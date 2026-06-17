@@ -1,27 +1,14 @@
 {
+  "name": "app-assps-edu-pk",
+  "private": true,
   "scripts": {
-    "smoke:paper-ai": "node al-siddique-backend/src/scripts/aiSmokeTest.js"
-  },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.94.0",
-    "@google/generative-ai": "^0.24.1",
-    "@napi-rs/canvas": "^1.0.0",
-    "@tailwindcss/vite": "^4.2.4",
-    "bcryptjs": "^3.0.3",
-    "clsx": "^2.1.1",
-    "dotenv": "^17.4.2",
-    "framer-motion": "^12.38.0",
-    "lucide-react": "^1.14.0",
-    "multer": "^2.1.1",
-    "mupdf": "^1.27.0",
-    "pdf-parse": "^1.1.1",
-    "pdfjs-dist": "^5.7.284",
-    "pg": "^8.20.0",
-    "react-router-dom": "^7.14.2",
-    "tailwindcss": "^4.2.4",
-    "twilio": "^6.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.14"
+    "dev:frontend": "npm --prefix al-siddique-frontend run dev",
+    "build:frontend": "npm --prefix al-siddique-frontend run build",
+    "lint:frontend": "npm --prefix al-siddique-frontend run lint",
+    "preview:frontend": "npm --prefix al-siddique-frontend run preview",
+    "dev:backend": "npm --prefix al-siddique-backend/src run dev",
+    "start:backend": "npm --prefix al-siddique-backend/src run start",
+    "migrate:backend": "npm --prefix al-siddique-backend/src run migrate",
+    "smoke:paper-ai": "npm --prefix al-siddique-backend/src run smoke:paper-ai"
   }
 }

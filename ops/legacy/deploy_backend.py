@@ -1,17 +1,20 @@
 import paramiko
 import os
 
-host = '72.61.228.88'
-username = 'root'
-password = 'Myself&03452744344'
+host = os.getenv('ASSPS_VPS_HOST', '')
+username = os.getenv('ASSPS_VPS_USER', '')
+password = os.getenv('ASSPS_VPS_PASSWORD', '')
 remote_dir = '/var/www/apex-backend/src/routes'
-local_dir = r'C:\projects\My SAas\al-siddique-os\al-siddique-backend\src\routes'
+local_dir = os.getenv('ASSPS_BACKEND_ROUTES_DIR', r'C:\projects\My SAas\al-siddique-os\al-siddique-backend\src\routes')
 
 files_to_upload = [
     'feeRoutes.js',
     'examRoutes.js',
     'authRoutes.js'
 ]
+
+if not host or not username or not password:
+    raise SystemExit('Missing ASSPS_VPS_HOST / ASSPS_VPS_USER / ASSPS_VPS_PASSWORD environment variables.')
 
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())

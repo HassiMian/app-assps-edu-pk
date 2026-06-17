@@ -1,12 +1,15 @@
 import paramiko
 import os
 
-host = '72.61.228.88'
-username = 'root'
-password = 'Myself&03452744344'
-local_zip = r'c:\projects\My SAas\al-siddique-os\al-siddique-frontend\dist.zip'
+host = os.getenv('ASSPS_VPS_HOST', '')
+username = os.getenv('ASSPS_VPS_USER', '')
+password = os.getenv('ASSPS_VPS_PASSWORD', '')
+local_zip = os.getenv('ASSPS_FRONTEND_DIST_ZIP', r'c:\projects\My SAas\al-siddique-os\al-siddique-frontend\dist.zip')
 remote_dir = '/var/www/apex-os'
 remote_zip = f'{remote_dir}/dist.zip'
+
+if not host or not username or not password:
+    raise SystemExit('Missing ASSPS_VPS_HOST / ASSPS_VPS_USER / ASSPS_VPS_PASSWORD environment variables.')
 
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
