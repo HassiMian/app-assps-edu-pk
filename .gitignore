@@ -8,6 +8,11 @@ uploads/
 *.log
 *.tar.gz
 *.zip
+.claude/
+*.db
+*.sqlite
+*.sqlite3
+*.tsbuildinfo
 .env
 .env.local
 .env.*.local
