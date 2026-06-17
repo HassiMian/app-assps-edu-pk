@@ -1695,7 +1695,7 @@ export default function UnifiedPaperGenerator() {
     sets:1,
   })
 
-  const pattern = useMemo(() => findUnifiedPattern(config), [config.classLevel, config.subject, config.medium])
+  const pattern = useMemo(() => findUnifiedPattern(config), [config.classLevel, config.subject, config.medium, config.intent, config.paperType])
   const bankItems = useMemo(() => {
     const ids = new Set(selectedBankIds)
     return questions.filter(q => ids.has(q.id)).map(q => ({
@@ -1743,7 +1743,7 @@ export default function UnifiedPaperGenerator() {
     const inferred = inferConfigFromPaste(manualText, config)
     setConfig(prev => ({ ...prev, ...inferred }))
     const parsed = parseSmartPasteV2(manualText, inferred).map(item => ({ ...item, reviewStatus:'Ready', confidence:Math.max(Number(item.confidence || 0), 0.78) }))
-    const nextItems = [...parsed, ...reviewItems]
+    const nextItems = parsed
     setReviewItems(nextItems)
     const nextPattern = findUnifiedPattern(inferred)
     setSections(buildSectionsFromPattern(nextPattern, inferred, bankItems, approvedReviewItems(nextItems)))
