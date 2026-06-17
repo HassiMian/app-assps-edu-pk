@@ -51,7 +51,7 @@ const SECTION_HINTS = [
   { type:'True/False', category:'True/False', re:/\b(?:true\s*\/?\s*false|state whether|tick true|write true)\b|درست\s*\/\s*غلط|صحیح\s*\/\s*غلط/i },
   { type:'Match the Columns', category:'Match the Columns', re:/\b(?:match(?:\s+the)?\s+columns?|matching)\b|کالم\s+ملائیں/i },
   { type:'Translation', category:'Translation', re:/\b(?:translate|translation|into urdu|into english)\b|ترجمہ/i },
-  { type:'Grammar', category:'Grammar', re:/\b(?:grammar|parts of speech|tenses|voice|narration|sentence correction|correct form|punctuation|idioms?)\b|قواعد|درستی/i },
+  { type:'Grammar', category:'Grammar', re:/\b(?:grammar|parts of speech|tenses|voice|narration|sentence correction|correct form|punctuation|idioms?|adjectives?|proper nouns?|opposite meanings?|antonyms?|synonyms?|suitable adjectives?)\b|قواعد|درستی/i },
   { type:'Theorem', category:'Theorem', re:/\b(?:theorem|prove|construction)\b/i },
   { type:'Diagram', category:'Diagram-based', re:/\b(?:diagram|draw|label|graph)\b|خاکہ|نقشہ/i },
   { type:'Short Question', category:'Numerical', re:/\b(?:numerical|calculate|solve|simplify|evaluate|find the value)\b/i },
@@ -124,7 +124,7 @@ function inferTotalMarksFromPaste(rawText = '') {
 }
 
 function isAssessmentLikePaste(rawText = '') {
-  return /\b(?:assessment|quiz|worksheet|test|chapter test|unit test|monthly test|weekly test|practice sheet|revision test|exit ticket|part\s+a)\b/i.test(String(rawText || ''))
+  return /\b(?:assessment|ass\s*#?|quiz|worksheet|test|chapter test|unit test|monthly test|weekly test|practice sheet|revision test|exit ticket|part\s+a)\b/i.test(String(rawText || ''))
 }
 
 function isBoardLikePaste(rawText = '') {
@@ -147,7 +147,7 @@ function guessCategory(text = '', subject = '') {
   const type = normalizeType(line)
   const lower = line.toLowerCase()
   if (type === 'MCQ') return 'Objective'
-  if (/write the meanings?|meanings? of|word meanings?|vocabulary/.test(lower)) return 'Grammar'
+  if (/write the meanings?|meanings? of|word meanings?|vocabulary|adjectives?|proper nouns?|opposite meanings?|antonyms?|synonyms?|suitable adjectives?/.test(lower)) return 'Grammar'
   if (/complete each of the sentences|complete the sentences|fill in the blanks?/.test(lower)) return 'Fill in the Blanks'
   if (/translate into urdu|translate into english|translation/.test(lower)) return 'Translation'
   if (type === 'Diagram') return 'Diagram-based'
@@ -883,15 +883,121 @@ function parseStructuredManualPaste(rawText = '', config = {}, pattern = null) {
   return sections.flatMap(section => parseStructuredSectionItems(section, pattern, config))
 }
 
+function extractTrailingMarksToken(text = '') {
+  const value = String(text || '').trim()
+  const match = value.match(/^(.*?)(?:\s+|\s*\()\s*(?:marks?\s*)?(\d{1,3})(?:\s*marks?)?\)?$/i)
+  if (!match) return { text: value, marks: 0 }
+  const before = match[1].trim()
+  const marks = Number(match[2])
+  if (!before || !Number.isFinite(marks)) return { text: value, marks: 0 }
+  return { text: before.replace(/[.:;\-–—]\s*$/, '').trim(), marks }
+}
+
+function detectCompactClassSubject(rawText = '') {
+  const lines = String(rawText || '')
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .slice(0, 10)
+
+  for (const line of lines) {
+    const match = line.match(/^(?:class\s*)?(\d{1,2})(?:st|nd|rd|th)?\s+(.+)$/i)
+    if (!match) continue
+    const subject = detectSubjectFromPaste(match[2])
+    if (subject) return { classLevel: match[1], subject }
+  }
+  return null
+}
+
+function classifyAssessmentBlock(title = '', body = '', subject = '') {
+  const combined = `${title}\n${body}`.toLowerCase()
+  const hint = detectSectionHint(`${title}\n${body}`)
+  if (/translate|translation|into urdu|into english/.test(combined)) return { type: 'Translation', category: 'Translation' }
+  if (/adjectives?|proper nouns?|opposite meanings?|antonyms?|synonyms?|suitable adjectives?|grammar|vocabulary/.test(combined)) {
+    return { type: 'Grammar', category: 'Grammar' }
+  }
+  if (hint) return { type: hint.type, category: hint.category }
+  const category = guessCategory(`${title}\n${body}`, subject)
+  return { type: normalizeType(title || body), category }
+}
+
+function parseNumberedAssessmentPaste(rawText = '', config = {}, pattern = null) {
+  const raw = sanitizePasteText(rawText)
+  if (!raw) return []
+  const lines = raw.split('\n')
+  const blocks = []
+  let current = null
+
+  const pushCurrent = () => {
+    if (!current) return
+    current.body = current.body.join('\n').trim()
+    blocks.push(current)
+    current = null
+  }
+
+  lines.forEach(line => {
+    const trimmed = line.trim()
+    const match = trimmed.match(/^(\d{1,2})\s*[.)]\s+(.+)$/)
+    if (match) {
+      pushCurrent()
+      const marked = extractTrailingMarksToken(match[2])
+      current = {
+        originalNo: Number(match[1]),
+        title: marked.text || match[2].trim(),
+        marks: marked.marks,
+        body: [],
+      }
+      return
+    }
+    if (current) current.body.push(line)
+  })
+  pushCurrent()
+
+  if (blocks.length < 2) return []
+  const meaningfulBlocks = blocks.filter(block => block.title && !isLikelyMetadataLine(block.title))
+  if (meaningfulBlocks.length < 2) return []
+
+  return meaningfulBlocks.map((block, index) => {
+    const body = block.body
+      .split('\n')
+      .map(line => line.trimEnd())
+      .filter(line => line.trim() && !isLikelyMetadataLine(line))
+      .join('\n')
+      .trim()
+    const text = [block.title, body].filter(Boolean).join('\n')
+    const { type, category } = classifyAssessmentBlock(block.title, body, config.subject)
+    const targetSection = resolveSectionForSmartItem(pattern, {
+      title: block.title,
+      type,
+      category,
+      text,
+    })
+    return {
+      text,
+      options: [],
+      type,
+      category,
+      marks: Number(block.marks || targetSection?.marksEach || 1),
+      questionNo: Number(targetSection?.questionNo || 0),
+      section: targetSection,
+      source: `Smart Assessment Q${block.originalNo || index + 1}`,
+      originalQuestionNo: block.originalNo || index + 1,
+    }
+  }).filter(row => row.text)
+}
+
 function inferConfigFromPaste(rawText = '', currentConfig = {}) {
   const raw = String(rawText || '')
   const next = { ...currentConfig }
   const subject = detectSubjectFromPaste(raw)
+  const compactClassSubject = detectCompactClassSubject(raw)
   const classMatch = raw.match(/\b(?:class|grade)\s*[:-]?\s*(\d{1,2})(?:st|nd|rd|th)?\b|\b(\d{1,2})(?:st|nd|rd|th)\s+(?:class|grade)\b/i)
-  const titleMatch = raw.match(/(?:Assessment|Quiz|Worksheet|Chapter|Unit|Paper)\s*:\s*([^\n]+)/i)
+  const titleMatch = raw.match(/(?:Assessment|Ass\s*#?|Quiz|Worksheet|Chapter|Unit|Paper)\s*[:#-]?\s*([^\n]+)/i)
   const totalMarks = inferTotalMarksFromPaste(raw)
-  if (subject) next.subject = subject
-  if (classMatch) next.classLevel = classMatch[1] || classMatch[2]
+  if (subject || compactClassSubject?.subject) next.subject = compactClassSubject?.subject || subject
+  if (classMatch || compactClassSubject?.classLevel) next.classLevel = classMatch?.[1] || classMatch?.[2] || compactClassSubject?.classLevel
+  if (next.subject === 'English') next.medium = 'English'
+  if (next.subject === 'Urdu') next.medium = 'Urdu'
 
   if (isBoardLikePaste(raw) && !isAssessmentLikePaste(raw)) {
     next.intent = 'Board Pattern Paper'
@@ -912,6 +1018,7 @@ function parseSmartPasteV2(rawText, config) {
   if (!raw) return []
   const inferredConfig = inferConfigFromPaste(raw, config)
   const pattern = findUnifiedPattern(inferredConfig)
+  const numberedAssessmentRows = parseNumberedAssessmentPaste(raw, inferredConfig, pattern)
   const structuredRows = parseStructuredManualPaste(raw, inferredConfig, pattern)
   const assessmentRows = parseAssessmentPaste(raw, pattern)
   const looseRows = parseLooseManualPaste(raw, inferredConfig, pattern)
@@ -927,7 +1034,7 @@ function parseSmartPasteV2(rawText, config) {
     .map(text => text.trim())
     .filter(Boolean)
     .map(text => ({ text, questionNo: parseQuestionNumber(text), section: null }))
-  const items = structuredRows.length ? structuredRows : assessmentRows.length ? assessmentRows : looseRows.length ? looseRows : rows.length ? rows : fallback
+  const items = numberedAssessmentRows.length ? numberedAssessmentRows : structuredRows.length ? structuredRows : assessmentRows.length ? assessmentRows : looseRows.length ? looseRows : rows.length ? rows : fallback
 
   return items.map((row, index) => {
     const text = row.text
@@ -1359,6 +1466,7 @@ function mapUnifiedQuestionType(question = {}) {
   if (text.includes('match')) return 'columns'
   if (text.includes('numerical') || text.includes('calculate') || text.includes('solve')) return 'numerical'
   if (text.includes('diagram') || text.includes('draw') || text.includes('label')) return 'diagram'
+  if (text.includes('grammar') || text.includes('adjective') || text.includes('proper noun') || text.includes('opposite meaning') || text.includes('antonym') || text.includes('synonym') || text.includes('vocabulary')) return 'grammar'
   if (text.includes('definition') || text.includes('define') || text.includes('what is')) return 'short'
   if (text.includes('essay') || text.includes('mazmoon')) return 'essay'
   if (text.includes('letter') || text.includes('application') || text.includes('درخواست') || text.includes('خط')) return 'letter'
@@ -1462,6 +1570,7 @@ function adaptUnifiedForPTS(config, sections) {
       classLevel: config.classLevel,
       paperCode: config.paperCode || '',
       timeAllowed: config.time || '2 hours',
+      totalMarks: config.totalMarks,
       examDate: config.examDate || new Date().toLocaleDateString('en-GB').replace(/\//g, '-'),
       language: config.medium === 'Urdu' ? 'urdu' : config.medium === 'Dual Medium' ? 'dual' : 'english',
       publisher: config.board || '',
