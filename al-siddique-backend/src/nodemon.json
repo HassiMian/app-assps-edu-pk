@@ -1,0 +1,11 @@
+{
+  "verbose": true,
+  "ignore": [
+    "logs/*",
+    "logs/app.log",
+    "logs/error.log",
+    "*.log",
+    "uploads/*",
+    "temp/*"
+  ]
+}

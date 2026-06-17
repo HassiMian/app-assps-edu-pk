@@ -1,0 +1,143 @@
+/* ASSPS SaaS — mobile scroll + shell fix (design unchanged) */
+
+@media (max-width: 1024px) {
+  html {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100dvh;
+  }
+
+  body.app-drawer-open {
+    overflow: hidden !important;
+    touch-action: none;
+    position: fixed;
+    width: 100%;
+  }
+
+  /* Mobile: bounded flex column — main area scrolls inside shell */
+  .app-shell--mobile {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+  }
+
+  .app-shell--mobile .app-sidebar-slot {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100dvh !important;
+    transform: translate3d(-110%, 0, 0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    pointer-events: none;
+    z-index: 120;
+  }
+
+  .app-shell--mobile.app-shell--drawer-open .app-sidebar-slot {
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .app-shell--mobile .app-main-column {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Critical: keep flex scroll child — do NOT set height:auto here */
+  .app-shell--mobile .super-module-viewport {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Module content grows inside scrollable main */
+  .super-module-viewport > .super-module-card,
+  .super-module-viewport > div,
+  .super-module-viewport .attendance-analytics-page,
+  .super-module-viewport .paper-generator-shell,
+  .super-module-viewport .pts-generator-surface,
+  .super-module-viewport .daily-diary-feature {
+    min-height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .super-module-viewport [style*="minHeight: '100vh'"],
+  .super-module-viewport [style*='minHeight: "100vh"'],
+  .super-module-viewport [style*="min-height: 100vh"],
+  .super-module-viewport [style*="height:calc(100vh"],
+  .super-module-viewport [style*="height: calc(100vh"] {
+    min-height: auto !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  .super-module-viewport [style*="gridTemplateColumns: '280px"],
+  .super-module-viewport [style*='gridTemplateColumns: "280px'],
+  .super-module-viewport [style*="grid-template-columns: 280px"] {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    min-height: auto !important;
+  }
+
+  .super-module-viewport .os-scroll-x,
+  .super-module-viewport .responsive-table-wrap,
+  .super-module-viewport .table-responsive {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .super-topbar {
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100%;
+  }
+
+  /* School hero: stack calendar under title on tablet/mobile */
+  .super-module-viewport .school-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+  }
+
+  .super-module-viewport .school-hero-calendar {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-self: center !important;
+    width: 100% !important;
+    max-width: 10.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .super-module-viewport table {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+    max-width: none;
+  }
+}

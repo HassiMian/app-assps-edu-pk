@@ -1,0 +1,226 @@
+// APEX tenant-safe data model reference.
+// Current backend uses PostgreSQL + Express directly; keep this schema as the
+// Prisma-ready source of truth for the future Prisma migration.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model School {
+  id                    String   @id @default(cuid())
+  tenantId              String   @unique
+  schoolName            String
+  ownerName             String
+  email                 String?
+  phone                 String?
+  address               String?
+  city                  String?
+  logoUrl               String?
+  primaryColor          String?
+  secondaryColor        String?
+  status                SchoolStatus @default(PENDING)
+  subscriptionPlan      SubscriptionPlan?
+  subscriptionStatus    SubscriptionStatus @default(PENDING)
+  subscriptionStartDate DateTime?
+  subscriptionEndDate   DateTime?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  users                 User[]
+  subscriptionRequests  SubscriptionRequest[]
+  tenantBranding        TenantBranding?
+  students              Student[]
+  classes               Class[]
+
+  @@index([tenantId])
+}
+
+model TenantBranding {
+  id             String   @id @default(cuid())
+  tenantId       String   @unique
+  logoUrl        String?
+  primaryColor   String?
+  secondaryColor String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  school         School   @relation(fields: [tenantId], references: [tenantId], onDelete: Cascade)
+}
+
+model User {
+  id                 String @id @default(cuid())
+  tenantId           String
+  schoolId           String?
+  name               String
+  email              String @unique
+  password           String
+  role               UserRole
+  status             UserStatus @default(ACTIVE)
+  mustChangePassword Boolean @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  school             School? @relation(fields: [schoolId], references: [id])
+
+  @@index([tenantId])
+  @@index([role])
+}
+
+model SubscriptionRequest {
+  id                   String @id @default(cuid())
+  requestId            String @unique
+  tenantId             String?
+  planId               String?
+  planName             String?
+  planPrice            Int?
+  ownerName            String
+  schoolName           String
+  schoolAddress        String?
+  city                 String?
+  email                String
+  contactNumber        String
+  selectedPlan         SubscriptionPlan
+  billingCycle         BillingCycle
+  paymentMethod        PaymentMethod
+  transactionId        String?
+  paymentScreenshotUrl String?
+  status               RequestStatus @default(PENDING)
+  rejectionReason      String?
+  approvedAt           DateTime?
+  createdSchoolId      String?
+  createdAdminUserId   String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  school               School? @relation(fields: [createdSchoolId], references: [id])
+
+  @@index([status])
+  @@index([email])
+}
+
+model Invoice {
+  id            String @id @default(cuid())
+  tenantId      String
+  invoiceNumber String @unique
+  amount        Float
+  plan          SubscriptionPlan
+  status        InvoiceStatus
+  createdAt     DateTime @default(now())
+
+  @@index([tenantId])
+}
+
+model Payment {
+  id            String @id @default(cuid())
+  tenantId      String?
+  requestId     String?
+  transactionId String?
+  paymentMethod PaymentMethod
+  amount        Float
+  screenshotUrl String?
+  status        PaymentStatus
+  createdAt     DateTime @default(now())
+
+  @@index([status])
+}
+
+model Student {
+  id         String   @id @default(cuid())
+  tenantId   String
+  schoolId   String?
+  name       String
+  fatherName String?
+  className  String?
+  section    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  school     School?  @relation(fields: [schoolId], references: [id])
+
+  @@index([tenantId])
+  @@index([schoolId])
+}
+
+model Class {
+  id        String   @id @default(cuid())
+  tenantId  String
+  schoolId  String?
+  name      String
+  section   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  school    School?  @relation(fields: [schoolId], references: [id])
+
+  @@index([tenantId])
+  @@index([schoolId])
+}
+
+enum SchoolStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+  EXPIRED
+}
+
+enum SubscriptionStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum SubscriptionPlan {
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  SCHOOL_ADMIN
+  TEACHER
+  PARENT
+  STUDENT
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BillingCycle {
+  MONTHLY
+  YEARLY
+}
+
+enum PaymentMethod {
+  JAZZCASH
+  EASYPAISA
+  BANK_TRANSFER
+  CARD
+}
+
+enum PaymentStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+}

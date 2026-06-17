@@ -1,0 +1,27 @@
+{
+  "url": "https://api.assps.edu.pk/login?cleared=1",
+  "text": "Al Siddique Scholars Public School\n\nAPEX CONNECT\n\nSchool Admin Login\n\nSecure access portal\n\n\"Shaping Minds · Building Futures\"\n\nLogin ID\nPassword\nSecure Login\nForgot / Reset Password?\nBack to Portal Selection\nChange Portal",
+  "inputs": [
+    {
+      "type": "text",
+      "placeholder": "admin@school.com",
+      "value": "",
+      "name": "",
+      "autocomplete": "username"
+    },
+    {
+      "type": "password",
+      "placeholder": "********",
+      "value": "",
+      "name": "",
+      "autocomplete": "current-password"
+    }
+  ],
+  "buttons": [
+    "",
+    "Secure Login",
+    "Forgot / Reset Password?",
+    "Back to Portal Selection",
+    "Change Portal"
+  ]
+}
