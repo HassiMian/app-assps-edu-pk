@@ -221,6 +221,8 @@ function splitInlineSubparts(text = '', typeHint = '') {
 
   const first = matches[0]
   const prompt = raw.slice(0, first.index || 0).trim().replace(/[:\-]\s*$/, '').trim()
+  const promptLower = prompt.toLowerCase()
+  const typeLower = String(typeHint || '').toLowerCase()
   const items = matches.map((match, index) => {
     const start = (match.index || 0) + match[0].length
     const end = matches[index + 1]?.index ?? raw.length
@@ -229,6 +231,14 @@ function splitInlineSubparts(text = '', typeHint = '') {
   }).filter(item => item.body)
 
   if (!items.length) return [raw]
+
+  const shouldKeepGrouped =
+    (!!prompt && (
+      /answer the following questions?|answer briefly|answer in detail|attempt any|attempt the following|write the meanings?|meanings? of|translate(?: into [a-z]+)?|translation|complete each|complete the sentences?|fill in the blanks?|write short note|short note|differentiate|define|what is|state whether|solve the following/.test(promptLower)
+      || /short question|long question|translation|fill in the blanks|true\/false|match the columns/.test(typeLower)
+    ))
+
+  if (shouldKeepGrouped) return [raw]
 
   const genericPrompt = /^(answer the following questions?|attempt any|question|questions?)$/i.test(prompt)
   return items.map(item => {
