@@ -31,6 +31,39 @@ const CLASSES = Array.from({ length: 12 }, (_, i) => String(i + 1))
 const SUBJECTS = ['Biology', 'Physics', 'Chemistry', 'Mathematics', 'Urdu', 'English', 'Computer Science', 'Pakistan Studies', 'Islamiyat', 'Tarjuma-tul-Quran', 'Science', 'General Knowledge']
 const MEDIUMS = ['English', 'Urdu', 'Dual Medium']
 const DRAFT_KEY = 'assps_unified_paper_generator_drafts'
+const SUBJECT_ALIASES = [
+  ['Mathematics', /\b(?:maths?|mathematics|algebra|geometry|trigonometry)\b/i],
+  ['Computer Science', /\b(?:computer science|computer|coding|programming|ict)\b/i],
+  ['Pakistan Studies', /\b(?:pakistan studies|pak studies|social studies)\b/i],
+  ['Tarjuma-tul-Quran', /\b(?:tarjuma|tarjama|quran|qur'?an|translation of quran)\b/i],
+  ['Islamiyat', /\b(?:islamiyat|islamiat|islamic studies)\b/i],
+  ['General Knowledge', /\b(?:general knowledge|gk)\b/i],
+  ['Biology', /\b(?:biology|bio|botany|zoology)\b/i],
+  ['Chemistry', /\b(?:chemistry|chem)\b/i],
+  ['Physics', /\b(?:physics|phy)\b/i],
+  ['English', /\benglish\b/i],
+  ['Urdu', /\burdu\b|[\u0600-\u06ff]/i],
+  ['Science', /\bscience\b/i],
+]
+const SECTION_HINTS = [
+  { type:'MCQ', category:'Objective', re:/\b(?:mcqs?|objective|multiple choice|choose|circle the correct|correct option)\b|درست\s+جواب|انتخاب/i },
+  { type:'Fill in the Blanks', category:'Fill in the Blanks', re:/\b(?:fill(?:\s+in)?(?:\s+the)?\s+blanks?|complete the sentences?)\b|خالی\s+جگہ/i },
+  { type:'True/False', category:'True/False', re:/\b(?:true\s*\/?\s*false|state whether|tick true|write true)\b|درست\s*\/\s*غلط|صحیح\s*\/\s*غلط/i },
+  { type:'Match the Columns', category:'Match the Columns', re:/\b(?:match(?:\s+the)?\s+columns?|matching)\b|کالم\s+ملائیں/i },
+  { type:'Translation', category:'Translation', re:/\b(?:translate|translation|into urdu|into english)\b|ترجمہ/i },
+  { type:'Grammar', category:'Grammar', re:/\b(?:grammar|parts of speech|tenses|voice|narration|sentence correction|correct form|punctuation|idioms?)\b|قواعد|درستی/i },
+  { type:'Theorem', category:'Theorem', re:/\b(?:theorem|prove|construction)\b/i },
+  { type:'Diagram', category:'Diagram-based', re:/\b(?:diagram|draw|label|graph)\b|خاکہ|نقشہ/i },
+  { type:'Short Question', category:'Numerical', re:/\b(?:numerical|calculate|solve|simplify|evaluate|find the value)\b/i },
+  { type:'Short Question', category:'Chemical Equation', re:/\b(?:equation|reaction|balance|chemical)\b/i },
+  { type:'Essay', category:'Essay', re:/\bessay\b|مضمون/i },
+  { type:'Letter', category:'Letter', re:/\bletter\b|خط/i },
+  { type:'Application', category:'Application', re:/\bapplication\b|درخواست/i },
+  { type:'Comprehension', category:'Comprehension', re:/\b(?:comprehension|passage|read the following)\b|عبارت/i },
+  { type:'Dictation Words', category:'Dictation Words', re:/\b(?:dictation|spellings?|phonics)\b|املا/i },
+  { type:'Long Question', category:'Explanation', re:/\b(?:long questions?|detailed|answer in detail|explain in detail)\b|تفصیلی|تشریح/i },
+  { type:'Short Question', category:'Short Question', re:/\b(?:short questions?|answer briefly|brief answers?|definitions?|define)\b|مختصر/i },
+]
 
 function safeId(prefix = 'upg') {
   return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
@@ -66,6 +99,36 @@ function normalizeType(line = '') {
   if (/تشریح|اشعار/.test(t)) return 'Explanation'
   if (/long|تفصیلی/.test(t)) return 'Long Question'
   return 'Short Question'
+}
+
+function detectSubjectFromPaste(rawText = '') {
+  const raw = String(rawText || '')
+  const direct = SUBJECTS.find(subject => new RegExp(`\\b${subject.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(raw))
+  if (direct) return direct
+  return SUBJECT_ALIASES.find(([, re]) => re.test(raw))?.[0] || ''
+}
+
+function detectSectionHint(text = '') {
+  const raw = String(text || '')
+  return SECTION_HINTS.find(hint => hint.re.test(raw)) || null
+}
+
+function inferMarksFromText(text = '', fallback = 1) {
+  const match = String(text || '').match(/(?:\[(\d+(?:\.\d+)?)\]|\((\d+(?:\.\d+)?)\s*marks?\)|(\d+(?:\.\d+)?)\s*marks?)/i)
+  return match ? Number(match[1] || match[2] || match[3]) : fallback
+}
+
+function inferTotalMarksFromPaste(rawText = '') {
+  const match = String(rawText || '').match(/(?:total\s+marks?|marks)\s*[:=-]?\s*(\d{1,3})/i)
+  return match ? Number(match[1]) : 0
+}
+
+function isAssessmentLikePaste(rawText = '') {
+  return /\b(?:assessment|quiz|worksheet|test|chapter test|unit test|monthly test|weekly test|practice sheet|revision test|exit ticket|part\s+a)\b/i.test(String(rawText || ''))
+}
+
+function isBoardLikePaste(rawText = '') {
+  return /\b(?:board|annual|supplementary|objective paper|subjective paper|time allowed|roll no|paper code|question\s+no|q\.?\s*no)\b/i.test(String(rawText || ''))
 }
 
 function guessCategory(text = '', subject = '') {
@@ -107,7 +170,7 @@ function normalizeIndicDigits(value = '') {
 
 function parseQuestionNumber(value = '') {
   const text = normalizeIndicDigits(value)
-  const match = text.match(/(?:^|\n)\s*(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.\-]?\s*(\d{1,2})/i)
+  const match = text.match(/(?:^|\n)\s*(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.-]?\s*(\d{1,2})/i)
   return match ? Number(match[1]) : 0
 }
 
@@ -134,10 +197,23 @@ function extractInlineMcqOptions(text = '') {
   const parenMatches = [...source.matchAll(/\(([a-dA-D])\)\s*([^()]+?)(?=\s*\([a-dA-D]\)|$)/g)]
   if (parenMatches.length >= 2) {
     return {
-      stem: source.split(/\([a-dA-D]\)/)[0].trim().replace(/[:\-]\s*$/, '').trim(),
+      stem: source.split(/\([a-dA-D]\)/)[0].trim().replace(/[:-]\s*$/, '').trim(),
       options: parenMatches.map((match, index) => ({
         key: match[1].toUpperCase(),
         label: match[1].toUpperCase(),
+        text: match[2].trim(),
+        order: index + 1,
+      })),
+    }
+  }
+
+  const urduParenMatches = [...source.matchAll(/\((الف|ب|ج|د)\)\s*([^()]+?)(?=\s*\((?:الف|ب|ج|د)\)|$)/g)]
+  if (urduParenMatches.length >= 2) {
+    return {
+      stem: source.split(/\((?:الف|ب|ج|د)\)/)[0].trim().replace(/[:-]\s*$/, '').trim(),
+      options: urduParenMatches.map((match, index) => ({
+        key: String.fromCharCode(65 + index),
+        label: match[1],
         text: match[2].trim(),
         order: index + 1,
       })),
@@ -158,6 +234,26 @@ function extractInlineMcqOptions(text = '') {
       options: lineMatches.map((match, index) => ({
         key: match[1].toUpperCase(),
         label: match[1].toUpperCase(),
+        text: match[2].trim(),
+        order: index + 1,
+      })),
+    }
+  }
+
+  const urduLineMatches = source
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .map(line => line.match(/^(الف|ب|ج|د)[.)،:]?\s+(.+)$/))
+    .filter(Boolean)
+
+  if (urduLineMatches.length >= 2) {
+    const firstOptionIndex = source.search(/\n\s*(?:الف|ب|ج|د)[.)،:]?\s+/)
+    return {
+      stem: firstOptionIndex > -1 ? source.slice(0, firstOptionIndex).trim() : '',
+      options: urduLineMatches.map((match, index) => ({
+        key: String.fromCharCode(65 + index),
+        label: match[1],
         text: match[2].trim(),
         order: index + 1,
       })),
@@ -220,13 +316,13 @@ function splitInlineSubparts(text = '', typeHint = '') {
   if (matches.length < 2) return [raw]
 
   const first = matches[0]
-  const prompt = raw.slice(0, first.index || 0).trim().replace(/[:\-]\s*$/, '').trim()
+  const prompt = raw.slice(0, first.index || 0).trim().replace(/[:-]\s*$/, '').trim()
   const promptLower = prompt.toLowerCase()
   const typeLower = String(typeHint || '').toLowerCase()
   const items = matches.map((match, index) => {
     const start = (match.index || 0) + match[0].length
     const end = matches[index + 1]?.index ?? raw.length
-    const body = raw.slice(start, end).trim().replace(/[:\-]\s*$/, '').trim()
+    const body = raw.slice(start, end).trim().replace(/[:-]\s*$/, '').trim()
     return { marker: match[1], body }
   }).filter(item => item.body)
 
@@ -254,7 +350,7 @@ function splitInlineSubparts(text = '', typeHint = '') {
 function cleanLooseChunkText(text = '') {
   return String(text || '')
     .replace(/\s+/g, ' ')
-    .replace(/\s*[:\-]\s*$/, '')
+    .replace(/\s*[:-]\s*$/, '')
     .trim()
 }
 
@@ -389,10 +485,50 @@ function sectionForQuestionNo(pattern, questionNo) {
   return (pattern.sections || []).find(section => Number(section.questionNo || 0) === Number(questionNo)) || null
 }
 
+function resolveSectionForSmartItem(pattern, item = {}) {
+  const sections = pattern?.sections || []
+  if (!sections.length) return null
+  const explicit = sectionForQuestionNo(pattern, item.questionNo)
+  const explicitType = questionBucket(item.type || item.category || item.title)
+  const explicitSectionBucket = explicit ? questionBucket(explicit.type || explicit.title) : ''
+  const shouldTrustExplicit =
+    explicit &&
+    (!item.type || explicitType === explicitSectionBucket || Number(item.questionNo || 0) > 3)
+
+  if (shouldTrustExplicit) return explicit
+
+  const itemText = `${item.title || ''} ${item.type || ''} ${item.category || ''} ${item.text || ''}`.toLowerCase()
+  const ranked = sections
+    .map(section => {
+      const sectionText = `${section.title || ''} ${section.type || ''} ${(section.allowedCategories || []).join(' ')}`.toLowerCase()
+      const sectionBucket = questionBucket(section.type || section.title)
+      let score = 0
+      if (explicit && Number(section.questionNo || 0) === Number(item.questionNo || 0)) score += 18
+      if (explicitType === sectionBucket) score += 28
+      if (item.type && String(section.type || '').toLowerCase() === String(item.type).toLowerCase()) score += 35
+      if (item.category && (section.allowedCategories || []).some(cat => {
+        const c = String(cat || '').toLowerCase()
+        const v = String(item.category || '').toLowerCase()
+        return c === v || c.includes(v) || v.includes(c)
+      })) score += 45
+      if (/translation|translate|ترجمہ/.test(itemText) && /translation|ترجمہ/.test(sectionText)) score += 60
+      if (/grammar|voice|narration|idiom|قواعد/.test(itemText) && /grammar|writing|قواعد/.test(sectionText)) score += 45
+      if (/theorem|construction/.test(itemText) && /theorem|construction/.test(sectionText)) score += 55
+      if (/diagram|draw|label|graph|خاکہ/.test(itemText) && /diagram|graph|label/.test(sectionText)) score += 35
+      if (/numerical|calculate|solve|formula|unit/.test(itemText) && /numerical|formula|unit|measurement/.test(sectionText)) score += 35
+      if (/equation|reaction|balance|chemical/.test(itemText) && /equation|reaction|chemical/.test(sectionText)) score += 35
+      if (/essay|letter|application|story|dialogue|comprehension/.test(itemText) && /writing|essay|letter|application|comprehension/.test(sectionText)) score += 35
+      return { section, score }
+    })
+    .sort((a, b) => b.score - a.score)
+
+  return ranked[0]?.score > 0 ? ranked[0].section : explicit
+}
+
 function splitBoardPaste(rawText = '') {
   const raw = normalizeIndicDigits(String(rawText || '').replace(/\r/g, '').trim())
   if (!raw) return []
-  const headerRe = /(?:^|\n)\s*(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.\-]?\s*\d{1,2}/gi
+  const headerRe = /(?:^|\n)\s*(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.-]?\s*\d{1,2}/gi
   const matches = [...raw.matchAll(headerRe)]
   if (!matches.length) return [{ questionNo: 0, text: raw }]
   return matches.map((match, index) => {
@@ -409,7 +545,7 @@ function splitSectionItems(blockText = '') {
   const raw = String(blockText || '').trim()
   if (!raw) return []
   const withoutHeader = raw
-    .replace(/^\s*(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.\-]?\s*\d{1,2}\s*/i, '')
+    .replace(/^\s*(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.-]?\s*\d{1,2}\s*/i, '')
     .trim()
   const numbered = withoutHeader
     .split(/(?=\n?\s*(?:\(\s?[ivxlcdm]+\s?\)|[ivxlcdm]{1,6}[.)]|[a-dA-D][.)]|\(\s?[A-D]\s?\)|\d{1,2}\s*[.)-]))/i)
@@ -485,7 +621,7 @@ function parseAssessmentPart(block, pattern) {
       .map(row => {
         const inlineOptions = [...String(row.text || '').matchAll(/\(([a-dA-D])\)\s*([^()]+?)(?=\s*\([a-dA-D]\)|$)/g)]
         if (!inlineOptions.length) return row
-        const stem = String(row.text || '').split(/\([a-dA-D]\)/)[0].trim().replace(/[:\-]\s*$/, '').trim()
+        const stem = String(row.text || '').split(/\([a-dA-D]\)/)[0].trim().replace(/[:-]\s*$/, '').trim()
         return {
           ...row,
           text: stem || row.text,
@@ -532,19 +668,241 @@ function parseAssessmentPaste(rawText = '', pattern) {
   return blocks.flatMap(block => parseAssessmentPart(block, pattern))
 }
 
+function parseStructuredHeading(line = '') {
+  const text = String(line || '').trim()
+  if (!text) return null
+  const hint = detectSectionHint(text)
+
+  const questionMatch = text.match(/^(?:q(?:uestion)?\.?|سوال(?:\s*نمبر)?|س)\s*[:.-]?\s*(\d{1,2})\b\s*(.*)$/i)
+  if (questionMatch) {
+    return {
+      questionNo: Number(questionMatch[1]),
+      title: questionMatch[2]?.trim() || text,
+      typeHint: hint?.type || '',
+      categoryHint: hint?.category || '',
+    }
+  }
+
+  const partMatch = text.match(/^part\s+([a-z])\s*[:.-]?\s*(.*)$/i)
+  if (partMatch) {
+    const part = partMatch[1].toUpperCase()
+    return {
+      questionNo: part === 'A' ? 1 : part === 'B' ? 2 : part === 'C' ? 3 : 0,
+      title: partMatch[2]?.trim() || text,
+      typeHint: hint?.type || '',
+      categoryHint: hint?.category || '',
+    }
+  }
+
+  if (/^(?:mcqs?|objective|multiple choice|choose the correct (?:option|answer)|درست جواب|درست جواب کا انتخاب)/i.test(text)) {
+    return { questionNo: 1, title: text, typeHint: 'MCQ', categoryHint: 'Objective' }
+  }
+  if (/^(?:short questions?|answer briefly|مختصر سوالات)/i.test(text)) {
+    return { questionNo: 2, title: text, typeHint: 'Short Question', categoryHint: 'Short Question' }
+  }
+  if (/^(?:long questions?|answer in detail|تفصیلی سوالات)/i.test(text)) {
+    return { questionNo: 3, title: text, typeHint: 'Long Question', categoryHint: 'Explanation' }
+  }
+
+  if (hint && /[:：]?$/.test(text.replace(/\s*\(?\d+\s*marks?\)?\s*$/i, '').trim())) {
+    return {
+      questionNo: 0,
+      title: text,
+      typeHint: hint.type,
+      categoryHint: hint.category,
+    }
+  }
+
+  return null
+}
+
+function splitStructuredPaperSections(rawText = '') {
+  const raw = sanitizePasteText(rawText)
+  if (!raw) return []
+
+  const sections = []
+  let current = null
+  const pushCurrent = () => {
+    if (!current) return
+    const text = current.lines.join('\n').trim()
+    if (text) sections.push({ ...current, text })
+    current = null
+  }
+
+  raw.split('\n').forEach(line => {
+    const trimmed = line.trim()
+    const heading = parseStructuredHeading(trimmed)
+    if (heading && (heading.questionNo || heading.typeHint)) {
+      pushCurrent()
+      current = { ...heading, lines: [], heading: trimmed }
+      return
+    }
+    if (!current) {
+      current = { questionNo: 0, title: '', heading: '', lines: [] }
+    }
+    current.lines.push(line)
+  })
+
+  pushCurrent()
+  return sections.filter(section => section.questionNo || section.typeHint || section.text.split('\n').length > 2)
+}
+
+function parseMcqOptionLine(line = '', index = 0) {
+  const match = String(line || '').trim().match(/^(?:\(?([a-dA-D])\)?|(الف|ب|ج|د))[.)،:]?\s+(.+)$/)
+  if (!match) return null
+  return {
+    key: match[1]?.toUpperCase() || String.fromCharCode(65 + index),
+    label: match[1]?.toUpperCase() || match[2],
+    text: match[3].trim(),
+    order: index + 1,
+  }
+}
+
+function sectionTypeFromHeading(section, pattern) {
+  if (section.typeHint) return section.typeHint
+  const targetSection = resolveSectionForSmartItem(pattern, {
+    questionNo: section.questionNo,
+    title: section.title,
+    type: section.typeHint,
+    category: section.categoryHint,
+    text: section.text,
+  })
+  if (targetSection?.type) return targetSection.type
+  const detected = detectLooseSectionType(section.title, section.text)
+  if (detected) return detected
+  if (section.questionNo === 1) return 'MCQ'
+  if (section.questionNo >= 5) return 'Long Question'
+  return 'Short Question'
+}
+
+function splitNumberedQuestionBlocks(text = '') {
+  const lines = String(text || '')
+    .split('\n')
+    .map(line => line.trimEnd())
+  const blocks = []
+  let current = []
+
+  const pushCurrent = () => {
+    const block = current.join('\n').trim()
+    if (block) blocks.push(block)
+    current = []
+  }
+
+  lines.forEach(line => {
+    const trimmed = line.trim()
+    if (!trimmed) {
+      if (current.length) current.push('')
+      return
+    }
+    const startsQuestion = /^\d{1,2}\s*[.)-]\s+/.test(trimmed)
+    if (startsQuestion && current.length) pushCurrent()
+    current.push(line)
+  })
+
+  pushCurrent()
+  return blocks.length ? blocks : String(text || '').split(/\n{2,}/).map(x => x.trim()).filter(Boolean)
+}
+
+function parseStructuredSectionItems(section, pattern, config) {
+  const targetSection = resolveSectionForSmartItem(pattern, {
+    questionNo: section.questionNo,
+    title: section.title,
+    type: section.typeHint,
+    category: section.categoryHint,
+    text: section.text,
+  })
+  const type = sectionTypeFromHeading(section, pattern)
+  const bucket = questionBucket(type)
+  const marksEach = inferMarksFromText(section.title || section.heading || '', Number(targetSection?.marksEach || (bucket === 'mcq' ? 1 : bucket === 'long' ? 5 : 2)))
+  const body = String(section.text || '')
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => line && !isLikelyMetadataLine(line))
+    .join('\n')
+    .trim()
+
+  if (!body) return []
+
+  if (bucket === 'mcq') {
+    const blocks = splitNumberedQuestionBlocks(body)
+    return blocks.map(block => {
+      const lines = block.split('\n').map(line => line.trim()).filter(Boolean)
+      const lead = cleanAssessmentLead(lines[0] || block)
+      const row = { text: lead, options: [] }
+
+      lines.slice(1).forEach(line => {
+        const option = parseMcqOptionLine(line, row.options.length)
+        if (option) row.options.push(option)
+        else if (!row.options.length) row.text = `${row.text} ${line}`.trim()
+      })
+
+      const inline = extractInlineMcqOptions(row.text)
+      if (inline.options.length >= 2) {
+        row.text = inline.stem || row.text
+        row.options = inline.options
+      }
+
+      return {
+        text: cleanLooseChunkText(row.text),
+        options: row.options,
+        type: 'MCQ',
+        category: section.categoryHint || 'Objective',
+        marks: marksEach,
+        questionNo: Number(targetSection?.questionNo || section.questionNo || 1),
+        section: targetSection,
+        source: section.heading || section.title || 'Smart Manual Paste',
+      }
+    }).filter(row => row.text)
+  }
+
+  const blocks = splitNumberedQuestionBlocks(body)
+  return blocks.flatMap((block, index) => {
+    const cleaned = cleanLooseChunkText(cleanAssessmentLead(stripLeadingQuestionMarker(block)))
+    if (!cleaned || isLikelyMetadataLine(cleaned)) return []
+    const pieces = splitInlineSubparts(cleaned, type)
+    return pieces.map(piece => {
+      const text = cleanLooseChunkText(piece)
+      if (!text || isLikelyMetadataLine(text)) return null
+      return {
+        text,
+        options: [],
+        type,
+        category: section.categoryHint || targetSection?.allowedCategories?.[0] || guessCategory(`${section.title}\n${text}`, config.subject),
+        marks: marksEach,
+        questionNo: Number(targetSection?.questionNo || section.questionNo || 0),
+        section: targetSection,
+        source: section.heading || section.title || `Smart Manual Paste ${index + 1}`,
+      }
+    }).filter(Boolean)
+  })
+}
+
+function parseStructuredManualPaste(rawText = '', config = {}, pattern = null) {
+  const sections = splitStructuredPaperSections(rawText)
+  if (!sections.some(section => section.questionNo || section.typeHint)) return []
+  return sections.flatMap(section => parseStructuredSectionItems(section, pattern, config))
+}
+
 function inferConfigFromPaste(rawText = '', currentConfig = {}) {
   const raw = String(rawText || '')
   const next = { ...currentConfig }
-  const subject = SUBJECTS.find(subject => new RegExp(`\\b${subject.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(raw))
-  const classMatch = raw.match(/\bclass\s*(\d{1,2})(?:st|nd|rd|th)?\b/i)
-  const titleMatch = raw.match(/Assessment\s*:\s*([^\n]+)/i)
+  const subject = detectSubjectFromPaste(raw)
+  const classMatch = raw.match(/\b(?:class|grade)\s*[:-]?\s*(\d{1,2})(?:st|nd|rd|th)?\b|\b(\d{1,2})(?:st|nd|rd|th)\s+(?:class|grade)\b/i)
+  const titleMatch = raw.match(/(?:Assessment|Quiz|Worksheet|Chapter|Unit|Paper)\s*:\s*([^\n]+)/i)
+  const totalMarks = inferTotalMarksFromPaste(raw)
   if (subject) next.subject = subject
-  if (classMatch) next.classLevel = classMatch[1]
-  if (/assessment|unit\s*\d+|part\s+a\s*:/i.test(raw)) {
+  if (classMatch) next.classLevel = classMatch[1] || classMatch[2]
+
+  if (isBoardLikePaste(raw) && !isAssessmentLikePaste(raw)) {
+    next.intent = 'Board Pattern Paper'
+    next.paperType = /annual/i.test(raw) ? 'Annual' : next.paperType || 'Board Pattern Paper'
+    next.board = /gujranwala/i.test(raw) ? 'Punjab / Gujranwala Board' : next.board || 'Board Pattern'
+  } else if (isAssessmentLikePaste(raw) || (totalMarks && totalMarks <= 50)) {
     next.intent = 'School Assessment'
-    next.paperType = 'Assessment'
+    next.paperType = /worksheet/i.test(raw) ? 'Worksheet' : /quiz/i.test(raw) ? 'Quiz' : /chapter/i.test(raw) ? 'Chapter Test' : 'Assessment'
     next.board = 'School Assessment'
   }
+  if (totalMarks) next.totalMarks = totalMarks
   if (titleMatch) next.chapters = titleMatch[1].trim()
   return next
 }
@@ -554,6 +912,7 @@ function parseSmartPasteV2(rawText, config) {
   if (!raw) return []
   const inferredConfig = inferConfigFromPaste(raw, config)
   const pattern = findUnifiedPattern(inferredConfig)
+  const structuredRows = parseStructuredManualPaste(raw, inferredConfig, pattern)
   const assessmentRows = parseAssessmentPaste(raw, pattern)
   const looseRows = parseLooseManualPaste(raw, inferredConfig, pattern)
   const blocks = splitBoardPaste(raw)
@@ -568,12 +927,19 @@ function parseSmartPasteV2(rawText, config) {
     .map(text => text.trim())
     .filter(Boolean)
     .map(text => ({ text, questionNo: parseQuestionNumber(text), section: null }))
-  const items = assessmentRows.length ? assessmentRows : looseRows.length ? looseRows : rows.length ? rows : fallback
+  const items = structuredRows.length ? structuredRows : assessmentRows.length ? assessmentRows : looseRows.length ? looseRows : rows.length ? rows : fallback
 
   return items.map((row, index) => {
     const text = row.text
     const type = row.type || inferTypeForTarget(row.section, text)
-    const targetSection = row.section || sectionForQuestionNo(pattern, row.questionNo)
+    const category = row.category || guessCategory(`${row.source || ''}\n${text}`, inferredConfig.subject)
+    const targetSection = row.section || resolveSectionForSmartItem(pattern, {
+      questionNo: row.questionNo,
+      title: row.source || '',
+      type,
+      category,
+      text,
+    })
     const confidence = targetSection
       ? 0.82
       : /[?؟]|(?:^|\n)\s*(?:[A-D]\)|\(A\)|الف|ب|ج|د)/.test(text) ? 0.78 : 0.52
@@ -582,12 +948,12 @@ function parseSmartPasteV2(rawText, config) {
       text,
       answer: '',
       type,
-      category: row.category || targetSection?.allowedCategories?.[0] || guessCategory(text, inferredConfig.subject),
+      category: category || targetSection?.allowedCategories?.[0] || guessCategory(text, inferredConfig.subject),
       marks: Number(row.marks || targetSection?.marksEach || (type === 'MCQ' ? 1 : type === 'Long Question' || type === 'Essay' ? 5 : 2)),
       options: row.options || [],
       chapter: '',
       topic: '',
-      source: row.questionNo ? `Manual Paste Q${row.questionNo}` : 'Manual Paste',
+      source: row.source || (row.questionNo ? `Manual Paste Q${row.questionNo}` : 'Manual Paste'),
       confidence,
       reviewStatus: confidence >= 0.7 ? 'Ready' : 'Needs Review',
       duplicateHash: duplicateHash(text),
@@ -596,7 +962,7 @@ function parseSmartPasteV2(rawText, config) {
       classLevel: inferredConfig.classLevel,
       subject: inferredConfig.subject,
       board: inferredConfig.board,
-      targetQuestionNo: Number(row.questionNo || targetSection?.questionNo || 0),
+      targetQuestionNo: Number(targetSection?.questionNo || row.questionNo || 0),
       targetSectionId: targetSection?.id || '',
       createdAt: new Date().toISOString(),
       order: index + 1,
