@@ -819,29 +819,37 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
 router.put('/:id', protect, adminOnly, async (req, res) => {
   try {
     await ensureFeePaymentColumns()
-    const { amount, due_date, discount, month, year } = req.body
+    await ensureFeeSystemSchema(currentSchoolId(req))
+    const { amount, monthly_fee, previous_arrears, due_date, discount, month, year, challan_no } = req.body
     const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const gross = asMoney(amount)
-    const disc = asMoney(discount)
-    const remaining = Math.max(0, gross - disc)
+    const monthly = amount !== undefined ? asMoney(amount) : monthly_fee !== undefined ? asMoney(monthly_fee) : null
+    const arrears = previous_arrears !== undefined ? asMoney(previous_arrears) : null
+    const disc = discount !== undefined ? asMoney(discount) : null
     const sql = `
       UPDATE fee_challans SET
-        amount = COALESCE($1, amount),
-        monthly_fee = COALESCE($1, monthly_fee),
-        gross_total = COALESCE($2, gross_total),
-        remaining_balance = COALESCE($2, remaining_balance),
-        discount = COALESCE($3, discount),
-        due_date = COALESCE($4, due_date),
-        month = COALESCE($5, month),
-        year = COALESCE($6, year),
+        challan_no = COALESCE($1, challan_no),
+        amount = COALESCE($2, amount),
+        monthly_fee = COALESCE($2, monthly_fee),
+        previous_arrears = COALESCE($3, previous_arrears),
+        discount = COALESCE($4, discount),
+        due_date = COALESCE($5, due_date),
+        month = COALESCE($6, month),
+        year = COALESCE($7, year),
+        gross_total = GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0),
+        remaining_balance = GREATEST(GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0) - COALESCE(paid_amount, 0), 0),
+        status = CASE
+          WHEN COALESCE(paid_amount, 0) <= 0 THEN 'unpaid'
+          WHEN COALESCE(paid_amount, 0) < GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0) THEN 'partial'
+          ELSE 'paid'
+        END,
         updated_at = NOW()
-      WHERE id = $7
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $8' : ''}
+      WHERE id = $8
+      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $9' : ''}
       RETURNING *
     `
     const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [gross || null, remaining || null, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id, currentSchoolId(req)]
-      : [gross || null, remaining || null, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id]
+      ? [challan_no || null, monthly, arrears, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id, currentSchoolId(req)]
+      : [challan_no || null, monthly, arrears, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id]
     const result = await query(sql, params)
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan updated', data: result.rows[0] })

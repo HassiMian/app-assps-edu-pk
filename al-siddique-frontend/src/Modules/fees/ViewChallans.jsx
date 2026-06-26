@@ -460,6 +460,10 @@ export default function ViewChallans() {
  const [paymentForm, setPaymentForm] = useState({ discount: 0, paid_amount: 0, payment_mode: 'cash', payment_note: '' })
  const [paymentError, setPaymentError] = useState('')
  const [paying, setPaying] = useState(false)
+ const [editChallan, setEditChallan] = useState(null)
+ const [editForm, setEditForm] = useState({ challan_no: '', month: '', year: '', monthly_fee: 0, previous_arrears: 0, discount: 0, due_date: '' })
+ const [editError, setEditError] = useState('')
+ const [savingEdit, setSavingEdit] = useState(false)
  const [printDdOpen, setPrintDdOpen] = useState(false)
  const [printMenuPos, setPrintMenuPos] = useState({ top: 0, right: 0 })
  const [classView, setClassView] = useState(false)
@@ -542,6 +546,7 @@ export default function ViewChallans() {
  const top = spaceBelow < menuH + 12 ? rect.top - menuH - 4 : rect.bottom + 4
  setActionMenuPos({ top, right: window.innerWidth - rect.right })
  setActionMenuItems([
+ { label:'Edit Challan / Fee', fn:()=>{ openEdit(item); setOpenActionId(null) } },
  { label:'Mark as Unpaid', fn:()=>{ api.put(`/api/fees/${item.id}/pay`,{paid_amount:0,discount:0,payment_note:'Reverted'}).then(load).catch(()=>{}); setOpenActionId(null) } },
  { label:'View Fee History', fn:()=>{ alert('Fee history coming soon'); setOpenActionId(null) } },
  { label:'One Student (1 Copy)', fn:()=>{ printChallan(item,school,1,1); setOpenActionId(null) } },
@@ -550,6 +555,75 @@ export default function ViewChallans() {
  { label:'Print (Premium)', fn:()=>{ printChallan(item,school,2,3); setOpenActionId(null) } },
  ])
  setOpenActionId(item.id)
+ }
+
+ const toInputDate = (value) => {
+ if (!value) return ''
+ const date = new Date(value)
+ if (Number.isNaN(date.getTime())) return String(value).slice(0, 10)
+ return date.toISOString().slice(0, 10)
+ }
+
+ const openEdit = (challan) => {
+ setEditChallan(challan)
+ setEditForm({
+ challan_no: challan.challan_no || '',
+ month: challan.month || '',
+ year: challan.year || new Date().getFullYear(),
+ monthly_fee: feeParts(challan).monthly,
+ previous_arrears: feeParts(challan).arrears,
+ discount: Number(challan.discount || 0),
+ due_date: toInputDate(challan.due_date),
+ })
+ setEditError('')
+ }
+
+ const closeEdit = () => {
+ if (savingEdit) return
+ setEditChallan(null)
+ setEditError('')
+ }
+
+ const saveEdit = async () => {
+ if (!editChallan) return
+ const monthlyFee = Math.max(0, Number(editForm.monthly_fee || 0))
+ const arrears = Math.max(0, Number(editForm.previous_arrears || 0))
+ const discount = Math.max(0, Number(editForm.discount || 0))
+ if (!editForm.challan_no.trim()) {
+ setEditError('Challan number is required.')
+ return
+ }
+ if (!editForm.month.trim()) {
+ setEditError('Month is required.')
+ return
+ }
+ if (!Number(editForm.year)) {
+ setEditError('Year is required.')
+ return
+ }
+ if (discount > monthlyFee + arrears) {
+ setEditError('Discount cannot exceed monthly fee plus arrears.')
+ return
+ }
+ setSavingEdit(true)
+ try {
+ await api.put(`/api/fees/${editChallan.id}`, {
+ challan_no: editForm.challan_no.trim(),
+ month: editForm.month.trim(),
+ year: Number(editForm.year),
+ monthly_fee: monthlyFee,
+ amount: monthlyFee,
+ previous_arrears: arrears,
+ discount,
+ due_date: editForm.due_date || null,
+ })
+ setEditChallan(null)
+ load()
+ } catch (err) {
+ setEditError(err.response?.data?.message || 'Challan could not be updated. Please try again.')
+ } finally {
+ setSavingEdit(false)
+ }
  }
 
  const openPayment = (challan) => {
@@ -875,6 +949,112 @@ export default function ViewChallans() {
  </div>
  </div>,
  document.body
+ )}
+
+ {editChallan && (
+ <div style={{
+ position:'fixed', inset:0, zIndex:1000, background:'rgba(2,12,24,0.72)', backdropFilter:'blur(10px)',
+ display:'flex', alignItems:'center', justifyContent:'center', padding:20,
+ }}>
+ <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.55)' }}>
+ <div style={{ display:'flex', justifyContent:'space-between', gap:16, alignItems:'flex-start', marginBottom:18 }}>
+ <div>
+ <div style={{ color:C.gold, fontWeight:900, fontSize:22 }}>Edit Challan & Monthly Fee</div>
+ <div style={{ color:C.muted, marginTop:6 }}>{editChallan.name || 'Student'} - {editChallan.gr_number || 'No GR'}</div>
+ </div>
+ <button onClick={closeEdit} style={{ ...btnSecondary, padding:'8px 12px' }}>Close</button>
+ </div>
+
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(2, minmax(0, 1fr))', gap:14 }}>
+ <div>
+ <label style={labelStyle}>Challan Number</label>
+ <input
+ style={input}
+ value={editForm.challan_no}
+ onChange={e=>setEditForm(f=>({ ...f, challan_no:e.target.value }))}
+ placeholder="CH-0001"
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>Due Date</label>
+ <input
+ style={input}
+ type="date"
+ value={editForm.due_date}
+ onChange={e=>setEditForm(f=>({ ...f, due_date:e.target.value }))}
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>Month</label>
+ <input
+ style={input}
+ value={editForm.month}
+ onChange={e=>setEditForm(f=>({ ...f, month:e.target.value }))}
+ placeholder="June"
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>Year</label>
+ <input
+ style={input}
+ type="number"
+ value={editForm.year}
+ onChange={e=>setEditForm(f=>({ ...f, year:e.target.value }))}
+ placeholder="2026"
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>Monthly Fee</label>
+ <input
+ style={input}
+ type="number"
+ min="0"
+ value={editForm.monthly_fee}
+ onChange={e=>setEditForm(f=>({ ...f, monthly_fee:e.target.value }))}
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>Previous Arrears</label>
+ <input
+ style={input}
+ type="number"
+ min="0"
+ value={editForm.previous_arrears}
+ onChange={e=>setEditForm(f=>({ ...f, previous_arrears:e.target.value }))}
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>Discount</label>
+ <input
+ style={input}
+ type="number"
+ min="0"
+ value={editForm.discount}
+ onChange={e=>setEditForm(f=>({ ...f, discount:e.target.value }))}
+ />
+ </div>
+ <div>
+ <label style={labelStyle}>New Net Total</label>
+ <div style={{ ...input, display:'flex', alignItems:'center', color:C.gold, fontWeight:900 }}>
+ Rs. {money(Math.max(0, Number(editForm.monthly_fee || 0) + Number(editForm.previous_arrears || 0) - Number(editForm.discount || 0)))}
+ </div>
+ </div>
+ </div>
+
+ {editError && (
+ <div style={{ marginTop:14, color:C.red, background:'rgba(255,55,95,0.1)', border:'1px solid rgba(255,55,95,0.25)', borderRadius:12, padding:'10px 12px', fontWeight:700 }}>
+ {editError}
+ </div>
+ )}
+
+ <div style={{ display:'flex', justifyContent:'flex-end', gap:10, marginTop:20, flexWrap:'wrap' }}>
+ <button onClick={closeEdit} style={btnSecondary} disabled={savingEdit}>Cancel</button>
+ <button onClick={saveEdit} style={btnPrimary} disabled={savingEdit}>
+ {savingEdit ? 'Saving...' : 'Save Challan Changes'}
+ </button>
+ </div>
+ </div>
+ </div>
  )}
 
  {paymentChallan && (

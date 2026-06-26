@@ -272,13 +272,22 @@ function setStoredEmployees(employees) {
 }
 
 function normalizeFeeChallan(challan = {}) {
+ const monthlyFee = Number(challan.monthly_fee ?? challan.amount ?? 0)
+ const previousArrears = Number(challan.previous_arrears ?? challan.prev_month_fee ?? 0)
+ const discount = Number(challan.discount || 0)
+ const grossTotal = Number(challan.gross_total ?? Math.max(0, monthlyFee + previousArrears - discount))
+ const paidAmount = Number(challan.paid_amount || 0)
  return {
  ...challan,
  id: challan.id || Date.now(),
  challan_no: challan.challan_no || `CH-${String(challan.id || Date.now()).slice(-4)}`,
- amount: Number(challan.amount || 0),
- paid_amount: Number(challan.paid_amount || 0),
- discount: Number(challan.discount || 0),
+ amount: monthlyFee,
+ monthly_fee: monthlyFee,
+ previous_arrears: previousArrears,
+ gross_total: grossTotal,
+ remaining_balance: Number(challan.remaining_balance ?? Math.max(0, grossTotal - paidAmount)),
+ paid_amount: paidAmount,
+ discount,
  payment_mode: challan.payment_mode || null,
  payment_note: challan.payment_note || '',
  status: challan.status || 'unpaid',
@@ -530,6 +539,48 @@ api.interceptors.response.use(
  setStoredEmployees(employees)
  return Promise.resolve({
  data: { success: true, data: nextEmployee, message: 'Employee updated in demo storage.' },
+ status: 200,
+ statusText: 'OK',
+ headers: {},
+ config: err.config
+ });
+ }
+
+ if (match.match(/\/api\/fees\/[^/]+$/) && method === 'put') {
+ const id = match.split('/').pop()
+ const fees = getStoredFees()
+ const incoming = readRequestPayload(err.config)
+ const found = fees.findIndex(item => String(item.id) === String(id))
+ if (found < 0) return Promise.reject(err)
+ const current = fees[found]
+ const monthlyFee = incoming.amount !== undefined
+ ? Math.max(0, Number(incoming.amount || 0))
+ : incoming.monthly_fee !== undefined
+ ? Math.max(0, Number(incoming.monthly_fee || 0))
+ : Number(current.monthly_fee ?? current.amount ?? 0)
+ const previousArrears = incoming.previous_arrears !== undefined
+ ? Math.max(0, Number(incoming.previous_arrears || 0))
+ : Number(current.previous_arrears || 0)
+ const discount = incoming.discount !== undefined
+ ? Math.max(0, Number(incoming.discount || 0))
+ : Number(current.discount || 0)
+ const gross = Math.max(0, monthlyFee + previousArrears - discount)
+ const paid = Math.max(0, Number(current.paid_amount || 0))
+ const status = paid <= 0 ? 'unpaid' : paid < gross ? 'partial' : 'paid'
+ fees[found] = normalizeFeeChallan({
+ ...current,
+ ...incoming,
+ amount: monthlyFee,
+ monthly_fee: monthlyFee,
+ previous_arrears: previousArrears,
+ discount,
+ gross_total: gross,
+ remaining_balance: Math.max(0, gross - paid),
+ status,
+ })
+ setStoredFees(fees)
+ return Promise.resolve({
+ data: { success: true, data: fees[found], message: 'Challan updated in demo storage.' },
  status: 200,
  statusText: 'OK',
  headers: {},

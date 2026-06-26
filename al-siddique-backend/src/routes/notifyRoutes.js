@@ -16,6 +16,7 @@ function isScopedPortalRole(role) {
 }
 
 function scopedNotificationPredicate(role, startIndex = 1) {
+  const normalizedRole = String(role || '').toLowerCase()
   if (String(role || '').toLowerCase() === 'parent') {
     return {
       clause: `AND n.recipient_role = $${startIndex}
@@ -41,6 +42,13 @@ function scopedNotificationPredicate(role, startIndex = 1) {
             AND s.student_user_id = $${startIndex + 1}
         )`,
       needsUserId: true,
+    }
+  }
+
+  if (['super_admin', 'admin', 'principal', 'accountant'].includes(normalizedRole)) {
+    return {
+      clause: '',
+      needsUserId: false,
     }
   }
 
