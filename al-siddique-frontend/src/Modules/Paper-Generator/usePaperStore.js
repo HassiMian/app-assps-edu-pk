@@ -3,10 +3,23 @@ import { useState, useEffect } from 'react'
 import { resolveAssetUrl } from '../../services/api'
 import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
+import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
+const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
+
+const SEED_TYPE_MAP = {
+ mcq: 'mcq',
+ short: 'short',
+ long: 'long',
+ grammar: 'grammar',
+ composition: 'essay',
+ fill_blank: 'fill',
+ match: 'columns',
+ project_diagram: 'diagram',
+}
 
 
 const SUBJECT_CATEGORY_MAP = {
@@ -87,12 +100,208 @@ const defaultStore = {
  },
 }
 
+function isAsspsTenantUser(user = readAuthUser()) {
+ const haystack = [
+ user?.tenant_id,
+ user?.tenantId,
+ user?.school_id,
+ user?.schoolId,
+ user?.school_code,
+ user?.schoolCode,
+ user?.school_name,
+ user?.schoolName,
+ user?.name,
+ ].map(v => String(v || '').toLowerCase()).join(' ')
+
+ return (
+  /\b1\b/.test(String(user?.school_id || user?.schoolId || '')) ||
+  haystack.includes('al siddique') ||
+  haystack.includes('assps') ||
+  haystack.includes('default')
+ )
+}
+
+function seedQuestionType(record) {
+ const raw = normText(record?.question_type || record?.category)
+ return SEED_TYPE_MAP[raw] || raw || 'short'
+}
+
+function seedQuestionMedium(record) {
+ const subject = String(record?.subject || '').toLowerCase()
+ const medium = String(record?.medium || '').toLowerCase()
+ const text = String(record?.question_text || '')
+ if (subject.includes('urdu') || subject.includes('pakistan studies urdu') || medium.includes('urdu') || /[\u0600-\u06ff]/.test(text)) {
+  return 'urdu'
+ }
+ return 'english'
+}
+
+function seedQuestionKey({ classLevel = '', subject = '', chapter = '', text = '' }) {
+ return [
+  normalizeClassLevel(classLevel),
+  normText(subject),
+  normText(chapter),
+  normText(text),
+ ].join('::')
+}
+
+function normalizeSeedOptions(options = [], isRtl = false) {
+ if (!Array.isArray(options)) return []
+ return options.map((option, index) => {
+  const label = String.fromCharCode(65 + index)
+  if (typeof option === 'string') {
+   return {
+    label,
+    text: isRtl ? '' : option,
+    textUrdu: isRtl ? option : '',
+   }
+  }
+  if (!option || typeof option !== 'object') return null
+  const text = option.text || option.label || option.value || ''
+  const textUrdu = option.textUrdu || option.urdu || ''
+  return {
+   label: option.key || option.labelKey || label,
+   text: isRtl ? (option.textEnglish || '') : text,
+   textUrdu: isRtl ? (textUrdu || text) : textUrdu,
+  }
+ }).filter(Boolean)
+}
+
+function withAsspsQuestionBankSeed(store) {
+ if (!isAsspsTenantUser()) return store
+ const seedRows = Array.isArray(asspsQuestionBankSeed) ? asspsQuestionBankSeed : []
+ if (!seedRows.length) return store
+
+ const subjects = Array.isArray(store.subjects) ? [...store.subjects] : []
+ const questions = Array.isArray(store.questions) ? [...store.questions] : []
+ const subjectKeyToId = new Map()
+ const subjectById = new Map()
+
+ subjects.forEach(subject => {
+  const key = normalizeSubjectKey({
+   name: subject?.name,
+   classLevel: subject?.classLevel,
+   publisher: subject?.publisher,
+  })
+  const seedKey = normalizeSubjectKey({
+   name: subject?.name,
+   classLevel: subject?.classLevel,
+   publisher: '',
+  })
+  if (key) subjectKeyToId.set(key, subject.id)
+  if (seedKey) subjectKeyToId.set(seedKey, subject.id)
+  if (subject?.id) subjectById.set(subject.id, subject)
+ })
+
+ const questionKeys = new Set(questions.map(question => {
+  const subject = subjectById.get(question.subjectId) || {}
+  return seedQuestionKey({
+   classLevel: subject.classLevel,
+   subject: subject.name,
+   chapter: question.chapter,
+   text: question.text || question.textUrdu,
+  })
+ }))
+ const existingIds = new Set([...subjects.map(s => s.id), ...questions.map(q => q.id)])
+
+ let inserted = 0
+ let skippedDuplicates = 0
+ const failed = []
+ const now = new Date().toISOString()
+
+ seedRows.forEach((record, index) => {
+  const classLevel = String(record?.class_level || '').trim()
+  const subjectName = String(record?.subject || '').trim()
+  const chapter = String(record?.chapter_name || '').trim()
+  const text = String(record?.question_text || '').trim()
+  if (!classLevel || !subjectName || !chapter || !text) {
+   failed.push({ index: index + 1, id: record?.id || '', reason: 'Missing required field' })
+   return
+  }
+
+  const duplicateKey = seedQuestionKey({ classLevel, subject: subjectName, chapter, text })
+  if (questionKeys.has(duplicateKey)) {
+   skippedDuplicates += 1
+   return
+  }
+
+  const subjectKey = normalizeSubjectKey({ name: subjectName, classLevel, publisher: '' })
+  let subjectId = subjectKeyToId.get(subjectKey)
+  if (!subjectId) {
+   subjectId = `seed_sub_${normalizeClassLevel(classLevel)}_${normText(subjectName).replace(/[^a-z0-9]+/g, '_')}`.replace(/_+$/g, '')
+   if (existingIds.has(subjectId)) subjectId = `${subjectId}_${index}`
+   const subject = {
+    id: subjectId,
+    name: subjectName,
+    nameUrdu: /[\u0600-\u06ff]/.test(subjectName) ? subjectName : '',
+    publisher: '',
+    cover: null,
+    classLevel,
+    source: 'ASSPS seed',
+    createdAt: now,
+   }
+   subjects.push(subject)
+   subjectKeyToId.set(subjectKey, subjectId)
+   subjectById.set(subjectId, subject)
+   existingIds.add(subjectId)
+  }
+
+  const medium = seedQuestionMedium(record)
+  const isRtl = medium === 'urdu'
+  let questionId = `seed_q_${String(record?.id || index + 1).replace(/[^a-zA-Z0-9_-]/g, '_')}`
+  if (existingIds.has(questionId)) questionId = `${questionId}_${index}`
+  existingIds.add(questionId)
+  questionKeys.add(duplicateKey)
+  inserted += 1
+
+  questions.push({
+   id: questionId,
+   subjectId,
+   type: seedQuestionType(record),
+   medium,
+   text,
+   textUrdu: isRtl ? text : '',
+   options: normalizeSeedOptions(record?.options, isRtl),
+   answer: record?.answer === undefined || record?.answer === null ? '' : String(record.answer),
+   marks: Number(record?.marks) || 1,
+   chapter,
+   topic: String(record?.topic_name || record?.chapter_name || '').trim(),
+   priority: 'exercise',
+   source: record?.source || 'ASSPS JSON seed',
+   seedId: record?.id || '',
+   seedCategory: record?.category || '',
+   difficulty: record?.difficulty || 'medium',
+   tags: Array.isArray(record?.tags) ? record.tags : [],
+   createdAt: now,
+  })
+ })
+
+ return {
+  ...store,
+  subjects,
+  questions,
+  seedInfo: {
+   ...(store.seedInfo || {}),
+   asspsQuestionBank: {
+    version: ASSPS_QBANK_SEED_VERSION,
+    totalRead: seedRows.length,
+    inserted,
+    skippedDuplicates,
+    failed: failed.length,
+    failedItems: failed.slice(0, 20),
+    appliedAt: now,
+   },
+  },
+ }
+}
+
 function loadStore() {
  try {
  const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy: true })
  if (!raw) {
- saveStore(defaultStore)
- return defaultStore
+ const seeded = withAsspsQuestionBankSeed(defaultStore)
+ saveStore(seeded)
+ return seeded
  }
  const parsed = JSON.parse(raw)
  // Keep user data as-is; only seed if this is truly the very first run
@@ -141,7 +350,7 @@ function loadStore() {
  schoolAccess: Array.isArray(persistedPaperSettings.schoolAccess) ? persistedPaperSettings.schoolAccess : [],
  superappModules: persistedPaperSettings.superappModules || {},
  }
- return {
+ const nextStore = {
  ...defaultStore,
  ...parsed,
  subjects,
@@ -150,6 +359,14 @@ function loadStore() {
  savedPapers,
  paperSettings: safePaperSettings,
  }
+ const seeded = withAsspsQuestionBankSeed(nextStore)
+ if (
+  seeded !== nextStore &&
+  (seeded.seedInfo?.asspsQuestionBank?.inserted || seeded.seedInfo?.asspsQuestionBank?.failed)
+ ) {
+  saveStore(seeded)
+ }
+ return seeded
  } catch { return defaultStore }
 }
 
