@@ -104,10 +104,10 @@ function loadJson(file) {
 async function findSchool(client, selector) {
   const wanted = norm(selector || DEFAULT_SCHOOL_NAME)
   const result = await client.query(
-    `SELECT id, name, slug
+    `SELECT id, name, code, NULL::text AS slug
        FROM schools
       WHERE lower(name) = lower($1)
-         OR lower(slug) = lower($1)
+         OR lower(code) = lower($1)
          OR lower(name) = lower($2)
       ORDER BY CASE WHEN lower(name) = lower($1) THEN 0 ELSE 1 END
       LIMIT 1`,
