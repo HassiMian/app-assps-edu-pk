@@ -1,11 +1,17 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function PremiumLogo({ src, alt = 'Logo', size = 48, className = '', variant = 'default' }) {
+export default function PremiumLogo({ src, alt = 'Logo', size = 48, className = '', variant = 'default', fallbackText = 'AS' }) {
+  const [imageOk, setImageOk] = useState(Boolean(src && src !== 'null' && src !== 'undefined'));
   const inset = size > 84 ? 8 : 6;
   const isHero = variant === 'hero';
   const glowInset = isHero ? 14 : 10;
+
+  useEffect(() => {
+    setImageOk(Boolean(src && src !== 'null' && src !== 'undefined'));
+  }, [src]);
+
   return (
     <div
       className={`premium-logo-shell relative flex items-center justify-center rounded-full ${className}`}
@@ -102,22 +108,47 @@ export default function PremiumLogo({ src, alt = 'Logo', size = 48, className = 
             transformOrigin: 'center center',
           }}
         />
-        <img
-          src={src}
-          alt="Premium School Logo"
-          style={{
-            position: 'relative',
-            zIndex: 1,
-            width: isHero ? '88%' : '84%',
-            height: isHero ? '88%' : '84%',
-            objectFit: 'contain',
-            mixBlendMode: 'multiply',
-            filter: isHero
-              ? 'drop-shadow(0 4px 16px rgba(11,44,77,0.16)) saturate(1.04)'
-              : 'drop-shadow(0 2px 10px rgba(11,44,77,0.12))',
-            transform: 'translateZ(0)',
-          }}
-        />
+        {imageOk ? (
+          <img
+            src={src}
+            alt={alt}
+            onError={() => setImageOk(false)}
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              width: isHero ? '88%' : '84%',
+              height: isHero ? '88%' : '84%',
+              objectFit: 'contain',
+              filter: isHero
+                ? 'drop-shadow(0 4px 16px rgba(11,44,77,0.18)) saturate(1.08) contrast(1.04)'
+                : 'drop-shadow(0 2px 10px rgba(11,44,77,0.14)) saturate(1.06)',
+              transform: 'translateZ(0)',
+            }}
+          />
+        ) : (
+          <div
+            aria-label={alt}
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              width: isHero ? '78%' : '74%',
+              height: isHero ? '78%' : '74%',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'linear-gradient(145deg, #071e34, #0B2C4D)',
+              color: '#F7D774',
+              border: '1px solid rgba(200,153,26,0.38)',
+              fontSize: Math.max(14, Math.round(size * 0.26)),
+              fontWeight: 900,
+              letterSpacing: 0,
+              lineHeight: 1,
+            }}
+          >
+            {fallbackText}
+          </div>
+        )}
       </div>
     </div>
   );

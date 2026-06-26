@@ -40,6 +40,8 @@ export default function SchoolHero({ schoolName, schoolLogo, compact = false }) 
 
   const initials = useMemo(() => getInitials(schoolName), [schoolName]);
   const titleLines = useMemo(() => splitSchoolName(schoolName), [schoolName]);
+  const resolvedLogo = String(schoolLogo || '').trim();
+  const hasLogo = resolvedLogo && resolvedLogo !== 'null' && resolvedLogo !== 'undefined';
 
   const shellPadding = compact ? 'p-4 sm:p-5' : 'p-5 sm:p-6 xl:p-7';
   const contentGap = compact ? 'gap-4 xl:gap-5' : 'gap-5 xl:gap-6';
@@ -80,8 +82,8 @@ export default function SchoolHero({ schoolName, schoolLogo, compact = false }) 
           >
             <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-amber-400/20 via-cyan-500/10 to-transparent blur-2xl" />
             <div className="absolute inset-0 animate-pulse rounded-full border border-amber-300/20" />
-            {schoolLogo && schoolLogo !== 'null' ? (
-              <PremiumLogo src={schoolLogo} size={heroLogoSize} variant="hero" />
+            {hasLogo ? (
+              <PremiumLogo src={resolvedLogo} size={heroLogoSize} variant="hero" fallbackText={initials} alt={`${schoolName} logo`} />
             ) : (
               <div className={`flex items-center justify-center ${compact ? 'h-24 w-24' : 'h-28 w-28'} rounded-full border border-amber-400/30 bg-gradient-to-br from-amber-400/20 to-cyan-500/20 text-xl sm:text-2xl font-black text-white shadow-xl overflow-hidden`} style={{ lineHeight: 1 }}>
                 {initials}
