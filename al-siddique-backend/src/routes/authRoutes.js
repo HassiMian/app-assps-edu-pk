@@ -24,7 +24,8 @@ const JWT_SECRET = resolveSecret('JWT_SECRET', 'dev-jwt-secret')
 const JWT_REFRESH_SECRET = resolveSecret('JWT_REFRESH_SECRET', 'dev-refresh-secret')
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '15m'
 const JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '30d'
-const DEMO_LOGIN_ENABLED = process.env.DEMO_LOGIN_ENABLED !== 'false'
+const DEMO_LOGIN_ENABLED = process.env.NODE_ENV !== 'production' && process.env.DEMO_LOGIN_ENABLED === 'true'
+const DEMO_ADMIN_PASSWORD = process.env.DEMO_ADMIN_PASSWORD || ''
 
 if (process.env.NODE_ENV !== 'production' && (!process.env.JWT_SECRET || !process.env.JWT_REFRESH_SECRET)) {
   console.warn('WARNING: JWT secrets are using development fallback values. Set JWT_SECRET and JWT_REFRESH_SECRET before deploying to production.')
@@ -37,7 +38,7 @@ const BLOCK_DURATION_MS = 15 * 60 * 1000 // 15 minutes
 const RESET_OTP_TTL_MS = 10 * 60 * 1000
 
 const demoAccounts = {
-  'demo@assps.edu.pk': { role: 'admin', name: 'System Admin', designation: 'Principal', school_id: 2, password: 'Demo@12345' },
+  'demo@assps.edu.pk': { role: 'admin', name: 'System Admin', designation: 'Principal', school_id: 2, password: DEMO_ADMIN_PASSWORD },
 }
 
 function isMissingUsersTableError(err) {
@@ -207,7 +208,11 @@ async function fetchSchoolById(schoolId) {
     )
     return result.rows[0] || null
   } catch (err) {
-    console.error('Database connection failed in fetchSchoolById, returning mock school:', err.message)
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Database connection failed in fetchSchoolById:', err.message)
+      return null
+    }
+    console.error('Database connection failed in fetchSchoolById, returning development mock school:', err.message)
     return {
       id: schoolId || 1,
       name: 'Al Siddique Scholars Public School',
@@ -235,7 +240,11 @@ async function fetchSchoolByCode(code) {
     )
     return result.rows[0] || null
   } catch (err) {
-    console.error('Database connection failed in fetchSchoolByCode, returning mock school:', err.message)
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Database connection failed in fetchSchoolByCode:', err.message)
+      return null
+    }
+    console.error('Database connection failed in fetchSchoolByCode, returning development mock school:', err.message)
     return {
       id: 1,
       name: 'Al Siddique Scholars Public School',
@@ -530,7 +539,7 @@ router.post('/login', async (req, res) => {
       if (err?.code === '42703') {
         result = await query('SELECT * FROM users WHERE LOWER(email) = LOWER($1) AND is_active = true', [loginId])
       } else {
-      const canUseDemoFallback = DEMO_LOGIN_ENABLED || isMissingUsersTableError(err)
+      const canUseDemoFallback = DEMO_LOGIN_ENABLED || (process.env.NODE_ENV !== 'production' && isMissingUsersTableError(err))
       if (canUseDemoFallback && demoAccounts[email] && demoAccounts[email].password === password) {
         if (requestedSchool && requestedSchool.id !== 1) {
           return sendJson(res, 403, { message: 'Demo login is only available for the default school.' })
@@ -697,7 +706,7 @@ router.post('/refresh', async (req, res) => {
         user = result.rows[0]
       }
     } catch (dbErr) {
-      if ((DEMO_LOGIN_ENABLED || isMissingUsersTableError(dbErr)) && (decoded.id === 999 || demoAccounts[decoded.email])) {
+      if ((DEMO_LOGIN_ENABLED || (process.env.NODE_ENV !== 'production' && isMissingUsersTableError(dbErr))) && (decoded.id === 999 || demoAccounts[decoded.email])) {
         const account = demoAccounts[decoded.email] || demoAccounts['demo@assps.edu.pk']
         const newPayload = {
           id: 999,
@@ -880,6 +889,23 @@ router.post('/password-reset/confirm', async (req, res) => {
 router.get('/me', protect, async (req, res) => {
   try {
     const decoded = req.user || {}
+    if (decoded.account_type === 'service') {
+      return sendJson(res, 200, {
+        user: {
+          id: decoded.id,
+          account_type: 'service',
+          service_identity: decoded.service_identity,
+          school_id: decoded.school_id,
+          tenant_id: decoded.tenant_id,
+          school_code: decoded.school_code || null,
+          school_name: req.school?.school_name || req.school?.name || null,
+          role: 'service',
+          scopes: decoded.scopes || [],
+          permissions: decoded.permissions || decoded.scopes || [],
+        },
+        schoolBranding: buildSchoolBranding(req.school),
+      })
+    }
     let user
     try {
       const result = await query('SELECT * FROM users WHERE id = $1 AND is_active = true', [decoded.id])
@@ -947,7 +973,7 @@ router.get('/me', protect, async (req, res) => {
     })
   } catch (err) {
     console.error('Auth me error:', err.message)
-    if (DEMO_LOGIN_ENABLED || isMissingUsersTableError(err)) {
+    if (DEMO_LOGIN_ENABLED || (process.env.NODE_ENV !== 'production' && isMissingUsersTableError(err))) {
       const decoded = req.user || {}
       const email = decoded.email || 'demo@assps.edu.pk'
       const account = demoAccounts[email] || demoAccounts['demo@assps.edu.pk']

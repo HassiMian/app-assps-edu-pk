@@ -16,3 +16,12 @@ uploads/
 .env
 .env.local
 .env.*.local
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sql.gz
+runtime/server-snapshots/
