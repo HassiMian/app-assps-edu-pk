@@ -1,8 +1,15 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Printer, Save, Plus, X } from 'lucide-react'
 import { useAcademicStore } from '../services/useAcademicStore'
 import { useStudentStore } from '../services/useStudentStore'
 import { usePaperStore } from './Paper-Generator/usePaperStore'
+import {
+ FINAL_EXAM_SEED_KEY,
+ FINAL_EXAM_SEED_VERSION,
+ FINAL_EXAM_TERM,
+ mergeFinalExamRows,
+ validateFinalExamRows,
+} from './dateSheetFinalExam2026'
 
 const STORE_KEY = 'al_siddique_date_sheets'
 const TERMS = ['First Term Exam', 'Second Term Exam', 'Annual Exam', 'Monthly Assessment']
@@ -23,8 +30,15 @@ function getStorage() {
 
 function readSheets() {
  try {
- const saved = JSON.parse(getStorage()?.getItem(STORE_KEY) || '[]')
- return Array.isArray(saved) ? saved : []
+ const storage = getStorage()
+ const saved = JSON.parse(storage?.getItem(STORE_KEY) || '[]')
+ const rows = Array.isArray(saved) ? saved : []
+ if (storage?.getItem(FINAL_EXAM_SEED_KEY) === FINAL_EXAM_SEED_VERSION) return rows
+ const seeded = mergeFinalExamRows(rows)
+ if (validateFinalExamRows(seeded).length) return rows
+ storage?.setItem(STORE_KEY, JSON.stringify(seeded))
+ storage?.setItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
+ return seeded
  } catch {
  return []
  }
@@ -32,7 +46,9 @@ function readSheets() {
 
 function writeSheets(rows) {
  const storage = getStorage()
- try { storage?.setItem(STORE_KEY, JSON.stringify(rows)) } catch {}
+ try { storage?.setItem(STORE_KEY, JSON.stringify(rows)) } catch {
+ // localStorage can be blocked in private/restricted browser contexts.
+ }
 }
 
 function clsValue(value) {
@@ -109,7 +125,7 @@ function templateCss(template) {
 
 function buildCard({ student, rows, school, term, session, template }) {
  const logo = school.logo ? `<img class="logo" src="${school.logo}" alt="logo">` : '<div class="logo" style="display:grid;place-items:center;font-weight:900">S</div>'
- const lines = rows.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(prettyDate(r.date))}</td><td>${esc(dayName(r.date))}</td><td>${esc(r.subjects.join(', '))}</td><td>${esc((r.times || []).filter(Boolean).join(' / ') || '09:00 AM')}</td></tr>`).join('')
+ const lines = rows.map((r, i) => `<tr><td>${i + 1}</td><td>${esc(prettyDate(r.date))}</td><td>${esc(dayName(r.date))}</td><td>${esc(r.subjects.join(', '))}</td><td>${esc((r.times || []).filter(Boolean).join(' / '))}</td></tr>`).join('')
  return `<section class="sheet ${template}">
  <div class="head">${logo}<div class="school"><h1>${esc(school.schoolName || 'Al Siddique Scholars Public School')}</h1><small>${esc(school.address || '')}${school.phone ? ` | ${esc(school.phone)}` : ''}</small></div><div class="meta"><b>Date Sheet</b><br>${esc(term)}<br>${esc(session)}</div></div>
  <div class="info"><div><span>Student</span><strong>${esc(student.name)}</strong></div><div><span>GR No</span><strong>${esc(student.gr_number || '-')}</strong></div><div><span>Father</span><strong>${esc(student.father_name || '-')}</strong></div><div><span>Class</span><strong>${esc(clsLabel(student.class))} - ${esc(student.section || 'A')}</strong></div></div>
@@ -153,7 +169,7 @@ export default function DateSheet() {
  const [sheets, setSheets] = useState(readSheets)
  const [printClass, setPrintClass] = useState(classOptions[0]?.value || '1')
  const [printSession, setPrintSession] = useState(session)
- const [printTerm, setPrintTerm] = useState(TERMS[0])
+ const [printTerm, setPrintTerm] = useState(FINAL_EXAM_TERM)
  const [template, setTemplate] = useState('classic')
  const [layout, setLayout] = useState('single')
 
