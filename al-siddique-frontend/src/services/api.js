@@ -617,29 +617,6 @@ api.interceptors.response.use(
  return Promise.resolve({ data: payload, status: 200, statusText: 'OK', headers: {}, config: err.config });
  }
 
- // Mock Login Fallback
- if (match === '/api/auth/login' && err.config.method === 'post') {
- const { email } = JSON.parse(err.config.data);
- console.warn(` Using Mock Login for: ${email}`);
- return Promise.resolve({
- data: {
- success: true,
- token: 'mock-jwt-token',
- user: { 
- id: 1, 
- name: email.includes('admin') ? 'Siddique Admin' : 'Senior Teacher', 
- email, 
- role: email.includes('admin') ? 'admin' : 'teacher' 
- },
- message: 'Welcome to Demo Mode!'
- },
- status: 200,
- statusText: 'OK',
- headers: {},
- config: err.config
- });
- }
-
  return Promise.reject(err);
  }
 );

@@ -182,7 +182,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  const branding = useTenantBranding()
  const { paperSettings } = usePaperStore()
  const uploadedLogo = branding?.logoUrl || paperSettings?.logo
- const schoolName = branding?.schoolName || paperSettings?.schoolName || 'School OS'
+ const schoolName = branding?.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
  const role = user?.role || 'admin'
  const inactiveIcon = 'rgba(224,229,238,0.94)'
  const inactiveText = 'rgba(224,229,238,0.92)'

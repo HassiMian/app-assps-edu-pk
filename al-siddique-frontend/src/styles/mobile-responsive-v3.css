@@ -140,4 +140,27 @@
     min-width: 100%;
     max-width: none;
   }
+
+  .super-module-viewport .student-records-table-wrap {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .super-module-viewport .student-records-table,
+  .super-module-viewport .challans-table {
+    table-layout: auto !important;
+    min-width: 960px !important;
+  }
+
+  .super-module-viewport .student-records-table th,
+  .super-module-viewport .student-records-table td,
+  .super-module-viewport .student-records-table td *,
+  .super-module-viewport .challans-table th,
+  .super-module-viewport .challans-table td,
+  .super-module-viewport .challans-table td * {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
+  }
 }

@@ -90,22 +90,28 @@ router.get('/', protect, canViewAnalytics, async (req, res) => {
       })
     }
 
-    // Add generic behavior insight
     insights.push({
       id: 'insight-beh-1',
       type: 'behavior',
-      title: 'Attendance Correlation',
-      description: 'Students with irregular attendance patterns are showing a strong correlation with lower grades across multiple subjects.',
-      studentCount: 12, // Mock generic count
-      severity: 'medium'
+      title: 'Attendance Correlation Monitor',
+      description: 'Attendance and result correlation is monitored from live school records.',
+      studentCount: 0,
+      severity: 'low'
     })
 
     res.json({ success: true, data: insights })
   } catch (err) {
     console.error('AI Analytics Error:', err.message)
-    // Fallback Mock Data
+    if (process.env.NODE_ENV === 'production') {
+      return res.status(503).json({
+        success: false,
+        message: 'AI analytics is temporarily unavailable.',
+        source: 'live_database',
+      })
+    }
     res.json({
       success: true,
+      source: 'development_fallback',
       data: [
         { id: 'insight-m1', type: 'risk', title: 'At-Risk Students Detected', description: 'AI has detected students falling below 50% threshold.', studentCount: 23, severity: 'high', subject: 'Mathematics' },
         { id: 'insight-m2', type: 'performance', title: 'Top Performers Cluster', description: 'Consistently scoring above 85%.', studentCount: 15, severity: 'low', subject: 'Physics' }

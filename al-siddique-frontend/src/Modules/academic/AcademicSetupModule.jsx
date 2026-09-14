@@ -1,7 +1,14 @@
 // AcademicSetupModule.jsx — Al Siddique Smart School OS
 
 import { useState } from 'react'
-import { GraduationCap } from 'lucide-react'
+import { GraduationCap, Plus, Trash2, Edit2, Check, X } from 'lucide-react'
+
+function slugifyLevel(name) {
+  const clean = String(name || '').toLowerCase().trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+  return clean || `c_${Date.now()}`
+}
 
 //  Academic data (classes, subjects, calendar) stored separately 
 const AK = 'al_siddique_academic'
@@ -65,32 +72,36 @@ function isLegacyDefaultClass(cls) {
 }
 
 function mergeClasses(savedClasses = []) {
- const next = [...DEFAULT_ACADEMIC.classes]
- savedClasses.forEach(item => {
- if (!item?.name || isLegacyDefaultClass(item)) return
- const index = next.findIndex(existing => existing.name === item.name)
- if (index >= 0) next[index] = { ...next[index], ...item }
- else if (REAL_CLASS_NAMES.includes(item.name)) next.push(item)
- })
- return next
+  if (!Array.isArray(savedClasses) || savedClasses.length === 0) {
+    return DEFAULT_ACADEMIC.classes
+  }
+  return savedClasses.map((item, idx) => ({
+    level: String(item.level || `c_${idx + 1}`),
+    name: String(item.name || `Class ${idx + 1}`).trim(),
+    active: item.active !== false,
+    sections: Array.isArray(item.sections) && item.sections.length > 0 ? item.sections : ['Blue'],
+  }))
 }
 
 function loadAcademic() {
- try {
- const saved = JSON.parse(getStorage()?.getItem(AK))
- if (!saved) return DEFAULT_ACADEMIC
- return {
- ...DEFAULT_ACADEMIC,
- ...saved,
- localities: Array.isArray(saved.localities) ? [...new Set([...DEFAULT_ACADEMIC.localities, ...saved.localities])] : DEFAULT_ACADEMIC.localities,
- classes: Array.isArray(saved.classes) ? mergeClasses(saved.classes) : DEFAULT_ACADEMIC.classes,
- }
- }
- catch { return DEFAULT_ACADEMIC }
+  try {
+    const saved = JSON.parse(getStorage()?.getItem(AK))
+    if (!saved) return DEFAULT_ACADEMIC
+    return {
+      ...DEFAULT_ACADEMIC,
+      ...saved,
+      localities: Array.isArray(saved.localities) ? [...new Set([...DEFAULT_ACADEMIC.localities, ...saved.localities])] : DEFAULT_ACADEMIC.localities,
+      classes: Array.isArray(saved.classes) ? mergeClasses(saved.classes) : DEFAULT_ACADEMIC.classes,
+    }
+  }
+  catch { return DEFAULT_ACADEMIC }
 }
 function saveAcademic(d) {
- const storage = getStorage()
- try { storage?.setItem(AK, JSON.stringify(d)) } catch {}
+  const storage = getStorage()
+  try { storage?.setItem(AK, JSON.stringify(d)) } catch {}
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('storage'))
+  }
 }
 
 //  Palette 
@@ -143,128 +154,301 @@ const SECTION_PRESETS = [
 
 //  Tab 1: Classes & Sections 
 function ClassesTab({ data, setData }) {
- const [sectionInput, setSectionInput] = useState({})
- const [editingName, setEditingName] = useState({})
- const [newClassName, setNewClassName] = useState('')
- const [addingClass, setAddingClass] = useState(false)
+  const [sectionInput, setSectionInput] = useState({})
+  const [editingName, setEditingName] = useState({})
+  const [tempName, setTempName] = useState({})
+  const [newClassName, setNewClassName] = useState('')
+  const [newClassSection, setNewClassSection] = useState('Blue')
+  const [addingClass, setAddingClass] = useState(false)
 
- function toggleClass(level) {
- setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, active: !c.active } : c) }))
- }
- function addSection(level, val) {
- if (!val.trim()) return
- setData(d => ({ ...d, classes: d.classes.map(c => c.level === level && !c.sections.includes(val.trim()) ? { ...c, sections: [...c.sections, val.trim()] } : c) }))
- setSectionInput(s => ({ ...s, [level]: '' }))
- }
- function removeSection(level, sec) {
- setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, sections: c.sections.filter(s => s !== sec) } : c) }))
- }
- function applyPreset(level, sections) {
- setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, sections } : c) }))
- }
- function saveClassName(level, newName) {
- if (!newName.trim()) return
- setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, name: newName.trim() } : c) }))
- setEditingName(e => ({ ...e, [level]: false }))
- }
- function addClass() {
- setNewClassName('')
- setAddingClass(false)
- }
- function deleteClass(level) {
- if (!window.confirm('Delete this class?')) return
- setData(d => ({ ...d, classes: d.classes.filter(c => c.level !== level) }))
- }
+  function toggleClass(level) {
+    setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, active: !c.active } : c) }))
+  }
 
- return (
- <div>
- <GCard style={{ marginBottom:20 }}>
- <SHead icon="" title="Classes & Sections" sub="Customize class names, enable/disable classes, and manage sections. Changes apply school-wide." />
+  function addSection(level, val) {
+    if (!val.trim()) return
+    setData(d => ({ ...d, classes: d.classes.map(c => c.level === level && !c.sections.includes(val.trim()) ? { ...c, sections: [...c.sections, val.trim()] } : c) }))
+    setSectionInput(s => ({ ...s, [level]: '' }))
+  }
 
- {/* Add new class */}
- <div className="super-module-card" style={{ marginBottom:16 }}>
- {false && addingClass ? (
- <div className="super-module-card" style={{ display:'flex', gap:8, alignItems:'center', background:'rgba(200,153,26,0.06)', border:`1px solid ${C.border}`, borderRadius:10, padding:'10px 14px' }}>
- <input value={newClassName} onChange={e=>setNewClassName(e.target.value)}
- onKeyDown={e=>e.key==='Enter'&&addClass()}
- placeholder="Classes are locked to imported school data" maxLength={20}
- style={{ flex:1, background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:8, color:C.silver, padding:'7px 12px', fontSize:13, outline:'none' }} />
- <Btn variant="gold" onClick={addClass}>Add</Btn>
- <Btn variant="ghost" onClick={()=>{setAddingClass(false);setNewClassName('')}}>Cancel</Btn>
- </div>
- ) : null}
- </div>
+  function removeSection(level, sec) {
+    setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, sections: c.sections.filter(s => s !== sec) } : c) }))
+  }
 
- <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(300px,1fr))', gap:14 }}>
- {data.classes.map(cls => (
- <div key={cls.level} style={{ background:'rgba(7,30,52,0.5)', borderRadius:14, padding:16, border:`1px solid ${cls.active ? C.border : 'rgba(255,55,95,0.2)'}`, opacity: cls.active ? 1 : 0.7 }}>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10 }}>
- {/* Editable class name */}
- {editingName[cls.level] ? (
- <input
- autoFocus
- defaultValue={cls.name || `Class ${cls.level}`}
- onBlur={e=>saveClassName(cls.level, e.target.value)}
- onKeyDown={e=>{if(e.key==='Enter')saveClassName(cls.level,e.target.value);if(e.key==='Escape')setEditingName(x=>({...x,[cls.level]:false}))}}
- style={{ background:'rgba(11,44,77,0.8)', border:`1px solid ${C.gold}`, borderRadius:6, color:'#fff', padding:'4px 10px', fontSize:14, fontWeight:800, outline:'none', width:130 }}
- />
- ) : (
- <button onClick={()=>setEditingName(e=>({...e,[cls.level]:true}))}
- title="Click to rename"
- style={{ background:'none', border:'none', cursor:'pointer', color:'#fff', fontWeight:800, fontSize:14, padding:0, display:'flex', alignItems:'center', gap:5 }}>
- {cls.name || `Class ${cls.level}`}
- <span style={{ fontSize:11, color:C.muted }}></span>
- </button>
- )}
- <div className="super-module-card" style={{ display:'flex', gap:5 }}>
- <button onClick={() => toggleClass(cls.level)}
- style={{ padding:'4px 10px', borderRadius:20, border:'none', cursor:'pointer', fontWeight:700, fontSize:11,
- background: cls.active ? 'rgba(48,209,88,0.15)' : 'rgba(255,55,95,0.15)',
- color: cls.active ? C.green : C.red }}>
- {cls.active ? ' Active' : ' Off'}
- </button>
- {cls.level.startsWith('custom_') && (
- <button onClick={()=>deleteClass(cls.level)}
- style={{ padding:'4px 8px', borderRadius:20, border:'none', cursor:'pointer', background:'rgba(255,55,95,0.12)', color:C.red, fontSize:11 }}></button>
- )}
- </div>
- </div>
+  function applyPreset(level, sections) {
+    setData(d => ({ ...d, classes: d.classes.map(c => c.level === level ? { ...c, sections } : c) }))
+  }
 
- {/* Sections */}
- <div className="super-module-card" style={{ display:'flex', flexWrap:'wrap', gap:6, marginBottom:10 }}>
- {cls.sections.map(sec => (
- <span key={sec} style={{ display:'flex', alignItems:'center', gap:4, padding:'3px 10px', borderRadius:20, background:'rgba(200,153,26,0.12)', border:`1px solid rgba(200,153,26,0.25)`, color:C.gold, fontSize:12, fontWeight:600 }}>
- {sec}
- <button onClick={() => removeSection(cls.level, sec)} style={{ background:'none', border:'none', color:C.gold, cursor:'pointer', fontSize:14, lineHeight:1, padding:0, opacity:0.6 }}>×</button>
- </span>
- ))}
- </div>
+  function saveClassName(level, newName) {
+    const trimmed = (newName || '').trim()
+    if (!trimmed) {
+      setEditingName(e => ({ ...e, [level]: false }))
+      return
+    }
+    const duplicate = data.classes.some(c => c.level !== level && c.name.toLowerCase() === trimmed.toLowerCase())
+    if (duplicate) {
+      alert(`Another class already has the name "${trimmed}".`)
+      return
+    }
+    setData(d => ({
+      ...d,
+      classes: d.classes.map(c => c.level === level ? { ...c, name: trimmed } : c),
+    }))
+    setEditingName(e => ({ ...e, [level]: false }))
+  }
 
- {/* Add section input */}
- <div className="super-module-card" style={{ display:'flex', gap:6, marginBottom:8 }}>
- <input value={sectionInput[cls.level] || ''} onChange={e => setSectionInput(s => ({ ...s, [cls.level]: e.target.value }))}
- onKeyDown={e => e.key === 'Enter' && addSection(cls.level, sectionInput[cls.level] || '')}
- placeholder="Add section..." maxLength={10}
- style={{ flex:1, background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:8, color:C.silver, padding:'6px 10px', fontSize:12, outline:'none' }} />
- <button onClick={() => addSection(cls.level, sectionInput[cls.level] || '')}
- style={{ background:C.gold, border:'none', borderRadius:8, padding:'6px 12px', color:'#071e34', fontWeight: 600, cursor:'pointer', fontSize:12 }}>+</button>
- </div>
+  function addClass() {
+    const trimmed = newClassName.trim()
+    if (!trimmed) return
+    const duplicate = data.classes.some(c => c.name.toLowerCase() === trimmed.toLowerCase())
+    if (duplicate) {
+      alert(`Class "${trimmed}" already exists.`)
+      return
+    }
+    const safeLevel = slugifyLevel(trimmed)
+    const finalLevel = data.classes.some(c => c.level === safeLevel) ? `${safeLevel}_${Date.now()}` : safeLevel
+    const initialSec = newClassSection.trim() || 'Blue'
+    const newCls = {
+      level: finalLevel,
+      name: trimmed,
+      active: true,
+      sections: [initialSec],
+    }
+    setData(d => ({
+      ...d,
+      classes: [...d.classes, newCls],
+    }))
+    setNewClassName('')
+    setNewClassSection('Blue')
+    setAddingClass(false)
+  }
 
- {/* Presets */}
- <div className="super-module-card" style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
- {SECTION_PRESETS.map(p => (
- <button key={p.label} onClick={() => applyPreset(cls.level, p.sections)}
- style={{ padding:'3px 8px', borderRadius:6, fontSize:10, border:`1px dashed ${C.border}`, background:'transparent', color:C.muted, cursor:'pointer' }}>
- {p.label}
- </button>
- ))}
- </div>
- </div>
- ))}
- </div>
- </GCard>
- </div>
- )
+  function deleteClass(level, name) {
+    const label = name || level
+    if (!window.confirm(`Are you sure you want to remove "${label}"? This will delete the class from the setup.`)) return
+    setData(d => ({
+      ...d,
+      classes: d.classes.filter(c => c.level !== level),
+    }))
+  }
+
+  return (
+    <div>
+      <GCard style={{ marginBottom: 20 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 20, paddingBottom: 14, borderBottom: `1px solid ${C.border}` }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ fontSize: 22 }}>🏫</span>
+              <h3 style={{ margin: 0, color: C.gold, fontSize: 17, fontWeight: 800 }}>Classes & Sections</h3>
+            </div>
+            <p style={{ margin: '6px 0 0 32px', color: C.muted, fontSize: 13 }}>
+              Customize class names, add new classes, remove classes, and manage sections. Changes apply school-wide.
+            </p>
+          </div>
+          <Btn variant="gold" onClick={() => setAddingClass(a => !a)}>
+            <Plus size={16} /> Add Class
+          </Btn>
+        </div>
+
+        {/* Add new class panel */}
+        {addingClass && (
+          <div style={{ marginBottom: 20, padding: 18, background: 'rgba(200,153,26,0.08)', border: `1px solid rgba(200,153,26,0.32)`, borderRadius: 14 }}>
+            <div style={{ fontWeight: 800, color: C.gold, fontSize: 14, marginBottom: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Plus size={16} /> Add New Class
+            </div>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+              <div style={{ flex: '1 1 220px' }}>
+                <Lbl>Class Name</Lbl>
+                <Inp
+                  autoFocus
+                  value={newClassName}
+                  onChange={e => setNewClassName(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && addClass()}
+                  placeholder="e.g. Class 9, Pre Nine, Nursery, Hifaz..."
+                  maxLength={30}
+                />
+              </div>
+              <div style={{ width: 150 }}>
+                <Lbl>Initial Section</Lbl>
+                <Inp
+                  value={newClassSection}
+                  onChange={e => setNewClassSection(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && addClass()}
+                  placeholder="e.g. Blue, A"
+                  maxLength={15}
+                />
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <Btn variant="gold" onClick={addClass}>Save Class</Btn>
+                <Btn variant="ghost" onClick={() => { setAddingClass(false); setNewClassName(''); setNewClassSection('Blue'); }}>Cancel</Btn>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Grid of classes */}
+        <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px,1fr))', gap: 14 }}>
+          {data.classes.map(cls => (
+            <div key={cls.level} style={{ background: 'rgba(7,30,52,0.5)', borderRadius: 14, padding: 16, border: `1px solid ${cls.active ? C.border : 'rgba(255,55,95,0.2)'}`, opacity: cls.active ? 1 : 0.7 }}>
+              <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, gap: 8 }}>
+                {/* Editable class name */}
+                {editingName[cls.level] ? (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5, flex: 1 }}>
+                    <input
+                      autoFocus
+                      value={tempName[cls.level] ?? cls.name}
+                      onChange={e => setTempName(t => ({ ...t, [cls.level]: e.target.value }))}
+                      onBlur={() => saveClassName(cls.level, tempName[cls.level] ?? cls.name)}
+                      onKeyDown={e => {
+                        if (e.key === 'Enter') saveClassName(cls.level, tempName[cls.level] ?? cls.name)
+                        if (e.key === 'Escape') setEditingName(x => ({ ...x, [cls.level]: false }))
+                      }}
+                      style={{
+                        background: 'rgba(11,44,77,0.95)',
+                        border: `1.5px solid ${C.gold}`,
+                        borderRadius: 8,
+                        color: '#fff',
+                        padding: '4px 8px',
+                        fontSize: 14,
+                        fontWeight: 800,
+                        outline: 'none',
+                        width: '100%',
+                        maxWidth: 160,
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => saveClassName(cls.level, tempName[cls.level] ?? cls.name)}
+                      title="Save name"
+                      style={{ background: 'rgba(48,209,88,0.2)', border: '1px solid rgba(48,209,88,0.4)', borderRadius: 6, color: C.green, padding: '4px 6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                    >
+                      <Check size={14} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditingName(x => ({ ...x, [cls.level]: false }))}
+                      title="Cancel"
+                      style={{ background: 'rgba(255,55,95,0.15)', border: '1px solid rgba(255,55,95,0.3)', borderRadius: 6, color: C.red, padding: '4px 6px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ color: '#fff', fontWeight: 800, fontSize: 15 }}>
+                      {cls.name || `Class ${cls.level}`}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setTempName(t => ({ ...t, [cls.level]: cls.name }))
+                        setEditingName(e => ({ ...e, [cls.level]: true }))
+                      }}
+                      title="Click to rename class"
+                      style={{
+                        background: 'rgba(255,255,255,0.06)',
+                        border: '1px solid rgba(255,255,255,0.14)',
+                        borderRadius: 6,
+                        color: C.muted,
+                        padding: '3px 5px',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      <Edit2 size={12} />
+                    </button>
+                  </div>
+                )}
+
+                {/* Right controls: Active toggle & Delete class */}
+                <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+                  <button
+                    type="button"
+                    onClick={() => toggleClass(cls.level)}
+                    style={{
+                      padding: '4px 10px',
+                      borderRadius: 20,
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: 700,
+                      fontSize: 11,
+                      background: cls.active ? 'rgba(48,209,88,0.15)' : 'rgba(255,55,95,0.15)',
+                      color: cls.active ? C.green : C.red,
+                    }}
+                  >
+                    {cls.active ? '● Active' : '○ Off'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => deleteClass(cls.level, cls.name)}
+                    title={`Delete ${cls.name}`}
+                    style={{
+                      width: 26,
+                      height: 26,
+                      borderRadius: 7,
+                      border: '1px solid rgba(255,55,95,0.25)',
+                      background: 'rgba(255,55,95,0.12)',
+                      color: C.red,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      padding: 0,
+                    }}
+                  >
+                    <Trash2 size={13} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Sections */}
+              <div className="super-module-card" style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
+                {cls.sections.map(sec => (
+                  <span key={sec} style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 20, background: 'rgba(200,153,26,0.12)', border: `1px solid rgba(200,153,26,0.25)`, color: C.gold, fontSize: 12, fontWeight: 600 }}>
+                    {sec}
+                    <button onClick={() => removeSection(cls.level, sec)} style={{ background: 'none', border: 'none', color: C.gold, cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: 0, opacity: 0.6 }}>×</button>
+                  </span>
+                ))}
+              </div>
+
+              {/* Add section input */}
+              <div className="super-module-card" style={{ display: 'flex', gap: 6, marginBottom: 8 }}>
+                <input
+                  value={sectionInput[cls.level] || ''}
+                  onChange={e => setSectionInput(s => ({ ...s, [cls.level]: e.target.value }))}
+                  onKeyDown={e => e.key === 'Enter' && addSection(cls.level, sectionInput[cls.level] || '')}
+                  placeholder="Add section..."
+                  maxLength={10}
+                  style={{ flex: 1, background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 8, color: C.silver, padding: '6px 10px', fontSize: 12, outline: 'none' }}
+                />
+                <button
+                  onClick={() => addSection(cls.level, sectionInput[cls.level] || '')}
+                  style={{ background: C.gold, border: 'none', borderRadius: 8, padding: '6px 12px', color: '#071e34', fontWeight: 600, cursor: 'pointer', fontSize: 12 }}
+                >
+                  +
+                </button>
+              </div>
+
+              {/* Presets */}
+              <div className="super-module-card" style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                {SECTION_PRESETS.map(p => (
+                  <button
+                    key={p.label}
+                    onClick={() => applyPreset(cls.level, p.sections)}
+                    style={{ padding: '3px 8px', borderRadius: 6, fontSize: 10, border: `1px dashed ${C.border}`, background: 'transparent', color: C.muted, cursor: 'pointer' }}
+                  >
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </GCard>
+    </div>
+  )
 }
 
 //  Tab 2: Subjects 

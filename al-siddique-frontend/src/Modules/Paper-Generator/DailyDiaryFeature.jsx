@@ -25,6 +25,7 @@ const templates = [
   { id: 18, name: 'Junior Garden Rose', hero: 'linear-gradient(135deg,#8b5169,#e2a7b8)', head: '#713f55', even: '#fff4f7', footer: '#f5dce5', kidIcon: 'JOY' },
   { id: 19, name: 'Early Years Ocean', hero: 'linear-gradient(135deg,#245f7a,#82c7d9)', head: '#1f4d63', even: '#eff9fc', footer: '#d8edf5', kidIcon: 'SEA' },
   { id: 20, name: 'Montessori Linen Dots', hero: 'linear-gradient(135deg,#6f6a50,#c9c198)', head: '#55503b', even: '#faf8ef', footer: '#ebe6cd', kidIcon: 'DOT' },
+  { id: 21, name: 'Decent Vibrant Minimal', hero: 'linear-gradient(135deg,#0284c7 0%,#2563eb 50%,#4f46e5 100%)', head: '#1e40af', even: '#f0f7ff', footer: '#e0f2fe' },
 ]
 
 const FALLBACK_CLASSES = [
@@ -39,7 +40,7 @@ const FALLBACK_CLASSES = [
   { level: '5', label: 'CLASS 5' },
 ]
 
-const FALLBACK_SUBJECTS = ['English', 'Urdu', 'Math', 'G.K.', 'Islamiat', 'Drawing', 'Computer', 'Science']
+const FALLBACK_SUBJECTS = ['English', 'Urdu', 'Math', 'GK', 'Islamiat', 'General Knowledge', 'Drawing', 'Computer', 'Science']
 const FONT_OPTIONS = [
   { label: 'Inter', value: 'Inter, Arial, sans-serif' },
   { label: 'Arial', value: 'Arial, sans-serif' },
@@ -87,6 +88,12 @@ const safeRows = (rows) => {
 const titleCase = (input) => input.split(/\s+/).filter(Boolean).map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
 const escapeHtml = (value) => String(value || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;')
 const slipDensityClass = (count) => count >= 14 ? ' micro-slip' : count >= 12 ? ' ultra-slip' : count >= 8 ? ' compact-slip' : ''
+const fontValue = (value) => {
+  if (typeof value === 'string') return value
+  if (value && typeof value === 'object' && typeof value.value === 'string') return value.value
+  return FONT_OPTIONS[0].value
+}
+const inlineFont = (value) => fontValue(value).replace(/"/g, "'")
 
 const normalizeDateInput = (value) => {
   const iso = value.match(/\b(\d{4}-\d{2}-\d{2})\b/)
@@ -155,7 +162,7 @@ const robustParseDiaryText = (text, subjectHints = []) => {
         subject: subject.toUpperCase(),
         diary: subjectMatch[2].trim(),
         isUrdu: /urdu/i.test(subject),
-        fontFamily: /urdu/i.test(subject) ? URDU_FONT : FONT_OPTIONS[0],
+        fontFamily: /urdu/i.test(subject) ? URDU_FONT : FONT_OPTIONS[0].value,
         fontSize: 13,
         lineHeight: 1.18,
       }
@@ -171,7 +178,7 @@ const robustParseDiaryText = (text, subjectHints = []) => {
         subject: subject.toUpperCase(),
         diary: parts.slice(1).join(' - ').trim(),
         isUrdu: /urdu/i.test(subject),
-        fontFamily: /urdu/i.test(subject) ? URDU_FONT : FONT_OPTIONS[0],
+        fontFamily: /urdu/i.test(subject) ? URDU_FONT : FONT_OPTIONS[0].value,
         fontSize: 13,
         lineHeight: 1.18,
       }
@@ -251,7 +258,7 @@ export default function DailyDiaryFeature() {
   const [footerText, setFooterText] = useState('Please review and sign the diary daily.')
   const [footerIsUrdu, setFooterIsUrdu] = useState(false)
   const [rows, setRows] = useState(defaultRows)
-  const [fontFamily, setFontFamily] = useState(FONT_OPTIONS[0])
+  const [fontFamily, setFontFamily] = useState(FONT_OPTIONS[0].value)
   const [radius, setRadius] = useState(24)
   const [fontSize, setFontSize] = useState(13)
   const [lineHeight, setLineHeight] = useState(1.18)
@@ -276,7 +283,9 @@ export default function DailyDiaryFeature() {
   const classLabel = selectedClass?.label || classLevel || 'MOVER'
   const subjectOptions = useMemo(() => {
     const fromStore = subjectsForClass(classLevel || selectedClass?.level || '')
-    return fromStore.length ? fromStore : FALLBACK_SUBJECTS
+    const base = fromStore.length ? fromStore : FALLBACK_SUBJECTS
+    const hasGk = base.some((s) => /^(gk|general knowledge|g\.k\.)$/i.test(String(s).trim()))
+    return hasGk ? base : [...base, 'GK']
   }, [classLevel, selectedClass?.level, subjectsForClass])
   const slips = Array.from({ length: slipsPerPage }, (_, i) => i)
 
@@ -294,7 +303,7 @@ export default function DailyDiaryFeature() {
     const style = record.style_settings || {}
     if (style.radius !== undefined) setRadius(Number(style.radius))
     if (style.fontSize !== undefined) setFontSize(Number(style.fontSize))
-    if (style.fontFamily !== undefined) setFontFamily(String(style.fontFamily))
+    if (style.fontFamily !== undefined) setFontFamily(fontValue(style.fontFamily))
     if (style.lineHeight !== undefined) setLineHeight(Number(style.lineHeight))
     if (style.wordSpacing !== undefined) setWordSpacing(Number(style.wordSpacing))
     if (style.letterSpacing !== undefined) setLetterSpacing(Number(style.letterSpacing))
@@ -345,8 +354,17 @@ export default function DailyDiaryFeature() {
         const diaries = await loadSavedDiaries()
         if (cancelled) return
         setSavedDiaries(diaries)
-        const latest = diaries[0]
-        if (latest && typeof window !== 'undefined' && !getTenantStorageItem('dailyDiaryDraft', { migrateLegacy: true })) hydrateDiary(latest)
+        const local = typeof window !== 'undefined' ? getTenantStorageItem('dailyDiaryDraft', { migrateLegacy: true }) : null
+        if (local) {
+          try {
+            const parsed = JSON.parse(local)
+            if (parsed.id && !diaries.some((d) => Number(d.id) === Number(parsed.id))) {
+              setSavedDiaryId(null)
+            }
+          } catch {}
+        } else if (diaries[0]) {
+          hydrateDiary(diaries[0])
+        }
       } catch {}
     }
     void restore()
@@ -403,23 +421,40 @@ export default function DailyDiaryFeature() {
       footer_text: footerText,
       footer_is_urdu: footerIsUrdu,
       rows,
-      style_settings: { radius, fontSize, fontFamily, lineHeight, wordSpacing, letterSpacing, showWatermark, schoolNameFontSize, footerFontSize, dateClassFontSize, tableHeadFontSize },
+      style_settings: { radius, fontSize, fontFamily: fontValue(fontFamily), lineHeight, wordSpacing, letterSpacing, showWatermark, schoolNameFontSize, footerFontSize, dateClassFontSize, tableHeadFontSize },
     }
     if (typeof window !== 'undefined') setTenantStorageItem('dailyDiaryDraft', JSON.stringify(payload))
     setSaving(true)
     setStatus('Saving...')
     try {
-      const response = savedDiaryId ? await api.put(`/api/daily-diary/${savedDiaryId}`, payload) : await api.post('/api/daily-diary', payload)
+      let response
+      if (savedDiaryId) {
+        try {
+          response = await api.put(`/api/daily-diary/${savedDiaryId}`, payload)
+        } catch (putErr) {
+          if (putErr.response?.status === 404 || putErr.response?.status === 403 || putErr.response?.status === 400) {
+            console.warn(`[DailyDiary] Existing diary ID ${savedDiaryId} not found or rejected on server (${putErr.response?.status}). Creating fresh via POST...`)
+            response = await api.post('/api/daily-diary', { ...payload, id: undefined })
+          } else {
+            throw putErr
+          }
+        }
+      } else {
+        response = await api.post('/api/daily-diary', payload)
+      }
+
       const saved = response.data?.data
       if (saved?.id) {
-        setSavedDiaryId(Number(saved.id))
-        if (typeof window !== 'undefined') setTenantStorageItem('dailyDiaryDraft', JSON.stringify({ ...payload, id: saved.id }))
+        if (typeof window !== 'undefined') setTenantStorageItem('dailyDiaryDraft', JSON.stringify({ ...payload, id: undefined }))
       }
+      setSavedDiaryId(null)
       const diaries = await loadSavedDiaries().catch(() => [])
       if (Array.isArray(diaries)) setSavedDiaries(diaries)
-      setStatus('Draft saved successfully.')
-    } catch {
-      setStatus('Saved locally. Server save is unavailable right now.')
+      setStatus('Draft saved to server successfully.')
+    } catch (err) {
+      console.error('Daily diary save error:', err)
+      const serverMsg = err.response?.data?.message
+      setStatus(serverMsg ? `Server save failed: ${serverMsg}` : 'Saved locally. Server save is unavailable right now.')
     } finally {
       setSaving(false)
       window.setTimeout(() => setStatus(''), 4000)
@@ -435,11 +470,9 @@ export default function DailyDiaryFeature() {
 
   const handlePrintDiary = () => {
     if (typeof window === 'undefined') return
-    const printWindow = window.open('', '_blank', 'width=1200,height=900')
-    if (!printWindow) return
 
     const slipsHtml = Array.from({ length: slipsPerPage }, () => `
-      <div class="diary-card${slipDensityClass(slipsPerPage)}" style="border-radius:${radius}px;font-size:${fontSize}px;line-height:${lineHeight};word-spacing:${wordSpacing}px;letter-spacing:${letterSpacing}px;font-family:${fontFamily.replace(/"/g, "'")}">
+      <div class="diary-card${slipDensityClass(slipsPerPage)}" style="border-radius:${radius}px;font-size:${fontSize}px;line-height:${lineHeight};word-spacing:${wordSpacing}px;letter-spacing:${letterSpacing}px;font-family:${inlineFont(fontFamily)}">
         <div class="hero" style="background:${template.hero}">
           <div class="logo-box">${logoUrl ? `<img src="${escapeHtml(logoUrl.startsWith('http') || logoUrl.startsWith('blob:') || logoUrl.startsWith('data:') ? logoUrl : (logoUrl.startsWith('/') ? 'https://api.assps.edu.pk' + logoUrl : 'https://api.assps.edu.pk/' + logoUrl))}" alt="School logo" />` : '<span>ASS</span>'}</div>
           <div class="school-info">
@@ -456,8 +489,8 @@ export default function DailyDiaryFeature() {
           </div>
           ${rows.map((row, index) => `
             <div class="table-row">
-              <div class="subject-pill" style="background:${index % 2 ? template.even : '#ffffff'};font-family:${fontFamily.replace(/"/g, "'")};font-size:${Math.max(9, fontSize - 1)}px;line-height:${lineHeight};font-weight:${row.isBold ? '1000' : '750'}">${escapeHtml(row.subject)}</div>
-              <div class="${row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}" style="background:${index % 2 ? template.even : '#ffffff'};font-family:${(row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily)).replace(/"/g, "'")};font-size:${row.fontSize || fontSize}px;line-height:${row.lineHeight || lineHeight};font-weight:${row.isBold ? '900' : (row.isUrdu ? 'normal' : '700')};text-align:${row.textAlign || (row.isUrdu ? 'right' : 'left')}">${escapeHtml(row.diary || '-')}</div>
+              <div class="subject-pill" style="background:${index % 2 ? template.even : '#ffffff'};font-family:${inlineFont(fontFamily)};font-size:${Math.max(9, fontSize - 1)}px;line-height:${lineHeight};font-weight:${row.isBold ? '1000' : '750'}">${escapeHtml(row.subject)}</div>
+              <div class="${row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}" style="background:${index % 2 ? template.even : '#ffffff'};font-family:${inlineFont(row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily))};font-size:${row.fontSize || fontSize}px;line-height:${row.lineHeight || lineHeight};font-weight:${row.isBold ? '900' : (row.isUrdu ? 'normal' : '700')};text-align:${row.textAlign || (row.isUrdu ? 'right' : 'left')}">${escapeHtml(row.diary || '-')}</div>
             </div>
           `).join('')}
         </div>
@@ -474,11 +507,66 @@ export default function DailyDiaryFeature() {
           <title>Daily Diary Print</title>
           <style>${css}</style>
           <style>
-            body{margin:0;background:#fff}
-            .print-toolbar{position:sticky;top:0;z-index:9999;display:flex;align-items:center;gap:12px;padding:10px 14px;background:#071e34;color:#d8e2f0;font-family:Inter,Arial,sans-serif;box-shadow:0 10px 28px rgba(0,0,0,.18)}
-            .print-toolbar strong{color:#e8b420}
-            .print-toolbar button{margin-left:auto;border:0;border-radius:10px;padding:9px 18px;background:linear-gradient(135deg,#C8991A,#e8b420);color:#071e34;font-weight:900;cursor:pointer}
-            @media print{.print-toolbar{display:none!important}}
+            html, body {
+              margin: 0 !important;
+              padding: 0 !important;
+              background: #fff !important;
+              font-family: Inter, Arial, sans-serif;
+            }
+            .print-toolbar {
+              position: sticky;
+              top: 0;
+              z-index: 9999;
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 10px 14px;
+              background: #071e34;
+              color: #d8e2f0;
+              font-family: Inter, Arial, sans-serif;
+              box-shadow: 0 10px 28px rgba(0,0,0,.18);
+            }
+            .print-toolbar strong { color: #e8b420; }
+            .print-toolbar button {
+              margin-left: auto;
+              border: 0;
+              border-radius: 10px;
+              padding: 9px 18px;
+              background: linear-gradient(135deg, #C8991A, #e8b420);
+              color: #071e34;
+              font-weight: 900;
+              cursor: pointer;
+            }
+            @media print {
+              .print-toolbar { display: none !important; }
+              @page { size: A4 portrait; margin: 4mm; }
+              html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #fff !important;
+                height: auto !important;
+              }
+              .daily-diary-feature {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #fff !important;
+              }
+              .print-sheet {
+                width: 100% !important;
+                max-width: 202mm !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                overflow: visible !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+              }
+              .diary-card {
+                box-shadow: none !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+              }
+            }
           </style>
         </head>
         <body>
@@ -488,12 +576,19 @@ export default function DailyDiaryFeature() {
               ${slipsHtml}
             </div>
           </div>
-          <script>window.onload=function(){setTimeout(function(){window.focus();window.print();},600)}</script>
+          <script>window.onload=function(){setTimeout(function(){window.focus();window.print();},400)}</script>
         </body>
       </html>`
-    printWindow.document.open()
-    printWindow.document.write(printHtml)
-    printWindow.document.close()
+
+    const printWindow = window.open('', '_blank', 'width=1200,height=900')
+    if (printWindow) {
+      printWindow.document.open()
+      printWindow.document.write(printHtml)
+      printWindow.document.close()
+      printWindow.focus()
+    } else {
+      window.print()
+    }
   }
 
   const openSavedDiary = (record) => {
@@ -509,10 +604,25 @@ export default function DailyDiaryFeature() {
       await api.delete(`/api/daily-diary/${record.id}`)
       const diaries = await loadSavedDiaries().catch(() => [])
       setSavedDiaries(Array.isArray(diaries) ? diaries : [])
-      if (savedDiaryId === record.id) setSavedDiaryId(null)
+      if (savedDiaryId === record.id) {
+        setSavedDiaryId(null)
+        if (typeof window !== 'undefined') {
+          const local = getTenantStorageItem('dailyDiaryDraft', { migrateLegacy: true })
+          if (local) {
+            try {
+              const draft = JSON.parse(local)
+              if (draft.id === record.id) {
+                delete draft.id
+                setTenantStorageItem('dailyDiaryDraft', JSON.stringify(draft))
+              }
+            } catch {}
+          }
+        }
+      }
       setStatus('Draft deleted.')
       window.setTimeout(() => setStatus(''), 2500)
-    } catch {
+    } catch (err) {
+      console.error('Delete diary error:', err)
       setStatus('Could not delete the selected draft.')
       window.setTimeout(() => setStatus(''), 3500)
     }
@@ -531,6 +641,7 @@ export default function DailyDiaryFeature() {
         <div className="actions">
           <button onClick={saveDailyDiary} disabled={saving}>{saving ? 'Saving...' : 'Save Diary'}</button>
           <button onClick={handlePrintDiary} className="primary">Print Preview</button>
+          <button type="button" onClick={() => window.print()} style={{ background: 'rgba(10,132,255,0.18)', border: '1px solid rgba(10,132,255,0.35)', color: '#64D2FF', fontWeight: 800, padding: '10px 18px', borderRadius: 10, cursor: 'pointer' }}>🖨️ Direct Print</button>
         </div>
       </div>
 
@@ -836,5 +947,15 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .micro-slip .footer-note{font-size:6.6px;min-height:10px;padding:1px 2px;margin-bottom:1px}
 .watermark{position:absolute;right:-14px;bottom:-22px;font-size:78px;font-weight:1000;opacity:.03;pointer-events:none}
 @media(max-width:1200px){.designer-layout{grid-template-columns:1fr}.left-column,.right-column{grid-column:auto}.compose-grid{grid-template-columns:1fr}.page-header{display:block}.actions{margin-top:12px}.print-sheet{width:100%;min-height:auto}.edit-row{grid-template-columns:1fr;grid-template-areas:"subject" "diary" "tools" "actions"}.row-tools{grid-template-columns:1fr}.font-size-tools{justify-content:flex-start}.edit-actions{grid-template-columns:1fr}.edit-actions .check{white-space:normal}}
-@media print{@page{size:A4 portrait;margin:0}.no-print{display:none!important}.daily-diary-feature{padding:0;background:white;min-height:0}.print-sheet{width:210mm;min-height:0;height:auto;margin:0;padding:1mm;box-shadow:none;gap:.6mm;page-break-after:auto;break-after:auto;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start;justify-content:center;overflow:visible}.diary-card{box-shadow:none;break-inside:avoid;page-break-inside:avoid}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}.table-head div,.footer-note,.subject-pill,.task-pill{print-color-adjust:exact;-webkit-print-color-adjust:exact;line-height:1.12!important}}
+@media print {
+  @page { size: A4 portrait; margin: 4mm; }
+  .no-print, nav, header, aside, .app-sidebar, .app-header { display: none !important; }
+  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; height: auto !important; }
+  #root > *:not(.daily-diary-feature) { display: none !important; }
+  .daily-diary-feature { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; padding: 0 !important; margin: 0 !important; background: white !important; min-height: 0 !important; }
+  .print-sheet { width: 100% !important; max-width: 202mm !important; min-height: 0 !important; height: auto !important; margin: 0 auto !important; padding: 0 !important; box-shadow: none !important; gap: .6mm !important; page-break-after: auto !important; break-after: auto !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; align-items: start !important; justify-content: center !important; overflow: visible !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .diary-card { box-shadow: none !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+  .hero { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
+  .table-head div, .footer-note, .subject-pill, .task-pill { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; line-height: 1.12 !important; }
+}
 `

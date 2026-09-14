@@ -89,6 +89,25 @@ const statusMeta = {
  },
 }
 
+const ATTENDANCE_CLASS_LABEL_FIXES = {
+ 'Pre Nine': 'Nine',
+}
+
+function attendanceClassLabel(value) {
+ return ATTENDANCE_CLASS_LABEL_FIXES[value] || value
+}
+
+function attendanceApiClass(value) {
+ return value === 'Pre Nine' ? 'Nine' : value
+}
+
+function attendanceSectionsForClass(className, sectionsForClass) {
+ const direct = sectionsForClass(className)
+ if (direct.length) return direct
+ if (className === 'Nine') return sectionsForClass('Pre Nine')
+ return []
+}
+
 function Panel({ children, accent = C.blue, style = {}, className = '' }) {
  return (
  <div className={`att-panel att-reveal ${className}`} style={{ ...glass, '--accent': accent, ...style }}>
@@ -134,6 +153,10 @@ function StatCard({ state, value, delay }) {
 
 export default function MarkAttendance() {
  const { classNames: CLASSES, allSections: SECTIONS, sectionsForClass } = useAcademicStore()
+ const attendanceClasses = useMemo(
+ () => [...new Set(CLASSES.map(attendanceClassLabel))],
+ [CLASSES]
+ )
  const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter')
  const [selectedSection, setSelectedSection] = useState('Blue')
  const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
@@ -146,7 +169,7 @@ export default function MarkAttendance() {
  const loadStudents = () => {
  setLoading(true)
  setMessage('')
- api.get('/api/students', { params: { class: selectedClass, section: selectedSection } })
+ api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } })
  .then((res) => {
  const list = res.data.data || []
  setStudents(list)
@@ -164,7 +187,7 @@ export default function MarkAttendance() {
  }, [])
 
  useEffect(() => {
- const available = sectionsForClass(selectedClass)
+ const available = attendanceSectionsForClass(selectedClass, sectionsForClass)
  if (available.length && !available.includes(selectedSection)) {
  setSelectedSection(available[0])
  return
@@ -448,13 +471,13 @@ export default function MarkAttendance() {
  <div>
  <label className="att-label">Class</label>
  <select style={fieldStyle} value={selectedClass} onChange={(event) => setSelectedClass(event.target.value)}>
- {CLASSES.map((value) => <option key={value} value={value}>{value}</option>)}
+ {attendanceClasses.map((value) => <option key={value} value={value}>{value}</option>)}
  </select>
  </div>
  <div>
  <label className="att-label">Section</label>
  <select style={fieldStyle} value={selectedSection} onChange={(event) => setSelectedSection(event.target.value)}>
- {sectionsForClass(selectedClass).map((value) => <option key={value} value={value}>{value}</option>)}
+ {attendanceSectionsForClass(selectedClass, sectionsForClass).map((value) => <option key={value} value={value}>{value}</option>)}
  </select>
  </div>
  <div>

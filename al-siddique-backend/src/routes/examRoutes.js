@@ -1,10 +1,12 @@
 const express = require('express')
 const router  = express.Router()
 const { query } = require('../config/database')
-const { protect, requireRoles } = require('../middleware/auth')
+const { protect, requireRoles, adminOrServiceScope, requireScopeForServiceOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+const canReadResults = adminOrServiceScope('school.results.read')
+const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
 
 function portalStudentScope(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
@@ -19,7 +21,7 @@ function portalStudentScope(req, alias = 's', startIndex = 1) {
 }
 
 // GET /api/exams
-router.get('/', protect, async (req, res) => {
+router.get('/', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {
   try {
     let sql = 'SELECT * FROM exams WHERE 1=1'
     const tenant = await tenantClause(req, { table: 'exams', paramIndex: 1 })
@@ -28,6 +30,9 @@ router.get('/', protect, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Exams list error:', err.message)
+    if (!ALLOW_MOCK_FALLBACK) {
+      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
+    }
     // DB offline â€” return mock exam list
     const today = new Date().toISOString().split('T')[0]
     res.json({
@@ -164,8 +169,59 @@ router.post('/results', protect, canManageExams, async (req, res) => {
   }
 })
 
+// GET /api/exams/results
+router.get('/results', protect, canReadResults, async (req, res) => {
+  try {
+    const filters = []
+    const params = []
+    let idx = 1
+
+    if (req.query.student_id) {
+      filters.push(`er.student_id = $${idx++}`)
+      params.push(req.query.student_id)
+    }
+    if (req.query.exam_type) {
+      filters.push(`LOWER(e.type) = LOWER($${idx++})`)
+      params.push(req.query.exam_type)
+    }
+    if (req.query.subject) {
+      filters.push(`LOWER(er.subject) = LOWER($${idx++})`)
+      params.push(req.query.subject)
+    }
+    if (req.query.class) {
+      filters.push(`LOWER(s.class) = LOWER($${idx++})`)
+      params.push(req.query.class)
+    }
+
+    let sql = `
+      SELECT er.*, e.name as exam_name, e.session, e.type as exam_type,
+             s.name as student_name, s.class, s.section, s.gr_number, s.father_name
+      FROM exam_results er
+      JOIN exams e ON er.exam_id = e.id
+      JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
+      WHERE 1=1
+    `
+    if (filters.length) sql += ` AND ${filters.join(' AND ')}`
+
+    const isSuperAdmin = req.user?.role === 'super_admin'
+    if (!isSuperAdmin) {
+      const studentTenant = await tenantClause(req, { table: 'students', alias: 's', paramIndex: idx })
+      const examTenant = await tenantClause(req, { table: 'exams', alias: 'e', paramIndex: studentTenant.nextIndex })
+      sql += studentTenant.clause + examTenant.clause
+      params.push(...studentTenant.params, ...examTenant.params)
+    }
+
+    sql += ` ORDER BY e.created_at DESC, s.class, s.roll_number, er.subject LIMIT 500`
+    const result = await query(sql, params)
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Exam results list error:', err.message)
+    res.status(500).json({ success: false, message: err.message })
+  }
+})
+
 // GET /api/exams/results/:exam_id
-router.get('/results/:exam_id', protect, canManageExams, async (req, res) => {
+router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
   try {
     let sql = `
       SELECT er.*, s.name, s.gr_number, s.roll_number, s.father_name, s.photo
@@ -187,6 +243,9 @@ router.get('/results/:exam_id', protect, canManageExams, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Exam results fetch error:', err.message)
+    if (!ALLOW_MOCK_FALLBACK) {
+      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
+    }
     // DB offline â€” return mock results
     res.json({
       success: true,
@@ -213,7 +272,7 @@ function calcGrade(obtained, total) {
 }
 
 // GET /api/exams/student-results/:student_id
-router.get('/student-results/:student_id', protect, async (req, res) => {
+router.get('/student-results/:student_id', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {
   try {
     let sql = `
       SELECT er.*, e.name as exam_name, e.session, e.type as exam_type, s.name as student_name, s.class, s.section, s.gr_number, s.father_name, s.photo
@@ -238,6 +297,9 @@ router.get('/student-results/:student_id', protect, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Student results fetch error:', err.message)
+    if (!ALLOW_MOCK_FALLBACK) {
+      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
+    }
     res.json({
       success: true,
       data: [

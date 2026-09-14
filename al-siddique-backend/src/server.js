@@ -195,6 +195,7 @@ const registerRoutes = (router) => {
   mount('/notify',     './routes/notifyRoutes')
   mount('/paper',      './routes/paperRoute')
   mount('/question-bank', './routes/questionBankRoutes')
+  mount('/timetable',  './routes/timetableRoutes')
   mount('/global-search', './routes/globalSearchRoutes')
   mount('/admissions', './routes/admissionRoutes')
   mount('/demo-requests', './routes/demoRequestRoutes')
@@ -207,16 +208,7 @@ const registerRoutes = (router) => {
   mount('/portal',     './routes/portalRoutes')
   mount('/ops',        './routes/opsRoutes')
   mount('/daily-diary','./routes/dailyDiaryRoutes')
-  try { router.use('/ai-analytics', (req, res) => {
-    // Mock AI data for now but hitting real endpoint
-    res.json({
-      success: true,
-      data: [
-        { id: '1', type: 'risk', title: 'At-Risk Students Detected', description: '23 students showing declining performance.', studentCount: 23, severity: 'high', grade: 'Grade 10' },
-        { id: '2', type: 'performance', title: 'Top Performers Cluster', description: '156 students consistently scoring above 90%.', studentCount: 156, severity: 'low', grade: 'All Grades' },
-      ]
-    })
-  }) } catch(e) {}
+  mount('/ai-analytics', './routes/aiAnalyticsRoutes')
 }
 
 const apiRouter = express.Router()

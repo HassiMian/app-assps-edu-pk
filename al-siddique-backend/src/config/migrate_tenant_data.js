@@ -75,35 +75,49 @@ async function migrate() {
 
     // ── 4. Setup Target Users ───────────────────────────────────────────────────
     console.log('Setting up secure user accounts...');
-    const adminHash = await bcrypt.hash('admin123', 10);
-    const demoHash = await bcrypt.hash('Demo@12345', 10);
+    const adminSeedPassword = process.env.ASSPS_ADMIN_SEED_PASSWORD || '';
+    const demoSeedPassword = process.env.DEMO_ADMIN_PASSWORD || '';
+    const allowDemoSeed = process.env.NODE_ENV !== 'production' && process.env.DEMO_LOGIN_ENABLED === 'true' && demoSeedPassword;
 
-    // Create info@assps.edu.pk for Real School (school_id: 1)
-    await client.query(`
-      INSERT INTO users (name, email, password, role, designation, school_id, is_active)
-      VALUES ('Muhammad Haseeb Arshad', 'info@assps.edu.pk', $1, 'admin', 'Principal', 1, true)
-      ON CONFLICT (email) DO UPDATE SET
-        school_id = 1,
-        role = 'admin',
-        is_active = true;
-    `, [adminHash]);
+    // Create/update info@assps.edu.pk only when an operator provides a seed password.
+    if (adminSeedPassword) {
+      if (adminSeedPassword.length < 12) {
+        throw new Error('ASSPS_ADMIN_SEED_PASSWORD must be at least 12 characters.');
+      }
+      const adminHash = await bcrypt.hash(adminSeedPassword, 12);
+      await client.query(`
+        INSERT INTO users (name, email, password, role, designation, school_id, is_active)
+        VALUES ('Muhammad Haseeb Arshad', 'info@assps.edu.pk', $1, 'admin', 'Principal', 1, true)
+        ON CONFLICT (email) DO UPDATE SET
+          school_id = 1,
+          role = 'admin',
+          is_active = true;
+      `, [adminHash]);
+    } else {
+      console.log('  ASSPS admin seed password not provided; existing admin password left unchanged.');
+    }
 
-    // Create demo@assps.edu.pk for Demo School (school_id: 2)
-    await client.query(`
-      INSERT INTO users (name, email, password, role, designation, school_id, is_active)
-      VALUES ('Demo Admin', 'demo@assps.edu.pk', $1, 'admin', 'Demo Principal', 2, true)
-      ON CONFLICT (email) DO UPDATE SET
-        school_id = 2,
-        role = 'admin',
-        is_active = true;
-    `, [demoHash]);
+    // Demo user creation is development-only and must be explicitly enabled.
+    if (allowDemoSeed) {
+      const demoHash = await bcrypt.hash(demoSeedPassword, 12);
+      await client.query(`
+        INSERT INTO users (name, email, password, role, designation, school_id, is_active)
+        VALUES ('Demo Admin', 'demo@assps.edu.pk', $1, 'admin', 'Demo Principal', 2, true)
+        ON CONFLICT (email) DO UPDATE SET
+          school_id = 2,
+          role = 'admin',
+          is_active = true;
+      `, [demoHash]);
+    } else {
+      console.log('  Demo user seeding skipped.');
+    }
     console.log('✅ Target users created/updated!');
 
     // ── 5. Seed Isolated Sample Data under school_id = 2 ────────────────────────
     console.log('Checking existing demo data...');
     const demoStudentCheck = await client.query('SELECT id FROM students WHERE school_id = 2 LIMIT 1');
     
-    if (demoStudentCheck.rows.length === 0) {
+    if (allowDemoSeed && demoStudentCheck.rows.length === 0) {
       console.log('Seeding fresh sample data under school_id = 2...');
       
       // Get the demo admin ID
@@ -171,8 +185,10 @@ async function migrate() {
         `, [examId, seededStudentIds[0]]);
       }
       console.log('  Seeded demo exams & results!');
-    } else {
+    } else if (allowDemoSeed) {
       console.log('  Demo sample data is already seeded under school_id = 2.');
+    } else {
+      console.log('  Demo sample data seeding skipped.');
     }
 
     await client.query('COMMIT');

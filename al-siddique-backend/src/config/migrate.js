@@ -23,7 +23,7 @@ async function migrate() {
       );
 
       INSERT INTO schools (id, name, code)
-      VALUES (1, 'Al Siddique Scholars Public School', 'default')
+      VALUES (1, 'Al Siddique Scholars Public School', 'assps')
       ON CONFLICT (id) DO NOTHING;
     `)
     await pool.query(`ALTER TABLE schools ADD COLUMN IF NOT EXISTS subscription_plan VARCHAR(50) DEFAULT 'basic';`)
@@ -419,21 +419,33 @@ async function migrate() {
     `).catch(() => {})
     console.log('cards table ready')
 
-    const adminHash = await bcrypt.hash('admin123', 10)
-    await pool.query(`
-      INSERT INTO users (name, email, password, role, designation, school_id)
-      VALUES ('Muhammad Haseeb Arshad', 'admin@alsiddique.edu.pk', $1, 'admin', 'Principal', 1)
-      ON CONFLICT (email) DO NOTHING;
-    `, [adminHash])
-    console.log('admin user ready')
+    const adminSeedPassword = process.env.MIGRATE_ADMIN_SEED_PASSWORD || ''
+    if (adminSeedPassword) {
+      if (adminSeedPassword.length < 12) throw new Error('MIGRATE_ADMIN_SEED_PASSWORD must be at least 12 characters.')
+      const adminHash = await bcrypt.hash(adminSeedPassword, 12)
+      await pool.query(`
+        INSERT INTO users (name, email, password, role, designation, school_id)
+        VALUES ('Muhammad Haseeb Arshad', 'admin@alsiddique.edu.pk', $1, 'admin', 'Principal', 1)
+        ON CONFLICT (email) DO NOTHING;
+      `, [adminHash])
+      console.log('admin user ready')
+    } else {
+      console.log('admin seed skipped; MIGRATE_ADMIN_SEED_PASSWORD not provided')
+    }
 
-    const teacherHash = await bcrypt.hash('teacher123', 10)
-    await pool.query(`
-      INSERT INTO users (name, email, password, role, designation, school_id)
-      VALUES ('Teacher Account', 'teacher@alsiddique.edu.pk', $1, 'teacher', 'Class Teacher', 1)
-      ON CONFLICT (email) DO NOTHING;
-    `, [teacherHash])
-    console.log('teacher user ready')
+    const teacherSeedPassword = process.env.MIGRATE_TEACHER_SEED_PASSWORD || ''
+    if (teacherSeedPassword) {
+      if (teacherSeedPassword.length < 12) throw new Error('MIGRATE_TEACHER_SEED_PASSWORD must be at least 12 characters.')
+      const teacherHash = await bcrypt.hash(teacherSeedPassword, 12)
+      await pool.query(`
+        INSERT INTO users (name, email, password, role, designation, school_id)
+        VALUES ('Teacher Account', 'teacher@alsiddique.edu.pk', $1, 'teacher', 'Class Teacher', 1)
+        ON CONFLICT (email) DO NOTHING;
+      `, [teacherHash])
+      console.log('teacher user ready')
+    } else {
+      console.log('teacher seed skipped; MIGRATE_TEACHER_SEED_PASSWORD not provided')
+    }
 
     try {
       const rlsMigration = require('./migrations/005_rls_policies')

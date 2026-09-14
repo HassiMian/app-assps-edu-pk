@@ -51,13 +51,13 @@ function dedupeStudents(students = []) {
 }
 
 async function fetchFromAPI() {
- try {
- const res = await api.get('/api/students')
- _cache = dedupeStudents(res.data.data || [])
- notify()
- } catch {
- // Keep the last known cache if the student API is temporarily unavailable.
- }
+  try {
+    const res = await api.get('/api/students?active=all')
+    _cache = dedupeStudents(res.data?.data || [])
+    notify()
+  } catch {
+    // Keep the last known cache if the student API is temporarily unavailable.
+  }
 }
 
 export async function refreshStudents() {
@@ -65,30 +65,46 @@ export async function refreshStudents() {
 }
 
 export function useStudentStore() {
- const [students, setStudents] = useState(_cache)
+  const [students, setStudents] = useState(_cache)
 
- useEffect(() => {
- const refresh = () => setStudents([..._cache])
- _listeners.push(refresh)
- fetchFromAPI()
- return () => { _listeners = _listeners.filter(f => f !== refresh) }
- }, [])
+  useEffect(() => {
+    const refresh = () => setStudents([..._cache])
+    _listeners.push(refresh)
+    fetchFromAPI()
+    return () => { _listeners = _listeners.filter(f => f !== refresh) }
+  }, [])
 
- const addStudent = useCallback(async (data) => {
- const res = await api.post('/api/students', data)
- await fetchFromAPI()
- return res.data?.data || res.data || data
- }, [])
+  const addStudent = useCallback(async (data) => {
+    const res = await api.post('/api/students', data)
+    await fetchFromAPI()
+    return res.data?.data || res.data || data
+  }, [])
 
- const deleteStudent = useCallback(async (id) => {
- await api.delete(`/api/students/${id}`)
- await fetchFromAPI()
- }, [])
+  const deleteStudent = useCallback(async (id, permanent = false) => {
+    if (permanent) {
+      _cache = _cache.filter(s => s.id !== id && String(s.id) !== String(id))
+    } else {
+      _cache = _cache.map(s => (s.id === id || String(s.id) === String(id) ? { ...s, is_active: false } : s))
+    }
+    notify()
+    try {
+      await api.delete(`/api/students/${id}${permanent ? '?permanent=true' : ''}`)
+    } catch (err) {
+      console.error('Delete student API error:', err)
+    }
+    await fetchFromAPI()
+  }, [])
 
- const updateStudent = useCallback(async (id, patch) => {
- await api.put(`/api/students/${id}`, patch)
- await fetchFromAPI()
- }, [])
+  const updateStudent = useCallback(async (id, patch) => {
+    _cache = _cache.map(s => (s.id === id || String(s.id) === String(id) ? { ...s, ...patch } : s))
+    notify()
+    try {
+      await api.put(`/api/students/${id}`, patch)
+    } catch (err) {
+      console.error('Update student API error:', err)
+    }
+    await fetchFromAPI()
+  }, [])
 
- return { students, addStudent, deleteStudent, updateStudent }
+  return { students, addStudent, deleteStudent, updateStudent }
 }

@@ -1,15 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+﻿import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useSearchParams } from "react-router-dom";
-import { Search, Plus, Download, Eye, Edit, Trash2, GraduationCap, ChevronDown, X } from "lucide-react";
+import { Search, Plus, Download, Eye, Edit, Trash2, GraduationCap, ChevronDown, X, RotateCcw, Printer } from "lucide-react";
 import { useStudentStore, refreshStudents } from "../../services/useStudentStore";
 import { useAcademicStore } from "../../services/useAcademicStore";
 import { usePaperStore } from "../Paper-Generator/usePaperStore";
 import { useFamilyStore } from "../../services/useFamilyStore";
-import { Printer } from "lucide-react";
-import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import PhotoUploadAI from "../../components/PhotoUploadAI";
 import PhotoProfessionalizer from "../../components/PhotoProfessionalizer";
+import { BarChart, ChartLegend, DonutChart } from "../../components/Charts";
 import { useUserStore, getUserByEntity } from "../../services/useUserStore";
 import api from "../../services/api";
 import FeeSetupFields, { initFeeSetup } from "../fees/FeeSetupFields";
@@ -21,6 +20,7 @@ import { printChallan } from "../fees/ViewChallans";
 const transformStudent = (student) => ({
  id: student.id,
  gr: student.gr_number || student.gr || "",
+ roll: student.roll_number || student.rollNo || student.roll || "",
  name: student.name || "",
  father: student.father_name || student.father || "",
  mother: student.mother_name || student.mother || "",
@@ -111,6 +111,7 @@ const exportToCSV = (data) => {
 const MODULE_TABS = [
  { id: "students", label: "Learner Records" },
  { id: "classwise", label: "Class Analytics" },
+ { id: "performance", label: "Student Performance Sheet" },
  { id: "admissions", label: "Admissions Vault" },
  { id: "slips", label: "Student Documents" },
  { id: "locality", label: "Location Map" },
@@ -131,101 +132,571 @@ const STUDENT_DOCS = [
 ];
 
 function PrintStudentList({ list, onClose, school }) {
- if (!list) return null;
- const { type, data } = list;
- const today = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
- const logo = school?.logo || "";
+  if (!list) return null;
+  const { type, data } = list;
+  const today = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
+  const logo = school?.logo || "";
+  const schoolName = school?.schoolName || "Al Siddique Scholars Public School";
+  const schoolAddress = school?.address || "Sharif Chowk, Rayya Khas, Narowal";
+  const schoolPhone = school?.phone || "0300-1291959";
+  // Read principalSignature directly from the store (usePaperStore already imported above)
+  const { paperSettings } = usePaperStore();
+  const sigImg = paperSettings?.principalSignature || school?.principalSignature || null;
+
+  const handlePrint = () => {
+    const rowsHtml = (data || []).map((s, idx) => `
+      <tr>
+        <td style="text-align:center; width:35px;">${idx + 1}</td>
+        <td style="width:75px; font-weight:700; color:#0b2c4d;">${s.gr || 'â€”'}</td>
+        <td style="font-weight:700; color:#111;">${s.name || 'â€”'}</td>
+        <td>${s.father || 'â€”'}</td>
+        <td style="width:90px; text-align:center;">${s.dob || 'â€”'}</td>
+        <td style="width:105px;">${s.contact || 'â€”'}</td>
+        <td style="width:110px; font-weight:600;">${s.class || ''} / ${s.section || ''}</td>
+      </tr>
+    `).join('');
+
+    const sigHtml = sigImg
+      ? `<img src="${sigImg}" style="height:36px; max-width:130px; object-fit:contain;" alt="Signature" />`
+      : `<span style="display:inline-block; height:36px; width:130px;"></span>`;
+
+    const logoHtml = logo
+      ? `<img src="${logo}" style="width:65px; height:65px; object-fit:contain;" alt="Logo" />`
+      : `<div style="width:65px; height:65px; border-radius:50%; border:1px solid #D9DEE8; display:grid; place-items:center; color:#0b2c4d; font-size:26px; font-weight:900;">${schoolName.charAt(0)}</div>`;
+
+    const printDoc = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>${type} â€” ${schoolName}</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 10mm 15mm 10mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #111;
+      font-size: 11px;
+    }
+    .header-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #0b2c4d;
+      padding-bottom: 10px;
+    }
+    .school-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b2c4d;
+      font-family: 'Cinzel', serif, Georgia, Arial;
+      letter-spacing: 0.5px;
+    }
+    .school-meta {
+      font-size: 11px;
+      color: #555;
+      margin-top: 2px;
+    }
+    .report-title {
+      margin: 6px 0 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: #b8860b;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      page-break-inside: auto;
+      margin-top: 8px;
+    }
+    thead {
+      display: table-header-group;
+    }
+    tbody {
+      display: table-row-group;
+    }
+    tr {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 5.5px 7px;
+      text-align: left;
+      font-size: 10.5px;
+      color: #111;
+    }
+    th {
+      background: #f0f4f8 !important;
+      font-weight: 700;
+      color: #0b2c4d;
+      text-transform: uppercase;
+      font-size: 9.5px;
+      letter-spacing: 0.5px;
+    }
+    .footer-box {
+      margin-top: 20px;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 11px;
+      color: #444;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .sig-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 140px;
+    }
+    .sig-line {
+      border-top: 1px solid #333;
+      padding-top: 4px;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-box">
+    ${logoHtml}
+    <div>
+      <h1 class="school-title">${schoolName}</h1>
+      <div class="school-meta">${schoolAddress} Â· ${schoolPhone}</div>
+      <h2 class="report-title">${type} â€” Session 2026-2027</h2>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:35px; text-align:center;">Sr#</th>
+        <th style="width:75px;">GR No</th>
+        <th>Student Name</th>
+        <th>Father Name</th>
+        <th style="width:90px; text-align:center;">DOB</th>
+        <th style="width:105px;">Contact</th>
+        <th style="width:110px;">Class / Sec</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${rowsHtml}
+    </tbody>
+  </table>
+
+  <div class="footer-box">
+    <span><strong>Total Students:</strong> ${data.length} &nbsp;|&nbsp; <strong>Date:</strong> ${today}</span>
+    <div class="sig-block">
+      ${sigHtml}
+      <div class="sig-line">Principal Signature</div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        window.focus();
+        window.print();
+      }, 300);
+    };
+  </script>
+</body>
+</html>`;
+
+    const printWindow = window.open('', '_blank', 'width=1100,height=850');
+    if (printWindow) {
+      printWindow.document.open();
+      printWindow.document.write(printDoc);
+      printWindow.document.close();
+    } else {
+      window.print();
+    }
+  };
+
+  return createPortal(
+    <div className="app-modal-overlay" style={{
+      position: "fixed", inset: 0, zIndex: 10001,
+      background: "rgba(7,30,52,0.98)",
+      display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+      isolation: "isolate",
+    }}>
+      <style>{`
+        @media print {
+          @page {
+            size: A4 portrait;
+            margin: 12mm 10mm 15mm 10mm;
+          }
+          html, body {
+            background: #fff !important;
+            color: #000 !important;
+            height: auto !important;
+            min-height: 100% !important;
+            overflow: visible !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          body * {
+            visibility: hidden;
+          }
+          .app-modal-overlay {
+            position: static !important;
+            inset: auto !important;
+            background: transparent !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+            box-shadow: none !important;
+          }
+          .print-list-root, .print-list-root * {
+            visibility: visible !important;
+          }
+          .print-list-root {
+            position: static !important;
+            left: auto !important;
+            top: auto !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            overflow: visible !important;
+            background: #fff !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block !important;
+          }
+          .print-list-body {
+            overflow: visible !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            flex: none !important;
+          }
+          .no-print {
+            display: none !important;
+          }
+          table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            page-break-inside: auto !important;
+            break-inside: auto !important;
+            margin-top: 10px !important;
+          }
+          thead {
+            display: table-header-group !important;
+          }
+          tbody {
+            display: table-row-group !important;
+          }
+          tr {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+          }
+          th, td {
+            border: 1px solid #888 !important;
+            padding: 6px 8px !important;
+            text-align: left !important;
+            font-size: 10.5px !important;
+            color: #000 !important;
+          }
+          th {
+            background: #f0f4f8 !important;
+            font-weight: 700 !important;
+            color: #0b2c4d !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .print-footer {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin-top: 20px !important;
+            padding-top: 15px !important;
+          }
+        }
+      `}</style>
+      <div className="print-list-root" style={{
+        width: "min(1100px, calc(100vw - 48px))", maxWidth: 1100, background: "#fff", borderRadius: 20, overflow: "hidden", height: "92vh", display: "flex", flexDirection: "column",
+        boxShadow: "0 28px 80px rgba(0,0,0,0.45)",
+      }}>
+        <div style={{ padding: "14px 20px", background: "#0b2c4d", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }} className="no-print">
+          <h3 style={{ margin: 0, fontSize: 16 }}> {type}</h3>
+          <div style={{ display: "flex", gap: 10 }}>
+            <button onClick={handlePrint} style={{ background: "#C8991A", border: "none", padding: "8px 18px", borderRadius: 8, cursor: "pointer", fontWeight: 600, color: "#071e34" }}>Print Now</button>
+            <button onClick={onClose} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer" }}>Close</button>
+          </div>
+        </div>
+
+        <div className="print-list-body" style={{ flex: 1, overflowY: "auto", padding: "30px 40px", color: "#333", display: "flex", flexDirection: "column" }}>
+          {/* Header */}
+          <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 24, borderBottom: "2px solid #0b2c4d", paddingBottom: 16 }}>
+            {logo
+              ? <img src={logo} style={{ width: 70, height: 70, objectFit: "contain" }} alt="Logo" />
+              : <div style={{ width: 70, height: 70, borderRadius: "50%", border: "1px solid #D9DEE8", display: "grid", placeItems: "center", color: "#0b2c4d", fontSize: 28, fontWeight: 900 }}>{schoolName.charAt(0)}</div>}
+            <div>
+              <h1 style={{ margin: 0, fontSize: 22, color: "#0b2c4d", fontFamily: "'Cinzel', serif" }}>{schoolName}</h1>
+              <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>{schoolAddress} - {schoolPhone}</div>
+              <h2 style={{ margin: "8px 0 0", fontSize: 16, color: "#C8991A" }}>{type} &mdash; Session 2026-2027</h2>
+            </div>
+          </div>
+
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+            <thead>
+              <tr style={{ background: "#f4f4f4" }}>
+                <th style={{ width: 40 }}>Sr#</th>
+                <th style={{ width: 70 }}>GR No</th>
+                <th>Student Name</th>
+                <th>Father Name</th>
+                <th style={{ width: 100 }}>DOB</th>
+                <th style={{ width: 110 }}>Contact</th>
+                <th style={{ width: 120 }}>Class / Sec</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((s, idx) => (
+                <tr key={s.id}>
+                  <td style={{ textAlign: "center" }}>{idx + 1}</td>
+                  <td>{s.gr}</td>
+                  <td style={{ fontWeight: 700 }}>{s.name}</td>
+                  <td>{s.father}</td>
+                  <td>{s.dob || "â€”"}</td>
+                  <td>{s.contact}</td>
+                  <td>{s.class} / {s.section}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="print-footer" style={{ marginTop: "auto", paddingTop: 30, display: "flex", justifyContent: "space-between", alignItems: "flex-end", fontSize: 11, color: "#888" }}>
+            <span>Total Students: {data.length} &nbsp;|&nbsp; Date: {today}</span>
+            <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, minWidth: 140 }}>
+              {sigImg
+                ? <img src={sigImg} alt="Principal Signature" style={{ height: 36, maxWidth: 130, objectFit: "contain" }} />
+                : <span style={{ display: "block", height: 36, width: 130 }} />}
+              <span style={{ borderTop: "1px solid #333", paddingTop: 4, width: "100%", textAlign: "center" }}>Principal Signature</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+const performanceEscape = (value) => String(value ?? "")
+ .replace(/&/g, "&amp;")
+ .replace(/</g, "&lt;")
+ .replace(/>/g, "&gt;")
+ .replace(/"/g, "&quot;")
+ .replace(/'/g, "&#39;");
+
+const PERFORMANCE_DAYS = Array.from({ length: 30 }, (_, index) => index + 1);
+const PERFORMANCE_ROWS_PER_PAGE = 22;
+const PERFORMANCE_PRE_CLASS_SUBJECTS = ["English", "Urdu", "Math"];
+const PERFORMANCE_PRE_CLASSES = new Set(["starter", "mover", "flyer"]);
+
+const normalizeSheetText = (value) => String(value || "").trim().toLowerCase();
+
+function sortPerformanceRoster(list = []) {
+ return [...list].sort((a, b) => {
+  const rollA = Number.parseInt(a.roll, 10);
+  const rollB = Number.parseInt(b.roll, 10);
+  if (Number.isFinite(rollA) && Number.isFinite(rollB) && rollA !== rollB) return rollA - rollB;
+  return String(a.gr || "").localeCompare(String(b.gr || ""), undefined, { numeric: true }) || String(a.name || "").localeCompare(String(b.name || ""));
+ });
+}
+
+function chunkPerformanceRows(list = [], size = PERFORMANCE_ROWS_PER_PAGE) {
+ const chunks = [];
+ for (let i = 0; i < list.length; i += size) chunks.push(list.slice(i, i + size));
+ return chunks.length ? chunks : [[]];
+}
+
+function createPerformancePages({ subjects = [], roster = [] }) {
+ const rosterChunks = chunkPerformanceRows(roster);
+ return subjects.flatMap((subject) => rosterChunks.map((rows, index) => ({
+  subject,
+  rows,
+  subjectPage: index + 1,
+  subjectPages: rosterChunks.length,
+ })));
+}
+
+function getPerformanceSubjects(selectedClass, activeClasses = [], subjectsForClass) {
+ if (PERFORMANCE_PRE_CLASSES.has(normalizeSheetText(selectedClass))) {
+  return PERFORMANCE_PRE_CLASS_SUBJECTS;
+ }
+ const classRecord = activeClasses.find(cls => normalizeSheetText(cls.name) === normalizeSheetText(selectedClass));
+ const rawSubjects = typeof subjectsForClass === "function"
+  ? subjectsForClass(classRecord?.id || classRecord?.level || selectedClass)
+  : [];
+ const subjectNames = rawSubjects.map(subject => (
+  typeof subject === "string" ? subject : subject?.name || subject?.label || subject?.subject || ""
+ )).map(name => String(name).trim()).filter(Boolean);
+ return [...new Set(subjectNames)].sort((a, b) => a.localeCompare(b));
+}
+
+function performancePrintStyles() {
+ return `
+  @page { size: A4 landscape; margin: 4mm; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { margin: 0; background: #fff; color: #111; font-family: Arial, Helvetica, sans-serif; font-size: 6.8px; }
+  .perf-page { width: 100%; min-height: 202mm; page-break-after: always; break-after: page; display: flex; flex-direction: column; overflow: hidden; }
+  .perf-page:last-child { page-break-after: auto; break-after: auto; }
+  .perf-header { display: grid; grid-template-columns: 44px minmax(0, 1fr) 142px; gap: 6px; align-items: center; border: 1.25px solid #0b2c4d; padding: 4px 5px; max-width: 100%; overflow: hidden; }
+  .perf-logo { width: 38px; height: 38px; object-fit: contain; }
+  .perf-logo-fallback { width: 38px; height: 38px; border: 1px solid #0b2c4d; display: grid; place-items: center; font-size: 16px; font-weight: 800; color: #0b2c4d; }
+  .perf-school { margin: 0; font-size: 13.5px; line-height: 1.05; color: #0b2c4d; font-weight: 900; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .perf-address { margin-top: 2px; font-size: 6.4px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .perf-title { margin-top: 2px; font-size: 9px; color: #9b7308; font-weight: 800; letter-spacing: .2px; }
+  .perf-meta { display: grid; grid-template-columns: 1fr 1fr; border-left: 1px solid #9aa6b2; }
+  .perf-meta div { border-bottom: 1px solid #c7ced6; padding: 1.5px 3px; min-height: 13px; overflow: hidden; font-weight: 800; color: #111827; }
+  .perf-meta b { display: block; color: #0b2c4d; font-size: 5px; font-weight: 900; text-transform: uppercase; }
+  .perf-legend { display: flex; justify-content: space-between; gap: 6px; margin: 3px 0; font-size: 5.8px; color: #222; }
+  .perf-table { width: 100%; border-collapse: collapse; table-layout: fixed; flex: 1; }
+  .perf-table th, .perf-table td { border: 1px solid #1f2937; padding: 0; text-align: center; vertical-align: middle; height: 6.45mm; overflow: hidden; }
+  .perf-table th { background: #eef3f8; color: #0b2c4d; font-size: 5.5px; font-weight: 900; }
+  .perf-serial { width: 4mm; }
+  .perf-gr { width: 8.4mm; font-size: 5.1px; font-weight: 800; }
+  .perf-name { width: 14.2mm; text-align: left !important; padding-left: 1px !important; font-size: 6.1px; line-height: 1.08; font-weight: 950; color: #000; white-space: normal; }
+  .perf-father { width: 11.6mm; text-align: left !important; padding-left: 1px !important; font-size: 5.7px; line-height: 1.08; font-weight: 900; color: #000; white-space: normal; }
+  .perf-date { width: 8.36mm; }
+  .perf-lhc { display: grid; grid-template-columns: repeat(3, 1fr); height: 100%; min-height: 6.45mm; }
+  .perf-lhc span { display: grid; place-items: start center; border-left: 1px solid #94a3b8; font-size: 5px; line-height: 1; color: #1f2937; padding-top: .75mm; font-weight: 700; }
+  .perf-lhc span:first-child { border-left: 0; }
+  .perf-footer { display: grid; grid-template-columns: 1fr 72px 72px 72px; gap: 8px; margin-top: 5px; align-items: end; }
+  .perf-remarks { border: 1px solid #555; min-height: 24px; padding: 4px; font-size: 6.5px; }
+  .perf-sign { border-top: 1px solid #111; padding-top: 3px; text-align: center; font-weight: 700; font-size: 6.5px; }
+ `;
+}
+
+function StudentPerformanceSheet({ students, school, classNames, activeClasses, subjectsForClass }) {
+ const classes = classNames?.length ? classNames : [...new Set(students.map(s => s.class).filter(Boolean))];
+ const [selectedClass, setSelectedClass] = useState(classes[0] || "");
+ const [generatedClass, setGeneratedClass] = useState("");
+ const sheetClass = selectedClass || classes[0] || "";
+
+ const roster = sortPerformanceRoster(students.filter(student => student.status === "Active" && normalizeSheetText(student.class) === normalizeSheetText(sheetClass)));
+ const subjects = getPerformanceSubjects(sheetClass, activeClasses, subjectsForClass);
+ const pages = generatedClass === sheetClass ? createPerformancePages({ subjects, roster }) : [];
+ const previewPages = pages.slice(0, 1);
+ const month = new Date().toLocaleDateString("en-GB", { month: "long", year: "numeric" });
  const schoolName = school?.schoolName || "Al Siddique Scholars Public School";
  const schoolAddress = school?.address || "Sharif Chowk, Rayya Khas, Narowal";
- const schoolPhone = school?.phone || "0300-1291959";
- // Read principalSignature directly from the store (usePaperStore already imported above)
- const { paperSettings } = usePaperStore();
- const sigImg = paperSettings?.principalSignature || school?.principalSignature || null;
+ const schoolPhone = school?.phone || "";
+ const logo = school?.logo || "";
 
- return createPortal(
- <div className="app-modal-overlay" style={{
- position: "fixed", inset: 0, zIndex: 10001,
- background: "rgba(7,30,52,0.98)",
- display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
- isolation: "isolate",
- }}>
- <style>{`
- @media print {
- body * { visibility: hidden !important; }
- .print-list-root, .print-list-root * { visibility: visible !important; }
- .print-list-root { position: absolute; left: 0; top: 0; width: 100% !important; background: white !important; }
- .no-print { display: none !important; }
- table { width: 100%; border-collapse: collapse; }
- th, td { border: 1px solid #ccc; padding: 6px; text-align: left; font-size: 10px; }
- th { background: #f0f0f0 !important; -webkit-print-color-adjust: exact; }
- .print-list-body { min-height: calc(297mm - 46mm); display: flex !important; flex-direction: column !important; }
- }
- `}</style>
- <div className="print-list-root" style={{
- width: "min(1100px, calc(100vw - 48px))", maxWidth: 1100, background: "#fff", borderRadius: 20, overflow: "hidden", height: "92vh", display: "flex", flexDirection: "column",
- boxShadow: "0 28px 80px rgba(0,0,0,0.45)",
- }}>
- <div style={{ padding: "14px 20px", background: "#0b2c4d", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }} className="no-print">
- <h3 style={{ margin: 0, fontSize: 16 }}> {type}</h3>
- <div style={{ display: "flex", gap: 10 }}>
- <button onClick={() => window.print()} style={{ background: "#C8991A", border: "none", padding: "8px 18px", borderRadius: 8, cursor: "pointer", fontWeight: 600, color: "#071e34" }}>Print Now</button>
- <button onClick={onClose} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer" }}>Close</button>
- </div>
- </div>
- 
- <div className="print-list-body" style={{ flex: 1, overflowY: "auto", padding: "30px 40px", color: "#333", display: "flex", flexDirection: "column" }}>
- {/* Header */}
- <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 24, borderBottom: "2px solid #0b2c4d", paddingBottom: 16 }}>
- {logo
- ? <img src={logo} style={{ width: 70, height: 70, objectFit: "contain" }} alt="Logo" />
- : <div style={{ width: 70, height: 70, borderRadius: "50%", border: "1px solid #D9DEE8", display: "grid", placeItems: "center", color: "#0b2c4d", fontSize: 28, fontWeight: 900 }}>{schoolName.charAt(0)}</div>}
- <div>
- <h1 style={{ margin: 0, fontSize: 22, color: "#0b2c4d", fontFamily: "'Cinzel', serif" }}>{schoolName}</h1>
- <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>{schoolAddress} - {schoolPhone}</div>
- <h2 style={{ margin: "8px 0 0", fontSize: 16, color: "#C8991A" }}>{type} &mdash; Session 2026-2027</h2>
- </div>
- </div>
+ const renderPage = (page, pageIndex, mode = "screen") => {
+  const pageNo = pageIndex + 1;
+  const logoNode = logo
+   ? (mode === "html"
+    ? `<img class="perf-logo" src="${performanceEscape(logo)}" alt="School logo">`
+    : <img className="perf-logo" src={logo} alt="School logo" />)
+   : (mode === "html"
+    ? `<div class="perf-logo-fallback">${performanceEscape(schoolName.charAt(0))}</div>`
+    : <div className="perf-logo-fallback">{schoolName.charAt(0)}</div>);
+  const dayHeaders = PERFORMANCE_DAYS.map(day => mode === "html" ? `<th class="perf-date">${day}</th>` : <th key={day} className="perf-date">{day}</th>);
+  const rows = page.rows.map((student, rowIndex) => {
+   const serial = (page.subjectPage - 1) * PERFORMANCE_ROWS_PER_PAGE + rowIndex + 1;
+   const cells = PERFORMANCE_DAYS.map(day => (
+    mode === "html"
+     ? `<td><div class="perf-lhc"><span>L</span><span>H</span><span>C</span></div></td>`
+     : <td key={day}><div className="perf-lhc"><span>L</span><span>H</span><span>C</span></div></td>
+   ));
+   if (mode === "html") {
+    return `<tr><td>${serial}</td><td>${performanceEscape(student.gr || "")}</td><td class="perf-name">${performanceEscape(student.name || "")}</td><td class="perf-father">${performanceEscape(student.father || "")}</td>${cells.join("")}</tr>`;
+   }
+   return (
+    <tr key={student.id || `${student.gr}-${rowIndex}`}>
+     <td>{serial}</td><td>{student.gr}</td><td className="perf-name">{student.name}</td><td className="perf-father">{student.father}</td>{cells}
+    </tr>
+   );
+  });
+  const emptyRows = page.rows.length ? "" : (mode === "html"
+   ? `<tr><td colspan="${PERFORMANCE_DAYS.length + 4}" style="height:32px;">No active students found for this class.</td></tr>`
+   : <tr><td colSpan={PERFORMANCE_DAYS.length + 4} style={{ height: 32 }}>No active students found for this class.</td></tr>);
 
- <table style={{ width: "100%", borderCollapse: "collapse" }}>
- <thead>
- <tr style={{ background: "#f4f4f4" }}>
- <th style={{ width: 40 }}>Sr#</th>
- <th style={{ width: 70 }}>GR No</th>
- <th>Student Name</th>
- <th>Father Name</th>
- <th style={{ width: 100 }}>DOB</th>
- <th style={{ width: 110 }}>Contact</th>
- <th style={{ width: 120 }}>Class / Sec</th>
- </tr>
- </thead>
- <tbody>
- {data.map((s, idx) => (
- <tr key={s.id}>
- <td style={{ textAlign: "center" }}>{idx + 1}</td>
- <td>{s.gr}</td>
- <td style={{ fontWeight: 700 }}>{s.name}</td>
- <td>{s.father}</td>
- <td>{s.dob || "—"}</td>
- <td>{s.contact}</td>
- <td>{s.class} / {s.section}</td>
- </tr>
- ))}
- </tbody>
- </table>
+  if (mode === "html") {
+   return `<section class="perf-page">
+    <header class="perf-header">${logoNode}<div><h1 class="perf-school">${performanceEscape(schoolName)}</h1><div class="perf-address">${performanceEscape(schoolAddress)}${schoolPhone ? " | " + performanceEscape(schoolPhone) : ""}</div><div class="perf-title">Student Performance Sheet</div></div><div class="perf-meta"><div><b>Class</b>${performanceEscape(sheetClass)}</div><div><b>Subject</b>${performanceEscape(page.subject)}</div><div><b>Teacher</b>&nbsp;</div><div><b>Month</b>${performanceEscape(month)}</div><div><b>Total Students</b>${roster.length}</div><div><b>Page</b>${page.subjectPage}/${page.subjectPages} - Sheet ${pageNo}/${pages.length}</div></div></header>
+    <div class="perf-legend"><span><b>L</b> = Lesson / classwork completed</span><span><b>H</b> = Homework checked</span><span><b>C</b> = Concept cleared</span><span>&#10003; = Done / satisfactory &nbsp; &#10007; = Not done / needs follow-up</span></div>
+    <table class="perf-table"><thead><tr><th class="perf-serial">Sr</th><th class="perf-gr">GR No</th><th class="perf-name">Student Name</th><th class="perf-father">Father Name</th>${dayHeaders.join("")}</tr></thead><tbody>${rows.join("")}${emptyRows}</tbody></table>
+    <footer class="perf-footer"><div class="perf-remarks"><b>Remarks:</b></div><div class="perf-sign">Subject Teacher</div><div class="perf-sign">Section Head</div><div class="perf-sign">Principal</div></footer>
+   </section>`;
+  }
 
- <div style={{ marginTop: "auto", paddingTop: 30, display: "flex", justifyContent: "space-between", alignItems: "flex-end", fontSize: 11, color: "#888" }}>
- <span>Total Students: {data.length}</span>
- <span style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, minWidth: 140 }}>
- {sigImg
- ? <img src={sigImg} alt="Principal Signature" style={{ height: 36, maxWidth: 130, objectFit: "contain" }} />
- : <span style={{ display: "block", height: 36, width: 130 }} />}
- <span style={{ borderTop: "1px solid #333", paddingTop: 4, width: "100%", textAlign: "center" }}>Principal Signature</span>
- </span>
- </div>
- </div>
- </div>
- </div>,
- document.body
+  return (
+   <section key={`${page.subject}-${page.subjectPage}`} className="perf-page">
+    <header className="perf-header">{logoNode}<div><h1 className="perf-school">{schoolName}</h1><div className="perf-address">{schoolAddress}{schoolPhone ? ` | ${schoolPhone}` : ""}</div><div className="perf-title">Student Performance Sheet</div></div><div className="perf-meta"><div><b>Class</b>{sheetClass}</div><div><b>Subject</b>{page.subject}</div><div><b>Teacher</b>&nbsp;</div><div><b>Month</b>{month}</div><div><b>Total Students</b>{roster.length}</div><div><b>Page</b>{page.subjectPage}/{page.subjectPages} - Sheet {pageNo}/{pages.length}</div></div></header>
+    <div className="perf-legend"><span><b>L</b> = Lesson / classwork completed</span><span><b>H</b> = Homework checked</span><span><b>C</b> = Concept cleared</span><span>&#10003; = Done / satisfactory &nbsp; &#10007; = Not done / needs follow-up</span></div>
+    <table className="perf-table"><thead><tr><th className="perf-serial">Sr</th><th className="perf-gr">GR No</th><th className="perf-name">Student Name</th><th className="perf-father">Father Name</th>{dayHeaders}</tr></thead><tbody>{rows}{emptyRows}</tbody></table>
+    <footer className="perf-footer"><div className="perf-remarks"><b>Remarks:</b></div><div className="perf-sign">Subject Teacher</div><div className="perf-sign">Section Head</div><div className="perf-sign">Principal</div></footer>
+   </section>
+  );
+ };
+
+ const printPerformanceSheet = () => {
+  if (!generatedClass || !pages.length) return;
+  const printWindow = window.open("", "_blank", "width=1100,height=780");
+  if (printWindow) {
+   printWindow.document.open();
+   printWindow.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>Preparing Student Performance Sheet</title><style>body{font-family:Arial,Helvetica,sans-serif;margin:24px;color:#0b2c4d}strong{display:block;margin-bottom:8px}</style></head><body><strong>Preparing Student Performance Sheet...</strong><span>Please wait.</span></body></html>`);
+   printWindow.document.close();
+   setTimeout(() => {
+    const doc = `<!doctype html><html><head><meta charset="utf-8"><title>Student Performance Sheet - ${performanceEscape(sheetClass)}</title><style>${performancePrintStyles()}</style></head><body>${pages.map((page, index) => renderPage(page, index, "html")).join("")}<script>window.onload=function(){setTimeout(function(){window.focus();window.print();},250)};</script></body></html>`;
+    printWindow.document.open();
+    printWindow.document.write(doc);
+    printWindow.document.close();
+   }, 30);
+  }
+ };
+
+ return (
+  <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+   <div className="super-module-card" style={{ ...card, display: "grid", gridTemplateColumns: "minmax(220px, 1fr) auto auto", gap: 14, alignItems: "end" }}>
+    <label style={{ display: "flex", flexDirection: "column", gap: 8, color: "#8892A4", fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: .7 }}>
+     Class
+     <select value={sheetClass} onChange={e => { setSelectedClass(e.target.value); setGeneratedClass(""); }} style={{ background: "rgba(7,30,52,0.7)", color: "#C0C8D8", border: "1px solid rgba(148,163,184,0.18)", borderRadius: 12, padding: "12px 14px", outline: "none", textTransform: "none", letterSpacing: 0 }}>
+      {classes.map(cls => <option key={cls} value={cls}>{cls}</option>)}
+     </select>
+    </label>
+    <button type="button" onClick={() => setGeneratedClass(sheetClass)} disabled={!sheetClass} style={{ ...btnPrimary, justifyContent: "center", opacity: sheetClass ? 1 : .55 }}>Generate Preview</button>
+    <button type="button" onClick={printPerformanceSheet} disabled={!generatedClass || !pages.length} style={{ ...btnSecondary, justifyContent: "center", opacity: generatedClass && pages.length ? 1 : .55 }}><Printer size={16}/> Print A4</button>
+   </div>
+
+   {generatedClass && (
+    <div className="super-module-card" style={{ ...card, background: "#f8fafc", color: "#111", overflow: "auto", maxHeight: "72vh" }}>
+     <style>{performancePrintStyles()}</style>
+     <div style={{ color: "#0b2c4d", fontWeight: 800, marginBottom: 12 }}>{pages.length} printable A4 page(s) prepared for {sheetClass}: {subjects.length} subject(s), {roster.length} active student(s). Preview is limited to first page for faster loading; Print A4 includes every subject and roster page.</div>
+     {subjects.length ? previewPages.map((page, index) => renderPage(page, index)) : <div style={{ padding: 24, border: "1px dashed #94a3b8", color: "#475569" }}>No subjects are configured for this class in Academic Setup.</div>}
+    </div>
+   )}
+  </div>
  );
 }
 
@@ -247,10 +718,10 @@ const btnSecondary = {
  padding: "10px 20px", fontWeight: 600, fontSize: 14, cursor: "pointer",
 };
 
-//  Certificate print engine 
+//  Certificate print engine
 function printCertificate(docType, student, school = {}, requestedOrientation = "auto") {
  const sn = school.schoolName || "Al Siddique Scholars Public School";
- const su = school.schoolUrdu || "الصدیق اسکالرز پبلک اسکول";
+ const su = school.schoolUrdu || "Ø§Ù„ØµØ¯ÛŒÙ‚ Ø§Ø³Ú©Ø§Ù„Ø±Ø² Ù¾Ø¨Ù„Ú© Ø§Ø³Ú©ÙˆÙ„";
  const sa = school.address || "Sharif Chowk, Rayya Khas, Narowal";
  const showUrduHdr = school.showUrduHeader !== false;
  const sp = school.phone || "";
@@ -312,7 +783,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  w.document.close();
  };
 
- //  1. CHARACTER CERTIFICATE — Oxford formal, gold double-border 
+ //  1. CHARACTER CERTIFICATE â€” Oxford formal, gold double-border
  if (docType === "character") {
  open("Character Certificate",
  `@page{size:A4 portrait;margin:0}
@@ -361,7 +832,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  2. STUDY CERTIFICATE — Modern navy header with gold bar 
+ //  2. STUDY CERTIFICATE â€” Modern navy header with gold bar
  if (docType === "study") {
  open("Study Certificate",
  `@page{size:A4 portrait;margin:0}
@@ -407,7 +878,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  3. SPORTS CERTIFICATE — Landscape, dark left panel 
+ //  3. SPORTS CERTIFICATE â€” Landscape, dark left panel
  if (docType === "sports") {
  open("Sports Certificate",
  `@page{size:A4 landscape;margin:0}
@@ -465,7 +936,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  4. APPRECIATION CERTIFICATE — Landscape, ornate award design 
+ //  4. APPRECIATION CERTIFICATE â€” Landscape, ornate award design
  if (docType === "appreciation") {
  open("Appreciation Certificate",
  `@page{size:A4 landscape;margin:0}
@@ -508,7 +979,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  5. LEAVING CERTIFICATE — Formal institutional table 
+ //  5. LEAVING CERTIFICATE â€” Formal institutional table
  if (docType === "leaving") {
  const TR = (k,v) => `<tr><td style="padding:8px 13px;background:#f5f2eb;font-weight:700;font-size:12.5px;border:1px solid #ddd;color:#333;width:42%">${k}</td><td style="padding:8px 13px;font-size:12.5px;border:1px solid #ddd;color:#111">${v||"&mdash;"}</td></tr>`;
  open("Leaving Certificate",
@@ -552,7 +1023,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  6. PROVISIONAL CERTIFICATE — Oxford blue with info grid 
+ //  6. PROVISIONAL CERTIFICATE â€” Oxford blue with info grid
  if (docType === "provisional") {
  open("Provisional Certificate",
  `@page{size:A4 portrait;margin:0}
@@ -602,7 +1073,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  7. BIRTH CERTIFICATE VERIFICATION — Blue official doc 
+ //  7. BIRTH CERTIFICATE VERIFICATION â€” Blue official doc
  if (docType === "birth") {
  open("Birth Certificate Verification",
  `@page{size:A4 portrait;margin:0}
@@ -651,7 +1122,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  8. WARNING LETTER — Red stripe, corporate letter format 
+ //  8. WARNING LETTER â€” Red stripe, corporate letter format
  if (docType === "warning") {
  open("Warning Letter",
  `@page{size:A4 portrait;margin:0}
@@ -707,7 +1178,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  9. ADMISSION FORM — Navy header, clean section layout 
+ //  9. ADMISSION FORM â€” Navy header, clean section layout
  if (docType === "admission") {
  const F = (lbl, val) => `<div style="display:grid;grid-template-columns:1fr 2fr;border-bottom:1px solid #eee"><div style="padding:7px 12px;background:#f5f2eb;font-size:11px;font-weight:600;color:#444;border-right:1px solid #ddd">${lbl}</div><div style="padding:7px 12px;font-size:12px;color:#111;min-height:28px">${val||""}</div></div>`;
  const SH = (t) => `<div style="background:#0a1628;color:#e8c87a;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:3px 3px 0 0">${t}</div>`;
@@ -746,7 +1217,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  10. PROGRESS REPORT — Landscape, full subject table 
+ //  10. PROGRESS REPORT â€” Landscape, full subject table
  if (docType === "progress") {
  const SUBS = ["Mathematics","English","Urdu","Science","Islamiyat","Social Studies","Computer","Drawing / Art"];
  open("Progress Report",
@@ -810,7 +1281,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  }
 }
 
-//  Tooltip 
+//  Tooltip
 function Tip({ label, color = '#C8991A', children }) {
  const [show, setShow] = useState(false)
  return (
@@ -837,7 +1308,7 @@ function Tip({ label, color = '#C8991A', children }) {
  )
 }
 
-//  Add / Edit Student Modal 
+//  Add / Edit Student Modal
 function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCredGenerated, paperSettings }) {
  const { classNames, sectionsForClass, localities } = useAcademicStore();
  const { families, addStudentToFamily, createFamily } = useFamilyStore();
@@ -980,7 +1451,7 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  <div style={{ color:"#C8991A", fontSize:13, fontWeight:800 }}>Profile Photo</div>
  <div style={{ color:"#8892A4", fontSize:12, lineHeight:1.7 }}>
  Upload a clear passport-size photo of the student.<br/>
- Use the <span style={{color:"#0D9488",fontWeight: 600}}> AI Apply School Uniform</span> button to automatically apply the official school uniform/coat to the photo — perfect for ID cards and records.
+ Use the <span style={{color:"#0D9488",fontWeight: 600}}> AI Apply School Uniform</span> button to automatically apply the official school uniform/coat to the photo â€” perfect for ID cards and records.
  </div>
  </div>
  </div>
@@ -1009,9 +1480,9 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  {sh("Family Selection (Optional)")}
  <div style={{ gridColumn:"1/-1" }}>
  <label style={lbl}>Link to Existing Family</label>
- <select 
- style={{...inp,cursor:"pointer"}} 
- value={form.familyCode || ""} 
+ <select
+ style={{...inp,cursor:"pointer"}}
+ value={form.familyCode || ""}
  onChange={e=>set("familyCode",e.target.value)}
  >
  <option value="">-- No Family (System will Auto-Assign) --</option>
@@ -1050,7 +1521,7 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  <Plus size={16}/> Add Student Only
  </button>
  <button disabled={savingCombo || !generateChallan} onClick={() => saveStudent(true)} style={{...btnPrimary,flex:1,minWidth:200,justifyContent:"center"}}>
- {savingCombo ? "Saving…" : <><Plus size={16}/> Create Student + First Challan</>}
+ {savingCombo ? "Savingâ€¦" : <><Plus size={16}/> Create Student + First Challan</>}
  </button>
  </>
  ) : (
@@ -1064,7 +1535,7 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  ), document.body);
 }
 
-//  Access Tab (inside ProfileModal) 
+//  Access Tab (inside ProfileModal)
 function AccessTab({ student }) {
  const { generateStudent, regenerateStudent, generateParent, regenerateParent, resetPassword, toggleBlock, deleteAccess } = useUserStore()
  const [showPass, setShowPass] = useState({})
@@ -1104,8 +1575,8 @@ function AccessTab({ student }) {
  .row{display:flex;justify-content:space-between;padding:9px 13px;background:#f0f4ff;border-radius:8px;margin-bottom:8px}
  .lbl{color:#888;font-size:11px;font-weight:600}.val{color:#1a1a2e;font-size:14px;font-weight:700}
  </style></head><body><div class="card">
- <h2>${type} Login Card — Al Siddique OS</h2>
- <p>${student.name} · GR: ${student.gr || student.gr_number || ''} · Class ${student.class}</p>
+ <h2>${type} Login Card â€” Al Siddique OS</h2>
+ <p>${student.name} Â· GR: ${student.gr || student.gr_number || ''} Â· Class ${student.class}</p>
  <div class="row"><span class="lbl">Login ID</span><span class="val">${u.username}</span></div>
  <div class="row"><span class="lbl">Password</span><span class="val">${u.password}</span></div>
  <div class="row"><span class="lbl">Portal</span><span class="val">alsiddique.edu.pk</span></div>
@@ -1135,7 +1606,7 @@ function AccessTab({ student }) {
  </div>
  {u ? (
  <div style={{ display:'grid', gap:8 }}>
- {[['Login ID', u.username, `un_${u.id}`], ['Password', showPass[u.id] ? u.password : '••••••', `pw_${u.id}`]].map(([lbl,val,key])=>(
+ {[['Login ID', u.username, `un_${u.id}`], ['Password', showPass[u.id] ? u.password : 'â€¢â€¢â€¢â€¢â€¢â€¢', `pw_${u.id}`]].map(([lbl,val,key])=>(
  <div key={key} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', background:'rgba(7,30,52,0.6)', borderRadius:10, padding:'10px 14px' }}>
  <div>
  <div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>{lbl}</div>
@@ -1152,7 +1623,7 @@ function AccessTab({ student }) {
  <span style={{ color:u.isActive?'#30D158':'#FF375F', fontWeight:700, fontSize:13 }}>{u.isActive?' Active':' Blocked'}</span>
  </div>
  <div><div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>Last Login</div>
- <span style={{ color:'#C0C8D8', fontSize:12 }}>{u.lastLogin ? new Date(u.lastLogin).toLocaleDateString('en-PK') : '—'}</span>
+ <span style={{ color:'#C0C8D8', fontSize:12 }}>{u.lastLogin ? new Date(u.lastLogin).toLocaleDateString('en-PK') : 'â€”'}</span>
  </div>
  </div>
  </div>
@@ -1181,8 +1652,8 @@ function AccessTab({ student }) {
  {resetTarget && (
  <div style={{ position:'fixed', inset:0, background:'rgba(7,30,52,.85)', backdropFilter:'blur(8px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center' }}>
  <div style={{ background:'#0B2C4D', border:'1px solid rgba(148,163,184,0.2)', borderRadius:18, padding:28, width:340 }}>
- <h3 style={{ color:'#C8991A', margin:'0 0 6px', fontSize:16 }}>New Password — {resetTarget.label}</h3>
- <p style={{ color:'#8892A4', fontSize:12, margin:'0 0 16px' }}>{student.name} · {resetTarget.username}</p>
+ <h3 style={{ color:'#C8991A', margin:'0 0 6px', fontSize:16 }}>New Password â€” {resetTarget.label}</h3>
+ <p style={{ color:'#8892A4', fontSize:12, margin:'0 0 16px' }}>{student.name} Â· {resetTarget.username}</p>
  <input value={newPass} onChange={e=>setNewPass(e.target.value)} placeholder="Naya password..."
  style={{ width:'100%', background:'rgba(11,44,77,.8)', border:'1px solid rgba(148,163,184,.2)', borderRadius:10, color:'#C0C8D8', padding:'10px 13px', fontSize:14, outline:'none', boxSizing:'border-box', marginBottom:16 }}/>
  <div style={{ display:'flex', gap:10 }}>
@@ -1196,7 +1667,7 @@ function AccessTab({ student }) {
  )
 }
 
-//  Profile Modal 
+//  Profile Modal
 function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  const [tab, setTab] = useState("profile");
 
@@ -1213,7 +1684,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  const InfoBlock = ({ label, value }) => (
  <div style={{ padding:"12px 16px", background:"rgba(7,30,52,0.4)", borderRadius:10 }}>
  <div style={{ color:"#8892A4", fontSize:11, marginBottom:4, textTransform:"uppercase", letterSpacing:0.5 }}>{label}</div>
- <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:14 }}>{value||"—"}</div>
+ <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:14 }}>{value||"â€”"}</div>
  </div>
  );
 
@@ -1269,7 +1740,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
 
  {/* Avatar + status */}
  <div style={{ display:"flex", alignItems:"center", gap:16, padding:20, background:"rgba(7,30,52,0.5)", borderRadius:12, marginBottom:20 }}>
- {/* Photo — real image or emoji fallback */}
+ {/* Photo â€” real image or emoji fallback */}
  <div style={{ position:"relative", flexShrink:0 }}>
  {student.photo && !student.photo.includes('') && !student.photo.includes('') ? (
  <img
@@ -1291,7 +1762,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  </div>
  <div style={{ flex:1 }}>
  <h3 style={{ color:"#C0C8D8", fontSize:17, fontWeight:800, margin:0 }}>{student.name}</h3>
- <p style={{ color:"#8892A4", fontSize:13, margin:"4px 0 0" }}>{student.gr} · {student.class} · Section {student.section}</p>
+ <p style={{ color:"#8892A4", fontSize:13, margin:"4px 0 0" }}>{student.gr} Â· {student.class} Â· Section {student.section}</p>
  </div>
  <span style={{ padding:"3px 12px", borderRadius:20, fontSize:11, fontWeight:700, background:student.status==="Active"?"rgba(48,209,88,0.15)":"rgba(255,55,95,0.15)", color:student.status==="Active"?"#30D158":"#FF375F", border:`1px solid ${student.status==="Active"?"#30D158":"#FF375F"}` }}>
  {student.status}
@@ -1421,7 +1892,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  ), document.body);
 }
 
-//  Classwise Reports 
+//  Classwise Reports
 function ClasswiseReports({ students, onPrintClass }) {
  const classMap = {};
  students.forEach(s => {
@@ -1433,7 +1904,7 @@ function ClasswiseReports({ students, onPrintClass }) {
  const classes = Object.entries(classMap).sort(([a],[b])=>a.localeCompare(b));
  return (
  <div className="super-module-card" style={card}>
- <h2 style={{ color:"#C8991A", fontSize:16, fontWeight:800, margin:"0 0 20px" }}> Classwise Student Report — Session 2026-2027</h2>
+ <h2 style={{ color:"#C8991A", fontSize:16, fontWeight:800, margin:"0 0 20px" }}> Classwise Student Report â€” Session 2026-2027</h2>
  <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:16 }}>
  <button onClick={() => onPrintClass?.("All Classes Student List", students)} style={{ ...btnSecondary, padding:"8px 12px" }}><Printer size={14}/> Print All Details</button>
  </div>
@@ -1473,7 +1944,7 @@ function ClasswiseReports({ students, onPrintClass }) {
  );
 }
 
-//  Locality Reports 
+//  Locality Reports
 function LocalityReports({ students }) {
  const localMap = {};
  students.forEach(s => {
@@ -1515,7 +1986,7 @@ function LocalityReports({ students }) {
  );
 }
 
-//  Admission Form Print 
+//  Admission Form Print
 function AdmissionFormPrint({ school }) {
  function printBlankForm() {
  const blank = { name:"", father:"", mother:"", gr:"", class:"", section:"", dob:"", fatherCnic:"", whatsapp:"", phone:"", locality:"", religion:"Muslim", address:"", admissionDate:"", fatherOccupation:"" };
@@ -1531,7 +2002,7 @@ function AdmissionFormPrint({ school }) {
  );
 }
 
-//  Admissions & Withdrawal 
+//  Admissions & Withdrawal
 function AdmissionsReport({ students }) {
  const thisMonth = new Date().toISOString().slice(0,7);
  const thisYear = new Date().getFullYear().toString();
@@ -1578,7 +2049,7 @@ function AdmissionsReport({ students }) {
  );
 }
 
-//  Student Slips 
+//  Student Slips
 function StudentSlips({ students, school }) {
  const [sel, setSel] = useState(null);
  function printSlip(s) {
@@ -1611,11 +2082,11 @@ function StudentSlips({ students, school }) {
  );
 }
 
-//  Main Component 
+//  Main Component
 export default function StudentsModule() {
- const { classNames, allSections } = useAcademicStore();
+ const { classNames, allSections, activeClasses, subjectsForClass } = useAcademicStore();
  const { students: rawStudents, addStudent, deleteStudent, updateStudent } = useStudentStore();
- 
+
   const userRaw = localStorage.getItem('al_siddique_user')
   let isDemo = false
   try {
@@ -1632,6 +2103,7 @@ export default function StudentsModule() {
  const [showDropdown, setShowDropdown] = useState(false);
  const [filterClass, setFilterClass] = useState("All Classes");
  const [filterSection, setFilterSection] = useState("All Sections");
+ const [filterStatus, setFilterStatus] = useState("Active");
  const [showAdd, setShowAdd] = useState(false);
  const [editStudent, setEditStudent] = useState(null);
  const [viewStudent, setViewStudent] = useState(null);
@@ -1663,7 +2135,8 @@ export default function StudentsModule() {
  const matchS = s.name.toLowerCase().includes(q)||s.gr.toLowerCase().includes(q)||s.father.toLowerCase().includes(q);
  const matchC = filterClass==="All Classes"||s.class===filterClass;
  const matchSec = filterSection==="All Sections"||s.section===filterSection;
- return matchS&&matchC&&matchSec;
+ const matchStatus = filterStatus === "All" || (filterStatus === "Active" ? s.status === "Active" : s.status !== "Active");
+ return matchS&&matchC&&matchSec&&matchStatus;
  });
 
  const stats = [
@@ -1717,15 +2190,15 @@ export default function StudentsModule() {
  </div>
  <div>
  <h1 style={{ color:"#C0C8D8", fontSize:24, fontWeight:800, margin:0 }}>Student Management</h1>
- <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session 2026-2027 · {students.length} total students</p>
+ <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session 2026-2027 Â· {students.length} total students</p>
  </div>
  </div>
  <div style={{ display:"flex", gap:10 }}>
- <button 
+ <button
  onClick={() => {
  const sorted = [...students].sort((a,b) => a.class.localeCompare(b.class));
  setPrintList({ type: "Full Student List", data: sorted });
- }} 
+ }}
  style={btnSecondary}
  >
  <Printer size={16}/> Print All Classes
@@ -1856,7 +2329,7 @@ export default function StudentsModule() {
  <span style={{ fontSize:20 }}>{s.photo}</span>
  <div style={{ flex:1 }}>
  <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:13 }}>{s.name}</div>
- <div style={{ color:"#8892A4", fontSize:11 }}>{s.gr} · {s.class} {s.section} · Father: {s.father}</div>
+ <div style={{ color:"#8892A4", fontSize:11 }}>{s.gr} Â· {s.class} {s.section} Â· Father: {s.father}</div>
  </div>
  <span style={{ padding:"2px 8px", background:"rgba(10,132,255,0.12)", border:"1px solid rgba(10,132,255,0.2)", borderRadius:12, fontSize:11, color:"#0A84FF" }}>{s.fee}</span>
  </div>
@@ -1873,9 +2346,15 @@ export default function StudentsModule() {
  style={{ padding:"10px 14px", borderRadius:10, background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none", cursor:"pointer" }}>
  {allSections.map(s=><option key={s}>{s}</option>)}
  </select>
- 
- <button 
- onClick={() => setPrintList({ type: `${filterClass} List`, data: filtered })} 
+ <select value={filterStatus} onChange={e=>setFilterStatus(e.target.value)}
+ style={{ padding:"10px 14px", borderRadius:10, background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:filterStatus==="Active"?"#30D158":filterStatus==="Struck-off"?"#FF375F":"#C0C8D8", fontSize:14, fontWeight:700, outline:"none", cursor:"pointer" }}>
+ <option value="Active">ðŸŸ¢ Active ({students.filter(s=>s.status==="Active").length})</option>
+ <option value="Struck-off">ðŸ”´ Struck-off ({students.filter(s=>s.status!=="Active").length})</option>
+ <option value="All">ðŸ“‹ All Enrolled ({students.length})</option>
+ </select>
+
+ <button
+ onClick={() => setPrintList({ type: `${filterClass} List`, data: filtered })}
  style={{ ...btnSecondary, padding: "8px 12px" }}
  >
  <Printer size={14}/> Print This List
@@ -1885,8 +2364,8 @@ export default function StudentsModule() {
  </div>
 
  {/* Table */}
- <div className="super-module-card" style={card}>
- <table style={{ width:"100%", borderCollapse:"collapse" }}>
+ <div className="super-module-card student-records-table-wrap" style={{ ...card, overflowX:"auto" }}>
+ <table className="student-records-table" style={{ width:"100%", borderCollapse:"collapse" }}>
  <thead>
  <tr style={{ borderBottom:"1px solid rgba(200,153,26,0.2)" }}>
  {["GR No","Student","Father","Class","Contact","Fee","Status","Actions"].map(h=>(
@@ -1914,7 +2393,7 @@ export default function StudentsModule() {
  {(() => {
  const fam = getFamilyForStudent(s.id);
  return fam ? (
- <div 
+ <div
  onClick={(e) => { e.stopPropagation(); navigate('/families'); }}
  style={{ fontSize:10, color:"#0A84FF", cursor:"pointer", marginTop:2 }}
  >
@@ -1924,7 +2403,7 @@ export default function StudentsModule() {
  })()}
  </td>
  <td style={{ padding:"14px" }}>
- <span style={{ padding:"3px 10px", background:"rgba(10,132,255,0.1)", border:"1px solid rgba(10,132,255,0.2)", borderRadius:20, fontSize:12, color:"#0A84FF" }}>{s.class} · {s.section}</span>
+ <span style={{ padding:"3px 10px", background:"rgba(10,132,255,0.1)", border:"1px solid rgba(10,132,255,0.2)", borderRadius:20, fontSize:12, color:"#0A84FF" }}>{s.class} Â· {s.section}</span>
  </td>
  <td style={{ padding:"14px", color:"#8892A4", fontSize:13 }}>{s.contact}</td>
  <td style={{ padding:"14px" }}>
@@ -1941,10 +2420,23 @@ export default function StudentsModule() {
  <Tip label="Edit Student" color="#C8991A">
  <button onClick={()=>setEditStudent(s)} style={{ width:30, height:30, borderRadius:8, background:"rgba(148,163,184,0.18)", border:"1px solid rgba(200,153,26,0.2)", color:"#C8991A", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Edit size={14}/></button>
  </Tip>
- {!isDemo && (
- <Tip label="Delete Student" color="#FF375F">
- <button onClick={()=>{ if(window.confirm(`Delete ${s.name}?`)) deleteStudent(s.id) }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
+ {s.status === "Active" ? (
+ !isDemo && (
+ <Tip label="Struck-off / Remove Student" color="#FF375F">
+ <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to struck-off / remove ${s.name} (GR: ${s.gr})?`)) { await deleteStudent(s.id); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
  </Tip>
+ )
+ ) : (
+ !isDemo && (
+ <>
+ <Tip label="Reactivate / Restore Student" color="#30D158">
+ <button onClick={async ()=>{ if(window.confirm(`Reactivate ${s.name} (GR: ${s.gr}) to Active student roster?`)) { await updateStudent(s.id, { is_active: true }); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(48,209,88,0.15)", border:"1px solid rgba(48,209,88,0.25)", color:"#30D158", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><RotateCcw size={14}/></button>
+ </Tip>
+ <Tip label="Permanently Delete Student" color="#FF375F">
+ <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to permanently delete ${s.name} (GR: ${s.gr})? This will completely remove the student.`)) { await deleteStudent(s.id, true); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
+ </Tip>
+ </>
+ )
  )}
  </div>
  </td>
@@ -1963,6 +2455,7 @@ export default function StudentsModule() {
  )}
 
  {moduleTab==="classwise" && <ClasswiseReports students={students} onPrintClass={(type, data) => setPrintList({ type, data })}/>}
+ {moduleTab==="performance" && <StudentPerformanceSheet students={students} school={paperSettings} classNames={classNames} activeClasses={activeClasses} subjectsForClass={subjectsForClass}/>}
  {moduleTab==="admissions" && <AdmissionsReport students={students}/>}
  {moduleTab==="slips" && <StudentSlips students={filtered} school={paperSettings}/>}
  {moduleTab==="locality" && <LocalityReports students={students}/>}

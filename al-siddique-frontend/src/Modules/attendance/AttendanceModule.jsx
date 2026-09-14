@@ -54,10 +54,30 @@ const selectStyle = {
  color: "#C0C8D8", fontSize: 14, outline: "none", cursor: "pointer",
 };
 
+const ATTENDANCE_CLASS_LABEL_FIXES = {
+ "Pre Nine": "Nine",
+};
+
+function attendanceClassLabel(value) {
+ return ATTENDANCE_CLASS_LABEL_FIXES[value] || value;
+}
+
+function attendanceApiClass(value) {
+ return value === "Pre Nine" ? "Nine" : value;
+}
+
+function attendanceSectionsForClass(className, sectionsForClass) {
+ const direct = sectionsForClass(className);
+ if (direct.length) return direct;
+ if (className === "Nine") return sectionsForClass("Pre Nine");
+ return [];
+}
+
 export default function AttendanceModule() {
  const navigate = useNavigate();
  const [tab, setTab] = useState("mark");
  const { classNames: CLASSES, allSections: SECTION_LIST, sectionsForClass } = useAcademicStore();
+ const attendanceClasses = [...new Set(CLASSES.map(attendanceClassLabel))];
 
  useEffect(() => {
  if (tab === "smart") {
@@ -78,7 +98,7 @@ export default function AttendanceModule() {
  setLoading(true)
  try {
  const attendanceRes = await api.get('/api/attendance', {
- params: { class: selectedClass, section: selectedSection, date: selectedDate },
+ params: { class: attendanceApiClass(selectedClass), section: selectedSection, date: selectedDate },
  })
  const attendanceData = attendanceRes.data?.data || []
  if (attendanceData.length) {
@@ -86,7 +106,7 @@ export default function AttendanceModule() {
  setAttendance(attendanceData.reduce((acc, row) => { acc[row.student_id] = row.status; return acc }, {}))
  return
  }
- const studentRes = await api.get('/api/students', { params: { class: selectedClass, section: selectedSection } })
+ const studentRes = await api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } })
  setStudents((studentRes.data?.data || []).map(transformStudent))
  setAttendance({})
  } catch (err) {
@@ -98,7 +118,7 @@ export default function AttendanceModule() {
 
  useEffect(() => {
  if (!selectedClass) return
- const availableSections = sectionsForClass(selectedClass)
+ const availableSections = attendanceSectionsForClass(selectedClass, sectionsForClass)
  if (availableSections.length && !availableSections.includes(selectedSection)) {
  setSelectedSection(availableSections[0])
  return
@@ -295,10 +315,10 @@ export default function AttendanceModule() {
  {/* Filters */}
  <div className="super-module-card" style={{ ...card, marginBottom: 20, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", borderRadius: 22 }}>
  <select value={selectedClass} onChange={e => setSelectedClass(e.target.value)} style={selectStyle}>
- {CLASSES.map(c => <option key={c}>{c}</option>)}
+ {attendanceClasses.map(c => <option key={c}>{c}</option>)}
  </select>
  <select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} style={selectStyle}>
- {(sectionsForClass(selectedClass).length ? sectionsForClass(selectedClass) : SECTION_LIST.filter(item => item !== 'All')).map(s => <option key={s}>{s}</option>)}
+ {(attendanceSectionsForClass(selectedClass, sectionsForClass).length ? attendanceSectionsForClass(selectedClass, sectionsForClass) : SECTION_LIST.filter(item => item !== 'All')).map(s => <option key={s}>{s}</option>)}
  </select>
  <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
  style={{ ...selectStyle }} />

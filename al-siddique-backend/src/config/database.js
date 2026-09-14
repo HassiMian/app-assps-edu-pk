@@ -18,7 +18,7 @@ const pool = new Pool({
   port:     Number(envOrDev('DB_PORT', 5432)),
   database: envOrDev('DB_NAME', 'alsiddique_db'),
   user:     envOrDev('DB_USER', 'postgres'),
-  password: envOrDev('DB_PASSWORD', 'admin123'),
+  password: envOrDev('DB_PASSWORD', ''),
   max:      Number(envOrDev('DB_POOL_MAX', 20)),
   idleTimeoutMillis:    Number(envOrDev('DB_POOL_IDLE_TIMEOUT', 30000)),
   connectionTimeoutMillis: Number(envOrDev('DB_POOL_CONNECTION_TIMEOUT', 2000)),

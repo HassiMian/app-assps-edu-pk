@@ -4,11 +4,12 @@
 const express = require('express')
 const router  = express.Router()
 const { query } = require('../config/database')
-const { protect, requireRoles } = require('../middleware/auth')
+const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
+const canReadStaff = adminOrServiceScope('school.staff.read')
 
 const EMPLOYEE_WRITE_FIELDS = [
   'father_name',
@@ -74,7 +75,7 @@ function nullableDate(value) {
 }
 
 // GET /api/employees â€” list with search/filter
-router.get('/', protect, canManageStaff, async (req, res) => {
+router.get('/', protect, canReadStaff, async (req, res) => {
   try {
     const { search, active = true } = req.query
     let sql    = 'SELECT * FROM employees WHERE is_active = $1'
@@ -156,7 +157,7 @@ router.get('/', protect, canManageStaff, async (req, res) => {
 })
 
 // GET /api/employees/:id
-router.get('/:id', protect, canManageStaff, async (req, res) => {
+router.get('/:id', protect, canReadStaff, async (req, res) => {
   try {
     let sql = 'SELECT * FROM employees WHERE id = $1'
     const params = [req.params.id]

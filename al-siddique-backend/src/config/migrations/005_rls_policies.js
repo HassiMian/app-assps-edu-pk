@@ -1,6 +1,12 @@
 // src/config/migrations/005_rls_policies.js
 const { query } = require('../database')
 
+function assertSafeTableName(table) {
+  if (!/^[a-z_][a-z0-9_]*$/i.test(table)) {
+    throw new Error(`Unsafe table name in RLS migration: ${table}`)
+  }
+}
+
 async function up() {
   const tables = [
     'students',
@@ -21,23 +27,42 @@ async function up() {
     'fee_discount_applications',
     'employees',
     'exam_results',
-    'events'
+    'events',
   ]
 
+  const skipped = []
+
   for (const table of tables) {
-    // Enable RLS and Force it for the owner
-    await query(`ALTER TABLE IF EXISTS ${table} ENABLE ROW LEVEL SECURITY;`)
-    await query(`ALTER TABLE IF EXISTS ${table} FORCE ROW LEVEL SECURITY;`)
+    assertSafeTableName(table)
 
-    // Drop policy if it already exists to allow re-runs
+    const tableExists = await query('SELECT to_regclass($1) AS table_name', [`public.${table}`])
+    if (!tableExists.rows[0]?.table_name) {
+      skipped.push(`${table} (missing table)`)
+      continue
+    }
+
+    const schoolIdColumn = await query(
+      `SELECT 1
+         FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = $1
+          AND column_name = 'school_id'
+        LIMIT 1`,
+      [table]
+    )
+    if (!schoolIdColumn.rowCount) {
+      skipped.push(`${table} (missing school_id)`)
+      continue
+    }
+
+    await query(`ALTER TABLE ${table} ENABLE ROW LEVEL SECURITY;`)
+    await query(`ALTER TABLE ${table} FORCE ROW LEVEL SECURITY;`)
     await query(`DROP POLICY IF EXISTS tenant_isolation_policy ON ${table};`)
-
-    // Create the isolation policy
     await query(`
       CREATE POLICY tenant_isolation_policy ON ${table}
       FOR ALL
       USING (
-        current_setting('app.rls_enabled', true) IS NULL 
+        current_setting('app.rls_enabled', true) IS NULL
         OR current_setting('app.rls_enabled', true) = 'false'
         OR current_setting('app.is_super_admin', true) = 'true'
         OR school_id = NULLIF(current_setting('app.tenant_id', true), '')::int
@@ -45,7 +70,10 @@ async function up() {
     `)
   }
 
-  console.log('✅ RLS Policies applied to tenant tables.')
+  if (skipped.length) {
+    console.log(`RLS skipped optional tables: ${skipped.join(', ')}`)
+  }
+  console.log('RLS Policies applied to tenant tables.')
 }
 
 module.exports = { up }

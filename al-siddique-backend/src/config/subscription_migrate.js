@@ -75,6 +75,14 @@ async function migrateSubscriptionSchema() {
           subscription_status = COALESCE(subscription_status, 'pending')
       WHERE tenant_id IS NULL OR school_name IS NULL OR subscription_status IS NULL;
     `)
+    await client.query(`
+      UPDATE schools
+      SET tenant_id = 'assps',
+          code = 'assps',
+          school_name = COALESCE(school_name, name, 'Al Siddique Scholars Public School')
+      WHERE id = 1
+        AND (tenant_id IS NULL OR tenant_id = 'default' OR code IS NULL OR code = 'default');
+    `)
     console.log('Schools table tenant/subscription columns verified.')
 
     await client.query(`
@@ -154,6 +162,12 @@ async function migrateSubscriptionSchema() {
           FROM schools s
           WHERE t.tenant_id IS NULL
             AND t.school_id = s.id
+        `)
+        await client.query(`
+          UPDATE ${table}
+          SET tenant_id = 'assps'
+          WHERE school_id = 1
+            AND (tenant_id IS NULL OR tenant_id = 'default')
         `)
       }
       await client.query(`CREATE INDEX IF NOT EXISTS idx_${table}_tenant_id ON ${table}(tenant_id);`)

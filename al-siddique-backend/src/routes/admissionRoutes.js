@@ -1,7 +1,7 @@
 const express = require('express')
 const router  = express.Router()
 const pool    = require('../config/database')
-const { protect, requireRoles } = require('../middleware/auth')
+const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {
   validateSameTenantOrThrow,
@@ -9,10 +9,37 @@ const {
 } = require('../services/tenantCredentialGuard')
 
 const canViewAdmissions = requireRoles('super_admin', 'admin', 'principal')
+const canReadAdmissions = adminOrServiceScope('school.admissions.read')
+
+async function ensureAdmissionsTable() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS admissions (
+      id SERIAL PRIMARY KEY,
+      school_id INTEGER REFERENCES schools(id),
+      tenant_id VARCHAR(80),
+      student_name VARCHAR(150),
+      father_name VARCHAR(150),
+      parent_phone VARCHAR(30),
+      whatsapp_number VARCHAR(30),
+      class_applying VARCHAR(80),
+      gender VARCHAR(30),
+      date_of_birth DATE,
+      previous_school TEXT,
+      message TEXT,
+      status VARCHAR(20) DEFAULT 'pending',
+      created_at TIMESTAMP DEFAULT NOW(),
+      updated_at TIMESTAMP DEFAULT NOW()
+    )
+  `)
+  await pool.query('ALTER TABLE admissions ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id)')
+  await pool.query('ALTER TABLE admissions ADD COLUMN IF NOT EXISTS tenant_id VARCHAR(80)')
+  await pool.query('CREATE INDEX IF NOT EXISTS idx_admissions_school_created ON admissions(school_id, created_at DESC)')
+}
 
 // POST /api/admissions — public, no auth required
 router.post('/', async (req, res) => {
   try {
+    await ensureAdmissionsTable()
     const body = req.body || {}
     const pick = (...keys) => {
       for (const key of keys) {
@@ -103,8 +130,9 @@ router.post('/', async (req, res) => {
 })
 
 // GET /api/admissions — admin only, get all applications
-router.get('/', protect, canViewAdmissions, async (req, res) => {
+router.get('/', protect, canReadAdmissions, async (req, res) => {
   try {
+    await ensureAdmissionsTable()
     const supportsTenant = await hasColumn('admissions', 'school_id')
     const result = supportsTenant && req.user?.role !== 'super_admin'
       ? await pool.query(

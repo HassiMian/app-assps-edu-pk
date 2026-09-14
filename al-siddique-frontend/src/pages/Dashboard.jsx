@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
 import {
   Activity,
   ArrowUpRight,
@@ -215,7 +215,7 @@ function printBirthdayCertificate(student) {
 
 export default function Dashboard() {
   const branding = useTenantBranding()
-  const schoolName = branding?.schoolName || 'Al Siddique Scholars Public School'
+  const schoolName = branding?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
   const navigate = useNavigate()
   const [date, setDate] = useState(new Date())
   const [hidden, setHidden] = useState({})
@@ -230,63 +230,63 @@ export default function Dashboard() {
     return () => clearInterval(timer)
   }, [])
 
-  useEffect(() => {
-    async function fetchAll() {
-      try {
-        setLoading(true)
-        const [studentRes, dashRes] = await Promise.all([
-          api.get('/api/students'),
-          api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
-        ])
-        const allStudents = studentRes.data.data || []
-        const dash = dashRes.data || {}
-        setDashApi(dash)
+  const fetchAll = useCallback(async () => {
+    try {
+      setLoading(true)
+      const [studentRes, dashRes] = await Promise.all([
+        api.get('/api/students'),
+        api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
+      ])
+      const allStudents = studentRes.data.data || []
+      const dash = dashRes.data || {}
+      setDashApi(dash)
 
-        const presentCount = Number(dash.today_present ?? 0)
-        const attPct = Number(dash.today_pct ?? (allStudents.length > 0 ? Math.round((presentCount / allStudents.length) * 100) : 0))
+      const presentCount = Number(dash.today_present ?? 0)
+      const attPct = Number(dash.today_pct ?? (allStudents.length > 0 ? Math.round((presentCount / allStudents.length) * 100) : 0))
 
-        const feeRes = await api.get('/api/fees/summary').catch(() => api.get('/api/fees'))
-        const feeSummary = feeRes.data?.data?.collected !== undefined ? feeRes.data.data : null
-        const allFees = feeSummary ? [] : (feeRes.data.data || [])
-        const paidTotal = feeSummary ? Number(feeSummary.collected || 0) : allFees.filter((fee) => fee.status === 'paid').reduce((sum, fee) => sum + Number(fee.paid_amount || fee.amount || 0), 0)
-        const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.amount || 0), 0)
-        const pendingFees = feeSummary
-          ? Array.from({ length: Number(feeSummary.unpaid_students || 0) })
-          : allFees.filter((fee) => fee.status !== 'paid')
+      const feeRes = await api.get('/api/fees/summary').catch(() => api.get('/api/fees'))
+      const feeSummary = feeRes.data?.data?.collected !== undefined ? feeRes.data.data : null
+      const allFees = feeSummary ? [] : (feeRes.data.data || [])
+      const paidTotal = feeSummary ? Number(feeSummary.collected || 0) : allFees.filter((fee) => fee.status === 'paid').reduce((sum, fee) => sum + Number(fee.paid_amount || fee.amount || 0), 0)
+      const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.amount || 0), 0)
+      const pendingFees = feeSummary
+        ? Array.from({ length: Number(feeSummary.unpaid_students || 0) })
+        : allFees.filter((fee) => fee.status !== 'paid')
 
-        const empRes = await api.get('/api/employees').catch(() => ({ data: { data: [] } }))
-        const empCount = (empRes.data.data || []).length
+      const empRes = await api.get('/api/employees').catch(() => ({ data: { data: [] } }))
+      const empCount = (empRes.data.data || []).length
 
-        const classCounts = {}
-        allStudents.forEach((student) => {
-          const className = student.class || 'Unassigned'
-          classCounts[className] = (classCounts[className] || 0) + 1
-        })
-        const classArr = Object.entries(classCounts)
-          .map(([name, count]) => ({ name, count }))
-          .sort((a, b) => String(a.name).localeCompare(String(b.name)))
+      const classCounts = {}
+      allStudents.forEach((student) => {
+        const className = student.class || 'Unassigned'
+        classCounts[className] = (classCounts[className] || 0) + 1
+      })
+      const classArr = Object.entries(classCounts)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => String(a.name).localeCompare(String(b.name)))
 
-        setStats({
-          totalStudents: allStudents.length,
-          attPct,
-          presentCount,
-          paidTotal,
-          pendingTotal,
-          empCount,
-          pendingCount: feeSummary ? Number(feeSummary.unpaid_students || 0) : pendingFees.length,
-          overdueChallans: feeSummary ? Number(feeSummary.overdue_challans || 0) : 0,
-        })
-        setStudents(allStudents)
-        setClassData(classArr)
-      } catch (err) {
-        console.error('Dashboard fetch error:', err)
-      } finally {
-        setLoading(false)
-      }
+      setStats({
+        totalStudents: allStudents.length,
+        attPct,
+        presentCount,
+        paidTotal,
+        pendingTotal,
+        empCount,
+        pendingCount: feeSummary ? Number(feeSummary.unpaid_students || 0) : pendingFees.length,
+        overdueChallans: feeSummary ? Number(feeSummary.overdue_challans || 0) : 0,
+      })
+      setStudents(allStudents)
+      setClassData(classArr)
+    } catch (err) {
+      console.error('Dashboard fetch error:', err)
+    } finally {
+      setLoading(false)
     }
-
-    fetchAll()
   }, [])
+
+  useEffect(() => {
+    fetchAll()
+  }, [fetchAll])
 
   const dashboardStats = useMemo(() => {
     if (!stats) return []
@@ -504,6 +504,7 @@ export default function Dashboard() {
             <AttendanceStatsCard
               stats={dashApi?.attendance_stats}
               loading={false}
+              onRefresh={fetchAll}
             />
             <AdmissionWithdrawalStatsCard
               stats={dashApi?.admission_withdrawal}

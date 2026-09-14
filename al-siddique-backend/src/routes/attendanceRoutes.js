@@ -2,7 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const { query } = require('../config/database')
-const { protect, requireRoles } = require('../middleware/auth')
+const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {
   getTwilioConfigForSchool,
@@ -12,6 +12,30 @@ const {
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
 const canMarkAttendance = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const ATTENDANCE_STATUSES = ['present', 'absent', 'leave', 'late']
+const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'teacher'])
+
+function scopedAttendanceReadClause(req, alias = 's', startIndex = 1) {
+  const role = String(req.user?.role || '').toLowerCase()
+  const prefix = alias ? `${alias}.` : ''
+  if (ATTENDANCE_READ_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.attendance.read')) {
+    return { clause: '', params: [], nextIndex: startIndex }
+  }
+  if (role === 'parent') {
+    return { clause: ` AND ${prefix}parent_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
+  }
+  if (role === 'student') {
+    return { clause: ` AND ${prefix}student_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
+  }
+  return { clause: ' AND 1=0', params: [], nextIndex: startIndex }
+}
+
+function requireAttendanceAnalyticsAccess(req, res, next) {
+  const role = String(req.user?.role || '').toLowerCase()
+  if (ATTENDANCE_READ_ROLES.has(role)) return next()
+  if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.attendance.read')) return next()
+  return res.status(403).json({ success: false, message: 'Attendance analytics/report access denied.' })
+}
 
 function normalizeAttendanceStatus(status) {
   const value = String(status || '').trim().toLowerCase()
@@ -100,7 +124,7 @@ async function notifyParent(phone, studentName, status, date, twilioClient, twil
 }
 
 // GET /api/attendance
-router.get('/', protect, async (req, res) => {
+router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), async (req, res) => {
   try {
     const { class: cls, section, date } = req.query
     let sql = `
@@ -115,6 +139,10 @@ router.get('/', protect, async (req, res) => {
     sql += tenant.clause
     params.push(...tenant.params)
     i = tenant.nextIndex
+    const readScope = scopedAttendanceReadClause(req, 's', i)
+    sql += readScope.clause
+    params.push(...readScope.params)
+    i = readScope.nextIndex
     if (date) { sql += ` AND a.date = $${i++}`; params.push(date) }
     if (cls) { sql += ` AND s.class = $${i++}`; params.push(cls) }
     if (section) { sql += ` AND s.section = $${i++}`; params.push(section) }
@@ -303,7 +331,7 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
 
 // GET /api/attendance/history/:studentId â€” student attendance history
 // GET /api/attendance/history â€” query-based attendance history
-router.get('/history', protect, async (req, res) => {
+router.get('/history', protect, requireScopeForServiceOnly('school.attendance.read'), async (req, res) => {
   try {
     const {
       studentId,
@@ -349,6 +377,10 @@ router.get('/history', protect, async (req, res) => {
     sql += tenant.clause
     params.push(...tenant.params)
     i = tenant.nextIndex
+    const readScope = scopedAttendanceReadClause(req, 's', i)
+    sql += readScope.clause
+    params.push(...readScope.params)
+    i = readScope.nextIndex
 
     if (requestedStudentId) {
       sql += ` AND a.student_id = $${i++}`
@@ -407,7 +439,7 @@ router.get('/history', protect, async (req, res) => {
   }
 })
 
-router.get('/history/:studentId', protect, async (req, res) => {
+router.get('/history/:studentId', protect, requireScopeForServiceOnly('school.attendance.read'), async (req, res) => {
   try {
     const { studentId } = req.params
     const { from, to, status } = req.query
@@ -428,6 +460,10 @@ router.get('/history/:studentId', protect, async (req, res) => {
       sql += ` AND s.school_id = $${i++}`
       params.push(schoolId)
     }
+    const readScope = scopedAttendanceReadClause(req, 's', i)
+    sql += readScope.clause
+    params.push(...readScope.params)
+    i = readScope.nextIndex
 
     if (from) {
       sql += ` AND a.date >= $${i++}`
@@ -453,7 +489,7 @@ router.get('/history/:studentId', protect, async (req, res) => {
 })
 
 // GET /api/attendance/analytics â€” class and student level analytics
-router.get('/analytics', protect, async (req, res) => {
+router.get('/analytics', protect, requireScopeForServiceOnly('school.attendance.read'), requireAttendanceAnalyticsAccess, async (req, res) => {
   try {
     const { class: cls, section, from, to } = req.query
     const schoolId = currentSchoolId(req)
@@ -559,7 +595,7 @@ router.get('/analytics', protect, async (req, res) => {
 })
 
 // GET /api/attendance/report â€” generate attendance report
-router.get('/report', protect, async (req, res) => {
+router.get('/report', protect, requireScopeForServiceOnly('school.attendance.read'), requireAttendanceAnalyticsAccess, async (req, res) => {
   try {
     const { class: cls, section, from, to, format = 'json' } = req.query
     const schoolId = currentSchoolId(req)

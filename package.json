@@ -9,6 +9,12 @@
     "dev:backend": "npm --prefix al-siddique-backend/src run dev",
     "start:backend": "npm --prefix al-siddique-backend/src run start",
     "migrate:backend": "npm --prefix al-siddique-backend/src run migrate",
-    "smoke:paper-ai": "npm --prefix al-siddique-backend/src run smoke:paper-ai"
+    "smoke:paper-ai": "npm --prefix al-siddique-backend/src run smoke:paper-ai",
+    "production:safety": "node ops/production-safety-check.js",
+    "release:manifest": "node ops/release-candidate-manifest.js",
+    "live:contract": "node ops/live-route-contract-check.js",
+    "verify:local": "node ops/verify-local.js",
+    "deploy:production:dry-run": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1",
+    "deploy:production": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1 -Apply"
   }
 }

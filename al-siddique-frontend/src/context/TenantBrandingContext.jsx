@@ -6,7 +6,7 @@ import { getTenantStorageItem, setTenantStorageItem } from "../services/tenantSt
 const DEFAULT_BRANDING = {
   schoolId: null,
   tenantId: null,
-  schoolName: "APEX",
+  schoolName: "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
   logoUrl: null,
   address: "",
   primaryColor: "#071e34",

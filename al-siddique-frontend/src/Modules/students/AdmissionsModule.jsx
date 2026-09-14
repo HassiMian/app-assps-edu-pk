@@ -14,97 +14,13 @@ const MONTHS = ['January','February','March','April','May','June','July','August
 
 const blank = { name: '', father_name: '', mother_name: '', father_cnic: '', father_occupation: '', locality: '', studentClass: 'Starter', section: 'Blue', date_of_birth: '', parent_phone: '', parent_whatsapp: '', b_form_number: '', blood_group: '', religion: '', previous_school: '', gender: 'male', address: '', photo: null }
 
+import { renderCanonicalAdmissionFormHtml } from '../../services/canonicalDocumentTemplates'
+
 function printAdmissionForm(student, school) {
- const sn = school.schoolName || 'Al Siddique Scholars Public School'
- const su = school.schoolUrdu || 'الصدیق اسکالرز پبلک اسکول'
- const sa = school.address || 'Sharif Chowk, Rayya Khas, Narowal'
- const sl = school.logo || ''
- const showUrdu = school.showUrduHeader !== false
-
- const logoHtml = sl
- ? `<img src="${sl}" style="height:85px;object-fit:contain;display:block;margin:0 auto 8px">`
- : `<div style="width:80px;height:80px;border-radius:50%;border:3px solid #071e34;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:28px;color:#071e34;background:#fff">A</div>`
-
- const html = `
- <!DOCTYPE html><html><head><meta charset="UTF-8"><title>Admission Form - ${student.name}</title>
- <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
- <style>
- body{margin:0;padding:40px;font-family:Arial,sans-serif;color:#000;line-height:1.6}
- .card{max-width:800px;margin:0 auto;border:2px solid #071e34;padding:30px;position:relative;min-height:270mm}
- .header{text-align:center;margin-bottom:30px;border-bottom:3px double #071e34;padding-bottom:15px}
- .photo-box{position:absolute;right:30px;top:140px;width:120px;height:150px;border:1px solid #000;display:flex;align-items:center;justify-content:center;font-size:12px;background:#f9f9f9}
- h1{margin:10px 0 5px;font-size:24px;text-transform:uppercase;color:#071e34}
- .urdu{font-family:'Noto Nastaliq Urdu',serif;font-size:20px;direction:rtl;margin-bottom:8px}
- .form-title{background:#071e34;color:#fff;padding:8px;text-align:center;font-weight:bold;font-size:18px;margin-bottom:30px;letter-spacing:2px}
- .section{margin-bottom:25px}
- .section-title{border-bottom:1px solid #071e34;font-weight:bold;margin-bottom:15px;color:#071e34;text-transform:uppercase;font-size:14px}
- .row{display:flex;gap:20px;margin-bottom:15px}
- .field{flex:1;border-bottom:1px solid #ddd;padding-bottom:4px}
- .field label{font-size:11px;color:#666;display:block;font-weight:bold;text-transform:uppercase}
- .field span{font-size:15px;font-weight:bold;color:#000}
- .footer{margin-top:50px;display:flex;justify-content:space-between}
- .sig{width:200px;text-align:center;border-top:1px solid #000;padding-top:8px;font-size:13px;font-weight:bold}
- </style></head><body>
- <div class="card">
- <div class="header">
- ${logoHtml}
- ${showUrdu ? `<div class="urdu">${su}</div>` : ''}
- <h1>${sn}</h1>
- <div style="font-size:12px;color:#444">${sa}</div>
- </div>
- 
- <div class="form-title">STUDENT ADMISSION FORM</div>
- 
- <div class="photo-box">
- ${student.photo ? `<img src="${student.photo}" style="width:100%;height:100%;object-fit:cover">` : 'Passport Size Photo'}
- </div>
-
- <div class="section">
- <div class="section-title">Student Information</div>
- <div class="row">
- <div class="field"><label>Full Name</label><span>${student.name}</span></div>
- <div class="field" style="max-width:200px"><label>GR Number</label><span>${student.gr_number}</span></div>
- </div>
- <div class="row">
- <div class="field"><label>Father / Guardian Name</label><span>${student.father_name}</span></div>
- <div class="field"><label>Date of Birth</label><span>${student.date_of_birth || '—'}</span></div>
- </div>
- <div class="row">
- <div class="field"><label>Class Admitted</label><span>${student.class}</span></div>
- <div class="field"><label>Section</label><span>${student.section || '—'}</span></div>
- <div class="field"><label>Gender</label><span>${student.gender}</span></div>
- </div>
- </div>
-
- <div class="section">
- <div class="section-title">Contact & Address</div>
- <div class="row">
- <div class="field"><label>Parent Phone</label><span>${student.parent_phone}</span></div>
- <div class="field"><label>Address</label><span>${student.address || '—'}</span></div>
- </div>
- </div>
-
- <div class="section" style="margin-top:40px">
- <div class="section-title">Declaration</div>
- <p style="font-size:12px;color:#333;text-align:justify">
- I hereby declare that the information provided above is correct to the best of my knowledge. 
- I agree to abide by the rules and regulations of the institution as mentioned in the school policy. 
- I understand that the admission is subject to the verification of documents and clearance of dues.
- </p>
- </div>
-
- <div class="footer">
- <div class="sig">Parent / Guardian Signature</div>
- <div class="sig">Principal / Office Incharge</div>
- </div>
-
- </div>
- <script>window.onload=()=>window.print()</script>
- </body></html>
- `
- const w = window.open('', '_blank', 'width=900,height=800')
- w.document.write(html)
- w.document.close()
+  const html = renderCanonicalAdmissionFormHtml(student, school)
+  const w = window.open('', '_blank', 'width=900,height=800')
+  w.document.write(html)
+  w.document.close()
 }
 
 export default function AdmissionsModule() {
