@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Printer, Save, Plus, X } from 'lucide-react'
-import { useAcademicStore } from '../services/useAcademicStore'
+import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../services/useAcademicStore'
 import { useStudentStore } from '../services/useStudentStore'
 import { usePaperStore } from './Paper-Generator/usePaperStore'
 import {
@@ -51,13 +51,24 @@ function writeSheets(rows) {
  }
 }
 
-function clsValue(value) {
- return String(value || '').replace(/^Class\s+/i, '')
+function sameClass(left, right) {
+ if (!left || !right) return false
+ const cleanLeft = String(left).replace(/^Class\s+/i, '')
+ const cleanRight = String(right).replace(/^Class\s+/i, '')
+ return classLevelsMatch(cleanLeft, cleanRight)
 }
 
 function clsLabel(value) {
  if (!value) return ''
- return /^Class\s/i.test(String(value)) ? value : `Class ${value}`
+ return classLevelLabel(value) || (/^Class\s/i.test(String(value)) ? value : `Class ${value}`)
+}
+
+function studentClass(student = {}) {
+ return student.class || student.class_name || student.className || student.class_level || student.grade
+}
+
+function isActiveStudent(student = {}) {
+ return student.is_active !== false && String(student.status || 'Active').toLowerCase() !== 'inactive'
 }
 
 function dayName(date) {
@@ -261,8 +272,9 @@ export default function DateSheet() {
  setWarning(rows.length ? `${rows.length} date sheet records saved.` : 'Please select at least one date and subject.')
  }
 
- const printableRows = sheets.filter(row => row.session === printSession && row.term === printTerm && clsValue(row.class) === clsValue(printClass))
- const printableStudents = students.filter(student => clsValue(student.class) === clsValue(printClass))
+ const printableRows = sheets.filter(row => row.session === printSession && row.term === printTerm && sameClass(row.class, printClass))
+ const printableStudents = students.filter(student => isActiveStudent(student) && sameClass(studentClass(student), printClass))
+ const printablePreviewRows = [...printableRows].sort((a, b) => String(a.date).localeCompare(String(b.date)))
  const print = () => {
  if (!printableRows.length) return setWarning('No saved date sheet found for the selected class, session, and term.')
  if (!printableStudents.length) return setWarning('No students found for the selected class.')
@@ -467,6 +479,33 @@ export default function DateSheet() {
  <span>{printableRows.length} saved papers | {printableStudents.length} students</span>
  <button type="button" style={styles.button} onClick={print}><Printer size={15} /> Print</button>
  </div>
+ {printablePreviewRows.length > 0 && (
+ <div style={{ border:'1px solid rgba(148,163,184,0.12)', borderRadius:14, overflow:'hidden', background:'rgba(15,23,42,0.35)' }}>
+ <div style={{ padding:'10px 14px', color:'#e2e8f0', fontWeight:700, borderBottom:'1px solid rgba(148,163,184,0.1)' }}>
+ {clsLabel(printClass)} - {printTerm} preview
+ </div>
+ <table style={{ width:'100%', borderCollapse:'collapse', fontSize:13, color:'#cbd5e1' }}>
+ <thead>
+ <tr style={{ background:'rgba(15,23,42,0.55)', color:'#94a3b8', textTransform:'uppercase', fontSize:11 }}>
+ <th style={{ textAlign:'left', padding:'9px 12px' }}>Date</th>
+ <th style={{ textAlign:'left', padding:'9px 12px' }}>Day</th>
+ <th style={{ textAlign:'left', padding:'9px 12px' }}>Subject</th>
+ <th style={{ textAlign:'left', padding:'9px 12px' }}>Time</th>
+ </tr>
+ </thead>
+ <tbody>
+ {printablePreviewRows.map(row => (
+ <tr key={row.id} style={{ borderTop:'1px solid rgba(148,163,184,0.08)' }}>
+ <td style={{ padding:'10px 12px', fontWeight:700 }}>{prettyDate(row.date)}</td>
+ <td style={{ padding:'10px 12px' }}>{dayName(row.date)}</td>
+ <td style={{ padding:'10px 12px', color:'#fff', fontWeight:700 }}>{(row.subjects || []).join(', ')}</td>
+ <td style={{ padding:'10px 12px' }}>{(row.times || []).filter(Boolean).join(' / ') || '-'}</td>
+ </tr>
+ ))}
+ </tbody>
+ </table>
+ </div>
+ )}
  </div>
  </div>
  </div>
