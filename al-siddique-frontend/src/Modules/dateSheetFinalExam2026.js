@@ -1,7 +1,9 @@
 export const FINAL_EXAM_SESSION = '2026-2027'
-export const FINAL_EXAM_TERM = 'Annual Exam'
-export const FINAL_EXAM_SEED_KEY = 'al_siddique_date_sheets_final_exam_2026_2027_seed'
-export const FINAL_EXAM_SEED_VERSION = 'assps-final-exam-2026-2027-v1'
+export const FINAL_EXAM_TERM = 'First Term Exam'
+export const FINAL_EXAM_SEED_KEY = 'al_siddique_date_sheets_first_term_exam_2026_2027_seed'
+export const FINAL_EXAM_SEED_VERSION = 'assps-first-term-exam-2026-2027-v1'
+
+const LEGACY_MISTAKEN_SEED_VERSIONS = ['assps-final-exam-2026-2027-v1']
 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
@@ -148,6 +150,12 @@ function buildFinalExamRows() {
   )
 }
 
+function isManagedSeedRow(row) {
+  const id = String(row?.id || '')
+  return [FINAL_EXAM_SEED_VERSION, ...LEGACY_MISTAKEN_SEED_VERSIONS]
+    .some(version => id.startsWith(`${version}-`))
+}
+
 export function validateFinalExamRows(rows = []) {
   const issues = []
   const finalRows = rows.filter(row => row.session === FINAL_EXAM_SESSION && row.term === FINAL_EXAM_TERM)
@@ -171,7 +179,7 @@ export function validateFinalExamRows(rows = []) {
 
   const requiredRows = buildFinalExamRows()
   if (finalRows.length !== requiredRows.length) {
-    issues.push(`Expected ${requiredRows.length} final exam rows, found ${finalRows.length}`)
+    issues.push(`Expected ${requiredRows.length} first term exam rows, found ${finalRows.length}`)
   }
 
   requiredRows.forEach((expected) => {
@@ -193,6 +201,9 @@ export function validateFinalExamRows(rows = []) {
 
 export function mergeFinalExamRows(existingRows = []) {
   const safeRows = Array.isArray(existingRows) ? existingRows : []
-  const keptRows = safeRows.filter(row => !(row.session === FINAL_EXAM_SESSION && row.term === FINAL_EXAM_TERM))
+  const keptRows = safeRows.filter(row =>
+    !isManagedSeedRow(row) &&
+    !(row.session === FINAL_EXAM_SESSION && row.term === FINAL_EXAM_TERM)
+  )
   return [...keptRows, ...buildFinalExamRows()]
 }
