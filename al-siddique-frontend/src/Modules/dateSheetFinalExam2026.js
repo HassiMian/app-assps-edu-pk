@@ -1,13 +1,14 @@
 export const FINAL_EXAM_SESSION = '2026-2027'
 export const FINAL_EXAM_TERM = 'First Term Exam'
 export const FINAL_EXAM_SEED_KEY = 'al_siddique_date_sheets_first_term_exam_2026_2027_seed'
-export const FINAL_EXAM_SEED_VERSION = 'assps-first-term-exam-2026-2027-v3'
+export const FINAL_EXAM_SEED_VERSION = 'assps-first-term-exam-2026-2027-v4'
 export const FINAL_EXAM_PAPER_TIME = '10:00 AM - 12:00 PM'
 
 const LEGACY_MISTAKEN_SEED_VERSIONS = [
   'assps-final-exam-2026-2027-v1',
   'assps-first-term-exam-2026-2027-v1',
   'assps-first-term-exam-2026-2027-v2',
+  'assps-first-term-exam-2026-2027-v3',
 ]
 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -45,7 +46,7 @@ const MATRIX = {
   '2026-09-29': {
     2: 'English',
     4: 'English',
-    6: 'English A',
+    6: 'English',
     8: 'English',
   },
   '2026-09-30': {
@@ -76,7 +77,6 @@ const MATRIX = {
     2: 'Urdu',
     4: 'Urdu',
     6: 'Urdu',
-    7: 'Science',
     8: 'Urdu',
   },
   '2026-10-05': {
@@ -86,13 +86,12 @@ const MATRIX = {
     1: 'Science',
     3: 'Science',
     5: 'Science',
-    6: 'Science',
-    7: 'Social Studies',
+    7: 'Science',
   },
   '2026-10-06': {
     2: 'Science',
     4: 'Science',
-    6: 'English B',
+    6: 'Science',
     8: 'Science',
   },
   '2026-10-07': {
@@ -102,14 +101,13 @@ const MATRIX = {
     1: 'Islamiyat',
     3: 'General Knowledge Written',
     5: 'Social Studies',
-    7: 'English B',
+    7: 'Social Studies',
     8: 'Computer',
   },
   '2026-10-08': {
     2: 'Islamiyat',
     4: 'Social Studies',
     6: 'Social Studies',
-    7: 'Islamiyat',
   },
   '2026-10-09': {
     starter: 'Urdu Oral',
@@ -120,6 +118,7 @@ const MATRIX = {
     4: 'Islamiyat',
     5: 'Islamiyat',
     6: 'Islamiyat',
+    7: 'Islamiyat',
     8: 'Islamiyat',
   },
   '2026-10-10': {
