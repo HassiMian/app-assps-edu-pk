@@ -1006,9 +1006,17 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  <td style={{ padding:'10px 12px' }}>
  {item.status === 'paid'
  ? <div style={{ color:C.green, fontWeight:700, fontSize:12 }}> {money(item.paid_amount || netPayable(item))}</div>
- : <button style={{ ...payActionButton, ...tableActionButton, minWidth:80 }} onClick={()=>openPayment(item)}>
- {item.status === 'partial' ? 'Partially Pay' : 'Pay Now'}
- </button>
+ : <button
+     type="button"
+     style={{ ...payActionButton, ...tableActionButton, minWidth:80, cursor:'pointer', touchAction:'manipulation', WebkitTapHighlightColor:'transparent' }}
+     onClick={(e) => {
+       e.preventDefault()
+       e.stopPropagation()
+       openPayment(item)
+     }}
+   >
+     {item.status === 'partial' ? 'Partially Pay' : 'Pay Now'}
+   </button>
  }
  </td>
  <td style={{ padding:'10px 12px' }}>
@@ -1069,12 +1077,12 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  document.body
  )}
 
- {editChallan && (
+ {editChallan && typeof document !== 'undefined' && createPortal(
  <div style={{
- position:'fixed', inset:0, zIndex:1000, background:'rgba(2,12,24,0.72)', backdropFilter:'blur(10px)',
- display:'flex', alignItems:'center', justifyContent:'center', padding:20,
+ position:'fixed', inset:0, zIndex:10000, background:'rgba(2,12,24,0.78)', backdropFilter:'blur(10px)',
+ display:'flex', alignItems:'center', justifyContent:'center', padding:16,
  }}>
- <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.55)' }}>
+ <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.65)' }}>
  <div style={{ display:'flex', justifyContent:'space-between', gap:16, alignItems:'flex-start', marginBottom:18 }}>
  <div>
  <div style={{ color:C.gold, fontWeight:900, fontSize:22 }}>Edit Challan & Monthly Fee</div>
@@ -1172,15 +1180,16 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  </button>
  </div>
  </div>
- </div>
+ </div>,
+ document.body
  )}
 
- {paymentChallan && (
+ {paymentChallan && typeof document !== 'undefined' && createPortal(
  <div style={{
- position:'fixed', inset:0, zIndex:1000, background:'rgba(2,12,24,0.72)', backdropFilter:'blur(10px)',
- display:'flex', alignItems:'center', justifyContent:'center', padding:20,
+ position:'fixed', inset:0, zIndex:10000, background:'rgba(2,12,24,0.78)', backdropFilter:'blur(10px)',
+ display:'flex', alignItems:'center', justifyContent:'center', padding:16,
  }}>
- <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.55)' }}>
+ <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.65)' }}>
  <div style={{ display:'flex', justifyContent:'space-between', gap:16, alignItems:'flex-start', marginBottom:18 }}>
  <div>
  <div style={{ color:C.gold, fontWeight:900, fontSize:22 }}>Receive Fee Payment</div>
@@ -1203,7 +1212,7 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  ))}
  </div>
 
- <div style={{ display:'grid', gridTemplateColumns:'repeat(4, minmax(0, 1fr))', gap:10, marginBottom:18 }}>
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(130px, 1fr))', gap:10, marginBottom:18 }}>
  <div style={{ background:'rgba(15,23,42,0.62)', border:`1px solid ${C.border}`, borderRadius:12, padding:12 }}>
  <div style={{ color:C.muted, fontSize:11, fontWeight:800 }}>Gross Fee</div>
  <div style={{ color:C.silver, fontWeight:900, marginTop:6 }}>Rs. {money(paymentChallan.amount)}</div>
@@ -1287,8 +1296,9 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  </button>
  </div>
  </div>
- </div>
+ </div>,
+ document.body
  )}
  </div>
- )
+)
 }

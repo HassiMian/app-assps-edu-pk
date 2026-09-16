@@ -551,7 +551,16 @@ router.get('/', protect, async (req, res) => {
     if (status)     { sql += ` AND f.status = $${i++}`;                             params.push(status) }
     if (month)      { sql += ` AND LOWER(TRIM(f.month)) = LOWER(TRIM($${i++}))`;    params.push(month) }
     if (year)       { sql += ` AND f.year = $${i++}`;                               params.push(Number(year)) }
-    if (cls)        { sql += ` AND s.class = $${i++}`;                              params.push(cls) }
+    if (cls) {
+      const norm = String(cls).trim().toLowerCase()
+      if (['9', 'nine', 'pre nine', 'pre-nine', 'class 9'].includes(norm)) {
+        sql += ` AND (s.class ILIKE '9' OR s.class ILIKE 'Nine' OR s.class ILIKE 'Pre Nine')`
+      } else {
+        sql += ` AND (s.class = $${i} OR s.class ILIKE $${i})`
+        params.push(cls)
+        i++
+      }
+    }
     if (student_id) { sql += ` AND f.student_id = $${i++}`;                         params.push(Number(student_id)) }
     sql += ' ORDER BY f.created_at DESC'
 
