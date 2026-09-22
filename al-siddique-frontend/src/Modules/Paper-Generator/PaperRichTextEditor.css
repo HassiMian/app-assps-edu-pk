@@ -1,0 +1,89 @@
+.paper-rte {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #17212f;
+  font: 13px Arial, sans-serif;
+}
+
+.paper-rte-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px 0;
+  padding: 5px;
+  border-bottom: 1px solid #dbe2e9;
+  background: #f7f9fb;
+}
+
+.paper-rte-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 5px;
+  border-right: 1px solid #d9e0e7;
+}
+
+.paper-rte-group:last-child { border-right: 0; }
+
+.paper-rte-tool {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #334155;
+  cursor: pointer;
+}
+
+.paper-rte-tool:hover:not(:disabled), .paper-rte-tool.is-active {
+  border-color: #a7bfd0;
+  background: #e4f0f5;
+  color: #0a526d;
+}
+
+.paper-rte-tool:disabled, .paper-rte-select:disabled { opacity: .4; cursor: not-allowed; }
+.paper-rte-tool:focus-visible, .paper-rte-select:focus-visible, .paper-rte-content:focus-visible { outline: 2px solid #087e99; outline-offset: 1px; }
+
+.paper-rte-select {
+  max-width: 126px;
+  height: 28px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  color: #273449;
+  font: inherit;
+}
+
+.paper-rte-palette { display: inline-flex; align-items: center; gap: 3px; }
+.paper-rte-palette .paper-rte-select { max-width: 92px; }
+.paper-rte-palette-icon { font-size: 15px; font-weight: 700; }
+.paper-rte-palette i { width: 8px; height: 19px; border: 1px solid #9ca3af; border-radius: 2px; }
+
+.paper-rte-content {
+  min-height: 150px;
+  padding: 10px 12px;
+  outline: none;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.55;
+}
+
+.paper-rte-content[dir="rtl"] { font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif; line-height: 2; }
+.paper-rte-content > :first-child, .paper-rich-text-renderer > :first-child { margin-top: 0; }
+.paper-rte-content > :last-child, .paper-rich-text-renderer > :last-child { margin-bottom: 0; }
+.paper-rte-content table, .paper-rich-text-renderer table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.paper-rte-content th, .paper-rte-content td, .paper-rich-text-renderer th, .paper-rich-text-renderer td { min-width: 35px; padding: 5px 7px; border: 1px solid #94a3b8; vertical-align: top; }
+.paper-rte-content th, .paper-rich-text-renderer th { background: #eef4f6; font-weight: 700; }
+.paper-rte-content blockquote, .paper-rich-text-renderer blockquote { margin-inline: 0; padding-inline-start: 12px; border-inline-start: 3px solid #8aaeba; }
+.paper-rte-content pre, .paper-rich-text-renderer pre { overflow-x: auto; }
+.paper-rich-text-renderer { overflow-wrap: anywhere; white-space: pre-wrap; }
+
+@media (max-width: 600px) {
+  .paper-rte-toolbar { max-height: 160px; overflow-y: auto; }
+  .paper-rte-group { border-right: 0; }
+  .paper-rte-select { max-width: 104px; }
+}

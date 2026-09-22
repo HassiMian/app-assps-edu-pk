@@ -70,6 +70,9 @@ async function query(text, params) {
       console.error('DB Query Error (RLS):', err.message)
       throw err
     } finally {
+      try {
+        await client.query("SELECT set_config('app.rls_enabled', 'false', false), set_config('app.is_super_admin', 'false', false), set_config('app.tenant_id', '', false)")
+      } catch (_) {}
       client.release()
     }
   } else {

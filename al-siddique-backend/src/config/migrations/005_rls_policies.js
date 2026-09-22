@@ -62,8 +62,7 @@ async function up() {
       CREATE POLICY tenant_isolation_policy ON ${table}
       FOR ALL
       USING (
-        current_setting('app.rls_enabled', true) IS NULL
-        OR current_setting('app.rls_enabled', true) = 'false'
+        current_setting('app.rls_enabled', true) IS DISTINCT FROM 'true'
         OR current_setting('app.is_super_admin', true) = 'true'
         OR school_id = NULLIF(current_setting('app.tenant_id', true), '')::int
       );

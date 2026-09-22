@@ -3,6 +3,7 @@ import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
 const api = axios.create({
  baseURL: '',
+ timeout: 15000,
 })
 
 export function resolveAssetUrl(value) {
