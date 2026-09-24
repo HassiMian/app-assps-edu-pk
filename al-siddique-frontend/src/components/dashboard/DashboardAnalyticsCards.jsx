@@ -1,7 +1,9 @@
-﻿import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
+import { getPakistanDateString, formatPakistanDateDisplay } from '../../utils/dateUtils'
+import { emitAttendanceUpdated, onAttendanceUpdated } from '../../utils/attendanceEvents'
 import {
   UserPlus,
   UserMinus,
@@ -19,6 +21,7 @@ import {
   Zap,
   Loader2,
   ExternalLink,
+  AlertTriangle,
 } from 'lucide-react'
 
 const glass = {
@@ -69,10 +72,11 @@ function ViewAllLink({ onClick }) {
   )
 }
 
-function StatCell({ icon: Icon, label, value, color, bg, subtitle, onClick, clickable }) {
+function StatCell({ icon: Icon, label, value, color, bg, subtitle, onClick, clickable, testId }) {
   return (
     <div
       onClick={onClick}
+      data-testid={testId || undefined}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -97,8 +101,8 @@ function StatCell({ icon: Icon, label, value, color, bg, subtitle, onClick, clic
 
 function UnmarkedAttendanceModal({ onClose, onRefresh }) {
   const navigate = useNavigate()
-  const today = new Date().toISOString().slice(0, 10)
-  const todayDisplay = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })
+  const today = getPakistanDateString()
+  const todayDisplay = formatPakistanDateDisplay(undefined, 'long')
 
   const [loading, setLoading] = useState(true)
   const [students, setStudents] = useState([])
@@ -108,6 +112,74 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
   const [filterClass, setFilterClass] = useState('All Classes')
   const [saving, setSaving] = useState(false)
   const [saveSuccess, setSaveSuccess] = useState(false)
+  const [saveError, setSaveError] = useState(null)
+  const [showDiscardConfirm, setShowDiscardConfirm] = useState(false)
+  const [pendingNavigation, setPendingNavigation] = useState(null)
+
+  const pendingCount = Object.values(selectedStatus).filter(Boolean).length
+
+  const handleAttemptClose = () => {
+    if (pendingCount > 0) {
+      setShowDiscardConfirm(true)
+    } else {
+      onClose()
+    }
+  }
+
+  const handleNavigateFullSheet = () => {
+    if (pendingCount > 0) {
+      setPendingNavigation('/attendance/mark')
+      setShowDiscardConfirm(true)
+    } else {
+      onClose()
+      navigate('/attendance/mark')
+    }
+  }
+
+  const handleDiscardAndClose = () => {
+    const nextNav = pendingNavigation
+    setSelectedStatus({})
+    setShowDiscardConfirm(false)
+    setPendingNavigation(null)
+    onClose()
+    if (nextNav) {
+      navigate(nextNav)
+    }
+  }
+
+  const handleSaveAndClose = async () => {
+    const nextNav = pendingNavigation
+    setShowDiscardConfirm(false)
+    setPendingNavigation(null)
+    await handleSaveAttendance(true)
+    if (nextNav) {
+      navigate(nextNav)
+    }
+  }
+
+  // Canonical guard for ESC key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        handleAttemptClose()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [pendingCount])
+
+  // Canonical guard for browser reload / tab close
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (pendingCount > 0) {
+        e.preventDefault()
+        e.returnValue = ''
+      }
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [pendingCount])
 
   const loadData = async () => {
     setLoading(true)
@@ -184,7 +256,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
     setSelectedStatus(updated)
   }
 
-  const handleSaveAttendance = async () => {
+  const handleSaveAttendance = async (closeAfter = false) => {
     const entries = Object.entries(selectedStatus).filter(([_, val]) => !!val)
     if (entries.length === 0) {
       alert('Please select attendance status for at least one student before saving.')
@@ -192,6 +264,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
     }
 
     setSaving(true)
+    setSaveError(null)
     try {
       const records = entries.map(([studentId, status]) => ({
         student_id: Number(studentId),
@@ -203,21 +276,31 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
       setSaveSuccess(true)
       setSelectedStatus({})
       await loadData()
-      if (onRefresh) onRefresh()
-      setTimeout(() => setSaveSuccess(false), 3000)
+      // Delay external refresh signals so the success banner stays visible for 3s
+      // emitAttendanceUpdated + onRefresh both eventually call fetchAll (setLoading=true)
+      // which would unmount this modal's portal before Playwright/user can see the banner.
+      setTimeout(() => {
+        setSaveSuccess(false)
+        emitAttendanceUpdated({ date: today, count: records.length })
+        if (onRefresh) onRefresh()
+      }, 3000)
+      if (closeAfter === true) {
+        onClose()
+      }
     } catch (err) {
       console.error('Error saving attendance:', err)
-      alert('Failed to save attendance: ' + (err.response?.data?.message || err.message))
+      const msg = err.response?.data?.message || err.message || 'Failed to save attendance'
+      setSaveError(msg)
     } finally {
       setSaving(false)
     }
   }
 
-  const pendingCount = Object.values(selectedStatus).filter(Boolean).length
-
   return createPortal(
     <div
       className="app-modal-overlay"
+      data-testid="modal-backdrop"
+      onClick={handleAttemptClose}
       style={{
         position: 'fixed',
         inset: 0,
@@ -233,6 +316,8 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
     >
       <div
         className="super-module-card"
+        data-testid="unmarked-attendance-modal"
+        onClick={(e) => e.stopPropagation()}
         style={{
           width: 'min(1100px, 100%)',
           maxHeight: '92vh',
@@ -279,6 +364,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                   Unmarked Students Today
                 </h3>
                 <span
+                  data-testid="unmarked-counter-badge"
                   style={{
                     padding: '2px 10px',
                     borderRadius: 20,
@@ -300,10 +386,8 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <button
-              onClick={() => {
-                onClose()
-                navigate('/attendance/mark')
-              }}
+              onClick={handleNavigateFullSheet}
+              data-testid="full-sheet-nav-btn"
               style={{
                 background: 'rgba(10,132,255,0.12)',
                 border: '1px solid rgba(10,132,255,0.25)',
@@ -321,7 +405,8 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
               <ExternalLink size={14} /> Full Sheet
             </button>
             <button
-              onClick={onClose}
+              onClick={handleAttemptClose}
+              data-testid="modal-close-x"
               style={{
                 background: 'rgba(255,255,255,0.08)',
                 border: '1px solid rgba(255,255,255,0.15)',
@@ -421,7 +506,8 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
             </button>
 
             <button
-              onClick={handleSaveAttendance}
+              onClick={() => handleSaveAttendance(false)}
+              data-testid="save-attendance-btn"
               disabled={saving || pendingCount === 0}
               style={{
                 background: pendingCount > 0 ? 'linear-gradient(135deg, #C8991A, #e8b420)' : 'rgba(148,163,184,0.2)',
@@ -438,7 +524,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                 boxShadow: pendingCount > 0 ? '0 4px 15px rgba(200,153,26,0.3)' : 'none',
               }}
             >
-              {saving ? <Loader2 size={15} className="animate-spin" /> : <Save size={15} />}
+              {saving ? <Loader2 size={15} className="animate-spin" data-testid="saving-spinner" /> : <Save size={15} />}
               Save Attendance ({pendingCount})
             </button>
           </div>
@@ -446,6 +532,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
 
         {saveSuccess && (
           <div
+            data-testid="attendance-save-success"
             style={{
               padding: '10px 24px',
               background: 'rgba(48,209,88,0.15)',
@@ -459,6 +546,25 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
             }}
           >
             <CheckCircle2 size={16} /> Attendance saved and synchronized successfully!
+          </div>
+        )}
+
+        {saveError && (
+          <div
+            data-testid="attendance-save-error"
+            style={{
+              padding: '10px 24px',
+              background: 'rgba(255,55,95,0.15)',
+              borderBottom: '1px solid rgba(255,55,95,0.3)',
+              color: '#FF375F',
+              fontSize: 13,
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            <AlertTriangle size={16} /> Save failed: {saveError}
           </div>
         )}
 
@@ -516,13 +622,13 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                     >
                       <td style={{ padding: '12px', color: '#8892A4', fontSize: 12, width: 45 }}>{idx + 1}</td>
                       <td style={{ padding: '12px', color: '#C8991A', fontSize: 13, fontWeight: 700, width: 90 }}>
-                        {s.gr_number || s.gr || 'â€”'}
+                        {s.gr_number || s.gr || '—'}
                       </td>
                       <td style={{ padding: '12px' }}>
                         <div style={{ color: '#C0C8D8', fontWeight: 600, fontSize: 14 }}>{s.name}</div>
                       </td>
                       <td style={{ padding: '12px', color: '#8892A4', fontSize: 13 }}>
-                        {s.father_name || s.father || 'â€”'}
+                        {s.father_name || s.father || '—'}
                       </td>
                       <td style={{ padding: '12px' }}>
                         <span
@@ -536,83 +642,97 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                             fontWeight: 600,
                           }}
                         >
-                          {s.class || 'Unassigned'} {s.section ? `Â· ${s.section}` : ''}
+                          {s.class || 'Unassigned'} {s.section ? ` · ${s.section}` : ''}
                         </span>
                       </td>
                       <td style={{ padding: '12px', textAlign: 'center' }}>
-                        <div style={{ display: 'inline-flex', gap: 6 }}>
-                          <button
-                            onClick={() => handleSetStatus(s.id, 'present')}
-                            style={{
-                              padding: '5px 10px',
-                              borderRadius: 8,
-                              border: currentMark === 'present' ? '1px solid #30D158' : '1px solid rgba(48,209,88,0.25)',
-                              background: currentMark === 'present' ? '#30D158' : 'rgba(48,209,88,0.1)',
-                              color: currentMark === 'present' ? '#071e34' : '#30D158',
-                              fontWeight: 700,
-                              fontSize: 11,
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 4,
-                            }}
-                          >
-                            <UserCheck size={13} /> Present
-                          </button>
-                          <button
-                            onClick={() => handleSetStatus(s.id, 'absent')}
-                            style={{
-                              padding: '5px 10px',
-                              borderRadius: 8,
-                              border: currentMark === 'absent' ? '1px solid #FF375F' : '1px solid rgba(255,55,95,0.25)',
-                              background: currentMark === 'absent' ? '#FF375F' : 'rgba(255,55,95,0.1)',
-                              color: currentMark === 'absent' ? '#fff' : '#FF375F',
-                              fontWeight: 700,
-                              fontSize: 11,
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 4,
-                            }}
-                          >
-                            <UserX size={13} /> Absent
-                          </button>
-                          <button
-                            onClick={() => handleSetStatus(s.id, 'late')}
-                            style={{
-                              padding: '5px 10px',
-                              borderRadius: 8,
-                              border: currentMark === 'late' ? '1px solid #FF9F0A' : '1px solid rgba(255,159,10,0.25)',
-                              background: currentMark === 'late' ? '#FF9F0A' : 'rgba(255,159,10,0.1)',
-                              color: currentMark === 'late' ? '#071e34' : '#FF9F0A',
-                              fontWeight: 700,
-                              fontSize: 11,
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 4,
-                            }}
-                          >
-                            <Clock size={13} /> Late
-                          </button>
-                          <button
-                            onClick={() => handleSetStatus(s.id, 'leave')}
-                            style={{
-                              padding: '5px 10px',
-                              borderRadius: 8,
-                              border: currentMark === 'leave' ? '1px solid #0A84FF' : '1px solid rgba(10,132,255,0.25)',
-                              background: currentMark === 'leave' ? '#0A84FF' : 'rgba(10,132,255,0.1)',
-                              color: currentMark === 'leave' ? '#fff' : '#0A84FF',
-                              fontWeight: 700,
-                              fontSize: 11,
-                              cursor: 'pointer',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 4,
-                            }}
-                          >
-                            <CalendarOff size={13} /> Leave
-                          </button>
+                        <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                          <div style={{ display: 'inline-flex', gap: 6 }}>
+                            <button
+                              onClick={() => handleSetStatus(s.id, 'present')}
+                              data-testid={`btn-present-${s.id}`}
+                              style={{
+                                padding: '5px 10px',
+                                borderRadius: 8,
+                                border: currentMark === 'present' ? '2px dashed #C8991A' : '1px solid rgba(48,209,88,0.25)',
+                                background: currentMark === 'present' ? 'rgba(48,209,88,0.2)' : 'rgba(48,209,88,0.1)',
+                                color: currentMark === 'present' ? '#30D158' : '#30D158',
+                                fontWeight: 700,
+                                fontSize: 11,
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 4,
+                              }}
+                            >
+                              <UserCheck size={13} /> Present
+                            </button>
+                            <button
+                              onClick={() => handleSetStatus(s.id, 'absent')}
+                              data-testid={`btn-absent-${s.id}`}
+                              style={{
+                                padding: '5px 10px',
+                                borderRadius: 8,
+                                border: currentMark === 'absent' ? '2px dashed #C8991A' : '1px solid rgba(255,55,95,0.25)',
+                                background: currentMark === 'absent' ? 'rgba(255,55,95,0.2)' : 'rgba(255,55,95,0.1)',
+                                color: currentMark === 'absent' ? '#FF375F' : '#FF375F',
+                                fontWeight: 700,
+                                fontSize: 11,
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 4,
+                              }}
+                            >
+                              <UserX size={13} /> Absent
+                            </button>
+                            <button
+                              onClick={() => handleSetStatus(s.id, 'late')}
+                              data-testid={`btn-late-${s.id}`}
+                              style={{
+                                padding: '5px 10px',
+                                borderRadius: 8,
+                                border: currentMark === 'late' ? '2px dashed #C8991A' : '1px solid rgba(255,159,10,0.25)',
+                                background: currentMark === 'late' ? 'rgba(255,159,10,0.2)' : 'rgba(255,159,10,0.1)',
+                                color: currentMark === 'late' ? '#FF9F0A' : '#FF9F0A',
+                                fontWeight: 700,
+                                fontSize: 11,
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 4,
+                              }}
+                            >
+                              <Clock size={13} /> Late
+                            </button>
+                            <button
+                              onClick={() => handleSetStatus(s.id, 'leave')}
+                              data-testid={`btn-leave-${s.id}`}
+                              style={{
+                                padding: '5px 10px',
+                                borderRadius: 8,
+                                border: currentMark === 'leave' ? '2px dashed #C8991A' : '1px solid rgba(10,132,255,0.25)',
+                                background: currentMark === 'leave' ? 'rgba(10,132,255,0.2)' : 'rgba(10,132,255,0.1)',
+                                color: currentMark === 'leave' ? '#0A84FF' : '#0A84FF',
+                                fontWeight: 700,
+                                fontSize: 11,
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 4,
+                              }}
+                            >
+                              <CalendarOff size={13} /> Leave
+                            </button>
+                          </div>
+                          {currentMark && (
+                            <span
+                              data-testid={`staged-tag-${s.id}`}
+                              style={{ fontSize: 10, color: '#C8991A', fontWeight: 800, background: 'rgba(200,153,26,0.15)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(200,153,26,0.3)', letterSpacing: '0.04em' }}
+                            >
+                              STAGED (UNSAVED)
+                            </span>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -643,7 +763,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             <button
-              onClick={handleSaveAttendance}
+              onClick={() => handleSaveAttendance(false)}
               disabled={saving || pendingCount === 0}
               style={{
                 background: pendingCount > 0 ? 'linear-gradient(135deg, #C8991A, #e8b420)' : 'rgba(148,163,184,0.18)',
@@ -659,7 +779,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
               {saving ? 'Savingâ€¦' : `Save Attendance (${pendingCount})`}
             </button>
             <button
-              onClick={onClose}
+              onClick={handleAttemptClose}
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 border: 'none',
@@ -673,6 +793,94 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
             </button>
           </div>
         </div>
+
+        {showDiscardConfirm && (
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 10005,
+              background: 'rgba(0,0,0,0.7)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 16,
+            }}
+          >
+            <div
+              data-testid="unsaved-changes-dialog"
+              style={{
+                background: '#0B2C4D',
+                border: '1px solid rgba(255,159,10,0.4)',
+                borderRadius: 16,
+                padding: 24,
+                maxWidth: 440,
+                width: '100%',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+                <AlertTriangle size={24} color="#FF9F0A" />
+                <h4 style={{ margin: 0, color: '#f8fafc', fontSize: 17, fontWeight: 800 }}>
+                  Unsaved Attendance Marks
+                </h4>
+              </div>
+              <p style={{ color: '#C0C8D8', fontSize: 14, margin: '0 0 20px', lineHeight: 1.5 }}>
+                You have <strong>{pendingCount}</strong> student{pendingCount > 1 ? 's' : ''} staged with attendance marks. Would you like to save them before exiting?
+              </p>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10 }}>
+                <button
+                  onClick={() => setShowDiscardConfirm(false)}
+                  data-testid="keep-editing-btn"
+                  style={{
+                    background: 'rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                    color: '#C0C8D8',
+                    padding: '8px 14px',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontWeight: 600,
+                  }}
+                >
+                  Keep Editing
+                </button>
+                <button
+                  onClick={handleDiscardAndClose}
+                  data-testid="discard-changes-btn"
+                  style={{
+                    background: 'rgba(255,55,95,0.15)',
+                    border: '1px solid rgba(255,55,95,0.3)',
+                    color: '#FF375F',
+                    padding: '8px 14px',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontWeight: 700,
+                  }}
+                >
+                  Discard
+                </button>
+                <button
+                  onClick={handleSaveAndClose}
+                  data-testid="save-and-continue-btn"
+                  style={{
+                    background: 'linear-gradient(135deg, #C8991A, #e8b420)',
+                    border: 'none',
+                    color: '#071e34',
+                    padding: '8px 16px',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontWeight: 800,
+                  }}
+                >
+                  Save &amp; Continue
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>,
     document.body
@@ -683,6 +891,13 @@ export function AttendanceStatsCard({ stats, loading, onRefresh }) {
   const [showUnmarkedModal, setShowUnmarkedModal] = useState(false)
   const s = stats?.students || {}
   const staff = stats?.staff || {}
+
+  useEffect(() => {
+    const unsub = onAttendanceUpdated(() => {
+      if (onRefresh) onRefresh()
+    })
+    return unsub
+  }, [onRefresh])
 
   return (
     <div className="super-panel super-reveal" style={{ ...glass, padding: 22, position: 'relative', overflow: 'hidden' }}>
@@ -707,6 +922,7 @@ export function AttendanceStatsCard({ stats, loading, onRefresh }) {
               color="#94A3B8"
               bg="rgba(148,163,184,0.12)"
               clickable
+              testId="unmarked-stat-cell"
               onClick={() => setShowUnmarkedModal(true)}
             />
             <StatCell icon={UserCheck} label="Present" value={s.present ?? 0} color="#30D158" bg="rgba(48,209,88,0.12)" />
