@@ -1,7 +1,7 @@
-﻿require('dotenv').config()
+require('dotenv').config()
 const express = require('express')
 const router = express.Router()
-const { query } = require('../config/database')
+const { pool, query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {
@@ -9,10 +9,23 @@ const {
   buildTwilioClient,
 } = require('../services/twilioSettings')
 
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canMarkAttendance = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const ATTENDANCE_STATUSES = ['present', 'absent', 'leave', 'late']
 const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'teacher'])
+
+function getPakistanDateOnly(date = new Date()) {
+  try {
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Karachi',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(date)
+  } catch {
+    return date.toISOString().slice(0, 10)
+  }
+}
 
 function scopedAttendanceReadClause(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
@@ -53,7 +66,7 @@ function normalizeAttendanceRecord(record, fallbackDate) {
 
   return {
     student_id: studentId,
-    date: record.date || fallbackDate || new Date().toISOString().slice(0, 10),
+    date: record.date || fallbackDate || getPakistanDateOnly(),
     status: normalizeAttendanceStatus(record.status),
     note: record.note || record.remarks || null,
   }
@@ -66,7 +79,7 @@ function parseDate(value, fallback) {
 }
 
 function dateOnly(date) {
-  return date.toISOString().slice(0, 10)
+  return getPakistanDateOnly(date)
 }
 
 function defaultHistoryRange() {
@@ -221,6 +234,7 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     return res.status(400).json({ success: false, message: err.message || 'Invalid attendance record' })
   }
 
+  const client = await pool.connect()
   try {
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
@@ -231,33 +245,63 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     const supportsAttendanceSchool = await hasColumn('attendance', 'school_id')
     const supportsAttendanceTenant = await hasColumn('attendance', 'tenant_id')
     const supportsAttendanceNote = await hasColumn('attendance', 'note')
-    let saved = 0
     const toNotify = []
 
     const studentColumns = ['id', 'name', 'parent_phone']
     if (supportsStudentSchool) studentColumns.push('school_id')
     if (supportsStudentTenant) studentColumns.push('tenant_id')
 
-    for (const r of normalizedRecords) {
-      let studentSql = `SELECT ${studentColumns.join(', ')} FROM students WHERE id = $1`
-      const studentParams = [r.student_id]
-      let idx = 2
+    await client.query('BEGIN')
 
-      if (req.user?.role !== 'super_admin') {
-        if (supportsStudentTenant && tenantId) {
-          studentSql += ` AND tenant_id = $${idx++}`
-          studentParams.push(tenantId)
-        } else if (supportsStudentSchool && schoolId) {
-          studentSql += ` AND school_id = $${idx++}`
-          studentParams.push(schoolId)
-        }
+    // 1. Bulk pre-validate all requested student IDs
+    const requestedIds = [...new Set(normalizedRecords.map(r => Number(r.student_id)).filter(id => Number.isInteger(id)))]
+    if (requestedIds.length !== normalizedRecords.length) {
+      await client.query('ROLLBACK')
+      return res.status(400).json({
+        success: false,
+        error: 'INVALID_STUDENT_IDS',
+        message: 'Invalid or non-integer student ID detected in payload.',
+        invalidIds: normalizedRecords.filter(r => !Number.isInteger(Number(r.student_id))).map(r => r.student_id),
+        saved: 0,
+      })
+    }
+
+    let rosterSql = `SELECT ${studentColumns.join(', ')} FROM students WHERE id = ANY($1::int[]) AND is_active = true`
+    const rosterParams = [requestedIds]
+    let pIdx = 2
+    if (req.user?.role !== 'super_admin') {
+      if (supportsStudentTenant && tenantId) {
+        rosterSql += ` AND tenant_id = $${pIdx++}`
+        rosterParams.push(tenantId)
+      } else if (supportsStudentSchool && schoolId) {
+        rosterSql += ` AND school_id = $${pIdx++}`
+        rosterParams.push(schoolId)
       }
+    }
 
-      studentSql += ' LIMIT 1'
-      const studentResult = await query(studentSql, studentParams)
-      if (!studentResult.rows.length) continue
+    const rosterResult = await client.query(rosterSql, rosterParams)
+    const studentMap = new Map(rosterResult.rows.map(s => [Number(s.id), s]))
+    const invalidIds = requestedIds.filter(id => !studentMap.has(Number(id)))
 
-      const student = studentResult.rows[0]
+    if (invalidIds.length > 0) {
+      await client.query('ROLLBACK')
+      return res.status(400).json({
+        success: false,
+        error: 'INVALID_STUDENT_IDS',
+        message: `Attendance rejected: ${invalidIds.length} student(s) do not exist, are inactive, or are unauthorized for your school/tenant.`,
+        invalidIds,
+        saved: 0,
+      })
+    }
+
+    // 2. Atomic upsert loop inside transaction
+    let saved = 0
+    const markedByUserId = Number.isInteger(Number(marked_by))
+      ? Number(marked_by)
+      : (Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null)
+
+    for (const r of normalizedRecords) {
+      const student = studentMap.get(Number(r.student_id))
       if ((r.status === 'absent' || r.status === 'late') && student.parent_phone) {
         toNotify.push({
           name: student.name,
@@ -290,7 +334,7 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
         `$${attendanceParams.length + 3}`,
         `$${attendanceParams.length + 4}`
       )
-      attendanceParams.push(r.student_id, r.date, r.status, marked_by || null)
+      attendanceParams.push(r.student_id, r.date, r.status, markedByUserId)
 
       if (supportsAttendanceNote) {
         columns.push('note')
@@ -307,25 +351,121 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
         INSERT INTO attendance (${columns.join(', ')})
         VALUES (${values.join(', ')})
         ON CONFLICT (student_id, date) DO UPDATE SET ${updateParts.join(', ')}
+        RETURNING id
       `
 
-      await query(attendanceSql, attendanceParams)
-      saved++
+      const insertRes = await client.query(attendanceSql, attendanceParams)
+      if (insertRes.rowCount > 0) {
+        saved++
+      }
     }
 
-    res.json({ success: true, message: `${saved} records save ho gaye` })
+    if (saved !== normalizedRecords.length) {
+      await client.query('ROLLBACK')
+      return res.status(500).json({
+        success: false,
+        error: 'INCOMPLETE_BATCH_PERSISTENCE',
+        message: `Attendance batch failed invariant check: requested ${normalizedRecords.length}, persisted ${saved}. Rolled back completely.`,
+        saved: 0,
+      })
+    }
+
+    await client.query('COMMIT')
+
+    res.json({
+      success: true,
+      message: `${saved} records save ho gaye`,
+      savedCount: saved,
+      requestedCount: normalizedRecords.length,
+    })
 
     for (const item of toNotify) {
       void notifyParent(item.phone, item.name, item.status, item.date, twilioClient, twilioConfig)
     }
   } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
     console.error('Attendance mark error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Attendance could not be saved.' })
+    return res.status(500).json({
+      success: false,
+      error: 'DATABASE_ERROR',
+      message: 'Database error: Attendance could not be saved. ' + err.message,
+      saved: 0,
+    })
+  } finally {
+    client.release()
+  }
+})
+
+// POST /api/attendance/mark-by-gr — single scan by QR code / GR number
+router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
+  try {
+    const { gr_number, status = 'present', date } = req.body
+    if (!gr_number) {
+      return res.status(400).json({ success: false, message: 'GR number is required' })
+    }
+    const schoolId = currentSchoolId(req)
+    const tenantId = currentTenantId(req)
+    const supportsStudentSchool = await hasColumn('students', 'school_id')
+    const supportsStudentTenant = await hasColumn('students', 'tenant_id')
+
+    let studentSql = `SELECT id, name, gr_number, class, section, parent_phone FROM students WHERE LOWER(TRIM(gr_number)) = LOWER(TRIM($1)) AND is_active = true`
+    const params = [gr_number]
+    let idx = 2
+    if (req.user?.role !== 'super_admin') {
+      if (supportsStudentTenant && tenantId) {
+        studentSql += ` AND tenant_id = $${idx++}`
+        params.push(tenantId)
+      } else if (supportsStudentSchool && schoolId) {
+        studentSql += ` AND school_id = $${idx++}`
+        params.push(schoolId)
+      }
+    }
+    studentSql += ' LIMIT 1'
+    const studentRes = await query(studentSql, params)
+    if (!studentRes.rows.length) {
+      return res.status(404).json({ success: false, message: `Student with GR ${gr_number} not found` })
     }
 
-    console.warn('PostgreSQL offline or mark error. Returning successful simulation response (Mock Fallback).')
-    return res.json({ success: true, message: `${normalizedRecords.length} records save ho gaye (Mock Fallback)` })
+    const student = studentRes.rows[0]
+    const recordDate = date || getPakistanDateOnly()
+    const normalizedStatus = normalizeAttendanceStatus(status)
+
+    const supportsAttendanceSchool = await hasColumn('attendance', 'school_id')
+    const supportsAttendanceTenant = await hasColumn('attendance', 'tenant_id')
+
+    const cols = ['student_id', 'date', 'status', 'marked_by']
+    const vals = ['$1', '$2', '$3', '$4']
+    const markedByUserId = Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null
+    const attParams = [student.id, recordDate, normalizedStatus, markedByUserId]
+
+    if (supportsAttendanceSchool) {
+      cols.push('school_id')
+      vals.push(`$${attParams.length + 1}`)
+      attParams.push(student.school_id || schoolId || null)
+    }
+    if (supportsAttendanceTenant) {
+      cols.push('tenant_id')
+      vals.push(`$${attParams.length + 1}`)
+      attParams.push(student.tenant_id || tenantId || null)
+    }
+
+    const updateParts = ['status = EXCLUDED.status', 'marked_by = EXCLUDED.marked_by']
+    const sql = `
+      INSERT INTO attendance (${cols.join(', ')})
+      VALUES (${vals.join(', ')})
+      ON CONFLICT (student_id, date) DO UPDATE SET ${updateParts.join(', ')}
+      RETURNING *
+    `
+    const result = await query(sql, attParams)
+    return res.json({
+      success: true,
+      message: `${student.name} (${student.gr_number}) marked ${normalizedStatus}`,
+      data: result.rows[0],
+      student
+    })
+  } catch (err) {
+    console.error('mark-by-gr error:', err)
+    return res.status(500).json({ success: false, message: err.message || 'Failed to mark attendance by GR' })
   }
 })
 

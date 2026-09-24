@@ -16,6 +16,8 @@ import {
  Zap,
 } from 'lucide-react'
 import api from '../../services/api'
+import { getPakistanDateString } from '../../utils/dateUtils'
+import { emitAttendanceUpdated } from '../../utils/attendanceEvents'
 
 // Removed hardcoded CLASSES and SECTIONS
 
@@ -159,7 +161,7 @@ export default function MarkAttendance() {
  )
  const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter')
  const [selectedSection, setSelectedSection] = useState('Blue')
- const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
+ const [date, setDate] = useState(getPakistanDateString())
  const [students, setStudents] = useState([])
  const [attendance, setAttendance] = useState({})
  const [loading, setLoading] = useState(false)
@@ -169,11 +171,24 @@ export default function MarkAttendance() {
  const loadStudents = () => {
  setLoading(true)
  setMessage('')
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } })
- .then((res) => {
- const list = res.data.data || []
+ Promise.all([
+ api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
+ ])
+ .then(([stuRes, attRes]) => {
+ const list = stuRes.data?.data || []
+ const attList = attRes.data?.data || []
+ const attMap = {}
+ attList.forEach((row) => {
+ const sid = row.student_id || row.id
+ if (sid) attMap[sid] = row.status
+ })
  setStudents(list)
- setAttendance(list.reduce((acc, student) => ({ ...acc, [student.id]: 'present' }), {}))
+ const initialMarks = {}
+ list.forEach((s) => {
+ initialMarks[s.id] = attMap[s.id] || 'present'
+ })
+ setAttendance(initialMarks)
  })
  .catch(() => {
  setStudents([])
@@ -194,7 +209,7 @@ export default function MarkAttendance() {
  }
  if (selectedClass) loadStudents()
  // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [selectedClass, selectedSection])
+ }, [selectedClass, selectedSection, date])
 
  const updateStatus = (id, status) => setAttendance((prev) => ({ ...prev, [id]: status }))
 
@@ -207,6 +222,7 @@ export default function MarkAttendance() {
  try {
  const records = students.map((student) => ({ student_id: student.id, date, status: attendance[student.id] || 'present' }))
  await api.post('/api/attendance/mark', { records })
+ emitAttendanceUpdated({ date, count: records.length })
  setMessage('Attendance saved successfully.')
  setTimeout(() => setMessage(''), 3000)
  } catch {
