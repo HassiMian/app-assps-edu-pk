@@ -1,7 +1,7 @@
 // AcademicSetupModule.jsx — Al Siddique Smart School OS
 
 import { useState } from 'react'
-import { GraduationCap, Plus, Trash2, Edit2, Check, X } from 'lucide-react'
+import { GraduationCap, Plus, Trash2, Edit2, Check, X, Building2 } from 'lucide-react'
 
 function slugifyLevel(name) {
   const clean = String(name || '').toLowerCase().trim()
@@ -238,7 +238,7 @@ function ClassesTab({ data, setData }) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 20, paddingBottom: 14, borderBottom: `1px solid ${C.border}` }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontSize: 22 }}>🏫</span>
+              <Building2 size={22} color={C.gold} />
               <h3 style={{ margin: 0, color: C.gold, fontSize: 17, fontWeight: 800 }}>Classes & Sections</h3>
             </div>
             <p style={{ margin: '6px 0 0 32px', color: C.muted, fontSize: 13 }}>

@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { Key } from 'lucide-react'
 import Portal from '../../components/Portal'
 import api from '../../services/api'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
@@ -292,7 +293,7 @@ export default function AdmissionsModule() {
 
  {generatedCredentials && (
     <div style={{ background: 'rgba(200,153,26,0.1)', border: `1px solid ${C.gold}`, borderRadius: 12, padding: 20 }}>
-      <h3 style={{ color: C.gold, margin: '0 0 12px 0', fontSize: 16 }}>🔑 Super App Login Credentials Generated</h3>
+      <h3 style={{ color: C.gold, margin: '0 0 12px 0', fontSize: 16, display: 'flex', alignItems: 'center', gap: 8 }}><Key size={18} /> Super App Login Credentials Generated</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
         {generatedCredentials.parent && (
           <div style={{ background: 'rgba(7,30,52,0.6)', padding: 12, borderRadius: 8 }}>
@@ -598,7 +599,7 @@ export default function AdmissionsModule() {
 
  {generatedCredentials && (
     <div style={{ background: 'rgba(200,153,26,0.1)', border: `1px solid ${C.gold}`, borderRadius: 12, padding: 16, marginBottom: 20 }}>
-      <h3 style={{ color: C.gold, margin: '0 0 12px 0', fontSize: 15 }}>🔑 Super App Credentials</h3>
+      <h3 style={{ color: C.gold, margin: '0 0 12px 0', fontSize: 15, display: 'flex', alignItems: 'center', gap: 8 }}><Key size={16} /> Super App Credentials</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         {generatedCredentials.parent && (
           <div>

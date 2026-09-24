@@ -1,5 +1,5 @@
-﻿// AL SIDDIQUE SMART SCHOOL OS
-// Fee Collection Module â€” Working Version
+// AL SIDDIQUE SMART SCHOOL OS
+// Fee Collection Module — Working Version
 // Path: src/Modules/fees/FeeModule.jsx
 
 import { useState, useMemo, useEffect } from 'react'
@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import api from '../../services/api'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
-import { BadgeCheck, CreditCard, ReceiptText, Wallet } from 'lucide-react'
+import { BadgeCheck, CreditCard, ReceiptText, Wallet, X } from 'lucide-react'
 import { renderVoucherCopyHtml } from './ViewChallans'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -34,7 +34,7 @@ const normalizeChallan = (item) => {
  gr: item.gr_number || item.gr || student?.gr || '',
  class: item.class || student?.class || '',
  section: item.section || student?.section || 'Blue',
- familyCode: item.familyCode || student?.familyCode || 'â€”',
+ familyCode: item.familyCode || student?.familyCode || '—',
  contact: item.parent_phone || item.contact || student?.contact || '',
  month: item.month || '05',
  year: item.year || '2026',
@@ -437,13 +437,13 @@ function PrintStudentList({ list, onClose, school }) {
     const rowsHtml = (data || []).map((item, idx) => `
       <tr>
         <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; width: 35px;">${idx + 1}</td>
-        <td style="padding: 6px 8px; border: 1px solid #aaa; font-weight: 700; color: #0b2c4d; width: 75px;">${item.gr || 'â€”'}</td>
-        <td style="padding: 6px 8px; border: 1px solid #aaa; font-weight: 700; color: #111;">${item.student || item.name || 'â€”'}</td>
-        <td style="padding: 6px 8px; border: 1px solid #aaa;">${item.father || 'â€”'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; font-weight: 700; color: #0b2c4d; width: 75px;">${item.gr || '—'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; font-weight: 700; color: #111;">${item.student || item.name || '—'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa;">${item.father || '—'}</td>
         <td style="padding: 6px 8px; border: 1px solid #aaa; width: 105px;">${item.class || ''} / ${item.section || ''}</td>
-        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; width: 85px;">${item.familyCode || 'â€”'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; width: 85px;">${item.familyCode || '—'}</td>
         <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: right; font-weight: 600; width: 85px;">${item.total || item.fee || '0'}</td>
-        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; font-weight: 700; width: 70px; color: ${item.status === 'Paid' ? '#166534' : '#991b1b'};">${item.status || 'â€”'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; font-weight: 700; width: 70px; color: ${item.status === 'Paid' ? '#166534' : '#991b1b'};">${item.status || '—'}</td>
       </tr>
     `).join('')
 
@@ -459,7 +459,7 @@ function PrintStudentList({ list, onClose, school }) {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>${type} â€” ${schoolName}</title>
+  <title>${type} — ${schoolName}</title>
   <style>
     @page {
       size: A4 portrait;
@@ -570,8 +570,8 @@ function PrintStudentList({ list, onClose, school }) {
     ${logoHtml}
     <div>
       <h1 class="school-title">${schoolName}</h1>
-      <div class="school-meta">${schoolAddress} Â· ${schoolPhone}</div>
-      <h2 class="report-title">${type} â€” Session 2026-2027</h2>
+      <div class="school-meta">${schoolAddress} · ${schoolPhone}</div>
+      <h2 class="report-title">${type} — Session 2026-2027</h2>
     </div>
   </div>
 
@@ -720,7 +720,7 @@ function PrintStudentList({ list, onClose, school }) {
               <div>
                 <h1 style={{ margin: 0, fontSize: 24, color: '#0b2c4d' }}>{schoolName}</h1>
                 <div className="super-module-card" style={{ fontSize: 14, color: '#666', marginTop: 4 }}>{schoolAddress} - {schoolPhone}</div>
-                <h2 style={{ margin: '10px 0 0', fontSize: 18, color: C.gold }}>{type} â€” {new Date().toLocaleDateString()}</h2>
+                <h2 style={{ margin: '10px 0 0', fontSize: 18, color: C.gold }}>{type} — {new Date().toLocaleDateString()}</h2>
               </div>
             </div>
 
@@ -965,7 +965,7 @@ function ProofReview() {
  <div>
  <div style={{ color: '#fff', fontWeight: 700, fontSize: 15 }}>{p.name} <span style={{ color: C.muted, fontWeight: 400, fontSize: 13 }}>({p.gr_number})</span></div>
  <div style={{ color: C.silver, fontSize: 13, marginTop: 4 }}>Class {p.class} &bull; {p.month} {p.year} &bull; Rs {Number(p.proof_amount || p.amount).toLocaleString()}</div>
- <div style={{ color: C.muted, fontSize: 12, marginTop: 2 }}>Via: {p.proof_method || 'â€”'} &bull; Submitted: {p.proof_submitted_at ? new Date(p.proof_submitted_at).toLocaleDateString('en-GB') : 'â€”'}</div>
+ <div style={{ color: C.muted, fontSize: 12, marginTop: 2 }}>Via: {p.proof_method || '—'} &bull; Submitted: {p.proof_submitted_at ? new Date(p.proof_submitted_at).toLocaleDateString('en-GB') : '—'}</div>
  </div>
  <div style={{ display: 'flex', gap: 8 }}>
  <button onClick={() => setPreview(p)} style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.35)', color: '#60a5fa', borderRadius: 8, padding: '7px 14px', cursor: 'pointer', fontSize: 13, fontWeight: 600 }}> View</button>
@@ -980,8 +980,8 @@ function ProofReview() {
  <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', zIndex: 9000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
  <div style={{ background: '#0f172a', border: '1px solid rgba(200,153,26,0.3)', borderRadius: 20, maxWidth: 480, width: '100%', padding: 24 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
- <div style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>{preview.name} â€” Payment Screenshot</div>
- <button onClick={() => setPreview(null)} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', fontSize: 20, lineHeight: 1 }}>Ã—</button>
+ <div style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>{preview.name} — Payment Screenshot</div>
+ <button onClick={() => setPreview(null)} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 4 }}><X size={18} /></button>
  </div>
  <img src={preview.proof_image} alt="Proof" style={{ width: '100%', borderRadius: 12, marginBottom: 16, maxHeight: 320, objectFit: 'contain', background: '#1e293b' }} />
  <div style={{ display: 'flex', gap: 10 }}>
@@ -1060,7 +1060,7 @@ function CreateChallan({ onCreate }) {
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 24 }}>
  <div className="super-module-card" style={{ display: 'grid', gap: 24 }}>
  <GCard>
- <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 1 â€” Select Student</h2>
+ <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 1 — Select Student</h2>
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
  <div>
  <Lbl>Class</Lbl>
@@ -1093,7 +1093,7 @@ function CreateChallan({ onCreate }) {
  </GCard>
 
  <GCard>
- <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 2 â€” Billing Period</h2>
+ <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 2 — Billing Period</h2>
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
  <div><Lbl>Month</Lbl><Sel value={selectedMonth} onChange={e => setSelectedMonth(e.target.value)}>{MONTHS.map(item => <option key={item} value={item}>{item}</option>)}</Sel></div>
  <div><Lbl>Year</Lbl><Sel value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>{['2025', '2026', '2027'].map(year => <option key={year} value={year}>{year}</option>)}</Sel></div>
@@ -1102,7 +1102,7 @@ function CreateChallan({ onCreate }) {
  </GCard>
 
  <GCard>
- <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 3 â€” Fee Heads</h2>
+ <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 3 — Fee Heads</h2>
  <div className="super-module-card" style={{ display: 'grid', gap: 12 }}>
  {FEE_HEADS.map(head => (
  <div key={head.id} style={{
@@ -1128,7 +1128,7 @@ function CreateChallan({ onCreate }) {
  <GCard style={{ position: 'sticky', top: 24 }}>
  <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Challan Summary</h2>
  <div className="super-module-card" style={{ display: 'grid', gap: 12, marginBottom: 20 }}>
- <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', color: C.muted }}><span>Student</span><span>{student?.name || 'â€”'}</span></div>
+ <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', color: C.muted }}><span>Student</span><span>{student?.name || '—'}</span></div>
  <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', color: C.muted }}><span>Month</span><span>{`${selectedMonth} ${selectedYear}`}</span></div>
  <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', color: C.muted }}><span>Due Date</span><span>{dueDate}</span></div>
  </div>

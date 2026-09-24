@@ -147,11 +147,11 @@ function PrintStudentList({ list, onClose, school }) {
     const rowsHtml = (data || []).map((s, idx) => `
       <tr>
         <td style="text-align:center; width:35px;">${idx + 1}</td>
-        <td style="width:75px; font-weight:700; color:#0b2c4d;">${s.gr || 'â€”'}</td>
-        <td style="font-weight:700; color:#111;">${s.name || 'â€”'}</td>
-        <td>${s.father || 'â€”'}</td>
-        <td style="width:90px; text-align:center;">${s.dob || 'â€”'}</td>
-        <td style="width:105px;">${s.contact || 'â€”'}</td>
+        <td style="width:75px; font-weight:700; color:#0b2c4d;">${s.gr || '—'}</td>
+        <td style="font-weight:700; color:#111;">${s.name || '—'}</td>
+        <td>${s.father || '—'}</td>
+        <td style="width:90px; text-align:center;">${s.dob || '—'}</td>
+        <td style="width:105px;">${s.contact || '—'}</td>
         <td style="width:110px; font-weight:600;">${s.class || ''} / ${s.section || ''}</td>
       </tr>
     `).join('');
@@ -168,7 +168,7 @@ function PrintStudentList({ list, onClose, school }) {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>${type} â€” ${schoolName}</title>
+  <title>${type} — ${schoolName}</title>
   <style>
     @page {
       size: A4 portrait;
@@ -279,8 +279,8 @@ function PrintStudentList({ list, onClose, school }) {
     ${logoHtml}
     <div>
       <h1 class="school-title">${schoolName}</h1>
-      <div class="school-meta">${schoolAddress} Â· ${schoolPhone}</div>
-      <h2 class="report-title">${type} â€” Session 2026-2027</h2>
+      <div class="school-meta">${schoolAddress} · ${schoolPhone}</div>
+      <h2 class="report-title">${type} — Session 2026-2027</h2>
     </div>
   </div>
 
@@ -484,7 +484,7 @@ function PrintStudentList({ list, onClose, school }) {
                   <td>{s.gr}</td>
                   <td style={{ fontWeight: 700 }}>{s.name}</td>
                   <td>{s.father}</td>
-                  <td>{s.dob || "â€”"}</td>
+                  <td>{s.dob || "—"}</td>
                   <td>{s.contact}</td>
                   <td>{s.class} / {s.section}</td>
                 </tr>
@@ -783,7 +783,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  w.document.close();
  };
 
- //  1. CHARACTER CERTIFICATE â€” Oxford formal, gold double-border
+ //  1. CHARACTER CERTIFICATE — Oxford formal, gold double-border
  if (docType === "character") {
  open("Character Certificate",
  `@page{size:A4 portrait;margin:0}
@@ -832,7 +832,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  2. STUDY CERTIFICATE â€” Modern navy header with gold bar
+ //  2. STUDY CERTIFICATE — Modern navy header with gold bar
  if (docType === "study") {
  open("Study Certificate",
  `@page{size:A4 portrait;margin:0}
@@ -878,7 +878,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  3. SPORTS CERTIFICATE â€” Landscape, dark left panel
+ //  3. SPORTS CERTIFICATE — Landscape, dark left panel
  if (docType === "sports") {
  open("Sports Certificate",
  `@page{size:A4 landscape;margin:0}
@@ -936,7 +936,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  4. APPRECIATION CERTIFICATE â€” Landscape, ornate award design
+ //  4. APPRECIATION CERTIFICATE — Landscape, ornate award design
  if (docType === "appreciation") {
  open("Appreciation Certificate",
  `@page{size:A4 landscape;margin:0}
@@ -979,7 +979,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  5. LEAVING CERTIFICATE â€” Formal institutional table
+ //  5. LEAVING CERTIFICATE — Formal institutional table
  if (docType === "leaving") {
  const TR = (k,v) => `<tr><td style="padding:8px 13px;background:#f5f2eb;font-weight:700;font-size:12.5px;border:1px solid #ddd;color:#333;width:42%">${k}</td><td style="padding:8px 13px;font-size:12.5px;border:1px solid #ddd;color:#111">${v||"&mdash;"}</td></tr>`;
  open("Leaving Certificate",
@@ -1023,7 +1023,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  6. PROVISIONAL CERTIFICATE â€” Oxford blue with info grid
+ //  6. PROVISIONAL CERTIFICATE — Oxford blue with info grid
  if (docType === "provisional") {
  open("Provisional Certificate",
  `@page{size:A4 portrait;margin:0}
@@ -1073,7 +1073,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  7. BIRTH CERTIFICATE VERIFICATION â€” Blue official doc
+ //  7. BIRTH CERTIFICATE VERIFICATION — Blue official doc
  if (docType === "birth") {
  open("Birth Certificate Verification",
  `@page{size:A4 portrait;margin:0}
@@ -1122,7 +1122,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  8. WARNING LETTER â€” Red stripe, corporate letter format
+ //  8. WARNING LETTER — Red stripe, corporate letter format
  if (docType === "warning") {
  open("Warning Letter",
  `@page{size:A4 portrait;margin:0}
@@ -1178,7 +1178,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  9. ADMISSION FORM â€” Navy header, clean section layout
+ //  9. ADMISSION FORM — Navy header, clean section layout
  if (docType === "admission") {
  const F = (lbl, val) => `<div style="display:grid;grid-template-columns:1fr 2fr;border-bottom:1px solid #eee"><div style="padding:7px 12px;background:#f5f2eb;font-size:11px;font-weight:600;color:#444;border-right:1px solid #ddd">${lbl}</div><div style="padding:7px 12px;font-size:12px;color:#111;min-height:28px">${val||""}</div></div>`;
  const SH = (t) => `<div style="background:#0a1628;color:#e8c87a;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:3px 3px 0 0">${t}</div>`;
@@ -1217,7 +1217,7 @@ function printCertificate(docType, student, school = {}, requestedOrientation = 
  ); return;
  }
 
- //  10. PROGRESS REPORT â€” Landscape, full subject table
+ //  10. PROGRESS REPORT — Landscape, full subject table
  if (docType === "progress") {
  const SUBS = ["Mathematics","English","Urdu","Science","Islamiyat","Social Studies","Computer","Drawing / Art"];
  open("Progress Report",
@@ -1451,7 +1451,7 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  <div style={{ color:"#C8991A", fontSize:13, fontWeight:800 }}>Profile Photo</div>
  <div style={{ color:"#8892A4", fontSize:12, lineHeight:1.7 }}>
  Upload a clear passport-size photo of the student.<br/>
- Use the <span style={{color:"#0D9488",fontWeight: 600}}> AI Apply School Uniform</span> button to automatically apply the official school uniform/coat to the photo â€” perfect for ID cards and records.
+ Use the <span style={{color:"#0D9488",fontWeight: 600}}> AI Apply School Uniform</span> button to automatically apply the official school uniform/coat to the photo — perfect for ID cards and records.
  </div>
  </div>
  </div>
@@ -1521,7 +1521,7 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  <Plus size={16}/> Add Student Only
  </button>
  <button disabled={savingCombo || !generateChallan} onClick={() => saveStudent(true)} style={{...btnPrimary,flex:1,minWidth:200,justifyContent:"center"}}>
- {savingCombo ? "Savingâ€¦" : <><Plus size={16}/> Create Student + First Challan</>}
+ {savingCombo ? "Saving..." : <><Plus size={16}/> Create Student + First Challan</>}
  </button>
  </>
  ) : (
@@ -1575,8 +1575,8 @@ function AccessTab({ student }) {
  .row{display:flex;justify-content:space-between;padding:9px 13px;background:#f0f4ff;border-radius:8px;margin-bottom:8px}
  .lbl{color:#888;font-size:11px;font-weight:600}.val{color:#1a1a2e;font-size:14px;font-weight:700}
  </style></head><body><div class="card">
- <h2>${type} Login Card â€” Al Siddique OS</h2>
- <p>${student.name} Â· GR: ${student.gr || student.gr_number || ''} Â· Class ${student.class}</p>
+ <h2>${type} Login Card — Al Siddique OS</h2>
+ <p>${student.name} · GR: ${student.gr || student.gr_number || ''} · Class ${student.class}</p>
  <div class="row"><span class="lbl">Login ID</span><span class="val">${u.username}</span></div>
  <div class="row"><span class="lbl">Password</span><span class="val">${u.password}</span></div>
  <div class="row"><span class="lbl">Portal</span><span class="val">alsiddique.edu.pk</span></div>
@@ -1606,7 +1606,7 @@ function AccessTab({ student }) {
  </div>
  {u ? (
  <div style={{ display:'grid', gap:8 }}>
- {[['Login ID', u.username, `un_${u.id}`], ['Password', showPass[u.id] ? u.password : 'â€¢â€¢â€¢â€¢â€¢â€¢', `pw_${u.id}`]].map(([lbl,val,key])=>(
+ {[['Login ID', u.username, `un_${u.id}`], ['Password', showPass[u.id] ? u.password : '••••••', `pw_${u.id}`]].map(([lbl,val,key])=>(
  <div key={key} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', background:'rgba(7,30,52,0.6)', borderRadius:10, padding:'10px 14px' }}>
  <div>
  <div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>{lbl}</div>
@@ -1623,7 +1623,7 @@ function AccessTab({ student }) {
  <span style={{ color:u.isActive?'#30D158':'#FF375F', fontWeight:700, fontSize:13 }}>{u.isActive?' Active':' Blocked'}</span>
  </div>
  <div><div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>Last Login</div>
- <span style={{ color:'#C0C8D8', fontSize:12 }}>{u.lastLogin ? new Date(u.lastLogin).toLocaleDateString('en-PK') : 'â€”'}</span>
+ <span style={{ color:'#C0C8D8', fontSize:12 }}>{u.lastLogin ? new Date(u.lastLogin).toLocaleDateString('en-PK') : '—'}</span>
  </div>
  </div>
  </div>
@@ -1652,8 +1652,8 @@ function AccessTab({ student }) {
  {resetTarget && (
  <div style={{ position:'fixed', inset:0, background:'rgba(7,30,52,.85)', backdropFilter:'blur(8px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center' }}>
  <div style={{ background:'#0B2C4D', border:'1px solid rgba(148,163,184,0.2)', borderRadius:18, padding:28, width:340 }}>
- <h3 style={{ color:'#C8991A', margin:'0 0 6px', fontSize:16 }}>New Password â€” {resetTarget.label}</h3>
- <p style={{ color:'#8892A4', fontSize:12, margin:'0 0 16px' }}>{student.name} Â· {resetTarget.username}</p>
+ <h3 style={{ color:'#C8991A', margin:'0 0 6px', fontSize:16 }}>New Password — {resetTarget.label}</h3>
+ <p style={{ color:'#8892A4', fontSize:12, margin:'0 0 16px' }}>{student.name} · {resetTarget.username}</p>
  <input value={newPass} onChange={e=>setNewPass(e.target.value)} placeholder="Naya password..."
  style={{ width:'100%', background:'rgba(11,44,77,.8)', border:'1px solid rgba(148,163,184,.2)', borderRadius:10, color:'#C0C8D8', padding:'10px 13px', fontSize:14, outline:'none', boxSizing:'border-box', marginBottom:16 }}/>
  <div style={{ display:'flex', gap:10 }}>
@@ -1684,7 +1684,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  const InfoBlock = ({ label, value }) => (
  <div style={{ padding:"12px 16px", background:"rgba(7,30,52,0.4)", borderRadius:10 }}>
  <div style={{ color:"#8892A4", fontSize:11, marginBottom:4, textTransform:"uppercase", letterSpacing:0.5 }}>{label}</div>
- <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:14 }}>{value||"â€”"}</div>
+ <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:14 }}>{value||"—"}</div>
  </div>
  );
 
@@ -1740,7 +1740,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
 
  {/* Avatar + status */}
  <div style={{ display:"flex", alignItems:"center", gap:16, padding:20, background:"rgba(7,30,52,0.5)", borderRadius:12, marginBottom:20 }}>
- {/* Photo â€” real image or emoji fallback */}
+ {/* Photo — real image or emoji fallback */}
  <div style={{ position:"relative", flexShrink:0 }}>
  {student.photo && !student.photo.includes('') && !student.photo.includes('') ? (
  <img
@@ -1762,7 +1762,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  </div>
  <div style={{ flex:1 }}>
  <h3 style={{ color:"#C0C8D8", fontSize:17, fontWeight:800, margin:0 }}>{student.name}</h3>
- <p style={{ color:"#8892A4", fontSize:13, margin:"4px 0 0" }}>{student.gr} Â· {student.class} Â· Section {student.section}</p>
+ <p style={{ color:"#8892A4", fontSize:13, margin:"4px 0 0" }}>{student.gr} · {student.class} · Section {student.section}</p>
  </div>
  <span style={{ padding:"3px 12px", borderRadius:20, fontSize:11, fontWeight:700, background:student.status==="Active"?"rgba(48,209,88,0.15)":"rgba(255,55,95,0.15)", color:student.status==="Active"?"#30D158":"#FF375F", border:`1px solid ${student.status==="Active"?"#30D158":"#FF375F"}` }}>
  {student.status}
@@ -1904,7 +1904,7 @@ function ClasswiseReports({ students, onPrintClass }) {
  const classes = Object.entries(classMap).sort(([a],[b])=>a.localeCompare(b));
  return (
  <div className="super-module-card" style={card}>
- <h2 style={{ color:"#C8991A", fontSize:16, fontWeight:800, margin:"0 0 20px" }}> Classwise Student Report â€” Session 2026-2027</h2>
+ <h2 style={{ color:"#C8991A", fontSize:16, fontWeight:800, margin:"0 0 20px" }}> Classwise Student Report — Session 2026-2027</h2>
  <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:16 }}>
  <button onClick={() => onPrintClass?.("All Classes Student List", students)} style={{ ...btnSecondary, padding:"8px 12px" }}><Printer size={14}/> Print All Details</button>
  </div>
@@ -2190,7 +2190,7 @@ export default function StudentsModule() {
  </div>
  <div>
  <h1 style={{ color:"#C0C8D8", fontSize:24, fontWeight:800, margin:0 }}>Student Management</h1>
- <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session 2026-2027 Â· {students.length} total students</p>
+ <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session 2026-2027 · {students.length} total students</p>
  </div>
  </div>
  <div style={{ display:"flex", gap:10 }}>
@@ -2329,7 +2329,7 @@ export default function StudentsModule() {
  <span style={{ fontSize:20 }}>{s.photo}</span>
  <div style={{ flex:1 }}>
  <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:13 }}>{s.name}</div>
- <div style={{ color:"#8892A4", fontSize:11 }}>{s.gr} Â· {s.class} {s.section} Â· Father: {s.father}</div>
+ <div style={{ color:"#8892A4", fontSize:11 }}>{s.gr} · {s.class} {s.section} · Father: {s.father}</div>
  </div>
  <span style={{ padding:"2px 8px", background:"rgba(10,132,255,0.12)", border:"1px solid rgba(10,132,255,0.2)", borderRadius:12, fontSize:11, color:"#0A84FF" }}>{s.fee}</span>
  </div>
@@ -2403,7 +2403,7 @@ export default function StudentsModule() {
  })()}
  </td>
  <td style={{ padding:"14px" }}>
- <span style={{ padding:"3px 10px", background:"rgba(10,132,255,0.1)", border:"1px solid rgba(10,132,255,0.2)", borderRadius:20, fontSize:12, color:"#0A84FF" }}>{s.class} Â· {s.section}</span>
+ <span style={{ padding:"3px 10px", background:"rgba(10,132,255,0.1)", border:"1px solid rgba(10,132,255,0.2)", borderRadius:20, fontSize:12, color:"#0A84FF" }}>{s.class} · {s.section}</span>
  </td>
  <td style={{ padding:"14px", color:"#8892A4", fontSize:13 }}>{s.contact}</td>
  <td style={{ padding:"14px" }}>

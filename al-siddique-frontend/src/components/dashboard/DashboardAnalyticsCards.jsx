@@ -776,7 +776,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                 cursor: pendingCount > 0 && !saving ? 'pointer' : 'not-allowed',
               }}
             >
-              {saving ? 'Savingâ€¦' : `Save Attendance (${pendingCount})`}
+              {saving ? 'Saving...' : `Save Attendance (${pendingCount})`}
             </button>
             <button
               onClick={handleAttemptClose}
@@ -910,7 +910,7 @@ export function AttendanceStatsCard({ stats, loading, onRefresh }) {
       </div>
 
       {loading ? (
-        <div style={{ color: '#94A3B8', padding: 20, textAlign: 'center' }}>Loadingâ€¦</div>
+        <div style={{ color: '#94A3B8', padding: 20, textAlign: 'center' }}>Loading...</div>
       ) : (
         <>
           <div style={{ color: '#C8991A', fontSize: 11, fontWeight: 800, letterSpacing: '0.08em', marginBottom: 8 }}>STUDENT ATTENDANCE</div>
@@ -977,7 +977,7 @@ export function AdmissionWithdrawalStatsCard({ stats, loading }) {
       </div>
 
       {loading ? (
-        <div style={{ color: '#94A3B8', padding: 20, textAlign: 'center' }}>Loadingâ€¦</div>
+        <div style={{ color: '#94A3B8', padding: 20, textAlign: 'center' }}>Loading...</div>
       ) : (
         <div>
           {rows.map((row, i) => (

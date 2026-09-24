@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {
  Check, X, Clock, Users, Calendar,
- ChevronDown, Save, Search
+ ChevronDown, Save, Search, UserCheck, UserX, CalendarOff, QrCode, BarChart3, MessageSquare
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
@@ -177,10 +177,10 @@ export default function AttendanceModule() {
  };
 
  const tabs = [
- { key: "mark", label: "Mark Attendance", icon: "" },
- { key: "smart", label: "Smart Scan ", icon: "" },
- { key: "analytics", label: "Analytics", icon: "" },
- { key: "report", label: "SMS Report", icon: "" },
+ { key: "mark", label: "Mark Attendance", icon: CheckCircle2 },
+ { key: "smart", label: "Smart Scan", icon: QrCode },
+ { key: "analytics", label: "Analytics", icon: BarChart3 },
+ { key: "report", label: "SMS Report", icon: MessageSquare },
  ];
 
  const attDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
@@ -203,22 +203,27 @@ export default function AttendanceModule() {
  </div>
  </div>
 
- {/*  Attendance Dashboard  */}
+ {/* Attendance Dashboard */}
  {/* Stats Cards */}
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 16 }}>
  {[
- { label: 'Present', value: presentCount, icon: '', grad: 'linear-gradient(135deg,rgba(48,209,88,0.18),rgba(48,209,88,0.06))' },
- { label: 'Absent', value: absentCount, icon: '', grad: 'linear-gradient(135deg,rgba(255,55,95,0.18),rgba(255,55,95,0.06))' },
- { label: 'Late', value: lateCount, icon: '', grad: 'linear-gradient(135deg,rgba(255,159,10,0.18),rgba(255,159,10,0.06))' },
- { label: 'Leave', value: leaveCount, icon: '', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
- { label: 'Total Students', value: totalStudents, icon: '', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
- ].map(c => (
+ { label: 'Present', value: presentCount, Icon: UserCheck, color: '#30D158', grad: 'linear-gradient(135deg,rgba(48,209,88,0.18),rgba(48,209,88,0.06))' },
+ { label: 'Absent', value: absentCount, Icon: UserX, color: '#FF375F', grad: 'linear-gradient(135deg,rgba(255,55,95,0.18),rgba(255,55,95,0.06))' },
+ { label: 'Late', value: lateCount, Icon: Clock, color: '#FF9F0A', grad: 'linear-gradient(135deg,rgba(255,159,10,0.18),rgba(255,159,10,0.06))' },
+ { label: 'Leave', value: leaveCount, Icon: CalendarOff, color: '#0A84FF', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
+ { label: 'Total Students', value: totalStudents, Icon: Users, color: '#C8991A', grad: 'linear-gradient(135deg,rgba(200,153,26,0.18),rgba(200,153,26,0.06))' },
+ ].map(c => {
+ const IconComp = c.Icon
+ return (
  <div key={c.label} style={{ ...attDashCard, background: c.grad, padding: '16px 18px', borderRadius: 22 }}>
- <div style={{ fontSize: 22 }}>{c.icon}</div>
- <div style={{ color: 'white', fontSize: 28, fontWeight: 900, marginTop: 6 }}>{c.value}</div>
- <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11 }}>{c.label}</div>
+ <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+ <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 12, fontWeight: 700 }}>{c.label}</div>
+ <IconComp size={18} color={c.color} />
  </div>
- ))}
+ <div style={{ color: 'white', fontSize: 28, fontWeight: 900, marginTop: 8 }}>{c.value}</div>
+ </div>
+ )
+ })}
  </div>
 
  {/* Charts */}

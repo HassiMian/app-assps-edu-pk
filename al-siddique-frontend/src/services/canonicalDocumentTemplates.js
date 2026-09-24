@@ -1,5 +1,5 @@
 ﻿/**
- * JARVIS 4.1 & ASSPS SCHOOL SAAS â€” CANONICAL DOCUMENT TEMPLATES (Frontend Service)
+ * JARVIS 4.1 & ASSPS SCHOOL SAAS — CANONICAL DOCUMENT TEMPLATES (Frontend Service)
  *
  * Single source of truth for all visual document templates:
  * - Official Admission Form (A4 Portrait, navy/gold double border, bilingual header, photo box, signatures)
@@ -79,9 +79,9 @@ export function renderDynamicFeeRows(ch, theme) {
       rowsHtml += `
         <tr style="border-bottom:1px solid #e8e8e8; background:#fff;">
           <td style="padding:4px 6px; font-size:10.5px; color:#e74c3c; font-weight:700;">Discount</td>
-          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#e74c3c;">â€”</td>
+          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#e74c3c;">—</td>
           <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#e74c3c;">Rs. ${Number(ch.discount).toLocaleString()}</td>
-          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#e74c3c;">â€”</td>
+          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#e74c3c;">—</td>
           <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px; color:#e74c3c;">- Rs. ${Number(ch.discount).toLocaleString()}</td>
         </tr>
       `;
@@ -92,8 +92,8 @@ export function renderDynamicFeeRows(ch, theme) {
         <tr style="border-bottom:1px solid #e8e8e8; background:#fff;">
           <td style="padding:4px 6px; font-size:10.5px; color:#ff8c00; font-weight:700;">Late Fee</td>
           <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#ff8c00;">Rs. ${Number(ch.lateFee).toLocaleString()}</td>
-          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#ff8c00;">â€”</td>
-          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#ff8c00;">â€”</td>
+          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#ff8c00;">—</td>
+          <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#ff8c00;">—</td>
           <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px; color:#ff8c00;">+ Rs. ${Number(ch.lateFee).toLocaleString()}</td>
         </tr>
       `;
@@ -102,9 +102,9 @@ export function renderDynamicFeeRows(ch, theme) {
     rowsHtml += `
       <tr style="border-top:2px solid ${theme.primaryColor}; background:#e4e4e4; font-weight:800;">
         <td style="padding:4px 6px; font-size:11.5px; color:#111;">Net Total</td>
-        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">â€”</td>
-        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">â€”</td>
-        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">â€”</td>
+        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">—</td>
+        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">—</td>
+        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">—</td>
         <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">Rs. ${Number(ch.total || 0).toLocaleString()}</td>
       </tr>
     `;
@@ -127,24 +127,24 @@ export function renderDynamicFeeRows(ch, theme) {
       </tr>
       <tr style="border-bottom:1px solid #e8e8e8; background:#fff;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Admission Fee</td>
-        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${admFee ? admFee.toLocaleString() : 'â€”'}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${admFee ? admFee.toLocaleString() : '—'}</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${admFee ? admFee.toLocaleString() : 'â€”'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${admFee ? admFee.toLocaleString() : '—'}</td>
       </tr>
       <tr style="border-bottom:1px solid #e8e8e8; background:#f7f7f7;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Other Fee</td>
-        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${othFee ? othFee.toLocaleString() : 'â€”'}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${othFee ? othFee.toLocaleString() : '—'}</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${othFee ? othFee.toLocaleString() : 'â€”'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${othFee ? othFee.toLocaleString() : '—'}</td>
       </tr>
       <tr style="border-bottom:1px solid #d4b84a; background:#fef8e0;">
         <td style="padding:4px 6px; color:#7a5c00; font-style:italic; font-size:10.5px; font-weight:600;">Previous Arrears / Balance</td>
-        <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : 'â€”'}</td>
+        <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : '—'}</td>
         <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">0</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : 'â€”'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : '—'}</td>
       </tr>
       <tr style="border-top:2px solid ${theme.primaryColor}; background:#e4e4e4; font-weight:800;">
         <td style="padding:4px 6px; font-size:11.5px; color:#111;">Net Total</td>
@@ -173,11 +173,11 @@ export function renderCanonicalFeeVoucherCopyHtml(ch, label, school = {}, templa
   const sa = school?.address || school?.schoolAddress || CANONICAL_SCHOOL_IDENTITY.address;
   const sl = school?.logo || school?.logoUrl || '';
 
-  const grVal = ch.gr_number || ch.gr || 'â€”';
-  const nameVal = ch.name || ch.student || 'â€”';
-  const fatherVal = ch.father_name || ch.father || 'â€”';
-  const voucherNoVal = ch.challan_no || ch.voucherNo || ch.voucherNumber || 'â€”';
-  const classVal = ch.class || ch.className || 'â€”';
+  const grVal = ch.gr_number || ch.gr || '—';
+  const nameVal = ch.name || ch.student || '—';
+  const fatherVal = ch.father_name || ch.father || '—';
+  const voucherNoVal = ch.challan_no || ch.voucherNo || ch.voucherNumber || '—';
+  const classVal = ch.class || ch.className || '—';
   const sectionVal = ch.section || 'Blue';
 
   const { gross: net } = feeParts(ch);
@@ -312,7 +312,7 @@ export function renderCanonicalFeeVoucherHtml(challan, school = {}, options = {}
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Fee Voucher â€” ${challan.challan_no || challan.name || ''}</title>
+  <title>Fee Voucher — ${challan.challan_no || challan.name || ''}</title>
   <style>
     * { box-sizing:border-box; margin:0; padding:0; }
     @page { size:${printPageSize}; margin:${printMargin}; }
@@ -327,7 +327,7 @@ export function renderCanonicalFeeVoucherHtml(challan, school = {}, options = {}
   <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:10px 20px; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
     <div style="display:flex; align-items:center; gap:12px;">
       <strong style="color:#C8991A; font-size:15px;">${school?.name || school?.schoolName || CANONICAL_SCHOOL_IDENTITY.schoolName}</strong>
-      <span style="font-size:13px; color:#C0C8D8;">â€¢ Voucher: ${challan.challan_no || challan.name || 'Single Voucher'}</span>
+      <span style="font-size:13px; color:#C0C8D8;">• Voucher: ${challan.challan_no || challan.name || 'Single Voucher'}</span>
     </div>
     <div style="display:flex; gap:10px;">
       <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">ðŸ–¨ï¸ Print Voucher</button>
@@ -416,15 +416,15 @@ ${student.photo ? `<img src="${student.photo}" style="width:100%;height:100%;obj
 <div class="section">
 <div class="section-title">Student Information</div>
 <div class="row">
-<div class="field"><label>Full Name</label><span>${student.name || 'â€”'}</span></div>
-<div class="field" style="max-width:200px"><label>GR Number</label><span>${student.gr_number || student.admissionNumber || 'â€”'}</span></div>
+<div class="field"><label>Full Name</label><span>${student.name || '—'}</span></div>
+<div class="field" style="max-width:200px"><label>GR Number</label><span>${student.gr_number || student.admissionNumber || '—'}</span></div>
 </div>
 <div class="row">
-<div class="field"><label>Father / Guardian Name</label><span>${student.father_name || student.fatherName || 'â€”'}</span></div>
-<div class="field"><label>Date of Birth</label><span>${student.date_of_birth || student.dob || 'â€”'}</span></div>
+<div class="field"><label>Father / Guardian Name</label><span>${student.father_name || student.fatherName || '—'}</span></div>
+<div class="field"><label>Date of Birth</label><span>${student.date_of_birth || student.dob || '—'}</span></div>
 </div>
 <div class="row">
-<div class="field"><label>Class Admitted</label><span>${student.class || student.className || 'â€”'}</span></div>
+<div class="field"><label>Class Admitted</label><span>${student.class || student.className || '—'}</span></div>
 <div class="field"><label>Section</label><span>${student.section || 'Blue'}</span></div>
 <div class="field"><label>Gender</label><span>${student.gender || 'Male'}</span></div>
 </div>
@@ -433,8 +433,8 @@ ${student.photo ? `<img src="${student.photo}" style="width:100%;height:100%;obj
 <div class="section">
 <div class="section-title">Contact & Address</div>
 <div class="row">
-<div class="field"><label>Parent Phone</label><span>${student.parent_phone || student.contact || 'â€”'}</span></div>
-<div class="field"><label>Address</label><span>${student.address || 'â€”'}</span></div>
+<div class="field"><label>Parent Phone</label><span>${student.parent_phone || student.contact || '—'}</span></div>
+<div class="field"><label>Address</label><span>${student.address || '—'}</span></div>
 </div>
 </div>
 

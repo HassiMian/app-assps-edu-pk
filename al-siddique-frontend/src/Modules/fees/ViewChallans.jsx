@@ -2,6 +2,7 @@ import { renderCanonicalFeeVoucherCopyHtml, renderCanonicalFeeVoucherHtml } from
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import { Printer } from 'lucide-react'
 import api from '../../services/api'
 import { useTenantBranding } from '../../context/TenantBrandingContext'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
@@ -312,7 +313,7 @@ export function printChallan(challan, school = {}, templateId = 1, copies = 3, p
       <span style="font-size:13px; color:#C0C8D8;">• Voucher: ${challan.challan_no || challan.name || 'Single Voucher'}</span>
     </div>
     <div style="display:flex; gap:10px;">
-      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">🖨️ Print Voucher</button>
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">Print Voucher</button>
       <button onclick="window.close()" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:600; border:1px solid rgba(255,255,255,0.2); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px;">Close</button>
     </div>
   </div>
@@ -392,7 +393,7 @@ export function printCompactBatch(challans, school = {}, printWin = null) {
       <span style="font-size:13px; color:#C0C8D8;">• Batch of ${challans.length} Compact Vouchers Ready</span>
     </div>
     <div style="display:flex; gap:10px;">
-      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">🖨️ Print All (${challans.length})</button>
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">Print All (${challans.length})</button>
       <button onclick="window.close()" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:600; border:1px solid rgba(255,255,255,0.2); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px;">Close</button>
     </div>
   </div>
@@ -460,7 +461,7 @@ export function printBatchChallans(challans, school = {}, templateId = 1, printW
       <span style="font-size:13px; color:#C0C8D8;">• Batch Print: <strong>${challans.length} Students</strong> (${challans.length * 3} Vouchers)</span>
     </div>
     <div style="display:flex; gap:12px;">
-      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:9px 24px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 3px 10px rgba(0,0,0,0.35);">🖨️ Print All Vouchers (${challans.length})</button>
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:9px 24px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 3px 10px rgba(0,0,0,0.35);">Print All Vouchers (${challans.length})</button>
       <button onclick="window.close()" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:600; border:1px solid rgba(255,255,255,0.25); padding:9px 16px; border-radius:8px; cursor:pointer; font-size:13px;">Close</button>
     </div>
   </div>
@@ -784,7 +785,7 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
           gap: 6
         }}
       >
-        🖨️ Batch Print ({filtered.length})
+        <Printer size={15} /> Batch Print ({filtered.length})
       </button>
 
       {/* Print Vouchers Dropdown */}
