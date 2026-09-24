@@ -25,6 +25,7 @@ import { useTenantBranding } from '../context/TenantBrandingContext'
 import { BarChart, ChartLegend, DonutChart } from '../components/Charts'
 import SchoolHero from '../components/SchoolHero'
 import { AttendanceStatsCard, AdmissionWithdrawalStatsCard } from '../components/dashboard/DashboardAnalyticsCards'
+import { onAttendanceUpdated } from '../utils/attendanceEvents'
 
 const ATTENDANCE_DATA = [
   { day: 'Mon', pct: 94 },
@@ -225,16 +226,11 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [dashApi, setDashApi] = useState(null)
 
-  useEffect(() => {
-    const timer = setInterval(() => setDate(new Date()), 60000)
-    return () => clearInterval(timer)
-  }, [])
-
-  const fetchAll = useCallback(async () => {
+  const fetchAll = useCallback(async (silent = false) => {
     try {
-      setLoading(true)
+      if (!silent) setLoading(true)
       const [studentRes, dashRes] = await Promise.all([
-        api.get('/api/students'),
+        api.get('/api/students').catch(() => ({ data: { data: [] } })),
         api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
       ])
       const allStudents = studentRes.data.data || []
@@ -283,6 +279,17 @@ export default function Dashboard() {
       setLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    const timer = setInterval(() => setDate(new Date()), 60000)
+    const unsub = onAttendanceUpdated(() => {
+      fetchAll(true)  // silent=true: don't flip loading state during background refresh
+    })
+    return () => {
+      clearInterval(timer)
+      unsub()
+    }
+  }, [fetchAll])
 
   useEffect(() => {
     fetchAll()
@@ -499,19 +506,18 @@ export default function Dashboard() {
           </div>
         )}
 
-        {!loading && (
-          <div className="super-dashboard-analytics-row">
-            <AttendanceStatsCard
-              stats={dashApi?.attendance_stats}
-              loading={false}
-              onRefresh={fetchAll}
-            />
-            <AdmissionWithdrawalStatsCard
-              stats={dashApi?.admission_withdrawal}
-              loading={false}
-            />
-          </div>
-        )}
+        <div className="super-dashboard-analytics-row">
+          <AttendanceStatsCard
+            stats={dashApi?.attendance_stats}
+            loading={false}
+            onRefresh={() => fetchAll(true)}
+          />
+          <AdmissionWithdrawalStatsCard
+            stats={dashApi?.admission_withdrawal}
+            loading={false}
+          />
+        </div>
+
 
         {!loading && stats && (
           <Panel accent="#FF9F0A" style={{ marginBottom: 20, background: 'linear-gradient(135deg,rgba(15,23,42,0.82),rgba(255,159,10,0.08))' }}>

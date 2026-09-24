@@ -9,9 +9,13 @@ const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && proces
 const safe = async (fn) => { try { return await fn() } catch (err) { console.error('Dashboard query failed:', err.message); return null } }
 
 // ── GET /api/dashboard/stats  (SaaS)
-// ── GET /api/admin/dashboard  (Super App — same handler via apiRouter alias)
 router.get(['/', '/stats'], protect, async (req, res) => {
-  const today      = new Date().toISOString().split('T')[0]
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Karachi',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(new Date())
   const year       = new Date().getFullYear()
   const monthName  = new Date().toLocaleString('en-US', { month: 'long' })
   const monthNum   = (new Date().getMonth() + 1).toString().padStart(2, '0')
@@ -19,134 +23,136 @@ router.get(['/', '/stats'], protect, async (req, res) => {
   const schoolId   = currentSchoolId(req)
   const isSuperAdmin = req.user?.role === 'super_admin'
 
-  const studentScope = isSuperAdmin ? [] : [schoolId]
-  const studentScopeAt2 = isSuperAdmin ? [today] : [today, schoolId]
-  const feeScope = isSuperAdmin ? [] : [schoolId]
-  const feeScopeMonth = isSuperAdmin ? [monthName, monthLabel] : [schoolId, monthName, monthLabel]
-
-  const studentTenant = isSuperAdmin ? '' : ' AND school_id = $1'
-  const studentParams = isSuperAdmin ? [] : [schoolId]
-
-  const [studentsR, todayAttR, todayAttDistinctR, feeStatusR, feeMonthR, feePendR,
-         employeesR, booksR, admissionsR, weeklyR,
-         admTodayR, admMonthR, admYearR, wdMonthR, wdYearR] = await Promise.all([
-    safe(() => query(`
-      SELECT COUNT(*)
-      FROM students
-      WHERE is_active = true${isSuperAdmin ? '' : ' AND school_id = $1'}`, studentScope)),
-    safe(() => query(`
+  const consolidatedSql = `
+    WITH stu AS (
       SELECT
-        COUNT(*)                                                          AS total,
-        SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END)              AS present,
-        SUM(CASE WHEN a.status = 'absent' THEN 1 ELSE 0 END)               AS absent,
-        SUM(CASE WHEN a.status = 'late' THEN 1 ELSE 0 END)                 AS late,
-        SUM(CASE WHEN a.status = 'leave' THEN 1 ELSE 0 END)                AS leave
-      FROM attendance a
-      JOIN students s ON s.id = a.student_id
-      WHERE a.date::text = $1${isSuperAdmin ? '' : ' AND s.school_id = $2'}`,
-      studentScopeAt2)),
-    safe(() => query(`
+        COUNT(*) FILTER (WHERE is_active = true)::int AS total_students,
+        COUNT(*) FILTER (WHERE created_at::date = CURRENT_DATE)::int AS adm_today,
+        COUNT(*) FILTER (WHERE created_at >= date_trunc('month', CURRENT_DATE))::int AS adm_month,
+        COUNT(*) FILTER (WHERE created_at >= date_trunc('year', CURRENT_DATE))::int AS adm_year,
+        COUNT(*) FILTER (WHERE is_active = false AND updated_at >= date_trunc('month', CURRENT_DATE))::int AS wd_month,
+        COUNT(*) FILTER (WHERE is_active = false AND updated_at >= date_trunc('year', CURRENT_DATE))::int AS wd_year
+      FROM students
+      WHERE 1=1 AND ($1::int IS NULL OR school_id = $1)
+    ),
+    att AS (
       SELECT
         COUNT(DISTINCT CASE WHEN a.status = 'present' THEN a.student_id END)::int AS present,
-        COUNT(DISTINCT CASE WHEN a.status = 'absent' THEN a.student_id END)::int  AS absent,
-        COUNT(DISTINCT CASE WHEN a.status = 'late' THEN a.student_id END)::int    AS late,
-        COUNT(DISTINCT CASE WHEN a.status = 'leave' THEN a.student_id END)::int   AS leave,
+        COUNT(DISTINCT CASE WHEN a.status = 'absent' THEN a.student_id END)::int AS absent,
+        COUNT(DISTINCT CASE WHEN a.status = 'late' THEN a.student_id END)::int AS late,
+        COUNT(DISTINCT CASE WHEN a.status = 'leave' THEN a.student_id END)::int AS leave,
         COUNT(DISTINCT a.student_id)::int AS marked
       FROM attendance a
       JOIN students s ON s.id = a.student_id AND s.is_active = true
-      WHERE a.date::text = $1${isSuperAdmin ? '' : ' AND s.school_id = $2'}`,
-      studentScopeAt2)),
-    safe(() => query(`
+      WHERE a.date::text = $2 AND ($1::int IS NULL OR s.school_id = $1)
+    ),
+    fee AS (
       SELECT
-        COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END), 0) AS collected,
-        COALESCE(SUM(CASE WHEN status IN ('unpaid','pending') THEN amount ELSE 0 END), 0) AS pending,
-        COALESCE(SUM(CASE WHEN status = 'overdue' THEN amount ELSE 0 END), 0) AS overdue
-      FROM fee_challans${isSuperAdmin ? '' : ' WHERE school_id = $1'}`, feeScope)),
-    safe(() => query(`
-      SELECT COALESCE(SUM(amount), 0) AS total
+        COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END), 0)::float AS collected,
+        COALESCE(SUM(CASE WHEN status IN ('unpaid','pending') THEN amount ELSE 0 END), 0)::float AS pending,
+        COALESCE(SUM(CASE WHEN status = 'overdue' THEN amount ELSE 0 END), 0)::float AS overdue,
+        COALESCE(SUM(CASE WHEN status = 'paid' AND (month = $3 OR month = $4) THEN amount ELSE 0 END), 0)::float AS collected_month,
+        COALESCE(SUM(CASE WHEN status IN ('unpaid','pending') THEN amount ELSE 0 END), 0)::float AS pending_total,
+        COUNT(CASE WHEN status IN ('unpaid','pending') THEN 1 END)::int AS pending_count
       FROM fee_challans
-      WHERE status = 'paid'${isSuperAdmin ? ' AND (month = $1 OR month = $2)' : ' AND school_id = $1 AND (month = $2 OR month = $3)'}`,
-      feeScopeMonth)),
-    safe(() => query(`
-      SELECT COALESCE(SUM(amount), 0) AS total, COUNT(*) AS cnt
-      FROM fee_challans
-      WHERE status IN ('unpaid','pending')${isSuperAdmin ? '' : ' AND school_id = $1'}`, feeScope)),
-    safe(() => query(`
-      SELECT COUNT(*)
+      WHERE 1=1 AND ($1::int IS NULL OR school_id = $1)
+    ),
+    emp AS (
+      SELECT COUNT(*)::int AS emp_count
       FROM employees
-      WHERE is_active = true${isSuperAdmin ? '' : ' AND school_id = $1'}`, studentScope)),
-    safe(() => query(`SELECT 0 AS count`)),
-    safe(() => query(`
-      SELECT COUNT(*) FROM admissions
-      WHERE created_at >= date_trunc('month', CURRENT_DATE)`)),
-    safe(() => query(`
-      WITH dates AS (
-        SELECT generate_series(
-          CURRENT_DATE - INTERVAL '6 days', CURRENT_DATE, '1 day'::interval
-        )::date AS d
-      )
-      SELECT
-        d.d::text                                                                      AS date,
-        to_char(d.d, 'Dy')                                                             AS day,
-        COALESCE(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END), 0)::int       AS present,
-        COALESCE(COUNT(DISTINCT a.student_id), 0)::int                                 AS total,
-        CASE WHEN COUNT(DISTINCT a.student_id) > 0
-          THEN ROUND(SUM(CASE WHEN a.status='present' THEN 1 ELSE 0 END)*100.0
-               / NULLIF(COUNT(DISTINCT a.student_id),0))::int
-          ELSE 0 END                                                                   AS percent
-      FROM dates d
-      LEFT JOIN (
-        SELECT a.*
-        FROM attendance a
-        JOIN students s ON s.id = a.student_id
-        ${isSuperAdmin ? '' : 'WHERE s.school_id = $1'}
-      ) a ON a.date = d.d
-      GROUP BY d.d ORDER BY d.d`, isSuperAdmin ? [] : [schoolId])),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE created_at::date = CURRENT_DATE${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE created_at >= date_trunc('month', CURRENT_DATE)${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE created_at >= date_trunc('year', CURRENT_DATE)${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE is_active = false
-        AND updated_at >= date_trunc('month', CURRENT_DATE)${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE is_active = false
-        AND updated_at >= date_trunc('year', CURRENT_DATE)${studentTenant}`, studentParams)),
+      WHERE is_active = true AND ($1::int IS NULL OR school_id = $1)
+    ),
+    adm AS (
+      SELECT COUNT(*)::int AS adm_count
+      FROM admissions
+      WHERE created_at >= date_trunc('month', CURRENT_DATE)
+    )
+    SELECT
+      stu.*,
+      COALESCE(att.present, 0)::int AS att_present,
+      COALESCE(att.absent, 0)::int AS att_absent,
+      COALESCE(att.late, 0)::int AS att_late,
+      COALESCE(att.leave, 0)::int AS att_leave,
+      COALESCE(att.marked, 0)::int AS att_marked,
+      COALESCE(fee.collected, 0)::float AS fee_collected,
+      COALESCE(fee.pending, 0)::float AS fee_pending,
+      COALESCE(fee.overdue, 0)::float AS fee_overdue,
+      COALESCE(fee.collected_month, 0)::float AS fee_collected_month,
+      COALESCE(fee.pending_total, 0)::float AS fee_pending_total,
+      COALESCE(fee.pending_count, 0)::int AS fee_pending_count,
+      emp.emp_count,
+      COALESCE(adm.adm_count, 0)::int AS adm_count
+    FROM stu
+    CROSS JOIN att
+    CROSS JOIN fee
+    CROSS JOIN emp
+    CROSS JOIN adm;
+  `
+
+  const weeklySql = `
+    WITH dates AS (
+      SELECT generate_series(
+        CURRENT_DATE - INTERVAL '6 days', CURRENT_DATE, '1 day'::interval
+      )::date AS d
+    )
+    SELECT
+      d.d::text AS date,
+      to_char(d.d, 'Dy') AS day,
+      COALESCE(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END), 0)::int AS present,
+      COALESCE(COUNT(DISTINCT a.student_id), 0)::int AS total,
+      CASE WHEN COUNT(DISTINCT a.student_id) > 0
+        THEN ROUND(SUM(CASE WHEN a.status='present' THEN 1 ELSE 0 END)*100.0
+             / NULLIF(COUNT(DISTINCT a.student_id),0))::int
+        ELSE 0 END AS percent
+    FROM dates d
+    LEFT JOIN (
+      SELECT a.*
+      FROM attendance a
+      JOIN students s ON s.id = a.student_id
+      WHERE ($1::int IS NULL OR s.school_id = $1)
+    ) a ON a.date = d.d
+    GROUP BY d.d ORDER BY d.d
+  `
+
+  const [overviewRes, weeklyRes] = await Promise.all([
+    safe(() => query(consolidatedSql, [schoolId, today, monthName, monthLabel])),
+    safe(() => query(weeklySql, [schoolId])),
   ])
 
-  const dashboardDbOffline = [studentsR, todayAttR, todayAttDistinctR, feeStatusR, feeMonthR, feePendR, employeesR, weeklyR].some(r => r === null)
-  if (dashboardDbOffline) {
+  if (!overviewRes || !weeklyRes) {
     return res.status(503).json({ success: false, message: 'Database unavailable. Dashboard is temporarily offline.' })
   }
 
-  const students = parseInt(studentsR?.rows?.[0]?.count || 0)
-  const attTotal = todayAttR?.rows?.[0] || {}
-  const attDist  = todayAttDistinctR?.rows?.[0] || {}
-
-  const todayPresent = parseInt(attDist.present || attTotal.present || 0)
-  const todayAbsent  = parseInt(attDist.absent  || attTotal.absent  || 0)
-  const todayLate    = parseInt(attDist.late    || attTotal.late    || 0)
-  const todayLeave   = parseInt(attDist.leave   || attTotal.leave   || 0)
+  const o = overviewRes.rows[0] || {}
+  const students = o.total_students || 0
+  const todayPresent = o.att_present || 0
+  const todayAbsent  = o.att_absent  || 0
+  const todayLate    = o.att_late    || 0
+  const todayLeave   = o.att_leave   || 0
   const todayTotal   = todayPresent + todayAbsent + todayLate + todayLeave
 
-  const todayMarked  = parseInt(attDist.marked || 0)
+  const todayMarked  = o.att_marked || 0
   const todayUnmarked = Math.max(0, students - todayMarked)
   const todayPct     = students > 0 ? Math.round((todayPresent / students) * 100) : (todayTotal > 0 ? Math.round((todayPresent / todayTotal) * 100) : 0)
 
-  const fsData = feeStatusR?.rows?.[0] || { collected: 0, pending: 0, overdue: 0 }
-  const feeCollectedMonth  = parseFloat(feeMonthR?.rows?.[0]?.total || 0)
-  const feePendingTotal    = parseFloat(feePendR?.rows?.[0]?.total  || 0)
-  const feePendingCount    = parseInt(feePendR?.rows?.[0]?.cnt      || 0)
-  const employees  = parseInt(employeesR?.rows?.[0]?.count  || 0)
-  const books      = parseInt(booksR?.rows?.[0]?.count      || 0)
-  const admissions = parseInt(admissionsR?.rows?.[0]?.count || 0)
+  const fsData = {
+    collected: o.fee_collected || 0,
+    pending:   o.fee_pending   || 0,
+    overdue:   o.fee_overdue   || 0,
+  }
+  const feeCollectedMonth  = parseFloat(o.fee_collected_month || 0)
+  const feePendingTotal    = parseFloat(o.fee_pending_total || 0)
+  const feePendingCount    = parseInt(o.fee_pending_count || 0)
+  const employees  = parseInt(o.emp_count || 0)
+  const books      = 0
+  const admissions = parseInt(o.adm_count || 0)
+
+  const weeklyR = weeklyRes
+  const admTodayR = { rows: [{ c: o.adm_today || 0 }] }
+  const admMonthR = { rows: [{ c: o.adm_month || 0 }] }
+  const admYearR  = { rows: [{ c: o.adm_year  || 0 }] }
+  const wdMonthR  = { rows: [{ c: o.wd_month  || 0 }] }
+  const wdYearR   = { rows: [{ c: o.wd_year   || 0 }] }
 
   const weekly = (weeklyR?.rows || []).map(r => ({
     date:    r.date,
