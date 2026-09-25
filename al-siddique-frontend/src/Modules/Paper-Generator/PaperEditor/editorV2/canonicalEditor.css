@@ -1,0 +1,118 @@
+/* canonicalEditor.css — Shared Typography Tokens & Layout Parity Styles for Canonical Editor V2 (Rule 33) */
+
+:root {
+  --canonical-font-en: 'Times New Roman', serif;
+  --canonical-font-ur: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  --canonical-line-height-en: 1.45;
+  --canonical-line-height-ur: 1.9;
+  --canonical-font-size: 13px;
+  --canonical-font-size-half: 11px;
+}
+
+/* Page Surface */
+.canonical-paper-surface {
+  background: #ffffff;
+  color: #111827;
+  box-sizing: border-box;
+  position: relative;
+  font-family: var(--canonical-font-en);
+  font-size: var(--canonical-font-size);
+  line-height: var(--canonical-line-height-en);
+}
+
+.canonical-paper-surface[dir="rtl"] {
+  font-family: var(--canonical-font-ur);
+  line-height: var(--canonical-line-height-ur);
+}
+
+/* Stem Box Container (Preserves Identical Geometry in Edit vs View Mode) */
+.canonical-stem-box {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-width: 24px;
+}
+
+/* Edit Mode ProseMirror Container */
+.canonical-editable-stem-content {
+  outline: none;
+}
+
+.canonical-editable-stem-content .ProseMirror {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  min-height: 1.2em;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.canonical-editable-stem-content .ProseMirror p {
+  margin: 0 0 2px 0;
+  padding: 0;
+}
+
+.canonical-editable-stem-content .ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+.canonical-editable-stem-content .ProseMirror-focused {
+  background-color: rgba(200, 153, 26, 0.08);
+  border-radius: 3px;
+  box-shadow: 0 0 0 1.5px rgba(200, 153, 26, 0.4);
+}
+
+/* Static View Mode Renderer (Strict Geometry Parity with ProseMirror) */
+.canonical-static-text {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.canonical-static-text p {
+  margin: 0 0 2px 0;
+  padding: 0;
+}
+
+.canonical-static-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Locked Marks Evidence Badge (Rule 22) */
+.canonical-locked-marks-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #1e3a8a;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  padding: 1px 6px;
+  user-select: none;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.canonical-paper-surface[dir="rtl"] .canonical-locked-marks-badge {
+  margin-left: 0;
+  margin-right: 6px;
+}
+
+/* Unknown Preserved Block (Rule 37) */
+.canonical-unknown-preserved-block {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin: 8px 0;
+  font-family: monospace;
+  font-size: 12px;
+  color: #334155;
+  white-space: pre-wrap;
+}

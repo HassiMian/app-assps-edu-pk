@@ -15,7 +15,7 @@ const HandwrittenScannerTab = lazy(() => import('./HandwrittenScannerTab'))
 const QuestionBank = lazy(() => import('./QuestionBank'))
 const NotesMakerTab = lazy(() => import('./NotesMakerTab'))
 const DailyDiaryFeature = lazy(() => import('./DailyDiaryFeature'))
-const PaperEditorMain = lazy(() => import('./PaperEditor/PaperEditorMain'))
+const PaperEditorRouter = lazy(() => import('./PaperEditor/editorV2/PaperEditorRouter'))
 
 const C = {
   card: 'rgba(15,23,42,0.58)',
@@ -165,7 +165,7 @@ export default function PaperGenerator() {
     return (
       <>
         {moduleTab === 'build' && <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
-        {moduleTab === 'word_editor' && <ModuleWrap><PaperEditorMain loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
+        {moduleTab === 'word_editor' && <ModuleWrap><PaperEditorRouter loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
         {moduleTab === 'board_pattern' && <ModuleWrap><BoardPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
       </>
     )
