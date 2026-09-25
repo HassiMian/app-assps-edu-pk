@@ -1,14 +1,34 @@
-// PaperEditorRouter.jsx — Dynamic Router Dispatching to Canonical or Legacy Editor (Rules 24, 28)
 import React, { useMemo } from 'react'
 import { resolvePaperEditorRoute } from './canonicalRouteGuards.js'
 import CanonicalPaperEditorMain from './CanonicalPaperEditorMain.jsx'
 import LegacyPaperEditorMain from '../PaperEditorMain.jsx'
+import EarlyYearsWorksheetEditor from '../earlyYears/EarlyYearsWorksheetEditor.jsx'
 
 export default function PaperEditorRouter({
   loadedPaper = null,
   onReturnToSource = null,
   initialTemplate = null,
 }) {
+  // Check if Early Years paper
+  const isEarlyYears = useMemo(() => {
+    if (!loadedPaper || typeof loadedPaper !== 'object') return false
+    return (
+      loadedPaper.corpusId === 'early-years-first-term-2026' ||
+      (typeof loadedPaper.id === 'string' && loadedPaper.id.startsWith('ey-')) ||
+      (typeof loadedPaper.classStage === 'string' &&
+        ['starter', 'mover', 'flyer'].includes(loadedPaper.classStage.toLowerCase()))
+    )
+  }, [loadedPaper])
+
+  if (isEarlyYears) {
+    return (
+      <EarlyYearsWorksheetEditor
+        initialPaperId={loadedPaper?.id || 'ey-starter-english-2026'}
+        onReturnToSource={onReturnToSource}
+      />
+    )
+  }
+
   const routingDecision = useMemo(() => {
     return resolvePaperEditorRoute(loadedPaper)
   }, [loadedPaper])
