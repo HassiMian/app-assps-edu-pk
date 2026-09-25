@@ -7,6 +7,10 @@ import {
   DocumentDirection,
   FieldProvenanceOrigin,
   CoverageStatus,
+  NodeMarksOrigin,
+  SectionMarksOrigin,
+  ClassificationCertainty,
+  CanonicalNodeType,
   createCanonicalPaperDocument,
   createCanonicalSection,
   createScopeHeaderNode,
@@ -29,6 +33,31 @@ import { parseVerticalMath } from './semanticParsers/parseVerticalMath.js'
 
 export const MIGRATION_ENGINE_VERSION = '2.0.0-b2'
 export const MIGRATION_BASELINE_COMMIT = '6eea6773d3cf8166aee3ef80a7acc3a71847ea2c'
+
+export const DEFAULT_V13_DATASET_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
+export const DEFAULT_V13_DECLARED_SHA256 = '6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692'
+export const DEFAULT_V13_BYTE_SHA256 = '5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214'
+export const DEFAULT_MANIFEST_BYTE_SHA256 = 'f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4'
+export const DEFAULT_MANIFEST_VERSION = '1.0.0'
+
+/**
+ * Determines whether a canonical node is an eligible academic question node
+ * for receiving marks.
+ */
+function isAcademicQuestionNode(node) {
+  if (!node || !node.type) return false
+  if (
+    node.type === CanonicalNodeType.SCOPE_HEADER ||
+    node.type === CanonicalNodeType.SECTION_BANNER ||
+    node.type === CanonicalNodeType.UNKNOWN_PRESERVED
+  ) {
+    return false
+  }
+  if (node.type === CanonicalNodeType.RICH_TEXT && node.layoutSemantic !== 'vertical-math-grid') {
+    return false
+  }
+  return true
+}
 
 /**
  * Migrates a single official V13 paper and its B1 normalization manifest entry
@@ -53,8 +82,13 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
 
   // Metadata mapping — preserve source, no default invention
   const cfg = v13Paper.config || {}
-  const language = cfg.language || DocumentLanguage.ENGLISH
-  const docDirection = language === 'urdu' ? DocumentDirection.RTL : DocumentDirection.LTR
+  const language = cfg.language || DocumentLanguage.UNKNOWN
+  const docDirection =
+    language === DocumentLanguage.URDU
+      ? DocumentDirection.RTL
+      : language === DocumentLanguage.ENGLISH
+        ? DocumentDirection.LTR
+        : DocumentDirection.AUTO
 
   const metadata = {
     title: cfg.title || null,
@@ -172,7 +206,8 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
       canonicalSectionId,
       sourceSec.id,
       secDirection,
-      globalNodeIds
+      globalNodeIds,
+      manifestSec
     )
 
     // 4. Verify content coverage invariants
@@ -214,12 +249,25 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
     sections.push(section)
   })
 
+  // Source Identity (Mandatory canonical provenance)
+  const sourceIdentity = {
+    sourcePaperId: v13Paper.id,
+    sourceDatasetGeneration: migrationContext.sourceDatasetGeneration || 'v13',
+    sourceDatasetVersion: migrationContext.sourceDatasetVersion || DEFAULT_V13_DATASET_VERSION,
+    sourceDatasetByteSha256: migrationContext.sourceDatasetByteSha256 || DEFAULT_V13_BYTE_SHA256,
+    sourceDatasetDeclaredSha256: migrationContext.sourceDatasetDeclaredSha256 || DEFAULT_V13_DECLARED_SHA256,
+    normalizationManifestByteSha256: migrationContext.normalizationManifestByteSha256 || DEFAULT_MANIFEST_BYTE_SHA256,
+    normalizationManifestVersion: migrationContext.normalizationManifestVersion || DEFAULT_MANIFEST_VERSION,
+    manifestPaperIndex: Number.isInteger(manifestPaper.paperIndex) ? manifestPaper.paperIndex : 1,
+  }
+
   // Assemble Canonical Document
   const doc = createCanonicalPaperDocument({
     id: docId,
     metadata,
     presentation,
     authority,
+    sourceIdentity,
     sections,
     sourceCoverageLedger: docCoverageLedger,
     createdAt: null,
@@ -227,10 +275,6 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
     migrationAudit: {
       migrationBaselineCommit: migrationContext.migrationBaselineCommit || MIGRATION_BASELINE_COMMIT,
       migrationEngineVersion: migrationContext.migrationEngineVersion || MIGRATION_ENGINE_VERSION,
-      sourceDatasetVersion: migrationContext.sourceDatasetVersion || null,
-      sourceDatasetDeclaredSha256: migrationContext.sourceDatasetDeclaredSha256 || null,
-      sourceDatasetByteSha256: migrationContext.sourceDatasetByteSha256 || null,
-      normalizationManifestByteSha256: migrationContext.normalizationManifestByteSha256 || null,
     },
   })
 
@@ -291,7 +335,15 @@ function selectParserForSection(section, paper) {
 /**
  * Stitches parsed item spans into a 100% gapless, non-overlapping coverage ledger.
  */
-function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sourceSectionId, direction, globalNodeIds) {
+export function stitchItemsToFullCoverage(
+  parsedItems,
+  content,
+  canonicalSectionId,
+  sourceSectionId,
+  direction,
+  globalNodeIds,
+  manifestSec
+) {
   const nodes = []
   const segments = []
 
@@ -329,7 +381,13 @@ function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sou
       id: nodeId,
       direction,
       rawText: content,
+      operationalNodeMarks: null,
+      authoritativeNodeMarks: null,
+      nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
+      marksEvidenceString: null,
       provenance: {
+        classificationCertainty: ClassificationCertainty.UNKNOWN,
+        academicTextMutated: false,
         sourceSegmentIds: [segId],
         rawSourceSnapshot: content,
       },
@@ -348,6 +406,27 @@ function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sou
       globalNodeIds.add(bannerId)
       items.unshift({
         node: createSectionBannerNode({ id: bannerId, bannerText: preText.trim(), direction }),
+        startOffset: 0,
+        endOffset: items[0].startOffset,
+        rawText: preText,
+      })
+    } else if (preText.trim().length > 0) {
+      const unkId = `${canonicalSectionId}__gap_pre`
+      globalNodeIds.add(unkId)
+      items.unshift({
+        node: createUnknownPreservedNode({
+          id: unkId,
+          direction,
+          rawText: preText,
+          operationalNodeMarks: null,
+          authoritativeNodeMarks: null,
+          nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
+          marksEvidenceString: null,
+          provenance: {
+            classificationCertainty: ClassificationCertainty.UNKNOWN,
+            academicTextMutated: false,
+          },
+        }),
         startOffset: 0,
         endOffset: items[0].startOffset,
         rawText: preText,
@@ -372,6 +451,28 @@ function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sou
           rawText: gapText,
         })
         i++ // skip newly inserted banner
+      } else if (gapText.trim().length > 0) {
+        const unkId = `${canonicalSectionId}__gap_${i}`
+        globalNodeIds.add(unkId)
+        items.splice(i + 1, 0, {
+          node: createUnknownPreservedNode({
+            id: unkId,
+            direction,
+            rawText: gapText,
+            operationalNodeMarks: null,
+            authoritativeNodeMarks: null,
+            nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
+            marksEvidenceString: null,
+            provenance: {
+              classificationCertainty: ClassificationCertainty.UNKNOWN,
+              academicTextMutated: false,
+            },
+          }),
+          startOffset: items[i].endOffset,
+          endOffset: items[i + 1].startOffset,
+          rawText: gapText,
+        })
+        i++ // skip newly inserted unknown node
       } else {
         items[i].endOffset = items[i + 1].startOffset
         items[i].rawText = content.slice(items[i].startOffset, items[i].endOffset)
@@ -388,6 +489,27 @@ function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sou
       globalNodeIds.add(bannerId)
       items.push({
         node: createSectionBannerNode({ id: bannerId, bannerText: postText.trim(), direction }),
+        startOffset: last.endOffset,
+        endOffset: content.length,
+        rawText: postText,
+      })
+    } else if (postText.trim().length > 0) {
+      const unkId = `${canonicalSectionId}__gap_post`
+      globalNodeIds.add(unkId)
+      items.push({
+        node: createUnknownPreservedNode({
+          id: unkId,
+          direction,
+          rawText: postText,
+          operationalNodeMarks: null,
+          authoritativeNodeMarks: null,
+          nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
+          marksEvidenceString: null,
+          provenance: {
+            classificationCertainty: ClassificationCertainty.UNKNOWN,
+            academicTextMutated: false,
+          },
+        }),
         startOffset: last.endOffset,
         endOffset: content.length,
         rawText: postText,
@@ -413,18 +535,45 @@ function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sou
 
     // Attach provenance
     item.node.provenance = {
+      classificationCertainty:
+        item.node.provenance?.classificationCertainty || ClassificationCertainty.DETERMINISTIC,
+      academicTextMutated: Boolean(item.node.provenance?.academicTextMutated ?? false),
       sourceSegmentIds: [segId],
       rawSourceSnapshot: item.rawText,
     }
 
-    // Item-level marks detection (e.g. Class 8 Computer Q3 items: "Explain... (10 Marks)")
+    // Node Marks Authority & Origin Resolution
+    // Priority: ITEM_LEVEL_EXPLICIT > DERIVED_FROM_RESOLVED_FORMULA > INHERITED_OPERATIONAL > UNSTATED
     const marksMatch = item.rawText.match(/\((\d+)\s*(?:Marks?|نمبر)\)/i)
-    if (marksMatch && item.node.type !== 'scope_header' && item.node.type !== 'section_banner') {
-      item.node.operationalNodeMarks = parseInt(marksMatch[1], 10)
-      item.node.authoritativeNodeMarks = null // Stays null unless explicitly balanced
-      item.node.nodeMarksOrigin = 'TEACHER_EXPLICIT_SCALAR'
+    const formula = manifestSec?.explicitHeadingFormula
+    const isFormulaResolved =
+      formula &&
+      formula.interpretationStatus === 'RESOLVED' &&
+      formula.interpretedMarksPerItem != null &&
+      manifestSec.sectionMarksOrigin === SectionMarksOrigin.TEACHER_EXPLICIT_FORMULA
+
+    if (marksMatch && isAcademicQuestionNode(item.node)) {
+      const explicitVal = parseInt(marksMatch[1], 10)
+      item.node.operationalNodeMarks = explicitVal
+      item.node.authoritativeNodeMarks = explicitVal
+      item.node.nodeMarksOrigin = NodeMarksOrigin.ITEM_LEVEL_EXPLICIT
       item.node.marksEvidenceString = marksMatch[0]
+    } else if (isFormulaResolved && isAcademicQuestionNode(item.node)) {
+      item.node.operationalNodeMarks = formula.interpretedMarksPerItem
+      item.node.authoritativeNodeMarks = formula.interpretedMarksPerItem
+      item.node.nodeMarksOrigin = NodeMarksOrigin.DERIVED_FROM_RESOLVED_FORMULA
+      item.node.marksEvidenceString = formula.rawFormula || null
+    } else {
+      item.node.operationalNodeMarks = null
+      item.node.authoritativeNodeMarks = null
+      item.node.nodeMarksOrigin = NodeMarksOrigin.UNSTATED
+      item.node.marksEvidenceString = null
     }
+
+    const coverageStatus =
+      item.node.type === CanonicalNodeType.UNKNOWN_PRESERVED
+        ? CoverageStatus.RAW_PRESERVED
+        : CoverageStatus.STRUCTURED
 
     const seg = createCoverageSegment({
       sourceSectionId,
@@ -434,7 +583,7 @@ function stitchItemsToFullCoverage(parsedItems, content, canonicalSectionId, sou
       endOffset: item.endOffset,
       rawSourceSnapshot: item.rawText,
       targetCanonicalIds: [finalNodeId],
-      coverageStatus: CoverageStatus.STRUCTURED,
+      coverageStatus,
     })
 
     nodes.push(item.node)
@@ -480,10 +629,12 @@ export function generateCanonicalV2Corpus(v13Dataset, normalizationManifest, ide
     const canonicalDoc = migrateOfficialPaperToV2(v13Paper, manifestPaper, {
       migrationBaselineCommit: identity.migrationBaselineCommit || MIGRATION_BASELINE_COMMIT,
       migrationEngineVersion: MIGRATION_ENGINE_VERSION,
+      sourceDatasetGeneration: 'v13',
       sourceDatasetVersion: v13Dataset.version,
       sourceDatasetDeclaredSha256: v13Dataset.sourceSha256,
       sourceDatasetByteSha256: identity.sourceDatasetByteSha256 || null,
       normalizationManifestByteSha256: identity.normalizationManifestByteSha256 || null,
+      normalizationManifestVersion: normalizationManifest.schemaVersion || DEFAULT_MANIFEST_VERSION,
     })
 
     if (documentIds.has(canonicalDoc.id)) {

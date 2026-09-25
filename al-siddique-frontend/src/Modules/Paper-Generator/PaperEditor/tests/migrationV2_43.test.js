@@ -13,17 +13,26 @@ import {
   DocumentLanguage,
   DocumentDirection,
   AttemptRule,
+  AttemptRuleOrigin,
   PaperMarksStatus,
   PaperTotalOrigin,
   SectionMarksOrigin,
+  NodeMarksOrigin,
+  VALID_NODE_MARKS_ORIGINS,
+  ClassificationCertainty,
+  VALID_CLASSIFICATION_CERTAINTIES,
+  CoverageStatus,
   CanonicalNodeType,
   LabelOrigin,
+  createCanonicalPaperDocument,
+  createShortQuestionNode,
   validateCanonicalPaperDocument,
 } from '../core/PaperDocumentV2.js'
 
 import {
   generateCanonicalV2Corpus,
   migrateOfficialPaperToV2,
+  stitchItemsToFullCoverage,
 } from '../migration/migrateOfficialPaperToV2.js'
 
 import {
@@ -357,3 +366,219 @@ test('TEST 45: Source Immutability (V12, V13, B1 Manifest SHA-256 unchanged)', (
   assert.equal(curV13Sha, EXPECTED_V13_SHA, 'V13 source file SHA-256 must remain identical')
   assert.equal(curManifestSha, EXPECTED_MANIFEST_SHA, 'Normalization manifest SHA-256 must remain identical')
 })
+
+test('REGRESSION A: Class 8 Computer Q3 explicit item marks', () => {
+  const c8Comp = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-8-computer')
+  assert.ok(c8Comp, 'Class 8 Computer document must exist')
+  const c8LongSec = c8Comp.sections.find(s => /Long/i.test(s.heading || ''))
+  assert.ok(c8LongSec, 'Class 8 Computer Long questions section must exist')
+  assert.equal(c8LongSec.authoritativeSectionTotal, null)
+  assert.equal(c8LongSec.listedPotentialItemMarksTotal, 30)
+  assert.equal(c8LongSec.attemptRule, AttemptRule.UNSPECIFIED)
+
+  // 3 explicit question nodes
+  const qNodes = c8LongSec.nodes.filter(n => n.type === CanonicalNodeType.LONG_QUESTION)
+  assert.equal(qNodes.length, 3, 'Must have 3 long question nodes')
+  for (const q of qNodes) {
+    assert.equal(q.operationalNodeMarks, 10)
+    assert.equal(q.authoritativeNodeMarks, 10)
+    assert.equal(q.nodeMarksOrigin, NodeMarksOrigin.ITEM_LEVEL_EXPLICIT)
+    assert.equal(q.marksEvidenceString, '(10 Marks)')
+  }
+})
+
+test('REGRESSION B: Class 4 Math Q2 formula-derived node marks', () => {
+  const c4Math = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-4-mathematics')
+  assert.ok(c4Math, 'Class 4 Mathematics document must exist')
+  const sec2 = c4Math.sections.find(s => /Q2\./i.test(s.heading || ''))
+  assert.ok(sec2, 'Class 4 Math Q2 section must exist')
+  assert.equal(sec2.formula.rawFormula, '2×8=16')
+  assert.equal(sec2.formula.interpretationStatus, 'RESOLVED')
+  assert.equal(sec2.formula.interpretedMarksPerItem, 2)
+
+  const academicNodes = sec2.nodes.filter(n => n.type === CanonicalNodeType.SHORT_QUESTION)
+  assert.equal(academicNodes.length, 10, 'Expected 10 candidate question nodes')
+  for (const node of academicNodes) {
+    assert.equal(node.operationalNodeMarks, 2)
+    assert.equal(node.authoritativeNodeMarks, 2)
+    assert.equal(node.nodeMarksOrigin, NodeMarksOrigin.DERIVED_FROM_RESOLVED_FORMULA)
+  }
+})
+
+test('REGRESSION C: Class 5 Math Q4 formula-derived 6 marks/question', () => {
+  const c5Math = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-5-mathematics')
+  assert.ok(c5Math, 'Class 5 Mathematics document must exist')
+  const sec4 = c5Math.sections.find(s => /Q4\./i.test(s.heading || ''))
+  assert.ok(sec4, 'Class 5 Math Q4 section must exist')
+  assert.equal(sec4.formula.rawFormula, '2×6=12')
+  assert.equal(sec4.formula.interpretationStatus, 'RESOLVED')
+  assert.equal(sec4.formula.interpretedMarksPerItem, 6)
+
+  const academicNodes = sec4.nodes.filter(n => n.type === CanonicalNodeType.LONG_QUESTION || n.type === CanonicalNodeType.SHORT_QUESTION)
+  assert.ok(academicNodes.length > 0, 'Class 5 Math Q4 must contain academic question nodes')
+  for (const node of academicNodes) {
+    assert.equal(node.operationalNodeMarks, 6)
+    assert.equal(node.authoritativeNodeMarks, 6)
+    assert.equal(node.nodeMarksOrigin, NodeMarksOrigin.DERIVED_FROM_RESOLVED_FORMULA)
+  }
+})
+
+test('REGRESSION D: Class 6 Math Long unresolved formula does not invent node marks', () => {
+  const c6Math = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-6-mathematics')
+  assert.ok(c6Math, 'Class 6 Mathematics document must exist')
+  const longSec = c6Math.sections.find(s => /Long/i.test(s.heading || ''))
+  assert.ok(longSec, 'Class 6 Math Long section must exist')
+  assert.equal(longSec.formula.rawFormula, '10×2')
+  assert.equal(longSec.formula.interpretationStatus, 'UNRESOLVED')
+  assert.equal(longSec.formula.interpretedMarksPerItem, null)
+
+  for (const node of longSec.nodes) {
+    assert.equal(node.operationalNodeMarks, null)
+    assert.equal(node.authoritativeNodeMarks, null)
+    assert.equal(node.nodeMarksOrigin, NodeMarksOrigin.UNSTATED)
+  }
+})
+
+test('REGRESSION E: All canonical nodes have valid nodeMarksOrigin', () => {
+  let nodeCount = 0
+  for (const doc of corpus.documents) {
+    for (const sec of doc.sections) {
+      for (const node of sec.nodes) {
+        nodeCount++
+        assert.ok(
+          VALID_NODE_MARKS_ORIGINS.has(node.nodeMarksOrigin),
+          `Node ${node.id} in ${doc.id} has invalid nodeMarksOrigin: "${node.nodeMarksOrigin}"`
+        )
+        if (node.type === CanonicalNodeType.SCOPE_HEADER || node.type === CanonicalNodeType.SECTION_BANNER || node.type === CanonicalNodeType.UNKNOWN_PRESERVED) {
+          assert.equal(node.nodeMarksOrigin, NodeMarksOrigin.UNSTATED)
+          assert.equal(node.operationalNodeMarks, null)
+          assert.equal(node.authoritativeNodeMarks, null)
+        }
+      }
+    }
+  }
+  assert.ok(nodeCount > 500, `Expected > 500 nodes across corpus, got ${nodeCount}`)
+})
+
+test('REGRESSION F, G, H: sourceIdentity contract and parity across all 43 docs', () => {
+  for (let i = 0; i < corpus.documents.length; i++) {
+    const doc = corpus.documents[i]
+    const v13Paper = v13Dataset.papers[i]
+    const manifestPaper = normalizationManifest.papers[i]
+
+    // F. sourceIdentity exists and is object
+    assert.ok(doc.sourceIdentity && typeof doc.sourceIdentity === 'object', `Doc ${doc.id} must have sourceIdentity object`)
+
+    // G. sourcePaperId exactly matches original V13 ID
+    assert.equal(doc.sourceIdentity.sourcePaperId, v13Paper.id)
+    assert.equal(doc.sourceIdentity.sourceDatasetGeneration, 'v13')
+    assert.equal(doc.sourceIdentity.sourceDatasetVersion, v13Dataset.version)
+    assert.equal(doc.sourceIdentity.sourceDatasetByteSha256, v13ByteSha256)
+    assert.equal(doc.sourceIdentity.sourceDatasetDeclaredSha256, v13Dataset.sourceSha256)
+    assert.equal(doc.sourceIdentity.normalizationManifestByteSha256, manifestByteSha256)
+    assert.equal(doc.sourceIdentity.normalizationManifestVersion, normalizationManifest.schemaVersion)
+
+    // H. manifestPaperIndex parity 1..43
+    assert.equal(doc.sourceIdentity.manifestPaperIndex, i + 1)
+    assert.equal(doc.sourceIdentity.manifestPaperIndex, manifestPaper.paperIndex)
+  }
+})
+
+test('REGRESSION I: Factory default language is UNKNOWN and direction is AUTO', () => {
+  const defaultDoc = createCanonicalPaperDocument({})
+  assert.equal(defaultDoc.metadata.language, DocumentLanguage.UNKNOWN)
+  assert.equal(defaultDoc.metadata.direction, DocumentDirection.AUTO)
+})
+
+test('REGRESSION J & K: Meaningful unparsed gap creates unknown_preserved + RAW_PRESERVED without false STRUCTURED labeling', () => {
+  // Test section stitching with an unparsed meaningful internal gap between two items
+  const testContent = 'First question stem.\n\n[Unparsed non-banner teacher note here]\n\nSecond question stem.'
+  const parsedItems = [
+    {
+      node: createShortQuestionNode({ id: 'item01', stemText: 'First question stem.' }),
+      startOffset: 0,
+      endOffset: 20,
+      rawText: 'First question stem.',
+    },
+    {
+      node: createShortQuestionNode({ id: 'item02', stemText: 'Second question stem.' }),
+      startOffset: testContent.indexOf('Second question stem.'),
+      endOffset: testContent.length,
+      rawText: 'Second question stem.',
+    },
+  ]
+  const globalNodeIds = new Set()
+  const stitched = stitchItemsToFullCoverage(
+    parsedItems,
+    testContent,
+    'test_sec',
+    'source_sec',
+    DocumentDirection.LTR,
+    globalNodeIds,
+    {}
+  )
+  assert.equal(stitched.nodes.length, 3, 'Must contain Item 1, gap node, and Item 2')
+
+  const gapNode = stitched.nodes[1]
+  assert.equal(gapNode.type, CanonicalNodeType.UNKNOWN_PRESERVED, 'Gap must produce unknown_preserved node')
+  assert.equal(gapNode.nodeMarksOrigin, NodeMarksOrigin.UNSTATED)
+  assert.equal(gapNode.operationalNodeMarks, null)
+  assert.equal(gapNode.authoritativeNodeMarks, null)
+  assert.equal(gapNode.provenance.classificationCertainty, ClassificationCertainty.UNKNOWN)
+  assert.equal(gapNode.provenance.academicTextMutated, false)
+  assert.ok(gapNode.rawText.includes('[Unparsed non-banner teacher note here]'))
+
+  // Check ledger coverageStatus
+  const gapSegment = stitched.segments.find(seg => seg.targetCanonicalIds.includes(gapNode.id))
+  assert.ok(gapSegment, 'Gap segment must exist in ledger')
+  assert.equal(gapSegment.coverageStatus, CoverageStatus.RAW_PRESERVED, 'Gap segment must have RAW_PRESERVED status')
+
+  // Check that structured items are STRUCTURED
+  assert.equal(stitched.segments[0].coverageStatus, CoverageStatus.STRUCTURED)
+  assert.equal(stitched.segments[2].coverageStatus, CoverageStatus.STRUCTURED)
+
+  // Invariant verification on test gap
+  const cInvariants = verifyFieldCoverageInvariants(testContent, stitched.segments)
+  assert.equal(cInvariants.valid, true)
+
+  // Verify K across all corpus documents: no unknown_preserved has STRUCTURED and no structured has RAW_PRESERVED
+  for (const doc of corpus.documents) {
+    const nodeMap = new Map()
+    for (const s of doc.sections) {
+      for (const n of s.nodes) {
+        nodeMap.set(n.id, n)
+      }
+    }
+    for (const seg of doc.sourceCoverageLedger) {
+      for (const targetId of seg.targetCanonicalIds) {
+        const targetNode = nodeMap.get(targetId)
+        if (targetNode) {
+          if (targetNode.type === CanonicalNodeType.UNKNOWN_PRESERVED) {
+            assert.equal(seg.coverageStatus, CoverageStatus.RAW_PRESERVED, `Node ${targetId} is unknown_preserved but ledger status is ${seg.coverageStatus}`)
+          } else {
+            assert.equal(seg.coverageStatus, CoverageStatus.STRUCTURED, `Node ${targetId} is structured but ledger status is ${seg.coverageStatus}`)
+          }
+        }
+      }
+    }
+  }
+})
+
+test('REGRESSION L: All nodes have valid classificationCertainty and academicTextMutated === false', () => {
+  for (const doc of corpus.documents) {
+    for (const sec of doc.sections) {
+      for (const node of sec.nodes) {
+        assert.ok(
+          VALID_CLASSIFICATION_CERTAINTIES.has(node.provenance.classificationCertainty),
+          `Node ${node.id} in ${doc.id} has invalid classificationCertainty: "${node.provenance.classificationCertainty}"`
+        )
+        assert.equal(
+          node.provenance.academicTextMutated,
+          false,
+          `Node ${node.id} in ${doc.id} must have academicTextMutated === false in B2`
+        )
+      }
+    }
+  }
+})
+

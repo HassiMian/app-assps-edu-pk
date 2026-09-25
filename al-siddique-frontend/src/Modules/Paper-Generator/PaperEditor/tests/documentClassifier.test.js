@@ -24,6 +24,8 @@ import {
   CanonicalNodeType,
   LabelOrigin,
   FieldProvenanceOrigin,
+  NodeMarksOrigin,
+  ClassificationCertainty,
   createCanonicalPaperDocument,
   createCanonicalSection,
   createMcqNode,
@@ -44,6 +46,17 @@ const __dirname = path.dirname(__filename)
 
 const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
 const v13Dataset = JSON.parse(fs.readFileSync(v13Path, 'utf8'))
+
+const dummySourceIdentity = {
+  sourcePaperId: 'official-first-term-2026-class-1-urdu',
+  sourceDatasetGeneration: 'v13',
+  sourceDatasetVersion: 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13',
+  sourceDatasetByteSha256: '5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214',
+  sourceDatasetDeclaredSha256: '6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692',
+  normalizationManifestByteSha256: 'f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4',
+  normalizationManifestVersion: '1.0.0',
+  manifestPaperIndex: 1,
+}
 
 test('CLASSIFIER A: old schemaVersion 2 -> LEGACY_CANVAS_V2', () => {
   const legacyDoc = {
@@ -128,6 +141,7 @@ test('VALIDATOR: Valid canonical document passes validation', () => {
       language: DocumentLanguage.URDU,
       direction: DocumentDirection.RTL,
     },
+    sourceIdentity: dummySourceIdentity,
     sections: [
       createCanonicalSection({
         id: 'sec__01',
@@ -388,4 +402,103 @@ test('VALIDATOR: Duplicate IDs rejected', () => {
   const res = validateCanonicalPaperDocument(docDup)
   assert.equal(res.valid, false)
   assert.ok(res.errors.some(e => e.includes('Duplicate node id "node_dup"')))
+})
+
+test('VALIDATOR HARDENING: Rejects missing sourceIdentity', () => {
+  const doc = createCanonicalPaperDocument({
+    id: 'doc__no-sid',
+    sourceIdentity: null,
+  })
+  const res = validateCanonicalPaperDocument(doc)
+  assert.equal(res.valid, false)
+  assert.ok(res.errors.some(e => e.includes('Document sourceIdentity must be an object')))
+})
+
+test('VALIDATOR HARDENING: Rejects invalid sourceIdentity fields', () => {
+  const docBadGen = createCanonicalPaperDocument({
+    id: 'doc__bad-sid',
+    sourceIdentity: {
+      ...dummySourceIdentity,
+      sourceDatasetGeneration: 'v12', // must be 'v13'
+      manifestPaperIndex: 0, // must be integer >= 1
+      sourceDatasetByteSha256: 'short-sha', // must be 64-char hex
+    },
+  })
+  const res = validateCanonicalPaperDocument(docBadGen)
+  assert.equal(res.valid, false)
+  assert.ok(res.errors.some(e => e.includes('sourceIdentity.sourceDatasetGeneration must be "v13"')))
+  assert.ok(res.errors.some(e => e.includes('sourceIdentity.manifestPaperIndex must be an integer >= 1')))
+  assert.ok(res.errors.some(e => e.includes('sourceIdentity.sourceDatasetByteSha256 must be a 64-char hex string')))
+})
+
+test('VALIDATOR HARDENING: Rejects invalid nodeMarksOrigin', () => {
+  const docBadOrigin = createCanonicalPaperDocument({
+    id: 'doc__bad-node-marks-origin',
+    sourceIdentity: dummySourceIdentity,
+    sections: [
+      createCanonicalSection({
+        id: 'sec_1',
+        nodes: [
+          createShortQuestionNode({
+            id: 'q1',
+            stemText: 'Valid question',
+            nodeMarksOrigin: 'TEACHER_EXPLICIT_SCALAR', // Invalid at node level!
+          }),
+        ],
+      }),
+    ],
+  })
+  const res = validateCanonicalPaperDocument(docBadOrigin)
+  assert.equal(res.valid, false)
+  assert.ok(res.errors.some(e => e.includes('nodeMarksOrigin')))
+})
+
+test('VALIDATOR HARDENING: Rejects missing or invalid classificationCertainty', () => {
+  const docBadCert = createCanonicalPaperDocument({
+    id: 'doc__bad-certainty',
+    sourceIdentity: dummySourceIdentity,
+    sections: [
+      createCanonicalSection({
+        id: 'sec_1',
+        nodes: [
+          {
+            ...createShortQuestionNode({ id: 'q1', stemText: 'Valid stem' }),
+            provenance: {
+              classificationCertainty: 'ARBITRARY_FLOAT_OR_STRING',
+              academicTextMutated: false,
+              sourceSegmentIds: ['seg-1'],
+            },
+          },
+        ],
+      }),
+    ],
+  })
+  const res = validateCanonicalPaperDocument(docBadCert)
+  assert.equal(res.valid, false)
+  assert.ok(res.errors.some(e => e.includes('provenance.classificationCertainty')))
+})
+
+test('VALIDATOR HARDENING: Rejects academicTextMutated not boolean', () => {
+  const docBadMut = createCanonicalPaperDocument({
+    id: 'doc__bad-mutated',
+    sourceIdentity: dummySourceIdentity,
+    sections: [
+      createCanonicalSection({
+        id: 'sec_1',
+        nodes: [
+          {
+            ...createShortQuestionNode({ id: 'q1', stemText: 'Valid stem' }),
+            provenance: {
+              classificationCertainty: ClassificationCertainty.DETERMINISTIC,
+              academicTextMutated: 'false', // string, not boolean!
+              sourceSegmentIds: ['seg-1'],
+            },
+          },
+        ],
+      }),
+    ],
+  })
+  const res = validateCanonicalPaperDocument(docBadMut)
+  assert.equal(res.valid, false)
+  assert.ok(res.errors.some(e => e.includes('provenance.academicTextMutated must be a boolean')))
 })

@@ -63,6 +63,13 @@ export const SectionMarksOrigin = Object.freeze({
   NONE: 'NONE',
 })
 
+export const NodeMarksOrigin = Object.freeze({
+  ITEM_LEVEL_EXPLICIT: 'ITEM_LEVEL_EXPLICIT',
+  DERIVED_FROM_RESOLVED_FORMULA: 'DERIVED_FROM_RESOLVED_FORMULA',
+  INHERITED_OPERATIONAL: 'INHERITED_OPERATIONAL',
+  UNSTATED: 'UNSTATED',
+})
+
 export const ClassificationCertainty = Object.freeze({
   EXPLICIT: 'EXPLICIT',
   DETERMINISTIC: 'DETERMINISTIC',
@@ -108,17 +115,19 @@ export const CanonicalNodeType = Object.freeze({
   UNKNOWN_PRESERVED: 'unknown_preserved',
 })
 
-const VALID_LANGUAGES = new Set(Object.values(DocumentLanguage))
-const VALID_DIRECTIONS = new Set(Object.values(DocumentDirection))
-const VALID_ATTEMPT_RULES = new Set(Object.values(AttemptRule))
-const VALID_ATTEMPT_RULE_ORIGINS = new Set(Object.values(AttemptRuleOrigin))
-const VALID_PAPER_MARKS_STATUSES = new Set(Object.values(PaperMarksStatus))
-const VALID_PAPER_TOTAL_ORIGINS = new Set(Object.values(PaperTotalOrigin))
-const VALID_SECTION_MARKS_ORIGINS = new Set(Object.values(SectionMarksOrigin))
-const VALID_FIELD_PROVENANCE_ORIGINS = new Set(Object.values(FieldProvenanceOrigin))
-const VALID_COVERAGE_STATUSES = new Set(Object.values(CoverageStatus))
-const VALID_LABEL_ORIGINS = new Set(Object.values(LabelOrigin))
-const VALID_NODE_TYPES = new Set(Object.values(CanonicalNodeType))
+export const VALID_LANGUAGES = new Set(Object.values(DocumentLanguage))
+export const VALID_DIRECTIONS = new Set(Object.values(DocumentDirection))
+export const VALID_ATTEMPT_RULES = new Set(Object.values(AttemptRule))
+export const VALID_ATTEMPT_RULE_ORIGINS = new Set(Object.values(AttemptRuleOrigin))
+export const VALID_PAPER_MARKS_STATUSES = new Set(Object.values(PaperMarksStatus))
+export const VALID_PAPER_TOTAL_ORIGINS = new Set(Object.values(PaperTotalOrigin))
+export const VALID_SECTION_MARKS_ORIGINS = new Set(Object.values(SectionMarksOrigin))
+export const VALID_NODE_MARKS_ORIGINS = new Set(Object.values(NodeMarksOrigin))
+export const VALID_FIELD_PROVENANCE_ORIGINS = new Set(Object.values(FieldProvenanceOrigin))
+export const VALID_COVERAGE_STATUSES = new Set(Object.values(CoverageStatus))
+export const VALID_LABEL_ORIGINS = new Set(Object.values(LabelOrigin))
+export const VALID_NODE_TYPES = new Set(Object.values(CanonicalNodeType))
+export const VALID_CLASSIFICATION_CERTAINTIES = new Set(Object.values(ClassificationCertainty))
 
 export function createProvenanceField(value = null, origin = FieldProvenanceOrigin.UNSET) {
   return {
@@ -134,9 +143,12 @@ export function createBaseNode(overrides = {}) {
     direction: overrides.direction || DocumentDirection.AUTO,
     operationalNodeMarks: overrides.operationalNodeMarks ?? null,
     authoritativeNodeMarks: overrides.authoritativeNodeMarks ?? null,
-    nodeMarksOrigin: overrides.nodeMarksOrigin ?? null,
+    nodeMarksOrigin: overrides.nodeMarksOrigin || NodeMarksOrigin.UNSTATED,
     marksEvidenceString: overrides.marksEvidenceString ?? null,
     provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.UNKNOWN,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
       sourceSegmentIds: Array.isArray(overrides.provenance?.sourceSegmentIds)
         ? [...overrides.provenance.sourceSegmentIds]
         : [],
@@ -146,7 +158,17 @@ export function createBaseNode(overrides = {}) {
 }
 
 export function createMcqNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.MCQ })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.MCQ,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.EXPLICIT,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     stemText: overrides.stemText ?? '',
@@ -166,7 +188,17 @@ export function createMcqNode(overrides = {}) {
 }
 
 export function createGenericQuestionNode(type, overrides = {}) {
-  const base = createBaseNode({ ...overrides, type })
+  const base = createBaseNode({
+    ...overrides,
+    type,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.DETERMINISTIC,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     stemText: overrides.stemText ?? '',
@@ -212,7 +244,17 @@ export function createDefinitionNode(overrides = {}) {
 }
 
 export function createTrueFalseNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.TRUE_FALSE })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.TRUE_FALSE,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.EXPLICIT,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     statement: overrides.statement ?? '',
@@ -222,7 +264,17 @@ export function createTrueFalseNode(overrides = {}) {
 }
 
 export function createFillBlankNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.FILL_BLANK })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.FILL_BLANK,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.EXPLICIT,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     fullText: overrides.fullText ?? '',
@@ -239,7 +291,17 @@ export function createFillBlankNode(overrides = {}) {
 }
 
 export function createMatchingColumnsNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.MATCHING_COLUMNS })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.MATCHING_COLUMNS,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.EXPLICIT,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     leftItems: Array.isArray(overrides.leftItems)
@@ -253,7 +315,17 @@ export function createMatchingColumnsNode(overrides = {}) {
 }
 
 export function createGrammarTableNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.GRAMMAR_TABLE })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.GRAMMAR_TABLE,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.EXPLICIT,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     tableSemantic: overrides.tableSemantic ?? 'unknown_table',
@@ -270,7 +342,17 @@ export function createGrammarTableNode(overrides = {}) {
 }
 
 export function createVerticalMathNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.VERTICAL_MATH })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.VERTICAL_MATH,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.DETERMINISTIC,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     operands: Array.isArray(overrides.operands)
@@ -295,7 +377,17 @@ export function createVerticalMathNode(overrides = {}) {
 }
 
 export function createRichTextNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.RICH_TEXT })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.RICH_TEXT,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.DETERMINISTIC,
+      academicTextMutated: Boolean(overrides.provenance?.academicTextMutated ?? false),
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     content: overrides.content ?? '',
@@ -309,8 +401,15 @@ export function createScopeHeaderNode(overrides = {}) {
     type: CanonicalNodeType.SCOPE_HEADER,
     operationalNodeMarks: null,
     authoritativeNodeMarks: null,
-    nodeMarksOrigin: null,
+    nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
     marksEvidenceString: null,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.DETERMINISTIC,
+      academicTextMutated: false,
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
   })
   return {
     ...base,
@@ -324,8 +423,15 @@ export function createSectionBannerNode(overrides = {}) {
     type: CanonicalNodeType.SECTION_BANNER,
     operationalNodeMarks: null,
     authoritativeNodeMarks: null,
-    nodeMarksOrigin: null,
+    nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
     marksEvidenceString: null,
+    provenance: {
+      classificationCertainty:
+        overrides.provenance?.classificationCertainty || ClassificationCertainty.DETERMINISTIC,
+      academicTextMutated: false,
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
   })
   return {
     ...base,
@@ -334,7 +440,20 @@ export function createSectionBannerNode(overrides = {}) {
 }
 
 export function createUnknownPreservedNode(overrides = {}) {
-  const base = createBaseNode({ ...overrides, type: CanonicalNodeType.UNKNOWN_PRESERVED })
+  const base = createBaseNode({
+    ...overrides,
+    type: CanonicalNodeType.UNKNOWN_PRESERVED,
+    operationalNodeMarks: null,
+    authoritativeNodeMarks: null,
+    nodeMarksOrigin: NodeMarksOrigin.UNSTATED,
+    marksEvidenceString: null,
+    provenance: {
+      classificationCertainty: ClassificationCertainty.UNKNOWN,
+      academicTextMutated: false,
+      sourceSegmentIds: overrides.provenance?.sourceSegmentIds,
+      rawSourceSnapshot: overrides.provenance?.rawSourceSnapshot,
+    },
+  })
   return {
     ...base,
     rawText: overrides.rawText ?? '',
@@ -383,6 +502,16 @@ export function createCanonicalPaperDocument(overrides = {}) {
   const pres = overrides.presentation || {}
   const auth = overrides.authority || {}
   const audit = overrides.migrationAudit || {}
+  const sid = overrides.sourceIdentity || null
+
+  const language = meta.language || DocumentLanguage.UNKNOWN
+  const direction =
+    meta.direction ||
+    (language === DocumentLanguage.URDU
+      ? DocumentDirection.RTL
+      : language === DocumentLanguage.ENGLISH
+        ? DocumentDirection.LTR
+        : DocumentDirection.AUTO)
 
   return {
     format: CANONICAL_FORMAT,
@@ -398,8 +527,8 @@ export function createCanonicalPaperDocument(overrides = {}) {
       subjectName: meta.subjectName ?? null,
       examType: meta.examType ?? null,
       session: meta.session ?? null,
-      language: meta.language || DocumentLanguage.ENGLISH,
-      direction: meta.direction || DocumentDirection.AUTO,
+      language,
+      direction,
       durationMinutes: Number.isFinite(meta.durationMinutes) ? Number(meta.durationMinutes) : null,
       timeAllowed: meta.timeAllowed ?? null,
       examDate: meta.examDate ?? null,
@@ -431,6 +560,18 @@ export function createCanonicalPaperDocument(overrides = {}) {
       sourceTotalNote: auth.sourceTotalNote ?? null,
       qaNotes: auth.qaNotes ?? null,
     },
+    sourceIdentity: sid
+      ? {
+          sourcePaperId: sid.sourcePaperId,
+          sourceDatasetGeneration: sid.sourceDatasetGeneration || 'v13',
+          sourceDatasetVersion: sid.sourceDatasetVersion,
+          sourceDatasetByteSha256: sid.sourceDatasetByteSha256,
+          sourceDatasetDeclaredSha256: sid.sourceDatasetDeclaredSha256,
+          normalizationManifestByteSha256: sid.normalizationManifestByteSha256,
+          normalizationManifestVersion: sid.normalizationManifestVersion,
+          manifestPaperIndex: sid.manifestPaperIndex,
+        }
+      : null,
     sections: Array.isArray(overrides.sections) ? [...overrides.sections] : [],
     sourceCoverageLedger: Array.isArray(overrides.sourceCoverageLedger)
       ? [...overrides.sourceCoverageLedger]
@@ -440,10 +581,6 @@ export function createCanonicalPaperDocument(overrides = {}) {
     migrationAudit: {
       migrationBaselineCommit: audit.migrationBaselineCommit ?? null,
       migrationEngineVersion: audit.migrationEngineVersion ?? null,
-      sourceDatasetVersion: audit.sourceDatasetVersion ?? null,
-      sourceDatasetDeclaredSha256: audit.sourceDatasetDeclaredSha256 ?? null,
-      sourceDatasetByteSha256: audit.sourceDatasetByteSha256 ?? null,
-      normalizationManifestByteSha256: audit.normalizationManifestByteSha256 ?? null,
     },
   }
 }
@@ -477,7 +614,38 @@ export function validateCanonicalPaperDocument(doc) {
     errors.push('Document id must be a non-empty string')
   }
 
-  // 3. Metadata Validation
+  // 3. Source Identity Validation (Mandatory for Canonical B2)
+  if (!doc.sourceIdentity || typeof doc.sourceIdentity !== 'object') {
+    errors.push('Document sourceIdentity must be an object')
+  } else {
+    const sid = doc.sourceIdentity
+    if (typeof sid.sourcePaperId !== 'string' || !sid.sourcePaperId.trim()) {
+      errors.push('sourceIdentity.sourcePaperId must be a non-empty string')
+    }
+    if (sid.sourceDatasetGeneration !== 'v13') {
+      errors.push(`sourceIdentity.sourceDatasetGeneration must be "v13", got "${sid.sourceDatasetGeneration}"`)
+    }
+    if (typeof sid.sourceDatasetVersion !== 'string' || !sid.sourceDatasetVersion.trim()) {
+      errors.push('sourceIdentity.sourceDatasetVersion must be a non-empty string')
+    }
+    if (typeof sid.sourceDatasetByteSha256 !== 'string' || sid.sourceDatasetByteSha256.length !== 64) {
+      errors.push('sourceIdentity.sourceDatasetByteSha256 must be a 64-char hex string')
+    }
+    if (typeof sid.sourceDatasetDeclaredSha256 !== 'string' || sid.sourceDatasetDeclaredSha256.length !== 64) {
+      errors.push('sourceIdentity.sourceDatasetDeclaredSha256 must be a 64-char hex string')
+    }
+    if (typeof sid.normalizationManifestByteSha256 !== 'string' || sid.normalizationManifestByteSha256.length !== 64) {
+      errors.push('sourceIdentity.normalizationManifestByteSha256 must be a 64-char hex string')
+    }
+    if (typeof sid.normalizationManifestVersion !== 'string' || !sid.normalizationManifestVersion.trim()) {
+      errors.push('sourceIdentity.normalizationManifestVersion must be a non-empty string')
+    }
+    if (!Number.isInteger(sid.manifestPaperIndex) || sid.manifestPaperIndex < 1) {
+      errors.push('sourceIdentity.manifestPaperIndex must be an integer >= 1')
+    }
+  }
+
+  // 4. Metadata Validation
   if (!doc.metadata || typeof doc.metadata !== 'object') {
     errors.push('Document metadata must be an object')
   } else {
@@ -495,7 +663,7 @@ export function validateCanonicalPaperDocument(doc) {
     }
   }
 
-  // 4. Presentation Provenance Validation
+  // 5. Presentation Provenance Validation
   if (!doc.presentation || typeof doc.presentation !== 'object') {
     errors.push('Document presentation must be an object')
   } else {
@@ -509,7 +677,7 @@ export function validateCanonicalPaperDocument(doc) {
     }
   }
 
-  // 5. Authority Validation
+  // 6. Authority Validation
   if (!doc.authority || typeof doc.authority !== 'object') {
     errors.push('Document authority must be an object')
   } else {
@@ -537,7 +705,7 @@ export function validateCanonicalPaperDocument(doc) {
     }
   }
 
-  // 6. Section & Node Validation
+  // 7. Section & Node Validation
   if (!Array.isArray(doc.sections)) {
     errors.push('sections must be an array')
   } else {
@@ -615,10 +783,31 @@ export function validateCanonicalPaperDocument(doc) {
           errors.push(`Invalid ${nodePath}.direction: "${node.direction}"`)
         }
 
+        if (!VALID_NODE_MARKS_ORIGINS.has(node.nodeMarksOrigin)) {
+          errors.push(`Invalid ${nodePath}.nodeMarksOrigin: "${node.nodeMarksOrigin}"`)
+        }
+
         for (const nMarksKey of ['operationalNodeMarks', 'authoritativeNodeMarks']) {
           const val = node[nMarksKey]
           if (val !== null && (!Number.isFinite(val) || Number.isNaN(val))) {
             errors.push(`${nodePath}.${nMarksKey} must be finite number or null`)
+          }
+        }
+
+        // Validate Provenance Contract
+        if (!node.provenance || typeof node.provenance !== 'object') {
+          errors.push(`${nodePath}.provenance must be an object`)
+        } else {
+          if (!VALID_CLASSIFICATION_CERTAINTIES.has(node.provenance.classificationCertainty)) {
+            errors.push(
+              `Invalid ${nodePath}.provenance.classificationCertainty: "${node.provenance.classificationCertainty}"`
+            )
+          }
+          if (typeof node.provenance.academicTextMutated !== 'boolean') {
+            errors.push(`${nodePath}.provenance.academicTextMutated must be a boolean`)
+          }
+          if (!Array.isArray(node.provenance.sourceSegmentIds)) {
+            errors.push(`${nodePath}.provenance.sourceSegmentIds must be an array`)
           }
         }
 
@@ -628,7 +817,7 @@ export function validateCanonicalPaperDocument(doc) {
     })
   }
 
-  // 7. Source Coverage Ledger Validation
+  // 8. Source Coverage Ledger Validation
   if (doc.sourceCoverageLedger !== undefined) {
     if (!Array.isArray(doc.sourceCoverageLedger)) {
       errors.push('sourceCoverageLedger must be an array')

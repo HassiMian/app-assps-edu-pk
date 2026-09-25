@@ -11,6 +11,7 @@ import {
   createSectionBannerNode,
   createUnknownPreservedNode,
   DocumentDirection,
+  ClassificationCertainty,
 } from '../../core/PaperDocumentV2.js'
 
 /**
@@ -82,6 +83,10 @@ export function parseQuestionList(content, context = {}) {
             direction,
             stemText: line.trim(),
             subparts: [],
+            provenance: {
+              classificationCertainty: ClassificationCertainty.HEURISTIC,
+              academicTextMutated: false,
+            },
           })
           items.push({
             node,
@@ -101,6 +106,10 @@ export function parseQuestionList(content, context = {}) {
         direction,
         stemText: content.trim(),
         subparts: [],
+        provenance: {
+          classificationCertainty: ClassificationCertainty.HEURISTIC,
+          academicTextMutated: false,
+        },
       })
       items.push({
         node,
