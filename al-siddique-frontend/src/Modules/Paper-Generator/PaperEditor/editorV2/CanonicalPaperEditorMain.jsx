@@ -14,6 +14,11 @@ export default function CanonicalPaperEditorMain({
   loadedPaper,
   onReturnToSource = null,
 }) {
+  // Performance diagnostics tracking (test-only, zero production overhead, Rule 27)
+  if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
+    window.__B3_DIAGNOSTICS__.rootRenderCount = (window.__B3_DIAGNOSTICS__.rootRenderCount || 0) + 1
+  }
+
   // 1. Initialize stable EditorWorkingStore and EditorFieldRegistry
   const store = useMemo(() => new EditorWorkingStore(loadedPaper), [loadedPaper])
   const registry = useMemo(() => new EditorFieldRegistry(), [loadedPaper])
@@ -26,7 +31,7 @@ export default function CanonicalPaperEditorMain({
   const [isSaving, setIsSaving] = useState(false)
   const [externalRevisionToken, setExternalRevisionToken] = useState(1)
 
-  // 2. Subscribe to working store updates
+  // 2. Subscribe to working store updates (only fired on explicit document-level changes)
   useEffect(() => {
     return store.subscribe((updatedDoc) => {
       setWorkingDoc({ ...updatedDoc })
@@ -37,10 +42,12 @@ export default function CanonicalPaperEditorMain({
   useEffect(() => {
     const draftResult = loadWorkingDraft(loadedPaper)
     if (draftResult?.status === 'OK' && draftResult.draft) {
-      store.applyCompactDraft(draftResult.draft)
-      setExternalRevisionToken(t => t + 1)
-      setSaveStatus('Loaded previous working draft')
-      setTimeout(() => setSaveStatus(''), 3000)
+      const applyRes = store.applyCompactDraft(draftResult.draft)
+      if (applyRes.status === 'APPLIED') {
+        setExternalRevisionToken(t => t + 1)
+        setSaveStatus('Loaded previous working draft')
+        setTimeout(() => setSaveStatus(''), 3000)
+      }
     } else if (draftResult?.status === 'BASELINE_MISMATCH') {
       setSaveStatus('Baseline modified; draft preserved separately')
       setTimeout(() => setSaveStatus(''), 4500)
@@ -52,6 +59,7 @@ export default function CanonicalPaperEditorMain({
     setIsSaving(true)
     setSaveStatus('Saving draft...')
     try {
+      store.publishDocumentChange()
       const compactDraft = store.exportCompactDraft()
       const result = saveWorkingDraft(compactDraft)
       if (result.success) {
@@ -66,8 +74,9 @@ export default function CanonicalPaperEditorMain({
     }
   }
 
-  // 5. Toggle Edit Mode Handler
+  // 5. Toggle Edit Mode Handler (Flush document projection before switching, Rule 32)
   const handleToggleEditMode = () => {
+    store.publishDocumentChange()
     setIsEditMode(prev => !prev)
   }
 

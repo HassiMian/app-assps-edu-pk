@@ -8,6 +8,95 @@ import { migrateOfficialPaperToV2 } from '../migration/migrateOfficialPaperToV2.
 import officialV13Dataset from '../../seed-data/official-first-term-2026-v13.json' with { type: 'json' }
 import normalizationManifest from '../migration/data/normalizationManifestV13.json' with { type: 'json' }
 
+import { stableStringify } from './editorProjection.js'
+
+/**
+ * Extracts a deterministic academic projection from an official V13 paper for pristine comparison.
+ * Excludes non-academic presentation and runtime fields (editorSettings, createdAt, pure UI state).
+ *
+ * @param {any} paper
+ * @returns {object|null}
+ */
+export function extractOfficialV13AcademicProjection(paper) {
+  if (!paper || typeof paper !== 'object') return null
+
+  const config = paper.config || {}
+  const projectedConfig = {
+    title: config.title ?? '',
+    classLevel: config.classLevel != null ? String(config.classLevel) : '',
+    className: config.className != null ? String(config.className) : '',
+    subject: config.subject ?? '',
+    subjectName: config.subjectName ?? '',
+    examType: config.examType ?? '',
+    language: config.language ?? '',
+    totalMarks: config.totalMarks ?? null,
+    session: config.session ?? '',
+    paperCode: config.paperCode ?? '',
+    timeAllowed: config.timeAllowed ?? '',
+    examDate: config.examDate ?? '',
+    ...(config.instructions !== undefined ? { instructions: config.instructions } : {}),
+  }
+
+  const sections = Array.isArray(paper.official_section) ? paper.official_section : []
+  const projectedSections = sections.map(s => {
+    if (!s || typeof s !== 'object') return null
+    const sec = {
+      id: s.id ?? '',
+      type: s.type ?? '',
+      medium: s.medium ?? '',
+      heading: s.heading ?? '',
+      content: s.content ?? '',
+      text: s.text ?? '',
+      textUrdu: s.textUrdu ?? '',
+      marks: s.marks != null ? Number(s.marks) : (s.totalMarks != null ? Number(s.totalMarks) : null),
+      sourceOrder: s.sourceOrder != null ? Number(s.sourceOrder) : null,
+      priority: s.priority ?? '',
+    }
+    if (s.options) {
+      sec.options = Array.isArray(s.options)
+        ? s.options.map(opt => {
+            if (!opt || typeof opt !== 'object') return opt
+            return {
+              id: opt.id ?? '',
+              label: opt.label ?? opt.displayLabel ?? opt.canonicalLabel ?? '',
+              text: opt.text ?? '',
+              ...(opt.urduText !== undefined ? { urduText: opt.urduText } : {}),
+              ...(opt.isCorrect !== undefined ? { isCorrect: opt.isCorrect } : {}),
+            }
+          })
+        : s.options
+    }
+    return sec
+  })
+
+  const projectedSectionMarks = paper.official_section_marks != null
+    ? (Array.isArray(paper.official_section_marks)
+        ? paper.official_section_marks
+        : paper.official_section_marks)
+    : null
+
+  const projectedSelectedQuestions = Array.isArray(paper.selectedQuestions) && paper.selectedQuestions.length > 0
+    ? paper.selectedQuestions.map(q => {
+        if (!q || typeof q !== 'object') return q
+        return {
+          id: q.id ?? '',
+          text: q.text ?? q.questionText ?? '',
+          heading: q.heading ?? '',
+          marks: q.marks ?? null,
+          options: q.options ?? null,
+        }
+      })
+    : null
+
+  return {
+    id: paper.id,
+    config: projectedConfig,
+    sections: projectedSections,
+    official_section_marks: projectedSectionMarks,
+    selectedQuestions: projectedSelectedQuestions,
+  }
+}
+
 /**
  * Checks whether an incoming OFFICIAL_V13_PAPER matches the official pristine seed data
  * academically without user mutations.
@@ -22,34 +111,14 @@ export function isPristineOfficialV13Paper(paperPayload) {
     return false
   }
 
-  // Compare core academic fields
-  if (paperPayload.classLevel !== pristinePaper.classLevel) return false
-  if (paperPayload.subject !== pristinePaper.subject) return false
+  const inputProjection = extractOfficialV13AcademicProjection(paperPayload)
+  const pristineProjection = extractOfficialV13AcademicProjection(pristinePaper)
 
-  const inputSections = paperPayload.official_section || []
-  const pristineSections = pristinePaper.official_section || []
-
-  if (inputSections.length !== pristineSections.length) {
+  if (!inputProjection || !pristineProjection) {
     return false
   }
 
-  for (let i = 0; i < inputSections.length; i++) {
-    const inSec = inputSections[i]
-    const priSec = pristineSections[i]
-
-    if (inSec.id !== priSec.id) return false
-    if ((inSec.heading || '') !== (priSec.heading || '')) return false
-    if ((inSec.content || '') !== (priSec.content || '')) return false
-    if (inSec.totalMarks !== priSec.totalMarks) return false
-    if (inSec.marksPerQuestion !== priSec.marksPerQuestion) return false
-
-    // Options count if MCQ
-    const inOpts = inSec.options || []
-    const priOpts = priSec.options || []
-    if (inOpts.length !== priOpts.length) return false
-  }
-
-  return true
+  return stableStringify(inputProjection) === stableStringify(pristineProjection)
 }
 
 /**

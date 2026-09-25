@@ -61,6 +61,9 @@ function renderBlock(block, index) {
         if (child.type === 'text') {
           return renderTextWithMarks(child, `${key}-c${cIdx}`)
         }
+        if (child.type === 'hardBreak') {
+          return <br key={`${key}-br-${cIdx}`} />
+        }
         return null
       })
     : null

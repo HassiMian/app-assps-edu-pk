@@ -3,9 +3,13 @@ import {
   canonicalTextToTiptapDoc,
   computeCanonicalFingerprint,
 } from './editorProjection.js'
+import {
+  getB3NodeEditability,
+  B3_RENDER_STRATEGY,
+} from './nodeRenderStrategy.js'
 
 /**
- * Determines the academic field name and initial text for a canonical node.
+ * Determines the academic field name and initial text for an editable canonical node.
  */
 function resolveNodeFieldInfo(node) {
   const type = node.type || node.nodeType
@@ -60,29 +64,42 @@ export function createFieldOverlay(fieldName, editableText, direction = 'auto', 
 
 /**
  * Creates a NodeOverlay for a canonical node.
+ * For READ_ONLY_STRUCTURED nodes: editableFields = {} (Rule 5).
  * Does NOT duplicate full canonical snapshot or raw source ledger.
  */
 export function createNodeOverlay(node) {
-  const { fieldName, rawText } = resolveNodeFieldInfo(node)
-  const { editableText, lockedMarksEvidence } = extractLockedMarksEvidence(node, rawText)
+  const nodeType = node.type || node.nodeType
+  const strategy = getB3NodeEditability(nodeType)
+  const editableFields = {}
 
-  const fieldOverlay = createFieldOverlay(
-    fieldName,
-    editableText,
-    node.direction || 'auto',
-    lockedMarksEvidence
-  )
+  if (strategy === B3_RENDER_STRATEGY.EDITABLE_RICH) {
+    const { fieldName, rawText } = resolveNodeFieldInfo(node)
+    const { editableText, lockedMarksEvidence } = extractLockedMarksEvidence(node, rawText)
+    editableFields[fieldName] = createFieldOverlay(
+      fieldName,
+      editableText,
+      node.direction || 'auto',
+      lockedMarksEvidence
+    )
+  } else if (strategy === B3_RENDER_STRATEGY.EDITABLE_RAW) {
+    const rawText = String(node.rawText || '')
+    editableFields.rawText = createFieldOverlay(
+      'rawText',
+      rawText,
+      node.direction || 'auto',
+      null
+    )
+  }
+  // READ_ONLY_STRUCTURED leaves editableFields = {} without creating dummy stem overlays
 
   return {
     nodeId: node.id,
-    nodeType: node.type || node.nodeType,
+    nodeType,
     direction: node.direction || 'auto',
     authoritativeNodeMarks: node.authoritativeNodeMarks ?? null,
     operationalNodeMarks: node.operationalNodeMarks ?? null,
     nodeMarksOrigin: node.nodeMarksOrigin || 'UNSTATED',
-    editableFields: {
-      [fieldName]: fieldOverlay,
-    },
+    editableFields,
     provenance: {
       classificationCertainty: node.provenance?.classificationCertainty || 'UNKNOWN',
       sourceSegmentIds: Array.isArray(node.provenance?.sourceSegmentIds)
@@ -127,6 +144,7 @@ export function createSectionOverlay(section) {
 
 /**
  * Creates a PaperEditorWorkingDocument from an immutable canonical PaperDocumentV2.
+ * Canonical language/direction origin is canonicalDoc.metadata (Rule 16).
  * The canonicalDoc remains the immutable baseline truth.
  */
 export function createEditorWorkingDocument(canonicalDoc) {
@@ -136,6 +154,11 @@ export function createEditorWorkingDocument(canonicalDoc) {
 
   const baseFingerprint = computeCanonicalFingerprint(canonicalDoc)
   const workingDocumentId = `workdoc__${canonicalDoc.id}`
+
+  // Canonical B2 language/direction live under metadata (Rule 16)
+  const lang = canonicalDoc.metadata?.language || 'unknown'
+  let dir = canonicalDoc.metadata?.direction || (lang === 'urdu' ? 'rtl' : 'ltr')
+  if (dir === 'dual') dir = 'ltr'
 
   return {
     documentModel: 'PaperEditorWorkingDocument',
@@ -151,8 +174,8 @@ export function createEditorWorkingDocument(canonicalDoc) {
       zoomLevel: 100,
       pageBorder: 'none',
       printMode: 'a4',
-      language: canonicalDoc.presentation?.language || 'unknown',
-      direction: canonicalDoc.presentation?.direction || 'auto',
+      language: lang,
+      direction: dir,
     },
     sections: Array.isArray(canonicalDoc.sections)
       ? canonicalDoc.sections.map(s => createSectionOverlay(s))

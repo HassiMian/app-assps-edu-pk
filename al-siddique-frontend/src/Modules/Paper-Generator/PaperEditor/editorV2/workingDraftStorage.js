@@ -7,6 +7,7 @@ import {
 import {
   computeCanonicalFingerprint,
   sanitizePaperRichText,
+  stableStringify,
 } from './editorProjection.js'
 
 export const CANONICAL_DRAFTS_BASE_KEY = 'al_siddique_canonical_working_drafts'
@@ -89,6 +90,17 @@ export function validateWorkingDraft(draft) {
     }
     if (typeof patch.academicTextMutated !== 'boolean') {
       return { valid: false, error: `Patch '${key}' academicTextMutated must be a boolean` }
+    }
+
+    // Strict sanitization validation (Rule 23):
+    // Sanitized rich text must be semantically identical to submitted workingRich.
+    // If sanitization would drop or mutate unsupported content, reject draft as invalid.
+    const sanitizedRich = sanitizePaperRichText(patch.workingRich)
+    if (stableStringify(sanitizedRich) !== stableStringify(patch.workingRich)) {
+      return {
+        valid: false,
+        error: `Patch '${key}' workingRich contains unsupported content that would be dropped or mutated by sanitization`,
+      }
     }
   }
 

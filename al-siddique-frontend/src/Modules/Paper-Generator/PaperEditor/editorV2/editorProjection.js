@@ -56,7 +56,7 @@ export const SUPPORTED_SIZES = [8, 9, 10, 11, 12, 13, 14, 16, 18, 20, 24, 28, 32
 export const SUPPORTED_COLORS = ['#111827', '#374151', '#123b67', '#075985', '#06695b', '#9a6a00', '#b91c1c', '#7e22ce']
 export const SUPPORTED_HIGHLIGHTS = ['#fef08a', '#bbf7d0', '#bfdbfe', '#fecaca', '#e9d5ff']
 
-const ALLOWED_BLOCKS = new Set(['doc', 'paragraph', 'heading'])
+const ALLOWED_BLOCKS = new Set(['doc', 'paragraph', 'heading', 'hardBreak'])
 const ALLOWED_MARKS = new Set(['bold', 'italic', 'underline', 'strike', 'superscript', 'subscript', 'textStyle', 'highlight'])
 
 const safeDirection = val => (val === 'rtl' || val === 'ltr' ? val : null)
@@ -99,6 +99,9 @@ function cleanNode(node, depth = 0) {
     if (typeof node.text !== 'string') return null
     const marks = Array.isArray(node.marks) ? node.marks.map(cleanMark).filter(Boolean) : []
     return { type: 'text', text: node.text, ...(marks.length ? { marks } : {}) }
+  }
+  if (node.type === 'hardBreak') {
+    return { type: 'hardBreak' }
   }
   if (!ALLOWED_BLOCKS.has(node.type)) return null
 
@@ -173,8 +176,11 @@ export function extractPlainTextFromTiptap(tiptapDoc) {
   const lines = tiptapDoc.content.map(block => {
     if (!block || !Array.isArray(block.content)) return ''
     return block.content
-      .filter(child => child?.type === 'text' && typeof child.text === 'string')
-      .map(child => child.text)
+      .map(child => {
+        if (child?.type === 'text' && typeof child.text === 'string') return child.text
+        if (child?.type === 'hardBreak') return '\n'
+        return ''
+      })
       .join('')
   })
 

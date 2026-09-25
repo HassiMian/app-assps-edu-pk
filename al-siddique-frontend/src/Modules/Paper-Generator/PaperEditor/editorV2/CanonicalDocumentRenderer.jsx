@@ -1,10 +1,10 @@
-// CanonicalDocumentRenderer.jsx — Surface Renderer for Canonical Document Working Projections (Rules 20, 33, 34)
+// CanonicalDocumentRenderer.jsx — Surface Renderer for Canonical Paper Documents (Rules 6, 7, 8, 9, 10, 11, 12, 13, 14, 17, 18, 34)
 import React from 'react'
 import CanonicalEditableText from './CanonicalEditableText.jsx'
-import CanonicalStaticText from './CanonicalStaticText.jsx'
 import CanonicalStaticNode from './CanonicalStaticNode.jsx'
 import { buildFieldKey } from './EditorFieldRegistry.js'
-import './canonicalEditor.css'
+import { getB3NodeEditability, B3_RENDER_STRATEGY } from './nodeRenderStrategy.js'
+import { usePaperStore } from '../../usePaperStore.js'
 
 export default function CanonicalDocumentRenderer({
   workingDoc,
@@ -12,30 +12,62 @@ export default function CanonicalDocumentRenderer({
   isEditing = true,
   store,
   registry,
-  activeFieldKey = null,
-  onFocusField = null,
+  activeFieldKey,
+  onFocusField,
   externalRevisionToken = 1,
 }) {
-  if (!workingDoc) return null
+  // Performance diagnostics tracking (test-only, zero production overhead, Rule 27)
+  if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) {
+    window.__B3_DIAGNOSTICS__.documentRendererRenderCount = (window.__B3_DIAGNOSTICS__.documentRendererRenderCount || 0) + 1
+  }
+
+  // Tenant paperSettings for presentation only (Rule 18)
+  const { paperSettings } = usePaperStore()
+
+  if (!workingDoc || !workingDoc.sections) {
+    return (
+      <div style={{ padding: '40px', textAlign: 'center', color: '#94a3b8' }}>
+        No canonical document loaded.
+      </div>
+    )
+  }
 
   const meta = canonicalBaseline?.metadata || {}
-  const pres = workingDoc.presentation || {}
-  const isUrdu = pres.language === 'urdu' || pres.direction === 'rtl'
-  const isHalf = pres.printMode === 'half'
+  const pres = workingDoc.presentationOverlay || workingDoc.presentation || {}
+  const isUrdu = pres.language === 'urdu' || meta.language === 'urdu'
+  const isHalf = pres.templateId === 'half_page'
+
+  const schoolName = pres.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
+  const schoolAddress = pres.schoolAddress || paperSettings?.address || 'Sharif Chowk, Rayya Khas, Narowal'
+  const logoUrl = pres.logoUrl || paperSettings?.logo || meta.logoUrl || null
+
+  // Total Marks Authority Resolution (Rule 17)
+  let totalMarksDisplay = '—'
+  if (canonicalBaseline?.authority?.authoritativePaperTotal != null) {
+    totalMarksDisplay = String(canonicalBaseline.authority.authoritativePaperTotal)
+  } else if (
+    canonicalBaseline?.authority?.storedConfiguredTotal != null &&
+    canonicalBaseline.authority.paperTotalOrigin !== 'UNRESOLVED_ZERO'
+  ) {
+    totalMarksDisplay = String(canonicalBaseline.authority.storedConfiguredTotal)
+  } else {
+    totalMarksDisplay = '—'
+  }
 
   const pageStyle = {
-    width: '210mm',
-    minHeight: isHalf ? '148mm' : '297mm',
+    width: isHalf ? '148mm' : '210mm',
+    minHeight: isHalf ? '210mm' : '297mm',
     margin: '0 auto',
+    padding: isHalf ? '16mm 14mm' : '20mm 18mm',
     background: '#ffffff',
-    color: '#111827',
-    padding: isHalf ? '6mm 8mm' : '10mm 12mm',
+    color: '#0f172a',
+    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+    borderRadius: '4px',
     boxSizing: 'border-box',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
-    direction: isUrdu ? 'rtl' : 'ltr',
     position: 'relative',
-    fontSize: isHalf ? '11px' : '13px',
-    lineHeight: isUrdu ? 1.9 : 1.45,
+    fontFamily: isUrdu
+      ? "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif"
+      : "'Times New Roman', 'Arial', serif",
   }
 
   return (
@@ -45,9 +77,10 @@ export default function CanonicalDocumentRenderer({
       style={pageStyle}
       dir={isUrdu ? 'rtl' : 'ltr'}
     >
-      {/* 1. School Header Section (Strictly Read-Only & Isolated outside Tiptap, Rule 34) */}
+      {/* 1. School Header Section (Strictly Read-Only & Isolated outside Tiptap, Rules 17, 18, 34) */}
       <header
         data-canonical-header
+        className="canonical-school-header"
         style={{
           position: 'relative',
           zIndex: 1,
@@ -59,35 +92,35 @@ export default function CanonicalDocumentRenderer({
         <div style={{ display: 'grid', gridTemplateColumns: '70px 1fr 140px', gap: '12px', alignItems: 'center' }}>
           {/* Logo */}
           <div style={{ width: 64, height: 64, display: 'grid', placeItems: 'center', background: '#fff', border: '1px solid #cbd5e1', borderRadius: 8 }}>
-            {meta.logoUrl ? (
-              <img src={meta.logoUrl} alt="Logo" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            {logoUrl ? (
+              <img src={logoUrl} alt="Logo" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             ) : (
-              <strong style={{ color: '#1e3a8a', fontSize: '18px' }}>ASSPS</strong>
+              <span style={{ color: '#1e3a8a', fontSize: '18px', fontWeight: 900 }}>ASSPS</span>
             )}
           </div>
 
           {/* School Name & Address */}
           <div style={{ textAlign: isUrdu ? 'right' : 'left' }}>
             <h1 style={{ margin: 0, fontSize: isHalf ? '18px' : '22px', fontWeight: 900, color: '#1e3a8a', letterSpacing: '0.02em' }}>
-              {meta.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'}
+              {schoolName}
             </h1>
             <div style={{ fontSize: '11px', color: '#475569', marginTop: '3px' }}>
-              {meta.schoolAddress || 'Sharif Chowk, Rayya Khas, Narowal'}
+              {schoolAddress}
             </div>
           </div>
 
-          {/* Exam Type & Session Badge */}
+          {/* Exam Type & Session Badge (No invented defaults, Rule 17) */}
           <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 6, padding: '6px 8px', textAlign: 'center' }}>
             <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', color: '#1e3a8a' }}>
-              {meta.examType || 'Examination'}
+              {meta.examType || '__________'}
             </div>
             <div style={{ fontSize: '12px', fontWeight: 900, color: '#0f172a', marginTop: '2px' }}>
-              {meta.session || '2026-2027'}
+              {meta.session || '__________'}
             </div>
           </div>
         </div>
 
-        {/* Student Information Table */}
+        {/* Student Information Table (No invented defaults, Rule 17) */}
         <div
           data-student-info
           dir="ltr"
@@ -101,11 +134,11 @@ export default function CanonicalDocumentRenderer({
           {[
             ['Student Name', '__________________________'],
             ['Roll No.', '__________'],
-            ['Class', meta.className || meta.classLevel || 'General'],
-            ['Paper Code', meta.paperCode || 'AP-01'],
-            ['Subject', meta.subject || meta.subjectName || 'General'],
-            ['Time Allowed', meta.timeAllowed || '1 Hour'],
-            ['Total Marks', meta.totalMarks ?? '__________'],
+            ['Class', meta.className || meta.classLevel || '__________'],
+            ['Paper Code', meta.paperCode || '__________'],
+            ['Subject', meta.subject || meta.subjectName || '__________'],
+            ['Time Allowed', meta.timeAllowed || '__________'],
+            ['Total Marks', totalMarksDisplay],
             ['Date', meta.examDate || '__________'],
           ].map(([label, val], idx) => (
             <div
@@ -119,7 +152,7 @@ export default function CanonicalDocumentRenderer({
               }}
             >
               <span style={{ color: '#1e3a8a', fontWeight: 800, fontSize: '9px', textTransform: 'uppercase', display: 'block' }}>{label}</span>
-              <strong style={{ color: '#1e293b', fontSize: '11px' }}>{val}</strong>
+              <span style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}>{val}</span>
             </div>
           ))}
         </div>
@@ -129,7 +162,8 @@ export default function CanonicalDocumentRenderer({
       <main style={{ position: 'relative', zIndex: 1 }}>
         {workingDoc.sections?.map((section, sIdx) => {
           const secDir = section.direction === 'rtl' ? 'rtl' : (section.direction === 'ltr' ? 'ltr' : (isUrdu ? 'rtl' : 'ltr'))
-          const totalMarksDisplay = section.authoritativeSectionTotal ?? section.operationalSectionTotal
+          const totalMarks = section.authoritativeSectionTotal ?? section.operationalSectionTotal
+          let questionCounter = 0
 
           return (
             <section
@@ -139,34 +173,34 @@ export default function CanonicalDocumentRenderer({
             >
               {/* Section Heading Bar (READ-ONLY in B3, Rule 20) */}
               <div
+                className="canonical-section-heading-bar"
+                dir={secDir}
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: isUrdu ? '1fr auto' : 'auto 1fr',
-                  gap: '10px',
+                  display: 'flex',
                   alignItems: 'center',
-                  paddingBottom: '4px',
-                  marginBottom: '8px',
-                  borderBottom: '2px solid #1e3a8a',
-                  direction: isUrdu ? 'rtl' : 'ltr',
+                  justifyContent: 'space-between',
+                  padding: '4px 10px',
+                  background: '#f1f5f9',
+                  borderLeft: secDir === 'rtl' ? 'none' : '4px solid #1e3a8a',
+                  borderRight: secDir === 'rtl' ? '4px solid #1e3a8a' : 'none',
+                  borderRadius: '2px',
+                  marginBottom: '10px',
                 }}
               >
-                {/* Marks Badge */}
-                {totalMarksDisplay !== null && totalMarksDisplay !== undefined && (
+                {/* Total Marks badge if available */}
+                {totalMarks !== null && totalMarks !== undefined && (
                   <span
-                    data-section-marks-badge
+                    className="canonical-section-marks-badge"
                     style={{
-                      color: '#1e3a8a',
-                      border: '1px solid #bfdbfe',
-                      background: '#eff6ff',
-                      borderRadius: 4,
-                      padding: '2px 8px',
-                      fontWeight: 800,
+                      background: '#1e3a8a',
+                      color: '#ffffff',
                       fontSize: '11px',
-                      whiteSpace: 'nowrap',
-                      direction: 'ltr',
+                      fontWeight: 800,
+                      padding: '2px 8px',
+                      borderRadius: '4px',
                     }}
                   >
-                    ({totalMarksDisplay} Marks)
+                    ({totalMarks} Marks)
                   </span>
                 )}
 
@@ -194,34 +228,64 @@ export default function CanonicalDocumentRenderer({
 
               {/* Section Nodes */}
               <div className="canonical-section-nodes" dir={secDir}>
-                {section.nodeOverlays?.map((nodeOverlay, nIdx) => {
-                  const fieldName = Object.keys(nodeOverlay.editableFields)[0] || 'stem'
-                  const fieldOverlay = nodeOverlay.editableFields[fieldName]
-                  const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeOverlay.nodeId, fieldName)
+                {section.nodeOverlays?.map((nodeOverlay) => {
+                  const nodeType = nodeOverlay.nodeType
+                  const strategy = getB3NodeEditability(nodeType)
                   const nodeDir = nodeOverlay.direction === 'rtl' ? 'rtl' : (nodeOverlay.direction === 'ltr' ? 'ltr' : secDir)
 
-                  // Find original baseline node for specialized structural subparts (like MCQ options)
+                  // Baseline node reference
                   const baselineSec = canonicalBaseline?.sections?.find(s => s.id === section.id)
                   const baselineNode = baselineSec?.nodes?.find(n => n.id === nodeOverlay.nodeId)
 
-                  if (nodeOverlay.nodeType === 'section_banner') {
+                  // 1. Scope Headers and Section Banners have NO question numbers or marks (Rule 13)
+                  if (nodeType === 'section_banner' || nodeType === 'scope_header') {
                     return (
                       <div
                         key={nodeOverlay.nodeId}
                         data-node-id={nodeOverlay.nodeId}
-                        data-node-type="section_banner"
+                        data-node-type={nodeType}
                         style={{ marginBottom: '6px' }}
                       >
-                        <CanonicalStaticNode node={baselineNode} direction={nodeDir} />
+                        <CanonicalStaticNode node={baselineNode || nodeOverlay} direction={nodeDir} />
                       </div>
                     )
                   }
+
+                  // Increment question count for academic question items
+                  questionCounter++
+                  const currentQNum = questionCounter
+
+                  // 2. Read-Only Structured Nodes (true_false, fill_blank, matching_columns, grammar_table, vertical_math, unknown_preserved) (Rules 6-12, 14)
+                  if (strategy === B3_RENDER_STRATEGY.READ_ONLY_STRUCTURED) {
+                    return (
+                      <div
+                        key={nodeOverlay.nodeId}
+                        data-node-id={nodeOverlay.nodeId}
+                        data-node-type={nodeType}
+                        style={{ marginBottom: '8px', padding: '2px 0' }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                          <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
+                            {currentQNum}.
+                          </span>
+                          <div style={{ flex: 1 }}>
+                            <CanonicalStaticNode node={baselineNode || nodeOverlay} direction={nodeDir} />
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  }
+
+                  // 3. Rich Text Editable Nodes (mcq, short_question, long_question, essay, letter, translation, etc.) (Rule 4, 8)
+                  const fieldName = Object.keys(nodeOverlay.editableFields)[0] || 'stem'
+                  const fieldOverlay = nodeOverlay.editableFields[fieldName]
+                  const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeOverlay.nodeId, fieldName)
 
                   return (
                     <div
                       key={nodeOverlay.nodeId}
                       data-node-id={nodeOverlay.nodeId}
-                      data-node-type={nodeOverlay.nodeType}
+                      data-node-type={nodeType}
                       style={{
                         marginBottom: '8px',
                         padding: '2px 0',
@@ -230,7 +294,7 @@ export default function CanonicalDocumentRenderer({
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
                         {/* Question Number Prefix */}
                         <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
-                          {nIdx + 1}.
+                          {currentQNum}.
                         </span>
 
                         {/* In-Place Editable Stem */}
@@ -248,8 +312,8 @@ export default function CanonicalDocumentRenderer({
                         </div>
                       </div>
 
-                      {/* Specialized Structured Elements (e.g. MCQ options or Unknown Preserved) */}
-                      {baselineNode && (
+                      {/* Specialized Structured Elements: MCQ options ONLY (Rule 8, 14 - NO duplication!) */}
+                      {nodeType === 'mcq' && baselineNode && (
                         <CanonicalStaticNode node={baselineNode} direction={nodeDir} />
                       )}
                     </div>

@@ -1,4 +1,4 @@
-// CanonicalEditorExtensions.js — Safe Tiptap / ProseMirror extensions for Canonical Paper Editor V2 (Rule 15)
+// CanonicalEditorExtensions.js — Safe Tiptap / ProseMirror extensions for Canonical Paper Editor V2 (Rules 15, 22)
 import StarterKit from '@tiptap/starter-kit'
 import { TextStyle } from '@tiptap/extension-text-style'
 import TextAlign from '@tiptap/extension-text-align'
@@ -63,16 +63,24 @@ export const CanonicalTextAlign = TextAlign.extend({
 })
 
 /**
- * Returns the exact list of safe extensions for in-place text editing in B3.
- * TableKit is deliberately omitted to prevent academic structure corruption.
+ * Returns the exact list of safe extensions for in-place text editing in B3 (Rule 22).
+ * Structural input-rules (lists, blockquotes, code blocks) and tables are disabled.
+ * HardBreak is enabled with consistent serialization and static rendering.
  */
 export function getCanonicalEditorExtensions() {
   return [
     StarterKit.configure({
       history: true,
-      underline: false,
-      link: false,
       heading: { levels: [1, 2, 3, 4] },
+      hardBreak: true,
+      bulletList: false,
+      orderedList: false,
+      listItem: false,
+      blockquote: false,
+      codeBlock: false,
+      horizontalRule: false,
+      dropcursor: false,
+      gapcursor: false,
     }),
     Underline,
     CanonicalTextStyle,
