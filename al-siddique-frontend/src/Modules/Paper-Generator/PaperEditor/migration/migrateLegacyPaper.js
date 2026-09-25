@@ -17,6 +17,14 @@ function parseOptionsFromContent(content = '') {
   return []
 }
 
+export function finiteNumberOr(value, fallback = 0) {
+  if (value === null || value === undefined || value === '') {
+    return fallback
+  }
+  const parsed = Number(value)
+  return Number.isFinite(parsed) ? parsed : fallback
+}
+
 export function migrateLegacyPaper(raw) {
   if (!raw || typeof raw !== 'object') {
     return createPaperDocument()
@@ -40,7 +48,7 @@ export function migrateLegacyPaper(raw) {
     officialList.forEach((item, index) => {
       const heading = item.heading || item.title || item.text || `Question ${index + 1}`
       const content = item.content || item.stemText || ''
-      const marks = Number(item.marks) || 10
+      const marks = finiteNumberOr(item.marks, 0)
       const isMcqSection = item.type === 'mcq' || item.layoutPreset === 'mcq' || /(?:choose|mcq|معروضی|کثیر\s*الانتخاب)/i.test(heading)
 
       const parsedOptions = isMcqSection ? parseOptionsFromContent(content) : (item.options || [])
@@ -54,14 +62,14 @@ export function migrateLegacyPaper(raw) {
         stemText: isMcqSection ? heading : (content || heading),
         stemUrdu: isUrdu ? (isMcqSection ? heading : (content || heading)) : '',
         options: parsedOptions,
-        answerLines: Number(item.answerLines) || 0,
+        answerLines: finiteNumberOr(item.answerLines, 0),
         stemRich: item.richContent || null,
       })
 
       const sectionLayout = isMcqSection
-        ? { layoutMode: 'compact-grid', columns: Number(item.mcqColumns) || 4, borderStyle: 'box', direction: isUrdu ? 'rtl' : 'ltr' }
+        ? { layoutMode: 'compact-grid', columns: finiteNumberOr(item.mcqColumns, 4), borderStyle: 'box', direction: isUrdu ? 'rtl' : 'ltr' }
         : (item.layoutPreset === 'columns'
-            ? { layoutMode: '2-column-balanced', columns: Number(item.columnCount) || 2, borderStyle: 'none', direction: isUrdu ? 'rtl' : 'ltr' }
+            ? { layoutMode: '2-column-balanced', columns: finiteNumberOr(item.columnCount, 2), borderStyle: 'none', direction: isUrdu ? 'rtl' : 'ltr' }
             : { layoutMode: '1-column', columns: 1, borderStyle: 'none', direction: isUrdu ? 'rtl' : 'ltr' })
 
       sections.push(createPaperSection({
@@ -86,7 +94,10 @@ export function migrateLegacyPaper(raw) {
     let sectionNum = 1
 
     if (mcqs.length > 0) {
-      const marksEach = Number(raw.mcq_marks || raw.selectedQuestions?.mcq?.marks || 1)
+      const rawMcqMarks = (raw.mcq_marks !== undefined && raw.mcq_marks !== null && raw.mcq_marks !== '')
+        ? raw.mcq_marks
+        : raw.selectedQuestions?.mcq?.marks
+      const marksEach = finiteNumberOr(rawMcqMarks, 1)
       sections.push(createPaperSection({
         id: `sec_mcq_${Date.now()}`,
         type: 'mcq',
@@ -105,7 +116,7 @@ export function migrateLegacyPaper(raw) {
           id: q.id || `mcq_${idx + 1}`,
           qNumber: idx + 1,
           type: 'mcq',
-          marks: Number(q.marks) || marksEach,
+          marks: finiteNumberOr(q.marks, marksEach),
           direction: isUrdu ? 'rtl' : 'auto',
           stemText: q.en || q.text || '',
           stemUrdu: q.ur || q.textUrdu || '',
@@ -120,7 +131,10 @@ export function migrateLegacyPaper(raw) {
     }
 
     if (shorts.length > 0) {
-      const marksEach = Number(raw.short_marks || raw.selectedQuestions?.short?.marks || 2)
+      const rawShortMarks = (raw.short_marks !== undefined && raw.short_marks !== null && raw.short_marks !== '')
+        ? raw.short_marks
+        : raw.selectedQuestions?.short?.marks
+      const marksEach = finiteNumberOr(rawShortMarks, 2)
       sections.push(createPaperSection({
         id: `sec_short_${Date.now()}`,
         type: 'short',
@@ -139,7 +153,7 @@ export function migrateLegacyPaper(raw) {
           id: q.id || `short_${idx + 1}`,
           qNumber: idx + 1,
           type: 'short',
-          marks: Number(q.marks) || marksEach,
+          marks: finiteNumberOr(q.marks, marksEach),
           direction: isUrdu ? 'rtl' : 'auto',
           stemText: q.en || q.text || '',
           stemUrdu: q.ur || q.textUrdu || '',
@@ -148,7 +162,10 @@ export function migrateLegacyPaper(raw) {
     }
 
     if (longs.length > 0) {
-      const marksEach = Number(raw.long_marks || raw.selectedQuestions?.long?.marks || 5)
+      const rawLongMarks = (raw.long_marks !== undefined && raw.long_marks !== null && raw.long_marks !== '')
+        ? raw.long_marks
+        : raw.selectedQuestions?.long?.marks
+      const marksEach = finiteNumberOr(rawLongMarks, 5)
       sections.push(createPaperSection({
         id: `sec_long_${Date.now()}`,
         type: 'long',
@@ -167,13 +184,23 @@ export function migrateLegacyPaper(raw) {
           id: q.id || `long_${idx + 1}`,
           qNumber: idx + 1,
           type: 'long',
-          marks: Number(q.marks) || marksEach,
+          marks: finiteNumberOr(q.marks, marksEach),
           direction: isUrdu ? 'rtl' : 'auto',
           stemText: q.en || q.text || '',
           stemUrdu: q.ur || q.textUrdu || '',
         })),
       }))
     }
+  }
+
+  // Resolve totalMarks without destructive falsy coercion
+  let migratedTotalMarks = 0
+  if (config.totalMarks !== undefined && config.totalMarks !== null && config.totalMarks !== '') {
+    migratedTotalMarks = finiteNumberOr(config.totalMarks, 0)
+  } else {
+    // Config total is truly absent: retain deterministic section sum only if sections provide one
+    const sectionSum = sections.reduce((sum, s) => sum + (s.totalMarks || 0), 0)
+    migratedTotalMarks = sectionSum > 0 ? sectionSum : 0
   }
 
   return createPaperDocument({
@@ -189,8 +216,8 @@ export function migrateLegacyPaper(raw) {
       examType: config.examType || 'First Term Examination 2026',
       session: config.session || '2026-2027',
       language: config.language || (isUrdu ? 'urdu' : 'english'),
-      totalMarks: Number(config.totalMarks) || (sections.reduce((sum, s) => sum + (s.totalMarks || 0), 0) || 50),
-      durationMinutes: Number(config.duration || config.durationMinutes) || 60,
+      totalMarks: migratedTotalMarks,
+      durationMinutes: finiteNumberOr(config.duration ?? config.durationMinutes, 60),
       timeAllowed: config.timeAllowed || 'As announced',
       examDate: config.examDate || '',
       instructions: config.instructions || '',
