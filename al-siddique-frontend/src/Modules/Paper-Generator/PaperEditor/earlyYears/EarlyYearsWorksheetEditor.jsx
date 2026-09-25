@@ -1,4 +1,3 @@
-// EarlyYearsWorksheetEditor.jsx — Main Worksheet View with Paper Switcher and Preview
 import React, { useState, useMemo } from 'react'
 import {
   getAllEarlyYearsPapers,
@@ -6,6 +5,7 @@ import {
   getQAFindingsForPaper
 } from './data/earlyYearsSourceStore.js'
 import EarlyYearsPaperContainer from './components/EarlyYearsPaperContainer.jsx'
+import EarlyYearsInspector from './inspector/EarlyYearsInspector.jsx'
 
 export default function EarlyYearsWorksheetEditor({
   initialPaperId = 'ey-starter-english-2026',
@@ -267,83 +267,13 @@ export default function EarlyYearsWorksheetEditor({
           )}
         </main>
 
-        {/* QA Inspector Sidebar */}
+        {/* Inspector Sidebar */}
         {showQAPanel && (
-          <aside
-            className="no-print"
-            style={{
-              width: '320px',
-              background: '#1e293b',
-              borderLeft: '1px solid #475569',
-              padding: '16px',
-              overflowY: 'auto',
-              flexShrink: 0
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <h3 style={{ margin: 0, fontSize: '15px', color: '#f8fafc' }}>Source QA Findings</h3>
-              <button
-                type="button"
-                onClick={() => setShowQAPanel(false)}
-                style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '16px' }}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div style={{ fontSize: '11px', color: '#94a3b8', marginBottom: '14px' }}>
-              Authoritative source audit notes for {currentPaper?.classDisplayName} {currentPaper?.subject}.
-            </div>
-
-            {qaFindings.length === 0 ? (
-              <div style={{ padding: '12px', background: '#0f172a', borderRadius: '6px', color: '#4ade80', fontSize: '12px' }}>
-                ✓ No academic ambiguities or mark conflicts detected in this paper.
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {qaFindings.map((finding) => (
-                  <div
-                    key={finding.id}
-                    style={{
-                      padding: '10px',
-                      background: '#0f172a',
-                      borderRadius: '6px',
-                      borderLeft: `4px solid ${
-                        finding.status === 'SOURCE_TOTAL_CONFLICT'
-                          ? '#ef4444'
-                          : finding.status === 'AUTHORITATIVE_HEADER_TOTAL_ABSENT'
-                          ? '#3b82f6'
-                          : '#eab308'
-                      }`
-                    }}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                      <span style={{ fontSize: '11px', fontWeight: 'bold', color: '#f1f5f9' }}>
-                        {finding.title}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: '9px',
-                          padding: '1px 5px',
-                          borderRadius: '3px',
-                          background: '#334155',
-                          color: '#cbd5e1'
-                        }}
-                      >
-                        {finding.status}
-                      </span>
-                    </div>
-                    <div style={{ fontSize: '11px', color: '#cbd5e1', lineHeight: '1.4' }}>
-                      {finding.description}
-                    </div>
-                    <div style={{ fontSize: '10px', color: '#64748b', marginTop: '6px', fontStyle: 'italic' }}>
-                      Rule: {finding.academicRule}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </aside>
+          <EarlyYearsInspector
+            currentPaper={currentPaper}
+            qaFindings={qaFindings}
+            onClose={() => setShowQAPanel(false)}
+          />
         )}
       </div>
     </div>
