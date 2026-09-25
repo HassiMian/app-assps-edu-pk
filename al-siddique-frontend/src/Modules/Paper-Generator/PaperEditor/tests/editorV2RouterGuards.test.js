@@ -135,3 +135,117 @@ test('ROUTER H: All 43 pristine papers in V13 dataset pass pristine check and ro
   }
 })
 
+test('ROUTER I: Real source shape assertion across all 43 V13 papers (Section 8)', () => {
+  assert.strictEqual(v13Dataset.papers.length, 43, 'paperCount must be 43')
+
+  for (const paper of v13Dataset.papers) {
+    assert.ok(
+      paper.selectedQuestions && typeof paper.selectedQuestions === 'object' && !Array.isArray(paper.selectedQuestions),
+      `Paper '${paper.id}' selectedQuestions must be a non-array object`
+    )
+    assert.ok(
+      paper.selectedQuestions.official_section && typeof paper.selectedQuestions.official_section === 'object',
+      `Paper '${paper.id}' selectedQuestions.official_section must exist as an object`
+    )
+    assert.ok(
+      Array.isArray(paper.selectedQuestions.official_section.questions),
+      `Paper '${paper.id}' selectedQuestions.official_section.questions must be an array`
+    )
+    assert.ok(
+      paper.selectedQuestions.official_section.questions.length > 0,
+      `Paper '${paper.id}' selectedQuestions.official_section.questions must not be empty`
+    )
+  }
+})
+
+test('ROUTER J: Real-shape selectedQuestions content mutation forces LEGACY with official_section untouched (Section 6)', () => {
+  const pristinePaper = v13Dataset.papers[0]
+  const modifiedPaper = JSON.parse(JSON.stringify(pristinePaper))
+
+  // official_section remains COMPLETELY UNCHANGED
+  assert.deepStrictEqual(modifiedPaper.official_section, pristinePaper.official_section)
+
+  // Modify ONLY selectedQuestions.official_section.questions[0].content
+  modifiedPaper.selectedQuestions.official_section.questions[0].content = 'User modified question in selectedQuestions mirror only'
+
+  assert.strictEqual(isPristineOfficialV13Paper(modifiedPaper), false, 'Modified selectedQuestions mirror must fail pristine check')
+
+  const decision = resolvePaperEditorRoute(modifiedPaper)
+  assert.strictEqual(
+    decision.route,
+    'LEGACY_CANVAS_V2',
+    'Modified selectedQuestions mirror must route to LEGACY_CANVAS_V2 to protect user customization'
+  )
+  assert.strictEqual(decision.reason, 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY')
+  assert.strictEqual(decision.resolvedPaper, modifiedPaper)
+})
+
+test('ROUTER K: Additional nested mirror tests with top-level official_section untouched (Section 7)', () => {
+  const pristinePaper = v13Dataset.papers[0]
+
+  function assertMirrorMutationForcesLegacy(mutator, label) {
+    const paper = JSON.parse(JSON.stringify(pristinePaper))
+    // Verify initial official_section parity
+    assert.deepStrictEqual(paper.official_section, pristinePaper.official_section)
+
+    mutator(paper)
+
+    // Verify official_section was NOT mutated by the helper
+    assert.deepStrictEqual(paper.official_section, pristinePaper.official_section, `official_section must remain untouched for '${label}'`)
+
+    const isPristine = isPristineOfficialV13Paper(paper)
+    assert.strictEqual(isPristine, false, `Mutation '${label}' in selectedQuestions must fail pristine check`)
+
+    const decision = resolvePaperEditorRoute(paper)
+    assert.strictEqual(
+      decision.route,
+      'LEGACY_CANVAS_V2',
+      `Mutation '${label}' in selectedQuestions must route to LEGACY_CANVAS_V2`
+    )
+  }
+
+  // A. selectedQuestions.official_section.questions[0].heading
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.questions[0].heading = 'Custom Modified Heading'
+  }, 'questions[0].heading')
+
+  // B. selectedQuestions.official_section.questions[0].marks
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.questions[0].marks = 99
+  }, 'questions[0].marks')
+
+  // C. selectedQuestions.official_section.questions[0].textUrdu
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.questions[0].textUrdu = 'تبدیل شدہ سوال برائے مرر'
+  }, 'questions[0].textUrdu')
+
+  // D. selectedQuestions.official_section.questions reorder
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.questions.reverse()
+  }, 'questions reorder')
+
+  // E. remove one nested question
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.questions.pop()
+  }, 'remove nested question')
+
+  // F. add one nested question
+  assertMirrorMutationForcesLegacy(p => {
+    const clone = JSON.parse(JSON.stringify(p.selectedQuestions.official_section.questions[0]))
+    clone.id = 'extra-nested-q-id'
+    p.selectedQuestions.official_section.questions.push(clone)
+  }, 'add nested question')
+
+  // G. selectedQuestions.official_section.marks
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.marks = 50
+  }, 'official_section.marks')
+
+  // H. nested option text/label mutation where options data exists
+  assertMirrorMutationForcesLegacy(p => {
+    p.selectedQuestions.official_section.questions[0].options = [
+      { id: 'opt_1', label: 'A', text: 'Custom Option in Mirror' },
+    ]
+  }, 'nested options mutation')
+})
+

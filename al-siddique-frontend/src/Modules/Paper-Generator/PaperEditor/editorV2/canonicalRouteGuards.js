@@ -11,6 +11,78 @@ import normalizationManifest from '../migration/data/normalizationManifestV13.js
 import { stableStringify } from './editorProjection.js'
 
 /**
+ * Helper to project a single academic question from selectedQuestions subtree without lossy normalization.
+ */
+function projectAcademicQuestion(q) {
+  if (!q || typeof q !== 'object') return q
+  const res = {
+    id: q.id ?? '',
+    type: q.type ?? '',
+    medium: q.medium ?? '',
+    heading: q.heading ?? '',
+    content: q.content ?? '',
+    text: q.text ?? '',
+    textUrdu: q.textUrdu ?? '',
+    marks: q.marks !== undefined ? q.marks : null,
+    sourceOrder: q.sourceOrder !== undefined ? q.sourceOrder : null,
+    priority: q.priority ?? '',
+  }
+  if (q.options !== undefined) {
+    res.options = Array.isArray(q.options)
+      ? q.options.map(opt => {
+          if (!opt || typeof opt !== 'object') return opt
+          return {
+            id: opt.id ?? '',
+            label: opt.label ?? opt.displayLabel ?? opt.canonicalLabel ?? '',
+            text: opt.text ?? '',
+            ...(opt.urduText !== undefined ? { urduText: opt.urduText } : {}),
+            ...(opt.isCorrect !== undefined ? { isCorrect: opt.isCorrect } : {}),
+          }
+        })
+      : q.options
+  }
+  for (const [k, v] of Object.entries(q)) {
+    if (res[k] === undefined) {
+      res[k] = v
+    }
+  }
+  return res
+}
+
+/**
+ * Projects the complete academic selectedQuestions subtree (both real V13 object-form and array-form).
+ */
+function projectSelectedQuestionsSubtree(sq) {
+  if (!sq || typeof sq !== 'object') return null
+
+  if (Array.isArray(sq)) {
+    return sq.map(projectAcademicQuestion)
+  }
+
+  // Object-form: e.g. { official_section: { questions: [...], marks: ... } }
+  const projected = {}
+  for (const [secKey, secVal] of Object.entries(sq)) {
+    if (secVal && typeof secVal === 'object') {
+      const projectedSec = {
+        ...(secVal.marks !== undefined ? { marks: secVal.marks } : {}),
+        questions: Array.isArray(secVal.questions)
+          ? secVal.questions.map(projectAcademicQuestion)
+          : secVal.questions,
+      }
+      for (const [k, v] of Object.entries(secVal)) {
+        if (k !== 'marks' && k !== 'questions') {
+          projectedSec[k] = v
+        }
+      }
+      projected[secKey] = projectedSec
+    } else {
+      projected[secKey] = secVal
+    }
+  }
+  return projected
+}
+
+/**
  * Extracts a deterministic academic projection from an official V13 paper for pristine comparison.
  * Excludes non-academic presentation and runtime fields (editorSettings, createdAt, pure UI state).
  *
@@ -75,18 +147,7 @@ export function extractOfficialV13AcademicProjection(paper) {
         : paper.official_section_marks)
     : null
 
-  const projectedSelectedQuestions = Array.isArray(paper.selectedQuestions) && paper.selectedQuestions.length > 0
-    ? paper.selectedQuestions.map(q => {
-        if (!q || typeof q !== 'object') return q
-        return {
-          id: q.id ?? '',
-          text: q.text ?? q.questionText ?? '',
-          heading: q.heading ?? '',
-          marks: q.marks ?? null,
-          options: q.options ?? null,
-        }
-      })
-    : null
+  const projectedSelectedQuestions = projectSelectedQuestionsSubtree(paper.selectedQuestions)
 
   return {
     id: paper.id,
