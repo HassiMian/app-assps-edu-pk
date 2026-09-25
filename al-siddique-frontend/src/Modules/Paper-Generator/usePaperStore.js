@@ -4,11 +4,14 @@ import { resolveAssetUrl } from '../../services/api'
 import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../services/useAcademicStore'
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
+import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
+const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V15'
 
 const SEED_TYPE_MAP = {
  mcq: 'mcq',
@@ -98,6 +101,19 @@ const defaultStore = {
  schoolAccess: [],
  superappModules: {},
  },
+}
+
+function readAuthUser() {
+ try {
+  const raw = getStorage()?.getItem('al_siddique_user')
+  return raw ? JSON.parse(raw) : null
+ } catch {
+  return null
+ }
+}
+
+function cloneJson(value) {
+ return JSON.parse(JSON.stringify(value))
 }
 
 function isAsspsTenantUser(user = readAuthUser()) {
@@ -295,11 +311,95 @@ function withAsspsQuestionBankSeed(store) {
  }
 }
 
+function withOfficialExamPaperSeed(store) {
+ if (!isAsspsTenantUser()) return store
+ const seed = officialFirstTermPapers && typeof officialFirstTermPapers === 'object' ? officialFirstTermPapers : null
+ const seedPapers = Array.isArray(seed?.papers) ? seed.papers : []
+ if (!seedPapers.length || seed?.version !== OFFICIAL_EXAM_DATA_VERSION) return store
+ if (store.seedInfo?.officialFirstTerm2026?.version === OFFICIAL_EXAM_SEED_VERSION && store.seedInfo.officialFirstTerm2026.sourceSha256 === seed.sourceSha256) return store
+
+ const savedPapers = Array.isArray(store.savedPapers) ? [...store.savedPapers] : []
+ const seedById = new Map(seedPapers.map(paper => [String(paper.id), paper]))
+ let inserted = 0
+ let migrated = 0
+ let styled = 0
+ const withReadableOfficialTypography = paper => {
+  const fontSize = Number(paper?.editorSettings?.fontSize || 0)
+  const headingSize = Number(paper?.editorSettings?.headingSize || 0)
+  return {
+   ...paper,
+   editorSettings: {
+    ...(paper.editorSettings || {}),
+    fontFamily: paper.editorSettings?.fontFamily || "'Times New Roman', Times, serif",
+    fontSize: fontSize > 11 ? fontSize : 13,
+    headingSize: headingSize > 12 ? headingSize : 14,
+   },
+  }
+ }
+ const upgraded = savedPapers.map(existing => {
+  const seedPaper = seedById.get(String(existing?.id || ''))
+  if (!seedPaper) return existing
+  if (existing.documentFormat !== 'official-v12') {
+   const legacySize = Number(existing.editorSettings?.fontSize || 0)
+   const legacyHeadingSize = Number(existing.editorSettings?.headingSize || 0)
+   if (legacySize > 11 && existing.editorSettings?.fontFamily) return existing
+   styled += 1
+   return {
+    ...existing,
+    editorSettings: {
+     ...(existing.editorSettings || {}),
+     fontFamily: existing.editorSettings?.fontFamily || "'Times New Roman', Times, serif",
+     fontSize: legacySize > 11 ? legacySize : 13,
+     headingSize: legacyHeadingSize > 12 ? legacyHeadingSize : 14,
+    },
+   }
+  }
+  const next = withReadableOfficialTypography(cloneJson(seedPaper))
+  const oldSections = Array.isArray(existing.sections) ? existing.sections : []
+  const nativeSections = next.selectedQuestions?.official_section?.questions || []
+  nativeSections.forEach((question, index) => {
+   const old = oldSections[index]
+   if (!old) return
+   question.heading = old.heading ?? question.heading
+   question.content = old.content ?? question.content
+   question.text = question.heading
+   question.textUrdu = next.config?.language === 'urdu' ? question.heading : ''
+  })
+  next.official_section = nativeSections
+  next.name = existing.name || next.name
+  next.createdAt = existing.createdAt || next.createdAt
+  next.updatedAt = new Date().toISOString()
+  migrated += 1
+  return next
+ })
+ const existingIds = new Set(upgraded.map(paper => String(paper?.id || '')))
+ const missing = seedPapers.filter(paper => !existingIds.has(String(paper.id))).map(paper => withReadableOfficialTypography(cloneJson(paper)))
+ inserted = missing.length
+ if (!inserted && !migrated && !styled) return store
+
+ return {
+  ...store,
+  savedPapers: [...missing, ...upgraded],
+  seedInfo: {
+   ...(store.seedInfo || {}),
+   officialFirstTerm2026: {
+    version: OFFICIAL_EXAM_SEED_VERSION,
+    sourceSha256: seed.sourceSha256,
+    inserted,
+    migrated,
+    styled,
+    total: seedPapers.length,
+    appliedAt: new Date().toISOString(),
+   },
+  },
+ }
+}
+
 function loadStore() {
  try {
  const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy: true })
  if (!raw) {
- const seeded = withAsspsQuestionBankSeed(defaultStore)
+ const seeded = withOfficialExamPaperSeed(withAsspsQuestionBankSeed(defaultStore))
  saveStore(seeded)
  return seeded
  }
@@ -359,15 +459,16 @@ function loadStore() {
  savedPapers,
  paperSettings: safePaperSettings,
  }
- const seeded = withAsspsQuestionBankSeed(nextStore)
- if (
-  seeded !== nextStore &&
-  (seeded.seedInfo?.asspsQuestionBank?.inserted || seeded.seedInfo?.asspsQuestionBank?.failed)
- ) {
+ const questionSeeded = withAsspsQuestionBankSeed(nextStore)
+ const seeded = withOfficialExamPaperSeed(questionSeeded)
+ if (seeded !== nextStore) {
   saveStore(seeded)
  }
  return seeded
- } catch { return defaultStore }
+ } catch (error) {
+  console.error('Failed to load Paper Generator store:', error)
+  return defaultStore
+ }
 }
 
 function saveStore(data) {
@@ -941,6 +1042,20 @@ export function usePaperStore() {
  update(s => ({ ...s, savedPapers: s.savedPapers.map(p => p.id === id ? { ...p, name } : p) }))
  }
 
+ function updateSavedPaper(id, changes) {
+ const updatedAt = new Date().toISOString()
+ let updatedPaper = null
+ const success = update(s => ({
+  ...s,
+  savedPapers: s.savedPapers.map(paper => {
+   if (String(paper.id) !== String(id)) return paper
+   updatedPaper = { ...paper, ...changes, id: paper.id, createdAt: paper.createdAt, updatedAt }
+   return updatedPaper
+  }),
+ }))
+ return success ? updatedPaper : null
+ }
+
  //  Paper Settings 
  function updatePaperSettings(changes) {
  update(s => ({ ...s, paperSettings: { ...s.paperSettings, ...changes } }))
@@ -1042,7 +1157,7 @@ export function usePaperStore() {
  addQuestion, editQuestion, deleteQuestion, bulkImportQuestions, bulkAddQuestions,
  importPaperQuestionsToBank,
  addQuestionType, editQuestionType, deleteQuestionType,
- savePaper, deleteSavedPaper, renameSavedPaper,
+ savePaper, deleteSavedPaper, renameSavedPaper, updateSavedPaper,
  updatePaperSettings,
  addSchoolAccess,
  updateSchoolAccess,

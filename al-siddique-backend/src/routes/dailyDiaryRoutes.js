@@ -96,7 +96,7 @@ router.get('/', async (req, res) => {
     await tenantClause(req)
     await ensureDailyDiaryTable()
     const limit = Math.max(1, Math.min(Number(req.query.limit || 20), 100))
-    const schoolId = currentSchoolId(req)
+    const schoolId = currentSchoolId(req) || req.user?.school_id || 1
     const isSuperAdmin = req.user?.role === 'super_admin'
 
     const result = isSuperAdmin
@@ -139,7 +139,8 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
-    if (req.user?.role !== 'super_admin' && diary.school_id !== currentSchoolId(req)) {
+    const userSchoolId = currentSchoolId(req) || req.user?.school_id || 1
+    if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
 
@@ -157,7 +158,7 @@ router.post('/', async (req, res) => {
   try {
     await tenantClause(req)
     await ensureDailyDiaryTable()
-    const schoolId = currentSchoolId(req)
+    const schoolId = currentSchoolId(req) || req.user?.school_id || 1
     const payload = normalizePayload(req.body || {})
 
     const result = await pool.query(
@@ -212,10 +213,11 @@ router.put('/:id', async (req, res) => {
     const existing = await pool.query('SELECT * FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
     const current = existing.rows[0]
     if (!current) {
-      return res.status(404).json({ success: false, message: 'Daily diary not found.' })
+      return res.status(404).json({ success: false, notFound: true, message: 'Daily diary not found.' })
     }
 
-    if (req.user?.role !== 'super_admin' && current.school_id !== currentSchoolId(req)) {
+    const userSchoolId = currentSchoolId(req) || req.user?.school_id || 1
+    if (req.user?.role !== 'super_admin' && current.school_id !== userSchoolId) {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
 
@@ -279,7 +281,8 @@ router.delete('/:id', async (req, res) => {
     if (!diary) {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
-    if (req.user?.role !== 'super_admin' && diary.school_id !== currentSchoolId(req)) {
+    const userSchoolId = currentSchoolId(req) || req.user?.school_id || 1
+    if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
 

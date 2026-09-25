@@ -27,7 +27,10 @@ async function main() {
   const user = ident(env.DB_USER || 'apexos_user')
   const password = env.DB_PASSWORD || ''
   const adminUser = env.PG_ADMIN_USER || 'postgres'
-  const adminPassword = env.PG_ADMIN_PASSWORD || 'admin123'
+  const adminPassword = env.PG_ADMIN_PASSWORD
+  if (!adminPassword) {
+    throw new Error('PG_ADMIN_PASSWORD is required to bootstrap local PostgreSQL.')
+  }
 
   const adminPool = new Pool({
     host,

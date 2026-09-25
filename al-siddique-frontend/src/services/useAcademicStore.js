@@ -25,22 +25,24 @@ const DEFAULT_ACADEMIC = {
  { level: '6', name: 'Six', active: true, sections: ['Blue'] },
  { level: '7', name: 'Seven', active: true, sections: ['Blue'] },
  { level: '8', name: 'Eight', active: true, sections: ['Blue'] },
- { level: 'pre-nine', name: 'Pre Nine', active: true, sections: ['Fatima','Usman','Blue'] },
+ { level: '9', name: 'Nine', active: true, sections: ['Fatima','Usman','Blue'] },
  { level: 'hifaz', name: 'Hifaz Class', active: true, sections: ['Abubakar'] },
  ],
  subjects: [
- { id: 'sb1', name: 'Mathematics', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine'] },
- { id: 'sb2', name: 'English', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine'] },
- { id: 'sb3', name: 'Urdu', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine'] },
+ { id: 'sb1', name: 'Mathematics', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
+ { id: 'sb2', name: 'English', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
+ { id: 'sb3', name: 'Urdu', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
  { id: 'sb4', name: 'Science', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8'] },
- { id: 'sb5', name: 'Islamiyat', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine'] },
+ { id: 'sb5', name: 'Islamiyat', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
  { id: 'sb6', name: 'Social Studies', classes: ['1','2','3','4','5','6','7','8'] },
- { id: 'sb7', name: 'Computer', classes: ['5','6','7','8','pre-nine'] },
- { id: 'sb8', name: 'Physics', classes: ['pre-nine'] },
- { id: 'sb9', name: 'Chemistry', classes: ['pre-nine'] },
- { id: 'sb10', name: 'Biology', classes: ['pre-nine'] },
- { id: 'sb11', name: 'General Science', classes: ['pre-nine'] },
- { id: 'sb12', name: 'Quran / Nazra', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine','hifaz'] },
+ { id: 'sb7', name: 'Computer', classes: ['5','6','7','8','9','pre-nine'] },
+ { id: 'sb8', name: 'Physics', classes: ['9','pre-nine'] },
+ { id: 'sb9', name: 'Chemistry', classes: ['9','pre-nine'] },
+ { id: 'sb10', name: 'Biology', classes: ['9','pre-nine'] },
+ { id: 'sb11', name: 'General Science', classes: ['9','pre-nine'] },
+ { id: 'sb12', name: 'Quran / Nazra', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine','hifaz'] },
+ { id: 'sb13', name: 'General Knowledge', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8'] },
+ { id: 'sb14', name: 'GK', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8'] },
  ],
 }
 
@@ -48,7 +50,8 @@ const CLASS_LEVEL_ALIASES = {
  starter: ['starter', 'playgroup', 'play-group', 'play group', 'pg'],
  mover: ['mover', 'nursery'],
  flyer: ['flyer', 'prep', 'kg'],
- 'pre-nine': ['pre-nine', 'pre nine', 'prenine', '9', '10', 'nine', 'ten', 'class 9', 'class 10'],
+ '9': ['9', 'nine', 'class 9', 'pre-nine', 'pre nine', 'prenine', '10', 'ten', 'class 10'],
+ 'pre-nine': ['9', 'nine', 'class 9', 'pre-nine', 'pre nine', 'prenine', '10', 'ten', 'class 10'],
  hifaz: ['hifaz', 'hifaz class', 'hifz'],
 }
 
@@ -64,11 +67,12 @@ const CLASS_LEVEL_LABELS = {
  '6': 'Six',
  '7': 'Seven',
  '8': 'Eight',
- 'pre-nine': 'Pre Nine',
+ '9': 'Nine',
+ 'pre-nine': 'Nine',
  hifaz: 'Hifaz Class',
 }
 
-export const CANONICAL_CLASS_ORDER = ['starter','mover','flyer','1','2','3','4','5','6','7','8','pre-nine','hifaz']
+export const CANONICAL_CLASS_ORDER = ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine','hifaz']
 
 function cleanClassLevel(value) {
  return String(value || '').trim().toLowerCase()
@@ -122,14 +126,15 @@ function isLegacyDefaultClass(cls) {
 }
 
 function mergeByName(defaultItems, savedItems = []) {
- const next = [...defaultItems]
- savedItems.forEach(item => {
- if (!item?.name || isLegacyDefaultClass(item)) return
- const index = next.findIndex(existing => existing.name === item.name)
- if (index >= 0) next[index] = { ...next[index], ...item }
- else if (REAL_CLASS_NAMES.includes(item.name)) next.push(item)
- })
- return next
+  if (Array.isArray(savedItems) && savedItems.length > 0) {
+    return savedItems.map((item, idx) => ({
+      level: String(item.level || `c_${idx + 1}`),
+      name: String(item.name || `Class ${idx + 1}`).trim(),
+      active: item.active !== false,
+      sections: Array.isArray(item.sections) && item.sections.length > 0 ? item.sections : ['Blue'],
+    }))
+  }
+  return defaultItems
 }
 
 function load() {
@@ -169,26 +174,19 @@ function normalizeApiClass(item, index) {
 }
 
 function mergeLiveAcademic(localData, liveClasses) {
- if (!Array.isArray(liveClasses) || !liveClasses.length) return localData
+  if (!Array.isArray(liveClasses) || !liveClasses.length) return localData
 
- const classMap = new Map()
- liveClasses.forEach((item, index) => {
- const normalized = normalizeApiClass(item, index)
- if (!normalized) return
- const key = `${normalized.level}:${normalized.name}`.toLowerCase()
- const existing = classMap.get(key)
- if (existing) {
- classMap.set(key, {
- ...existing,
- sections: [...new Set([...(existing.sections || []), ...(normalized.sections || [])])],
- })
- } else {
- classMap.set(key, normalized)
- }
- })
+  const baseClasses = Array.isArray(localData.classes) ? [...localData.classes] : []
+  liveClasses.forEach((item, index) => {
+    const normalized = normalizeApiClass(item, index)
+    if (!normalized) return
+    const match = baseClasses.find(c => String(c.level) === String(normalized.level) || c.name.toLowerCase() === normalized.name.toLowerCase())
+    if (match) {
+      match.sections = [...new Set([...(match.sections || []), ...(normalized.sections || [])])]
+    }
+  })
 
- const classes = Array.from(classMap.values())
- return classes.length ? { ...localData, classes } : localData
+  return { ...localData, classes: baseClasses }
 }
 
 function classesFromStudents(students = []) {
@@ -210,19 +208,19 @@ function classesFromStudents(students = []) {
 export function useAcademicStore() {
  const [data, setData] = useState(load)
 
- function updateAcademic(updates) {
- setData(prev => {
- const next = {
- ...prev,
- ...updates,
- classes: Array.isArray(updates.classes) ? mergeByName(DEFAULT_ACADEMIC.classes, updates.classes) : prev.classes,
- }
- const storage = getStorage()
- try { storage?.setItem(AK, JSON.stringify(next)) } catch {}
- window.dispatchEvent(new Event('storage'))
- return next
- })
- }
+  function updateAcademic(updates) {
+    setData(prev => {
+      const next = {
+        ...prev,
+        ...updates,
+        classes: Array.isArray(updates.classes) ? updates.classes : prev.classes,
+      }
+      const storage = getStorage()
+      try { storage?.setItem(AK, JSON.stringify(next)) } catch {}
+      window.dispatchEvent(new Event('storage'))
+      return next
+    })
+  }
 
  useEffect(() => {
  let cancelled = false

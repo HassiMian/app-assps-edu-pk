@@ -4,6 +4,10 @@ const { pool } = require('./config/database')
 const bcrypt = require('bcryptjs')
 
 async function seed() {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('Refusing to run dummy seed data in production.')
+  }
+
   console.log('\n🚀 Seeding Dummy Data...\n')
   const client = await pool.connect()
 
@@ -14,8 +18,16 @@ async function seed() {
     // await client.query('TRUNCATE students, attendance, fee_challans, exams, exam_results, employees RESTART IDENTITY CASCADE')
 
     // ── 2. Users ──────────────────────────────────────────────────────────────
-    const hash = await bcrypt.hash('admin123', 10)
-    const teacherHash = await bcrypt.hash('teacher123', 10)
+    const adminPassword = process.env.SEED_ADMIN_PASSWORD
+    const teacherPassword = process.env.SEED_TEACHER_PASSWORD
+    if (!adminPassword || !teacherPassword) {
+      throw new Error('SEED_ADMIN_PASSWORD and SEED_TEACHER_PASSWORD are required for local dummy seeding.')
+    }
+    if (adminPassword.length < 12 || teacherPassword.length < 12) {
+      throw new Error('Seed passwords must be at least 12 characters.')
+    }
+    const hash = await bcrypt.hash(adminPassword, 12)
+    const teacherHash = await bcrypt.hash(teacherPassword, 12)
     
     const adminRes = await client.query(`
       INSERT INTO users (name, email, password, role, designation)

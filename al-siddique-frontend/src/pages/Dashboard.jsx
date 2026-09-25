@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
 import {
   Activity,
   ArrowUpRight,
@@ -25,6 +25,7 @@ import { useTenantBranding } from '../context/TenantBrandingContext'
 import { BarChart, ChartLegend, DonutChart } from '../components/Charts'
 import SchoolHero from '../components/SchoolHero'
 import { AttendanceStatsCard, AdmissionWithdrawalStatsCard } from '../components/dashboard/DashboardAnalyticsCards'
+import { onAttendanceUpdated } from '../utils/attendanceEvents'
 
 const ATTENDANCE_DATA = [
   { day: 'Mon', pct: 94 },
@@ -215,7 +216,7 @@ function printBirthdayCertificate(student) {
 
 export default function Dashboard() {
   const branding = useTenantBranding()
-  const schoolName = branding?.schoolName || 'Al Siddique Scholars Public School'
+  const schoolName = branding?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
   const navigate = useNavigate()
   const [date, setDate] = useState(new Date())
   const [hidden, setHidden] = useState({})
@@ -225,68 +226,74 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [dashApi, setDashApi] = useState(null)
 
+  const fetchAll = useCallback(async (silent = false) => {
+    try {
+      if (!silent) setLoading(true)
+      const [studentRes, dashRes] = await Promise.all([
+        api.get('/api/students').catch(() => ({ data: { data: [] } })),
+        api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
+      ])
+      const allStudents = studentRes.data.data || []
+      const dash = dashRes.data || {}
+      setDashApi(dash)
+
+      const presentCount = Number(dash.today_present ?? 0)
+      const attPct = Number(dash.today_pct ?? (allStudents.length > 0 ? Math.round((presentCount / allStudents.length) * 100) : 0))
+
+      const feeRes = await api.get('/api/fees/summary').catch(() => api.get('/api/fees'))
+      const feeSummary = feeRes.data?.data?.collected !== undefined ? feeRes.data.data : null
+      const allFees = feeSummary ? [] : (feeRes.data.data || [])
+      const paidTotal = feeSummary ? Number(feeSummary.collected || 0) : allFees.filter((fee) => fee.status === 'paid').reduce((sum, fee) => sum + Number(fee.paid_amount || fee.amount || 0), 0)
+      const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.amount || 0), 0)
+      const pendingFees = feeSummary
+        ? Array.from({ length: Number(feeSummary.unpaid_students || 0) })
+        : allFees.filter((fee) => fee.status !== 'paid')
+
+      const empRes = await api.get('/api/employees').catch(() => ({ data: { data: [] } }))
+      const empCount = (empRes.data.data || []).length
+
+      const classCounts = {}
+      allStudents.forEach((student) => {
+        const className = student.class || 'Unassigned'
+        classCounts[className] = (classCounts[className] || 0) + 1
+      })
+      const classArr = Object.entries(classCounts)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => String(a.name).localeCompare(String(b.name)))
+
+      setStats({
+        totalStudents: allStudents.length,
+        attPct,
+        presentCount,
+        paidTotal,
+        pendingTotal,
+        empCount,
+        pendingCount: feeSummary ? Number(feeSummary.unpaid_students || 0) : pendingFees.length,
+        overdueChallans: feeSummary ? Number(feeSummary.overdue_challans || 0) : 0,
+      })
+      setStudents(allStudents)
+      setClassData(classArr)
+    } catch (err) {
+      console.error('Dashboard fetch error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
   useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 60000)
-    return () => clearInterval(timer)
-  }, [])
+    const unsub = onAttendanceUpdated(() => {
+      fetchAll(true)  // silent=true: don't flip loading state during background refresh
+    })
+    return () => {
+      clearInterval(timer)
+      unsub()
+    }
+  }, [fetchAll])
 
   useEffect(() => {
-    async function fetchAll() {
-      try {
-        setLoading(true)
-        const [studentRes, dashRes] = await Promise.all([
-          api.get('/api/students'),
-          api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
-        ])
-        const allStudents = studentRes.data.data || []
-        const dash = dashRes.data || {}
-        setDashApi(dash)
-
-        const presentCount = Number(dash.today_present ?? 0)
-        const attPct = Number(dash.today_pct ?? (allStudents.length > 0 ? Math.round((presentCount / allStudents.length) * 100) : 0))
-
-        const feeRes = await api.get('/api/fees/summary').catch(() => api.get('/api/fees'))
-        const feeSummary = feeRes.data?.data?.collected !== undefined ? feeRes.data.data : null
-        const allFees = feeSummary ? [] : (feeRes.data.data || [])
-        const paidTotal = feeSummary ? Number(feeSummary.collected || 0) : allFees.filter((fee) => fee.status === 'paid').reduce((sum, fee) => sum + Number(fee.paid_amount || fee.amount || 0), 0)
-        const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.amount || 0), 0)
-        const pendingFees = feeSummary
-          ? Array.from({ length: Number(feeSummary.unpaid_students || 0) })
-          : allFees.filter((fee) => fee.status !== 'paid')
-
-        const empRes = await api.get('/api/employees').catch(() => ({ data: { data: [] } }))
-        const empCount = (empRes.data.data || []).length
-
-        const classCounts = {}
-        allStudents.forEach((student) => {
-          const className = student.class || 'Unassigned'
-          classCounts[className] = (classCounts[className] || 0) + 1
-        })
-        const classArr = Object.entries(classCounts)
-          .map(([name, count]) => ({ name, count }))
-          .sort((a, b) => String(a.name).localeCompare(String(b.name)))
-
-        setStats({
-          totalStudents: allStudents.length,
-          attPct,
-          presentCount,
-          paidTotal,
-          pendingTotal,
-          empCount,
-          pendingCount: feeSummary ? Number(feeSummary.unpaid_students || 0) : pendingFees.length,
-          overdueChallans: feeSummary ? Number(feeSummary.overdue_challans || 0) : 0,
-        })
-        setStudents(allStudents)
-        setClassData(classArr)
-      } catch (err) {
-        console.error('Dashboard fetch error:', err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchAll()
-  }, [])
+  }, [fetchAll])
 
   const dashboardStats = useMemo(() => {
     if (!stats) return []
@@ -499,18 +506,18 @@ export default function Dashboard() {
           </div>
         )}
 
-        {!loading && (
-          <div className="super-dashboard-analytics-row">
-            <AttendanceStatsCard
-              stats={dashApi?.attendance_stats}
-              loading={false}
-            />
-            <AdmissionWithdrawalStatsCard
-              stats={dashApi?.admission_withdrawal}
-              loading={false}
-            />
-          </div>
-        )}
+        <div className="super-dashboard-analytics-row">
+          <AttendanceStatsCard
+            stats={dashApi?.attendance_stats}
+            loading={false}
+            onRefresh={() => fetchAll(true)}
+          />
+          <AdmissionWithdrawalStatsCard
+            stats={dashApi?.admission_withdrawal}
+            loading={false}
+          />
+        </div>
+
 
         {!loading && stats && (
           <Panel accent="#FF9F0A" style={{ marginBottom: 20, background: 'linear-gradient(135deg,rgba(15,23,42,0.82),rgba(255,159,10,0.08))' }}>

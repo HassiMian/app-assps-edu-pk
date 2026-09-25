@@ -4,7 +4,7 @@
 const express = require('express')
 const router = express.Router()
 const { pool } = require('../config/database')
-const { protect, requireRoles } = require('../middleware/auth')
+const { protect, requireRoles, requireScopeForServiceOnly } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
 const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -84,7 +84,7 @@ function normalizeNoticePayload(body) {
 }
 
 // GET all notices for this school
-router.get('/', protect, async (req, res) => {
+router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), async (req, res) => {
   try {
     try {
       await ensureNoticesTable()

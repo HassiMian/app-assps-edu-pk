@@ -16,6 +16,8 @@ import {
  Zap,
 } from 'lucide-react'
 import api from '../../services/api'
+import { getPakistanDateString } from '../../utils/dateUtils'
+import { emitAttendanceUpdated } from '../../utils/attendanceEvents'
 
 // Removed hardcoded CLASSES and SECTIONS
 
@@ -89,6 +91,25 @@ const statusMeta = {
  },
 }
 
+const ATTENDANCE_CLASS_LABEL_FIXES = {
+ 'Pre Nine': 'Nine',
+}
+
+function attendanceClassLabel(value) {
+ return ATTENDANCE_CLASS_LABEL_FIXES[value] || value
+}
+
+function attendanceApiClass(value) {
+ return value === 'Pre Nine' ? 'Nine' : value
+}
+
+function attendanceSectionsForClass(className, sectionsForClass) {
+ const direct = sectionsForClass(className)
+ if (direct.length) return direct
+ if (className === 'Nine') return sectionsForClass('Pre Nine')
+ return []
+}
+
 function Panel({ children, accent = C.blue, style = {}, className = '' }) {
  return (
  <div className={`att-panel att-reveal ${className}`} style={{ ...glass, '--accent': accent, ...style }}>
@@ -134,9 +155,13 @@ function StatCard({ state, value, delay }) {
 
 export default function MarkAttendance() {
  const { classNames: CLASSES, allSections: SECTIONS, sectionsForClass } = useAcademicStore()
+ const attendanceClasses = useMemo(
+ () => [...new Set(CLASSES.map(attendanceClassLabel))],
+ [CLASSES]
+ )
  const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter')
  const [selectedSection, setSelectedSection] = useState('Blue')
- const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
+ const [date, setDate] = useState(getPakistanDateString())
  const [students, setStudents] = useState([])
  const [attendance, setAttendance] = useState({})
  const [loading, setLoading] = useState(false)
@@ -146,11 +171,24 @@ export default function MarkAttendance() {
  const loadStudents = () => {
  setLoading(true)
  setMessage('')
- api.get('/api/students', { params: { class: selectedClass, section: selectedSection } })
- .then((res) => {
- const list = res.data.data || []
+ Promise.all([
+ api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
+ ])
+ .then(([stuRes, attRes]) => {
+ const list = stuRes.data?.data || []
+ const attList = attRes.data?.data || []
+ const attMap = {}
+ attList.forEach((row) => {
+ const sid = row.student_id || row.id
+ if (sid) attMap[sid] = row.status
+ })
  setStudents(list)
- setAttendance(list.reduce((acc, student) => ({ ...acc, [student.id]: 'present' }), {}))
+ const initialMarks = {}
+ list.forEach((s) => {
+ initialMarks[s.id] = attMap[s.id] || 'present'
+ })
+ setAttendance(initialMarks)
  })
  .catch(() => {
  setStudents([])
@@ -164,14 +202,14 @@ export default function MarkAttendance() {
  }, [])
 
  useEffect(() => {
- const available = sectionsForClass(selectedClass)
+ const available = attendanceSectionsForClass(selectedClass, sectionsForClass)
  if (available.length && !available.includes(selectedSection)) {
  setSelectedSection(available[0])
  return
  }
  if (selectedClass) loadStudents()
  // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [selectedClass, selectedSection])
+ }, [selectedClass, selectedSection, date])
 
  const updateStatus = (id, status) => setAttendance((prev) => ({ ...prev, [id]: status }))
 
@@ -184,6 +222,7 @@ export default function MarkAttendance() {
  try {
  const records = students.map((student) => ({ student_id: student.id, date, status: attendance[student.id] || 'present' }))
  await api.post('/api/attendance/mark', { records })
+ emitAttendanceUpdated({ date, count: records.length })
  setMessage('Attendance saved successfully.')
  setTimeout(() => setMessage(''), 3000)
  } catch {
@@ -448,13 +487,13 @@ export default function MarkAttendance() {
  <div>
  <label className="att-label">Class</label>
  <select style={fieldStyle} value={selectedClass} onChange={(event) => setSelectedClass(event.target.value)}>
- {CLASSES.map((value) => <option key={value} value={value}>{value}</option>)}
+ {attendanceClasses.map((value) => <option key={value} value={value}>{value}</option>)}
  </select>
  </div>
  <div>
  <label className="att-label">Section</label>
  <select style={fieldStyle} value={selectedSection} onChange={(event) => setSelectedSection(event.target.value)}>
- {sectionsForClass(selectedClass).map((value) => <option key={value} value={value}>{value}</option>)}
+ {attendanceSectionsForClass(selectedClass, sectionsForClass).map((value) => <option key={value} value={value}>{value}</option>)}
  </select>
  </div>
  <div>

@@ -1,7 +1,11 @@
 ﻿const express = require('express')
 const router  = express.Router()
 const { query } = require('../config/database')
-const { protect, adminOnly } = require('../middleware/auth')
+const auth = require('../middleware/auth')
+const protect = auth.protect
+const adminOnly = auth.adminOnly
+const hasServiceScope = auth.hasServiceScope || (() => true)
+const requireScopeForServiceOnly = auth.requireScopeForServiceOnly || (() => (req, res, next) => next())
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
@@ -117,6 +121,8 @@ async function requireStudentInCurrentSchool(req, res, studentId) {
   } else if (role === 'student') {
     sql += ' AND student_user_id = $3'
     params.push(req.user?.id || null)
+  } else if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.students.read')) {
+    // tenantClause/RLS already limits the service to its authenticated school.
   } else if (!STUDENT_ADMIN_ROLES.has(role)) {
     sql += ' AND 1=0'
   }
@@ -132,6 +138,7 @@ function scopedStudentReadClause(req, alias = '', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
   const prefix = alias ? `${alias}.` : ''
   if (STUDENT_ADMIN_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.students.read')) return { clause: '', params: [], nextIndex: startIndex }
   if (role === 'parent') {
     return { clause: ` AND ${prefix}parent_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
   }
@@ -142,14 +149,20 @@ function scopedStudentReadClause(req, alias = '', startIndex = 1) {
 }
 
 // GET /api/students
-router.get('/', protect, async (req, res) => {
+router.get('/', protect, requireScopeForServiceOnly('school.students.read'), async (req, res) => {
   try {
-    const { class: cls, section, search, active = 'true' } = req.query
+    const { class: cls, section, search, active = 'all' } = req.query
     const activeValue = String(active).trim().toLowerCase()
-    const activeBool = activeValue === 'false' || activeValue === '0' ? false : true
-    let sql    = 'SELECT * FROM students WHERE is_active = $1'
-    let params = [activeBool]
-    let i = 2
+    let sql    = 'SELECT * FROM students WHERE 1=1'
+    let params = []
+    let i = 1
+
+    if (activeValue === 'true' || activeValue === 'active' || activeValue === '1') {
+      sql += ` AND is_active = true`
+    } else if (activeValue === 'false' || activeValue === 'inactive' || activeValue === '0') {
+      sql += ` AND is_active = false`
+    }
+
     const tenant = await tenantClause(req, { table: 'students', paramIndex: i })
     sql += tenant.clause
     params.push(...tenant.params)
@@ -245,9 +258,9 @@ router.get('/', protect, async (req, res) => {
     if (section) filtered = filtered.filter(s => s.section === section);
     if (search) {
       const q = search.toLowerCase();
-      filtered = filtered.filter(s => 
-        s.name.toLowerCase().includes(q) || 
-        s.gr_number.toLowerCase().includes(q) || 
+      filtered = filtered.filter(s =>
+        s.name.toLowerCase().includes(q) ||
+        s.gr_number.toLowerCase().includes(q) ||
         s.father_name.toLowerCase().includes(q)
       );
     }
@@ -256,7 +269,7 @@ router.get('/', protect, async (req, res) => {
 })
 
 // GET /api/students/:id/fee-profile
-router.get('/:id/fee-profile', protect, async (req, res) => {
+router.get('/:id/fee-profile', protect, requireScopeForServiceOnly('school.fees.read'), async (req, res) => {
   try {
     const studentId = Number(req.params.id)
     if (!(await requireStudentInCurrentSchool(req, res, studentId))) return
@@ -336,7 +349,7 @@ router.get('/family-search', protect, adminOnly, async (req, res) => {
 })
 
 // GET /api/students/:id
-router.get('/:id', protect, async (req, res) => {
+router.get('/:id', protect, requireScopeForServiceOnly('school.students.read'), async (req, res) => {
   try {
     let sql = 'SELECT * FROM students WHERE id = $1'
     const params = [req.params.id]
@@ -386,144 +399,131 @@ router.get('/:id', protect, async (req, res) => {
 router.post('/', protect, adminOnly, async (req, res) => {
   try {
     const {
-      gr_number, name, father_name, mother_name, class: cls, section = 'Blue',
-      roll_number, date_of_birth, gender, address, parent_phone, parent_whatsapp, photo, send_credentials
+      name, father_name, mother_name, class: cls, section,
+      roll_number, date_of_birth, gender, address, parent_phone, parent_whatsapp,
+      photo, family_code, father_cnic, b_form,
+      emergency_contact, previous_school, remarks,
+      student_portal_enabled, parent_portal_enabled, send_credentials,
+      create_challan, challan_month, challan_due_date,
+      monthly_fee, tuition_fee, computer_fee, lab_fee, library_fee, transport_fee, exam_fee, other_charges, admission_fee
     } = req.body
 
-    if (!name || !cls)
-      return res.status(400).json({ success: false, message: 'Name aur Class zaroori hai' })
+    const schoolId = currentSchoolId(req)
+    validateSameTenantOrThrow(req, schoolId)
 
-    const gr = gr_number || `GR-${Date.now().toString().slice(-6)}`
+    // Validate required fields
+    if (!name) {
+      return res.status(400).json({ success: false, message: 'Student Name zaroori hai' })
+    }
+    if (!father_name) {
+      return res.status(400).json({ success: false, message: 'Father Name zaroori hai' })
+    }
+    if (!cls) {
+      return res.status(400).json({ success: false, message: 'Class select karein' })
+    }
+
+    const currentYear = new Date().getFullYear()
+    const autoGr = `GR-${currentYear}-${Math.floor(1000 + Math.random() * 9000)}`
+    const finalGr = req.body.gr_number || autoGr
     const normalizedClass = normalizeClassName(cls)
 
-    const supportsSchool = await hasColumn('students', 'school_id')
-    const supportsTenantId = await hasColumn('students', 'tenant_id')
-    const schoolIdForInsert = currentSchoolId(req)
-    const tenantIdForInsert = currentTenantId(req)
-    const result = supportsSchool && supportsTenantId
-      ? await query(`
-        INSERT INTO students
-          (school_id, tenant_id, gr_number, name, father_name, mother_name, class, section, roll_number,
-           date_of_birth, gender, address, parent_phone, parent_whatsapp, photo)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
-        RETURNING *
-      `, [schoolIdForInsert, tenantIdForInsert, gr, name, father_name, mother_name, normalizedClass, section, roll_number,
-          date_of_birth, gender, address, parent_phone, parent_whatsapp, photo])
-      : supportsSchool
-      ? await query(`
-        INSERT INTO students
-          (school_id, gr_number, name, father_name, mother_name, class, section, roll_number,
-           date_of_birth, gender, address, parent_phone, parent_whatsapp, photo)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
-        RETURNING *
-      `, [schoolIdForInsert, gr, name, father_name, mother_name, normalizedClass, section, roll_number,
-          date_of_birth, gender, address, parent_phone, parent_whatsapp, photo])
-      : await query(`
-        INSERT INTO students
-          (gr_number, name, father_name, mother_name, class, section, roll_number,
-           date_of_birth, gender, address, parent_phone, parent_whatsapp, photo)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
-        RETURNING *
-      `, [gr, name, father_name, mother_name, normalizedClass, section, roll_number,
-          date_of_birth, gender, address, parent_phone, parent_whatsapp, photo])
+    // Calculate Roll Number automatically if not provided
+    let finalRollNumber = roll_number
+    if (!finalRollNumber) {
+      const rollRes = await query(
+        `SELECT COALESCE(MAX(NULLIF(regexp_replace(roll_number, '[^0-9]', '', 'g'), '')::integer), 0) + 1 AS next_roll
+         FROM students
+         WHERE class = $1 AND section = $2 AND school_id = $3`,
+        [normalizedClass, section || 'Blue', schoolId]
+      )
+      finalRollNumber = String(rollRes.rows[0]?.next_roll || 1)
+    }
 
-    const studentData = result.rows[0];
-    const studentId = studentData.id;
-    const schoolId = studentData.school_id || schoolIdForInsert || 1;
-    const tenantId = studentData.tenant_id || tenantIdForInsert || null;
+    const candidateColumns = [
+      ['school_id', schoolId],
+      ['gr_number', finalGr],
+      ['name', name],
+      ['father_name', father_name],
+      ['mother_name', mother_name || null],
+      ['class', normalizedClass],
+      ['section', section || 'Blue'],
+      ['roll_number', finalRollNumber],
+      ['date_of_birth', date_of_birth || null],
+      ['gender', gender || 'male'],
+      ['address', address || null],
+      ['parent_phone', parent_phone || null],
+      ['parent_whatsapp', parent_whatsapp || null],
+      ['photo', photo || null],
+      ['is_active', true],
+      ['family_code', family_code || null],
+      ['father_cnic', father_cnic || null],
+      ['father_occupation', req.body.father_occupation || null],
+      ['locality', req.body.locality || null],
+      ['b_form', req.body.b_form || req.body.b_form_number || null],
+      ['emergency_contact', emergency_contact || null],
+      ['previous_school', previous_school || null],
+      ['remarks', remarks || null],
+      ['blood_group', req.body.blood_group || null],
+      ['religion', req.body.religion || null],
+    ]
 
-    // --- AUTO GENERATE SUPER APP CREDENTIALS ---
-    const bcrypt = require('bcryptjs');
-    let parentEmail = null;
-    let parentPassword = null;
-    let parentUserId = null;
+    const insertCols = []
+    const insertVals = []
+    const insertPlaceholders = []
 
-    await validateSameTenantOrThrow({
-      tenantId,
-      studentId,
-    });
-    
-    if (parent_phone) {
-      const cleanPhone = parent_phone.replace(/[^0-9]/g, '');
-      parentEmail = `parent_${cleanPhone}@assps.edu.pk`;
-      parentPassword = parentPortalPassword({ parent_phone });
-      
-      let parentUserRes = await query(
-        'SELECT id FROM users WHERE email = $1 AND tenant_id = $2 AND LOWER(role) = $3 LIMIT 1',
-        [parentEmail, tenantId, 'parent']
-      );
-      if (parentUserRes.rows.length === 0) {
-        const hashedParentPw = await bcrypt.hash(parentPassword, 10);
-        parentUserRes = await query(`
-          INSERT INTO users (name, email, username, password, role, designation, school_id, tenant_id, is_active, phone)
-          VALUES ($1, $2, $3, $4, 'parent', 'Parent', $5, $6, true, $7)
-          RETURNING id
-        `, [father_name || 'Parent', parentEmail, `P-${String(gr).replace(/\D/g, '') || cleanPhone.slice(-4)}`, hashedParentPw, schoolId, tenantId, parent_phone]);
+    for (const [col, val] of candidateColumns) {
+      const colExists = await hasColumn('students', col).catch(() => false)
+      if (colExists) {
+        insertCols.push(col)
+        insertVals.push(val)
+        insertPlaceholders.push(`$${insertCols.length}`)
       }
-      parentUserId = parentUserRes.rows[0]?.id || null;
-
-      await validateSameTenantOrThrow({
-        tenantId,
-        studentId,
-        parentUserId,
-      });
     }
 
-    const studentUsername = gr;
-    const studentEmail = `student_${String(gr).toLowerCase()}@assps.edu.pk`;
-    const studentPassword = studentPortalPassword({ father_name });
+    const sql = `
+      INSERT INTO students (${insertCols.join(', ')})
+      VALUES (${insertPlaceholders.join(', ')})
+      RETURNING *
+    `
+    const result = await query(sql, insertVals)
+    const studentData = result.rows[0]
+    const studentId = studentData.id
 
-    const existingStudentCredential = await query(
-      `SELECT id
-       FROM users
-       WHERE tenant_id = $1
-         AND LOWER(role) = 'student'
-         AND (email = $2 OR username = $3)
-       LIMIT 1`,
-      [tenantId, studentEmail, studentUsername]
-    );
+    // Credentials Setup
+    const studentEmail = `${finalGr.toLowerCase().replace(/[^a-z0-9]/g, '')}@assps.edu.pk`
+    const studentPassword = studentPortalPassword(studentData)
+    const parentEmail = (parent_phone || parent_whatsapp) ? `${(parent_phone || parent_whatsapp).replace(/\D/g, '').slice(-10)}@parents.assps.edu.pk` : null
+    const parentPassword = parentPortalPassword(studentData)
 
-    if (existingStudentCredential.rows.length === 0) {
-      const hashedStudentPw = await bcrypt.hash(studentPassword, 10);
-      await query(`
-        INSERT INTO users (name, email, username, password, role, designation, school_id, tenant_id, is_active, phone)
-        VALUES ($1, $2, $3, $4, 'student', 'Student', $5, $6, true, $7)
-      `, [name, studentEmail, studentUsername, hashedStudentPw, schoolId, tenantId, parent_phone || parent_whatsapp || null]);
-    }
-
-    try {
-      if (send_credentials && parent_phone) {
-        await query(`
-          INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
-          VALUES ($1, 'admin', 'Credentials Dispatched', $2, 'info', NOW())
-        `, [schoolId, `Super App credentials sent via WhatsApp to ${parent_phone}`]);
-      }
-    } catch (e) {
-      console.error('Notification log error:', e.message);
-    }
-
-    const { fee_profile, generate_first_challan, first_challan } = req.body
+    // Save Fee Profile
     let savedFeeProfile = null
-    let firstChallan = null
-
-    if (fee_profile && typeof fee_profile === 'object') {
-      await upsertStudentFeeProfile(studentId, schoolId, fee_profile)
-      savedFeeProfile = await getStudentFeeProfile(studentId)
+    const rawMonthlyFee = Number(monthly_fee || tuition_fee || 0)
+    if (rawMonthlyFee > 0 || computer_fee || lab_fee || library_fee || transport_fee || exam_fee || other_charges || admission_fee) {
+      savedFeeProfile = await upsertStudentFeeProfile(studentId, schoolId, {
+        monthly_fee: rawMonthlyFee,
+        tuition_fee: Number(tuition_fee || rawMonthlyFee || 0),
+        computer_fee: Number(computer_fee || 0),
+        lab_fee: Number(lab_fee || 0),
+        library_fee: Number(library_fee || 0),
+        transport_fee: Number(transport_fee || 0),
+        exam_fee: Number(exam_fee || 0),
+        other_charges: Number(other_charges || 0),
+        admission_fee: Number(admission_fee || 0)
+      })
     }
 
-    if (generate_first_challan) {
-      const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-      const now = new Date()
-      const month = first_challan?.month || MONTHS[now.getMonth()]
-      const year = Number(first_challan?.year || now.getFullYear())
-      const due_date = first_challan?.due_date || null
-      const discount = Number(first_challan?.discount || 0)
-      const grossAmount = Number(
-        first_challan?.amount
-        || (savedFeeProfile
-          ? Number(savedFeeProfile.monthly_fee || 0)
-            + Number(savedFeeProfile.admission_fee || 0)
-            + Number(savedFeeProfile.registration_fee || 0)
+    // Generate First Challan if requested
+    let firstChallan = null
+    if (create_challan) {
+      const month = challan_month || new Date().toLocaleString('en-US', { month: 'long' })
+      const year = currentYear
+      const due_date = challan_due_date || new Date(Date.now() + 10 * 86400000).toISOString().split('T')[0]
+      const discount = 0
+      const grossAmount = Math.max(0,
+        rawMonthlyFee + (savedFeeProfile
+          ? Number(savedFeeProfile.admission_fee || 0)
+            + Number(savedFeeProfile.computer_fee || 0)
+            + Number(savedFeeProfile.lab_fee || 0)
             + Number(savedFeeProfile.library_fee || 0)
             + Number(savedFeeProfile.transport_fee || 0)
             + Number(savedFeeProfile.exam_fee || 0)
@@ -550,11 +550,11 @@ router.post('/', protect, adminOnly, async (req, res) => {
       }
     }
 
-    res.status(201).json({ 
-      success: true, 
+    res.status(201).json({
+      success: true,
       message: firstChallan
         ? 'Student add ho gaya, fee profile save ho gaya aur pehla challan ban gaya'
-        : 'Student add ho gaya aur credentials generate ho gaye', 
+        : 'Student add ho gaya aur credentials generate ho gaye',
       data: studentData,
       fee_profile: savedFeeProfile,
       first_challan: firstChallan,
@@ -616,18 +616,39 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
 router.delete('/:id', protect, adminOnly, async (req, res) => {
   try {
     const supportsTenant = await hasColumn('students', 'school_id')
+    const permanent = req.query.permanent === 'true'
+    const schoolId = currentSchoolId(req)
+    const studentId = req.params.id
+
+    if (permanent) {
+      // Clean non-cascading foreign keys safely
+      await query('DELETE FROM cards WHERE student_id = $1', [studentId]).catch(() => {})
+      await query('DELETE FROM notification_log WHERE student_id = $1', [studentId]).catch(() => {})
+      await query('DELETE FROM online_exam_attempts WHERE student_id = $1', [studentId]).catch(() => {})
+
+      const sql = supportsTenant && req.user?.role !== 'super_admin'
+        ? 'DELETE FROM students WHERE id = $1 AND school_id = $2'
+        : 'DELETE FROM students WHERE id = $1'
+      const params = supportsTenant && req.user?.role !== 'super_admin'
+        ? [studentId, schoolId]
+        : [studentId]
+      await query(sql, params)
+      return res.json({ success: true, message: 'Student permanently delete ho gaya' })
+    }
+
     const sql = supportsTenant && req.user?.role !== 'super_admin'
       ? 'UPDATE students SET is_active = false WHERE id = $1 AND school_id = $2'
       : 'UPDATE students SET is_active = false WHERE id = $1'
     const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [req.params.id, currentSchoolId(req)]
-      : [req.params.id]
+      ? [studentId, schoolId]
+      : [studentId]
     await query(sql, params)
     res.json({ success: true, message: 'Student delete ho gaya' })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
   }
 })
+
 
 // POST /api/students/bulk
 router.post('/bulk', protect, adminOnly, async (req, res) => {
@@ -671,4 +692,3 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
 })
 
 module.exports = router
-

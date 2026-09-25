@@ -17,12 +17,21 @@ const TABLES = [
   { label: "paper", table: "papers" },
 ];
 
+function envOrDev(name: string, fallback: string | number) {
+  const value = process.env[name];
+  if (value && String(value).trim()) return value;
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(`${name} is required in production.`);
+  }
+  return fallback;
+}
+
 const pool = new Pool({
-  host: process.env.DB_HOST || "127.0.0.1",
-  port: Number(process.env.DB_PORT || 5432),
-  database: process.env.DB_NAME || "alsiddique_db",
-  user: process.env.DB_USER || "postgres",
-  password: process.env.DB_PASSWORD || "admin123",
+  host: String(envOrDev("DB_HOST", "127.0.0.1")),
+  port: Number(envOrDev("DB_PORT", 5432)),
+  database: String(envOrDev("DB_NAME", "alsiddique_db")),
+  user: String(envOrDev("DB_USER", "postgres")),
+  password: String(envOrDev("DB_PASSWORD", "")),
 });
 
 function quoteIdent(identifier: string) {

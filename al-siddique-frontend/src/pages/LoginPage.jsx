@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Shield } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { normalizeAppRole } from "../utils/role";
 
@@ -41,11 +41,6 @@ export default function LoginPage() {
     }
 
     setLoading(false);
-  };
-
-  const handleFillDemo = () => {
-    setEmail("demo@assps.edu.pk");
-    setPassword("Demo@12345");
   };
 
   return (
@@ -254,46 +249,6 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Re-purposed Demo Auto-Fill Trigger */}
-          <div
-            style={{
-              marginTop: 24,
-              paddingTop: 20,
-              borderTop: "1px solid rgba(148,163,184,0.12)",
-              textAlign: "center",
-            }}
-          >
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              style={{
-                background: "rgba(200,153,26,0.08)",
-                border: "1px solid rgba(200,153,26,0.2)",
-                borderRadius: 12,
-                color: "#C8991A",
-                padding: "10px 20px",
-                fontSize: 13,
-                fontWeight: 700,
-                cursor: "pointer",
-                transition: "all 0.2s",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(200,153,26,0.15)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(200,153,26,0.08)";
-              }}
-            >
-              <Shield size={15} />
-              Auto-fill Demo Sandbox
-            </button>
-            <p style={{ color: "#6B7280", fontSize: 11, marginTop: 8, marginHorizontal: 0 }}>
-              Quickly test the platform with sandbox demo credentials
-            </p>
-          </div>
         </div>
 
         <p style={{ textAlign: "center", color: "#6B7280", fontSize: 11, marginTop: 24 }}>

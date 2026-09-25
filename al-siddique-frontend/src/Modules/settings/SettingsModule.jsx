@@ -1,5 +1,9 @@
-// src/Modules/settings/SettingsModule.jsx
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { 
+  FileText, Brain, MapPin, BarChart3, Megaphone, BookOpen, 
+  MessageSquare, GraduationCap, Smartphone, Globe, Settings, 
+  Building2, Sparkles 
+} from 'lucide-react'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import api, { resolveAssetUrl } from '../../services/api'
@@ -29,7 +33,7 @@ const Inp = ({ style = {}, ...p }) => (
 const SHead = ({ icon, title, sub }) => (
  <div className="super-module-card" style={{ marginBottom: 20, paddingBottom: 12, borderBottom: `1px solid ${C.border}` }}>
  <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
- <span style={{ fontSize: 22 }}>{icon}</span>
+ {icon ? <span style={{ display: 'flex', alignItems: 'center', fontSize: 22, color: C.gold }}>{icon}</span> : null}
  <h3 style={{ margin: 0, color: C.gold, fontSize: 16, fontWeight: 800 }}>{title}</h3>
  </div>
  {sub && <p style={{ margin: '6px 0 0 32px', color: C.muted, fontSize: 13 }}>{sub}</p>}
@@ -230,14 +234,14 @@ function PaperGeneratorCategoriesCard() {
 }
 
 const SUPERAPP_MODULES = [
-  { id: 'paper-gen', name: 'Paper Studio', icon: '📝' },
-  { id: 'quiz-engine', name: 'Quiz Engine', icon: '🧠' },
-  { id: 'attendance', name: 'Presence Matrix', icon: '📍' },
-  { id: 'analytics', name: 'Intelligence Board', icon: '📊' },
-  { id: 'announcements', name: 'Alert Center', icon: '📣' },
-  { id: 'homework', name: 'Homework Assistant', icon: '📚' },
-  { id: 'messaging', name: 'Comms Hub', icon: '💬' },
-  { id: 'admissions', name: 'Admissions Control', icon: '🎓' },
+  { id: 'paper-gen', name: 'Paper Studio', icon: FileText },
+  { id: 'quiz-engine', name: 'Quiz Engine', icon: Brain },
+  { id: 'attendance', name: 'Presence Matrix', icon: MapPin },
+  { id: 'analytics', name: 'Intelligence Board', icon: BarChart3 },
+  { id: 'announcements', name: 'Alert Center', icon: Megaphone },
+  { id: 'homework', name: 'Homework Assistant', icon: BookOpen },
+  { id: 'messaging', name: 'Comms Hub', icon: MessageSquare },
+  { id: 'admissions', name: 'Admissions Control', icon: GraduationCap },
 ];
 
 function SuperAppControlCenter({ superappModules = {}, setSuperappModule, schoolName, schoolLogo, brandingConfig = {}, setBrandingConfig }) {
@@ -257,7 +261,7 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
   return (
     <GCard style={{ marginBottom: 20 }}>
       <SHead
-        icon="📱"
+        icon={<Smartphone size={22} />}
         title="Super App Master Control"
         sub="Manage Apex OS Super App configurations, live module access, and branding."
       />
@@ -269,8 +273,8 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
           {/* Connection Test */}
           <div style={{ background: 'rgba(15,23,42,0.4)', borderRadius: 16, padding: 20, border: `1px solid ${C.border}` }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-              <div style={{ padding: 10, background: 'rgba(200,153,26,0.12)', color: C.gold, borderRadius: 12, fontSize: 18 }}>
-                🌐
+              <div style={{ padding: 10, background: 'rgba(200,153,26,0.12)', color: C.gold, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Globe size={18} />
               </div>
               <div>
                 <h3 style={{ margin: 0, color: '#fff', fontSize: 15, fontWeight: 700 }}>Backend Connection</h3>
@@ -310,8 +314,8 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
           {/* Modules Grid */}
           <div style={{ background: 'rgba(15,23,42,0.4)', borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, flex: 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-              <div style={{ padding: 10, background: 'rgba(168,85,247,0.1)', color: '#A855F7', borderRadius: 12, fontSize: 18 }}>
-                ⚙️
+              <div style={{ padding: 10, background: 'rgba(168,85,247,0.1)', color: '#A855F7', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Settings size={18} />
               </div>
               <div>
                 <h3 style={{ margin: 0, color: '#fff', fontSize: 15, fontWeight: 700 }}>Module Management</h3>
@@ -321,10 +325,13 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
             <div style={{ display: 'grid', gap: 10 }}>
               {SUPERAPP_MODULES.map(mod => {
                 const enabled = superappModules[mod.id] !== false; // default true
+                const ModIcon = mod.icon;
                 return (
                   <div key={mod.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(148,163,184,0.05)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span style={{ fontSize: 16 }}>{mod.icon}</span>
+                      <span style={{ display: 'flex', alignItems: 'center', color: enabled ? C.gold : C.muted }}>
+                        {typeof ModIcon === 'function' ? <ModIcon size={18} /> : ModIcon}
+                      </span>
                       <div>
                         <div style={{ color: enabled ? '#fff' : C.muted, fontSize: 13, fontWeight: 600 }}>{mod.name}</div>
                         <div style={{ color: enabled ? C.green : C.muted, fontSize: 11 }}>{enabled ? 'Active' : 'Disabled'}</div>
@@ -352,8 +359,8 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
         {/* Branding Preview */}
         <div style={{ background: 'rgba(15,23,42,0.4)', borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-            <div style={{ padding: 10, background: 'rgba(232,180,32,0.1)', color: C.gold, borderRadius: 12, fontSize: 18 }}>
-              🏢
+            <div style={{ padding: 10, background: 'rgba(232,180,32,0.1)', color: C.gold, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Building2 size={18} />
             </div>
             <div>
               <h3 style={{ margin: 0, color: '#fff', fontSize: 15, fontWeight: 700 }}>Branding & Identity Sync</h3>
@@ -365,7 +372,7 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
             {previewLoginBackground && <div style={{ position: 'absolute', inset: 0, background: brandingConfig.darkMode !== false ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)', backdropFilter: brandingConfig.glassEffect !== false ? 'blur(12px)' : 'none' }} />}
 
             <div style={{ width: 90, height: 90, borderRadius: 24, background: brandingConfig.glassEffect !== false ? 'rgba(200,153,26,0.15)' : 'rgba(200,153,26,0.05)', backdropFilter: brandingConfig.glassEffect !== false ? 'blur(10px)' : 'none', border: `1px solid ${brandingConfig.primaryColor || 'rgba(200,153,26,0.3)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, zIndex: 10, boxShadow: '0 8px 24px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.1)' }}>
-              {previewLogo ? <img src={previewLogo} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 8, filter: 'drop-shadow(0 0 12px rgba(245,197,66,0.5))' }} /> : <span style={{ fontSize: 36 }}>🎓</span>}
+              {previewLogo ? <img src={previewLogo} style={{ width: '100%', height: '100%', objectFit: 'contain', padding: 8, filter: 'drop-shadow(0 0 12px rgba(245,197,66,0.5))' }} /> : <GraduationCap size={36} color={C.gold} />}
             </div>
             
             <h2 style={{ margin: 0, color: brandingConfig.darkMode !== false ? '#fff' : '#000', fontSize: 24, fontFamily: brandingConfig.typography || "'Playfair Display', serif", fontWeight: 900, textAlign: 'center', lineHeight: 1.2, zIndex: 10 }}>
@@ -381,8 +388,8 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
         {/* Advanced Theming & Branding Config */}
         <div style={{ background: 'rgba(15,23,42,0.4)', borderRadius: 16, padding: 20, border: `1px solid ${C.border}`, display: 'flex', flexDirection: 'column', gridColumn: '1 / -1' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-            <div style={{ padding: 10, background: 'rgba(48,209,88,0.1)', color: C.green, borderRadius: 12, fontSize: 18 }}>
-              ✨
+            <div style={{ padding: 10, background: 'rgba(48,209,88,0.1)', color: C.green, borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Sparkles size={18} />
             </div>
             <div>
               <h3 style={{ margin: 0, color: '#fff', fontSize: 15, fontWeight: 700 }}>Advanced Branding & Theming</h3>
@@ -676,7 +683,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  {/* Header */}
  <GCard style={{ marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-   <div className="super-module-card" style={{ width: 52, height: 52, borderRadius: 20, background: 'rgba(142,142,147,0.15)', border: '1px solid rgba(142,142,147,0.3)', display: 'grid', placeItems: 'center', fontSize: 26 }}>⚙️</div>
+   <div className="super-module-card" style={{ width: 52, height: 52, borderRadius: 20, background: 'rgba(142,142,147,0.15)', border: '1px solid rgba(142,142,147,0.3)', display: 'grid', placeItems: 'center' }}><Settings size={26} color="#fff" /></div>
    <div>
    <h1 style={{ margin: 0, fontSize: 26, color: '#fff', fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>System Settings</h1>
    <p style={{ margin: '4px 0 0', color: C.muted, fontSize: 13 }}>Enterprise Control Center · Branding · Access</p>

@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import api from '../../services/api'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
-import { BadgeCheck, CreditCard, ReceiptText, Wallet } from 'lucide-react'
+import { BadgeCheck, CreditCard, ReceiptText, Wallet, X } from 'lucide-react'
 import { renderVoucherCopyHtml } from './ViewChallans'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -216,7 +216,7 @@ const StatusBadge = ({ status }) => {
 
 function ActionDropdown({ onPrint }) {
  const [open, setOpen] = useState(false)
- 
+
  const options = [
  { label: 'Edit Challan', color: C.silver },
  { label: 'Delete Challan', color: C.red },
@@ -233,7 +233,7 @@ function ActionDropdown({ onPrint }) {
 
  return (
  <div className="super-module-card" style={{ position: 'relative' }}>
- <button 
+ <button
  onClick={() => setOpen(!open)}
  onBlur={() => setTimeout(() => setOpen(false), 200)}
  style={{
@@ -267,7 +267,7 @@ function ActionDropdown({ onPrint }) {
  border: '1px solid #ddd'
  }}>
  {options.map((opt, i) => (
- <div 
+ <div
  key={i}
  onClick={() => { opt.action?.(); setOpen(false) }}
  style={{
@@ -357,16 +357,16 @@ function PrintVoucher({ challan, selectedTemplate, onClose, school }) {
           @media print {
             body * { visibility: hidden !important; }
             .print-voucher-root, .print-voucher-root * { visibility: visible !important; }
-            .print-voucher-root { 
-              position: absolute !important; 
-              left: 0 !important; 
-              top: 0 !important; 
-              width: 297mm !important; 
+            .print-voucher-root {
+              position: absolute !important;
+              left: 0 !important;
+              top: 0 !important;
+              width: 297mm !important;
               height: 210mm !important;
-              box-shadow: none !important; 
+              box-shadow: none !important;
               padding: 2mm 3mm !important;
               margin: 0 !important;
-              background: #fff !important; 
+              background: #fff !important;
             }
             .no-print { display: none !important; }
             .print-scroll-container { overflow: visible !important; height: auto !important; width: 100% !important; padding: 0 !important; }
@@ -423,100 +423,350 @@ function PrintVoucher({ challan, selectedTemplate, onClose, school }) {
 }
 
 function PrintStudentList({ list, onClose, school }) {
- if (!list) return null
- const { type, data } = list
- const logo = school?.logo || ''
- const schoolName = school?.schoolName || 'Al Siddique Scholars Public School'
- const schoolAddress = school?.address || 'Sharif Chowk, Rayya Khas, Narowal'
- const schoolPhone = school?.phone || '0300-1291959'
- const { paperSettings } = usePaperStore()
- const sigImg = paperSettings?.principalSignature || school?.principalSignature || null
+  if (!list) return null
+  const { type, data } = list
+  const logo = school?.logo || ''
+  const schoolName = school?.schoolName || 'Al Siddique Scholars Public School'
+  const schoolAddress = school?.address || 'Sharif Chowk, Rayya Khas, Narowal'
+  const schoolPhone = school?.phone || '0300-1291959'
+  const { paperSettings } = usePaperStore()
+  const sigImg = paperSettings?.principalSignature || school?.principalSignature || null
+  const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })
 
- return (
- <Portal>
- <div className="super-module-card" style={{
- position: 'fixed', inset: 0, zIndex: 10001,
- background: 'rgba(7,30,52,0.98)',
- display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
- }}>
- <style>{`
- @media print {
- body * { visibility: hidden !important; }
- .print-list-root, .print-list-root * { visibility: visible !important; }
- .print-list-root { position: absolute; left: 0; top: 0; width: 100% !important; background: white !important; }
- .no-print { display: none !important; }
- table { width: 100%; border-collapse: collapse; }
- th, td { border: 1px solid #ccc; padding: 8px; text-align: left; font-size: 11px; }
- th { background: #f0f0f0 !important; -webkit-print-color-adjust: exact; }
- }
- `}</style>
- <div className="print-list-root" style={{
- width: '100%', maxWidth: 1000, background: '#fff', borderRadius: 20, overflow: 'hidden', height: '90vh', display: 'flex', flexDirection: 'column'
- }}>
- <div className="super-module-card" style={{ padding: '16px 24px', background: '#0b2c4d', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="no-print">
- <h3 style={{ margin: 0 }}> {type}</h3>
- <div className="super-module-card" style={{ display: 'flex', gap: 10 }}>
- <button onClick={() => window.print()} style={{ background: C.gold, border: 'none', padding: '8px 20px', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>Print Now</button>
- <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}>Close</button>
- </div>
- </div>
- 
- <div className="super-module-card" style={{ flex: 1, overflowY: 'auto', padding: 40, color: '#333' }}>
- {/* Header */}
- <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 30, borderBottom: '2px solid #0b2c4d', paddingBottom: 20 }}>
- {logo
- ? <img src={logo} style={{ width: 80, height: 80, objectFit:'contain' }} alt="Logo" />
- : <div style={{ width:80, height:80, borderRadius:'50%', border:'1px solid #D9DEE8', display:'grid', placeItems:'center', color:'#0b2c4d', fontSize:30, fontWeight:900 }}>{schoolName.charAt(0)}</div>}
- <div>
- <h1 style={{ margin: 0, fontSize: 24, color: '#0b2c4d' }}>{schoolName}</h1>
- <div className="super-module-card" style={{ fontSize: 14, color: '#666', marginTop: 4 }}>{schoolAddress} - {schoolPhone}</div>
- <h2 style={{ margin: '10px 0 0', fontSize: 18, color: C.gold }}>{type} — {new Date().toLocaleDateString()}</h2>
- </div>
- </div>
+  const handlePrint = () => {
+    const rowsHtml = (data || []).map((item, idx) => `
+      <tr>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; width: 35px;">${idx + 1}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; font-weight: 700; color: #0b2c4d; width: 75px;">${item.gr || '—'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; font-weight: 700; color: #111;">${item.student || item.name || '—'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa;">${item.father || '—'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; width: 105px;">${item.class || ''} / ${item.section || ''}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; width: 85px;">${item.familyCode || '—'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: right; font-weight: 600; width: 85px;">${item.total || item.fee || '0'}</td>
+        <td style="padding: 6px 8px; border: 1px solid #aaa; text-align: center; font-weight: 700; width: 70px; color: ${item.status === 'Paid' ? '#166534' : '#991b1b'};">${item.status || '—'}</td>
+      </tr>
+    `).join('')
 
- <table style={{ width: '100%', borderCollapse: 'collapse' }}>
- <thead>
- <tr style={{ background: '#f4f4f4' }}>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Sr#</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>GR No</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Student Name</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Father Name</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Class / Section</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Family Code</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Monthly Fee</th>
- <th style={{ padding: 10, border: '1px solid #ddd' }}>Status</th>
- </tr>
- </thead>
- <tbody>
- {data.map((item, idx) => (
- <tr key={item.id}>
- <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>{idx + 1}</td>
- <td style={{ padding: 8, border: '1px solid #ddd' }}>{item.gr}</td>
- <td style={{ padding: 8, border: '1px solid #ddd', fontWeight: 600 }}>{item.student}</td>
- <td style={{ padding: 8, border: '1px solid #ddd' }}>{item.father}</td>
- <td style={{ padding: 8, border: '1px solid #ddd' }}>{item.class} / {item.section}</td>
- <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>{item.familyCode}</td>
- <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'right' }}>{item.total}</td>
- <td style={{ padding: 8, border: '1px solid #ddd', fontWeight: 700, color: item.status==='Paid' ? 'green' : 'red' }}>{item.status}</td>
- </tr>
- ))}
- </tbody>
- </table>
+    const sigHtml = sigImg
+      ? `<img src="${sigImg}" style="height:36px; max-width:130px; object-fit:contain;" alt="Signature" />`
+      : `<span style="display:inline-block; height:36px; width:130px;"></span>`
 
- <div className="super-module-card" style={{ marginTop: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontSize: 12, color: '#888' }}>
- <span>Printed on: {new Date().toLocaleString()}</span>
- <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, minWidth: 150 }}>
- {sigImg
- ? <img src={sigImg} alt="Principal Signature" style={{ height: 36, maxWidth: 130, objectFit: 'contain' }} />
- : <span style={{ display: 'block', height: 36, width: 130 }} />}
- <span style={{ borderTop: '1px solid #333', paddingTop: 5, width: '100%', textAlign: 'center' }}>Principal Signature</span>
- </span>
- </div>
- </div>
- </div>
- </div>
- </Portal>
- )
+    const logoHtml = logo
+      ? `<img src="${logo}" style="width:65px; height:65px; object-fit:contain;" alt="Logo" />`
+      : `<div style="width:65px; height:65px; border-radius:50%; border:1px solid #D9DEE8; display:grid; place-items:center; color:#0b2c4d; font-size:26px; font-weight:900;">${schoolName.charAt(0)}</div>`
+
+    const printDoc = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>${type} — ${schoolName}</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 12mm 10mm 15mm 10mm;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #111;
+      font-size: 11px;
+    }
+    .header-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #0b2c4d;
+      padding-bottom: 10px;
+    }
+    .school-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 800;
+      color: #0b2c4d;
+      font-family: 'Cinzel', serif, Georgia, Arial;
+      letter-spacing: 0.5px;
+    }
+    .school-meta {
+      font-size: 11px;
+      color: #555;
+      margin-top: 2px;
+    }
+    .report-title {
+      margin: 6px 0 0;
+      font-size: 14px;
+      font-weight: 700;
+      color: #b8860b;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      page-break-inside: auto;
+      margin-top: 8px;
+    }
+    thead {
+      display: table-header-group;
+    }
+    tbody {
+      display: table-row-group;
+    }
+    tr {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 5.5px 7px;
+      text-align: left;
+      font-size: 10.5px;
+      color: #111;
+    }
+    th {
+      background: #f0f4f8 !important;
+      font-weight: 700;
+      color: #0b2c4d;
+      text-transform: uppercase;
+      font-size: 9.5px;
+      letter-spacing: 0.5px;
+    }
+    .footer-box {
+      margin-top: 20px;
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 11px;
+      color: #444;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .sig-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 140px;
+    }
+    .sig-line {
+      border-top: 1px solid #333;
+      padding-top: 4px;
+      width: 100%;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 600;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="header-box">
+    ${logoHtml}
+    <div>
+      <h1 class="school-title">${schoolName}</h1>
+      <div class="school-meta">${schoolAddress} · ${schoolPhone}</div>
+      <h2 class="report-title">${type} — Session 2026-2027</h2>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:35px; text-align:center;">Sr#</th>
+        <th style="width:75px;">GR No</th>
+        <th>Student Name</th>
+        <th>Father Name</th>
+        <th style="width:105px;">Class / Section</th>
+        <th style="width:85px; text-align:center;">Family Code</th>
+        <th style="width:85px; text-align:right;">Monthly Fee</th>
+        <th style="width:70px; text-align:center;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${rowsHtml}
+    </tbody>
+  </table>
+
+  <div class="footer-box">
+    <span><strong>Total Records:</strong> ${data.length} &nbsp;|&nbsp; <strong>Date:</strong> ${today}</span>
+    <div class="sig-block">
+      ${sigHtml}
+      <div class="sig-line">Principal Signature</div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      setTimeout(function() {
+        window.focus();
+        window.print();
+      }, 300);
+    };
+  </script>
+</body>
+</html>`
+
+    const printWindow = window.open('', '_blank', 'width=1100,height=850')
+    if (printWindow) {
+      printWindow.document.open()
+      printWindow.document.write(printDoc)
+      printWindow.document.close()
+    } else {
+      window.print()
+    }
+  }
+
+  return (
+    <Portal>
+      <div className="super-module-card" style={{
+        position: 'fixed', inset: 0, zIndex: 10001,
+        background: 'rgba(7,30,52,0.98)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
+      }}>
+        <style>{`
+          @media print {
+            @page {
+              size: A4 portrait;
+              margin: 12mm 10mm 15mm 10mm;
+            }
+            html, body {
+              background: #fff !important;
+              color: #000 !important;
+              height: auto !important;
+              min-height: 100% !important;
+              overflow: visible !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
+            body * {
+              visibility: hidden;
+            }
+            .print-list-root, .print-list-root * {
+              visibility: visible !important;
+            }
+            .print-list-root {
+              position: static !important;
+              left: auto !important;
+              top: auto !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              height: auto !important;
+              min-height: 0 !important;
+              max-height: none !important;
+              overflow: visible !important;
+              background: #fff !important;
+              border-radius: 0 !important;
+              box-shadow: none !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              display: block !important;
+            }
+            .no-print {
+              display: none !important;
+            }
+            table {
+              width: 100% !important;
+              border-collapse: collapse !important;
+              page-break-inside: auto !important;
+            }
+            thead {
+              display: table-header-group !important;
+            }
+            tbody {
+              display: table-row-group !important;
+            }
+            tr {
+              page-break-inside: avoid !important;
+              break-inside: avoid !important;
+            }
+            th, td {
+              border: 1px solid #888 !important;
+              padding: 6px 8px !important;
+              text-align: left !important;
+              font-size: 10.5px !important;
+              color: #000 !important;
+            }
+            th {
+              background: #f0f4f8 !important;
+              font-weight: 700 !important;
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+            }
+          }
+        `}</style>
+        <div className="print-list-root" style={{
+          width: '100%', maxWidth: 1000, background: '#fff', borderRadius: 20, overflow: 'hidden', height: '90vh', display: 'flex', flexDirection: 'column'
+        }}>
+          <div className="super-module-card" style={{ padding: '16px 24px', background: '#0b2c4d', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className="no-print">
+            <h3 style={{ margin: 0 }}> {type}</h3>
+            <div className="super-module-card" style={{ display: 'flex', gap: 10 }}>
+              <button onClick={handlePrint} style={{ background: C.gold, border: 'none', padding: '8px 20px', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>Print Now</button>
+              <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', padding: '8px 16px', borderRadius: 8, cursor: 'pointer' }}>Close</button>
+            </div>
+          </div>
+
+          <div className="super-module-card" style={{ flex: 1, overflowY: 'auto', padding: 40, color: '#333' }}>
+            {/* Header */}
+            <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', gap: 20, marginBottom: 30, borderBottom: '2px solid #0b2c4d', paddingBottom: 20 }}>
+              {logo
+                ? <img src={logo} style={{ width: 80, height: 80, objectFit:'contain' }} alt="Logo" />
+                : <div style={{ width:80, height:80, borderRadius:'50%', border:'1px solid #D9DEE8', display:'grid', placeItems:'center', color:'#0b2c4d', fontSize:30, fontWeight:900 }}>{schoolName.charAt(0)}</div>}
+              <div>
+                <h1 style={{ margin: 0, fontSize: 24, color: '#0b2c4d' }}>{schoolName}</h1>
+                <div className="super-module-card" style={{ fontSize: 14, color: '#666', marginTop: 4 }}>{schoolAddress} - {schoolPhone}</div>
+                <h2 style={{ margin: '10px 0 0', fontSize: 18, color: C.gold }}>{type} — {new Date().toLocaleDateString()}</h2>
+              </div>
+            </div>
+
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr style={{ background: '#f4f4f4' }}>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Sr#</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>GR No</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Student Name</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Father Name</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Class / Section</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Family Code</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Monthly Fee</th>
+                  <th style={{ padding: 10, border: '1px solid #ddd' }}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item, idx) => (
+                  <tr key={item.id}>
+                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>{idx + 1}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{item.gr}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd', fontWeight: 600 }}>{item.student}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{item.father}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd' }}>{item.class} / {item.section}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>{item.familyCode}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd', textAlign: 'right' }}>{item.total}</td>
+                    <td style={{ padding: 8, border: '1px solid #ddd', fontWeight: 700, color: item.status==='Paid' ? 'green' : 'red' }}>{item.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="super-module-card" style={{ marginTop: 40, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontSize: 12, color: '#888' }}>
+              <span>Printed on: {new Date().toLocaleString()}</span>
+              <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, minWidth: 150 }}>
+                {sigImg
+                  ? <img src={sigImg} alt="Principal Signature" style={{ height: 36, maxWidth: 130, objectFit: 'contain' }} />
+                  : <span style={{ display: 'block', height: 36, width: 130 }} />}
+                <span style={{ borderTop: '1px solid #333', paddingTop: 5, width: '100%', textAlign: 'center' }}>Principal Signature</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Portal>
+  )
 }
 
 function FeeModule() {
@@ -585,9 +835,9 @@ function FeeModule() {
  />
  )}
  {printList && (
- <PrintStudentList 
- list={printList} 
- onClose={() => setPrintList(null)} 
+ <PrintStudentList
+ list={printList}
+ onClose={() => setPrintList(null)}
  school={paperSettings}
  />
  )}
@@ -636,9 +886,9 @@ function FeeModule() {
  <div className="super-module-card" style={{ paddingTop: 28 }}>
  {routeTab === 'create' && <CreateChallan onCreate={addChallan} />}
  {routeTab === 'view' && (
- <ViewChallans 
- challans={challans} 
- onPrint={setPrintChallan} 
+ <ViewChallans
+ challans={challans}
+ onPrint={setPrintChallan}
  onPrintList={(type, data) => setPrintList({ type, data })}
  />
  )}
@@ -731,7 +981,7 @@ function ProofReview() {
  <div style={{ background: '#0f172a', border: '1px solid rgba(200,153,26,0.3)', borderRadius: 20, maxWidth: 480, width: '100%', padding: 24 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16 }}>
  <div style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>{preview.name} — Payment Screenshot</div>
- <button onClick={() => setPreview(null)} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', fontSize: 20, lineHeight: 1 }}>×</button>
+ <button onClick={() => setPreview(null)} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 4 }}><X size={18} /></button>
  </div>
  <img src={preview.proof_image} alt="Proof" style={{ width: '100%', borderRadius: 12, marginBottom: 16, maxHeight: 320, objectFit: 'contain', background: '#1e293b' }} />
  <div style={{ display: 'flex', gap: 10 }}>

@@ -1,9 +1,12 @@
 import paramiko
-import sys
+import os
 
-host = '72.61.228.88'
-username = 'root'
-password = 'Myself&03452744344'
+host = os.getenv('ASSPS_VPS_HOST', '')
+username = os.getenv('ASSPS_VPS_USER', '')
+password = os.getenv('ASSPS_VPS_PASSWORD', '')
+
+if not host or not username or not password:
+    raise SystemExit('Missing ASSPS_VPS_HOST / ASSPS_VPS_USER / ASSPS_VPS_PASSWORD environment variables.')
 
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())

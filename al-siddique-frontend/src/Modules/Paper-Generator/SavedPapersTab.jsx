@@ -17,6 +17,36 @@ function fmtDate(iso) {
 }
 
 function categoryStats(paper = {}) {
+ if (paper.schemaVersion === 2 || paper.schemaVersion === '2') {
+  const sections = paper.sections || []
+  let mcqCount = 0, shortCount = 0, longCount = 0, totalQuestions = 0
+  sections.forEach(s => {
+   const count = (s.questions || []).length
+   totalQuestions += count
+   if (s.type === 'mcq') mcqCount += count
+   else if (s.type === 'short') shortCount += count
+   else if (s.type === 'long') longCount += count
+  })
+  return {
+   mcqCount,
+   shortCount,
+   longCount,
+   totalQuestions,
+   totalMarks: Number(paper.metadata?.totalMarks) || 0,
+  }
+ }
+ if (paper.documentFormat === 'official-v12' || paper.documentFormat === 'pts-native-v13') {
+  const sections = paper.documentFormat === 'pts-native-v13'
+   ? (paper.official_section || paper.selectedQuestions?.official_section?.questions || [])
+   : (Array.isArray(paper.sections) ? paper.sections : [])
+  return {
+   mcqCount: sections.filter(section => section.type === 'mcq').length,
+   shortCount: sections.filter(section => section.type === 'short').length,
+   longCount: sections.filter(section => section.type === 'long').length,
+   totalQuestions: sections.length,
+   totalMarks: Number(paper.config?.totalMarks) || 0,
+  }
+ }
  const legacy = {
  mcq: paper.selectedMCQ || [],
  short: paper.selectedShort || [],
@@ -185,6 +215,11 @@ export default function SavedPapersTab({ onLoadPaper }) {
  <button onClick={() => onLoadPaper(paper)}
  style={{ flex: 1, background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
   Load & Preview
+ </button>
+ <button onClick={() => onLoadPaper(paper, 'word_editor')}
+ title="Open in Word-like Ribbon Editor"
+ style={{ background: 'rgba(10,132,255,0.2)', border: '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
+  Word Edit
  </button>
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>

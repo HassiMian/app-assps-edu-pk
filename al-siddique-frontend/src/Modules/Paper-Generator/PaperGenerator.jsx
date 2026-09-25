@@ -15,6 +15,7 @@ const HandwrittenScannerTab = lazy(() => import('./HandwrittenScannerTab'))
 const QuestionBank = lazy(() => import('./QuestionBank'))
 const NotesMakerTab = lazy(() => import('./NotesMakerTab'))
 const DailyDiaryFeature = lazy(() => import('./DailyDiaryFeature'))
+const PaperEditorMain = lazy(() => import('./PaperEditor/PaperEditorMain'))
 
 const C = {
   card: 'rgba(15,23,42,0.58)',
@@ -54,6 +55,7 @@ function shuffle(arr) {
 
 const MODULE_TABS = [
   { id: 'build',         label: 'Paper Studio'     },
+  { id: 'word_editor',   label: 'Word Paper Editor' },
   { id: 'unified',       label: 'Unified Paper Generator', path: '/paper-generator/unified' },
   { id: 'board_pattern', label: 'Board Paper Mode' },
   { id: 'manual',        label: 'Manual Draft'     },
@@ -74,7 +76,7 @@ export default function PaperGenerator() {
   const [mode, setMode] = useState('offline')
   const [step, setStep] = useState(0)
 
-  const { subjects, questions, paperSettings, getQuestionsForPaper, getChaptersForSubject, loadSampleData } = usePaperStore()
+  const { subjects, questions, savedPapers, paperSettings, getQuestionsForPaper, getChaptersForSubject, loadSampleData } = usePaperStore()
   const { activeClasses, classes: acClasses, subjects: acSubjects } = useAcademicStore()
 
   // Calculate paper stats for the mini-dashboard
@@ -122,7 +124,6 @@ export default function PaperGenerator() {
 
   const totalSelected = selectedMCQ.length + selectedShort.length + selectedLong.length
   const totalMarksSelected = [...selectedMCQ, ...selectedShort, ...selectedLong].reduce((s, q) => s + (q.marks || 1), 0)
-
   const cfgSet = (k) => (e) => setConfig(prev => ({ ...prev, [k]: e.target.value }))
 
   function handleProceedToPreview({ config: cfg, selectedMCQ: mcq, selectedShort: sh, selectedLong: lg, ...rest }) {
@@ -131,21 +132,23 @@ export default function PaperGenerator() {
     setModuleTab('build')
   }
 
-  function handleLoadPaper(paper) {
+  function handleLoadPaper(paper, targetTab = null) {
     setLoadedSavedPaper(paper)
-    if (paper?.structureMode === 'board_pattern') {
+    if (targetTab) {
+       setModuleTab(targetTab)
+    } else if (paper?.structureMode === 'board_pattern') {
        setModuleTab('board_pattern')
     } else {
        setModuleTab('build')
     }
   }
 
-  const openModuleTab = (tab) => {
-    if (tab.path) {
-      navigate(tab.path)
-      return
+  const openModuleTab = (t) => {
+    if (t.path) {
+      navigate(t.path)
+    } else {
+      setModuleTab(t.id)
     }
-    setModuleTab(tab.id)
   }
 
   const ModuleWrap = ({ children }) => (
@@ -158,11 +161,12 @@ export default function PaperGenerator() {
   )
 
   // PTS Build Paper tab renders as its own full-screen flow
-  if (moduleTab === 'build' || moduleTab === 'board_pattern') {
+  if (moduleTab === 'build' || moduleTab === 'board_pattern' || moduleTab === 'word_editor') {
     return (
       <>
-        {moduleTab === 'build' && <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'build')} /></ModuleWrap>}
-        {moduleTab === 'board_pattern' && <ModuleWrap><BoardPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'build')} /></ModuleWrap>}
+        {moduleTab === 'build' && <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
+        {moduleTab === 'word_editor' && <ModuleWrap><PaperEditorMain loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
+        {moduleTab === 'board_pattern' && <ModuleWrap><BoardPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
       </>
     )
   }
@@ -189,7 +193,7 @@ export default function PaperGenerator() {
             { label: 'Total Classes',  value: acClasses?.length || 0,  icon: '🏫', grad: 'linear-gradient(135deg,rgba(148,163,184,0.18),rgba(200,153,26,0.06))' },
             { label: 'Total Subjects', value: acSubjects?.length || 0, icon: '📚', grad: 'linear-gradient(135deg,rgba(13,148,136,0.18),rgba(13,148,136,0.06))' },
             { label: 'Exam Types',     value: EXAM_TYPES.length,       icon: '📝', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
-            { label: 'Saved Papers',   value: 0,                       icon: '💾', grad: 'linear-gradient(135deg,rgba(191,90,242,0.18),rgba(191,90,242,0.06))' },
+            { label: 'Saved Papers',   value: savedPapers?.length || 0,                       icon: '💾', grad: 'linear-gradient(135deg,rgba(191,90,242,0.18),rgba(191,90,242,0.06))' },
           ].map(c => (
             <div key={c.label} style={{ ...pgDashCard, background: c.grad, padding: '16px 18px' }}>
               <div className="super-module-card" style={{ fontSize: 22 }}>{c.icon}</div>

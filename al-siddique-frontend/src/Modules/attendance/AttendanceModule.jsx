@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import {
  Check, X, Clock, Users, Calendar,
- ChevronDown, Save, Search
+ ChevronDown, Save, Search, UserCheck, UserX, CalendarOff, QrCode, BarChart3, MessageSquare
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
+import { getPakistanDateString } from "../../utils/dateUtils";
+import { emitAttendanceUpdated } from "../../utils/attendanceEvents";
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -54,10 +56,30 @@ const selectStyle = {
  color: "#C0C8D8", fontSize: 14, outline: "none", cursor: "pointer",
 };
 
+const ATTENDANCE_CLASS_LABEL_FIXES = {
+ "Pre Nine": "Nine",
+};
+
+function attendanceClassLabel(value) {
+ return ATTENDANCE_CLASS_LABEL_FIXES[value] || value;
+}
+
+function attendanceApiClass(value) {
+ return value === "Pre Nine" ? "Nine" : value;
+}
+
+function attendanceSectionsForClass(className, sectionsForClass) {
+ const direct = sectionsForClass(className);
+ if (direct.length) return direct;
+ if (className === "Nine") return sectionsForClass("Pre Nine");
+ return [];
+}
+
 export default function AttendanceModule() {
  const navigate = useNavigate();
  const [tab, setTab] = useState("mark");
  const { classNames: CLASSES, allSections: SECTION_LIST, sectionsForClass } = useAcademicStore();
+ const attendanceClasses = [...new Set(CLASSES.map(attendanceClassLabel))];
 
  useEffect(() => {
  if (tab === "smart") {
@@ -68,7 +90,7 @@ export default function AttendanceModule() {
 
  const [selectedClass, setSelectedClass] = useState(CLASSES[0] || "Class 6");
  const [selectedSection, setSelectedSection] = useState("Blue");
- const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
+ const [selectedDate, setSelectedDate] = useState(getPakistanDateString());
  const [students, setStudents] = useState([]);
  const [attendance, setAttendance] = useState({});
  const [saved, setSaved] = useState(false);
@@ -77,18 +99,26 @@ export default function AttendanceModule() {
  const loadAttendance = async () => {
  setLoading(true)
  try {
- const attendanceRes = await api.get('/api/attendance', {
- params: { class: selectedClass, section: selectedSection, date: selectedDate },
- })
+ const [attendanceRes, studentRes] = await Promise.all([
+ api.get('/api/attendance', {
+ params: { class: attendanceApiClass(selectedClass), section: selectedSection, date: selectedDate },
+ }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/students', {
+ params: { class: attendanceApiClass(selectedClass), section: selectedSection },
+ }).catch(() => ({ data: { data: [] } })),
+ ])
+
  const attendanceData = attendanceRes.data?.data || []
- if (attendanceData.length) {
- setStudents(attendanceData.map(transformAttendanceRow))
- setAttendance(attendanceData.reduce((acc, row) => { acc[row.student_id] = row.status; return acc }, {}))
- return
- }
- const studentRes = await api.get('/api/students', { params: { class: selectedClass, section: selectedSection } })
- setStudents((studentRes.data?.data || []).map(transformStudent))
- setAttendance({})
+ const studentData = studentRes.data?.data || []
+
+ const markMap = {}
+ attendanceData.forEach((row) => {
+ const sid = row.student_id || row.id
+ if (sid) markMap[sid] = row.status
+ })
+
+ setStudents(studentData.map(transformStudent))
+ setAttendance(markMap)
  } catch (err) {
  console.error('Could not load attendance', err)
  } finally {
@@ -98,7 +128,7 @@ export default function AttendanceModule() {
 
  useEffect(() => {
  if (!selectedClass) return
- const availableSections = sectionsForClass(selectedClass)
+ const availableSections = attendanceSectionsForClass(selectedClass, sectionsForClass)
  if (availableSections.length && !availableSections.includes(selectedSection)) {
  setSelectedSection(availableSections[0])
  return
@@ -125,25 +155,32 @@ export default function AttendanceModule() {
  const unmarked = students.length - Object.keys(attendance).length;
 
  const handleSave = async () => {
+ const entries = Object.entries(attendance).filter(([_, status]) => !!status)
+ if (!entries.length) {
+ alert('Please select attendance status for at least one student before saving.')
+ return
+ }
  try {
- const records = students.map((s) => ({
- student_id: s.id,
+ const records = entries.map(([studentId, status]) => ({
+ student_id: Number(studentId),
  date: selectedDate,
- status: attendance[s.id] || 'absent',
+ status,
  }))
  await api.post('/api/attendance/mark', { records })
+ emitAttendanceUpdated({ date: selectedDate, count: records.length })
  setSaved(true)
  setTimeout(() => setSaved(false), 3000)
  } catch (err) {
  console.error('Failed to save attendance', err)
+ alert('Failed to save attendance: ' + (err.response?.data?.message || err.message))
  }
  };
 
  const tabs = [
- { key: "mark", label: "Mark Attendance", icon: "" },
- { key: "smart", label: "Smart Scan ", icon: "" },
- { key: "analytics", label: "Analytics", icon: "" },
- { key: "report", label: "SMS Report", icon: "" },
+ { key: "mark", label: "Mark Attendance", icon: CheckCircle2 },
+ { key: "smart", label: "Smart Scan", icon: QrCode },
+ { key: "analytics", label: "Analytics", icon: BarChart3 },
+ { key: "report", label: "SMS Report", icon: MessageSquare },
  ];
 
  const attDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
@@ -166,22 +203,27 @@ export default function AttendanceModule() {
  </div>
  </div>
 
- {/*  Attendance Dashboard  */}
+ {/* Attendance Dashboard */}
  {/* Stats Cards */}
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 16 }}>
  {[
- { label: 'Present', value: presentCount, icon: '', grad: 'linear-gradient(135deg,rgba(48,209,88,0.18),rgba(48,209,88,0.06))' },
- { label: 'Absent', value: absentCount, icon: '', grad: 'linear-gradient(135deg,rgba(255,55,95,0.18),rgba(255,55,95,0.06))' },
- { label: 'Late', value: lateCount, icon: '', grad: 'linear-gradient(135deg,rgba(255,159,10,0.18),rgba(255,159,10,0.06))' },
- { label: 'Leave', value: leaveCount, icon: '', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
- { label: 'Total Students', value: totalStudents, icon: '', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
- ].map(c => (
+ { label: 'Present', value: presentCount, Icon: UserCheck, color: '#30D158', grad: 'linear-gradient(135deg,rgba(48,209,88,0.18),rgba(48,209,88,0.06))' },
+ { label: 'Absent', value: absentCount, Icon: UserX, color: '#FF375F', grad: 'linear-gradient(135deg,rgba(255,55,95,0.18),rgba(255,55,95,0.06))' },
+ { label: 'Late', value: lateCount, Icon: Clock, color: '#FF9F0A', grad: 'linear-gradient(135deg,rgba(255,159,10,0.18),rgba(255,159,10,0.06))' },
+ { label: 'Leave', value: leaveCount, Icon: CalendarOff, color: '#0A84FF', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
+ { label: 'Total Students', value: totalStudents, Icon: Users, color: '#C8991A', grad: 'linear-gradient(135deg,rgba(200,153,26,0.18),rgba(200,153,26,0.06))' },
+ ].map(c => {
+ const IconComp = c.Icon
+ return (
  <div key={c.label} style={{ ...attDashCard, background: c.grad, padding: '16px 18px', borderRadius: 22 }}>
- <div style={{ fontSize: 22 }}>{c.icon}</div>
- <div style={{ color: 'white', fontSize: 28, fontWeight: 900, marginTop: 6 }}>{c.value}</div>
- <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11 }}>{c.label}</div>
+ <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+ <div style={{ color: 'rgba(255,255,255,0.65)', fontSize: 12, fontWeight: 700 }}>{c.label}</div>
+ <IconComp size={18} color={c.color} />
  </div>
- ))}
+ <div style={{ color: 'white', fontSize: 28, fontWeight: 900, marginTop: 8 }}>{c.value}</div>
+ </div>
+ )
+ })}
  </div>
 
  {/* Charts */}
@@ -295,10 +337,10 @@ export default function AttendanceModule() {
  {/* Filters */}
  <div className="super-module-card" style={{ ...card, marginBottom: 20, display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", borderRadius: 22 }}>
  <select value={selectedClass} onChange={e => setSelectedClass(e.target.value)} style={selectStyle}>
- {CLASSES.map(c => <option key={c}>{c}</option>)}
+ {attendanceClasses.map(c => <option key={c}>{c}</option>)}
  </select>
  <select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} style={selectStyle}>
- {(sectionsForClass(selectedClass).length ? sectionsForClass(selectedClass) : SECTION_LIST.filter(item => item !== 'All')).map(s => <option key={s}>{s}</option>)}
+ {(attendanceSectionsForClass(selectedClass, sectionsForClass).length ? attendanceSectionsForClass(selectedClass, sectionsForClass) : SECTION_LIST.filter(item => item !== 'All')).map(s => <option key={s}>{s}</option>)}
  </select>
  <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
  style={{ ...selectStyle }} />

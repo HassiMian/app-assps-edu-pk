@@ -101,6 +101,7 @@ async function ensureFeeSystemSchema(schoolId) {
     CREATE INDEX IF NOT EXISTS idx_fee_class_settings_school ON fee_class_settings(school_id, class_name);
     CREATE INDEX IF NOT EXISTS idx_fee_discount_packages_school ON fee_discount_packages(school_id, active);
     CREATE INDEX IF NOT EXISTS idx_fee_challans_migration_batch ON fee_challans(migration_batch);
+    CREATE UNIQUE INDEX IF NOT EXISTS uq_fee_challans_student_month_year ON fee_challans (student_id, LOWER(TRIM(month)), year);
   `)
   for (const tableName of ['fee_class_settings', 'fee_discount_packages', 'fee_discount_applications']) {
     await query(`ALTER TABLE ${tableName} ALTER COLUMN school_id DROP DEFAULT`).catch(() => {})
@@ -166,6 +167,25 @@ function asMoney(value) {
 
 function normalizeClassName(value) {
   return String(value || '').trim()
+}
+
+const MONTH_ORDER = {
+  january: 1,
+  february: 2,
+  march: 3,
+  april: 4,
+  may: 5,
+  june: 6,
+  july: 7,
+  august: 8,
+  september: 9,
+  october: 10,
+  november: 11,
+  december: 12,
+}
+
+function monthNumber(value) {
+  return MONTH_ORDER[String(value || '').trim().toLowerCase()] || null
 }
 
 async function getClassMonthlyFee(schoolId, className, session = '2026-2027') {
@@ -249,15 +269,43 @@ async function calculateAutoDiscount({ studentId, schoolId, className, session, 
   return { packageId: null, label: null, amount: 0, siblingCount }
 }
 
-async function calculatePreviousArrears(studentId, schoolId, supportsTenant) {
+async function calculatePreviousArrears(studentId, schoolId, supportsTenant, targetMonth, targetYear) {
+  const targetMonthNumber = monthNumber(targetMonth)
+  const targetYearNumber = Number(targetYear)
+  const monthCase = `
+    CASE LOWER(TRIM(month))
+      WHEN 'january' THEN 1
+      WHEN 'february' THEN 2
+      WHEN 'march' THEN 3
+      WHEN 'april' THEN 4
+      WHEN 'may' THEN 5
+      WHEN 'june' THEN 6
+      WHEN 'july' THEN 7
+      WHEN 'august' THEN 8
+      WHEN 'september' THEN 9
+      WHEN 'october' THEN 10
+      WHEN 'november' THEN 11
+      WHEN 'december' THEN 12
+      ELSE NULL
+    END
+  `
+  const priorPeriodFilter = targetMonthNumber && Number.isFinite(targetYearNumber)
+    ? ` AND (
+          year < $${supportsTenant ? 3 : 2}
+          OR (year = $${supportsTenant ? 3 : 2} AND ${monthCase} < $${supportsTenant ? 4 : 3})
+        )`
+    : ''
   const sql = supportsTenant 
-    ? `SELECT COALESCE(SUM(remaining_balance - COALESCE(paid_amount, 0)), 0) AS total_arrears
+    ? `SELECT COALESCE(SUM(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0)), 0) AS total_arrears
        FROM fee_challans
-       WHERE student_id = $1 AND school_id = $2 AND status IN ('unpaid', 'partial')`
-    : `SELECT COALESCE(SUM(remaining_balance - COALESCE(paid_amount, 0)), 0) AS total_arrears
+       WHERE student_id = $1 AND school_id = $2 AND status IN ('unpaid', 'partial')${priorPeriodFilter}`
+    : `SELECT COALESCE(SUM(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0)), 0) AS total_arrears
        FROM fee_challans
-       WHERE student_id = $1 AND status IN ('unpaid', 'partial')`
+       WHERE student_id = $1 AND status IN ('unpaid', 'partial')${priorPeriodFilter}`
   const params = supportsTenant ? [studentId, schoolId] : [studentId]
+  if (targetMonthNumber && Number.isFinite(targetYearNumber)) {
+    params.push(targetYearNumber, targetMonthNumber)
+  }
   try {
     const result = await query(sql, params)
     return asMoney(result.rows[0]?.total_arrears || 0)
@@ -358,9 +406,19 @@ router.get('/summary', protect, adminOnly, async (req, res) => {
     const params = supportsTenant ? [schoolId] : []
     const agg = await query(`
       SELECT
-        COALESCE(SUM(CASE WHEN f.status = 'paid' THEN COALESCE(f.paid_amount, f.amount, 0) ELSE 0 END), 0) AS collected,
-        COALESCE(SUM(CASE WHEN f.status IN ('unpaid', 'partial') THEN COALESCE(f.remaining_balance, f.amount, 0) - COALESCE(f.paid_amount, 0) ELSE 0 END), 0) AS pending,
-        COUNT(*) FILTER (WHERE f.status = 'unpaid') AS unpaid_count,
+        COALESCE(SUM(COALESCE(f.paid_amount, 0)), 0) AS collected,
+        COALESCE(SUM(
+          CASE WHEN COALESCE(f.status, 'unpaid') <> 'paid' THEN
+            GREATEST(
+              0,
+              COALESCE(
+                f.remaining_balance,
+                COALESCE(f.gross_total, f.amount, 0) - COALESCE(f.paid_amount, 0)
+              )
+            )
+          ELSE 0 END
+        ), 0) AS pending,
+        COUNT(*) FILTER (WHERE f.status IN ('unpaid', 'partial')) AS unpaid_count,
         COUNT(*) FILTER (WHERE f.status = 'partial') AS partial_count,
         COUNT(*) FILTER (WHERE f.due_date IS NOT NULL AND f.due_date < CURRENT_DATE AND f.status <> 'paid') AS overdue_count
       FROM fee_challans f
@@ -380,7 +438,7 @@ router.get('/summary', protect, adminOnly, async (req, res) => {
       data: {
         collected: asMoney(row.collected),
         pending: asMoney(row.pending),
-        unpaid_students: Number(row.unpaid_count || 0),
+        unpaid_students: Number(row.unpaid_count || 0) + Number(row.partial_count || 0),
         overdue_challans: Number(row.overdue_count || 0),
         partial_count: Number(row.partial_count || 0),
         recent_payments: recent.rows,
@@ -490,11 +548,20 @@ router.get('/', protect, async (req, res) => {
     sql += readScope.clause
     params.push(...readScope.params)
     i = readScope.nextIndex
-    if (status)     { sql += ` AND f.status = $${i++}`;      params.push(status) }
-    if (month)      { sql += ` AND f.month = $${i++}`;       params.push(month) }
-    if (year)       { sql += ` AND f.year = $${i++}`;        params.push(year) }
-    if (cls)        { sql += ` AND s.class = $${i++}`;       params.push(cls) }
-    if (student_id) { sql += ` AND f.student_id = $${i++}`;  params.push(student_id) }
+    if (status)     { sql += ` AND f.status = $${i++}`;                             params.push(status) }
+    if (month)      { sql += ` AND LOWER(TRIM(f.month)) = LOWER(TRIM($${i++}))`;    params.push(month) }
+    if (year)       { sql += ` AND f.year = $${i++}`;                               params.push(Number(year)) }
+    if (cls) {
+      const norm = String(cls).trim().toLowerCase()
+      if (['9', 'nine', 'pre nine', 'pre-nine', 'class 9'].includes(norm)) {
+        sql += ` AND (s.class ILIKE '9' OR s.class ILIKE 'Nine' OR s.class ILIKE 'Pre Nine')`
+      } else {
+        sql += ` AND (s.class = $${i} OR s.class ILIKE $${i})`
+        params.push(cls)
+        i++
+      }
+    }
+    if (student_id) { sql += ` AND f.student_id = $${i++}`;                         params.push(Number(student_id)) }
     sql += ' ORDER BY f.created_at DESC'
 
     const result = await query(sql, params)
@@ -593,7 +660,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       console.warn('Skipping column verification due to offline db');
     }
     await tenantClause(req)
-    const { student_id, month, year, amount, due_date, created_by, discount, previous_arrears = 0 } = req.body
+    const { student_id, month, year, amount, due_date, created_by, discount, previous_arrears } = req.body
     const challan_no = `CH-${Date.now().toString().slice(-8)}`
     const schoolId = currentSchoolId(req)
 
@@ -640,7 +707,9 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const session = String(year || '2026') === '2026' ? '2026-2027' : `${year}-${Number(year) + 1}`
     const configuredMonthly = await getClassMonthlyFee(schoolId, student.class, session)
     const monthlyFee = asMoney(amount || configuredMonthly)
-    const arrears = previous_arrears !== undefined ? asMoney(previous_arrears) : await calculatePreviousArrears(student_id, schoolId, supportsTenant)
+    const arrears = previous_arrears !== undefined
+      ? asMoney(previous_arrears)
+      : await calculatePreviousArrears(student_id, schoolId, supportsTenant, month, year)
     const autoDiscount = discount === undefined || discount === null || discount === ''
       ? await calculateAutoDiscount({ studentId: Number(student_id), schoolId, className: student.class, session, baseAmount: monthlyFee })
       : { packageId: null, label: null, amount: 0, siblingCount: 1 }
@@ -760,7 +829,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
       }
 
       const challan_no = `CH-${Date.now().toString().slice(-8)}-${student.id}`
-      const arrears = await calculatePreviousArrears(student.id, schoolId, supportsTenant)
+      const arrears = await calculatePreviousArrears(student.id, schoolId, supportsTenant, month, year)
       const monthlyFee = asMoney(configuredMonthly)
       
       const autoDiscount = await calculateAutoDiscount({ studentId: student.id, schoolId, className: student.class, session, baseAmount: monthlyFee })
@@ -815,20 +884,19 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
   }
 })
 
-// PUT /api/fees/:id â€” edit challan (amount, due date, discount)
+// PUT /api/fees/:id — edit challan (amount, due date, discount, arrears, monthly fee)
 router.put('/:id', protect, adminOnly, async (req, res) => {
   try {
     await ensureFeePaymentColumns()
-    await ensureFeeSystemSchema(currentSchoolId(req))
-    const { amount, monthly_fee, previous_arrears, due_date, discount, month, year, challan_no } = req.body
+    const { amount, due_date, discount, month, year, monthly_fee, previous_arrears, challan_no } = req.body
     const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const monthly = amount !== undefined ? asMoney(amount) : monthly_fee !== undefined ? asMoney(monthly_fee) : null
+    const monthly = amount !== undefined ? asMoney(amount) : (monthly_fee !== undefined ? asMoney(monthly_fee) : null)
     const arrears = previous_arrears !== undefined ? asMoney(previous_arrears) : null
     const disc = discount !== undefined ? asMoney(discount) : null
     const sql = `
       UPDATE fee_challans SET
         challan_no = COALESCE($1, challan_no),
-        amount = COALESCE($2, amount),
+        amount = GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0),
         monthly_fee = COALESCE($2, monthly_fee),
         previous_arrears = COALESCE($3, previous_arrears),
         discount = COALESCE($4, discount),
@@ -879,30 +947,56 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
 // POST /api/fees/:id/regenerate â€” replace challan amounts (same period)
 router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
   try {
-    const { amount, discount, due_date } = req.body
+    const { amount, discount, due_date, previous_arrears } = req.body
     const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const gross = asMoney(amount)
-    const disc = asMoney(discount)
-    const remaining = Math.max(0, gross - disc)
+    const schoolId = currentSchoolId(req)
+    const existingSql = `
+      SELECT student_id, month, year, amount, monthly_fee, discount
+      FROM fee_challans
+      WHERE id = $1
+      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''}
+      LIMIT 1
+    `
+    const existingParams = supportsTenant && req.user?.role !== 'super_admin'
+      ? [req.params.id, schoolId]
+      : [req.params.id]
+    const existing = await query(existingSql, existingParams)
+    if (!existing.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
+    const current = existing.rows[0]
+    const monthly = amount !== undefined
+      ? asMoney(amount)
+      : asMoney(current.monthly_fee || current.amount)
+    const arrears = previous_arrears !== undefined
+      ? asMoney(previous_arrears)
+      : await calculatePreviousArrears(current.student_id, schoolId, supportsTenant, current.month, current.year)
+    const disc = discount !== undefined
+      ? asMoney(discount)
+      : asMoney(current.discount)
+    const gross = Math.max(0, monthly + arrears - disc)
     const challan_no = `CH-${Date.now().toString().slice(-8)}`
     const sql = `
       UPDATE fee_challans SET
         challan_no = $1,
-        amount = $2,
+        amount = $3,
         monthly_fee = $2,
-        gross_total = $3,
-        remaining_balance = $3,
-        discount = $4,
-        due_date = COALESCE($5, due_date),
-        status = CASE WHEN paid_amount > 0 THEN status ELSE 'unpaid' END,
+        previous_arrears = $4,
+        gross_total = $5,
+        remaining_balance = GREATEST($5 - COALESCE(paid_amount, 0), 0),
+        discount = $6,
+        due_date = COALESCE($7, due_date),
+        status = CASE
+          WHEN COALESCE(paid_amount, 0) <= 0 THEN 'unpaid'
+          WHEN COALESCE(paid_amount, 0) < $5 THEN 'partial'
+          ELSE 'paid'
+        END,
         updated_at = NOW()
-      WHERE id = $6
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $7' : ''}
+      WHERE id = $8
+      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $9' : ''}
       RETURNING *
     `
     const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [challan_no, gross, remaining, disc, due_date || null, req.params.id, currentSchoolId(req)]
-      : [challan_no, gross, remaining, disc, due_date || null, req.params.id]
+      ? [challan_no, monthly, gross, arrears, gross, disc, due_date || null, req.params.id, schoolId]
+      : [challan_no, monthly, gross, arrears, gross, disc, due_date || null, req.params.id]
     const result = await query(sql, params)
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan regenerated', data: result.rows[0] })
@@ -1160,4 +1254,3 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
 })
 
 module.exports = router
-

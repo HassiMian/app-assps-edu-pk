@@ -10,6 +10,7 @@ import {
  Clock, Users, Bell, Filter, Eye, RefreshCw,
  Smartphone, MessageCircle, ChevronDown, X, AlertCircle,
 } from 'lucide-react'
+import api from '../../services/api'
 
 //  Design tokens 
 
@@ -22,6 +23,14 @@ const card = {
 
 const API_BASE = '/api/notify'
 const SCHOOL_NAME = 'Al Siddique Scholars Public School'
+
+function isProductionHost() {
+ try {
+ return ['app.assps.edu.pk', 'api.assps.edu.pk'].includes(window.location.hostname)
+ } catch {
+ return false
+ }
+}
 
 //  Mock student data (replace with real API later) 
 
@@ -146,6 +155,10 @@ export default function NotificationModule() {
  const [sending, setSending] = useState(false)
  const [log, setLog] = useState([])
  const [toast, setToast] = useState(null)
+ const [sourceRecipients, setSourceRecipients] = useState([])
+ const [sourceLoading, setSourceLoading] = useState(false)
+ const [sourceMessage, setSourceMessage] = useState('')
+ const productionHost = isProductionHost()
 
  // Sync tab when URL ?tab= changes
  useEffect(() => {
@@ -163,6 +176,32 @@ export default function NotificationModule() {
  // Custom tab
  const [customMsg, setCustomMsg] = useState('')
  const [customRecipients, setCustomRecipients] = useState([])
+
+ useEffect(() => {
+ if (!productionHost || activeTab === 'log') return
+ let cancelled = false
+ async function loadRecipients() {
+ setSourceLoading(true)
+ setSourceMessage('')
+ try {
+ const params = { type: activeTab }
+ if (activeTab === 'fee') params.month = feeMonth.split(' ')[0]
+ const res = await api.get(`${API_BASE}/recipients`, { params })
+ if (cancelled) return
+ const rows = Array.isArray(res.data?.recipients) ? res.data.recipients : []
+ setSourceRecipients(rows)
+ setSourceMessage(res.data?.message || `${rows.length} source-backed recipients loaded.`)
+ } catch (err) {
+ if (cancelled) return
+ setSourceRecipients([])
+ setSourceMessage(err?.response?.data?.message || 'Source-backed recipients load nahi ho sake.')
+ } finally {
+ if (!cancelled) setSourceLoading(false)
+ }
+ }
+ loadRecipients()
+ return () => { cancelled = true }
+ }, [productionHost, activeTab, feeMonth])
 
  //  Helpers 
 
@@ -201,33 +240,36 @@ export default function NotificationModule() {
  function buildPreview() {
  const today = new Date().toLocaleDateString('en-PK', { day: '2-digit', month: 'long', year: 'numeric' })
  let messages = []
+ const sourceList = productionHost ? sourceRecipients : null
 
  if (activeTab === 'attendance') {
- const students = mockAttendance.filter(s => selected.includes(s.id))
+ const students = (sourceList || mockAttendance).filter(s => selected.includes(s.id))
  messages = students.map(s => ({
  name: s.name, phone: s.phone,
  message: buildMessage(`attendance_${s.status}`, { ...s, date: today }),
  }))
  }
  else if (activeTab === 'fee') {
- const students = mockStudents.filter(s => selected.includes(s.id) && s.feeStatus !== 'paid')
+ const students = (sourceList || mockStudents).filter(s => selected.includes(s.id) && (sourceList || s.feeStatus !== 'paid'))
  messages = students.map(s => ({
  name: s.name, phone: s.phone,
  message: buildMessage(feeType, { ...s, feeMonth }),
  }))
  }
  else if (activeTab === 'results') {
- const students = mockStudents.filter(s => selected.includes(s.id))
+ const students = (sourceList || mockStudents).filter(s => selected.includes(s.id))
  messages = students.map(s => ({
  name: s.name, phone: s.phone,
- message: buildMessage(s.examResult.passed ? 'result_pass' : 'result_fail', {
+ message: buildMessage(s.examResult?.passed === false ? 'result_fail' : 'result_pass', {
  ...s, examName,
- marks: s.examResult.marks, total: s.examResult.total, grade: s.examResult.grade,
+ marks: s.examResult?.marks || s.marks || '',
+ total: s.examResult?.total || s.total || '',
+ grade: s.examResult?.grade || s.grade || s.status || '',
  }),
  }))
  }
  else if (activeTab === 'custom') {
- messages = mockStudents.filter(s => selected.includes(s.id)).map(s => ({
+ messages = (sourceList || mockStudents).filter(s => selected.includes(s.id)).map(s => ({
  name: s.name, phone: s.phone,
  message: customMsg,
  }))
@@ -244,17 +286,16 @@ export default function NotificationModule() {
  const now = new Date().toLocaleTimeString('en-PK', { hour: '2-digit', minute: '2-digit' })
 
  try {
- // Call backend API
- const res = await fetch(`${API_BASE}/bulk`, {
- method: 'POST',
- headers: { 'Content-Type': 'application/json' },
- body: JSON.stringify({
+ const res = await api.post(`${API_BASE}/bulk`, {
  recipients: preview.map(m => ({ phone: m.phone, message: m.message })),
  templateKey: 'custom', // message already built
  language: 'both',
  channel,
- }),
  })
+
+ if (res.data?.success === false) {
+ throw new Error(res.data?.message || 'Notification send failed.')
+ }
 
  // Log results
  const newLogs = preview.map(m => ({
@@ -269,17 +310,7 @@ export default function NotificationModule() {
  setLog(prev => [...newLogs, ...prev])
  showToast(` ${preview.length} messages sent successfully!`)
  } catch (err) {
- // If backend not connected yet — simulate
- console.warn('Backend not connected, simulating:', err.message)
- const newLogs = preview.map(m => ({
- id: Date.now() + Math.random(),
- name: m.name, phone: m.phone,
- type: activeTab, channel,
- status: Math.random() > 0.15 ? 'sent' : 'failed',
- time: now,
- }))
- setLog(prev => [...newLogs, ...prev])
- showToast(` ${preview.length} messages sent (simulated — backend not connected)`, '#FF9F0A')
+ showToast(err?.response?.data?.message || err?.message || 'Notification send failed.', '#FF375F')
  }
 
  setSending(false)
@@ -289,7 +320,9 @@ export default function NotificationModule() {
 
  //  Student list for current tab 
 
- const currentList = activeTab === 'attendance'
+ const currentList = productionHost
+ ? sourceRecipients
+ : activeTab === 'attendance'
  ? mockAttendance
  : activeTab === 'fee'
  ? mockStudents.filter(s => s.feeStatus !== 'paid')
@@ -426,7 +459,15 @@ export default function NotificationModule() {
 
  {/* Student rows */}
  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
- {currentList.map(s => {
+ {productionHost && sourceLoading ? (
+ <div style={{ padding: 24, borderRadius: 12, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(192,200,216,0.76)', fontSize: 13, lineHeight: 1.6 }}>
+ Source-backed recipients load ho rahe hain...
+ </div>
+ ) : productionHost && currentList.length === 0 ? (
+ <div style={{ padding: 24, borderRadius: 12, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(192,200,216,0.76)', fontSize: 13, lineHeight: 1.6 }}>
+ {sourceMessage || 'Production par mock recipients disabled hain. Source-backed recipient list empty hai.'}
+ </div>
+ ) : currentList.map(s => {
  const sel = selected.includes(s.id)
  const statusColors = { absent: '#FF375F', late: '#FF9F0A', present: '#30D158', unpaid: '#FF9F0A', overdue: '#FF375F', paid: '#30D158' }
  const status = s.status || s.feeStatus

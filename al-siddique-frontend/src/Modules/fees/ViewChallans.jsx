@@ -1,7 +1,10 @@
+import { renderCanonicalFeeVoucherCopyHtml, renderCanonicalFeeVoucherHtml } from '../../services/canonicalDocumentTemplates';
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
+import { Printer } from 'lucide-react'
 import api from '../../services/api'
+import { useTenantBranding } from '../../context/TenantBrandingContext'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useFamilyStore } from '../../services/useFamilyStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -159,41 +162,43 @@ function renderDynamicFeeRows(ch, theme) {
     const admFee = Number(ch.admission_fee || 0)
     const othFee = Number(ch.other_fee || 0)
     const hasPrev = prevFee > 0
+    const totalGross = amt + prevFee + admFee + othFee
+    const monthlyNet = Math.max(0, amt - disc)
 
     return `
       <tr style="border-bottom:1px solid #e8e8e8; background:#f7f7f7;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Monthly Fee ${ch.month||''} ${ch.year||''}</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${amt.toLocaleString()}</td>
-        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${disc||0}</td>
-        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${paidAmt?net.toLocaleString():0}</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${net.toLocaleString()}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${disc > 0 ? disc.toLocaleString() : '0'}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${paidAmt > 0 ? Math.min(paidAmt, monthlyNet).toLocaleString() : '0'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${monthlyNet.toLocaleString()}</td>
       </tr>
       <tr style="border-bottom:1px solid #e8e8e8; background:#fff;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Admission Fee</td>
-        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${admFee?admFee.toLocaleString():'—'}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${admFee ? admFee.toLocaleString() : '—'}</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${admFee?admFee.toLocaleString():'—'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${admFee ? admFee.toLocaleString() : '—'}</td>
       </tr>
       <tr style="border-bottom:1px solid #e8e8e8; background:#f7f7f7;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Other Fee</td>
-        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${othFee?othFee.toLocaleString():'—'}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${othFee ? othFee.toLocaleString() : '—'}</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${othFee?othFee.toLocaleString():'—'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${othFee ? othFee.toLocaleString() : '—'}</td>
       </tr>
       <tr style="border-bottom:1px solid #d4b84a; background:#fef8e0;">
-        <td style="padding:4px 6px; color:#7a5c00; font-style:italic; font-size:10.5px;">Previous Month Fee</td>
-        <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">${hasPrev?prevFee.toLocaleString():'—'}</td>
+        <td style="padding:4px 6px; color:#7a5c00; font-style:italic; font-size:10.5px; font-weight:600;">Previous Arrears / Balance</td>
+        <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : '—'}</td>
         <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">0</td>
         <td style="text-align:center; padding:4px 3px; color:#7a5c00; font-size:10.5px;">0</td>
-        <td style="text-align:center; padding:4px 3px; font-weight:800; color:#7a5c00; font-size:10.5px;">${hasPrev?prevFee.toLocaleString():'—'}</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; color:#7a5c00; font-size:10.5px;">${hasPrev ? prevFee.toLocaleString() : '—'}</td>
       </tr>
       <tr style="border-top:2px solid ${theme.primaryColor}; background:#e4e4e4; font-weight:800;">
         <td style="padding:4px 6px; font-size:11.5px; color:#111;">Net Total</td>
-        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${amt.toLocaleString()}</td>
-        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${disc||0}</td>
-        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${paidAmt?net.toLocaleString():0}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${totalGross.toLocaleString()}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${disc > 0 ? disc.toLocaleString() : '0'}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${paidAmt > 0 ? paidAmt.toLocaleString() : '0'}</td>
         <td style="text-align:center; padding:4px 3px; font-size:11.5px; color:#111;">${net.toLocaleString()}</td>
       </tr>
     `
@@ -201,164 +206,119 @@ function renderDynamicFeeRows(ch, theme) {
 }
 
 // Unified function to render one copy of the voucher (occupies 100% width and height of container)
-export function renderVoucherCopyHtml(ch, label, school, templateId, isCompact = false) {
-  const theme = getTemplateTheme(templateId)
-  const today = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
-  
-  // Handle different property naming (database vs preview)
-  const dueDateVal = ch.due_date || ch.dueDate
-  const dueDate = dueDateVal
-    ? new Date(dueDateVal).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
-    : today
-
-  const sn = school.name || school.schoolName || 'Al Siddique Scholars Public School'
-  const sa = school.address || ''
-  const sl = school.logo || ''
-
-  const grVal = ch.gr_number || ch.gr || '—'
-  const nameVal = ch.name || ch.student || '—'
-  const fatherVal = ch.father_name || ch.father || '—'
-  const voucherNoVal = ch.challan_no || ch.voucherNo || '—'
-  const classVal = ch.class || '—'
-  const sectionVal = ch.section || '—'
-
-  const { gross: net, remaining: rem } = feeParts(ch)
-  const netTotalVal = ch.total !== undefined ? ch.total : net
-  const paidVal = ch.status === 'paid' || ch.status === 'Paid' ? netTotalVal : (ch.paid_amount || 0)
-  const remVal = ch.status === 'paid' || ch.status === 'Paid' ? 0 : (ch.remaining_balance !== undefined ? ch.remaining_balance : netTotalVal)
-
-  const logoImg = sl
-    ? `<img src="${sl}" style="height:36px;width:36px;object-fit:contain;display:block">`
-    : `<div style="width:36px;height:36px;border-radius:50%;background:${theme.primaryColor};display:flex;align-items:center;justify-content:center;font-weight:900;color:${theme.secondaryColor};font-size:16px;font-family:sans-serif">A</div>`
-
-  const feeRows = renderDynamicFeeRows(ch, theme)
-
-  return `
-    <div style="width:100%; height:100%; box-sizing:border-box; border:1.8px solid ${theme.outerBorderColor}; border-radius:6px; font-family:${theme.fontFam}; display:flex; flex-direction:column; overflow:hidden; background:${theme.cardBg}; padding:8px 10px; justify-content:flex-start; page-break-inside:avoid; position:relative;">
-      
-      <!-- Top Label Header -->
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid ${theme.primaryColor}; padding-bottom:2px; margin-bottom:3px;">
-        <div style="font-weight:700; font-size:10px; color:${theme.secondaryColor}; letter-spacing:0.5px; text-transform:uppercase;">${label}</div>
-        <div style="font-weight:700; font-size:10px; color:${theme.primaryColor};">No: <span style="color:${theme.secondaryColor}">${voucherNoVal}</span></div>
-      </div>
-      
-      <!-- School Branding Header -->
-      <div style="display:flex; align-items:center; gap:6px; margin-bottom:3px; justify-content:center;">
-        <div style="flex:0 0 auto;">${logoImg}</div>
-        <div style="flex:1; text-align:center;">
-          <div style="font-weight:800; font-size:15px; color:${theme.schoolNameColor}; line-height:1.2; margin:0; padding:0;">${sn}</div>
-          <div style="font-size:9px; color:#555; line-height:1.2; margin-top:1px;">${sa}</div>
-        </div>
-        <div style="flex:0 0 auto;">${logoImg}</div>
-      </div>
-      
-      <!-- Voucher Sub-Header -->
-      <div style="background:${theme.headerBg}; color:${theme.headerText}; text-align:center; padding:2px; font-weight:700; font-size:12px; letter-spacing:1.5px; border-radius:4px; margin-bottom:4px;">
-        FEE VOUCHER
-      </div>
-
-      <!-- Student Details Section (Vertical stack layout for narrow columns) -->
-      <table style="width:100%; border-collapse:collapse; margin-bottom:4px; font-size:11px; line-height:1.3;">
-        <tr style="border-bottom:1px solid #eee;">
-          <td style="padding:2px; color:#555; font-weight:500; width:32%;">Student:</td>
-          <td style="padding:2px; font-weight:700; color:#000; width:68%; text-transform:capitalize;">${nameVal}</td>
-        </tr>
-        <tr style="border-bottom:1px solid #eee;">
-          <td style="padding:2px; color:#555; font-weight:500;">Father:</td>
-          <td style="padding:2px; font-weight:700; color:#000; text-transform:capitalize;">${fatherVal}</td>
-        </tr>
-        <tr style="border-bottom:1px solid #eee;">
-          <td style="padding:2px; color:#555; font-weight:500;">Class / Sec:</td>
-          <td style="padding:2px; font-weight:700; color:#000;">${classVal} (${sectionVal})</td>
-        </tr>
-        <tr style="border-bottom:1px solid #eee;">
-          <td style="padding:2px; color:#555; font-weight:500;">GR Number:</td>
-          <td style="padding:2px; font-weight:700; color:${theme.secondaryColor};">${grVal}</td>
-        </tr>
-        <tr style="border-bottom:1px solid #eee;">
-          <td style="padding:2px; color:#555; font-weight:500;">Due Date:</td>
-          <td style="padding:2px; font-weight:700; color:#c0392b;">${dueDate}</td>
-        </tr>
-        <tr>
-          <td style="padding:2px; color:#555; font-weight:500;">Print Date:</td>
-          <td style="padding:2px; font-weight:700; color:#555;">${today}</td>
-        </tr>
-      </table>
-
-      <!-- Fee Table -->
-      <table style="width:100%; border-collapse:collapse; font-size:10.5px; margin-bottom:4px;">
-        <thead>
-          <tr style="background:${theme.tableHeaderBg}; color:${theme.tableHeaderColor}; border-top:1.5px solid ${theme.primaryColor}; border-bottom:1.5px solid ${theme.primaryColor}; font-weight:700;">
-            <th style="text-align:left; padding:4px 6px;">Particulars</th>
-            <th style="text-align:center; padding:4px 2px; width:18%;">Gross</th>
-            <th style="text-align:center; padding:4px 2px; width:12%;">Disc</th>
-            <th style="text-align:center; padding:4px 2px; width:14%;">Paid</th>
-            <th style="text-align:center; padding:4px 2px; width:16%;">Net</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${feeRows}
-        </tbody>
-      </table>
-
-      <!-- Totals & Notes Sections (Stacked vertically) -->
-      <div style="display:flex; flex-direction:column; gap:3px; margin-bottom:4px;">
-        <!-- Totals (11.5px bold) -->
-        <div style="display:flex; flex-direction:column; gap:2px; font-size:11.5px; font-weight:700; background:#f9f9f9; padding:4px 6px; border-radius:4px; border:1px solid #ddd;">
-          <div style="display:flex; justify-content:space-between;">
-            <span style="color:#555;">Paid Amount:</span>
-            <span style="color:${(ch.status==='paid' || ch.status==='Paid')?'#27ae60':'#333'}">Rs. ${paidVal.toLocaleString()}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; border-top:1px solid #eee; padding-top:2px;">
-            <span>Remaining:</span>
-            <span style="color:${remVal===0?'#27ae60':'#c0392b'}">${remVal===0?'PAID':'Rs. '+remVal.toLocaleString()}</span>
-          </div>
-        </div>
-        
-        <!-- Notes (9.5px readable - height auto so it NEVER cuts off) -->
-        <div style="font-size:9.5px; font-weight:700; line-height:1.25; color:#555; text-align:justify; border:1px solid #ddd; padding:4px; border-radius:4px; background:#fff; height:auto; overflow:visible;">
-          ${NOTICE_TEXT}
-        </div>
-      </div>
-
-      <!-- Signatures & Stamps Footer -->
-      <div style="display:flex; justify-content:space-between; align-items:center; padding-top:2px; border-top:1px solid #eee; margin-top:auto;">
-        <div style="text-align:center; width:75px;">
-          <div style="border-top:1px solid #333; margin-top:6px; margin-bottom:1px;"></div>
-          <span style="font-size:10px; font-weight:700; color:#555;">Depositor</span>
-        </div>
-        <div style="text-align:center;">
-          <div style="display:inline-block; border-radius:4px; padding:2px 8px; transform:rotate(-5deg); font-size:9.5px; font-weight:800; letter-spacing:1px; line-height:1; ${theme.stampStyle}">STAMP</div>
-        </div>
-        <div style="text-align:center; width:75px;">
-          <div style="border-top:1px solid #333; margin-top:6px; margin-bottom:1px;"></div>
-          <span style="font-size:10px; font-weight:700; color:#555;">Cashier</span>
-        </div>
-      </div>
-
-    </div>
-  `
+export function renderVoucherCopyHtml(ch, label, school = {}, templateId = 1, isCompact = false) {
+  return renderCanonicalFeeVoucherCopyHtml(ch, label, school, templateId);
 }
 
-//  Fee Challan Print — A4 Landscape, 3-per-page
-export function printChallan(challan, school, templateId = 1, copies = 3) {
+export function renderAndPrintHtml(html, title = 'Fee Vouchers', existingWindow = null) {
+  // Method 1: Blob URL (fastest & most reliable across all modern browsers)
+  try {
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
+    const blobUrl = URL.createObjectURL(blob)
+
+    if (existingWindow && !existingWindow.closed) {
+      existingWindow.location.href = blobUrl
+      existingWindow.focus()
+      return
+    }
+
+    const win = window.open(blobUrl, '_blank')
+    if (win) {
+      win.focus()
+      return
+    }
+  } catch (err) {
+    console.warn('Blob window.open failed:', err)
+  }
+
+  // Method 2: Direct window.open and document.write fallback
+  try {
+    const win = window.open('', '_blank')
+    if (win && win.document) {
+      win.document.open()
+      win.document.write(html)
+      win.document.close()
+      try { win.document.title = title } catch(t) {}
+      win.focus()
+      return
+    }
+  } catch (err) {
+    console.warn('Direct document.write fallback failed:', err)
+  }
+
+  // Method 3: Iframe print fallback (if window.open was blocked)
+  try {
+    let iframe = document.getElementById('apex-print-frame')
+    if (!iframe) {
+      iframe = document.createElement('iframe')
+      iframe.id = 'apex-print-frame'
+      iframe.style.position = 'fixed'
+      iframe.style.top = '-9999px'
+      iframe.style.left = '-9999px'
+      iframe.style.width = '1000px'
+      iframe.style.height = '1000px'
+      iframe.style.border = 'none'
+      iframe.style.zIndex = '-1000'
+      document.body.appendChild(iframe)
+    }
+
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' })
+    iframe.src = URL.createObjectURL(blob)
+    iframe.onload = () => {
+      setTimeout(() => {
+        try {
+          iframe.contentWindow.focus()
+          iframe.contentWindow.print()
+        } catch (err) {
+          console.error('Iframe print error:', err)
+        }
+      }, 400)
+    }
+  } catch (e) {
+    console.error('All print methods failed:', e)
+  }
+}
+
+// Fee Challan Print — A4 Landscape, 3-per-page
+export function printChallan(challan, school = {}, templateId = 1, copies = 3, printWin = null) {
+  if (!challan) {
+    alert('No challan selected to print.')
+    return
+  }
   const LABELS = ['Student Copy', 'Institute Copy', 'Bank Copy'].slice(0, copies)
 
   const printPageSize = 'A4 landscape'
   const printMargin = '2mm 3mm'
   const bodyDimensions = 'width:291mm; height:204mm; display:flex; flex-direction:row; gap:6px; box-sizing:border-box;'
 
-  const html = `<!DOCTYPE html><html><head><title>Fee Voucher — ${challan.challan_no||''}</title>
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fee Voucher — ${challan.challan_no || challan.name || ''}</title>
   <style>
     * { box-sizing:border-box; margin:0; padding:0; }
     @page { size:${printPageSize}; margin:${printMargin}; }
-    body { background:#fff; font-family: Arial, sans-serif; }
+    body { background:#f3f4f6; font-family: Arial, sans-serif; padding:10px; margin:0; }
     @media print {
-      body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      body { background:#fff; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .no-print { display:none !important; }
     }
   </style>
-  </head><body>
-  <div style="${bodyDimensions}">
+</head>
+<body>
+  <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:10px 20px; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <strong style="color:#C8991A; font-size:15px;">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</strong>
+      <span style="font-size:13px; color:#C0C8D8;">• Voucher: ${challan.challan_no || challan.name || 'Single Voucher'}</span>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">Print Voucher</button>
+      <button onclick="window.close()" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:600; border:1px solid rgba(255,255,255,0.2); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px;">Close</button>
+    </div>
+  </div>
+
+  <div style="${bodyDimensions}; margin: 0 auto; background:#fff;">
     ${LABELS.map((label, index) => `
       <div style="width:calc(33.33% - 4px); height:204mm; display:flex;">
         ${renderVoucherCopyHtml(challan, label, school, templateId)}
@@ -366,14 +326,31 @@ export function printChallan(challan, school, templateId = 1, copies = 3) {
       ${(copies === 3 && index < 2) ? '<div style="border-left:1.5px dashed #ccc; width:1px; margin:0 2mm; height:204mm;"></div>' : ''}
     `).join('')}
   </div>
-  <script>window.onload=()=>setTimeout(()=>window.print(),500);</script></body></html>`
 
-  const w = window.open('', '_blank', 'width=1200,height=900')
-  w.document.write(html)
-  w.document.close()
+  <script>
+    function triggerPrint() {
+      try { window.focus(); window.print(); } catch(e) {}
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(triggerPrint, 350);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(triggerPrint, 350);
+      });
+      setTimeout(triggerPrint, 1200);
+    }
+  </script>
+</body>
+</html>`
+
+  renderAndPrintHtml(html, `Fee Voucher — ${challan.challan_no || challan.name || ''}`, printWin)
 }
 
-export function printCompactBatch(challans, school) {
+export function printCompactBatch(challans, school = {}, printWin = null) {
+  if (!challans || !challans.length) {
+    alert('No challans available to print.')
+    return
+  }
   const batchVouchers = challans.map((ch) => {
     return renderVoucherCopyHtml(ch, 'Student Copy', school, 1)
   })
@@ -382,7 +359,7 @@ export function printCompactBatch(challans, school) {
   for (let i = 0; i < batchVouchers.length; i += 3) {
     const group = batchVouchers.slice(i, i + 3)
     pages.push(`
-      <div style="width:291mm; height:204mm; display:flex; flex-direction:row; gap:6px; box-sizing:border-box; page-break-after:always;">
+      <div class="voucher-page" style="width:291mm; height:204mm; display:flex; flex-direction:row; gap:6px; box-sizing:border-box; page-break-after:always; break-after:page; page-break-inside:avoid; break-inside:avoid; margin:0 auto 10mm; background:#fff;">
         ${group.map((v, index) => `
           <div style="width:calc(33.33% - 4px); height:204mm; display:flex;">
             ${v}
@@ -393,30 +370,65 @@ export function printCompactBatch(challans, school) {
     `)
   }
 
-  const html = `<!DOCTYPE html><html><head><title>Fee Vouchers — 3 per Page</title>
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fee Vouchers — (${challans.length} Compact Vouchers)</title>
   <style>
     * { box-sizing:border-box; margin:0; padding:0; }
     @page { size:A4 landscape; margin:2mm 3mm; }
-    body { background:#fff; font-family: Arial, sans-serif; }
+    body { background:#f3f4f6; font-family: Arial, sans-serif; padding:10px; margin:0; }
     @media print {
-      body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      body { background:#fff; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .no-print { display:none !important; }
+      .voucher-page { margin-bottom:0 !important; }
     }
   </style>
-  </head><body>
-    ${pages.join('')}
-    <script>window.onload=()=>setTimeout(()=>window.print(),500);</script>
-  </body></html>`
+</head>
+<body>
+  <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:10px 20px; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <strong style="color:#C8991A; font-size:15px;">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</strong>
+      <span style="font-size:13px; color:#C0C8D8;">• Batch of ${challans.length} Compact Vouchers Ready</span>
+    </div>
+    <div style="display:flex; gap:10px;">
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:8px 20px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">Print All (${challans.length})</button>
+      <button onclick="window.close()" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:600; border:1px solid rgba(255,255,255,0.2); padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px;">Close</button>
+    </div>
+  </div>
 
-  const w = window.open('', '_blank', 'width=1200,height=900')
-  w.document.write(html)
-  w.document.close()
+  ${pages.join('')}
+
+  <script>
+    function triggerPrint() {
+      try { window.focus(); window.print(); } catch(e) {}
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(triggerPrint, 400);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(triggerPrint, 400);
+      });
+      setTimeout(triggerPrint, 1400);
+    }
+  </script>
+</body>
+</html>`
+
+  renderAndPrintHtml(html, `Fee Vouchers — (${challans.length} Compact Vouchers)`, printWin)
 }
 
-export function printBatchChallans(challans, school, templateId = 1) {
+export function printBatchChallans(challans, school = {}, templateId = 1, printWin = null) {
+  if (!challans || !challans.length) {
+    alert('No challans available to print.')
+    return
+  }
+
   const LABELS = ['Student Copy', 'Institute Copy', 'Bank Copy']
 
   const pages = challans.map(ch => `
-    <div style="width:291mm; height:204mm; display:flex; flex-direction:row; gap:6px; box-sizing:border-box; page-break-after:always;">
+    <div class="voucher-page" style="width:291mm; height:204mm; display:flex; flex-direction:row; gap:6px; box-sizing:border-box; page-break-after:always; break-after:page; page-break-inside:avoid; break-inside:avoid; margin:0 auto 10mm; background:#fff;">
       ${LABELS.map((label, index) => `
         <div style="width:calc(33.33% - 4px); height:204mm; display:flex;">
           ${renderVoucherCopyHtml(ch, label, school, templateId)}
@@ -426,23 +438,53 @@ export function printBatchChallans(challans, school, templateId = 1) {
     </div>
   `).join('')
 
-  const html = `<!DOCTYPE html><html><head><title>Batch Fee Vouchers</title>
+  const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Batch Fee Vouchers — (${challans.length} Students)</title>
   <style>
     * { box-sizing:border-box; margin:0; padding:0; }
     @page { size:A4 landscape; margin:2mm 3mm; }
-    body { background:#fff; font-family: Arial, sans-serif; }
+    body { background:#f3f4f6; font-family: Arial, sans-serif; padding:10px; margin:0; }
     @media print {
-      body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      body { background:#fff; padding:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .no-print { display:none !important; }
+      .voucher-page { margin-bottom:0 !important; }
     }
   </style>
-  </head><body>
-    ${pages}
-    <script>window.onload=()=>setTimeout(()=>window.print(),500);</script>
-  </body></html>`
+</head>
+<body>
+  <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:12px 24px; border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <strong style="color:#C8991A; font-size:16px; letter-spacing:0.5px;">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</strong>
+      <span style="font-size:13px; color:#C0C8D8;">• Batch Print: <strong>${challans.length} Students</strong> (${challans.length * 3} Vouchers)</span>
+    </div>
+    <div style="display:flex; gap:12px;">
+      <button onclick="window.print()" style="background:linear-gradient(135deg,#D9A813,#F2C43B); color:#071e34; font-weight:800; border:none; padding:9px 24px; border-radius:8px; cursor:pointer; font-size:14px; box-shadow:0 3px 10px rgba(0,0,0,0.35);">Print All Vouchers (${challans.length})</button>
+      <button onclick="window.close()" style="background:rgba(255,255,255,0.15); color:#fff; font-weight:600; border:1px solid rgba(255,255,255,0.25); padding:9px 16px; border-radius:8px; cursor:pointer; font-size:13px;">Close</button>
+    </div>
+  </div>
 
-  const w = window.open('', '_blank', 'width=1200,height=900')
-  w.document.write(html)
-  w.document.close()
+  ${pages}
+
+  <script>
+    function triggerPrint() {
+      try { window.focus(); window.print(); } catch(e) {}
+    }
+    if (document.readyState === 'complete') {
+      setTimeout(triggerPrint, 450);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(triggerPrint, 450);
+      });
+      setTimeout(triggerPrint, 1500);
+    }
+  </script>
+</body>
+</html>`
+
+  renderAndPrintHtml(html, `Batch Fee Vouchers — (${challans.length} Students)`, printWin)
 }
 
 const money = (value) => Number(value || 0).toLocaleString()
@@ -453,9 +495,14 @@ export default function ViewChallans() {
  const navigate = useNavigate()
  const [challans, setChallans] = useState([])
  const [loading, setLoading] = useState(true)
- const [search, setSearch] = useState('')
+ const MONTH_OPTIONS = ['September', 'August', 'July', 'June', 'May', 'All Months']
+ const YEAR_OPTIONS = ['2026', '2027', 'All Years']
+
  const [selectedStatus, setSelectedStatus] = useState('All')
  const [selectedClass, setSelectedClass] = useState('All Classes')
+ const [selectedMonth, setSelectedMonth] = useState('September')
+ const [selectedYear, setSelectedYear] = useState('2026')
+ const [search, setSearch] = useState('')
  const [paymentChallan, setPaymentChallan] = useState(null)
  const [paymentForm, setPaymentForm] = useState({ discount: 0, paid_amount: 0, payment_mode: 'cash', payment_note: '' })
  const [paymentError, setPaymentError] = useState('')
@@ -477,19 +524,32 @@ export default function ViewChallans() {
  const { families, getFamilyForStudent } = useFamilyStore()
  const { classNames } = useAcademicStore()
  const classOptions = ['All Classes', ...(classNames?.length ? classNames : ['Starter'])]
+ const branding = useTenantBranding()
 
- const load = () => {
- setLoading(true)
- const params = {}
- if (selectedStatus !== 'All') params.status = selectedStatus
- if (selectedClass !== 'All Classes') params.class = selectedClass
- api.get('/api/fees', { params })
- .then(r => setChallans(r.data.data || []))
- .catch(() => setChallans([]))
- .finally(() => setLoading(false))
+ const school = {
+   name: branding?.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
+   schoolName: branding?.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
+   urdu: paperSettings?.schoolUrdu || '',
+   address: branding?.address || paperSettings?.address || paperSettings?.schoolAddress || 'Sharif Chowk, Rayya Khas, Narowal',
+   phone: paperSettings?.phone || '03001291959',
+   logo: branding?.logoUrl || paperSettings?.logo || '',
+   showUrduHeader: paperSettings?.showUrduHeader || false,
  }
 
- useEffect(() => { load() }, [selectedStatus, selectedClass])
+ const load = () => {
+   setLoading(true)
+   const params = {}
+   if (selectedStatus !== 'All') params.status = selectedStatus
+   if (selectedClass !== 'All Classes') params.class = selectedClass
+   if (selectedMonth !== 'All Months') params.month = selectedMonth
+   if (selectedYear !== 'All Years') params.year = selectedYear
+   api.get('/api/fees', { params })
+     .then(r => setChallans(r.data.data || []))
+     .catch(() => setChallans([]))
+     .finally(() => setLoading(false))
+ }
+
+ useEffect(() => { load() }, [selectedStatus, selectedClass, selectedMonth, selectedYear])
 
  const syncPrintMenuPosition = () => {
  const rect = printDdButtonRef.current?.getBoundingClientRect()
@@ -511,20 +571,20 @@ export default function ViewChallans() {
  window.addEventListener('resize', syncPrintMenuPosition)
  window.addEventListener('scroll', syncPrintMenuPosition, true)
  return () => {
- window.removeEventListener('resize', syncPrintMenuPosition)
+window.removeEventListener('resize', syncPrintMenuPosition)
  window.removeEventListener('scroll', syncPrintMenuPosition, true)
  }
  }, [printDdOpen])
 
- // Close dropdown on outside click
- useEffect(() => {
- const handler = (e) => {
- if (printDdRef.current?.contains(e.target) || printDdButtonRef.current?.contains(e.target)) return
- setPrintDdOpen(false)
- }
- document.addEventListener('mousedown', handler)
- return () => document.removeEventListener('mousedown', handler)
- }, [])
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.target.closest?.('.print-dd-menu') || e.target.closest?.('.print-dd-btn') || printDdRef.current?.contains(e.target) || printDdButtonRef.current?.contains(e.target)) return
+      setPrintDdOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
 
  // Close action dropdown on outside click
  useEffect(() => {
@@ -687,17 +747,8 @@ export default function ViewChallans() {
  return [c.name, c.gr_number, c.challan_no, fam?.code, fam?.fatherName].some(v => v?.toLowerCase().includes(q))
  })
 
- const school = {
- name: paperSettings.schoolName,
- urdu: paperSettings.schoolUrdu,
- address: paperSettings.address,
- phone: paperSettings.phone,
- logo: paperSettings.logo,
- showUrduHeader: paperSettings.showUrduHeader,
- }
-
  const paymentPayable = paymentChallan ? netPayable(paymentChallan, paymentForm.discount) : 0
- const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
+const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  const paymentRemaining = Math.max(0, paymentPayable - paymentAlreadyPaid - Number(paymentForm.paid_amount || 0))
 
  return (
@@ -705,62 +756,130 @@ export default function ViewChallans() {
  <div style={{ width:'100%', maxWidth:1520, margin:'0 auto', display:'grid', gap:24 }}>
 
  {/* Header */}
- <div className="super-module-card" style={{ ...card, display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:16, alignItems:'center', position:'relative', zIndex:50 }}>
- <div>
- <h1 style={sectionHeader}>View Challans</h1>
- <p style={{ color:C.muted, marginTop:8 }}>Browse fee vouchers, receive full or partial payments, and apply discounts.</p>
- </div>
- <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
- <button onClick={()=>setClassView(v=>!v)} style={{ ...btnSecondary, fontSize:13, borderColor: classView ? '#C8991A' : undefined, color: classView ? '#C8991A' : undefined }}>
-  {classView ? 'List View' : 'Class Wise View'}
- </button>
+  <div className="super-module-card" style={{ ...card, display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:16, alignItems:'center', position:'relative', zIndex:50 }}>
+    <div>
+      <h1 style={sectionHeader}>View Challans</h1>
+      <p style={{ color:C.muted, marginTop:8 }}>Browse fee vouchers, receive full or partial payments, and apply discounts.</p>
+    </div>
+    <div style={{ display:'flex', gap:10, flexWrap:'wrap', alignItems:'center' }}>
+      <button type="button" onClick={()=>setClassView(v=>!v)} style={{ ...btnSecondary, fontSize:13, borderColor: classView ? '#C8991A' : undefined, color: classView ? '#C8991A' : undefined }}>
+        {classView ? 'List View' : 'Class Wise View'}
+      </button>
 
- {/* Print Vouchers Dropdown */}
- <div style={{ position:'relative' }}>
- <button ref={printDdButtonRef} onClick={togglePrintDropdown} style={{ ...btnPrimary, fontSize:13 }}>
-  Print Vouchers 
- </button>
- {printDdOpen && createPortal(
- <div ref={printDdRef} style={{ position:'fixed', right:printMenuPos.right, top:printMenuPos.top, background:'#0B2C4D', border:'1px solid rgba(200,153,26,0.25)', borderRadius:12, zIndex:10000, width:'min(320px, calc(100vw - 32px))', maxHeight:`min(520px, calc(100vh - ${printMenuPos.top + 16}px))`, boxShadow:'0 18px 48px rgba(0,0,0,0.55)', overflowY:'auto', overflowX:'hidden' }}>
- <div style={{ padding:'8px 18px 4px', color:'#8892A4', fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:0.5 }}>Template 1 — Classic Bank</div>
- {[
- { label:'Single Student (Classic)', fn:()=>{ if(filtered.length) printChallan(filtered[0],school,1); else alert('No challans'); setPrintDdOpen(false) } },
- { label:'Batch Print (Classic)', fn:()=>{ if(filtered.length) printBatchChallans(filtered,school,1); else alert('No challans'); setPrintDdOpen(false) } },
- ].map(item=>(
- <div key={item.label} onClick={item.fn} style={{ padding:'9px 18px', cursor:'pointer', color:'#C0C8D8', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.04)' }}
- onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.1)'}
- onMouseLeave={e=>e.currentTarget.style.background='transparent'}>{item.label}</div>
- ))}
- <div style={{ padding:'8px 18px 4px', color:'#8892A4', fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:0.5, borderTop:'1px solid rgba(255,255,255,0.06)', marginTop:4 }}>Template 2 — Modern Premium</div>
- {[
- { label:'Single Student (Premium)', fn:()=>{ if(filtered.length) printChallan(filtered[0],school,2); else alert('No challans'); setPrintDdOpen(false) } },
- { label:'Batch Print (Premium)', fn:()=>{ if(filtered.length) printBatchChallans(filtered,school,2); else alert('No challans'); setPrintDdOpen(false) } },
- ].map(item=>(
- <div key={item.label} onClick={item.fn} style={{ padding:'9px 18px', cursor:'pointer', color:'#C0C8D8', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.04)' }}
- onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.1)'}
- onMouseLeave={e=>e.currentTarget.style.background='transparent'}>{item.label}</div>
- ))}
- <div style={{ padding:'8px 18px 4px', color:'#8892A4', fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:0.5, borderTop:'1px solid rgba(255,255,255,0.06)', marginTop:4 }}>Template 3 — Simple Compact</div>
- {[
- { label:'Single Student (Simple)', fn:()=>{ if(filtered.length) printChallan(filtered[0],school,3); else alert('No challans'); setPrintDdOpen(false) } },
- { label:'Batch Print (Simple)', fn:()=>{ if(filtered.length) printBatchChallans(filtered,school,3); else alert('No challans'); setPrintDdOpen(false) } },
- ].map(item=>(
- <div key={item.label} onClick={item.fn} style={{ padding:'9px 18px', cursor:'pointer', color:'#C0C8D8', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.04)' }}
- onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.1)'}
- onMouseLeave={e=>e.currentTarget.style.background='transparent'}>{item.label}</div>
- ))}
- </div>,
- document.body
- )}
- </div>
- </div>
- </div>
+      {/* Quick Direct 1-Click Batch Print Button */}
+      <button
+        type="button"
+        onClick={() => {
+          if (!filtered.length) { alert('No challans found in current view.'); return }
+          printBatchChallans(filtered, school, 1)
+        }}
+        style={{
+          ...btnPrimary,
+          background: 'linear-gradient(135deg,#D9A813,#F2C43B)',
+          color: '#071e34',
+          fontWeight: 800,
+          fontSize: 13,
+          boxShadow: '0 3px 12px rgba(217,168,19,0.4)',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6
+        }}
+      >
+        <Printer size={15} /> Batch Print ({filtered.length})
+      </button>
+
+      {/* Print Vouchers Dropdown */}
+      <div style={{ position:'relative' }}>
+        <button ref={printDdButtonRef} type="button" className="print-dd-btn" onClick={togglePrintDropdown} style={{ ...btnSecondary, fontSize:13 }}>
+          More Print Options ▾
+        </button>
+        {printDdOpen && createPortal(
+          <div ref={printDdRef} className="print-dd-menu" style={{ position:'fixed', right:printMenuPos.right, top:printMenuPos.top, background:'#0B2C4D', border:'1px solid rgba(200,153,26,0.25)', borderRadius:12, zIndex:10000, width:'min(320px, calc(100vw - 32px))', maxHeight:`min(520px, calc(100vh - ${printMenuPos.top + 16}px))`, boxShadow:'0 18px 48px rgba(0,0,0,0.55)', overflowY:'auto', overflowX:'hidden' }}>
+            <div style={{ padding:'8px 18px 4px', color:'#8892A4', fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:0.5 }}>Template 1 — Classic Bank</div>
+            {[
+              { label:'Single Student (Classic)', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printChallan(filtered[0],school,1,3) } },
+              { label:'Batch Print (Classic)', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printBatchChallans(filtered,school,1) } },
+            ].map(item=>(
+              <button
+                key={item.label}
+                type="button"
+                onClick={(e)=>{
+                  e.stopPropagation()
+                  item.fn()
+                  setPrintDdOpen(false)
+                }}
+                style={{ display:'block', width:'100%', textAlign:'left', padding:'10px 18px', cursor:'pointer', background:'transparent', border:'none', color:'#C0C8D8', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.04)', fontFamily:'inherit' }}
+                onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.14)'}
+                onMouseLeave={e=>e.currentTarget.style.background='transparent'}
+              >
+                {item.label}
+              </button>
+            ))}
+            <div style={{ padding:'8px 18px 4px', color:'#8892A4', fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:0.5, borderTop:'1px solid rgba(255,255,255,0.06)', marginTop:4 }}>Template 2 — Modern Premium</div>
+            {[
+              { label:'Single Student (Premium)', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printChallan(filtered[0],school,2,3) } },
+              { label:'Batch Print (Premium)', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printBatchChallans(filtered,school,2) } },
+            ].map(item=>(
+              <button
+                key={item.label}
+                type="button"
+                onClick={(e)=>{
+                  e.stopPropagation()
+                  item.fn()
+                  setPrintDdOpen(false)
+                }}
+                style={{ display:'block', width:'100%', textAlign:'left', padding:'10px 18px', cursor:'pointer', background:'transparent', border:'none', color:'#C0C8D8', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.04)', fontFamily:'inherit' }}
+                onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.14)'}
+                onMouseLeave={e=>e.currentTarget.style.background='transparent'}
+              >
+                {item.label}
+              </button>
+            ))}
+            <div style={{ padding:'8px 18px 4px', color:'#8892A4', fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:0.5, borderTop:'1px solid rgba(255,255,255,0.06)', marginTop:4 }}>Template 3 — Simple Compact</div>
+            {[
+              { label:'Single Student (Simple)', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printChallan(filtered[0],school,3,3) } },
+              { label:'Batch Print (Simple)', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printBatchChallans(filtered,school,3) } },
+              { label:'Compact 3-in-1 Batch', fn:()=>{ if(!filtered.length){ alert('No challans in current view.'); return } printCompactBatch(filtered,school) } },
+            ].map(item=>(
+              <button
+                key={item.label}
+                type="button"
+                onClick={(e)=>{
+                  e.stopPropagation()
+                  item.fn()
+                  setPrintDdOpen(false)
+                }}
+                style={{ display:'block', width:'100%', textAlign:'left', padding:'10px 18px', cursor:'pointer', background:'transparent', border:'none', color:'#C0C8D8', fontSize:13, borderBottom:'1px solid rgba(255,255,255,0.04)', fontFamily:'inherit' }}
+                onMouseEnter={e=>e.currentTarget.style.background='rgba(200,153,26,0.14)'}
+                onMouseLeave={e=>e.currentTarget.style.background='transparent'}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>,
+          document.body
+        )}
+      </div>
+    </div>
+  </div>
 
  {/* Filters */}
- <div className="super-module-card" style={{ ...card, display:'grid', gridTemplateColumns:'1.5fr 1fr 1fr', gap:16, alignItems:'end', position:'relative', zIndex:40 }}>
+ <div className="super-module-card" style={{ ...card, display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(170px, 1fr))', gap:14, alignItems:'end', position:'relative', zIndex:40 }}>
  <div>
  <label style={labelStyle}>Search</label>
  <input style={input} value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search voucher, student or GR"/>
+ </div>
+ <div>
+ <label style={labelStyle}>Billing Month</label>
+ <select style={select} value={selectedMonth} onChange={e=>setSelectedMonth(e.target.value)}>
+ {MONTH_OPTIONS.map(v=><option key={v} value={v}>{v}</option>)}
+ </select>
+ </div>
+ <div>
+ <label style={labelStyle}>Year</label>
+ <select style={select} value={selectedYear} onChange={e=>setSelectedYear(e.target.value)}>
+ {YEAR_OPTIONS.map(v=><option key={v} value={v}>{v}</option>)}
+ </select>
  </div>
  <div>
  <label style={labelStyle}>Class</label>
@@ -791,7 +910,7 @@ export default function ViewChallans() {
  return (
  <div className="super-module-card" style={{ ...card, overflowX:'auto' }}>
  <div style={{ color:'#C8991A', fontWeight:800, fontSize:15, marginBottom:16 }}> Challans by Class</div>
- <table style={{ width:'100%', borderCollapse:'collapse' }}>
+ <table className="challans-table" style={{ width:'100%', borderCollapse:'collapse' }}>
  <thead>
  <tr style={{ borderBottom:'1px solid rgba(200,153,26,0.2)' }}>
  {['Class','Total Challans','Paid','Unpaid','Total Amount','Paid Amount','Pending'].map(h=>(
@@ -822,7 +941,7 @@ export default function ViewChallans() {
  {loading ? (
  <div style={{ padding:40, textAlign:'center', color:C.muted }}>Loading challans…</div>
  ) : (
- <table style={{ width:'100%', borderCollapse:'collapse' }}>
+ <table className="challans-table" style={{ width:'100%', borderCollapse:'collapse' }}>
  <thead>
  <tr style={{ borderBottom:`1px solid ${C.border}` }}>
  {['GR. No','Student / Father','Family Code','Class/Sec','Challan / Month','Monthly Fee','Total','Pay Fee','Status','Action'].map(h=>(
@@ -888,9 +1007,17 @@ export default function ViewChallans() {
  <td style={{ padding:'10px 12px' }}>
  {item.status === 'paid'
  ? <div style={{ color:C.green, fontWeight:700, fontSize:12 }}> {money(item.paid_amount || netPayable(item))}</div>
- : <button style={{ ...payActionButton, ...tableActionButton, minWidth:80 }} onClick={()=>openPayment(item)}>
- {item.status === 'partial' ? 'Partially Pay' : 'Pay Now'}
- </button>
+ : <button
+     type="button"
+     style={{ ...payActionButton, ...tableActionButton, minWidth:80, cursor:'pointer', touchAction:'manipulation', WebkitTapHighlightColor:'transparent' }}
+     onClick={(e) => {
+       e.preventDefault()
+       e.stopPropagation()
+       openPayment(item)
+     }}
+   >
+     {item.status === 'partial' ? 'Partially Pay' : 'Pay Now'}
+   </button>
  }
  </td>
  <td style={{ padding:'10px 12px' }}>
@@ -951,12 +1078,12 @@ export default function ViewChallans() {
  document.body
  )}
 
- {editChallan && (
+ {editChallan && typeof document !== 'undefined' && createPortal(
  <div style={{
- position:'fixed', inset:0, zIndex:1000, background:'rgba(2,12,24,0.72)', backdropFilter:'blur(10px)',
- display:'flex', alignItems:'center', justifyContent:'center', padding:20,
+ position:'fixed', inset:0, zIndex:10000, background:'rgba(2,12,24,0.78)', backdropFilter:'blur(10px)',
+ display:'flex', alignItems:'center', justifyContent:'center', padding:16,
  }}>
- <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.55)' }}>
+ <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.65)' }}>
  <div style={{ display:'flex', justifyContent:'space-between', gap:16, alignItems:'flex-start', marginBottom:18 }}>
  <div>
  <div style={{ color:C.gold, fontWeight:900, fontSize:22 }}>Edit Challan & Monthly Fee</div>
@@ -1054,15 +1181,16 @@ export default function ViewChallans() {
  </button>
  </div>
  </div>
- </div>
+ </div>,
+ document.body
  )}
 
- {paymentChallan && (
+ {paymentChallan && typeof document !== 'undefined' && createPortal(
  <div style={{
- position:'fixed', inset:0, zIndex:1000, background:'rgba(2,12,24,0.72)', backdropFilter:'blur(10px)',
- display:'flex', alignItems:'center', justifyContent:'center', padding:20,
+ position:'fixed', inset:0, zIndex:10000, background:'rgba(2,12,24,0.78)', backdropFilter:'blur(10px)',
+ display:'flex', alignItems:'center', justifyContent:'center', padding:16,
  }}>
- <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.55)' }}>
+ <div className="super-module-card" style={{ ...card, width:'min(760px, 100%)', maxHeight:'92vh', overflowY:'auto', boxShadow:'0 30px 90px rgba(0,0,0,0.65)' }}>
  <div style={{ display:'flex', justifyContent:'space-between', gap:16, alignItems:'flex-start', marginBottom:18 }}>
  <div>
  <div style={{ color:C.gold, fontWeight:900, fontSize:22 }}>Receive Fee Payment</div>
@@ -1085,7 +1213,7 @@ export default function ViewChallans() {
  ))}
  </div>
 
- <div style={{ display:'grid', gridTemplateColumns:'repeat(4, minmax(0, 1fr))', gap:10, marginBottom:18 }}>
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(130px, 1fr))', gap:10, marginBottom:18 }}>
  <div style={{ background:'rgba(15,23,42,0.62)', border:`1px solid ${C.border}`, borderRadius:12, padding:12 }}>
  <div style={{ color:C.muted, fontSize:11, fontWeight:800 }}>Gross Fee</div>
  <div style={{ color:C.silver, fontWeight:900, marginTop:6 }}>Rs. {money(paymentChallan.amount)}</div>
@@ -1169,8 +1297,9 @@ export default function ViewChallans() {
  </button>
  </div>
  </div>
- </div>
+ </div>,
+ document.body
  )}
  </div>
- )
+)
 }

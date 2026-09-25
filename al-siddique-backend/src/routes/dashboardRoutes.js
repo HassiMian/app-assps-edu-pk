@@ -3,235 +3,156 @@ const router  = express.Router()
 const { query } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 const safe = async (fn) => { try { return await fn() } catch (err) { console.error('Dashboard query failed:', err.message); return null } }
 
 // ── GET /api/dashboard/stats  (SaaS)
-// ── GET /api/admin/dashboard  (Super App — same handler via apiRouter alias)
 router.get(['/', '/stats'], protect, async (req, res) => {
-  const today      = new Date().toISOString().split('T')[0]
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Karachi',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(new Date())
   const year       = new Date().getFullYear()
-  const month      = (new Date().getMonth() + 1).toString().padStart(2, '0')
-  const monthLabel = `${year}-${month}`
+  const monthName  = new Date().toLocaleString('en-US', { month: 'long' })
+  const monthNum   = (new Date().getMonth() + 1).toString().padStart(2, '0')
+  const monthLabel = `${year}-${monthNum}`
   const schoolId   = currentSchoolId(req)
   const isSuperAdmin = req.user?.role === 'super_admin'
-  const studentScope = isSuperAdmin ? [] : [schoolId]
-  const studentScopeAt2 = isSuperAdmin ? [] : [today, schoolId]
-  const feeScope = isSuperAdmin ? [] : [schoolId]
-  const feeScopeMonth = isSuperAdmin ? [monthLabel] : [schoolId, monthLabel]
 
-  const studentTenant = isSuperAdmin ? '' : ' AND school_id = $1'
-  const studentParams = isSuperAdmin ? [] : [schoolId]
-
-  const [studentsR, todayAttR, todayAttDistinctR, feeStatusR, feeMonthR, feePendR,
-         employeesR, booksR, admissionsR, weeklyR,
-         admTodayR, admMonthR, admYearR, wdMonthR, wdYearR] = await Promise.all([
-    safe(() => query(`
-      SELECT COUNT(*)
-      FROM students
-      WHERE is_active = true${isSuperAdmin ? '' : ' AND school_id = $1'}`, studentScope)),
-    safe(() => query(`
+  const consolidatedSql = `
+    WITH stu AS (
       SELECT
-        COUNT(*)                                                          AS total,
-        SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END)              AS present,
-        SUM(CASE WHEN status = 'absent' THEN 1 ELSE 0 END)               AS absent,
-        SUM(CASE WHEN status = 'late' THEN 1 ELSE 0 END)                 AS late,
-        SUM(CASE WHEN status = 'leave' THEN 1 ELSE 0 END)                AS leave
-      FROM attendance a
-      JOIN students s ON s.id = a.student_id
-      WHERE a.date = $1${isSuperAdmin ? '' : ' AND s.school_id = $2'}`,
-      studentScopeAt2)),
-    safe(() => query(`
+        COUNT(*) FILTER (WHERE is_active = true)::int AS total_students,
+        COUNT(*) FILTER (WHERE created_at::date = CURRENT_DATE)::int AS adm_today,
+        COUNT(*) FILTER (WHERE created_at >= date_trunc('month', CURRENT_DATE))::int AS adm_month,
+        COUNT(*) FILTER (WHERE created_at >= date_trunc('year', CURRENT_DATE))::int AS adm_year,
+        COUNT(*) FILTER (WHERE is_active = false AND updated_at >= date_trunc('month', CURRENT_DATE))::int AS wd_month,
+        COUNT(*) FILTER (WHERE is_active = false AND updated_at >= date_trunc('year', CURRENT_DATE))::int AS wd_year
+      FROM students
+      WHERE 1=1 AND ($1::int IS NULL OR school_id = $1)
+    ),
+    att AS (
       SELECT
         COUNT(DISTINCT CASE WHEN a.status = 'present' THEN a.student_id END)::int AS present,
-        COUNT(DISTINCT CASE WHEN a.status = 'absent' THEN a.student_id END)::int  AS absent,
-        COUNT(DISTINCT CASE WHEN a.status = 'late' THEN a.student_id END)::int    AS late,
-        COUNT(DISTINCT CASE WHEN a.status = 'leave' THEN a.student_id END)::int   AS leave,
+        COUNT(DISTINCT CASE WHEN a.status = 'absent' THEN a.student_id END)::int AS absent,
+        COUNT(DISTINCT CASE WHEN a.status = 'late' THEN a.student_id END)::int AS late,
+        COUNT(DISTINCT CASE WHEN a.status = 'leave' THEN a.student_id END)::int AS leave,
         COUNT(DISTINCT a.student_id)::int AS marked
       FROM attendance a
       JOIN students s ON s.id = a.student_id AND s.is_active = true
-      WHERE a.date = $1${isSuperAdmin ? '' : ' AND s.school_id = $2'}`,
-      studentScopeAt2)),
-    safe(() => query(`
+      WHERE a.date::text = $2 AND ($1::int IS NULL OR s.school_id = $1)
+    ),
+    fee AS (
       SELECT
-        COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END), 0) AS collected,
-        COALESCE(SUM(CASE WHEN status IN ('unpaid','pending') THEN amount ELSE 0 END), 0) AS pending,
-        COALESCE(SUM(CASE WHEN status = 'overdue' THEN amount ELSE 0 END), 0) AS overdue
-      FROM fee_challans${isSuperAdmin ? '' : ' WHERE school_id = $1'}`, feeScope)),
-    safe(() => query(`
-      SELECT COALESCE(SUM(amount), 0) AS total
+        COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END), 0)::float AS collected,
+        COALESCE(SUM(CASE WHEN status IN ('unpaid','pending') THEN amount ELSE 0 END), 0)::float AS pending,
+        COALESCE(SUM(CASE WHEN status = 'overdue' THEN amount ELSE 0 END), 0)::float AS overdue,
+        COALESCE(SUM(CASE WHEN status = 'paid' AND (month = $3 OR month = $4) THEN amount ELSE 0 END), 0)::float AS collected_month,
+        COALESCE(SUM(CASE WHEN status IN ('unpaid','pending') THEN amount ELSE 0 END), 0)::float AS pending_total,
+        COUNT(CASE WHEN status IN ('unpaid','pending') THEN 1 END)::int AS pending_count
       FROM fee_challans
-      WHERE status = 'paid'${isSuperAdmin ? ' AND month = $1' : ' AND school_id = $1 AND month = $2'}`,
-      feeScopeMonth)),
-    safe(() => query(`
-      SELECT COALESCE(SUM(amount), 0) AS total, COUNT(*) AS cnt
-      FROM fee_challans
-      WHERE status IN ('unpaid','pending')${isSuperAdmin ? '' : ' AND school_id = $1'}`, feeScope)),
-    safe(() => query(`
-      SELECT COUNT(*)
+      WHERE 1=1 AND ($1::int IS NULL OR school_id = $1)
+    ),
+    emp AS (
+      SELECT COUNT(*)::int AS emp_count
       FROM employees
-      WHERE is_active = true${isSuperAdmin ? '' : ' AND school_id = $1'}`, studentScope)),
-    safe(() => query(`SELECT 0 AS count`)), // library table does not exist yet
-    safe(() => query(`
-      SELECT COUNT(*) FROM admissions
-      WHERE created_at >= date_trunc('month', CURRENT_DATE)`)),
-    safe(() => query(`
-      WITH dates AS (
-        SELECT generate_series(
-          CURRENT_DATE - INTERVAL '6 days', CURRENT_DATE, '1 day'::interval
-        )::date AS d
-      )
-      SELECT
-        d.d::text                                                                      AS date,
-        to_char(d.d, 'Dy')                                                             AS day,
-        COALESCE(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END), 0)::int       AS present,
-        COALESCE(COUNT(DISTINCT a.student_id), 0)::int                                 AS total,
-        CASE WHEN COUNT(DISTINCT a.student_id) > 0
-          THEN ROUND(SUM(CASE WHEN a.status='present' THEN 1 ELSE 0 END)*100.0
-               / NULLIF(COUNT(DISTINCT a.student_id),0))::int
-          ELSE 0 END                                                                   AS percent
-      FROM dates d
-      LEFT JOIN (
-        SELECT a.*
-        FROM attendance a
-        JOIN students s ON s.id = a.student_id
-        ${isSuperAdmin ? '' : 'WHERE s.school_id = $1'}
-      ) a ON a.date = d.d
-      GROUP BY d.d ORDER BY d.d`, isSuperAdmin ? [] : [schoolId])),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE created_at::date = CURRENT_DATE${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE created_at >= date_trunc('month', CURRENT_DATE)${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE created_at >= date_trunc('year', CURRENT_DATE)${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE is_active = false
-        AND updated_at >= date_trunc('month', CURRENT_DATE)${studentTenant}`, studentParams)),
-    safe(() => query(`
-      SELECT COUNT(*)::int AS c FROM students
-      WHERE is_active = false
-        AND updated_at >= date_trunc('year', CURRENT_DATE)${studentTenant}`, studentParams)),
+      WHERE is_active = true AND ($1::int IS NULL OR school_id = $1)
+    ),
+    adm AS (
+      SELECT COUNT(*)::int AS adm_count
+      FROM admissions
+      WHERE created_at >= date_trunc('month', CURRENT_DATE)
+    )
+    SELECT
+      stu.*,
+      COALESCE(att.present, 0)::int AS att_present,
+      COALESCE(att.absent, 0)::int AS att_absent,
+      COALESCE(att.late, 0)::int AS att_late,
+      COALESCE(att.leave, 0)::int AS att_leave,
+      COALESCE(att.marked, 0)::int AS att_marked,
+      COALESCE(fee.collected, 0)::float AS fee_collected,
+      COALESCE(fee.pending, 0)::float AS fee_pending,
+      COALESCE(fee.overdue, 0)::float AS fee_overdue,
+      COALESCE(fee.collected_month, 0)::float AS fee_collected_month,
+      COALESCE(fee.pending_total, 0)::float AS fee_pending_total,
+      COALESCE(fee.pending_count, 0)::int AS fee_pending_count,
+      emp.emp_count,
+      COALESCE(adm.adm_count, 0)::int AS adm_count
+    FROM stu
+    CROSS JOIN att
+    CROSS JOIN fee
+    CROSS JOIN emp
+    CROSS JOIN adm;
+  `
+
+  const weeklySql = `
+    WITH dates AS (
+      SELECT generate_series(
+        CURRENT_DATE - INTERVAL '6 days', CURRENT_DATE, '1 day'::interval
+      )::date AS d
+    )
+    SELECT
+      d.d::text AS date,
+      to_char(d.d, 'Dy') AS day,
+      COALESCE(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END), 0)::int AS present,
+      COALESCE(COUNT(DISTINCT a.student_id), 0)::int AS total,
+      CASE WHEN COUNT(DISTINCT a.student_id) > 0
+        THEN ROUND(SUM(CASE WHEN a.status='present' THEN 1 ELSE 0 END)*100.0
+             / NULLIF(COUNT(DISTINCT a.student_id),0))::int
+        ELSE 0 END AS percent
+    FROM dates d
+    LEFT JOIN (
+      SELECT a.*
+      FROM attendance a
+      JOIN students s ON s.id = a.student_id
+      WHERE ($1::int IS NULL OR s.school_id = $1)
+    ) a ON a.date = d.d
+    GROUP BY d.d ORDER BY d.d
+  `
+
+  const [overviewRes, weeklyRes] = await Promise.all([
+    safe(() => query(consolidatedSql, [schoolId, today, monthName, monthLabel])),
+    safe(() => query(weeklySql, [schoolId])),
   ])
 
-  const dashboardDbOffline = [studentsR, todayAttR, feeStatusR, feeMonthR, feePendR, employeesR, weeklyR].some(r => r === null)
-  if (dashboardDbOffline) {
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Dashboard is temporarily offline.' })
-    }
-    console.warn('Dashboard offline fallback active. Returning high-fidelity mock dashboard data.')
-    const mockWeeklyAttendance = [
-      { date: today, day: 'Mon', present: 145, total: 150, percent: 97 },
-      { date: today, day: 'Tue', present: 142, total: 150, percent: 95 },
-      { date: today, day: 'Wed', present: 148, total: 150, percent: 99 },
-      { date: today, day: 'Thu', present: 140, total: 150, percent: 93 },
-      { date: today, day: 'Fri', present: 146, total: 150, percent: 97 },
-      { date: today, day: 'Sat', present: 0, total: 0, percent: 0 },
-      { date: today, day: 'Sun', present: 0, total: 0, percent: 0 },
-    ]
-    const superAppData = {
-      stats: {
-        totalStudents:  150,
-        totalTeachers:  12,
-        totalParents:   95,
-        monthlyRevenue: 350000,
-        systemHealth:   99.9,
-        attendanceRate: 97,
-      },
-      revenueData: [
-        { month: 'Jan', revenue: 320000 },
-        { month: 'Feb', revenue: 340000 },
-        { month: 'Mar', revenue: 310000 },
-        { month: 'Apr', revenue: 350000 },
-        { month: 'May', revenue: 360000 },
-      ],
-      gradeDistribution: [
-        { grade: 'A+', count: 25 },
-        { grade: 'A', count: 45 },
-        { grade: 'B', count: 50 },
-        { grade: 'C', count: 20 },
-        { grade: 'D', count: 10 },
-      ],
-      performanceTrend: [
-        { exam: 'Mid Term', average: 78 },
-        { exam: 'Final Term', average: 82 },
-      ],
-      departmentStats: [
-        { department: 'Science', teachers: 5 },
-        { department: 'Arts', teachers: 3 },
-        { department: 'Commerce', teachers: 4 },
-      ],
-      recentActivities: [
-        { id: 1, message: 'New student Muhammad Ali enrolled in Class 10', time: '10 mins ago' },
-        { id: 2, message: 'Fee payment of Rs. 2,500 received for Zaid Ahmed', time: '1 hour ago' },
-        { id: 3, message: 'Attendance marked: 97% students present today', time: '2 hours ago' },
-      ],
-      quickModules: [
-        { name: 'Teachers', count: 12, path: '/admin/employees', color: 'from-purple-500 to-indigo-500', glow: 'shadow-purple-500/25' },
-        { name: 'Students', count: 150,  path: '/admin/students', color: 'from-blue-500 to-cyan-500',    glow: 'shadow-blue-500/25' },
-      ],
-    }
-
-    return res.json({
-      success: true,
-      data: superAppData,
-      total_students:      150,
-      today_total:         150,
-      today_present:       145,
-      today_absent:        3,
-      today_late:          2,
-      today_leave:         0,
-      today_pct:           97,
-      fee_collected_month: 350000,
-      fee_pending_total:   45000,
-      fee_pending_count:   18,
-      total_employees:     12,
-      books_issued:        34,
-      admissions_this_month: 12,
-      weekly_attendance:   mockWeeklyAttendance,
-      fee_status: {
-        collected: 350000,
-        pending:   45000,
-        overdue:   15000,
-      },
-      attendance_stats: {
-        students: { unmarked: 5, present: 145, absent: 3, late: 2, leave: 0 },
-        staff: { present: 12, absent: 0, leave: 0 },
-      },
-      admission_withdrawal: {
-        admission_today: 2,
-        admission_month: 12,
-        admission_year: 45,
-        withdrawal_month: 1,
-        withdrawal_year: 3,
-      },
-    })
+  if (!overviewRes || !weeklyRes) {
+    return res.status(503).json({ success: false, message: 'Database unavailable. Dashboard is temporarily offline.' })
   }
 
-  const students   = parseInt(studentsR?.rows?.[0]?.count   || 0)
-  const att        = todayAttR?.rows?.[0]  || { total: 0, present: 0, absent: 0, late: 0, leave: 0 }
-  const attDist    = todayAttDistinctR?.rows?.[0] || { present: 0, absent: 0, late: 0, leave: 0, marked: 0 }
-  const todayTotal   = parseInt(att.total   || 0)
-  const todayPresent = parseInt(attDist.present ?? att.present ?? 0)
-  const todayAbsent  = parseInt(attDist.absent ?? att.absent ?? 0)
-  const todayLate    = parseInt(attDist.late ?? att.late ?? 0)
-  const todayLeave   = parseInt(attDist.leave ?? att.leave ?? 0)
-  const todayMarked  = parseInt(attDist.marked || 0)
+  const o = overviewRes.rows[0] || {}
+  const students = o.total_students || 0
+  const todayPresent = o.att_present || 0
+  const todayAbsent  = o.att_absent  || 0
+  const todayLate    = o.att_late    || 0
+  const todayLeave   = o.att_leave   || 0
+  const todayTotal   = todayPresent + todayAbsent + todayLate + todayLeave
+
+  const todayMarked  = o.att_marked || 0
   const todayUnmarked = Math.max(0, students - todayMarked)
   const todayPct     = students > 0 ? Math.round((todayPresent / students) * 100) : (todayTotal > 0 ? Math.round((todayPresent / todayTotal) * 100) : 0)
 
-  const fs = feeStatusR?.rows?.[0] || { collected: 0, pending: 0, overdue: 0 }
-  const feeCollectedMonth  = parseFloat(feeMonthR?.rows?.[0]?.total || 0)
-  const feePendingTotal    = parseFloat(feePendR?.rows?.[0]?.total  || 0)
-  const feePendingCount    = parseInt(feePendR?.rows?.[0]?.cnt      || 0)
-  const employees  = parseInt(employeesR?.rows?.[0]?.count  || 0)
-  const books      = parseInt(booksR?.rows?.[0]?.count      || 0)
-  const admissions = parseInt(admissionsR?.rows?.[0]?.count || 0)
+  const fsData = {
+    collected: o.fee_collected || 0,
+    pending:   o.fee_pending   || 0,
+    overdue:   o.fee_overdue   || 0,
+  }
+  const feeCollectedMonth  = parseFloat(o.fee_collected_month || 0)
+  const feePendingTotal    = parseFloat(o.fee_pending_total || 0)
+  const feePendingCount    = parseInt(o.fee_pending_count || 0)
+  const employees  = parseInt(o.emp_count || 0)
+  const books      = 0
+  const admissions = parseInt(o.adm_count || 0)
+
+  const weeklyR = weeklyRes
+  const admTodayR = { rows: [{ c: o.adm_today || 0 }] }
+  const admMonthR = { rows: [{ c: o.adm_month || 0 }] }
+  const admYearR  = { rows: [{ c: o.adm_year  || 0 }] }
+  const wdMonthR  = { rows: [{ c: o.wd_month  || 0 }] }
+  const wdYearR   = { rows: [{ c: o.wd_year   || 0 }] }
 
   const weekly = (weeklyR?.rows || []).map(r => ({
     date:    r.date,
@@ -241,13 +162,12 @@ router.get(['/', '/stats'], protect, async (req, res) => {
     percent: parseInt(r.percent || 0),
   }))
 
-  // Super App expects a nested data shape
   const superAppData = {
     stats: {
       totalStudents:  students,
       totalTeachers:  employees,
       totalParents:   0,
-      monthlyRevenue: Math.round(parseFloat(fs.collected || 0)),
+      monthlyRevenue: Math.round(parseFloat(fsData.collected || 0)),
       systemHealth:   99.9,
       attendanceRate: todayPct,
     },
@@ -265,7 +185,6 @@ router.get(['/', '/stats'], protect, async (req, res) => {
   res.json({
     success: true,
     data: superAppData,
-    // Flat fields for SaaS Dashboard
     total_students:      students,
     today_total:         todayTotal,
     today_present:       todayPresent,
@@ -281,9 +200,9 @@ router.get(['/', '/stats'], protect, async (req, res) => {
     admissions_this_month: admissions,
     weekly_attendance:   weekly,
     fee_status: {
-      collected: parseFloat(fs.collected || 0),
-      pending:   parseFloat(fs.pending   || 0),
-      overdue:   parseFloat(fs.overdue   || 0),
+      collected: parseFloat(fsData.collected || 0),
+      pending:   parseFloat(fsData.pending   || 0),
+      overdue:   parseFloat(fsData.overdue   || 0),
     },
     attendance_stats: {
       students: {
@@ -330,24 +249,15 @@ router.get('/class-stats', protect, async (req, res) => {
       COALESCE(SUM(CASE WHEN f.status IN('unpaid','pending') THEN f.amount ELSE 0 END),0)::int
                                                                            AS fee_pending
     FROM students s
-    LEFT JOIN attendance a ON a.student_id = s.id AND a.school_id = s.school_id
-    LEFT JOIN fee_challans f ON f.student_id = s.id AND f.school_id = s.school_id
+    LEFT JOIN attendance a ON a.student_id = s.id
+    LEFT JOIN fee_challans f ON f.student_id = s.id
     WHERE s.is_active = true${isSuperAdmin ? '' : ' AND s.school_id = $1'}
     GROUP BY s.class
     ORDER BY s.class
   `, isSuperAdmin ? [] : [schoolId]))
 
   if (result === null) {
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Class stats cannot be loaded.' })
-    }
-    console.warn('Dashboard class-stats offline fallback active. Returning high-fidelity mock class stats.')
-    const mockClassStats = [
-      { class_id: '9', class_name: 'Class 9', total: 45, present_today: 43, attendance_percent: 95, fee_collected: 110000, fee_pending: 12000 },
-      { class_id: '10', class_name: 'Class 10', total: 55, present_today: 54, attendance_percent: 98, fee_collected: 135000, fee_pending: 15000 },
-      { class_id: '8', class_name: 'Class 8', total: 50, present_today: 48, attendance_percent: 96, fee_collected: 105000, fee_pending: 18000 },
-    ]
-    return res.json(mockClassStats)
+    return res.status(503).json({ success: false, message: 'Database unavailable. Class stats cannot be loaded.' })
   }
 
   res.json(result?.rows || [])
@@ -364,7 +274,7 @@ router.get('/activity', protect, async (req, res) => {
       ORDER BY created_at DESC LIMIT 3`, isSuperAdmin ? [] : [schoolId])),
     safe(() => query(`
       SELECT s.name, f.amount, f.status, f.updated_at
-      FROM fee_challans f JOIN students s ON s.id = f.student_id AND s.school_id = f.school_id
+      FROM fee_challans f JOIN students s ON s.id = f.student_id
       WHERE f.status = 'paid'${isSuperAdmin ? '' : ' AND s.school_id = $1'}
       ORDER BY f.updated_at DESC LIMIT 3`, isSuperAdmin ? [] : [schoolId])),
     safe(() => query(`
@@ -375,16 +285,7 @@ router.get('/activity', protect, async (req, res) => {
   ])
 
   if ([studentsR, feesR, attR].some(r => r === null)) {
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Activity feed cannot be loaded.' })
-    }
-    console.warn('Dashboard activity offline fallback active. Returning high-fidelity mock activities.')
-    const mockActivities = [
-      { icon: '🎓', message: 'New student enrolled: Muhammad Ali', time: new Date(Date.now() - 10 * 60 * 1000).toISOString() },
-      { icon: '💰', message: 'Fee paid: Zaid Ahmed — Rs. 2,500', time: new Date(Date.now() - 60 * 60 * 1000).toISOString() },
-      { icon: '📋', message: '5 students marked absent today', time: new Date().toISOString() },
-    ]
-    return res.json(mockActivities)
+    return res.status(503).json({ success: false, message: 'Database unavailable. Activity feed cannot be loaded.' })
   }
 
   const activity = []

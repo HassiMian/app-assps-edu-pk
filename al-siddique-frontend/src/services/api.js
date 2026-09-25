@@ -2,8 +2,24 @@ import axios from 'axios'
 import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
 const api = axios.create({
- baseURL: '',
+  baseURL: '',
+  timeout: 20000,
 })
+
+// Lightweight in-memory cache for static / read-mostly endpoints
+const CACHE_CONFIG = {
+  '/api/settings/public': 60000,
+  '/api/academic/setup': 60000,
+}
+const requestCache = new Map()
+
+export function clearApiCache(endpoint) {
+  if (endpoint) {
+    requestCache.delete(endpoint)
+  } else {
+    requestCache.clear()
+  }
+}
 
 export function resolveAssetUrl(value) {
  try {
@@ -84,11 +100,31 @@ export function clearAuthSession() {
  } catch {}
 }
 
-// JWT interceptor — har request mein token lagao
+// JWT interceptor — har request mein token lagao + cache check
 api.interceptors.request.use((config) => {
- const token = localStorage.getItem('al_siddique_token')
- if (token) config.headers.Authorization = `Bearer ${token}`
- return config
+  const token = localStorage.getItem('al_siddique_token')
+  if (token) config.headers.Authorization = `Bearer ${token}`
+
+  const method = (config.method || 'get').toLowerCase()
+  if (method === 'get' && !config.skipCache) {
+    const urlKey = config.url?.split('?')[0]
+    const ttl = CACHE_CONFIG[urlKey]
+    if (ttl) {
+      const cached = requestCache.get(config.url)
+      if (cached && Date.now() - cached.timestamp < ttl) {
+        config.adapter = () => Promise.resolve({
+          data: cached.data,
+          status: 200,
+          statusText: 'OK (Cached)',
+          headers: cached.headers || {},
+          config,
+          request: {}
+        })
+      }
+    }
+  }
+
+  return config
 })
 
 function demoDateOffset(days) {
@@ -344,19 +380,59 @@ function normalizeResultPayload(config) {
  }
 }
 
-// Auto-logout on 401 & Demo Fallback
+// Auto-logout on 401, Cache Population, Retry on Network Flap, & Demo Fallback
 api.interceptors.response.use(
- (res) => res,
- (err) => {
- const url = err.config?.url || '';
- const method = (err.config?.method || 'get').toLowerCase();
+  (res) => {
+    const method = (res.config?.method || 'get').toLowerCase()
+    if (method === 'get' && !res.config?.skipCache && res.status === 200) {
+      const urlKey = res.config?.url?.split('?')[0]
+      if (CACHE_CONFIG[urlKey]) {
+        requestCache.set(res.config.url, {
+          data: res.data,
+          headers: res.headers,
+          timestamp: Date.now()
+        })
+      }
+    }
+    return res
+  },
+  async (err) => {
+    const config = err.config || {}
+    const url = config.url || ''
+    const method = (config.method || 'get').toLowerCase()
 
- if (err.response?.status === 401) {
- localStorage.removeItem('al_siddique_token');
- localStorage.removeItem('al_siddique_user');
- window.location.href = '/login';
- return Promise.reject(err);
- }
+    if (err.response?.status === 401) {
+      localStorage.removeItem('al_siddique_token')
+      localStorage.removeItem('al_siddique_user')
+      window.location.href = '/login'
+      return Promise.reject(err)
+    }
+
+    // Exponential backoff retry with randomized bounded jitter for GET requests only
+    const status = err.response?.status
+    const isNetworkOrTimeout = !err.response || err.code === 'ECONNABORTED' || status === 408 || (status >= 502 && status <= 504)
+    
+    // 429 Too Many Requests: do not blindly retry unless a safe, bounded Retry-After is explicitly specified (<= 5s)
+    let retryAfterDelay = null
+    if (status === 429) {
+      const retryAfterHeader = err.response?.headers?.['retry-after']
+      if (retryAfterHeader) {
+        const parsed = parseInt(retryAfterHeader, 10)
+        if (!isNaN(parsed) && parsed > 0 && parsed <= 5) {
+          retryAfterDelay = parsed * 1000
+        }
+      }
+    }
+
+    const canRetry = isNetworkOrTimeout || retryAfterDelay !== null
+    if (method === 'get' && canRetry && (config._retryCount || 0) < 2) {
+      config._retryCount = (config._retryCount || 0) + 1
+      // Base backoff (1000ms * attempt) + randomized bounded jitter (0-400ms)
+      const jitter = Math.floor(Math.random() * 400)
+      const delayMs = retryAfterDelay !== null ? (retryAfterDelay + jitter) : (config._retryCount * 1000 + jitter)
+      await new Promise(resolve => setTimeout(resolve, delayMs))
+      return api(config)
+    }
 
   const authUser = getAuthUser()
   const isRealSession = authUser && authUser.email && authUser.email !== 'demo@assps.edu.pk'
@@ -615,29 +691,6 @@ api.interceptors.response.use(
  }
  }
  return Promise.resolve({ data: payload, status: 200, statusText: 'OK', headers: {}, config: err.config });
- }
-
- // Mock Login Fallback
- if (match === '/api/auth/login' && err.config.method === 'post') {
- const { email } = JSON.parse(err.config.data);
- console.warn(` Using Mock Login for: ${email}`);
- return Promise.resolve({
- data: {
- success: true,
- token: 'mock-jwt-token',
- user: { 
- id: 1, 
- name: email.includes('admin') ? 'Siddique Admin' : 'Senior Teacher', 
- email, 
- role: email.includes('admin') ? 'admin' : 'teacher' 
- },
- message: 'Welcome to Demo Mode!'
- },
- status: 200,
- statusText: 'OK',
- headers: {},
- config: err.config
- });
  }
 
  return Promise.reject(err);
