@@ -1,55 +1,127 @@
 /**
- * Migration 003: Attendance Sequence & Write Integrity
- * Resolves verified primary key collision defect by synchronizing attendance_id_seq with MAX(id).
+ * Migration 003: Attendance Sequence & Write Integrity (Monotonic Safe)
+ *
+ * Enforces monotonic sequence integrity on attendance_id_seq:
+ * - Discovers sequence via pg_get_serial_sequence.
+ * - Inspects MAX(id) and current (last_value, is_called).
+ * - Determines if the next generated ID is already strictly greater than MAX(id).
+ * - Moves the sequence FORWARD only when behind or collision-prone.
+ * - NEVER moves the sequence backwards.
+ * - Verification is strictly read-only: NEVER calls nextval().
+ * - Safe on empty tables, concurrent-safe, idempotent.
  */
+
 const { pool } = require('../src/config/database');
 
-async function up() {
-  const client = await pool.connect();
+/**
+ * Computes next value that PostgreSQL sequence will generate given last_value and is_called.
+ * When is_called is true, nextval() will return last_value + 1.
+ * When is_called is false, nextval() will return last_value.
+ */
+function computeNextVal(lastValue, isCalled) {
+  const num = Number(lastValue);
+  return isCalled ? num + 1 : num;
+}
+
+async function up(options = {}) {
+  const dbPool = options.pool || pool;
+  const tableName = options.tableName || 'attendance';
+  const columnName = options.columnName || 'id';
+
+  const client = await dbPool.connect();
   try {
-    console.log('Running migration 003: Attendance Sequence & Write Integrity...');
+    console.log(`Running migration 003 (monotonic): ${tableName}.${columnName} sequence integrity...`);
     await client.query('BEGIN');
 
-    // 1. Discover sequence owned by attendance.id
-    const seqRes = await client.query("SELECT pg_get_serial_sequence('attendance', 'id') AS seq_name");
-    const seqName = seqRes.rows[0]?.seq_name || 'public.attendance_id_seq';
+    // 1. Discover sequence owned by table.column
+    const seqRes = await client.query(
+      "SELECT pg_get_serial_sequence($1, $2) AS seq_name",
+      [tableName, columnName]
+    );
+    let seqName = seqRes.rows[0]?.seq_name;
+    if (!seqName) {
+      seqName = `public.${tableName}_${columnName}_seq`;
+    }
 
     console.log(`Discovered sequence: ${seqName}`);
 
     // 2. Discover MAX(id)
-    const maxRes = await client.query('SELECT MAX(id) AS max_id FROM attendance');
-    const maxId = maxRes.rows[0]?.max_id;
+    const maxRes = await client.query(`SELECT MAX("${columnName}") AS max_id FROM "${tableName}"`);
+    const rawMaxId = maxRes.rows[0]?.max_id;
+    const maxId = (rawMaxId !== null && rawMaxId !== undefined) ? Number(rawMaxId) : null;
+    const threshold = (maxId !== null && maxId > 0) ? maxId : 0;
 
-    if (maxId !== null && maxId !== undefined && Number(maxId) > 0) {
-      const syncVal = Number(maxId);
-      await client.query('SELECT setval($1, $2, true)', [seqName, syncVal]);
-      console.log(`Synchronized ${seqName} to MAX(id) = ${syncVal}`);
+    // 3. Read current sequence status
+    const seqStatusRes = await client.query(`SELECT last_value, is_called FROM ${seqName}`);
+    if (seqStatusRes.rows.length === 0) {
+      throw new Error(`Sequence ${seqName} could not be read`);
+    }
+    const currentLastVal = Number(seqStatusRes.rows[0].last_value);
+    const currentIsCalled = Boolean(seqStatusRes.rows[0].is_called);
+    const currentNextVal = computeNextVal(currentLastVal, currentIsCalled);
+
+    console.log(`Current state: MAX(${columnName}) = ${maxId !== null ? maxId : 'NULL (empty table)'}, sequence last_value = ${currentLastVal}, is_called = ${currentIsCalled}, next_generated = ${currentNextVal}`);
+
+    let mutated = false;
+
+    // 4. Assess safety: next generated ID must be > threshold
+    if (maxId === null || maxId === 0) {
+      // Empty table: safe as long as next generated ID >= 1
+      if (currentNextVal < 1) {
+        console.log(`Empty table with uninitialized sequence. Setting ${seqName} to 1 (is_called = false)`);
+        await client.query('SELECT setval($1, 1, false)', [seqName]);
+        mutated = true;
+      } else {
+        console.log(`Empty table: sequence is already safe (next generated = ${currentNextVal} >= 1). No change.`);
+      }
     } else {
-      // Empty table: set to 1, is_called = false so first insert gets 1
-      await client.query('SELECT setval($1, 1, false)', [seqName]);
-      console.log(`Table empty. Initialized ${seqName} to 1 (is_called = false)`);
+      // Populated table
+      if (currentNextVal > maxId) {
+        console.log(`Sequence ${seqName} is ALREADY SAFE: next generated ID (${currentNextVal}) > MAX(${columnName}) (${maxId}). No change needed.`);
+      } else {
+        // Sequence is behind or collision-prone: advance forward only!
+        const targetVal = Math.max(currentLastVal, maxId);
+        console.log(`Advancing sequence ${seqName} forward: last_value set to ${targetVal} (is_called = true)`);
+        await client.query('SELECT setval($1, $2, true)', [seqName, targetVal]);
+        mutated = true;
+      }
     }
 
     await client.query('COMMIT');
 
-    // 3. Post-execution verification: test nextval behavior
-    const testNextVal = await pool.query(`SELECT nextval('${seqName}') AS next_val`);
-    const nextGenerated = Number(testNextVal.rows[0].next_val);
-    const currentMax = maxId ? Number(maxId) : 0;
+    // 5. Read-only verification: NO nextval() call!
+    const verifyRes = await dbPool.query(`SELECT last_value, is_called FROM ${seqName}`);
+    const verifiedLastVal = Number(verifyRes.rows[0].last_value);
+    const verifiedIsCalled = Boolean(verifyRes.rows[0].is_called);
+    const verifiedNextVal = computeNextVal(verifiedLastVal, verifiedIsCalled);
 
-    if (nextGenerated <= currentMax) {
-      throw new Error(`Integrity check failed: nextval (${nextGenerated}) is not greater than MAX(id) (${currentMax})`);
+    // Mathematical invariant proof:
+    // a) Next generated ID must be strictly greater than MAX(id) (or >= 1 if empty)
+    if (maxId !== null && maxId > 0) {
+      if (verifiedNextVal <= maxId) {
+        throw new Error(`Integrity check failed: next generated ID (${verifiedNextVal}) is not strictly greater than MAX(${columnName}) (${maxId})`);
+      }
+    } else {
+      if (verifiedNextVal < 1) {
+        throw new Error(`Integrity check failed: next generated ID (${verifiedNextVal}) is less than 1 on empty table`);
+      }
     }
-    console.log(`Verified nextval test: generated ${nextGenerated} > MAX(id) ${currentMax}`);
 
-    // Restore sequence to maxId so the test nextval does not leave a gap
-    if (maxId !== null && maxId !== undefined) {
-      await pool.query('SELECT setval($1, $2, true)', [seqName, Number(maxId)]);
-      console.log(`Restored sequence position to MAX(id) = ${maxId}`);
+    // b) Monotonicity: sequence last_value must NEVER have moved backwards
+    if (verifiedLastVal < currentLastVal && (maxId !== null && maxId > 0)) {
+      throw new Error(`Monotonicity invariant violation: sequence last_value moved backwards from ${currentLastVal} to ${verifiedLastVal}`);
     }
 
-    console.log('✅ Migration 003 completed successfully.');
-    return { success: true, sequence: seqName, maxId };
+    console.log(`✅ Migration 003 completed successfully. Verified safe next generated ID: ${verifiedNextVal} > threshold ${threshold} (mutated: ${mutated})`);
+    return {
+      success: true,
+      sequence: seqName,
+      maxId,
+      mutated,
+      previousLastVal: currentLastVal,
+      verifiedLastVal,
+      verifiedNextVal,
+    };
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {});
     console.error('❌ Migration 003 failed:', err.message);
@@ -62,20 +134,16 @@ async function up() {
 async function down() {
   /**
    * SAFE ROLLBACK POLICY:
-   * A sequence-integrity synchronization fixes a broken sequence pointer.
-   * Rolling back this migration by resetting the sequence backwards to 1 is intentionally
-   * REJECTED as UNSAFE, because it would immediately re-introduce primary key collision
-   * defects (duplicate key violates attendance_pkey) against existing production records.
-   *
-   * In PostgreSQL schema maintenance, monotonic sequence repairs are irreversible forward fixes.
-   * The down() method is intentionally a safe NO-OP that verifies sequence integrity is maintained.
+   * A monotonic sequence repair is an irreversible forward fix.
+   * Decreasing a sequence backwards in production creates immediate primary key collisions
+   * against newly created or existing records.
+   * down() is intentionally a safe NO-OP.
    */
-  console.log('Migration 003 down(): Sequence synchronization is a forward integrity repair.');
-  console.log('Rollback to an earlier colliding sequence value is UNSAFE and prohibited to prevent duplicate key errors.');
-  return { success: true, message: 'NO_OP_SAFE_INTEGRITY_PRESERVED' };
+  console.log('Migration 003 down(): Monotonic sequence synchronization is forward-only. Rollback is a safe NO-OP to preserve primary key uniqueness.');
+  return { success: true, message: 'NO_OP_MONOTONIC_INTEGRITY_PRESERVED' };
 }
 
-module.exports = { up, down };
+module.exports = { up, down, computeNextVal };
 
 if (require.main === module) {
   up()

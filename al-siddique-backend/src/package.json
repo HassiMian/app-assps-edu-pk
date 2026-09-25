@@ -11,6 +11,7 @@
     "smoke:paper-ai": "node scripts/aiSmokeTest.js",
     "test:attendance": "node tests/attendance-integrity.test.js",
     "test:dashboard": "node tests/dashboard-concurrency.test.js",
+    "test:migration-003": "node tests/migration-003-safety.test.js",
     "tenant:audit": "tsx prisma/audit-tenant-data.ts",
     "tenant:fix": "tsx prisma/audit-tenant-data.ts --fix"
   },
