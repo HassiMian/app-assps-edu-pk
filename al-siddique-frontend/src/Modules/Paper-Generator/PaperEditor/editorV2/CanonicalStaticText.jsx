@@ -53,11 +53,8 @@ function renderTextWithMarks(node, keyPrefix) {
 function renderBlock(block, index) {
   const key = `block-${index}`
   const attrs = block.attrs || {}
-  const props = {
-    key,
-    dir: attrs.dir || undefined,
-    style: attrs.textAlign ? { textAlign: attrs.textAlign } : undefined,
-  }
+  const dir = attrs.dir || undefined
+  const style = attrs.textAlign ? { textAlign: attrs.textAlign } : undefined
 
   const children = Array.isArray(block.content) && block.content.length > 0
     ? block.content.map((child, cIdx) => {
@@ -70,11 +67,11 @@ function renderBlock(block, index) {
 
   if (block.type === 'heading') {
     const Tag = `h${[1, 2, 3, 4].includes(attrs.level) ? attrs.level : 2}`
-    return <Tag {...props}>{children || '\u00A0'}</Tag>
+    return <Tag key={key} dir={dir} style={style}>{children || '\u00A0'}</Tag>
   }
 
   // Default to paragraph
-  return <p {...props}>{children || '\u00A0'}</p>
+  return <p key={key} dir={dir} style={style}>{children || '\u00A0'}</p>
 }
 
 export default function CanonicalStaticText({ value, fallbackText = '', direction = 'auto' }) {

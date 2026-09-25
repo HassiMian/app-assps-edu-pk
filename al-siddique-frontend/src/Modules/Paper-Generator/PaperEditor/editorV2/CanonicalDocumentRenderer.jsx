@@ -204,6 +204,19 @@ export default function CanonicalDocumentRenderer({
                   const baselineSec = canonicalBaseline?.sections?.find(s => s.id === section.id)
                   const baselineNode = baselineSec?.nodes?.find(n => n.id === nodeOverlay.nodeId)
 
+                  if (nodeOverlay.nodeType === 'section_banner') {
+                    return (
+                      <div
+                        key={nodeOverlay.nodeId}
+                        data-node-id={nodeOverlay.nodeId}
+                        data-node-type="section_banner"
+                        style={{ marginBottom: '6px' }}
+                      >
+                        <CanonicalStaticNode node={baselineNode} direction={nodeDir} />
+                      </div>
+                    )
+                  }
+
                   return (
                     <div
                       key={nodeOverlay.nodeId}

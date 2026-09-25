@@ -6,7 +6,25 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
   const type = node.type || node.nodeType
   const dir = direction === 'rtl' ? 'rtl' : (direction === 'ltr' ? 'ltr' : 'auto')
 
-  // 1. Unknown Preserved Node (Rule 37)
+  // 1. Section Banner Node
+  if (type === 'section_banner') {
+    return (
+      <div
+        className="canonical-section-banner"
+        dir={dir}
+        style={{
+          fontSize: '13px',
+          fontWeight: 700,
+          color: '#1e3a8a',
+          margin: '8px 0 4px',
+        }}
+      >
+        {node.bannerText || node.rawText || ''}
+      </div>
+    )
+  }
+
+  // 2. Unknown Preserved Node (Rule 37)
   if (type === 'unknown_preserved') {
     return (
       <div className="canonical-unknown-preserved-block" dir={dir}>

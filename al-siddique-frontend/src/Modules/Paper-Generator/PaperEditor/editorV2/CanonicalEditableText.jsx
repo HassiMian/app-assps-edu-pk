@@ -19,7 +19,7 @@ export default function CanonicalEditableText({
   // If in static view mode, render zero-overhead static renderer
   if (!isEditing) {
     return (
-      <span className="canonical-stem-box" dir={dir}>
+      <span className="canonical-stem-box canonical-editable-field" dir={dir}>
         <CanonicalStaticText
           value={fieldOverlay?.workingRich}
           fallbackText={fieldOverlay?.workingPlainText}
@@ -117,7 +117,7 @@ function ActiveInPlaceEditor({
 
   return (
     <span
-      className="canonical-stem-box"
+      className="canonical-stem-box canonical-editable-field"
       dir={direction}
       onClick={() => {
         if (editor && !editor.isFocused) {
