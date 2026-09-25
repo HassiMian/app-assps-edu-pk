@@ -1,6 +1,7 @@
 // normalizeOfficialPaper.js — Authority-safe 43-paper normalization engine
 import {
   parseMarksFormula,
+  resolveFormulaRoles,
   parseScalarMarks,
   parseContentItemMarks,
   countActualItems,
@@ -281,11 +282,12 @@ export function normalizeOfficialPaper(rawPaper, paperIndex) {
     const content = q.content || ''
     const storedLegacyMarksValue = q.marks ?? 0
 
-    const formula = parseMarksFormula(heading)
+    const rawFormula = parseMarksFormula(heading)
     const scalar = parseScalarMarks(heading)
     const contentItemMarks = parseContentItemMarks(content)
-    const actualItemCount = countActualItems(content)
+    const actualItemCount = countActualItems(content, heading)
     const attempt = parseAttemptRule(heading, content, actualItemCount, contentItemMarks.hasItemMarks)
+    const formula = resolveFormulaRoles(rawFormula, heading, actualItemCount, attempt.attemptCount)
     const itemCount = evaluateItemCountStatus(actualItemCount, formula, scalar)
 
     if (itemCount.itemCountStatus === 'SOURCE_COUNT_MISMATCH') {
@@ -354,9 +356,13 @@ export function normalizeOfficialPaper(rawPaper, paperIndex) {
       sectionMarksOrigin,
       explicitHeadingFormula: formula ? {
         rawFormula: formula.rawFormula,
-        itemCount: formula.operandA,
-        marksPerItem: formula.operandB,
+        operandA: formula.operandA,
+        operandB: formula.operandB,
         formulaTotal: formula.formulaTotal,
+        hasExplicitEqualsTotal: formula.hasExplicitEqualsTotal,
+        interpretedItemCount: formula.interpretedItemCount,
+        interpretedMarksPerItem: formula.interpretedMarksPerItem,
+        interpretationStatus: formula.interpretationStatus,
       } : null,
       explicitContentMarksEvidence: contentItemMarks.hasItemMarks,
       listedPotentialItemMarksTotal: contentItemMarks.listedPotentialItemMarksTotal,

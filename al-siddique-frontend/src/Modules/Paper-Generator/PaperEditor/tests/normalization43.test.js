@@ -10,6 +10,10 @@ import {
   generate43NormalizationManifest,
   sortObjectKeysRecursively,
 } from '../migration/normalizeOfficialPaper.js'
+import {
+  parseMarksFormula,
+  resolveFormulaRoles,
+} from '../migration/marksEvidence.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -249,14 +253,15 @@ test('TEST 15: Item-Count Conflict Benchmarks', () => {
   const c5islB = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-5-islamiyat-version-b')
   const c5s4 = c5islB.sections[3]
   assert.equal(c5s4.actualItemCount, 2)
+  assert.equal(c5s4.formulaExpectedItemCount, 1, 'Singular hadith wording establishes formulaExpectedItemCount = 1')
   assert.equal(c5s4.itemCountStatus, 'SOURCE_COUNT_MISMATCH')
 
-  // Benchmark 4: Class 8 Mathematics Short (10x3=30 but 12 items)
+  // Benchmark 4: Class 8 Mathematics Short (10x3=30 with 12 items; unresolved formula role)
   const c8m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-8-mathematics')
   const c8s3 = c8m.sections[2]
   assert.equal(c8s3.actualItemCount, 12)
-  assert.equal(c8s3.formulaExpectedItemCount, 10)
-  assert.equal(c8s3.itemCountStatus, 'SOURCE_COUNT_MISMATCH')
+  assert.equal(c8s3.formulaExpectedItemCount, null, 'Unresolved formula role must not fabricate expected count')
+  assert.equal(c8s3.itemCountStatus, 'UNKNOWN')
 })
 
 test('TEST 16: Exact 43-Paper Partition Verification', () => {
@@ -332,4 +337,150 @@ test('TEST 17: Content Losslessness & Lexical Integrity', () => {
       assert.equal(snapNumbers.length, rawNumbers.length, 'All numeric tokens in content must be preserved')
     }
   }
+})
+
+test('TEST 18: Formula Role Resolution Benchmarks (Class 4 Math Q2, Class 5 Math Q2 & Q4, Class 7 Math Q3)', () => {
+  // A. Class 4 Math Q2: 2×8=16 + Attempt any 8 -> itemCount 8, marksEach 2
+  const c4m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-4-mathematics')
+  const c4s2 = c4m.sections[1]
+  assert.equal(c4s2.attemptRule, 'ATTEMPT_ANY')
+  assert.equal(c4s2.attemptCount, 8)
+  assert.equal(c4s2.explicitHeadingFormula.rawFormula, '2×8=16')
+  assert.equal(c4s2.explicitHeadingFormula.operandA, 2)
+  assert.equal(c4s2.explicitHeadingFormula.operandB, 8)
+  assert.equal(c4s2.explicitHeadingFormula.formulaTotal, 16)
+  assert.equal(c4s2.explicitHeadingFormula.hasExplicitEqualsTotal, true)
+  assert.equal(c4s2.explicitHeadingFormula.interpretedItemCount, 8, 'itemCount must be 8, NEVER 2')
+  assert.equal(c4s2.explicitHeadingFormula.interpretedMarksPerItem, 2, 'marksPerItem must be 2, NEVER 8')
+  assert.equal(c4s2.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
+
+  // Class 4 Math Q3: also 2×8=16 + Attempt any 8
+  const c4s3 = c4m.sections[2]
+  assert.equal(c4s3.explicitHeadingFormula.interpretedItemCount, 8)
+  assert.equal(c4s3.explicitHeadingFormula.interpretedMarksPerItem, 2)
+  assert.equal(c4s3.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
+
+  // B. Class 5 Math Q2: 8×2=16 + Attempt any 8 -> itemCount 8, marksEach 2
+  const c5m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-5-mathematics')
+  const c5s2 = c5m.sections[1]
+  assert.equal(c5s2.attemptRule, 'ATTEMPT_ANY')
+  assert.equal(c5s2.attemptCount, 8)
+  assert.equal(c5s2.explicitHeadingFormula.rawFormula, '8×2=16')
+  assert.equal(c5s2.explicitHeadingFormula.interpretedItemCount, 8)
+  assert.equal(c5s2.explicitHeadingFormula.interpretedMarksPerItem, 2)
+  assert.equal(c5s2.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
+
+  // C. Class 5 Math Q4: 2×6=12 + Attempt any 2 -> itemCount 2, marksEach 6
+  const c5s4 = c5m.sections[3]
+  assert.equal(c5s4.attemptRule, 'ATTEMPT_ANY')
+  assert.equal(c5s4.attemptCount, 2)
+  assert.equal(c5s4.explicitHeadingFormula.rawFormula, '2×6=12')
+  assert.equal(c5s4.explicitHeadingFormula.interpretedItemCount, 2)
+  assert.equal(c5s4.explicitHeadingFormula.interpretedMarksPerItem, 6)
+  assert.equal(c5s4.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
+
+  // D. Class 7 Math Q3: 7×2=14 + Attempt any 7 -> itemCount 7, marksEach 2
+  const c7m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-7-mathematics')
+  const c7s3 = c7m.sections[2]
+  assert.equal(c7s3.attemptRule, 'ATTEMPT_ANY')
+  assert.equal(c7s3.attemptCount, 7)
+  assert.equal(c7s3.explicitHeadingFormula.rawFormula, '7×2=14')
+  assert.equal(c7s3.explicitHeadingFormula.interpretedItemCount, 7)
+  assert.equal(c7s3.explicitHeadingFormula.interpretedMarksPerItem, 2)
+  assert.equal(c7s3.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
+})
+
+test('TEST 19: Class 6 Math Long and Class 8 Computer Q3 Conservative Attempt Semantics', () => {
+  // E. Class 6 Math Long: must NOT default to ALL solely because items exist
+  const c6m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-6-mathematics')
+  const longSec = c6m.sections[4]
+  assert.equal(longSec.heading, 'Long Questions. (10×2)')
+  assert.equal(longSec.actualItemCount, 3)
+  assert.equal(longSec.attemptRule, 'UNSPECIFIED', 'Must NOT default to ALL solely because items exist')
+  assert.equal(longSec.attemptCount, null)
+  assert.notEqual(longSec.attemptRule, 'ALL')
+  assert.equal(longSec.explicitHeadingFormula.formulaTotal, 20)
+  assert.equal(longSec.explicitHeadingFormula.interpretationStatus, 'UNRESOLVED')
+  assert.equal(longSec.explicitHeadingFormula.interpretedItemCount, null)
+  assert.equal(longSec.explicitHeadingFormula.interpretedMarksPerItem, null)
+  assert.equal(longSec.formulaExpectedItemCount, null)
+  assert.equal(longSec.itemCountStatus, 'UNKNOWN')
+
+  // F. Class 8 Computer Q3: remains UNSPECIFIED
+  const c8comp = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-8-computer')
+  const q3 = c8comp.sections[2]
+  assert.equal(q3.attemptRule, 'UNSPECIFIED')
+  assert.equal(q3.listedPotentialItemMarksTotal, 30)
+  assert.equal(q3.authoritativeSectionTotal, null)
+})
+
+test('TEST 20: Spacer and Chapter/Scope Headings are NOT_APPLICABLE with 0 items', () => {
+  // G. chapter/scope headings: NOT_APPLICABLE, actualItemCount: 0
+  const spacerIds = [
+    'official-first-term-2026-class-4-english',
+    'official-first-term-2026-class-5-english',
+    'official-first-term-2026-class-6-science',
+    'official-first-term-2026-class-6-mathematics',
+    'official-first-term-2026-class-6-urdu',
+    'official-first-term-2026-class-6-english',
+    'official-first-term-2026-class-8-mathematics',
+  ]
+
+  for (const pid of spacerIds) {
+    const paper = manifest.papers.find(p => p.paperId === pid)
+    assert.ok(paper, `Paper ${pid} must exist`)
+    const sec1 = paper.sections[0]
+    assert.equal(sec1.actualItemCount, 0, `${pid} S1 actualItemCount must be 0`)
+    assert.equal(sec1.attemptRule, 'NOT_APPLICABLE', `${pid} S1 attemptRule must be NOT_APPLICABLE`)
+    assert.equal(sec1.attemptCount, null, `${pid} S1 attemptCount must be null`)
+  }
+})
+
+test('TEST 21: Formula Parser Preserves Raw Structure (operandA, operandB, hasExplicitEqualsTotal)', () => {
+  // H. formula parser preserves: operandA, operandB, hasExplicitEqualsTotal
+  const f1 = parseMarksFormula('Q2. Attempt any eight questions. (2×8=16)')
+  assert.deepEqual(f1, {
+    rawFormula: '2×8=16',
+    operandA: 2,
+    operandB: 8,
+    formulaTotal: 16,
+    hasExplicitEqualsTotal: true,
+  })
+
+  const f2 = parseMarksFormula('Long Questions. (10×2)')
+  assert.deepEqual(f2, {
+    rawFormula: '10×2',
+    operandA: 10,
+    operandB: 2,
+    formulaTotal: 20,
+    hasExplicitEqualsTotal: false,
+  })
+
+  const f3 = parseMarksFormula('Short Questions. (10×3=30)')
+  assert.deepEqual(f3, {
+    rawFormula: '10×3=30',
+    operandA: 10,
+    operandB: 3,
+    formulaTotal: 30,
+    hasExplicitEqualsTotal: true,
+  })
+
+  const f4 = parseMarksFormula('Heading with no formula')
+  assert.equal(f4, null)
+})
+
+test('TEST 22: Unresolved Formula Roles Do Not Fabricate itemCount / marksPerItem', () => {
+  // I. unresolved formula role: does not fabricate itemCount / marksPerItem
+  const rawF = parseMarksFormula('Short Questions. (10×3=30)')
+  // When actual items is 12 and no attempt rule exists, roles remain ambiguous
+  const resolved = resolveFormulaRoles(rawF, 'Short Questions. (10×3=30)', 12, null)
+
+  assert.equal(resolved.rawFormula, '10×3=30')
+  assert.equal(resolved.operandA, 10)
+  assert.equal(resolved.operandB, 3)
+  assert.equal(resolved.formulaTotal, 30)
+  assert.equal(resolved.hasExplicitEqualsTotal, true)
+  assert.equal(resolved.interpretationStatus, 'UNRESOLVED')
+  assert.equal(resolved.interpretedItemCount, null, 'Must NOT guess itemCount')
+  assert.equal(resolved.interpretedMarksPerItem, null, 'Must NOT guess marksPerItem')
 })
