@@ -1,19 +1,21 @@
 // earlyYearsSourceStore.js — Authoritative loader & accessors for Early Years papers & QA manifest
-import earlyYearsSourceV1 from './early-years-first-term-2026-source-v1.json' with { type: 'json' }
-import earlyYearsQaV1 from './early-years-first-term-2026-qa-v1.json' with { type: 'json' }
+// V2 is the ACTIVE authoritative corpus.
+// V1 (early-years-first-term-2026-source-v1.json) is retained as superseded historical evidence only.
+import earlyYearsSourceV2 from './early-years-first-term-2026-source-v2.json' with { type: 'json' }
+import earlyYearsQaV2 from './early-years-first-term-2026-qa-v2.json' with { type: 'json' }
 
 /**
- * Returns full Early Years corpus
+ * Returns full Early Years corpus (V2 — teacher-source faithful)
  */
 export function getEarlyYearsCorpus() {
-  return earlyYearsSourceV1
+  return earlyYearsSourceV2
 }
 
 /**
  * Returns all 9 Early Years papers
  */
 export function getAllEarlyYearsPapers() {
-  return earlyYearsSourceV1.papers || []
+  return earlyYearsSourceV2.papers || []
 }
 
 /**
@@ -21,7 +23,7 @@ export function getAllEarlyYearsPapers() {
  */
 export function getEarlyYearsPaperById(paperId) {
   if (!paperId) return null
-  return earlyYearsSourceV1.papers.find((p) => p.id === paperId) || null
+  return earlyYearsSourceV2.papers.find((p) => p.id === paperId) || null
 }
 
 /**
@@ -29,14 +31,14 @@ export function getEarlyYearsPaperById(paperId) {
  */
 export function getEarlyYearsPapersByClass(classStage) {
   if (!classStage) return []
-  return earlyYearsSourceV1.papers.filter((p) => p.classStage === classStage.toLowerCase())
+  return earlyYearsSourceV2.papers.filter((p) => p.classStage === classStage.toLowerCase())
 }
 
 /**
- * Returns QA Manifest
+ * Returns QA Manifest V2
  */
 export function getEarlyYearsQAManifest() {
-  return earlyYearsQaV1
+  return earlyYearsQaV2
 }
 
 /**
@@ -44,13 +46,13 @@ export function getEarlyYearsQAManifest() {
  */
 export function getQAFindingsForPaper(paperId) {
   if (!paperId) return []
-  return (earlyYearsQaV1.findings || []).filter((f) => f.paperId === paperId)
+  return (earlyYearsQaV2.findings || []).filter((f) => f.paperId === paperId)
 }
 
 /**
  * Validates corpus integrity against academic source constraints
  */
-export function validateEarlyYearsCorpus(corpus = earlyYearsSourceV1) {
+export function validateEarlyYearsCorpus(corpus = earlyYearsSourceV2) {
   const errors = []
   if (!corpus || !Array.isArray(corpus.papers)) {
     return { valid: false, errors: ['Corpus is missing papers array'] }

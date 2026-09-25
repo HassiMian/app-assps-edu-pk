@@ -566,4 +566,26 @@ export function registerUserSketchAsset(asset) {
   return record
 }
 
-
+/**
+ * registerSessionSketch — convenience alias called after processSketchFileUpload.
+ * Marks asset as session-only (not persisted across reload).
+ */
+export function registerSessionSketch(uploadedAsset) {
+  if (!uploadedAsset || !uploadedAsset.id) {
+    throw new Error('Uploaded asset must have an id field')
+  }
+  const record = {
+    id: uploadedAsset.id,
+    name: uploadedAsset.name || uploadedAsset.id,
+    altText: `Session sketch: ${uploadedAsset.name || uploadedAsset.id}`,
+    viewBox: '0 0 100 100',
+    source: 'SESSION_UPLOAD',
+    mimeType: uploadedAsset.mimeType || 'image/svg+xml',
+    printSafe: true,
+    svgContent: uploadedAsset.svgContent || '',
+    dataUrl: uploadedAsset.dataUrl || null,
+    isSession: true
+  }
+  userUploads.set(uploadedAsset.id, record)
+  return record
+}

@@ -1,0 +1,310 @@
+// build-v2-qa.mjs — One-shot script to write early-years-first-term-2026-qa-v2.json
+import { writeFileSync } from 'fs'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+const qa = {
+  manifestVersion: '2.0.0',
+  supersedes: '1.0.0',
+  supersessionReason: 'QA V2 derived from repaired V2 source. Corrections: Mover Urdu question sum is 10+10+20+10=50; repeated matching target is nun (not ba). Added SOURCE_LAYOUT_AMBIGUOUS findings for genuinely unclear teacher layouts.',
+  academicSession: '2026',
+  term: 'First Term',
+  summary: {
+    totalPapers: 9,
+    sourcePresentCount: 9,
+    sourceMissingCount: 0,
+    totalConflictCount: 2,
+    ambiguityCount: 9,
+    sourceStatus: 'COMPLETE'
+  },
+  findings: [
+    {
+      id: 'qa-v2-ey-starter-urdu-total-conflict',
+      paperId: 'ey-starter-urdu-2026',
+      questionId: null,
+      status: 'SOURCE_TOTAL_CONFLICT',
+      title: 'Starter Urdu Header vs Questions Total Conflict',
+      description: 'Header declares total 50, but individual question marks sum to 20+20+10+10+20=80. Preserved exact source without silent reconciliation.',
+      headerTotal: 50,
+      listedQuestionTotal: 80,
+      academicRule: 'Teacher text is authoritative source material. Do not silently reconcile academic conflicts.'
+    },
+    {
+      id: 'qa-v2-ey-starter-urdu-q1-glyph-count',
+      paperId: 'ey-starter-urdu-2026',
+      questionId: 'ey-starter-urdu-q1',
+      status: 'SOURCE_REPAIR',
+      title: 'Starter Urdu Q1 Glyph Count Restored to 14',
+      description: 'V1 contained only 6 glyphs. V2 restores exact 14-glyph ragged sequence as supplied by teacher: Row1: ا آ ب پ ت | Row2: ٹ ث ج چ ح | Row3: خ د ڈ ذ.',
+      academicRule: 'Do not reduce teacher-supplied letter sequence. Do not complete or extend beyond supplied content.'
+    },
+    {
+      id: 'qa-v2-ey-starter-urdu-q2-exact-choices',
+      paperId: 'ey-starter-urdu-2026',
+      questionId: 'ey-starter-urdu-q2',
+      status: 'SUSPICIOUS_PICTURE_LETTER_OPTIONS',
+      title: 'Starter Urdu Q2 Exact Source Choices Restored',
+      description: 'V1 replaced source choices. V2 uses exact teacher choices: مرغی: س م ب | پنکھا: ب ب ج | ٹماٹر: ت س ض. Preserved as-is even where academically suspicious.',
+      academicRule: 'Preserve exact source options and flag. Do not replace with academically expected alternatives.'
+    },
+    {
+      id: 'qa-v2-ey-starter-urdu-q3-ragged-grid',
+      paperId: 'ey-starter-urdu-2026',
+      questionId: 'ey-starter-urdu-q3',
+      status: 'SOURCE_REPAIR',
+      title: 'Starter Urdu Q3 Ragged Grid Restored',
+      description: 'V1 replaced with a uniform rectangular grid. V2 uses exact source ragged rows: Row1: ف ت ت ج د ذ (6) | Row2: ذ س ب د ف ح ب (7) | Row3: ف م ب (3).',
+      academicRule: 'Renderer must support ragged rows. Do not substitute a rectangular grid for layout convenience.'
+    },
+    {
+      id: 'qa-v2-ey-mover-english-q1-layout-ambiguous',
+      paperId: 'ey-mover-english-2026',
+      questionId: 'ey-mover-eng-q1',
+      status: 'SOURCE_LAYOUT_AMBIGUOUS',
+      title: 'Mover English Q1 Missing Letter Layout Ambiguous',
+      description: 'Teacher wrote letters with uneven spacing (A _ _ D / _ F _ _ / H _ _ J / _ L M _). Exact layout cannot be determined from pasted source. Raw layout stored. V1 invented A_C_E_G... alternating pattern which is NOT in teacher source.',
+      academicRule: 'Do not invent a full alphabet pattern where teacher source is ambiguous. Preserve raw and flag.'
+    },
+    {
+      id: 'qa-v2-ey-mover-english-q2-six-words-ambiguous',
+      paperId: 'ey-mover-english-2026',
+      questionId: 'ey-mover-eng-q2',
+      status: 'SOURCE_LAYOUT_AMBIGUOUS',
+      title: 'Mover English Q2 Word Grouping Ambiguous',
+      description: 'Source has two picture prompts (Fish, Mouse) and six words: Fish, Dog, Cat, Monkey, Mouse, Bus. Grouping of words under pictures not clear from pasted source. V1 invented Fish/Dish and Mouse/House which do NOT appear in teacher source.',
+      academicRule: 'Preserve all six words exactly. Do not decide grouping or invent new words. Flag layout ambiguity.'
+    },
+    {
+      id: 'qa-v2-ey-mover-english-q3-marks-repair',
+      paperId: 'ey-mover-english-2026',
+      questionId: 'ey-mover-eng-q3',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover English Q3 Marks Restored to 20',
+      description: 'V1 had Q3=15 marks. Teacher source says 20 marks for "Write Alphabets A to Z".',
+      academicRule: 'Do not silently change marks. Preserve teacher-supplied values.'
+    },
+    {
+      id: 'qa-v2-ey-mover-english-q4-repair',
+      paperId: 'ey-mover-english-2026',
+      questionId: 'ey-mover-eng-q4',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover English Q4 Restored to Exact 6 Rows',
+      description: 'V1 had wrong letters F/G/H/I/J with marks=15. Teacher source has exact 6 rows: R-q, M-p, P-m, Q-r, D-s, S-d with marks=10.',
+      academicRule: 'Preserve exact matching columns as supplied. Do not replace letters.'
+    },
+    {
+      id: 'qa-v2-ey-mover-urdu-header-total-absent',
+      paperId: 'ey-mover-urdu-2026',
+      questionId: null,
+      status: 'AUTHORITATIVE_HEADER_TOTAL_ABSENT',
+      title: 'Mover Urdu Omitted Header Total',
+      description: 'No explicit paper total in supplied header. Question marks sum to 10+10+20+10=50. Recorded derivedPotentialTotal=50, authoritativeHeaderTotal=null.',
+      authoritativeHeaderTotal: null,
+      derivedPotentialTotal: 50,
+      academicRule: 'Do not pretend teacher explicitly supplied total 50.'
+    },
+    {
+      id: 'qa-v2-ey-mover-urdu-q1-instruction-repair',
+      paperId: 'ey-mover-urdu-2026',
+      questionId: 'ey-mover-urdu-q1',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover Urdu Q1 Instruction Restored',
+      description: 'V1 had generic "حروف تہجی لکھیں (الف تا ے)" with marks=15. Teacher source has "مندرجہ ذیل الفاظ کو دوبارہ خوشخط کر کے لکھیں۔" with 8 specific letters in 2 rows, marks=10.',
+      academicRule: 'Do not replace source instruction with a normalized generic form.'
+    },
+    {
+      id: 'qa-v2-ey-mover-urdu-q2-layout-ambiguous',
+      paperId: 'ey-mover-urdu-2026',
+      questionId: 'ey-mover-urdu-q2',
+      status: 'SOURCE_LAYOUT_AMBIGUOUS',
+      title: 'Mover Urdu Q2 Blank-Fill Layout Ambiguous',
+      description: 'Teacher source shows: ب ا / ث ت / خ ج / ر ذ but exact blank positions within each pair are not unambiguously clear from paste. Raw layout stored.',
+      academicRule: 'Do not invent a Urdu alphabet sequence where teacher supplied a specific grid. Flag and store raw.'
+    },
+    {
+      id: 'qa-v2-ey-mover-urdu-q3-marks-repair',
+      paperId: 'ey-mover-urdu-2026',
+      questionId: 'ey-mover-urdu-q3',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover Urdu Q3 Marks Restored to 20',
+      description: 'V1 had Q3=15 marks. Teacher source says 20 marks for "ا تا ش حروفِ تہجی لکھیں۔".',
+      academicRule: 'Do not silently change marks.'
+    },
+    {
+      id: 'qa-v2-ey-mover-urdu-q4-repeated-nun',
+      paperId: 'ey-mover-urdu-2026',
+      questionId: 'ey-mover-urdu-q4',
+      status: 'REPEATED_MATCHING_VALUE',
+      title: 'Mover Urdu Q4 Repeated Target is Nun Not Ba',
+      description: 'V1 QA stated repeated target was ب. V2 correction: repeated target is ن (nun). Right column: ن م ن ص س ل ع — ن appears at positions 1 and 3. Exact 7-row matching preserved.',
+      academicRule: 'Preserve exact source matching columns. Do not replace letters in either column.'
+    },
+    {
+      id: 'qa-v2-ey-mover-math-q1-grid-repair',
+      paperId: 'ey-mover-math-2026',
+      questionId: 'ey-mover-math-q1',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover Math Q1 Grid Restored to Exact 5 Rows',
+      description: 'V1 had a generic odd-alternating 1-3-5-7... grid. Teacher source has specific 5-row grid: Row1:1_3_ | Row2:56_8 | Row3:_1011_ | Row4:13_15_ | Row5:17_19_.',
+      academicRule: 'Preserve teacher-supplied row structure exactly. Do not substitute a generic pattern.'
+    },
+    {
+      id: 'qa-v2-ey-mover-math-q3-marks-repair',
+      paperId: 'ey-mover-math-2026',
+      questionId: 'ey-mover-math-q3',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover Math Q3 Marks Restored to 20',
+      description: 'V1 had Q3=15 marks. Teacher source says 20 marks for "Write Counting 1 to 30".',
+      academicRule: 'Do not silently change marks.'
+    },
+    {
+      id: 'qa-v2-ey-mover-math-q4-repair',
+      paperId: 'ey-mover-math-2026',
+      questionId: 'ey-mover-math-q4',
+      status: 'SOURCE_REPAIR',
+      title: 'Mover Math Q4 Restored to Exact 7 Rows',
+      description: 'V1 had wrong numbers (6/8/10/12/14) with marks=15. Teacher source has exact 7 rows: 12/17/19/30/70/40/50 with marks=10.',
+      academicRule: 'Preserve exact matching numbers as supplied. Do not replace.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q1-repair',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q1',
+      status: 'SOURCE_REPAIR',
+      title: 'Flyer English Q1 Restored to Exact 5 Rows',
+      description: 'V1 had wrong rows (ball/cat/pen/sun). V2 restores exact 5 teacher rows: boat/boal/boot | Aple/Appl/Apple | Car/Cir/Cpr | ball/ball/bill | Dig/Dog/Dag.',
+      academicRule: 'Preserve exact spelling candidates and case. Do not replace rows.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q1-duplicate',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q1',
+      status: 'DUPLICATE_CANDIDATE',
+      title: 'Flyer English Q1 Row 4 Duplicate Candidate ball/ball/bill',
+      description: 'Row 4 choices are ball/ball/bill. First two candidates are identical. Preserved exact source without deduplication.',
+      academicRule: 'Preserve source. Flag duplicate candidate.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q2-repair',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q2',
+      status: 'SOURCE_REPAIR',
+      title: 'Flyer English Q2 Restored to Exact 5 Prompts',
+      description: 'V1 had Ball_/C_t/D_g/F_sh/B_ok. V2 restores exact prompts: Appl_/Ball_/C__r/D__g/H_n.',
+      academicRule: 'Preserve exact source prompts. Do not invent alternative missing-letter exercises.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q2-ambiguous',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q2',
+      status: 'AMBIGUOUS_PROMPT',
+      title: 'Flyer English Q2 Missing Letter Ambiguity',
+      description: 'Prompts like "C __r" have ambiguous blank count. Preserved source wording exactly.',
+      academicRule: 'Preserve source. Flag ambiguity.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q3-wording',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q3',
+      status: 'WORDING_AMBIGUITY',
+      title: 'Flyer English Q3 Prompt Wording Ambiguity',
+      description: 'Instruction states "Write small letters A a to S". Wording is ambiguous (mixed case notation). Preserved source wording exactly.',
+      academicRule: 'Preserve source. Flag wording ambiguity.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q4-repair',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q4',
+      status: 'SOURCE_REPAIR',
+      title: 'Flyer English Q4 Instruction Preserved Exactly',
+      description: 'V1 added "capital letters" that was not in source. V2 uses exact source: "Write Alphabets A to P".',
+      academicRule: 'Do not add words to instruction that teacher did not write.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-english-q5-repair',
+      paperId: 'ey-flyer-english-2026',
+      questionId: 'ey-flyer-eng-q5',
+      status: 'SOURCE_REPAIR',
+      title: 'Flyer English Q5 Restored to Exact 7 Rows L/G/P/M/R/T/N',
+      description: 'V1 had K/L/M/N/O. V2 restores exact 7 teacher rows: L-p, G-t, P-l, M-n, R-g, T-r, N-m.',
+      academicRule: 'Preserve exact matching letters as supplied.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-urdu-total-conflict',
+      paperId: 'ey-flyer-urdu-2026',
+      questionId: null,
+      status: 'SOURCE_TOTAL_CONFLICT',
+      title: 'Flyer Urdu Header vs Questions Total Conflict',
+      description: 'Header declares total 50, but individual question marks sum to 10+20+10+10+5+5=60. Preserved exact source without silent reconciliation.',
+      headerTotal: 50,
+      listedQuestionTotal: 60,
+      academicRule: 'Teacher text is authoritative source material. Do not silently reconcile academic conflicts.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-math-q1-layout-ambiguous',
+      paperId: 'ey-flyer-math-2026',
+      questionId: 'ey-flyer-math-q1',
+      status: 'SOURCE_LAYOUT_AMBIGUOUS',
+      title: 'Flyer Math Q1 Raw Sequence Layout Ambiguous',
+      description: 'Teacher source is raw string: "1 __3 _6 __ 9___11_ 13 _ 15__17 __20". Exact blank count and structured slots cannot be parsed unambiguously. Raw sequence stored.',
+      academicRule: 'Store raw source. Do not generate a generic 1-20 fill pattern unless provable from source.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-math-q2-repair',
+      paperId: 'ey-flyer-math-2026',
+      questionId: 'ey-flyer-math-q2',
+      status: 'SOURCE_REPAIR',
+      title: 'Flyer Math Q2 Restored to Exact 7 Before-Targets',
+      description: 'V1 had 5 items with targets 5/9/12/15/20. Teacher source has exactly 7 items: _10, _14, _21, _8, _17, _25, _13.',
+      academicRule: 'Preserve exact before-number targets as supplied.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-math-q5-repair',
+      paperId: 'ey-flyer-math-2026',
+      questionId: 'ey-flyer-math-q5',
+      status: 'SOURCE_REPAIR',
+      title: 'Flyer Math Q5 After-Sequences Restored with Full Context',
+      description: 'V1 had single target numbers (7/14/21/29/35). Teacher source has full sequences: 13,14,15,_ | 25,26,27,_ | 29,30,31,_ | 35,36,37,_ | 47,48,49,_.',
+      academicRule: 'Render full sequences as supplied. Do not reduce to single-number targets.'
+    },
+    {
+      id: 'qa-v2-ey-flyer-math-q3-semantic',
+      paperId: 'ey-flyer-math-2026',
+      questionId: 'ey-flyer-math-q3',
+      status: 'SEMANTIC_AMBIGUITY',
+      title: 'Flyer Math Q3 Counting Representation Ambiguity',
+      description: 'Instruction states "Write english counting 1 to 10". Ambiguous whether digits or word names are expected.',
+      academicRule: 'Preserve source. Flag semantic ambiguity: digits vs number names.'
+    },
+    {
+      id: 'qa-v2-ey-starter-eng-q5-marks-ambiguity',
+      paperId: 'ey-starter-english-2026',
+      questionId: 'ey-starter-eng-q5',
+      status: 'SOURCE_ITEM_COUNT_MARKS_AMBIGUITY',
+      title: 'Starter English Q5 Item Count vs Marks Ambiguity',
+      description: 'Section mark value is 10, but only 4 prompt rows (A-D) supplied. Did not invent an E row.',
+      academicRule: 'Only A-D are supplied. Do NOT invent an E row merely to reconcile marks.'
+    },
+    {
+      id: 'qa-v2-ey-starter-math-q5-ambiguous',
+      paperId: 'ey-starter-math-2026',
+      questionId: 'ey-starter-math-q5',
+      status: 'SOURCE_AMBIGUOUS',
+      title: "Starter Math Q5 'Match the Same words' Ambiguity",
+      description: "Heading states 'Match the Same words', but content is numeric (15/17/18/19/11 vs 20/18/19/17/11) and columns are not an identical mirror.",
+      academicRule: "Do NOT silently rename heading. Do NOT alter supplied values."
+    }
+  ]
+}
+
+const outPath = join(
+  __dirname,
+  'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/earlyYears/data/early-years-first-term-2026-qa-v2.json'
+)
+
+import { writeFileSync as wf } from 'fs'
+wf(outPath, JSON.stringify(qa, null, 2), 'utf8')
+console.log('✓ Written:', outPath)
+console.log('  Findings:', qa.findings.length)

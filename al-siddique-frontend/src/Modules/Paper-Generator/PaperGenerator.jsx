@@ -16,6 +16,7 @@ const QuestionBank = lazy(() => import('./QuestionBank'))
 const NotesMakerTab = lazy(() => import('./NotesMakerTab'))
 const DailyDiaryFeature = lazy(() => import('./DailyDiaryFeature'))
 const PaperEditorRouter = lazy(() => import('./PaperEditor/editorV2/PaperEditorRouter'))
+const EarlyYearsWorksheetEditor = lazy(() => import('./PaperEditor/earlyYears/EarlyYearsWorksheetEditor'))
 
 const C = {
   card: 'rgba(15,23,42,0.58)',
@@ -66,6 +67,7 @@ const MODULE_TABS = [
   { id: 'lesson',        label: 'Lesson Plans'     },
   { id: 'bank',          label: 'Question Bank'    },
   { id: 'saved',         label: 'Saved Papers'     },
+  { id: 'early_years',   label: 'Pre Classes Papers' },
 ]
 
 export default function PaperGenerator() {
@@ -161,12 +163,19 @@ export default function PaperGenerator() {
   )
 
   // PTS Build Paper tab renders as its own full-screen flow
-  if (moduleTab === 'build' || moduleTab === 'board_pattern' || moduleTab === 'word_editor') {
+  if (moduleTab === 'build' || moduleTab === 'board_pattern' || moduleTab === 'word_editor' || moduleTab === 'early_years') {
     return (
       <>
         {moduleTab === 'build' && <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
         {moduleTab === 'word_editor' && <ModuleWrap><PaperEditorRouter loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
         {moduleTab === 'board_pattern' && <ModuleWrap><BoardPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
+        {moduleTab === 'early_years' && (
+          <ModuleWrap>
+            <Suspense fallback={<div style={{ padding: 40, color: '#C0C8D8', fontFamily: 'Inter, sans-serif' }}>Loading Pre Classes Papers...</div>}>
+              <EarlyYearsWorksheetEditor />
+            </Suspense>
+          </ModuleWrap>
+        )}
       </>
     )
   }
