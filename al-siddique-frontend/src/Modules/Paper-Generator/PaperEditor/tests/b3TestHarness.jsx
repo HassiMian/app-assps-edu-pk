@@ -9,27 +9,84 @@ import '@/index.css'
 const canonicalDocs = canonicalCorpusData.documents
 const v13Papers = v13DatasetData.papers
 
+if (typeof window !== 'undefined') {
+  window.__B3_DIAGNOSTICS__ = {
+    rootRenderCount: 0,
+    documentRendererRenderCount: 0,
+    fieldRenderCounts: {},
+    editorCreationCounts: {},
+    localSetContentCounts: {},
+  }
+}
+
 function B3HarnessApp() {
   const [paper, setPaper] = useState(null)
 
   useEffect(() => {
+    window.__B3_RESET_DIAGNOSTICS__ = () => {
+      window.__B3_DIAGNOSTICS__ = {
+        rootRenderCount: 0,
+        documentRendererRenderCount: 0,
+        fieldRenderCounts: {},
+        editorCreationCounts: {},
+        localSetContentCounts: {},
+      }
+    }
+
     window.__B3_LOAD_PAPER__ = (type) => {
+      let p = null
       if (type === 'canonical-english') {
-        setPaper(canonicalDocs[0])
+        p = canonicalDocs[0]
       } else if (type === 'canonical-urdu') {
-        const u = canonicalDocs.find(p => p.id.includes('class-6-urdu'))
-        setPaper(u)
+        p = canonicalDocs.find(doc => doc.id.includes('class-6-urdu'))
       } else if (type === 'pristine-v13') {
-        setPaper(v13Papers[0])
+        p = v13Papers[0]
       } else if (type === 'modified-v13') {
         const modified = JSON.parse(JSON.stringify(v13Papers[0]))
         modified.official_section[0].content = 'Custom modified question by user'
-        setPaper(modified)
+        p = modified
       } else if (type === 'legacy-schema2') {
-        setPaper({ schemaVersion: 2, sections: [] })
+        p = { schemaVersion: 2, sections: [] }
       } else if (typeof type === 'object') {
-        setPaper(type)
+        p = type
       }
+
+      if (p && p.format === 'assps-canonical-paper') {
+        window.__B3_BASELINE_CAPTURE__ = {
+          docJson: JSON.stringify(p),
+          sourceIdentityJson: JSON.stringify(p.sourceIdentity),
+          sourceCoverageLedgerJson: JSON.stringify(p.sourceCoverageLedger),
+          authorityJson: JSON.stringify(p.authority),
+          nodeMarksJson: JSON.stringify(p.sections.map(s => s.nodes.map(n => n.nodeMarks))),
+          reference: p,
+        }
+      }
+
+      setPaper(p)
+    }
+
+    window.__B3_VERIFY_BASELINE_INTEGRITY__ = () => {
+      const capture = window.__B3_BASELINE_CAPTURE__
+      if (!capture) return { ok: false, error: 'NO_BASELINE_CAPTURE' }
+      const current = capture.reference
+
+      const currentJson = JSON.stringify(current)
+      if (currentJson !== capture.docJson) {
+        return { ok: false, error: 'CANONICAL_BASELINE_DOC_MUTATED' }
+      }
+      if (JSON.stringify(current.sourceIdentity) !== capture.sourceIdentityJson) {
+        return { ok: false, error: 'SOURCE_IDENTITY_MUTATED' }
+      }
+      if (JSON.stringify(current.sourceCoverageLedger) !== capture.sourceCoverageLedgerJson) {
+        return { ok: false, error: 'SOURCE_COVERAGE_LEDGER_MUTATED' }
+      }
+      if (JSON.stringify(current.authority) !== capture.authorityJson) {
+        return { ok: false, error: 'AUTHORITY_MUTATED' }
+      }
+      if (JSON.stringify(current.sections.map(s => s.nodes.map(n => n.nodeMarks))) !== capture.nodeMarksJson) {
+        return { ok: false, error: 'NODE_MARKS_MUTATED' }
+      }
+      return { ok: true }
     }
 
     const params = new URLSearchParams(window.location.search)

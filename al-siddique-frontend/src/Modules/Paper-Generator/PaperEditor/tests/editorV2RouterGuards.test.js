@@ -75,3 +75,63 @@ test('ROUTER F: Academically Modified V13 Paper routes to LEGACY_CANVAS_V2 to pr
   assert.strictEqual(decision.reason, 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY')
   assert.strictEqual(decision.resolvedPaper, modifiedPaper)
 })
+
+test('ROUTER G: Every individual academic mutation forces LEGACY route (Section 21)', () => {
+  const pristinePaper = v13Dataset.papers[0]
+
+  // Helper to assert modified paper routes to LEGACY_CANVAS_V2
+  function assertForcesLegacy(mutator, label) {
+    const paper = JSON.parse(JSON.stringify(pristinePaper))
+    mutator(paper)
+    const isPristine = isPristineOfficialV13Paper(paper)
+    assert.strictEqual(isPristine, false, `Mutation '${label}' must fail pristine check`)
+    const decision = resolvePaperEditorRoute(paper)
+    assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2', `Mutation '${label}' must route to LEGACY_CANVAS_V2`)
+  }
+
+  // 1. config.totalMarks changed
+  assertForcesLegacy(p => { p.config.totalMarks = 999 }, 'config.totalMarks')
+
+  // 2. config.subject changed
+  assertForcesLegacy(p => { p.config.subject = 'Advanced Astrophysics' }, 'config.subject')
+
+  // 3. config.language changed
+  assertForcesLegacy(p => { p.config.language = 'arabic' }, 'config.language')
+
+  // 4. config.paperCode changed
+  assertForcesLegacy(p => { p.config.paperCode = 'CUSTOM-CODE-99' }, 'config.paperCode')
+
+  // 5. section.medium changed
+  assertForcesLegacy(p => { p.official_section[0].medium = 'english' }, 'section.medium')
+
+  // 6. section.marks changed
+  assertForcesLegacy(p => { p.official_section[0].marks = 25 }, 'section.marks')
+
+  // 7. section.heading changed
+  assertForcesLegacy(p => { p.official_section[0].heading = 'Custom Section Heading' }, 'section.heading')
+
+  // 8. section.content changed
+  assertForcesLegacy(p => { p.official_section[0].content = 'Different question stem body' }, 'section.content')
+
+  // 9. section.textUrdu changed
+  assertForcesLegacy(p => { p.official_section[0].textUrdu = 'تبدیل شدہ سوال' }, 'section.textUrdu')
+
+  // 10. option content changed if options exist
+  assertForcesLegacy(p => {
+    p.official_section[0].options = [{ id: 'opt_1', text: 'Custom Option A' }]
+  }, 'section.options')
+
+  // 11. selectedQuestions official academic content changed
+  assertForcesLegacy(p => {
+    p.selectedQuestions = [{ id: 'sq_1', text: 'Custom Selected Question' }]
+  }, 'selectedQuestions')
+})
+
+test('ROUTER H: All 43 pristine papers in V13 dataset pass pristine check and route to CANONICAL_V2', () => {
+  for (const paper of v13Dataset.papers) {
+    assert.strictEqual(isPristineOfficialV13Paper(paper), true, `Paper ${paper.id} must be pristine`)
+    const decision = resolvePaperEditorRoute(paper)
+    assert.strictEqual(decision.route, 'CANONICAL_V2', `Paper ${paper.id} must route to CANONICAL_V2`)
+  }
+})
+

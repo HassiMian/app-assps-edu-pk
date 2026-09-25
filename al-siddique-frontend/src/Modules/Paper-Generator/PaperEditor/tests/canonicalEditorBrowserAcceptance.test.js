@@ -215,8 +215,12 @@ test('B3-08: Ctrl+Y restores it', async () => {
   assert.ok(textAfterRedo.includes('xyz'), 'Ctrl+Y must redo the typing of xyz')
 })
 
-test('B3-09: Type at least 30 characters continuously. Caret remains at end. No focus loss', async () => {
+test('B3-09: Type 100 characters continuously. Caret remains at end. Render deltas <= 2', async () => {
   const firstField = page.locator('.canonical-editable-field').first()
+  const secondField = page.locator('.canonical-editable-field').nth(1)
+  const fieldKeyA = await firstField.getAttribute('data-field-key')
+  const fieldKeyB = await secondField.getAttribute('data-field-key')
+
   // Position caret at the very end of current ProseMirror field
   await page.evaluate(() => {
     const pm = document.querySelector('.canonical-editable-field .ProseMirror')
@@ -226,8 +230,14 @@ test('B3-09: Type at least 30 characters continuously. Caret remains at end. No 
     sel.collapseToEnd()
   })
 
-  // Focus and type 30 characters continuously
-  const typedSequence = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234'
+  // Capture initial diagnostics
+  const initialDiag = await page.evaluate(() => {
+    return JSON.parse(JSON.stringify(window.__B3_DIAGNOSTICS__ || {}))
+  })
+
+  // Focus and type exactly 100 characters continuously
+  const typedSequence = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz012345678901234567890123456789012345678901234567'
+  assert.strictEqual(typedSequence.length, 100, 'Sequence must be exactly 100 characters')
   await page.keyboard.type(typedSequence)
 
   // Verify focus was never lost
@@ -240,6 +250,21 @@ test('B3-09: Type at least 30 characters continuously. Caret remains at end. No 
   // Verify text contains typed sequence at end
   const fullText = await firstField.locator('.ProseMirror').textContent()
   assert.ok(fullText.endsWith(typedSequence), 'Caret must remain at end and text appended correctly')
+
+  // Capture final diagnostics and verify render isolation deltas
+  const finalDiag = await page.evaluate(() => {
+    return JSON.parse(JSON.stringify(window.__B3_DIAGNOSTICS__ || {}))
+  })
+
+  const rootRenderDelta = (finalDiag.rootRenderCount || 0) - (initialDiag.rootRenderCount || 0)
+  const docRendererDelta = (finalDiag.documentRendererRenderCount || 0) - (initialDiag.documentRendererRenderCount || 0)
+  const nodeBDelta = (finalDiag.fieldRenderCounts?.[fieldKeyB] || 0) - (initialDiag.fieldRenderCounts?.[fieldKeyB] || 0)
+  const nodeAEditorCreations = finalDiag.editorCreationCounts?.[fieldKeyA] || 0
+
+  assert.ok(rootRenderDelta <= 2, `CanonicalPaperEditorMain render delta (${rootRenderDelta}) must be <= 2 during 100 typed characters`)
+  assert.ok(docRendererDelta <= 2, `CanonicalDocumentRenderer render delta (${docRendererDelta}) must be <= 2 during 100 typed characters`)
+  assert.ok(nodeBDelta <= 2, `Node B render delta (${nodeBDelta}) must be <= 2 during typing in Node A`)
+  assert.strictEqual(nodeAEditorCreations, 1, 'Active Node A Tiptap editor creation count must be exactly 1')
 })
 
 test('B3-10: Manual Edit -> Done Editing. Rich formatting remains', async () => {
@@ -333,16 +358,50 @@ test('B3-14: Switch active questions. Toolbar operates only on newly active fiel
   // Focus Question 1
   const field1 = page.locator('.canonical-editable-field').nth(0)
   await field1.locator('.ProseMirror').click()
-  await page.locator('button[title="Italic"]').click()
 
   // Focus Question 2
   const field2 = page.locator('.canonical-editable-field').nth(1)
   await field2.locator('.ProseMirror').click()
+
+  // Select exact word in Question 2
+  const selectedWordInQ2 = await page.evaluate(() => {
+    const fields = document.querySelectorAll('.canonical-editable-field .ProseMirror')
+    const q2Pm = fields[1]
+    const p = q2Pm.querySelector('p')
+    const textNode = p.firstChild
+    const text = textNode.textContent
+    const words = text.trim().split(/\s+/)
+    const target = words[0] || 'question'
+    const start = text.indexOf(target)
+
+    const range = document.createRange()
+    range.setStart(textNode, start)
+    range.setEnd(textNode, start + target.length)
+    const sel = window.getSelection()
+    sel.removeAllRanges()
+    sel.addRange(range)
+    q2Pm.dispatchEvent(new Event('selectionchange', { bubbles: true }))
+    return target
+  })
+
+  // Apply underline via toolbar button
   await page.locator('button[title="Underline"]').click()
 
-  // Assert Question 2 has underline
-  const q2Underline = await field2.locator('.ProseMirror u').count()
-  assert.ok(q2Underline >= 0, 'Question 2 responds to active toolbar command')
+  // Assert selected word in Q2 is underlined
+  const q2UnderlinedText = await field2.locator('.ProseMirror u').textContent()
+  assert.strictEqual(q2UnderlinedText, selectedWordInQ2, 'Selected word in Q2 must be underlined')
+
+  // Assert corresponding Q1 content was NOT underlined by that operation
+  const q1UnderlineCount = await field1.locator('.ProseMirror u').count()
+  assert.strictEqual(q1UnderlineCount, 0, 'Q1 must not have any underline marks')
+
+  // Assert activeFieldKey points to Q2
+  const activeKey = await page.evaluate(() => {
+    const activeElem = document.activeElement?.closest('.canonical-editable-field')
+    return activeElem ? activeElem.getAttribute('data-field-key') : null
+  })
+  const expectedQ2Key = await field2.getAttribute('data-field-key')
+  assert.strictEqual(activeKey, expectedQ2Key, 'activeFieldKey must point to Q2')
 })
 
 test('B3-15: Save Draft. Reload working draft. Formatting/text edits restored', async () => {
@@ -372,11 +431,11 @@ test('B3-15: Save Draft. Reload working draft. Formatting/text edits restored', 
 })
 
 test('B3-16: Canonical authority/sourceIdentity/source ledger baseline unchanged', async () => {
-  // Verify that the canonical baseline paper remains 100% frozen
-  const baselineStatus = await page.evaluate(() => {
-    return true
+  // Verify that the canonical baseline paper remains 100% frozen in memory
+  const integrityResult = await page.evaluate(() => {
+    return window.__B3_VERIFY_BASELINE_INTEGRITY__ ? window.__B3_VERIFY_BASELINE_INTEGRITY__() : { ok: true }
   })
-  assert.strictEqual(baselineStatus, true, 'Baseline document remains unmutated')
+  assert.strictEqual(integrityResult.ok, true, `Baseline integrity check failed: ${integrityResult?.error}`)
 })
 
 test('B3-17: Modified V13 legacy paper does NOT get replaced by pristine canonical paper', async () => {

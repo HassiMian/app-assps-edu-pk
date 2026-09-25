@@ -22,6 +22,10 @@ import {
   resolvePaperEditorRoute,
   isPristineOfficialV13Paper,
 } from '../editorV2/canonicalRouteGuards.js'
+import {
+  getB3NodeEditability,
+  B3_RENDER_STRATEGY as NODE_EDITABILITY_STRATEGY,
+} from '../editorV2/nodeRenderStrategy.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -61,10 +65,16 @@ test('INVARIANT A (Rule 44): 100 typed characters causes 0 full document clones 
 
   // Hard Structural Invariant Assertions (Rule 44)
   assert.strictEqual(clonePaperDocumentCalls, 0, 'clonePaperDocument calls MUST be 0 during typing')
+  assert.ok(workingDocRerenderEvents <= 1, `workingDocRerenderEvents must be <= 1 during typing (was ${workingDocRerenderEvents}, at most first PRISTINE->DIRTY transition)`)
   assert.strictEqual(firstNode.editableFields[fieldName].workingPlainText, currentText)
   assert.strictEqual(firstNode.editableFields[fieldName].isDirty, true)
   assert.strictEqual(firstNode.editableFields[fieldName].academicTextMutated, true)
   assert.strictEqual(firstNode.editableFields[fieldName].mutationState, 'TEXT_CHANGED')
+
+  // Document notification happens on explicit publication (Save Draft, Done Editing, etc.)
+  const prevEvents = workingDocRerenderEvents
+  store.publishDocumentChange()
+  assert.strictEqual(workingDocRerenderEvents, prevEvents + 1, 'workingDocRerenderEvents must increment on explicit publishDocumentChange()')
 
   // Verify baseline is untouched
   const baselineDoc = store.getBaselineDocument()
@@ -195,4 +205,95 @@ test('INVARIANT E (Rule 47): Route Guards correctly segregate Canonical V2 from 
 
   // 6. Dataset Container
   assert.strictEqual(resolvePaperEditorRoute(v13Dataset).route, 'DIAGNOSTIC_DATASET')
+})
+
+test('INVARIANT F: Structural Visibility Corpus Test across all 43 canonical documents (Section 15)', () => {
+  const recognizedNodeTypes = new Set()
+  let totalNodesAudited = 0
+
+  for (const doc of canonicalCorpus) {
+    for (const sec of doc.sections) {
+      for (const node of sec.nodes) {
+        totalNodesAudited++
+        recognizedNodeTypes.add(node.type)
+
+        const strategy = getB3NodeEditability(node.type)
+
+        // Must resolve to exactly one valid B3 rendering strategy
+        assert.ok(
+          strategy === NODE_EDITABILITY_STRATEGY.EDITABLE_RICH ||
+          strategy === NODE_EDITABILITY_STRATEGY.EDITABLE_RAW ||
+          strategy === NODE_EDITABILITY_STRATEGY.READ_ONLY_STRUCTURED,
+          `Node '${node.id}' of type '${node.type}' resolved to unhandled strategy '${strategy}'`
+        )
+      }
+    }
+  }
+
+  assert.ok(totalNodesAudited > 0, 'Must audit all nodes across canonical corpus')
+
+  // Assert every canonical node type present in corpus has a deterministic strategy
+  const expectedCorpusTypes = [
+    'short_question',
+    'grammar_table',
+    'vertical_math',
+    'letter',
+    'fill_blank',
+    'matching_columns',
+    'mcq',
+    'true_false',
+    'section_banner',
+    'long_question',
+    'translation',
+    'scope_header',
+  ]
+
+  for (const t of expectedCorpusTypes) {
+    assert.ok(recognizedNodeTypes.has(t), `Corpus must contain node type '${t}'`)
+    const s = getB3NodeEditability(t)
+    assert.ok(s, `Strategy for '${t}' must be defined`)
+  }
+})
+
+test('INVARIANT G: Baseline Immutability and Bit-Identical Integrity (Rule 12, Section 26)', () => {
+  const doc = canonicalCorpus[0]
+  const preDocJson = JSON.stringify(doc)
+  const preHash = crypto.createHash('sha256').update(preDocJson).digest('hex')
+  const preIdentity = JSON.stringify(doc.sourceIdentity)
+  const preCoverage = JSON.stringify(doc.sourceCoverageLedger)
+  const preAuthority = JSON.stringify(doc.authority)
+  const preNodeMarks = JSON.stringify(doc.sections.map(s => s.nodes.map(n => n.nodeMarks)))
+
+  const store = new EditorWorkingStore(doc)
+  const workingDoc = store.getWorkingDocument()
+
+  const firstSec = workingDoc.sections[0]
+  const firstNode = firstSec.nodeOverlays[0]
+  const fieldName = Object.keys(firstNode.editableFields)[0]
+  const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, firstSec.id, firstNode.nodeId, fieldName)
+
+  // 1. Typing
+  store.updateField(fieldKey, canonicalTextToTiptapDoc('Edited text 123'), 'Edited text 123')
+
+  // 2. Bold / Formatting
+  const boldRich = {
+    type: 'doc',
+    content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Edited text 123', marks: [{ type: 'bold' }] }] }],
+  }
+  store.updateField(fieldKey, boldRich, 'Edited text 123')
+
+  // 3. Presentation / Direction
+  workingDoc.presentation.direction = 'rtl'
+  workingDoc.presentation.zoomLevel = 1.25
+
+  // 4. Assert baseline document in store is 100% untouched
+  const baseline = store.getBaselineDocument()
+  const postDocJson = JSON.stringify(baseline)
+  const postHash = crypto.createHash('sha256').update(postDocJson).digest('hex')
+
+  assert.strictEqual(postHash, preHash, 'Canonical baseline hash must remain 100% bit-identical')
+  assert.strictEqual(JSON.stringify(baseline.sourceIdentity), preIdentity, 'sourceIdentity must be untouched')
+  assert.strictEqual(JSON.stringify(baseline.sourceCoverageLedger), preCoverage, 'sourceCoverageLedger must be untouched')
+  assert.strictEqual(JSON.stringify(baseline.authority), preAuthority, 'authority must be untouched')
+  assert.strictEqual(JSON.stringify(baseline.sections.map(s => s.nodes.map(n => n.nodeMarks))), preNodeMarks, 'nodeMarks must be untouched')
 })

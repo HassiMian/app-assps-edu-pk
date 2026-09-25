@@ -61,6 +61,34 @@ test('DRAFT VALIDATOR: Strictly validates schema and rejects malformed draft pay
     false
   )
 
+  // Reject draft with unsupported content that would be dropped by sanitization (Rule 23)
+  assert.strictEqual(
+    validateWorkingDraft({
+      draftFormat: 'assps-canonical-working-draft',
+      draftVersion: 1,
+      baseCanonicalDocumentId: 'doc1',
+      baseFingerprint: 'a'.repeat(64),
+      fieldPatches: {
+        'field1': {
+          workingRich: {
+            type: 'doc',
+            content: [
+              {
+                type: 'paragraph',
+                content: [{ type: 'text', text: 'Hello', marks: [{ type: 'disallowedMarkType' }] }],
+              },
+            ],
+          },
+          workingPlainText: 'Hello',
+          mutationState: 'FORMATTING_ONLY',
+          academicTextMutated: false,
+        },
+      },
+    }).valid,
+    false,
+    'Draft with unsupported mark type must be rejected as invalid'
+  )
+
   // Valid draft passes
   assert.strictEqual(
     validateWorkingDraft({
@@ -78,6 +106,54 @@ test('DRAFT VALIDATOR: Strictly validates schema and rejects malformed draft pay
       },
     }).valid,
     true
+  )
+})
+
+test('ATOMIC DRAFT APPLICATION: Preflights all keys and rejects if unknown field key exists (Rule 24)', () => {
+  const doc = canonicalCorpus[0]
+  const store = new EditorWorkingStore(doc)
+  const workingDoc = store.getWorkingDocument()
+
+  const firstSec = workingDoc.sections[0]
+  const firstNode = firstSec.nodeOverlays[0]
+  const fieldName = Object.keys(firstNode.editableFields)[0]
+  const validKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, firstSec.id, firstNode.nodeId, fieldName)
+  const unknownKey = 'nonexistent-doc::nonexistent-sec::nonexistent-node::stemText'
+
+  const initialText = firstNode.editableFields[fieldName].workingPlainText
+
+  // Draft contains 1 valid patch and 1 unknown field key
+  const draftWithUnknown = {
+    draftFormat: 'assps-canonical-working-draft',
+    draftVersion: 1,
+    baseCanonicalDocumentId: workingDoc.baseCanonicalDocumentId,
+    baseFingerprint: workingDoc.baseFingerprint,
+    fieldPatches: {
+      [validKey]: {
+        workingRich: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'SHOULD_NOT_BE_APPLIED' }] }] },
+        workingPlainText: 'SHOULD_NOT_BE_APPLIED',
+        mutationState: 'TEXT_CHANGED',
+        academicTextMutated: true,
+      },
+      [unknownKey]: {
+        workingRich: { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: 'UNKNOWN' }] }] },
+        workingPlainText: 'UNKNOWN',
+        mutationState: 'TEXT_CHANGED',
+        academicTextMutated: true,
+      },
+    },
+  }
+
+  // Preflight must reject draft atomically
+  const result = store.applyCompactDraft(draftWithUnknown)
+  assert.strictEqual(result.status, 'INVALID_DRAFT')
+  assert.ok(result.error.includes('UNKNOWN_FIELD'))
+
+  // Assert atomic rollback: valid patch was NOT applied
+  assert.strictEqual(
+    firstNode.editableFields[fieldName].workingPlainText,
+    initialText,
+    'Valid patch must NOT be applied when another key is unknown (atomic apply)'
   )
 })
 
