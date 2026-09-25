@@ -1,0 +1,120 @@
+{
+  "manifestVersion": "1.0.0",
+  "academicSession": "2026",
+  "term": "First Term",
+  "summary": {
+    "totalPapers": 9,
+    "sourcePresentCount": 9,
+    "sourceMissingCount": 0,
+    "totalConflictCount": 2,
+    "ambiguityCount": 5,
+    "sourceStatus": "COMPLETE"
+  },
+  "findings": [
+    {
+      "id": "qa-ey-starter-urdu-total-conflict",
+      "paperId": "ey-starter-urdu-2026",
+      "questionId": null,
+      "status": "SOURCE_TOTAL_CONFLICT",
+      "title": "Starter Urdu Header vs Questions Total Conflict",
+      "description": "Header declares total 50, but individual question marks sum to 20 + 20 + 10 + 10 + 20 = 80. Preserved exact source without silent reconciliation.",
+      "headerTotal": 50,
+      "listedQuestionTotal": 80,
+      "academicRule": "Teacher text is authoritative source material. Do not silently reconcile academic conflicts."
+    },
+    {
+      "id": "qa-ey-starter-urdu-q2-suspicious-options",
+      "paperId": "ey-starter-urdu-2026",
+      "questionId": "ey-starter-urdu-q2",
+      "status": "SOURCE_AMBIGUOUS",
+      "title": "Starter Urdu Q2 Picture-Letter Choices",
+      "description": "Supplied options appear academically suspicious for some picture prompts (chicken, hand fan, tomato). Preserved exact source letters without alteration.",
+      "academicRule": "Preserve exact source options and flag."
+    },
+    {
+      "id": "qa-ey-mover-urdu-header-total-absent",
+      "paperId": "ey-mover-urdu-2026",
+      "questionId": null,
+      "status": "AUTHORITATIVE_HEADER_TOTAL_ABSENT",
+      "title": "Mover Urdu Omitted Header Total",
+      "description": "No explicit paper total in supplied header. Question marks sum to 15 + 10 + 15 + 10 = 50. Recorded derivedPotentialTotal = 50, authoritativeHeaderTotal = null.",
+      "authoritativeHeaderTotal": null,
+      "derivedPotentialTotal": 50,
+      "academicRule": "Do not pretend teacher explicitly supplied total 50."
+    },
+    {
+      "id": "qa-ey-mover-urdu-q4-repeated-matching",
+      "paperId": "ey-mover-urdu-2026",
+      "questionId": "ey-mover-urdu-q4",
+      "status": "REPEATED_MATCHING_VALUE",
+      "title": "Mover Urdu Repeated Matching Target",
+      "description": "Right column contains repeated letter value 'ب'. Preserved exact source.",
+      "academicRule": "Preserve exact source matching columns."
+    },
+    {
+      "id": "qa-ey-flyer-urdu-total-conflict",
+      "paperId": "ey-flyer-urdu-2026",
+      "questionId": null,
+      "status": "SOURCE_TOTAL_CONFLICT",
+      "title": "Flyer Urdu Header vs Questions Total Conflict",
+      "description": "Header declares total 50, but individual question marks sum to 10 + 20 + 10 + 10 + 5 + 5 = 60. Preserved exact source without silent reconciliation.",
+      "headerTotal": 50,
+      "listedQuestionTotal": 60,
+      "academicRule": "Teacher text is authoritative source material. Do not silently reconcile academic conflicts."
+    },
+    {
+      "id": "qa-ey-flyer-eng-q1-duplicate-candidate",
+      "paperId": "ey-flyer-english-2026",
+      "questionId": "ey-flyer-eng-q1",
+      "status": "DUPLICATE_CANDIDATE",
+      "title": "Flyer English Q1 Duplicate Option",
+      "description": "Spelling choices contain duplicate candidates 'ball / ball / bill'. Preserved exact source without silent deduplication.",
+      "academicRule": "Preserve source. Flag duplicate candidate."
+    },
+    {
+      "id": "qa-ey-flyer-eng-q2-ambiguous-prompt",
+      "paperId": "ey-flyer-english-2026",
+      "questionId": "ey-flyer-eng-q2",
+      "status": "AMBIGUOUS_PROMPT",
+      "title": "Flyer English Q2 Missing Letter Ambiguity",
+      "description": "Prompt reads 'Ball _'. Preserved source and flagged ambiguity.",
+      "academicRule": "Preserve source. Flag ambiguity."
+    },
+    {
+      "id": "qa-ey-flyer-eng-q3-wording-ambiguity",
+      "paperId": "ey-flyer-english-2026",
+      "questionId": "ey-flyer-eng-q3",
+      "status": "WORDING_AMBIGUITY",
+      "title": "Flyer English Q3 Prompt Wording",
+      "description": "Instruction states 'Write small letters A a to S'. Preserved source wording.",
+      "academicRule": "Preserve source. Flag wording ambiguity."
+    },
+    {
+      "id": "qa-ey-flyer-math-q3-semantic-ambiguity",
+      "paperId": "ey-flyer-math-2026",
+      "questionId": "ey-flyer-math-q3",
+      "status": "SEMANTIC_AMBIGUITY",
+      "title": "Flyer Math Q3 Counting Representation Ambiguity",
+      "description": "Instruction states 'Write english counting 1 to 10'. Ambiguous whether digits (1, 2, 3...) or word names (one, two, three...) are expected.",
+      "academicRule": "Preserve source. Flag semantic ambiguity: digits vs number names."
+    },
+    {
+      "id": "qa-ey-starter-eng-q5-marks-ambiguity",
+      "paperId": "ey-starter-english-2026",
+      "questionId": "ey-starter-eng-q5",
+      "status": "SOURCE_ITEM_COUNT_MARKS_AMBIGUITY",
+      "title": "Starter English Q5 Item Count vs Marks Ambiguity",
+      "description": "Section mark value is 10, but only 4 prompt rows (A-D) are supplied without an explicit per-item formula. Did not invent an E row.",
+      "academicRule": "Only A-D are supplied. Do NOT invent an E row merely to reconcile marks."
+    },
+    {
+      "id": "qa-ey-starter-math-q5-same-words-ambiguity",
+      "paperId": "ey-starter-math-2026",
+      "questionId": "ey-starter-math-q5",
+      "status": "SOURCE_AMBIGUOUS",
+      "title": "Starter Math Q5 'Match the Same words' Ambiguity",
+      "description": "Heading states 'Match the Same words', but content is numeric (15, 17, 18, 19, 11 vs 20, 18, 19, 17, 11) and columns are not an identical mirror.",
+      "academicRule": "Do NOT silently rename heading. Do NOT alter supplied values."
+    }
+  ]
+}
