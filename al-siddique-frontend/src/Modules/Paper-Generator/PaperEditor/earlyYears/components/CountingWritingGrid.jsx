@@ -5,13 +5,15 @@ import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 export default function CountingWritingGrid({
   countTo = 30,
   gridColumns = 6,
-  gridRows = null
+  gridRows = null,
+  showGuideNumbers = false
 }) {
   const totalCells = countTo || (gridColumns * (gridRows || 5))
 
   return (
     <div
       className="early-years-counting-grid"
+      data-testid="counting-writing-grid"
       style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
@@ -22,6 +24,8 @@ export default function CountingWritingGrid({
       {Array.from({ length: totalCells }).map((_, idx) => (
         <div
           key={`counting-cell-${idx}`}
+          className="counting-cell"
+          data-cell-idx={idx}
           style={{
             height: LAYOUT_TOKENS.childResponse.boxGridCellSizeMm + 'mm',
             minHeight: '38px',
@@ -34,10 +38,13 @@ export default function CountingWritingGrid({
             padding: '2px 4px'
           }}
         >
-          {/* Subtle index helper in light grey */}
-          <span style={{ fontSize: '9px', color: '#bbb' }}>{idx + 1}</span>
+          {/* Default: BLANK response cell. Guide number only rendered if explicitly requested */}
+          {showGuideNumbers && (
+            <span className="guide-number" style={{ fontSize: '9px', color: '#bbb' }}>{idx + 1}</span>
+          )}
         </div>
       ))}
     </div>
   )
 }
+

@@ -19,3 +19,5 @@ export { default as UrduJoinLettersExercise } from './UrduJoinLettersExercise.js
 export { default as CircleChoiceGrid } from './CircleChoiceGrid.jsx'
 export { default as NumberCopyPractice } from './NumberCopyPractice.jsx'
 export { default as DrawingResponseArea } from './DrawingResponseArea.jsx'
+export { default as SourceFaithfulPracticeLayout } from './SourceFaithfulPracticeLayout.jsx'
+

@@ -121,11 +121,8 @@ export default function EarlyYearsQuestionBlock({
           const overrideSketch = overlay.sketchOverrides?.[slotId] ||
             (overlay.targetVisualSlot === slotId ? overlay.sketchAssetId : null) ||
             ((content.items && content.items.length === 1 && overlay.sketchAssetId) ? overlay.sketchAssetId : null)
-          let choices = item.choices || item.options
-          if (!choices && Array.isArray(content.allWords) && content.items?.length > 0) {
-            const count = Math.ceil(content.allWords.length / content.items.length)
-            choices = content.allWords.slice(idx * count, (idx + 1) * count)
-          }
+          // Do NOT infer split choices when groupingAmbiguous is true
+          const choices = content.groupingAmbiguous ? [] : (item.choices || item.options || [])
           return {
             ...item,
             choices,
@@ -135,6 +132,8 @@ export default function EarlyYearsQuestionBlock({
         return (
           <CircleChoiceWithSketch
             items={effectiveItems}
+            allWords={content.allWords}
+            groupingAmbiguous={content.groupingAmbiguous}
             isUrdu={isUrdu}
             sketchSize={resolvedSketchSize}
             layout={resolvedLayout}
@@ -148,6 +147,8 @@ export default function EarlyYearsQuestionBlock({
           <MissingLetterGrid
             sequence={content.sequence}
             items={content.items}
+            rawSourceLayout={content.rawSourceLayout}
+            layoutAmbiguous={content.layoutAmbiguous}
             isUrdu={isUrdu}
           />
         )
@@ -156,10 +157,19 @@ export default function EarlyYearsQuestionBlock({
           <MissingUrduLetterGrid
             sequence={content.sequence}
             sequences={content.sequences}
+            rawSourceLayout={content.rawSourceLayout}
+            layoutAmbiguous={content.layoutAmbiguous}
           />
         )
       case 'MissingNumberGrid':
-        return <MissingNumberGrid grid={content.grid} />
+        return (
+          <MissingNumberGrid
+            grid={content.grid}
+            rows={content.rows}
+            rawSourceSequence={content.rawSourceSequence}
+            layoutAmbiguous={content.layoutAmbiguous}
+          />
+        )
       case 'BeforeAfterGrid':
         return <BeforeAfterGrid items={content.items} mode={content.mode} />
       case 'AlphabetWritingArea':
@@ -185,8 +195,10 @@ export default function EarlyYearsQuestionBlock({
             countTo={content.countTo}
             gridColumns={content.gridColumns}
             gridRows={content.gridRows}
+            showGuideNumbers={content.showGuideNumbers || false}
           />
         )
+
       case 'PatternCopyBlock':
         return <PatternCopyBlock patterns={content.patterns} />
       case 'TraceShapeBlock': {

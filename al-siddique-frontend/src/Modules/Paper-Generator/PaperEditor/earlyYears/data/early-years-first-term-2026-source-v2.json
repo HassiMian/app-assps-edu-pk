@@ -1014,10 +1014,11 @@
           "id": "ey-mover-urdu-q3",
           "questionNumber": 3,
           "label": "سوال نمبر 3",
-          "rawInstruction": "ا تا ش حروف۔ تہجی لکھیں۔",
+          "rawInstruction": "ا تا ش  حروفِ تہجی لکھیں۔",
           "rawContent": "ا تا ش",
-          "instruction": "ا تا ش حروف۔ تہجی لکھیں۔",
+          "instruction": "ا تا ش  حروفِ تہجی لکھیں۔",
           "marks": 20,
+
           "presentationType": "UrduHandwritingResponse",
           "content": {
             "prompt": "ا تا ش",

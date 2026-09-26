@@ -1,0 +1,44 @@
+/* earlyYearsPrint.css — Dedicated print stylesheet for Early Years worksheets */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .early-years-editor-root {
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  .early-years-paper-viewport {
+    background: #ffffff !important;
+    padding: 0 !important;
+    display: block !important;
+    min-height: auto !important;
+  }
+
+  .early-years-sheet-a4 {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    box-shadow: none !important;
+    transform: none !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+  }
+
+  .early-years-question-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

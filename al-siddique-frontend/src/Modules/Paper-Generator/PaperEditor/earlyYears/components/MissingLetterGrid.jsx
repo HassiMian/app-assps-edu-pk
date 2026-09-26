@@ -1,19 +1,35 @@
-// MissingLetterGrid.jsx — Large letter boxes with blanks for missing letter exercises
 import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+import SourceFaithfulPracticeLayout from './SourceFaithfulPracticeLayout.jsx'
 
 export default function MissingLetterGrid({
   sequence = [],
   items = [],
-  isUrdu = false
+  isUrdu = false,
+  rawSourceLayout = null,
+  layoutAmbiguous = false
 }) {
   const fontFamily = isUrdu
     ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
     : TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
 
+  // Mode 0: Raw source layout fallback for ambiguous teacher formats
+  if ((layoutAmbiguous && rawSourceLayout) || (rawSourceLayout && (!items || items.length === 0) && (!sequence || sequence.length === 0))) {
+    return (
+      <SourceFaithfulPracticeLayout
+        rawText={rawSourceLayout}
+        isUrdu={isUrdu}
+        preserveWhitespace={true}
+        fontSize={isUrdu ? TYPOGRAPHY_TOKENS.fontSizes.urduChildText : TYPOGRAPHY_TOKENS.fontSizes.englishChildText}
+        minRowHeight="48px"
+      />
+    )
+  }
+
   // Mode A: items with blank underscores like "Ball _", "C _ t"
   if (items && items.length > 0) {
+
     return (
       <div
         className="early-years-missing-letter-items"

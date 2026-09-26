@@ -5,6 +5,8 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import EarlyYearsWorksheetEditor from '../earlyYears/EarlyYearsWorksheetEditor.jsx'
 import PaperGenerator from '../../PaperGenerator.jsx'
 import '@/index.css'
+import '../earlyYears/earlyYearsPrint.css'
+
 
 function EarlyYearsHarnessApp() {
   const [paperId, setPaperId] = useState('ey-starter-english-2026')

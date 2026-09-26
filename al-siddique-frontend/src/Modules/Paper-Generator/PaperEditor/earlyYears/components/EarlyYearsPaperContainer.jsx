@@ -5,6 +5,7 @@ import EarlyYearsHeader from './EarlyYearsHeader.jsx'
 import EarlyYearsQuestionBlock from './EarlyYearsQuestionBlock.jsx'
 import UrduFontNotice from './UrduFontNotice.jsx'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+import '../earlyYearsPrint.css'
 
 export default function EarlyYearsPaperContainer({
   paper = null,
@@ -39,10 +40,11 @@ export default function EarlyYearsPaperContainer({
     >
       {/* Dev diagnostics notice (hidden in print) */}
       {isUrdu && (
-        <div style={{ width: '210mm', maxWidth: '100%', boxSizing: 'border-box' }}>
+        <div className="no-print" style={{ width: '210mm', maxWidth: '100%', boxSizing: 'border-box' }}>
           <UrduFontNotice />
         </div>
       )}
+
 
       {/* A4 Sheet Container */}
       <div

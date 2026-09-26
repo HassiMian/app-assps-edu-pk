@@ -2,12 +2,28 @@
 import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+import SourceFaithfulPracticeLayout from './SourceFaithfulPracticeLayout.jsx'
 
 export default function MissingUrduLetterGrid({
   sequence = null,
-  sequences = null
+  sequences = null,
+  rawSourceLayout = null,
+  layoutAmbiguous = false
 }) {
   const allSequences = sequences || (sequence ? [sequence] : [])
+
+  // Mode 0: Raw source layout fallback for ambiguous teacher formats
+  if ((layoutAmbiguous && rawSourceLayout) || (rawSourceLayout && allSequences.length === 0)) {
+    return (
+      <SourceFaithfulPracticeLayout
+        rawText={rawSourceLayout}
+        isUrdu={true}
+        preserveWhitespace={true}
+        fontSize={TYPOGRAPHY_TOKENS.fontSizes.urduChildText}
+        minRowHeight="48px"
+      />
+    )
+  }
 
   return (
     <div

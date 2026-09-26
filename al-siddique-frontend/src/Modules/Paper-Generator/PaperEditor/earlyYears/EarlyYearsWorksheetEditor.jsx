@@ -7,6 +7,7 @@ import {
 import EarlyYearsPaperContainer from './components/EarlyYearsPaperContainer.jsx'
 import EarlyYearsInspector from './inspector/EarlyYearsInspector.jsx'
 import { subscribePresentationOverlay } from './specs/EarlyYearsPresentationOverlay.js'
+import './earlyYearsPrint.css'
 
 export default function EarlyYearsWorksheetEditor({
   initialPaperId = 'ey-starter-english-2026',
@@ -17,15 +18,13 @@ export default function EarlyYearsWorksheetEditor({
   const [showQAPanel, setShowQAPanel] = useState(false)
   const [presentationRevision, setPresentationRevision] = useState(0)
 
+  // Single notification mechanism: subscriber increments revision exactly once per setOverlay()
   useEffect(() => {
     return subscribePresentationOverlay(() => {
       setPresentationRevision((r) => r + 1)
     })
   }, [])
 
-  const handlePresentationChange = useCallback((paperId, questionId, fields) => {
-    setPresentationRevision((r) => r + 1)
-  }, [])
 
   const allPapers = useMemo(() => getAllEarlyYearsPapers(), [])
   const currentPaper = useMemo(() => {
@@ -273,7 +272,7 @@ export default function EarlyYearsWorksheetEditor({
         >
           {currentPaper && (
             <EarlyYearsPaperContainer
-              key={`${currentPaper.id}-rev-${presentationRevision}`}
+              key={currentPaper.id}
               paper={currentPaper}
               scale={zoomLevel}
               presentationRevision={presentationRevision}
@@ -287,7 +286,6 @@ export default function EarlyYearsWorksheetEditor({
             currentPaper={currentPaper}
             qaFindings={qaFindings}
             onClose={() => setShowQAPanel(false)}
-            onPresentationChange={handlePresentationChange}
           />
         )}
       </div>

@@ -5,11 +5,74 @@ import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 
 export default function BeforeAfterGrid({
   items = [],
-  mode = 'before' // 'before' | 'after'
+  mode = 'before' // 'before' | 'after' | 'after-sequence'
 }) {
+  // Mode C: after-sequence (Flyer Math Q5)
+  if (mode === 'after-sequence') {
+    return (
+      <div
+        className="early-years-before-after-grid after-sequence-mode"
+        data-testid="after-sequence-grid"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          margin: '14px 0',
+          alignItems: 'flex-start'
+        }}
+      >
+        {items.map((item, idx) => {
+          const sequence = item.sequence || []
+          return (
+            <div
+              key={`after-seq-${idx}`}
+              className="after-sequence-row"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                padding: '6px 14px',
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                background: '#fafafa'
+              }}
+            >
+              <span
+                className="after-sequence-text"
+                style={{
+                  fontFamily: TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary,
+                  fontSize: TYPOGRAPHY_TOKENS.fontSizes.numberGridText,
+                  fontWeight: 'bold',
+                  letterSpacing: '2px',
+                  color: '#000'
+                }}
+              >
+                {sequence.join(', ')},
+              </span>
+
+              <div
+                className="after-sequence-blank"
+                style={{
+                  width: LAYOUT_TOKENS.childResponse.boxGridCellSizeMm + 'mm',
+                  height: LAYOUT_TOKENS.childResponse.boxGridCellSizeMm + 'mm',
+                  minWidth: '40px',
+                  minHeight: '40px',
+                  border: '2px dashed #000',
+                  borderRadius: '6px',
+                  background: '#fff'
+                }}
+              />
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
+
   return (
     <div
       className="early-years-before-after-grid"
+
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
