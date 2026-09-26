@@ -48,10 +48,14 @@ export default function CanonicalPaperEditorMain({
         setExternalRevisionToken(t => t + 1)
         setSaveStatus('Loaded previous working draft')
         setTimeout(() => setSaveStatus(''), 3000)
+      } else {
+        setSaveStatus('Saved draft could not be loaded safely; source paper was left unchanged.')
       }
     } else if (draftResult?.status === 'BASELINE_MISMATCH') {
       setSaveStatus('Baseline modified; draft preserved separately')
       setTimeout(() => setSaveStatus(''), 4500)
+    } else if (draftResult?.status === 'CORRUPTED') {
+      setSaveStatus('Saved draft could not be loaded safely; source paper was left unchanged.')
     }
   }, [loadedPaper, store])
 
@@ -62,7 +66,7 @@ export default function CanonicalPaperEditorMain({
     try {
       store.publishDocumentChange()
       const compactDraft = store.exportCompactDraft()
-      const result = saveWorkingDraft(compactDraft)
+      const result = saveWorkingDraft(compactDraft, store.getBaselineDocument())
       if (result.success) {
         setSaveStatus('Draft saved successfully!')
         setTimeout(() => setSaveStatus(''), 3500)
@@ -84,7 +88,7 @@ export default function CanonicalPaperEditorMain({
   // 6. Handle structured undo/redo shortcuts when structured control is focused
   useEffect(() => {
     const handleKeyDown = (e) => {
-      const mode = workingDoc?.session?.activeInteractionMode
+      const mode = store.getWorkingDocument()?.session?.activeInteractionMode
       if (mode !== INTERACTION_MODE.STRUCTURED) return
 
       if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z')) {
@@ -103,7 +107,7 @@ export default function CanonicalPaperEditorMain({
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [store, workingDoc])
+  }, [store])
 
   const zoomTransform = `scale(${zoomLevel / 100})`
 

@@ -112,6 +112,19 @@ export function validateWorkingDraft(draft, canonicalDoc) {
   // V2-specific structured block validation
   if (draft.draftVersion === CANONICAL_DRAFT_VERSION_V2) {
     if (draft.structured !== undefined && draft.structured !== null) {
+      const hasStructuredEdits =
+        Object.keys(draft.structured.structuredPatches || {}).length > 0 ||
+        Object.keys(draft.structured.insertedNodes || {}).length > 0 ||
+        (Array.isArray(draft.structured.deletedNodeIds) && draft.structured.deletedNodeIds.length > 0) ||
+        Object.keys(draft.structured.nodeOrderBySection || {}).length > 0
+
+      if (hasStructuredEdits && !canonicalDoc) {
+        return {
+          valid: false,
+          error: 'Canonical baseline document is required to validate V2 structured draft',
+        }
+      }
+
       if (canonicalDoc) {
         const structuredResult = validateDraftStructuredBlock(draft.structured, canonicalDoc)
         if (!structuredResult.valid) {

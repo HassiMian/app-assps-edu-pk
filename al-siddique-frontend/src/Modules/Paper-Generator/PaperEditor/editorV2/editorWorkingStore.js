@@ -33,7 +33,37 @@ import {
 } from './structured/structuredIdAllocator.js'
 import { exportStructuredBlock, computeMaxSequenceFromStructured } from './structured/structuredDraftV2.js'
 import { validateV2StructuredBlock } from './structured/structuredPatchValidator.js'
-import { parseVerticalNumeric } from './structured/structuredNodeProjection.js'
+import { parseVerticalNumeric, resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
+
+function applyFieldPatchToDoc(doc, fieldKey, patch) {
+  const { sectionId, nodeId, fieldName } = parseFieldKey(fieldKey)
+  const section = doc.sections.find(s => s.id === sectionId)
+  if (!section) return false
+  const nodeOverlay = section.nodeOverlays.find(n => n.nodeId === nodeId)
+  if (!nodeOverlay) return false
+  const fieldOverlay = nodeOverlay.editableFields?.[fieldName]
+  if (!fieldOverlay) return false
+
+  const workingRich = patch.workingRich
+  const resolvedPlainText = patch.workingPlainText !== null && patch.workingPlainText !== undefined
+    ? patch.workingPlainText
+    : extractPlainTextFromTiptap(workingRich)
+
+  const dirtyCheck = computeFieldDirtyState(
+    workingRich,
+    fieldOverlay.baselineRich,
+    resolvedPlainText,
+    fieldOverlay.baselinePlainText
+  )
+
+  fieldOverlay.workingRich = dirtyCheck.sanitizedWorking
+  fieldOverlay.workingPlainText = resolvedPlainText
+  fieldOverlay.isDirty = dirtyCheck.isDirty
+  fieldOverlay.academicTextMutated = dirtyCheck.academicTextMutated
+  fieldOverlay.mutationState = dirtyCheck.mutationState
+  nodeOverlay.provenance.academicTextMutated = dirtyCheck.academicTextMutated
+  return true
+}
 
 /**
  * Deep freezes an object recursively to guarantee immutability.
@@ -228,11 +258,16 @@ export class EditorWorkingStore {
       }
       case CMD.ADD_MCQ_OPTION: {
         const p = this._getOrCreatePatch(nodeId, 'mcq')
-        p.insertedOptions[payload.newOption.id] = payload.newOption
+        const bl = this._getBaselineNode(nodeId)
+        const isBaseline = (bl?.options || []).some(o => o.id === payload.newOption.id)
+        if (isBaseline) {
+          p.deletedOptionIds = (p.deletedOptionIds || []).filter(id => id !== payload.newOption.id)
+        } else {
+          p.insertedOptions[payload.newOption.id] = payload.newOption
+        }
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         // Update order
-        const bl = this._getBaselineNode(nodeId)
-        const curOrder = p.optionOrder || (bl?.options || []).map(o => o.id)
+        const curOrder = p.optionOrder || (bl?.options || []).filter(o => !(p.deletedOptionIds || []).includes(o.id)).map(o => o.id)
         const idx = payload.afterId ? curOrder.indexOf(payload.afterId) : -1
         const newOrder = [...curOrder]
         newOrder.splice(idx >= 0 ? idx + 1 : newOrder.length, 0, payload.newOption.id)
@@ -241,8 +276,16 @@ export class EditorWorkingStore {
       }
       case CMD.REMOVE_MCQ_OPTION: {
         const p = this._getOrCreatePatch(nodeId, 'mcq')
-        if (!p.deletedOptionIds.includes(payload.optionId)) p.deletedOptionIds.push(payload.optionId)
-        p.optionOrder = (p.optionOrder || []).filter(id => id !== payload.optionId)
+        const isInserted = Boolean(p.insertedOptions && p.insertedOptions[payload.optionId])
+        if (isInserted) {
+          delete p.insertedOptions[payload.optionId]
+          if (p.optionPatches) delete p.optionPatches[payload.optionId]
+        } else {
+          if (!p.deletedOptionIds.includes(payload.optionId)) p.deletedOptionIds.push(payload.optionId)
+        }
+        const bl = this._getBaselineNode(nodeId)
+        const curOrder = p.optionOrder || (bl?.options || []).map(o => o.id)
+        p.optionOrder = curOrder.filter(id => id !== payload.optionId)
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
@@ -274,12 +317,16 @@ export class EditorWorkingStore {
       }
       case CMD.INSERT_FILL_SEGMENT: {
         const p = this._getOrCreatePatch(nodeId, 'fill_blank')
-        p.insertedSegments[payload.newSeg.id] = payload.newSeg
+        const bl = this._getBaselineNode(nodeId)
+        const srcSegIds = new Set((bl?.segments || []).map((_, i) => deriveBaselineSegmentId(nodeId, i)))
+        if (srcSegIds.has(payload.newSeg.id)) {
+          p.deletedSegIds = (p.deletedSegIds || []).filter(id => id !== payload.newSeg.id)
+        } else {
+          p.insertedSegments[payload.newSeg.id] = payload.newSeg
+        }
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         // Update order
-        const bl = this._getBaselineNode(nodeId)
-        const srcSegs = bl?.segments || []
-        const curOrder = p.segmentOrder || srcSegs.map((_, i) => deriveBaselineSegmentId(nodeId, i))
+        const curOrder = p.segmentOrder || (bl?.segments || []).map((_, i) => deriveBaselineSegmentId(nodeId, i)).filter(id => !(p.deletedSegIds || []).includes(id))
         const idx = payload.afterSegId ? curOrder.indexOf(payload.afterSegId) : -1
         const newOrder = [...curOrder]
         newOrder.splice(idx >= 0 ? idx + 1 : newOrder.length, 0, payload.newSeg.id)
@@ -288,9 +335,16 @@ export class EditorWorkingStore {
       }
       case CMD.REMOVE_FILL_SEGMENT: {
         const p = this._getOrCreatePatch(nodeId, 'fill_blank')
-        if (!p.deletedSegIds.includes(payload.segId)) p.deletedSegIds.push(payload.segId)
-        if (p.segmentOrder) p.segmentOrder = p.segmentOrder.filter(id => id !== payload.segId)
-        if (p.insertedSegments[payload.segId]) delete p.insertedSegments[payload.segId]
+        const isInserted = Boolean(p.insertedSegments && p.insertedSegments[payload.segId])
+        if (isInserted) {
+          delete p.insertedSegments[payload.segId]
+          if (p.segmentPatches) delete p.segmentPatches[payload.segId]
+        } else {
+          if (!p.deletedSegIds.includes(payload.segId)) p.deletedSegIds.push(payload.segId)
+        }
+        const bl = this._getBaselineNode(nodeId)
+        const curOrder = p.segmentOrder || (bl?.segments || []).map((_, i) => deriveBaselineSegmentId(nodeId, i))
+        p.segmentOrder = curOrder.filter(id => id !== payload.segId)
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
@@ -321,35 +375,59 @@ export class EditorWorkingStore {
       }
       case CMD.ADD_MATCHING_LEFT: {
         const p = this._getOrCreatePatch(nodeId, 'matching_columns')
-        p.insertedLeftItems[payload.newItem.id] = payload.newItem
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         const bl = this._getBaselineNode(nodeId)
-        const curOrder = p.leftOrder || (bl?.leftItems || []).map(i => i.id)
+        const isBaseline = (bl?.leftItems || []).some(i => i.id === payload.newItem.id)
+        if (isBaseline) {
+          p.deletedLeftIds = (p.deletedLeftIds || []).filter(id => id !== payload.newItem.id)
+        } else {
+          p.insertedLeftItems[payload.newItem.id] = payload.newItem
+        }
+        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const curOrder = p.leftOrder || (bl?.leftItems || []).filter(i => !(p.deletedLeftIds || []).includes(i.id)).map(i => i.id)
         p.leftOrder = [...curOrder, payload.newItem.id]
         break
       }
       case CMD.REMOVE_MATCHING_LEFT: {
         const p = this._getOrCreatePatch(nodeId, 'matching_columns')
-        if (!p.deletedLeftIds.includes(payload.itemId)) p.deletedLeftIds.push(payload.itemId)
-        if (p.leftOrder) p.leftOrder = p.leftOrder.filter(id => id !== payload.itemId)
-        if (p.insertedLeftItems[payload.itemId]) delete p.insertedLeftItems[payload.itemId]
+        const isInserted = Boolean(p.insertedLeftItems && p.insertedLeftItems[payload.itemId])
+        if (isInserted) {
+          delete p.insertedLeftItems[payload.itemId]
+          if (p.leftPatches) delete p.leftPatches[payload.itemId]
+        } else {
+          if (!p.deletedLeftIds.includes(payload.itemId)) p.deletedLeftIds.push(payload.itemId)
+        }
+        const bl = this._getBaselineNode(nodeId)
+        const curOrder = p.leftOrder || (bl?.leftItems || []).map(i => i.id)
+        p.leftOrder = curOrder.filter(id => id !== payload.itemId)
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
       case CMD.ADD_MATCHING_RIGHT: {
         const p = this._getOrCreatePatch(nodeId, 'matching_columns')
-        p.insertedRightItems[payload.newItem.id] = payload.newItem
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         const bl = this._getBaselineNode(nodeId)
-        const curOrder = p.rightOrder || (bl?.rightItems || []).map(i => i.id)
+        const isBaseline = (bl?.rightItems || []).some(i => i.id === payload.newItem.id)
+        if (isBaseline) {
+          p.deletedRightIds = (p.deletedRightIds || []).filter(id => id !== payload.newItem.id)
+        } else {
+          p.insertedRightItems[payload.newItem.id] = payload.newItem
+        }
+        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const curOrder = p.rightOrder || (bl?.rightItems || []).filter(i => !(p.deletedRightIds || []).includes(i.id)).map(i => i.id)
         p.rightOrder = [...curOrder, payload.newItem.id]
         break
       }
       case CMD.REMOVE_MATCHING_RIGHT: {
         const p = this._getOrCreatePatch(nodeId, 'matching_columns')
-        if (!p.deletedRightIds.includes(payload.itemId)) p.deletedRightIds.push(payload.itemId)
-        if (p.rightOrder) p.rightOrder = p.rightOrder.filter(id => id !== payload.itemId)
-        if (p.insertedRightItems[payload.itemId]) delete p.insertedRightItems[payload.itemId]
+        const isInserted = Boolean(p.insertedRightItems && p.insertedRightItems[payload.itemId])
+        if (isInserted) {
+          delete p.insertedRightItems[payload.itemId]
+          if (p.rightPatches) delete p.rightPatches[payload.itemId]
+        } else {
+          if (!p.deletedRightIds.includes(payload.itemId)) p.deletedRightIds.push(payload.itemId)
+        }
+        const bl = this._getBaselineNode(nodeId)
+        const curOrder = p.rightOrder || (bl?.rightItems || []).map(i => i.id)
+        p.rightOrder = curOrder.filter(id => id !== payload.itemId)
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
@@ -392,11 +470,15 @@ export class EditorWorkingStore {
       }
       case CMD.ADD_GRAMMAR_ROW: {
         const p = this._getOrCreatePatch(nodeId, 'grammar_table')
-        p.insertedRows[payload.newRow.id] = payload.newRow
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         const bl = this._getBaselineNode(nodeId)
-        const srcRows = bl?.rows || []
-        const curOrder = p.rowOrder || srcRows.map((_, i) => deriveBaselineGrammarRowId(nodeId, i))
+        const srcRowIds = new Set((bl?.rows || []).map((_, i) => deriveBaselineGrammarRowId(nodeId, i)))
+        if (srcRowIds.has(payload.newRow.id)) {
+          p.deletedRowIds = (p.deletedRowIds || []).filter(id => id !== payload.newRow.id)
+        } else {
+          p.insertedRows[payload.newRow.id] = payload.newRow
+        }
+        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const curOrder = p.rowOrder || (bl?.rows || []).map((_, i) => deriveBaselineGrammarRowId(nodeId, i)).filter(id => !(p.deletedRowIds || []).includes(id))
         const idx = payload.afterRowId ? curOrder.indexOf(payload.afterRowId) : -1
         const newOrder = [...curOrder]
         newOrder.splice(idx >= 0 ? idx + 1 : newOrder.length, 0, payload.newRow.id)
@@ -405,9 +487,16 @@ export class EditorWorkingStore {
       }
       case CMD.REMOVE_GRAMMAR_ROW: {
         const p = this._getOrCreatePatch(nodeId, 'grammar_table')
-        if (!p.deletedRowIds.includes(payload.rowId)) p.deletedRowIds.push(payload.rowId)
-        if (p.rowOrder) p.rowOrder = p.rowOrder.filter(id => id !== payload.rowId)
-        if (p.insertedRows[payload.rowId]) delete p.insertedRows[payload.rowId]
+        const isInserted = Boolean(p.insertedRows && p.insertedRows[payload.rowId])
+        if (isInserted) {
+          delete p.insertedRows[payload.rowId]
+          if (p.rowPatches) delete p.rowPatches[payload.rowId]
+        } else {
+          if (!p.deletedRowIds.includes(payload.rowId)) p.deletedRowIds.push(payload.rowId)
+        }
+        const bl = this._getBaselineNode(nodeId)
+        const curOrder = p.rowOrder || (bl?.rows || []).map((_, i) => deriveBaselineGrammarRowId(nodeId, i))
+        p.rowOrder = curOrder.filter(id => id !== payload.rowId)
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
@@ -426,11 +515,15 @@ export class EditorWorkingStore {
       }
       case CMD.ADD_VERTICAL_OPERAND: {
         const p = this._getOrCreatePatch(nodeId, 'vertical_math')
-        p.insertedOperands[payload.newOp.id] = payload.newOp
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         const bl = this._getBaselineNode(nodeId)
-        const srcOps = bl?.operands || []
-        const curOrder = p.operandOrder || srcOps.map((_, i) => deriveBaselineOperandId(nodeId, i))
+        const srcOpIds = new Set((bl?.operands || []).map((_, i) => deriveBaselineOperandId(nodeId, i)))
+        if (srcOpIds.has(payload.newOp.id)) {
+          p.deletedOperandIds = (p.deletedOperandIds || []).filter(id => id !== payload.newOp.id)
+        } else {
+          p.insertedOperands[payload.newOp.id] = payload.newOp
+        }
+        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const curOrder = p.operandOrder || (bl?.operands || []).map((_, i) => deriveBaselineOperandId(nodeId, i)).filter(id => !(p.deletedOperandIds || []).includes(id))
         const idx = payload.afterOpId ? curOrder.indexOf(payload.afterOpId) : -1
         const newOrder = [...curOrder]
         newOrder.splice(idx >= 0 ? idx + 1 : newOrder.length, 0, payload.newOp.id)
@@ -439,9 +532,16 @@ export class EditorWorkingStore {
       }
       case CMD.REMOVE_VERTICAL_OPERAND: {
         const p = this._getOrCreatePatch(nodeId, 'vertical_math')
-        if (!p.deletedOperandIds.includes(payload.opId)) p.deletedOperandIds.push(payload.opId)
-        if (p.operandOrder) p.operandOrder = p.operandOrder.filter(id => id !== payload.opId)
-        if (p.insertedOperands[payload.opId]) delete p.insertedOperands[payload.opId]
+        const isInserted = Boolean(p.insertedOperands && p.insertedOperands[payload.opId])
+        if (isInserted) {
+          delete p.insertedOperands[payload.opId]
+          if (p.operandPatches) delete p.operandPatches[payload.opId]
+        } else {
+          if (!p.deletedOperandIds.includes(payload.opId)) p.deletedOperandIds.push(payload.opId)
+        }
+        const bl = this._getBaselineNode(nodeId)
+        const curOrder = p.operandOrder || (bl?.operands || []).map((_, i) => deriveBaselineOperandId(nodeId, i))
+        p.operandOrder = curOrder.filter(id => id !== payload.opId)
         p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
@@ -662,42 +762,75 @@ export class EditorWorkingStore {
       }
     }
 
-    // 3. ALL GOOD — apply to _workingDoc directly (candidate approach for large docs is wasteful;
-    //    since preflight is complete, in-place mutation is safe)
-    // Apply field patches with NONE notify mode (no mid-apply notifications)
-    for (const [fieldKey, patch] of Object.entries(patches)) {
-      this.updateField(fieldKey, patch.workingRich, patch.workingPlainText, { notifyMode: 'NONE' })
-    }
+    // 3. TRUE ATOMIC APPLY: build candidate document and allocator from canonical baseline
+    try {
+      const candidateDoc = createEditorWorkingDocument(this._baselineDoc)
+      const candidateAllocator = new StructuredIdAllocator(this._baselineDoc.id)
 
-    // Apply structured block
-    if (structured) {
-      Object.assign(this._workingDoc.structured, {
-        structuredPatches: structured.structuredPatches || {},
-        insertedNodes: structured.insertedNodes || {},
-        deletedNodeIds: Array.isArray(structured.deletedNodeIds) ? [...structured.deletedNodeIds] : [],
-        nodeOrderBySection: structured.nodeOrderBySection || {},
-        nextUserStructureSequence: structured.nextUserStructureSequence || 1,
-      })
-      // Advance ID allocator past all saved user IDs
-      const maxSeq = computeMaxSequenceFromStructured(structured)
-      const savedSeq = structured.nextUserStructureSequence || 1
-      this._idAllocator.advanceTo(Math.max(maxSeq, savedSeq - 1))
-    }
+      // Apply all text patches silently to candidateDoc
+      for (const [fieldKey, patch] of Object.entries(patches)) {
+        const applied = applyFieldPatchToDoc(candidateDoc, fieldKey, patch)
+        if (!applied) {
+          return { status: 'INVALID_DRAFT', error: `UNKNOWN_FIELD: '${fieldKey}' not found in candidate` }
+        }
+      }
 
-    if (compactDraft.presentationPatch) {
-      Object.assign(this._workingDoc.presentation, compactDraft.presentationPatch)
-    }
+      // Compute dirty state on candidate
+      let hasDirtyField = false
+      for (const sec of candidateDoc.sections) {
+        for (const node of sec.nodeOverlays) {
+          for (const f of Object.values(node.editableFields || {})) {
+            if (f.isDirty) { hasDirtyField = true; break }
+          }
+        }
+      }
 
-    this._workingDoc.session.revisionToken += 1
-    this._workingDoc.session.structuralRevisionToken = (this._workingDoc.session.structuralRevisionToken || 1) + 1
-    this._workingDoc.session.isDirty = Object.keys(patches).length > 0 || (structured && Object.keys(structured.structuredPatches || {}).length > 0)
+      // Apply complete structured block
+      if (structured) {
+        Object.assign(candidateDoc.structured, {
+          structuredPatches: structured.structuredPatches ? JSON.parse(JSON.stringify(structured.structuredPatches)) : {},
+          insertedNodes: structured.insertedNodes ? JSON.parse(JSON.stringify(structured.insertedNodes)) : {},
+          deletedNodeIds: Array.isArray(structured.deletedNodeIds) ? [...structured.deletedNodeIds] : [],
+          nodeOrderBySection: structured.nodeOrderBySection ? JSON.parse(JSON.stringify(structured.nodeOrderBySection)) : {},
+          nextUserStructureSequence: structured.nextUserStructureSequence || 1,
+        })
+        // Advance candidate allocator
+        const maxSeq = computeMaxSequenceFromStructured(structured)
+        const savedSeq = structured.nextUserStructureSequence || 1
+        candidateAllocator.advanceTo(Math.max(maxSeq, savedSeq - 1))
+      }
 
-    this._notify() // EXACTLY ONE notification (spec §21)
+      // Apply presentation patch
+      if (compactDraft.presentationPatch) {
+        Object.assign(candidateDoc.presentation, compactDraft.presentationPatch)
+      }
 
-    return {
-      status: 'APPLIED',
-      patchCount: Object.keys(patches).length,
-      structuredPatchCount: Object.keys(structured?.structuredPatches || {}).length,
+      // Validate final candidate state
+      for (const sec of candidateDoc.sections) {
+        resolveWorkingSectionNodes(sec, candidateDoc.structured, this._baselineDoc)
+      }
+
+      // Candidate tokens and dirty flags
+      candidateDoc.session.revisionToken = (this._workingDoc.session.revisionToken || 1) + 1
+      candidateDoc.session.structuralRevisionToken = (this._workingDoc.session.structuralRevisionToken || 1) + 1
+      candidateDoc.session.isDirty = hasDirtyField || (structured && Object.keys(structured.structuredPatches || {}).length > 0)
+
+      // ONLY THEN swap candidate into _workingDoc and swap allocator
+      this._workingDoc = candidateDoc
+      this._idAllocator = candidateAllocator
+      this._structuredHistory.clear()
+
+      // Exactly ONE notification
+      this._notify()
+
+      return {
+        status: 'APPLIED',
+        patchCount: Object.keys(patches).length,
+        structuredPatchCount: Object.keys(structured?.structuredPatches || {}).length,
+      }
+    } catch (err) {
+      // Current _workingDoc and _idAllocator remain completely unchanged; zero notification
+      return { status: 'INVALID_DRAFT', error: err.message }
     }
   }
 

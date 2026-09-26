@@ -35,7 +35,7 @@ export default function StructuredTextInput({
   }
 
   const handleBlur = () => {
-    if (controlKey && getActiveStructuredKey() === controlKey) {
+    if (!controlKey || getActiveStructuredKey() === controlKey) {
       setActiveStructuredKey(null)
       setMode(INTERACTION_MODE.NONE)
     }
