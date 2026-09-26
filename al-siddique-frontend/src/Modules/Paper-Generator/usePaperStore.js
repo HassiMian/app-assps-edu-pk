@@ -5,6 +5,8 @@ import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../se
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
+import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
+import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.js'
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
@@ -12,6 +14,7 @@ const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
 const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V15'
+const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V3'
 
 const SEED_TYPE_MAP = {
  mcq: 'mcq',
@@ -395,11 +398,39 @@ function withOfficialExamPaperSeed(store) {
  }
 }
 
+function withExamNightRecoverySeed(store) {
+ if (!isAsspsTenantUser()) return store
+ const source = examNightRecoverySeed && typeof examNightRecoverySeed === 'object' ? examNightRecoverySeed : null
+ const recoveryPapers = buildRecoverySavedPapers(source)
+ if (!recoveryPapers.length) return store
+
+ const savedPapers = Array.isArray(store.savedPapers) ? [...store.savedPapers] : []
+ const existingIds = new Set(savedPapers.map(paper => String(paper?.id || '')))
+ const missing = recoveryPapers.filter(paper => !existingIds.has(String(paper.id)))
+ const alreadyCurrent = store.seedInfo?.examNightRecovery?.version === EXAM_NIGHT_RECOVERY_SEED_VERSION
+
+ if (!missing.length && alreadyCurrent) return store
+
+ return {
+  ...store,
+  savedPapers: [...missing, ...savedPapers],
+  seedInfo: {
+   ...(store.seedInfo || {}),
+   examNightRecovery: {
+    version: EXAM_NIGHT_RECOVERY_SEED_VERSION,
+    inserted: missing.length,
+    total: recoveryPapers.length,
+    appliedAt: new Date().toISOString(),
+   },
+  },
+ }
+}
+
 function loadStore() {
  try {
  const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy: true })
  if (!raw) {
- const seeded = withOfficialExamPaperSeed(withAsspsQuestionBankSeed(defaultStore))
+ const seeded = withExamNightRecoverySeed(withOfficialExamPaperSeed(withAsspsQuestionBankSeed(defaultStore)))
  saveStore(seeded)
  return seeded
  }
@@ -460,7 +491,7 @@ function loadStore() {
  paperSettings: safePaperSettings,
  }
  const questionSeeded = withAsspsQuestionBankSeed(nextStore)
- const seeded = withOfficialExamPaperSeed(questionSeeded)
+ const seeded = withExamNightRecoverySeed(withOfficialExamPaperSeed(questionSeeded))
  if (seeded !== nextStore) {
   saveStore(seeded)
  }

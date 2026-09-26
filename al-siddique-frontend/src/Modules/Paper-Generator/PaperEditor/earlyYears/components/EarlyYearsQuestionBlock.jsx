@@ -29,7 +29,8 @@ export default function EarlyYearsQuestionBlock({
   question = {},
   isUrdu = false,
   paperId = null,
-  presentationRevision = 0
+  presentationRevision = 0,
+  templatePreset = {}
 }) {
   const {
     label = 'Q1',
@@ -54,8 +55,11 @@ export default function EarlyYearsQuestionBlock({
   const resolvedTraceMode = overlay.traceMode || content.traceMode || undefined
 
   const fontFamily = isUrdu
-    ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
-    : TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
+    ? (templatePreset.urduFont || TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary)
+    : (templatePreset.fontFamily || TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary)
+  const accent = templatePreset.accent || '#123b67'
+  const borderColor = templatePreset.border || accent
+  const badgeBg = templatePreset.accentSoft || '#f8f8f8'
 
   const renderVisualBody = () => {
     switch (presentationType) {
@@ -257,7 +261,7 @@ export default function EarlyYearsQuestionBlock({
           alignItems: 'baseline',
           justifyContent: 'space-between',
           gap: '8px',
-          borderBottom: '1px solid #000',
+          borderBottom: `1px solid ${borderColor}`,
           paddingBottom: '4px',
           marginBottom: '8px'
         }}
@@ -272,7 +276,7 @@ export default function EarlyYearsQuestionBlock({
                 : TYPOGRAPHY_TOKENS.fontSizes.englishQuestionHeading,
               fontWeight: 'bold',
               minWidth: LAYOUT_TOKENS.childResponse.questionNumberWidthPx + 'px',
-              color: '#000',
+              color: accent,
               flexShrink: 0
             }}
           >
@@ -302,10 +306,11 @@ export default function EarlyYearsQuestionBlock({
               fontFamily: TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary,
               fontSize: TYPOGRAPHY_TOKENS.fontSizes.metadata,
               fontWeight: 'bold',
-              border: '1.2px solid #000',
+              border: `1.2px solid ${borderColor}`,
               borderRadius: '12px',
               padding: '2px 8px',
-              background: '#f8f8f8',
+              background: badgeBg,
+              color: accent,
               flexShrink: 0,
               marginLeft: isUrdu ? 0 : '8px',
               marginRight: isUrdu ? '8px' : 0

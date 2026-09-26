@@ -11,7 +11,8 @@ export default function EarlyYearsPaperContainer({
   paper = null,
   spec = null,
   scale = 1,
-  presentationRevision = 0
+  presentationRevision = 0,
+  templatePreset = null
 }) {
   const activeSpec = spec || (paper ? buildWorksheetSpec(paper) : null)
 
@@ -24,6 +25,8 @@ export default function EarlyYearsPaperContainer({
   }
 
   const isUrdu = activeSpec.language === 'urdu' || activeSpec.subject === 'urdu'
+  const theme = templatePreset || {}
+  const paperFont = isUrdu ? (theme.urduFont || "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif") : (theme.fontFamily || "'Times New Roman', serif")
 
   return (
     <div
@@ -57,6 +60,9 @@ export default function EarlyYearsPaperContainer({
           boxShadow: '0 4px 14px rgba(0, 0, 0, 0.15)',
           boxSizing: 'border-box',
           color: '#000',
+          fontFamily: paperFont,
+          height: 'auto',
+          overflow: 'visible',
           transform: scale !== 1 ? `scale(${scale})` : undefined,
           transformOrigin: 'top center',
           position: 'relative',
@@ -67,6 +73,7 @@ export default function EarlyYearsPaperContainer({
         <EarlyYearsHeader
           headerConfig={activeSpec.headerConfig}
           isUrdu={isUrdu}
+          templatePreset={theme}
         />
 
         {/* Question Blocks */}
@@ -78,6 +85,7 @@ export default function EarlyYearsPaperContainer({
               isUrdu={isUrdu}
               paperId={paper?.id || activeSpec.paperId}
               presentationRevision={presentationRevision}
+              templatePreset={theme}
             />
           ))}
         </div>

@@ -4,7 +4,8 @@ import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 
 export default function EarlyYearsHeader({
   headerConfig = {},
-  isUrdu = false
+  isUrdu = false,
+  templatePreset = {}
 }) {
   const {
     schoolName = 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
@@ -14,15 +15,21 @@ export default function EarlyYearsHeader({
     totalMarks = 50
   } = headerConfig
 
+  const accent = templatePreset.accent || '#123b67'
+  const border = templatePreset.border || accent
+  const accentSoft = templatePreset.accentSoft || '#ffffff'
+  const englishFont = templatePreset.fontFamily || TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
+  const urduFont = templatePreset.urduFont || TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
+
   return (
     <header
       className="early-years-worksheet-header"
       style={{
-        border: '2px solid #000',
+        border: `2px solid ${border}`,
         borderRadius: '8px',
         padding: '10px 14px',
         marginBottom: '16px',
-        background: '#fff',
+        background: templatePreset.headerStyle === 'banded' ? accentSoft : '#fff',
         direction: isUrdu ? 'rtl' : 'ltr'
       }}
     >
@@ -32,10 +39,10 @@ export default function EarlyYearsHeader({
           style={{
             margin: 0,
             fontSize: TYPOGRAPHY_TOKENS.fontSizes.schoolName,
-            fontFamily: TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary,
+            fontFamily: englishFont,
             fontWeight: 'bold',
             letterSpacing: '0.5px',
-            color: '#000',
+            color: accent,
             textTransform: 'uppercase'
           }}
         >
@@ -59,13 +66,11 @@ export default function EarlyYearsHeader({
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
           gap: '8px',
-          borderTop: '1.5px solid #000',
-          borderBottom: '1.5px solid #000',
+          borderTop: `1.5px solid ${border}`,
+          borderBottom: `1.5px solid ${border}`,
           padding: '6px 4px',
           fontSize: TYPOGRAPHY_TOKENS.fontSizes.metadata,
-          fontFamily: isUrdu
-            ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
-            : TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary,
+          fontFamily: isUrdu ? urduFont : englishFont,
           fontWeight: 'bold'
         }}
       >
@@ -95,9 +100,7 @@ export default function EarlyYearsHeader({
           gap: '12px',
           padding: '6px 4px 0 4px',
           fontSize: TYPOGRAPHY_TOKENS.fontSizes.metadata,
-          fontFamily: isUrdu
-            ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
-            : TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
+          fontFamily: isUrdu ? urduFont : englishFont
         }}
       >
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: '6px' }}>

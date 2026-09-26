@@ -195,7 +195,7 @@ export default function AppLayout({ children }) {
  zIndex: 1,
  minHeight: 0,
  }}>
- <div style={{ position: 'relative', zIndex: 100, flexShrink: 0 }}>
+ <div className="app-topbar-slot" style={{ position: 'relative', zIndex: 100, flexShrink: 0 }}>
  <Topbar
  collapsed={isMobile ? false : collapsed}
  onMenuToggle={isMobile ? () => setMobileOpen(v => !v) : undefined}

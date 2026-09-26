@@ -1,51 +1,71 @@
-/* earlyYearsPrint.css — Dedicated print stylesheet for Early Years worksheets */
+/* earlyYearsPrint.css — Early Years screen/print isolation */
+.early-years-sheet-a4 {
+  height: auto !important;
+  overflow: visible !important;
+  background: #fff !important;
+}
+.early-years-questions-container {
+  position: relative;
+  display: block;
+}
 @page {
   size: A4 portrait;
   margin: 0;
 }
-
 @media print {
-  .no-print {
-    display: none !important;
-  }
-
-  body {
-    background: #ffffff !important;
+  body.early-years-mode {
     margin: 0 !important;
     padding: 0 !important;
+    background: #fff !important;
   }
-
-  .paper-generator-module-wrap,
-  .early-years-module-wrap {
-    min-height: auto !important;
-    background: #ffffff !important;
+  body.early-years-mode .app-sidebar-slot,
+  body.early-years-mode .app-topbar-slot,
+  body.early-years-mode .paper-generator-module-tabs,
+  body.early-years-mode .early-years-editor-root > header,
+  body.early-years-mode .early-years-inspector,
+  body.early-years-mode .no-print {
+    display: none !important;
   }
-
-  .early-years-editor-root {
-
-    height: auto !important;
-    overflow: visible !important;
-    background: #ffffff !important;
-  }
-
-  .early-years-paper-viewport {
-    background: #ffffff !important;
-    padding: 0 !important;
+  body.early-years-mode .app-shell,
+  body.early-years-mode .app-main-column,
+  body.early-years-mode .super-module-viewport,
+  body.early-years-mode .paper-generator-module-wrap,
+  body.early-years-mode .early-years-module-wrap,
+  body.early-years-mode .early-years-editor-root,
+  body.early-years-mode .early-years-paper-viewport {
     display: block !important;
-    min-height: auto !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    animation: none !important;
+    background: #fff !important;
   }
-
-  .early-years-sheet-a4 {
+  body.early-years-mode .early-years-sheet-a4 {
+    display: block !important;
     width: 210mm !important;
     min-height: 297mm !important;
+    height: auto !important;
+    margin: 0 auto !important;
     box-shadow: none !important;
     transform: none !important;
-    margin: 0 auto !important;
-    background: #ffffff !important;
+    transform-origin: top left !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+    page-break-after: auto !important;
   }
-
-  .early-years-question-block {
+  body.early-years-mode .early-years-question-block {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
+  }
+  body.early-years-mode .early-years-footer {
+    color: #444 !important;
   }
 }

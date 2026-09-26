@@ -7,6 +7,7 @@ import {
 import EarlyYearsPaperContainer from './components/EarlyYearsPaperContainer.jsx'
 import EarlyYearsInspector from './inspector/EarlyYearsInspector.jsx'
 import { subscribePresentationOverlay } from './specs/EarlyYearsPresentationOverlay.js'
+import { PAPER_TEMPLATES, getTemplatePreset } from '../templates/paperTemplates.js'
 import './earlyYearsPrint.css'
 
 export default function EarlyYearsWorksheetEditor({
@@ -17,6 +18,13 @@ export default function EarlyYearsWorksheetEditor({
   const [zoomLevel, setZoomLevel] = useState(1.0)
   const [showQAPanel, setShowQAPanel] = useState(false)
   const [presentationRevision, setPresentationRevision] = useState(0)
+  const [templateId, setTemplateId] = useState('academic')
+  const templatePreset = useMemo(() => getTemplatePreset(templateId), [templateId])
+
+  useEffect(() => {
+    document.body.classList.add('early-years-mode')
+    return () => document.body.classList.remove('early-years-mode')
+  }, [])
 
   // Single notification mechanism: subscriber increments revision exactly once per setOverlay()
   useEffect(() => {
@@ -37,6 +45,11 @@ export default function EarlyYearsWorksheetEditor({
 
   const hasConflict = currentPaper?.totalMarksSource?.hasConflict
   const hasAmbiguity = qaFindings.length > 0 && !hasConflict
+
+  const handlePrint = useCallback(() => {
+    document.activeElement?.blur?.()
+    requestAnimationFrame(() => window.print())
+  }, [])
 
   return (
     <div
@@ -172,6 +185,25 @@ export default function EarlyYearsWorksheetEditor({
 
         {/* Action Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <label style={{ fontSize: '11px', color: '#cbd5e1' }}>Template:</label>
+          <select
+            value={templateId}
+            onChange={(e) => setTemplateId(e.target.value)}
+            style={{
+              padding: '6px 8px',
+              borderRadius: '6px',
+              background: '#0f172a',
+              color: '#fff',
+              border: '1px solid #475569',
+              fontSize: '11px',
+              cursor: 'pointer',
+              maxWidth: '150px'
+            }}
+          >
+            {PAPER_TEMPLATES.map((template) => (
+              <option key={template.id} value={template.id}>{template.label}</option>
+            ))}
+          </select>
           <button
             type="button"
             onClick={() => setZoomLevel((z) => Math.max(0.6, z - 0.1))}
@@ -240,7 +272,7 @@ export default function EarlyYearsWorksheetEditor({
 
           <button
             type="button"
-            onClick={() => window.print()}
+            onClick={handlePrint}
             style={{
               background: '#2563eb',
               color: '#fff',
@@ -276,6 +308,7 @@ export default function EarlyYearsWorksheetEditor({
               paper={currentPaper}
               scale={zoomLevel}
               presentationRevision={presentationRevision}
+              templatePreset={templatePreset}
             />
           )}
         </main>
