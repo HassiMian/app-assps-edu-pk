@@ -1,4 +1,4 @@
-// createEditorWorkingDocument.js — Pure factory for PaperEditorWorkingDocument (Schema 3.1-W)
+// createEditorWorkingDocument.js — Pure factory for PaperEditorWorkingDocument (Schema 3.2-W)
 import {
   canonicalTextToTiptapDoc,
   computeCanonicalFingerprint,
@@ -7,6 +7,7 @@ import {
   getB3NodeEditability,
   B3_RENDER_STRATEGY,
 } from './nodeRenderStrategy.js'
+import { createEmptyStructuredState } from './structured/structuredNodeModel.js'
 
 /**
  * Determines the academic field name and initial text for an editable canonical node.
@@ -164,7 +165,7 @@ export function createEditorWorkingDocument(canonicalDoc) {
     documentModel: 'PaperEditorWorkingDocument',
     workingFormat: 'assps-working-paper',
     schemaVersion: 3,
-    workingVersion: '3.1.0',
+    workingVersion: '3.2.0',
     workingDocumentId,
     baseCanonicalDocumentId: canonicalDoc.id,
     baseFingerprint,
@@ -180,11 +181,15 @@ export function createEditorWorkingDocument(canonicalDoc) {
     sections: Array.isArray(canonicalDoc.sections)
       ? canonicalDoc.sections.map(s => createSectionOverlay(s))
       : [],
+    structured: createEmptyStructuredState(),
     session: {
       isDirty: false,
       editMode: true,
       activeFieldKey: null,
+      activeStructuredControlKey: null,
+      activeInteractionMode: 'NONE',
       revisionToken: 1,
+      structuralRevisionToken: 1,
     },
   }
 }
