@@ -1,0 +1,7 @@
+{
+  "commit": "927cd227b6861218e77747bb7103259972b94f1c",
+  "branch": "hotfix/attendance-active-roster",
+  "deployedAt": "2026-09-26T12:08:00.000Z",
+  "component": "frontend",
+  "version": "hotfix-attendance-active-roster"
+}
