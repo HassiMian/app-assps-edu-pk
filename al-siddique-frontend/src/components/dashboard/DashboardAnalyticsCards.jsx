@@ -185,10 +185,10 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
     setLoading(true)
     try {
       const [stuRes, attRes] = await Promise.all([
-        api.get('/api/students').catch(() => ({ data: { data: [] } })),
+        api.get('/api/students', { params: { active: 'true' } }).catch(() => ({ data: { data: [] } })),
         api.get(`/api/attendance?date=${today}`).catch(() => ({ data: { data: [] } })),
       ])
-      const stuList = stuRes.data?.data || []
+      const stuList = (stuRes.data?.data || []).filter((s) => s.is_active !== false)
       const attList = attRes.data?.data || []
       setStudents(stuList)
       setMarkedToday(attList)
@@ -213,11 +213,13 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
   }, [markedToday])
 
   const unmarkedStudents = useMemo(() => {
-    return students.filter((s) => {
-      const idMatch = markedIds.has(Number(s.id))
-      const grMatch = s.gr_number && markedIds.has(String(s.gr_number).trim().toLowerCase())
-      return !idMatch && !grMatch
-    })
+    return students
+      .filter((s) => s.is_active !== false)
+      .filter((s) => {
+        const idMatch = markedIds.has(Number(s.id))
+        const grMatch = s.gr_number && markedIds.has(String(s.gr_number).trim().toLowerCase())
+        return !idMatch && !grMatch
+      })
   }, [students, markedIds])
 
   const classList = useMemo(() => {

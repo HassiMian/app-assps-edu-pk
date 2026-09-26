@@ -104,7 +104,7 @@ export default function AttendanceModule() {
  params: { class: attendanceApiClass(selectedClass), section: selectedSection, date: selectedDate },
  }).catch(() => ({ data: { data: [] } })),
  api.get('/api/students', {
- params: { class: attendanceApiClass(selectedClass), section: selectedSection },
+ params: { class: attendanceApiClass(selectedClass), section: selectedSection, active: 'true' },
  }).catch(() => ({ data: { data: [] } })),
  ])
 
@@ -117,7 +117,7 @@ export default function AttendanceModule() {
  if (sid) markMap[sid] = row.status
  })
 
- setStudents(studentData.map(transformStudent))
+ setStudents(studentData.filter((s) => s.is_active !== false).map(transformStudent))
  setAttendance(markMap)
  } catch (err) {
  console.error('Could not load attendance', err)

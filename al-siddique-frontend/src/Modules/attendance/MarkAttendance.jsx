@@ -172,11 +172,11 @@ export default function MarkAttendance() {
  setLoading(true)
  setMessage('')
  Promise.all([
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, active: 'true' } }).catch(() => ({ data: { data: [] } })),
  api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
  ])
  .then(([stuRes, attRes]) => {
- const list = stuRes.data?.data || []
+ const list = (stuRes.data?.data || []).filter((s) => s.is_active !== false)
  const attList = attRes.data?.data || []
  const attMap = {}
  attList.forEach((row) => {
@@ -225,8 +225,12 @@ export default function MarkAttendance() {
  emitAttendanceUpdated({ date, count: records.length })
  setMessage('Attendance saved successfully.')
  setTimeout(() => setMessage(''), 3000)
- } catch {
- setMessage('Failed to save. Try again.')
+ } catch (err) {
+ const msg =
+ err.response?.data?.message ||
+ err.message ||
+ 'Failed to save attendance. Try again.'
+ setMessage(msg)
  } finally {
  setSaving(false)
  }

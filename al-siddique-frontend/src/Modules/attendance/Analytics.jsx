@@ -64,10 +64,10 @@ export default function Analytics() {
 
   useEffect(() => {
     let alive = true
-    api.get('/api/students')
+    api.get('/api/students', { params: { active: 'true' } })
       .then((res) => {
         if (!alive) return
-        setStudents(Array.isArray(res.data?.data) ? res.data.data : [])
+        setStudents(Array.isArray(res.data?.data) ? res.data.data.filter(s => s.is_active !== false) : [])
       })
       .catch((err) => {
         console.warn('Unable to load student filters:', err?.message || err)
