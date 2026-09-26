@@ -116,3 +116,176 @@
   color: #334155;
   white-space: pre-wrap;
 }
+
+/* ========================================================
+   EMERGENCY CANONICAL A4 PRINT MODE
+   ======================================================== */
+
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+@media print {
+  /* 1. Global Reset & Print Background Color Preservation */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 2. Container Overrides (eliminate 100vh scrolling / clipping) */
+  #root,
+  .super-module-card,
+  .canonical-paper-editor-container {
+    height: auto !important;
+    min-height: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  #canonical-paper-canvas {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+    background: #ffffff !important;
+  }
+
+  .canonical-preview-container {
+    transform: none !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  /* 3. Canonical Sheet: Exact A4 Dimensions */
+  .canonical-paper-surface {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    max-width: 210mm !important;
+    margin: 0 auto !important;
+    padding: 16mm 18mm 20mm 18mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 4. Complete UI Chrome & Control Suppression */
+  nav,
+  aside,
+  header.canonical-paper-ribbon,
+  .canonical-paper-ribbon,
+  .canonical-sub-toolbar,
+  #paper-generator-module-tabs,
+  .paper-generator-module-tabs,
+  #b3-harness-controls,
+  .no-print,
+  .canonical-node-controls-header,
+  .node-structure-controls,
+  .structured-item-controls,
+  .canonical-add-node-bar,
+  .canonical-editor-toast,
+  .canonical-section-warning-badge,
+  .grammar-blank-toggle,
+  .grammar-action-col,
+  .mcq-answer-key-badge,
+  .vertical-math-screen-op,
+  .structured-text-screen-only,
+  button,
+  input[type="checkbox"] {
+    display: none !important;
+  }
+
+  /* 5. Print-Only Text Elements */
+  .vertical-math-print-op {
+    display: inline !important;
+  }
+
+  .structured-text-print-only {
+    display: inline !important;
+    background: transparent !important;
+    border: none !important;
+    color: #000000 !important;
+  }
+
+  /* 6. Strip All Editor Outlines, Borders, Rings & Form Chrome */
+  .ProseMirror,
+  .canonical-editable-field,
+  .canonical-editable-stem-content,
+  .structured-text-input {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #000000 !important;
+  }
+
+  .canonical-editable-stem-content .ProseMirror-focused {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* 7. Page Breaks & Geometry */
+  [data-node-id],
+  .canonical-question-block {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .canonical-section-heading-bar {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    background: #f1f5f9 !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 8. Structured Editors in Print */
+  div[data-option-id] {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .fill-blank-token-flow {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  div[data-segment-id] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .canonical-vertical-math-editor {
+    background: transparent !important;
+    border: none !important;
+    padding: 4px 0 !important;
+  }
+
+  .canonical-word-bank-box {
+    border: 1px dashed #64748b !important;
+    background: transparent !important;
+  }
+}
+

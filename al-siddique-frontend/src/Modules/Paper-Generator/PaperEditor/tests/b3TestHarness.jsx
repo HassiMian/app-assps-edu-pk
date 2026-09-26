@@ -35,7 +35,9 @@ function B3HarnessApp() {
 
     window.__B3_LOAD_PAPER__ = (type) => {
       let p = null
-      if (type === 'canonical-english') {
+      if (typeof type === 'string' && canonicalDocs.some(doc => doc.id === type)) {
+        p = canonicalDocs.find(doc => doc.id === type)
+      } else if (type === 'canonical-english') {
         p = canonicalDocs.find(doc => doc.id.includes('class-4-english')) || canonicalDocs[0]
       } else if (type === 'canonical-urdu') {
         p = canonicalDocs.find(doc => doc.id.includes('class-6-urdu'))

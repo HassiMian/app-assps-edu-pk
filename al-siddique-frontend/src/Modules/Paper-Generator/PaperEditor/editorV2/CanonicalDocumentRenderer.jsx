@@ -406,6 +406,7 @@ export default function CanonicalDocumentRenderer({
                         // Contextual node controls header
                         const controlsHeader = isEditing && (
                           <div
+                            className="canonical-node-controls-header no-print"
                             style={{
                               display: 'flex',
                               justifyContent: 'flex-end',
@@ -555,7 +556,7 @@ export default function CanonicalDocumentRenderer({
 
                       {/* Add Question Button at the bottom of the section */}
                       {isEditing && (
-                        <div style={{ marginTop: '10px', paddingTop: '6px' }}>
+                        <div className="canonical-add-node-bar no-print" style={{ marginTop: '10px', paddingTop: '6px' }}>
                           <AddStructuredNodeMenu
                             onSelectType={(type) => {
                               const lastNodeId = workingItems.length > 0 ? workingItems[workingItems.length - 1].nodeId : null
@@ -578,6 +579,7 @@ export default function CanonicalDocumentRenderer({
       {toastMessage && (
         <div
           role="status"
+          className="canonical-editor-toast no-print"
           style={{
             position: 'fixed',
             bottom: '24px',

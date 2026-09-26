@@ -86,9 +86,51 @@ export default function StructuredTextInput({
     ...style,
   }
 
+  const printSpanStyle = {
+    display: 'none',
+    fontFamily: baseStyle.fontFamily,
+    fontSize: baseStyle.fontSize,
+    lineHeight: baseStyle.lineHeight,
+    whiteSpace: multiline ? 'pre-wrap' : 'normal',
+    color: '#000000',
+    background: 'transparent',
+    border: 'none',
+    padding: 0,
+    margin: 0,
+    ...style,
+  }
+
   if (multiline) {
     return (
-      <textarea
+      <>
+        <span className="structured-text-print-only" dir={dir} style={printSpanStyle}>
+          {localVal}
+        </span>
+        <textarea
+          value={localVal}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          dir={dir}
+          disabled={disabled}
+          rows={rows}
+          aria-label={ariaLabel || placeholder}
+          className={`structured-text-input structured-text-screen-only ${className}`}
+          style={{ ...baseStyle, resize: 'vertical' }}
+        />
+      </>
+    )
+  }
+
+  return (
+    <>
+      <span className="structured-text-print-only" dir={dir} style={printSpanStyle}>
+        {localVal}
+      </span>
+      <input
+        type="text"
         value={localVal}
         onChange={handleChange}
         onFocus={handleFocus}
@@ -97,28 +139,10 @@ export default function StructuredTextInput({
         placeholder={placeholder}
         dir={dir}
         disabled={disabled}
-        rows={rows}
         aria-label={ariaLabel || placeholder}
-        className={`structured-text-input ${className}`}
-        style={{ ...baseStyle, resize: 'vertical' }}
+        className={`structured-text-input structured-text-screen-only ${className}`}
+        style={baseStyle}
       />
-    )
-  }
-
-  return (
-    <input
-      type="text"
-      value={localVal}
-      onChange={handleChange}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onKeyDown={handleKeyDown}
-      placeholder={placeholder}
-      dir={dir}
-      disabled={disabled}
-      aria-label={ariaLabel || placeholder}
-      className={`structured-text-input ${className}`}
-      style={baseStyle}
-    />
+    </>
   )
 }

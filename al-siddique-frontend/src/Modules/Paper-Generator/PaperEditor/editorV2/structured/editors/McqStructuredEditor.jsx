@@ -139,6 +139,7 @@ export default function McqStructuredEditor({
               {opt.isCorrect != null && (
                 <span
                   title="Answer Key (Read-Only)"
+                  className="mcq-answer-key-badge no-print"
                   style={{
                     fontSize: '10px',
                     fontWeight: 700,

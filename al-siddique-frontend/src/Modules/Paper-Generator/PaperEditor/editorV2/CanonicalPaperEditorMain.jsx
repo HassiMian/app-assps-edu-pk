@@ -85,6 +85,17 @@ export default function CanonicalPaperEditorMain({
     setIsEditMode(prev => !prev)
   }
 
+  // 6. Emergency Canonical A4 Print Handler (Flush active element and state, then print)
+  const handlePrint = useCallback(() => {
+    if (typeof document !== 'undefined' && document.activeElement && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur()
+    }
+    store.publishDocumentChange()
+    if (typeof window !== 'undefined') {
+      window.print()
+    }
+  }, [store])
+
   // Handle field focus to ensure Tiptap interaction mode is set (Rule 19)
   const handleFocusField = useCallback((fieldKey) => {
     setActiveFieldKey(fieldKey)
@@ -93,7 +104,7 @@ export default function CanonicalPaperEditorMain({
     }
   }, [store])
 
-  // 6. Handle structured undo/redo shortcuts when structured control is focused (Rule 19)
+  // 7. Handle structured undo/redo shortcuts when structured control is focused (Rule 19)
   useEffect(() => {
     const handleKeyDown = (e) => {
       // If event target is inside a ProseMirror / Tiptap editable field, NEVER intercept structured shortcuts
@@ -155,10 +166,12 @@ export default function CanonicalPaperEditorMain({
         isEditMode={isEditMode}
         onToggleEditMode={handleToggleEditMode}
         activeFieldKey={activeFieldKey}
+        onPrint={handlePrint}
       />
 
       {/* 2. Sub-Toolbar with Mode Toggle & Zoom */}
       <div
+        className="canonical-sub-toolbar no-print"
         style={{
           display: 'flex',
           alignItems: 'center',

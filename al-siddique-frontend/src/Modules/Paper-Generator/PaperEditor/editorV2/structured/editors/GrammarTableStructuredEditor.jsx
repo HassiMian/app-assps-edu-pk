@@ -144,7 +144,7 @@ export default function GrammarTableStructuredEditor({
               />
             </th>
             {isEditing && (
-              <th style={{ padding: '6px', border: '1px solid #cbd5e1', width: '10%' }}>
+              <th style={{ padding: '6px', border: '1px solid #cbd5e1', width: '10%' }} className="grammar-action-col no-print">
                 <span style={{ fontSize: '11px', color: '#64748b' }}>Actions</span>
               </th>
             )}
@@ -175,7 +175,7 @@ export default function GrammarTableStructuredEditor({
                       />
                     </div>
                     {isEditing && (
-                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '10px', color: '#64748b', cursor: 'pointer' }}>
+                      <label className="grammar-blank-toggle no-print" style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '10px', color: '#64748b', cursor: 'pointer' }}>
                         <input
                           type="checkbox"
                           checked={Boolean(row.leftIsBlank)}
@@ -202,7 +202,7 @@ export default function GrammarTableStructuredEditor({
                       />
                     </div>
                     {isEditing && (
-                      <label style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '10px', color: '#64748b', cursor: 'pointer' }}>
+                      <label className="grammar-blank-toggle no-print" style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', fontSize: '10px', color: '#64748b', cursor: 'pointer' }}>
                         <input
                           type="checkbox"
                           checked={Boolean(row.rightIsBlank)}
@@ -216,7 +216,7 @@ export default function GrammarTableStructuredEditor({
 
                 {/* Row Controls */}
                 {isEditing && (
-                  <td style={{ padding: '4px', border: '1px solid #cbd5e1', textAlign: 'center' }}>
+                  <td className="grammar-action-col no-print" style={{ padding: '4px', border: '1px solid #cbd5e1', textAlign: 'center' }}>
                     <StructuredItemControls
                       canMoveUp={canMoveUp}
                       canMoveDown={canMoveDown}

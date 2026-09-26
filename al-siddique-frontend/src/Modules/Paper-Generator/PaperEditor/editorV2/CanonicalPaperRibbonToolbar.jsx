@@ -4,7 +4,7 @@ import {
   Undo2, Redo2, Bold, Italic, Underline, Strikethrough,
   Superscript, Subscript, AlignLeft, AlignCenter, AlignRight,
   AlignJustify, ArrowLeft, ArrowRight, Highlighter, RemoveFormatting,
-  Save, Edit3, CheckCircle2
+  Save, Edit3, CheckCircle2, Printer
 } from 'lucide-react'
 import {
   SUPPORTED_FONTS,
@@ -22,6 +22,7 @@ export default function CanonicalPaperRibbonToolbar({
   isEditMode = true,
   onToggleEditMode,
   activeFieldKey = null,
+  onPrint = null,
 }) {
   const [, setSelectionRev] = useState(0)
 
@@ -131,10 +132,27 @@ export default function CanonicalPaperRibbonToolbar({
           )}
         </div>
 
-        {/* Save Draft Action */}
+        {/* Save Draft & Print Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {onPrint && (
+            <button
+              type="button"
+              id="canonical-print-btn"
+              onClick={onPrint}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '5px',
+                padding: '5px 12px', borderRadius: '6px', border: 'none',
+                background: '#2563eb', color: '#ffffff', fontWeight: 700, fontSize: '11px',
+                cursor: 'pointer',
+              }}
+            >
+              <Printer size={13} /> Print / Save PDF
+            </button>
+          )}
+
           <button
             type="button"
+            id="canonical-save-draft-btn"
             onClick={onSaveDraft}
             disabled={saving}
             style={{

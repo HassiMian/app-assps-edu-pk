@@ -140,23 +140,27 @@ export default function VerticalMathStructuredEditor({
               {/* Operator on the last operand row */}
               {isLastOperand ? (
                 isEditing ? (
-                  <select
-                    value={operator}
-                    onChange={handleUpdateOperator}
-                    style={{
-                      fontSize: '15px',
-                      fontWeight: 700,
-                      padding: '2px',
-                      borderRadius: '3px',
-                      border: '1px solid #cbd5e1',
-                      background: '#ffffff',
-                    }}
-                  >
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                    <option value="×">×</option>
-                    <option value="÷">÷</option>
-                  </select>
+                  <>
+                    <span className="vertical-math-print-op" style={{ display: 'none', fontSize: '16px', fontWeight: 800 }}>{operator}</span>
+                    <select
+                      className="vertical-math-screen-op"
+                      value={operator}
+                      onChange={handleUpdateOperator}
+                      style={{
+                        fontSize: '15px',
+                        fontWeight: 700,
+                        padding: '2px',
+                        borderRadius: '3px',
+                        border: '1px solid #cbd5e1',
+                        background: '#ffffff',
+                      }}
+                    >
+                      <option value="+">+</option>
+                      <option value="-">-</option>
+                      <option value="×">×</option>
+                      <option value="÷">÷</option>
+                    </select>
+                  </>
                 ) : (
                   <span style={{ fontSize: '16px', fontWeight: 800 }}>{operator}</span>
                 )
