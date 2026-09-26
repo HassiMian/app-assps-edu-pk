@@ -1,6 +1,5 @@
-// al-siddique-backend/src/tests/attendance-integrity.test.js
-// GATE D: Comprehensive Attendance End-to-End & Integrity Test Suite
-
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const assert = require('assert')
 const http = require('http')
 const jwt = require('jsonwebtoken')
@@ -89,7 +88,7 @@ async function runAttendanceIntegritySuite() {
     `, [foreignStudentId, schoolBId])
 
     const tokenA = jwt.sign(
-      { id: 1, email: 'admin@alsiddique.edu.pk', role: 'admin', school_id: schoolAId, tenant_id: 'school_1' },
+      { id: 1, email: 'admin@assps.edu.pk', role: 'admin', school_id: schoolAId, tenant_id: 'assps' },
       JWT_SECRET,
       { expiresIn: '1h' }
     )
