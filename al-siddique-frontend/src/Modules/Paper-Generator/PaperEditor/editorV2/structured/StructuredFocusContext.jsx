@@ -3,15 +3,15 @@
 
 import React, { createContext, useContext, useRef, useCallback } from 'react'
 
-// INTERACTION MODES (spec §14)
-export const INTERACTION_MODE = {
-  TIPTAP:     'TIPTAP',
-  STRUCTURED: 'STRUCTURED',
-  NONE:       'NONE',
-}
+// Re-export pure JS helpers (no JSX) so both this file and node:test can use them.
+export {
+  INTERACTION_MODE,
+  buildStructuredControlKey,
+  parseStructuredControlKey,
+} from './structuredFocusHelpers.js'
 
 const StructuredFocusCtx = createContext({
-  getMode: () => INTERACTION_MODE.NONE,
+  getMode: () => 'NONE',
   setMode: () => {},
   getActiveStructuredKey: () => null,
   setActiveStructuredKey: () => {},
@@ -22,7 +22,7 @@ const StructuredFocusCtx = createContext({
  * Children can call useStructuredFocus() to read/write focus state.
  */
 export function StructuredFocusProvider({ children, onModeChange }) {
-  const modeRef = useRef(INTERACTION_MODE.NONE)
+  const modeRef = useRef('NONE')
   const keyRef = useRef(null)
 
   const setMode = useCallback((mode) => {
@@ -50,26 +50,4 @@ export function StructuredFocusProvider({ children, onModeChange }) {
 
 export function useStructuredFocus() {
   return useContext(StructuredFocusCtx)
-}
-
-/**
- * Builds a structured control key. Separate from B3 field key grammar (spec §13).
- * Format: structured::<docId>::<secId>::<nodeId>::<kind>::<itemId>::<subfield>
- */
-export function buildStructuredControlKey(docId, secId, nodeId, kind, itemId = '', subfield = '') {
-  return `structured::${docId}::${secId}::${nodeId}::${kind}::${itemId}::${subfield}`
-}
-
-export function parseStructuredControlKey(key) {
-  if (typeof key !== 'string' || !key.startsWith('structured::')) return null
-  const parts = key.split('::')
-  return {
-    prefix:   parts[0] || '',
-    docId:    parts[1] || '',
-    secId:    parts[2] || '',
-    nodeId:   parts[3] || '',
-    kind:     parts[4] || '',
-    itemId:   parts[5] || '',
-    subfield: parts[6] || '',
-  }
 }

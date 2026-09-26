@@ -85,28 +85,27 @@ function projectTrueFalse(baselineNode, patch) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 // FILL BLANK PROJECTION
 // ─────────────────────────────────────────────────────────────────────────────
 function projectFillBlank(baselineNode, patch) {
-  if (!patch) return baselineNode
-
   const srcSegs = Array.isArray(baselineNode.segments) ? baselineNode.segments : []
-  const deletedSet = new Set(patch.deletedSegIds || [])
-  const insertedMap = patch.insertedSegments || {}
+  const deletedSet = new Set(patch?.deletedSegIds || [])
+  const insertedMap = patch?.insertedSegments || {}
 
   // Build resolved segment map with derived IDs for source segments
   const srcMap = {}
   for (let i = 0; i < srcSegs.length; i++) {
     const wid = deriveBaselineSegmentId(baselineNode.id, i)
     if (deletedSet.has(wid)) continue
-    const p = patch.segmentPatches?.[wid]
+    const p = patch?.segmentPatches?.[wid]
     srcMap[wid] = p
-      ? { workingSegmentId: wid, type: p.type ?? srcSegs[i].type, value: p.value !== undefined ? p.value : srcSegs[i].value }
-      : { workingSegmentId: wid, type: srcSegs[i].type, value: srcSegs[i].value }
+      ? { id: wid, workingSegmentId: wid, sourceSegmentIndex: i, type: p.type ?? srcSegs[i].type, value: p.value !== undefined ? p.value : srcSegs[i].value }
+      : { id: wid, workingSegmentId: wid, sourceSegmentIndex: i, type: srcSegs[i].type, value: srcSegs[i].value }
   }
 
   // Determine order
-  let order = patch.segmentOrder
+  let order = patch?.segmentOrder
   if (!order) {
     order = Object.keys(srcMap)
     for (const id of Object.keys(insertedMap)) {
@@ -115,10 +114,10 @@ function projectFillBlank(baselineNode, patch) {
   }
 
   const resolvedSegments = order
-    .map(id => srcMap[id] || (insertedMap[id] ? { workingSegmentId: id, ...insertedMap[id] } : null))
+    .map(id => srcMap[id] || (insertedMap[id] ? { id, workingSegmentId: id, ...insertedMap[id] } : null))
     .filter(Boolean)
 
-  const wordBank = patch.wordBankPatch !== null && patch.wordBankPatch !== undefined
+  const wordBank = (patch?.wordBankPatch !== null && patch?.wordBankPatch !== undefined)
     ? patch.wordBankPatch
     : (baselineNode.wordBank || [])
 
@@ -184,21 +183,19 @@ function projectMatching(baselineNode, patch) {
 // GRAMMAR PROJECTION
 // ─────────────────────────────────────────────────────────────────────────────
 function projectGrammar(baselineNode, patch) {
-  if (!patch) return baselineNode
-
   const srcRows = Array.isArray(baselineNode.rows) ? baselineNode.rows : []
-  const deletedSet = new Set(patch.deletedRowIds || [])
-  const insertedMap = patch.insertedRows || {}
+  const deletedSet = new Set(patch?.deletedRowIds || [])
+  const insertedMap = patch?.insertedRows || {}
 
   const rowMap = {}
   for (let i = 0; i < srcRows.length; i++) {
     const rid = deriveBaselineGrammarRowId(baselineNode.id, i)
     if (deletedSet.has(rid)) continue
-    const p = patch.rowPatches?.[rid]
-    rowMap[rid] = p ? { ...srcRows[i], workingRowId: rid, ...p } : { ...srcRows[i], workingRowId: rid }
+    const p = patch?.rowPatches?.[rid]
+    rowMap[rid] = p ? { ...srcRows[i], id: rid, workingRowId: rid, ...p } : { ...srcRows[i], id: rid, workingRowId: rid }
   }
 
-  let rowOrder = patch.rowOrder
+  let rowOrder = patch?.rowOrder
   if (!rowOrder) {
     rowOrder = Object.keys(rowMap)
     for (const id of Object.keys(insertedMap)) {
@@ -206,10 +203,10 @@ function projectGrammar(baselineNode, patch) {
     }
   }
   const resolvedRows = rowOrder
-    .map(id => rowMap[id] || (insertedMap[id] ? { workingRowId: id, ...insertedMap[id] } : null))
+    .map(id => rowMap[id] || (insertedMap[id] ? { id, workingRowId: id, ...insertedMap[id] } : null))
     .filter(Boolean)
 
-  const columns = patch.columnHeaderPatches !== null && patch.columnHeaderPatches !== undefined
+  const columns = (patch?.columnHeaderPatches !== null && patch?.columnHeaderPatches !== undefined)
     ? patch.columnHeaderPatches
     : (baselineNode.columns || ['Column 1', 'Column 2'])
 
@@ -220,25 +217,23 @@ function projectGrammar(baselineNode, patch) {
 // VERTICAL MATH PROJECTION
 // ─────────────────────────────────────────────────────────────────────────────
 function projectVerticalMath(baselineNode, patch) {
-  if (!patch) return baselineNode
-
   const srcOps = Array.isArray(baselineNode.operands) ? baselineNode.operands : []
-  const deletedSet = new Set(patch.deletedOperandIds || [])
-  const insertedMap = patch.insertedOperands || {}
+  const deletedSet = new Set(patch?.deletedOperandIds || [])
+  const insertedMap = patch?.insertedOperands || {}
 
   const opMap = {}
   for (let i = 0; i < srcOps.length; i++) {
     const wid = deriveBaselineOperandId(baselineNode.id, i)
     if (deletedSet.has(wid)) continue
-    const p = patch.operandPatches?.[wid]
+    const p = patch?.operandPatches?.[wid]
     if (p) {
-      opMap[wid] = { ...srcOps[i], workingOpId: wid, raw: p.raw, normalizedNumericValue: p.normalizedNumericValue }
+      opMap[wid] = { ...srcOps[i], id: wid, workingOpId: wid, raw: p.raw, normalizedNumericValue: p.normalizedNumericValue }
     } else {
-      opMap[wid] = { ...srcOps[i], workingOpId: wid }
+      opMap[wid] = { ...srcOps[i], id: wid, workingOpId: wid }
     }
   }
 
-  let opOrder = patch.operandOrder
+  let opOrder = patch?.operandOrder
   if (!opOrder) {
     opOrder = Object.keys(opMap)
     for (const id of Object.keys(insertedMap)) {
@@ -246,15 +241,15 @@ function projectVerticalMath(baselineNode, patch) {
     }
   }
   const resolvedOperands = opOrder
-    .map(id => opMap[id] || (insertedMap[id] ? { workingOpId: id, ...insertedMap[id] } : null))
+    .map(id => opMap[id] || (insertedMap[id] ? { id, workingOpId: id, ...insertedMap[id] } : null))
     .filter(Boolean)
 
-  const operator = patch.operatorPatch !== null && patch.operatorPatch !== undefined
+  const operator = (patch?.operatorPatch !== null && patch?.operatorPatch !== undefined)
     ? patch.operatorPatch
     : baselineNode.operator
 
   let result = baselineNode.result
-  if (patch.resultPatch !== undefined) {
+  if (patch?.resultPatch !== undefined) {
     result = patch.resultPatch  // may be null (explicitly removed) or { raw, normalizedNumericValue }
   }
 
@@ -270,10 +265,15 @@ function projectVerticalMath(baselineNode, patch) {
  */
 export function resolveStructuredNode(baselineNode, structuredPatch) {
   if (!baselineNode) return null
+  const type = baselineNode.type || baselineNode.nodeType
   if (!structuredPatch || structuredPatch.mutationState === 'PRISTINE') {
+    if (type === 'fill_blank' || type === 'grammar_table' || type === 'vertical_math') {
+      return type === 'fill_blank' ? projectFillBlank(baselineNode, null)
+           : type === 'grammar_table' ? projectGrammar(baselineNode, null)
+           : projectVerticalMath(baselineNode, null)
+    }
     return baselineNode  // fast path: no allocation needed
   }
-  const type = baselineNode.type || baselineNode.nodeType
   switch (type) {
     case 'mcq':              return projectMCQ(baselineNode, structuredPatch)
     case 'true_false':       return projectTrueFalse(baselineNode, structuredPatch)
@@ -283,6 +283,15 @@ export function resolveStructuredNode(baselineNode, structuredPatch) {
     case 'vertical_math':    return projectVerticalMath(baselineNode, structuredPatch)
     default:                 return baselineNode
   }
+}
+
+/**
+ * Pure helper per spec §51: projects baseline node given full structuredState.
+ */
+export function projectStructuredNodeForRender(baselineNode, structuredState) {
+  if (!baselineNode) return null
+  const patch = structuredState?.structuredPatches?.[baselineNode.id] || null
+  return resolveStructuredNode(baselineNode, patch)
 }
 
 /**

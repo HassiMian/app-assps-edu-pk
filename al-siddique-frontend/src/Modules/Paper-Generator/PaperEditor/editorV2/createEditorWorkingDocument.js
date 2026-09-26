@@ -165,7 +165,7 @@ export function createEditorWorkingDocument(canonicalDoc) {
     documentModel: 'PaperEditorWorkingDocument',
     workingFormat: 'assps-working-paper',
     schemaVersion: 3,
-    workingVersion: '3.1.0',
+    workingVersion: '3.2.0',
     workingDocumentId,
     baseCanonicalDocumentId: canonicalDoc.id,
     baseFingerprint,

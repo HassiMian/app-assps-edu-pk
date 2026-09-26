@@ -204,6 +204,10 @@ export class EditorWorkingStore {
     return order
   }
 
+  getSectionWorkingNodeOrder(sectionId) {
+    return [...this._getSectionNodeOrder(sectionId)]
+  }
+
   _allocate(sectionId, kind) {
     return this._idAllocator.allocate(sectionId, kind)
   }
@@ -480,8 +484,14 @@ export class EditorWorkingStore {
         if (blNode) {
           if (!s.deletedNodeIds.includes(nodeId)) s.deletedNodeIds.push(nodeId)
         } else {
-          // User-created node: remove from insertedNodes
+          // User-created node: remove from insertedNodes and also purge from nodeOrderBySection
           delete s.insertedNodes[nodeId]
+          // Purge from all section orders so the draft validator doesn't see a dangling reference
+          for (const secId of Object.keys(s.nodeOrderBySection)) {
+            const ord = s.nodeOrderBySection[secId]
+            const i = ord.indexOf(nodeId)
+            if (i >= 0) ord.splice(i, 1)
+          }
         }
         const order = this._getSectionNodeOrder(sectionId)
         const idx = order.indexOf(nodeId)
@@ -549,6 +559,14 @@ export class EditorWorkingStore {
     this.applyStructuralCommand(cmd)
     this._notify()
     return true
+  }
+
+  canUndoStructural() {
+    return this._structuredHistory.canUndo()
+  }
+
+  canRedoStructural() {
+    return this._structuredHistory.canRedo()
   }
 
   // ─────────────────────────────────────────────────────────────────────────

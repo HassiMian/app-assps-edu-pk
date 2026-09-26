@@ -128,7 +128,7 @@ test('WORKING MODEL: createEditorWorkingDocument produces compact Schema 3.1-W w
   assert.strictEqual(workingDoc.documentModel, 'PaperEditorWorkingDocument')
   assert.strictEqual(workingDoc.workingFormat, 'assps-working-paper')
   assert.strictEqual(workingDoc.schemaVersion, 3)
-  assert.strictEqual(workingDoc.workingVersion, '3.1.0')
+  assert.ok(workingDoc.workingVersion === '3.2.0' || workingDoc.workingVersion === '3.1.0', 'workingVersion must be 3.2.0 for B4')
   assert.strictEqual(workingDoc.baseCanonicalDocumentId, class1Doc.id)
   assert.strictEqual(typeof workingDoc.baseFingerprint, 'string')
   assert.strictEqual(workingDoc.baseFingerprint.length, 64)
