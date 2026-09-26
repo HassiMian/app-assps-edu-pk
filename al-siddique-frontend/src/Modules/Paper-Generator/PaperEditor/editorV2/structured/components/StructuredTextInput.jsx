@@ -27,6 +27,16 @@ export default function StructuredTextInput({
     setLocalVal(value ?? '')
   }, [value])
 
+  // Cleanup on unmount if this control had focus (Rule 19)
+  useEffect(() => {
+    return () => {
+      if (controlKey && getActiveStructuredKey() === controlKey) {
+        setActiveStructuredKey(null)
+        setMode(INTERACTION_MODE.NONE)
+      }
+    }
+  }, [controlKey, getActiveStructuredKey, setActiveStructuredKey, setMode])
+
   const handleFocus = () => {
     setMode(INTERACTION_MODE.STRUCTURED)
     if (controlKey) {

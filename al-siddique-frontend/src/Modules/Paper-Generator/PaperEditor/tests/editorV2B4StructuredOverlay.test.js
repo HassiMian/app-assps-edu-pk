@@ -784,7 +784,7 @@ test('B4-DRAFT-V2-01: Full Draft V2 round trip with exactly 1 notification, zero
   assert.strictEqual(applyRes.status, 'APPLIED')
   assert.strictEqual(notifyCount, 1, 'Must notify subscribers exactly ONCE')
 
-  // Compare resolved section nodes
+  // Compare resolved section nodes deeply
   const baselineSec = doc.sections.find(s => s.id === sec.id)
   const resolvedStore1 = resolveWorkingSectionNodes(baselineSec, store.getWorkingDocument().structured)
   const resolvedStore2 = resolveWorkingSectionNodes(baselineSec, store2.getWorkingDocument().structured)
@@ -793,6 +793,7 @@ test('B4-DRAFT-V2-01: Full Draft V2 round trip with exactly 1 notification, zero
   for (let i = 0; i < resolvedStore1.length; i++) {
     assert.strictEqual(resolvedStore1[i].nodeId, resolvedStore2[i].nodeId)
     assert.strictEqual(resolvedStore1[i].isInserted, resolvedStore2[i].isInserted)
+    assert.deepStrictEqual(resolvedStore1[i].resolvedNode, resolvedStore2[i].resolvedNode)
   }
 })
 
@@ -963,5 +964,636 @@ test('B4-HASH-FREEZE-01: Source dataset and canonical artifact SHA-256 byte pari
     const actualSha = crypto.createHash('sha256').update(buf).digest('hex')
     assert.strictEqual(actualSha, item.expectedSha, `SHA-256 freeze violation on ${item.name}`)
   }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 17. REAL MCQ PERSISTENCE TEST (Section 11)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-MCQ-PERSIST-01: Real canonical MCQ persistence through saveWorkingDraft/loadWorkingDraft with isCorrect: null', () => {
+  let doc = null
+  let sec = null
+  let mcqNode = null
+  for (const d of canonicalCorpus) {
+    for (const s of d.sections || []) {
+      for (const n of s.nodes || []) {
+        if (n.type === 'mcq' && n.options && n.options.length >= 3) {
+          doc = d
+          sec = s
+          mcqNode = n
+          break
+        }
+      }
+      if (mcqNode) break
+    }
+    if (mcqNode) break
+  }
+  assert.ok(mcqNode, 'Must find real canonical MCQ with at least 3 options')
+
+  const baselineDocClone = JSON.parse(JSON.stringify(doc))
+  clearAllWorkingDrafts()
+
+  // 1. Create initial store and make edits:
+  // - edit option text
+  // - add option (with isCorrect: null)
+  // - reorder options
+  const store = new EditorWorkingStore(doc)
+  const opt0 = mcqNode.options[0]
+  const opt1 = mcqNode.options[1]
+
+  // Edit option 0 text
+  store.dispatchStructuralCommand(
+    cmdUpdateMcqOptionText(mcqNode.id, sec.id, opt0.id, 'Updated Option 0 Persist Test', opt0.text)
+  )
+
+  // Add option
+  const allocator = store.getIdAllocator()
+  const newOptId = allocator.allocateOptionId(sec.id)
+  const nextLabel = generateNextOptionLabel(mcqNode.options)
+  const newOpt = createInsertedOption(newOptId, {
+    canonicalLabel: nextLabel,
+    displayLabel: nextLabel,
+    text: 'Persisted Inserted Option',
+    isCorrect: null,
+  })
+  store.dispatchStructuralCommand(
+    cmdAddMcqOption(mcqNode.id, sec.id, newOpt, opt1.id)
+  )
+
+  // Reorder options: put newly added option first
+  const curOrder = store.getWorkingDocument().structured.structuredPatches[mcqNode.id].optionOrder
+  const reordered = [newOptId, ...curOrder.filter(id => id !== newOptId)]
+  store.dispatchStructuralCommand(
+    cmdReorderMcqOptions(mcqNode.id, sec.id, reordered, curOrder)
+  )
+
+  // Capture resolved state from original store
+  const baselineSec = doc.sections.find(s => s.id === sec.id)
+  const resolvedBeforeSave = resolveWorkingSectionNodes(baselineSec, store.getWorkingDocument().structured)
+  const resolvedMcqBefore = resolvedBeforeSave.find(i => i.nodeId === mcqNode.id).resolvedNode
+
+  // 2. Save draft through saveWorkingDraft(compactDraft, store.getBaselineDocument())
+  const compactDraft = store.exportCompactDraft()
+  const saveRes = saveWorkingDraft(compactDraft, store.getBaselineDocument())
+  assert.strictEqual(saveRes.success, true)
+
+  // 3. Destroy store/editor & simulate reload
+  const loadedDraftResult = loadWorkingDraft(doc)
+  assert.strictEqual(loadedDraftResult.status, 'OK', 'Draft must load with status OK (never CORRUPTED)')
+  assert.ok(loadedDraftResult.draft)
+
+  // 4. Create fresh store & apply loaded draft
+  const freshStore = new EditorWorkingStore(doc)
+  let notifyCount = 0
+  freshStore.subscribe(() => { notifyCount++ })
+  const applyRes = freshStore.applyCompactDraft(loadedDraftResult.draft)
+  assert.strictEqual(applyRes.status, 'APPLIED')
+  assert.strictEqual(notifyCount, 1)
+
+  // 5. Deep assertions
+  const resolvedAfterReload = resolveWorkingSectionNodes(baselineSec, freshStore.getWorkingDocument().structured)
+  const resolvedMcqAfter = resolvedAfterReload.find(i => i.nodeId === mcqNode.id).resolvedNode
+
+  // Option text identical
+  assert.strictEqual(resolvedMcqAfter.options.find(o => o.id === opt0.id).text, 'Updated Option 0 Persist Test')
+  // Added option present and identical
+  const reloadedAddedOpt = resolvedMcqAfter.options.find(o => o.id === newOptId)
+  assert.ok(reloadedAddedOpt, 'Added option must be present in reloaded working structure')
+  assert.strictEqual(reloadedAddedOpt.text, 'Persisted Inserted Option')
+  assert.strictEqual(reloadedAddedOpt.canonicalLabel, nextLabel)
+  // isCorrect strictly null
+  assert.strictEqual(reloadedAddedOpt.isCorrect, null)
+  for (const opt of resolvedMcqAfter.options) {
+    if ('isCorrect' in opt) {
+      assert.strictEqual(opt.isCorrect, null, 'isCorrect must remain null on all options')
+    }
+  }
+  // Order identical
+  assert.deepStrictEqual(
+    resolvedMcqAfter.options.map(o => o.id),
+    reordered
+  )
+  // Deep comparison of resolved node
+  assert.deepStrictEqual(resolvedMcqAfter, resolvedMcqBefore)
+
+  // Canonical baseline remains 100% bit-identical
+  assert.deepStrictEqual(doc, baselineDocClone, 'Canonical baseline document remains bit-identical')
+  assert.deepStrictEqual(freshStore.getBaselineDocument(), baselineDocClone)
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 18. ADD → DELETE ROUND-TRIP TESTS FOR ALL 6 TYPES (Section 12)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-ADD-DEL-ROUNDTRIP-01: Add -> Delete round trip for all 6 nested structured item types', () => {
+  clearAllWorkingDrafts()
+
+  // 1. MCQ Option
+  {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'mcq')))
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'mcq'))
+    const node = sec.nodes.find(n => n.type === 'mcq')
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    const newId = allocator.allocateOptionId(sec.id)
+    const newOpt = createInsertedOption(newId, { text: 'Temp MCQ Option' })
+    store.dispatchStructuralCommand(cmdAddMcqOption(node.id, sec.id, newOpt, node.options[0].id))
+    // Now delete the same user-created option
+    store.dispatchStructuralCommand(cmdRemoveMcqOption(node.id, sec.id, newId, newOpt, node.options[0].id))
+
+    const patch = store.getWorkingDocument().structured.structuredPatches[node.id]
+    assert.strictEqual(patch.deletedOptionIds.includes(newId), false, 'Inserted ID must NOT be pushed to deletedOptionIds')
+    assert.strictEqual(Boolean(patch.insertedOptions[newId]), false, 'Inserted option must be removed from insertedOptions')
+
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+
+    const store2 = new EditorWorkingStore(doc)
+    store2.applyCompactDraft(loaded.draft)
+    const resolved = resolveWorkingSectionNodes(sec, store2.getWorkingDocument().structured)
+    const resolvedNode = resolved.find(i => i.nodeId === node.id).resolvedNode
+    assert.deepStrictEqual(resolvedNode.options.map(o => o.id), node.options.map(o => o.id))
+  }
+
+  // 2. Fill Blank Segment
+  {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'fill_blank')))
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'fill_blank'))
+    const node = sec.nodes.find(n => n.type === 'fill_blank')
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    const newId = allocator.allocateSegmentId(sec.id)
+    const newSeg = createInsertedSegment(newId, 'blank', '')
+    const prevOrder = (node.segments || []).map((_, i) => deriveBaselineSegmentId(node.id, i))
+    store.dispatchStructuralCommand(cmdInsertFillSegment(node.id, sec.id, newSeg, prevOrder[0], prevOrder))
+    store.dispatchStructuralCommand(cmdRemoveFillSegment(node.id, sec.id, newId, newSeg, [...prevOrder, newId]))
+
+    const patch = store.getWorkingDocument().structured.structuredPatches[node.id]
+    assert.strictEqual(patch.deletedSegIds.includes(newId), false, 'Inserted segment ID must NOT be in deletedSegIds')
+    assert.strictEqual(Boolean(patch.insertedSegments[newId]), false)
+
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+  }
+
+  // 3. Matching Left Item
+  {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'matching_columns')))
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'matching_columns'))
+    const node = sec.nodes.find(n => n.type === 'matching_columns')
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    const newId = allocator.allocateItemId(sec.id, 'left')
+    const newItem = createInsertedMatchingItem(newId, 'Temp Left')
+    const prevOrder = (node.leftItems || []).map(i => i.id)
+    store.dispatchStructuralCommand(cmdAddMatchingItem('left', node.id, sec.id, newItem, prevOrder))
+    store.dispatchStructuralCommand(cmdRemoveMatchingItem('left', node.id, sec.id, newId, newItem, [...prevOrder, newId]))
+
+    const patch = store.getWorkingDocument().structured.structuredPatches[node.id]
+    assert.strictEqual(patch.deletedLeftIds.includes(newId), false)
+    assert.strictEqual(Boolean(patch.insertedLeftItems[newId]), false)
+
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+  }
+
+  // 4. Matching Right Item
+  {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'matching_columns')))
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'matching_columns'))
+    const node = sec.nodes.find(n => n.type === 'matching_columns')
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    const newId = allocator.allocateItemId(sec.id, 'right')
+    const newItem = createInsertedMatchingItem(newId, 'Temp Right')
+    const prevOrder = (node.rightItems || []).map(i => i.id)
+    store.dispatchStructuralCommand(cmdAddMatchingItem('right', node.id, sec.id, newItem, prevOrder))
+    store.dispatchStructuralCommand(cmdRemoveMatchingItem('right', node.id, sec.id, newId, newItem, [...prevOrder, newId]))
+
+    const patch = store.getWorkingDocument().structured.structuredPatches[node.id]
+    assert.strictEqual(patch.deletedRightIds.includes(newId), false)
+    assert.strictEqual(Boolean(patch.insertedRightItems[newId]), false)
+
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+  }
+
+  // 5. Grammar Row
+  {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'grammar_table')))
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'grammar_table'))
+    const node = sec.nodes.find(n => n.type === 'grammar_table')
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    const newId = allocator.allocateRowId(sec.id)
+    const newRow = createInsertedGrammarRow(newId, 'G-Left', 'G-Right')
+    const prevOrder = (node.rows || []).map((_, i) => deriveBaselineGrammarRowId(node.id, i))
+    store.dispatchStructuralCommand(cmdAddGrammarRow(node.id, sec.id, newRow, prevOrder[0], prevOrder))
+    store.dispatchStructuralCommand(cmdRemoveGrammarRow(node.id, sec.id, newId, newRow, prevOrder[0], [...prevOrder, newId]))
+
+    const patch = store.getWorkingDocument().structured.structuredPatches[node.id]
+    assert.strictEqual(patch.deletedRowIds.includes(newId), false)
+    assert.strictEqual(Boolean(patch.insertedRows[newId]), false)
+
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+  }
+
+  // 6. Vertical Math Operand
+  {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'vertical_math')))
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'vertical_math'))
+    const node = sec.nodes.find(n => n.type === 'vertical_math')
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    const newId = allocator.allocateOperandId(sec.id)
+    const newOp = createInsertedOperand(newId, '99', 99)
+    const prevOrder = (node.operands || []).map((_, i) => deriveBaselineOperandId(node.id, i))
+    store.dispatchStructuralCommand(cmdAddVerticalOperand(node.id, sec.id, newOp, prevOrder[0], prevOrder))
+    store.dispatchStructuralCommand(cmdRemoveVerticalOperand(node.id, sec.id, newId, newOp, prevOrder[0], [...prevOrder, newId]))
+
+    const patch = store.getWorkingDocument().structured.structuredPatches[node.id]
+    assert.strictEqual(patch.deletedOperandIds.includes(newId), false)
+    assert.strictEqual(Boolean(patch.insertedOperands[newId]), false)
+
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 19. SOURCE DELETE ROUND-TRIP (Section 13)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-SRC-DEL-ROUNDTRIP-01: Baseline source item deletion persistence and undo restoration', () => {
+  clearAllWorkingDrafts()
+
+  const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'mcq' && n.options.length >= 3)))
+  const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'mcq' && n.options.length >= 3))
+  const node = sec.nodes.find(n => n.type === 'mcq' && n.options.length >= 3)
+  const store = new EditorWorkingStore(doc)
+
+  const deletedOption = node.options[1]
+  const afterId = node.options[0].id
+
+  // Delete baseline option
+  store.dispatchStructuralCommand(cmdRemoveMcqOption(node.id, sec.id, deletedOption.id, deletedOption, afterId))
+
+  // In working store: deletedOption is hidden
+  let resolved = resolveWorkingSectionNodes(sec, store.getWorkingDocument().structured)
+  let resolvedMcq = resolved.find(i => i.nodeId === node.id).resolvedNode
+  assert.strictEqual(resolvedMcq.options.some(o => o.id === deletedOption.id), false)
+  assert.strictEqual(store.getWorkingDocument().structured.structuredPatches[node.id].deletedOptionIds.includes(deletedOption.id), true)
+
+  // Undo restores it before saving
+  assert.strictEqual(store.canUndoStructural(), true)
+  store.undoStructural()
+  resolved = resolveWorkingSectionNodes(sec, store.getWorkingDocument().structured)
+  resolvedMcq = resolved.find(i => i.nodeId === node.id).resolvedNode
+  assert.strictEqual(resolvedMcq.options.some(o => o.id === deletedOption.id), true)
+
+  // Redo re-deletes it
+  store.redoStructural()
+  resolved = resolveWorkingSectionNodes(sec, store.getWorkingDocument().structured)
+  resolvedMcq = resolved.find(i => i.nodeId === node.id).resolvedNode
+  assert.strictEqual(resolvedMcq.options.some(o => o.id === deletedOption.id), false)
+
+  // Save draft
+  const draft = store.exportCompactDraft()
+  saveWorkingDraft(draft, store.getBaselineDocument())
+
+  // Reload
+  const loaded = loadWorkingDraft(doc)
+  assert.strictEqual(loaded.status, 'OK')
+  const store2 = new EditorWorkingStore(doc)
+  store2.applyCompactDraft(loaded.draft)
+
+  // Assert source item remains in immutable canonical baseline
+  assert.strictEqual(doc.sections.find(s => s.id === sec.id).nodes.find(n => n.id === node.id).options.some(o => o.id === deletedOption.id), true)
+  // Resolved working structure hides it
+  const resolved2 = resolveWorkingSectionNodes(sec, store2.getWorkingDocument().structured)
+  const resolvedMcq2 = resolved2.find(i => i.nodeId === node.id).resolvedNode
+  assert.strictEqual(resolvedMcq2.options.some(o => o.id === deletedOption.id), false)
+  // Deleted ID survived draft
+  assert.strictEqual(store2.getWorkingDocument().structured.structuredPatches[node.id].deletedOptionIds.includes(deletedOption.id), true)
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 20. ALL SIX STRUCTURED TYPES DEEP ROUND TRIP (Section 14)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-SIX-TYPES-ROUNDTRIP-01: Independent deep round-trip fixture for all six structured types', () => {
+  clearAllWorkingDrafts()
+
+  const types = ['mcq', 'true_false', 'fill_blank', 'matching_columns', 'grammar_table', 'vertical_math']
+  for (const t of types) {
+    const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === t)))
+    assert.ok(doc, `Must find canonical document with type '${t}'`)
+    const sec = doc.sections.find(s => s.nodes.some(n => n.type === t))
+    const node = sec.nodes.find(n => n.type === t)
+
+    const store = new EditorWorkingStore(doc)
+    const allocator = store.getIdAllocator()
+
+    // Apply structured modification according to type
+    if (t === 'mcq') {
+      store.dispatchStructuralCommand(cmdUpdateMcqOptionText(node.id, sec.id, node.options[0].id, 'Deep MCQ Text', node.options[0].text))
+    } else if (t === 'true_false') {
+      store.dispatchStructuralCommand(cmdUpdateTfStatement(node.id, sec.id, 'Deep TF Statement', node.statement))
+      store.dispatchStructuralCommand(cmdUpdateTfIndicator(node.id, sec.id, !node.hasIndicatorBox, node.hasIndicatorBox))
+    } else if (t === 'fill_blank') {
+      const segId = deriveBaselineSegmentId(node.id, 0)
+      store.dispatchStructuralCommand(cmdUpdateFillSegmentText(node.id, sec.id, segId, 'Deep Fill Value', node.segments[0].value))
+      store.dispatchStructuralCommand(cmdUpdateWordBank(node.id, sec.id, ['WordA', 'WordB'], node.wordBank || []))
+    } else if (t === 'matching_columns') {
+      store.dispatchStructuralCommand(cmdUpdateMatchingSide('left', node.id, sec.id, node.leftItems[0].id, 'Deep Left', node.leftItems[0].text))
+      store.dispatchStructuralCommand(cmdUpdateMatchingSide('right', node.id, sec.id, node.rightItems[0].id, 'Deep Right', node.rightItems[0].text))
+    } else if (t === 'grammar_table') {
+      const rowId = deriveBaselineGrammarRowId(node.id, 0)
+      store.dispatchStructuralCommand(cmdUpdateGrammarCell(node.id, sec.id, rowId, 'left', 'Deep G-Left', node.rows[0].leftText))
+      store.dispatchStructuralCommand(cmdUpdateGrammarHeaders(node.id, sec.id, ['Col 1', 'Col 2'], ['Singular', 'Plural']))
+    } else if (t === 'vertical_math') {
+      const opId = deriveBaselineOperandId(node.id, 0)
+      store.dispatchStructuralCommand(cmdUpdateVerticalOperand(node.id, sec.id, opId, '456', 456, node.operands[0].raw, node.operands[0].normalizedNumericValue))
+      store.dispatchStructuralCommand(cmdUpdateVerticalOperator(node.id, sec.id, '-', '+'))
+      store.dispatchStructuralCommand(cmdSetVerticalResult(node.id, sec.id, '123', 123, node.result))
+    }
+
+    const baselineSec = doc.sections.find(s => s.id === sec.id)
+    const resolvedBefore = resolveWorkingSectionNodes(baselineSec, store.getWorkingDocument().structured)
+    const targetBefore = resolvedBefore.find(i => i.nodeId === node.id).resolvedNode
+
+    // Save
+    const draft = store.exportCompactDraft()
+    saveWorkingDraft(draft, store.getBaselineDocument())
+
+    // Reload
+    const loaded = loadWorkingDraft(doc)
+    assert.strictEqual(loaded.status, 'OK')
+    const freshStore = new EditorWorkingStore(doc)
+    const applyRes = freshStore.applyCompactDraft(loaded.draft)
+    assert.strictEqual(applyRes.status, 'APPLIED')
+
+    const resolvedAfter = resolveWorkingSectionNodes(baselineSec, freshStore.getWorkingDocument().structured)
+    const targetAfter = resolvedAfter.find(i => i.nodeId === node.id).resolvedNode
+
+    // Deep compare academic working structure
+    assert.deepStrictEqual(targetAfter, targetBefore, `Type '${t}' must deep match after save and reload`)
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 21. INSERTED SIX NODE TYPES ROUND TRIP (Section 15)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-INSERT-NODE-ROUNDTRIP-01: Insert all six user-created node types and verify provenance & null answer keys after reload', () => {
+  clearAllWorkingDrafts()
+  const doc = canonicalCorpus[0]
+  const sec = doc.sections[0]
+  const store = new EditorWorkingStore(doc)
+  const allocator = store.getIdAllocator()
+
+  const nodeTypes = ['mcq', 'true_false', 'fill_blank', 'matching_columns', 'grammar_table', 'vertical_math']
+  const insertedNodeIds = []
+
+  for (const t of nodeTypes) {
+    const newNodeId = allocator.allocateNodeId(sec.id)
+    insertedNodeIds.push(newNodeId)
+    const rec = createDefaultInsertedNode(t, newNodeId, sec.id, (k) => allocator.allocate(sec.id, k))
+    const prevOrder = store.getSectionWorkingNodeOrder(sec.id)
+    store.dispatchStructuralCommand(cmdInsertNode(newNodeId, sec.id, rec, null, prevOrder))
+  }
+
+  // Save
+  const draft = store.exportCompactDraft()
+  saveWorkingDraft(draft, store.getBaselineDocument())
+
+  // Reload
+  const loaded = loadWorkingDraft(doc)
+  assert.strictEqual(loaded.status, 'OK')
+  const freshStore = new EditorWorkingStore(doc)
+  freshStore.applyCompactDraft(loaded.draft)
+
+  const baselineSec = doc.sections.find(s => s.id === sec.id)
+  const resolved = resolveWorkingSectionNodes(baselineSec, freshStore.getWorkingDocument().structured)
+
+  for (let i = 0; i < nodeTypes.length; i++) {
+    const t = nodeTypes[i]
+    const id = insertedNodeIds[i]
+    const item = resolved.find(x => x.nodeId === id)
+    assert.ok(item, `Inserted node ${id} (${t}) must be present after reload`)
+    assert.strictEqual(item.isInserted, true)
+
+    const rawRecord = freshStore.getWorkingDocument().structured.insertedNodes[id]
+    assert.strictEqual(rawRecord.origin, 'USER_CREATED')
+    assert.deepStrictEqual(rawRecord.sourceSegmentIds, [])
+    assert.strictEqual(rawRecord.rawSourceSnapshot, null)
+    assert.strictEqual(rawRecord.isCorrect ?? null, null)
+    assert.strictEqual(rawRecord.expectedAnswer ?? null, null)
+    assert.strictEqual(rawRecord.correctMappings ?? null, null)
+
+    if (t === 'mcq') {
+      assert.ok(item.resolvedNode.options.length >= 2)
+      for (const opt of item.resolvedNode.options) {
+        assert.strictEqual(opt.isCorrect, null)
+      }
+    }
+  }
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 22. DUPLICATE NODE PERSISTENCE (Section 16)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-DUPLICATE-NODE-ROUNDTRIP-01: Duplicate source MCQ and structured type preserves independent stable IDs and scrubs provenance', () => {
+  clearAllWorkingDrafts()
+  const doc = canonicalCorpus.find(d => d.sections.some(s => s.nodes.some(n => n.type === 'mcq')))
+  const sec = doc.sections.find(s => s.nodes.some(n => n.type === 'mcq'))
+  const mcqNode = sec.nodes.find(n => n.type === 'mcq')
+
+  const store = new EditorWorkingStore(doc)
+  const allocator = store.getIdAllocator()
+  const dupMcqId = allocator.allocateNodeId(sec.id)
+
+  const duplicateRecord = {
+    nodeId: dupMcqId,
+    nodeType: 'mcq',
+    sectionId: sec.id,
+    origin: 'USER_CREATED',
+    sourceSegmentIds: [],
+    rawSourceSnapshot: null,
+    isCorrect: null,
+    expectedAnswer: null,
+    correctMappings: null,
+    stem: mcqNode.stem || 'Duplicated stem',
+    options: (mcqNode.options || []).map(opt => ({
+      id: allocator.allocateOptionId(sec.id),
+      canonicalLabel: opt.canonicalLabel || 'A',
+      displayLabel: opt.displayLabel || 'A',
+      text: opt.text || '',
+      direction: opt.direction || 'ltr',
+      isCorrect: null,
+    })),
+  }
+
+  const prevOrder = store.getSectionWorkingNodeOrder(sec.id)
+  store.dispatchStructuralCommand(cmdDuplicateNode(mcqNode.id, dupMcqId, sec.id, duplicateRecord, mcqNode.id, prevOrder))
+
+  // Save
+  const draft = store.exportCompactDraft()
+  saveWorkingDraft(draft, store.getBaselineDocument())
+
+  // Reload
+  const loaded = loadWorkingDraft(doc)
+  assert.strictEqual(loaded.status, 'OK')
+  const freshStore = new EditorWorkingStore(doc)
+  freshStore.applyCompactDraft(loaded.draft)
+
+  const baselineSec = doc.sections.find(s => s.id === sec.id)
+  const resolved = resolveWorkingSectionNodes(baselineSec, freshStore.getWorkingDocument().structured)
+  const dupItem = resolved.find(x => x.nodeId === dupMcqId)
+  assert.ok(dupItem, 'Duplicate node must survive reload')
+  assert.strictEqual(dupItem.isInserted, true)
+  assert.strictEqual(dupItem.resolvedNode.origin, 'USER_CREATED')
+  assert.deepStrictEqual(dupItem.resolvedNode.sourceSegmentIds, [])
+  assert.strictEqual(dupItem.resolvedNode.rawSourceSnapshot, null)
+  assert.strictEqual(dupItem.resolvedNode.isCorrect, null)
+
+  // Source node remains unchanged
+  const srcItem = resolved.find(x => x.nodeId === mcqNode.id)
+  assert.ok(srcItem)
+  assert.strictEqual(srcItem.isInserted, false)
+  assert.deepStrictEqual(srcItem.resolvedNode.options.map(o => o.id), mcqNode.options.map(o => o.id))
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 23. TRUE ATOMIC APPLY & ALLOCATOR STATE (Sections 9 & 10)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-ATOMIC-APPLY-01: Unexpected failure leaves _workingDoc and allocator completely unmutated with zero notifications', () => {
+  const doc = canonicalCorpus[0]
+  const store = new EditorWorkingStore(doc)
+
+  const workingDocBefore = store.getWorkingDocument()
+  const allocatorSeqBefore = store.getIdAllocator().serialize()
+
+  let notifyCount = 0
+  store.subscribe(() => { notifyCount++ })
+
+  // Construct a corrupt draft that passes preflight but fails during candidate projection
+  // (e.g. cross-section reference in nodeOrderBySection)
+  const compactDraft = store.exportCompactDraft()
+  compactDraft.draftVersion = 2
+  compactDraft.structured = {
+    structuredPatches: {},
+    insertedNodes: {},
+    deletedNodeIds: [],
+    nodeOrderBySection: {
+      [doc.sections[0].id]: [doc.sections[1].nodes[0].id], // Cross-section reference!
+    },
+    nextUserStructureSequence: 999,
+  }
+
+  const result = store.applyCompactDraft(compactDraft)
+  assert.strictEqual(result.status, 'INVALID_DRAFT')
+  assert.strictEqual(notifyCount, 0, 'Must emit ZERO notifications on apply failure')
+
+  // Working document must remain 100% unmutated
+  assert.strictEqual(store.getWorkingDocument(), workingDocBefore)
+  // Allocator sequence must remain unchanged (no sequence jump to 999)
+  assert.strictEqual(store.getIdAllocator().serialize(), allocatorSeqBefore)
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 24. SAVE-SUCCESS => LOAD-OK INVARIANT CONTRACT (Section 8)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-CONTRACT-SAVE-LOAD-01: Save success guarantees loadWorkingDraft returns status OK and rejects saving without canonicalDoc when structured edits exist', () => {
+  clearAllWorkingDrafts()
+  const doc = canonicalCorpus[0]
+  const sec = doc.sections[0]
+  const store = new EditorWorkingStore(doc)
+
+  // Add structured edit
+  const allocator = store.getIdAllocator()
+  const newNodeId = allocator.allocateNodeId(sec.id)
+  const rec = createDefaultInsertedNode('mcq', newNodeId, sec.id, (k) => allocator.allocate(sec.id, k))
+  const prevOrder = store.getSectionWorkingNodeOrder(sec.id)
+  store.dispatchStructuralCommand(cmdInsertNode(newNodeId, sec.id, rec, null, prevOrder))
+
+  const compactDraft = store.exportCompactDraft()
+
+  // 1. Attempting to save without canonicalDoc MUST throw explicit error
+  assert.throws(
+    () => saveWorkingDraft(compactDraft),
+    /Canonical baseline document is required to validate V2 structured draft/
+  )
+
+  // 2. Saving with canonicalDoc succeeds
+  const saveRes = saveWorkingDraft(compactDraft, store.getBaselineDocument())
+  assert.strictEqual(saveRes.success, true)
+
+  // 3. Absolute Invariant: loadWorkingDraft must return status = OK, never CORRUPTED
+  const loadRes = loadWorkingDraft(doc)
+  assert.strictEqual(loadRes.status, 'OK')
+  assert.ok(loadRes.draft)
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 25. SECTION OWNERSHIP VALIDATION (Section 6)
+// ─────────────────────────────────────────────────────────────────────────────
+test('B4-SECTION-OWNERSHIP-01: Validator rejects cross-section node references in nodeOrderBySection', () => {
+  const doc = canonicalCorpus[0]
+  assert.ok(doc.sections.length >= 2, 'Corpus paper must have at least 2 sections')
+  const sec0 = doc.sections[0]
+  const sec1 = doc.sections[1]
+  const nodeSec1 = sec1.nodes[0]
+
+  // Cross section reference of source node
+  const badStructured1 = {
+    structuredPatches: {},
+    insertedNodes: {},
+    deletedNodeIds: [],
+    nodeOrderBySection: {
+      [sec0.id]: [nodeSec1.id], // Belongs to sec1!
+    },
+    nextUserStructureSequence: 1,
+  }
+  const res1 = validateV2StructuredBlock(badStructured1, doc)
+  assert.strictEqual(res1.valid, false)
+  assert.ok(res1.error.includes('belongs to section'), 'Must reject cross-section source node reference')
+
+  // Cross section reference of inserted node
+  const badStructured2 = {
+    structuredPatches: {},
+    insertedNodes: {
+      'user_sec1_node_1': {
+        nodeId: 'user_sec1_node_1',
+        nodeType: 'mcq',
+        sectionId: sec1.id, // Inserted for sec1
+        origin: 'USER_CREATED',
+        sourceSegmentIds: [],
+        rawSourceSnapshot: null,
+      },
+    },
+    deletedNodeIds: [],
+    nodeOrderBySection: {
+      [sec0.id]: ['user_sec1_node_1'], // Placed in sec0!
+    },
+    nextUserStructureSequence: 2,
+  }
+  const res2 = validateV2StructuredBlock(badStructured2, doc)
+  assert.strictEqual(res2.valid, false)
+  assert.ok(res2.error.includes('has sectionId'), 'Must reject cross-section inserted node placement')
 })
 

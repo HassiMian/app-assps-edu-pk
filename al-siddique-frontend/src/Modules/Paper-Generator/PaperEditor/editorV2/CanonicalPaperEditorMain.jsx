@@ -1,5 +1,5 @@
 // CanonicalPaperEditorMain.jsx — Top-Level Canonical Word-Like In-Place Editor (Rule 23)
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import CanonicalPaperRibbonToolbar from './CanonicalPaperRibbonToolbar.jsx'
 import CanonicalDocumentRenderer from './CanonicalDocumentRenderer.jsx'
 import { EditorWorkingStore } from './editorWorkingStore.js'
@@ -85,9 +85,25 @@ export default function CanonicalPaperEditorMain({
     setIsEditMode(prev => !prev)
   }
 
-  // 6. Handle structured undo/redo shortcuts when structured control is focused
+  // Handle field focus to ensure Tiptap interaction mode is set (Rule 19)
+  const handleFocusField = useCallback((fieldKey) => {
+    setActiveFieldKey(fieldKey)
+    if (store.getWorkingDocument()?.session) {
+      store.getWorkingDocument().session.activeInteractionMode = INTERACTION_MODE.TIPTAP
+    }
+  }, [store])
+
+  // 6. Handle structured undo/redo shortcuts when structured control is focused (Rule 19)
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // If event target is inside a ProseMirror / Tiptap editable field, NEVER intercept structured shortcuts
+      if (e.target?.closest?.('.ProseMirror, .canonical-editable-field')) {
+        if (store.getWorkingDocument()?.session) {
+          store.getWorkingDocument().session.activeInteractionMode = INTERACTION_MODE.TIPTAP
+        }
+        return
+      }
+
       const mode = store.getWorkingDocument()?.session?.activeInteractionMode
       if (mode !== INTERACTION_MODE.STRUCTURED) return
 
@@ -244,7 +260,7 @@ export default function CanonicalPaperEditorMain({
             store={store}
             registry={registry}
             activeFieldKey={activeFieldKey}
-            onFocusField={setActiveFieldKey}
+            onFocusField={handleFocusField}
             externalRevisionToken={externalRevisionToken}
           />
         </div>

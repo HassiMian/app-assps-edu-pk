@@ -251,9 +251,23 @@ export class EditorWorkingStore {
     switch (type) {
       // MCQ
       case CMD.UPDATE_MCQ_OPTION_TEXT: {
-        const p = this._getOrCreatePatch(nodeId, 'mcq')
-        p.optionPatches[payload.optionId] = { ...(p.optionPatches[payload.optionId] || {}), text: payload.text }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const opt = (insNode.options || []).find(o => o.id === payload.optionId)
+          if (opt) opt.text = payload.text
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'mcq')
+          if (p.insertedOptions && p.insertedOptions[payload.optionId]) {
+            p.insertedOptions[payload.optionId] = {
+              ...p.insertedOptions[payload.optionId],
+              text: payload.text,
+            }
+          } else {
+            p.optionPatches[payload.optionId] = { ...(p.optionPatches[payload.optionId] || {}), text: payload.text }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        }
         break
       }
       case CMD.ADD_MCQ_OPTION: {
@@ -310,9 +324,23 @@ export class EditorWorkingStore {
       }
       // Fill Blank
       case CMD.UPDATE_FILL_SEGMENT_TEXT: {
-        const p = this._getOrCreatePatch(nodeId, 'fill_blank')
-        p.segmentPatches[payload.segId] = { ...(p.segmentPatches[payload.segId] || {}), value: payload.value }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const seg = (insNode.segments || []).find(seg => seg.id === payload.segId)
+          if (seg) seg.value = payload.value
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'fill_blank')
+          if (p.insertedSegments && p.insertedSegments[payload.segId]) {
+            p.insertedSegments[payload.segId] = {
+              ...p.insertedSegments[payload.segId],
+              value: payload.value,
+            }
+          } else {
+            p.segmentPatches[payload.segId] = { ...(p.segmentPatches[payload.segId] || {}), value: payload.value }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        }
         break
       }
       case CMD.INSERT_FILL_SEGMENT: {
@@ -362,15 +390,43 @@ export class EditorWorkingStore {
       }
       // Matching
       case CMD.UPDATE_MATCHING_LEFT: {
-        const p = this._getOrCreatePatch(nodeId, 'matching_columns')
-        p.leftPatches[payload.itemId] = { ...(p.leftPatches[payload.itemId] || {}), text: payload.text }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const item = (insNode.leftItems || []).find(i => i.id === payload.itemId)
+          if (item) item.text = payload.text
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'matching_columns')
+          if (p.insertedLeftItems && p.insertedLeftItems[payload.itemId]) {
+            p.insertedLeftItems[payload.itemId] = {
+              ...p.insertedLeftItems[payload.itemId],
+              text: payload.text,
+            }
+          } else {
+            p.leftPatches[payload.itemId] = { ...(p.leftPatches[payload.itemId] || {}), text: payload.text }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        }
         break
       }
       case CMD.UPDATE_MATCHING_RIGHT: {
-        const p = this._getOrCreatePatch(nodeId, 'matching_columns')
-        p.rightPatches[payload.itemId] = { ...(p.rightPatches[payload.itemId] || {}), text: payload.text }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const item = (insNode.rightItems || []).find(i => i.id === payload.itemId)
+          if (item) item.text = payload.text
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'matching_columns')
+          if (p.insertedRightItems && p.insertedRightItems[payload.itemId]) {
+            p.insertedRightItems[payload.itemId] = {
+              ...p.insertedRightItems[payload.itemId],
+              text: payload.text,
+            }
+          } else {
+            p.rightPatches[payload.itemId] = { ...(p.rightPatches[payload.itemId] || {}), text: payload.text }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        }
         break
       }
       case CMD.ADD_MATCHING_LEFT: {
@@ -451,21 +507,53 @@ export class EditorWorkingStore {
         break
       }
       case CMD.UPDATE_GRAMMAR_CELL: {
-        const p = this._getOrCreatePatch(nodeId, 'grammar_table')
-        p.rowPatches[payload.rowId] = {
-          ...(p.rowPatches[payload.rowId] || {}),
-          [payload.side === 'left' ? 'leftText' : 'rightText']: payload.value,
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const row = (insNode.rows || []).find(r => r.id === payload.rowId)
+          if (row) {
+            row[payload.side === 'left' ? 'leftText' : 'rightText'] = payload.value
+          }
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'grammar_table')
+          if (p.insertedRows && p.insertedRows[payload.rowId]) {
+            p.insertedRows[payload.rowId] = {
+              ...p.insertedRows[payload.rowId],
+              [payload.side === 'left' ? 'leftText' : 'rightText']: payload.value,
+            }
+          } else {
+            p.rowPatches[payload.rowId] = {
+              ...(p.rowPatches[payload.rowId] || {}),
+              [payload.side === 'left' ? 'leftText' : 'rightText']: payload.value,
+            }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
       case CMD.TOGGLE_GRAMMAR_BLANK: {
-        const p = this._getOrCreatePatch(nodeId, 'grammar_table')
-        p.rowPatches[payload.rowId] = {
-          ...(p.rowPatches[payload.rowId] || {}),
-          [payload.side === 'left' ? 'leftIsBlank' : 'rightIsBlank']: payload.isBlank,
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const row = (insNode.rows || []).find(r => r.id === payload.rowId)
+          if (row) {
+            row[payload.side === 'left' ? 'leftIsBlank' : 'rightIsBlank'] = payload.isBlank
+          }
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'grammar_table')
+          if (p.insertedRows && p.insertedRows[payload.rowId]) {
+            p.insertedRows[payload.rowId] = {
+              ...p.insertedRows[payload.rowId],
+              [payload.side === 'left' ? 'leftIsBlank' : 'rightIsBlank']: payload.isBlank,
+            }
+          } else {
+            p.rowPatches[payload.rowId] = {
+              ...(p.rowPatches[payload.rowId] || {}),
+              [payload.side === 'left' ? 'leftIsBlank' : 'rightIsBlank']: payload.isBlank,
+            }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
         break
       }
       case CMD.ADD_GRAMMAR_ROW: {
@@ -508,9 +596,27 @@ export class EditorWorkingStore {
       }
       // Vertical Math
       case CMD.UPDATE_VERTICAL_OPERAND: {
-        const p = this._getOrCreatePatch(nodeId, 'vertical_math')
-        p.operandPatches[payload.opId] = { raw: payload.raw, normalizedNumericValue: payload.normalizedNumericValue }
-        p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        const s = this._workingDoc.structured
+        const insNode = s.insertedNodes?.[nodeId]
+        if (insNode) {
+          const op = (insNode.operands || []).find(o => o.id === payload.opId)
+          if (op) {
+            op.raw = payload.raw
+            op.normalizedNumericValue = payload.normalizedNumericValue
+          }
+        } else {
+          const p = this._getOrCreatePatch(nodeId, 'vertical_math')
+          if (p.insertedOperands && p.insertedOperands[payload.opId]) {
+            p.insertedOperands[payload.opId] = {
+              ...p.insertedOperands[payload.opId],
+              raw: payload.raw,
+              normalizedNumericValue: payload.normalizedNumericValue,
+            }
+          } else {
+            p.operandPatches[payload.opId] = { raw: payload.raw, normalizedNumericValue: payload.normalizedNumericValue }
+          }
+          p.mutationState = STRUCTURED_MUTATION.USER_EDITED
+        }
         break
       }
       case CMD.ADD_VERTICAL_OPERAND: {
