@@ -2,6 +2,8 @@
 import React from 'react'
 import CanonicalEditableText from './CanonicalEditableText.jsx'
 import CanonicalStaticNode from './CanonicalStaticNode.jsx'
+import CanonicalStructuredNodeEditor from './structured/CanonicalStructuredNodeEditor.jsx'
+import { resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
 import { buildFieldKey } from './EditorFieldRegistry.js'
 import { getB3NodeEditability, B3_RENDER_STRATEGY } from './nodeRenderStrategy.js'
 import { usePaperStore } from '../../usePaperStore.js'
@@ -228,97 +230,157 @@ export default function CanonicalDocumentRenderer({
 
               {/* Section Nodes */}
               <div className="canonical-section-nodes" dir={secDir}>
-                {section.nodeOverlays?.map((nodeOverlay) => {
-                  const nodeType = nodeOverlay.nodeType
-                  const strategy = getB3NodeEditability(nodeType)
-                  const nodeDir = nodeOverlay.direction === 'rtl' ? 'rtl' : (nodeOverlay.direction === 'ltr' ? 'ltr' : secDir)
-
-                  // Baseline node reference
+                {(() => {
                   const baselineSec = canonicalBaseline?.sections?.find(s => s.id === section.id)
-                  const baselineNode = baselineSec?.nodes?.find(n => n.id === nodeOverlay.nodeId)
+                  const workingItems = resolveWorkingSectionNodes(baselineSec, workingDoc?.structured)
 
-                  // 1. Scope Headers and Section Banners have NO question numbers or marks (Rule 13)
-                  if (nodeType === 'section_banner' || nodeType === 'scope_header') {
+                  return workingItems.map(({ resolvedNode, nodeId }) => {
+                    const nodeType = resolvedNode.type || resolvedNode.nodeType
+                    const nodeDir = resolvedNode.direction === 'rtl' ? 'rtl' : (resolvedNode.direction === 'ltr' ? 'ltr' : secDir)
+                    const nodeOverlay = section.nodeOverlays?.find(n => n.nodeId === nodeId)
+
+                    // 1. Scope Headers and Section Banners have NO question numbers or marks (Rule 13)
+                    if (nodeType === 'section_banner' || nodeType === 'scope_header') {
+                      return (
+                        <div
+                          key={nodeId}
+                          data-node-id={nodeId}
+                          data-node-type={nodeType}
+                          style={{ marginBottom: '6px' }}
+                        >
+                          <CanonicalStaticNode node={resolvedNode} direction={nodeDir} />
+                        </div>
+                      )
+                    }
+
+                    // Increment question count for academic question items
+                    questionCounter++
+                    const currentQNum = questionCounter
+
+                    // 2. Structured Non-MCQ Nodes (true_false, fill_blank, matching_columns, grammar_table, vertical_math, unknown_preserved)
+                    const isStructuredType = [
+                      'true_false',
+                      'fill_blank',
+                      'matching_columns',
+                      'grammar_table',
+                      'vertical_math',
+                      'unknown_preserved',
+                    ].includes(nodeType)
+
+                    if (isStructuredType) {
+                      return (
+                        <div
+                          key={nodeId}
+                          data-node-id={nodeId}
+                          data-node-type={nodeType}
+                          style={{ marginBottom: '8px', padding: '2px 0' }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                            <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
+                              {currentQNum}.
+                            </span>
+                            <div style={{ flex: 1 }}>
+                              <CanonicalStructuredNodeEditor
+                                nodeId={nodeId}
+                                sectionId={section.id}
+                                resolvedNode={resolvedNode}
+                                store={store}
+                                dir={nodeDir}
+                                isEditing={isEditing}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    }
+
+                    // 3. MCQ Nodes (Rich text stem + Structured options)
+                    if (nodeType === 'mcq') {
+                      const fieldName = nodeOverlay?.editableFields ? Object.keys(nodeOverlay.editableFields)[0] || 'stem' : 'stem'
+                      const fieldOverlay = nodeOverlay?.editableFields?.[fieldName]
+                      const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeId, fieldName)
+
+                      return (
+                        <div
+                          key={nodeId}
+                          data-node-id={nodeId}
+                          data-node-type={nodeType}
+                          style={{ marginBottom: '8px', padding: '2px 0' }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                            <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
+                              {currentQNum}.
+                            </span>
+                            <div style={{ flex: 1 }}>
+                              {fieldOverlay ? (
+                                <CanonicalEditableText
+                                  fieldKey={fieldKey}
+                                  fieldOverlay={fieldOverlay}
+                                  direction={nodeDir}
+                                  store={store}
+                                  registry={registry}
+                                  onFocusField={onFocusField}
+                                  isEditing={isEditing}
+                                  externalRevisionToken={externalRevisionToken}
+                                />
+                              ) : (
+                                <div style={{ fontSize: '13px', fontWeight: 600 }}>{resolvedNode.stemText || ''}</div>
+                              )}
+                            </div>
+                          </div>
+
+                          <CanonicalStructuredNodeEditor
+                            nodeId={nodeId}
+                            sectionId={section.id}
+                            resolvedNode={resolvedNode}
+                            store={store}
+                            dir={nodeDir}
+                            isEditing={isEditing}
+                          />
+                        </div>
+                      )
+                    }
+
+                    // 4. Other Rich Text Editable Nodes (short_question, long_question, essay, letter, translation, etc.)
+                    const fieldName = nodeOverlay?.editableFields ? Object.keys(nodeOverlay.editableFields)[0] || 'stem' : 'stem'
+                    const fieldOverlay = nodeOverlay?.editableFields?.[fieldName]
+                    const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeId, fieldName)
+
                     return (
                       <div
-                        key={nodeOverlay.nodeId}
-                        data-node-id={nodeOverlay.nodeId}
+                        key={nodeId}
+                        data-node-id={nodeId}
                         data-node-type={nodeType}
-                        style={{ marginBottom: '6px' }}
-                      >
-                        <CanonicalStaticNode node={baselineNode || nodeOverlay} direction={nodeDir} />
-                      </div>
-                    )
-                  }
-
-                  // Increment question count for academic question items
-                  questionCounter++
-                  const currentQNum = questionCounter
-
-                  // 2. Read-Only Structured Nodes (true_false, fill_blank, matching_columns, grammar_table, vertical_math, unknown_preserved) (Rules 6-12, 14)
-                  if (strategy === B3_RENDER_STRATEGY.READ_ONLY_STRUCTURED) {
-                    return (
-                      <div
-                        key={nodeOverlay.nodeId}
-                        data-node-id={nodeOverlay.nodeId}
-                        data-node-type={nodeType}
-                        style={{ marginBottom: '8px', padding: '2px 0' }}
+                        style={{
+                          marginBottom: '8px',
+                          padding: '2px 0',
+                        }}
                       >
                         <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
                           <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
                             {currentQNum}.
                           </span>
                           <div style={{ flex: 1 }}>
-                            <CanonicalStaticNode node={baselineNode || nodeOverlay} direction={nodeDir} />
+                            {fieldOverlay ? (
+                              <CanonicalEditableText
+                                fieldKey={fieldKey}
+                                fieldOverlay={fieldOverlay}
+                                direction={nodeDir}
+                                store={store}
+                                registry={registry}
+                                onFocusField={onFocusField}
+                                isEditing={isEditing}
+                                externalRevisionToken={externalRevisionToken}
+                              />
+                            ) : (
+                              <CanonicalStaticNode node={resolvedNode} direction={nodeDir} />
+                            )}
                           </div>
                         </div>
                       </div>
                     )
-                  }
-
-                  // 3. Rich Text Editable Nodes (mcq, short_question, long_question, essay, letter, translation, etc.) (Rule 4, 8)
-                  const fieldName = Object.keys(nodeOverlay.editableFields)[0] || 'stem'
-                  const fieldOverlay = nodeOverlay.editableFields[fieldName]
-                  const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeOverlay.nodeId, fieldName)
-
-                  return (
-                    <div
-                      key={nodeOverlay.nodeId}
-                      data-node-id={nodeOverlay.nodeId}
-                      data-node-type={nodeType}
-                      style={{
-                        marginBottom: '8px',
-                        padding: '2px 0',
-                      }}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                        {/* Question Number Prefix */}
-                        <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
-                          {currentQNum}.
-                        </span>
-
-                        {/* In-Place Editable Stem */}
-                        <div style={{ flex: 1 }}>
-                          <CanonicalEditableText
-                            fieldKey={fieldKey}
-                            fieldOverlay={fieldOverlay}
-                            direction={nodeDir}
-                            store={store}
-                            registry={registry}
-                            onFocusField={onFocusField}
-                            isEditing={isEditing}
-                            externalRevisionToken={externalRevisionToken}
-                          />
-                        </div>
-                      </div>
-
-                      {/* Specialized Structured Elements: MCQ options ONLY (Rule 8, 14 - NO duplication!) */}
-                      {nodeType === 'mcq' && baselineNode && (
-                        <CanonicalStaticNode node={baselineNode} direction={nodeDir} />
-                      )}
-                    </div>
-                  )
-                })}
+                  })
+                })()}
               </div>
             </section>
           )

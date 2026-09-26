@@ -8,6 +8,7 @@ import {
   saveWorkingDraft,
   loadWorkingDraft,
 } from './workingDraftStorage.js'
+import { StructuredFocusProvider, INTERACTION_MODE } from './structured/StructuredFocusContext.jsx'
 import { ZoomIn, ZoomOut, ArrowLeft } from 'lucide-react'
 
 export default function CanonicalPaperEditorMain({
@@ -80,19 +81,50 @@ export default function CanonicalPaperEditorMain({
     setIsEditMode(prev => !prev)
   }
 
+  // 6. Handle structured undo/redo shortcuts when structured control is focused
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const mode = workingDoc?.session?.activeInteractionMode
+      if (mode !== INTERACTION_MODE.STRUCTURED) return
+
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'z' || e.key === 'Z')) {
+        if (e.shiftKey) {
+          e.preventDefault()
+          store.redoStructural()
+        } else {
+          e.preventDefault()
+          store.undoStructural()
+        }
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === 'y' || e.key === 'Y')) {
+        e.preventDefault()
+        store.redoStructural()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [store, workingDoc])
+
   const zoomTransform = `scale(${zoomLevel / 100})`
 
   return (
-    <div
-      className="canonical-paper-editor-container"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-        background: '#071e34',
-        color: '#e2e8f0',
+    <StructuredFocusProvider
+      onModeChange={(mode) => {
+        if (store.getWorkingDocument()?.session) {
+          store.getWorkingDocument().session.activeInteractionMode = mode
+        }
       }}
     >
+      <div
+        className="canonical-paper-editor-container"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          background: '#071e34',
+          color: '#e2e8f0',
+        }}
+      >
       {/* 1. Word-like Ribbon Toolbar */}
       <CanonicalPaperRibbonToolbar
         registry={registry}
@@ -214,5 +246,6 @@ export default function CanonicalPaperEditorMain({
         </div>
       </main>
     </div>
+    </StructuredFocusProvider>
   )
 }
