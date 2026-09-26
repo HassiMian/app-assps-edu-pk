@@ -6,15 +6,20 @@ import RenderSketch from '../assets/RenderSketch.jsx'
 
 export default function CircleChoiceWithSketch({
   items = [],
-  isUrdu = false
+  isUrdu = false,
+  sketchSize = 'mainVisual',
+  layout = 'stacked'
 }) {
   const fontFamily = isUrdu
     ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
     : TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
 
+  const isVisualLeft = layout === 'visual-left'
+
   return (
     <div
-      className="early-years-circle-choice-sketches"
+      className={`early-years-circle-choice-sketches ${layout ? `layout-${layout}` : ''}`}
+      data-layout={layout}
       style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${Math.min(items.length, 3)}, minmax(0, 1fr))`,
@@ -34,14 +39,15 @@ export default function CircleChoiceWithSketch({
               borderRadius: '10px',
               padding: '12px 8px',
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: isVisualLeft ? 'row' : 'column',
               alignItems: 'center',
+              justifyContent: isVisualLeft ? 'space-around' : 'center',
               background: '#fff',
               gap: '12px'
             }}
           >
             {/* Sketch */}
-            <RenderSketch assetId={item.sketchId} size="mainVisual" />
+            <RenderSketch assetId={item.sketchId} size={sketchSize} />
 
             {/* Options Row (e.g. three letters or two words) */}
             <div

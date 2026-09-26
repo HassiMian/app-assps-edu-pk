@@ -2,6 +2,7 @@
 import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+import { getOverlay } from '../specs/EarlyYearsPresentationOverlay.js'
 import {
   TraceGlyphGrid,
   CaterpillarNumberTrace,
@@ -26,7 +27,9 @@ import {
 
 export default function EarlyYearsQuestionBlock({
   question = {},
-  isUrdu = false
+  isUrdu = false,
+  paperId = null,
+  presentationRevision = 0
 }) {
   const {
     label = 'Q1',
@@ -35,6 +38,20 @@ export default function EarlyYearsQuestionBlock({
     presentationType = '',
     content = {}
   } = question
+
+  const qId = question.questionId || question.id
+  const overlay = (paperId && qId) ? getOverlay(paperId, qId) : {}
+
+  // Fallback resolution: overlay value -> source presentation value -> design token default
+  const resolvedSketchSize = overlay.sketchSize || overlay.sketchSizeMm || content.sketchSize || undefined
+  const resolvedLineCount = overlay.lineCount !== undefined && overlay.lineCount !== null
+    ? overlay.lineCount
+    : (content.lineCount || content.lines || 3)
+  const resolvedLineGapMm = overlay.lineGapMm !== undefined && overlay.lineGapMm !== null
+    ? overlay.lineGapMm
+    : content.lineGapMm
+  const resolvedLayout = overlay.layout || content.layout || 'stacked'
+  const resolvedTraceMode = overlay.traceMode || content.traceMode || undefined
 
   const fontFamily = isUrdu
     ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
@@ -53,20 +70,77 @@ export default function EarlyYearsQuestionBlock({
         )
       case 'CaterpillarNumberTrace':
         return <CaterpillarNumberTrace numbers={content.numbers} />
-      case 'VisualMatchingColumns':
+      case 'VisualMatchingColumns': {
+        const effectiveLeft = (content.leftItems || []).map((item, idx) => {
+          const slotId = `left-${idx}`
+          const overrideSketch = overlay.sketchOverrides?.[slotId] ||
+            (overlay.targetVisualSlot === slotId ? overlay.sketchAssetId : null)
+          return overrideSketch ? { ...item, sketchId: overrideSketch } : item
+        })
+        const effectiveRight = (content.rightItems || []).map((item, idx) => {
+          const slotId = `right-${idx}`
+          const overrideSketch = overlay.sketchOverrides?.[slotId] ||
+            (overlay.targetVisualSlot === slotId ? overlay.sketchAssetId : null)
+          return overrideSketch ? { ...item, sketchId: overrideSketch } : item
+        })
         return (
           <VisualMatchingColumns
-            leftItems={content.leftItems}
-            rightItems={content.rightItems}
+            leftItems={effectiveLeft}
+            rightItems={effectiveRight}
             connectionGap={content.connectionGap}
             rowHeight={content.rowHeight}
             isUrdu={isUrdu}
+            sketchSize={resolvedSketchSize}
+            layout={resolvedLayout}
           />
         )
-      case 'PictureColoringBlock':
-        return <PictureColoringBlock items={content.items} isUrdu={isUrdu} />
-      case 'CircleChoiceWithSketch':
-        return <CircleChoiceWithSketch items={content.items} isUrdu={isUrdu} />
+      }
+      case 'PictureColoringBlock': {
+        const effectiveItems = (content.items || []).map((item, idx) => {
+          const slotId = String(idx)
+          const overrideSketch = overlay.sketchOverrides?.[slotId] ||
+            (overlay.targetVisualSlot === slotId ? overlay.sketchAssetId : null) ||
+            ((content.items && content.items.length === 1 && overlay.sketchAssetId) ? overlay.sketchAssetId : null)
+          return {
+            ...item,
+            sketchId: overrideSketch || item.sketchId
+          }
+        })
+        return (
+          <PictureColoringBlock
+            items={effectiveItems}
+            isUrdu={isUrdu}
+            sketchSize={resolvedSketchSize}
+            layout={resolvedLayout}
+          />
+        )
+      }
+      case 'CircleChoiceWithSketch': {
+        const effectiveItems = (content.items || []).map((item, idx) => {
+          const slotId = String(idx)
+          const overrideSketch = overlay.sketchOverrides?.[slotId] ||
+            (overlay.targetVisualSlot === slotId ? overlay.sketchAssetId : null) ||
+            ((content.items && content.items.length === 1 && overlay.sketchAssetId) ? overlay.sketchAssetId : null)
+          let choices = item.choices || item.options
+          if (!choices && Array.isArray(content.allWords) && content.items?.length > 0) {
+            const count = Math.ceil(content.allWords.length / content.items.length)
+            choices = content.allWords.slice(idx * count, (idx + 1) * count)
+          }
+          return {
+            ...item,
+            choices,
+            sketchId: overrideSketch || item.sketchId
+          }
+        })
+        return (
+          <CircleChoiceWithSketch
+            items={effectiveItems}
+            isUrdu={isUrdu}
+            sketchSize={resolvedSketchSize}
+            layout={resolvedLayout}
+          />
+        )
+      }
       case 'ChoiceLetterRow':
         return <ChoiceLetterRow rows={content.rows} isUrdu={isUrdu} />
       case 'MissingLetterGrid':
@@ -91,15 +165,17 @@ export default function EarlyYearsQuestionBlock({
       case 'AlphabetWritingArea':
         return (
           <AlphabetWritingArea
-            lines={content.lines}
-            lineCount={content.lineCount}
+            lines={resolvedLineCount}
+            lineCount={resolvedLineCount}
+            lineGapMm={resolvedLineGapMm}
             isUrdu={isUrdu}
           />
         )
       case 'UrduHandwritingResponse':
         return (
           <UrduHandwritingResponse
-            lineCount={content.lineCount}
+            lineCount={resolvedLineCount}
+            lineGapMm={resolvedLineGapMm}
             placeholders={content.placeholders}
           />
         )
@@ -113,13 +189,17 @@ export default function EarlyYearsQuestionBlock({
         )
       case 'PatternCopyBlock':
         return <PatternCopyBlock patterns={content.patterns} />
-      case 'TraceShapeBlock':
+      case 'TraceShapeBlock': {
+        const effectiveShapeId = overlay.sketchOverrides?.['0'] || overlay.sketchAssetId || content.shapeId
+        const effectiveDotted = resolvedTraceMode === 'solid' ? false : (resolvedTraceMode === 'dotted' ? true : content.isDotted)
         return (
           <TraceShapeBlock
-            shapeId={content.shapeId}
-            isDotted={content.isDotted}
+            shapeId={effectiveShapeId}
+            isDotted={effectiveDotted}
+            sketchSize={resolvedSketchSize}
           />
         )
+      }
       case 'UrduJoinLettersExercise':
         return <UrduJoinLettersExercise expressions={content.expressions} />
       case 'CircleChoiceGrid':
@@ -154,10 +234,11 @@ export default function EarlyYearsQuestionBlock({
         marginBottom: '20px',
         pageBreakInside: 'avoid',
         breakInside: 'avoid',
-        direction: isUrdu ? 'rtl' : 'ltr'
+        direction: isUrdu ? 'rtl' : 'ltr',
+        fontFamily
       }}
     >
-      {/* Header Row: Fixed Question Label + Instruction + Marks Badge */}
+      {/* Header Row: Fixed Question Label + Instruction + Marks Badge (Source-Owned) */}
       <div
         style={{
           display: 'flex',
@@ -204,6 +285,7 @@ export default function EarlyYearsQuestionBlock({
         {/* Section Marks */}
         {marks !== null && marks !== undefined && (
           <span
+            className="early-years-question-marks"
             style={{
               fontFamily: TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary,
               fontSize: TYPOGRAPHY_TOKENS.fontSizes.metadata,
@@ -222,8 +304,22 @@ export default function EarlyYearsQuestionBlock({
         )}
       </div>
 
-      {/* Visual Child Response Body */}
-      <div className="early-years-question-body">{renderVisualBody()}</div>
+      {/* Visual Child Response Body with layout and overlay resolution */}
+      <div
+        className={`early-years-question-body early-years-layout-${resolvedLayout}`}
+        data-layout={resolvedLayout}
+        style={
+          resolvedLayout === 'visual-left'
+            ? { display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '16px' }
+            : resolvedLayout === 'visual-top'
+            ? { display: 'flex', flexDirection: 'column', gap: '12px' }
+            : resolvedLayout === 'two-column'
+            ? { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }
+            : undefined
+        }
+      >
+        {renderVisualBody()}
+      </div>
     </div>
   )
 }

@@ -9,7 +9,8 @@ import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 export default function EarlyYearsPaperContainer({
   paper = null,
   spec = null,
-  scale = 1
+  scale = 1,
+  presentationRevision = 0
 }) {
   const activeSpec = spec || (paper ? buildWorksheetSpec(paper) : null)
 
@@ -70,9 +71,11 @@ export default function EarlyYearsPaperContainer({
         <div className="early-years-questions-container">
           {activeSpec.questionPresentations.map((question) => (
             <EarlyYearsQuestionBlock
-              key={question.questionId}
+              key={`${question.questionId}-${presentationRevision}`}
               question={question}
               isUrdu={isUrdu}
+              paperId={paper?.id || activeSpec.paperId}
+              presentationRevision={presentationRevision}
             />
           ))}
         </div>

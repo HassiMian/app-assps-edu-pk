@@ -25,9 +25,7 @@
       "classDisplayName": "Starter",
       "subject": "english",
       "language": "english",
-      "rawTeacherSource": {
-        "note": "Teacher-supplied Starter English paper. Transcribed without inference or normalisation."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Starter\nSubject: English\nTotal Marks: 50\n\nQ1. Trace the Alphabets. (10)\nA  B  C  D  E\nF  G  H  I  J\n\nQ2. Match capital letters with small letters. (10)\nColumn A | Column B\nB | c\nA | e\nC | b\nD | d\nE | a\n\nQ3. Color it. (10)\nApple\nMango\nGrapes\nBanana\n\nQ4. Match picture with its letter (10)\nApple    [Lion Drawing]\nDoll     [Flower Drawing]\nKite     [Doll Drawing]\nFlower   [Kite Drawing]\nLion     [Apple Drawing]\n\nQ5. Circle the small letters of given Capital letters. (10)\nA -> w  e  a\nB -> d  b  t\nC -> c  s  u\nD -> p  r  d",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -288,7 +286,8 @@
         "SOURCE_ITEM_COUNT_MARKS_AMBIGUITY"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Teacher-supplied Starter English paper. Transcribed without inference or normalisation."
     },
     {
       "id": "ey-starter-urdu-2026",
@@ -296,9 +295,7 @@
       "classDisplayName": "Starter",
       "subject": "urdu",
       "language": "urdu",
-      "rawTeacherSource": {
-        "note": "Teacher-supplied Starter Urdu paper. Header total 50 conflicts with question marks sum 80. Exact letter grids and choice options preserved as supplied. Q1: 14-glyph ragged sequence (not 6). Q2: exact choices per picture. Q3: ragged grid from teacher source."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Starter\nSubject: Urdu\nHeader Total: 50\n\nسوال نمبر 1. حروف تہجی لکھیں ٹریس کریں (20)\nRow 1: ا  آ  ب  پ  ت\nRow 2: ٹ  ث  ج  چ  ح\nRow 3: خ  د  ڈ  ذ\n\nسوال نمبر 2. صحیح حروف پر دائرہ لگائیں (20)\nمرغی: س  م  ب\nپنکھا: ب  ب  ج\nٹماٹر: ت  س  ض\n\nسوال نمبر 3. ف اور ب پر دائرہ لگائیں (10)\nRow 1: ف  ت  ت  ج  د  ذ\nRow 2: ذ  س  ب  د  ف  ح  ب\nRow 3: ف  م  ب\n\nسوال نمبر 4. رنگ بھریں (10)\nپنسل\nآم\nانگور\n\nسوال نمبر 5. کالم ملائیں (20)\nکالم الف | کالم ب\nا | تتلی\nب | انگور\nت | بلا",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -541,7 +538,8 @@
         "DUPLICATE_CANDIDATE"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Teacher-supplied Starter Urdu paper. Header total 50 conflicts with question marks sum 80. Exact letter grids and choice options preserved as supplied. Q1: 14-glyph ragged sequence (not 6). Q2: exact choices per picture. Q3: ragged grid from teacher source."
     },
     {
       "id": "ey-starter-math-2026",
@@ -549,9 +547,7 @@
       "classDisplayName": "Starter",
       "subject": "math",
       "language": "english",
-      "rawTeacherSource": {
-        "note": "Teacher-supplied Starter Math. Caterpillar marker and Q3 exact wording preserved including source spelling errors."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Starter\nSubject: Math\nTotal: 50\n\nQ1. Trace the numbers. (10)\nDrawing of cartipiler\n1 2 3 4 5 6 7 8 9 10\n\nQ2. Count the apples in each box, match with Correct numbers. (10)\n4 apples | 5\n3 apples | 4\n5 apples | 3\n2 apples | 1\n1 apple  | 2\n\nQ3. Trace the shapes using led pencil and colour it. (10)\n[Square shape dotted]\n\nQ4. Look above and write it yourself. (10)\n1 2 3 4 5\n\nQ5. Match the Same words. (10)\nColumn A | Column B\n15 | 20\n17 | 18\n18 | 19\n19 | 17\n11 | 11",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -600,7 +596,7 @@
           "questionNumber": 2,
           "label": "Q2",
           "rawInstruction": "Count the apples in each box, match with Correct numbers.",
-          "rawContent": "4 apples-4, 3 apples-3, 5 apples-5, 2 apples-2, 1 apple-1",
+          "rawContent": "4 apples | 5\n3 apples | 4\n5 apples | 3\n2 apples | 1\n1 apple  | 2",
           "instruction": "Count the apples in each box, match with Correct numbers.",
           "marks": 10,
           "presentationType": "VisualMatchingColumns",
@@ -765,7 +761,8 @@
         "SOURCE_AMBIGUOUS"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Teacher-supplied Starter Math. Caterpillar marker and Q3 exact wording preserved including source spelling errors."
     },
     {
       "id": "ey-mover-english-2026",
@@ -773,9 +770,7 @@
       "classDisplayName": "Mover",
       "subject": "english",
       "language": "english",
-      "rawTeacherSource": {
-        "note": "Q1 layout ambiguous. Q2: 6 words total, grouping ambiguous. Q3=20 marks. Q4=10 marks, exact 6 rows: R/M/P/Q/D/S."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Mover\nSubject: English\nTotal Marks: 50\n\nQ1. Supply missing letters (10)\nA        D\n    F\nH        J\n    L    M\n\nQ2. Tick the correct name of the picture. (10)\n[F Picture]  [M Picture]\nFish\nDog\nCat\nMonkey\nMouse\nBus\n\nQ3. Write Alphabets A to Z (20)\n\nQ4. Match the capital letter with small letters (10)\nColumn A | Column B\nR | q\nM | p\nP | m\nQ | r\nD | s\nS | d",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -931,7 +926,8 @@
         "SOURCE_LAYOUT_AMBIGUOUS"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Q1 layout ambiguous. Q2: 6 words total, grouping ambiguous. Q3=20 marks. Q4=10 marks, exact 6 rows: R/M/P/Q/D/S."
     },
     {
       "id": "ey-mover-urdu-2026",
@@ -939,9 +935,7 @@
       "classDisplayName": "Mover",
       "subject": "urdu",
       "language": "urdu",
-      "rawTeacherSource": {
-        "note": "No explicit paper total. Q1 handwriting practice grid, not alphabet-to-ye. Q2 layout ambiguous. Q3=20 marks. Q4 has repeated target nun (not ba)."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Mover\nSubject: Urdu\nHeader Total: [omitted]\n\nسوال نمبر 1. مندرجہ ذیل الفاظ کو دوبارہ خوشخط کر کے لکھیں۔ (10)\nRow 1: ا  ب  پ  ٹ\nRow 2: ح  د  ر  س\n\nسوال نمبر 2. مناسب الفاظ کی مدد سے خالی جگہ پر کریں۔ (10)\nب        ا\nث        ت\nخ        ج\nر        ذ\n\nسوال نمبر 3. ا تا ش حروفِ تہجی لکھیں۔ (20)\n\nسوال نمبر 4. کالم الف کو کالم ب سے ملائیں (ایک جیسے حروف کو ملائیں) (10)\nکالم الف | کالم ب\nس | ن\nص | م\nع | ن\nف | ص\nل | س\nم | ل\nن | ع",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -1114,7 +1108,8 @@
         "SOURCE_LAYOUT_AMBIGUOUS"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "No explicit paper total. Q1 handwriting practice grid, not alphabet-to-ye. Q2 layout ambiguous. Q3=20 marks. Q4 has repeated target nun (not ba)."
     },
     {
       "id": "ey-mover-math-2026",
@@ -1122,9 +1117,7 @@
       "classDisplayName": "Mover",
       "subject": "math",
       "language": "english",
-      "rawTeacherSource": {
-        "note": "Q1 exact 5-row grid (not odd-alternating). Q3=20 marks. Q4=10 marks, exact 7 matching rows."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Mover\nSubject: Math\nTotal Marks: 50\n\nQ1. Write the missing numbers. (10)\nRow 1: 1  [blank]  3  [blank]\nRow 2: 5  6  [blank]  8\nRow 3: [blank]  10  11  [blank]\nRow 4: 13  [blank]  15  [blank]\nRow 5: 17  [blank]  19  [blank]\n\nQ2. Draw the pattern one by one (10)\n1. Triangle\n2. Arrow\n3. Circle\n\nQ3. Write Counting 1 to 30 (20)\n\nQ4. Match the following. (10)\nColumn A | Column B\n12 | 30\n17 | 40\n19 | 70\n30 | 19\n70 | 12\n40 | 50\n50 | 17",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -1306,7 +1299,8 @@
       ],
       "qaFlags": [],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Q1 exact 5-row grid (not odd-alternating). Q3=20 marks. Q4=10 marks, exact 7 matching rows."
     },
     {
       "id": "ey-flyer-english-2026",
@@ -1314,9 +1308,7 @@
       "classDisplayName": "Flyer",
       "subject": "english",
       "language": "english",
-      "rawTeacherSource": {
-        "note": "Q1: 5 rows with exact spelling candidates. Q2: 5 exact prompts. Q4: exact source instruction. Q5: 7 exact matching rows L/G/P/M/R/T/N."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Flyer\nSubject: English\nTotal Marks: 50\n\nQ1. Circle the correct spelling of the words. (10)\nboat | boal | boot\nAple | Appl | Apple\nCar | Cir | Cpr\nball | ball | bill\nDig | Dog | Dag\n\nQ2. Write missing letters. (10)\n(a) Appl _\n(b) Ball _\n(c) C __r\n(d) D __ g\n(e) H _ n\n\nQ3. Write small letters A a to S (10)\n\nQ4. Write Alphabets A to P (10)\n\nQ5. Match the capital letters with small letters. (10)\nColumn A | Column B\nL | p\nG | t\nP | l\nM | n\nR | g\nT | r\nN | m",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -1533,7 +1525,8 @@
         "WORDING_AMBIGUITY"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Q1: 5 rows with exact spelling candidates. Q2: 5 exact prompts. Q4: exact source instruction. Q5: 7 exact matching rows L/G/P/M/R/T/N."
     },
     {
       "id": "ey-flyer-urdu-2026",
@@ -1541,9 +1534,7 @@
       "classDisplayName": "Flyer",
       "subject": "urdu",
       "language": "urdu",
-      "rawTeacherSource": {
-        "note": "Header total 50 vs question sum 60 — SOURCE_TOTAL_CONFLICT preserved. All question content verbatim."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Flyer\nSubject: Urdu\nHeader Total: 50\nListed Question Total: 60\n\nسوال نمبر 1. حروف کو جوڑ کر لکھیں (10)\n1. ا + ن + ا + ر = _______\n2. ب + ت + ا + پ = _______\n3. م + و + م = _______\n4. ب + ل + ی = _______\n5. ک + ت + ا + ب = _______\n\nسوال نمبر 2. کوئی سے تین پھلوں کے نام لکھیں (20)\n1. _______\n2. _______\n3. _______\n\nسوال نمبر 3. خالی جگہ پر کریں (10)\nا _ ب _ ت\nث _ ج _ خ\n\nسوال نمبر 4. حروف تہجی لکھیں (10)\n\nسوال نمبر 5. کوئی سی تین سبزیوں کے نام لکھیں (5)\n1. _______\n2. _______\n3. _______\n\nسوال نمبر 6. ہفتے کے دنوں کے نام لکھیں (کوئی سے چار) (5)\n1. _______\n2. _______\n3. _______\n4. _______",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -1729,7 +1720,8 @@
         "SOURCE_TOTAL_CONFLICT"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Header total 50 vs question sum 60 — SOURCE_TOTAL_CONFLICT preserved. All question content verbatim."
     },
     {
       "id": "ey-flyer-math-2026",
@@ -1737,9 +1729,7 @@
       "classDisplayName": "Flyer",
       "subject": "math",
       "language": "english",
-      "rawTeacherSource": {
-        "note": "Q1 raw sequence preserved exactly (ambiguous). Q2 exact 7 before-targets. Q5 exact 5 after-sequences with full context numbers."
-      },
+      "rawTeacherSource": "School: Al-siddique Scholars Public School Sharif Chowk\nClass: Flyer\nSubject: Math\nTotal Marks: 50\n\nQ1. Write the missing numbers (10)\n1 __3 _6 __ 9___11_ 13 _ 15__17 __20\n\nQ2. What comes before (10)\n_ 10\n_ 14\n_ 21\n_ 8\n_ 17\n_ 25\n_ 13\n\nQ3. Write english counting 1 to 10 (10)\n\nQ4. Write numbers counting 1 to 50 (10)\n\nQ5. What comes after (10)\n13, 14, 15, _\n25, 26, 27, _\n29, 30, 31, _\n35, 36, 37, _\n47, 48, 49, _",
       "headerSource": {
         "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
         "campus": "Sharif Chowk, Rayya Khas, Narowal",
@@ -1919,7 +1909,8 @@
         "SOURCE_LAYOUT_AMBIGUOUS"
       ],
       "status": "SOURCE_PRESENT",
-      "printable": true
+      "printable": true,
+      "sourceNotes": "Q1 raw sequence preserved exactly (ambiguous). Q2 exact 7 before-targets. Q5 exact 5 after-sequences with full context numbers."
     }
   ]
 }

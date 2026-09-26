@@ -3,7 +3,8 @@ import RenderSketch from '../assets/RenderSketch.jsx'
 
 export default function TraceShapeBlock({
   shapeId = 'shape.square.v1',
-  isDotted = true
+  isDotted = true,
+  sketchSize = null
 }) {
   return (
     <div
@@ -22,8 +23,10 @@ export default function TraceShapeBlock({
     >
       <div
         style={{
-          width: '120px',
-          height: '120px',
+          width: sketchSize ? 'auto' : '120px',
+          height: sketchSize ? 'auto' : '120px',
+          minWidth: '60px',
+          minHeight: '60px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
@@ -31,7 +34,7 @@ export default function TraceShapeBlock({
       >
         <RenderSketch
           assetId={shapeId}
-          size="110px"
+          size={sketchSize || '110px'}
           isDotted={isDotted}
         />
       </div>

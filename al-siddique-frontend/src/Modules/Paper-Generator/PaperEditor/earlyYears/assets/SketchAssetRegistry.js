@@ -550,16 +550,17 @@ export function registerUserSketchAsset(asset) {
   const record = {
     id: asset.assetId,
     name: asset.name || asset.assetId,
-    altText: asset.altText || 'User uploaded sketch',
+    altText: asset.altText || `Session sketch: ${asset.name || asset.assetId}`,
     viewBox: asset.viewBox || '0 0 100 100',
-    source: 'USER_UPLOAD',
+    source: asset.source || 'USER_UPLOAD',
     mimeType: asset.mimeType || 'image/svg+xml',
     width: asset.width || 100,
     height: asset.height || 100,
     aspectRatio: asset.aspectRatio || 1,
     printSafe: true,
     svgContent: asset.svgContent || '',
-    dataUrl: asset.dataUrl || null
+    dataUrl: asset.dataUrl || null,
+    isSession: true
   }
 
   userUploads.set(asset.assetId, record)
@@ -567,25 +568,13 @@ export function registerUserSketchAsset(asset) {
 }
 
 /**
- * registerSessionSketch — convenience alias called after processSketchFileUpload.
- * Marks asset as session-only (not persisted across reload).
+ * registerSessionSketch — idempotent convenience alias for session-uploaded sketches.
  */
 export function registerSessionSketch(uploadedAsset) {
-  if (!uploadedAsset || !uploadedAsset.id) {
-    throw new Error('Uploaded asset must have an id field')
+  if (!uploadedAsset) return null
+  const id = uploadedAsset.id || uploadedAsset.assetId
+  if (id && userUploads.has(id)) {
+    return userUploads.get(id)
   }
-  const record = {
-    id: uploadedAsset.id,
-    name: uploadedAsset.name || uploadedAsset.id,
-    altText: `Session sketch: ${uploadedAsset.name || uploadedAsset.id}`,
-    viewBox: '0 0 100 100',
-    source: 'SESSION_UPLOAD',
-    mimeType: uploadedAsset.mimeType || 'image/svg+xml',
-    printSafe: true,
-    svgContent: uploadedAsset.svgContent || '',
-    dataUrl: uploadedAsset.dataUrl || null,
-    isSession: true
-  }
-  userUploads.set(uploadedAsset.id, record)
-  return record
+  return registerUserSketchAsset({ ...uploadedAsset, assetId: id })
 }

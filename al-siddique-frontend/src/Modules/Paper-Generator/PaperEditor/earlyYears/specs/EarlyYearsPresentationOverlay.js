@@ -4,9 +4,39 @@
 // Controls: sketchAsset, sketchSize, lineCount, lineGapMm, writingMode, layout
 
 const _store = new Map()
+const _listeners = new Set()
+let _revision = 0
 
 function overlayKey(paperId, questionId) {
   return `${paperId}::${questionId}`
+}
+
+function notifyListeners() {
+  _revision++
+  for (const listener of _listeners) {
+    try {
+      listener(_revision)
+    } catch (e) {
+      console.error('Error in presentation overlay listener:', e)
+    }
+  }
+}
+
+/**
+ * Returns current global overlay revision counter.
+ */
+export function getPresentationRevision() {
+  return _revision
+}
+
+/**
+ * Subscribes a listener to any overlay mutations. Returns unsubscribe function.
+ */
+export function subscribePresentationOverlay(listener) {
+  _listeners.add(listener)
+  return () => {
+    _listeners.delete(listener)
+  }
 }
 
 /**
@@ -24,6 +54,7 @@ export function setOverlay(paperId, questionId, fields) {
   const key = overlayKey(paperId, questionId)
   const existing = _store.get(key) || {}
   _store.set(key, { ...existing, ...fields })
+  notifyListeners()
 }
 
 /**
@@ -31,6 +62,7 @@ export function setOverlay(paperId, questionId, fields) {
  */
 export function clearOverlay(paperId, questionId) {
   _store.delete(overlayKey(paperId, questionId))
+  notifyListeners()
 }
 
 /**
@@ -42,6 +74,7 @@ export function clearPaperOverlays(paperId) {
       _store.delete(key)
     }
   }
+  notifyListeners()
 }
 
 /**

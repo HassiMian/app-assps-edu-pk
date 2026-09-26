@@ -5,7 +5,8 @@
 // They assert V2 store outputs against independently coded expected literals.
 // Any future source rewrite that violates teacher content will fail these tests.
 
-import { describe, it, expect } from 'vitest'
+import { describe, it } from 'node:test'
+import assert from 'node:assert/strict'
 import {
   getEarlyYearsPaperById,
   getAllEarlyYearsPapers,
@@ -13,6 +14,51 @@ import {
   getQAFindingsForPaper,
   getEarlyYearsCorpus
 } from '../earlyYears/data/earlyYearsSourceStore.js'
+
+function expect(actual) {
+  return {
+    toBe(expected) {
+      assert.strictEqual(actual, expected)
+    },
+    toEqual(expected) {
+      assert.deepStrictEqual(actual, expected)
+    },
+    toContain(expected) {
+      if (typeof actual === 'string' || Array.isArray(actual)) {
+        assert.ok(actual.includes(expected), `Expected ${JSON.stringify(actual)} to contain ${JSON.stringify(expected)}`)
+      } else {
+        assert.ok(expected in actual, `Expected ${JSON.stringify(actual)} to contain key ${expected}`)
+      }
+    },
+    toBeTruthy() {
+      assert.ok(actual, `Expected truthy value, got ${actual}`)
+    },
+    toBeFalsy() {
+      assert.ok(!actual, `Expected falsy value, got ${actual}`)
+    },
+    toBeUndefined() {
+      assert.strictEqual(actual, undefined)
+    },
+    toBeGreaterThan(expected) {
+      assert.ok(actual > expected, `Expected ${actual} > ${expected}`)
+    },
+    not: {
+      toContain(expected) {
+        if (typeof actual === 'string' || Array.isArray(actual)) {
+          assert.ok(!actual.includes(expected), `Expected ${JSON.stringify(actual)} not to contain ${JSON.stringify(expected)}`)
+        } else {
+          assert.ok(!(expected in actual), `Expected ${JSON.stringify(actual)} not to contain key ${expected}`)
+        }
+      },
+      toBe(expected) {
+        assert.notStrictEqual(actual, expected)
+      },
+      toBeUndefined() {
+        assert.notStrictEqual(actual, undefined)
+      }
+    }
+  }
+}
 
 // ─────────────────────────────────────────
 // CORPUS STRUCTURAL INVARIANTS
@@ -412,22 +458,65 @@ describe('Flyer Urdu fidelity', () => {
 // ─────────────────────────────────────────
 
 describe('Provenance field coverage', () => {
-  it('EY-F-29: All papers have rawTeacherSource field', () => {
+  it('EY-F-29: All papers have substantive literal rawTeacherSource text, not a summary note', () => {
     const papers = getAllEarlyYearsPapers()
     for (const paper of papers) {
       expect(paper.rawTeacherSource).toBeTruthy()
-      expect(typeof paper.rawTeacherSource.note).toBe('string')
+      expect(typeof paper.rawTeacherSource).toBe('string')
+      expect(paper.rawTeacherSource.length).toBeGreaterThan(50)
+      // Must be literal teacher text, not just a summary note
+      expect(paper.rawTeacherSource).toContain('School:')
+      expect(paper.rawTeacherSource).toContain('Al-siddique')
     }
   })
 
-  it('EY-F-30: All questions have rawInstruction and rawContent fields', () => {
+  it('EY-F-30: All questions have non-empty rawInstruction and rawContent fields', () => {
     const papers = getAllEarlyYearsPapers()
     for (const paper of papers) {
       for (const q of paper.questions) {
-        expect(q.rawInstruction).not.toBeUndefined()
-        expect(q.rawContent).not.toBeUndefined()
+        expect(typeof q.rawInstruction).toBe('string')
+        expect(q.rawInstruction.trim().length).toBeGreaterThan(0)
+        expect(typeof q.rawContent).toBe('string')
+        expect(q.rawContent.trim().length).toBeGreaterThan(0)
       }
     }
+  })
+
+  it('EY-F-33: Starter Math Q2 rawContent contains both apple count sequence AND shuffled right values 5,4,3,1,2', () => {
+    const paper = getEarlyYearsPaperById('ey-starter-math-2026')
+    const q2 = paper.questions.find((q) => q.questionNumber === 2)
+    expect(q2).toBeTruthy()
+    // Must preserve two-column source ordering with apples and shuffled right-side values
+    expect(q2.rawContent).toContain('4 apples | 5')
+    expect(q2.rawContent).toContain('3 apples | 4')
+    expect(q2.rawContent).toContain('5 apples | 3')
+    expect(q2.rawContent).toContain('2 apples | 1')
+    expect(q2.rawContent).toContain('1 apple  | 2')
+  })
+
+  it('EY-F-34: Raw fields preserve literal teacher spellings without normalization', () => {
+    const sMath = getEarlyYearsPaperById('ey-starter-math-2026')
+    const sMathQ1 = sMath.questions.find((q) => q.questionNumber === 1)
+    expect(sMathQ1.rawContent).toContain('cartipiler')
+
+    const sMathQ3 = sMath.questions.find((q) => q.questionNumber === 3)
+    expect(sMathQ3.rawInstruction).toContain('led pencil')
+
+    const sMathQ5 = sMath.questions.find((q) => q.questionNumber === 5)
+    expect(sMathQ5.rawInstruction).toBe('Match the Same words.')
+
+    const fMath = getEarlyYearsPaperById('ey-flyer-math-2026')
+    const fMathQ3 = fMath.questions.find((q) => q.questionNumber === 3)
+    expect(fMathQ3.rawInstruction).toBe('Write english counting 1 to 10')
+
+    const fEng = getEarlyYearsPaperById('ey-flyer-english-2026')
+    const fEngQ1 = fEng.questions.find((q) => q.questionNumber === 1)
+    expect(fEngQ1.rawContent).toContain('Aple')
+    expect(fEngQ1.rawContent).toContain('Appl')
+    expect(fEngQ1.rawContent).toContain('Apple')
+
+    const fEngQ2 = fEng.questions.find((q) => q.questionNumber === 2)
+    expect(fEngQ2.rawContent).toContain('Ball _')
   })
 })
 

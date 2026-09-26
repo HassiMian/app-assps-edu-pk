@@ -9,7 +9,9 @@ export default function VisualMatchingColumns({
   rightItems = [],
   connectionGap = '50mm',
   rowHeight = '16mm',
-  isUrdu = false
+  isUrdu = false,
+  sketchSize = 'choiceVisual',
+  layout = 'stacked'
 }) {
   const fontFamily = isUrdu
     ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
@@ -41,7 +43,7 @@ export default function VisualMatchingColumns({
             <RenderSketch
               key={`cnt-${item.id}-${i}`}
               assetId={item.sketchId}
-              size="22mm"
+              size={sketchSize === 'smallVisual' ? '18mm' : '22mm'}
             />
           ))}
         </div>
@@ -58,7 +60,7 @@ export default function VisualMatchingColumns({
             gap: '8px'
           }}
         >
-          <RenderSketch assetId={item.sketchId} size="choiceVisual" />
+          <RenderSketch assetId={item.sketchId} size={sketchSize} />
           {item.label && (
             <span
               style={{

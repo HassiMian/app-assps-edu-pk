@@ -162,9 +162,9 @@ test('EY-BROWSER-06: Mover English fish/mouse choices and Mover Math pattern cop
   await fishMouse.waitFor({ timeout: 5000 })
   const text = await fishMouse.textContent()
   assert.ok(text.includes('Fish'))
-  assert.ok(text.includes('Dish'))
   assert.ok(text.includes('Mouse'))
-  assert.ok(text.includes('House'))
+  assert.ok(text.includes('Cat'))
+  assert.ok(text.includes('Dog'))
 
   // Mover Math
   await page.goto(`${BASE_URL}?paper=ey-mover-math-2026`, { waitUntil: 'domcontentloaded' })
@@ -201,12 +201,13 @@ test('EY-BROWSER-08: Flyer English preserves duplicate spelling candidate ball/b
 
   const choiceRows = page.locator('.early-years-choice-letter-rows')
   await choiceRows.waitFor({ timeout: 5000 })
-  const firstRowText = await choiceRows.locator('> div').first().textContent()
-  assert.ok(firstRowText.includes('ball'))
-  assert.ok(firstRowText.includes('bill'))
+  const ballRow = choiceRows.locator('> div').filter({ hasText: 'ball' }).first()
+  const ballRowText = await ballRow.textContent()
+  assert.ok(ballRowText.includes('ball'))
+  assert.ok(ballRowText.includes('bill'))
 
   // Count occurrences of ball
-  const ballCount = (firstRowText.match(/ball/g) || []).length
+  const ballCount = (ballRowText.match(/ball/g) || []).length
   assert.equal(ballCount, 2, 'Duplicate option "ball" must remain preserved in source view')
 })
 

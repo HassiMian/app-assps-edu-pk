@@ -5,9 +5,11 @@ import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 
 export default function UrduHandwritingResponse({
   lineCount = 3,
+  lineGapMm = null,
   placeholders = null
 }) {
   const count = lineCount || (placeholders ? placeholders.length : 3)
+  const effectiveGapMm = lineGapMm !== null && lineGapMm !== undefined ? lineGapMm : LAYOUT_TOKENS.childResponse.handwritingRowSpacingMm
 
   return (
     <div
@@ -15,7 +17,7 @@ export default function UrduHandwritingResponse({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '14px',
+        gap: `${effectiveGapMm}mm`,
         margin: '14px 0',
         direction: 'rtl'
       }}
@@ -51,7 +53,7 @@ export default function UrduHandwritingResponse({
               style={{
                 flex: 1,
                 borderBottom: '1.8px solid #222',
-                minHeight: LAYOUT_TOKENS.childResponse.handwritingRowSpacingMm + 'mm'
+                minHeight: `${effectiveGapMm}mm`
               }}
             />
           </div>

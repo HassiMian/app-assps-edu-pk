@@ -1,7 +1,7 @@
 // EarlyYearsInspector.jsx — Inspector sidebar with FUNCTIONAL controls wired to EarlyYearsPresentationOverlay
 // Controls update presentation overlay WITHOUT mutating academic source JSON.
-import React, { useState, useCallback } from 'react'
-import { getAllSketchAssets, registerSessionSketch } from '../assets/SketchAssetRegistry.js'
+import React, { useState, useCallback, useMemo } from 'react'
+import { getAllSketchAssets } from '../assets/SketchAssetRegistry.js'
 import { processSketchFileUpload } from '../upload/uploadSketchValidator.js'
 import RenderSketch from '../assets/RenderSketch.jsx'
 import {
@@ -11,6 +11,72 @@ import {
   LAYOUT_SUPPORT,
   isLayoutSupported
 } from '../specs/EarlyYearsPresentationOverlay.js'
+
+function getVisualSlotsForQuestion(question) {
+  if (!question) return []
+  const { presentationType, content } = question
+
+  if (presentationType === 'PictureColoringBlock' && Array.isArray(content?.items)) {
+    return content.items.map((item, idx) => ({
+      slotId: String(idx),
+      label: item.label || `Item ${idx + 1}`,
+      defaultSketchId: item.sketchId
+    }))
+  }
+
+  if (presentationType === 'CircleChoiceWithSketch' && Array.isArray(content?.items)) {
+    return content.items.map((item, idx) => ({
+      slotId: String(idx),
+      label: item.prompt || item.label || `Visual ${idx + 1}`,
+      defaultSketchId: item.sketchId
+    }))
+  }
+
+  if (presentationType === 'VisualMatchingColumns') {
+    const slots = []
+    if (Array.isArray(content?.leftItems)) {
+      content.leftItems.forEach((item, idx) => {
+        if (item.sketchId) {
+          slots.push({
+            slotId: `left-${idx}`,
+            label: `Left: ${item.text || item.label || idx + 1}`,
+            defaultSketchId: item.sketchId
+          })
+        }
+      })
+    }
+    if (Array.isArray(content?.rightItems)) {
+      content.rightItems.forEach((item, idx) => {
+        if (item.sketchId) {
+          slots.push({
+            slotId: `right-${idx}`,
+            label: `Right: ${item.text || item.label || idx + 1}`,
+            defaultSketchId: item.sketchId
+          })
+        }
+      })
+    }
+    return slots
+  }
+
+  if (presentationType === 'TraceShapeBlock' && content?.shapeId) {
+    return [{
+      slotId: '0',
+      label: 'Shape',
+      defaultSketchId: content.shapeId
+    }]
+  }
+
+  if (content?.sketchId) {
+    return [{
+      slotId: '0',
+      label: 'Visual',
+      defaultSketchId: content.sketchId
+    }]
+  }
+
+  return []
+}
 
 export default function EarlyYearsInspector({
   currentPaper = null,
@@ -22,8 +88,9 @@ export default function EarlyYearsInspector({
   const [selectedQuestionIdx, setSelectedQuestionIdx] = useState(0)
   const [uploadError, setUploadError] = useState(null)
   const [uploadSuccess, setUploadSuccess] = useState(null)
-  const [sessionAssets, setSessionAssets] = useState([])
+  const [assetRevision, setAssetRevision] = useState(0)
   const [selectedAssetId, setSelectedAssetId] = useState(null)
+  const [selectedSlotId, setSelectedSlotId] = useState('')
   const [sketchSize, setSketchSize] = useState('choiceVisual')
   const [lineCount, setLineCount] = useState(3)
   const [lineGapMm, setLineGapMm] = useState(11)
@@ -31,8 +98,23 @@ export default function EarlyYearsInspector({
 
   const questions = currentPaper?.questions || []
   const selectedQuestion = questions[selectedQuestionIdx] || questions[0]
-  const builtinAssets = getAllSketchAssets()
-  const allAssets = [...builtinAssets, ...sessionAssets]
+
+  // All registered sketch assets (single registration query)
+  const allAssets = useMemo(() => {
+    return getAllSketchAssets()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [assetRevision])
+
+  // Discover visual slots in target question
+  const visualSlots = useMemo(() => {
+    return getVisualSlotsForQuestion(selectedQuestion)
+  }, [selectedQuestion])
+
+  // Active slot resolution
+  const activeSlotId = useMemo(() => {
+    if (visualSlots.length === 1) return visualSlots[0].slotId
+    return selectedSlotId
+  }, [visualSlots, selectedSlotId])
 
   // Emit overlay update and notify parent
   const pushOverlay = useCallback(
@@ -49,13 +131,32 @@ export default function EarlyYearsInspector({
     [currentPaper, selectedQuestion, onPresentationChange]
   )
 
-  // ─── Sketch asset selection ───────────────────────────────
+  // Sketch asset tile click
   const handleAssetClick = (assetId) => {
+    if (visualSlots.length > 1 && !activeSlotId) {
+      return // Disabled if slot not selected
+    }
+    const slotToUse = activeSlotId || (visualSlots.length === 1 ? visualSlots[0].slotId : null)
+    if (!slotToUse) return
+
     setSelectedAssetId(assetId)
-    pushOverlay({ sketchAssetId: assetId, isSessionAsset: sessionAssets.some((a) => a.id === assetId) })
+    const currentOverlay = getOverlay(currentPaper.id, selectedQuestion.id)
+    const existingOverrides = currentOverlay.sketchOverrides || {}
+    const newOverrides = {
+      ...existingOverrides,
+      [slotToUse]: assetId
+    }
+
+    const assetObj = allAssets.find((a) => a.id === assetId)
+    pushOverlay({
+      sketchAssetId: assetId,
+      targetVisualSlot: slotToUse,
+      sketchOverrides: newOverrides,
+      isSessionAsset: Boolean(assetObj?.isSession)
+    })
   }
 
-  // ─── File upload ──────────────────────────────────────────
+  // File upload — single registration path
   const handleFileUpload = async (e) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -64,26 +165,39 @@ export default function EarlyYearsInspector({
 
     try {
       const registered = await processSketchFileUpload(file)
-      // Register into registry and local session state
-      registerSessionSketch(registered)
-      setSessionAssets((prev) => [...prev, registered])
-      // Auto-select uploaded asset for current question
+      // Single registration: update revision to re-query allAssets
+      setAssetRevision((r) => r + 1)
       setSelectedAssetId(registered.id)
-      pushOverlay({ sketchAssetId: registered.id, isSessionAsset: true })
+
+      const slotToUse = activeSlotId || (visualSlots.length === 1 ? visualSlots[0].slotId : null)
+      if (slotToUse) {
+        const currentOverlay = getOverlay(currentPaper.id, selectedQuestion.id)
+        const existingOverrides = currentOverlay.sketchOverrides || {}
+        pushOverlay({
+          sketchAssetId: registered.id,
+          targetVisualSlot: slotToUse,
+          sketchOverrides: {
+            ...existingOverrides,
+            [slotToUse]: registered.id
+          },
+          isSessionAsset: true
+        })
+      }
+
       setUploadSuccess(`Session-only custom asset "${registered.name}" loaded. (${registered.id})`)
     } catch (err) {
       setUploadError(err.message)
     }
   }
 
-  // ─── Sketch size ──────────────────────────────────────────
+  // Sketch size
   const handleSketchSizeChange = (e) => {
     const size = e.target.value
     setSketchSize(size)
     pushOverlay({ sketchSize: size, sketchSizeMm: SKETCH_SIZES[size] })
   }
 
-  // ─── Answer lines ─────────────────────────────────────────
+  // Answer lines
   const handleLineCountChange = (e) => {
     const count = Number(e.target.value)
     setLineCount(count)
@@ -96,7 +210,7 @@ export default function EarlyYearsInspector({
     pushOverlay({ lineGapMm: gap })
   }
 
-  // ─── Layout ───────────────────────────────────────────────
+  // Layout
   const handleLayoutClick = (mode) => {
     if (!selectedQuestion) return
     if (!isLayoutSupported(selectedQuestion.presentationType, mode)) return
@@ -107,6 +221,10 @@ export default function EarlyYearsInspector({
   const BTN = { padding: '5px 10px', borderRadius: '4px', border: 'none', cursor: 'pointer', fontSize: '11px', fontWeight: 'bold' }
   const TAB_ACTIVE = { ...BTN, background: '#3b82f6', color: '#fff' }
   const TAB_INACTIVE = { ...BTN, background: '#334155', color: '#fff' }
+
+  const isSelectedSessionAsset = Boolean(
+    allAssets.find((a) => a.id === selectedAssetId)?.isSession
+  )
 
   return (
     <aside
@@ -152,10 +270,12 @@ export default function EarlyYearsInspector({
               onChange={(e) => {
                 const idx = Number(e.target.value)
                 setSelectedQuestionIdx(idx)
+                setSelectedSlotId('')
                 // Reset controls to existing overlay for this question
                 if (currentPaper && questions[idx]) {
                   const ov = getOverlay(currentPaper.id, questions[idx].id)
                   if (ov.sketchAssetId) setSelectedAssetId(ov.sketchAssetId)
+                  if (ov.targetVisualSlot) setSelectedSlotId(ov.targetVisualSlot)
                   if (ov.sketchSize) setSketchSize(ov.sketchSize)
                   if (ov.lineCount) setLineCount(ov.lineCount)
                   if (ov.lineGapMm) setLineGapMm(ov.lineGapMm)
@@ -182,59 +302,118 @@ export default function EarlyYearsInspector({
                   style={{ width: '100%', padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#38bdf8', border: '1px solid #475569', fontSize: '12px', boxSizing: 'border-box' }} />
               </div>
 
+              {/* Visual Slot Selector (if multiple slots exist) */}
+              {visualSlots.length > 1 && (
+                <div style={{ background: '#0f172a', padding: '10px', borderRadius: '6px', border: '1px solid #475569' }}>
+                  <label style={{ display: 'block', color: '#38bdf8', marginBottom: '4px', fontWeight: 'bold' }}>
+                    Target Visual Slot (Required for replacement):
+                  </label>
+                  <select
+                    id="targetVisualSlotSelector"
+                    value={selectedSlotId}
+                    onChange={(e) => setSelectedSlotId(e.target.value)}
+                    style={{ width: '100%', padding: '6px 8px', borderRadius: '6px', background: '#1e293b', color: '#fff', border: '1px solid #64748b', fontSize: '12px' }}
+                  >
+                    <option value="">-- Select a slot to override --</option>
+                    {visualSlots.map((slot) => {
+                      const ov = getOverlay(currentPaper.id, selectedQuestion.id)
+                      const currentSketch = ov?.sketchOverrides?.[slot.slotId] || slot.defaultSketchId
+                      return (
+                        <option key={slot.slotId} value={slot.slotId}>
+                          Slot: {slot.label} (Current: {currentSketch || 'None'})
+                        </option>
+                      )
+                    })}
+                  </select>
+                  {!selectedSlotId && (
+                    <div style={{ fontSize: '10px', color: '#f59e0b', marginTop: '4px' }}>
+                      ⚠️ Select a slot above to enable sketch replacement.
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Sketch Asset Selector — FUNCTIONAL */}
               <div>
-                <label style={{ display: 'block', color: '#94a3b8', marginBottom: '4px', fontWeight: 'bold' }}>
-                  Sketch Asset ({allAssets.length} available):
-                </label>
-                <div style={{ maxHeight: '120px', overflowY: 'auto', border: '1px solid #475569', borderRadius: '6px', padding: '6px', background: '#0f172a', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px' }}>
-                  {allAssets.map((asset) => (
-                    <div
-                      key={asset.id}
-                      title={`${asset.name} (${asset.id})${asset.isSession ? ' [Session]' : ''}`}
-                      onClick={() => handleAssetClick(asset.id)}
-                      style={{
-                        border: selectedAssetId === asset.id ? '2px solid #3b82f6' : '1px solid #334155',
-                        borderRadius: '4px',
-                        padding: '4px',
-                        background: selectedAssetId === asset.id ? '#1e3a5f' : '#fff',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        position: 'relative'
-                      }}
-                    >
-                      <RenderSketch assetId={asset.id} size="18mm" />
-                      {asset.isSession && (
-                        <span style={{ position: 'absolute', top: '1px', right: '2px', fontSize: '7px', color: '#f59e0b' }}>S</span>
-                      )}
-                    </div>
-                  ))}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <label style={{ color: '#94a3b8', fontWeight: 'bold' }}>
+                    Sketch Asset ({allAssets.length} available):
+                  </label>
+                  {visualSlots.length > 1 && !activeSlotId && (
+                    <span style={{ fontSize: '10px', color: '#f59e0b' }}>[Slot selection needed]</span>
+                  )}
+                </div>
+                <div
+                  id="sketchAssetGrid"
+                  style={{
+                    maxHeight: '120px',
+                    overflowY: 'auto',
+                    border: '1px solid #475569',
+                    borderRadius: '6px',
+                    padding: '6px',
+                    background: '#0f172a',
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gap: '6px',
+                    opacity: (visualSlots.length > 1 && !activeSlotId) ? 0.45 : 1
+                  }}
+                >
+                  {allAssets.map((asset) => {
+                    const isDisabled = visualSlots.length > 1 && !activeSlotId
+                    return (
+                      <div
+                        key={asset.id}
+                        title={`${asset.name} (${asset.id})${asset.isSession ? ' [Session]' : ''}`}
+                        onClick={() => !isDisabled && handleAssetClick(asset.id)}
+                        style={{
+                          border: selectedAssetId === asset.id ? '2px solid #3b82f6' : '1px solid #334155',
+                          borderRadius: '4px',
+                          padding: '4px',
+                          background: selectedAssetId === asset.id ? '#1e3a5f' : '#fff',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: isDisabled ? 'not-allowed' : 'pointer',
+                          position: 'relative'
+                        }}
+                      >
+                        <RenderSketch assetId={asset.id} size="18mm" />
+                        {asset.isSession && (
+                          <span style={{ position: 'absolute', top: '1px', right: '2px', fontSize: '7px', color: '#f59e0b', fontWeight: 'bold' }}>S</span>
+                        )}
+                      </div>
+                    )
+                  })}
                 </div>
                 {selectedAssetId && (
                   <div style={{ fontSize: '10px', color: '#38bdf8', marginTop: '4px' }}>
                     ✓ Selected: {selectedAssetId}
-                    {sessionAssets.some((a) => a.id === selectedAssetId) && (
-                      <span style={{ color: '#f59e0b', marginLeft: '4px' }}>Session-only custom asset</span>
+                    {isSelectedSessionAsset && (
+                      <div style={{ color: '#f59e0b', marginTop: '2px' }}>
+                        Session-only custom asset (not persisted after reload)
+                      </div>
                     )}
                   </div>
                 )}
               </div>
 
-              {/* Upload Sketch — FUNCTIONAL */}
+              {/* Upload Sketch — FUNCTIONAL with ONE registration path */}
               <div style={{ border: '1px dashed #64748b', borderRadius: '6px', padding: '10px', background: '#0f172a' }}>
                 <label style={{ display: 'block', color: '#38bdf8', marginBottom: '4px', fontWeight: 'bold' }}>
                   Upload Sketch (SVG, PNG, WebP):
                 </label>
-                <input type="file" accept=".svg,image/svg+xml,image/png,image/webp"
+                <input
+                  id="sketchFileInput"
+                  type="file"
+                  accept=".svg,image/svg+xml,image/png,image/webp"
                   onChange={handleFileUpload}
-                  style={{ fontSize: '11px', color: '#cbd5e1' }} />
+                  style={{ fontSize: '11px', color: '#cbd5e1' }}
+                />
                 {uploadError && <div style={{ color: '#ef4444', fontSize: '10px', marginTop: '4px' }}>✕ {uploadError}</div>}
                 {uploadSuccess && (
                   <div style={{ color: '#22c55e', fontSize: '10px', marginTop: '4px' }}>
                     ✓ {uploadSuccess}<br />
-                    <span style={{ color: '#f59e0b' }}>Session-only custom asset — not persisted on reload.</span>
+                    <span style={{ color: '#f59e0b', fontWeight: 'bold' }}>Session-only custom asset — no claim of persistence after reload.</span>
                   </div>
                 )}
               </div>
@@ -242,8 +421,12 @@ export default function EarlyYearsInspector({
               {/* Sketch Size — FUNCTIONAL */}
               <div>
                 <label style={{ display: 'block', color: '#94a3b8', marginBottom: '4px', fontWeight: 'bold' }}>Sketch Size:</label>
-                <select value={sketchSize} onChange={handleSketchSizeChange}
-                  style={{ width: '100%', padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#fff', border: '1px solid #475569', fontSize: '12px' }}>
+                <select
+                  id="sketchSizeSelector"
+                  value={sketchSize}
+                  onChange={handleSketchSizeChange}
+                  style={{ width: '100%', padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#fff', border: '1px solid #475569', fontSize: '12px' }}
+                >
                   <option value="smallVisual">Small Visual (28mm)</option>
                   <option value="choiceVisual">Choice Visual (35mm)</option>
                   <option value="mainVisual">Main Visual (42mm)</option>
@@ -256,12 +439,20 @@ export default function EarlyYearsInspector({
               <div>
                 <label style={{ display: 'block', color: '#94a3b8', marginBottom: '4px', fontWeight: 'bold' }}>Answer Lines:</label>
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <select value={lineCount} onChange={handleLineCountChange}
-                    style={{ flex: 1, padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#fff', border: '1px solid #475569', fontSize: '12px' }}>
+                  <select
+                    id="answerLineCountSelector"
+                    value={lineCount}
+                    onChange={handleLineCountChange}
+                    style={{ flex: 1, padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#fff', border: '1px solid #475569', fontSize: '12px' }}
+                  >
                     {[1,2,3,4,5].map((n) => <option key={n} value={n}>{n} Line{n !== 1 ? 's' : ''}</option>)}
                   </select>
-                  <select value={lineGapMm} onChange={handleLineGapChange}
-                    style={{ flex: 1, padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#fff', border: '1px solid #475569', fontSize: '12px' }}>
+                  <select
+                    id="answerLineGapSelector"
+                    value={lineGapMm}
+                    onChange={handleLineGapChange}
+                    style={{ flex: 1, padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#fff', border: '1px solid #475569', fontSize: '12px' }}
+                  >
                     {[8,9,10,11,12,13,14].map((n) => <option key={n} value={n}>{n}mm Gap</option>)}
                   </select>
                 </div>
@@ -281,6 +472,7 @@ export default function EarlyYearsInspector({
                       <button
                         key={mode}
                         type="button"
+                        id={`layout-btn-${mode}`}
                         disabled={!supported}
                         onClick={() => handleLayoutClick(mode)}
                         title={!supported ? `Not supported for ${selectedQuestion.presentationType}` : ''}

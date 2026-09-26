@@ -3,7 +3,7 @@ import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import RenderSketch from '../assets/RenderSketch.jsx'
 
-export function ColouringSketchArea({ sketchId, label, isUrdu = false }) {
+export function ColouringSketchArea({ sketchId, label, isUrdu = false, sketchSize = 'colouringVisual' }) {
   const fontFamily = isUrdu
     ? TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
     : TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
@@ -23,7 +23,7 @@ export function ColouringSketchArea({ sketchId, label, isUrdu = false }) {
         minWidth: '100px'
       }}
     >
-      <RenderSketch assetId={sketchId} size="colouringVisual" />
+      <RenderSketch assetId={sketchId} size={sketchSize} />
       {label && (
         <span
           style={{
@@ -43,14 +43,21 @@ export function ColouringSketchArea({ sketchId, label, isUrdu = false }) {
 
 export default function PictureColoringBlock({
   items = [],
-  isUrdu = false
+  isUrdu = false,
+  sketchSize = 'colouringVisual',
+  layout = 'stacked'
 }) {
+  const isVisualLeft = layout === 'visual-left'
+
   return (
     <div
-      className="early-years-picture-coloring-block"
+      className={`early-years-picture-coloring-block ${layout ? `layout-${layout}` : ''}`}
+      data-layout={layout}
       style={{
-        display: 'grid',
-        gridTemplateColumns: `repeat(${Math.min(items.length, 4)}, minmax(0, 1fr))`,
+        display: isVisualLeft ? 'flex' : 'grid',
+        flexDirection: isVisualLeft ? 'row' : undefined,
+        flexWrap: isVisualLeft ? 'wrap' : undefined,
+        gridTemplateColumns: isVisualLeft ? undefined : `repeat(${Math.min(items.length, 4)}, minmax(0, 1fr))`,
         gap: '14px',
         margin: '14px 0',
         direction: isUrdu ? 'rtl' : 'ltr'
@@ -62,6 +69,7 @@ export default function PictureColoringBlock({
           sketchId={item.sketchId}
           label={item.label}
           isUrdu={isUrdu}
+          sketchSize={sketchSize}
         />
       ))}
     </div>

@@ -5,6 +5,7 @@ import HandwritingLines from './HandwritingLines.jsx'
 export default function AlphabetWritingArea({
   lines = 4,
   lineCount = null,
+  lineGapMm = null,
   isUrdu = false
 }) {
   const count = lineCount || lines || 4
@@ -22,6 +23,7 @@ export default function AlphabetWritingArea({
     >
       <HandwritingLines
         lineCount={count}
+        lineGapMm={lineGapMm !== null && lineGapMm !== undefined ? lineGapMm : undefined}
         styleMode={isUrdu ? 'single-baseline' : 'four-line'}
         isUrdu={isUrdu}
       />

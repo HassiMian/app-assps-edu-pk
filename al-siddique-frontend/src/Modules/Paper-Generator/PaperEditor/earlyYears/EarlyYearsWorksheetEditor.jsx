@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import {
   getAllEarlyYearsPapers,
   getEarlyYearsPaperById,
@@ -6,6 +6,7 @@ import {
 } from './data/earlyYearsSourceStore.js'
 import EarlyYearsPaperContainer from './components/EarlyYearsPaperContainer.jsx'
 import EarlyYearsInspector from './inspector/EarlyYearsInspector.jsx'
+import { subscribePresentationOverlay } from './specs/EarlyYearsPresentationOverlay.js'
 
 export default function EarlyYearsWorksheetEditor({
   initialPaperId = 'ey-starter-english-2026',
@@ -14,6 +15,17 @@ export default function EarlyYearsWorksheetEditor({
   const [selectedPaperId, setSelectedPaperId] = useState(initialPaperId)
   const [zoomLevel, setZoomLevel] = useState(1.0)
   const [showQAPanel, setShowQAPanel] = useState(false)
+  const [presentationRevision, setPresentationRevision] = useState(0)
+
+  useEffect(() => {
+    return subscribePresentationOverlay(() => {
+      setPresentationRevision((r) => r + 1)
+    })
+  }, [])
+
+  const handlePresentationChange = useCallback((paperId, questionId, fields) => {
+    setPresentationRevision((r) => r + 1)
+  }, [])
 
   const allPapers = useMemo(() => getAllEarlyYearsPapers(), [])
   const currentPaper = useMemo(() => {
@@ -261,8 +273,10 @@ export default function EarlyYearsWorksheetEditor({
         >
           {currentPaper && (
             <EarlyYearsPaperContainer
+              key={`${currentPaper.id}-rev-${presentationRevision}`}
               paper={currentPaper}
               scale={zoomLevel}
+              presentationRevision={presentationRevision}
             />
           )}
         </main>
@@ -273,6 +287,7 @@ export default function EarlyYearsWorksheetEditor({
             currentPaper={currentPaper}
             qaFindings={qaFindings}
             onClose={() => setShowQAPanel(false)}
+            onPresentationChange={handlePresentationChange}
           />
         )}
       </div>
