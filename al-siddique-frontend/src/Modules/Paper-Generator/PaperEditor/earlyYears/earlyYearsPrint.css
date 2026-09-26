@@ -15,7 +15,14 @@
     padding: 0 !important;
   }
 
+  .paper-generator-module-wrap,
+  .early-years-module-wrap {
+    min-height: auto !important;
+    background: #ffffff !important;
+  }
+
   .early-years-editor-root {
+
     height: auto !important;
     overflow: visible !important;
     background: #ffffff !important;

@@ -154,13 +154,24 @@ export default function PaperGenerator() {
   }
 
   const ModuleWrap = ({ children }) => (
-    <div style={{ minHeight:'100vh', width:'100%', background:'#071e34' }}>
-      <div style={{ padding:'10px 24px', display:'flex', gap:8, borderBottom:'1px solid rgba(148,163,184,0.18)' }}>
+    <div
+      className={moduleTab === 'early_years' ? 'paper-generator-module-wrap early-years-module-wrap' : 'paper-generator-module-wrap'}
+      style={{ minHeight:'100vh', width:'100%', background:'#071e34' }}
+    >
+      <div
+        className={
+          moduleTab === 'early_years'
+            ? 'paper-generator-module-tabs no-print'
+            : 'paper-generator-module-tabs'
+        }
+        style={{ padding:'10px 24px', display:'flex', gap:8, borderBottom:'1px solid rgba(148,163,184,0.18)' }}
+      >
         {MODULE_TABS.map(t => <TabBtn key={t.id} active={moduleTab === t.id} onClick={() => openModuleTab(t)}>{t.label}</TabBtn>)}
       </div>
       <Suspense fallback={<div style={{padding:40, color:C.silver}}>Loading...</div>}>{children}</Suspense>
     </div>
   )
+
 
   // PTS Build Paper tab renders as its own full-screen flow
   if (moduleTab === 'build' || moduleTab === 'board_pattern' || moduleTab === 'word_editor' || moduleTab === 'early_years') {

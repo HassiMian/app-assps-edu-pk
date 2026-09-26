@@ -415,3 +415,131 @@ test('EY-RENDER-07: Real Geometry QA: 0 clipping and 0 overlap across all 9 pape
   }
   assert.equal(geometryViolations.length, 0, `Geometry violations must be 0, found: ${geometryViolations.join('; ')}`)
 })
+
+// ─────────────────────────────────────────────────────────────
+// 7. REAL PRODUCT ROUTE PRINT TEST (Sections 4, 5, 6, 7)
+// ─────────────────────────────────────────────────────────────
+
+test('EY-RENDER-08: Real PaperGenerator Route Print: Chrome Hidden, PDFs Generated, Screen Clean', async () => {
+  // 1. Open real PaperGenerator route
+  await page.goto(`${BASE_URL}?mode=generator`, { waitUntil: 'domcontentloaded' })
+
+  // 2. Click "Pre Classes Papers" tab in PaperGenerator
+  const preClassesTab = page.locator('button:has-text("Pre Classes Papers")').first()
+  await preClassesTab.waitFor({ timeout: 10000 })
+  await preClassesTab.click()
+
+  // 3. Wait for Early Years sheet
+  await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
+
+  // 4. Open QA Inspector
+  const qaBtn = page.locator('button:has-text("QA Panel")')
+  if (await qaBtn.count() > 0) {
+    await qaBtn.click()
+    await page.waitForSelector('.early-years-inspector', { timeout: 5000 })
+  }
+
+  // 5. Emulate Print Media
+  await page.emulateMedia({ media: 'print' })
+
+  // A. Paper Generator module navigation strip: display === none
+  const navDisplay = await page.locator('.paper-generator-module-tabs').evaluate((el) => window.getComputedStyle(el).display)
+  assert.equal(navDisplay, 'none', 'Paper Generator module navigation strip must have display: none in print')
+
+  // B. Early Years editor top header: display === none
+  const headerDisplay = await page.locator('header.no-print').evaluate((el) => window.getComputedStyle(el).display)
+  assert.equal(headerDisplay, 'none', 'Early Years editor top header must have display: none in print')
+
+  // C. Inspector: display === none
+  const inspectorDisplay = await page.locator('.early-years-inspector').evaluate((el) => window.getComputedStyle(el).display)
+  assert.equal(inspectorDisplay, 'none', 'Inspector must have display: none in print')
+
+  // D. Urdu font diagnostic notice: display === none (if present)
+  const fontNoticeLocator = page.locator('.early-years-paper-viewport > .no-print')
+  if (await fontNoticeLocator.count() > 0) {
+    const noticeDisplay = await fontNoticeLocator.evaluate((el) => window.getComputedStyle(el).display)
+    assert.equal(noticeDisplay, 'none', 'Urdu font diagnostic notice must have display: none in print')
+  }
+
+  // E. .early-years-sheet-a4: displayed
+  const sheetDisplay = await page.locator('.early-years-sheet-a4').evaluate((el) => window.getComputedStyle(el).display)
+  assert.notEqual(sheetDisplay, 'none', 'Sheet must be displayed in print')
+
+  // F. sheet transform: none
+  const transform = await page.locator('.early-years-sheet-a4').evaluate((el) => window.getComputedStyle(el).transform)
+  assert.equal(transform, 'none', 'Sheet transform must be none in print')
+
+  // G. sheet boxShadow: none
+  const boxShadow = await page.locator('.early-years-sheet-a4').evaluate((el) => window.getComputedStyle(el).boxShadow)
+  assert.equal(boxShadow, 'none', 'Sheet boxShadow must be none in print')
+
+  // H. sheet width corresponds to A4 print styling (210mm)
+  const sheetWidth = await page.locator('.early-years-sheet-a4').evaluate((el) => window.getComputedStyle(el).width)
+  assert.ok(
+    sheetWidth.includes('793') || sheetWidth.includes('794') || sheetWidth.includes('210mm'),
+    `Sheet width (${sheetWidth}) must correspond to A4 width 210mm`
+  )
+
+  // 6. Product-chrome visibility test: No visible text from module navigation outside worksheet
+  const chromeTexts = ['Build Paper', 'Word Editor', 'Pre Classes Papers', 'Saved Papers', 'Question Bank']
+  for (const text of chromeTexts) {
+    const locators = await page.locator(`button:has-text("${text}"), span:has-text("${text}")`).all()
+    for (const loc of locators) {
+      const isVisibleInPrint = await loc.evaluate((node) => {
+        let curr = node
+        while (curr) {
+          if (window.getComputedStyle(curr).display === 'none') return false
+          curr = curr.parentElement
+        }
+        return typeof node.checkVisibility === 'function' ? node.checkVisibility() : true
+      })
+      assert.equal(isVisibleInPrint, false, `Text "${text}" must not be visible in print chrome`)
+    }
+  }
+
+
+  // 7. Real Product PDF Generation outside Git in OS temp directory
+  const tmpDir = os.tmpdir()
+  const starterEnglishRealPdf = path.join(tmpDir, 'Starter_English_RealProduct_A4.pdf')
+  await page.pdf({
+    path: starterEnglishRealPdf,
+    format: 'A4',
+    printBackground: true
+  })
+  assert.ok(fs.existsSync(starterEnglishRealPdf), 'Starter English real route PDF must exist')
+  assert.ok(fs.statSync(starterEnglishRealPdf).size > 1000, 'Starter English real route PDF must have substantive size')
+
+  // Switch to Starter Urdu and generate second real product PDF
+  await page.emulateMedia({ media: 'screen' })
+  const paperSelect = page.locator('header select').first()
+  await paperSelect.selectOption('ey-starter-urdu-2026')
+  await page.waitForTimeout(400)
+  await page.emulateMedia({ media: 'print' })
+
+  const starterUrduRealPdf = path.join(tmpDir, 'Starter_Urdu_RealProduct_A4.pdf')
+  await page.pdf({
+    path: starterUrduRealPdf,
+    format: 'A4',
+    printBackground: true
+  })
+  assert.ok(fs.existsSync(starterUrduRealPdf), 'Starter Urdu real route PDF must exist')
+  assert.ok(fs.statSync(starterUrduRealPdf).size > 1000, 'Starter Urdu real route PDF must have substantive size')
+
+  // 8. Screen Regression: Switch back to screen media
+  await page.emulateMedia({ media: 'screen' })
+
+  // Assert module tabs are visible again and functional
+  const screenNavDisplay = await page.locator('.paper-generator-module-tabs').evaluate((el) => window.getComputedStyle(el).display)
+  assert.equal(screenNavDisplay, 'flex', 'Module navigation tabs must be visible on screen')
+
+  const preClassesBtn = page.locator('button:has-text("Pre Classes Papers")').first()
+  assert.ok(await preClassesBtn.isVisible(), 'Pre Classes Papers tab button must be visible on screen')
+
+  const questionBankBtn = page.locator('button:has-text("Question Bank")').first()
+  assert.ok(await questionBankBtn.isVisible(), 'Question Bank tab button must be visible on screen')
+
+  const savedPapersBtn = page.locator('button:has-text("Saved Papers")').first()
+  assert.ok(await savedPapersBtn.isVisible(), 'Saved Papers tab button must be visible on screen')
+})
+
+
