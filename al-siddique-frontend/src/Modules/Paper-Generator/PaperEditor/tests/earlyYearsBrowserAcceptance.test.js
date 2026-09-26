@@ -158,9 +158,10 @@ test('EY-BROWSER-06: Mover English fish/mouse choices and Mover Math pattern cop
   // Mover English
   await page.goto(`${BASE_URL}?paper=ey-mover-english-2026`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
-  const fishMouse = page.locator('.early-years-circle-choice-sketches')
+  const fishMouse = page.locator('.early-years-circle-choice-with-sketch-container')
   await fishMouse.waitFor({ timeout: 5000 })
   const text = await fishMouse.textContent()
+
   assert.ok(text.includes('Fish'))
   assert.ok(text.includes('Mouse'))
   assert.ok(text.includes('Cat'))

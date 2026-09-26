@@ -291,7 +291,18 @@ describe('Mover Urdu fidelity', () => {
     expect(rightValues.filter((v) => v === 'ب').length).toBe(0)
     expect(q4.qaFlags).toContain('REPEATED_MATCHING_VALUE')
   })
+
+  it('EY-F-35: Q3 instruction matches exact teacher source without punctuation split', () => {
+    const paper = getEarlyYearsPaperById('ey-mover-urdu-2026')
+    const q3 = paper.questions.find((q) => q.questionNumber === 3)
+    expect(q3).toBeTruthy()
+    expect(q3.rawInstruction).toBe('ا تا ش  حروفِ تہجی لکھیں۔')
+    expect(q3.instruction).toBe('ا تا ش  حروفِ تہجی لکھیں۔')
+    expect(q3.rawInstruction).not.toContain('حروف۔')
+    expect(q3.rawInstruction).toContain('حروفِ')
+  })
 })
+
 
 // ─────────────────────────────────────────
 // FLYER ENGLISH — EXACT SOURCE FIDELITY
