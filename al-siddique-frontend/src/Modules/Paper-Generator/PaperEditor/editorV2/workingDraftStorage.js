@@ -1,4 +1,4 @@
-// workingDraftStorage.js — Scoped Tenant Storage for Canonical Working Drafts (Rules 9, 10, 11)
+// workingDraftStorage.js — Scoped Tenant Storage for Canonical Working Drafts (Rules 9, 10, 11, B4-B)
 import {
   getTenantStorageItem,
   setTenantStorageItem,
@@ -9,10 +9,12 @@ import {
   sanitizePaperRichText,
   stableStringify,
 } from './editorProjection.js'
+import { validateDraftStructuredBlock } from './structured/structuredDraftV2.js'
 
 export const CANONICAL_DRAFTS_BASE_KEY = 'al_siddique_canonical_working_drafts'
 export const CANONICAL_DRAFT_FORMAT = 'assps-canonical-working-draft'
 export const CANONICAL_DRAFT_VERSION = 1
+export const CANONICAL_DRAFT_VERSION_V2 = 2
 
 // In-memory fallback map for non-browser / headless test environments
 const _memoryFallback = new Map()
@@ -51,16 +53,19 @@ function setRawDraftsContainer(container) {
 
 /**
  * Validates a compact working draft object (Rule 11).
+ * Supports draftVersion 1 (B3) and draftVersion 2 (B4).
  * Rejects corrupt or invalid drafts without silent modification.
+ * @param {object} draft
+ * @param {object} [canonicalDoc] — required for V2 structured block validation
  */
-export function validateWorkingDraft(draft) {
+export function validateWorkingDraft(draft, canonicalDoc) {
   if (!draft || typeof draft !== 'object') {
     return { valid: false, error: 'Draft must be a non-null object' }
   }
   if (draft.draftFormat !== CANONICAL_DRAFT_FORMAT) {
     return { valid: false, error: `Invalid draftFormat '${draft.draftFormat}', expected '${CANONICAL_DRAFT_FORMAT}'` }
   }
-  if (draft.draftVersion !== CANONICAL_DRAFT_VERSION) {
+  if (draft.draftVersion !== CANONICAL_DRAFT_VERSION && draft.draftVersion !== CANONICAL_DRAFT_VERSION_V2) {
     return { valid: false, error: `Unsupported draftVersion '${draft.draftVersion}'` }
   }
   if (typeof draft.baseCanonicalDocumentId !== 'string' || !draft.baseCanonicalDocumentId) {
@@ -104,14 +109,44 @@ export function validateWorkingDraft(draft) {
     }
   }
 
+  // V2-specific structured block validation
+  if (draft.draftVersion === CANONICAL_DRAFT_VERSION_V2) {
+    if (draft.structured !== undefined && draft.structured !== null) {
+      if (canonicalDoc) {
+        const structuredResult = validateDraftStructuredBlock(draft.structured, canonicalDoc)
+        if (!structuredResult.valid) {
+          return { valid: false, error: `V2 structured validation: ${structuredResult.error}` }
+        }
+      } else {
+        if (typeof draft.structured !== 'object' || Array.isArray(draft.structured)) {
+          return { valid: false, error: 'V2 structured block must be a non-null object' }
+        }
+        if (draft.structured.structuredPatches && (typeof draft.structured.structuredPatches !== 'object' || Array.isArray(draft.structured.structuredPatches))) {
+          return { valid: false, error: 'structuredPatches must be an object' }
+        }
+        if (draft.structured.insertedNodes && (typeof draft.structured.insertedNodes !== 'object' || Array.isArray(draft.structured.insertedNodes))) {
+          return { valid: false, error: 'insertedNodes must be an object' }
+        }
+        if (draft.structured.deletedNodeIds && !Array.isArray(draft.structured.deletedNodeIds)) {
+          return { valid: false, error: 'deletedNodeIds must be an array' }
+        }
+        if (draft.structured.nodeOrderBySection && (typeof draft.structured.nodeOrderBySection !== 'object' || Array.isArray(draft.structured.nodeOrderBySection))) {
+          return { valid: false, error: 'nodeOrderBySection must be an object' }
+        }
+      }
+    }
+  }
+
   return { valid: true }
 }
 
 /**
  * Saves a compact working draft for a canonical document.
+ * @param {object} compactDraft
+ * @param {object} [canonicalDoc]
  */
-export function saveWorkingDraft(compactDraft) {
-  const validation = validateWorkingDraft(compactDraft)
+export function saveWorkingDraft(compactDraft, canonicalDoc = null) {
+  const validation = validateWorkingDraft(compactDraft, canonicalDoc)
   if (!validation.valid) {
     throw new Error(`Draft validation failed: ${validation.error}`)
   }
@@ -143,7 +178,7 @@ export function loadWorkingDraft(canonicalDoc) {
     return null
   }
 
-  const validation = validateWorkingDraft(draft)
+  const validation = validateWorkingDraft(draft, canonicalDoc)
   if (!validation.valid) {
     console.warn(`Stored draft for '${canonicalDoc.id}' is invalid:`, validation.error)
     return { status: 'CORRUPTED', error: validation.error }

@@ -78,3 +78,5 @@ export function extractMaxSequenceFromUserId(userId) {
   if (match) return parseInt(match[1], 10)
   return 0
 }
+
+export const computeMaxSequenceFromUserId = extractMaxSequenceFromUserId
