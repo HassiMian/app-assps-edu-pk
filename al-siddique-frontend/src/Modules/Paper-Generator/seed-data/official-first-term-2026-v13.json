@@ -1269,7 +1269,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "2",
@@ -1281,12 +1281,12 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-2-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "As stated; six questions at 10 marks each.",
+      "sourceTotalNote": "As stated; six questions at 10 marks each. Q2 instruction was normalized to >, <, or = because the supplied item 81 □ 81 requires equality.",
       "sourceContentSha256": "68c1868d9ba86c52ea1f08dd102213345305999a8d9ad63c78b8e60f100db9e6",
-      "qaNotes": "preserve source, do not invent corrections:\n- Class label in source read \"Two / Starter\"; classified under Class Two because the paper itself is presented with Class Two papers.\n- Q2 includes 81 □ 81 though instruction asks only > or <; equality symbol may also be required.",
+      "qaNotes": "Principal-approved print normalization: Q2 now explicitly allows = so every supplied comparison item is answerable. Academic numbers/items otherwise preserved.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -1306,9 +1306,9 @@
               "id": "official-first-term-2026-class-2-mathematics-section-2",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q2. Write > or < in the empty boxes. (10)",
+              "heading": "Q2. Write >, <, or = in the empty boxes. (10)",
               "content": "1. 35 □ 48\n2. 219 □ 20\n3. 92 □ 89\n4. 81 □ 81\n5. 34 □ 48",
-              "text": "Q2. Write > or < in the empty boxes. (10)",
+              "text": "Q2. Write >, <, or = in the empty boxes. (10)",
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 2,
@@ -1383,9 +1383,9 @@
           "id": "official-first-term-2026-class-2-mathematics-section-2",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q2. Write > or < in the empty boxes. (10)",
+          "heading": "Q2. Write >, <, or = in the empty boxes. (10)",
           "content": "1. 35 □ 48\n2. 219 □ 20\n3. 92 □ 89\n4. 81 □ 81\n5. 34 □ 48",
-          "text": "Q2. Write > or < in the empty boxes. (10)",
+          "text": "Q2. Write >, <, or = in the empty boxes. (10)",
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 2,
@@ -1454,7 +1454,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-3-urdu",
@@ -3401,7 +3402,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "4",
@@ -3413,12 +3414,12 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-4-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "As stated; section marks sum to 60.",
+      "sourceTotalNote": "Teacher/header total is 60 and authoritative section totals are 15+16+16+13=60.",
       "sourceContentSha256": "9dcf61c9c7b963229de182fb50bcdd28458d70c181f047ceab45ebf5a0e686fb",
-      "qaNotes": "preserve source, do not invent corrections:\n- Q4 source says \"Attempt any Two questions. 13\" but lists four tasks; retained with 13 marks.\n- Some number spacing/circled-digit notation in Q2(3) is ambiguous because the source text lost the visual circles.",
+      "qaNotes": "Formula headings 2×8=16 are treated as section totals (16), not marks-per-item. Q4 remains 13 marks exactly as supplied.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -3442,7 +3443,7 @@
               "content": "1. Write the name of this number in words: 300 801\n2. Write the number in figures: Seven hundred and twenty-five thousand one hundred and twenty.\n3. Write the value of the circled digit: 64 9 767; 3 4 8 0 27.\n4. Write each number in expanded form: 627 051.\n5. Fill in the blanks with > or <: (i) 47 863 □ 47 859  (ii) 10 198 □ 10 197\n6. Write these numbers in descending order: 43 892, 43 961, 43 691, 44 001.\n7. Add: 32 943 + 28 127.\n8. 200 more than 25 000.\n9. Complete the number pattern: 5, 10, ___, ___, 80.\n10. Which of the following is divisible by 2? (i) 200  (ii) 345",
               "text": "Q2. Attempt any eight questions. (2×8=16)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 16,
               "sourceOrder": 2,
               "priority": "all"
             },
@@ -3454,7 +3455,7 @@
               "content": "1. Multiply: 1964 × 14.\n2. Find the rule, then find the next two numbers: 6, 9, 12, 15, ___, ___. Rule: ______.\n3. Write first six numbers of a pattern: add 15, start with 20.\n4. Find the factors of 35.\n5. Find the prime factors of 84 using the division method.\n6. Write the factors of 25 and 15 and circle the common factor.\n7. Find the common factors of 48 and 30.\n8. Circle the sets of like fractions: (i) 4/14, 1/15, 6/15   (ii) 9/20, 8/10, 16/20\n9. Change the mixed number into an improper fraction: 2 6/8 = ___/8.\n10. Change into a mixed fraction: 50/7.",
               "text": "Q3. Attempt any eight questions. (2×8=16)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 16,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -3495,7 +3496,7 @@
           "content": "1. Write the name of this number in words: 300 801\n2. Write the number in figures: Seven hundred and twenty-five thousand one hundred and twenty.\n3. Write the value of the circled digit: 64 9 767; 3 4 8 0 27.\n4. Write each number in expanded form: 627 051.\n5. Fill in the blanks with > or <: (i) 47 863 □ 47 859  (ii) 10 198 □ 10 197\n6. Write these numbers in descending order: 43 892, 43 961, 43 691, 44 001.\n7. Add: 32 943 + 28 127.\n8. 200 more than 25 000.\n9. Complete the number pattern: 5, 10, ___, ___, 80.\n10. Which of the following is divisible by 2? (i) 200  (ii) 345",
           "text": "Q2. Attempt any eight questions. (2×8=16)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 16,
           "sourceOrder": 2,
           "priority": "all"
         },
@@ -3507,7 +3508,7 @@
           "content": "1. Multiply: 1964 × 14.\n2. Find the rule, then find the next two numbers: 6, 9, 12, 15, ___, ___. Rule: ______.\n3. Write first six numbers of a pattern: add 15, start with 20.\n4. Find the factors of 35.\n5. Find the prime factors of 84 using the division method.\n6. Write the factors of 25 and 15 and circle the common factor.\n7. Find the common factors of 48 and 30.\n8. Circle the sets of like fractions: (i) 4/14, 1/15, 6/15   (ii) 9/20, 8/10, 16/20\n9. Change the mixed number into an improper fraction: 2 6/8 = ___/8.\n10. Change into a mixed fraction: 50/7.",
           "text": "Q3. Attempt any eight questions. (2×8=16)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 16,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -3538,7 +3539,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-5-social-studies",
@@ -5028,7 +5030,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "6",
@@ -5040,12 +5042,12 @@
         "totalMarks": 50,
         "session": "2026-2027",
         "paperCode": "FT26-6-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "As stated by teacher source; marking scheme is internally inconsistent.",
+      "sourceTotalNote": "Teacher/header total is 50, but supplied section notation is internally inconsistent: MCQs (5) contain 6 items; Fill in the blanks has no marks; Short Questions (10×3)=30; Long Questions (10×2)=20.",
       "sourceContentSha256": "46ad66c19ce891c455d0400557f93f3e52ba7ca5fd0c9379f528baa141cb6fed",
-      "qaNotes": "preserve source, do not invent corrections:\n- MCQ section says 5 marks but contains 6 MCQs.\n- Short Questions alone are labelled 10×3=30 and Long Questions 10×2=20, already totaling 50 before MCQs/fill blanks; source marking scheme is inconsistent.\n- No marks are stated for Fill in the blanks.",
+      "qaNotes": "PRINT HOLD: no marks are invented. Confirm the intended allocation/total before printing. Layout/content may be reviewed safely.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -5189,7 +5191,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-6-islamiyat",
@@ -7309,7 +7312,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "8",
@@ -7321,12 +7324,12 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-8-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "Provisional: total not stated; 60 inferred from 10 MCQ + 30 short + likely 20 long.",
+      "sourceTotalNote": "Teacher source did not state a paper total. 60 is only a provisional working total from prior reconstruction; Q2 lists 12 short questions despite 10×3=30, and Q3 marks/attempt rule are not source-authorized.",
       "sourceContentSha256": "45c95c04434a3cf8ca6e8440c01100622c5d554db7ef91d390372300440ffd16",
-      "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated; 60 is provisional.\n- Short heading says 10×3=30 but lists 12 questions and does not state how many to attempt.\n- Long-question marks/attempt rule were not stated; 20 is provisional to reach 60.",
+      "qaNotes": "PRINT HOLD: confirm total marks, how many of the 12 short questions are to be attempted, and the long-question attempt/marks rule.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -7446,7 +7449,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-8-english",

@@ -1,14 +1,15 @@
 // officialSectionSemantics.js — shared semantic classifier/parser for official exam sections
 const SECTION_MARKER_RE = /^\s*#\s*(.+?)\s*$/
 
-const MCQ_HEADING_RE = /(?:tick|choose|circle|select|mark)\b[^\n]*(?:correct|best)[^\n]*(?:option|answer)|correct\s+(?:option|answer)|multiple\s+choice|\bmcq\b|درست[^\n]*(?:جواب|نشان|انتخاب)|صحیح[^\n]*جواب|نشان[^\n]*لگائیں|نشان\s*دہی/i
+const MCQ_HEADING_RE = /(?:tick|choose|circle|select|mark)\b[^\n]*(?:correct|best)[^\n]*(?:option|answer)|correct\s+(?:option|answer)|multiple\s+choice|\bmcqs?\b|درست[^\n]*(?:جواب|نشان|انتخاب)|صحیح[^\n]*جواب|نشان[^\n]*لگائیں|نشان\s*دہی/i
 const TRUE_FALSE_RE = /true\s*(?:or|\/)?\s*false|tick\s+the\s+true|cross\s+the\s+false|درست[^\n]*غلط|صحیح[^\n]*غلط/i
 const MATCH_RE = /match\s+(?:the\s+)?columns?|matching|کالم[^\n]*(?:ملائیں|ملاؤ)|جوڑ[^\n]*مل/i
 const SHORT_RE = /short\s+questions?|answer\s+(?:the\s+)?(?:(?:following|these)\s+)?questions?(?:\s+given\s+below)?|مختصر[^\n]*سوال|مختصر[^\n]*جواب/i
 const LONG_RE = /long\s+questions?|detailed\s+questions?|essay|story|application|letter|paragraph|summari[sz]e|summary|تفصیلی|مضمون|درخواست|خط|کہانی/i
 const VERTICAL_MATH_RE = /addition|subtract|subtraction|multiply|multiplication|division|divide|vertical|solve\s+the\s+sums?|add\s+the\s+following|subtract\s+the\s+following|multiply\s+the\s+following|جمع|تفریق/i
-const MATH_COMPARE_RE = /greater\s+than|less\s+than|fill\s+in\s+the\s+symbols?\s*>\s*or\s*<|compare/i
-const MATH_NUMBER_NAME_RE = /number\s+names?/i
+const MATH_COMPARE_RE = /greater\s+than|less\s+than|fill\s+in\s+the\s+symbols?\s*>\s*or\s*<|write\s*>\s*(?:,|or)?\s*<|write[^\n]*(?:>|less)[^\n]*(?:<|equal)|compare/i
+const MATH_NUMBER_NAME_RE = /number\s+names?|write\s+in\s+words|write\s+the\s+number|write\s+in\s+figures/i
+const ATTEMPT_ANY_RE = /attempt\s+any\s+(?:\w+|\d+)\s+questions?/i
 const MATH_PLACE_VALUE_RE = /tens?\s+and\s+ones?|place\s+value/i
 const MATH_ORDER_RE = /ascending\s+order|descending\s+order/i
 const MATH_TABLE_RE = /(?:write\s+the\s+)?tables?\s+of\b|table\s+of\s+\d/i
@@ -37,8 +38,8 @@ export function inferOfficialSectionKind(section = {}) {
   if (MATH_ORDER_RE.test(heading)) return 'math_order'
   if (MATH_TABLE_RE.test(heading)) return 'math_table'
   if (VERTICAL_MATH_RE.test(heading)) return 'vertical_math'
-  if (SHORT_RE.test(heading)) return 'short'
   if (LONG_RE.test(heading)) return 'long'
+  if (SHORT_RE.test(heading) || ATTEMPT_ANY_RE.test(heading)) return 'short'
   if (trimmedLines.some(line => /^\|.*\|$/.test(line))) return 'table'
   if (/_{3,}|□|☐/.test(content)) return 'fill_blank'
   return 'list'
