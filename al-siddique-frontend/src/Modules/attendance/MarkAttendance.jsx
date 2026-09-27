@@ -16,6 +16,7 @@ import {
  Zap,
 } from 'lucide-react'
 import api from '../../services/api'
+import { saveAttendanceRecords } from '../../services/attendanceSave'
 import { getPakistanDateString } from '../../utils/dateUtils'
 import { emitAttendanceUpdated } from '../../utils/attendanceEvents'
 
@@ -221,10 +222,13 @@ export default function MarkAttendance() {
  setSaving(true)
  try {
  const records = students.map((student) => ({ student_id: student.id, date, status: attendance[student.id] || 'present' }))
- await api.post('/api/attendance/mark', { records })
- emitAttendanceUpdated({ date, count: records.length })
- setMessage('Attendance saved successfully.')
- setTimeout(() => setMessage(''), 3000)
+ const saveResult = await saveAttendanceRecords(api, records)
+ emitAttendanceUpdated({ date, count: saveResult.saved })
+ await loadStudents()
+ setMessage(saveResult.rejectedIds?.length
+ ? `Attendance saved for ${saveResult.saved} student(s); ${saveResult.rejectedIds.length} rejected record(s) still need review.`
+ : 'Attendance saved successfully.')
+ setTimeout(() => setMessage(''), 4000)
  } catch (err) {
  const msg =
  err.response?.data?.message ||

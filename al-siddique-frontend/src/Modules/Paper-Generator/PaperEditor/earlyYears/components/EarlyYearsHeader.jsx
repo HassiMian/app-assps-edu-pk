@@ -12,7 +12,9 @@ export default function EarlyYearsHeader({
     campus = 'Sharif Chowk, Rayya Khas, Narowal',
     classDisplayName = 'Starter',
     subjectDisplayName = 'English',
-    totalMarks = 50
+    totalMarks = 50,
+    examDate = '',
+    timeAllowed = ''
   } = headerConfig
 
   const accent = templatePreset.accent || '#123b67'
@@ -84,7 +86,8 @@ export default function EarlyYearsHeader({
         </div>
         <div>
           <span>{isUrdu ? 'تاریخ:' : 'Date:'} </span>
-          <span style={{ borderBottom: '1px solid #000', display: 'inline-block', width: '60px' }}>&nbsp;</span>
+          {examDate ? <span style={{ fontWeight: 'normal' }}>{examDate}</span> : <span style={{ borderBottom: '1px solid #000', display: 'inline-block', width: '60px' }}>&nbsp;</span>}
+          {timeAllowed && <div style={{ fontSize: '8.5pt', fontWeight: 'normal', marginTop: 2 }}>{isUrdu ? 'وقت:' : 'Time:'} {timeAllowed}</div>}
         </div>
         <div style={{ textAlign: isUrdu ? 'left' : 'right' }}>
           <span>{isUrdu ? 'کل نمبر:' : 'Total Marks:'} </span>

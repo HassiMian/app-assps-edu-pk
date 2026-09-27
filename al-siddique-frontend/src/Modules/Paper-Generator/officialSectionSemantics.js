@@ -6,7 +6,12 @@ const TRUE_FALSE_RE = /true\s*(?:or|\/)?\s*false|tick\s+the\s+true|cross\s+the\s
 const MATCH_RE = /match\s+(?:the\s+)?columns?|matching|کالم[^\n]*(?:ملائیں|ملاؤ)|جوڑ[^\n]*مل/i
 const SHORT_RE = /short\s+questions?|answer\s+(?:the\s+)?(?:(?:following|these)\s+)?questions?(?:\s+given\s+below)?|مختصر[^\n]*سوال|مختصر[^\n]*جواب/i
 const LONG_RE = /long\s+questions?|detailed\s+questions?|essay|story|application|letter|paragraph|summari[sz]e|summary|تفصیلی|مضمون|درخواست|خط|کہانی/i
-const VERTICAL_MATH_RE = /addition|subtract|subtraction|vertical|solve\s+the\s+sums?|جمع|تفریق/i
+const VERTICAL_MATH_RE = /addition|subtract|subtraction|multiply|multiplication|division|divide|vertical|solve\s+the\s+sums?|add\s+the\s+following|subtract\s+the\s+following|multiply\s+the\s+following|جمع|تفریق/i
+const MATH_COMPARE_RE = /greater\s+than|less\s+than|fill\s+in\s+the\s+symbols?\s*>\s*or\s*<|compare/i
+const MATH_NUMBER_NAME_RE = /number\s+names?/i
+const MATH_PLACE_VALUE_RE = /tens?\s+and\s+ones?|place\s+value/i
+const MATH_ORDER_RE = /ascending\s+order|descending\s+order/i
+const MATH_TABLE_RE = /(?:write\s+the\s+)?tables?\s+of\b|table\s+of\s+\d/i
 const PAIR_TABLE_RE = /word\s+meanings?|meanings?\s+of|urdu\s+meaning|opposites?|antonyms?|synonyms?|plural|singular|masculine|feminine|past\s+tense|acronyms?|abbreviations?|full\s+forms?|write\s+(?:these|the\s+following)\s+as\s+numbers?|معانی|مترادف|متضاد|واحد|جمع|مذکر|مونث|ہم\s*آواز/i
 
 export function isSectionMarkerLine(line = '') {
@@ -26,6 +31,11 @@ export function inferOfficialSectionKind(section = {}) {
   if (TRUE_FALSE_RE.test(heading)) return 'true_false'
   if (MATCH_RE.test(heading)) return 'matching'
   if (PAIR_TABLE_RE.test(heading)) return 'pair_table'
+  if (MATH_COMPARE_RE.test(heading)) return 'math_compare'
+  if (MATH_NUMBER_NAME_RE.test(heading)) return 'math_number_name'
+  if (MATH_PLACE_VALUE_RE.test(heading)) return 'math_place_value'
+  if (MATH_ORDER_RE.test(heading)) return 'math_order'
+  if (MATH_TABLE_RE.test(heading)) return 'math_table'
   if (VERTICAL_MATH_RE.test(heading)) return 'vertical_math'
   if (SHORT_RE.test(heading)) return 'short'
   if (LONG_RE.test(heading)) return 'long'
@@ -167,5 +177,10 @@ export const OFFICIAL_SECTION_PATTERNS = {
   SHORT_RE,
   LONG_RE,
   VERTICAL_MATH_RE,
+  MATH_COMPARE_RE,
+  MATH_NUMBER_NAME_RE,
+  MATH_PLACE_VALUE_RE,
+  MATH_ORDER_RE,
+  MATH_TABLE_RE,
   PAIR_TABLE_RE
 }

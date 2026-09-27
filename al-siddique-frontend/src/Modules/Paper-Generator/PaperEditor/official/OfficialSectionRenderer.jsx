@@ -126,6 +126,53 @@ function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor }) {
   </table>
 }
 
+
+function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
+  const raw = String(content || '').replace(/\r\n/g, '\n')
+  const mathFont = "'Cambria Math', 'Times New Roman', serif"
+
+  if (kind === 'vertical_math' && /\s{3,}/.test(raw)) {
+    const blocks = raw.split(/\n\s*\n/).map(block => block.split('\n').filter(line => line.trim())).filter(Boolean)
+    return <div data-math-operation-matrix style={{ display:'grid', gap:`${8*fs}px` }}>
+      {blocks.map((lines, blockIndex) => {
+        const rows = lines.map(line => line.trim().split(/\s{3,}/).map(cell => cell.trim()).filter(Boolean))
+        const cols = Math.max(...rows.map(row => row.length), 1)
+        return <div key={blockIndex} style={{ display:'grid', gridTemplateColumns:`repeat(${cols}, minmax(0,1fr))`, gap:`${10*fs}px`, breakInside:'avoid' }}>
+          {Array.from({length:cols}, (_,colIndex) => {
+            const cellLines = rows.map(row => row[colIndex] || '').filter(Boolean)
+            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px` }}>
+              {cellLines.map((line,i)=><div key={i} style={{ whiteSpace:'pre', borderBottom:/^_+$/.test(line)?`1.5px solid ${themeColor}`:'none', minHeight:'1.2em' }}>{/^_+$/.test(line)?'':line}</div>)}
+            </div>
+          })}
+        </div>
+      })}
+    </div>
+  }
+
+  const lines = raw.split('\n').map(line => line.trim()).filter(Boolean)
+  const rows = lines.map((line,index) => {
+    const match = line.match(/^((?:\d+|[ivxlcdm]+|[a-z]))[.)]\s*(.*)$/i)
+    return { serial: match?.[1] || String(index+1), text: match?.[2] || line }
+  })
+
+  if (kind === 'math_table') {
+    return <div data-math-table-practice style={{ display:'grid', gridTemplateColumns:rows.length>1?'1fr 1fr':'1fr', gap:`${10*fs}px` }}>
+      {rows.map(row => <div key={row.serial} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${8*fs}px`, breakInside:'avoid' }}>
+        <div style={{ fontFamily:mathFont, fontWeight:800, fontSize:`${Math.max(qFs,13)}px`, marginBottom:5 }}><AnswerText text={row.text}/></div>
+        <div style={{ height:`${38*fs}px`, borderBottom:`1px solid ${themeColor}88` }} />
+      </div>)}
+    </div>
+  }
+
+  const twoColumn = rows.length >= 4
+  return <div data-math-practice-grid data-math-kind={kind} style={{ display:'grid', gridTemplateColumns:twoColumn?'1fr 1fr':'1fr', gap:`${7*fs}px ${14*fs}px`, fontFamily:mathFont }}>
+    {rows.map(row => <div key={row.serial} style={{ display:'grid', gridTemplateColumns:'28px minmax(0,1fr)', alignItems:'center', gap:6, border:`1px solid ${themeColor}3D`, borderRadius:4, padding:`${6*fs}px ${8*fs}px`, breakInside:'avoid', minHeight:`${32*fs}px` }}>
+      <b style={{ color:themeColor, textAlign:'center' }}>{row.serial}.</b>
+      <div style={{ fontSize:`${Math.max(qFs,13)}px`, minWidth:0 }}><AnswerText text={row.text}/></div>
+    </div>)}
+  </div>
+}
+
 function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem = 0 }) {
   const mcqs = kind === 'mcq' ? parseMcqRows(content) : []
   if (mcqs.length) return <McqSection rows={mcqs} layout={mcqLayout} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
@@ -133,6 +180,7 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
   const tableRows = parseMarkdownTable(content)
   if (tableRows.length >= 2) return <SourceTable rows={tableRows} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
   if (kind === 'pair_table') return <PairPracticeTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
+  if (['vertical_math','math_compare','math_number_name','math_place_value','math_order','math_table'].includes(kind)) return <MathPracticeGrid content={content} kind={kind} qFs={qFs} fs={fs} themeColor={themeColor}/>
 
   const rawLines = String(content).split(/\r?\n/).map(line=>line.trim()).filter(Boolean)
   const numberedRe = /^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i

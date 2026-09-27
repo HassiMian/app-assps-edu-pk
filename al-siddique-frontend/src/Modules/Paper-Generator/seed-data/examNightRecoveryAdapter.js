@@ -11,7 +11,10 @@ function renderSectionContent(section = {}) {
       return `${roman(index)}. ${stem}${optionText ? `\n${optionText}` : ''}`
     }).join('\n\n')
   }
-  return items.map((item, index) => `${roman(index)}. ${typeof item === 'string' ? item : JSON.stringify(item)}`).join('\n')
+  return items.map((item, index) => {
+    const text = typeof item === 'string' ? item : JSON.stringify(item)
+    return /^(?:\d+|[a-z]|[ivxlcdm]+)[.)]\s+/i.test(text) ? text : `${roman(index)}. ${text}`
+  }).join('\n')
 }
 
 export function buildRecoverySavedPapers(seed = {}) {

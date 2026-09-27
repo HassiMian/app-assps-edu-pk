@@ -49,6 +49,8 @@ export function buildWorksheetSpec(paper) {
       classDisplayName: paper.classDisplayName || paper.classStage?.toUpperCase(),
       subjectDisplayName: paper.subject?.toUpperCase(),
       totalMarks: paper.headerSource?.totalMarks ?? (paper.totalMarksSource?.headerTotal ?? null),
+      examDate: paper.headerSource?.examDate || '',
+      timeAllowed: paper.headerSource?.timeAllowed || '',
       showNameRollNo: true
     },
 

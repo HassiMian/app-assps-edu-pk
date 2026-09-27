@@ -195,9 +195,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "Provisional: five major questions; source did not state a total.",
+      "sourceTotalNote": "Working header total 50 retained from the five-major-question source package; teacher source did not assign question-wise marks.",
       "sourceContentSha256": "c9bf48bc88d59920b89810686c480b8eaa32865b93fee06a46c9e9f354e79a71",
-      "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated in source; 50 is provisional and should be confirmed.\n- Q1 source contained mixed + and - operations under an Addition heading; operations were preserved.",
+      "qaNotes": "Do not invent section marks. Preserve mixed + and - operators in Q1 exactly as supplied. Mathematics print layout must use aligned operation/comparison/response structures.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -341,7 +341,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY_WITH_UNRESOLVED_SECTION_MARKS"
     },
     {
       "id": "official-first-term-2026-class-1-english",
@@ -4289,9 +4290,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "As stated; 15+16+16+12=59 in source arithmetic, though Q4 says 2x6=12; header retained at 60.",
+      "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 59 (15+16+16+12); preserve both values and do not invent the missing 1 mark.",
       "sourceContentSha256": "819f5aeaeaa9d3441df5708b858480a1c745d98b45f845fb703c08d3e6529ebe",
-      "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 59 (15+16+16+12).\n- Several MCQ options appear mathematically inconsistent; they are preserved as teacher-submitted content, not silently rewritten.",
+      "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 section marks reflect the full expressions printed in the headings, not the attempt-count multiplier alone.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -4315,7 +4316,7 @@
               "content": "1. Write the following number in words: 4 000 000.\n2. Write the following number in expanded form: 403 075.\n3. Arrange in descending order: 9 603 298; 9 630 928; 9 613 829.\n4. 5000 more than 245 624.\n5. 90 000 less than 194 523.\n6. Divide by 10: 38 200.\n7. Identify the pattern rule and complete the missing terms: 38, 45, ___, 59, 66, ___, 80.\n8. Use random number to make patterns: 49, 37, 53, 41, 45, 57.\n9. Find the HCF by prime factorisation method: 26, 96, 12.\n10. Which of the following numbers are divisible by 4? a) 1996  b) 2000",
               "text": "Q2. Attempt any eight questions. (8×2=16)",
               "textUrdu": "",
-              "marks": 8,
+              "marks": 16,
               "sourceOrder": 2,
               "priority": "all"
             },
@@ -4327,7 +4328,7 @@
               "content": "1. Find the HCF for each group of prime factors: 2×3×3×5; 2×3×5×7; 2×3×3×7.\n2. Add: 5/13 + 7/26.\n3. Subtract: 6/7 - 4/5.\n4. Solve: 6×1/2; 1/2×1/2.\n5. Find product: 1/5×7/8.\n6. Divide: 1/4 ÷ 1/2.\n7. 7/3 ÷ 14/15.\n8. Solve: 302.48 - 208.24.\n9. Rewrite in ascending order: 3.48, 5.2, 3.8, 5.02.\n10. Solve: 482.11 + 653.93.",
               "text": "Q3. Attempt any eight questions. (8×2=16)",
               "textUrdu": "",
-              "marks": 8,
+              "marks": 16,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -4339,12 +4340,12 @@
               "content": "1. Find the difference between the greatest 6-digit number and the greatest 5-digit number.\n2. 34 396 ÷ 64.\n3. Using division method find the HCF of 35, 42, 77.",
               "text": "Q4. Attempt any two questions. (2×6=12)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 12,
               "sourceOrder": 4,
               "priority": "all"
             }
           ],
-          "marks": 0
+          "marks": 59
         }
       },
       "official_section": [
@@ -4368,7 +4369,7 @@
           "content": "1. Write the following number in words: 4 000 000.\n2. Write the following number in expanded form: 403 075.\n3. Arrange in descending order: 9 603 298; 9 630 928; 9 613 829.\n4. 5000 more than 245 624.\n5. 90 000 less than 194 523.\n6. Divide by 10: 38 200.\n7. Identify the pattern rule and complete the missing terms: 38, 45, ___, 59, 66, ___, 80.\n8. Use random number to make patterns: 49, 37, 53, 41, 45, 57.\n9. Find the HCF by prime factorisation method: 26, 96, 12.\n10. Which of the following numbers are divisible by 4? a) 1996  b) 2000",
           "text": "Q2. Attempt any eight questions. (8×2=16)",
           "textUrdu": "",
-          "marks": 8,
+          "marks": 16,
           "sourceOrder": 2,
           "priority": "all"
         },
@@ -4380,7 +4381,7 @@
           "content": "1. Find the HCF for each group of prime factors: 2×3×3×5; 2×3×5×7; 2×3×3×7.\n2. Add: 5/13 + 7/26.\n3. Subtract: 6/7 - 4/5.\n4. Solve: 6×1/2; 1/2×1/2.\n5. Find product: 1/5×7/8.\n6. Divide: 1/4 ÷ 1/2.\n7. 7/3 ÷ 14/15.\n8. Solve: 302.48 - 208.24.\n9. Rewrite in ascending order: 3.48, 5.2, 3.8, 5.02.\n10. Solve: 482.11 + 653.93.",
           "text": "Q3. Attempt any eight questions. (8×2=16)",
           "textUrdu": "",
-          "marks": 8,
+          "marks": 16,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -4392,12 +4393,12 @@
           "content": "1. Find the difference between the greatest 6-digit number and the greatest 5-digit number.\n2. 34 396 ÷ 64.\n3. Using division method find the HCF of 35, 42, 77.",
           "text": "Q4. Attempt any two questions. (2×6=12)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 12,
           "sourceOrder": 4,
           "priority": "all"
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 59,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
@@ -4411,7 +4412,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY_WITH_SOURCE_CONFLICT"
     },
     {
       "id": "official-first-term-2026-class-5-english",
@@ -6277,9 +6279,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 50 (10+16+14+10); preserve both values and do not invent the missing 10 marks.",
       "sourceContentSha256": "da9a3105a4766040ac3a0331d29263498653265d1d3d14aa29223e435ca3738a",
-      "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 50; 10 marks appear missing.\n- Q4(1a) supplied A and A′ overlap, which is mathematically unusual; preserved as source.\n- Some encircled-digit formatting was lost in plain-text source.",
+      "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 marks reflect the full expressions in the source headings.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -6303,7 +6305,7 @@
               "content": "1. Express set in tabular form: O = set of any odd numbers which are divisible by 3.\n2. If A={2,4,6,8}, B={1,3,5,7}, find A∪B.\n3. If R={1,2,3,4,5,6}, S={0,3,6,9}, find R∩S.\n4. If U={1,2,3,...10} and A={0,1,2,3}, find A'.\n5. If A={0,2,4,6,8}, B={1,3,5,7,9}, find A/B.\n6. Write down the rational number whose numerator is (-7)×2 and denominator is 21-2.\n7. Represent the rational number -2 on the number line.\n8. Fill in the blanks: 4/5 = -12/? = 20/?.\n9. Add: 3/5 and -2/5.\n10. Simplify: (6/15) ÷ (4/35).",
               "text": "Q2. Attempt any eight questions. (8×2=16)",
               "textUrdu": "",
-              "marks": 8,
+              "marks": 16,
               "sourceOrder": 2,
               "priority": "all"
             },
@@ -6315,7 +6317,7 @@
               "content": "1. Multiply: 4/15 by 3/8.\n2. Round off to the decimal place indicated by encircled digits: a) 416.595  b) 7.91659.\n3. Which rational numbers can be terminating or non-terminating decimal? i) -13/4  ii) -5/7  iii) -5/80.\n4. Express the decimals as fractions: i) 5.04  ii) 0.25.\n5. Find decimal value: 6.6/7.\n6. Find the square of 4/3.\n7. Find the positive square root: 1764.\n8. Find square root: 56.25.\n9. Find square root of 1.7×34×0.8.\n10. The total cost of 10 tickets is Rs 200. Find the cost of 25 tickets.",
               "text": "Q3. Attempt any seven questions. (7×2=14)",
               "textUrdu": "",
-              "marks": 7,
+              "marks": 14,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -6327,12 +6329,12 @@
               "content": "1. a) Find universal set of A={1,3,5,7,9} and A'={4,5,6,7,12}.\n   b) Arrange in ascending order: 2/5, -1/2, 8/-15, -3/10.\n2. a) Show that (-8/5×3/4) + (7/8×-16/25).\n   b) Hassan had a piece of cloth measuring 674.95 cm. He cuts off a 217.43 cm long piece. What length remains? Round off to one decimal place.\n3. a) If U={1,2,3,4,5,6,7}, A={5,6,7} and B={1,3,5}, show that (A∪B)'=A'∩B'.\n   b) Write 1/5 in decimal form by changing the denominator to a power of 10.",
               "text": "Q4. Long Questions - Attempt any 2. (2×5=10)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 10,
               "sourceOrder": 4,
               "priority": "all"
             }
           ],
-          "marks": 0
+          "marks": 50
         }
       },
       "official_section": [
@@ -6356,7 +6358,7 @@
           "content": "1. Express set in tabular form: O = set of any odd numbers which are divisible by 3.\n2. If A={2,4,6,8}, B={1,3,5,7}, find A∪B.\n3. If R={1,2,3,4,5,6}, S={0,3,6,9}, find R∩S.\n4. If U={1,2,3,...10} and A={0,1,2,3}, find A'.\n5. If A={0,2,4,6,8}, B={1,3,5,7,9}, find A/B.\n6. Write down the rational number whose numerator is (-7)×2 and denominator is 21-2.\n7. Represent the rational number -2 on the number line.\n8. Fill in the blanks: 4/5 = -12/? = 20/?.\n9. Add: 3/5 and -2/5.\n10. Simplify: (6/15) ÷ (4/35).",
           "text": "Q2. Attempt any eight questions. (8×2=16)",
           "textUrdu": "",
-          "marks": 8,
+          "marks": 16,
           "sourceOrder": 2,
           "priority": "all"
         },
@@ -6368,7 +6370,7 @@
           "content": "1. Multiply: 4/15 by 3/8.\n2. Round off to the decimal place indicated by encircled digits: a) 416.595  b) 7.91659.\n3. Which rational numbers can be terminating or non-terminating decimal? i) -13/4  ii) -5/7  iii) -5/80.\n4. Express the decimals as fractions: i) 5.04  ii) 0.25.\n5. Find decimal value: 6.6/7.\n6. Find the square of 4/3.\n7. Find the positive square root: 1764.\n8. Find square root: 56.25.\n9. Find square root of 1.7×34×0.8.\n10. The total cost of 10 tickets is Rs 200. Find the cost of 25 tickets.",
           "text": "Q3. Attempt any seven questions. (7×2=14)",
           "textUrdu": "",
-          "marks": 7,
+          "marks": 14,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -6380,12 +6382,12 @@
           "content": "1. a) Find universal set of A={1,3,5,7,9} and A'={4,5,6,7,12}.\n   b) Arrange in ascending order: 2/5, -1/2, 8/-15, -3/10.\n2. a) Show that (-8/5×3/4) + (7/8×-16/25).\n   b) Hassan had a piece of cloth measuring 674.95 cm. He cuts off a 217.43 cm long piece. What length remains? Round off to one decimal place.\n3. a) If U={1,2,3,4,5,6,7}, A={5,6,7} and B={1,3,5}, show that (A∪B)'=A'∩B'.\n   b) Write 1/5 in decimal form by changing the denominator to a power of 10.",
           "text": "Q4. Long Questions - Attempt any 2. (2×5=10)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 10,
           "sourceOrder": 4,
           "priority": "all"
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 50,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
@@ -6399,7 +6401,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY_WITH_SOURCE_CONFLICT"
     },
     {
       "id": "official-first-term-2026-class-7-english",

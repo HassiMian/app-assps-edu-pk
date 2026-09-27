@@ -12,6 +12,7 @@ import { getDisplayOptionLabel } from './PaperEditor/layouts/urduRtlEngine.js'
 import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
 import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
+import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
 
 function storeQToTemplate(q) {
  return {
@@ -501,6 +502,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const editorSettings = loadedPaper?.editorSettings || {}
 
  const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
+ const printAudit = isOfficialPaper ? auditOfficialPaperForPrint(loadedPaper || {}) : { blocked:false, issues:[] }
  const [tmpl, setTmpl] = useState(editorSettings.template || 'classic')
  const [printMode, setPrintMode] = useState(editorSettings.printMode || 'a4')
  const [mcqLayout, setMcqLayout] = useState(editorSettings.mcqLayout || (isOfficialPaper ? 'matrix-table' : 'compact-grid'))
@@ -717,6 +719,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPrint() {
+ if (printAudit.blocked) {
+  alert(paperPrintBlockMessage(printAudit))
+  return
+ }
  if (editMode) {
   setEditMode(false)
   await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))

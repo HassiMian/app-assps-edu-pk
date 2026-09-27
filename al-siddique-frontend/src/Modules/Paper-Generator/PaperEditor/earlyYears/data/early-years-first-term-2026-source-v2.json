@@ -555,7 +555,9 @@
         "date": "",
         "class": "Starter",
         "subject": "Math",
-        "totalMarks": 50
+        "totalMarks": 50,
+        "examDate": "2026-09-30",
+        "timeAllowed": "2 Hours"
       },
       "totalMarksSource": {
         "headerTotal": 50,
@@ -1018,7 +1020,6 @@
           "rawContent": "ا تا ش",
           "instruction": "ا تا ش  حروفِ تہجی لکھیں۔",
           "marks": 20,
-
           "presentationType": "UrduHandwritingResponse",
           "content": {
             "prompt": "ا تا ش",
@@ -1126,7 +1127,9 @@
         "date": "",
         "class": "Mover",
         "subject": "Math",
-        "totalMarks": 50
+        "totalMarks": 50,
+        "examDate": "2026-09-30",
+        "timeAllowed": "2 Hours"
       },
       "totalMarksSource": {
         "headerTotal": 50,
@@ -1738,7 +1741,9 @@
         "date": "",
         "class": "Flyer",
         "subject": "Math",
-        "totalMarks": 50
+        "totalMarks": 50,
+        "examDate": "2026-09-30",
+        "timeAllowed": "2 Hours"
       },
       "totalMarksSource": {
         "headerTotal": 50,

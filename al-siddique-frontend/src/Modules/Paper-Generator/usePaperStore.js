@@ -14,14 +14,18 @@ const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
-const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V19_SEP29_ENGLISH_PRINT_RULES'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V20_SEP30_MATH_PRINT_RULES'
 const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
  'official-first-term-2026-class-2-english',
  'official-first-term-2026-class-4-english',
  'official-first-term-2026-class-6-english',
  'official-first-term-2026-class-8-english',
+ 'official-first-term-2026-class-1-countdown-mathematics',
+ 'official-first-term-2026-class-5-mathematics',
+ 'official-first-term-2026-class-7-mathematics',
 ])
-const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V3'
+const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V4_SEP30_MATH_REFRESH'
+const EXAM_NIGHT_FORCE_REFRESH_IDS = new Set(['recovery-first-term-2026-class-3-mathematics'])
 
 const SEED_TYPE_MAP = {
  mcq: 'mcq',
@@ -410,15 +414,25 @@ function withExamNightRecoverySeed(store) {
  if (!recoveryPapers.length) return store
 
  const savedPapers = Array.isArray(store.savedPapers) ? [...store.savedPapers] : []
- const existingIds = new Set(savedPapers.map(paper => String(paper?.id || '')))
+ const recoveryById = new Map(recoveryPapers.map(paper => [String(paper.id), paper]))
+ let refreshed = 0
+ const refreshedSaved = savedPapers.map(existing => {
+  const id = String(existing?.id || '')
+  if (!EXAM_NIGHT_FORCE_REFRESH_IDS.has(id)) return existing
+  const next = recoveryById.get(id)
+  if (!next) return existing
+  refreshed += 1
+  return { ...next, name: existing.name || next.name, createdAt: existing.createdAt || next.createdAt, updatedAt: new Date().toISOString() }
+ })
+ const existingIds = new Set(refreshedSaved.map(paper => String(paper?.id || '')))
  const missing = recoveryPapers.filter(paper => !existingIds.has(String(paper.id)))
  const alreadyCurrent = store.seedInfo?.examNightRecovery?.version === EXAM_NIGHT_RECOVERY_SEED_VERSION
 
- if (!missing.length && alreadyCurrent) return store
+ if (!missing.length && !refreshed && alreadyCurrent) return store
 
  return {
   ...store,
-  savedPapers: [...missing, ...savedPapers],
+  savedPapers: [...missing, ...refreshedSaved],
   seedInfo: {
    ...(store.seedInfo || {}),
    examNightRecovery: {

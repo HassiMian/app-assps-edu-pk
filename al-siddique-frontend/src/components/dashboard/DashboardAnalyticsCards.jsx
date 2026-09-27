@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
+import { saveAttendanceRecords } from '../../services/attendanceSave'
 import { getPakistanDateString, formatPakistanDateDisplay } from '../../utils/dateUtils'
 import { emitAttendanceUpdated, onAttendanceUpdated } from '../../utils/attendanceEvents'
 import {
@@ -274,19 +275,25 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
         date: today,
       }))
 
-      await api.post('/api/attendance/mark', { records })
+      const saveResult = await saveAttendanceRecords(api, records)
       setSaveSuccess(true)
-      setSelectedStatus({})
+      if (saveResult.rejectedIds?.length) {
+        const rejected = new Set(saveResult.rejectedIds.map(Number))
+        setSelectedStatus((prev) => Object.fromEntries(Object.entries(prev).filter(([studentId]) => rejected.has(Number(studentId)))))
+        setSaveError(`Attendance saved for ${saveResult.saved} student(s); ${saveResult.rejectedIds.length} rejected record(s) still need review.`)
+      } else {
+        setSelectedStatus({})
+      }
       await loadData()
       // Delay external refresh signals so the success banner stays visible for 3s
       // emitAttendanceUpdated + onRefresh both eventually call fetchAll (setLoading=true)
       // which would unmount this modal's portal before Playwright/user can see the banner.
       setTimeout(() => {
         setSaveSuccess(false)
-        emitAttendanceUpdated({ date: today, count: records.length })
+        emitAttendanceUpdated({ date: today, count: saveResult.saved })
         if (onRefresh) onRefresh()
       }, 3000)
-      if (closeAfter === true) {
+      if (closeAfter === true && !saveResult.rejectedIds?.length) {
         onClose()
       }
     } catch (err) {
