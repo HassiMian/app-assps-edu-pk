@@ -8,6 +8,8 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
 
   // 1. Section Banner Node (Rule 13)
   if (type === 'section_banner') {
+    const raw = node.bannerText || node.rawText || ''
+    const bannerText = raw.replace(/^#+\s*/, '')
     return (
       <div
         className="canonical-section-banner"
@@ -19,13 +21,15 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
           margin: '8px 0 4px',
         }}
       >
-        {node.bannerText || node.rawText || ''}
+        {bannerText}
       </div>
     )
   }
 
   // 2. Scope Header Node (Rule 13)
   if (type === 'scope_header') {
+    const raw = node.headingText || node.scopeText || node.rawText || ''
+    const scopeText = raw.replace(/^#+\s*/, '')
     return (
       <div
         className="canonical-scope-header"
@@ -38,7 +42,7 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
           fontStyle: 'italic',
         }}
       >
-        {node.headingText || ''}
+        {scopeText}
       </div>
     )
   }

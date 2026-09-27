@@ -17,6 +17,8 @@ const NotesMakerTab = lazy(() => import('./NotesMakerTab'))
 const DailyDiaryFeature = lazy(() => import('./DailyDiaryFeature'))
 const PaperEditorRouter = lazy(() => import('./PaperEditor/editorV2/PaperEditorRouter'))
 const EarlyYearsWorksheetEditor = lazy(() => import('./PaperEditor/earlyYears/EarlyYearsWorksheetEditor'))
+import { resolvePaperRoute } from './resolvePaperRoute.js'
+export { resolvePaperRoute }
 
 const C = {
   card: 'rgba(15,23,42,0.58)',
@@ -136,13 +138,8 @@ export default function PaperGenerator() {
 
   function handleLoadPaper(paper, targetTab = null) {
     setLoadedSavedPaper(paper)
-    if (targetTab) {
-       setModuleTab(targetTab)
-    } else if (paper?.structureMode === 'board_pattern') {
-       setModuleTab('board_pattern')
-    } else {
-       setModuleTab('build')
-    }
+    const nextTab = resolvePaperRoute(paper, targetTab)
+    setModuleTab(nextTab)
   }
 
   const openModuleTab = (t) => {
@@ -183,7 +180,10 @@ export default function PaperGenerator() {
         {moduleTab === 'early_years' && (
           <ModuleWrap>
             <Suspense fallback={<div style={{ padding: 40, color: '#C0C8D8', fontFamily: 'Inter, sans-serif' }}>Loading Pre Classes Papers...</div>}>
-              <EarlyYearsWorksheetEditor />
+              <EarlyYearsWorksheetEditor
+                initialPaperId={loadedSavedPaper?.id || 'ey-starter-english-2026'}
+                onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')}
+              />
             </Suspense>
           </ModuleWrap>
         )}

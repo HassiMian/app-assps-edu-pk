@@ -181,9 +181,21 @@
     background: #ffffff !important;
     color: #000000 !important;
     box-shadow: none !important;
-    border: none !important;
     transform: none !important;
     box-sizing: border-box !important;
+  }
+
+  .canonical-paper-surface.page-border-thin {
+    border: 1.5px solid #1e293b !important;
+  }
+  .canonical-paper-surface.page-border-thick {
+    border: 3.5px solid #1e293b !important;
+  }
+  .canonical-paper-surface.page-border-double {
+    border: 4.5px double #1e293b !important;
+  }
+  .canonical-paper-surface.page-border-none {
+    border: none !important;
   }
 
   /* 4. Complete UI Chrome & Control Suppression */
@@ -287,5 +299,48 @@
     border: 1px dashed #64748b !important;
     background: transparent !important;
   }
+
+  /* 7. Answer Lines and Table Print Parity (FIX F, FIX H) */
+  .canonical-answer-lines {
+    display: block !important;
+  }
+
+  .canonical-answer-line {
+    display: block !important;
+    border-bottom: 1px dashed #000000 !important;
+    height: 24px !important;
+    width: 100% !important;
+  }
+
+  .canonical-mcq-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1.5px solid #000000 !important;
+    page-break-inside: auto !important;
+  }
+
+  .canonical-mcq-table th,
+  .canonical-mcq-table td {
+    border: 1px solid #94a3b8 !important;
+    padding: 5px 8px !important;
+  }
+
+  .canonical-mcq-table tr {
+    page-break-inside: avoid !important;
+  }
+}
+
+/* Page Border Utility Classes (Screen) */
+.canonical-paper-surface.page-border-thin {
+  border: 1.5px solid #1e293b;
+}
+.canonical-paper-surface.page-border-thick {
+  border: 3.5px solid #1e293b;
+}
+.canonical-paper-surface.page-border-double {
+  border: 4.5px double #1e293b;
+}
+.canonical-paper-surface.page-border-none {
+  border: none;
 }
 

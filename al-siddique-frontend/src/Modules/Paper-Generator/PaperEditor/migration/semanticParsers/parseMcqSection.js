@@ -22,8 +22,11 @@ export function parseMcqSection(content, context = {}) {
   const direction = context.direction || DocumentDirection.AUTO
 
   // Match question start boundaries
-  // Lines starting with 1., 1), (1), i), i., Q1., (a), الف), etc.
-  const lineRegex = /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[\.\)\-:]|\([0-9]+\)|\([a-zA-Z]\)|\([الف-ي]\))[ \t]+/gm
+  // If numeric boundaries exist (1., 2., i., ii., Q1.), questions are strictly numeric/Roman
+  const hasNumeric = /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[\.\)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/m.test(content)
+  const lineRegex = hasNumeric
+    ? /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[\.\)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/gm
+    : /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[الف-ي])[\.\)\-:]|\([0-9]+\)|\([الف-ي]\))[ \t]+/gm
   const matches = []
   let match
   while ((match = lineRegex.exec(content)) !== null) {
@@ -126,7 +129,7 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
   // a) / A) / (a) / a.
   // الف) / ب) / ج) / د)
   // 1) / 2) / 3) / (1)
-  const optionInlinePattern = /(?:^|\s+)(?:☐|\(T\/F\)|\[\s*\])?\s*(?:([a-dA-D]|الف|ب|ج|د|[1-4])[\.\)\-:]|\(([a-dA-D]|الف|ب|ج|د|[1-4])\))[ \t]+([^\n\t]+)/g
+  const optMarkerRegex = /(?:^|[ \t]+)(?:☐|\(T\/F\)|\[\s*\])?\s*(?:([a-dA-D]|الف|ب|ج|د|[1-4])[\.\)\-:]|\(([a-dA-D]|الف|ب|ج|د|[1-4])\))[ \t]+/g
 
   for (let lIdx = 0; lIdx < lines.length; lIdx++) {
     const line = lines[lIdx].trim()
@@ -139,25 +142,27 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
     }
 
     // Check if line contains labeled options
-    const inlineMatches = []
+    optMarkerRegex.lastIndex = 0
+    const inlineMarkers = []
     let m
-    while ((m = optionInlinePattern.exec(line)) !== null) {
-      const label = m[1] || m[2]
-      const text = m[3].replace(/[ \t]+(?:[a-dA-D]|الف|ب|ج|د|[1-4])[\.\)\-:]/g, '').trim()
-      inlineMatches.push({ label, text })
+    while ((m = optMarkerRegex.exec(line)) !== null) {
+      inlineMarkers.push({ index: m.index, matchLen: m[0].length, label: m[1] || m[2] })
     }
 
-    if (inlineMatches.length >= 2) {
+    if (inlineMarkers.length >= 2) {
       foundOptions = true
-      inlineMatches.forEach((opt) => {
+      inlineMarkers.forEach((marker, mi) => {
+        const textStart = marker.index + marker.matchLen
+        const textEnd = mi + 1 < inlineMarkers.length ? inlineMarkers[mi + 1].index : line.length
+        const optText = line.slice(textStart, textEnd).trim()
         const canonicalLabel = optLetters[options.length] || String(options.length + 1)
         options.push({
           id: `${nodeId}__opt${canonicalLabel}`,
           canonicalLabel,
-          sourceLabel: opt.label,
-          displayLabel: `${opt.label})`,
+          sourceLabel: marker.label,
+          displayLabel: `${marker.label})`,
           labelOrigin: LabelOrigin.SOURCE,
-          text: opt.text,
+          text: optText,
           direction: defaultDirection,
           isCorrect: null,
         })
@@ -165,20 +170,19 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
       continue
     }
 
-    // Check single option line: e.g. "a) Food" or "☐ الف) اللہ"
-    const singleOptMatch = line.match(/^(?:☐|\(T\/F\)|\[\s*\])?[ \t]*([a-dA-D]|الف|ب|ج|د|[1-4])[\.\)\-:][ \t]+(.+)$/)
-    if (singleOptMatch && lIdx > 0) {
+    // Single option line: e.g. "a) Food" or "☐ الف) اللہ"
+    if (inlineMarkers.length === 1 && lIdx > 0) {
       foundOptions = true
-      const label = singleOptMatch[1]
-      const text = singleOptMatch[2].trim()
+      const marker = inlineMarkers[0]
+      const optText = line.slice(marker.index + marker.matchLen).trim()
       const canonicalLabel = optLetters[options.length] || String(options.length + 1)
       options.push({
         id: `${nodeId}__opt${canonicalLabel}`,
         canonicalLabel,
-        sourceLabel: label,
-        displayLabel: `${label})`,
+        sourceLabel: marker.label,
+        displayLabel: `${marker.label})`,
         labelOrigin: LabelOrigin.SOURCE,
-        text,
+        text: optText,
         direction: defaultDirection,
         isCorrect: null,
       })

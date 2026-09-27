@@ -22,6 +22,12 @@ export default function EarlyYearsWorksheetEditor({
   const templatePreset = useMemo(() => getTemplatePreset(templateId), [templateId])
 
   useEffect(() => {
+    if (initialPaperId) {
+      setSelectedPaperId(initialPaperId)
+    }
+  }, [initialPaperId])
+
+  useEffect(() => {
     document.body.classList.add('early-years-mode')
     return () => document.body.classList.remove('early-years-mode')
   }, [])

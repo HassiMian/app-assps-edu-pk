@@ -776,6 +776,67 @@ export class EditorWorkingStore {
   }
 
   // ─────────────────────────────────────────────────────────────────────────
+  // STRUCTURAL PRESENTATION CONTROLS (FIX F)
+  // ─────────────────────────────────────────────────────────────────────────
+  setPageBorder(pageBorder) {
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    this._workingDoc.presentation.pageBorder = pageBorder
+    this._workingDoc.session.isDirty = true
+    this.publishDocumentChange()
+  }
+
+  setMcqLayout(sectionId, mcqLayout) {
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.sectionLayoutOverrides) this._workingDoc.presentation.sectionLayoutOverrides = {}
+    const secId = sectionId || this._workingDoc.sections?.[0]?.id
+    if (secId) {
+      this._workingDoc.presentation.sectionLayoutOverrides[secId] = {
+        ...(this._workingDoc.presentation.sectionLayoutOverrides[secId] || {}),
+        mcqLayout,
+      }
+      this._workingDoc.session.isDirty = true
+      this.publishDocumentChange()
+    }
+  }
+
+  setShortLayout(sectionId, shortLayout) {
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.sectionLayoutOverrides) this._workingDoc.presentation.sectionLayoutOverrides = {}
+    const secId = sectionId || this._workingDoc.sections?.[0]?.id
+    if (secId) {
+      this._workingDoc.presentation.sectionLayoutOverrides[secId] = {
+        ...(this._workingDoc.presentation.sectionLayoutOverrides[secId] || {}),
+        shortLayout,
+      }
+      this._workingDoc.session.isDirty = true
+      this.publishDocumentChange()
+    }
+  }
+
+  setQuestionBorder(sectionId, questionBorder) {
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.sectionLayoutOverrides) this._workingDoc.presentation.sectionLayoutOverrides = {}
+    const secId = sectionId || this._workingDoc.sections?.[0]?.id
+    if (secId) {
+      this._workingDoc.presentation.sectionLayoutOverrides[secId] = {
+        ...(this._workingDoc.presentation.sectionLayoutOverrides[secId] || {}),
+        questionBorder,
+      }
+      this._workingDoc.session.isDirty = true
+      this.publishDocumentChange()
+    }
+  }
+
+  setAnswerLines(nodeId, lines) {
+    if (!nodeId) return
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.answerLinesByNode) this._workingDoc.presentation.answerLinesByNode = {}
+    this._workingDoc.presentation.answerLinesByNode[nodeId] = Number(lines) || 0
+    this._workingDoc.session.isDirty = true
+    this.publishDocumentChange()
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
   // DRAFT EXPORT (V2)
   // ─────────────────────────────────────────────────────────────────────────
   exportCompactDraft({ forceV2 = false } = {}) {
@@ -818,6 +879,9 @@ export class EditorWorkingStore {
       presentationPatch: {
         zoomLevel: this._workingDoc.presentation.zoomLevel,
         templateId: this._workingDoc.presentation.templateId,
+        pageBorder: this._workingDoc.presentation.pageBorder || 'none',
+        sectionLayoutOverrides: this._workingDoc.presentation.sectionLayoutOverrides || {},
+        answerLinesByNode: this._workingDoc.presentation.answerLinesByNode || {},
       },
     }
 
@@ -906,9 +970,20 @@ export class EditorWorkingStore {
         candidateAllocator.advanceTo(Math.max(maxSeq, savedSeq - 1))
       }
 
-      // Apply presentation patch
+      // Apply presentation patch (Rule 11, FIX G)
       if (compactDraft.presentationPatch) {
-        Object.assign(candidateDoc.presentation, compactDraft.presentationPatch)
+        Object.assign(candidateDoc.presentation, {
+          ...candidateDoc.presentation,
+          ...compactDraft.presentationPatch,
+          sectionLayoutOverrides: {
+            ...(candidateDoc.presentation.sectionLayoutOverrides || {}),
+            ...(compactDraft.presentationPatch.sectionLayoutOverrides || {}),
+          },
+          answerLinesByNode: {
+            ...(candidateDoc.presentation.answerLinesByNode || {}),
+            ...(compactDraft.presentationPatch.answerLinesByNode || {}),
+          },
+        })
       }
 
       // Validate final candidate state

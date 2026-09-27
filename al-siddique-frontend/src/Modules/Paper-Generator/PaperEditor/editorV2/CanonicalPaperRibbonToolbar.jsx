@@ -12,6 +12,7 @@ import {
   SUPPORTED_COLORS,
   SUPPORTED_HIGHLIGHTS,
 } from './CanonicalEditorExtensions.js'
+import { parseFieldKey } from './EditorFieldRegistry.js'
 
 export default function CanonicalPaperRibbonToolbar({
   registry,
@@ -46,19 +47,29 @@ export default function CanonicalPaperRibbonToolbar({
 
   const activeEditor = registry?.getActiveEditor()
 
+  const restoreAndFocus = (editor) => {
+    const sel = registry?.getSelection?.(activeFieldKey || registry?.getActiveFieldKey())
+    let chain = editor.chain()
+    if (sel && typeof sel.from === 'number' && typeof sel.to === 'number') {
+      chain = chain.setTextSelection({ from: sel.from, to: sel.to })
+    }
+    return chain.focus()
+  }
+
   const runCommand = (commandFn) => {
     if (!activeEditor) return
-    commandFn(activeEditor.chain().focus()).run()
+    commandFn(restoreAndFocus(activeEditor)).run()
   }
 
   const setTextStyle = (attr, val) => {
     if (!activeEditor) return
     const currentAttrs = activeEditor.getAttributes('textStyle') || {}
     const nextAttrs = { ...currentAttrs, [attr]: val || null }
+    const chain = restoreAndFocus(activeEditor)
     if (Object.values(nextAttrs).some(Boolean)) {
-      activeEditor.chain().focus().setMark('textStyle', nextAttrs).run()
+      chain.setMark('textStyle', nextAttrs).run()
     } else {
-      activeEditor.chain().focus().unsetMark('textStyle').run()
+      chain.unsetMark('textStyle').run()
     }
   }
 
@@ -93,6 +104,21 @@ export default function CanonicalPaperRibbonToolbar({
     cursor: 'pointer',
     height: '28px',
   }
+
+  const workingDoc = store?.getWorkingDocument()
+  const pres = workingDoc?.presentationOverlay || workingDoc?.presentation || {}
+  const currentPageBorder = pres.pageBorder || 'none'
+
+  const activeKey = activeFieldKey || registry?.getActiveFieldKey()
+  const { sectionId: activeSectionId, nodeId: activeNodeId } = parseFieldKey(activeKey)
+  const targetSectionId = activeSectionId || workingDoc?.sections?.[0]?.id
+  const sectionOverrides = targetSectionId ? (pres.sectionLayoutOverrides?.[targetSectionId] || {}) : {}
+
+  const isClass5Q1 = targetSectionId && targetSectionId.includes('class-5-english')
+  const currentMcqLayout = sectionOverrides.mcqLayout || (isClass5Q1 ? 'table' : 'grid')
+  const currentShortLayout = sectionOverrides.shortLayout || '1-column'
+  const currentQuestionBorder = sectionOverrides.questionBorder || 'none'
+  const currentAnswerLines = activeNodeId ? (pres.answerLinesByNode?.[activeNodeId] || 0) : 0
 
   return (
     <header
@@ -382,6 +408,95 @@ export default function CanonicalPaperRibbonToolbar({
           >
             <ArrowLeft size={14} />
           </button>
+        </div>
+
+        <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.12)' }} />
+
+        {/* Structural Exam-Night Controls (FIX F) */}
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {/* Page Border */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>Page Border</span>
+            <select
+              aria-label="Page Border"
+              id="toolbar-page-border-select"
+              value={currentPageBorder}
+              onChange={e => store?.setPageBorder?.(e.target.value)}
+              style={{ ...selectStyle, width: '75px' }}
+            >
+              <option value="none">None</option>
+              <option value="thin">Thin</option>
+              <option value="thick">Thick</option>
+              <option value="double">Double</option>
+            </select>
+          </div>
+
+          {/* MCQ Layout */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>MCQ Layout</span>
+            <select
+              aria-label="MCQ Layout"
+              id="toolbar-mcq-layout-select"
+              value={currentMcqLayout}
+              onChange={e => store?.setMcqLayout?.(targetSectionId, e.target.value)}
+              style={{ ...selectStyle, width: '80px' }}
+            >
+              <option value="table">Table</option>
+              <option value="grid">Grid</option>
+              <option value="classic">Classic</option>
+            </select>
+          </div>
+
+          {/* Short Qs Layout */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>Short Qs</span>
+            <select
+              aria-label="Short Question Layout"
+              id="toolbar-short-layout-select"
+              value={currentShortLayout}
+              onChange={e => store?.setShortLayout?.(targetSectionId, e.target.value)}
+              style={{ ...selectStyle, width: '85px' }}
+            >
+              <option value="1-column">1-Column</option>
+              <option value="2-column-balanced">2-Col Balanced</option>
+              <option value="table">Table</option>
+            </select>
+          </div>
+
+          {/* Question Border */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>Q Border</span>
+            <select
+              aria-label="Question Border"
+              id="toolbar-question-border-select"
+              value={currentQuestionBorder}
+              onChange={e => store?.setQuestionBorder?.(targetSectionId, e.target.value)}
+              style={{ ...selectStyle, width: '70px' }}
+            >
+              <option value="none">None</option>
+              <option value="box">Box</option>
+              <option value="table">Table</option>
+            </select>
+          </div>
+
+          {/* Answer Lines */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '10px', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>Answer Lines</span>
+            <select
+              aria-label="Answer Lines"
+              id="toolbar-answer-lines-select"
+              value={currentAnswerLines}
+              onChange={e => store?.setAnswerLines?.(activeNodeId, Number(e.target.value))}
+              style={{ ...selectStyle, width: '75px' }}
+              title={activeNodeId ? `Applies to active question (${activeNodeId})` : 'Click a question to apply answer lines'}
+            >
+              <option value="0">None</option>
+              <option value="1">1 Line</option>
+              <option value="2">2 Lines</option>
+              <option value="3">3 Lines</option>
+              <option value="4">4 Lines</option>
+            </select>
+          </div>
         </div>
       </div>
     </header>

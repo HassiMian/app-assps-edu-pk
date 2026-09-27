@@ -77,12 +77,18 @@ function ActiveInPlaceEditor({
         'data-field-key': fieldKey,
       },
     },
-    onFocus: () => {
+    onFocus: ({ editor: ed }) => {
       registry?.setActiveFieldKey(fieldKey)
+      if (ed?.state?.selection) {
+        registry?.saveSelection?.(fieldKey, ed.state.selection)
+      }
       onFocusField?.(fieldKey)
     },
-    onSelectionUpdate: () => {
+    onSelectionUpdate: ({ editor: ed }) => {
       registry?.setActiveFieldKey(fieldKey)
+      if (ed?.state?.selection) {
+        registry?.saveSelection?.(fieldKey, ed.state.selection)
+      }
     },
     onUpdate: ({ editor: updatedEd }) => {
       isLocalUpdateRef.current = true

@@ -169,6 +169,14 @@ export default function CanonicalDocumentRenderer({
     totalMarksDisplay = '—'
   }
 
+  const pageBorder = pres.pageBorder || 'none'
+  const borderStyles = {
+    none: 'none',
+    thin: '1.5px solid #1e293b',
+    thick: '3.5px solid #1e293b',
+    double: '4.5px double #1e293b',
+  }
+
   const pageStyle = {
     width: isHalf ? '148mm' : '210mm',
     minHeight: isHalf ? '210mm' : '297mm',
@@ -176,6 +184,7 @@ export default function CanonicalDocumentRenderer({
     padding: isHalf ? '16mm 14mm' : '20mm 18mm',
     background: '#ffffff',
     color: '#0f172a',
+    border: borderStyles[pageBorder] || 'none',
     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
     borderRadius: '4px',
     boxSizing: 'border-box',
@@ -188,7 +197,7 @@ export default function CanonicalDocumentRenderer({
   return (
     <article
       data-canonical-working-document={workingDoc.workingDocumentId}
-      className="canonical-paper-surface"
+      className={`canonical-paper-surface page-border-${pageBorder}`}
       style={pageStyle}
       dir={isUrdu ? 'rtl' : 'ltr'}
     >
@@ -280,90 +289,107 @@ export default function CanonicalDocumentRenderer({
           const totalMarks = section.authoritativeSectionTotal ?? section.operationalSectionTotal
           let questionCounter = 0
 
+          const secOverrides = pres.sectionLayoutOverrides?.[section.id] || {}
+          const isClass5Q1 = section.id && section.id.includes('class-5-english') && (section.title?.includes('Tick the correct option') || section.id.includes('s02'))
+          const mcqLayout = secOverrides.mcqLayout || (isClass5Q1 ? 'table' : 'grid')
+          const shortLayout = secOverrides.shortLayout || '1-column'
+          const questionBorder = secOverrides.questionBorder || 'none'
+          const answerLinesMap = pres.answerLinesByNode || {}
+
+          const qBorderStyles = {
+            none: {},
+            box: { border: '1px solid #cbd5e1', borderRadius: '4px', padding: '8px 10px', margin: '6px 0', background: '#fafafa' },
+            table: { border: '1.5px solid #1e293b', borderRadius: '0', padding: '6px 8px', margin: '4px 0' },
+          }
+          const qBorderStyle = qBorderStyles[questionBorder] || {}
+          const hasSectionHeading = Boolean(section.title?.trim()) || (isUrdu && Boolean(section.titleUrdu?.trim()))
+
           return (
             <section
               key={section.id || sIdx}
               data-canonical-section={section.id}
               style={{ marginBottom: '18px' }}
             >
-              {/* Section Heading Bar (READ-ONLY in B3, Rule 20) */}
-              <div
-                className="canonical-section-heading-bar"
-                dir={secDir}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '4px 10px',
-                  background: '#f1f5f9',
-                  borderLeft: secDir === 'rtl' ? 'none' : '4px solid #1e3a8a',
-                  borderRight: secDir === 'rtl' ? '4px solid #1e3a8a' : 'none',
-                  borderRadius: '2px',
-                  marginBottom: '10px',
-                }}
-              >
-                {/* Total Marks badge if available */}
-                {totalMarks !== null && totalMarks !== undefined && (
-                  <span
-                    className="canonical-section-marks-badge"
-                    style={{
-                      background: '#1e3a8a',
-                      color: '#ffffff',
-                      fontSize: '11px',
-                      fontWeight: 800,
-                      padding: '2px 8px',
-                      borderRadius: '4px',
-                    }}
-                  >
-                    ({totalMarks} Marks)
-                  </span>
-                )}
-
-                {/* Section structural change warning badge (B4-E spec) */}
-                {(() => {
-                  const s = workingDoc?.structured
-                  const baselineSec = canonicalBaseline?.sections?.find(sec => sec.id === section.id)
-                  const hasSectionChanges = Boolean(
-                    s && (
-                      Object.values(s.insertedNodes || {}).some(n => n.sectionId === section.id) ||
-                      (s.deletedNodeIds || []).some(id => baselineSec?.nodes?.some(n => n.id === id)) ||
-                      s.nodeOrderBySection?.[section.id]
-                    )
-                  )
-                  if (!hasSectionChanges) return null
-                  return (
-                    <span
-                      className="canonical-section-warning-badge"
-                      style={{
-                        background: '#fef3c7',
-                        color: '#92400e',
-                        fontSize: '10px',
-                        fontWeight: 600,
-                        padding: '2px 6px',
-                        borderRadius: '4px',
-                        border: '1px solid #fde68a',
-                        userSelect: 'none',
-                      }}
-                    >
-                      Working structure changed; source marks total remains unchanged.
-                    </span>
-                  )
-                })()}
-
-                {/* Section Title */}
-                <h2
-                  data-section-title
+              {/* Section Heading Bar (READ-ONLY in B3, Rule 20, FIX C & D) */}
+              {hasSectionHeading && (
+                <div
+                  className="canonical-section-heading-bar"
+                  dir={secDir}
                   style={{
-                    margin: 0,
-                    fontSize: isHalf ? '13px' : '15px',
-                    fontWeight: 800,
-                    color: '#1e3a8a',
-                    textAlign: isUrdu ? 'right' : 'left',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '4px 10px',
+                    background: '#f1f5f9',
+                    borderLeft: secDir === 'rtl' ? 'none' : '4px solid #1e3a8a',
+                    borderRight: secDir === 'rtl' ? '4px solid #1e3a8a' : 'none',
+                    borderRadius: '2px',
+                    marginBottom: '10px',
                   }}
                 >
-                  {isUrdu ? (section.titleUrdu || section.title) : section.title}
-                </h2>
-              </div>
+                  {/* Total Marks badge only if positive and authoritative (Rule 17, FIX D) */}
+                  {totalMarks !== null && totalMarks !== undefined && Number(totalMarks) > 0 && (
+                    <span
+                      className="canonical-section-marks-badge"
+                      style={{
+                        background: '#1e3a8a',
+                        color: '#ffffff',
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                      }}
+                    >
+                      ({totalMarks} Marks)
+                    </span>
+                  )}
+
+                  {/* Section structural change warning badge (B4-E spec) */}
+                  {(() => {
+                    const s = workingDoc?.structured
+                    const baselineSec = canonicalBaseline?.sections?.find(sec => sec.id === section.id)
+                    const hasSectionChanges = Boolean(
+                      s && (
+                        Object.values(s.insertedNodes || {}).some(n => n.sectionId === section.id) ||
+                        (s.deletedNodeIds || []).some(id => baselineSec?.nodes?.some(n => n.id === id)) ||
+                        s.nodeOrderBySection?.[section.id]
+                      )
+                    )
+                    if (!hasSectionChanges) return null
+                    return (
+                      <span
+                        className="canonical-section-warning-badge"
+                        style={{
+                          background: '#fef3c7',
+                          color: '#92400e',
+                          fontSize: '10px',
+                          fontWeight: 600,
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          border: '1px solid #fde68a',
+                          userSelect: 'none',
+                        }}
+                      >
+                        Working structure changed; source marks total remains unchanged.
+                      </span>
+                    )
+                  })()}
+
+                  {/* Section Title */}
+                  <h2
+                    data-section-title
+                    style={{
+                      margin: 0,
+                      fontSize: isHalf ? '13px' : '15px',
+                      fontWeight: 800,
+                      color: '#1e3a8a',
+                      textAlign: isUrdu ? 'right' : 'left',
+                    }}
+                  >
+                    {isUrdu ? (section.titleUrdu || section.title) : section.title}
+                  </h2>
+                </div>
+              )}
 
               {/* Instructions if present */}
               {section.instructions && (
@@ -373,7 +399,11 @@ export default function CanonicalDocumentRenderer({
               )}
 
               {/* Section Nodes */}
-              <div className="canonical-section-nodes" dir={secDir}>
+              <div
+                className="canonical-section-nodes"
+                dir={secDir}
+                style={shortLayout === '2-column-balanced' ? { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' } : {}}
+              >
                 {(() => {
                   const baselineSec = canonicalBaseline?.sections?.find(s => s.id === section.id)
                   const workingItems = resolveWorkingSectionNodes(baselineSec, workingDoc?.structured)
@@ -471,12 +501,94 @@ export default function CanonicalDocumentRenderer({
                           const fieldOverlay = nodeOverlay?.editableFields?.[fieldName]
                           const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeId, fieldName)
 
+                          if (mcqLayout === 'table') {
+                            return (
+                              <div
+                                key={nodeId}
+                                data-node-id={nodeId}
+                                data-node-type={nodeType}
+                                className="canonical-mcq-table-node"
+                                style={{
+                                  marginBottom: '6px',
+                                  border: '1px solid #cbd5e1',
+                                  borderRadius: '4px',
+                                  overflow: 'hidden',
+                                  ...qBorderStyle,
+                                }}
+                              >
+                                {controlsHeader}
+                                <table className="canonical-mcq-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: isHalf ? '11px' : '12px' }}>
+                                  <tbody>
+                                    <tr>
+                                      <td style={{ width: '36px', padding: '6px 8px', fontWeight: 800, color: '#1e3a8a', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', background: '#f8fafc' }}>
+                                        {currentQNum}.
+                                      </td>
+                                      <td style={{ padding: '6px 10px', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', fontWeight: 600 }}>
+                                        {fieldOverlay ? (
+                                          <CanonicalEditableText
+                                            fieldKey={fieldKey}
+                                            fieldOverlay={fieldOverlay}
+                                            direction={nodeDir}
+                                            store={store}
+                                            registry={registry}
+                                            onFocusField={onFocusField}
+                                            isEditing={isEditing}
+                                            externalRevisionToken={externalRevisionToken}
+                                          />
+                                        ) : (
+                                          <div>{resolvedNode.stemText || ''}</div>
+                                        )}
+                                        {Boolean(answerLinesMap[nodeId] > 0) && (
+                                          <div className="canonical-answer-lines" style={{ marginTop: '8px' }}>
+                                            {Array.from({ length: answerLinesMap[nodeId] }, (_, lIdx) => (
+                                              <div key={lIdx} className="canonical-answer-line" style={{ borderBottom: '1px dashed #64748b', height: '22px', width: '100%', margin: '2px 0' }} />
+                                            ))}
+                                          </div>
+                                        )}
+                                      </td>
+                                      {resolvedNode.options?.map((opt, oIdx) => {
+                                        const optLabel = opt.displayLabel || opt.sourceLabel || opt.canonicalLabel || opt.label || String.fromCharCode(97 + oIdx)
+                                        return (
+                                          <td
+                                            key={opt.id || oIdx}
+                                            style={{
+                                              padding: '6px 8px',
+                                              borderRight: oIdx < (resolvedNode.options.length - 1) ? '1px solid #cbd5e1' : 'none',
+                                              verticalAlign: 'top',
+                                              width: `${Math.floor(45 / (resolvedNode.options.length || 3))}%`,
+                                            }}
+                                          >
+                                            <span style={{ fontWeight: 800, color: '#1e3a8a', marginRight: '4px' }}>({optLabel})</span>
+                                            <span>{opt.text || opt.textUrdu || ''}</span>
+                                          </td>
+                                        )
+                                      })}
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                {isEditing && (
+                                  <div className="no-print" style={{ padding: '4px 8px', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+                                    <CanonicalStructuredNodeEditor
+                                      nodeId={nodeId}
+                                      sectionId={section.id}
+                                      resolvedNode={resolvedNode}
+                                      store={store}
+                                      dir={nodeDir}
+                                      isEditing={isEditing}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          }
+
+                          // Classic or Grid Layout
                           return (
                             <div
                               key={nodeId}
                               data-node-id={nodeId}
                               data-node-type={nodeType}
-                              style={{ marginBottom: '10px', padding: '2px 0' }}
+                              style={{ marginBottom: '10px', padding: '2px 0', ...qBorderStyle }}
                             >
                               {controlsHeader}
                               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
@@ -498,17 +610,46 @@ export default function CanonicalDocumentRenderer({
                                   ) : (
                                     <div style={{ fontSize: '13px', fontWeight: 600 }}>{resolvedNode.stemText || ''}</div>
                                   )}
+                                  {Boolean(answerLinesMap[nodeId] > 0) && (
+                                    <div className="canonical-answer-lines" style={{ marginTop: '8px' }}>
+                                      {Array.from({ length: answerLinesMap[nodeId] }, (_, lIdx) => (
+                                        <div key={lIdx} className="canonical-answer-line" style={{ borderBottom: '1px dashed #64748b', height: '22px', width: '100%', margin: '2px 0' }} />
+                                      ))}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
 
-                              <CanonicalStructuredNodeEditor
-                                nodeId={nodeId}
-                                sectionId={section.id}
-                                resolvedNode={resolvedNode}
-                                store={store}
-                                dir={nodeDir}
-                                isEditing={isEditing}
-                              />
+                              {isEditing ? (
+                                <CanonicalStructuredNodeEditor
+                                  nodeId={nodeId}
+                                  sectionId={section.id}
+                                  resolvedNode={resolvedNode}
+                                  store={store}
+                                  dir={nodeDir}
+                                  isEditing={isEditing}
+                                />
+                              ) : (
+                                <div
+                                  className={mcqLayout === 'classic' ? 'canonical-mcq-options-classic' : 'canonical-mcq-options-grid'}
+                                  dir={nodeDir}
+                                  style={
+                                    mcqLayout === 'classic'
+                                      ? { display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '6px', paddingLeft: nodeDir === 'rtl' ? '0' : '24px', paddingRight: nodeDir === 'rtl' ? '24px' : '0', fontSize: '12px' }
+                                      : { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginTop: '6px', paddingLeft: nodeDir === 'rtl' ? '0' : '24px', paddingRight: nodeDir === 'rtl' ? '24px' : '0', fontSize: '12px' }
+                                  }
+                                >
+                                  {resolvedNode.options?.map((opt, idx) => {
+                                    const label = opt.displayLabel || opt.sourceLabel || opt.canonicalLabel || opt.label || String.fromCharCode(65 + idx)
+                                    return (
+                                      <div key={opt.id || idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <span style={{ fontWeight: 800, color: '#1e3a8a' }}>({label})</span>
+                                        <span>{opt.text || opt.textUrdu || ''}</span>
+                                      </div>
+                                    )
+                                  })}
+                                </div>
+                              )}
                             </div>
                           )
                         }
@@ -526,6 +667,7 @@ export default function CanonicalDocumentRenderer({
                             style={{
                               marginBottom: '10px',
                               padding: '2px 0',
+                              ...qBorderStyle,
                             }}
                           >
                             {controlsHeader}
@@ -547,6 +689,24 @@ export default function CanonicalDocumentRenderer({
                                   />
                                 ) : (
                                   <CanonicalStaticNode node={resolvedNode} direction={nodeDir} />
+                                )}
+
+                                {/* Answer blank lines (FIX F, FIX H) */}
+                                {Boolean(answerLinesMap[nodeId] > 0) && (
+                                  <div className="canonical-answer-lines" style={{ marginTop: '8px', marginBottom: '8px' }}>
+                                    {Array.from({ length: answerLinesMap[nodeId] }, (_, lIdx) => (
+                                      <div
+                                        key={lIdx}
+                                        className="canonical-answer-line"
+                                        style={{
+                                          borderBottom: '1px dashed #64748b',
+                                          height: '24px',
+                                          width: '100%',
+                                          margin: '2px 0',
+                                        }}
+                                      />
+                                    ))}
+                                  </div>
                                 )}
                               </div>
                             </div>

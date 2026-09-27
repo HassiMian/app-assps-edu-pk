@@ -17,6 +17,7 @@ export function parseFieldKey(fieldKey) {
 export class EditorFieldRegistry {
   constructor() {
     this._registry = new Map()
+    this._savedSelections = new Map()
     this._activeFieldKey = null
     this._lastFocusedFieldKey = null
   }
@@ -44,6 +45,7 @@ export class EditorFieldRegistry {
   unregister(fieldKey) {
     if (!fieldKey) return
     this._registry.delete(fieldKey)
+    this._savedSelections.delete(fieldKey)
     if (this._activeFieldKey === fieldKey) {
       this._activeFieldKey = null
     }
@@ -56,6 +58,16 @@ export class EditorFieldRegistry {
 
   has(fieldKey) {
     return this._registry.has(fieldKey)
+  }
+
+  saveSelection(fieldKey, selection) {
+    if (!fieldKey || !selection) return
+    this._savedSelections.set(fieldKey, { from: selection.from, to: selection.to })
+  }
+
+  getSelection(fieldKey) {
+    const key = fieldKey || this.getActiveFieldKey()
+    return key ? this._savedSelections.get(key) : null
   }
 
   setActiveFieldKey(fieldKey) {
@@ -85,6 +97,7 @@ export class EditorFieldRegistry {
 
   clear() {
     this._registry.clear()
+    this._savedSelections.clear()
     this._activeFieldKey = null
     this._lastFocusedFieldKey = null
   }

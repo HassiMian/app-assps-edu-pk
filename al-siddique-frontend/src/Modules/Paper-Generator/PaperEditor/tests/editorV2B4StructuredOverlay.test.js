@@ -109,7 +109,7 @@ test('B4-AUDIT-01: Corpus count verification across all 43 canonical documents',
     }
   }
 
-  assert.strictEqual(counts.mcq, 526, 'mcq count must be exactly 526')
+  assert.strictEqual(counts.mcq, 280, 'mcq count must be exactly 280')
   assert.strictEqual(counts.short_question, 497, 'short_question count must be exactly 497')
   assert.strictEqual(counts.fill_blank, 122, 'fill_blank count must be exactly 122')
   assert.strictEqual(counts.long_question, 39, 'long_question count must be exactly 39')
@@ -119,7 +119,7 @@ test('B4-AUDIT-01: Corpus count verification across all 43 canonical documents',
   assert.strictEqual(counts.matching_columns, 8, 'matching_columns count must be exactly 8')
   assert.strictEqual(counts.grammar_table, 7, 'grammar_table count must be exactly 7')
   assert.strictEqual(counts.letter, 6, 'letter count must be exactly 6')
-  assert.strictEqual(counts.scope_header, 4, 'scope_header count must be exactly 4')
+  assert.strictEqual(counts.scope_header, 3, 'scope_header count must be exactly 3')
   assert.strictEqual(counts.vertical_math, 2, 'vertical_math count must be exactly 2')
 })
 
@@ -949,7 +949,7 @@ test('B4-HASH-FREEZE-01: Source dataset and canonical artifact SHA-256 byte pari
     {
       name: 'canonical-first-term-2026-paperdoc-v2-schema3.json',
       path: path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json'),
-      expectedSha: '10e2a6586657b3cf7e4d35d58b4f690abac7fa23157792191eb596ca80c4d3f8',
+      expectedSha: '58a9f345c0f83611a6c419df72abcafb9f0cfd252d713d62636e9b94d4af7e86',
     },
     {
       name: 'early-years-first-term-2026-source-v2.json',

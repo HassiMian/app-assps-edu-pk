@@ -174,6 +174,8 @@ export function createEditorWorkingDocument(canonicalDoc) {
       templateId: canonicalDoc.presentation?.templateId || 'academic',
       zoomLevel: 100,
       pageBorder: 'none',
+      sectionLayoutOverrides: {},
+      answerLinesByNode: {},
       printMode: 'a4',
       language: lang,
       direction: dir,
