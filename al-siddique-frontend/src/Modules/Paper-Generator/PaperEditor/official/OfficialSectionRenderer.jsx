@@ -76,15 +76,19 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor }) {
   </div>
 }
 
-function NumberedList({ rows, isUrdu, qFs, fs, shortLayout, themeColor }) {
+function NumberedList({ rows, isUrdu, qFs, fs, shortLayout, themeColor, answerLinesPerItem = 0 }) {
   if (shortLayout === 'table') {
     return <table data-short-table style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px` }}><tbody>
       {rows.map(row => <tr key={row.serial}><td style={{ width:42, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800 }}>{row.serial}</td><td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}><AnswerText text={row.text}/></td></tr>)}
     </tbody></table>
   }
-  const renderRow = row => <div key={row.serial} style={{ display:'grid', gridTemplateColumns:isUrdu?'1fr 34px':'34px 1fr', gap:7, marginBottom:`${4*fs}px`, alignItems:'start', breakInside:'avoid' }}>
-    <span dir="ltr" style={{ gridColumn:isUrdu?2:1, textAlign:'center', fontWeight:800 }}>{row.serial}.</span>
-    <div dir={isUrdu?'rtl':'ltr'} style={{ gridColumn:isUrdu?1:2, textAlign:isUrdu?'right':'left', minWidth:0 }}><AnswerText text={row.text}/></div>
+  const itemLineCount = Math.max(0, Number(answerLinesPerItem) || 0)
+  const renderRow = row => <div key={row.serial} data-numbered-response-row style={{ marginBottom:`${itemLineCount ? 7*fs : 4*fs}px`, breakInside:'avoid' }}>
+    <div style={{ display:'grid', gridTemplateColumns:isUrdu?'1fr 34px':'34px 1fr', gap:7, alignItems:'start' }}>
+      <span dir="ltr" style={{ gridColumn:isUrdu?2:1, textAlign:'center', fontWeight:800 }}>{row.serial}.</span>
+      <div dir={isUrdu?'rtl':'ltr'} style={{ gridColumn:isUrdu?1:2, textAlign:isUrdu?'right':'left', minWidth:0 }}><AnswerText text={row.text}/></div>
+    </div>
+    {itemLineCount > 0 && <div data-item-answer-lines style={{ marginInlineStart:isUrdu?0:41, marginInlineEnd:isUrdu?41:0 }}>{Array.from({length:itemLineCount},(_,i)=><div key={i} style={{ height:`${18*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
   </div>
   if (shortLayout === '2-column-balanced' && rows.length > 3) {
     const mid = Math.ceil(rows.length/2)
@@ -122,7 +126,7 @@ function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor }) {
   </table>
 }
 
-function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout }) {
+function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem = 0 }) {
   const mcqs = kind === 'mcq' ? parseMcqRows(content) : []
   if (mcqs.length) return <McqSection rows={mcqs} layout={mcqLayout} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
 
@@ -140,14 +144,14 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
   }
 
   const rows = parseNumberedLines(content)
-  if (kind === 'short') return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout={shortLayout} themeColor={themeColor}/>
+  if (kind === 'short') return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout={shortLayout} themeColor={themeColor} answerLinesPerItem={answerLinesPerItem}/>
   if (kind === 'matching' && rows.length) return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="table" themeColor={themeColor}/>
   if (kind === 'vertical_math' && rows.length) {
     return <div data-vertical-math style={{ display:'grid', gridTemplateColumns:`repeat(${Math.min(3,rows.length)}, minmax(0,1fr))`, gap:`${8*fs}px`, direction:'ltr' }}>
       {rows.map(row => <div key={row.serial} style={{ border:`1px solid ${themeColor}55`, padding:`${8*fs}px`, textAlign:'center', fontFamily:"'Cambria Math', 'Times New Roman', serif", fontSize:`${Math.max(qFs+1,14)}px`, fontWeight:700, minHeight:`${38*fs}px` }}><span style={{ color:themeColor }}>{row.serial}.</span> <AnswerText text={row.text}/></div>)}
     </div>
   }
-  if (rows.length >= 2) return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="1-column" themeColor={themeColor}/>
+  if (rows.length >= 2) return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="1-column" themeColor={themeColor} answerLinesPerItem={answerLinesPerItem}/>
   return <div style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, textAlign:isUrdu?'right':'left' }}><AnswerText text={content}/></div>
 }
 
@@ -183,6 +187,10 @@ export default function OfficialSectionRenderer({
         {editMode && <div className="no-print" data-edit-guide style={{ marginBottom:7, padding:7, border:`1px dashed ${themeColor}88`, borderRadius:5, background:'#f8fafc' }}>
           <input aria-label={`Question ${ordinal} heading`} value={section.heading||''} onChange={e=>onQuestionChange?.(section.id,{heading:e.target.value,text:e.target.value,textUrdu:isUrdu?e.target.value:''})} style={{ width:'100%', boxSizing:'border-box', border:`1px solid ${themeColor}66`, borderRadius:5, padding:6, marginBottom:6, font:'inherit', fontWeight:800, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}/>
           <textarea aria-label={`Question ${ordinal} content`} value={section.content||''} onChange={e=>onQuestionChange?.(section.id,{content:e.target.value})} style={{ width:'100%', boxSizing:'border-box', minHeight:Math.max(82,String(section.content||'').split('\n').length*20), resize:'vertical', border:`1px solid ${themeColor}55`, borderRadius:5, padding:7, font:'inherit', lineHeight:isUrdu?urdLineH:engLineH, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}/>
+          <div style={{ display:'flex', gap:12, alignItems:'center', flexWrap:'wrap', marginTop:6, fontFamily:'Arial,sans-serif', fontSize:11, direction:'ltr' }}>
+            <label>Section answer lines <input type="number" min="0" max="20" value={Number(section.answerLines||0)} onChange={e=>onQuestionChange?.(section.id,{answerLines:Math.max(0,Number(e.target.value)||0)})} style={{ width:58, marginLeft:4 }}/></label>
+            <label>Lines per item <input type="number" min="0" max="5" value={Number(section.answerLinesPerItem||0)} onChange={e=>onQuestionChange?.(section.id,{answerLinesPerItem:Math.max(0,Number(e.target.value)||0)})} style={{ width:58, marginLeft:4 }}/></label>
+          </div>
         </div>}
         <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{ display:'grid', gridTemplateColumns:isUrdu?'72px minmax(0,1fr)':'minmax(0,1fr) 72px', alignItems:'center', gap:8, paddingBottom:`${4*fs}px`, marginBottom:`${6*fs}px`, borderBottom:showSectionLine?`2px solid ${themeColor}`:'none', direction:'ltr' }}>
           <div data-question-heading style={{ gridColumn:isUrdu?2:1, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontWeight:900, fontSize:`${Math.max(Number(headingFs || 0), qFs + 1, 13)}px` }}>{displayHeading}</div>
@@ -190,7 +198,7 @@ export default function OfficialSectionRenderer({
         </div>
         {parts.length ? parts.map((part,partIndex)=>part.type==='marker'
           ? <SectionBanner key={partIndex} text={part.text} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>
-          : <div key={partIndex} style={{ textAlign:resolvedAlign }}>{renderContent({ content:part.text, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout })}</div>) : null}
+          : <div key={partIndex} style={{ textAlign:resolvedAlign }}>{renderContent({ content:part.text, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem:Math.max(0,Number(section.answerLinesPerItem)||0) })}</div>) : null}
         {answerLines > 0 && <div data-configurable-answer-lines>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{ height:`${20*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
       </section>
     })}

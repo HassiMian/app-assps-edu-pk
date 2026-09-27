@@ -4,10 +4,10 @@ const SECTION_MARKER_RE = /^\s*#\s*(.+?)\s*$/
 const MCQ_HEADING_RE = /(?:tick|choose|circle|select|mark)\b[^\n]*(?:correct|best)[^\n]*(?:option|answer)|correct\s+(?:option|answer)|multiple\s+choice|\bmcq\b|درست[^\n]*(?:جواب|نشان|انتخاب)|صحیح[^\n]*جواب|نشان[^\n]*لگائیں|نشان\s*دہی/i
 const TRUE_FALSE_RE = /true\s*(?:or|\/)?\s*false|tick\s+the\s+true|cross\s+the\s+false|درست[^\n]*غلط|صحیح[^\n]*غلط/i
 const MATCH_RE = /match\s+(?:the\s+)?columns?|matching|کالم[^\n]*(?:ملائیں|ملاؤ)|جوڑ[^\n]*مل/i
-const SHORT_RE = /short\s+questions?|answer\s+(?:the\s+)?(?:following|these)\s+questions?|مختصر[^\n]*سوال|مختصر[^\n]*جواب/i
-const LONG_RE = /long\s+questions?|detailed\s+questions?|essay|story|application|letter|paragraph|تفصیلی|مضمون|درخواست|خط|کہانی/i
+const SHORT_RE = /short\s+questions?|answer\s+(?:the\s+)?(?:(?:following|these)\s+)?questions?(?:\s+given\s+below)?|مختصر[^\n]*سوال|مختصر[^\n]*جواب/i
+const LONG_RE = /long\s+questions?|detailed\s+questions?|essay|story|application|letter|paragraph|summari[sz]e|summary|تفصیلی|مضمون|درخواست|خط|کہانی/i
 const VERTICAL_MATH_RE = /addition|subtract|subtraction|vertical|solve\s+the\s+sums?|جمع|تفریق/i
-const PAIR_TABLE_RE = /word\s+meanings?|urdu\s+meaning|opposites?|antonyms?|synonyms?|plural|singular|masculine|feminine|past\s+tense|معانی|مترادف|متضاد|واحد|جمع|مذکر|مونث|ہم\s*آواز/i
+const PAIR_TABLE_RE = /word\s+meanings?|meanings?\s+of|urdu\s+meaning|opposites?|antonyms?|synonyms?|plural|singular|masculine|feminine|past\s+tense|acronyms?|abbreviations?|full\s+forms?|write\s+(?:these|the\s+following)\s+as\s+numbers?|معانی|مترادف|متضاد|واحد|جمع|مذکر|مونث|ہم\s*آواز/i
 
 export function isSectionMarkerLine(line = '') {
   return SECTION_MARKER_RE.test(String(line))

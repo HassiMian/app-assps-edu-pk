@@ -5,6 +5,7 @@ import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../se
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
+import { getFinalExamScheduleForPaper } from '../dateSheetFinalExam2026.js'
 import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
 import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.js'
 
@@ -13,7 +14,13 @@ const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
-const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V17_CLASS1_ENGLISH_50_MARKS'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V19_SEP29_ENGLISH_PRINT_RULES'
+const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
+ 'official-first-term-2026-class-2-english',
+ 'official-first-term-2026-class-4-english',
+ 'official-first-term-2026-class-6-english',
+ 'official-first-term-2026-class-8-english',
+])
 const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V3'
 
 const SEED_TYPE_MAP = {
@@ -329,8 +336,16 @@ function withOfficialExamPaperSeed(store) {
  const withReadableOfficialTypography = paper => {
   const fontSize = Number(paper?.editorSettings?.fontSize || 0)
   const headingSize = Number(paper?.editorSettings?.headingSize || 0)
+  const schedule = getFinalExamScheduleForPaper(
+   paper?.config?.classLevel || paper?.config?.className,
+   paper?.config?.subject || paper?.config?.subjectName
+  )
   return {
    ...paper,
+   config: {
+    ...(paper.config || {}),
+    ...(schedule ? { examDate: schedule.date, timeAllowed: schedule.timeAllowed || '2 Hours', paperTime: schedule.time } : {}),
+   },
    editorSettings: {
     ...(paper.editorSettings || {}),
     fontFamily: paper.editorSettings?.fontFamily || "'Times New Roman', Times, serif",
@@ -340,13 +355,16 @@ function withOfficialExamPaperSeed(store) {
   }
  }
  const upgraded = savedPapers.map(existing => {
-  const seedPaper = seedById.get(String(existing?.id || ''))
+  const existingId = String(existing?.id || '')
+  const seedPaper = seedById.get(existingId)
   if (!seedPaper) return existing
+  // Exam-day seed bumps are surgical: refresh only papers explicitly changed in
+  // this release so already-reviewed papers and deliberate manual edits survive.
+  if (!OFFICIAL_EXAM_FORCE_REFRESH_IDS.has(existingId)) return existing
 
-  // The V13 teacher dataset is authoritative for official First Term papers.
-  // Rehydrate every known official ID from that source so stale local shapes
-  // (old `sections`, missing `official_section`, canonical-only migrations, etc.)
-  // cannot silently remove MCQs/tables or reorder academic content.
+  // The V13 teacher dataset is authoritative for the scheduled papers refreshed here.
+  // Rehydrate the selected IDs from that source so stale local shapes cannot
+  // silently remove MCQs/tables, dates, answer-space rules, or source ordering.
   const next = withReadableOfficialTypography(cloneJson(seedPaper))
   const nativeSections = cloneJson(next.selectedQuestions?.official_section?.questions || next.official_section || [])
   next.official_section = nativeSections

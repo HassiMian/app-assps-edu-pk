@@ -762,7 +762,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "2",
@@ -774,8 +774,9 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-2-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "As stated by teacher source.",
       "sourceContentSha256": "13f5d0d731a7c7f6957ed6163507ad8e6e3ca3cf1d301a2c9148510ee03f2b15",
@@ -793,7 +794,8 @@
               "textUrdu": "",
               "marks": 25,
               "sourceOrder": 1,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-2-english-section-2",
@@ -853,7 +855,8 @@
               "textUrdu": "",
               "marks": 5,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 3
             },
             {
               "id": "official-first-term-2026-class-2-english-section-7",
@@ -865,7 +868,8 @@
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             }
           ],
           "marks": 0
@@ -882,7 +886,8 @@
           "textUrdu": "",
           "marks": 25,
           "sourceOrder": 1,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-2-english-section-2",
@@ -942,7 +947,8 @@
           "textUrdu": "",
           "marks": 5,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 3
         },
         {
           "id": "official-first-term-2026-class-2-english-section-7",
@@ -954,7 +960,8 @@
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         }
       ],
       "official_section_marks": 0,
@@ -966,12 +973,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-2-islamiyat",
@@ -2292,7 +2312,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "4",
@@ -2304,8 +2324,9 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-4-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "As stated by teacher source.",
       "sourceContentSha256": "02020bb9245ecccb95a7b7a6f8608e688744e4336c4204d799352ec2629606d8",
@@ -2383,7 +2404,8 @@
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-4-english-section-7",
@@ -2395,7 +2417,8 @@
               "textUrdu": "",
               "marks": 8,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-4-english-section-8",
@@ -2407,7 +2430,8 @@
               "textUrdu": "",
               "marks": 8,
               "sourceOrder": 8,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-4-english-section-9",
@@ -2419,7 +2443,8 @@
               "textUrdu": "",
               "marks": 4,
               "sourceOrder": 9,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-4-english-section-10",
@@ -2508,7 +2533,8 @@
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-4-english-section-7",
@@ -2520,7 +2546,8 @@
           "textUrdu": "",
           "marks": 8,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-4-english-section-8",
@@ -2532,7 +2559,8 @@
           "textUrdu": "",
           "marks": 8,
           "sourceOrder": 8,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-4-english-section-9",
@@ -2544,7 +2572,8 @@
           "textUrdu": "",
           "marks": 4,
           "sourceOrder": 9,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-4-english-section-10",
@@ -2568,12 +2597,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-4-urdu",
@@ -5614,7 +5656,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "6",
@@ -5626,12 +5668,13 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-6-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "As stated by teacher source.",
       "sourceContentSha256": "5780fd3bb6f5fbe9e686f32be9b62f091773d4804c216c393f7e3e13cd31f8d8",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.\\n29 Sep print rule: teacher source states total 75 but gives no section-wise marks; do not invent question marks.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -5693,7 +5736,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 5,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 6
             },
             {
               "id": "official-first-term-2026-class-6-english-section-6",
@@ -5705,7 +5749,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-6-english-section-7",
@@ -5717,7 +5762,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 10
             },
             {
               "id": "official-first-term-2026-class-6-english-section-8",
@@ -5729,7 +5775,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 8,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-6-english-section-9",
@@ -5741,7 +5788,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 9,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 10
             }
           ],
           "marks": 0
@@ -5806,7 +5854,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 5,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 6
         },
         {
           "id": "official-first-term-2026-class-6-english-section-6",
@@ -5818,7 +5867,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-6-english-section-7",
@@ -5830,7 +5880,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 10
         },
         {
           "id": "official-first-term-2026-class-6-english-section-8",
@@ -5842,7 +5893,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 8,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-6-english-section-9",
@@ -5854,7 +5906,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 9,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 10
         }
       ],
       "official_section_marks": 0,
@@ -5866,12 +5919,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "READY_LAYOUT"
     },
     {
       "id": "official-first-term-2026-class-7-science",
@@ -7386,7 +7452,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "8",
@@ -7398,12 +7464,13 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-8-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "Provisional: source did not state a total; 75 used to match neighboring English term-paper pattern.",
       "sourceContentSha256": "3615bc946f134d948473001b40071ed1bed048c424e6e24c64348730a86155d9",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.\\n29 Sep print rule: total 75 remains provisional from prior source package; source gives no section-wise marks and only 9 MCQs; do not invent a 10th MCQ or section marks.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -7441,7 +7508,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 3,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-8-english-section-4",
@@ -7477,7 +7545,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 10
             },
             {
               "id": "official-first-term-2026-class-8-english-section-7",
@@ -7489,7 +7558,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-8-english-section-8",
@@ -7501,7 +7571,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 8,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             }
           ],
           "marks": 0
@@ -7542,7 +7613,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 3,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-8-english-section-4",
@@ -7578,7 +7650,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 10
         },
         {
           "id": "official-first-term-2026-class-8-english-section-7",
@@ -7590,7 +7663,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-8-english-section-8",
@@ -7602,7 +7676,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 8,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         }
       ],
       "official_section_marks": 0,
@@ -7614,12 +7689,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "REVIEW_SOURCE_MCQS"
     },
     {
       "id": "official-first-term-2026-class-1-science",
