@@ -62,3 +62,11 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Add/duplicate/delete/move question actions now preserve canonical question numbering across marker sections.
 - Focused local acceptance: Universal Workspace PASS; Class 7 Social Studies 10/10 MCQs and Urdu bracket geometry PASS; representative Class 4 Science/Islamiyat controls PASS; working-copy persistence PASS.
 - Rule tests: 12/12 PASS; production build PASS.
+
+## Phase 3 cleanup — completed locally
+- Replaced the old 700+ line PaperGenerator shell with a small router focused only on the six supported modules.
+- Removed dead Paper Generator source modules that had no remaining callers: AI Generator, Manual Draft, Handwritten Scanner, Notes Maker, legacy Paper Preview engines, old Build Paper Wizard, and Unified Paper Generator.
+- `/paper-generator/unified` now redirects safely to the new Paper Workspace instead of loading a second generator.
+- Kept Question Bank, Pre Classes Papers, Daily Diary and Lesson Plans intact.
+- Kept only `word_editor` and `board_pattern` as hidden compatibility routes for saved-document safety.
+- Build and 12/12 rule tests PASS after physical cleanup; focused Universal Workspace and representative controls QA PASS.

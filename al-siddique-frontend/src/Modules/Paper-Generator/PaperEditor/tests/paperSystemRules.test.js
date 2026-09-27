@@ -96,7 +96,7 @@ test('saving an official edit stamps a protected working copy instead of changin
 
 test('paper workspace navigation exposes only the six supported modules', () => {
   const source=fs.readFileSync(new URL('../../PaperGenerator.jsx', import.meta.url),'utf8')
-  const block=source.match(/const MODULE_TABS = \[([\s\S]*?)\]\s*\nconst LEGACY_COMPATIBILITY_TABS/)?.[1] || ''
+  const block=source.match(/const MODULE_TABS = \[([\s\S]*?)\]\s*\n\s*\/\/ Only compatibility routes/)?.[1] || ''
   for (const label of ['Paper Workspace','Saved Papers','Question Bank','Pre Classes Papers','Daily Diary','Lesson Plans']) assert.equal(block.includes(label),true,label+' should be visible')
   for (const label of ['AI Generator','Manual Draft','Unified Paper Generator','Board Paper Mode','AI Scan','Notes Maker']) assert.equal(block.includes(label),false,label+' should be hidden from normal navigation')
 })
