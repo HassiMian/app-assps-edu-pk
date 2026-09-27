@@ -350,7 +350,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_PRINCIPAL_MARKS_CORRECTION_20260927",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "1",
@@ -359,15 +359,15 @@
         "subjectName": "English",
         "examType": "First Term Examination 2026",
         "language": "english",
-        "totalMarks": 36,
+        "totalMarks": 50,
         "session": "2026-2027",
         "paperCode": "FT26-1-ENGLISH",
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "Calculated from explicit question marks: 6+10+10+5+5.",
+      "sourceTotalNote": "Principal correction 2026-09-27: five major questions, 10 marks each; total 50.",
       "sourceContentSha256": "12f7c89816cd965d97628279f73191def300f5f41bb2d4507e5f85ae62161c51",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source has only 8 items under Q2 although Q2 is marked 10.\n- Total 36 is the sum of explicit marks and is unusual for a term paper; confirm intended total.",
+      "qaNotes": "Authoritative correction from school principal: Q1-Q5 are 10 marks each; total marks 50. Preserve question text/content unchanged.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -375,11 +375,11 @@
               "id": "official-first-term-2026-class-1-english-section-1",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q1. Write one word with each given letter. (6)",
+              "heading": "Q1. Write one word with each given letter. (10)",
               "content": "B = __________\nG = __________\nI = __________\nM = __________\nT = __________\nV = __________",
-              "text": "Q1. Write one word with each given letter. (6)",
+              "text": "Q1. Write one word with each given letter. (10)",
               "textUrdu": "",
-              "marks": 6,
+              "marks": 10,
               "sourceOrder": 1,
               "priority": "all"
             },
@@ -411,11 +411,11 @@
               "id": "official-first-term-2026-class-1-english-section-4",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q4. Singular and Plural. (5)",
+              "heading": "Q4. Singular and Plural. (10)",
               "content": "Boy, Women, Cow, Apple, Watch",
-              "text": "Q4. Singular and Plural. (5)",
+              "text": "Q4. Singular and Plural. (10)",
               "textUrdu": "",
-              "marks": 5,
+              "marks": 10,
               "sourceOrder": 4,
               "priority": "all"
             },
@@ -423,16 +423,16 @@
               "id": "official-first-term-2026-class-1-english-section-5",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q5. Masculine and Feminine. (5)",
+              "heading": "Q5. Masculine and Feminine. (10)",
               "content": "Bull, Father, Waiter, Horse, Sir",
-              "text": "Q5. Masculine and Feminine. (5)",
+              "text": "Q5. Masculine and Feminine. (10)",
               "textUrdu": "",
-              "marks": 5,
+              "marks": 10,
               "sourceOrder": 5,
               "priority": "all"
             }
           ],
-          "marks": 0
+          "marks": 50
         }
       },
       "official_section": [
@@ -440,11 +440,11 @@
           "id": "official-first-term-2026-class-1-english-section-1",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q1. Write one word with each given letter. (6)",
+          "heading": "Q1. Write one word with each given letter. (10)",
           "content": "B = __________\nG = __________\nI = __________\nM = __________\nT = __________\nV = __________",
-          "text": "Q1. Write one word with each given letter. (6)",
+          "text": "Q1. Write one word with each given letter. (10)",
           "textUrdu": "",
-          "marks": 6,
+          "marks": 10,
           "sourceOrder": 1,
           "priority": "all"
         },
@@ -476,11 +476,11 @@
           "id": "official-first-term-2026-class-1-english-section-4",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q4. Singular and Plural. (5)",
+          "heading": "Q4. Singular and Plural. (10)",
           "content": "Boy, Women, Cow, Apple, Watch",
-          "text": "Q4. Singular and Plural. (5)",
+          "text": "Q4. Singular and Plural. (10)",
           "textUrdu": "",
-          "marks": 5,
+          "marks": 10,
           "sourceOrder": 4,
           "priority": "all"
         },
@@ -488,16 +488,16 @@
           "id": "official-first-term-2026-class-1-english-section-5",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q5. Masculine and Feminine. (5)",
+          "heading": "Q5. Masculine and Feminine. (10)",
           "content": "Bull, Father, Waiter, Horse, Sir",
-          "text": "Q5. Masculine and Feminine. (5)",
+          "text": "Q5. Masculine and Feminine. (10)",
           "textUrdu": "",
-          "marks": 5,
+          "marks": 10,
           "sourceOrder": 5,
           "priority": "all"
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 50,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
