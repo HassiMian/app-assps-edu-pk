@@ -14,7 +14,7 @@ const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
-const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V23_OCT02_URDU_REVIEW'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V24_UNIVERSAL_PAPER_SYSTEM'
 const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
  'official-first-term-2026-class-2-english',
  'official-first-term-2026-class-4-english',
@@ -30,6 +30,7 @@ const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
  'official-first-term-2026-class-1-urdu',
  'official-first-term-2026-class-3-urdu',
  'official-first-term-2026-class-5-urdu',
+ 'official-first-term-2026-class-7-social-studies',
 ])
 const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V5_OCT02_URDU_REFRESH'
 const EXAM_NIGHT_FORCE_REFRESH_IDS = new Set([
@@ -372,6 +373,9 @@ function withOfficialExamPaperSeed(store) {
   const existingId = String(existing?.id || '')
   const seedPaper = seedById.get(existingId)
   if (!seedPaper) return existing
+  // A saved editor revision is a working copy. Never let a later seed bump
+  // overwrite principal/teacher edits; the source seed remains the locked baseline.
+  if (existing?.userEdited || existing?.paperSystem?.workingCopy) return existing
   // Exam-day seed bumps are surgical: refresh only papers explicitly changed in
   // this release so already-reviewed papers and deliberate manual edits survive.
   if (!OFFICIAL_EXAM_FORCE_REFRESH_IDS.has(existingId)) return existing

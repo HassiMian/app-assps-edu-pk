@@ -24,6 +24,9 @@ export function cleanSectionMarker(line = '') {
 }
 
 export function inferOfficialSectionKind(section = {}) {
+  const manualKind = String(section.layoutPreset || section.sectionKind || '').trim().toLowerCase()
+  const allowedManualKinds = new Set(['mcq','short','long','table','pair_table','matching','true_false','fill_blank','list','vertical_math','math_compare','math_number_name','math_place_value','math_order','math_table'])
+  if (manualKind && manualKind !== 'auto' && allowedManualKinds.has(manualKind)) return manualKind
   const heading = String(section.heading || '')
   const content = String(section.content || '')
   const trimmedLines = content.split(/\r?\n/).map(line => line.trim()).filter(Boolean)

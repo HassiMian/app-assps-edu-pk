@@ -5,10 +5,10 @@ import { usePaperStore } from './usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { DonutChart, BarChart, ChartLegend } from '../../components/Charts' // used in Paper Analytics section
 import PaperPreviewEngine from './PaperPreviewEngine'
-import AIGeneratorTab from './AIGeneratorTab'
-import ManualPaperTab from './ManualPaperTab'
-import SavedPapersTab from './SavedPapersTab'
-import LessonPlanTab from './LessonPlanTab'
+const AIGeneratorTab = lazy(() => import('./AIGeneratorTab'))
+const ManualPaperTab = lazy(() => import('./ManualPaperTab'))
+const SavedPapersTab = lazy(() => import('./SavedPapersTab'))
+const LessonPlanTab = lazy(() => import('./LessonPlanTab'))
 const PTSPaperGenerator = lazy(() => import('./PTSPaperGenerator'))
 const BoardPaperGenerator = lazy(() => import('./BoardPaperGenerator'))
 const HandwrittenScannerTab = lazy(() => import('./HandwrittenScannerTab'))
@@ -56,26 +56,25 @@ function shuffle(arr) {
   return a
 }
 
+// The visible workspace is intentionally small. Legacy generator/editor routes stay
+// mounted for rollback compatibility, but are hidden from normal navigation so one
+// rules-driven Paper Workspace is the default editing surface.
 const MODULE_TABS = [
-  { id: 'build',         label: 'Paper Studio'     },
-  { id: 'word_editor',   label: 'Word Paper Editor' },
-  { id: 'unified',       label: 'Unified Paper Generator', path: '/paper-generator/unified' },
-  { id: 'board_pattern', label: 'Board Paper Mode' },
-  { id: 'manual',        label: 'Manual Draft'     },
-  { id: 'scan',          label: 'AI Scan'          },
-  { id: 'ai',            label: 'AI Generator'     },
-  { id: 'notes',         label: 'Notes Maker'      },
-  { id: 'diary',         label: 'Daily Diary'      },
-  { id: 'lesson',        label: 'Lesson Plans'     },
-  { id: 'bank',          label: 'Question Bank'    },
-  { id: 'saved',         label: 'Saved Papers'     },
-  { id: 'early_years',   label: 'Pre Classes Papers' },
+  { id: 'build',       label: 'Paper Workspace' },
+  { id: 'saved',       label: 'Saved Papers' },
+  { id: 'bank',        label: 'Question Bank' },
+  { id: 'early_years', label: 'Pre Classes Papers' },
+  { id: 'diary',       label: 'Daily Diary' },
+  { id: 'lesson',      label: 'Lesson Plans' },
 ]
+const LEGACY_COMPATIBILITY_TABS = new Set(['word_editor','unified','board_pattern','manual','scan','ai','notes'])
+const ROUTABLE_TAB_IDS = new Set([...MODULE_TABS.map(tab => tab.id), ...LEGACY_COMPATIBILITY_TABS])
 
 export default function PaperGenerator() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
-  const initialTab = MODULE_TABS.some(t => t.id === searchParams.get('tab')) ? searchParams.get('tab') : 'build'
+  const requestedTab = searchParams.get('tab')
+  const initialTab = ROUTABLE_TAB_IDS.has(requestedTab) ? requestedTab : 'build'
   const [moduleTab, setModuleTab] = useState(initialTab)
   const [mode, setMode] = useState('offline')
   const [step, setStep] = useState(0)
@@ -170,21 +169,24 @@ export default function PaperGenerator() {
   )
 
 
-  // PTS Build Paper tab renders as its own full-screen flow
-  if (moduleTab === 'build' || moduleTab === 'board_pattern' || moduleTab === 'word_editor' || moduleTab === 'early_years') {
+  // Primary workspace modules render without the old analytics/dashboard chrome.
+  // Legacy routes remain routable only for rollback compatibility.
+  if (['build','saved','bank','early_years','diary','lesson','board_pattern','word_editor'].includes(moduleTab)) {
     return (
       <>
         {moduleTab === 'build' && <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
+        {moduleTab === 'saved' && <ModuleWrap><SavedPapersTab onLoadPaper={handleLoadPaper} /></ModuleWrap>}
+        {moduleTab === 'bank' && <ModuleWrap><QuestionBank /></ModuleWrap>}
+        {moduleTab === 'diary' && <ModuleWrap><DailyDiaryFeature /></ModuleWrap>}
+        {moduleTab === 'lesson' && <ModuleWrap><LessonPlanTab settings={paperSettings} /></ModuleWrap>}
         {moduleTab === 'word_editor' && <ModuleWrap><PaperEditorRouter loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
         {moduleTab === 'board_pattern' && <ModuleWrap><BoardPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')} /></ModuleWrap>}
         {moduleTab === 'early_years' && (
           <ModuleWrap>
-            <Suspense fallback={<div style={{ padding: 40, color: '#C0C8D8', fontFamily: 'Inter, sans-serif' }}>Loading Pre Classes Papers...</div>}>
-              <EarlyYearsWorksheetEditor
-                initialPaperId={loadedSavedPaper?.id || 'ey-starter-english-2026'}
-                onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')}
-              />
-            </Suspense>
+            <EarlyYearsWorksheetEditor
+              initialPaperId={loadedSavedPaper?.id || 'ey-starter-english-2026'}
+              onReturnToSource={() => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')}
+            />
           </ModuleWrap>
         )}
       </>
@@ -271,8 +273,8 @@ export default function PaperGenerator() {
         )}
 
         {/* ── AI Generator ────────────────────────────────────────────────────── */}
-        {moduleTab === 'ai' && <AIGeneratorTab onProceedToPreview={handleProceedToPreview} />}
-        {moduleTab === 'manual' && <ManualPaperTab onProceedToPreview={handleProceedToPreview} />}
+        {moduleTab === 'ai' && <Suspense fallback={<div style={{ padding:40, color:C.silver }}>Loading legacy AI Generator...</div>}><AIGeneratorTab onProceedToPreview={handleProceedToPreview} /></Suspense>}
+        {moduleTab === 'manual' && <Suspense fallback={<div style={{ padding:40, color:C.silver }}>Loading legacy Manual Draft...</div>}><ManualPaperTab onProceedToPreview={handleProceedToPreview} /></Suspense>}
         {moduleTab === 'scan' && (
           <Suspense fallback={<div style={{ padding: 40, color: C.silver }}>Loading AI Scan...</div>}>
             <HandwrittenScannerTab onProceedToPreview={handleProceedToPreview} />

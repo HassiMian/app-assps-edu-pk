@@ -232,10 +232,10 @@ export default function SavedPapersTab({ onLoadPaper }) {
  style={{ flex: 1, background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
   Load & Preview
  </button>
- <button onClick={() => onLoadPaper(paper, (isOfficial || isUrdu) ? 'build' : 'word_editor')}
- title={(isOfficial || isUrdu) ? "Open in Paper Studio — recommended print editor" : "Open in Word-like Ribbon Editor"}
- style={{ background: (isOfficial || isUrdu) ? 'rgba(48,209,88,0.15)' : 'rgba(10,132,255,0.2)', border: (isOfficial || isUrdu) ? '1px solid rgba(48,209,88,0.35)' : '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: (isOfficial || isUrdu) ? '#4ade80' : '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
-  {(isOfficial || isUrdu) ? 'Edit / Print' : 'Word Edit'}
+ <button onClick={() => onLoadPaper(paper, 'build')}
+ title="Open in the single rules-driven Paper Workspace"
+ style={{ background:'rgba(48,209,88,0.15)', border:'1px solid rgba(48,209,88,0.35)', borderRadius:10, padding:'9px 10px', color:'#4ade80', fontWeight:700, cursor:'pointer', fontSize:12, whiteSpace:'nowrap' }}>
+  Open / Edit
  </button>
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>

@@ -1,4 +1,5 @@
 import { inferOfficialSectionKind } from './officialSectionSemantics.js'
+import { resolveSectionTotalMarks } from './paperSystemRules.js'
 
 export const ASSPS_OFFICIAL_PAPER_RULES_VERSION = 'ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V2'
 
@@ -10,8 +11,9 @@ export function auditOfficialPaperForPrint(paper = {}) {
     : (paper.selectedQuestions?.official_section?.questions || [])
   const academic = sections.filter(section => inferOfficialSectionKind(section) !== 'marker')
   const headerTotal = Number(paper.config?.totalMarks || 0)
-  const explicitSections = academic.filter(section => Number(section.marks || 0) > 0)
-  const explicitSectionSum = explicitSections.reduce((sum, section) => sum + Number(section.marks || 0), 0)
+  const sectionTotals = academic.map(section => resolveSectionTotalMarks(section))
+  const explicitSections = academic.filter((section, index) => Number(sectionTotals[index] || 0) > 0)
+  const explicitSectionSum = sectionTotals.reduce((sum, marks) => sum + Number(marks || 0), 0)
   const unresolvedSectionCount = academic.length - explicitSections.length
   const readiness = String(paper.printReadiness || 'READY').trim().toUpperCase()
 
