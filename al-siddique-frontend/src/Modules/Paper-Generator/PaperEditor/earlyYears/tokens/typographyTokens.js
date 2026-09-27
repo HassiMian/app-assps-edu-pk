@@ -8,18 +8,18 @@ export const TYPOGRAPHY_TOKENS = {
   },
 
   fontSizes: {
-    schoolName: "18pt",
-    schoolSubtitle: "11pt",
-    metadata: "12pt",
-    englishQuestionHeading: "15pt",
-    englishChildText: "16pt",
-    urduQuestionHeading: "21pt",
-    urduChildText: "25pt",
-    traceGlyph: "38pt",
-    numberGridText: "19pt",
-    matchingText: "16pt",
-    choiceOptionText: "16pt",
-    instructionSubtext: "12pt"
+    schoolName: "16pt",
+    schoolSubtitle: "9.5pt",
+    metadata: "10.5pt",
+    englishQuestionHeading: "13.5pt",
+    englishChildText: "14pt",
+    urduQuestionHeading: "18pt",
+    urduChildText: "21pt",
+    traceGlyph: "30pt",
+    numberGridText: "17pt",
+    matchingText: "14pt",
+    choiceOptionText: "14pt",
+    instructionSubtext: "10.5pt"
   },
 
   fontWeights: {

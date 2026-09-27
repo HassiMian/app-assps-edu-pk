@@ -14,8 +14,8 @@ export default function AlphabetWritingArea({
     <div
       className="early-years-alphabet-writing-area"
       style={{
-        margin: '12px 0',
-        padding: '8px 12px',
+        margin: '6px 0',
+        padding: '5px 8px',
         border: '1px solid #ccc',
         borderRadius: '8px',
         background: '#fff'

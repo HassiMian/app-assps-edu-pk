@@ -94,8 +94,8 @@ export default function EarlyYearsPaperContainer({
         <footer
           className="early-years-footer"
           style={{
-            marginTop: '24px',
-            paddingTop: '8px',
+            marginTop: '12px',
+            paddingTop: '5px',
             borderTop: '1px solid #ccc',
             display: 'flex',
             justifyContent: 'space-between',

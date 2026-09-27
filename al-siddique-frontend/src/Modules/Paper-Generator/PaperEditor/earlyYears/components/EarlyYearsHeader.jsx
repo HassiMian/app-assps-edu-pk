@@ -27,8 +27,8 @@ export default function EarlyYearsHeader({
       style={{
         border: `2px solid ${border}`,
         borderRadius: '8px',
-        padding: '10px 14px',
-        marginBottom: '16px',
+        padding: '7px 10px',
+        marginBottom: '10px',
         background: templatePreset.headerStyle === 'banded' ? accentSoft : '#fff',
         direction: isUrdu ? 'rtl' : 'ltr'
       }}

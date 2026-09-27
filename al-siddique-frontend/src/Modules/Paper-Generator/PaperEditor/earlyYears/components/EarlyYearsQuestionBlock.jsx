@@ -247,7 +247,7 @@ export default function EarlyYearsQuestionBlock({
     <div
       className="early-years-question-block"
       style={{
-        marginBottom: '20px',
+        marginBottom: '12px',
         pageBreakInside: 'avoid',
         breakInside: 'avoid',
         direction: isUrdu ? 'rtl' : 'ltr',
@@ -262,8 +262,8 @@ export default function EarlyYearsQuestionBlock({
           justifyContent: 'space-between',
           gap: '8px',
           borderBottom: `1px solid ${borderColor}`,
-          paddingBottom: '4px',
-          marginBottom: '8px'
+          paddingBottom: '3px',
+          marginBottom: '5px'
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flex: 1 }}>
@@ -327,11 +327,11 @@ export default function EarlyYearsQuestionBlock({
         data-layout={resolvedLayout}
         style={
           resolvedLayout === 'visual-left'
-            ? { display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '16px' }
+            ? { display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: '10px' }
             : resolvedLayout === 'visual-top'
-            ? { display: 'flex', flexDirection: 'column', gap: '12px' }
+            ? { display: 'flex', flexDirection: 'column', gap: '8px' }
             : resolvedLayout === 'two-column'
-            ? { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }
+            ? { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }
             : undefined
         }
       >

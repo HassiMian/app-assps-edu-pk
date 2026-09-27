@@ -26,8 +26,8 @@ export default function CircleChoiceWithSketch({
         style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${Math.min(items.length, 3)}, minmax(0, 1fr))`,
-          gap: '16px',
-          margin: '14px 0',
+          gap: '10px',
+          margin: '8px 0',
           direction: isUrdu ? 'rtl' : 'ltr'
         }}
       >
@@ -41,7 +41,7 @@ export default function CircleChoiceWithSketch({
             style={{
               border: '1.5px solid #333',
               borderRadius: '10px',
-              padding: '12px 8px',
+              padding: '8px 6px',
               display: 'flex',
               flexDirection: isVisualLeft ? 'row' : 'column',
               alignItems: 'center',
@@ -57,7 +57,7 @@ export default function CircleChoiceWithSketch({
             <div
               style={{
                 display: 'flex',
-                gap: '10px',
+                gap: '7px',
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexWrap: 'wrap'
@@ -72,7 +72,7 @@ export default function CircleChoiceWithSketch({
                     gap: '6px',
                     border: '1.5px solid #222',
                     borderRadius: '20px',
-                    padding: '4px 12px',
+                    padding: '3px 8px',
                     minWidth: LAYOUT_TOKENS.childResponse.visualChoiceHitAreaMm + 'mm',
                     minHeight: LAYOUT_TOKENS.childResponse.visualChoiceHitAreaMm + 'mm',
                     justifyContent: 'center'
@@ -104,8 +104,8 @@ export default function CircleChoiceWithSketch({
           className="early-years-shared-word-bank"
           data-testid="shared-word-bank"
           style={{
-            margin: '12px 0',
-            padding: '12px 16px',
+            margin: '8px 0',
+            padding: '8px 12px',
             border: '1.5px solid #333',
             borderRadius: '8px',
             background: '#f8fafc',

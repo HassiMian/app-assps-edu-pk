@@ -45,8 +45,6 @@ export function isUrduScriptPaper(paper = {}) {
 }
 
 export function resolvePaperRoute(paper, targetTab = null) {
-  // If targetTab is explicitly provided and is NOT word_editor, respect it
-  if (targetTab && targetTab !== 'word_editor') return targetTab
   if (!paper) return targetTab || 'build'
 
   const id = String(paper.id || '')
@@ -62,22 +60,19 @@ export function resolvePaperRoute(paper, targetTab = null) {
 
   if (paper.structureMode === 'board_pattern') return 'board_pattern'
 
-  // Critical Emergency Override: Urdu-script papers ALWAYS route to legacy Paper Studio ('build')
-  // even if targetTab === 'word_editor'
-  if (isUrduScriptPaper(paper)) {
-    return 'build'
-  }
-
-  if (targetTab === 'word_editor') return 'word_editor'
-
   const isCanonicalV2 = paper.schemaVersion === 2 || paper.schemaVersion === '2' || paper.documentFormat === 'canonical-v2'
   const isOfficialV13 = paper.documentFormat === 'pts-native-v13'
   const isOfficialV12 = paper.documentFormat === 'official-v12'
   const isOfficialFirstTerm = id.startsWith('official-first-term-') || id.includes('first-term-2026')
 
-  if (isCanonicalV2 || isOfficialV13 || isOfficialV12 || isOfficialFirstTerm) {
-    return 'word_editor'
-  }
+  // Official First Term papers have one stable exam-day renderer: Paper Studio.
+  // Do not let an explicit Word-Editor target bypass the source-ordered semantic
+  // renderer and reintroduce the broken marks/MCQ/RTL presentation.
+  if (isOfficialV13 || isOfficialV12 || isOfficialFirstTerm) return 'build'
 
+  // Explicit editor choice is respected for non-official/custom documents.
+  if (targetTab) return targetTab
+
+  if (isCanonicalV2) return 'word_editor'
   return 'build'
 }

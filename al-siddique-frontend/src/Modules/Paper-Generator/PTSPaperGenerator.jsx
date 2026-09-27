@@ -10,6 +10,8 @@ import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuest
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
 import { getDisplayOptionLabel } from './PaperEditor/layouts/urduRtlEngine.js'
 import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
+import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
+import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
 
 function storeQToTemplate(q) {
  return {
@@ -498,10 +500,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
 
  const editorSettings = loadedPaper?.editorSettings || {}
 
+ const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  const [tmpl, setTmpl] = useState(editorSettings.template || 'classic')
  const [printMode, setPrintMode] = useState(editorSettings.printMode || 'a4')
- const [mcqLayout, setMcqLayout] = useState(editorSettings.mcqLayout || 'compact-grid')
- const [shortLayout, setShortLayout] = useState(editorSettings.shortLayout || '2-column-balanced')
+ const [mcqLayout, setMcqLayout] = useState(editorSettings.mcqLayout || (isOfficialPaper ? 'matrix-table' : 'compact-grid'))
+ const [shortLayout, setShortLayout] = useState(editorSettings.shortLayout || (isOfficialPaper ? '1-column' : '2-column-balanced'))
  const [language, setLanguage] = useState(()=> overrideConfig?.language || 'english')
  const [paperCode, setPaperCode] = useState(()=> overrideConfig?.paperCode || String(Math.floor(1000+Math.random()*9000)))
  const [timeAllwd, setTimeAllwd] = useState(()=> overrideConfig?.timeAllowed || '30 minutes')
@@ -524,7 +527,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [limitWarn, setLimitWarn] = useState(false)
 
  const [editMode, setEditMode] = useState(false)
- const [letterSp, setLetterSp] = useState(0)
+ const [letterSp, setLetterSp] = useState(editorSettings.letterSpacing || 0)
+ const [wordSp, setWordSp] = useState(editorSettings.wordSpacing || 0)
  const [engLineH, setEngLineH] = useState(editorSettings.englishLineHeight || 1.5)
  const [urdLineH, setUrdLineH] = useState(editorSettings.urduLineHeight || 2.0)
  const [showAnsLines, setShowAnsLines] = useState(Boolean(editorSettings.showAnswerLines))
@@ -543,7 +547,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [qBorderStyle, setQBorderStyle] = useState(editorSettings.questionBorder || 'none')
  const [pageBorder, setPageBorder] = useState(editorSettings.pageBorder || 'none')
  const [showUrduHeaders, setShowUrduHeaders] = useState(Boolean(editorSettings.showUrduHeaders))
- const [showSectionLine, setShowSectionLine] = useState(Boolean(editorSettings.showSectionLine))
+ const [showSectionLine, setShowSectionLine] = useState(editorSettings.showSectionLine !== undefined ? Boolean(editorSettings.showSectionLine) : isOfficialPaper)
  const [showWatermark, setShowWatermark] = useState(false)
  const [watermarkOpacity, setWatermarkOpacity] = useState(0.08)
  const [watermarkScale, setWatermarkScale] = useState(1.18)
@@ -626,7 +630,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const updatePaperQuestion = (type, id, changes) => {
   onPaperChange(current => ({ ...current, [type]:(current[type] || []).map(question => question.id === id ? { ...question, ...changes } : question) }))
  }
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, mcqLayout, shortLayout }
+ const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))
@@ -674,7 +678,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   showAnswerLines:showAnsLines, showUrduHeaders, showSectionLine,
   fontColor, fontFamily, fontSize:baseFontSz, headingSize:headFontSz,
   fontBold, fontItalic, fontUnderline, textAlign,
-  urduLineHeight:urdLineH, englishLineHeight:engLineH, letterSpacing:letterSp,
+  urduLineHeight:urdLineH, englishLineHeight:engLineH, letterSpacing:letterSp, wordSpacing:wordSp,
   mcqLayout, shortLayout,
  }
  const payload = {
@@ -684,7 +688,6 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
        selectedMCQ: paper.mcq || [],
        selectedShort: paper.short || [],
        selectedLong: paper.long || [],
-       selectedQuestions, 
        teacherHidden: overrideConfig?.teacherHidden || false,
        editorSettings:editorState,
        selectedQuestions,
@@ -765,7 +768,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
 [dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], [dir="rtl"] * {
   font-family: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
 }
-*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}table{border-collapse:collapse}[data-edit-guide]{border:none!important}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}.no-print,[data-edit-guide]{display:none!important}table{border-collapse:collapse}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
  doc.close()
  try {
   if (doc.fonts) {
@@ -785,8 +788,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
  }
 
- const tinp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box', border: pageBorderStyle }
- const filterInp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:13, outline:'none', boxSizing:'border-box', border: pageBorderStyle }
+ const tinp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box' }
+ const filterInp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:13, outline:'none', boxSizing:'border-box' }
  const filterSel = { ...filterInp, cursor:'pointer' }
 
  return (
@@ -829,6 +832,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Letter Sp</span>
  <input type="range" min={0} max={3} step={0.5} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{letterSp}px</span>
+ </div>
+ <div style={{ display:'flex', gap:5, alignItems:'center' }}>
+ <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Word Sp</span>
+ <input type="range" min={0} max={8} step={0.5} value={wordSp} onChange={e=>setWordSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{wordSp}px</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Line H (En)</span>
@@ -1137,61 +1145,88 @@ function ColumnResponseGrid({ content, isUrdu, fs, qFs, themeColor, columns=2 })
  })}</div>
 }
 
-function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeColor }) {
- const heading = String(question.heading || '')
- const requestedLayout = question.layoutPreset || 'auto'
- const requestedColumns = Number(question.columnCount || 2)
- if (requestedLayout === 'rich') return <PaperRichTextRenderer value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} />
- if (requestedLayout === 'columns' || (requestedLayout === 'auto' && /احادیث|حدیث/i.test(heading))) return <ColumnResponseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} columns={requestedLayout === 'auto' ? 3 : requestedColumns} />
- if (requestedLayout === 'true-false' || /(?:true\s*(?:or|\/)?\s*false|tick the true|cross the false|درست.*غلط)/i.test(heading)) return <TrueFalseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />
- if (/(?:write\s+the\s+tables?|table\s+of|پہاڑ)/i.test(heading)) return <MultiplicationTableGrid heading={heading} content={question.content} fs={fs} qFs={qFs} themeColor={themeColor} />
- const mcqs = (requestedLayout === 'mcq' || /(?:choose|correct answer|mcq|درست جواب|صحیح جواب)/i.test(heading)) ? parseMcqRows(question.content) : []
- if (mcqs.length) return <div data-mcq-grid>{mcqs.map(row => {
-  const requested = Number(question.mcqColumns || 0)
-  const columns = requested >= 1 && requested <= 4 ? requested : (row.options.some(option => option.text.length > 22) ? 2 : Math.min(4, row.options.length))
-  return <table key={row.number} style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${5 * fs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px`, breakInside:'avoid' }}><tbody>
-   <tr><td colSpan={columns} style={{ border:`1px solid ${themeColor}99`, padding:`${4 * fs}px ${6 * fs}px`, fontWeight:700 }}><b dir="ltr">{row.number}.</b> {row.prompt}</td></tr>
-   {chunk(row.options, columns).map((optionRow, optionRowIndex) => <tr key={optionRowIndex}>{optionRow.map(option => <td key={option.label} style={{ width:`${100/columns}%`, border:`1px solid ${themeColor}99`, padding:`${4 * fs}px`, textAlign:isUrdu?'right':'left', overflowWrap:'anywhere' }}><b dir="ltr" style={{ display:'inline-block', marginInlineEnd:5 }}>{option.label})</b><span dir={isUrdu?'rtl':'ltr'}>{option.text}</span></td>)}{optionRow.length < columns && <td colSpan={columns - optionRow.length} style={{ border:`1px solid ${themeColor}99` }} />}</tr>)}
-  </tbody></table>
- })}</div>
-
- const sums = /(?:sums?|addition|subtract|vertical|جمع|تفریق)/i.test(heading) ? parseVerticalSums(question.content) : []
- if (sums.length) return <table data-vertical-math-grid style={{ width:'100%', borderCollapse:'separate', borderSpacing:`${8 * fs}px`, tableLayout:'fixed', direction:'ltr', margin:`${4 * fs}px 0` }}><tbody>{sums.map((sumRow, rowIndex) => <tr key={rowIndex} style={{ breakInside:'avoid' }}>{sumRow.map((sum, index) => <td key={index} style={{ border:`1px solid ${themeColor}55`, padding:`${8 * fs}px`, textAlign:'right', fontFamily:'Arial, sans-serif', fontSize:`${Math.max(qFs + 3, 14)}px`, fontWeight:700 }}><div>{sum.top}</div><div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8 }}><span>{sum.operator}</span><span>{sum.bottom}</span></div><div style={{ borderTop:`1.5px solid ${themeColor}`, height:`${18 * fs}px`, marginTop:3 }} /></td>)}</tr>)}</tbody></table>
-
- const plainLines = String(question.content || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
- if (plainLines.length >= 2 && !blocks.some(block => block.type === 'table')) return <NumberedResponseList content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} />
-
- return blocks.map((block, blockIndex) => block.type === 'table'
-  ? <table key={blockIndex} data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5 * fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed' }}><tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5 * fs}px ${7 * fs}px`, textAlign:isUrdu ? 'right' : 'left', fontWeight:rowIndex === 0 ? 700 : 500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
-  : <div key={blockIndex} style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, lineHeight:isUrdu ? 2.1 : 1.55, marginBottom:`${5 * fs}px`, textAlign:isUrdu ? 'right' : 'left' }}><TextWithAnswerLines text={block.text} /></div>)
+function ShortResponseLayout({ content, isUrdu, fs, qFs, themeColor, layout='1-column' }) {
+ const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+ const clean = lines.map((line,index) => {
+  const match = line.match(/^((?:\d+|[ivxlcdm]+|[a-z]))[.)]\s*(.*)$/i)
+  return { serial:match?.[1] || String(index+1), body:match?.[2] || line }
+ })
+ if (layout === 'table') return <table data-short-layout="table" style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>{clean.map(item => <tr key={item.serial}><td style={{ width:42, border:`1px solid ${themeColor}77`, padding:5, textAlign:'center', fontWeight:800 }}>{item.serial}.</td><td style={{ border:`1px solid ${themeColor}77`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}><TextWithAnswerLines text={item.body} /></td></tr>)}</tbody></table>
+ const twoCol = layout === '2-column-balanced'
+ return <div data-short-layout={layout} style={twoCol ? { display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${4*fs}px ${16*fs}px` } : {}}>{clean.map(item => <div key={item.serial} style={{ display:'grid', gridTemplateColumns:isUrdu?'1fr 34px':'34px 1fr', gap:7, alignItems:'start', marginBottom:`${4*fs}px`, breakInside:'avoid' }}><b dir="ltr" style={{ gridColumn:isUrdu?2:1, textAlign:'center' }}>{item.serial}.</b><div dir={isUrdu?'rtl':'ltr'} style={{ gridColumn:isUrdu?1:2, textAlign:isUrdu?'right':'left', lineHeight:isUrdu?1.8:1.45 }}><TextWithAnswerLines text={item.body} /></div></div>)}</div>
 }
 
-function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, onQuestionChange }) {
- const ordered = [...questions].sort((a, b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
- return <div style={{ direction:isUrdu ? 'rtl' : 'ltr' }}>
-  {ordered.map((question, index) => {
-   const blocks = parseOfficialContentBlocks(question.content)
-   const rawHeading = String(question.heading || '').trim()
-   const inlineMarks = rawHeading.match(/\(([^)]*\d+[^)]*)\)\s*$/)
-   const hasSerial = /^(?:Q(?:uestion)?\s*\d+|سوال(?:\s+نمبر)?\s*\d+)/i.test(rawHeading)
-   const displayHeading = hasSerial ? rawHeading : `${isUrdu ? `سوال نمبر ${index + 1}:` : `Q${index + 1}.`} ${rawHeading}`.trim()
-   const headingHasMarks = /\([^)]*\d+\s*(?:marks?|نمبر)?[^)]*\)/i.test(rawHeading)
-   const controlStyle = { width:'100%', boxSizing:'border-box', border:`1px solid ${themeColor}66`, borderRadius:6, padding:7, background:'#fff', color:'#111', fontFamily:'inherit', direction:isUrdu ? 'rtl' : 'ltr', textAlign:isUrdu ? 'right' : 'left' }
-   const answerLines = Number.isFinite(Number(question.answerLines)) ? Number(question.answerLines) : 0
-   return <section key={question.id || index} data-official-section style={{ marginBottom:`${9 * fs}px`, breakInside:'auto' }}>
-    {editMode ? <input aria-label={`Question ${index + 1} heading`} value={question.heading || ''} onChange={event => onQuestionChange?.(question.id, { heading:event.target.value, text:event.target.value, textUrdu:isUrdu ? event.target.value : '' })} style={{ ...controlStyle, fontWeight:800, marginBottom:6 }} /> : <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:10, alignItems:'center', paddingBottom:`${4 * fs}px`, marginBottom:`${6 * fs}px`, borderBottom:`2px solid ${themeColor}`, fontWeight:800, fontSize:`${Math.max(qFs + 1, 13)}px`, lineHeight:isUrdu ? 2 : 1.4, direction:'ltr' }}><span data-marks-badge style={{ minWidth:56, whiteSpace:'nowrap', color:themeColor, border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 7px', textAlign:'center', direction:'ltr' }}>{inlineMarks?.[1] || (Number(question.marks) > 0 ? question.marks : '—')}</span><span style={{ direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}>{displayHeading.replace(inlineMarks?.[0] || '', '').trim()}</span></div>}
-    {editMode && <div style={{ display:'flex', alignItems:'center', gap:12, flexWrap:'wrap', marginBottom:6, fontFamily:'Arial,sans-serif', direction:'ltr', fontSize:11, color:themeColor }}><label style={{ display:'flex', alignItems:'center', gap:6 }}>Answer lines <input aria-label={`Question ${index + 1} answer lines`} type="number" min="0" max="30" value={answerLines} onChange={event => onQuestionChange?.(question.id, { answerLines:Math.max(0, Number(event.target.value) || 0) })} style={{ ...controlStyle, width:64, padding:4 }} /></label><label style={{ display:'flex', alignItems:'center', gap:6 }}>Layout <select aria-label={`Question ${index + 1} layout`} value={question.layoutPreset || 'auto'} onChange={event => onQuestionChange?.(question.id, { layoutPreset:event.target.value })} style={{ ...controlStyle, width:130, padding:4, direction:'ltr' }}><option value="auto">Auto</option><option value="list">Numbered list</option><option value="columns">Columns</option><option value="table">Table</option><option value="mcq">MCQ grid</option><option value="true-false">True / False</option><option value="rich">Rich text</option></select></label>{(question.layoutPreset === 'columns') && <label style={{ display:'flex', alignItems:'center', gap:6 }}>Columns <input aria-label={`Question ${index + 1} columns`} type="number" min="1" max="4" value={question.columnCount || 2} onChange={event => onQuestionChange?.(question.id, { columnCount:Math.max(1, Math.min(4, Number(event.target.value) || 2)) })} style={{ ...controlStyle, width:56, padding:4 }} /></label>}</div>}
-    {editMode ? question.layoutPreset === 'rich' ? <PaperRichTextEditor ariaLabel={`Question ${index + 1} rich content`} value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} onChange={richContent => onQuestionChange?.(question.id, { richContent })} /> : <textarea aria-label={`Question ${index + 1} content`} value={question.content || ''} onChange={event => onQuestionChange?.(question.id, { content:event.target.value })} style={{ ...controlStyle, minHeight:Math.max(110, String(question.content || '').split('\n').length * 24), resize:'vertical', lineHeight:isUrdu ? 2.1 : 1.55 }} /> : <><StructuredOfficialContent question={question} blocks={blocks} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />{answerLines > 0 && <div data-configurable-answer-lines>{Array.from({ length:answerLines }, (_, lineIndex) => <div key={lineIndex} style={{ height:`${22*fs}px`, borderBottom:'1px solid #7b8794' }} />)}</div>}</>}
-   </section>
-  })}
- </div>
+function OfficialMcqLayout({ rows, isUrdu, fs, qFs, themeColor, layout='matrix-table' }) {
+ if (!rows.length) return null
+ const maxOptions = Math.max(2, ...rows.map(row => row.options.length))
+ if (layout === 'classic') return <div data-mcq-layout="classic">{rows.map(row => <div key={row.number} style={{ marginBottom:`${7*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, textAlign:isUrdu?'right':'left' }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ marginTop:3, textAlign:isUrdu?'right':'left' }}>{row.options.map(opt => <span key={opt.label} style={{ marginInlineEnd:18 }}><b dir="ltr">({opt.label})</b> {opt.text}</span>)}</div></div>)}</div>
+ if (layout === 'compact-grid') return <div data-mcq-layout="grid" style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${7*fs}px` }}>{rows.map(row => <div key={row.number} style={{ border:`1px solid ${themeColor}66`, padding:`${6*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, marginBottom:4 }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:4 }}>{row.options.map(opt => <div key={opt.label}><b dir="ltr">({opt.label})</b> {opt.text}</div>)}</div></div>)}</div>
+ return <table data-mcq-layout="matrix-table" style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}><thead><tr><th style={{ width:38, border:`1px solid ${themeColor}88`, padding:5 }}>#</th><th style={{ width:'42%', border:`1px solid ${themeColor}88`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'سوال':'Question'}</th>{Array.from({length:maxOptions},(_,i)=><th key={i} style={{ border:`1px solid ${themeColor}88`, padding:5 }}>{String.fromCharCode(65+i)}</th>)}</tr></thead><tbody>{rows.map(row => <tr key={row.number} style={{ breakInside:'avoid' }}><td style={{ border:`1px solid ${themeColor}88`, padding:5, textAlign:'center', fontWeight:800 }}>{row.number}</td><td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:600 }}>{row.prompt}</td>{Array.from({length:maxOptions},(_,i)=>{ const opt=row.options[i]; return <td key={i} style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}>{opt ? <><b dir="ltr">({opt.label})</b> {opt.text}</> : null}</td> })}</tr>)}</tbody></table>
+}
+
+function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeColor, mcqLayout='matrix-table', shortLayout='1-column' }) {
+ const heading = String(question.heading || '')
+ const inferredKind = inferOfficialSectionKind(question)
+ const requestedLayout = question.layoutPreset || 'auto'
+ const kind = requestedLayout === 'mcq' ? 'mcq' : requestedLayout === 'true-false' ? 'true_false' : requestedLayout === 'columns' ? 'matching' : requestedLayout === 'table' ? 'table' : inferredKind
+ if (requestedLayout === 'rich') return <PaperRichTextRenderer value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} />
+ if (kind === 'marker') return <>{splitContentWithMarkers(question.content).map((part,i) => part.type === 'marker' ? <div key={i} data-section-label style={{ fontWeight:900, textAlign:'center', padding:`${5*fs}px`, borderBottom:`1px solid ${themeColor}` }}>{part.text}</div> : null)}</>
+ if (kind === 'mcq') {
+  const rows = parseOfficialMcqRows(question.content)
+  if (rows.length) return <OfficialMcqLayout rows={rows} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} layout={question.mcqLayout || mcqLayout} />
+ }
+ if (kind === 'true_false') return <TrueFalseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />
+ if (kind === 'vertical_math' || /(?:write\s+the\s+tables?|table\s+of|پہاڑ)/i.test(heading)) {
+  if (/(?:write\s+the\s+tables?|table\s+of|پہاڑ)/i.test(heading)) return <MultiplicationTableGrid heading={heading} content={question.content} fs={fs} qFs={qFs} themeColor={themeColor} />
+  const sums = parseVerticalSums(question.content)
+  if (sums.length) return <table data-vertical-math-grid style={{ width:'100%', borderCollapse:'separate', borderSpacing:`${7*fs}px`, tableLayout:'fixed', direction:'ltr', margin:`${4*fs}px 0`, fontFamily:"'Cambria Math','Times New Roman',serif" }}><tbody>{sums.map((sumRow,rowIndex)=><tr key={rowIndex}>{sumRow.map((sum,index)=><td key={index} style={{ border:`1px solid ${themeColor}55`, padding:`${7*fs}px`, textAlign:'right', fontSize:`${Math.max(qFs+2,14)}px`, fontWeight:700 }}><div>{sum.top}</div><div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8 }}><span>{sum.operator}</span><span>{sum.bottom}</span></div><div style={{ borderTop:`1.5px solid ${themeColor}`, height:`${17*fs}px`, marginTop:3 }} /></td>)}</tr>)}</tbody></table>
+ }
+ if (kind === 'short') return <ShortResponseLayout content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} layout={question.shortLayout || shortLayout} />
+ if (kind === 'matching' || kind === 'table') {
+  const tableBlock = blocks.find(block => block.type === 'table')
+  if (tableBlock) return <table data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5*fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr' }}><tbody>{tableBlock.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?700:500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
+  if (kind === 'matching') return <ColumnResponseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} columns={2} />
+ }
+ const plainLines = String(question.content || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+ if (plainLines.length >= 2 && !blocks.some(block => block.type === 'table')) return <NumberedResponseList content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} />
+ return blocks.map((block,blockIndex) => block.type === 'table'
+  ? <table key={blockIndex} data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5*fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr' }}><tbody>{block.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?700:500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
+  : <div key={blockIndex} style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, lineHeight:isUrdu?1.9:1.5, marginBottom:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}><TextWithAnswerLines text={block.text} /></div>)
+}
+
+function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, onQuestionChange, mcqLayout='matrix-table', shortLayout='1-column', qBorderStyle='none', showAnsLines=false, showSectionLine=true }) {
+ const ordered = [...questions].sort((a,b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
+ return <div style={{ direction:isUrdu?'rtl':'ltr' }}>{ordered.map((question,index) => {
+  const blocks = parseOfficialContentBlocks(question.content)
+  const kind = inferOfficialSectionKind(question)
+  const rawHeading = String(question.heading || '').trim()
+  const hasSerial = /^(?:Q(?:uestion)?\s*\d+|سوال(?:\s+نمبر)?\s*\d+)/i.test(rawHeading)
+  const cleanHeading = stripTrailingMarks(rawHeading)
+  const displayHeading = hasSerial ? cleanHeading : `${isUrdu ? `سوال نمبر ${index+1}:` : `Q${index+1}.`} ${cleanHeading}`.trim()
+  const marksLabel = extractMarksLabel(rawHeading, question.marks)
+  const answerLines = Number.isFinite(Number(question.answerLines)) ? Number(question.answerLines) : (showAnsLines && ['short','long','list'].includes(kind) ? 1 : 0)
+  const borderStyle = qBorderStyle === 'box' ? { border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px` } : qBorderStyle === 'table' ? { border:`1.5px solid ${themeColor}`, padding:`${6*fs}px` } : {}
+  const controlStyle = { width:'100%', boxSizing:'border-box', border:`1px solid ${themeColor}66`, borderRadius:6, padding:7, background:'#fff', color:'#111', fontFamily:'inherit', direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }
+  if (kind === 'marker' && !rawHeading) return <div key={question.id || index}>{splitContentWithMarkers(question.content).map((part,i) => part.type === 'marker' ? <div key={i} data-section-label style={{ fontWeight:900, textAlign:'center', padding:`${5*fs}px`, marginBottom:`${5*fs}px`, borderBottom:`1px solid ${themeColor}` }}>{part.text}</div> : null)}</div>
+  return <section key={question.id || index} data-official-section data-section-kind={kind} style={{ marginBottom:`${10*fs}px`, breakInside:'avoid', ...borderStyle }}>
+   {editMode
+    ? <input aria-label={`Question ${index+1} heading`} value={question.heading || ''} onChange={event => onQuestionChange?.(question.id,{ heading:event.target.value, text:event.target.value, textUrdu:isUrdu?event.target.value:'' })} style={{ ...controlStyle, fontWeight:800, marginBottom:6 }} />
+    : <div data-official-heading data-language={isUrdu?'urdu':'english'} style={{ display:'grid', gridTemplateColumns:isUrdu?'auto minmax(0,1fr)':'minmax(0,1fr) auto', gap:10, alignItems:'center', paddingBottom:`${4*fs}px`, marginBottom:`${6*fs}px`, borderBottom:showSectionLine?`2px solid ${themeColor}`:'1px solid #d7dee7', fontWeight:800, fontSize:`${Math.max(qFs+1,13)}px`, lineHeight:isUrdu?1.9:1.35, direction:'ltr' }}>
+      {isUrdu ? <>{marksLabel && <span data-marks-badge style={{ justifySelf:'start', minWidth:52, whiteSpace:'nowrap', color:themeColor, border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 7px', textAlign:'center', direction:'ltr', fontFamily:'Arial,sans-serif', fontSize:`${Math.max(10,qFs*.66)}px` }}>{marksLabel}</span>}<span dir="rtl" style={{ textAlign:'right', justifySelf:'stretch' }}>{displayHeading}</span></> : <><span dir="ltr" style={{ textAlign:'left', justifySelf:'stretch' }}>{displayHeading}</span>{marksLabel && <span data-marks-badge style={{ justifySelf:'end', minWidth:52, whiteSpace:'nowrap', color:themeColor, border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 7px', textAlign:'center', direction:'ltr', fontFamily:'Arial,sans-serif', fontSize:`${Math.max(10,qFs*.66)}px` }}>{marksLabel}</span>}</>}
+     </div>}
+   {editMode && <div className="no-print" style={{ display:'flex', alignItems:'center', gap:10, flexWrap:'wrap', marginBottom:6, fontFamily:'Arial,sans-serif', direction:'ltr', fontSize:11, color:themeColor }}><label>Answer lines <input type="number" min="0" max="12" value={answerLines} onChange={e=>onQuestionChange?.(question.id,{answerLines:Math.max(0,Number(e.target.value)||0)})} style={{...controlStyle,width:60,padding:4}} /></label><label>Layout <select value={question.layoutPreset || 'auto'} onChange={e=>onQuestionChange?.(question.id,{layoutPreset:e.target.value})} style={{...controlStyle,width:140,padding:4,direction:'ltr'}}><option value="auto">Auto</option><option value="mcq">MCQ</option><option value="list">List</option><option value="columns">Columns</option><option value="table">Table</option><option value="true-false">True / False</option><option value="rich">Rich Text</option></select></label></div>}
+   {editMode
+    ? question.layoutPreset === 'rich' ? <PaperRichTextEditor ariaLabel={`Question ${index+1} rich content`} value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} onChange={richContent=>onQuestionChange?.(question.id,{richContent})} /> : <textarea aria-label={`Question ${index+1} content`} value={question.content || ''} onChange={event=>onQuestionChange?.(question.id,{content:event.target.value})} style={{...controlStyle,minHeight:Math.max(95,String(question.content||'').split('\n').length*22),resize:'vertical',lineHeight:isUrdu?1.9:1.5}} />
+    : <><StructuredOfficialContent question={question} blocks={blocks} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} mcqLayout={mcqLayout} shortLayout={shortLayout} />{answerLines > 0 && <div data-configurable-answer-lines>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{ height:`${21*fs}px`, borderBottom:'1px solid #7b8794' }} />)}</div>}</>}
+  </section>
+ })}</div>
 }
 
 //  Shared Section Renderer 
-function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, urdLineH, engLineH, letterSp, printAns, showAnsLines, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange }) {
+function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, mcqLayout='matrix-table', shortLayout='1-column', urdLineH, engLineH, letterSp, wordSp=0, textAlign='start', fontFamily='', printAns, showAnsLines, showSectionLine=true, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange }) {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
- if (type.value === 'official_section') return <OfficialSections questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} themeColor={themeColor} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} />
+ if (type.value === 'official_section') return <OfficialSectionRenderer questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} themeColor={themeColor} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} showAnsLines={showAnsLines} showSectionLine={showSectionLine} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={fontFamily} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} />
  const marks = paper[`${type.value}_marks`] || type.marks || 1
  const isMcq = type.value === 'mcq'
  
@@ -1324,8 +1359,12 @@ function Logo({ size=50, src=null }) {
 
 function editablePaperProps(edit) { return edit ? { 'data-manual-edit': 'true' } : {} }
 
-function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) {
- return { lineHeight: isUrdu ? urdLineH : engLineH, letterSpacing: `${letterSp}px` }
+function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp=0, wordSp=0 }) {
+ return {
+  lineHeight: isUrdu ? urdLineH : engLineH,
+  letterSpacing: `${letterSp}px`,
+  wordSpacing: `${wordSp}px`
+ }
 }
 
 //  Template 1: AS Classic (exact PDF replica) 
@@ -1396,7 +1435,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
 }
 
 //  Template 2: Modern Pro 
-function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1411,7 +1450,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
  const themeColor = '#1565c0'
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:'linear-gradient(135deg,#1a237e 0%,#0d47a1 60%,#1565c0 100%)', padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, marginBottom:`${6*fs}px`, borderRadius:`${4*fs}px` }}><div style={{ textAlign:'center', color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, marginBottom:`${3*fs}px`, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px` }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, border:'1px solid #e0e0e0', fontSize:`${10*fs}px` }}>
  <tbody>
@@ -1444,7 +1483,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
 }
 
 //  Template 3: Elite Premium 
-function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1459,7 +1498,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#fffef8', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Georgia', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#fffef8', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Georgia', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:'#0a0a14', padding:`${(half?12:16)*fs}px ${(half?14:20)*fs}px`, marginBottom:`${8*fs}px` }}><div style={{ textAlign:'center', color:goldL, fontSize:`${(half?20:26)*hFs}px`, fontWeight:700, letterSpacing:2, marginBottom:`${4*fs}px`, fontFamily:"Georgia, serif", textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}><div style={{ flex:1, height:1, background:`linear-gradient(to right, transparent, ${gold})` }} /><div style={{ color:'#aaa', fontSize:`${9*hFs}px`, letterSpacing:1 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div><div style={{ flex:1, height:1, background:`linear-gradient(to left, transparent, ${gold})` }} /></div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, fontSize:`${10*fs}px` }}>
  <tbody>
@@ -1493,7 +1532,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
 }
 
 //  Template 4: Emerald Green 
-function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1508,7 +1547,7 @@ function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:`linear-gradient(90deg,${teal} 0%,${tealL} 50%,#26a69a 100%)`, borderRadius:`${4*fs}px`, overflow:'hidden', marginBottom:`${7*fs}px` }}><div style={{ padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, display:'flex', alignItems:'center', gap:`${10*fs}px` }}><Logo size={half?36:50} src={settings?.logo} /><div style={{ flex:1, textAlign:'center' }}><div style={{ color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px`, marginTop:2 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div></div></div>
  <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:`${4*fs}px`, marginBottom:`${8*fs}px` }}>{[ ['Student Name', null], ['Subject', cfg.subjectName], ['Class', cfg.className], ['Date', cfg.examDate], ['Roll Number', null], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<div key={lbl} style={{ background:mint, borderRadius:`${3*fs}px`, border:`1px solid ${tealL}44`, padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:teal, fontWeight:700, fontSize:`${8*fs}px`, textTransform:'uppercase', letterSpacing:'0.05em' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${10*fs}px`, color:'#004d40' }}>{val}</div> : <div style={{ borderBottom:`1.5px solid ${teal}`, height:`${12*fs}px`, marginTop:`${2*fs}px` }} />}</div>))}</div>
  <div style={{ border:`2px solid ${teal}`, borderRadius:`${6*fs}px`, padding:`${8*fs}px`, position:'relative', overflow:'hidden' }}><div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', pointerEvents:'none', overflow:'hidden' }}><div style={{ transform:'rotate(-30deg)', opacity:0.04, fontSize:half?70:110, fontWeight:900, color:teal, lineHeight:1, textAlign:'center' }}></div></div>
@@ -1543,7 +1582,7 @@ const PREMIUM_PAPER_THEMES = {
  editorial:{ accent:'#39566a', soft:'#eaf0f3', line:'#a6bbc6', heading:'Georgia, serif', label:'Editorial Slate', header:'masthead' },
 }
 
-function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange, mcqLayout='compact-grid', shortLayout='2-column-balanced' }) {
+function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, showSectionLine=true, questionTypes=[], settings, pbStyle, onQuestionChange, mcqLayout='matrix-table', shortLayout='1-column' }) {
  const theme = PREMIUM_PAPER_THEMES[variant] || PREMIUM_PAPER_THEMES.academic
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1567,8 +1606,8 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   ['Student Name', ''], ['Roll Number', ''], ['Class', cfg.className], ['Paper Code', cfg.paperCode],
   ['Subject', cfg.subjectName], ['Time Allowed', cfg.timeAllowed], ['Total Marks', String(total)], ['Exam Date', cfg.examDate],
  ]
- let questionNumber = 0
- return <div {...editablePaperProps(editMode)} data-premium-template={variant} style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ const visibleQuestionTypes = questionTypes.filter(type => (paper[type.value] || []).length)
+ return <div {...editablePaperProps(editMode)} data-premium-template={variant} style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
   <header style={{ direction:'ltr', borderTop:composition.border, borderBottom:`2px solid ${theme.accent}`, borderLeft:variant==='modern'||variant==='coral'?composition.border:'none', padding:`${5 * fs}px ${8 * fs}px`, background:composition.background, borderRadius:composition.radius, display:'grid', gridTemplateColumns:composition.columns, alignItems:'center', gap:8 }}>
    <div style={{ order:composition.logo, gridColumn:composition.logoColumn || 'auto', display:'grid', placeItems:'center' }}><Logo size={half?42:54} src={settings?.logo} /></div>
    <div style={{ order:composition.title, gridColumn:composition.titleColumn || 'auto', textAlign:composition.titleAlign, minWidth:0 }}><div style={{ color:theme.accent, fontFamily:theme.heading, fontWeight:800, fontSize:`${Math.min(24, (half?18:22) * Math.max(.9, headFontSz/14))}px`, lineHeight:1.15 }}>{schoolName}</div><div style={{ color:'#526174', fontSize:`${9 * fs}px`, marginTop:4 }}>{settings?.address || 'Sharif Chowk, Rayya Khas, Narowal | 03001291959'}</div></div>
@@ -1578,11 +1617,9 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
    {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
   </tbody></table>
   <main style={{ position:'relative', zIndex:2 }}>
-   {questionTypes.map(type => {
-    if (!(paper[type.value] || []).length) return null
-    questionNumber += 1
-    return <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={12*fs} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} printAns={printAns} showAnsLines={showAnsLines} qn={questionNumber} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
-   })}
+   {visibleQuestionTypes.map((type, typeIndex) => (
+    <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={12*fs} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={contentFont} printAns={printAns} showAnsLines={showAnsLines} showSectionLine={showSectionLine} qn={typeIndex + 1} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
+   ))}
   </main>
  </div>
 }
@@ -1592,7 +1629,7 @@ function AcademicClassicTemplate(props) {
 }
 
 //  Template 5: Docx Assessment 
-function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
+function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1606,7 +1643,7 @@ function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editM
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Times New Roman', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Times New Roman', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ borderBottom:'2px solid #000', paddingBottom:5, marginBottom:15 }}><div style={{ fontSize:`${(half?18:24)*fs}px`, fontWeight:700, textAlign:'center' }}>ASSESSMENT PAPER</div><div style={{ display:'flex', justifyContent:'space-between', marginTop:10, fontWeight:700, fontSize:`${11*fs}px` }}><span>Subject: {cfg.subjectName}</span><span>Class: {cfg.className}</span><span>Marks: {total}</span></div></div>
  <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: __________________________</span><span>Date: {cfg.examDate}</span></div>
  {questionTypes.map((type, idx) => {
@@ -1866,8 +1903,7 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
 }
 
 export default function PTSPaperGenerator(props) {
- if (props.loadedPaper?.sections && Array.isArray(props.loadedPaper.sections) && props.loadedPaper.sections.length > 0) {
-  return <OfficialExamPaperEditor loadedPaper={props.loadedPaper} onReturnToSource={props.onReturnToSource} />
- }
+ // Official first-term papers use the full Paper Studio surface so all templates,
+ // spacing, borders, structured MCQs/tables and print settings share one renderer.
  return <PTSPaperGeneratorCore {...props} />
 }

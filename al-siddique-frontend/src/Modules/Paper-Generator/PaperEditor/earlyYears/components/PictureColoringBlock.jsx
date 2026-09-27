@@ -18,7 +18,7 @@ export function ColouringSketchArea({ sketchId, label, isUrdu = false, sketchSiz
         justifyContent: 'center',
         border: '1px dashed #777',
         borderRadius: '10px',
-        padding: '12px 8px',
+        padding: '8px 6px',
         background: '#fff',
         minWidth: '100px'
       }}
@@ -58,8 +58,8 @@ export default function PictureColoringBlock({
         flexDirection: isVisualLeft ? 'row' : undefined,
         flexWrap: isVisualLeft ? 'wrap' : undefined,
         gridTemplateColumns: isVisualLeft ? undefined : `repeat(${Math.min(items.length, 4)}, minmax(0, 1fr))`,
-        gap: '14px',
-        margin: '14px 0',
+        gap: '9px',
+        margin: '8px 0',
         direction: isUrdu ? 'rtl' : 'ltr'
       }}
     >

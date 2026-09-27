@@ -85,29 +85,51 @@ export default function CanonicalPaperEditorMain({
     setIsEditMode(prev => !prev)
   }
 
-  // 6. Emergency Canonical A4 Print Handler (Flush active element and state, then print)
+  // 6. Canonical A4 Print Handler — isolate the paper from the application chrome.
   const handlePrint = useCallback(async () => {
-    if (typeof document !== 'undefined' && document.activeElement && typeof document.activeElement.blur === 'function') {
-      document.activeElement.blur()
-    }
+    if (typeof document === 'undefined') return
+    document.activeElement?.blur?.()
     store.publishDocumentChange()
-    if (typeof document !== 'undefined' && document.fonts) {
-      try {
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+
+    const surface = document.querySelector('.canonical-paper-surface')
+    if (!surface) return
+
+    const oldFrame = document.getElementById('__canonical_print_frame')
+    oldFrame?.remove?.()
+    const frame = document.createElement('iframe')
+    frame.id = '__canonical_print_frame'
+    frame.style.cssText = 'position:fixed;left:-9999px;top:0;width:210mm;height:297mm;border:0;background:#fff'
+    document.body.appendChild(frame)
+
+    const doc = frame.contentDocument
+    doc.open()
+    doc.write('<!doctype html><html><head><meta charset="UTF-8"></head><body></body></html>')
+    doc.close()
+
+    document.head.querySelectorAll('style,link[rel="stylesheet"]').forEach(node => {
+      doc.head.appendChild(node.cloneNode(true))
+    })
+    doc.body.appendChild(surface.cloneNode(true))
+
+    try {
+      if (doc.fonts) {
         await Promise.race([
           Promise.all([
-            document.fonts.load("16px 'ASSPS Jameel Noori'"),
-            document.fonts.load("16px 'Jameel Noori Nastaleeq'"),
-            document.fonts.ready,
+            doc.fonts.load("16px 'ASSPS Jameel Noori'"),
+            doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
+            doc.fonts.ready,
           ]),
-          new Promise(r => setTimeout(r, 2000))
+          new Promise(resolve => setTimeout(resolve, 2500))
         ])
-      } catch (err) {
-        console.warn('Urdu print font preload warning in Canonical handlePrint:', err)
       }
+    } catch (err) {
+      console.warn('Canonical print font preload warning:', err)
     }
-    if (typeof window !== 'undefined') {
-      window.print()
-    }
+
+    frame.contentWindow?.focus()
+    frame.contentWindow?.print()
+    setTimeout(() => frame.remove(), 3500)
   }, [store])
 
   // Handle field focus to ensure Tiptap interaction mode is set (Rule 19)

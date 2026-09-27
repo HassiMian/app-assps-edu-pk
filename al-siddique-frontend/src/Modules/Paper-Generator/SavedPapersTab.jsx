@@ -5,6 +5,7 @@ import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { useAuth } from '../../context/AuthContext'
 import { isUrduScriptPaper } from './resolvePaperRoute.js'
+import { inferOfficialSectionKind, countOfficialMcqs, countNumberedItems } from './officialSectionSemantics.js'
 
 const C = {
  card: 'rgba(11,44,77,0.92)', gold: '#C8991A', goldL: '#e8b420',
@@ -40,11 +41,23 @@ function categoryStats(paper = {}) {
   const sections = paper.documentFormat === 'pts-native-v13'
    ? (paper.official_section || paper.selectedQuestions?.official_section?.questions || [])
    : (Array.isArray(paper.sections) ? paper.sections : [])
+  const mcqCount = sections.reduce((sum, section) => sum + countOfficialMcqs(section), 0)
+  const shortCount = sections.reduce((sum, section) => {
+   if (inferOfficialSectionKind(section) !== 'short') return sum
+   return sum + Math.max(1, countNumberedItems(section.content))
+  }, 0)
+  const longCount = sections.filter(section => inferOfficialSectionKind(section) === 'long').length
+  const totalQuestions = sections.reduce((sum, section) => {
+   const kind = inferOfficialSectionKind(section)
+   if (kind === 'marker') return sum
+   if (kind === 'mcq') return sum + Math.max(1, countOfficialMcqs(section))
+   return sum + Math.max(1, countNumberedItems(section.content))
+  }, 0)
   return {
-   mcqCount: sections.filter(section => section.type === 'mcq').length,
-   shortCount: sections.filter(section => section.type === 'short').length,
-   longCount: sections.filter(section => section.type === 'long').length,
-   totalQuestions: sections.length,
+   mcqCount,
+   shortCount,
+   longCount,
+   totalQuestions,
    totalMarks: Number(paper.config?.totalMarks) || 0,
   }
  }
@@ -149,6 +162,7 @@ export default function SavedPapersTab({ onLoadPaper }) {
  {filtered.map(paper => {
  const stats = categoryStats(paper)
  const isUrdu = isUrduScriptPaper(paper)
+ const isOfficial = paper.documentFormat === 'pts-native-v13' || paper.documentFormat === 'official-v12' || String(paper.id || '').startsWith('official-first-term-')
 
  return (
  <div key={paper.id} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, overflow: 'hidden' }}>
@@ -218,10 +232,10 @@ export default function SavedPapersTab({ onLoadPaper }) {
  style={{ flex: 1, background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
   Load & Preview
  </button>
- <button onClick={() => onLoadPaper(paper, isUrdu ? 'build' : 'word_editor')}
- title={isUrdu ? "Open in Paper Studio" : "Open in Word-like Ribbon Editor"}
- style={{ background: isUrdu ? 'rgba(48,209,88,0.15)' : 'rgba(10,132,255,0.2)', border: isUrdu ? '1px solid rgba(48,209,88,0.35)' : '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: isUrdu ? '#4ade80' : '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
-  {isUrdu ? 'Edit / Print' : 'Word Edit'}
+ <button onClick={() => onLoadPaper(paper, (isOfficial || isUrdu) ? 'build' : 'word_editor')}
+ title={(isOfficial || isUrdu) ? "Open in Paper Studio — recommended print editor" : "Open in Word-like Ribbon Editor"}
+ style={{ background: (isOfficial || isUrdu) ? 'rgba(48,209,88,0.15)' : 'rgba(10,132,255,0.2)', border: (isOfficial || isUrdu) ? '1px solid rgba(48,209,88,0.35)' : '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: (isOfficial || isUrdu) ? '#4ade80' : '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
+  {(isOfficial || isUrdu) ? 'Edit / Print' : 'Word Edit'}
  </button>
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>

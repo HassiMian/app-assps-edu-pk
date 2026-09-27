@@ -19,8 +19,8 @@ export default function TraceGlyphGrid({
       style={{
         display: 'grid',
         gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
-        gap: '12px',
-        margin: '10px 0',
+        gap: '8px',
+        margin: '6px 0',
         direction: isUrdu ? 'rtl' : 'ltr'
       }}
     >
@@ -30,14 +30,14 @@ export default function TraceGlyphGrid({
           style={{
             border: '1.5px solid #222',
             borderRadius: '8px',
-            padding: '8px 4px',
+            padding: '5px 4px',
             textAlign: 'center',
             background: '#fff',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'space-between',
-            minHeight: '75px'
+            minHeight: '58px'
           }}
         >
           {/* Tracing letter */}
