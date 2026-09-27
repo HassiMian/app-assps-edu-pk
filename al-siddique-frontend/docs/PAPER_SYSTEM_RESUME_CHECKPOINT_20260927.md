@@ -52,3 +52,13 @@ Production build: PASS.
 Representative controls: Class 4 Science PASS; Class 4 Islamiyat PASS.
 Working-copy persistence: PASS (userEdited=true, workingCopy=true, edits survive reopen).
 Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket geometry PASS, no unexpected console errors in focused QA.
+
+
+## Phase 2 hardening — resumed
+- Added a live Paper Quality Gate in the Paper Workspace. It reports structural errors/warnings before print.
+- Print now blocks only on structural errors (for example unparsable MCQ sections or duplicate internal section IDs); warnings remain visible without inventing academic content.
+- Added **Apply ASSPS Rules**: reapplies safe presentation rules (font, page border, MCQ table, one-column short questions, line heights, marker-safe numbering) without rewriting teacher question content or marks.
+- Section-marker-aware resequencing now keeps `Section A`, `Subjective Part`, etc. as banners and numbers only real questions.
+- Add/duplicate/delete/move question actions now preserve canonical question numbering across marker sections.
+- Focused local acceptance: Universal Workspace PASS; Class 7 Social Studies 10/10 MCQs and Urdu bracket geometry PASS; representative Class 4 Science/Islamiyat controls PASS; working-copy persistence PASS.
+- Rule tests: 12/12 PASS; production build PASS.

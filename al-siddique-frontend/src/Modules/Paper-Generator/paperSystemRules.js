@@ -1,5 +1,6 @@
 // paperSystemRules.js — single source of truth for ASSPS paper authoring/presentation rules
 import { URDU_FONT_STACK, isUrduScriptPaper } from './resolvePaperRoute.js'
+import { inferOfficialSectionKind, parseMcqRows } from './officialSectionSemantics.js'
 
 export const ASSPS_PAPER_SYSTEM_VERSION = 'ASSPS_PAPER_SYSTEM_V1_2026_09_27'
 export const PAPER_LOCKED_HEADER_FIELDS = Object.freeze(['schoolName', 'logo'])
@@ -140,10 +141,108 @@ export function replaceSectionMarks(heading = '', nextMarks = 0, isUrdu = false)
   return clean + ' (' + marks + (isUrdu ? ' نمبر' : ' Marks') + ')'
 }
 
-export function normalizeSectionOrder(sections = []) {
+export function normalizeSectionOrder(sections = [], isUrdu = false) {
+  let questionSerial = 0
   return [...sections]
-    .sort((a, b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
-    .map((section, index) => ({ ...section, sourceOrder: index + 1 }))
+    .map((section, index) => {
+      const ordered = { ...section, sourceOrder: index + 1 }
+      if (inferOfficialSectionKind(section) === 'marker') return ordered
+      questionSerial += 1
+      const heading = replaceQuestionSerial(section.heading || section.text || section.textUrdu || '', questionSerial, isUrdu)
+      return {
+        ...ordered,
+        heading,
+        text: heading,
+        textUrdu: isUrdu ? heading : (section.textUrdu || ''),
+      }
+    })
+}
+
+export function applyAsspsPaperRules(paper = {}) {
+  const profile = buildPaperRuleProfile(paper)
+  const sourceSections = Array.isArray(paper.official_section)
+    ? paper.official_section
+    : (paper.selectedQuestions?.official_section?.questions || [])
+  const sections = normalizeSectionOrder(sourceSections, profile.isUrdu)
+  const config = buildEditablePaperConfig(paper.config || {})
+  const editorSettings = {
+    ...(paper.editorSettings || {}),
+    mcqLayout: 'matrix-table',
+    shortLayout: '1-column',
+    pageBorder: 'thin',
+    questionBorder: 'none',
+    fontFamily: profile.fontFamily,
+    fontSize: Number(paper.editorSettings?.fontSize || 13),
+    headingSize: Number(paper.editorSettings?.headingSize || 14),
+    englishLineHeight: Number(paper.editorSettings?.englishLineHeight || 1.55),
+    urduLineHeight: Number(paper.editorSettings?.urduLineHeight || 2.2),
+    showSectionLine: paper.editorSettings?.showSectionLine !== false,
+  }
+  return {
+    ...paper,
+    config,
+    editorSettings,
+    official_section: sections,
+    selectedQuestions: paper.selectedQuestions?.official_section
+      ? {
+          ...paper.selectedQuestions,
+          official_section: {
+            ...paper.selectedQuestions.official_section,
+            questions: sections,
+          },
+        }
+      : paper.selectedQuestions,
+    paperSystemVersion: ASSPS_PAPER_SYSTEM_VERSION,
+    paperSystem: {
+      ...(paper.paperSystem || {}),
+      rulesAppliedAt: new Date().toISOString(),
+      rulesVersion: ASSPS_PAPER_SYSTEM_VERSION,
+    },
+  }
+}
+
+export function validatePaperDraft(paper = {}) {
+  const sections = Array.isArray(paper.official_section)
+    ? paper.official_section
+    : (paper.selectedQuestions?.official_section?.questions || [])
+  const academic = sections.filter(section => inferOfficialSectionKind(section) !== 'marker')
+  const ledger = buildMarksLedger(paper)
+  const issues = []
+  if (!String(paper.config?.classLevel || paper.config?.className || '').trim()) issues.push({ code:'CLASS_MISSING', level:'warning', text:'Class is missing.' })
+  if (!String(paper.config?.subject || paper.config?.subjectName || '').trim()) issues.push({ code:'SUBJECT_MISSING', level:'warning', text:'Subject is missing.' })
+  if (!String(paper.config?.paperCode || '').trim()) issues.push({ code:'PAPER_CODE_MISSING', level:'warning', text:'Paper code is missing.' })
+  if (!String(paper.config?.examDate || '').trim()) issues.push({ code:'EXAM_DATE_MISSING', level:'warning', text:'Exam date is missing.' })
+  if (!Number(paper.config?.totalMarks || 0)) issues.push({ code:'TOTAL_MARKS_MISSING', level:'warning', text:'Total marks are missing.' })
+  if (!academic.length) issues.push({ code:'NO_QUESTIONS', level:'error', text:'Paper has no question sections.' })
+  const ids = new Set()
+  academic.forEach((section, index) => {
+    const number = index + 1
+    if (!String(section.heading || section.text || '').trim()) issues.push({ code:'QUESTION_HEADING_MISSING', level:'error', question:number, text:`Question ${number} heading is empty.` })
+    if (!String(section.content || '').trim()) issues.push({ code:'QUESTION_CONTENT_MISSING', level:'warning', question:number, text:`Question ${number} content is empty.` })
+    if (section.id) {
+      if (ids.has(section.id)) issues.push({ code:'DUPLICATE_SECTION_ID', level:'error', question:number, text:`Question ${number} has a duplicate internal id.` })
+      ids.add(section.id)
+    }
+    const kind = inferOfficialSectionKind(section)
+    if (kind === 'mcq') {
+      const rows = parseMcqRows(section.content || '')
+      if (!rows.length) issues.push({ code:'MCQ_PARSE_EMPTY', level:'error', question:number, text:`Question ${number} is marked MCQ but no MCQs can be parsed.` })
+      rows.forEach((row, rowIndex) => {
+        if ((row.options || []).length < 2) issues.push({ code:'MCQ_OPTIONS_TOO_FEW', level:'error', question:number, item:rowIndex + 1, text:`Question ${number}, MCQ ${rowIndex + 1} has fewer than two options.` })
+      })
+    }
+  })
+  if (ledger.headerTotal > 0 && ledger.questionTotal > 0 && !ledger.balanced) {
+    issues.push({ code:'MARKS_MISMATCH', level:'warning', text:`Header total is ${ledger.headerTotal}, while question totals equal ${ledger.questionTotal}.` })
+  }
+  return {
+    ready: !issues.some(issue => issue.level === 'error'),
+    issues,
+    errorCount: issues.filter(issue => issue.level === 'error').length,
+    warningCount: issues.filter(issue => issue.level === 'warning').length,
+    marksLedger: ledger,
+    academicQuestionCount: academic.length,
+  }
 }
 
 export function buildEditablePaperConfig(config = {}) {

@@ -30,6 +30,7 @@ export function inferOfficialSectionKind(section = {}) {
   const heading = String(section.heading || '')
   const content = String(section.content || '')
   const trimmedLines = content.split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+  if (isSectionMarkerLine(heading.trim()) && (!trimmedLines.length || trimmedLines.every(isSectionMarkerLine))) return 'marker'
   if (!heading.trim() && trimmedLines.length > 0 && trimmedLines.every(isSectionMarkerLine)) return 'marker'
   if (MCQ_HEADING_RE.test(heading)) return 'mcq'
   if (TRUE_FALSE_RE.test(heading)) return 'true_false'

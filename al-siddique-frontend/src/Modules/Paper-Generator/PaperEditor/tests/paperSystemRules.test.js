@@ -11,6 +11,9 @@ import {
   buildMarksLedger,
   stampWorkingCopy,
   buildPaperRuleProfile,
+  applyAsspsPaperRules,
+  normalizeSectionOrder,
+  validatePaperDraft,
   PAPER_LOCKED_HEADER_FIELDS,
   PAPER_EDITABLE_HEADER_FIELDS,
 } from '../../paperSystemRules.js'
@@ -107,4 +110,57 @@ test('official rule profile defines one consistent layout and no-silent-rewrite 
   assert.equal(profile.presentation.headingFontSize,14)
   assert.equal(profile.contentPolicy.noSilentAcademicRewrite,true)
   assert.equal(profile.contentPolicy.explicitUserEditsOnly,true)
+})
+
+
+test('marker-aware resequencing preserves section banners and numbers only academic questions', () => {
+  const sections = [
+    { id:'m1', sourceOrder:1, heading:'# Section A', content:'# Section A' },
+    { id:'q5', sourceOrder:2, heading:'Q5. First real question (10)', content:'1. A\n2. B', marks:10 },
+    { id:'m2', sourceOrder:3, heading:'# Subjective Part', content:'# Subjective Part' },
+    { id:'q9', sourceOrder:4, heading:'Q9. Second real question (10)', content:'1. C\n2. D', marks:10 },
+  ]
+  const next = normalizeSectionOrder(sections, false)
+  assert.equal(next[0].heading, '# Section A')
+  assert.match(next[1].heading, /^Q1\./)
+  assert.equal(next[2].heading, '# Subjective Part')
+  assert.match(next[3].heading, /^Q2\./)
+  assert.deepEqual(next.map(x=>x.sourceOrder), [1,2,3,4])
+})
+
+test('Apply ASSPS Rules changes presentation safely without rewriting question content or marks', () => {
+  const source = {
+    id:'official-demo',
+    config:{ classLevel:'5', subject:'Urdu', language:'urdu', totalMarks:20 },
+    official_section:[
+      { id:'a', sourceOrder:2, heading:'سوال نمبر 8: پہلا سوال (10)', content:'اصل عبارت A', marks:10 },
+      { id:'b', sourceOrder:3, heading:'سوال نمبر 9: دوسرا سوال (10)', content:'اصل عبارت B', marks:10 },
+    ],
+    editorSettings:{ mcqLayout:'classic', pageBorder:'none' },
+  }
+  const next = applyAsspsPaperRules(source)
+  assert.equal(next.official_section[0].content, 'اصل عبارت A')
+  assert.equal(next.official_section[1].content, 'اصل عبارت B')
+  assert.deepEqual(next.official_section.map(x=>x.marks), [10,10])
+  assert.match(next.official_section[0].heading, /^سوال نمبر 1:/)
+  assert.match(next.official_section[1].heading, /^سوال نمبر 2:/)
+  assert.equal(next.editorSettings.mcqLayout, 'matrix-table')
+  assert.equal(next.editorSettings.pageBorder, 'thin')
+  assert.match(next.editorSettings.fontFamily, /Jameel Noori/)
+})
+
+test('paper quality gate catches structural errors and marks mismatch without silently changing them', () => {
+  const draft = {
+    config:{ classLevel:'4', subject:'English', paperCode:'T-1', examDate:'2026-10-01', totalMarks:20 },
+    official_section:[
+      { id:'q1', sourceOrder:1, heading:'Q1. MCQs (10)', content:'1. Broken MCQ\nA) only one', marks:10, layoutPreset:'mcq' },
+      { id:'q1', sourceOrder:2, heading:'Q2. ', content:'', marks:5 },
+    ],
+  }
+  const gate = validatePaperDraft(draft)
+  assert.equal(gate.ready, false)
+  assert.ok(gate.issues.some(x=>x.code==='MCQ_PARSE_EMPTY'||x.code==='MCQ_OPTIONS_TOO_FEW'))
+  assert.ok(gate.issues.some(x=>x.code==='DUPLICATE_SECTION_ID'))
+  assert.ok(gate.issues.some(x=>x.code==='QUESTION_CONTENT_MISSING'))
+  assert.ok(gate.issues.some(x=>x.code==='MARKS_MISMATCH'))
 })

@@ -13,7 +13,7 @@ import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
 import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
 import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
-import { buildMarksLedger, buildPaperRuleProfile, replaceQuestionSerial, stampWorkingCopy } from './paperSystemRules.js'
+import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
 
 function storeQToTemplate(q) {
  return {
@@ -620,6 +620,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   printReadiness: marksAuthorityEdited ? 'READY' : loadedPaper?.printReadiness,
  }
  const marksLedger = isOfficialPaper ? buildMarksLedger(liveAuditPaper) : { headerTotal:Number(headerTotalMarks || 0), questionTotal:0, balanced:false, difference:0 }
+ const draftQuality = isOfficialPaper ? validatePaperDraft(liveAuditPaper) : { ready:true, issues:[], errorCount:0, warningCount:0, academicQuestionCount:0 }
  const printAudit = isOfficialPaper ? auditOfficialPaperForPrint(liveAuditPaper) : { blocked:false, issues:[] }
  const TemplateComp = {
  academic: (props) => <PremiumPaperTemplate {...props} variant="academic" />,
@@ -657,14 +658,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   if (Object.prototype.hasOwnProperty.call(changes || {}, 'marks')) setMarksAuthorityEdited(true)
   onPaperChange(current => ({ ...current, [type]:(current[type] || []).map(question => question.id === id ? { ...question, ...changes } : question) }))
  }
- const resequenceOfficial = sections => {
-  const urdu = isUrduScriptPaper({ config:cfg, ...paper })
-  return sections.map((section,index) => {
-   const serial = index + 1
-   const heading = replaceQuestionSerial(section.heading || '', serial, urdu)
-   return { ...section, sourceOrder:serial, heading, text:heading, textUrdu:urdu?heading:(section.textUrdu || '') }
-  })
- }
+ const resequenceOfficial = sections => normalizeSectionOrder(
+  sections,
+  isUrduScriptPaper({ config:cfg, ...paper })
+ )
  const deleteOfficialSection = id => onPaperChange(current => ({ ...current, official_section:resequenceOfficial((current.official_section || []).filter(section => section.id !== id)) }))
  const duplicateOfficialSection = id => onPaperChange(current => {
   const sections = [...(current.official_section || [])]
@@ -684,12 +681,34 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  })
  const addOfficialSection = () => onPaperChange(current => {
   const sections = [...(current.official_section || [])]
-  const serial = sections.length + 1
+  const academicCount = sections.filter(section => inferOfficialSectionKind(section) !== 'marker').length
+  const serial = academicCount + 1
   const urdu = isUrduScriptPaper({ config:cfg, ...current })
   const heading = urdu ? `سوال نمبر ${serial}: نیا سوال۔` : `Q${serial}. New Question`
-  sections.push({ id:`${loadedPaper?.id || 'paper'}-manual-${Date.now()}`, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:serial, priority:'manual' })
+  sections.push({ id:`${loadedPaper?.id || 'paper'}-manual-${Date.now()}`, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:sections.length + 1, priority:'manual' })
   return { ...current, official_section:resequenceOfficial(sections) }
  })
+ const applyWorkspaceRules = () => {
+  if (!isOfficialPaper) return
+  const next = applyAsspsPaperRules({ ...liveAuditPaper, config:cfg, official_section:paper.official_section || [] })
+  onPaperChange(current => ({
+   ...current,
+   official_section: next.official_section,
+   selectedQuestions: next.selectedQuestions,
+   paperSystemVersion: next.paperSystemVersion,
+   paperSystem: next.paperSystem,
+  }))
+  setMcqLayout(next.editorSettings.mcqLayout)
+  setShortLayout(next.editorSettings.shortLayout)
+  setPageBorder(next.editorSettings.pageBorder)
+  setQBorderStyle(next.editorSettings.questionBorder)
+  setFontFamily(next.editorSettings.fontFamily)
+  setBaseFontSz(next.editorSettings.fontSize)
+  setHeadFontSz(next.editorSettings.headingSize)
+  setEngLineH(next.editorSettings.englishLineHeight)
+  setUrdLineH(next.editorSettings.urduLineHeight)
+  setShowSectionLine(next.editorSettings.showSectionLine)
+ }
  const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, mcqLayout, shortLayout }
 
  function doSearch() {
@@ -779,6 +798,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPrint() {
+ if (draftQuality.errorCount > 0) {
+  alert(['PRINT BLOCKED — paper quality gate found errors.', ...draftQuality.issues.filter(issue=>issue.level==='error').map(issue=>`• ${issue.text}`)].join('\n'))
+  return
+ }
  if (printAudit.blocked) {
   alert(paperPrintBlockMessage(printAudit))
   return
@@ -906,6 +929,13 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   {isOfficialPaper && <div data-marks-ledger style={{ border:`1px solid ${marksLedger.balanced?'rgba(48,209,88,.45)':'rgba(255,159,10,.55)'}`, borderRadius:8, padding:'7px 9px', background:marksLedger.balanced?'rgba(48,209,88,.08)':'rgba(255,159,10,.08)', fontFamily:'Arial,sans-serif' }}><div style={{fontSize:10,color:D.muted,fontWeight:800}}>MARKS LEDGER</div><div style={{fontSize:12,color:marksLedger.balanced?D.green:D.orange,fontWeight:900}}>Header {marksLedger.headerTotal || 0} / Questions {marksLedger.questionTotal || 0}</div></div>}
   {isOfficialPaper && <button type="button" disabled={!marksLedger.questionTotal || marksLedger.headerTotal===marksLedger.questionTotal} onClick={()=>{setHeaderTotalMarks(marksLedger.questionTotal);setMarksAuthorityEdited(true)}} style={{...tinp,cursor:'pointer',fontWeight:800,color:D.gold,minWidth:128}}>Use Question Total</button>}
  </div>
+ {isOfficialPaper && <div style={{ display:'grid', gridTemplateColumns:'minmax(0,1fr) auto', gap:10, marginTop:8, alignItems:'start' }}>
+  <div data-paper-quality-gate style={{ border:`1px solid ${draftQuality.errorCount?'rgba(255,55,95,.55)':draftQuality.warningCount?'rgba(255,159,10,.55)':'rgba(48,209,88,.45)'}`, borderRadius:8, padding:'8px 10px', background:draftQuality.errorCount?'rgba(255,55,95,.08)':draftQuality.warningCount?'rgba(255,159,10,.08)':'rgba(48,209,88,.08)', fontFamily:'Arial,sans-serif' }}>
+   <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}><b style={{ fontSize:11, color:draftQuality.errorCount?D.red:draftQuality.warningCount?D.orange:D.green }}>PAPER QUALITY GATE</b><span style={{ fontSize:11, color:D.silver }}>{draftQuality.academicQuestionCount} questions · {draftQuality.errorCount} errors · {draftQuality.warningCount} warnings</span></div>
+   {draftQuality.issues.length > 0 && <div style={{ marginTop:5, fontSize:10, color:D.muted }}>{draftQuality.issues.slice(0,4).map(issue=><div key={`${issue.code}-${issue.question||0}-${issue.item||0}`}>• {issue.text}</div>)}{draftQuality.issues.length>4&&<div>• +{draftQuality.issues.length-4} more issue(s)</div>}</div>}
+  </div>
+  <button data-apply-assps-rules type="button" onClick={applyWorkspaceRules} style={{...tinp,cursor:'pointer',fontWeight:900,color:D.gold,minWidth:158,padding:'9px 12px'}}>Apply ASSPS Rules</button>
+ </div>}
  <div style={{ marginTop:7, fontSize:10, color:D.muted }}>School name and logo are locked to school branding. Every other paper field is editable. Official source data stays locked; Save writes an editable working copy.</div>
  </details>
  <details open style={{ marginTop:8 }}>
