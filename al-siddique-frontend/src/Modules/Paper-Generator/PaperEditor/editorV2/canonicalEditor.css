@@ -1,8 +1,30 @@
 /* canonicalEditor.css — Shared Typography Tokens & Layout Parity Styles for Canonical Editor V2 (Rule 33) */
 
+@font-face {
+  font-family: 'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+
 :root {
   --canonical-font-en: 'Times New Roman', serif;
-  --canonical-font-ur: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+  --canonical-font-ur: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif;
   --canonical-line-height-en: 1.45;
   --canonical-line-height-ur: 1.9;
   --canonical-font-size: 13px;

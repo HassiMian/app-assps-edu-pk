@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { useAuth } from '../../context/AuthContext'
+import { isUrduScriptPaper } from './resolvePaperRoute.js'
 
 const C = {
  card: 'rgba(11,44,77,0.92)', gold: '#C8991A', goldL: '#e8b420',
@@ -147,6 +148,7 @@ export default function SavedPapersTab({ onLoadPaper }) {
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
  {filtered.map(paper => {
  const stats = categoryStats(paper)
+ const isUrdu = isUrduScriptPaper(paper)
 
  return (
  <div key={paper.id} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, overflow: 'hidden' }}>
@@ -216,10 +218,10 @@ export default function SavedPapersTab({ onLoadPaper }) {
  style={{ flex: 1, background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
   Load & Preview
  </button>
- <button onClick={() => onLoadPaper(paper, 'word_editor')}
- title="Open in Word-like Ribbon Editor"
- style={{ background: 'rgba(10,132,255,0.2)', border: '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
-  Word Edit
+ <button onClick={() => onLoadPaper(paper, isUrdu ? 'build' : 'word_editor')}
+ title={isUrdu ? "Open in Paper Studio" : "Open in Word-like Ribbon Editor"}
+ style={{ background: isUrdu ? 'rgba(48,209,88,0.15)' : 'rgba(10,132,255,0.2)', border: isUrdu ? '1px solid rgba(48,209,88,0.35)' : '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: isUrdu ? '#4ade80' : '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
+  {isUrdu ? 'Edit / Print' : 'Word Edit'}
  </button>
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>

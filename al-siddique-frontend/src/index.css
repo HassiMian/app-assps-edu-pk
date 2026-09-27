@@ -1,6 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+
 :root {
   --navy: #0B2C4D;
   --navy-light: #0d3563;
@@ -20,7 +42,7 @@
   --glow-gold: 0 0 20px rgba(200, 153, 26, 0.4);
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
-  --font-urdu: 'Noto Nastaliq Urdu', serif;
+  --font-urdu: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif;
   --app-bg: #071e34;
   --app-bg-soft: #0b2c4d;
   --app-surface: rgba(15,23,42,0.58);

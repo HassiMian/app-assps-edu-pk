@@ -86,11 +86,25 @@ export default function CanonicalPaperEditorMain({
   }
 
   // 6. Emergency Canonical A4 Print Handler (Flush active element and state, then print)
-  const handlePrint = useCallback(() => {
+  const handlePrint = useCallback(async () => {
     if (typeof document !== 'undefined' && document.activeElement && typeof document.activeElement.blur === 'function') {
       document.activeElement.blur()
     }
     store.publishDocumentChange()
+    if (typeof document !== 'undefined' && document.fonts) {
+      try {
+        await Promise.race([
+          Promise.all([
+            document.fonts.load("16px 'ASSPS Jameel Noori'"),
+            document.fonts.load("16px 'Jameel Noori Nastaleeq'"),
+            document.fonts.ready,
+          ]),
+          new Promise(r => setTimeout(r, 2000))
+        ])
+      } catch (err) {
+        console.warn('Urdu print font preload warning in Canonical handlePrint:', err)
+      }
+    }
     if (typeof window !== 'undefined') {
       window.print()
     }

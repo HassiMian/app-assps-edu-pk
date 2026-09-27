@@ -9,8 +9,8 @@ import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../servi
 import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
 import { getDisplayOptionLabel } from './PaperEditor/layouts/urduRtlEngine.js'
+import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 
-// Normalize a store question to the template question format
 function storeQToTemplate(q) {
  return {
  id: q.id, type: q.type,
@@ -529,7 +529,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [urdLineH, setUrdLineH] = useState(editorSettings.urduLineHeight || 2.0)
  const [showAnsLines, setShowAnsLines] = useState(Boolean(editorSettings.showAnswerLines))
  const [fontColor, setFontColor] = useState(editorSettings.fontColor || '#1a1a1a')
- const [fontFamily, setFontFamily] = useState(editorSettings.fontFamily || "'Times New Roman', Times, serif")
+ const [fontFamily, setFontFamily] = useState(() => {
+  if (editorSettings.fontFamily) return editorSettings.fontFamily
+  const isUrduPaper = isUrduScriptPaper({ config: overrideConfig || loadedPaper?.config, ...loadedPaper })
+  return isUrduPaper ? URDU_FONT_STACK : "'Times New Roman', Times, serif"
+ })
  const [baseFontSz, setBaseFontSz] = useState(editorSettings.fontSize || 13)
  const [headFontSz, setHeadFontSz] = useState(editorSettings.headingSize || 14)
  const [fontBold, setFontBold] = useState(Boolean(editorSettings.fontBold))
@@ -737,12 +741,48 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  })
  doc.open()
  const wmCss = (showWatermark && paperSettings?.logo && watermarkOpacity > 0) ? `body::before { content: ""; position: fixed; top: 52%; left: 50%; transform: translate(-50%, -50%); width: ${145 * watermarkScale}mm; height: ${145 * watermarkScale}mm; background-image: url('${paperSettings.logo}'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: ${watermarkOpacity}; z-index: 0; pointer-events: none; } body > * { position: relative; z-index: 1; } .preview-wm { display: none !important; }` : ''
- doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>@font-face{font-family:'Jameel Noori Nastaleeq';src:url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');font-display:swap}*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}table{border-collapse:collapse}[data-edit-guide]{border:none!important}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
+ doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+@font-face{
+  font-family:'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+@font-face{
+  font-family:'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+[dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], [dir="rtl"] * {
+  font-family: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
+}
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}table{border-collapse:collapse}[data-edit-guide]{border:none!important}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
  doc.close()
- setTimeout(() => {
+ try {
+  if (doc.fonts) {
+   await Promise.race([
+    Promise.all([
+     doc.fonts.load("16px 'ASSPS Jameel Noori'"),
+     doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
+     doc.fonts.ready,
+    ]),
+    new Promise(resolve => setTimeout(resolve, 2000))
+   ])
+  }
+ } catch (err) {
+  console.warn('Urdu print font preload warning in doPrint:', err)
+ }
  try { iframe.contentWindow.focus(); iframe.contentWindow.print() } catch(e) { console.error('iframe print failed:', e) }
  setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
- }, 1200)
  }
 
  const tinp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box', border: pageBorderStyle }
@@ -812,7 +852,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <option value="'Calibri', sans-serif">Calibri</option>
  <option value="'Garamond', serif">Garamond</option>
  <option value="'Book Antiqua', serif">Book Antiqua</option>
- <option value="'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif">Jameel Noori Nastaleeq</option>
+ <option value="'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif">Jameel Noori Nastaleeq</option>
  <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
  <option value="'Palatino Linotype', serif">Palatino Linotype</option>
  </select>
@@ -1174,11 +1214,11 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  
  return (
  <div key={type.value} style={{ marginBottom:`${10*fs}px` }}>
- {urduHeader && <div style={{ textAlign:'center', fontFamily:'Noto Nastaliq Urdu,serif', fontSize:`${14*fs}px`, fontWeight:800, color:'#1a237e', marginBottom:`${5*fs}px`, direction:'rtl' }}>{urduHeader}</div>}
+ {urduHeader && <div style={{ textAlign:'center', fontFamily:URDU_FONT_STACK, fontSize:`${14*fs}px`, fontWeight:800, color:'#1a237e', marginBottom:`${5*fs}px`, direction:'rtl' }}>{urduHeader}</div>}
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:`${6*fs}px`, paddingBottom:`${4*fs}px`, borderBottom:`2.1px solid ${themeColor}`, direction: isUrdu ? 'rtl' : 'ltr' }}>
  {isUrdu ? (
  <>
- <span style={{ fontWeight:700, fontSize:`${12*fs}px`, fontFamily:'Noto Nastaliq Urdu,serif' }}>سوال نمبر {qn}. {type.labelUrdu}</span>
+ <span style={{ fontWeight:700, fontSize:`${12*fs}px`, fontFamily:URDU_FONT_STACK }}>سوال نمبر {qn}. {type.labelUrdu}</span>
  <span style={{ fontWeight:700, fontSize:`${10*fs}px`, color:themeColor }}>({marks} × {qs.length} = {qs.length*marks})</span>
  </>
  ) : (
@@ -1200,7 +1240,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <tbody>{qs.map((q,i)=>(
  <tr key={q.id || `${type.value}-row-${i}`}>
  <td style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', fontWeight:700, color:themeColor }}>{i+1}.</td>
- <td style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px ${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH }}>
+ <td style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px ${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH }}>
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </td>
  {q.options?.map((opt, optIndex)=>(
@@ -1215,12 +1255,12 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  ) : (
  qs.map((q,i)=>(
  <div key={q.id || `${type.value}-card-${i}`} style={{ marginBottom:`${8*fs}px`, ...(qBorderStyle==='box'?{border:`1px solid ${themeColor}44`,borderRadius:`${3*fs}px`,padding:`${6*fs}px ${8*fs}px`}:{}) }}>
- <div style={{ fontWeight:700, fontSize:`${qFs}px`, marginBottom:`${3*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
+ <div style={{ fontWeight:700, fontSize:`${qFs}px`, marginBottom:`${3*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
  <span style={{ color:themeColor }}>{i+1}.</span>{' '}<span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </div>
  <div style={{ display:'grid', gridTemplateColumns:`repeat(${half?2:4},1fr)`, gap:`${2*fs}px`, paddingLeft:isUrdu?0:`${14*fs}px`, paddingRight:isUrdu?`${14*fs}px`:0 }}>
  {q.options?.map((opt, optIndex)=>(
- <div key={opt.key || opt.label || `${type.value}-choice-${i}-${optIndex}`} style={{ fontSize:`${qFsSm}px`, direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
+ <div key={opt.key || opt.label || `${type.value}-choice-${i}-${optIndex}`} style={{ fontSize:`${qFsSm}px`, direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
  <strong style={{color:themeColor}}>({opt.key || opt.label || String.fromCharCode(65 + optIndex)})</strong>{' '}
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitOptionText(q, optIndex, event.currentTarget.textContent || '')} style={editStyle}>{getT(opt)}</span>
  {printAns&&opt.correct&&<span style={{color:'#c00',fontWeight:700}}> </span>}
@@ -1240,7 +1280,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <tbody>{qs.map((q,i)=>(
  <tr key={q.id || `${type.value}-table-${i}`}>
  <td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:'center', fontWeight:700, color:themeColor, verticalAlign:'top' }}>{i+1}.</td>
- <td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, minHeight:`${20*fs}px` }}>
+ <td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, minHeight:`${20*fs}px` }}>
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </td>
  </tr>
@@ -1250,7 +1290,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <div style={{ display: (type.value==='short'||type.value.includes('short')) ? 'grid' : 'block', gridTemplateColumns: (type.value==='short'||type.value.includes('short')) ? '1fr 1fr' : 'none', gap:`${4*fs}px ${14*fs}px` }}>
  {qs.map((q,i)=>(
  <div key={q.id || `${type.value}-item-${i}`} style={{ fontSize:`${qFs}px`, marginBottom: (type.value==='short'||type.value.includes('short')) ? 0 : `${12*fs}px`, ...(qBorderStyle==='box'?{border:`1px solid ${themeColor}44`,borderRadius:`${3*fs}px`,padding: (type.value==='short'||type.value.includes('short')) ? `${5*fs}px ${7*fs}px` : `${6*fs}px ${8*fs}px`}:{}) }}>
- <div style={{ fontWeight: (type.value==='short'||type.value.includes('short')) ? 600 : 700, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
+ <div style={{ fontWeight: (type.value==='short'||type.value.includes('short')) ? 600 : 700, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
  <span style={{ color:themeColor, fontWeight: 600 }}>{i+1}.</span>{' '}<span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </div>
  {showAnsLines && ((type.value==='short'||type.value.includes('short')) ? (
@@ -1291,7 +1331,7 @@ function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) {
 //  Template 1: AS Classic (exact PDF replica) 
 function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #cc0000', borderRadius:2, minWidth:20, display:'inline-block' } : {}
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -1299,7 +1339,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
   const qFs = 11 * fs
  const qFsSm = Math.max(7, 10 * fs)
  const qFsHead = 12 * fs
- const wrap = { width:'100%', background:'white', color: fontColor, fontFamily: fontFamily || 'Arial, sans-serif', fontSize: `${baseFontSz*fs}px`, direction: isUrdu ? 'rtl' : 'ltr', padding: half ? '3mm 3mm' : '4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }
+ const wrap = { width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize: `${baseFontSz*fs}px`, direction: isUrdu ? 'rtl' : 'ltr', padding: half ? '3mm 3mm' : '4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }
  const cell = { border:'1px solid #aaa', padding:`${Math.round(3*fs)}px ${Math.round(7*fs)}px` }
  const cellLbl = { color:'#666', fontSize:`${9*fs}px` }
  const cellVal = { fontWeight:700, fontSize:`${10*fs}px` }
@@ -1358,7 +1398,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
 //  Template 2: Modern Pro 
 function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #1565c0', borderRadius:2, minWidth:20, display:'inline-block' } : {}
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -1371,7 +1411,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
  const themeColor = '#1565c0'
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: fontFamily || 'Arial, sans-serif', fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
  <div style={{ background:'linear-gradient(135deg,#1a237e 0%,#0d47a1 60%,#1565c0 100%)', padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, marginBottom:`${6*fs}px`, borderRadius:`${4*fs}px` }}><div style={{ textAlign:'center', color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, marginBottom:`${3*fs}px`, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px` }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, border:'1px solid #e0e0e0', fontSize:`${10*fs}px` }}>
  <tbody>
@@ -1406,7 +1446,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
 //  Template 3: Elite Premium 
 function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #B8860B', borderRadius:2, minWidth:20, display:'inline-block' } : {}
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -1419,7 +1459,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#fffef8', color: fontColor, fontFamily: fontFamily || "'Georgia', Times, serif", fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#fffef8', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Georgia', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
  <div style={{ background:'#0a0a14', padding:`${(half?12:16)*fs}px ${(half?14:20)*fs}px`, marginBottom:`${8*fs}px` }}><div style={{ textAlign:'center', color:goldL, fontSize:`${(half?20:26)*hFs}px`, fontWeight:700, letterSpacing:2, marginBottom:`${4*fs}px`, fontFamily:"Georgia, serif", textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}><div style={{ flex:1, height:1, background:`linear-gradient(to right, transparent, ${gold})` }} /><div style={{ color:'#aaa', fontSize:`${9*hFs}px`, letterSpacing:1 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div><div style={{ flex:1, height:1, background:`linear-gradient(to left, transparent, ${gold})` }} /></div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, fontSize:`${10*fs}px` }}>
  <tbody>
@@ -1455,7 +1495,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
 //  Template 4: Emerald Green 
 function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const hFs = (half ? 0.82 : 1) * (headFontSz / 11)
@@ -1468,7 +1508,7 @@ function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: fontFamily || 'Arial, sans-serif', fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
  <div style={{ background:`linear-gradient(90deg,${teal} 0%,${tealL} 50%,#26a69a 100%)`, borderRadius:`${4*fs}px`, overflow:'hidden', marginBottom:`${7*fs}px` }}><div style={{ padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, display:'flex', alignItems:'center', gap:`${10*fs}px` }}><Logo size={half?36:50} src={settings?.logo} /><div style={{ flex:1, textAlign:'center' }}><div style={{ color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px`, marginTop:2 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div></div></div>
  <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:`${4*fs}px`, marginBottom:`${8*fs}px` }}>{[ ['Student Name', null], ['Subject', cfg.subjectName], ['Class', cfg.className], ['Date', cfg.examDate], ['Roll Number', null], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<div key={lbl} style={{ background:mint, borderRadius:`${3*fs}px`, border:`1px solid ${tealL}44`, padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:teal, fontWeight:700, fontSize:`${8*fs}px`, textTransform:'uppercase', letterSpacing:'0.05em' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${10*fs}px`, color:'#004d40' }}>{val}</div> : <div style={{ borderBottom:`1.5px solid ${teal}`, height:`${12*fs}px`, marginTop:`${2*fs}px` }} />}</div>))}</div>
  <div style={{ border:`2px solid ${teal}`, borderRadius:`${6*fs}px`, padding:`${8*fs}px`, position:'relative', overflow:'hidden' }}><div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', pointerEvents:'none', overflow:'hidden' }}><div style={{ transform:'rotate(-30deg)', opacity:0.04, fontSize:half?70:110, fontWeight:900, color:teal, lineHeight:1, textAlign:'center' }}></div></div>
@@ -1505,12 +1545,12 @@ const PREMIUM_PAPER_THEMES = {
 
 function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange, mcqLayout='compact-grid', shortLayout='2-column-balanced' }) {
  const theme = PREMIUM_PAPER_THEMES[variant] || PREMIUM_PAPER_THEMES.academic
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, type) => sum + (paper[type.value]?.length || 0) * (paper[`${type.value}_marks`] || type.marks || 1), 0)
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const qFs = baseFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)
- const contentFont = isUrdu ? "'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif" : (fontFamily || 'Arial, sans-serif')
+ const contentFont = isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif')
  const schoolName = (settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()
  const compositions = {
   academic:{ columns:'60px minmax(0,1fr) 218px', background:'#fff', radius:0, logo:1, title:2, badge:3, titleAlign:'center', border:`3px solid ${theme.accent}` },
@@ -1554,7 +1594,7 @@ function AcademicClassicTemplate(props) {
 //  Template 5: Docx Assessment 
 function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const hFs = (half ? 0.82 : 1) * (headFontSz / 11)
@@ -1566,7 +1606,7 @@ function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editM
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: fontFamily || "'Times New Roman', Times, serif", fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Times New Roman', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
  <div style={{ borderBottom:'2px solid #000', paddingBottom:5, marginBottom:15 }}><div style={{ fontSize:`${(half?18:24)*fs}px`, fontWeight:700, textAlign:'center' }}>ASSESSMENT PAPER</div><div style={{ display:'flex', justifyContent:'space-between', marginTop:10, fontWeight:700, fontSize:`${11*fs}px` }}><span>Subject: {cfg.subjectName}</span><span>Class: {cfg.className}</span><span>Marks: {total}</span></div></div>
  <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: __________________________</span><span>Date: {cfg.examDate}</span></div>
  {questionTypes.map((type, idx) => {
@@ -1610,7 +1650,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
  const [status, setStatus] = useState('')
  const printRef = useRef(null)
  const theme = OFFICIAL_TEMPLATE_THEMES.find(item => item.id === template) || OFFICIAL_TEMPLATE_THEMES[0]
- const isUrdu = draft.config?.language === 'urdu'
+ const isUrdu = isUrduScriptPaper(draft)
 
  const updateConfig = (key, value) => setDraft(current => ({
   ...current,
@@ -1638,7 +1678,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   setEditing(false)
  }
 
- function printPaper() {
+ async function printPaper() {
   const node = printRef.current
   if (!node) return
   const frame = document.createElement('iframe')
@@ -1646,13 +1686,49 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   document.body.appendChild(frame)
   const doc = frame.contentDocument
   doc.open()
-  doc.write(`<!doctype html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet"><style>@page{size:A4 portrait;margin:10mm}*{box-sizing:border-box}body{margin:0;background:#fff}textarea,input,button,.official-qa-notes{display:none!important}.official-paper{width:100%!important;min-height:auto!important;box-shadow:none!important;margin:0!important}.official-section{break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body>${node.outerHTML}</body></html>`)
+  doc.write(`<!doctype html><html><head><meta charset="UTF-8"><style>
+@font-face{
+  font-family:'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+@font-face{
+  font-family:'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda'),
+    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: block;
+}
+[dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], .official-paper[dir="rtl"], .official-paper[dir="rtl"] * {
+  font-family: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
+}
+@page{size:A4 portrait;margin:10mm}*{box-sizing:border-box}body{margin:0;background:#fff}textarea,input,button,.official-qa-notes{display:none!important}.official-paper{width:100%!important;min-height:auto!important;box-shadow:none!important;margin:0!important}.official-section{break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body>${node.outerHTML}</body></html>`)
   doc.close()
-  setTimeout(() => {
-   frame.contentWindow?.focus()
-   frame.contentWindow?.print()
-   setTimeout(() => frame.remove(), 2500)
-  }, 700)
+  try {
+   if (doc.fonts) {
+    await Promise.race([
+     Promise.all([
+      doc.fonts.load("16px 'ASSPS Jameel Noori'"),
+      doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
+      doc.fonts.ready,
+     ]),
+     new Promise(resolve => setTimeout(resolve, 2000))
+    ])
+   }
+  } catch (err) {
+   console.warn('Urdu print font preload warning in printPaper:', err)
+  }
+  frame.contentWindow?.focus()
+  frame.contentWindow?.print()
+  setTimeout(() => frame.remove(), 3000)
  }
 
  const inputStyle = { width:'100%', boxSizing:'border-box', border:`1px solid ${theme.border}`, borderRadius:6, padding:'8px 10px', font:'inherit', color:'#111827', background:'#fff' }
@@ -1676,7 +1752,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
     {draft.sourceTotalNote && <div style={{ marginTop:8 }}>{draft.sourceTotalNote}</div>}
     {draft.qaNotes && <pre style={{ margin:'8px 0 0', whiteSpace:'pre-wrap', fontFamily:'inherit' }}>{draft.qaNotes}</pre>}
    </details>}
-   <div ref={printRef} className="official-paper" dir={isUrdu ? 'rtl' : 'ltr'} style={{ width:'210mm', minHeight:'297mm', margin:'0 auto', background:'#fff', color:'#111827', padding:'12mm', boxSizing:'border-box', boxShadow:'0 12px 40px rgba(0,0,0,.4)', fontFamily:isUrdu ? "'Noto Nastaliq Urdu', serif" : "'Times New Roman', serif", borderTop:`8px solid ${theme.accent}` }}>
+   <div ref={printRef} className="official-paper" dir={isUrdu ? 'rtl' : 'ltr'} style={{ width:'210mm', minHeight:'297mm', margin:'0 auto', background:'#fff', color:'#111827', padding:'12mm', boxSizing:'border-box', boxShadow:'0 12px 40px rgba(0,0,0,.4)', fontFamily:isUrdu ? URDU_FONT_STACK : "'Times New Roman', serif", borderTop:`8px solid ${theme.accent}` }}>
     <header style={{ display:'grid', gridTemplateColumns:'80px 1fr 150px', gap:14, alignItems:'center', borderBottom:`3px solid ${theme.accent}`, paddingBottom:12, marginBottom:12 }}>
      <div style={{ width:72, height:72, display:'grid', placeItems:'center', background:'#fff' }}>{paperSettings?.logo ? <img src={paperSettings.logo} alt="School logo" style={{ maxWidth:'100%', maxHeight:'100%', objectFit:'contain' }} /> : <strong style={{ color:theme.accent }}>ASSPS</strong>}</div>
      <div style={{ textAlign:isUrdu ? 'right' : 'left' }}>
@@ -1790,5 +1866,8 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
 }
 
 export default function PTSPaperGenerator(props) {
+ if (props.loadedPaper?.sections && Array.isArray(props.loadedPaper.sections) && props.loadedPaper.sections.length > 0) {
+  return <OfficialExamPaperEditor loadedPaper={props.loadedPaper} onReturnToSource={props.onReturnToSource} />
+ }
  return <PTSPaperGeneratorCore {...props} />
 }

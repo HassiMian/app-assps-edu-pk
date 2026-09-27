@@ -190,7 +190,7 @@ export default function CanonicalDocumentRenderer({
     boxSizing: 'border-box',
     position: 'relative',
     fontFamily: isUrdu
-      ? "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif"
+      ? "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif"
       : "'Times New Roman', 'Arial', serif",
   }
 
