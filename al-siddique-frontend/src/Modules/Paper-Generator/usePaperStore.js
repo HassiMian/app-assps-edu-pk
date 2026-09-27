@@ -14,7 +14,7 @@ const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
-const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V22_OCT01_MATH_FINAL'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V23_OCT02_URDU_REVIEW'
 const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
  'official-first-term-2026-class-2-english',
  'official-first-term-2026-class-4-english',
@@ -27,9 +27,15 @@ const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
  'official-first-term-2026-class-4-mathematics',
  'official-first-term-2026-class-6-mathematics',
  'official-first-term-2026-class-8-mathematics',
+ 'official-first-term-2026-class-1-urdu',
+ 'official-first-term-2026-class-3-urdu',
+ 'official-first-term-2026-class-5-urdu',
 ])
-const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V4_SEP30_MATH_REFRESH'
-const EXAM_NIGHT_FORCE_REFRESH_IDS = new Set(['recovery-first-term-2026-class-3-mathematics'])
+const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V5_OCT02_URDU_REFRESH'
+const EXAM_NIGHT_FORCE_REFRESH_IDS = new Set([
+ 'recovery-first-term-2026-class-3-mathematics',
+ 'recovery-first-term-2026-class-7-urdu',
+])
 
 const SEED_TYPE_MAP = {
  mcq: 'mcq',

@@ -1,6 +1,7 @@
 // EarlyYearsWorksheetSpec.js — Three-layer worksheet presentation specification
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+import { getFinalExamScheduleForPaper } from '../../../../dateSheetFinalExam2026.js'
 
 /**
  * Creates presentation specification for an Early Years paper
@@ -10,6 +11,12 @@ export function buildWorksheetSpec(paper) {
   if (!paper) return null
 
   const isUrdu = paper.language === 'urdu' || paper.subject === 'urdu'
+  const schedule = getFinalExamScheduleForPaper(paper.classStage, paper.subject)
+  const sourceHeaderTotal = paper.headerSource?.totalMarks ?? paper.totalMarksSource?.headerTotal ?? null
+  const listedQuestionTotal = (paper.questions || []).reduce((sum, q) => sum + (Number(q?.marks) || 0), 0)
+  const derivedTotal = sourceHeaderTotal == null && !paper.totalMarksSource?.hasConflict && listedQuestionTotal > 0
+    ? listedQuestionTotal
+    : sourceHeaderTotal
 
   return {
     paperId: paper.id,
@@ -48,9 +55,10 @@ export function buildWorksheetSpec(paper) {
       campus: paper.headerSource?.campus || 'Sharif Chowk, Rayya Khas, Narowal',
       classDisplayName: paper.classDisplayName || paper.classStage?.toUpperCase(),
       subjectDisplayName: paper.subject?.toUpperCase(),
-      totalMarks: paper.headerSource?.totalMarks ?? (paper.totalMarksSource?.headerTotal ?? null),
-      examDate: paper.headerSource?.examDate || '',
-      timeAllowed: paper.headerSource?.timeAllowed || '',
+      totalMarks: derivedTotal,
+      totalMarksAuthority: sourceHeaderTotal == null && derivedTotal != null ? 'derived-from-explicit-question-marks' : 'source-header',
+      examDate: paper.headerSource?.examDate || schedule?.date || '',
+      timeAllowed: paper.headerSource?.timeAllowed || schedule?.timeAllowed || '',
       showNameRollNo: true
     },
 

@@ -10,7 +10,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT02_URDU_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "1",
@@ -22,10 +22,10 @@
         "totalMarks": 50,
         "session": "2026-2027",
         "paperCode": "FT26-1-URDU",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-02"
       },
-      "sourceTotalNote": "Inferred from five questions marked 10 each.",
+      "sourceTotalNote": "Five source questions are explicitly 10 marks each; total 50 is internally balanced.",
       "sourceContentSha256": "2451fd23872894614637526177174e9881f52cce76776051de66d405a028195a",
       "qaNotes": "preserve source, do not invent corrections:\n- Q2 contains the same letter sequence د+ر+ی+ا twice in the supplied source; retained.",
       "selectedQuestions": {
@@ -171,7 +171,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-1-countdown-mathematics",
@@ -1464,7 +1465,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT02_URDU_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "3",
@@ -1476,12 +1477,12 @@
         "totalMarks": 100,
         "session": "2026-2027",
         "paperCode": "FT26-3-URDU",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-02"
       },
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total is 100, while explicit section marks total 85. Missing 15 marks are not source-authorized and are not invented.",
       "sourceContentSha256": "1162e950a8bc5e97aae8cdbd41d75d4c9f1ffd2bcf8a49506fe6bd9ea76f832b",
-      "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.\nPRINT HOLD 2026-09-27: confirm the missing 15 marks / omitted section before printing.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -1649,7 +1650,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-3-science",
@@ -3719,7 +3721,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT02_URDU_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "5",
@@ -3731,10 +3733,10 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-5-URDU",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-02"
       },
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total 75; explicit question marks total 75 and are internally balanced.",
       "sourceContentSha256": "75f96ae93b25243875b67151248b1aa86b27acc0c3d8a6e17213f3cfeb2882a3",
       "qaNotes": "preserve source, do not invent corrections:\n- Q6 source heading included \"10*6\" though five questions are listed; treated as 10 marks to reconcile the stated 75.\n- Several Urdu phrases are garbled in source, especially Q6(3) and Q7; retained rather than guessed.",
       "selectedQuestions": {
@@ -3976,7 +3978,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-5-science",

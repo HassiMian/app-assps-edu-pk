@@ -1,4 +1,4 @@
-// paperTemplates.js — Visual Presets for ASSPS Paper Generator
+// paperTemplates.js â€” Visual Presets for ASSPS Paper Generator
 export const PAPER_TEMPLATES = [
   {
     id: 'academic',
@@ -11,7 +11,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#123b67',
     badgeText: '#ffffff',
     fontFamily: "'Times New Roman', serif",
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'modern',
@@ -24,7 +24,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#075985',
     badgeText: '#ffffff',
     fontFamily: 'Arial, sans-serif',
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'emerald',
@@ -37,7 +37,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#06695b',
     badgeText: '#ffffff',
     fontFamily: 'Calibri, sans-serif',
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'gold',
@@ -50,7 +50,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#9a6a00',
     badgeText: '#ffffff',
     fontFamily: "'Times New Roman', serif",
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'coral',
@@ -63,7 +63,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#c2410c',
     badgeText: '#ffffff',
     fontFamily: 'Georgia, serif',
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'violet',
@@ -76,7 +76,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#5b21b6',
     badgeText: '#ffffff',
     fontFamily: 'Georgia, serif',
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'minimal',
@@ -89,7 +89,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#18181b',
     badgeText: '#ffffff',
     fontFamily: "'Times New Roman', serif",
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
   {
     id: 'editorial',
@@ -102,7 +102,7 @@ export const PAPER_TEMPLATES = [
     badgeBg: '#334155',
     badgeText: '#ffffff',
     fontFamily: "'Times New Roman', serif",
-    urduFont: "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif",
+    urduFont: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif",
   },
 ]
 

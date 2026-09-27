@@ -62,10 +62,13 @@ export function buildRecoverySavedPapers(seed = {}) {
       selectedQuestions: { official_section: { questions: sections, marks: totalMarks } },
       editorSettings: {
         template: 'academic',
-        fontFamily: medium === 'urdu' ? "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif" : "'Times New Roman', Times, serif",
+        fontFamily: medium === 'urdu' ? "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif" : "'Times New Roman', Times, serif",
         fontSize: 13,
         headingSize: 14,
       },
+      printReadiness: paper.printReadiness || 'READY',
+      sourceTotalNote: paper.sourceTotalNote || (Array.isArray(paper.sourceNotes) ? paper.sourceNotes.join(' ') : ''),
+      qaNotes: paper.qaNotes || '',
       createdAt: now,
       updatedAt: now,
     }

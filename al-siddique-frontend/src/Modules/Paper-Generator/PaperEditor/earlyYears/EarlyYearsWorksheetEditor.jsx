@@ -52,10 +52,33 @@ export default function EarlyYearsWorksheetEditor({
   const hasConflict = currentPaper?.totalMarksSource?.hasConflict
   const hasAmbiguity = qaFindings.length > 0 && !hasConflict
 
-  const handlePrint = useCallback(() => {
+  const handlePrint = useCallback(async () => {
+    if (hasConflict) {
+      const headerTotal = currentPaper?.headerSource?.totalMarks ?? currentPaper?.totalMarksSource?.headerTotal ?? 'unknown'
+      const listedTotal = currentPaper?.totalMarksSource?.listedQuestionTotal ?? (currentPaper?.questions || []).reduce((sum, q) => sum + (Number(q?.marks) || 0), 0)
+      window.alert(`PRINT BLOCKED — marks conflict must be resolved first.\nHeader total: ${headerTotal}\nQuestion marks total: ${listedTotal}`)
+      return
+    }
     document.activeElement?.blur?.()
+    try {
+      if (document.fonts) {
+        if (currentPaper?.language === 'urdu' || currentPaper?.subject === 'urdu') {
+          await Promise.race([
+            Promise.all([
+              document.fonts.load("18px 'Jameel Noori Nastaleeq'"),
+              document.fonts.ready,
+            ]),
+            new Promise(resolve => setTimeout(resolve, 2000)),
+          ])
+        } else {
+          await document.fonts.ready
+        }
+      }
+    } catch (error) {
+      console.warn('Early Years print font preload warning:', error)
+    }
     requestAnimationFrame(() => window.print())
-  }, [])
+  }, [hasConflict, currentPaper])
 
   return (
     <div
