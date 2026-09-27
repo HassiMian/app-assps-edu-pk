@@ -44,7 +44,7 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor }) {
         <th style={{ width:'8%', border:`1px solid ${themeColor}88`, padding:5 }}>#</th>
         <th colSpan={maxOptions} style={{ border:`1px solid ${themeColor}88`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'سوال اور اختیارات':'Question & Options'}</th>
       </tr></thead>
-      <tbody>{rows.map(row => <React.Fragment key={row.number}>
+      <tbody>{rows.map(row => <Fragment key={row.number}>
         <tr style={{ breakInside:'avoid' }}>
           <td rowSpan={2} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontWeight:800, verticalAlign:'top' }}>{row.number}</td>
           <td colSpan={maxOptions} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px ${7*fs}px`, fontWeight:800, textAlign:isUrdu?'right':'left' }}>{row.prompt}</td>
@@ -52,7 +52,7 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor }) {
         <tr style={{ breakInside:'avoid' }}>
           {Array.from({length:maxOptions},(_,i)=><td key={i} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', verticalAlign:'top', overflowWrap:'break-word' }}>{row.options[i] ? <><b dir="ltr">{row.options[i].label})</b> {row.options[i].text}</> : ''}</td>)}
         </tr>
-      </React.Fragment>)}</tbody>
+      </Fragment>)}</tbody>
     </table>
   }
   if (layout === 'classic') {
@@ -152,7 +152,7 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
 }
 
 export default function OfficialSectionRenderer({
-  questions = [], isUrdu = false, editMode = false, fs = 1, qFs = 13,
+  questions = [], isUrdu = false, editMode = false, fs = 1, qFs = 13, headingFs = null,
   themeColor = '#123b67', onQuestionChange, qBorderStyle = 'none',
   mcqLayout = 'matrix-table', shortLayout = '1-column', showAnsLines = false,
   showSectionLine = true, urdLineH = 2, engLineH = 1.5, letterSp = 0,
@@ -185,7 +185,7 @@ export default function OfficialSectionRenderer({
           <textarea aria-label={`Question ${ordinal} content`} value={section.content||''} onChange={e=>onQuestionChange?.(section.id,{content:e.target.value})} style={{ width:'100%', boxSizing:'border-box', minHeight:Math.max(82,String(section.content||'').split('\n').length*20), resize:'vertical', border:`1px solid ${themeColor}55`, borderRadius:5, padding:7, font:'inherit', lineHeight:isUrdu?urdLineH:engLineH, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}/>
         </div>}
         <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{ display:'grid', gridTemplateColumns:isUrdu?'72px minmax(0,1fr)':'minmax(0,1fr) 72px', alignItems:'center', gap:8, paddingBottom:`${4*fs}px`, marginBottom:`${6*fs}px`, borderBottom:showSectionLine?`2px solid ${themeColor}`:'none', direction:'ltr' }}>
-          <div data-question-heading style={{ gridColumn:isUrdu?2:1, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontWeight:900, fontSize:`${Math.max(qFs+1,13)}px` }}>{displayHeading}</div>
+          <div data-question-heading style={{ gridColumn:isUrdu?2:1, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontWeight:900, fontSize:`${Math.max(Number(headingFs || 0), qFs + 1, 13)}px` }}>{displayHeading}</div>
           {marksLabel ? <div data-marks-badge style={{ gridColumn:isUrdu?1:2, direction:'ltr', textAlign:'center', border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 5px', color:themeColor, fontWeight:800, fontSize:`${Math.max(10,qFs-2)}px`, whiteSpace:'nowrap' }}>{marksLabel}</div> : <span/>}
         </div>
         {parts.length ? parts.map((part,partIndex)=>part.type==='marker'
