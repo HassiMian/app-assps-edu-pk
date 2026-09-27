@@ -9,16 +9,23 @@ export default function CountingWritingGrid({
   showGuideNumbers = false
 }) {
   const totalCells = countTo || (gridColumns * (gridRows || 5))
+  // Dense counting tasks (e.g. 1–50) should remain child-writable without
+  // wasting an entire extra A4 side. Ten columns still leave ~17–18mm per
+  // cell on A4, which is comfortable for two-digit answers.
+  const resolvedColumns = countTo >= 40 ? 10 : gridColumns
+  const resolvedCellHeightMm = countTo >= 40 ? 11 : LAYOUT_TOKENS.childResponse.boxGridCellSizeMm
+  const resolvedGap = countTo >= 40 ? '4px' : '6px'
 
   return (
     <div
       className="early-years-counting-grid"
       data-testid="counting-writing-grid"
+      data-count-to={countTo}
       style={{
         display: 'grid',
-        gridTemplateColumns: `repeat(${gridColumns}, minmax(0, 1fr))`,
-        gap: '6px',
-        margin: '12px 0'
+        gridTemplateColumns: `repeat(${resolvedColumns}, minmax(0, 1fr))`,
+        gap: resolvedGap,
+        margin: countTo >= 40 ? '7px 0' : '12px 0'
       }}
     >
       {Array.from({ length: totalCells }).map((_, idx) => (
@@ -27,8 +34,8 @@ export default function CountingWritingGrid({
           className="counting-cell"
           data-cell-idx={idx}
           style={{
-            height: LAYOUT_TOKENS.childResponse.boxGridCellSizeMm + 'mm',
-            minHeight: '38px',
+            height: resolvedCellHeightMm + 'mm',
+            minHeight: countTo >= 40 ? '34px' : '38px',
             border: '1.5px solid #222',
             borderRadius: '6px',
             background: '#fff',

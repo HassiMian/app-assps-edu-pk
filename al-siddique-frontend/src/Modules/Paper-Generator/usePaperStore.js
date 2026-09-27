@@ -13,7 +13,7 @@ const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
-const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V15'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V16_LAYOUT_RECOVERY'
 const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V3'
 
 const SEED_TYPE_MAP = {
@@ -342,33 +342,20 @@ function withOfficialExamPaperSeed(store) {
  const upgraded = savedPapers.map(existing => {
   const seedPaper = seedById.get(String(existing?.id || ''))
   if (!seedPaper) return existing
-  if (existing.documentFormat !== 'official-v12') {
-   const legacySize = Number(existing.editorSettings?.fontSize || 0)
-   const legacyHeadingSize = Number(existing.editorSettings?.headingSize || 0)
-   if (legacySize > 11 && existing.editorSettings?.fontFamily) return existing
-   styled += 1
-   return {
-    ...existing,
-    editorSettings: {
-     ...(existing.editorSettings || {}),
-     fontFamily: existing.editorSettings?.fontFamily || "'Times New Roman', Times, serif",
-     fontSize: legacySize > 11 ? legacySize : 13,
-     headingSize: legacyHeadingSize > 12 ? legacyHeadingSize : 14,
-    },
-   }
-  }
+
+  // The V13 teacher dataset is authoritative for official First Term papers.
+  // Rehydrate every known official ID from that source so stale local shapes
+  // (old `sections`, missing `official_section`, canonical-only migrations, etc.)
+  // cannot silently remove MCQs/tables or reorder academic content.
   const next = withReadableOfficialTypography(cloneJson(seedPaper))
-  const oldSections = Array.isArray(existing.sections) ? existing.sections : []
-  const nativeSections = next.selectedQuestions?.official_section?.questions || []
-  nativeSections.forEach((question, index) => {
-   const old = oldSections[index]
-   if (!old) return
-   question.heading = old.heading ?? question.heading
-   question.content = old.content ?? question.content
-   question.text = question.heading
-   question.textUrdu = next.config?.language === 'urdu' ? question.heading : ''
-  })
+  const nativeSections = cloneJson(next.selectedQuestions?.official_section?.questions || next.official_section || [])
   next.official_section = nativeSections
+  if (next.selectedQuestions?.official_section) {
+   next.selectedQuestions.official_section.questions = nativeSections
+  }
+
+  // Preserve only user-facing identity/timestamps. Presentation resets to the
+  // known-good seed defaults; the editor can then persist deliberate changes.
   next.name = existing.name || next.name
   next.createdAt = existing.createdAt || next.createdAt
   next.updatedAt = new Date().toISOString()
