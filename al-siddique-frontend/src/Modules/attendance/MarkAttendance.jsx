@@ -165,6 +165,7 @@ export default function MarkAttendance() {
  const [date, setDate] = useState(getPakistanDateString())
  const [students, setStudents] = useState([])
  const [attendance, setAttendance] = useState({})
+ const [savedStudentIds, setSavedStudentIds] = useState(() => new Set())
  const [loading, setLoading] = useState(false)
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
@@ -190,10 +191,12 @@ export default function MarkAttendance() {
  initialMarks[s.id] = attMap[s.id] || 'present'
  })
  setAttendance(initialMarks)
+ setSavedStudentIds(new Set(attList.map((row) => Number(row.student_id || row.id)).filter(Number.isFinite)))
  })
  .catch(() => {
  setStudents([])
  setAttendance({})
+ setSavedStudentIds(new Set())
  })
  .finally(() => setLoading(false))
  }
@@ -248,8 +251,11 @@ export default function MarkAttendance() {
  }), [attendance])
 
  const total = students.length
- const marked = Object.keys(attendance).length
+ const marked = students.filter((student) => savedStudentIds.has(Number(student.id))).length
  const attendanceRate = total > 0 ? Math.round((counts.present / total) * 100) : 0
+ const messageTone = /saved for .*rejected record/i.test(message)
+ ? C.amber
+ : (/rejected|failed|error/i.test(message) ? C.red : C.green)
 
  return (
  <div className="att-shell">
@@ -531,7 +537,7 @@ export default function MarkAttendance() {
  <div>
  <h2 style={{ color: '#f8fafc', fontSize: 18, fontWeight: 900, margin: 0 }}>{selectedClass} - Section {selectedSection}</h2>
  <p style={{ color: C.muted, margin: '6px 0 0', fontSize: 13 }}>
- {marked} marked out of {total} students. Current presence rate is {attendanceRate}%.
+ {marked} saved out of {total} students. Current draft presence rate is {attendanceRate}%.
  </p>
  </div>
  </div>
@@ -565,8 +571,8 @@ export default function MarkAttendance() {
  </Panel>
 
  {message && (
- <Panel accent={message.startsWith('Failed') ? C.red : C.green} style={{ padding: '16px 20px' }}>
- <div style={{ position: 'relative', zIndex: 1, color: message.startsWith('Failed') ? C.red : C.green, fontWeight: 900 }}>
+ <Panel accent={messageTone} style={{ padding: '16px 20px' }}>
+ <div style={{ position: 'relative', zIndex: 1, color: messageTone, fontWeight: 900 }}>
  {message}
  </div>
  </Panel>
@@ -608,6 +614,7 @@ export default function MarkAttendance() {
  const status = attendance[student.id] || 'present'
  const meta = statusMeta[status]
  const StatusIcon = meta.icon
+ const isSaved = savedStudentIds.has(Number(student.id))
 
  return (
  <tr key={student.id} className="att-row">
@@ -625,7 +632,7 @@ export default function MarkAttendance() {
  <td style={{ color: C.gold, fontWeight: 900 }}>{student.gr_number || student.gr || '-'}</td>
  <td>
  <span className="att-status-pill" style={{ color: meta.color, background: meta.bg, border: `1px solid ${meta.border}` }}>
- <StatusIcon size={14} style={{ marginRight: 6 }} /> {status}
+ <StatusIcon size={14} style={{ marginRight: 6 }} /> {status} {isSaved ? '• Saved' : '• Staged'}
  </span>
  </td>
  <td>
@@ -668,7 +675,7 @@ export default function MarkAttendance() {
  <Panel accent={C.green} style={{ padding: 22 }}>
  <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 12, color: C.muted, fontSize: 13, fontWeight: 700 }}>
  <Calendar size={17} color={C.green} />
- Attendance defaults to present when a class is loaded, then updates instantly as you mark each student.
+ Unsaved students default to a staged Present status for quick entry. A student counts as saved only after the server confirms the attendance record.
  </div>
  </Panel>
  </div>

@@ -270,13 +270,14 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     const rosterParams = [requestedIds]
     let pIdx = 2
     if (req.user?.role !== 'super_admin') {
-      if (supportsStudentTenant && tenantId) {
-        rosterSql += ` AND tenant_id = $${pIdx++}`
-        rosterParams.push(tenantId)
-      } else if (supportsStudentSchool && schoolId) {
-        rosterSql += ` AND school_id = $${pIdx++}`
-        rosterParams.push(schoolId)
-      }
+      // Use the exact same tenant/school visibility rule as GET /api/students.
+      // Previously attendance validation preferred tenant_id and ignored a valid
+      // school_id match when tenant_id was stale/missing, so a student could be
+      // visible in the active roster but rejected during save.
+      const rosterTenant = await tenantClause(req, { table: 'students', paramIndex: pIdx })
+      rosterSql += rosterTenant.clause
+      rosterParams.push(...rosterTenant.params)
+      pIdx = rosterTenant.nextIndex
     }
 
     const rosterResult = await client.query(rosterSql, rosterParams)
@@ -405,20 +406,15 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     }
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
-    const supportsStudentSchool = await hasColumn('students', 'school_id')
-    const supportsStudentTenant = await hasColumn('students', 'tenant_id')
 
     let studentSql = `SELECT id, name, gr_number, class, section, parent_phone FROM students WHERE LOWER(TRIM(gr_number)) = LOWER(TRIM($1)) AND is_active = true`
     const params = [gr_number]
     let idx = 2
     if (req.user?.role !== 'super_admin') {
-      if (supportsStudentTenant && tenantId) {
-        studentSql += ` AND tenant_id = $${idx++}`
-        params.push(tenantId)
-      } else if (supportsStudentSchool && schoolId) {
-        studentSql += ` AND school_id = $${idx++}`
-        params.push(schoolId)
-      }
+      const studentTenant = await tenantClause(req, { table: 'students', paramIndex: idx })
+      studentSql += studentTenant.clause
+      params.push(...studentTenant.params)
+      idx = studentTenant.nextIndex
     }
     studentSql += ' LIMIT 1'
     const studentRes = await query(studentSql, params)
