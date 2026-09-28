@@ -268,3 +268,19 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Production frontend build: PASS.
 - No production default-route switch or deployment was performed in this phase.
 - Next: prepare a controlled production-readiness decision gate using the accumulated semantic, render/print and real-route canary evidence; do not remove the legacy fallback until post-cutover rollback criteria are defined and verified.
+
+## Phase 17 — Machine-Checkable Canonical Cutover Readiness Gate (28 Sep 2026)
+- Added `canonicalCutoverReadiness.test.js` to encode cutover prerequisites as executable invariants rather than a manual checklist.
+- Static readiness requires: 43 canonical documents, 242/242 source/canonical sections, schemaVersion 3, zero semantic issues, zero warnings, zero unknown-preserved nodes.
+- Default official routing is explicitly required to remain `build` until a deliberate cutover phase.
+- Explicit canary must resolve all 43 pristine V13 papers through `word_editor` to `CANONICAL_V2`.
+- Academic content or total-marks mutation must still fail pristine validation and preserve the `LEGACY_CANVAS_V2` fallback.
+- Operational schedule-only `examDate` / `timeAllowed` changes remain canonical-safe and are carried into canonical metadata.
+- Legacy PaperEditor fallback file, Early Years route, Board Pattern route and legacy V12 route are required to remain available as rollback/protected paths.
+- Added `scripts/audit_canonical_cutover_readiness.mjs` as the full release-readiness runner.
+- The full runner executes: static/core readiness, all-43 render/static/print browser parity, real PaperGenerator all-43 canary routing, and production frontend build.
+- Fixed the readiness runner itself for Windows by launching the npm build through `ComSpec` instead of direct `npm.cmd` spawn.
+- Final full gate: static/core 84/84 PASS; render/static/print 43/43 PASS; real canary 43/43 PASS; production build PASS.
+- Machine result: `CANONICAL_CUTOVER_READINESS_READY`.
+- No default production route switch or production deployment was performed in this phase.
+- Next cutover, if executed, must preserve an immediate rollback path to stable `build` / legacy fallback and must not delete compatibility code in the same release.
