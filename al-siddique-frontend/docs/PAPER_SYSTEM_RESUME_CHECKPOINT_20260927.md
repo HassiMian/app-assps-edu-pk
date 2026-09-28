@@ -301,3 +301,17 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Production frontend build: PASS.
 - Final machine marker: `CANONICAL_CUTOVER_RELEASE_READY`.
 - Production deployment must be atomic and retain the live V3 backup plus an immediate server-side rollback path.
+
+## Phase 18 Production Deployment — COMPLETE (28 Sep 2026)
+- Application cutover commit deployed: `75f1fb468244f16957b0f78bfb33d3702df6be66`.
+- Previous production commit verified before switch: `999f9ceffdc550cfe63d477217cd126ce614e7eb`.
+- Deployment method: staged tar archive, SHA-256 verification, release-meta commit verification, nginx validation, atomic directory swap, automatic rollback on failure.
+- Deployment archive SHA-256: `8e177f488f1221ce9487bd766268fbba656805ae653ca4ac66bc61a1c2763584`.
+- Production HTTP: 200; release-meta HTTP: 200; live release-meta commit matches `75f1fb4...`.
+- Server rollback snapshots preserved:
+  - `/var/www/apex-os.bak-20260928-130312-v5`
+  - `/var/www/apex-os.old-20260928-130312-v5`
+- Post-deploy real production browser acceptance: 43/43 official V13 papers PASS in Canonical V2.
+- Post-deploy emergency rollback acceptance: `canonicalLegacy=1` opens stable Paper Workspace and renders zero canonical surfaces.
+- Production QA console errors: 0.
+- Production cutover status: `CANONICAL_V5_LIVE_VERIFIED`.
