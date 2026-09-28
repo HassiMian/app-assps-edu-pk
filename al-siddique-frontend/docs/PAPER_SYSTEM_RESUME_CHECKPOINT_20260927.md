@@ -224,3 +224,17 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Final focused migration/invariants/parity/rules/draft/structured/metadata regression: 81/81 PASS.
 - Production frontend build: PASS.
 - Production route remains unchanged.
+
+
+## Phase 14 — All-43 Canonical Render / Static / Print Parity Gate (28 Sep 2026)
+- Added tracked browser acceptance gate `canonicalAll43RenderPrintAcceptance.test.js` covering every canonical First Term paper.
+- Gate opens all 43 canonical documents in the real browser harness and verifies 242 canonical sections plus top-level canonical node structure.
+- Each paper is switched from edit mode to Done Editing/static mode before print checks.
+- Static screen text and print-media text are required to remain meaning-equivalent for every paper.
+- Gate rejects leaked `[object Object]`, `undefined` and `NaN` tokens, page errors, paper-resource console errors and horizontal paper overflow.
+- Urdu-script papers are required to retain RTL direction and the Jameel/Nastaliq/Urdu font stack.
+- Browser favicon navigation noise is isolated from paper-resource failures; font/API/image/CSS/paper resource errors remain hard failures.
+- Final all-43 browser result: 43/43 PASS.
+- Semantic parity remains 43 papers / 242 sections with 0 semantic issues and 0 unknown-preserved nodes.
+- Phase 13 granular structured-edit browser gate remains 12/12 PASS; focused core regression remains 81/81 PASS; production frontend build remains PASS.
+- Production routing is still unchanged. The next step is a controlled route-readiness/canary phase, not an unguarded production cutover.
