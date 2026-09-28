@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import CanonicalEditableText from './CanonicalEditableText.jsx'
 import CanonicalStaticNode from './CanonicalStaticNode.jsx'
+import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
 import CanonicalStructuredNodeEditor from './structured/CanonicalStructuredNodeEditor.jsx'
 import NodeStructureControls from './structured/components/NodeStructureControls.jsx'
 import AddStructuredNodeMenu from './structured/components/AddStructuredNodeMenu.jsx'
@@ -546,23 +547,22 @@ export default function CanonicalDocumentRenderer({
                                           </div>
                                         )}
                                       </td>
-                                      {resolvedNode.options?.map((opt, oIdx) => {
-                                        const optLabel = opt.displayLabel || opt.sourceLabel || opt.canonicalLabel || opt.label || String.fromCharCode(97 + oIdx)
-                                        return (
-                                          <td
-                                            key={opt.id || oIdx}
-                                            style={{
-                                              padding: '6px 8px',
-                                              borderRight: oIdx < (resolvedNode.options.length - 1) ? '1px solid #cbd5e1' : 'none',
-                                              verticalAlign: 'top',
-                                              width: `${Math.floor(45 / (resolvedNode.options.length || 3))}%`,
-                                            }}
-                                          >
-                                            <span style={{ fontWeight: 800, color: '#1e3a8a', marginRight: '4px' }}>({optLabel})</span>
+                                      {resolvedNode.options?.map((opt, oIdx) => (
+                                        <td
+                                          key={opt.id || oIdx}
+                                          style={{
+                                            padding: '6px 8px',
+                                            borderRight: oIdx < (resolvedNode.options.length - 1) ? '1px solid #cbd5e1' : 'none',
+                                            verticalAlign: 'top',
+                                            width: `${Math.floor(45 / (resolvedNode.options.length || 3))}%`,
+                                          }}
+                                        >
+                                          <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '4px' }}>
+                                            <CanonicalOptionLabel option={opt} index={oIdx} direction={nodeDir} />
                                             <span>{opt.text || opt.textUrdu || ''}</span>
-                                          </td>
-                                        )
-                                      })}
+                                          </span>
+                                        </td>
+                                      ))}
                                     </tr>
                                   </tbody>
                                 </table>
@@ -639,15 +639,12 @@ export default function CanonicalDocumentRenderer({
                                       : { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginTop: '6px', paddingLeft: nodeDir === 'rtl' ? '0' : '24px', paddingRight: nodeDir === 'rtl' ? '24px' : '0', fontSize: '12px' }
                                   }
                                 >
-                                  {resolvedNode.options?.map((opt, idx) => {
-                                    const label = opt.displayLabel || opt.sourceLabel || opt.canonicalLabel || opt.label || String.fromCharCode(65 + idx)
-                                    return (
-                                      <div key={opt.id || idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                        <span style={{ fontWeight: 800, color: '#1e3a8a' }}>({label})</span>
-                                        <span>{opt.text || opt.textUrdu || ''}</span>
-                                      </div>
-                                    )
-                                  })}
+                                  {resolvedNode.options?.map((opt, idx) => (
+                                    <div key={opt.id || idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                      <CanonicalOptionLabel option={opt} index={idx} direction={nodeDir} />
+                                      <span>{opt.text || opt.textUrdu || ''}</span>
+                                    </div>
+                                  ))}
                                 </div>
                               )}
                             </div>

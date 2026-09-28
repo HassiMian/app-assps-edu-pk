@@ -1,5 +1,6 @@
 // CanonicalStaticNode.jsx — Renders Read-Only Specialized Nodes in B3 (Rules 6, 7, 8, 9, 10, 11, 12, 13, 14)
 import React from 'react'
+import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
 
 export default function CanonicalStaticNode({ node, direction = 'auto' }) {
   if (!node) return null
@@ -64,14 +65,12 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
         }}
       >
         {node.options.map((opt, idx) => {
-          // Label priority: displayLabel -> sourceLabel -> canonicalLabel -> label (Rule 8)
-          const label = opt.displayLabel || opt.sourceLabel || opt.canonicalLabel || opt.label || String.fromCharCode(65 + idx)
           const optText = opt.text || opt.textUrdu || ''
           const optDir = opt.direction || dir
 
           return (
             <div key={opt.id || idx} dir={optDir} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ fontWeight: 800, color: '#1e3a8a' }}>({label})</span>
+              <CanonicalOptionLabel option={opt} index={idx} direction={optDir} />
               <span>{optText}</span>
             </div>
           )

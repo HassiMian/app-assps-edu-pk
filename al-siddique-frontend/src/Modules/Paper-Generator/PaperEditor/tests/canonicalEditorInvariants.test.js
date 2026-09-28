@@ -37,14 +37,22 @@ const v13DatasetPath = path.resolve(__dirname, '../../seed-data/official-first-t
 const v13Dataset = JSON.parse(fs.readFileSync(v13DatasetPath, 'utf-8'))
 
 test('INVARIANT A (Rule 44): 100 typed characters causes 0 full document clones and 0 canonical baseline mutations', () => {
-  const doc = canonicalCorpus[0]
+  const doc = canonicalCorpus.find(candidate => {
+    const working = new EditorWorkingStore(candidate).getWorkingDocument()
+    return working.sections.some(section =>
+      (section.nodeOverlays || []).some(node => Object.keys(node.editableFields || {}).length > 0)
+    )
+  })
+  assert.ok(doc, 'Corpus must contain at least one text-editable canonical node')
   const preHash = crypto.createHash('sha256').update(JSON.stringify(doc)).digest('hex')
 
   const store = new EditorWorkingStore(doc)
   const workingDoc = store.getWorkingDocument()
 
-  const firstSec = workingDoc.sections[0]
-  const firstNode = firstSec.nodeOverlays[0]
+  const firstSec = workingDoc.sections.find(section =>
+    (section.nodeOverlays || []).some(node => Object.keys(node.editableFields || {}).length > 0)
+  )
+  const firstNode = firstSec.nodeOverlays.find(node => Object.keys(node.editableFields || {}).length > 0)
   const fieldName = Object.keys(firstNode.editableFields)[0]
   const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, firstSec.id, firstNode.nodeId, fieldName)
 
@@ -83,15 +91,26 @@ test('INVARIANT A (Rule 44): 100 typed characters causes 0 full document clones 
 })
 
 test('INVARIANT B (Rule 49): Typing in Node A does NOT cause renders or updates in neighboring Node B', () => {
-  const doc = canonicalCorpus[0]
-  const store = new EditorWorkingStore(doc)
+  let selected = null
+  for (const candidate of canonicalCorpus) {
+    const candidateStore = new EditorWorkingStore(candidate)
+    const candidateWorking = candidateStore.getWorkingDocument()
+    const candidateSection = candidateWorking.sections.find(section =>
+      (section.nodeOverlays || []).filter(node => node.editableFields?.stem).length >= 2
+    )
+    if (candidateSection) {
+      selected = { doc: candidate, sectionId: candidateSection.id }
+      break
+    }
+  }
+
+  assert.ok(selected, 'Corpus must contain a section with at least 2 stem-editable nodes')
+  const store = new EditorWorkingStore(selected.doc)
   const workingDoc = store.getWorkingDocument()
-
-  const sec = workingDoc.sections[0]
-  assert.ok(sec.nodeOverlays.length >= 2, 'Section must have at least 2 nodes')
-
-  const nodeA = sec.nodeOverlays[0]
-  const nodeB = sec.nodeOverlays[1]
+  const sec = workingDoc.sections.find(section => section.id === selected.sectionId)
+  const editableStemNodes = sec.nodeOverlays.filter(node => node.editableFields?.stem)
+  const nodeA = editableStemNodes[0]
+  const nodeB = editableStemNodes[1]
 
   const fieldKeyA = buildFieldKey(workingDoc.baseCanonicalDocumentId, sec.id, nodeA.nodeId, 'stem')
   const baselineBText = nodeB.editableFields.stem.baselinePlainText

@@ -21,16 +21,38 @@ export function parseMcqSection(content, context = {}) {
   const sectionId = context.sectionId || 'sec'
   const direction = context.direction || DocumentDirection.AUTO
 
-  // Match question start boundaries
-  // If numeric boundaries exist (1., 2., i., ii., Q1.), questions are strictly numeric/Roman
-  const hasNumeric = /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[\.\)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/m.test(content)
-  const lineRegex = hasNumeric
-    ? /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[\.\)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/gm
-    : /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[الف-ي])[\.\)\-:]|\([0-9]+\)|\([الف-ي]\))[ \t]+/gm
+  // Match question-start boundaries without confusing option rows for questions.
+  // Important source forms:
+  //   1. Question text          -> real question boundary
+  //   (1) option (2) option    -> NOT a question boundary
+  //   الف) Question text       -> Urdu question boundary
+  //   ☐ الف) option            -> NOT a question boundary
+  const numericQuestionStart = /^[ \t]*(?:(?:Q\s*\d+|[0-9]+|[ivxIVX]+)[\.\)\-:]|\([0-9]+\)|\([ivxIVX]+\))[ \t]+/
+  const urduQuestionStart = /^[ \t]*(?:(?:الف|ا|ب|ج|د|ہ|و|ز|ح)[\.\)\-:]|\((?:الف|ا|ب|ج|د|ہ|و|ز|ح)\))[ \t]+/
+  const lineEntries = []
+  let cursor = 0
+  for (const rawLine of content.split('\n')) {
+    lineEntries.push({ index: cursor, line: rawLine })
+    cursor += rawLine.length + 1
+  }
+
+  const isNumericOptionRow = (line = '') => {
+    const tokens = String(line).match(/\([1-8]\)/g) || []
+    return tokens.length >= 2
+  }
+  const isCheckboxOptionRow = (line = '') => /^\s*☐/.test(String(line))
+
+  const numericCandidates = lineEntries
+    .map(entry => ({ ...entry, match: entry.line.match(numericQuestionStart) }))
+    .filter(entry => entry.match && !isNumericOptionRow(entry.line) && !isCheckboxOptionRow(entry.line))
+  const hasNumericQuestions = numericCandidates.length > 0
   const matches = []
-  let match
-  while ((match = lineRegex.exec(content)) !== null) {
-    matches.push({ index: match.index, text: match[0] })
+
+  for (const entry of lineEntries) {
+    if (isCheckboxOptionRow(entry.line) || isNumericOptionRow(entry.line)) continue
+    const boundary = entry.line.match(hasNumericQuestions ? numericQuestionStart : urduQuestionStart)
+    if (!boundary) continue
+    matches.push({ index: entry.index + boundary.index, text: boundary[0] })
   }
 
   // If no numbered lines found, treat entire content as 1 item
@@ -123,13 +145,13 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
   const options = []
 
   let foundOptions = false
-  const optLetters = ['A', 'B', 'C', 'D', 'E', 'F']
+  const optLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
   // Patterns for option markers:
   // a) / A) / (a) / a.
   // الف) / ب) / ج) / د)
   // 1) / 2) / 3) / (1)
-  const optMarkerRegex = /(?:^|[ \t]+)(?:☐|\(T\/F\)|\[\s*\])?\s*(?:([a-dA-D]|الف|ب|ج|د|[1-4])[\.\)\-:]|\(([a-dA-D]|الف|ب|ج|د|[1-4])\))[ \t]+/g
+  const optMarkerRegex = /(?:^|[ \t]+)(?:☐|\(T\/F\)|\[\s*\])?\s*(?:([a-dA-D]|الف|ا|ب|ج|د|ہ|و|ز|ح|[1-8])[\.\)\-:]|\(([a-dA-D]|الف|ا|ب|ج|د|ہ|و|ز|ح|[1-8])\))[ \t]+/g
 
   for (let lIdx = 0; lIdx < lines.length; lIdx++) {
     const line = lines[lIdx].trim()
@@ -218,7 +240,7 @@ function parseSingleMcqBlock(rawText, nodeId, defaultDirection) {
 
   // Strip question number prefix from stem if present
   let stemText = stemLines.join(' ')
-  stemText = stemText.replace(/^[ \t]*(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[a-zA-Z]|[الف-ي])[\.\)\-:][ \t]*/, '').trim()
+  stemText = stemText.replace(/^[ \t]*(?:Q\s*\d+|[0-9]+|[ivxIVX]+|[a-zA-Z]|الف|ا|ب|ج|د|ہ|و|ز|ح)[\.\)\-:][ \t]*/, '').trim()
 
   // Ensure at least 2 options for valid MCQ contract
   if (options.length < 2) {

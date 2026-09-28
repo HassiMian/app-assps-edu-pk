@@ -102,3 +102,19 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Deterministic reconciliation check PASS and production frontend build PASS.
 - No production route switch in this phase. Official First Term papers remain on stable Paper Workspace (`build`) until Canonical shadow parity passes.
 - Next phase: all-43 shadow parity between live Paper Workspace and Canonical V2; do not duplicate more structured editor logic inside `OfficialSectionRenderer`.
+
+## Phase 6 — V5 Shadow Parity / RTL Canonicalization (28 Sep 2026)
+- Branch: `feature/paper-system-v5-shadow-parity-20260928`; production route remains unchanged.
+- Canonical migration now delegates section classification to the same `inferOfficialSectionKind` used by the live Paper Workspace, removing classifier drift.
+- Hardened MCQ migration so numeric/checkbox option rows are not mistaken for question boundaries and source option labels up to the supported Urdu/numeric set are preserved.
+- Fixed the Class 6 English source case `W. F. Holmes`: the option parser no longer splits the author name at `F.`; all live-vs-canonical MCQ sections now report 0 mismatches.
+- Added shared `CanonicalOptionLabel` renderer so canonical Table, Classic, Grid and static MCQ presentations use the same label/separator/text model.
+- Urdu option punctuation is rendered semantically as label + closing bracket + option text, preventing bidi bracket movement and eliminating renderer-specific `(label)` formatting.
+- Reconciled the 43-paper canonical corpus and reference lock deterministically; repeated reconciliation is byte-stable.
+- Updated editor invariant fixtures to select genuinely text-editable canonical nodes instead of assuming the first node is a rich-text stem.
+- Focused canonical/migration/Urdu/normalization regression: 52/52 PASS.
+- Paper-system rule regression: 12/12 PASS.
+- Live-vs-canonical MCQ shadow probe: 0 mismatched sections.
+- Production frontend build: PASS.
+- No source paper, Question Bank, Daily Diary, Lesson Plans or Early Years authority was deleted or rewritten.
+- Next: expand shadow parity beyond MCQs to all semantic section kinds and only consider a route switch after the all-43 parity gate is clean.

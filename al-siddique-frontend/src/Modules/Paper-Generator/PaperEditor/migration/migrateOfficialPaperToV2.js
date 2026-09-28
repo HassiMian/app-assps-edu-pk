@@ -30,6 +30,7 @@ import { parseTables } from './semanticParsers/parseTables.js'
 import { parseFillBlanks } from './semanticParsers/parseFillBlanks.js'
 import { parseTrueFalse } from './semanticParsers/parseTrueFalse.js'
 import { parseVerticalMath } from './semanticParsers/parseVerticalMath.js'
+import { inferOfficialSectionKind } from '../../officialSectionSemantics.js'
 
 export const MIGRATION_ENGINE_VERSION = '2.0.0-b2'
 export const MIGRATION_BASELINE_COMMIT = '6eea6773d3cf8166aee3ef80a7acc3a71847ea2c'
@@ -294,41 +295,22 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
  */
 function selectParserForSection(section, paper) {
   const h = section.heading || ''
-  const c = section.content || ''
+  const kind = inferOfficialSectionKind(section)
 
-  // 1. Vertical Math: Class 1 Countdown addition/subtraction sums
+  // Canonical migration must use the same section classifier as the live Paper Workspace.
+  // The semantic parser remains independent, but classifier drift is not allowed.
+  if (kind === 'mcq') return parseMcqSection
+  if (kind === 'true_false') return parseTrueFalse
+  if (kind === 'fill_blank') return parseFillBlanks
+  if (kind === 'table' || kind === 'pair_table' || kind === 'matching') return parseTables
+  if (kind === 'vertical_math') return parseVerticalMath
+
+  // Preserve the explicit Class 1 Countdown vertical-arithmetic rule.
   if (paper.id.includes('countdown') && /Solve\s+the\s+sums/i.test(h)) {
     return parseVerticalMath
   }
 
-  // 2. Tables & Matching: markdown table syntax
-  if (/\|.*\|/.test(c)) {
-    return parseTables
-  }
-
-  // 3. Fill Blanks:
-  // Heading has "خالی جگہ" or "Fill in the blank"
-  if (/fill\s+in\s+the\s+blanks?|خالی\s+جگہ/i.test(h)) {
-    return parseFillBlanks
-  }
-
-  // 4. True / False:
-  if (
-    /true\s*(?:or|\/)\s*false|درست\s*(?:\/|\s*یا\s*)\s*غلط|صحیح\s*(?:\/|\s*یا\s*)\s*غلط/i.test(h) ||
-    /\bT\s+for\s+True\b/i.test(h) ||
-    /Write\s+True\s+or\s+False/i.test(c)
-  ) {
-    return parseTrueFalse
-  }
-
-  // 5. MCQ:
-  if (
-    /multiple\s+choice|mcqs?|درست\s+جواب|صحیح\s+جواب|انتخاب|choose\s+the\s+(?:best|correct)\s+answer|tick\s+the\s+correct\s+option|tick\s+the\s+correct\s+answers|circle\s+the\s+correct\s+answer|select\s+the\s+correct\s+answer/i.test(h)
-  ) {
-    return parseMcqSection
-  }
-
-  // 6. Question List (short, long, essay, application, letter, translation, definition, banners)
+  // Question List handles short/long/essay/application/letter/translation/definition/banners.
   return parseQuestionList
 }
 
