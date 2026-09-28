@@ -238,3 +238,18 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Semantic parity remains 43 papers / 242 sections with 0 semantic issues and 0 unknown-preserved nodes.
 - Phase 13 granular structured-edit browser gate remains 12/12 PASS; focused core regression remains 81/81 PASS; production frontend build remains PASS.
 - Production routing is still unchanged. The next step is a controlled route-readiness/canary phase, not an unguarded production cutover.
+
+
+## Phase 15 — Controlled Canonical Route Canary (28 Sep 2026)
+- Added a hidden, explicit top-level canary policy for official First Term routing; default production routing remains unchanged.
+- Normal official V13/V12/First Term loads still route to the stable `build` Paper Workspace.
+- When and only when `canonicalCanary=1` is present, pristine official V13 papers may enter the existing `word_editor` chain.
+- No duplicate router was introduced: `PaperEditorRouter` remains the final authority and reuses its existing pristine-V13 guard/migration.
+- All 43 pristine operational V13 papers pass the canary chain and resolve to `CANONICAL_V2` with schemaVersion 3.
+- Modified/user-mutated V13 payloads fail the pristine check and fall back to `LEGACY_CANVAS_V2`; source edits are therefore not silently normalized.
+- Legacy V12 papers remain on `build` even under canary. Early Years remains `early_years`; board-pattern remains `board_pattern`.
+- Existing targetTab requests still cannot bypass default official routing when the canary policy is off.
+- Route/canary/emergency/Urdu/seven-paper acceptance: 35/35 PASS.
+- Production frontend build: PASS.
+- Phase 14 all-43 render/static/print parity remains 43/43 PASS.
+- This phase adds canary capability only; it does not flip the default production route.

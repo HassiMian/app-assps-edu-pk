@@ -44,8 +44,10 @@ export function isUrduScriptPaper(paper = {}) {
   )
 }
 
-export function resolvePaperRoute(paper, targetTab = null) {
+export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
   if (!paper) return targetTab || 'build'
+
+  const allowOfficialCanonicalCanary = routingPolicy?.officialCanonicalCanary === true
 
   const id = String(paper.id || '')
   const corpusId = String(paper.corpusId || '')
@@ -65,10 +67,13 @@ export function resolvePaperRoute(paper, targetTab = null) {
   const isOfficialV12 = paper.documentFormat === 'official-v12'
   const isOfficialFirstTerm = id.startsWith('official-first-term-') || id.includes('first-term-2026')
 
-  // Official First Term papers have one stable exam-day renderer: Paper Studio.
-  // Do not let an explicit Word-Editor target bypass the source-ordered semantic
-  // renderer and reintroduce the broken marks/MCQ/RTL presentation.
-  if (isOfficialV13 || isOfficialV12 || isOfficialFirstTerm) return 'build'
+  // Official First Term papers remain on the stable Paper Workspace by default.
+  // Phase 15 adds only an explicit hidden canary path; PaperEditorRouter still performs
+  // the final pristine-V13/canonical guard and falls back safely for modified payloads.
+  if (isOfficialV13 || isOfficialV12 || isOfficialFirstTerm) {
+    if (allowOfficialCanonicalCanary && (isOfficialV13 || isCanonicalV2)) return 'word_editor'
+    return 'build'
+  }
 
   // Explicit editor choice is respected for non-official/custom documents.
   if (targetTab) return targetTab
