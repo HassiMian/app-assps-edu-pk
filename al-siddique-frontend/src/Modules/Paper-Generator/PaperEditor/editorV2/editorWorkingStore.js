@@ -3,6 +3,12 @@ import {
   computeFieldDirtyState,
   computeCanonicalFingerprint,
   extractPlainTextFromTiptap,
+  SUPPORTED_FONTS,
+  SUPPORTED_SIZES,
+  SUPPORTED_COLORS,
+  SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
 } from './editorProjection.js'
 import {
   createEditorWorkingDocument,
@@ -40,6 +46,31 @@ import {
   getEffectiveSectionTotal,
   getEffectivePaperTotal,
 } from './workingMarksEngine.js'
+
+const STRUCTURED_FONT_VALUES = new Set(SUPPORTED_FONTS.map(font => font.value))
+const STRUCTURED_SIZE_VALUES = new Set(SUPPORTED_SIZES.map(size => `${size}pt`))
+const STRUCTURED_ALIGN_VALUES = new Set(['left', 'center', 'right', 'justify'])
+const STRUCTURED_DIRECTION_VALUES = new Set(['ltr', 'rtl'])
+const STRUCTURED_WEIGHT_VALUES = new Set(['normal', 'bold', '400', '700'])
+const STRUCTURED_STYLE_VALUES = new Set(['normal', 'italic'])
+const STRUCTURED_DECORATION_VALUES = new Set(['none', 'underline', 'line-through'])
+
+function sanitizeStructuredFieldStyle(input = {}) {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) return {}
+  const out = {}
+  if (STRUCTURED_FONT_VALUES.has(input.fontFamily)) out.fontFamily = input.fontFamily
+  if (STRUCTURED_SIZE_VALUES.has(input.fontSize)) out.fontSize = input.fontSize
+  if (STRUCTURED_WEIGHT_VALUES.has(input.fontWeight)) out.fontWeight = input.fontWeight
+  if (STRUCTURED_STYLE_VALUES.has(input.fontStyle)) out.fontStyle = input.fontStyle
+  if (STRUCTURED_DECORATION_VALUES.has(input.textDecoration)) out.textDecoration = input.textDecoration
+  if (SUPPORTED_COLORS.includes(input.color)) out.color = input.color
+  if (SUPPORTED_HIGHLIGHTS.includes(input.backgroundColor)) out.backgroundColor = input.backgroundColor
+  if (STRUCTURED_ALIGN_VALUES.has(input.textAlign)) out.textAlign = input.textAlign
+  if (STRUCTURED_DIRECTION_VALUES.has(input.direction)) out.direction = input.direction
+  if (SUPPORTED_LINE_HEIGHTS.includes(input.lineHeight)) out.lineHeight = input.lineHeight
+  if (SUPPORTED_PARAGRAPH_SPACING.includes(input.paragraphSpacing)) out.paragraphSpacing = input.paragraphSpacing
+  return out
+}
 
 function applyFieldPatchToDoc(doc, fieldKey, patch) {
   const { sectionId, nodeId, fieldName } = parseFieldKey(fieldKey)
@@ -1119,6 +1150,49 @@ export class EditorWorkingStore {
     }
   }
 
+  getStructuredFieldStyle(controlKey) {
+    if (!controlKey) return {}
+    return {
+      ...(this._workingDoc.presentation?.structuredFieldStyles?.[controlKey] || {}),
+    }
+  }
+
+  setStructuredFieldStyle(controlKey, patch = {}) {
+    if (!controlKey || typeof controlKey !== 'string' || !controlKey.startsWith('structured::')) return false
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.structuredFieldStyles) {
+      this._workingDoc.presentation.structuredFieldStyles = {}
+    }
+
+    const current = this._workingDoc.presentation.structuredFieldStyles[controlKey] || {}
+    const merged = { ...current }
+    for (const [key, value] of Object.entries(patch || {})) {
+      if (value === null || value === undefined || value === '') delete merged[key]
+      else merged[key] = value
+    }
+    const sanitized = sanitizeStructuredFieldStyle(merged)
+
+    if (Object.keys(sanitized).length > 0) {
+      this._workingDoc.presentation.structuredFieldStyles[controlKey] = sanitized
+    } else {
+      delete this._workingDoc.presentation.structuredFieldStyles[controlKey]
+    }
+
+    this._workingDoc.presentation.isDirty = true
+    this._recomputeDocumentDirty()
+    this.publishDocumentChange()
+    return true
+  }
+
+  clearStructuredFieldStyle(controlKey) {
+    if (!controlKey || !this._workingDoc.presentation?.structuredFieldStyles?.[controlKey]) return false
+    delete this._workingDoc.presentation.structuredFieldStyles[controlKey]
+    this._workingDoc.presentation.isDirty = true
+    this._recomputeDocumentDirty()
+    this.publishDocumentChange()
+    return true
+  }
+
   setAnswerLines(nodeId, lines) {
     if (!nodeId) return
     if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
@@ -1246,6 +1320,7 @@ export class EditorWorkingStore {
         pageBorder: this._workingDoc.presentation.pageBorder || 'none',
         sectionLayoutOverrides: this._workingDoc.presentation.sectionLayoutOverrides || {},
         answerLinesByNode: this._workingDoc.presentation.answerLinesByNode || {},
+        structuredFieldStyles: this._workingDoc.presentation.structuredFieldStyles || {},
       },
     }
 
@@ -1433,6 +1508,10 @@ export class EditorWorkingStore {
           answerLinesByNode: {
             ...(candidateDoc.presentation.answerLinesByNode || {}),
             ...(compactDraft.presentationPatch.answerLinesByNode || {}),
+          },
+          structuredFieldStyles: {
+            ...(candidateDoc.presentation.structuredFieldStyles || {}),
+            ...(compactDraft.presentationPatch.structuredFieldStyles || {}),
           },
         })
       }

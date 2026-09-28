@@ -174,3 +174,51 @@ test('Phase 11 browser: general instructions and active-question spacing stay sc
   assert.strictEqual(await staticParagraph.evaluate(element => element.style.marginBottom), '6pt')
   assert.strictEqual(await staticParagraph.textContent(), originalText)
 })
+
+
+test('Phase 12 browser: MCQ option formatting is option-scoped and survives static rendering', async () => {
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-mcq-structured-editor .structured-text-input', { timeout: 10000 })
+
+  const options = page.locator('.canonical-mcq-structured-editor .structured-text-input')
+  assert.ok((await options.count()) >= 2)
+  const first = options.nth(0)
+  const second = options.nth(1)
+  const firstText = await first.inputValue()
+  const secondWeightBefore = await second.evaluate(element => element.style.fontWeight)
+
+  await first.click()
+  await page.locator('select[aria-label="Font Size"]').selectOption('16')
+  await page.getByTitle('Bold').click()
+  await page.getByTitle('Align Center').click()
+  await page.locator('select[aria-label="Line Height"]').selectOption('1.5')
+  await page.locator('select[aria-label="Paragraph Spacing"]').selectOption('6pt')
+
+  assert.strictEqual(await first.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await first.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await first.evaluate(element => element.style.textAlign), 'center')
+  assert.strictEqual(await first.evaluate(element => element.style.lineHeight), '1.5')
+  assert.strictEqual(await first.evaluate(element => element.style.marginBottom), '6pt')
+  assert.strictEqual(await first.inputValue(), firstText)
+  assert.strictEqual(await second.evaluate(element => element.style.fontWeight), secondWeightBefore)
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const staticOption = page.getByText(firstText, { exact: true }).last()
+  assert.strictEqual(await staticOption.count(), 1)
+  assert.strictEqual(await staticOption.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await staticOption.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await staticOption.evaluate(element => element.style.textAlign), 'center')
+  assert.strictEqual(await staticOption.evaluate(element => element.style.lineHeight), '1.5')
+  assert.strictEqual(await staticOption.evaluate(element => element.style.marginBottom), '6pt')
+})
+
+test('Phase 12 browser: Urdu MCQ edit mode uses semantic label then closing bracket', async () => {
+  const urduUrl = `http://localhost:${PORT}/b3-test.html?mode=doc__official-first-term-2026-class-7-social-studies`
+  await page.goto(urduUrl, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-mcq-structured-editor [data-canonical-option-label]', { timeout: 10000 })
+
+  const label = page.locator('.canonical-mcq-structured-editor [data-canonical-option-label][data-language="urdu"]').first()
+  assert.strictEqual(await label.count(), 1)
+  assert.strictEqual((await label.locator('[data-option-label-text]').textContent()).trim(), 'الف')
+  assert.strictEqual((await label.locator('[data-option-bracket]').textContent()).trim(), ')')
+})

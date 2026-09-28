@@ -26,6 +26,7 @@ export default function CanonicalPaperEditorMain({
 
   const [workingDoc, setWorkingDoc] = useState(() => store.getWorkingDocument())
   const [activeFieldKey, setActiveFieldKey] = useState(null)
+  const [activeStructuredKey, setActiveStructuredKey] = useState(null)
   const [isEditMode, setIsEditMode] = useState(true)
   const [zoomLevel, setZoomLevel] = useState(100)
   const [saveStatus, setSaveStatus] = useState('')
@@ -151,6 +152,7 @@ export default function CanonicalPaperEditorMain({
   // Handle field focus to ensure Tiptap interaction mode is set (Rule 19)
   const handleFocusField = useCallback((fieldKey) => {
     setActiveFieldKey(fieldKey)
+    setActiveStructuredKey(null)
     if (store.getWorkingDocument()?.session) {
       store.getWorkingDocument().session.activeInteractionMode = INTERACTION_MODE.TIPTAP
     }
@@ -192,6 +194,7 @@ export default function CanonicalPaperEditorMain({
 
   return (
     <StructuredFocusProvider
+      onActiveStructuredKeyChange={setActiveStructuredKey}
       onModeChange={(mode) => {
         if (store.getWorkingDocument()?.session) {
           store.getWorkingDocument().session.activeInteractionMode = mode
@@ -218,6 +221,7 @@ export default function CanonicalPaperEditorMain({
         isEditMode={isEditMode}
         onToggleEditMode={handleToggleEditMode}
         activeFieldKey={activeFieldKey}
+        activeStructuredKey={activeStructuredKey}
         onPrint={handlePrint}
       />
 

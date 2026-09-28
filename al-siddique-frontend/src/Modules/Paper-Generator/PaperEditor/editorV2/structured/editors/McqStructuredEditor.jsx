@@ -5,6 +5,7 @@
 
 import React from 'react'
 import StructuredTextInput from '../components/StructuredTextInput.jsx'
+import CanonicalOptionLabel from '../../CanonicalOptionLabel.jsx'
 import StructuredItemControls from '../components/StructuredItemControls.jsx'
 import {
   cmdUpdateMcqOptionText,
@@ -110,16 +111,8 @@ export default function McqStructuredEditor({
               }}
             >
               {/* Option Label */}
-              <span
-                style={{
-                  fontWeight: 800,
-                  fontSize: '12px',
-                  color: '#1e3a8a',
-                  minWidth: '22px',
-                  userSelect: 'none',
-                }}
-              >
-                ({optLabel})
+              <span style={{ minWidth: '22px', userSelect: 'none' }}>
+                <CanonicalOptionLabel option={opt} index={idx} direction={optDir} />
               </span>
 
               {/* Editable Option Text */}
@@ -132,6 +125,7 @@ export default function McqStructuredEditor({
                   disabled={!isEditing}
                   controlKey={ctrlKey}
                   ariaLabel={`Option ${optLabel} text`}
+                  store={store}
                 />
               </div>
 

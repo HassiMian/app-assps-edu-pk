@@ -15,6 +15,7 @@ import {
   SUPPORTED_PARAGRAPH_SPACING,
 } from './CanonicalEditorExtensions.js'
 import { parseFieldKey } from './EditorFieldRegistry.js'
+import { parseStructuredControlKey } from './structured/structuredFocusHelpers.js'
 
 export default function CanonicalPaperRibbonToolbar({
   registry,
@@ -25,6 +26,7 @@ export default function CanonicalPaperRibbonToolbar({
   isEditMode = true,
   onToggleEditMode,
   activeFieldKey = null,
+  activeStructuredKey = null,
   onPrint = null,
 }) {
   const [, setSelectionRev] = useState(0)
@@ -63,7 +65,27 @@ export default function CanonicalPaperRibbonToolbar({
     commandFn(restoreAndFocus(activeEditor)).run()
   }
 
+  const isStructuredTarget = Boolean(activeStructuredKey)
+  const currentStructuredStyle = isStructuredTarget
+    ? (store?.getStructuredFieldStyle?.(activeStructuredKey) || {})
+    : {}
+
+  const setStructuredStyle = (patch) => {
+    if (!isStructuredTarget) return false
+    return Boolean(store?.setStructuredFieldStyle?.(activeStructuredKey, patch))
+  }
+
+  const toggleStructuredStyle = (key, activeValue, inactiveValue = null) => {
+    if (!isStructuredTarget) return false
+    const current = currentStructuredStyle?.[key]
+    return setStructuredStyle({ [key]: current === activeValue ? inactiveValue : activeValue })
+  }
+
   const setTextStyle = (attr, val) => {
+    if (isStructuredTarget) {
+      setStructuredStyle({ [attr]: val || null })
+      return
+    }
     if (!activeEditor) return
     const currentAttrs = activeEditor.getAttributes('textStyle') || {}
     const nextAttrs = { ...currentAttrs, [attr]: val || null }
@@ -75,11 +97,15 @@ export default function CanonicalPaperRibbonToolbar({
     }
   }
 
-  const currentTextStyle = activeEditor?.getAttributes('textStyle') || {}
+  const currentTextStyle = isStructuredTarget
+    ? currentStructuredStyle
+    : (activeEditor?.getAttributes('textStyle') || {})
   const currentBlockType = activeEditor?.isActive('heading') ? 'heading' : 'paragraph'
-  const currentBlockAttrs = activeEditor?.getAttributes(currentBlockType) || {}
-  const canUndo = Boolean(activeEditor?.can().undo())
-  const canRedo = Boolean(activeEditor?.can().redo())
+  const currentBlockAttrs = isStructuredTarget
+    ? currentStructuredStyle
+    : (activeEditor?.getAttributes(currentBlockType) || {})
+  const canUndo = !isStructuredTarget && Boolean(activeEditor?.can().undo())
+  const canRedo = !isStructuredTarget && Boolean(activeEditor?.can().redo())
 
   const toolBtnStyle = (isActive = false, disabled = false) => ({
     display: 'inline-flex',
@@ -115,14 +141,16 @@ export default function CanonicalPaperRibbonToolbar({
 
   const activeKey = activeFieldKey || registry?.getActiveFieldKey()
   const { sectionId: activeSectionId, nodeId: activeNodeId } = parseFieldKey(activeKey)
-  const targetSectionId = activeSectionId || workingDoc?.sections?.[0]?.id
+  const structuredTarget = parseStructuredControlKey(activeStructuredKey)
+  const targetSectionId = structuredTarget?.secId || activeSectionId || workingDoc?.sections?.[0]?.id
+  const targetNodeId = structuredTarget?.nodeId || activeNodeId
   const sectionOverrides = targetSectionId ? (pres.sectionLayoutOverrides?.[targetSectionId] || {}) : {}
 
   const isClass5Q1 = targetSectionId && targetSectionId.includes('class-5-english')
   const currentMcqLayout = sectionOverrides.mcqLayout || (isClass5Q1 ? 'table' : 'grid')
   const currentShortLayout = sectionOverrides.shortLayout || '1-column'
   const currentQuestionBorder = sectionOverrides.questionBorder || 'none'
-  const currentAnswerLines = activeNodeId ? (pres.answerLinesByNode?.[activeNodeId] || 0) : 0
+  const currentAnswerLines = targetNodeId ? (pres.answerLinesByNode?.[targetNodeId] || 0) : 0
 
   return (
     <header
@@ -268,8 +296,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Bold"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.toggleBold())}
-            style={toolBtnStyle(activeEditor?.isActive('bold'))}
+            onClick={() => isStructuredTarget ? toggleStructuredStyle('fontWeight', 'bold') : runCommand(c => c.toggleBold())}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.fontWeight === 'bold' : activeEditor?.isActive('bold'))}
           >
             <Bold size={14} />
           </button>
@@ -277,8 +305,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Italic"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.toggleItalic())}
-            style={toolBtnStyle(activeEditor?.isActive('italic'))}
+            onClick={() => isStructuredTarget ? toggleStructuredStyle('fontStyle', 'italic') : runCommand(c => c.toggleItalic())}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.fontStyle === 'italic' : activeEditor?.isActive('italic'))}
           >
             <Italic size={14} />
           </button>
@@ -286,8 +314,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Underline"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.toggleUnderline())}
-            style={toolBtnStyle(activeEditor?.isActive('underline'))}
+            onClick={() => isStructuredTarget ? toggleStructuredStyle('textDecoration', 'underline') : runCommand(c => c.toggleUnderline())}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.textDecoration === 'underline' : activeEditor?.isActive('underline'))}
           >
             <Underline size={14} />
           </button>
@@ -295,8 +323,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Strikethrough"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.toggleStrike())}
-            style={toolBtnStyle(activeEditor?.isActive('strike'))}
+            onClick={() => isStructuredTarget ? toggleStructuredStyle('textDecoration', 'line-through') : runCommand(c => c.toggleStrike())}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.textDecoration === 'line-through' : activeEditor?.isActive('strike'))}
           >
             <Strikethrough size={14} />
           </button>
@@ -304,8 +332,9 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Superscript"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.toggleSuperscript())}
-            style={toolBtnStyle(activeEditor?.isActive('superscript'))}
+            onClick={() => { if (!isStructuredTarget) runCommand(c => c.toggleSuperscript()) }}
+            disabled={isStructuredTarget}
+            style={toolBtnStyle(activeEditor?.isActive('superscript'), isStructuredTarget)}
           >
             <Superscript size={14} />
           </button>
@@ -313,8 +342,9 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Subscript"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.toggleSubscript())}
-            style={toolBtnStyle(activeEditor?.isActive('subscript'))}
+            onClick={() => { if (!isStructuredTarget) runCommand(c => c.toggleSubscript()) }}
+            disabled={isStructuredTarget}
+            style={toolBtnStyle(activeEditor?.isActive('subscript'), isStructuredTarget)}
           >
             <Subscript size={14} />
           </button>
@@ -322,7 +352,7 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Clear Formatting"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.unsetAllMarks())}
+            onClick={() => isStructuredTarget ? store?.clearStructuredFieldStyle?.(activeStructuredKey) : runCommand(c => c.unsetAllMarks())}
             style={toolBtnStyle(false)}
           >
             <RemoveFormatting size={14} />
@@ -345,8 +375,12 @@ export default function CanonicalPaperRibbonToolbar({
 
           <select
             aria-label="Highlight"
-            value={activeEditor?.getAttributes('highlight')?.color || ''}
-            onChange={e => e.target.value ? runCommand(c => c.setHighlight({ color: e.target.value })) : runCommand(c => c.unsetHighlight())}
+            value={isStructuredTarget ? (currentStructuredStyle.backgroundColor || '') : (activeEditor?.getAttributes('highlight')?.color || '')}
+            onChange={e => {
+              if (isStructuredTarget) setStructuredStyle({ backgroundColor: e.target.value || null })
+              else if (e.target.value) runCommand(c => c.setHighlight({ color: e.target.value }))
+              else runCommand(c => c.unsetHighlight())
+            }}
             style={{ ...selectStyle, width: '75px' }}
           >
             <option value="">Highlight</option>
@@ -362,8 +396,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Align Left"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.setTextAlign('left'))}
-            style={toolBtnStyle(activeEditor?.isActive({ textAlign: 'left' }))}
+            onClick={() => isStructuredTarget ? setStructuredStyle({ textAlign: 'left' }) : runCommand(c => c.setTextAlign('left'))}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.textAlign === 'left' : activeEditor?.isActive({ textAlign: 'left' }))}
           >
             <AlignLeft size={14} />
           </button>
@@ -371,8 +405,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Align Center"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.setTextAlign('center'))}
-            style={toolBtnStyle(activeEditor?.isActive({ textAlign: 'center' }))}
+            onClick={() => isStructuredTarget ? setStructuredStyle({ textAlign: 'center' }) : runCommand(c => c.setTextAlign('center'))}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.textAlign === 'center' : activeEditor?.isActive({ textAlign: 'center' }))}
           >
             <AlignCenter size={14} />
           </button>
@@ -380,8 +414,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Align Right"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.setTextAlign('right'))}
-            style={toolBtnStyle(activeEditor?.isActive({ textAlign: 'right' }))}
+            onClick={() => isStructuredTarget ? setStructuredStyle({ textAlign: 'right' }) : runCommand(c => c.setTextAlign('right'))}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.textAlign === 'right' : activeEditor?.isActive({ textAlign: 'right' }))}
           >
             <AlignRight size={14} />
           </button>
@@ -389,8 +423,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Justify"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.setTextAlign('justify'))}
-            style={toolBtnStyle(activeEditor?.isActive({ textAlign: 'justify' }))}
+            onClick={() => isStructuredTarget ? setStructuredStyle({ textAlign: 'justify' }) : runCommand(c => c.setTextAlign('justify'))}
+            style={toolBtnStyle(isStructuredTarget ? currentStructuredStyle.textAlign === 'justify' : activeEditor?.isActive({ textAlign: 'justify' }))}
           >
             <AlignJustify size={14} />
           </button>
@@ -398,8 +432,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Direction LTR"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.updateAttributes('paragraph', { dir: 'ltr' }).updateAttributes('heading', { dir: 'ltr' }))}
-            style={toolBtnStyle(false)}
+            onClick={() => isStructuredTarget ? setStructuredStyle({ direction: 'ltr' }) : runCommand(c => c.updateAttributes('paragraph', { dir: 'ltr' }).updateAttributes('heading', { dir: 'ltr' }))}
+            style={toolBtnStyle(isStructuredTarget && currentStructuredStyle.direction === 'ltr')}
           >
             <ArrowRight size={14} />
           </button>
@@ -407,8 +441,8 @@ export default function CanonicalPaperRibbonToolbar({
             type="button"
             title="Direction RTL (Urdu)"
             onMouseDown={e => e.preventDefault()}
-            onClick={() => runCommand(c => c.updateAttributes('paragraph', { dir: 'rtl' }).updateAttributes('heading', { dir: 'rtl' }))}
-            style={toolBtnStyle(false)}
+            onClick={() => isStructuredTarget ? setStructuredStyle({ direction: 'rtl' }) : runCommand(c => c.updateAttributes('paragraph', { dir: 'rtl' }).updateAttributes('heading', { dir: 'rtl' }))}
+            style={toolBtnStyle(isStructuredTarget && currentStructuredStyle.direction === 'rtl')}
           >
             <ArrowLeft size={14} />
           </button>
@@ -422,8 +456,12 @@ export default function CanonicalPaperRibbonToolbar({
             aria-label="Line Height"
             value={currentBlockAttrs.lineHeight || ''}
             onChange={e => {
-              if (!activeEditor) return
               const value = e.target.value || null
+              if (isStructuredTarget) {
+                setStructuredStyle({ lineHeight: value })
+                return
+              }
+              if (!activeEditor) return
               restoreAndFocus(activeEditor)
                 .updateAttributes('paragraph', { lineHeight: value })
                 .updateAttributes('heading', { lineHeight: value })
@@ -442,8 +480,12 @@ export default function CanonicalPaperRibbonToolbar({
             aria-label="Paragraph Spacing"
             value={currentBlockAttrs.paragraphSpacing || ''}
             onChange={e => {
-              if (!activeEditor) return
               const value = e.target.value || null
+              if (isStructuredTarget) {
+                setStructuredStyle({ paragraphSpacing: value })
+                return
+              }
+              if (!activeEditor) return
               restoreAndFocus(activeEditor)
                 .updateAttributes('paragraph', { paragraphSpacing: value })
                 .updateAttributes('heading', { paragraphSpacing: value })
@@ -535,9 +577,9 @@ export default function CanonicalPaperRibbonToolbar({
               aria-label="Answer Lines"
               id="toolbar-answer-lines-select"
               value={currentAnswerLines}
-              onChange={e => store?.setAnswerLines?.(activeNodeId, Number(e.target.value))}
+              onChange={e => store?.setAnswerLines?.(targetNodeId, Number(e.target.value))}
               style={{ ...selectStyle, width: '75px' }}
-              title={activeNodeId ? `Applies to active question (${activeNodeId})` : 'Click a question to apply answer lines'}
+              title={targetNodeId ? `Applies to active question (${targetNodeId})` : 'Click a question to apply answer lines'}
             >
               <option value="0">None</option>
               <option value="1">1 Line</option>

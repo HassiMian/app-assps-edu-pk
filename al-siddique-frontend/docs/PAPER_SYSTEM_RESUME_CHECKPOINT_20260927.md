@@ -190,3 +190,21 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Final focused migration/invariants/rules/parity/working-model regression: 54/54 PASS.
 - Production frontend build: PASS.
 - Production route remains unchanged.
+
+## Phase 12 — Scoped MCQ Option Formatting + Edit-Mode RTL Parity (28 Sep 2026)
+- Preserved the B4 rule that structured MCQ options remain semantic plain-text fields; no nested Tiptap editor was introduced per option.
+- Added presentation-level `structuredFieldStyles` keyed by the existing structured control key, keeping academic option text separate from formatting.
+- MCQ option styles support whitelisted font family, font size, bold/italic, underline/strike, text color, highlight, alignment, direction, line height and paragraph spacing.
+- Arbitrary CSS/style keys and unsupported values are dropped by the working store and rejected by compact-draft validation.
+- Structured field styles persist through draft export/reopen while canonical source text and provenance remain immutable.
+- Ribbon formatting now routes to the active structured MCQ option instead of accidentally formatting the last Tiptap field.
+- Superscript/subscript and stale Tiptap Undo/Redo are disabled while a structured option is the active formatting target.
+- Structural toolbar controls derive section/node targeting from the active structured key when applicable.
+- Edit-mode MCQ option labels now use the same CanonicalOptionLabel renderer as static mode, eliminating legacy `(label)` divergence.
+- Urdu edit-mode option geometry is verified as semantic label followed by closing bracket: `الف)`.
+- MCQ table/grid/classic static rendering consumes the same structured option-style map, preserving Done Editing / print presentation parity.
+- MCQ style/draft validation unit suite: 10/10 PASS.
+- Browser acceptance including scoped option styling and Urdu bracket geometry: 7/7 PASS.
+- Final focused migration/invariants/rules/parity/working-model regression: 55/55 PASS.
+- Production frontend build: PASS.
+- Production route remains unchanged.

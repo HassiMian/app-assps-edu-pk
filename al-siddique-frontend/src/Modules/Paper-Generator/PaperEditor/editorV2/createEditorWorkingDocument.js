@@ -259,6 +259,7 @@ export function createEditorWorkingDocument(canonicalDoc) {
       pageBorder: 'none',
       sectionLayoutOverrides: {},
       answerLinesByNode: {},
+      structuredFieldStyles: {},
       printMode: 'a4',
       language: lang,
       direction: dir,

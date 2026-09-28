@@ -21,7 +21,7 @@ const StructuredFocusCtx = createContext({
  * Provider: wraps the editor container.
  * Children can call useStructuredFocus() to read/write focus state.
  */
-export function StructuredFocusProvider({ children, onModeChange }) {
+export function StructuredFocusProvider({ children, onModeChange, onActiveStructuredKeyChange }) {
   const modeRef = useRef('NONE')
   const keyRef = useRef(null)
 
@@ -32,7 +32,10 @@ export function StructuredFocusProvider({ children, onModeChange }) {
 
   const setActiveStructuredKey = useCallback((key) => {
     keyRef.current = key
-  }, [])
+    // Preserve the last non-null structured target for toolbar actions after input blur.
+    // A Tiptap field focus explicitly clears this target in CanonicalPaperEditorMain.
+    if (key) onActiveStructuredKeyChange?.(key)
+  }, [onActiveStructuredKeyChange])
 
   const ctx = {
     getMode: () => modeRef.current,

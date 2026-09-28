@@ -7,6 +7,7 @@ import CanonicalStructuredNodeEditor from './structured/CanonicalStructuredNodeE
 import NodeStructureControls from './structured/components/NodeStructureControls.jsx'
 import AddStructuredNodeMenu from './structured/components/AddStructuredNodeMenu.jsx'
 import { resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
+import { buildStructuredControlKey } from './structured/structuredFocusHelpers.js'
 import { createDefaultInsertedNode } from './structured/structuredNodeDefaults.js'
 import {
   cmdInsertNode,
@@ -17,6 +18,16 @@ import {
 import { buildFieldKey } from './EditorFieldRegistry.js'
 import { getB3NodeEditability, B3_RENDER_STRATEGY } from './nodeRenderStrategy.js'
 import { usePaperStore } from '../../usePaperStore.js'
+
+function resolveStructuredPresentation(presentation, controlKey, fallbackDirection = 'auto') {
+  const raw = presentation?.structuredFieldStyles?.[controlKey] || {}
+  const style = { ...raw }
+  const direction = style.direction || fallbackDirection
+  if (style.paragraphSpacing) style.marginBottom = style.paragraphSpacing
+  delete style.direction
+  delete style.paragraphSpacing
+  return { style, direction }
+}
 
 export default function CanonicalDocumentRenderer({
   workingDoc,
@@ -898,22 +909,35 @@ export default function CanonicalDocumentRenderer({
                                           </div>
                                         )}
                                       </td>
-                                      {resolvedNode.options?.map((opt, oIdx) => (
-                                        <td
-                                          key={opt.id || oIdx}
-                                          style={{
-                                            padding: '6px 8px',
-                                            borderRight: oIdx < (resolvedNode.options.length - 1) ? '1px solid #cbd5e1' : 'none',
-                                            verticalAlign: 'top',
-                                            width: `${Math.floor(45 / (resolvedNode.options.length || 3))}%`,
-                                          }}
-                                        >
-                                          <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '4px' }}>
-                                            <CanonicalOptionLabel option={opt} index={oIdx} direction={nodeDir} />
-                                            <span>{opt.text || opt.textUrdu || ''}</span>
-                                          </span>
-                                        </td>
-                                      ))}
+                                      {resolvedNode.options?.map((opt, oIdx) => {
+                                        const optionControlKey = buildStructuredControlKey(
+                                          workingDoc.baseCanonicalDocumentId,
+                                          section.id,
+                                          nodeId,
+                                          'option',
+                                          opt.id || String(oIdx),
+                                          'text'
+                                        )
+                                        const optionPresentation = resolveStructuredPresentation(pres, optionControlKey, nodeDir)
+                                        return (
+                                          <td
+                                            key={opt.id || oIdx}
+                                            style={{
+                                              padding: '6px 8px',
+                                              borderRight: oIdx < (resolvedNode.options.length - 1) ? '1px solid #cbd5e1' : 'none',
+                                              verticalAlign: 'top',
+                                              width: `${Math.floor(45 / (resolvedNode.options.length || 3))}%`,
+                                            }}
+                                          >
+                                            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '4px' }}>
+                                              <CanonicalOptionLabel option={opt} index={oIdx} direction={optionPresentation.direction} />
+                                              <span dir={optionPresentation.direction} style={optionPresentation.style}>
+                                                {opt.text || opt.textUrdu || ''}
+                                              </span>
+                                            </span>
+                                          </td>
+                                        )
+                                      })}
                                     </tr>
                                   </tbody>
                                 </table>
@@ -989,12 +1013,25 @@ export default function CanonicalDocumentRenderer({
                                       : { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '8px', marginTop: '6px', paddingLeft: nodeDir === 'rtl' ? '0' : '24px', paddingRight: nodeDir === 'rtl' ? '24px' : '0', fontSize: '12px' }
                                   }
                                 >
-                                  {resolvedNode.options?.map((opt, idx) => (
-                                    <div key={opt.id || idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                      <CanonicalOptionLabel option={opt} index={idx} direction={nodeDir} />
-                                      <span>{opt.text || opt.textUrdu || ''}</span>
-                                    </div>
-                                  ))}
+                                  {resolvedNode.options?.map((opt, idx) => {
+                                    const optionControlKey = buildStructuredControlKey(
+                                      workingDoc.baseCanonicalDocumentId,
+                                      section.id,
+                                      nodeId,
+                                      'option',
+                                      opt.id || String(idx),
+                                      'text'
+                                    )
+                                    const optionPresentation = resolveStructuredPresentation(pres, optionControlKey, nodeDir)
+                                    return (
+                                      <div key={opt.id || idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                        <CanonicalOptionLabel option={opt} index={idx} direction={optionPresentation.direction} />
+                                        <span dir={optionPresentation.direction} style={optionPresentation.style}>
+                                          {opt.text || opt.textUrdu || ''}
+                                        </span>
+                                      </div>
+                                    )
+                                  })}
                                 </div>
                               )}
                             </div>

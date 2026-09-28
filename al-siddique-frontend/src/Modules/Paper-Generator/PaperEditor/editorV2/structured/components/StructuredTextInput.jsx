@@ -17,6 +17,7 @@ export default function StructuredTextInput({
   style = {},
   controlKey = null,
   ariaLabel = '',
+  store = null,
 }) {
   const [localVal, setLocalVal] = useState(value ?? '')
   const { setMode, setActiveStructuredKey, getActiveStructuredKey } = useStructuredFocus()
@@ -69,8 +70,19 @@ export default function StructuredTextInput({
     }
   }
 
+  const structuredStyle = controlKey && store?.getStructuredFieldStyle
+    ? store.getStructuredFieldStyle(controlKey)
+    : {}
+  const effectiveDir = structuredStyle.direction || dir
+  const visualStructuredStyle = {
+    ...structuredStyle,
+    ...(structuredStyle.paragraphSpacing ? { marginBottom: structuredStyle.paragraphSpacing } : {}),
+  }
+  delete visualStructuredStyle.direction
+  delete visualStructuredStyle.paragraphSpacing
+
   const baseStyle = {
-    fontFamily: dir === 'rtl'
+    fontFamily: effectiveDir === 'rtl'
       ? "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif"
       : "'Times New Roman', 'Arial', serif",
     fontSize: '13px',
@@ -84,6 +96,7 @@ export default function StructuredTextInput({
     boxSizing: 'border-box',
     width: '100%',
     ...style,
+    ...visualStructuredStyle,
   }
 
   const printSpanStyle = {
@@ -98,12 +111,13 @@ export default function StructuredTextInput({
     padding: 0,
     margin: 0,
     ...style,
+    ...visualStructuredStyle,
   }
 
   if (multiline) {
     return (
       <>
-        <span className="structured-text-print-only" dir={dir} style={printSpanStyle}>
+        <span className="structured-text-print-only" dir={effectiveDir} style={printSpanStyle}>
           {localVal}
         </span>
         <textarea
@@ -113,7 +127,7 @@ export default function StructuredTextInput({
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          dir={dir}
+          dir={effectiveDir}
           disabled={disabled}
           rows={rows}
           aria-label={ariaLabel || placeholder}
@@ -126,7 +140,7 @@ export default function StructuredTextInput({
 
   return (
     <>
-      <span className="structured-text-print-only" dir={dir} style={printSpanStyle}>
+      <span className="structured-text-print-only" dir={effectiveDir} style={printSpanStyle}>
         {localVal}
       </span>
       <input
@@ -137,7 +151,7 @@ export default function StructuredTextInput({
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        dir={dir}
+        dir={effectiveDir}
         disabled={disabled}
         aria-label={ariaLabel || placeholder}
         className={`structured-text-input structured-text-screen-only ${className}`}

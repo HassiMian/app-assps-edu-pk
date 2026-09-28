@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 import { EditorWorkingStore } from '../editorV2/editorWorkingStore.js'
 import { validateWorkingDraft } from '../editorV2/workingDraftStorage.js'
+import { buildStructuredControlKey } from '../editorV2/structured/structuredFocusHelpers.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -177,6 +178,62 @@ test('general instructions support multiline metadata persistence without source
   const reopened = new EditorWorkingStore(doc)
   assert.strictEqual(reopened.applyCompactDraft(draft).status, 'APPLIED')
   assert.strictEqual(reopened.getWorkingDocument().metadata.generalInstructions, value)
+
+  const afterHash = crypto.createHash('sha256').update(JSON.stringify(reopened.getBaselineDocument())).digest('hex')
+  assert.strictEqual(afterHash, baselineHash)
+})
+
+
+test('MCQ option formatting is scoped, sanitized and draft-safe', () => {
+  const doc = canonicalCorpus.find(item => item.id.includes('class-6-science'))
+  assert.ok(doc)
+  const section = doc.sections.find(sec => (sec.nodes || []).some(node => node.type === 'mcq'))
+  const mcq = section?.nodes?.find(node => node.type === 'mcq')
+  const option = mcq?.options?.[0]
+  assert.ok(section && mcq && option)
+
+  const baselineHash = crypto.createHash('sha256').update(JSON.stringify(doc)).digest('hex')
+  const key = buildStructuredControlKey(doc.id, section.id, mcq.id, 'option', option.id, 'text')
+  const store = new EditorWorkingStore(doc)
+
+  assert.strictEqual(store.setStructuredFieldStyle(key, {
+    fontFamily: "'Times New Roman', serif",
+    fontSize: '16pt',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    lineHeight: '1.5',
+    paragraphSpacing: '6pt',
+    direction: 'ltr',
+    color: '#123b67',
+    backgroundColor: '#fef08a',
+    arbitraryCss: 'position:fixed',
+  }), true)
+
+  assert.deepStrictEqual(store.getStructuredFieldStyle(key), {
+    fontFamily: "'Times New Roman', serif",
+    fontSize: '16pt',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    color: '#123b67',
+    backgroundColor: '#fef08a',
+    textAlign: 'center',
+    direction: 'ltr',
+    lineHeight: '1.5',
+    paragraphSpacing: '6pt',
+  })
+
+  const draft = store.exportCompactDraft()
+  assert.strictEqual(draft.presentationPatch.structuredFieldStyles[key].fontWeight, 'bold')
+  assert.strictEqual(validateWorkingDraft(draft, doc).valid, true)
+
+  const reopened = new EditorWorkingStore(doc)
+  assert.strictEqual(reopened.applyCompactDraft(draft).status, 'APPLIED')
+  assert.deepStrictEqual(reopened.getStructuredFieldStyle(key), store.getStructuredFieldStyle(key))
+
+  const maliciousDraft = structuredClone(draft)
+  maliciousDraft.presentationPatch.structuredFieldStyles[key].fontSize = '999px'
+  assert.strictEqual(validateWorkingDraft(maliciousDraft, doc).valid, false)
 
   const afterHash = crypto.createHash('sha256').update(JSON.stringify(reopened.getBaselineDocument())).digest('hex')
   assert.strictEqual(afterHash, baselineHash)

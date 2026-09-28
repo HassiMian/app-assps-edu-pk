@@ -8,6 +8,12 @@ import {
   computeCanonicalFingerprint,
   sanitizePaperRichText,
   stableStringify,
+  SUPPORTED_FONTS,
+  SUPPORTED_SIZES,
+  SUPPORTED_COLORS,
+  SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
 } from './editorProjection.js'
 import { validateDraftStructuredBlock } from './structured/structuredDraftV2.js'
 
@@ -258,6 +264,51 @@ export function validateWorkingDraft(draft, canonicalDoc) {
         typeof patch.displayNumberOverride !== 'string'
       ) {
         return { valid: false, error: `displayNumberOverride must be string or null for '${nodeId}'` }
+      }
+    }
+  }
+
+  // Optional presentation overlay validation.
+  if (draft.presentationPatch !== undefined && draft.presentationPatch !== null) {
+    if (typeof draft.presentationPatch !== 'object' || Array.isArray(draft.presentationPatch)) {
+      return { valid: false, error: 'presentationPatch must be an object' }
+    }
+    const styles = draft.presentationPatch.structuredFieldStyles || {}
+    if (typeof styles !== 'object' || Array.isArray(styles)) {
+      return { valid: false, error: 'presentationPatch.structuredFieldStyles must be an object' }
+    }
+
+    const fontValues = new Set(SUPPORTED_FONTS.map(font => font.value))
+    const sizeValues = new Set(SUPPORTED_SIZES.map(size => `${size}pt`))
+    const alignValues = new Set(['left', 'center', 'right', 'justify'])
+    const directionValues = new Set(['ltr', 'rtl'])
+    const weightValues = new Set(['normal', 'bold', '400', '700'])
+    const styleValues = new Set(['normal', 'italic'])
+    const decorationValues = new Set(['none', 'underline', 'line-through'])
+    const allowedKeys = new Set([
+      'fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'textDecoration',
+      'color', 'backgroundColor', 'textAlign', 'direction', 'lineHeight', 'paragraphSpacing',
+    ])
+
+    for (const [controlKey, style] of Object.entries(styles)) {
+      if (!controlKey.startsWith('structured::') || !style || typeof style !== 'object' || Array.isArray(style)) {
+        return { valid: false, error: `Invalid structured field style '${controlKey}'` }
+      }
+      for (const [key, value] of Object.entries(style)) {
+        if (!allowedKeys.has(key)) return { valid: false, error: `Unsupported structured style key '${key}'` }
+        const valid =
+          (key === 'fontFamily' && fontValues.has(value)) ||
+          (key === 'fontSize' && sizeValues.has(value)) ||
+          (key === 'fontWeight' && weightValues.has(value)) ||
+          (key === 'fontStyle' && styleValues.has(value)) ||
+          (key === 'textDecoration' && decorationValues.has(value)) ||
+          (key === 'color' && SUPPORTED_COLORS.includes(value)) ||
+          (key === 'backgroundColor' && SUPPORTED_HIGHLIGHTS.includes(value)) ||
+          (key === 'textAlign' && alignValues.has(value)) ||
+          (key === 'direction' && directionValues.has(value)) ||
+          (key === 'lineHeight' && SUPPORTED_LINE_HEIGHTS.includes(value)) ||
+          (key === 'paragraphSpacing' && SUPPORTED_PARAGRAPH_SPACING.includes(value))
+        if (!valid) return { valid: false, error: `Invalid structured style value for '${key}'` }
       }
     }
   }
