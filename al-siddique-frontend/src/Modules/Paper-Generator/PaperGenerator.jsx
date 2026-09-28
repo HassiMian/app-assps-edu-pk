@@ -60,6 +60,7 @@ export default function PaperGenerator() {
   const navigate = useNavigate()
   const requestedTab = searchParams.get('tab')
   const officialCanonicalCanary = searchParams.get('canonicalCanary') === '1'
+  const forceOfficialLegacyRoute = searchParams.get('canonicalLegacy') === '1'
   const initialTab = ROUTABLE_TAB_IDS.has(requestedTab) ? requestedTab : 'build'
   const [moduleTab, setModuleTab] = useState(initialTab)
   const [loadedSavedPaper, setLoadedSavedPaper] = useState(null)
@@ -72,7 +73,10 @@ export default function PaperGenerator() {
 
   const handleLoadPaper = (paper, targetTab = null) => {
     setLoadedSavedPaper(paper)
-    setModuleTab(resolvePaperRoute(paper, targetTab, { officialCanonicalCanary }))
+    setModuleTab(resolvePaperRoute(paper, targetTab, {
+      officialCanonicalCanary,
+      forceOfficialLegacyRoute,
+    }))
   }
 
   const returnToSource = () => setModuleTab(loadedSavedPaper?.sourceTab || 'saved')

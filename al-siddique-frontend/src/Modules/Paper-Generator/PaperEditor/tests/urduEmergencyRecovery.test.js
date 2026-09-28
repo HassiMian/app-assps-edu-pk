@@ -39,14 +39,14 @@ test('URDU RECOVERY 1: isUrduScriptPaper correctly identifies all Urdu-script su
   assert.strictEqual(isUrduScriptPaper({ name: 'First Term Examination 2026 - Class 6 - Science', config: { subject: 'Science', language: 'english' } }), false)
 })
 
-test('URDU RECOVERY 2: Urdu-script official papers route to legacy Paper Studio (build)', () => {
+test('URDU RECOVERY 2: Urdu-script V13 papers use canonical editor; legacy V12 remains build', () => {
   const class8Urdu = {
     id: 'official-first-term-2026-class-8-urdu',
     name: 'First Term Examination 2026 - Class 8 - Urdu',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Urdu', language: 'urdu' },
   }
-  assert.strictEqual(resolvePaperRoute(class8Urdu), 'build')
+  assert.strictEqual(resolvePaperRoute(class8Urdu), 'word_editor')
 
   const class5Urdu = {
     id: 'official-first-term-2026-class-5-urdu',
@@ -62,7 +62,7 @@ test('URDU RECOVERY 2: Urdu-script official papers route to legacy Paper Studio 
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Islamiyat' },
   }
-  assert.strictEqual(resolvePaperRoute(islamiyatPaper), 'build')
+  assert.strictEqual(resolvePaperRoute(islamiyatPaper), 'word_editor')
 
   const pakStudiesPaper = {
     id: 'official-first-term-2026-class-8-pak-studies',
@@ -70,7 +70,7 @@ test('URDU RECOVERY 2: Urdu-script official papers route to legacy Paper Studio 
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Pak Studies' },
   }
-  assert.strictEqual(resolvePaperRoute(pakStudiesPaper), 'build')
+  assert.strictEqual(resolvePaperRoute(pakStudiesPaper), 'word_editor')
 
   const quranPaper = {
     id: 'official-first-term-2026-class-8-tarjuma-tul-quran',
@@ -78,28 +78,31 @@ test('URDU RECOVERY 2: Urdu-script official papers route to legacy Paper Studio 
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Tarjuma-tul-Quran' },
   }
-  assert.strictEqual(resolvePaperRoute(quranPaper), 'build')
+  assert.strictEqual(resolvePaperRoute(quranPaper), 'word_editor')
 })
 
-test('URDU RECOVERY 3: Urdu-script papers NEVER enter word_editor even if targetTab is word_editor', () => {
+test('URDU RECOVERY 3: Urdu-script V13 uses canonical route and retains emergency stable-workspace rollback', () => {
   const class8Urdu = {
     id: 'official-first-term-2026-class-8-urdu',
     name: 'First Term Examination 2026 - Class 8 - Urdu',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Urdu', language: 'urdu' },
   }
-  // Even if user or caller requested word_editor, emergency route forces legacy build
-  assert.strictEqual(resolvePaperRoute(class8Urdu, 'word_editor'), 'build')
+  assert.strictEqual(resolvePaperRoute(class8Urdu, 'word_editor'), 'word_editor')
+  assert.strictEqual(
+    resolvePaperRoute(class8Urdu, null, { forceOfficialLegacyRoute: true }),
+    'build'
+  )
 })
 
-test('URDU RECOVERY 4: English official papers share the stable Paper Workspace until canonical parity gate', () => {
+test('URDU RECOVERY 4: English official V13 papers share the canonical editor default after cutover', () => {
   const class5English = {
     id: 'official-first-term-2026-class-5-english',
     name: 'First Term Examination 2026 - Class 5 - English',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '5', subject: 'English', language: 'english' },
   }
-  assert.strictEqual(resolvePaperRoute(class5English), 'build')
+  assert.strictEqual(resolvePaperRoute(class5English), 'word_editor')
 
   const class7English = {
     id: 'official-first-term-2026-class-7-english',
@@ -107,7 +110,7 @@ test('URDU RECOVERY 4: English official papers share the stable Paper Workspace 
     documentFormat: 'pts-native-v13',
     config: { classLevel: '7', subject: 'English', language: 'english' },
   }
-  assert.strictEqual(resolvePaperRoute(class7English), 'build')
+  assert.strictEqual(resolvePaperRoute(class7English), 'word_editor')
 })
 
 test('URDU RECOVERY 5: Early Years papers strictly retain early_years route', () => {

@@ -47,7 +47,7 @@ export function isUrduScriptPaper(paper = {}) {
 export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
   if (!paper) return targetTab || 'build'
 
-  const allowOfficialCanonicalCanary = routingPolicy?.officialCanonicalCanary === true
+  const forceOfficialLegacyRoute = routingPolicy?.forceOfficialLegacyRoute === true
 
   const id = String(paper.id || '')
   const corpusId = String(paper.corpusId || '')
@@ -62,16 +62,25 @@ export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
 
   if (paper.structureMode === 'board_pattern') return 'board_pattern'
 
-  const isCanonicalV2 = paper.schemaVersion === 2 || paper.schemaVersion === '2' || paper.documentFormat === 'canonical-v2'
+  const canonicalSchemaVersion = Number(paper.schemaVersion || 0)
+  const isCanonicalV2 = (
+    canonicalSchemaVersion === 2 ||
+    canonicalSchemaVersion === 3 ||
+    paper.documentFormat === 'canonical-v2'
+  )
   const isOfficialV13 = paper.documentFormat === 'pts-native-v13'
   const isOfficialV12 = paper.documentFormat === 'official-v12'
   const isOfficialFirstTerm = id.startsWith('official-first-term-') || id.includes('first-term-2026')
 
-  // Official First Term papers remain on the stable Paper Workspace by default.
-  // Phase 15 adds only an explicit hidden canary path; PaperEditorRouter still performs
-  // the final pristine-V13/canonical guard and falls back safely for modified payloads.
+  // Phase 18 cutover: official V13/canonical First Term papers now enter the
+  // guarded canonical editor chain by default. PaperEditorRouter remains the final
+  // authority: pristine V13 is migrated to Canonical V2; modified/custom V13 is
+  // preserved in LEGACY_CANVAS_V2. The emergency rollback flag forces the proven
+  // stable Paper Workspace without deleting or bypassing any compatibility code.
   if (isOfficialV13 || isOfficialV12 || isOfficialFirstTerm) {
-    if (allowOfficialCanonicalCanary && (isOfficialV13 || isCanonicalV2)) return 'word_editor'
+    if (forceOfficialLegacyRoute) return 'build'
+    if (isOfficialV12) return 'build'
+    if (isOfficialV13 || isCanonicalV2) return 'word_editor'
     return 'build'
   }
 

@@ -82,7 +82,7 @@ test('GATE 4: Class 1 English (official-first-term-2026-class-1-english) Accepta
   assert.ok(paper, 'Class 1 English exists in Canonical V2')
 
   // Route
-  assert.strictEqual(resolvePaperRoute(paper), 'build', 'Class 1 English stays on stable Paper Workspace until canonical parity gate')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor', 'Class 1 English uses canonical editor after cutover')
 
   // Marks authority
   assert.strictEqual(paper.authority.authoritativePaperTotal, 50)
@@ -95,7 +95,7 @@ test('GATE 5: Class 3 English (official-first-term-2026-class-3-english) Accepta
   assert.ok(paper, 'Class 3 English exists in Canonical V2')
 
   // Route
-  assert.strictEqual(resolvePaperRoute(paper), 'build', 'Class 3 English stays on stable Paper Workspace until canonical parity gate')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor', 'Class 3 English uses canonical editor after cutover')
 
   // Marks authority
   assert.strictEqual(paper.authority.authoritativePaperTotal, 75)
@@ -120,7 +120,7 @@ test('GATE 6: Class 5 English (official-first-term-2026-class-5-english) Accepta
   assert.ok(paper, 'Class 5 English exists in Canonical V2')
 
   // Route
-  assert.strictEqual(resolvePaperRoute(paper), 'build', 'Class 5 English stays on stable Paper Workspace until canonical parity gate')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor', 'Class 5 English uses canonical editor after cutover')
 
   // Marks authority
   assert.strictEqual(paper.authority.authoritativePaperTotal, 75)
@@ -163,7 +163,7 @@ test('GATE 7: Class 7 English (official-first-term-2026-class-7-english) Accepta
   assert.ok(paper, 'Class 7 English exists in Canonical V2')
 
   // Route
-  assert.strictEqual(resolvePaperRoute(paper), 'build', 'Class 7 English stays on stable Paper Workspace until canonical parity gate')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor', 'Class 7 English uses canonical editor after cutover')
 
   // Marks authority
   assert.strictEqual(paper.authority.authoritativePaperTotal, 75)

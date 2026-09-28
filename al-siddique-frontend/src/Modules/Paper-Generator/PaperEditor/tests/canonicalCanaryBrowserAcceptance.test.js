@@ -90,10 +90,10 @@ async function loadSavedPaper(paper) {
   await loadButton.click()
 }
 
-test('Phase 16: real PaperGenerator canary route opens all 43 pristine V13 papers in Canonical V2', async () => {
+test('Phase 18: real PaperGenerator default route opens all 43 pristine V13 papers in Canonical V2', async () => {
   assert.strictEqual(v13.papers.length, 43)
 
-  await page.goto(`${BASE_URL}?canonicalCanary=1`, { waitUntil: 'domcontentloaded' })
+  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' })
   await openSavedPapers()
 
   const failures = []
@@ -122,12 +122,12 @@ test('Phase 16: real PaperGenerator canary route opens all 43 pristine V13 paper
       assert.deepStrictEqual(consoleErrors, [], `${paper.id}: console errors: ${consoleErrors.join(' | ')}`)
 
       canonicalCount += 1
-      console.log(`PHASE16 ${index + 1}/43 PASS ${paper.id}`)
+      console.log(`PHASE18 ${index + 1}/43 PASS ${paper.id}`)
 
       await openSavedPapers()
     } catch (error) {
       failures.push({ paperId: paper.id, message: error.message })
-      console.log(`PHASE16 ${index + 1}/43 FAIL ${paper.id}: ${error.message}`)
+      console.log(`PHASE18 ${index + 1}/43 FAIL ${paper.id}: ${error.message}`)
       try {
         await openSavedPapers()
       } catch {}
@@ -138,11 +138,11 @@ test('Phase 16: real PaperGenerator canary route opens all 43 pristine V13 paper
   assert.strictEqual(canonicalCount, 43)
 })
 
-test('Phase 16: canary off keeps official paper on stable Paper Workspace', async () => {
+test('Phase 18: emergency canonicalLegacy=1 rollback keeps official paper on stable Paper Workspace', async () => {
   const sample = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
   assert.ok(sample)
 
-  await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' })
+  await page.goto(`${BASE_URL}?canonicalLegacy=1`, { waitUntil: 'domcontentloaded' })
   await openSavedPapers()
   await loadSavedPaper(sample)
 

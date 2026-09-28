@@ -284,3 +284,20 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Machine result: `CANONICAL_CUTOVER_READINESS_READY`.
 - No default production route switch or production deployment was performed in this phase.
 - Next cutover, if executed, must preserve an immediate rollback path to stable `build` / legacy fallback and must not delete compatibility code in the same release.
+
+## Phase 18 — Controlled Canonical Default Cutover + Immediate Legacy Rollback (28 Sep 2026)
+- Official pristine V13 First Term papers now route into the guarded Canonical V2 editor chain by default.
+- `PaperEditorRouter` remains the final authority: pristine V13 migrates to schemaVersion 3 Canonical; modified academic payloads continue to fall back to `LEGACY_CANVAS_V2`.
+- Added explicit emergency rollback query: `canonicalLegacy=1`, which forces official papers back to the proven stable `build` Paper Workspace without deleting compatibility code.
+- Legacy V12 remains on `build`; Early Years remains `early_years`; Board Pattern remains `board_pattern`.
+- Canonical schemaVersion 3 documents are now recognized by the top-level route resolver.
+- Schedule-only `examDate` / `timeAllowed` metadata remains canonical-safe; academic content/marks mutation remains guarded.
+- Updated historical emergency/Urdu/seven-paper routing tests to the post-cutover contract while preserving all RTL/font/marks/legacy fallback invariants.
+- Real PaperGenerator default route acceptance: 43/43 official V13 papers open in Canonical V2 with no canary parameter.
+- Emergency rollback browser acceptance: `canonicalLegacy=1` opens the stable Paper Workspace.
+- Static/core release regression: 114/114 PASS.
+- All-43 render/static/print parity: 43/43 PASS.
+- Real PaperGenerator default-cutover + rollback browser gate: PASS.
+- Production frontend build: PASS.
+- Final machine marker: `CANONICAL_CUTOVER_RELEASE_READY`.
+- Production deployment must be atomic and retain the live V3 backup plus an immediate server-side rollback path.

@@ -15,6 +15,9 @@ const nodeTests = [
   'src/Modules/Paper-Generator/PaperEditor/tests/canonicalRouteCanary.test.js',
   'src/Modules/Paper-Generator/PaperEditor/tests/canonicalMetadataMarksEditing.test.js',
   'src/Modules/Paper-Generator/PaperEditor/tests/editorV2B4StructuredOverlay.test.js',
+  'src/Modules/Paper-Generator/PaperEditor/tests/examNightEmergencyFix.test.js',
+  'src/Modules/Paper-Generator/PaperEditor/tests/urduEmergencyRecovery.test.js',
+  'src/Modules/Paper-Generator/PaperEditor/tests/sevenPaperAcceptanceGate.test.js',
 ]
 
 const browserTests = [
@@ -73,5 +76,5 @@ if (process.platform === 'win32') {
   )
 }
 
-console.log('\nCANONICAL_CUTOVER_READINESS_READY')
-console.log('Default production route is intentionally unchanged by this audit.')
+console.log('\nCANONICAL_CUTOVER_RELEASE_READY')
+console.log('Official V13 default route is canonical; canonicalLegacy=1 remains the immediate stable-workspace rollback.')

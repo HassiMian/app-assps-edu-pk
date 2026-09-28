@@ -44,13 +44,18 @@ test('Phase 17 readiness: canonical corpus is complete and semantically clean', 
   }
 })
 
-test('Phase 17 readiness: default production route remains stable until explicit cutover', () => {
+test('Phase 18 cutover: default production route uses guarded canonical chain with emergency rollback', () => {
   for (const paper of v13.papers) {
-    assert.strictEqual(resolvePaperRoute(paper), 'build', paper.id)
+    assert.strictEqual(resolvePaperRoute(paper), 'word_editor', paper.id)
     assert.strictEqual(
-      resolvePaperRoute(paper, 'word_editor'),
+      resolvePaperRoute(paper, 'build'),
+      'word_editor',
+      `${paper.id}: targetTab must not bypass canonical default`
+    )
+    assert.strictEqual(
+      resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }),
       'build',
-      `${paper.id}: targetTab must not bypass default route`
+      `${paper.id}: emergency rollback must restore stable workspace`
     )
   }
 })

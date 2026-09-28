@@ -15,13 +15,18 @@ const __dirname = path.dirname(__filename)
 const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
 const v13 = JSON.parse(fs.readFileSync(v13Path, 'utf8'))
 
-test('Phase 15: default official routing remains stable with canary off', () => {
+test('Phase 18: default official V13 routing enters guarded canonical chain', () => {
   for (const paper of v13.papers) {
-    assert.strictEqual(resolvePaperRoute(paper), 'build', paper.id)
+    assert.strictEqual(resolvePaperRoute(paper), 'word_editor', paper.id)
     assert.strictEqual(
-      resolvePaperRoute(paper, 'word_editor'),
+      resolvePaperRoute(paper, 'build'),
+      'word_editor',
+      `${paper.id}: targetTab must not bypass canonical cutover`
+    )
+    assert.strictEqual(
+      resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }),
       'build',
-      `${paper.id}: targetTab must not bypass default official routing`
+      `${paper.id}: emergency legacy rollback must remain available`
     )
   }
 })
@@ -80,16 +85,20 @@ test('Phase 15: legacy V12, Early Years and board-pattern routes do not change u
   )
 })
 
-test('Phase 15: canonical official document can enter canary editor but remains build by default', () => {
+test('Phase 18: canonical official document uses canonical editor by default and supports emergency rollback', () => {
   const canonicalPaper = {
     id: 'doc__official-first-term-2026-class-5-english',
     schemaVersion: 2,
     documentFormat: 'canonical-v2',
   }
-  assert.strictEqual(resolvePaperRoute(canonicalPaper), 'build')
+  assert.strictEqual(resolvePaperRoute(canonicalPaper), 'word_editor')
   assert.strictEqual(
     resolvePaperRoute(canonicalPaper, null, { officialCanonicalCanary: true }),
     'word_editor'
+  )
+  assert.strictEqual(
+    resolvePaperRoute(canonicalPaper, null, { forceOfficialLegacyRoute: true }),
+    'build'
   )
 })
 

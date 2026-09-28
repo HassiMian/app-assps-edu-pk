@@ -7,9 +7,12 @@ import '@/index.css'
 
 function CanaryHarnessApp() {
   const params = new URLSearchParams(window.location.search)
-  const canary = params.get('canonicalCanary') === '1'
-  const initialEntry = canary
-    ? '/paper-generator?canonicalCanary=1'
+  const forwarded = new URLSearchParams()
+  if (params.get('canonicalCanary') === '1') forwarded.set('canonicalCanary', '1')
+  if (params.get('canonicalLegacy') === '1') forwarded.set('canonicalLegacy', '1')
+  const query = forwarded.toString()
+  const initialEntry = query
+    ? `/paper-generator?${query}`
     : '/paper-generator'
 
   return (

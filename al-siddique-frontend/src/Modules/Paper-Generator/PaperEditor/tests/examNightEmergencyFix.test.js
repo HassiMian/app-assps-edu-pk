@@ -19,28 +19,31 @@ const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documen
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. ROUTING TESTS (FIX A)
 // ─────────────────────────────────────────────────────────────────────────────
-test('FIX A.1: Class 5 official V13 remains on stable Paper Workspace until canonical parity gate', () => {
+test('FIX A.1: Class 5 official V13 uses guarded canonical route with rollback available', () => {
   const paper = {
     id: 'official-first-term-2026-class-5-english',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '5', subject: 'English' },
   }
-  assert.strictEqual(resolvePaperRoute(paper), 'build')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }), 'build')
 })
 
-test('FIX A.2: Class 7 official V13 remains on stable Paper Workspace until canonical parity gate', () => {
+test('FIX A.2: Class 7 official V13 uses guarded canonical route with rollback available', () => {
   const paper = {
     id: 'official-first-term-2026-class-7-english',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '7', subject: 'English' },
   }
-  assert.strictEqual(resolvePaperRoute(paper), 'build')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }), 'build')
 })
 
-test('FIX A.3: Official First Term canonical document remains on stable Paper Workspace until parity gate', () => {
+test('FIX A.3: Official First Term canonical document opens canonical editor by default', () => {
   const paper = canonicalCorpus.find(p => p.id.includes('class-5-english'))
   assert.ok(paper)
-  assert.strictEqual(resolvePaperRoute(paper), 'build')
+  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }), 'build')
 })
 
 test('FIX A.4: Starter English routes to early_years', () => {
@@ -79,14 +82,18 @@ test('FIX A.7: True legacy custom builder papers route to build', () => {
   assert.strictEqual(resolvePaperRoute(null), 'build')
 })
 
-test('FIX A.8: Official First Term routing cannot be bypassed, while custom targetTab remains authoritative', () => {
+test('FIX A.8: Official V13 canonical routing cannot be bypassed, while emergency rollback and custom targetTab remain authoritative', () => {
   const officialPaper = {
     id: 'official-first-term-2026-class-5-english',
     documentFormat: 'pts-native-v13',
   }
-  assert.strictEqual(resolvePaperRoute(officialPaper, 'build'), 'build')
-  assert.strictEqual(resolvePaperRoute(officialPaper, 'saved'), 'build')
-  assert.strictEqual(resolvePaperRoute(officialPaper, 'word_editor'), 'build')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'build'), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'saved'), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'word_editor'), 'word_editor')
+  assert.strictEqual(
+    resolvePaperRoute(officialPaper, 'word_editor', { forceOfficialLegacyRoute: true }),
+    'build'
+  )
 
   const customPaper = { id: 'custom-user-paper-100' }
   assert.strictEqual(resolvePaperRoute(customPaper, 'saved'), 'saved')
