@@ -5,6 +5,7 @@ import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
 import { usePaperStore } from './usePaperStore'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
+import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
 import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
@@ -13,7 +14,7 @@ import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
 import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
 import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
-import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
+import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
 
 function storeQToTemplate(q) {
  return {
@@ -538,6 +539,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [limitWarn, setLimitWarn] = useState(false)
 
  const [editMode, setEditMode] = useState(false)
+ const [selectedSectionId, setSelectedSectionId] = useState('')
+ const [activeEditable, setActiveEditable] = useState(null)
  const [letterSp, setLetterSp] = useState(editorSettings.letterSpacing || 0)
  const [wordSp, setWordSp] = useState(editorSettings.wordSpacing || 0)
  const [engLineH, setEngLineH] = useState(editorSettings.englishLineHeight || (isOfficialPaper ? ruleProfile.presentation.englishLineHeight : 1.5))
@@ -662,7 +665,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   sections,
   isUrduScriptPaper({ config:cfg, ...paper })
  )
- const deleteOfficialSection = id => onPaperChange(current => ({ ...current, official_section:resequenceOfficial((current.official_section || []).filter(section => section.id !== id)) }))
+ const deleteOfficialSection = id => {
+  if (String(selectedSectionId||'') === String(id||'')) { setSelectedSectionId(''); setActiveEditable(null) }
+  onPaperChange(current => ({ ...current, official_section:resequenceOfficial((current.official_section || []).filter(section => section.id !== id)) }))
+ }
  const duplicateOfficialSection = id => onPaperChange(current => {
   const sections = [...(current.official_section || [])]
   const index = sections.findIndex(section => section.id === id)
@@ -709,7 +715,16 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   setUrdLineH(next.editorSettings.urduLineHeight)
   setShowSectionLine(next.editorSettings.showSectionLine)
  }
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, mcqLayout, shortLayout }
+ const selectedSection = (paper.official_section || []).find(section => String(section.id||'') === String(selectedSectionId||'')) || null
+ const selectedSectionKind = selectedSection ? inferOfficialSectionKind(selectedSection) : 'auto'
+ const selectedSectionMarks = selectedSection ? resolveSectionTotalMarks(selectedSection) : 0
+ const toggleEditMode = () => setEditMode(current => {
+  const next = !current
+  if (!next) { setSelectedSectionId(''); setActiveEditable(null) }
+  return next
+ })
+ const updateSelectedSection = changes => selectedSection && updatePaperQuestion('official_section', selectedSection.id, changes)
+ const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:setActiveEditable, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))
@@ -886,7 +901,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <style>{`.pts-generator-surface select option, .pts-generator-surface select optgroup { background: var(--pg-option-bg, #0a1e35); color: var(--pg-option-text, #e6eef8); }`}</style>
  <div style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
  <div style={{ display:'flex', gap:8, marginBottom:12, flexWrap:'wrap', alignItems:'center' }}>
- {TEMPLATES.map(t=>(<button key={t.id} onClick={()=>setTmpl(t.id)} style={{ padding:'9px 18px', borderRadius:10, border:'none', cursor:'pointer', fontWeight: 600, fontSize:13, transition:'all .15s', background: tmpl===t.id ? `linear-gradient(135deg,${D.gold},${D.goldL})` : 'rgba(11,44,77,0.92)', color: tmpl===t.id ? '#071e34' : D.muted, boxShadow: tmpl===t.id ? `0 4px 14px rgba(200,153,26,0.3)` : 'none', }}>{t.label}</button>))}
+ <div style={{display:'flex',alignItems:'center',gap:7}}>
+  <span style={{fontSize:11,color:D.muted,fontWeight:800}}>Template</span>
+  <select aria-label="Paper template" value={tmpl} onChange={e=>setTmpl(e.target.value)} style={{...tinp,minWidth:170,cursor:'pointer',fontWeight:700,color:D.gold}}>
+   {TEMPLATES.map(t=><option key={t.id} value={t.id}>{t.label}</option>)}
+  </select>
+ </div>
  <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <ThemeToggle mode={uiTheme} onToggle={onToggleTheme} />
  {PRINT_MODES.map(m=>(<button key={m.id} onClick={()=>setPrintMode(m.id)} style={{ padding:'8px 16px', borderRadius:9, border:`1px solid ${D.border}`, cursor:'pointer', fontWeight:600, fontSize:12, transition:'all .15s', background: printMode===m.id ? `rgba(48,209,88,0.15)` : 'rgba(15,23,42,0.46)', color: printMode===m.id ? D.green : D.muted, borderColor: printMode===m.id ? `rgba(48,209,88,0.4)` : D.border, }}>{printMode===m.id?' ':' '}{m.label}</button>))}
@@ -912,6 +932,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
  <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
+ {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
  <DBtn color="green" onClick={doSave} disabled={!totalQs} style={{ padding:'8px 16px', fontSize:13 }}> Save</DBtn>
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
@@ -938,10 +959,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>}
  <div style={{ marginTop:7, fontSize:10, color:D.muted }}>School name and logo are locked to school branding. Every other paper field is editable. Official source data stays locked; Save writes an editable working copy.</div>
  </details>
- <details open style={{ marginTop:8 }}>
- <summary style={{ cursor:'pointer', color:D.silver, fontSize:12, fontWeight:700, userSelect:'none' }}>Advanced formatting</summary>
+ <details style={{ marginTop:8 }}>
+ <summary style={{ cursor:'pointer', color:D.silver, fontSize:12, fontWeight:700, userSelect:'none' }}>Paper Style &amp; Layout</summary>
  <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:10 }}>
- <button onClick={()=>setEditMode(p=>!p)} style={{ padding:'6px 14px', borderRadius:9, border:`1px solid ${D.border}`, cursor:'pointer', fontWeight: 600, fontSize:12, background: editMode ? `linear-gradient(135deg,${D.gold},${D.goldL})` : 'rgba(11,44,77,0.92)', color: editMode ? '#071e34' : D.silver, }}>{editMode ? ' Done Edit' : ' Manual Edit'}</button>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Letter Sp</span>
  <input type="range" min={0} max={3} step={0.5} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
@@ -1050,6 +1070,48 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <button type="button" title={isFullscreen?'Exit full screen':'Full screen'} aria-label={isFullscreen?'Exit full screen':'Full screen'} onClick={()=>isFullscreen?document.exitFullscreen?.():document.querySelector('.pts-generator-surface')?.requestFullscreen?.()} style={{ width:30, height:30, display:'grid', placeItems:'center', background:'rgba(11,44,77,.8)', color:D.silver, border:`1px solid ${D.border}`, borderRadius:5, cursor:'pointer' }}>{isFullscreen?<Minimize size={16} />:<Maximize size={16} />}</button>
  </div>
  </div>
+ <PaperSelectionToolbar editMode={editMode} active={activeEditable} />
+ {editMode && isOfficialPaper && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid #ef4444', borderRadius:12, background:'rgba(7,25,48,.98)', color:D.silver, boxShadow:'0 10px 34px rgba(0,0,0,.42)', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8, marginBottom:10 }}>
+   <div><b style={{ color:'#fecaca', fontSize:12 }}>EDIT PAPER</b><div style={{ color:D.muted, fontSize:10, marginTop:2 }}>{selectedSection ? 'Question settings — paper layout stays fixed' : 'Click any question or editable line'}</div></div>
+   {selectedSection && <button type="button" aria-label="Close question inspector" onClick={()=>{setSelectedSectionId('');setActiveEditable(null)}} style={{border:0,background:'transparent',color:D.muted,fontSize:18,cursor:'pointer'}}>×</button>}
+  </div>
+  {selectedSection ? <>
+   <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Question No.
+     <input type="number" min="1" value={Number(selectedSection.sourceOrder||1)} onChange={e=>{const next=Math.max(1,Number(e.target.value)||1);const heading=replaceQuestionSerial(selectedSection.heading||'',next,isUrduScriptPaper({config:cfg,...paper}));updateSelectedSection({sourceOrder:next,heading,text:heading,textUrdu:isUrduScriptPaper({config:cfg,...paper})?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
+    </label>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Marks
+     <input type="number" min="0" value={selectedSectionMarks||''} onChange={e=>{const next=Math.max(0,Number(e.target.value)||0);const urdu=isUrduScriptPaper({config:cfg,...paper});const heading=replaceSectionMarks(selectedSection.heading||'',next,urdu);updateSelectedSection({marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
+    </label>
+   </div>
+   <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Question Type
+    <select value={selectedSection.layoutPreset||'auto'} onChange={e=>updateSelectedSection({layoutPreset:e.target.value})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
+     <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
+    </select>
+   </label>
+   <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Section Divider
+    <select value={selectedSection.showDivider===true?'show':selectedSection.showDivider===false?'hide':'inherit'} onChange={e=>updateSelectedSection({showDivider:e.target.value==='inherit'?undefined:e.target.value==='show'})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
+     <option value="inherit">Use global setting</option><option value="show">Show divider</option><option value="hide">Hide divider</option>
+    </select>
+   </label>
+   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginTop:8}}>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Answer Lines<input type="number" min="0" max="20" value={Number(selectedSection.answerLines||0)} onChange={e=>updateSelectedSection({answerLines:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} /></label>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Lines / Item<input type="number" min="0" max="5" value={Number(selectedSection.answerLinesPerItem||0)} onChange={e=>updateSelectedSection({answerLinesPerItem:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} /></label>
+   </div>
+   <div style={{display:'flex',gap:5,flexWrap:'wrap',marginTop:10}}>
+    <button type="button" onClick={()=>moveOfficialSection(selectedSection.id,-1)} style={{...tinp,cursor:'pointer',padding:'6px 9px'}}>↑ Up</button>
+    <button type="button" onClick={()=>moveOfficialSection(selectedSection.id,1)} style={{...tinp,cursor:'pointer',padding:'6px 9px'}}>↓ Down</button>
+    <button type="button" onClick={()=>duplicateOfficialSection(selectedSection.id)} style={{...tinp,cursor:'pointer',padding:'6px 9px'}}>Duplicate</button>
+    <button type="button" onClick={()=>deleteOfficialSection(selectedSection.id)} style={{...tinp,cursor:'pointer',padding:'6px 9px',color:'#fca5a5',borderColor:'rgba(239,68,68,.5)'}}>Delete</button>
+   </div>
+   <details style={{marginTop:10}}>
+    <summary style={{fontSize:10,color:D.muted,cursor:'pointer',fontWeight:800}}>Advanced raw content</summary>
+    <textarea aria-label="Selected question raw content" value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} style={{...tinp,width:'100%',minHeight:110,resize:'vertical',marginTop:6,direction:isUrduScriptPaper({config:cfg,...paper})?'rtl':'ltr',fontFamily:isUrduScriptPaper({config:cfg,...paper})?URDU_FONT_STACK:"'Times New Roman',serif"}} />
+   </details>
+  </> : <div style={{fontSize:11,lineHeight:1.55,color:D.muted}}>The paper will not move in Edit mode. Click a question to open structural controls. Click its text to type directly. Select text to use the floating Word-style formatting bar.</div>}
+  <button type="button" onClick={addOfficialSection} style={{...tinp,width:'100%',marginTop:10,cursor:'pointer',fontWeight:900,color:D.gold}}>+ Add Question</button>
+ </div>}
  <div id="paper-canvas" ref={canvasRef} style={{ flex:1, minHeight:0, overflowY:'auto', background:'var(--pg-canvas, #1e2a3a)', padding:'12px', display:'flex', flexDirection:'column', alignItems:'center', gap: half ? 8 : 0 }}>
  {totalQs === 0 ? (
  <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:60 }}>
@@ -1337,10 +1399,10 @@ function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, on
 }
 
 //  Shared Section Renderer 
-function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, mcqLayout='matrix-table', shortLayout='1-column', urdLineH, engLineH, letterSp, wordSp=0, textAlign='start', fontFamily='', printAns, showAnsLines, showSectionLine=true, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection }) {
+function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, mcqLayout='matrix-table', shortLayout='1-column', urdLineH, engLineH, letterSp, wordSp=0, textAlign='start', fontFamily='', printAns, showAnsLines, showSectionLine=true, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable }) {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
- if (type.value === 'official_section') return <OfficialSectionRenderer questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} headingFs={qFsHead} themeColor={themeColor} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} showAnsLines={showAnsLines} showSectionLine={showSectionLine} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={fontFamily} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} />
+ if (type.value === 'official_section') return <OfficialSectionRenderer questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} headingFs={qFsHead} themeColor={themeColor} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} showAnsLines={showAnsLines} showSectionLine={showSectionLine} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={fontFamily} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} />
  const marks = paper[`${type.value}_marks`] || type.marks || 1
  const isMcq = type.value === 'mcq'
  
@@ -1696,7 +1758,7 @@ const PREMIUM_PAPER_THEMES = {
  editorial:{ accent:'#39566a', soft:'#eaf0f3', line:'#a6bbc6', heading:'Georgia, serif', label:'Editorial Slate', header:'masthead' },
 }
 
-function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, showSectionLine=true, questionTypes=[], settings, pbStyle, onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, mcqLayout='matrix-table', shortLayout='1-column' }) {
+function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, showSectionLine=true, questionTypes=[], settings, pbStyle, onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable, mcqLayout='matrix-table', shortLayout='1-column' }) {
  const theme = PREMIUM_PAPER_THEMES[variant] || PREMIUM_PAPER_THEMES.academic
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1733,7 +1795,7 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   </tbody></table>
   <main style={{ position:'relative', zIndex:2 }}>
    {visibleQuestionTypes.map((type, typeIndex) => (
-    <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={headFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={contentFont} printAns={printAns} showAnsLines={showAnsLines} showSectionLine={showSectionLine} qn={typeIndex + 1} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
+    <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={headFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={contentFont} printAns={printAns} showAnsLines={showAnsLines} showSectionLine={showSectionLine} qn={typeIndex + 1} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
    ))}
   </main>
  </div>

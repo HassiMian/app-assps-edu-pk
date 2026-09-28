@@ -10,12 +10,26 @@ import {
 } from '../../officialSectionSemantics.js'
 import { URDU_FONT_STACK } from '../../resolvePaperRoute.js'
 import { optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks } from '../../paperSystemRules.js'
+import { InlineEditable } from '../../PaperInlineEditor.jsx'
 
 function parseNumberedLines(content = '') {
-  return String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean).map((line, index) => {
+  return String(content).split(/\r?\n/).map((raw, sourceIndex) => {
+    const line = raw.trim()
+    if (!line) return null
     const match = line.match(/^((?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و))[.)]\s*(.*)$/i)
-    return { serial: match?.[1] || String(index + 1), text: match?.[2] || line }
-  })
+    return { serial: match?.[1] || String(sourceIndex + 1), text: match?.[2] || line, sourceIndex, hadSerial:Boolean(match) }
+  }).filter(Boolean)
+}
+
+function itemSerialText(serial, isUrdu) {
+  const value=String(serial||'').replace(/[().]/g,'').trim()
+  return isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(value) ? value + ')' : value + '.'
+}
+function replaceNumberedLine(content, row, text, isUrdu) {
+  const lines=String(content||'').split(/\r?\n/)
+  const punctuation=isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(String(row.serial)) ? ')' : '.'
+  lines[row.sourceIndex]=(row.hadSerial ? String(row.serial)+punctuation+' ' : '')+String(text||'')
+  return lines.join('\n')
 }
 
 function parseMarkdownTable(content = '') {
@@ -86,25 +100,35 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor }) {
   </div>
 }
 
-function NumberedList({ rows, isUrdu, qFs, fs, shortLayout, themeColor, answerLinesPerItem = 0 }) {
+function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeColor, answerLinesPerItem = 0, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
+  const commitRow=(row, payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const nextContent=replaceNumberedLine(content,row,payload.text,isUrdu)
+    const key='item-'+row.sourceIndex
+    onQuestionChange(section.id,{ content:nextContent, richText:{...(section.richText||{}),[key]:payload.html} })
+  }
+  const rowText=row=>{
+    const key='item-'+row.sourceIndex
+    const rich=section?.richText?.[key]||''
+    if(editMode||rich) return <InlineEditable text={row.text} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section?.id} ariaLabel={'Edit item '+row.serial} onActivate={onActiveEditable} onCommit={payload=>commitRow(row,payload)} />
+    return <AnswerText text={row.text}/>
+  }
   if (shortLayout === 'table') {
-    return <table data-short-table style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px` }}><tbody>
-      {rows.map(row => <tr key={row.serial}><td style={{ width:42, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800 }}>{row.serial}</td><td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}><AnswerText text={row.text}/></td></tr>)}
+    return <table data-short-table style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>
+      {rows.map(row => <tr key={row.serial}><td style={{ width:50, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800, whiteSpace:'nowrap' }}>{itemSerialText(row.serial,isUrdu)}</td><td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}>{rowText(row)}</td></tr>)}
     </tbody></table>
   }
   const itemLineCount = Math.max(0, Number(answerLinesPerItem) || 0)
-  const renderRow = row => <div key={row.serial} data-numbered-response-row style={{ marginBottom:`${itemLineCount ? 7*fs : 4*fs}px`, breakInside:'avoid' }}>
-    <div style={{ display:'grid', gridTemplateColumns:isUrdu?'1fr 34px':'34px 1fr', gap:7, alignItems:'start' }}>
-      <span dir="ltr" style={{ gridColumn:isUrdu?2:1, textAlign:'center', fontWeight:800 }}>{row.serial}.</span>
-      <div dir={isUrdu?'rtl':'ltr'} style={{ gridColumn:isUrdu?1:2, textAlign:isUrdu?'right':'left', minWidth:0 }}><AnswerText text={row.text}/></div>
+  const renderRow = row => <div key={row.serial+'-'+row.sourceIndex} data-numbered-response-row style={{ marginBottom:`${itemLineCount ? 7*fs : 4*fs}px`, breakInside:'avoid' }}>
+    <div dir={isUrdu?'rtl':'ltr'} style={{ display:'flex', flexDirection:'row', gap:7, alignItems:'baseline', justifyContent:'flex-start', textAlign:isUrdu?'right':'left', minWidth:0 }}>
+      <span data-item-serial style={{ flex:'0 0 auto', minWidth:isUrdu?32:26, textAlign:isUrdu?'right':'center', fontWeight:800, whiteSpace:'nowrap', unicodeBidi:'isolate' }}>{itemSerialText(row.serial,isUrdu)}</span>
+      <div style={{ flex:'1 1 auto', minWidth:0 }}>{rowText(row)}</div>
     </div>
-    {itemLineCount > 0 && <div data-item-answer-lines style={{ marginInlineStart:isUrdu?0:41, marginInlineEnd:isUrdu?41:0 }}>{Array.from({length:itemLineCount},(_,i)=><div key={i} style={{ height:`${18*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
+    {itemLineCount > 0 && <div data-item-answer-lines style={{ marginInlineStart:isUrdu?0:39, marginInlineEnd:isUrdu?39:0 }}>{Array.from({length:itemLineCount},(_,i)=><div key={i} style={{ height:`${18*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
   </div>
   if (shortLayout === '2-column-balanced' && rows.length > 3) {
     const mid = Math.ceil(rows.length/2)
-    const first = rows.slice(0, mid)
-    const second = rows.slice(mid)
-    const columns = isUrdu ? [first, second] : [first, second]
+    const columns = [rows.slice(0,mid), rows.slice(mid)]
     return <div data-short-two-column style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:`${6*fs}px ${18*fs}px`, direction:isUrdu?'rtl':'ltr' }}>{columns.map((column, idx)=><div key={idx}>{column.map(renderRow)}</div>)}</div>
   }
   return <div data-numbered-list>{rows.map(renderRow)}</div>
@@ -137,6 +161,18 @@ function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor }) {
 }
 
 
+function VerticalMathLines({ lines, themeColor }) {
+  return <div data-place-value-stack style={{ display:'inline-grid', gridTemplateColumns:'18px minmax(3ch,max-content)', alignItems:'baseline', justifyContent:'center', columnGap:4, fontVariantNumeric:'tabular-nums', direction:'ltr' }}>
+    {lines.map((raw,index)=>{
+      const line=String(raw||'').trim()
+      if(/^_+$/.test(line)) return <span key={index} style={{ gridColumn:'1 / -1', height:5, borderTop:`1.6px solid ${themeColor}`, marginTop:1 }} />
+      const match=line.match(/^([+\-−×xX÷])?\s*([0-9][0-9,.' ]*)$/)
+      if(match) return <Fragment key={index}><span style={{ textAlign:'center', fontWeight:800 }}>{match[1]||''}</span><span style={{ textAlign:'right', whiteSpace:'pre', letterSpacing:0 }}>{match[2].trim()}</span></Fragment>
+      return <span key={index} style={{ gridColumn:'1 / -1', textAlign:'center', whiteSpace:'pre' }}>{line}</span>
+    })}
+  </div>
+}
+
 function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
   const raw = String(content || '').replace(/\r\n/g, '\n')
   const mathFont = "'Cambria Math', 'Times New Roman', serif"
@@ -150,8 +186,8 @@ function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
         return <div key={blockIndex} style={{ display:'grid', gridTemplateColumns:`repeat(${cols}, minmax(0,1fr))`, gap:`${10*fs}px`, breakInside:'avoid' }}>
           {Array.from({length:cols}, (_,colIndex) => {
             const cellLines = rows.map(row => row[colIndex] || '').filter(Boolean)
-            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px` }}>
-              {cellLines.map((line,i)=><div key={i} style={{ whiteSpace:'pre', borderBottom:/^_+$/.test(line)?`1.5px solid ${themeColor}`:'none', minHeight:'1.2em' }}>{/^_+$/.test(line)?'':line}</div>)}
+            return <div key={colIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px ${9*fs}px`, textAlign:'center', fontFamily:mathFont, fontSize:`${Math.max(qFs+1,14)}px`, lineHeight:1.35, minHeight:`${58*fs}px`, display:'grid', placeItems:'center' }}>
+              <VerticalMathLines lines={cellLines} themeColor={themeColor} />
             </div>
           })}
         </div>
@@ -183,7 +219,7 @@ function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
   </div>
 }
 
-function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem = 0 }) {
+function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem = 0, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
   const mcqs = kind === 'mcq' ? parseMcqRows(content) : []
   if (mcqs.length) return <McqSection rows={mcqs} layout={mcqLayout} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
 
@@ -198,87 +234,86 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
   if (firstNumbered > 0 && firstNumbered <= 2) {
     const bank = rawLines.slice(0, firstNumbered).join(' ')
     const bankRows = parseNumberedLines(rawLines.slice(firstNumbered).join('\n'))
-    return <><div data-word-bank style={{ border:`1px solid ${themeColor}55`, background:`${themeColor}0A`, padding:`${5*fs}px ${8*fs}px`, marginBottom:`${6*fs}px`, textAlign:'center', fontWeight:700 }}>{bank}</div><NumberedList rows={bankRows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="1-column" themeColor={themeColor}/></>
+    return <><div data-word-bank style={{ border:`1px solid ${themeColor}55`, background:`${themeColor}0A`, padding:`${5*fs}px ${8*fs}px`, marginBottom:`${6*fs}px`, textAlign:'center', fontWeight:700 }}>{bank}</div><NumberedList rows={bankRows} content={rawLines.slice(firstNumbered).join('\n')} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="1-column" themeColor={themeColor} editMode={false}/></>
   }
 
   const rows = parseNumberedLines(content)
-  if (kind === 'short') return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout={shortLayout} themeColor={themeColor} answerLinesPerItem={answerLinesPerItem}/>
-  if (kind === 'matching' && rows.length) return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="table" themeColor={themeColor}/>
+  if (kind === 'short') return <NumberedList rows={rows} content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout={shortLayout} themeColor={themeColor} answerLinesPerItem={answerLinesPerItem} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  if (kind === 'matching' && rows.length) return <NumberedList rows={rows} content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="table" themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
   if (kind === 'vertical_math' && rows.length) {
     return <div data-vertical-math style={{ display:'grid', gridTemplateColumns:`repeat(${Math.min(3,rows.length)}, minmax(0,1fr))`, gap:`${8*fs}px`, direction:'ltr' }}>
       {rows.map(row => <div key={row.serial} style={{ border:`1px solid ${themeColor}55`, padding:`${8*fs}px`, textAlign:'center', fontFamily:"'Cambria Math', 'Times New Roman', serif", fontSize:`${Math.max(qFs+1,14)}px`, fontWeight:700, minHeight:`${38*fs}px` }}><span style={{ color:themeColor }}>{row.serial}.</span> <AnswerText text={row.text}/></div>)}
     </div>
   }
-  if (rows.length >= 2) return <NumberedList rows={rows} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="1-column" themeColor={themeColor} answerLinesPerItem={answerLinesPerItem}/>
-  return <div style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, textAlign:isUrdu?'right':'left' }}><AnswerText text={content}/></div>
+  if (rows.length >= 2) return <NumberedList rows={rows} content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="1-column" themeColor={themeColor} answerLinesPerItem={answerLinesPerItem} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  const richContent=section?.richText?.content||''
+  return (editMode||richContent) && section?.id ? <InlineEditable as="div" singleLine={false} text={content} richHtml={richContent} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="content" sectionId={section.id} ariaLabel="Edit question content" onActivate={onActiveEditable} onCommit={payload=>onQuestionChange?.(section.id,{content:payload.text,richText:{...(section.richText||{}),content:payload.html}})} style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, textAlign:isUrdu?'right':'left' }}/> : <div style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, textAlign:isUrdu?'right':'left' }}><AnswerText text={content}/></div>
 }
 
 export default function OfficialSectionRenderer({
-  questions = [], isUrdu = false, editMode = false, fs = 1, qFs = 13, headingFs = null,
-  themeColor = '#123b67', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, qBorderStyle = 'none',
-  mcqLayout = 'matrix-table', shortLayout = '1-column', showAnsLines = false,
-  showSectionLine = true, urdLineH = 2, engLineH = 1.5, letterSp = 0,
-  wordSp = 0, textAlign = 'start', fontFamily = ''
+ questions = [], isUrdu = false, editMode = false, fs = 1, qFs = 13, headingFs = null,
+ themeColor = '#123b67', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId = '', onActiveEditable,
+ qBorderStyle = 'none', mcqLayout = 'matrix-table', shortLayout = '1-column', showAnsLines = false,
+ showSectionLine = true, urdLineH = 2, engLineH = 1.5, letterSp = 0,
+ wordSp = 0, textAlign = 'start', fontFamily = ''
 }) {
-  const ordered = [...questions].sort((a,b)=>Number(a.sourceOrder||0)-Number(b.sourceOrder||0))
-  return <div data-official-sections style={{ direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?URDU_FONT_STACK:(fontFamily||'inherit'), lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px`, wordSpacing:`${wordSp}px` }}>
-    {ordered.map((section,index)=>{
-      const kind = inferOfficialSectionKind(section)
-      if (kind === 'marker') {
-        const labels = String(section.content||'').split(/\r?\n/).filter(isSectionMarkerLine)
-        return <Fragment key={section.id||index}>{labels.map((line,i)=><SectionBanner key={i} text={cleanSectionMarker(line)} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>)}</Fragment>
-      }
-      const ordinal = ordered.slice(0, index + 1).filter(item => inferOfficialSectionKind(item) !== 'marker').length
-      const rawHeading = String(section.heading||'').trim()
-      const hasSerial = /^(?:Q(?:uestion)?\s*\d+|سوال(?:\s+نمبر)?\s*\d+)/i.test(rawHeading)
-      const cleanHeading = stripTrailingMarks(rawHeading)
-      const displayHeading = hasSerial ? cleanHeading : `${isUrdu?`سوال نمبر ${ordinal}:`:`Q${ordinal}.`} ${cleanHeading}`.trim()
-      const resolvedMarks = resolveSectionTotalMarks(section)
-      const marksLabel = extractMarksLabel(rawHeading, resolvedMarks)
-      const parts = splitContentWithMarkers(section.content)
-      const sectionBorder = qBorderStyle === 'box' ? `1px solid ${themeColor}66` : qBorderStyle === 'table' ? `1.5px solid ${themeColor}` : 'none'
-      const sectionPadding = qBorderStyle === 'none' ? 0 : `${7*fs}px`
-      const defaultLines = showAnsLines && ['short','long','list','fill_blank'].includes(kind) ? (kind==='long'?6:2) : 0
-      const answerLines = Number(section.answerLines || defaultLines)
-      const resolvedAlign = textAlign==='start'?(isUrdu?'right':'left'):textAlign==='end'?(isUrdu?'left':'right'):textAlign
-
-      return <section key={section.id||index} data-official-section data-section-kind={kind} style={{ marginBottom:`${10*fs}px`, border:sectionBorder, borderRadius:qBorderStyle==='box'?5:0, padding:sectionPadding, breakInside:'auto' }}>
-        {editMode && <div className="no-print" data-edit-guide style={{ marginBottom:7, padding:8, border:`1px dashed ${themeColor}88`, borderRadius:6, background:'#f8fafc' }}>
-          <div style={{ display:'grid', gridTemplateColumns:'90px 105px minmax(0,1fr) auto', gap:7, alignItems:'end', marginBottom:7, fontFamily:'Arial,sans-serif', direction:'ltr' }}>
-            <label style={{ fontSize:10, fontWeight:800, color:'#475569' }}>Question No.
-              <input aria-label={`Question ${ordinal} number`} type="number" min="1" value={Number(section.sourceOrder||ordinal)} onChange={e=>{ const next=Math.max(1,Number(e.target.value)||1); onQuestionChange?.(section.id,{sourceOrder:next,heading:replaceQuestionSerial(section.heading||'',next,isUrdu),text:replaceQuestionSerial(section.heading||'',next,isUrdu),textUrdu:isUrdu?replaceQuestionSerial(section.heading||'',next,isUrdu):''}) }} style={{ width:'100%', boxSizing:'border-box', marginTop:3, padding:5 }}/>
-            </label>
-            <label style={{ fontSize:10, fontWeight:800, color:'#475569' }}>Marks
-              <input aria-label={`Question ${ordinal} marks`} type="number" min="0" value={resolvedMarks || ''} onChange={e=>{ const next=Math.max(0,Number(e.target.value)||0); const heading=replaceSectionMarks(section.heading||'',next,isUrdu); onQuestionChange?.(section.id,{marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:isUrdu?heading:''}) }} style={{ width:'100%', boxSizing:'border-box', marginTop:3, padding:5 }}/>
-            </label>
-            <label style={{ fontSize:10, fontWeight:800, color:'#475569' }}>Question / Instruction
-              <input aria-label={`Question ${ordinal} heading`} value={section.heading||''} onChange={e=>onQuestionChange?.(section.id,{heading:e.target.value,text:e.target.value,textUrdu:isUrdu?e.target.value:''})} style={{ width:'100%', boxSizing:'border-box', border:`1px solid ${themeColor}66`, borderRadius:5, padding:6, marginTop:3, font:'inherit', fontWeight:800, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}/>
-            </label>
-            <div style={{ display:'flex', gap:4, paddingBottom:1 }}>
-              <button type="button" title="Move question up" onClick={()=>onMoveSection?.(section.id,-1)} style={{ padding:'5px 8px' }}>↑</button>
-              <button type="button" title="Move question down" onClick={()=>onMoveSection?.(section.id,1)} style={{ padding:'5px 8px' }}>↓</button>
-              <button type="button" title="Duplicate question" onClick={()=>onDuplicateSection?.(section.id)} style={{ padding:'5px 8px' }}>Duplicate</button>
-              <button type="button" title="Delete question" onClick={()=>onDeleteSection?.(section.id)} style={{ padding:'5px 8px', color:'#b91c1c' }}>Delete</button>
-            </div>
-          </div>
-          <label style={{ display:'block', fontFamily:'Arial,sans-serif', fontSize:10, fontWeight:800, color:'#475569', marginBottom:3 }}>Question Content</label>
-          <textarea aria-label={`Question ${ordinal} content`} value={section.content||''} onChange={e=>onQuestionChange?.(section.id,{content:e.target.value})} style={{ width:'100%', boxSizing:'border-box', minHeight:Math.max(82,String(section.content||'').split('\n').length*20), resize:'vertical', border:`1px solid ${themeColor}55`, borderRadius:5, padding:7, font:'inherit', lineHeight:isUrdu?urdLineH:engLineH, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}/>
-          <div style={{ display:'flex', gap:12, alignItems:'center', flexWrap:'wrap', marginTop:6, fontFamily:'Arial,sans-serif', fontSize:11, direction:'ltr' }}>
-            <label style={{ fontWeight:800, color:'#475569' }}>Type <select value={section.layoutPreset || 'auto'} onChange={e=>onQuestionChange?.(section.id,{layoutPreset:e.target.value})} style={{ marginLeft:4 }}><option value="auto">Auto ({kind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option></select></label>
-            <label>Section answer lines <input type="number" min="0" max="20" value={Number(section.answerLines||0)} onChange={e=>onQuestionChange?.(section.id,{answerLines:Math.max(0,Number(e.target.value)||0)})} style={{ width:58, marginLeft:4 }}/></label>
-            <label>Lines per item <input type="number" min="0" max="5" value={Number(section.answerLinesPerItem||0)} onChange={e=>onQuestionChange?.(section.id,{answerLinesPerItem:Math.max(0,Number(e.target.value)||0)})} style={{ width:58, marginLeft:4 }}/></label>
-          </div>
-        </div>}
-        <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{ display:'grid', gridTemplateColumns:isUrdu?'72px minmax(0,1fr)':'minmax(0,1fr) 72px', alignItems:'center', gap:8, paddingBottom:`${4*fs}px`, marginBottom:`${6*fs}px`, borderBottom:showSectionLine?`2px solid ${themeColor}`:'none', direction:'ltr' }}>
-          <div data-question-heading style={{ gridColumn:isUrdu?2:1, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontWeight:900, fontSize:`${Math.max(Number(headingFs || 0), qFs + 1, 13)}px` }}>{displayHeading}</div>
-          {marksLabel ? <div data-marks-badge style={{ gridColumn:isUrdu?1:2, direction:'ltr', textAlign:'center', border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 5px', color:themeColor, fontWeight:800, fontSize:`${Math.max(10,qFs-2)}px`, whiteSpace:'nowrap' }}>{marksLabel}</div> : <span/>}
-        </div>
-        {parts.length ? parts.map((part,partIndex)=>part.type==='marker'
-          ? <SectionBanner key={partIndex} text={part.text} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>
-          : <div key={partIndex} style={{ textAlign:resolvedAlign }}>{renderContent({ content:part.text, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem:Math.max(0,Number(section.answerLinesPerItem)||0) })}</div>) : null}
-        {answerLines > 0 && <div data-configurable-answer-lines>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{ height:`${20*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
-      </section>
-    })}
-    {editMode && <div className="no-print" style={{ marginTop:10, direction:'ltr', textAlign:'center' }}><button type="button" onClick={()=>onAddSection?.()} style={{ border:`1px solid ${themeColor}`, color:themeColor, background:'#fff', borderRadius:7, padding:'7px 14px', fontWeight:800, cursor:'pointer' }}>+ Add Question Section</button></div>}
-  </div>
+ const ordered = [...questions].sort((a,b)=>Number(a.sourceOrder||0)-Number(b.sourceOrder||0))
+ return <div data-official-sections style={{ direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?URDU_FONT_STACK:(fontFamily||'inherit'), lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:String(letterSp)+'px', wordSpacing:String(wordSp)+'px' }}>
+  {ordered.map((section,index)=>{
+   const kind=inferOfficialSectionKind(section)
+   if(kind==='marker'){
+    const labels=String(section.content||'').split(/\r?\n/).filter(isSectionMarkerLine)
+    return <Fragment key={section.id||index}>{labels.map((line,i)=><SectionBanner key={i} text={cleanSectionMarker(line)} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>)}</Fragment>
+   }
+   const ordinal=ordered.slice(0,index+1).filter(item=>inferOfficialSectionKind(item)!=='marker').length
+   const serial=Number(section.sourceOrder||ordinal)||ordinal
+   const rawHeading=String(section.heading||'').trim()
+   const cleanHeading=stripTrailingMarks(rawHeading)
+   const instruction=cleanHeading
+    .replace(/^(?:Q(?:uestion)?\s*\d+\s*[:.)-]?|سوال(?:\s+نمبر)?\s*\d+\s*[:.)-]?)\s*/i,'').trim()
+   const resolvedMarks=resolveSectionTotalMarks(section)
+   const marksLabel=extractMarksLabel(rawHeading,resolvedMarks)
+   const parts=splitContentWithMarkers(section.content)
+   const sectionBorder=qBorderStyle==='box'?'1px solid '+themeColor+'66':qBorderStyle==='table'?'1.5px solid '+themeColor:'none'
+   const sectionPadding=qBorderStyle==='none'?0:String(7*fs)+'px'
+   const defaultLines=showAnsLines&&['short','long','list','fill_blank'].includes(kind)?(kind==='long'?6:2):0
+   const answerLines=Number(section.answerLines||defaultLines)
+   const resolvedAlign=textAlign==='start'?(isUrdu?'right':'left'):textAlign==='end'?(isUrdu?'left':'right'):textAlign
+   const divider=section.showDivider===true?true:section.showDivider===false?false:showSectionLine
+   const selected=editMode&&String(selectedSectionId||'')===String(section.id||'')
+   const serialText=isUrdu?'سوال نمبر '+serial+':':'Q'+serial+'.'
+   const commitInstruction=payload=>{
+    let heading=replaceQuestionSerial(payload.text,serial,isUrdu)
+    heading=replaceSectionMarks(heading,resolvedMarks,isUrdu)
+    onQuestionChange?.(section.id,{heading,text:heading,textUrdu:isUrdu?heading:'',richText:{...(section.richText||{}),headingInstruction:payload.html}})
+   }
+   const commitSerial=payload=>{
+    const next=Math.max(1,Number(String(payload.text).match(/\d+/)?.[0]||serial))
+    const heading=replaceQuestionSerial(section.heading||'',next,isUrdu)
+    onQuestionChange?.(section.id,{sourceOrder:next,heading,text:heading,textUrdu:isUrdu?heading:''})
+   }
+   const commitMarks=payload=>{
+    const next=Math.max(0,Number(String(payload.text).match(/\d+/)?.[0]||0))
+    const heading=replaceSectionMarks(section.heading||'',next,isUrdu)
+    onQuestionChange?.(section.id,{marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:isUrdu?heading:''})
+   }
+   return <section key={section.id||index} data-official-section data-section-kind={kind} data-edit-selected={selected?'true':undefined}
+    onMouseDown={event=>{if(editMode){if(event.target?.closest?.('[data-paper-inline-editable]')) return;event.stopPropagation();onSelectSection?.(section.id)}}}
+    style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?5:0,padding:sectionPadding,breakInside:'auto',outline:editMode?(selected?'2px dashed #dc2626':'1px dashed #ef4444'):'none',outlineOffset:editMode?3:0,background:selected?'rgba(254,226,226,.12)':undefined}}>
+    <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'72px minmax(0,1fr)':'minmax(0,1fr) 72px',alignItems:'center',gap:8,paddingBottom:String(4*fs)+'px',marginBottom:String(6*fs)+'px',borderBottom:divider?'2px solid '+themeColor:'none',direction:'ltr'}}>
+     <div data-question-heading style={{gridColumn:isUrdu?2:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6}}>
+      <InlineEditable text={serialText} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-number" sectionId={section.id} ariaLabel={'Edit question '+serial+' number'} onActivate={onActiveEditable} onCommit={commitSerial} style={{flex:'0 0 auto',whiteSpace:'nowrap',fontWeight:900}} />
+      <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:900}} />
+     </div>
+     {marksLabel?<div data-marks-badge style={{gridColumn:isUrdu?1:2,direction:'ltr',textAlign:'center',border:'1px solid '+themeColor,borderRadius:4,padding:'2px 5px',color:themeColor,fontWeight:800,fontSize:String(Math.max(10,qFs-2))+'px',whiteSpace:'nowrap'}}>
+      <InlineEditable text={marksLabel} editMode={editMode} direction="ltr" fieldKey="marks" sectionId={section.id} ariaLabel={'Edit question '+serial+' marks'} onActivate={onActiveEditable} onCommit={commitMarks} style={{display:'block',textAlign:'center'}} />
+     </div>:<span/>}
+    </div>
+    {parts.length?parts.map((part,partIndex)=>part.type==='marker'
+     ?<SectionBanner key={partIndex} text={part.text} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>
+     :<div key={partIndex} style={{textAlign:resolvedAlign}}>{renderContent({content:part.text,kind,isUrdu,qFs,fs,themeColor,mcqLayout,shortLayout,answerLinesPerItem:Math.max(0,Number(section.answerLinesPerItem)||0),editMode:editMode&&parts.length===1,section,onQuestionChange,onActiveEditable})}</div>):null}
+    {answerLines>0&&<div data-configurable-answer-lines>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{height:String(20*fs)+'px',borderBottom:'1px solid #8793a0'}}/>)}</div>}
+   </section>
+  })}
+ </div>
 }
