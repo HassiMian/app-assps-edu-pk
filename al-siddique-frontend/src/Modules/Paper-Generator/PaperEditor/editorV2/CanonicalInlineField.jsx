@@ -9,6 +9,7 @@ export default function CanonicalInlineField({
   minWidth = '24px',
   textAlign = 'inherit',
   numeric = false,
+  multiline = false,
   style = {},
 }) {
   const ref = useRef(null)
@@ -30,7 +31,9 @@ export default function CanonicalInlineField({
 
   const commit = () => {
     if (!ref.current || typeof onCommit !== 'function') return
-    let next = ref.current.textContent ?? ''
+    let next = multiline
+      ? (ref.current.innerText ?? ref.current.textContent ?? '')
+      : (ref.current.textContent ?? '')
     if (!normalized && next === placeholder) next = ''
     if (numeric) {
       next = next.replace(/[^0-9.]/g, '')
@@ -54,7 +57,7 @@ export default function CanonicalInlineField({
       }}
       onBlur={commit}
       onKeyDown={(event) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && !multiline) {
           event.preventDefault()
           event.currentTarget.blur()
         } else if (event.key === 'Escape') {
@@ -74,6 +77,7 @@ export default function CanonicalInlineField({
         borderRadius: '2px',
         padding: '0 2px',
         cursor: 'text',
+        whiteSpace: multiline ? 'pre-wrap' : 'normal',
         ...style,
       }}
     >

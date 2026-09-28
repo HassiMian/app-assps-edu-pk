@@ -11,6 +11,8 @@ import {
   SUPPORTED_SIZES,
   SUPPORTED_COLORS,
   SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
 } from './CanonicalEditorExtensions.js'
 import { parseFieldKey } from './EditorFieldRegistry.js'
 
@@ -74,6 +76,8 @@ export default function CanonicalPaperRibbonToolbar({
   }
 
   const currentTextStyle = activeEditor?.getAttributes('textStyle') || {}
+  const currentBlockType = activeEditor?.isActive('heading') ? 'heading' : 'paragraph'
+  const currentBlockAttrs = activeEditor?.getAttributes(currentBlockType) || {}
   const canUndo = Boolean(activeEditor?.can().undo())
   const canRedo = Boolean(activeEditor?.can().redo())
 
@@ -408,6 +412,51 @@ export default function CanonicalPaperRibbonToolbar({
           >
             <ArrowLeft size={14} />
           </button>
+        </div>
+
+        <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.12)' }} />
+
+        {/* Granular paragraph spacing applies only to the active rich-text block. */}
+        <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+          <select
+            aria-label="Line Height"
+            value={currentBlockAttrs.lineHeight || ''}
+            onChange={e => {
+              if (!activeEditor) return
+              const value = e.target.value || null
+              restoreAndFocus(activeEditor)
+                .updateAttributes('paragraph', { lineHeight: value })
+                .updateAttributes('heading', { lineHeight: value })
+                .run()
+            }}
+            style={{ ...selectStyle, width: '78px' }}
+            title="Line spacing for the active paragraph/question"
+          >
+            <option value="">Line</option>
+            {SUPPORTED_LINE_HEIGHTS.map(value => (
+              <option key={value} value={value}>{value}×</option>
+            ))}
+          </select>
+
+          <select
+            aria-label="Paragraph Spacing"
+            value={currentBlockAttrs.paragraphSpacing || ''}
+            onChange={e => {
+              if (!activeEditor) return
+              const value = e.target.value || null
+              restoreAndFocus(activeEditor)
+                .updateAttributes('paragraph', { paragraphSpacing: value })
+                .updateAttributes('heading', { paragraphSpacing: value })
+                .run()
+            }}
+            style={{ ...selectStyle, width: '88px' }}
+            title="Space after the active paragraph/question"
+          >
+            <option value="">After</option>
+            {SUPPORTED_PARAGRAPH_SPACING.map(value => (
+              <option key={value} value={value}>{value}</option>
+            ))}
+          </select>
         </div>
 
         <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.12)' }} />

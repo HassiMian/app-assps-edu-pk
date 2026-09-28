@@ -54,7 +54,11 @@ function renderBlock(block, index) {
   const key = `block-${index}`
   const attrs = block.attrs || {}
   const dir = attrs.dir || undefined
-  const style = attrs.textAlign ? { textAlign: attrs.textAlign } : undefined
+  const blockStyle = {}
+  if (attrs.textAlign) blockStyle.textAlign = attrs.textAlign
+  if (attrs.lineHeight) blockStyle.lineHeight = attrs.lineHeight
+  if (attrs.paragraphSpacing) blockStyle.marginBottom = attrs.paragraphSpacing
+  const style = Object.keys(blockStyle).length > 0 ? blockStyle : undefined
 
   const children = Array.isArray(block.content) && block.content.length > 0
     ? block.content.map((child, cIdx) => {

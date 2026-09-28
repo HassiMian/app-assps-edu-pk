@@ -11,6 +11,8 @@ import {
   SUPPORTED_SIZES,
   SUPPORTED_COLORS,
   SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
 } from './editorProjection.js'
 
 export {
@@ -18,6 +20,8 @@ export {
   SUPPORTED_SIZES,
   SUPPORTED_COLORS,
   SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
 }
 
 export const CanonicalTextStyle = TextStyle.extend({
@@ -54,6 +58,24 @@ export const CanonicalTextAlign = TextAlign.extend({
             default: null,
             parseHTML: element => element.getAttribute('dir') || null,
             renderHTML: attrs => (attrs.dir ? { dir: attrs.dir } : {}),
+          },
+          lineHeight: {
+            default: null,
+            parseHTML: element => element.style.lineHeight || null,
+            renderHTML: attrs => (
+              SUPPORTED_LINE_HEIGHTS.includes(String(attrs.lineHeight || ''))
+                ? { style: `line-height: ${attrs.lineHeight}` }
+                : {}
+            ),
+          },
+          paragraphSpacing: {
+            default: null,
+            parseHTML: element => element.style.marginBottom || null,
+            renderHTML: attrs => (
+              SUPPORTED_PARAGRAPH_SPACING.includes(String(attrs.paragraphSpacing || ''))
+                ? { style: `margin-bottom: ${attrs.paragraphSpacing}` }
+                : {}
+            ),
           },
         },
       },

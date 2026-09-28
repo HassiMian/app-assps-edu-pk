@@ -11,6 +11,7 @@ import {
   extractPlainTextFromTiptap,
   computeFieldDirtyState,
   computeCanonicalFingerprint,
+  sanitizePaperRichText,
 } from '../editorV2/editorProjection.js'
 import {
   createEditorWorkingDocument,
@@ -212,4 +213,35 @@ test('IMMUTABILITY: Canonical baseline document remains 100% bit-identical after
   assert.strictEqual(baselineDoc.sourceIdentity.sourcePaperId, doc.sourceIdentity.sourcePaperId)
   assert.strictEqual(baselineDoc.sourceIdentity.sourceDatasetByteSha256, doc.sourceIdentity.sourceDatasetByteSha256)
   assert.strictEqual(baselineDoc.sourceCoverageLedger.length, doc.sourceCoverageLedger.length)
+})
+
+
+test('PROJECTION C: line height and paragraph spacing are safe formatting-only attributes', () => {
+  const baselineText = 'Spacing test'
+  const baselineRich = canonicalTextToTiptapDoc(baselineText)
+  const formattedRich = {
+    type: 'doc',
+    content: [{
+      type: 'paragraph',
+      attrs: { lineHeight: '1.5', paragraphSpacing: '6pt' },
+      content: [{ type: 'text', text: baselineText }],
+    }],
+  }
+
+  const check = computeFieldDirtyState(formattedRich, baselineRich, baselineText, baselineText)
+  assert.strictEqual(check.isDirty, true)
+  assert.strictEqual(check.academicTextMutated, false)
+  assert.strictEqual(check.mutationState, 'FORMATTING_ONLY')
+  assert.strictEqual(check.sanitizedWorking.content[0].attrs.lineHeight, '1.5')
+  assert.strictEqual(check.sanitizedWorking.content[0].attrs.paragraphSpacing, '6pt')
+
+  const unsafe = sanitizePaperRichText({
+    type: 'doc',
+    content: [{
+      type: 'paragraph',
+      attrs: { lineHeight: '9', paragraphSpacing: '99px' },
+      content: [{ type: 'text', text: baselineText }],
+    }],
+  })
+  assert.strictEqual(unsafe.content[0].attrs, undefined)
 })

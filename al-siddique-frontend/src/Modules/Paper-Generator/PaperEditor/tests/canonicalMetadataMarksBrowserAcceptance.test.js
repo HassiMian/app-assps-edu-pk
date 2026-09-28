@@ -136,3 +136,41 @@ test('Phase 10 browser: section title and instruction edit independently', async
   const afterNodeIds = await page.locator('[data-node-id]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-node-id')))
   assert.deepStrictEqual(afterNodeIds, beforeNodeIds)
 })
+
+
+test('Phase 11 browser: general instructions and active-question spacing stay scoped', async () => {
+  const instructions = page.locator('[data-canonical-inline-editor][aria-label="General instructions"]')
+  assert.strictEqual(await instructions.count(), 1)
+
+  await instructions.click()
+  await instructions.press('Control+A')
+  await instructions.fill('Read every question carefully.')
+  await instructions.evaluate(element => element.blur())
+  assert.strictEqual((await instructions.textContent()).trim(), 'Read every question carefully.')
+
+  const editable = page.locator('.canonical-editable-stem-content').first()
+  assert.strictEqual(await editable.count(), 1)
+  await editable.click()
+
+  const paragraph = editable.locator('p').first()
+  const originalText = await paragraph.textContent()
+
+  await page.locator('select[aria-label="Line Height"]').selectOption('1.5')
+  await page.locator('select[aria-label="Paragraph Spacing"]').selectOption('6pt')
+
+  const lineHeight = await paragraph.evaluate(element => element.style.lineHeight)
+  const marginBottom = await paragraph.evaluate(element => element.style.marginBottom)
+  assert.strictEqual(lineHeight, '1.5')
+  assert.strictEqual(marginBottom, '6pt')
+  assert.strictEqual(await paragraph.textContent(), originalText)
+
+  const fieldKey = await editable.getAttribute('data-field-key')
+  assert.ok(fieldKey)
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+
+  const staticParagraph = page.locator(`[data-field-key="${fieldKey}"] .canonical-static-text p`).first()
+  assert.strictEqual(await staticParagraph.count(), 1)
+  assert.strictEqual(await staticParagraph.evaluate(element => element.style.lineHeight), '1.5')
+  assert.strictEqual(await staticParagraph.evaluate(element => element.style.marginBottom), '6pt')
+  assert.strictEqual(await staticParagraph.textContent(), originalText)
+})

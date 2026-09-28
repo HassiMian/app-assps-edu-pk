@@ -158,3 +158,26 @@ test('section title and instructions are independent draft-safe working overlays
   assert.strictEqual(reopened.setSectionTitle(section.id, originalTitle || ''), true)
   assert.strictEqual(reopened.setSectionInstructions(section.id, originalInstructions || ''), true)
 })
+
+
+test('general instructions support multiline metadata persistence without source mutation', () => {
+  const doc = canonicalCorpus.find(item => item.id.includes('class-6-science'))
+  assert.ok(doc)
+  const baselineHash = crypto.createHash('sha256').update(JSON.stringify(doc)).digest('hex')
+  const store = new EditorWorkingStore(doc)
+  const value = 'Read every question carefully.\nShow working where required.'
+
+  assert.strictEqual(store.setMetadataField('generalInstructions', value), true)
+  assert.strictEqual(store.getWorkingDocument().metadata.generalInstructions, value)
+
+  const draft = store.exportCompactDraft()
+  assert.strictEqual(draft.metadataPatch.fields.generalInstructions, value)
+  assert.strictEqual(validateWorkingDraft(draft, doc).valid, true)
+
+  const reopened = new EditorWorkingStore(doc)
+  assert.strictEqual(reopened.applyCompactDraft(draft).status, 'APPLIED')
+  assert.strictEqual(reopened.getWorkingDocument().metadata.generalInstructions, value)
+
+  const afterHash = crypto.createHash('sha256').update(JSON.stringify(reopened.getBaselineDocument())).digest('hex')
+  assert.strictEqual(afterHash, baselineHash)
+})

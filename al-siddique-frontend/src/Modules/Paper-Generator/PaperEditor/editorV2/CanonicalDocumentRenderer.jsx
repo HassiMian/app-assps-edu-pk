@@ -469,6 +469,38 @@ export default function CanonicalDocumentRenderer({
             </button>
           </div>
         )}
+
+        {(meta.generalInstructions || isEditing) && (
+          <div
+            className={!meta.generalInstructions && isEditing ? 'no-print' : undefined}
+            dir={isUrdu ? 'rtl' : 'ltr'}
+            style={{
+              marginTop: '8px',
+              padding: '6px 8px',
+              borderTop: '1px dashed #cbd5e1',
+              fontSize: '11px',
+              color: '#334155',
+              textAlign: isUrdu ? 'right' : 'left',
+            }}
+          >
+            <strong style={{ marginInlineEnd: '6px', color: '#1e3a8a' }}>General Instructions:</strong>
+            <CanonicalInlineField
+              value={meta.generalInstructions || ''}
+              onCommit={(value) => store?.setMetadataField?.('generalInstructions', value)}
+              isEditing={isEditing}
+              placeholder="+ Add general instructions"
+              ariaLabel="General instructions"
+              minWidth="220px"
+              textAlign={isUrdu ? 'right' : 'left'}
+              multiline
+              style={{
+                fontSize: '11px',
+                color: '#334155',
+                background: isEditing ? 'rgba(248,250,252,0.8)' : 'transparent',
+              }}
+            />
+          </div>
+        )}
       </header>
 
       {/* 2. Main Sections Area */}

@@ -173,3 +173,20 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Final migration/invariants/rules/parity/working-model regression: 52/52 PASS.
 - Production frontend build: PASS.
 - Production route remains unchanged.
+
+## Phase 11 — General Instructions + Granular Text Spacing (28 Sep 2026)
+- Added paper-level General Instructions as an independently editable multiline metadata field; empty helper UI is edit-only and does not print.
+- General Instructions persist through compact working drafts and reopen without mutating canonical source.
+- Extended CanonicalInlineField with multiline-safe editing and newline-preserving commit behavior.
+- Added safe paragraph-level line-height values: 1, 1.15, 1.25, 1.5, 1.75, 2.
+- Added safe paragraph-after spacing values: 0pt, 2pt, 4pt, 6pt, 8pt, 10pt, 12pt.
+- Spacing attributes are schema-aware Tiptap paragraph/heading attributes, pass through strict sanitizer, and are classified as FORMATTING_ONLY when academic text is unchanged.
+- Invalid spacing values are removed by sanitization rather than persisted.
+- Ribbon controls now apply line height and paragraph spacing only to the active rich-text block/question instead of the whole paper.
+- Canonical static renderer consumes the same spacing attributes, preserving editor -> static/print geometry parity.
+- Browser acceptance confirms line-height 1.5 and paragraph spacing 6pt survive Done Editing/static rendering without changing question text.
+- General-instructions + spacing unit regression: 11/11 PASS.
+- Browser metadata/marks/section/spacing acceptance: 5/5 PASS.
+- Final focused migration/invariants/rules/parity/working-model regression: 54/54 PASS.
+- Production frontend build: PASS.
+- Production route remains unchanged.

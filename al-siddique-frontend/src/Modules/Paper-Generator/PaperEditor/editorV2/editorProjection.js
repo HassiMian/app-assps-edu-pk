@@ -55,6 +55,8 @@ export const SUPPORTED_FONTS = [
 export const SUPPORTED_SIZES = [8, 9, 10, 11, 12, 13, 14, 16, 18, 20, 24, 28, 32, 36]
 export const SUPPORTED_COLORS = ['#111827', '#374151', '#123b67', '#075985', '#06695b', '#9a6a00', '#b91c1c', '#7e22ce']
 export const SUPPORTED_HIGHLIGHTS = ['#fef08a', '#bbf7d0', '#bfdbfe', '#fecaca', '#e9d5ff']
+export const SUPPORTED_LINE_HEIGHTS = ['1', '1.15', '1.25', '1.5', '1.75', '2']
+export const SUPPORTED_PARAGRAPH_SPACING = ['0pt', '2pt', '4pt', '6pt', '8pt', '10pt', '12pt']
 
 const ALLOWED_BLOCKS = new Set(['doc', 'paragraph', 'heading', 'hardBreak'])
 const ALLOWED_MARKS = new Set(['bold', 'italic', 'underline', 'strike', 'superscript', 'subscript', 'textStyle', 'highlight'])
@@ -69,6 +71,14 @@ const safeSize = val => {
 }
 const safeColor = val => (SUPPORTED_COLORS.includes(val) ? val : null)
 const safeHighlight = val => (SUPPORTED_HIGHLIGHTS.includes(val) ? val : null)
+const safeLineHeight = val => {
+  const normalized = val === null || val === undefined ? '' : String(val)
+  return SUPPORTED_LINE_HEIGHTS.includes(normalized) ? normalized : null
+}
+const safeParagraphSpacing = val => {
+  const normalized = val === null || val === undefined ? '' : String(val)
+  return SUPPORTED_PARAGRAPH_SPACING.includes(normalized) ? normalized : null
+}
 
 /**
  * Sanitizes an individual ProseMirror mark object.
@@ -109,8 +119,12 @@ function cleanNode(node, depth = 0) {
   if (node.type === 'paragraph' || node.type === 'heading') {
     const dir = safeDirection(node.attrs?.dir)
     const textAlign = safeAlign(node.attrs?.textAlign)
+    const lineHeight = safeLineHeight(node.attrs?.lineHeight)
+    const paragraphSpacing = safeParagraphSpacing(node.attrs?.paragraphSpacing)
     if (dir) attrs.dir = dir
     if (textAlign) attrs.textAlign = textAlign
+    if (lineHeight) attrs.lineHeight = lineHeight
+    if (paragraphSpacing) attrs.paragraphSpacing = paragraphSpacing
     if (node.type === 'heading') {
       attrs.level = [1, 2, 3, 4].includes(node.attrs?.level) ? node.attrs.level : 2
     }
