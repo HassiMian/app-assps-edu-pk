@@ -5,6 +5,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import Highlight from '@tiptap/extension-highlight'
 import Superscript from '@tiptap/extension-superscript'
 import Subscript from '@tiptap/extension-subscript'
+import { TableKit } from '@tiptap/extension-table'
 
 import {
   SUPPORTED_FONTS,
@@ -85,8 +86,8 @@ export const CanonicalTextAlign = TextAlign.extend({
 
 /**
  * Returns the exact list of safe extensions for in-place text editing in B3 (Rule 22).
- * Structural input-rules (lists, blockquotes, code blocks) and tables are disabled.
- * HardBreak is enabled with consistent serialization and static rendering.
+ * Structural input-rules that can destabilize question boundaries remain disabled.
+ * Horizontal rules and tables are enabled explicitly for the Unified Editor INSERT tab.
  */
 export function getCanonicalEditorExtensions() {
   return [
@@ -99,7 +100,7 @@ export function getCanonicalEditorExtensions() {
       listItem: false,
       blockquote: false,
       codeBlock: false,
-      horizontalRule: false,
+      horizontalRule: true,
       dropcursor: false,
       gapcursor: false,
     }),
@@ -111,5 +112,8 @@ export function getCanonicalEditorExtensions() {
     Highlight.configure({ multicolor: true }),
     Superscript,
     Subscript,
+    TableKit.configure({
+      table: { resizable: false },
+    }),
   ]
 }

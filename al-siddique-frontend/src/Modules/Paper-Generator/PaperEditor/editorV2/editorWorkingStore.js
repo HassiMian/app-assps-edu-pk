@@ -1105,6 +1105,22 @@ export class EditorWorkingStore {
     this.publishDocumentChange()
   }
 
+  setTemplateId(templateId) {
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    this._workingDoc.presentation.templateId = templateId || 'academic'
+    this._workingDoc.presentation.isDirty = true
+    this._workingDoc.session.isDirty = true
+    this.publishDocumentChange()
+  }
+
+  setPrintMode(printMode) {
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    this._workingDoc.presentation.printMode = printMode === 'half' ? 'half' : 'a4'
+    this._workingDoc.presentation.isDirty = true
+    this._workingDoc.session.isDirty = true
+    this.publishDocumentChange()
+  }
+
   setMcqLayout(sectionId, mcqLayout) {
     if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
     if (!this._workingDoc.presentation.sectionLayoutOverrides) this._workingDoc.presentation.sectionLayoutOverrides = {}
@@ -1317,6 +1333,7 @@ export class EditorWorkingStore {
         isDirty: Boolean(this._workingDoc.presentation.isDirty),
         zoomLevel: this._workingDoc.presentation.zoomLevel,
         templateId: this._workingDoc.presentation.templateId,
+        printMode: this._workingDoc.presentation.printMode || 'a4',
         pageBorder: this._workingDoc.presentation.pageBorder || 'none',
         sectionLayoutOverrides: this._workingDoc.presentation.sectionLayoutOverrides || {},
         answerLinesByNode: this._workingDoc.presentation.answerLinesByNode || {},

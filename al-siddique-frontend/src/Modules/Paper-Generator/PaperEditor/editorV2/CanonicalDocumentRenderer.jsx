@@ -4,21 +4,28 @@ import CanonicalStaticNode from './CanonicalStaticNode.jsx'
 import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
 import CanonicalInlineField from './CanonicalInlineField.jsx'
 import CanonicalStructuredNodeEditor from './structured/CanonicalStructuredNodeEditor.jsx'
+import StructuredTextInput from './structured/components/StructuredTextInput.jsx'
 import NodeStructureControls from './structured/components/NodeStructureControls.jsx'
 import AddStructuredNodeMenu from './structured/components/AddStructuredNodeMenu.jsx'
 import { resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
 import { buildStructuredControlKey } from './structured/structuredFocusHelpers.js'
 import { resolveStructuredFieldPresentation } from './structured/structuredFieldPresentation.js'
-import { createDefaultInsertedNode } from './structured/structuredNodeDefaults.js'
+import { createDefaultInsertedNode, generateNextOptionLabel } from './structured/structuredNodeDefaults.js'
+import { createInsertedOption } from './structured/structuredNodeModel.js'
 import {
   cmdInsertNode,
   cmdDeleteNode,
   cmdDuplicateNode,
   cmdMoveNode,
+  cmdUpdateMcqOptionText,
+  cmdAddMcqOption,
+  cmdRemoveMcqOption,
+  cmdReorderMcqOptions,
 } from './structured/structuredCommands.js'
 import { buildFieldKey } from './EditorFieldRegistry.js'
 import { getB3NodeEditability, B3_RENDER_STRATEGY } from './nodeRenderStrategy.js'
 import { usePaperStore } from '../../usePaperStore.js'
+import { getTemplatePreset } from '../templates/paperTemplates.js'
 
 export default function CanonicalDocumentRenderer({
   workingDoc,
@@ -143,6 +150,50 @@ export default function CanonicalDocumentRenderer({
     store.dispatchStructuralCommand(cmd)
   }
 
+  const handleUpdateMcqOption = (sectionId, nodeId, option, value) => {
+    if (!store || !option?.id || value === option.text) return
+    store.dispatchStructuralCommand(
+      cmdUpdateMcqOptionText(nodeId, sectionId, option.id, value, option.text || '')
+    )
+  }
+
+  const handleAddMcqOption = (sectionId, nodeId, options, direction) => {
+    if (!store) return
+    const allocator = store.getIdAllocator()
+    const id = allocator.allocateOptionId(sectionId)
+    const label = generateNextOptionLabel(options || [])
+    const option = createInsertedOption(id, {
+      canonicalLabel: label,
+      displayLabel: label,
+      text: '',
+      direction,
+    })
+    const afterId = options?.length ? options[options.length - 1].id : null
+    store.dispatchStructuralCommand(cmdAddMcqOption(nodeId, sectionId, option, afterId))
+  }
+
+  const handleDeleteMcqOption = (sectionId, nodeId, options, optionId) => {
+    if (!store || !Array.isArray(options) || options.length <= 2) return
+    const index = options.findIndex(option => option.id === optionId)
+    if (index < 0) return
+    const option = options[index]
+    const afterId = index > 0 ? options[index - 1].id : null
+    store.dispatchStructuralCommand(
+      cmdRemoveMcqOption(nodeId, sectionId, optionId, option, afterId)
+    )
+  }
+
+  const handleMoveMcqOption = (sectionId, nodeId, options, fromIndex, toIndex) => {
+    if (!store || toIndex < 0 || toIndex >= options.length) return
+    const currentOrder = options.map(option => option.id)
+    const nextOrder = [...currentOrder]
+    const [moved] = nextOrder.splice(fromIndex, 1)
+    nextOrder.splice(toIndex, 0, moved)
+    store.dispatchStructuralCommand(
+      cmdReorderMcqOptions(nodeId, sectionId, nextOrder, currentOrder)
+    )
+  }
+
   if (!workingDoc || !workingDoc.sections) {
     return (
       <div style={{ padding: '40px', textAlign: 'center', color: '#94a3b8' }}>
@@ -154,7 +205,11 @@ export default function CanonicalDocumentRenderer({
   const meta = workingDoc.metadata || canonicalBaseline?.metadata || {}
   const pres = workingDoc.presentationOverlay || workingDoc.presentation || {}
   const isUrdu = pres.language === 'urdu' || meta.language === 'urdu'
-  const isHalf = pres.templateId === 'half_page'
+  const isHalf = pres.printMode === 'half' || pres.templateId === 'half_page'
+  const template = getTemplatePreset(pres.templateId === 'half_page' ? 'academic' : (pres.templateId || 'academic'))
+  const accent = template.accent || '#123b67'
+  const accentSoft = template.accentSoft || '#eaf2fa'
+  const templateBorder = template.border || '#9eb6cf'
 
   const schoolName = pres.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
   const schoolAddress = meta.schoolAddress !== null && meta.schoolAddress !== undefined
@@ -203,7 +258,7 @@ export default function CanonicalDocumentRenderer({
     width: isHalf ? '148mm' : '210mm',
     minHeight: isHalf ? '210mm' : '297mm',
     margin: '0 auto',
-    padding: isHalf ? '16mm 14mm' : '20mm 18mm',
+    padding: isHalf ? '8mm 8mm' : '10mm 12mm',
     background: '#ffffff',
     color: '#0f172a',
     border: borderStyles[pageBorder] || 'none',
@@ -213,7 +268,7 @@ export default function CanonicalDocumentRenderer({
     position: 'relative',
     fontFamily: isUrdu
       ? "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif"
-      : "'Times New Roman', 'Arial', serif",
+      : (template.fontFamily || "'Times New Roman', 'Arial', serif"),
   }
 
   return (
@@ -230,24 +285,26 @@ export default function CanonicalDocumentRenderer({
         style={{
           position: 'relative',
           zIndex: 1,
-          borderBottom: '2.5px solid #1e3a8a',
-          paddingBottom: '10px',
+          borderTop: `3px solid ${accent}`,
+          borderBottom: `2px solid ${accent}`,
+          padding: '8px 8px 10px',
           marginBottom: '12px',
+          background: '#ffffff',
         }}
       >
-        <div style={{ display: 'grid', gridTemplateColumns: '70px 1fr 140px', gap: '12px', alignItems: 'center' }}>
+        <div dir="ltr" style={{ display: 'grid', gridTemplateColumns: '64px minmax(0, 1fr) 190px', gap: '12px', alignItems: 'center' }}>
           {/* Logo */}
-          <div style={{ width: 64, height: 64, display: 'grid', placeItems: 'center', background: '#fff', border: '1px solid #cbd5e1', borderRadius: 8 }}>
+          <div style={{ width: 58, height: 58, display: 'grid', placeItems: 'center', background: '#fff', border: `1px solid ${templateBorder}`, borderRadius: 4 }}>
             {logoUrl ? (
               <img src={logoUrl} alt="Logo" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             ) : (
-              <span style={{ color: '#1e3a8a', fontSize: '18px', fontWeight: 900 }}>ASSPS</span>
+              <span style={{ color: accent, fontSize: '18px', fontWeight: 900 }}>ASSPS</span>
             )}
           </div>
 
           {/* School Name & Address */}
-          <div style={{ textAlign: isUrdu ? 'right' : 'left' }}>
-            <h1 style={{ margin: 0, fontSize: isHalf ? '18px' : '22px', fontWeight: 900, color: '#1e3a8a', letterSpacing: '0.02em' }}>
+          <div style={{ textAlign: 'center', minWidth: 0 }}>
+            <h1 style={{ margin: 0, fontSize: isHalf ? '18px' : '24px', lineHeight: 1.1, fontWeight: 900, color: accent, letterSpacing: '0.01em' }}>
               {schoolName}
             </h1>
             <div style={{ fontSize: '11px', color: '#475569', marginTop: '3px' }}>
@@ -264,8 +321,8 @@ export default function CanonicalDocumentRenderer({
           </div>
 
           {/* Exam Type & Session Badge */}
-          <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 6, padding: '6px 8px', textAlign: 'center' }}>
-            <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', color: '#1e3a8a' }}>
+          <div style={{ background: accentSoft, border: `1px solid ${templateBorder}`, borderRadius: 4, padding: '6px 8px', textAlign: 'center' }}>
+            <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', color: accent }}>
               <CanonicalInlineField
                 value={meta.examType || ''}
                 onCommit={(value) => store?.setMetadataField?.('examType', value)}
@@ -298,8 +355,8 @@ export default function CanonicalDocumentRenderer({
           dir="ltr"
           style={{
             display: 'grid',
-            gridTemplateColumns: '1.4fr 1fr 1fr 1fr',
-            gap: '6px',
+            gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+            gap: '0',
             marginTop: '10px',
           }}
         >
@@ -308,14 +365,14 @@ export default function CanonicalDocumentRenderer({
               key={field.id}
               style={{
                 position: 'relative',
-                background: '#eff6ff',
-                border: '1px solid #bfdbfe',
-                padding: '4px 22px 4px 8px',
-                borderRadius: 4,
+                background: accentSoft,
+                border: `1px solid ${templateBorder}`,
+                padding: '5px 22px 5px 8px',
+                borderRadius: 0,
                 fontSize: '11px',
               }}
             >
-              <span style={{ color: '#1e3a8a', fontWeight: 800, fontSize: '9px', textTransform: 'uppercase', display: 'block' }}>
+              <span style={{ color: accent, fontWeight: 800, fontSize: '9px', textTransform: 'uppercase', display: 'block' }}>
                 {field.label}
               </span>
               {field.marksField ? (
@@ -485,7 +542,7 @@ export default function CanonicalDocumentRenderer({
               textAlign: isUrdu ? 'right' : 'left',
             }}
           >
-            <strong style={{ marginInlineEnd: '6px', color: '#1e3a8a' }}>General Instructions:</strong>
+            <strong style={{ marginInlineEnd: '6px', color: accent }}>General Instructions:</strong>
             <CanonicalInlineField
               value={meta.generalInstructions || ''}
               onCommit={(value) => store?.setMetadataField?.('generalInstructions', value)}
@@ -542,14 +599,16 @@ export default function CanonicalDocumentRenderer({
                   dir={secDir}
                   style={{
                     display: 'flex',
+                    flexDirection: secDir === 'rtl' ? 'row' : 'row-reverse',
+                    direction: 'ltr',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '4px 10px',
-                    background: '#f1f5f9',
-                    borderLeft: secDir === 'rtl' ? 'none' : '4px solid #1e3a8a',
-                    borderRight: secDir === 'rtl' ? '4px solid #1e3a8a' : 'none',
+                    gap: '10px',
+                    padding: '5px 8px',
+                    background: accentSoft,
+                    border: `1px solid ${templateBorder}`,
+                    borderInlineStart: `4px solid ${accent}`,
                     borderRadius: '2px',
-                    marginBottom: '10px',
+                    marginBottom: '8px',
                   }}
                 >
                   {/* Working section marks. Source authority remains immutable. */}
@@ -557,15 +616,22 @@ export default function CanonicalDocumentRenderer({
                     <span
                       className={'canonical-section-marks-badge' + (!Number.isFinite(totalMarks) ? ' canonical-section-marks-empty' : '')}
                       style={{
-                        background: '#1e3a8a',
-                        color: '#ffffff',
-                        fontSize: '11px',
+                        background: '#ffffff',
+                        color: accent,
+                        border: `1px solid ${templateBorder}`,
+                        fontSize: '10px',
                         fontWeight: 800,
-                        padding: '2px 8px',
-                        borderRadius: '4px',
+                        padding: '3px 6px',
+                        borderRadius: '3px',
                         display: 'inline-flex',
                         alignItems: 'baseline',
+                        justifyContent: 'center',
                         gap: '2px',
+                        flex: '0 0 auto',
+                        minWidth: '62px',
+                        maxWidth: '82px',
+                        whiteSpace: 'nowrap',
+                        direction: 'ltr',
                       }}
                     >
                       <span>(</span>
@@ -579,11 +645,11 @@ export default function CanonicalDocumentRenderer({
                         textAlign="center"
                         numeric
                         style={{
-                          color: '#ffffff',
-                          fontSize: '11px',
+                          color: accent,
+                          fontSize: '10px',
                           fontWeight: 800,
-                          background: isEditing ? 'rgba(255,255,255,0.12)' : 'transparent',
-                          borderBottomColor: isEditing ? 'rgba(255,255,255,0.65)' : 'transparent',
+                          background: isEditing ? accentSoft : 'transparent',
+                          borderBottomColor: isEditing ? accent : 'transparent',
                         }}
                       />
                       <span>Marks)</span>
@@ -626,10 +692,13 @@ export default function CanonicalDocumentRenderer({
                     data-section-title
                     style={{
                       margin: 0,
+                      flex: '1 1 auto',
+                      minWidth: 0,
                       fontSize: isHalf ? '13px' : '15px',
                       fontWeight: 800,
-                      color: '#1e3a8a',
-                      textAlign: isUrdu ? 'right' : 'left',
+                      color: accent,
+                      textAlign: secDir === 'rtl' ? 'right' : 'left',
+                      direction: secDir,
                     }}
                   >
                     <CanonicalInlineField
@@ -643,8 +712,8 @@ export default function CanonicalDocumentRenderer({
                       style={{
                         fontSize: isHalf ? '13px' : '15px',
                         fontWeight: 800,
-                        color: '#1e3a8a',
-                        background: isEditing ? 'rgba(255,255,255,0.7)' : 'transparent',
+                        color: accent,
+                        background: isEditing ? 'rgba(255,255,255,0.72)' : 'transparent',
                       }}
                     />
                   </h2>
@@ -853,6 +922,8 @@ export default function CanonicalDocumentRenderer({
                           const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeId, fieldName)
 
                           if (mcqLayout === 'table') {
+                            const options = resolvedNode.options || []
+                            const optionCount = Math.max(options.length, 1)
                             return (
                               <div
                                 key={nodeId}
@@ -860,24 +931,61 @@ export default function CanonicalDocumentRenderer({
                                 data-node-type={nodeType}
                                 className="canonical-mcq-table-node"
                                 style={{
-                                  marginBottom: '6px',
-                                  border: '1px solid #cbd5e1',
-                                  borderRadius: '4px',
+                                  marginBottom: '8px',
+                                  border: `1px solid ${templateBorder}`,
+                                  borderRadius: '3px',
                                   overflow: 'hidden',
+                                  breakInside: 'avoid',
+                                  background: '#ffffff',
                                   ...qBorderStyle,
                                 }}
                               >
                                 {controlsHeader}
-                                <table className="canonical-mcq-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: isHalf ? '11px' : '12px' }}>
+                                <table
+                                  className="canonical-mcq-table"
+                                  dir={nodeDir}
+                                  style={{
+                                    width: '100%',
+                                    borderCollapse: 'collapse',
+                                    tableLayout: 'fixed',
+                                    fontSize: isHalf ? '11px' : '12.5px',
+                                  }}
+                                >
                                   <tbody>
-                                    <tr>
-                                      <td style={{ width: '54px', padding: '6px 8px', fontWeight: 800, color: '#1e3a8a', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', background: '#f8fafc' }}>
+                                    <tr style={{ breakInside: 'avoid' }}>
+                                      <td
+                                        rowSpan={2}
+                                        data-mcq-number-cell
+                                        style={{
+                                          width: isHalf ? '50px' : '62px',
+                                          padding: '6px 5px',
+                                          fontWeight: 800,
+                                          color: accent,
+                                          border: `1px solid ${templateBorder}`,
+                                          verticalAlign: 'top',
+                                          textAlign: 'center',
+                                          background: accentSoft,
+                                          direction: 'ltr',
+                                        }}
+                                      >
                                         {questionNumberControl}
-                                        <div style={{ marginTop: '4px' }}>
+                                        <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'center' }}>
                                           {questionMarksControl}
                                         </div>
                                       </td>
-                                      <td style={{ padding: '6px 10px', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', fontWeight: 600 }}>
+                                      <td
+                                        colSpan={optionCount}
+                                        data-mcq-prompt-cell
+                                        style={{
+                                          padding: '7px 10px',
+                                          border: `1px solid ${templateBorder}`,
+                                          verticalAlign: 'top',
+                                          fontWeight: 700,
+                                          textAlign: nodeDir === 'rtl' ? 'right' : 'left',
+                                          direction: nodeDir,
+                                          overflowWrap: 'anywhere',
+                                        }}
+                                      >
                                         {fieldOverlay ? (
                                           <CanonicalEditableText
                                             fieldKey={fieldKey}
@@ -892,15 +1000,10 @@ export default function CanonicalDocumentRenderer({
                                         ) : (
                                           <div>{resolvedNode.stemText || ''}</div>
                                         )}
-                                        {Boolean(answerLinesMap[nodeId] > 0) && (
-                                          <div className="canonical-answer-lines" style={{ marginTop: '8px' }}>
-                                            {Array.from({ length: answerLinesMap[nodeId] }, (_, lIdx) => (
-                                              <div key={lIdx} className="canonical-answer-line" style={{ borderBottom: '1px dashed #64748b', height: '22px', width: '100%', margin: '2px 0' }} />
-                                            ))}
-                                          </div>
-                                        )}
                                       </td>
-                                      {resolvedNode.options?.map((opt, oIdx) => {
+                                    </tr>
+                                    <tr style={{ breakInside: 'avoid' }}>
+                                      {options.map((opt, oIdx) => {
                                         const optionControlKey = buildStructuredControlKey(
                                           workingDoc.baseCanonicalDocumentId,
                                           section.id,
@@ -909,23 +1012,114 @@ export default function CanonicalDocumentRenderer({
                                           opt.id || String(oIdx),
                                           'text'
                                         )
-                                        const optionPresentation = resolveStructuredFieldPresentation(pres, optionControlKey, nodeDir)
+                                        const optionPresentation = resolveStructuredFieldPresentation(
+                                          pres,
+                                          optionControlKey,
+                                          nodeDir
+                                        )
+                                        const optionDir = optionPresentation.direction || nodeDir
                                         return (
                                           <td
                                             key={opt.id || oIdx}
+                                            data-mcq-option-cell
+                                            data-option-index={oIdx}
                                             style={{
-                                              padding: '6px 8px',
-                                              borderRight: oIdx < (resolvedNode.options.length - 1) ? '1px solid #cbd5e1' : 'none',
+                                              position: 'relative',
+                                              padding: isEditing ? '6px 6px 5px' : '7px 8px',
+                                              border: `1px solid ${templateBorder}`,
                                               verticalAlign: 'top',
-                                              width: `${Math.floor(45 / (resolvedNode.options.length || 3))}%`,
+                                              width: `${100 / optionCount}%`,
+                                              minWidth: 0,
+                                              textAlign: optionDir === 'rtl' ? 'right' : 'left',
+                                              overflowWrap: 'anywhere',
+                                              background: '#ffffff',
                                             }}
                                           >
-                                            <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '4px' }}>
-                                              <CanonicalOptionLabel option={opt} index={oIdx} direction={optionPresentation.direction} />
-                                              <span dir={optionPresentation.direction} style={optionPresentation.style}>
-                                                {opt.text || opt.textUrdu || ''}
-                                              </span>
-                                            </span>
+                                            <div
+                                              data-option-choice
+                                              style={{
+                                                display: 'flex',
+                                                flexDirection: optionDir === 'rtl' ? 'row-reverse' : 'row',
+                                                direction: 'ltr',
+                                                alignItems: 'baseline',
+                                                gap: '6px',
+                                                minWidth: 0,
+                                              }}
+                                            >
+                                              <CanonicalOptionLabel
+                                                option={opt}
+                                                index={oIdx}
+                                                direction={optionDir}
+                                                color={accent}
+                                              />
+                                              <div style={{ flex: '1 1 auto', minWidth: 0 }}>
+                                                {isEditing ? (
+                                                  <StructuredTextInput
+                                                    value={opt.text || opt.textUrdu || ''}
+                                                    onCommit={(value) => handleUpdateMcqOption(section.id, nodeId, opt, value)}
+                                                    placeholder={'Option ' + (oIdx + 1)}
+                                                    dir={optionDir}
+                                                    controlKey={optionControlKey}
+                                                    ariaLabel={'Question ' + currentQNum + ' option ' + (oIdx + 1)}
+                                                    store={store}
+                                                    style={{
+                                                      border: 'none',
+                                                      padding: '0 2px',
+                                                      borderRadius: 0,
+                                                      background: 'transparent',
+                                                      fontSize: isHalf ? '11px' : '12.5px',
+                                                      textAlign: optionDir === 'rtl' ? 'right' : 'left',
+                                                      ...optionPresentation.style,
+                                                    }}
+                                                  />
+                                                ) : (
+                                                  <span
+                                                    data-option-text
+                                                    dir={optionDir}
+                                                    style={{
+                                                      display: 'block',
+                                                      ...optionPresentation.style,
+                                                    }}
+                                                  >
+                                                    {opt.text || opt.textUrdu || ''}
+                                                  </span>
+                                                )}
+                                              </div>
+                                            </div>
+                                            {isEditing && (
+                                              <div
+                                                className="no-print canonical-option-mini-controls"
+                                                style={{
+                                                  display: 'flex',
+                                                  justifyContent: optionDir === 'rtl' ? 'flex-start' : 'flex-end',
+                                                  gap: '3px',
+                                                  marginTop: '3px',
+                                                  direction: 'ltr',
+                                                }}
+                                              >
+                                                <button
+                                                  type="button"
+                                                  aria-label={'Move option ' + (oIdx + 1) + ' left'}
+                                                  disabled={oIdx === 0}
+                                                  onClick={() => handleMoveMcqOption(section.id, nodeId, options, oIdx, oIdx - 1)}
+                                                  style={{ border: 'none', background: 'transparent', color: '#64748b', cursor: oIdx === 0 ? 'default' : 'pointer', fontSize: '10px' }}
+                                                >‹</button>
+                                                <button
+                                                  type="button"
+                                                  aria-label={'Move option ' + (oIdx + 1) + ' right'}
+                                                  disabled={oIdx === options.length - 1}
+                                                  onClick={() => handleMoveMcqOption(section.id, nodeId, options, oIdx, oIdx + 1)}
+                                                  style={{ border: 'none', background: 'transparent', color: '#64748b', cursor: oIdx === options.length - 1 ? 'default' : 'pointer', fontSize: '10px' }}
+                                                >›</button>
+                                                <button
+                                                  type="button"
+                                                  aria-label={'Delete option ' + (oIdx + 1)}
+                                                  disabled={options.length <= 2}
+                                                  onClick={() => handleDeleteMcqOption(section.id, nodeId, options, opt.id)}
+                                                  style={{ border: 'none', background: 'transparent', color: options.length <= 2 ? '#cbd5e1' : '#b91c1c', cursor: options.length <= 2 ? 'default' : 'pointer', fontSize: '10px' }}
+                                                >×</button>
+                                              </div>
+                                            )}
                                           </td>
                                         )
                                       })}
@@ -933,15 +1127,32 @@ export default function CanonicalDocumentRenderer({
                                   </tbody>
                                 </table>
                                 {isEditing && (
-                                  <div className="no-print" style={{ padding: '4px 8px', background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
-                                    <CanonicalStructuredNodeEditor
-                                      nodeId={nodeId}
-                                      sectionId={section.id}
-                                      resolvedNode={resolvedNode}
-                                      store={store}
-                                      dir={nodeDir}
-                                      isEditing={isEditing}
-                                    />
+                                  <div
+                                    className="no-print"
+                                    style={{
+                                      display: 'flex',
+                                      justifyContent: nodeDir === 'rtl' ? 'flex-start' : 'flex-end',
+                                      padding: '3px 6px',
+                                      background: '#f8fafc',
+                                      borderTop: `1px solid ${templateBorder}`,
+                                    }}
+                                  >
+                                    <button
+                                      type="button"
+                                      onClick={() => handleAddMcqOption(section.id, nodeId, options, nodeDir)}
+                                      style={{
+                                        border: `1px dashed ${templateBorder}`,
+                                        background: '#ffffff',
+                                        color: accent,
+                                        borderRadius: '3px',
+                                        padding: '2px 7px',
+                                        fontSize: '9px',
+                                        fontWeight: 700,
+                                        cursor: 'pointer',
+                                      }}
+                                    >
+                                      + Option
+                                    </button>
                                   </div>
                                 )}
                               </div>

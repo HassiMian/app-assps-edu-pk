@@ -19,6 +19,22 @@ const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documen
 const v13DatasetPath = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
 const v13Dataset = JSON.parse(fs.readFileSync(v13DatasetPath, 'utf-8'))
 
+function flattenCanonicalText(doc) {
+  return (doc?.sections || [])
+    .flatMap(section => [
+      section.title,
+      section.titleUrdu,
+      ...(section.nodes || []).flatMap(node => [
+        node.stemText,
+        node.rawText,
+        node.text,
+        ...(node.options || []).map(option => option.text),
+      ]),
+    ])
+    .filter(Boolean)
+    .join(' | ')
+}
+
 test('ROUTER A: Canonical document routes directly to CANONICAL_V2', () => {
   const canonicalDoc = canonicalCorpus[0]
   const decision = resolvePaperEditorRoute(canonicalDoc)
@@ -62,69 +78,90 @@ test('ROUTER E: Pristine Official V13 Paper routes to CANONICAL_V2 via migration
   assert.strictEqual(decision.resolvedPaper.schemaVersion, 3)
 })
 
-test('ROUTER F: Academically Modified V13 Paper routes to LEGACY_CANVAS_V2 to preserve edits (Rule 25)', () => {
+test('ROUTER F: Academically modified V13 content imports to Canonical without losing the edit', () => {
   const pristinePaper = v13Dataset.papers[0]
-  const modifiedPaper = JSON.parse(JSON.stringify(pristinePaper))
+  const modifiedPaper = structuredClone(pristinePaper)
+  modifiedPaper.official_section[0].content = 'USER EDIT SENTINEL: preserved official-section content'
 
-  // Mutate academic question content
-  modifiedPaper.official_section[0].content = 'User edited this question content in legacy editor.'
   assert.strictEqual(isPristineOfficialV13Paper(modifiedPaper), false)
-
   const decision = resolvePaperEditorRoute(modifiedPaper)
-  assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2', 'Modified V13 paper must NOT be overwritten by pristine canonical baseline')
-  assert.strictEqual(decision.reason, 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY')
-  assert.strictEqual(decision.resolvedPaper, modifiedPaper)
+
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+  assert.ok(
+    flattenCanonicalText(decision.resolvedPaper).includes('USER EDIT SENTINEL'),
+    'Modified official-section content must survive canonical import'
+  )
 })
 
-test('ROUTER G: Every individual academic mutation forces LEGACY route (Section 21)', () => {
+test('ROUTER G: Only losslessly mapped legacy mutations enter Canonical; unsupported mutations keep emergency fallback', () => {
   const pristinePaper = v13Dataset.papers[0]
 
-  // Helper to assert modified paper routes to LEGACY_CANVAS_V2
-  function assertForcesLegacy(mutator, label) {
-    const paper = JSON.parse(JSON.stringify(pristinePaper))
+  const canonicalCase = (mutator, verify, label) => {
+    const paper = structuredClone(pristinePaper)
     mutator(paper)
-    const isPristine = isPristineOfficialV13Paper(paper)
-    assert.strictEqual(isPristine, false, `Mutation '${label}' must fail pristine check`)
+    assert.strictEqual(isPristineOfficialV13Paper(paper), false, label + ' must fail pristine check')
     const decision = resolvePaperEditorRoute(paper)
-    assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2', `Mutation '${label}' must route to LEGACY_CANVAS_V2`)
+    assert.strictEqual(decision.route, 'CANONICAL_V2', label + ' must import to Canonical')
+    assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+    verify?.(decision.resolvedPaper)
   }
 
-  // 1. config.totalMarks changed
-  assertForcesLegacy(p => { p.config.totalMarks = 999 }, 'config.totalMarks')
+  canonicalCase(
+    paper => { paper.config.totalMarks = 999 },
+    doc => assert.strictEqual(doc.authority.authoritativePaperTotal, 999),
+    'config.totalMarks'
+  )
+  canonicalCase(
+    paper => { paper.config.subject = 'Advanced Astrophysics' },
+    doc => assert.strictEqual(doc.metadata.subject, 'Advanced Astrophysics'),
+    'config.subject'
+  )
+  canonicalCase(
+    paper => { paper.config.paperCode = 'CUSTOM-CODE-99' },
+    doc => assert.strictEqual(doc.metadata.paperCode, 'CUSTOM-CODE-99'),
+    'config.paperCode'
+  )
+  canonicalCase(
+    paper => { paper.official_section[0].marks = 25 },
+    doc => assert.strictEqual(doc.sections[0].authoritativeSectionTotal, 25),
+    'section.marks'
+  )
+  canonicalCase(
+    paper => { paper.official_section[0].heading = 'Custom Section Heading Sentinel' },
+    doc => assert.ok(flattenCanonicalText(doc).includes('Custom Section Heading Sentinel')),
+    'section.heading'
+  )
+  canonicalCase(
+    paper => { paper.official_section[0].content = 'Different question stem body sentinel' },
+    doc => assert.ok(flattenCanonicalText(doc).includes('Different question stem body sentinel')),
+    'section.content'
+  )
 
-  // 2. config.subject changed
-  assertForcesLegacy(p => { p.config.subject = 'Advanced Astrophysics' }, 'config.subject')
+  const legacyCase = (mutator, label) => {
+    const paper = structuredClone(pristinePaper)
+    mutator(paper)
+    assert.strictEqual(isPristineOfficialV13Paper(paper), false, label + ' must fail pristine check')
+    const decision = resolvePaperEditorRoute(paper)
+    assert.strictEqual(
+      decision.route,
+      'LEGACY_CANVAS_V2',
+      label + ' is not losslessly mapped and must retain emergency fallback'
+    )
+    assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORT_FAILED_SAFE_LEGACY_FALLBACK')
+  }
 
-  // 3. config.language changed
-  assertForcesLegacy(p => { p.config.language = 'arabic' }, 'config.language')
-
-  // 4. config.paperCode changed
-  assertForcesLegacy(p => { p.config.paperCode = 'CUSTOM-CODE-99' }, 'config.paperCode')
-
-  // 5. section.medium changed
-  assertForcesLegacy(p => { p.official_section[0].medium = 'english' }, 'section.medium')
-
-  // 6. section.marks changed
-  assertForcesLegacy(p => { p.official_section[0].marks = 25 }, 'section.marks')
-
-  // 7. section.heading changed
-  assertForcesLegacy(p => { p.official_section[0].heading = 'Custom Section Heading' }, 'section.heading')
-
-  // 8. section.content changed
-  assertForcesLegacy(p => { p.official_section[0].content = 'Different question stem body' }, 'section.content')
-
-  // 9. section.textUrdu changed
-  assertForcesLegacy(p => { p.official_section[0].textUrdu = 'تبدیل شدہ سوال' }, 'section.textUrdu')
-
-  // 10. option content changed if options exist
-  assertForcesLegacy(p => {
-    p.official_section[0].options = [{ id: 'opt_1', text: 'Custom Option A' }]
-  }, 'section.options')
-
-  // 11. selectedQuestions official academic content changed
-  assertForcesLegacy(p => {
-    p.selectedQuestions = [{ id: 'sq_1', text: 'Custom Selected Question' }]
-  }, 'selectedQuestions')
+  legacyCase(paper => { paper.config.language = 'arabic' }, 'unsupported config.language')
+  legacyCase(paper => { paper.official_section[0].medium = 'english' }, 'section.medium')
+  legacyCase(paper => { paper.official_section[0].textUrdu = 'تبدیل شدہ سوال' }, 'section.textUrdu')
+  legacyCase(
+    paper => { paper.official_section[0].options = [{ id: 'opt_1', text: 'Custom Option A' }] },
+    'section.options'
+  )
+  legacyCase(
+    paper => { paper.selectedQuestions = [{ id: 'sq_1', text: 'Malformed legacy mirror' }] },
+    'malformed selectedQuestions'
+  )
 })
 
 test('ROUTER H: All 43 pristine papers in V13 dataset pass pristine check and route to CANONICAL_V2', () => {
@@ -158,94 +195,102 @@ test('ROUTER I: Real source shape assertion across all 43 V13 papers (Section 8)
   }
 })
 
-test('ROUTER J: Real-shape selectedQuestions content mutation forces LEGACY with official_section untouched (Section 6)', () => {
+test('ROUTER J: selectedQuestions-only content mutation imports to Canonical and preserves the mirror edit', () => {
   const pristinePaper = v13Dataset.papers[0]
-  const modifiedPaper = JSON.parse(JSON.stringify(pristinePaper))
+  const modifiedPaper = structuredClone(pristinePaper)
+  modifiedPaper.selectedQuestions.official_section.questions[0].content =
+    'MIRROR ONLY SENTINEL: preserve this user customization'
 
-  // official_section remains COMPLETELY UNCHANGED
   assert.deepStrictEqual(modifiedPaper.official_section, pristinePaper.official_section)
-
-  // Modify ONLY selectedQuestions.official_section.questions[0].content
-  modifiedPaper.selectedQuestions.official_section.questions[0].content = 'User modified question in selectedQuestions mirror only'
-
-  assert.strictEqual(isPristineOfficialV13Paper(modifiedPaper), false, 'Modified selectedQuestions mirror must fail pristine check')
+  assert.strictEqual(isPristineOfficialV13Paper(modifiedPaper), false)
 
   const decision = resolvePaperEditorRoute(modifiedPaper)
-  assert.strictEqual(
-    decision.route,
-    'LEGACY_CANVAS_V2',
-    'Modified selectedQuestions mirror must route to LEGACY_CANVAS_V2 to protect user customization'
-  )
-  assert.strictEqual(decision.reason, 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY')
-  assert.strictEqual(decision.resolvedPaper, modifiedPaper)
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+  assert.ok(flattenCanonicalText(decision.resolvedPaper).includes('MIRROR ONLY SENTINEL'))
 })
 
-test('ROUTER K: Additional nested mirror tests with top-level official_section untouched (Section 7)', () => {
+test('ROUTER K: mirror reorder/remove and mapped fields are preserved; ambiguous/unsupported edits fall back safely', () => {
   const pristinePaper = v13Dataset.papers[0]
 
-  function assertMirrorMutationForcesLegacy(mutator, label) {
-    const paper = JSON.parse(JSON.stringify(pristinePaper))
-    // Verify initial official_section parity
-    assert.deepStrictEqual(paper.official_section, pristinePaper.official_section)
-
+  const run = (mutator) => {
+    const paper = structuredClone(pristinePaper)
     mutator(paper)
+    assert.deepStrictEqual(paper.official_section, pristinePaper.official_section)
+    assert.strictEqual(isPristineOfficialV13Paper(paper), false)
+    return resolvePaperEditorRoute(paper)
+  }
 
-    // Verify official_section was NOT mutated by the helper
-    assert.deepStrictEqual(paper.official_section, pristinePaper.official_section, `official_section must remain untouched for '${label}'`)
+  {
+    const decision = run(paper => {
+      paper.selectedQuestions.official_section.questions[0].heading = 'Mirror Heading Sentinel'
+    })
+    assert.strictEqual(decision.route, 'CANONICAL_V2')
+    assert.ok(flattenCanonicalText(decision.resolvedPaper).includes('Mirror Heading Sentinel'))
+  }
 
-    const isPristine = isPristineOfficialV13Paper(paper)
-    assert.strictEqual(isPristine, false, `Mutation '${label}' in selectedQuestions must fail pristine check`)
+  {
+    const decision = run(paper => {
+      paper.selectedQuestions.official_section.questions[0].marks = 99
+    })
+    assert.strictEqual(decision.route, 'CANONICAL_V2')
+    assert.strictEqual(decision.resolvedPaper.sections[0].authoritativeSectionTotal, 99)
+  }
 
-    const decision = resolvePaperEditorRoute(paper)
+  {
+    const original = pristinePaper.selectedQuestions.official_section.questions
+    const decision = run(paper => {
+      paper.selectedQuestions.official_section.questions.reverse()
+    })
+    assert.strictEqual(decision.route, 'CANONICAL_V2')
     assert.strictEqual(
-      decision.route,
-      'LEGACY_CANVAS_V2',
-      `Mutation '${label}' in selectedQuestions must route to LEGACY_CANVAS_V2`
+      decision.resolvedPaper.sections[0].provenance.sourceSectionId,
+      original[original.length - 1].id,
+      'Mirror reorder must become canonical section order'
     )
   }
 
-  // A. selectedQuestions.official_section.questions[0].heading
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.questions[0].heading = 'Custom Modified Heading'
-  }, 'questions[0].heading')
+  {
+    const decision = run(paper => {
+      paper.selectedQuestions.official_section.questions.pop()
+    })
+    assert.strictEqual(decision.route, 'CANONICAL_V2')
+    assert.strictEqual(
+      decision.resolvedPaper.sections.length,
+      pristinePaper.official_section.length - 1,
+      'Mirror removal must remain removed after canonical import'
+    )
+  }
 
-  // B. selectedQuestions.official_section.questions[0].marks
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.questions[0].marks = 99
-  }, 'questions[0].marks')
+  const expectLegacy = (mutator, label) => {
+    const decision = run(mutator)
+    assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2', label)
+    assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORT_FAILED_SAFE_LEGACY_FALLBACK')
+  }
 
-  // C. selectedQuestions.official_section.questions[0].textUrdu
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.questions[0].textUrdu = 'تبدیل شدہ سوال برائے مرر'
-  }, 'questions[0].textUrdu')
-
-  // D. selectedQuestions.official_section.questions reorder
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.questions.reverse()
-  }, 'questions reorder')
-
-  // E. remove one nested question
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.questions.pop()
-  }, 'remove nested question')
-
-  // F. add one nested question
-  assertMirrorMutationForcesLegacy(p => {
-    const clone = JSON.parse(JSON.stringify(p.selectedQuestions.official_section.questions[0]))
-    clone.id = 'extra-nested-q-id'
-    p.selectedQuestions.official_section.questions.push(clone)
-  }, 'add nested question')
-
-  // G. selectedQuestions.official_section.marks
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.marks = 50
-  }, 'official_section.marks')
-
-  // H. nested option text/label mutation where options data exists
-  assertMirrorMutationForcesLegacy(p => {
-    p.selectedQuestions.official_section.questions[0].options = [
-      { id: 'opt_1', label: 'A', text: 'Custom Option in Mirror' },
-    ]
-  }, 'nested options mutation')
+  expectLegacy(
+    paper => { paper.selectedQuestions.official_section.questions[0].textUrdu = 'تبدیل شدہ سوال برائے مرر' },
+    'Unmapped textUrdu edit must not be discarded'
+  )
+  expectLegacy(
+    paper => {
+      const clone = structuredClone(paper.selectedQuestions.official_section.questions[0])
+      clone.id = 'extra-nested-q-id'
+      paper.selectedQuestions.official_section.questions.push(clone)
+    },
+    'New legacy section without normalization manifest must retain fallback'
+  )
+  expectLegacy(
+    paper => { paper.selectedQuestions.official_section.marks = 50 },
+    'Ambiguous container marks must retain fallback'
+  )
+  expectLegacy(
+    paper => {
+      paper.selectedQuestions.official_section.questions[0].options = [
+        { id: 'opt_1', label: 'A', text: 'Custom Option in Mirror' },
+      ]
+    },
+    'Legacy section.options mutation is not a lossless canonical source'
+  )
 })
 

@@ -4,6 +4,7 @@ import {
   DOCUMENT_CLASSIFICATIONS,
 } from '../migration/classifyPaperDocument.js'
 import { migrateOfficialPaperToV2 } from '../migration/migrateOfficialPaperToV2.js'
+import { importModifiedOfficialV13ToCanonical } from './importModifiedOfficialV13.js'
 
 import officialV13Dataset from '../../seed-data/official-first-term-2026-v13.json' with { type: 'json' }
 import normalizationManifest from '../migration/data/normalizationManifestV13.json' with { type: 'json' }
@@ -232,11 +233,27 @@ export function resolvePaperEditorRoute(loadedPaper) {
       }
     }
 
-    // If modified or migration failed, route to legacy editor to protect user edits
+    // Modified official working copies now use the same canonical editor.
+    // Import through a guarded adapter that restores user-authored totals/section marks
+    // after deterministic structure migration. Legacy remains only a failure fallback.
+    const manifestRecord = normalizationManifest.papers?.find(p => p.paperId === loadedPaper.id)
+    if (manifestRecord) {
+      try {
+        const canonicalDoc = importModifiedOfficialV13ToCanonical(loadedPaper, manifestRecord)
+        return {
+          route: 'CANONICAL_V2',
+          resolvedPaper: canonicalDoc,
+          reason: 'MODIFIED_V13_IMPORTED_TO_CANONICAL',
+        }
+      } catch (err) {
+        console.warn('Failed to import modified V13 working copy into canonical editor:', err)
+      }
+    }
+
     return {
       route: 'LEGACY_CANVAS_V2',
       resolvedPaper: loadedPaper,
-      reason: 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY',
+      reason: 'MODIFIED_V13_IMPORT_FAILED_SAFE_LEGACY_FALLBACK',
     }
   }
 

@@ -215,12 +215,19 @@ test('INVARIANT E (Rule 47): Route Guards correctly segregate Canonical V2 from 
   const pristinePaper = v13Dataset.papers[0]
   assert.strictEqual(resolvePaperEditorRoute(pristinePaper).route, 'CANONICAL_V2')
 
-  // 5. Modified V13 (Preserves edits in legacy editor)
+  // 5. Supported modified V13 mutations are imported losslessly into Canonical.
   const modifiedPaper = JSON.parse(JSON.stringify(pristinePaper))
   modifiedPaper.official_section[0].content = 'Edited question content'
   const decision = resolvePaperEditorRoute(modifiedPaper)
-  assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2')
-  assert.strictEqual(decision.reason, 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY')
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+
+  // Unsupported/ambiguous academic mutations retain the emergency legacy fallback.
+  const unsupportedPaper = JSON.parse(JSON.stringify(pristinePaper))
+  unsupportedPaper.official_section[0].options = [{ label: 'A', text: 'Unsupported legacy option mutation' }]
+  const fallback = resolvePaperEditorRoute(unsupportedPaper)
+  assert.strictEqual(fallback.route, 'LEGACY_CANVAS_V2')
+  assert.strictEqual(fallback.reason, 'MODIFIED_V13_IMPORT_FAILED_SAFE_LEGACY_FALLBACK')
 
   // 6. Dataset Container
   assert.strictEqual(resolvePaperEditorRoute(v13Dataset).route, 'DIAGNOSTIC_DATASET')

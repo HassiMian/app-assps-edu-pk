@@ -53,13 +53,13 @@ function SectionBanner({ text, themeColor, isUrdu, fs }) {
 
 function OptionLabel({ label, index, isUrdu, themeColor }) {
   const parts = optionLabelParts(label, index, isUrdu)
-  return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}><b data-option-label-text>{parts.label}</b><b data-option-bracket dir="ltr">{parts.closingBracket}</b></span>
+  return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}><b data-option-label-text>{parts.label}</b><b data-option-bracket dir="ltr">{parts.closingBracket}</b></span>
 }
 
 function OptionChoice({ option, index, isUrdu, themeColor, editMode=false, section=null, rowIndex=0, onCommit, onActiveEditable }) {
   const fieldKey='mcq-'+rowIndex+'-option-'+index
   const rich=section?.richText?.[fieldKey]||''
-  return <span data-option-choice style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:4, whiteSpace:'normal' }}>
+  return <span data-option-choice style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:6, whiteSpace:'normal' }}>
     <OptionLabel label={option.label} index={index} isUrdu={isUrdu} themeColor={themeColor} />
     {(editMode||rich)
       ? <InlineEditable text={option.text} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={fieldKey} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' option '+(index+1)} onActivate={onActiveEditable} onCommit={payload=>onCommit?.(payload,fieldKey)} style={{direction:isUrdu?'rtl':'ltr',unicodeBidi:'plaintext'}} />

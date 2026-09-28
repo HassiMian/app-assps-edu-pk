@@ -47,20 +47,26 @@ test('Phase 15: explicit official canary sends all pristine V13 papers through c
     assert.ok(decision.resolvedPaper?.id?.startsWith('doc__'))
   }
 })
-test('Phase 15: modified official V13 is rejected by canonical guard', () => {
+test('Phase 20: modified official V13 imports safely into the unified canonical editor', () => {
   const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
   assert.ok(source)
   const modified = structuredClone(source)
-  modified.selectedQuestions.official_section.questions[0].content += '\nUSER MODIFICATION'
+  modified.selectedQuestions.official_section.questions[1].content =
+    modified.selectedQuestions.official_section.questions[1].content.replace(
+      'Why did Saba cry suddenly?',
+      'USER MODIFICATION SENTINEL?'
+    )
 
   assert.strictEqual(isPristineOfficialV13Paper(modified), false)
-  assert.strictEqual(
-    resolvePaperRoute(modified, null, { officialCanonicalCanary: true }),
-    'word_editor'
-  )
+  assert.strictEqual(resolvePaperRoute(modified), 'word_editor')
   const decision = resolvePaperEditorRoute(modified)
-  assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2')
-  assert.strictEqual(decision.reason, 'MODIFIED_OR_CUSTOM_V13_PRESERVED_IN_LEGACY')
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+  const allText = decision.resolvedPaper.sections
+    .flatMap(section => section.nodes || [])
+    .map(node => node.stemText || node.rawText || '')
+    .join(' | ')
+  assert.ok(allText.includes('USER MODIFICATION SENTINEL?'))
 })
 
 test('Phase 15: legacy V12, Early Years and board-pattern routes do not change under canary', () => {
@@ -117,7 +123,7 @@ test('Phase 16: schedule-only header metadata changes remain canonical-safe', ()
   assert.strictEqual(decision.resolvedPaper?.metadata?.timeAllowed, '2 Hours')
 })
 
-test('Phase 16: academic marks mutation still fails pristine canonical guard', () => {
+test('Phase 20: academic marks mutation fails pristine check but is preserved by canonical working-copy import', () => {
   const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
   assert.ok(source)
 
@@ -126,5 +132,24 @@ test('Phase 16: academic marks mutation still fails pristine canonical guard', (
 
   assert.strictEqual(isPristineOfficialV13Paper(modified), false)
   const decision = resolvePaperEditorRoute(modified)
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+  assert.strictEqual(
+    decision.resolvedPaper.authority.authoritativePaperTotal,
+    modified.config.totalMarks
+  )
+})
+
+test('Phase 20: contradictory dual legacy mirrors retain emergency legacy fallback', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
+  assert.ok(source)
+  const modified = structuredClone(source)
+  modified.official_section[1].content =
+    modified.official_section[1].content.replace('Why did Saba cry suddenly?', 'OFFICIAL CONFLICT?')
+  modified.selectedQuestions.official_section.questions[1].content =
+    modified.selectedQuestions.official_section.questions[1].content.replace('Why did Saba cry suddenly?', 'MIRROR CONFLICT?')
+
+  const decision = resolvePaperEditorRoute(modified)
   assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORT_FAILED_SAFE_LEGACY_FALLBACK')
 })
