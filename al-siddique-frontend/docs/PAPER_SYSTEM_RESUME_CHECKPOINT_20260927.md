@@ -118,3 +118,16 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Production frontend build: PASS.
 - No source paper, Question Bank, Daily Diary, Lesson Plans or Early Years authority was deleted or rewritten.
 - Next: expand shadow parity beyond MCQs to all semantic section kinds and only consider a route switch after the all-43 parity gate is clean.
+
+## Phase 7 — Heading-Only Academic Node Recovery (28 Sep 2026)
+- The all-semantic shadow matrix exposed 33 official sections whose complete academic prompt lived in the source heading while content was empty.
+- Previous canonical migration treated empty content as metadata-only and produced zero editable nodes for those sections.
+- Migration now detects heading-only academic sections and parses the authoritative heading into canonical question nodes while preserving empty content as a separate metadata-only coverage segment.
+- Heading-based node provenance points to the exact heading source segment; raw source remains unchanged and auditable.
+- Presentation-only question numbering and trailing marks are removed from the editable stem without changing the stored raw source snapshot.
+- Promoted heading-only questions no longer duplicate themselves as both a section heading and a question node.
+- Verified representative types: English essay -> `essay`; English leave prompt -> `application`; Urdu essay -> `essay`; maths table prompt -> editable question node.
+- Empty academic canonical sections reduced from 33 to 0 across the 43-paper corpus.
+- Focused migration/editor/rules regression: 36/36 PASS.
+- Production frontend build: PASS.
+- Production routing remains unchanged; Canonical V2 is still under shadow-parity validation.

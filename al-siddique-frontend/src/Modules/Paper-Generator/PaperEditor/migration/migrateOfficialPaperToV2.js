@@ -165,30 +165,21 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
           ? DocumentDirection.LTR
           : docDirection
 
-    // 1. Heading coverage
-    const headingSegId = `${canonicalSectionId}__h_seg01`
-    const headingCoverageSeg = createCoverageSegment({
-      sourceSectionId: sourceSec.id,
-      sourceField: 'heading',
-      sourceSegmentId: headingSegId,
-      startOffset: 0,
-      endOffset: secHeading.length,
-      rawSourceSnapshot: secHeading,
-      targetCanonicalIds: [canonicalSectionId],
-      coverageStatus: secHeading.length > 0 ? CoverageStatus.STRUCTURED : CoverageStatus.METADATA_ONLY,
-    })
+    // 1. Decide whether the academic prompt lives entirely in the heading.
+    // Some official papers store the complete question (essay/application/definition/etc.)
+    // in heading while content is intentionally empty. Those must become canonical nodes,
+    // not disappear as metadata-only sections.
+    const inferredKind = inferOfficialSectionKind(sourceSec)
+    const headingOnlyAcademic = Boolean(
+      secHeading.trim() &&
+      !secContent.trim() &&
+      inferredKind !== 'marker'
+    )
 
-    const hInvariants = verifyFieldCoverageInvariants(secHeading, [headingCoverageSeg])
-    if (!hInvariants.valid) {
-      throw new Error(
-        `Heading coverage invariant violation in ${sourceSec.id}: ${hInvariants.errors.join('; ')}`
-      )
-    }
-    docCoverageLedger.push(headingCoverageSeg)
-
-    // 2. Semantic parsing of content
+    // 2. Semantic parsing from the authoritative source field.
     const parser = selectParserForSection(sourceSec, v13Paper)
-    let parsedItems = parser(secContent, {
+    const parserSource = headingOnlyAcademic ? secHeading : secContent
+    let parsedItems = parser(parserSource, {
       sectionId: canonicalSectionId,
       sourceSectionId: sourceSec.id,
       paperId,
@@ -200,34 +191,96 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
       attemptCount: manifestSec.attemptCount,
     })
 
-    // 3. Gapless stitching of parsed items
+    if (headingOnlyAcademic) {
+      // Remove presentation-only numbering/marks from the editable stem while preserving
+      // the exact source in provenance/coverage. This is not an academic rewrite.
+      parsedItems = parsedItems.map(item => {
+        if (!item?.node) return item
+        const node = { ...item.node }
+        if (typeof node.stemText === 'string') {
+          node.stemText = node.stemText
+            .replace(/^\s*سوال\s*نمبر\s*\d+\s*[:.)-]?\s*/i, '')
+            .replace(/\s*\(\s*\d+\s*(?:Marks?|نمبر)?\s*\)\s*$/i, '')
+            .trim()
+        }
+        return { ...item, node }
+      })
+    }
+
+    // 3. Gapless stitching against the field that actually contains the academic text.
     const stitched = stitchItemsToFullCoverage(
       parsedItems,
-      secContent,
+      parserSource,
       canonicalSectionId,
       sourceSec.id,
       secDirection,
       globalNodeIds,
-      manifestSec
+      manifestSec,
+      headingOnlyAcademic ? 'heading' : 'content'
     )
 
-    // 4. Verify content coverage invariants
-    const cInvariants = verifyFieldCoverageInvariants(secContent, stitched.segments)
-    if (!cInvariants.valid) {
+    // 4. Verify source-field coverage invariants.
+    const primaryInvariants = verifyFieldCoverageInvariants(parserSource, stitched.segments)
+    if (!primaryInvariants.valid) {
       throw new Error(
-        `Content coverage invariant violation in ${sourceSec.id}: ${cInvariants.errors.join('; ')}`
+        `${headingOnlyAcademic ? 'Heading' : 'Content'} coverage invariant violation in ${sourceSec.id}: ${primaryInvariants.errors.join('; ')}`
       )
     }
-
     stitched.segments.forEach(seg => docCoverageLedger.push(seg))
+
+    let headingSegId = null
+    const extraSectionSegmentIds = []
+
+    if (headingOnlyAcademic) {
+      // The heading is already fully covered by the academic node(s). Preserve the empty
+      // content field separately so both original source fields remain losslessly audited.
+      const emptyContentSeg = createCoverageSegment({
+        sourceSectionId: sourceSec.id,
+        sourceField: 'content',
+        sourceSegmentId: `${canonicalSectionId}__c_empty`,
+        startOffset: 0,
+        endOffset: 0,
+        rawSourceSnapshot: '',
+        targetCanonicalIds: [canonicalSectionId],
+        coverageStatus: CoverageStatus.METADATA_ONLY,
+      })
+      const cInvariants = verifyFieldCoverageInvariants(secContent, [emptyContentSeg])
+      if (!cInvariants.valid) {
+        throw new Error(
+          `Content coverage invariant violation in ${sourceSec.id}: ${cInvariants.errors.join('; ')}`
+        )
+      }
+      docCoverageLedger.push(emptyContentSeg)
+      extraSectionSegmentIds.push(emptyContentSeg.sourceSegmentId)
+    } else {
+      headingSegId = `${canonicalSectionId}__h_seg01`
+      const headingCoverageSeg = createCoverageSegment({
+        sourceSectionId: sourceSec.id,
+        sourceField: 'heading',
+        sourceSegmentId: headingSegId,
+        startOffset: 0,
+        endOffset: secHeading.length,
+        rawSourceSnapshot: secHeading,
+        targetCanonicalIds: [canonicalSectionId],
+        coverageStatus: secHeading.length > 0 ? CoverageStatus.STRUCTURED : CoverageStatus.METADATA_ONLY,
+      })
+      const hInvariants = verifyFieldCoverageInvariants(secHeading, [headingCoverageSeg])
+      if (!hInvariants.valid) {
+        throw new Error(
+          `Heading coverage invariant violation in ${sourceSec.id}: ${hInvariants.errors.join('; ')}`
+        )
+      }
+      docCoverageLedger.push(headingCoverageSeg)
+      extraSectionSegmentIds.push(headingSegId)
+    }
 
     // 5. Construct Canonical Section
     const section = createCanonicalSection({
       id: canonicalSectionId,
       sectionIndex: sIndexNum,
-      title: secHeading || null,
-      titleUrdu: secDirection === DocumentDirection.RTL ? secHeading : null,
-      heading: secHeading || null,
+      title: headingOnlyAcademic ? null : (secHeading || null),
+      titleUrdu: headingOnlyAcademic ? null : (secDirection === DocumentDirection.RTL ? secHeading : null),
+      heading: headingOnlyAcademic ? null : (secHeading || null),
       instructions: null,
       direction: secDirection,
       storedLegacyMarksValue: manifestSec.storedLegacyMarksValue,
@@ -243,7 +296,10 @@ export function migrateOfficialPaperToV2(v13Paper, manifestPaper, migrationConte
       nodes: stitched.nodes,
       provenance: {
         sourceSectionId: sourceSec.id,
-        sourceSegmentIds: [headingSegId, ...stitched.segments.map(s => s.sourceSegmentId)],
+        sourceSegmentIds: [
+          ...extraSectionSegmentIds,
+          ...stitched.segments.map(s => s.sourceSegmentId),
+        ],
       },
     })
 
@@ -324,17 +380,19 @@ export function stitchItemsToFullCoverage(
   sourceSectionId,
   direction,
   globalNodeIds,
-  manifestSec
+  manifestSec,
+  sourceField = 'content'
 ) {
   const nodes = []
   const segments = []
+  const segmentPrefix = sourceField === 'heading' ? 'h' : 'c'
 
   // Case A: empty content
   if (content.length === 0) {
     const emptySeg = createCoverageSegment({
       sourceSectionId,
-      sourceField: 'content',
-      sourceSegmentId: `${canonicalSectionId}__c_empty`,
+      sourceField,
+      sourceSegmentId: `${canonicalSectionId}__${segmentPrefix}_empty`,
       startOffset: 0,
       endOffset: 0,
       rawSourceSnapshot: '',
@@ -348,10 +406,10 @@ export function stitchItemsToFullCoverage(
   if (!parsedItems || parsedItems.length === 0) {
     const nodeId = `${canonicalSectionId}__raw01`
     globalNodeIds.add(nodeId)
-    const segId = `${canonicalSectionId}__c_seg01`
+    const segId = `${canonicalSectionId}__${segmentPrefix}_seg01`
     const seg = createCoverageSegment({
       sourceSectionId,
-      sourceField: 'content',
+      sourceField,
       sourceSegmentId: segId,
       startOffset: 0,
       endOffset: content.length,
@@ -505,7 +563,7 @@ export function stitchItemsToFullCoverage(
   // Assemble final nodes and segments
   items.forEach((item, idx) => {
     const itemNum = String(idx + 1).padStart(2, '0')
-    const segId = `${canonicalSectionId}__c_seg${itemNum}`
+    const segId = `${canonicalSectionId}__${segmentPrefix}_seg${itemNum}`
 
     // Ensure node has a globally unique ID
     let finalNodeId = item.node.id
@@ -559,7 +617,7 @@ export function stitchItemsToFullCoverage(
 
     const seg = createCoverageSegment({
       sourceSectionId,
-      sourceField: 'content',
+      sourceField,
       sourceSegmentId: segId,
       startOffset: item.startOffset,
       endOffset: item.endOffset,
