@@ -34,12 +34,13 @@ export const PROVENANCE_OVERRIDES = {
     paperMarksStatus: 'PROVISIONAL_OR_RECONCILED',
   },
 
-  // Paper 3: Class 1 English — Derived from 6+10+10+5+5 = 36; header unstated in source.
-  // Section 2 has count mismatch: marked 10, only 8 items supplied.
+  // Paper 3: Class 1 English — principal-approved 2026-09-27 correction supersedes
+  // the historical 36-mark transcription. Five explicit 10-mark sections => 50.
+  // Section 2 still has a source item-count mismatch: marked 10, only 8 items supplied.
   'official-first-term-2026-class-1-english': {
     paperTotalOrigin: 'DERIVED_FROM_EXPLICIT_SECTION_EVIDENCE',
     originalTeacherHeaderTotal: null,
-    authoritativePaperTotal: 36,
+    authoritativePaperTotal: 50,
     hasItemCountConflict: true,
     paperMarksStatus: 'BALANCED_DETERMINISTIC',
   },
@@ -441,14 +442,15 @@ export function sortObjectKeysRecursively(val) {
 /**
  * Generates the full 43-paper normalization manifest from the operational v13 dataset.
  */
-export function generate43NormalizationManifest(v13Dataset) {
+export function generate43NormalizationManifest(v13Dataset, options = {}) {
   const papers = (v13Dataset.papers || []).map((p, idx) => normalizeOfficialPaper(p, idx + 1))
   const manifest = {
-    schemaVersion: '1.0.0',
+    schemaVersion: '1.1.0',
     datasetVersion: v13Dataset.version || 'v13',
     sourceSha256: v13Dataset.sourceSha256 || null,
+    sourceDatasetByteSha256: options.sourceDatasetByteSha256 || null,
     paperCount: papers.length,
-    generatedAtBaseline: 'b47941ac7867af1b96664c53fd4428a59ccd5055',
+    generatedAtBaseline: options.generatedAtBaseline || 'b47941ac7867af1b96664c53fd4428a59ccd5055',
     papers,
   }
   return sortObjectKeysRecursively(manifest)

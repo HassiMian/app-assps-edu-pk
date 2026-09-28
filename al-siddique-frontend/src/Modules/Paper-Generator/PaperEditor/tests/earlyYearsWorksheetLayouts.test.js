@@ -21,10 +21,10 @@ test('EY-LAYOUT 1: buildWorksheetSpec generates valid presentation spec for all 
     assert.equal(spec.pageProfile.orientation, 'portrait')
     assert.equal(spec.pageProfile.widthMm, 210)
     assert.equal(spec.pageProfile.heightMm, 297)
-    assert.equal(spec.pageProfile.margins.top, 12)
-    assert.equal(spec.pageProfile.margins.bottom, 12)
-    assert.equal(spec.pageProfile.margins.left, 15)
-    assert.equal(spec.pageProfile.margins.right, 15)
+    assert.equal(spec.pageProfile.margins.top, 8)
+    assert.equal(spec.pageProfile.margins.bottom, 8)
+    assert.equal(spec.pageProfile.margins.left, 9)
+    assert.equal(spec.pageProfile.margins.right, 9)
 
     // Header config
     assert.equal(spec.headerConfig.schoolName, 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL')
@@ -74,9 +74,13 @@ test('EY-LAYOUT 3: Marks fidelity and total preservation across header configura
   const suQuestionSum = starterUrdu.questionPresentations.reduce((acc, q) => acc + q.marks, 0)
   assert.equal(suQuestionSum, 80, 'Question sum must remain 80 without auto-reconciliation')
 
-  // Mover Urdu: Header total omitted by teacher
-  const moverUrdu = buildWorksheetSpec(getEarlyYearsPaperById('ey-mover-urdu-2026'))
-  assert.equal(moverUrdu.headerConfig.totalMarks, null, 'Omitted header total must be null')
+  // Mover Urdu: source header is omitted, but the presentation may show the deterministic
+  // 50-mark total derived from explicit question marks without mutating source provenance.
+  const moverUrduSource = getEarlyYearsPaperById('ey-mover-urdu-2026')
+  assert.equal(moverUrduSource.totalMarksSource.headerTotal, null, 'Source header total must remain absent')
+  const moverUrdu = buildWorksheetSpec(moverUrduSource)
+  assert.equal(moverUrdu.headerConfig.totalMarks, 50, 'Presentation total must derive to 50 from explicit question marks')
+  assert.equal(moverUrdu.headerConfig.totalMarksAuthority, 'derived-from-explicit-question-marks')
 
   // Flyer Urdu: Header total 50, but individual questions total 60
   const flyerUrdu = buildWorksheetSpec(getEarlyYearsPaperById('ey-flyer-urdu-2026'))

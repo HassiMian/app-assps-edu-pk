@@ -94,7 +94,15 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const corpusPath = path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
+const referenceLockPath = path.resolve(__dirname, '../migration/data/referenceCorpusLock.json')
 const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documents
+const referenceLock = JSON.parse(fs.readFileSync(referenceLockPath, 'utf-8'))
+const lockedRecord = name => {
+  const record = referenceLock.files?.find(item => item.name === name)
+  assert.ok(record?.sha256, `Missing SHA lock for ${name}`)
+  return record
+}
+const lockedSha = name => lockedRecord(name).sha256
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. CORPUS AUDIT COUNTS
@@ -109,7 +117,7 @@ test('B4-AUDIT-01: Corpus count verification across all 43 canonical documents',
     }
   }
 
-  assert.strictEqual(counts.mcq, 280, 'mcq count must be exactly 280')
+  assert.strictEqual(counts.mcq, 279, 'mcq count must be exactly 279 after the approved Class 6 Mathematics MCQ removal')
   assert.strictEqual(counts.short_question, 497, 'short_question count must be exactly 497')
   assert.strictEqual(counts.fill_blank, 122, 'fill_blank count must be exactly 122')
   assert.strictEqual(counts.long_question, 39, 'long_question count must be exactly 39')
@@ -934,34 +942,38 @@ test('B4-HASH-FREEZE-01: Source dataset and canonical artifact SHA-256 byte pari
     {
       name: 'official-first-term-2026-v12.json',
       path: path.resolve(__dirname, '../../seed-data/official-first-term-2026-v12.json'),
-      expectedSha: 'd8fe0c5529c26a557444dc41331f67b8699e93bf06bae442c40ac274edbfd8a3',
+      expectedSha: lockedSha('official-first-term-2026-v12.json'),
     },
     {
       name: 'official-first-term-2026-v13.json',
       path: path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json'),
-      expectedSha: '5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214',
+      expectedSha: lockedSha('official-first-term-2026-v13.json'),
     },
     {
       name: 'normalizationManifestV13.json',
       path: path.resolve(__dirname, '../migration/data/normalizationManifestV13.json'),
-      expectedSha: 'f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4',
+      expectedSha: lockedSha('normalizationManifestV13.json'),
     },
     {
       name: 'canonical-first-term-2026-paperdoc-v2-schema3.json',
       path: path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json'),
-      expectedSha: '58a9f345c0f83611a6c419df72abcafb9f0cfd252d713d62636e9b94d4af7e86',
+      expectedSha: lockedSha('canonical-first-term-2026-paperdoc-v2-schema3.json'),
     },
     {
       name: 'early-years-first-term-2026-source-v2.json',
       path: path.resolve(__dirname, '../earlyYears/data/early-years-first-term-2026-source-v2.json'),
-      expectedSha: '25391ebedf0a69d374b09b36aecc4cb1e0ad12560077f4e371823d56989da65e',
+      expectedSha: lockedSha('early-years-first-term-2026-source-v2.json'),
     },
   ]
 
   for (const item of filesToCheck) {
     assert.ok(fs.existsSync(item.path), `File must exist: ${item.name}`)
+    const record = lockedRecord(item.name)
     const buf = fs.readFileSync(item.path)
-    const actualSha = crypto.createHash('sha256').update(buf).digest('hex')
+    const hashInput = record.hashMode === 'utf8-lf-normalized'
+      ? Buffer.from(buf.toString('utf8').replace(/\r\n/g, '\n'), 'utf8')
+      : buf
+    const actualSha = crypto.createHash('sha256').update(hashInput).digest('hex')
     assert.strictEqual(actualSha, item.expectedSha, `SHA-256 freeze violation on ${item.name}`)
   }
 })

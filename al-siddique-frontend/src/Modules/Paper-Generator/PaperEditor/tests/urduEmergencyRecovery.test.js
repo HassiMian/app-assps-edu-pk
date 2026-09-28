@@ -92,14 +92,14 @@ test('URDU RECOVERY 3: Urdu-script papers NEVER enter word_editor even if target
   assert.strictEqual(resolvePaperRoute(class8Urdu, 'word_editor'), 'build')
 })
 
-test('URDU RECOVERY 4: English official papers strictly retain word_editor route', () => {
+test('URDU RECOVERY 4: English official papers share the stable Paper Workspace until canonical parity gate', () => {
   const class5English = {
     id: 'official-first-term-2026-class-5-english',
     name: 'First Term Examination 2026 - Class 5 - English',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '5', subject: 'English', language: 'english' },
   }
-  assert.strictEqual(resolvePaperRoute(class5English), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(class5English), 'build')
 
   const class7English = {
     id: 'official-first-term-2026-class-7-english',
@@ -107,7 +107,7 @@ test('URDU RECOVERY 4: English official papers strictly retain word_editor route
     documentFormat: 'pts-native-v13',
     config: { classLevel: '7', subject: 'English', language: 'english' },
   }
-  assert.strictEqual(resolvePaperRoute(class7English), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(class7English), 'build')
 })
 
 test('URDU RECOVERY 5: Early Years papers strictly retain early_years route', () => {

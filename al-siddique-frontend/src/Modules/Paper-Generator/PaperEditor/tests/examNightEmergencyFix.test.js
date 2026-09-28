@@ -19,28 +19,28 @@ const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documen
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. ROUTING TESTS (FIX A)
 // ─────────────────────────────────────────────────────────────────────────────
-test('FIX A.1: Class 5 official V13 routes to word_editor', () => {
+test('FIX A.1: Class 5 official V13 remains on stable Paper Workspace until canonical parity gate', () => {
   const paper = {
     id: 'official-first-term-2026-class-5-english',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '5', subject: 'English' },
   }
-  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper), 'build')
 })
 
-test('FIX A.2: Class 7 official V13 routes to word_editor', () => {
+test('FIX A.2: Class 7 official V13 remains on stable Paper Workspace until canonical parity gate', () => {
   const paper = {
     id: 'official-first-term-2026-class-7-english',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '7', subject: 'English' },
   }
-  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper), 'build')
 })
 
-test('FIX A.3: Canonical Paper Document V2 routes to word_editor', () => {
+test('FIX A.3: Official First Term canonical document remains on stable Paper Workspace until parity gate', () => {
   const paper = canonicalCorpus.find(p => p.id.includes('class-5-english'))
   assert.ok(paper)
-  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper), 'build')
 })
 
 test('FIX A.4: Starter English routes to early_years', () => {
@@ -79,13 +79,18 @@ test('FIX A.7: True legacy custom builder papers route to build', () => {
   assert.strictEqual(resolvePaperRoute(null), 'build')
 })
 
-test('FIX A.8: Explicit targetTab remains authoritative', () => {
-  const paper = {
+test('FIX A.8: Official First Term routing cannot be bypassed, while custom targetTab remains authoritative', () => {
+  const officialPaper = {
     id: 'official-first-term-2026-class-5-english',
     documentFormat: 'pts-native-v13',
   }
-  assert.strictEqual(resolvePaperRoute(paper, 'build'), 'build')
-  assert.strictEqual(resolvePaperRoute(paper, 'saved'), 'saved')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'build'), 'build')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'saved'), 'build')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'word_editor'), 'build')
+
+  const customPaper = { id: 'custom-user-paper-100' }
+  assert.strictEqual(resolvePaperRoute(customPaper, 'saved'), 'saved')
+  assert.strictEqual(resolvePaperRoute(customPaper, 'word_editor'), 'word_editor')
 })
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -161,13 +166,13 @@ test('FIX C.2: Class 3 English Q6 Singular/Plural is structured table without ra
 // ─────────────────────────────────────────────────────────────────────────────
 // 4. MARKS AUTHORITY (FIX D)
 // ─────────────────────────────────────────────────────────────────────────────
-test('FIX D.1: Class 1 English marks authority: total 36 and sections 6, 10, 10, 5, 5', () => {
+test('FIX D.1: Class 1 English principal-corrected marks authority: total 50 and five 10-mark sections', () => {
   const p1 = canonicalCorpus.find(p => p.id.includes('class-1-english'))
   assert.ok(p1)
-  assert.strictEqual(p1.authority.authoritativePaperTotal, 36)
+  assert.strictEqual(p1.authority.authoritativePaperTotal, 50)
 
   const sectionMarks = p1.sections.map(s => s.authoritativeSectionTotal)
-  assert.deepStrictEqual(sectionMarks, [6, 10, 10, 5, 5])
+  assert.deepStrictEqual(sectionMarks, [10, 10, 10, 10, 10])
 })
 
 test('FIX D.2: Class 3 English marks authority: total 75 preserved from source dataset', () => {

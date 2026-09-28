@@ -84,3 +84,21 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Advanced raw content remains available as a fallback for every semantic section.
 - Local acceptance: 10/10 Class 7 Social Studies MCQs preserved after edit, Urdu label geometry preserved, edited prompt/option reflected in raw working content, zero console errors.
 - Existing V2 in-place QA still PASS; paperSystemRules.test.js 12/12 PASS; production build PASS.
+
+
+## Phase 5 — Canonical Authority Reconciliation / V4 Foundation (28 Sep 2026)
+- Branch: `feature/paper-system-v4-canonical-convergence-20260928`; production remains unchanged on deployed V3 `999f9ce`.
+- Current operational V13 authority: 43 papers, source commit `16764ca8551ab0b76165c5b437ba09915581944b`, SHA-256 `870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f`.
+- Added deterministic `scripts/reconcile_canonical_v13.mjs`: current V13 -> normalization manifest -> canonical PaperDocument corpus -> reviewed reference-corpus lock.
+- Added `referenceCorpusLock.json` so historical sources, operational authority and derived artifacts have explicit roles instead of stale hard-coded freeze hashes.
+- Early Years source locking is LF-normalized to avoid false Windows CRLF/LF integrity failures while keeping academic content immutable.
+- Reconciled approved Class 6 Mathematics scheme: 5 MCQs, 10 compulsory shorts, and attempt any 2 of 3 long questions at 10 marks each.
+- Fixed a real Class 1 English authority bug: current principal-approved source is 50 marks (five 10-mark sections), replacing the obsolete 36-mark provenance override.
+- Regenerated manifest SHA-256: `51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2`.
+- Regenerated canonical corpus SHA-256: `ab178edad6933cc7968c9f69c2be7fdb8e9f54305a82bc7e81c068d3cd777a5b`.
+- Reconciled obsolete emergency-routing and Early Years pre-duplex test contracts against current production architecture and Git lineage.
+- Full PaperEditor regression: 274/274 PASS; focused Canonical browser/structured acceptance: 20/20 PASS.
+- Removed duplicate Tiptap Underline registration; StarterKit remains the single Underline provider and the warning is gone.
+- Deterministic reconciliation check PASS and production frontend build PASS.
+- No production route switch in this phase. Official First Term papers remain on stable Paper Workspace (`build`) until Canonical shadow parity passes.
+- Next phase: all-43 shadow parity between live Paper Workspace and Canonical V2; do not duplicate more structured editor logic inside `OfficialSectionRenderer`.

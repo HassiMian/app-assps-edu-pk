@@ -61,7 +61,10 @@ test('TEST 2: All source sections accounted for without omission or drop', () =>
 })
 
 test('TEST 3: Deterministic Byte-Identical Manifest Regeneration', () => {
-  const regenerated = generate43NormalizationManifest(v13)
+  const regenerated = generate43NormalizationManifest(v13, {
+    sourceDatasetByteSha256: manifest.sourceDatasetByteSha256,
+    generatedAtBaseline: manifest.generatedAtBaseline,
+  })
   const regeneratedJson = JSON.stringify(regenerated, null, 2) + '\n'
   const diskJson = fs.readFileSync(manifestPath, 'utf8')
 
@@ -256,12 +259,14 @@ test('TEST 15: Item-Count Conflict Benchmarks', () => {
   assert.equal(c5s4.formulaExpectedItemCount, 1, 'Singular hadith wording establishes formulaExpectedItemCount = 1')
   assert.equal(c5s4.itemCountStatus, 'SOURCE_COUNT_MISMATCH')
 
-  // Benchmark 4: Class 8 Mathematics Short (10x3=30 with 12 items; unresolved formula role)
+  // Benchmark 4: Class 8 Mathematics Short (attempt any 10 from 12, 10×3=30)
   const c8m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-8-mathematics')
   const c8s3 = c8m.sections[2]
   assert.equal(c8s3.actualItemCount, 12)
-  assert.equal(c8s3.formulaExpectedItemCount, null, 'Unresolved formula role must not fabricate expected count')
-  assert.equal(c8s3.itemCountStatus, 'UNKNOWN')
+  assert.equal(c8s3.attemptRule, 'ATTEMPT_ANY')
+  assert.equal(c8s3.attemptCount, 10)
+  assert.equal(c8s3.formulaExpectedItemCount, 10)
+  assert.equal(c8s3.itemCountStatus, 'SOURCE_COUNT_MISMATCH')
 })
 
 test('TEST 16: Exact 43-Paper Partition Verification', () => {
@@ -390,21 +395,20 @@ test('TEST 18: Formula Role Resolution Benchmarks (Class 4 Math Q2, Class 5 Math
   assert.equal(c7s3.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
 })
 
-test('TEST 19: Class 6 Math Long and Class 8 Computer Q3 Conservative Attempt Semantics', () => {
-  // E. Class 6 Math Long: must NOT default to ALL solely because items exist
+test('TEST 19: Class 6 Math approved choice semantics and Class 8 Computer conservative semantics', () => {
+  // E. Class 6 Math Long: principal-approved attempt-any-two choice is explicit
   const c6m = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-6-mathematics')
   const longSec = c6m.sections[4]
-  assert.equal(longSec.heading, 'Long Questions. (10×2)')
+  assert.equal(longSec.heading, 'Q4. Attempt any two long questions. (2×10=20)')
   assert.equal(longSec.actualItemCount, 3)
-  assert.equal(longSec.attemptRule, 'UNSPECIFIED', 'Must NOT default to ALL solely because items exist')
-  assert.equal(longSec.attemptCount, null)
-  assert.notEqual(longSec.attemptRule, 'ALL')
+  assert.equal(longSec.attemptRule, 'ATTEMPT_ANY')
+  assert.equal(longSec.attemptCount, 2)
   assert.equal(longSec.explicitHeadingFormula.formulaTotal, 20)
-  assert.equal(longSec.explicitHeadingFormula.interpretationStatus, 'UNRESOLVED')
-  assert.equal(longSec.explicitHeadingFormula.interpretedItemCount, null)
-  assert.equal(longSec.explicitHeadingFormula.interpretedMarksPerItem, null)
-  assert.equal(longSec.formulaExpectedItemCount, null)
-  assert.equal(longSec.itemCountStatus, 'UNKNOWN')
+  assert.equal(longSec.explicitHeadingFormula.interpretationStatus, 'RESOLVED')
+  assert.equal(longSec.explicitHeadingFormula.interpretedItemCount, 2)
+  assert.equal(longSec.explicitHeadingFormula.interpretedMarksPerItem, 10)
+  assert.equal(longSec.formulaExpectedItemCount, 2)
+  assert.equal(longSec.itemCountStatus, 'SOURCE_COUNT_MISMATCH')
 
   // F. Class 8 Computer Q3: remains UNSPECIFIED
   const c8comp = manifest.papers.find(p => p.paperId === 'official-first-term-2026-class-8-computer')

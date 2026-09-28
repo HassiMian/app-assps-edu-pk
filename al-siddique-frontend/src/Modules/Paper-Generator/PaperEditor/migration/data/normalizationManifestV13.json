@@ -1,6 +1,6 @@
 {
   "datasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
-  "generatedAtBaseline": "b47941ac7867af1b96664c53fd4428a59ccd5055",
+  "generatedAtBaseline": "16764ca8551ab0b76165c5b437ba09915581944b",
   "paperCount": 43,
   "papers": [
     {
@@ -118,7 +118,7 @@
           "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "Inferred from five questions marked 10 each.",
+      "sourceTotalNote": "Five source questions are explicitly 10 marks each; total 50 is internally balanced.",
       "storedConfiguredTotal": 50,
       "subject": "Urdu"
     },
@@ -134,7 +134,7 @@
       "paperIndex": 2,
       "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
       "paperTotalOrigin": "PROVISIONAL_INFERENCE",
-      "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated in source; 50 is provisional and should be confirmed.\n- Q1 source contained mixed + and - operations under an Addition heading; operations were preserved.",
+      "qaNotes": "Do not invent section marks. Preserve mixed + and - operators in Q1 exactly as supplied. Mathematics print layout must use aligned operation/comparison/response structures.",
       "sections": [
         {
           "actualItemCount": 6,
@@ -237,12 +237,12 @@
           "storedLegacyMarksValue": 0
         }
       ],
-      "sourceTotalNote": "Provisional: five major questions; source did not state a total.",
+      "sourceTotalNote": "Working header total 50 retained from the five-major-question source package; teacher source did not assign question-wise marks.",
       "storedConfiguredTotal": 50,
       "subject": "Countdown (Mathematics)"
     },
     {
-      "authoritativePaperTotal": 36,
+      "authoritativePaperTotal": 50,
       "className": "1",
       "hasItemCountConflict": true,
       "hasProvisionalMarks": false,
@@ -253,27 +253,27 @@
       "paperIndex": 3,
       "paperMarksStatus": "BALANCED_DETERMINISTIC",
       "paperTotalOrigin": "DERIVED_FROM_EXPLICIT_SECTION_EVIDENCE",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source has only 8 items under Q2 although Q2 is marked 10.\n- Total 36 is the sum of explicit marks and is unusual for a term paper; confirm intended total.",
+      "qaNotes": "Authoritative correction from school principal: Q1-Q5 are 10 marks each; total marks 50. Preserve question text/content unchanged.",
       "sections": [
         {
           "actualItemCount": 6,
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": 6,
-          "evidence": "Scalar heading notation (6)",
+          "authoritativeSectionTotal": 10,
+          "evidence": "Scalar heading notation (10)",
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": null,
           "formulaExpectedItemCount": 6,
-          "heading": "Q1. Write one word with each given letter. (6)",
+          "heading": "Q1. Write one word with each given letter. (10)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
-          "operationalSectionTotal": 6,
+          "operationalSectionTotal": 10,
           "rawSourceSnapshot": "B = __________\nG = __________\nI = __________\nM = __________\nT = __________\nV = __________",
           "sectionId": "official-first-term-2026-class-1-english-section-1",
           "sectionIndex": 1,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
-          "storedLegacyMarksValue": 6
+          "storedLegacyMarksValue": 10
         },
         {
           "actualItemCount": 8,
@@ -320,44 +320,44 @@
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": 5,
-          "evidence": "Scalar heading notation (5)",
+          "authoritativeSectionTotal": 10,
+          "evidence": "Scalar heading notation (10)",
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": null,
           "formulaExpectedItemCount": 5,
-          "heading": "Q4. Singular and Plural. (5)",
+          "heading": "Q4. Singular and Plural. (10)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
-          "operationalSectionTotal": 5,
+          "operationalSectionTotal": 10,
           "rawSourceSnapshot": "Boy, Women, Cow, Apple, Watch",
           "sectionId": "official-first-term-2026-class-1-english-section-4",
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
-          "storedLegacyMarksValue": 5
+          "storedLegacyMarksValue": 10
         },
         {
           "actualItemCount": 5,
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": 5,
-          "evidence": "Scalar heading notation (5)",
+          "authoritativeSectionTotal": 10,
+          "evidence": "Scalar heading notation (10)",
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": null,
           "formulaExpectedItemCount": 5,
-          "heading": "Q5. Masculine and Feminine. (5)",
+          "heading": "Q5. Masculine and Feminine. (10)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
-          "operationalSectionTotal": 5,
+          "operationalSectionTotal": 10,
           "rawSourceSnapshot": "Bull, Father, Waiter, Horse, Sir",
           "sectionId": "official-first-term-2026-class-1-english-section-5",
           "sectionIndex": 5,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
-          "storedLegacyMarksValue": 5
+          "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "Calculated from explicit question marks: 6+10+10+5+5.",
-      "storedConfiguredTotal": 36,
+      "sourceTotalNote": "Principal correction 2026-09-27: five major questions, 10 marks each; total 50.",
+      "storedConfiguredTotal": 50,
       "subject": "English"
     },
     {
@@ -888,7 +888,7 @@
       "paperIndex": 8,
       "paperMarksStatus": "BALANCED_EXPLICIT",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- Class label in source read \"Two / Starter\"; classified under Class Two because the paper itself is presented with Class Two papers.\n- Q2 includes 81 □ 81 though instruction asks only > or <; equality symbol may also be required.",
+      "qaNotes": "Principal-approved print normalization: Q2 now explicitly allows = so every supplied comparison item is answerable. Academic numbers/items otherwise preserved.",
       "sections": [
         {
           "actualItemCount": 5,
@@ -920,7 +920,7 @@
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": null,
           "formulaExpectedItemCount": 5,
-          "heading": "Q2. Write > or < in the empty boxes. (10)",
+          "heading": "Q2. Write >, <, or = in the empty boxes. (10)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 10,
@@ -1011,7 +1011,7 @@
           "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "As stated; six questions at 10 marks each.",
+      "sourceTotalNote": "As stated; six questions at 10 marks each. Q2 instruction was normalized to >, <, or = because the supplied item 81 □ 81 requires equality.",
       "storedConfiguredTotal": 60,
       "subject": "Mathematics"
     },
@@ -1027,7 +1027,7 @@
       "paperIndex": 9,
       "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.\nPRINT HOLD 2026-09-27: confirm the missing 15 marks / omitted section before printing.",
       "sections": [
         {
           "actualItemCount": 6,
@@ -1150,7 +1150,7 @@
           "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total is 100, while explicit section marks total 85. Missing 15 marks are not source-authorized and are not invented.",
       "storedConfiguredTotal": 100,
       "subject": "Urdu"
     },
@@ -2397,7 +2397,7 @@
       "paperIndex": 19,
       "paperMarksStatus": "BALANCED_EXPLICIT",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- Q4 source says \"Attempt any Two questions. 13\" but lists four tasks; retained with 13 marks.\n- Some number spacing/circled-digit notation in Q2(3) is ambiguous because the source text lost the visual circles.",
+      "qaNotes": "Formula headings 2×8=16 are treated as section totals (16), not marks-per-item. Q4 remains 13 marks exactly as supplied.",
       "sections": [
         {
           "actualItemCount": 15,
@@ -2446,7 +2446,7 @@
           "sectionId": "official-first-term-2026-class-4-mathematics-section-2",
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2
+          "storedLegacyMarksValue": 16
         },
         {
           "actualItemCount": 10,
@@ -2475,7 +2475,7 @@
           "sectionId": "official-first-term-2026-class-4-mathematics-section-3",
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2
+          "storedLegacyMarksValue": 16
         },
         {
           "actualItemCount": 4,
@@ -2498,7 +2498,7 @@
           "storedLegacyMarksValue": 13
         }
       ],
-      "sourceTotalNote": "As stated; section marks sum to 60.",
+      "sourceTotalNote": "Teacher/header total is 60 and authoritative section totals are 15+16+16+13=60.",
       "storedConfiguredTotal": 60,
       "subject": "Mathematics"
     },
@@ -2816,7 +2816,7 @@
           "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total 75; explicit question marks total 75 and are internally balanced.",
       "storedConfiguredTotal": 75,
       "subject": "Urdu"
     },
@@ -3030,7 +3030,7 @@
       "paperIndex": 24,
       "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 59 (15+16+16+12).\n- Several MCQ options appear mathematically inconsistent; they are preserved as teacher-submitted content, not silently rewritten.",
+      "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 section marks reflect the full expressions printed in the headings, not the attempt-count multiplier alone.",
       "sections": [
         {
           "actualItemCount": 15,
@@ -3079,7 +3079,7 @@
           "sectionId": "official-first-term-2026-class-5-mathematics-section-2",
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 8
+          "storedLegacyMarksValue": 16
         },
         {
           "actualItemCount": 10,
@@ -3108,7 +3108,7 @@
           "sectionId": "official-first-term-2026-class-5-mathematics-section-3",
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 8
+          "storedLegacyMarksValue": 16
         },
         {
           "actualItemCount": 3,
@@ -3137,10 +3137,10 @@
           "sectionId": "official-first-term-2026-class-5-mathematics-section-4",
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2
+          "storedLegacyMarksValue": 12
         }
       ],
-      "sourceTotalNote": "As stated; 15+16+16+12=59 in source arithmetic, though Q4 says 2x6=12; header retained at 60.",
+      "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 59 (15+16+16+12); preserve both values and do not invent the missing 1 mark.",
       "storedConfiguredTotal": 60,
       "subject": "Mathematics"
     },
@@ -3674,7 +3674,7 @@
       "paperIndex": 28,
       "paperMarksStatus": "MIXED_EXPLICIT_AND_UNRESOLVED",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- MCQ section says 5 marks but contains 6 MCQs.\n- Short Questions alone are labelled 10×3=30 and Long Questions 10×2=20, already totaling 50 before MCQs/fill blanks; source marking scheme is inconsistent.\n- No marks are stated for Fill in the blanks.",
+      "qaNotes": "One middle MCQ from the six-item source was removed by principal instruction (the former MCQ 4: 5×(-3)-(-3)); remaining MCQs were renumbered 1-5. All 10 short questions are compulsory. Long section has one-question choice: attempt any 2 of 3.",
       "sections": [
         {
           "actualItemCount": 0,
@@ -3697,23 +3697,32 @@
           "storedLegacyMarksValue": 0
         },
         {
-          "actualItemCount": 6,
+          "actualItemCount": 5,
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
           "authoritativeSectionTotal": 5,
-          "evidence": "Scalar heading notation (5)",
+          "evidence": "Formula 5×1=5 yields 5 marks",
           "explicitContentMarksEvidence": false,
-          "explicitHeadingFormula": null,
-          "formulaExpectedItemCount": 6,
-          "heading": "MCQs. (5)",
+          "explicitHeadingFormula": {
+            "formulaTotal": 5,
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 5,
+            "interpretedMarksPerItem": 1,
+            "operandA": 5,
+            "operandB": 1,
+            "rawFormula": "5×1=5"
+          },
+          "formulaExpectedItemCount": 5,
+          "heading": "Q1. Select the correct answer. (5×1=5)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 5,
-          "rawSourceSnapshot": "1. Which of the following sets is an empty set?\n   a) A={1,2,3,4,5}   b) B={}   c) C={1,3,5}   d) D={2,4,6,8,...}\n2. The set of whole numbers is:\n   a) finite   b) infinite   c) empty   d) none of the above\n3. On the number line which is greater, -15 or -3?\n   a) -15   b) -3   c) They are equal   d) None of the above\n4. The value of 5×(-3)-(-3) is:\n   a) -12   b) 18   c) -18   d) 12\n5. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n6. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
+          "rawSourceSnapshot": "1. Which of the following sets is an empty set?\n   a) A={1,2,3,4,5}   b) B={}   c) C={1,3,5}   d) D={2,4,6,8,...}\n2. The set of whole numbers is:\n   a) finite   b) infinite   c) empty   d) none of the above\n3. On the number line which is greater, -15 or -3?\n   a) -15   b) -3   c) They are equal   d) None of the above\n4. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n5. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
           "sectionId": "official-first-term-2026-class-6-mathematics-section-2",
           "sectionIndex": 2,
-          "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
+          "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
           "storedLegacyMarksValue": 5
         },
         {
@@ -3721,20 +3730,29 @@
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": null,
-          "evidence": "Section lacks explicit marks",
+          "authoritativeSectionTotal": 5,
+          "evidence": "Formula 5×1=5 yields 5 marks",
           "explicitContentMarksEvidence": false,
-          "explicitHeadingFormula": null,
+          "explicitHeadingFormula": {
+            "formulaTotal": 5,
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 5,
+            "interpretedMarksPerItem": 1,
+            "operandA": 5,
+            "operandB": 1,
+            "rawFormula": "5×1=5"
+          },
           "formulaExpectedItemCount": 5,
-          "heading": "Fill in the blanks.",
+          "heading": "Q2. Fill in the blanks. (5×1=5)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
-          "operationalSectionTotal": 0,
+          "operationalSectionTotal": 5,
           "rawSourceSnapshot": "1. 5×(7+2) = (5×___) + (5×___)\n2. 12 ÷ ___ = 12\n3. ___ ÷ 10 = 0\n4. 54 + (36+40) = (54+___) + 40\n5. The smallest whole number is ___",
           "sectionId": "official-first-term-2026-class-6-mathematics-section-3",
           "sectionIndex": 3,
-          "sectionMarksOrigin": "NONE",
-          "storedLegacyMarksValue": 0
+          "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
+          "storedLegacyMarksValue": 5
         },
         {
           "actualItemCount": 10,
@@ -3742,20 +3760,20 @@
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
           "authoritativeSectionTotal": 30,
-          "evidence": "Formula 10×3 yields 30 marks",
+          "evidence": "Formula 10×3=30 yields 30 marks",
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": {
             "formulaTotal": 30,
-            "hasExplicitEqualsTotal": false,
+            "hasExplicitEqualsTotal": true,
             "interpretationStatus": "RESOLVED",
             "interpretedItemCount": 10,
             "interpretedMarksPerItem": 3,
             "operandA": 10,
             "operandB": 3,
-            "rawFormula": "10×3"
+            "rawFormula": "10×3=30"
           },
           "formulaExpectedItemCount": 10,
-          "heading": "Short Questions. (10×3)",
+          "heading": "Q3. Answer all ten short questions. (10×3=30)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 30,
@@ -3763,40 +3781,40 @@
           "sectionId": "official-first-term-2026-class-6-mathematics-section-4",
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 10
+          "storedLegacyMarksValue": 30
         },
         {
           "actualItemCount": 3,
-          "attemptCount": null,
-          "attemptRule": "UNSPECIFIED",
-          "attemptRuleOrigin": "UNKNOWN",
+          "attemptCount": 2,
+          "attemptRule": "ATTEMPT_ANY",
+          "attemptRuleOrigin": "TEACHER_EXPLICIT",
           "authoritativeSectionTotal": 20,
-          "evidence": "Formula 10×2 yields 20 marks",
+          "evidence": "Formula 2×10=20 yields 20 marks",
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": {
             "formulaTotal": 20,
-            "hasExplicitEqualsTotal": false,
-            "interpretationStatus": "UNRESOLVED",
-            "interpretedItemCount": null,
-            "interpretedMarksPerItem": null,
-            "operandA": 10,
-            "operandB": 2,
-            "rawFormula": "10×2"
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 2,
+            "interpretedMarksPerItem": 10,
+            "operandA": 2,
+            "operandB": 10,
+            "rawFormula": "2×10=20"
           },
-          "formulaExpectedItemCount": null,
-          "heading": "Long Questions. (10×2)",
-          "itemCountStatus": "UNKNOWN",
+          "formulaExpectedItemCount": 2,
+          "heading": "Q4. Attempt any two long questions. (2×10=20)",
+          "itemCountStatus": "SOURCE_COUNT_MISMATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 20,
           "rawSourceSnapshot": "1. Find the prime factors of 663.\n2. Solve: (2x-5)/(7x-3) = 5/4.\n3. Find LCM of 42, 48, 56.",
           "sectionId": "official-first-term-2026-class-6-mathematics-section-5",
           "sectionIndex": 5,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 10
+          "storedLegacyMarksValue": 20
         }
       ],
-      "sourceTotalNote": "As stated by teacher source; marking scheme is internally inconsistent.",
-      "storedConfiguredTotal": 50,
+      "sourceTotalNote": "Principal-approved scheme: 5 MCQs ×1=5, 5 fill in the blanks ×1=5, 10 short questions ×3=30, and attempt any 2 of 3 long questions ×10=20. Total 60.",
+      "storedConfiguredTotal": 60,
       "subject": "Mathematics"
     },
     {
@@ -4167,7 +4185,7 @@
       "paperIndex": 31,
       "paperMarksStatus": "HEADER_TOTAL_WITH_UNRESOLVED_SECTIONS",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.\\n29 Sep print rule: teacher source states total 75 but gives no section-wise marks; do not invent question marks.",
       "sections": [
         {
           "actualItemCount": 0,
@@ -4485,7 +4503,7 @@
       "paperIndex": 33,
       "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
       "paperTotalOrigin": "CORRECTED_FROM_CONFLICTING_SOURCE_HEADER",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source top line said total 10 but explicit sections total 50; total corrected to 50.\n- Several terms (e.g. \"عربیاں کالی\", \"عمل کرلاؤ\") are garbled in source and retained.",
+      "qaNotes": "Principal corrections 2026-09-27: MCQ1 = قشر الارض کی کتنی بڑی پلیٹیں ہیں؟ options 6, 7, 8; MCQ8 = فصلوں کی کتنی اقسام ہیں؟; MCQ9 = بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟ options ہوائی، بحری، زمینی. Urdu option labels render as الف) ب) ج) with the closing bracket between label and option text.",
       "sections": [
         {
           "actualItemCount": 10,
@@ -4501,7 +4519,7 @@
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 10,
-          "rawSourceSnapshot": "1. قطر الارض کی کتنی بڑی پیمائش ہے؟\n   ا) ایشیا   ب) چین   ج) ساوت\n2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n8. صحراؤں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n9. بین الاقوامی تجارت کو اسٹوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
+          "rawSourceSnapshot": "1. قشر الارض کی کتنی بڑی پلیٹیں ہیں؟\n   ا) 6   ب) 7   ج) 8\n2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n8. فصلوں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n9. بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
           "sectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sectionIndex": 1,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
@@ -4534,7 +4552,7 @@
           "sectionId": "official-first-term-2026-class-7-social-studies-section-2",
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 3
+          "storedLegacyMarksValue": 15
         },
         {
           "actualItemCount": 5,
@@ -4563,7 +4581,7 @@
           "sectionId": "official-first-term-2026-class-7-social-studies-section-3",
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 3
+          "storedLegacyMarksValue": 15
         },
         {
           "actualItemCount": 3,
@@ -4592,10 +4610,10 @@
           "sectionId": "official-first-term-2026-class-7-social-studies-section-4",
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2
+          "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "Corrected from source top-line \"کل نمبر: 10\" because explicit section marks total 50.",
+      "sourceTotalNote": "Explicit section totals are 10 + 15 + 15 + 10 = 50; the earlier source top-line total was inconsistent and is superseded by the explicit section formulas.",
       "storedConfiguredTotal": 50,
       "subject": "Social Studies"
     },
@@ -4611,7 +4629,7 @@
       "paperIndex": 34,
       "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
       "paperTotalOrigin": "TEACHER_EXPLICIT",
-      "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 50; 10 marks appear missing.\n- Q4(1a) supplied A and A′ overlap, which is mathematically unusual; preserved as source.\n- Some encircled-digit formatting was lost in plain-text source.",
+      "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 marks reflect the full expressions in the source headings.",
       "sections": [
         {
           "actualItemCount": 10,
@@ -4669,7 +4687,7 @@
           "sectionId": "official-first-term-2026-class-7-mathematics-section-2",
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 8
+          "storedLegacyMarksValue": 16
         },
         {
           "actualItemCount": 10,
@@ -4698,7 +4716,7 @@
           "sectionId": "official-first-term-2026-class-7-mathematics-section-3",
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 7
+          "storedLegacyMarksValue": 14
         },
         {
           "actualItemCount": 3,
@@ -4727,10 +4745,10 @@
           "sectionId": "official-first-term-2026-class-7-mathematics-section-4",
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2
+          "storedLegacyMarksValue": 10
         }
       ],
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 50 (10+16+14+10); preserve both values and do not invent the missing 10 marks.",
       "storedConfiguredTotal": 60,
       "subject": "Mathematics"
     },
@@ -5453,7 +5471,7 @@
       "paperIndex": 40,
       "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
       "paperTotalOrigin": "PROVISIONAL_INFERENCE",
-      "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated; 60 is provisional.\n- Short heading says 10×3=30 but lists 12 questions and does not state how many to attempt.\n- Long-question marks/attempt rule were not stated; 20 is provisional to reach 60.",
+      "qaNotes": "Choice statements are explicit. Two of twelve short questions are optional; one of three long questions is optional. No question content changed.",
       "sections": [
         {
           "actualItemCount": 0,
@@ -5494,7 +5512,7 @@
             "rawFormula": "10×1=10"
           },
           "formulaExpectedItemCount": 10,
-          "heading": "MCQs. (10×1=10)",
+          "heading": "Q1. Select the correct answer. (10×1=10)",
           "itemCountStatus": "MATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 10,
@@ -5506,45 +5524,54 @@
         },
         {
           "actualItemCount": 12,
-          "attemptCount": null,
-          "attemptRule": "UNSPECIFIED",
-          "attemptRuleOrigin": "UNKNOWN",
+          "attemptCount": 10,
+          "attemptRule": "ATTEMPT_ANY",
+          "attemptRuleOrigin": "TEACHER_EXPLICIT",
           "authoritativeSectionTotal": 30,
           "evidence": "Formula 10×3=30 yields 30 marks",
           "explicitContentMarksEvidence": false,
           "explicitHeadingFormula": {
             "formulaTotal": 30,
             "hasExplicitEqualsTotal": true,
-            "interpretationStatus": "UNRESOLVED",
-            "interpretedItemCount": null,
-            "interpretedMarksPerItem": null,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 10,
+            "interpretedMarksPerItem": 3,
             "operandA": 10,
             "operandB": 3,
             "rawFormula": "10×3=30"
           },
-          "formulaExpectedItemCount": null,
-          "heading": "Short Questions. (10×3=30)",
-          "itemCountStatus": "UNKNOWN",
+          "formulaExpectedItemCount": 10,
+          "heading": "Q2. Attempt any ten short questions. (10×3=30)",
+          "itemCountStatus": "SOURCE_COUNT_MISMATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 30,
           "rawSourceSnapshot": "1. Find absolute value: -9.\n2. Locate 6.75 on the number line.\n3. Round off to 3 significant figures: i) 672879   ii) 325708.\n4. Estimate: 89×27.\n5. Find the square of 14.\n6. Which is the perfect square: 432.\n7. Find square root of 121 by division method.\n8. Find cube of 8.\n9. Find cube root of 512.\n10. Identify the term-to-term rule: 64, 32, 16, ___, ___.\n11. Write in scientific notation: 6,780,000.\n12. Write in standard form: 6.75×10⁶.",
           "sectionId": "official-first-term-2026-class-8-mathematics-section-3",
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 10
+          "storedLegacyMarksValue": 30
         },
         {
           "actualItemCount": 3,
-          "attemptCount": null,
-          "attemptRule": "UNSPECIFIED",
-          "attemptRuleOrigin": "UNKNOWN",
+          "attemptCount": 2,
+          "attemptRule": "ATTEMPT_ANY",
+          "attemptRuleOrigin": "TEACHER_EXPLICIT",
           "authoritativeSectionTotal": null,
           "evidence": "Long-question marks/attempt rule were not stated; 20 is provisional to reach 60.",
           "explicitContentMarksEvidence": false,
-          "explicitHeadingFormula": null,
-          "formulaExpectedItemCount": 3,
-          "heading": "Long Questions. (20 - provisional)",
-          "itemCountStatus": "MATCH",
+          "explicitHeadingFormula": {
+            "formulaTotal": 20,
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 2,
+            "interpretedMarksPerItem": 10,
+            "operandA": 2,
+            "operandB": 10,
+            "rawFormula": "2×10=20"
+          },
+          "formulaExpectedItemCount": 2,
+          "heading": "Q3. Attempt any two long questions. (2×10=20)",
+          "itemCountStatus": "SOURCE_COUNT_MISMATCH",
           "listedPotentialItemMarksTotal": null,
           "operationalSectionTotal": 20,
           "rawSourceSnapshot": "1. Find the value of x² + 1/x² when x + 1/x = 7.\n2. Find the cube of 2m + 1.\n3. Resolve by using formula a²-b²=(a+b)(a-b): 2y² - 128.",
@@ -5554,7 +5581,7 @@
           "storedLegacyMarksValue": 20
         }
       ],
-      "sourceTotalNote": "Provisional: total not stated; 60 inferred from 10 MCQ + 30 short + likely 20 long.",
+      "sourceTotalNote": "Principal-approved scheme: 10 MCQs ×1=10, attempt any 10 of 12 short questions ×3=30, and attempt any 2 of 3 long questions ×10=20. Total 60.",
       "storedConfiguredTotal": 60,
       "subject": "Mathematics"
     },
@@ -5570,7 +5597,7 @@
       "paperIndex": 41,
       "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
       "paperTotalOrigin": "PROVISIONAL_INFERENCE",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.\\n29 Sep print rule: total 75 remains provisional from prior source package; source gives no section-wise marks and only 9 MCQs; do not invent a 10th MCQ or section marks.",
       "sections": [
         {
           "actualItemCount": 9,
@@ -5976,6 +6003,7 @@
       "subject": "Islamiyat"
     }
   ],
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
+  "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
   "sourceSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692"
 }

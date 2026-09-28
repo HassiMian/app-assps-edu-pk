@@ -165,21 +165,21 @@ test('INVARIANT D (Rule 46): Marks Authority Lock on Class 8 Computer and Class 
   assert.strictEqual(node1.nodeMarksOrigin, 'ITEM_LEVEL_EXPLICIT')
   assert.strictEqual(node1.editableFields.stem.lockedMarksEvidence, '(10 Marks)')
 
-  // 2. Class 6 Math Long Questions (Unresolved Formula)
+  // 2. Class 6 Math Long Questions (approved 2×10=20 choice)
   const c6Math = canonicalCorpus.find(p => p.id.includes('class-6-mathematics'))
   const storeC6 = new EditorWorkingStore(c6Math)
   const workingC6 = storeC6.getWorkingDocument()
 
-  const longSec = workingC6.sections.find(s => /Long/i.test(s.title))
+  const longSec = workingC6.sections.find(s => /Attempt any two long/i.test(s.title))
   const c6Node = longSec.nodeOverlays[0]
   const fieldKeyC6 = buildFieldKey(workingC6.baseCanonicalDocumentId, longSec.id, c6Node.nodeId, 'stem')
 
   storeC6.updateField(fieldKeyC6, canonicalTextToTiptapDoc('User edited math long question'), 'User edited math long question')
 
-  // Unresolved formula marks remain null and unstated
-  assert.strictEqual(c6Node.authoritativeNodeMarks, null)
-  assert.strictEqual(c6Node.operationalNodeMarks, null)
-  assert.strictEqual(c6Node.nodeMarksOrigin, 'UNSTATED')
+  // Editing question text must not mutate resolved formula-derived marks authority.
+  assert.strictEqual(c6Node.authoritativeNodeMarks, 10)
+  assert.strictEqual(c6Node.operationalNodeMarks, 10)
+  assert.strictEqual(c6Node.nodeMarksOrigin, 'DERIVED_FROM_RESOLVED_FORMULA')
 })
 
 test('INVARIANT E (Rule 47): Route Guards correctly segregate Canonical V2 from Legacy Canvas', () => {

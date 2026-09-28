@@ -15,7 +15,7 @@
         "paperMarksStatus": "BALANCED_DETERMINISTIC",
         "paperTotalOrigin": "DERIVED_FROM_EXPLICIT_SECTION_EVIDENCE",
         "qaNotes": "preserve source, do not invent corrections:\n- Q2 contains the same letter sequence د+ر+ی+ا twice in the supplied source; retained.",
-        "sourceTotalNote": "Inferred from five questions marked 10 each.",
+        "sourceTotalNote": "Five source questions are explicitly 10 marks each; total 50 is internally balanced.",
         "storedConfiguredTotal": 50
       },
       "createdAt": null,
@@ -27,7 +27,7 @@
         "className": "1",
         "direction": "rtl",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-02",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "urdu",
@@ -35,11 +35,11 @@
         "session": "2026-2027",
         "subject": "Urdu",
         "subjectName": "Urdu",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -1008,9 +1008,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 1,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -1030,8 +1030,8 @@
         "originalTeacherHeaderTotal": null,
         "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
         "paperTotalOrigin": "PROVISIONAL_INFERENCE",
-        "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated in source; 50 is provisional and should be confirmed.\n- Q1 source contained mixed + and - operations under an Addition heading; operations were preserved.",
-        "sourceTotalNote": "Provisional: five major questions; source did not state a total.",
+        "qaNotes": "Do not invent section marks. Preserve mixed + and - operators in Q1 exactly as supplied. Mathematics print layout must use aligned operation/comparison/response structures.",
+        "sourceTotalNote": "Working header total 50 retained from the five-major-question source package; teacher source did not assign question-wise marks.",
         "storedConfiguredTotal": 50
       },
       "createdAt": null,
@@ -1055,7 +1055,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -2046,9 +2046,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 2,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -2058,7 +2058,7 @@
     },
     {
       "authority": {
-        "authoritativePaperTotal": 36,
+        "authoritativePaperTotal": 50,
         "flags": {
           "hasItemCountConflict": true,
           "hasProvisionalMarks": false,
@@ -2068,9 +2068,9 @@
         "originalTeacherHeaderTotal": null,
         "paperMarksStatus": "BALANCED_DETERMINISTIC",
         "paperTotalOrigin": "DERIVED_FROM_EXPLICIT_SECTION_EVIDENCE",
-        "qaNotes": "preserve source, do not invent corrections:\n- Source has only 8 items under Q2 although Q2 is marked 10.\n- Total 36 is the sum of explicit marks and is unusual for a term paper; confirm intended total.",
-        "sourceTotalNote": "Calculated from explicit question marks: 6+10+10+5+5.",
-        "storedConfiguredTotal": 36
+        "qaNotes": "Authoritative correction from school principal: Q1-Q5 are 10 marks each; total marks 50. Preserve question text/content unchanged.",
+        "sourceTotalNote": "Principal correction 2026-09-27: five major questions, 10 marks each; total 50.",
+        "storedConfiguredTotal": 50
       },
       "createdAt": null,
       "documentModel": "PaperDocumentV2",
@@ -2093,7 +2093,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -2117,10 +2117,10 @@
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": 6,
+          "authoritativeSectionTotal": 10,
           "direction": "ltr",
           "formula": null,
-          "heading": "Q1. Write one word with each given letter. (6)",
+          "heading": "Q1. Write one word with each given letter. (10)",
           "id": "official-first-term-2026-class-1-english__s01",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -2240,7 +2240,7 @@
               "type": "letter"
             }
           ],
-          "operationalSectionTotal": 6,
+          "operationalSectionTotal": 10,
           "provenance": {
             "sourceSectionId": "official-first-term-2026-class-1-english-section-1",
             "sourceSegmentIds": [
@@ -2255,8 +2255,8 @@
           },
           "sectionIndex": 1,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
-          "storedLegacyMarksValue": 6,
-          "title": "Q1. Write one word with each given letter. (6)",
+          "storedLegacyMarksValue": 10,
+          "title": "Q1. Write one word with each given letter. (10)",
           "titleUrdu": null
         },
         {
@@ -2518,10 +2518,10 @@
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": 5,
+          "authoritativeSectionTotal": 10,
           "direction": "ltr",
           "formula": null,
-          "heading": "Q4. Singular and Plural. (5)",
+          "heading": "Q4. Singular and Plural. (10)",
           "id": "official-first-term-2026-class-1-english__s04",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -2546,7 +2546,7 @@
               "type": "short_question"
             }
           ],
-          "operationalSectionTotal": 5,
+          "operationalSectionTotal": 10,
           "provenance": {
             "sourceSectionId": "official-first-term-2026-class-1-english-section-4",
             "sourceSegmentIds": [
@@ -2556,8 +2556,8 @@
           },
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
-          "storedLegacyMarksValue": 5,
-          "title": "Q4. Singular and Plural. (5)",
+          "storedLegacyMarksValue": 10,
+          "title": "Q4. Singular and Plural. (10)",
           "titleUrdu": null
         },
         {
@@ -2565,10 +2565,10 @@
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": 5,
+          "authoritativeSectionTotal": 10,
           "direction": "ltr",
           "formula": null,
-          "heading": "Q5. Masculine and Feminine. (5)",
+          "heading": "Q5. Masculine and Feminine. (10)",
           "id": "official-first-term-2026-class-1-english__s05",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -2593,7 +2593,7 @@
               "type": "short_question"
             }
           ],
-          "operationalSectionTotal": 5,
+          "operationalSectionTotal": 10,
           "provenance": {
             "sourceSectionId": "official-first-term-2026-class-1-english-section-5",
             "sourceSegmentIds": [
@@ -2603,22 +2603,22 @@
           },
           "sectionIndex": 5,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
-          "storedLegacyMarksValue": 5,
-          "title": "Q5. Masculine and Feminine. (5)",
+          "storedLegacyMarksValue": 10,
+          "title": "Q5. Masculine and Feminine. (10)",
           "titleUrdu": null
         }
       ],
       "sourceCoverageLedger": [
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 46,
-          "endOffset": 46,
+          "diagnosticCharCount": 47,
+          "endOffset": 47,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Q1. Write one word with each given letter. (6)",
+          "rawSourceSnapshot": "Q1. Write one word with each given letter. (10)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-1-english-section-1",
           "sourceSegmentId": "official-first-term-2026-class-1-english__s01__h_seg01",
-          "sourceSegmentSha256": "a6f53b67d38e87be852d100af24633654308ae39c889e2b0f9a19b5355c54285",
+          "sourceSegmentSha256": "d40246fa5be5bb501ec512c7d1b1b30e64b6d8b6fca63530981ace278e51ffa6",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-1-english__s01"
@@ -2896,14 +2896,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 28,
-          "endOffset": 28,
+          "diagnosticCharCount": 29,
+          "endOffset": 29,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Q4. Singular and Plural. (5)",
+          "rawSourceSnapshot": "Q4. Singular and Plural. (10)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-1-english-section-4",
           "sourceSegmentId": "official-first-term-2026-class-1-english__s04__h_seg01",
-          "sourceSegmentSha256": "351b9b09ee6ef7df1a132414a9b0e3aa0a7f9dc9aee0bf1bb1cef000e1856100",
+          "sourceSegmentSha256": "1c3911022ac2dc5909869e332e0e0004922db614e3f26f9ac5a48383d9a502af",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-1-english__s04"
@@ -2926,14 +2926,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 31,
-          "endOffset": 31,
+          "diagnosticCharCount": 32,
+          "endOffset": 32,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Q5. Masculine and Feminine. (5)",
+          "rawSourceSnapshot": "Q5. Masculine and Feminine. (10)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-1-english-section-5",
           "sourceSegmentId": "official-first-term-2026-class-1-english__s05__h_seg01",
-          "sourceSegmentSha256": "60ccd0ed5cdabcbf3ad48f52e2c4033b8483b663c9a09133660d7667f0f06303",
+          "sourceSegmentSha256": "e445bd44dc5da59dd0bcde631d7e46095aa1f89a03f05d3dc8159d9f9546413b",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-1-english__s05"
@@ -2957,9 +2957,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 3,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -3004,7 +3004,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -4270,9 +4270,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 4,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -4305,7 +4305,7 @@
         "className": "2",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-09-29",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -4313,11 +4313,11 @@
         "session": "2026-2027",
         "subject": "English",
         "subjectName": "English",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -5440,9 +5440,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 5,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -5487,7 +5487,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -6427,9 +6427,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 6,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -6474,7 +6474,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -7620,9 +7620,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 7,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -7642,8 +7642,8 @@
         "originalTeacherHeaderTotal": 60,
         "paperMarksStatus": "BALANCED_EXPLICIT",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- Class label in source read \"Two / Starter\"; classified under Class Two because the paper itself is presented with Class Two papers.\n- Q2 includes 81 □ 81 though instruction asks only > or <; equality symbol may also be required.",
-        "sourceTotalNote": "As stated; six questions at 10 marks each.",
+        "qaNotes": "Principal-approved print normalization: Q2 now explicitly allows = so every supplied comparison item is answerable. Academic numbers/items otherwise preserved.",
+        "sourceTotalNote": "As stated; six questions at 10 marks each. Q2 instruction was normalized to >, <, or = because the supplied item 81 □ 81 requires equality.",
         "storedConfiguredTotal": 60
       },
       "createdAt": null,
@@ -7655,7 +7655,7 @@
         "className": "2",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-01",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -7663,11 +7663,11 @@
         "session": "2026-2027",
         "subject": "Mathematics",
         "subjectName": "Mathematics",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -7821,7 +7821,7 @@
           "authoritativeSectionTotal": 10,
           "direction": "ltr",
           "formula": null,
-          "heading": "Q2. Write > or < in the empty boxes. (10)",
+          "heading": "Q2. Write >, <, or = in the empty boxes. (10)",
           "id": "official-first-term-2026-class-2-mathematics__s02",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -7937,7 +7937,7 @@
           "sectionIndex": 2,
           "sectionMarksOrigin": "LEGACY_UNKNOWN",
           "storedLegacyMarksValue": 10,
-          "title": "Q2. Write > or < in the empty boxes. (10)",
+          "title": "Q2. Write >, <, or = in the empty boxes. (10)",
           "titleUrdu": null
         },
         {
@@ -8322,14 +8322,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 41,
-          "endOffset": 41,
+          "diagnosticCharCount": 45,
+          "endOffset": 45,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Q2. Write > or < in the empty boxes. (10)",
+          "rawSourceSnapshot": "Q2. Write >, <, or = in the empty boxes. (10)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-2-mathematics-section-2",
           "sourceSegmentId": "official-first-term-2026-class-2-mathematics__s02__h_seg01",
-          "sourceSegmentSha256": "bd20873dc391a44ede17c3e0be2be8a86e2ce77f064d3aa4c4b6814a7ac0720e",
+          "sourceSegmentSha256": "83368d3ea2811ab6744806b26db13bcbe882084b6c8b62ebc5e580f2e9f66979",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-2-mathematics__s02"
@@ -8623,9 +8623,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 8,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -8645,8 +8645,8 @@
         "originalTeacherHeaderTotal": 100,
         "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.",
-        "sourceTotalNote": "As stated by teacher source.",
+        "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.\nPRINT HOLD 2026-09-27: confirm the missing 15 marks / omitted section before printing.",
+        "sourceTotalNote": "Teacher/header total is 100, while explicit section marks total 85. Missing 15 marks are not source-authorized and are not invented.",
         "storedConfiguredTotal": 100
       },
       "createdAt": null,
@@ -8658,7 +8658,7 @@
         "className": "3",
         "direction": "rtl",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-02",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "urdu",
@@ -8666,11 +8666,11 @@
         "session": "2026-2027",
         "subject": "Urdu",
         "subjectName": "Urdu",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -9560,9 +9560,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 9,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -9607,7 +9607,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -10589,9 +10589,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 10,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -10636,7 +10636,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -11704,9 +11704,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 11,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -11751,7 +11751,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -12838,9 +12838,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 12,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -12885,7 +12885,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -13856,9 +13856,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 13,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -13891,7 +13891,7 @@
         "className": "4",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-09-29",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -13899,11 +13899,11 @@
         "session": "2026-2027",
         "subject": "English",
         "subjectName": "English",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -15810,9 +15810,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 14,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -15857,7 +15857,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -17024,9 +17024,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 15,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -17071,7 +17071,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -18647,9 +18647,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 16,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -18694,7 +18694,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -19866,9 +19866,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 17,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -19913,7 +19913,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -21543,9 +21543,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 18,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -21565,8 +21565,8 @@
         "originalTeacherHeaderTotal": 60,
         "paperMarksStatus": "BALANCED_EXPLICIT",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- Q4 source says \"Attempt any Two questions. 13\" but lists four tasks; retained with 13 marks.\n- Some number spacing/circled-digit notation in Q2(3) is ambiguous because the source text lost the visual circles.",
-        "sourceTotalNote": "As stated; section marks sum to 60.",
+        "qaNotes": "Formula headings 2×8=16 are treated as section totals (16), not marks-per-item. Q4 remains 13 marks exactly as supplied.",
+        "sourceTotalNote": "Teacher/header total is 60 and authoritative section totals are 15+16+16+13=60.",
         "storedConfiguredTotal": 60
       },
       "createdAt": null,
@@ -21578,7 +21578,7 @@
         "className": "4",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-01",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -21586,11 +21586,11 @@
         "session": "2026-2027",
         "subject": "Mathematics",
         "subjectName": "Mathematics",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -22783,7 +22783,7 @@
           },
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2,
+          "storedLegacyMarksValue": 16,
           "title": "Q2. Attempt any eight questions. (2×8=16)",
           "titleUrdu": null
         },
@@ -23019,7 +23019,7 @@
           },
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2,
+          "storedLegacyMarksValue": 16,
           "title": "Q3. Attempt any eight questions. (2×8=16)",
           "titleUrdu": null
         },
@@ -23780,9 +23780,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 19,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -23827,7 +23827,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -25007,9 +25007,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 20,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -25030,7 +25030,7 @@
         "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
         "qaNotes": "preserve source, do not invent corrections:\n- Q6 source heading included \"10*6\" though five questions are listed; treated as 10 marks to reconcile the stated 75.\n- Several Urdu phrases are garbled in source, especially Q6(3) and Q7; retained rather than guessed.",
-        "sourceTotalNote": "As stated by teacher source.",
+        "sourceTotalNote": "Teacher/header total 75; explicit question marks total 75 and are internally balanced.",
         "storedConfiguredTotal": 75
       },
       "createdAt": null,
@@ -25042,7 +25042,7 @@
         "className": "5",
         "direction": "rtl",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-02",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "urdu",
@@ -25050,11 +25050,11 @@
         "session": "2026-2027",
         "subject": "Urdu",
         "subjectName": "Urdu",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -26551,9 +26551,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 21,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -26598,7 +26598,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -28222,9 +28222,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 22,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -28269,7 +28269,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -30376,9 +30376,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 23,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -30398,8 +30398,8 @@
         "originalTeacherHeaderTotal": 60,
         "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 59 (15+16+16+12).\n- Several MCQ options appear mathematically inconsistent; they are preserved as teacher-submitted content, not silently rewritten.",
-        "sourceTotalNote": "As stated; 15+16+16+12=59 in source arithmetic, though Q4 says 2x6=12; header retained at 60.",
+        "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 section marks reflect the full expressions printed in the headings, not the attempt-count multiplier alone.",
+        "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 59 (15+16+16+12); preserve both values and do not invent the missing 1 mark.",
         "storedConfiguredTotal": 60
       },
       "createdAt": null,
@@ -30423,7 +30423,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -31616,7 +31616,7 @@
           },
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 8,
+          "storedLegacyMarksValue": 16,
           "title": "Q2. Attempt any eight questions. (8×2=16)",
           "titleUrdu": null
         },
@@ -31852,7 +31852,7 @@
           },
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 8,
+          "storedLegacyMarksValue": 16,
           "title": "Q3. Attempt any eight questions. (8×2=16)",
           "titleUrdu": null
         },
@@ -31948,7 +31948,7 @@
           },
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2,
+          "storedLegacyMarksValue": 12,
           "title": "Q4. Attempt any two questions. (2×6=12)",
           "titleUrdu": null
         }
@@ -32587,9 +32587,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 24,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -32634,7 +32634,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -34263,9 +34263,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 25,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -34310,7 +34310,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -36160,9 +36160,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 26,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -36207,7 +36207,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -37844,9 +37844,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 27,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -37866,9 +37866,9 @@
         "originalTeacherHeaderTotal": 50,
         "paperMarksStatus": "MIXED_EXPLICIT_AND_UNRESOLVED",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- MCQ section says 5 marks but contains 6 MCQs.\n- Short Questions alone are labelled 10×3=30 and Long Questions 10×2=20, already totaling 50 before MCQs/fill blanks; source marking scheme is inconsistent.\n- No marks are stated for Fill in the blanks.",
-        "sourceTotalNote": "As stated by teacher source; marking scheme is internally inconsistent.",
-        "storedConfiguredTotal": 50
+        "qaNotes": "One middle MCQ from the six-item source was removed by principal instruction (the former MCQ 4: 5×(-3)-(-3)); remaining MCQs were renumbered 1-5. All 10 short questions are compulsory. Long section has one-question choice: attempt any 2 of 3.",
+        "sourceTotalNote": "Principal-approved scheme: 5 MCQs ×1=5, 5 fill in the blanks ×1=5, 10 short questions ×3=30, and attempt any 2 of 3 long questions ×10=20. Total 60.",
+        "storedConfiguredTotal": 60
       },
       "createdAt": null,
       "documentModel": "PaperDocumentV2",
@@ -37879,7 +37879,7 @@
         "className": "6",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-01",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -37887,11 +37887,11 @@
         "session": "2026-2027",
         "subject": "Mathematics",
         "subjectName": "Mathematics",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -37957,25 +37957,34 @@
           "titleUrdu": null
         },
         {
-          "actualItemCount": 6,
+          "actualItemCount": 5,
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
           "authoritativeSectionTotal": 5,
           "direction": "ltr",
-          "formula": null,
-          "heading": "MCQs. (5)",
+          "formula": {
+            "formulaTotal": 5,
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 5,
+            "interpretedMarksPerItem": 1,
+            "operandA": 5,
+            "operandB": 1,
+            "rawFormula": "5×1=5"
+          },
+          "heading": "Q1. Select the correct answer. (5×1=5)",
           "id": "official-first-term-2026-class-6-mathematics__s02",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
           "nodes": [
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s02__q01",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "options": [
                 {
                   "canonicalLabel": "A",
@@ -38030,12 +38039,12 @@
               "type": "mcq"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s02__q02",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "options": [
                 {
                   "canonicalLabel": "A",
@@ -38090,12 +38099,12 @@
               "type": "mcq"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s02__q03",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "options": [
                 {
                   "canonicalLabel": "A",
@@ -38150,12 +38159,12 @@
               "type": "mcq"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s02__q04",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "options": [
                 {
                   "canonicalLabel": "A",
@@ -38165,7 +38174,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "a",
-                  "text": "-12"
+                  "text": "9"
                 },
                 {
                   "canonicalLabel": "B",
@@ -38175,7 +38184,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "b",
-                  "text": "18"
+                  "text": "3"
                 },
                 {
                   "canonicalLabel": "C",
@@ -38185,7 +38194,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "c",
-                  "text": "-18"
+                  "text": "27"
                 },
                 {
                   "canonicalLabel": "D",
@@ -38195,27 +38204,27 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "d",
-                  "text": "12"
+                  "text": "all of the above"
                 }
               ],
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
-                "rawSourceSnapshot": "4. The value of 5×(-3)-(-3) is:\n   a) -12   b) 18   c) -18   d) 12\n",
+                "rawSourceSnapshot": "4. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n",
                 "sourceSegmentIds": [
                   "official-first-term-2026-class-6-mathematics__s02__c_seg04"
                 ]
               },
-              "stemText": "The value of 5×(-3)-(-3) is:",
+              "stemText": "3294 is divisible by:",
               "type": "mcq"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s02__q05",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "options": [
                 {
                   "canonicalLabel": "A",
@@ -38225,7 +38234,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "a",
-                  "text": "9"
+                  "text": "65"
                 },
                 {
                   "canonicalLabel": "B",
@@ -38235,7 +38244,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "b",
-                  "text": "3"
+                  "text": "126"
                 },
                 {
                   "canonicalLabel": "C",
@@ -38245,7 +38254,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "c",
-                  "text": "27"
+                  "text": "81"
                 },
                 {
                   "canonicalLabel": "D",
@@ -38255,75 +38264,15 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "d",
-                  "text": "all of the above"
-                }
-              ],
-              "provenance": {
-                "academicTextMutated": false,
-                "classificationCertainty": "EXPLICIT",
-                "rawSourceSnapshot": "5. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n",
-                "sourceSegmentIds": [
-                  "official-first-term-2026-class-6-mathematics__s02__c_seg05"
-                ]
-              },
-              "stemText": "3294 is divisible by:",
-              "type": "mcq"
-            },
-            {
-              "authoritativeNodeMarks": null,
-              "direction": "ltr",
-              "id": "official-first-term-2026-class-6-mathematics__s02__q06",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
-              "options": [
-                {
-                  "canonicalLabel": "A",
-                  "direction": "ltr",
-                  "displayLabel": "a)",
-                  "id": "official-first-term-2026-class-6-mathematics__s02__q06__optA",
-                  "isCorrect": null,
-                  "labelOrigin": "SOURCE",
-                  "sourceLabel": "a",
-                  "text": "65"
-                },
-                {
-                  "canonicalLabel": "B",
-                  "direction": "ltr",
-                  "displayLabel": "b)",
-                  "id": "official-first-term-2026-class-6-mathematics__s02__q06__optB",
-                  "isCorrect": null,
-                  "labelOrigin": "SOURCE",
-                  "sourceLabel": "b",
-                  "text": "126"
-                },
-                {
-                  "canonicalLabel": "C",
-                  "direction": "ltr",
-                  "displayLabel": "c)",
-                  "id": "official-first-term-2026-class-6-mathematics__s02__q06__optC",
-                  "isCorrect": null,
-                  "labelOrigin": "SOURCE",
-                  "sourceLabel": "c",
-                  "text": "81"
-                },
-                {
-                  "canonicalLabel": "D",
-                  "direction": "ltr",
-                  "displayLabel": "d)",
-                  "id": "official-first-term-2026-class-6-mathematics__s02__q06__optD",
-                  "isCorrect": null,
-                  "labelOrigin": "SOURCE",
-                  "sourceLabel": "d",
                   "text": "32"
                 }
               ],
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
-                "rawSourceSnapshot": "6. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
+                "rawSourceSnapshot": "5. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
                 "sourceSegmentIds": [
-                  "official-first-term-2026-class-6-mathematics__s02__c_seg06"
+                  "official-first-term-2026-class-6-mathematics__s02__c_seg05"
                 ]
               },
               "stemText": "Evaluate 2 + 7×9:",
@@ -38339,14 +38288,13 @@
               "official-first-term-2026-class-6-mathematics__s02__c_seg02",
               "official-first-term-2026-class-6-mathematics__s02__c_seg03",
               "official-first-term-2026-class-6-mathematics__s02__c_seg04",
-              "official-first-term-2026-class-6-mathematics__s02__c_seg05",
-              "official-first-term-2026-class-6-mathematics__s02__c_seg06"
+              "official-first-term-2026-class-6-mathematics__s02__c_seg05"
             ]
           },
           "sectionIndex": 2,
-          "sectionMarksOrigin": "TEACHER_EXPLICIT_SCALAR",
+          "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
           "storedLegacyMarksValue": 5,
-          "title": "MCQs. (5)",
+          "title": "Q1. Select the correct answer. (5×1=5)",
           "titleUrdu": null
         },
         {
@@ -38354,22 +38302,31 @@
           "attemptCount": null,
           "attemptRule": "UNSPECIFIED",
           "attemptRuleOrigin": "UNKNOWN",
-          "authoritativeSectionTotal": null,
+          "authoritativeSectionTotal": 5,
           "direction": "ltr",
-          "formula": null,
-          "heading": "Fill in the blanks.",
+          "formula": {
+            "formulaTotal": 5,
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 5,
+            "interpretedMarksPerItem": 1,
+            "operandA": 5,
+            "operandB": 1,
+            "rawFormula": "5×1=5"
+          },
+          "heading": "Q2. Fill in the blanks. (5×1=5)",
           "id": "official-first-term-2026-class-6-mathematics__s03",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
           "nodes": [
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "fullText": "5×(7+2) = (5×___) + (5×___)",
               "id": "official-first-term-2026-class-6-mathematics__s03__q01",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
@@ -38405,13 +38362,13 @@
               "wordBank": null
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "fullText": "12 ÷ ___ = 12",
               "id": "official-first-term-2026-class-6-mathematics__s03__q02",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
@@ -38439,13 +38396,13 @@
               "wordBank": null
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "fullText": "___ ÷ 10 = 0",
               "id": "official-first-term-2026-class-6-mathematics__s03__q03",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
@@ -38469,13 +38426,13 @@
               "wordBank": null
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "fullText": "54 + (36+40) = (54+___) + 40",
               "id": "official-first-term-2026-class-6-mathematics__s03__q04",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
@@ -38503,13 +38460,13 @@
               "wordBank": null
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 1,
               "direction": "ltr",
               "fullText": "The smallest whole number is ___",
               "id": "official-first-term-2026-class-6-mathematics__s03__q05",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "5×1=5",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 1,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
@@ -38533,7 +38490,7 @@
               "wordBank": null
             }
           ],
-          "operationalSectionTotal": 0,
+          "operationalSectionTotal": 5,
           "provenance": {
             "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-3",
             "sourceSegmentIds": [
@@ -38546,9 +38503,9 @@
             ]
           },
           "sectionIndex": 3,
-          "sectionMarksOrigin": "NONE",
-          "storedLegacyMarksValue": 0,
-          "title": "Fill in the blanks.",
+          "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
+          "storedLegacyMarksValue": 5,
+          "title": "Q2. Fill in the blanks. (5×1=5)",
           "titleUrdu": null
         },
         {
@@ -38560,15 +38517,15 @@
           "direction": "ltr",
           "formula": {
             "formulaTotal": 30,
-            "hasExplicitEqualsTotal": false,
+            "hasExplicitEqualsTotal": true,
             "interpretationStatus": "RESOLVED",
             "interpretedItemCount": 10,
             "interpretedMarksPerItem": 3,
             "operandA": 10,
             "operandB": 3,
-            "rawFormula": "10×3"
+            "rawFormula": "10×3=30"
           },
-          "heading": "Short Questions. (10×3)",
+          "heading": "Q3. Answer all ten short questions. (10×3=30)",
           "id": "official-first-term-2026-class-6-mathematics__s04",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -38577,7 +38534,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q01",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38596,7 +38553,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q02",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38615,7 +38572,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q03",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38634,7 +38591,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q04",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38653,7 +38610,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q05",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38672,7 +38629,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q06",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38691,7 +38648,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q07",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38710,7 +38667,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q08",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38729,7 +38686,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q09",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38748,7 +38705,7 @@
               "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s04__q10",
-              "marksEvidenceString": "10×3",
+              "marksEvidenceString": "10×3=30",
               "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
               "operationalNodeMarks": 3,
               "provenance": {
@@ -38783,39 +38740,39 @@
           },
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 10,
-          "title": "Short Questions. (10×3)",
+          "storedLegacyMarksValue": 30,
+          "title": "Q3. Answer all ten short questions. (10×3=30)",
           "titleUrdu": null
         },
         {
           "actualItemCount": 3,
-          "attemptCount": null,
-          "attemptRule": "UNSPECIFIED",
-          "attemptRuleOrigin": "UNKNOWN",
+          "attemptCount": 2,
+          "attemptRule": "ATTEMPT_ANY",
+          "attemptRuleOrigin": "TEACHER_EXPLICIT",
           "authoritativeSectionTotal": 20,
           "direction": "ltr",
           "formula": {
             "formulaTotal": 20,
-            "hasExplicitEqualsTotal": false,
-            "interpretationStatus": "UNRESOLVED",
-            "interpretedItemCount": null,
-            "interpretedMarksPerItem": null,
-            "operandA": 10,
-            "operandB": 2,
-            "rawFormula": "10×2"
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 2,
+            "interpretedMarksPerItem": 10,
+            "operandA": 2,
+            "operandB": 10,
+            "rawFormula": "2×10=20"
           },
-          "heading": "Long Questions. (10×2)",
+          "heading": "Q4. Attempt any two long questions. (2×10=20)",
           "id": "official-first-term-2026-class-6-mathematics__s05",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
           "nodes": [
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 10,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s05__q01",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "2×10=20",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 10,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -38829,12 +38786,12 @@
               "type": "long_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 10,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s05__q02",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "2×10=20",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 10,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -38848,12 +38805,12 @@
               "type": "long_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 10,
               "direction": "ltr",
               "id": "official-first-term-2026-class-6-mathematics__s05__q03",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "2×10=20",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 10,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -38879,8 +38836,8 @@
           },
           "sectionIndex": 5,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 10,
-          "title": "Long Questions. (10×2)",
+          "storedLegacyMarksValue": 20,
+          "title": "Q4. Attempt any two long questions. (2×10=20)",
           "titleUrdu": null
         }
       ],
@@ -38917,14 +38874,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 9,
-          "endOffset": 9,
+          "diagnosticCharCount": 38,
+          "endOffset": 38,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "MCQs. (5)",
+          "rawSourceSnapshot": "Q1. Select the correct answer. (5×1=5)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-2",
           "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s02__h_seg01",
-          "sourceSegmentSha256": "764a8913d416de922e52851b820b9ed1b36a3a9130346dbea7086b0e9c94040a",
+          "sourceSegmentSha256": "0a481dd9bde59c2c89bc04e299b4895604a6de9f2e94c752f02f381ca37b5b0d",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-6-mathematics__s02"
@@ -38977,14 +38934,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 67,
-          "endOffset": 386,
+          "diagnosticCharCount": 70,
+          "endOffset": 389,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "4. The value of 5×(-3)-(-3) is:\n   a) -12   b) 18   c) -18   d) 12\n",
+          "rawSourceSnapshot": "4. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-2",
           "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s02__c_seg04",
-          "sourceSegmentSha256": "807d11c52674d985fa75f701f6256b3fd9b74781a8fa4bb53eebade54715b211",
+          "sourceSegmentSha256": "48f24d6dd0baa5a458285100e91801529f7bffa7766ee4c22d1e5bb21b4f965b",
           "startOffset": 319,
           "targetCanonicalIds": [
             "official-first-term-2026-class-6-mathematics__s02__q04"
@@ -38992,44 +38949,29 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 70,
-          "endOffset": 456,
+          "diagnosticCharCount": 54,
+          "endOffset": 443,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "5. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n",
+          "rawSourceSnapshot": "5. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-2",
           "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s02__c_seg05",
-          "sourceSegmentSha256": "03e2469d73db618b62d0dcc90e63b89ddcf593c020701c1329390b7edfab4d60",
-          "startOffset": 386,
+          "sourceSegmentSha256": "851254dffa3ed4c98e45faaf537bab3834d32ea65ff4f27547168128f3ff7a99",
+          "startOffset": 389,
           "targetCanonicalIds": [
             "official-first-term-2026-class-6-mathematics__s02__q05"
           ]
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 54,
-          "endOffset": 510,
+          "diagnosticCharCount": 31,
+          "endOffset": 31,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "6. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
-          "sourceField": "content",
-          "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-2",
-          "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s02__c_seg06",
-          "sourceSegmentSha256": "5674d1fd9a94e6f876a0fa82bad14c74ead2cd1e8f28d7e0f0e37df6619a4091",
-          "startOffset": 456,
-          "targetCanonicalIds": [
-            "official-first-term-2026-class-6-mathematics__s02__q06"
-          ]
-        },
-        {
-          "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 19,
-          "endOffset": 19,
-          "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Fill in the blanks.",
+          "rawSourceSnapshot": "Q2. Fill in the blanks. (5×1=5)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-3",
           "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s03__h_seg01",
-          "sourceSegmentSha256": "2ef4191ab0ba939eecc76f7e2c6e5718635c0986050410a8f0cdea1e1fa6f184",
+          "sourceSegmentSha256": "ccd3abe12419852e1c61f54348dc052b987536aa78738ddc1b905d368d9cdde4",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-6-mathematics__s03"
@@ -39112,14 +39054,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 23,
-          "endOffset": 23,
+          "diagnosticCharCount": 45,
+          "endOffset": 45,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Short Questions. (10×3)",
+          "rawSourceSnapshot": "Q3. Answer all ten short questions. (10×3=30)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-4",
           "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s04__h_seg01",
-          "sourceSegmentSha256": "9d8d75615676f38e053c63217431e281e858dfd94e832dd74b7251831362e7b9",
+          "sourceSegmentSha256": "62b6836983532ab906173879d947af199fc48ebbc5486bf167c74b9704b52fea",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-6-mathematics__s04"
@@ -39277,14 +39219,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 22,
-          "endOffset": 22,
+          "diagnosticCharCount": 45,
+          "endOffset": 45,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Long Questions. (10×2)",
+          "rawSourceSnapshot": "Q4. Attempt any two long questions. (2×10=20)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-6-mathematics-section-5",
           "sourceSegmentId": "official-first-term-2026-class-6-mathematics__s05__h_seg01",
-          "sourceSegmentSha256": "d3adccb234e36a97027ab07dd07cb86341f96a31f648acc4186cdcaae02b04f6",
+          "sourceSegmentSha256": "938056af09a00dcce833adb227ef16ea3705bd27a1947b13a3ecfe7fadc046da",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-6-mathematics__s05"
@@ -39338,9 +39280,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 28,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -39385,7 +39327,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -41315,9 +41257,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 29,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -41362,7 +41304,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -42996,9 +42938,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 30,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -43018,7 +42960,7 @@
         "originalTeacherHeaderTotal": 75,
         "paperMarksStatus": "HEADER_TOTAL_WITH_UNRESOLVED_SECTIONS",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.",
+        "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.\\n29 Sep print rule: teacher source states total 75 but gives no section-wise marks; do not invent question marks.",
         "sourceTotalNote": "As stated by teacher source.",
         "storedConfiguredTotal": 75
       },
@@ -43031,7 +42973,7 @@
         "className": "6",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-09-29",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -43039,11 +42981,11 @@
         "session": "2026-2027",
         "subject": "English",
         "subjectName": "English",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -44792,9 +44734,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 31,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -44839,7 +44781,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -46573,9 +46515,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 32,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -46595,8 +46537,8 @@
         "originalTeacherHeaderTotal": 10,
         "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
         "paperTotalOrigin": "CORRECTED_FROM_CONFLICTING_SOURCE_HEADER",
-        "qaNotes": "preserve source, do not invent corrections:\n- Source top line said total 10 but explicit sections total 50; total corrected to 50.\n- Several terms (e.g. \"عربیاں کالی\", \"عمل کرلاؤ\") are garbled in source and retained.",
-        "sourceTotalNote": "Corrected from source top-line \"کل نمبر: 10\" because explicit section marks total 50.",
+        "qaNotes": "Principal corrections 2026-09-27: MCQ1 = قشر الارض کی کتنی بڑی پلیٹیں ہیں؟ options 6, 7, 8; MCQ8 = فصلوں کی کتنی اقسام ہیں؟; MCQ9 = بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟ options ہوائی، بحری، زمینی. Urdu option labels render as الف) ب) ج) with the closing bracket between label and option text.",
+        "sourceTotalNote": "Explicit section totals are 10 + 15 + 15 + 10 = 50; the earlier source top-line total was inconsistent and is superseded by the explicit section formulas.",
         "storedConfiguredTotal": 50
       },
       "createdAt": null,
@@ -46620,7 +46562,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -46668,7 +46610,7 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "ب",
-                  "text": "چین"
+                  "text": "7"
                 },
                 {
                   "canonicalLabel": "B",
@@ -46678,18 +46620,18 @@
                   "isCorrect": null,
                   "labelOrigin": "SOURCE",
                   "sourceLabel": "ج",
-                  "text": "ساوت"
+                  "text": "8"
                 }
               ],
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
-                "rawSourceSnapshot": "1. قطر الارض کی کتنی بڑی پیمائش ہے؟\n   ا) ایشیا   ب) چین   ج) ساوت\n",
+                "rawSourceSnapshot": "1. قشر الارض کی کتنی بڑی پلیٹیں ہیں؟\n   ا) 6   ب) 7   ج) 8\n",
                 "sourceSegmentIds": [
                   "official-first-term-2026-class-7-social-studies__s01__c_seg01"
                 ]
               },
-              "stemText": "قطر الارض کی کتنی بڑی پیمائش ہے؟",
+              "stemText": "قشر الارض کی کتنی بڑی پلیٹیں ہیں؟",
               "type": "mcq"
             },
             {
@@ -46964,12 +46906,12 @@
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
-                "rawSourceSnapshot": "8. صحراؤں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n",
+                "rawSourceSnapshot": "8. فصلوں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n",
                 "sourceSegmentIds": [
                   "official-first-term-2026-class-7-social-studies__s01__c_seg08"
                 ]
               },
-              "stemText": "صحراؤں کی کتنی اقسام ہیں؟",
+              "stemText": "فصلوں کی کتنی اقسام ہیں؟",
               "type": "mcq"
             },
             {
@@ -47004,12 +46946,12 @@
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "EXPLICIT",
-                "rawSourceSnapshot": "9. بین الاقوامی تجارت کو اسٹوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n",
+                "rawSourceSnapshot": "9. بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n",
                 "sourceSegmentIds": [
                   "official-first-term-2026-class-7-social-studies__s01__c_seg09"
                 ]
               },
-              "stemText": "بین الاقوامی تجارت کو اسٹوں سے ہوتی ہے؟",
+              "stemText": "بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟",
               "type": "mcq"
             },
             {
@@ -47208,7 +47150,7 @@
           },
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 3,
+          "storedLegacyMarksValue": 15,
           "title": "سوال نمبر 2: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
           "titleUrdu": "سوال نمبر 2: مختصر سوالوں کے جوابات دیں۔ (3×5=15)"
         },
@@ -47344,7 +47286,7 @@
           },
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 3,
+          "storedLegacyMarksValue": 15,
           "title": "سوال نمبر 3: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
           "titleUrdu": "سوال نمبر 3: مختصر سوالوں کے جوابات دیں۔ (3×5=15)"
         },
@@ -47440,7 +47382,7 @@
           },
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2,
+          "storedLegacyMarksValue": 10,
           "title": "سوال نمبر 4: تفصیلی سوالوں کے جوابات دیں۔ کوئی 2۔ (2×5=10)",
           "titleUrdu": "سوال نمبر 4: تفصیلی سوالوں کے جوابات دیں۔ کوئی 2۔ (2×5=10)"
         }
@@ -47463,14 +47405,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 67,
-          "endOffset": 67,
+          "diagnosticCharCount": 59,
+          "endOffset": 59,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "1. قطر الارض کی کتنی بڑی پیمائش ہے؟\n   ا) ایشیا   ب) چین   ج) ساوت\n",
+          "rawSourceSnapshot": "1. قشر الارض کی کتنی بڑی پلیٹیں ہیں؟\n   ا) 6   ب) 7   ج) 8\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg01",
-          "sourceSegmentSha256": "3cca74d15d6c583a8b444d15de908727b59e53902b9f15539d5b10c20281cd50",
+          "sourceSegmentSha256": "6eb8288974ac9cdaa7a1aa68d3f48f08c55ae72cf263816bc977fcaf22348354",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q01"
@@ -47479,14 +47421,14 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 103,
-          "endOffset": 170,
+          "endOffset": 162,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg02",
           "sourceSegmentSha256": "d5af113921ea3c48f9d386511efe522c84ff295c61a2d8c240329f5c20c37a89",
-          "startOffset": 67,
+          "startOffset": 59,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q02"
           ]
@@ -47494,14 +47436,14 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 63,
-          "endOffset": 233,
+          "endOffset": 225,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg03",
           "sourceSegmentSha256": "25f0676ab0cf9b599521588f75371042cafcd142a2f044e09cd481443a21c36c",
-          "startOffset": 170,
+          "startOffset": 162,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q03"
           ]
@@ -47509,14 +47451,14 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 109,
-          "endOffset": 342,
+          "endOffset": 334,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg04",
           "sourceSegmentSha256": "059b034197fe1709548e3398a2bae5ea89415810caa6359236a3ee9df2c9c848",
-          "startOffset": 233,
+          "startOffset": 225,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q04"
           ]
@@ -47524,14 +47466,14 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 87,
-          "endOffset": 429,
+          "endOffset": 421,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg05",
           "sourceSegmentSha256": "28a7b386632822391bd500f1510eb03639f515579a5b4114b12ac282778ab06a",
-          "startOffset": 342,
+          "startOffset": 334,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q05"
           ]
@@ -47539,14 +47481,14 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 95,
-          "endOffset": 524,
+          "endOffset": 516,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg06",
           "sourceSegmentSha256": "adc169c9aaf93550c027123da6295668250a24590182f612d432f037575134e7",
-          "startOffset": 429,
+          "startOffset": 421,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q06"
           ]
@@ -47554,44 +47496,44 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 110,
-          "endOffset": 634,
+          "endOffset": 626,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg07",
           "sourceSegmentSha256": "676d3e7cb723c7aab92f10a422c48e500f46a7b739d7f72fddef7ddceba6c74b",
-          "startOffset": 524,
+          "startOffset": 516,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q07"
           ]
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 58,
-          "endOffset": 692,
+          "diagnosticCharCount": 57,
+          "endOffset": 683,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "8. صحراؤں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n",
+          "rawSourceSnapshot": "8. فصلوں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg08",
-          "sourceSegmentSha256": "eef6cd5f47d53addef44c049e0d6be62f41205d6a508c64ec86ee8cbe11b9e8b",
-          "startOffset": 634,
+          "sourceSegmentSha256": "261d09b03243f521649d684b73bdd929c39c689b4c26c3bfd4bfe4db2e07bab4",
+          "startOffset": 626,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q08"
           ]
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 76,
-          "endOffset": 768,
+          "diagnosticCharCount": 77,
+          "endOffset": 760,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "9. بین الاقوامی تجارت کو اسٹوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n",
+          "rawSourceSnapshot": "9. بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg09",
-          "sourceSegmentSha256": "24e9894391b7a4b98999bead80a26e7e32534324690d1f4b881e8c36040b2083",
-          "startOffset": 692,
+          "sourceSegmentSha256": "53089a3928c7b3ce9f8e0180f1ed3c01c6865b7952e8b58a962b7b156ae22c4a",
+          "startOffset": 683,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q09"
           ]
@@ -47599,14 +47541,14 @@
         {
           "coverageStatus": "STRUCTURED",
           "diagnosticCharCount": 76,
-          "endOffset": 844,
+          "endOffset": 836,
           "offsetUnit": "utf16-code-unit",
           "rawSourceSnapshot": "10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
           "sourceField": "content",
           "sourceSectionId": "official-first-term-2026-class-7-social-studies-section-1",
           "sourceSegmentId": "official-first-term-2026-class-7-social-studies__s01__c_seg10",
           "sourceSegmentSha256": "8ba7bbbacc923572f382228339e9697d19f1aa967ccdd068fb43b16cba313eee",
-          "startOffset": 768,
+          "startOffset": 760,
           "targetCanonicalIds": [
             "official-first-term-2026-class-7-social-studies__s01__q10"
           ]
@@ -47854,9 +47796,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 33,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -47876,8 +47818,8 @@
         "originalTeacherHeaderTotal": 60,
         "paperMarksStatus": "SOURCE_TOTAL_CONFLICT",
         "paperTotalOrigin": "TEACHER_EXPLICIT",
-        "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 50; 10 marks appear missing.\n- Q4(1a) supplied A and A′ overlap, which is mathematically unusual; preserved as source.\n- Some encircled-digit formatting was lost in plain-text source.",
-        "sourceTotalNote": "As stated by teacher source.",
+        "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 marks reflect the full expressions in the source headings.",
+        "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 50 (10+16+14+10); preserve both values and do not invent the missing 10 marks.",
         "storedConfiguredTotal": 60
       },
       "createdAt": null,
@@ -47901,7 +47843,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -48798,7 +48740,7 @@
           },
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 8,
+          "storedLegacyMarksValue": 16,
           "title": "Q2. Attempt any eight questions. (8×2=16)",
           "titleUrdu": null
         },
@@ -49034,7 +48976,7 @@
           },
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 7,
+          "storedLegacyMarksValue": 14,
           "title": "Q3. Attempt any seven questions. (7×2=14)",
           "titleUrdu": null
         },
@@ -49157,7 +49099,7 @@
           },
           "sectionIndex": 4,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 2,
+          "storedLegacyMarksValue": 10,
           "title": "Q4. Long Questions - Attempt any 2. (2×5=10)",
           "titleUrdu": null
         }
@@ -49721,9 +49663,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 34,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -49768,7 +49710,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -51163,9 +51105,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 35,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -51210,7 +51152,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -52375,9 +52317,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 36,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -52422,7 +52364,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -53945,9 +53887,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 37,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -53992,7 +53934,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -55699,9 +55641,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 38,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -55746,7 +55688,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -56980,9 +56922,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 39,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -57002,8 +56944,8 @@
         "originalTeacherHeaderTotal": null,
         "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
         "paperTotalOrigin": "PROVISIONAL_INFERENCE",
-        "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated; 60 is provisional.\n- Short heading says 10×3=30 but lists 12 questions and does not state how many to attempt.\n- Long-question marks/attempt rule were not stated; 20 is provisional to reach 60.",
-        "sourceTotalNote": "Provisional: total not stated; 60 inferred from 10 MCQ + 30 short + likely 20 long.",
+        "qaNotes": "Choice statements are explicit. Two of twelve short questions are optional; one of three long questions is optional. No question content changed.",
+        "sourceTotalNote": "Principal-approved scheme: 10 MCQs ×1=10, attempt any 10 of 12 short questions ×3=30, and attempt any 2 of 3 long questions ×10=20. Total 60.",
         "storedConfiguredTotal": 60
       },
       "createdAt": null,
@@ -57015,7 +56957,7 @@
         "className": "8",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-10-01",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -57023,11 +56965,11 @@
         "session": "2026-2027",
         "subject": "Mathematics",
         "subjectName": "Mathematics",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -57109,7 +57051,7 @@
             "operandB": 1,
             "rawFormula": "10×1=10"
           },
-          "heading": "MCQs. (10×1=10)",
+          "heading": "Q1. Select the correct answer. (10×1=10)",
           "id": "official-first-term-2026-class-8-mathematics__s02",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -57156,38 +57098,38 @@
           "sectionIndex": 2,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
           "storedLegacyMarksValue": 10,
-          "title": "MCQs. (10×1=10)",
+          "title": "Q1. Select the correct answer. (10×1=10)",
           "titleUrdu": null
         },
         {
           "actualItemCount": 12,
-          "attemptCount": null,
-          "attemptRule": "UNSPECIFIED",
-          "attemptRuleOrigin": "UNKNOWN",
+          "attemptCount": 10,
+          "attemptRule": "ATTEMPT_ANY",
+          "attemptRuleOrigin": "TEACHER_EXPLICIT",
           "authoritativeSectionTotal": 30,
           "direction": "ltr",
           "formula": {
             "formulaTotal": 30,
             "hasExplicitEqualsTotal": true,
-            "interpretationStatus": "UNRESOLVED",
-            "interpretedItemCount": null,
-            "interpretedMarksPerItem": null,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 10,
+            "interpretedMarksPerItem": 3,
             "operandA": 10,
             "operandB": 3,
             "rawFormula": "10×3=30"
           },
-          "heading": "Short Questions. (10×3=30)",
+          "heading": "Q2. Attempt any ten short questions. (10×3=30)",
           "id": "official-first-term-2026-class-8-mathematics__s03",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
           "nodes": [
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q01",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57201,12 +57143,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q02",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57220,12 +57162,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q03",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57239,12 +57181,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q04",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57258,12 +57200,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q05",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57277,12 +57219,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q06",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57296,12 +57238,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q07",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57315,12 +57257,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q08",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57334,12 +57276,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q09",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57353,12 +57295,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q10",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57372,12 +57314,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q11",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57391,12 +57333,12 @@
               "type": "short_question"
             },
             {
-              "authoritativeNodeMarks": null,
+              "authoritativeNodeMarks": 3,
               "direction": "ltr",
               "id": "official-first-term-2026-class-8-mathematics__s03__q12",
-              "marksEvidenceString": null,
-              "nodeMarksOrigin": "UNSTATED",
-              "operationalNodeMarks": null,
+              "marksEvidenceString": "10×3=30",
+              "nodeMarksOrigin": "DERIVED_FROM_RESOLVED_FORMULA",
+              "operationalNodeMarks": 3,
               "provenance": {
                 "academicTextMutated": false,
                 "classificationCertainty": "DETERMINISTIC",
@@ -57431,19 +57373,28 @@
           },
           "sectionIndex": 3,
           "sectionMarksOrigin": "TEACHER_EXPLICIT_FORMULA",
-          "storedLegacyMarksValue": 10,
-          "title": "Short Questions. (10×3=30)",
+          "storedLegacyMarksValue": 30,
+          "title": "Q2. Attempt any ten short questions. (10×3=30)",
           "titleUrdu": null
         },
         {
           "actualItemCount": 3,
-          "attemptCount": null,
-          "attemptRule": "UNSPECIFIED",
-          "attemptRuleOrigin": "UNKNOWN",
+          "attemptCount": 2,
+          "attemptRule": "ATTEMPT_ANY",
+          "attemptRuleOrigin": "TEACHER_EXPLICIT",
           "authoritativeSectionTotal": null,
           "direction": "ltr",
-          "formula": null,
-          "heading": "Long Questions. (20 - provisional)",
+          "formula": {
+            "formulaTotal": 20,
+            "hasExplicitEqualsTotal": true,
+            "interpretationStatus": "RESOLVED",
+            "interpretedItemCount": 2,
+            "interpretedMarksPerItem": 10,
+            "operandA": 2,
+            "operandB": 10,
+            "rawFormula": "2×10=20"
+          },
+          "heading": "Q3. Attempt any two long questions. (2×10=20)",
           "id": "official-first-term-2026-class-8-mathematics__s04",
           "instructions": null,
           "listedPotentialItemMarksTotal": null,
@@ -57519,7 +57470,7 @@
           "sectionIndex": 4,
           "sectionMarksOrigin": "PROVISIONAL_RECONCILIATION",
           "storedLegacyMarksValue": 20,
-          "title": "Long Questions. (20 - provisional)",
+          "title": "Q3. Attempt any two long questions. (2×10=20)",
           "titleUrdu": null
         }
       ],
@@ -57556,14 +57507,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 15,
-          "endOffset": 15,
+          "diagnosticCharCount": 40,
+          "endOffset": 40,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "MCQs. (10×1=10)",
+          "rawSourceSnapshot": "Q1. Select the correct answer. (10×1=10)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-8-mathematics-section-2",
           "sourceSegmentId": "official-first-term-2026-class-8-mathematics__s02__h_seg01",
-          "sourceSegmentSha256": "15862d798d4586c0a732c07d490cbe373a1d8a97f1ad698921e443cefbbdfaa7",
+          "sourceSegmentSha256": "4b8fc7cf971023c4d6c06382c857aa3962ddd8dff83bc84751d56549b2c2eabd",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-8-mathematics__s02"
@@ -57586,14 +57537,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 26,
-          "endOffset": 26,
+          "diagnosticCharCount": 46,
+          "endOffset": 46,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Short Questions. (10×3=30)",
+          "rawSourceSnapshot": "Q2. Attempt any ten short questions. (10×3=30)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-8-mathematics-section-3",
           "sourceSegmentId": "official-first-term-2026-class-8-mathematics__s03__h_seg01",
-          "sourceSegmentSha256": "a0d022123f9f69b9b46fe77db56a7382f92e2ad26a2f4ef7cf14ecc6fd299fa1",
+          "sourceSegmentSha256": "0631f679cd481cabba8b793ec8bc1ddb2dd0e92e3fd86f04f3bcbce6df3c6f05",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-8-mathematics__s03"
@@ -57781,14 +57732,14 @@
         },
         {
           "coverageStatus": "STRUCTURED",
-          "diagnosticCharCount": 34,
-          "endOffset": 34,
+          "diagnosticCharCount": 45,
+          "endOffset": 45,
           "offsetUnit": "utf16-code-unit",
-          "rawSourceSnapshot": "Long Questions. (20 - provisional)",
+          "rawSourceSnapshot": "Q3. Attempt any two long questions. (2×10=20)",
           "sourceField": "heading",
           "sourceSectionId": "official-first-term-2026-class-8-mathematics-section-4",
           "sourceSegmentId": "official-first-term-2026-class-8-mathematics__s04__h_seg01",
-          "sourceSegmentSha256": "e9762cd1da8ac186f97e49c8c5f8a3eff205a0465932cdd0e650f5dd011923f9",
+          "sourceSegmentSha256": "098c6f80bdd16e15636a8d93790e2284d48c66816d2a33157a83bab845ec262e",
           "startOffset": 0,
           "targetCanonicalIds": [
             "official-first-term-2026-class-8-mathematics__s04"
@@ -57842,9 +57793,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 40,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -57864,7 +57815,7 @@
         "originalTeacherHeaderTotal": null,
         "paperMarksStatus": "PROVISIONAL_OR_RECONCILED",
         "paperTotalOrigin": "PROVISIONAL_INFERENCE",
-        "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.",
+        "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.\\n29 Sep print rule: total 75 remains provisional from prior source package; source gives no section-wise marks and only 9 MCQs; do not invent a 10th MCQ or section marks.",
         "sourceTotalNote": "Provisional: source did not state a total; 75 used to match neighboring English term-paper pattern.",
         "storedConfiguredTotal": 75
       },
@@ -57877,7 +57828,7 @@
         "className": "8",
         "direction": "ltr",
         "durationMinutes": null,
-        "examDate": "__________",
+        "examDate": "2026-09-29",
         "examType": "First Term Examination 2026",
         "generalInstructions": null,
         "language": "english",
@@ -57885,11 +57836,11 @@
         "session": "2026-2027",
         "subject": "English",
         "subjectName": "English",
-        "timeAllowed": "As announced",
+        "timeAllowed": "2 Hours",
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -59203,9 +59154,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 41,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -59250,7 +59201,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -60240,9 +60191,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 42,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -60287,7 +60238,7 @@
         "title": "FIRST TERM EXAMINATION 2026"
       },
       "migrationAudit": {
-        "migrationBaselineCommit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+        "migrationBaselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
         "migrationEngineVersion": "2.0.0-b2"
       },
       "presentation": {
@@ -61072,9 +61023,9 @@
       ],
       "sourceIdentity": {
         "manifestPaperIndex": 43,
-        "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
-        "normalizationManifestVersion": "1.0.0",
-        "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+        "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+        "normalizationManifestVersion": "1.1.0",
+        "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
         "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
         "sourceDatasetGeneration": "v13",
         "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
@@ -61083,9 +61034,9 @@
       "updatedAt": null
     }
   ],
-  "normalizationManifestByteSha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4",
+  "normalizationManifestByteSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
   "paperCount": 43,
-  "sourceDatasetByteSha256": "5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214",
+  "sourceDatasetByteSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
   "sourceDatasetDeclaredSha256": "6669abfe216eb1be8cef7cee97663db25dbb91bfc949b4d078e29139dc73e692",
   "sourceDatasetGeneration": "v13",
   "sourceDatasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13"

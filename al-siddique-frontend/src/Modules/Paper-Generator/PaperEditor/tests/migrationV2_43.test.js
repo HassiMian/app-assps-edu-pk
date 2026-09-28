@@ -46,6 +46,7 @@ const __dirname = path.dirname(__filename)
 const v12Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v12.json')
 const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
 const manifestPath = path.resolve(__dirname, '../migration/data/normalizationManifestV13.json')
+const referenceLockPath = path.resolve(__dirname, '../migration/data/referenceCorpusLock.json')
 const committedArtifactPath = path.resolve(
   __dirname,
   '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json'
@@ -55,14 +56,20 @@ const v13Buf = fs.readFileSync(v13Path)
 const manifestBuf = fs.readFileSync(manifestPath)
 const v13Dataset = JSON.parse(v13Buf.toString('utf8'))
 const normalizationManifest = JSON.parse(manifestBuf.toString('utf8'))
+const referenceLock = JSON.parse(fs.readFileSync(referenceLockPath, 'utf8'))
+const lockedSha = name => {
+  const record = referenceLock.files?.find(item => item.name === name)
+  assert.ok(record?.sha256, `Missing SHA lock for ${name}`)
+  return record.sha256
+}
 
 const v13ByteSha256 = crypto.createHash('sha256').update(v13Buf).digest('hex')
 const manifestByteSha256 = crypto.createHash('sha256').update(manifestBuf).digest('hex')
 
-// Baseline immutable SHA values
-const EXPECTED_V12_SHA = 'd8fe0c5529c26a557444dc41331f67b8699e93bf06bae442c40ac274edbfd8a3'
-const EXPECTED_V13_SHA = '5e659e9ce9d8bba5003bfd4e1e54dceaeddec2aac7ce52a07adee7f165757214'
-const EXPECTED_MANIFEST_SHA = 'f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4'
+// Explicit source/derived artifact authority comes from the reviewed reference-corpus lock.
+const EXPECTED_V12_SHA = lockedSha('official-first-term-2026-v12.json')
+const EXPECTED_V13_SHA = lockedSha('official-first-term-2026-v13.json')
+const EXPECTED_MANIFEST_SHA = lockedSha('normalizationManifestV13.json')
 
 function canonicalStringify(obj, space = 2) {
   function sortKeys(value) {
@@ -80,6 +87,7 @@ function canonicalStringify(obj, space = 2) {
 }
 
 const corpus = generateCanonicalV2Corpus(v13Dataset, normalizationManifest, {
+  migrationBaselineCommit: normalizationManifest.generatedAtBaseline,
   sourceDatasetByteSha256: v13ByteSha256,
   normalizationManifestByteSha256: manifestByteSha256,
 })
@@ -235,11 +243,16 @@ test('TEST 40: Benchmark Fixture Acceptance', () => {
   assert.ok(c6Sci, 'Class 6 Science document must exist')
   assert.equal(c6Sci.authority.flags.hasItemCountConflict, true)
 
-  // 9. Class 6 Mathematics -> long attempt UNSPECIFIED
+  // 9. Class 6 Mathematics -> principal-approved attempt-any-two long scheme
   const c6Math = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-6-mathematics')
   assert.ok(c6Math, 'Class 6 Mathematics document must exist')
-  const c6LongSec = c6Math.sections.find(s => /Long/i.test(s.heading || ''))
-  assert.equal(c6LongSec.attemptRule, AttemptRule.UNSPECIFIED)
+  const c6LongSec = c6Math.sections.find(s => /Attempt any two long/i.test(s.heading || ''))
+  assert.ok(c6LongSec, 'Class 6 Mathematics long section must exist')
+  assert.equal(c6LongSec.attemptRule, AttemptRule.ATTEMPT_ANY)
+  assert.equal(c6LongSec.attemptCount, 2)
+  assert.equal(c6LongSec.actualItemCount, 3)
+  assert.equal(c6LongSec.formula.rawFormula, '2×10=20')
+  assert.equal(c6LongSec.formula.interpretationStatus, 'RESOLVED')
 
   // 10. Class 8 Computer -> 3 item-level 10 Marks, section authority unresolved
   const c8Comp = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-8-computer')
@@ -335,10 +348,12 @@ test('TEST 43: Language & Direction Invariant ("dual" forbidden for direction)',
 
 test('TEST 44: Deterministic Byte-Identical Serialization & Committed Artifact Parity', () => {
   const corpus1 = generateCanonicalV2Corpus(v13Dataset, normalizationManifest, {
+    migrationBaselineCommit: normalizationManifest.generatedAtBaseline,
     sourceDatasetByteSha256: v13ByteSha256,
     normalizationManifestByteSha256: manifestByteSha256,
   })
   const corpus2 = generateCanonicalV2Corpus(v13Dataset, normalizationManifest, {
+    migrationBaselineCommit: normalizationManifest.generatedAtBaseline,
     sourceDatasetByteSha256: v13ByteSha256,
     normalizationManifestByteSha256: manifestByteSha256,
   })
@@ -423,19 +438,23 @@ test('REGRESSION C: Class 5 Math Q4 formula-derived 6 marks/question', () => {
   }
 })
 
-test('REGRESSION D: Class 6 Math Long unresolved formula does not invent node marks', () => {
+test('REGRESSION D: Class 6 Math Long approved attempt-any-two formula assigns 10 marks per candidate question', () => {
   const c6Math = corpus.documents.find(d => d.id === 'doc__official-first-term-2026-class-6-mathematics')
   assert.ok(c6Math, 'Class 6 Mathematics document must exist')
-  const longSec = c6Math.sections.find(s => /Long/i.test(s.heading || ''))
+  const longSec = c6Math.sections.find(s => /Attempt any two long/i.test(s.heading || ''))
   assert.ok(longSec, 'Class 6 Math Long section must exist')
-  assert.equal(longSec.formula.rawFormula, '10×2')
-  assert.equal(longSec.formula.interpretationStatus, 'UNRESOLVED')
-  assert.equal(longSec.formula.interpretedMarksPerItem, null)
+  assert.equal(longSec.attemptRule, AttemptRule.ATTEMPT_ANY)
+  assert.equal(longSec.attemptCount, 2)
+  assert.equal(longSec.actualItemCount, 3)
+  assert.equal(longSec.formula.rawFormula, '2×10=20')
+  assert.equal(longSec.formula.interpretationStatus, 'RESOLVED')
+  assert.equal(longSec.formula.interpretedItemCount, 2)
+  assert.equal(longSec.formula.interpretedMarksPerItem, 10)
 
   for (const node of longSec.nodes) {
-    assert.equal(node.operationalNodeMarks, null)
-    assert.equal(node.authoritativeNodeMarks, null)
-    assert.equal(node.nodeMarksOrigin, NodeMarksOrigin.UNSTATED)
+    assert.equal(node.operationalNodeMarks, 10)
+    assert.equal(node.authoritativeNodeMarks, 10)
+    assert.equal(node.nodeMarksOrigin, NodeMarksOrigin.DERIVED_FROM_RESOLVED_FORMULA)
   }
 })
 

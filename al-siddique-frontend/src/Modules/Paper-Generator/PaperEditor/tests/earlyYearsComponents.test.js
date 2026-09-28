@@ -105,15 +105,15 @@ test('EY-ASSET 3: User sketch upload registration accepts valid SVG and rejects 
 })
 
 test('EY-TOKENS: Typography tokens contain required early-years values', () => {
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.schoolName, '18pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.metadata, '12pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.englishQuestionHeading, '15pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.englishChildText, '16pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.urduQuestionHeading, '21pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.urduChildText, '25pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.traceGlyph, '38pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.numberGridText, '19pt')
-  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.matchingText, '16pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.schoolName, '16pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.metadata, '10.5pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.englishQuestionHeading, '13.5pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.englishChildText, '14pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.urduQuestionHeading, '18pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.urduChildText, '21pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.traceGlyph, '30pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.numberGridText, '17pt')
+  assert.equal(TYPOGRAPHY_TOKENS.fontSizes.matchingText, '14pt')
 
   // Urdu primary font token specifies Jameel Noori Nastaleeq first
   assert.ok(TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary.includes('Jameel Noori Nastaleeq'))
@@ -124,11 +124,11 @@ test('EY-TOKENS: Layout tokens respect child spacing and dimension requirements'
   assert.equal(LAYOUT_TOKENS.page.format, 'A4')
   assert.equal(LAYOUT_TOKENS.page.orientation, 'portrait')
 
-  // Response spacing
-  assert.ok(LAYOUT_TOKENS.childResponse.handwritingRowSpacingMm >= 10 && LAYOUT_TOKENS.childResponse.handwritingRowSpacingMm <= 12)
-  assert.ok(LAYOUT_TOKENS.childResponse.largeAnswerLineWidthMm >= 85 && LAYOUT_TOKENS.childResponse.largeAnswerLineWidthMm <= 110)
-  assert.ok(LAYOUT_TOKENS.childResponse.matchingRowHeightMm >= 14)
-  assert.ok(LAYOUT_TOKENS.childResponse.visualChoiceHitAreaMm >= 12)
+  // Compact print-safe response spacing introduced by the duplex/geometry recovery.
+  assert.equal(LAYOUT_TOKENS.childResponse.handwritingRowSpacingMm, 9)
+  assert.equal(LAYOUT_TOKENS.childResponse.largeAnswerLineWidthMm, 90)
+  assert.equal(LAYOUT_TOKENS.childResponse.matchingRowHeightMm, 13)
+  assert.equal(LAYOUT_TOKENS.childResponse.visualChoiceHitAreaMm, 11)
 
   // Sketch tokens
   assert.ok(LAYOUT_TOKENS.sketchSizes.smallVisual)
