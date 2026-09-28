@@ -625,27 +625,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const marksLedger = isOfficialPaper ? buildMarksLedger(liveAuditPaper) : { headerTotal:Number(headerTotalMarks || 0), questionTotal:0, balanced:false, difference:0 }
  const draftQuality = isOfficialPaper ? validatePaperDraft(liveAuditPaper) : { ready:true, issues:[], errorCount:0, warningCount:0, academicQuestionCount:0 }
  const printAudit = isOfficialPaper ? auditOfficialPaperForPrint(liveAuditPaper) : { blocked:false, issues:[] }
- const TemplateComp = {
- academic: (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- modern: (props) => <PremiumPaperTemplate {...props} variant="modern" />,
- emerald: (props) => <PremiumPaperTemplate {...props} variant="emerald" />,
- gold: (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- coral: (props) => <PremiumPaperTemplate {...props} variant="coral" />,
- violet: (props) => <PremiumPaperTemplate {...props} variant="violet" />,
- minimal: (props) => <PremiumPaperTemplate {...props} variant="minimal" />,
- editorial: (props) => <PremiumPaperTemplate {...props} variant="editorial" />,
- // Compatibility aliases keep previously saved papers opening without migration.
- classic: (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- elite: (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- 'docx-assessment': (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- 'royal-elite': (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- 'board-blue': (props) => <PremiumPaperTemplate {...props} variant="modern" />,
- 'compact-classic': (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- 'serif-gold': (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- 'clean-minimal': (props) => <PremiumPaperTemplate {...props} variant="coral" />,
- 'exam-grid': (props) => <PremiumPaperTemplate {...props} variant="violet" />,
- 'scholar-classic': (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- }[tmpl]
+ const templateVariant = ({
+  academic:'academic', modern:'modern', emerald:'emerald', gold:'gold', coral:'coral', violet:'violet', minimal:'minimal', editorial:'editorial',
+  // Compatibility aliases keep previously saved papers opening without migration.
+  classic:'academic', elite:'gold', 'docx-assessment':'academic', 'royal-elite':'gold', 'board-blue':'modern', 'compact-classic':'academic',
+  'serif-gold':'gold', 'clean-minimal':'coral', 'exam-grid':'violet', 'scholar-classic':'academic',
+ }[tmpl] || 'academic')
  const half = printMode === 'half'
  const fitWidthZoom = (canvasSize.width - 24) / 794
  const fitPageZoom = Math.min(fitWidthZoom, (canvasSize.height - 24) / 1123)
@@ -1122,10 +1107,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  ) : half ? (
  <div className="preview-container" style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
- {[0,1].map(index=><div key={index} className="half-paper" style={{ height:544, overflow:'hidden', borderBottom:index===0?'1px dashed #b9c5d0':'none', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><TemplateComp {...tplProps} half={true} /></div>)}
+ {[0,1].map(index=><div key={index} className="half-paper" style={{ height:544, overflow:'hidden', borderBottom:index===0?'1px dashed #b9c5d0':'none', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={true} /></div>)}
  </div>
  ) : (
- <div className="preview-container" style={{ width:794, minHeight:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 24px rgba(0,0,0,0.4)', overflowX:'hidden', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><TemplateComp {...tplProps} half={false} /></div>
+ <div className="preview-container" style={{ width:794, minHeight:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 24px rgba(0,0,0,0.4)', overflowX:'hidden', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={false} /></div>
  )}
  </div>
  <style>{`@media print { body { display: none !important; } }`}</style>

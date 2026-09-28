@@ -56,10 +56,55 @@ function OptionLabel({ label, index, isUrdu, themeColor }) {
   return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}><b data-option-label-text>{parts.label}</b><b data-option-bracket dir="ltr">{parts.closingBracket}</b></span>
 }
 
-function OptionChoice({ option, index, isUrdu, themeColor }) {
-  return <span data-option-choice style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:4, whiteSpace:'normal' }}><OptionLabel label={option.label} index={index} isUrdu={isUrdu} themeColor={themeColor} /><span data-option-text style={{ direction:isUrdu?'rtl':'ltr', unicodeBidi:'plaintext' }}>{option.text}</span></span>
+function OptionChoice({ option, index, isUrdu, themeColor, editMode=false, section=null, rowIndex=0, onCommit, onActiveEditable }) {
+  const fieldKey='mcq-'+rowIndex+'-option-'+index
+  const rich=section?.richText?.[fieldKey]||''
+  return <span data-option-choice style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:4, whiteSpace:'normal' }}>
+    <OptionLabel label={option.label} index={index} isUrdu={isUrdu} themeColor={themeColor} />
+    {(editMode||rich)
+      ? <InlineEditable text={option.text} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={fieldKey} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' option '+(index+1)} onActivate={onActiveEditable} onCommit={payload=>onCommit?.(payload,fieldKey)} style={{direction:isUrdu?'rtl':'ltr',unicodeBidi:'plaintext'}} />
+      : <span data-option-text style={{ direction:isUrdu?'rtl':'ltr', unicodeBidi:'plaintext' }}>{option.text}</span>}
+  </span>
 }
-function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor }) {
+function serializeMcqRows(rows=[], isUrdu=false) {
+  return rows.map((row,rowIndex)=>{
+    const number=Math.max(1,Number(row.number)||rowIndex+1)
+    const prompt=String(row.prompt||'').trim()
+    const options=(row.options||[]).map((option,index)=>{
+      const parts=optionLabelParts(option.label,index,isUrdu)
+      const label=isUrdu ? parts.label+parts.closingBracket : '('+String(parts.label||String.fromCharCode(97+index)).toLowerCase()+')'
+      return label+' '+String(option.text||'').trim()
+    }).join(' ')
+    return number+'. '+prompt+'\n'+options
+  }).join('\n')
+}
+function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
+  const commitField=(rowIndex,kind,optionIndex,payload,fieldKey)=>{
+    if(!section?.id||!onQuestionChange) return
+    const nextRows=rows.map((row,index)=>index===rowIndex?{...row,options:(row.options||[]).map(option=>({...option}))}:{...row,options:(row.options||[]).map(option=>({...option}))})
+    const row=nextRows[rowIndex]
+    if(!row) return
+    if(kind==='number') row.number=String(Math.max(1,Number(String(payload.text).match(/\d+/)?.[0]||row.number||rowIndex+1)))
+    else if(kind==='prompt') row.prompt=payload.text
+    else if(kind==='option'&&row.options?.[optionIndex]) row.options[optionIndex].text=payload.text
+    const richText={...(section.richText||{})}
+    if(fieldKey&&kind!=='number') richText[fieldKey]=payload.html
+    onQuestionChange(section.id,{content:serializeMcqRows(nextRows,isUrdu),richText})
+  }
+  const numberNode=(row,rowIndex)=>{
+    const key='mcq-'+rowIndex+'-number'
+    return editMode
+      ? <InlineEditable text={String(row.number)} editMode={true} direction="ltr" fieldKey={key} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' number'} onActivate={onActiveEditable} onCommit={payload=>commitField(rowIndex,'number',null,payload,key)} style={{display:'inline-block',minWidth:18,textAlign:'center',fontWeight:800}} />
+      : <>{row.number}</>
+  }
+  const promptNode=(row,rowIndex)=>{
+    const key='mcq-'+rowIndex+'-prompt'
+    const rich=section?.richText?.[key]||''
+    return (editMode||rich)
+      ? <InlineEditable text={row.prompt} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' question'} onActivate={onActiveEditable} onCommit={payload=>commitField(rowIndex,'prompt',null,payload,key)} style={{display:'inline',fontWeight:800}} />
+      : <>{row.prompt}</>
+  }
+  const optionNode=(option,optionIndex,rowIndex)=><OptionChoice key={option.label+'-'+optionIndex} option={option} index={optionIndex} isUrdu={isUrdu} themeColor={themeColor} editMode={editMode} section={section} rowIndex={rowIndex} onActiveEditable={onActiveEditable} onCommit={(payload,key)=>commitField(rowIndex,'option',optionIndex,payload,key)} />
   if (!rows.length) return null
   if (layout === 'matrix-table') {
     const maxOptions = Math.max(...rows.map(row => row.options.length), 2)
@@ -68,32 +113,32 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor }) {
         <th style={{ width:'8%', border:`1px solid ${themeColor}88`, padding:5 }}>#</th>
         <th colSpan={maxOptions} style={{ border:`1px solid ${themeColor}88`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'سوال اور اختیارات':'Question & Options'}</th>
       </tr></thead>
-      <tbody>{rows.map(row => <Fragment key={row.number}>
+      <tbody>{rows.map((row,rowIndex) => <Fragment key={row.number+'-'+rowIndex}>
         <tr style={{ breakInside:'avoid' }}>
-          <td rowSpan={2} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontWeight:800, verticalAlign:'top' }}>{row.number}</td>
-          <td colSpan={maxOptions} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px ${7*fs}px`, fontWeight:800, textAlign:isUrdu?'right':'left' }}>{row.prompt}</td>
+          <td rowSpan={2} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontWeight:800, verticalAlign:'top' }}>{numberNode(row,rowIndex)}</td>
+          <td colSpan={maxOptions} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px ${7*fs}px`, fontWeight:800, textAlign:isUrdu?'right':'left' }}>{promptNode(row,rowIndex)}</td>
         </tr>
         <tr style={{ breakInside:'avoid' }}>
-          {Array.from({length:maxOptions},(_,i)=><td key={i} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', verticalAlign:'top', overflowWrap:'break-word' }}>{row.options[i] ? <OptionChoice option={row.options[i]} index={i} isUrdu={isUrdu} themeColor={themeColor} /> : ''}</td>)}
+          {Array.from({length:maxOptions},(_,i)=><td key={i} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', verticalAlign:'top', overflowWrap:'break-word' }}>{row.options[i] ? optionNode(row.options[i],i,rowIndex) : ''}</td>)}
         </tr>
       </Fragment>)}</tbody>
     </table>
   }
   if (layout === 'classic') {
-    return <div data-official-mcq-classic>{rows.map(row => <div key={row.number} style={{ marginBottom:`${7*fs}px`, breakInside:'avoid' }}>
-      <div style={{ fontWeight:800, marginBottom:3 }}><b dir="ltr">{row.number}.</b> {row.prompt}</div>
+    return <div data-official-mcq-classic>{rows.map((row,rowIndex) => <div key={row.number+'-'+rowIndex} style={{ marginBottom:`${7*fs}px`, breakInside:'avoid' }}>
+      <div style={{ fontWeight:800, marginBottom:3 }}><b dir="ltr">{numberNode(row,rowIndex)}.</b> {promptNode(row,rowIndex)}</div>
       <div style={{ display:'flex', flexWrap:'wrap', gap:`${4*fs}px ${16*fs}px`, paddingInlineStart:`${14*fs}px` }}>
-        {row.options.map((option, optionIndex) => <OptionChoice key={option.label} option={option} index={optionIndex} isUrdu={isUrdu} themeColor={themeColor} />)}
+        {row.options.map((option, optionIndex) => optionNode(option,optionIndex,rowIndex))}
       </div>
     </div>)}</div>
   }
   return <div data-official-mcq-grid style={{ display:'grid', gridTemplateColumns:'1fr', gap:`${6*fs}px` }}>
-    {rows.map(row => {
+    {rows.map((row,rowIndex) => {
       const cols = row.options.some(option => option.text.length > 24) ? 2 : Math.min(4, row.options.length)
-      return <div key={row.number} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${6*fs}px`, breakInside:'avoid' }}>
-        <div style={{ fontWeight:800, marginBottom:4 }}><b dir="ltr">{row.number}.</b> {row.prompt}</div>
+      return <div key={row.number+'-'+rowIndex} style={{ border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${6*fs}px`, breakInside:'avoid' }}>
+        <div style={{ fontWeight:800, marginBottom:4 }}><b dir="ltr">{numberNode(row,rowIndex)}.</b> {promptNode(row,rowIndex)}</div>
         <div style={{ display:'grid', gridTemplateColumns:`repeat(${cols}, minmax(0,1fr))`, gap:4 }}>
-          {row.options.map((option, optionIndex) => <div key={option.label} style={{ border:`1px solid ${themeColor}3D`, padding:`${4*fs}px`, minWidth:0 }}><OptionChoice option={option} index={optionIndex} isUrdu={isUrdu} themeColor={themeColor} /></div>)}
+          {row.options.map((option, optionIndex) => <div key={option.label+'-'+optionIndex} style={{ border:`1px solid ${themeColor}3D`, padding:`${4*fs}px`, minWidth:0 }}>{optionNode(option,optionIndex,rowIndex)}</div>)}
         </div>
       </div>
     })}
@@ -221,7 +266,7 @@ function MathPracticeGrid({ content, kind, qFs, fs, themeColor }) {
 
 function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, shortLayout, answerLinesPerItem = 0, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
   const mcqs = kind === 'mcq' ? parseMcqRows(content) : []
-  if (mcqs.length) return <McqSection rows={mcqs} layout={mcqLayout} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
+  if (mcqs.length) return <McqSection rows={mcqs} layout={mcqLayout} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
 
   const tableRows = parseMarkdownTable(content)
   if (tableRows.length >= 2) return <SourceTable rows={tableRows} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>

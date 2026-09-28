@@ -70,3 +70,17 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Kept Question Bank, Pre Classes Papers, Daily Diary and Lesson Plans intact.
 - Kept only `word_editor` and `board_pattern` as hidden compatibility routes for saved-document safety.
 - Build and 12/12 rule tests PASS after physical cleanup; focused Universal Workspace and representative controls QA PASS.
+
+
+## Phase 4 — structured in-place editing V3 (28 Sep 2026)
+- Resumed from deployed V2 commit `d148a96`; no restart/rewrite of the paper system.
+- Fixed a real focus-loss bug: the selected paper template component was being recreated on every state change, which could unmount the contentEditable node immediately after a click. Template resolution now uses one stable `PremiumPaperTemplate` component with a variant prop, so click-to-type editing keeps focus and selection.
+- MCQ rows are now first-class in-place editable structures in Table, Classic and Grid layouts:
+  - MCQ item number
+  - MCQ question/prompt
+  - each option text
+- Editing an MCQ writes only to the working copy. The renderer serializes the edited MCQ block deterministically and preserves row count/order.
+- Urdu MCQ labels remain rule-driven (الف) ب) ج) د)) with the bracket between label and option text. The user edits option text only; layout punctuation is not corrupted by typing.
+- Advanced raw content remains available as a fallback for every semantic section.
+- Local acceptance: 10/10 Class 7 Social Studies MCQs preserved after edit, Urdu label geometry preserved, edited prompt/option reflected in raw working content, zero console errors.
+- Existing V2 in-place QA still PASS; paperSystemRules.test.js 12/12 PASS; production build PASS.
