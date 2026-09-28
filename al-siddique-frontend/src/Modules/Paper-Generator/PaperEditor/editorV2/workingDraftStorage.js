@@ -109,6 +109,131 @@ export function validateWorkingDraft(draft, canonicalDoc) {
     }
   }
 
+  // Optional metadata overlay validation (V2 working overlays).
+  if (draft.metadataPatch !== undefined && draft.metadataPatch !== null) {
+    if (typeof draft.metadataPatch !== 'object' || Array.isArray(draft.metadataPatch)) {
+      return { valid: false, error: 'metadataPatch must be an object' }
+    }
+    const allowedMetadataFields = new Set([
+      'title',
+      'paperCode',
+      'className',
+      'classLevel',
+      'subject',
+      'subjectName',
+      'examType',
+      'session',
+      'durationMinutes',
+      'timeAllowed',
+      'examDate',
+      'generalInstructions',
+      'schoolAddress',
+      'studentNameField',
+      'rollNoField',
+    ])
+    const fields = draft.metadataPatch.fields || {}
+    if (typeof fields !== 'object' || Array.isArray(fields)) {
+      return { valid: false, error: 'metadataPatch.fields must be an object' }
+    }
+    for (const [fieldName, value] of Object.entries(fields)) {
+      if (!allowedMetadataFields.has(fieldName)) {
+        return { valid: false, error: `Unsupported metadata field '${fieldName}'` }
+      }
+      if (fieldName === 'durationMinutes') {
+        if (value !== null && (!Number.isFinite(Number(value)) || Number(value) < 0)) {
+          return { valid: false, error: 'durationMinutes must be a non-negative number or null' }
+        }
+      } else if (value !== null && typeof value !== 'string') {
+        return { valid: false, error: `metadataPatch.fields.${fieldName} must be string or null` }
+      }
+    }
+    if (draft.metadataPatch.customFields !== null && draft.metadataPatch.customFields !== undefined) {
+      if (!Array.isArray(draft.metadataPatch.customFields)) {
+        return { valid: false, error: 'metadataPatch.customFields must be an array or null' }
+      }
+      for (const field of draft.metadataPatch.customFields) {
+        if (
+          !field ||
+          typeof field !== 'object' ||
+          typeof field.id !== 'string' ||
+          typeof field.label !== 'string' ||
+          typeof field.value !== 'string'
+        ) {
+          return { valid: false, error: 'Each custom header field must contain string id, label, and value' }
+        }
+      }
+    }
+    if (
+      draft.metadataPatch.hiddenHeaderFields !== null &&
+      draft.metadataPatch.hiddenHeaderFields !== undefined
+    ) {
+      if (
+        !Array.isArray(draft.metadataPatch.hiddenHeaderFields) ||
+        draft.metadataPatch.hiddenHeaderFields.some(id => typeof id !== 'string')
+      ) {
+        return { valid: false, error: 'metadataPatch.hiddenHeaderFields must be an array of strings or null' }
+      }
+    }
+  }
+
+  // Optional marks / numbering overlay validation.
+  if (draft.marksPatch !== undefined && draft.marksPatch !== null) {
+    if (typeof draft.marksPatch !== 'object' || Array.isArray(draft.marksPatch)) {
+      return { valid: false, error: 'marksPatch must be an object' }
+    }
+    const validModes = new Set(['SOURCE', 'AUTO', 'MANUAL'])
+    const validateMark = (value) =>
+      value === null || value === undefined || (Number.isFinite(Number(value)) && Number(value) >= 0)
+
+    if (draft.marksPatch.paper) {
+      if (!validModes.has(draft.marksPatch.paper.paperTotalMode)) {
+        return { valid: false, error: 'marksPatch.paper.paperTotalMode is invalid' }
+      }
+      if (!validateMark(draft.marksPatch.paper.manualPaperTotal)) {
+        return { valid: false, error: 'marksPatch.paper.manualPaperTotal is invalid' }
+      }
+    }
+
+    const sections = draft.marksPatch.sections || {}
+    if (typeof sections !== 'object' || Array.isArray(sections)) {
+      return { valid: false, error: 'marksPatch.sections must be an object' }
+    }
+    for (const [sectionId, patch] of Object.entries(sections)) {
+      if (!patch || typeof patch !== 'object' || !validModes.has(patch.sectionTotalMode)) {
+        return { valid: false, error: `Invalid marks section patch '${sectionId}'` }
+      }
+      if (!validateMark(patch.workingSectionTotal)) {
+        return { valid: false, error: `Invalid section mark for '${sectionId}'` }
+      }
+    }
+
+    const nodes = draft.marksPatch.nodes || {}
+    if (typeof nodes !== 'object' || Array.isArray(nodes)) {
+      return { valid: false, error: 'marksPatch.nodes must be an object' }
+    }
+    for (const [nodeId, patch] of Object.entries(nodes)) {
+      if (!patch || typeof patch !== 'object' || typeof patch.sectionId !== 'string') {
+        return { valid: false, error: `Invalid marks node patch '${nodeId}'` }
+      }
+      if (!validateMark(patch.workingNodeMarks)) {
+        return { valid: false, error: `Invalid node mark for '${nodeId}'` }
+      }
+      if (patch.nodeMarksDirty !== undefined && typeof patch.nodeMarksDirty !== 'boolean') {
+        return { valid: false, error: `nodeMarksDirty must be boolean for '${nodeId}'` }
+      }
+      if (patch.displayNumberDirty !== undefined && typeof patch.displayNumberDirty !== 'boolean') {
+        return { valid: false, error: `displayNumberDirty must be boolean for '${nodeId}'` }
+      }
+      if (
+        patch.displayNumberOverride !== null &&
+        patch.displayNumberOverride !== undefined &&
+        typeof patch.displayNumberOverride !== 'string'
+      ) {
+        return { valid: false, error: `displayNumberOverride must be string or null for '${nodeId}'` }
+      }
+    }
+  }
+
   // V2-specific structured block validation
   if (draft.draftVersion === CANONICAL_DRAFT_VERSION_V2) {
     if (draft.structured !== undefined && draft.structured !== null) {

@@ -110,7 +110,23 @@ export default function CanonicalPaperEditorMain({
     document.head.querySelectorAll('style,link[rel="stylesheet"]').forEach(node => {
       doc.head.appendChild(node.cloneNode(true))
     })
-    doc.body.appendChild(surface.cloneNode(true))
+    const printSurface = surface.cloneNode(true)
+    printSurface.querySelectorAll('.no-print').forEach(node => node.remove())
+    printSurface.querySelectorAll('.canonical-question-marks-empty, .canonical-section-marks-empty').forEach(node => node.remove())
+    printSurface.querySelectorAll('[data-canonical-inline-editor]').forEach(node => {
+      node.removeAttribute('contenteditable')
+      node.removeAttribute('role')
+      node.removeAttribute('tabindex')
+      node.style.borderBottom = 'none'
+      node.style.background = 'transparent'
+      node.style.padding = '0'
+      node.style.cursor = 'default'
+      node.style.outline = 'none'
+    })
+    printSurface.querySelectorAll('[contenteditable]').forEach(node => {
+      node.removeAttribute('contenteditable')
+    })
+    doc.body.appendChild(printSurface)
 
     try {
       if (doc.fonts) {

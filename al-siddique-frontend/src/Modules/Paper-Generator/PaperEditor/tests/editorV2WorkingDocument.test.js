@@ -29,6 +29,19 @@ const __dirname = path.dirname(__filename)
 const corpusPath = path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documents
 
+function getEditableFixture() {
+  for (const doc of canonicalCorpus) {
+    const workingDoc = createEditorWorkingDocument(doc)
+    for (const section of workingDoc.sections) {
+      const node = section.nodeOverlays.find(item => Object.keys(item.editableFields || {}).length > 0)
+      if (!node) continue
+      const fieldName = Object.keys(node.editableFields)[0]
+      return { doc, workingDoc, section, node, fieldName }
+    }
+  }
+  throw new Error('Expected at least one text-editable canonical node in corpus')
+}
+
 test('PROJECTION A: canonicalTextToTiptapDoc preserves blank lines and round-trips exactly', () => {
   const cases = [
     { label: 'English multiline with blank line', text: 'Line 1\n\nLine 3\nLine 4' },
@@ -120,10 +133,8 @@ test('PROJECTION B: Dirty detection distinguishes PRISTINE, FORMATTING_ONLY, and
 })
 
 test('WORKING MODEL: createEditorWorkingDocument produces compact Schema 3.1-W without full source ledger copying', () => {
-  const class1Doc = canonicalCorpus[0]
-  assert.ok(class1Doc, 'Must find canonical class 1 document')
-
-  const workingDoc = createEditorWorkingDocument(class1Doc)
+  const { doc: class1Doc, workingDoc, section: firstSection, node: firstNodeOverlay } = getEditableFixture()
+  assert.ok(class1Doc, 'Must find canonical document with an editable field')
 
   assert.strictEqual(workingDoc.documentModel, 'PaperEditorWorkingDocument')
   assert.strictEqual(workingDoc.workingFormat, 'assps-working-paper')
@@ -138,13 +149,13 @@ test('WORKING MODEL: createEditorWorkingDocument produces compact Schema 3.1-W w
 
   // Verify sections and node overlays
   assert.ok(workingDoc.sections.length > 0)
-  const firstSection = workingDoc.sections[0]
   assert.ok(firstSection.nodeOverlays.length > 0)
 
-  const firstNodeOverlay = firstSection.nodeOverlays[0]
   assert.ok(firstNodeOverlay.editableFields.stem || firstNodeOverlay.editableFields.content || firstNodeOverlay.editableFields.rawText)
-  assert.strictEqual(firstNodeOverlay.authoritativeNodeMarks, class1Doc.sections[0].nodes[0].authoritativeNodeMarks)
-  assert.strictEqual(firstNodeOverlay.nodeMarksOrigin, class1Doc.sections[0].nodes[0].nodeMarksOrigin)
+  const sourceSection = class1Doc.sections.find(section => section.id === firstSection.id)
+  const sourceNode = sourceSection.nodes.find(node => node.id === firstNodeOverlay.nodeId)
+  assert.strictEqual(firstNodeOverlay.authoritativeNodeMarks, sourceNode.authoritativeNodeMarks)
+  assert.strictEqual(firstNodeOverlay.nodeMarksOrigin, sourceNode.nodeMarksOrigin)
 })
 
 test('MARKS LOCK: Class 8 Computer Q3 locks marks evidence outside editable stem (Rule 22)', () => {
@@ -166,15 +177,15 @@ test('MARKS LOCK: Class 8 Computer Q3 locks marks evidence outside editable stem
 })
 
 test('IMMUTABILITY: Canonical baseline document remains 100% bit-identical after active working edits (Rule 12)', () => {
-  const doc = canonicalCorpus[0]
+  const fixture = getEditableFixture()
+  const doc = fixture.doc
   const preHash = crypto.createHash('sha256').update(JSON.stringify(doc)).digest('hex')
 
   const store = new EditorWorkingStore(doc)
   const workingDoc = store.getWorkingDocument()
-
-  const firstSec = workingDoc.sections[0]
-  const firstNode = firstSec.nodeOverlays[0]
-  const fieldName = Object.keys(firstNode.editableFields)[0]
+  const firstSec = workingDoc.sections.find(section => section.id === fixture.section.id)
+  const firstNode = firstSec.nodeOverlays.find(node => node.nodeId === fixture.node.nodeId)
+  const fieldName = fixture.fieldName
   const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, firstSec.id, firstNode.nodeId, fieldName)
 
   // Perform multiple mutations in the working store

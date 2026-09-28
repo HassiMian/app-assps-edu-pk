@@ -9,6 +9,61 @@ import {
 } from './nodeRenderStrategy.js'
 import { createEmptyStructuredState } from './structured/structuredNodeModel.js'
 
+const EDITABLE_METADATA_KEYS = Object.freeze([
+  'title',
+  'paperCode',
+  'className',
+  'classLevel',
+  'subject',
+  'subjectName',
+  'examType',
+  'session',
+  'durationMinutes',
+  'timeAllowed',
+  'examDate',
+  'generalInstructions',
+  'schoolAddress',
+  'studentNameField',
+  'rollNoField',
+])
+
+export function resolveSourcePaperTotal(canonicalDoc) {
+  const authority = canonicalDoc?.authority || {}
+  if (Number.isFinite(authority.authoritativePaperTotal)) return Number(authority.authoritativePaperTotal)
+  if (
+    Number.isFinite(authority.storedConfiguredTotal) &&
+    authority.paperTotalOrigin !== 'UNRESOLVED_ZERO'
+  ) {
+    return Number(authority.storedConfiguredTotal)
+  }
+  if (Number.isFinite(authority.originalTeacherHeaderTotal)) return Number(authority.originalTeacherHeaderTotal)
+  return null
+}
+
+export function createWorkingMetadata(canonicalDoc) {
+  const source = canonicalDoc?.metadata || {}
+  const values = {}
+  for (const key of EDITABLE_METADATA_KEYS) {
+    values[key] = source[key] ?? null
+  }
+
+  const sourceSchoolAddress = canonicalDoc?.presentation?.schoolAddress?.value
+  values.schoolAddress = typeof sourceSchoolAddress === 'string' ? sourceSchoolAddress : null
+  values.studentNameField = '__________________________'
+  values.rollNoField = '__________'
+
+  values.language = source.language || 'unknown'
+  values.direction = source.direction || (values.language === 'urdu' ? 'rtl' : 'ltr')
+  return {
+    ...values,
+    dirtyFields: {},
+    customFields: [],
+    customFieldsDirty: false,
+    hiddenHeaderFields: [],
+    hiddenHeaderFieldsDirty: false,
+  }
+}
+
 /**
  * Determines the academic field name and initial text for an editable canonical node.
  */
@@ -93,6 +148,8 @@ export function createNodeOverlay(node) {
   }
   // READ_ONLY_STRUCTURED leaves editableFields = {} without creating dummy stem overlays
 
+  const sourceNodeMarks = node.authoritativeNodeMarks ?? node.operationalNodeMarks ?? null
+
   return {
     nodeId: node.id,
     nodeType,
@@ -100,6 +157,10 @@ export function createNodeOverlay(node) {
     authoritativeNodeMarks: node.authoritativeNodeMarks ?? null,
     operationalNodeMarks: node.operationalNodeMarks ?? null,
     nodeMarksOrigin: node.nodeMarksOrigin || 'UNSTATED',
+    workingNodeMarks: Number.isFinite(sourceNodeMarks) ? Number(sourceNodeMarks) : null,
+    nodeMarksDirty: false,
+    displayNumberOverride: null,
+    displayNumberDirty: false,
     editableFields,
     provenance: {
       classificationCertainty: node.provenance?.classificationCertainty || 'UNKNOWN',
@@ -117,6 +178,7 @@ export function createNodeOverlay(node) {
  * Section headings in B3 are READ-ONLY (Rule 20).
  */
 export function createSectionOverlay(section) {
+  const sourceSectionTotal = section.authoritativeSectionTotal ?? section.operationalSectionTotal ?? null
   return {
     id: section.id,
     sectionIndex: section.sectionIndex ?? 1,
@@ -127,9 +189,16 @@ export function createSectionOverlay(section) {
     direction: section.direction || 'auto',
     authoritativeSectionTotal: section.authoritativeSectionTotal ?? null,
     operationalSectionTotal: section.operationalSectionTotal ?? null,
+    workingSectionTotal: Number.isFinite(sourceSectionTotal) ? Number(sourceSectionTotal) : null,
+    computedSectionTotal: null,
+    sectionTotalMode: 'SOURCE',
+    sectionMarksDirty: false,
+    sectionMarksStatus: 'SOURCE',
     sectionMarksOrigin: section.sectionMarksOrigin || 'NONE',
     attemptRule: section.attemptRule || 'ALL',
     attemptRuleOrigin: section.attemptRuleOrigin || 'UNKNOWN',
+    attemptCount: Number.isFinite(section.attemptCount) ? Number(section.attemptCount) : null,
+    actualItemCount: Number.isFinite(section.actualItemCount) ? Number(section.actualItemCount) : null,
     formula: section.formula || null,
     layout: {
       layoutMode: section.layout?.layoutMode || 'compact-grid',
@@ -170,7 +239,17 @@ export function createEditorWorkingDocument(canonicalDoc) {
     baseCanonicalDocumentId: canonicalDoc.id,
     baseFingerprint,
     sourceIdentity: Object.freeze({ ...(canonicalDoc.sourceIdentity || {}) }),
+    metadata: createWorkingMetadata(canonicalDoc),
+    marks: {
+      sourcePaperTotal: resolveSourcePaperTotal(canonicalDoc),
+      paperTotalMode: 'SOURCE',
+      manualPaperTotal: null,
+      computedPaperTotal: null,
+      paperMarksDirty: false,
+      paperMarksStatus: 'SOURCE',
+    },
     presentation: {
+      isDirty: false,
       templateId: canonicalDoc.presentation?.templateId || 'academic',
       zoomLevel: 100,
       pageBorder: 'none',

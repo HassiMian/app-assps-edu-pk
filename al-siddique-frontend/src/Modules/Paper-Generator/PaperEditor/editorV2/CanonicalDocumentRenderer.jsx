@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import CanonicalEditableText from './CanonicalEditableText.jsx'
 import CanonicalStaticNode from './CanonicalStaticNode.jsx'
 import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
+import CanonicalInlineField from './CanonicalInlineField.jsx'
 import CanonicalStructuredNodeEditor from './structured/CanonicalStructuredNodeEditor.jsx'
 import NodeStructureControls from './structured/components/NodeStructureControls.jsx'
 import AddStructuredNodeMenu from './structured/components/AddStructuredNodeMenu.jsx'
@@ -148,27 +149,45 @@ export default function CanonicalDocumentRenderer({
     )
   }
 
-  const meta = canonicalBaseline?.metadata || {}
+  const meta = workingDoc.metadata || canonicalBaseline?.metadata || {}
   const pres = workingDoc.presentationOverlay || workingDoc.presentation || {}
   const isUrdu = pres.language === 'urdu' || meta.language === 'urdu'
   const isHalf = pres.templateId === 'half_page'
 
   const schoolName = pres.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
-  const schoolAddress = pres.schoolAddress || paperSettings?.address || 'Sharif Chowk, Rayya Khas, Narowal'
+  const schoolAddress = meta.schoolAddress !== null && meta.schoolAddress !== undefined
+    ? meta.schoolAddress
+    : (paperSettings?.address || 'Sharif Chowk, Rayya Khas, Narowal')
   const logoUrl = pres.logoUrl || paperSettings?.logo || meta.logoUrl || null
 
-  // Total Marks Authority Resolution (Rule 17)
-  let totalMarksDisplay = '—'
-  if (canonicalBaseline?.authority?.authoritativePaperTotal != null) {
-    totalMarksDisplay = String(canonicalBaseline.authority.authoritativePaperTotal)
+  // Working total marks overlay. Canonical authority remains immutable in the baseline.
+  let effectivePaperTotal = null
+  if (store?.getEffectivePaperTotal) {
+    effectivePaperTotal = store.getEffectivePaperTotal()
+  } else if (canonicalBaseline?.authority?.authoritativePaperTotal != null) {
+    effectivePaperTotal = Number(canonicalBaseline.authority.authoritativePaperTotal)
   } else if (
     canonicalBaseline?.authority?.storedConfiguredTotal != null &&
     canonicalBaseline.authority.paperTotalOrigin !== 'UNRESOLVED_ZERO'
   ) {
-    totalMarksDisplay = String(canonicalBaseline.authority.storedConfiguredTotal)
-  } else {
-    totalMarksDisplay = '—'
+    effectivePaperTotal = Number(canonicalBaseline.authority.storedConfiguredTotal)
   }
+  const totalMarksDisplay = Number.isFinite(effectivePaperTotal)
+    ? String(effectivePaperTotal)
+    : '—'
+
+  const headerInfoFields = [
+    { id: 'studentName', label: 'Student Name', value: meta.studentNameField ?? '__________________________', metadataKey: 'studentNameField' },
+    { id: 'rollNo', label: 'Roll No.', value: meta.rollNoField ?? '__________', metadataKey: 'rollNoField' },
+    { id: 'className', label: 'Class', value: meta.className ?? meta.classLevel ?? '', metadataKey: 'className' },
+    { id: 'paperCode', label: 'Paper Code', value: meta.paperCode ?? '', metadataKey: 'paperCode' },
+    { id: 'subject', label: 'Subject', value: meta.subject ?? meta.subjectName ?? '', metadataKey: 'subject' },
+    { id: 'timeAllowed', label: 'Time Allowed', value: meta.timeAllowed ?? '', metadataKey: 'timeAllowed' },
+    { id: 'totalMarks', label: 'Total Marks', value: totalMarksDisplay === '—' ? '' : totalMarksDisplay, marksField: true },
+    { id: 'examDate', label: 'Date', value: meta.examDate ?? '', metadataKey: 'examDate' },
+  ]
+  const hiddenHeaderFields = new Set(meta.hiddenHeaderFields || [])
+  const visibleHeaderInfoFields = headerInfoFields.filter(field => !hiddenHeaderFields.has(field.id))
 
   const pageBorder = pres.pageBorder || 'none'
   const borderStyles = {
@@ -202,7 +221,7 @@ export default function CanonicalDocumentRenderer({
       style={pageStyle}
       dir={isUrdu ? 'rtl' : 'ltr'}
     >
-      {/* 1. School Header Section (Strictly Read-Only & Isolated outside Tiptap, Rules 17, 18, 34) */}
+      {/* 1. School identity protected; paper metadata remains independently editable. */}
       <header
         data-canonical-header
         className="canonical-school-header"
@@ -230,17 +249,43 @@ export default function CanonicalDocumentRenderer({
               {schoolName}
             </h1>
             <div style={{ fontSize: '11px', color: '#475569', marginTop: '3px' }}>
-              {schoolAddress}
+              <CanonicalInlineField
+                value={schoolAddress}
+                onCommit={(value) => store?.setMetadataField?.('schoolAddress', value)}
+                isEditing={isEditing}
+                placeholder="School address"
+                ariaLabel="School address"
+                minWidth="180px"
+                style={{ fontSize: '11px', color: '#475569' }}
+              />
             </div>
           </div>
 
-          {/* Exam Type & Session Badge (No invented defaults, Rule 17) */}
+          {/* Exam Type & Session Badge */}
           <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 6, padding: '6px 8px', textAlign: 'center' }}>
             <div style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', color: '#1e3a8a' }}>
-              {meta.examType || '__________'}
+              <CanonicalInlineField
+                value={meta.examType || ''}
+                onCommit={(value) => store?.setMetadataField?.('examType', value)}
+                isEditing={isEditing}
+                placeholder="__________"
+                ariaLabel="Exam type"
+                minWidth="90px"
+                textAlign="center"
+                style={{ fontSize: '10px', fontWeight: 800 }}
+              />
             </div>
             <div style={{ fontSize: '12px', fontWeight: 900, color: '#0f172a', marginTop: '2px' }}>
-              {meta.session || '__________'}
+              <CanonicalInlineField
+                value={meta.session || ''}
+                onCommit={(value) => store?.setMetadataField?.('session', value)}
+                isEditing={isEditing}
+                placeholder="__________"
+                ariaLabel="Session"
+                minWidth="90px"
+                textAlign="center"
+                style={{ fontSize: '12px', fontWeight: 900 }}
+              />
             </div>
           </div>
         </div>
@@ -256,38 +301,183 @@ export default function CanonicalDocumentRenderer({
             marginTop: '10px',
           }}
         >
-          {[
-            ['Student Name', '__________________________'],
-            ['Roll No.', '__________'],
-            ['Class', meta.className || meta.classLevel || '__________'],
-            ['Paper Code', meta.paperCode || '__________'],
-            ['Subject', meta.subject || meta.subjectName || '__________'],
-            ['Time Allowed', meta.timeAllowed || '__________'],
-            ['Total Marks', totalMarksDisplay],
-            ['Date', meta.examDate || '__________'],
-          ].map(([label, val], idx) => (
+          {visibleHeaderInfoFields.map((field) => (
             <div
-              key={idx}
+              key={field.id}
               style={{
+                position: 'relative',
                 background: '#eff6ff',
                 border: '1px solid #bfdbfe',
+                padding: '4px 22px 4px 8px',
+                borderRadius: 4,
+                fontSize: '11px',
+              }}
+            >
+              <span style={{ color: '#1e3a8a', fontWeight: 800, fontSize: '9px', textTransform: 'uppercase', display: 'block' }}>
+                {field.label}
+              </span>
+              {field.marksField ? (
+                <CanonicalInlineField
+                  value={field.value}
+                  onCommit={(value) => store?.setPaperTotalMarks?.(value)}
+                  isEditing={isEditing}
+                  placeholder="—"
+                  ariaLabel="Total marks"
+                  minWidth="36px"
+                  numeric
+                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}
+                />
+              ) : (
+                <CanonicalInlineField
+                  value={field.value}
+                  onCommit={(value) => store?.setMetadataField?.(field.metadataKey, value)}
+                  isEditing={isEditing}
+                  placeholder="__________"
+                  ariaLabel={field.label}
+                  minWidth="58px"
+                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}
+                />
+              )}
+              {isEditing && (
+                <button
+                  type="button"
+                  className="no-print"
+                  aria-label={'Remove ' + field.label + ' field'}
+                  onClick={() => store?.hideHeaderField?.(field.id)}
+                  style={{
+                    position: 'absolute',
+                    top: '2px',
+                    right: '3px',
+                    border: 'none',
+                    background: 'transparent',
+                    color: '#94a3b8',
+                    cursor: 'pointer',
+                    fontSize: '12px',
+                    lineHeight: 1,
+                  }}
+                >
+                  ×
+                </button>
+              )}
+            </div>
+          ))}
+
+          {(meta.customFields || []).map((field) => (
+            <div
+              key={field.id}
+              style={{
+                position: 'relative',
+                background: '#f8fafc',
+                border: '1px dashed #94a3b8',
                 padding: '4px 8px',
                 borderRadius: 4,
                 fontSize: '11px',
               }}
             >
-              <span style={{ color: '#1e3a8a', fontWeight: 800, fontSize: '9px', textTransform: 'uppercase', display: 'block' }}>{label}</span>
-              <span style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}>{val}</span>
+              <CanonicalInlineField
+                value={field.label}
+                onCommit={(value) => store?.updateCustomHeaderField?.(field.id, { label: value })}
+                isEditing={isEditing}
+                placeholder="FIELD"
+                ariaLabel="Custom field label"
+                minWidth="54px"
+                style={{ color: '#1e3a8a', fontWeight: 800, fontSize: '9px', textTransform: 'uppercase' }}
+              />
+              <div>
+                <CanonicalInlineField
+                  value={field.value}
+                  onCommit={(value) => store?.updateCustomHeaderField?.(field.id, { value })}
+                  isEditing={isEditing}
+                  placeholder="__________"
+                  ariaLabel={field.label || 'Custom field value'}
+                  minWidth="64px"
+                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}
+                />
+              </div>
+              {isEditing && (
+                <button
+                  type="button"
+                  className="no-print"
+                  aria-label={`Remove ${field.label || 'custom field'}`}
+                  onClick={() => store?.removeCustomHeaderField?.(field.id)}
+                  style={{
+                    position: 'absolute',
+                    top: '2px',
+                    right: '3px',
+                    border: 'none',
+                    background: 'transparent',
+                    color: '#94a3b8',
+                    cursor: 'pointer',
+                    fontSize: '12px',
+                    lineHeight: 1,
+                  }}
+                >
+                  ×
+                </button>
+              )}
             </div>
           ))}
         </div>
+
+        {isEditing && (
+          <div
+            className="no-print"
+            style={{
+              marginTop: '6px',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              gap: '6px',
+              flexWrap: 'wrap',
+            }}
+          >
+            {headerInfoFields
+              .filter(field => hiddenHeaderFields.has(field.id))
+              .map(field => (
+                <button
+                  key={field.id}
+                  type="button"
+                  onClick={() => store?.restoreHeaderField?.(field.id)}
+                  aria-label={'Restore ' + field.label + ' field'}
+                  style={{
+                    border: '1px dashed #cbd5e1',
+                    background: '#ffffff',
+                    color: '#64748b',
+                    borderRadius: '4px',
+                    padding: '3px 7px',
+                    fontSize: '10px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  + {field.label}
+                </button>
+              ))}
+            <button
+              type="button"
+              onClick={() => store?.addCustomHeaderField?.('Field', '')}
+              style={{
+                border: '1px dashed #94a3b8',
+                background: '#f8fafc',
+                color: '#475569',
+                borderRadius: '4px',
+                padding: '3px 8px',
+                fontSize: '10px',
+                cursor: 'pointer',
+              }}
+            >
+              + Add header field
+            </button>
+          </div>
+        )}
       </header>
 
       {/* 2. Main Sections Area */}
       <main style={{ position: 'relative', zIndex: 1 }}>
         {workingDoc.sections?.map((section, sIdx) => {
           const secDir = section.direction === 'rtl' ? 'rtl' : (section.direction === 'ltr' ? 'ltr' : (isUrdu ? 'rtl' : 'ltr'))
-          const totalMarks = section.authoritativeSectionTotal ?? section.operationalSectionTotal
+          const totalMarks = store?.getEffectiveSectionTotal
+            ? store.getEffectiveSectionTotal(section.id)
+            : (section.authoritativeSectionTotal ?? section.operationalSectionTotal)
           let questionCounter = 0
 
           const secOverrides = pres.sectionLayoutOverrides?.[section.id] || {}
@@ -328,10 +518,10 @@ export default function CanonicalDocumentRenderer({
                     marginBottom: '10px',
                   }}
                 >
-                  {/* Total Marks badge only if positive and authoritative (Rule 17, FIX D) */}
-                  {totalMarks !== null && totalMarks !== undefined && Number(totalMarks) > 0 && (
+                  {/* Working section marks. Source authority remains immutable. */}
+                  {(isEditing || (totalMarks !== null && totalMarks !== undefined)) && (
                     <span
-                      className="canonical-section-marks-badge"
+                      className={'canonical-section-marks-badge' + (!Number.isFinite(totalMarks) ? ' canonical-section-marks-empty' : '')}
                       style={{
                         background: '#1e3a8a',
                         color: '#ffffff',
@@ -339,9 +529,30 @@ export default function CanonicalDocumentRenderer({
                         fontWeight: 800,
                         padding: '2px 8px',
                         borderRadius: '4px',
+                        display: 'inline-flex',
+                        alignItems: 'baseline',
+                        gap: '2px',
                       }}
                     >
-                      ({totalMarks} Marks)
+                      <span>(</span>
+                      <CanonicalInlineField
+                        value={Number.isFinite(totalMarks) ? String(totalMarks) : ''}
+                        onCommit={(value) => store?.setSectionMarks?.(section.id, value)}
+                        isEditing={isEditing}
+                        placeholder="—"
+                        ariaLabel={'Section ' + (sIdx + 1) + ' marks'}
+                        minWidth="20px"
+                        textAlign="center"
+                        numeric
+                        style={{
+                          color: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 800,
+                          background: isEditing ? 'rgba(255,255,255,0.12)' : 'transparent',
+                          borderBottomColor: isEditing ? 'rgba(255,255,255,0.65)' : 'transparent',
+                        }}
+                      />
+                      <span>Marks)</span>
                     </span>
                   )}
 
@@ -371,7 +582,7 @@ export default function CanonicalDocumentRenderer({
                           userSelect: 'none',
                         }}
                       >
-                        Working structure changed; source marks total remains unchanged.
+                        Working structure changed; review the working marks total.
                       </span>
                     )
                   })()}
@@ -433,6 +644,72 @@ export default function CanonicalDocumentRenderer({
                         // Increment question count for academic question items
                         questionCounter++
                         const currentQNum = questionCounter
+                        const displayQNum = store?.getNodeDisplayNumber
+                          ? store.getNodeDisplayNumber(section.id, nodeId, currentQNum)
+                          : String(currentQNum)
+                        const nodeMarks = store?.getEffectiveNodeMarks
+                          ? store.getEffectiveNodeMarks(section.id, nodeId)
+                          : (resolvedNode.authoritativeNodeMarks ?? resolvedNode.operationalNodeMarks ?? null)
+
+                        const questionNumberControl = (
+                          <span
+                            className="canonical-question-number"
+                            style={{
+                              fontWeight: 800,
+                              color: '#1e3a8a',
+                              minWidth: '22px',
+                              display: 'inline-flex',
+                              alignItems: 'baseline',
+                              gap: '1px',
+                              flexShrink: 0,
+                            }}
+                          >
+                            <CanonicalInlineField
+                              value={displayQNum}
+                              onCommit={(value) => store?.setNodeDisplayNumber?.(section.id, nodeId, value)}
+                              isEditing={isEditing}
+                              ariaLabel={'Question ' + currentQNum + ' number'}
+                              minWidth="14px"
+                              textAlign="center"
+                              style={{
+                                fontWeight: 800,
+                                color: '#1e3a8a',
+                                background: isEditing ? 'rgba(239,246,255,0.75)' : 'transparent',
+                              }}
+                            />
+                            <span>.</span>
+                          </span>
+                        )
+
+                        const questionMarksControl = (isEditing || nodeMarks !== null) ? (
+                          <span
+                            className={'canonical-question-marks' + (nodeMarks === null ? ' canonical-question-marks-empty' : '')}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'baseline',
+                              gap: '2px',
+                              whiteSpace: 'nowrap',
+                              fontSize: '10px',
+                              fontWeight: 700,
+                              color: '#475569',
+                              flexShrink: 0,
+                            }}
+                          >
+                            <span>(</span>
+                            <CanonicalInlineField
+                              value={Number.isFinite(nodeMarks) ? String(nodeMarks) : ''}
+                              onCommit={(value) => store?.setNodeMarks?.(section.id, nodeId, value)}
+                              isEditing={isEditing}
+                              placeholder="—"
+                              ariaLabel={'Question ' + currentQNum + ' marks'}
+                              minWidth="18px"
+                              textAlign="center"
+                              numeric
+                              style={{ fontSize: '10px', fontWeight: 700, color: '#475569' }}
+                            />
+                            <span>Marks)</span>
+                          </span>
+                        ) : null
 
                         // Contextual node controls header
                         const controlsHeader = isEditing && (
@@ -478,9 +755,7 @@ export default function CanonicalDocumentRenderer({
                             >
                               {controlsHeader}
                               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                                <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
-                                  {currentQNum}.
-                                </span>
+                                {questionNumberControl}
                                 <div style={{ flex: 1 }}>
                                   <CanonicalStructuredNodeEditor
                                     nodeId={nodeId}
@@ -491,6 +766,7 @@ export default function CanonicalDocumentRenderer({
                                     isEditing={isEditing}
                                   />
                                 </div>
+                                {questionMarksControl}
                               </div>
                             </div>
                           )
@@ -521,8 +797,11 @@ export default function CanonicalDocumentRenderer({
                                 <table className="canonical-mcq-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: isHalf ? '11px' : '12px' }}>
                                   <tbody>
                                     <tr>
-                                      <td style={{ width: '36px', padding: '6px 8px', fontWeight: 800, color: '#1e3a8a', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', background: '#f8fafc' }}>
-                                        {currentQNum}.
+                                      <td style={{ width: '54px', padding: '6px 8px', fontWeight: 800, color: '#1e3a8a', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', background: '#f8fafc' }}>
+                                        {questionNumberControl}
+                                        <div style={{ marginTop: '4px' }}>
+                                          {questionMarksControl}
+                                        </div>
                                       </td>
                                       <td style={{ padding: '6px 10px', borderRight: '1px solid #cbd5e1', verticalAlign: 'top', fontWeight: 600 }}>
                                         {fieldOverlay ? (
@@ -592,9 +871,7 @@ export default function CanonicalDocumentRenderer({
                             >
                               {controlsHeader}
                               <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                                <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
-                                  {currentQNum}.
-                                </span>
+                                {questionNumberControl}
                                 <div style={{ flex: 1 }}>
                                   {fieldOverlay ? (
                                     <CanonicalEditableText
@@ -618,6 +895,7 @@ export default function CanonicalDocumentRenderer({
                                     </div>
                                   )}
                                 </div>
+                                {questionMarksControl}
                               </div>
 
                               {isEditing ? (
@@ -669,9 +947,7 @@ export default function CanonicalDocumentRenderer({
                           >
                             {controlsHeader}
                             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
-                              <span style={{ fontWeight: 800, color: '#1e3a8a', minWidth: '18px', userSelect: 'none' }}>
-                                {currentQNum}.
-                              </span>
+                              {questionNumberControl}
                               <div style={{ flex: 1 }}>
                                 {fieldOverlay ? (
                                   <CanonicalEditableText
@@ -706,6 +982,7 @@ export default function CanonicalDocumentRenderer({
                                   </div>
                                 )}
                               </div>
+                              {questionMarksControl}
                             </div>
                           </div>
                         )

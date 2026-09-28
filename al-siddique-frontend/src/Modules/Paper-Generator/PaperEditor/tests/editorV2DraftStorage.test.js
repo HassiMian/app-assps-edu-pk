@@ -25,6 +25,28 @@ const __dirname = path.dirname(__filename)
 const corpusPath = path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documents
 
+function getEditableFixture() {
+  for (const doc of canonicalCorpus) {
+    const store = new EditorWorkingStore(doc)
+    const workingDoc = store.getWorkingDocument()
+    for (const section of workingDoc.sections) {
+      const node = section.nodeOverlays.find(item => Object.keys(item.editableFields || {}).length > 0)
+      if (!node) continue
+      const fieldName = Object.keys(node.editableFields)[0]
+      return {
+        doc,
+        store,
+        workingDoc,
+        section,
+        node,
+        fieldName,
+        fieldKey: buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, node.nodeId, fieldName),
+      }
+    }
+  }
+  throw new Error('Expected at least one text-editable canonical node in corpus')
+}
+
 test('DRAFT VALIDATOR: Strictly validates schema and rejects malformed draft payloads (Rule 11)', () => {
   // Missing fields
   assert.strictEqual(validateWorkingDraft(null).valid, false)
@@ -110,17 +132,10 @@ test('DRAFT VALIDATOR: Strictly validates schema and rejects malformed draft pay
 })
 
 test('ATOMIC DRAFT APPLICATION: Preflights all keys and rejects if unknown field key exists (Rule 24)', () => {
-  const doc = canonicalCorpus[0]
-  const store = new EditorWorkingStore(doc)
-  const workingDoc = store.getWorkingDocument()
-
-  const firstSec = workingDoc.sections[0]
-  const firstNode = firstSec.nodeOverlays[0]
-  const fieldName = Object.keys(firstNode.editableFields)[0]
-  const validKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, firstSec.id, firstNode.nodeId, fieldName)
+  const { store, workingDoc, node, fieldName, fieldKey: validKey } = getEditableFixture()
   const unknownKey = 'nonexistent-doc::nonexistent-sec::nonexistent-node::stemText'
 
-  const initialText = firstNode.editableFields[fieldName].workingPlainText
+  const initialText = node.editableFields[fieldName].workingPlainText
 
   // Draft contains 1 valid patch and 1 unknown field key
   const draftWithUnknown = {
@@ -151,7 +166,7 @@ test('ATOMIC DRAFT APPLICATION: Preflights all keys and rejects if unknown field
 
   // Assert atomic rollback: valid patch was NOT applied
   assert.strictEqual(
-    firstNode.editableFields[fieldName].workingPlainText,
+    node.editableFields[fieldName].workingPlainText,
     initialText,
     'Valid patch must NOT be applied when another key is unknown (atomic apply)'
   )
@@ -159,14 +174,7 @@ test('ATOMIC DRAFT APPLICATION: Preflights all keys and rejects if unknown field
 
 test('DRAFT STORAGE: Saves and loads compact drafts without corrupting baseline (Rules 9, 10)', () => {
   clearAllWorkingDrafts()
-  const doc = canonicalCorpus[0]
-  const store = new EditorWorkingStore(doc)
-  const workingDoc = store.getWorkingDocument()
-
-  const firstSec = workingDoc.sections[0]
-  const firstNode = firstSec.nodeOverlays[0]
-  const fieldName = Object.keys(firstNode.editableFields)[0]
-  const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, firstSec.id, firstNode.nodeId, fieldName)
+  const { doc, store, fieldKey } = getEditableFixture()
 
   // Modify field
   const editedRich = {

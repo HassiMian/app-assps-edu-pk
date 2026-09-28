@@ -34,6 +34,12 @@ import {
 import { exportStructuredBlock, computeMaxSequenceFromStructured } from './structured/structuredDraftV2.js'
 import { validateV2StructuredBlock } from './structured/structuredPatchValidator.js'
 import { parseVerticalNumeric, resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
+import {
+  normalizeWorkingMark,
+  recalculateWorkingMarks,
+  getEffectiveSectionTotal,
+  getEffectivePaperTotal,
+} from './workingMarksEngine.js'
 
 function applyFieldPatchToDoc(doc, fieldKey, patch) {
   const { sectionId, nodeId, fieldName } = parseFieldKey(fieldKey)
@@ -115,6 +121,257 @@ export class EditorWorkingStore {
 
   publishDocumentChange() { this._notify() }
 
+  _hasStructuredEdits() {
+    const structured = this._workingDoc?.structured || {}
+    return (
+      Object.keys(structured.structuredPatches || {}).length > 0 ||
+      Object.keys(structured.insertedNodes || {}).length > 0 ||
+      (structured.deletedNodeIds || []).length > 0 ||
+      Object.keys(structured.nodeOrderBySection || {}).length > 0
+    )
+  }
+
+  _recomputeDocumentDirty() {
+    let textDirty = false
+    let marksDirty = Boolean(this._workingDoc?.marks?.paperMarksDirty)
+    let numberingDirty = false
+
+    for (const sec of this._workingDoc.sections || []) {
+      marksDirty = marksDirty || Boolean(sec.sectionMarksDirty)
+      for (const node of sec.nodeOverlays || []) {
+        marksDirty = marksDirty || Boolean(node.nodeMarksDirty)
+        numberingDirty = numberingDirty || Boolean(node.displayNumberDirty)
+        for (const field of Object.values(node.editableFields || {})) {
+          if (field.isDirty) textDirty = true
+        }
+      }
+    }
+
+    const metadataDirty = Boolean(
+      this._workingDoc?.metadata?.customFieldsDirty ||
+      this._workingDoc?.metadata?.hiddenHeaderFieldsDirty ||
+      Object.values(this._workingDoc?.metadata?.dirtyFields || {}).some(Boolean)
+    )
+    const presentationDirty = Boolean(this._workingDoc?.presentation?.isDirty)
+    const dirty = Boolean(
+      textDirty ||
+      metadataDirty ||
+      marksDirty ||
+      numberingDirty ||
+      presentationDirty ||
+      this._hasStructuredEdits()
+    )
+    this._workingDoc.session.isDirty = dirty
+    return dirty
+  }
+
+  _findNodeOverlay(sectionId, nodeId) {
+    const section = this._workingDoc.sections.find(sec => sec.id === sectionId)
+    const node = section?.nodeOverlays?.find(item => item.nodeId === nodeId)
+    return { section, node }
+  }
+
+  setMetadataField(fieldName, value) {
+    const metadata = this._workingDoc.metadata
+    if (!metadata || !Object.prototype.hasOwnProperty.call(metadata, fieldName)) return false
+    if ([
+      'language',
+      'direction',
+      'dirtyFields',
+      'customFields',
+      'customFieldsDirty',
+      'hiddenHeaderFields',
+      'hiddenHeaderFieldsDirty',
+    ].includes(fieldName)) return false
+
+    const baselineValue = this._baselineDoc.metadata?.[fieldName] ?? null
+    const normalizedValue = fieldName === 'durationMinutes'
+      ? normalizeWorkingMark(value)
+      : (value === null || value === undefined ? '' : String(value))
+
+    metadata[fieldName] = normalizedValue
+    metadata.dirtyFields[fieldName] = normalizedValue !== baselineValue
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  addCustomHeaderField(label = 'Field', value = '') {
+    const metadata = this._workingDoc.metadata
+    if (!metadata) return null
+    const used = new Set((metadata.customFields || []).map(field => field.id))
+    let seq = (metadata.customFields || []).length + 1
+    let id = `custom_header_${seq}`
+    while (used.has(id)) {
+      seq += 1
+      id = `custom_header_${seq}`
+    }
+    const record = { id, label: String(label || 'Field'), value: String(value || '') }
+    metadata.customFields.push(record)
+    metadata.customFieldsDirty = true
+    this._recomputeDocumentDirty()
+    this._notify()
+    return record
+  }
+
+  updateCustomHeaderField(fieldId, patch = {}) {
+    const metadata = this._workingDoc.metadata
+    const field = metadata?.customFields?.find(item => item.id === fieldId)
+    if (!field) return false
+    if (patch.label !== undefined) field.label = String(patch.label)
+    if (patch.value !== undefined) field.value = String(patch.value)
+    metadata.customFieldsDirty = true
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  removeCustomHeaderField(fieldId) {
+    const metadata = this._workingDoc.metadata
+    if (!metadata) return false
+    const before = metadata.customFields.length
+    metadata.customFields = metadata.customFields.filter(field => field.id !== fieldId)
+    if (metadata.customFields.length === before) return false
+    metadata.customFieldsDirty = true
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  hideHeaderField(fieldId) {
+    const metadata = this._workingDoc.metadata
+    if (!metadata || !fieldId) return false
+    if (!metadata.hiddenHeaderFields.includes(fieldId)) {
+      metadata.hiddenHeaderFields.push(fieldId)
+      metadata.hiddenHeaderFieldsDirty = true
+      this._recomputeDocumentDirty()
+      this._notify()
+    }
+    return true
+  }
+
+  restoreHeaderField(fieldId) {
+    const metadata = this._workingDoc.metadata
+    if (!metadata || !fieldId) return false
+    const before = metadata.hiddenHeaderFields.length
+    metadata.hiddenHeaderFields = metadata.hiddenHeaderFields.filter(id => id !== fieldId)
+    if (metadata.hiddenHeaderFields.length !== before) {
+      metadata.hiddenHeaderFieldsDirty = true
+      this._recomputeDocumentDirty()
+      this._notify()
+    }
+    return true
+  }
+
+  getEffectiveNodeMarks(sectionId, nodeId) {
+    const { node } = this._findNodeOverlay(sectionId, nodeId)
+    if (node) return normalizeWorkingMark(node.workingNodeMarks)
+    const inserted = this._workingDoc.structured?.insertedNodes?.[nodeId]
+    return normalizeWorkingMark(inserted?.workingMarksOverride)
+  }
+
+  setNodeMarks(sectionId, nodeId, value) {
+    const mark = normalizeWorkingMark(value)
+    const { section, node } = this._findNodeOverlay(sectionId, nodeId)
+    const inserted = this._workingDoc.structured?.insertedNodes?.[nodeId]
+    if (!section || (!node && !inserted)) return false
+
+    if (node) {
+      const sourceMark = node.authoritativeNodeMarks ?? node.operationalNodeMarks ?? null
+      node.workingNodeMarks = mark
+      node.nodeMarksDirty = mark !== normalizeWorkingMark(sourceMark)
+    } else {
+      inserted.workingMarksOverride = mark
+    }
+
+    if (section.sectionTotalMode !== 'MANUAL') {
+      section.sectionTotalMode = 'AUTO'
+      section.sectionMarksDirty = true
+    }
+    if (this._workingDoc.marks.paperTotalMode !== 'MANUAL') {
+      this._workingDoc.marks.paperTotalMode = 'AUTO'
+      this._workingDoc.marks.paperMarksDirty = true
+    }
+
+    recalculateWorkingMarks(this._workingDoc, this._baselineDoc)
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  getEffectiveSectionTotal(sectionId) {
+    const section = this._workingDoc.sections.find(sec => sec.id === sectionId)
+    return getEffectiveSectionTotal(section)
+  }
+
+  setSectionMarks(sectionId, value) {
+    const section = this._workingDoc.sections.find(sec => sec.id === sectionId)
+    if (!section) return false
+    const mark = normalizeWorkingMark(value)
+    const sourceMark = section.authoritativeSectionTotal ?? section.operationalSectionTotal ?? null
+    section.workingSectionTotal = mark
+    section.sectionTotalMode = 'MANUAL'
+    section.sectionMarksDirty = mark !== normalizeWorkingMark(sourceMark)
+    section.sectionMarksStatus = 'MANUAL'
+
+    if (this._workingDoc.marks.paperTotalMode !== 'MANUAL') {
+      this._workingDoc.marks.paperTotalMode = 'AUTO'
+      this._workingDoc.marks.paperMarksDirty = true
+    }
+    recalculateWorkingMarks(this._workingDoc, this._baselineDoc)
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  setPaperTotalMarks(value) {
+    const mark = normalizeWorkingMark(value)
+    this._workingDoc.marks.paperTotalMode = 'MANUAL'
+    this._workingDoc.marks.manualPaperTotal = mark
+    this._workingDoc.marks.paperMarksDirty = mark !== normalizeWorkingMark(this._workingDoc.marks.sourcePaperTotal)
+    this._workingDoc.marks.paperMarksStatus = 'MANUAL'
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  setPaperTotalAuto() {
+    this._workingDoc.marks.paperTotalMode = 'AUTO'
+    this._workingDoc.marks.paperMarksDirty = true
+    recalculateWorkingMarks(this._workingDoc, this._baselineDoc)
+    this._recomputeDocumentDirty()
+    this._notify()
+  }
+
+  getEffectivePaperTotal() {
+    return getEffectivePaperTotal(this._workingDoc)
+  }
+
+  getNodeDisplayNumber(sectionId, nodeId, fallbackNumber) {
+    const { node } = this._findNodeOverlay(sectionId, nodeId)
+    const inserted = this._workingDoc.structured?.insertedNodes?.[nodeId]
+    const override = node?.displayNumberOverride ?? inserted?.displayNumberOverride
+    return override === null || override === undefined || String(override).trim() === ''
+      ? String(fallbackNumber)
+      : String(override)
+  }
+
+  setNodeDisplayNumber(sectionId, nodeId, value) {
+    const normalized = value === null || value === undefined ? null : String(value).trim()
+    const { node } = this._findNodeOverlay(sectionId, nodeId)
+    const inserted = this._workingDoc.structured?.insertedNodes?.[nodeId]
+    if (!node && !inserted) return false
+    if (node) {
+      node.displayNumberOverride = normalized || null
+      node.displayNumberDirty = Boolean(normalized)
+    } else {
+      inserted.displayNumberOverride = normalized || null
+    }
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
   // ─────────────────────────────────────────────────────────────────────────
   // B3 FIELD OPERATIONS (unchanged interface)
   // ─────────────────────────────────────────────────────────────────────────
@@ -158,17 +415,8 @@ export class EditorWorkingStore {
     fieldOverlay.mutationState = dirtyCheck.mutationState
     nodeOverlay.provenance.academicTextMutated = dirtyCheck.academicTextMutated
 
-    let docDirty = false
-    outer: for (const sec of this._workingDoc.sections) {
-      for (const node of sec.nodeOverlays) {
-        for (const f of Object.values(node.editableFields || {})) {
-          if (f.isDirty) { docDirty = true; break outer }
-        }
-      }
-    }
-
     const previousDocDirty = this._workingDoc.session.isDirty
-    this._workingDoc.session.isDirty = docDirty
+    const docDirty = this._recomputeDocumentDirty()
 
     // Fix spec §21: NONE mode never notifies (even on first PRISTINE→DIRTY)
     if (notifyMode !== 'NONE') {
@@ -781,6 +1029,7 @@ export class EditorWorkingStore {
   setPageBorder(pageBorder) {
     if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
     this._workingDoc.presentation.pageBorder = pageBorder
+    this._workingDoc.presentation.isDirty = true
     this._workingDoc.session.isDirty = true
     this.publishDocumentChange()
   }
@@ -794,6 +1043,7 @@ export class EditorWorkingStore {
         ...(this._workingDoc.presentation.sectionLayoutOverrides[secId] || {}),
         mcqLayout,
       }
+      this._workingDoc.presentation.isDirty = true
       this._workingDoc.session.isDirty = true
       this.publishDocumentChange()
     }
@@ -808,6 +1058,7 @@ export class EditorWorkingStore {
         ...(this._workingDoc.presentation.sectionLayoutOverrides[secId] || {}),
         shortLayout,
       }
+      this._workingDoc.presentation.isDirty = true
       this._workingDoc.session.isDirty = true
       this.publishDocumentChange()
     }
@@ -822,6 +1073,7 @@ export class EditorWorkingStore {
         ...(this._workingDoc.presentation.sectionLayoutOverrides[secId] || {}),
         questionBorder,
       }
+      this._workingDoc.presentation.isDirty = true
       this._workingDoc.session.isDirty = true
       this.publishDocumentChange()
     }
@@ -832,6 +1084,7 @@ export class EditorWorkingStore {
     if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
     if (!this._workingDoc.presentation.answerLinesByNode) this._workingDoc.presentation.answerLinesByNode = {}
     this._workingDoc.presentation.answerLinesByNode[nodeId] = Number(lines) || 0
+    this._workingDoc.presentation.isDirty = true
     this._workingDoc.session.isDirty = true
     this.publishDocumentChange()
   }
@@ -858,6 +1111,48 @@ export class EditorWorkingStore {
       }
     }
 
+    const metadataPatch = { fields: {}, customFields: null, hiddenHeaderFields: null }
+    for (const [fieldName, dirty] of Object.entries(this._workingDoc.metadata?.dirtyFields || {})) {
+      if (dirty) metadataPatch.fields[fieldName] = this._workingDoc.metadata[fieldName]
+    }
+    if (this._workingDoc.metadata?.customFieldsDirty) {
+      metadataPatch.customFields = JSON.parse(JSON.stringify(this._workingDoc.metadata.customFields || []))
+    }
+    if (this._workingDoc.metadata?.hiddenHeaderFieldsDirty) {
+      metadataPatch.hiddenHeaderFields = [...(this._workingDoc.metadata.hiddenHeaderFields || [])]
+    }
+
+    const marksPatch = {
+      paper: this._workingDoc.marks?.paperMarksDirty
+        ? {
+            paperTotalMode: this._workingDoc.marks.paperTotalMode,
+            manualPaperTotal: this._workingDoc.marks.manualPaperTotal,
+          }
+        : null,
+      sections: {},
+      nodes: {},
+    }
+
+    for (const sec of this._workingDoc.sections || []) {
+      if (sec.sectionMarksDirty) {
+        marksPatch.sections[sec.id] = {
+          workingSectionTotal: sec.workingSectionTotal,
+          sectionTotalMode: sec.sectionTotalMode,
+        }
+      }
+      for (const node of sec.nodeOverlays || []) {
+        if (node.nodeMarksDirty || node.displayNumberDirty) {
+          marksPatch.nodes[node.nodeId] = {
+            sectionId: sec.id,
+            workingNodeMarks: node.workingNodeMarks,
+            nodeMarksDirty: Boolean(node.nodeMarksDirty),
+            displayNumberOverride: node.displayNumberOverride,
+            displayNumberDirty: Boolean(node.displayNumberDirty),
+          }
+        }
+      }
+    }
+
     const structured = exportStructuredBlock(this._workingDoc)
     structured.nextUserStructureSequence = this._idAllocator.serialize()
 
@@ -867,7 +1162,16 @@ export class EditorWorkingStore {
       (structured.deletedNodeIds || []).length > 0 ||
       Object.keys(structured.nodeOrderBySection || {}).length > 0
 
-    const isV2 = forceV2 || hasStructuredEdits
+    const hasMetadataEdits =
+      Object.keys(metadataPatch.fields).length > 0 ||
+      metadataPatch.customFields !== null ||
+      metadataPatch.hiddenHeaderFields !== null
+    const hasMarksEdits =
+      Boolean(marksPatch.paper) ||
+      Object.keys(marksPatch.sections).length > 0 ||
+      Object.keys(marksPatch.nodes).length > 0
+
+    const isV2 = forceV2 || hasStructuredEdits || hasMetadataEdits || hasMarksEdits
 
     const draft = {
       draftFormat: 'assps-canonical-working-draft',
@@ -876,7 +1180,10 @@ export class EditorWorkingStore {
       baseFingerprint: this._workingDoc.baseFingerprint,
       savedAt: new Date().toISOString(),
       fieldPatches,
+      metadataPatch,
+      marksPatch,
       presentationPatch: {
+        isDirty: Boolean(this._workingDoc.presentation.isDirty),
         zoomLevel: this._workingDoc.presentation.zoomLevel,
         templateId: this._workingDoc.presentation.templateId,
         pageBorder: this._workingDoc.presentation.pageBorder || 'none',
@@ -915,6 +1222,8 @@ export class EditorWorkingStore {
 
     const patches = compactDraft.fieldPatches || {}
     const structured = compactDraft.structured || null
+    const metadataPatch = compactDraft.metadataPatch || { fields: {}, customFields: null, hiddenHeaderFields: null }
+    const marksPatch = compactDraft.marksPatch || { paper: null, sections: {}, nodes: {} }
 
     // 1. PREFLIGHT text patches: all keys must resolve
     for (const fieldKey of Object.keys(patches)) {
@@ -970,11 +1279,69 @@ export class EditorWorkingStore {
         candidateAllocator.advanceTo(Math.max(maxSeq, savedSeq - 1))
       }
 
+      // Apply metadata overlay. School name/logo are not part of editable metadata.
+      for (const [fieldName, value] of Object.entries(metadataPatch.fields || {})) {
+        if (
+          !Object.prototype.hasOwnProperty.call(candidateDoc.metadata, fieldName) ||
+          ['language', 'direction', 'dirtyFields', 'customFields', 'customFieldsDirty'].includes(fieldName)
+        ) {
+          return { status: 'INVALID_DRAFT', error: `UNKNOWN_METADATA_FIELD: '${fieldName}'` }
+        }
+        candidateDoc.metadata[fieldName] = value
+        candidateDoc.metadata.dirtyFields[fieldName] = true
+      }
+      if (Array.isArray(metadataPatch.customFields)) {
+        candidateDoc.metadata.customFields = JSON.parse(JSON.stringify(metadataPatch.customFields))
+        candidateDoc.metadata.customFieldsDirty = true
+      }
+      if (Array.isArray(metadataPatch.hiddenHeaderFields)) {
+        candidateDoc.metadata.hiddenHeaderFields = [...metadataPatch.hiddenHeaderFields]
+        candidateDoc.metadata.hiddenHeaderFieldsDirty = true
+      }
+
+      // Apply marks + numbering overlays.
+      if (marksPatch.paper) {
+        candidateDoc.marks.paperTotalMode = marksPatch.paper.paperTotalMode || 'MANUAL'
+        candidateDoc.marks.manualPaperTotal = normalizeWorkingMark(marksPatch.paper.manualPaperTotal)
+        candidateDoc.marks.paperMarksDirty = true
+        candidateDoc.marks.paperMarksStatus = candidateDoc.marks.paperTotalMode === 'MANUAL' ? 'MANUAL' : 'AUTO'
+      }
+
+      for (const [sectionId, sectionPatch] of Object.entries(marksPatch.sections || {})) {
+        const section = candidateDoc.sections.find(sec => sec.id === sectionId)
+        if (!section) return { status: 'INVALID_DRAFT', error: `UNKNOWN_MARKS_SECTION: '${sectionId}'` }
+        section.workingSectionTotal = normalizeWorkingMark(sectionPatch.workingSectionTotal)
+        section.sectionTotalMode = sectionPatch.sectionTotalMode || 'MANUAL'
+        section.sectionMarksDirty = true
+        section.sectionMarksStatus = section.sectionTotalMode === 'MANUAL' ? 'MANUAL' : 'AUTO'
+      }
+
+      for (const [nodeId, nodePatch] of Object.entries(marksPatch.nodes || {})) {
+        const section = candidateDoc.sections.find(sec => sec.id === nodePatch.sectionId)
+        const node = section?.nodeOverlays?.find(item => item.nodeId === nodeId)
+        const inserted = candidateDoc.structured?.insertedNodes?.[nodeId]
+        if (!node && !inserted) {
+          return { status: 'INVALID_DRAFT', error: `UNKNOWN_MARKS_NODE: '${nodeId}'` }
+        }
+        if (node) {
+          node.workingNodeMarks = normalizeWorkingMark(nodePatch.workingNodeMarks)
+          node.nodeMarksDirty = Boolean(nodePatch.nodeMarksDirty)
+          node.displayNumberOverride = nodePatch.displayNumberOverride ?? null
+          node.displayNumberDirty = Boolean(nodePatch.displayNumberDirty)
+        } else {
+          inserted.workingMarksOverride = normalizeWorkingMark(nodePatch.workingNodeMarks)
+          inserted.displayNumberOverride = nodePatch.displayNumberOverride ?? null
+        }
+      }
+
+      recalculateWorkingMarks(candidateDoc, this._baselineDoc)
+
       // Apply presentation patch (Rule 11, FIX G)
       if (compactDraft.presentationPatch) {
         Object.assign(candidateDoc.presentation, {
           ...candidateDoc.presentation,
           ...compactDraft.presentationPatch,
+          isDirty: Boolean(compactDraft.presentationPatch.isDirty),
           sectionLayoutOverrides: {
             ...(candidateDoc.presentation.sectionLayoutOverrides || {}),
             ...(compactDraft.presentationPatch.sectionLayoutOverrides || {}),
@@ -992,9 +1359,34 @@ export class EditorWorkingStore {
       }
 
       // Candidate tokens and dirty flags
+      const hasStructuredDirty = Boolean(
+        structured && (
+          Object.keys(structured.structuredPatches || {}).length > 0 ||
+          Object.keys(structured.insertedNodes || {}).length > 0 ||
+          (structured.deletedNodeIds || []).length > 0 ||
+          Object.keys(structured.nodeOrderBySection || {}).length > 0
+        )
+      )
+      const hasMetadataDirty = Boolean(
+        Object.keys(metadataPatch.fields || {}).length > 0 ||
+        Array.isArray(metadataPatch.customFields) ||
+        Array.isArray(metadataPatch.hiddenHeaderFields)
+      )
+      const hasMarksDirty = Boolean(
+        marksPatch.paper ||
+        Object.keys(marksPatch.sections || {}).length > 0 ||
+        Object.keys(marksPatch.nodes || {}).length > 0
+      )
+
       candidateDoc.session.revisionToken = (this._workingDoc.session.revisionToken || 1) + 1
       candidateDoc.session.structuralRevisionToken = (this._workingDoc.session.structuralRevisionToken || 1) + 1
-      candidateDoc.session.isDirty = hasDirtyField || (structured && Object.keys(structured.structuredPatches || {}).length > 0)
+      candidateDoc.session.isDirty = Boolean(
+        hasDirtyField ||
+        hasStructuredDirty ||
+        hasMetadataDirty ||
+        hasMarksDirty ||
+        candidateDoc.presentation.isDirty
+      )
 
       // ONLY THEN swap candidate into _workingDoc and swap allocator
       this._workingDoc = candidateDoc
@@ -1016,30 +1408,13 @@ export class EditorWorkingStore {
   }
 
   revertAllToBaseline() {
-    for (const sec of this._workingDoc.sections) {
-      for (const node of sec.nodeOverlays) {
-        for (const fieldOverlay of Object.values(node.editableFields || {})) {
-          fieldOverlay.workingRich = JSON.parse(JSON.stringify(fieldOverlay.baselineRich))
-          fieldOverlay.workingPlainText = fieldOverlay.baselinePlainText
-          fieldOverlay.isDirty = false
-          fieldOverlay.academicTextMutated = false
-          fieldOverlay.mutationState = 'PRISTINE'
-        }
-        node.provenance.academicTextMutated = false
-      }
-    }
-    // Reset structured state
-    Object.assign(this._workingDoc.structured, {
-      structuredPatches: {},
-      insertedNodes: {},
-      deletedNodeIds: [],
-      nodeOrderBySection: {},
-      nextUserStructureSequence: 1,
-    })
+    const previousRevision = this._workingDoc?.session?.revisionToken || 1
+    const previousStructuralRevision = this._workingDoc?.session?.structuralRevisionToken || 1
+    this._workingDoc = createEditorWorkingDocument(this._baselineDoc)
+    this._workingDoc.session.revisionToken = previousRevision + 1
+    this._workingDoc.session.structuralRevisionToken = previousStructuralRevision + 1
+    this._idAllocator = new StructuredIdAllocator(this._baselineDoc.id, 1)
     this._structuredHistory.clear()
-    this._workingDoc.session.isDirty = false
-    this._workingDoc.session.revisionToken += 1
-    this._workingDoc.session.structuralRevisionToken = (this._workingDoc.session.structuralRevisionToken || 1) + 1
     this.publishDocumentChange()
   }
 }

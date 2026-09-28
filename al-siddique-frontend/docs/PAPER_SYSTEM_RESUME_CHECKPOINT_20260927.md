@@ -142,3 +142,20 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Heading-only regression fixtures explicitly cover Class 2 English essay and Class 2 Urdu essay provenance/stems.
 - MCQ regression verifies live-parser versus canonical row/prompt/options equivalence.
 - Canonical routing is still not switched to production; this gate is a prerequisite, not a deployment authorization.
+
+## Phase 9 — Granular Header / Marks / Number Editing (28 Sep 2026)
+- Extended the canonical working-document overlay instead of creating another editor or mutating canonical source.
+- School name/logo remain protected identity; paper metadata fields are independently editable in-place.
+- Editable header metadata now includes class, subject, paper code, exam type, session, time allowed, date, school address, student/roll placeholders and user-defined custom fields.
+- Header fields can be hidden/restored; custom fields can be added, renamed, edited and removed without changing the canonical baseline.
+- Added scoped question-number overrides so one question number can be edited without renumbering or reformatting the whole page.
+- Added working marks engine for question, section and paper totals. Source authority remains immutable; working-copy marks can be manual or automatically recalculated.
+- Question-mark changes recalculate AUTO section totals; section totals recalculate AUTO paper totals. Explicit manual paper totals remain manual until changed.
+- Marks/metadata/number overlays are included in compact draft persistence, validation and atomic reopen/apply.
+- Revert-to-baseline now recreates the working overlay cleanly, including metadata, marks, structured changes and presentation state.
+- Added CanonicalInlineField for isolated in-place metadata/number/marks editing without whole-page formatting side effects.
+- Core metadata/marks/draft/semantic tests: 15/15 PASS.
+- Browser acceptance: header metadata + total marks, question number + question marks, section marks + protected school identity: 3/3 PASS.
+- Final focused migration/invariants/rules/parity/working-model regression: 51/51 PASS.
+- Production frontend build: PASS.
+- Production route remains unchanged; this phase is committed only after regression and build gates pass.
