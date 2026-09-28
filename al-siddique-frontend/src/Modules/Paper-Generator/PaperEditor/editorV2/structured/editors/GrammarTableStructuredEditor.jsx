@@ -27,6 +27,8 @@ export default function GrammarTableStructuredEditor({
   const columns = resolvedNode?.columns || ['Column 1', 'Column 2']
   const rows = resolvedNode?.rows || []
   const docId = store?.getWorkingDocument()?.baseCanonicalDocumentId || ''
+  const leftHeaderKey = buildStructuredControlKey(docId, sectionId, nodeId, 'grammar_header', 'column-0', 'text')
+  const rightHeaderKey = buildStructuredControlKey(docId, sectionId, nodeId, 'grammar_header', 'column-1', 'text')
 
   // Fallback for non-2-column tables
   if (columns.length !== 2) {
@@ -129,6 +131,8 @@ export default function GrammarTableStructuredEditor({
                 dir={dir}
                 disabled={!isEditing}
                 ariaLabel="Column 1 header"
+                controlKey={leftHeaderKey}
+                store={store}
                 style={{ fontWeight: 700, textAlign: 'center' }}
               />
             </th>
@@ -140,6 +144,8 @@ export default function GrammarTableStructuredEditor({
                 dir={dir}
                 disabled={!isEditing}
                 ariaLabel="Column 2 header"
+                controlKey={rightHeaderKey}
+                store={store}
                 style={{ fontWeight: 700, textAlign: 'center' }}
               />
             </th>
@@ -172,6 +178,7 @@ export default function GrammarTableStructuredEditor({
                         disabled={!isEditing}
                         controlKey={leftCtrlKey}
                         ariaLabel={`Row ${idx + 1} left cell`}
+                        store={store}
                       />
                     </div>
                     {isEditing && (
@@ -199,6 +206,7 @@ export default function GrammarTableStructuredEditor({
                         disabled={!isEditing}
                         controlKey={rightCtrlKey}
                         ariaLabel={`Row ${idx + 1} right cell`}
+                        store={store}
                       />
                     </div>
                     {isEditing && (

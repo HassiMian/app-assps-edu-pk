@@ -30,6 +30,7 @@ export default function VerticalMathStructuredEditor({
   const operator = resolvedNode?.operator || '+'
   const result = resolvedNode?.result || null
   const docId = store?.getWorkingDocument()?.baseCanonicalDocumentId || ''
+  const resultCtrlKey = buildStructuredControlKey(docId, sectionId, nodeId, 'vertical_result', 'result', 'raw')
 
   const handleUpdateOperand = (opId, newRaw) => {
     if (!store) return
@@ -178,6 +179,7 @@ export default function VerticalMathStructuredEditor({
                   disabled={!isEditing}
                   controlKey={ctrlKey}
                   ariaLabel={`Operand ${idx + 1}`}
+                  store={store}
                   style={{
                     fontFamily: "'Courier New', Courier, monospace",
                     fontSize: '15px',
@@ -226,7 +228,9 @@ export default function VerticalMathStructuredEditor({
               placeholder="Result"
               dir="ltr"
               disabled={!isEditing}
+              controlKey={resultCtrlKey}
               ariaLabel="Vertical math result"
+              store={store}
               style={{
                 fontFamily: "'Courier New', Courier, monospace",
                 fontSize: '15px',

@@ -23,6 +23,7 @@ export default function FillBlankStructuredEditor({
 }) {
   const segments = resolvedNode?.segments || []
   const wordBank = resolvedNode?.wordBank || []
+  const docId = store?.getWorkingDocument()?.baseCanonicalDocumentId || ''
   const [newWordInput, setNewWordInput] = useState('')
 
   const handleUpdateSegmentText = (segId, newText) => {
@@ -99,6 +100,9 @@ export default function FillBlankStructuredEditor({
         onMoveSegment={handleMoveSegment}
         dir={dir}
         nodeId={nodeId}
+        sectionId={sectionId}
+        documentId={docId}
+        store={store}
       />
 
       {/* 2. Word Bank (if present or if adding in edit mode) */}

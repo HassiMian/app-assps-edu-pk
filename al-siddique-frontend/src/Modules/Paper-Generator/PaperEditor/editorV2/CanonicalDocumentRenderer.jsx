@@ -8,6 +8,7 @@ import NodeStructureControls from './structured/components/NodeStructureControls
 import AddStructuredNodeMenu from './structured/components/AddStructuredNodeMenu.jsx'
 import { resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
 import { buildStructuredControlKey } from './structured/structuredFocusHelpers.js'
+import { resolveStructuredFieldPresentation } from './structured/structuredFieldPresentation.js'
 import { createDefaultInsertedNode } from './structured/structuredNodeDefaults.js'
 import {
   cmdInsertNode,
@@ -18,16 +19,6 @@ import {
 import { buildFieldKey } from './EditorFieldRegistry.js'
 import { getB3NodeEditability, B3_RENDER_STRATEGY } from './nodeRenderStrategy.js'
 import { usePaperStore } from '../../usePaperStore.js'
-
-function resolveStructuredPresentation(presentation, controlKey, fallbackDirection = 'auto') {
-  const raw = presentation?.structuredFieldStyles?.[controlKey] || {}
-  const style = { ...raw }
-  const direction = style.direction || fallbackDirection
-  if (style.paragraphSpacing) style.marginBottom = style.paragraphSpacing
-  delete style.direction
-  delete style.paragraphSpacing
-  return { style, direction }
-}
 
 export default function CanonicalDocumentRenderer({
   workingDoc,
@@ -918,7 +909,7 @@ export default function CanonicalDocumentRenderer({
                                           opt.id || String(oIdx),
                                           'text'
                                         )
-                                        const optionPresentation = resolveStructuredPresentation(pres, optionControlKey, nodeDir)
+                                        const optionPresentation = resolveStructuredFieldPresentation(pres, optionControlKey, nodeDir)
                                         return (
                                           <td
                                             key={opt.id || oIdx}
@@ -1022,7 +1013,7 @@ export default function CanonicalDocumentRenderer({
                                       opt.id || String(idx),
                                       'text'
                                     )
-                                    const optionPresentation = resolveStructuredPresentation(pres, optionControlKey, nodeDir)
+                                    const optionPresentation = resolveStructuredFieldPresentation(pres, optionControlKey, nodeDir)
                                     return (
                                       <div key={opt.id || idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                                         <CanonicalOptionLabel option={opt} index={idx} direction={optionPresentation.direction} />

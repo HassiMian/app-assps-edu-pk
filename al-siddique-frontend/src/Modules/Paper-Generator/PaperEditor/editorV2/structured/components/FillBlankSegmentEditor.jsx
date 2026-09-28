@@ -5,6 +5,7 @@
 import React from 'react'
 import StructuredTextInput from './StructuredTextInput.jsx'
 import StructuredItemControls from './StructuredItemControls.jsx'
+import { buildStructuredControlKey } from '../structuredFocusHelpers.js'
 
 export default function FillBlankSegmentEditor({
   segments = [],
@@ -15,6 +16,9 @@ export default function FillBlankSegmentEditor({
   onMoveSegment,
   dir = 'ltr',
   nodeId = '',
+  sectionId = '',
+  documentId = '',
+  store = null,
 }) {
   return (
     <div className="fill-blank-segment-editor" dir={dir} style={{ marginTop: '6px' }}>
@@ -33,6 +37,9 @@ export default function FillBlankSegmentEditor({
       >
         {segments.map((seg, idx) => {
           const isBlank = seg.type === 'blank'
+          const ctrlKey = !isBlank
+            ? buildStructuredControlKey(documentId, sectionId, nodeId, 'fill_blank_segment', seg.id || String(idx), 'text')
+            : null
           const canMoveUp = idx > 0
           const canMoveDown = idx < segments.length - 1
           const canDelete = segments.length > 1
@@ -73,7 +80,9 @@ export default function FillBlankSegmentEditor({
                     onCommit={(newText) => onUpdateText(seg.id, newText)}
                     placeholder="Enter text..."
                     dir={dir}
+                    controlKey={ctrlKey}
                     ariaLabel={`Text segment ${idx + 1}`}
+                    store={store}
                   />
                 </div>
               )}

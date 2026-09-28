@@ -17,13 +17,23 @@ export default function CanonicalStructuredNodeEditor({
 }) {
   if (!resolvedNode) return null
   const nodeType = resolvedNode.type || resolvedNode.nodeType
-
-  // In view mode (not editing), render the static projection
-  if (!isEditing) {
-    return <CanonicalStaticNode node={resolvedNode} direction={dir} />
+  const workingDoc = store?.getWorkingDocument?.()
+  const structuredContext = {
+    presentation: workingDoc?.presentationOverlay || workingDoc?.presentation || {},
+    documentId: workingDoc?.baseCanonicalDocumentId || '',
+    sectionId,
   }
 
-  // Edit Mode Routers
+  if (!isEditing) {
+    return (
+      <CanonicalStaticNode
+        node={resolvedNode}
+        direction={dir}
+        structuredContext={structuredContext}
+      />
+    )
+  }
+
   switch (nodeType) {
     case 'mcq':
       return (
@@ -98,6 +108,12 @@ export default function CanonicalStructuredNodeEditor({
       )
 
     default:
-      return <CanonicalStaticNode node={resolvedNode} direction={dir} />
+      return (
+        <CanonicalStaticNode
+          node={resolvedNode}
+          direction={dir}
+          structuredContext={structuredContext}
+        />
+      )
   }
 }

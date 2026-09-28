@@ -222,3 +222,138 @@ test('Phase 12 browser: Urdu MCQ edit mode uses semantic label then closing brac
   assert.strictEqual((await label.locator('[data-option-label-text]').textContent()).trim(), 'الف')
   assert.strictEqual((await label.locator('[data-option-bracket]').textContent()).trim(), ')')
 })
+
+
+test('Phase 13 browser: True/False structured field formatting survives static rendering', async () => {
+  const url = `http://localhost:${PORT}/b3-test.html?mode=doc__official-first-term-2026-class-2-science`
+  await page.goto(url, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-tf-structured-editor .structured-text-input', { timeout: 10000 })
+
+  const input = page.locator('.canonical-tf-structured-editor .structured-text-input').first()
+  const originalText = await input.inputValue()
+  await input.click()
+  await page.locator('select[aria-label="Font Size"]').selectOption('16')
+  await page.getByTitle('Bold').click()
+  await page.getByTitle('Align Center').click()
+
+  assert.strictEqual(await input.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await input.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await input.evaluate(element => element.style.textAlign), 'center')
+  assert.strictEqual(await input.inputValue(), originalText)
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const staticStatement = page.locator('[data-node-type="true_false"] .canonical-true-false-node > span').first()
+  assert.strictEqual((await staticStatement.textContent()).trim(), originalText.trim())
+  assert.strictEqual(await staticStatement.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await staticStatement.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await staticStatement.evaluate(element => element.style.textAlign), 'center')
+})
+
+test('Phase 13 browser: grammar-table cell formatting is cell-scoped and static-safe', async () => {
+  const url = `http://localhost:${PORT}/b3-test.html?mode=doc__official-first-term-2026-class-1-urdu`
+  await page.goto(url, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-grammar-structured-editor .structured-text-input', { timeout: 10000 })
+
+  const inputs = page.locator('.canonical-grammar-structured-editor .structured-text-input')
+  assert.ok((await inputs.count()) >= 4)
+  const target = inputs.nth(2)
+  const neighbor = inputs.nth(3)
+  const targetText = await target.inputValue()
+  const neighborWeight = await neighbor.evaluate(element => element.style.fontWeight)
+
+  await target.click()
+  await page.locator('select[aria-label="Font Size"]').selectOption('16')
+  await page.getByTitle('Bold').click()
+  await page.locator('select[aria-label="Line Height"]').selectOption('1.5')
+
+  assert.strictEqual(await target.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await target.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await target.evaluate(element => element.style.lineHeight), '1.5')
+  assert.strictEqual(await neighbor.evaluate(element => element.style.fontWeight), neighborWeight)
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const staticCell = page.locator('[data-node-type="grammar_table"] td').filter({ hasText: targetText }).first()
+  assert.strictEqual(await staticCell.count(), 1)
+  assert.strictEqual(await staticCell.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await staticCell.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await staticCell.evaluate(element => element.style.lineHeight), '1.5')
+})
+
+test('Phase 13 browser: vertical-math operand formatting survives Done Editing', async () => {
+  const url = `http://localhost:${PORT}/b3-test.html?mode=doc__official-first-term-2026-class-1-countdown-mathematics`
+  await page.goto(url, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-vertical-math-editor .structured-text-input', { timeout: 10000 })
+
+  const operand = page.locator('.canonical-vertical-math-editor .structured-text-input').first()
+  const originalText = await operand.inputValue()
+  await operand.click()
+  await page.locator('select[aria-label="Font Size"]').selectOption('16')
+  await page.getByTitle('Bold').click()
+
+  assert.strictEqual(await operand.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await operand.evaluate(element => element.style.fontWeight), 'bold')
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const staticOperand = page.locator('[data-node-type="vertical_math"] .canonical-vertical-math-block span').filter({ hasText: originalText }).last()
+  assert.strictEqual(await staticOperand.count(), 1)
+  assert.strictEqual(await staticOperand.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await staticOperand.evaluate(element => element.style.fontWeight), 'bold')
+})
+
+
+test('Phase 13 browser: fill-blank text-segment formatting is segment-scoped and static-safe', async () => {
+  const url = `http://localhost:${PORT}/b3-test.html?mode=doc__official-first-term-2026-class-1-urdu`
+  await page.goto(url, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-fill-blank-structured-editor .structured-text-input', { timeout: 10000 })
+
+  const inputs = page.locator('.canonical-fill-blank-structured-editor .structured-text-input')
+  assert.ok((await inputs.count()) >= 1)
+  const target = inputs.first()
+  const targetText = await target.inputValue()
+
+  await target.click()
+  await page.locator('select[aria-label="Font Size"]').selectOption('16')
+  await page.getByTitle('Bold').click()
+  await page.locator('select[aria-label="Paragraph Spacing"]').selectOption('6pt')
+
+  assert.strictEqual(await target.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await target.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await target.evaluate(element => element.style.marginBottom), '6pt')
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const staticSegment = page.locator('[data-node-type="fill_blank"] .canonical-fill-blank-node span').filter({ hasText: targetText }).first()
+  assert.strictEqual(await staticSegment.count(), 1)
+  assert.strictEqual(await staticSegment.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await staticSegment.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await staticSegment.evaluate(element => element.style.marginBottom), '6pt')
+})
+
+test('Phase 13 browser: matching-column item formatting stays isolated and survives static rendering', async () => {
+  const url = `http://localhost:${PORT}/b3-test.html?mode=doc__official-first-term-2026-class-2-english`
+  await page.goto(url, { waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.canonical-matching-structured-editor .structured-text-input', { timeout: 10000 })
+
+  const inputs = page.locator('.canonical-matching-structured-editor .structured-text-input')
+  assert.ok((await inputs.count()) >= 2)
+  const target = inputs.first()
+  const neighbor = inputs.nth(1)
+  const targetText = await target.inputValue()
+  const neighborWeight = await neighbor.evaluate(element => element.style.fontWeight)
+
+  await target.click()
+  await page.locator('select[aria-label="Font Size"]').selectOption('16')
+  await page.getByTitle('Bold').click()
+  await page.getByTitle('Align Center').click()
+
+  assert.strictEqual(await target.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await target.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await target.evaluate(element => element.style.textAlign), 'center')
+  assert.strictEqual(await neighbor.evaluate(element => element.style.fontWeight), neighborWeight)
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const staticCell = page.locator('[data-node-type="matching_columns"] td').filter({ hasText: targetText }).first()
+  assert.strictEqual(await staticCell.count(), 1)
+  assert.strictEqual(await staticCell.evaluate(element => element.style.fontSize), '16pt')
+  assert.strictEqual(await staticCell.evaluate(element => element.style.fontWeight), 'bold')
+  assert.strictEqual(await staticCell.evaluate(element => element.style.textAlign), 'center')
+})

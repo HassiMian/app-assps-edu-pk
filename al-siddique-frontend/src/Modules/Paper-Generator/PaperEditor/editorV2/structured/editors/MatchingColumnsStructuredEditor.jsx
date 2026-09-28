@@ -125,6 +125,7 @@ export default function MatchingColumnsStructuredEditor({
                     disabled={!isEditing}
                     controlKey={ctrlKey}
                     ariaLabel={`Left item ${idx + 1}`}
+                    store={store}
                   />
                 </div>
                 {isEditing && (
@@ -213,6 +214,7 @@ export default function MatchingColumnsStructuredEditor({
                     disabled={!isEditing}
                     controlKey={ctrlKey}
                     ariaLabel={`Right item ${labelChar}`}
+                    store={store}
                   />
                 </div>
                 {isEditing && (

@@ -208,3 +208,19 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Final focused migration/invariants/rules/parity/working-model regression: 55/55 PASS.
 - Production frontend build: PASS.
 - Production route remains unchanged.
+
+
+## Phase 13 — Scoped Non-MCQ Structured Formatting Parity (28 Sep 2026)
+- Extended the existing presentation-only structured-field style layer beyond MCQ options; canonical academic source/data remains unchanged.
+- StructuredTextInput formatting now applies to True/False statements, Fill-Blank text segments, Matching-column items, Grammar-table headers/cells, Vertical-Math operands and result fields.
+- Added shared `structuredFieldPresentation` resolver so edit-mode inputs and Done Editing/static rendering consume the same whitelisted style map.
+- Static renderer now resolves the exact same structured control keys used by edit mode for each field, preserving per-field font, size, emphasis, alignment, direction, line-height and paragraph-spacing parity.
+- Formatting one structured field does not alter neighboring cells/items/segments.
+- Fill-Blank blank tokens remain structural blanks; only text segments receive text formatting.
+- Vertical-Math raw numeric strings remain exact; formatting never normalizes or calculates numeric content.
+- Reconciled stale B4 regression fixtures against the current 43-paper canonical authority: 281 MCQs and current semantic node counts; MCQ clipping test now verifies every canonical MCQ rather than an obsolete 11-option fixture.
+- Legacy V1 draft compatibility test now selects a genuinely rich-text-editable field instead of assuming the first corpus node is rich text.
+- Phase 13 browser acceptance: 12/12 PASS, including True/False, Fill Blank, Matching, Grammar Table and Vertical Math edit-to-static parity.
+- Final focused migration/invariants/parity/rules/draft/structured/metadata regression: 81/81 PASS.
+- Production frontend build: PASS.
+- Production route remains unchanged.

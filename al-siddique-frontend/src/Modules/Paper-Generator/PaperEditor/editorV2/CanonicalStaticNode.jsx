@@ -1,11 +1,27 @@
 // CanonicalStaticNode.jsx — Renders Read-Only Specialized Nodes in B3 (Rules 6, 7, 8, 9, 10, 11, 12, 13, 14)
 import React from 'react'
 import CanonicalOptionLabel from './CanonicalOptionLabel.jsx'
+import { buildStructuredControlKey } from './structured/structuredFocusHelpers.js'
+import { resolveStructuredFieldPresentation } from './structured/structuredFieldPresentation.js'
 
-export default function CanonicalStaticNode({ node, direction = 'auto' }) {
+export default function CanonicalStaticNode({ node, direction = 'auto', structuredContext = null }) {
   if (!node) return null
   const type = node.type || node.nodeType
   const dir = direction === 'rtl' ? 'rtl' : (direction === 'ltr' ? 'ltr' : 'auto')
+  const presentation = structuredContext?.presentation || {}
+  const documentId = structuredContext?.documentId || ''
+  const sectionId = structuredContext?.sectionId || ''
+  const fieldPresentation = (kind, itemId = '', subfield = '', fallbackDirection = dir) => {
+    const key = buildStructuredControlKey(
+      documentId,
+      sectionId,
+      node.id || '',
+      kind,
+      itemId,
+      subfield
+    )
+    return resolveStructuredFieldPresentation(presentation, key, fallbackDirection)
+  }
 
   // 1. Section Banner Node (Rule 13)
   if (type === 'section_banner') {
@@ -82,9 +98,10 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
   // 4. True / False Node (Rule 9)
   if (type === 'true_false') {
     const statement = node.statement || node.statementText || node.stemText || ''
+    const statementPresentation = fieldPresentation('true_false', 'statement', 'text', dir)
     return (
       <div className="canonical-true-false-node" dir={dir} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', fontSize: '13px' }}>
-        <span>{statement}</span>
+        <span dir={statementPresentation.direction} style={statementPresentation.style}>{statement}</span>
         {node.hasIndicatorBox && (
           <span
             className="canonical-tf-box"
@@ -117,7 +134,7 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
             if (seg.type === 'blank') {
               return (
                 <span
-                  key={sIdx}
+                  key={seg.id || sIdx}
                   className="canonical-fill-blank-line"
                   style={{
                     display: 'inline-block',
@@ -132,7 +149,21 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
                 </span>
               )
             }
-            return <span key={sIdx}>{seg.value}</span>
+            const segmentPresentation = fieldPresentation(
+              'fill_blank_segment',
+              seg.id || String(sIdx),
+              'text',
+              dir
+            )
+            return (
+              <span
+                key={seg.id || sIdx}
+                dir={segmentPresentation.direction}
+                style={segmentPresentation.style}
+              >
+                {seg.value}
+              </span>
+            )
           })
         ) : (
           <span>{node.fullText || node.rawSource || ''}</span>
@@ -182,11 +213,27 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
               const rItem = right[rIdx]
               const lText = typeof lItem === 'object' && lItem !== null ? (lItem.text || '') : String(lItem || '')
               const rText = typeof rItem === 'object' && rItem !== null ? (rItem.text || '') : String(rItem || '')
+              const lPresentation = lItem && typeof lItem === 'object'
+                ? fieldPresentation('matching', lItem.id || String(rIdx), 'left', dir)
+                : { style: {}, direction: dir }
+              const rPresentation = rItem && typeof rItem === 'object'
+                ? fieldPresentation('matching', rItem.id || String(rIdx), 'right', dir)
+                : { style: {}, direction: dir }
 
               return (
                 <tr key={rIdx} style={{ borderTop: '1px solid #e2e8f0' }}>
-                  <td style={{ padding: '6px 10px', borderRight: '1px solid #cbd5e1' }}>{lText}</td>
-                  <td style={{ padding: '6px 10px' }}>{rText}</td>
+                  <td
+                    dir={lPresentation.direction}
+                    style={{ padding: '6px 10px', borderRight: '1px solid #cbd5e1', ...lPresentation.style }}
+                  >
+                    {lText}
+                  </td>
+                  <td
+                    dir={rPresentation.direction}
+                    style={{ padding: '6px 10px', ...rPresentation.style }}
+                  >
+                    {rText}
+                  </td>
                 </tr>
               )
             })}
@@ -206,31 +253,58 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
           <thead>
             <tr style={{ background: '#f1f5f9', color: '#1e3a8a' }}>
-              {columns.map((colName, cIdx) => (
-                <th
-                  key={cIdx}
-                  style={{
-                    padding: '6px 10px',
-                    borderRight: cIdx < columns.length - 1 ? '1px solid #cbd5e1' : 'none',
-                    textAlign: dir === 'rtl' ? 'right' : 'left',
-                  }}
-                >
-                  {colName}
-                </th>
-              ))}
+              {columns.map((colName, cIdx) => {
+                const headerPresentation = fieldPresentation(
+                  'grammar_header',
+                  `column-${cIdx}`,
+                  'text',
+                  dir
+                )
+                return (
+                  <th
+                    key={cIdx}
+                    dir={headerPresentation.direction}
+                    style={{
+                      padding: '6px 10px',
+                      borderRight: cIdx < columns.length - 1 ? '1px solid #cbd5e1' : 'none',
+                      textAlign: dir === 'rtl' ? 'right' : 'left',
+                      ...headerPresentation.style,
+                    }}
+                  >
+                    {colName}
+                  </th>
+                )
+              })}
             </tr>
           </thead>
           <tbody>
             {rows.map((row, rIdx) => {
               const leftVal = row.leftText || (row.leftIsBlank ? '__________' : '')
               const rightVal = row.rightText || (row.rightIsBlank ? '__________' : '')
+              const leftPresentation = fieldPresentation('grammar', row.id || String(rIdx), 'left', dir)
+              const rightPresentation = fieldPresentation('grammar', row.id || String(rIdx), 'right', dir)
 
               return (
-                <tr key={rIdx} style={{ borderTop: '1px solid #e2e8f0' }}>
-                  <td style={{ padding: '6px 10px', borderRight: '1px solid #cbd5e1', textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+                <tr key={row.id || rIdx} style={{ borderTop: '1px solid #e2e8f0' }}>
+                  <td
+                    dir={leftPresentation.direction}
+                    style={{
+                      padding: '6px 10px',
+                      borderRight: '1px solid #cbd5e1',
+                      textAlign: dir === 'rtl' ? 'right' : 'left',
+                      ...leftPresentation.style,
+                    }}
+                  >
                     {leftVal}
                   </td>
-                  <td style={{ padding: '6px 10px', textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+                  <td
+                    dir={rightPresentation.direction}
+                    style={{
+                      padding: '6px 10px',
+                      textAlign: dir === 'rtl' ? 'right' : 'left',
+                      ...rightPresentation.style,
+                    }}
+                  >
                     {rightVal}
                   </td>
                 </tr>
@@ -262,20 +336,44 @@ export default function CanonicalStaticNode({ node, direction = 'auto' }) {
         }}
       >
         <div style={{ borderBottom: '2px solid #0f172a', padding: '4px 6px' }}>
-          {operands.map((op, oIdx) => (
-            <div key={oIdx} style={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
-              <span style={{ minWidth: '16px', textAlign: 'left' }}>
-                {oIdx === operands.length - 1 ? operator : ''}
-              </span>
-              <span>{op.raw ?? op.normalizedNumericValue ?? ''}</span>
-            </div>
-          ))}
+          {operands.map((op, oIdx) => {
+            const operandPresentation = fieldPresentation(
+              'operand',
+              op.id || String(oIdx),
+              'raw',
+              'ltr'
+            )
+            return (
+              <div key={op.id || oIdx} style={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
+                <span style={{ minWidth: '16px', textAlign: 'left' }}>
+                  {oIdx === operands.length - 1 ? operator : ''}
+                </span>
+                <span
+                  dir={operandPresentation.direction}
+                  style={operandPresentation.style}
+                >
+                  {op.raw ?? op.normalizedNumericValue ?? ''}
+                </span>
+              </div>
+            )
+          })}
         </div>
-        {resultRaw !== null && (
-          <div style={{ padding: '4px 6px', fontWeight: 800 }}>
-            {resultRaw}
-          </div>
-        )}
+        {resultRaw !== null && (() => {
+          const resultPresentation = fieldPresentation(
+            'vertical_result',
+            'result',
+            'raw',
+            'ltr'
+          )
+          return (
+            <div
+              dir={resultPresentation.direction}
+              style={{ padding: '4px 6px', fontWeight: 800, ...resultPresentation.style }}
+            >
+              {resultRaw}
+            </div>
+          )
+        })()}
       </div>
     )
   }

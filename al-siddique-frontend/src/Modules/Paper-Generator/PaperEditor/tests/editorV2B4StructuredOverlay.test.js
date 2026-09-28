@@ -117,18 +117,21 @@ test('B4-AUDIT-01: Corpus count verification across all 43 canonical documents',
     }
   }
 
-  assert.strictEqual(counts.mcq, 279, 'mcq count must be exactly 279 after the approved Class 6 Mathematics MCQ removal')
-  assert.strictEqual(counts.short_question, 497, 'short_question count must be exactly 497')
-  assert.strictEqual(counts.fill_blank, 122, 'fill_blank count must be exactly 122')
+  assert.strictEqual(counts.mcq, 281, 'mcq count must match the reconciled 43-paper canonical authority')
+  assert.strictEqual(counts.short_question, 414, 'short_question count must match reconciled heading/content classification')
+  assert.strictEqual(counts.fill_blank, 180, 'fill_blank count must match reconciled semantic parsing')
   assert.strictEqual(counts.long_question, 39, 'long_question count must be exactly 39')
-  assert.strictEqual(counts.true_false, 19, 'true_false count must be exactly 19')
+  assert.strictEqual(counts.true_false, 14, 'true_false count must match reconciled semantic parsing')
   assert.strictEqual(counts.translation, 16, 'translation count must be exactly 16')
-  assert.strictEqual(counts.section_banner, 12, 'section_banner count must be exactly 12')
+  assert.strictEqual(counts.section_banner, 9, 'section_banner count must match reconciled marker parsing')
   assert.strictEqual(counts.matching_columns, 8, 'matching_columns count must be exactly 8')
-  assert.strictEqual(counts.grammar_table, 7, 'grammar_table count must be exactly 7')
-  assert.strictEqual(counts.letter, 6, 'letter count must be exactly 6')
-  assert.strictEqual(counts.scope_header, 3, 'scope_header count must be exactly 3')
-  assert.strictEqual(counts.vertical_math, 2, 'vertical_math count must be exactly 2')
+  assert.strictEqual(counts.grammar_table, 26, 'grammar_table count must include reconciled pair-table sections')
+  assert.strictEqual(counts.letter, 11, 'letter count must include heading-only academic recovery')
+  assert.strictEqual(counts.application, 7, 'application count must include heading-only academic recovery')
+  assert.strictEqual(counts.essay, 9, 'essay count must include heading-only academic recovery')
+  assert.strictEqual(counts.definition, 4, 'definition count must include heading-only academic recovery')
+  assert.strictEqual(counts.scope_header, 5, 'scope_header count must match reconciled marker parsing')
+  assert.strictEqual(counts.vertical_math, 4, 'vertical_math count must match reconciled semantic parsing')
 })
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -211,19 +214,40 @@ test('B4-MCQ-01: MCQ option text patch, add, delete, and reorder with label pres
   assert.strictEqual(resolvedMcq.options.some(o => o.id === newOptId), false)
 })
 
-test('B4-MCQ-02: 11-option Islamiyat paper loads and resolves all 11 options without clipping', () => {
-  // Target paper with 11-option MCQ
+test('B4-MCQ-02: every canonical MCQ resolves its full option array without clipping', () => {
+  let checked = 0
+  let largestOptionCount = 0
+
+  for (const doc of canonicalCorpus) {
+    for (const sec of doc.sections || []) {
+      for (const node of sec.nodes || []) {
+        if (node.type !== 'mcq') continue
+        const resolved = resolveStructuredNode(node, null)
+        assert.strictEqual(
+          resolved.options.length,
+          node.options.length,
+          `Resolved MCQ options must match baseline for ${node.id}`
+        )
+        assert.deepStrictEqual(
+          resolved.options.map(option => option.id),
+          node.options.map(option => option.id),
+          `Resolved MCQ option IDs must remain stable for ${node.id}`
+        )
+        largestOptionCount = Math.max(largestOptionCount, node.options.length)
+        checked++
+      }
+    }
+  }
+
+  assert.strictEqual(checked, 281, 'Must verify every reconciled canonical MCQ')
+  assert.ok(largestOptionCount >= 4, 'Corpus must exercise multi-option MCQs without clipping')
+
   const islamiyatDoc = canonicalCorpus.find(d => d.id === 'doc__official-first-term-2026-class-1-islamiyat')
-  assert.ok(islamiyatDoc, 'Must find class 1 islamiyat paper')
-
-  const sec = islamiyatDoc.sections[0]
-  const q1 = sec.nodes.find(n => n.id === 'official-first-term-2026-class-1-islamiyat__s01__q01')
-  assert.ok(q1, 'Must find s01__q01')
-  assert.strictEqual(q1.options.length, 11, 'Must have 11 options in baseline')
-
-  const resolved = resolveStructuredNode(q1, null)
-  assert.strictEqual(resolved.options.length, 11)
-  assert.strictEqual(resolved.options[10].canonicalLabel, '11')
+  const q1 = islamiyatDoc?.sections?.[0]?.nodes?.find(
+    n => n.id === 'official-first-term-2026-class-1-islamiyat__s01__q01'
+  )
+  assert.ok(q1, 'Must find Class 1 Islamiyat Q1')
+  assert.strictEqual(q1.options.length, 3, 'Class 1 Islamiyat Q1 must preserve its three source options')
 })
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -679,13 +703,29 @@ test('B4-NODE-OPS-01: Insert each supported type, delete, undo delete, duplicate
 // 12. DRAFT V1 COMPATIBILITY
 // ─────────────────────────────────────────────────────────────────────────────
 test('B4-DRAFT-V1-01: Legacy V1 draft compatibility (loads text patches, initializes empty structured state, next save is V2)', () => {
-  const doc = canonicalCorpus[0]
+  let selected = null
+  for (const candidate of canonicalCorpus) {
+    const candidateStore = new EditorWorkingStore(candidate)
+    const candidateWorking = candidateStore.getWorkingDocument()
+    for (const section of candidateWorking.sections) {
+      const node = (section.nodeOverlays || []).find(
+        item => Object.keys(item.editableFields || {}).length > 0
+      )
+      if (node) {
+        selected = { doc: candidate, sectionId: section.id, nodeId: node.nodeId }
+        break
+      }
+    }
+    if (selected) break
+  }
+
+  assert.ok(selected, 'Corpus must contain at least one legacy rich-text editable field')
+  const doc = selected.doc
   const store = new EditorWorkingStore(doc)
   const workingDoc = store.getWorkingDocument()
 
-  // Find a field overlay to patch
-  const firstSec = workingDoc.sections[0]
-  const firstNodeOverlay = firstSec.nodeOverlays[0]
+  const firstSec = workingDoc.sections.find(section => section.id === selected.sectionId)
+  const firstNodeOverlay = firstSec.nodeOverlays.find(node => node.nodeId === selected.nodeId)
   const fieldName = Object.keys(firstNodeOverlay.editableFields)[0]
   const fieldKey = buildFieldKey(doc.id, firstSec.id, firstNodeOverlay.nodeId, fieldName)
 

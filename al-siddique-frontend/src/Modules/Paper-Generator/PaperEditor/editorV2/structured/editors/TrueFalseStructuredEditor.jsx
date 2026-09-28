@@ -59,6 +59,7 @@ export default function TrueFalseStructuredEditor({
           disabled={!isEditing}
           controlKey={ctrlKey}
           ariaLabel="True/False statement text"
+          store={store}
         />
       </div>
 
