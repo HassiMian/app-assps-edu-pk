@@ -104,8 +104,9 @@ export function extractOfficialV13AcademicProjection(paper) {
     totalMarks: config.totalMarks ?? null,
     session: config.session ?? '',
     paperCode: config.paperCode ?? '',
-    timeAllowed: config.timeAllowed ?? '',
-    examDate: config.examDate ?? '',
+    // examDate and timeAllowed are intentionally excluded from pristine academic identity.
+    // They are operational/header metadata and may be refreshed by the official schedule
+    // or edited in the canonical working copy without changing academic content.
     ...(config.instructions !== undefined ? { instructions: config.instructions } : {}),
   }
 

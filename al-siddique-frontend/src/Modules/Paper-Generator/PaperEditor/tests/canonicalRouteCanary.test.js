@@ -92,3 +92,30 @@ test('Phase 15: canonical official document can enter canary editor but remains 
     'word_editor'
   )
 })
+
+test('Phase 16: schedule-only header metadata changes remain canonical-safe', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-1-countdown-mathematics')
+  assert.ok(source)
+
+  const scheduled = structuredClone(source)
+  scheduled.config.examDate = '2026-09-30'
+  scheduled.config.timeAllowed = '2 Hours'
+
+  assert.strictEqual(isPristineOfficialV13Paper(scheduled), true)
+  const decision = resolvePaperEditorRoute(scheduled)
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.resolvedPaper?.metadata?.examDate, '2026-09-30')
+  assert.strictEqual(decision.resolvedPaper?.metadata?.timeAllowed, '2 Hours')
+})
+
+test('Phase 16: academic marks mutation still fails pristine canonical guard', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
+  assert.ok(source)
+
+  const modified = structuredClone(source)
+  modified.config.totalMarks = Number(modified.config.totalMarks || 0) + 1
+
+  assert.strictEqual(isPristineOfficialV13Paper(modified), false)
+  const decision = resolvePaperEditorRoute(modified)
+  assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2')
+})

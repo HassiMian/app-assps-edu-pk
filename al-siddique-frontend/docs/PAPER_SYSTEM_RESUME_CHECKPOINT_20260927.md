@@ -253,3 +253,18 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Production frontend build: PASS.
 - Phase 14 all-43 render/static/print parity remains 43/43 PASS.
 - This phase adds canary capability only; it does not flip the default production route.
+
+## Phase 16 — Real Product Canonical Canary Acceptance (28 Sep 2026)
+- Added a dedicated browser harness around the real AuthProvider + PaperGenerator + Saved Papers flow; this is not the isolated B3 editor harness.
+- The acceptance path exercises: Saved Papers -> Load & Preview -> PaperGenerator routing -> PaperEditorRouter -> Canonical V2.
+- Initial real-browser canary exposed a system-level guard bug: official saved-paper seeding may refresh `examDate` and `timeAllowed` from the final exam schedule, but the pristine guard incorrectly treated those editable header fields as academic identity.
+- Corrected pristine V13 comparison so schedule-only `examDate` / `timeAllowed` changes do not force legacy fallback. Academic content, section structure and total marks remain protected by the pristine guard.
+- Canonical migration continues to carry the refreshed date/time metadata into the canonical document; the fix does not discard operational schedule data.
+- Added regression proving schedule-only metadata remains canonical-safe.
+- Added regression proving an academic total-marks mutation still fails the pristine guard and falls back to legacy.
+- Real PaperGenerator canary acceptance: all 43/43 seeded official V13 papers open through the full product chain in Canonical V2.
+- Canary-off control: official paper still opens in the stable `build` Paper Workspace; default production route remains unchanged.
+- Focused migration/parity/editor/marks/structured/routing regression: 78/78 PASS.
+- Production frontend build: PASS.
+- No production default-route switch or deployment was performed in this phase.
+- Next: prepare a controlled production-readiness decision gate using the accumulated semantic, render/print and real-route canary evidence; do not remove the legacy fallback until post-cutover rollback criteria are defined and verified.
