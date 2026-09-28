@@ -131,3 +131,14 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Focused migration/editor/rules regression: 36/36 PASS.
 - Production frontend build: PASS.
 - Production routing remains unchanged; Canonical V2 is still under shadow-parity validation.
+
+## Phase 8 — Permanent All-43 Semantic Shadow-Parity Gate (28 Sep 2026)
+- Added reusable `auditCanonicalSemanticParity` instead of relying on temporary diagnostic commands.
+- Added CLI audit `scripts/audit_canonical_semantic_parity.mjs` for repeatable release/convergence checks.
+- Added `canonicalSemanticParity.test.js` so parity failures block regression runs.
+- Gate validates paper/section mapping, heading/content source coverage, academic-node presence, strict semantic node families, marker isolation, and exact MCQ prompt/option parity.
+- Current gate result: 43 papers, 242 source sections, 242 canonical sections, 35 MCQ sections, 33 heading-only academic sections.
+- Current hard issues: 0. Warnings: 0. Unknown-preserved nodes: 0.
+- Heading-only regression fixtures explicitly cover Class 2 English essay and Class 2 Urdu essay provenance/stems.
+- MCQ regression verifies live-parser versus canonical row/prompt/options equivalence.
+- Canonical routing is still not switched to production; this gate is a prerequisite, not a deployment authorization.
