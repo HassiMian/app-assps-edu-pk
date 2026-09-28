@@ -329,3 +329,15 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Post-cleanup focused regression: 26/26 PASS.
 - Post-cleanup production frontend build: PASS.
 - No production redeploy required for this batch because removed files were not in the runtime dependency graph.
+
+## Phase 19 — Local Workspace Quarantine Cleanup (28 Sep 2026)
+- Audited untracked workspace noise separately from tracked runtime code; no blind deletion was performed.
+- Untracked inventory before quarantine: 197 non-ignored files, approximately 12.3 MB.
+- Categories included runtime QA artifacts, PDFs/PNGs/JSON reports, diagnostic scripts, deployment scripts, repair utilities and three source backup snapshots.
+- Audited the four untracked files under `src/`: three were explicit backup snapshots; `smartBulkParser.js` had zero tracked references.
+- All 197 untracked files were moved, not deleted, to:
+  `C:\Users\Imac\Desktop\al-siddique-os\paper-generator-untracked-archive-20260928`
+- Archive preserves original relative paths.
+- `MANIFEST.csv` records every archived file with byte size and SHA-256 hash.
+- Repository working tree after quarantine: clean.
+- Ignored/secrets-managed files were not included in this move.
