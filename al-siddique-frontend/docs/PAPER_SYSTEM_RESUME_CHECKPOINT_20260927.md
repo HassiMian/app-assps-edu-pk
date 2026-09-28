@@ -159,3 +159,17 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Final focused migration/invariants/rules/parity/working-model regression: 51/51 PASS.
 - Production frontend build: PASS.
 - Production route remains unchanged; this phase is committed only after regression and build gates pass.
+
+## Phase 10 — Granular Section Title / Instruction Editing (28 Sep 2026)
+- Converted section title and section instructions from read-only renderer text into independent working-copy overlays.
+- Existing section titles are edited in place; sections without a title expose an edit-only add-title field that does not print while empty.
+- Existing instructions are edited in place; sections without instructions expose an edit-only add-instruction field that does not print while empty.
+- Section title edits update the working title/heading consistently; RTL sections keep the working Urdu title aligned with the same section overlay.
+- Added dedicated `sectionPatch` draft payload instead of mixing section text with marks, metadata or presentation state.
+- Section patches are strictly validated against canonical section IDs and the allowed fields: title, titleUrdu, heading, instructions.
+- Draft reopen/apply restores section text atomically; canonical source/provenance remains immutable.
+- Section text dirty state participates in document dirty/revert behavior without affecting neighboring questions.
+- Focused section/draft/browser regression: 12/12 PASS.
+- Final migration/invariants/rules/parity/working-model regression: 52/52 PASS.
+- Production frontend build: PASS.
+- Production route remains unchanged.

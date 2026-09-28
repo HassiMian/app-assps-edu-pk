@@ -176,6 +176,34 @@ export function validateWorkingDraft(draft, canonicalDoc) {
     }
   }
 
+  // Optional section title/instruction overlay validation.
+  if (draft.sectionPatch !== undefined && draft.sectionPatch !== null) {
+    if (typeof draft.sectionPatch !== 'object' || Array.isArray(draft.sectionPatch)) {
+      return { valid: false, error: 'sectionPatch must be an object' }
+    }
+    const allowedSectionFields = new Set(['title', 'titleUrdu', 'heading', 'instructions'])
+    const canonicalSectionIds = canonicalDoc
+      ? new Set((canonicalDoc.sections || []).map(section => section.id))
+      : null
+
+    for (const [sectionId, patch] of Object.entries(draft.sectionPatch)) {
+      if (!patch || typeof patch !== 'object' || Array.isArray(patch)) {
+        return { valid: false, error: `Invalid section patch '${sectionId}'` }
+      }
+      if (canonicalSectionIds && !canonicalSectionIds.has(sectionId)) {
+        return { valid: false, error: `Unknown section patch '${sectionId}'` }
+      }
+      for (const [fieldName, value] of Object.entries(patch)) {
+        if (!allowedSectionFields.has(fieldName)) {
+          return { valid: false, error: `Unsupported section field '${fieldName}'` }
+        }
+        if (value !== null && typeof value !== 'string') {
+          return { valid: false, error: `sectionPatch.${sectionId}.${fieldName} must be string or null` }
+        }
+      }
+    }
+  }
+
   // Optional marks / numbering overlay validation.
   if (draft.marksPatch !== undefined && draft.marksPatch !== null) {
     if (typeof draft.marksPatch !== 'object' || Array.isArray(draft.marksPatch)) {

@@ -598,15 +598,55 @@ export default function CanonicalDocumentRenderer({
                       textAlign: isUrdu ? 'right' : 'left',
                     }}
                   >
-                    {isUrdu ? (section.titleUrdu || section.title) : section.title}
+                    <CanonicalInlineField
+                      value={isUrdu ? (section.titleUrdu || section.title || '') : (section.title || '')}
+                      onCommit={(value) => store?.setSectionTitle?.(section.id, value)}
+                      isEditing={isEditing}
+                      placeholder="Section title"
+                      ariaLabel={'Section ' + (sIdx + 1) + ' title'}
+                      minWidth="120px"
+                      textAlign={secDir === 'rtl' ? 'right' : 'left'}
+                      style={{
+                        fontSize: isHalf ? '13px' : '15px',
+                        fontWeight: 800,
+                        color: '#1e3a8a',
+                        background: isEditing ? 'rgba(255,255,255,0.7)' : 'transparent',
+                      }}
+                    />
                   </h2>
                 </div>
               )}
 
-              {/* Instructions if present */}
-              {section.instructions && (
-                <div style={{ fontSize: '11px', fontStyle: 'italic', color: '#475569', marginBottom: '6px' }}>
-                  {section.instructions}
+              {!hasSectionHeading && isEditing && (
+                <div className="no-print" style={{ marginBottom: '6px', fontSize: '10px', color: '#64748b' }}>
+                  <CanonicalInlineField
+                    value=""
+                    onCommit={(value) => store?.setSectionTitle?.(section.id, value)}
+                    isEditing
+                    placeholder="+ Add section title"
+                    ariaLabel={'Section ' + (sIdx + 1) + ' title'}
+                    minWidth="110px"
+                    textAlign={secDir === 'rtl' ? 'right' : 'left'}
+                    style={{ fontSize: '10px', color: '#64748b' }}
+                  />
+                </div>
+              )}
+
+              {(section.instructions || isEditing) && (
+                <div
+                  className={!section.instructions && isEditing ? 'no-print' : undefined}
+                  style={{ fontSize: '11px', fontStyle: 'italic', color: '#475569', marginBottom: '6px' }}
+                >
+                  <CanonicalInlineField
+                    value={section.instructions || ''}
+                    onCommit={(value) => store?.setSectionInstructions?.(section.id, value)}
+                    isEditing={isEditing}
+                    placeholder="+ Add instruction"
+                    ariaLabel={'Section ' + (sIdx + 1) + ' instruction'}
+                    minWidth="120px"
+                    textAlign={secDir === 'rtl' ? 'right' : 'left'}
+                    style={{ fontSize: '11px', fontStyle: 'italic', color: '#475569' }}
+                  />
                 </div>
               )}
 

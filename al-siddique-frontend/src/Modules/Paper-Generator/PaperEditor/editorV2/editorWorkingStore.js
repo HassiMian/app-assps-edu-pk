@@ -138,6 +138,7 @@ export class EditorWorkingStore {
 
     for (const sec of this._workingDoc.sections || []) {
       marksDirty = marksDirty || Boolean(sec.sectionMarksDirty)
+      if (sec.sectionTextDirty?.title || sec.sectionTextDirty?.instructions) textDirty = true
       for (const node of sec.nodeOverlays || []) {
         marksDirty = marksDirty || Boolean(node.nodeMarksDirty)
         numberingDirty = numberingDirty || Boolean(node.displayNumberDirty)
@@ -260,6 +261,45 @@ export class EditorWorkingStore {
       this._recomputeDocumentDirty()
       this._notify()
     }
+    return true
+  }
+
+  setSectionTitle(sectionId, value) {
+    const section = this._workingDoc.sections.find(sec => sec.id === sectionId)
+    const baseline = this._baselineDoc.sections?.find(sec => sec.id === sectionId)
+    if (!section || !baseline) return false
+
+    const normalized = value === null || value === undefined ? '' : String(value)
+    const isRtl = section.direction === 'rtl'
+    const baselineDisplay = isRtl
+      ? String(baseline.titleUrdu || baseline.title || '')
+      : String(baseline.title || '')
+
+    section.title = normalized
+    section.heading = normalized
+    if (isRtl) section.titleUrdu = normalized || null
+    section.sectionTextDirty = section.sectionTextDirty || { title: false, instructions: false }
+    section.sectionTextDirty.title = normalized !== baselineDisplay
+
+    this._recomputeDocumentDirty()
+    this._notify()
+    return true
+  }
+
+  setSectionInstructions(sectionId, value) {
+    const section = this._workingDoc.sections.find(sec => sec.id === sectionId)
+    const baseline = this._baselineDoc.sections?.find(sec => sec.id === sectionId)
+    if (!section || !baseline) return false
+
+    const normalized = value === null || value === undefined ? '' : String(value)
+    const baselineValue = String(baseline.instructions || '')
+
+    section.instructions = normalized || null
+    section.sectionTextDirty = section.sectionTextDirty || { title: false, instructions: false }
+    section.sectionTextDirty.instructions = normalized !== baselineValue
+
+    this._recomputeDocumentDirty()
+    this._notify()
     return true
   }
 
@@ -1122,6 +1162,21 @@ export class EditorWorkingStore {
       metadataPatch.hiddenHeaderFields = [...(this._workingDoc.metadata.hiddenHeaderFields || [])]
     }
 
+    const sectionPatch = {}
+
+    for (const sec of this._workingDoc.sections || []) {
+      const patch = {}
+      if (sec.sectionTextDirty?.title) {
+        patch.title = sec.title
+        patch.heading = sec.heading
+        patch.titleUrdu = sec.titleUrdu
+      }
+      if (sec.sectionTextDirty?.instructions) {
+        patch.instructions = sec.instructions
+      }
+      if (Object.keys(patch).length > 0) sectionPatch[sec.id] = patch
+    }
+
     const marksPatch = {
       paper: this._workingDoc.marks?.paperMarksDirty
         ? {
@@ -1166,12 +1221,13 @@ export class EditorWorkingStore {
       Object.keys(metadataPatch.fields).length > 0 ||
       metadataPatch.customFields !== null ||
       metadataPatch.hiddenHeaderFields !== null
+    const hasSectionEdits = Object.keys(sectionPatch).length > 0
     const hasMarksEdits =
       Boolean(marksPatch.paper) ||
       Object.keys(marksPatch.sections).length > 0 ||
       Object.keys(marksPatch.nodes).length > 0
 
-    const isV2 = forceV2 || hasStructuredEdits || hasMetadataEdits || hasMarksEdits
+    const isV2 = forceV2 || hasStructuredEdits || hasMetadataEdits || hasSectionEdits || hasMarksEdits
 
     const draft = {
       draftFormat: 'assps-canonical-working-draft',
@@ -1181,6 +1237,7 @@ export class EditorWorkingStore {
       savedAt: new Date().toISOString(),
       fieldPatches,
       metadataPatch,
+      sectionPatch,
       marksPatch,
       presentationPatch: {
         isDirty: Boolean(this._workingDoc.presentation.isDirty),
@@ -1223,6 +1280,7 @@ export class EditorWorkingStore {
     const patches = compactDraft.fieldPatches || {}
     const structured = compactDraft.structured || null
     const metadataPatch = compactDraft.metadataPatch || { fields: {}, customFields: null, hiddenHeaderFields: null }
+    const sectionPatch = compactDraft.sectionPatch || {}
     const marksPatch = compactDraft.marksPatch || { paper: null, sections: {}, nodes: {} }
 
     // 1. PREFLIGHT text patches: all keys must resolve
@@ -1277,6 +1335,32 @@ export class EditorWorkingStore {
         const maxSeq = computeMaxSequenceFromStructured(structured)
         const savedSeq = structured.nextUserStructureSequence || 1
         candidateAllocator.advanceTo(Math.max(maxSeq, savedSeq - 1))
+      }
+
+      // Apply section text overlays before metadata/marks. Canonical source remains immutable.
+      for (const [sectionId, patch] of Object.entries(sectionPatch)) {
+        const section = candidateDoc.sections.find(sec => sec.id === sectionId)
+        if (!section) {
+          return { status: 'INVALID_DRAFT', error: `UNKNOWN_SECTION_PATCH: '${sectionId}'` }
+        }
+        if (Object.prototype.hasOwnProperty.call(patch, 'title')) {
+          section.title = patch.title ?? ''
+          section.heading = Object.prototype.hasOwnProperty.call(patch, 'heading')
+            ? (patch.heading ?? '')
+            : section.title
+          if (section.direction === 'rtl') {
+            section.titleUrdu = Object.prototype.hasOwnProperty.call(patch, 'titleUrdu')
+              ? (patch.titleUrdu ?? null)
+              : (section.title || null)
+          } else if (Object.prototype.hasOwnProperty.call(patch, 'titleUrdu')) {
+            section.titleUrdu = patch.titleUrdu ?? null
+          }
+          section.sectionTextDirty.title = true
+        }
+        if (Object.prototype.hasOwnProperty.call(patch, 'instructions')) {
+          section.instructions = patch.instructions ?? null
+          section.sectionTextDirty.instructions = true
+        }
       }
 
       // Apply metadata overlay. School name/logo are not part of editable metadata.
@@ -1372,6 +1456,7 @@ export class EditorWorkingStore {
         Array.isArray(metadataPatch.customFields) ||
         Array.isArray(metadataPatch.hiddenHeaderFields)
       )
+      const hasSectionDirty = Object.keys(sectionPatch || {}).length > 0
       const hasMarksDirty = Boolean(
         marksPatch.paper ||
         Object.keys(marksPatch.sections || {}).length > 0 ||
@@ -1384,6 +1469,7 @@ export class EditorWorkingStore {
         hasDirtyField ||
         hasStructuredDirty ||
         hasMetadataDirty ||
+        hasSectionDirty ||
         hasMarksDirty ||
         candidateDoc.presentation.isDirty
       )

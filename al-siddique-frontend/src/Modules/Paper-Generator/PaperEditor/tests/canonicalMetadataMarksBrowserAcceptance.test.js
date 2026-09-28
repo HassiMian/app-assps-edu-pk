@@ -116,3 +116,23 @@ test('Phase 9 browser: section marks edit does not mutate school identity', asyn
   assert.strictEqual(await page.locator('.canonical-school-header h1').textContent(), schoolName)
   assert.strictEqual(await page.locator('.canonical-school-header img').count(), logoCount)
 })
+
+
+test('Phase 10 browser: section title and instruction edit independently', async () => {
+  const titleField = page.locator('[data-canonical-inline-editor][aria-label="Section 1 title"]').first()
+  const instructionField = page.locator('[data-canonical-inline-editor][aria-label="Section 1 instruction"]').first()
+
+  assert.strictEqual(await titleField.count(), 1)
+  assert.strictEqual(await instructionField.count(), 1)
+
+  const beforeNodeIds = await page.locator('[data-node-id]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-node-id')))
+
+  await replaceInline(titleField, 'Section A — Browser Edited')
+  await replaceInline(instructionField, 'Attempt all questions carefully.')
+
+  assert.strictEqual((await titleField.textContent()).trim(), 'Section A — Browser Edited')
+  assert.strictEqual((await instructionField.textContent()).trim(), 'Attempt all questions carefully.')
+
+  const afterNodeIds = await page.locator('[data-node-id]').evaluateAll(nodes => nodes.map(node => node.getAttribute('data-node-id')))
+  assert.deepStrictEqual(afterNodeIds, beforeNodeIds)
+})

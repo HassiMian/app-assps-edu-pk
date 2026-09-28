@@ -116,3 +116,45 @@ test('question display number override is independent and draft-safe', () => {
   assert.strictEqual(reopened.applyCompactDraft(draft).status, 'APPLIED')
   assert.strictEqual(reopened.getNodeDisplayNumber(section.id, node.nodeId, 1), '3A')
 })
+
+
+test('section title and instructions are independent draft-safe working overlays', () => {
+  const doc = canonicalCorpus.find(item => item.id.includes('class-6-science'))
+  assert.ok(doc)
+
+  const baselineHash = crypto.createHash('sha256').update(JSON.stringify(doc)).digest('hex')
+  const store = new EditorWorkingStore(doc)
+  const working = store.getWorkingDocument()
+  const section = working.sections.find(item => (item.title || '').length > 0)
+  assert.ok(section)
+
+  const originalTitle = section.title
+  const originalInstructions = section.instructions
+
+  assert.strictEqual(store.setSectionTitle(section.id, 'Section A — Revised Working Title'), true)
+  assert.strictEqual(store.setSectionInstructions(section.id, 'Attempt all questions carefully.'), true)
+
+  assert.strictEqual(section.title, 'Section A — Revised Working Title')
+  assert.strictEqual(section.instructions, 'Attempt all questions carefully.')
+  assert.strictEqual(section.sectionTextDirty.title, true)
+  assert.strictEqual(section.sectionTextDirty.instructions, true)
+
+  const draft = store.exportCompactDraft()
+  assert.strictEqual(draft.draftVersion, 2)
+  assert.strictEqual(draft.sectionPatch[section.id].title, 'Section A — Revised Working Title')
+  assert.strictEqual(draft.sectionPatch[section.id].instructions, 'Attempt all questions carefully.')
+  assert.strictEqual(validateWorkingDraft(draft, doc).valid, true)
+
+  const reopened = new EditorWorkingStore(doc)
+  assert.strictEqual(reopened.applyCompactDraft(draft).status, 'APPLIED')
+  const reopenedSection = reopened.getWorkingDocument().sections.find(item => item.id === section.id)
+  assert.strictEqual(reopenedSection.title, 'Section A — Revised Working Title')
+  assert.strictEqual(reopenedSection.instructions, 'Attempt all questions carefully.')
+
+  const afterHash = crypto.createHash('sha256').update(JSON.stringify(reopened.getBaselineDocument())).digest('hex')
+  assert.strictEqual(afterHash, baselineHash)
+
+  // Restore-to-source values clears dirty state through normal setters.
+  assert.strictEqual(reopened.setSectionTitle(section.id, originalTitle || ''), true)
+  assert.strictEqual(reopened.setSectionInstructions(section.id, originalInstructions || ''), true)
+})

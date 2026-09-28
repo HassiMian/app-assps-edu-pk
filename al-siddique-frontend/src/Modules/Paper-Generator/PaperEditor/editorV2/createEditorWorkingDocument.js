@@ -200,6 +200,10 @@ export function createSectionOverlay(section) {
     attemptCount: Number.isFinite(section.attemptCount) ? Number(section.attemptCount) : null,
     actualItemCount: Number.isFinite(section.actualItemCount) ? Number(section.actualItemCount) : null,
     formula: section.formula || null,
+    sectionTextDirty: {
+      title: false,
+      instructions: false,
+    },
     layout: {
       layoutMode: section.layout?.layoutMode || 'compact-grid',
       columns: section.layout?.columns || 4,
