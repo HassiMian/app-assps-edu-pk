@@ -315,3 +315,17 @@ Class 7 Social Studies: 4 sections, 10 MCQs, marks ledger 50/50, Urdu bracket ge
 - Post-deploy emergency rollback acceptance: `canonicalLegacy=1` opens stable Paper Workspace and renders zero canonical surfaces.
 - Production QA console errors: 0.
 - Production cutover status: `CANONICAL_V5_LIVE_VERIFIED`.
+
+## Phase 19 — Dependency-Aware Paper Generator Cleanup, Batch 1 (28 Sep 2026)
+- Started post-cutover cleanup only after Canonical V5 production verification; legacy rollback compatibility remains protected.
+- Tracked Paper Generator inventory before cleanup: 175 files, including 161 JS/JSX/MJS code files.
+- Runtime import graph roots include PaperGenerator, OnlineTest, QuestionBank and shared usePaperStore; 122 code files are runtime-reachable.
+- Test/reference graph remains intentionally broader; normalization, canonical semantic-audit and marks-evidence modules are test/reference dependencies and were NOT removed.
+- Protected modules remain untouched: Question Bank, Daily Diary, Lesson Planning, Early Years, Board Pattern and legacy rollback editor.
+- Proven zero-reference tracked files:
+  - `manualPaperParser.js` — retired manual-draft parser; zero repository references, zero test references, unchanged since initial split snapshot.
+  - `unifiedPatternLibrary.js` — abandoned unified/board-pattern library; zero repository references, zero test references, unchanged since initial split snapshot.
+- Removed only those two proven-dead tracked files.
+- Post-cleanup focused regression: 26/26 PASS.
+- Post-cleanup production frontend build: PASS.
+- No production redeploy required for this batch because removed files were not in the runtime dependency graph.
