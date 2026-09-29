@@ -94,6 +94,38 @@ test('EY-BROWSER-PREMIUM: premium child templates and Paper Workspace classics c
   assert.ok(options.includes('Pencil & Paper'))
 })
 
+test('EY-BROWSER-SKETCH-V2: every sketch used by the 9 Early Years papers resolves to professional-v2 line art', async () => {
+  const usedSketchIds = [
+    'sketch.apple.v1','sketch.banana.v1','sketch.butterfly.v1','sketch.caterpillar.v1',
+    'sketch.chicken.v1','sketch.cricket-bat.v1','sketch.doll.v1','sketch.fish.v1',
+    'sketch.flower.v1','sketch.grapes.v1','sketch.hand-fan.v1','sketch.kite.v1',
+    'sketch.lion.v1','sketch.mango.v1','sketch.mouse.v1','sketch.pencil.v1','sketch.tomato.v1'
+  ]
+  const result = await page.evaluate(async (ids) => {
+    const module = await import('/src/Modules/Paper-Generator/PaperEditor/earlyYears/assets/SketchAssetRegistry.js')
+    return ids.map((id) => {
+      const asset = module.getSketchAsset(id)
+      return {
+        id,
+        qualityVersion: asset?.qualityVersion || '',
+        source: asset?.source || '',
+        printSafe: asset?.printSafe === true,
+        svgContent: asset?.svgContent || '',
+      }
+    })
+  }, usedSketchIds)
+
+  assert.equal(result.length, 17)
+  for (const asset of result) {
+    assert.equal(asset.qualityVersion, 'professional-v2', `${asset.id} must use professional-v2 geometry`)
+    assert.equal(asset.source, 'BUILTIN')
+    assert.equal(asset.printSafe, true)
+    assert.match(asset.svgContent, /stroke-linecap="round"/)
+    assert.match(asset.svgContent, /stroke-linejoin="round"/)
+    assert.ok(asset.svgContent.length > 300, `${asset.id} line art must contain real geometry`)
+  }
+})
+
 test('EY-BROWSER-01: Starter English Q3 renders colouring sketches (Apple, Mango, Grapes, Banana)', async () => {
   await page.goto(`${BASE_URL}?paper=ey-starter-english-2026`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })

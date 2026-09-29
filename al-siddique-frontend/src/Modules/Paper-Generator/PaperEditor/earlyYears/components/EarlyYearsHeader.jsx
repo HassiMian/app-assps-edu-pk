@@ -1,12 +1,16 @@
 import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
-import schoolLogo from '../../../../../assets/school-logo.svg'
+import { useTenantBranding } from '../../../../../context/TenantBrandingContext.jsx'
+import { usePaperStore } from '../../../usePaperStore.js'
+import fallbackSchoolLogo from '../../../../../assets/school-logo.svg'
 
 export default function EarlyYearsHeader({
   headerConfig = {},
   isUrdu = false,
   templatePreset = {}
 }) {
+  const branding = useTenantBranding()
+  const { paperSettings } = usePaperStore()
   const {
     schoolName = 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
     campus = 'Sharif Chowk, Rayya Khas, Narowal',
@@ -24,6 +28,8 @@ export default function EarlyYearsHeader({
   const englishFont = templatePreset.fontFamily || TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
   const urduFont = templatePreset.urduFont || TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
   const paperFont = isUrdu ? urduFont : englishFont
+  const resolvedSchoolName = branding?.schoolName || paperSettings?.schoolName || schoolName
+  const resolvedSchoolLogo = branding?.logoUrl || paperSettings?.logo || paperSettings?.schoolLogo || fallbackSchoolLogo
 
   const metaCell = {
     border: `1px solid ${border}`,
@@ -92,8 +98,8 @@ export default function EarlyYearsHeader({
           }}
         >
           <img
-            src={schoolLogo}
-            alt="Al Siddique Scholars Public School logo"
+            src={resolvedSchoolLogo}
+            alt={`${resolvedSchoolName} logo`}
             style={{ width: 49, height: 49, objectFit: 'contain', display: 'block' }}
           />
         </div>
@@ -111,7 +117,7 @@ export default function EarlyYearsHeader({
               textTransform: 'uppercase'
             }}
           >
-            {schoolName}
+            {resolvedSchoolName}
           </div>
           <div style={{ marginTop: 2, fontSize: 8.5, fontWeight: 700, color: '#526174', fontFamily: TYPOGRAPHY_TOKENS.fontFamilies.englishSupportingSans }}>
             {campus}

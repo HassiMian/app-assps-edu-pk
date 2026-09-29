@@ -1,5 +1,6 @@
 // SketchAssetRegistry.js — Reusable print-safe SVG line-art asset registry for Early Years papers
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
+import { PROFESSIONAL_SKETCH_OVERRIDES } from './ProfessionalSketchLibrary.js'
 
 /**
  * Builtin Line-Art SVG Assets
@@ -482,6 +483,17 @@ export const BUILTIN_SKETCHES = {
     `
   }
 }
+
+// Upgrade only the presentation geometry; keep every stable asset ID/source contract intact.
+Object.entries(PROFESSIONAL_SKETCH_OVERRIDES).forEach(([assetId, override]) => {
+  if (!BUILTIN_SKETCHES[assetId]) return
+  BUILTIN_SKETCHES[assetId] = {
+    ...BUILTIN_SKETCHES[assetId],
+    ...override,
+    source: 'BUILTIN',
+    printSafe: true,
+  }
+})
 
 /**
  * In-memory user uploaded sketch registry
