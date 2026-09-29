@@ -28,8 +28,6 @@ export default function CanonicalPaperRibbonToolbar({
   activeFieldKey = null,
   activeStructuredKey = null,
   onPrint = null,
-  embedded = false,
-  showStructuralControls = true,
 }) {
   const [, setSelectionRev] = useState(0)
 
@@ -165,7 +163,6 @@ export default function CanonicalPaperRibbonToolbar({
       }}
     >
       {/* Top Action Bar */}
-      {!embedded && (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 14px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span style={{ fontSize: '12px', fontWeight: 800, color: '#C8991A', letterSpacing: '0.05em' }}>
@@ -227,7 +224,6 @@ export default function CanonicalPaperRibbonToolbar({
           </button>
         </div>
       </div>
-      )}
 
       {/* Formatting Tools Panel */}
       <div
@@ -507,8 +503,7 @@ export default function CanonicalPaperRibbonToolbar({
 
         <div style={{ width: 1, height: 20, background: 'rgba(255,255,255,0.12)' }} />
 
-        {/* Structural controls live in the Unified Layout tab by default. */}
-        {showStructuralControls && (
+        {/* Structural Exam-Night Controls (FIX F) */}
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           {/* Page Border */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -594,7 +589,6 @@ export default function CanonicalPaperRibbonToolbar({
             </select>
           </div>
         </div>
-        )}
       </div>
     </header>
   )

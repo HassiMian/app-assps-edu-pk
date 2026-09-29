@@ -5,7 +5,6 @@ import {
 } from '../migration/classifyPaperDocument.js'
 import { migrateOfficialPaperToV2 } from '../migration/migrateOfficialPaperToV2.js'
 import { importModifiedOfficialV13ToCanonical } from './importModifiedOfficialV13.js'
-import { adaptLegacyCanvasToCanonical } from './adaptLegacyCanvasToCanonical.js'
 
 import officialV13Dataset from '../../seed-data/official-first-term-2026-v13.json' with { type: 'json' }
 import normalizationManifest from '../migration/data/normalizationManifestV13.json' with { type: 'json' }
@@ -267,26 +266,12 @@ export function resolvePaperEditorRoute(loadedPaper) {
     }
   }
 
-  // 4. LEGACY_CANVAS_V2: use the same Canonical Unified Editor through a
-  // lossless schema2 adapter. Unknown/corrupt formats still retain emergency fallback.
-  if (classification === DOCUMENT_CLASSIFICATIONS.LEGACY_CANVAS_V2) {
-    try {
-      const canonicalDoc = adaptLegacyCanvasToCanonical(loadedPaper)
-      return {
-        route: 'CANONICAL_V2',
-        resolvedPaper: canonicalDoc,
-        reason: 'LEGACY_CANVAS_V2_ADAPTED_TO_UNIFIED_EDITOR',
-      }
-    } catch (err) {
-      console.warn('Failed to adapt legacy schema2 paper to unified editor:', err)
-    }
-  }
-
+  // 4. LEGACY_CANVAS_V2 and UNKNOWN: Preserve legacy editor path
   return {
     route: 'LEGACY_CANVAS_V2',
     resolvedPaper: loadedPaper,
     reason: classification === DOCUMENT_CLASSIFICATIONS.LEGACY_CANVAS_V2
-      ? 'LEGACY_CANVAS_ADAPTER_FAILED_SAFE_FALLBACK'
+      ? 'LEGACY_CANVAS_V2_PRESERVED'
       : 'UNKNOWN_FORMAT_SAFE_LEGACY_FALLBACK',
   }
 }

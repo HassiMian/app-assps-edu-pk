@@ -478,7 +478,7 @@ const MEDIUMS = [
  { v:'english', l:'ENGLISH MEDIUM' },
 ]
 
-function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBack, overrideConfig, loadedPaper, uiTheme='dark', onToggleTheme, onOpenUnifiedEditor = null }) {
+function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBack, overrideConfig, loadedPaper, uiTheme='dark', onToggleTheme }) {
  const isLoaded = !!overrideConfig
  const isStore = !isLoaded && subjectId.startsWith('store:')
  const { subjects: storeSubjects, questions: storeQs, savePaper, updateSavedPaper, importPaperQuestionsToBank, getFilteredQuestionTypes, questionTypes: allQuestionTypes, paperSettings } = usePaperStore()
@@ -747,17 +747,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setSelIds(n)
  }
 
- function buildCurrentPaperPayload() {
+ function doSave() {
+ if (!totalQs) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
  const selectedQuestions = {}
- questionTypes.forEach(t => {
-  const workingMarks = paper[`${t.value}_marks`]
-  const sourceMarks = loadedPaper?.selectedQuestions?.[t.value]?.marks
-  const marks = workingMarks !== undefined && workingMarks !== null
-   ? workingMarks
-   : (sourceMarks !== undefined && sourceMarks !== null ? sourceMarks : (t.marks ?? 1))
-  selectedQuestions[t.value] = { questions: paper[t.value] || [], marks }
- })
+ questionTypes.forEach(t => { selectedQuestions[t.value] = { questions: paper[t.value] || [], marks: paper[`${t.value}_marks`] || t.marks || 1 } })
  const editorState = {
   template:tmpl, printMode, questionBorder:qBorderStyle, pageBorder,
   showAnswerLines:showAnsLines, showUrduHeaders, showSectionLine,
@@ -767,9 +761,6 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   mcqLayout, shortLayout,
  }
  const payloadBase = {
-       // Preserve source identity / format so Unified Studio can route this
-       // working copy through the same canonical engine as Saved Papers.
-       ...(loadedPaper || {}),
        ...paper,
        name: loadedPaper?.name || name,
        config: { ...(loadedPaper?.config || {}), ...cfg },
@@ -781,13 +772,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
        printReadiness: isOfficialPaper && !printAudit.blocked ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness),
        selectedQuestions,
      }
- return isOfficialPaper ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
- }
-
- function doSave() {
- if (!totalQs) return
- const payload = buildCurrentPaperPayload()
- const selectedQuestions = payload.selectedQuestions || {}
+ const payload = isOfficialPaper ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
  const saved = loadedPaper?.id ? updateSavedPaper(loadedPaper.id, payload) : savePaper(payload)
   if (!saved) return // Failed due to quota exceeded
   
@@ -932,7 +917,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
  <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
- {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={()=>onOpenUnifiedEditor ? onOpenUnifiedEditor(buildCurrentPaperPayload()) : toggleEditMode()} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{onOpenUnifiedEditor?'Edit in Studio':(editMode?'Done Editing':'Edit Paper')}</button>}
+ {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
  <DBtn color="green" onClick={doSave} disabled={!totalQs} style={{ padding:'8px 16px', fontSize:13 }}> Save</DBtn>
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
@@ -2003,7 +1988,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
 }
 
 //  Main Component 
-function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenUnifiedEditor = null }) {
+function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  const [uiTheme, setUiTheme] = useState(getInitialPaperTheme)
  const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'syllabus')
  const [syllabusId, setSyllabusId] = useState(null)
@@ -2070,7 +2055,7 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenUni
  {step==='class' && (<ClassStep syllabusId={syllabusId} onSelect={id => { setClassId(id); setStep('subject') }} onBack={() => setStep('syllabus')} />)}
  {step==='subject' && (<SubjectStep syllabusId={syllabusId} classId={classId} onSelect={id => { setSubjectId(id); setStep('chapters') }} onBack={() => setStep('class')} />)}
  {step==='chapters' && (<ChapterStep subjectId={subjectId} selectedChapters={selChapters} selectedTopics={selTopics} onChange={(c,t) => { setSelChapters(c); setSelTopics(t) }} onNext={() => setStep('questions')} onBack={() => setStep('subject')} />)}
- {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={loadedPaper?.config || null} loadedPaper={loadedPaper || null} uiTheme={uiTheme} onToggleTheme={() => setUiTheme(m => m === 'dark' ? 'light' : 'dark')} onOpenUnifiedEditor={onOpenUnifiedEditor} onBack={() => {
+ {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={loadedPaper?.config || null} loadedPaper={loadedPaper || null} uiTheme={uiTheme} onToggleTheme={() => setUiTheme(m => m === 'dark' ? 'light' : 'dark')} onBack={() => {
  if (loadedPaper && onReturnToSource) onReturnToSource();
  else setStep(loadedPaper ? 'syllabus' : 'chapters');
  }} />)}

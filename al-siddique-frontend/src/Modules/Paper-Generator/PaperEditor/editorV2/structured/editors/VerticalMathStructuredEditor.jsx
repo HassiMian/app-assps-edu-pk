@@ -243,7 +243,6 @@ export default function VerticalMathStructuredEditor({
           </div>
           {isEditing && (
             <button
-              className="canonical-contextual-control no-print"
               type="button"
               onClick={handleRemoveResultLine}
               title="Remove result line"
@@ -265,7 +264,6 @@ export default function VerticalMathStructuredEditor({
         isEditing && (
           <div style={{ width: '100%', textAlign: 'right', marginTop: '4px' }}>
             <button
-              className="canonical-contextual-control no-print"
               type="button"
               onClick={handleAddResultLine}
               style={{
@@ -288,7 +286,6 @@ export default function VerticalMathStructuredEditor({
       {isEditing && (
         <div style={{ marginTop: '8px', alignSelf: 'flex-start' }}>
           <button
-            className="canonical-contextual-control no-print"
             type="button"
             onClick={handleAddOperand}
             style={{

@@ -20,7 +20,7 @@ import {
 import {
   StructuredIdAllocator,
 } from './structured/structuredIdAllocator.js'
-import { CMD, cmdInsertNode } from './structured/structuredCommands.js'
+import { CMD } from './structured/structuredCommands.js'
 import { StructuredCommandHistory } from './structured/StructuredCommandHistory.js'
 import {
   createMcqPatch,
@@ -39,7 +39,6 @@ import {
 } from './structured/structuredIdAllocator.js'
 import { exportStructuredBlock, computeMaxSequenceFromStructured } from './structured/structuredDraftV2.js'
 import { validateV2StructuredBlock } from './structured/structuredPatchValidator.js'
-import { createDefaultInsertedNode } from './structured/structuredNodeDefaults.js'
 import { parseVerticalNumeric, resolveWorkingSectionNodes } from './structured/structuredNodeProjection.js'
 import {
   normalizeWorkingMark,
@@ -998,14 +997,10 @@ export class EditorWorkingStore {
       // Node operations
       case CMD.INSERT_NODE: {
         const s = this._workingDoc.structured
-        // Resolve current order BEFORE registering the inserted node; otherwise
-        // _getSectionNodeOrder() already includes it and a second splice duplicates the id.
-        const order = this._getSectionNodeOrder(sectionId)
         s.insertedNodes[nodeId] = payload.insertedRecord
-        if (!order.includes(nodeId)) {
-          const idx = payload.afterNodeId ? order.indexOf(payload.afterNodeId) : -1
-          order.splice(idx >= 0 ? idx + 1 : order.length, 0, nodeId)
-        }
+        const order = this._getSectionNodeOrder(sectionId)
+        const idx = payload.afterNodeId ? order.indexOf(payload.afterNodeId) : -1
+        order.splice(idx >= 0 ? idx + 1 : order.length, 0, nodeId)
         break
       }
       case CMD.DELETE_NODE: {
@@ -1039,12 +1034,10 @@ export class EditorWorkingStore {
       }
       case CMD.DUPLICATE_NODE: {
         const s = this._workingDoc.structured
-        const order = this._getSectionNodeOrder(sectionId)
         s.insertedNodes[payload.newNodeId] = payload.insertedRecord
-        if (!order.includes(payload.newNodeId)) {
-          const idx = payload.afterNodeId ? order.indexOf(payload.afterNodeId) : order.indexOf(nodeId)
-          order.splice(idx >= 0 ? idx + 1 : order.length, 0, payload.newNodeId)
-        }
+        const order = this._getSectionNodeOrder(sectionId)
+        const idx = payload.afterNodeId ? order.indexOf(payload.afterNodeId) : order.indexOf(nodeId)
+        order.splice(idx >= 0 ? idx + 1 : order.length, 0, payload.newNodeId)
         break
       }
       case CMD.MOVE_NODE: {
@@ -1065,29 +1058,6 @@ export class EditorWorkingStore {
    * Pushes a structural command to history and applies it.
    * Publishes ONE document update.
    */
-  insertQuestion(sectionId, nodeType = 'mcq', afterNodeId = null) {
-    const secId = sectionId || this._workingDoc.sections?.[0]?.id
-    if (!secId) return null
-    const baselineSection = this._baselineDoc.sections?.find(section => section.id === secId)
-    if (!baselineSection) return null
-
-    const currentNodes = resolveWorkingSectionNodes(baselineSection, this._workingDoc.structured)
-    const previousOrder = currentNodes.map(node => node.id)
-    const effectiveAfterId = afterNodeId || previousOrder[previousOrder.length - 1] || null
-    const nodeId = this._idAllocator.allocateNodeId(secId)
-    const allocate = kind => {
-      if (kind === 'option') return this._idAllocator.allocateOptionId(secId)
-      if (kind === 'segment') return this._idAllocator.allocateSegmentId(secId)
-      if (kind === 'row') return this._idAllocator.allocateRowId(secId)
-      if (kind === 'operand') return this._idAllocator.allocateOperandId(secId)
-      if (kind === 'left-item') return this._idAllocator.allocateItemId(secId, 'left')
-      if (kind === 'right-item') return this._idAllocator.allocateItemId(secId, 'right')
-      return this._idAllocator.allocate(secId, kind)
-    }
-    const insertedRecord = createDefaultInsertedNode(nodeType, nodeId, secId, allocate)
-    this.dispatchStructuralCommand(cmdInsertNode(nodeId, secId, insertedRecord, effectiveAfterId, previousOrder))
-    return nodeId
-  }
   dispatchStructuralCommand(cmd) {
     this.applyStructuralCommand(cmd)
     this._structuredHistory.push(cmd)

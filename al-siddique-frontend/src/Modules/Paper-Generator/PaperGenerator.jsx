@@ -67,18 +67,8 @@ export default function PaperGenerator() {
   const { paperSettings } = usePaperStore()
 
   const openModuleTab = tab => {
-    if (tab.path) {
-      navigate(tab.path)
-      return
-    }
-    if (tab.id === 'build') setLoadedSavedPaper(null)
-    setModuleTab(tab.id)
-  }
-
-  const openUnifiedEditor = paper => {
-    if (!paper) return
-    setLoadedSavedPaper(paper)
-    setModuleTab('word_editor')
+    if (tab.path) navigate(tab.path)
+    else setModuleTab(tab.id)
   }
 
   const handleLoadPaper = (paper, targetTab = null) => {
@@ -117,7 +107,7 @@ export default function PaperGenerator() {
   )
 
   if (moduleTab === 'build') {
-    return <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={returnToSource} onOpenUnifiedEditor={openUnifiedEditor}/></ModuleWrap>
+    return <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={returnToSource}/></ModuleWrap>
   }
   if (moduleTab === 'saved') {
     return <ModuleWrap><SavedPapersTab onLoadPaper={handleLoadPaper}/></ModuleWrap>
@@ -143,5 +133,5 @@ export default function PaperGenerator() {
     return <ModuleWrap><BoardPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={returnToSource}/></ModuleWrap>
   }
 
-  return <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={returnToSource} onOpenUnifiedEditor={openUnifiedEditor}/></ModuleWrap>
+  return <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={returnToSource}/></ModuleWrap>
 }

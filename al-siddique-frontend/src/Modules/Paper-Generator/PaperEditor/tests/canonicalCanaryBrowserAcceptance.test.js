@@ -86,7 +86,7 @@ async function loadSavedPaper(paper) {
   const exactName = page.getByText(paper.name, { exact: true })
   await exactName.waitFor({ timeout: 10000 })
 
-  const loadButton = page.getByRole('button', { name: 'Open in Editor' }).first()
+  const loadButton = page.getByRole('button', { name: 'Load & Preview' }).first()
   await loadButton.click()
 }
 
@@ -149,25 +149,4 @@ test('Phase 18: emergency canonicalLegacy=1 rollback keeps official paper on sta
   await page.waitForSelector('.pts-generator-surface', { timeout: 12000 })
   assert.strictEqual(await page.locator('.canonical-paper-editor-container').count(), 0)
   assert.ok(await page.locator('.pts-generator-surface').count() > 0)
-})
-
-test('V6 product flow: Paper Workspace Edit in Studio converges to the same Unified Editor', async () => {
-  const sample = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-7-islamiyat')
-    || v13.papers.find(paper => String(paper.config?.subject || '').toLowerCase().includes('islam'))
-  assert.ok(sample)
-
-  await page.goto(`${BASE_URL}?canonicalLegacy=1`, { waitUntil: 'domcontentloaded' })
-  await openSavedPapers()
-  await loadSavedPaper(sample)
-
-  await page.waitForSelector('.pts-generator-surface', { timeout: 12000 })
-  const studioButton = page.getByRole('button', { name: 'Edit in Studio', exact: true })
-  await studioButton.waitFor({ timeout: 10000 })
-  await studioButton.click()
-
-  await page.waitForSelector('.canonical-paper-editor-container', { timeout: 12000 })
-  await page.waitForSelector('[data-unified-editor-command-bar]', { timeout: 12000 })
-  assert.strictEqual(await page.locator('.pts-generator-surface').count(), 0)
-  assert.strictEqual(await page.locator('.paper-editor-v2-root').count(), 0)
-  assert.strictEqual(await page.locator('[data-unified-editor-command-bar]').count(), 1)
 })

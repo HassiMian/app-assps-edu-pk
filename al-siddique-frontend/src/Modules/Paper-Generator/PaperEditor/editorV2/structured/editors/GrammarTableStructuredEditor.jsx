@@ -244,7 +244,7 @@ export default function GrammarTableStructuredEditor({
       </table>
 
       {isEditing && (
-        <div className="canonical-inline-add-control no-print" style={{ marginTop: '6px' }}>
+        <div style={{ marginTop: '6px' }}>
           <button
             type="button"
             onClick={handleAddRow}

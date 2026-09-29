@@ -205,8 +205,8 @@ test('INVARIANT E (Rule 47): Route Guards correctly segregate Canonical V2 from 
   // 1. Canonical doc
   assert.strictEqual(resolvePaperEditorRoute(canonicalCorpus[0]).route, 'CANONICAL_V2')
 
-  // 2. Legacy Schema 2 saved papers are adapted into the Unified Canonical editor
-  assert.strictEqual(resolvePaperEditorRoute({ schemaVersion: 2, id: 'legacy', sections: [] }).route, 'CANONICAL_V2')
+  // 2. Legacy Schema 2
+  assert.strictEqual(resolvePaperEditorRoute({ schemaVersion: 2, sections: [] }).route, 'LEGACY_CANVAS_V2')
 
   // 3. Null / empty
   assert.strictEqual(resolvePaperEditorRoute(null).route, 'LEGACY_CANVAS_V2')

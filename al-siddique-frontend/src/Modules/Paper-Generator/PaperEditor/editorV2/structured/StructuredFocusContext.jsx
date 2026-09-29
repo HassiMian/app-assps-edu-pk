@@ -1,7 +1,7 @@
 // StructuredFocusContext.jsx — Tracks whether focus is in a Tiptap field or a structured control.
 // Provides history-routing context via React context API.
 
-import React, { createContext, useContext, useRef, useCallback, useMemo } from 'react'
+import React, { createContext, useContext, useRef, useCallback } from 'react'
 
 // Re-export pure JS helpers (no JSX) so both this file and node:test can use them.
 export {
@@ -37,15 +37,12 @@ export function StructuredFocusProvider({ children, onModeChange, onActiveStruct
     if (key) onActiveStructuredKeyChange?.(key)
   }, [onActiveStructuredKeyChange])
 
-  const getMode = useCallback(() => modeRef.current, [])
-  const getActiveStructuredKey = useCallback(() => keyRef.current, [])
-
-  const ctx = useMemo(() => ({
-    getMode,
+  const ctx = {
+    getMode: () => modeRef.current,
     setMode,
-    getActiveStructuredKey,
+    getActiveStructuredKey: () => keyRef.current,
     setActiveStructuredKey,
-  }), [getMode, setMode, getActiveStructuredKey, setActiveStructuredKey])
+  }
 
   return (
     <StructuredFocusCtx.Provider value={ctx}>
