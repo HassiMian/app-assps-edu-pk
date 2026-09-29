@@ -41,7 +41,7 @@ export default function EarlyYearsWorksheetEditor({
   const [zoomLevel, setZoomLevel] = useState(1.0)
   const [showQAPanel, setShowQAPanel] = useState(false)
   const [presentationRevision, setPresentationRevision] = useState(0)
-  const [templateId, setTemplateId] = useState('little-scholars-navy')
+  const [templateId, setTemplateId] = useState('scholar-spark')
   const templatePreset = useMemo(() => getEarlyYearsTemplatePreset(templateId), [templateId])
 
   useEffect(() => {

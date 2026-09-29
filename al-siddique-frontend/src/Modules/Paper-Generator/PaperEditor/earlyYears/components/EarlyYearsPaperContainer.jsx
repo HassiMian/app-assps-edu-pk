@@ -6,6 +6,16 @@ import UrduFontNotice from './UrduFontNotice.jsx'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 import '../earlyYearsPrint.css'
 
+function pagePattern(pattern='none', accent='#123b67', accent2='#38bdf8', tint='#ffffff') {
+  if(pattern==='micro-grid') return `linear-gradient(${accent}0A 1px, transparent 1px), linear-gradient(90deg, ${accent}0A 1px, transparent 1px), linear-gradient(180deg,${tint},#fff 26%)`
+  if(pattern==='notebook') return `repeating-linear-gradient(180deg, transparent 0 25px, ${accent}0B 25px 26px), linear-gradient(180deg,${tint},#fff 24%)`
+  if(pattern==='waves') return `radial-gradient(ellipse at 12% -4%, ${accent2}16 0 42px, transparent 43px), radial-gradient(ellipse at 88% -7%, ${accent}10 0 52px, transparent 53px), linear-gradient(180deg,${tint},#fff 28%)`
+  if(pattern==='sun-lines') return `radial-gradient(circle at 92% 5%, ${accent2}18 0 32px, transparent 33px), linear-gradient(180deg,${tint},#fff 28%)`
+  if(pattern==='constellation') return `radial-gradient(circle at 12px 12px,${accent2}16 0 1.2px,transparent 1.4px), radial-gradient(circle at 42px 30px,${accent}0D 0 1px,transparent 1.2px), linear-gradient(180deg,${tint},#fff 28%)`
+  if(pattern==='confetti') return `linear-gradient(135deg,transparent 0 48%,${accent2}10 49% 51%,transparent 52%), linear-gradient(180deg,${tint},#fff 28%)`
+  return `linear-gradient(180deg,${tint} 0%,#fff 24%,#fff 100%)`
+}
+
 function PremiumPageMotif({ motif = 'classic', accent = '#123b67', accent2 = '#38bdf8' }) {
   if (motif === 'classic') return null
   const symbol = motif === 'clouds' ? '●' : motif === 'sun' ? '✦' : motif === 'confetti' ? '◆' : motif === 'dots' ? '•' : '★'
@@ -40,6 +50,10 @@ export default function EarlyYearsPaperContainer({
   const border = theme.border || '#9eb6cf'
   const accentSoft = theme.accentSoft || '#eef8ff'
   const pageTint = theme.pageTint || '#ffffff'
+  const pageBackground = pagePattern(theme.pagePattern, accent, accent2, pageTint)
+  const premiumFrame = theme.premiumEarlyYears
+    ? `inset 0 0 0 1px #fff, inset 0 0 0 2px ${border}66, 0 14px 42px rgba(2,12,27,.22)`
+    : '0 14px 42px rgba(2, 12, 27, .28)'
   const paperFont = isUrdu
     ? (theme.urduFont || "'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif")
     : (theme.fontFamily || "'Times New Roman', serif")
@@ -60,7 +74,7 @@ export default function EarlyYearsPaperContainer({
         '--ey-accent-2':accent2,
         '--ey-border':border,
         '--ey-soft':accentSoft,
-        '--ey-page-background':`linear-gradient(180deg, ${pageTint} 0%, #ffffff 24%, #ffffff 100%)`,
+        '--ey-page-background':pageBackground,
       }}
     >
       {isUrdu && (
@@ -77,8 +91,9 @@ export default function EarlyYearsPaperContainer({
           width:`${LAYOUT_TOKENS.page.widthMm}mm`,
           minHeight:`${LAYOUT_TOKENS.page.heightMm}mm`,
           padding:`${LAYOUT_TOKENS.page.marginTopMm}mm ${LAYOUT_TOKENS.page.marginRightMm}mm ${LAYOUT_TOKENS.page.marginBottomMm}mm ${LAYOUT_TOKENS.page.marginLeftMm}mm`,
-          background:`linear-gradient(180deg, ${pageTint} 0%, #ffffff 24%, #ffffff 100%)`,
-          boxShadow:'0 14px 42px rgba(2, 12, 27, .28)',
+          background:pageBackground,
+          backgroundSize: theme.pagePattern === 'micro-grid' ? '18px 18px,18px 18px,auto' : undefined,
+          boxShadow:premiumFrame,
           boxSizing:'border-box',
           color:'#111827',
           fontFamily:paperFont,

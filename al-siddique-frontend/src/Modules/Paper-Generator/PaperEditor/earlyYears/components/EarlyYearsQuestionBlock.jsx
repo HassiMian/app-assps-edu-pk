@@ -62,6 +62,15 @@ export default function EarlyYearsQuestionBlock({
   const borderColor = templatePreset.border || accent
   const badgeBg = templatePreset.accentSoft || '#f8f8f8'
   const premiumEarlyYears = Boolean(templatePreset.premiumEarlyYears)
+  const questionStyle = templatePreset.questionStyle || (premiumEarlyYears ? 'card' : 'classic')
+  const labelShape = templatePreset.labelShape || 'pill'
+  const questionVisual = {
+    card:{ border:`1px solid ${borderColor}`, borderRadius:10, background:`linear-gradient(180deg,${badgeBg} 0,#fff 25%,#fff 100%)`, boxShadow:`inset 3px 0 0 ${accent2},0 1px 2px rgba(15,23,42,.035)`, padding:'6px 7px 7px' },
+    soft:{ border:`1px solid ${borderColor}AA`, borderRadius:12, background:`linear-gradient(135deg,#fff 0,${badgeBg} 180%)`, boxShadow:'0 1px 3px rgba(15,23,42,.035)', padding:'7px 8px' },
+    'side-accent':{ border:'none', borderRadius:0, background:'rgba(255,255,255,.72)', boxShadow:`inset ${isUrdu?'-3px':'3px'} 0 0 ${accent}`, padding:isUrdu?'6px 9px 7px 7px':'6px 7px 7px 9px' },
+    underline:{ border:'none', borderRadius:0, background:'rgba(255,255,255,.78)', boxShadow:`inset 0 -1px 0 ${borderColor}`, padding:'5px 2px 7px' },
+    classic:{ border:'none', borderRadius:0, background:'transparent', boxShadow:'none', padding:0 }
+  }[questionStyle]
 
   const renderVisualBody = () => {
     switch (presentationType) {
@@ -251,11 +260,11 @@ export default function EarlyYearsQuestionBlock({
       data-premium-question={premiumEarlyYears ? 'true' : 'false'}
       style={{
         marginBottom: premiumEarlyYears ? 10 : 12,
-        padding: premiumEarlyYears ? '6px 7px 7px' : 0,
-        border: premiumEarlyYears ? `1px solid ${borderColor}` : 'none',
-        borderRadius: premiumEarlyYears ? 9 : 0,
-        background: premiumEarlyYears ? `linear-gradient(180deg, ${badgeBg} 0, #fff 22%, #fff 100%)` : 'transparent',
-        boxShadow: premiumEarlyYears ? `inset 3px 0 0 ${accent2}` : 'none',
+        padding: questionVisual.padding,
+        border: questionVisual.border,
+        borderRadius: questionVisual.borderRadius,
+        background: questionVisual.background,
+        boxShadow: questionVisual.boxShadow,
         pageBreakInside: 'avoid',
         breakInside: 'avoid',
         direction: isUrdu ? 'rtl' : 'ltr',
@@ -288,10 +297,11 @@ export default function EarlyYearsQuestionBlock({
               display: premiumEarlyYears ? 'inline-grid' : 'inline',
               placeItems: premiumEarlyYears ? 'center' : undefined,
               padding: premiumEarlyYears ? '1px 7px' : 0,
-              borderRadius: premiumEarlyYears ? 999 : 0,
-              background: premiumEarlyYears ? accent : 'transparent',
-              color: premiumEarlyYears ? '#fff' : accent,
-              boxShadow: premiumEarlyYears ? `0 0 0 2px ${badgeBg}` : 'none',
+              borderRadius: premiumEarlyYears ? (labelShape==='pill'?999:labelShape==='ticket'?4:8) : 0,
+              background: premiumEarlyYears ? (labelShape==='ticket'?badgeBg:accent) : 'transparent',
+              border: premiumEarlyYears && labelShape==='ticket' ? `1px solid ${accent}` : 'none',
+              color: premiumEarlyYears ? (labelShape==='ticket'?accent:'#fff') : accent,
+              boxShadow: premiumEarlyYears && labelShape!=='ticket' ? `0 0 0 2px ${badgeBg}` : 'none',
               flexShrink: 0
             }}
           >
