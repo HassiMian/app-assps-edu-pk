@@ -454,7 +454,6 @@ export default function EarlyYearsWorksheetEditor({
         >
           {currentPaper && (
             <EarlyYearsPaperContainer
-              key={`${currentPaper.id}-${templateId}`}
               paper={currentPaper}
               scale={zoomLevel}
               presentationRevision={presentationRevision}

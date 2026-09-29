@@ -1,7 +1,6 @@
 import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { useTenantBranding } from '../../../../../context/TenantBrandingContext.jsx'
-import { usePaperStore } from '../../../usePaperStore.js'
 import fallbackSchoolLogo from '../../../../../assets/school-logo.svg'
 
 export default function EarlyYearsHeader({
@@ -10,7 +9,6 @@ export default function EarlyYearsHeader({
   templatePreset = {}
 }) {
   const branding = useTenantBranding()
-  const { paperSettings } = usePaperStore()
   const {
     schoolName = 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
     campus = 'Sharif Chowk, Rayya Khas, Narowal',
@@ -28,8 +26,8 @@ export default function EarlyYearsHeader({
   const englishFont = templatePreset.fontFamily || TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary
   const urduFont = templatePreset.urduFont || TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary
   const paperFont = isUrdu ? urduFont : englishFont
-  const resolvedSchoolName = branding?.schoolName || paperSettings?.schoolName || schoolName
-  const resolvedSchoolLogo = branding?.logoUrl || paperSettings?.logo || paperSettings?.schoolLogo || fallbackSchoolLogo
+  const resolvedSchoolName = branding?.schoolName || schoolName
+  const resolvedSchoolLogo = branding?.logoUrl || fallbackSchoolLogo
 
   const metaCell = {
     border: `1px solid ${border}`,
