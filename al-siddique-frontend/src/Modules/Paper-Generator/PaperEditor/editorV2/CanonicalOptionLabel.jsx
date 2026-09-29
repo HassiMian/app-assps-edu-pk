@@ -28,8 +28,8 @@ export default function CanonicalOptionLabel({
       data-language={parts.direction === 'rtl' ? 'urdu' : 'english'}
       style={{
         display: 'inline-flex',
-        flexDirection: parts.direction === 'rtl' ? 'row-reverse' : 'row',
-        direction: 'ltr',
+        flexDirection: 'row',
+        direction: parts.direction === 'rtl' ? 'rtl' : 'ltr',
         unicodeBidi: 'isolate',
         alignItems: 'baseline',
         gap: '1px',

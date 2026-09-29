@@ -24,7 +24,15 @@ function parseNumberedLines(content = '') {
 
 function itemSerialText(serial, isUrdu) {
   const value=String(serial||'').replace(/[().]/g,'').trim()
-  return isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(value) ? value + ')' : value + '.'
+  return isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(value) ? value : value + '.'
+}
+function ItemSerial({ serial, isUrdu, color='currentColor' }) {
+  const value=String(serial||'').replace(/[().]/g,'').trim()
+  const urduLetter=isUrdu && /^(?:الف|ب|ج|د|ہ|و|ز|ح)$/.test(value)
+  if(!urduLetter) return <>{value}.</>
+  return <span data-urdu-item-label style={{display:'inline-flex',flexDirection:'row',direction:'rtl',unicodeBidi:'isolate',alignItems:'baseline',gap:1,whiteSpace:'nowrap'}}>
+    <span>{value}</span><StableClosingBracket color={color}/>
+  </span>
 }
 function replaceNumberedLine(content, row, text, isUrdu) {
   const lines=String(content||'').split(/\r?\n/)
@@ -54,8 +62,8 @@ function SectionBanner({ text, themeColor, isUrdu, fs }) {
 
 function OptionLabel({ label, index, isUrdu, themeColor }) {
   const parts = optionLabelParts(label, index, isUrdu)
-  return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}>
-    <b data-option-label-text style={{ fontFamily:isUrdu?URDU_FONT_STACK:'inherit' }}>{parts.label}</b>
+  return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}>
+    <b data-option-label-text style={{ fontFamily:'inherit' }}>{parts.label}</b>
     <StableClosingBracket color={themeColor} />
   </span>
 }
@@ -63,7 +71,7 @@ function OptionLabel({ label, index, isUrdu, themeColor }) {
 function OptionChoice({ option, index, isUrdu, themeColor, editMode=false, section=null, rowIndex=0, onCommit, onActiveEditable }) {
   const fieldKey='mcq-'+rowIndex+'-option-'+index
   const rich=section?.richText?.[fieldKey]||''
-  return <span data-option-choice style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:6, whiteSpace:'normal' }}>
+  return <span data-option-choice style={{ display:'inline-flex', flexDirection:'row', direction:isUrdu?'rtl':'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:6, whiteSpace:'normal' }}>
     <OptionLabel label={option.label} index={index} isUrdu={isUrdu} themeColor={themeColor} />
     {(editMode||rich)
       ? <InlineEditable text={option.text} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={fieldKey} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' option '+(index+1)} onActivate={onActiveEditable} onCommit={payload=>onCommit?.(payload,fieldKey)} style={{direction:isUrdu?'rtl':'ltr',unicodeBidi:'plaintext'}} />
@@ -164,13 +172,13 @@ function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeCol
   }
   if (shortLayout === 'table') {
     return <table data-short-table style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>
-      {rows.map(row => <tr key={row.serial}><td style={{ width:50, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800, whiteSpace:'nowrap' }}>{itemSerialText(row.serial,isUrdu)}</td><td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}>{rowText(row)}</td></tr>)}
+      {rows.map(row => <tr key={row.serial}><td style={{ width:50, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800, whiteSpace:'nowrap' }}><ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/></td><td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}>{rowText(row)}</td></tr>)}
     </tbody></table>
   }
   const itemLineCount = Math.max(0, Number(answerLinesPerItem) || 0)
   const renderRow = row => <div key={row.serial+'-'+row.sourceIndex} data-numbered-response-row style={{ marginBottom:`${itemLineCount ? 7*fs : 4*fs}px`, breakInside:'avoid' }}>
     <div dir={isUrdu?'rtl':'ltr'} style={{ display:'flex', flexDirection:'row', gap:7, alignItems:'baseline', justifyContent:'flex-start', textAlign:isUrdu?'right':'left', minWidth:0 }}>
-      <span data-item-serial style={{ flex:'0 0 auto', minWidth:isUrdu?32:26, textAlign:isUrdu?'right':'center', fontWeight:800, whiteSpace:'nowrap', unicodeBidi:'isolate' }}>{itemSerialText(row.serial,isUrdu)}</span>
+      <span data-item-serial style={{ flex:'0 0 auto', minWidth:isUrdu?32:26, textAlign:isUrdu?'right':'center', fontWeight:800, whiteSpace:'nowrap', unicodeBidi:'isolate' }}><ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/></span>
       <div style={{ flex:'1 1 auto', minWidth:0 }}>{rowText(row)}</div>
     </div>
     {itemLineCount > 0 && <div data-item-answer-lines style={{ marginInlineStart:isUrdu?0:39, marginInlineEnd:isUrdu?39:0 }}>{Array.from({length:itemLineCount},(_,i)=><div key={i} style={{ height:`${18*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
@@ -417,10 +425,11 @@ export default function OfficialSectionRenderer({
  themeColor = '#123b67', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId = '', onActiveEditable,
  qBorderStyle = 'none', mcqLayout = 'matrix-table', shortLayout = '1-column', showAnsLines = false,
  showSectionLine = true, urdLineH = 2, engLineH = 1.5, letterSp = 0,
- wordSp = 0, textAlign = 'start', fontFamily = ''
+ wordSp = 0, textAlign = 'start', fontFamily = '', fontBold = false, fontItalic = false,
+ fontUnderline = false, showUrduHeaders = false
 }) {
  const ordered = [...questions].sort((a,b)=>Number(a.sourceOrder||0)-Number(b.sourceOrder||0))
- return <div data-official-sections style={{ direction:isUrdu?'rtl':'ltr', fontFamily:fontFamily || (isUrdu?URDU_FONT_STACK:'inherit'), lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:String(letterSp)+'px', wordSpacing:String(wordSp)+'px' }}>
+ return <div data-official-sections data-global-bold={fontBold?'true':'false'} data-global-italic={fontItalic?'true':'false'} data-global-underline={fontUnderline?'true':'false'} style={{ direction:isUrdu?'rtl':'ltr', fontFamily:fontFamily || (isUrdu?URDU_FONT_STACK:'inherit'), fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:String(letterSp)+'px', wordSpacing:String(wordSp)+'px' }}>
   {ordered.map((section,index)=>{
    const kind=inferOfficialSectionKind(section)
    if(kind==='marker'){
@@ -437,12 +446,18 @@ export default function OfficialSectionRenderer({
    const marksLabel=extractMarksLabel(rawHeading,resolvedMarks)
    const parts=splitContentWithMarkers(section.content)
    const sectionBorder=qBorderStyle==='box'?'1px solid '+themeColor+'66':qBorderStyle==='table'?'1.5px solid '+themeColor:'none'
-   const sectionPadding=qBorderStyle==='none'?0:String(7*fs)+'px'
+   const sectionPadding=qBorderStyle==='box'?String(7*fs)+'px':0
+   const contentPadding=qBorderStyle==='table'?String(6*fs)+'px '+String(8*fs)+'px':0
    const defaultLines=showAnsLines&&['short','long','list','fill_blank'].includes(kind)?(kind==='long'?6:2):0
    const answerLines=Number(section.answerLines||defaultLines)
    const resolvedAlign=textAlign==='start'?(isUrdu?'right':'left'):textAlign==='end'?(isUrdu?'left':'right'):textAlign
    const divider=section.showDivider===true?true:section.showDivider===false?false:showSectionLine
    const selected=editMode&&String(selectedSectionId||'')===String(section.id||'')
+   const previousKind=[...ordered.slice(0,index)].reverse().map(inferOfficialSectionKind).find(value=>value!=='marker')||''
+   const currentGroup=kind==='mcq'?'objective':'subjective'
+   const previousGroup=previousKind?(previousKind==='mcq'?'objective':'subjective'):''
+   const showGroupBanner=Boolean(isUrdu&&showUrduHeaders&&currentGroup!==previousGroup)
+   const groupBannerText=currentGroup==='objective'?'حصہ معروضی':'حصہ انشائیہ'
    const serialText=isUrdu?'سوال نمبر '+serial+':':'Q'+serial+'.'
    const commitInstruction=payload=>{
     let heading=replaceQuestionSerial(payload.text,serial,isUrdu)
@@ -459,10 +474,12 @@ export default function OfficialSectionRenderer({
     const heading=replaceSectionMarks(section.heading||'',next,isUrdu)
     onQuestionChange?.(section.id,{marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:isUrdu?heading:''})
    }
-   return <section key={section.id||index} data-official-section data-section-kind={kind} data-edit-selected={selected?'true':undefined}
+   return <Fragment key={section.id||index}>
+    {showGroupBanner&&<SectionBanner text={groupBannerText} themeColor={themeColor} isUrdu={true} fs={fs}/>}
+    <section data-official-section data-section-kind={kind} data-question-border={qBorderStyle} data-edit-selected={selected?'true':undefined}
     onMouseDown={event=>{if(editMode){if(event.target?.closest?.('[data-paper-inline-editable]')) return;event.stopPropagation();onSelectSection?.(section.id)}}}
-    style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?5:0,padding:sectionPadding,breakInside:'auto',outline:editMode?(selected?'2px dashed #dc2626':'1px dashed #ef4444'):'none',outlineOffset:editMode?3:0,background:selected?'rgba(254,226,226,.12)':undefined}}>
-    <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'84px minmax(0,1fr)':'minmax(0,1fr) 84px',gridTemplateRows:'auto',alignItems:'center',gap:8,paddingBottom:String(4*fs)+'px',marginBottom:String(6*fs)+'px',borderBottom:divider?'2px solid '+themeColor:'none',direction:'ltr'}}>
+    style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?7:0,padding:sectionPadding,breakInside:'auto',overflow:qBorderStyle==='table'?'hidden':undefined,outline:editMode?(selected?'2px dashed #dc2626':'1px dashed #ef4444'):'none',outlineOffset:editMode?3:0,background:selected?'rgba(254,226,226,.12)':undefined}}>
+    <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'84px minmax(0,1fr)':'minmax(0,1fr) 84px',gridTemplateRows:'auto',alignItems:'center',gap:8,padding:qBorderStyle==='table'?String(5*fs)+'px '+String(7*fs)+'px':undefined,paddingBottom:qBorderStyle==='table'?String(5*fs)+'px':String(4*fs)+'px',marginBottom:qBorderStyle==='table'?0:String(6*fs)+'px',borderBottom:qBorderStyle==='table'?'1.5px solid '+themeColor:(divider?'2px solid '+themeColor:'none'),background:qBorderStyle==='table'?themeColor+'09':undefined,direction:'ltr'}}>
      <div data-question-heading style={{gridColumn:isUrdu?2:1,gridRow:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6,minWidth:0}}>
       <InlineEditable text={serialText} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-number" sectionId={section.id} ariaLabel={'Edit question '+serial+' number'} onActivate={onActiveEditable} onCommit={commitSerial} style={{flex:'0 0 auto',whiteSpace:'nowrap',fontWeight:900}} />
       <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:900}} />
@@ -473,9 +490,10 @@ export default function OfficialSectionRenderer({
     </div>
     {parts.length?parts.map((part,partIndex)=>part.type==='marker'
      ?<SectionBanner key={partIndex} text={part.text} themeColor={themeColor} isUrdu={isUrdu} fs={fs}/>
-     :<div key={partIndex} style={{textAlign:resolvedAlign}}>{renderContent({content:part.text,kind,isUrdu,qFs,fs,themeColor,mcqLayout,shortLayout,answerLinesPerItem:Math.max(0,Number(section.answerLinesPerItem)||0),editMode:editMode&&parts.length===1,section,onQuestionChange,onActiveEditable})}</div>):null}
-    {answerLines>0&&<div data-configurable-answer-lines>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{height:String(20*fs)+'px',borderBottom:'1px solid #8793a0'}}/>)}</div>}
+     :<div key={partIndex} style={{textAlign:resolvedAlign,padding:contentPadding}}>{renderContent({content:part.text,kind,isUrdu,qFs,fs,themeColor,mcqLayout,shortLayout,answerLinesPerItem:Math.max(0,Number(section.answerLinesPerItem)||0),editMode:editMode&&parts.length===1,section,onQuestionChange,onActiveEditable})}</div>):null}
+    {answerLines>0&&<div data-configurable-answer-lines style={{padding:contentPadding}}>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{height:String(20*fs)+'px',borderBottom:'1px solid #8793a0'}}/>)}</div>}
    </section>
+   </Fragment>
   })}
  </div>
 }

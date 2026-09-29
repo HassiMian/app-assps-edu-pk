@@ -13,6 +13,7 @@ import { buildPaperTextFlow, resolvePaperFontFamily } from './PaperEditor/layout
 import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
 import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
+import StableClosingBracket from './PaperEditor/StableClosingBracket.jsx'
 import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
 import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
 
@@ -69,6 +70,101 @@ const watermarkPreviewStyle = (logo, opacity, scale = 1.18) => ({
 function PreviewWatermark({ logo, show, opacity, scale }) {
  if (!show || !logo || opacity <= 0) return null
  return <div className="preview-wm" style={watermarkPreviewStyle(logo, opacity, scale)} />
+}
+
+function normalizeAnswerToken(value='') {
+ return String(value || '').trim().replace(/[().\s]/g,'').toUpperCase()
+}
+
+function sectionAnswerAt(section={}, row={}, rowIndex=0) {
+ const key = String(row?.number ?? rowIndex + 1)
+ const raw = Array.isArray(section.answerKey)
+  ? section.answerKey[rowIndex]
+  : (section.answerKey?.[key] ?? section.answerKey?.[rowIndex] ?? section.correctAnswers?.[key] ?? section.correctAnswers?.[rowIndex])
+ return normalizeAnswerToken(raw)
+}
+
+function collectObjectiveRows(paper={}) {
+ const rows=[]
+ for (const section of paper.official_section || []) {
+  if (inferOfficialSectionKind(section) !== 'mcq') continue
+  const parsed=parseOfficialMcqRows(section.content || '')
+  parsed.forEach((row,rowIndex)=>rows.push({
+   section,
+   sectionId:section.id,
+   row,
+   rowIndex,
+   answer:sectionAnswerAt(section,row,rowIndex),
+   globalIndex:rows.length + 1,
+  }))
+ }
+ if (rows.length) return rows
+ for (const [rowIndex,question] of (paper.mcq || []).entries()) {
+  const options=(question.options || []).map((option,index)=>({
+   label:option.label || option.key || String.fromCharCode(65+index),
+   text:option.text || option.en || option.ur || '',
+  }))
+  const explicit=question.answer || question.correctAnswer || question.correct
+  const correctOption=(question.options || []).find(option=>option.correct)
+  const answer=normalizeAnswerToken(explicit || correctOption?.label || correctOption?.key || '')
+  rows.push({
+   section:null,
+   sectionId:'',
+   row:{ number:rowIndex+1, prompt:question.text || question.en || question.ur || '', options },
+   rowIndex,
+   answer,
+   globalIndex:rows.length + 1,
+  })
+ }
+ return rows
+}
+
+function ObjectiveBubbleSheet({ paper, isUrdu=false, themeColor='#123b67', showAnswers=false }) {
+ const rows=collectObjectiveRows(paper)
+ if (!rows.length) return null
+ return <section data-workspace-bubble-sheet style={{ margin:'10px 0 12px', border:`1.5px solid ${themeColor}88`, borderRadius:6, padding:'8px 10px', breakInside:'avoid', direction:isUrdu?'rtl':'ltr', background:`${themeColor}08` }}>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, marginBottom:7, borderBottom:`1px solid ${themeColor}55`, paddingBottom:5 }}>
+   <b style={{ color:themeColor, fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif' }}>{isUrdu?'جوابی ببل شیٹ':'OBJECTIVE BUBBLE SHEET'}</b>
+   <span style={{ fontFamily:'Arial,sans-serif', fontSize:10, color:'#64748b' }}>{rows.length} MCQs</span>
+  </div>
+  <div style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:'5px 18px', direction:'ltr' }}>
+   {rows.map(({row,answer,globalIndex})=>{
+    const opts=(row.options||[]).slice(0,8)
+    return <div key={globalIndex} data-bubble-row style={{ display:'grid', gridTemplateColumns:'28px repeat('+Math.max(opts.length,1)+',26px)', alignItems:'center', gap:4, minHeight:24 }}>
+     <b style={{ fontFamily:'Arial,sans-serif', fontSize:10, color:themeColor }}>{globalIndex}.</b>
+     {opts.map((opt,index)=>{
+      const normalized=normalizeAnswerToken(opt.label || String.fromCharCode(65+index))
+      const active=Boolean(showAnswers && answer && (answer===normalized || answer===String(index+1)))
+      const display=isUrdu?optionLabelParts(opt.label,index,true).label:String(opt.label||String.fromCharCode(65+index)).replace(/[().]/g,'').toUpperCase()
+      return <span key={index} data-bubble-option data-selected={active?'true':'false'} style={{ width:22,height:22,borderRadius:'50%',border:`1.4px solid ${themeColor}`,display:'grid',placeItems:'center',fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif',fontSize:isUrdu?10:8,fontWeight:800,color:active?'#fff':themeColor,background:active?themeColor:'#fff' }}>{display}</span>
+     })}
+    </div>
+   })}
+  </div>
+ </section>
+}
+
+function ObjectiveAnswerKey({ paper, isUrdu=false, themeColor='#123b67' }) {
+ const rows=collectObjectiveRows(paper)
+ if (!rows.length) return null
+ return <section data-workspace-answer-key style={{ margin:'10px 0 12px', border:`1.5px dashed ${themeColor}99`, borderRadius:6, padding:'8px 10px', breakInside:'avoid', direction:isUrdu?'rtl':'ltr' }}>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, marginBottom:7 }}>
+   <b style={{ color:themeColor, fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif' }}>{isUrdu?'جوابی کلید':'ANSWER KEY'}</b>
+   <span style={{ fontFamily:'Arial,sans-serif', fontSize:9, color:'#64748b' }}>{isUrdu?'اساتذہ کے لیے':'Teacher copy'}</span>
+  </div>
+  <div style={{ display:'grid', gridTemplateColumns:'repeat(5,minmax(0,1fr))', gap:5, direction:'ltr' }}>
+   {rows.map(({row,answer,globalIndex})=>{
+    const optionIndex=(row.options||[]).findIndex((opt,index)=>normalizeAnswerToken(opt.label||String.fromCharCode(65+index))===answer)
+    const display=answer
+      ? (isUrdu && optionIndex>=0 ? optionLabelParts(row.options[optionIndex]?.label,optionIndex,true).label : answer)
+      : '—'
+    return <div key={globalIndex} data-answer-key-row style={{ border:`1px solid ${themeColor}44`, borderRadius:4, padding:'4px 5px', textAlign:'center', background:answer?`${themeColor}08`:'#fff', fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif' }}>
+     <span style={{ fontFamily:'Arial,sans-serif', fontSize:9, color:'#64748b' }}>{globalIndex}</span>
+     <b style={{ marginInlineStart:5, color:answer?themeColor:'#94a3b8', fontSize:11 }}>{display}</b>
+    </div>
+   })}
+  </div>
+ </section>
 }
 
 const themeVars = (mode) => mode === 'light'
@@ -521,8 +617,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [headerSession, setHeaderSession] = useState(()=> overrideConfig?.session || '')
  const [headerAddress, setHeaderAddress] = useState(()=> overrideConfig?.address || overrideConfig?.campus || '')
  const [marksAuthorityEdited, setMarksAuthorityEdited] = useState(false)
- const [printBub, setPrintBub] = useState(true)
- const [printAns, setPrintAns] = useState(false)
+ const [printBub, setPrintBub] = useState(Boolean(editorSettings.printBubbleSheet))
+ const [printAns, setPrintAns] = useState(Boolean(editorSettings.printAnswerKey))
  const [modalOpen, setModalOpen] = useState(!loadedPaper)
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
@@ -559,12 +655,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [fontUnderline, setFontUnderline] = useState(Boolean(editorSettings.fontUnderline))
  const [textAlign, setTextAlign] = useState(editorSettings.textAlign || 'start')
  const [qBorderStyle, setQBorderStyle] = useState(editorSettings.questionBorder || (isOfficialPaper ? ruleProfile.presentation.questionBorder : 'none'))
- const [pageBorder, setPageBorder] = useState(editorSettings.pageBorder || (isOfficialPaper ? ruleProfile.presentation.pageBorder : 'none'))
+ const [pageBorder, setPageBorder] = useState(editorSettings.pageBorder === 'thick' ? 'scholar' : (editorSettings.pageBorder || (isOfficialPaper ? ruleProfile.presentation.pageBorder : 'none')))
  const [showUrduHeaders, setShowUrduHeaders] = useState(Boolean(editorSettings.showUrduHeaders))
  const [showSectionLine, setShowSectionLine] = useState(editorSettings.showSectionLine !== undefined ? Boolean(editorSettings.showSectionLine) : isOfficialPaper)
- const [showWatermark, setShowWatermark] = useState(false)
- const [watermarkOpacity, setWatermarkOpacity] = useState(0.08)
- const [watermarkScale, setWatermarkScale] = useState(1.18)
+ const [showWatermark, setShowWatermark] = useState(Boolean(editorSettings.showWatermark))
+ const [watermarkOpacity, setWatermarkOpacity] = useState(Number(editorSettings.watermarkOpacity ?? 0.08))
+ const [watermarkScale, setWatermarkScale] = useState(Number(editorSettings.watermarkScale ?? 1.18))
  const canvasRef = useRef(null)
  const [canvasSize, setCanvasSize] = useState({ width:794, height:1123 })
  const [zoomMode, setZoomMode] = useState('fit-width')
@@ -640,8 +736,15 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   setZoomMode('custom')
  }
  const totalQs = questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0), 0)
- const pageBorderMap = { none: 'none', thin: '1px solid #111', thick: '3px solid #111', double: '4px double #111' }
- const pageBorderStyle = pageBorderMap[pageBorder] || 'none'
+ const pageFrameStyles = {
+  none:{ border:'none' },
+  thin:{ border:'1px solid #9aaabd' },
+  scholar:{ border:'2px solid #173b66', boxShadow:'inset 0 0 0 4px #fff, inset 0 0 0 5px #b9c8d8' },
+  double:{ border:'4px double #173b66' },
+  premium:{ border:'1px solid #8195aa', boxShadow:'inset 0 0 0 3px #fff, inset 0 0 0 4.5px #173b66', borderRadius:2 },
+ }
+ const pageFrameStyle = pageFrameStyles[pageBorder] || pageFrameStyles.none
+ const pageBorderStyle = pageFrameStyle.border
  const updatePaperQuestion = (type, id, changes) => {
   if (Object.prototype.hasOwnProperty.call(changes || {}, 'marks')) setMarksAuthorityEdited(true)
   onPaperChange(current => ({ ...current, [type]:(current[type] || []).map(question => question.id === id ? { ...question, ...changes } : question) }))
@@ -691,7 +794,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }))
   setMcqLayout(next.editorSettings.mcqLayout)
   setShortLayout(next.editorSettings.shortLayout)
-  setPageBorder(next.editorSettings.pageBorder)
+  setPageBorder(next.editorSettings.pageBorder === 'thick' ? 'scholar' : (next.editorSettings.pageBorder || 'none'))
   setQBorderStyle(next.editorSettings.questionBorder)
   setFontFamily(next.editorSettings.fontFamily)
   setBaseFontSz(next.editorSettings.fontSize)
@@ -703,13 +806,15 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const selectedSection = (paper.official_section || []).find(section => String(section.id||'') === String(selectedSectionId||'')) || null
  const selectedSectionKind = selectedSection ? inferOfficialSectionKind(selectedSection) : 'auto'
  const selectedSectionMarks = selectedSection ? resolveSectionTotalMarks(selectedSection) : 0
+ const selectedSectionIsUrdu = isUrduScriptPaper({config:cfg,...paper})
+ const selectedMcqRows = selectedSectionKind === 'mcq' ? parseOfficialMcqRows(selectedSection?.content || '') : []
  const toggleEditMode = () => setEditMode(current => {
   const next = !current
   if (!next) { setSelectedSectionId(''); setActiveEditable(null) }
   return next
  })
  const updateSelectedSection = changes => selectedSection && updatePaperQuestion('official_section', selectedSection.id, changes)
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:setActiveEditable, mcqLayout, shortLayout }
+ const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:setActiveEditable, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))
@@ -759,6 +864,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   fontBold, fontItalic, fontUnderline, textAlign,
   urduLineHeight:urdLineH, englishLineHeight:engLineH, letterSpacing:letterSp, wordSpacing:wordSp,
   mcqLayout, shortLayout,
+  printBubbleSheet:printBub, printAnswerKey:printAns,
+  showWatermark, watermarkOpacity, watermarkScale,
  }
  const payloadBase = {
        ...paper,
@@ -951,12 +1058,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:10 }}>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Letter Sp</span>
- <input aria-label="Paper Letter Spacing" type="range" min={0} max={3} step={0.5} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Paper Letter Spacing" type="range" min={-1} max={5} step={0.1} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:82, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{letterSp}px</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Word Sp</span>
- <input aria-label="Paper Word Spacing" type="range" min={0} max={8} step={0.5} value={wordSp} onChange={e=>setWordSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Paper Word Spacing" type="range" min={-2} max={14} step={0.5} value={wordSp} onChange={e=>setWordSp(Number(e.target.value))} style={{ width:82, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{wordSp}px</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
@@ -1010,39 +1117,39 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Q Border</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['none','None'],['box','Box'],['table','Table']].map(([v,l])=>(<button key={v} onClick={()=>setQBorderStyle(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${qBorderStyle===v?D.gold:D.border}`, cursor:'pointer', fontWeight:qBorderStyle===v?700:400, fontSize:11, background: qBorderStyle===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: qBorderStyle===v?D.gold:D.muted, }}>{l}</button>))}
+ {[['none','None'],['box','Box'],['table','Table']].map(([v,l])=>(<button key={v} aria-label={`Question border ${l}`} aria-pressed={qBorderStyle===v} onClick={()=>setQBorderStyle(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${qBorderStyle===v?D.gold:D.border}`, cursor:'pointer', fontWeight:qBorderStyle===v?700:400, fontSize:11, background: qBorderStyle===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: qBorderStyle===v?D.gold:D.muted, }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>MCQ Layout</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['compact-grid','Grid'],['matrix-table','Table'],['classic','Classic']].map(([v,l])=>(<button key={v} onClick={()=>setMcqLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${mcqLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:mcqLayout===v?700:400, fontSize:11, background: mcqLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: mcqLayout===v?D.gold:D.muted }}>{l}</button>))}
+ {[['compact-grid','Grid'],['matrix-table','Table'],['classic','Classic']].map(([v,l])=>(<button key={v} aria-label={`MCQ layout ${l}`} aria-pressed={mcqLayout===v} onClick={()=>setMcqLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${mcqLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:mcqLayout===v?700:400, fontSize:11, background: mcqLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: mcqLayout===v?D.gold:D.muted }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Short Qs</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['2-column-balanced','2-Col (1-5|6-10)'],['1-column','1-Col'],['table','Table']].map(([v,l])=>(<button key={v} onClick={()=>setShortLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${shortLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:shortLayout===v?700:400, fontSize:11, background: shortLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: shortLayout===v?D.gold:D.muted }}>{l}</button>))}
+ {[['2-column-balanced','2-Col (1-5|6-10)'],['1-column','1-Col'],['table','Table']].map(([v,l])=>(<button key={v} aria-label={`Short questions layout ${l}`} aria-pressed={shortLayout===v} onClick={()=>setShortLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${shortLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:shortLayout===v?700:400, fontSize:11, background: shortLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: shortLayout===v?D.gold:D.muted }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Page Border</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['none','None'],['thin','Thin'],['thick','Thick'],['double','Double']].map(([v,l])=>(<button key={v} onClick={()=>setPageBorder(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${pageBorder===v?D.gold:D.border}`, cursor:'pointer', fontWeight:pageBorder===v?700:400, fontSize:11, background: pageBorder===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: pageBorder===v?D.gold:D.muted, }}>{l}</button>))}
+ {[['none','None'],['thin','Fine'],['scholar','Scholar'],['double','Double'],['premium','Premium']].map(([v,l])=>(<button key={v} aria-label={`Page border ${l}`} aria-pressed={pageBorder===v} onClick={()=>setPageBorder(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${pageBorder===v?D.gold:D.border}`, cursor:'pointer', fontWeight:pageBorder===v?800:500, fontSize:11, background: pageBorder===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: pageBorder===v?D.gold:D.muted, }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showWatermark} onChange={e=>setShowWatermark(e.target.checked)} style={{ accentColor:D.gold }} />Logo WM</label>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Watermark</span>
- <input type="range" min={0.03} max={0.22} step={0.01} value={watermarkOpacity} onChange={e=>setWatermarkOpacity(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Watermark Opacity" type="range" min={0.02} max={0.24} step={0.01} value={watermarkOpacity} onChange={e=>setWatermarkOpacity(Number(e.target.value))} style={{ width:74, accentColor:D.gold }} /><span style={{fontSize:10,color:D.gold,minWidth:30}}>{Math.round(watermarkOpacity*100)}%</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>WM Size</span>
- <input type="range" min={0.8} max={1.6} step={0.05} value={watermarkScale} onChange={e=>setWatermarkScale(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Watermark Size" type="range" min={0.65} max={1.9} step={0.05} value={watermarkScale} onChange={e=>setWatermarkScale(Number(e.target.value))} style={{ width:74, accentColor:D.gold }} /><span style={{fontSize:10,color:D.gold,minWidth:28}}>{Math.round(watermarkScale*100)}%</span>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showUrduHeaders} onChange={e=>setShowUrduHeaders(e.target.checked)} style={{ accentColor:D.gold }} />حصہ معروضی / انشائیہ</label>
@@ -1082,6 +1189,41 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
      <option value="inherit">Use global setting</option><option value="show">Show divider</option><option value="hide">Hide divider</option>
     </select>
    </label>
+   {selectedSectionKind==='mcq' && selectedMcqRows.length>0 && <div data-answer-key-editor style={{marginTop:10,padding:9,border:'1px solid rgba(148,163,184,.2)',borderRadius:9,background:'rgba(255,255,255,.025)'}}>
+    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8,marginBottom:7}}>
+     <b style={{fontSize:10,color:D.gold}}>ANSWER KEY</b>
+     <span style={{fontSize:9,color:D.muted}}>Set correct option</span>
+    </div>
+    <div style={{display:'grid',gap:6}}>
+     {selectedMcqRows.map((row,rowIndex)=>{
+      const currentAnswer=sectionAnswerAt(selectedSection,row,rowIndex)
+      return <div key={String(row.number)+'-'+rowIndex} style={{display:'grid',gridTemplateColumns:'30px 1fr',alignItems:'center',gap:6}}>
+       <b style={{fontSize:10,color:D.silver,textAlign:'center'}}>{row.number}.</b>
+       <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+        {(row.options||[]).map((opt,optIndex)=>{
+         const token=normalizeAnswerToken(opt.label||String.fromCharCode(65+optIndex))
+         const active=currentAnswer===token
+         const label=selectedSectionIsUrdu?optionLabelParts(opt.label,optIndex,true).label:String(opt.label||String.fromCharCode(65+optIndex)).replace(/[().]/g,'').toUpperCase()
+         return <button key={optIndex} type="button" aria-label={`Set MCQ ${row.number} answer ${label}`} aria-pressed={active} onClick={()=>{
+          const existing=Array.isArray(selectedSection.answerKey)
+           ? Object.fromEntries(selectedSection.answerKey.map((value,index)=>[String(index+1),value]))
+           : {...(selectedSection.answerKey||{})}
+          existing[String(row.number||rowIndex+1)]=token
+          updateSelectedSection({answerKey:existing})
+         }} style={{minWidth:30,height:28,padding:'0 7px',borderRadius:6,border:`1px solid ${active?D.gold:D.border}`,background:active?'rgba(200,153,26,.22)':'rgba(11,44,77,.65)',color:active?D.gold:D.silver,cursor:'pointer',fontFamily:selectedSectionIsUrdu?URDU_FONT_STACK:'Arial,sans-serif',fontWeight:900}}>{label}</button>
+        })}
+        <button type="button" aria-label={`Clear MCQ ${row.number} answer`} onClick={()=>{
+         const existing=Array.isArray(selectedSection.answerKey)
+          ? Object.fromEntries(selectedSection.answerKey.map((value,index)=>[String(index+1),value]))
+          : {...(selectedSection.answerKey||{})}
+         delete existing[String(row.number||rowIndex+1)]
+         updateSelectedSection({answerKey:existing})
+        }} style={{height:28,padding:'0 7px',borderRadius:6,border:`1px solid ${D.border}`,background:'transparent',color:D.muted,cursor:'pointer',fontSize:9}}>Clear</button>
+       </div>
+      </div>
+     })}
+    </div>
+   </div>}
    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginTop:8}}>
     <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Answer Lines<input type="number" min="0" max="20" value={Number(selectedSection.answerLines||0)} onChange={e=>updateSelectedSection({answerLines:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} /></label>
     <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Lines / Item<input type="number" min="0" max="5" value={Number(selectedSection.answerLinesPerItem||0)} onChange={e=>updateSelectedSection({answerLinesPerItem:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} /></label>
@@ -1108,11 +1250,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <button onClick={()=>setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}> Open Question Menu</button>
  </div>
  ) : half ? (
- <div className="preview-container" style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
+ <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
  {[0,1].map(index=><div key={index} className="half-paper" style={{ height:544, overflow:'hidden', borderBottom:index===0?'1px dashed #b9c5d0':'none', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={true} /></div>)}
  </div>
  ) : (
- <div className="preview-container" style={{ width:794, minHeight:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 24px rgba(0,0,0,0.4)', overflowX:'hidden', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={false} /></div>
+ <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, minHeight:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 24px rgba(0,0,0,0.4)', overflowX:'hidden', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={false} /></div>
  )}
  </div>
  <style>{`@media print { body { display: none !important; } }`}</style>
@@ -1399,10 +1541,10 @@ function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, on
 }
 
 //  Shared Section Renderer 
-function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, mcqLayout='matrix-table', shortLayout='1-column', urdLineH, engLineH, letterSp, wordSp=0, textAlign='start', fontFamily='', printAns, showAnsLines, showSectionLine=true, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable }) {
+function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, mcqLayout='matrix-table', shortLayout='1-column', urdLineH, engLineH, letterSp, wordSp=0, textAlign='start', fontFamily='', fontBold=false, fontItalic=false, fontUnderline=false, showUrduHeaders=false, printAns, showAnsLines, showSectionLine=true, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable }) {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
- if (type.value === 'official_section') return <OfficialSectionRenderer questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} headingFs={qFsHead} themeColor={themeColor} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} showAnsLines={showAnsLines} showSectionLine={showSectionLine} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={fontFamily} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} />
+ if (type.value === 'official_section') return <OfficialSectionRenderer questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} headingFs={qFsHead} themeColor={themeColor} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} showAnsLines={showAnsLines} showSectionLine={showSectionLine} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={fontFamily} fontBold={fontBold} fontItalic={fontItalic} fontUnderline={fontUnderline} showUrduHeaders={showUrduHeaders} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} />
  const marks = paper[`${type.value}_marks`] || type.marks || 1
  const isMcq = type.value === 'mcq'
  
@@ -1538,9 +1680,9 @@ function editablePaperProps(edit) { return edit ? { 'data-manual-edit': 'true' }
 function PaperOptionLabel({ label, index=0, isUrdu=false, color='currentColor' }) {
  const parts = optionLabelParts(label, index, isUrdu)
  if (!isUrdu) return <b dir="ltr" style={{ color, fontFamily:'Arial,sans-serif', whiteSpace:'nowrap' }}>({parts.label})</b>
- return <span data-workspace-option-label data-language="urdu" style={{ display:'inline-flex', flexDirection:'row-reverse', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color, whiteSpace:'nowrap', fontWeight:900 }}>
+ return <span data-workspace-option-label data-language="urdu" style={{ display:'inline-flex', flexDirection:'row', direction:'rtl', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color, whiteSpace:'nowrap', fontWeight:900 }}>
   <b data-option-label-text style={{ fontFamily:URDU_FONT_STACK }}>{parts.label}</b>
-  <b data-option-bracket dir="ltr" style={{ direction:'ltr', unicodeBidi:'isolate-override', fontFamily:'Arial,sans-serif', display:'inline-block', fontWeight:900 }}>{parts.closingBracket}</b>
+  <StableClosingBracket color={color} />
  </span>
 }
 
@@ -1769,7 +1911,7 @@ const PREMIUM_PAPER_THEMES = {
  editorial:{ accent:'#39566a', soft:'#eaf0f3', line:'#a6bbc6', heading:'Georgia, serif', label:'Editorial Slate', header:'masthead' },
 }
 
-function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, showSectionLine=true, questionTypes=[], settings, pbStyle, onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable, mcqLayout='matrix-table', shortLayout='1-column' }) {
+function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, showSectionLine=true, questionTypes=[], settings, pbStyle, pageFrameStyle={}, onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable, mcqLayout='matrix-table', shortLayout='1-column' }) {
  const theme = PREMIUM_PAPER_THEMES[variant] || PREMIUM_PAPER_THEMES.academic
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1804,7 +1946,16 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   data-english-line-height={engLineH}
   data-urdu-line-height={urdLineH}
   data-paper-font-family={fontFamily || (isUrdu?'urdu-default':'english-default')}
-  style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
+  data-whole-bold={fontBold?'true':'false'}
+  data-whole-italic={fontItalic?'true':'false'}
+  data-whole-underline={fontUnderline?'true':'false'}
+  style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, ...pageFrameStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
+  {(fontBold||fontItalic||fontUnderline) && <style>{`
+   [data-paper-style-root][data-whole-bold="true"] [data-official-sections] * { font-weight: 700; }
+   [data-paper-style-root][data-whole-italic="true"] [data-official-sections] * { font-style: italic; }
+   [data-paper-style-root][data-whole-underline="true"] [data-official-sections] *:not(svg):not(path) { text-decoration-line: underline; }
+   [data-paper-style-root] [data-question-heading], [data-paper-style-root] [data-option-label], [data-paper-style-root] [data-section-banner] { font-weight: 900; }
+  `}</style>}
   <header style={{ direction:'ltr', borderTop:composition.border, borderBottom:`2px solid ${theme.accent}`, borderLeft:variant==='modern'||variant==='coral'?composition.border:'none', padding:`${5 * fs}px ${8 * fs}px`, background:composition.background, borderRadius:composition.radius, display:'grid', gridTemplateColumns:composition.columns, alignItems:'center', gap:8 }}>
    <div style={{ order:composition.logo, gridColumn:composition.logoColumn || 'auto', display:'grid', placeItems:'center' }}><Logo size={half?42:54} src={settings?.logo} /></div>
    <div style={{ order:composition.title, gridColumn:composition.titleColumn || 'auto', textAlign:composition.titleAlign, minWidth:0 }}><div style={{ color:theme.accent, fontFamily:theme.heading, fontWeight:800, fontSize:`${Math.min(24, (half?18:22) * Math.max(.9, headFontSz/14))}px`, lineHeight:1.15 }}>{schoolName}</div><div style={{ color:'#526174', fontSize:`${9 * fs}px`, marginTop:4 }}>{cfg.address || settings?.address || 'Sharif Chowk, Rayya Khas, Narowal | 03001291959'}</div></div>
@@ -1813,11 +1964,13 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   <table data-student-info style={{ direction:'ltr', width:'100%', borderCollapse:'collapse', tableLayout:'fixed', margin:`${7 * fs}px 0 ${10 * fs}px`, fontFamily:'Arial, sans-serif' }}><tbody>
    {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
   </tbody></table>
+  {printBubble && <ObjectiveBubbleSheet paper={paper} isUrdu={isUrdu} themeColor={theme.accent} showAnswers={printAns} />}
   <main style={{ position:'relative', zIndex:2 }}>
    {visibleQuestionTypes.map((type, typeIndex) => (
-    <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={headFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={contentFont} printAns={printAns} showAnsLines={showAnsLines} showSectionLine={showSectionLine} qn={typeIndex + 1} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
+    <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={headFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={contentFont} fontBold={fontBold} fontItalic={fontItalic} fontUnderline={fontUnderline} showUrduHeaders={showUrduHeaders} printAns={printAns} showAnsLines={showAnsLines} showSectionLine={showSectionLine} qn={typeIndex + 1} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
    ))}
   </main>
+  {printAns && <ObjectiveAnswerKey paper={paper} isUrdu={isUrdu} themeColor={theme.accent} />}
  </div>
 }
 

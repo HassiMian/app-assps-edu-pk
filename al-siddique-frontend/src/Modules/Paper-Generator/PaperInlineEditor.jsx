@@ -9,7 +9,7 @@ export const INLINE_SIZES = [8,9,10,11,12,13,14,16,18,20,22,24,28,32]
 const selectionCache = new Map()
 const cacheKey = (sectionId='',fieldKey='') => String(sectionId)+'::'+String(fieldKey)
 const ALLOWED_TAGS = new Set(['B','STRONG','I','EM','U','S','SPAN','SUP','SUB','BR'])
-const ALLOWED_STYLE = new Set(['font-family','font-size','color','background-color','font-weight','font-style','text-decoration','vertical-align'])
+const ALLOWED_STYLE = new Set(['font-family','font-size','color','background-color','font-weight','font-style','text-decoration','text-decoration-line','vertical-align'])
 const FONT_RE = /^(?:Times New Roman|Arial|Georgia|Cambria Math|Jameel Noori Nastaleeq|Noto Nastaliq Urdu)(?:\s*,\s*(?:serif|sans-serif))?$/i
 const SIZE_RE = /^(?:[8-9]|1\d|2\d|3[0-2])(?:px|pt)$/
 const COLOR_RE = /^(?:#[0-9a-f]{3,8}|rgb(?:a)?\([^)]{3,40}\)|[a-z]{3,20})$/i
@@ -25,7 +25,7 @@ function safeStyleValue(name,value='') {
  if(name==='color'||name==='background-color') return COLOR_RE.test(clean)?clean:''
  if(name==='font-weight') return /^(?:normal|bold|[1-9]00)$/.test(clean)?clean:''
  if(name==='font-style') return /^(?:normal|italic)$/.test(clean)?clean:''
- if(name==='text-decoration') return /^(?:none|underline|line-through)(?:\s+(?:underline|line-through))*$/.test(clean)?clean:''
+ if(name==='text-decoration'||name==='text-decoration-line') return /^(?:none|underline|line-through)(?:\s+(?:underline|line-through))*$/.test(clean)?clean:''
  if(name==='vertical-align') return /^(?:baseline|super|sub)$/.test(clean)?clean:''
  return ''
 }
@@ -102,7 +102,13 @@ export function InlineEditable(props) {
   const el=ref.current; const selection=window.getSelection?.()
   if(!el||!selection||!selection.rangeCount||selection.isCollapsed) return
   const range=selection.getRangeAt(0); const snapshot=selectionOffsets(el,range)
-  if(snapshot){savedSelection.current=snapshot;selectionCache.set(cacheKey(sectionId,fieldKey),snapshot)}
+  if(snapshot){
+   savedSelection.current=snapshot
+   selectionCache.set(cacheKey(sectionId,fieldKey),snapshot)
+   // Selection refs alone do not trigger a toolbar render. Refresh the active
+   // editor contract so toolbar commands always see the latest saved range.
+   if(focused.current && onActivate) queueMicrotask(()=>activate())
+  }
  }
  useEffect(()=>{
   if(!editMode) { savedSelection.current=null; selectionCache.delete(cacheKey(sectionId,fieldKey)); return }

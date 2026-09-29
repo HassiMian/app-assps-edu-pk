@@ -17,7 +17,7 @@ const paper = {
     paperCode: 'TEST-URDU',
     timeAllowed: '2 Hours',
     examDate: '2026-10-03',
-    totalMarks: 15,
+    totalMarks: 20,
     title: 'FIRST TERM EXAMINATION 2026',
   },
   official_section: [
@@ -56,6 +56,18 @@ const paper = {
       textUrdu: 'سوال نمبر 3: کالم A کو کالم B سے ملائیں۔ (5)',
       marks: 5,
       content: '1. کتاب | Book\n2. قلم | Pen\n3. سکول | School',
+    },
+    {
+      id: 'urdu-short',
+      type: 'official_section',
+      medium: 'urdu',
+      sourceOrder: 4,
+      layoutPreset: 'short',
+      heading: 'سوال نمبر 4: مختصر سوالات کے جواب دیں۔ (5)',
+      text: 'سوال نمبر 4: مختصر سوالات کے جواب دیں۔ (5)',
+      textUrdu: 'سوال نمبر 4: مختصر سوالات کے جواب دیں۔ (5)',
+      marks: 5,
+      content: '1. پاکستان کا دارالحکومت کیا ہے؟\n2. قومی زبان کون سی ہے؟\n3. شاعر مشرق کون ہیں؟\n4. کتاب کسے کہتے ہیں؟\n5. استاد کا احترام کیوں ضروری ہے؟\n6. محنت کا فائدہ کیا ہے؟\n7. وقت کی پابندی کیوں ضروری ہے؟\n8. سچائی کیا ہے؟\n9. وطن سے محبت کیوں کرنی چاہیے؟\n10. علم کی اہمیت کیا ہے؟',
     },
   ],
   editorSettings: {

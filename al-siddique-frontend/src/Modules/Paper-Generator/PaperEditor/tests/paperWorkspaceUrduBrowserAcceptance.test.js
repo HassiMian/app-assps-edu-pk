@@ -90,10 +90,13 @@ test('Workspace Urdu: option label uses Urdu letter plus a true closing bracket'
   assert.match(bracketCss.unicodeBidi, /isolate|override/i)
   assert.match(bracketCss.fontFamily, /Arial/i)
 
+  const optionText = option.locator('..').locator('[data-option-text]')
   const labelBox = await label.boundingBox()
   const bracketBox = await bracket.boundingBox()
-  assert.ok(labelBox && bracketBox)
-  assert.ok(labelBox.x > bracketBox.x, 'In RTL visual order the Urdu label must sit to the right of its closing bracket')
+  const textBox = await optionText.boundingBox()
+  assert.ok(labelBox && bracketBox && textBox)
+  assert.ok(labelBox.x > bracketBox.x, 'Urdu label must sit to the right of its closing bracket')
+  assert.ok(bracketBox.x > textBox.x, 'Closing bracket must sit between the Urdu label and option text')
 })
 
 test('Workspace Urdu: sentence usage renders dedicated word/sentence columns', async () => {
@@ -128,8 +131,136 @@ test('Workspace matching columns expose editable Column A/B headings and cells',
   assert.match(await table.textContent(), /کتابچہ/)
 })
 
+test('Workspace objective tools render Bubble Sheet and teacher-set Answer Key', async () => {
+  const bubbleToggle = page.getByLabel('Bubble Sheet')
+  const answerToggle = page.getByLabel('Answer Keys')
+  if (!(await bubbleToggle.isChecked())) await bubbleToggle.check()
+  if (!(await answerToggle.isChecked())) await answerToggle.check()
+
+  const bubble = page.locator('[data-workspace-bubble-sheet]')
+  const answerKey = page.locator('[data-workspace-answer-key]')
+  await bubble.waitFor({ state: 'visible' })
+  await answerKey.waitFor({ state: 'visible' })
+  assert.equal(await bubble.locator('[data-bubble-row]').count(), 1)
+  assert.equal(await answerKey.locator('[data-answer-key-row]').count(), 1)
+  assert.match(await answerKey.locator('[data-answer-key-row]').first().textContent(), /—/)
+
+  await page.getByRole('button', { name: 'Edit Paper' }).click()
+  const mcqSection = page.locator('[data-official-section][data-section-kind="mcq"]').first()
+  await mcqSection.evaluate(el => el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true })))
+  await page.locator('[data-answer-key-editor]').waitFor({ state: 'visible' })
+  await page.getByLabel('Set MCQ 1 answer الف').click()
+
+  assert.equal(await bubble.locator('[data-bubble-option][data-selected="true"]').count(), 1)
+  assert.match(await answerKey.locator('[data-answer-key-row]').first().textContent(), /الف/)
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+})
+
+test('Workspace structure controls visibly switch MCQ, short, borders, watermark and Urdu section UI', async () => {
+  const panel = page.locator('details').filter({ hasText: 'Paper Style & Layout' })
+  if (!(await panel.evaluate(el => el.open))) await panel.locator('summary').click()
+
+  await page.getByLabel('MCQ layout Grid').click()
+  await page.locator('[data-official-mcq-grid]').waitFor({ state: 'visible' })
+  await page.getByLabel('MCQ layout Classic').click()
+  await page.locator('[data-official-mcq-classic]').waitFor({ state: 'visible' })
+  await page.getByLabel('MCQ layout Table').click()
+  await page.locator('[data-official-mcq-table]').waitFor({ state: 'visible' })
+
+  await page.getByLabel('Short questions layout 2-Col (1-5|6-10)').click()
+  await page.locator('[data-short-two-column]').waitFor({ state: 'visible' })
+  await page.getByLabel('Short questions layout Table').click()
+  await page.locator('[data-short-table]').waitFor({ state: 'visible' })
+  await page.getByLabel('Short questions layout 1-Col').click()
+  const shortSection = page.locator('[data-official-section][data-section-kind="short"]')
+  await shortSection.locator('[data-numbered-list]').waitFor({ state: 'visible' })
+
+  const firstSection = page.locator('[data-official-section]').first()
+  await page.getByLabel('Question border Box').click()
+  assert.equal(await firstSection.getAttribute('data-question-border'), 'box')
+  assert.notEqual(await firstSection.evaluate(el => getComputedStyle(el).borderStyle), 'none')
+  await page.getByLabel('Question border Table').click()
+  assert.equal(await firstSection.getAttribute('data-question-border'), 'table')
+  assert.notEqual(await firstSection.locator('[data-section-heading]').evaluate(el => getComputedStyle(el).backgroundColor), 'rgba(0, 0, 0, 0)')
+  await page.getByLabel('Question border None').click()
+
+  await page.getByLabel('Page border Premium').click()
+  const root = page.locator('[data-paper-style-root]')
+  const frame = await root.evaluate(el => ({ border: el.style.border, shadow: el.style.boxShadow }))
+  assert.match(frame.border, /solid/)
+  assert.match(frame.shadow, /inset/)
+
+  const wmToggle = page.getByLabel('Logo WM')
+  if (!(await wmToggle.isChecked())) await wmToggle.check()
+  const wmSize = page.getByLabel('Watermark Size')
+  await wmSize.evaluate((el) => {
+    const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set
+    setter.call(el, '1.75')
+    el.dispatchEvent(new Event('input', { bubbles: true }))
+    el.dispatchEvent(new Event('change', { bubbles: true }))
+  })
+  const preview = page.locator('.preview-container')
+  assert.equal(await preview.getAttribute('data-watermark-enabled'), 'true')
+  assert.equal(await preview.getAttribute('data-watermark-scale'), '1.75')
+
+  const urduHeaders = page.getByLabel('حصہ معروضی / انشائیہ')
+  if (!(await urduHeaders.isChecked())) await urduHeaders.check()
+  const banners = await page.locator('[data-section-banner]').allTextContents()
+  assert.ok(banners.some(text => text.includes('حصہ معروضی')))
+  assert.ok(banners.some(text => text.includes('حصہ انشائیہ')))
+
+  const sectionLines = page.getByLabel('Section Lines')
+  if (await sectionLines.isChecked()) await sectionLines.uncheck()
+  assert.equal(await page.locator('[data-section-heading]').first().evaluate(el => getComputedStyle(el).borderBottomStyle), 'none')
+  await sectionLines.check()
+})
+
+test('Workspace Edit Paper preserves selection-only bold, italic, underline, font and size formatting', async () => {
+  await page.getByRole('button', { name: 'Edit Paper' }).click()
+  const editable = page.getByLabel('Edit MCQ 1 question')
+  await editable.click()
+  await editable.evaluate(el => {
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
+    const node = walker.nextNode()
+    if (!node) throw new Error('No editable text node')
+    const range = document.createRange()
+    range.setStart(node, 0)
+    range.setEnd(node, Math.min(5, node.textContent.length))
+    const selection = window.getSelection()
+    selection.removeAllRanges()
+    selection.addRange(range)
+    document.dispatchEvent(new Event('selectionchange', { bubbles: true }))
+    el.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+  })
+
+  const toolbar = page.locator('[data-inline-selection-toolbar]')
+  assert.equal(await toolbar.getAttribute('data-selection-saved'), 'true')
+  await toolbar.getByRole('button', { name: 'B', exact: true }).click()
+  await toolbar.getByRole('button', { name: 'I', exact: true }).click()
+  await toolbar.getByRole('button', { name: 'U', exact: true }).click()
+  await toolbar.getByLabel('Selected text font').selectOption('Georgia')
+  await toolbar.getByLabel('Selected text size').selectOption('18')
+
+  const htmlDuringEdit = await editable.innerHTML()
+  assert.match(htmlDuringEdit, /font-weight:\s*bold/i)
+  assert.match(htmlDuringEdit, /font-style:\s*italic/i)
+  assert.match(htmlDuringEdit, /text-decoration(?:-line)?:\s*underline/i)
+  assert.match(htmlDuringEdit, /font-family:\s*Georgia/i)
+  assert.match(htmlDuringEdit, /font-size:\s*18pt/i)
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  const persisted = page.locator('[data-edit-field="mcq-0-prompt"]').first()
+  const persistedHtml = await persisted.innerHTML()
+  assert.match(persistedHtml, /font-weight:\s*bold/i)
+  assert.match(persistedHtml, /font-style:\s*italic/i)
+  assert.match(persistedHtml, /text-decoration(?:-line)?:\s*underline/i)
+  assert.match(persistedHtml, /font-family:\s*Georgia/i)
+  assert.match(persistedHtml, /font-size:\s*18pt/i)
+})
+
 test('Workspace style controls mutate the actual paper style root and Urdu content', async () => {
-  await page.locator('summary').filter({ hasText: 'Paper Style & Layout' }).click()
+  const stylePanel = page.locator('details').filter({ hasText: 'Paper Style & Layout' })
+  if (!(await stylePanel.evaluate(el => el.open))) await stylePanel.locator('summary').click()
 
   const root = page.locator('[data-paper-style-root]')
   const urduSections = page.locator('[data-official-sections]')
@@ -191,6 +322,25 @@ test('Workspace style controls mutate the actual paper style root and Urdu conte
   assert.equal(sectionSpacing.lineHeight, '2.8')
   assert.equal(sectionSpacing.letterSpacing, '1.5px')
   assert.equal(sectionSpacing.wordSpacing, '4px')
+
+  const actualQuestionText = page.locator('[data-option-text]').first()
+  const actualStyle = await actualQuestionText.evaluate(node => {
+    const css = getComputedStyle(node)
+    return {
+      fontFamily: css.fontFamily,
+      fontWeight: Number(css.fontWeight) || 0,
+      fontStyle: css.fontStyle,
+      textDecorationLine: css.textDecorationLine,
+      letterSpacing: css.letterSpacing,
+      wordSpacing: css.wordSpacing,
+    }
+  })
+  assert.match(actualStyle.fontFamily, /Times New Roman/i, 'Font control must reach actual question content')
+  assert.ok(actualStyle.fontWeight >= 700, 'Bold control must reach actual question content')
+  assert.equal(actualStyle.fontStyle, 'italic', 'Italic control must reach actual question content')
+  assert.match(actualStyle.textDecorationLine, /underline/, 'Underline control must reach actual question content')
+  assert.equal(actualStyle.letterSpacing, '1.5px')
+  assert.equal(actualStyle.wordSpacing, '4px')
 })
 
 test('Workspace print uses the styled preview clone and preserves the isolated Urdu bracket', async () => {
@@ -210,6 +360,8 @@ test('Workspace print uses the styled preview clone and preserves the isolated U
       bracketText: bracket?.textContent?.trim() || '',
       bracketFont: bracket ? getComputedStyle(bracket).fontFamily : '',
       bracketDirection: bracket ? getComputedStyle(bracket).direction : '',
+      bubbleCount: doc.querySelectorAll('[data-workspace-bubble-sheet]').length,
+      answerKeyCount: doc.querySelectorAll('[data-workspace-answer-key]').length,
     }
   })
 
@@ -220,4 +372,6 @@ test('Workspace print uses the styled preview clone and preserves the isolated U
   assert.equal(printed.bracketText, ')')
   assert.match(printed.bracketFont, /Arial/i)
   assert.equal(printed.bracketDirection, 'ltr')
+  assert.equal(printed.bubbleCount, 1)
+  assert.equal(printed.answerKeyCount, 1)
 })
