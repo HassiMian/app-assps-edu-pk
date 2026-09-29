@@ -58,8 +58,10 @@ export default function EarlyYearsQuestionBlock({
     ? (templatePreset.urduFont || TYPOGRAPHY_TOKENS.fontFamilies.urduPrimary)
     : (templatePreset.fontFamily || TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary)
   const accent = templatePreset.accent || '#123b67'
+  const accent2 = templatePreset.accent2 || templatePreset.border || '#38bdf8'
   const borderColor = templatePreset.border || accent
   const badgeBg = templatePreset.accentSoft || '#f8f8f8'
+  const premiumEarlyYears = Boolean(templatePreset.premiumEarlyYears)
 
   const renderVisualBody = () => {
     switch (presentationType) {
@@ -246,8 +248,14 @@ export default function EarlyYearsQuestionBlock({
   return (
     <div
       className="early-years-question-block"
+      data-premium-question={premiumEarlyYears ? 'true' : 'false'}
       style={{
-        marginBottom: '12px',
+        marginBottom: premiumEarlyYears ? 10 : 12,
+        padding: premiumEarlyYears ? '6px 7px 7px' : 0,
+        border: premiumEarlyYears ? `1px solid ${borderColor}` : 'none',
+        borderRadius: premiumEarlyYears ? 9 : 0,
+        background: premiumEarlyYears ? `linear-gradient(180deg, ${badgeBg} 0, #fff 22%, #fff 100%)` : 'transparent',
+        boxShadow: premiumEarlyYears ? `inset 3px 0 0 ${accent2}` : 'none',
         pageBreakInside: 'avoid',
         breakInside: 'avoid',
         direction: isUrdu ? 'rtl' : 'ltr',
@@ -261,9 +269,9 @@ export default function EarlyYearsQuestionBlock({
           alignItems: 'baseline',
           justifyContent: 'space-between',
           gap: '8px',
-          borderBottom: `1px solid ${borderColor}`,
-          paddingBottom: '3px',
-          marginBottom: '5px'
+          borderBottom: `1px solid ${premiumEarlyYears ? accent2 : borderColor}`,
+          paddingBottom: premiumEarlyYears ? 4 : 3,
+          marginBottom: premiumEarlyYears ? 6 : 5
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flex: 1 }}>
@@ -274,9 +282,16 @@ export default function EarlyYearsQuestionBlock({
               fontSize: isUrdu
                 ? TYPOGRAPHY_TOKENS.fontSizes.urduQuestionHeading
                 : TYPOGRAPHY_TOKENS.fontSizes.englishQuestionHeading,
-              fontWeight: 'bold',
-              minWidth: LAYOUT_TOKENS.childResponse.questionNumberWidthPx + 'px',
-              color: accent,
+              fontWeight: 1000,
+              minWidth: premiumEarlyYears ? 34 : (LAYOUT_TOKENS.childResponse.questionNumberWidthPx + 'px'),
+              minHeight: premiumEarlyYears ? 25 : undefined,
+              display: premiumEarlyYears ? 'inline-grid' : 'inline',
+              placeItems: premiumEarlyYears ? 'center' : undefined,
+              padding: premiumEarlyYears ? '1px 7px' : 0,
+              borderRadius: premiumEarlyYears ? 999 : 0,
+              background: premiumEarlyYears ? accent : 'transparent',
+              color: premiumEarlyYears ? '#fff' : accent,
+              boxShadow: premiumEarlyYears ? `0 0 0 2px ${badgeBg}` : 'none',
               flexShrink: 0
             }}
           >
@@ -306,10 +321,10 @@ export default function EarlyYearsQuestionBlock({
               fontFamily: TYPOGRAPHY_TOKENS.fontFamilies.englishPrimary,
               fontSize: TYPOGRAPHY_TOKENS.fontSizes.metadata,
               fontWeight: 'bold',
-              border: `1.2px solid ${borderColor}`,
+              border: `1.2px solid ${premiumEarlyYears ? accent2 : borderColor}`,
               borderRadius: '12px',
               padding: '2px 8px',
-              background: badgeBg,
+              background: premiumEarlyYears ? '#fff' : badgeBg,
               color: accent,
               flexShrink: 0,
               marginLeft: isUrdu ? 0 : '8px',

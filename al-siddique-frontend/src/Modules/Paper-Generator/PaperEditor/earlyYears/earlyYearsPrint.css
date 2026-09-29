@@ -2,7 +2,21 @@
 .early-years-sheet-a4 {
   height: auto !important;
   overflow: visible !important;
-  background: #fff !important;
+  background: var(--ey-page-background, #fff) !important;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.early-years-sheet-a4[data-premium-early-years="true"] {
+  outline: 1px solid color-mix(in srgb, var(--ey-border, #9eb6cf) 65%, transparent);
+  outline-offset: -4px;
+}
+.early-years-sheet-a4[data-premium-early-years="true"] .counting-cell,
+.early-years-sheet-a4[data-premium-early-years="true"] .num-cell,
+.early-years-sheet-a4[data-premium-early-years="true"] .missing-cell {
+  border-color: var(--ey-border, #9eb6cf) !important;
+}
+.early-years-sheet-a4[data-premium-early-years="true"] .early-years-question-body svg {
+  color: var(--ey-accent, #123b67);
 }
 .early-years-questions-container {
   position: relative;

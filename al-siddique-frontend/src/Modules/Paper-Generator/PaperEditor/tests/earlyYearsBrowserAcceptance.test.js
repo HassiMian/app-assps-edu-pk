@@ -49,6 +49,41 @@ after(async () => {
   if (server) await server.close()
 })
 
+test('EY-BROWSER-PREMIUM: premium child templates and Paper Workspace classics change the real A4 presentation', async () => {
+  await page.goto(`${BASE_URL}?paper=ey-starter-english-2026`, { waitUntil: 'domcontentloaded' })
+  await page.evaluate(() => localStorage.removeItem('assps-early-years-template-map-v1'))
+  await page.reload({ waitUntil: 'domcontentloaded' })
+  await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
+
+  const selector = page.getByLabel('Early Years template')
+  const sheet = page.locator('.early-years-sheet-a4')
+  const premiumHeader = page.locator('[data-early-years-premium-header]')
+  assert.equal(await selector.inputValue(), 'little-scholars-navy')
+  assert.equal(await sheet.getAttribute('data-template-id'), 'little-scholars-navy')
+  assert.equal(await sheet.getAttribute('data-premium-early-years'), 'true')
+  assert.equal(await premiumHeader.getAttribute('data-early-years-premium-header'), 'true')
+  assert.equal(await page.locator('[data-early-years-template-swatches] button').count(), 6)
+
+  const firstQuestion = page.locator('.early-years-question-block').first()
+  assert.equal(await firstQuestion.getAttribute('data-premium-question'), 'true')
+  assert.notEqual(await firstQuestion.evaluate(el => getComputedStyle(el).borderStyle), 'none')
+
+  await selector.selectOption('coral-play')
+  await page.waitForTimeout(100)
+  assert.equal(await sheet.getAttribute('data-template-id'), 'coral-play')
+  const coralAccent = await firstQuestion.evaluate(el => getComputedStyle(el).boxShadow)
+  assert.notEqual(coralAccent, 'none')
+
+  await selector.selectOption('academic')
+  await page.waitForTimeout(100)
+  assert.equal(await sheet.getAttribute('data-template-id'), 'academic')
+  assert.equal(await sheet.getAttribute('data-premium-early-years'), 'false')
+
+  const options = await selector.locator('option').allTextContents()
+  assert.ok(options.includes('Little Scholars Navy'))
+  assert.ok(options.includes('Academic Navy'))
+})
+
 test('EY-BROWSER-01: Starter English Q3 renders colouring sketches (Apple, Mango, Grapes, Banana)', async () => {
   await page.goto(`${BASE_URL}?paper=ey-starter-english-2026`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
