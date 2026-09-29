@@ -14,6 +14,7 @@ const MATH_PLACE_VALUE_RE = /tens?\s+and\s+ones?|place\s+value/i
 const MATH_ORDER_RE = /ascending\s+order|descending\s+order/i
 const MATH_TABLE_RE = /(?:write\s+the\s+)?tables?\s+of\b|table\s+of\s+\d/i
 const PAIR_TABLE_RE = /word\s+meanings?|meanings?\s+of|urdu\s+meaning|opposites?|antonyms?|synonyms?|plural|singular|masculine|feminine|past\s+tense|acronyms?|abbreviations?|full\s+forms?|write\s+(?:these|the\s+following)\s+as\s+numbers?|معانی|مترادف|متضاد|واحد|جمع|مذکر|مونث|ہم\s*آواز/i
+const SENTENCE_USAGE_RE = /use\s+(?:the\s+)?(?:following\s+)?words?\s+in\s+(?:your\s+own\s+)?sentences?|make\s+sentences?\s+(?:with|using)|جمل(?:ہ|ے|وں)[^\n]*(?:استعمال|بنائ|بنا)|الفاظ[^\n]*جمل(?:ہ|ے|وں)|جملوں\s+میں\s+استعمال/i
 
 export function isSectionMarkerLine(line = '') {
   return SECTION_MARKER_RE.test(String(line))
@@ -25,7 +26,7 @@ export function cleanSectionMarker(line = '') {
 
 export function inferOfficialSectionKind(section = {}) {
   const manualKind = String(section.layoutPreset || section.sectionKind || '').trim().toLowerCase()
-  const allowedManualKinds = new Set(['mcq','short','long','table','pair_table','matching','true_false','fill_blank','list','vertical_math','math_compare','math_number_name','math_place_value','math_order','math_table'])
+  const allowedManualKinds = new Set(['mcq','short','long','table','pair_table','sentence_usage','matching','true_false','fill_blank','list','vertical_math','math_compare','math_number_name','math_place_value','math_order','math_table'])
   if (manualKind && manualKind !== 'auto' && allowedManualKinds.has(manualKind)) return manualKind
   const heading = String(section.heading || '')
   const content = String(section.content || '')
@@ -35,6 +36,7 @@ export function inferOfficialSectionKind(section = {}) {
   if (MCQ_HEADING_RE.test(heading)) return 'mcq'
   if (TRUE_FALSE_RE.test(heading)) return 'true_false'
   if (MATCH_RE.test(heading)) return 'matching'
+  if (SENTENCE_USAGE_RE.test(heading)) return 'sentence_usage'
   if (PAIR_TABLE_RE.test(heading)) return 'pair_table'
   if (MATH_COMPARE_RE.test(heading)) return 'math_compare'
   if (MATH_NUMBER_NAME_RE.test(heading)) return 'math_number_name'
@@ -187,5 +189,6 @@ export const OFFICIAL_SECTION_PATTERNS = {
   MATH_PLACE_VALUE_RE,
   MATH_ORDER_RE,
   MATH_TABLE_RE,
-  PAIR_TABLE_RE
+  PAIR_TABLE_RE,
+  SENTENCE_USAGE_RE
 }

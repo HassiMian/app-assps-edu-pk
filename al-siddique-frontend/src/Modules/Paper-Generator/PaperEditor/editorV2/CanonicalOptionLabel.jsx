@@ -39,7 +39,18 @@ export default function CanonicalOptionLabel({
       }}
     >
       <b data-option-label-text>{parts.label}</b>
-      <b data-option-bracket dir="ltr">{parts.closingBracket}</b>
+      <b
+        data-option-bracket
+        dir="ltr"
+        style={{
+          direction: 'ltr',
+          unicodeBidi: 'isolate-override',
+          fontFamily: 'Arial, sans-serif',
+          display: 'inline-block',
+        }}
+      >
+        {parts.closingBracket}
+      </b>
     </span>
   )
 }

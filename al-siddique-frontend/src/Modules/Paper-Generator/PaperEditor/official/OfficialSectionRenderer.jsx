@@ -53,7 +53,20 @@ function SectionBanner({ text, themeColor, isUrdu, fs }) {
 
 function OptionLabel({ label, index, isUrdu, themeColor }) {
   const parts = optionLabelParts(label, index, isUrdu)
-  return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}><b data-option-label-text>{parts.label}</b><b data-option-bracket dir="ltr">{parts.closingBracket}</b></span>
+  return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}>
+    <b data-option-label-text style={{ fontFamily:isUrdu?URDU_FONT_STACK:'inherit' }}>{parts.label}</b>
+    <b
+      data-option-bracket
+      dir="ltr"
+      style={{
+        direction:'ltr',
+        unicodeBidi:'isolate-override',
+        fontFamily:"Arial, sans-serif",
+        fontWeight:900,
+        display:'inline-block',
+      }}
+    >{parts.closingBracket}</b>
+  </span>
 }
 
 function OptionChoice({ option, index, isUrdu, themeColor, editMode=false, section=null, rowIndex=0, onCommit, onActiveEditable }) {
@@ -185,6 +198,26 @@ function SourceTable({ rows, isUrdu, qFs, fs, themeColor }) {
   </tbody></table>
 }
 
+function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor }) {
+  const rawLines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+  let items = rawLines.map(line => line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()).filter(Boolean)
+  if (items.length <= 1) {
+    items = String(content).split(/[،,]|\s{2,}/).map(item => item.replace(/^\d+[.)]\s*/,'').trim()).filter(Boolean)
+  }
+  return <table data-sentence-usage-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}>
+    <thead><tr style={{ background:`${themeColor}10` }}>
+      <th style={{ width:'9%', border:`1px solid ${themeColor}66`, padding:5 }}>#</th>
+      <th style={{ width:'31%', border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'لفظ':'Word'}</th>
+      <th style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جملہ':'Sentence'}</th>
+    </tr></thead>
+    <tbody>{items.map((item,index)=><tr key={index}>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:700, fontFamily:'Arial,sans-serif', direction:'ltr' }}>{index+1}</td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:700 }}><AnswerText text={item}/></td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, minHeight:`${28*fs}px` }}><span style={{ display:'inline-block', width:'94%', borderBottom:`1px solid ${themeColor}88`, minHeight:'1.25em' }} /></td>
+    </tr>)}</tbody>
+  </table>
+}
+
 function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor }) {
   const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
   let items = lines.map(line => line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()).filter(Boolean)
@@ -270,6 +303,7 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
 
   const tableRows = parseMarkdownTable(content)
   if (tableRows.length >= 2) return <SourceTable rows={tableRows} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
+  if (kind === 'sentence_usage') return <SentenceUsageTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
   if (kind === 'pair_table') return <PairPracticeTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
   if (['vertical_math','math_compare','math_number_name','math_place_value','math_order','math_table'].includes(kind)) return <MathPracticeGrid content={content} kind={kind} qFs={qFs} fs={fs} themeColor={themeColor}/>
 
@@ -303,7 +337,7 @@ export default function OfficialSectionRenderer({
  wordSp = 0, textAlign = 'start', fontFamily = ''
 }) {
  const ordered = [...questions].sort((a,b)=>Number(a.sourceOrder||0)-Number(b.sourceOrder||0))
- return <div data-official-sections style={{ direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?URDU_FONT_STACK:(fontFamily||'inherit'), lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:String(letterSp)+'px', wordSpacing:String(wordSp)+'px' }}>
+ return <div data-official-sections style={{ direction:isUrdu?'rtl':'ltr', fontFamily:fontFamily || (isUrdu?URDU_FONT_STACK:'inherit'), lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:String(letterSp)+'px', wordSpacing:String(wordSp)+'px' }}>
   {ordered.map((section,index)=>{
    const kind=inferOfficialSectionKind(section)
    if(kind==='marker'){
@@ -345,12 +379,12 @@ export default function OfficialSectionRenderer({
    return <section key={section.id||index} data-official-section data-section-kind={kind} data-edit-selected={selected?'true':undefined}
     onMouseDown={event=>{if(editMode){if(event.target?.closest?.('[data-paper-inline-editable]')) return;event.stopPropagation();onSelectSection?.(section.id)}}}
     style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?5:0,padding:sectionPadding,breakInside:'auto',outline:editMode?(selected?'2px dashed #dc2626':'1px dashed #ef4444'):'none',outlineOffset:editMode?3:0,background:selected?'rgba(254,226,226,.12)':undefined}}>
-    <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'72px minmax(0,1fr)':'minmax(0,1fr) 72px',alignItems:'center',gap:8,paddingBottom:String(4*fs)+'px',marginBottom:String(6*fs)+'px',borderBottom:divider?'2px solid '+themeColor:'none',direction:'ltr'}}>
-     <div data-question-heading style={{gridColumn:isUrdu?2:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6}}>
+    <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'84px minmax(0,1fr)':'minmax(0,1fr) 84px',gridTemplateRows:'auto',alignItems:'center',gap:8,paddingBottom:String(4*fs)+'px',marginBottom:String(6*fs)+'px',borderBottom:divider?'2px solid '+themeColor:'none',direction:'ltr'}}>
+     <div data-question-heading style={{gridColumn:isUrdu?2:1,gridRow:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6,minWidth:0}}>
       <InlineEditable text={serialText} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-number" sectionId={section.id} ariaLabel={'Edit question '+serial+' number'} onActivate={onActiveEditable} onCommit={commitSerial} style={{flex:'0 0 auto',whiteSpace:'nowrap',fontWeight:900}} />
       <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:900}} />
      </div>
-     {marksLabel?<div data-marks-badge style={{gridColumn:isUrdu?1:2,direction:'ltr',textAlign:'center',border:'1px solid '+themeColor,borderRadius:4,padding:'2px 5px',color:themeColor,fontWeight:800,fontSize:String(Math.max(10,qFs-2))+'px',whiteSpace:'nowrap'}}>
+     {marksLabel?<div data-marks-badge style={{gridColumn:isUrdu?1:2,gridRow:1,direction:'ltr',textAlign:'center',alignSelf:'center',justifySelf:isUrdu?'start':'end',minWidth:64,border:'1px solid '+themeColor,borderRadius:4,padding:'2px 7px',color:themeColor,fontWeight:800,fontSize:String(Math.max(10,qFs-2))+'px',whiteSpace:'nowrap',fontFamily:'Arial,sans-serif'}}>
       <InlineEditable text={marksLabel} editMode={editMode} direction="ltr" fieldKey="marks" sectionId={section.id} ariaLabel={'Edit question '+serial+' marks'} onActivate={onActiveEditable} onCommit={commitMarks} style={{display:'block',textAlign:'center'}} />
      </div>:<span/>}
     </div>

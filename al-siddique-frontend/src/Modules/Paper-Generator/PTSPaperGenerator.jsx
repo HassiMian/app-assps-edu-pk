@@ -9,12 +9,12 @@ import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
 import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
-import { getDisplayOptionLabel } from './PaperEditor/layouts/urduRtlEngine.js'
+import { buildPaperTextFlow, resolvePaperFontFamily } from './PaperEditor/layouts/paperWorkspaceStyleEngine.js'
 import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
 import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
 import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
-import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
+import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
 
 function storeQToTemplate(q) {
  return {
@@ -854,8 +854,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   font-weight: 400 900;
   font-display: block;
 }
-[dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], [dir="rtl"] * {
-  font-family: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
+[data-option-bracket] {
+  direction: ltr !important;
+  unicode-bidi: isolate-override !important;
+  font-family: Arial, sans-serif !important;
 }
 *,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}.no-print,[data-edit-guide]{display:none!important}table{border-collapse:collapse}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
  doc.close()
@@ -949,27 +951,27 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:10 }}>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Letter Sp</span>
- <input type="range" min={0} max={3} step={0.5} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Paper Letter Spacing" type="range" min={0} max={3} step={0.5} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{letterSp}px</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Word Sp</span>
- <input type="range" min={0} max={8} step={0.5} value={wordSp} onChange={e=>setWordSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Paper Word Spacing" type="range" min={0} max={8} step={0.5} value={wordSp} onChange={e=>setWordSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{wordSp}px</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Line H (En)</span>
- <input type="range" min={1} max={3} step={0.1} value={engLineH} onChange={e=>setEngLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="English Line Height" type="range" min={1} max={3} step={0.1} value={engLineH} onChange={e=>setEngLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:26 }}>{engLineH}</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Line H (Ur)</span>
- <input type="range" min={1.5} max={4} step={0.1} value={urdLineH} onChange={e=>setUrdLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Urdu Line Height" type="range" min={1.5} max={4} step={0.1} value={urdLineH} onChange={e=>setUrdLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:26 }}>{urdLineH}</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Font</span>
- <select value={fontFamily} onChange={e=>setFontFamily(e.target.value)} style={{ background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.silver, padding:'4px 8px', fontSize:11, outline:'none', cursor:'pointer' }}>
+ <select aria-label="Paper Font Family" value={fontFamily} onChange={e=>setFontFamily(e.target.value)} style={{ background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.silver, padding:'4px 8px', fontSize:11, outline:'none', cursor:'pointer' }}>
  <option value="">Default</option>
  <option value="'Times New Roman', serif">Times New Roman</option>
  <option value="'Arial', sans-serif">Arial</option>
@@ -992,15 +994,15 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Color</span>
- <input type="color" value={fontColor} onChange={e=>setFontColor(e.target.value)} style={{ width:30, height:26, padding:2, borderRadius:6, border:`1px solid ${D.border}`, background:'transparent', cursor:'pointer' }} />
+ <input aria-label="Paper Font Color" type="color" value={fontColor} onChange={e=>setFontColor(e.target.value)} style={{ width:30, height:26, padding:2, borderRadius:6, border:`1px solid ${D.border}`, background:'transparent', cursor:'pointer' }} />
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Size</span>
- <input type="number" min={8} max={16} value={baseFontSz} onChange={e=>setBaseFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
+ <input aria-label="Paper Body Font Size" type="number" min={8} max={16} value={baseFontSz} onChange={e=>setBaseFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Head Size</span>
- <input type="number" min={8} max={24} value={headFontSz} onChange={e=>setHeadFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
+ <input aria-label="Paper Heading Font Size" type="number" min={8} max={24} value={headFontSz} onChange={e=>setHeadFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
  </div>
  </div>
  <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:8, paddingTop:8, borderTop:`1px solid ${D.border}` }}>
@@ -1072,7 +1074,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
    </div>
    <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Question Type
     <select value={selectedSection.layoutPreset||'auto'} onChange={e=>updateSelectedSection({layoutPreset:e.target.value})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
-     <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
+     <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="sentence_usage">Sentence Usage — لفظ / جملہ</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
     </select>
    </label>
    <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Section Divider
@@ -1317,12 +1319,24 @@ function ShortResponseLayout({ content, isUrdu, fs, qFs, themeColor, layout='1-c
  return <div data-short-layout={layout} style={twoCol ? { display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${4*fs}px ${16*fs}px` } : {}}>{clean.map(item => <div key={item.serial} style={{ display:'grid', gridTemplateColumns:isUrdu?'1fr 34px':'34px 1fr', gap:7, alignItems:'start', marginBottom:`${4*fs}px`, breakInside:'avoid' }}><b dir="ltr" style={{ gridColumn:isUrdu?2:1, textAlign:'center' }}>{item.serial}.</b><div dir={isUrdu?'rtl':'ltr'} style={{ gridColumn:isUrdu?1:2, textAlign:isUrdu?'right':'left', lineHeight:isUrdu?1.8:1.45 }}><TextWithAnswerLines text={item.body} /></div></div>)}</div>
 }
 
+function SentenceUsageResponseTable({ content, isUrdu, fs, qFs, themeColor }) {
+ const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+ const items = lines.map((line,index) => {
+  const match = line.match(/^((?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و))[.)]\s*(.*)$/i)
+  return { serial:match?.[1] || String(index+1), word:match?.[2] || line }
+ })
+ return <table data-sentence-usage-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}>
+  <thead><tr><th style={{ width:44, border:`1px solid ${themeColor}77`, padding:5 }}>#</th><th style={{ width:'31%', border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'لفظ':'Word'}</th><th style={{ border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جملہ':'Sentence'}</th></tr></thead>
+  <tbody>{items.map(item=><tr key={item.serial}><td style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontFamily:'Arial,sans-serif', direction:'ltr' }}>{item.serial}</td><td style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, fontWeight:700, textAlign:isUrdu?'right':'left' }}>{item.word}</td><td style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px` }}><span style={{ display:'inline-block', width:'94%', minHeight:'1.25em', borderBottom:`1px solid ${themeColor}88` }} /></td></tr>)}</tbody>
+ </table>
+}
+
 function OfficialMcqLayout({ rows, isUrdu, fs, qFs, themeColor, layout='matrix-table' }) {
  if (!rows.length) return null
  const maxOptions = Math.max(2, ...rows.map(row => row.options.length))
- if (layout === 'classic') return <div data-mcq-layout="classic">{rows.map(row => <div key={row.number} style={{ marginBottom:`${7*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, textAlign:isUrdu?'right':'left' }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ marginTop:3, textAlign:isUrdu?'right':'left' }}>{row.options.map(opt => <span key={opt.label} style={{ marginInlineEnd:18 }}><b dir="ltr">({opt.label})</b> {opt.text}</span>)}</div></div>)}</div>
- if (layout === 'compact-grid') return <div data-mcq-layout="grid" style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${7*fs}px` }}>{rows.map(row => <div key={row.number} style={{ border:`1px solid ${themeColor}66`, padding:`${6*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, marginBottom:4 }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:4 }}>{row.options.map(opt => <div key={opt.label}><b dir="ltr">({opt.label})</b> {opt.text}</div>)}</div></div>)}</div>
- return <table data-mcq-layout="matrix-table" style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}><thead><tr><th style={{ width:38, border:`1px solid ${themeColor}88`, padding:5 }}>#</th><th style={{ width:'42%', border:`1px solid ${themeColor}88`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'سوال':'Question'}</th>{Array.from({length:maxOptions},(_,i)=><th key={i} style={{ border:`1px solid ${themeColor}88`, padding:5 }}>{String.fromCharCode(65+i)}</th>)}</tr></thead><tbody>{rows.map(row => <tr key={row.number} style={{ breakInside:'avoid' }}><td style={{ border:`1px solid ${themeColor}88`, padding:5, textAlign:'center', fontWeight:800 }}>{row.number}</td><td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:600 }}>{row.prompt}</td>{Array.from({length:maxOptions},(_,i)=>{ const opt=row.options[i]; return <td key={i} style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}>{opt ? <><b dir="ltr">({opt.label})</b> {opt.text}</> : null}</td> })}</tr>)}</tbody></table>
+ if (layout === 'classic') return <div data-mcq-layout="classic">{rows.map(row => <div key={row.number} style={{ marginBottom:`${7*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, textAlign:isUrdu?'right':'left' }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ marginTop:3, textAlign:isUrdu?'right':'left' }}>{row.options.map((opt,optIndex) => <span key={opt.label} style={{ marginInlineEnd:18 }}><PaperOptionLabel label={opt.label} index={optIndex} isUrdu={isUrdu} color={themeColor} />{' '}{opt.text}</span>)}</div></div>)}</div>
+ if (layout === 'compact-grid') return <div data-mcq-layout="grid" style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${7*fs}px` }}>{rows.map(row => <div key={row.number} style={{ border:`1px solid ${themeColor}66`, padding:`${6*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, marginBottom:4 }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:4 }}>{row.options.map((opt,optIndex) => <div key={opt.label}><PaperOptionLabel label={opt.label} index={optIndex} isUrdu={isUrdu} color={themeColor} />{' '}{opt.text}</div>)}</div></div>)}</div>
+ return <table data-mcq-layout="matrix-table" style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}><thead><tr><th style={{ width:38, border:`1px solid ${themeColor}88`, padding:5 }}>#</th><th style={{ width:'42%', border:`1px solid ${themeColor}88`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'سوال':'Question'}</th>{Array.from({length:maxOptions},(_,i)=><th key={i} style={{ border:`1px solid ${themeColor}88`, padding:5 }}><PaperOptionLabel label={String.fromCharCode(65+i)} index={i} isUrdu={isUrdu} color={themeColor} /></th>)}</tr></thead><tbody>{rows.map(row => <tr key={row.number} style={{ breakInside:'avoid' }}><td style={{ border:`1px solid ${themeColor}88`, padding:5, textAlign:'center', fontWeight:800 }}>{row.number}</td><td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:600 }}>{row.prompt}</td>{Array.from({length:maxOptions},(_,i)=>{ const opt=row.options[i]; return <td key={i} style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}>{opt ? <><PaperOptionLabel label={opt.label} index={i} isUrdu={isUrdu} color={themeColor} />{' '}{opt.text}</> : null}</td> })}</tr>)}</tbody></table>
 }
 
 function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeColor, mcqLayout='matrix-table', shortLayout='1-column' }) {
@@ -1343,6 +1357,7 @@ function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeCol
   if (sums.length) return <table data-vertical-math-grid style={{ width:'100%', borderCollapse:'separate', borderSpacing:`${7*fs}px`, tableLayout:'fixed', direction:'ltr', margin:`${4*fs}px 0`, fontFamily:"'Cambria Math','Times New Roman',serif" }}><tbody>{sums.map((sumRow,rowIndex)=><tr key={rowIndex}>{sumRow.map((sum,index)=><td key={index} style={{ border:`1px solid ${themeColor}55`, padding:`${7*fs}px`, textAlign:'right', fontSize:`${Math.max(qFs+2,14)}px`, fontWeight:700 }}><div>{sum.top}</div><div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8 }}><span>{sum.operator}</span><span>{sum.bottom}</span></div><div style={{ borderTop:`1.5px solid ${themeColor}`, height:`${17*fs}px`, marginTop:3 }} /></td>)}</tr>)}</tbody></table>
  }
  if (kind === 'short') return <ShortResponseLayout content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} layout={question.shortLayout || shortLayout} />
+ if (kind === 'sentence_usage') return <SentenceUsageResponseTable content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />
  if (kind === 'matching' || kind === 'table') {
   const tableBlock = blocks.find(block => block.type === 'table')
   if (tableBlock) return <table data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5*fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr' }}><tbody>{tableBlock.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?700:500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
@@ -1431,7 +1446,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <thead><tr style={{ background:`${themeColor}11` }}>
  <th style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', width:'5%' }}>No.</th>
  <th style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px ${5*fs}px` }}>{isUrdu?'سوال':'Question'}</th>
- {['A','B','C','D'].map(l=><th key={l} style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', width:'11%' }}>({l})</th>)}
+ {['A','B','C','D'].map((l,optIndex)=><th key={l} style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', width:'11%' }}><PaperOptionLabel label={l} index={optIndex} isUrdu={isUrdu} color={themeColor} /></th>)}
  </tr></thead>
  <tbody>{qs.map((q,i)=>(
  <tr key={q.id || `${type.value}-row-${i}`}>
@@ -1457,7 +1472,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <div style={{ display:'grid', gridTemplateColumns:`repeat(${half?2:4},1fr)`, gap:`${2*fs}px`, paddingLeft:isUrdu?0:`${14*fs}px`, paddingRight:isUrdu?`${14*fs}px`:0 }}>
  {q.options?.map((opt, optIndex)=>(
  <div key={opt.key || opt.label || `${type.value}-choice-${i}-${optIndex}`} style={{ fontSize:`${qFsSm}px`, direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
- <strong style={{color:themeColor}}>({opt.key || opt.label || String.fromCharCode(65 + optIndex)})</strong>{' '}
+ <PaperOptionLabel label={opt.key || opt.label || String.fromCharCode(65 + optIndex)} index={optIndex} isUrdu={isUrdu} color={themeColor} />{' '}
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitOptionText(q, optIndex, event.currentTarget.textContent || '')} style={editStyle}>{getT(opt)}</span>
  {printAns&&opt.correct&&<span style={{color:'#c00',fontWeight:700}}> </span>}
  </div>
@@ -1520,16 +1535,27 @@ function Logo({ size=50, src=null }) {
 
 function editablePaperProps(edit) { return edit ? { 'data-manual-edit': 'true' } : {} }
 
+function PaperOptionLabel({ label, index=0, isUrdu=false, color='currentColor' }) {
+ const parts = optionLabelParts(label, index, isUrdu)
+ if (!isUrdu) return <b dir="ltr" style={{ color, fontFamily:'Arial,sans-serif', whiteSpace:'nowrap' }}>({parts.label})</b>
+ return <span data-workspace-option-label data-language="urdu" style={{ display:'inline-flex', flexDirection:'row-reverse', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color, whiteSpace:'nowrap', fontWeight:900 }}>
+  <b data-option-label-text style={{ fontFamily:URDU_FONT_STACK }}>{parts.label}</b>
+  <b data-option-bracket dir="ltr" style={{ direction:'ltr', unicodeBidi:'isolate-override', fontFamily:'Arial,sans-serif', display:'inline-block', fontWeight:900 }}>{parts.closingBracket}</b>
+ </span>
+}
+
 function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp=0, wordSp=0 }) {
- return {
-  lineHeight: isUrdu ? urdLineH : engLineH,
-  letterSpacing: `${letterSp}px`,
-  wordSpacing: `${wordSp}px`
- }
+ return buildPaperTextFlow({
+  isUrdu,
+  englishLineHeight:engLineH,
+  urduLineHeight:urdLineH,
+  letterSpacing:letterSp,
+  wordSpacing:wordSp,
+ })
 }
 
 //  Template 1: AS Classic (exact PDF replica) 
-function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
@@ -1539,7 +1565,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
   const qFs = 11 * fs
  const qFsSm = Math.max(7, 10 * fs)
  const qFsHead = 12 * fs
- const wrap = { width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize: `${baseFontSz*fs}px`, direction: isUrdu ? 'rtl' : 'ltr', padding: half ? '3mm 3mm' : '4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }
+ const wrap = { width:'100%', background:'white', color: fontColor, fontFamily: resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:'Arial, sans-serif' }), fontSize: `${baseFontSz*fs}px`, direction: isUrdu ? 'rtl' : 'ltr', padding: half ? '3mm 3mm' : '4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }
  const cell = { border:'1px solid #aaa', padding:`${Math.round(3*fs)}px ${Math.round(7*fs)}px` }
  const cellLbl = { color:'#666', fontSize:`${9*fs}px` }
  const cellVal = { fontWeight:700, fontSize:`${10*fs}px` }
@@ -1611,7 +1637,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
  const themeColor = '#1565c0'
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
+ <div {...editablePaperProps(editMode)} data-paper-style-root style={{ width:'100%', background:'white', color: fontColor, fontFamily: resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:'Arial, sans-serif' }), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:'linear-gradient(135deg,#1a237e 0%,#0d47a1 60%,#1565c0 100%)', padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, marginBottom:`${6*fs}px`, borderRadius:`${4*fs}px` }}><div style={{ textAlign:'center', color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, marginBottom:`${3*fs}px`, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px` }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, border:'1px solid #e0e0e0', fontSize:`${10*fs}px` }}>
  <tbody>
@@ -1750,7 +1776,7 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, type) => sum + (paper[type.value]?.length || 0) * (paper[`${type.value}_marks`] || type.marks || 1), 0)
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const qFs = baseFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)
- const contentFont = isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif')
+ const contentFont = resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:"'Times New Roman', Times, serif" })
  const schoolName = (settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()
  const examBadge = cfg.title || [cfg.examType, cfg.session].filter(Boolean).join(' ') || 'EXAMINATION'
  const compositions = {
@@ -1769,7 +1795,16 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   ['Subject', cfg.subjectName], ['Time Allowed', cfg.timeAllowed], ['Total Marks', String(total)], ['Exam Date', cfg.examDate],
  ]
  const visibleQuestionTypes = questionTypes.filter(type => (paper[type.value] || []).length)
- return <div {...editablePaperProps(editMode)} data-premium-template={variant} style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
+ return <div
+  {...editablePaperProps(editMode)}
+  data-premium-template={variant}
+  data-paper-style-root
+  data-letter-spacing={letterSp}
+  data-word-spacing={wordSp}
+  data-english-line-height={engLineH}
+  data-urdu-line-height={urdLineH}
+  data-paper-font-family={fontFamily || (isUrdu?'urdu-default':'english-default')}
+  style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
   <header style={{ direction:'ltr', borderTop:composition.border, borderBottom:`2px solid ${theme.accent}`, borderLeft:variant==='modern'||variant==='coral'?composition.border:'none', padding:`${5 * fs}px ${8 * fs}px`, background:composition.background, borderRadius:composition.radius, display:'grid', gridTemplateColumns:composition.columns, alignItems:'center', gap:8 }}>
    <div style={{ order:composition.logo, gridColumn:composition.logoColumn || 'auto', display:'grid', placeItems:'center' }}><Logo size={half?42:54} src={settings?.logo} /></div>
    <div style={{ order:composition.title, gridColumn:composition.titleColumn || 'auto', textAlign:composition.titleAlign, minWidth:0 }}><div style={{ color:theme.accent, fontFamily:theme.heading, fontWeight:800, fontSize:`${Math.min(24, (half?18:22) * Math.max(.9, headFontSz/14))}px`, lineHeight:1.15 }}>{schoolName}</div><div style={{ color:'#526174', fontSize:`${9 * fs}px`, marginTop:4 }}>{cfg.address || settings?.address || 'Sharif Chowk, Rayya Khas, Narowal | 03001291959'}</div></div>
