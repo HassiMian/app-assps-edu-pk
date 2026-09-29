@@ -13,6 +13,7 @@ const TABS = [
   ['insert', 'INSERT'],
   ['layout', 'LAYOUT'],
   ['paper', 'PAPER'],
+  ['view', 'VIEW'],
 ]
 
 const INSERT_TYPES = [
@@ -60,6 +61,7 @@ export default function UnifiedPaperCommandBar({
   onToggleEditMode,
   activeFieldKey = null,
   activeStructuredKey = null,
+  activeNodeContext = null,
   onPrint = null,
   onBack = null,
   documentLabel = '',
@@ -80,10 +82,10 @@ export default function UnifiedPaperCommandBar({
     const active = parseFieldKey(activeFieldKey || registry?.getActiveFieldKey())
     const structured = parseStructuredControlKey(activeStructuredKey)
     return {
-      sectionId: structured?.secId || active?.sectionId || workingDoc?.sections?.[0]?.id || null,
-      nodeId: structured?.nodeId || active?.nodeId || null,
+      sectionId: structured?.secId || active?.sectionId || activeNodeContext?.sectionId || workingDoc?.sections?.[0]?.id || null,
+      nodeId: structured?.nodeId || active?.nodeId || activeNodeContext?.nodeId || null,
     }
-  }, [activeFieldKey, activeStructuredKey, registry, workingDoc])
+  }, [activeFieldKey, activeStructuredKey, activeNodeContext, registry, workingDoc])
 
   const sectionOverride = target.sectionId
     ? (pres.sectionLayoutOverrides?.[target.sectionId] || {})
@@ -112,6 +114,11 @@ export default function UnifiedPaperCommandBar({
           {workingDoc?.sourceIdentity?.sourceDatasetGeneration === 'legacy-canvas-v2' && (
             <span className="unified-adapter-badge">Migrated Saved Paper</span>
           )}
+          {activeNodeContext?.nodeId && (
+            <span className="unified-active-target" data-active-question-chip>
+              Q {activeNodeContext.displayNumber || activeNodeContext.ordinal || '—'} · {String(activeNodeContext.nodeType || 'question').replaceAll('_', ' ')}
+            </span>
+          )}
         </div>
 
         <div className="unified-command-actions">
@@ -120,13 +127,6 @@ export default function UnifiedPaperCommandBar({
               <CheckCircle2 size={13}/>{saveStatus}
             </span>
           )}
-          <div className="unified-zoom-controls" data-zoom-controls>
-            <button type="button" onClick={onZoomOut} title="Zoom out" aria-label="Zoom out"><ZoomOut size={13}/></button>
-            <button type="button" onClick={onZoomReset} title="Reset zoom" aria-label="Reset zoom">{zoomLevel}%</button>
-            <button type="button" onClick={onZoomIn} title="Zoom in" aria-label="Zoom in"><ZoomIn size={13}/></button>
-            <button type="button" onClick={onFitWidth} title="Fit paper width" aria-label="Fit Width">Fit Width</button>
-            <button type="button" onClick={onFitPage} title="Fit full page" aria-label="Fit Page"><Maximize2 size={12}/> Fit Page</button>
-          </div>
           <button type="button" onClick={onToggleEditMode} style={{...actionStyle, background: isEditMode ? '#C8991A' : 'rgba(255,255,255,.055)', color: isEditMode ? '#071e34' : '#e2e8f0'}}>
             <Edit3 size={14}/>{isEditMode ? 'Done Editing' : 'Edit Paper'}
           </button>
@@ -223,9 +223,12 @@ export default function UnifiedPaperCommandBar({
                     <option value="table">Table</option><option value="grid">Grid</option><option value="classic">Classic</option>
                   </select>
                 </label>
-                <label style={labelStyle}>SHORT QUESTIONS
+                <label style={labelStyle}>SHORT / LONG FLOW
                   <select aria-label="Short Question Layout" value={sectionOverride.shortLayout || '1-column'} onChange={e => store?.setShortLayout?.(target.sectionId,e.target.value)} style={inputStyle}>
-                    <option value="1-column">1 Column</option><option value="2-column-balanced">2 Columns</option><option value="table">Table</option>
+                    <option value="1-column">1 Column</option>
+                    <option value="2-column-balanced">2 Columns</option>
+                    <option value="3-column-balanced">3 Columns</option>
+                    <option value="table">Table Default</option>
                   </select>
                 </label>
                 <label style={labelStyle}>QUESTION BORDER
@@ -279,6 +282,23 @@ export default function UnifiedPaperCommandBar({
             </div>
             <div className="unified-command-hint">
               School name and logo remain protected. All operational paper metadata stays independently editable.
+            </div>
+          </div>
+        )}
+        {activeTab === 'view' && (
+          <div className="unified-command-group-row">
+            <div className="unified-command-group">
+              <span className="unified-command-group-title"><Maximize2 size={12}/> Canvas view</span>
+              <div className="unified-zoom-controls" data-zoom-controls>
+                <button type="button" onClick={onZoomOut} title="Zoom out" aria-label="Zoom out"><ZoomOut size={13}/></button>
+                <button type="button" onClick={onZoomReset} title="Reset zoom" aria-label="Reset zoom">{zoomLevel}%</button>
+                <button type="button" onClick={onZoomIn} title="Zoom in" aria-label="Zoom in"><ZoomIn size={13}/></button>
+                <button type="button" onClick={onFitWidth} title="Fit paper width" aria-label="Fit Width">Fit Width</button>
+                <button type="button" onClick={onFitPage} title="Fit full page" aria-label="Fit Page"><Maximize2 size={12}/> Fit Page</button>
+              </div>
+            </div>
+            <div className="unified-command-hint">
+              View controls never modify the paper content. Select a question to open its contextual inspector.
             </div>
           </div>
         )}

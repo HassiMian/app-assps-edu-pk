@@ -512,7 +512,7 @@ test('B4-BROWSER-01: Real MCQ persistence: edit option, add option, move, save, 
 
   // Assert ribbon displays success
   const ribbonText = await page.locator('.unified-paper-command-bar').textContent()
-  assert.ok(ribbonText.includes('Draft saved successfully!'), 'Must display Draft saved successfully!')
+  assert.ok(ribbonText.includes('Paper saved') || ribbonText.includes('Saved Papers updated'), 'Must display real Paper save success')
 
   // 6. Reload page with canonical-english
   await page.goto(`${BASE_URL}?mode=canonical-english`, { waitUntil: 'domcontentloaded' })
@@ -651,8 +651,9 @@ test('B4-BROWSER-03: Corrupted draft displays non-destructive warning and preser
   // Verify non-destructive warning is shown
   const ribbonText = await page.locator('.unified-paper-command-bar').textContent()
   assert.ok(
-    ribbonText.includes('Saved draft could not be loaded safely; source paper was left unchanged.') ||
-    ribbonText.includes('Baseline modified; draft preserved separately'),
+    ribbonText.includes('Recovery draft could not be loaded safely; source paper was left unchanged.') ||
+    ribbonText.includes('Baseline modified; recovery draft preserved separately') ||
+    ribbonText.includes('Recovery draft is invalid; source paper was left unchanged.'),
     'Must display non-destructive status message'
   )
 

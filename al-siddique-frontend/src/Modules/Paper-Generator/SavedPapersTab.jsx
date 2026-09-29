@@ -19,6 +19,7 @@ function fmtDate(iso) {
 }
 
 function categoryStats(paper = {}) {
+ const latest = paper.canonicalSavedSummary || {}
  if (paper.schemaVersion === 2 || paper.schemaVersion === '2') {
   const sections = paper.sections || []
   let mcqCount = 0, shortCount = 0, longCount = 0, totalQuestions = 0
@@ -34,7 +35,7 @@ function categoryStats(paper = {}) {
    shortCount,
    longCount,
    totalQuestions,
-   totalMarks: Number(paper.metadata?.totalMarks) || 0,
+   totalMarks: Number(latest.totalMarks ?? paper.metadata?.totalMarks) || 0,
   }
  }
  if (paper.documentFormat === 'official-v12' || paper.documentFormat === 'pts-native-v13') {
@@ -58,7 +59,7 @@ function categoryStats(paper = {}) {
    shortCount,
    longCount,
    totalQuestions,
-   totalMarks: Number(paper.config?.totalMarks) || 0,
+   totalMarks: Number(latest.totalMarks ?? paper.config?.totalMarks) || 0,
   }
  }
  const legacy = {
@@ -82,7 +83,7 @@ function categoryStats(paper = {}) {
  shortCount: legacy.short.length,
  longCount: legacy.long.length,
  totalQuestions,
- totalMarks,
+ totalMarks: Number(latest.totalMarks ?? totalMarks) || 0,
  }
 }
 
@@ -98,9 +99,10 @@ export default function SavedPapersTab({ onLoadPaper }) {
  // Role-based visibility
  if (isTeacher && p.teacherHidden) return false
 
- const nameMatch = !search || p.name?.toLowerCase()?.includes(search.toLowerCase())
- const subMatch = p.config?.subject?.toLowerCase()?.includes(search.toLowerCase())
- const clsMatch = p.config?.classLevel?.toLowerCase()?.includes(search.toLowerCase())
+ const latest = p.canonicalSavedSummary || {}
+ const nameMatch = !search || p.name?.toLowerCase()?.includes(search.toLowerCase()) || latest.title?.toLowerCase()?.includes(search.toLowerCase())
+ const subMatch = (latest.subject || p.config?.subject || '').toLowerCase().includes(search.toLowerCase())
+ const clsMatch = (latest.classLevel || p.config?.classLevel || '').toLowerCase().includes(search.toLowerCase())
  return nameMatch || subMatch || clsMatch
  })
 
@@ -161,6 +163,7 @@ export default function SavedPapersTab({ onLoadPaper }) {
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
  {filtered.map(paper => {
  const stats = categoryStats(paper)
+ const latest = paper.canonicalSavedSummary || {}
  const isUrdu = isUrduScriptPaper(paper)
  const isOfficial = paper.documentFormat === 'pts-native-v13' || paper.documentFormat === 'official-v12' || String(paper.id || '').startsWith('official-first-term-')
 
@@ -190,14 +193,14 @@ export default function SavedPapersTab({ onLoadPaper }) {
 
  {/* Meta */}
  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
- {paper.config?.classLevel && (
+ {(latest.classLevel || paper.config?.classLevel) && (
  <span style={{ fontSize: 11, padding: '3px 8px', borderRadius: 6, background: 'rgba(148,163,184,0.18)', color: C.gold, border: `1px solid rgba(200,153,26,0.3)`, fontWeight: 600 }}>
- Class {paper.config.classLevel}
+ Class {latest.classLevel || paper.config.classLevel}
  </span>
  )}
- {paper.config?.subject && (
+ {(latest.subject || paper.config?.subject) && (
  <span style={{ fontSize: 11, padding: '3px 8px', borderRadius: 6, background: 'rgba(10,132,255,0.1)', color: '#0A84FF', border: '1px solid rgba(10,132,255,0.2)', fontWeight: 600 }}>
- {paper.config.subject}
+ {latest.subject || paper.config.subject}
  </span>
  )}
  {paper.config?.examType && (
@@ -223,7 +226,7 @@ export default function SavedPapersTab({ onLoadPaper }) {
  </div>
 
  <div style={{ fontSize: 11, color: C.muted, marginBottom: 14 }}>
-  {fmtDate(paper.createdAt)}
+  {paper.canonicalSavedAt ? 'Edited ' : ''}{fmtDate(paper.canonicalSavedAt || paper.updatedAt || paper.createdAt)}
  </div>
 
  {/* Actions */}

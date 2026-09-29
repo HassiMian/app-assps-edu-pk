@@ -34,7 +34,9 @@ export default function CanonicalDocumentRenderer({
   store,
   registry,
   activeFieldKey,
+  activeNodeId = null,
   onFocusField,
+  onSelectNode = null,
   externalRevisionToken = 1,
 }) {
   // Performance diagnostics tracking (test-only, zero production overhead, Rule 27)
@@ -581,6 +583,7 @@ export default function CanonicalDocumentRenderer({
           // Grid / classic remain explicit user choices from the Layout tab.
           const mcqLayout = secOverrides.mcqLayout || 'table'
           const shortLayout = secOverrides.shortLayout || '1-column'
+          const sectionColumnCount = shortLayout === '3-column-balanced' ? 3 : (shortLayout === '2-column-balanced' ? 2 : 1)
           const questionBorder = secOverrides.questionBorder || 'none'
           const answerLinesMap = pres.answerLinesByNode || {}
 
@@ -762,7 +765,7 @@ export default function CanonicalDocumentRenderer({
               <div
                 className="canonical-section-nodes"
                 dir={secDir}
-                style={shortLayout === '2-column-balanced' ? { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' } : {}}
+                style={sectionColumnCount > 1 ? { display: 'grid', gridTemplateColumns: `repeat(${sectionColumnCount}, minmax(0, 1fr))`, gap: '14px' } : {}}
               >
                 {(() => {
                   const baselineSec = canonicalBaseline?.sections?.find(s => s.id === section.id)
@@ -798,6 +801,15 @@ export default function CanonicalDocumentRenderer({
                         const nodeMarks = store?.getEffectiveNodeMarks
                           ? store.getEffectiveNodeMarks(section.id, nodeId)
                           : (resolvedNode.authoritativeNodeMarks ?? resolvedNode.operationalNodeMarks ?? null)
+                        const isNodeSelected = activeNodeId === nodeId
+                        const selectNode = () => onSelectNode?.({
+                          sectionId: section.id,
+                          nodeId,
+                          nodeType,
+                          displayNumber: String(displayQNum),
+                          ordinal: currentQNum,
+                        })
+                        const selectedClassName = isNodeSelected ? ' canonical-node-selected' : ''
 
                         const questionNumberControl = (
                           <span
@@ -899,6 +911,8 @@ export default function CanonicalDocumentRenderer({
                               key={nodeId}
                               data-node-id={nodeId}
                               data-node-type={nodeType}
+                              className={'canonical-question-node' + selectedClassName}
+                              onClick={selectNode}
                               style={{ marginBottom: '10px', padding: '2px 0' }}
                             >
                               {controlsHeader}
@@ -934,7 +948,8 @@ export default function CanonicalDocumentRenderer({
                                 key={nodeId}
                                 data-node-id={nodeId}
                                 data-node-type={nodeType}
-                                className="canonical-mcq-table-node"
+                                className={'canonical-mcq-table-node canonical-question-node' + selectedClassName}
+                                onClick={selectNode}
                                 style={{
                                   marginBottom: '8px',
                                   border: `1px solid ${templateBorder}`,
@@ -1191,6 +1206,8 @@ export default function CanonicalDocumentRenderer({
                               key={nodeId}
                               data-node-id={nodeId}
                               data-node-type={nodeType}
+                              className={'canonical-question-node' + selectedClassName}
+                              onClick={selectNode}
                               style={{ marginBottom: '10px', padding: '2px 0', ...qBorderStyle }}
                             >
                               {controlsHeader}
@@ -1271,15 +1288,75 @@ export default function CanonicalDocumentRenderer({
                         const fieldOverlay = nodeOverlay?.editableFields?.[fieldName]
                         const fieldKey = buildFieldKey(workingDoc.baseCanonicalDocumentId, section.id, nodeId, fieldName)
 
+                        const isShortOrLong = ['short_question', 'long_question'].includes(nodeType)
+                        const inheritedQuestionLayout = isShortOrLong && shortLayout === 'table'
+                          ? 'table'
+                          : (questionBorder === 'table' ? 'table' : (questionBorder === 'box' ? 'box' : 'plain'))
+                        const effectiveQuestionLayout = pres.questionLayoutByNode?.[nodeId] || inheritedQuestionLayout
+
+                        if (effectiveQuestionLayout === 'table') {
+                          return (
+                            <div
+                              key={nodeId}
+                              data-node-id={nodeId}
+                              data-node-type={nodeType}
+                              data-question-layout="table"
+                              className={'canonical-question-node canonical-rich-question-table-wrap' + selectedClassName}
+                              onClick={selectNode}
+                              style={{ marginBottom: '9px' }}
+                            >
+                              {controlsHeader}
+                              <table className="canonical-rich-question-table" dir={nodeDir}>
+                                <tbody>
+                                  <tr>
+                                    <td className="canonical-rich-question-number-cell" dir="ltr">
+                                      {questionNumberControl}
+                                    </td>
+                                    <td className="canonical-rich-question-text-cell">
+                                      {fieldOverlay ? (
+                                        <CanonicalEditableText
+                                          fieldKey={fieldKey}
+                                          fieldOverlay={fieldOverlay}
+                                          direction={nodeDir}
+                                          store={store}
+                                          registry={registry}
+                                          onFocusField={onFocusField}
+                                          isEditing={isEditing}
+                                          externalRevisionToken={externalRevisionToken}
+                                        />
+                                      ) : (
+                                        <CanonicalStaticNode node={resolvedNode} direction={nodeDir} />
+                                      )}
+                                      {Boolean(answerLinesMap[nodeId] > 0) && (
+                                        <div className="canonical-answer-lines" style={{ marginTop: '8px', marginBottom: '4px' }}>
+                                          {Array.from({ length: answerLinesMap[nodeId] }, (_, lIdx) => (
+                                            <div key={lIdx} className="canonical-answer-line" style={{ borderBottom: '1px dashed #64748b', height: '24px', width: '100%', margin: '2px 0' }} />
+                                          ))}
+                                        </div>
+                                      )}
+                                    </td>
+                                    <td className="canonical-rich-question-marks-cell" dir="ltr">
+                                      {questionMarksControl}
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          )
+                        }
+
                         return (
                           <div
                             key={nodeId}
                             data-node-id={nodeId}
                             data-node-type={nodeType}
+                            data-question-layout={effectiveQuestionLayout}
+                            className={'canonical-question-node' + selectedClassName}
+                            onClick={selectNode}
                             style={{
                               marginBottom: '10px',
-                              padding: '2px 0',
-                              ...qBorderStyle,
+                              padding: effectiveQuestionLayout === 'box' ? '8px 10px' : '2px 0',
+                              ...(effectiveQuestionLayout === 'box' ? qBorderStyles.box : {}),
                             }}
                           >
                             {controlsHeader}

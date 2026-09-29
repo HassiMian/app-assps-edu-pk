@@ -258,6 +258,7 @@ export function createEditorWorkingDocument(canonicalDoc) {
       zoomLevel: 100,
       pageBorder: 'none',
       sectionLayoutOverrides: {},
+      questionLayoutByNode: {},
       answerLinesByNode: {},
       structuredFieldStyles: {},
       printMode: 'a4',

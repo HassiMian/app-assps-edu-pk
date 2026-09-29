@@ -1,7 +1,8 @@
 // CanonicalEditableText.jsx — Focus-Stable In-Place Tiptap Field Editor (Rules 1, 27, 28, 29, 30)
 import React, { useEffect, useRef } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
-import { getCanonicalEditorExtensions } from './CanonicalEditorExtensions.js'
+import { BubbleMenu } from '@tiptap/react/menus'
+import { getCanonicalEditorExtensions, SUPPORTED_FONTS, SUPPORTED_SIZES } from './CanonicalEditorExtensions.js'
 import CanonicalStaticText from './CanonicalStaticText.jsx'
 
 function CanonicalEditableText({
@@ -142,6 +143,15 @@ function ActiveInPlaceEditor({
     }
   }, [externalRevisionToken, fieldOverlay?.workingRich, editor])
 
+  const applyTextStyle = (attr, value) => {
+    if (!editor) return
+    const currentAttrs = editor.getAttributes('textStyle') || {}
+    const nextAttrs = { ...currentAttrs, [attr]: value || null }
+    const chain = editor.chain().focus()
+    if (Object.values(nextAttrs).some(Boolean)) chain.setMark('textStyle', nextAttrs).run()
+    else chain.unsetMark('textStyle').run()
+  }
+
   return (
     <span
       className="canonical-stem-box canonical-editable-field"
@@ -153,6 +163,39 @@ function ActiveInPlaceEditor({
         }
       }}
     >
+      {editor && (
+        <BubbleMenu
+          editor={editor}
+          pluginKey={`canonical-selection-bubble-${fieldKey}`}
+          updateDelay={80}
+          shouldShow={({ from, to }) => from !== to && editor.isEditable}
+          options={{ placement: 'top', offset: 8, shift: true, flip: true }}
+          className="canonical-selection-bubble"
+          data-selection-bubble
+        >
+          <button type="button" title="Bold selected text" onMouseDown={e => e.preventDefault()} onClick={() => editor.chain().focus().toggleBold().run()} className={editor.isActive('bold') ? 'is-active' : ''}>B</button>
+          <button type="button" title="Italic selected text" onMouseDown={e => e.preventDefault()} onClick={() => editor.chain().focus().toggleItalic().run()} className={editor.isActive('italic') ? 'is-active' : ''}><em>I</em></button>
+          <button type="button" title="Underline selected text" onMouseDown={e => e.preventDefault()} onClick={() => editor.chain().focus().toggleUnderline().run()} className={editor.isActive('underline') ? 'is-active' : ''}><u>U</u></button>
+          <select
+            aria-label="Selection Font Family"
+            title="Font for selected text"
+            value={editor.getAttributes('textStyle')?.fontFamily || ''}
+            onChange={e => applyTextStyle('fontFamily', e.target.value)}
+          >
+            <option value="">Font</option>
+            {SUPPORTED_FONTS.map(font => <option key={font.value} value={font.value}>{font.label}</option>)}
+          </select>
+          <select
+            aria-label="Selection Font Size"
+            title="Size for selected text"
+            value={String(editor.getAttributes('textStyle')?.fontSize || '').replace(/[^0-9]/g, '')}
+            onChange={e => applyTextStyle('fontSize', e.target.value ? `${e.target.value}pt` : null)}
+          >
+            <option value="">Size</option>
+            {SUPPORTED_SIZES.map(size => <option key={size} value={size}>{size}</option>)}
+          </select>
+        </BubbleMenu>
+      )}
       <EditorContent editor={editor} />
       {fieldOverlay?.lockedMarksEvidence && (
         <span className="canonical-locked-marks-badge" title="Authoritative marks evidence (read-only)">

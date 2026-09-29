@@ -38,6 +38,7 @@ export default function PaperEditorRouter({
     return (
       <CanonicalPaperEditorMain
         loadedPaper={routingDecision.resolvedPaper}
+        sourcePaperRecord={loadedPaper}
         onReturnToSource={onReturnToSource}
       />
     )

@@ -1196,6 +1196,24 @@ export class EditorWorkingStore {
     }
   }
 
+  setQuestionLayout(nodeId, layout) {
+    if (!nodeId) return false
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.questionLayoutByNode) {
+      this._workingDoc.presentation.questionLayoutByNode = {}
+    }
+    if (layout === 'inherit' || layout === null || layout === undefined || layout === '') {
+      delete this._workingDoc.presentation.questionLayoutByNode[nodeId]
+    } else {
+      const normalized = ['plain', 'box', 'table'].includes(layout) ? layout : 'plain'
+      this._workingDoc.presentation.questionLayoutByNode[nodeId] = normalized
+    }
+    this._workingDoc.presentation.isDirty = true
+    this._workingDoc.session.isDirty = true
+    this.publishDocumentChange()
+    return true
+  }
+
   getStructuredFieldStyle(controlKey) {
     if (!controlKey) return {}
     return {
@@ -1366,6 +1384,7 @@ export class EditorWorkingStore {
         printMode: this._workingDoc.presentation.printMode || 'a4',
         pageBorder: this._workingDoc.presentation.pageBorder || 'none',
         sectionLayoutOverrides: this._workingDoc.presentation.sectionLayoutOverrides || {},
+        questionLayoutByNode: this._workingDoc.presentation.questionLayoutByNode || {},
         answerLinesByNode: this._workingDoc.presentation.answerLinesByNode || {},
         structuredFieldStyles: this._workingDoc.presentation.structuredFieldStyles || {},
       },
@@ -1551,6 +1570,10 @@ export class EditorWorkingStore {
           sectionLayoutOverrides: {
             ...(candidateDoc.presentation.sectionLayoutOverrides || {}),
             ...(compactDraft.presentationPatch.sectionLayoutOverrides || {}),
+          },
+          questionLayoutByNode: {
+            ...(candidateDoc.presentation.questionLayoutByNode || {}),
+            ...(compactDraft.presentationPatch.questionLayoutByNode || {}),
           },
           answerLinesByNode: {
             ...(candidateDoc.presentation.answerLinesByNode || {}),
