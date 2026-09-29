@@ -1,11 +1,11 @@
 // PaperGenerator.jsx — ASSPS clean Paper Workspace router
 import { lazy, Suspense, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { usePaperStore } from './usePaperStore'
+
 import { resolvePaperRoute } from './resolvePaperRoute.js'
 
 const SavedPapersTab = lazy(() => import('./SavedPapersTab'))
-const LessonPlanTab = lazy(() => import('./LessonPlanTab'))
+const LessonPlanModule = lazy(() => import('./LessonPlanModule'))
 const PTSPaperGenerator = lazy(() => import('./PTSPaperGenerator'))
 const BoardPaperGenerator = lazy(() => import('./BoardPaperGenerator'))
 const QuestionBank = lazy(() => import('./QuestionBank'))
@@ -64,7 +64,6 @@ export default function PaperGenerator() {
   const initialTab = ROUTABLE_TAB_IDS.has(requestedTab) ? requestedTab : 'build'
   const [moduleTab, setModuleTab] = useState(initialTab)
   const [loadedSavedPaper, setLoadedSavedPaper] = useState(null)
-  const { paperSettings } = usePaperStore()
 
   const openModuleTab = tab => {
     if (tab.path) navigate(tab.path)
@@ -126,7 +125,7 @@ export default function PaperGenerator() {
     return <ModuleWrap><DailyDiaryFeature/></ModuleWrap>
   }
   if (moduleTab === 'lesson') {
-    return <ModuleWrap><LessonPlanTab settings={paperSettings}/></ModuleWrap>
+    return <ModuleWrap><LessonPlanModule/></ModuleWrap>
   }
 
   // Compatibility only: these routes are not shown in normal Paper Generator navigation.
