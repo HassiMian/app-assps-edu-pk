@@ -663,7 +663,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [watermarkScale, setWatermarkScale] = useState(Number(editorSettings.watermarkScale ?? 1.18))
  const canvasRef = useRef(null)
  const [canvasSize, setCanvasSize] = useState({ width:794, height:1123 })
- const [zoomMode, setZoomMode] = useState('fit-width')
+ const [zoomMode, setZoomMode] = useState('fit-page')
  const [zoomPercent, setZoomPercent] = useState(100)
  const [isFullscreen, setIsFullscreen] = useState(false)
 
@@ -810,7 +810,14 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const selectedMcqRows = selectedSectionKind === 'mcq' ? parseOfficialMcqRows(selectedSection?.content || '') : []
  const toggleEditMode = () => setEditMode(current => {
   const next = !current
-  if (!next) { setSelectedSectionId(''); setActiveEditable(null) }
+  if (next) {
+   setZoomMode('fit-page')
+   setZoomPercent(100)
+   requestAnimationFrame(()=>canvasRef.current?.scrollTo?.({ top:0, left:0, behavior:'instant' }))
+  } else {
+   setSelectedSectionId('')
+   setActiveEditable(null)
+  }
   return next
  })
  const updateSelectedSection = changes => selectedSection && updatePaperQuestion('official_section', selectedSection.id, changes)
@@ -991,10 +998,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const filterSel = { ...filterInp, cursor:'pointer' }
 
  return (
- <div className="pts-generator-surface" style={{ display:'flex', flexDirection:'column', minHeight:'calc(100vh - 82px)', height:'calc(100vh - 82px)', width:'100%', position:'relative', ...themeVars(uiTheme) }}>
+ <div className="pts-generator-surface" data-paper-workspace-shell style={{ display:'flex', flexDirection:'column', minHeight:'calc(100vh - 82px)', height:'calc(100vh - 82px)', width:'100%', position:'relative', overflow:'hidden', ...themeVars(uiTheme) }}>
  <style>{`.pts-generator-surface select option, .pts-generator-surface select optgroup { background: var(--pg-option-bg, #0a1e35); color: var(--pg-option-text, #e6eef8); }`}</style>
- <div style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
- <div style={{ display:'flex', gap:8, marginBottom:12, flexWrap:'wrap', alignItems:'center' }}>
+ <div data-paper-command-center style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'8px 14px 7px', flexShrink:0, position:'relative', zIndex:40, boxShadow:'0 8px 24px rgba(2,12,27,.16)' }}>
+ <div data-command-row="template" style={{ display:editMode?'none':'flex', gap:8, marginBottom:editMode?0:7, flexWrap:'nowrap', alignItems:'center', overflowX:'auto', scrollbarWidth:'thin' }}>
  <div style={{display:'flex',alignItems:'center',gap:7}}>
   <span style={{fontSize:11,color:D.muted,fontWeight:800}}>Template</span>
   <select aria-label="Paper template" value={tmpl} onChange={e=>setTmpl(e.target.value)} style={{...tinp,minWidth:170,cursor:'pointer',fontWeight:700,color:D.gold}}>
@@ -1006,31 +1013,37 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  {PRINT_MODES.map(m=>(<button key={m.id} onClick={()=>setPrintMode(m.id)} style={{ padding:'8px 16px', borderRadius:9, border:`1px solid ${D.border}`, cursor:'pointer', fontWeight:600, fontSize:12, transition:'all .15s', background: printMode===m.id ? `rgba(48,209,88,0.15)` : 'rgba(15,23,42,0.46)', color: printMode===m.id ? D.green : D.muted, borderColor: printMode===m.id ? `rgba(48,209,88,0.4)` : D.border, }}>{printMode===m.id?' ':' '}{m.label}</button>))}
  </div>
  </div>
- <div data-paper-header-controls style={{ display:'flex', gap:12, flexWrap:'wrap', alignItems:'center' }}>
- {[['Class', headerClass, setHeaderClass, 70, 'text'], ['Subject', headerSubject, setHeaderSubject, 120, 'text'], ['Paper Code', paperCode, setPaperCode, 105, 'text'], ['Time Allowed', timeAllwd, setTimeAllwd, 110, 'text'], ['Exam Date', examDate, setExamDate, 110, 'text']].map(([lbl, val, set, w, type])=>(
- <div key={lbl} style={{ display:'flex', gap:6, alignItems:'center' }}>
- <span style={{ fontSize:12, color:D.muted, fontWeight:600 }}>{lbl}</span>
- <input type={type} value={val} onChange={e=>set(e.target.value)} style={{ ...tinp, width:w }} />
- </div>
- ))}
- <div style={{ display:'flex', gap:6, alignItems:'center' }}>
- <span style={{ fontSize:12, color:D.muted, fontWeight:600 }}>Total Marks</span>
- <input aria-label="Total Marks" type="number" min="0" value={headerTotalMarks || ''} onChange={e=>{ setHeaderTotalMarks(Math.max(0,Number(e.target.value)||0)); setMarksAuthorityEdited(true) }} style={{ ...tinp, width:72 }} />
- </div>
- <div style={{ display:'flex', gap:6, alignItems:'center' }}>
- <span style={{ fontSize:12, color:D.muted, fontWeight:600 }}>Language</span>
- <select value={language} onChange={e=>setLanguage(e.target.value)} style={{ ...tinp, cursor:'pointer', width:120 }}><option value="english">English</option><option value="urdu">Urdu (اردو)</option><option value="dual">Dual Medium</option></select>
- </div>
- <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printBub} onChange={e=>setPrintBub(e.target.checked)} style={{ accentColor:D.gold }} />Bubble Sheet</label>
- <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printAns} onChange={e=>setPrintAns(e.target.checked)} style={{ accentColor:D.gold }} />Answer Keys</label>
- <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
- <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
- <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
- {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
- <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
- <DBtn color="green" onClick={doSave} disabled={!totalQs} style={{ padding:'8px 16px', fontSize:13 }}> Save</DBtn>
- <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
- </div>
+ <div data-paper-header-controls style={{ display:'grid', gridTemplateRows:'auto auto', gap:6, paddingBottom:2 }}>
+  <div data-paper-meta-row style={{ display:'flex', gap:9, flexWrap:'wrap', alignItems:'center' }}>
+   {[['Class', headerClass, setHeaderClass, 64, 'text'], ['Subject', headerSubject, setHeaderSubject, 112, 'text'], ['Paper Code', paperCode, setPaperCode, 96, 'text'], ['Time Allowed', timeAllwd, setTimeAllwd, 100, 'text'], ['Exam Date', examDate, setExamDate, 102, 'text']].map(([lbl, val, set, w, type])=>(
+   <div key={lbl} style={{ display:'flex', gap:5, alignItems:'center', whiteSpace:'nowrap' }}>
+    <span style={{ fontSize:11, color:D.muted, fontWeight:700 }}>{lbl}</span>
+    <input type={type} value={val} onChange={e=>set(e.target.value)} style={{ ...tinp, width:w, padding:'6px 8px' }} />
+   </div>
+   ))}
+   <div style={{ display:'flex', gap:5, alignItems:'center', whiteSpace:'nowrap' }}>
+    <span style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Total Marks</span>
+    <input aria-label="Total Marks" type="number" min="0" value={headerTotalMarks || ''} onChange={e=>{ setHeaderTotalMarks(Math.max(0,Number(e.target.value)||0)); setMarksAuthorityEdited(true) }} style={{ ...tinp, width:64, padding:'6px 8px' }} />
+   </div>
+   <div style={{ display:'flex', gap:5, alignItems:'center', whiteSpace:'nowrap' }}>
+    <span style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Language</span>
+    <select value={language} onChange={e=>setLanguage(e.target.value)} style={{ ...tinp, cursor:'pointer', width:112, padding:'6px 8px' }}><option value="english">English</option><option value="urdu">Urdu (اردو)</option><option value="dual">Dual Medium</option></select>
+   </div>
+  </div>
+  <div data-paper-action-row style={{ display:'flex', gap:10, alignItems:'center', justifyContent:'space-between', minWidth:0, borderTop:`1px solid ${D.border}`, paddingTop:6 }}>
+   <div data-paper-output-tools style={{ display:'flex', gap:13, alignItems:'center', flexWrap:'wrap', minWidth:0 }}>
+    <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver, whiteSpace:'nowrap' }}><input aria-label="Bubble Sheet" type="checkbox" checked={printBub} onChange={e=>setPrintBub(e.target.checked)} style={{ accentColor:D.gold }} />Bubble Sheet</label>
+    <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver, whiteSpace:'nowrap' }}><input aria-label="Answer Keys" type="checkbox" checked={printAns} onChange={e=>setPrintAns(e.target.checked)} style={{ accentColor:D.gold }} />Answer Keys</label>
+    <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver, whiteSpace:'nowrap' }}><input aria-label="Ans Lines" type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
+   </div>
+   <div data-primary-paper-actions style={{ display:'flex', gap:7, alignItems:'center', flexShrink:0 }}>
+    <DBtn color="ghost" onClick={onBack} style={{ padding:'7px 13px', fontSize:12 }}>← Back</DBtn>
+    {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'7px 14px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
+    <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'7px 16px', fontWeight:600, fontSize:12, cursor:'pointer', display:'flex', alignItems:'center', gap:7 }}>Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 7px', fontSize:10, fontWeight:700 }}>{totalQs}</span>)}</button>
+    <DBtn color="green" onClick={doSave} disabled={!totalQs} style={{ padding:'7px 14px', fontSize:12 }}>Save</DBtn>
+    <GoldBtn onClick={doPrint} style={{ padding:'7px 17px', fontSize:12 }}>Print</GoldBtn>
+   </div>
+  </div>
  </div>
  <details data-paper-metadata-editor style={{ marginTop:8 }}>
  <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>Paper Information — edit all header fields</summary>
@@ -1053,9 +1066,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>}
  <div style={{ marginTop:7, fontSize:10, color:D.muted }}>School name and logo are locked to school branding. Every other paper field is editable. Official source data stays locked; Save writes an editable working copy.</div>
  </details>
- <details style={{ marginTop:8 }}>
+ <details data-paper-style-panel style={{ marginTop:6 }}>
  <summary style={{ cursor:'pointer', color:D.silver, fontSize:12, fontWeight:700, userSelect:'none' }}>Paper Style &amp; Layout</summary>
- <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:10 }}>
+ <div data-style-controls-row style={{ display:'flex', gap:11, flexWrap:'nowrap', alignItems:'center', marginTop:7, overflowX:'auto', paddingBottom:4, scrollbarWidth:'thin' }}>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Letter Sp</span>
  <input aria-label="Paper Letter Spacing" type="range" min={-1} max={5} step={0.1} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:82, accentColor:D.gold }} />
@@ -1112,7 +1125,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <input aria-label="Paper Heading Font Size" type="number" min={8} max={24} value={headFontSz} onChange={e=>setHeadFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
  </div>
  </div>
- <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:8, paddingTop:8, borderTop:`1px solid ${D.border}` }}>
+ <div data-structure-controls-row style={{ display:'flex', gap:11, flexWrap:'nowrap', alignItems:'center', marginTop:5, paddingTop:6, borderTop:`1px solid ${D.border}`, overflowX:'auto', paddingBottom:3, scrollbarWidth:'thin' }}>
  <span style={{ fontSize:11, color:D.gold, fontWeight:700, letterSpacing:'0.04em' }}>STRUCTURE</span>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Q Border</span>
@@ -1241,7 +1254,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   </> : <div style={{fontSize:11,lineHeight:1.55,color:D.muted}}>The paper will not move in Edit mode. Click a question to open structural controls. Click its text to type directly. Select text to use the floating Word-style formatting bar.</div>}
   <button type="button" onClick={addOfficialSection} style={{...tinp,width:'100%',marginTop:10,cursor:'pointer',fontWeight:900,color:D.gold}}>+ Add Question</button>
  </div>}
- <div id="paper-canvas" ref={canvasRef} style={{ flex:1, minHeight:0, overflowY:'auto', background:'var(--pg-canvas, #1e2a3a)', padding:'12px', display:'flex', flexDirection:'column', alignItems:'center', gap: half ? 8 : 0 }}>
+ <div id="paper-canvas" data-paper-canvas ref={canvasRef} style={{ flex:1, minHeight:0, overflow:'auto', background:'var(--pg-canvas, #1e2a3a)', padding:'8px 12px 12px', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', gap: half ? 8 : 0, scrollBehavior:'smooth' }}>
  {totalQs === 0 ? (
  <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:60 }}>
  <div style={{ fontSize:72, marginBottom:16, opacity:0.4 }}></div>

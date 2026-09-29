@@ -75,16 +75,17 @@ test('Workspace Urdu: option label uses Urdu letter plus a true closing bracket'
 
   const label = option.locator('[data-option-label-text]')
   const bracket = option.locator('[data-option-bracket]')
-  const bracketShape = bracket.locator('[data-option-bracket-shape]')
+  const bracketGlyph = bracket.locator('[data-option-bracket-glyph]')
   assert.equal((await label.textContent()).trim(), 'الف')
   assert.equal((await bracket.textContent()).trim(), ')')
-  await bracketShape.waitFor({ state: 'visible' })
-  assert.match(await bracketShape.locator('path').getAttribute('d'), /M1\.1 1\.2 C5\.1 4\.1 6\.8 7\.2 6\.8 9/)
+  assert.equal((await bracketGlyph.textContent()).trim(), ')')
+  assert.equal(await bracket.locator('svg').count(), 0, 'Bracket must be a normal typographic glyph, not an oversized custom SVG')
 
   const bracketCss = await bracket.evaluate(node => ({
     direction: getComputedStyle(node).direction,
     unicodeBidi: getComputedStyle(node).unicodeBidi,
     fontFamily: getComputedStyle(node).fontFamily,
+    lineHeight: getComputedStyle(node).lineHeight,
   }))
   assert.equal(bracketCss.direction, 'ltr')
   assert.match(bracketCss.unicodeBidi, /isolate|override/i)
@@ -97,6 +98,9 @@ test('Workspace Urdu: option label uses Urdu letter plus a true closing bracket'
   assert.ok(labelBox && bracketBox && textBox)
   assert.ok(labelBox.x > bracketBox.x, 'Urdu label must sit to the right of its closing bracket')
   assert.ok(bracketBox.x > textBox.x, 'Closing bracket must sit between the Urdu label and option text')
+  assert.ok(bracketBox.height <= labelBox.height * 1.18, `Bracket must stay typographically aligned instead of becoming a tall curved stroke (label=${labelBox.height}, bracket=${bracketBox.height})`)
+  assert.ok(bracketBox.height >= labelBox.height * 0.55, `Bracket must remain legible at Urdu text size (label=${labelBox.height}, bracket=${bracketBox.height})`)
+  assert.ok(bracketBox.width < labelBox.height * 0.55, `Bracket must remain compact beside the Urdu option label (label=${labelBox.height}, bracketWidth=${bracketBox.width})`)
 })
 
 test('Workspace Urdu: sentence usage renders dedicated word/sentence columns', async () => {
@@ -129,6 +133,53 @@ test('Workspace matching columns expose editable Column A/B headings and cells',
   await page.getByRole('button', { name: 'Done Editing' }).click()
   assert.match(await table.textContent(), /کالم الف/)
   assert.match(await table.textContent(), /کتابچہ/)
+})
+
+test('Workspace Table type creates a real balanced two-column table and Edit mode keeps the first page in view', async () => {
+  await page.getByRole('button', { name: 'Edit Paper' }).click()
+  await page.waitForTimeout(180)
+
+  const shell = page.locator('[data-paper-workspace-shell]')
+  const commandCenter = page.locator('[data-paper-command-center]')
+  const canvas = page.locator('[data-paper-canvas]')
+  const preview = page.locator('.preview-container').first()
+  const shellBox = await shell.boundingBox()
+  const commandBox = await commandCenter.boundingBox()
+  const canvasBox = await canvas.boundingBox()
+  const previewBox = await preview.boundingBox()
+  assert.ok(shellBox && commandBox && canvasBox && previewBox)
+  assert.ok(Math.abs(commandBox.width - shellBox.width) < 3, 'Command center must span the full paper workspace width')
+  const activeZoom = await preview.evaluate(el => Number.parseFloat(el.style.zoom || '1'))
+  assert.ok(1123 * activeZoom <= canvasBox.height + 3, `Fit Page must keep the first A4 page visible inside the live canvas (zoom=${activeZoom}, canvas=${canvasBox.height})`)
+  assert.ok(794 * activeZoom <= canvasBox.width + 3, `Fit Page must keep the first A4 page within the live canvas width (zoom=${activeZoom}, canvas=${canvasBox.width})`)
+
+  const shortSection = page.locator('[data-official-section][data-section-kind="short"]').first()
+  await shortSection.evaluate(el => el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true })))
+  const typeSelect = page.getByLabel('Question Type')
+  await typeSelect.selectOption('table')
+
+  const rawSummary = page.locator('summary').filter({ hasText: 'Advanced raw content' })
+  await rawSummary.click()
+  const raw = page.getByLabel('Selected question raw content')
+  const original = await raw.inputValue()
+  await raw.fill('i. عرض بلد اور طول بلد میں فرق تحریر کریں۔\nii. آتش فشاں پر نوٹ لکھیں۔\niii. رہائشی بستیوں کی ساخت کے لحاظ سے اقسام بیان کریں۔')
+
+  const selectedTableSection = page.locator('[data-official-section][data-edit-selected="true"]')
+  assert.equal(await selectedTableSection.getAttribute('data-section-kind'), 'table')
+  const table = selectedTableSection.locator('[data-balanced-question-table]')
+  await table.waitFor({ state: 'visible' })
+  assert.equal(await table.getAttribute('data-table-columns'), '2')
+  assert.equal(await table.locator('tbody tr').count(), 2, 'Three questions must balance into two table rows')
+  assert.equal(await table.locator('[data-balanced-table-item]').count(), 3)
+  const firstRowCells = table.locator('tbody tr').first().locator('td')
+  assert.equal(await firstRowCells.count(), 2)
+  for (let i = 0; i < 2; i += 1) {
+    assert.notEqual(await firstRowCells.nth(i).evaluate(el => getComputedStyle(el).borderStyle), 'none')
+  }
+
+  await raw.fill(original)
+  await typeSelect.selectOption('short')
+  await page.getByRole('button', { name: 'Done Editing' }).click()
 })
 
 test('Workspace objective tools render Bubble Sheet and teacher-set Answer Key', async () => {

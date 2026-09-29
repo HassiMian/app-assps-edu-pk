@@ -157,6 +157,41 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor, editMode=false,
   </div>
 }
 
+function BalancedQuestionTable({ rows, content='', isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
+  const commitRow=(row,payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const nextContent=replaceNumberedLine(content,row,payload.text,isUrdu)
+    const key='item-'+row.sourceIndex
+    onQuestionChange(section.id,{ content:nextContent, richText:{...(section.richText||{}),[key]:payload.html} })
+  }
+  const renderEntry=(row)=>{
+    if(!row) return <div data-balanced-table-empty style={{minHeight:`${28*fs}px`}}/>
+    const key='item-'+row.sourceIndex
+    const rich=section?.richText?.[key]||''
+    return <div data-balanced-table-item style={{display:'grid',gridTemplateColumns:isUrdu?'minmax(0,1fr) 34px':'34px minmax(0,1fr)',alignItems:'start',gap:6,minWidth:0}}>
+      <div style={{gridColumn:isUrdu?2:1,fontWeight:900,textAlign:'center',whiteSpace:'nowrap',color:themeColor}}>
+        <ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/>
+      </div>
+      <div style={{gridColumn:isUrdu?1:2,minWidth:0,textAlign:isUrdu?'right':'left'}}>
+        {(editMode||rich)
+          ? <InlineEditable text={row.text} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section?.id} ariaLabel={'Edit table item '+row.serial} onActivate={onActiveEditable} onCommit={payload=>commitRow(row,payload)} style={{display:'block',minWidth:0}} />
+          : <AnswerText text={row.text}/>}
+      </div>
+    </div>
+  }
+  if(!rows.length) return null
+  const split=Math.ceil(rows.length/2)
+  const first=rows.slice(0,split)
+  const second=rows.slice(split)
+  const lineCount=Math.max(first.length,second.length)
+  return <table data-balanced-question-table data-table-columns="2" style={{width:'100%',borderCollapse:'collapse',tableLayout:'fixed',fontSize:`${qFs}px`,direction:isUrdu?'rtl':'ltr'}}>
+    <tbody>{Array.from({length:lineCount},(_,index)=><tr key={index} style={{breakInside:'avoid'}}>
+      <td style={{width:'50%',border:`1px solid ${themeColor}66`,padding:`${7*fs}px ${8*fs}px`,verticalAlign:'top'}}>{renderEntry(first[index])}</td>
+      <td style={{width:'50%',border:`1px solid ${themeColor}66`,padding:`${7*fs}px ${8*fs}px`,verticalAlign:'top'}}>{renderEntry(second[index])}</td>
+    </tr>)}</tbody>
+  </table>
+}
+
 function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeColor, answerLinesPerItem = 0, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
   const commitRow=(row, payload)=>{
     if(!section?.id||!onQuestionChange) return
@@ -393,6 +428,10 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
 
   const tableRows = parseMarkdownTable(content)
   if (tableRows.length >= 2) return <SourceTable rows={tableRows} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  if (kind === 'table') {
+    const rows=parseNumberedLines(content)
+    return <BalancedQuestionTable rows={rows} content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  }
   if (kind === 'matching') return <MatchingColumnsTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
   if (kind === 'sentence_usage') return <SentenceUsageTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
   if (kind === 'pair_table') return <PairPracticeTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
