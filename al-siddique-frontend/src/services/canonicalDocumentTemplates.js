@@ -1,4 +1,4 @@
-﻿/**
+/**
  * JARVIS 4.1 & ASSPS SCHOOL SAAS — CANONICAL DOCUMENT TEMPLATES (Frontend Service)
  *
  * Single source of truth for all visual document templates:
@@ -51,12 +51,13 @@ export function getTemplateTheme(templateId = 1) {
 
 export function feeParts(challan = {}, discountOverride) {
   const monthly = Number(challan.monthly_fee ?? challan.amount ?? 0);
+  const paperFund = Number(challan.paper_fund ?? 0);
   const arrears = Number(challan.previous_arrears ?? challan.prev_month_fee ?? 0);
   const discount = Number(discountOverride ?? challan.discount ?? 0);
-  const gross = Number(challan.gross_total ?? Math.max(0, monthly + arrears - discount));
+  const gross = Number(challan.gross_total ?? Math.max(0, monthly + paperFund + arrears - discount));
   const paid = Number(challan.paid_amount ?? 0);
   const remaining = Number(challan.remaining_balance ?? Math.max(0, gross - paid));
-  return { monthly, arrears, discount, gross, paid, remaining };
+  return { monthly, paperFund, arrears, discount, gross, paid, remaining };
 }
 
 export function renderDynamicFeeRows(ch, theme) {
@@ -110,12 +111,20 @@ export function renderDynamicFeeRows(ch, theme) {
     `;
     return rowsHtml;
   } else {
-    const { monthly: amt, arrears: prevFee, discount: disc, gross: net, paid: paidAmt } = feeParts(ch);
+    const { monthly: amt, paperFund, arrears: prevFee, discount: disc, gross: net, paid: paidAmt } = feeParts(ch);
     const admFee = Number(ch.admission_fee || 0);
     const othFee = Number(ch.other_fee || 0);
     const hasPrev = prevFee > 0;
-    const totalGross = amt + prevFee + admFee + othFee;
+    const totalGross = amt + paperFund + prevFee + admFee + othFee;
     const monthlyNet = Math.max(0, amt - disc);
+    const paperFundRow = paperFund > 0 ? `
+      <tr style="border-bottom:1px solid #dbeafe; background:#eff6ff;">
+        <td style="padding:4px 6px; font-size:10.5px; color:#1e3a8a; font-weight:700;">Paper Fund</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#1e3a8a;">${paperFund.toLocaleString()}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px; color:#1e3a8a;">${paperFund.toLocaleString()}</td>
+      </tr>` : '';
 
     return `
       <tr style="border-bottom:1px solid #e8e8e8; background:#f7f7f7;">
@@ -125,6 +134,7 @@ export function renderDynamicFeeRows(ch, theme) {
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${paidAmt > 0 ? Math.min(paidAmt, monthlyNet).toLocaleString() : '0'}</td>
         <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${monthlyNet.toLocaleString()}</td>
       </tr>
+      ${paperFundRow}
       <tr style="border-bottom:1px solid #e8e8e8; background:#fff;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Admission Fee</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${admFee ? admFee.toLocaleString() : '—'}</td>

@@ -47,6 +47,7 @@ async function ensureFeeSystemSchema(schoolId) {
     ALTER TABLE fee_challans
       ADD COLUMN IF NOT EXISTS monthly_fee DECIMAL(10,2),
       ADD COLUMN IF NOT EXISTS previous_arrears DECIMAL(10,2) DEFAULT 0,
+      ADD COLUMN IF NOT EXISTS paper_fund DECIMAL(10,2) DEFAULT 0,
       ADD COLUMN IF NOT EXISTS gross_total DECIMAL(10,2),
       ADD COLUMN IF NOT EXISTS remaining_balance DECIMAL(10,2),
       ADD COLUMN IF NOT EXISTS discount_package_id INTEGER,
@@ -660,7 +661,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       console.warn('Skipping column verification due to offline db');
     }
     await tenantClause(req)
-    const { student_id, month, year, amount, due_date, created_by, discount, previous_arrears } = req.body
+    const { student_id, month, year, amount, due_date, created_by, discount, previous_arrears, paper_fund } = req.body
     const challan_no = `CH-${Date.now().toString().slice(-8)}`
     const schoolId = currentSchoolId(req)
 
@@ -710,13 +711,14 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const arrears = previous_arrears !== undefined
       ? asMoney(previous_arrears)
       : await calculatePreviousArrears(student_id, schoolId, supportsTenant, month, year)
+    const paperFund = asMoney(paper_fund)
     const autoDiscount = discount === undefined || discount === null || discount === ''
       ? await calculateAutoDiscount({ studentId: Number(student_id), schoolId, className: student.class, session, baseAmount: monthlyFee })
       : { packageId: null, label: null, amount: 0, siblingCount: 1 }
     const finalDiscount = discount === undefined || discount === null || discount === ''
       ? autoDiscount.amount
       : asMoney(discount)
-    const grossTotal = Math.max(0, monthlyFee + arrears - finalDiscount)
+    const grossTotal = Math.max(0, monthlyFee + paperFund + arrears - finalDiscount)
     const remainingBalance = grossTotal
     const creatorId = Number.isFinite(Number(created_by)) ? Number(created_by) : (req.user?.id || null)
 
@@ -724,25 +726,25 @@ router.post('/', protect, adminOnly, async (req, res) => {
       ? await query(`
         INSERT INTO fee_challans (
           school_id, challan_no, student_id, month, year, amount, due_date, created_by,
-          discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
+          discount, monthly_fee, previous_arrears, paper_fund, gross_total, remaining_balance,
           discount_package_id, discount_label
         )
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) RETURNING *
       `, [
         schoolId, challan_no, student_id, month, year, grossTotal, due_date, creatorId,
-        finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
+        finalDiscount, monthlyFee, arrears, paperFund, grossTotal, remainingBalance,
         autoDiscount.packageId, autoDiscount.label,
       ])
       : await query(`
         INSERT INTO fee_challans (
           challan_no, student_id, month, year, amount, due_date, created_by,
-          discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
+          discount, monthly_fee, previous_arrears, paper_fund, gross_total, remaining_balance,
           discount_package_id, discount_label
         )
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *
       `, [
         challan_no, student_id, month, year, grossTotal, due_date, creatorId,
-        finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
+        finalDiscount, monthlyFee, arrears, paperFund, grossTotal, remainingBalance,
         autoDiscount.packageId, autoDiscount.label,
       ])
 
@@ -798,7 +800,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     await tenantClause(req)
     const schoolId = currentSchoolId(req)
     const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const { class: className, month, year, due_date } = req.body
+    const { class: className, month, year, due_date, paper_fund = 0 } = req.body
     
     if (!className || !month || !year) {
       return res.status(400).json({ success: false, message: 'class, month, and year are required' })
@@ -813,6 +815,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     let skippedCount = 0
     const session = String(year || '2026') === '2026' ? '2026-2027' : `${year}-${Number(year) + 1}`
     const configuredMonthly = await getClassMonthlyFee(schoolId, className, session)
+    const paperFund = asMoney(paper_fund)
 
     for (const student of studentsResult.rows) {
       const duplicateSql = supportsTenant
@@ -834,7 +837,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
       
       const autoDiscount = await calculateAutoDiscount({ studentId: student.id, schoolId, className: student.class, session, baseAmount: monthlyFee })
       const finalDiscount = autoDiscount.amount
-      const grossTotal = Math.max(0, monthlyFee + arrears - finalDiscount)
+      const grossTotal = Math.max(0, monthlyFee + paperFund + arrears - finalDiscount)
       const remainingBalance = grossTotal
       const creatorId = req.user?.id || null
 
@@ -842,25 +845,25 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
         ? await query(`
           INSERT INTO fee_challans (
             school_id, challan_no, student_id, month, year, amount, due_date, created_by,
-            discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
+            discount, monthly_fee, previous_arrears, paper_fund, gross_total, remaining_balance,
             discount_package_id, discount_label
           )
-          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING id
+          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16) RETURNING id
         `, [
           schoolId, challan_no, student.id, month, year, grossTotal, due_date, creatorId,
-          finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
+          finalDiscount, monthlyFee, arrears, paperFund, grossTotal, remainingBalance,
           autoDiscount.packageId, autoDiscount.label,
         ])
         : await query(`
           INSERT INTO fee_challans (
             challan_no, student_id, month, year, amount, due_date, created_by,
-            discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
+            discount, monthly_fee, previous_arrears, paper_fund, gross_total, remaining_balance,
             discount_package_id, discount_label
           )
-          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING id
+          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING id
         `, [
           challan_no, student.id, month, year, grossTotal, due_date, creatorId,
-          finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
+          finalDiscount, monthlyFee, arrears, paperFund, grossTotal, remainingBalance,
           autoDiscount.packageId, autoDiscount.label,
         ])
 
@@ -896,18 +899,18 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
     const sql = `
       UPDATE fee_challans SET
         challan_no = COALESCE($1, challan_no),
-        amount = GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0),
+        amount = GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0),
         monthly_fee = COALESCE($2, monthly_fee),
         previous_arrears = COALESCE($3, previous_arrears),
         discount = COALESCE($4, discount),
         due_date = COALESCE($5, due_date),
         month = COALESCE($6, month),
         year = COALESCE($7, year),
-        gross_total = GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0),
-        remaining_balance = GREATEST(GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0) - COALESCE(paid_amount, 0), 0),
+        gross_total = GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0),
+        remaining_balance = GREATEST(GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0) - COALESCE(paid_amount, 0), 0),
         status = CASE
           WHEN COALESCE(paid_amount, 0) <= 0 THEN 'unpaid'
-          WHEN COALESCE(paid_amount, 0) < GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0) THEN 'partial'
+          WHEN COALESCE(paid_amount, 0) < GREATEST(COALESCE($2, monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE($3, previous_arrears, 0) - COALESCE($4, discount, 0), 0) THEN 'partial'
           ELSE 'paid'
         END,
         updated_at = NOW()
@@ -951,7 +954,7 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
     const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
     const schoolId = currentSchoolId(req)
     const existingSql = `
-      SELECT student_id, month, year, amount, monthly_fee, discount
+      SELECT student_id, month, year, amount, monthly_fee, paper_fund, discount
       FROM fee_challans
       WHERE id = $1
       ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''}
@@ -972,7 +975,8 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
     const disc = discount !== undefined
       ? asMoney(discount)
       : asMoney(current.discount)
-    const gross = Math.max(0, monthly + arrears - disc)
+    const paperFund = asMoney(current.paper_fund)
+    const gross = Math.max(0, monthly + paperFund + arrears - disc)
     const challan_no = `CH-${Date.now().toString().slice(-8)}`
     const sql = `
       UPDATE fee_challans SET
@@ -1206,11 +1210,11 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
           payment_mode=$2,
           discount=$4,
           payment_note=$5,
-          gross_total=GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(previous_arrears, 0) - $4, 0),
-          remaining_balance=GREATEST(GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(previous_arrears, 0) - $4, 0) - $1, 0),
+          gross_total=GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE(previous_arrears, 0) - $4, 0),
+          remaining_balance=GREATEST(GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE(previous_arrears, 0) - $4, 0) - $1, 0),
           status=CASE
             WHEN $1 <= 0 THEN 'unpaid'
-            WHEN $1 < GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(previous_arrears, 0) - $4, 0) THEN 'partial'
+            WHEN $1 < GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(paper_fund, 0) + COALESCE(previous_arrears, 0) - $4, 0) THEN 'partial'
             ELSE 'paid'
           END,
           paid_date=CASE WHEN $1 > 0 THEN CURRENT_DATE ELSE NULL END,

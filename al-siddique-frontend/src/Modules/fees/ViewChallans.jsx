@@ -54,12 +54,13 @@ const payActionButton = {
 
 function feeParts(challan = {}, discountOverride) {
  const monthly = Number(challan.monthly_fee ?? challan.amount ?? 0)
+ const paperFund = Number(challan.paper_fund ?? 0)
  const arrears = Number(challan.previous_arrears ?? challan.prev_month_fee ?? 0)
  const discount = Number(discountOverride ?? challan.discount ?? 0)
- const gross = Number(challan.gross_total ?? Math.max(0, monthly + arrears - discount))
+ const gross = Number(challan.gross_total ?? Math.max(0, monthly + paperFund + arrears - discount))
  const paid = Number(challan.paid_amount ?? 0)
  const remaining = Number(challan.remaining_balance ?? Math.max(0, gross - paid))
- return { monthly, arrears, discount, gross, paid, remaining }
+ return { monthly, paperFund, arrears, discount, gross, paid, remaining }
 }
 
 const NOTICE_TEXT = 'Please ensure that the fee is paid by the due date to avoid any late charges. Retain the receipt after making the payment for future reference. Payments can be made online or at the school\'s designated counters. For any questions or assistance, feel free to contact the school office.'
@@ -158,12 +159,20 @@ function renderDynamicFeeRows(ch, theme) {
     return rowsHtml
   } else {
     // Database format
-    const { monthly: amt, arrears: prevFee, discount: disc, gross: net, paid: paidAmt, remaining: rem } = feeParts(ch)
+    const { monthly: amt, paperFund, arrears: prevFee, discount: disc, gross: net, paid: paidAmt, remaining: rem } = feeParts(ch)
     const admFee = Number(ch.admission_fee || 0)
     const othFee = Number(ch.other_fee || 0)
     const hasPrev = prevFee > 0
-    const totalGross = amt + prevFee + admFee + othFee
+    const totalGross = amt + paperFund + prevFee + admFee + othFee
     const monthlyNet = Math.max(0, amt - disc)
+    const paperFundRow = paperFund > 0 ? `
+      <tr style="border-bottom:1px solid #dbeafe; background:#eff6ff;">
+        <td style="padding:4px 6px; font-size:10.5px; color:#1e3a8a; font-weight:700;">Paper Fund</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px; color:#1e3a8a;">${paperFund.toLocaleString()}</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
+        <td style="text-align:center; padding:4px 3px; font-size:10.5px;">0</td>
+        <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px; color:#1e3a8a;">${paperFund.toLocaleString()}</td>
+      </tr>` : ''
 
     return `
       <tr style="border-bottom:1px solid #e8e8e8; background:#f7f7f7;">
@@ -173,6 +182,7 @@ function renderDynamicFeeRows(ch, theme) {
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${paidAmt > 0 ? Math.min(paidAmt, monthlyNet).toLocaleString() : '0'}</td>
         <td style="text-align:center; padding:4px 3px; font-weight:800; font-size:10.5px;">${monthlyNet.toLocaleString()}</td>
       </tr>
+      ${paperFundRow}
       <tr style="border-bottom:1px solid #e8e8e8; background:#fff;">
         <td style="padding:4px 6px; font-size:10.5px; color:#263238;">Admission Fee</td>
         <td style="text-align:center; padding:4px 3px; font-size:10.5px;">${admFee ? admFee.toLocaleString() : '—'}</td>
@@ -495,12 +505,12 @@ export default function ViewChallans() {
  const navigate = useNavigate()
  const [challans, setChallans] = useState([])
  const [loading, setLoading] = useState(true)
- const MONTH_OPTIONS = ['September', 'August', 'July', 'June', 'May', 'All Months']
+ const MONTH_OPTIONS = ['October', 'September', 'August', 'July', 'June', 'May', 'All Months']
  const YEAR_OPTIONS = ['2026', '2027', 'All Years']
 
  const [selectedStatus, setSelectedStatus] = useState('All')
  const [selectedClass, setSelectedClass] = useState('All Classes')
- const [selectedMonth, setSelectedMonth] = useState('September')
+ const [selectedMonth, setSelectedMonth] = useState('October')
  const [selectedYear, setSelectedYear] = useState('2026')
  const [search, setSearch] = useState('')
  const [paymentChallan, setPaymentChallan] = useState(null)
@@ -508,7 +518,7 @@ export default function ViewChallans() {
  const [paymentError, setPaymentError] = useState('')
  const [paying, setPaying] = useState(false)
  const [editChallan, setEditChallan] = useState(null)
- const [editForm, setEditForm] = useState({ challan_no: '', month: '', year: '', monthly_fee: 0, previous_arrears: 0, discount: 0, due_date: '' })
+ const [editForm, setEditForm] = useState({ challan_no: '', month: '', year: '', monthly_fee: 0, paper_fund: 0, previous_arrears: 0, discount: 0, due_date: '' })
  const [editError, setEditError] = useState('')
  const [savingEdit, setSavingEdit] = useState(false)
  const [printDdOpen, setPrintDdOpen] = useState(false)
@@ -631,6 +641,7 @@ window.removeEventListener('resize', syncPrintMenuPosition)
  month: challan.month || '',
  year: challan.year || new Date().getFullYear(),
  monthly_fee: feeParts(challan).monthly,
+ paper_fund: feeParts(challan).paperFund,
  previous_arrears: feeParts(challan).arrears,
  discount: Number(challan.discount || 0),
  due_date: toInputDate(challan.due_date),
@@ -647,6 +658,7 @@ window.removeEventListener('resize', syncPrintMenuPosition)
  const saveEdit = async () => {
  if (!editChallan) return
  const monthlyFee = Math.max(0, Number(editForm.monthly_fee || 0))
+ const paperFund = Math.max(0, Number(editForm.paper_fund || 0))
  const arrears = Math.max(0, Number(editForm.previous_arrears || 0))
  const discount = Math.max(0, Number(editForm.discount || 0))
  if (!editForm.challan_no.trim()) {
@@ -661,8 +673,8 @@ window.removeEventListener('resize', syncPrintMenuPosition)
  setEditError('Year is required.')
  return
  }
- if (discount > monthlyFee + arrears) {
- setEditError('Discount cannot exceed monthly fee plus arrears.')
+ if (discount > monthlyFee + paperFund + arrears) {
+ setEditError('Discount cannot exceed monthly fee, Paper Fund, and arrears.')
  return
  }
  setSavingEdit(true)
@@ -713,7 +725,7 @@ window.removeEventListener('resize', syncPrintMenuPosition)
  const receivedNow = Math.max(0, Number(paymentForm.paid_amount || 0))
  const paid = Math.min(payable, Number(paymentChallan.paid_amount || 0) + receivedNow)
 
- const baseBeforeDiscount = feeParts(paymentChallan, 0).monthly + feeParts(paymentChallan, 0).arrears
+ const baseBeforeDiscount = feeParts(paymentChallan, 0).monthly + feeParts(paymentChallan, 0).paperFund + feeParts(paymentChallan, 0).arrears
  if (discount > baseBeforeDiscount) {
  setPaymentError('Discount cannot exceed the total challan amount.')
  return
@@ -1141,6 +1153,16 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  />
  </div>
  <div>
+ <label style={labelStyle}>Paper Fund</label>
+ <input
+ style={{ ...input, background:'rgba(30,58,138,0.16)', color:'#93c5fd' }}
+ type="number"
+ min="0"
+ value={editForm.paper_fund}
+ readOnly
+ />
+ </div>
+ <div>
  <label style={labelStyle}>Previous Arrears</label>
  <input
  style={input}
@@ -1163,7 +1185,7 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  <div>
  <label style={labelStyle}>New Net Total</label>
  <div style={{ ...input, display:'flex', alignItems:'center', color:C.gold, fontWeight:900 }}>
- Rs. {money(Math.max(0, Number(editForm.monthly_fee || 0) + Number(editForm.previous_arrears || 0) - Number(editForm.discount || 0)))}
+ Rs. {money(Math.max(0, Number(editForm.monthly_fee || 0) + Number(editForm.paper_fund || 0) + Number(editForm.previous_arrears || 0) - Number(editForm.discount || 0)))}
  </div>
  </div>
  </div>
