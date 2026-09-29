@@ -28,7 +28,7 @@ const templates = [
   { id: 21, name: 'Royal Blue', accent: '#2f5aa6', accent2: '#7897cc', tint: '#f3f7fe', line: '#cfdbef', texture: 'repeating-linear-gradient(90deg,rgba(47,90,166,.024) 0 1px,transparent 1px 9px)' },
 ].map((template) => ({
   ...template,
-  hero: `${template.texture},linear-gradient(180deg,#ffffff 0%,${template.tint} 100%)`,
+  hero: `${template.texture},linear-gradient(110deg,${template.tint} 0%,#ffffff 42%,#ffffff 72%,${template.tint} 100%)`,
   head: template.accent,
   even: '#ffffff',
   footer: template.tint,
@@ -235,7 +235,6 @@ function DiarySlip({ template, schoolName, tagline, logoUrl, classLabel, date, r
             <div
               className="subject-pill"
               style={{
-                background: '#ffffff',
                 fontFamily,
                 fontSize: `${Math.max(9, fontSize - 1)}px`,
                 lineHeight,
@@ -247,7 +246,6 @@ function DiarySlip({ template, schoolName, tagline, logoUrl, classLabel, date, r
             <div
               className={row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}
               style={{
-                background: '#ffffff',
                 fontFamily: row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily),
                 fontSize: `${row.fontSize || fontSize}px`,
                 lineHeight: row.lineHeight || lineHeight,
@@ -510,8 +508,8 @@ export default function DailyDiaryFeature() {
           </div>
           ${rows.map((row, index) => `
             <div class="table-row">
-              <div class="subject-pill" style="background:#ffffff;font-family:${inlineFont(fontFamily)};font-size:${Math.max(9, fontSize - 1)}px;line-height:${lineHeight};font-weight:${row.isBold ? '1000' : '750'}">${escapeHtml(row.subject)}</div>
-              <div class="${row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}" style="background:#ffffff;font-family:${inlineFont(row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily))};font-size:${row.fontSize || fontSize}px;line-height:${row.lineHeight || lineHeight};font-weight:${row.isBold ? '900' : (row.isUrdu ? 'normal' : '700')};text-align:${row.textAlign || (row.isUrdu ? 'right' : 'left')}">${escapeHtml(row.diary || '-')}</div>
+              <div class="subject-pill" style="font-family:${inlineFont(fontFamily)};font-size:${Math.max(9, fontSize - 1)}px;line-height:${lineHeight};font-weight:${row.isBold ? '1000' : '750'}">${escapeHtml(row.subject)}</div>
+              <div class="${row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}" style="font-family:${inlineFont(row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily))};font-size:${row.fontSize || fontSize}px;line-height:${row.lineHeight || lineHeight};font-weight:${row.isBold ? '900' : (row.isUrdu ? 'normal' : '700')};text-align:${row.textAlign || (row.isUrdu ? 'right' : 'left')}">${escapeHtml(row.diary || '-')}</div>
             </div>
           `).join('')}
         </div>
@@ -922,17 +920,18 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .edit-actions .check{white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis;padding:6px 10px;border:1px solid rgba(148,163,184,.12);border-radius:10px;background:rgba(255,255,255,.03)}
 .compose-warning{margin-top:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,193,7,.2);background:rgba(255,193,7,.08);color:#ffd37a;font-size:12px;font-weight:800;line-height:1.5}
 .helper-copy{font-size:11px;color:#94A3B8;line-height:1.5;margin-top:-2px;padding:10px 12px;border:1px dashed rgba(148,163,184,.12);border-radius:12px;background:rgba(255,255,255,.02)}
-.print-sheet{width:207mm;min-height:287mm;background:white;margin:0 auto;padding:1mm;display:grid;gap:.65mm;box-shadow:0 20px 60px rgba(15,23,42,.12);align-items:start;justify-content:center;box-sizing:border-box;grid-auto-rows:max-content}
-.diary-card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--diary-line,#d7dee7);box-shadow:0 3px 10px rgba(15,23,42,.045);height:auto;display:flex;flex-direction:column;max-width:100%;color:#1f2937}
-.diary-card::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:linear-gradient(90deg,var(--diary-accent,#173b66),var(--diary-accent-2,#6f89a8));z-index:4;pointer-events:none}
+.print-sheet{width:207mm;min-height:287mm;background:#f8fafc;margin:0 auto;padding:.55mm;display:grid;gap:.5mm;box-shadow:0 20px 60px rgba(15,23,42,.12);align-items:start;justify-content:center;box-sizing:border-box;grid-auto-rows:max-content}
+.diary-card{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,#fff 72%,var(--diary-tint,#f3f7fb) 150%);border:1px solid var(--diary-line,#d7dee7);box-shadow:0 4px 14px rgba(15,23,42,.055);height:auto;display:flex;flex-direction:column;max-width:100%;color:#1f2937}
+.diary-card::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:linear-gradient(90deg,var(--diary-accent,#173b66),var(--diary-accent-2,#6f89a8),var(--diary-accent,#173b66));z-index:4;pointer-events:none}
+.diary-card::after{content:"";position:absolute;right:-28px;bottom:-34px;width:96px;height:96px;border:1px solid var(--diary-line,#d7dee7);border-radius:50%;opacity:.28;pointer-events:none}
 .compact-slip{font-size:9.6px!important}
 .ultra-slip{font-size:8.8px!important}
 .micro-slip{font-size:8.1px!important}
-.hero{padding:7px 7px 6px;display:flex;align-items:center;gap:6px;color:#1f2937;flex-shrink:0;border-bottom:1px solid var(--diary-line,#d7dee7);position:relative}
+.hero{padding:8px 8px 7px;display:flex;align-items:center;gap:7px;color:#1f2937;flex-shrink:0;border-bottom:1px solid var(--diary-line,#d7dee7);position:relative;box-shadow:inset 0 -1px 0 rgba(255,255,255,.65)}
 .hero::after{content:"";position:absolute;left:7px;bottom:-1px;width:34%;height:2px;background:linear-gradient(90deg,var(--diary-accent,#173b66),transparent);pointer-events:none}
 .compact-slip .hero{padding:4px 5px;gap:4px}
 .ultra-slip .hero,.micro-slip .hero{padding:3px 4px;gap:3px}
-.logo-box{width:42px;height:42px;min-width:42px;border-radius:12px;background:#fff;display:grid;place-items:center;border:1px solid var(--diary-line,#d7dee7);box-shadow:0 2px 5px rgba(15,23,42,.04);overflow:hidden}
+.logo-box{width:42px;height:42px;min-width:42px;border-radius:10px;background:rgba(255,255,255,.92);display:grid;place-items:center;border:1px solid var(--diary-line,#d7dee7);box-shadow:0 3px 9px rgba(15,23,42,.055);overflow:hidden}
 .compact-slip .logo-box{width:34px;height:34px;min-width:34px;border-radius:12px}
 .ultra-slip .logo-box{width:28px;height:28px;min-width:28px;border-radius:9px}
 .micro-slip .logo-box{width:24px;height:24px;min-width:24px;border-radius:8px}
@@ -945,7 +944,7 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .micro-slip .school-name{font-size:8.6px}
 .tagline{font-size:8px;font-weight:800;color:#64748b;margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
 .ultra-slip .tagline,.micro-slip .tagline{font-size:6.7px;margin-top:1px}
-.date-box{text-align:right;font-size:9px;line-height:1.3;font-weight:900;color:var(--diary-accent,#173b66);background:var(--diary-tint,#f3f7fb);border:1px solid var(--diary-line,#d7dee7);border-radius:8px;padding:3px 5px}
+.date-box{text-align:right;font-size:9px;line-height:1.35;font-weight:900;color:var(--diary-accent,#173b66);background:rgba(255,255,255,.72);border:1px solid var(--diary-line,#d7dee7);border-top:2px solid var(--diary-accent,#173b66);border-radius:7px;padding:3px 6px;min-width:74px}
 .compact-slip .date-box{font-size:7.8px}
 .ultra-slip .date-box{font-size:6.8px}
 .micro-slip .date-box{font-size:6.2px}
@@ -953,20 +952,20 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .kid-badge{width:30px;height:30px;border-radius:999px;background:rgba(255,255,255,.92);color:#1f2937;display:grid;place-items:center;font-size:8px;font-weight:1000;box-shadow:0 8px 18px rgba(15,23,42,.14);flex-shrink:0}
 .compact-slip .kid-badge{width:24px;height:24px;font-size:6.8px}
 .ultra-slip .kid-badge,.micro-slip .kid-badge{width:20px;height:20px;font-size:5.8px}
-.diary-table{margin:2px 4px 1px;border-radius:7px;overflow:hidden;border:1px solid var(--diary-line,#d7dee7);background:#fff;flex:0 0 auto;min-height:0}
-.table-head,.table-row{display:grid;grid-template-columns:minmax(45px,.22fr) minmax(0,1fr);gap:0;padding:0}
-.table-head div{padding:3px 4px;color:var(--diary-accent,#173b66);background:#fff;text-align:center;font-size:8px;font-weight:1000;letter-spacing:.32px;border-bottom:1px solid var(--diary-line,#d7dee7)}
+.diary-table{margin:2px 3px 1px;border-radius:6px;overflow:hidden;border:1px solid var(--diary-line,#d7dee7);background:#fff;flex:0 0 auto;min-height:0;box-shadow:0 1px 0 rgba(15,23,42,.025)}
+.table-head,.table-row{display:grid;grid-template-columns:minmax(42px,.18fr) minmax(0,1fr);gap:0;padding:0}
+.table-head div{padding:3px 5px;color:var(--diary-accent,#173b66);background:linear-gradient(180deg,var(--diary-tint,#f3f7fb),rgba(255,255,255,.86));text-align:center;font-size:8px;font-weight:1000;letter-spacing:.42px;border-bottom:1px solid var(--diary-line,#d7dee7)}
 .table-head div:first-child{border-right:1px solid var(--diary-line,#d7dee7)}
 .ultra-slip .table-head,.ultra-slip .table-row,.micro-slip .table-head,.micro-slip .table-row{grid-template-columns:minmax(39px,.2fr) minmax(0,1fr);gap:.8px;padding:.4px}
 .ultra-slip .table-head div,.micro-slip .table-head div{font-size:6.2px;padding:1px 2px;border-radius:5px}
-.subject-pill,.task-pill{border-radius:0;border:0;border-bottom:1px solid var(--diary-line,#d7dee7);box-shadow:none;padding:3px 5px;min-height:14px;color:#1f2937;font-weight:750;overflow:hidden;background:#fff!important}
-.subject-pill{border-right:1px solid var(--diary-line,#d7dee7);border-left:3px solid var(--diary-accent,#173b66);background:linear-gradient(90deg,var(--diary-tint,#f3f7fb),#fff 42%)!important}
+.subject-pill,.task-pill{border-radius:0;border:0;border-bottom:1px solid var(--diary-line,#d7dee7);box-shadow:none;padding:3px 6px;min-height:14px;color:#1f2937;font-weight:750;overflow:hidden}
+.subject-pill{border-right:1px solid var(--diary-line,#d7dee7);border-left:3px solid var(--diary-accent,#173b66);background:linear-gradient(90deg,var(--diary-tint,#f3f7fb),#fff 78%)!important}
 .ultra-slip .subject-pill,.ultra-slip .task-pill,.micro-slip .subject-pill,.micro-slip .task-pill{padding:1px 2px;min-height:10px;border-radius:5px}
-.task-pill{color:#111827;font-weight:800}
+.task-pill{color:#111827;font-weight:800;background:linear-gradient(90deg,#fff 0%,#fff 54%,var(--diary-tint,#f3f7fb) 135%)!important}
 .subject-pill{text-align:center;font-weight:1000;white-space:nowrap;text-overflow:clip}
 .task-pill{font-weight:700;white-space:normal;overflow-wrap:anywhere;word-break:normal}
 .urdu-text{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;direction:rtl;font-size:1em;line-height:1.25}
-.footer-note{margin:1px 4px 3px;border-radius:5px;padding:3px 5px;text-align:center;font-weight:850;flex-shrink:0;font-size:9px;line-height:1.25;color:#475569;border:1px solid var(--diary-line,#d7dee7);border-left:3px solid var(--diary-accent,#173b66);min-height:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--diary-tint,#f3f7fb),#fff 60%)!important}
+.footer-note{margin:1px 3px 3px;border-radius:5px;padding:3px 6px;text-align:center;font-weight:850;flex-shrink:0;font-size:9px;line-height:1.25;color:#475569;border:1px solid var(--diary-line,#d7dee7);border-left:3px solid var(--diary-accent,#173b66);min-height:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--diary-tint,#f3f7fb),#fff 50%,var(--diary-tint,#f3f7fb) 150%)!important}
 .compact-slip .footer-note{font-size:8.2px;min-height:15px;padding:2px 4px}
 .ultra-slip .footer-note{font-size:7.2px;min-height:12px;padding:1px 3px;margin-bottom:2px}
 .micro-slip .footer-note{font-size:6.6px;min-height:10px;padding:1px 2px;margin-bottom:1px}
@@ -978,7 +977,7 @@ button:disabled{opacity:.65;cursor:not-allowed}
   html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; height: auto !important; }
   #root > *:not(.daily-diary-feature) { display: none !important; }
   .daily-diary-feature { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; padding: 0 !important; margin: 0 !important; background: white !important; min-height: 0 !important; }
-  .print-sheet { width: 100% !important; max-width: 202mm !important; min-height: 0 !important; height: auto !important; margin: 0 auto !important; padding: 0 !important; box-shadow: none !important; gap: .6mm !important; page-break-after: auto !important; break-after: auto !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; align-items: start !important; justify-content: center !important; overflow: visible !important; page-break-inside: avoid !important; break-inside: avoid !important; }
+  .print-sheet { width: 100% !important; max-width: 202mm !important; min-height: 0 !important; height: auto !important; margin: 0 auto !important; padding: 0 !important; background: #fff !important; box-shadow: none !important; gap: .6mm !important; page-break-after: auto !important; break-after: auto !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; align-items: start !important; justify-content: center !important; overflow: visible !important; page-break-inside: avoid !important; break-inside: avoid !important; }
   .diary-card { box-shadow: none !important; break-inside: avoid !important; page-break-inside: avoid !important; }
   .hero { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; }
   .table-head div, .footer-note, .subject-pill, .task-pill { print-color-adjust: exact !important; -webkit-print-color-adjust: exact !important; line-height: 1.12 !important; }

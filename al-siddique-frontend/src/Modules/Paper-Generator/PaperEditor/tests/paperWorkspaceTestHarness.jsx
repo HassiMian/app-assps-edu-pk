@@ -17,7 +17,7 @@ const paper = {
     paperCode: 'TEST-URDU',
     timeAllowed: '2 Hours',
     examDate: '2026-10-03',
-    totalMarks: 10,
+    totalMarks: 15,
     title: 'FIRST TERM EXAMINATION 2026',
   },
   official_section: [
@@ -45,6 +45,17 @@ const paper = {
       textUrdu: 'سوال نمبر 2: درج ذیل الفاظ کو جملوں میں استعمال کریں۔ (5)',
       marks: 5,
       content: '1. کتاب\n2. وطن\n3. محنت\n4. استاد\n5. کامیابی',
+    },
+    {
+      id: 'urdu-matching',
+      type: 'official_section',
+      medium: 'urdu',
+      sourceOrder: 3,
+      heading: 'سوال نمبر 3: کالم A کو کالم B سے ملائیں۔ (5)',
+      text: 'سوال نمبر 3: کالم A کو کالم B سے ملائیں۔ (5)',
+      textUrdu: 'سوال نمبر 3: کالم A کو کالم B سے ملائیں۔ (5)',
+      marks: 5,
+      content: '1. کتاب | Book\n2. قلم | Pen\n3. سکول | School',
     },
   ],
   editorSettings: {

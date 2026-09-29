@@ -1,5 +1,6 @@
 import React from 'react'
 import { optionLabelParts } from '../../paperSystemRules.js'
+import StableClosingBracket from '../StableClosingBracket.jsx'
 
 export function getCanonicalOptionLabelParts(option = {}, index = 0, direction = 'ltr') {
   const isUrdu = direction === 'rtl' || option.direction === 'rtl'
@@ -39,18 +40,7 @@ export default function CanonicalOptionLabel({
       }}
     >
       <b data-option-label-text>{parts.label}</b>
-      <b
-        data-option-bracket
-        dir="ltr"
-        style={{
-          direction: 'ltr',
-          unicodeBidi: 'isolate-override',
-          fontFamily: 'Arial, sans-serif',
-          display: 'inline-block',
-        }}
-      >
-        {parts.closingBracket}
-      </b>
+      <StableClosingBracket color={color} />
     </span>
   )
 }

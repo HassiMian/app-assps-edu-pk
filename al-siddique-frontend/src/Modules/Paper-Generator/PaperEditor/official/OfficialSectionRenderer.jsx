@@ -11,6 +11,7 @@ import {
 import { URDU_FONT_STACK } from '../../resolvePaperRoute.js'
 import { optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks } from '../../paperSystemRules.js'
 import { InlineEditable } from '../../PaperInlineEditor.jsx'
+import StableClosingBracket from '../StableClosingBracket.jsx'
 
 function parseNumberedLines(content = '') {
   return String(content).split(/\r?\n/).map((raw, sourceIndex) => {
@@ -55,17 +56,7 @@ function OptionLabel({ label, index, isUrdu, themeColor }) {
   const parts = optionLabelParts(label, index, isUrdu)
   return <span data-option-label data-language={isUrdu?'urdu':'english'} style={{ display:'inline-flex', flexDirection:isUrdu?'row-reverse':'row', direction:'ltr', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color:themeColor, fontWeight:900, whiteSpace:'nowrap' }}>
     <b data-option-label-text style={{ fontFamily:isUrdu?URDU_FONT_STACK:'inherit' }}>{parts.label}</b>
-    <b
-      data-option-bracket
-      dir="ltr"
-      style={{
-        direction:'ltr',
-        unicodeBidi:'isolate-override',
-        fontFamily:"Arial, sans-serif",
-        fontWeight:900,
-        display:'inline-block',
-      }}
-    >{parts.closingBracket}</b>
+    <StableClosingBracket color={themeColor} />
   </span>
 }
 
@@ -192,47 +183,138 @@ function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeCol
   return <div data-numbered-list>{rows.map(renderRow)}</div>
 }
 
-function SourceTable({ rows, isUrdu, qFs, fs, themeColor }) {
+function serializeMarkdownRows(rows = []) {
+  if (!rows.length) return ''
+  const encode = row => '| ' + row.map(cell => String(cell || '').trim()).join(' | ') + ' |'
+  const separator = '| ' + rows[0].map(() => '---').join(' | ') + ' |'
+  return [encode(rows[0]), separator, ...rows.slice(1).map(encode)].join('\n')
+}
+
+function SourceTable({ rows, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
+  const commitCell=(rowIndex,cellIndex,payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const nextRows=rows.map(row=>[...row])
+    nextRows[rowIndex][cellIndex]=payload.text
+    const key='source-table-'+rowIndex+'-'+cellIndex
+    onQuestionChange(section.id,{content:serializeMarkdownRows(nextRows),richText:{...(section.richText||{}),[key]:payload.html}})
+  }
   return <table data-source-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>
-    {rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex} style={{ border:`1px solid ${themeColor}77`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?800:500 }}><AnswerText text={cell}/></td>)}</tr>)}
+    {rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=>{
+      const key='source-table-'+rowIndex+'-'+cellIndex
+      const rich=section?.richText?.[key]||''
+      return <td key={cellIndex} style={{ border:`1px solid ${themeColor}77`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?800:500 }}>
+        {(editMode||rich)&&section?.id
+          ? <InlineEditable text={cell} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section.id} ariaLabel={`Edit table row ${rowIndex+1} column ${cellIndex+1}`} onActivate={onActiveEditable} onCommit={payload=>commitCell(rowIndex,cellIndex,payload)} style={{display:'block',minWidth:0,fontWeight:rowIndex===0?800:500}}/>
+          : <AnswerText text={cell}/>}
+      </td>
+    })}</tr>)}
   </tbody></table>
 }
 
-function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor }) {
+function parseMatchingRows(content = '') {
+  return String(content).split(/\r?\n/).map(line=>line.trim()).filter(Boolean).map((line,index)=>{
+    const clean=line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()
+    const parts=clean.includes('|')?clean.split('|'):clean.includes('\t')?clean.split(/\t+/):clean.split(/\s{3,}/)
+    return { left:String(parts[0]||'').trim(), right:String(parts.slice(1).join(' ')||'').trim(), index }
+  })
+}
+
+function serializeMatchingRows(rows = []) {
+  return rows.map((row,index)=>`${index+1}. ${String(row.left||'').trim()} | ${String(row.right||'').trim()}`).join('\n')
+}
+
+function MatchingColumnsTable({ content, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
+  const rows=parseMatchingRows(content)
+  const defaults=isUrdu?['کالم A','کالم B']:['Column A','Column B']
+  const headers=Array.isArray(section?.tableHeaders)&&section.tableHeaders.length>=2?section.tableHeaders:defaults
+  const commitHeader=(index,payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const next=[...headers]
+    next[index]=payload.text
+    const key='matching-header-'+index
+    onQuestionChange(section.id,{tableHeaders:next,richText:{...(section.richText||{}),[key]:payload.html}})
+  }
+  const commitCell=(rowIndex,side,payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const next=rows.map(row=>({...row}))
+    next[rowIndex][side]=payload.text
+    const key='matching-'+rowIndex+'-'+side
+    onQuestionChange(section.id,{content:serializeMatchingRows(next),richText:{...(section.richText||{}),[key]:payload.html}})
+  }
+  return <table data-matching-columns-table style={{width:'100%',borderCollapse:'collapse',tableLayout:'fixed',fontSize:`${qFs}px`,direction:isUrdu?'rtl':'ltr'}}>
+    <thead><tr style={{background:`linear-gradient(180deg,${themeColor}12,${themeColor}07)`}}>
+      {headers.map((header,index)=>{
+        const key='matching-header-'+index
+        const rich=section?.richText?.[key]||''
+        return <th key={index} data-column-header={index===0?'A':'B'} style={{border:`1px solid ${themeColor}66`,padding:`${5*fs}px ${7*fs}px`,textAlign:'center',fontWeight:900}}>
+          {(editMode||rich)&&section?.id?<InlineEditable text={header} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section.id} ariaLabel={`Edit Column ${index===0?'A':'B'} heading`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',textAlign:'center',fontWeight:900}}/>:header}
+        </th>
+      })}
+    </tr></thead>
+    <tbody>{rows.map((row,rowIndex)=><tr key={rowIndex}>
+      {['left','right'].map((side,cellIndex)=>{
+        const key='matching-'+rowIndex+'-'+side
+        const rich=section?.richText?.[key]||''
+        const value=row[side]||''
+        return <td key={side} style={{border:`1px solid ${themeColor}55`,padding:`${6*fs}px ${8*fs}px`,textAlign:isUrdu?'right':'left',minHeight:`${28*fs}px`}}>
+          {(editMode||rich)&&section?.id?<InlineEditable text={value} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section.id} ariaLabel={`Edit Column ${cellIndex===0?'A':'B'} row ${rowIndex+1}`} onActivate={onActiveEditable} onCommit={payload=>commitCell(rowIndex,side,payload)} style={{display:'block',minWidth:0,minHeight:'1.2em'}}/>:<AnswerText text={value}/>}
+        </td>
+      })}
+    </tr>)}</tbody>
+  </table>
+}
+
+function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
   const rawLines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
   let items = rawLines.map(line => line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()).filter(Boolean)
-  if (items.length <= 1) {
-    items = String(content).split(/[،,]|\s{2,}/).map(item => item.replace(/^\d+[.)]\s*/,'').trim()).filter(Boolean)
+  if (items.length <= 1) items = String(content).split(/[،,]|\s{2,}/).map(item => item.replace(/^\d+[.)]\s*/,'').trim()).filter(Boolean)
+  const defaults=isUrdu?['لفظ','جملہ']:['Word','Sentence']
+  const headers=Array.isArray(section?.tableHeaders)&&section.tableHeaders.length>=2?section.tableHeaders:defaults
+  const commitHeader=(index,payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const next=[...headers]; next[index]=payload.text
+    onQuestionChange(section.id,{tableHeaders:next})
+  }
+  const commitWord=(index,payload)=>{
+    if(!section?.id||!onQuestionChange) return
+    const next=[...items]; next[index]=payload.text
+    const nextContent=next.map((item,i)=>`${i+1}. ${item}`).join('\n')
+    const key='sentence-word-'+index
+    onQuestionChange(section.id,{content:nextContent,richText:{...(section.richText||{}),[key]:payload.html}})
   }
   return <table data-sentence-usage-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}>
     <thead><tr style={{ background:`${themeColor}10` }}>
       <th style={{ width:'9%', border:`1px solid ${themeColor}66`, padding:5 }}>#</th>
-      <th style={{ width:'31%', border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'لفظ':'Word'}</th>
-      <th style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جملہ':'Sentence'}</th>
+      {headers.map((header,index)=><th key={index} style={{ width:index===0?'31%':undefined, border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>
+        {editMode&&section?.id?<InlineEditable text={header} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'sentence-header-'+index} sectionId={section.id} ariaLabel={`Edit sentence table heading ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',fontWeight:900}}/>:header}
+      </th>)}
     </tr></thead>
     <tbody>{items.map((item,index)=><tr key={index}>
       <td style={{ border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:700, fontFamily:'Arial,sans-serif', direction:'ltr' }}>{index+1}</td>
-      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:700 }}><AnswerText text={item}/></td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:700 }}>
+        {editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'sentence-word-'+index} sectionId={section.id} ariaLabel={`Edit sentence word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitWord(index,payload)} style={{display:'block',fontWeight:700}}/>:<AnswerText text={item}/>}
+      </td>
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, minHeight:`${28*fs}px` }}><span style={{ display:'inline-block', width:'94%', borderBottom:`1px solid ${themeColor}88`, minHeight:'1.25em' }} /></td>
     </tr>)}</tbody>
   </table>
 }
 
-function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor }) {
+function PairPracticeTable({ content, isUrdu, qFs, fs, themeColor, editMode=false, section=null, onQuestionChange, onActiveEditable }) {
   const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
   let items = lines.map(line => line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()).filter(Boolean)
-  if (items.length <= 2) {
-    items = String(content).split(/[،,]|\s{2,}/).map(item=>item.replace(/^\d+[.)]\s*/,'').trim()).filter(Boolean)
-  }
+  if (items.length <= 2) items = String(content).split(/[،,]|\s{2,}/).map(item=>item.replace(/^\d+[.)]\s*/,'').trim()).filter(Boolean)
+  const defaults=isUrdu?['لفظ','جواب']:['Word','Answer']
+  const headers=Array.isArray(section?.tableHeaders)&&section.tableHeaders.length>=2?section.tableHeaders:defaults
+  const commitHeader=(index,payload)=>{ if(section?.id&&onQuestionChange){const next=[...headers];next[index]=payload.text;onQuestionChange(section.id,{tableHeaders:next})} }
+  const commitItem=(index,payload)=>{ if(section?.id&&onQuestionChange){const next=[...items];next[index]=payload.text;onQuestionChange(section.id,{content:next.map((item,i)=>`${i+1}. ${item}`).join('\n')})} }
   return <table data-pair-practice-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}>
     <thead><tr style={{ background:`${themeColor}10` }}>
       <th style={{ width:'9%', border:`1px solid ${themeColor}66`, padding:5 }}>#</th>
-      <th style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'لفظ':'Word'}</th>
-      <th style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جواب':'Answer'}</th>
+      {headers.map((header,index)=><th key={index} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:isUrdu?'right':'left' }}>{editMode&&section?.id?<InlineEditable text={header} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'pair-header-'+index} sectionId={section.id} ariaLabel={`Edit pair table heading ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitHeader(index,payload)} style={{display:'block',fontWeight:900}}/>:header}</th>)}
     </tr></thead>
     <tbody>{items.map((item,index)=><tr key={index}>
       <td style={{ border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:700 }}>{index+1}</td>
-      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}><AnswerText text={item}/></td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}>{editMode&&section?.id?<InlineEditable text={item} editMode={true} direction={isUrdu?'rtl':'ltr'} fieldKey={'pair-item-'+index} sectionId={section.id} ariaLabel={`Edit pair table word ${index+1}`} onActivate={onActiveEditable} onCommit={payload=>commitItem(index,payload)} style={{display:'block'}}/>:<AnswerText text={item}/>}</td>
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px` }}><span style={{ display:'inline-block', width:'85%', borderBottom:`1px solid ${themeColor}88`, minHeight:'1em' }} /></td>
     </tr>)}</tbody>
   </table>
@@ -302,9 +384,10 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
   if (mcqs.length) return <McqSection rows={mcqs} layout={mcqLayout} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
 
   const tableRows = parseMarkdownTable(content)
-  if (tableRows.length >= 2) return <SourceTable rows={tableRows} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
-  if (kind === 'sentence_usage') return <SentenceUsageTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
-  if (kind === 'pair_table') return <PairPracticeTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor}/>
+  if (tableRows.length >= 2) return <SourceTable rows={tableRows} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  if (kind === 'matching') return <MatchingColumnsTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  if (kind === 'sentence_usage') return <SentenceUsageTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  if (kind === 'pair_table') return <PairPracticeTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
   if (['vertical_math','math_compare','math_number_name','math_place_value','math_order','math_table'].includes(kind)) return <MathPracticeGrid content={content} kind={kind} qFs={qFs} fs={fs} themeColor={themeColor}/>
 
   const rawLines = String(content).split(/\r?\n/).map(line=>line.trim()).filter(Boolean)
@@ -318,7 +401,7 @@ function renderContent({ content, kind, isUrdu, qFs, fs, themeColor, mcqLayout, 
 
   const rows = parseNumberedLines(content)
   if (kind === 'short') return <NumberedList rows={rows} content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout={shortLayout} themeColor={themeColor} answerLinesPerItem={answerLinesPerItem} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
-  if (kind === 'matching' && rows.length) return <NumberedList rows={rows} content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} shortLayout="table" themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
+  if (kind === 'matching' && rows.length) return <MatchingColumnsTable content={content} isUrdu={isUrdu} qFs={qFs} fs={fs} themeColor={themeColor} editMode={editMode} section={section} onQuestionChange={onQuestionChange} onActiveEditable={onActiveEditable}/>
   if (kind === 'vertical_math' && rows.length) {
     return <div data-vertical-math style={{ display:'grid', gridTemplateColumns:`repeat(${Math.min(3,rows.length)}, minmax(0,1fr))`, gap:`${8*fs}px`, direction:'ltr' }}>
       {rows.map(row => <div key={row.serial} style={{ border:`1px solid ${themeColor}55`, padding:`${8*fs}px`, textAlign:'center', fontFamily:"'Cambria Math', 'Times New Roman', serif", fontSize:`${Math.max(qFs+1,14)}px`, fontWeight:700, minHeight:`${38*fs}px` }}><span style={{ color:themeColor }}>{row.serial}.</span> <AnswerText text={row.text}/></div>)}

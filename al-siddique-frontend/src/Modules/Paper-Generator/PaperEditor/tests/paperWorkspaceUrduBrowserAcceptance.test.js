@@ -75,8 +75,11 @@ test('Workspace Urdu: option label uses Urdu letter plus a true closing bracket'
 
   const label = option.locator('[data-option-label-text]')
   const bracket = option.locator('[data-option-bracket]')
+  const bracketShape = bracket.locator('[data-option-bracket-shape]')
   assert.equal((await label.textContent()).trim(), 'الف')
   assert.equal((await bracket.textContent()).trim(), ')')
+  await bracketShape.waitFor({ state: 'visible' })
+  assert.match(await bracketShape.locator('path').getAttribute('d'), /M1\.1 1\.2 C5\.1 4\.1 6\.8 7\.2 6\.8 9/)
 
   const bracketCss = await bracket.evaluate(node => ({
     direction: getComputedStyle(node).direction,
@@ -100,6 +103,29 @@ test('Workspace Urdu: sentence usage renders dedicated word/sentence columns', a
   assert.match(text, /لفظ/)
   assert.match(text, /جملہ/)
   assert.equal(await table.locator('tbody tr').count(), 5)
+})
+
+test('Workspace matching columns expose editable Column A/B headings and cells', async () => {
+  await page.getByRole('button', { name: 'Edit Paper' }).click()
+  const table = page.locator('[data-matching-columns-table]')
+  await table.waitFor({ state: 'visible' })
+
+  const headerA = table.locator('[data-column-header="A"]')
+  const headerB = table.locator('[data-column-header="B"]')
+  assert.match(await headerA.textContent(), /کالم A/)
+  assert.match(await headerB.textContent(), /کالم B/)
+
+  const editableHeader = page.getByLabel('Edit Column A heading')
+  await editableHeader.fill('کالم الف')
+  await editableHeader.blur()
+
+  const editableCell = page.getByLabel('Edit Column A row 1')
+  await editableCell.fill('کتابچہ')
+  await editableCell.blur()
+
+  await page.getByRole('button', { name: 'Done Editing' }).click()
+  assert.match(await table.textContent(), /کالم الف/)
+  assert.match(await table.textContent(), /کتابچہ/)
 })
 
 test('Workspace style controls mutate the actual paper style root and Urdu content', async () => {
