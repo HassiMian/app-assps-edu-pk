@@ -5,28 +5,34 @@ import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenan
 import { usePaperStore } from './usePaperStore'
 
 const templates = [
-  { id: 1, name: 'Canva Ivory Ledger', hero: 'linear-gradient(135deg,#26324a,#7b8ba8)', head: '#26324a', even: '#f5f7fb', footer: '#edf1f7' },
-  { id: 2, name: 'Pearl Gold Academy', hero: 'linear-gradient(135deg,#2c2a24,#b69b5e)', head: '#2c2a24', even: '#fbf7ed', footer: '#f3ead3' },
-  { id: 3, name: 'Sage Montessori Luxe', hero: 'linear-gradient(135deg,#23443b,#77a896)', head: '#23443b', even: '#f0f7f4', footer: '#dfeee8' },
-  { id: 4, name: 'Ink Lilac Editorial', hero: 'linear-gradient(135deg,#2f3146,#8d86b8)', head: '#34304f', even: '#f5f3fa', footer: '#e8e4f2' },
-  { id: 5, name: 'Warm Sand Junior', hero: 'linear-gradient(135deg,#514131,#c79b74)', head: '#514131', even: '#fbf4ec', footer: '#f0dfcf' },
-  { id: 6, name: 'Oxford Slate Minimal', hero: 'linear-gradient(135deg,#1f2937,#64748b)', head: '#1f2937', even: '#f8fafc', footer: '#e7edf4' },
-  { id: 7, name: 'Blush Rose Premium', hero: 'linear-gradient(135deg,#633143,#bd7892)', head: '#633143', even: '#fbf1f5', footer: '#f2dbe5' },
-  { id: 8, name: 'Coastal Teal Glass', hero: 'linear-gradient(135deg,#244b5a,#78b9c7)', head: '#244b5a', even: '#eef8fa', footer: '#d8edf2' },
-  { id: 9, name: 'Olive Linen Classic', hero: 'linear-gradient(135deg,#3e4a2f,#9caf78)', head: '#3e4a2f', even: '#f6f8ee', footer: '#e6ecd5' },
-  { id: 10, name: 'Stone Platinum', hero: 'linear-gradient(135deg,#3b3834,#aaa39b)', head: '#3b3834', even: '#f7f6f4', footer: '#e6e2dd' },
-  { id: 11, name: 'Pre-K Storybook Sky', hero: 'linear-gradient(135deg,#3b82a0,#8ed3dd)', head: '#22566a', even: '#eefafd', footer: '#d9f3f8', kidIcon: 'ABC' },
-  { id: 12, name: 'Little Learners Meadow', hero: 'linear-gradient(135deg,#4d7c5a,#b8d99b)', head: '#355f40', even: '#f3faef', footer: '#e2f1d5', kidIcon: '123' },
-  { id: 13, name: 'Tiny Scholar Peach', hero: 'linear-gradient(135deg,#b86b4b,#f3bf8f)', head: '#8b4b34', even: '#fff6ee', footer: '#f8dfc8', kidIcon: 'A+' },
-  { id: 14, name: 'Rainbow Pastel Academy', hero: 'linear-gradient(135deg,#5d6bb0,#efb8d5)', head: '#49528f', even: '#f8f5ff', footer: '#f2e4f4', kidIcon: 'ART' },
-  { id: 15, name: 'Playgroup Mint Blocks', hero: 'linear-gradient(135deg,#2f7d78,#9bd8c8)', head: '#23615d', even: '#effbf8', footer: '#d8f2ec', kidIcon: 'TOY' },
-  { id: 16, name: 'Nursery Pencil Premium', hero: 'linear-gradient(135deg,#6d5b3f,#d6bd81)', head: '#5b4930', even: '#fbf7ec', footer: '#efe3bf', kidIcon: 'PEN' },
-  { id: 17, name: 'Kinder Cloud Pearl', hero: 'linear-gradient(135deg,#63768d,#c8d8e8)', head: '#455970', even: '#f5f9fd', footer: '#e8f0f8', kidIcon: 'SUN' },
-  { id: 18, name: 'Junior Garden Rose', hero: 'linear-gradient(135deg,#8b5169,#e2a7b8)', head: '#713f55', even: '#fff4f7', footer: '#f5dce5', kidIcon: 'JOY' },
-  { id: 19, name: 'Early Years Ocean', hero: 'linear-gradient(135deg,#245f7a,#82c7d9)', head: '#1f4d63', even: '#eff9fc', footer: '#d8edf5', kidIcon: 'SEA' },
-  { id: 20, name: 'Montessori Linen Dots', hero: 'linear-gradient(135deg,#6f6a50,#c9c198)', head: '#55503b', even: '#faf8ef', footer: '#ebe6cd', kidIcon: 'DOT' },
-  { id: 21, name: 'Decent Vibrant Minimal', hero: 'linear-gradient(135deg,#0284c7 0%,#2563eb 50%,#4f46e5 100%)', head: '#1e40af', even: '#f0f7ff', footer: '#e0f2fe' },
-]
+  { id: 1, name: 'Navy', accent: '#173b66', accent2: '#6f89a8', tint: '#f3f7fb', line: '#cbd7e4', texture: 'linear-gradient(135deg,rgba(23,59,102,.035) 25%,transparent 25%,transparent 75%,rgba(23,59,102,.035) 75%)' },
+  { id: 2, name: 'Gold', accent: '#9a6a12', accent2: '#c9a24f', tint: '#fcf9f1', line: '#e3d5b5', texture: 'repeating-linear-gradient(0deg,rgba(154,106,18,.028) 0 1px,transparent 1px 7px)' },
+  { id: 3, name: 'Sage', accent: '#446b5a', accent2: '#89a99a', tint: '#f5f9f6', line: '#cfddd6', texture: 'radial-gradient(circle at 1px 1px,rgba(68,107,90,.055) 1px,transparent 1px)' },
+  { id: 4, name: 'Lilac', accent: '#625b8f', accent2: '#9b96bb', tint: '#f7f6fb', line: '#d9d5e8', texture: 'repeating-linear-gradient(135deg,rgba(98,91,143,.028) 0 1px,transparent 1px 8px)' },
+  { id: 5, name: 'Orange', accent: '#b65f1d', accent2: '#dd9b66', tint: '#fff8f2', line: '#ecd5c3', texture: 'radial-gradient(circle at 1px 1px,rgba(182,95,29,.05) 1px,transparent 1px)' },
+  { id: 6, name: 'Slate', accent: '#475569', accent2: '#94a3b8', tint: '#f8fafc', line: '#d7dee7', texture: 'repeating-linear-gradient(90deg,rgba(71,85,105,.024) 0 1px,transparent 1px 9px)' },
+  { id: 7, name: 'Rose', accent: '#9a5069', accent2: '#cf91a5', tint: '#fff6f8', line: '#ead3db', texture: 'repeating-linear-gradient(45deg,rgba(154,80,105,.025) 0 1px,transparent 1px 9px)' },
+  { id: 8, name: 'Teal', accent: '#216a70', accent2: '#6fa8aa', tint: '#f3fafa', line: '#c9dfe0', texture: 'radial-gradient(circle at 2px 2px,rgba(33,106,112,.045) 1px,transparent 1px)' },
+  { id: 9, name: 'Olive', accent: '#66733d', accent2: '#a4ad7a', tint: '#fafbf5', line: '#dce1c8', texture: 'repeating-linear-gradient(135deg,rgba(102,115,61,.025) 0 1px,transparent 1px 10px)' },
+  { id: 10, name: 'Stone', accent: '#625f5a', accent2: '#aaa49b', tint: '#faf9f7', line: '#dedbd6', texture: 'repeating-linear-gradient(0deg,rgba(98,95,90,.025) 0 1px,transparent 1px 8px)' },
+  { id: 11, name: 'Sky', accent: '#367f9a', accent2: '#8bc7d8', tint: '#f3fbfd', line: '#cde7ee', texture: 'radial-gradient(circle at 1px 1px,rgba(54,127,154,.045) 1px,transparent 1px)' },
+  { id: 12, name: 'Meadow', accent: '#4f7c58', accent2: '#9ac48c', tint: '#f6fbf3', line: '#d3e5ca', texture: 'repeating-linear-gradient(45deg,rgba(79,124,88,.024) 0 1px,transparent 1px 10px)' },
+  { id: 13, name: 'Peach', accent: '#b56d48', accent2: '#e0a77e', tint: '#fff8f3', line: '#edd9cb', texture: 'radial-gradient(circle at 2px 2px,rgba(181,109,72,.045) 1px,transparent 1px)' },
+  { id: 14, name: 'Lavender', accent: '#6f68a1', accent2: '#aaa5cd', tint: '#f8f7fc', line: '#dedbf0', texture: 'repeating-linear-gradient(135deg,rgba(111,104,161,.026) 0 1px,transparent 1px 10px)' },
+  { id: 15, name: 'Mint', accent: '#377c73', accent2: '#8bc2b8', tint: '#f3faf8', line: '#cde5df', texture: 'radial-gradient(circle at 1px 1px,rgba(55,124,115,.045) 1px,transparent 1px)' },
+  { id: 16, name: 'Mustard', accent: '#8a6b2f', accent2: '#cbb071', tint: '#fcfaf4', line: '#e5dcc4', texture: 'repeating-linear-gradient(0deg,rgba(138,107,47,.025) 0 1px,transparent 1px 8px)' },
+  { id: 17, name: 'Ice Blue', accent: '#55728c', accent2: '#9eb7cb', tint: '#f6f9fc', line: '#d7e1e9', texture: 'repeating-linear-gradient(90deg,rgba(85,114,140,.023) 0 1px,transparent 1px 10px)' },
+  { id: 18, name: 'Mauve', accent: '#865b70', accent2: '#bd8fa4', tint: '#fbf6f8', line: '#e5d4dc', texture: 'radial-gradient(circle at 2px 2px,rgba(134,91,112,.04) 1px,transparent 1px)' },
+  { id: 19, name: 'Ocean Blue', accent: '#285f7d', accent2: '#70a9c1', tint: '#f4f9fc', line: '#cbdfea', texture: 'repeating-linear-gradient(135deg,rgba(40,95,125,.024) 0 1px,transparent 1px 10px)' },
+  { id: 20, name: 'Linen', accent: '#777057', accent2: '#b4aa86', tint: '#fbfaf5', line: '#e2decd', texture: 'repeating-linear-gradient(45deg,rgba(119,112,87,.022) 0 1px,transparent 1px 8px)' },
+  { id: 21, name: 'Royal Blue', accent: '#2f5aa6', accent2: '#7897cc', tint: '#f3f7fe', line: '#cfdbef', texture: 'repeating-linear-gradient(90deg,rgba(47,90,166,.024) 0 1px,transparent 1px 9px)' },
+].map((template) => ({
+  ...template,
+  hero: `${template.texture},linear-gradient(180deg,#ffffff 0%,${template.tint} 100%)`,
+  head: template.accent,
+  even: '#ffffff',
+  footer: template.tint,
+}))
 
 const FALLBACK_CLASSES = [
   { level: 'play', label: 'PLAY' },
@@ -194,7 +200,22 @@ const robustParseDiaryText = (text, subjectHints = []) => {
 
 function DiarySlip({ template, schoolName, tagline, logoUrl, classLabel, date, rows, footerText, footerIsUrdu, slipsPerPage, fontFamily, radius, fontSize, lineHeight, wordSpacing, letterSpacing, showWatermark, schoolNameFontSize, footerFontSize, dateClassFontSize, tableHeadFontSize }) {
   return (
-    <div className={`diary-card${slipDensityClass(slipsPerPage)}`} style={{ borderRadius: radius, fontSize, lineHeight, wordSpacing, letterSpacing, fontFamily }}>
+    <div
+      className={`diary-card${slipDensityClass(slipsPerPage)}`}
+      style={{
+        borderRadius: radius,
+        fontSize,
+        lineHeight,
+        wordSpacing,
+        letterSpacing,
+        fontFamily,
+        '--diary-accent': template.accent,
+        '--diary-accent-2': template.accent2,
+        '--diary-tint': template.tint,
+        '--diary-line': template.line,
+        '--diary-texture': template.texture,
+      }}
+    >
       <div className="hero" style={{ background: template.hero }}>
         <div className="logo-box">{logoUrl ? <img src={logoUrl.startsWith('http') || logoUrl.startsWith('blob:') || logoUrl.startsWith('data:') ? logoUrl : (logoUrl.startsWith('/') ? 'https://api.assps.edu.pk' + logoUrl : 'https://api.assps.edu.pk/' + logoUrl)} alt="School logo" /> : <span>ASS</span>}</div>
         <div className="school-info">
@@ -206,15 +227,15 @@ function DiarySlip({ template, schoolName, tagline, logoUrl, classLabel, date, r
       </div>
       <div className="diary-table">
         <div className="table-head">
-          <div style={{ background: template.head, ...(tableHeadFontSize ? { fontSize: `${tableHeadFontSize}px` } : {}) }}>SUBJECT</div>
-          <div style={{ background: template.head, ...(tableHeadFontSize ? { fontSize: `${tableHeadFontSize}px` } : {}) }}>HOME TASK / DIARY</div>
+          <div style={{ color: template.head, ...(tableHeadFontSize ? { fontSize: `${tableHeadFontSize}px` } : {}) }}>SUBJECT</div>
+          <div style={{ color: template.head, ...(tableHeadFontSize ? { fontSize: `${tableHeadFontSize}px` } : {}) }}>HOME TASK / DIARY</div>
         </div>
         {rows.map((row, index) => (
           <div className="table-row" key={row.id}>
             <div
               className="subject-pill"
               style={{
-                background: index % 2 ? template.even : '#ffffff',
+                background: '#ffffff',
                 fontFamily,
                 fontSize: `${Math.max(9, fontSize - 1)}px`,
                 lineHeight,
@@ -226,7 +247,7 @@ function DiarySlip({ template, schoolName, tagline, logoUrl, classLabel, date, r
             <div
               className={row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}
               style={{
-                background: index % 2 ? template.even : '#ffffff',
+                background: '#ffffff',
                 fontFamily: row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily),
                 fontSize: `${row.fontSize || fontSize}px`,
                 lineHeight: row.lineHeight || lineHeight,
@@ -259,7 +280,7 @@ export default function DailyDiaryFeature() {
   const [footerIsUrdu, setFooterIsUrdu] = useState(false)
   const [rows, setRows] = useState(defaultRows)
   const [fontFamily, setFontFamily] = useState(FONT_OPTIONS[0].value)
-  const [radius, setRadius] = useState(24)
+  const [radius, setRadius] = useState(10)
   const [fontSize, setFontSize] = useState(13)
   const [lineHeight, setLineHeight] = useState(1.18)
   const [wordSpacing, setWordSpacing] = useState(0)
@@ -472,7 +493,7 @@ export default function DailyDiaryFeature() {
     if (typeof window === 'undefined') return
 
     const slipsHtml = Array.from({ length: slipsPerPage }, () => `
-      <div class="diary-card${slipDensityClass(slipsPerPage)}" style="border-radius:${radius}px;font-size:${fontSize}px;line-height:${lineHeight};word-spacing:${wordSpacing}px;letter-spacing:${letterSpacing}px;font-family:${inlineFont(fontFamily)}">
+      <div class="diary-card${slipDensityClass(slipsPerPage)}" style="border-radius:${radius}px;font-size:${fontSize}px;line-height:${lineHeight};word-spacing:${wordSpacing}px;letter-spacing:${letterSpacing}px;font-family:${inlineFont(fontFamily)};--diary-accent:${template.accent};--diary-accent-2:${template.accent2};--diary-tint:${template.tint};--diary-line:${template.line};--diary-texture:${template.texture}">
         <div class="hero" style="background:${template.hero}">
           <div class="logo-box">${logoUrl ? `<img src="${escapeHtml(logoUrl.startsWith('http') || logoUrl.startsWith('blob:') || logoUrl.startsWith('data:') ? logoUrl : (logoUrl.startsWith('/') ? 'https://api.assps.edu.pk' + logoUrl : 'https://api.assps.edu.pk/' + logoUrl))}" alt="School logo" />` : '<span>ASS</span>'}</div>
           <div class="school-info">
@@ -484,13 +505,13 @@ export default function DailyDiaryFeature() {
         </div>
         <div class="diary-table">
           <div class="table-head">
-            <div style="background:${template.head};${tableHeadFontSize ? `font-size:${tableHeadFontSize}px;` : ''}">SUBJECT</div>
-            <div style="background:${template.head};${tableHeadFontSize ? `font-size:${tableHeadFontSize}px;` : ''}">HOME TASK / DIARY</div>
+            <div style="color:${template.head};${tableHeadFontSize ? `font-size:${tableHeadFontSize}px;` : ''}">SUBJECT</div>
+            <div style="color:${template.head};${tableHeadFontSize ? `font-size:${tableHeadFontSize}px;` : ''}">HOME TASK / DIARY</div>
           </div>
           ${rows.map((row, index) => `
             <div class="table-row">
-              <div class="subject-pill" style="background:${index % 2 ? template.even : '#ffffff'};font-family:${inlineFont(fontFamily)};font-size:${Math.max(9, fontSize - 1)}px;line-height:${lineHeight};font-weight:${row.isBold ? '1000' : '750'}">${escapeHtml(row.subject)}</div>
-              <div class="${row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}" style="background:${index % 2 ? template.even : '#ffffff'};font-family:${inlineFont(row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily))};font-size:${row.fontSize || fontSize}px;line-height:${row.lineHeight || lineHeight};font-weight:${row.isBold ? '900' : (row.isUrdu ? 'normal' : '700')};text-align:${row.textAlign || (row.isUrdu ? 'right' : 'left')}">${escapeHtml(row.diary || '-')}</div>
+              <div class="subject-pill" style="background:#ffffff;font-family:${inlineFont(fontFamily)};font-size:${Math.max(9, fontSize - 1)}px;line-height:${lineHeight};font-weight:${row.isBold ? '1000' : '750'}">${escapeHtml(row.subject)}</div>
+              <div class="${row.isUrdu ? 'task-pill urdu-text' : 'task-pill'}" style="background:#ffffff;font-family:${inlineFont(row.isUrdu ? URDU_FONT : (row.fontFamily || fontFamily))};font-size:${row.fontSize || fontSize}px;line-height:${row.lineHeight || lineHeight};font-weight:${row.isBold ? '900' : (row.isUrdu ? 'normal' : '700')};text-align:${row.textAlign || (row.isUrdu ? 'right' : 'left')}">${escapeHtml(row.diary || '-')}</div>
             </div>
           `).join('')}
         </div>
@@ -636,7 +657,7 @@ export default function DailyDiaryFeature() {
         <div>
           <div className="eyebrow">Daily Diary Generator</div>
           <h1>Daily Diary Generator</h1>
-          <p>Paste diary content, auto-arrange subjects, fine tune typography, and print a clean A4 sheet without changing the provided template styles.</p>
+          <p>Compose the diary once, then choose a clean color theme with restrained accents, subtle texture, and print-friendly typography.</p>
         </div>
         <div className="actions">
           <button onClick={saveDailyDiary} disabled={saving}>{saving ? 'Saving...' : 'Save Diary'}</button>
@@ -699,7 +720,7 @@ export default function DailyDiaryFeature() {
               </select>
             </label>
             <div className="slider-grid">
-              <label>Border Radius<input type="range" min="12" max="34" value={radius} onChange={(e) => setRadius(Number(e.target.value))} /></label>
+              <label>Border Radius<input type="range" min="4" max="18" value={radius} onChange={(e) => setRadius(Number(e.target.value))} /></label>
               <label>Font Size<input type="range" min="10" max="18" value={fontSize} onChange={(e) => applyGlobalFontSize(Number(e.target.value))} /></label>
               <label>Line Space<input type="range" min="0.95" max="1.7" step="0.02" value={lineHeight} onChange={(e) => applyGlobalLineHeight(Number(e.target.value))} /></label>
               <label>Word Space<input type="range" min="-2" max="8" value={wordSpacing} onChange={(e) => setWordSpacing(Number(e.target.value))} /></label>
@@ -902,27 +923,29 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .compose-warning{margin-top:10px;padding:10px 12px;border-radius:12px;border:1px solid rgba(255,193,7,.2);background:rgba(255,193,7,.08);color:#ffd37a;font-size:12px;font-weight:800;line-height:1.5}
 .helper-copy{font-size:11px;color:#94A3B8;line-height:1.5;margin-top:-2px;padding:10px 12px;border:1px dashed rgba(148,163,184,.12);border-radius:12px;background:rgba(255,255,255,.02)}
 .print-sheet{width:207mm;min-height:287mm;background:white;margin:0 auto;padding:1mm;display:grid;gap:.65mm;box-shadow:0 20px 60px rgba(15,23,42,.12);align-items:start;justify-content:center;box-sizing:border-box;grid-auto-rows:max-content}
-.diary-card{position:relative;overflow:hidden;background:#fff;border:1px solid rgba(15,23,42,.08);box-shadow:0 5px 14px rgba(15,23,42,.05);height:auto;display:flex;flex-direction:column;max-width:100%;filter:saturate(1.1) contrast(1.04)}
+.diary-card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--diary-line,#d7dee7);box-shadow:0 3px 10px rgba(15,23,42,.045);height:auto;display:flex;flex-direction:column;max-width:100%;color:#1f2937}
+.diary-card::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:linear-gradient(90deg,var(--diary-accent,#173b66),var(--diary-accent-2,#6f89a8));z-index:4;pointer-events:none}
 .compact-slip{font-size:9.6px!important}
 .ultra-slip{font-size:8.8px!important}
 .micro-slip{font-size:8.1px!important}
-.hero{padding:5px 6px;display:flex;align-items:center;gap:5px;color:white;flex-shrink:0}
+.hero{padding:7px 7px 6px;display:flex;align-items:center;gap:6px;color:#1f2937;flex-shrink:0;border-bottom:1px solid var(--diary-line,#d7dee7);position:relative}
+.hero::after{content:"";position:absolute;left:7px;bottom:-1px;width:34%;height:2px;background:linear-gradient(90deg,var(--diary-accent,#173b66),transparent);pointer-events:none}
 .compact-slip .hero{padding:4px 5px;gap:4px}
 .ultra-slip .hero,.micro-slip .hero{padding:3px 4px;gap:3px}
-.logo-box{width:42px;height:42px;min-width:42px;border-radius:15px;background:white;display:grid;place-items:center;box-shadow:0 8px 18px rgba(0,0,0,.16);overflow:hidden}
+.logo-box{width:42px;height:42px;min-width:42px;border-radius:12px;background:#fff;display:grid;place-items:center;border:1px solid var(--diary-line,#d7dee7);box-shadow:0 2px 5px rgba(15,23,42,.04);overflow:hidden}
 .compact-slip .logo-box{width:34px;height:34px;min-width:34px;border-radius:12px}
 .ultra-slip .logo-box{width:28px;height:28px;min-width:28px;border-radius:9px}
 .micro-slip .logo-box{width:24px;height:24px;min-width:24px;border-radius:8px}
 .logo-box img{width:100%;height:100%;object-fit:contain}
 .logo-box span{font-weight:1000;color:#111827}
 .school-info{flex:1;min-width:0}
-.school-name{font-size:14px;font-weight:1000;line-height:1;letter-spacing:-.3px;text-transform:uppercase}
+.school-name{font-size:14px;font-weight:1000;line-height:1.03;letter-spacing:-.28px;text-transform:uppercase;color:var(--diary-accent,#173b66)}
 .compact-slip .school-name{font-size:11px}
 .ultra-slip .school-name{font-size:9.6px}
 .micro-slip .school-name{font-size:8.6px}
-.tagline{font-size:8.5px;font-weight:800;opacity:.9;margin-top:2px;text-transform:uppercase}
+.tagline{font-size:8px;font-weight:800;color:#64748b;margin-top:2px;text-transform:uppercase;letter-spacing:.03em}
 .ultra-slip .tagline,.micro-slip .tagline{font-size:6.7px;margin-top:1px}
-.date-box{text-align:right;font-size:9px;line-height:1.3;font-weight:900}
+.date-box{text-align:right;font-size:9px;line-height:1.3;font-weight:900;color:var(--diary-accent,#173b66);background:var(--diary-tint,#f3f7fb);border:1px solid var(--diary-line,#d7dee7);border-radius:8px;padding:3px 5px}
 .compact-slip .date-box{font-size:7.8px}
 .ultra-slip .date-box{font-size:6.8px}
 .micro-slip .date-box{font-size:6.2px}
@@ -930,22 +953,24 @@ button:disabled{opacity:.65;cursor:not-allowed}
 .kid-badge{width:30px;height:30px;border-radius:999px;background:rgba(255,255,255,.92);color:#1f2937;display:grid;place-items:center;font-size:8px;font-weight:1000;box-shadow:0 8px 18px rgba(15,23,42,.14);flex-shrink:0}
 .compact-slip .kid-badge{width:24px;height:24px;font-size:6.8px}
 .ultra-slip .kid-badge,.micro-slip .kid-badge{width:20px;height:20px;font-size:5.8px}
-.diary-table{margin:1.5px 3px 1.5px;border-radius:8px;overflow:hidden;border:1px solid rgba(15,23,42,.16);flex:0 0 auto;min-height:0}
-.table-head,.table-row{display:grid;grid-template-columns:minmax(45px,.22fr) minmax(0,1fr);gap:1.2px;padding:.8px}
-.table-head div{padding:2px 4px;border-radius:7px;color:white;text-align:center;font-size:8px;font-weight:1000;letter-spacing:.2px}
+.diary-table{margin:2px 4px 1px;border-radius:7px;overflow:hidden;border:1px solid var(--diary-line,#d7dee7);background:#fff;flex:0 0 auto;min-height:0}
+.table-head,.table-row{display:grid;grid-template-columns:minmax(45px,.22fr) minmax(0,1fr);gap:0;padding:0}
+.table-head div{padding:3px 4px;color:var(--diary-accent,#173b66);background:#fff;text-align:center;font-size:8px;font-weight:1000;letter-spacing:.32px;border-bottom:1px solid var(--diary-line,#d7dee7)}
+.table-head div:first-child{border-right:1px solid var(--diary-line,#d7dee7)}
 .ultra-slip .table-head,.ultra-slip .table-row,.micro-slip .table-head,.micro-slip .table-row{grid-template-columns:minmax(39px,.2fr) minmax(0,1fr);gap:.8px;padding:.4px}
 .ultra-slip .table-head div,.micro-slip .table-head div{font-size:6.2px;padding:1px 2px;border-radius:5px}
-.subject-pill,.task-pill{border-radius:7px;border:1px solid rgba(15,23,42,.12);box-shadow:0 1px 4px rgba(15,23,42,.04);padding:2px 4px;min-height:14px;color:#1f2937;font-weight:750;overflow:hidden}
+.subject-pill,.task-pill{border-radius:0;border:0;border-bottom:1px solid var(--diary-line,#d7dee7);box-shadow:none;padding:3px 5px;min-height:14px;color:#1f2937;font-weight:750;overflow:hidden;background:#fff!important}
+.subject-pill{border-right:1px solid var(--diary-line,#d7dee7);border-left:3px solid var(--diary-accent,#173b66);background:linear-gradient(90deg,var(--diary-tint,#f3f7fb),#fff 42%)!important}
 .ultra-slip .subject-pill,.ultra-slip .task-pill,.micro-slip .subject-pill,.micro-slip .task-pill{padding:1px 2px;min-height:10px;border-radius:5px}
 .task-pill{color:#111827;font-weight:800}
 .subject-pill{text-align:center;font-weight:1000;white-space:nowrap;text-overflow:clip}
 .task-pill{font-weight:700;white-space:normal;overflow-wrap:anywhere;word-break:normal}
 .urdu-text{font-family:"Noto Nastaliq Urdu","Jameel Noori Nastaleeq",serif;direction:rtl;font-size:1em;line-height:1.25}
-.footer-note{margin:0 4px 3px;border-radius:7px;padding:3px 5px;text-align:center;font-weight:900;flex-shrink:0;font-size:9.2px;line-height:1.25;color:#1f2937;border:1px solid rgba(15,23,42,.08);min-height:18px;display:flex;align-items:center;justify-content:center}
+.footer-note{margin:1px 4px 3px;border-radius:5px;padding:3px 5px;text-align:center;font-weight:850;flex-shrink:0;font-size:9px;line-height:1.25;color:#475569;border:1px solid var(--diary-line,#d7dee7);border-left:3px solid var(--diary-accent,#173b66);min-height:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--diary-tint,#f3f7fb),#fff 60%)!important}
 .compact-slip .footer-note{font-size:8.2px;min-height:15px;padding:2px 4px}
 .ultra-slip .footer-note{font-size:7.2px;min-height:12px;padding:1px 3px;margin-bottom:2px}
 .micro-slip .footer-note{font-size:6.6px;min-height:10px;padding:1px 2px;margin-bottom:1px}
-.watermark{position:absolute;right:-14px;bottom:-22px;font-size:78px;font-weight:1000;opacity:.03;pointer-events:none}
+.watermark{position:absolute;right:-14px;bottom:-22px;font-size:78px;font-weight:1000;color:var(--diary-accent,#173b66);opacity:.022;pointer-events:none}
 @media(max-width:1200px){.designer-layout{grid-template-columns:1fr}.left-column,.right-column{grid-column:auto}.compose-grid{grid-template-columns:1fr}.page-header{display:block}.actions{margin-top:12px}.print-sheet{width:100%;min-height:auto}.edit-row{grid-template-columns:1fr;grid-template-areas:"subject" "diary" "tools" "actions"}.row-tools{grid-template-columns:1fr}.font-size-tools{justify-content:flex-start}.edit-actions{grid-template-columns:1fr}.edit-actions .check{white-space:normal}}
 @media print {
   @page { size: A4 portrait; margin: 4mm; }
