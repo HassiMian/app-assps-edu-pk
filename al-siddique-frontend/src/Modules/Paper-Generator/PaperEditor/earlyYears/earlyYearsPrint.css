@@ -150,3 +150,40 @@
     font-size: 8pt !important;
   }
 }
+
+
+/* Print hardening: never print the dark editor canvas/frame around an Early Years sheet.
+   Starter may keep a light template border; Mover/Flyer print borderless by default. */
+@media print {
+  html,
+  body,
+  #root,
+  .early-years-editor-root,
+  .early-years-workspace-body,
+  .early-years-paper-viewport {
+    background: #fff !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border: 0 !important;
+  }
+
+  .early-years-paper-viewport {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .early-years-sheet-a4,
+  .early-years-sheet-a4[data-premium-early-years="true"] {
+    box-shadow: none !important;
+    outline: none !important;
+    outline-offset: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    margin: 0 auto !important;
+    background: #fff !important;
+  }
+
+  .early-years-sheet-a4[data-class-stage="starter"] {
+    border: 0.25mm solid var(--ey-border, #b8cadb) !important;
+  }
+}

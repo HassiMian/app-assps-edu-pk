@@ -88,6 +88,7 @@ export default function EarlyYearsPaperContainer({
       <div
         className="early-years-sheet-a4"
         data-template-id={theme.id || 'classic'}
+        data-class-stage={String(paper?.classStage || activeSpec?.headerConfig?.classDisplayName || '').toLowerCase()}
         data-premium-early-years={theme.premiumEarlyYears ? 'true' : 'false'}
         style={{
           width:`${LAYOUT_TOKENS.page.widthMm}mm`,

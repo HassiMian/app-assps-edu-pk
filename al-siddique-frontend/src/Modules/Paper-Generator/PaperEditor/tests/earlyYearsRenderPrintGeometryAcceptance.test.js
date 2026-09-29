@@ -305,14 +305,33 @@ test('EY-RENDER-06: Print Media Styling & A4 PDF Generation Outside Git', async 
   // Assert sheet styling for print
   const sheetStyles = await page.locator('.early-years-sheet-a4').evaluate((el) => {
     const cs = window.getComputedStyle(el)
+    const viewport = window.getComputedStyle(el.closest('.early-years-paper-viewport'))
     return {
       transform: cs.transform,
       boxShadow: cs.boxShadow,
-      backgroundColor: cs.backgroundColor
+      outlineStyle: cs.outlineStyle,
+      borderTopWidth: cs.borderTopWidth,
+      borderTopColor: cs.borderTopColor,
+      backgroundColor: cs.backgroundColor,
+      viewportBackground: viewport.backgroundColor,
+      viewportShadow: viewport.boxShadow,
+      viewportOutline: viewport.outlineStyle,
+      viewportBorderTopWidth: viewport.borderTopWidth,
     }
   })
   assert.equal(sheetStyles.transform, 'none', 'Sheet transform must be none in print')
   assert.equal(sheetStyles.boxShadow, 'none', 'Sheet box-shadow must be none in print')
+  assert.equal(sheetStyles.outlineStyle, 'none', 'Sheet outline must be removed in print')
+  assert.equal(sheetStyles.viewportShadow, 'none', 'Dark editor viewport shadow must never print')
+  assert.equal(sheetStyles.viewportOutline, 'none', 'Dark editor viewport outline must never print')
+  assert.equal(sheetStyles.viewportBorderTopWidth, '0px', 'Dark editor viewport border must never print')
+  assert.ok(
+    sheetStyles.viewportBackground.includes('255, 255, 255') || sheetStyles.viewportBackground === 'white',
+    'Editor viewport background must be white in print'
+  )
+  assert.ok(Number.parseFloat(sheetStyles.borderTopWidth) <= 1.1, `Starter keeps only a thin controlled template border; got ${sheetStyles.borderTopWidth}`)
+  assert.notEqual(sheetStyles.borderTopWidth, '0px', 'Starter keeps its light template border')
+  assert.doesNotMatch(sheetStyles.borderTopColor, /rgb\(0, 0, 0\)/, 'Starter print border must not be black')
   assert.ok(
     sheetStyles.backgroundColor.includes('255, 255, 255') || sheetStyles.backgroundColor === 'white',
     'Sheet background must be white in print'
@@ -341,6 +360,14 @@ test('EY-RENDER-06: Print Media Styling & A4 PDF Generation Outside Git', async 
   await page.goto(`${BASE_URL}?paper=ey-flyer-math-2026`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
   await page.emulateMedia({ media: 'print' })
+
+  const flyerPrintStyles = await page.locator('.early-years-sheet-a4').evaluate((el) => {
+    const cs = window.getComputedStyle(el)
+    return { borderTopWidth: cs.borderTopWidth, boxShadow: cs.boxShadow, outlineStyle: cs.outlineStyle }
+  })
+  assert.equal(flyerPrintStyles.borderTopWidth, '0px', 'Flyer must not print an outer sheet border')
+  assert.equal(flyerPrintStyles.boxShadow, 'none', 'Flyer must not print a sheet shadow')
+  assert.equal(flyerPrintStyles.outlineStyle, 'none', 'Flyer must not print a sheet outline')
 
   const flyerMathPdfPath = path.join(tmpDir, 'Flyer_Math_A4_Print.pdf')
   await page.pdf({
