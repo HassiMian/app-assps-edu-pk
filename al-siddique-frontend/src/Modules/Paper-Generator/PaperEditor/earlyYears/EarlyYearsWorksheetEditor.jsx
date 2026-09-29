@@ -11,7 +11,8 @@ import {
   EARLY_YEARS_PREMIUM_TEMPLATES,
   EARLY_YEARS_TEMPLATE_OPTIONS,
   getDefaultEarlyYearsTemplateId,
-  getEarlyYearsTemplatePreset
+  getEarlyYearsTemplatePreset,
+  normalizeEarlyYearsTemplateId
 } from './earlyYearsTemplates.js'
 import './earlyYearsPrint.css'
 
@@ -75,17 +76,34 @@ export default function EarlyYearsWorksheetEditor({
   useEffect(() => {
     if (!currentPaper?.id) return
     const saved = readTemplateMap()
-    const next = saved[currentPaper.id] || getDefaultEarlyYearsTemplateId(currentPaper.classStage)
+    const raw = saved[currentPaper.id] || getDefaultEarlyYearsTemplateId(currentPaper.classStage)
+    const next = normalizeEarlyYearsTemplateId(raw)
+    if (raw !== next) {
+      saved[currentPaper.id] = next
+      writeTemplateMap(saved)
+    }
     setTemplateId(next)
   }, [currentPaper?.id, currentPaper?.classStage])
 
+  useEffect(() => {
+    const scroller = document.querySelector('[data-early-years-scroll-region]')
+    if (scroller) scroller.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [selectedPaperId])
+
   const selectTemplate = useCallback((nextId) => {
-    setTemplateId(nextId)
+    const normalized = normalizeEarlyYearsTemplateId(nextId)
+    setTemplateId(normalized)
     if (!currentPaper?.id) return
     const saved = readTemplateMap()
-    saved[currentPaper.id] = nextId
+    saved[currentPaper.id] = normalized
     writeTemplateMap(saved)
   }, [currentPaper?.id])
+
+  const selectPaper = useCallback((nextId) => {
+    if (!nextId || nextId === selectedPaperId) return
+    setShowQAPanel(false)
+    setSelectedPaperId(nextId)
+  }, [selectedPaperId])
 
   const hasConflict = currentPaper?.totalMarksSource?.hasConflict
   const hasAmbiguity = qaFindings.length > 0 && !hasConflict
@@ -124,7 +142,9 @@ export default function EarlyYearsWorksheetEditor({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100vh',
+        flex: '1 1 auto',
+        height: '100%',
+        minHeight: 0,
         overflow: 'hidden',
         background: '#0f172a',
         color: '#f8fafc',
@@ -178,8 +198,10 @@ export default function EarlyYearsWorksheetEditor({
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <label style={{ fontSize: '12px', color: '#cbd5e1' }}>Select Paper:</label>
           <select
+            data-early-years-paper-selector
+            aria-label="Select Early Years paper"
             value={currentPaper?.id || ''}
-            onChange={(e) => setSelectedPaperId(e.target.value)}
+            onChange={(e) => selectPaper(e.target.value)}
             style={{
               padding: '6px 10px',
               borderRadius: '6px',
@@ -412,20 +434,27 @@ export default function EarlyYearsWorksheetEditor({
       </header>
 
       {/* Main Workspace Body */}
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+      <div data-early-years-workspace-body style={{ display: 'flex', flex: '1 1 auto', minHeight: 0, overflow: 'hidden' }}>
         {/* Printable Paper Canvas Area */}
         <main
+          data-early-years-scroll-region
           style={{
-            flex: 1,
+            flex: '1 1 auto',
+            minHeight: 0,
+            height: '100%',
             overflowY: 'auto',
+            overflowX: 'auto',
+            overscrollBehavior: 'contain',
+            scrollbarGutter: 'stable',
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'flex-start',
             background: '#334155'
           }}
         >
           {currentPaper && (
             <EarlyYearsPaperContainer
-              key={currentPaper.id}
+              key={`${currentPaper.id}-${templateId}`}
               paper={currentPaper}
               scale={zoomLevel}
               presentationRevision={presentationRevision}

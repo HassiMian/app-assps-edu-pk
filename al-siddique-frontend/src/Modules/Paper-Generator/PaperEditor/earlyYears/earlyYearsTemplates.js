@@ -88,8 +88,27 @@ export const EARLY_YEARS_TEMPLATE_OPTIONS = [
   })),
 ]
 
+const LEGACY_TEMPLATE_ID_MAP = {
+  'little-scholars-navy':'scholar-spark',
+  'sky-explorer':'sky-adventure',
+  'mint-discovery':'mint-discovery-v2',
+  'sunny-sprout':'sunshine-studio',
+  'coral-play':'coral-creative',
+  'violet-story':'violet-story-v2',
+}
+
+export function normalizeEarlyYearsTemplateId(templateId='scholar-spark') {
+  const raw=String(templateId||'').trim()
+  if(!raw) return 'scholar-spark'
+  if(LEGACY_TEMPLATE_ID_MAP[raw]) return LEGACY_TEMPLATE_ID_MAP[raw]
+  if(EARLY_YEARS_TEMPLATE_OPTIONS.some(template=>template.id===raw)) return raw
+  if(PAPER_TEMPLATES.some(template=>template.id===raw)) return 'workspace-'+raw
+  return 'scholar-spark'
+}
+
 export function getEarlyYearsTemplatePreset(templateId='scholar-spark') {
-  return EARLY_YEARS_TEMPLATE_OPTIONS.find(template => template.id === templateId)
+  const normalized=normalizeEarlyYearsTemplateId(templateId)
+  return EARLY_YEARS_TEMPLATE_OPTIONS.find(template => template.id === normalized)
     || EARLY_YEARS_PREMIUM_TEMPLATES[0]
 }
 

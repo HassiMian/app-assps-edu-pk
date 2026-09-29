@@ -88,6 +88,72 @@ test('EY-OVERLAY-01: Real PaperGenerator UI route navigation: Pre Classes Papers
   assert.ok(flyerMathText.includes('Flyer'), 'Must switch to Flyer Math')
 })
 
+test('EY-OVERLAY-01B: production workspace scroll, template switching, paper switching, and premium header are stable', async () => {
+  await page.goto(`${BASE_URL}?mode=generator`, { waitUntil: 'domcontentloaded' })
+  await page.evaluate(() => localStorage.removeItem('assps-early-years-template-map-v1'))
+  await page.reload({ waitUntil: 'domcontentloaded' })
+
+  const preClassesTab = page.locator('button:has-text("Pre Classes Papers")').first()
+  await preClassesTab.waitFor({ timeout: 10000 })
+  await preClassesTab.click()
+  await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
+
+  const scroller = page.locator('[data-early-years-scroll-region]')
+  const metrics = await scroller.evaluate((el) => ({
+    clientHeight: el.clientHeight,
+    scrollHeight: el.scrollHeight,
+    overflowY: getComputedStyle(el).overflowY,
+  }))
+  assert.ok(metrics.clientHeight > 300, `Scroll viewport must have usable height, got ${metrics.clientHeight}`)
+  assert.ok(metrics.scrollHeight > metrics.clientHeight + 100, `Full paper must extend beyond viewport (scroll=${metrics.scrollHeight}, client=${metrics.clientHeight})`)
+  assert.equal(metrics.overflowY, 'auto')
+
+  await scroller.evaluate((el) => { el.scrollTop = el.scrollHeight })
+  await page.waitForTimeout(80)
+  const bottomState = await scroller.evaluate((el) => ({
+    top: el.scrollTop,
+    gap: el.scrollHeight - el.clientHeight - el.scrollTop,
+  }))
+  assert.ok(bottomState.top > 100, 'Paper workspace must scroll vertically')
+  assert.ok(bottomState.gap < 3, `Paper bottom must be reachable; remaining gap=${bottomState.gap}`)
+
+  const logo = page.locator('[data-early-years-school-logo] img')
+  await logo.waitFor({ state: 'visible' })
+  assert.ok(await logo.evaluate((img) => img.complete && img.naturalWidth > 0), 'Actual school logo asset must render')
+
+  const schoolNameStyle = await page.locator('[data-early-years-school-name]').evaluate((el) => {
+    const s = getComputedStyle(el)
+    return { family: s.fontFamily, weight: Number.parseInt(s.fontWeight, 10), size: Number.parseFloat(s.fontSize) }
+  })
+  assert.match(schoolNameStyle.family, /Times New Roman/i)
+  assert.ok(schoolNameStyle.weight >= 700, `School name must be bold; got ${schoolNameStyle.weight}`)
+  assert.ok(schoolNameStyle.size >= 19, `School name must be prominent; got ${schoolNameStyle.size}px`)
+
+  const classBadgeStyle = await page.locator('[data-early-years-class-badge]').evaluate((el) => {
+    const s = getComputedStyle(el)
+    return { family: s.fontFamily, weight: Number.parseInt(s.fontWeight, 10) }
+  })
+  assert.match(classBadgeStyle.family, /Trebuchet|Segoe UI/i)
+  assert.ok(classBadgeStyle.weight >= 700)
+
+  await page.getByRole('button', { name: 'Use Ferozi Learning Lab template' }).click()
+  await page.waitForTimeout(120)
+  assert.equal(await page.getByLabel('Early Years template').inputValue(), 'ferozi-learning-lab')
+  assert.equal(await page.locator('.early-years-sheet-a4').getAttribute('data-template-id'), 'ferozi-learning-lab')
+
+  const paperSelect = page.getByLabel('Select Early Years paper')
+  await paperSelect.selectOption('ey-mover-urdu-2026')
+  await page.waitForTimeout(180)
+  assert.equal(await paperSelect.inputValue(), 'ey-mover-urdu-2026')
+  assert.ok((await page.locator('.early-years-sheet-a4').textContent()).includes('Mover'))
+  assert.ok((await scroller.evaluate((el) => el.scrollTop)) < 5, 'Switching papers must reset canvas to the top')
+
+  await paperSelect.selectOption('ey-flyer-math-2026')
+  await page.waitForTimeout(180)
+  assert.equal(await paperSelect.inputValue(), 'ey-flyer-math-2026')
+  assert.ok((await page.locator('.early-years-sheet-a4').textContent()).includes('Flyer'))
+})
+
 // ─────────────────────────────────────────────────────────────
 // 2. SKETCH SIZE FUNCTIONAL TEST (Req 9)
 // ─────────────────────────────────────────────────────────────

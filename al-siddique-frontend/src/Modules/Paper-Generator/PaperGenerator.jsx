@@ -84,7 +84,10 @@ export default function PaperGenerator() {
   const ModuleWrap = ({ children }) => (
     <div
       className={moduleTab === 'early_years' ? 'paper-generator-module-wrap early-years-module-wrap' : 'paper-generator-module-wrap'}
-      style={{ minHeight:'100vh', width:'100%', background:'#071e34' }}
+      style={moduleTab === 'early_years'
+        ? { height:'calc(100dvh - 78px)', minHeight:0, width:'100%', background:'#071e34', display:'flex', flexDirection:'column', overflow:'hidden' }
+        : { minHeight:'100vh', width:'100%', background:'#071e34' }
+      }
     >
       <div
         className={moduleTab === 'early_years' ? 'paper-generator-module-tabs no-print' : 'paper-generator-module-tabs'}
@@ -98,6 +101,7 @@ export default function PaperGenerator() {
           position:'sticky',
           top:0,
           zIndex:30,
+          flexShrink:0,
         }}
       >
         {MODULE_TABS.map(tab=><TabBtn key={tab.id} active={moduleTab===tab.id} onClick={()=>openModuleTab(tab)}>{tab.label}</TabBtn>)}

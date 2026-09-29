@@ -68,6 +68,7 @@
     height: auto !important;
     margin: 0 auto !important;
     box-shadow: none !important;
+    zoom: 1 !important;
     transform: none !important;
     transform-origin: top left !important;
     overflow: visible !important;

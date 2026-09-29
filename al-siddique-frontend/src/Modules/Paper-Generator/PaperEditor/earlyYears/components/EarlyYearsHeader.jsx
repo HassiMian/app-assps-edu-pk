@@ -1,5 +1,6 @@
 import React from 'react'
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
+import schoolLogo from '../../../../../assets/school-logo.svg'
 
 export default function EarlyYearsHeader({
   headerConfig = {},
@@ -75,33 +76,37 @@ export default function EarlyYearsHeader({
         }}
       />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '58px minmax(0,1fr) auto', gap: 9, alignItems: 'center', direction: 'ltr' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '62px minmax(0,1fr) 94px', gap: 10, alignItems: 'center', direction: 'ltr' }}>
         <div
+          data-early-years-school-logo
           style={{
-            width: 52,
-            height: 52,
-            borderRadius: 14,
+            width: 56,
+            height: 56,
+            borderRadius: 12,
             display: 'grid',
             placeItems: 'center',
             background: '#fff',
             border: `1px solid ${border}`,
-            boxShadow: `inset 0 0 0 3px ${accentSoft}`
+            boxShadow: `inset 0 0 0 3px ${accentSoft}, 0 2px 6px rgba(15,23,42,.07)`,
+            overflow: 'hidden'
           }}
         >
-          <div style={{ textAlign: 'center', lineHeight: 1 }}>
-            <div style={{ fontSize: 15, fontWeight: 1000, color: accent, letterSpacing: -.5 }}>ASSPS</div>
-            <div style={{ fontSize: 6.5, fontWeight: 900, color: accent2, marginTop: 3, letterSpacing: .4 }}>LEARN • GROW</div>
-          </div>
+          <img
+            src={schoolLogo}
+            alt="Al Siddique Scholars Public School logo"
+            style={{ width: 49, height: 49, objectFit: 'contain', display: 'block' }}
+          />
         </div>
 
         <div style={{ minWidth: 0, textAlign: 'center', direction: isUrdu ? 'rtl' : 'ltr' }}>
           <div
+            data-early-years-school-name
             style={{
-              fontFamily: englishFont,
-              fontSize: TYPOGRAPHY_TOKENS.fontSizes.schoolName,
-              fontWeight: 1000,
+              fontFamily: "'Times New Roman', Times, serif",
+              fontSize: 20,
+              fontWeight: 900,
               color: accent,
-              letterSpacing: .2,
+              letterSpacing: .35,
               lineHeight: 1.02,
               textTransform: 'uppercase'
             }}
@@ -121,11 +126,47 @@ export default function EarlyYearsHeader({
           </div>
         </div>
 
-        <div style={{ display: 'grid', gap: 4, justifyItems: 'end', direction: 'ltr' }}>
-          <span style={{ minWidth: 72, textAlign: 'center', padding: '4px 8px', borderRadius: 999, background: accentSoft, border: `1px solid ${border}`, color: accent, fontSize: 9, fontWeight: 1000 }}>
+        <div style={{ display: 'grid', gap: 5, justifyItems: 'end', direction: 'ltr' }}>
+          <span
+            data-early-years-class-badge
+            style={{
+              minWidth: 82,
+              textAlign: 'center',
+              padding: '5px 9px',
+              borderRadius: 9,
+              background: `linear-gradient(135deg,${accentSoft},#fff)`,
+              border: `1px solid ${border}`,
+              color: accent,
+              fontFamily: "'Trebuchet MS','Segoe UI',sans-serif",
+              fontSize: 10.5,
+              fontWeight: 900,
+              letterSpacing: .55,
+              lineHeight: 1,
+              textTransform: 'uppercase',
+              boxShadow: '0 1px 3px rgba(15,23,42,.05)'
+            }}
+          >
             {classDisplayName}
           </span>
-          <span style={{ minWidth: 72, textAlign: 'center', padding: '3px 8px', borderRadius: 999, background: '#fff', border: `1px solid ${border}`, color: '#334155', fontSize: 8.5, fontWeight: 900 }}>
+          <span
+            data-early-years-subject-badge
+            style={{
+              minWidth: 82,
+              textAlign: 'center',
+              padding: '4px 9px',
+              borderRadius: 9,
+              background: '#fff',
+              border: `1px solid ${border}`,
+              color: '#334155',
+              fontFamily: "'Trebuchet MS','Segoe UI',sans-serif",
+              fontSize: 9.5,
+              fontWeight: 900,
+              letterSpacing: .45,
+              lineHeight: 1,
+              textTransform: 'uppercase',
+              boxShadow: '0 1px 2px rgba(15,23,42,.04)'
+            }}
+          >
             {subjectDisplayName}
           </span>
         </div>

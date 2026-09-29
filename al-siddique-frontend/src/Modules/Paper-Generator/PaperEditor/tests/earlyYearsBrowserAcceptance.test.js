@@ -51,7 +51,9 @@ after(async () => {
 
 test('EY-BROWSER-PREMIUM: premium child templates and Paper Workspace classics change the real A4 presentation', async () => {
   await page.goto(`${BASE_URL}?paper=ey-starter-english-2026`, { waitUntil: 'domcontentloaded' })
-  await page.evaluate(() => localStorage.removeItem('assps-early-years-template-map-v1'))
+  await page.evaluate(() => localStorage.setItem('assps-early-years-template-map-v1', JSON.stringify({
+    'ey-starter-english-2026': 'little-scholars-navy'
+  })))
   await page.reload({ waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.early-years-sheet-a4', { timeout: 10000 })
 
@@ -59,6 +61,8 @@ test('EY-BROWSER-PREMIUM: premium child templates and Paper Workspace classics c
   const sheet = page.locator('.early-years-sheet-a4')
   const premiumHeader = page.locator('[data-early-years-premium-header]')
   assert.equal(await selector.inputValue(), 'scholar-spark')
+  const migratedTemplateMap = await page.evaluate(() => JSON.parse(localStorage.getItem('assps-early-years-template-map-v1') || '{}'))
+  assert.equal(migratedTemplateMap['ey-starter-english-2026'], 'scholar-spark', 'Legacy template ids must migrate automatically')
   assert.equal(await sheet.getAttribute('data-template-id'), 'scholar-spark')
   assert.equal(await sheet.getAttribute('data-premium-early-years'), 'true')
   assert.equal(await premiumHeader.getAttribute('data-early-years-premium-header'), 'true')
@@ -71,8 +75,9 @@ test('EY-BROWSER-PREMIUM: premium child templates and Paper Workspace classics c
   const starterBackground = await sheet.evaluate(el => getComputedStyle(el).backgroundImage)
   assert.match(starterBackground, /radial-gradient|linear-gradient/)
 
-  await selector.selectOption('coral-creative')
+  await page.getByRole('button', { name: 'Use Coral Creative template' }).click()
   await page.waitForTimeout(100)
+  assert.equal(await selector.inputValue(), 'coral-creative')
   assert.equal(await sheet.getAttribute('data-template-id'), 'coral-creative')
   const coralAccent = await firstQuestion.evaluate(el => getComputedStyle(el).boxShadow)
   assert.notEqual(coralAccent, 'none')
