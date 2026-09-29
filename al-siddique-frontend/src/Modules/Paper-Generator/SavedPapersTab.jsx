@@ -230,13 +230,9 @@ export default function SavedPapersTab({ onLoadPaper }) {
  <div style={{ display: 'flex', gap: 8 }}>
  <button onClick={() => onLoadPaper(paper)}
  style={{ flex: 1, background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
-  Load & Preview
+  Open in Editor
  </button>
- <button onClick={() => onLoadPaper(paper, 'build')}
- title="Open in the single rules-driven Paper Workspace"
- style={{ background:'rgba(48,209,88,0.15)', border:'1px solid rgba(48,209,88,0.35)', borderRadius:10, padding:'9px 10px', color:'#4ade80', fontWeight:700, cursor:'pointer', fontSize:12, whiteSpace:'nowrap' }}>
-  Open / Edit
- </button>
+
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>
  

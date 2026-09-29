@@ -147,6 +147,7 @@ export default function MatchingColumnsStructuredEditor({
 
         {isEditing && (
           <button
+            className="canonical-contextual-control no-print"
             type="button"
             onClick={() => handleAddItem('left')}
             style={{
@@ -236,6 +237,7 @@ export default function MatchingColumnsStructuredEditor({
 
         {isEditing && (
           <button
+            className="canonical-contextual-control no-print"
             type="button"
             onClick={() => handleAddItem('right')}
             style={{

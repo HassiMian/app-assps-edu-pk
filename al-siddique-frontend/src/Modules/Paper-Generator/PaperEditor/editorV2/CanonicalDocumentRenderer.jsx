@@ -269,12 +269,17 @@ export default function CanonicalDocumentRenderer({
     fontFamily: isUrdu
       ? "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif"
       : (template.fontFamily || "'Times New Roman', 'Arial', serif"),
+    '--canonical-accent': accent,
+    '--canonical-accent-soft': accentSoft,
+    '--canonical-border': templateBorder,
   }
 
   return (
     <article
       data-canonical-working-document={workingDoc.workingDocumentId}
       className={`canonical-paper-surface page-border-${pageBorder}`}
+      data-header-style={template.headerStyle || 'standard'}
+      data-template-id={pres.templateId || 'academic'}
       style={pageStyle}
       dir={isUrdu ? 'rtl' : 'ltr'}
     >
@@ -381,7 +386,7 @@ export default function CanonicalDocumentRenderer({
                   onCommit={(value) => store?.setPaperTotalMarks?.(value)}
                   isEditing={isEditing}
                   placeholder="—"
-                  ariaLabel="Total marks"
+                  ariaLabel="Total Marks"
                   minWidth="36px"
                   numeric
                   style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}
@@ -400,7 +405,7 @@ export default function CanonicalDocumentRenderer({
               {isEditing && (
                 <button
                   type="button"
-                  className="no-print"
+                  className="no-print canonical-header-field-control"
                   aria-label={'Remove ' + field.label + ' field'}
                   onClick={() => store?.hideHeaderField?.(field.id)}
                   style={{
@@ -456,7 +461,7 @@ export default function CanonicalDocumentRenderer({
               {isEditing && (
                 <button
                   type="button"
-                  className="no-print"
+                  className="no-print canonical-header-field-control"
                   aria-label={`Remove ${field.label || 'custom field'}`}
                   onClick={() => store?.removeCustomHeaderField?.(field.id)}
                   style={{
@@ -480,7 +485,7 @@ export default function CanonicalDocumentRenderer({
 
         {isEditing && (
           <div
-            className="no-print"
+            className="no-print canonical-header-field-tray"
             style={{
               marginTop: '6px',
               display: 'flex',
@@ -572,8 +577,9 @@ export default function CanonicalDocumentRenderer({
           let questionCounter = 0
 
           const secOverrides = pres.sectionLayoutOverrides?.[section.id] || {}
-          const isClass5Q1 = section.id && section.id.includes('class-5-english') && (section.title?.includes('Tick the correct option') || section.id.includes('s02'))
-          const mcqLayout = secOverrides.mcqLayout || (isClass5Q1 ? 'table' : 'grid')
+          // Unified Studio default: official/canonical MCQs render as a structured table.
+          // Grid / classic remain explicit user choices from the Layout tab.
+          const mcqLayout = secOverrides.mcqLayout || 'table'
           const shortLayout = secOverrides.shortLayout || '1-column'
           const questionBorder = secOverrides.questionBorder || 'none'
           const answerLinesMap = pres.answerLinesByNode || {}
@@ -634,7 +640,6 @@ export default function CanonicalDocumentRenderer({
                         direction: 'ltr',
                       }}
                     >
-                      <span>(</span>
                       <CanonicalInlineField
                         value={Number.isFinite(totalMarks) ? String(totalMarks) : ''}
                         onCommit={(value) => store?.setSectionMarks?.(section.id, value)}
@@ -652,7 +657,7 @@ export default function CanonicalDocumentRenderer({
                           borderBottomColor: isEditing ? accent : 'transparent',
                         }}
                       />
-                      <span>Marks)</span>
+                      <span>Marks</span>
                     </span>
                   )}
 
@@ -957,7 +962,7 @@ export default function CanonicalDocumentRenderer({
                                         rowSpan={2}
                                         data-mcq-number-cell
                                         style={{
-                                          width: isHalf ? '50px' : '62px',
+                                          width: isHalf ? '34px' : '42px',
                                           padding: '6px 5px',
                                           fontWeight: 800,
                                           color: accent,
@@ -969,9 +974,6 @@ export default function CanonicalDocumentRenderer({
                                         }}
                                       >
                                         {questionNumberControl}
-                                        <div style={{ marginTop: '5px', display: 'flex', justifyContent: 'center' }}>
-                                          {questionMarksControl}
-                                        </div>
                                       </td>
                                       <td
                                         colSpan={optionCount}
@@ -986,6 +988,18 @@ export default function CanonicalDocumentRenderer({
                                           overflowWrap: 'anywhere',
                                         }}
                                       >
+                                        <div
+                                          className="canonical-mcq-prompt-layout"
+                                          style={{
+                                            display: 'flex',
+                                            position: 'relative',
+                                            flexDirection: nodeDir === 'rtl' ? 'row-reverse' : 'row',
+                                            direction: 'ltr',
+                                            alignItems: 'flex-start',
+                                            gap: '7px',
+                                          }}
+                                        >
+                                          <div style={{ flex: '1 1 auto', minWidth: 0, direction: nodeDir }}>
                                         {fieldOverlay ? (
                                           <CanonicalEditableText
                                             fieldKey={fieldKey}
@@ -1000,6 +1014,18 @@ export default function CanonicalDocumentRenderer({
                                         ) : (
                                           <div>{resolvedNode.stemText || ''}</div>
                                         )}
+                                          </div>
+                                          {questionMarksControl && (
+                                            <div
+                                              className="canonical-mcq-prompt-marks"
+                                              style={nodeMarks === null
+                                                ? { position: 'absolute', insetInlineEnd: 0, top: 0, zIndex: 2 }
+                                                : { flex: '0 0 auto' }}
+                                            >
+                                              {questionMarksControl}
+                                            </div>
+                                          )}
+                                        </div>
                                       </td>
                                     </tr>
                                     <tr style={{ breakInside: 'avoid' }}>
@@ -1052,7 +1078,7 @@ export default function CanonicalDocumentRenderer({
                                                 direction={optionDir}
                                                 color={accent}
                                               />
-                                              <div style={{ flex: '1 1 auto', minWidth: 0 }}>
+                                              <div data-option-text style={{ flex: '1 1 auto', minWidth: 0 }}>
                                                 {isEditing ? (
                                                   <StructuredTextInput
                                                     value={opt.text || opt.textUrdu || ''}
@@ -1128,7 +1154,7 @@ export default function CanonicalDocumentRenderer({
                                 </table>
                                 {isEditing && (
                                   <div
-                                    className="no-print"
+                                    className="no-print canonical-inline-add-control"
                                     style={{
                                       display: 'flex',
                                       justifyContent: nodeDir === 'rtl' ? 'flex-start' : 'flex-end',

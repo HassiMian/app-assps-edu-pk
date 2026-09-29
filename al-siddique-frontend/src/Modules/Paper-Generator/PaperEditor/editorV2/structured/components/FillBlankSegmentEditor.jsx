@@ -103,7 +103,7 @@ export default function FillBlankSegmentEditor({
       </div>
 
       {/* Segment Insertion Buttons */}
-      <div style={{ display: 'flex', gap: '8px', marginTop: '6px' }}>
+      <div className="canonical-inline-add-control no-print" style={{ display: 'flex', gap: '8px', marginTop: '6px' }}>
         <button
           type="button"
           onClick={() => onInsertText?.()}

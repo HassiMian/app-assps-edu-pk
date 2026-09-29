@@ -14,6 +14,8 @@ const frontendRoot = path.resolve(__dirname, '../../../../..')
 let server
 let browser
 let page
+let headerSnapshotBeforeFormatting=''
+const richFields=()=>page.locator('.canonical-editable-field:has(.ProseMirror)')
 const PORT = 5189
 const BASE_URL = `http://localhost:${PORT}/b3-test.html`
 
@@ -41,6 +43,9 @@ before(async () => {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
   })
+  await context.route('**/api/settings/public**', route =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: '{}' })
+  )
   page = await context.newPage()
   page.on('console', msg => console.log('BROWSER CONSOLE:', msg.type(), msg.text()))
   page.on('pageerror', err => console.log('PAGE ERROR:', err.message))
@@ -54,17 +59,22 @@ after(async () => {
 test('B3-01: Open canonical editor from pristine official paper', async () => {
   await page.goto(`${BASE_URL}?mode=pristine-v13`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
-  await page.waitForSelector('.canonical-paper-ribbon', { timeout: 5000 })
+  await page.waitForSelector('.unified-paper-command-bar', { timeout: 5000 })
 
-  const headerTitle = await page.locator('.canonical-paper-ribbon').textContent()
-  assert.ok(headerTitle.includes('CANONICAL EDITOR V2'), 'Ribbon must show CANONICAL EDITOR V2')
+  const headerTitle = await page.locator('.unified-paper-command-bar').textContent()
+  assert.ok(headerTitle.includes('Paper Editor'), 'Unified command shell must show Paper Editor')
+  for (const tab of ['HOME','INSERT','LAYOUT','PAPER']) assert.ok(headerTitle.includes(tab), 'Unified shell missing '+tab)
 
-  const editableCount = await page.locator('.canonical-editable-field').count()
-  assert.ok(editableCount > 0, 'Must render editable fields for academic questions')
+  const editableCount = await richFields().count()
+  const structuredCount = await page.locator('[data-structured-editor]').count()
+  assert.ok(editableCount + structuredCount > 0, 'Must render a supported editable academic control')
 })
 
 test('B3-02: Select exactly one word. Bold. Only selected word changes', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
+  await page.evaluate(() => window.__B3_LOAD_PAPER__('canonical-english'))
+  await page.waitForSelector('.canonical-editable-field:has(.ProseMirror)', { timeout: 10000 })
+  headerSnapshotBeforeFormatting = await page.locator('.canonical-school-header').innerHTML()
+  const firstField = richFields().first()
   await firstField.locator('.ProseMirror').click()
 
   // Select first word deterministically
@@ -104,7 +114,7 @@ test('B3-02: Select exactly one word. Bold. Only selected word changes', async (
 })
 
 test('B3-03: Select another word. Set 18pt. Only selected word changes', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
+  const firstField = richFields().first()
 
   // Select second word
   const selectedWord = await page.evaluate(() => {
@@ -140,7 +150,7 @@ test('B3-03: Select another word. Set 18pt. Only selected word changes', async (
 })
 
 test('B3-04: Question 2 unchanged', async () => {
-  const secondField = page.locator('.canonical-editable-field').nth(1)
+  const secondField = richFields().nth(1)
   const strongCount = await secondField.locator('.ProseMirror strong').count()
   const styledSpanCount = await secondField.locator('.ProseMirror span[style*="font-size"]').count()
 
@@ -150,17 +160,16 @@ test('B3-04: Question 2 unchanged', async () => {
 
 test('B3-05: Header style unchanged', async () => {
   const headerElem = page.locator('.canonical-school-header')
-  const count = await headerElem.count()
-  if (count > 0) {
-    const strongInHeader = await headerElem.locator('strong').count()
-    const span18InHeader = await headerElem.locator('span[style*="18pt"]').count()
-    assert.strictEqual(strongInHeader, 0, 'Header must not be modified by body toolbar bold')
-    assert.strictEqual(span18InHeader, 0, 'Header must not be modified by body toolbar font size')
-  }
+  assert.strictEqual(await headerElem.count(),1,'Canonical header must remain mounted')
+  assert.strictEqual(
+    await headerElem.innerHTML(),
+    headerSnapshotBeforeFormatting,
+    'Body formatting commands must not mutate header markup'
+  )
 })
 
 test('B3-06: Collapsed caret + Bold. Existing text unchanged. Newly typed text bold', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
+  const firstField = richFields().first()
   await firstField.locator('.ProseMirror').click()
 
   // Collapse caret at the very end
@@ -192,7 +201,7 @@ test('B3-06: Collapsed caret + Bold. Existing text unchanged. Newly typed text b
 })
 
 test('B3-07: Ctrl+Z while Tiptap focused. Only local text/mark transaction undone', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
+  const firstField = richFields().first()
   await firstField.locator('.ProseMirror').click()
 
   // Press Ctrl+Z
@@ -204,7 +213,7 @@ test('B3-07: Ctrl+Z while Tiptap focused. Only local text/mark transaction undon
 })
 
 test('B3-08: Ctrl+Y restores it', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
+  const firstField = richFields().first()
   await firstField.locator('.ProseMirror').click()
 
   // Press Ctrl+Y
@@ -216,8 +225,8 @@ test('B3-08: Ctrl+Y restores it', async () => {
 })
 
 test('B3-09: Type 100 characters continuously. Caret remains at end. Render deltas <= 2', async () => {
-  const firstField = page.locator('.canonical-editable-field').first()
-  const secondField = page.locator('.canonical-editable-field').nth(1)
+  const firstField = richFields().first()
+  const secondField = richFields().nth(1)
   const fieldKeyA = await firstField.getAttribute('data-field-key')
   const fieldKeyB = await secondField.getAttribute('data-field-key')
 
@@ -267,7 +276,7 @@ test('B3-09: Type 100 characters continuously. Caret remains at end. Render delt
   assert.strictEqual(nodeAEditorCreations, 1, 'Active Node A Tiptap editor creation count must be exactly 1')
 })
 
-test('B3-10: Manual Edit -> Done Editing. Rich formatting remains', async () => {
+test('B3-10: Edit Paper -> Done Editing. Rich formatting remains', async () => {
   // Click Done Editing
   await page.locator('button:has-text("Done Editing")').click()
 
@@ -281,13 +290,13 @@ test('B3-10: Manual Edit -> Done Editing. Rich formatting remains', async () => 
   assert.ok(boldInStatic > 0, 'Bold text formatting must be preserved in static view')
 })
 
-test('B3-11: Done Editing -> Manual Edit. Formatting remains', async () => {
-  // Click Manual Edit
-  await page.locator('button:has-text("Manual Edit")').click()
+test('B3-11: Done Editing -> Edit Paper. Formatting remains', async () => {
+  // Click Edit Paper
+  await page.locator('button:has-text("Edit Paper")').click()
 
   // Wait for editable field view
-  await page.waitForSelector('.canonical-editable-field', { timeout: 5000 })
-  const editableCount = await page.locator('.canonical-editable-field').count()
+  await page.waitForSelector('.canonical-editable-field:has(.ProseMirror)', { timeout: 5000 })
+  const editableCount = await richFields().count()
   assert.ok(editableCount > 0, 'Editable fields must be re-mounted')
 
   // Verify formatting remains
@@ -296,17 +305,19 @@ test('B3-11: Done Editing -> Manual Edit. Formatting remains', async () => {
 })
 
 test('B3-12: Edit/view bounding box difference <=1px for tested stem', async () => {
-  // Measure in Edit mode
-  const editBox = await page.locator('.canonical-editable-field').first().boundingBox()
+  // Measure the same field identity in both modes, not an inner static child.
+  const editField = richFields().first()
+  const fieldKey = await editField.getAttribute('data-field-key')
+  assert.ok(fieldKey, 'Rich-text field must expose stable data-field-key')
+  const editBox = await editField.boundingBox()
 
-  // Switch to View mode
   await page.locator('button:has-text("Done Editing")').click()
   await page.waitForSelector('.canonical-static-text')
-  const viewBox = await page.locator('.canonical-static-text').first().boundingBox()
+  const viewField = page.locator(`.canonical-editable-field[data-field-key="${fieldKey}"]`).first()
+  const viewBox = await viewField.boundingBox()
 
-  // Switch back to Edit mode
-  await page.locator('button:has-text("Manual Edit")').click()
-  await page.waitForSelector('.canonical-editable-field')
+  await page.locator('button:has-text("Edit Paper")').click()
+  await page.waitForSelector('.canonical-editable-field:has(.ProseMirror)')
 
   assert.ok(editBox && viewBox, 'Both boxes must be measured')
   const widthDiff = Math.abs(editBox.width - viewBox.width)
@@ -328,7 +339,7 @@ test('B3-13: Urdu paper. dir rtl preserved. Selected Urdu word bolds without dir
   assert.strictEqual(dir, 'rtl', 'Urdu paper must preserve dir="rtl"')
 
   // Select an Urdu word and bold it
-  const firstField = page.locator('.canonical-editable-field').first()
+  const firstField = richFields().first()
   await firstField.locator('.ProseMirror').click()
 
   await page.evaluate(() => {
@@ -356,11 +367,11 @@ test('B3-13: Urdu paper. dir rtl preserved. Selected Urdu word bolds without dir
 
 test('B3-14: Switch active questions. Toolbar operates only on newly active field', async () => {
   // Focus Question 1
-  const field1 = page.locator('.canonical-editable-field').nth(0)
+  const field1 = richFields().nth(0)
   await field1.locator('.ProseMirror').click()
 
   // Focus Question 2
-  const field2 = page.locator('.canonical-editable-field').nth(1)
+  const field2 = richFields().nth(1)
   await field2.locator('.ProseMirror').click()
 
   // Select exact word in Question 2
@@ -404,9 +415,9 @@ test('B3-14: Switch active questions. Toolbar operates only on newly active fiel
   assert.strictEqual(activeKey, expectedQ2Key, 'activeFieldKey must point to Q2')
 })
 
-test('B3-15: Save Draft. Reload working draft. Formatting/text edits restored', async () => {
-  // Click Save Draft
-  await page.locator('button:has-text("Save Draft")').click()
+test('B3-15: Save Paper. Reload working draft. Formatting/text edits restored', async () => {
+  // Click Save Paper
+  await page.locator('button:has-text("Save Paper")').click()
   await page.waitForTimeout(1000)
 
   // Verify draft was saved in tenant storage
@@ -438,24 +449,34 @@ test('B3-16: Canonical authority/sourceIdentity/source ledger baseline unchanged
   assert.strictEqual(integrityResult.ok, true, `Baseline integrity check failed: ${integrityResult?.error}`)
 })
 
-test('B3-17: Modified V13 legacy paper does NOT get replaced by pristine canonical paper', async () => {
+test('B3-17: Supported modified V13 paper opens in Unified Canonical Editor without losing custom text', async () => {
   await page.locator('#btn-load-modified-v13').click()
-  await page.waitForTimeout(1000)
+  await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
+  await page.waitForFunction(() => document.querySelector('.canonical-paper-editor-container')?.textContent?.includes('Custom modified question by user'), null, { timeout: 10000 })
 
-  // Verify that Canonical Paper Editor is NOT mounted
   const canonicalCount = await page.locator('.canonical-paper-editor-container').count()
-  assert.strictEqual(canonicalCount, 0, 'Modified V13 paper must NOT route to Canonical Editor')
+  assert.strictEqual(canonicalCount, 1, 'Supported modified V13 paper must route to the Unified Canonical Editor')
 
-  // Verify legacy editor is mounted and contains custom text
-  const legacyContent = await page.content()
-  assert.ok(legacyContent.includes('Custom modified question by user'), 'Custom modified content must be preserved in legacy editor')
+  const editorContent = await page.locator('.canonical-paper-editor-container').textContent()
+  assert.ok(editorContent.includes('Custom modified question by user'), 'Custom modified content must be preserved in the unified editor')
 })
+
+async function useStructuredMcqGrid() {
+  const firstMcqStem = page.locator('[data-node-type="mcq"] .canonical-editable-field .ProseMirror').first()
+  await firstMcqStem.waitFor({ timeout: 8000 })
+  await firstMcqStem.click()
+  await page.locator('[data-command-tab="layout"]').click()
+  const layout = page.locator('select[aria-label="MCQ Layout"]')
+  await layout.waitFor({ timeout: 8000 })
+  await layout.selectOption('grid')
+  await page.waitForSelector('[data-structured-editor="mcq"]', { timeout: 10000 })
+}
 
 test('B4-BROWSER-01: Real MCQ persistence: edit option, add option, move, save, reload, assert, and Edit/View/Edit parity', async () => {
   // 1. Open canonical editor with canonical-english paper (has MCQ)
   await page.goto(`${BASE_URL}?mode=canonical-english`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
-  await page.waitForSelector('[data-structured-editor="mcq"]', { timeout: 10000 })
+  await useStructuredMcqGrid()
 
   const mcqEditor = page.locator('[data-structured-editor="mcq"]').first()
 
@@ -485,18 +506,18 @@ test('B4-BROWSER-01: Real MCQ persistence: edit option, add option, move, save, 
   await moveUpBtn.click()
   await page.waitForTimeout(300)
 
-  // 5. Save Draft
-  await page.locator('button:has-text("Save Draft")').click()
+  // 5. Save Paper
+  await page.locator('button:has-text("Save Paper")').click()
   await page.waitForTimeout(1000)
 
   // Assert ribbon displays success
-  const ribbonText = await page.locator('.canonical-paper-ribbon').textContent()
+  const ribbonText = await page.locator('.unified-paper-command-bar').textContent()
   assert.ok(ribbonText.includes('Draft saved successfully!'), 'Must display Draft saved successfully!')
 
   // 6. Reload page with canonical-english
   await page.goto(`${BASE_URL}?mode=canonical-english`, { waitUntil: 'domcontentloaded' })
   await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
-  await page.waitForSelector('[data-structured-editor="mcq"]', { timeout: 10000 })
+  await useStructuredMcqGrid()
 
   // Verify exact changed option and added option remain
   const mcqReloaded = page.locator('[data-structured-editor="mcq"]').first()
@@ -519,26 +540,27 @@ test('B4-BROWSER-01: Real MCQ persistence: edit option, add option, move, save, 
   await page.waitForTimeout(300)
   const isStillEdit = await page.locator('button:has-text("Done Editing")').count()
   assert.strictEqual(isStillEdit, 0, 'Must switch to view mode')
-  const manualEditBtn = page.locator('button:has-text("Manual Edit")')
-  assert.strictEqual(await manualEditBtn.count(), 1, 'Manual Edit button must be visible')
+  const manualEditBtn = page.locator('button:has-text("Edit Paper")')
+  assert.strictEqual(await manualEditBtn.count(), 1, 'Edit Paper button must be visible')
 
   // Verify static rendered structure displays the edited and added option text
   const renderedContent = await page.locator('.canonical-paper-editor-container').textContent()
   assert.ok(renderedContent.includes('Updated Option A in Browser'))
   assert.ok(renderedContent.includes('Brand New Option E Browser'))
 
-  // 8. Test Manual Edit -> verify same structure returns
+  // 8. Test Edit Paper -> verify same structure returns
   await manualEditBtn.click()
   await page.waitForTimeout(300)
   const structuredEditorCount = await page.locator('[data-structured-editor="mcq"]').count()
-  assert.ok(structuredEditorCount > 0, 'Structured editor must return on Manual Edit')
+  assert.ok(structuredEditorCount > 0, 'Structured editor must return on Edit Paper')
   const valReturn0 = await page.locator('[data-structured-editor="mcq"]').first().locator('.structured-text-input').first().inputValue()
   assert.strictEqual(valReturn0, 'Updated Option A in Browser')
 })
 
 test('B4-BROWSER-02: Structured history in real DOM and Tiptap Ctrl+Z isolation with no history leak', async () => {
   await page.goto(`${BASE_URL}?mode=canonical-english`, { waitUntil: 'domcontentloaded' })
-  await page.waitForSelector('[data-structured-editor="mcq"]', { timeout: 10000 })
+  await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
+  await useStructuredMcqGrid()
 
   const mcqEditor = page.locator('[data-structured-editor="mcq"]').first()
 
@@ -627,7 +649,7 @@ test('B4-BROWSER-03: Corrupted draft displays non-destructive warning and preser
   await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
 
   // Verify non-destructive warning is shown
-  const ribbonText = await page.locator('.canonical-paper-ribbon').textContent()
+  const ribbonText = await page.locator('.unified-paper-command-bar').textContent()
   assert.ok(
     ribbonText.includes('Saved draft could not be loaded safely; source paper was left unchanged.') ||
     ribbonText.includes('Baseline modified; draft preserved separately'),

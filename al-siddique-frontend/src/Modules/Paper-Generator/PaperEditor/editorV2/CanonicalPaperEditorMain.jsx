@@ -1,6 +1,7 @@
 // CanonicalPaperEditorMain.jsx — Top-Level Canonical Word-Like In-Place Editor (Rule 23)
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
-import CanonicalPaperRibbonToolbar from './CanonicalPaperRibbonToolbar.jsx'
+import './canonicalEditor.css'
+import UnifiedPaperCommandBar from './UnifiedPaperCommandBar.jsx'
 import CanonicalDocumentRenderer from './CanonicalDocumentRenderer.jsx'
 import { EditorWorkingStore } from './editorWorkingStore.js'
 import { EditorFieldRegistry } from './EditorFieldRegistry.js'
@@ -9,7 +10,6 @@ import {
   loadWorkingDraft,
 } from './workingDraftStorage.js'
 import { StructuredFocusProvider, INTERACTION_MODE } from './structured/StructuredFocusContext.jsx'
-import { ZoomIn, ZoomOut, ArrowLeft } from 'lucide-react'
 
 export default function CanonicalPaperEditorMain({
   loadedPaper,
@@ -29,6 +29,7 @@ export default function CanonicalPaperEditorMain({
   const [activeStructuredKey, setActiveStructuredKey] = useState(null)
   const [isEditMode, setIsEditMode] = useState(true)
   const [zoomLevel, setZoomLevel] = useState(100)
+  const canvasRef = useRef(null)
   const [saveStatus, setSaveStatus] = useState('')
   const [isSaving, setIsSaving] = useState(false)
   const [externalRevisionToken, setExternalRevisionToken] = useState(1)
@@ -38,6 +39,15 @@ export default function CanonicalPaperEditorMain({
     return store.subscribe((updatedDoc) => {
       setWorkingDoc({ ...updatedDoc })
     })
+  }, [store])
+
+  // 2b. A different payload may reuse the same saved-paper id. Hydrate React state
+  // from the newly created store immediately instead of showing the previous baseline.
+  useEffect(() => {
+    setWorkingDoc({ ...store.getWorkingDocument() })
+    setActiveFieldKey(null)
+    setActiveStructuredKey(null)
+    setExternalRevisionToken(token => token + 1)
   }, [store])
 
   // 3. Attempt to load existing compact draft on initial mount (Rule 39)
@@ -190,16 +200,34 @@ export default function CanonicalPaperEditorMain({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [store])
 
+  const handleStructuredModeChange = useCallback((mode) => {
+    if (store.getWorkingDocument()?.session) {
+      store.getWorkingDocument().session.activeInteractionMode = mode
+    }
+  }, [store])
+
+  const clampZoom = useCallback(value => Math.max(40, Math.min(180, Math.round(value))), [])
+  const handleFitWidth = useCallback(() => {
+    const canvas = canvasRef.current
+    const paper = canvas?.querySelector?.('.canonical-paper-surface')
+    if (!canvas || !paper || !paper.offsetWidth) return
+    const available = Math.max(320, canvas.clientWidth - 56)
+    setZoomLevel(clampZoom((available / paper.offsetWidth) * 100))
+  }, [clampZoom])
+  const handleFitPage = useCallback(() => {
+    const canvas = canvasRef.current
+    const paper = canvas?.querySelector?.('.canonical-paper-surface')
+    if (!canvas || !paper || !paper.offsetWidth || !paper.offsetHeight) return
+    const widthScale = Math.max(320, canvas.clientWidth - 56) / paper.offsetWidth
+    const heightScale = Math.max(320, canvas.clientHeight - 44) / paper.offsetHeight
+    setZoomLevel(clampZoom(Math.min(widthScale, heightScale) * 100))
+  }, [clampZoom])
   const zoomTransform = `scale(${zoomLevel / 100})`
 
   return (
     <StructuredFocusProvider
       onActiveStructuredKeyChange={setActiveStructuredKey}
-      onModeChange={(mode) => {
-        if (store.getWorkingDocument()?.session) {
-          store.getWorkingDocument().session.activeInteractionMode = mode
-        }
-      }}
+      onModeChange={handleStructuredModeChange}
     >
       <div
         className="canonical-paper-editor-container"
@@ -211,8 +239,8 @@ export default function CanonicalPaperEditorMain({
           color: '#e2e8f0',
         }}
       >
-      {/* 1. Word-like Ribbon Toolbar */}
-      <CanonicalPaperRibbonToolbar
+      {/* 1. Unified command shell — the single editing surface for saved papers. */}
+      <UnifiedPaperCommandBar
         registry={registry}
         store={store}
         onSaveDraft={handleSaveDraft}
@@ -223,86 +251,19 @@ export default function CanonicalPaperEditorMain({
         activeFieldKey={activeFieldKey}
         activeStructuredKey={activeStructuredKey}
         onPrint={handlePrint}
+        onBack={onReturnToSource}
+        documentLabel={workingDoc?.metadata?.title || loadedPaper?.name || loadedPaper?.id}
+        zoomLevel={zoomLevel}
+        onZoomOut={() => setZoomLevel(z => clampZoom(z - 10))}
+        onZoomIn={() => setZoomLevel(z => clampZoom(z + 10))}
+        onZoomReset={() => setZoomLevel(100)}
+        onFitWidth={handleFitWidth}
+        onFitPage={handleFitPage}
       />
 
-      {/* 2. Sub-Toolbar with Mode Toggle & Zoom */}
-      <div
-        className="canonical-sub-toolbar no-print"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '6px 16px',
-          background: '#0c2744',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          fontSize: '12px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {onReturnToSource && (
-            <button
-              type="button"
-              onClick={onReturnToSource}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px',
-                background: 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: '#cbd5e1',
-                borderRadius: '5px',
-                padding: '4px 10px',
-                cursor: 'pointer',
-                fontWeight: 600,
-              }}
-            >
-              <ArrowLeft size={13} /> Back
-            </button>
-          )}
-
-          <span style={{ color: '#94a3b8', fontSize: '11px' }}>
-            Document: <strong>{loadedPaper?.id}</strong>
-          </span>
-        </div>
-
-        {/* Zoom Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <button
-            type="button"
-            title="Zoom Out"
-            onClick={() => setZoomLevel(z => Math.max(50, z - 10))}
-            style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
-          >
-            <ZoomOut size={15} />
-          </button>
-          <span style={{ minWidth: '42px', textAlign: 'center', fontWeight: 700 }}>{zoomLevel}%</span>
-          <button
-            type="button"
-            title="Zoom In"
-            onClick={() => setZoomLevel(z => Math.min(200, z + 10))}
-            style={{ background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
-          >
-            <ZoomIn size={15} />
-          </button>
-          <button
-            type="button"
-            onClick={() => setZoomLevel(100)}
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', padding: '2px 6px', color: '#cbd5e1', cursor: 'pointer', fontSize: '11px' }}
-          >
-            100%
-          </button>
-          <button
-            type="button"
-            onClick={() => setZoomLevel(90)}
-            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px', padding: '2px 6px', color: '#cbd5e1', cursor: 'pointer', fontSize: '11px' }}
-          >
-            Fit Width
-          </button>
-        </div>
-      </div>
-
-      {/* 3. Paper Canvas Area */}
+      {/* 2. Paper Canvas Area */}
       <main
+        ref={canvasRef}
         id="canonical-paper-canvas"
         style={{
           flex: 1,

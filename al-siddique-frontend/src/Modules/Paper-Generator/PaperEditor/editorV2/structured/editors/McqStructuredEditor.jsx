@@ -99,10 +99,14 @@ export default function McqStructuredEditor({
             <div
               key={opt.id || idx}
               data-option-id={opt.id}
+              data-option-choice
+              dir={optDir}
               style={{
                 display: 'flex',
+                flexDirection: 'row',
+                direction: optDir,
                 alignItems: 'center',
-                gap: '6px',
+                gap: '4px',
                 padding: '4px 6px',
                 background: '#ffffff',
                 border: '1px solid #e2e8f0',
@@ -116,7 +120,7 @@ export default function McqStructuredEditor({
               </span>
 
               {/* Editable Option Text */}
-              <div style={{ flex: 1 }}>
+              <div data-option-text style={{ flex: 1, minWidth: 0 }}>
                 <StructuredTextInput
                   value={opt.text || ''}
                   onCommit={(newText) => handleUpdateOptionText(opt.id, newText, opt.text || '')}
@@ -169,7 +173,7 @@ export default function McqStructuredEditor({
 
       {/* Add Option Button (Editor Only) */}
       {isEditing && (
-        <div style={{ marginTop: '8px' }}>
+        <div className="canonical-inline-add-control no-print" style={{ marginTop: '8px' }}>
           <button
             type="button"
             onClick={handleAddOption}

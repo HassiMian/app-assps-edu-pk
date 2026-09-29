@@ -43,16 +43,38 @@ test('ROUTER A: Canonical document routes directly to CANONICAL_V2', () => {
   assert.strictEqual(decision.resolvedPaper.id, canonicalDoc.id)
 })
 
-test('ROUTER B: Legacy Schema 2 canvas document routes to LEGACY_CANVAS_V2', () => {
+test('ROUTER B: Legacy Schema 2 saved paper adapts to the same CANONICAL_V2 editor', () => {
   const legacyDoc = {
     schemaVersion: 2,
     id: 'paper_123',
     name: 'Old Exam',
-    sections: [{ id: 'sec_1', questions: [] }],
+    metadata: { subject: 'Islamiyat', classLevel: '7', language: 'urdu', totalMarks: 10 },
+    sections: [{
+      id: 'sec_1',
+      type: 'mcq',
+      title: 'درست جواب کا انتخاب کریں',
+      totalMarks: 10,
+      questions: [{
+        id: 'q1',
+        type: 'mcq',
+        stemUrdu: 'نمونہ سوال؟',
+        marks: 1,
+        options: [
+          { label: 'الف', textUrdu: 'پہلا' },
+          { label: 'ب', textUrdu: 'دوسرا' },
+        ],
+      }],
+    }],
   }
   const decision = resolvePaperEditorRoute(legacyDoc)
 
-  assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2')
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'LEGACY_CANVAS_V2_ADAPTED_TO_UNIFIED_EDITOR')
+  assert.strictEqual(decision.resolvedPaper.id, 'paper_123')
+  assert.strictEqual(decision.resolvedPaper.metadata.subject, 'Islamiyat')
+  assert.strictEqual(decision.resolvedPaper.metadata.direction, 'rtl')
+  assert.strictEqual(decision.resolvedPaper.authority.authoritativePaperTotal, 10)
+  assert.strictEqual(decision.resolvedPaper.sections[0].nodes[0].options[0].text, 'پہلا')
 })
 
 test('ROUTER C: Null or empty payload routes safely to LEGACY_CANVAS_V2', () => {

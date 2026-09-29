@@ -48,7 +48,38 @@ function B3HarnessApp() {
         modified.official_section[0].content = 'Custom modified question by user'
         p = modified
       } else if (type === 'legacy-schema2') {
-        p = { schemaVersion: 2, sections: [] }
+        p = {
+          schemaVersion: 2,
+          id: 'paper_legacy_class7_islamiyat',
+          name: 'Legacy Class 7 Islamiyat',
+          metadata: {
+            title: 'First Term Examination 2026',
+            classLevel: '7',
+            subject: 'Islamiyat',
+            paperCode: 'FT26-7-ISLAMIYAT',
+            timeAllowed: '2 Hours',
+            totalMarks: 10,
+            language: 'urdu',
+          },
+          sections: [{
+            id: 'legacy_mcq_section',
+            type: 'mcq',
+            title: 'سوال نمبر 1: درست جواب کا انتخاب کیجیے',
+            totalMarks: 10,
+            questions: [{
+              id: 'legacy_mcq_1',
+              type: 'mcq',
+              textUrdu: 'جنگ یمامہ میں شہید ہونے والے مسلمانوں کی تعداد ہے؟',
+              marks: 1,
+              options: [
+                { label: 'الف', textUrdu: '1200' },
+                { label: 'ب', textUrdu: '1300' },
+                { label: 'ج', textUrdu: '1400' },
+                { label: 'د', textUrdu: '1500' },
+              ],
+            }],
+          }],
+        }
       } else if (typeof type === 'object') {
         p = type
       }
