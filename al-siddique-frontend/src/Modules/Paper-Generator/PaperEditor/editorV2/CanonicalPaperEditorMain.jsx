@@ -3,19 +3,16 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import './canonicalEditor.css'
 import UnifiedPaperCommandBar from './UnifiedPaperCommandBar.jsx'
 import CanonicalDocumentRenderer from './CanonicalDocumentRenderer.jsx'
-import CanonicalQuestionInspector from './CanonicalQuestionInspector.jsx'
 import { EditorWorkingStore } from './editorWorkingStore.js'
-import { EditorFieldRegistry, parseFieldKey } from './EditorFieldRegistry.js'
-import { usePaperStore } from '../../usePaperStore.js'
+import { EditorFieldRegistry } from './EditorFieldRegistry.js'
 import {
   saveWorkingDraft,
   loadWorkingDraft,
 } from './workingDraftStorage.js'
-import { StructuredFocusProvider, INTERACTION_MODE, parseStructuredControlKey } from './structured/StructuredFocusContext.jsx'
+import { StructuredFocusProvider, INTERACTION_MODE } from './structured/StructuredFocusContext.jsx'
 
 export default function CanonicalPaperEditorMain({
   loadedPaper,
-  sourcePaperRecord = null,
   onReturnToSource = null,
 }) {
   // Performance diagnostics tracking (test-only, zero production overhead, Rule 27)
@@ -26,13 +23,10 @@ export default function CanonicalPaperEditorMain({
   // 1. Initialize stable EditorWorkingStore and EditorFieldRegistry
   const store = useMemo(() => new EditorWorkingStore(loadedPaper), [loadedPaper])
   const registry = useMemo(() => new EditorFieldRegistry(), [loadedPaper])
-  const { savedPapers, updateSavedPaper, savePaper } = usePaperStore()
 
   const [workingDoc, setWorkingDoc] = useState(() => store.getWorkingDocument())
   const [activeFieldKey, setActiveFieldKey] = useState(null)
   const [activeStructuredKey, setActiveStructuredKey] = useState(null)
-  const [activeNodeContext, setActiveNodeContext] = useState(null)
-  const [persistedPaperId, setPersistedPaperId] = useState(null)
   const [isEditMode, setIsEditMode] = useState(true)
   const [zoomLevel, setZoomLevel] = useState(100)
   const canvasRef = useRef(null)
@@ -53,121 +47,52 @@ export default function CanonicalPaperEditorMain({
     setWorkingDoc({ ...store.getWorkingDocument() })
     setActiveFieldKey(null)
     setActiveStructuredKey(null)
-    setActiveNodeContext(null)
-    const sourceId = sourcePaperRecord?.id
-    setPersistedPaperId(sourceId && savedPapers.some(paper => String(paper.id) === String(sourceId)) ? sourceId : null)
     setExternalRevisionToken(token => token + 1)
-  }, [store, sourcePaperRecord?.id])
+  }, [store])
 
-  // 3. Restore the version saved with the Saved Paper first.
-  // Tenant draft storage remains a recovery layer, not the primary saved-paper record.
+  // 3. Attempt to load existing compact draft on initial mount (Rule 39)
   useEffect(() => {
-    const embeddedDraft = sourcePaperRecord?.canonicalWorkingDraft
-    if (embeddedDraft) {
-      const applyRes = store.applyCompactDraft(embeddedDraft)
-      if (applyRes.status === 'APPLIED') {
-        setExternalRevisionToken(t => t + 1)
-        setSaveStatus('Loaded saved paper edits')
-        setTimeout(() => setSaveStatus(''), 2600)
-        return
-      }
-      setSaveStatus('Saved paper edits could not be applied safely; source was left unchanged.')
-      return
-    }
-
     const draftResult = loadWorkingDraft(loadedPaper)
     if (draftResult?.status === 'OK' && draftResult.draft) {
       const applyRes = store.applyCompactDraft(draftResult.draft)
       if (applyRes.status === 'APPLIED') {
         setExternalRevisionToken(t => t + 1)
-        setSaveStatus('Recovered working draft')
+        setSaveStatus('Loaded previous working draft')
         setTimeout(() => setSaveStatus(''), 3000)
       } else {
-        setSaveStatus('Recovery draft could not be loaded safely; source paper was left unchanged.')
+        setSaveStatus('Saved draft could not be loaded safely; source paper was left unchanged.')
       }
     } else if (draftResult?.status === 'BASELINE_MISMATCH') {
-      setSaveStatus('Baseline modified; recovery draft preserved separately')
+      setSaveStatus('Baseline modified; draft preserved separately')
       setTimeout(() => setSaveStatus(''), 4500)
     } else if (draftResult?.status === 'CORRUPTED') {
-      setSaveStatus('Recovery draft is invalid; source paper was left unchanged.')
+      setSaveStatus('Saved draft could not be loaded safely; source paper was left unchanged.')
     }
-  }, [loadedPaper, sourcePaperRecord, store])
+  }, [loadedPaper, store])
 
-  const flushPendingEditorState = useCallback(async () => {
-    if (typeof document !== 'undefined') document.activeElement?.blur?.()
-    await new Promise(resolve => setTimeout(resolve, 0))
-    store.publishDocumentChange()
-  }, [store])
-
-  // 4. Save Paper — persist both a recovery draft and the actual Saved Papers record.
-  const handleSaveDraft = async () => {
+  // 4. Save Draft Handler (Rules 9, 10, 38)
+  const handleSaveDraft = () => {
     setIsSaving(true)
-    setSaveStatus('Saving paper...')
+    setSaveStatus('Saving draft...')
     try {
-      await flushPendingEditorState()
-      const compactDraft = store.exportCompactDraft({ forceV2: true })
-      const recoveryResult = saveWorkingDraft(compactDraft, store.getBaselineDocument())
-      const current = store.getWorkingDocument()
-      const summary = {
-        title: current.metadata?.title || sourcePaperRecord?.name || 'Paper',
-        classLevel: current.metadata?.className ?? current.metadata?.classLevel ?? '',
-        subject: current.metadata?.subject ?? '',
-        paperCode: current.metadata?.paperCode ?? '',
-        timeAllowed: current.metadata?.timeAllowed ?? '',
-        examDate: current.metadata?.examDate ?? '',
-        totalMarks: store.getEffectivePaperTotal?.() ?? null,
+      store.publishDocumentChange()
+      const compactDraft = store.exportCompactDraft()
+      const result = saveWorkingDraft(compactDraft, store.getBaselineDocument())
+      if (result.success) {
+        setSaveStatus('Draft saved successfully!')
+        setTimeout(() => setSaveStatus(''), 3500)
       }
-      const savedPatch = {
-        canonicalWorkingDraft: compactDraft,
-        canonicalBaselineDocumentId: store.getBaselineDocument()?.id || null,
-        canonicalEditorVersion: 'v7-operability',
-        canonicalSavedAt: compactDraft.savedAt,
-        canonicalSavedSummary: summary,
-      }
-
-      const sourceId = sourcePaperRecord?.id
-      const storedSourceId = sourceId && savedPapers.some(paper => String(paper.id) === String(sourceId))
-        ? sourceId
-        : null
-      const targetId = persistedPaperId || storedSourceId
-      let savedRecord = targetId ? updateSavedPaper?.(targetId, savedPatch) : null
-
-      if (!savedRecord) {
-        const {
-          id: _sourceId,
-          createdAt: _sourceCreatedAt,
-          updatedAt: _sourceUpdatedAt,
-          canonicalWorkingDraft: _oldDraft,
-          canonicalSavedSummary: _oldSummary,
-          ...safeSource
-        } = sourcePaperRecord || {}
-        savedRecord = savePaper?.({
-          ...safeSource,
-          name: sourcePaperRecord?.name || summary.title || 'Saved Paper',
-          config: sourcePaperRecord?.config || {},
-          ...savedPatch,
-        })
-        if (savedRecord?.id) setPersistedPaperId(savedRecord.id)
-      } else if (savedRecord?.id) {
-        setPersistedPaperId(savedRecord.id)
-      }
-
-      if (!savedRecord) {
-        throw new Error('Saved Papers record could not be updated')
-      }
-      setSaveStatus(recoveryResult?.success ? 'Paper saved • Saved Papers updated' : 'Paper saved • recovery backup unavailable')
-      setTimeout(() => setSaveStatus(''), 3800)
     } catch (err) {
-      console.error('Failed to save canonical paper:', err)
-      setSaveStatus('Save failed — current editor state is still open')
+      console.error('Failed to save working draft:', err)
+      setSaveStatus('Failed to save draft.')
     } finally {
       setIsSaving(false)
     }
   }
 
-  // 5. Toggle Edit Mode only after active structured/plain input state is flushed.
-  const handleToggleEditMode = async () => {
-    await flushPendingEditorState()
+  // 5. Toggle Edit Mode Handler (Flush document projection before switching, Rule 32)
+  const handleToggleEditMode = () => {
+    store.publishDocumentChange()
     setIsEditMode(prev => !prev)
   }
 
@@ -234,48 +159,14 @@ export default function CanonicalPaperEditorMain({
     setTimeout(() => frame.remove(), 3500)
   }, [store])
 
-  const resolveNodeContext = useCallback((sectionId, nodeId, fallback = {}) => {
-    if (!sectionId || !nodeId) return null
-    const inserted = store.getWorkingDocument()?.structured?.insertedNodes?.[nodeId]
-    const baselineSection = store.getBaselineDocument()?.sections?.find(section => section.id === sectionId)
-    const baselineNode = baselineSection?.nodes?.find(node => node.id === nodeId)
-    return {
-      sectionId,
-      nodeId,
-      nodeType: inserted?.nodeType || inserted?.type || baselineNode?.type || baselineNode?.nodeType || fallback.nodeType || 'question',
-      displayNumber: fallback.displayNumber,
-      ordinal: fallback.ordinal || 1,
-    }
-  }, [store])
-
-  // Handle field focus to ensure Tiptap interaction mode and inspector target stay aligned.
+  // Handle field focus to ensure Tiptap interaction mode is set (Rule 19)
   const handleFocusField = useCallback((fieldKey) => {
     setActiveFieldKey(fieldKey)
     setActiveStructuredKey(null)
-    const parsed = parseFieldKey(fieldKey)
-    if (parsed?.sectionId && parsed?.nodeId) {
-      setActiveNodeContext(previous => (
-        previous?.nodeId === parsed.nodeId
-          ? previous
-          : resolveNodeContext(parsed.sectionId, parsed.nodeId, previous || {})
-      ))
-    }
     if (store.getWorkingDocument()?.session) {
       store.getWorkingDocument().session.activeInteractionMode = INTERACTION_MODE.TIPTAP
     }
-  }, [store, resolveNodeContext])
-
-  const handleActiveStructuredKeyChange = useCallback((key) => {
-    setActiveStructuredKey(key)
-    const parsed = parseStructuredControlKey(key)
-    if (parsed?.secId && parsed?.nodeId) {
-      setActiveNodeContext(previous => (
-        previous?.nodeId === parsed.nodeId
-          ? previous
-          : resolveNodeContext(parsed.secId, parsed.nodeId, previous || {})
-      ))
-    }
-  }, [resolveNodeContext])
+  }, [store])
 
   // 7. Handle structured undo/redo shortcuts when structured control is focused (Rule 19)
   useEffect(() => {
@@ -335,7 +226,7 @@ export default function CanonicalPaperEditorMain({
 
   return (
     <StructuredFocusProvider
-      onActiveStructuredKeyChange={handleActiveStructuredKeyChange}
+      onActiveStructuredKeyChange={setActiveStructuredKey}
       onModeChange={handleStructuredModeChange}
     >
       <div
@@ -359,7 +250,6 @@ export default function CanonicalPaperEditorMain({
         onToggleEditMode={handleToggleEditMode}
         activeFieldKey={activeFieldKey}
         activeStructuredKey={activeStructuredKey}
-        activeNodeContext={activeNodeContext}
         onPrint={handlePrint}
         onBack={onReturnToSource}
         documentLabel={workingDoc?.metadata?.title || loadedPaper?.name || loadedPaper?.id}
@@ -371,8 +261,7 @@ export default function CanonicalPaperEditorMain({
         onFitPage={handleFitPage}
       />
 
-      {/* 2. Paper canvas + contextual question inspector */}
-      <div className="canonical-editor-workspace">
+      {/* 2. Paper Canvas Area */}
       <main
         ref={canvasRef}
         id="canonical-paper-canvas"
@@ -401,24 +290,11 @@ export default function CanonicalPaperEditorMain({
             store={store}
             registry={registry}
             activeFieldKey={activeFieldKey}
-            activeNodeId={activeNodeContext?.nodeId || null}
             onFocusField={handleFocusField}
-            onSelectNode={setActiveNodeContext}
             externalRevisionToken={externalRevisionToken}
           />
         </div>
       </main>
-      {isEditMode && activeNodeContext && (
-        <CanonicalQuestionInspector
-          activeNode={activeNodeContext}
-          workingDoc={workingDoc}
-          store={store}
-          registry={registry}
-          activeFieldKey={activeFieldKey}
-          onClose={() => setActiveNodeContext(null)}
-        />
-      )}
-      </div>
     </div>
     </StructuredFocusProvider>
   )
