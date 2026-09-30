@@ -59,7 +59,8 @@ export default function CanonicalPaperRibbonToolbar({
   }
 
   const captureLiveSelection = () => {
-    registry?.captureActiveSelection?.()
+    if (registry?.beginToolbarInteraction) return registry.beginToolbarInteraction()
+    return registry?.captureActiveSelection?.()
   }
 
   const restoreAndFocus = (editor, fieldKey = null) => {
@@ -81,11 +82,15 @@ export default function CanonicalPaperRibbonToolbar({
     if (!editor) return false
     const chain = restoreAndFocus(editor, key)
     if (!chain) return false
-    commandFn(chain).run()
-    if (editor.state?.selection) {
-      registry?.saveSelection?.(key, editor.state.selection)
+    try {
+      commandFn(chain).run()
+      if (editor.state?.selection) {
+        registry?.saveSelection?.(key, editor.state.selection, { force: true })
+      }
+      return true
+    } finally {
+      registry?.endToolbarInteraction?.(key, { saveCurrent: true })
     }
-    return true
   }
 
   const isStructuredTarget = Boolean(activeStructuredKey)
@@ -115,13 +120,17 @@ export default function CanonicalPaperRibbonToolbar({
     const nextAttrs = { ...currentAttrs, [attr]: val || null }
     const chain = restoreAndFocus(editor, key)
     if (!chain) return
-    if (Object.values(nextAttrs).some(Boolean)) {
-      chain.setMark('textStyle', nextAttrs).run()
-    } else {
-      chain.unsetMark('textStyle').run()
-    }
-    if (editor.state?.selection) {
-      registry?.saveSelection?.(key, editor.state.selection)
+    try {
+      if (Object.values(nextAttrs).some(Boolean)) {
+        chain.setMark('textStyle', nextAttrs).run()
+      } else {
+        chain.unsetMark('textStyle').run()
+      }
+      if (editor.state?.selection) {
+        registry?.saveSelection?.(key, editor.state.selection, { force: true })
+      }
+    } finally {
+      registry?.endToolbarInteraction?.(key, { saveCurrent: true })
     }
   }
 
@@ -492,12 +501,9 @@ export default function CanonicalPaperRibbonToolbar({
                 setStructuredStyle({ lineHeight: value })
                 return
               }
-              const { key, editor } = getLiveTarget()
-              if (!editor) return
-              restoreAndFocus(editor, key)
-                ?.updateAttributes('paragraph', { lineHeight: value })
-                .updateAttributes('heading', { lineHeight: value })
-                .run()
+              runCommand(c => c
+                .updateAttributes('paragraph', { lineHeight: value })
+                .updateAttributes('heading', { lineHeight: value }))
             }}
             style={{ ...selectStyle, width: '78px' }}
             title="Line spacing for the active paragraph/question"
@@ -517,12 +523,9 @@ export default function CanonicalPaperRibbonToolbar({
                 setStructuredStyle({ paragraphSpacing: value })
                 return
               }
-              const { key, editor } = getLiveTarget()
-              if (!editor) return
-              restoreAndFocus(editor, key)
-                ?.updateAttributes('paragraph', { paragraphSpacing: value })
-                .updateAttributes('heading', { paragraphSpacing: value })
-                .run()
+              runCommand(c => c
+                .updateAttributes('paragraph', { paragraphSpacing: value })
+                .updateAttributes('heading', { paragraphSpacing: value }))
             }}
             style={{ ...selectStyle, width: '88px' }}
             title="Space after the active paragraph/question"
@@ -583,8 +586,10 @@ export default function CanonicalPaperRibbonToolbar({
             >
               <option value="1-column">1 Column</option>
               <option value="2-column-balanced">2 Columns</option>
+              <option value="3-column-balanced">3 Columns</option>
               <option value="table-1-column">Table 1-Col</option>
               <option value="table">Table 2-Col</option>
+              <option value="table-3-column">Table 3-Col</option>
             </select>
           </div>
 

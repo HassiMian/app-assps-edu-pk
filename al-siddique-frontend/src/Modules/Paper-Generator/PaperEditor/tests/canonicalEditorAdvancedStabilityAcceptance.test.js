@@ -128,6 +128,15 @@ test('ADV-03: short questions switch between columns and real table layouts with
   assert.equal(grid.display, 'grid')
   assert.equal(grid.columns, 2, 'Two-column mode must create two grid tracks')
 
+  await layout.selectOption('3-column-balanced')
+  assert.equal(await section.locator('.canonical-section-nodes').getAttribute('data-short-layout'), '3-column-balanced')
+  grid = await section.locator('.canonical-section-nodes').evaluate(el => ({
+    display: getComputedStyle(el).display,
+    columns: getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length,
+  }))
+  assert.equal(grid.display, 'grid')
+  assert.equal(grid.columns, 3, 'Three-column mode must create three grid tracks')
+
   await layout.selectOption('table')
   assert.equal(await section.locator('.canonical-section-nodes').getAttribute('data-short-layout'), 'table')
   const tableState = await shortNode.evaluate(el => ({
@@ -136,6 +145,16 @@ test('ADV-03: short questions switch between columns and real table layouts with
   }))
   assert.notEqual(tableState.borderStyle, 'none', 'Table mode must draw a real cell border')
   assert.notEqual(tableState.borderWidth, '0px', 'Table mode border must be visible')
+
+  await layout.selectOption('table-3-column')
+  grid = await section.locator('.canonical-section-nodes').evaluate(el => ({
+    display: getComputedStyle(el).display,
+    columns: getComputedStyle(el).gridTemplateColumns.split(' ').filter(Boolean).length,
+  }))
+  assert.equal(grid.display, 'grid')
+  assert.equal(grid.columns, 3, 'Table 3-column mode must create three grid tracks')
+  const table3Border = await shortNode.evaluate(el => getComputedStyle(el).borderTopStyle)
+  assert.notEqual(table3Border, 'none', 'Table 3-column mode must preserve cell borders')
 
   await layout.selectOption('table-1-column')
   grid = await section.locator('.canonical-section-nodes').evaluate(el => ({
@@ -150,4 +169,40 @@ test('ADV-03: short questions switch between columns and real table layouts with
     const span = await nonShort.evaluate(el => getComputedStyle(el).gridColumn)
     assert.ok(span.includes('1') && span.includes('-1'), 'Non-short nodes must span the full section width')
   }
+})
+
+
+test('ADV-04: toolbar focus race cannot collapse and lose a highlighted text range', async () => {
+  const field = page.locator('.canonical-editable-field .ProseMirror').first()
+  const word = await selectFirstWordIn(field)
+  const sizeSelect = page.locator('select[aria-label="Font Size"]')
+
+  // Capture the real range exactly as the toolbar does, then imitate the browser
+  // collapsing DOM selection while focus transfers to a native select control.
+  await sizeSelect.dispatchEvent('pointerdown')
+  await field.evaluate((pm) => {
+    const sel = window.getSelection()
+    if (!sel || !pm.firstChild) return
+    const range = document.createRange()
+    range.selectNodeContents(pm)
+    range.collapse(false)
+    sel.removeAllRanges()
+    sel.addRange(range)
+    document.dispatchEvent(new Event('selectionchange'))
+  })
+  await sizeSelect.focus()
+  await sizeSelect.selectOption('20')
+
+  const state = await field.evaluate((pm, expected) => {
+    const sized = Array.from(pm.querySelectorAll('span')).find(el => el.textContent === expected && el.style.fontSize)
+    return {
+      sizedText: sized?.textContent || null,
+      size: sized?.style?.fontSize || null,
+      fullText: pm.textContent,
+    }
+  }, word)
+
+  assert.equal(state.sizedText, word, 'The original highlighted word must remain the formatting target')
+  assert.equal(state.size, '20pt', 'Formatting must apply to the preserved range after focus transfer')
+  assert.ok(state.fullText.length > word.length, 'Formatting must not replace or truncate the rest of the question')
 })

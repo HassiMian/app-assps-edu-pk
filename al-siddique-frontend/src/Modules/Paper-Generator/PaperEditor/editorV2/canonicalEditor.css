@@ -441,3 +441,60 @@
     page-break-inside: avoid !important;
   }
 }
+
+
+/* Advanced short-question layouts: compact 3-column and 3-column table.
+   These remain section-scoped and preserve full-width non-short nodes. */
+.canonical-section-nodes.short-layout-3-column-balanced,
+.canonical-section-nodes.short-layout-table-3-column {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+
+.canonical-section-nodes.short-layout-3-column-balanced {
+  column-gap: 10px;
+  row-gap: 7px;
+}
+
+.canonical-section-nodes.short-layout-table-3-column {
+  gap: 0;
+}
+
+.canonical-section-nodes.short-layout-3-column-balanced > [data-node-type="short_question"],
+.canonical-section-nodes.short-layout-3-column-balanced > [data-node-type="short"],
+.canonical-section-nodes.short-layout-table-3-column > [data-node-type="short_question"],
+.canonical-section-nodes.short-layout-table-3-column > [data-node-type="short"] {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.canonical-section-nodes.short-layout-3-column-balanced > [data-node-type]:not([data-node-type="short_question"]):not([data-node-type="short"]),
+.canonical-section-nodes.short-layout-table-3-column > [data-node-type]:not([data-node-type="short_question"]):not([data-node-type="short"]) {
+  grid-column: 1 / -1;
+}
+
+.canonical-section-nodes.short-layout-table-3-column > [data-node-type="short_question"],
+.canonical-section-nodes.short-layout-table-3-column > [data-node-type="short"] {
+  border: 1px solid #64748b !important;
+  border-radius: 0 !important;
+  background: #ffffff !important;
+  margin: 0 !important;
+  padding: 6px 7px !important;
+  min-height: 44px;
+}
+
+@media print {
+  .canonical-section-nodes.short-layout-3-column-balanced,
+  .canonical-section-nodes.short-layout-table-3-column {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .canonical-section-nodes.short-layout-table-3-column > [data-node-type="short_question"],
+  .canonical-section-nodes.short-layout-table-3-column > [data-node-type="short"] {
+    border: 1px solid #000000 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
