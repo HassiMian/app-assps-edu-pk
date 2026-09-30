@@ -5,7 +5,7 @@ const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
-const REAL_CLASS_NAMES = ['Starter', 'Mover', 'Flyer', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Pre Nine', 'Hifaz Class']
+const REAL_CLASS_NAMES = ['Starter', 'Mover', 'Flyer', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Pre Nine', 'Hifaz Class']
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
 function canManageFeeRecord(req) {
@@ -116,21 +116,16 @@ async function ensureFeeSystemSchema(schoolId) {
   const defaults = [
     ['Starter', 2500], ['Mover', 2500], ['Flyer', 2500], ['One', 2500], ['Two', 2500], ['Three', 2500], ['Four', 2500], ['Five', 2500],
     ['Six', 2800], ['Seven', 2800], ['Eight', 2800],
-    ['Pre Nine', 3000], ['Hifaz Class', 2500],
+    ['Nine', 3000], ['Ten', 3000], ['Pre Nine', 3000], ['Hifaz Class', 2500],
   ]
   for (const [className, monthlyFee] of defaults) {
     await query(`
       INSERT INTO fee_class_settings (school_id, class_name, session, monthly_fee, active)
       VALUES ($1, $2, '2026-2027', $3, true)
       ON CONFLICT (school_id, class_name, session)
-      DO UPDATE SET monthly_fee = EXCLUDED.monthly_fee, active = true, updated_at = NOW()
+      DO NOTHING
     `, [schoolId, className, monthlyFee])
   }
-  await query(`
-    UPDATE fee_class_settings
-    SET active = false, updated_at = NOW()
-    WHERE school_id = $1 AND NOT (class_name = ANY($2::text[]))
-  `, [schoolId, REAL_CLASS_NAMES])
   await query(`
     INSERT INTO fee_discount_packages (
       school_id, name, description, discount_type, discount_value, min_sibling_count,
@@ -554,8 +549,10 @@ router.get('/', protect, async (req, res) => {
     if (year)       { sql += ` AND f.year = $${i++}`;                               params.push(Number(year)) }
     if (cls) {
       const norm = String(cls).trim().toLowerCase()
-      if (['9', 'nine', 'pre nine', 'pre-nine', 'class 9'].includes(norm)) {
-        sql += ` AND (s.class ILIKE '9' OR s.class ILIKE 'Nine' OR s.class ILIKE 'Pre Nine')`
+      if (['9', 'nine', 'class 9'].includes(norm)) {
+        sql += ` AND (s.class ILIKE '9' OR s.class ILIKE 'Nine')`
+      } else if (['pre nine', 'pre-nine'].includes(norm)) {
+        sql += ` AND s.class ILIKE 'Pre Nine'`
       } else {
         sql += ` AND (s.class = $${i} OR s.class ILIKE $${i})`
         params.push(cls)
