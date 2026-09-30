@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const INLINE_FONTS = [
  ['Default',''], ['Times New Roman','Times New Roman'], ['Arial','Arial'],
@@ -103,11 +103,16 @@ export function InlineEditable(props) {
   if(!el||!selection||!selection.rangeCount||selection.isCollapsed) return
   const range=selection.getRangeAt(0); const snapshot=selectionOffsets(el,range)
   if(snapshot){
+   const previous=savedSelection.current
    savedSelection.current=snapshot
    selectionCache.set(cacheKey(sectionId,fieldKey),snapshot)
-   // Selection refs alone do not trigger a toolbar render. Refresh the active
-   // editor contract so toolbar commands always see the latest saved range.
-   if(focused.current && onActivate) queueMicrotask(()=>activate())
+   // Never refresh the parent editor while the user is dragging a selection.
+   // Parent state updates remount/rerender paper nodes and Chromium visibly
+   // collapses/repaints the blue range, which is the selection blink bug.
+   // Notify only the floating toolbar; it can re-render independently.
+   if(!previous||previous.start!==snapshot.start||previous.end!==snapshot.end){
+    window.dispatchEvent?.(new CustomEvent('paper-inline-selection-saved',{detail:{sectionId,fieldKey,start:snapshot.start,end:snapshot.end}}))
+   }
   }
  }
  useEffect(()=>{
@@ -195,9 +200,22 @@ function TButton({label,onClick,disabled}) {
   style={{height:30,minWidth:30,padding:'0 8px',border:'1px solid #334155',borderRadius:6,background:'#0b1f36',color:disabled?'#64748b':'#f8fafc',fontWeight:800,cursor:disabled?'default':'pointer'}}>{label}</button>
 }
 export function PaperSelectionToolbar({editMode=false,active=null}) {
+ const [selectionRev,setSelectionRev]=useState(0)
+ useEffect(()=>{
+  if(typeof window==='undefined') return
+  const handler=event=>{
+   const detail=event?.detail||{}
+   if(!active||(
+    String(detail.sectionId||'')===String(active.sectionId||'')&&
+    String(detail.fieldKey||'')===String(active.fieldKey||'')
+   )) setSelectionRev(value=>value+1)
+  }
+  window.addEventListener('paper-inline-selection-saved',handler)
+  return ()=>window.removeEventListener('paper-inline-selection-saved',handler)
+ },[active])
  if(!editMode) return null
  const title=active?.fieldKey?'Editing: '+active.fieldKey:'Click text to edit'
- return <div className="no-print" data-inline-selection-toolbar data-selection-saved={active?.getSelectionSnapshot?.()?'true':'false'}
+ return <div className="no-print" data-inline-selection-toolbar data-selection-revision={selectionRev} data-selection-saved={active?.getSelectionSnapshot?.()?'true':'false'}
   onMouseDownCapture={()=>active?.rememberSelection?.()}
   style={{position:'fixed',left:'50%',bottom:18,transform:'translateX(-50%)',zIndex:12000,display:'flex',alignItems:'center',gap:5,padding:'7px 9px',border:'1px solid #ef4444',borderRadius:10,background:'rgba(7,25,48,.97)',boxShadow:'0 8px 26px rgba(0,0,0,.35)',fontFamily:'Arial,sans-serif',direction:'ltr'}}>
   <span style={{fontSize:11,fontWeight:900,color:'#fca5a5',padding:'0 5px'}}>{title}</span>

@@ -75,20 +75,22 @@ test('Workspace Urdu: option label uses Urdu letter plus a true closing bracket'
 
   const label = option.locator('[data-option-label-text]')
   const bracket = option.locator('[data-option-bracket]')
-  const bracketShape = bracket.locator('[data-option-bracket-shape]')
   assert.equal((await label.textContent()).trim(), 'الف')
   assert.equal((await bracket.textContent()).trim(), ')')
-  await bracketShape.waitFor({ state: 'visible' })
-  assert.match(await bracketShape.locator('path').getAttribute('d'), /M1\.1 1\.2 C5\.1 4\.1 6\.8 7\.2 6\.8 9/)
+  assert.equal(await bracket.locator('svg').count(), 0, 'Bracket must be a normal text glyph, never an oversized SVG shape')
 
   const bracketCss = await bracket.evaluate(node => ({
     direction: getComputedStyle(node).direction,
     unicodeBidi: getComputedStyle(node).unicodeBidi,
     fontFamily: getComputedStyle(node).fontFamily,
+    fontSize: parseFloat(getComputedStyle(node).fontSize),
+    lineHeight: getComputedStyle(node).lineHeight,
   }))
   assert.equal(bracketCss.direction, 'ltr')
   assert.match(bracketCss.unicodeBidi, /isolate|override/i)
   assert.match(bracketCss.fontFamily, /Arial/i)
+  const labelFontSize = await label.evaluate(node => parseFloat(getComputedStyle(node).fontSize))
+  assert.ok(bracketCss.fontSize <= labelFontSize * 1.05, 'Closing bracket must stay normal-sized beside the Urdu label')
 
   const optionText = option.locator('..').locator('[data-option-text]')
   const labelBox = await label.boundingBox()
@@ -221,7 +223,7 @@ test('Workspace Edit Paper preserves selection-only bold, italic, underline, fon
   await page.getByRole('button', { name: 'Edit Paper' }).click()
   const editable = page.getByLabel('Edit MCQ 1 question')
   await editable.click()
-  await editable.evaluate(el => {
+  const expectedSelection = await editable.evaluate(el => {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT)
     const node = walker.nextNode()
     if (!node) throw new Error('No editable text node')
@@ -231,9 +233,23 @@ test('Workspace Edit Paper preserves selection-only bold, italic, underline, fon
     const selection = window.getSelection()
     selection.removeAllRanges()
     selection.addRange(range)
-    document.dispatchEvent(new Event('selectionchange', { bubbles: true }))
+    // Simulate Chromium firing multiple selectionchange events while a mouse
+    // drag is still in progress. The paper must not re-render and collapse it.
+    for (let i = 0; i < 8; i += 1) {
+      document.dispatchEvent(new Event('selectionchange', { bubbles: true }))
+    }
     el.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }))
+    return selection.toString()
   })
+
+  await page.waitForTimeout(180)
+  const liveSelection = await editable.evaluate(el => {
+    const selection = window.getSelection()
+    if (!selection || selection.isCollapsed || !selection.rangeCount) return ''
+    const range = selection.getRangeAt(0)
+    return el.contains(range.commonAncestorContainer) ? selection.toString() : ''
+  })
+  assert.equal(liveSelection, expectedSelection, 'Highlighted text must remain visibly selected instead of blinking/collapsing')
 
   const toolbar = page.locator('[data-inline-selection-toolbar]')
   assert.equal(await toolbar.getAttribute('data-selection-saved'), 'true')
