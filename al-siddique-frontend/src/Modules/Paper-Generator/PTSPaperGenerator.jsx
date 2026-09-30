@@ -1,5 +1,6 @@
 // PTSPaperGenerator.jsx — PTS clone, dark SaaS theme
 import { useEffect, useState, useRef } from 'react'
+import { useTheme } from '../../context/ThemeContext.jsx'
 import { Maximize, Minimize, ZoomIn, ZoomOut } from 'lucide-react'
 import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
@@ -220,20 +221,10 @@ const themeVars = (mode) => mode === 'light'
  '--pg-option-text': '#e6eef8',
  }
 
-const PAPER_WORKSPACE_THEME_KEY='assps_paper_workspace_theme'
-function getInitialPaperTheme() {
- try {
-  return window.localStorage?.getItem(PAPER_WORKSPACE_THEME_KEY)==='dark' ? 'dark' : 'light'
- } catch {
-  return 'light'
- }
-}
+// The Paper Workspace and the portal header share ONE theme authority.
+// A second localStorage key caused light controls inside a dark shell and vice versa.
 function togglePaperWorkspaceTheme(setTheme){
- setTheme(current=>{
-  const next=current==='light'?'dark':'light'
-  try{window.localStorage?.setItem(PAPER_WORKSPACE_THEME_KEY,next)}catch{}
-  return next
- })
+ setTheme(current=>current==='light'?'dark':'light')
 }
 
 const ThemeToggle = ({ mode, onToggle }) => (
@@ -654,6 +645,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [editMode, setEditMode] = useState(false)
  const [selectedSectionId, setSelectedSectionId] = useState('')
  const [activeEditable, setActiveEditable] = useState(null)
+ const activateEditable = payload => {
+  if(!payload?.sectionId)return
+  setActiveEditable(previous=>previous?.element===payload.element&&previous?.fieldKey===payload.fieldKey&&previous?.sectionId===payload.sectionId?previous:payload)
+  setSelectedSectionId(previous=>String(previous||'')===String(payload.sectionId)?previous:String(payload.sectionId))
+ }
  const [letterSp, setLetterSp] = useState(editorSettings.letterSpacing || 0)
  const [wordSp, setWordSp] = useState(editorSettings.wordSpacing || 0)
  const [engLineH, setEngLineH] = useState(editorSettings.englishLineHeight || (isOfficialPaper ? ruleProfile.presentation.englishLineHeight : 1.5))
@@ -831,7 +827,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   return next
  })
  const updateSelectedSection = changes => selectedSection && updatePaperQuestion('official_section', selectedSection.id, changes)
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:setActiveEditable, mcqLayout, shortLayout }
+ const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))
@@ -2194,7 +2190,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
 
 //  Main Component 
 function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
- const [uiTheme, setUiTheme] = useState(getInitialPaperTheme)
+ const { theme:uiTheme, setTheme:setUiTheme } = useTheme()
  const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'syllabus')
  const [syllabusId, setSyllabusId] = useState(null)
  const [classId, setClassId] = useState(null)
@@ -2240,17 +2236,8 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  questions: [{ label:'Build Paper' }],
  }
 
- useEffect(() => {
- const syncTheme = () => setUiTheme(getInitialPaperTheme())
- const observer = new MutationObserver(syncTheme)
- observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
- window.addEventListener('storage', syncTheme)
- return () => {
- observer.disconnect()
- window.removeEventListener('storage', syncTheme)
- }
- }, [])
-
+ // The portal theme is authoritative. Never force-reset a user's Dark/Light
+ // choice when revisiting this route; both header and workspace follow it.
  return (
  <div className="pts-paper-generator-shell" data-paper-theme={uiTheme} style={{ background:D.bg, minHeight:'100vh', fontFamily:'Inter, Segoe UI, sans-serif', position:'relative', ...themeVars(uiTheme) }}>
  <DBreadcrumb steps={crumbs[step]||[]} />

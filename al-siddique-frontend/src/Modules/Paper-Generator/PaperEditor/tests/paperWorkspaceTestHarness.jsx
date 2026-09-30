@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PTSPaperGenerator from '../../PTSPaperGenerator.jsx'
+import { ThemeProvider, useTheme } from '@/context/ThemeContext.jsx'
 import '@/index.css'
 
 const paper = {
@@ -85,6 +86,14 @@ const paper = {
   },
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+function ThemeFixture() {
+ const { theme, setTheme, toggleTheme } = useTheme()
+ React.useEffect(() => { setTheme('light') }, [setTheme])
+ return <>
+  <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
   <PTSPaperGenerator loadedPaper={paper} />
+ </>
+}
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <ThemeProvider><ThemeFixture /></ThemeProvider>
 )

@@ -128,7 +128,7 @@ test('V11-03: Light Mode defaults on, toolbar and inspector have readable light 
   assert.equal(await shell.getAttribute('data-paper-theme'),'dark')
   await page.getByRole('button',{name:'Dark Mode'}).click()
   assert.equal(await shell.getAttribute('data-paper-theme'),'light')
-  assert.equal(await page.evaluate(()=>localStorage.getItem('assps_paper_workspace_theme')),'light')
+  assert.equal(await page.evaluate(()=>localStorage.getItem('al_siddique_theme')),'light')
   assert.equal(await page.locator('[data-paper-style-root]').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(255, 255, 255)')
 })
 
