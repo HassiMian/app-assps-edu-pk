@@ -134,10 +134,11 @@ export default function FeeSettings() {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
+  const classNamesKey = (CLASSES || []).join('\u001f')
   const availableClasses = useMemo(() => {
     const merged = [...new Set([...(CLASSES || []), ...Object.keys(FALLBACK_FEES)])]
     return merged.filter(Boolean)
-  }, [CLASSES])
+  }, [classNamesKey])
 
   useEffect(() => {
     let alive = true
