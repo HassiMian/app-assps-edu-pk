@@ -11,15 +11,57 @@ const liveFieldHandles = new WeakMap()
 let lastActualSelection = null
 const cacheKey = (sectionId='',fieldKey='') => String(sectionId)+'::'+String(fieldKey)
 const ALLOWED_TAGS = new Set(['B','STRONG','I','EM','U','S','SPAN','SUP','SUB','BR'])
-const ALLOWED_STYLE = new Set(['font-family','font-size','color','background-color','font-weight','font-style','text-decoration','text-decoration-line','vertical-align'])
+const ALLOWED_STYLE = new Set(['font-family','font-size','color','background-color','font-weight','font-style','text-decoration','text-decoration-line','vertical-align','display','transform'])
 const FONT_RE = /^(?:Times New Roman|Arial|Georgia|Cambria Math|Jameel Noori Nastaleeq|Noto Nastaliq Urdu)(?:\s*,\s*(?:serif|sans-serif))?$/i
-const SIZE_RE = /^(?:[8-9]|1\d|2\d|3[0-2])(?:px|pt)$/
+const SIZE_RE = /^(?:(?:[8-9]|1\d|2\d|3[0-2])(?:px|pt)|0\.85em)$/
 const COLOR_RE = /^(?:#[0-9a-f]{3,8}|rgb(?:a)?\([^)]{3,40}\)|[a-z]{3,20})$/i
 
 function escapeHtml(value='') {
  return String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')
 }
 function textHtml(value='') { return escapeHtml(value).replace(/\r?\n/g,'<br>') }
+// The official Urdu heading may include a literal (✓). The static Nastaleeq
+// face gives Latin parentheses an exaggerated calligraphic shape. Isolate ONLY
+// this token in a compact neutral font; preserve its actual text and selection.
+function normalizeHeadingPunctuation(html,fieldKey) {
+ if(fieldKey!=='question-heading'||!String(html).includes('✓')||typeof document==='undefined')return html
+ const template=document.createElement('template')
+ template.innerHTML=html
+ const walker=document.createTreeWalker(template.content,NodeFilter.SHOW_TEXT)
+ const nodes=[]
+ let node
+ while((node=walker.nextNode()))nodes.push(node)
+ for(const textNode of nodes) {
+  const original=textNode.textContent||''
+  const matches=[...original.matchAll(/\(\s*✓\s*\)/gu)]
+  if(!matches.length)continue
+  let parent=textNode.parentElement
+  let decorated=false
+  while(parent) {
+   if(parent.tagName==='SPAN'&&parent.getAttribute('dir')==='ltr'&&
+      /Arial/i.test(parent.style?.fontFamily||'')&&parent.style?.fontSize==='0.85em'){
+    decorated=true;break
+   }
+   parent=parent.parentElement
+  }
+  if(decorated)continue
+  const frag=document.createDocumentFragment()
+  let pos=0
+  for(const match of matches){
+   if(match.index>pos)frag.appendChild(document.createTextNode(original.slice(pos,match.index)))
+   const symbol=document.createElement('span')
+   symbol.dir='ltr'
+   symbol.style.fontFamily='Arial, sans-serif'
+   symbol.style.fontSize='0.85em'
+   symbol.textContent=match[0]
+   frag.appendChild(symbol)
+   pos=match.index+match[0].length
+  }
+  if(pos<original.length)frag.appendChild(document.createTextNode(original.slice(pos)))
+  textNode.replaceWith(frag)
+ }
+ return template.innerHTML
+}
 function safeStyleValue(name,value='') {
  const clean=String(value).trim()
  if(name==='font-family') return FONT_RE.test(clean.replace(/["']/g,''))?clean:''
@@ -29,6 +71,10 @@ function safeStyleValue(name,value='') {
  if(name==='font-style') return /^(?:normal|italic)$/.test(clean)?clean:''
  if(name==='text-decoration'||name==='text-decoration-line') return /^(?:none|underline|line-through)(?:\s+(?:underline|line-through))*$/.test(clean)?clean:''
  if(name==='vertical-align') return /^(?:baseline|super|sub)$/.test(clean)?clean:''
+ // Allow ONLY the editor-generated optical italic correction for Urdu fonts;
+ // never accept arbitrary CSS transform or layout from pasted/untrusted HTML.
+ if(name==='display') return clean==='inline-block'?clean:''
+ if(name==='transform') return /^skewX\(-8deg\)$/i.test(clean)?'skewX(-8deg)':''
  return ''
 }
 export function sanitizeInlineHtml(html='') {
@@ -43,7 +89,10 @@ export function sanitizeInlineHtml(html='') {
     while(child.firstChild) frag.appendChild(child.firstChild)
     child.replaceWith(frag); cleanNode(node); continue
    }
-   for(const attr of [...child.attributes]) if(attr.name!=='style') child.removeAttribute(attr.name)
+   for(const attr of [...child.attributes]) {
+    if(attr.name==='dir'&&child.tagName==='SPAN'&&/^(?:ltr|rtl)$/.test(attr.value))continue
+    if(attr.name!=='style')child.removeAttribute(attr.name)
+   }
    if(child.hasAttribute('style')) {
     const allowed=[]
     for(const prop of [...child.style]) {
@@ -95,7 +144,7 @@ export function InlineEditable(props) {
  const { text='', richHtml='', editMode=false, direction='ltr', className='', style,
   fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='' }=props
  const ref=useRef(null); const focused=useRef(false); const savedSelection=useRef(null); const Tag=as
- const html=richHtml?sanitizeInlineHtml(richHtml):textHtml(text)
+ const html=normalizeHeadingPunctuation(richHtml?sanitizeInlineHtml(richHtml):textHtml(text),fieldKey)
  const lastCommittedHtml=useRef(html)
  useEffect(()=>{
   if(!ref.current||focused.current) return
@@ -262,6 +311,7 @@ function readInlineRuns(el) {
    if(/\bunderline\b/.test(decoration))fmt.underline=true
    if(/\bline-through\b/.test(decoration))fmt.strikeThrough=true
   }
+  if(node.tagName==='SPAN'&&node.getAttribute('dir')==='ltr')fmt.extra.dir='ltr'
   for(const name of ['fontFamily','fontSize','color','backgroundColor','verticalAlign']){
    if(node.style?.[name])fmt.extra[name]=node.style[name]
   }
@@ -289,14 +339,33 @@ function renderInlineRuns(el,runs) {
  for(const run of runs) {
   if(!run.text) continue
   const fmt=run.fmt
-  const span=document.createElement('span')
-  if(fmt.bold)span.style.fontWeight='bold'
-  if(fmt.italic)span.style.fontStyle='italic'
-  if(fmt.underline||fmt.strikeThrough)span.style.textDecoration=[fmt.underline?'underline':'',fmt.strikeThrough?'line-through':''].filter(Boolean).join(' ')
-  for(const [key,value] of Object.entries(fmt.extra||{}))if(value)span.style[key]=value
-  span.textContent=run.text
-  if(span.getAttribute('style'))fragment.appendChild(span)
-  else fragment.appendChild(document.createTextNode(run.text))
+  // The installed static Jameel Nastaleeq font ignores font-style:italic for
+  // Arabic glyphs. Apply a safe, small optical slant to Urdu word segments only.
+  // Separate whitespace nodes keep whole-sentence selections line-wrappable.
+  const parts=fmt.italic&&/[\u0600-\u06ff\u0750-\u077f]/.test(run.text)
+   ?run.text.split(/(\s+)/)
+   :[run.text]
+  for(const part of parts) {
+   if(!part)continue
+   if(/^\s+$/.test(part)){fragment.appendChild(document.createTextNode(part));continue}
+   const span=document.createElement('span')
+   if(fmt.bold)span.style.fontWeight='bold'
+   if(fmt.italic) {
+    span.style.fontStyle='italic'
+    if(/[\u0600-\u06ff\u0750-\u077f]/.test(part)) {
+     span.style.display='inline-block'
+     span.style.transform='skewX(-8deg)'
+    }
+   }
+   if(fmt.underline||fmt.strikeThrough)span.style.textDecoration=[fmt.underline?'underline':'',fmt.strikeThrough?'line-through':''].filter(Boolean).join(' ')
+   for(const [key,value] of Object.entries(fmt.extra||{}))if(value){
+    if(key==='dir')span.dir=value
+    else span.style[key]=value
+   }
+   span.textContent=part
+   if(span.getAttribute('style'))fragment.appendChild(span)
+   else fragment.appendChild(document.createTextNode(part))
+  }
  }
  el.replaceChildren(fragment)
 }

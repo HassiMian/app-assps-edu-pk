@@ -86,7 +86,7 @@ test('Workspace Urdu: option label uses Urdu letter plus a true closing bracket'
     fontSize: parseFloat(getComputedStyle(node).fontSize),
     lineHeight: getComputedStyle(node).lineHeight,
   }))
-  assert.equal(bracketCss.direction, 'ltr')
+  assert.equal(bracketCss.direction, 'rtl')
   assert.match(bracketCss.unicodeBidi, /isolate|override/i)
   assert.match(bracketCss.fontFamily, /Arial/i)
   const labelFontSize = await label.evaluate(node => parseFloat(getComputedStyle(node).fontSize))
@@ -389,7 +389,7 @@ test('Workspace print uses the styled preview clone and preserves the isolated U
   assert.equal(printed.lineHeight, '2.8')
   assert.equal(printed.bracketText, ')')
   assert.match(printed.bracketFont, /Arial/i)
-  assert.equal(printed.bracketDirection, 'ltr')
+  assert.equal(printed.bracketDirection, 'rtl')
   assert.equal(printed.bubbleCount, 1)
   assert.equal(printed.answerKeyCount, 1)
 })

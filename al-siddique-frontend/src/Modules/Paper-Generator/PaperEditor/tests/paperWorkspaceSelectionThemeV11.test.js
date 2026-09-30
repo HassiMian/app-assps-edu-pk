@@ -144,7 +144,7 @@ test('V11-04: Urdu MCQ bracket is optically compact and ordered in preview and p
     return {labelSize:parseFloat(getComputedStyle(label).fontSize),bracketSize:parseFloat(getComputedStyle(bracket).fontSize),bracketHeight:b.height,labelHeight:a.height,svg:bracket.querySelectorAll('svg').length,dir:getComputedStyle(bracket).direction}
   })
   assert.equal(metrics.svg,0)
-  assert.equal(metrics.dir,'ltr')
+  assert.equal(metrics.dir,'rtl','Logical closing parenthesis must mirror visually in RTL Urdu')
   assert.ok(metrics.bracketSize<=metrics.labelSize*.83,'bracket must be optically smaller than Nastaliq glyph')
   await page.getByRole('button',{name:'Print'}).click()
   const frame=page.locator('#__print_frame')

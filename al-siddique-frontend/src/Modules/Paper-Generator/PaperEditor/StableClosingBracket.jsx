@@ -4,10 +4,10 @@ export default function StableClosingBracket({ color = 'currentColor', style = {
   return (
     <span
       data-option-bracket
-      dir="ltr"
+      dir="rtl"
       aria-hidden="true"
       style={{
-        direction: 'ltr',
+        direction: 'rtl',
         unicodeBidi: 'isolate',
         fontFamily: 'Arial, sans-serif',
         fontWeight: 400,

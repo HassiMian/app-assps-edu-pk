@@ -4,10 +4,9 @@
   font-family: 'ASSPS Jameel Noori';
   src:
     local('Jameel Noori Nastaleeq'),
-    local('Jameel Noori Nastaleeq Kasheeda'),
-    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+    local('Jameel Noori Nastaleeq Kasheeda');
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: block;
 }
 
@@ -15,10 +14,9 @@
   font-family: 'Jameel Noori Nastaleeq';
   src:
     local('Jameel Noori Nastaleeq'),
-    local('Jameel Noori Nastaleeq Kasheeda'),
-    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+    local('Jameel Noori Nastaleeq Kasheeda');
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: block;
 }
 

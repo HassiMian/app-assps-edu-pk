@@ -958,25 +958,23 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   font-family:'ASSPS Jameel Noori';
   src:
     local('Jameel Noori Nastaleeq'),
-    local('Jameel Noori Nastaleeq Kasheeda'),
-    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+    local('Jameel Noori Nastaleeq Kasheeda');
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: block;
 }
 @font-face{
   font-family:'Jameel Noori Nastaleeq';
   src:
     local('Jameel Noori Nastaleeq'),
-    local('Jameel Noori Nastaleeq Kasheeda'),
-    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+    local('Jameel Noori Nastaleeq Kasheeda');
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: block;
 }
 [data-option-bracket] {
-  direction: ltr !important;
-  unicode-bidi: isolate-override !important;
+  direction: rtl !important;
+  unicode-bidi: isolate !important;
   font-family: Arial, sans-serif !important;
 }
 *,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}.no-print,[data-edit-guide]{display:none!important}table{border-collapse:collapse}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
@@ -2091,20 +2089,18 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   font-family:'ASSPS Jameel Noori';
   src:
     local('Jameel Noori Nastaleeq'),
-    local('Jameel Noori Nastaleeq Kasheeda'),
-    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+    local('Jameel Noori Nastaleeq Kasheeda');
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: block;
 }
 @font-face{
   font-family:'Jameel Noori Nastaleeq';
   src:
     local('Jameel Noori Nastaleeq'),
-    local('Jameel Noori Nastaleeq Kasheeda'),
-    url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+    local('Jameel Noori Nastaleeq Kasheeda');
   font-style: normal;
-  font-weight: 400 900;
+  font-weight: 400;
   font-display: block;
 }
 [dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], .official-paper[dir="rtl"], .official-paper[dir="rtl"] * {
