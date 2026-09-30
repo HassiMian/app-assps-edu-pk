@@ -1,6 +1,8 @@
 // resolvePaperRoute.js — Central Paper Routing Resolver for ASSPS (Rule FIX A + URDU OVERRIDE)
 
-export const URDU_FONT_STACK = "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif"
+// Paper-only static face: a single regular Nastaleeq file cannot truthfully advertise
+// a 400–900 variable range. A regular face permits Chromium to synthesize visible bold.
+export const URDU_FONT_STACK = "'ASSPS Paper Static Noori', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif"
 
 export function isUrduScriptPaper(paper = {}) {
   if (!paper || typeof paper !== 'object') return false

@@ -955,6 +955,18 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const wmCss = (showWatermark && paperSettings?.logo && watermarkOpacity > 0) ? `body::before { content: ""; position: fixed; top: 52%; left: 50%; transform: translate(-50%, -50%); width: ${145 * watermarkScale}mm; height: ${145 * watermarkScale}mm; background-image: url('${paperSettings.logo}'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: ${watermarkOpacity}; z-index: 0; pointer-events: none; } body > * { position: relative; z-index: 1; } .preview-wm { display: none !important; }` : ''
  doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
 @font-face{
+  font-family:'ASSPS Paper Static Noori';
+  src: local('Jameel Noori Nastaleeq'), local('Jameel Noori Nastaleeq Kasheeda'), url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+[data-official-sections]{font-synthesis:weight style}
+[data-official-sections] [data-edit-field] span[style*="font-weight: bold"],
+[data-official-sections] [data-paper-inline-editable] span[style*="font-weight: bold"],
+[data-official-sections] [data-edit-field] span[style*="font-weight:bold"],
+[data-official-sections] [data-paper-inline-editable] span[style*="font-weight:bold"]{text-shadow:0.24px 0 currentColor,-0.24px 0 currentColor}
+@font-face{
   font-family:'ASSPS Jameel Noori';
   src:
     local('Jameel Noori Nastaleeq'),
@@ -985,7 +997,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   if (doc.fonts) {
    await Promise.race([
     Promise.all([
-     doc.fonts.load("16px 'ASSPS Jameel Noori'"),
+     doc.fonts.load("16px 'ASSPS Paper Static Noori'"),
+      doc.fonts.load("16px 'ASSPS Jameel Noori'"),
      doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
      doc.fonts.ready,
     ]),
@@ -2088,6 +2101,18 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   doc.open()
   doc.write(`<!doctype html><html><head><meta charset="UTF-8"><style>
 @font-face{
+  font-family:'ASSPS Paper Static Noori';
+  src: local('Jameel Noori Nastaleeq'), local('Jameel Noori Nastaleeq Kasheeda'), url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+}
+[data-official-sections]{font-synthesis:weight style}
+[data-official-sections] [data-edit-field] span[style*="font-weight: bold"],
+[data-official-sections] [data-paper-inline-editable] span[style*="font-weight: bold"],
+[data-official-sections] [data-edit-field] span[style*="font-weight:bold"],
+[data-official-sections] [data-paper-inline-editable] span[style*="font-weight:bold"]{text-shadow:0.24px 0 currentColor,-0.24px 0 currentColor}
+@font-face{
   font-family:'ASSPS Jameel Noori';
   src:
     local('Jameel Noori Nastaleeq'),
@@ -2108,7 +2133,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   font-display: block;
 }
 [dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], .official-paper[dir="rtl"], .official-paper[dir="rtl"] * {
-  font-family: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
+  font-family: 'ASSPS Paper Static Noori', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif !important;
 }
 @page{size:A4 portrait;margin:10mm}*{box-sizing:border-box}body{margin:0;background:#fff}textarea,input,button,.official-qa-notes{display:none!important}.official-paper{width:100%!important;min-height:auto!important;box-shadow:none!important;margin:0!important}.official-section{break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body>${node.outerHTML}</body></html>`)
   doc.close()
@@ -2116,6 +2141,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
    if (doc.fonts) {
     await Promise.race([
      Promise.all([
+      doc.fonts.load("16px 'ASSPS Paper Static Noori'"),
       doc.fonts.load("16px 'ASSPS Jameel Noori'"),
       doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
       doc.fonts.ready,

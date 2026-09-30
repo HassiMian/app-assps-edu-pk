@@ -115,3 +115,31 @@ input[type="color"] {
     display: none !important;
   }
 }
+
+/* Paper typography only: the installed Jameel face is static (regular), NOT a
+   variable 400–900 font. Allow synthetic weight/style for selected Urdu runs. */
+@font-face {
+  font-family: 'ASSPS Paper Static Noori';
+  src: local('Jameel Noori Nastaleeq'),
+       local('Jameel Noori Nastaleeq Kasheeda'),
+       url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.pts-paper-generator-shell [data-official-sections] {
+  font-synthesis: weight style;
+}
+/* Screen-only complement to synthetic bold for static Nastaleeq glyphs.
+   Scope to explicitly marked text: unchanged Urdu prose and marks are untouched. */
+.pts-paper-generator-shell [data-official-sections] [data-paper-inline-editable] span[style*="font-weight: bold"],
+.pts-paper-generator-shell [data-official-sections] [data-edit-field] span[style*="font-weight: bold"] {
+  text-shadow: 0.24px 0 currentColor, -0.24px 0 currentColor;
+}
+
+/* sanitizeInlineHtml canonicalizes 'font-weight: bold' to 'font-weight:bold'.
+   Both serialized forms must receive visible optical weight before/after Save. */
+.pts-paper-generator-shell [data-official-sections] [data-paper-inline-editable] span[style*="font-weight:bold"],
+.pts-paper-generator-shell [data-official-sections] [data-edit-field] span[style*="font-weight:bold"] {
+  text-shadow: 0.24px 0 currentColor, -0.24px 0 currentColor;
+}

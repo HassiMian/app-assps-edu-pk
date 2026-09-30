@@ -197,7 +197,40 @@ function resolveActionTarget(active) {
   const range=selection.getRangeAt(0)
   const start=ownerOfSelectionNode(range.startContainer)
   const end=ownerOfSelectionNode(range.endContainer)
+  // A mouse drag over the visible question title may also include its
+  // independently editable serial. Treat that as a heading selection, never
+  // as a marks selection or the previously edited MCQ cell.
+  if(start&&end&&start!==end){
+   const wrapper=start.closest('[data-question-heading]')
+   const sameHeading=wrapper&&wrapper===end.closest('[data-question-heading]')
+   const pair=[start.dataset.editField,end.dataset.editField]
+   if(!sameHeading||!pair.includes('question-number')||!pair.includes('question-heading')||
+      String(start.dataset.sectionId)!==String(end.dataset.sectionId)) return null
+   const title=wrapper.querySelector('[data-paper-inline-editable][data-edit-field="question-heading"]')
+   const handle=title&&liveFieldHandles.get(title)?.()
+   if(!handle||!title.textContent?.length) return null
+   const selected=document.createRange(); selected.selectNodeContents(title)
+   const snapshot={start:0,end:selected.toString().length}
+   lastActualSelection={element:title,sectionId:String(handle.sectionId),fieldKey:'question-heading',snapshot,savedAt:Date.now()}
+   return {el:title,handle,range:selected,snapshot}
+  }
   if(!start||start!==end||!start.contains(range.commonAncestorContainer)) return null
+  // Chromium clips a drag across two independent editable title children to
+  // the first editing host: selecting number + statement can yield ONLY the
+  // full 'سوال نمبر 2:' serial. A whole-serial formatting gesture therefore
+  // targets the adjacent statement, not the serial/marks metadata.
+  if(start.dataset.editField==='question-number'){
+   const own=selectionOffsets(start,range)
+   const fullSerial=own?.start===0 && own.end>=String(start.textContent||'').length
+   const title=start.closest('[data-question-heading]')?.querySelector('[data-paper-inline-editable][data-edit-field="question-heading"]')
+   const titleHandle=title&&liveFieldHandles.get(title)?.()
+   if(fullSerial&&titleHandle&&String(titleHandle.sectionId)===String(start.dataset.sectionId)&&title.textContent?.length){
+    const titleRange=document.createRange();titleRange.selectNodeContents(title)
+    const snapshot={start:0,end:titleRange.toString().length}
+    lastActualSelection={element:title,sectionId:String(titleHandle.sectionId),fieldKey:'question-heading',snapshot,savedAt:Date.now()}
+    return {el:title,handle:titleHandle,range:titleRange,snapshot}
+   }
+  }
   const handle=liveFieldHandles.get(start)?.()
   const snapshot=selectionOffsets(start,range)
   if(!handle||!snapshot||snapshot.end<=snapshot.start) return null
