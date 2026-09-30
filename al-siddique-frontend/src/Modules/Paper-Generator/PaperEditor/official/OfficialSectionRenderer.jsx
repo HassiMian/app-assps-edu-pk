@@ -113,7 +113,7 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor, editMode=false,
     const key='mcq-'+rowIndex+'-prompt'
     const rich=section?.richText?.[key]||''
     return (editMode||rich)
-      ? <InlineEditable text={row.prompt} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' question'} onActivate={onActiveEditable} onCommit={payload=>commitField(rowIndex,'prompt',null,payload,key)} style={{display:'inline',fontWeight:800}} />
+      ? <InlineEditable text={row.prompt} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section?.id} ariaLabel={'Edit MCQ '+(rowIndex+1)+' question'} onActivate={onActiveEditable} onCommit={payload=>commitField(rowIndex,'prompt',null,payload,key)} style={{display:'inline',fontWeight:500}} />
       : <>{row.prompt}</>
   }
   const optionNode=(option,optionIndex,rowIndex)=><OptionChoice key={option.label+'-'+optionIndex} option={option} index={optionIndex} isUrdu={isUrdu} themeColor={themeColor} editMode={editMode} section={section} rowIndex={rowIndex} onActiveEditable={onActiveEditable} onCommit={(payload,key)=>commitField(rowIndex,'option',optionIndex,payload,key)} />
@@ -476,9 +476,16 @@ export default function OfficialSectionRenderer({
    const groupBannerText=currentGroup==='objective'?'حصہ معروضی':'حصہ انشائیہ'
    const serialText=isUrdu?'سوال نمبر '+serial+':':'Q'+serial+'.'
    const commitInstruction=payload=>{
+    const richText={...(section.richText||{}),headingInstruction:payload.html}
+    // Formatting a selected phrase must never re-serialize question numbers or
+    // marks. Only rebuild the actual heading when its plain text changed.
+    if(String(payload.text??'')===instruction){
+     onQuestionChange?.(section.id,{richText})
+     return
+    }
     let heading=replaceQuestionSerial(payload.text,serial,isUrdu)
     heading=replaceSectionMarks(heading,resolvedMarks,isUrdu)
-    onQuestionChange?.(section.id,{heading,text:heading,textUrdu:isUrdu?heading:'',richText:{...(section.richText||{}),headingInstruction:payload.html}})
+    onQuestionChange?.(section.id,{heading,text:heading,textUrdu:isUrdu?heading:'',richText})
    }
    const commitSerial=payload=>{
     const next=Math.max(1,Number(String(payload.text).match(/\d+/)?.[0]||serial))
@@ -494,11 +501,11 @@ export default function OfficialSectionRenderer({
     {showGroupBanner&&<SectionBanner text={groupBannerText} themeColor={themeColor} isUrdu={true} fs={fs}/>}
     <section data-official-section data-section-kind={kind} data-question-border={qBorderStyle} data-edit-selected={selected?'true':undefined}
     onMouseDown={event=>{if(editMode){if(event.target?.closest?.('[data-paper-inline-editable]')) return;event.stopPropagation();onSelectSection?.(section.id)}}}
-    style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?7:0,padding:sectionPadding,breakInside:'auto',overflow:qBorderStyle==='table'?'hidden':undefined,outline:editMode?(selected?'2px dashed #dc2626':'1px dashed #ef4444'):'none',outlineOffset:editMode?3:0,background:selected?'rgba(254,226,226,.12)':undefined}}>
+    style={{marginBottom:String(10*fs)+'px',border:sectionBorder,borderRadius:qBorderStyle==='box'?7:0,padding:sectionPadding,breakInside:'auto',overflow:qBorderStyle==='table'?'hidden':undefined,outline:editMode?(selected?'2px dashed '+themeColor:'1px dashed '+themeColor+'77'):'none',outlineOffset:editMode?3:0,background:selected?themeColor+'0A':undefined}}>
     <div data-section-heading data-language={isUrdu?'urdu':'english'} style={{display:'grid',gridTemplateColumns:isUrdu?'84px minmax(0,1fr)':'minmax(0,1fr) 84px',gridTemplateRows:'auto',alignItems:'center',gap:8,padding:qBorderStyle==='table'?String(5*fs)+'px '+String(7*fs)+'px':undefined,paddingBottom:qBorderStyle==='table'?String(5*fs)+'px':String(4*fs)+'px',marginBottom:qBorderStyle==='table'?0:String(6*fs)+'px',borderBottom:qBorderStyle==='table'?'1.5px solid '+themeColor:(divider?'2px solid '+themeColor:'none'),background:qBorderStyle==='table'?themeColor+'09':undefined,direction:'ltr'}}>
      <div data-question-heading style={{gridColumn:isUrdu?2:1,gridRow:1,direction:isUrdu?'rtl':'ltr',textAlign:isUrdu?'right':'left',fontWeight:900,fontSize:String(Math.max(Number(headingFs||0),qFs+1,13))+'px',display:'flex',flexDirection:'row',justifyContent:'flex-start',alignItems:'baseline',gap:6,minWidth:0}}>
       <InlineEditable text={serialText} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-number" sectionId={section.id} ariaLabel={'Edit question '+serial+' number'} onActivate={onActiveEditable} onCommit={commitSerial} style={{flex:'0 0 auto',whiteSpace:'nowrap',fontWeight:900}} />
-      <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:900}} />
+      <InlineEditable text={instruction} richHtml={section.richText?.headingInstruction||''} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey="question-heading" sectionId={section.id} ariaLabel={'Edit question '+serial+' heading'} onActivate={onActiveEditable} onCommit={commitInstruction} style={{flex:'1 1 auto',minWidth:0,fontWeight:500}} />
      </div>
      {marksLabel?<div data-marks-badge style={{gridColumn:isUrdu?1:2,gridRow:1,direction:'ltr',textAlign:'center',alignSelf:'center',justifySelf:isUrdu?'start':'end',minWidth:64,border:'1px solid '+themeColor,borderRadius:4,padding:'2px 7px',color:themeColor,fontWeight:800,fontSize:String(Math.max(10,qFs-2))+'px',whiteSpace:'nowrap',fontFamily:'Arial,sans-serif'}}>
       <InlineEditable text={marksLabel} editMode={editMode} direction="ltr" fieldKey="marks" sectionId={section.id} ariaLabel={'Edit question '+serial+' marks'} onActivate={onActiveEditable} onCommit={commitMarks} style={{display:'block',textAlign:'center'}} />

@@ -94,9 +94,11 @@ export function InlineEditable(props) {
   fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='' }=props
  const ref=useRef(null); const focused=useRef(false); const savedSelection=useRef(null); const Tag=as
  const html=richHtml?sanitizeInlineHtml(richHtml):textHtml(text)
+ const lastCommittedHtml=useRef(html)
  useEffect(()=>{
   if(!ref.current||focused.current) return
   if(ref.current.innerHTML!==html) ref.current.innerHTML=html
+  lastCommittedHtml.current=html
  },[html])
  const rememberSelection=()=>{
   const el=ref.current; const selection=window.getSelection?.()
@@ -126,6 +128,8 @@ export function InlineEditable(props) {
   if(!el) return
   const safe=sanitizeInlineHtml(el.innerHTML)
   if(el.innerHTML!==safe) el.innerHTML=safe
+  if(safe===lastCommittedHtml.current) return
+  lastCommittedHtml.current=safe
   if(onCommit) onCommit({ text:htmlToPlainText(safe), html:safe })
  }
  const commit=()=>commitElement(ref.current)
@@ -142,7 +146,15 @@ export function InlineEditable(props) {
   aria-label={ariaLabel||undefined} spellCheck={false}
   style={{...style,outline:editMode?'none':undefined,cursor:editMode?'text':undefined}}
   onFocus={()=>{ focused.current=true; activate() }}
-  onBlur={()=>{ rememberSelection(); focused.current=false; commit() }}
+  onBlur={event=>{
+   rememberSelection()
+   focused.current=false
+   // A native select/color picker within the floating toolbar may take focus.
+   // That is not the end of an editing transaction; let its change handler
+   // apply the selected formatting before committing the field.
+   if(event.relatedTarget?.closest?.('[data-inline-selection-toolbar]')) return
+   commit()
+  }}
   onMouseUp={rememberSelection} onKeyUp={rememberSelection}
   onKeyDown={event=>{ if(singleLine&&event.key==='Enter'){event.preventDefault();ref.current?.blur()} }}
   dangerouslySetInnerHTML={{__html:html}} />
@@ -182,6 +194,45 @@ function exec(active,command,value=null,requireSelection=true) {
  active.rememberSelection?.()
  active.commitElement?.(el)
 }
+function toggleSemanticMark(active, command) {
+ const el=findActiveElement(active)
+ const selected=resolveActiveRange(active)
+ const selection=window.getSelection?.()
+ if(!el||!selected||selected.collapsed||!selection||!el.contains(selected.commonAncestorContainer)) return null
+ const offsets=selectionOffsets(el,selected)
+ if(!offsets||offsets.end<=offsets.start) return null
+
+ // Restore this exact field and selected text after a toolbar interaction.
+ // Native contentEditable commands provide reversible mixed-format B/I/U/S
+ // behaviour; nesting a new styled span on each click never did.
+ if(document.activeElement!==el) el.focus({preventScroll:true})
+ const target=findActiveElement(active)||el
+ const range=rangeFromOffsets(target,offsets)
+ if(!range||!target.contains(range.commonAncestorContainer)) return null
+ selection.removeAllRanges()
+ selection.addRange(range)
+ document.execCommand('styleWithCSS',false,false)
+ if(!document.execCommand(command,false,null)) return null
+
+ const pressed=Boolean(document.queryCommandState(command))
+ active.rememberSelection?.()
+ const retained=active.getSelectionSnapshot?.()||offsets
+ active.commitElement?.(target)
+ requestAnimationFrame(()=>{
+  const current=findActiveElement(active)
+  if(!current?.isContentEditable) return
+  // Never jump into a different question if the user moved elsewhere.
+  if(document.activeElement!==current&&
+     !document.activeElement?.closest?.('[data-inline-selection-toolbar]')) return
+  const restored=rangeFromOffsets(current,retained)
+  if(!restored) return
+  const sel=window.getSelection?.()
+  if(!sel) return
+  sel.removeAllRanges()
+  sel.addRange(restored)
+ })
+ return pressed
+}
 function applyRangeStyle(active,styles={}) {
  const el=findActiveElement(active); const selection=window.getSelection?.(); const range=resolveActiveRange(active)
  if(!el||!selection||!range) return
@@ -195,12 +246,20 @@ function applyRangeStyle(active,styles={}) {
  active.rememberSelection?.()
  active.commitElement?.(el)
 }
-function TButton({label,onClick,disabled}) {
- return <button type="button" title={label} disabled={disabled} onMouseDown={e=>e.preventDefault()} onClick={onClick}
-  style={{height:30,minWidth:30,padding:'0 8px',border:'1px solid #334155',borderRadius:6,background:'#0b1f36',color:disabled?'#64748b':'#f8fafc',fontWeight:800,cursor:disabled?'default':'pointer'}}>{label}</button>
+function TButton({label,onClick,disabled,pressed}) {
+ return <button type="button" title={label} aria-pressed={pressed===undefined?undefined:Boolean(pressed)} data-format-on={pressed===undefined?undefined:(pressed?'true':'false')} disabled={disabled} onMouseDown={e=>e.preventDefault()} onClick={onClick}
+  style={{height:30,minWidth:30,padding:'0 8px',border:'1px solid var(--pg-border,#334155)',borderRadius:6,background:pressed?'var(--pg-gold-light,#e8b420)':'var(--pg-tool-bg,#0b1f36)',color:disabled?'var(--pg-muted,#64748b)':(pressed?'#102b4c':'var(--pg-text,#f8fafc)'),fontWeight:800,cursor:disabled?'default':'pointer'}}>{label}</button>
 }
 export function PaperSelectionToolbar({editMode=false,active=null}) {
  const [selectionRev,setSelectionRev]=useState(0)
+ const [marks,setMarks]=useState({bold:false,italic:false,underline:false,strikeThrough:false})
+ const toggleMark=command=>{
+  const next=toggleSemanticMark(active,command)
+  if(next!==null) setMarks(previous=>({...previous,[command]:next}))
+ }
+ useEffect(()=>{
+  setMarks({bold:false,italic:false,underline:false,strikeThrough:false})
+ },[active?.sectionId,active?.fieldKey])
  useEffect(()=>{
   if(typeof window==='undefined') return
   const handler=event=>{
@@ -208,7 +267,19 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
    if(!active||(
     String(detail.sectionId||'')===String(active.sectionId||'')&&
     String(detail.fieldKey||'')===String(active.fieldKey||'')
-   )) setSelectionRev(value=>value+1)
+   )) {
+    setSelectionRev(value=>value+1)
+    const el=findActiveElement(active)
+    const sel=window.getSelection?.()
+    if(el&&sel?.rangeCount&&el.contains(sel.getRangeAt(0).commonAncestorContainer)){
+     setMarks({
+      bold:Boolean(document.queryCommandState('bold')),
+      italic: Boolean(document.queryCommandState('italic')),
+      underline:Boolean(document.queryCommandState('underline')),
+      strikeThrough:Boolean(document.queryCommandState('strikeThrough')),
+     })
+    }
+   }
   }
   window.addEventListener('paper-inline-selection-saved',handler)
   return ()=>window.removeEventListener('paper-inline-selection-saved',handler)
@@ -217,22 +288,22 @@ export function PaperSelectionToolbar({editMode=false,active=null}) {
  const title=active?.fieldKey?'Editing: '+active.fieldKey:'Click text to edit'
  return <div className="no-print" data-inline-selection-toolbar data-selection-revision={selectionRev} data-selection-saved={active?.getSelectionSnapshot?.()?'true':'false'}
   onMouseDownCapture={()=>active?.rememberSelection?.()}
-  style={{position:'fixed',left:'50%',bottom:18,transform:'translateX(-50%)',zIndex:12000,display:'flex',alignItems:'center',gap:5,padding:'7px 9px',border:'1px solid #ef4444',borderRadius:10,background:'rgba(7,25,48,.97)',boxShadow:'0 8px 26px rgba(0,0,0,.35)',fontFamily:'Arial,sans-serif',direction:'ltr'}}>
-  <span style={{fontSize:11,fontWeight:900,color:'#fca5a5',padding:'0 5px'}}>{title}</span>
-  <TButton label="B" disabled={!active?.element} onClick={()=>applyRangeStyle(active,{fontWeight:'bold'})} />
-  <TButton label="I" disabled={!active?.element} onClick={()=>applyRangeStyle(active,{fontStyle:'italic'})} />
-  <TButton label="U" disabled={!active?.element} onClick={()=>applyRangeStyle(active,{textDecoration:'underline'})} />
-  <TButton label="S" disabled={!active?.element} onClick={()=>applyRangeStyle(active,{textDecoration:'line-through'})} />
+  style={{position:'fixed',left:'50%',bottom:18,transform:'translateX(-50%)',zIndex:12000,display:'flex',alignItems:'center',gap:5,padding:'7px 9px',border:'1px solid var(--pg-panel-border,#ef4444)',borderRadius:10,background:'var(--pg-panel-bg,rgba(7,25,48,.97))',color:'var(--pg-text,#f8fafc)',boxShadow:'var(--pg-panel-shadow,0 8px 26px rgba(0,0,0,.35))',fontFamily:'Arial,sans-serif',direction:'ltr'}}>
+  <span style={{fontSize:11,fontWeight:900,color:'var(--pg-gold,#fca5a5)',padding:'0 5px'}}>{title}</span>
+  <TButton label="B" pressed={marks.bold} disabled={!active?.element} onClick={()=>toggleMark('bold')} />
+  <TButton label="I" pressed={marks.italic} disabled={!active?.element} onClick={()=>toggleMark('italic')} />
+  <TButton label="U" pressed={marks.underline} disabled={!active?.element} onClick={()=>toggleMark('underline')} />
+  <TButton label="S" pressed={marks.strikeThrough} disabled={!active?.element} onClick={()=>toggleMark('strikeThrough')} />
   <TButton label="x²" disabled={!active?.element} onClick={()=>applyRangeStyle(active,{verticalAlign:'super',fontSize:'9pt'})} />
   <TButton label="x₂" disabled={!active?.element} onClick={()=>applyRangeStyle(active,{verticalAlign:'sub',fontSize:'9pt'})} />
   <select aria-label="Selected text font" disabled={!active?.element} defaultValue=""
    onChange={e=>{if(e.target.value)applyRangeStyle(active,{fontFamily:e.target.value});e.target.value=''}}
-   style={{height:30,maxWidth:145,border:'1px solid #334155',borderRadius:6,background:'#0b1f36',color:'#e2e8f0'}}>
+   style={{height:30,maxWidth:145,border:'1px solid var(--pg-border,#334155)',borderRadius:6,background:'var(--pg-input-bg,#0b1f36)',color:'var(--pg-text,#e2e8f0)'}}>
    {INLINE_FONTS.map(([label,font])=><option key={label} value={font}>{label}</option>)}
   </select>
   <select aria-label="Selected text size" disabled={!active?.element} defaultValue=""
    onChange={e=>{if(e.target.value)applyRangeStyle(active,{fontSize:e.target.value+'pt'});e.target.value=''}}
-   style={{height:30,width:70,border:'1px solid #334155',borderRadius:6,background:'#0b1f36',color:'#e2e8f0'}}>
+   style={{height:30,width:70,border:'1px solid var(--pg-border,#334155)',borderRadius:6,background:'var(--pg-input-bg,#0b1f36)',color:'var(--pg-text,#e2e8f0)'}}>
    <option value="">Size</option>{INLINE_SIZES.map(size=><option key={size} value={size}>{size} pt</option>)}
   </select>
   <input title="Selected text color" aria-label="Selected text color" type="color" disabled={!active?.element}

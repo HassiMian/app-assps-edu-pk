@@ -6,6 +6,7 @@ import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/question
 import { usePaperStore } from './usePaperStore'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
 import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
+import './PaperEditor/paperWorkspaceLight.css'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
 import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
@@ -169,24 +170,29 @@ function ObjectiveAnswerKey({ paper, isUrdu=false, themeColor='#123b67' }) {
 
 const themeVars = (mode) => mode === 'light'
  ? {
- '--pg-bg': 'linear-gradient(135deg, #f7f9fc 0%, #edf3f8 48%, #e7eff8 100%)',
- '--pg-card': 'rgba(255,255,255,0.68)',
- '--pg-card-strong': 'rgba(255,255,255,0.82)',
- '--pg-gold': '#9a6500',
- '--pg-gold-light': '#c78505',
- '--pg-text': '#162235',
- '--pg-muted': '#5d6b7e',
+ '--pg-bg': '#f4f7fb',
+ '--pg-card': '#ffffff',
+ '--pg-card-strong': '#ffffff',
+ '--pg-gold': '#966a13',
+ '--pg-gold-light': '#dfbb69',
+ '--pg-text': '#102b4c',
+ '--pg-muted': '#536782',
  '--pg-green': '#138a36',
  '--pg-red': '#d32246',
  '--pg-orange': '#c26b00',
  '--pg-blue': '#075fb8',
- '--pg-border': 'rgba(15,35,60,0.16)',
- '--pg-border-hover': 'rgba(161,111,0,0.36)',
- '--pg-toolbar': 'rgba(248,252,255,0.94)',
- '--pg-canvas': '#d8e1eb',
- '--pg-chip': 'rgba(255,255,255,0.86)',
+ '--pg-border': '#cbd5e1',
+ '--pg-border-hover': '#b48a34',
+ '--pg-toolbar': '#ffffff',
+ '--pg-canvas': '#e8edf3',
+ '--pg-chip': '#f2f5f9',
+ '--pg-input-bg': '#f8fafc',
+ '--pg-panel-bg': '#ffffff',
+ '--pg-panel-border': '#cbd5e1',
+ '--pg-panel-shadow': '0 8px 26px rgba(16,43,76,0.10)',
+ '--pg-tool-bg': '#f2f5f9',
  '--pg-option-bg': '#ffffff',
- '--pg-option-text': '#162235',
+ '--pg-option-text': '#102b4c',
  }
  : {
  '--pg-bg': '#071e34',
@@ -205,23 +211,34 @@ const themeVars = (mode) => mode === 'light'
  '--pg-toolbar': 'rgba(7,25,48,0.97)',
  '--pg-canvas': '#1e2a3a',
  '--pg-chip': 'rgba(11,44,77,0.92)',
+ '--pg-input-bg': 'rgba(11,44,77,0.6)',
+ '--pg-panel-bg': 'rgba(7,25,48,.98)',
+ '--pg-panel-border': '#ef4444',
+ '--pg-panel-shadow': '0 10px 34px rgba(0,0,0,.42)',
+ '--pg-tool-bg': '#0b1f36',
  '--pg-option-bg': '#0a1e35',
  '--pg-option-text': '#e6eef8',
  }
 
+const PAPER_WORKSPACE_THEME_KEY='assps_paper_workspace_theme'
 function getInitialPaperTheme() {
  try {
- const stored = window.localStorage?.getItem('al_siddique_theme')
- const rootTheme = document.documentElement?.dataset?.theme
- return stored === 'light' || rootTheme === 'light' ? 'light' : 'dark'
+  return window.localStorage?.getItem(PAPER_WORKSPACE_THEME_KEY)==='dark' ? 'dark' : 'light'
  } catch {
- return 'dark'
+  return 'light'
  }
+}
+function togglePaperWorkspaceTheme(setTheme){
+ setTheme(current=>{
+  const next=current==='light'?'dark':'light'
+  try{window.localStorage?.setItem(PAPER_WORKSPACE_THEME_KEY,next)}catch{}
+  return next
+ })
 }
 
 const ThemeToggle = ({ mode, onToggle }) => (
  <button onClick={onToggle} style={{
- background: mode === 'light' ? 'rgba(7,95,184,0.10)' : 'rgba(255,255,255,0.06)',
+ background: mode === 'light' ? 'rgba(16,43,76,0.08)' : 'rgba(255,255,255,0.06)',
  border:`1px solid ${D.border}`,
  color:D.silver,
  borderRadius:9,
@@ -257,7 +274,7 @@ const DBtn = ({ children, onClick, color='gold', style={}, disabled=false }) => 
  gold: `linear-gradient(135deg,${D.gold},${D.goldL})`,
  green: `linear-gradient(135deg,#1b5e20,#2e7d32)`,
  red: `linear-gradient(135deg,#b71c1c,#c62828)`,
- ghost: 'rgba(15,23,42,0.46)',
+ ghost: 'var(--pg-chip,rgba(15,23,42,0.46))',
  }[color]
  const fg = color === 'ghost' ? D.silver : (color === 'gold' ? '#071e34' : 'white')
  return (
@@ -272,7 +289,7 @@ const DBtn = ({ children, onClick, color='gold', style={}, disabled=false }) => 
 }
 
 const DBreadcrumb = ({ steps }) => (
- <div style={{ background:'rgba(15,23,42,0.46)', borderBottom:`1px solid ${D.border}`,
+ <div style={{ background:'var(--pg-card-strong,rgba(15,23,42,0.46))', borderBottom:`1px solid ${D.border}`,
  padding:'9px 24px', fontSize:13, color:D.muted, display:'flex', gap:6, alignItems:'center' }}>
  <span style={{ color:D.gold, cursor: steps[0]?.onClick ? 'pointer' : 'default' }}
  onClick={steps[0]?.onClick}>Dashboard</span>
@@ -296,7 +313,7 @@ const GoBack = ({ onClick }) => (
 )
 
 const pbStyle = `1px solid ${D.border}`
-const dinp = { background:'rgba(11,44,77,0.6)', border: pbStyle, borderRadius:9,
+const dinp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border: pbStyle, borderRadius:9,
  color:D.silver, padding:'9px 12px', fontSize:14, outline:'none', boxSizing:'border-box', width:'100%' }
 
 //  Step 1  Syllabus 
@@ -986,14 +1003,14 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
  }
 
- const tinp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box' }
- const filterInp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:13, outline:'none', boxSizing:'border-box' }
+ const tinp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box' }
+ const filterInp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:13, outline:'none', boxSizing:'border-box' }
  const filterSel = { ...filterInp, cursor:'pointer' }
 
  return (
  <div className="pts-generator-surface" style={{ display:'flex', flexDirection:'column', minHeight:'calc(100vh - 82px)', height:'calc(100vh - 82px)', width:'100%', position:'relative', ...themeVars(uiTheme) }}>
  <style>{`.pts-generator-surface select option, .pts-generator-surface select optgroup { background: var(--pg-option-bg, #0a1e35); color: var(--pg-option-text, #e6eef8); }`}</style>
- <div style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
+ <div data-paper-controls style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
  <div style={{ display:'flex', gap:8, marginBottom:12, flexWrap:'wrap', alignItems:'center' }}>
  <div style={{display:'flex',alignItems:'center',gap:7}}>
   <span style={{fontSize:11,color:D.muted,fontWeight:800}}>Template</span>
@@ -1024,7 +1041,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printBub} onChange={e=>setPrintBub(e.target.checked)} style={{ accentColor:D.gold }} />Bubble Sheet</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printAns} onChange={e=>setPrintAns(e.target.checked)} style={{ accentColor:D.gold }} />Answer Keys</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
- <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
+ <div data-paper-actions style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
  {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
@@ -1165,9 +1182,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  </div>
  <PaperSelectionToolbar editMode={editMode} active={activeEditable} />
- {editMode && isOfficialPaper && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid #ef4444', borderRadius:12, background:'rgba(7,25,48,.98)', color:D.silver, boxShadow:'0 10px 34px rgba(0,0,0,.42)', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
+ {editMode && isOfficialPaper && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid var(--pg-panel-border,#ef4444)', borderRadius:12, background:'var(--pg-panel-bg,rgba(7,25,48,.98))', color:D.silver, boxShadow:'var(--pg-panel-shadow,0 10px 34px rgba(0,0,0,.42))', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
   <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8, marginBottom:10 }}>
-   <div><b style={{ color:'#fecaca', fontSize:12 }}>EDIT PAPER</b><div style={{ color:D.muted, fontSize:10, marginTop:2 }}>{selectedSection ? 'Question settings — paper layout stays fixed' : 'Click any question or editable line'}</div></div>
+   <div><b style={{ color:D.gold, fontSize:12 }}>EDIT PAPER</b><div style={{ color:D.muted, fontSize:10, marginTop:2 }}>{selectedSection ? 'Question settings — paper layout stays fixed' : 'Click any question or editable line'}</div></div>
    {selectedSection && <button type="button" aria-label="Close question inspector" onClick={()=>{setSelectedSectionId('');setActiveEditable(null)}} style={{border:0,background:'transparent',color:D.muted,fontSize:18,cursor:'pointer'}}>×</button>}
   </div>
   {selectedSection ? <>
@@ -2237,13 +2254,13 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  return (
  <div className="pts-paper-generator-shell" data-paper-theme={uiTheme} style={{ background:D.bg, minHeight:'100vh', fontFamily:'Inter, Segoe UI, sans-serif', position:'relative', ...themeVars(uiTheme) }}>
  <DBreadcrumb steps={crumbs[step]||[]} />
- {step !== 'questions' && (<div style={{ position:'absolute', top:8, right:18, zIndex:5 }}><ThemeToggle mode={uiTheme} onToggle={() => setUiTheme(m => m === 'dark' ? 'light' : 'dark')} /></div>)}
+ {step !== 'questions' && (<div style={{ position:'absolute', top:8, right:18, zIndex:5 }}><ThemeToggle mode={uiTheme} onToggle={() => togglePaperWorkspaceTheme(setUiTheme)} /></div>)}
  <div style={{ padding:'24px', maxWidth:1100, margin:'0 auto' }}>
  {step==='syllabus' && (<SyllabusStep onSelect={id => { setSyllabusId(id); setStep('class') }} />)}
  {step==='class' && (<ClassStep syllabusId={syllabusId} onSelect={id => { setClassId(id); setStep('subject') }} onBack={() => setStep('syllabus')} />)}
  {step==='subject' && (<SubjectStep syllabusId={syllabusId} classId={classId} onSelect={id => { setSubjectId(id); setStep('chapters') }} onBack={() => setStep('class')} />)}
  {step==='chapters' && (<ChapterStep subjectId={subjectId} selectedChapters={selChapters} selectedTopics={selTopics} onChange={(c,t) => { setSelChapters(c); setSelTopics(t) }} onNext={() => setStep('questions')} onBack={() => setStep('subject')} />)}
- {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={loadedPaper?.config || null} loadedPaper={loadedPaper || null} uiTheme={uiTheme} onToggleTheme={() => setUiTheme(m => m === 'dark' ? 'light' : 'dark')} onBack={() => {
+ {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={loadedPaper?.config || null} loadedPaper={loadedPaper || null} uiTheme={uiTheme} onToggleTheme={() => togglePaperWorkspaceTheme(setUiTheme)} onBack={() => {
  if (loadedPaper && onReturnToSource) onReturnToSource();
  else setStep(loadedPaper ? 'syllabus' : 'chapters');
  }} />)}
