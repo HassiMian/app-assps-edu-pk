@@ -5,7 +5,9 @@ param(
   [switch]$ConfirmProduction,
   [string]$HostSpec = $env:ASSPS_DEPLOY_HOST,
   [string]$SshKey = $env:ASSPS_DEPLOY_SSH_KEY,
-  [string]$KnownHostsFile = $env:ASSPS_DEPLOY_KNOWN_HOSTS
+  [string]$KnownHostsFile = $env:ASSPS_DEPLOY_KNOWN_HOSTS,
+  [string]$ReleaseVersion = '',
+  [string]$PreviousLiveCommit = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -106,6 +108,27 @@ grep -Eq '^AUTO_MIGRATE_ON_BOOT=false$' /var/www/apex-backend/.env
 
 if ($Mode -in @('Frontend', 'Both')) {
   Run 'npm run build:frontend'
+  if ($ReleaseVersion) {
+    Step "embed release metadata: $ReleaseVersion"
+    if ($Apply) {
+      $releaseCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
+      Assert-NativeSuccess 'git rev-parse HEAD'
+      $releaseBranch = (& git -C $repoRoot rev-parse --abbrev-ref HEAD).Trim()
+      Assert-NativeSuccess 'git rev-parse branch'
+      $releaseInfo = [ordered]@{
+        version = $ReleaseVersion
+        component = 'frontend'
+        commit = $releaseCommit
+        shortCommit = $releaseCommit.Substring(0,7)
+        branch = $releaseBranch
+        previousLiveCommit = $PreviousLiveCommit
+        publishedAtUTC = (Get-Date).ToUniversalTime().ToString('o')
+      }
+      $metaPath = Join-Path $frontendRoot 'dist\release-meta.json'
+      [IO.File]::WriteAllText($metaPath, ($releaseInfo | ConvertTo-Json -Depth 3), [Text.UTF8Encoding]::new($false))
+      if (-not (Test-Path $metaPath)) { throw 'Release metadata injection failed.' }
+    }
+  }
   $archive = Join-Path $env:TEMP "assps-frontend-dist-$timestamp.tar"
   Run "tar -cf `"$archive`" -C `"$frontendRoot\dist`" ."
   CopyToRemote $archive "/tmp/assps-frontend-dist-$timestamp.tar"
@@ -120,10 +143,18 @@ tar -xf /tmp/assps-frontend-dist-$timestamp.tar -C /var/www/apex-os.new-$timesta
 chown -R www-data:www-data /var/www/apex-os.new-$timestamp
 find /var/www/apex-os.new-$timestamp -type d -exec chmod 755 {} \;
 find /var/www/apex-os.new-$timestamp -type f -exec chmod 644 {} \;
-rm -rf /var/www/apex-os
-mv /var/www/apex-os.new-$timestamp /var/www/apex-os
-nginx -t
-curl -fsS https://app.assps.edu.pk >/dev/null
+test -f /var/www/apex-os.new-$timestamp/index.html
+mv /var/www/apex-os /var/www/apex-os.prev-$timestamp
+if ! mv /var/www/apex-os.new-$timestamp /var/www/apex-os; then
+  mv /var/www/apex-os.prev-$timestamp /var/www/apex-os
+  exit 1
+fi
+if ! nginx -t || ! curl -fsS https://app.assps.edu.pk >/dev/null; then
+  mv /var/www/apex-os /var/www/apex-os.failed-$timestamp
+  mv /var/www/apex-os.prev-$timestamp /var/www/apex-os
+  nginx -t
+  exit 1
+fi
 "@
 }
 

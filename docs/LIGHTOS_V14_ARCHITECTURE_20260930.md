@@ -34,3 +34,12 @@ E. Paper Workspace stays isolated; print and V13 Urdu fixes untouched.
 - The public frontend still reports V13 f5a0b96. V14 has NOT been deployed to production.
 - Live backend notification-route SHA-256 differs from both the V13 baseline and the staged V14 route even after normalizing local CRLF to LF. Therefore replacing the complete live backend route based on repo history is not safe without a reviewed three-way reconciliation. A full read-copy request was blocked by platform safety checks; do not circumvent this by alternative remote-copy methods.
 - Release must use an approved workflow, preserve live backups and unrelated changes, review only the inbox GET query delta, then independently verify authenticated Recent/History, persistent per-browser dismissal and school/role visibility. Do not delete historical notification_log rows or regenerate unrelated papers.
+
+## 30 September 2026 production release continuation
+- Authorized live handler inspection confirmed the original GET /inbox query matches the known old handler, despite unrelated live/backend route hash differences.
+- A guarded surgical patch now checks exact hash of BOTH live route copies before touching anything, changes only the handler between // GET /api/notify/inbox and // PUT /api/notify/read-all, validates Node syntax, and backs up originals with their metadata.
+- Patch baseline SHA256 (each): 1ffbde6abdf987807730e2f46b0698991c72a8b81f482abecfa22b3f1482210e. New live SHA256 (each): e3c93ea47e1a355134862bbbca38aca48cb1679e03e06953829d26b002b19509.
+- Original server route files backed up to /var/backups/assps-lightos-v14-notify-20260930T165342Z. PM2 backend restart successful. /health returned status ok, and anonymous recent/history endpoints both returned HTTP 401.
+- Added one-off guarded production patch and four local patch tests. It never exports or overwrites full production code.
+- Frontend-only deploy script now writes exact committed Git revision to dist/release-meta.json on apply; stage/swap preserves original site in timestamped backup and restores on swap/health-check failure.
+- Remaining release acceptance: publish frontend-only, independently verify hosted release metadata, physical assets, backend health, and authorized authenticated UI check when a logged-in user session is available.
