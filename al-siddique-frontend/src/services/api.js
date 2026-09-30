@@ -309,9 +309,10 @@ function setStoredEmployees(employees) {
 
 function normalizeFeeChallan(challan = {}) {
  const monthlyFee = Number(challan.monthly_fee ?? challan.amount ?? 0)
+ const paperFund = Number(challan.paper_fund ?? 0)
  const previousArrears = Number(challan.previous_arrears ?? challan.prev_month_fee ?? 0)
  const discount = Number(challan.discount || 0)
- const grossTotal = Number(challan.gross_total ?? Math.max(0, monthlyFee + previousArrears - discount))
+ const grossTotal = Number(challan.gross_total ?? Math.max(0, monthlyFee + paperFund + previousArrears - discount))
  const paidAmount = Number(challan.paid_amount || 0)
  return {
  ...challan,
@@ -319,6 +320,7 @@ function normalizeFeeChallan(challan = {}) {
  challan_no: challan.challan_no || `CH-${String(challan.id || Date.now()).slice(-4)}`,
  amount: monthlyFee,
  monthly_fee: monthlyFee,
+ paper_fund: paperFund,
  previous_arrears: previousArrears,
  gross_total: grossTotal,
  remaining_balance: Number(challan.remaining_balance ?? Math.max(0, grossTotal - paidAmount)),
@@ -640,7 +642,8 @@ api.interceptors.response.use(
  const discount = incoming.discount !== undefined
  ? Math.max(0, Number(incoming.discount || 0))
  : Number(current.discount || 0)
- const gross = Math.max(0, monthlyFee + previousArrears - discount)
+ const paperFund = Number(current.paper_fund || 0)
+ const gross = Math.max(0, monthlyFee + paperFund + previousArrears - discount)
  const paid = Math.max(0, Number(current.paid_amount || 0))
  const status = paid <= 0 ? 'unpaid' : paid < gross ? 'partial' : 'paid'
  fees[found] = normalizeFeeChallan({
