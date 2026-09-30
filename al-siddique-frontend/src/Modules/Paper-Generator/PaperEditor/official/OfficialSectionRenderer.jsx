@@ -170,9 +170,25 @@ function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeCol
     if(editMode||rich) return <InlineEditable text={row.text} richHtml={rich} editMode={editMode} direction={isUrdu?'rtl':'ltr'} fieldKey={key} sectionId={section?.id} ariaLabel={'Edit item '+row.serial} onActivate={onActiveEditable} onCommit={payload=>commitRow(row,payload)} />
     return <AnswerText text={row.text}/>
   }
-  if (shortLayout === 'table') {
-    return <table data-short-table style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>
+  if (shortLayout === 'table' || shortLayout === 'table-1-column') {
+    return <table data-short-table data-short-table-columns="1" style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>
       {rows.map(row => <tr key={row.serial}><td style={{ width:50, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800, whiteSpace:'nowrap' }}><ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/></td><td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}>{rowText(row)}</td></tr>)}
+    </tbody></table>
+  }
+  if (shortLayout === 'table-2-column' && rows.length > 1) {
+    const mid = Math.ceil(rows.length / 2)
+    const left = rows.slice(0, mid)
+    const right = rows.slice(mid)
+    const rowCount = Math.max(left.length, right.length)
+    const cell = row => row ? <>
+      <td style={{ width:44, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800, whiteSpace:'nowrap' }}><ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/></td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', minWidth:0 }}>{rowText(row)}</td>
+    </> : <>
+      <td style={{ width:44, border:`1px solid ${themeColor}55`, padding:5 }} />
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px` }} />
+    </>
+    return <table data-short-table data-short-table-columns="2" style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>
+      {Array.from({length:rowCount},(_,index)=><tr key={index}>{cell(left[index])}{cell(right[index])}</tr>)}
     </tbody></table>
   }
   const itemLineCount = Math.max(0, Number(answerLinesPerItem) || 0)
@@ -276,7 +292,7 @@ function SentenceUsageTable({ content, isUrdu, qFs, fs, themeColor, editMode=fal
   const rawLines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
   let items = rawLines.map(line => line.replace(/^(?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و)[.)]\s*/i,'').trim()).filter(Boolean)
   if (items.length <= 1) items = String(content).split(/[،,]|\s{2,}/).map(item => item.replace(/^\d+[.)]\s*/,'').trim()).filter(Boolean)
-  const defaults=isUrdu?['لفظ','جملہ']:['Word','Sentence']
+  const defaults=isUrdu?['الفاظ','جملے']:['Words','Sentences']
   const headers=Array.isArray(section?.tableHeaders)&&section.tableHeaders.length>=2?section.tableHeaders:defaults
   const commitHeader=(index,payload)=>{
     if(!section?.id||!onQuestionChange) return

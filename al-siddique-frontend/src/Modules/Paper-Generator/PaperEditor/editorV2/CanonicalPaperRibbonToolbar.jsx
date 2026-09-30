@@ -51,18 +51,41 @@ export default function CanonicalPaperRibbonToolbar({
 
   const activeEditor = registry?.getActiveEditor()
 
-  const restoreAndFocus = (editor) => {
-    const sel = registry?.getSelection?.(activeFieldKey || registry?.getActiveFieldKey())
+  const getLiveTarget = () => {
+    const key = registry?.getActiveFieldKey?.() || activeFieldKey || null
+    const editor = key ? registry?.get?.(key)?.editor : registry?.getActiveEditor?.()
+    if (!editor || editor.isDestroyed) return { key: null, editor: null }
+    return { key, editor }
+  }
+
+  const captureLiveSelection = () => {
+    registry?.captureActiveSelection?.()
+  }
+
+  const restoreAndFocus = (editor, fieldKey = null) => {
+    if (!editor || editor.isDestroyed) return null
+    const key = fieldKey || registry?.getActiveFieldKey?.() || activeFieldKey
+    const sel = registry?.getSelection?.(key)
     let chain = editor.chain()
     if (sel && typeof sel.from === 'number' && typeof sel.to === 'number') {
-      chain = chain.setTextSelection({ from: sel.from, to: sel.to })
+      const maxPos = Math.max(1, Number(editor.state?.doc?.content?.size || 1))
+      const from = Math.max(1, Math.min(sel.from, maxPos))
+      const to = Math.max(from, Math.min(sel.to, maxPos))
+      chain = chain.setTextSelection({ from, to })
     }
     return chain.focus()
   }
 
   const runCommand = (commandFn) => {
-    if (!activeEditor) return
-    commandFn(restoreAndFocus(activeEditor)).run()
+    const { key, editor } = getLiveTarget()
+    if (!editor) return false
+    const chain = restoreAndFocus(editor, key)
+    if (!chain) return false
+    commandFn(chain).run()
+    if (editor.state?.selection) {
+      registry?.saveSelection?.(key, editor.state.selection)
+    }
+    return true
   }
 
   const isStructuredTarget = Boolean(activeStructuredKey)
@@ -86,14 +109,19 @@ export default function CanonicalPaperRibbonToolbar({
       setStructuredStyle({ [attr]: val || null })
       return
     }
-    if (!activeEditor) return
-    const currentAttrs = activeEditor.getAttributes('textStyle') || {}
+    const { key, editor } = getLiveTarget()
+    if (!editor) return
+    const currentAttrs = editor.getAttributes('textStyle') || {}
     const nextAttrs = { ...currentAttrs, [attr]: val || null }
-    const chain = restoreAndFocus(activeEditor)
+    const chain = restoreAndFocus(editor, key)
+    if (!chain) return
     if (Object.values(nextAttrs).some(Boolean)) {
       chain.setMark('textStyle', nextAttrs).run()
     } else {
       chain.unsetMark('textStyle').run()
+    }
+    if (editor.state?.selection) {
+      registry?.saveSelection?.(key, editor.state.selection)
     }
   }
 
@@ -139,7 +167,7 @@ export default function CanonicalPaperRibbonToolbar({
   const pres = workingDoc?.presentationOverlay || workingDoc?.presentation || {}
   const currentPageBorder = pres.pageBorder || 'none'
 
-  const activeKey = activeFieldKey || registry?.getActiveFieldKey()
+  const activeKey = registry?.getActiveFieldKey?.() || activeFieldKey
   const { sectionId: activeSectionId, nodeId: activeNodeId } = parseFieldKey(activeKey)
   const structuredTarget = parseStructuredControlKey(activeStructuredKey)
   const targetSectionId = structuredTarget?.secId || activeSectionId || workingDoc?.sections?.[0]?.id
@@ -229,6 +257,9 @@ export default function CanonicalPaperRibbonToolbar({
       <div
         role="toolbar"
         aria-label="Academic Formatting"
+        onPointerDownCapture={() => {
+          if (!activeStructuredKey) captureLiveSelection()
+        }}
         style={{
           padding: '6px 14px',
           display: 'flex',
@@ -461,9 +492,10 @@ export default function CanonicalPaperRibbonToolbar({
                 setStructuredStyle({ lineHeight: value })
                 return
               }
-              if (!activeEditor) return
-              restoreAndFocus(activeEditor)
-                .updateAttributes('paragraph', { lineHeight: value })
+              const { key, editor } = getLiveTarget()
+              if (!editor) return
+              restoreAndFocus(editor, key)
+                ?.updateAttributes('paragraph', { lineHeight: value })
                 .updateAttributes('heading', { lineHeight: value })
                 .run()
             }}
@@ -485,9 +517,10 @@ export default function CanonicalPaperRibbonToolbar({
                 setStructuredStyle({ paragraphSpacing: value })
                 return
               }
-              if (!activeEditor) return
-              restoreAndFocus(activeEditor)
-                .updateAttributes('paragraph', { paragraphSpacing: value })
+              const { key, editor } = getLiveTarget()
+              if (!editor) return
+              restoreAndFocus(editor, key)
+                ?.updateAttributes('paragraph', { paragraphSpacing: value })
                 .updateAttributes('heading', { paragraphSpacing: value })
                 .run()
             }}
@@ -548,9 +581,10 @@ export default function CanonicalPaperRibbonToolbar({
               onChange={e => store?.setShortLayout?.(targetSectionId, e.target.value)}
               style={{ ...selectStyle, width: '85px' }}
             >
-              <option value="1-column">1-Column</option>
-              <option value="2-column-balanced">2-Col Balanced</option>
-              <option value="table">Table</option>
+              <option value="1-column">1 Column</option>
+              <option value="2-column-balanced">2 Columns</option>
+              <option value="table-1-column">Table 1-Col</option>
+              <option value="table">Table 2-Col</option>
             </select>
           </div>
 

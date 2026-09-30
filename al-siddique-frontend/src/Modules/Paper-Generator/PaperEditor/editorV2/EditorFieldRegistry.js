@@ -62,7 +62,26 @@ export class EditorFieldRegistry {
 
   saveSelection(fieldKey, selection) {
     if (!fieldKey || !selection) return
-    this._savedSelections.set(fieldKey, { from: selection.from, to: selection.to })
+    const from = Number(selection.from)
+    const to = Number(selection.to)
+    if (!Number.isFinite(from) || !Number.isFinite(to)) return
+    this._savedSelections.set(fieldKey, {
+      from,
+      to,
+      anchor: Number.isFinite(Number(selection.anchor)) ? Number(selection.anchor) : from,
+      head: Number.isFinite(Number(selection.head)) ? Number(selection.head) : to,
+      empty: Boolean(selection.empty),
+      savedAt: Date.now(),
+    })
+  }
+
+  captureActiveSelection() {
+    const key = this.getActiveFieldKey()
+    const editor = key ? this.get(key)?.editor : null
+    const selection = editor?.state?.selection
+    if (!key || !selection) return null
+    this.saveSelection(key, selection)
+    return this.getSelection(key)
   }
 
   getSelection(fieldKey) {

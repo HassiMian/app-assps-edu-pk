@@ -1131,7 +1131,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Short Qs</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['2-column-balanced','2-Col (1-5|6-10)'],['1-column','1-Col'],['table','Table']].map(([v,l])=>(<button key={v} aria-label={`Short questions layout ${l}`} aria-pressed={shortLayout===v} onClick={()=>setShortLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${shortLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:shortLayout===v?700:400, fontSize:11, background: shortLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: shortLayout===v?D.gold:D.muted }}>{l}</button>))}
+ {[['2-column-balanced','2 Columns'],['1-column','1 Column'],['table','Table 1-Col'],['table-2-column','Table 2-Col']].map(([v,l])=>(<button key={v} aria-label={`Short questions layout ${l}`} aria-pressed={shortLayout===v} onClick={()=>setShortLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${shortLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:shortLayout===v?700:400, fontSize:11, background: shortLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: shortLayout===v?D.gold:D.muted }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
@@ -1181,7 +1181,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
    </div>
    <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Question Type
     <select value={selectedSection.layoutPreset||'auto'} onChange={e=>updateSelectedSection({layoutPreset:e.target.value})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
-     <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="sentence_usage">Sentence Usage — لفظ / جملہ</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
+     <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="sentence_usage">Sentence Usage — الفاظ / جملے</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
     </select>
    </label>
    <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Section Divider
@@ -1468,7 +1468,7 @@ function SentenceUsageResponseTable({ content, isUrdu, fs, qFs, themeColor }) {
   return { serial:match?.[1] || String(index+1), word:match?.[2] || line }
  })
  return <table data-sentence-usage-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}>
-  <thead><tr><th style={{ width:44, border:`1px solid ${themeColor}77`, padding:5 }}>#</th><th style={{ width:'31%', border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'لفظ':'Word'}</th><th style={{ border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جملہ':'Sentence'}</th></tr></thead>
+  <thead><tr><th style={{ width:44, border:`1px solid ${themeColor}77`, padding:5 }}>#</th><th style={{ width:'31%', border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'الفاظ':'Words'}</th><th style={{ border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جملے':'Sentences'}</th></tr></thead>
   <tbody>{items.map(item=><tr key={item.serial}><td style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontFamily:'Arial,sans-serif', direction:'ltr' }}>{item.serial}</td><td style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, fontWeight:700, textAlign:isUrdu?'right':'left' }}>{item.word}</td><td style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px` }}><span style={{ display:'inline-block', width:'94%', minHeight:'1.25em', borderBottom:`1px solid ${themeColor}88` }} /></td></tr>)}</tbody>
  </table>
 }

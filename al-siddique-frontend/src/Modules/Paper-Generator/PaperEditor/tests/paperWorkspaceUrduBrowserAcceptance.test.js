@@ -103,8 +103,8 @@ test('Workspace Urdu: sentence usage renders dedicated word/sentence columns', a
   const table = page.locator('[data-sentence-usage-table]')
   await table.waitFor({ state: 'visible' })
   const text = await table.textContent()
-  assert.match(text, /لفظ/)
-  assert.match(text, /جملہ/)
+  assert.match(text, /الفاظ/)
+  assert.match(text, /جملے/)
   assert.equal(await table.locator('tbody tr').count(), 5)
 })
 
@@ -167,11 +167,13 @@ test('Workspace structure controls visibly switch MCQ, short, borders, watermark
   await page.getByLabel('MCQ layout Table').click()
   await page.locator('[data-official-mcq-table]').waitFor({ state: 'visible' })
 
-  await page.getByLabel('Short questions layout 2-Col (1-5|6-10)').click()
+  await page.getByLabel('Short questions layout 2 Columns').click()
   await page.locator('[data-short-two-column]').waitFor({ state: 'visible' })
-  await page.getByLabel('Short questions layout Table').click()
-  await page.locator('[data-short-table]').waitFor({ state: 'visible' })
-  await page.getByLabel('Short questions layout 1-Col').click()
+  await page.getByLabel('Short questions layout Table 1-Col').click()
+  await page.locator('[data-short-table][data-short-table-columns="1"]').waitFor({ state: 'visible' })
+  await page.getByLabel('Short questions layout Table 2-Col').click()
+  await page.locator('[data-short-table][data-short-table-columns="2"]').waitFor({ state: 'visible' })
+  await page.getByLabel('Short questions layout 1 Column').click()
   const shortSection = page.locator('[data-official-section][data-section-kind="short"]')
   await shortSection.locator('[data-numbered-list]').waitFor({ state: 'visible' })
 

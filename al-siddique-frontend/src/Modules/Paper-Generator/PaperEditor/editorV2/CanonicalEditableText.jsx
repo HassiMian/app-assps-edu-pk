@@ -90,6 +90,13 @@ function ActiveInPlaceEditor({
         registry?.saveSelection?.(fieldKey, ed.state.selection)
       }
     },
+    onBlur: ({ editor: ed }) => {
+      // Preserve the exact text range before toolbar controls, selects, or dialogs
+      // take browser focus. Formatting commands can then restore this range.
+      if (ed?.state?.selection) {
+        registry?.saveSelection?.(fieldKey, ed.state.selection)
+      }
+    },
     onUpdate: ({ editor: updatedEd }) => {
       isLocalUpdateRef.current = true
       // Local typing updates compact working store silently (Rule 1, 28)

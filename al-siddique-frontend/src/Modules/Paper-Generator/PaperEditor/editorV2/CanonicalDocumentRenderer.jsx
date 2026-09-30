@@ -755,9 +755,9 @@ export default function CanonicalDocumentRenderer({
 
               {/* Section Nodes */}
               <div
-                className="canonical-section-nodes"
+                className={`canonical-section-nodes short-layout-${shortLayout}`}
+                data-short-layout={shortLayout}
                 dir={secDir}
-                style={shortLayout === '2-column-balanced' ? { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '14px' } : {}}
               >
                 {(() => {
                   const baselineSec = canonicalBaseline?.sections?.find(s => s.id === section.id)
@@ -1301,7 +1301,7 @@ export default function CanonicalDocumentRenderer({
 
                       {/* Add Question Button at the bottom of the section */}
                       {isEditing && (
-                        <div className="canonical-add-node-bar no-print" style={{ marginTop: '10px', paddingTop: '6px' }}>
+                        <div className="canonical-add-node-bar no-print" style={{ marginTop: '10px', paddingTop: '6px', gridColumn: '1 / -1' }}>
                           <AddStructuredNodeMenu
                             onSelectType={(type) => {
                               const lastNodeId = workingItems.length > 0 ? workingItems[workingItems.length - 1].nodeId : null
