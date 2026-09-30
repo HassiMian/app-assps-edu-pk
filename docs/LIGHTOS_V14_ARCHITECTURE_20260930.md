@@ -27,3 +27,10 @@ E. Paper Workspace stays isolated; print and V13 Urdu fixes untouched.
 3. Notifications: old events absent from recent Bell but accessible in Archive; same-browser dismiss survives refresh for user; no fake events or deletion.
 4. Contrast: standard small text >=4.5:1, significant icon contrast >=3:1, focus visible.
 5. Theme/printing: no A4 paper or fee/attendance logic changes; unit & browser regression and build before production deployment.
+
+## Implementation/release checkpoint
+- Source branch: fix/lightos-v14-navigation-inbox; initial feature commit 2bc3d5c.
+- V14 frontend/browser and inbox-model acceptance: 9/9 PASS. Existing V13/V12/V11 canonical/Urdu/print regressions: 42/42 PASS. Production-safety script and frontend Vite build: PASS.
+- The public frontend still reports V13 f5a0b96. V14 has NOT been deployed to production.
+- Live backend notification-route SHA-256 differs from both the V13 baseline and the staged V14 route even after normalizing local CRLF to LF. Therefore replacing the complete live backend route based on repo history is not safe without a reviewed three-way reconciliation. A full read-copy request was blocked by platform safety checks; do not circumvent this by alternative remote-copy methods.
+- Release must use an approved workflow, preserve live backups and unrelated changes, review only the inbox GET query delta, then independently verify authenticated Recent/History, persistent per-browser dismissal and school/role visibility. Do not delete historical notification_log rows or regenerate unrelated papers.
