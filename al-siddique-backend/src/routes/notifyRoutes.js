@@ -346,14 +346,20 @@ router.get('/inbox', protect, async (req, res) => {
     const recipientRole = req.user?.role || null
     const scope = scopedNotificationPredicate(recipientRole, 2)
     const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
+    const view = req.query.view === 'history' ? 'history' : 'recent'
+    const maxRows = view === 'history' ? 200 : 50
+    const parsedLimit = Number.parseInt(req.query.limit, 10)
+    const limit = Number.isFinite(parsedLimit) ? Math.max(1, Math.min(maxRows, parsedLimit)) : maxRows
+    const recentClause = view === 'recent' ? "AND n.sent_at >= NOW() - INTERVAL '30 days'" : ''
     const result = await pool.query(`
       SELECT id, school_id, student_id, recipient_role, title, type, message, metadata, read_at, status, sent_at
       FROM notification_log n
       WHERE n.school_id = $1
         ${scope.clause}
-      ORDER BY COALESCE(read_at, sent_at) DESC
-      LIMIT 50
-    `, params)
+        ${recentClause}
+      ORDER BY n.sent_at DESC, n.id DESC
+      LIMIT $${params.length + 1}
+    `, [...params, limit])
 
     res.json({
       success: true,

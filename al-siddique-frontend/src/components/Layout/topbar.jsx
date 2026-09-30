@@ -6,6 +6,7 @@ import { useStudentStore } from '../../services/useStudentStore'
 import { useTenantBranding } from '../../context/TenantBrandingContext'
 import { useTheme } from '../../context/ThemeContext'
 import api from '../../services/api'
+import { isNotificationRecent, notificationDismissKey, readDismissedIds, persistDismissedIds, sortNotificationEvents } from '../../services/notificationInboxModel'
 
 function getStorage() {
  try {
@@ -142,6 +143,7 @@ function notificationIcon(type = '') {
 function normalizeNotification(n) {
  return {
  id: n.id,
+ sentAt: n.sent_at || n.created_at || null,
  icon: n.icon || notificationIcon(n.type || n.title),
  title: n.title || 'Notification',
  body: n.body || n.message || '',
@@ -164,6 +166,16 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  const [showNotifs, setShowNotifs] = useState(false)
  const [notifs, setNotifs] = useState([])
  const [notifsLoading, setNotifsLoading] = useState(false)
+ const [notifsError, setNotifsError] = useState('')
+ const dismissKey = notificationDismissKey(user)
+ const [hiddenNotificationIds, setHiddenNotificationIds] = useState(() => readDismissedIds(dismissKey))
+ useEffect(() => {
+  const refresh = event => { if (!event?.detail?.key || event.detail.key === dismissKey) setHiddenNotificationIds(readDismissedIds(dismissKey)) }
+  refresh()
+  window.addEventListener('storage',refresh)
+  window.addEventListener('assps-notifications-hidden-updated',refresh)
+  return () => { window.removeEventListener('storage',refresh); window.removeEventListener('assps-notifications-hidden-updated',refresh) }
+ }, [dismissKey])
  const menuRef = useRef()
  const bellRef = useRef()
  const searchRef = useRef()
@@ -224,8 +236,10 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  try {
  const res = await api.get('/api/notify/inbox')
  const rows = Array.isArray(res.data?.data) ? res.data.data : []
- setNotifs(rows.map(normalizeNotification))
+ setNotifs(sortNotificationEvents(rows.map(normalizeNotification)))
+ setNotifsError('')
  } catch {
+ setNotifsError('Notifications could not be loaded. Please retry.')
  setNotifs([])
  } finally {
  setNotifsLoading(false)
@@ -239,7 +253,8 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  return () => window.removeEventListener('focus', handleFocus)
  }, [])
 
- const unreadCount = notifs.filter(n => n.unread).length
+ const recentNotifs = notifs.filter(n => isNotificationRecent(n) && !hiddenNotificationIds.has(String(n.id)))
+ const unreadCount = recentNotifs.filter(n => n.unread).length
 
  const markAllRead = async () => {
  try {
@@ -248,7 +263,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  } catch {
  }
  }
- const dismiss = (id) => setNotifs(n => n.filter(x => x.id !== id))
+ const dismiss = (id) => setHiddenNotificationIds(previous => {
+  const next = new Set(previous)
+  next.add(String(id))
+  return persistDismissedIds(dismissKey,next)
+ })
 
  useEffect(() => {
  if (!isMobile) setMobileSearchOpen(false)
@@ -299,9 +318,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  display: 'flex',
  alignItems: 'center',
  justifyContent: 'center',
- background: 'linear-gradient(135deg, rgba(10,132,255,0.26), rgba(191,90,242,0.18))',
- border: '1px solid rgba(148,163,184,0.16)',
- boxShadow: '0 10px 26px rgba(10,132,255,0.16)',
+ background: 'var(--os-topbar-button-bg,rgba(16,41,68,.10))',
+ border: '1px solid var(--os-topbar-button-border,rgba(148,163,184,0.25))',
+ boxShadow: 'none',
  cursor: 'pointer',
  transition: 'all 0.2s ease',
  }
@@ -512,7 +531,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
 
  <button
  type="button"
- className="lightos-theme-toggle header-action-btn"
+ className="lightos-theme-toggle header-action-btn os-theme-trigger"
  onClick={toggleTheme}
  aria-label={isLight ? 'Switch to dark mode' : 'Switch to light mode'}
  title={isLight ? 'Dark Mode' : 'Light Mode'}
@@ -524,6 +543,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {/* Bell */}
  <div ref={bellRef} style={{ position: 'relative', flexShrink: 0 }}>
  <div
+ className="os-notif-trigger" role="button" tabIndex={0}
+ aria-label="Notifications" aria-expanded={showNotifs}
+ onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.currentTarget.click()}}}
  onClick={() => {
  setShowNotifs(v => {
  const next = !v
@@ -535,7 +557,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
  >
- <Bell size={18} color="#f8fafc" />
+ <Bell size={18} color={isLight ? '#102944' : '#f8fafc'} />
  {unreadCount > 0 && (
  <div style={{
  position: 'absolute', top: 8, right: 8,
@@ -551,7 +573,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  </div>
 
  {showNotifs && (
- <div style={{
+ <div className="os-notif-popover" role="region" aria-label="Recent notifications" style={{
  position: 'absolute', right: 0, top: 'calc(100% + 10px)',
  width: isMobile ? 'min(92vw, 340px)' : 340, zIndex: 9999,
  background: 'rgba(7, 22, 40, 0.97)',
@@ -593,12 +615,14 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <div style={{ padding: 32, textAlign: 'center', color: '#8892A4', fontSize: 13 }}>
  Loading notifications...
  </div>
- ) : notifs.length === 0 ? (
+ ) : notifsError ? (
+ <div className="os-notif-state" style={{padding:20,fontSize:12}} role="alert">{notifsError} <button type="button" onClick={syncNotifications}>Retry</button></div>
+ ) : recentNotifs.length === 0 ? (
  <div style={{ padding: 32, textAlign: 'center', color: '#8892A4', fontSize: 13 }}>
- No notifications
+ No recent notifications (last 30 days). Older entries remain in History.
  </div>
- ) : notifs.map(n => (
- <div key={n.id} style={{
+ ) : recentNotifs.map(n => (
+ <div key={n.id} className="os-notif-row" style={{
  display: 'flex', alignItems: 'flex-start', gap: 10,
  padding: '11px 16px',
  borderBottom: '1px solid rgba(255,255,255,0.04)',
@@ -608,7 +632,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
  onMouseLeave={e => e.currentTarget.style.background = n.unread ? 'rgba(200,153,26,0.05)' : 'transparent'}
  >
- <span style={{ fontSize: 20, lineHeight: 1.3, flexShrink: 0 }}>{n.icon}</span>
+ <span style={{ width:22, height:22, display:'grid', placeItems:'center', flexShrink:0, color:'var(--os-gold,#B78720)' }}><Bell size={16} /></span>
  <div style={{ flex: 1, minWidth: 0 }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
  <span style={{ color: '#f0f4ff', fontSize: 13, fontWeight: 600 }}>{n.title}</span>
@@ -632,7 +656,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {/* Footer */}
  <div style={{ padding: '10px 16px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
  <button
- onClick={() => { navigate('/notifications'); setShowNotifs(false) }}
+ onClick={() => { navigate('/notifications?tab=inbox'); setShowNotifs(false) }}
  style={{
  width: '100%', padding: '9px', borderRadius: 10, border: '1px solid rgba(200,153,26,0.25)',
  background: 'rgba(200,153,26,0.08)', color: '#C8991A', fontSize: 13, fontWeight: 600,
@@ -641,7 +665,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,153,26,0.15)'}
  onMouseLeave={e => e.currentTarget.style.background = 'rgba(200,153,26,0.08)'}
  >
- View All Notifications →
+ View Inbox &amp; History →
  </button>
  </div>
  </div>

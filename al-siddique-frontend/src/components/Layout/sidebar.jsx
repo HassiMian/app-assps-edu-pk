@@ -96,7 +96,8 @@ const MENU_GROUPS = [
  {
  label: 'COMMUNICATIONS',
  items: [
- { icon: Bell, label: 'Notifications', color: '#25D366', roles: ROLE_SETS.schoolStaff, permKey: 'notifications', children: [
+ { icon: Bell, label: 'Notifications', color: '#B78720', roles: ROLE_SETS.schoolStaff, permKey: 'notifications', children: [
+ { label: 'Inbox & History', path: '/notifications?tab=inbox', roles: ROLE_SETS.schoolStaff, permKey: 'notifications' },
  { label: 'Attendance Alerts', path: '/notifications?tab=attendance', roles: ROLE_SETS.schoolStaff, permKey: 'notifications' },
  { label: 'Fee Reminders', path: '/notifications?tab=fee', roles: ROLE_SETS.adminOffice, permKey: 'notifications' },
  { label: 'Exam Results', path: '/notifications?tab=results', roles: ROLE_SETS.academicStaff, permKey: 'notifications' },
@@ -184,8 +185,8 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  const uploadedLogo = branding?.logoUrl || paperSettings?.logo
  const schoolName = branding?.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
  const role = user?.role || 'admin'
- const inactiveIcon = 'rgba(224,229,238,0.94)'
- const inactiveText = 'rgba(224,229,238,0.92)'
+ const inactiveIcon = 'var(--os-sidebar-icon, #CBD5E1)'
+ const inactiveText = 'var(--os-sidebar-text, #CBD5E1)'
 
  const isAdmin = ADMIN_ROLES.includes(role)
  const isStaff = !isAdmin && role !== 'student' && role !== 'parent'
@@ -231,7 +232,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  to={item.path}
  onMouseDown={saveSidebarPosition}
  onClick={saveSidebarPosition}
- className={() => ''}
+ className="os-sidebar-link"
  style={({ isActive }) => ({
  display: 'flex',
  alignItems: 'center',
@@ -256,14 +257,14 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  >
  {({ isActive }) => (
  <>
- <div className="super-sidebar-brand-logo" style={{
+ <div className="os-sidebar-icon-tile" style={{
  width: effectiveCollapsed ? 38 : 32, height: effectiveCollapsed ? 38 : 32, borderRadius: 10, flexShrink: 0,
  background: isActive ? `${item.color}26` : 'rgba(255,255,255,0.045)',
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  transition: 'all 0.2s',
  boxShadow: isActive ? `0 0 12px ${item.color}24` : 'none',
  }}>
- <item.icon size={effectiveCollapsed ? 19 : 16} color={isActive ? item.color : inactiveIcon} />
+ <item.icon size={effectiveCollapsed ? 19 : 16} color="currentColor" />
  </div>
  {!effectiveCollapsed && (
  <span style={{
@@ -283,7 +284,8 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  const isOpen = open.includes(item.label)
  return (
  <div key={item.label}>
- <div
+ <div className="os-sidebar-parent" data-open={isOpen ? 'true' : 'false'} role="button" tabIndex={0}
+ onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); if (!effectiveCollapsed) toggle(item.label) } }}
  onClick={() => {
  saveSidebarPosition()
  if (!effectiveCollapsed) toggle(item.label)
@@ -302,13 +304,13 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  boxShadow: isOpen ? `0 8px 18px ${item.color}10` : 'none',
  }}
  >
- <div style={{
+ <div className="os-sidebar-icon-tile" style={{
  width: effectiveCollapsed ? 38 : 32, height: effectiveCollapsed ? 38 : 32, borderRadius: 10, flexShrink: 0,
  background: isOpen ? `${item.color}22` : 'rgba(255,255,255,0.045)',
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  transition: 'all 0.2s',
  }}>
- <item.icon size={effectiveCollapsed ? 19 : 16} color={isOpen ? item.color : inactiveIcon} />
+ <item.icon size={effectiveCollapsed ? 19 : 16} color="currentColor" />
  </div>
  {!effectiveCollapsed && (
  <>
@@ -338,6 +340,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  {item.children.map(child => (
  <NavLink
  key={child.path}
+ className="os-sidebar-child"
  to={child.path}
  onMouseDown={saveSidebarPosition}
  onClick={saveSidebarPosition}
@@ -383,12 +386,12 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  }}
  >
  {/* Gradient overlay hint */}
- <div style={{
+ <div className="os-sidebar-decor" style={{
  position: 'absolute', top: 0, left: 0, right: 0, height: 200, pointerEvents: 'none',
  background: 'radial-gradient(circle at 18% 12%, rgba(10,132,255,0.18), transparent 34%), radial-gradient(circle at 74% 6%, rgba(200,153,26,0.12), transparent 30%)',
  borderRadius: '0 0 50% 0',
  }} />
- <div style={{
+ <div className="os-sidebar-decor" style={{
  position: 'absolute',
  bottom: 110,
  left: -80,
@@ -407,7 +410,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  justifyContent: effectiveCollapsed ? 'center' : 'flex-start',
  flexShrink: 0,
  }}>
- <div style={{
+ <div className="super-sidebar-brand-logo os-sidebar-school-logo" style={{
  width: effectiveCollapsed ? 48 : 40, height: effectiveCollapsed ? 48 : 40,
  borderRadius: effectiveCollapsed ? 14 : 12,
  background: uploadedLogo ? '#fff' : 'linear-gradient(135deg, #0A84FF, #22d3ee)',
@@ -467,7 +470,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  <div key={gi} style={{ marginBottom: 8 }}>
  {/* Group label divider */}
  {group.label && !effectiveCollapsed && (
- <div className="super-sidebar-user-card" style={{
+ <div className="os-sidebar-group-heading" style={{
  display: 'flex', alignItems: 'center', gap: 8,
  padding: '10px 4px 6px',
  marginTop: gi === 0 ? 0 : 4,

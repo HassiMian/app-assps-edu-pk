@@ -11,6 +11,7 @@ import {
  Smartphone, MessageCircle, ChevronDown, X, AlertCircle,
 } from 'lucide-react'
 import api from '../../services/api'
+import NotificationInboxV14 from './NotificationInboxV14'
 
 //  Design tokens 
 
@@ -142,10 +143,10 @@ function LogItem({ log }) {
 
 //  Main Component 
 
-const VALID_TABS = ['attendance', 'fee', 'results', 'custom', 'log']
+const VALID_TABS = ['inbox', 'attendance', 'fee', 'results', 'custom', 'log']
 
 export default function NotificationModule() {
- const [searchParams] = useSearchParams()
+ const [searchParams,setSearchParams] = useSearchParams()
  const tabParam = searchParams.get('tab')
  const [activeTab, setActiveTab] = useState(VALID_TABS.includes(tabParam) ? tabParam : 'attendance')
  const [channel, setChannel] = useState('both') // both | whatsapp | sms
@@ -178,7 +179,7 @@ export default function NotificationModule() {
  const [customRecipients, setCustomRecipients] = useState([])
 
  useEffect(() => {
- if (!productionHost || activeTab === 'log') return
+ if (!productionHost || activeTab === 'log' || activeTab === 'inbox') return
  let cancelled = false
  async function loadRecipients() {
  setSourceLoading(true)
@@ -329,12 +330,15 @@ export default function NotificationModule() {
  : mockStudents
 
  const tabs = [
+ { id: 'inbox', label: 'Inbox', icon: <Bell size={14} />, color: '#C8991A' },
  { id: 'attendance', label: 'Attendance', icon: <Users size={14} />, color: '#FF375F' },
  { id: 'fee', label: 'Fee', icon: <Bell size={14} />, color: '#FF9F0A' },
  { id: 'results', label: 'Results', icon: <CheckCircle size={14} />, color: '#BF5AF2' },
  { id: 'custom', label: 'Custom', icon: <MessageSquare size={14} />, color: '#0A84FF' },
  { id: 'log', label: `Log (${log.length})`, icon: <Clock size={14} />, color: '#30D158' },
  ]
+
+ if(activeTab==='inbox') return <NotificationInboxV14 onBack={()=>{setActiveTab('attendance');setSearchParams({tab:'attendance'})}}/>
 
  return (
  <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #071e34 0%, #0B2C4D 100%)', color: '#fff', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
