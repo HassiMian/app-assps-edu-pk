@@ -15,6 +15,8 @@ const FALLBACK_FEES = {
   Six: 2800,
   Seven: 2800,
   Eight: 2800,
+  Nine: 3000,
+  Ten: 3000,
   'Pre Nine': 3000,
   'Hifaz Class': 2500,
 }
@@ -140,10 +142,12 @@ export default function FeeSettings() {
   useEffect(() => {
     let alive = true
     setLoading(true)
+    setError('')
     api.get('/api/fees/settings')
       .then((res) => {
         if (!alive) return
         const data = res.data?.data || {}
+        setError('')
         const remoteClasses = data.classSettings || []
         const merged = availableClasses.map((className) => {
           const found = remoteClasses.find(item => item.class_name === className)
@@ -197,6 +201,7 @@ export default function FeeSettings() {
     setMessage('')
     try {
       await api.put('/api/fees/settings', { classSettings, discountPackages })
+      setError('')
       setMessage('Fee settings saved. Defaults and discount packages are now active for challan generation.')
       setTimeout(() => setMessage(''), 5000)
     } catch (err) {
