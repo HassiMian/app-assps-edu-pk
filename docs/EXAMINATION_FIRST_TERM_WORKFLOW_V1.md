@@ -83,3 +83,12 @@ Marks are validated 0..subject total, tenant/class/section checked, and save is 
 - Archive upload through Remote Desktop Commander's SCP was blocked by the command safety check; there was no production archive transfer, directory swap, or marks mutation.
 - Next action: use an approved transfer/deployment route; stage by COPYING current live directory and overlaying the reviewed r4 archive (retain old hashed assets), verify, back up, switch with rollback, and confirm r4 in live release-meta.json.
 - Then repeat authenticated Marks Entry on Exam 9 / One / Yellow and verify Total Marks / Passing Marks initially EMPTY with required-paper notice; verify blank save and Result Cards; do not use fake marks.
+
+## Live acceptance follow-up — 01 Oct 2026
+- Production backend restarted successfully with snapshot-safe First Term sync code active.
+- Live official sync returned HTTP 200 for canonical exam id 9 with 75 official papers, 12 enrolled class/sections, and 81 scheduled section-papers.
+- Post-sync invariants remained exact: exam id 9 unique; enrollments 12; subjects 81; Nine 0; 04-Oct 0; exam_results 0.
+- Live Marks Entry accepted First Term Exam -> One -> Yellow and loaded 38 active students with 0 marks entered.
+- One/Yellow scheduled subjects matched the official matrix exactly: English 28 Sep, Mathematics 30 Sep, Urdu 02 Oct, Science 05 Oct, Islamiyat 07 Oct, Quran / Nazra 09 Oct.
+- Live Result Cards route loaded successfully and correctly reported no saved marks for the exam.
+- Save -> reload -> Result Cards with a mark remains intentionally unexecuted until a genuine student mark is available; no fake production mark was inserted.
