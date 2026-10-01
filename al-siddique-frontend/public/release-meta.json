@@ -1,9 +1,9 @@
 {
-  "version": "examination-first-term-workflow-v1-r3-paper-hotfix3",
+  "version": "examination-first-term-workflow-v1-r3-paper-hotfix4-compact",
   "component": "frontend",
-  "commit": "153baf9cddf4e8c040ff00b7c0eb7e00d6c78f33",
-  "shortCommit": "153baf9",
-  "previousLiveCommit": "594f6951d56d123d5db6ae05035b4e8e1d476482",
+  "commit": "dee749cbea51f683f8f94adf1b5ce1b8d67f3002",
+  "shortCommit": "dee749c",
+  "previousLiveCommit": "eb3693333f10fbafdd34e533e9416d5ac8a6d201",
   "backendWorkflowCommit": "ab28a5c8d02b0339eee166a0af1facab1db7cd68",
-  "releaseNote": "Emergency editable recovery exams and Early Years mark/metadata/presentation working copies, Flyer Urdu Q4 supported, user-controlled marks reconciliation, source-preserving warning print, idempotent Paper Store and stable print frame. No backend or Examination r5 mutation."
+  "releaseNote": "Restores compact Class 8/recovery Paper Workspace: closed metadata and manual edit mode, removes intrusive marks reconciliation grid, keeps saved marks, native question inspector, nine sections, print and Early Years fixes. No backend, DB or Examination r5 mutation."
 }
