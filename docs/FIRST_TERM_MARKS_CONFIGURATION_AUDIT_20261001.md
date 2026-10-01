@@ -47,3 +47,11 @@ Off-matrix seeds must stay as reference records, not become scheduled First Term
 - Reconcile the 8 flagged paper sources and 2 invalid-zero sources. Verify the 30 unrepresented subjects from printed originals/working copies; choose actual Class Five Islamiyat version.
 - Only then configure the corresponding `exam_subjects` rows with an auditable, validated batch (non-destructive and idempotent); preserve unrelated students, fees, attendance, saved papers, and Paper Editor V13.
 - For final live save/reload/result-card acceptance, use **genuine actual obtained marks** rather than introducing mock results in production.
+
+## Passing percentage decision and implementation (updated)
+- For all official First Term papers, including Written, Oral, GK and Quran/Nazra, **33% is the starting default, not a compulsory fixed percentage**.
+- A Passing Percentage input allows the operator to select a rate from 1–100% (up to 2 decimal places) per scheduled class/section/subject before its first marks save.
+- Passing Marks are calculated and displayed automatically as `Math.ceil(actualTotal * chosenPercentage / 100)`. Examples: 50 marks at 33% = 17; 50 at 40% = 20; 60 at 30% = 18; 75 at 35% = 27.
+- The selected percentage is stored separately in nullable `exam_subjects.pass_percentage` via `migrate_exam_passing_percentage_v1.js`, alongside its calculated `pass_marks`. On reload the saved choice is shown. The chosen scheme remains locked after its first genuine marks batch to prevent changing the threshold underneath existing results.
+- Backend rejects mismatches between supplied percentage and passing marks and rejects attempts to overwrite an already-configured scheme. All changes are scoped to canonical School 1 / First Term exam 9.
+- Rollout order: verify production data and files -> backup -> run the *additive, idempotent* new percentage-column migration once -> deploy matching backend policy and exam routes -> deploy validated frontend build -> confirm setup/roster and no unexpected mark changes.

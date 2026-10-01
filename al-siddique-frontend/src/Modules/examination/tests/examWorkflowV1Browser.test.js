@@ -23,7 +23,7 @@ const enrollments = [
 const subjects = [
   { id:101, class_name:'One', section:'Blue', subject:'English', exam_date:'2026-09-28', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:1 },
   { id:102, class_name:'One', section:'Blue', subject:'Mathematics', exam_date:'2026-09-30', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:2 },
-  { id:103, class_name:'One', section:'Yellow', subject:'English', exam_date:'2026-09-28', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:1 },
+  { id:103, class_name:'One', section:'Yellow', subject:'English', exam_date:'2026-09-28', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, pass_percentage:null, sort_order:1 },
   { id:104, class_name:'One', section:'Yellow', subject:'Mathematics', exam_date:'2026-09-30', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:2 },
   { id:201, class_name:'Two', section:'Orange', subject:'English', exam_date:'2026-09-29', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:1 },
 ]
@@ -78,6 +78,12 @@ before(async () => {
     if (route.request().method() !== 'POST') return route.continue()
     resultPostCalls += 1
     lastPayload = route.request().postDataJSON()
+    const selected = subjects.find(s => s.class_name === 'One' && s.section === 'Yellow' && s.subject === lastPayload.results?.[0]?.subject)
+    if (selected && lastPayload.results?.length) {
+      selected.total_marks = lastPayload.results[0].total_marks
+      selected.pass_marks = lastPayload.results[0].pass_marks
+      selected.pass_percentage = lastPayload.results[0].pass_percentage ?? null
+    }
     savedResults = (lastPayload.results || []).map((row,index) => ({
       id:500+index,
       ...row,
@@ -94,6 +100,7 @@ before(async () => {
 
 beforeEach(async () => {
   savedResults = []
+  subjects.forEach(row => { row.total_marks = null; row.pass_marks = null; row.pass_percentage = null })
   examCreateCalls = 0
   resultPostCalls = 0
   lastPayload = null
@@ -153,7 +160,8 @@ test('marks save is one batch and is re-fetched for verification; MarksSheet nev
 
   const numberInputs = page.locator('input[type="number"]')
   await numberInputs.nth(0).fill('50')
-  await numberInputs.nth(1).fill('17')
+  assert.equal(await page.getByRole('spinbutton', { name:'Passing Marks' }).inputValue(), '17')
+  assert.equal(await page.getByRole('spinbutton', { name:'Passing Marks' }).isDisabled(), true)
   await page.getByLabel('Marks for Yellow Student One').fill('45')
   await page.getByLabel('Marks for Yellow Student Two').fill('40')
 
@@ -174,7 +182,7 @@ test('client rejects out-of-range mark before API mutation', async () => {
   await page.getByText('Yellow Student One', { exact:true }).waitFor()
   const numberInputs = page.locator('input[type="number"]')
   await numberInputs.nth(0).fill('50')
-  await numberInputs.nth(1).fill('17')
+  assert.equal(await page.getByRole('spinbutton', { name:'Passing Marks' }).inputValue(), '17')
   await page.getByLabel('Marks for Yellow Student One').fill('55')
   await page.getByRole('button', { name:/Save All Marks/ }).click()
   await page.getByText(/Invalid marks for Yellow Student One/).waitFor()
@@ -182,7 +190,7 @@ test('client rejects out-of-range mark before API mutation', async () => {
   assert.equal(examCreateCalls, 0)
 })
 
-test('unconfigured paper requires its actual total and passing marks, never silent 100/33', async () => {
+test('unconfigured First Term paper requires actual total and calculates 33% pass for all subjects', async () => {
   await page.locator('select').nth(2).selectOption('Yellow')
   await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
 
@@ -199,11 +207,62 @@ test('unconfigured paper requires its actual total and passing marks, never sile
   assert.equal(resultPostCalls, 0)
 
   await total.fill('50')
-  await page.getByRole('button', { name:/Save All Marks/ }).click()
-  await page.getByText(/Set passing marks/).waitFor()
-  assert.equal(resultPostCalls, 0)
-  assert.equal(await mark.isDisabled(), true)
-
-  await passing.fill('17')
+  assert.equal(await passing.inputValue(), '17')
+  assert.equal(await passing.isDisabled(), true)
+  assert.equal(await page.getByRole('spinbutton', { name:'Passing Percentage' }).inputValue(), '33')
   assert.equal(await mark.isEnabled(), true)
+  await total.fill('60')
+  assert.equal(await passing.inputValue(), '20')
+  await total.fill('75')
+  assert.equal(await passing.inputValue(), '25')
+  assert.equal(resultPostCalls, 0)
+})
+
+test('operator can choose paper-specific passing percentage instead of compulsory 33%, and reload persists selection', async () => {
+  await page.locator('select').nth(2).selectOption('Yellow')
+  await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
+
+  const total = page.getByRole('spinbutton', { name:'Total Marks' })
+  const percentage = page.getByRole('spinbutton', { name:'Passing Percentage' })
+  const passing = page.getByRole('spinbutton', { name:'Passing Marks' })
+
+  assert.equal(await percentage.inputValue(), '33')
+  await total.fill('50')
+  assert.equal(await passing.inputValue(), '17')
+
+  await percentage.fill('40')
+  assert.equal(await passing.inputValue(), '20')
+  await page.getByLabel('Marks for Yellow Student One').fill('25')
+  await page.getByRole('button', { name:/Save All Marks/ }).click()
+  await page.getByText(/Saved and verified marks for 1 student/).waitFor({ state:'visible' })
+
+  assert.equal(resultPostCalls, 1)
+  assert.equal(lastPayload.results[0].pass_percentage, 40)
+  assert.equal(lastPayload.results[0].pass_marks, 20)
+  assert.equal(lastPayload.results[0].total_marks, 50)
+
+  await page.reload({ waitUntil:'domcontentloaded' })
+  await page.getByText('Marks Entry', { exact:true }).waitFor({ state:'visible' })
+  await page.locator('select').nth(2).selectOption('Yellow')
+  await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
+  assert.equal(await percentage.inputValue(), '40')
+  assert.equal(await percentage.isDisabled(), true, 'saved paper scheme is locked after its first real save')
+  assert.equal(await passing.inputValue(), '20')
+  assert.equal(await total.inputValue(), '50')
+  assert.equal(await page.getByLabel('Marks for Yellow Student One').inputValue(), '25')
+  assert.equal(examCreateCalls, 0)
+})
+
+test('blank or invalid passing percentage never permits a marks save', async () => {
+  await page.locator('select').nth(2).selectOption('Yellow')
+  await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
+  await page.getByRole('spinbutton', { name:'Total Marks' }).fill('50')
+  const percentage = page.getByRole('spinbutton', { name:'Passing Percentage' })
+  for (const invalid of ['', '0', '101', '33.333']) {
+    await percentage.fill(invalid)
+    assert.equal(await page.getByLabel('Marks for Yellow Student One').isDisabled(), true)
+    await page.getByRole('button', { name:/Save All Marks/ }).click()
+    await page.getByText(/Choose a passing percentage between 1 and 100/).waitFor({ state:'visible' })
+    assert.equal(resultPostCalls, 0)
+  }
 })

@@ -3,6 +3,7 @@ import { CalendarDays, CheckCircle2, RefreshCw, Save, Search } from 'lucide-reac
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
+import { isOfficialFirstTermExam, requiredFirstTermPassMarks } from './firstTermMarksPolicy'
 
 const CLASS_ORDER = ['Starter','Mover','Flyer','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Hifaz Class']
 
@@ -41,6 +42,7 @@ export default function MarksSheet() {
   const [marks, setMarks] = useState({})
   const [totalMarks, setTotalMarks] = useState('')
   const [passMarks, setPassMarks] = useState('')
+  const [passingPercent, setPassingPercent] = useState('33')
   const [loadingSetup, setLoadingSetup] = useState(false)
   const [loadingStudents, setLoadingStudents] = useState(false)
   const [saving, setSaving] = useState(false)
@@ -68,6 +70,18 @@ export default function MarksSheet() {
   )
 
   const selectedSubject = scheduledSubjects.find(row => String(row.id) === String(selectedSubjectId)) || null
+  const firstTermPolicy = isOfficialFirstTermExam(selectedExam)
+  const validPassingPercent = String(passingPercent).trim() !== ''
+    && Number.isFinite(Number(passingPercent)) && Number(passingPercent) >= 1 && Number(passingPercent) <= 100
+    && Math.round(Number(passingPercent) * 100) / 100 === Number(passingPercent)
+  const requiredPassMarks = firstTermPolicy && validPassingPercent
+    ? requiredFirstTermPassMarks(totalMarks, passingPercent) : null
+  const effectivePassMarks = firstTermPolicy ? (requiredPassMarks ?? '') : passMarks
+  const passSchemeMismatch = firstTermPolicy && selectedSubject?.pass_marks != null
+    && requiredPassMarks !== null
+    && (Number(selectedSubject.pass_marks) !== requiredPassMarks
+      || (selectedSubject.pass_percentage != null
+        && Number(selectedSubject.pass_percentage) !== Number(passingPercent)))
   const enteredCount = students.filter(student => marks[student.id] !== undefined && marks[student.id] !== '').length
 
   function setStatus(text, kind = 'info') {
@@ -168,6 +182,7 @@ export default function MarksSheet() {
     setSelectedSubjectId(String(next.id))
     setTotalMarks(next.total_marks == null ? '' : String(next.total_marks))
     setPassMarks(next.pass_marks == null ? '' : String(next.pass_marks))
+    setPassingPercent(next.pass_percentage == null ? '33' : String(next.pass_percentage))
     setStudents([])
     setMarks({})
   }, [scheduledSubjects, selectedSubjectId])
@@ -176,6 +191,7 @@ export default function MarksSheet() {
     if (!selectedSubject) return
     setTotalMarks(selectedSubject.total_marks == null ? '' : String(selectedSubject.total_marks))
     setPassMarks(selectedSubject.pass_marks == null ? '' : String(selectedSubject.pass_marks))
+    setPassingPercent(selectedSubject.pass_percentage == null ? '33' : String(selectedSubject.pass_percentage))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSubjectId])
 
@@ -239,12 +255,18 @@ export default function MarksSheet() {
       return setStatus('Load the selected class roster before saving marks.', 'error')
     }
     const total = Number(totalMarks)
-    const pass = Number(passMarks)
+    const pass = Number(effectivePassMarks)
+    if (firstTermPolicy && !validPassingPercent) {
+      return setStatus('Choose a passing percentage between 1 and 100 (up to 2 decimal places). Default is 33%.', 'error')
+    }
     if (String(totalMarks).trim() === '' || !Number.isFinite(total) || total <= 0) {
       return setStatus('Set the actual total marks from this scheduled paper before saving.', 'error')
     }
-    if (String(passMarks).trim() === '' || !Number.isFinite(pass) || pass < 0 || pass > total) {
-      return setStatus('Set passing marks between 0 and the actual paper total before saving.', 'error')
+    if (String(effectivePassMarks).trim() === '' || !Number.isFinite(pass) || pass < 0 || pass > total) {
+      return setStatus('Set valid passing marks for the actual paper total before saving.', 'error')
+    }
+    if (passSchemeMismatch) {
+      return setStatus('Saved marks scheme conflicts with the selected passing percentage. Contact the examination administrator before saving.', 'error')
     }
 
     const rows = []
@@ -262,6 +284,7 @@ export default function MarksSheet() {
         marks_obtained: obtained,
         total_marks: total,
         pass_marks: pass,
+        ...(firstTermPolicy ? { pass_percentage: Number(passingPercent) } : {}),
       })
     }
     if (!rows.length) return setStatus('Enter at least one student mark before saving.', 'error')
@@ -283,7 +306,7 @@ export default function MarksSheet() {
       setSetup(prev => ({
         ...prev,
         subjects: prev.subjects.map(row => String(row.id) === String(selectedSubject.id)
-          ? { ...row, total_marks:total, pass_marks:pass }
+          ? { ...row, total_marks:total, pass_marks:pass, ...(firstTermPolicy ? { pass_percentage:Number(passingPercent) } : {}) }
           : row)
       }))
       setStatus(`Saved and verified marks for ${rows.length} student(s).`, 'success')
@@ -370,7 +393,7 @@ export default function MarksSheet() {
           </div>
 
           {selectedSubject && (
-            <div style={{ display:'grid', gridTemplateColumns:'1.4fr repeat(2,minmax(150px,0.45fr)) auto', gap:14, alignItems:'end' }}>
+            <div style={{ display:'grid', gridTemplateColumns:firstTermPolicy ? '1.4fr repeat(3,minmax(125px,0.45fr)) auto' : '1.4fr repeat(2,minmax(150px,0.45fr)) auto', gap:14, alignItems:'end' }}>
               <div style={{ padding:'10px 12px', borderRadius:12, background:'rgba(10,132,255,0.07)', border:'1px solid rgba(10,132,255,0.17)' }}>
                 <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>DATE SHEET PAPER</div>
                 <div style={{ color:C.silver, fontWeight:800, marginTop:3, display:'flex', alignItems:'center', gap:7 }}>
@@ -381,9 +404,16 @@ export default function MarksSheet() {
                 <label style={labelStyle}>Total Marks</label>
                 <input type="number" min="1" placeholder="Actual paper total" aria-label="Total Marks" style={input} value={totalMarks} disabled={selectedSubject.total_marks !== null && selectedSubject.total_marks !== undefined} onChange={e=>setTotalMarks(e.target.value)} />
               </div>
+              {firstTermPolicy && <div>
+                <label style={labelStyle}>Passing Percentage (default 33%)</label>
+                <input type="number" min="1" max="100" step="0.01" aria-label="Passing Percentage" style={input}
+                  value={passingPercent}
+                  disabled={selectedSubject.total_marks != null || selectedSubject.pass_marks != null || selectedSubject.pass_percentage != null}
+                  onChange={e=>setPassingPercent(e.target.value)} />
+              </div>}
               <div>
-                <label style={labelStyle}>Passing Marks</label>
-                <input type="number" min="0" max={Number(totalMarks)>0 ? Number(totalMarks) : undefined} placeholder="Required passing marks" aria-label="Passing Marks" style={input} value={passMarks} disabled={selectedSubject.pass_marks !== null && selectedSubject.pass_marks !== undefined} onChange={e=>setPassMarks(e.target.value)} />
+                <label style={labelStyle}>{firstTermPolicy ? 'Calculated Passing Marks (rounded up)' : 'Passing Marks'}</label>
+                <input type="number" min="0" max={Number(totalMarks)>0 ? Number(totalMarks) : undefined} placeholder={firstTermPolicy ? 'Calculated from actual paper total' : 'Required passing marks'} aria-label="Passing Marks" style={input} value={effectivePassMarks} disabled={firstTermPolicy || (selectedSubject.pass_marks !== null && selectedSubject.pass_marks !== undefined)} onChange={e=>setPassMarks(e.target.value)} />
               </div>
               <button type="button" onClick={()=>loadRoster()} disabled={loadingStudents} style={{ ...btnPrimary, minHeight:46, display:'inline-flex', alignItems:'center', justifyContent:'center', gap:8 }}>
                 <Search size={16} /> {loadingStudents ? 'Loading...' : 'Refresh Students'}
@@ -393,11 +423,12 @@ export default function MarksSheet() {
 
           {selectedSubject && (selectedSubject.total_marks == null || selectedSubject.pass_marks == null) && (
             <div role="status" style={{ color:C.gold, fontSize:12, lineHeight:1.6 }}>
-              Paper marks are not configured. Enter the actual Total Marks and Passing Marks from the printed paper before entering student marks. The first verified save locks this subject's marks scheme; 100/33 is not assumed.
+              Paper marks are not configured. Enter the actual Total Marks from the printed paper. {firstTermPolicy ? 'Choose the passing percentage (33% by default); passing marks are calculated automatically and rounded up for Written, Oral and Quran/Nazra alike.' : 'Enter the approved passing marks.'} The first verified save locks this subject's marks scheme; a generic 100/33 is never assumed.
             </div>
           )}
+          {passSchemeMismatch && <div role="alert" style={{ color:C.red, fontSize:12 }}>Saved passing marks/percentage conflict with the selected scheme. Entry is blocked pending examination administrator review.</div>}
           {selectedSubject?.total_marks !== null && selectedSubject?.total_marks !== undefined && (
-            <div style={{ color:C.muted, fontSize:11 }}>Grading is locked for this scheduled subject after the first successful marks save: {selectedSubject.total_marks} total / {selectedSubject.pass_marks ?? 0} pass.</div>
+            <div style={{ color:C.muted, fontSize:11 }}>Grading is locked for this scheduled subject after the first successful marks save: {selectedSubject.total_marks} total / {selectedSubject.pass_marks ?? 'unconfigured'} pass{firstTermPolicy ? ` · ${selectedSubject.pass_percentage ?? 33}%` : ''}.</div>
           )}
         </div>
 
@@ -440,7 +471,7 @@ export default function MarksSheet() {
                       <input type="number" min="0" max={Number(totalMarks)>0 ? Number(totalMarks) : undefined} step="0.01"
                         aria-label={`Marks for ${student.name}`}
                         value={value}
-                        disabled={String(totalMarks).trim() === '' || String(passMarks).trim() === ''}
+                        disabled={String(totalMarks).trim() === '' || String(effectivePassMarks).trim() === '' || passSchemeMismatch}
                         onChange={e=>updateMark(student.id,e.target.value)}
                         onFocus={e=>e.target.select()}
                         style={{ ...input, width:118, margin:'0 auto', textAlign:'center', borderColor:invalid?C.red:undefined }}

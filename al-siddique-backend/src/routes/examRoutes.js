@@ -4,6 +4,7 @@ const { query, pool } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope, requireScopeForServiceOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const officialFirstTerm = require('../config/firstTermExam2026')
+const { DEFAULT_PASS_PERCENT, isOfficialFirstTermExam, requiredFirstTermPassMarks } = require('../config/firstTermMarksPolicy')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const canSyncOfficial = requireRoles('super_admin', 'admin', 'principal')
@@ -60,16 +61,16 @@ function sendRouteError(res, error, fallback = 'Exam operation failed') {
   return res.status(status).json({ success: false, message })
 }
 
-function calcGrade(obtained, total) {
-  if (!Number.isFinite(total) || total <= 0) return 'F'
+function calcGrade(obtained, total, passing = Math.ceil(total * 0.33)) {
+  if (!Number.isFinite(total) || total <= 0 || !Number.isFinite(passing)) return 'F'
+  if (obtained < passing) return 'F'
   const pct = (obtained / total) * 100
   if (pct >= 90) return 'A+'
   if (pct >= 80) return 'A'
   if (pct >= 70) return 'B'
   if (pct >= 60) return 'C'
   if (pct >= 50) return 'D'
-  if (pct >= 33) return 'E'
-  return 'F'
+  return 'E'
 }
 
 // GET /api/exams
@@ -226,7 +227,7 @@ router.get('/:id/setup', protect, canManageExams, async (req, res) => {
         [schoolId, exam.id]
       ),
       query(
-        `SELECT id, class_name, section, subject, exam_date, paper_time, total_marks, pass_marks, sort_order
+        `SELECT id, class_name, section, subject, exam_date, paper_time, total_marks, pass_marks, pass_percentage, sort_order
          FROM exam_subjects
          WHERE school_id=$1 AND exam_id=$2 AND is_active=true
          ORDER BY exam_date, sort_order, class_name, section, subject`,
@@ -353,8 +354,8 @@ router.post('/results', protect, canManageExams, async (req, res) => {
       const subject = String(row?.subject || '').trim()
       const marksObtained = Number(row?.marks_obtained)
       const totalMarks = Number(row?.total_marks)
-      const passMarks = row?.pass_marks === undefined || row?.pass_marks === null || row?.pass_marks === ''
-        ? Math.round(totalMarks * 0.33)
+      const providedPassMarks = row?.pass_marks === undefined || row?.pass_marks === null || row?.pass_marks === ''
+        ? null
         : Number(row.pass_marks)
 
       if (!Number.isInteger(examId) || examId <= 0 || !Number.isInteger(studentId) || studentId <= 0 || !subject) {
@@ -367,6 +368,31 @@ router.post('/results', protect, canManageExams, async (req, res) => {
         error.status = 400
         throw error
       }
+      const exam = await getScopedExam(req, examId, client)
+      const officialTerm = isOfficialFirstTermExam(exam)
+      if (officialTerm && !Number.isInteger(totalMarks)) {
+        const error = new Error('First Term paper total must be a whole number.')
+        error.status = 400
+        throw error
+      }
+      const providedPassPercentage = row?.pass_percentage === undefined || row?.pass_percentage === null || row?.pass_percentage === ''
+        ? null
+        : Number(row.pass_percentage)
+      if (officialTerm && providedPassPercentage !== null
+          && (!Number.isFinite(providedPassPercentage) || providedPassPercentage < 1 || providedPassPercentage > 100
+            || Math.round(providedPassPercentage * 100) / 100 !== providedPassPercentage)) {
+        const error = new Error('Select a valid passing percentage between 1 and 100 (maximum 2 decimal places).')
+        error.status = 400
+        throw error
+      }
+      const passPercentage = officialTerm ? (providedPassPercentage ?? DEFAULT_PASS_PERCENT) : null
+      const expectedPassMarks = officialTerm ? requiredFirstTermPassMarks(totalMarks, passPercentage) : null
+      if (officialTerm && providedPassMarks !== null && providedPassMarks !== expectedPassMarks) {
+        const error = new Error(`Passing marks must match the selected ${passPercentage}% (rounded up): ${expectedPassMarks} for a ${totalMarks}-mark paper.`)
+        error.status = 400
+        throw error
+      }
+      const passMarks = officialTerm ? expectedPassMarks : (providedPassMarks ?? Math.round(totalMarks * 0.33))
       if (!Number.isFinite(passMarks) || passMarks < 0 || passMarks > totalMarks) {
         const error = new Error('Passing marks must be between 0 and total marks.')
         error.status = 400
@@ -377,8 +403,6 @@ router.post('/results', protect, canManageExams, async (req, res) => {
         error.status = 400
         throw error
       }
-
-      const exam = await getScopedExam(req, examId, client)
       const effectiveSchoolId = Number(exam.school_id)
       if (!isSuperAdmin && Number(schoolId) !== effectiveSchoolId) {
         const error = new Error('Exam does not belong to this school')
@@ -426,7 +450,7 @@ router.post('/results', protect, canManageExams, async (req, res) => {
         }
 
         const subjectConfig = await client.query(
-          `SELECT id, total_marks, pass_marks
+          `SELECT id, total_marks, pass_marks, pass_percentage
            FROM exam_subjects
            WHERE school_id=$1 AND exam_id=$2 AND class_name=$3 AND section=$4
              AND LOWER(subject)=LOWER($5) AND is_active=true
@@ -450,19 +474,25 @@ router.post('/results', protect, canManageExams, async (req, res) => {
           error.status = 409
           throw error
         }
-        if (config.total_marks === null || config.pass_marks === null) {
+        if (officialTerm && config.pass_percentage !== null && Number(config.pass_percentage) !== passPercentage) {
+          const error = new Error(`Passing percentage for ${subject} is already configured as ${config.pass_percentage}%.`)
+          error.status = 409
+          throw error
+        }
+        if (config.total_marks === null || config.pass_marks === null || (officialTerm && config.pass_percentage === null)) {
           await client.query(
             `UPDATE exam_subjects
              SET total_marks=COALESCE(total_marks,$1),
                  pass_marks=COALESCE(pass_marks,$2),
+                 pass_percentage=COALESCE(pass_percentage,$3),
                  updated_at=NOW()
-             WHERE id=$3`,
-            [totalMarks, passMarks, config.id]
+             WHERE id=$4`,
+            [totalMarks, passMarks, passPercentage, config.id]
           )
         }
       }
 
-      const grade = calcGrade(marksObtained, totalMarks)
+      const grade = calcGrade(marksObtained, totalMarks, passMarks)
       await client.query(
         `INSERT INTO exam_results
           (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade)
