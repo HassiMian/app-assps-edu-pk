@@ -19,6 +19,7 @@ function gradeLabel(pct) {
  if (pct >= 70) return 'B'
  if (pct >= 60) return 'C'
  if (pct >= 50) return 'D'
+ if (pct >= 33) return 'E'
  return 'F'
 }
 
