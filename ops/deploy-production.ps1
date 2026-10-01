@@ -63,7 +63,13 @@ function Remote($script) {
     Write-Host $script
     return
   }
-  & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $script
+
+  # Keep the remote payload as one argv item even when SshExe is a .cmd/Python
+  # compatibility wrapper. Passing a multiline here-string directly can be
+  # truncated by Windows command-line forwarding while still returning exit 0.
+  $encodedScript = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($script))
+  $remoteCommand = "printf '%s' '$encodedScript' | base64 -d | bash"
+  & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $remoteCommand
   Assert-NativeSuccess "ssh $HostSpec"
 }
 

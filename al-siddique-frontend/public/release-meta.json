@@ -1,0 +1,9 @@
+{
+  "version": "examination-first-term-workflow-v1-r3",
+  "component": "frontend",
+  "commit": "594f6951d56d123d5db6ae05035b4e8e1d476482",
+  "shortCommit": "594f695",
+  "previousLiveCommit": "a236509f4627d1d913c00c0e3b031a7b57a04ca6",
+  "backendWorkflowCommit": "ab28a5c8d02b0339eee166a0af1facab1db7cd68",
+  "releaseNote": "First Term enrollment snapshot safety and Marks Entry stale roster-status correction"
+}

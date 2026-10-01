@@ -49,3 +49,13 @@ Marks are validated 0..subject total, tenant/class/section checked, and save is 
 - Official sync now merges existing official exam enrollments with the current active roster instead of deleting an already-enrolled official section.
 - Non-official classes such as Nine remain excluded, and exam_subjects are rebuilt only from the official 75-paper matrix.
 - Regression coverage confirms One/Blue remains in the exam snapshot when the current roster contains only One/Yellow.
+
+## Production acceptance follow-up — 01 Oct 2026 (r3)
+- Backend snapshot-safety commit: ab28a5c8d02b0339eee166a0af1facab1db7cd68.
+- Frontend stale roster-status fix: 594f6951d56d123d5db6ae05035b4e8e1d476482.
+- Patched official sync returned HTTP 200 with exam id 9, 75 official papers, 12 enrolled class/sections and 81 scheduled section-papers.
+- Live setup/roster API: 12/81; One Blue=0; One Yellow=38; Starter Blue=45; Mover Purple=42; Flyer Pink=24; Two Orange=31; Three Red=29; Four Blue=17; Five Blue=23; Six Blue=20; Seven Blue=21; Eight Blue=11.
+- Live Marks Entry acceptance on new MarksSheet-C7DMTe5V.js: One/Blue empty state observed, then One/Yellow loaded 38 students and the stale Blue error cleared (STALE=false).
+- Live Result Cards correctly reports no students with marks because exam_results for exam 9 remains 0. No fake marks were created.
+- Frontend deploy helper false-success was traced to multiline payload forwarding through the Windows .cmd/Paramiko SSH wrapper. Remote payloads are now base64-encoded into one argv item before execution.
+- release-meta.json is now source-controlled in frontend/public so future clean frontend swaps retain release identity.

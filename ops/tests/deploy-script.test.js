@@ -30,3 +30,9 @@ test('backend deploy preflight requires production env and disabled auto migrati
   assert.match(deployScript, /\^NODE_ENV=production\$/)
   assert.match(deployScript, /\^AUTO_MIGRATE_ON_BOOT=false\$/)
 })
+
+test('remote deploy payload is encoded before wrapper execution', () => {
+  assert.match(deployScript, /ToBase64String/)
+  assert.match(deployScript, /base64 -d \| bash/)
+  assert.doesNotMatch(deployScript, /\$HostSpec \$script\s*\n/)
+})
