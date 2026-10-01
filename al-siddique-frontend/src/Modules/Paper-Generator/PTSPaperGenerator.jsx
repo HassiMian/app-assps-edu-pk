@@ -994,7 +994,11 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   console.warn('Urdu print font preload warning in doPrint:', err)
  }
  try { iframe.contentWindow.focus(); iframe.contentWindow.print() } catch(e) { console.error('iframe print failed:', e) }
- setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
+ // Chrome may need several seconds to render a multi-page Urdu print preview.
+ // Removing the source iframe after 3 seconds closes the preview before printing.
+ // Keep it alive while the operator selects a printer or saves the PDF; the next
+ // print removes any previous frame, and this timer is only a fallback cleanup.
+ setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 180000)
  }
 
  const tinp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box' }
