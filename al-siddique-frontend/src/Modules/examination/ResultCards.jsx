@@ -365,7 +365,8 @@ export default function ResultCards() {
  api.get('/api/exams').then(r => {
  const list = r.data.data || []
  setExams(list)
- if (list.length) setSelectedExam(String(list[0].id))
+ const preferred = list.find(item => String(item.name || '').toLowerCase() === 'first term exam' && item.session === '2026-2027') || list[0]
+ if (preferred) setSelectedExam(String(preferred.id))
  }).catch(() => {})
  }, [])
 
@@ -550,8 +551,12 @@ export default function ResultCards() {
  <div style={{ color:C.silver, fontWeight:800 }}>{exam.type || 'Exam'}</div>
  </div>
  <div style={{ padding:10, borderRadius:12, background:'rgba(255,255,255,0.04)' }}>
- <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>MARKS</div>
- <div style={{ color:C.silver, fontWeight:800 }}>{exam.total_marks || 100}</div>
+ <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>MARKS SCHEME</div>
+ <div style={{ color:C.silver, fontWeight:800 }}>
+ {String(exam.name || '').toLowerCase() === 'first term exam' && exam.session === '2026-2027'
+   ? 'Per scheduled paper'
+   : (exam.total_marks ?? 'Not configured')}
+ </div>
  </div>
  </div>
  )}

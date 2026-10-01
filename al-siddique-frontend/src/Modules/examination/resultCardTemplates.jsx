@@ -254,7 +254,7 @@ export function ResultMarksTable({ data }) {
  {data.result.subjects.map(row => (
  <tr key={row.subjectName}>
  <td>{row.subjectName}</td>
- {activeTerms.map(([, field]) => <td key={field}>{row[field] | '-'}</td>)}
+ {activeTerms.map(([, field]) => <td key={field}>{row[field] ?? '-'}</td>)}
  <td>{row.totalMarks}</td>
  <td>{row.obtainedMarks}</td>
  <td>{row.percentage}%</td>
