@@ -5,7 +5,9 @@ param(
   [switch]$ConfirmProduction,
   [string]$HostSpec = $env:ASSPS_DEPLOY_HOST,
   [string]$SshKey = $env:ASSPS_DEPLOY_SSH_KEY,
-  [string]$KnownHostsFile = $env:ASSPS_DEPLOY_KNOWN_HOSTS
+  [string]$KnownHostsFile = $env:ASSPS_DEPLOY_KNOWN_HOSTS,
+  [string]$SshExe = 'ssh',
+  [string]$ScpExe = 'scp'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -61,14 +63,14 @@ function Remote($script) {
     Write-Host $script
     return
   }
-  & ssh -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $script
+  & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $script
   Assert-NativeSuccess "ssh $HostSpec"
 }
 
 function CopyToRemote($localPath, $remotePath) {
   Step "copy $localPath -> $(HostLabel):$remotePath"
   if (-not $Apply) { return }
-  & scp -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $localPath "${HostSpec}:$remotePath"
+  & $ScpExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $localPath "${HostSpec}:$remotePath"
   Assert-NativeSuccess "scp $localPath"
 }
 
