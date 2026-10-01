@@ -71,3 +71,15 @@ Marks are validated 0..subject total, tenant/class/section checked, and save is 
 - New browser test validates no implicit 100/33, no POST on missing scheme and correct input enablement after values are provided.
 - Clean baseline build of source-controlled r3 matches all compared production JS asset hashes exactly, including Paper Editor, Result Cards, Notifications and Diary. No broad or blind frontend replacement.
 - Full combined regression: 28/28 PASS; production safety check PASS; production build PASS.
+
+## r4 release checkpoint — tested, NOT YET deployed (01 Oct 2026)
+- Current live frontend remains r3 (release commit 594f695); do not claim r4 is live.
+- Guard implementation commit: 083aed524b5cf964fcd996825025b2fa9fd3c7dd.
+- Source-controlled r4 release metadata checkpoint: ac8cbe733cdd2e75365b6aa674b76997f327b307.
+- Local release archive: C:\Users\Imac\AppData\Local\Temp\assps-examination-r4-083aed5.tar
+- Archive SHA256: d7bdf2cfc629f1146b2e6e84c0e506a25e4fc42ae90def75f1c4ebc114f68323 (4,361,216 bytes).
+- Full production safety gate passed. Combined Examination + Paper Editor V13 regression 28/28 passed. Vite production build passed.
+- Clean r3 baseline rebuild reproduced the live ResultCards, PaperEditorRouter, NotificationModule, DailyDiaryFeature, MarksSheet, AppLayout, and index asset hashes byte-for-byte. Temporary baseline build folder cleaned and guard source restored.
+- Archive upload through Remote Desktop Commander's SCP was blocked by the command safety check; there was no production archive transfer, directory swap, or marks mutation.
+- Next action: use an approved transfer/deployment route; stage by COPYING current live directory and overlaying the reviewed r4 archive (retain old hashed assets), verify, back up, switch with rollback, and confirm r4 in live release-meta.json.
+- Then repeat authenticated Marks Entry on Exam 9 / One / Yellow and verify Total Marks / Passing Marks initially EMPTY with required-paper notice; verify blank save and Result Cards; do not use fake marks.
