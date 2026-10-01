@@ -210,6 +210,9 @@ function normalizeSeedOptions(options = [], isRtl = false) {
 
 function withAsspsQuestionBankSeed(store) {
  if (!isAsspsTenantUser()) return store
+ // The large question-bank merge must run only once for each seed release.
+ // Re-running it on every cross-tab storage event rewrites the entire store.
+ if (store.seedInfo?.asspsQuestionBank?.version === ASSPS_QBANK_SEED_VERSION) return store
  const seedRows = Array.isArray(asspsQuestionBankSeed) ? asspsQuestionBankSeed : []
  if (!seedRows.length) return store
 
@@ -428,10 +431,17 @@ function withExamNightRecoverySeed(store) {
  if (!recoveryPapers.length) return store
 
  const savedPapers = Array.isArray(store.savedPapers) ? [...store.savedPapers] : []
+ const alreadyCurrent = store.seedInfo?.examNightRecovery?.version === EXAM_NIGHT_RECOVERY_SEED_VERSION
+ const knownIds = new Set(savedPapers.map(paper => String(paper?.id || '')))
+ // A current seed with every expected record is immutable: no refresh, no write.
+ if (alreadyCurrent && recoveryPapers.every(paper => knownIds.has(String(paper.id)))) return store
  const recoveryById = new Map(recoveryPapers.map(paper => [String(paper.id), paper]))
  let refreshed = 0
  const refreshedSaved = savedPapers.map(existing => {
   const id = String(existing?.id || '')
+  // Version bumps never overwrite a principal's working copy, and an unchanged
+  // seed version cannot regenerate the same paper on every storage read.
+  if (alreadyCurrent || existing?.userEdited || existing?.paperSystem?.workingCopy) return existing
   if (!EXAM_NIGHT_FORCE_REFRESH_IDS.has(id)) return existing
   const next = recoveryById.get(id)
   if (!next) return existing
@@ -440,8 +450,6 @@ function withExamNightRecoverySeed(store) {
  })
  const existingIds = new Set(refreshedSaved.map(paper => String(paper?.id || '')))
  const missing = recoveryPapers.filter(paper => !existingIds.has(String(paper.id)))
- const alreadyCurrent = store.seedInfo?.examNightRecovery?.version === EXAM_NIGHT_RECOVERY_SEED_VERSION
-
  if (!missing.length && !refreshed && alreadyCurrent) return store
 
  return {
