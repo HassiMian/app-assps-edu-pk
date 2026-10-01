@@ -2,6 +2,8 @@
 import { TYPOGRAPHY_TOKENS } from '../tokens/typographyTokens.js'
 import { LAYOUT_TOKENS } from '../tokens/layoutTokens.js'
 import { getFinalExamScheduleForPaper } from '../../../../dateSheetFinalExam2026.js'
+import { getOverlay } from './EarlyYearsPresentationOverlay.js'
+import { resolveEarlyYearsMarks } from './earlyYearsMarks.js'
 
 /**
  * Creates presentation specification for an Early Years paper
@@ -12,9 +14,11 @@ export function buildWorksheetSpec(paper) {
 
   const isUrdu = paper.language === 'urdu' || paper.subject === 'urdu'
   const schedule = getFinalExamScheduleForPaper(paper.classStage, paper.subject)
-  const sourceHeaderTotal = paper.headerSource?.totalMarks ?? paper.totalMarksSource?.headerTotal ?? null
-  const listedQuestionTotal = (paper.questions || []).reduce((sum, q) => sum + (Number(q?.marks) || 0), 0)
-  const derivedTotal = sourceHeaderTotal == null && !paper.totalMarksSource?.hasConflict && listedQuestionTotal > 0
+  const marksState = resolveEarlyYearsMarks(paper)
+  const headerEdit = getOverlay(paper.id, '__header__')
+  const sourceHeaderTotal = marksState.headerTotal
+  const listedQuestionTotal = marksState.questionTotal
+  const derivedTotal = sourceHeaderTotal == null && !marksState.hasConflict && listedQuestionTotal > 0
     ? listedQuestionTotal
     : sourceHeaderTotal
 
@@ -53,12 +57,12 @@ export function buildWorksheetSpec(paper) {
     headerConfig: {
       schoolName: paper.headerSource?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
       campus: paper.headerSource?.campus || 'Sharif Chowk, Rayya Khas, Narowal',
-      classDisplayName: paper.classDisplayName || paper.classStage?.toUpperCase(),
-      subjectDisplayName: paper.subject?.toUpperCase(),
+      classDisplayName: headerEdit.classDisplayNameOverride ?? (paper.classDisplayName || paper.classStage?.toUpperCase()),
+      subjectDisplayName: headerEdit.subjectDisplayNameOverride ?? paper.subject?.toUpperCase(),
       totalMarks: derivedTotal,
       totalMarksAuthority: sourceHeaderTotal == null && derivedTotal != null ? 'derived-from-explicit-question-marks' : 'source-header',
-      examDate: paper.headerSource?.examDate || schedule?.date || '',
-      timeAllowed: paper.headerSource?.timeAllowed || schedule?.timeAllowed || '',
+      examDate: headerEdit.examDateOverride ?? (paper.headerSource?.examDate || schedule?.date || ''),
+      timeAllowed: headerEdit.timeAllowedOverride ?? (paper.headerSource?.timeAllowed || schedule?.timeAllowed || ''),
       showNameRollNo: true
     },
 

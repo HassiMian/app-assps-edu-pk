@@ -7,6 +7,7 @@ import {
 import EarlyYearsPaperContainer from './components/EarlyYearsPaperContainer.jsx'
 import EarlyYearsInspector from './inspector/EarlyYearsInspector.jsx'
 import { subscribePresentationOverlay } from './specs/EarlyYearsPresentationOverlay.js'
+import { resolveEarlyYearsMarks } from './specs/earlyYearsMarks.js'
 import {
   EARLY_YEARS_PREMIUM_TEMPLATES,
   EARLY_YEARS_TEMPLATE_OPTIONS,
@@ -105,16 +106,17 @@ export default function EarlyYearsWorksheetEditor({
     setSelectedPaperId(nextId)
   }, [selectedPaperId])
 
-  const hasConflict = currentPaper?.totalMarksSource?.hasConflict
+  const marksState = useMemo(() => resolveEarlyYearsMarks(currentPaper), [currentPaper, presentationRevision])
+  const hasConflict = marksState.hasConflict
   const hasAmbiguity = qaFindings.length > 0 && !hasConflict
 
-  const handlePrint = useCallback(async () => {
-    if (hasConflict) {
-      const headerTotal = currentPaper?.headerSource?.totalMarks ?? currentPaper?.totalMarksSource?.headerTotal ?? 'unknown'
-      const listedTotal = currentPaper?.totalMarksSource?.listedQuestionTotal ?? (currentPaper?.questions || []).reduce((sum, q) => sum + (Number(q?.marks) || 0), 0)
-      window.alert(`PRINT BLOCKED — marks conflict must be resolved first.\nHeader total: ${headerTotal}\nQuestion marks total: ${listedTotal}`)
+  const handlePrint = useCallback(async (allowDraft = false) => {
+    if (hasConflict && !allowDraft) {
+      setShowQAPanel(true)
+      window.alert(`MARKS NEED REVIEW — edit the paper before final printing.\nHeader total: ${marksState.headerTotal}\nQuestion marks total: ${marksState.questionTotal}\nUse Edit Paper / Marks to adjust either value, or choose Print Draft with Warning.`)
       return
     }
+    if (hasConflict && allowDraft && !window.confirm('Print this paper as an explicitly labelled DRAFT with unresolved marks? The discrepancy will be visible on the paper.')) return
     document.activeElement?.blur?.()
     try {
       if (document.fonts) {
@@ -134,7 +136,7 @@ export default function EarlyYearsWorksheetEditor({
       console.warn('Early Years print font preload warning:', error)
     }
     requestAnimationFrame(() => window.print())
-  }, [hasConflict, currentPaper])
+  }, [hasConflict, currentPaper, marksState])
 
   return (
     <div
@@ -398,6 +400,7 @@ export default function EarlyYearsWorksheetEditor({
 
           <button
             type="button"
+            aria-label="Edit Paper / Marks"
             onClick={() => setShowQAPanel(!showQAPanel)}
             style={{
               background: showQAPanel ? '#3b82f6' : '#334155',
@@ -410,12 +413,12 @@ export default function EarlyYearsWorksheetEditor({
               marginLeft: '4px'
             }}
           >
-            QA Panel {qaFindings.length > 0 ? `(${qaFindings.length})` : ''}
+            ✎ Edit Paper / Marks · QA Panel {qaFindings.length > 0 ? `(${qaFindings.length} notices)` : ''}
           </button>
 
           <button
             type="button"
-            onClick={handlePrint}
+            onClick={() => handlePrint(false)}
             style={{
               background: '#2563eb',
               color: '#fff',
@@ -430,6 +433,7 @@ export default function EarlyYearsWorksheetEditor({
           >
             🖨️ Print Worksheet
           </button>
+          {hasConflict && <button type="button" aria-label="Print Draft with Warning" onClick={() => handlePrint(true)} style={{background:'#92400e',color:'#fff',border:'1px solid #fbbf24',borderRadius:6,padding:'6px 11px',cursor:'pointer',fontSize:11,fontWeight:800}}>Print Draft with Warning</button>}
         </div>
       </header>
 

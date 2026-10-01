@@ -60,6 +60,11 @@ export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
   )
   if (isEarlyYears) return 'early_years'
 
+  // Recovery source has V13-shaped sections but NO canonical normalization manifest.
+  // Sending it to word_editor opens a preview-only legacy compatibility component.
+  // The editable Paper Workspace handles its complete sections and marks instead.
+  if (paper.recoverySourceManaged || id.startsWith('recovery-first-term-')) return 'build'
+
   if (paper.structureMode === 'board_pattern') return 'board_pattern'
 
   const canonicalSchemaVersion = Number(paper.schemaVersion || 0)

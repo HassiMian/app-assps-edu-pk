@@ -1,5 +1,6 @@
 import React from 'react'
 import { buildWorksheetSpec } from '../specs/EarlyYearsWorksheetSpec.js'
+import { resolveEarlyYearsMarks } from '../specs/earlyYearsMarks.js'
 import EarlyYearsHeader from './EarlyYearsHeader.jsx'
 import EarlyYearsQuestionBlock from './EarlyYearsQuestionBlock.jsx'
 import UrduFontNotice from './UrduFontNotice.jsx'
@@ -44,6 +45,7 @@ export default function EarlyYearsPaperContainer({
   }
 
   const isUrdu = activeSpec.language === 'urdu' || activeSpec.subject === 'urdu'
+  const marksState = paper ? resolveEarlyYearsMarks(paper) : null
   const theme = templatePreset || {}
   const accent = theme.accent || '#123b67'
   const accent2 = theme.accent2 || theme.border || '#38bdf8'
@@ -119,6 +121,9 @@ export default function EarlyYearsPaperContainer({
             isUrdu={isUrdu}
             templatePreset={theme}
           />
+          {marksState?.hasConflict && <div data-early-years-draft-warning style={{margin:'0 0 8px',padding:'6px 9px',background:'#fff1d6',border:'1.5px solid #b45309',borderRadius:5,color:'#78350f',fontFamily:'Arial,sans-serif',fontSize:11,fontWeight:800,direction:'ltr',textAlign:'center'}}>
+            DRAFT — MARKS REVIEW PENDING: Header {marksState.headerTotal} / Questions {marksState.questionTotal}
+          </div>}
 
           <div className="early-years-questions-container">
             {activeSpec.questionPresentations.map((question) => (

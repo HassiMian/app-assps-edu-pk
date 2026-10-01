@@ -1,4 +1,5 @@
 // EarlyYearsPresentationOverlay.js
+import { getTenantScope, getTenantStorageItem, setTenantStorageItem } from '../../../../../services/tenantStorage.js'
 // Decoupled presentation overlay — keyed by paperId+questionId
 // NEVER mutates academic source JSON.
 // Controls: sketchAsset, sketchSize, lineCount, lineGapMm, writingMode, layout
@@ -6,6 +7,35 @@
 const _store = new Map()
 const _listeners = new Set()
 let _revision = 0
+const WORKING_COPY_KEY = 'assps-early-years-editor-working-copy-v1'
+let _loadedTenant = null
+
+function ensureHydrated() {
+  const scope = getTenantScope()
+  if (scope === _loadedTenant) return
+  _loadedTenant = scope
+  _store.clear()
+  try {
+    const raw = getTenantStorageItem(WORKING_COPY_KEY)
+    if (!raw) return
+    const saved = JSON.parse(raw)
+    if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return
+    for (const [key, value] of Object.entries(saved)) {
+      if (key.includes('::') && value && typeof value === 'object' && !Array.isArray(value)) _store.set(key, value)
+    }
+  } catch (error) {
+    console.warn('Early Years working copy could not be read; academic source remains intact', error)
+  }
+}
+
+function persistWorkingCopy() {
+  try {
+    // Content and marks are a tenant-scoped working overlay, never a mutation of teacher JSON.
+    setTenantStorageItem(WORKING_COPY_KEY, JSON.stringify(Object.fromEntries(_store)))
+  } catch (error) {
+    console.error('Could not save Early Years working copy', error)
+  }
+}
 
 function overlayKey(paperId, questionId) {
   return `${paperId}::${questionId}`
@@ -43,6 +73,7 @@ export function subscribePresentationOverlay(listener) {
  * Returns the overlay for a specific question (or empty defaults).
  */
 export function getOverlay(paperId, questionId) {
+  ensureHydrated()
   const key = overlayKey(paperId, questionId)
   return _store.get(key) || {}
 }
@@ -51,9 +82,11 @@ export function getOverlay(paperId, questionId) {
  * Updates one or more overlay fields for a question without mutating source.
  */
 export function setOverlay(paperId, questionId, fields) {
+  ensureHydrated()
   const key = overlayKey(paperId, questionId)
   const existing = _store.get(key) || {}
   _store.set(key, { ...existing, ...fields })
+  persistWorkingCopy()
   notifyListeners()
 }
 

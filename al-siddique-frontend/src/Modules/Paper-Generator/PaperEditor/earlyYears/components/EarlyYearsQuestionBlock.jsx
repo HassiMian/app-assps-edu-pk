@@ -37,11 +37,17 @@ export default function EarlyYearsQuestionBlock({
     instruction = '',
     marks = null,
     presentationType = '',
-    content = {}
+    content: sourceContent = {}
   } = question
 
   const qId = question.questionId || question.id
   const overlay = (paperId && qId) ? getOverlay(paperId, qId) : {}
+  const editedLabel = overlay.labelOverride !== undefined ? overlay.labelOverride : label
+  const editedMarks = overlay.marksOverride !== undefined ? overlay.marksOverride : marks
+  const editedInstruction = overlay.instructionOverride !== undefined ? overlay.instructionOverride : instruction
+  const content = overlay.contentOverride !== undefined ? overlay.contentOverride : sourceContent
+  const editedContent = content
+  const editedPresentationType = overlay.presentationTypeOverride || presentationType
 
   // Fallback resolution: overlay value -> source presentation value -> design token default
   const resolvedSketchSize = overlay.sketchSize || overlay.sketchSizeMm || content.sketchSize || undefined
@@ -73,7 +79,7 @@ export default function EarlyYearsQuestionBlock({
   }[questionStyle]
 
   const renderVisualBody = () => {
-    switch (presentationType) {
+    switch (editedPresentationType) {
       case 'TraceGlyphGrid':
         return (
           <TraceGlyphGrid
@@ -196,12 +202,13 @@ export default function EarlyYearsQuestionBlock({
             isUrdu={isUrdu}
           />
         )
+      case 'UrduAlphabetWritingArea':
       case 'UrduHandwritingResponse':
         return (
           <UrduHandwritingResponse
             lineCount={resolvedLineCount}
             lineGapMm={resolvedLineGapMm}
-            placeholders={content.placeholders}
+            placeholders={editedContent.placeholders}
           />
         )
       case 'CountingWritingGrid':
@@ -245,10 +252,16 @@ export default function EarlyYearsQuestionBlock({
         )
       case 'DrawingResponseArea':
         return <DrawingResponseArea height={content.height} hint={content.hint} />
+      case 'StandardTextResponse':
+        return <div data-early-years-standard-response style={{whiteSpace:'pre-wrap',color:'#111827',lineHeight:isUrdu?1.9:1.5}}>
+          {typeof content === 'string' ? content : (typeof content?.text === 'string' ? content.text : JSON.stringify(content,null,2))}
+          <div style={{marginTop:8}}>{isUrdu ? <UrduHandwritingResponse lineCount={resolvedLineCount} /> : <AlphabetWritingArea lineCount={resolvedLineCount} />}</div>
+        </div>
       default:
         return (
-          <div style={{ color: '#888', fontStyle: 'italic', padding: '8px' }}>
-            Unsupported presentation: {presentationType}
+          <div data-early-years-safe-presentation style={{ color:'#111827', padding:8, whiteSpace:'pre-wrap', border:'1px solid #cbd5e1', borderRadius:5 }}>
+            {typeof editedContent === 'string' ? editedContent : JSON.stringify(editedContent, null, 2)}
+            {isUrdu ? <UrduHandwritingResponse lineCount={resolvedLineCount} /> : <AlphabetWritingArea lineCount={resolvedLineCount} />}
           </div>
         )
     }
@@ -305,7 +318,7 @@ export default function EarlyYearsQuestionBlock({
               flexShrink: 0
             }}
           >
-            {label}.
+            {editedLabel}.
           </span>
 
           {/* Teacher Instruction Text */}
@@ -319,12 +332,12 @@ export default function EarlyYearsQuestionBlock({
               color: '#111'
             }}
           >
-            {instruction}
+            {editedInstruction}
           </span>
         </div>
 
         {/* Section Marks */}
-        {marks !== null && marks !== undefined && (
+        {editedMarks !== null && editedMarks !== undefined && (
           <span
             className="early-years-question-marks"
             style={{
@@ -341,7 +354,7 @@ export default function EarlyYearsQuestionBlock({
               marginRight: isUrdu ? '8px' : 0
             }}
           >
-            ({marks})
+            ({editedMarks})
           </span>
         )}
       </div>

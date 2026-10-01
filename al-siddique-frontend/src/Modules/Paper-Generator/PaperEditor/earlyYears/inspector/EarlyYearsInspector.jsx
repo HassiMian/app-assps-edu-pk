@@ -1,9 +1,10 @@
 // EarlyYearsInspector.jsx — Inspector sidebar with FUNCTIONAL controls wired to EarlyYearsPresentationOverlay
 // Controls update presentation overlay WITHOUT mutating academic source JSON.
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import { getAllSketchAssets } from '../assets/SketchAssetRegistry.js'
 import { processSketchFileUpload } from '../upload/uploadSketchValidator.js'
 import RenderSketch from '../assets/RenderSketch.jsx'
+import { resolveEarlyYearsMarks } from '../specs/earlyYearsMarks.js'
 import {
   getOverlay,
   setOverlay,
@@ -95,9 +96,33 @@ export default function EarlyYearsInspector({
   const [lineCount, setLineCount] = useState(3)
   const [lineGapMm, setLineGapMm] = useState(11)
   const [activeLayout, setActiveLayout] = useState('stacked')
+  const [contentDraft, setContentDraft] = useState('')
+  const [contentError, setContentError] = useState('')
 
   const questions = currentPaper?.questions || []
   const selectedQuestion = questions[selectedQuestionIdx] || questions[0]
+  const marksState = resolveEarlyYearsMarks(currentPaper)
+  const headerOverlay = currentPaper?.id ? getOverlay(currentPaper.id, '__header__') : {}
+  const activeQuestionOverlay = (currentPaper?.id && selectedQuestion?.id) ? getOverlay(currentPaper.id, selectedQuestion.id) : {}
+
+  useEffect(() => {
+    if (!selectedQuestion || !currentPaper?.id) return
+    const saved = getOverlay(currentPaper.id, selectedQuestion.id)
+    setContentDraft(JSON.stringify(saved.contentOverride ?? selectedQuestion.content ?? {}, null, 2))
+    setContentError('')
+  }, [currentPaper?.id, selectedQuestion?.id])
+
+  function saveEditableContent() {
+    if (!currentPaper?.id || !selectedQuestion?.id) return
+    try {
+      const value = JSON.parse(contentDraft)
+      if (value === null || typeof value !== 'object' || Array.isArray(value)) throw new Error('Enter a valid JSON content object.')
+      pushOverlay({ contentOverride:value })
+      setContentError('')
+    } catch (error) {
+      setContentError(error.message)
+    }
+  }
 
   // All registered sketch assets (single registration query)
   const allAssets = useMemo(() => {
@@ -213,7 +238,8 @@ export default function EarlyYearsInspector({
   // Layout
   const handleLayoutClick = (mode) => {
     if (!selectedQuestion) return
-    if (!isLayoutSupported(selectedQuestion.presentationType, mode)) return
+    // Layout is a user-controlled presentation preference. The outer response
+    // container always supports these modes; child widgets keep their own safety.
     setActiveLayout(mode)
     pushOverlay({ layout: mode })
   }
@@ -260,6 +286,25 @@ export default function EarlyYearsInspector({
       {activeTab === 'controls' && (
         <div style={{ flex: 1, overflowY: 'auto', padding: '14px' }}>
 
+          {/* Optional header working-copy overrides; school identity stays protected. */}
+          {currentPaper && <div data-early-years-marks-editor style={{padding:10,border:'1px solid #64748b',borderRadius:7,background:'#0f172a',marginBottom:12}}>
+            <b style={{color:'#38bdf8'}}>EDIT PAPER / RESOLVE MARKS</b>
+            <div style={{fontSize:10,color:'#cbd5e1',margin:'5px 0'}}>Header {marksState.headerTotal ?? 'not set'} · Questions {marksState.questionTotal} · Difference {marksState.difference ?? '—'}</div>
+            <label style={{display:'block',marginTop:5}}>Header Total Marks
+              <input aria-label="Early Years Header Total Marks" type="number" min="0" value={marksState.headerTotal ?? ''} onChange={e=>setOverlay(currentPaper.id,'__header__',{totalMarksOverride:e.target.value===''?null:Math.max(0,Number(e.target.value)||0)})} style={{width:'100%',boxSizing:'border-box',padding:6,marginTop:3,background:'#17243b',color:'#fff',border:'1px solid #64748b'}} />
+            </label>
+            <button type="button" onClick={()=>setOverlay(currentPaper.id,'__header__',{totalMarksOverride:marksState.questionTotal})} style={{marginTop:6,padding:'6px 8px',border:0,borderRadius:5,background:'#2563eb',color:'#fff',cursor:'pointer'}}>Use Question Sum ({marksState.questionTotal})</button>
+            <button type="button" onClick={()=>setOverlay(currentPaper.id,'__header__',{totalMarksOverride:undefined})} style={{marginLeft:5,marginTop:6,padding:'6px 8px',border:'1px solid #64748b',borderRadius:5,background:'transparent',color:'#fff',cursor:'pointer'}}>Restore Source Total</button>
+            {[
+              ['Class Label','classDisplayNameOverride',currentPaper.classDisplayName || currentPaper.classStage],
+              ['Subject Label','subjectDisplayNameOverride',currentPaper.subject?.toUpperCase()],
+              ['Exam Date','examDateOverride',currentPaper.headerSource?.examDate || ''],
+              ['Time Allowed','timeAllowedOverride',currentPaper.headerSource?.timeAllowed || ''],
+            ].map(([label,key,fallback])=><label key={key} style={{display:'block',marginTop:7}}>{label}<input aria-label={label} type="text" value={headerOverlay[key] ?? fallback ?? ''} onChange={e=>setOverlay(currentPaper.id,'__header__',{[key]:e.target.value})} style={{width:'100%',boxSizing:'border-box',marginTop:3,padding:5,background:'#17243b',color:'#fff',border:'1px solid #475569'}} /></label>)}
+            {marksState.hasConflict && <div role="alert" style={{marginTop:8,color:'#fbbf24'}}>Marks mismatch: edit each question below, change Header Total, or explicitly use Print Draft with Warning. No marks are altered automatically.</div>}
+            <div style={{fontSize:10,color:'#94a3b8',marginTop:7}}>Source records stay immutable; revisions persist in your school's working overlay.</div>
+          </div>}
+
           {/* Question Selector */}
           <div style={{ marginBottom: '14px' }}>
             <label style={{ display: 'block', color: '#94a3b8', marginBottom: '4px', fontWeight: 'bold' }}>
@@ -295,11 +340,35 @@ export default function EarlyYearsInspector({
           {selectedQuestion && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
 
-              {/* Visual Type (read-only) */}
-              <div>
-                <label style={{ display: 'block', color: '#94a3b8', marginBottom: '4px', fontWeight: 'bold' }}>Visual Type:</label>
-                <input type="text" readOnly value={selectedQuestion.presentationType || 'Standard'}
-                  style={{ width: '100%', padding: '6px 8px', borderRadius: '6px', background: '#0f172a', color: '#38bdf8', border: '1px solid #475569', fontSize: '12px', boxSizing: 'border-box' }} />
+              <div data-early-years-question-editor style={{padding:9,border:'1px solid #475569',borderRadius:7,background:'#111e32'}}>
+                <b style={{fontSize:12,color:'#38bdf8'}}>EDIT SELECTED QUESTION</b>
+                <label style={{display:'block',marginTop:8}}>Question Label
+                  <input aria-label="Early Years Question Label" type="text" value={activeQuestionOverlay.labelOverride ?? selectedQuestion.label ?? ''} onChange={e=>pushOverlay({labelOverride:e.target.value})} style={{width:'100%',boxSizing:'border-box',marginTop:3,padding:6,color:'#fff',background:'#0f172a',border:'1px solid #64748b'}} />
+                </label>
+                <label style={{display:'block',marginTop:8}}>Question Marks
+                  <input aria-label="Early Years Question Marks" type="number" min="0" value={activeQuestionOverlay.marksOverride ?? selectedQuestion.marks ?? ''} onChange={e=>pushOverlay({marksOverride:e.target.value===''?null:Math.max(0,Number(e.target.value)||0)})} style={{width:'100%',boxSizing:'border-box',marginTop:3,padding:6,color:'#fff',background:'#0f172a',border:'1px solid #64748b'}} />
+                </label>
+                <label style={{display:'block',marginTop:8}}>Instruction / Question Text
+                  <textarea aria-label="Early Years Question Instruction" rows={3} value={activeQuestionOverlay.instructionOverride ?? selectedQuestion.instruction ?? ''} onChange={e=>pushOverlay({instructionOverride:e.target.value})} style={{width:'100%',boxSizing:'border-box',marginTop:3,padding:6,color:'#fff',background:'#0f172a',border:'1px solid #64748b',direction:currentPaper?.subject==='urdu'?'rtl':'ltr',resize:'vertical'}} />
+                </label>
+                <label style={{display:'block',marginTop:8}}>Presentation (optional)
+                  <select aria-label="Early Years Question Presentation" value={activeQuestionOverlay.presentationTypeOverride ?? ''} onChange={e=>pushOverlay({presentationTypeOverride:e.target.value || undefined})} style={{width:'100%',boxSizing:'border-box',marginTop:3,padding:6,color:'#fff',background:'#0f172a',border:'1px solid #64748b'}}>
+                    <option value="">Original: {selectedQuestion.presentationType}</option>
+                    <option value="StandardTextResponse">Text / Editable Content</option>
+                    <option value="UrduHandwritingResponse">Urdu Writing Lines</option>
+                    <option value="UrduAlphabetWritingArea">Urdu Alphabet Writing</option>
+                    <option value="AlphabetWritingArea">English Writing Lines</option>
+                    <option value="DrawingResponseArea">Drawing Response Area</option>
+                  </select>
+                </label>
+                <label style={{display:'block',marginTop:8}}>Content Structure (optional JSON)
+                  <textarea aria-label="Early Years Question Content" rows={5} value={contentDraft} onChange={e=>setContentDraft(e.target.value)} style={{width:'100%',boxSizing:'border-box',marginTop:3,padding:6,color:'#fff',background:'#0f172a',border:'1px solid #64748b',resize:'vertical',fontFamily:'monospace',fontSize:10}} />
+                </label>
+                {contentError && <div role="alert" style={{color:'#fca5a5',marginTop:5}}>{contentError}</div>}
+                <div style={{display:'flex',gap:6,marginTop:6}}>
+                  <button type="button" onClick={saveEditableContent} style={{padding:'6px 8px',background:'#2563eb',color:'#fff',border:0,borderRadius:5,cursor:'pointer'}}>Apply Content</button>
+                  <button type="button" onClick={()=>pushOverlay({marksOverride:undefined,instructionOverride:undefined,labelOverride:undefined,presentationTypeOverride:undefined,contentOverride:undefined})} style={{padding:'6px 8px',background:'#334155',color:'#fff',border:0,borderRadius:5,cursor:'pointer'}}>Restore Source Question</button>
+                </div>
               </div>
 
               {/* Visual Slot Selector (if multiple slots exist) */}
@@ -466,7 +535,7 @@ export default function EarlyYearsInspector({
                 <label style={{ display: 'block', color: '#94a3b8', marginBottom: '4px', fontWeight: 'bold' }}>Question Layout:</label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
                   {Object.keys(LAYOUT_SUPPORT).map((mode) => {
-                    const supported = isLayoutSupported(selectedQuestion.presentationType, mode)
+                    const supported = true
                     const isActive = activeLayout === mode
                     return (
                       <button

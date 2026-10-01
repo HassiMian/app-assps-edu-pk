@@ -264,10 +264,13 @@ test('EY-OVERLAY-04: Question layout: stacked -> visual-left modifies DOM class/
   await qSelect.selectOption('0')
   await page.waitForTimeout(300)
 
-  // Verify unsupported layout button (visual-left for TraceGlyphGrid) is disabled
+  // User-controlled presentation modes remain optional, including TraceGlyphGrid.
+  // The parent layout changes while the original child exercise remains present.
   const visualLeftBtnQ1 = page.locator('#layout-btn-visual-left')
-  const isDisabled = await visualLeftBtnQ1.isDisabled()
-  assert.equal(isDisabled, true, 'visual-left layout button must be disabled for TraceGlyphGrid')
+  assert.equal(await visualLeftBtnQ1.isEnabled(), true)
+  await visualLeftBtnQ1.click()
+  assert.equal(await page.locator('.early-years-question-block').first().locator('.early-years-question-body').getAttribute('data-layout'), 'visual-left')
+  assert.equal(await page.locator('.early-years-trace-glyph-grid').count() > 0, true)
 })
 
 // ─────────────────────────────────────────────────────────────
