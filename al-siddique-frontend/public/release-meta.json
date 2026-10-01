@@ -1,9 +1,10 @@
 {
-  "version": "examination-first-term-workflow-v1-r4",
+  "version": "examination-first-term-workflow-v1-r5",
   "component": "frontend",
-  "commit": "083aed524b5cf964fcd996825025b2fa9fd3c7dd",
-  "shortCommit": "083aed5",
+  "commit": "2e144ab9e6d4096fbd6202b88e291da18367939a",
+  "shortCommit": "2e144ab",
   "previousLiveCommit": "594f6951d56d123d5db6ae05035b4e8e1d476482",
-  "backendWorkflowCommit": "ab28a5c8d02b0339eee166a0af1facab1db7cd68",
-  "releaseNote": "Require explicit paper-specific total and passing marks before first First Term marks save"
+  "backendWorkflowCommit": "2e144ab9e6d4096fbd6202b88e291da18367939a",
+  "releaseNote": "Paper-specific selectable passing percentage (33% default), grade alignment and incomplete First Term card protection",
+  "migration": "migrate_exam_passing_percentage_v1.js"
 }
