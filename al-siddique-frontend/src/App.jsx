@@ -52,7 +52,6 @@ const CreateChallan = lazyRetry(() => import('./Modules/fees/CreateChallan'), 'C
 const ViewChallans = lazyRetry(() => import('./Modules/fees/ViewChallans'), 'ViewChallans')
 const FeeReporting = lazyRetry(() => import('./Modules/fees/FeeReporting'), 'FeeReporting')
 const FeeSettings = lazyRetry(() => import('./Modules/fees/FeeSettings'), 'FeeSettings')
-const ExaminationModule = lazyRetry(() => import('./Modules/examination/ExaminationModule'), 'ExaminationModule')
 const ManageExams = lazyRetry(() => import('./Modules/examination/ManageExams'), 'ManageExams')
 const MarksSheet = lazyRetry(() => import('./Modules/examination/MarksSheet'), 'MarksSheet')
 const ResultCards = lazyRetry(() => import('./Modules/examination/ResultCards'), 'ResultCards')
@@ -348,7 +347,7 @@ function AppRoutes() {
  <Route path="/fees/settings" element={<W roles={ROLES.adminOffice} permKey="fees_settings"><FeeSettings /></W>} />
  <Route path="/fees/proofs" element={<W roles={ROLES.adminOffice} permKey="fees_view"><FeeModule /></W>} />
 
- <Route path="/examination" element={<W roles={ROLES.academicStaff} permKey="exams_manage"><ExaminationModule /></W>} />
+ <Route path="/examination" element={<W roles={ROLES.academicStaff} permKey="exams_manage"><ManageExams /></W>} />
  <Route path="/examination/manage" element={<W roles={ROLES.academicStaff} permKey="exams_manage"><ManageExams /></W>} />
  <Route path="/examination/marks" element={<W roles={ROLES.academicStaff} permKey="exams_marks"><MarksSheet /></W>} />
  <Route path="/examination/results" element={<W roles={ROLES.academicStaff} permKey="exams_results"><ResultCards /></W>} />

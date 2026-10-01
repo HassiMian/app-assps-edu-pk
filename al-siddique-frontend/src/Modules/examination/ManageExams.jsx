@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Plus, RefreshCw } from 'lucide-react'
+import { CheckCircle2, Database, Plus, RefreshCw } from 'lucide-react'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { useAcademicStore } from '../../services/useAcademicStore'
@@ -35,13 +35,30 @@ export default function ManageExams() {
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
  const [form, setForm] = useState(emptyForm)
+ const [syncingOfficial, setSyncingOfficial] = useState(false)
+ const [setupSummary, setSetupSummary] = useState({})
 
  const load = async () => {
  setLoading(true)
  setMessage('')
  try {
  const res = await api.get('/api/exams')
- setExams((res.data.data || []).map(normalizeExam))
+ const list = (res.data.data || []).map(normalizeExam)
+ setExams(list)
+ const summaries = {}
+ await Promise.all(list.map(async exam => {
+   try {
+     const setup = await api.get(`/api/exams/${exam.id}/setup`)
+     const data = setup.data?.data || {}
+     summaries[exam.id] = {
+       enrollments: (data.enrollments || []).length,
+       subjects: (data.subjects || []).length,
+     }
+   } catch {
+     summaries[exam.id] = { enrollments:0, subjects:0 }
+   }
+ }))
+ setSetupSummary(summaries)
  } catch {
  setExams([])
  setMessage('Refresh failed. Please check the backend connection.')
@@ -87,6 +104,21 @@ export default function ManageExams() {
  }
  }
 
+ const syncOfficialFirstTerm = async () => {
+ setSyncingOfficial(true)
+ setMessage('')
+ try {
+   const response = await api.post('/api/exams/official-first-term/sync')
+   const data = response.data?.data || {}
+   setMessage(`First Term Exam wired successfully: ${data.officialPaperCount ?? 'official'} date-sheet papers, ${data.enrolledClassSections || 0} active class/section(s).`)
+   await load()
+ } catch (err) {
+   setMessage(err.response?.data?.message || 'Failed to synchronize official First Term Exam.')
+ } finally {
+   setSyncingOfficial(false)
+ }
+ }
+
  const currentSessionCount = exams.filter(exam => (exam.session || SESSIONS[0]) === form.session).length
 
  return (
@@ -97,10 +129,25 @@ export default function ManageExams() {
  <h1 style={sectionHeader}>Examination & Assessment</h1>
  <p style={{ color: C.muted, marginTop: 8 }}>Create exams by session, class, and type.</p>
  </div>
+ <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+ <button type="button" style={{ ...btnPrimary, display:'inline-flex', alignItems:'center', gap:8 }} onClick={syncOfficialFirstTerm} disabled={syncingOfficial}>
+ <Database size={16} /> {syncingOfficial ? 'Synchronizing...' : 'Sync Official First Term 2026-27'}
+ </button>
  <button type="button" style={btnSecondary} onClick={load} disabled={loading}>
  <RefreshCw size={16} style={{ marginRight: 8, verticalAlign: 'middle' }} />
  {loading ? 'Refreshing...' : 'Refresh Data'}
  </button>
+ </div>
+ </div>
+
+ <div className="super-module-card" style={{ ...card, borderColor:'rgba(200,153,26,0.28)', background:'rgba(200,153,26,0.06)' }}>
+ <div style={{ display:'flex', gap:10, alignItems:'flex-start' }}>
+ <CheckCircle2 size={19} color={C.gold} style={{ marginTop:2, flexShrink:0 }} />
+ <div>
+ <div style={{ color:C.gold, fontWeight:900 }}>Canonical First Term workflow</div>
+ <div style={{ color:C.muted, fontSize:12, marginTop:4, lineHeight:1.6 }}>The sync action preserves the existing First Term exam, enrolls only active real class/sections, and attaches exactly the official date-sheet subjects. Marks Entry and Result Cards then use the same exam ID.</div>
+ </div>
+ </div>
  </div>
 
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 20 }}>
@@ -172,7 +219,7 @@ export default function ManageExams() {
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
  <tr style={{ borderBottom: `1px solid ${C.border}` }}>
- {['Exam', 'Type', 'Class', 'Session'].map(label => (
+ {['Exam', 'Type', 'Class Scope', 'Session', 'Wiring'].map(label => (
  <th key={label} style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12, textTransform: 'uppercase', letterSpacing: 0.06 }}>{label}</th>
  ))}
  </tr>
@@ -184,10 +231,15 @@ export default function ManageExams() {
  <td style={{ padding: '14px 16px', color: C.silver }}>{exam.type || 'Term Exam'}</td>
  <td style={{ padding: '14px 16px' }}>{classLabel(exam.class || 'All Classes')}</td>
  <td style={{ padding: '14px 16px' }}>{exam.session || SESSIONS[0]}</td>
+ <td style={{ padding:'14px 16px' }}>
+   {setupSummary[exam.id]?.enrollments ? (
+     <div><strong style={{ color:C.green }}>{setupSummary[exam.id].enrollments} class/section(s)</strong><div style={{ color:C.muted, fontSize:10, marginTop:2 }}>{setupSummary[exam.id].subjects} scheduled subject rows</div></div>
+   ) : <span style={{ color:C.muted }}>Legacy / not wired</span>}
+ </td>
  </tr>
  ))}
  {exams.length === 0 && (
- <tr><td colSpan={4} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No exams yet.</td></tr>
+ <tr><td colSpan={5} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No exams yet.</td></tr>
  )}
  </tbody>
  </table>

@@ -1,370 +1,446 @@
-import { useState, useEffect } from 'react'
-import { RefreshCw, Save, Search } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { CalendarDays, CheckCircle2, RefreshCw, Save, Search } from 'lucide-react'
 import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
-import { useAcademicStore } from '../../services/useAcademicStore'
 
-const FALLBACK_EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
+const CLASS_ORDER = ['Starter','Mover','Flyer','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Hifaz Class']
 
-function classLabel(value) {
- return value ? `Class ${value}` : 'Select class'
+function examTypeLabel(value) {
+  if (value === 'TE') return 'Term Exam'
+  if (value === 'AS') return 'Assessment'
+  if (value === 'monthly') return 'Monthly Test'
+  if (value === 'weekly') return 'Quiz / Weekly'
+  return value || 'Exam'
 }
 
-function normalizeClass(value) {
- return String(value || '').replace(/^Class\s+/i, '')
+function sortClasses(items = []) {
+  return [...items].sort((a, b) => {
+    const ai = CLASS_ORDER.indexOf(a)
+    const bi = CLASS_ORDER.indexOf(b)
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi) || a.localeCompare(b)
+  })
 }
 
-function typeLabel(value) {
- if (value === 'TE') return 'Term Exam'
- if (value === 'AS') return 'Assessment'
- return value || 'Term Exam'
-}
-
-function normalizeExam(exam) {
- return {
- ...exam,
- type: typeLabel(exam.type),
- class: exam.class === 'All Classes' ? exam.class : normalizeClass(exam.class),
- session: exam.session || '2026-2027',
- }
+function formatDate(value) {
+  if (!value) return ''
+  const date = new Date(`${String(value).slice(0, 10)}T00:00:00`)
+  if (Number.isNaN(date.getTime())) return String(value)
+  return date.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
 }
 
 export default function MarksSheet() {
- const { classNames, subjectsForClass } = useAcademicStore()
- const { paperSettings } = usePaperStore()
- const [exams, setExams] = useState([])
- const [students, setStudents] = useState([])
- const [selectedExamType, setSelectedExamType] = useState('')
- const [selectedClass, setSelectedClass] = useState('')
- const [selectedSubject, setSelectedSubject] = useState('')
- const [selectedExamId, setSelectedExamId] = useState('')
- const [totalMarks, setTotalMarks] = useState(100)
- const [passMarks, setPassMarks] = useState(33)
- const [marks, setMarks] = useState({})
- const [saving, setSaving] = useState(false)
- const [loadingData, setLoadingData] = useState(false)
- const [refreshing, setRefreshing] = useState(false)
- const [message, setMessage] = useState('')
+  const { paperSettings } = usePaperStore()
+  const [exams, setExams] = useState([])
+  const [selectedExamId, setSelectedExamId] = useState('')
+  const [setup, setSetup] = useState({ enrollments: [], subjects: [], exam: null })
+  const [selectedClass, setSelectedClass] = useState('')
+  const [selectedSection, setSelectedSection] = useState('')
+  const [selectedSubjectId, setSelectedSubjectId] = useState('')
+  const [students, setStudents] = useState([])
+  const [marks, setMarks] = useState({})
+  const [totalMarks, setTotalMarks] = useState(100)
+  const [passMarks, setPassMarks] = useState(33)
+  const [loadingSetup, setLoadingSetup] = useState(false)
+  const [loadingStudents, setLoadingStudents] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+  const [message, setMessage] = useState('')
+  const [messageKind, setMessageKind] = useState('info')
 
- const loadExams = async () => {
- setRefreshing(true)
- try {
- const res = await api.get('/api/exams')
- const list = (res.data.data || []).map(normalizeExam)
- setExams(list)
- if (!selectedExamType && list.length) setSelectedExamType(list[0].type || FALLBACK_EXAM_TYPES[0])
- } catch {
- setExams([])
- setMessage('Refresh failed. Please check the backend connection.')
- } finally {
- setRefreshing(false)
- }
- }
+  const selectedExam = exams.find(exam => String(exam.id) === String(selectedExamId)) || setup.exam || null
 
- useEffect(() => {
- // eslint-disable-next-line react-hooks/set-state-in-effect
- loadExams()
- // eslint-disable-next-line react-hooks/exhaustive-deps
- }, [])
+  const classes = useMemo(() => sortClasses([
+    ...new Set((setup.enrollments || []).map(row => String(row.class_name || '').trim()).filter(Boolean))
+  ]), [setup.enrollments])
 
- const examTypes = Array.from(new Set([...FALLBACK_EXAM_TYPES, ...exams.map(exam => exam.type).filter(Boolean)]))
- const matchingExams = exams.filter(exam => {
- const typeOk = !selectedExamType || (exam.type || FALLBACK_EXAM_TYPES[0]) === selectedExamType
- const classOk = !selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'
- return typeOk && classOk
- })
- const selectedExam = exams.find(exam => String(exam.id) === String(selectedExamId)) || matchingExams[0]
+  const sections = useMemo(() => [
+    ...new Set((setup.enrollments || [])
+      .filter(row => row.class_name === selectedClass)
+      .map(row => String(row.section || '').trim()))
+  ].sort((a,b)=>a.localeCompare(b)), [setup.enrollments, selectedClass])
 
- const syncExamDefaults = (nextExam) => {
- setStudents([])
- setMarks({})
- setSelectedExamId(nextExam ? String(nextExam.id) : '')
- if (nextExam) {
- setTotalMarks(Number(nextExam.total_marks || 100))
- setPassMarks(Number(nextExam.pass_marks || 33))
- }
- }
+  const scheduledSubjects = useMemo(() =>
+    (setup.subjects || [])
+      .filter(row => row.class_name === selectedClass && String(row.section || '').trim() === selectedSection)
+      .sort((a,b) => String(a.exam_date || '').localeCompare(String(b.exam_date || '')) || Number(a.sort_order || 0) - Number(b.sort_order || 0)),
+    [setup.subjects, selectedClass, selectedSection]
+  )
 
- const changeExamType = (value) => {
- const nextExam = exams.find(exam => (exam.type || FALLBACK_EXAM_TYPES[0]) === value && (!selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'))
- setSelectedExamType(value)
- syncExamDefaults(nextExam)
- }
+  const selectedSubject = scheduledSubjects.find(row => String(row.id) === String(selectedSubjectId)) || null
+  const enteredCount = students.filter(student => marks[student.id] !== undefined && marks[student.id] !== '').length
 
- const changeClass = (value) => {
- const nextExam = exams.find(exam => (!selectedExamType || (exam.type || FALLBACK_EXAM_TYPES[0]) === selectedExamType) && (normalizeClass(exam.class) === value || exam.class === 'All Classes'))
- setSelectedClass(value)
- syncExamDefaults(nextExam)
- }
-
- const refreshData = async () => {
- setStudents([])
- setMarks({})
- setMessage('')
- await loadExams()
- }
-
-  const searchStudents = async () => {
-  if (!selectedExamType || !selectedClass || !selectedSubject) {
-  setMessage('Please select exam type, class, and subject first.')
-  return
+  function setStatus(text, kind = 'info') {
+    setMessage(text)
+    setMessageKind(kind)
   }
 
-  setLoadingData(true)
-  setMessage('')
-  try {
-  const queryClass = selectedClass.startsWith('Class ') ? selectedClass : 'Class ' + selectedClass
-  const exam = selectedExam
-  const [studRes, markRes] = await Promise.all([
-  api.get('/api/students', { params: { class: queryClass } }),
-  exam ? api.get(`/api/exams/results/${exam.id}`) : Promise.resolve({ data: { data: [] } }),
-  ])
-  const studentList = studRes.data.data || []
-  setStudents(studentList)
-  if (studentList.length === 0) {
-  setMessage(`No students found registered in ${queryClass}. Please add students first.`)
-  } else {
-  setMessage('')
-  }
-  const loaded = {}
-  for (const row of (markRes.data.data || [])) {
-  if (row.subject === selectedSubject) loaded[row.student_id] = row.marks_obtained
-  }
-  setMarks(loaded)
-  if (exam) {
-  setTotalMarks(Number(exam.total_marks || totalMarks || 100))
-  setPassMarks(Number(exam.pass_marks || passMarks || 33))
-  }
-  } catch (err) {
-  setStudents([])
-  setMarks({})
-  const errMsg = err.response?.data?.message || err.message || 'Server error.'
-  setMessage(`Search failed: ${errMsg}. Please verify the backend service status.`)
-  } finally {
-  setLoadingData(false)
-  }
+  async function loadExams({ preserve = true } = {}) {
+    setRefreshing(true)
+    try {
+      const response = await api.get('/api/exams')
+      const list = Array.isArray(response.data?.data) ? response.data.data : []
+      setExams(list)
+      const existing = preserve ? selectedExamId : ''
+      const preferred = list.find(exam => String(exam.id) === String(existing))
+        || list.find(exam => String(exam.name || '').toLowerCase() === 'first term exam' && exam.session === '2026-2027')
+        || list[0]
+      setSelectedExamId(preferred ? String(preferred.id) : '')
+      if (!preferred) setStatus('No exam is available. Create or synchronize an exam in Manage Exams first.', 'error')
+    } catch (error) {
+      setExams([])
+      setSelectedExamId('')
+      setStatus(error.response?.data?.message || 'Could not load exams.', 'error')
+    } finally {
+      setRefreshing(false)
+    }
   }
 
-  const updateMark = (studentId, value) => {
-    const cleaned = typeof value === 'string' ? value.replace(/^0+(?=\d)/, '') : value
-    setMarks(prev => ({ ...prev, [studentId]: cleaned }))
+  useEffect(() => {
+    void loadExams({ preserve:false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    if (!selectedExamId) {
+      setSetup({ enrollments:[], subjects:[], exam:null })
+      setStudents([])
+      setMarks({})
+      return
+    }
+    let cancelled = false
+    async function loadSetup() {
+      setLoadingSetup(true)
+      setStudents([])
+      setMarks({})
+      try {
+        const response = await api.get(`/api/exams/${selectedExamId}/setup`)
+        if (cancelled) return
+        const data = response.data?.data || { enrollments:[], subjects:[], exam:null }
+        setSetup(data)
+        const nextClasses = sortClasses([...new Set((data.enrollments || []).map(row => row.class_name).filter(Boolean))])
+        const nextClass = nextClasses[0] || ''
+        const nextSections = [...new Set((data.enrollments || []).filter(row => row.class_name === nextClass).map(row => String(row.section || '').trim()))]
+        setSelectedClass(nextClass)
+        setSelectedSection(nextSections[0] || '')
+        setSelectedSubjectId('')
+        if (!nextClasses.length) {
+          setStatus('This exam is not wired to class sections yet. Open Manage Exams and synchronize the official First Term setup.', 'error')
+        } else {
+          setStatus('', 'info')
+        }
+      } catch (error) {
+        if (cancelled) return
+        setSetup({ enrollments:[], subjects:[], exam:null })
+        setSelectedClass('')
+        setSelectedSection('')
+        setSelectedSubjectId('')
+        setStatus(error.response?.data?.message || 'Could not load exam setup.', 'error')
+      } finally {
+        if (!cancelled) setLoadingSetup(false)
+      }
+    }
+    void loadSetup()
+    return () => { cancelled = true }
+  }, [selectedExamId])
+
+  useEffect(() => {
+    if (!selectedClass) {
+      setSelectedSection('')
+      return
+    }
+    if (!sections.includes(selectedSection)) {
+      setSelectedSection(sections[0] || '')
+    }
+    setStudents([])
+    setMarks({})
+  }, [selectedClass, sections, selectedSection])
+
+  useEffect(() => {
+    if (!scheduledSubjects.length) {
+      setSelectedSubjectId('')
+      setStudents([])
+      setMarks({})
+      return
+    }
+    const current = scheduledSubjects.find(row => String(row.id) === String(selectedSubjectId))
+    const next = current || scheduledSubjects[0]
+    setSelectedSubjectId(String(next.id))
+    setTotalMarks(Number(next.total_marks ?? selectedExam?.total_marks ?? 100))
+    setPassMarks(Number(next.pass_marks ?? selectedExam?.pass_marks ?? 33))
+    setStudents([])
+    setMarks({})
+  }, [scheduledSubjects, selectedSubjectId, selectedExam?.total_marks, selectedExam?.pass_marks])
+
+  useEffect(() => {
+    if (!selectedSubject) return
+    setTotalMarks(Number(selectedSubject.total_marks ?? selectedExam?.total_marks ?? 100))
+    setPassMarks(Number(selectedSubject.pass_marks ?? selectedExam?.pass_marks ?? 33))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSubjectId])
+
+  async function loadRoster({ quiet = false } = {}) {
+    if (!selectedExamId || !selectedClass || selectedSection === undefined || !selectedSubject) {
+      if (!quiet) setStatus('Select exam, class, section and scheduled subject first.', 'error')
+      return
+    }
+    setLoadingStudents(true)
+    if (!quiet) setStatus('', 'info')
+    try {
+      const [studentResponse, resultResponse] = await Promise.all([
+        api.get(`/api/exams/${selectedExamId}/roster`, { params:{ class:selectedClass, section:selectedSection } }),
+        api.get(`/api/exams/results/${selectedExamId}`),
+      ])
+      const roster = Array.isArray(studentResponse.data?.data) ? studentResponse.data.data : []
+      const savedRows = Array.isArray(resultResponse.data?.data) ? resultResponse.data.data : []
+      const loadedMarks = {}
+      savedRows.forEach(row => {
+        if (String(row.subject || '').toLowerCase() === String(selectedSubject.subject || '').toLowerCase()) {
+          loadedMarks[row.student_id] = String(row.marks_obtained ?? '')
+        }
+      })
+      setStudents(roster)
+      setMarks(loadedMarks)
+      if (!roster.length) {
+        setStatus(`No active students are registered in ${selectedClass}${selectedSection ? ' - ' + selectedSection : ''}.`, 'error')
+      } else if (!quiet) {
+        setStatus(`${roster.length} active student(s) loaded. ${Object.keys(loadedMarks).length} saved mark(s) restored.`, 'success')
+      }
+    } catch (error) {
+      setStudents([])
+      setMarks({})
+      setStatus(error.response?.data?.message || 'Students could not be loaded for this exam.', 'error')
+    } finally {
+      setLoadingStudents(false)
+    }
   }
 
-  const saveMarks = async () => {
-  if (!selectedExamType || !selectedClass || !selectedSubject || !students.length) return
+  useEffect(() => {
+    if (selectedExamId && selectedClass && selectedSubject) {
+      void loadRoster({ quiet:true })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedExamId, selectedClass, selectedSection, selectedSubjectId])
 
-  setSaving(true)
-  setMessage('')
-  try {
-  const exam = selectedExam
-  let examId = exam?.id
-  if (!examId) {
-  let resolvedType = selectedExamType
-  if (selectedExamType === 'Term Exam') resolvedType = 'TE'
-  else if (selectedExamType === 'Assessment') resolvedType = 'AS'
-
-  const created = await api.post('/api/exams', {
-  name: `${selectedExamType} - Class ${selectedClass}`,
-  type: resolvedType,
-  class: selectedClass,
-  session: '2026-2027',
-  total_marks: Number(totalMarks),
-  pass_marks: Number(passMarks),
-  })
-  examId = created.data.data?.id
-  await loadExams()
+  function updateMark(studentId, value) {
+    if (value === '') {
+      setMarks(prev => ({ ...prev, [studentId]: '' }))
+      return
+    }
+    const numeric = Number(value)
+    if (!Number.isFinite(numeric)) return
+    setMarks(prev => ({ ...prev, [studentId]: value }))
   }
 
-  const results = students
-  .filter(student => marks[student.id] !== undefined && marks[student.id] !== '')
-  .map(student => ({
-  exam_id: Number(examId),
-  student_id: student.id,
-  student_name: student.name,
-  subject: selectedSubject,
-  marks_obtained: Number(marks[student.id]),
-  total_marks: Number(totalMarks),
-  pass_marks: Number(passMarks),
-  }))
+  async function saveMarks() {
+    if (!selectedExamId || !selectedClass || !selectedSubject || !students.length) {
+      return setStatus('Load the selected class roster before saving marks.', 'error')
+    }
+    const total = Number(totalMarks)
+    const pass = Number(passMarks)
+    if (!Number.isFinite(total) || total <= 0) return setStatus('Total marks must be greater than zero.', 'error')
+    if (!Number.isFinite(pass) || pass < 0 || pass > total) return setStatus('Passing marks must be between 0 and total marks.', 'error')
 
- await api.post('/api/exams/results', { results })
- setMessage('Marks saved successfully.')
- setTimeout(() => setMessage(''), 3000)
-  } catch (err) {
-  setMessage(err.response?.data?.message || 'Failed to save marks.')
-  } finally {
-  setSaving(false)
+    const rows = []
+    for (const student of students) {
+      const raw = marks[student.id]
+      if (raw === undefined || raw === '') continue
+      const obtained = Number(raw)
+      if (!Number.isFinite(obtained) || obtained < 0 || obtained > total) {
+        return setStatus(`Invalid marks for ${student.name}. Enter a value from 0 to ${total}.`, 'error')
+      }
+      rows.push({
+        exam_id: Number(selectedExamId),
+        student_id: student.id,
+        subject: selectedSubject.subject,
+        marks_obtained: obtained,
+        total_marks: total,
+        pass_marks: pass,
+      })
+    }
+    if (!rows.length) return setStatus('Enter at least one student mark before saving.', 'error')
+
+    setSaving(true)
+    setStatus('', 'info')
+    try {
+      await api.post('/api/exams/results', { results:rows })
+      const verifyResponse = await api.get(`/api/exams/results/${selectedExamId}`)
+      const verifyRows = (verifyResponse.data?.data || []).filter(row =>
+        String(row.subject || '').toLowerCase() === String(selectedSubject.subject || '').toLowerCase()
+      )
+      const byStudent = new Map(verifyRows.map(row => [String(row.student_id), Number(row.marks_obtained)]))
+      const verified = rows.every(row => byStudent.has(String(row.student_id)) && byStudent.get(String(row.student_id)) === Number(row.marks_obtained))
+      if (!verified) {
+        setStatus('Server responded, but marks verification did not match. Do not continue to result cards until this is resolved.', 'error')
+        return
+      }
+      setSetup(prev => ({
+        ...prev,
+        subjects: prev.subjects.map(row => String(row.id) === String(selectedSubject.id)
+          ? { ...row, total_marks:total, pass_marks:pass }
+          : row)
+      }))
+      setStatus(`Saved and verified marks for ${rows.length} student(s).`, 'success')
+    } catch (error) {
+      setStatus(error.response?.data?.message || 'Failed to save marks.', 'error')
+    } finally {
+      setSaving(false)
+    }
   }
+
+  async function printBlankSheet(allSubjects = false) {
+    if (!students.length) await loadRoster()
+    const roster = students
+    if (!roster.length) return setStatus('Load students before printing a blank marks sheet.', 'error')
+    const columns = allSubjects ? scheduledSubjects : [selectedSubject].filter(Boolean)
+    if (!columns.length) return setStatus('No scheduled subjects found for this class/section.', 'error')
+
+    const schoolName = (paperSettings.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()
+    const address = paperSettings.address || ''
+    const phone = paperSettings.phone || ''
+    const headerCells = columns.map(row => `<th>${row.subject}<br><small>${formatDate(row.exam_date)}</small></th>`).join('')
+    const rowsHtml = roster.map((student,index) => `<tr><td>${index+1}</td><td>${student.name}</td><td>${student.gr_number || '-'}</td><td>${student.father_name || '-'}</td>${columns.map(()=>'<td></td>').join('')}</tr>`).join('')
+    const win = window.open('', '_blank', 'width=1100,height=780')
+    if (!win) return
+    win.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>Blank Marks Sheet</title><style>
+      @page{size:A4 landscape;margin:10mm}body{font-family:Arial,sans-serif;color:#111;margin:0}.head{text-align:center;margin-bottom:14px}.head h1{font-size:20px;margin:0}.sub{font-size:11px;margin-top:4px}.meta{margin-top:8px;font-weight:700;font-size:13px}table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #333;padding:6px}th{background:#eee}td{height:26px}small{font-weight:400}</style></head><body>
+      <div class="head"><h1>${schoolName}</h1><div class="sub">${address}${phone ? ' | '+phone : ''}</div><div class="meta">${selectedExam?.name || 'Exam'} · ${selectedClass}${selectedSection ? ' - '+selectedSection : ''}</div></div>
+      <table><thead><tr><th>#</th><th>Student</th><th>GR No</th><th>Father Name</th>${headerCells}</tr></thead><tbody>${rowsHtml}</tbody></table>
+      </body></html>`)
+    win.document.close()
   }
 
-  const fetchClassStudents = async () => {
-  if (students.length) return students
-  if (!selectedClass) return []
-  try {
-  const queryClass = selectedClass.startsWith('Class ') ? selectedClass : 'Class ' + selectedClass
-  const res = await api.get('/api/students', { params: { class: queryClass } })
-  return res.data.data || []
-  } catch {
-  return []
-  }
-  }
+  const messageColor = messageKind === 'error' ? C.red : messageKind === 'success' ? C.green : C.muted
 
- const printBlankSheet = async (mode) => {
- if (!selectedClass) {
- setMessage('Please select class first.')
- return
- }
- const list = await fetchClassStudents()
- if (!list.length) {
- setMessage('Students could not be loaded for blank sheet.')
- return
- }
- const schoolName = (paperSettings.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()
- const logo = paperSettings.logo || ''
- const addr = paperSettings.address || ''
- const phone = paperSettings.phone || ''
- const columns = mode === 'subject'
- ? [selectedSubject || 'Subject Marks']
- : mode === 'all_subjects'
- ? (subjectsForClass(classLabel(selectedClass))?.length ? subjectsForClass(classLabel(selectedClass)) : ['Subject 1', 'Subject 2'])
- : (matchingExams.length ? matchingExams.map((exam, index) => exam.name || `${typeLabel(exam.type)} ${index + 1}`) : ['Assessment 1', 'Assessment 2', 'Assessment 3', 'Assessment 4', 'Assessment 5'])
- const title = mode === 'subject'
- ? `${selectedSubject || 'Subject'} Blank Mark Sheet`
- : mode === 'all_subjects'
- ? 'All Subjects Blank Mark Sheet'
- : 'All Assessments Blank Mark Sheet'
- const headCells = columns.map(col => `<th>${col}<br><small>${totalMarks || 100}</small></th>`).join('')
- const rows = list.map((student, i) => `<tr><td>${i + 1}</td><td>${student.name || ''}</td><td>${student.gr_number || '-'}</td><td>${student.father_name || '-'}</td>${columns.map(() => '<td class="mark"></td>').join('')}</tr>`).join('')
- const logoHtml = logo ? `<img src="${logo.startsWith('http') || logo.startsWith('blob:') || logo.startsWith('data:') ? logo : (logo.startsWith('/') ? 'https://api.assps.edu.pk' + logo : 'https://api.assps.edu.pk/' + logo)}" alt="logo">` : `<div class="logo-fallback">A</div>`
- const w = window.open('', '_blank', 'width=1100,height=760')
- w.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>${title}</title><style>
- *{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;background:#eef2f7;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact}
- @page{size:A4 landscape;margin:8mm}@media print{body{background:white}.no-print{display:none!important;height:0!important;overflow:hidden!important}}
- .bar.no-print{background:#071e34;color:white;padding:12px 18px;display:flex;gap:12px;align-items:center}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:8px;padding:9px 18px;font-weight:800;cursor:pointer}
- .page{background:white;margin:14px auto;padding:16px;max-width:1120px;box-shadow:0 12px 30px rgba(15,23,42,.16)}
- .head{display:flex;align-items:center;gap:14px;border-bottom:3px solid #13224A;padding-bottom:10px;margin-bottom:10px}
- .head img,.logo-fallback{width:62px;height:62px;object-fit:contain;border:1px solid #CBD5E1;border-radius:50%;padding:5px;display:grid;place-items:center;font-weight:900;color:#13224A}
- h1{margin:0;font-size:22px;line-height:1}.sub{font-size:12px;color:#475569;margin-top:4px}.meta{margin-left:auto;text-align:right;font-size:12px;color:#334155;line-height:1.6}
- table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #334155;padding:6px 7px;text-align:left}th{background:#13224A;color:white;text-transform:uppercase;font-size:10px}th small{color:#FACC15}.mark{height:30px;min-width:74px}
- </style></head><body><div class="bar no-print"><strong>${title}</strong><button onclick="window.print()">Print / Save PDF</button></div><section class="page">
- <div class="head">${logoHtml}<div><h1>${schoolName}</h1><div class="sub">${addr}${phone ? ` | ${phone}` : ''}</div></div><div class="meta"><b>${title}</b><br>Class ${selectedClass}<br>${selectedExamType || 'All Exam Types'}${selectedSubject ? ` | ${selectedSubject}` : ''}</div></div>
- <table><thead><tr><th>#</th><th>Student</th><th>GR No</th><th>Father Name</th>${headCells}</tr></thead><tbody>${rows}</tbody></table>
- </section></body></html>`)
- w.document.close()
- }
+  return (
+    <div style={{ minHeight:'100%', background:'#071e34', color:C.silver, padding:24 }}>
+      <div style={{ maxWidth:1240, margin:'0 auto', display:'grid', gap:20 }}>
+        <div className="super-module-card" style={{ ...card, display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:16, alignItems:'center' }}>
+          <div>
+            <h1 style={sectionHeader}>Marks Entry</h1>
+            <p style={{ color:C.muted, marginTop:8 }}>One workflow: exam → actual class/section → scheduled date-sheet subject → students → verified marks.</p>
+          </div>
+          <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
+            <button type="button" style={btnSecondary} onClick={()=>loadExams()} disabled={refreshing}>
+              <RefreshCw size={16} style={{ marginRight:7, verticalAlign:'middle' }} /> {refreshing ? 'Refreshing...' : 'Refresh Exams'}
+            </button>
+            <button type="button" style={btnSecondary} onClick={()=>printBlankSheet(false)} disabled={!selectedSubject}>Print Subject Sheet</button>
+            <button type="button" style={btnSecondary} onClick={()=>printBlankSheet(true)} disabled={!scheduledSubjects.length}>Print Class Sheet</button>
+            <button type="button" style={btnPrimary} onClick={saveMarks} disabled={saving || !students.length || !selectedSubject}>
+              <Save size={16} style={{ marginRight:7, verticalAlign:'middle' }} /> {saving ? 'Saving & Verifying...' : 'Save All Marks'}
+            </button>
+          </div>
+        </div>
 
- return (
- <div style={{ minHeight: '100%', background: '#071e34', color: C.silver, padding: 24 }}>
- <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gap: 24 }}>
- <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16 }}>
- <div>
- <h1 style={sectionHeader}>Marks Sheet</h1>
- <p style={{ color: C.muted, marginTop: 8 }}>Select exam type, class, and subject, then add marks student by student.</p>
- </div>
- <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
- <button type="button" style={btnSecondary} onClick={refreshData} disabled={refreshing}>
- <RefreshCw size={16} style={{ marginRight: 8, verticalAlign: 'middle' }} />
- {refreshing ? 'Refreshing...' : 'Refresh Data'}
- </button>
- <button type="button" style={btnSecondary} onClick={() => printBlankSheet('subject')}>Print Blank Subject Sheet</button>
- <button type="button" style={btnSecondary} onClick={() => printBlankSheet('all_subjects')}>Print Blank All Subjects</button>
- <button type="button" style={btnSecondary} onClick={() => printBlankSheet('all')}>Print Blank All Assessments</button>
- <button style={btnPrimary} onClick={saveMarks} disabled={saving || !students.length}>
- <Save size={16} style={{ marginRight: 8, verticalAlign: 'middle' }} />
- {saving ? 'Saving...' : 'Save All Marks'}
- </button>
- </div>
- </div>
+        <div className="super-module-card" style={{ ...card, display:'grid', gap:18 }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(210px,1fr))', gap:14 }}>
+            <div>
+              <label style={labelStyle}>1. Exam / Term</label>
+              <select style={select} value={selectedExamId} onChange={e=>setSelectedExamId(e.target.value)} disabled={refreshing}>
+                <option value="">Select exam</option>
+                {exams.map(exam => <option key={exam.id} value={exam.id}>{exam.name} · {exam.session || ''} · {examTypeLabel(exam.type)}</option>)}
+              </select>
+            </div>
+            <div>
+              <label style={labelStyle}>2. Class</label>
+              <select style={select} value={selectedClass} onChange={e=>setSelectedClass(e.target.value)} disabled={!classes.length || loadingSetup}>
+                <option value="">Select class</option>
+                {classes.map(value => <option key={value} value={value}>{value}</option>)}
+              </select>
+            </div>
+            <div>
+              <label style={labelStyle}>3. Section</label>
+              <select style={select} value={selectedSection} onChange={e=>setSelectedSection(e.target.value)} disabled={!selectedClass || !sections.length}>
+                {sections.map(value => <option key={value || '__none'} value={value}>{value || 'No Section'}</option>)}
+              </select>
+            </div>
+            <div>
+              <label style={labelStyle}>4. Scheduled Subject</label>
+              <select style={select} value={selectedSubjectId} onChange={e=>{setSelectedSubjectId(e.target.value);setStudents([]);setMarks({})}} disabled={!scheduledSubjects.length}>
+                <option value="">Select subject</option>
+                {scheduledSubjects.map(row => <option key={row.id} value={row.id}>{row.subject} · {formatDate(row.exam_date)}</option>)}
+              </select>
+            </div>
+          </div>
 
- <div className="super-module-card" style={{ ...card, display: 'grid', gap: 18 }}>
- <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16 }}>
- <div>
- <label style={labelStyle}>Exam Type</label>
- <select style={select} value={selectedExamType} onChange={e => changeExamType(e.target.value)}>
- <option value="">Select exam type</option>
- {examTypes.map(type => <option key={type} value={type}>{type}</option>)}
- </select>
- </div>
- <div>
- <label style={labelStyle}>Class</label>
- <select style={select} value={selectedClass} onChange={e => changeClass(e.target.value)}>
- <option value="">Select class</option>
- {classNames.map(cls => <option key={normalizeClass(cls)} value={normalizeClass(cls)}>{cls}</option>)}
- </select>
- </div>
- <div>
- <label style={labelStyle}>Subject</label>
- <select style={select} value={selectedSubject} onChange={e => { setSelectedSubject(e.target.value); setStudents([]); setMarks({}) }}>
- <option value="">Select subject</option>
- {(selectedClass ? subjectsForClass(classLabel(selectedClass)) : []).map(subject => <option key={subject} value={subject}>{subject}</option>)}
- </select>
- </div>
- </div>
+          {selectedSubject && (
+            <div style={{ display:'grid', gridTemplateColumns:'1.4fr repeat(2,minmax(150px,0.45fr)) auto', gap:14, alignItems:'end' }}>
+              <div style={{ padding:'10px 12px', borderRadius:12, background:'rgba(10,132,255,0.07)', border:'1px solid rgba(10,132,255,0.17)' }}>
+                <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>DATE SHEET PAPER</div>
+                <div style={{ color:C.silver, fontWeight:800, marginTop:3, display:'flex', alignItems:'center', gap:7 }}>
+                  <CalendarDays size={15} color={C.gold} /> {selectedSubject.subject} · {formatDate(selectedSubject.exam_date)} · {selectedSubject.paper_time || 'Time not set'}
+                </div>
+              </div>
+              <div>
+                <label style={labelStyle}>Total Marks</label>
+                <input type="number" min="1" style={input} value={totalMarks} disabled={selectedSubject.total_marks !== null && selectedSubject.total_marks !== undefined} onChange={e=>setTotalMarks(e.target.value)} />
+              </div>
+              <div>
+                <label style={labelStyle}>Passing Marks</label>
+                <input type="number" min="0" max={Number(totalMarks)||100} style={input} value={passMarks} disabled={selectedSubject.pass_marks !== null && selectedSubject.pass_marks !== undefined} onChange={e=>setPassMarks(e.target.value)} />
+              </div>
+              <button type="button" onClick={()=>loadRoster()} disabled={loadingStudents} style={{ ...btnPrimary, minHeight:46, display:'inline-flex', alignItems:'center', justifyContent:'center', gap:8 }}>
+                <Search size={16} /> {loadingStudents ? 'Loading...' : 'Refresh Students'}
+              </button>
+            </div>
+          )}
 
- <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: 16, alignItems: 'end' }}>
- <div>
- <label style={labelStyle}>Total Marks</label>
- <input type="number" min="1" style={input} value={totalMarks} onChange={e => setTotalMarks(e.target.value)} />
- </div>
- <div>
- <label style={labelStyle}>Passing Marks</label>
- <input type="number" min="0" style={input} value={passMarks} onChange={e => setPassMarks(e.target.value)} />
- </div>
- <button type="button" onClick={searchStudents} disabled={loadingData} style={{ ...btnPrimary, display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'center', minHeight: 46 }}>
- <Search size={17} />
- {loadingData ? 'Searching...' : 'Search Students'}
- </button>
- </div>
+          {selectedSubject?.total_marks !== null && selectedSubject?.total_marks !== undefined && (
+            <div style={{ color:C.muted, fontSize:11 }}>Grading is locked for this scheduled subject after the first successful marks save: {selectedSubject.total_marks} total / {selectedSubject.pass_marks ?? 0} pass.</div>
+          )}
+        </div>
 
- {selectedExam && (
- <div style={{ color: C.muted, fontSize: 13 }}>
- Using exam: <strong style={{ color: C.silver }}>{selectedExam.name}</strong> · {classLabel(normalizeClass(selectedExam.class))} · {selectedExam.session || '2026-2027'}
- </div>
- )}
- </div>
+        {message && <div className="super-module-card" style={{ ...card, color:messageColor, borderColor:messageColor, display:'flex', gap:9, alignItems:'center' }}>
+          {messageKind === 'success' && <CheckCircle2 size={18} />} {message}
+        </div>}
 
- {message && <div className="super-module-card" style={{ ...card, borderColor: message.includes('failed') || message.includes('could not') || message.includes('Please') ? C.red : C.green, color: message.includes('failed') || message.includes('could not') || message.includes('Please') ? C.red : C.green }}>{message}</div>}
+        <div className="super-module-card" style={{ ...card, overflowX:'auto' }}>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, marginBottom:12 }}>
+            <div>
+              <div style={{ color:C.gold, fontSize:14, fontWeight:900 }}>Student Marks Sheet</div>
+              <div style={{ color:C.muted, fontSize:11, marginTop:3 }}>
+                {students.length ? `${students.length} active students · ${enteredCount} marks entered` : 'Choose a scheduled subject to load the real roster.'}
+              </div>
+            </div>
+            {selectedExam && <div style={{ color:C.muted, fontSize:11, textAlign:'right' }}>{selectedExam.name}<br/>{selectedClass}{selectedSection ? ' · '+selectedSection : ''}</div>}
+          </div>
 
- <div className="super-module-card" style={{ ...card, overflowX: 'auto' }}>
- {students.length === 0 ? (
- <div style={{ padding: 40, textAlign: 'center', color: C.muted }}>
- Select exam type, class, and subject, then click Search Students.
- </div>
- ) : (
- <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 680 }}>
- <thead>
- <tr style={{ borderBottom: `1px solid ${C.border}` }}>
- <th style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12 }}>Student</th>
- <th style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12 }}>GR No</th>
- <th style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12 }}>Father Name</th>
- <th style={{ padding: '14px 16px', textAlign: 'center', color: C.muted, fontSize: 12 }}>{selectedSubject} Marks</th>
- </tr>
- </thead>
- <tbody>
- {students.map((student, i) => (
- <tr key={student.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
- <td style={{ padding: '14px 16px', color: C.gold, fontWeight: 800 }}>{student.name}</td>
- <td style={{ padding: '14px 16px' }}>{student.gr_number || '-'}</td>
- <td style={{ padding: '14px 16px' }}>{student.father_name || '-'}</td>
- <td style={{ padding: '10px 12px', textAlign: 'center' }}>
- <input
- type="number"
- min="0"
- max={Number(totalMarks) || 100}
- value={marks[student.id] ?? ''}
- onChange={e => updateMark(student.id, e.target.value)}
- onFocus={e => e.target.select()}
- style={{ ...input, width: 110, margin: '0 auto', textAlign: 'center' }}
- />
- </td>
- </tr>
- ))}
- </tbody>
- </table>
- )}
- </div>
- </div>
- </div>
- )
+          {!students.length ? (
+            <div style={{ padding:42, textAlign:'center', color:C.muted }}>
+              {loadingStudents ? 'Loading students...' : loadingSetup ? 'Loading exam setup...' : 'No roster loaded for the current selection.'}
+            </div>
+          ) : (
+            <table style={{ width:'100%', borderCollapse:'collapse', minWidth:720 }}>
+              <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>
+                {['#','Student','GR No','Father Name', selectedSubject?.subject ? `${selectedSubject.subject} Marks` : 'Marks'].map(label =>
+                  <th key={label} style={{ padding:'12px 14px', textAlign:label.includes('Marks')?'center':'left', color:C.muted, fontSize:11, textTransform:'uppercase' }}>{label}</th>
+                )}
+              </tr></thead>
+              <tbody>
+                {students.map((student,index) => {
+                  const value = marks[student.id] ?? ''
+                  const invalid = value !== '' && (Number(value) < 0 || Number(value) > Number(totalMarks))
+                  return <tr key={student.id} style={{ background:index%2 ? 'rgba(11,44,77,0.20)' : 'transparent', borderBottom:'1px solid rgba(148,163,184,0.08)' }}>
+                    <td style={{ padding:'11px 14px', color:C.muted }}>{index+1}</td>
+                    <td style={{ padding:'11px 14px', color:C.gold, fontWeight:800 }}>{student.name}</td>
+                    <td style={{ padding:'11px 14px' }}>{student.gr_number || '-'}</td>
+                    <td style={{ padding:'11px 14px' }}>{student.father_name || '-'}</td>
+                    <td style={{ padding:'8px 12px', textAlign:'center' }}>
+                      <input type="number" min="0" max={Number(totalMarks)||100} step="0.01"
+                        aria-label={`Marks for ${student.name}`}
+                        value={value}
+                        onChange={e=>updateMark(student.id,e.target.value)}
+                        onFocus={e=>e.target.select()}
+                        style={{ ...input, width:118, margin:'0 auto', textAlign:'center', borderColor:invalid?C.red:undefined }}
+                      />
+                    </td>
+                  </tr>
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </div>
+  )
 }

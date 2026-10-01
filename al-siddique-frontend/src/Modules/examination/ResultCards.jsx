@@ -47,7 +47,7 @@ const TEMPLATES = [
 function printResultCard(student, exam, studentMarks, opts, school) {
  const t = TEMPLATES.find(t => t.id === opts.template) || TEMPLATES[0]
  const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
- const totalPossible = studentMarks.length * (exam?.total_marks || 100)
+ const totalPossible = studentMarks.reduce((sum,row) => sum + Number(row.total_marks || exam?.total_marks || 100), 0)
  const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
  const grade = gradeLabel(pct)
  const today = opts.resultDate || new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
@@ -88,7 +88,7 @@ function printResultCard(student, exam, studentMarks, opts, school) {
  </div>
 
  <div class="student-row">
- <div>Student Name: <strong>${student.name}</strong><br>Class/Section: <strong>${exam?.class || '—'}</strong></div>
+ <div>Student Name: <strong>${student.name}</strong><br>Class/Section: <strong>${student.class || '—'}${student.section ? ' - ' + student.section : ''}</strong></div>
  <div style="text-align:right">Father Name: <strong>${student.father_name || '—'}</strong><br>Session: <strong>2026-2027</strong> &nbsp; Reg No: <strong>${student.gr_number || '—'}</strong></div>
  </div>
 
@@ -98,11 +98,12 @@ function printResultCard(student, exam, studentMarks, opts, school) {
  </tr></thead>
  <tbody>
  ${studentMarks.map((r, i) => {
- const rowPct = totalPossible > 0 ? Math.round((Number(r.marks_obtained) / (exam?.total_marks || 100)) * 100) : 0
+ const rowTotal = Number(r.total_marks || exam?.total_marks || 100)
+ const rowPct = rowTotal > 0 ? Math.round((Number(r.marks_obtained) / rowTotal) * 100) : 0
  return `<tr>
  <td>${i + 1}</td>
  <td>${r.subject}</td>
- <td>${exam?.total_marks || 100}</td>
+ <td>${rowTotal}</td>
  <td style="font-weight:700">${r.marks_obtained}</td>
  <td>${rowPct}%</td>
  <td style="font-weight:700;color:${rowPct >= 50 ? 'green' : 'red'}">${gradeLabel(rowPct)}</td>
@@ -353,6 +354,7 @@ export default function ResultCards() {
  const [selectedExam, setSelectedExam] = useState('')
  const [selectedStudent, setSelectedStudent] = useState('')
  const [outputMode, setOutputMode] = useState('single')
+ const [selectedClassSection, setSelectedClassSection] = useState('')
  const [printCards, setPrintCards] = useState([])
  const [loading, setLoading] = useState(false)
  const [showParams, setShowParams] = useState(false)
@@ -375,6 +377,8 @@ export default function ResultCards() {
  .then(r => {
  const list = r.data.data || []
  setResults(list)
+ const firstClassKey = list.length ? `${list[0].class || ''}|${list[0].section || ''}` : ''
+ setSelectedClassSection(firstClassKey)
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
  })
@@ -399,6 +403,9 @@ export default function ResultCards() {
   roll_number: r.roll_number || r.rollNo || '',
   father_name: r.father_name || r.fatherName || '',
   photo: r.photo || '',
+  class: r.class || '',
+  className: r.class || '',
+  section: r.section || '',
   subjectsCount: 0,
   })
   }
@@ -414,10 +421,17 @@ export default function ResultCards() {
  })).filter(item => item.studentMarks.length > 0)
 
  const students = buildStudentsFromRows(results)
+ const classSectionOptions = [...new Map(students.map(s => [`${s.class || ''}|${s.section || ''}`, { key:`${s.class || ''}|${s.section || ''}`, className:s.class || '', section:s.section || '' }])).values()]
+ const effectiveClassSection = selectedClassSection || classSectionOptions[0]?.key || ''
+ const filteredStudents = effectiveClassSection
+   ? students.filter(s => `${s.class || ''}|${s.section || ''}` === effectiveClassSection)
+   : students
+ const filteredIds = new Set(filteredStudents.map(s => String(s.id)))
+ const filteredResults = results.filter(r => filteredIds.has(String(r.student_id)))
  const studentMarks = results.filter(r => String(r.student_id) === selectedStudent)
  const student = students.find(s => String(s.id) === selectedStudent)
  const exam = exams.find(e => String(e.id) === selectedExam)
- const classPrintCards = buildPrintCards(results, exam, students)
+ const classPrintCards = buildPrintCards(filteredResults, exam, filteredStudents)
  const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
  const totalPossible = studentMarks.reduce((s, r) => s + Number(r.total_marks || exam?.total_marks || 100), 0)
  const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
@@ -552,6 +566,9 @@ export default function ResultCards() {
  <div style={{ color:C.muted, fontSize:12 }}>
  {loading ? 'Loading students with marks...' : students.length ? `${students.length} student(s) found for this exam.` : 'No students loaded yet.'}
  </div>
+ {classSectionOptions.length > 0 && <select style={select} value={effectiveClassSection} onChange={e=>{setSelectedClassSection(e.target.value);setOutputMode('class')}}>
+ {classSectionOptions.map(item => <option key={item.key} value={item.key}>Class / Section - {item.className}{item.section ? ` - ${item.section}` : ''}</option>)}
+ </select>}
  <select
  style={{ ...select, fontSize:15, fontWeight:800, opacity: students.length ? 1 : 0.65 }}
  value={printTargetValue}
@@ -559,7 +576,7 @@ export default function ResultCards() {
  disabled={!students.length || loading}
  >
  <option value="">{loading ? 'Loading targets...' : students.length ? 'Select print target' : 'No students with marks'}</option>
- <option value="class">Whole Class - Class {exam?.class || '-'} ({classPrintCards.length} cards)</option>
+ <option value="class">Whole Class / Section ({classPrintCards.length} cards)</option>
  <option value="all">All Classes - all saved result cards</option>
  {students.map(s => {
  const suffix = s.gr_number ? s.gr_number : s.roll_number ? `Roll ${s.roll_number}` : `${s.subjectsCount} subjects`
@@ -569,10 +586,10 @@ export default function ResultCards() {
  {(student || outputMode !== 'single') && (
  <div style={{ marginTop:'auto', padding:12, borderRadius:14, background:'rgba(10,132,255,0.08)', border:'1px solid rgba(10,132,255,0.18)' }}>
  <div style={{ color:C.silver, fontWeight:800, fontSize:15 }}>
- {outputMode === 'single' ? selectedStudentLabel : outputMode === 'class' ? `${classPrintCards.length} cards for ${exam?.class || 'selected class'}` : 'All classes will be loaded before print'}
+ {outputMode === 'single' ? selectedStudentLabel : outputMode === 'class' ? `${classPrintCards.length} cards for ${filteredStudents[0]?.class || 'selected class'}${filteredStudents[0]?.section ? ' - '+filteredStudents[0].section : ''}` : 'All classes will be loaded before print'}
  </div>
  <div style={{ color:C.muted, fontSize:12, marginTop:4 }}>
- {outputMode === 'single' ? `${studentMarks.length} subject marks ready` : outputMode === 'class' ? 'One A4 page per student in this exam/class' : 'All exams/classes with saved marks will be printed'}
+ {outputMode === 'single' ? `${studentMarks.length} subject marks ready` : outputMode === 'class' ? 'One A4 page per student in this class/section' : 'All exams/classes with saved marks will be printed'}
  </div>
  </div>
  )}

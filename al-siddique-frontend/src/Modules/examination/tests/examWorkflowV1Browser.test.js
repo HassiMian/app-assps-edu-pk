@@ -1,0 +1,167 @@
+import { test, before, after, beforeEach } from 'node:test'
+import assert from 'node:assert/strict'
+import path from 'node:path'
+import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { chromium } from 'playwright'
+import { createServer } from 'vite'
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..')
+const port = 5237
+let server, browser, context, page
+let savedResults = []
+let examCreateCalls = 0
+let resultPostCalls = 0
+let lastPayload = null
+
+const exam = { id:9, school_id:1, name:'First Term Exam', type:'TE', class:'All Classes', session:'2026-2027', total_marks:100, pass_marks:33 }
+const enrollments = [
+  { id:1, class_name:'One', section:'Blue' },
+  { id:2, class_name:'One', section:'Yellow' },
+  { id:3, class_name:'Two', section:'Orange' },
+]
+const subjects = [
+  { id:101, class_name:'One', section:'Blue', subject:'English', exam_date:'2026-09-28', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:1 },
+  { id:102, class_name:'One', section:'Blue', subject:'Mathematics', exam_date:'2026-09-30', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:2 },
+  { id:103, class_name:'One', section:'Yellow', subject:'English', exam_date:'2026-09-28', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:1 },
+  { id:104, class_name:'One', section:'Yellow', subject:'Mathematics', exam_date:'2026-09-30', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:2 },
+  { id:201, class_name:'Two', section:'Orange', subject:'English', exam_date:'2026-09-29', paper_time:'10:00 AM - 12:00 PM', total_marks:null, pass_marks:null, sort_order:1 },
+]
+const rosters = {
+  'One|Blue': [
+    { id:11, name:'Blue Student One', gr_number:'GR-B1', father_name:'Father B1', class:'One', section:'Blue', roll_number:'1' },
+  ],
+  'One|Yellow': [
+    { id:21, name:'Yellow Student One', gr_number:'GR-Y1', father_name:'Father Y1', class:'One', section:'Yellow', roll_number:'1' },
+    { id:22, name:'Yellow Student Two', gr_number:'GR-Y2', father_name:'Father Y2', class:'One', section:'Yellow', roll_number:'2' },
+  ],
+  'Two|Orange': [
+    { id:31, name:'Orange Student One', gr_number:'GR-O1', father_name:'Father O1', class:'Two', section:'Orange', roll_number:'1' },
+  ],
+}
+
+before(async () => {
+  const executablePath = [
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    (process.env.LOCALAPPDATA || '') + '/Google/Chrome/Application/chrome.exe',
+  ].find(fs.existsSync)
+  server = await createServer({ root, server:{ port, strictPort:true } })
+  await server.listen()
+  browser = await chromium.launch({ headless:true, executablePath, args:['--no-sandbox'] })
+  context = await browser.newContext({ viewport:{ width:1440, height:980 } })
+
+  await context.route('**/api/settings/public*', route => route.fulfill({ status:200, contentType:'application/json', body:JSON.stringify({ success:true, data:{} }) }))
+  await context.route('**/api/exams', async route => {
+    const request = route.request()
+    if (request.method() === 'GET') {
+      return route.fulfill({ status:200, contentType:'application/json', body:JSON.stringify({ success:true, data:[exam] }) })
+    }
+    if (request.method() === 'POST') examCreateCalls += 1
+    return route.fulfill({ status:500, contentType:'application/json', body:JSON.stringify({ success:false, message:'Marks screen must not create exams' }) })
+  })
+  await context.route('**/api/exams/9/setup', route => route.fulfill({
+    status:200, contentType:'application/json',
+    body:JSON.stringify({ success:true, data:{ exam, enrollments, subjects } })
+  }))
+  await context.route(/\/api\/exams\/9\/roster.*/, route => {
+    const url = new URL(route.request().url())
+    const key = `${url.searchParams.get('class')}|${url.searchParams.get('section') || ''}`
+    const data = rosters[key] || []
+    return route.fulfill({ status:200, contentType:'application/json', body:JSON.stringify({ success:true, count:data.length, data }) })
+  })
+  await context.route('**/api/exams/results/9', route => route.fulfill({
+    status:200, contentType:'application/json',
+    body:JSON.stringify({ success:true, data:savedResults })
+  }))
+  await context.route('**/api/exams/results', async route => {
+    if (route.request().method() !== 'POST') return route.continue()
+    resultPostCalls += 1
+    lastPayload = route.request().postDataJSON()
+    savedResults = (lastPayload.results || []).map((row,index) => ({
+      id:500+index,
+      ...row,
+      class: row.student_id >= 20 && row.student_id < 30 ? 'One' : 'One',
+      section: row.student_id >= 20 && row.student_id < 30 ? 'Yellow' : 'Blue',
+      name: row.student_id === 21 ? 'Yellow Student One' : row.student_id === 22 ? 'Yellow Student Two' : 'Blue Student One',
+      father_name:'Parent',
+      gr_number:`GR-${row.student_id}`,
+    }))
+    return route.fulfill({ status:200, contentType:'application/json', body:JSON.stringify({ success:true, message:'saved', count:savedResults.length }) })
+  })
+  page = await context.newPage()
+})
+
+beforeEach(async () => {
+  savedResults = []
+  examCreateCalls = 0
+  resultPostCalls = 0
+  lastPayload = null
+  await page.goto('about:blank')
+  await page.goto(`http://localhost:${port}/exam-workflow-v1-test.html`, { waitUntil:'domcontentloaded' })
+  await page.getByText('Marks Entry', { exact:true }).waitFor({ state:'visible', timeout:15000 })
+})
+
+after(async () => {
+  await context?.close()
+  await browser?.close()
+  await server?.close()
+})
+
+test('marks workflow uses exact exam setup, actual sections and scheduled subjects', async () => {
+  const examSelect = page.locator('select').nth(0)
+  await page.waitForFunction(() => document.querySelectorAll('select')[0]?.value === '9')
+  assert.equal(await examSelect.inputValue(), '9')
+  assert.match(await examSelect.locator('option:checked').textContent(), /First Term Exam/)
+
+  const classSelect = page.locator('select').nth(1)
+  await page.waitForFunction(() => document.querySelectorAll('select')[1]?.value === 'One')
+  assert.deepEqual(await classSelect.locator('option').allTextContents(), ['Select class','One','Two'])
+  assert.equal((await classSelect.locator('option').allTextContents()).includes('Nine'), false)
+
+  const sectionSelect = page.locator('select').nth(2)
+  await sectionSelect.selectOption('Yellow')
+  await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
+
+  const subjectSelect = page.locator('select').nth(3)
+  assert.equal(await subjectSelect.inputValue(), '103')
+  assert.match(await subjectSelect.locator('option:checked').textContent(), /English.*28 Sep(?:t)? 2026/)
+
+  assert.equal(await page.getByText('Yellow Student Two', { exact:true }).count(), 1)
+  assert.equal(examCreateCalls, 0)
+})
+
+test('marks save is one batch and is re-fetched for verification; MarksSheet never creates exam', async () => {
+  const sectionSelect = page.locator('select').nth(2)
+  await sectionSelect.selectOption('Yellow')
+  await page.getByText('Yellow Student Two', { exact:true }).waitFor()
+
+  const numberInputs = page.locator('input[type="number"]')
+  await numberInputs.nth(0).fill('50')
+  await numberInputs.nth(1).fill('17')
+  await page.getByLabel('Marks for Yellow Student One').fill('45')
+  await page.getByLabel('Marks for Yellow Student Two').fill('40')
+
+  await page.getByRole('button', { name:/Save All Marks/ }).click()
+  await page.getByText(/Saved and verified marks for 2 student/).waitFor({ state:'visible', timeout:10000 })
+
+  assert.equal(resultPostCalls, 1)
+  assert.equal(examCreateCalls, 0)
+  assert.equal(lastPayload.results.length, 2)
+  assert.deepEqual(lastPayload.results.map(row => [row.exam_id,row.student_id,row.subject,row.marks_obtained,row.total_marks,row.pass_marks]), [
+    [9,21,'English',45,50,17],
+    [9,22,'English',40,50,17],
+  ])
+})
+
+test('client rejects out-of-range mark before API mutation', async () => {
+  await page.locator('select').nth(2).selectOption('Yellow')
+  await page.getByText('Yellow Student One', { exact:true }).waitFor()
+  const numberInputs = page.locator('input[type="number"]')
+  await numberInputs.nth(0).fill('50')
+  await page.getByLabel('Marks for Yellow Student One').fill('55')
+  await page.getByRole('button', { name:/Save All Marks/ }).click()
+  await page.getByText(/Invalid marks for Yellow Student One/).waitFor()
+  assert.equal(resultPostCalls, 0)
+  assert.equal(examCreateCalls, 0)
+})

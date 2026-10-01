@@ -445,7 +445,7 @@ export default function DateSheet() {
       setCellSubjects(loaded.cellSubjects)
       setDayCount(loaded.columns.length)
       setGridReady(true)
-      setWarning('Restored official First Term Exam 2026-2027 staggered timetable with 77 papers.')
+      setWarning(`Restored official First Term Exam 2026-2027 staggered timetable with ${seeded.length} papers.`)
     }
   }
 
