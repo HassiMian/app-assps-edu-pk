@@ -642,7 +642,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [selIds, setSelIds] = useState(new Set())
  const [limitWarn, setLimitWarn] = useState(false)
 
- const [editMode, setEditMode] = useState(Boolean(loadedPaper?.recoverySourceManaged))
+ const [editMode, setEditMode] = useState(false)
  const [selectedSectionId, setSelectedSectionId] = useState('')
  const [activeEditable, setActiveEditable] = useState(null)
  const activateEditable = payload => {
@@ -1047,8 +1047,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
  </div>
  </div>
- <details data-paper-metadata-editor open={loadedPaper?.recoverySourceManaged ? true : undefined} style={{ marginTop:8 }}>
- <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>{loadedPaper?.recoverySourceManaged ? 'EDIT PAPER / RESOLVE MARKS — change question marks or header before printing' : 'Paper Information — edit all header fields'}</summary>
+ <details data-paper-metadata-editor style={{ marginTop:8 }}>
+ <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>Paper Information — edit all header fields</summary>
  <div style={{ display:'grid', gridTemplateColumns:'2fr 1.4fr 1fr', gap:10, marginTop:8, alignItems:'end' }}>
   <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Paper / Exam Title<input value={headerTitle} onChange={e=>setHeaderTitle(e.target.value)} style={{...tinp,width:'100%',marginTop:4}} /></label>
   <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Exam Type<input value={headerExamType} onChange={e=>setHeaderExamType(e.target.value)} style={{...tinp,width:'100%',marginTop:4}} /></label>
@@ -1059,27 +1059,6 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   {isOfficialPaper && <div data-marks-ledger style={{ border:`1px solid ${marksLedger.balanced?'rgba(48,209,88,.45)':'rgba(255,159,10,.55)'}`, borderRadius:8, padding:'7px 9px', background:marksLedger.balanced?'rgba(48,209,88,.08)':'rgba(255,159,10,.08)', fontFamily:'Arial,sans-serif' }}><div style={{fontSize:10,color:D.muted,fontWeight:800}}>MARKS LEDGER</div><div style={{fontSize:12,color:marksLedger.balanced?D.green:D.orange,fontWeight:900}}>Header {marksLedger.headerTotal || 0} / Questions {marksLedger.questionTotal || 0}</div></div>}
   {isOfficialPaper && <button type="button" disabled={!marksLedger.questionTotal || marksLedger.headerTotal===marksLedger.questionTotal} onClick={()=>{setHeaderTotalMarks(marksLedger.questionTotal);setMarksAuthorityEdited(true)}} style={{...tinp,cursor:'pointer',fontWeight:800,color:D.gold,minWidth:128}}>Use Question Total</button>}
  </div>
- {isOfficialPaper && (loadedPaper?.recoverySourceManaged || !marksLedger.balanced) && <div data-marks-reconciliation className="no-print" style={{ marginTop:10, border:'1px solid rgba(255,159,10,.55)', borderRadius:9, padding:10, background:'rgba(255,159,10,.07)' }}>
-  <b style={{ fontSize:12, color:D.gold }}>MANUAL MARKS RECONCILIATION — every field is editable</b>
-  <div style={{fontSize:11,color:D.silver,margin:'5px 0 8px'}}>Header {marksLedger.headerTotal ?? 0} · Question sum {marksLedger.questionTotal ?? 0} · Difference {marksLedger.difference ?? 0}. Original seed is preserved; Save stores your working revision.</div>
-  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',gap:7}}>
-   {(paper.official_section || []).filter(section=>inferOfficialSectionKind(section)!=='marker').map((section,index)=><label key={section.id} style={{display:'flex',alignItems:'center',gap:8,fontSize:11,color:D.silver,border:`1px solid ${D.border}`,padding:6,borderRadius:6}}>
-    <span style={{flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}} title={section.heading}>Q{index+1}: {String(section.heading||'').replace(/\\s+/g,' ').slice(0,34)}</span>
-    <input aria-label={`Question ${index+1} marks`} type="number" min="0" step="1" value={section.marks ?? ''} onChange={event=>{
-     const text=event.target.value
-     const value=text==='' ? null : Math.max(0,Number(text)||0)
-     const urdu=isUrduScriptPaper({config:cfg,...paper})
-     const heading=value===null?String(section.heading||''):replaceSectionMarks(section.heading||'',value,urdu)
-     updatePaperQuestion('official_section',section.id,{marks:value,operationalMarks:value,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})
-    }} style={{...tinp,width:65,padding:5}} />
-   </label>)}
-  </div>
-  <div style={{display:'flex',flexWrap:'wrap',gap:8,marginTop:9,alignItems:'center'}}>
-   <button type="button" onClick={()=>{setHeaderTotalMarks(marksLedger.questionTotal);setMarksAuthorityEdited(true)}} style={{...tinp,color:D.gold,fontWeight:800,cursor:'pointer'}}>Set header to question sum ({marksLedger.questionTotal})</button>
-   <button type="button" onClick={()=>setEditMode(true)} style={{...tinp,color:D.green,fontWeight:800,cursor:'pointer'}}>Open full question editor</button>
-   <span style={{fontSize:10,color:D.muted}}>Change actual marks yourself; nothing is redistributed automatically.</span>
-  </div>
- </div>}
  {isOfficialPaper && <div style={{ display:'grid', gridTemplateColumns:'minmax(0,1fr) auto', gap:10, marginTop:8, alignItems:'start' }}>
   <div data-paper-quality-gate style={{ border:`1px solid ${draftQuality.errorCount?'rgba(255,55,95,.55)':draftQuality.warningCount?'rgba(255,159,10,.55)':'rgba(48,209,88,.45)'}`, borderRadius:8, padding:'8px 10px', background:draftQuality.errorCount?'rgba(255,55,95,.08)':draftQuality.warningCount?'rgba(255,159,10,.08)':'rgba(48,209,88,.08)', fontFamily:'Arial,sans-serif' }}>
    <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}><b style={{ fontSize:11, color:draftQuality.errorCount?D.red:draftQuality.warningCount?D.orange:D.green }}>PAPER QUALITY GATE</b><span style={{ fontSize:11, color:D.silver }}>{draftQuality.academicQuestionCount} questions · {draftQuality.errorCount} errors · {draftQuality.warningCount} warnings</span></div>

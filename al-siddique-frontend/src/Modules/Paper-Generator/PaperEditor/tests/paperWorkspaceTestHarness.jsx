@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import PTSPaperGenerator from '../../PTSPaperGenerator.jsx'
 import { ThemeProvider, useTheme } from '@/context/ThemeContext.jsx'
 import '@/index.css'
+import recoverySource from '../../seed-data/exam-night-recovery-v3.json'
+import { buildRecoverySavedPapers } from '../../seed-data/examNightRecoveryAdapter.js'
 
 const paper = {
   id: 'workspace-urdu-acceptance-paper',
@@ -86,12 +88,19 @@ const paper = {
   },
 }
 
+const classEightUrduFixture = (() => {
+  const recovered = buildRecoverySavedPapers(recoverySource).find(p => p.id === 'recovery-first-term-2026-class-8-urdu')
+  if (!recovered) throw new Error('Class 8 Urdu recovery source unavailable')
+  // Test-only fixture mirrors the already-reconciled 70/70 paper shown in the screenshot.
+  return { ...recovered, config: { ...recovered.config, totalMarks: 70 }, printReadiness: 'READY' }
+})()
+
 function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
-  <PTSPaperGenerator loadedPaper={paper} />
+  <PTSPaperGenerator loadedPaper={new URLSearchParams(window.location.search).has('recovery8') ? classEightUrduFixture : paper} />
  </>
 }
 ReactDOM.createRoot(document.getElementById('root')).render(
