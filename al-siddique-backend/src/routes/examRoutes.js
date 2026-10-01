@@ -593,7 +593,23 @@ router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
     }
     sql += ' ORDER BY s.class, s.section, s.roll_number, er.subject'
     const result = await query(sql, params)
-    res.json({ success: true, data: result.rows })
+
+    // Supply the canonical exam subject schedule to authorized result-card readers.
+    // A missing result row cannot be treated as a zero or a completed paper.
+    let scheduleSql = `SELECT es.class_name, es.section, es.subject,
+                              es.total_marks, es.pass_marks, es.pass_percentage
+                       FROM exam_subjects es
+                       JOIN exams e ON e.id=es.exam_id AND e.school_id=es.school_id
+                       WHERE es.exam_id=$1 AND es.is_active=true`
+    const scheduleParams = [req.params.exam_id]
+    if (!isSuperAdmin) {
+      const scheduleScope = await tenantClause(req, { table:'exams', alias:'e', paramIndex:2 })
+      scheduleSql += scheduleScope.clause
+      scheduleParams.push(...scheduleScope.params)
+    }
+    scheduleSql += ' ORDER BY es.class_name, es.section, es.sort_order'
+    const schedule = await query(scheduleSql, scheduleParams)
+    res.json({ success: true, data: result.rows, scheduledSubjects: schedule.rows })
   } catch (err) {
     console.error('Exam results fetch error:', err.message)
     if (!ALLOW_MOCK_FALLBACK) {

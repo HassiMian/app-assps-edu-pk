@@ -1,6 +1,8 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
+import { gradeFromPercentage } from './firstTermResultIntegrity'
+import { isOfficialFirstTermExam } from './firstTermMarksPolicy'
 
 export const RESULT_TEMPLATES = [
  { id: 'reference', label: 'Template 1', name: 'Reference Clone' },
@@ -73,12 +75,16 @@ function SchoolNameLines({ name }) {
  return <span className="rc-brand-main">{clean}</span>
 }
 
-export function buildResultCardData({ student, exam, studentMarks, options, school }) {
+export function buildResultCardData({ student, exam, studentMarks, options, school, assessment }) {
  const opts = { ...DEFAULT_RESULT_OPTIONS, ...options }
+ const official = isOfficialFirstTermExam(exam)
+ const attendanceAvailable = ['totalSchoolDays','attended','absent'].every(key =>
+   exam?.[key] !== null && exam?.[key] !== undefined && exam?.[key] !== '' && Number.isFinite(Number(exam[key])))
+ if (official && !attendanceAvailable) opts.includeAttendance = false
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
  const subjects = (studentMarks || []).map((row) => {
- const perTermTotal = Number(row.total_marks || exam?.total_marks || 100)
+ const perTermTotal = Number(row.total_marks ?? exam?.total_marks ?? 100)
  const subject = {
  subjectName: row.subjectName || row.subject || 'Subject',
  assessmentMarks: numberOrNull(row.assessmentMarks ?? row.assessment_marks),
@@ -94,19 +100,25 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((s, v) => s + v, 0) : Number(row.marks_obtained || 0)
  const totalMarks = selectedMarks.length ? selectedMarks.length * perTermTotal : perTermTotal
  const percentage = totalMarks > 0 ? Math.round((obtainedMarks / totalMarks) * 100) : 0
+ const explicitPass = row.pass_marks != null && Number.isFinite(Number(row.pass_marks))
+ const passed = explicitPass ? obtainedMarks >= Number(row.pass_marks) : row.grade ? row.grade !== 'F' : percentage >= 33
  return {
  ...subject,
  totalMarks,
  obtainedMarks,
  percentage,
- grade: row.grade || gradeLabel(percentage),
- remarks: row.remarks || (percentage >= 80 ? 'Excellent' : percentage >= 60 ? 'Good' : percentage >= 50 ? 'Satisfactory' : 'Needs improvement'),
+ passMarks: explicitPass ? Number(row.pass_marks) : null,
+ passPercentage: row.pass_percentage == null ? null : Number(row.pass_percentage),
+ grade: passed ? gradeFromPercentage(percentage) : 'F',
+ remarks: row.remarks || (passed ? (percentage >= 80 ? 'Excellent' : percentage >= 60 ? 'Good' : percentage >= 50 ? 'Satisfactory' : 'Pass') : 'Below passing threshold'),
  }
  })
 
  const totalMarks = subjects.reduce((s, r) => s + r.totalMarks, 0)
  const obtainedMarks = subjects.reduce((s, r) => s + r.obtainedMarks, 0)
  const percentage = totalMarks > 0 ? Math.round((obtainedMarks / totalMarks) * 100) : 0
+ const resultStatus = official && !assessment?.complete ? 'Incomplete'
+   : subjects.some(row => row.grade === 'F') ? 'Fail' : subjects.length ? 'Pass' : 'Incomplete'
  const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 
  return {
@@ -135,16 +147,18 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  issueDate: today,
  subjects,
  attendance: {
- totalDays: exam?.totalSchoolDays || 220,
- attended: exam?.attended || 205,
- absent: exam?.absent || 15,
+ available: attendanceAvailable,
+ totalDays: attendanceAvailable ? Number(exam.totalSchoolDays) : null,
+ attended: attendanceAvailable ? Number(exam.attended) : null,
+ absent: attendanceAvailable ? Number(exam.absent) : null,
  },
  teacherRemarks: options.teacherRemarks || exam?.teacherRemarks || DEFAULT_RESULT_OPTIONS.teacherRemarks,
- principalRemarks: exam?.principalRemarks || 'Promoted as per school assessment policy.',
+ principalRemarks: exam?.principalRemarks || (official ? '' : 'Promoted as per school assessment policy.'),
  totalMarks,
  obtainedMarks,
  percentage,
- grade: gradeLabel(percentage),
+ grade: resultStatus === 'Incomplete' ? '—' : resultStatus === 'Fail' ? 'F' : gradeFromPercentage(percentage),
+ status: resultStatus,
  },
  options: opts,
  }
@@ -269,7 +283,7 @@ export function ResultMarksTable({ data }) {
  <td>{data.result.obtainedMarks}</td>
  <td>{data.result.percentage}%</td>
  <td>{data.result.grade}</td>
- <td>{data.result.percentage >= 50 ? 'Pass' : 'Needs review'}</td>
+ <td>{data.result.status}</td>
  </tr>
  </tbody>
  </table>
@@ -620,7 +634,7 @@ export const resultCardPrintCss = `
 export function openResultPrintWindow(data, exportMode = false) {
  const cards = Array.isArray(data) ? data : [data]
  const first = cards[0]
- if (!first) return
+ if (!first || cards.some(card => card?.result?.status === 'Incomplete')) return
  const pageRule = first.options.orientation === 'landscape'
  ? '@page { size: A4 landscape; margin: 0; }'
  : '@page { size: A4 portrait; margin: 0; }'

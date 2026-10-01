@@ -12,6 +12,7 @@ import {
  openResultPrintWindow,
  resultCardPrintCss,
 } from './resultCardTemplates'
+import { evaluateFirstTermStudent } from './firstTermResultIntegrity'
 
 function gradeLabel(pct) {
  if (pct >= 90) return 'A+'
@@ -352,6 +353,8 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
 export default function ResultCards() {
  const [exams, setExams] = useState([])
  const [results, setResults] = useState([])
+ const [scheduledSubjects, setScheduledSubjects] = useState(null)
+ const [loadError, setLoadError] = useState('')
  const [selectedExam, setSelectedExam] = useState('')
  const [selectedStudent, setSelectedStudent] = useState('')
  const [outputMode, setOutputMode] = useState('single')
@@ -374,17 +377,20 @@ export default function ResultCards() {
  if (!selectedExam) return
  setLoading(true)
  setResults([])
+ setScheduledSubjects(null)
+ setLoadError('')
  setSelectedStudent('')
  api.get(`/api/exams/results/${selectedExam}`)
  .then(r => {
  const list = r.data.data || []
  setResults(list)
+ setScheduledSubjects(Array.isArray(r.data.scheduledSubjects) ? r.data.scheduledSubjects : null)
  const firstClassKey = list.length ? `${list[0].class || ''}|${list[0].section || ''}` : ''
  setSelectedClassSection(firstClassKey)
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
  })
- .catch(() => setResults([]))
+ .catch(() => {setResults([]);setScheduledSubjects(null);setLoadError('Could not verify the saved marks and official subject schedule. Printing is unavailable.')})
  .finally(() => setLoading(false))
  }
 
@@ -415,12 +421,15 @@ export default function ResultCards() {
   })
   return [...map.values()]
   }
- const buildPrintCards = (rows = results, examObj = exam, scopeStudents = buildStudentsFromRows(rows)) =>
- scopeStudents.map(s => ({
- student: s,
- exam: examObj,
- studentMarks: rows.filter(r => String(r.student_id) === String(s.id)),
- })).filter(item => item.studentMarks.length > 0)
+ const buildPrintCards = (rows, examObj, scopeStudents, schedule) =>
+ scopeStudents.map(s => {
+   const assessment = evaluateFirstTermStudent({
+     exam:examObj, student:s,
+     rows:rows.filter(r => String(r.student_id) === String(s.id)),
+     scheduledSubjects:schedule,
+   })
+   return { student:s, exam:examObj, studentMarks:assessment.rows, assessment }
+ }).filter(item => item.studentMarks.length > 0 && item.assessment.complete)
 
  const students = buildStudentsFromRows(results)
  const classSectionOptions = [...new Map(students.map(s => [`${s.class || ''}|${s.section || ''}`, { key:`${s.class || ''}|${s.section || ''}`, className:s.class || '', section:s.section || '' }])).values()]
@@ -433,9 +442,14 @@ export default function ResultCards() {
  const studentMarks = results.filter(r => String(r.student_id) === selectedStudent)
  const student = students.find(s => String(s.id) === selectedStudent)
  const exam = exams.find(e => String(e.id) === selectedExam)
- const classPrintCards = buildPrintCards(filteredResults, exam, filteredStudents)
- const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
- const totalPossible = studentMarks.reduce((s, r) => s + Number(r.total_marks || exam?.total_marks || 100), 0)
+ const assessment = evaluateFirstTermStudent({ exam, student, rows:studentMarks, scheduledSubjects })
+ const classAssessments = filteredStudents.map(s => evaluateFirstTermStudent({
+   exam, student:s, rows:filteredResults.filter(r=>String(r.student_id)===String(s.id)), scheduledSubjects,
+ }))
+ const classIncomplete = classAssessments.filter(item=>!item.complete).length
+ const classPrintCards = buildPrintCards(filteredResults, exam, filteredStudents, scheduledSubjects)
+ const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained ?? 0), 0)
+ const totalPossible = studentMarks.reduce((s, r) => s + Number(r.total_marks ?? 0), 0)
  const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
  const selectedStudentLabel = student
  ? `${student.name}${student.gr_number ? ` - ${student.gr_number}` : student.roll_number ? ` - Roll ${student.roll_number}` : ''}`
@@ -452,20 +466,20 @@ export default function ResultCards() {
  }
  }
  const canPrint = outputMode === 'single'
- ? !!student && studentMarks.length > 0
+ ? !!student && assessment.complete && studentMarks.length > 0
  : outputMode === 'class'
- ? classPrintCards.length > 0
- : exams.length > 0
+ ? classPrintCards.length > 0 && classIncomplete === 0
+ : exams.length > 0 && !loading
 
  const openDesigner = async () => {
  if (outputMode === 'single') {
- if (!student || !studentMarks.length) return alert('Select student with marks first')
- setPrintCards([{ student, exam, studentMarks }])
+ if (!student || !studentMarks.length || !assessment.complete) return alert('Result incomplete: verify every scheduled subject before generating a final card.')
+ setPrintCards([{ student, exam, studentMarks:assessment.rows }])
  setShowParams(true)
  return
  }
  if (outputMode === 'class') {
- if (!classPrintCards.length) return alert('No class result cards found for this exam')
+ if (!classPrintCards.length || classIncomplete) return alert('One or more students have incomplete scheduled marks. Complete those entries before generating class cards.')
  setPrintCards(classPrintCards)
  setShowParams(true)
  return
@@ -476,14 +490,18 @@ export default function ResultCards() {
  const all = await Promise.all(exams.map(async (item) => {
  const res = await api.get(`/api/exams/results/${item.id}`)
  const rows = res.data.data || []
- return buildPrintCards(rows, item, buildStudentsFromRows(rows))
+ const schedule = Array.isArray(res.data.scheduledSubjects) ? res.data.scheduledSubjects : null
+ const scope = buildStudentsFromRows(rows)
+ const complete = buildPrintCards(rows, item, scope, schedule)
+ if (complete.length !== scope.length) throw new Error('Incomplete student results found')
+ return complete
  }))
  const flat = all.flat()
  if (!flat.length) return alert('No marks found in any class/exam')
  setPrintCards(flat)
  setShowParams(true)
  } catch {
- alert('Could not load all classes result cards')
+ alert('Some result cards are incomplete or the schedule is unavailable. All-classes printing is blocked.')
  } finally {
  setLoading(false)
  }
@@ -523,9 +541,9 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ ...card, display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:16, alignItems:'center' }}>
  <div>
  <h1 style={sectionHeader}>Result Cards</h1>
- <p style={{ color:C.muted, marginTop:8 }}>Choose single student, whole class, or all classes, then print professional A4 result cards.</p>
+ <p style={{ color:C.muted, marginTop:8 }}>Only students with every scheduled subject recorded can generate final A4 result cards.</p>
  </div>
- <button style={{ ...btnPrimary, opacity: canPrint ? 1 : 0.55, cursor: canPrint ? 'pointer' : 'not-allowed' }} onClick={openDesigner}>
+ <button style={{ ...btnPrimary, opacity: canPrint ? 1 : 0.55, cursor: canPrint ? 'pointer' : 'not-allowed' }} onClick={openDesigner} disabled={!canPrint || loading}>
   Generate Report Cards
  </button>
  </div>
@@ -570,8 +588,16 @@ export default function ResultCards() {
  </button>
  </div>
  <div style={{ color:C.muted, fontSize:12 }}>
- {loading ? 'Loading students with marks...' : students.length ? `${students.length} student(s) found for this exam.` : 'No students loaded yet.'}
+ {loading ? 'Loading students with marks and scheduled papers...' : students.length ? `${students.length} student(s) with saved marks. ${students.filter(s => !evaluateFirstTermStudent({ exam, student:s, rows:results.filter(r=>String(r.student_id)===String(s.id)), scheduledSubjects }).complete).length} incomplete or unverified.` : 'No students loaded yet.'}
  </div>
+ {loadError && <div role="alert" style={{ color:C.red, fontSize:12 }}>{loadError}</div>}
+ {student && !assessment.complete && (
+ <div role="status" style={{ color:C.gold, fontSize:12 }}>
+ Result Incomplete: {assessment.enteredCount}/{assessment.expectedCount} scheduled papers verified.
+ {assessment.missing.length ? ` Pending: ${assessment.missing.join(', ')}.` : ` ${assessment.status}.`}
+ Final result-card printing is disabled.
+ </div>
+ )}
  {classSectionOptions.length > 0 && <select style={select} value={effectiveClassSection} onChange={e=>{setSelectedClassSection(e.target.value);setOutputMode('class')}}>
  {classSectionOptions.map(item => <option key={item.key} value={item.key}>Class / Section - {item.className}{item.section ? ` - ${item.section}` : ''}</option>)}
  </select>}
@@ -582,7 +608,7 @@ export default function ResultCards() {
  disabled={!students.length || loading}
  >
  <option value="">{loading ? 'Loading targets...' : students.length ? 'Select print target' : 'No students with marks'}</option>
- <option value="class">Whole Class / Section ({classPrintCards.length} cards)</option>
+ <option value="class">Saved cards in Class / Section ({classPrintCards.length} complete)</option>
  <option value="all">All Classes - all saved result cards</option>
  {students.map(s => {
  const suffix = s.gr_number ? s.gr_number : s.roll_number ? `Roll ${s.roll_number}` : `${s.subjectsCount} subjects`
@@ -595,7 +621,7 @@ export default function ResultCards() {
  {outputMode === 'single' ? selectedStudentLabel : outputMode === 'class' ? `${classPrintCards.length} cards for ${filteredStudents[0]?.class || 'selected class'}${filteredStudents[0]?.section ? ' - '+filteredStudents[0].section : ''}` : 'All classes will be loaded before print'}
  </div>
  <div style={{ color:C.muted, fontSize:12, marginTop:4 }}>
- {outputMode === 'single' ? `${studentMarks.length} subject marks ready` : outputMode === 'class' ? 'One A4 page per student in this class/section' : 'All exams/classes with saved marks will be printed'}
+ {outputMode === 'single' ? `${assessment.enteredCount}/${assessment.expectedCount} scheduled subjects verified · ${assessment.status}` : outputMode === 'class' ? `${classIncomplete} incomplete/unverified among students with saved marks; final print requires all complete.` : 'Only verified complete saved result cards are eligible.'}
  </div>
  </div>
  )}
@@ -607,7 +633,7 @@ export default function ResultCards() {
  <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:10 }}>
  <div style={{ padding:12, borderRadius:14, background:'rgba(48,209,88,0.08)' }}>
  <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>OBTAINED</div>
- <div style={{ color:C.green, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (totalObtained || '-') : outputMode === 'class' ? classPrintCards.length : 'All'}</div>
+ <div style={{ color:C.green, fontSize:20, fontWeight:900 }}>{outputMode === 'single' ? (studentMarks.length ? totalObtained : '-') : outputMode === 'class' ? classPrintCards.length : 'All'}</div>
  </div>
  <div style={{ padding:12, borderRadius:14, background:'rgba(200,153,26,0.08)' }}>
  <div style={{ color:C.muted, fontSize:10, fontWeight:800 }}>PERCENT</div>
@@ -648,16 +674,16 @@ export default function ResultCards() {
  <div>
  <div style={{ color:C.gold, fontWeight:800, fontSize:22 }}>Result Card Preview</div>
  <div style={{ color:C.silver, marginTop:6 }}>{selectedStudentLabel}</div>
- <div style={{ color:C.muted, marginTop:4, fontSize:13 }}>{exam?.name} · {exam?.class}</div>
+ <div style={{ color:C.muted, marginTop:4, fontSize:13 }}>{exam?.name} · {exam?.class} · {assessment.status}</div>
  </div>
- <button style={btnSecondary} onClick={openDesigner}> Print with Template</button>
+ <button style={btnSecondary} onClick={openDesigner} disabled={!assessment.complete}> Print with Template</button>
  </div>
  <div style={{ display:'grid', gap:10, marginBottom:18 }}>
- {studentMarks.map(row=>(
+ {(assessment.rows.length ? assessment.rows : studentMarks).map(row=>(
  <div key={row.id || row.subject} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'11px 14px', borderRadius:12, background:'rgba(255,255,255,0.04)' }}>
  <span style={{ color:C.silver }}>{row.subject}</span>
- <span style={{ color:Number(row.marks_obtained)>=(exam?.pass_marks||33)?C.green:C.red, fontWeight:700 }}>
- {row.marks_obtained} / {row.total_marks || exam?.total_marks || 100}
+ <span style={{ color:row.grade==='F'?C.red:C.green, fontWeight:700 }}>
+ {row.marks_obtained} / {row.total_marks ?? '—'}{row.pass_marks != null ? ` (Pass: ${row.pass_marks})` : ''}
  </span>
  </div>
  ))}
@@ -665,14 +691,14 @@ export default function ResultCards() {
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:16, borderRadius:20, background:'rgba(255,255,255,0.08)' }}>
  <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalObtained} / {totalPossible}</div></div>
  <div style={{ textAlign:'right' }}>
- <div style={{ color:pct>=(exam?.pass_marks||33)?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
- <div style={{ color:C.muted }}>Grade: {gradeLabel(pct)}</div>
+ <div style={{ color:assessment.complete ? (assessment.status==='Pass'?C.green:C.red) : C.gold, fontSize:32, fontWeight:800 }}>{pct}%</div>
+ <div style={{ color:C.muted }}>Status: {assessment.status}{assessment.complete ? ` · Grade: ${assessment.status==='Fail'?'F':gradeLabel(pct)==='F'?'E':gradeLabel(pct)}` : ' · partial marks only'}</div>
  </div>
  </div>
  </div>
  ) : (
  <div className="super-module-card" style={{ ...card, padding:40, textAlign:'center', color:C.muted }}>
- {selectedExam?'No marks found for this exam. Go to Marks Sheet, load students, enter marks, then come back here.':'Select an exam to start generating result cards.'}
+ {loadError || (selectedExam?'No marks found for this exam. Go to Marks Sheet, load students, enter marks, then come back here.':'Select an exam to start generating result cards.')}
  </div>
  )}
  </div>
