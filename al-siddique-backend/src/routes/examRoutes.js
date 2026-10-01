@@ -132,25 +132,32 @@ router.post('/official-first-term/sync', protect, canSyncOfficial, async (req, r
       exam = updated.rows[0]
     }
 
-    const roster = await client.query(
-      `SELECT class, COALESCE(section,'') AS section
-       FROM students
-       WHERE school_id=$1 AND COALESCE(is_active,true)=true`,
-      [schoolId]
-    )
+    const [roster, existingEnrollments] = await Promise.all([
+      client.query(
+        `SELECT class, COALESCE(section,'') AS section
+         FROM students
+         WHERE school_id=$1 AND COALESCE(is_active,true)=true`,
+        [schoolId]
+      ),
+      client.query(
+        `SELECT class_name, COALESCE(section,'') AS section
+         FROM exam_class_enrollments
+         WHERE school_id=$1 AND exam_id=$2 AND is_active=true`,
+        [schoolId, exam.id]
+      ),
+    ])
 
-    const officialClassNames = new Set(Object.values(officialFirstTerm.CLASS_LEVEL_TO_NAME))
-    const desiredEnrollments = new Map()
-    for (const row of roster.rows) {
-      const className = officialFirstTerm.normalizeClassName(row.class)
-      if (!officialClassNames.has(className)) continue
-      const section = String(row.section || '').trim()
-      desiredEnrollments.set(`${className}|${section}`, { className, section })
-    }
+    // Exam enrollment is a snapshot. Once a section is enrolled, a later student
+    // transfer must not silently remove that section from an exam already underway.
+    const desiredEnrollments = officialFirstTerm.mergeEnrollmentSnapshot(existingEnrollments.rows, roster.rows)
+    const officialClassNames = Object.values(officialFirstTerm.CLASS_LEVEL_TO_NAME)
 
     await client.query(
-      'UPDATE exam_class_enrollments SET is_active=false, updated_at=NOW() WHERE school_id=$1 AND exam_id=$2',
-      [schoolId, exam.id]
+      `UPDATE exam_class_enrollments
+       SET is_active=false, updated_at=NOW()
+       WHERE school_id=$1 AND exam_id=$2
+         AND NOT (class_name = ANY($3::text[]))`,
+      [schoolId, exam.id, officialClassNames]
     )
     await client.query(
       'UPDATE exam_subjects SET is_active=false, updated_at=NOW() WHERE school_id=$1 AND exam_id=$2',
@@ -158,7 +165,7 @@ router.post('/official-first-term/sync', protect, canSyncOfficial, async (req, r
     )
 
     let scheduledSectionPapers = 0
-    for (const { className, section } of desiredEnrollments.values()) {
+    for (const { className, section } of desiredEnrollments) {
       await client.query(
         `INSERT INTO exam_class_enrollments (school_id, exam_id, class_name, section, is_active)
          VALUES ($1,$2,$3,$4,true)
@@ -192,7 +199,7 @@ router.post('/official-first-term/sync', protect, canSyncOfficial, async (req, r
       data: {
         exam,
         officialPaperCount: officialFirstTerm.officialRows().length,
-        enrolledClassSections: desiredEnrollments.size,
+        enrolledClassSections: desiredEnrollments.length,
         scheduledSectionPapers,
       }
     })

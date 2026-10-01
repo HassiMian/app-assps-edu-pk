@@ -81,6 +81,27 @@ function subjectsForClass(value) {
   return officialRows().filter(row => row.className === canonical)
 }
 
+function mergeEnrollmentSnapshot(existingRows = [], rosterRows = []) {
+  const officialClassNames = new Set(Object.values(CLASS_LEVEL_TO_NAME))
+  const merged = new Map()
+
+  for (const row of existingRows) {
+    const className = normalizeClassName(row?.class_name ?? row?.class)
+    if (!officialClassNames.has(className)) continue
+    const section = String(row?.section || '').trim()
+    merged.set(`${className}|${section}`, { className, section })
+  }
+
+  for (const row of rosterRows) {
+    const className = normalizeClassName(row?.class_name ?? row?.class)
+    if (!officialClassNames.has(className)) continue
+    const section = String(row?.section || '').trim()
+    merged.set(`${className}|${section}`, { className, section })
+  }
+
+  return [...merged.values()]
+}
+
 module.exports = {
   SESSION,
   NAME,
@@ -95,4 +116,5 @@ module.exports = {
   aliasesForClass,
   officialRows,
   subjectsForClass,
+  mergeEnrollmentSnapshot,
 }

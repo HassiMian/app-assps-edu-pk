@@ -30,3 +30,22 @@ test('scheduled subjects are class-specific and retain oral/written distinction'
     'English','Mathematics','Urdu','Science','Islamiyat','Quran / Nazra'
   ])
 })
+
+test('enrollment sync preserves the exam snapshot when a student later changes section', () => {
+  const merged = official.mergeEnrollmentSnapshot(
+    [
+      { class_name: 'One', section: 'Blue' },
+      { class_name: 'One', section: 'Yellow' },
+      { class_name: 'Nine', section: 'Fatima' },
+    ],
+    [
+      { class: 'One', section: 'Yellow' },
+      { class: 'Two', section: 'Orange' },
+    ]
+  )
+
+  assert.deepEqual(
+    merged.map(row => `${row.className}|${row.section}`).sort(),
+    ['One|Blue', 'One|Yellow', 'Two|Orange'].sort()
+  )
+})

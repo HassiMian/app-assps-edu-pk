@@ -42,3 +42,10 @@ Marks are validated 0..subject total, tenant/class/section checked, and save is 
 - Frontend deployment archive SHA256: a0a51710a379fcd96fde64ab83eb416e1c9257c0287e506ea50d2e1ad25f2d1d.
 - Rollback snapshots preserved: /var/www/apex-os.bak-20261001-074300 and /var/www/apex-os.prev-20261001-074300.
 - Deploy transport improvement: ops/deploy-production.ps1 accepts explicit SshExe/ScpExe paths; deploy safety tests 4/4 PASS.
+
+## Snapshot safety follow-up — 01 Oct 2026
+- After the verified 12/81 sync, the only active One/Blue student moved to One/Yellow, leaving the live roster at One/Blue=0 and One/Yellow=38.
+- This is treated as a roster change, not grounds to rewrite historical exam enrollment.
+- Official sync now merges existing official exam enrollments with the current active roster instead of deleting an already-enrolled official section.
+- Non-official classes such as Nine remain excluded, and exam_subjects are rebuilt only from the official 75-paper matrix.
+- Regression coverage confirms One/Blue remains in the exam snapshot when the current roster contains only One/Yellow.
