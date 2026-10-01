@@ -1,9 +1,9 @@
 {
-  "version": "examination-first-term-workflow-v1-r3-paper-hotfix2",
+  "version": "examination-first-term-workflow-v1-r3-paper-hotfix3",
   "component": "frontend",
-  "commit": "70e64509ee5809e9dd222493ef87bafd5d5bd413",
-  "shortCommit": "70e6450",
+  "commit": "153baf9cddf4e8c040ff00b7c0eb7e00d6c78f33",
+  "shortCommit": "153baf9",
   "previousLiveCommit": "594f6951d56d123d5db6ae05035b4e8e1d476482",
   "backendWorkflowCommit": "ab28a5c8d02b0339eee166a0af1facab1db7cd68",
-  "releaseNote": "Paper Store same-version seeding idempotent; preserves edited papers and prevents repeated storage rewrites. Print source iframe retained for slow 3-page Chrome preview. Backend and examination r5 unchanged."
+  "releaseNote": "Emergency editable recovery exams and Early Years mark/metadata/presentation working copies, Flyer Urdu Q4 supported, user-controlled marks reconciliation, source-preserving warning print, idempotent Paper Store and stable print frame. No backend or Examination r5 mutation."
 }
