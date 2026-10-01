@@ -203,7 +203,9 @@ export default function MarksSheet() {
       setMarks(loadedMarks)
       if (!roster.length) {
         setStatus(`No active students are registered in ${selectedClass}${selectedSection ? ' - ' + selectedSection : ''}.`, 'error')
-      } else if (!quiet) {
+      } else if (quiet) {
+        setStatus('', 'info')
+      } else {
         setStatus(`${roster.length} active student(s) loaded. ${Object.keys(loadedMarks).length} saved mark(s) restored.`, 'success')
       }
     } catch (error) {

@@ -131,6 +131,21 @@ test('marks workflow uses exact exam setup, actual sections and scheduled subjec
   assert.equal(examCreateCalls, 0)
 })
 
+test('successful quiet roster reload clears a stale empty-section error', async () => {
+  const originalBlue = rosters['One|Blue']
+  try {
+    rosters['One|Blue'] = []
+    await page.getByRole('button', { name:/Refresh Students/ }).click()
+    await page.getByText(/No active students are registered in One - Blue/).waitFor({ state:'visible' })
+
+    await page.locator('select').nth(2).selectOption('Yellow')
+    await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
+    assert.equal(await page.getByText(/No active students are registered in One - Blue/).count(), 0)
+  } finally {
+    rosters['One|Blue'] = originalBlue
+  }
+})
+
 test('marks save is one batch and is re-fetched for verification; MarksSheet never creates exam', async () => {
   const sectionSelect = page.locator('select').nth(2)
   await sectionSelect.selectOption('Yellow')
