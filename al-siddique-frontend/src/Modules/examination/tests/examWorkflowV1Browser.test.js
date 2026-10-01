@@ -174,9 +174,36 @@ test('client rejects out-of-range mark before API mutation', async () => {
   await page.getByText('Yellow Student One', { exact:true }).waitFor()
   const numberInputs = page.locator('input[type="number"]')
   await numberInputs.nth(0).fill('50')
+  await numberInputs.nth(1).fill('17')
   await page.getByLabel('Marks for Yellow Student One').fill('55')
   await page.getByRole('button', { name:/Save All Marks/ }).click()
   await page.getByText(/Invalid marks for Yellow Student One/).waitFor()
   assert.equal(resultPostCalls, 0)
   assert.equal(examCreateCalls, 0)
+})
+
+test('unconfigured paper requires its actual total and passing marks, never silent 100/33', async () => {
+  await page.locator('select').nth(2).selectOption('Yellow')
+  await page.getByText('Yellow Student One', { exact:true }).waitFor({ state:'visible' })
+
+  const total = page.getByRole('spinbutton', { name:'Total Marks' })
+  const passing = page.getByRole('spinbutton', { name:'Passing Marks' })
+  const mark = page.getByLabel('Marks for Yellow Student One')
+  assert.equal(await total.inputValue(), '')
+  assert.equal(await passing.inputValue(), '')
+  assert.equal(await mark.isDisabled(), true)
+  assert.equal(await page.getByText(/Paper marks are not configured/).count(), 1)
+
+  await page.getByRole('button', { name:/Save All Marks/ }).click()
+  await page.getByText(/Set the actual total marks/).waitFor()
+  assert.equal(resultPostCalls, 0)
+
+  await total.fill('50')
+  await page.getByRole('button', { name:/Save All Marks/ }).click()
+  await page.getByText(/Set passing marks/).waitFor()
+  assert.equal(resultPostCalls, 0)
+  assert.equal(await mark.isDisabled(), true)
+
+  await passing.fill('17')
+  assert.equal(await mark.isEnabled(), true)
 })

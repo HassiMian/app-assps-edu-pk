@@ -59,3 +59,15 @@ Marks are validated 0..subject total, tenant/class/section checked, and save is 
 - Live Result Cards correctly reports no students with marks because exam_results for exam 9 remains 0. No fake marks were created.
 - Frontend deploy helper false-success was traced to multiline payload forwarding through the Windows .cmd/Paramiko SSH wrapper. Remote payloads are now base64-encoded into one argv item before execution.
 - release-meta.json is now source-controlled in frontend/public so future clean frontend swaps retain release identity.
+
+## Live Marks Entry acceptance and paper-marks guard — 01 Oct 2026
+- In authenticated Opera on live r3, Exam 9 selects correctly. Starter/Blue loads 45 real students.
+- One/Blue correctly shows its empty-roster state. Switching to One/Yellow automatically loads 38 real students without stale error.
+- Switching One/Yellow from English (28 Sep) to Mathematics (30 Sep) retains and reloads the 38-person roster; no results were altered.
+- Blank Save All Marks gives "Enter at least one student mark before saving"; production exam_results for Exam 9 remained zero.
+- Result Cards selects First Term Exam - All Classes and correctly reports no saved marks.
+- Production data audit: 81 active exam_subjects, ZERO total_marks configured, ZERO pass_marks configured. Previous 100/33 display was inherited fallback, not approved paper-specific grading.
+- MarksSheet guard now displays empty, explicit Total Marks and Passing Marks for unconfigured subjects; student mark inputs remain disabled until both are supplied. First verified save still atomically locks the scheduled subject scheme, using existing backend rules.
+- New browser test validates no implicit 100/33, no POST on missing scheme and correct input enablement after values are provided.
+- Clean baseline build of source-controlled r3 matches all compared production JS asset hashes exactly, including Paper Editor, Result Cards, Notifications and Diary. No broad or blind frontend replacement.
+- Full combined regression: 28/28 PASS; production safety check PASS; production build PASS.

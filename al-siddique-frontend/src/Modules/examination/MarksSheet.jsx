@@ -39,8 +39,8 @@ export default function MarksSheet() {
   const [selectedSubjectId, setSelectedSubjectId] = useState('')
   const [students, setStudents] = useState([])
   const [marks, setMarks] = useState({})
-  const [totalMarks, setTotalMarks] = useState(100)
-  const [passMarks, setPassMarks] = useState(33)
+  const [totalMarks, setTotalMarks] = useState('')
+  const [passMarks, setPassMarks] = useState('')
   const [loadingSetup, setLoadingSetup] = useState(false)
   const [loadingStudents, setLoadingStudents] = useState(false)
   const [saving, setSaving] = useState(false)
@@ -166,16 +166,16 @@ export default function MarksSheet() {
     const current = scheduledSubjects.find(row => String(row.id) === String(selectedSubjectId))
     const next = current || scheduledSubjects[0]
     setSelectedSubjectId(String(next.id))
-    setTotalMarks(Number(next.total_marks ?? selectedExam?.total_marks ?? 100))
-    setPassMarks(Number(next.pass_marks ?? selectedExam?.pass_marks ?? 33))
+    setTotalMarks(next.total_marks == null ? '' : String(next.total_marks))
+    setPassMarks(next.pass_marks == null ? '' : String(next.pass_marks))
     setStudents([])
     setMarks({})
-  }, [scheduledSubjects, selectedSubjectId, selectedExam?.total_marks, selectedExam?.pass_marks])
+  }, [scheduledSubjects, selectedSubjectId])
 
   useEffect(() => {
     if (!selectedSubject) return
-    setTotalMarks(Number(selectedSubject.total_marks ?? selectedExam?.total_marks ?? 100))
-    setPassMarks(Number(selectedSubject.pass_marks ?? selectedExam?.pass_marks ?? 33))
+    setTotalMarks(selectedSubject.total_marks == null ? '' : String(selectedSubject.total_marks))
+    setPassMarks(selectedSubject.pass_marks == null ? '' : String(selectedSubject.pass_marks))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSubjectId])
 
@@ -240,8 +240,12 @@ export default function MarksSheet() {
     }
     const total = Number(totalMarks)
     const pass = Number(passMarks)
-    if (!Number.isFinite(total) || total <= 0) return setStatus('Total marks must be greater than zero.', 'error')
-    if (!Number.isFinite(pass) || pass < 0 || pass > total) return setStatus('Passing marks must be between 0 and total marks.', 'error')
+    if (String(totalMarks).trim() === '' || !Number.isFinite(total) || total <= 0) {
+      return setStatus('Set the actual total marks from this scheduled paper before saving.', 'error')
+    }
+    if (String(passMarks).trim() === '' || !Number.isFinite(pass) || pass < 0 || pass > total) {
+      return setStatus('Set passing marks between 0 and the actual paper total before saving.', 'error')
+    }
 
     const rows = []
     for (const student of students) {
@@ -375,11 +379,11 @@ export default function MarksSheet() {
               </div>
               <div>
                 <label style={labelStyle}>Total Marks</label>
-                <input type="number" min="1" style={input} value={totalMarks} disabled={selectedSubject.total_marks !== null && selectedSubject.total_marks !== undefined} onChange={e=>setTotalMarks(e.target.value)} />
+                <input type="number" min="1" placeholder="Actual paper total" aria-label="Total Marks" style={input} value={totalMarks} disabled={selectedSubject.total_marks !== null && selectedSubject.total_marks !== undefined} onChange={e=>setTotalMarks(e.target.value)} />
               </div>
               <div>
                 <label style={labelStyle}>Passing Marks</label>
-                <input type="number" min="0" max={Number(totalMarks)||100} style={input} value={passMarks} disabled={selectedSubject.pass_marks !== null && selectedSubject.pass_marks !== undefined} onChange={e=>setPassMarks(e.target.value)} />
+                <input type="number" min="0" max={Number(totalMarks)>0 ? Number(totalMarks) : undefined} placeholder="Required passing marks" aria-label="Passing Marks" style={input} value={passMarks} disabled={selectedSubject.pass_marks !== null && selectedSubject.pass_marks !== undefined} onChange={e=>setPassMarks(e.target.value)} />
               </div>
               <button type="button" onClick={()=>loadRoster()} disabled={loadingStudents} style={{ ...btnPrimary, minHeight:46, display:'inline-flex', alignItems:'center', justifyContent:'center', gap:8 }}>
                 <Search size={16} /> {loadingStudents ? 'Loading...' : 'Refresh Students'}
@@ -387,6 +391,11 @@ export default function MarksSheet() {
             </div>
           )}
 
+          {selectedSubject && (selectedSubject.total_marks == null || selectedSubject.pass_marks == null) && (
+            <div role="status" style={{ color:C.gold, fontSize:12, lineHeight:1.6 }}>
+              Paper marks are not configured. Enter the actual Total Marks and Passing Marks from the printed paper before entering student marks. The first verified save locks this subject's marks scheme; 100/33 is not assumed.
+            </div>
+          )}
           {selectedSubject?.total_marks !== null && selectedSubject?.total_marks !== undefined && (
             <div style={{ color:C.muted, fontSize:11 }}>Grading is locked for this scheduled subject after the first successful marks save: {selectedSubject.total_marks} total / {selectedSubject.pass_marks ?? 0} pass.</div>
           )}
@@ -428,9 +437,10 @@ export default function MarksSheet() {
                     <td style={{ padding:'11px 14px' }}>{student.gr_number || '-'}</td>
                     <td style={{ padding:'11px 14px' }}>{student.father_name || '-'}</td>
                     <td style={{ padding:'8px 12px', textAlign:'center' }}>
-                      <input type="number" min="0" max={Number(totalMarks)||100} step="0.01"
+                      <input type="number" min="0" max={Number(totalMarks)>0 ? Number(totalMarks) : undefined} step="0.01"
                         aria-label={`Marks for ${student.name}`}
                         value={value}
+                        disabled={String(totalMarks).trim() === '' || String(passMarks).trim() === ''}
                         onChange={e=>updateMark(student.id,e.target.value)}
                         onFocus={e=>e.target.select()}
                         style={{ ...input, width:118, margin:'0 auto', textAlign:'center', borderColor:invalid?C.red:undefined }}
