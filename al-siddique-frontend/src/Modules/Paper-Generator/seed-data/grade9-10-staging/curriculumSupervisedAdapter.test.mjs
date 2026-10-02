@@ -67,3 +67,13 @@ test('target subject is mandatory even for academically approved material',()=>{
  const x=toStructuredBankCandidate(approved(),{manifest,subjectId:''});
  assert.equal(x.ok,false);assert.match(x.errors.join('|'),/subject ID/);
 });
+
+test('supervised review defaults to full and optionally validates ALP without dropping provenance',()=>{
+ const q=approved();q.syllabusScope={alpStatus:'excluded'};
+ const full=buildCurriculumSupervisedReview({questions:[q],manifest,subjectId:'S'});
+ assert.equal(full.selection.syllabusMode,'full');assert.equal(full.counts.academicallyReady,1);
+ assert.equal(full.ready[0].candidate.curriculumQuestion.syllabusScope.alpStatus,'excluded');
+ const alp=buildCurriculumSupervisedReview({questions:[q],manifest,subjectId:'S',syllabusMode:'alp',examYear:2026});
+ assert.equal(alp.counts.academicallyReady,0);assert.equal(alp.counts.rejected,1);
+ assert.equal(full.directCommitAllowed,false);assert.equal(alp.directCommitAllowed,false);
+});

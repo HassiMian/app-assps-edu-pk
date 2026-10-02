@@ -60,7 +60,8 @@ test('question origin, ALP and keyed board evidence are separate validations',()
  const e=auditPublicationCandidate(q,manifest()).errors.join('|');
  assert.match(e,/Non-exercise/);assert.match(e,/Board appearance/);
  q.origin='exercise';q.boardEvidence=[];q.syllabusScope.evidenceSha256='';
- assert.match(auditPublicationCandidate(q,manifest()).errors.join('|'),/ALP evidence/);
+ assert.equal(auditPublicationCandidate(q,manifest()).valid,true);
+ assert.match(auditPublicationCandidate(q,manifest(),{syllabusMode:'alp',examYear:2026}).errors.join('|'),/ALP evidence/);
 });
 test('dry-run counts unchanged payloads, ID conflicts, semantic duplicates and rejects',()=>{
  const good=candidate(),identical=structuredClone(good),modified=structuredClone(good);
@@ -94,4 +95,26 @@ test('previous-board label needs exact independently registered paper evidence',
  m.boardPapers=[{id:'TEST-PAPER',status:'VERIFIED_PAPER',sha256:E,
   board:'Lahore',year:2026,session:'First Annual',url:q.boardEvidence[0].paperUrl,pageCount:3}];
  assert.equal(auditPublicationCandidate(q,m).valid,true);
+});
+
+test('full release accepts reviewed textbook content with no ALP evidence; ALP remains opt-in',()=>{
+ const q=candidate();q.syllabusScope={alpStatus:'excluded'};
+ assert.equal(auditPublicationCandidate(q,manifest()).valid,true);
+ assert.equal(auditPublicationCandidate(q,manifest(),{syllabusMode:'alp',examYear:2026}).valid,false);
+ q.syllabusScope={alpStatus:'unverified'};
+ assert.equal(auditPublicationCandidate(q,manifest()).valid,true);
+ const full=dryRunStaging({staged:[q],manifest:manifest()});
+ assert.equal(full.counts.wouldInsert,1);assert.equal(full.selection.syllabusMode,'full');
+ const alp=dryRunStaging({staged:[q],manifest:manifest(),syllabusMode:'alp',examYear:2026});
+ assert.equal(alp.counts.wouldInsert,0);assert.equal(alp.counts.rejected,1);
+ q.review.checks.syllabus=false;
+ assert.equal(auditPublicationCandidate(q,manifest()).valid,false);
+});
+test('ALP release verifies matching year and evidence without weakening source review',()=>{
+ const q=candidate();
+ assert.equal(auditPublicationCandidate(q,manifest(),{syllabusMode:'alp',examYear:2026}).valid,true);
+ assert.equal(auditPublicationCandidate(q,manifest(),{syllabusMode:'alp',examYear:2027}).valid,false);
+ assert.equal(auditPublicationCandidate(q,manifest(),{syllabusMode:'alp'}).valid,false);
+ q.source.languages.ur.pdfSha256='c'.repeat(64);
+ assert.equal(auditPublicationCandidate(q,manifest()).valid,false);
 });
