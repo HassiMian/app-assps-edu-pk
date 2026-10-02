@@ -7,13 +7,19 @@ test('source catalog manifest is well-formed and IDs unique',()=>{
  assert.ok(m.entries.length>=25);
  assert.equal(new Set(m.entries.map(s=>s.recordId)).size,m.entries.length);
 });
-test('only catalog-009 has downloaded PDF bytes; ALL edition/page/exercise audits remain pending',()=>{
+test('Biology IX English and Urdu have verified PDF bytes; ALL edition/page/exercise audits remain pending',()=>{
+ const downloaded=new Map([
+  ['pectaa-catalog-009',{bytes:31362949,sha:'f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5'}],
+  ['pectaa-catalog-010',{bytes:84697797,sha:'7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd',pages:212}],
+ ]);
  for(const e of m.entries){
-   if(e.recordId==='pectaa-catalog-009'){
+   if(downloaded.has(e.recordId)){
+     const expected=downloaded.get(e.recordId);
      assert.match(e.pdfUrl,/drive.google.com/);
      assert.equal(e.downloadStatus,'PDF_BYTES_VERIFIED_EDITION_UNREVIEWED');
-     assert.equal(e.downloadByteLength,31362949);
-     assert.equal(e.pdfSha256,'f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5');
+     assert.equal(e.downloadByteLength,expected.bytes);
+     assert.equal(e.pdfSha256,expected.sha);
+     if(expected.pages)assert.equal(e.pdfPageCount,expected.pages);
    }else{
      assert.equal(e.pdfUrl,null);
      assert.equal(e.pdfSha256,null);

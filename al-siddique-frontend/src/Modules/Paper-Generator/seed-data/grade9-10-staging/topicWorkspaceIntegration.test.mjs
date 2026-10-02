@@ -16,3 +16,24 @@ test('pilot UI never calls live Question Bank writer or uncontrolled AI generati
  assert.match(researchUI,/Export review drafts/);
  assert.match(researchUI,/Draft \{type\}/);
 });
+
+test('persistent curriculum drafts use tenant-scoped storage wrapper and never raw localStorage',()=>{
+ const store=readFileSync(new URL('../../topicDraftBrowserStore.js',import.meta.url),'utf8');
+ assert.match(store,/getTenantStorageItem/);assert.match(store,/setTenantStorageItem/);
+ assert.match(store,/expectedRevision/);assert.match(store,/rollbackTopicDraftLibrary/);
+ assert.doesNotMatch(store,/window\.localStorage|localStorage\./);
+ assert.doesNotMatch(researchUI,/setDrafts\(|setBlocks\(/);
+ assert.match(researchUI,/library revision/);
+ assert.match(researchUI,/tenant-scoped/);
+});
+test('draft browser storage key is isolated per curriculum before tenant scoping',()=>{
+ const store=readFileSync(new URL('../../topicDraftBrowserStore.js',import.meta.url),'utf8');
+ assert.match(store,/topicDraftBaseKey\(curriculumKey\)/);
+ assert.match(store,/\$\{BASE_KEY\}__\$\{part\}/);
+ assert.match(store,/keyPart/);
+});
+test('Urdu authoring is bound to the verified Urdu ledger and its own physical page',()=>{
+ assert.match(researchUI,/biology9UrduEvidenceLedger/);
+ assert.match(researchUI,/urduEvidencePage/);
+ assert.match(researchUI,/Urdu source physical page/);
+});

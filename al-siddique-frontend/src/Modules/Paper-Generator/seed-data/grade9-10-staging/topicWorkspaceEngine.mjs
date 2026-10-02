@@ -11,9 +11,9 @@ export function getTopicNode(ledger,chapterId,topicId){
 }
 // Exercise reference must be assigned to a verified topic via an independently reviewed mapping.
 // Counts of exercise placeholders are NOT approved questions and have no presumptive topic.
-export function newTopicDraft({id,ledger,chapterId,topicId,type='short',origin='additional',
+export function newTopicDraft({id,ledger,urduLedger=null,chapterId,topicId,type='short',origin='additional',
  en='',ur='',hi='',answerEn='',answerUr='',answerHi='',marks=2,importance=false,
- importanceReason='',traditional=false,difficulty='medium',evidencePage=null,exerciseRef=null,
+ importanceReason='',traditional=false,difficulty='medium',evidencePage=null,urduEvidencePage=null,exerciseRef=null,
  optEn=['','','',''],optUr=['','','',''],optHi=['','','',''],correctOptionId='A'}){
  const node=getTopicNode(ledger,chapterId,topicId);
  const errors=[];
@@ -24,14 +24,33 @@ export function newTopicDraft({id,ledger,chapterId,topicId,type='short',origin='
  if(!Number.isFinite(marks)||marks<=0)errors.push('Marks must be positive');
  if(!['easy','medium','difficult'].includes(difficulty))errors.push('Difficulty must be Easy, Medium or Difficult');
  if(!Number.isInteger(evidencePage)||evidencePage<1||evidencePage>ledger?.source?.pdfPages)
-  errors.push('All original and exercise drafts need a physical source page within the verified PDF');
+  errors.push('All drafts need a physical English-source page within the verified PDF');
+ const rangeReady=Number.isInteger(node?.topic?.verifiedPhysicalStartPage)&&Number.isInteger(node?.topic?.verifiedPhysicalEndPage)
+  &&node.topic.pageAuditStatus==='VISUALLY_CHECKED';
+ if(origin!=='exercise'){
+  if(!rangeReady)errors.push('Topic authoring is blocked until its physical page range is independently verified');
+  else if(Number.isInteger(evidencePage)&&(evidencePage<node.topic.verifiedPhysicalStartPage||evidencePage>node.topic.verifiedPhysicalEndPage))
+   errors.push('English source page is outside the verified topic range');
+ }
  if(importance&&!text(importanceReason))errors.push('Importance requires a rationale');
  if(origin==='exercise'){
-  if(!text(exerciseRef))errors.push('Exercise additionally needs an individually checked source reference');
+  const section=(node?.chapter?.exercise?.sections||[]).find(s=>(s.questionSourceRefs||[]).includes(exerciseRef));
+  if(!text(exerciseRef)||!section)errors.push('Exercise requires a known exercise reference');
+  if(!section||section.individualQuestionPageMapStatus!=='VERIFIED')errors.push('Exercise authoring is blocked until the exact exercise item page is individually verified');
  }else if(exerciseRef)errors.push('Original topic-authored work must not claim exercise origin');
  if(!text(en)) errors.push('An English draft question is required');
  if(type!=='mcq'&&!text(answerEn)) errors.push('An English draft answer is required');
  if(type!=='mcq'&&text(ur)&&!text(answerUr))errors.push('A drafted Urdu question requires its Urdu answer');
+ let urduNode=null;
+ if(text(ur)){
+  urduNode=(urduLedger?.chapters||[]).find(c=>c.number===node?.chapter?.number)?.topics?.find(t=>t.id===topicId)||null;
+  const urduRangeReady=Number.isInteger(urduNode?.verifiedPhysicalStartPage)&&Number.isInteger(urduNode?.verifiedPhysicalEndPage)
+   &&urduNode.pageAuditStatus==='VISUALLY_CHECKED';
+  if(!urduRangeReady)errors.push('Urdu rendition is blocked until the matching Urdu topic page range is verified');
+  if(!Number.isInteger(urduEvidencePage))errors.push('Urdu rendition needs its own physical source page');
+  else if(urduRangeReady&&(urduEvidencePage<urduNode.verifiedPhysicalStartPage||urduEvidencePage>urduNode.verifiedPhysicalEndPage))
+   errors.push('Urdu source page is outside the verified Urdu topic range');
+ }
  if(type!=='mcq'&&text(hi)&&!text(answerHi))errors.push('A drafted Hindi question requires its Hindi answer');
  if(type==='mcq'){
   if(!Array.isArray(optEn)||optEn.length!==4||optEn.some(o=>!text(o))) errors.push('MCQ requires four real English options');
@@ -41,11 +60,16 @@ export function newTopicDraft({id,ledger,chapterId,topicId,type='short',origin='
  }
  if(errors.length)return {valid:false,errors,question:null};
  const question={id,chapter:{id:chapterId,number:node.chapter.number},topicId,
-  type,origin,marks,difficulty,importance:{selected:importance,reason:importanceReason},
+  type,origin,marks,difficulty,medium:text(ur)?'dual':'english',importance:{selected:importance,reason:importanceReason},
   editorial:{traditional:!!traditional},source:{catalogRecordId:ledger.source.catalogRecordId,
    pdfSha256:ledger.source.pdfSha256,page:evidencePage,exerciseRef:origin==='exercise'?exerciseRef:null,
-   topicIndexEvidence:'TABLE_OF_CONTENTS_FIRST_PASS'},
+   topicIndexEvidence:'VISUALLY_VERIFIED_TOPIC_RANGE',languages:{
+    en:{catalogRecordId:ledger.source.catalogRecordId,pdfSha256:ledger.source.pdfSha256,page:evidencePage,
+     exerciseRef:origin==='exercise'?exerciseRef:null},
+    ...(text(ur)?{ur:{catalogRecordId:urduLedger.source.catalogRecordId,pdfSha256:urduLedger.source.pdfSha256,
+     page:urduEvidencePage,exerciseRef:null}}:{})}},
   curriculum:{authority:'PECTAA',grade:9,subjectId:'biology',edition:ledger.curriculum.catalogEditionLabel,
+   catalogRecordIds:{en:ledger.source.catalogRecordId,...(text(ur)&&urduLedger?.source?.catalogRecordId?{ur:urduLedger.source.catalogRecordId}:{})},
    languageSource:'en'},correctOptionId:type==='mcq'?correctOptionId:null,
   content:Object.fromEntries(['en','ur','hi'].map((l)=>{
    const stem={en,ur,hi}[l],answer={en:answerEn,ur:answerUr,hi:answerHi}[l];
@@ -60,10 +84,15 @@ export function newTopicDraft({id,ledger,chapterId,topicId,type='short',origin='
  return {valid:true,errors:[],question};
 }
 export function viewLanguage(q,language){
- if(language==='dual')return !!text(q?.content?.en?.stem)&&!!text(q?.content?.ur?.stem);
  if(!VIEW_LANGUAGES.includes(language))return false;
+ const enEvidence=q?.source?.languages?.en||(q?.source?.pdfSha256&&Number.isInteger(q?.source?.page)?q.source:null);
+ const urEvidence=q?.source?.languages?.ur;
+ const enReady=!!text(q?.content?.en?.stem)&&!!enEvidence?.pdfSha256&&Number.isInteger(enEvidence?.page);
+ const urReady=!!text(q?.content?.ur?.stem)&&!!urEvidence?.pdfSha256&&Number.isInteger(urEvidence?.page);
+ if(language==='dual')return enReady&&urReady;
+ if(language==='ur')return urReady;
  if(language==='hi')return !!text(q?.content?.hi?.stem); // Authoring preview only; publication requires Hindi review.
- return !!text(q?.content?.[language]?.stem);
+ return enReady;
 }
 export function projectTopicTree({ledger,questions=[],type='short',origin='all',importantOnly=false,
  traditionalOnly=false,language='en',showEmptyTopics=true,search=''}={}){
