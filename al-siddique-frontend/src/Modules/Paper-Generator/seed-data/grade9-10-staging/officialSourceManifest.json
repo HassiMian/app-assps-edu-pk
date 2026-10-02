@@ -2,9 +2,9 @@
   "schemaVersion": "assps-official-manifest-v1",
   "catalogUrl": "https://pectaa.edu.pk/curriculum-compliance/",
   "checkedOn": "2026-10-02",
-  "status": "CATALOG_ONLY_NOT_DOWNLOADED",
+  "status": "ONE_BINARY_VERIFIED_28_PDF_DOWNLOADS_PENDING",
   "authority": "PECTAA",
-  "notes": "Listing labels transcribed from official PECTAA Grade IX/X catalog. VERIFY edition/medium where explicitly marked. No chapters/pages/exercises or PDF hashes have been asserted.",
+  "notes": "27 unique official-page hyperlinks; 2 repeated Tarjuma labels unresolved. Biology IX EM link downloaded as PDF bytes (31,362,949, SHA-256 recorded) but cover/edition/chapter and exercise QA NOT done. No real academic question is approved.",
   "entries": [
     {
       "recordId": "pectaa-catalog-001",
@@ -18,7 +18,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 7,
+      "catalogLinkStatus": "AMBIGUOUS_REPEATED_LABEL",
+      "catalogAssetUrl": null
     },
     {
       "recordId": "pectaa-catalog-002",
@@ -32,7 +37,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1kiaCqhXsXuuZ7HAAuXYfjl4_WaBf-ARS/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-003",
@@ -46,7 +56,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1JPgnI_hL6D0EMPG36IdjcqB2OFBHLp52/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-004",
@@ -60,7 +75,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1mWBO-wzXqv0Oq9oazcjM-Y16EqmPqBtj/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-005",
@@ -74,7 +94,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1IHxM96F221JY3uL4jEIRWQ8NxskXyilF/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-006",
@@ -88,7 +113,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1uSduNMyaebkeOlAis_oh4KUBKssMAT2M/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-007",
@@ -102,7 +132,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1OY1Unpm8VkLCGQfbLFrE8wLn3fzXmZpc/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-008",
@@ -116,7 +151,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1sbP5nnysHqXB-T3qVb55chS93LdqqBoN/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-009",
@@ -126,11 +166,21 @@
       "edition": "2025-26",
       "medium": "English",
       "catalogLabel": "Biology (EM) 2025-26",
-      "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfUrl": "https://drive.google.com/file/d/1rH5qC3FM12nPcH1zIVbm25tMKWxMv-3P/view?usp=sharing",
+      "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_EDITION_CHAPTER_AND_EXERCISE_VALIDATION",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1rH5qC3FM12nPcH1zIVbm25tMKWxMv-3P/view?usp=sharing",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 31362949,
+      "downloadVerifiedOn": "2026-10-02",
+      "downloadStatus": "PDF_BYTES_VERIFIED_EDITION_UNREVIEWED",
+      "sourceCacheRef": "IX/biology9_em_catalog009.pdf"
     },
     {
       "recordId": "pectaa-catalog-010",
@@ -144,7 +194,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1LxUO75kyWQQWZZPTpg9oGYetAgYAjql3/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-011",
@@ -158,7 +213,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1Afzgg1sukw1-qBOj61VnMGs6-b1x82ae/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-012",
@@ -172,7 +232,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/17UbTKUKdiVeK-_AZRFXgqnzBfwjtq92p/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-013",
@@ -186,7 +251,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1K9AWmNIjYFUNWE_F8JkELmlEkZO9Ms85/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-014",
@@ -200,7 +270,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 7,
+      "catalogLinkStatus": "AMBIGUOUS_REPEATED_LABEL",
+      "catalogAssetUrl": null
     },
     {
       "recordId": "pectaa-catalog-015",
@@ -214,7 +289,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1rvX2aIfWwwH_N7V4jsGwMmkpwteDlUmB/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-016",
@@ -228,7 +308,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1DIhnZpXMa_5-GiS4KLq9B0ITTAOnPlr4/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-017",
@@ -242,7 +327,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1oiEZlsGqnwvAzHgB8Yp1RWi6AnvJ-UE1/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-018",
@@ -256,7 +346,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1HeCYkhQimYehdXb6R4vEisIa3qUQtsTt/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-019",
@@ -270,7 +365,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1-4tyA97RPFni6fju0-vTA_w1thjBjtVs/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-020",
@@ -284,7 +384,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1-8TsnRfFOQ3JxAT9QXsBGH4Xf5fquZEo/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-021",
@@ -298,7 +403,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/10Vy5cqKK9eAlv9k-zW6jqjmTJZngUAk-/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-022",
@@ -312,7 +422,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1O30gCpTFypPnG8BR8fsFmYrxEWXOzS17/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-023",
@@ -326,7 +441,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1uJ52QDD3klP-CwbfXWHlV_d4Y4aTJws5/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-024",
@@ -340,7 +460,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1BqP9RHrXtqCpZZ1soQcyvJ90ACUSAWar/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-025",
@@ -354,7 +479,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1bfJ7yeruNQ-dKlYeMtCNua2t4k3QbxBU/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-026",
@@ -368,7 +498,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1SOthleP3bosiOobT5Zwbi0Ceq7J091pc/view?usp=drive_link"
     },
     {
       "recordId": "pectaa-catalog-027",
@@ -382,7 +517,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/18jrYqapYhunZykdWTX4Yl5js8RtCk2Bq/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-028",
@@ -396,7 +536,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1JpqDG39mhcFxq0cx1pRfx3_lLR6xwsLs/view?usp=sharing"
     },
     {
       "recordId": "pectaa-catalog-029",
@@ -410,7 +555,12 @@
       "pdfSha256": null,
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE"
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1kX5PVHh8f2u9r_gUIGewxh2T_xSl3P_e/view?usp=sharing"
     }
   ],
   "additionalCatalogStreamsPending": [
