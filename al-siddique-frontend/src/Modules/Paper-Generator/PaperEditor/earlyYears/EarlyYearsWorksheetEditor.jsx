@@ -16,6 +16,8 @@ import {
   normalizeEarlyYearsTemplateId
 } from './earlyYearsTemplates.js'
 import './earlyYearsPrint.css'
+import EarlyYearsReferenceBaselineDialog from './EarlyYearsReferenceBaselineDialog.jsx'
+import { getTenantScope } from '../../../../services/tenantStorage.js'
 
 const TEMPLATE_STORAGE_KEY = 'assps-early-years-template-map-v1'
 
@@ -42,6 +44,7 @@ export default function EarlyYearsWorksheetEditor({
   const [selectedPaperId, setSelectedPaperId] = useState(initialPaperId)
   const [zoomLevel, setZoomLevel] = useState(1.0)
   const [showQAPanel, setShowQAPanel] = useState(false)
+  const [showReferenceBaseline, setShowReferenceBaseline] = useState(false)
   const [presentationRevision, setPresentationRevision] = useState(0)
   const [templateId, setTemplateId] = useState('scholar-spark')
   const templatePreset = useMemo(() => getEarlyYearsTemplatePreset(templateId), [templateId])
@@ -103,6 +106,7 @@ export default function EarlyYearsWorksheetEditor({
   const selectPaper = useCallback((nextId) => {
     if (!nextId || nextId === selectedPaperId) return
     setShowQAPanel(false)
+    setShowReferenceBaseline(false)
     setSelectedPaperId(nextId)
   }, [selectedPaperId])
 
@@ -153,6 +157,9 @@ export default function EarlyYearsWorksheetEditor({
         fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
       }}
     >
+      {showReferenceBaseline && currentPaper && <EarlyYearsReferenceBaselineDialog
+        key={currentPaper.id} paper={currentPaper} templateId={templateId}
+        onClose={() => setShowReferenceBaseline(false)} />}
       {/* Top Application Bar */}
       <header
         className="no-print"
@@ -416,6 +423,15 @@ export default function EarlyYearsWorksheetEditor({
             ✎ Edit Paper / Marks · QA Panel {qaFindings.length > 0 ? `(${qaFindings.length} notices)` : ''}
           </button>
 
+          {getTenantScope() !== 'public' && <button
+            type="button" data-early-years-reference-baseline-trigger
+            aria-label={`Capture Early Years reference baseline for ${currentPaper?.id || ''}`}
+            title="Read-only original source, exact persisted overlays, template and referenced sketches; screenshot/PDF separate"
+            onClick={() => setShowReferenceBaseline(true)}
+            style={{background:'#334155',color:'#dbeafe',border:'1px solid #64748b',borderRadius:6,
+              padding:'6px 11px',cursor:'pointer',fontSize:11,fontWeight:750}}>
+            Reference Baseline
+          </button>}
           <button
             type="button"
             onClick={() => handlePrint(false)}
