@@ -26,6 +26,7 @@ const clone=()=>({
 })
 export default function TopicWiseCurriculumWorkspace(){
  const [type,setType]=useState('mcq'),[language,setLanguage]=useState('en')
+ const [syllabusMode,setSyllabusMode]=useState('full'),[examYear,setExamYear]=useState(2026)
  const [origin,setOrigin]=useState('all'),[importantOnly,setImportantOnly]=useState(false)
  const [traditionalOnly,setTraditionalOnly]=useState(false),[search,setSearch]=useState('')
  const [opened,setOpened]=useState([biologyLedger.chapters[0].id])
@@ -39,10 +40,11 @@ export default function TopicWiseCurriculumWorkspace(){
  const blocks=library?.blocks||[]
  const drafts=useMemo(()=>[...reviewedPendingExamples.drafts,...userDrafts],[userDrafts])
  const tree=useMemo(()=>projectTopicTree({ledger:biologyLedger,questions:drafts,type,origin,
-  importantOnly,traditionalOnly,language,showEmptyTopics:showEmpty,search}),
-  [drafts,type,origin,importantOnly,traditionalOnly,language,showEmpty,search])
- const inspected=useMemo(()=>validateQuestionBlocks(blocks,drafts,{language}),[blocks,drafts,language])
- const currentSelected=drafts.filter(q=>selected.includes(q.id)&&q.type===type)
+  importantOnly,traditionalOnly,language,showEmptyTopics:showEmpty,search,syllabusMode,examYear}),
+  [drafts,type,origin,importantOnly,traditionalOnly,language,showEmpty,search,syllabusMode,examYear])
+ const inspected=useMemo(()=>validateQuestionBlocks(blocks,drafts,{language,syllabusMode,examYear}),[blocks,drafts,language,syllabusMode,examYear])
+ const visibleQuestions=tree.flatMap(ch=>ch.topics.flatMap(t=>t.questions))
+ const currentSelected=visibleQuestions.filter(q=>selected.includes(q.id))
  const setField=(key,value)=>setForm(f=>({...f,[key]:value}))
  function persistLibrary(nextUserDrafts,nextBlocks,message){
   if(!library){setNotice('Draft library is unavailable. Reload it before writing anything.');return false}
@@ -68,6 +70,7 @@ export default function TopicWiseCurriculumWorkspace(){
   setLibrary(restored.library);setSelected([]);setNotice('Rolled back content from revision '+target+' as new revision '+restored.library.revision+'.')
  }
  function startDraft(chapterId,topicId){
+  if(syllabusMode!=='full'){setNotice('Switch to Full textbook to author a question. ALP eligibility is reviewed separately.');return}
   setEditing({chapterId,topicId});setForm({...emptyForm(),marks:type==='mcq'?1:type==='long'?5:2});setNotice('')
  }
  function saveDraft(){
@@ -109,7 +112,8 @@ export default function TopicWiseCurriculumWorkspace(){
  }
  function exportStaging(){
   if(!drafts.length){setNotice('No topic-authored draft is available to export.');return}
-  const data={...clone(),libraryRevision:library?.revision??null,draftQuestions:drafts,previewBlocks:blocks};
+  const data={...clone(),bankCoverage:'full-textbook',selection:{syllabusMode,examYear:syllabusMode==='alp'?examYear:null},
+   selectionValidation:inspected,libraryRevision:library?.revision??null,draftQuestions:drafts,previewBlocks:blocks};
   const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}))
   const anchor=document.createElement('a');anchor.href=url;anchor.download='assps-ix-biology-topic-drafts-review-only.json'
   anchor.click();URL.revokeObjectURL(url)
@@ -138,6 +142,12 @@ export default function TopicWiseCurriculumWorkspace(){
    {AUTHORING_TYPES.map(t=><button key={t} type="button" style={button(type===t)} onClick={()=>{setType(t);setSelected([]);setNotice('')}}>{t.toUpperCase()}</button>)}
   </div>
   <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'center',marginBottom:14}}>
+   <select aria-label="Syllabus coverage" style={{...inputStyle,maxWidth:210}} value={syllabusMode}
+    onChange={e=>{setSyllabusMode(e.target.value);setSelected([]);setEditing(null);setNotice('')}}>
+    <option value="full">Full textbook (default)</option><option value="alp">ALP — verified topics only</option>
+   </select>
+   {syllabusMode==='alp'&&<label style={{fontSize:12}}>Exam year <input aria-label="ALP examination year" style={{...inputStyle,width:90}} type="number" min="2000" value={examYear}
+    onChange={e=>{setExamYear(Number(e.target.value));setSelected([])}}/></label>}
    <select aria-label="Question origin" style={{...inputStyle,maxWidth:190}} value={origin} onChange={e=>setOrigin(e.target.value)}>
     <option value="all">All source origins</option>{ORIGIN_TYPES.map(o=><option key={o} value={o}>{o}</option>)}
    </select>
@@ -149,6 +159,8 @@ export default function TopicWiseCurriculumWorkspace(){
    <label style={{fontSize:12}}><input type="checkbox" checked={traditionalOnly} onChange={e=>setTraditionalOnly(e.target.checked)}/> Traditional</label>
    <label style={{fontSize:12}}><input type="checkbox" checked={showEmpty} onChange={e=>setShowEmpty(e.target.checked)}/> Show empty topics</label>
   </div>
+  <p style={{fontSize:12,color:tone.muted}}>Full textbook coverage includes all prescribed chapters, including material outside ALP. ALP changes selection only; saved drafts and blocks remain available.</p>
+  {syllabusMode==='alp'&&tree.length===0&&<div role="status" style={{...base,marginBottom:12}}>No verified ALP-eligible questions for {examYear}. Choose Full textbook to browse and author all topics.</div>}
   {notice&&<div role="status" style={{...base,color:'#ffe1a0',marginBottom:12}}>{notice}</div>}
   <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,320px),1fr))',gap:12,alignItems:'start'}}>
    <div style={{display:'flex',flexDirection:'column',gap:9}}>
@@ -164,7 +176,7 @@ export default function TopicWiseCurriculumWorkspace(){
       <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap'}}>
        <strong style={{fontSize:13}}>{t.id} · {t.title}</strong>
        <span style={{fontSize:11,color:tone.muted}}>TOC p.{t.indexPage} · {t.questions.length} item(s)</span>
-       <button style={{...button(),marginLeft:'auto'}} type="button" onClick={()=>startDraft(ch.id,t.id)}>
+       <button disabled={syllabusMode!=='full'} style={{...button(),marginLeft:'auto',opacity:syllabusMode==='full'?1:.5}} type="button" onClick={()=>startDraft(ch.id,t.id)}>
         <Plus size={12} style={{verticalAlign:'middle'}}/> Draft {type}</button>
       </div>
       {t.questions.length===0?<p style={{fontSize:12,color:tone.muted,margin:'7px 0'}}>No reviewed or authored {type.toUpperCase()} for this topic yet.</p>:

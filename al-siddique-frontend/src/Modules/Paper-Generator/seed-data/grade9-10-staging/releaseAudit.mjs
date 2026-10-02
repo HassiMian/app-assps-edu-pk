@@ -38,9 +38,9 @@ function checkBook(q,language,manifest,errors){
    errors.push(language+': non-exercise item is misclassified');
 }
 
-export function auditPublicationCandidate(q,manifest){
+export function auditPublicationCandidate(q,manifest,{syllabusMode='full',examYear}={}){
  if(!q||typeof q!=='object') return {valid:false,errors:['Invalid staged record']};
- const errors=[...validateQuestion(q,{forPublication:true}).errors];
+ const errors=[...validateQuestion(q,{forPublication:true,syllabusMode,examYear}).errors];
  if(q?.medium!=='dual') errors.push('One identity must include both reviewed languages');
  for(const language of ['en','ur']){
    if(!has(q?.content?.[language]?.stem)||!has(q?.content?.[language]?.answer))
@@ -59,8 +59,8 @@ export function auditPublicationCandidate(q,manifest){
    errors.push('Author cannot independently approve own academic item');
  if(has(reviewers.english)&&reviewers.english===reviewers.urdu)
    errors.push('Independent language reviewer identities required');
- if(!hash(q?.syllabusScope?.evidenceSha256)||q.syllabusScope?.verifiedBy!==reviewers.syllabus)
-   errors.push('Exam-year syllabus/ALP evidence is not checksum-bound and reviewed');
+ // Full-book syllabus review is bound to the verified bilingual textbook indices above.
+ // Exam-year ALP evidence is required only by the optional ALP selection policy.
  for(const [i,b] of (Array.isArray(q?.boardEvidence)?q.boardEvidence:[]).entries()){
    if(!b||typeof b!=='object'){errors.push('Malformed board evidence '+i);continue;}
    if(!hash(b.paperSha256)||!Number.isInteger(b.paperPage)||b.paperPage<1||
@@ -84,12 +84,12 @@ export function auditPublicationCandidate(q,manifest){
 }
 
 // Preview only: no storage, network calls, mutation, commits, or seed action.
-export function dryRunStaging({staged=[],existing=[],manifest={entries:[]}}={}){
+export function dryRunStaging({staged=[],existing=[],manifest={entries:[]},syllabusMode='full',examYear}={}){
  const inserts=[],duplicates=[],conflicts=[],rejected=[];
  const ids=new Map(existing.map(q=>[q.id,{digest:recordDigest(q),kind:'existing'}]));
  const meanings=new Map(existing.map(q=>[meaningKey(q),q.id]));
  for(const q of staged){
-   const review=auditPublicationCandidate(q,manifest);
+   const review=auditPublicationCandidate(q,manifest,{syllabusMode,examYear});
    if(!review.valid){rejected.push({id:q?.id??null,reasons:review.errors});continue;}
    const digest=recordDigest(q), found=ids.get(q.id);
    if(found){
@@ -102,7 +102,7 @@ export function dryRunStaging({staged=[],existing=[],manifest={entries:[]}}={}){
    meanings.set(meaningKey(q),q.id);
    inserts.push({id:q.id,digest,edition:q.curriculum.edition});
  }
- return {mode:'DRY_RUN_ONLY',counts:{wouldInsert:inserts.length,duplicates:duplicates.length,
+ return {mode:'DRY_RUN_ONLY',bankCoverage:'full-textbook',selection:{syllabusMode,examYear:syllabusMode==='alp'?examYear:null},counts:{wouldInsert:inserts.length,duplicates:duplicates.length,
    conflicts:conflicts.length,rejected:rejected.length,existingCount:existing.length,
    existingWrites:0},inserts,duplicates,conflicts,rejected,
    rollback:{strategy:'versioned snapshot and hash verification BEFORE separately authorized import',

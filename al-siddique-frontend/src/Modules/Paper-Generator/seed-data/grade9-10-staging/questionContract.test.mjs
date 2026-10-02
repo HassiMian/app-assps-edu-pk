@@ -11,7 +11,7 @@ const base=()=>({
  content:{en:{stem:'Sample English question?'},ur:{stem:'نمونہ اردو سوال؟'}},
  importance:{selected:false,reason:''},boardEvidence:[],
  syllabusScope:{examYear:2026,alpStatus:'included',evidenceUrl:'https://pectaa.edu.pk/curriculum-compliance/'},
- review:{status:'approved',checks:{source:true,academic:true,answer:true,originality:true,translation:true}}
+ review:{status:'approved',checks:{source:true,academic:true,answer:true,originality:true,translation:true,syllabus:true}}
 });
 test('complete reviewed dual source record passes publication gate',()=>{
  assert.equal(validateQuestion(base(),{forPublication:true}).valid,true);
@@ -39,9 +39,11 @@ test('verified historical evidence is independent of exercise origin',()=>{
  paperUrl:'https://example.edu.pk/verified-paper',questionRef:'Section B #1',matchType:'conceptual'}];
  assert.deepEqual(visibleTags(q),['exercise','previously-appeared','easy']);
 });
-test('published selection excludes deleted and unverified ALP scope',()=>{
- const excluded=base();excluded.syllabusScope.alpStatus='excluded';
- assert.equal(selectApprovedQuestions([base(),excluded],{origin:'exercise'}).length,1);
+test('full-book selection preserves reviewed questions outside ALP',()=>{
+ const excluded=base();excluded.id='excluded';excluded.syllabusScope.alpStatus='excluded';
+ const unverified=base();unverified.id='unverified';unverified.syllabusScope.alpStatus='unverified';
+ assert.equal(selectApprovedQuestions([base(),excluded,unverified],{origin:'exercise'}).length,3);
+ assert.equal(selectApprovedQuestions([excluded,unverified],{syllabusMode:'alp',examYear:2026}).length,0);
 });
 test('selected chapter and origin are strict, never include blanks',()=>{
  const a=base(),b=base();b.id='other';b.chapter.id='';b.origin='additional';b.source.exerciseRef='';
@@ -68,4 +70,16 @@ test('grade, edition, subject and medium queries isolate a curriculum cohort',()
 test('duplicate IDs and bilingual academic duplicate are reported',()=>{
  const q=base(); const other=structuredClone(q);
  assert.equal(duplicateDiagnostics([q,other]).length,2);
+});
+
+test('optional ALP selection includes only year-matched reviewed evidence',()=>{
+ const q=base();q.syllabusScope.evidenceSha256='a'.repeat(64);
+ q.syllabusScope.verifiedBy='test-reviewer';q.review.reviewers={syllabus:'test-reviewer'};
+ assert.equal(selectApprovedQuestions([q],{syllabusMode:'alp',examYear:2026}).length,1);
+ assert.equal(selectApprovedQuestions([q],{syllabusMode:'alp',examYear:2027}).length,0);
+ q.syllabusScope.evidenceSha256='';
+ assert.equal(selectApprovedQuestions([q],{syllabusMode:'alp',examYear:2026}).length,0);
+ assert.equal(selectApprovedQuestions([q]).length,1);
+ q.review.checks.syllabus=false;
+ assert.equal(selectApprovedQuestions([q]).length,0);
 });

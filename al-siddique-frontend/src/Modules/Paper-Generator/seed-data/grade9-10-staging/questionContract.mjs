@@ -1,4 +1,5 @@
 // Grade IX/X revised curriculum STAGING CONTRACT ONLY. No production side effects.
+import {syllabusSelectionErrors,matchesSyllabus} from './syllabusPolicy.mjs';
 export const CONTRACT_VERSION = 'assps-qbk-grade9-10-v1';
 export const ORIGINS = Object.freeze(['exercise', 'additional', 'conceptual']);
 export const DIFFICULTIES = Object.freeze(['easy', 'medium', 'difficult']);
@@ -9,7 +10,7 @@ const has = v => typeof v === 'string' && !!v.trim();
 const validUrl = s => has(s) && /^https:\/\//i.test(s);
 const clean = s => String(s ?? '').normalize('NFKC').trim().replace(/\s+/g,' ').toLowerCase();
 
-export function validateQuestion(q, { forPublication = false } = {}) {
+export function validateQuestion(q, { forPublication = false, syllabusMode = 'full', examYear } = {}) {
   const errors = [];
   if (!q || typeof q !== 'object') return { valid:false, errors:['Question must be an object'] };
   if (!has(q.id)) errors.push('Missing stable question ID');
@@ -51,13 +52,12 @@ export function validateQuestion(q, { forPublication = false } = {}) {
   if (forPublication) {
     if (q.review?.status!=='approved') errors.push('Not approved');
     const checks=q.review?.checks || {};
-    for (const k of ['source','academic','answer','originality'])
+    for (const k of ['source','academic','answer','originality','syllabus'])
       if (checks[k]!==true) errors.push('Missing '+k+' approval');
     if (q.medium==='dual' && checks.translation!==true) errors.push('Missing bilingual translation approval');
     if (!validUrl(q.source?.officialUrl)||!Number.isInteger(q.source?.page)||q.source.page<1)
       errors.push('Unverified official source URL/page');
-    if (scope.alpStatus==='excluded'||scope.alpStatus==='unverified') errors.push('Not board-ready under this syllabus scope');
-    if (!Number.isInteger(scope.examYear) || !validUrl(scope.evidenceUrl)) errors.push('Missing exam-year/scope evidence');
+    errors.push(...syllabusSelectionErrors(q,{syllabusMode,examYear}));
   }
   return { valid: errors.length===0, errors };
 }
@@ -82,7 +82,7 @@ export function selectApprovedQuestions(records, query={}) {
     }
     if (query.important===true && q.importance?.selected!==true) return false;
     if (query.previousBoard===true && !visibleTags(q).includes('previously-appeared')) return false;
-    if (query.examYear && q.syllabusScope?.examYear!==query.examYear) return false;
+    if (!matchesSyllabus(q,{syllabusMode:query.syllabusMode??'full',examYear:query.examYear})) return false;
     if (query.medium==='dual' && q.medium!=='dual') return false;
     if (query.medium==='urdu' && !['urdu','dual'].includes(q.medium)) return false;
     if (query.medium==='english' && !['english','dual'].includes(q.medium)) return false;

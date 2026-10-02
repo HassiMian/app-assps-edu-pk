@@ -1,8 +1,8 @@
 import {auditPublicationCandidate} from './releaseAudit.mjs';
 const has=v=>typeof v==='string'&&v.trim().length>0;
 const legacyPriority=origin=>origin==='exercise'?'exercise':origin==='additional'?'additional':'all';
-export function toStructuredBankCandidate(question,{manifest,subjectId}={}){
- const audit=auditPublicationCandidate(question,manifest);
+export function toStructuredBankCandidate(question,{manifest,subjectId,syllabusMode='full',examYear}={}){
+ const audit=auditPublicationCandidate(question,manifest,{syllabusMode,examYear});
  if(!audit.valid)return {ok:false,id:question?.id??null,errors:audit.errors};
  if(!has(subjectId))return {ok:false,id:question.id,errors:['Target Question Bank subject ID is required.']};
  const options=question.type==='mcq'?(question.content.en.options||[]).map((o,i)=>({
@@ -29,15 +29,16 @@ export function analyzeLegacySupervisedCompatibility(candidate){
  if(candidate.type!=='mcq')reasons.push('Current legacy record has one answer field and would lose the reviewed Urdu answer.');
  return {lossless:false,reasons};
 }
-export function buildCurriculumSupervisedReview({questions=[],manifest,subjectId}={}){
+export function buildCurriculumSupervisedReview({questions=[],manifest,subjectId,syllabusMode='full',examYear}={}){
  const ready=[],rejected=[];
  for(const q of Array.isArray(questions)?questions:[]){
-  const built=toStructuredBankCandidate(q,{manifest,subjectId});
+  const built=toStructuredBankCandidate(q,{manifest,subjectId,syllabusMode,examYear});
   if(!built.ok){rejected.push({id:built.id,errors:built.errors});continue}
   const compatibility=analyzeLegacySupervisedCompatibility(built.candidate);
   ready.push({id:q.id,candidate:built.candidate,legacyCompatibility:compatibility});
  }
  return {mode:'SUPERVISED_REVIEW_ONLY_NO_COMMIT',directCommitAllowed:false,
+  bankCoverage:'full-textbook',selection:{syllabusMode,examYear:syllabusMode==='alp'?examYear:null},
   counts:{input:Array.isArray(questions)?questions.length:0,academicallyReady:ready.length,rejected:rejected.length,
    losslessLegacyCommit:ready.filter(r=>r.legacyCompatibility.lossless).length},
   ready,rejected,

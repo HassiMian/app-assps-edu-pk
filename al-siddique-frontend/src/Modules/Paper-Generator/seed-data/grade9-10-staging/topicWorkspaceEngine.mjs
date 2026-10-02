@@ -1,4 +1,5 @@
 // Isolated IX/X curriculum authoring projection. NO live store or network calls.
+import {matchesSyllabus} from './syllabusPolicy.mjs';
 export const AUTHORING_TYPES=Object.freeze(['mcq','short','long','numerical','diagram','fill','grammar','comprehension']);
 export const ORIGIN_TYPES=Object.freeze(['exercise','additional','conceptual']);
 export const VIEW_LANGUAGES=Object.freeze(['en','ur','dual','hi']);
@@ -80,7 +81,7 @@ export function newTopicDraft({id,ledger,urduLedger=null,chapterId,topicId,type=
   })),
   review:{status:'draft',checks:{source:false,academic:false,answer:false,english:false,
    urdu:false,translation:false,syllabus:false,duplicate:false,hindi:false}},
-  syllabusScope:{alpStatus:'unverified'},boardEvidence:[]};
+  syllabusScope:{coverage:'full-textbook',alpStatus:'unverified'},boardEvidence:[]};
  return {valid:true,errors:[],question};
 }
 export function viewLanguage(q,language){
@@ -95,7 +96,7 @@ export function viewLanguage(q,language){
  return enReady;
 }
 export function projectTopicTree({ledger,questions=[],type='short',origin='all',importantOnly=false,
- traditionalOnly=false,language='en',showEmptyTopics=true,search=''}={}){
+ traditionalOnly=false,language='en',showEmptyTopics=true,search='',syllabusMode='full',examYear}={}){
  if(!ledger?.chapters||!AUTHORING_TYPES.includes(type)||!VIEW_LANGUAGES.includes(language))return [];
  const qlist=Array.isArray(questions)?questions:[];
  const term=text(search).toLocaleLowerCase();
@@ -104,14 +105,14 @@ export function projectTopicTree({ledger,questions=[],type='short',origin='all',
    const questionsInTopic=qlist.filter(q=>q.chapter?.id===ch.id&&q.topicId===t.id&&q.type===type
     &&(origin==='all'||q.origin===origin)&&(!importantOnly||q.importance?.selected===true)
     &&(!traditionalOnly||q.editorial?.traditional===true)
-    &&viewLanguage(q,language)&&(!term||[t.title,q.content?.en?.stem,q.content?.ur?.stem,q.content?.hi?.stem]
+    &&matchesSyllabus(q,{syllabusMode,examYear})&&viewLanguage(q,language)&&(!term||[t.title,q.content?.en?.stem,q.content?.ur?.stem,q.content?.hi?.stem]
      .some(s=>String(s||'').toLocaleLowerCase().includes(term))));
    return {id:t.id,title:t.title,chapterId:ch.id,indexPage:t.tocPage,questions:questionsInTopic};
-  }).filter(t=>showEmptyTopics||t.questions.length>0);
+  }).filter(t=>(syllabusMode==='full'&&showEmptyTopics)||t.questions.length>0);
   return {id:ch.id,number:ch.number,title:ch.title,topics,count:topics.reduce((n,t)=>n+t.questions.length,0)};
  }).filter(ch=>ch.topics.length>0);
 }
-export function validateQuestionBlocks(blocks,questions,{language='en'}={}){
+export function validateQuestionBlocks(blocks,questions,{language='en',syllabusMode='full',examYear}={}){
  const ids=new Set(),errors=[],sections=[];
  for(const [i,b] of (Array.isArray(blocks)?blocks:[]).entries()){
   const members=(b.questionIds||[]).map(id=>questions.find(q=>q.id===id));
@@ -123,6 +124,7 @@ export function validateQuestionBlocks(blocks,questions,{language='en'}={}){
    if(ids.has(q.id))errors.push('Duplicate question identity: '+q.id);
    ids.add(q.id);
    if(!viewLanguage(q,language))errors.push('Missing '+language+' content: '+q.id);
+   if(!matchesSyllabus(q,{syllabusMode,examYear}))errors.push('Question outside selected syllabus: '+q.id);
    if(!Number.isFinite(q.marks)||q.marks<=0)errors.push('Invalid marks: '+q.id);
   }
   const attempt=Number(b.attemptAny??members.length);
