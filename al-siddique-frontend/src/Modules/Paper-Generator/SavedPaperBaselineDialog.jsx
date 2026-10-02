@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import VisualEvidenceManifestDialog from './PaperEditor/core/VisualEvidenceManifestDialog.jsx'
 import Portal from '../../components/Portal'
 import {getTenantScope,getTenantStorageItem} from '../../services/tenantStorage.js'
 import {captureSavedPaperBaseline,verifySavedPaperBaseline,compareCurrentSavedPaperWithBaseline} from
@@ -20,6 +21,7 @@ function downloadBlob(filename,content){
 export default function SavedPaperBaselineDialog({paper,onClose}){
  const [ack,setAck]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('')
  const [comparison,setComparison]=useState(null)
+ const [visualEvidenceOpen,setVisualEvidenceOpen]=useState(false)
  const capture=()=>{
   setError('');setNotice('');setComparison(null)
   try{
@@ -45,6 +47,13 @@ export default function SavedPaperBaselineDialog({paper,onClose}){
   }catch(e){setError('Comparison blocked: '+e.message)}
  }
  return <Portal>
+ {visualEvidenceOpen&&<VisualEvidenceManifestDialog family="SAVED_PAPER" paperId={String(paper.id)}
+  tenantScope={getTenantScope()} onClose={()=>setVisualEvidenceOpen(false)}
+  compareCurrentBaseline={baseline=>{
+   const result=compareCurrentSavedPaperWithBaseline(baseline,readRaw())
+   if(result.sourceId!==String(paper.id))throw new Error('Wrong selected saved paper.')
+   return result
+  }} />}
  <div data-paper-baseline-dialog style={{position:'fixed',inset:0,zIndex:9999,background:'rgba(0,0,0,.78)',
   display:'grid',placeItems:'center',padding:18}}>
  <div style={{background:'#092744',color:'#ecf2fa',border:'1px solid #526987',borderRadius:14,
@@ -79,6 +88,10 @@ export default function SavedPaperBaselineDialog({paper,onClose}){
     <input data-import-native-baseline aria-label="Compare native baseline JSON" type="file"
      accept=".json,application/json" onChange={compareFile} hidden/>
    </label>
+   <button data-open-visual-evidence type="button" style={button}
+    onClick={()=>setVisualEvidenceOpen(true)}>
+    Bind original A4 screenshot + PDF to DATA baseline
+   </button>
   </div>
   {comparison&&<div data-baseline-comparison role="status" style={{fontSize:12,border:'1px solid #536984',
    padding:11,borderRadius:8,marginTop:9}}>

@@ -1,5 +1,6 @@
 // Read-only snapshot UI for reference Early Years V2 editor, separate from generic Saved Papers.
 import {useState} from 'react'
+import VisualEvidenceManifestDialog from '../core/VisualEvidenceManifestDialog.jsx'
 import Portal from '../../../../components/Portal'
 import {getTenantScope,getTenantStorageItem} from '../../../../services/tenantStorage.js'
 import {getOverlay,getAllOverlaysForPaper} from './specs/EarlyYearsPresentationOverlay.js'
@@ -28,6 +29,7 @@ function downloadJson(name,value){
 export default function EarlyYearsReferenceBaselineDialog({paper,templateId,onClose}){
  const [ack,setAck]=useState(false),[error,setError]=useState('')
  const [message,setMessage]=useState(''),[comparison,setComparison]=useState(null)
+ const [visualEvidenceOpen,setVisualEvidenceOpen]=useState(false)
  const capture=()=>{
   setError('');setMessage('');setComparison(null)
   try{
@@ -55,7 +57,11 @@ export default function EarlyYearsReferenceBaselineDialog({paper,templateId,onCl
    setComparison(result)
   }catch(err){setError('Comparison blocked: '+err.message)}
  }
- return <Portal><div data-early-years-reference-baseline
+ return <Portal>
+ {visualEvidenceOpen&&<VisualEvidenceManifestDialog family="EARLY_YEARS_REFERENCE"
+  paperId={paper.id} tenantScope={getTenantScope()} onClose={()=>setVisualEvidenceOpen(false)}
+  compareCurrentBaseline={bundle=>compareEarlyYearsReferenceBaseline(bundle,readSourceState(paper,templateId))} />}
+ <div data-early-years-reference-baseline
   style={{position:'fixed',inset:0,zIndex:9999,background:'rgba(0,0,0,.8)',
    display:'grid',placeItems:'center',padding:18}}>
   <div style={{background:'#092744',color:'#eff6ff',border:'1px solid #72849c',
@@ -86,6 +92,8 @@ export default function EarlyYearsReferenceBaselineDialog({paper,templateId,onCl
      <input type="file" aria-label="Compare Early Years reference JSON" data-compare-early-years-baseline
       accept=".json,application/json" hidden onChange={compare}/>
     </label>
+    <button data-open-visual-evidence type="button" style={button}
+     onClick={()=>setVisualEvidenceOpen(true)}>Bind original A4 screenshot + PDF to DATA baseline</button>
    </div>
    <div style={{fontSize:12,lineHeight:1.7,padding:'10px 0',opacity:.9}}>
     For actual visual evidence of THIS edited copy, keep the selected template unchanged,
