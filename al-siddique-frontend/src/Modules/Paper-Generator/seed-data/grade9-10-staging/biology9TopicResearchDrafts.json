@@ -1,0 +1,518 @@
+{
+  "schemaVersion": "assps-topic-research-examples-v1",
+  "sourcePdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "verifiedReadingPages": [
+    6,
+    7
+  ],
+  "scope": "Chapter 1, topic 1.1 only; author-created original prompts, not textbook exercise reproductions",
+  "reviewStatus": "AUTHOR_DRAFT_ALL_ACADEMIC_LANGUAGE_ALP_CHECKS_PENDING",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "drafts": [
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "A scientist investigates microscopic fungi, while another studies the behaviour of animals. Identify the two relevant fields and explain how their scopes differ.",
+          "answer": "Microbiology examines microorganisms, including microscopic fungi. Zoology studies animals, their structure, functions, behaviour and diversity."
+        },
+        "ur": {
+          "stem": "",
+          "answer": ""
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": []
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S02",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 7,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "A report investigates cell structures and division, while another explains how a body part works. Which branches of biology are most directly involved?",
+          "answer": "Cytology is concerned with cells and processes such as their division. Physiology deals with the functioning of body parts."
+        },
+        "ur": {
+          "stem": "",
+          "answer": ""
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": []
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S03",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "How do morphology and anatomy offer different but complementary views of an organism?",
+          "answer": "Morphology describes form and structural features, including appearance; anatomy concentrates on internal physical organization. Together they help describe an organism more fully."
+        },
+        "ur": {
+          "stem": "",
+          "answer": ""
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": []
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-S04",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 7,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": null,
+      "content": {
+        "en": {
+          "stem": "Why is taxonomy useful when biologists need to compare unfamiliar living organisms?",
+          "answer": "Taxonomy organizes organisms into groups by their similarities and differences, helping scientists compare diversity and investigate relationships."
+        },
+        "ur": {
+          "stem": "",
+          "answer": ""
+        },
+        "hi": {
+          "stem": "",
+          "answer": ""
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": []
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 7,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": "A",
+      "content": {
+        "en": {
+          "stem": "A scientist uses a microscope to investigate the organization of tissues. Which branch is most directly relevant?",
+          "answer": "Histology",
+          "options": [
+            {
+              "id": "A",
+              "text": "Histology"
+            },
+            {
+              "id": "B",
+              "text": "Genetics"
+            },
+            {
+              "id": "C",
+              "text": "Zoology"
+            },
+            {
+              "id": "D",
+              "text": "Physiology"
+            }
+          ]
+        },
+        "ur": {
+          "stem": "ایک سائنس دان خردبین سے بافتوں کی ساخت کا مطالعہ کرتا ہے۔ اس تحقیق کا تعلق حیاتیات کی کس شاخ سے ہے؟",
+          "answer": "علم الانسجہ",
+          "options": [
+            {
+              "id": "A",
+              "text": "علم الانسجہ"
+            },
+            {
+              "id": "B",
+              "text": "جینیات"
+            },
+            {
+              "id": "C",
+              "text": "حیوانیات"
+            },
+            {
+              "id": "D",
+              "text": "فعلیات"
+            }
+          ]
+        },
+        "hi": {
+          "stem": "एक वैज्ञानिक सूक्ष्मदर्शी से ऊतकों की संरचना का अध्ययन करता है। यह किस शाखा से संबंधित है?",
+          "answer": "ऊतक विज्ञान",
+          "options": [
+            {
+              "id": "A",
+              "text": "ऊतक विज्ञान"
+            },
+            {
+              "id": "B",
+              "text": "आनुवंशिकी"
+            },
+            {
+              "id": "C",
+              "text": "प्राणि विज्ञान"
+            },
+            {
+              "id": "D",
+              "text": "शरीर क्रिया विज्ञान"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": []
+    },
+    {
+      "id": "IX-BIO-EM-RESEARCH-C01-T0101-M02",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "medium",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "TABLE_OF_CONTENTS_FIRST_PASS"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "languageSource": "en"
+      },
+      "correctOptionId": "B",
+      "content": {
+        "en": {
+          "stem": "Which biological subfield is most directly concerned with comparing organisms by their form and outward features?",
+          "answer": "Morphology",
+          "options": [
+            {
+              "id": "A",
+              "text": "Anatomy"
+            },
+            {
+              "id": "B",
+              "text": "Morphology"
+            },
+            {
+              "id": "C",
+              "text": "Embryology"
+            },
+            {
+              "id": "D",
+              "text": "Pharmacology"
+            }
+          ]
+        },
+        "ur": {
+          "stem": "جانداروں کی شکل اور ظاہری خصوصیات کا تقابلی مطالعہ حیاتیات کی کس ذیلی شاخ سے متعلق ہے؟",
+          "answer": "شکلیات",
+          "options": [
+            {
+              "id": "A",
+              "text": "تشریح الاعضا"
+            },
+            {
+              "id": "B",
+              "text": "شکلیات"
+            },
+            {
+              "id": "C",
+              "text": "علم الجنین"
+            },
+            {
+              "id": "D",
+              "text": "ادویات کا علم"
+            }
+          ]
+        },
+        "hi": {
+          "stem": "जीवों के आकार और बाहरी विशेषताओं की तुलना मुख्यतः किस उपशाखा से संबंधित है?",
+          "answer": "आकृति विज्ञान",
+          "options": [
+            {
+              "id": "A",
+              "text": "शरीर रचना विज्ञान"
+            },
+            {
+              "id": "B",
+              "text": "आकृति विज्ञान"
+            },
+            {
+              "id": "C",
+              "text": "भ्रूण विज्ञान"
+            },
+            {
+              "id": "D",
+              "text": "औषध विज्ञान"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "syllabus": false,
+          "duplicate": false,
+          "hindi": false
+        }
+      },
+      "syllabusScope": {
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": []
+    }
+  ]
+}

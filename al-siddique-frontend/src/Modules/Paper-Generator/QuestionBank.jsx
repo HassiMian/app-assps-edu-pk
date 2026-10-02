@@ -3,6 +3,7 @@ import { extractQuestionsFromFile, MODEL_OPTIONS, DEFAULT_MODEL, getAiConfig, te
 import { CHAPTERS, SUBJECTS } from './data/questionBank'
 import PaperAiJobsPanel from './PaperAiJobsPanel'
 import QuickQuestionEntry from './QuickQuestionEntry.jsx'
+import TopicWiseCurriculumWorkspace from './TopicWiseCurriculumWorkspace.jsx'
 import { QUICK_TEXT_KINDS } from './quickQuestionRecord.js'
 import api from '../../services/api'
 
@@ -2140,7 +2141,7 @@ export default function QuestionBank() {
  const active = sub.id === activeSubject
  return (
  <div key={sub.id}
- onClick={() => { setActiveSubject(sub.id); setFilterChapter(''); setFilterPriority('all'); setFilterType('all') }}
+ onClick={() => { setTab('questions'); setActiveSubject(sub.id); setFilterChapter(''); setFilterPriority('all'); setFilterType('all') }}
  style={{
  padding: '10px 11px', borderRadius: 12, marginBottom: 6, cursor: 'pointer',
  background: active ? 'rgba(200,153,26,0.14)' : 'transparent',
@@ -2174,22 +2175,22 @@ export default function QuestionBank() {
  <div style={{ padding: '18px 24px', borderBottom: '1px solid rgba(200,153,26,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap', background: 'rgba(255,255,255,0.02)' }}>
  <div style={{ minWidth: 0 }}>
  <h2 style={{ margin: 0, fontSize: 20, color: '#fff', lineHeight: 1.25 }}>
- {currentSubject ? currentSubject.name : 'Question Bank'}
- {currentSubject?.classLevel && <span style={{ color: C.gold, fontSize: 14, marginLeft: 8 }}>{classLevelLabel(currentSubject.classLevel)}</span>}
- {showUrdu && <span style={{ color: C.purple, fontSize: 12, marginLeft: 6 }}>Dual Medium</span>}
+ {tab === 'curriculum' ? 'Curriculum Research Workspace (IX/X)' : currentSubject ? currentSubject.name : 'Question Bank'}
+ {tab !== 'curriculum' && currentSubject?.classLevel && <span style={{ color: C.gold, fontSize: 14, marginLeft: 8 }}>{classLevelLabel(currentSubject.classLevel)}</span>}
+ {tab !== 'curriculum' && showUrdu && <span style={{ color: C.purple, fontSize: 12, marginLeft: 6 }}>Dual Medium</span>}
  </h2>
  <div style={{ fontSize: 12, color: 'rgba(192,200,216,0.6)', marginTop: 4, lineHeight: 1.5 }}>
- {currentSubject?.publisher || 'Manage questions, import from AI textbooks, and edit content before saving.'}
+ {tab === 'curriculum' ? 'Isolated chapter/topic-based authoring pilot · no live imports or production modifications' : currentSubject?.publisher || 'Manage questions, import from AI textbooks, and edit content before saving.'}
  </div>
  </div>
 
  <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
- <button onClick={() => setShowAnswers(!showAnswers)}
+ {tab !== 'curriculum' && <button onClick={() => setShowAnswers(!showAnswers)}
  style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 12px', borderRadius: 8, border: `1px solid ${showAnswers ? C.green : 'rgba(255,255,255,0.1)'}`, background: showAnswers ? 'rgba(48,209,88,0.15)' : 'rgba(255,255,255,0.05)', color: showAnswers ? C.green : C.silver, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}>
  {showAnswers ? <Eye size={14} /> : <EyeOff size={14} />} Answer Key
- </button>
- <Btn variant="ai" size="sm" onClick={() => setAiModal(true)}><Sparkles size={13} /> AI Import</Btn>
- {[{ id: 'questions', label: 'Questions' }].map(t => (
+ </button>}
+ {tab !== 'curriculum' && <Btn variant="ai" size="sm" onClick={() => setAiModal(true)}><Sparkles size={13} /> AI Import</Btn>}
+ {[{ id: 'questions', label: 'Questions' }, {id:'curriculum',label:'IX/X · Topic Workspace'}].map(t => (
  <button key={t.id} onClick={() => setTab(t.id)}
  style={{ padding: '7px 16px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 13,
  background: tab === t.id ? C.gold : 'rgba(255,255,255,0.07)',
@@ -2197,7 +2198,7 @@ export default function QuestionBank() {
  {t.label}
  </button>
  ))}
- {currentSubject && (
+ {currentSubject && tab !== 'curriculum' && (
  <>
  <Btn variant="ghost" size="sm" onClick={() => setSubjectModal(currentSubject)}><Edit2 size={13} /> Edit</Btn>
  <Btn variant="red" size="sm" onClick={() => { if(window.confirm(`Delete "${currentSubject.name}"?`)) { store.deleteSubject(currentSubject.id); setActiveSubject(null) } }}><Trash2 size={13} /></Btn>
@@ -2206,8 +2207,8 @@ export default function QuestionBank() {
  </div>
  </div>
 
- {/* Body */}
- {!activeSubject ? (
+ {/* Body: the IX/X research tab deliberately avoids existing store mutations. */}
+ {tab === 'curriculum' ? <div style={{flex:1,overflowY:'auto'}}><TopicWiseCurriculumWorkspace /></div> : !activeSubject ? (
  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
  <BookOpen size={52} color="rgba(192,200,216,0.2)" />
  <div style={{ fontSize: 17, fontWeight: 600, color: 'rgba(192,200,216,0.5)' }}>Select a subject from the left panel</div>
