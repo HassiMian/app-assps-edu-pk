@@ -3,8 +3,9 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {newTopicDraft,projectTopicTree,validateQuestionBlocks,topicIdentity,viewLanguage} from './topicWorkspaceEngine.mjs';
 const ledger=JSON.parse(readFileSync(new URL('./biology9EnglishEvidenceLedger.json',import.meta.url)));
+const urduLedger=JSON.parse(readFileSync(new URL('./biology9UrduEvidenceLedger.json',import.meta.url)));
 const ch1=ledger.chapters[0],ch2=ledger.chapters[1],topic1=ch1.topics[0],topic2=ch2.topics[0];
-const draft=(id,changes={})=>newTopicDraft({id,ledger,chapterId:ch1.id,topicId:topic1.id,
+const draft=(id,changes={})=>newTopicDraft({id,ledger,urduLedger,chapterId:ch1.id,topicId:topic1.id,
  type:'short',origin:'conceptual',en:'Explain an original concept.',answerEn:'Source-bound model answer.',marks:2,evidencePage:6,
  ...changes});
 test('original topic-authored questions retain a stable verified chapter/topic binding',()=>{
@@ -16,13 +17,17 @@ test('original topic-authored questions retain a stable verified chapter/topic b
  assert.equal(d.question.syllabusScope.alpStatus,'unverified');
 });
 test('identical topic titles in separate chapters never merge into one group',()=>{
- const a=draft('A').question;
- const b=newTopicDraft({id:'B',ledger,chapterId:ch2.id,topicId:topic2.id,
-  type:'short',origin:'additional',en:'Other chapter question',answerEn:'Other answer',evidencePage:25}).question;
- assert.notEqual(topicIdentity(a),topicIdentity(b));
- const tree=projectTopicTree({ledger,questions:[a,b],type:'short'});
- assert.equal(tree[0].topics[0].questions.length,1);
- assert.equal(tree[1].topics[0].questions.length,1);
+ const fixture=structuredClone(ledger);
+ const second=fixture.chapters[1].topics[0];
+ second.title=fixture.chapters[0].topics[0].title;
+ second.verifiedPhysicalStartPage=25;second.verifiedPhysicalEndPage=26;second.pageAuditStatus='VISUALLY_CHECKED';
+ const a=newTopicDraft({id:'A',ledger:fixture,chapterId:fixture.chapters[0].id,topicId:fixture.chapters[0].topics[0].id,
+  type:'short',origin:'conceptual',en:'First chapter question',answerEn:'Answer A',marks:2,evidencePage:6}).question;
+ const b=newTopicDraft({id:'B',ledger:fixture,chapterId:fixture.chapters[1].id,topicId:second.id,
+  type:'short',origin:'additional',en:'Other chapter question',answerEn:'Other answer',marks:2,evidencePage:25}).question;
+ assert.ok(a&&b);assert.notEqual(topicIdentity(a),topicIdentity(b));
+ const tree=projectTopicTree({ledger:fixture,questions:[a,b],type:'short',showEmptyTopics:false});
+ assert.equal(tree[0].topics[0].questions.length,1);assert.equal(tree[1].topics[0].questions.length,1);
  assert.equal(tree[0].count,1);assert.equal(tree[1].count,1);
 });
 test('question type and editorial flags are independent of origin',()=>{
@@ -41,7 +46,7 @@ test('exercise cannot masquerade as a topic-authored conceptual origin',()=>{
 test('MCQ retains ONE correct option ID across all author languages',()=>{
  const d=draft('MCQ',{type:'mcq',en:'Which branch studies tissues?',answerEn:'',
   optEn:['Zoology','Histology','Ecology','Genetics'],correctOptionId:'B',
-  ur:'بافتوں کا مطالعہ کون سی شاخ کرتی ہے؟',optUr:['علم حیوانات','علم الانسجہ','ماحولیات','جینیات'],
+  ur:'بافتوں کا مطالعہ کون سی شاخ کرتی ہے؟',urduEvidencePage:5,optUr:['علم حیوانات','علم الانسجہ','ماحولیات','جینیات'],
   hi:'ऊतकों का अध्ययन कौन करता है?',optHi:['प्राणि विज्ञान','ऊतक विज्ञान','पारिस्थितिकी','आनुवंशिकी']});
  assert.equal(d.valid,true);
  assert.equal(d.question.correctOptionId,'B');
@@ -53,7 +58,7 @@ test('MCQ retains ONE correct option ID across all author languages',()=>{
  assert.equal(draft('badMCQ',{type:'mcq',en:'Which?',answerEn:'',optEn:['A','','C','D']}).valid,false);
 });
 test('optional Urdu/Hindi draft views do not imply approved translation',()=>{
- const q=draft('D1',{ur:'تجزیاتی سوال',answerUr:'جواب',hi:'नमूना प्रश्न',answerHi:'उत्तर'}).question;
+ const q=draft('D1',{ur:'تجزیاتی سوال',answerUr:'جواب',urduEvidencePage:5,hi:'नमूना प्रश्न',answerHi:'उत्तर'}).question;
  assert.equal(viewLanguage(q,'dual'),true);
  assert.equal(viewLanguage(q,'hi'),true);
  assert.equal(q.review.checks.translation,false);

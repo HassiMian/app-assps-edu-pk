@@ -1,6 +1,6 @@
 {
   "schemaVersion": "assps-ix-biology-em-source-evidence-ledger-v1",
-  "recordStatus": "FIRST_PASS_VISUAL_NOT_IN_APPROVED_BANK",
+  "recordStatus": "CHAPTER_1_TOPIC_PAGES_VERIFIED_REMAINDER_FIRST_PASS",
   "createdOn": "2026-10-02",
   "curriculum": {
     "authority": "PECTAA_OFFICIAL_CATALOG",
@@ -38,7 +38,8 @@
       "id": "CH1_MISSING_SECTION_HEADER",
       "page": 24,
       "detail": "Seven independently numbered items between B and D have no visible section heading; do not assume letter C.",
-      "status": "NEEDS_EDITOR_CONFIRMATION"
+      "status": "NEEDS_EDITOR_CONFIRMATION",
+      "crossEditionFinding": "Urdu counterpart labels the analogous seven-item block as section C on physical page 25; English visibleLabel remains null."
     },
     {
       "id": "LATE_HEADER_MISMATCH",
@@ -63,57 +64,73 @@
           "id": "1.1",
           "title": "Biology and its Branches",
           "tocPage": 2,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 6,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 6,
+          "verifiedPhysicalEndPage": 7
         },
         {
           "id": "1.2",
           "title": "Relation of Biology with Other Sciences",
           "tocPage": 4,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 8,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 8,
+          "verifiedPhysicalEndPage": 9
         },
         {
           "id": "1.3",
           "title": "Careers in Biology",
           "tocPage": 6,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 10,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 10,
+          "verifiedPhysicalEndPage": 11
         },
         {
           "id": "1.4",
           "title": "Quranic Instructions to Reveal the Study of Life",
           "tocPage": 8,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 12,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 12,
+          "verifiedPhysicalEndPage": 12
         },
         {
           "id": "1.5",
           "title": "Science as a Collaborative Field",
           "tocPage": 9,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 13,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 13,
+          "verifiedPhysicalEndPage": 13
         },
         {
           "id": "1.6",
           "title": "Scientific Method",
           "tocPage": 10,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 14,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 14,
+          "verifiedPhysicalEndPage": 15
         },
         {
           "id": "1.7",
           "title": "Theory and Law/Principle",
           "tocPage": 12,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 16,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 16,
+          "verifiedPhysicalEndPage": 16
         },
         {
           "id": "1.8",
           "title": "Malaria — An Example of Biological Method",
           "tocPage": 13,
-          "actualPage": null,
-          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+          "actualPage": 17,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "verifiedPhysicalStartPage": 17,
+          "verifiedPhysicalEndPage": 21
         }
       ],
       "exercise": {
@@ -178,7 +195,14 @@
               "EX-C01-UNLABELLED_AFTER_B-Q07"
             ],
             "questionTextIncluded": false,
-            "individualQuestionPageMapStatus": "PENDING"
+            "individualQuestionPageMapStatus": "PENDING",
+            "crossEditionCorroboration": {
+              "urduCatalogRecordId": "pectaa-catalog-010",
+              "urduVisibleLabel": "C",
+              "urduType": "long",
+              "urduPhysicalPage": 25,
+              "status": "CORROBORATED_BUT_ENGLISH_HEADING_STILL_ABSENT"
+            }
           },
           {
             "label": "D",

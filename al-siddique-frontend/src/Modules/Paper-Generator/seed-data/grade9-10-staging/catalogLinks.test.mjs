@@ -8,7 +8,7 @@ test('official-page anchor inventory is explicit about downloads versus links',(
  for(const e of m.entries){
   assert.equal(e.catalogEvidenceUrl,m.catalogUrl);
   if(e.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND') assert.match(e.catalogAssetUrl,/^https:\/\//);
-  if(e.recordId!=='pectaa-catalog-009'){
+  if(!['pectaa-catalog-009','pectaa-catalog-010'].includes(e.recordId)){
    assert.equal(e.pdfUrl,null);
    assert.equal(e.pdfSha256,null);
   }else{

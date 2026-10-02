@@ -16,11 +16,14 @@ test('topic-authored samples are sourced ORIGINAL, never textbook exercise or li
 });
 test('question-type-first UI engine independently projects MCQs/shorts under topic 1.1',()=>{
  const opts={ledger,questions:examples.drafts,showEmptyTopics:false};
- const mcq=projectTopicTree({...opts,type:'mcq',language:'dual'});
+ const mcq=projectTopicTree({...opts,type:'mcq',language:'en'});
  const shorts=projectTopicTree({...opts,type:'short'});
  assert.equal(mcq.length,1);assert.equal(mcq[0].topics.length,1);assert.equal(mcq[0].topics[0].questions.length,2);
  assert.equal(shorts[0].topics[0].questions.length,4);
  assert.equal(projectTopicTree({...opts,type:'short',language:'dual'}).length,0);
+ // Existing seed MCQ translations predate Urdu source-page binding; do not expose them as Urdu/Dual evidence-ready.
+ assert.equal(projectTopicTree({...opts,type:'mcq',language:'dual'}).length,0);
+ assert.equal(projectTopicTree({...opts,type:'mcq',language:'ur'}).length,0);
  assert.equal(projectTopicTree({...opts,type:'mcq',language:'hi'})[0].topics[0].questions.length,2);
 });
 test('research sample MCQ option IDs and keys are stable across original draft languages',()=>{
