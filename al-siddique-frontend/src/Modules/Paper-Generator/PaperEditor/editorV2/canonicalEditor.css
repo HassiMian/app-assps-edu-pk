@@ -234,6 +234,9 @@
   .canonical-add-node-bar,
   .canonical-editor-toast,
   .canonical-section-warning-badge,
+  /* Match the existing print-surface cleanup: never print ghost '( Marks)' labels. */
+  .canonical-question-marks-empty,
+  .canonical-section-marks-empty,
   .grammar-blank-toggle,
   .grammar-action-col,
   .mcq-answer-key-badge,

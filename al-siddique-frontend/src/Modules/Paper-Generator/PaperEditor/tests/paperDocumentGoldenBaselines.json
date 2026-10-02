@@ -1,0 +1,536 @@
+{
+  "version": "1.0.0",
+  "lockedParentCommit": "ec29edacc93b5bf7e347db70bca2e2dd6a7f9ffb",
+  "format": "SHA-256 of UTF-8 JSON.stringify(parsed paper), preserving field order and exact content",
+  "corpora": {
+    "official43": {
+      "count": 43,
+      "aggregateSha256": "ffdb4eb0d3831a325e32448383813b8f3d16605a8916870bb940abfbf07eaf92",
+      "entries": [
+        {
+          "index": 0,
+          "id": "official-first-term-2026-class-1-urdu",
+          "sha256": "c9f4417368f15d280c9208f326279f6ceb24d1d15e8d0feaa67be48e2ae44972"
+        },
+        {
+          "index": 1,
+          "id": "official-first-term-2026-class-1-countdown-mathematics",
+          "sha256": "5c4ed99e1c0451d035f8ccc7a814267a8058dfda37c0d9c1ef47d9f5582a10e1"
+        },
+        {
+          "index": 2,
+          "id": "official-first-term-2026-class-1-english",
+          "sha256": "554003b75f18ec1367006cefe4bc2947beb16003189afe9415b0a5802296e4fa"
+        },
+        {
+          "index": 3,
+          "id": "official-first-term-2026-class-2-urdu",
+          "sha256": "a0c7791388b237cc2ddc7aa318e138dbf0e72c89b3551f8e3a027ba85c9d5eb1"
+        },
+        {
+          "index": 4,
+          "id": "official-first-term-2026-class-2-english",
+          "sha256": "00d3eb5b9d84ce487475e8e24da67742217b3cd9c14f0158431f6716f946e05b"
+        },
+        {
+          "index": 5,
+          "id": "official-first-term-2026-class-2-islamiyat",
+          "sha256": "d5b1723376fd38e5554859f7273e08456a71d60f4b21d0e357905d921545990f"
+        },
+        {
+          "index": 6,
+          "id": "official-first-term-2026-class-2-science",
+          "sha256": "d35086bb2e37da18d25145f415f3da3d5aa733ed6a28b2a4484e88c2001ef872"
+        },
+        {
+          "index": 7,
+          "id": "official-first-term-2026-class-2-mathematics",
+          "sha256": "d909a72907cdbcad97cf58977ff23a45eaa61a54ee0a4f0a2362184563164ded"
+        },
+        {
+          "index": 8,
+          "id": "official-first-term-2026-class-3-urdu",
+          "sha256": "0a69a6d5b77a536b9705663f12966b0fb2be264ee7df4b952fa855eb5d619006"
+        },
+        {
+          "index": 9,
+          "id": "official-first-term-2026-class-3-science",
+          "sha256": "6add6d3536add8d7654da2ee606ae461a70595c1d9cd13b8e12c2a91df03ccc8"
+        },
+        {
+          "index": 10,
+          "id": "official-first-term-2026-class-3-social-studies",
+          "sha256": "2f2ce8709b68d310bd423ff5bb035a7ddb1bc0e8bbf84fdb9944d58ba0d9d3f1"
+        },
+        {
+          "index": 11,
+          "id": "official-first-term-2026-class-3-english",
+          "sha256": "59f919bfca46d700a43d1a5c3148c9b5874bc5c07d37276ac4413f5cbedb8a52"
+        },
+        {
+          "index": 12,
+          "id": "official-first-term-2026-class-3-islamiyat",
+          "sha256": "efe367538d3e59d95d03139069ddffb5874a6a93b978479418d72f04c3a44006"
+        },
+        {
+          "index": 13,
+          "id": "official-first-term-2026-class-4-english",
+          "sha256": "cacc836698c6cac32259add70b19ad38f6aed061d9d954bc5ceecd52dc2ce028"
+        },
+        {
+          "index": 14,
+          "id": "official-first-term-2026-class-4-urdu",
+          "sha256": "3401ca89179910118c48ae86712c4e29e5f662a34a7b828d322a81a13ab50ee2"
+        },
+        {
+          "index": 15,
+          "id": "official-first-term-2026-class-4-islamiyat",
+          "sha256": "06ab7ceae5135fa6e7d3c89bea30095654c5ce9d41e8733c9ff1d78e162fccaa"
+        },
+        {
+          "index": 16,
+          "id": "official-first-term-2026-class-4-social-studies",
+          "sha256": "e2d91d5327aaebe9af74e3b92b8e48ebea9408e6abb4bb5383ee6bed0eb357c3"
+        },
+        {
+          "index": 17,
+          "id": "official-first-term-2026-class-4-science",
+          "sha256": "a42bf8a4465a8664ae3e8ea8007eb4e45e4d7493f12e224f0e69ed2b3a30d7a8"
+        },
+        {
+          "index": 18,
+          "id": "official-first-term-2026-class-4-mathematics",
+          "sha256": "91457600995be06f7f1a0a716063f8af0bc0659dcf3c5bc464fce06cc387fe46"
+        },
+        {
+          "index": 19,
+          "id": "official-first-term-2026-class-5-social-studies",
+          "sha256": "6fa3c9456a2b5303d3afceec1fc994491679a92f00f5169e19b9d3170487e235"
+        },
+        {
+          "index": 20,
+          "id": "official-first-term-2026-class-5-urdu",
+          "sha256": "bb13177eec4a96e45b66a70483cfc37d0bf32e06f8df058df71c6773b00797c2"
+        },
+        {
+          "index": 21,
+          "id": "official-first-term-2026-class-5-science",
+          "sha256": "791ca5ec858406b36bd06aa9d05a240a4efeaf7824fa6419afb97cd0abac7992"
+        },
+        {
+          "index": 22,
+          "id": "official-first-term-2026-class-5-islamiyat-version-a",
+          "sha256": "e037d5f976e4610e124e4168c2c75a6ff26cb384467b1c853fc2f168127c1082"
+        },
+        {
+          "index": 23,
+          "id": "official-first-term-2026-class-5-mathematics",
+          "sha256": "e0c0c7b7aa993adfc37e6970aeea280bb0d9b9f953721d387f730597bf626e2b"
+        },
+        {
+          "index": 24,
+          "id": "official-first-term-2026-class-5-english",
+          "sha256": "37804b4d9f679597d4e0aa0cda2aaca8b96f6c8b84e78ddca469c2e41146dd48"
+        },
+        {
+          "index": 25,
+          "id": "official-first-term-2026-class-5-islamiyat-version-b",
+          "sha256": "e10e16d269cd2af12c0966a09bd642d4da042e70567beb19dda37199e8e36712"
+        },
+        {
+          "index": 26,
+          "id": "official-first-term-2026-class-6-science",
+          "sha256": "57067d31418ddb8274622d8e28ec01db61cc7f5e563e49747682ee4e7ac2f3df"
+        },
+        {
+          "index": 27,
+          "id": "official-first-term-2026-class-6-mathematics",
+          "sha256": "233e7340059b16bd4c0ec27681c68153331f5063fb8ca32845db6173c4ba418b"
+        },
+        {
+          "index": 28,
+          "id": "official-first-term-2026-class-6-islamiyat",
+          "sha256": "481d395935b35076ecdb771c792a34e062c5dc0d4a8ca2bc02488815c00ce3ea"
+        },
+        {
+          "index": 29,
+          "id": "official-first-term-2026-class-6-urdu",
+          "sha256": "be958531658b6739dc13fd5c6cdf24e9c2ae2d82d22b15669b8cb001b385e507"
+        },
+        {
+          "index": 30,
+          "id": "official-first-term-2026-class-6-english",
+          "sha256": "175338743f1b920d76e81a868ddd6847b9a8fb76e631cf8a03265d4fc3ac5ebe"
+        },
+        {
+          "index": 31,
+          "id": "official-first-term-2026-class-7-science",
+          "sha256": "a616e8c0f4b7ae72b2d75a67aeb32afa18d3dd1a07ec58c15e1b23fc016d91ce"
+        },
+        {
+          "index": 32,
+          "id": "official-first-term-2026-class-7-social-studies",
+          "sha256": "9f92e740833a90f760354ca9f9b2c662a4b11391c0843e9936dc142f62e43019"
+        },
+        {
+          "index": 33,
+          "id": "official-first-term-2026-class-7-mathematics",
+          "sha256": "dd24eacfdcb1a881bc1dba08d340607163e18ba832ddce906304c363b23c5e2e"
+        },
+        {
+          "index": 34,
+          "id": "official-first-term-2026-class-7-english",
+          "sha256": "4e2745375a3e24ec085118a108bf9d2eb2b46923a202c3b73b4dc9af2b111b3b"
+        },
+        {
+          "index": 35,
+          "id": "official-first-term-2026-class-8-social-studies",
+          "sha256": "4fcf344c5e58e3236c6d13f3c82e56b59f06fdfdae4f39dbe98f657105a7579f"
+        },
+        {
+          "index": 36,
+          "id": "official-first-term-2026-class-8-islamiyat",
+          "sha256": "6751b90404829576296fba37650b1630fcb457cd8441d4d6afffa563bc90ab60"
+        },
+        {
+          "index": 37,
+          "id": "official-first-term-2026-class-8-tarjuma-tul-quran",
+          "sha256": "078d5ca7d4c6a47e6928e5fbd9c09da78578afceac5f6494e59eeaadeb5f091b"
+        },
+        {
+          "index": 38,
+          "id": "official-first-term-2026-class-8-computer",
+          "sha256": "9194b1fb7034134d7a0f34b1d32ea70233663a5ed111d016f58715fc03aac1b5"
+        },
+        {
+          "index": 39,
+          "id": "official-first-term-2026-class-8-mathematics",
+          "sha256": "a33b3dd182c847397ca8e8107fea296203127e44d08818ed372f0c631c50ad65"
+        },
+        {
+          "index": 40,
+          "id": "official-first-term-2026-class-8-english",
+          "sha256": "281ba9ae5a62fc5d1823267ffed43059f6b691c9e0309fb4dd723c41d7be9e12"
+        },
+        {
+          "index": 41,
+          "id": "official-first-term-2026-class-1-science",
+          "sha256": "2d26666657c9bc55a85fde56bc21583cedd5c371e5967705870d6a2868348f17"
+        },
+        {
+          "index": 42,
+          "id": "official-first-term-2026-class-1-islamiyat",
+          "sha256": "bb55987499c5207b2264842cda83871e4b3d78e33e6d25a53c67cd76f4779b58"
+        }
+      ]
+    },
+    "earlyYears9": {
+      "count": 9,
+      "aggregateSha256": "f299c989636c83fd57a94f7e8eb2021ed4f64563e0491548ad37b80477a2de27",
+      "entries": [
+        {
+          "index": 0,
+          "id": "ey-starter-english-2026",
+          "sha256": "42e394a3fbb26f7d3a06f96e205b789fb5e8746ece69512b1978b895f6c71e17"
+        },
+        {
+          "index": 1,
+          "id": "ey-starter-urdu-2026",
+          "sha256": "b1ead0264c752705b81a084fd72a0fb952115006b9a554a0142eea4799904b14"
+        },
+        {
+          "index": 2,
+          "id": "ey-starter-math-2026",
+          "sha256": "1fc241da8590cfe4402c7f0d9157e8970bf61fd7050fb6039e4641c6e66fcddb"
+        },
+        {
+          "index": 3,
+          "id": "ey-mover-english-2026",
+          "sha256": "359afbfec77b93ee0b52e4f3bccbd326d2c216b29680299c999f3e00c9cc8520"
+        },
+        {
+          "index": 4,
+          "id": "ey-mover-urdu-2026",
+          "sha256": "455538740993f69ae2e7c36794ac2f8eb9b2892e823d09385a9399e6def47000"
+        },
+        {
+          "index": 5,
+          "id": "ey-mover-math-2026",
+          "sha256": "eabdc4d749c45f946e526409890dad4066b90e880c94295a5e464f8df26c65e1"
+        },
+        {
+          "index": 6,
+          "id": "ey-flyer-english-2026",
+          "sha256": "e5a5b8356a2c1382ba0eaf12ef406ddba2bb48d406d25cc67fe8016a246b68d1"
+        },
+        {
+          "index": 7,
+          "id": "ey-flyer-urdu-2026",
+          "sha256": "96b0f01d91bc3a00d3d4f6db0109fbbbbed1ebcde0d628f213c9e50d78ec8d7d"
+        },
+        {
+          "index": 8,
+          "id": "ey-flyer-math-2026",
+          "sha256": "985503eed60a311205fa95f63c3e32cb2162ba8b522dab57835745e56d3c5c6f"
+        }
+      ]
+    },
+    "recovery6": {
+      "count": 6,
+      "aggregateSha256": "544e5575536c7abd2a84e5c6152b51fbd5aa06b7e7700837be3f4d0e2ae5de4a",
+      "entries": [
+        {
+          "index": 0,
+          "id": "recovery-first-term-2026-class-3-mathematics",
+          "sha256": "9ef6c0a9460a0da0a6ee70a6437bce4677551cea60426610b20c05b0d61de698"
+        },
+        {
+          "index": 1,
+          "id": "recovery-first-term-2026-class-6-social-studies",
+          "sha256": "f35f527c3a9c0774c8b5a8c92955a2fc37b2d81d6950ce8ce0493c086777cf35"
+        },
+        {
+          "index": 2,
+          "id": "recovery-first-term-2026-class-7-urdu",
+          "sha256": "15f4b51f6bfc8066b9c9037a35cc77ac6c9a1c8263f12b72e433feb78c530307"
+        },
+        {
+          "index": 3,
+          "id": "recovery-first-term-2026-class-7-islamiyat",
+          "sha256": "16159e62cb746017e296d6f2a42950743ad2d0d3defe832be219ed7065e4b3aa"
+        },
+        {
+          "index": 4,
+          "id": "recovery-first-term-2026-class-8-urdu",
+          "sha256": "745c240a7f19b74162426bc01957dcb06ad3e6263dcce4f8a59ef65be11bef90"
+        },
+        {
+          "index": 5,
+          "id": "recovery-first-term-2026-class-8-science",
+          "sha256": "4161e6cbe1559f147fd84384de16ad5f004cb75f7b5e99fd20af28952c6cfbe0"
+        }
+      ]
+    },
+    "canonical43": {
+      "count": 43,
+      "aggregateSha256": "7829722cf17a29bfe6bb8d8e25f0faf83342d99c26610635f9a162ebf139f14d",
+      "entries": [
+        {
+          "index": 0,
+          "id": "doc__official-first-term-2026-class-1-urdu",
+          "sha256": "4f48d0188d7d92c010b69fb49a6c2f438c6cac5f9854066c32a4146fa20230ea"
+        },
+        {
+          "index": 1,
+          "id": "doc__official-first-term-2026-class-1-countdown-mathematics",
+          "sha256": "a873551dd388cd83cd99c85fcfe2e18c1fe345ac5252bb7eae649b5c3dc7a8ab"
+        },
+        {
+          "index": 2,
+          "id": "doc__official-first-term-2026-class-1-english",
+          "sha256": "e7fcb7c19bb69f6bf3276af23dc4ac41f6c0c921cc48bfe63a6cfca8ae4779e5"
+        },
+        {
+          "index": 3,
+          "id": "doc__official-first-term-2026-class-2-urdu",
+          "sha256": "aeead097d62706faa8e8fb34500c01c24a1cff0cf0c6eace2c0d64aa518e5f4d"
+        },
+        {
+          "index": 4,
+          "id": "doc__official-first-term-2026-class-2-english",
+          "sha256": "abacaef4bbcbf0e16b26b7a97731149ba656d2f70b96b3e0dc529f776f3606c1"
+        },
+        {
+          "index": 5,
+          "id": "doc__official-first-term-2026-class-2-islamiyat",
+          "sha256": "bef68f9134ae63f72d157a3e5fb6400112689dc1c284c0acbcabe4080e3f9dab"
+        },
+        {
+          "index": 6,
+          "id": "doc__official-first-term-2026-class-2-science",
+          "sha256": "6f1c0aa070d3a5f1b14bfafbda566256119c1c1e98d692086a6beecb3ea51135"
+        },
+        {
+          "index": 7,
+          "id": "doc__official-first-term-2026-class-2-mathematics",
+          "sha256": "f8f9a15ebfb8ebbb0462968e82477607121b67567e146c7c54aa777281293c38"
+        },
+        {
+          "index": 8,
+          "id": "doc__official-first-term-2026-class-3-urdu",
+          "sha256": "c814971e248808e988725a8a9bf346c33b744cc04f97739158a2a9d82fa624b5"
+        },
+        {
+          "index": 9,
+          "id": "doc__official-first-term-2026-class-3-science",
+          "sha256": "c7f69714cef168e222fda09a7770041f0f239345ddb080fef57c279fcb279825"
+        },
+        {
+          "index": 10,
+          "id": "doc__official-first-term-2026-class-3-social-studies",
+          "sha256": "3369c27b417d0ce199a2ab5ce6e61b24e76fba56b34d13886d8b9fdad137f290"
+        },
+        {
+          "index": 11,
+          "id": "doc__official-first-term-2026-class-3-english",
+          "sha256": "e8251ca74596f1fded95c583bb096855140fa68747dc2e15523915d3c11c6fd7"
+        },
+        {
+          "index": 12,
+          "id": "doc__official-first-term-2026-class-3-islamiyat",
+          "sha256": "58b4662996509cfd0ea07909aa86d4725a4f8a92b7e042cdd17f134c1d77ad99"
+        },
+        {
+          "index": 13,
+          "id": "doc__official-first-term-2026-class-4-english",
+          "sha256": "a38b656d113c282faf3a5350905cac9908c6af5d8a984b23fb7ff8283079540d"
+        },
+        {
+          "index": 14,
+          "id": "doc__official-first-term-2026-class-4-urdu",
+          "sha256": "b49ab0535eb07d733c94e800edc094270e3c97ffe41ddeef95937dc31829b66c"
+        },
+        {
+          "index": 15,
+          "id": "doc__official-first-term-2026-class-4-islamiyat",
+          "sha256": "509cd635ac451f84fcde77916a99c1620920f46084f7c77a20047babf84fae56"
+        },
+        {
+          "index": 16,
+          "id": "doc__official-first-term-2026-class-4-social-studies",
+          "sha256": "6ba4d7eeb76dcc8b84c54833e1d7d1c7b3fd99b1addf99fe012cd12c9211d30d"
+        },
+        {
+          "index": 17,
+          "id": "doc__official-first-term-2026-class-4-science",
+          "sha256": "510c4864208b6dfc581be59ccd9f0e40e64fde2042199335615c2ed0c7af07bc"
+        },
+        {
+          "index": 18,
+          "id": "doc__official-first-term-2026-class-4-mathematics",
+          "sha256": "a6b7b0ce31831eff2268aa50f297ead7c6b0bf7e620cfc2af0f264cfe43443a0"
+        },
+        {
+          "index": 19,
+          "id": "doc__official-first-term-2026-class-5-social-studies",
+          "sha256": "2ab5e68fe730776d84a206f3cc2a06c95ada4eeba1ed86e653c1233ad8083a1d"
+        },
+        {
+          "index": 20,
+          "id": "doc__official-first-term-2026-class-5-urdu",
+          "sha256": "937ff6d29d1932263b93a0927734c4023ecb2ef85ddd6cdf7713e87aa38a49ce"
+        },
+        {
+          "index": 21,
+          "id": "doc__official-first-term-2026-class-5-science",
+          "sha256": "118fa41f8947046bd2e66208e9355818af14be91dae7237c9d699d9f7659b4ef"
+        },
+        {
+          "index": 22,
+          "id": "doc__official-first-term-2026-class-5-islamiyat-version-a",
+          "sha256": "df8002304b734e91484c403109aa3e3ef1bd0d2b255faf09b06880ea93f0ba47"
+        },
+        {
+          "index": 23,
+          "id": "doc__official-first-term-2026-class-5-mathematics",
+          "sha256": "889c4a94ec0c967feca73bdb8571cdf2ff7e8b7655f9bf2ba630498bb356521f"
+        },
+        {
+          "index": 24,
+          "id": "doc__official-first-term-2026-class-5-english",
+          "sha256": "8eb37d6fbff1d03ec5b1e8e18cd87d58b49c0ce5969d40f37b26317e2f252003"
+        },
+        {
+          "index": 25,
+          "id": "doc__official-first-term-2026-class-5-islamiyat-version-b",
+          "sha256": "2b4591096b735429644b0bfcaaf97b5b60d185b1953104953745af0be982b24b"
+        },
+        {
+          "index": 26,
+          "id": "doc__official-first-term-2026-class-6-science",
+          "sha256": "f6b1b5d8585351905635f57cbd8ea7c866e7b48b0636cae2d6ab767d76ff7d3b"
+        },
+        {
+          "index": 27,
+          "id": "doc__official-first-term-2026-class-6-mathematics",
+          "sha256": "0d3b9fc4aaf8cf1c828c204f1f5a284b86fcceb7bc5c1acbb947e86c23f15f70"
+        },
+        {
+          "index": 28,
+          "id": "doc__official-first-term-2026-class-6-islamiyat",
+          "sha256": "b2bed760c2f3f0f6cf4eda13e3d9029f89ab4c06b7e060cc93fdcf1b83de2a96"
+        },
+        {
+          "index": 29,
+          "id": "doc__official-first-term-2026-class-6-urdu",
+          "sha256": "0d7a15dce93f0056bf890e4575cb0a979528aeb987122593d95919a7b873375f"
+        },
+        {
+          "index": 30,
+          "id": "doc__official-first-term-2026-class-6-english",
+          "sha256": "fb968e42380e0b0075bb75dd5836bbd185e4763017d6e0f16525f0c6edab4900"
+        },
+        {
+          "index": 31,
+          "id": "doc__official-first-term-2026-class-7-science",
+          "sha256": "47dfde79f497139a43dfc3b7a9312128097956ad58945ce6f6e47bd38e844e6f"
+        },
+        {
+          "index": 32,
+          "id": "doc__official-first-term-2026-class-7-social-studies",
+          "sha256": "8165a3caf18c04e4e3e186fdd6fb511f5e11b5243c08a3e945f88c50689c17b0"
+        },
+        {
+          "index": 33,
+          "id": "doc__official-first-term-2026-class-7-mathematics",
+          "sha256": "592525dbbe28f9f1a0d936f00d54075ca9f1f167056a80b757f5ecc2f589fd31"
+        },
+        {
+          "index": 34,
+          "id": "doc__official-first-term-2026-class-7-english",
+          "sha256": "85f9abf2306a2f447bd1c299616ea0010566a7c6bf743454d03bcd33f2a55844"
+        },
+        {
+          "index": 35,
+          "id": "doc__official-first-term-2026-class-8-social-studies",
+          "sha256": "5d402c4ce8bbdd0f0233fe57bda29eefc86f6a2d04375b058f18bca34fba51e6"
+        },
+        {
+          "index": 36,
+          "id": "doc__official-first-term-2026-class-8-islamiyat",
+          "sha256": "36a5fae5d8058a75f23ba329850d769399f1cd78f90d47ea6e554ee66b29c918"
+        },
+        {
+          "index": 37,
+          "id": "doc__official-first-term-2026-class-8-tarjuma-tul-quran",
+          "sha256": "84ebbe603dda666cdabd7cf7db6f3322e8a4553651179fca516e9e6dc223558c"
+        },
+        {
+          "index": 38,
+          "id": "doc__official-first-term-2026-class-8-computer",
+          "sha256": "c9b29864a0d0af38b7bee057e593a8e86ca2969264fedc35dace1eb0565abed9"
+        },
+        {
+          "index": 39,
+          "id": "doc__official-first-term-2026-class-8-mathematics",
+          "sha256": "96155b5711850f3a325dc60e379995ffa78b669c7f0a4f3c486af8ce521199a2"
+        },
+        {
+          "index": 40,
+          "id": "doc__official-first-term-2026-class-8-english",
+          "sha256": "49092a850a315352058ec9ac40cc5e4d7863ce1b77f5abfb7056447253ed641e"
+        },
+        {
+          "index": 41,
+          "id": "doc__official-first-term-2026-class-1-science",
+          "sha256": "1bda1794fb0c5e6d79daff78b9236f41362b088d4a781ee8c79db935c4642140"
+        },
+        {
+          "index": 42,
+          "id": "doc__official-first-term-2026-class-1-islamiyat",
+          "sha256": "38856d053e22e7a458c2941a0289db29b2c230423c9272ca40628aa9ca11ff1a"
+        }
+      ]
+    }
+  }
+}
