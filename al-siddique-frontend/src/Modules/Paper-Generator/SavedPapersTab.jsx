@@ -4,8 +4,8 @@ import { useState } from 'react'
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { canDuplicatePaperInWorkspace } from './paperCreationDraft.js'
+import SavedPaperBaselineDialog from './SavedPaperBaselineDialog.jsx'
 import { useAuth } from '../../context/AuthContext'
-import { isUrduScriptPaper } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, countOfficialMcqs, countNumberedItems } from './officialSectionSemantics.js'
 
 const C = {
@@ -89,11 +89,13 @@ function categoryStats(paper = {}) {
 
 export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  const { savedPapers, deleteSavedPaper, renameSavedPaper } = usePaperStore()
- const { isTeacher } = useAuth()
+ const { user, isTeacher } = useAuth()
+ const canCaptureNativeBaseline = ['principal','admin','super_admin'].includes(user?.role)
  const [renaming, setRenaming] = useState(null) // paper id
  const [renameVal, setRenameVal] = useState('')
  const [search, setSearch] = useState('')
  const [confirmDelete, setConfirmDelete] = useState(null)
+ const [baselineTarget, setBaselineTarget] = useState(null)
 
  const filtered = savedPapers.filter(p => {
  // Role-based visibility
@@ -117,6 +119,7 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
 
  return (
  <div>
+ {baselineTarget && <SavedPaperBaselineDialog paper={baselineTarget} onClose={() => setBaselineTarget(null)} />}
  {/* Delete confirm modal */}
  {confirmDelete && (
  <Portal>
@@ -162,8 +165,6 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
  {filtered.map(paper => {
  const stats = categoryStats(paper)
- const isUrdu = isUrduScriptPaper(paper)
- const isOfficial = paper.documentFormat === 'pts-native-v13' || paper.documentFormat === 'official-v12' || String(paper.id || '').startsWith('official-first-term-')
 
  return (
  <div key={paper.id} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, overflow: 'hidden' }}>
@@ -242,6 +243,14 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  title="Create independent editable copy; original paper stays unchanged"
  style={{ background:'rgba(100,210,255,.12)', border:'1px solid rgba(100,210,255,.35)', borderRadius:10, padding:'9px 10px', color:'#64D2FF', fontWeight:800, cursor:'pointer', fontSize:12, whiteSpace:'nowrap' }}>
   Duplicate
+ </button>}
+ {canCaptureNativeBaseline && <button type="button" data-capture-native-baseline
+ aria-label={`Capture native baseline for ${paper.name}`}
+ onClick={() => setBaselineTarget(paper)}
+ title="Read-only snapshot of actual stored paper + separate working draft, no automatic approval or source rewrite"
+ style={{ background:'rgba(192,200,216,.11)',border:'1px solid rgba(192,200,216,.38)',borderRadius:10,
+ padding:'9px 10px',color:'#d7e1ee',fontWeight:750,cursor:'pointer',fontSize:12,whiteSpace:'nowrap' }}>
+ Native Baseline
  </button>}
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>
