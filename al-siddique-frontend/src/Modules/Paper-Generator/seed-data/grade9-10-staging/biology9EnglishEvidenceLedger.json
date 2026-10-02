@@ -67,7 +67,8 @@
           "actualPage": 6,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 6,
-          "verifiedPhysicalEndPage": 7
+          "verifiedPhysicalEndPage": 8,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.2",
@@ -76,7 +77,8 @@
           "actualPage": 8,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 8,
-          "verifiedPhysicalEndPage": 9
+          "verifiedPhysicalEndPage": 10,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.3",
@@ -85,7 +87,8 @@
           "actualPage": 10,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 10,
-          "verifiedPhysicalEndPage": 11
+          "verifiedPhysicalEndPage": 12,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.4",
@@ -94,7 +97,8 @@
           "actualPage": 12,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 12,
-          "verifiedPhysicalEndPage": 12
+          "verifiedPhysicalEndPage": 13,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.5",
@@ -103,7 +107,8 @@
           "actualPage": 13,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 13,
-          "verifiedPhysicalEndPage": 13
+          "verifiedPhysicalEndPage": 14,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.6",
@@ -112,7 +117,8 @@
           "actualPage": 14,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 14,
-          "verifiedPhysicalEndPage": 15
+          "verifiedPhysicalEndPage": 16,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.7",
@@ -121,7 +127,8 @@
           "actualPage": 16,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 16,
-          "verifiedPhysicalEndPage": 16
+          "verifiedPhysicalEndPage": 17,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.8",
@@ -130,7 +137,8 @@
           "actualPage": 17,
           "pageAuditStatus": "VISUALLY_CHECKED",
           "verifiedPhysicalStartPage": 17,
-          "verifiedPhysicalEndPage": 21
+          "verifiedPhysicalEndPage": 20,
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         }
       ],
       "exercise": {
@@ -219,6 +227,17 @@
             "individualQuestionPageMapStatus": "PENDING"
           }
         ]
+      },
+      "summaryEvidence": {
+        "physicalPage": 21,
+        "status": "VISUALLY_CHECKED",
+        "scope": "CHAPTER_WIDE_KEY_POINTS_NOT_EXCLUSIVE_TO_TOPIC_1_8"
+      },
+      "topicBoundaryAudit": {
+        "date": "2026-10-02",
+        "status": "VISUALLY_RECHECKED_SHARED_PAGE_BOUNDARIES",
+        "independentAcademicApproval": false,
+        "method": "Direct page rendering; end pages include continuation up to the next heading."
       }
     },
     {

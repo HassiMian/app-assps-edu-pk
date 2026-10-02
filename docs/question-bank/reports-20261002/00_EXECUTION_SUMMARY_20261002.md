@@ -1,4 +1,6 @@
 # ASSPS IX/X foundation continuation — 2026-10-02
+
+Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORING_20261002.md) and [independent draft review](12_CHAPTER1_INDEPENDENT_REVIEW_20261002.md). The earlier sections below retain the initial foundation snapshot; current status is in the continuation section.
 ## Initial safe baseline
 - Repository HassiMian/app-assps-edu-pk; isolated branch feat/grade9-10-curriculum-bank-foundation-20261002; start HEAD d292d2af5fd01150a6ad1d26cd92cfcf04082c0d; initially clean.
 - Existing questionContract.mjs, official papers, Early Years, examination modules, PaperDocument and tenant browser storage were NOT modified.
@@ -19,3 +21,10 @@
 - Human chapter/exercise/answer review, Urdu/English review, expanded Arts/Tech/alternative religion catalog, actual board-paper matrices and browser print acceptance remain PENDING/BLOCKED.
 - Six dated workstream reports 01–06 are alongside this summary.
 - Deployment forbidden until edition verification, QA, independent teacher signoff, real tenant dry-run, snapshot/rollback and three-mode Paper Generator regression succeed.
+
+## Continuation — full-book Chapter 1 authoring, 2026-10-02
+
+- **COMPLETED:** Latest continuation: full textbook default, 48 new bilingual Chapter 1 drafts across all eight topics, six prior examples preserved.
+- **VERIFIED:** 80/80 staging tests pass; independent English6–21/Urdu5–22 draft source review completed.
+- **PENDING:** Formal edition/exercise/terminology release checks, complete IX/X corpus, subject patterns and browser/print acceptance.
+- **BLOCKED:** Approved questions=0; production imports/deployment=0.

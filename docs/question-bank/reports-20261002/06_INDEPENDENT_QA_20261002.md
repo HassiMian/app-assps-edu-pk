@@ -1,4 +1,6 @@
 # Independent QA workstream — 2026-10-02
+
+Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORING_20261002.md) and [independent draft review](12_CHAPTER1_INDEPENDENT_REVIEW_20261002.md). The earlier sections below retain the initial foundation snapshot; current status is in the continuation section.
 ## COMPLETED
 - Baseline foundation tests BEFORE edits: 15/15 pass.
 - Companion baseline selection (Paper Store + Early Years + Workspace + print snapshot): 46/47 pass; sole failed-to-run file imports missing local 'playwright' dependency.
@@ -14,3 +16,10 @@
 ## BLOCKED
 - Full curriculum-bank acceptance cannot be claimed; the source and pattern corpus is not yet independently verified.
 - The missing Playwright package is an environment/test-readiness blocker, NOT a proven renderer defect.
+
+## Continuation — full-book Chapter 1 authoring, 2026-10-02
+
+- **COMPLETED:** Separate independent reviewer inspected the48 specifications and actual EN6–21/UR5–22 source pages; fixes were verified.
+- **VERIFIED:** 122 primary/supplemental/related page checks and80/80 automated staging tests pass.
+- **PENDING:** Formal edition/exercise matching, complete content coverage, final terminology/synthesis release signoff and browser/A4 print.
+- **BLOCKED:** Independent review explicitly withholds publication approval; no real approved/imported questions.
