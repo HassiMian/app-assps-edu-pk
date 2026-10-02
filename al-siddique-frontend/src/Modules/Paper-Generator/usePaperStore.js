@@ -5,6 +5,7 @@ import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../se
 import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
+import { applyClass6UrduOct03ContentCorrection } from './class6UrduOct03ContentHotfix.js'
 import { getFinalExamScheduleForPaper } from '../dateSheetFinalExam2026.js'
 import { validatePasteManyRows, toQuestionBankRecord } from './pasteManyReview.js'
 import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
@@ -473,8 +474,10 @@ function loadStore() {
  const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy: true })
  if (!raw) {
  const seeded = withExamNightRecoverySeed(withOfficialExamPaperSeed(withAsspsQuestionBankSeed(defaultStore)))
- saveStore(seeded)
- return seeded
+ const corrected = isAsspsTenantUser()
+  ? applyClass6UrduOct03ContentCorrection(seeded, officialFirstTermPapers) : seeded
+ saveStore(corrected)
+ return corrected
  }
  const parsed = JSON.parse(raw)
  // Keep user data as-is; only seed if this is truly the very first run
@@ -534,10 +537,12 @@ function loadStore() {
  }
  const questionSeeded = withAsspsQuestionBankSeed(nextStore)
  const seeded = withExamNightRecoverySeed(withOfficialExamPaperSeed(questionSeeded))
- if (seeded !== nextStore) {
-  saveStore(seeded)
+ const corrected = isAsspsTenantUser()
+  ? applyClass6UrduOct03ContentCorrection(seeded, officialFirstTermPapers) : seeded
+ if (corrected !== nextStore) {
+  saveStore(corrected)
  }
- return seeded
+ return corrected
  } catch (error) {
   console.error('Failed to load Paper Generator store:', error)
   return defaultStore
