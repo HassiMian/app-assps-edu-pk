@@ -1,0 +1,19 @@
+{
+  "generatedOn": "2026-10-02",
+  "mode": "DRY_RUN_NO_LIVE_ACCESS",
+  "stagedRealQuestionCount": 0,
+  "existingTenantSnapshot": "NOT_ACCESSED",
+  "reportInterpretation": "There is no academic input to insert. Counts are not claims about duplicates or conflicts in production.",
+  "wouldInsert": 0,
+  "knownDuplicates": 0,
+  "knownConflicts": 0,
+  "rejectedActualRecords": 0,
+  "actualProductionImpact": "NONE; no import attempted",
+  "pending": [
+    "verified source PDFs and chapter/exercise ledgers",
+    "subject/board pattern matrix",
+    "academic and bilingual signoff",
+    "tenant-scoped existing bank snapshot",
+    "authorized final import"
+  ]
+}
