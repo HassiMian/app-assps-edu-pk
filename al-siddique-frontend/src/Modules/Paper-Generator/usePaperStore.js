@@ -6,6 +6,7 @@ import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenan
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
 import { getFinalExamScheduleForPaper } from '../dateSheetFinalExam2026.js'
+import { validatePasteManyRows, toQuestionBankRecord } from './pasteManyReview.js'
 import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
 import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.js'
 
@@ -1019,6 +1020,26 @@ export function usePaperStore() {
  return summary
  }
 
+ function commitReviewedQuestionBatch({subjectId,rows}) {
+  if(!subjectId || !Array.isArray(rows)) throw new Error('Choose a subject and review the pasted questions first.')
+  let inserted=[]
+  const success=update(s=>{
+   if(!(s.subjects||[]).some(sub=>sub.id===subjectId)) throw new Error('The selected subject no longer exists. No questions were saved.')
+   const types=(s.questionTypes||defaultStore.questionTypes).map(item=>item.value)
+   const review=validatePasteManyRows(rows,s.questions||[],subjectId,types)
+   if(!review.canCommit) throw new Error(review.includedCount===0?'Select at least one question.':'Review failed: '+review.rows.filter(row=>row.included!==false&&row.errors.length).map(row=>row.id+': '+row.errors.join(', ')).join(' | '))
+   const at=new Date().toISOString()
+   inserted=review.rows.filter(row=>row.included!==false).map(row=>({
+    ...toQuestionBankRecord(row,subjectId),
+    id:'q_'+Date.now()+'_'+(typeof globalThis.crypto?.randomUUID==='function'?globalThis.crypto.randomUUID():Math.random().toString(36).slice(2)),
+    source:'supervised-paste-many',createdAt:at,
+   }))
+   return {...s,questions:[...s.questions,...inserted]}
+  })
+  if(!success)throw new Error('Browser storage write failed. Nothing was committed; keep the reviewed rows and retry.')
+  return {inserted:inserted.length,ids:inserted.map(q=>q.id)}
+ }
+
  function bulkAddQuestions(questionsList) {
  if (!questionsList || !questionsList.length) return []
  const imported = questionsList.map(q => ({
@@ -1030,46 +1051,7 @@ export function usePaperStore() {
  return imported
  }
 
- function bulkImportQuestions(subjectId, rawText, type = 'mcq', chapter = '', medium = 'english') {
- const blocks = rawText.split('---').map(b => b.trim()).filter(Boolean)
- const imported = []
- blocks.forEach(block => {
- const lines = block.split('\n').map(l => l.trim()).filter(Boolean)
- const get = (prefix) => {
- const line = lines.find(l => l.startsWith(prefix + ':'))
- return line ? line.slice(prefix.length + 1).trim() : ''
- }
- const text = get('Q')
- if (!text) return
- // Parse columns: LEFT: a|b|c RIGHT: x|y|z
- let leftColumn = [], rightColumn = []
- if (type === 'columns') {
- const leftRaw = get('LEFT')
- const rightRaw = get('RIGHT')
- leftColumn = leftRaw ? leftRaw.split('|').map(s => s.trim()) : []
- rightColumn = rightRaw ? rightRaw.split('|').map(s => s.trim()) : []
- }
- imported.push({
- id: `q_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
- subjectId, type,
- medium: get('MEDIUM') || medium,
- text,
- textUrdu: get('UR'),
- marks: Number(get('MARKS')) || 1,
- answer: get('ANS'),
- chapter: get('CHAP') || chapter,
- priority: get('PRI') || 'all',
- options: type === 'mcq'
- ? ['A', 'B', 'C', 'D'].map(label => ({ label, text: get(label), textUrdu: get(`UR${label}`) })).filter(o => o.text || o.textUrdu)
- : [],
- leftColumn,
- rightColumn,
- createdAt: new Date().toISOString(),
- })
- })
- update(s => ({ ...s, questions: [...s.questions, ...imported] }))
- return imported.length
- }
+ // Direct unreviewed bulkImportQuestions retired: Paste Many now validates and atomically commits reviewed rows.
 
  //  Question Types 
  function addQuestionType({ label, labelUrdu = '', marks = 1 }) {
@@ -1226,7 +1208,7 @@ export function usePaperStore() {
  questionTypes: store.questionTypes || defaultStore.questionTypes,
  addSubject, editSubject, deleteSubject,
  findSubjectByIdentity, ensureSubject,
- addQuestion, editQuestion, deleteQuestion, bulkImportQuestions, bulkAddQuestions,
+ addQuestion, editQuestion, deleteQuestion, bulkAddQuestions, commitReviewedQuestionBatch,
  importPaperQuestionsToBank,
  addQuestionType, editQuestionType, deleteQuestionType,
  savePaper, deleteSavedPaper, renameSavedPaper, updateSavedPaper,

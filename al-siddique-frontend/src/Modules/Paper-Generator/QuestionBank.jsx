@@ -3,6 +3,7 @@ import { extractQuestionsFromFile, MODEL_OPTIONS, DEFAULT_MODEL, getAiConfig, te
 import { CHAPTERS, SUBJECTS } from './data/questionBank'
 import PaperAiJobsPanel from './PaperAiJobsPanel'
 import QuickQuestionEntry from './QuickQuestionEntry.jsx'
+import SupervisedPasteMany from './SupervisedPasteMany.jsx'
 import { QUICK_TEXT_KINDS } from './quickQuestionRecord.js'
 import api from '../../services/api'
 
@@ -637,185 +638,7 @@ function QuestionModal({ question, subjectId, subjectClassLevel, existingChapter
  )
 }
 
-//  Bulk Import Modal (text + .txt file upload) 
-
-function BulkImportModal({ subjectId, subjectClassLevel, questionTypes = [], onImport, onClose }) {
- const [raw, setRaw] = useState('')
- const [type, setType] = useState(questionTypes[0]?.value || 'mcq')
- const [medium, setMedium] = useState(defaultMediumForClass(subjectClassLevel))
- const [count, setCount] = useState(null)
- const fileRef = useRef()
-
- const showUrdu = medium !== 'english'
-
- const templateMCQ =
-`Q: What is the capital of Pakistan?
-${showUrdu ? 'UR: پاکستان کا دارالحکومت کیا ہے؟\n' : ''}A: Karachi
-B: Lahore
-C: Islamabad
-D: Peshawar
-ANS: C
-MARKS: 1
-CHAP: Chapter 1
-PRI: exercise
----
-Q: The national language of Pakistan is?
-${showUrdu ? 'UR: پاکستان کی قومی زبان کون سی ہے؟\n' : ''}A: Punjabi
-B: Sindhi
-C: Pashto
-D: Urdu
-ANS: D
-MARKS: 1
-CHAP: Chapter 1
-PRI: past`
-
- const templateColumns =
-`Q: Match Column A with Column B
-LEFT: Photosynthesis|Respiration|Transpiration
-RIGHT: Food-making process|Energy release|Water evaporation
-ANS: 1-A, 2-B, 3-C
-MARKS: 3
-CHAP: Chapter 2
-PRI: exercise
----
-Q: Match the following terms
-LEFT: Nucleus|Cytoplasm|Cell wall
-RIGHT: Control center|Jelly-like fluid|Outer rigid layer
-ANS: 1-A, 2-B, 3-C
-MARKS: 3
-CHAP: Chapter 2
-PRI: exercise`
-
- const templateFill =
-`Q: The capital of Pakistan is [blank].
-${showUrdu ? 'UR: پاکستان کا دارالحکومت [blank] ہے۔\n' : ''}ANS: Islamabad
-MARKS: 1
-CHAP: Chapter 1
-PRI: exercise
----
-Q: Water boils at [blank] degrees Celsius.
-ANS: 100
-MARKS: 1
-CHAP: Chapter 3
-PRI: exercise`
-
- const templateShort =
-`Q: Define photosynthesis.
-${showUrdu ? 'UR: ضیاء ترکیب کی تعریف کریں۔\n' : ''}ANS: Process by which plants make food using sunlight, water, and CO2.
-MARKS: 2
-CHAP: Chapter 3
-PRI: exercise
----
-Q: Write any two uses of water.
-${showUrdu ? 'UR: پانی کے کوئی دو استعمال لکھیں۔\n' : ''}ANS: Drinking, cooking, agriculture, sanitation.
-MARKS: 2
-CHAP: Chapter 4
-PRI: all`
-
- const templateTrueFalse =
-`Q: The sun rises in the east.
-${showUrdu ? 'UR: سورج مشرق سے طلوع ہوتا ہے۔\n' : ''}ANS: True
-MARKS: 1
-CHAP: Chapter 1
-PRI: exercise
----
-Q: Water is a compound of carbon and oxygen.
-ANS: False
-MARKS: 1
-CHAP: Chapter 2
-PRI: exercise`
-
- const templates = { mcq: templateMCQ, short: templateShort, long: templateShort, fill: templateFill, true_false: templateTrueFalse, columns: templateColumns, grammar: templateShort }
- const template = templates[type] || templateShort
-
- function downloadTemplate() {
- const blob = new Blob([template], { type: 'text/plain;charset=utf-8' })
- const url = URL.createObjectURL(blob)
- const a = document.createElement('a'); a.href = url
- a.download = `template_${type}${showUrdu ? '_dual' : ''}.txt`
- a.click(); URL.revokeObjectURL(url)
- }
-
- function handleFileLoad(e) {
- const file = e.target.files[0]
- if (!file) return
- if (!file.name.endsWith('.txt')) {
- alert('Only .txt files are supported here. For PDF, use "AI Textbook Import".')
- return
- }
- const reader = new FileReader()
- reader.onload = ev => setRaw(prev => prev ? prev + '\n---\n' + ev.target.result : ev.target.result)
- reader.readAsText(file)
- e.target.value = ''
- }
-
- function handleImport() {
- const n = onImport(subjectId, raw, type, '', medium)
- setCount(n); setRaw('')
- }
-
- return (
- <Portal>
- <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', zIndex: 9999,
- display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
- <div className="super-module-card" style={{ ...card, padding: 24, width: 'min(700px, calc(100vw - 32px))', maxHeight: '90vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 14 }}>
- <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
- <div>
- <h3 style={{ color: C.gold, margin: 0, fontSize: 18 }}> Bulk Import — Text Format</h3>
- <div style={{ color: C.muted, fontSize: 12, marginTop: 4 }}>
- Paste structured text or load a .txt template to import questions quickly.
- </div>
- </div>
- <button onClick={onClose} style={{ background: 'none', border: 'none', color: C.silver, cursor: 'pointer' }}><X /></button>
- </div>
-
- <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
- <Select label="Question Type" value={type} onChange={e => setType(e.target.value)}
- options={questionTypes.map(t => ({ value: t.value, label: t.label }))} />
- <Select label="Question Medium" value={medium} onChange={e => setMedium(e.target.value)}
- options={MEDIUM_OPTIONS} />
- </div>
-
- {/* Template preview */}
- <div>
- <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
- <label style={{ fontSize: 12, color: C.silver, fontWeight: 500 }}>Format Template</label>
- <div style={{ display: 'flex', gap: 8 }}>
- <Btn variant="ghost" size="sm" onClick={() => fileRef.current.click()}><FileUp size={12} /> Load .txt</Btn>
- <Btn variant="green" size="sm" onClick={downloadTemplate}><Download size={12} /> Download</Btn>
- </div>
- </div>
- <input ref={fileRef} type="file" accept=".txt" style={{ display: 'none' }} onChange={handleFileLoad} />
- <div style={{ background: 'rgba(200,153,26,0.06)', border: '1px solid rgba(200,153,26,0.2)', borderRadius: 12, padding: 12,
- fontSize: 12, color: C.silver, fontFamily: 'monospace', lineHeight: 1.8, whiteSpace: 'pre-wrap', maxHeight: 180, overflowY: 'auto' }}>
- {template}
- </div>
- {type === 'columns' && (
- <div style={{ marginTop: 6, padding: '6px 10px', background: 'rgba(100,210,255,0.08)', borderRadius: 6, fontSize: 11, color: C.cyan }}>
-  Columns format: LEFT: item1|item2|item3 and RIGHT: match1|match2|match3 separated by |
- </div>
- )}
- </div>
-
- <Textarea label="Paste Questions Here" value={raw} onChange={e => setRaw(e.target.value)}
- style={{ minHeight: 220, fontFamily: 'monospace', fontSize: 12 }}
- placeholder={`Q: Sample question\nANS: Answer\nMARKS: 1\nCHAP: Chapter 1\nPRI: exercise\n---`} />
-
- {count !== null && (
- <div style={{ background: 'rgba(48,209,88,0.1)', border: '1px solid rgba(48,209,88,0.3)', borderRadius: 10, padding: '10px 14px', color: C.green, fontSize: 13 }}>
-  {count} question{count !== 1 ? 's' : ''} imported successfully!
- </div>
- )}
-
- <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', paddingTop: 4, borderTop: '1px solid rgba(148,163,184,0.12)' }}>
- <Btn variant="ghost" onClick={onClose}>Close</Btn>
- <Btn variant="gold" disabled={!raw.trim()} onClick={handleImport}><Upload size={14} /> Import Questions</Btn>
- </div>
- </div>
- </div>
- </Portal>
- )
-}
+// Paste Many review and commit lives in SupervisedPasteMany.jsx.
 
 //  AI Textbook Import Modal (star feature) 
 
@@ -2069,11 +1892,11 @@ export default function QuestionBank() {
  />
  )}
  {bulkModal && (
- <BulkImportModal
- subjectId={activeSubject}
- subjectClassLevel={currentSubject?.classLevel}
+ <SupervisedPasteMany
+ subject={currentSubject}
  questionTypes={filteredTypes}
- onImport={store.bulkImportQuestions}
+ existingQuestions={store.questions}
+ onCommit={store.commitReviewedQuestionBatch}
  onClose={() => setBulkModal(false)}
  />
  )}
@@ -2238,7 +2061,7 @@ export default function QuestionBank() {
  style={{ width: '100%', paddingLeft: 32, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(200,153,26,0.18)', borderRadius: 12, padding: '9px 12px 9px 32px', color: '#fff', fontSize: 13, outline: 'none', boxSizing: 'border-box' }} />
  </div>
  <Btn variant="ai" size="sm" onClick={() => setAiModal(true)} ><Sparkles size={13} /> AI Import</Btn>
- <Btn variant="blue" size="sm" onClick={() => setBulkModal(true)} ><Upload size={13} /> Paste Text</Btn>
+ <Btn variant="blue" size="sm" onClick={() => setBulkModal(true)} ><Upload size={13} /> Paste Many / Review</Btn>
  <Btn variant="gold" size="sm" disabled={!filteredTypes.some(t=>QUICK_TEXT_KINDS.has(t.value))} onClick={() => setQuickAddOpen(v=>!v)}><Plus size={13} /> Quick Add</Btn>
  <Btn variant="ghost" size="sm" onClick={() => { setQuickAddOpen(false); setQuestionModal('add') }}><Plus size={13} /> Advanced Add</Btn>
  </div>
