@@ -187,3 +187,16 @@
     border: 0.25mm solid var(--ey-border, #b8cadb) !important;
   }
 }
+
+/* Isolated printing for user-created worksheets: show only the shared A4 renderer. */
+@media print {
+ body.early-years-mode [data-early-years-studio],
+ body.early-years-mode [data-user-early-years-studio],
+ body.early-years-mode [data-user-early-years-studio] .early-years-workspace-body,
+ body.early-years-mode [data-user-early-years-preview] {
+  display:block !important; width:100% !important; height:auto !important;
+  min-height:0 !important; max-height:none !important; overflow:visible !important;
+  margin:0 !important; padding:0 !important; position:static !important; background:#fff !important;
+ }
+ body.early-years-mode [data-user-early-years-studio] .early-years-workspace-body {grid-template-columns:1fr !important}
+}

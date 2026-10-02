@@ -60,8 +60,9 @@ export function buildWorksheetSpec(paper) {
       classDisplayName: headerEdit.classDisplayNameOverride ?? (paper.classDisplayName || paper.classStage?.toUpperCase()),
       subjectDisplayName: headerEdit.subjectDisplayNameOverride ?? paper.subject?.toUpperCase(),
       totalMarks: derivedTotal,
+      examTitle: paper.userAuthored ? (paper.headerSource?.title || 'Practice Worksheet') : 'FIRST TERM 2026',
       totalMarksAuthority: sourceHeaderTotal == null && derivedTotal != null ? 'derived-from-explicit-question-marks' : 'source-header',
-      examDate: headerEdit.examDateOverride ?? (paper.headerSource?.examDate || schedule?.date || ''),
+      examDate: headerEdit.examDateOverride ?? (paper.userAuthored ? (paper.headerSource?.examDate || '') : (paper.headerSource?.examDate || schedule?.date || '')),
       timeAllowed: headerEdit.timeAllowedOverride ?? (paper.headerSource?.timeAllowed || schedule?.timeAllowed || ''),
       showNameRollNo: true
     },

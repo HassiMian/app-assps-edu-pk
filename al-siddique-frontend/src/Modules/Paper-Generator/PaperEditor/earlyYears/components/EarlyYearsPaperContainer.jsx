@@ -121,6 +121,7 @@ export default function EarlyYearsPaperContainer({
             isUrdu={isUrdu}
             templatePreset={theme}
           />
+          {paper?.userAuthored && <div data-user-early-years-draft-warning style={{margin:'0 0 8px',padding:'6px 9px',background:'#fff7e5',border:'1px solid #b45309',color:'#713f12',fontFamily:'Arial,sans-serif',fontSize:10,fontWeight:800,textAlign:'center',direction:'ltr'}}>DRAFT — USER-CREATED WORKSHEET • NOT AN APPROVED EXAMINATION PAPER</div>}
           {marksState?.hasConflict && <div data-early-years-draft-warning style={{margin:'0 0 8px',padding:'6px 9px',background:'#fff1d6',border:'1.5px solid #b45309',borderRadius:5,color:'#78350f',fontFamily:'Arial,sans-serif',fontSize:11,fontWeight:800,direction:'ltr',textAlign:'center'}}>
             DRAFT — MARKS REVIEW PENDING: Header {marksState.headerTotal} / Questions {marksState.questionTotal}
           </div>}

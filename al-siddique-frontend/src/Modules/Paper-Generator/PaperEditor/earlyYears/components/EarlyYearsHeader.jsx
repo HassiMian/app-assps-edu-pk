@@ -15,6 +15,7 @@ export default function EarlyYearsHeader({
     classDisplayName = 'Starter',
     subjectDisplayName = 'English',
     totalMarks = 50,
+    examTitle = 'FIRST TERM 2026',
     examDate = '',
     timeAllowed = ''
   } = headerConfig
@@ -122,7 +123,7 @@ export default function EarlyYearsHeader({
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', gap: 5, marginTop: 4, direction: 'ltr' }}>
             <span style={{ padding: '2px 7px', borderRadius: 999, background: accent, color: '#fff', fontSize: 7.5, fontWeight: 900, letterSpacing: .45 }}>
-              FIRST TERM 2026
+              {examTitle}
             </span>
             <span style={{ padding: '2px 7px', borderRadius: 999, border: `1px solid ${border}`, background: '#fff', color: accent, fontSize: 7.5, fontWeight: 900 }}>
               EARLY YEARS

@@ -12,7 +12,7 @@ const BoardPaperGenerator = lazy(() => import('./BoardPaperGenerator'))
 const QuestionBank = lazy(() => import('./QuestionBank'))
 const DailyDiaryFeature = lazy(() => import('./DailyDiaryFeature'))
 const PaperEditorRouter = lazy(() => import('./PaperEditor/editorV2/PaperEditorRouter'))
-const EarlyYearsWorksheetEditor = lazy(() => import('./PaperEditor/earlyYears/EarlyYearsWorksheetEditor'))
+const EarlyYearsStudio = lazy(() => import('./PaperEditor/earlyYears/EarlyYearsStudio'))
 
 export { resolvePaperRoute }
 
@@ -128,7 +128,7 @@ export default function PaperGenerator() {
     return <ModuleWrap><QuestionBank/></ModuleWrap>
   }
   if (moduleTab === 'early_years') {
-    return <ModuleWrap><EarlyYearsWorksheetEditor initialPaperId={loadedSavedPaper?.id || 'ey-starter-english-2026'} onReturnToSource={returnToSource}/></ModuleWrap>
+    return <ModuleWrap><EarlyYearsStudio initialPaperId={loadedSavedPaper?.id || 'ey-starter-english-2026'} onReturnToSource={returnToSource}/></ModuleWrap>
   }
   if (moduleTab === 'diary') {
     return <ModuleWrap><DailyDiaryFeature/></ModuleWrap>
