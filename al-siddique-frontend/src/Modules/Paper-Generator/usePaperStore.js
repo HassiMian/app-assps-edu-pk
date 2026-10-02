@@ -915,8 +915,8 @@ export function usePaperStore() {
   structuredData, leftColumn, rightColumn,
   createdAt: new Date().toISOString(),
   }
- update(s => ({ ...s, questions: [...s.questions, q] }))
- return q
+ const success = update(s => ({ ...s, questions: [...s.questions, q] }))
+ return success ? q : null
  }
 
  function editQuestion(id, changes) {

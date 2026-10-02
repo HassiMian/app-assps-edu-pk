@@ -52,6 +52,10 @@ export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
   const id = String(paper.id || '')
   const corpusId = String(paper.corpusId || '')
   const stage = String(paper.classStage || paper.config?.classLevel || paper.classLevel || '').toLowerCase()
+  // Independently authored Early Years papers are created in the regular blank
+  // workspace until the dedicated visual Activity Builder is introduced.
+  // The nine immutable source papers still use their specialist renderer.
+  if (paper.userAuthored === true && paper.documentFormat === 'pts-native-v13' && ['blank','duplicate'].includes(paper.creationMethod)) return 'build'
   const isEarlyYears = (
     corpusId === 'early-years-first-term-2026' ||
     id.startsWith('ey-') ||

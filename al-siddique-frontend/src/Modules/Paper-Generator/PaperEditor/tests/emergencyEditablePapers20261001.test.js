@@ -29,7 +29,7 @@ test('Class Eight Urdu recovery opens the editable workspace, not preview-only c
   assert.doesNotMatch(source,/data-marks-reconciliation/)
   assert.match(source,/data-edit-paper-toggle/)
   assert.match(source,/<details data-paper-metadata-editor style=/)
-  assert.match(source,/const \[editMode, setEditMode\] = useState\(false\)/)
+  assert.match(source,/const \[editMode, setEditMode\] = useState\(Boolean\(loadedPaper\?\.creationMethod && !loadedPaper\?\.id\)\)/)
   assert.match(source,/selectedSectionMarks/)
 })
 

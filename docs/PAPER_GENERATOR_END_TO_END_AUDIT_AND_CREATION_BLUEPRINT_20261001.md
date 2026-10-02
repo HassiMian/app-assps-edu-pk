@@ -101,3 +101,22 @@ P4: complete E2E matrix for Starter, Mover, Flyer, Classes One–Eight, Urdu/Eng
 - Run existing Paper Editor V13 visual/print parity tests and Early Years source fidelity tests after each narrow patch.
 - Fresh release metadata and verifiable artifact hash, backup, staging and no deletion of historical hashed assets.
 - Production DB and Examination First Term r5 are outside this release. No paper content/marks mutation as a side effect of upgrading.
+
+## Continuation checkpoint — 2026-10-02, Phase 1 self-service prototype
+
+Source branch: `feat/paper-create-entry-and-quick-bank-v1-20261001` based on **live Hotfix4** checkpoint `99fc462`.
+
+Implemented in isolated frontend development only (NOT yet activated on production):
+- An explicit three-method Paper Workspace start: **Blank Paper — Type Myself**, **Build from Question Bank** (existing wizard preserved), **Duplicate Saved Paper** (compatible workspace documents only).
+- Blank setup with class (Starter/Mover/Flyer + One–Eight), manually typed subject, language, optional metadata, optional target marks and A4 mode. Blank draft starts with no synthetic questions and no persisted ID.
+- User-owned V13-shaped generic paper, original compact editor reused. When creating a question, the inspector selects it automatically and provides direct heading, content, per-question marks, type and answer-line controls.
+- Empty draft may be saved before adding questions; printing an empty user-authored sheet is explicitly blocked. Repeat Save updates the SAME saved paper ID rather than creating duplicates.
+- Saved Papers includes independent deep-copy Duplicate for compatible legacy/V13 workspace documents, protecting source identity and old archives. Specialist Early Years/board/canonical documents are excluded pending appropriate adapters.
+- Question Bank now has Quick Add with retained class/subject/type and **Save & Add Another**, duplicate question warning, optional answer/chapter/topic and correctly separate Urdu/English/Dual content. Existing Advanced Add, Paste Text and AI import remain.
+- `usePaperStore.addQuestion` now reports failed local persistence instead of announcing a false success.
+
+Acceptance evidence at code checkpoint: **56/56 PASS** across browser and unit suites: Class 8 compact viewport, nine Early Years source visual cases, V13 Urdu font/RTL/printing, new Blank Paper Create → Empty Draft Save → Type → Save Same ID → Reopen → Print Preview, Quick Add repeated entry / duplicate rejection / Dual translation, source clone independence, Paper Store seed idempotence. Recheck after any subsequent edits and before release.
+
+**Remaining before broad production self-service rollout:** dedicated Early Years activity palette (tracing, picture, colouring, matching) with independent user-created paper library; supervised Paste Many preview / dedup / Commit; durable authenticated backend paper and question version storage rather than sole tenant-scoped localStorage; schema adapters and aligned editor/print parity across manual, bank and Early Years sources. Do not label the existing browser-local store multi-device-safe. Do not force Pre Classes sources through generic duplicate routing until the adapter is tested.
+
+Production release remains `examination-first-term-workflow-v1-r3-paper-hotfix4-compact`. Do not deploy Phase 1 without fresh build/review, release manifest, backup and live asset checks. Existing Class Eight Urdu source and marks MUST remain intact.

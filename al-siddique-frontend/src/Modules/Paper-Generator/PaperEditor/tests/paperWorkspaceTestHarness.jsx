@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import PTSPaperGenerator from '../../PTSPaperGenerator.jsx'
+import { usePaperStore } from '../../usePaperStore.js'
 import { ThemeProvider, useTheme } from '@/context/ThemeContext.jsx'
 import '@/index.css'
 import recoverySource from '../../seed-data/exam-night-recovery-v3.json'
@@ -97,10 +98,13 @@ const classEightUrduFixture = (() => {
 
 function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
+ const { savedPapers } = usePaperStore()
+ const params = new URLSearchParams(window.location.search)
+ const fixture = params.has('new') ? null : params.has('reopen') ? savedPapers.find(p => p.userAuthored && p.name==='Phase1 Browser Urdu') || null : params.has('recovery8') ? classEightUrduFixture : paper
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
-  <PTSPaperGenerator loadedPaper={new URLSearchParams(window.location.search).has('recovery8') ? classEightUrduFixture : paper} />
+  <PTSPaperGenerator loadedPaper={fixture} />
  </>
 }
 ReactDOM.createRoot(document.getElementById('root')).render(

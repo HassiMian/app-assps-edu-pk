@@ -3,6 +3,7 @@ import { lazy, Suspense, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { resolvePaperRoute } from './resolvePaperRoute.js'
+import { createDuplicatePaperDraft } from './paperCreationDraft.js'
 
 const SavedPapersTab = lazy(() => import('./SavedPapersTab'))
 const LessonPlanModule = lazy(() => import('./LessonPlanModule'))
@@ -67,7 +68,15 @@ export default function PaperGenerator() {
 
   const openModuleTab = tab => {
     if (tab.path) navigate(tab.path)
-    else setModuleTab(tab.id)
+    else {
+      if (tab.id === 'build' && moduleTab !== 'build') setLoadedSavedPaper(null)
+      setModuleTab(tab.id)
+    }
+  }
+
+  const handleDuplicatePaper = paper => {
+    setLoadedSavedPaper(createDuplicatePaperDraft(paper))
+    setModuleTab('build')
   }
 
   const handleLoadPaper = (paper, targetTab = null) => {
@@ -110,10 +119,10 @@ export default function PaperGenerator() {
   )
 
   if (moduleTab === 'build') {
-    return <ModuleWrap><PTSPaperGenerator loadedPaper={loadedSavedPaper} onReturnToSource={returnToSource}/></ModuleWrap>
+    return <ModuleWrap><PTSPaperGenerator key={loadedSavedPaper?.id || (loadedSavedPaper?.creationMethod==='duplicate' ? `copy-${loadedSavedPaper.duplicateOf}` : 'new-paper')} loadedPaper={loadedSavedPaper} onOpenSaved={()=>setModuleTab('saved')} onReturnToSource={returnToSource}/></ModuleWrap>
   }
   if (moduleTab === 'saved') {
-    return <ModuleWrap><SavedPapersTab onLoadPaper={handleLoadPaper}/></ModuleWrap>
+    return <ModuleWrap><SavedPapersTab onLoadPaper={handleLoadPaper} onDuplicatePaper={handleDuplicatePaper}/></ModuleWrap>
   }
   if (moduleTab === 'bank') {
     return <ModuleWrap><QuestionBank/></ModuleWrap>

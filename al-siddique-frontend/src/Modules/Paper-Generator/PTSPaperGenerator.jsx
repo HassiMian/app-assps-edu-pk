@@ -18,6 +18,8 @@ import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRende
 import StableClosingBracket from './PaperEditor/StableClosingBracket.jsx'
 import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
 import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
+import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
+import { createBlankPaperDraft } from './paperCreationDraft.js'
 
 function storeQToTemplate(q) {
  return {
@@ -595,19 +597,18 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  ? { name: storeSubjectInfo?.name || '', color: D.gold, emoji: '', edition: storeSubjectInfo?.publisher || '' }
  : SUBJECTS.find(s=>s.id===subjectId)
  
+ const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
  if (paper && allQuestionTypes) {
  const activeTypes = new Set(allQuestionTypes.filter(t => paper[t.value]?.length > 0).map(t => t.value))
  questionTypes = allQuestionTypes.filter(t => questionTypes.some(qt => qt.value === t.value) || activeTypes.has(t.value))
  }
- if (paper?.official_section?.length && !questionTypes.some(type => type.value === 'official_section')) {
+ if ((isOfficialPaper || paper?.official_section?.length) && !questionTypes.some(type => type.value === 'official_section')) {
   questionTypes = [...questionTypes, { value:'official_section', label:'Official Questions', labelUrdu:'امتحانی سوالات', marks:0 }]
  }
 
  const editorSettings = loadedPaper?.editorSettings || {}
-
- const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
  const ruleProfile = buildPaperRuleProfile(loadedPaper || { config:overrideConfig || {} })
  const [tmpl, setTmpl] = useState(editorSettings.template || 'classic')
  const [printMode, setPrintMode] = useState(editorSettings.printMode || 'a4')
@@ -628,6 +629,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [printBub, setPrintBub] = useState(Boolean(editorSettings.printBubbleSheet))
  const [printAns, setPrintAns] = useState(Boolean(editorSettings.printAnswerKey))
  const [modalOpen, setModalOpen] = useState(!loadedPaper)
+ const persistedPaperIdRef = useRef(loadedPaper?.id || '')
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
  const [priority, setPriority] = useState('all')
@@ -642,7 +644,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [selIds, setSelIds] = useState(new Set())
  const [limitWarn, setLimitWarn] = useState(false)
 
- const [editMode, setEditMode] = useState(false)
+ const [editMode, setEditMode] = useState(Boolean(loadedPaper?.creationMethod && !loadedPaper?.id))
  const [selectedSectionId, setSelectedSectionId] = useState('')
  const [activeEditable, setActiveEditable] = useState(null)
  const activateEditable = payload => {
@@ -786,15 +788,21 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   const [item] = sections.splice(from, 1); sections.splice(to, 0, item)
   return { ...current, official_section:resequenceOfficial(sections) }
  })
- const addOfficialSection = () => onPaperChange(current => {
+ const addOfficialSection = () => {
+  const newId = `${loadedPaper?.id || 'paper'}-manual-${Date.now()}-${Math.random().toString(36).slice(2,7)}`
+  onPaperChange(current => {
   const sections = [...(current.official_section || [])]
   const academicCount = sections.filter(section => inferOfficialSectionKind(section) !== 'marker').length
   const serial = academicCount + 1
   const urdu = isUrduScriptPaper({ config:cfg, ...current })
   const heading = urdu ? `سوال نمبر ${serial}: نیا سوال۔` : `Q${serial}. New Question`
-  sections.push({ id:`${loadedPaper?.id || 'paper'}-manual-${Date.now()}`, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:sections.length + 1, priority:'manual' })
+  sections.push({ id:newId, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:sections.length + 1, priority:'manual' })
   return { ...current, official_section:resequenceOfficial(sections) }
- })
+  })
+  setSelectedSectionId(newId)
+  setActiveEditable(null)
+  if (loadedPaper?.userAuthored) setEditMode(true)
+ }
  const applyWorkspaceRules = () => {
   if (!isOfficialPaper) return
   const next = applyAsspsPaperRules({ ...liveAuditPaper, config:cfg, official_section:paper.official_section || [] })
@@ -866,10 +874,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  function doSave() {
- if (!totalQs) return
+ if (!totalQs && !loadedPaper?.userAuthored) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
  const selectedQuestions = {}
- questionTypes.forEach(t => { selectedQuestions[t.value] = { questions: paper[t.value] || [], marks: paper[`${t.value}_marks`] || t.marks || 1 } })
+ questionTypes.forEach(t => { selectedQuestions[t.value] = { questions: paper[t.value] || [], marks: t.value==='official_section' ? marksLedger.questionTotal : (paper[`${t.value}_marks`] ?? t.marks ?? 1) } })
  const editorState = {
   template:tmpl, printMode, questionBorder:qBorderStyle, pageBorder,
   showAnswerLines:showAnsLines, showUrduHeaders, showSectionLine,
@@ -889,11 +897,15 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
        selectedLong: paper.long || [],
        teacherHidden: overrideConfig?.teacherHidden || false,
        editorSettings:editorState,
-       printReadiness: isOfficialPaper && !printAudit.blocked ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness),
+       printReadiness: loadedPaper?.userAuthored
+        ? (totalQs>0 && marksLedger.balanced && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : 'DRAFT')
+        : (isOfficialPaper && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness)),
        selectedQuestions,
+       ...(isOfficialPaper ? { official_section_marks:marksLedger.questionTotal } : {}),
      }
- const payload = isOfficialPaper ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
- const saved = loadedPaper?.id ? updateSavedPaper(loadedPaper.id, payload) : savePaper(payload)
+ const payload = isOfficialPaper && loadedPaper?.creationMethod !== 'blank' ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
+ const saved = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, payload) : savePaper(payload)
+ if (saved?.id) persistedPaperIdRef.current = saved.id
   if (!saved) return // Failed due to quota exceeded
   
   const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
@@ -918,6 +930,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doPrint() {
+ if (loadedPaper?.userAuthored && totalQs===0) {
+  alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
+  return
+ }
  if (draftQuality.errorCount > 0) {
   alert(['PRINT BLOCKED — paper quality gate found errors.', ...draftQuality.issues.filter(issue=>issue.level==='error').map(issue=>`• ${issue.text}`)].join('\n'))
   return
@@ -1043,7 +1059,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
  {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
- <DBtn color="green" onClick={doSave} disabled={!totalQs} style={{ padding:'8px 16px', fontSize:13 }}> Save</DBtn>
+ <DBtn color="green" onClick={doSave} disabled={!totalQs && !loadedPaper?.userAuthored} style={{ padding:'8px 16px', fontSize:13 }}>{loadedPaper?.userAuthored ? 'Save Draft' : 'Save'}</DBtn>
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
  </div>
  </div>
@@ -1194,6 +1210,14 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
      <input type="number" min="0" value={selectedSectionMarks||''} onChange={e=>{const next=Math.max(0,Number(e.target.value)||0);const urdu=isUrduScriptPaper({config:cfg,...paper});const heading=replaceSectionMarks(selectedSection.heading||'',next,urdu);updateSelectedSection({marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
     </label>
    </div>
+   {loadedPaper?.userAuthored && <>
+    <label style={{display:'block',fontSize:11,fontWeight:800,color:D.muted,marginTop:9}}>Question Heading
+      <input aria-label="Selected question heading" value={selectedSection.heading||''} onChange={e=>updateSelectedSection({heading:e.target.value,text:e.target.value,textUrdu:selectedSectionIsUrdu?e.target.value:''})} style={{...tinp,width:'100%',marginTop:4}} />
+    </label>
+    <label style={{display:'block',fontSize:11,fontWeight:800,color:D.muted,marginTop:9}}>Question Content
+      <textarea aria-label="Selected question content" dir={selectedSectionIsUrdu?'rtl':'ltr'} value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} placeholder="Type your question or activity here..." style={{...tinp,width:'100%',minHeight:95,resize:'vertical',marginTop:4,fontFamily:selectedSectionIsUrdu?URDU_FONT_STACK:"'Times New Roman',serif"}} />
+    </label>
+   </>}
    <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Question Type
     <select value={selectedSection.layoutPreset||'auto'} onChange={e=>updateSelectedSection({layoutPreset:e.target.value})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
      <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="sentence_usage">Sentence Usage — الفاظ / جملے</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
@@ -1262,7 +1286,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ fontSize:72, marginBottom:16, opacity:0.4 }}></div>
  <div style={{ fontSize:22, fontWeight:700, color:D.silver, marginBottom:10 }}>Paper Preview</div>
  <div style={{ fontSize:14, color:D.muted, maxWidth:380, lineHeight:1.7 }}>Click <strong style={{color:'#4da6ff'}}>Question Menu</strong> to add questions.<br/>Your paper will appear here live as you add them.</div>
- <button onClick={()=>setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}> Open Question Menu</button>
+ <button onClick={()=>isOfficialPaper ? addOfficialSection() : setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}>{isOfficialPaper ? '+ Type First Question' : 'Open Question Menu'}</button>
  </div>
  ) : half ? (
  <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
@@ -2189,9 +2213,10 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
 }
 
 //  Main Component 
-function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
+function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSaved = null }) {
  const { theme:uiTheme, setTheme:setUiTheme } = useTheme()
- const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'syllabus')
+ const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'choose')
+ const [creationDraft, setCreationDraft] = useState(null)
  const [syllabusId, setSyllabusId] = useState(null)
  const [classId, setClassId] = useState(null)
  const [subjectId, setSubjectId] = useState(null)
@@ -2227,8 +2252,21 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  questionTypes.forEach(t => { initial[t.value] = []; initial[`${t.value}_marks`] = t.marks || 1 })
  return initial
  })
+ const createNewBlankPaper = input => {
+  const fresh = createBlankPaperDraft(input)
+  setCreationDraft(fresh)
+  setPaper(() => {
+   const next = { ...fresh }
+   questionTypes.forEach(type => { next[type.value]=[]; next[`${type.value}_marks`]=type.marks||1 })
+   return next
+  })
+  setStep('questions')
+ }
+ const activePaper = creationDraft || loadedPaper
 
  const crumbs = {
+ choose:[{label:'Choose Creation Method'}],
+ blank_setup:[{label:'Create Blank Paper'}],
  syllabus: [{ label:'Syllabus Selection' }],
  class: [{ label:'Syllabus Selection', onClick:()=>setStep('syllabus') }, { label:'Class Selection' }],
  subject: [{ label:'Syllabus Selection', onClick:()=>setStep('syllabus') }, { label:'Class', onClick:()=>setStep('class') }, { label:'Subject Selection' }],
@@ -2243,13 +2281,16 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  <DBreadcrumb steps={crumbs[step]||[]} />
  {step !== 'questions' && (<div style={{ position:'absolute', top:8, right:18, zIndex:5 }}><ThemeToggle mode={uiTheme} onToggle={() => togglePaperWorkspaceTheme(setUiTheme)} /></div>)}
  <div style={{ padding:'24px', maxWidth:1100, margin:'0 auto' }}>
+ {step==='choose' && <PaperCreationWelcome onBlank={()=>setStep('blank_setup')} onBank={()=>setStep('syllabus')} onDuplicate={()=>onOpenSaved?.()} />}
+ {step==='blank_setup' && <BlankPaperSetup onBack={()=>setStep('choose')} onCreate={createNewBlankPaper} />}
  {step==='syllabus' && (<SyllabusStep onSelect={id => { setSyllabusId(id); setStep('class') }} />)}
  {step==='class' && (<ClassStep syllabusId={syllabusId} onSelect={id => { setClassId(id); setStep('subject') }} onBack={() => setStep('syllabus')} />)}
  {step==='subject' && (<SubjectStep syllabusId={syllabusId} classId={classId} onSelect={id => { setSubjectId(id); setStep('chapters') }} onBack={() => setStep('class')} />)}
  {step==='chapters' && (<ChapterStep subjectId={subjectId} selectedChapters={selChapters} selectedTopics={selTopics} onChange={(c,t) => { setSelChapters(c); setSelTopics(t) }} onNext={() => setStep('questions')} onBack={() => setStep('subject')} />)}
- {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={loadedPaper?.config || null} loadedPaper={loadedPaper || null} uiTheme={uiTheme} onToggleTheme={() => togglePaperWorkspaceTheme(setUiTheme)} onBack={() => {
- if (loadedPaper && onReturnToSource) onReturnToSource();
- else setStep(loadedPaper ? 'syllabus' : 'chapters');
+ {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={activePaper?.config || null} loadedPaper={activePaper || null} uiTheme={uiTheme} onToggleTheme={() => togglePaperWorkspaceTheme(setUiTheme)} onBack={() => {
+ if (creationDraft) { setCreationDraft(null); setStep('choose') }
+ else if (loadedPaper && onReturnToSource) onReturnToSource()
+ else setStep('chapters')
  }} />)}
  </div>
  </div>
