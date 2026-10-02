@@ -4,6 +4,7 @@ import {Plus,ChevronDown,ChevronRight,Download,CheckCircle2,AlertTriangle,X,Refr
 import biologyLedger from './seed-data/grade9-10-staging/biology9EnglishEvidenceLedger.json'
 import biologyUrduLedger from './seed-data/grade9-10-staging/biology9UrduEvidenceLedger.json'
 import reviewedPendingExamples from './seed-data/grade9-10-staging/biology9TopicResearchDrafts.json'
+import chapter1DraftBatch from './seed-data/grade9-10-staging/biology9Chapter1TopicDrafts.json'
 import {AUTHORING_TYPES,ORIGIN_TYPES,newTopicDraft,projectTopicTree,validateQuestionBlocks}
  from './seed-data/grade9-10-staging/topicWorkspaceEngine.mjs'
 import {loadTopicDraftLibrary,saveTopicDraftLibrary,rollbackTopicDraftLibrary} from './topicDraftBrowserStore.js'
@@ -18,7 +19,8 @@ const emptyForm=()=>({en:'',ur:'',hi:'',answerEn:'',answerUr:'',answerHi:'',orig
  exerciseRef:'',evidencePage:'',urduEvidencePage:'',marks:2,difficulty:'medium',traditional:false,
  important:false,importanceReason:'',optEn:['','','',''],optUr:['','','',''],optHi:['','','',''],correctOptionId:'A'})
 const CURRICULUM_KEY='IX-BIO-EM-2025-26'
-const SEED_IDS=reviewedPendingExamples.drafts.map(q=>q.id)
+const RESEARCH_DRAFTS=[...reviewedPendingExamples.drafts,...chapter1DraftBatch.drafts]
+const SEED_IDS=RESEARCH_DRAFTS.map(q=>q.id)
 const clone=()=>({
  ledgerSchema:biologyLedger.schemaVersion,sourcePdfSha256:biologyLedger.source.pdfSha256,
  createdFor:'ASSPS curriculum research staging only; NOT production selectable',
@@ -38,7 +40,7 @@ export default function TopicWiseCurriculumWorkspace(){
  const [showEmpty,setShowEmpty]=useState(true)
  const userDrafts=library?.drafts||[]
  const blocks=library?.blocks||[]
- const drafts=useMemo(()=>[...reviewedPendingExamples.drafts,...userDrafts],[userDrafts])
+ const drafts=useMemo(()=>[...RESEARCH_DRAFTS,...userDrafts],[userDrafts])
  const tree=useMemo(()=>projectTopicTree({ledger:biologyLedger,questions:drafts,type,origin,
   importantOnly,traditionalOnly,language,showEmptyTopics:showEmpty,search,syllabusMode,examYear}),
   [drafts,type,origin,importantOnly,traditionalOnly,language,showEmpty,search,syllabusMode,examYear])
@@ -126,7 +128,7 @@ export default function TopicWiseCurriculumWorkspace(){
  return <section style={{padding:'16px 18px',background:tone.bg,color:tone.text,minHeight:580}}>
   <div style={{display:'flex',justifyContent:'space-between',gap:12,flexWrap:'wrap',alignItems:'center'}}>
    <div><h3 style={{margin:'0 0 5px',fontSize:19}}>Curriculum Workspace · Grade IX Biology (pilot)</h3>
-    <small style={{color:tone.muted}}>6 source-grounded research examples + {userDrafts.length} tenant draft(s) · library rev {library?.revision??'blocked'} · all unapproved</small></div>
+    <small style={{color:tone.muted}}>{RESEARCH_DRAFTS.length} research drafts across {chapter1DraftBatch.topicCoverage.length} Chapter 1 topics + {userDrafts.length} tenant draft(s) · library rev {library?.revision??'blocked'} · all unapproved</small></div>
    <div style={{display:'flex',gap:7,flexWrap:'wrap'}}>
     <button type="button" onClick={reloadLibrary} style={button()}><RefreshCw size={13} style={{verticalAlign:'middle'}}/> Reload</button>
     <button type="button" onClick={rollbackPrevious} disabled={!library?.history?.length} style={{...button(),opacity:library?.history?.length?1:.5}}><RotateCcw size={13} style={{verticalAlign:'middle'}}/> Rollback</button>
@@ -186,8 +188,16 @@ export default function TopicWiseCurriculumWorkspace(){
          onChange={e=>setSelected(prev=>e.target.checked?[...prev,q.id]:prev.filter(id=>id!==q.id))}/>
         <div style={{minWidth:0,flex:1}}>{renderStem(q)}{q.type==='mcq'&&<div style={{fontSize:12,marginTop:5}}>{(q.content[language==='dual'?'en':language]?.options||[]).map(o=><div key={o.id}>{o.id}. {o.text}{language==='dual'?<span dir="rtl" lang="ur" style={{display:'inline-block',marginInlineStart:12,fontFamily:'Jameel Noori Nastaleeq, serif'}}>{q.content.ur.options.find(v=>v.id===o.id)?.text}</span>:null}</div>)}</div>}
          <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap',marginTop:4}}><small style={{color:tone.muted}}>{q.origin}
-         {q.editorial?.traditional?' · traditional':''}{q.importance?.selected?' · important':''} · {q.marks}m · unapproved</small>
-         {userDrafts.some(d=>d.id===q.id)&&<button type="button" onClick={()=>deleteDraft(q.id)} style={{...button(),padding:'3px 7px',color:'#ffb4b4'}}><Trash2 size={11}/> Delete draft</button>}</div></div>
+         {q.editorial?.traditional?' · traditional':''}{q.importance?.selected?' · important':''} · {q.difficulty} · {q.marks}m · unapproved</small>
+         <small style={{color:tone.muted}}>EN source p.{(q.source?.languages?.en?.pages||[q.source?.page]).join(', ')}
+          {q.source?.languages?.ur?' · UR source p.'+(q.source.languages.ur.pages||[q.source.languages.ur.page]).join(', '):''}</small>
+         {userDrafts.some(d=>d.id===q.id)&&<button type="button" onClick={()=>deleteDraft(q.id)} style={{...button(),padding:'3px 7px',color:'#ffb4b4'}}><Trash2 size={11}/> Delete draft</button>}</div>
+         <details style={{marginTop:7,fontSize:12}}><summary style={{cursor:'pointer'}}>Answer key · unapproved draft</summary>
+          {q.type==='mcq'&&<div style={{marginTop:5}}>Correct option: <span dir="ltr">{q.correctOptionId}</span></div>}
+          {(language==='dual'?['en','ur']:[language]).map(l=><p key={l} dir={l==='ur'?'rtl':'ltr'} lang={l}
+           style={{fontFamily:l==='ur'?'Jameel Noori Nastaleeq, serif':l==='en'?'Times New Roman, serif':'inherit',fontSize:l==='ur'?16:13}}>{q.content[l]?.answer}</p>)}
+          {q.source?.relatedEvidence?.length>0&&<small>Also grounded in topic(s): {q.source.relatedEvidence.map(e=>e.topicId).join(', ')} · synthesis review pending</small>}
+         </details></div>
        </div>)}
       {editing?.chapterId===ch.id&&editing?.topicId===t.id&&<div style={{...base,marginTop:9,background:'#163852'}}>
        <div style={{display:'flex',justifyContent:'space-between'}}><strong>New {type} · {t.id}</strong>

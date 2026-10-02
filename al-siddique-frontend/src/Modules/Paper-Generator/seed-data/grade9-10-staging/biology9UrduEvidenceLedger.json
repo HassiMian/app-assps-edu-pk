@@ -37,57 +37,65 @@
           "id": "1.1",
           "titleEnglishPrinted": "Biology and Its Branches",
           "verifiedPhysicalStartPage": 5,
-          "verifiedPhysicalEndPage": 7,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "verifiedPhysicalEndPage": 8,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.2",
           "titleEnglishPrinted": "Relation of Biology with Other Sciences",
           "verifiedPhysicalStartPage": 8,
-          "verifiedPhysicalEndPage": 8,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "verifiedPhysicalEndPage": 9,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.3",
           "titleEnglishPrinted": "Careers in Biology",
           "verifiedPhysicalStartPage": 9,
           "verifiedPhysicalEndPage": 11,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.4",
           "titleEnglishPrinted": "Quranic Instructions to Reveal the Study of Life",
           "verifiedPhysicalStartPage": 12,
-          "verifiedPhysicalEndPage": 12,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "verifiedPhysicalEndPage": 13,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.5",
           "titleEnglishPrinted": "Science as a Collaborative Field",
           "verifiedPhysicalStartPage": 13,
-          "verifiedPhysicalEndPage": 13,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "verifiedPhysicalEndPage": 14,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.6",
           "titleEnglishPrinted": "Scientific Method",
           "verifiedPhysicalStartPage": 14,
-          "verifiedPhysicalEndPage": 16,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "verifiedPhysicalEndPage": 17,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.7",
           "titleEnglishPrinted": "Theory and Law (Principle)",
           "verifiedPhysicalStartPage": 17,
           "verifiedPhysicalEndPage": 17,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         },
         {
           "id": "1.8",
           "titleEnglishPrinted": "Malaria — An Example of Biological Method",
           "verifiedPhysicalStartPage": 18,
-          "verifiedPhysicalEndPage": 22,
-          "pageAuditStatus": "VISUALLY_CHECKED"
+          "verifiedPhysicalEndPage": 21,
+          "pageAuditStatus": "VISUALLY_CHECKED",
+          "pageBoundaryNote": "Inclusive physical page range; a boundary page may contain adjacent topics. Use the exact subheading/paragraph evidence."
         }
       ],
       "exercise": {
@@ -165,6 +173,17 @@
             "reviewState": "FIRST_PASS_VISUAL"
           }
         ]
+      },
+      "summaryEvidence": {
+        "physicalPage": 22,
+        "status": "VISUALLY_CHECKED",
+        "scope": "CHAPTER_WIDE_KEY_POINTS_NOT_EXCLUSIVE_TO_TOPIC_1_8"
+      },
+      "topicBoundaryAudit": {
+        "date": "2026-10-02",
+        "status": "VISUALLY_RECHECKED_SHARED_PAGE_BOUNDARIES",
+        "independentAcademicApproval": false,
+        "method": "Direct page rendering; end pages include continuation up to the next heading."
       }
     },
     {

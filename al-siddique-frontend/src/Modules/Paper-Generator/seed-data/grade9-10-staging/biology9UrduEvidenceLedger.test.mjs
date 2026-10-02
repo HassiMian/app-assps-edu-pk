@@ -16,7 +16,7 @@ test('Urdu Chapter 1 topic pages are independently mapped, not copied from Engli
  const t=d.chapters[0].topics;
  assert.equal(t.length,8);
  assert.deepEqual(t.map(x=>x.verifiedPhysicalStartPage),[5,8,9,12,13,14,17,18]);
- assert.deepEqual(t.map(x=>x.verifiedPhysicalEndPage),[7,8,11,12,13,16,17,22]);
+ assert.deepEqual(t.map(x=>x.verifiedPhysicalEndPage),[8,9,11,13,14,17,17,21]);
  assert.ok(t.every(x=>x.pageAuditStatus==='VISUALLY_CHECKED'));
 });
 test('Urdu Chapter 1 exercise visibly supplies A/B/C/D section evidence',()=>{
