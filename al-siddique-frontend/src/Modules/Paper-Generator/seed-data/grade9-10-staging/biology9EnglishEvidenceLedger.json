@@ -1,0 +1,1479 @@
+{
+  "schemaVersion": "assps-ix-biology-em-source-evidence-ledger-v1",
+  "recordStatus": "FIRST_PASS_VISUAL_NOT_IN_APPROVED_BANK",
+  "createdOn": "2026-10-02",
+  "curriculum": {
+    "authority": "PECTAA_OFFICIAL_CATALOG",
+    "grade": 9,
+    "subject": "Biology",
+    "medium": "en",
+    "catalogEditionLabel": "2025-26",
+    "coverInternalLabel": "Experimental Edition",
+    "printedCurriculumBase": "Revised National Curriculum of Pakistan 2023",
+    "editionReview": "PENDING_INDEPENDENT_REVIEW"
+  },
+  "source": {
+    "catalogRecordId": "pectaa-catalog-009",
+    "catalogUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+    "assetUrl": "https://drive.google.com/file/d/1rH5qC3FM12nPcH1zIVbm25tMKWxMv-3P/view?usp=sharing",
+    "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+    "pdfBytes": 31362949,
+    "pdfPages": 180,
+    "extractionMethod": "DIRECT_VISUAL_PAGE_REVIEW_NO_OCR",
+    "physicalPageConvention": "PDF page index + 1 equals bottom printed page number for inspected content pages"
+  },
+  "paginationFindings": [
+    {
+      "id": "TOC_CHAPTER_OFFSET",
+      "detail": "All 11 observed chapter-opening pages are four greater than table-of-contents starting page entries.",
+      "status": "VISUALLY_CHECKED_AT_11_START_PAGES"
+    },
+    {
+      "id": "GLOSSARY_ANOMALY",
+      "tocPage": 173,
+      "actualStartPage": 176,
+      "status": "VISUALLY_CHECKED"
+    },
+    {
+      "id": "CH1_MISSING_SECTION_HEADER",
+      "page": 24,
+      "detail": "Seven independently numbered items between B and D have no visible section heading; do not assume letter C.",
+      "status": "NEEDS_EDITOR_CONFIRMATION"
+    },
+    {
+      "id": "LATE_HEADER_MISMATCH",
+      "pageRange": [
+        162,
+        175
+      ],
+      "detail": "Chapter 10 and 11 pages continue displaying PLANT PHYSIOLOGY in running header.",
+      "status": "VISUALLY_OBSERVED"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "IX-BIO-2025-EM-C01",
+      "number": 1,
+      "title": "The Science of Biology",
+      "tocStartPage": 1,
+      "verifiedPhysicalStartPage": 5,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "1.1",
+          "title": "Biology and its Branches",
+          "tocPage": 2,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.2",
+          "title": "Relation of Biology with Other Sciences",
+          "tocPage": 4,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.3",
+          "title": "Careers in Biology",
+          "tocPage": 6,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.4",
+          "title": "Quranic Instructions to Reveal the Study of Life",
+          "tocPage": 8,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.5",
+          "title": "Science as a Collaborative Field",
+          "tocPage": 9,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.6",
+          "title": "Scientific Method",
+          "tocPage": 10,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.7",
+          "title": "Theory and Law/Principle",
+          "tocPage": 12,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "1.8",
+          "title": "Malaria — An Example of Biological Method",
+          "tocPage": 13,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 22,
+        "lastPhysicalPage": 24,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 22,
+            "lastPhysicalPage": 23,
+            "questionSourceRefs": [
+              "EX-C01-A-Q01",
+              "EX-C01-A-Q02",
+              "EX-C01-A-Q03",
+              "EX-C01-A-Q04",
+              "EX-C01-A-Q05",
+              "EX-C01-A-Q06",
+              "EX-C01-A-Q07",
+              "EX-C01-A-Q08",
+              "EX-C01-A-Q09",
+              "EX-C01-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 6,
+            "firstPhysicalPage": 23,
+            "lastPhysicalPage": 23,
+            "questionSourceRefs": [
+              "EX-C01-B-Q01",
+              "EX-C01-B-Q02",
+              "EX-C01-B-Q03",
+              "EX-C01-B-Q04",
+              "EX-C01-B-Q05",
+              "EX-C01-B-Q06"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "UNLABELLED_AFTER_B",
+            "visibleLabel": null,
+            "type": "long_or_unclassified",
+            "count": 7,
+            "firstPhysicalPage": 24,
+            "lastPhysicalPage": 24,
+            "questionSourceRefs": [
+              "EX-C01-UNLABELLED_AFTER_B-Q01",
+              "EX-C01-UNLABELLED_AFTER_B-Q02",
+              "EX-C01-UNLABELLED_AFTER_B-Q03",
+              "EX-C01-UNLABELLED_AFTER_B-Q04",
+              "EX-C01-UNLABELLED_AFTER_B-Q05",
+              "EX-C01-UNLABELLED_AFTER_B-Q06",
+              "EX-C01-UNLABELLED_AFTER_B-Q07"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 24,
+            "lastPhysicalPage": 24,
+            "questionSourceRefs": [
+              "EX-C01-D-Q01",
+              "EX-C01-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C02",
+      "number": 2,
+      "title": "Biodiversity",
+      "tocStartPage": 21,
+      "verifiedPhysicalStartPage": 25,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "2.1",
+          "title": "Biodiversity",
+          "tocPage": 21,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.2",
+          "title": "Classification",
+          "tocPage": 22,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.3",
+          "title": "Taxonomic Ranks",
+          "tocPage": 23,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.4",
+          "title": "History of Classification",
+          "tocPage": 25,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.5",
+          "title": "Domains of Living Organisms",
+          "tocPage": 27,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.6",
+          "title": "Classification of Domain Eukarya",
+          "tocPage": 29,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.7",
+          "title": "Status of Virus in Classification",
+          "tocPage": 30,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "2.8",
+          "title": "Binomial Nomenclature",
+          "tocPage": 32,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 38,
+        "lastPhysicalPage": 40,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 38,
+            "lastPhysicalPage": 39,
+            "questionSourceRefs": [
+              "EX-C02-A-Q01",
+              "EX-C02-A-Q02",
+              "EX-C02-A-Q03",
+              "EX-C02-A-Q04",
+              "EX-C02-A-Q05",
+              "EX-C02-A-Q06",
+              "EX-C02-A-Q07",
+              "EX-C02-A-Q08",
+              "EX-C02-A-Q09",
+              "EX-C02-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 11,
+            "firstPhysicalPage": 40,
+            "lastPhysicalPage": 40,
+            "questionSourceRefs": [
+              "EX-C02-B-Q01",
+              "EX-C02-B-Q02",
+              "EX-C02-B-Q03",
+              "EX-C02-B-Q04",
+              "EX-C02-B-Q05",
+              "EX-C02-B-Q06",
+              "EX-C02-B-Q07",
+              "EX-C02-B-Q08",
+              "EX-C02-B-Q09",
+              "EX-C02-B-Q10",
+              "EX-C02-B-Q11"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 7,
+            "firstPhysicalPage": 40,
+            "lastPhysicalPage": 40,
+            "questionSourceRefs": [
+              "EX-C02-C-Q01",
+              "EX-C02-C-Q02",
+              "EX-C02-C-Q03",
+              "EX-C02-C-Q04",
+              "EX-C02-C-Q05",
+              "EX-C02-C-Q06",
+              "EX-C02-C-Q07"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 40,
+            "lastPhysicalPage": 40,
+            "questionSourceRefs": [
+              "EX-C02-D-Q01",
+              "EX-C02-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C03",
+      "number": 3,
+      "title": "The Cell",
+      "tocStartPage": 37,
+      "verifiedPhysicalStartPage": 41,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "3.1",
+          "title": "Cell",
+          "tocPage": 38,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "3.2",
+          "title": "Structure of Cell",
+          "tocPage": 38,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "3.3",
+          "title": "Structural Advantages of Plant and Animal Cells",
+          "tocPage": 49,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "3.4",
+          "title": "Cell Specialization",
+          "tocPage": 50,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "3.5",
+          "title": "Stem Cells",
+          "tocPage": 53,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 60,
+        "lastPhysicalPage": 62,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 14,
+            "firstPhysicalPage": 60,
+            "lastPhysicalPage": 61,
+            "questionSourceRefs": [
+              "EX-C03-A-Q01",
+              "EX-C03-A-Q02",
+              "EX-C03-A-Q03",
+              "EX-C03-A-Q04",
+              "EX-C03-A-Q05",
+              "EX-C03-A-Q06",
+              "EX-C03-A-Q07",
+              "EX-C03-A-Q08",
+              "EX-C03-A-Q09",
+              "EX-C03-A-Q10",
+              "EX-C03-A-Q11",
+              "EX-C03-A-Q12",
+              "EX-C03-A-Q13",
+              "EX-C03-A-Q14"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 14,
+            "firstPhysicalPage": 61,
+            "lastPhysicalPage": 62,
+            "questionSourceRefs": [
+              "EX-C03-B-Q01",
+              "EX-C03-B-Q02",
+              "EX-C03-B-Q03",
+              "EX-C03-B-Q04",
+              "EX-C03-B-Q05",
+              "EX-C03-B-Q06",
+              "EX-C03-B-Q07",
+              "EX-C03-B-Q08",
+              "EX-C03-B-Q09",
+              "EX-C03-B-Q10",
+              "EX-C03-B-Q11",
+              "EX-C03-B-Q12",
+              "EX-C03-B-Q13",
+              "EX-C03-B-Q14"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 10,
+            "firstPhysicalPage": 62,
+            "lastPhysicalPage": 62,
+            "questionSourceRefs": [
+              "EX-C03-C-Q01",
+              "EX-C03-C-Q02",
+              "EX-C03-C-Q03",
+              "EX-C03-C-Q04",
+              "EX-C03-C-Q05",
+              "EX-C03-C-Q06",
+              "EX-C03-C-Q07",
+              "EX-C03-C-Q08",
+              "EX-C03-C-Q09",
+              "EX-C03-C-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 62,
+            "lastPhysicalPage": 62,
+            "questionSourceRefs": [
+              "EX-C03-D-Q01",
+              "EX-C03-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C04",
+      "number": 4,
+      "title": "Cell Cycle",
+      "tocStartPage": 59,
+      "verifiedPhysicalStartPage": 63,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "4.1",
+          "title": "Cell Cycle",
+          "tocPage": 59,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "4.2",
+          "title": "Mitosis",
+          "tocPage": 61,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "4.3",
+          "title": "Meiosis",
+          "tocPage": 65,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "4.4",
+          "title": "Comparison between Meiosis and Mitosis",
+          "tocPage": 69,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 77,
+        "lastPhysicalPage": 78,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 77,
+            "lastPhysicalPage": 78,
+            "questionSourceRefs": [
+              "EX-C04-A-Q01",
+              "EX-C04-A-Q02",
+              "EX-C04-A-Q03",
+              "EX-C04-A-Q04",
+              "EX-C04-A-Q05",
+              "EX-C04-A-Q06",
+              "EX-C04-A-Q07",
+              "EX-C04-A-Q08",
+              "EX-C04-A-Q09",
+              "EX-C04-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 12,
+            "firstPhysicalPage": 78,
+            "lastPhysicalPage": 78,
+            "questionSourceRefs": [
+              "EX-C04-B-Q01",
+              "EX-C04-B-Q02",
+              "EX-C04-B-Q03",
+              "EX-C04-B-Q04",
+              "EX-C04-B-Q05",
+              "EX-C04-B-Q06",
+              "EX-C04-B-Q07",
+              "EX-C04-B-Q08",
+              "EX-C04-B-Q09",
+              "EX-C04-B-Q10",
+              "EX-C04-B-Q11",
+              "EX-C04-B-Q12"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 5,
+            "firstPhysicalPage": 78,
+            "lastPhysicalPage": 78,
+            "questionSourceRefs": [
+              "EX-C04-C-Q01",
+              "EX-C04-C-Q02",
+              "EX-C04-C-Q03",
+              "EX-C04-C-Q04",
+              "EX-C04-C-Q05"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 78,
+            "lastPhysicalPage": 78,
+            "questionSourceRefs": [
+              "EX-C04-D-Q01",
+              "EX-C04-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C05",
+      "number": 5,
+      "title": "Tissues, Organs, and Organ Systems",
+      "tocStartPage": 75,
+      "verifiedPhysicalStartPage": 79,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "5.1",
+          "title": "Levels of Organization",
+          "tocPage": 75,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "5.2",
+          "title": "Organs and Organ Systems in Plants",
+          "tocPage": 78,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "5.3",
+          "title": "Organs and Organ Systems in Humans",
+          "tocPage": 81,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "5.4",
+          "title": "Homeostasis",
+          "tocPage": 83,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 90,
+        "lastPhysicalPage": 92,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 90,
+            "lastPhysicalPage": 91,
+            "questionSourceRefs": [
+              "EX-C05-A-Q01",
+              "EX-C05-A-Q02",
+              "EX-C05-A-Q03",
+              "EX-C05-A-Q04",
+              "EX-C05-A-Q05",
+              "EX-C05-A-Q06",
+              "EX-C05-A-Q07",
+              "EX-C05-A-Q08",
+              "EX-C05-A-Q09",
+              "EX-C05-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 8,
+            "firstPhysicalPage": 92,
+            "lastPhysicalPage": 92,
+            "questionSourceRefs": [
+              "EX-C05-B-Q01",
+              "EX-C05-B-Q02",
+              "EX-C05-B-Q03",
+              "EX-C05-B-Q04",
+              "EX-C05-B-Q05",
+              "EX-C05-B-Q06",
+              "EX-C05-B-Q07",
+              "EX-C05-B-Q08"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 10,
+            "firstPhysicalPage": 92,
+            "lastPhysicalPage": 92,
+            "questionSourceRefs": [
+              "EX-C05-C-Q01",
+              "EX-C05-C-Q02",
+              "EX-C05-C-Q03",
+              "EX-C05-C-Q04",
+              "EX-C05-C-Q05",
+              "EX-C05-C-Q06",
+              "EX-C05-C-Q07",
+              "EX-C05-C-Q08",
+              "EX-C05-C-Q09",
+              "EX-C05-C-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 92,
+            "lastPhysicalPage": 92,
+            "questionSourceRefs": [
+              "EX-C05-D-Q01",
+              "EX-C05-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C06",
+      "number": 6,
+      "title": "Biomolecules",
+      "tocStartPage": 89,
+      "verifiedPhysicalStartPage": 93,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "6.1",
+          "title": "Biomolecules",
+          "tocPage": 89,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "6.2",
+          "title": "Carbohydrates",
+          "tocPage": 91,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "6.3",
+          "title": "Proteins",
+          "tocPage": 94,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "6.4",
+          "title": "Lipids",
+          "tocPage": 95,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "6.5",
+          "title": "Nucleic Acids",
+          "tocPage": 97,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "6.6",
+          "title": "The Working of DNA and RNA",
+          "tocPage": 100,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 106,
+        "lastPhysicalPage": 108,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 11,
+            "firstPhysicalPage": 106,
+            "lastPhysicalPage": 108,
+            "questionSourceRefs": [
+              "EX-C06-A-Q01",
+              "EX-C06-A-Q02",
+              "EX-C06-A-Q03",
+              "EX-C06-A-Q04",
+              "EX-C06-A-Q05",
+              "EX-C06-A-Q06",
+              "EX-C06-A-Q07",
+              "EX-C06-A-Q08",
+              "EX-C06-A-Q09",
+              "EX-C06-A-Q10",
+              "EX-C06-A-Q11"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 9,
+            "firstPhysicalPage": 108,
+            "lastPhysicalPage": 108,
+            "questionSourceRefs": [
+              "EX-C06-B-Q01",
+              "EX-C06-B-Q02",
+              "EX-C06-B-Q03",
+              "EX-C06-B-Q04",
+              "EX-C06-B-Q05",
+              "EX-C06-B-Q06",
+              "EX-C06-B-Q07",
+              "EX-C06-B-Q08",
+              "EX-C06-B-Q09"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 6,
+            "firstPhysicalPage": 108,
+            "lastPhysicalPage": 108,
+            "questionSourceRefs": [
+              "EX-C06-C-Q01",
+              "EX-C06-C-Q02",
+              "EX-C06-C-Q03",
+              "EX-C06-C-Q04",
+              "EX-C06-C-Q05",
+              "EX-C06-C-Q06"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 2,
+            "firstPhysicalPage": 108,
+            "lastPhysicalPage": 108,
+            "questionSourceRefs": [
+              "EX-C06-D-Q01",
+              "EX-C06-D-Q02"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C07",
+      "number": 7,
+      "title": "Enzymes",
+      "tocStartPage": 105,
+      "verifiedPhysicalStartPage": 109,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "7.1",
+          "title": "Metabolism",
+          "tocPage": 105,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "7.2",
+          "title": "Enzymes",
+          "tocPage": 106,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "7.3",
+          "title": "Mechanism of Enzyme Action",
+          "tocPage": 108,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "7.4",
+          "title": "Factors that Affect the Activity of Enzymes",
+          "tocPage": 109,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "7.5",
+          "title": "Enzyme Inhibition",
+          "tocPage": 111,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 117,
+        "lastPhysicalPage": 118,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 117,
+            "lastPhysicalPage": 118,
+            "questionSourceRefs": [
+              "EX-C07-A-Q01",
+              "EX-C07-A-Q02",
+              "EX-C07-A-Q03",
+              "EX-C07-A-Q04",
+              "EX-C07-A-Q05",
+              "EX-C07-A-Q06",
+              "EX-C07-A-Q07",
+              "EX-C07-A-Q08",
+              "EX-C07-A-Q09",
+              "EX-C07-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 10,
+            "firstPhysicalPage": 118,
+            "lastPhysicalPage": 118,
+            "questionSourceRefs": [
+              "EX-C07-B-Q01",
+              "EX-C07-B-Q02",
+              "EX-C07-B-Q03",
+              "EX-C07-B-Q04",
+              "EX-C07-B-Q05",
+              "EX-C07-B-Q06",
+              "EX-C07-B-Q07",
+              "EX-C07-B-Q08",
+              "EX-C07-B-Q09",
+              "EX-C07-B-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 5,
+            "firstPhysicalPage": 118,
+            "lastPhysicalPage": 118,
+            "questionSourceRefs": [
+              "EX-C07-C-Q01",
+              "EX-C07-C-Q02",
+              "EX-C07-C-Q03",
+              "EX-C07-C-Q04",
+              "EX-C07-C-Q05"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C08",
+      "number": 8,
+      "title": "Bioenergetics",
+      "tocStartPage": 115,
+      "verifiedPhysicalStartPage": 119,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "8.1",
+          "title": "ATP: The Cell's Energy Currency",
+          "tocPage": 116,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "8.2",
+          "title": "Photosynthesis",
+          "tocPage": 117,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "8.3",
+          "title": "Cellular Respiration",
+          "tocPage": 120,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 131,
+        "lastPhysicalPage": 132,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 131,
+            "lastPhysicalPage": 132,
+            "questionSourceRefs": [
+              "EX-C08-A-Q01",
+              "EX-C08-A-Q02",
+              "EX-C08-A-Q03",
+              "EX-C08-A-Q04",
+              "EX-C08-A-Q05",
+              "EX-C08-A-Q06",
+              "EX-C08-A-Q07",
+              "EX-C08-A-Q08",
+              "EX-C08-A-Q09",
+              "EX-C08-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 13,
+            "firstPhysicalPage": 132,
+            "lastPhysicalPage": 132,
+            "questionSourceRefs": [
+              "EX-C08-B-Q01",
+              "EX-C08-B-Q02",
+              "EX-C08-B-Q03",
+              "EX-C08-B-Q04",
+              "EX-C08-B-Q05",
+              "EX-C08-B-Q06",
+              "EX-C08-B-Q07",
+              "EX-C08-B-Q08",
+              "EX-C08-B-Q09",
+              "EX-C08-B-Q10",
+              "EX-C08-B-Q11",
+              "EX-C08-B-Q12",
+              "EX-C08-B-Q13"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 6,
+            "firstPhysicalPage": 132,
+            "lastPhysicalPage": 132,
+            "questionSourceRefs": [
+              "EX-C08-C-Q01",
+              "EX-C08-C-Q02",
+              "EX-C08-C-Q03",
+              "EX-C08-C-Q04",
+              "EX-C08-C-Q05",
+              "EX-C08-C-Q06"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 1,
+            "firstPhysicalPage": 132,
+            "lastPhysicalPage": 132,
+            "questionSourceRefs": [
+              "EX-C08-D-Q01"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C09",
+      "number": 9,
+      "title": "Plant Physiology",
+      "tocStartPage": 129,
+      "verifiedPhysicalStartPage": 133,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "9.1",
+          "title": "Nutrition in Plants",
+          "tocPage": 130,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.2",
+          "title": "Transport in Plants",
+          "tocPage": 132,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.3",
+          "title": "Transpiration",
+          "tocPage": 134,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.4",
+          "title": "Transport of Water and Salts in Plants",
+          "tocPage": 136,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.5",
+          "title": "Translocation of Food in Plants",
+          "tocPage": 137,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.6",
+          "title": "Gaseous Exchange in Plants",
+          "tocPage": 138,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.7",
+          "title": "Mechanisms for Excretion in Plants",
+          "tocPage": 140,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "9.8",
+          "title": "Osmotic Adjustments in Plants",
+          "tocPage": 142,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 149,
+        "lastPhysicalPage": 150,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 11,
+            "firstPhysicalPage": 149,
+            "lastPhysicalPage": 150,
+            "questionSourceRefs": [
+              "EX-C09-A-Q01",
+              "EX-C09-A-Q02",
+              "EX-C09-A-Q03",
+              "EX-C09-A-Q04",
+              "EX-C09-A-Q05",
+              "EX-C09-A-Q06",
+              "EX-C09-A-Q07",
+              "EX-C09-A-Q08",
+              "EX-C09-A-Q09",
+              "EX-C09-A-Q10",
+              "EX-C09-A-Q11"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 8,
+            "firstPhysicalPage": 150,
+            "lastPhysicalPage": 150,
+            "questionSourceRefs": [
+              "EX-C09-B-Q01",
+              "EX-C09-B-Q02",
+              "EX-C09-B-Q03",
+              "EX-C09-B-Q04",
+              "EX-C09-B-Q05",
+              "EX-C09-B-Q06",
+              "EX-C09-B-Q07",
+              "EX-C09-B-Q08"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 9,
+            "firstPhysicalPage": 150,
+            "lastPhysicalPage": 150,
+            "questionSourceRefs": [
+              "EX-C09-C-Q01",
+              "EX-C09-C-Q02",
+              "EX-C09-C-Q03",
+              "EX-C09-C-Q04",
+              "EX-C09-C-Q05",
+              "EX-C09-C-Q06",
+              "EX-C09-C-Q07",
+              "EX-C09-C-Q08",
+              "EX-C09-C-Q09"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 1,
+            "firstPhysicalPage": 150,
+            "lastPhysicalPage": 150,
+            "questionSourceRefs": [
+              "EX-C09-D-Q01"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C10",
+      "number": 10,
+      "title": "Reproduction in Plants",
+      "tocStartPage": 147,
+      "verifiedPhysicalStartPage": 151,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "10.1",
+          "title": "Types of Asexual Reproduction",
+          "tocPage": 147,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "10.2",
+          "title": "Artificial Propagation",
+          "tocPage": 152,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "10.3",
+          "title": "Sexual Reproduction in Plants",
+          "tocPage": 154,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 164,
+        "lastPhysicalPage": 166,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 15,
+            "firstPhysicalPage": 164,
+            "lastPhysicalPage": 165,
+            "questionSourceRefs": [
+              "EX-C10-A-Q01",
+              "EX-C10-A-Q02",
+              "EX-C10-A-Q03",
+              "EX-C10-A-Q04",
+              "EX-C10-A-Q05",
+              "EX-C10-A-Q06",
+              "EX-C10-A-Q07",
+              "EX-C10-A-Q08",
+              "EX-C10-A-Q09",
+              "EX-C10-A-Q10",
+              "EX-C10-A-Q11",
+              "EX-C10-A-Q12",
+              "EX-C10-A-Q13",
+              "EX-C10-A-Q14",
+              "EX-C10-A-Q15"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 10,
+            "firstPhysicalPage": 165,
+            "lastPhysicalPage": 166,
+            "questionSourceRefs": [
+              "EX-C10-B-Q01",
+              "EX-C10-B-Q02",
+              "EX-C10-B-Q03",
+              "EX-C10-B-Q04",
+              "EX-C10-B-Q05",
+              "EX-C10-B-Q06",
+              "EX-C10-B-Q07",
+              "EX-C10-B-Q08",
+              "EX-C10-B-Q09",
+              "EX-C10-B-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 6,
+            "firstPhysicalPage": 166,
+            "lastPhysicalPage": 166,
+            "questionSourceRefs": [
+              "EX-C10-C-Q01",
+              "EX-C10-C-Q02",
+              "EX-C10-C-Q03",
+              "EX-C10-C-Q04",
+              "EX-C10-C-Q05",
+              "EX-C10-C-Q06"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "D",
+            "visibleLabel": "D",
+            "type": "inquisitive",
+            "count": 3,
+            "firstPhysicalPage": 166,
+            "lastPhysicalPage": 166,
+            "questionSourceRefs": [
+              "EX-C10-D-Q01",
+              "EX-C10-D-Q02",
+              "EX-C10-D-Q03"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IX-BIO-2025-EM-C11",
+      "number": 11,
+      "title": "Biostatistics",
+      "tocStartPage": 163,
+      "verifiedPhysicalStartPage": 167,
+      "startPageEvidence": "CHAPTER_OPENING_VISUALLY_CHECKED",
+      "topics": [
+        {
+          "id": "11.1",
+          "title": "Introduction of Biostatistics",
+          "tocPage": 163,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "11.2",
+          "title": "Mean, Median, and Mode",
+          "tocPage": 165,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        },
+        {
+          "id": "11.3",
+          "title": "Bar Chart",
+          "tocPage": 167,
+          "actualPage": null,
+          "pageAuditStatus": "PENDING_INDIVIDUAL_TOPIC_PAGE_CHECK"
+        }
+      ],
+      "exercise": {
+        "firstPhysicalPage": 174,
+        "lastPhysicalPage": 175,
+        "reviewState": "FIRST_PASS_VISUAL_NEEDS_INDEPENDENT_REVIEW",
+        "sections": [
+          {
+            "label": "A",
+            "visibleLabel": "A",
+            "type": "mcq",
+            "count": 10,
+            "firstPhysicalPage": 174,
+            "lastPhysicalPage": 175,
+            "questionSourceRefs": [
+              "EX-C11-A-Q01",
+              "EX-C11-A-Q02",
+              "EX-C11-A-Q03",
+              "EX-C11-A-Q04",
+              "EX-C11-A-Q05",
+              "EX-C11-A-Q06",
+              "EX-C11-A-Q07",
+              "EX-C11-A-Q08",
+              "EX-C11-A-Q09",
+              "EX-C11-A-Q10"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "B",
+            "visibleLabel": "B",
+            "type": "short",
+            "count": 5,
+            "firstPhysicalPage": 175,
+            "lastPhysicalPage": 175,
+            "questionSourceRefs": [
+              "EX-C11-B-Q01",
+              "EX-C11-B-Q02",
+              "EX-C11-B-Q03",
+              "EX-C11-B-Q04",
+              "EX-C11-B-Q05"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          },
+          {
+            "label": "C",
+            "visibleLabel": "C",
+            "type": "long_or_unclassified",
+            "count": 5,
+            "firstPhysicalPage": 175,
+            "lastPhysicalPage": 175,
+            "questionSourceRefs": [
+              "EX-C11-C-Q01",
+              "EX-C11-C-Q02",
+              "EX-C11-C-Q03",
+              "EX-C11-C-Q04",
+              "EX-C11-C-Q05"
+            ],
+            "questionTextIncluded": false,
+            "individualQuestionPageMapStatus": "PENDING"
+          }
+        ]
+      }
+    }
+  ],
+  "release": {
+    "realApprovedQuestionCount": 0,
+    "tenantSeedAction": "NEVER_RUN",
+    "academicAnswerReview": "PENDING",
+    "urduEditionMapping": "PENDING",
+    "examYearAlpMapping": "PENDING",
+    "legalRightsReview": "PENDING"
+  },
+  "totals": {
+    "chapterCount": 11,
+    "topicIndexEntries": 57,
+    "exerciseSourceRefs": 320,
+    "unlabelledSourceRefs": 7
+  }
+}
