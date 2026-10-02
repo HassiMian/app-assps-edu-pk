@@ -25,7 +25,7 @@ const revKey=(school,id,revision)=>key(school,id)+'|'+revision
 function fakePg(rows=[row()],options={}){
  const db={docs:new Map(rows.map(r=>[key(r.school_id,r.id),{...r}])),
   revisions:new Map(rows.map(r=>[revKey(r.school_id,r.id,r.revision),revision(r)])),
-  events:[],releases:0,connections:0}
+  events:[],releases:0,releaseErrors:[],connections:0}
  const connector=async()=>{
   db.connections++
   let draftDocs=null,draftRevisions=null
@@ -46,6 +46,10 @@ function fakePg(rows=[row()],options={}){
     return {rowCount:0,rows:[]}
    }
    if(!draftDocs)throw new Error('Query outside SERIALIZABLE transaction.')
+   if(sql===SQL.setLocalSchool){
+    if(options.failRlsScope)return {rowCount:1,rows:[{scoped_school_id:'999'}]}
+    return {rowCount:1,rows:[{scoped_school_id:params[0]}]}
+   }
    if(sql===SQL.lockPaper){
     const record=draftDocs.get(key(params[0],params[1]))
     return {rowCount:record?1:0,rows:record?[{...record}]:[]}
@@ -82,7 +86,7 @@ function fakePg(rows=[row()],options={}){
     return {rowCount:1,rows:[result]}
    }
    throw new Error('Unsupported SQL reached in mock: '+sql)
-  },release(){db.releases++}}
+  },release(error){db.releases++;db.releaseErrors.push(Boolean(error))}}
  }
  return {db,connect:connector}
 }
@@ -110,9 +114,22 @@ test('successful staging-only DRAFT CAS appends exactly one immutable revision a
  assert.equal(snapshot.native_sha256,sha(changed))
  assert.equal(pg.db.revisions.get(revKey(51,'draft-001',2)).native_json_text,nativeText)
  assert.deepEqual(pg.db.events.map(e=>e.sql),[
-  'BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE',SQL.lockPaper,SQL.lockRevision,
+  'BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE',SQL.setLocalSchool,SQL.lockPaper,SQL.lockRevision,
   SQL.updateDraft,SQL.appendImmutableRevision,'COMMIT'])
  assert.equal(pg.db.releases,1)
+ assert.deepEqual(pg.db.releaseErrors,[false])
+})
+test('strict transaction-local paper RLS school scope is established before ANY paper read',async()=>{
+ const pg=fakePg()
+ const result=await appendStagingDraftRevision(request(pg.connect))
+ assert.equal(result.schoolId,51)
+ assert.deepEqual(pg.db.events[1],{sql:SQL.setLocalSchool,params:['51']})
+ assert.equal(pg.db.events[2].sql,SQL.lockPaper)
+ const rejected=fakePg([row()],{failRlsScope:true})
+ await assert.rejects(()=>appendStagingDraftRevision(request(rejected.connect)),/paper school RLS scope/)
+ assert.equal(rejected.db.events.some(x=>x.sql===SQL.lockPaper),false)
+ assert.equal(rejected.db.events.at(-1).sql,'ROLLBACK')
+ assert.equal(rejected.db.docs.get(key(51,'draft-001')).revision,2)
 })
 test('stale second writer loses optimistic lock; original and revision chain retained',async()=>{
  const pg=fakePg()
@@ -212,9 +229,18 @@ test('Urdu/multibyte text is bounded in UTF-8 BYTES before any staging connectio
   proposedNativeJsonText:oversized})),/5 MiB UTF-8/)
  assert.equal(pg.db.connections,0)
 })
-test('rollback itself failing is surfaced, not claimed a clean rollback or successful revision',async()=>{
+test('uncertain COMMIT outcome forces connection quarantine, rollback attempts, never reports success',async()=>{
+ const pg=fakePg([row()],{failCommit:true})
+ await assert.rejects(()=>appendStagingDraftRevision(request(pg.connect)),/commit failure/)
+ assert.equal(pg.db.docs.get(key(51,'draft-001')).revision,2)
+ assert.equal(pg.db.revisions.size,1)
+ assert.equal(pg.db.events.at(-1).sql,'ROLLBACK')
+ assert.deepEqual(pg.db.releaseErrors,[true])
+})
+test('rollback itself failing is surfaced and pool client quarantined, never claimed clean',async()=>{
  const pg=fakePg([row()],{failAudit:true,failRollback:true})
  await assert.rejects(()=>appendStagingDraftRevision(request(pg.connect)),/rollback failed/)
  assert.equal(pg.db.docs.get(key(51,'draft-001')).revision,2)
  assert.equal(pg.db.releases,1)
+ assert.deepEqual(pg.db.releaseErrors,[true])
 })

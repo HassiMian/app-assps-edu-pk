@@ -4,6 +4,8 @@ const {preparePaperRevisionCAS}=require('./paperRevisionPolicy.js')
 const validSchoolId=id=>Number.isSafeInteger(Number(id))&&Number(id)>0?Number(id):null
 const validHash=x=>typeof x==='string'&&/^[a-f0-9]{64}$/u.test(x)
 const SQL=Object.freeze({
+ // Transaction-local school scope for STRICT new-paper RLS (not the legacy bypass policy).
+ setLocalSchool: "SELECT set_config('app.paper_school_id', $1, true) AS scoped_school_id",
  lockPaper: 'SELECT school_id,id,created_by,status,source_protected,revision,native_json_text,native_sha256 FROM paper_documents WHERE school_id=$1 AND id=$2 FOR UPDATE',
  lockRevision: 'SELECT revision,native_sha256 FROM paper_revisions WHERE school_id=$1 AND document_id=$2 AND revision=$3',
  updateDraft: "UPDATE paper_documents SET native_json_text=$1,native_sha256=$2,revision=$3,updated_by=$4,updated_at=now() WHERE school_id=$5 AND id=$6 AND revision=$7 AND native_sha256=$8 AND status='DRAFT' AND source_protected=FALSE RETURNING school_id,id,revision,native_sha256",
@@ -59,13 +61,18 @@ async function appendStagingDraftRevision({
  // Check UTF-8 BYTES: multibyte Urdu payloads can exceed the safe limit despite shorter JS text.
  if(Buffer.byteLength(proposedNativeJsonText,'utf8')>5*1024*1024)
   throw new Error('Native JSON exceeds the safe 5 MiB UTF-8 staging payload limit.')
- let client,begun=false,committed=false
+ let client,begun=false,committed=false,quarantine=null
  try{
   client=await connect()
   if(!client||typeof client.query!=='function'||typeof client.release!=='function')
    throw new Error('Staging database connection contract invalid.')
   await client.query('BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE')
   begun=true
+  // Fail-closed DB RLS context. Transaction-local GUC resets on COMMIT/ROLLBACK,
+  // and is set using ONLY the independently server-verified actor's school ID.
+  const scopeResult=await client.query(SQL.setLocalSchool,[String(schoolId)])
+  if(!exactlyOne(scopeResult)||scopeResult.rows[0].scoped_school_id!==String(schoolId))
+   throw new Error('Verified transaction-local paper school RLS scope could not be established.')
   // Always scope SELECT by independently verified school, never an ID from the UI/header.
   const lookup=await client.query(SQL.lockPaper,[schoolId,paperId])
   if(!exactlyOne(lookup))throw new Error('Paper not found within independently verified school.')
@@ -93,7 +100,8 @@ async function appendStagingDraftRevision({
     String(audit.rows[0].document_id)!==paperId||audit.rows[0].revision!==plan.nextRevision||
     audit.rows[0].native_sha256!==plan.nextNativeSha256)
    throw new Error('Append-only revision audit failed; the entire paper update must roll back.')
-  await client.query('COMMIT')
+  // A failed COMMIT can have an UNKNOWN server-side outcome; never return that connection to pool.
+  try{await client.query('COMMIT')}catch(commitError){quarantine=commitError;throw commitError}
   committed=true
   return {status:'STAGING_DRAFT_REVISION_COMMITTED',schoolId,paperId,
    revision:plan.nextRevision,nativeSha256:plan.nextNativeSha256,
@@ -104,12 +112,14 @@ async function appendStagingDraftRevision({
    try{await client.query('ROLLBACK')}catch(rollbackError){
     const combined=new Error('Staging transaction failed AND rollback failed; connection must be quarantined.')
     combined.cause=error;combined.rollbackCause=rollbackError
+    quarantine=combined
     throw combined
    }
   }
   throw error
  }finally{
-  if(client)client.release()
+  // node-postgres release(error) removes a potentially broken/uncertain client from the pool.
+  if(client)client.release(quarantine||undefined)
  }
 }
 module.exports={assertVerifiedStagingGate,appendStagingDraftRevision,SQL}
