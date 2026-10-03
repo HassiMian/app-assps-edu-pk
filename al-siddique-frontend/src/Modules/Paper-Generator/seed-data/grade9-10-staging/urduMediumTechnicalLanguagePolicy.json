@@ -1,0 +1,35 @@
+{
+  "schemaVersion":"assps-urdu-medium-technical-language-policy-v1",
+  "createdOn":"2026-10-03",
+  "scope":"All Urdu-medium Science and Mathematics paper authoring",
+  "status":"LOCKED_AUTHORING_RULE",
+  "principle":"Use the terminology students actually see in the official Urdu-medium textbook; never translate technical vocabulary word-by-word merely to make it more purely Urdu.",
+  "sourcePriority":[
+    "Exact same-grade same-subject official Urdu-medium textbook form",
+    "Exact official glossary/key-term form from the same textbook/cohort",
+    "Verified parallel official Urdu-medium edition for the same curriculum concept",
+    "No fallback translation: unresolved terms remain blocked"
+  ],
+  "allowedRenderingModes":["LATIN_TERM_RETAINED","TEXTBOOK_URDU_TRANSLITERATION","TEXTBOOK_URDU_EQUIVALENT","TEXTBOOK_MIXED_FORM"],
+  "rules":{
+    "preserveLatinScriptWhenTextbookDoes":true,
+    "preserveTextbookTransliterationExactly":true,
+    "preserveMixedEnglishUrduPatternWhenTextbookDoes":true,
+    "inventPureUrduSynonym":false,
+    "dictionaryWordForWordTranslation":false,
+    "technicalTermEvidenceRequired":true,
+    "unverifiedTechnicalTermAction":"BLOCK_URDU_AUTHORING_OR_PUBLICATION"
+  },
+  "evidenceRequired":["catalogRecordId","pdfSha256","physicalPage","anchor","verifiedTextbookForm","renderingMode","reviewStatus"],
+  "initialEvidenceBase":{
+    "biology9UrduCatalogRecordId":"pectaa-catalog-010",
+    "biology9UrduPdfSha256":"7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+    "priorVerifiedPattern":"Chapter 1 review already observed textbook use of Urdu equivalents and transliterated scientific terms side-by-side; exact term output still requires page-level evidence."
+  },
+  "exampleOnlyNotSourceVerified":[
+    {"englishConcept":"reversible reaction","rule":"Do not invent a pure-Urdu substitute. Use the exact Chemistry Urdu textbook form after source verification."},
+    {"englishConcept":"irreversible reaction","rule":"Do not invent a pure-Urdu substitute. Use the exact Chemistry Urdu textbook form after source verification."}
+  ],
+  "publicationAllowed":false,
+  "note":"This policy does not itself approve any terminology record; each term needs textbook evidence."
+}
