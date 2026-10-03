@@ -28,3 +28,10 @@ Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORI
 - **VERIFIED:** 80/80 staging tests pass; independent English6–21/Urdu5–22 draft source review completed.
 - **PENDING:** Formal edition/exercise/terminology release checks, complete IX/X corpus, subject patterns and browser/print acceptance.
 - **BLOCKED:** Approved questions=0; production imports/deployment=0.
+
+## Continuation — Chapter 1 release-evidence and completeness audit, 2026-10-03
+
+- **COMPLETED:** All 25 Chapter 1 exercise source refs now have an English exact-item page/topic/concept evidence map; the current 48-draft corpus has a source-unit completeness audit with 33 explicit authoring gaps.
+- **VERIFIED:** New evidence/coverage tests pass 12/12; full staging regression passes 92/92 across 16 test files. No textbook exercise wording was committed into the evidence maps.
+- **PENDING:** Exact Urdu Section-A item pages, formal bilingual edition/cohort equivalence, original authoring for 33 gaps, independent academic/terminology review and browser/print acceptance.
+- **BLOCKED:** Exercise-origin release remains closed; Chapter 1 completeness=false; approved questions=0; production writes/deployment=0.

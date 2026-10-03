@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "assps-bio9-c1-exercise-evidence-map-v1",
+  "createdOn": "2026-10-03",
+  "status": "ENGLISH_ITEM_PAGES_VERIFIED_URDU_SECTION_EQUIVALENCE_PARTIAL",
+  "copyrightPolicy": "Stores source references, page evidence and concept classification only; no textbook question wording.",
+  "sources": {
+    "en": {"catalogRecordId":"pectaa-catalog-009","pdfSha256":"f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5","exercisePages":[22,23,24]},
+    "ur": {"catalogRecordId":"pectaa-catalog-010","pdfSha256":"7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd","exercisePages":[23,24,25]}
+  },
+  "editionEvidence": {
+    "english": "Cover says Biology 9, Revised National Curriculum of Pakistan 2023; credits page says Board-approved Experimental Edition. Official catalog labels it 2025-26.",
+    "urdu": "Official catalog label is Biology 9 (UM) 03.09.26. Eleven-chapter sequence and Chapter 1 topic/exercise structure are corroborated, but formal cohort/edition equivalence is still pending.",
+    "chapter1StructuralEquivalence": "CORROBORATED_NOT_FORMAL_EDITION_EQUIVALENCE",
+    "releaseApproved": false
+  },
+  "items": [
+    {"id":"C01-A-01","enRef":"EX-C01-A-Q01","urRef":"UM-EX-C01-A-Q01","section":"A","enPage":22,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.1"],"conceptTags":["cytology","cell-structure-function"],"riskFlags":[]},
+    {"id":"C01-A-02","enRef":"EX-C01-A-Q02","urRef":"UM-EX-C01-A-Q02","section":"A","enPage":22,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.1"],"conceptTags":["genetics","heredity","variation"],"riskFlags":[]},
+    {"id":"C01-A-03","enRef":"EX-C01-A-Q03","urRef":"UM-EX-C01-A-Q03","section":"A","enPage":22,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.2"],"conceptTags":["biotechnology","insulin-production"],"riskFlags":[]},
+    {"id":"C01-A-04","enRef":"EX-C01-A-Q04","urRef":"UM-EX-C01-A-Q04","section":"A","enPage":22,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.1"],"conceptTags":["physiology","organ-function"],"riskFlags":[]},
+    {"id":"C01-A-05","enRef":"EX-C01-A-Q05","urRef":"UM-EX-C01-A-Q05","section":"A","enPage":22,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.1"],"conceptTags":["taxonomy","classification"],"riskFlags":[]},
+    {"id":"C01-A-06","enRef":"EX-C01-A-Q06","urRef":"UM-EX-C01-A-Q06","section":"A","enPage":22,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.6"],"conceptTags":["scientific-method","deduction"],"riskFlags":[]},
+    {"id":"C01-A-07","enRef":"EX-C01-A-Q07","urRef":"UM-EX-C01-A-Q07","section":"A","enPage":23,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.6"],"conceptTags":["scientific-method","evidence","hypothesis-testing"],"riskFlags":[]},
+    {"id":"C01-A-08","enRef":"EX-C01-A-Q08","urRef":"UM-EX-C01-A-Q08","section":"A","enPage":23,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.6"],"conceptTags":["scientific-method","step-sequence"],"riskFlags":[]},
+    {"id":"C01-A-09","enRef":"EX-C01-A-Q09","urRef":"UM-EX-C01-A-Q09","section":"A","enPage":23,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.8"],"conceptTags":["malaria","smoke-observation","mosquito-behaviour"],"riskFlags":[]},
+    {"id":"C01-A-10","enRef":"EX-C01-A-Q10","urRef":"UM-EX-C01-A-Q10","section":"A","enPage":23,"urPage":null,"urPageRange":[23,24],"urPageStatus":"ITEM_PAGE_PENDING","topicIds":["1.6"],"conceptTags":["scientific-method","experimentation","hypothesis-testing"],"riskFlags":[]},
+    {"id":"C01-B-01","enRef":"EX-C01-B-Q01","urRef":"UM-EX-C01-B-Q01","section":"B","enPage":23,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.1"],"conceptTags":["biology-branches","genetics","anatomy","palaeontology","marine-biology","pathology"],"riskFlags":[]},
+    {"id":"C01-B-02","enRef":"EX-C01-B-Q02","urRef":"UM-EX-C01-B-Q02","section":"B","enPage":23,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.1"],"conceptTags":["embryology","development"],"riskFlags":[]},
+    {"id":"C01-B-03","enRef":"EX-C01-B-Q03","urRef":"UM-EX-C01-B-Q03","section":"B","enPage":23,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.3"],"conceptTags":["careers","medicine","surgery","animal-husbandry"],"riskFlags":[]},
+    {"id":"C01-B-04","enRef":"EX-C01-B-Q04","urRef":"UM-EX-C01-B-Q04","section":"B","enPage":23,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.1"],"conceptTags":["morphology","physiology","comparison"],"riskFlags":[]},
+    {"id":"C01-B-05","enRef":"EX-C01-B-Q05","urRef":"UM-EX-C01-B-Q05","section":"B","enPage":23,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.2"],"conceptTags":["computational-biology","computer-science"],"riskFlags":[]},
+    {"id":"C01-B-06","enRef":"EX-C01-B-Q06","urRef":"UM-EX-C01-B-Q06","section":"B","enPage":23,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.6"],"conceptTags":["scientific-method","observation","experimentation"],"riskFlags":[]},
+    {"id":"C01-C-01","enRef":"EX-C01-UNLABELLED_AFTER_B-Q01","urRef":"UM-EX-C01-C-Q01","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.2"],"conceptTags":["biology-related-sciences","physics","chemistry","statistics","geography","economics","computer-science"],"riskFlags":[]},
+    {"id":"C01-C-02","enRef":"EX-C01-UNLABELLED_AFTER_B-Q02","urRef":"UM-EX-C01-C-Q02","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.3"],"conceptTags":["careers","professional-studies"],"riskFlags":[]},
+    {"id":"C01-C-03","enRef":"EX-C01-UNLABELLED_AFTER_B-Q03","urRef":"UM-EX-C01-C-Q03","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.5"],"conceptTags":["collaborative-science","shared-knowledge","examples"],"riskFlags":[]},
+    {"id":"C01-C-04","enRef":"EX-C01-UNLABELLED_AFTER_B-Q04","urRef":"UM-EX-C01-C-Q04","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.7"],"conceptTags":["hypothesis","theory","law","principle"],"riskFlags":["BIO9-C1-THEORY-LAW-001","DO_NOT_AUTHOR_PROGRESSSION_AS_SCIENTIFIC_FACT"]},
+    {"id":"C01-C-05","enRef":"EX-C01-UNLABELLED_AFTER_B-Q05","urRef":"UM-EX-C01-C-Q05","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.6"],"conceptTags":["scientific-method","problem-solving-steps"],"riskFlags":[]},
+    {"id":"C01-C-06","enRef":"EX-C01-UNLABELLED_AFTER_B-Q06","urRef":"UM-EX-C01-C-Q06","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.8"],"conceptTags":["malaria","scientific-investigation","cause"],"riskFlags":["BIO9-C1-MALARIA-CHRONOLOGY-002","AVOID_DISPUTED_DATES"]},
+    {"id":"C01-C-07","enRef":"EX-C01-UNLABELLED_AFTER_B-Q07","urRef":"UM-EX-C01-C-Q07","section":"C","englishVisibleSectionLabel":null,"enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.8"],"conceptTags":["malaria","ross-experiments","mosquito-vector"],"riskFlags":["BIO9-C1-MALARIA-CHRONOLOGY-002","AVOID_DISPUTED_DATES"]},
+    {"id":"C01-D-01","enRef":"EX-C01-D-Q01","urRef":"UM-EX-C01-D-Q01","section":"D","enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.1"],"conceptTags":["biology-branches","specialization","research-benefit"],"riskFlags":[]},
+    {"id":"C01-D-02","enRef":"EX-C01-D-Q02","urRef":"UM-EX-C01-D-Q02","section":"D","enPage":24,"urPage":25,"urPageRange":[25,25],"urPageStatus":"ITEM_PAGE_VERIFIED_BY_SECTION_PAGE","topicIds":["1.6"],"conceptTags":["scientific-method","experimental-design","control-variables","plant-growth"],"riskFlags":[]}
+  ],
+  "releaseGates": {
+    "all25EnglishItemPagesVerified": true,
+    "all25UrduSectionRangesVerified": true,
+    "all25UrduExactItemPagesVerified": false,
+    "formalEditionEquivalenceApproved": false,
+    "exerciseOriginAuthoringReleaseAllowed": false,
+    "reason": "Do not release Exercise-origin bilingual records until every Urdu item page and formal edition/cohort equivalence are independently verified."
+  }
+}
