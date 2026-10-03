@@ -24,3 +24,8 @@ This queue is planning/evidence infrastructure, not an academic-question release
 Next academic action is to obtain exact Urdu evidence for queued units, then author original bilingual questions against those verified sources and send them through independent review. Exercise-origin authoring remains separately blocked by the unresolved Urdu A-item page map and formal edition/cohort equivalence.
 
 Approved questions remain zero; production imports, school-data writes and deployment remain zero.
+
+## Urdu verification docket
+A separate `biology9Chapter1UrduVerificationDocket.json` now converts the evidence blocker into a finite visual-review job: 33 content-unit checks inherit only their already verified Urdu topic page ranges, while all 10 unresolved Exercise-A refs remain constrained to verified Urdu pages 23-24. Exact Urdu pages and anchors remain null until visually confirmed.
+
+Docket-specific tests pass **4/4**. Complete staging regression after this addition passes **102/102** across 18 test files, zero failures/skips. The docket cannot authorize release or contain authored question/answer payloads.

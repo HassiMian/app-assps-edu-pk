@@ -42,3 +42,9 @@ Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORI
 - **VERIFIED:** Queue-specific tests pass 6/6; complete staging regression passes 98/98 across 17 test files; no question/answer payload or textbook exercise wording is stored in the queue.
 - **PENDING:** Exact Urdu evidence must be attached before original bilingual authoring begins.
 - **BLOCKED:** All queue items remain safeToAuthorNow=false and publicationAllowed=false; approved questions=0 and production writes/deployment=0.
+
+## Continuation — Urdu verification docket, 2026-10-03
+
+- **COMPLETED:** 33 content gaps plus 10 unresolved Exercise-A refs now have a finite Urdu visual-verification docket using only previously verified page ranges; no exact page or anchor is inferred.
+- **VERIFIED:** Docket tests pass 4/4; complete staging regression passes 102/102 across 18 test files.
+- **PENDING/BLOCKED:** Exact Urdu visual confirmation and formal edition equivalence still gate authoring/release; approved questions=0 and production writes/deployment=0.
