@@ -1,0 +1,10 @@
+{
+  "schemaVersion":"assps-biology9-bilingual-edition-equivalence-dossier-v1",
+  "createdOn":"2026-10-03","status":"STRUCTURAL_CORROBORATION_COMPLETE_RELEASE_EQUIVALENCE_UNAPPROVED",
+  "sources":{"english":{"ledger":"biology9EnglishEvidenceLedger.json","ledgerSha256":"5f67750dd12749a3a7b0dae0ad5ab1125f275e405e92f5137703dd3a66700667","pdfSha256":"f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5","catalogRecordId":"pectaa-catalog-009","catalogLabel":"Biology (EM) 2025-26"},"urdu":{"ledger":"biology9UrduEvidenceLedger.json","ledgerSha256":"c2208cacada551073edc15d9338874768aaa508a4eeba82f8a775564ca2ba09f","pdfSha256":"7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd","catalogRecordId":"pectaa-catalog-010","catalogLabel":"Biology 9 (UM) 03.09.26"}},
+  "corroborated":{"chapterCount":11,"chapterNumbersAndEnglishPrintedTitlesMatch":true,"chapter1TopicIdCount":8,"chapter1TopicIdsMatch":true,"chapter1ExerciseCounts":{"mcq":10,"short":6,"longBlock":7,"inquisitive":2},"chapter1ExerciseCountsMatch":true},
+  "knownPresentationDifferences":[{"scope":"chapter1.topic1.1","detail":"Capitalization differs only in printed English title: 'its' vs 'Its'."},{"scope":"chapter1.topic1.7","detail":"English ledger uses 'Theory and Law/Principle'; Urdu book English-printed title uses 'Theory and Law (Principle)'."},{"scope":"chapter1.exercise.longBlock","detail":"English seven-item block has no visible section header; Urdu counterpart visibly labels it C."}],
+  "notProven":["Formal publisher declaration that Urdu catalog-010 is the release-equivalent translation/cohort of English catalog-009","Full bilingual topic-by-topic semantic equivalence outside Chapter 1","Exact Urdu page+anchor evidence for 33 queued Chapter 1 content units","Exact Urdu page assignment for Exercise-A Q01-Q10 across pages 23-24","Independent terminology/editorial approval and source-conflict disposition"],
+  "releaseEquivalent":false,"publicationAllowed":false,"approvedQuestionCount":0,
+  "rule":"Structural corroboration reduces uncertainty but MUST NOT be converted into formal edition equivalence or academic publication approval."
+}
