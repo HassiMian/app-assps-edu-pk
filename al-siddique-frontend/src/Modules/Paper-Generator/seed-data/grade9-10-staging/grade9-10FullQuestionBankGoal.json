@@ -1,0 +1,642 @@
+{
+  "schemaVersion": "assps-grade9-10-full-question-bank-goal-v1",
+  "createdOn": "2026-10-04",
+  "parentCommit": "b0def3d95647f33dc10d137a6298ca7bcae6a4dc",
+  "status": "ACTIVE_FAIL_CLOSED",
+  "goalComplete": false,
+  "goal": "Complete Grade IX and X Punjab-board aligned Question Bank with original MCQs, short, long and applicable grammar/language items, dual-medium support where academically appropriate, verified provenance and Paper Generator compatibility.",
+  "scopePolicy": {
+    "primary": "All current Grade IX/X subjects represented in the verified PECTAA catalog manifest, plus IX-X grammar/general-science supplements, while expanding the manifest for any school-offered Humanities/Arts/Matric-Tech/religious-alternative subject before claiming final completion.",
+    "fullTextbookDefault": true,
+    "alpOptionalFilterOnly": true,
+    "klpOptionalFilterOnly": true,
+    "smartSyllabusMayNeverDeleteSourceCoverage": true,
+    "boardPatternControlsAssessmentShapeNotSourceCoverage": true,
+    "copyrightPolicy": "Generate original questions from verified concepts; do not reproduce textbook passages or protected paper wording except minimal labels/references."
+  },
+  "authorities": {
+    "curriculum": "PECTAA",
+    "schemeOfStudies": "BISE Lahore / Punjab scheme notifications",
+    "grade9Pattern2026": "PECTAA Revised Smart Syllabus / Pairing Schemes / Model Papers notification 07.11.2025; use pattern as assessment evidence while keeping full-book bank coverage.",
+    "boardSet": [
+      "Lahore",
+      "Gujranwala",
+      "Faisalabad",
+      "Rawalpindi",
+      "Sargodha",
+      "Multan",
+      "Sahiwal",
+      "Bahawalpur",
+      "Dera Ghazi Khan"
+    ]
+  },
+  "boardEvidenceRules": {
+    "statewideOfficialPatternCanSupportAllPunjabBoards": true,
+    "boardSpecificPastPaperClaimsNeedBoardPaperEvidence": true,
+    "thirdPartyPairingSchemeCannotGrantVerifiedStatus": true,
+    "newEditionPatternMissingAction": "BLOCK_PATTERN_SPECIFIC_RELEASE_OR_USE_LAST_PATTERN_ONLY_AS_HISTORICAL_NON_AUTHORITATIVE_EVIDENCE"
+  },
+  "languageRules": {
+    "urduConventionRef": "urduMediumLanguageConventionV2.json",
+    "englishGrammarSupplementRecord": "pectaa-catalog-026",
+    "urduGrammarSupplementRecord": "pectaa-catalog-027",
+    "dualMediumParityRequiredForScienceMathPakistanStudiesGeneralScienceWhereBothOfficialMediaExist": true,
+    "languageSubjectsKeepNativeAuthoringSemantics": true
+  },
+  "questionArchitecture": {
+    "baseContract": "questionContract.mjs",
+    "releaseAudit": "releaseAudit.mjs",
+    "types": [
+      "mcq",
+      "short",
+      "long",
+      "definition",
+      "numerical",
+      "diagram",
+      "fill",
+      "translation",
+      "comprehension",
+      "grammar",
+      "essay",
+      "letter",
+      "application",
+      "poetry",
+      "sentence_correction",
+      "muhawara",
+      "wahid_jama",
+      "mutradif",
+      "mutzad",
+      "alfaz_maani"
+    ],
+    "origins": [
+      "exercise",
+      "additional",
+      "conceptual"
+    ],
+    "originIndependentFromImportance": true,
+    "stableMcqOptionIdentity": true,
+    "answersRequired": true,
+    "longRubricsRequired": true,
+    "duplicateDetectionRequired": true,
+    "independentReviewRequiredBeforePublication": true
+  },
+  "subjects": [
+    {
+      "grade": 9,
+      "subject": "Tarjuma-tul-Quran",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-001"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Islamiat",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-002"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Urdu",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-003"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation",
+        "grammarAndCompositionCorpus"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "English",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-004"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation",
+        "grammarAndCompositionCorpus"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Mathematics",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-005",
+        "pectaa-catalog-006"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Chemistry",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-007",
+        "pectaa-catalog-008"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Biology",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-009",
+        "pectaa-catalog-010"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Physics",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-011",
+        "pectaa-catalog-012"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Computer",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-013"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Tarjuma-tul-Quran",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-014"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Urdu",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-015"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation",
+        "grammarAndCompositionCorpus"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "English",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-016"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation",
+        "grammarAndCompositionCorpus"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Mathematics",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "VERIFY"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-017"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Pakistan Studies",
+      "streams": [
+        "Compulsory"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-018",
+        "pectaa-catalog-019"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Biology",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-020",
+        "pectaa-catalog-021"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Chemistry",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-022"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Physics",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "English",
+        "VERIFY"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-023",
+        "pectaa-catalog-024"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 10,
+      "subject": "Computer Science",
+      "streams": [
+        "Science"
+      ],
+      "media": [
+        "VERIFY"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-025"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 0,
+      "subject": "English Grammar and Composition",
+      "streams": [
+        "IX–X Supplement"
+      ],
+      "media": [
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-026"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 0,
+      "subject": "Urdu Quaid-e-Insha",
+      "streams": [
+        "IX–X Supplement"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-027"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    },
+    {
+      "grade": 0,
+      "subject": "General Science",
+      "streams": [
+        "IX–X Supplement"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-028",
+        "pectaa-catalog-029"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ]
+    }
+  ],
+  "manifestRecordCount": 29,
+  "manifestRecordIds": [
+    "pectaa-catalog-001",
+    "pectaa-catalog-002",
+    "pectaa-catalog-003",
+    "pectaa-catalog-004",
+    "pectaa-catalog-005",
+    "pectaa-catalog-006",
+    "pectaa-catalog-007",
+    "pectaa-catalog-008",
+    "pectaa-catalog-009",
+    "pectaa-catalog-010",
+    "pectaa-catalog-011",
+    "pectaa-catalog-012",
+    "pectaa-catalog-013",
+    "pectaa-catalog-014",
+    "pectaa-catalog-015",
+    "pectaa-catalog-016",
+    "pectaa-catalog-017",
+    "pectaa-catalog-018",
+    "pectaa-catalog-019",
+    "pectaa-catalog-020",
+    "pectaa-catalog-021",
+    "pectaa-catalog-022",
+    "pectaa-catalog-023",
+    "pectaa-catalog-024",
+    "pectaa-catalog-025",
+    "pectaa-catalog-026",
+    "pectaa-catalog-027",
+    "pectaa-catalog-028",
+    "pectaa-catalog-029"
+  ],
+  "catalogExpansionRequired": [
+    "Humanities/Arts electives listed by PECTAA but not yet represented in officialSourceManifest.json",
+    "Matric-Tech subjects listed by PECTAA but not yet represented in officialSourceManifest.json",
+    "Religious Education alternatives where ASSPS offers/enrols those subjects",
+    "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"
+  ],
+  "completionGate": {
+    "allInScopeSubjectsComplete": false,
+    "allRequiredSourceBinariesVerified": false,
+    "allTopicCoverageAuditsClosed": false,
+    "allBoardPatternsVerifiedOrExplicitlyUnpublished": false,
+    "allQuestionCorporaReviewed": false,
+    "allGrammarPacksReviewed": false,
+    "allDualMediumParityChecksPassed": false,
+    "allReleaseAuditsPassed": false,
+    "paperGeneratorCompatibilityPassed": false,
+    "fullRegressionPassed": false,
+    "verifiedGitHubRemoteCommit": false,
+    "productionQuestionBankWriteAuthorized": false
+  },
+  "approvedQuestionCount": 0,
+  "productionWrites": 0
+}

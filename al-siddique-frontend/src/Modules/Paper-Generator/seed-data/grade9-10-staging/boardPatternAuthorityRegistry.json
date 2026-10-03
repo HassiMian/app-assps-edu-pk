@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "assps-punjab-board-pattern-authority-registry-v1",
+  "createdOn": "2026-10-04",
+  "status": "GRADE9_2026_STATEWIDE_AUTHORITY_VERIFIED_GRADE10_2027_PATTERN_PENDING",
+  "boards": [
+    "Lahore",
+    "Gujranwala",
+    "Faisalabad",
+    "Rawalpindi",
+    "Sargodha",
+    "Multan",
+    "Sahiwal",
+    "Bahawalpur",
+    "Dera Ghazi Khan"
+  ],
+  "sources": [
+    {
+      "id": "PECTAA-G9-2026-REVISED-ALP-PAIRING-MODEL",
+      "authority": "PECTAA",
+      "scope": "Punjab-wide Grade 9 Annual Examination 2026",
+      "url": "https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf",
+      "publicationDate": "2025-11-07",
+      "verificationState": "OFFICIAL_NOTIFICATION_VERIFIED",
+      "useFor": [
+        "assessment-shape",
+        "pairing-scheme",
+        "model-paper-pattern",
+        "optional-ALP-filter"
+      ],
+      "mustNotUseFor": [
+        "deleting-full-book-question-bank-coverage"
+      ]
+    },
+    {
+      "id": "BISE-LAHORE-SSC-SCHEME-2025-27",
+      "authority": "BISE Lahore",
+      "scope": "Grades IX-X Science/Humanities scheme of studies",
+      "url": "https://data.biselahore.com/dt/downloads/notifications/misc/SOS_Matric.pdf",
+      "verificationState": "OFFICIAL_PDF_VERIFIED",
+      "keyFacts": {
+        "scienceGroupGrade9CoreMarks": {
+          "TarjumaOrEthics": 50,
+          "Urdu": 75,
+          "English": 75,
+          "IslamiyatOrReligiousEducation": 100,
+          "Mathematics": 75,
+          "PhysicsTheory": 60,
+          "ChemistryTheory": 60,
+          "BiologyTheoryOrComputerTheory": "60 Biology / 50 Computer"
+        },
+        "scienceGroupGrade10CoreMarks": {
+          "TarjumaOrEthics": 50,
+          "Urdu": 75,
+          "English": 75,
+          "PakistanStudies": 100,
+          "Mathematics": 75,
+          "PhysicsTheory": 60,
+          "ChemistryTheory": 60,
+          "BiologyTheoryOrComputerTheory": "60 Biology / 50 Computer"
+        }
+      }
+    },
+    {
+      "id": "BISE-LAHORE-NOTIFICATIONS-2026",
+      "authority": "BISE Lahore",
+      "scope": "Official notification archive / board-specific evidence discovery",
+      "url": "https://home.biselahore.com/notifications",
+      "verificationState": "OFFICIAL_ARCHIVE_VERIFIED",
+      "note": "Archive includes updated SSC syllabus/scheme notices and explicitly warns against unauthorized guess papers/pairing schemes; board-specific occurrence claims still require a verified paper artifact."
+    }
+  ],
+  "grade10NewEditionPattern": {
+    "targetCohort": "Grade X 2026-27 textbooks / expected first annual 2027",
+    "state": "PENDING_OFFICIAL_MODEL_PAPER_OR_PAIRING_PUBLICATION",
+    "rule": "Do not infer a new-edition 2027 question pattern from old-edition 2026 papers. Historical papers may inform generic item taxonomy only."
+  }
+}
