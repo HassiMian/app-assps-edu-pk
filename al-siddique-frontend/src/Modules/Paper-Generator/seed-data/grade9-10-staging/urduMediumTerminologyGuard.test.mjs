@@ -1,0 +1,9 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {validateTextbookTermEvidence,validateUrduQuestionTerminology} from './urduMediumTerminologyGuard.mjs';
+const H='a'.repeat(64),base={conceptId:'chem.reversible',englishTerm:'reversible reaction',verifiedTextbookForm:'Reversible Reaction',renderingMode:'LATIN_TERM_RETAINED',dictionaryGenerated:false,inventedPureUrdu:false,evidence:{catalogRecordId:'pectaa-catalog-008',pdfSha256:H,physicalPage:42,anchor:'reaction heading',reviewStatus:'VISUALLY_VERIFIED'}};
+test('verified textbook-retained English scientific term is allowed',()=>assert.equal(validateTextbookTermEvidence(base).valid,true));
+test('verified textbook Urdu/transliterated form is allowed without forcing pure Urdu',()=>{const x={...base,verifiedTextbookForm:'ہائپوتھیسس',renderingMode:'TEXTBOOK_URDU_TRANSLITERATION'};assert.equal(validateTextbookTermEvidence(x).valid,true)});
+test('invented pure Urdu or dictionary translation is rejected even when fluent',()=>{assert.equal(validateTextbookTermEvidence({...base,inventedPureUrdu:true}).valid,false);assert.equal(validateTextbookTermEvidence({...base,dictionaryGenerated:true}).valid,false)});
+test('technical term without exact source page anchor is fail-closed',()=>{const x=structuredClone(base);x.evidence.anchor='';assert.equal(validateTextbookTermEvidence(x).valid,false)});
+test('Urdu question must use the exact verified textbook term form',()=>{assert.equal(validateUrduQuestionTerminology({stemUr:'Reversible Reaction کی وضاحت کریں۔',containsTechnicalVocabulary:true,technicalTerms:[base]}).valid,true);assert.equal(validateUrduQuestionTerminology({stemUr:'ایک نیا خالص اردو مترادف بیان کریں۔',containsTechnicalVocabulary:true,technicalTerms:[base]}).valid,false)});
+test('technical vocabulary cannot silently bypass the term bank',()=>assert.equal(validateUrduQuestionTerminology({stemUr:'سوال',containsTechnicalVocabulary:true,technicalTerms:[]}).valid,false));

@@ -55,3 +55,9 @@ Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORI
 - **PRESERVED DIFFERENCES:** Topic 1.1 capitalization, topic 1.7 slash/parentheses title form, and the English missing-C exercise header versus visible Urdu C remain explicit rather than normalized away.
 - **VERIFIED:** Dossier tests pass 5/5; complete staging regression passes 107/107 across 19 test files.
 - **PENDING/BLOCKED:** Structural corroboration is not formal publisher edition/cohort equivalence. Exact Urdu page+anchor evidence, terminology/editorial review, source-conflict disposition and signed publication remain required; approved questions=0 and production writes/deployment=0.
+
+## Continuation — Urdu-medium technical-language lock, 2026-10-03
+
+- **LOCKED RULE:** Urdu Science/Math papers follow exact official Urdu-medium textbook terminology, not literal/dictionary or invented pure-Urdu translation.
+- **ENFORCED:** Technical terms require exact textbook form + catalog/PDF hash/page/anchor evidence; unresolved terms block Urdu authoring/publication.
+- **SCOPE:** Biology IX evidence is active; Math/Chemistry/Physics Urdu sources are queued for cross-subject terminology audit.
