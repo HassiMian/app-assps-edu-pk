@@ -96,6 +96,7 @@ function validateDraft(doc,records){
    const record=ledger.get(key)?.academicRecord,working=item?.working
    if(!record||usedQuestions.has(sourceId)||
       item.id!=='authored::'+section.id+'::'+sourceId||item.kind!==section.kind||
+      item.kind!==record.type||
       item.chapterId!==record.chapter?.id||item.topicId!==record.topicId||
       !obj(working)||!has(working.stem)||!positive(working.marks)||working.marks>100||
       working.direction!==direction||!Number.isInteger(working.responseLines)||
@@ -182,6 +183,12 @@ function createIsolatedDraftGateway({gate,authenticate,approvedProvider,reposito
   if(enabled!==true)refuse('school has not been independently enabled for isolated staging')
   return scope
  }
+ const assertExpectedScope=(scope,expected)=>{
+  if(expected!==undefined&&(!obj(expected)||
+     expected.actorId!==scope.actorId||expected.role!==scope.role||
+     expected.schoolId!==scope.schoolId||expected.tenantId!==scope.tenantId))
+   refuse('authenticated actor changed between authoring session and staging gateway')
+ }
  const audit=async(scope,doc)=>{
   if(!obj(doc)||!obj(doc.sourceIdentity))refuse('new-authoring document required')
   // Only trusted provider lookup decides which question IDs and versions are published.
@@ -192,8 +199,10 @@ function createIsolatedDraftGateway({gate,authenticate,approvedProvider,reposito
   validateDraft(doc,records)
   return snap
  }
- async function create({authenticationContext,draft}={}){
-  const scope=await authorize(authenticationContext);const published=await audit(scope,draft)
+ async function create({authenticationContext,draft,expectedScope}={}){
+  const scope=await authorize(authenticationContext)
+  assertExpectedScope(scope,expectedScope)
+  const published=await audit(scope,draft)
   const json=nativeText(draft),digest=sha(json)
   const row=await repository.createExclusive({schoolId:scope.schoolId,
    tenantId:scope.tenantId,draftId:draft.id,createdBy:scope.actorId,
@@ -213,14 +222,17 @@ function createIsolatedDraftGateway({gate,authenticate,approvedProvider,reposito
   if(paper.id!==draftId)refuse('stored native draft ID drift')
   return {row,paper}
  }
- async function read({authenticationContext,draftId}={}){
+ async function read({authenticationContext,draftId,expectedScope}={}){
   const scope=await authorize(authenticationContext)
+  assertExpectedScope(scope,expectedScope)
   const {row,paper}=await loadVerified(scope,draftId)
   return {status:'STAGING_ONLY_AUTHORIZED_READ',draft:JSON.parse(JSON.stringify(paper)),
    revision:row.revision,nativeSha256:row.nativeSha256,authorizesProduction:false}
  }
- async function revise({authenticationContext,draft,expectedRevision,expectedNativeSha256}={}){
+ async function revise({authenticationContext,draft,expectedRevision,expectedNativeSha256,
+  expectedScope}={}){
   const scope=await authorize(authenticationContext)
+  assertExpectedScope(scope,expectedScope)
   if(!obj(draft)||!positive(expectedRevision)||!safeHash(expectedNativeSha256))
    refuse('draft, expected revision and native SHA required')
   const {row,paper:old}=await loadVerified(scope,draft.id)
