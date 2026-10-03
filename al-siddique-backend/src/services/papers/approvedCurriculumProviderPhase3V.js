@@ -173,6 +173,8 @@ function createPhase3VApprovedProvider({gate,resolveCurrentHead,readPublication,
    sourceBookIds:JSON.parse(JSON.stringify(p.sourceBookIds)),
    sourceChecksums:JSON.parse(JSON.stringify(p.sourceChecksums)),
    records:JSON.parse(JSON.stringify(records)),
+   // Signed enrichment: Phase3X must never invent bilingual chapter/topic display labels.
+   topicRegistry:JSON.parse(JSON.stringify(p.topicRegistry)),
    publicationId:p.publicationId,recordsDigest:p.recordsDigest,
    signatureVerification:'PINNED_ED25519_VERIFIED'}
  }
