@@ -9,7 +9,8 @@ const approved=p=>p?.schema===PHASE3P_SCHEMA&&p.status==='READ_ONLY_APPROVED_PRO
  Array.isArray(p.subjects)&&p.subjects.length===1&&Array.isArray(p.chapters)&&
  Array.isArray(p.questions)&&p.questions.every(q=>valid(q.id)&&
  q.academicRecord?.id===q.id&&q.academicRecord?.review?.status==='approved');
-const sourceKey=p=>JSON.stringify([p.revision??null,p.identity,p.sourceBookIds,p.sourceChecksums,
+const sourceKey=p=>JSON.stringify([p.revision??null,p.publicationLineage??null,
+ p.identity,p.sourceBookIds,p.sourceChecksums,
  p.selection,p.chapters,p.questions.map(q=>[q.id,q.type,q.marks,q.chapterId,q.topicId,
  q.text,q.textUrdu,q.options,q.academicRecord?.revision??null,
  q.academicRecord?.review?.status,q.academicRecord?.source?.languages])]);

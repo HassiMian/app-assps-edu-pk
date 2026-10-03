@@ -41,6 +41,9 @@ async function fixture(){
  const handoff=composeCurriculumPhase3PPreview({projection,medium:'en',
   blocks:[{id:'shorts',type:'short',questionIds:['qid-short'],attemptAny:1}]})
  handoff.snapshotRevision=7
+ handoff.publicationLineage={schema:'assps-phase3w-source-lineage-v1',
+  snapshotRevision:7,publicationId:'synthetic-phase3s-publication',
+  recordsDigest:'c'.repeat(64),clientAuthorizationState:'UNVERIFIED_CLIENT_ONLY'}
  const draft=createNewAuthoringPaperDocument({handoff,draftId:'draft-phase3s-001'})
  const snapshot={status:'PUBLISHED_APPROVED',trustOrigin:'SERVER_INDEPENDENT_AUDIT',
   schoolId:1,tenantId:'tenant-1',revision:7,curriculumIdentity:clone(identity),

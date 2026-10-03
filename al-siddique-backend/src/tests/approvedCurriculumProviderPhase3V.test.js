@@ -177,6 +177,7 @@ function workingDraft(q=question()){
   sourceIdentity:{kind:'NEW_AUTHORING_APPROVED_CURRICULUM',
    draftId:'draft-3v-001',sourcePaperId:null,sourceDatasetGeneration:null,
    authorizationState:'UNVERIFIED_CLIENT_ONLY',approvedSnapshotRevision:7,
+   publicationId:'pub-bio9-001',recordsDigest:recordsDigest([q]),
    curriculumIdentity:clone(identity),selection:clone(selection),
    sourceBookIds:clone(sourceBookIds),sourceChecksums:clone(sourceChecksums)},
   institutionBranding:null,
@@ -209,6 +210,13 @@ test('real Phase3S injection accepts only the signed Phase3V provider, no produc
  assert.equal(result.status,'STAGING_ONLY_DRAFT_STORED')
  assert.equal(result.authorizesProduction,false);assert.equal(result.approvedForPrint,false)
  assert.equal(rows.length,1);assert.equal(rows[0].approvedSnapshotRevision,7)
+ for(const mutate of [
+  x=>{x.sourceIdentity.publicationId='forged-other-publication'},
+  x=>{x.sourceIdentity.recordsDigest='0'.repeat(64)},
+  x=>{x.sourceIdentity.publicationId=null},
+ ]){const changed=clone(draft);mutate(changed)
+  await assert.rejects(gateway.create({draft:changed}),/signed publisher ID\/digest/)}
+ assert.equal(rows.length,1,'forged publication cannot reach repository')
  const blocked=make();blocked.head.status='PENDING_REVIEW'
  const noRows=[]
  const closed=createIsolatedDraftGateway({

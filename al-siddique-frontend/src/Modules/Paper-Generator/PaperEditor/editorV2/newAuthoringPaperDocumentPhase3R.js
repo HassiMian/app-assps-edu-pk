@@ -45,7 +45,17 @@ const evidenceFor=(ledgerItem,sourceIdentity)=>{
 };
 const sourceEntry=(doc,sectionId,id)=>doc.sourceLedger.find(l=>l.blockId===sectionId&&l.questionId===id);
 function validatedSource(handoff,draftId){
- const c=handoff?.composition;
+ const c=handoff?.composition,lineage=handoff?.publicationLineage??null;
+ if(lineage!==null&&(
+    lineage.schema!=='assps-phase3w-source-lineage-v1'||
+    !Number.isSafeInteger(lineage.snapshotRevision)||lineage.snapshotRevision<1||
+    handoff.snapshotRevision!==lineage.snapshotRevision||
+    !has(lineage.publicationId)||
+    !/^[a-f0-9]{64}$/i.test(lineage.recordsDigest||'')||
+    lineage.clientAuthorizationState!=='UNVERIFIED_CLIENT_ONLY'))
+  refuse('invalid publication lineage; no local metadata can authorize saving');
+ if(lineage===null&&handoff?.snapshotRevision!==null&&handoff?.snapshotRevision!==undefined)
+  refuse('orphan snapshot revision without publication identity');
  if(!draftIdValid(draftId)||handoff?.schema!==HANDOFF||
     handoff.status!=='UNSAVED_PREVIEW_AWAITING_NEW_AUTHORING_PAPERDOCUMENT_ADAPTER'||
     handoff.canonicalV13MigrationClaim!==false||handoff.liveEditorMounted!==false||
@@ -89,7 +99,8 @@ function validatedSource(handoff,draftId){
  return c;
 }
 export function createNewAuthoringPaperDocument({handoff,draftId,metadata={}}={}){
- const c=validatedSource(handoff,draftId),medium=c.medium;
+ const c=validatedSource(handoff,draftId),medium=c.medium,
+  lineage=handoff?.publicationLineage??null;
  const sections=c.blocks.map((b,i)=>({
   id:b.id,order:i+1,kind:b.type,medium,attemptAny:b.attemptAny,
   items:b.questions.map(q=>({
@@ -115,7 +126,9 @@ export function createNewAuthoringPaperDocument({handoff,draftId,metadata={}}={}
    sourceBookIds:clone(handoff.sourceBookIds),
    sourceChecksums:clone(handoff.sourceChecksums),
    selection:clone(handoff.selection),
-   approvedSnapshotRevision:handoff.snapshotRevision??null,
+   approvedSnapshotRevision:lineage?.snapshotRevision??null,
+   publicationId:lineage?.publicationId??null,
+   recordsDigest:lineage?.recordsDigest??null,
    authorizationState:'UNVERIFIED_CLIENT_ONLY'},
   institutionBranding:null,sections,sourceLedger:clone(handoff.sourceLedger),
   totalMarks:0,legacyPaperUpdated:false,legacyBankWriteAllowed:false,
@@ -149,6 +162,14 @@ export function validateNewAuthoringPaperDocument(doc){
  if(doc.metadata?.durationMinutes!==null&&doc.metadata?.durationMinutes!==undefined&&
     (!Number.isSafeInteger(doc.metadata.durationMinutes)||doc.metadata.durationMinutes<1))
   errors.push('durationMinutes must be positive integer or null');
+ if(sid?.approvedSnapshotRevision!==null&&(
+    !Number.isSafeInteger(sid?.approvedSnapshotRevision)||sid.approvedSnapshotRevision<1||
+    !has(sid?.publicationId)||
+    !/^[a-f0-9]{64}$/i.test(sid?.recordsDigest||'')))
+  errors.push('pinned source revision must include publication and signed records digest');
+ if(sid?.approvedSnapshotRevision===null&&(
+    sid?.publicationId!==null||sid?.recordsDigest!==null))
+  errors.push('unpublished preview cannot claim a signed source identity');
  if(!['full','alp'].includes(sid?.selection?.syllabusMode)||
     (sid?.selection?.syllabusMode==='alp'&&!Number.isInteger(sid.selection.examYear)))
   errors.push('explicit full or evidenced ALP selection required');

@@ -155,6 +155,17 @@ export function composeCurriculumPhase3PPreview({projection,blocks,medium='en'}=
  if(projection?.schema!==PHASE3P_SCHEMA||
     projection.status!=='READ_ONLY_APPROVED_PROJECTION'||!['en','ur'].includes(medium))
   refuse('approved read-only EN/UR projection required');
+ const lineage=projection.publicationLineage??null;
+ if(lineage!==null&&(
+   lineage.schema!=='assps-phase3w-source-lineage-v1'||
+   !Number.isSafeInteger(lineage.snapshotRevision)||lineage.snapshotRevision<1||
+   projection.revision!==lineage.snapshotRevision||
+   !has(lineage.publicationId)||
+   !/^[a-f0-9]{64}$/i.test(lineage.recordsDigest||'')||
+   lineage.clientAuthorizationState!=='UNVERIFIED_CLIENT_ONLY'))
+  refuse('invalid or stale publication lineage; client hint cannot authorize saving');
+ if(lineage===null&&projection.revision!==undefined)
+  refuse('orphan source revision without a pinned publication identity');
  const composition=composeTopicPaperBlocks({
   subjects:projection.subjects,chapters:projection.chapters,questions:projection.questions,
   subjectId:projection.subjects[0].id,medium,blocks});
@@ -169,6 +180,8 @@ export function composeCurriculumPhase3PPreview({projection,blocks,medium='en'}=
   composition,sourceLedger,sourceBookIds:copy(projection.sourceBookIds),
   sourceChecksums:copy(projection.sourceChecksums),
   curriculumIdentity:copy(projection.identity),selection:copy(projection.selection),
+  snapshotRevision:lineage?.snapshotRevision??null,
+  publicationLineage:lineage?copy(lineage):null,
   sourcePaperUpdated:false,legacyBankWriteAllowed:false,liveEditorMounted:false,
   canonicalV13MigrationClaim:false,printApproved:false};
 }

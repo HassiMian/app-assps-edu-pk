@@ -20,6 +20,14 @@ function actorScope(actor){
 }
 function approvedRecords(snapshot,scope,doc){
  const sid=doc?.sourceIdentity
+ // Only the CURRENT server resolver can authorize publication lineage.
+ // An unpinned local preview may exist, but it cannot use a signed provider for saving.
+ if(snapshot?.signatureVerification==='PINNED_ED25519_VERIFIED'&&(
+    !has(snapshot.publicationId)||!safeHash(snapshot.recordsDigest)||
+    !has(sid?.publicationId)||!safeHash(sid?.recordsDigest)||
+    sid.publicationId!==snapshot.publicationId||
+    sid.recordsDigest!==snapshot.recordsDigest))
+  refuse('signed publisher ID/digest missing or differs from authored source pin')
  if(!obj(snapshot)||snapshot.status!=='PUBLISHED_APPROVED'||
     snapshot.trustOrigin!=='SERVER_INDEPENDENT_AUDIT'||snapshot.schoolId!==scope.schoolId||
     snapshot.tenantId!==scope.tenantId||!positive(snapshot.revision)||
