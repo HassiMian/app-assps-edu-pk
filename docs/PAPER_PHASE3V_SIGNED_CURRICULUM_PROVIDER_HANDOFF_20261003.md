@@ -47,11 +47,11 @@ board/year exclusion evidence in the signed payload; Full requires explicit null
    there is no paper save/print authorization granted by the client-side payload or test labels.
 
 ## Executed regression
-14 Phase3V focused tests passed with newly generated synthetic Ed25519 test keys.
+15 Phase3V focused tests passed with newly generated synthetic Ed25519 test keys.
 Includes Phase3S dependency injection with a synthetic approved academic record and proof that
 unpublished status never reaches repository creation; no actual Curriculum publication was seeded.
 The real Ed25519 private signing key is NOT stored in repository, frontend or test fixture file.
-Production construction is explicitly refused. Existing Phase3O–3U targeted suite was 71/71.
+Production construction is explicitly refused. Full Phase3O–3V targeted sweep was 86/86 PASS.
 
 ## Pending upstream and production gates
 - Curriculum owner verifies IX Urdu Biology edition equivalence to intended English cohort and
