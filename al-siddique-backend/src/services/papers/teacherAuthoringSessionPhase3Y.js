@@ -203,4 +203,5 @@ function createPhase3YAuthoringSession({gate,authenticate,teacherProjection,
  }
  return Object.freeze({prepare,savePrepared,readVerified,reviseVerified,cancel})
 }
-module.exports={GATE_LABEL,TTL_MS,createPhase3YAuthoringSession}
+module.exports={GATE_LABEL,TTL_MS,createPhase3YAuthoringSession,
+ checkedProjection,sourcePin,assertSourceBinding}
