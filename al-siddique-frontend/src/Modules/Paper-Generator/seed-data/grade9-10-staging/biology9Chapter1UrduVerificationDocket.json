@@ -1,0 +1,716 @@
+{
+  "schemaVersion": "assps-bio9-c1-urdu-verification-docket-v1",
+  "createdOn": "2026-10-03",
+  "status": "VISUAL_VERIFICATION_REQUIRED_NO_INFERENCE",
+  "urduSource": {
+    "catalogRecordId": "pectaa-catalog-010",
+    "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd"
+  },
+  "queueSha256": "4f9e71be5b8026b83616cec9cff884c13bfb215560c565e3b1db015d778c7b70",
+  "contentUnitChecks": [
+    {
+      "queueId": "BIO9-C1-GAP-001",
+      "topicId": "1.1",
+      "concept": "biology-definition-and-scope",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-002",
+      "topicId": "1.1",
+      "concept": "zoology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-003",
+      "topicId": "1.1",
+      "concept": "morphology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-004",
+      "topicId": "1.1",
+      "concept": "anatomy",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-005",
+      "topicId": "1.1",
+      "concept": "physiology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-006",
+      "topicId": "1.1",
+      "concept": "molecular-biology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-007",
+      "topicId": "1.1",
+      "concept": "embryology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-008",
+      "topicId": "1.1",
+      "concept": "palaeontology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-009",
+      "topicId": "1.1",
+      "concept": "taxonomy",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-010",
+      "topicId": "1.1",
+      "concept": "marine-biology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-011",
+      "topicId": "1.1",
+      "concept": "pathology",
+      "verifiedUrduTopicPageRange": [
+        5,
+        8
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-012",
+      "topicId": "1.2",
+      "concept": "biotechnology",
+      "verifiedUrduTopicPageRange": [
+        8,
+        9
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-013",
+      "topicId": "1.3",
+      "concept": "medicine-and-surgery",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-014",
+      "topicId": "1.3",
+      "concept": "pharmacology-career",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-015",
+      "topicId": "1.3",
+      "concept": "fisheries-and-wildlife",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-016",
+      "topicId": "1.3",
+      "concept": "farming",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-017",
+      "topicId": "1.3",
+      "concept": "biotechnology-career",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-018",
+      "topicId": "1.3",
+      "concept": "veterinary-medicine",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-019",
+      "topicId": "1.3",
+      "concept": "environmental-science-career",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-020",
+      "topicId": "1.3",
+      "concept": "microbiology-career",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-021",
+      "topicId": "1.3",
+      "concept": "genetic-counselling",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-022",
+      "topicId": "1.3",
+      "concept": "nutrition-and-dietetics",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-023",
+      "topicId": "1.3",
+      "concept": "bioinformatics",
+      "verifiedUrduTopicPageRange": [
+        9,
+        11
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-024",
+      "topicId": "1.4",
+      "concept": "human-development-reflection",
+      "verifiedUrduTopicPageRange": [
+        12,
+        13
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-025",
+      "topicId": "1.4",
+      "concept": "clay-reference-and-human-origin-discussion",
+      "verifiedUrduTopicPageRange": [
+        12,
+        13
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-026",
+      "topicId": "1.5",
+      "concept": "medical-research-collaboration",
+      "verifiedUrduTopicPageRange": [
+        13,
+        14
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-027",
+      "topicId": "1.5",
+      "concept": "space-exploration-collaboration",
+      "verifiedUrduTopicPageRange": [
+        13,
+        14
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-028",
+      "topicId": "1.6",
+      "concept": "recognition-and-definition-of-scientific-problem",
+      "verifiedUrduTopicPageRange": [
+        14,
+        17
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-029",
+      "topicId": "1.6",
+      "concept": "experimental-group-and-control-group",
+      "verifiedUrduTopicPageRange": [
+        14,
+        17
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-030",
+      "topicId": "1.8",
+      "concept": "initial-malaria-observations-marsh-water-quinine",
+      "verifiedUrduTopicPageRange": [
+        18,
+        21
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-031",
+      "topicId": "1.8",
+      "concept": "outdoor-net-and-smoke-observations",
+      "verifiedUrduTopicPageRange": [
+        18,
+        21
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-032",
+      "topicId": "1.8",
+      "concept": "ross-evidence-chain-with-nonhuman-model",
+      "verifiedUrduTopicPageRange": [
+        18,
+        21
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    },
+    {
+      "queueId": "BIO9-C1-GAP-033",
+      "topicId": "1.8",
+      "concept": "historical-confirmation-conclusion",
+      "verifiedUrduTopicPageRange": [
+        18,
+        21
+      ],
+      "exactUrduPage": null,
+      "exactUrduAnchor": null,
+      "evidenceState": "RANGE_VERIFIED_EXACT_ITEM_EVIDENCE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "exactAnchor",
+        "semanticConceptEquivalence"
+      ]
+    }
+  ],
+  "exerciseSectionAChecks": [
+    {
+      "exerciseId": "C01-A-01",
+      "urRef": "UM-EX-C01-A-Q01",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-02",
+      "urRef": "UM-EX-C01-A-Q02",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-03",
+      "urRef": "UM-EX-C01-A-Q03",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-04",
+      "urRef": "UM-EX-C01-A-Q04",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-05",
+      "urRef": "UM-EX-C01-A-Q05",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-06",
+      "urRef": "UM-EX-C01-A-Q06",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-07",
+      "urRef": "UM-EX-C01-A-Q07",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-08",
+      "urRef": "UM-EX-C01-A-Q08",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-09",
+      "urRef": "UM-EX-C01-A-Q09",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    },
+    {
+      "exerciseId": "C01-A-10",
+      "urRef": "UM-EX-C01-A-Q10",
+      "verifiedUrduSectionPageRange": [
+        23,
+        24
+      ],
+      "exactUrduPage": null,
+      "evidenceState": "SECTION_RANGE_VERIFIED_EXACT_ITEM_PAGE_PENDING",
+      "requiredChecks": [
+        "exactPage",
+        "sourceItemIdentity"
+      ]
+    }
+  ],
+  "releaseAllowed": false
+}
