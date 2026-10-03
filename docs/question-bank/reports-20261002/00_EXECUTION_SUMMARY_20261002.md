@@ -48,3 +48,10 @@ Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORI
 - **COMPLETED:** 33 content gaps plus 10 unresolved Exercise-A refs now have a finite Urdu visual-verification docket using only previously verified page ranges; no exact page or anchor is inferred.
 - **VERIFIED:** Docket tests pass 4/4; complete staging regression passes 102/102 across 18 test files.
 - **PENDING/BLOCKED:** Exact Urdu visual confirmation and formal edition equivalence still gate authoring/release; approved questions=0 and production writes/deployment=0.
+
+## Continuation — bilingual structural edition-equivalence dossier, 2026-10-03
+
+- **COMPLETED:** Exact English/Urdu ledger bytes are SHA-pinned; 11/11 chapter numbers and English-printed titles align; Chapter 1 has the same 8 topic IDs and matching exercise cardinality 10/6/7/2.
+- **PRESERVED DIFFERENCES:** Topic 1.1 capitalization, topic 1.7 slash/parentheses title form, and the English missing-C exercise header versus visible Urdu C remain explicit rather than normalized away.
+- **VERIFIED:** Dossier tests pass 5/5; complete staging regression passes 107/107 across 19 test files.
+- **PENDING/BLOCKED:** Structural corroboration is not formal publisher edition/cohort equivalence. Exact Urdu page+anchor evidence, terminology/editorial review, source-conflict disposition and signed publication remain required; approved questions=0 and production writes/deployment=0.
