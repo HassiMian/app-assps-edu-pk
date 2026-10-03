@@ -1,0 +1,815 @@
+{
+  "schemaVersion": "assps-bio9-c1-authoring-queue-v1",
+  "createdOn": "2026-10-03",
+  "status": "EVIDENCE_GATED_NOT_READY_FOR_AUTHORING",
+  "sourceAuditSha256": "df208959796a848666d0e8de173b4618ddac71597eec3b8b919be7062ce0e54e",
+  "sourceAuditGapCount": 33,
+  "items": [
+    {
+      "id": "BIO9-C1-GAP-001",
+      "topicId": "1.1",
+      "concept": "biology-definition-and-scope",
+      "enPages": [
+        6
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-002",
+      "topicId": "1.1",
+      "concept": "zoology",
+      "enPages": [
+        6
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-003",
+      "topicId": "1.1",
+      "concept": "morphology",
+      "enPages": [
+        6
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-004",
+      "topicId": "1.1",
+      "concept": "anatomy",
+      "enPages": [
+        6
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-005",
+      "topicId": "1.1",
+      "concept": "physiology",
+      "enPages": [
+        7
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-006",
+      "topicId": "1.1",
+      "concept": "molecular-biology",
+      "enPages": [
+        7
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-007",
+      "topicId": "1.1",
+      "concept": "embryology",
+      "enPages": [
+        7
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-008",
+      "topicId": "1.1",
+      "concept": "palaeontology",
+      "enPages": [
+        7
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-009",
+      "topicId": "1.1",
+      "concept": "taxonomy",
+      "enPages": [
+        7
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-010",
+      "topicId": "1.1",
+      "concept": "marine-biology",
+      "enPages": [
+        8
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-011",
+      "topicId": "1.1",
+      "concept": "pathology",
+      "enPages": [
+        8
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-012",
+      "topicId": "1.2",
+      "concept": "biotechnology",
+      "enPages": [
+        9
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-013",
+      "topicId": "1.3",
+      "concept": "medicine-and-surgery",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-014",
+      "topicId": "1.3",
+      "concept": "pharmacology-career",
+      "enPages": [
+        10,
+        11
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-015",
+      "topicId": "1.3",
+      "concept": "fisheries-and-wildlife",
+      "enPages": [
+        11
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-016",
+      "topicId": "1.3",
+      "concept": "farming",
+      "enPages": [
+        11
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-017",
+      "topicId": "1.3",
+      "concept": "biotechnology-career",
+      "enPages": [
+        12
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-018",
+      "topicId": "1.3",
+      "concept": "veterinary-medicine",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-019",
+      "topicId": "1.3",
+      "concept": "environmental-science-career",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-020",
+      "topicId": "1.3",
+      "concept": "microbiology-career",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-021",
+      "topicId": "1.3",
+      "concept": "genetic-counselling",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-022",
+      "topicId": "1.3",
+      "concept": "nutrition-and-dietetics",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-023",
+      "topicId": "1.3",
+      "concept": "bioinformatics",
+      "enPages": [
+        10
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-024",
+      "topicId": "1.4",
+      "concept": "human-development-reflection",
+      "enPages": [
+        12,
+        13
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_AND_RELIGIOUS_EDITORIAL_REVIEW",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence",
+        "religiousEditorialReview"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-025",
+      "topicId": "1.4",
+      "concept": "clay-reference-and-human-origin-discussion",
+      "enPages": [
+        12
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_AND_RELIGIOUS_EDITORIAL_REVIEW",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence",
+        "religiousEditorialReview"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-026",
+      "topicId": "1.5",
+      "concept": "medical-research-collaboration",
+      "enPages": [
+        14
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-027",
+      "topicId": "1.5",
+      "concept": "space-exploration-collaboration",
+      "enPages": [
+        14
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-028",
+      "topicId": "1.6",
+      "concept": "recognition-and-definition-of-scientific-problem",
+      "enPages": [
+        14,
+        15
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-029",
+      "topicId": "1.6",
+      "concept": "experimental-group-and-control-group",
+      "enPages": [
+        16
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-030",
+      "topicId": "1.8",
+      "concept": "initial-malaria-observations-marsh-water-quinine",
+      "enPages": [
+        17,
+        18
+      ],
+      "riskFlags": [
+        "BIO9-C1-MALARIA-CHRONOLOGY-002"
+      ],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-031",
+      "topicId": "1.8",
+      "concept": "outdoor-net-and-smoke-observations",
+      "enPages": [
+        19
+      ],
+      "riskFlags": [],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-032",
+      "topicId": "1.8",
+      "concept": "ross-evidence-chain-with-nonhuman-model",
+      "enPages": [
+        19,
+        20
+      ],
+      "riskFlags": [
+        "BIO9-C1-MALARIA-CHRONOLOGY-002",
+        "KEEP_HISTORICAL_AND_NON_PROCEDURAL"
+      ],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    },
+    {
+      "id": "BIO9-C1-GAP-033",
+      "topicId": "1.8",
+      "concept": "historical-confirmation-conclusion",
+      "enPages": [
+        20
+      ],
+      "riskFlags": [
+        "KEEP_HISTORICAL_AND_NON_PROCEDURAL"
+      ],
+      "sourceKind": "TEXTBOOK_CONTENT_UNIT",
+      "queueState": "BLOCKED_PENDING_URDU_SOURCE_EVIDENCE",
+      "safeToAuthorNow": false,
+      "publicationAllowed": false,
+      "requiredBeforeAuthoring": [
+        "exactUrduSourcePages",
+        "urduAnchor",
+        "sourceConceptEquivalence"
+      ],
+      "requiredBeforeRelease": [
+        "formalBilingualEditionEquivalence",
+        "independentAcademicReview",
+        "independentAnswerReview",
+        "bilingualEditorialReview"
+      ]
+    }
+  ]
+}

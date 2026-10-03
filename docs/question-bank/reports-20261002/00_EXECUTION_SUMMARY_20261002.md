@@ -35,3 +35,10 @@ Latest checkpoint: [Chapter 1 full-book authoring](11_CHAPTER1_FULL_BOOK_AUTHORI
 - **VERIFIED:** New evidence/coverage tests pass 12/12; full staging regression passes 92/92 across 16 test files. No textbook exercise wording was committed into the evidence maps.
 - **PENDING:** Exact Urdu Section-A item pages, formal bilingual edition/cohort equivalence, original authoring for 33 gaps, independent academic/terminology review and browser/print acceptance.
 - **BLOCKED:** Exercise-origin release remains closed; Chapter 1 completeness=false; approved questions=0; production writes/deployment=0.
+
+## Continuation — evidence-gated authoring queue, 2026-10-03
+
+- **COMPLETED:** The 33 verified Chapter 1 coverage gaps now project one-to-one into a SHA-pinned authoring/evidence queue with permanent IDs and explicit Urdu/review requirements.
+- **VERIFIED:** Queue-specific tests pass 6/6; complete staging regression passes 98/98 across 17 test files; no question/answer payload or textbook exercise wording is stored in the queue.
+- **PENDING:** Exact Urdu evidence must be attached before original bilingual authoring begins.
+- **BLOCKED:** All queue items remain safeToAuthorNow=false and publicationAllowed=false; approved questions=0 and production writes/deployment=0.
