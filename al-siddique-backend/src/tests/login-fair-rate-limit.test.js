@@ -20,7 +20,7 @@ async function main(){const id=crypto.randomBytes(6).toString('hex'),ip='192.0.2
  console.log('Two login IDs behind same client IP have separate fair login quotas: PASS')
  const me=await send('/api/auth/me','GET',null,ip)
  assert.equal(me.status,401)
- assert.equal(me.headers['ratelimit-limit'],'120')
+ assert.equal(me.headers['ratelimit-limit'],'240')
  console.log('Normal /auth/me session checks do not consume login quota: PASS')
 }
 main().then(()=>process.exit(0)).catch(e=>{console.error('RATE-LIMIT REGRESSION FAILED:',e.message);process.exit(1)})

@@ -10,6 +10,7 @@ const cors    = require('cors')
 const helmet  = require('helmet')
 const morgan  = require('morgan')
 const rateLimit = require('express-rate-limit')
+const jwt = require('jsonwebtoken')
 const { query, tenantContext } = require('./config/database')
 const { migrate } = require('./config/migrate')
 const { migrateSubscriptionSchema } = require('./config/subscription_migrate')
@@ -37,12 +38,60 @@ app.use((req, res, next) => {
 app.disable('x-powered-by')
 app.use(helmet({ crossOriginResourcePolicy: false }))
 
-const generalLimiter = rateLimit({
+// General browsing quota: a school can have hundreds of parent/student/teacher
+// sessions behind ONE router/NAT. A plain 120/IP/min limiter caused unrelated
+// legitimate accounts to receive 429 after ordinary page navigation.
+// Only a VERIFIED HS256 access cookie may select a user quota. Unsigned userId,
+// tenantId or role cookies and arbitrary X-Forwarded-For are NEVER identity proof.
+const generalSessionSubject = (req) => {
+  const match = String(req.headers?.cookie || '').match(/(?:^|;\s*)authToken=([^;]+)/)
+  if (!match || !process.env.JWT_SECRET) return null
+  try {
+    const token = decodeURIComponent(match[1])
+    const decoded = jwt.verify(token, process.env.JWT_SECRET, { algorithms: ['HS256'] })
+    const id = Number(decoded?.id)
+    if (!Number.isSafeInteger(id) || id <= 0) return null
+    return `school:${String(decoded.school_id ?? decoded.tenant_id ?? 'global')}:user:${id}`
+  } catch { return null }
+}
+
+const skipDedicatedLimits = (req) =>
+  req.method === 'OPTIONS' || req.path === '/health' || req.path.startsWith('/health/') ||
+  ['/api/auth/login','/api/admin/auth/login',
+   '/api/auth/password-reset/request','/api/auth/password-reset/confirm',
+   '/api/admin/auth/password-reset/request','/api/admin/auth/password-reset/confirm'].includes(req.path)
+
+const authenticatedBrowseLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 120,
+  max: 180,
   standardHeaders: true,
   legacyHeaders: false,
-  message: { success: false, message: 'Too many requests. Please try again later.' },
+  keyGenerator: req => req.generalSessionSubject,
+  skip: req => !req.generalSessionSubject || skipDedicatedLimits(req),
+  message: { success:false, message:'Your session is sending too many requests. Please wait before retrying.' },
+})
+const publicBrowseLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 240,
+  standardHeaders: true,
+  legacyHeaders: false,
+  // Retain express-rate-limit's built-in trusted req.ip / IPv6 handling.
+  skip: req => Boolean(req.generalSessionSubject) || skipDedicatedLimits(req),
+  message: { success:false, message:'Too many requests. Please try again later.' },
+})
+app.use((req,res,next) => { req.generalSessionSubject = generalSessionSubject(req); next() })
+app.use(authenticatedBrowseLimiter)
+app.use(publicBrowseLimiter)
+
+// A separate per-network flood ceiling prevents rotating thousands of login
+// identifiers to evade the account+network limiter. 480/min accommodates an
+// ordinary school NAT login rush while retaining a finite abuse budget.
+const loginNetworkLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 480,
+  standardHeaders: false,
+  legacyHeaders: false,
+  message: {success:false,message:'Too many login requests from this network. Please retry shortly.'},
 })
 
 // Login throttling is scoped by network and normalized login identity, not
@@ -69,8 +118,6 @@ const recoveryLimiter = rateLimit({
   legacyHeaders: false,
   message: { success: false, message: 'Too many recovery requests. Please try again later.' },
 })
-
-app.use(generalLimiter)
 
 // ─── CORS ────────────────────────────────────────────────────────────────────
 // ─── CORS ────────────────────────────────────────────────────────────────────
@@ -231,7 +278,7 @@ const registerRoutes = (router) => {
 const apiRouter = express.Router()
 registerRoutes(apiRouter)
 
-app.use(['/api/auth/login', '/api/admin/auth/login'], authLimiter)
+app.use(['/api/auth/login', '/api/admin/auth/login'], loginNetworkLimiter, authLimiter)
 app.use([
   '/api/auth/password-reset/request', '/api/auth/password-reset/confirm',
   '/api/admin/auth/password-reset/request', '/api/admin/auth/password-reset/confirm',
