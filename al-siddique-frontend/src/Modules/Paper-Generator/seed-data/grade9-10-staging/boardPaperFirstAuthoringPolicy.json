@@ -2,7 +2,7 @@
   "schemaVersion": "assps-board-paper-first-authoring-contract-v1",
   "createdOn": "2026-10-04",
   "parentCommit": "dad7a2f07391220eccd32786328c33f4ada34edc",
-  "status": "ACTIVE_PATTERN_REVIEW_REQUIRED_BEFORE_AUTHORING",
+  "status": "OFFICIAL_G9_2026_ENGLISH_URDU_MODELS_VERIFIED_ACTUAL_ANNUAL_PAPERS_PENDING",
   "goal": "For every Grade IX/X subject, prioritize actual board paper or official model inspection before seeding original current-edition questions; English/Urdu grammar and writing hierarchy require full objective+subjective review.",
   "scope": "ALL_IN_SCOPE_SUBJECTS_ENGLISH_AND_URDU_PRIORITY",
   "coreSeparation": {
@@ -134,6 +134,52 @@
       "url": "https://pakboards.com/past-papers/bise-lahore/10/arts/english",
       "artifactState": "SECONDARY_INDEX_ONLY",
       "verifiedPatternHierarchy": false
+    },
+    {
+      "id": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+      "authority": "PECTAA (official model hosted by BISE Sargodha)",
+      "year": 2026,
+      "grade": 9,
+      "subjects": [
+        "English",
+        "Urdu"
+      ],
+      "documentType": "OFFICIAL_MODEL",
+      "url": "https://site.bisesargodha.edu.pk/Downloads/ModelPapers/Matric/9thRevisedALPNotification.pdf",
+      "indexUrl": "https://site.bisesargodha.edu.pk/MatricModelPapers",
+      "pdfSha256": "528a6627b7c027c685671de831889aa07aaa36676edf5c5d9e0d93833c46fcef",
+      "pages": 65,
+      "byteLength": 29595552,
+      "artifactState": "OFFICIAL_65_PAGE_SCAN_VISUALLY_REVIEWED_LANGUAGE_MODEL",
+      "verifiedPatternHierarchy": true,
+      "actualAnnualPaperVerified": false,
+      "taxonomyRegistry": "officialGrade9LanguageModelHierarchy2026.json",
+      "pageRanges": {
+        "urduInstructions": [
+          45,
+          46,
+          47,
+          48,
+          49
+        ],
+        "urduModel": [
+          50,
+          51,
+          52,
+          53
+        ],
+        "englishInstructions": [
+          54,
+          55,
+          56
+        ],
+        "englishModel": [
+          57,
+          58,
+          59,
+          60
+        ]
+      }
     }
   ],
   "priorityAcquisitionQueue": [
@@ -149,9 +195,11 @@
       "group": "I",
       "part": "OBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-I-SUBJECTIVE",
@@ -165,9 +213,11 @@
       "group": "I",
       "part": "SUBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-II-OBJECTIVE",
@@ -181,9 +231,11 @@
       "group": "II",
       "part": "OBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-II-SUBJECTIVE",
@@ -197,9 +249,11 @@
       "group": "II",
       "part": "SUBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-URDU-Lahore_Gujranwala_Multan-I-OBJECTIVE",
@@ -213,9 +267,11 @@
       "group": "I",
       "part": "OBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-URDU-Lahore_Gujranwala_Multan-I-SUBJECTIVE",
@@ -229,9 +285,11 @@
       "group": "I",
       "part": "SUBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-URDU-Lahore_Gujranwala_Multan-II-OBJECTIVE",
@@ -245,9 +303,11 @@
       "group": "II",
       "part": "OBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G9-URDU-Lahore_Gujranwala_Multan-II-SUBJECTIVE",
@@ -261,9 +321,11 @@
       "group": "II",
       "part": "SUBJECTIVE",
       "preferredExamYear": 2026,
-      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "paperArtifactStatus": "OFFICIAL_MODEL_VERIFIED_ACTUAL_2026_ANNUAL_PAPER_PENDING",
       "allowPatternApproval": false,
-      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY",
+      "allowModelCategoryTaxonomy": true,
+      "officialModelRegistry": "officialGrade9LanguageModelHierarchy2026.json"
     },
     {
       "id": "G10-ENGLISH-Lahore_Gujranwala_Multan-I-OBJECTIVE",
@@ -394,7 +456,50 @@
       "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
     }
   ],
-  "verifiedHierarchyEntries": [],
+  "verifiedHierarchyEntries": [
+    {
+      "id": "G9-ENGLISH-2026-PECTAA-MODEL-TAXONOMY",
+      "grade": 9,
+      "subject": "English",
+      "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+      "sourcePages": [
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ],
+      "authorityState": "VERIFIED_MODEL",
+      "documentType": "OFFICIAL_MODEL",
+      "questionCount": 9,
+      "totalMarks": 75,
+      "taxonomyRegistry": "officialGrade9LanguageModelHierarchy2026.json",
+      "actualAnnualPaperVerified": false
+    },
+    {
+      "id": "G9-URDU-2026-PECTAA-MODEL-TAXONOMY",
+      "grade": 9,
+      "subject": "Urdu",
+      "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+      "sourcePages": [
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53
+      ],
+      "authorityState": "VERIFIED_MODEL",
+      "documentType": "OFFICIAL_MODEL",
+      "questionCount": 9,
+      "totalMarks": 75,
+      "taxonomyRegistry": "officialGrade9LanguageModelHierarchy2026.json",
+      "actualAnnualPaperVerified": false
+    }
+  ],
   "verifiedQuestionTextCopiedFromPapers": 0,
   "verifiedAcademicContentSeededByThisPolicy": 0,
   "productionWrites": 0,

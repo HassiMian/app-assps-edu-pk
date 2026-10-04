@@ -1,0 +1,705 @@
+{
+  "schemaVersion": "assps-grade9-pectaa-2026-official-language-model-hierarchy-v1",
+  "reviewedOn": "2026-10-04",
+  "sourceDocument": {
+    "id": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+    "authority": "PECTAA",
+    "officialHost": "BISE Sargodha",
+    "documentType": "OFFICIAL_MODEL",
+    "url": "https://site.bisesargodha.edu.pk/Downloads/ModelPapers/Matric/9thRevisedALPNotification.pdf",
+    "indexUrl": "https://site.bisesargodha.edu.pk/MatricModelPapers",
+    "examCohort": "Grade 9 Annual Examination 2026",
+    "publicationBasis": "PECTAA revised notification 07 November 2025",
+    "pdfSha256": "528a6627b7c027c685671de831889aa07aaa36676edf5c5d9e0d93833c46fcef",
+    "byteLength": 29595552,
+    "pdfPhysicalPages": 65,
+    "imageOnlyScan": true,
+    "actual2026AnnualQuestionPaperVerified": false,
+    "evidencePages": {
+      "urduInstructions": [
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "urduModel": [
+        50,
+        51,
+        52,
+        53
+      ],
+      "englishInstructions": [
+        54,
+        55,
+        56
+      ],
+      "englishModel": [
+        57,
+        58,
+        59,
+        60
+      ]
+    }
+  },
+  "purpose": "Verified Punjab-wide MODEL question-category hierarchy only. It is not an inspected 2026 annual actual question paper or an academic content source.",
+  "patterns": [
+    {
+      "grade": 9,
+      "subject": "English",
+      "medium": "English",
+      "totalMarks": 75,
+      "objectiveMarks": 19,
+      "subjectiveMarks": 56,
+      "totalDurationMinutes": 150,
+      "objectiveDurationMinutes": 20,
+      "subjectiveDurationMinutes": 130,
+      "questionCount": 9,
+      "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+      "authorityState": "VERIFIED_MODEL",
+      "sections": [
+        {
+          "label": "Q1",
+          "paperPart": "OBJECTIVE",
+          "sectionMarks": 19,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            55,
+            57
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "MCQ",
+          "taskSubtype": "objective_grammar_vocab",
+          "attempt": 19,
+          "offered": 19,
+          "hierarchyPath": "Q1",
+          "children": [
+            {
+              "label": "Q1 > (a)",
+              "hierarchyPath": "Q1 > (a)",
+              "sectionMarks": 5,
+              "sourcePages": [
+                55,
+                57
+              ],
+              "taskSubtype": "verb_form",
+              "attempt": 5,
+              "offered": 5,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q1 > (b)",
+              "hierarchyPath": "Q1 > (b)",
+              "sectionMarks": 4,
+              "sourcePages": [
+                55,
+                57
+              ],
+              "taskSubtype": "spelling",
+              "attempt": 4,
+              "offered": 4,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q1 > (c)",
+              "hierarchyPath": "Q1 > (c)",
+              "sectionMarks": 5,
+              "sourcePages": [
+                55,
+                57
+              ],
+              "taskSubtype": "underlined_word_meaning",
+              "attempt": 5,
+              "offered": 5,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q1 > (d)",
+              "hierarchyPath": "Q1 > (d)",
+              "sectionMarks": 5,
+              "sourcePages": [
+                55,
+                57
+              ],
+              "taskSubtype": "grammar_recognition",
+              "attempt": 5,
+              "offered": 5,
+              "marksPerItem": 1
+            }
+          ]
+        },
+        {
+          "label": "Q2",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 10,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            55,
+            56,
+            58
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "SHORT",
+          "taskSubtype": "textbook_and_drama",
+          "attempt": 4,
+          "offered": 7,
+          "hierarchyPath": "Q2",
+          "children": [
+            {
+              "label": "Q2 > (a)",
+              "hierarchyPath": "Q2 > (a)",
+              "sectionMarks": 6,
+              "sourcePages": [
+                55,
+                58
+              ],
+              "taskSubtype": "textbook_exercise_short_answer",
+              "attempt": 3,
+              "offered": 5,
+              "marksPerItem": 2
+            },
+            {
+              "label": "Q2 > (b)",
+              "hierarchyPath": "Q2 > (b)",
+              "sectionMarks": 4,
+              "sourcePages": [
+                56,
+                58
+              ],
+              "taskSubtype": "drama_play_analytical_answer",
+              "attempt": 1,
+              "offered": 2,
+              "marksPerItem": 4
+            }
+          ]
+        },
+        {
+          "label": "Q3",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 8,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            58
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "TRANSLATION",
+          "taskSubtype": "textbook_paragraph_translation_or_simplification",
+          "attempt": 2,
+          "offered": 3,
+          "hierarchyPath": "Q3",
+          "children": [],
+          "choiceRule": "ATTEMPT_2_OF_3; TRANSLATE_URDU_OR_REWRITE_SIMPLE_ENGLISH",
+          "marksPerAttempt": 4
+        },
+        {
+          "label": "Q4",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            59
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "POETRY",
+          "taskSubtype": "poem_summary_or_stanza_explanation",
+          "attempt": 1,
+          "offered": 2,
+          "hierarchyPath": "Q4",
+          "children": [],
+          "choiceRule": "ONE_OF_TWO_EXCLUSIVE_ALTERNATIVES",
+          "marksPerAttempt": 5
+        },
+        {
+          "label": "Q5",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            59
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "GRAMMAR",
+          "taskSubtype": "word_phrase_idiom_sentence_usage",
+          "attempt": 5,
+          "offered": 8,
+          "hierarchyPath": "Q5",
+          "children": [],
+          "choiceRule": "ATTEMPT_5_OF_8",
+          "marksPerAttempt": 1
+        },
+        {
+          "label": "Q6",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 8,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            59
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "WRITING",
+          "taskSubtype": "letter_or_story_or_dialogue",
+          "attempt": 1,
+          "offered": 3,
+          "hierarchyPath": "Q6",
+          "children": [],
+          "choiceRule": "ONE_OF_THREE_EXCLUSIVE_ALTERNATIVES",
+          "marksPerAttempt": 8
+        },
+        {
+          "label": "Q7",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 10,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            59
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "COMPREHENSION",
+          "taskSubtype": "unseen_passage_five_answers",
+          "attempt": 5,
+          "offered": 5,
+          "hierarchyPath": "Q7",
+          "children": [],
+          "choiceRule": "COMPULSORY_5_QUESTIONS",
+          "marksPerAttempt": 2
+        },
+        {
+          "label": "Q8",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            59,
+            60
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "TRANSLATION",
+          "taskSubtype": "urdu_to_english_sentences_or_english_medium_ten_sentence_paragraph",
+          "attempt": 5,
+          "offered": 8,
+          "hierarchyPath": "Q8",
+          "children": [
+            {
+              "label": "Q8 > normal",
+              "hierarchyPath": "Q8 > normal",
+              "sourcePages": [
+                59
+              ],
+              "marks": 5,
+              "attempt": 5,
+              "offered": 8,
+              "marksPerItem": 1,
+              "taskSubtype": "urdu_to_english_sentences"
+            },
+            {
+              "label": "Q8 > alternate",
+              "hierarchyPath": "Q8 > alternate",
+              "sourcePages": [
+                56,
+                60
+              ],
+              "marks": 5,
+              "attempt": 1,
+              "offered": 1,
+              "taskSubtype": "ten_sentence_paragraph_english_medium_only",
+              "exclusiveAlternative": true
+            }
+          ],
+          "choiceRule": "NORMAL_5_OF_8_OR_ENGLISH_MEDIUM_ALTERNATE",
+          "marksPerAttempt": 1
+        },
+        {
+          "label": "Q9",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            56,
+            60
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "GRAMMAR",
+          "taskSubtype": "voice_change",
+          "attempt": 5,
+          "offered": 5,
+          "hierarchyPath": "Q9",
+          "children": [],
+          "choiceRule": "COMPULSORY_5",
+          "marksPerAttempt": 1
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "totalMarks": 75,
+      "objectiveMarks": 15,
+      "subjectiveMarks": 60,
+      "totalDurationMinutes": 150,
+      "objectiveDurationMinutes": 20,
+      "subjectiveDurationMinutes": 130,
+      "questionCount": 9,
+      "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+      "authorityState": "VERIFIED_MODEL",
+      "sections": [
+        {
+          "label": "Q1",
+          "paperPart": "OBJECTIVE",
+          "sectionMarks": 15,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            46,
+            50,
+            51
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "MCQ",
+          "taskSubtype": "urdu_literature_and_grammar",
+          "attempt": 15,
+          "offered": 15,
+          "hierarchyPath": "Q1",
+          "children": [
+            {
+              "label": "Q1 > literary",
+              "hierarchyPath": "Q1 > literary",
+              "sectionMarks": 10,
+              "sourcePages": [
+                46,
+                50,
+                51
+              ],
+              "taskSubtype": "prose_7_nazm_2_ghazal_1",
+              "attempt": 10,
+              "offered": 10,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q1 > grammar",
+              "hierarchyPath": "Q1 > grammar",
+              "sectionMarks": 5,
+              "sourcePages": [
+                46,
+                51
+              ],
+              "taskSubtype": "gender_singular_plural_synonym_antonym_idiom",
+              "attempt": 5,
+              "offered": 5,
+              "marksPerItem": 1
+            }
+          ]
+        },
+        {
+          "label": "Q2",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 10,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            47,
+            52
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "POETRY",
+          "taskSubtype": "verse_explanation_nazm_and_ghazal",
+          "attempt": 5,
+          "offered": 7,
+          "hierarchyPath": "Q2",
+          "children": [
+            {
+              "label": "Q2 > nazm",
+              "hierarchyPath": "Q2 > nazm",
+              "sectionMarks": 6,
+              "sourcePages": [
+                47,
+                52
+              ],
+              "taskSubtype": "nazm_couplet_explanation",
+              "attempt": 3,
+              "offered": 4,
+              "marksPerItem": 2
+            },
+            {
+              "label": "Q2 > ghazal",
+              "hierarchyPath": "Q2 > ghazal",
+              "sectionMarks": 4,
+              "sourcePages": [
+                47,
+                52
+              ],
+              "taskSubtype": "ghazal_couplet_explanation",
+              "attempt": 2,
+              "offered": 3,
+              "marksPerItem": 2
+            }
+          ]
+        },
+        {
+          "label": "Q3",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 10,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            47,
+            52
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "PROSE",
+          "taskSubtype": "passage_explanation_with_evidence_credits",
+          "attempt": 1,
+          "offered": 1,
+          "hierarchyPath": "Q3",
+          "children": [
+            {
+              "label": "Q3 > author_name",
+              "hierarchyPath": "Q3 > author_name",
+              "sectionMarks": 1,
+              "sourcePages": [
+                47,
+                52
+              ],
+              "taskSubtype": "author_name",
+              "attempt": 1,
+              "offered": 1,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q3 > lesson_title",
+              "hierarchyPath": "Q3 > lesson_title",
+              "sectionMarks": 1,
+              "sourcePages": [
+                47,
+                52
+              ],
+              "taskSubtype": "lesson_title",
+              "attempt": 1,
+              "offered": 1,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q3 > underlined_vocabulary",
+              "hierarchyPath": "Q3 > underlined_vocabulary",
+              "sectionMarks": 3,
+              "sourcePages": [
+                47,
+                52
+              ],
+              "taskSubtype": "three_underline_word_phrase_meanings",
+              "attempt": 3,
+              "offered": 3,
+              "marksPerItem": 1
+            },
+            {
+              "label": "Q3 > prose_explanation",
+              "hierarchyPath": "Q3 > prose_explanation",
+              "sectionMarks": 5,
+              "sourcePages": [
+                47,
+                52
+              ],
+              "taskSubtype": "meaning_and_context_explanation",
+              "attempt": 1,
+              "offered": 1,
+              "marksPerItem": 5
+            }
+          ]
+        },
+        {
+          "label": "Q4",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 10,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            48,
+            53
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "SHORT",
+          "taskSubtype": "literature_short_answers",
+          "attempt": 5,
+          "offered": 8,
+          "hierarchyPath": "Q4",
+          "children": [],
+          "choiceRule": "ATTEMPT_5_OF_8; 4_PROSE_2_NAZM_2_GHAZAL",
+          "marksPerAttempt": 2
+        },
+        {
+          "label": "Q5",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            48,
+            53
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "PROSE",
+          "taskSubtype": "prose_lesson_summary",
+          "attempt": 1,
+          "offered": 2,
+          "hierarchyPath": "Q5",
+          "children": [],
+          "choiceRule": "ONE_OF_TWO",
+          "marksPerAttempt": 5
+        },
+        {
+          "label": "Q6",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            48,
+            53
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "POETRY",
+          "taskSubtype": "nazm_summary_or_central_idea",
+          "attempt": 1,
+          "offered": 2,
+          "hierarchyPath": "Q6",
+          "children": [],
+          "choiceRule": "ONE_OF_TWO",
+          "marksPerAttempt": 5
+        },
+        {
+          "label": "Q7",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 10,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            49,
+            53
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "WRITING",
+          "taskSubtype": "application_or_letter",
+          "attempt": 1,
+          "offered": 2,
+          "hierarchyPath": "Q7",
+          "children": [],
+          "choiceRule": "APPLICATION_OR_LETTER",
+          "marksPerAttempt": 10
+        },
+        {
+          "label": "Q8",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            49,
+            53
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "WRITING",
+          "taskSubtype": "story_or_dialogue",
+          "attempt": 1,
+          "offered": 2,
+          "hierarchyPath": "Q8",
+          "children": [],
+          "choiceRule": "STORY_OR_DIALOGUE",
+          "marksPerAttempt": 5
+        },
+        {
+          "label": "Q9",
+          "paperPart": "SUBJECTIVE",
+          "sectionMarks": 5,
+          "sourceDocumentId": "PECTAA-G9-2026-REVISED-MODEL-SARGODHA-SHA528A6627",
+          "sourcePages": [
+            49,
+            53
+          ],
+          "authorityState": "VERIFIED_MODEL",
+          "taskFamily": "GRAMMAR",
+          "taskSubtype": "sentence_correction_completion_and_idiomatic_usage",
+          "attempt": 5,
+          "offered": 7,
+          "hierarchyPath": "Q9",
+          "children": [
+            {
+              "label": "Q9 > grammar_candidate_pool",
+              "hierarchyPath": "Q9 > grammar_candidate_pool",
+              "sourcePages": [
+                49,
+                53
+              ],
+              "offered": 4,
+              "taskSubtype": "sentence_correction_and_completion",
+              "countsTowardSectionMarks": false
+            },
+            {
+              "label": "Q9 > proverb_candidate_pool",
+              "hierarchyPath": "Q9 > proverb_candidate_pool",
+              "sourcePages": [
+                49,
+                53
+              ],
+              "offered": 3,
+              "taskSubtype": "proverb_and_idiom_completion",
+              "countsTowardSectionMarks": false
+            }
+          ],
+          "choiceRule": "ATTEMPT_5_OF_7",
+          "marksPerAttempt": 1
+        }
+      ]
+    }
+  ],
+  "segregation": {
+    "patternCategoriesCanInformAuthoring": true,
+    "modelMustNotBeMislabelledActualPaper": true,
+    "actualAnnualBoardPaperArtifactStillRequiredForActualPaperOccurrenceClaims": true,
+    "copyModelPaperQuestionsOrPassages": false,
+    "originalQuestionContentAuthority": "CURRENT_OFFICIAL_TEXTBOOK_OR_GRAMMAR_SOURCE_ONLY",
+    "preserveASSPSPaperDocumentVisualFormat": true,
+    "fullTextbookBankDefault": true,
+    "grade9ALP2026AppliesOnlyWhenExamYearFilterSelected": true,
+    "releaseApproved": false,
+    "academicApprovedQuestionCountDelta": 0,
+    "productionWrites": 0
+  },
+  "pendingActualPaperVerification": [
+    {
+      "subject": "English",
+      "year": 2026,
+      "grade": 9,
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "parts": [
+        "OBJECTIVE",
+        "SUBJECTIVE"
+      ],
+      "groups": [
+        "I",
+        "II"
+      ],
+      "state": "ACTUAL_EXAM_PAGES_PENDING"
+    },
+    {
+      "subject": "Urdu",
+      "year": 2026,
+      "grade": 9,
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "parts": [
+        "OBJECTIVE",
+        "SUBJECTIVE"
+      ],
+      "groups": [
+        "I",
+        "II"
+      ],
+      "state": "ACTUAL_EXAM_PAGES_PENDING"
+    }
+  ]
+}

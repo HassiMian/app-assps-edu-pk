@@ -36,7 +36,8 @@ test('research queue enumerates both grades/subjects/groups/parts without patter
  assert(j.priorityAcquisitionQueue.every(x=>x.allowPatternApproval===false));
 });
 test('verified hierarchy requires real page, marks and choice review',()=>{
- assert.equal(j.verifiedHierarchyEntries.length,0);
+ assert.equal(j.verifiedHierarchyEntries.length,2);
+ assert(j.verifiedHierarchyEntries.every(x=>x.authorityState==='VERIFIED_MODEL'&&x.documentType==='OFFICIAL_MODEL'&&!x.actualAnnualPaperVerified));
  assert.equal(j.rules.exactCategoryHierarchyMustBeBackedByPageReference,true);
  assert.equal(j.rules.marksChoiceAndQuestionOrderRequireActualDocumentVerification,true);
 });
