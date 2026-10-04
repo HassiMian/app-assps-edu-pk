@@ -45,12 +45,29 @@ const generalLimiter = rateLimit({
   message: { success: false, message: 'Too many requests. Please try again later.' },
 })
 
+// Login throttling is scoped by network and normalized login identity, not
+// by the Next.js reverse-proxy IP or unrelated authenticated /auth/me traffic.
+// The auth route separately blocks repeated incorrect passwords (5 failures).
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 60,
   standardHeaders: true,
   legacyHeaders: false,
-  message: { success: false, message: 'Too many authentication attempts. Please try again later.' },
+  keyGenerator: (req) => {
+    const identifier = String(req.body?.email || req.body?.username || req.body?.loginId || '')
+      .trim().toLowerCase()
+    return `${req.ip}:${require('crypto').createHash('sha256').update(identifier).digest('hex')}`
+  },
+  message: { success: false, message: 'Too many authentication attempts for this login. Please wait before trying again.' },
+})
+
+// Password-recovery operations retain independent per-IP throttling.
+const recoveryLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: 'Too many recovery requests. Please try again later.' },
 })
 
 app.use(generalLimiter)
@@ -214,7 +231,11 @@ const registerRoutes = (router) => {
 const apiRouter = express.Router()
 registerRoutes(apiRouter)
 
-app.use(['/api/auth', '/api/admin/auth'], authLimiter)
+app.use(['/api/auth/login', '/api/admin/auth/login'], authLimiter)
+app.use([
+  '/api/auth/password-reset/request', '/api/auth/password-reset/confirm',
+  '/api/admin/auth/password-reset/request', '/api/admin/auth/password-reset/confirm',
+], recoveryLimiter)
 app.use('/api', apiRouter)
 app.use('/api/admin', apiRouter) // Alias for Super App
 // ─── 404 Handler ──────────────────────────────────────────────────────────────
