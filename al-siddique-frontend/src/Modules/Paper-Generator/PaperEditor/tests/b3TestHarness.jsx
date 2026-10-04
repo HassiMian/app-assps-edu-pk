@@ -42,7 +42,12 @@ function B3HarnessApp() {
       } else if (type === 'canonical-urdu') {
         p = canonicalDocs.find(doc => doc.id.includes('class-6-urdu'))
       } else if (type === 'pristine-v13') {
-        p = v13Papers[0]
+        // B3 rich-text formatting acceptance requires a pristine official paper
+        // that deterministically migrates to at least one EDITABLE_RICH node.
+        // The dataset's first record is Class 1 Urdu and is intentionally
+        // structured (fill_blank/grammar_table), so using v13Papers[0] made the
+        // rich-text selector test exercise the wrong content class.
+        p = v13Papers.find(item => item.id === 'official-first-term-2026-class-1-english') || v13Papers[0]
       } else if (type === 'modified-v13') {
         const modified = JSON.parse(JSON.stringify(v13Papers[0]))
         modified.official_section[0].content = 'Custom modified question by user'

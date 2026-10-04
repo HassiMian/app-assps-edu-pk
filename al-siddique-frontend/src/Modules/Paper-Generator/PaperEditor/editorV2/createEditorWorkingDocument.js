@@ -260,6 +260,8 @@ export function createEditorWorkingDocument(canonicalDoc) {
       sectionLayoutOverrides: {},
       answerLinesByNode: {},
       structuredFieldStyles: {},
+      headerFieldStyles: {},
+      headerTemplate: null,
       printMode: 'a4',
       language: lang,
       direction: dir,

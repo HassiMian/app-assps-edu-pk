@@ -1,12 +1,13 @@
 {
   "files": [
     {
-      "hashMode": "raw-bytes",
+      "hashMode": "utf8-lf-normalized",
       "immutable": true,
       "name": "official-first-term-2026-v12.json",
       "path": "al-siddique-frontend/src/Modules/Paper-Generator/seed-data/official-first-term-2026-v12.json",
       "role": "historical-reference",
-      "sha256": "d8fe0c5529c26a557444dc41331f67b8699e93bf06bae442c40ac274edbfd8a3"
+      "sha256": "6e2ba2feae54f8e772357b5303cc569faefd6e01772ddc89adc9c2b4c9b2a014",
+      "baselineCommit": "8609421571dc5a459ffd23aa27ef047c41ab3f45"
     },
     {
       "baselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",

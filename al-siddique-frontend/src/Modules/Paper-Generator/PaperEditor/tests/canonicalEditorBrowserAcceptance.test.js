@@ -14,6 +14,7 @@ const frontendRoot = path.resolve(__dirname, '../../../../..')
 let server
 let browser
 let page
+let headerHtmlBeforeBodyFormatting = null
 const PORT = 5189
 const BASE_URL = `http://localhost:${PORT}/b3-test.html`
 
@@ -61,6 +62,8 @@ test('B3-01: Open canonical editor from pristine official paper', async () => {
 
   const editableCount = await page.locator('.canonical-editable-field').count()
   assert.ok(editableCount > 0, 'Must render editable fields for academic questions')
+  const headerElem = page.locator('.canonical-school-header')
+  headerHtmlBeforeBodyFormatting = await headerElem.count() > 0 ? await headerElem.innerHTML() : null
 })
 
 test('B3-02: Select exactly one word. Bold. Only selected word changes', async () => {
@@ -148,14 +151,16 @@ test('B3-04: Question 2 unchanged', async () => {
   assert.strictEqual(styledSpanCount, 0, 'Question 2 must not have font-size spans')
 })
 
-test('B3-05: Header style unchanged', async () => {
+test('B3-05: Header style unchanged by body formatting', async () => {
   const headerElem = page.locator('.canonical-school-header')
   const count = await headerElem.count()
   if (count > 0) {
-    const strongInHeader = await headerElem.locator('strong').count()
-    const span18InHeader = await headerElem.locator('span[style*="18pt"]').count()
-    assert.strictEqual(strongInHeader, 0, 'Header must not be modified by body toolbar bold')
-    assert.strictEqual(span18InHeader, 0, 'Header must not be modified by body toolbar font size')
+    const currentHeaderHtml = await headerElem.innerHTML()
+    assert.strictEqual(
+      currentHeaderHtml,
+      headerHtmlBeforeBodyFormatting,
+      'Body toolbar formatting must not mutate the independently styled header'
+    )
   }
 })
 
@@ -438,17 +443,21 @@ test('B3-16: Canonical authority/sourceIdentity/source ledger baseline unchanged
   assert.strictEqual(integrityResult.ok, true, `Baseline integrity check failed: ${integrityResult?.error}`)
 })
 
-test('B3-17: Modified V13 legacy paper does NOT get replaced by pristine canonical paper', async () => {
+test('B3-17: Modified V13 paper imports to canonical without reverting user content', async () => {
   await page.locator('#btn-load-modified-v13').click()
   await page.waitForTimeout(1000)
 
-  // Verify that Canonical Paper Editor is NOT mounted
+  // Canonical cutover now intentionally imports supported modified V13 working
+  // copies through the guarded adapter. The invariant is preservation of the
+  // user mutation — never replacement with the pristine source.
   const canonicalCount = await page.locator('.canonical-paper-editor-container').count()
-  assert.strictEqual(canonicalCount, 0, 'Modified V13 paper must NOT route to Canonical Editor')
+  assert.strictEqual(canonicalCount, 1, 'Supported modified V13 paper must route to Canonical Editor')
 
-  // Verify legacy editor is mounted and contains custom text
-  const legacyContent = await page.content()
-  assert.ok(legacyContent.includes('Custom modified question by user'), 'Custom modified content must be preserved in legacy editor')
+  const canonicalContent = await page.locator('.canonical-paper-editor-container').textContent()
+  assert.ok(
+    canonicalContent.includes('Custom modified question by user'),
+    'Modified V13 user content must survive canonical import'
+  )
 })
 
 test('B4-BROWSER-01: Real MCQ persistence: edit option, add option, move, save, reload, assert, and Edit/View/Edit parity', async () => {

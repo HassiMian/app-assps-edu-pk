@@ -1166,6 +1166,51 @@ export class EditorWorkingStore {
     }
   }
 
+  getHeaderFieldStyle(fieldKey) {
+    if (!fieldKey) return {}
+    return { ...(this._workingDoc.presentation?.headerFieldStyles?.[fieldKey] || {}) }
+  }
+
+  setHeaderFieldStyle(fieldKey, patch = {}) {
+    if (!fieldKey || typeof fieldKey !== 'string') return false
+    if (!this._workingDoc.presentation) this._workingDoc.presentation = {}
+    if (!this._workingDoc.presentation.headerFieldStyles) this._workingDoc.presentation.headerFieldStyles = {}
+    const current = this._workingDoc.presentation.headerFieldStyles[fieldKey] || {}
+    const merged = { ...current }
+    for (const [key, value] of Object.entries(patch || {})) {
+      if (value === null || value === undefined || value === '') delete merged[key]
+      else merged[key] = value
+    }
+    const sanitized = sanitizeStructuredFieldStyle(merged)
+    if (Object.keys(sanitized).length) this._workingDoc.presentation.headerFieldStyles[fieldKey] = sanitized
+    else delete this._workingDoc.presentation.headerFieldStyles[fieldKey]
+    this._workingDoc.presentation.isDirty = true
+    this._recomputeDocumentDirty(); this.publishDocumentChange(); return true
+  }
+
+  exportHeaderTemplate() {
+    return {
+      templateVersion: 1,
+      metadata: {
+        fields: Object.fromEntries(Object.entries(this._workingDoc.metadata || {}).filter(([k]) => !['dirtyFields','customFields','customFieldsDirty','hiddenHeaderFields','hiddenHeaderFieldsDirty','language','direction'].includes(k))),
+        customFields: JSON.parse(JSON.stringify(this._workingDoc.metadata?.customFields || [])),
+        hiddenHeaderFields: [...(this._workingDoc.metadata?.hiddenHeaderFields || [])],
+      },
+      paperTotal: this.getEffectivePaperTotal?.() ?? null,
+      styles: JSON.parse(JSON.stringify(this._workingDoc.presentation?.headerFieldStyles || {})),
+    }
+  }
+
+  applyHeaderTemplate(template = {}) {
+    if (!template || template.templateVersion !== 1 || typeof template.metadata !== 'object') return false
+    for (const [key, value] of Object.entries(template.metadata.fields || {})) this.setMetadataField(key, value)
+    if (Array.isArray(template.metadata.customFields)) { this._workingDoc.metadata.customFields = JSON.parse(JSON.stringify(template.metadata.customFields)); this._workingDoc.metadata.customFieldsDirty = true }
+    if (Array.isArray(template.metadata.hiddenHeaderFields)) { this._workingDoc.metadata.hiddenHeaderFields = [...template.metadata.hiddenHeaderFields]; this._workingDoc.metadata.hiddenHeaderFieldsDirty = true }
+    if (template.paperTotal !== null && template.paperTotal !== undefined) this.setPaperTotalMarks(template.paperTotal)
+    this._workingDoc.presentation.headerFieldStyles = Object.fromEntries(Object.entries(template.styles || {}).map(([k,v]) => [k, sanitizeStructuredFieldStyle(v)]))
+    this._workingDoc.presentation.isDirty = true; this._recomputeDocumentDirty(); this.publishDocumentChange(); return true
+  }
+
   getStructuredFieldStyle(controlKey) {
     if (!controlKey) return {}
     return {
@@ -1338,6 +1383,7 @@ export class EditorWorkingStore {
         sectionLayoutOverrides: this._workingDoc.presentation.sectionLayoutOverrides || {},
         answerLinesByNode: this._workingDoc.presentation.answerLinesByNode || {},
         structuredFieldStyles: this._workingDoc.presentation.structuredFieldStyles || {},
+        headerFieldStyles: this._workingDoc.presentation.headerFieldStyles || {},
       },
     }
 
@@ -1529,6 +1575,10 @@ export class EditorWorkingStore {
           structuredFieldStyles: {
             ...(candidateDoc.presentation.structuredFieldStyles || {}),
             ...(compactDraft.presentationPatch.structuredFieldStyles || {}),
+          },
+          headerFieldStyles: {
+            ...(candidateDoc.presentation.headerFieldStyles || {}),
+            ...(compactDraft.presentationPatch.headerFieldStyles || {}),
           },
         })
       }

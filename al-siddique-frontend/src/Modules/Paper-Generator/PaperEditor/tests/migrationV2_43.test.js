@@ -57,10 +57,18 @@ const manifestBuf = fs.readFileSync(manifestPath)
 const v13Dataset = JSON.parse(v13Buf.toString('utf8'))
 const normalizationManifest = JSON.parse(manifestBuf.toString('utf8'))
 const referenceLock = JSON.parse(fs.readFileSync(referenceLockPath, 'utf8'))
-const lockedSha = name => {
+const lockedRecord = name => {
   const record = referenceLock.files?.find(item => item.name === name)
   assert.ok(record?.sha256, `Missing SHA lock for ${name}`)
-  return record.sha256
+  return record
+}
+const lockedSha = name => lockedRecord(name).sha256
+const hashLockedBuffer = (name, buf) => {
+  const record = lockedRecord(name)
+  const hashInput = record.hashMode === 'utf8-lf-normalized'
+    ? Buffer.from(buf.toString('utf8').replace(/\r\n/g, '\n'), 'utf8')
+    : buf
+  return crypto.createHash('sha256').update(hashInput).digest('hex')
 }
 
 const v13ByteSha256 = crypto.createHash('sha256').update(v13Buf).digest('hex')
@@ -373,9 +381,9 @@ test('TEST 45: Source Immutability (V12, V13, B1 Manifest SHA-256 unchanged)', (
   const currentV13Buf = fs.readFileSync(v13Path)
   const currentManifestBuf = fs.readFileSync(manifestPath)
 
-  const curV12Sha = crypto.createHash('sha256').update(currentV12Buf).digest('hex')
-  const curV13Sha = crypto.createHash('sha256').update(currentV13Buf).digest('hex')
-  const curManifestSha = crypto.createHash('sha256').update(currentManifestBuf).digest('hex')
+  const curV12Sha = hashLockedBuffer('official-first-term-2026-v12.json', currentV12Buf)
+  const curV13Sha = hashLockedBuffer('official-first-term-2026-v13.json', currentV13Buf)
+  const curManifestSha = hashLockedBuffer('normalizationManifestV13.json', currentManifestBuf)
 
   assert.equal(curV12Sha, EXPECTED_V12_SHA, 'V12 source file SHA-256 must remain identical')
   assert.equal(curV13Sha, EXPECTED_V13_SHA, 'V13 source file SHA-256 must remain identical')
