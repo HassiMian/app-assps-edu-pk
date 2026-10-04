@@ -3,9 +3,10 @@
 
 const express = require('express')
 const router  = express.Router()
-const { query } = require('../config/database')
+const { query, pool } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
+const { ensureTeacherIdentity } = require('../services/portalIdentityService')
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
@@ -48,7 +49,6 @@ const EMPLOYEE_WRITE_FIELDS = [
   'branch_name',
   'app_access',
   'portal_username',
-  'portal_password',
   'portal_role',
   'portal_permissions',
   'portal_active',
@@ -231,13 +231,44 @@ router.post('/', protect, canManageStaff, async (req, res) => {
       ...requestFields.map(field => jsonValue(field, req.body[field])),
     ]
     const placeholders = values.map((_, idx) => `$${idx + 1}`).join(',')
-    const result = await query(`
-      INSERT INTO employees (${columns.join(', ')})
-      VALUES (${placeholders})
-      RETURNING *
-    `, values)
+    const client = await pool.connect()
+    let employee
+    let portalIdentity = null
+    try {
+      await client.query('BEGIN')
+      const result = await client.query(`
+        INSERT INTO employees (${columns.join(', ')})
+        VALUES (${placeholders})
+        RETURNING *
+      `, values)
+      employee = result.rows[0]
+      const requestedPortalRole = String(req.body.portal_role || '').toLowerCase()
+      const isTeacher = requestedPortalRole === 'teacher' || String(designation || '').toLowerCase().includes('teacher')
+      if (isTeacher) {
+        portalIdentity = await ensureTeacherIdentity(client, { schoolId: currentSchoolId(req), employee })
+        const linked = await client.query('SELECT * FROM employees WHERE id=$1 AND school_id=$2 LIMIT 1', [employee.id, currentSchoolId(req)])
+        employee = linked.rows[0] || employee
+      }
+      await client.query('COMMIT')
+    } catch (identityError) {
+      await client.query('ROLLBACK')
+      throw identityError
+    } finally {
+      client.release()
+    }
 
-    res.status(201).json({ success: true, message: 'Employee add ho gaya', data: result.rows[0] })
+    res.set('Cache-Control', 'private, no-store, max-age=0')
+    res.status(201).json({
+      success: true,
+      message: portalIdentity ? 'Employee add ho gaya aur teacher portal identity provision ho gayi' : 'Employee add ho gaya',
+      data: employee,
+      portal_identity: portalIdentity ? {
+        loginId: portalIdentity.loginId,
+        email: portalIdentity.email,
+        created: portalIdentity.created,
+        temporaryPassword: portalIdentity.created ? portalIdentity.temporaryPassword : null,
+      } : null,
+    })
   } catch (err) {
     if (err.code === '23505')
       return res.status(400).json({ success: false, message: 'EMP ID already exists' })
