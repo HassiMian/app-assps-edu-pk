@@ -206,6 +206,7 @@ const registerRoutes = (router) => {
   mount('/dashboard',  './routes/dashboardRoutes')
   mount('/events',     './routes/eventsRoutes')
   mount('/notices',    './routes/noticesRoutes')
+  mount('/portal/paper-studio', './routes/paperStudioRoutes')
   mount('/portal',     './routes/portalRoutes')
   mount('/ops',        './routes/opsRoutes')
   mount('/daily-diary','./routes/dailyDiaryRoutes')
