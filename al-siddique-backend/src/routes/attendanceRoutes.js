@@ -4,6 +4,7 @@ const router = express.Router()
 const { pool, query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
+const { teacherStudentScopeClause } = require('../services/teacherAssignmentService')
 const {
   getTwilioConfigForSchool,
   buildTwilioClient,
@@ -12,7 +13,7 @@ const {
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canMarkAttendance = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const ATTENDANCE_STATUSES = ['present', 'absent', 'leave', 'late']
-const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'teacher'])
+const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin'])
 
 function getPakistanDateOnly(date = new Date()) {
   try {
@@ -31,6 +32,7 @@ function scopedAttendanceReadClause(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
   const prefix = alias ? `${alias}.` : ''
   if (ATTENDANCE_READ_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (role === 'teacher') return teacherStudentScopeClause(req, alias, startIndex)
   if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.attendance.read')) {
     return { clause: '', params: [], nextIndex: startIndex }
   }
@@ -278,6 +280,17 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
         rosterParams.push(schoolId)
       }
     }
+    if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      rosterSql += ` AND EXISTS (
+        SELECT 1 FROM teacher_class_assignments tca
+        WHERE tca.school_id = students.school_id
+          AND tca.teacher_user_id = $${pIdx++}
+          AND tca.is_active = true
+          AND LOWER(tca.class_name) = LOWER(COALESCE(students.class,''))
+          AND (COALESCE(tca.section,'')='' OR LOWER(tca.section)=LOWER(COALESCE(students.section,'')))
+      )`
+      rosterParams.push(req.user?.id || null)
+    }
 
     const rosterResult = await client.query(rosterSql, rosterParams)
     const studentMap = new Map(rosterResult.rows.map(s => [Number(s.id), s]))
@@ -419,6 +432,17 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
         studentSql += ` AND school_id = $${idx++}`
         params.push(schoolId)
       }
+    }
+    if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      studentSql += ` AND EXISTS (
+        SELECT 1 FROM teacher_class_assignments tca
+        WHERE tca.school_id = students.school_id
+          AND tca.teacher_user_id = $${idx++}
+          AND tca.is_active = true
+          AND LOWER(tca.class_name) = LOWER(COALESCE(students.class,''))
+          AND (COALESCE(tca.section,'')='' OR LOWER(tca.section)=LOWER(COALESCE(students.section,'')))
+      )`
+      params.push(req.user?.id || null)
     }
     studentSql += ' LIMIT 1'
     const studentRes = await query(studentSql, params)

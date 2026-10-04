@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const { query } = require('../config/database')
 
 const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev-jwt-secret')
+const DEMO_LOGIN_ENABLED = process.env.NODE_ENV !== 'production' && process.env.DEMO_LOGIN_ENABLED === 'true'
 
 if (process.env.NODE_ENV === 'production' && !JWT_SECRET) {
   throw new Error('JWT_SECRET is required in production.')
@@ -158,11 +159,17 @@ function normalizeSchoolId(value) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : null
 }
 
+function canonicalRuntimeRole(role) {
+  const value = String(role || '').trim().toLowerCase()
+  if (value === 'school_admin' || value === 'schooladmin') return 'admin'
+  return value
+}
+
 function buildUserContext(user, school = null) {
   return {
     id: user.id,
     email: user.email || null,
-    role: user.role,
+    role: canonicalRuntimeRole(user.role),
     school_id: normalizeSchoolId(user.school_id),
     school_code: school?.code || user.school_code || user.schoolCode || null,
     tenant_id: user.tenant_id || user.tenantId || school?.tenant_id || null,
@@ -263,6 +270,9 @@ async function protect(req, res, next) {
       req.tenant_id = req.user.tenant_id || school?.tenant_id || null
       req.user.tenant_id = req.tenant_id
       req.user.school_code = req.school_code
+      if (!DEMO_LOGIN_ENABLED && String(school?.code || '').trim().toLowerCase() === 'demo') {
+        return sendJson(res, 403, { message: 'Demo access is currently disabled.' })
+      }
       if (!isSchoolActive(school)) {
         return sendJson(res, 403, {
           message: `School access disabled. Subscription status: ${school.status}. Contact your administrator.`,
@@ -292,7 +302,7 @@ async function protect(req, res, next) {
 }
 
 function adminOnly(req, res, next) {
-  const allowed = ['super_admin', 'admin', 'principal']
+  const allowed = ['super_admin', 'admin', 'school_admin', 'principal']
   if (!req.user?.role || !allowed.includes(req.user.role)) {
     return sendJson(res, 403, { message: 'Admin or principal only' })
   }

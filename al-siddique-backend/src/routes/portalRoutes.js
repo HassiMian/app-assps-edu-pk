@@ -6,6 +6,7 @@ const router  = express.Router()
 const { pool } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { ensureTeacherAssignmentSchema, getTeacherAssignments, teacherCanAccessClass } = require('../services/teacherAssignmentService')
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
 
 function toSafeDate(value) {
@@ -70,7 +71,9 @@ router.get('/dashboard', protect, async (req, res) => {
     const today    = new Date().toISOString().split('T')[0]
     const role = String(req.user?.role || '').toLowerCase()
     const scopedPortalRole = role === 'parent' || role === 'student'
+    const isTeacher = role === 'teacher'
     const studentOwnerColumn = role === 'parent' ? 'parent_user_id' : role === 'student' ? 'student_user_id' : null
+    if (isTeacher) await ensureTeacherAssignmentSchema()
 
     let studentsRes = { rows: [] }
     let attendanceRes = { rows: [] }
@@ -81,19 +84,54 @@ router.get('/dashboard', protect, async (req, res) => {
     let isDbOffline = false
 
     try {
-      const studentQuery = scopedPortalRole
-        ? `SELECT * FROM students WHERE school_id = $1 AND ${studentOwnerColumn} = $2 ORDER BY created_at DESC`
-        : 'SELECT * FROM students WHERE school_id = $1 ORDER BY created_at DESC'
-      const studentParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
+      let studentQuery
+      let studentParams
+      if (scopedPortalRole) {
+        studentQuery = `SELECT * FROM students WHERE school_id = $1 AND ${studentOwnerColumn} = $2 ORDER BY created_at DESC`
+        studentParams = [schoolId, req.user?.id || null]
+      } else if (isTeacher) {
+        studentQuery = `
+          SELECT s.* FROM students s
+          WHERE s.school_id=$1 AND s.is_active=true
+            AND EXISTS (
+              SELECT 1 FROM teacher_class_assignments tca
+              WHERE tca.school_id=s.school_id AND tca.teacher_user_id=$2 AND tca.is_active=true
+                AND LOWER(tca.class_name)=LOWER(COALESCE(s.class,''))
+                AND (COALESCE(tca.section,'')='' OR LOWER(tca.section)=LOWER(COALESCE(s.section,'')))
+            )
+          ORDER BY s.class, s.section, s.roll_number`
+        studentParams = [schoolId, req.user?.id || null]
+      } else {
+        studentQuery = 'SELECT * FROM students WHERE school_id = $1 ORDER BY created_at DESC'
+        studentParams = [schoolId]
+      }
 
-      const attendanceQuery = scopedPortalRole
-        ? `SELECT a.status, COUNT(*) as count
+      let attendanceQuery
+      let attendanceParams
+      if (scopedPortalRole) {
+        attendanceQuery = `SELECT a.status, COUNT(*) as count
            FROM attendance a
            JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
            WHERE a.school_id = $1 AND a.date::date = $2 AND s.${studentOwnerColumn} = $3
            GROUP BY a.status`
-        : 'SELECT status, COUNT(*) as count FROM attendance WHERE school_id = $1 AND date::date = $2 GROUP BY status'
-      const attendanceParams = scopedPortalRole ? [schoolId, today, req.user?.id || null] : [schoolId, today]
+        attendanceParams = [schoolId, today, req.user?.id || null]
+      } else if (isTeacher) {
+        attendanceQuery = `SELECT a.status, COUNT(*) as count
+           FROM attendance a
+           JOIN students s ON s.id=a.student_id AND s.school_id=a.school_id
+           WHERE a.school_id=$1 AND a.date::date=$2
+             AND EXISTS (
+               SELECT 1 FROM teacher_class_assignments tca
+               WHERE tca.school_id=s.school_id AND tca.teacher_user_id=$3 AND tca.is_active=true
+                 AND LOWER(tca.class_name)=LOWER(COALESCE(s.class,''))
+                 AND (COALESCE(tca.section,'')='' OR LOWER(tca.section)=LOWER(COALESCE(s.section,'')))
+             )
+           GROUP BY a.status`
+        attendanceParams = [schoolId, today, req.user?.id || null]
+      } else {
+        attendanceQuery = 'SELECT status, COUNT(*) as count FROM attendance WHERE school_id = $1 AND date::date = $2 GROUP BY status'
+        attendanceParams = [schoolId, today]
+      }
 
       const feesQuery = scopedPortalRole
         ? `SELECT f.status, COALESCE(SUM(f.amount::numeric),0) as total, COUNT(*) as count
@@ -104,13 +142,34 @@ router.get('/dashboard', protect, async (req, res) => {
         : 'SELECT status, COALESCE(SUM(amount::numeric),0) as total, COUNT(*) as count FROM fee_challans WHERE school_id = $1 GROUP BY status'
       const feesParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
 
+      let noticesPromise
+      if (role === 'parent' || role === 'student') {
+        const audience = role === 'parent' ? 'parents' : 'students'
+        noticesPromise = pool.query(`
+          SELECT * FROM notices
+          WHERE school_id=$1
+            AND (recipient_type='[]'::jsonb OR recipient_type ? $2 OR recipient_type ? 'all')
+            AND (expires_at IS NULL OR expires_at >= CURRENT_DATE)
+          ORDER BY is_pinned DESC, created_at DESC LIMIT 5`, [schoolId, audience]).catch(() => ({ rows: [] }))
+      } else if (isTeacher) {
+        noticesPromise = pool.query(`
+          SELECT * FROM notices
+          WHERE school_id=$1
+            AND (recipient_type='[]'::jsonb OR recipient_type ? 'teachers' OR recipient_type ? 'all')
+            AND (teacher_ids='[]'::jsonb OR teacher_ids ? $2)
+            AND (expires_at IS NULL OR expires_at >= CURRENT_DATE)
+          ORDER BY is_pinned DESC, created_at DESC LIMIT 5`, [schoolId, String(req.user?.id || '')]).catch(() => ({ rows: [] }))
+      } else {
+        noticesPromise = pool.query('SELECT * FROM notices WHERE school_id = $1 AND (expires_at IS NULL OR expires_at >= CURRENT_DATE) ORDER BY is_pinned DESC, created_at DESC LIMIT 5', [schoolId]).catch(() => ({ rows: [] }))
+      }
+
       const [r1, r2, r3, r4, r5, r6] = await Promise.all([
         pool.query(studentQuery, studentParams),
         pool.query(attendanceQuery, attendanceParams),
-        pool.query(feesQuery, feesParams),
-        scopedPortalRole ? Promise.resolve({ rows: [] }) : pool.query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]).catch(() => ({ rows: [] })),
-        pool.query('SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 5', [schoolId]).catch(() => ({ rows: [] })),
-        pool.query('SELECT * FROM exams WHERE school_id = $1 ORDER BY exam_date DESC LIMIT 10', [schoolId]).catch(() => ({ rows: [] })),
+        isTeacher ? Promise.resolve({ rows: [] }) : pool.query(feesQuery, feesParams),
+        (scopedPortalRole || isTeacher) ? Promise.resolve({ rows: [] }) : pool.query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]).catch(() => ({ rows: [] })),
+        noticesPromise,
+        pool.query('SELECT * FROM exams WHERE school_id = $1 ORDER BY COALESCE(start_date, end_date, created_at::date) DESC LIMIT 20', [schoolId]).catch(() => ({ rows: [] })),
       ])
       studentsRes = r1
       attendanceRes = r2
@@ -271,7 +330,7 @@ router.get('/dashboard', protect, async (req, res) => {
       ORDER BY DATE_TRUNC('month', created_at)
     `
     const feeMonthlyParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
-    const feeMonthlyRes = await pool.query(feeMonthlyQuery, feeMonthlyParams).catch(() => ({ rows: [] }))
+    const feeMonthlyRes = isTeacher ? { rows: [] } : await pool.query(feeMonthlyQuery, feeMonthlyParams).catch(() => ({ rows: [] }))
 
     const revenueData = feeMonthlyRes.rows.map(r => ({
       name:      r.month,
@@ -288,21 +347,65 @@ router.get('/dashboard', protect, async (req, res) => {
       phone: s.parent_phone || s.phone,
     }))
 
-    // Gender split
-    const boys  = allStudents.filter(s => (s.gender || '').toLowerCase() === 'male').length   || Math.round(totalStudents * 0.57)
-    const girls = allStudents.filter(s => (s.gender || '').toLowerCase() === 'female').length || (totalStudents - Math.round(totalStudents * 0.57))
+    // Gender split — never synthesize missing demographic data.
+    const boys = allStudents.filter(s => (s.gender || '').toLowerCase() === 'male').length
+    const girls = allStudents.filter(s => (s.gender || '').toLowerCase() === 'female').length
+    const unknownGender = Math.max(0, totalStudents - boys - girls)
     const genderData = [
-      { name: 'Boys',  value: boys  },
+      { name: 'Boys', value: boys },
       { name: 'Girls', value: girls },
+      ...(unknownGender ? [{ name: 'Not recorded', value: unknownGender }] : []),
     ]
 
-    // Weekly attendance trend (mock week based on real today's %age)
-    const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const attendanceTrend = weekDays.map((day, i) => ({
-      name:    day,
-      present: Math.max(0, presentCount + Math.floor(Math.random() * 4 - 2)),
-      absent:  Math.max(0, absentCount  + Math.floor(Math.random() * 2)),
+    const attendanceBreakdown = [
+      { name: 'Present', value: presentCount },
+      { name: 'Absent', value: absentCount },
+      { name: 'Late', value: lateCount },
+      { name: 'Leave', value: leaveCount },
+      ...(unmarkedCount ? [{ name: 'Unmarked', value: unmarkedCount }] : []),
+    ]
+
+    // Weekly attendance trend from persisted attendance rows only.
+    let trendSql = `
+      SELECT a.date::date AS day,
+        COUNT(*) FILTER (WHERE a.status='present')::int AS present,
+        COUNT(*) FILTER (WHERE a.status='absent')::int AS absent,
+        COUNT(*) FILTER (WHERE a.status='late')::int AS late,
+        COUNT(*) FILTER (WHERE a.status='leave')::int AS leave
+      FROM attendance a
+      JOIN students s ON s.id=a.student_id AND s.school_id=a.school_id
+      WHERE a.school_id=$1
+    `
+    const trendParams = [schoolId]
+    if (scopedPortalRole) {
+      trendSql += ` AND s.${studentOwnerColumn}=$2`
+      trendParams.push(req.user?.id || null)
+    } else if (isTeacher) {
+      trendSql += ` AND EXISTS (
+        SELECT 1 FROM teacher_class_assignments tca
+        WHERE tca.school_id=s.school_id AND tca.teacher_user_id=$2 AND tca.is_active=true
+          AND LOWER(tca.class_name)=LOWER(COALESCE(s.class,''))
+          AND (COALESCE(tca.section,'')='' OR LOWER(tca.section)=LOWER(COALESCE(s.section,'')))
+      )`
+      trendParams.push(req.user?.id || null)
+    }
+    trendSql += ` AND a.date >= CURRENT_DATE - INTERVAL '14 days' GROUP BY a.date::date ORDER BY a.date::date DESC LIMIT 6`
+    const trendRes = await pool.query(trendSql, trendParams).catch(() => ({ rows: [] }))
+    const attendanceTrend = [...trendRes.rows].reverse().map(r => ({
+      name: new Date(`${r.day}T00:00:00+05:00`).toLocaleDateString('en-US', { weekday: 'short', timeZone: 'Asia/Karachi' }),
+      present: Number(r.present || 0),
+      absent: Number(r.absent || 0),
+      late: Number(r.late || 0),
+      leave: Number(r.leave || 0),
     }))
+
+    const visibleClassKeys = new Set(allStudents.map(s => String(s.class || '').toLowerCase().replace(/^class\s+/, '').trim()).filter(Boolean))
+    const recentExams = (role === 'admin' || role === 'principal' || role === 'super_admin')
+      ? examsRes.rows.slice(0, 5)
+      : examsRes.rows.filter(exam => {
+          const key = String(exam.class || '').toLowerCase().replace(/^class\s+/, '').trim()
+          return !key || key === 'all classes' || key === 'all' || visibleClassKeys.has(key)
+        }).slice(0, 5)
 
     res.json({
       success: true,
@@ -317,10 +420,11 @@ router.get('/dashboard', protect, async (req, res) => {
         revenueData,
         classDistribution,
         genderData,
+        attendanceBreakdown,
         attendanceTrend,
         recentStudents,
         recentNotices: noticesRes.rows,
-        recentExams:   examsRes.rows.slice(0, 5),
+        recentExams,
         employees:     empRes.rows.slice(0, 5),
         role: req.user?.role,
       }
@@ -439,10 +543,36 @@ router.get('/timetable', protect, async (req, res) => {
   }
 })
 
-// GET /api/portal/teaching-options — distinct class/section combos for the current school
-router.get('/teaching-options', protect, async (req, res) => {
+// GET /api/portal/teaching-options — assigned classes for teachers; school classes for admins
+router.get('/teaching-options', protect, requireRoles('teacher', 'admin', 'principal'), async (req, res) => {
   try {
+    await ensureTeacherAssignmentSchema()
     const schoolId = currentSchoolId(req)
+    const role = String(req.user?.role || '').toLowerCase()
+
+    if (role === 'teacher') {
+      const assignments = await getTeacherAssignments({ schoolId, teacherUserId: req.user?.id })
+      const grouped = new Map()
+      for (const row of assignments) {
+        const className = String(row.class_name || '').trim()
+        const section = String(row.section || '').trim()
+        if (!className) continue
+        const key = `${className}::${section}`.toLowerCase()
+        if (!grouped.has(key)) grouped.set(key, { class_name: className, section, subjects: [] })
+        const subject = String(row.subject || '').trim()
+        if (subject && !grouped.get(key).subjects.includes(subject)) grouped.get(key).subjects.push(subject)
+      }
+      const classes = [...grouped.values()]
+      return res.json({
+        success: true,
+        data: {
+          classes,
+          timezone: 'Asia/Karachi',
+          assignment_required: classes.length === 0,
+        },
+      })
+    }
+
     const result = await pool.query(`
       SELECT class, section
       FROM students
@@ -450,24 +580,87 @@ router.get('/teaching-options', protect, async (req, res) => {
       GROUP BY class, section
       ORDER BY class::text ASC, section::text ASC
     `, [schoolId])
-
     const classes = result.rows
-      .map(row => ({
-        class_name: String(row.class || '').trim(),
-        section: String(row.section || '').trim() || 'A',
-      }))
+      .map(row => ({ class_name: String(row.class || '').trim(), section: String(row.section || '').trim() }))
       .filter(item => item.class_name)
-
-    res.json({
-      success: true,
-      data: {
-        classes,
-        timezone: 'Asia/Karachi',
-      },
-    })
+    return res.json({ success: true, data: { classes, timezone: 'Asia/Karachi', assignment_required: false } })
   } catch (error) {
     console.error('Teaching options error:', error)
     res.status(500).json({ success: false, message: 'Failed to fetch teaching options' })
+  }
+})
+
+// GET /api/portal/teacher-assignments — admin management or teacher self-view
+router.get('/teacher-assignments', protect, requireRoles('teacher', 'admin', 'principal'), async (req, res) => {
+  try {
+    await ensureTeacherAssignmentSchema()
+    const schoolId = currentSchoolId(req)
+    const role = String(req.user?.role || '').toLowerCase()
+    const teacherUserId = role === 'teacher' ? req.user?.id : Number(req.query.teacher_user_id || 0) || null
+    const params = [schoolId]
+    let sql = `SELECT id, school_id, teacher_user_id, employee_id, class_name, section, subject, source, is_active FROM teacher_class_assignments WHERE school_id=$1`
+    if (teacherUserId) { sql += ' AND teacher_user_id=$2'; params.push(teacherUserId) }
+    sql += ' ORDER BY teacher_user_id, class_name, section, subject'
+    const result = await pool.query(sql, params)
+    res.json({ success: true, data: result.rows })
+  } catch (error) {
+    console.error('Teacher assignment list error:', error)
+    res.status(500).json({ success: false, message: 'Failed to load teacher assignments' })
+  }
+})
+
+router.post('/teacher-assignments', protect, requireRoles('admin', 'principal'), async (req, res) => {
+  try {
+    await ensureTeacherAssignmentSchema()
+    const schoolId = currentSchoolId(req)
+    const teacherUserId = Number(req.body?.teacher_user_id)
+    const className = String(req.body?.class_name || '').trim()
+    const section = String(req.body?.section || '').trim()
+    const subject = String(req.body?.subject || '').trim()
+    if (!teacherUserId || !className) return res.status(400).json({ success: false, message: 'Teacher and class are required.' })
+
+    const teacher = await pool.query(`SELECT id FROM users WHERE id=$1 AND school_id=$2 AND is_active=true AND role='teacher' LIMIT 1`, [teacherUserId, schoolId])
+    if (!teacher.rows[0]) return res.status(400).json({ success: false, message: 'Teacher portal identity is not valid for this school.' })
+    const classExists = await pool.query(`SELECT 1 FROM students WHERE school_id=$1 AND is_active=true AND LOWER(class)=LOWER($2) AND ($3::text='' OR LOWER(COALESCE(section,''))=LOWER($3)) LIMIT 1`, [schoolId, className, section])
+    if (!classExists.rows[0]) return res.status(400).json({ success: false, message: 'Class/section does not exist in the live student roster.' })
+
+    const employee = await pool.query(`SELECT id FROM employees WHERE school_id=$1 AND user_id=$2 LIMIT 1`, [schoolId, teacherUserId])
+    const existing = await pool.query(`
+      SELECT id FROM teacher_class_assignments
+      WHERE school_id=$1 AND teacher_user_id=$2
+        AND LOWER(class_name)=LOWER($3)
+        AND LOWER(COALESCE(section,''))=LOWER($4)
+        AND LOWER(COALESCE(subject,''))=LOWER($5)
+      LIMIT 1
+    `, [schoolId, teacherUserId, className, section, subject])
+    const result = existing.rows[0]
+      ? await pool.query(`
+          UPDATE teacher_class_assignments
+          SET is_active=true, employee_id=$1, updated_at=NOW()
+          WHERE id=$2
+          RETURNING id, teacher_user_id, employee_id, class_name, section, subject, source, is_active
+        `, [employee.rows[0]?.id || null, existing.rows[0].id])
+      : await pool.query(`
+          INSERT INTO teacher_class_assignments (school_id, teacher_user_id, employee_id, class_name, section, subject, source)
+          VALUES ($1,$2,$3,$4,$5,$6,'manual')
+          RETURNING id, teacher_user_id, employee_id, class_name, section, subject, source, is_active
+        `, [schoolId, teacherUserId, employee.rows[0]?.id || null, className, section || null, subject || null])
+    res.status(201).json({ success: true, data: result.rows[0] })
+  } catch (error) {
+    console.error('Teacher assignment create error:', error)
+    res.status(500).json({ success: false, message: 'Failed to save teacher assignment' })
+  }
+})
+
+router.delete('/teacher-assignments/:id', protect, requireRoles('admin', 'principal'), async (req, res) => {
+  try {
+    await ensureTeacherAssignmentSchema()
+    const result = await pool.query(`UPDATE teacher_class_assignments SET is_active=false, updated_at=NOW() WHERE id=$1 AND school_id=$2 RETURNING id`, [req.params.id, currentSchoolId(req)])
+    if (!result.rowCount) return res.status(404).json({ success: false, message: 'Assignment not found' })
+    res.json({ success: true, message: 'Assignment disabled' })
+  } catch (error) {
+    console.error('Teacher assignment delete error:', error)
+    res.status(500).json({ success: false, message: 'Failed to disable teacher assignment' })
   }
 })
 
@@ -529,6 +722,20 @@ router.post('/online-classes', protect, requireRoles('teacher', 'admin', 'princi
         success: false,
         message: 'Class, subject, title, date, start time, end time, and meeting link are required.',
       })
+    }
+
+    if (String(req.user?.role || '').toLowerCase() === 'teacher') {
+      await ensureTeacherAssignmentSchema()
+      const allowed = await teacherCanAccessClass({
+        schoolId,
+        teacherUserId: req.user?.id,
+        className: class_name,
+        section,
+        subject,
+      })
+      if (!allowed) {
+        return res.status(403).json({ success: false, message: 'This class/section is not assigned to your teacher account.' })
+      }
     }
 
     const startDate = toSafeDate(`${class_date}T${start_time}:00+05:00`)

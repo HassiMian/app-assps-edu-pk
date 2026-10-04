@@ -1,0 +1,69 @@
+{
+  "scenarios": [
+    {
+      "scenarioId": "paper_1788490880140_zudi",
+      "timestamp": "2026-09-04T03:01:13.918Z",
+      "symbol": "XAUUSD",
+      "currentPrice": 4523.8,
+      "bias": "NEUTRAL / RANGE",
+      "regime": "TRANSITIONAL",
+      "confidence": "ELEVATED",
+      "bullishEntry": "4517.7 – 4521.4 (on pullback) OR above 4533.6 (on breakout)",
+      "bearishEntry": "4533.6 – 4529.9 (on rejection) OR below 4517.7 (on breakdown)",
+      "target1": 4533.6,
+      "target2": 4558.5,
+      "invalidation": 4511.55,
+      "outcome": "PENDING",
+      "resolvedAt": null
+    },
+    {
+      "scenarioId": "paper_1788490880732_gzq8",
+      "timestamp": "2026-09-04T03:01:13.918Z",
+      "symbol": "XAUUSD",
+      "currentPrice": 4523.8,
+      "bias": "NEUTRAL / RANGE",
+      "regime": "TRANSITIONAL",
+      "confidence": "ELEVATED",
+      "bullishEntry": "4517.7 – 4521.4 (on pullback) OR above 4533.6 (on breakout)",
+      "bearishEntry": "4533.6 – 4529.9 (on rejection) OR below 4517.7 (on breakdown)",
+      "target1": 4533.6,
+      "target2": 4558.5,
+      "invalidation": 4511.55,
+      "outcome": "PENDING",
+      "resolvedAt": null
+    },
+    {
+      "scenarioId": "paper_1788490910561_8j4k",
+      "timestamp": "2026-09-04T03:01:43.673Z",
+      "symbol": "XAUUSD",
+      "currentPrice": 4524,
+      "bias": "NEUTRAL / RANGE",
+      "regime": "TRANSITIONAL",
+      "confidence": "ELEVATED",
+      "bullishEntry": "4517.7 – 4521.4 (on pullback) OR above 4533.6 (on breakout)",
+      "bearishEntry": "4533.6 – 4529.9 (on rejection) OR below 4517.7 (on breakdown)",
+      "target1": 4533.6,
+      "target2": 4558.5,
+      "invalidation": 4511.53,
+      "outcome": "PENDING",
+      "resolvedAt": null
+    },
+    {
+      "scenarioId": "paper_1788490911193_stfl",
+      "timestamp": "2026-09-04T03:01:43.673Z",
+      "symbol": "XAUUSD",
+      "currentPrice": 4524,
+      "bias": "NEUTRAL / RANGE",
+      "regime": "TRANSITIONAL",
+      "confidence": "ELEVATED",
+      "bullishEntry": "4517.7 – 4521.4 (on pullback) OR above 4533.6 (on breakout)",
+      "bearishEntry": "4533.6 – 4529.9 (on rejection) OR below 4517.7 (on breakdown)",
+      "target1": 4533.6,
+      "target2": 4558.5,
+      "invalidation": 4511.53,
+      "outcome": "PENDING",
+      "resolvedAt": null
+    }
+  ],
+  "stats": {}
+}

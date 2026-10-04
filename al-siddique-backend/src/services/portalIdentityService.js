@@ -113,7 +113,8 @@ async function ensureParentIdentity(db, { schoolId, student }) {
        WHERE school_id = $1 AND is_active = true AND role = 'parent'
          AND (
            LOWER(email) = LOWER($2)
-           OR regexp_replace(COALESCE(phone,''),'[^0-9]','','g') = $3
+           OR (COALESCE(entity_type,'') <> 'parent_distinct'
+               AND regexp_replace(COALESCE(phone,''),'[^0-9]','','g') = $3)
          )
        ORDER BY id LIMIT 1`,
       [ctx.schoolId, email, phone],

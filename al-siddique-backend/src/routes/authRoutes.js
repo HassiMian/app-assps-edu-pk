@@ -10,7 +10,7 @@ const { query, pool } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentTenantId, hasColumn } = require('../middleware/tenant')
 const { getTwilioConfigForSchool, buildTwilioClient } = require('../services/twilioSettings')
-const { provisionStudentIdentities, ensureTeacherIdentity } = require('../services/portalIdentityService')
+const { provisionStudentIdentities, ensureTeacherIdentity, ensureStudentIdentity, schoolContext, tempPassword, rotateTemporaryPassword } = require('../services/portalIdentityService')
 
 function resolveSecret(name, fallback) {
   const value = process.env[name]
@@ -1113,7 +1113,12 @@ router.get('/users/missing-portal-links', protect, async (req, res) => {
           (parent_user_id IS NULL) AS missing_parent,
           (parent_user_id IS NULL AND NULLIF(regexp_replace(
              COALESCE(NULLIF(parent_phone,''),NULLIF(parent_whatsapp,''),''),
-             '[^0-9]','','g'),'') IS NULL) AS requires_guardian_contact
+             '[^0-9]','','g'),'') IS NULL) AS requires_guardian_contact,
+          (parent_user_id IS NULL AND (SELECT COUNT(DISTINCT LOWER(TRIM(COALESCE(other.father_name,''))))
+             FROM students other WHERE other.school_id=students.school_id AND other.is_active=true
+               AND regexp_replace(COALESCE(NULLIF(other.parent_phone,''),NULLIF(other.parent_whatsapp,''),''),'[^0-9]','','g')
+                 = regexp_replace(COALESCE(NULLIF(students.parent_phone,''),NULLIF(students.parent_whatsapp,''),''),'[^0-9]','','g')) > 1)
+             AS requires_guardian_review
         FROM students WHERE school_id=$1 AND is_active=true
           AND (student_user_id IS NULL OR parent_user_id IS NULL)
         ORDER BY class, gr_number, id`, [schoolId]),
@@ -1161,6 +1166,55 @@ router.patch('/users/guardian-contact', protect, async (req, res) => {
   }
 })
 
+// Verified distinct-guardian resolution for households sharing a phone.
+// Each unresolved student receives a separate parent account until staff
+// explicitly reconcile the family relationship; never infer it from phone alone.
+router.post('/users/resolve-distinct-guardian', protect, async (req, res) => {
+  const role=String(req.user?.role||'').trim().toLowerCase()
+  if(role!=='super_admin' && !ADMIN_PORTAL_ROLES.has(role))return sendJson(res,403,{message:'Permission denied.'})
+  const schoolId=Number(req.user?.school_id), studentId=Number(req.body?.studentId)
+  const verifiedName=String(req.body?.verifiedGuardianName||'').trim()
+  if(!Number.isInteger(schoolId)||schoolId<1||!Number.isInteger(studentId)||studentId<1||
+    req.body?.distinctGuardianVerified!==true||verifiedName.length<3||verifiedName.length>100){
+    return sendJson(res,400,{message:'Independent guardian verification and a valid name are required.'})
+  }
+  const client=await pool.connect()
+  try{
+    await client.query('BEGIN')
+    const result=await client.query('SELECT * FROM students WHERE school_id=$1 AND id=$2 AND is_active=true FOR UPDATE',[schoolId,studentId])
+    const student=result.rows[0]
+    if(!student||student.parent_user_id){await client.query('ROLLBACK');return sendJson(res,409,{message:'Student unavailable or parent already linked.'})}
+    const phone=String(student.parent_phone||student.parent_whatsapp||'').replace(/\D/g,'')
+    if(phone.length<10){await client.query('ROLLBACK');return sendJson(res,409,{message:'A verified guardian contact is required.'})}
+    const names=await client.query(`SELECT COUNT(DISTINCT LOWER(TRIM(COALESCE(father_name,''))))::int AS n
+      FROM students WHERE school_id=$1 AND is_active=true
+      AND regexp_replace(COALESCE(NULLIF(parent_phone,''),NULLIF(parent_whatsapp,''),''),'[^0-9]','','g')=$2`,[schoolId,phone])
+    if(Number(names.rows[0]?.n||0)<2){await client.query('ROLLBACK');return sendJson(res,409,{message:'No conflicting guardian names. Use normal linked-identity repair.'})}
+    const ctx=await schoolContext(client,schoolId)
+    const email=`parent_verified_${schoolId}_${student.id}@${ctx.schoolCode==='assps'?'assps.edu.pk':ctx.schoolCode+'.apex.com'}`
+    const username=`PVR-${schoolId}-${student.id}`
+    const initial=tempPassword('PVR')
+    const hashed=await bcrypt.hash(initial,12)
+    const created=await client.query(`INSERT INTO users(school_id,tenant_id,name,email,username,password,role,designation,
+       phone,is_active,must_change_password,entity_type,entity_id)
+       VALUES($1,$2,$3,$4,$5,$6,'parent','Verified distinct guardian',$7,true,true,'parent_distinct',$8)
+       RETURNING id`,[schoolId,ctx.tenantId,verifiedName,email,username,hashed,phone,student.id])
+    const studentIdentity=student.student_user_id
+      ? {userId:student.student_user_id,created:false}
+      : await ensureStudentIdentity(client,{schoolId,student})
+    await client.query(`UPDATE students SET parent_user_id=$1,student_user_id=$2,tenant_id=$3,updated_at=NOW()
+       WHERE id=$4 AND school_id=$5`,[created.rows[0].id,studentIdentity.userId,ctx.tenantId,student.id,schoolId])
+    await client.query(`INSERT INTO portal_identity_handoffs(school_id,user_id,portal_role,state)
+       VALUES($1,$2,'parent','pending') ON CONFLICT(user_id) DO NOTHING`,[schoolId,created.rows[0].id])
+    if(studentIdentity.created)await client.query(`INSERT INTO portal_identity_handoffs(school_id,user_id,portal_role,state)
+       VALUES($1,$2,'student','pending') ON CONFLICT(user_id) DO NOTHING`,[schoolId,studentIdentity.userId])
+    await client.query('COMMIT')
+    res.set('Cache-Control','private, no-store')
+    return sendJson(res,200,{message:'Verified distinct guardian linked. Credentials are pending separate private activation.'})
+  }catch(err){await client.query('ROLLBACK').catch(()=>{});console.error('Distinct guardian resolution failed:',err.code||err.name);return sendJson(res,409,{message:'Guardian identity could not be safely resolved.'})}
+  finally{client.release()}
+})
+
 // A single-record repair operation: never bulk-issue undistributed credentials.
 router.post('/users/provision-one', protect, async (req, res) => {
   const operatorRole = String(req.user?.role || '').trim().toLowerCase()
@@ -1192,9 +1246,19 @@ router.post('/users/provision-one', protect, async (req, res) => {
         return sendJson(res, 409, { message: 'Both portal identities are already linked.' })
       }
       const guardianContact = String(student.parent_phone || student.parent_whatsapp || '').replace(/\D/g, '')
-      if (!student.parent_user_id && !guardianContact) {
+      if (!student.parent_user_id && guardianContact.length < 10) {
         await client.query('ROLLBACK')
         return sendJson(res, 409, { message: 'Verify and save the guardian contact before issuing a parent login.' })
+      }
+      if (!student.parent_user_id) {
+        const ambiguous = await client.query(`SELECT COUNT(DISTINCT LOWER(TRIM(COALESCE(father_name,''))))::int AS n
+          FROM students WHERE school_id=$1 AND is_active=true
+          AND regexp_replace(COALESCE(NULLIF(parent_phone,''),NULLIF(parent_whatsapp,''),''),'[^0-9]','','g')=$2`,
+          [schoolId, guardianContact])
+        if (Number(ambiguous.rows[0]?.n || 0) > 1) {
+          await client.query('ROLLBACK')
+          return sendJson(res, 409, { message: 'This contact belongs to records naming different guardians. Verify the correct guardian before linking identities.' })
+        }
       }
       result = await provisionStudentIdentities(client, { schoolId, student })
     } else {
@@ -1236,6 +1300,88 @@ router.post('/users/provision-one', protect, async (req, res) => {
   } finally {
     client.release()
   }
+})
+
+// Legacy accounts are prepared with unknown random passwords; issue one
+// replacement credential only when a school admin has verified its recipient.
+router.get('/users/pending-activation', protect, async (req, res) => {
+  const role = String(req.user?.role || '').toLowerCase()
+  if (role !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(role)) return sendJson(res, 403, { message: 'Permission denied.' })
+  const schoolId = Number(req.user?.school_id)
+  if (!Number.isInteger(schoolId) || schoolId < 1) return sendJson(res, 400, { message: 'School is required.' })
+  try {
+    const result = await query(`SELECT h.id, h.user_id, h.portal_role, h.state, h.created_at, h.issued_at,
+       h.delivered_at, u.name, COALESCE(NULLIF(u.username,''),u.email) AS login_id,
+       u.must_change_password
+       FROM portal_identity_handoffs h JOIN users u ON u.id=h.user_id AND u.school_id=h.school_id
+       WHERE h.school_id=$1 AND u.is_active=true ORDER BY h.state, h.portal_role, u.name, h.id`, [schoolId])
+    res.set('Cache-Control', 'private, no-store, max-age=0')
+    return sendJson(res, 200, { data: result.rows, count: result.rowCount })
+  } catch (err) {
+    console.error('Pending activation list error:', err.code || err.name)
+    return sendJson(res, 500, { message: 'Activation records unavailable.' })
+  }
+})
+
+router.post('/users/pending-activation/:handoffId/issue', protect, async (req, res) => {
+  const operatorRole = String(req.user?.role || '').toLowerCase()
+  if (operatorRole !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(operatorRole)) return sendJson(res, 403, { message: 'Permission denied.' })
+  const schoolId = Number(req.user?.school_id)
+  const handoffId = Number(req.params.handoffId)
+  if (!Number.isInteger(schoolId) || schoolId < 1 || !Number.isInteger(handoffId) || handoffId < 1 ||
+      req.body?.recipientVerified !== true) {
+    return sendJson(res, 400, { message: 'A valid record and independently verified recipient are required.' })
+  }
+  const client = await pool.connect()
+  try {
+    await client.query('BEGIN')
+    const result = await client.query(`SELECT h.*, u.email, u.username, u.role, u.must_change_password, u.is_active
+      FROM portal_identity_handoffs h JOIN users u ON u.id=h.user_id AND u.school_id=h.school_id
+      WHERE h.id=$1 AND h.school_id=$2 FOR UPDATE OF h,u`, [handoffId,schoolId])
+    const record = result.rows[0]
+    if (!record || !record.is_active || !record.must_change_password || record.state==='delivered' ||
+       record.role!==record.portal_role) {
+      await client.query('ROLLBACK')
+      return sendJson(res, 409, { message: 'This identity is not eligible for activation issuance.' })
+    }
+    if (record.state==='issued') {
+      const reason=String(req.body?.reissueReason||'').trim()
+      if (req.body?.reissue!==true || reason.length<8) {
+        await client.query('ROLLBACK')
+        return sendJson(res, 409, { message: 'Already issued. For a lost handoff, explicitly request reissue with a reason.' })
+      }
+    }
+    const issued = await rotateTemporaryPassword(client,record.user_id,record.portal_role==='student'?'STU':record.portal_role==='parent'?'PAR':'TCH')
+    await client.query(`UPDATE portal_identity_handoffs SET state='issued',issued_at=NOW(),issued_by=$1
+      WHERE id=$2 AND school_id=$3`, [req.user.id,handoffId,schoolId])
+    await client.query('COMMIT')
+    res.set('Cache-Control', 'private, no-store, max-age=0')
+    res.set('Pragma','no-cache')
+    return sendJson(res, 200, { data: {
+      id:handoffId, role:record.portal_role, loginId:issued.user.username||issued.user.email,
+      temporaryPassword:issued.temporaryPassword,
+    }, message:'Deliver this one-time credential privately to the verified recipient, then confirm handoff.' })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(()=>{})
+    console.error('Pending activation issuance error:',err.code||err.name)
+    return sendJson(res, 500, { message:'Credential could not be issued; retry safely.' })
+  } finally { client.release() }
+})
+
+router.post('/users/pending-activation/:handoffId/confirm', protect, async (req, res) => {
+  const role=String(req.user?.role||'').toLowerCase()
+  if(role!=='super_admin' && !ADMIN_PORTAL_ROLES.has(role))return sendJson(res,403,{message:'Permission denied.'})
+  const schoolId=Number(req.user?.school_id), handoffId=Number(req.params.handoffId)
+  if(!Number.isInteger(schoolId)||schoolId<1||!Number.isInteger(handoffId)||handoffId<1||req.body?.deliveredPrivately!==true){
+    return sendJson(res,400,{message:'Confirm private handoff to the verified recipient.'})
+  }
+  try{
+    const result=await query(`UPDATE portal_identity_handoffs SET state='delivered',delivered_at=NOW(),delivered_by=$1
+      WHERE id=$2 AND school_id=$3 AND state='issued' RETURNING id`,[req.user.id,handoffId,schoolId])
+    if(!result.rowCount)return sendJson(res,409,{message:'Credential must first be issued or is already delivered.'})
+    res.set('Cache-Control','private, no-store')
+    return sendJson(res,200,{message:'Private credential handoff recorded.'})
+  }catch(err){console.error('Activation handoff confirmation:',err.code||err.name);return sendJson(res,500,{message:'Unable to record handoff.'})}
 })
 
 router.post('/users', protect, async (req, res) => {

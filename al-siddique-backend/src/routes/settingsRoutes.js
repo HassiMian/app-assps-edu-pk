@@ -182,12 +182,28 @@ async function resolveBrandingTenant(req) {
   return null
 }
 
+function sanitizeSchoolAccess(value, req = null) {
+  const role = String(req?.user?.role || '').toLowerCase()
+  const canManage = ['super_admin', 'admin', 'principal'].includes(role)
+  if (!canManage || !Array.isArray(value)) return []
+  return value.map((entry) => {
+    if (!entry || typeof entry !== 'object') return entry
+    const safe = { ...entry }
+    delete safe.adminPassword
+    delete safe.password
+    delete safe.secret
+    delete safe.token
+    return safe
+  })
+}
+
 function sanitizeSettingsRow(row = {}, req = null) {
   const schoolLogo = req ? toPublicAssetUrl(req, row.school_logo || null) : row.school_logo || null
   return {
     ...row,
     school_logo: schoolLogo,
     twilio_config: maskTwilioConfig(row.twilio_config || {}),
+    school_access: sanitizeSchoolAccess(row.school_access, req),
   }
 }
 
