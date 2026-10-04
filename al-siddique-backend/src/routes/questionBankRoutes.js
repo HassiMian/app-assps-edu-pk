@@ -6,8 +6,10 @@ const router = express.Router()
 const { query, tenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
 
 const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
 
 router.use(protect, canUseQuestionBank)
 
@@ -45,6 +47,20 @@ router.get('/', async (req, res) => {
     let sql = `SELECT * FROM question_bank WHERE school_id = $1`
     const params = [schoolId]
     let paramCount = 1
+    const role = String(req.user?.role || '').toLowerCase()
+    if (role === 'teacher') {
+      await ensureTeacherAssignmentSchema()
+      paramCount++
+      sql += ` AND is_approved = true AND EXISTS (
+        SELECT 1 FROM teacher_class_assignments tca
+        WHERE tca.school_id = question_bank.school_id
+          AND tca.teacher_user_id = $${paramCount}
+          AND tca.is_active = true
+          AND LOWER(tca.class_name) = LOWER(COALESCE(question_bank.class_level,''))
+          AND (COALESCE(tca.subject,'') = '' OR LOWER(tca.subject) = LOWER(COALESCE(question_bank.subject,'')))
+      )`
+      params.push(req.user?.id)
+    }
 
     if (subject) {
       paramCount++
@@ -71,7 +87,7 @@ router.get('/', async (req, res) => {
       sql += ` AND difficulty = $${paramCount}`
       params.push(difficulty)
     }
-    if (approved !== undefined) {
+    if (approved !== undefined && String(req.user?.role || '').toLowerCase() !== 'teacher') {
       paramCount++
       sql += ` AND is_approved = $${paramCount}`
       params.push(approved === 'true')
@@ -108,9 +124,18 @@ router.get('/:id', async (req, res) => {
     if (!schoolId) return
     const { id } = req.params
 
+    const role = String(req.user?.role || '').toLowerCase()
+    if (role === 'teacher') await ensureTeacherAssignmentSchema()
     const result = await query(
-      `SELECT * FROM question_bank WHERE id = $1 AND school_id = $2`,
-      [id, schoolId]
+      `SELECT * FROM question_bank q
+       WHERE q.id = $1 AND q.school_id = $2
+         ${role === 'teacher' ? `AND q.is_approved=true AND EXISTS (
+           SELECT 1 FROM teacher_class_assignments tca
+           WHERE tca.school_id=q.school_id AND tca.teacher_user_id=$3 AND tca.is_active=true
+             AND LOWER(tca.class_name)=LOWER(COALESCE(q.class_level,''))
+             AND (COALESCE(tca.subject,'')='' OR LOWER(tca.subject)=LOWER(COALESCE(q.subject,'')))
+         )` : ''}`,
+      role === 'teacher' ? [id, schoolId, req.user?.id] : [id, schoolId]
     )
 
     if (result.rows.length === 0) {
@@ -125,7 +150,7 @@ router.get('/:id', async (req, res) => {
 })
 
 // ─── 3. Add Single Question (Manual Entry) ────────────────────────────────────
-router.post('/', async (req, res) => {
+router.post('/', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
@@ -160,7 +185,7 @@ router.post('/', async (req, res) => {
 })
 
 // ─── 4. Edit Question ─────────────────────────────────────────────────────────
-router.put('/:id', async (req, res) => {
+router.put('/:id', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
@@ -211,7 +236,7 @@ router.put('/:id', async (req, res) => {
 })
 
 // ─── 5. Delete Question ───────────────────────────────────────────────────────
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
@@ -234,7 +259,7 @@ router.delete('/:id', async (req, res) => {
 })
 
 // ─── 6. Bulk Add / Approve AI Imported Questions ──────────────────────────────
-router.post('/import/approve', async (req, res) => {
+router.post('/import/approve', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
