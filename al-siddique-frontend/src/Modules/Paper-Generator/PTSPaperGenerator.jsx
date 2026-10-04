@@ -21,6 +21,7 @@ import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normaliz
 import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
 import { createBlankPaperDraft } from './paperCreationDraft.js'
 import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
+import { AssessmentRevisionConflictError, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
 
 function storeQToTemplate(q) {
  return {
@@ -632,6 +633,27 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [modalOpen, setModalOpen] = useState(!loadedPaper)
  const persistedPaperIdRef = useRef(loadedPaper?.id || '')
  const [finalizing, setFinalizing] = useState(false)
+ const [persistenceNotice, setPersistenceNotice] = useState('')
+
+ useEffect(() => {
+  if (!loadedPaper?.userAuthored) return undefined
+  const retry = () => flushAssessmentOfflineQueue().then(result => {
+   const serverPaperId = loadedPaper?.serverPaperId || paper?.serverPaperId || loadedPaper?.canonicalDocument?.id
+   const synced = result.synced?.find(item => item.paperId === serverPaperId)
+   if (synced && persistedPaperIdRef.current) {
+    const recovered = updateSavedPaper(persistedPaperIdRef.current, {
+     serverRevision:Number(synced.data?.currentRevision || 0), serverContentHash:synced.data?.contentHash || null,
+     persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE', syncConflict:false,
+    })
+    if (recovered) onPaperChange(current => ({ ...current, serverRevision:recovered.serverRevision, serverContentHash:recovered.serverContentHash, persistenceAuthority:recovered.persistenceAuthority, persistenceMode:recovered.persistenceMode }))
+   }
+   if (result.flushed) setPersistenceNotice(`Recovered ${result.flushed} queued save${result.flushed===1?'':'s'} to server.`)
+   else if (result.conflicts) setPersistenceNotice('Queued save needs conflict resolution before server sync.')
+  }).catch(() => {})
+  retry()
+  window.addEventListener('online', retry)
+  return () => window.removeEventListener('online', retry)
+ }, [loadedPaper?.userAuthored])
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
  const [priority, setPriority] = useState('all')
@@ -875,7 +897,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setSelIds(n)
  }
 
- function doSave(options = {}) {
+ async function doSave(options = {}) {
  const silent = options?.silent === true
  if (!totalQs && !loadedPaper?.userAuthored) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
@@ -894,47 +916,75 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const canonicalDocument = loadedPaper?.userAuthored
   ? createManualAssessmentDocument({ paper:{ ...loadedPaper, ...paper }, config:cfg, paperSettings })
   : null
+ let persistence = null
+ let serverPaperId = loadedPaper?.serverPaperId || paper.serverPaperId || null
+ if (canonicalDocument) {
+  const paperId = serverPaperId || canonicalDocument.id
+  serverPaperId = paperId
+  const expectedRevision = Number(paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
+  try {
+   persistence = await saveAssessmentRevision({ paperId, expectedRevision, title:name, document:canonicalDocument })
+   if (persistence.degraded) setPersistenceNotice('Offline/degraded mode — saved locally and queued for server recovery.')
+   else setPersistenceNotice(`Server revision ${persistence.data.currentRevision} saved.`)
+  } catch (error) {
+   if (error instanceof AssessmentRevisionConflictError || error?.code === 'REVISION_CONFLICT') {
+    const conflictPayload = {
+     ...paper, name:loadedPaper?.name || name, config:{ ...(loadedPaper?.config||{}), ...cfg }, canonicalDocument,
+     canonicalAuthority:'PaperDocumentV2', serverPaperId, persistenceAuthority:'LOCAL_RECOVERY_CONFLICT', persistenceMode:'CONFLICT',
+     serverRevision:Number(error.currentRevision || expectedRevision), syncConflict:true,
+    }
+    const localConflict = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, conflictPayload) : savePaper(conflictPayload)
+    if (localConflict?.id) persistedPaperIdRef.current = localConflict.id
+    setPersistenceNotice(`Conflict detected at server revision ${error.currentRevision}. Local edits preserved; overwrite blocked.`)
+    if (!silent) alert('SAVE CONFLICT — this paper changed in another tab. Your local edits were preserved and were not allowed to overwrite the newer server revision.')
+    return localConflict
+   }
+   throw error
+  }
+ }
+ const serverRevision = persistence?.degraded
+  ? Number(paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
+  : Number(persistence?.data?.currentRevision ?? paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
  const payloadBase = {
        ...paper,
        name: loadedPaper?.name || name,
        config: { ...(loadedPaper?.config || {}), ...cfg },
-       selectedMCQ: paper.mcq || [],
-       selectedShort: paper.short || [],
-       selectedLong: paper.long || [],
+       selectedMCQ: paper.mcq || [], selectedShort: paper.short || [], selectedLong: paper.long || [],
        teacherHidden: overrideConfig?.teacherHidden || false,
        editorSettings:editorState,
        printReadiness: loadedPaper?.userAuthored
         ? (totalQs>0 && marksLedger.balanced && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : 'DRAFT')
         : (isOfficialPaper && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness)),
        selectedQuestions,
-       ...(canonicalDocument ? { canonicalDocument, canonicalAuthority:'PaperDocumentV2', persistenceAuthority:'LOCAL_RECOVERY_ONLY' } : {}),
+       ...(canonicalDocument ? {
+        canonicalDocument, canonicalAuthority:'PaperDocumentV2', serverPaperId, serverRevision,
+        serverContentHash:persistence?.data?.contentHash || paper.serverContentHash || loadedPaper?.serverContentHash || null,
+        persistenceAuthority:persistence?.degraded ? 'LOCAL_RECOVERY_QUEUED' : 'SERVER_REVISION_SOURCE_OF_TRUTH',
+        persistenceMode:persistence?.degraded ? 'DEGRADED_OFFLINE' : 'ONLINE',
+       } : {}),
        ...(isOfficialPaper ? { official_section_marks:marksLedger.questionTotal } : {}),
      }
  const payload = isOfficialPaper && loadedPaper?.creationMethod !== 'blank' ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
  const saved = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, payload) : savePaper(payload)
  if (saved?.id) persistedPaperIdRef.current = saved.id
-  if (!saved) return null // Failed due to quota exceeded
-  
-  const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
+ if (!saved) return null
+ onPaperChange(current => ({ ...current, serverRevision:saved.serverRevision, serverContentHash:saved.serverContentHash, persistenceAuthority:saved.persistenceAuthority, persistenceMode:saved.persistenceMode }))
+ const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
   name: overrideConfig?.subjectName || overrideConfig?.subject || subjectName || '',
   classLevel: overrideConfig?.classLevel || className || '',
   publisher: overrideConfig?.publisher || (storeSubjectInfo?.publisher || ''),
-  }
-  const shouldImport = Boolean(loadedPaper?.importToQuestionBank || overrideConfig?.importToQuestionBank)
-  if (shouldImport) {
+ }
+ const shouldImport = Boolean(loadedPaper?.importToQuestionBank || overrideConfig?.importToQuestionBank)
+ if (shouldImport) {
   importPaperQuestionsToBank({
-  subjectId: loadedPaper?.questionBankSubjectId || overrideConfig?.questionBankSubjectId || '',
-  subjectMeta: questionBankMeta,
-  selectedMCQ: paper.mcq || [],
-  selectedShort: paper.short || [],
-  selectedLong: paper.long || [],
-  selectedQuestions,
-  medium: loadedPaper?.config?.language || loadedPaper?.config?.medium || overrideConfig?.language || overrideConfig?.medium || 'english',
-  source: loadedPaper?.paperSource || overrideConfig?.paperSource || 'paper',
+   subjectId: loadedPaper?.questionBankSubjectId || overrideConfig?.questionBankSubjectId || '', subjectMeta: questionBankMeta,
+   selectedMCQ: paper.mcq || [], selectedShort: paper.short || [], selectedLong: paper.long || [], selectedQuestions,
+   medium: loadedPaper?.config?.language || loadedPaper?.config?.medium || overrideConfig?.language || overrideConfig?.medium || 'english',
+   source: loadedPaper?.paperSource || overrideConfig?.paperSource || 'paper',
   })
-  }
-  if (!silent) alert(`Paper saved! \"${payload.name}\" (${totalQs} questions)`)
-  return saved
+ }
+ if (!silent) alert(persistence?.degraded ? `Paper saved locally. Server recovery is queued.` : `Paper saved! "${payload.name}" (${totalQs} questions)`)
+ return saved
  }
 
  async function doFinalize() {
@@ -946,14 +996,16 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }
   setFinalizing(true)
   try {
-    const saved = doSave({ silent:true })
+    const saved = await doSave({ silent:true })
     if (!saved?.canonicalDocument) throw new Error('Canonical PaperDocument was not saved.')
+    if (saved.persistenceAuthority !== 'SERVER_REVISION_SOURCE_OF_TRUTH') throw new Error('Server persistence is required before finalization. Local recovery copy is preserved.')
     const check = validateManualAssessmentForRelease(saved.canonicalDocument)
     if (!check.valid) throw new Error(check.errors.join(' | '))
     const release = await createAssessmentRelease(saved.canonicalDocument)
+    await finalizeAssessmentRelease({ paperId:saved.serverPaperId || saved.canonicalDocument.id, expectedRevision:Number(saved.serverRevision), release })
     const finalized = updateSavedPaper(saved.id, {
       assessmentRelease:release, lifecycleStatus:'FINALIZED', printReadiness:'READY',
-      finalizedAt:release.releasedAt,
+      finalizedAt:release.releasedAt, persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE',
     })
     if (!finalized) throw new Error('Finalized release could not be persisted.')
     onPaperChange(current => ({ ...current, assessmentRelease:release, lifecycleStatus:'FINALIZED', printReadiness:'READY' }))
@@ -1091,6 +1143,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printBub} onChange={e=>setPrintBub(e.target.checked)} style={{ accentColor:D.gold }} />Bubble Sheet</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printAns} onChange={e=>setPrintAns(e.target.checked)} style={{ accentColor:D.gold }} />Answer Keys</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
+ {loadedPaper?.userAuthored && persistenceNotice && <div data-assessment-persistence-status style={{ fontSize:10, maxWidth:220, color:persistenceNotice.includes('Conflict')||persistenceNotice.includes('Offline')?'#fbbf24':'#86efac', fontWeight:700 }}>{persistenceNotice}</div>}
  <div data-paper-actions style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
  {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}

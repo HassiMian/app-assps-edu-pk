@@ -823,6 +823,17 @@ function emit() {
   listeners.forEach(l => l());
 }
 
+
+export function markPaperServerRecovered(serverPaperId, serverRevision) {
+ const store = loadStore()
+ const updatedAt = new Date().toISOString()
+ const savedPapers = (store.savedPapers || []).map(paper => {
+  if (paper.serverPaperId !== serverPaperId && paper.canonicalDocument?.id !== serverPaperId) return paper
+  return { ...paper, serverPaperId, serverRevision:Number(serverRevision||0), persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE', syncConflict:false, updatedAt }
+ })
+ return saveStore({ ...store, savedPapers })
+}
+
 export function usePaperStore() {
   // Initialize global store on first use if null
   if (!globalStore) {

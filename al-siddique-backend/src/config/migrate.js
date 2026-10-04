@@ -448,6 +448,8 @@ async function migrate() {
     }
 
     try {
+      const assessmentStudioMigration = require('./migrations/006_assessment_studio_v1')
+      await assessmentStudioMigration.up()
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

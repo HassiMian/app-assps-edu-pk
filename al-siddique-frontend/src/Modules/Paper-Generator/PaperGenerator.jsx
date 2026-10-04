@@ -4,6 +4,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { resolvePaperRoute } from './resolvePaperRoute.js'
 import { createDuplicatePaperDraft } from './paperCreationDraft.js'
+import { loadAssessmentPaper } from './AssessmentStudio/core/assessmentPersistence.js'
+import { mergeServerDocumentIntoLocalPaper } from './AssessmentStudio/core/manualAssessmentDocument.js'
 
 const SavedPapersTab = lazy(() => import('./SavedPapersTab'))
 const LessonPlanModule = lazy(() => import('./LessonPlanModule'))
@@ -79,9 +81,19 @@ export default function PaperGenerator() {
     setModuleTab('build')
   }
 
-  const handleLoadPaper = (paper, targetTab = null) => {
-    setLoadedSavedPaper(paper)
-    setModuleTab(resolvePaperRoute(paper, targetTab, {
+  const handleLoadPaper = async (paper, targetTab = null) => {
+    let resolvedPaper = paper
+    if (paper?.userAuthored && (paper.serverPaperId || paper.canonicalDocument?.id)) {
+      try {
+        const server = await loadAssessmentPaper(paper.serverPaperId || paper.canonicalDocument.id)
+        if (server?.document_json) resolvedPaper = mergeServerDocumentIntoLocalPaper(paper, server.document_json, server)
+      } catch (error) {
+        const retryable = !error?.response || error.response.status === 408 || error.response.status === 429 || error.response.status >= 500
+        resolvedPaper = { ...paper, persistenceMode:retryable ? 'DEGRADED_OFFLINE' : (paper.persistenceMode || 'LOCAL_RECOVERY'), serverReopenError:error?.response?.status || 'NETWORK' }
+      }
+    }
+    setLoadedSavedPaper(resolvedPaper)
+    setModuleTab(resolvePaperRoute(resolvedPaper, targetTab, {
       officialCanonicalCanary,
       forceOfficialLegacyRoute,
     }))

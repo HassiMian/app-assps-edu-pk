@@ -18,6 +18,7 @@ test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -
  await server.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
  const context=await browser.newContext({viewport:{width:1640,height:960}})
+ await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
  await context.route('**/api/students**',route=>route.fulfill({status:200,contentType:'application/json',body:'[]'}))
  await context.route('**/api/settings/public**',route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}))
@@ -45,6 +46,10 @@ test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -
  await page.getByLabel('Selected question content').fill('What is photosynthesis?')
  await page.locator('[data-section-inspector] input[type="number"]').nth(1).fill('10')
  await page.getByRole('button',{name:'Save Draft'}).click()
+ await page.waitForFunction(()=>{
+   const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
+   return keys.some(k=>{try{return (JSON.parse(localStorage.getItem(k)).savedPapers||[]).some(p=>p.userAuthored&&p.name==='Architecture V1 Weekly Science'&&p.persistenceAuthority==='SERVER_REVISION_SOURCE_OF_TRUTH')}catch{return false}})
+ },null,{timeout:12000})
 
  const draft=await page.evaluate(()=>{
    const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
@@ -55,7 +60,10 @@ test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -
  assert.equal(draft.assessmentType,'Weekly Assessment')
  assert.equal(draft.scope.label,'Chapter 3 — Photosynthesis')
  assert.equal(draft.canonicalAuthority,'PaperDocumentV2')
- assert.equal(draft.persistenceAuthority,'LOCAL_RECOVERY_ONLY')
+ assert.equal(draft.persistenceAuthority,'SERVER_REVISION_SOURCE_OF_TRUTH')
+ assert.equal(draft.persistenceMode,'ONLINE')
+ assert.equal(draft.serverRevision,1)
+ assert.ok(draft.serverPaperId)
  assert.equal(draft.canonicalDocument.documentOrigin,'USER_AUTHORED')
  assert.equal(draft.canonicalDocument.sourceIdentity,null)
  assert.equal(draft.canonicalDocument.assessment.creationMode,'MANUAL')

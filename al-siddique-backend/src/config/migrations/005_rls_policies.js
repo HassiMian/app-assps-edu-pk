@@ -28,6 +28,11 @@ async function up() {
     'employees',
     'exam_results',
     'events',
+    'question_bank',
+    'question_bank_imports',
+    'assessment_papers',
+    'assessment_paper_revisions',
+    'assessment_releases',
   ]
 
   const skipped = []
@@ -64,6 +69,33 @@ async function up() {
       USING (
         current_setting('app.rls_enabled', true) IS DISTINCT FROM 'true'
         OR current_setting('app.is_super_admin', true) = 'true'
+        OR school_id = NULLIF(current_setting('app.tenant_id', true), '')::int
+      );
+    `)
+  }
+
+  // High-value authoring data is default-deny at the database layer.
+  // Unlike legacy tables, an unset request RLS context must never become a bypass.
+  const strictTables = ['question_bank', 'question_bank_imports', 'assessment_papers', 'assessment_paper_revisions', 'assessment_releases']
+  for (const table of strictTables) {
+    assertSafeTableName(table)
+    const exists = await query('SELECT to_regclass($1) AS table_name', [`public.${table}`])
+    if (!exists.rows[0]?.table_name) continue
+    const schoolIdColumn = await query(
+      `SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name=$1 AND column_name='school_id' LIMIT 1`,
+      [table]
+    )
+    if (!schoolIdColumn.rowCount) continue
+    await query(`DROP POLICY IF EXISTS tenant_isolation_policy ON ${table};`)
+    await query(`
+      CREATE POLICY tenant_isolation_policy ON ${table}
+      FOR ALL
+      USING (
+        current_setting('app.is_super_admin', true) = 'true'
+        OR school_id = NULLIF(current_setting('app.tenant_id', true), '')::int
+      )
+      WITH CHECK (
+        current_setting('app.is_super_admin', true) = 'true'
         OR school_id = NULLIF(current_setting('app.tenant_id', true), '')::int
       );
     `)

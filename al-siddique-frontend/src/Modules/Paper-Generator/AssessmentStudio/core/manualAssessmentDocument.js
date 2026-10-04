@@ -191,3 +191,41 @@ export async function createAssessmentRelease(doc, { rendererVersion = 'manual-w
     snapshot,
   }
 }
+
+
+export function mergeServerDocumentIntoLocalPaper(localPaper = {}, doc = {}, serverMeta = {}) {
+  const sections = Array.isArray(doc?.sections) ? doc.sections : []
+  const officialSections = sections.map((section, index) => ({
+    id: String(section.id || `server-section-${index + 1}`).replace(/^manual-section-/, ''),
+    heading: section.heading || section.title || `Question ${index + 1}`,
+    instructions: section.instructions || '',
+    content: section.nodes?.map(node => node.content || '').filter(Boolean).join('\n') || '',
+    marks: finiteMarks(section.operationalSectionTotal ?? section.authoritativeSectionTotal),
+  }))
+  return {
+    ...localPaper,
+    canonicalDocument: clone(doc),
+    official_section: officialSections,
+    official_section_marks: finiteMarks(doc?.scoringPlan?.questionMarksTotal),
+    assessmentType: doc?.assessment?.assessmentType || localPaper.assessmentType,
+    scope: clone(doc?.assessment?.scope || localPaper.scope || {}),
+    config: {
+      ...(localPaper.config || {}),
+      title: doc?.metadata?.title || localPaper.config?.title || '',
+      examType: doc?.metadata?.examType || localPaper.config?.examType || '',
+      classLevel: doc?.metadata?.classLevel || localPaper.config?.classLevel || '',
+      className: doc?.metadata?.className || localPaper.config?.className || '',
+      subject: doc?.metadata?.subject || localPaper.config?.subject || '',
+      subjectName: doc?.metadata?.subjectName || localPaper.config?.subjectName || '',
+      totalMarks: finiteMarks(doc?.scoringPlan?.maximumObtainableMarks),
+      language: String(doc?.metadata?.language || localPaper.config?.language || 'english').toLowerCase(),
+      session: doc?.metadata?.session || localPaper.config?.session || '',
+      timeAllowed: doc?.metadata?.timeAllowed || localPaper.config?.timeAllowed || '',
+      examDate: doc?.metadata?.examDate || localPaper.config?.examDate || '',
+    },
+    serverRevision: Number(serverMeta.current_revision ?? serverMeta.currentRevision ?? localPaper.serverRevision ?? 0),
+    serverContentHash: serverMeta.content_hash || serverMeta.contentHash || localPaper.serverContentHash || null,
+    persistenceAuthority: 'SERVER_REVISION_SOURCE_OF_TRUTH',
+    persistenceMode: 'ONLINE',
+  }
+}

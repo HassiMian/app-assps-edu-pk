@@ -3,7 +3,7 @@
 
 const express = require('express')
 const router = express.Router()
-const { query } = require('../config/database')
+const { query, tenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -20,6 +20,12 @@ function requireSchoolContext(req, res) {
   if (!schoolId) {
     res.status(400).json({ success: false, message: 'school_id is required for super admin question-bank access.' })
     return null
+  }
+  const ctx = tenantContext.getStore()
+  if (ctx) {
+    ctx.rlsEnabled = true
+    ctx.isSuperAdmin = req.user?.role === 'super_admin' || req.user?.role === 'platform_owner'
+    ctx.tenantId = ctx.isSuperAdmin ? null : schoolId
   }
   return schoolId
 }
