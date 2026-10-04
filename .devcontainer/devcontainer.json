@@ -1,0 +1,24 @@
+{
+  "name": "ASSPS Zero-Paid Cloud Workspace",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "containerEnv": {
+    "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+  },
+  "postCreateCommand": "bash ops/cloud-offload/codespace-bootstrap.sh",
+  "forwardPorts": [5173, 5000],
+  "portsAttributes": {
+    "5173": {"label": "ASSPS Frontend", "onAutoForward": "notify"},
+    "5000": {"label": "ASSPS Backend", "onAutoForward": "notify"}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}

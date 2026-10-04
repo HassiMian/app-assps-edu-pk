@@ -1,0 +1,25 @@
+name: Zero-Paid Manual Cloud Verification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: zero-paid-manual-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            al-siddique-frontend/package-lock.json
+            al-siddique-backend/src/package-lock.json
+      - run: npm ci --prefix al-siddique-frontend
+      - run: npm run build:frontend
+      - run: npm ci --prefix al-siddique-backend/src
+      - run: npm run production:safety
