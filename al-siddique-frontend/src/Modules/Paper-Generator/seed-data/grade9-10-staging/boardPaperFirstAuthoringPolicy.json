@@ -1,0 +1,402 @@
+{
+  "schemaVersion": "assps-board-paper-first-authoring-contract-v1",
+  "createdOn": "2026-10-04",
+  "parentCommit": "dad7a2f07391220eccd32786328c33f4ada34edc",
+  "status": "ACTIVE_PATTERN_REVIEW_REQUIRED_BEFORE_AUTHORING",
+  "goal": "For every Grade IX/X subject, prioritize actual board paper or official model inspection before seeding original current-edition questions; English/Urdu grammar and writing hierarchy require full objective+subjective review.",
+  "scope": "ALL_IN_SCOPE_SUBJECTS_ENGLISH_AND_URDU_PRIORITY",
+  "coreSeparation": {
+    "pastPaper": "STRUCTURE_SKILLS_SECTION_HIERARCHY_AND_MARKS_ONLY",
+    "currentOfficialTextbook": "ORIGINAL_QUESTION_CONTENT_AND_ACADEMIC_EVIDENCE",
+    "currentOfficialGrammarOrQuaidEInsha": "ORIGINAL_LANGUAGE_GRAMMAR_AND_COMPOSITION_CONTENT",
+    "asspsEditor": "EXISTING_PAPER_DOCUMENT_VISUAL_LAYOUT_AND_EDITING_RULES_UNCHANGED"
+  },
+  "precedence": [
+    "FIRST_NEW_SYLLABUS_2026_GRADE9_ACTUAL_BOARD_PAPER_SCANS_WHERE_VERIFIABLE",
+    "OFFICIAL_PECTAA_GRADE9_MODEL_AND_PAIRING_IF_ANNEX_VISUALLY_VERIFIED",
+    "OTHER_GRADE9_ACTUAL_REGIONAL_PAPERS_SAME_COHORT_GROUP_AND_MEDIUM",
+    "OLDER_GRADE10_ACTUAL_PAPERS_FOR_STRUCTURE_ONLY",
+    "OFFICIALLY_PUBLISHED_CURRENT_GRADE10_MODEL_ONLY_WHEN_VERIFIED",
+    "THIRD_PARTY_PAPERS_DISCOVERY_ONLY_UNTIL_PAGE_AUTHENTICITY_ESTABLISHED"
+  ],
+  "rules": {
+    "beforeEachPaperOrCorpus": "SCAN_AND_REGISTER_ORIGINAL_ACTUAL_PAPER_OBJECTIVE_SUBJECTIVE_OR_VERIFIED_OFFICIAL_MODEL",
+    "doNotTreatAnswerKeysAsFullPaper": true,
+    "seoYearDoesNotEstablishPaperYear": true,
+    "doNotInferExact2027Grade10PatternFrom2026OldCohort": true,
+    "olderGrade10PatternStructuralReferenceAllowed": true,
+    "neverCopyPastPaperQuestionsOrPassages": true,
+    "questionContentMustComeFromCurrentOfficialEdition": true,
+    "abstractPastPaperAssessedSkillsOnly": true,
+    "exactCategoryHierarchyMustBeBackedByPageReference": true,
+    "marksChoiceAndQuestionOrderRequireActualDocumentVerification": true,
+    "useASSPSExistingEditorNotBoardPageDesign": true,
+    "preserveFullBookDefault": true,
+    "alpAndKlpOptionalVerifiedFilters": true,
+    "subjectMatterReviewBeforeAcademicApproval": true
+  },
+  "documentTypeAuthority": {
+    "ACTUAL_PAPER": "May establish observed board-year pattern after page review",
+    "OFFICIAL_MODEL": "May establish model pattern when actual paper unavailable, label as MODEL",
+    "ANSWER_KEY": "Provides key/version evidence only; cannot establish subjective paper hierarchy",
+    "THIRD_PARTY_REPRODUCTION": "Must match actual board artifact before pattern authority",
+    "INDEX_ONLY": "Discovery only; never a paper pattern evidence"
+  },
+  "patternHierarchySchema": {
+    "paperId": "grade|subject|board|year|session|group|medium",
+    "sourceDocumentId": "required for every asserted section",
+    "sourcePage": "positive integer required for VERIFIED hierarchy",
+    "paperPart": "OBJECTIVE | SUBJECTIVE",
+    "sectionId": "stable identifier",
+    "parentSectionId": "nullable parent question identity",
+    "hierarchyPath": "e.g. Q1 > a > item 1; derived from inspected artifact, not assumed",
+    "boardQuestionLabel": "verbatim minimal label only (Q# / part letter)",
+    "taskFamily": "MCQ | PROSE | POETRY | DRAMA | COMPREHENSION | TRANSLATION | GRAMMAR | WRITING | OTHER; only when observed",
+    "taskSubtype": "specific grammar/composition skill observed, nullable until verified",
+    "instructionShape": "attempt any N / compulsory / either-or, derived, no passage copied",
+    "itemCount": "nullable until inspected",
+    "marksPerItem": "nullable until inspected",
+    "sectionMarks": "nullable until inspected",
+    "choiceRule": "nullable until inspected",
+    "topicOrSkillAnchor": "abstract learning outcome/category; not past-paper stem",
+    "authorityState": "PENDING | VERIFIED_ACTUAL | VERIFIED_MODEL | REJECTED"
+  },
+  "sourceReferences": [
+    {
+      "id": "PECTAA-G9-2026-OFFICIAL-SCHEME-INDEX",
+      "authority": "PECTAA",
+      "year": 2026,
+      "grade": 9,
+      "documentType": "OFFICIAL_MODEL",
+      "url": "https://pectaa.edu.pk/curriculum-compliance/",
+      "artifactState": "OFFICIAL_INDEX_VERIFIED_PAPER_FILE_REVIEW_PENDING",
+      "verifiedPatternHierarchy": false
+    },
+    {
+      "id": "MULTAN-G9-2026-ENGLISH-OBJECTIVE-KEY-BUNDLE",
+      "authority": "BISE Multan",
+      "year": 2026,
+      "grade": 9,
+      "subject": "English",
+      "documentType": "ANSWER_KEY",
+      "indexUrl": "https://web.bisemultan.edu.pk/question-papers-with-key-ssc-part-i-9th-1st-annual-2026-examination/",
+      "url": "https://drive.google.com/file/d/1eeLsV3uADEYxmGWuZMiLLZiHRqzIixNZ/view?usp=drive_link",
+      "pdfSha256": "35060a1bea551ac2908526c41759d8aa5941eceaef8894d6bf90738d8e3f2173",
+      "pages": 24,
+      "artifactState": "OFFICIAL_SCANNED_KEY_VISUALLY_VERIFIED",
+      "verifiedPatternHierarchy": false,
+      "note": "Scanned official objective answer-key bundle, not a question-paper source. Cannot infer subjective hierarchy."
+    },
+    {
+      "id": "MULTAN-G9-2026-URDU-OBJECTIVE-KEY-BUNDLE",
+      "authority": "BISE Multan",
+      "year": 2026,
+      "grade": 9,
+      "subject": "Urdu",
+      "documentType": "ANSWER_KEY",
+      "indexUrl": "https://web.bisemultan.edu.pk/question-papers-with-key-ssc-part-i-9th-1st-annual-2026-examination/",
+      "url": "https://drive.google.com/file/d/13E1TwasHAO1fazKHp9GEpDUAz1DNiBaO/view?usp=drive_link",
+      "pdfSha256": "5f932f7c6331bda19338cf087641081bec5df5aaa45096a05cd14cc883ab8e13",
+      "pages": 25,
+      "artifactState": "OFFICIAL_SCANNED_KEY_VISUALLY_VERIFIED",
+      "verifiedPatternHierarchy": false,
+      "note": "Scanned official objective answer-key bundle, not a question-paper source. Cannot infer subjective hierarchy."
+    },
+    {
+      "id": "MULTAN-G9-2026-OFFICIAL-INDEX",
+      "authority": "BISE Multan",
+      "year": 2026,
+      "grade": 9,
+      "documentType": "INDEX_ONLY",
+      "url": "https://web.bisemultan.edu.pk/past-papers-9th/",
+      "artifactState": "OFFICIAL_INDEX_VERIFIED",
+      "verifiedPatternHierarchy": false
+    },
+    {
+      "id": "GUJRANWALA-G10-2025-LANGUAGE-ARCHIVE-INDEX",
+      "authority": "Secondary archive",
+      "board": "Gujranwala",
+      "year": 2025,
+      "grade": 10,
+      "documentType": "INDEX_ONLY",
+      "url": "https://www.ilmkidunya.com/past_papers/gujranwala10th-past-papers.aspx",
+      "artifactState": "SECONDARY_INDEX_ONLY",
+      "verifiedPatternHierarchy": false
+    },
+    {
+      "id": "LAHORE-G10-2025-ENGLISH-ARCHIVE-INDEX",
+      "authority": "Secondary archive",
+      "board": "Lahore",
+      "year": 2025,
+      "grade": 10,
+      "subject": "English",
+      "documentType": "INDEX_ONLY",
+      "url": "https://pakboards.com/past-papers/bise-lahore/10/arts/english",
+      "artifactState": "SECONDARY_INDEX_ONLY",
+      "verifiedPatternHierarchy": false
+    }
+  ],
+  "priorityAcquisitionQueue": [
+    {
+      "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-I-OBJECTIVE",
+      "grade": 9,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-I-SUBJECTIVE",
+      "grade": 9,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-II-OBJECTIVE",
+      "grade": 9,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-ENGLISH-Lahore_Gujranwala_Multan-II-SUBJECTIVE",
+      "grade": 9,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-URDU-Lahore_Gujranwala_Multan-I-OBJECTIVE",
+      "grade": 9,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-URDU-Lahore_Gujranwala_Multan-I-SUBJECTIVE",
+      "grade": 9,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-URDU-Lahore_Gujranwala_Multan-II-OBJECTIVE",
+      "grade": 9,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G9-URDU-Lahore_Gujranwala_Multan-II-SUBJECTIVE",
+      "grade": 9,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "FIRST_NEW_SYLLABUS_EXAM_SKILL_TAXONOMY_ONLY"
+    },
+    {
+      "id": "G10-ENGLISH-Lahore_Gujranwala_Multan-I-OBJECTIVE",
+      "grade": 10,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-ENGLISH-Lahore_Gujranwala_Multan-I-SUBJECTIVE",
+      "grade": 10,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-ENGLISH-Lahore_Gujranwala_Multan-II-OBJECTIVE",
+      "grade": 10,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-ENGLISH-Lahore_Gujranwala_Multan-II-SUBJECTIVE",
+      "grade": 10,
+      "subject": "English",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-URDU-Lahore_Gujranwala_Multan-I-OBJECTIVE",
+      "grade": 10,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-URDU-Lahore_Gujranwala_Multan-I-SUBJECTIVE",
+      "grade": 10,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "I",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-URDU-Lahore_Gujranwala_Multan-II-OBJECTIVE",
+      "grade": 10,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "OBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    },
+    {
+      "id": "G10-URDU-Lahore_Gujranwala_Multan-II-SUBJECTIVE",
+      "grade": 10,
+      "subject": "Urdu",
+      "boards": [
+        "Lahore",
+        "Gujranwala",
+        "Multan"
+      ],
+      "group": "II",
+      "part": "SUBJECTIVE",
+      "preferredExamYear": 2026,
+      "paperArtifactStatus": "PENDING_ACTUAL_OR_OFFICIAL_MODEL_PAGE_INSPECTION",
+      "allowPatternApproval": false,
+      "contentUse": "OLDER_EDITION_STRUCTURE_ONLY_NEVER_CONTENT"
+    }
+  ],
+  "verifiedHierarchyEntries": [],
+  "verifiedQuestionTextCopiedFromPapers": 0,
+  "verifiedAcademicContentSeededByThisPolicy": 0,
+  "productionWrites": 0,
+  "releaseApproved": false
+}
