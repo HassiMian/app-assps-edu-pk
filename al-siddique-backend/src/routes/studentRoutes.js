@@ -1,6 +1,6 @@
 ﻿const express = require('express')
 const router  = express.Router()
-const { query } = require('../config/database')
+const { query, pool } = require('../config/database')
 const auth = require('../middleware/auth')
 const protect = auth.protect
 const adminOnly = auth.adminOnly
@@ -9,8 +9,10 @@ const requireScopeForServiceOnly = auth.requireScopeForServiceOnly || (() => (re
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
+const { provisionStudentIdentities, rotateTemporaryPassword } = require('../services/portalIdentityService')
+const { teacherStudentScopeClause } = require('../services/teacherAssignmentService')
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
-const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
+const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant'])
 
 const CLASS_ALIASES = {
   starter: 'Starter',
@@ -121,6 +123,16 @@ async function requireStudentInCurrentSchool(req, res, studentId) {
   } else if (role === 'student') {
     sql += ' AND student_user_id = $3'
     params.push(req.user?.id || null)
+  } else if (role === 'teacher') {
+    sql += ` AND EXISTS (
+      SELECT 1 FROM teacher_class_assignments tca
+      WHERE tca.school_id = students.school_id
+        AND tca.teacher_user_id = $3
+        AND tca.is_active = true
+        AND LOWER(tca.class_name) = LOWER(COALESCE(students.class,''))
+        AND (COALESCE(tca.section,'')='' OR LOWER(tca.section)=LOWER(COALESCE(students.section,'')))
+    )`
+    params.push(req.user?.id || null)
   } else if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.students.read')) {
     // tenantClause/RLS already limits the service to its authenticated school.
   } else if (!STUDENT_ADMIN_ROLES.has(role)) {
@@ -138,6 +150,7 @@ function scopedStudentReadClause(req, alias = '', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
   const prefix = alias ? `${alias}.` : ''
   if (STUDENT_ADMIN_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (role === 'teacher') return teacherStudentScopeClause(req, alias, startIndex)
   if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.students.read')) return { clause: '', params: [], nextIndex: startIndex }
   if (role === 'parent') {
     return { clause: ` AND ${prefix}parent_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }
@@ -485,15 +498,27 @@ router.post('/', protect, adminOnly, async (req, res) => {
       VALUES (${insertPlaceholders.join(', ')})
       RETURNING *
     `
-    const result = await query(sql, insertVals)
-    const studentData = result.rows[0]
+    let studentData
+    let identityProvisioning
+    const client = await pool.connect()
+    try {
+      await client.query('BEGIN')
+      const result = await client.query(sql, insertVals)
+      studentData = result.rows[0]
+      identityProvisioning = await provisionStudentIdentities(client, { schoolId, student: studentData })
+      const linked = await client.query(
+        'SELECT * FROM students WHERE id = $1 AND school_id = $2 LIMIT 1',
+        [studentData.id, schoolId],
+      )
+      studentData = linked.rows[0] || studentData
+      await client.query('COMMIT')
+    } catch (identityError) {
+      await client.query('ROLLBACK')
+      throw identityError
+    } finally {
+      client.release()
+    }
     const studentId = studentData.id
-
-    // Credentials Setup
-    const studentEmail = `${finalGr.toLowerCase().replace(/[^a-z0-9]/g, '')}@assps.edu.pk`
-    const studentPassword = studentPortalPassword(studentData)
-    const parentEmail = (parent_phone || parent_whatsapp) ? `${(parent_phone || parent_whatsapp).replace(/\D/g, '').slice(-10)}@parents.assps.edu.pk` : null
-    const parentPassword = parentPortalPassword(studentData)
 
     // Save Fee Profile
     let savedFeeProfile = null
@@ -550,6 +575,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       }
     }
 
+    res.set('Cache-Control', 'private, no-store, max-age=0')
     res.status(201).json({
       success: true,
       message: firstChallan
@@ -559,10 +585,21 @@ router.post('/', protect, adminOnly, async (req, res) => {
       fee_profile: savedFeeProfile,
       first_challan: firstChallan,
       credentials: {
-        parent: parentEmail ? { email: parentEmail, password: parentPassword } : null,
-        student: { email: studentEmail, password: studentPassword }
+        parent: identityProvisioning?.parent ? {
+          loginId: identityProvisioning.parent.loginId,
+          email: identityProvisioning.parent.email,
+          created: identityProvisioning.parent.created,
+          temporaryPassword: identityProvisioning.parent.created ? identityProvisioning.parent.temporaryPassword : null,
+        } : null,
+        student: identityProvisioning?.student ? {
+          loginId: identityProvisioning.student.loginId,
+          email: identityProvisioning.student.email,
+          created: identityProvisioning.student.created,
+          temporaryPassword: identityProvisioning.student.created ? identityProvisioning.student.temporaryPassword : null,
+        } : null,
       },
-      dispatched: !!send_credentials
+      dispatched: false,
+      dispatch_requested: !!send_credentials
     })
   } catch (err) {
     if (err.code === '23505')
