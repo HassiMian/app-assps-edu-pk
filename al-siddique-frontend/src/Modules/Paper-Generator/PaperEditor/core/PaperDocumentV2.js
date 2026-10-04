@@ -5,6 +5,14 @@ export const CANONICAL_FORMAT = 'assps-canonical-paper'
 export const CANONICAL_DOCUMENT_MODEL = 'PaperDocumentV2'
 export const CANONICAL_SCHEMA_VERSION = 3
 
+// Optional provenance discriminator for new documents. Historical canonical
+// migration artifacts intentionally omit this field, so absence continues to
+// mean SOURCE_MIGRATED and their frozen bytes remain untouched.
+export const DocumentOrigin = Object.freeze({
+  SOURCE_MIGRATED: 'SOURCE_MIGRATED',
+  USER_AUTHORED: 'USER_AUTHORED',
+})
+
 export const DocumentLanguage = Object.freeze({
   ENGLISH: 'english',
   URDU: 'urdu',
@@ -115,6 +123,7 @@ export const CanonicalNodeType = Object.freeze({
   UNKNOWN_PRESERVED: 'unknown_preserved',
 })
 
+export const VALID_DOCUMENT_ORIGINS = new Set(Object.values(DocumentOrigin))
 export const VALID_LANGUAGES = new Set(Object.values(DocumentLanguage))
 export const VALID_DIRECTIONS = new Set(Object.values(DocumentDirection))
 export const VALID_ATTEMPT_RULES = new Set(Object.values(AttemptRule))
@@ -517,6 +526,7 @@ export function createCanonicalPaperDocument(overrides = {}) {
     format: CANONICAL_FORMAT,
     documentModel: CANONICAL_DOCUMENT_MODEL,
     schemaVersion: CANONICAL_SCHEMA_VERSION,
+    ...(overrides.documentOrigin ? { documentOrigin: overrides.documentOrigin } : {}),
     id: overrides.id,
     metadata: {
       title: meta.title ?? null,
@@ -614,8 +624,18 @@ export function validateCanonicalPaperDocument(doc) {
     errors.push('Document id must be a non-empty string')
   }
 
-  // 3. Source Identity Validation (Mandatory for Canonical B2)
-  if (!doc.sourceIdentity || typeof doc.sourceIdentity !== 'object') {
+  // 3. Provenance / Source Identity Validation. Historical corpus documents
+  // predate documentOrigin and therefore default to SOURCE_MIGRATED. New
+  // USER_AUTHORED documents must never invent a legacy V13 source identity.
+  const documentOrigin = doc.documentOrigin || DocumentOrigin.SOURCE_MIGRATED
+  if (!VALID_DOCUMENT_ORIGINS.has(documentOrigin)) {
+    errors.push(`Invalid documentOrigin: "${documentOrigin}"`)
+  }
+  if (documentOrigin === DocumentOrigin.USER_AUTHORED) {
+    if (doc.sourceIdentity !== null && doc.sourceIdentity !== undefined) {
+      errors.push('USER_AUTHORED document sourceIdentity must be null or absent')
+    }
+  } else if (!doc.sourceIdentity || typeof doc.sourceIdentity !== 'object') {
     errors.push('Document sourceIdentity must be an object')
   } else {
     const sid = doc.sourceIdentity

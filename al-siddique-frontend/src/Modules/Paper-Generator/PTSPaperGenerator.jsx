@@ -20,6 +20,7 @@ import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPa
 import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
 import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
 import { createBlankPaperDraft } from './paperCreationDraft.js'
+import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
 
 function storeQToTemplate(q) {
  return {
@@ -630,6 +631,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [printAns, setPrintAns] = useState(Boolean(editorSettings.printAnswerKey))
  const [modalOpen, setModalOpen] = useState(!loadedPaper)
  const persistedPaperIdRef = useRef(loadedPaper?.id || '')
+ const [finalizing, setFinalizing] = useState(false)
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
  const [priority, setPriority] = useState('all')
@@ -873,7 +875,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setSelIds(n)
  }
 
- function doSave() {
+ function doSave(options = {}) {
+ const silent = options?.silent === true
  if (!totalQs && !loadedPaper?.userAuthored) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
  const selectedQuestions = {}
@@ -888,6 +891,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   printBubbleSheet:printBub, printAnswerKey:printAns,
   showWatermark, watermarkOpacity, watermarkScale,
  }
+ const canonicalDocument = loadedPaper?.userAuthored
+  ? createManualAssessmentDocument({ paper:{ ...loadedPaper, ...paper }, config:cfg, paperSettings })
+  : null
  const payloadBase = {
        ...paper,
        name: loadedPaper?.name || name,
@@ -901,12 +907,13 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
         ? (totalQs>0 && marksLedger.balanced && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : 'DRAFT')
         : (isOfficialPaper && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness)),
        selectedQuestions,
+       ...(canonicalDocument ? { canonicalDocument, canonicalAuthority:'PaperDocumentV2', persistenceAuthority:'LOCAL_RECOVERY_ONLY' } : {}),
        ...(isOfficialPaper ? { official_section_marks:marksLedger.questionTotal } : {}),
      }
  const payload = isOfficialPaper && loadedPaper?.creationMethod !== 'blank' ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
  const saved = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, payload) : savePaper(payload)
  if (saved?.id) persistedPaperIdRef.current = saved.id
-  if (!saved) return // Failed due to quota exceeded
+  if (!saved) return null // Failed due to quota exceeded
   
   const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
   name: overrideConfig?.subjectName || overrideConfig?.subject || subjectName || '',
@@ -926,7 +933,36 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   source: loadedPaper?.paperSource || overrideConfig?.paperSource || 'paper',
   })
   }
-  alert(`Paper saved! "${payload.name}" (${totalQs} questions)`)
+  if (!silent) alert(`Paper saved! \"${payload.name}\" (${totalQs} questions)`)
+  return saved
+ }
+
+ async function doFinalize() {
+  if (!loadedPaper?.userAuthored || finalizing) return
+  if (!totalQs) { alert('FINALIZE BLOCKED — add at least one question first.'); return }
+  if (draftQuality.errorCount > 0 || printAudit.blocked) {
+    alert('FINALIZE BLOCKED — resolve paper quality/print issues first.')
+    return
+  }
+  setFinalizing(true)
+  try {
+    const saved = doSave({ silent:true })
+    if (!saved?.canonicalDocument) throw new Error('Canonical PaperDocument was not saved.')
+    const check = validateManualAssessmentForRelease(saved.canonicalDocument)
+    if (!check.valid) throw new Error(check.errors.join(' | '))
+    const release = await createAssessmentRelease(saved.canonicalDocument)
+    const finalized = updateSavedPaper(saved.id, {
+      assessmentRelease:release, lifecycleStatus:'FINALIZED', printReadiness:'READY',
+      finalizedAt:release.releasedAt,
+    })
+    if (!finalized) throw new Error('Finalized release could not be persisted.')
+    onPaperChange(current => ({ ...current, assessmentRelease:release, lifecycleStatus:'FINALIZED', printReadiness:'READY' }))
+    alert(`Assessment finalized. Release hash: ${release.contentHash.slice(0,12)}…`)
+  } catch (error) {
+    alert(`FINALIZE BLOCKED — ${error.message}`)
+  } finally {
+    setFinalizing(false)
+  }
  }
 
  async function doPrint() {
@@ -1059,7 +1095,8 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
  {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
- <DBtn color="green" onClick={doSave} disabled={!totalQs && !loadedPaper?.userAuthored} style={{ padding:'8px 16px', fontSize:13 }}>{loadedPaper?.userAuthored ? 'Save Draft' : 'Save'}</DBtn>
+ <DBtn color="green" onClick={()=>doSave()} disabled={!totalQs && !loadedPaper?.userAuthored} style={{ padding:'8px 16px', fontSize:13 }}>{loadedPaper?.userAuthored ? 'Save Draft' : 'Save'}</DBtn>
+ {loadedPaper?.userAuthored && <button data-finalize-assessment type="button" onClick={doFinalize} disabled={finalizing || !totalQs} style={{ padding:'8px 14px',borderRadius:9,border:`1px solid ${D.gold}`,background:'rgba(200,153,26,.10)',color:D.gold,fontWeight:900,fontSize:12,cursor:finalizing?'wait':'pointer',opacity:(finalizing||!totalQs)?0.55:1 }}>{finalizing?'Finalizing…':paper.assessmentRelease?.status==='FINALIZED'?'Finalized ✓':'Finalize'}</button>}
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
  </div>
  </div>

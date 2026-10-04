@@ -100,7 +100,10 @@ function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
  const { savedPapers } = usePaperStore()
  const params = new URLSearchParams(window.location.search)
- const fixture = params.has('new') ? null : params.has('reopen') ? savedPapers.find(p => p.userAuthored && p.name==='Phase1 Browser Urdu') || null : params.has('recovery8') ? classEightUrduFixture : paper
+ const reopenName = params.get('reopenName') || 'Phase1 Browser Urdu'
+ const reopenId = params.get('reopenId') || ''
+ const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('recovery8') ? classEightUrduFixture : paper
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

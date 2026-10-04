@@ -18,11 +18,15 @@ export function createBlankPaperDraft(input={}) {
  const title=safeText(input.title)||'New Examination Paper'
  const totalMarks=input.targetMarks===''||input.targetMarks==null?0:target
  const name=safeText(input.name)||`${subjectName} — ${classLevel} — ${title}`
+ const assessmentType=safeText(input.assessmentType)||safeText(input.examType)||title||'Weekly Assessment'
+ const scopeLabel=safeText(input.scopeLabel)
  return {
   name, creationMethod:'blank', userAuthored:true, documentFormat:'pts-native-v13',
-  printReadiness:'DRAFT',
+  clientDraftId:`manual-draft-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,
+  assessmentType, scope:{label:scopeLabel||null,chapterId:null,learningScopeIds:[]},
+  printReadiness:'DRAFT', lifecycleStatus:'DRAFT',
   config:{
-   title, examType:safeText(input.examType)||title,
+   title, assessmentType, scopeLabel, examType:safeText(input.examType)||assessmentType,
    classLevel,className:classLevel,
    subject:subjectName,subjectName,language,
    paperCode:safeText(input.paperCode),
