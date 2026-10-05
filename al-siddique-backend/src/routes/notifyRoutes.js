@@ -282,6 +282,57 @@ router.post('/single', protect, canSendNotifications, async (req, res) => {
   }
 })
 
+// GET /api/notify/group-recipients — source-backed school communication groups
+router.get('/group-recipients', protect, canSendNotifications, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const group = String(req.query.group || 'parents').toLowerCase()
+    const limit = Math.min(Number(req.query.limit || 500) || 500, 1000)
+    let result
+
+    if (group === 'parents') {
+      result = await pool.query(`
+        SELECT s.id AS student_id, s.name, COALESCE(NULLIF(s.parent_whatsapp,''), NULLIF(s.parent_phone,'')) AS phone
+        FROM students s
+        WHERE s.school_id = $1 AND s.is_active = true
+          AND COALESCE(NULLIF(s.parent_whatsapp,''), NULLIF(s.parent_phone,'')) IS NOT NULL
+        ORDER BY s.class, s.section, s.roll_number, s.name
+        LIMIT $2
+      `, [schoolId, limit])
+    } else if (group === 'students') {
+      result = await pool.query(`
+        SELECT s.id AS student_id, s.name, NULLIF(s.phone_number,'') AS phone
+        FROM students s
+        WHERE s.school_id = $1 AND s.is_active = true AND NULLIF(s.phone_number,'') IS NOT NULL
+        ORDER BY s.class, s.section, s.roll_number, s.name
+        LIMIT $2
+      `, [schoolId, limit])
+    } else if (group === 'teachers' || group === 'staff') {
+      const teacherFilter = group === 'teachers'
+        ? `AND (LOWER(COALESCE(e.designation,'')) LIKE '%teacher%' OR LOWER(COALESCE(e.department,'')) LIKE '%academic%')`
+        : ''
+      result = await pool.query(`
+        SELECT NULL::integer AS student_id, e.name, NULLIF(e.phone,'') AS phone
+        FROM employees e
+        WHERE e.school_id = $1 AND e.is_active = true AND NULLIF(e.phone,'') IS NOT NULL
+          ${teacherFilter}
+        ORDER BY e.name
+        LIMIT $2
+      `, [schoolId, limit])
+    } else {
+      return res.status(400).json({ success: false, message: 'Unsupported recipient group.' })
+    }
+
+    const recipients = result.rows
+      .map(row => ({ student_id: row.student_id || null, name: row.name, phone: formatPhone(row.phone) }))
+      .filter(row => row.phone)
+    res.json({ success: true, group, count: recipients.length, recipients })
+  } catch (err) {
+    console.error('Group recipients error:', err.message)
+    res.status(500).json({ success: false, message: 'Recipient group could not be loaded.' })
+  }
+})
+
 // GET /api/notify/recipients
 router.get('/recipients', protect, canSendNotifications, async (req, res) => {
   try {
@@ -307,10 +358,10 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
     let jobs = []
     if (Array.isArray(recipients) && recipients.length) {
       jobs = recipients
-        .map(item => ({ phone: item?.phone, message: item?.message || message, student_id: item?.student_id || item?.id || null, name: item?.name || null, title: item?.title || 'School Notification', type: item?.type || 'manual' }))
+        .map(item => ({ phone: item?.phone, message: item?.message || message, student_id: item?.student_id || item?.id || null, name: item?.name || null, title: item?.title || 'School Notification', type: item?.type || 'manual', recipient_role: item?.recipient_role || 'parent', recipient_group: item?.recipient_group || null }))
         .filter(item => item.phone && item.message)
     } else if (Array.isArray(phones) && message) {
-      jobs = phones.map(phone => ({ phone, message, student_id: null, name: null, title: 'School Notification', type: 'manual' }))
+      jobs = phones.map(phone => ({ phone, message, student_id: null, name: null, title: 'School Notification', type: 'manual', recipient_role: 'parent', recipient_group: null }))
     }
 
     if (!jobs.length) {
@@ -334,6 +385,7 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
 
       const metadata = {
         recipient_name: job.name || null,
+        recipient_group: job.recipient_group || null,
         provider_error: delivery.error || null,
         requested_channel: channel,
       }
@@ -341,10 +393,11 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
         INSERT INTO notification_log (
           school_id, student_id, recipient_role, title, type, channel, phone, message,
           metadata, status, sent_by, sent_at, provider_sid
-        ) VALUES ($1,$2,'parent',$3,$4,$5,$6,$7,$8::jsonb,$9,$10,NOW(),$11)
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,NOW(),$12)
       `, [
         schoolId,
         Number.isInteger(Number(job.student_id)) ? Number(job.student_id) : null,
+        job.recipient_role || 'parent',
         job.title || 'School Notification',
         job.type || 'manual',
         delivery.channel || (channel === 'auto' ? null : channel),

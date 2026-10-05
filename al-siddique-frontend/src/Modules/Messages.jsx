@@ -1,78 +1,126 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import api from '../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from './moduleStyles'
 
-const RECIPIENTS = ['Students', 'Teachers', 'Parents', 'Staff']
-const initialMessages = [
- { id: 1, recipient: 'Parents', subject: 'Monthly Fee Reminder', status: 'Sent', date: '2026-05-01' },
- { id: 2, recipient: 'Students', subject: 'Exam Schedule Update', status: 'Draft', date: '2026-05-03' },
+const RECIPIENTS = [
+ { value: 'parents', label: 'Parents' },
+ { value: 'students', label: 'Students' },
+ { value: 'teachers', label: 'Teachers' },
+ { value: 'staff', label: 'Staff' },
 ]
 
 export default function Messages() {
- const [messages, setMessages] = useState(initialMessages)
- const [draft, setDraft] = useState({ recipient: 'Parents', subject: '', body: '' })
+ const [messages, setMessages] = useState([])
+ const [draft, setDraft] = useState({ recipient: 'parents', subject: '', body: '' })
  const [alert, setAlert] = useState('')
+ const [sending, setSending] = useState(false)
+ const [recipientCount, setRecipientCount] = useState(0)
 
- const sendMessage = (event) => {
+ async function loadHistory() {
+ try {
+ const response = await api.get('/api/notify/history')
+ const rows = Array.isArray(response.data?.data) ? response.data.data : []
+ setMessages(rows.filter(item => item.type === 'message').map(item => ({
+ id: item.id,
+ recipient: item.metadata?.recipient_group || item.metadata?.recipient_name || 'Recipient',
+ subject: item.title || 'School Message',
+ status: item.status || 'pending',
+ date: item.sent_at ? new Date(item.sent_at).toLocaleDateString('en-GB') : '',
+ })))
+ } catch (err) {
+ console.error('Failed to load message history', err)
+ setMessages([])
+ }
+ }
+
+ useEffect(() => {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ void loadHistory()
+ }, [])
+
+ useEffect(() => {
+ let cancelled = false
+ async function loadRecipients() {
+ try {
+ const response = await api.get('/api/notify/group-recipients', { params: { group: draft.recipient } })
+ if (!cancelled) setRecipientCount(Number(response.data?.count || 0))
+ } catch {
+ if (!cancelled) setRecipientCount(0)
+ }
+ }
+ void loadRecipients()
+ return () => { cancelled = true }
+ }, [draft.recipient])
+
+ const sendMessage = async (event) => {
  event.preventDefault()
- setMessages((prev) => [...prev, { ...draft, id: Date.now(), status: 'Sent', date: new Date().toISOString().split('T')[0] }])
- setDraft({ recipient: 'Parents', subject: '', body: '' })
- setAlert('Message sent successfully.')
- setTimeout(() => setAlert(''), 2800)
+ if (sending) return
+ setSending(true)
+ setAlert('')
+ try {
+ const recipientRes = await api.get('/api/notify/group-recipients', { params: { group: draft.recipient } })
+ const recipients = Array.isArray(recipientRes.data?.recipients) ? recipientRes.data.recipients : []
+ if (!recipients.length) {
+ setAlert('No verified recipients are available for this group.')
+ return
+ }
+ await api.post('/api/notify/bulk', {
+ channel: 'auto',
+ recipients: recipients.map(item => ({
+ ...item,
+ title: draft.subject,
+ type: 'message',
+ message: draft.body,
+ recipient_group: draft.recipient,
+ recipient_role: draft.recipient === 'parents' ? 'parent' : draft.recipient === 'students' ? 'student' : draft.recipient === 'teachers' ? 'teacher' : 'staff',
+ })),
+ })
+ setDraft({ recipient: draft.recipient, subject: '', body: '' })
+ setAlert('Message batch processed. Delivery status is available in the verified log.')
+ await loadHistory()
+ } catch (err) {
+ setAlert(err.response?.data?.message || 'Message could not be sent.')
+ } finally {
+ setSending(false)
+ setTimeout(() => setAlert(''), 3500)
+ }
  }
 
  return (
- <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+ <div style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
  <div style={{ maxWidth: 1220, margin: '0 auto', display: 'grid', gap: 22 }}>
  <div className="super-module-card" style={{ ...card, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, borderRadius: 22 }}>
  <div>
  <h1 style={sectionHeader}>School Messaging</h1>
- <p style={{ color: C.muted, marginTop: 8 }}>Send announcements, alerts, and reminders to students, parents, and staff.</p>
+ <p style={{ color: C.muted, marginTop: 8 }}>Send source-backed announcements to verified school contacts.</p>
  </div>
- <button style={btnPrimary}>Message Templates</button>
+ <div style={{ color:C.muted, fontSize:12, alignSelf:'center' }}>{recipientCount} verified recipients in selected group</div>
  </div>
 
  <form className="super-module-card" onSubmit={sendMessage} style={{ ...card, display: 'grid', gap: 18, borderRadius: 22 }}>
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
- <div>
- <label style={labelStyle}>Recipient Group</label>
- <select style={select} value={draft.recipient} onChange={(e) => setDraft({ ...draft, recipient: e.target.value })}>
- {RECIPIENTS.map((recipient) => <option key={recipient} value={recipient}>{recipient}</option>)}
- </select>
+ <div><label style={labelStyle}>Recipient Group</label><select style={select} value={draft.recipient} onChange={e => setDraft({ ...draft, recipient: e.target.value })}>{RECIPIENTS.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}</select></div>
+ <div><label style={labelStyle}>Subject</label><input style={input} value={draft.subject} onChange={e => setDraft({ ...draft, subject: e.target.value })} required /></div>
  </div>
- <div>
- <label style={labelStyle}>Subject</label>
- <input style={input} value={draft.subject} onChange={(e) => setDraft({ ...draft, subject: e.target.value })} required />
- </div>
- </div>
- <div>
- <label style={labelStyle}>Message Body</label>
- <textarea style={{ ...input, minHeight: 120, resize: 'vertical' }} value={draft.body} onChange={(e) => setDraft({ ...draft, body: e.target.value })} required />
- </div>
+ <div><label style={labelStyle}>Message</label><textarea style={{ ...input, minHeight: 130, resize: 'vertical' }} value={draft.body} onChange={e => setDraft({ ...draft, body: e.target.value })} required /></div>
  <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
- <button type="submit" style={btnPrimary}>Send Message</button>
- <button type="button" style={btnSecondary}>Save Draft</button>
- {alert && <span style={{ color: C.green, fontWeight: 700 }}>{alert}</span>}
+ <button type="submit" style={btnPrimary} disabled={sending || recipientCount === 0}>{sending ? 'Sending…' : 'Send Message'}</button>
+ <button type="button" style={{ ...btnSecondary, opacity:0.55, cursor:'not-allowed' }} disabled title="Draft persistence is not enabled yet">Save Draft</button>
+ {alert && <span style={{ color: alert.startsWith('Message batch') ? C.green : C.red, fontWeight: 700 }}>{alert}</span>}
  </div>
  </form>
 
  <div className="super-module-card" style={{ ...card, overflowX: 'auto', borderRadius: 22 }}>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
- <thead>
- <tr style={{ borderBottom: `1px solid ${C.border}` }}>
- {['Sent Date', 'Recipient', 'Subject', 'Status'].map((label) => (
- <th key={label} style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12, textTransform: 'uppercase', letterSpacing: 0.06 }}>{label}</th>
- ))}
- </tr>
- </thead>
+ <thead><tr style={{ borderBottom: `1px solid ${C.border}` }}>{['Sent Date','Recipient','Subject','Status'].map(label => <th key={label} style={{ padding:'14px 16px', textAlign:'left', color:C.muted, fontSize:12, textTransform:'uppercase' }}>{label}</th>)}</tr></thead>
  <tbody>
- {messages.map((msg, index) => (
- <tr key={msg.id} style={{ background: index % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
- <td style={{ padding: '14px 16px', color: C.gold }}>{msg.date}</td>
- <td style={{ padding: '14px 16px' }}>{msg.recipient}</td>
- <td style={{ padding: '14px 16px' }}>{msg.subject}</td>
- <td style={{ padding: '14px 16px' }}><span style={{ padding: '6px 12px', borderRadius: 14, background: msg.status === 'Sent' ? 'rgba(48,209,88,0.14)' : 'rgba(255,159,10,0.14)', color: msg.status === 'Sent' ? C.green : C.gold, fontWeight: 700 }}>{msg.status}</span></td>
- </tr>
- ))}
+ {messages.map((msg, index) => <tr key={msg.id} style={{ background:index % 2 ? 'var(--apex-bg-subtle)' : 'transparent' }}>
+ <td style={{ padding:'14px 16px', color:C.gold }}>{msg.date}</td>
+ <td style={{ padding:'14px 16px' }}>{msg.recipient}</td>
+ <td style={{ padding:'14px 16px' }}>{msg.subject}</td>
+ <td style={{ padding:'14px 16px' }}><span style={{ padding:'6px 12px', borderRadius:14, background:msg.status === 'sent' ? 'color-mix(in srgb, var(--apex-action-success) 10%, transparent)' : 'var(--apex-bg-subtle)', color:msg.status === 'sent' ? C.green : C.muted, fontWeight:700 }}>{msg.status}</span></td>
+ </tr>)}
+ {!messages.length && <tr><td colSpan={4} style={{ padding:28, textAlign:'center', color:C.muted }}>No verified message deliveries recorded yet.</td></tr>}
  </tbody>
  </table>
  </div>
