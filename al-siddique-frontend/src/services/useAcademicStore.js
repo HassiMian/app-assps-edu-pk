@@ -218,6 +218,7 @@ export function useAcademicStore() {
       const storage = getStorage()
       try { storage?.setItem(AK, JSON.stringify(next)) } catch {}
       window.dispatchEvent(new Event('storage'))
+      void api.put('/api/academic/setup', next).catch(() => {})
       return next
     })
   }

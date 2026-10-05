@@ -7,8 +7,23 @@ const { DEFAULT_ACADEMIC_SETUP, validateAcademicSetup } = require('../services/a
 
 const canEditAcademic = requireRoles('super_admin', 'admin', 'principal', 'school_admin')
 
+let academicStorageReady = null
+function ensureAcademicStorage() {
+  if (!academicStorageReady) {
+    academicStorageReady = (async () => {
+      await query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS academic_setup JSONB DEFAULT '{}'::jsonb")
+      await query('CREATE UNIQUE INDEX IF NOT EXISTS settings_school_id_unique ON settings (school_id)')
+    })().catch(err => {
+      academicStorageReady = null
+      throw err
+    })
+  }
+  return academicStorageReady
+}
+
 router.get('/setup', protect, requireScopeForServiceOnly('school.classes.read'), async (req, res) => {
   try {
+    await ensureAcademicStorage()
     const schoolId = currentSchoolId(req)
     const result = await query(
       `SELECT academic_setup
@@ -51,6 +66,7 @@ router.put('/setup', protect, canEditAcademic, async (req, res) => {
   }
 
   try {
+    await ensureAcademicStorage()
     const schoolId = currentSchoolId(req)
     const payload = validation.value
     const result = await query(

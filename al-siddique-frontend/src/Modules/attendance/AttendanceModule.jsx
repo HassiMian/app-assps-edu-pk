@@ -32,28 +32,28 @@ const transformStudent = (student) => ({
 })
 
 const card = {
- background: "rgba(11,44,77,0.92)", backdropFilter: "blur(20px)",
- border: "1px solid rgba(148,163,184,0.18)", borderRadius: 20, padding: 24,
+ background: "var(--apex-bg-surface)", backdropFilter: "blur(20px)",
+ border: "1px solid var(--apex-border-default)", borderRadius: 20, padding: 24,
 };
 
 const btnPrimary = {
  display: "flex", alignItems: "center", gap: 8,
- background: "linear-gradient(135deg, #C8991A, #e8b420)",
- color: "#071e34", border: "none", borderRadius: 10,
+ background: "var(--apex-action-primary)",
+ color: "#fff", border: "none", borderRadius: 10,
  padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: "pointer",
 };
 
 const btnSecondary = {
  display: "flex", alignItems: "center", gap: 8,
- background: "rgba(11,44,77,0.6)", color: "#C0C8D8",
- border: "1px solid rgba(200,153,26,0.2)", borderRadius: 10,
+ background: "var(--apex-bg-surface-solid)", color: "var(--apex-text-secondary)",
+ border: "1px solid var(--apex-border-default)", borderRadius: 10,
  padding: "10px 20px", fontWeight: 600, fontSize: 14, cursor: "pointer",
 };
 
 const selectStyle = {
  padding: "10px 14px", borderRadius: 10,
- background: "rgba(7,22,40,0.92)", border: "1px solid rgba(200,153,26,0.2)",
- color: "#C0C8D8", fontSize: 14, outline: "none", cursor: "pointer",
+ background: "var(--apex-bg-surface-solid)", border: "1px solid var(--apex-border-default)",
+ color: "var(--apex-text-secondary)", fontSize: 14, outline: "none", cursor: "pointer",
 };
 
 const ATTENDANCE_CLASS_LABEL_FIXES = {
@@ -197,8 +197,8 @@ export default function AttendanceModule() {
  <Check size={22} color="#30D158" />
  </div>
  <div>
- <h1 style={{ color: "#C0C8D8", fontSize: 24, fontWeight: 800, margin: 0 }}>Attendance System</h1>
- <p style={{ color: "#8892A4", fontSize: 13, margin: 0 }}>Session 2026-2027 · Mark & track student attendance</p>
+ <h1 style={{ color: "var(--apex-text-secondary)", fontSize: 24, fontWeight: 800, margin: 0 }}>Attendance System</h1>
+ <p style={{ color: "var(--apex-text-tertiary)", fontSize: 13, margin: 0 }}>Session 2026-2027 · Mark & track student attendance</p>
  </div>
  </div>
  </div>
@@ -367,7 +367,7 @@ export default function AttendanceModule() {
  { label: "Absent", value: absentCount, color: "#FF375F", bg: "rgba(255,55,95,0.1)" },
  { label: "Late", value: lateCount, color: "#FF9F0A", bg: "rgba(255,159,10,0.1)" },
  { label: "Leave", value: leaveCount, color: "#0A84FF", bg: "rgba(10,132,255,0.1)" },
- { label: "Unmarked", value: unmarked, color: "#8892A4", bg: "rgba(136,146,164,0.1)" },
+ { label: "Unmarked", value: unmarked, color: "var(--apex-text-tertiary)", bg: "rgba(136,146,164,0.1)" },
  ].map(s => (
  <div key={s.label} style={{ ...card, padding: 16, background: s.bg, border: `1px solid ${s.color}33`, borderRadius: 20, textAlign: "center" }}>
  <div style={{ color: s.color, fontSize: 28, fontWeight: 800 }}>{s.value}</div>
@@ -379,7 +379,7 @@ export default function AttendanceModule() {
  {/* Student List */}
  <div className="super-module-card" style={card}>
  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
- <h3 style={{ color: "#C8991A", fontSize: 15, fontWeight: 700, margin: 0 }}>
+ <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, margin: 0 }}>
  {selectedClass} — Section {selectedSection} · {selectedDate}
  </h3>
  <button onClick={handleSave} style={btnPrimary}>
@@ -407,11 +407,11 @@ export default function AttendanceModule() {
  background: status === "present" ? "rgba(48,209,88,0.06)" : status === "absent" ? "rgba(255,55,95,0.06)" : status === "late" ? "rgba(255,159,10,0.06)" : status === "leave" ? "rgba(10,132,255,0.06)" : "rgba(15,23,42,0.46)",
  border: `1px solid ${status === "present" ? "rgba(48,209,88,0.2)" : status === "absent" ? "rgba(255,55,95,0.2)" : status === "late" ? "rgba(255,159,10,0.2)" : status === "leave" ? "rgba(10,132,255,0.2)" : "rgba(200,153,26,0.1)"}`,
  }}>
- <span style={{ color: "#8892A4", fontSize: 13, width: 24 }}>{i + 1}</span>
+ <span style={{ color: "var(--apex-text-tertiary)", fontSize: 13, width: 24 }}>{i + 1}</span>
  <span style={{ fontSize: 28 }}>{s.photo}</span>
  <div style={{ flex: 1 }}>
- <div style={{ color: "#C0C8D8", fontWeight: 600, fontSize: 14 }}>{s.name}</div>
- <div style={{ color: "#8892A4", fontSize: 12 }}>{s.gr}</div>
+ <div style={{ color: "var(--apex-text-secondary)", fontWeight: 600, fontSize: 14 }}>{s.name}</div>
+ <div style={{ color: "var(--apex-text-tertiary)", fontSize: 12 }}>{s.gr}</div>
  </div>
  <div style={{ display: "flex", gap: 8 }}>
  {[
@@ -444,37 +444,37 @@ export default function AttendanceModule() {
  <div>
  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
  <div className="super-module-card" style={card}>
- <h3 style={{ color: "#C8991A", fontSize: 15, fontWeight: 700, marginBottom: 20 }}>Monthly Attendance — May 2026</h3>
+ <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 20 }}>Monthly Attendance — May 2026</h3>
  <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 120 }}>
  {Array.from({ length: 26 }, (_, i) => {
  const pct = Math.floor(Math.random() * 30) + 70;
  return (
  <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
  <div style={{ width: "100%", height: pct * 1.2, borderRadius: 3, background: pct >= 90 ? "#30D158" : pct >= 80 ? "#C8991A" : "#FF375F" }} />
- {(i + 1) % 5 === 0 && <span style={{ color: "#8892A4", fontSize: 8 }}>{i + 1}</span>}
+ {(i + 1) % 5 === 0 && <span style={{ color: "var(--apex-text-tertiary)", fontSize: 8 }}>{i + 1}</span>}
  </div>
  );
  })}
  </div>
  <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
- {[["#30D158", "≥90%"], ["#C8991A", "≥80%"], ["#FF375F", "Below 80%"]].map(([c, l]) => (
+ {[["var(--apex-action-success)", "≥90%"], ["var(--apex-action-highlight)", "≥80%"], ["var(--apex-action-danger)", "Below 80%"]].map(([c, l]) => (
  <div key={l} style={{ display: "flex", alignItems: "center", gap: 4 }}>
  <div style={{ width: 8, height: 8, borderRadius: 2, background: c }} />
- <span style={{ color: "#8892A4", fontSize: 11 }}>{l}</span>
+ <span style={{ color: "var(--apex-text-tertiary)", fontSize: 11 }}>{l}</span>
  </div>
  ))}
  </div>
  </div>
 
  <div className="super-module-card" style={card}>
- <h3 style={{ color: "#C8991A", fontSize: 15, fontWeight: 700, marginBottom: 16 }}>Class-wise Attendance %</h3>
+ <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 16 }}>Class-wise Attendance %</h3>
  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
  {CLASSES.slice(0, 7).map(c => {
  const pct = Math.floor(Math.random() * 20) + 78;
  return (
  <div key={c} style={{ display: "flex", alignItems: "center", gap: 10 }}>
- <span style={{ color: "#8892A4", fontSize: 12, width: 60 }}>{c}</span>
- <div style={{ flex: 1, height: 18, background: "rgba(11,44,77,0.92)", borderRadius: 6, overflow: "hidden" }}>
+ <span style={{ color: "var(--apex-text-tertiary)", fontSize: 12, width: 60 }}>{c}</span>
+ <div style={{ flex: 1, height: 18, background: "var(--apex-bg-surface)", borderRadius: 6, overflow: "hidden" }}>
  <div style={{ width: `${pct}%`, height: "100%", background: pct >= 90 ? "#30D158" : pct >= 80 ? "#C8991A" : "#FF375F", borderRadius: 6, display: "flex", alignItems: "center", paddingLeft: 8 }}>
  <span style={{ color: "white", fontSize: 10, fontWeight: 700 }}>{pct}%</span>
  </div>
@@ -491,7 +491,7 @@ export default function AttendanceModule() {
  {/* SMS REPORT TAB */}
  {tab === "report" && (
  <div className="super-module-card" style={card}>
- <h3 style={{ color: "#C8991A", fontSize: 15, fontWeight: 700, marginBottom: 16 }}> SMS/WhatsApp Notifications</h3>
+ <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 16 }}> SMS/WhatsApp Notifications</h3>
  <div style={{ marginBottom: 20, padding: "14px 18px", background: "rgba(10,132,255,0.08)", border: "1px solid rgba(10,132,255,0.2)", borderRadius: 12 }}>
  <p style={{ color: "#0A84FF", fontSize: 13, margin: 0 }}>
  ℹ When attendance is saved, SMS is automatically sent to parents of absent students via WhatsApp Business API.
@@ -499,12 +499,12 @@ export default function AttendanceModule() {
  </div>
  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
  {students.slice(0, 3).map(s => (
- <div key={s.id} style={{ padding: "14px 18px", background: "rgba(7,30,52,0.4)", borderRadius: 12, border: "1px solid rgba(200,153,26,0.1)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+ <div key={s.id} style={{ padding: "14px 18px", background: "var(--apex-bg-subtle)", borderRadius: 12, border: "1px solid var(--apex-border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
  <span style={{ fontSize: 24 }}>{s.photo}</span>
  <div>
- <div style={{ color: "#C0C8D8", fontWeight: 600 }}>{s.name}</div>
- <div style={{ color: "#8892A4", fontSize: 12 }}>Parent: 0300-1234567</div>
+ <div style={{ color: "var(--apex-text-secondary)", fontWeight: 600 }}>{s.name}</div>
+ <div style={{ color: "var(--apex-text-tertiary)", fontSize: 12 }}>Parent: 0300-1234567</div>
  </div>
  </div>
  <span style={{ padding: "4px 12px", background: "rgba(48,209,88,0.1)", border: "1px solid rgba(48,209,88,0.3)", borderRadius: 20, fontSize: 12, color: "#30D158", fontWeight: 600 }}>SMS Sent </span>
