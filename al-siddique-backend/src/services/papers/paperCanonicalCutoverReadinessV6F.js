@@ -2,6 +2,7 @@
 const { query } = require('../../config/database')
 const { verifyCanonicalRendererEvidence } = require('./paperRendererEvidenceV6F4')
 const { verifyCurriculumPublisherEvidence } = require('./paperCurriculumPublisherEvidenceV6G')
+const { deriveTechnicalEvidence } = require('./paperCurriculumTechnicalEvidenceV6G2')
 const REQUIRED_TABLES=['paper_documents','paper_revisions']
 const envTrue=name=>String(process.env[name]||'').trim().toLowerCase()==='true'
 async function tableExists(name){const r=await query("select exists(select 1 from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname=$1 and c.relkind in ('r','p')) ok",[name]);return Boolean(r.rows[0]?.ok)}
@@ -66,6 +67,7 @@ async function buildCanonicalCutoverReadiness(){
  const rendererEvidence=await verifyCanonicalRendererEvidence()
  const publisherApprovalFlag=envTrue('PAPER_CURRICULUM_PUBLISHER_PRODUCTION_APPROVED')
  const publisherEvidence=await verifyCurriculumPublisherEvidence()
+ const curriculumTechnicalEvidence=deriveTechnicalEvidence()
  const gates={
   canonicalRegistryPresent:registryPresent,
   canonicalRuntimeRoleApproved:runtimeRoleApproved,
@@ -94,6 +96,6 @@ async function buildCanonicalCutoverReadiness(){
  if(!gates.backupRestoreDrillApproved)blockers.push('BACKUP_RESTORE_DRILL_NOT_APPROVED')
  if(!gates.canonicalRegistryWriteEnabled)blockers.push('CANONICAL_REGISTRY_WRITE_DISABLED')
  const ready=blockers.length===0
- return {architectureVersion:'v6-g-readiness-1',mode:'READ_ONLY_CUTOVER_READINESS',ready,gates,blockers,publisherEvidence:{valid:publisherEvidence.valid,issues:publisherEvidence.issues,manifestSha:publisherEvidence.manifestSha,sourceCommit:publisherEvidence.sourceCommit,scope:publisherEvidence.scope,preflightStatus:publisherEvidence.preflightStatus,preflightBlockers:publisherEvidence.preflightBlockers,approvedQuestionCount:publisherEvidence.approvedQuestionCount},rendererEvidence:{valid:rendererEvidence.valid,issues:rendererEvidence.issues,manifestSha:rendererEvidence.manifestSha,sourceCommit:rendererEvidence.sourceCommit,buildId:rendererEvidence.buildId,variantCount:rendererEvidence.variantCount,liveVerified:rendererEvidence.liveVerified},storage:{activePortalRepository:'paper_vault',activeRevisionRepository:'paper_vault_revision_history',canonicalTarget:REQUIRED_TABLES,tablePresence:tableMap,counts,countAccuracy,rls,roles:{owner:roles.owner,runtime:roles.runtime,appBypassRls:Boolean(roles.app?.rolbypassrls),membership:roles.membership},privileges,payloadContracts,policies:policies.map(p=>({table:p.tablename,policy:p.policyname,roles:p.roles,cmd:p.cmd})),triggers},policy:{dualWriteAllowed:false,destructiveMigrationAllowed:false,automaticSourceIdentityFabricationAllowed:false,teacherFacingStorageDetails:false,directBypassRoleCanonicalAccessAllowed:false,canonicalRoleEscalationRequiresExplicitSetRole:true},checkedAt:new Date().toISOString()}
+ return {architectureVersion:'v6-g2-readiness-1',mode:'READ_ONLY_CUTOVER_READINESS',ready,gates,blockers,publisherEvidence:{valid:publisherEvidence.valid,issues:publisherEvidence.issues,manifestSha:publisherEvidence.manifestSha,sourceCommit:publisherEvidence.sourceCommit,scope:publisherEvidence.scope,preflightStatus:publisherEvidence.preflightStatus,preflightBlockers:publisherEvidence.preflightBlockers,approvedQuestionCount:publisherEvidence.approvedQuestionCount},curriculumTechnicalEvidence,rendererEvidence:{valid:rendererEvidence.valid,issues:rendererEvidence.issues,manifestSha:rendererEvidence.manifestSha,sourceCommit:rendererEvidence.sourceCommit,buildId:rendererEvidence.buildId,variantCount:rendererEvidence.variantCount,liveVerified:rendererEvidence.liveVerified},storage:{activePortalRepository:'paper_vault',activeRevisionRepository:'paper_vault_revision_history',canonicalTarget:REQUIRED_TABLES,tablePresence:tableMap,counts,countAccuracy,rls,roles:{owner:roles.owner,runtime:roles.runtime,appBypassRls:Boolean(roles.app?.rolbypassrls),membership:roles.membership},privileges,payloadContracts,policies:policies.map(p=>({table:p.tablename,policy:p.policyname,roles:p.roles,cmd:p.cmd})),triggers},policy:{dualWriteAllowed:false,destructiveMigrationAllowed:false,automaticSourceIdentityFabricationAllowed:false,teacherFacingStorageDetails:false,directBypassRoleCanonicalAccessAllowed:false,canonicalRoleEscalationRequiresExplicitSetRole:true},checkedAt:new Date().toISOString()}
 }
 module.exports={buildCanonicalCutoverReadiness}
