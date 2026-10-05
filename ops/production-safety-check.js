@@ -81,14 +81,20 @@ assertContains(
 
 assertContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
-  'productionHost ? sourceRecipients',
-  'production notifications must use source-backed recipients.'
+  'const currentList = sourceRecipients',
+  'notifications must use source-backed recipients in every environment.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  /mockStudents|mockAttendance|productionHost/,
+  'notification UI must not contain demo/mock recipient paths.'
 )
 
 assertContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
-  'Production par mock recipients disabled',
-  'production notification UI must clearly block mock recipients.'
+  '/history',
+  'notification delivery log must use the durable backend history source.'
 )
 
 if (failures.length) {

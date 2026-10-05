@@ -58,30 +58,11 @@ const selectStyle = {
  color: "var(--apex-text-secondary)", fontSize: 14, outline: "none", cursor: "pointer",
 };
 
-const ATTENDANCE_CLASS_LABEL_FIXES = {
- "Pre Nine": "Nine",
-};
-
-function attendanceClassLabel(value) {
- return ATTENDANCE_CLASS_LABEL_FIXES[value] || value;
-}
-
-function attendanceApiClass(value) {
- return value === "Pre Nine" ? "Nine" : value;
-}
-
-function attendanceSectionsForClass(className, sectionsForClass) {
- const direct = sectionsForClass(className);
- if (direct.length) return direct;
- if (className === "Nine") return sectionsForClass("Pre Nine");
- return [];
-}
-
 export default function AttendanceModule() {
  const navigate = useNavigate();
  const [tab, setTab] = useState("mark");
  const { classNames: CLASSES, allSections: SECTION_LIST, sectionsForClass } = useAcademicStore();
- const attendanceClasses = [...new Set(CLASSES.map(attendanceClassLabel))];
+ const attendanceClasses = CLASSES;
 
  useEffect(() => {
  if (tab === "smart") {
@@ -98,16 +79,17 @@ export default function AttendanceModule() {
  const [saved, setSaved] = useState(false);
  const [notificationQueueCount, setNotificationQueueCount] = useState(0);
  const [loading, setLoading] = useState(false);
+ const [monthlyTrend, setMonthlyTrend] = useState([]);
 
  const loadAttendance = async () => {
  setLoading(true)
  try {
  const [attendanceRes, studentRes] = await Promise.all([
  api.get('/api/attendance', {
- params: { class: attendanceApiClass(selectedClass), section: selectedSection, date: selectedDate },
+ params: { class: selectedClass, section: selectedSection, date: selectedDate },
  }).catch(() => ({ data: { data: [] } })),
  api.get('/api/students', {
- params: { class: attendanceApiClass(selectedClass), section: selectedSection },
+ params: { class: selectedClass, section: selectedSection },
  }).catch(() => ({ data: { data: [] } })),
  ])
 
@@ -131,13 +113,31 @@ export default function AttendanceModule() {
 
  useEffect(() => {
  if (!selectedClass) return
- const availableSections = attendanceSectionsForClass(selectedClass, sectionsForClass)
+ const availableSections = sectionsForClass(selectedClass)
  if (availableSections.length && !availableSections.includes(selectedSection)) {
  setSelectedSection(availableSections[0])
  return
  }
  loadAttendance()
  }, [selectedClass, selectedSection, selectedDate])
+
+ useEffect(() => {
+ if (tab !== 'analytics' || !selectedClass || !selectedSection) return
+ let cancelled = false
+ async function loadMonthlyTrend() {
+ try {
+ const d = new Date(selectedDate)
+ const response = await api.get('/api/attendance/monthly', {
+ params: { class: selectedClass, section: selectedSection, year: d.getFullYear(), month: d.getMonth() + 1 },
+ })
+ if (!cancelled) setMonthlyTrend(response.data?.data || [])
+ } catch {
+ if (!cancelled) setMonthlyTrend([])
+ }
+ }
+ void loadMonthlyTrend()
+ return () => { cancelled = true }
+ }, [tab, selectedClass, selectedSection, selectedDate])
 
  const setStatus = (id, status) => {
  setAttendance(prev => ({ ...prev, [id]: status }));
@@ -448,17 +448,17 @@ export default function AttendanceModule() {
  <div>
  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
  <div className="super-module-card" style={card}>
- <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 20 }}>Monthly Attendance — May 2026</h3>
+ <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 20 }}>Monthly Attendance — {new Date(selectedDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</h3>
  <div style={{ display: "flex", alignItems: "flex-end", gap: 6, height: 120 }}>
- {Array.from({ length: 26 }, (_, i) => {
- const pct = Math.floor(Math.random() * 30) + 70;
+ {monthlyTrend.some(day => Number(day.total || 0) > 0) ? monthlyTrend.map((day, i) => {
+ const pct = Number(day.percent || 0)
  return (
- <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
- <div style={{ width: "100%", height: pct * 1.2, borderRadius: 3, background: pct >= 90 ? "#30D158" : pct >= 80 ? "#C8991A" : "#FF375F" }} />
+ <div key={day.date} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+ <div style={{ width: "100%", height: Math.max(4, pct * 1.2), borderRadius: 3, background: pct >= 90 ? "var(--apex-action-success)" : pct >= 80 ? "var(--apex-action-highlight)" : "var(--apex-action-danger)" }} />
  {(i + 1) % 5 === 0 && <span style={{ color: "var(--apex-text-tertiary)", fontSize: 8 }}>{i + 1}</span>}
  </div>
- );
- })}
+ )
+ }) : <div style={{ width:'100%', alignSelf:'center', textAlign:'center', color:'var(--apex-text-tertiary)', fontSize:12 }}>No attendance records for this month.</div>}
  </div>
  <div style={{ display: "flex", gap: 16, marginTop: 12 }}>
  {[["var(--apex-action-success)", "≥90%"], ["var(--apex-action-highlight)", "≥80%"], ["var(--apex-action-danger)", "Below 80%"]].map(([c, l]) => (

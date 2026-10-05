@@ -81,12 +81,12 @@ export default function PaperGenerator() {
 
   // Calculate paper stats for the mini-dashboard
   const paperStats = useMemo(() => {
-    const totalPapers = 42 // Mock or from store
+    const totalPapers = Array.isArray(savedPapers) ? savedPapers.length : 0
     const subjectMap = {}
     subjects.forEach(s => { subjectMap[s.name] = (subjectMap[s.name] || 0) + 1 })
     const topSubjects = Object.entries(subjectMap).sort((a,b) => b[1] - a[1]).slice(0, 5)
     return { totalPapers, topSubjects }
-  }, [subjects])
+  }, [subjects, savedPapers])
 
   const [loadedSavedPaper, setLoadedSavedPaper] = useState(null)
 

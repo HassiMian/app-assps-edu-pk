@@ -218,6 +218,7 @@ async function ensureNotificationColumns() {
     ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS title VARCHAR(255);
     ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
     ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS read_at TIMESTAMP;
+    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS provider_sid VARCHAR(128);
     CREATE INDEX IF NOT EXISTS idx_notification_log_school_role_sent ON notification_log(school_id, recipient_role, sent_at DESC);
   `).catch(() => {})
 }
@@ -306,10 +307,10 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
     let jobs = []
     if (Array.isArray(recipients) && recipients.length) {
       jobs = recipients
-        .map(item => ({ phone: item?.phone, message: item?.message || message }))
+        .map(item => ({ phone: item?.phone, message: item?.message || message, student_id: item?.student_id || item?.id || null, name: item?.name || null, title: item?.title || 'School Notification', type: item?.type || 'manual' }))
         .filter(item => item.phone && item.message)
     } else if (Array.isArray(phones) && message) {
-      jobs = phones.map(phone => ({ phone, message }))
+      jobs = phones.map(phone => ({ phone, message, student_id: null, name: null, title: 'School Notification', type: 'manual' }))
     }
 
     if (!jobs.length) {
@@ -320,14 +321,42 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
     const twilioConfig = await getTwilioConfigForSchool(schoolId)
     const twilioClient = buildTwilioClient(twilioConfig)
 
+    await ensureNotificationColumns()
     const results = []
     for (const job of jobs) {
+      let delivery
       try {
         const result = await sendOne(job.phone, job.message, channel, twilioConfig, twilioClient)
-        results.push({ phone: formatPhone(job.phone), status: 'sent', ...result })
+        delivery = { phone: formatPhone(job.phone), status: 'sent', ...result }
       } catch (e) {
-        results.push({ phone: formatPhone(job.phone), status: 'failed', error: e.message })
+        delivery = { phone: formatPhone(job.phone), status: 'failed', channel: channel === 'auto' ? null : channel, error: e.message }
       }
+
+      const metadata = {
+        recipient_name: job.name || null,
+        provider_error: delivery.error || null,
+        requested_channel: channel,
+      }
+      await pool.query(`
+        INSERT INTO notification_log (
+          school_id, student_id, recipient_role, title, type, channel, phone, message,
+          metadata, status, sent_by, sent_at, provider_sid
+        ) VALUES ($1,$2,'parent',$3,$4,$5,$6,$7,$8::jsonb,$9,$10,NOW(),$11)
+      `, [
+        schoolId,
+        Number.isInteger(Number(job.student_id)) ? Number(job.student_id) : null,
+        job.title || 'School Notification',
+        job.type || 'manual',
+        delivery.channel || (channel === 'auto' ? null : channel),
+        delivery.phone,
+        job.message,
+        JSON.stringify(metadata),
+        delivery.status,
+        req.user?.id || null,
+        delivery.sid || null,
+      ])
+
+      results.push({ ...delivery, student_id: job.student_id || null, name: job.name || null })
     }
 
     const sent = results.filter(r => r.status === 'sent').length
@@ -335,6 +364,26 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
     res.json({ success: true, sent, failed, results })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
+  }
+})
+
+// GET /api/notify/history — verified outbound delivery ledger
+router.get('/history', protect, canSendNotifications, async (req, res) => {
+  try {
+    await ensureNotificationColumns()
+    const schoolId = currentSchoolId(req)
+    const result = await pool.query(`
+      SELECT id, student_id, title, type, channel, phone, message, metadata, status, sent_at, provider_sid
+      FROM notification_log
+      WHERE school_id = $1
+        AND (phone IS NOT NULL OR channel IS NOT NULL)
+      ORDER BY sent_at DESC
+      LIMIT 100
+    `, [schoolId])
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Notification history error:', err)
+    res.status(500).json({ success: false, message: 'Failed to load delivery history.' })
   }
 })
 

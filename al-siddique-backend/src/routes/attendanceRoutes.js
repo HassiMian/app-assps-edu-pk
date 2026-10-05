@@ -136,6 +136,52 @@ async function notifyParent(phone, studentName, status, date, twilioClient, twil
   }).catch(() => {})
 }
 
+// GET /api/attendance/monthly — canonical monthly trend for one class/section
+router.get('/monthly', protect, requireAttendanceAnalyticsAccess, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const cls = String(req.query.class || '').trim()
+    const section = String(req.query.section || '').trim()
+    const year = Number(req.query.year || new Date().getFullYear())
+    const month = Number(req.query.month || new Date().getMonth() + 1)
+    if (!cls || !section || !Number.isInteger(year) || month < 1 || month > 12) {
+      return res.status(400).json({ success: false, message: 'class, section, year and month are required.' })
+    }
+
+    const result = await query(`
+      WITH dates AS (
+        SELECT generate_series(
+          make_date($4, $5, 1),
+          (make_date($4, $5, 1) + INTERVAL '1 month - 1 day')::date,
+          '1 day'::interval
+        )::date AS d
+      )
+      SELECT d.d::text AS date,
+             COALESCE(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END), 0)::int AS present,
+             COALESCE(COUNT(a.student_id), 0)::int AS total,
+             CASE WHEN COUNT(a.student_id) > 0
+               THEN ROUND(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END) * 100.0 / COUNT(a.student_id))::int
+               ELSE 0 END AS percent
+      FROM dates d
+      LEFT JOIN (
+        SELECT a.student_id, a.date, a.status
+        FROM attendance a
+        JOIN students s ON s.id = a.student_id
+        WHERE s.school_id = $1
+          AND s.class = $2
+          AND s.section = $3
+      ) a ON a.date = d.d
+      GROUP BY d.d
+      ORDER BY d.d
+    `, [schoolId, cls, section, year, month])
+
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Monthly attendance analytics error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to load monthly attendance analytics.' })
+  }
+})
+
 // GET /api/attendance
 router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), async (req, res) => {
   try {

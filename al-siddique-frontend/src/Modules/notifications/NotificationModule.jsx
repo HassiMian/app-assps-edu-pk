@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react'
 import Portal from '../../components/Portal'
 import { useSearchParams } from 'react-router-dom'
 import {
- MessageSquare, Phone, Send, CheckCircle, XCircle,
- Clock, Users, Bell, Filter, Eye, RefreshCw,
- Smartphone, MessageCircle, ChevronDown, X, AlertCircle,
+ MessageSquare, Send, CheckCircle, XCircle,
+ Clock, Users, Bell, Eye, RefreshCw,
+ Smartphone, MessageCircle, X, AlertCircle,
 } from 'lucide-react'
 import api from '../../services/api'
 
@@ -23,30 +23,6 @@ const card = {
 
 const API_BASE = '/api/notify'
 const SCHOOL_NAME = 'Al Siddique Scholars Public School'
-
-function isProductionHost() {
- try {
- return ['app.assps.edu.pk', 'api.assps.edu.pk'].includes(window.location.hostname)
- } catch {
- return false
- }
-}
-
-//  Mock student data (replace with real API later) 
-
-const mockStudents = [
- { id: 1, name: 'Ali Hassan', class: '9A', rollNo: '01', phone: '03001234561', feeStatus: 'unpaid', feeAmount: 2500, feeMonth: 'May 2026', examResult: { marks: 450, total: 600, grade: 'A', passed: true } },
- { id: 2, name: 'Fatima Malik', class: '9A', rollNo: '02', phone: '03001234562', feeStatus: 'paid', feeAmount: 2500, feeMonth: 'May 2026', examResult: { marks: 310, total: 600, grade: 'C', passed: true } },
- { id: 3, name: 'Usman Tariq', class: '8B', rollNo: '05', phone: '03001234563', feeStatus: 'unpaid', feeAmount: 2000, feeMonth: 'May 2026', examResult: { marks: 180, total: 600, grade: 'F', passed: false } },
- { id: 4, name: 'Ayesha Noor', class: '8B', rollNo: '06', phone: '03001234564', feeStatus: 'overdue', feeAmount: 4000, feeMonth: 'April 2026', examResult: { marks: 520, total: 600, grade: 'A+',passed: true } },
- { id: 5, name: 'Bilal Hussain', class: '7C', rollNo: '11', phone: '03001234565', feeStatus: 'unpaid', feeAmount: 1800, feeMonth: 'May 2026', examResult: { marks: 290, total: 600, grade: 'C', passed: true } },
-]
-
-const mockAttendance = [
- { id: 1, name: 'Ali Hassan', class: '9A', rollNo: '01', phone: '03001234561', status: 'absent' },
- { id: 3, name: 'Usman Tariq', class: '8B', rollNo: '05', phone: '03001234563', status: 'late' },
- { id: 5, name: 'Bilal Hussain', class: '7C', rollNo: '11', phone: '03001234565', status: 'absent' },
-]
 
 //  Helpers 
 
@@ -158,32 +134,50 @@ export default function NotificationModule() {
  const [sourceRecipients, setSourceRecipients] = useState([])
  const [sourceLoading, setSourceLoading] = useState(false)
  const [sourceMessage, setSourceMessage] = useState('')
- const productionHost = isProductionHost()
 
  // Sync tab when URL ?tab= changes
  useEffect(() => {
  const t = searchParams.get('tab')
- if (VALID_TABS.includes(t)) { setActiveTab(t); setSelected([]) }
+ if (VALID_TABS.includes(t)) {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setActiveTab(t); setSelected([])
+ }
  }, [searchParams])
 
  // Fee tab
  const [feeType, setFeeType] = useState('fee_reminder') // fee_reminder | fee_overdue
- const [feeMonth, setFeeMonth] = useState('May 2026')
+ const [feeMonth, setFeeMonth] = useState(() => new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }))
 
  // Results tab
- const [examName, setExamName] = useState('Mid Term Exam 2026')
+ const [examName, setExamName] = useState('')
 
  // Custom tab
  const [customMsg, setCustomMsg] = useState('')
- const [customRecipients, setCustomRecipients] = useState([])
 
  useEffect(() => {
- if (!productionHost || activeTab === 'log') return
  let cancelled = false
- async function loadRecipients() {
+ async function loadSourceData() {
  setSourceLoading(true)
  setSourceMessage('')
  try {
+ if (activeTab === 'log') {
+ const res = await api.get(`${API_BASE}/history`)
+ if (cancelled) return
+ const rows = Array.isArray(res.data?.data) ? res.data.data : []
+ setLog(rows.map(item => ({
+ id: item.id,
+ name: item.metadata?.recipient_name || 'Recipient',
+ phone: item.phone || '—',
+ type: item.type || 'notification',
+ time: item.sent_at ? new Date(item.sent_at).toLocaleString('en-PK') : '',
+ status: item.status || 'pending',
+ channel: item.channel || 'sms',
+ message: item.message || '',
+ })))
+ setSourceRecipients([])
+ setSourceMessage(`${rows.length} verified delivery records loaded.`)
+ return
+ }
  const params = { type: activeTab }
  if (activeTab === 'fee') params.month = feeMonth.split(' ')[0]
  const res = await api.get(`${API_BASE}/recipients`, { params })
@@ -194,14 +188,15 @@ export default function NotificationModule() {
  } catch (err) {
  if (cancelled) return
  setSourceRecipients([])
- setSourceMessage(err?.response?.data?.message || 'Source-backed recipients load nahi ho sake.')
+ if (activeTab === 'log') setLog([])
+ setSourceMessage(err?.response?.data?.message || 'Source-backed data load nahi ho saka.')
  } finally {
  if (!cancelled) setSourceLoading(false)
  }
  }
- loadRecipients()
+ void loadSourceData()
  return () => { cancelled = true }
- }, [productionHost, activeTab, feeMonth])
+ }, [activeTab, feeMonth])
 
  //  Helpers 
 
@@ -240,26 +235,26 @@ export default function NotificationModule() {
  function buildPreview() {
  const today = new Date().toLocaleDateString('en-PK', { day: '2-digit', month: 'long', year: 'numeric' })
  let messages = []
- const sourceList = productionHost ? sourceRecipients : null
+ const sourceList = sourceRecipients
 
  if (activeTab === 'attendance') {
- const students = (sourceList || mockAttendance).filter(s => selected.includes(s.id))
+ const students = sourceList.filter(s => selected.includes(s.id))
  messages = students.map(s => ({
- name: s.name, phone: s.phone,
+ id: s.id, student_id: s.student_id || s.id, name: s.name, phone: s.phone,
  message: buildMessage(`attendance_${s.status}`, { ...s, date: today }),
  }))
  }
  else if (activeTab === 'fee') {
- const students = (sourceList || mockStudents).filter(s => selected.includes(s.id) && (sourceList || s.feeStatus !== 'paid'))
+ const students = sourceList.filter(s => selected.includes(s.id))
  messages = students.map(s => ({
- name: s.name, phone: s.phone,
+ id: s.id, student_id: s.student_id || s.id, name: s.name, phone: s.phone,
  message: buildMessage(feeType, { ...s, feeMonth }),
  }))
  }
  else if (activeTab === 'results') {
- const students = (sourceList || mockStudents).filter(s => selected.includes(s.id))
+ const students = sourceList.filter(s => selected.includes(s.id))
  messages = students.map(s => ({
- name: s.name, phone: s.phone,
+ id: s.id, student_id: s.student_id || s.id, name: s.name, phone: s.phone,
  message: buildMessage(s.examResult?.passed === false ? 'result_fail' : 'result_pass', {
  ...s, examName,
  marks: s.examResult?.marks || s.marks || '',
@@ -269,8 +264,8 @@ export default function NotificationModule() {
  }))
  }
  else if (activeTab === 'custom') {
- messages = (sourceList || mockStudents).filter(s => selected.includes(s.id)).map(s => ({
- name: s.name, phone: s.phone,
+ messages = sourceList.filter(s => selected.includes(s.id)).map(s => ({
+ id: s.id, student_id: s.student_id || s.id, name: s.name, phone: s.phone,
  message: customMsg,
  }))
  }
@@ -287,7 +282,7 @@ export default function NotificationModule() {
 
  try {
  const res = await api.post(`${API_BASE}/bulk`, {
- recipients: preview.map(m => ({ phone: m.phone, message: m.message })),
+ recipients: preview.map(m => ({ phone: m.phone, message: m.message, student_id: m.student_id || m.id || null, name: m.name, title: activeTab === 'attendance' ? 'Attendance Alert' : activeTab === 'fee' ? 'Fee Reminder' : activeTab === 'results' ? 'Result Notification' : 'School Notification', type: activeTab })),
  templateKey: 'custom', // message already built
  language: 'both',
  channel,
@@ -320,13 +315,8 @@ export default function NotificationModule() {
 
  //  Student list for current tab 
 
- const currentList = productionHost
- ? sourceRecipients
- : activeTab === 'attendance'
- ? mockAttendance
- : activeTab === 'fee'
- ? mockStudents.filter(s => s.feeStatus !== 'paid')
- : mockStudents
+ const currentList = sourceRecipients
+
 
  const tabs = [
  { id: 'attendance', label: 'Attendance', icon: <Users size={14} />, color: '#FF375F' },
@@ -337,7 +327,7 @@ export default function NotificationModule() {
  ]
 
  return (
- <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #071e34 0%, #0B2C4D 100%)', color: '#fff', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
+ <div style={{ minHeight: '100vh', background: 'var(--apex-shell-gradient)', color: '#fff', fontFamily: 'system-ui, sans-serif', padding: 24 }}>
 
  {/* Toast */}
  {toast && (
@@ -459,13 +449,13 @@ export default function NotificationModule() {
 
  {/* Student rows */}
  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
- {productionHost && sourceLoading ? (
+ {sourceLoading ? (
  <div style={{ padding: 24, borderRadius: 12, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(192,200,216,0.76)', fontSize: 13, lineHeight: 1.6 }}>
  Source-backed recipients load ho rahe hain...
  </div>
- ) : productionHost && currentList.length === 0 ? (
+ ) : currentList.length === 0 ? (
  <div style={{ padding: 24, borderRadius: 12, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(192,200,216,0.76)', fontSize: 13, lineHeight: 1.6 }}>
- {sourceMessage || 'Production par mock recipients disabled hain. Source-backed recipient list empty hai.'}
+ {sourceMessage || 'Source-backed recipient list empty hai.'}
  </div>
  ) : currentList.map(s => {
  const sel = selected.includes(s.id)
