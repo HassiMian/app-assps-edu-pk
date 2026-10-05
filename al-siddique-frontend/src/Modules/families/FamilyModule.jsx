@@ -7,9 +7,9 @@ import { C } from '../moduleStyles'
 import { ChevronDown, Users } from 'lucide-react'
 
 const card = {
- background: 'rgba(15,23,42,0.6)',
+ background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(20px)',
- border: '1px solid rgba(200,153,26,0.15)',
+ border: '1px solid var(--apex-border-default)',
  borderRadius: 20,
  padding: 20,
 }
@@ -17,7 +17,7 @@ const card = {
 const inp = {
  width: '100%', padding: '10px 14px', borderRadius: 10,
  boxSizing: 'border-box',
- background: 'rgba(7,30,52,0.7)', border: `1px solid ${C.border}`,
+ background: 'var(--apex-bg-surface-solid)', border: `1px solid ${C.border}`,
  color: C.silver, fontSize: 14, outline: 'none',
 }
 
@@ -64,7 +64,7 @@ function FamilyCard({ family, students, onAddStudent, onRemove, navigate }) {
  onClick={() => setExpanded(e => !e)}
  >
  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
- <div style={{ width: 44, height: 44, borderRadius: 14, background: 'rgba(200,153,26,0.15)', border: '1.5px solid rgba(200,153,26,0.35)', display: 'grid', placeItems: 'center', color: C.gold }}>
+ <div style={{ width: 44, height: 44, borderRadius: 14, background: 'color-mix(in srgb, var(--apex-action-primary) 9%, var(--apex-bg-surface-solid))', border: '1px solid var(--apex-border-default)', display: 'grid', placeItems: 'center', color: C.blue }}>
  <Users size={20} />
  </div>
  <div>
@@ -198,12 +198,16 @@ export default function FamilyModule() {
  [students, getFamilyForStudent]
  )
 
- const handleCreateFamily = () => {
+ const handleCreateFamily = async () => {
  if (!newFatherName.trim()) return
- createFamily(newFatherName.trim(), newPhone.trim())
+ try {
+ await createFamily(newFatherName.trim(), newPhone.trim())
  setNewFatherName('')
  setNewPhone('')
  setShowCreate(false)
+ } catch (err) {
+ console.error('Failed to create family', err)
+ }
  }
 
  const handleAddStudent = (familyCode) => {
@@ -211,9 +215,13 @@ export default function FamilyModule() {
  setAddStudentSearch('')
  }
 
- const confirmAddStudent = (student) => {
- addStudentToFamily(addStudentFamilyCode, { id: student.id, name: student.name })
+ const confirmAddStudent = async (student) => {
+ try {
+ await addStudentToFamily(addStudentFamilyCode, { id: student.id, name: student.name })
  setAddStudentFamilyCode(null)
+ } catch (err) {
+ console.error('Failed to link student to family', err)
+ }
  }
 
  const searchResults = useMemo(() => {
@@ -227,26 +235,26 @@ export default function FamilyModule() {
  }, [students, addStudentSearch])
 
  return (
- <div style={{ minHeight: '100vh', background: '#071e34', color: C.silver, fontFamily: 'Inter, sans-serif', padding: '24px 24px' }}>
+ <div style={{ minHeight: '100vh', background: 'var(--apex-shell-gradient)', color: C.silver, fontFamily: 'Inter, sans-serif', padding: '24px 24px' }}>
  {/* Header */}
  <div style={{ ...card, marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16, borderRadius: 22 }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
- <div style={{ width: 52, height: 52, borderRadius: 16, background: 'rgba(200,153,26,0.15)', border: '1.5px solid rgba(200,153,26,0.35)', display: 'grid', placeItems: 'center', color: C.gold }}>
+ <div style={{ width: 52, height: 52, borderRadius: 16, background: 'color-mix(in srgb, var(--apex-action-primary) 9%, var(--apex-bg-surface-solid))', border: '1px solid var(--apex-border-default)', display: 'grid', placeItems: 'center', color: C.gold }}>
  <Users size={26} />
  </div>
  <div>
- <h1 style={{ margin: 0, fontSize: 26, color: '#fff', fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>Family Management</h1>
+ <h1 style={{ margin: 0, fontSize: 26, color: 'var(--apex-text-primary)', fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>Family Management</h1>
  <p style={{ margin: '4px 0 0', color: C.muted, fontSize: 13 }}>Group students by family, track fees & communicate with parents.</p>
  </div>
  </div>
  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
  <button
- onClick={() => { autoDetectFamilies(students.map(s => ({ id: s.id, name: s.name, father: s.father, phone: s.phone, contact: s.contact }))); }}
+ onClick={() => { void autoDetectFamilies() }}
  style={{ background: 'rgba(10,132,255,0.14)', border: '1px solid rgba(10,132,255,0.3)', color: '#0A84FF', borderRadius: 12, padding: '10px 18px', cursor: 'pointer', fontWeight: 700, fontSize: 13 }}
- > Auto-Detect Families</button>
+ > Refresh Families</button>
  <button
  onClick={() => setShowCreate(true)}
- style={{ background: `linear-gradient(135deg, ${C.gold}, #e8b420)`, border: 'none', color: '#071e34', borderRadius: 12, padding: '10px 18px', cursor: 'pointer', fontWeight: 800, fontSize: 13 }}
+ style={{ background: 'var(--apex-action-primary)', border: 'none', color: '#fff', borderRadius: 12, padding: '10px 18px', cursor: 'pointer', fontWeight: 800, fontSize: 13 }}
  >+ New Family</button>
  </div>
  </div>
@@ -316,9 +324,9 @@ export default function FamilyModule() {
  {unlinkedStudents.length > 12 && <span style={{ color: C.muted, fontSize: 12, padding: '3px 0' }}>…and {unlinkedStudents.length - 12} more</span>}
  </div>
  <button
- onClick={() => { autoDetectFamilies(students.map(s => ({ id: s.id, name: s.name, father: s.father, phone: s.phone, contact: s.contact }))); }}
+ onClick={() => { void autoDetectFamilies() }}
  style={{ marginTop: 12, background: 'rgba(255,159,10,0.15)', border: '1px solid rgba(255,159,10,0.3)', color: '#FF9F0A', borderRadius: 8, padding: '7px 18px', cursor: 'pointer', fontWeight: 700, fontSize: 12 }}
- >Auto-link these students</button>
+ >Refresh Family Links</button>
  </div>
  )}
 

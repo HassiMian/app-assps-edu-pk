@@ -184,6 +184,7 @@ const registerRoutes = (router) => {
 
   mount('/auth',       './routes/authRoutes')
   mount('/students',   './routes/studentRoutes')
+  mount('/families',   './routes/familyRoutes')
   mount('/attendance', './routes/attendanceRoutes')
   mount('/academic',   './routes/academicRoutes')
   mount('/fees',       './routes/feeRoutes')
