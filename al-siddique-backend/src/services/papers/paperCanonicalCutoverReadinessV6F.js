@@ -13,6 +13,12 @@ async function tableCount(name){
 }
 async function rlsState(name){if(!await tableExists(name))return null;const r=await query("select c.relrowsecurity as enabled,c.relforcerowsecurity as forced,pg_get_userbyid(c.relowner) owner from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname=$1",[name]);return r.rows[0]||null}
 async function roleState(name){const r=await query('select rolname,rolsuper,rolbypassrls,rolinherit,rolcanlogin from pg_roles where rolname=$1',[name]);return r.rows[0]||null}
+async function payloadContractState(){
+ if(!await tableExists('paper_documents')||!await tableExists('paper_revisions'))return []
+ const names=['paper_documents_payload_discriminator_v6f2_ck','paper_revisions_payload_discriminator_v6f2_ck']
+ const r=await query(`select c.conname,c.convalidated,cl.relname as table_name,pg_get_constraintdef(c.oid) definition from pg_constraint c join pg_class cl on cl.oid=c.conrelid where c.conname=any($1::text[]) order by c.conname`,[names])
+ return r.rows
+}
 async function runtimeMembership(){const r=await query(`select m.inherit_option,m.set_option,m.admin_option from pg_auth_members m join pg_roles role on role.oid=m.roleid join pg_roles member on member.oid=m.member where role.rolname='apex_paper_runtime' and member.rolname='apexos_user'`);return r.rows[0]||null}
 async function privilegeState(){
  if(!await tableExists('paper_documents')||!await tableExists('paper_revisions'))return null
@@ -52,10 +58,13 @@ async function buildCanonicalCutoverReadiness(){
  const runtimeRoleApproved=Boolean(registryPresent&&roles.owner&&!roles.owner.rolsuper&&!roles.owner.rolbypassrls&&!roles.owner.rolcanlogin&&roles.runtime&&!roles.runtime.rolsuper&&!roles.runtime.rolbypassrls&&!roles.runtime.rolcanlogin&&roles.membership?.inherit_option===false&&roles.membership?.set_option===true&&REQUIRED_TABLES.every(t=>rls[t]?.owner==='apex_paper_owner')&&privileges?.runtime_docs_select===true&&privileges?.runtime_docs_insert===true&&privileges?.runtime_docs_update===true&&privileges?.runtime_docs_delete===false&&privileges?.runtime_revs_select===true&&privileges?.runtime_revs_insert===true&&privileges?.runtime_revs_update===false&&privileges?.runtime_revs_delete===false&&privileges?.app_docs_direct_select===false&&privileges?.app_revs_direct_select===false)
  const tenantRlsApproved=Boolean(registryPresent&&REQUIRED_TABLES.every(t=>rls[t]?.enabled===true&&rls[t]?.forced===true)&&policies.length===2&&policies.every(p=>p.policyname==='canonical_tenant_isolation'&&String(p.roles||'').includes('apex_paper_runtime')&&String(p.qual||'').includes('app.tenant_id')&&String(p.qual||'').includes('school_id')))
  const writeDefenseApproved=Boolean(registryPresent&&triggers.length===4)
+ const payloadContracts=await payloadContractState()
+ const payloadContractApproved=Boolean(registryPresent&&payloadContracts.length===2&&payloadContracts.every(c=>c.convalidated===true&&String(c.definition||'').includes(`payload ->> 'format'`)&&String(c.definition||'').includes('document_format')&&String(c.definition||'').includes('schema_version')))
  const gates={
   canonicalRegistryPresent:registryPresent,
   canonicalRuntimeRoleApproved:runtimeRoleApproved,
   canonicalWriteDefenseApproved:writeDefenseApproved,
+  canonicalPayloadContractApproved:payloadContractApproved,
   curriculumPublisherProductionApproved:envTrue('PAPER_CURRICULUM_PUBLISHER_PRODUCTION_APPROVED'),
   canonicalRendererParityApproved:envTrue('PAPER_CANONICAL_RENDERER_PARITY_APPROVED'),
   canonicalRegistryWriteEnabled:envTrue('PAPER_CANONICAL_REGISTRY_WRITE_ENABLED'),
@@ -67,11 +76,12 @@ async function buildCanonicalCutoverReadiness(){
  if(gates.canonicalRegistryPresent&&!gates.canonicalRuntimeRoleApproved)blockers.push('CANONICAL_RUNTIME_ROLE_NOT_APPROVED')
  if(gates.canonicalRegistryPresent&&!gates.tenantRlsApproved)blockers.push('CANONICAL_REGISTRY_RLS_NOT_APPROVED')
  if(gates.canonicalRegistryPresent&&!gates.canonicalWriteDefenseApproved)blockers.push('CANONICAL_WRITE_DEFENSE_NOT_APPROVED')
+ if(gates.canonicalRegistryPresent&&!gates.canonicalPayloadContractApproved)blockers.push('CANONICAL_PAYLOAD_CONTRACT_NOT_APPROVED')
  if(!gates.curriculumPublisherProductionApproved)blockers.push('CURRICULUM_PUBLISHER_NOT_PRODUCTION_APPROVED')
  if(!gates.canonicalRendererParityApproved)blockers.push('CANONICAL_RENDERER_PARITY_NOT_APPROVED')
  if(!gates.backupRestoreDrillApproved)blockers.push('BACKUP_RESTORE_DRILL_NOT_APPROVED')
  if(!gates.canonicalRegistryWriteEnabled)blockers.push('CANONICAL_REGISTRY_WRITE_DISABLED')
  const ready=blockers.length===0
- return {architectureVersion:'v6-f-readiness-2',mode:'READ_ONLY_CUTOVER_READINESS',ready,gates,blockers,storage:{activePortalRepository:'paper_vault',activeRevisionRepository:'paper_vault_revision_history',canonicalTarget:REQUIRED_TABLES,tablePresence:tableMap,counts,countAccuracy,rls,roles:{owner:roles.owner,runtime:roles.runtime,appBypassRls:Boolean(roles.app?.rolbypassrls),membership:roles.membership},privileges,policies:policies.map(p=>({table:p.tablename,policy:p.policyname,roles:p.roles,cmd:p.cmd})),triggers},policy:{dualWriteAllowed:false,destructiveMigrationAllowed:false,automaticSourceIdentityFabricationAllowed:false,teacherFacingStorageDetails:false,directBypassRoleCanonicalAccessAllowed:false,canonicalRoleEscalationRequiresExplicitSetRole:true},checkedAt:new Date().toISOString()}
+ return {architectureVersion:'v6-f-readiness-3',mode:'READ_ONLY_CUTOVER_READINESS',ready,gates,blockers,storage:{activePortalRepository:'paper_vault',activeRevisionRepository:'paper_vault_revision_history',canonicalTarget:REQUIRED_TABLES,tablePresence:tableMap,counts,countAccuracy,rls,roles:{owner:roles.owner,runtime:roles.runtime,appBypassRls:Boolean(roles.app?.rolbypassrls),membership:roles.membership},privileges,payloadContracts,policies:policies.map(p=>({table:p.tablename,policy:p.policyname,roles:p.roles,cmd:p.cmd})),triggers},policy:{dualWriteAllowed:false,destructiveMigrationAllowed:false,automaticSourceIdentityFabricationAllowed:false,teacherFacingStorageDetails:false,directBypassRoleCanonicalAccessAllowed:false,canonicalRoleEscalationRequiresExplicitSetRole:true},checkedAt:new Date().toISOString()}
 }
 module.exports={buildCanonicalCutoverReadiness}
