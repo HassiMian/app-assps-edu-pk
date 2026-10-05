@@ -24,5 +24,7 @@ console.log('PASS cross-teacher document review is non-leaking 404')
 r=await request(`/portal/paper-studio/papers/${idB}/document-review`,'GET',null,users.admin.cookie);
 if(r.status!==200||r.json.review?.family!=='legacy-connect-vault')throw Error('admin governed review failed')
 console.log('PASS admin can inspect governed school document boundary')
-console.log('V6_PROJECTION_GATE 8/8 PASS')
+r=await request('/portal/paper-studio/canonical-readiness','GET',null,users.admin.cookie);if(r.status!==200||r.json.data?.ready!==false||!r.json.data?.blockers?.includes('CANONICAL_REGISTRY_ABSENT'))throw Error(`admin canonical readiness wrong ${JSON.stringify(r.json)}`);console.log('PASS admin sees fail-closed canonical cutover readiness')
+r=await request('/portal/paper-studio/canonical-readiness','GET',null,users.teacherA.cookie);if(r.status!==403)throw Error(`teacher storage readiness leaked ${r.status}`);console.log('PASS teacher cannot inspect canonical storage readiness')
+console.log('V6_PROJECTION_GATE 10/10 PASS')
 }finally{if(sid){await c.query('delete from paper_vault where school_id=$1',[sid]).catch(()=>{});await c.query('delete from teacher_class_assignments where school_id=$1',[sid]).catch(()=>{});await c.query('delete from users where school_id=$1',[sid]).catch(()=>{});await c.query('delete from schools where id=$1',[sid]).catch(()=>{})}c.release();await pool.end();console.log('V6_SYNTHETIC_FIXTURES_CLEANED')}})().catch(e=>{console.error('FAIL',e.stack||e.message);process.exit(1)})

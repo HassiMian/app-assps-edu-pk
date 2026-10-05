@@ -3,6 +3,7 @@ const router = express.Router()
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
+const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -14,6 +15,19 @@ function schoolContext(req, res) {
   if (!schoolId) { res.status(403).json({ success:false, message:'School context is required.' }); return null }
   return schoolId
 }
+
+router.get('/canonical-readiness', async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const data=await buildCanonicalCutoverReadiness()
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  } catch(err) {
+    console.error('Paper Studio canonical readiness error:',err.message)
+    return res.status(500).json({success:false,message:'Canonical storage readiness could not be verified.'})
+  }
+})
 
 router.get('/context', async (req,res) => {
   try {
