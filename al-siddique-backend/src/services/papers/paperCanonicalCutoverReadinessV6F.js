@@ -1,6 +1,7 @@
 // V6-F — production-safe readiness probe only. It never creates/migrates tables.
 const { query } = require('../../config/database')
 const { verifyCanonicalRendererEvidence } = require('./paperRendererEvidenceV6F4')
+const { verifyCurriculumPublisherEvidence } = require('./paperCurriculumPublisherEvidenceV6G')
 const REQUIRED_TABLES=['paper_documents','paper_revisions']
 const envTrue=name=>String(process.env[name]||'').trim().toLowerCase()==='true'
 async function tableExists(name){const r=await query("select exists(select 1 from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname=$1 and c.relkind in ('r','p')) ok",[name]);return Boolean(r.rows[0]?.ok)}
@@ -63,12 +64,16 @@ async function buildCanonicalCutoverReadiness(){
  const payloadContractApproved=Boolean(registryPresent&&payloadContracts.length===2&&payloadContracts.every(c=>c.convalidated===true&&String(c.definition||'').includes(`payload ->> 'format'`)&&String(c.definition||'').includes('document_format')&&String(c.definition||'').includes('schema_version')))
  const rendererApprovalFlag=envTrue('PAPER_CANONICAL_RENDERER_PARITY_APPROVED')
  const rendererEvidence=await verifyCanonicalRendererEvidence()
+ const publisherApprovalFlag=envTrue('PAPER_CURRICULUM_PUBLISHER_PRODUCTION_APPROVED')
+ const publisherEvidence=await verifyCurriculumPublisherEvidence()
  const gates={
   canonicalRegistryPresent:registryPresent,
   canonicalRuntimeRoleApproved:runtimeRoleApproved,
   canonicalWriteDefenseApproved:writeDefenseApproved,
   canonicalPayloadContractApproved:payloadContractApproved,
-  curriculumPublisherProductionApproved:envTrue('PAPER_CURRICULUM_PUBLISHER_PRODUCTION_APPROVED'),
+  curriculumPublisherProductionApproved:Boolean(publisherApprovalFlag&&publisherEvidence.valid),
+  curriculumPublisherApprovalFlagSet:publisherApprovalFlag,
+  curriculumPublisherEvidenceVerified:publisherEvidence.valid,
   canonicalRendererParityApproved:Boolean(rendererApprovalFlag&&rendererEvidence.valid),
   canonicalRendererApprovalFlagSet:rendererApprovalFlag,
   canonicalRendererEvidenceVerified:rendererEvidence.valid,
@@ -82,12 +87,13 @@ async function buildCanonicalCutoverReadiness(){
  if(gates.canonicalRegistryPresent&&!gates.tenantRlsApproved)blockers.push('CANONICAL_REGISTRY_RLS_NOT_APPROVED')
  if(gates.canonicalRegistryPresent&&!gates.canonicalWriteDefenseApproved)blockers.push('CANONICAL_WRITE_DEFENSE_NOT_APPROVED')
  if(gates.canonicalRegistryPresent&&!gates.canonicalPayloadContractApproved)blockers.push('CANONICAL_PAYLOAD_CONTRACT_NOT_APPROVED')
+ if(!gates.curriculumPublisherEvidenceVerified)blockers.push('CURRICULUM_PUBLISHER_EVIDENCE_INVALID')
  if(!gates.curriculumPublisherProductionApproved)blockers.push('CURRICULUM_PUBLISHER_NOT_PRODUCTION_APPROVED')
  if(gates.canonicalRendererApprovalFlagSet&&!gates.canonicalRendererEvidenceVerified)blockers.push('CANONICAL_RENDERER_EVIDENCE_INVALID')
  if(!gates.canonicalRendererParityApproved)blockers.push('CANONICAL_RENDERER_PARITY_NOT_APPROVED')
  if(!gates.backupRestoreDrillApproved)blockers.push('BACKUP_RESTORE_DRILL_NOT_APPROVED')
  if(!gates.canonicalRegistryWriteEnabled)blockers.push('CANONICAL_REGISTRY_WRITE_DISABLED')
  const ready=blockers.length===0
- return {architectureVersion:'v6-f-readiness-4',mode:'READ_ONLY_CUTOVER_READINESS',ready,gates,blockers,rendererEvidence:{valid:rendererEvidence.valid,issues:rendererEvidence.issues,manifestSha:rendererEvidence.manifestSha,sourceCommit:rendererEvidence.sourceCommit,buildId:rendererEvidence.buildId,variantCount:rendererEvidence.variantCount,liveVerified:rendererEvidence.liveVerified},storage:{activePortalRepository:'paper_vault',activeRevisionRepository:'paper_vault_revision_history',canonicalTarget:REQUIRED_TABLES,tablePresence:tableMap,counts,countAccuracy,rls,roles:{owner:roles.owner,runtime:roles.runtime,appBypassRls:Boolean(roles.app?.rolbypassrls),membership:roles.membership},privileges,payloadContracts,policies:policies.map(p=>({table:p.tablename,policy:p.policyname,roles:p.roles,cmd:p.cmd})),triggers},policy:{dualWriteAllowed:false,destructiveMigrationAllowed:false,automaticSourceIdentityFabricationAllowed:false,teacherFacingStorageDetails:false,directBypassRoleCanonicalAccessAllowed:false,canonicalRoleEscalationRequiresExplicitSetRole:true},checkedAt:new Date().toISOString()}
+ return {architectureVersion:'v6-g-readiness-1',mode:'READ_ONLY_CUTOVER_READINESS',ready,gates,blockers,publisherEvidence:{valid:publisherEvidence.valid,issues:publisherEvidence.issues,manifestSha:publisherEvidence.manifestSha,sourceCommit:publisherEvidence.sourceCommit,scope:publisherEvidence.scope,preflightStatus:publisherEvidence.preflightStatus,preflightBlockers:publisherEvidence.preflightBlockers,approvedQuestionCount:publisherEvidence.approvedQuestionCount},rendererEvidence:{valid:rendererEvidence.valid,issues:rendererEvidence.issues,manifestSha:rendererEvidence.manifestSha,sourceCommit:rendererEvidence.sourceCommit,buildId:rendererEvidence.buildId,variantCount:rendererEvidence.variantCount,liveVerified:rendererEvidence.liveVerified},storage:{activePortalRepository:'paper_vault',activeRevisionRepository:'paper_vault_revision_history',canonicalTarget:REQUIRED_TABLES,tablePresence:tableMap,counts,countAccuracy,rls,roles:{owner:roles.owner,runtime:roles.runtime,appBypassRls:Boolean(roles.app?.rolbypassrls),membership:roles.membership},privileges,payloadContracts,policies:policies.map(p=>({table:p.tablename,policy:p.policyname,roles:p.roles,cmd:p.cmd})),triggers},policy:{dualWriteAllowed:false,destructiveMigrationAllowed:false,automaticSourceIdentityFabricationAllowed:false,teacherFacingStorageDetails:false,directBypassRoleCanonicalAccessAllowed:false,canonicalRoleEscalationRequiresExplicitSetRole:true},checkedAt:new Date().toISOString()}
 }
 module.exports={buildCanonicalCutoverReadiness}
