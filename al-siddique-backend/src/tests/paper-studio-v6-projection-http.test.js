@@ -15,5 +15,14 @@ r=await request('/portal/paper-studio/papers','GET',null,users.teacherA.cookie);
 r=await request(`/portal/paper-studio/papers/${idB}`,'GET',null,users.teacherA.cookie);if(r.status!==404)throw Error(`teacher cross-owner lookup leaked ${r.status}`);console.log('PASS cross-teacher direct lookup is non-leaking 404')
 r=await request('/portal/paper-studio/papers','GET',null,users.admin.cookie);if(r.status!==200||r.json.scope!=='school'||r.json.data.length!==2)throw Error(`admin list wrong ${JSON.stringify(r.json)}`);console.log('PASS admin sees school-wide paper projection')
 r=await request(`/portal/paper-studio/papers/${idA}`,'GET',null,users.admin.cookie);if(r.status!==200||!r.json.data?.document)throw Error('admin paper open failed');console.log('PASS admin can open governed school paper')
-console.log('V6_PROJECTION_GATE 5/5 PASS')
+r=await request(`/portal/paper-studio/papers/${idA}/document-review`,'GET',null,users.teacherA.cookie);
+if(r.status!==200||r.json.review?.family!=='legacy-connect-vault'||r.json.review?.canonicalWriteAllowed!==false||r.json.review?.printApprovalClaim!==false)throw Error(`own paper review boundary failed ${JSON.stringify(r.json)}`);
+console.log('PASS owner sees source-preserving legacy review without false canonical authority')
+r=await request(`/portal/paper-studio/papers/${idA}/document-review`,'GET',null,users.teacherB.cookie);
+if(r.status!==404)throw Error(`cross-owner review leaked ${r.status}`)
+console.log('PASS cross-teacher document review is non-leaking 404')
+r=await request(`/portal/paper-studio/papers/${idB}/document-review`,'GET',null,users.admin.cookie);
+if(r.status!==200||r.json.review?.family!=='legacy-connect-vault')throw Error('admin governed review failed')
+console.log('PASS admin can inspect governed school document boundary')
+console.log('V6_PROJECTION_GATE 8/8 PASS')
 }finally{if(sid){await c.query('delete from paper_vault where school_id=$1',[sid]).catch(()=>{});await c.query('delete from teacher_class_assignments where school_id=$1',[sid]).catch(()=>{});await c.query('delete from users where school_id=$1',[sid]).catch(()=>{});await c.query('delete from schools where id=$1',[sid]).catch(()=>{})}c.release();await pool.end();console.log('V6_SYNTHETIC_FIXTURES_CLEANED')}})().catch(e=>{console.error('FAIL',e.stack||e.message);process.exit(1)})
