@@ -14,9 +14,9 @@ function getStorage() {
 export function ThemeProvider({ children }) {
  const [theme, setTheme] = useState(() => {
  try {
- return getStorage()?.getItem(THEME_KEY) || 'dark'
+ return getStorage()?.getItem(THEME_KEY) || 'light'
  } catch {
- return 'dark'
+ return 'light'
  }
  })
 
