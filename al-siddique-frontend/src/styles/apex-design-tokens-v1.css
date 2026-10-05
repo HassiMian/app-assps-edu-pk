@@ -130,3 +130,40 @@
 [data-paper-render-root='true'] {
   --apex-shell-gradient: initial;
 }
+
+/* Phase A shell primitives — operational UI only; document renderers are excluded. */
+.app-shell {
+  background: var(--apex-shell-gradient);
+  color: var(--apex-text-primary);
+}
+
+.super-sidebar,
+.super-topbar,
+.super-search-box {
+  color: var(--apex-text-primary);
+  transition:
+    background-color var(--apex-motion-normal) ease,
+    border-color var(--apex-motion-normal) ease,
+    color var(--apex-motion-normal) ease,
+    box-shadow var(--apex-motion-normal) ease;
+}
+
+.super-topbar input::placeholder {
+  color: var(--apex-text-tertiary);
+  opacity: 0.85;
+}
+
+.super-sidebar :focus-visible,
+.super-topbar :focus-visible {
+  outline: none;
+  box-shadow: var(--apex-focus-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell,
+  .super-sidebar,
+  .super-topbar,
+  .super-search-box {
+    transition: none !important;
+  }
+}

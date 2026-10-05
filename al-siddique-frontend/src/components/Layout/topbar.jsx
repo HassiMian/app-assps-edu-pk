@@ -285,10 +285,10 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  .toUpperCase() || 'A'
 
  const glassCard = {
- background: 'rgba(11,44,77,0.92)',
+ background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(20px)',
  WebkitBackdropFilter: 'blur(20px)',
- border: '1px solid rgba(148,163,184,0.16)',
+ border: '1px solid var(--apex-border-default)',
  borderRadius: 18,
  }
 
@@ -299,9 +299,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  display: 'flex',
  alignItems: 'center',
  justifyContent: 'center',
- background: 'linear-gradient(135deg, rgba(10,132,255,0.26), rgba(191,90,242,0.18))',
- border: '1px solid rgba(148,163,184,0.16)',
- boxShadow: '0 10px 26px rgba(10,132,255,0.16)',
+ background: 'linear-gradient(135deg, color-mix(in srgb, var(--apex-action-primary) 18%, var(--apex-bg-surface-solid)), color-mix(in srgb, var(--apex-action-secondary) 10%, var(--apex-bg-surface-solid)))',
+ border: '1px solid var(--apex-border-default)',
+ boxShadow: 'var(--apex-shadow-sm)',
  cursor: 'pointer',
  transition: 'all 0.2s ease',
  }
@@ -317,11 +317,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  flexShrink: 0,
  position: 'relative',
  zIndex: 100,
- background: 'linear-gradient(135deg, rgba(15,23,42,0.94) 0%, rgba(30,41,59,0.88) 100%)',
+ background: 'color-mix(in srgb, var(--apex-bg-surface) 94%, transparent)',
  backdropFilter: 'blur(40px)',
  WebkitBackdropFilter: 'blur(40px)',
- borderBottom: '1px solid rgba(148,163,184,0.12)',
- boxShadow: '0 12px 36px rgba(0,0,0,0.24)',
+ borderBottom: '1px solid var(--apex-border-subtle)',
+ boxShadow: 'var(--apex-shadow-md)',
  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif',
  overflow: 'visible',
  }}>
@@ -332,9 +332,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  style={{
  width: 40, height: 40, borderRadius: 12, flexShrink: 0,
  display: 'flex', alignItems: 'center', justifyContent: 'center',
- background: 'rgba(255,255,255,0.08)',
+ background: 'var(--apex-bg-subtle)',
  border: '1px solid rgba(148,163,184,0.18)',
- cursor: 'pointer', color: '#f8fafc',
+ cursor: 'pointer', color: 'var(--apex-text-primary)',
  }}
  >
  <Menu size={20} />
@@ -375,7 +375,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  background: 'transparent',
  border: 'none',
  outline: 'none',
- color: '#f8fafc',
+ color: 'var(--apex-text-primary)',
  fontSize: 14,
  width: '100%',
  fontWeight: '500',
@@ -396,7 +396,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  zIndex: 9999, boxShadow: '0 16px 48px rgba(0,0,0,0.6)', overflow: 'hidden',
  }}>
  <div style={{ padding: '8px 14px 6px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
- <span style={{ color: '#8892A4', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+ <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
  Smart search assistant · {suggestions.length} match{suggestions.length > 1 ? 'es' : ''}
  </span>
  </div>
@@ -416,7 +416,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  </div>
  <div style={{ flex: 1, minWidth: 0 }}>
  <div style={{ color: '#f0f4ff', fontWeight: 600, fontSize: 13 }}>{s.title}</div>
- <div style={{ color: '#8892A4', fontSize: 11, marginTop: 2 }}>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11, marginTop: 2 }}>
  {s.subtitle}
  </div>
  </div>
@@ -569,7 +569,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
  <Bell size={15} color="#C8991A" />
- <span style={{ color: '#f8fafc', fontWeight: 700, fontSize: 14 }}>Notifications</span>
+ <span style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 14 }}>Notifications</span>
  {unreadCount > 0 && (
  <span style={{
  background: 'rgba(200,153,26,0.2)', color: '#C8991A',
@@ -581,7 +581,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <button
  onClick={markAllRead}
  title="Mark all read"
- style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#8892A4', display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, padding: 0 }}
+ style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--apex-text-tertiary)', display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, padding: 0 }}
  >
  <CheckCheck size={13} /> Mark all read
  </button>
@@ -590,11 +590,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {/* Items */}
  <div style={{ maxHeight: 340, overflowY: 'auto' }}>
  {notifsLoading ? (
- <div style={{ padding: 32, textAlign: 'center', color: '#8892A4', fontSize: 13 }}>
+ <div style={{ padding: 32, textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 13 }}>
  Loading notifications...
  </div>
  ) : notifs.length === 0 ? (
- <div style={{ padding: 32, textAlign: 'center', color: '#8892A4', fontSize: 13 }}>
+ <div style={{ padding: 32, textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 13 }}>
  No notifications
  </div>
  ) : notifs.map(n => (
@@ -614,7 +614,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <span style={{ color: '#f0f4ff', fontSize: 13, fontWeight: 600 }}>{n.title}</span>
  {n.unread && <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#C8991A', flexShrink: 0 }} />}
  </div>
- <p style={{ color: '#8892A4', fontSize: 12, margin: '2px 0 4px', lineHeight: 1.4 }}>{n.body}</p>
+ <p style={{ color: 'var(--apex-text-tertiary)', fontSize: 12, margin: '2px 0 4px', lineHeight: 1.4 }}>{n.body}</p>
  <span style={{ color: '#556070', fontSize: 11 }}>{n.time}</span>
  </div>
  <button
@@ -686,7 +686,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {user?.name?.[0] || 'A'}
  </div>
  {!isMobile && <div>
- <div style={{ color: '#f8fafc', fontSize: 14, fontWeight: '600', lineHeight: 1.3, marginBottom: '2px' }}>
+ <div style={{ color: 'var(--apex-text-primary)', fontSize: 14, fontWeight: '600', lineHeight: 1.3, marginBottom: '2px' }}>
  {user?.name?.split(' ').slice(0, 2).join(' ') || 'Admin'}
  </div>
  <div style={{ color: '#C8991A', fontSize: 12, fontWeight: '500' }}>
@@ -704,15 +704,15 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  boxShadow: '0 16px 48px rgba(0,0,0,0.5)', overflow: 'hidden',
  }}>
  <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
- <div style={{ color: '#f8fafc', fontWeight: 700, fontSize: 14 }}>{user?.name || 'Admin'}</div>
- <div style={{ color: '#8892A4', fontSize: 12 }}>{user?.designation || 'Principal'}</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 14 }}>{user?.name || 'Admin'}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{user?.designation || 'Principal'}</div>
  </div>
  {[
  { icon: <Settings2 size={14} />, label: 'System Settings', path: '/settings' },
  { icon: <BookOpen size={14} />, label: 'Academic Setup', path: '/academic' },
  ].map(item => (
  <div key={item.path} onClick={() => { navigate(item.path); setShowUserMenu(false) }}
- style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', cursor: 'pointer', color: '#C0C8D8', fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.04)' }}
+ style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', cursor: 'pointer', color: 'var(--apex-text-secondary)', fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.04)' }}
  onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,153,26,0.1)'}
  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
  >

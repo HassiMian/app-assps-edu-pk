@@ -375,9 +375,9 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  transform: 'translateZ(0)',
  height: '100dvh',
  minHeight: '100dvh',
- background: 'linear-gradient(180deg, rgba(15,23,42,0.98) 0%, rgba(10,28,49,0.98) 100%)',
- borderRight: '1px solid rgba(148,163,184,0.18)',
- boxShadow: '10px 0 28px rgba(0,0,0,0.30), -1px 0 0 rgba(200,153,26,0.12) inset',
+ background: 'linear-gradient(180deg, color-mix(in srgb, var(--apex-bg-surface-solid) 97%, transparent) 0%, color-mix(in srgb, var(--apex-bg-canvas-elevated) 98%, transparent) 100%)',
+ borderRight: '1px solid var(--apex-border-default)',
+ boxShadow: '12px 0 34px rgba(8,15,24,0.16), -1px 0 0 var(--apex-border-subtle) inset',
  overflow: 'hidden',
  filter: 'none',
  }}
@@ -385,7 +385,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  {/* Gradient overlay hint */}
  <div style={{
  position: 'absolute', top: 0, left: 0, right: 0, height: 200, pointerEvents: 'none',
- background: 'radial-gradient(circle at 18% 12%, rgba(10,132,255,0.18), transparent 34%), radial-gradient(circle at 74% 6%, rgba(200,153,26,0.12), transparent 30%)',
+ background: 'radial-gradient(circle at 18% 12%, color-mix(in srgb, var(--apex-action-primary) 18%, transparent), transparent 36%), radial-gradient(circle at 74% 6%, color-mix(in srgb, var(--apex-action-secondary) 10%, transparent), transparent 32%)',
  borderRadius: '0 0 50% 0',
  }} />
  <div style={{
@@ -395,7 +395,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  width: 220,
  height: 220,
  borderRadius: '50%',
- background: 'radial-gradient(circle, rgba(48,209,88,0.1), transparent 70%)',
+ background: 'radial-gradient(circle, color-mix(in srgb, var(--apex-action-secondary) 8%, transparent), transparent 70%)',
  pointerEvents: 'none',
  }} />
 
@@ -403,7 +403,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  <div style={{
  padding: effectiveCollapsed ? '18px 10px' : '18px 16px 16px',
  display: 'flex', alignItems: 'center', gap: 10,
- borderBottom: '1px solid rgba(148,163,184,0.12)',
+ borderBottom: '1px solid var(--apex-border-subtle)',
  justifyContent: effectiveCollapsed ? 'center' : 'flex-start',
  flexShrink: 0,
  }}>

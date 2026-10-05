@@ -126,7 +126,7 @@ export default function AppLayout({ children }) {
        minHeight: '100dvh',
        maxHeight: '100dvh',
        overflow: 'hidden',
-       background: 'var(--app-bg)',
+       background: 'var(--apex-shell-gradient)',
        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif',
        position: 'relative',
      }
@@ -135,7 +135,7 @@ export default function AppLayout({ children }) {
        height: '100dvh',
        minHeight: '100vh',
        overflow: 'hidden',
-       background: 'var(--app-bg)',
+       background: 'var(--apex-shell-gradient)',
        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif',
        position: 'relative',
      }
@@ -152,7 +152,7 @@ export default function AppLayout({ children }) {
  style={{
  position: 'fixed',
  inset: 0,
- background: 'rgba(0,0,0,0.6)',
+ background: 'var(--apex-bg-overlay)',
  backdropFilter: 'blur(4px)',
  zIndex: 70,
  }}
