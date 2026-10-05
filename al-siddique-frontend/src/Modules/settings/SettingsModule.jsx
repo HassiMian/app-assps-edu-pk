@@ -9,16 +9,16 @@ import { useAcademicStore } from '../../services/useAcademicStore'
 import api, { resolveAssetUrl } from '../../services/api'
 
 const C = {
- card: 'rgba(11,44,77,0.97)',
- gold: '#C8991A', goldL: '#e8b420',
- silver: '#C0C8D8', muted: '#8892A4',
- green: '#30D158', red: '#FF375F',
- blue: '#0A84FF',
- border: 'rgba(148,163,184,0.18)',
+ card: 'var(--apex-bg-surface)',
+ gold: 'var(--apex-action-highlight)', goldL: 'color-mix(in srgb, var(--apex-action-highlight) 78%, white)',
+ silver: 'var(--apex-text-primary)', muted: 'var(--apex-text-tertiary)',
+ green: 'var(--apex-action-success)', red: 'var(--apex-action-danger)',
+ blue: 'var(--apex-action-primary)',
+ border: 'var(--apex-border-default)',
 }
 
 const GCard = ({ children, style = {} }) => (
- <div className="super-module-card" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 22, padding: 24, boxShadow: '0 14px 34px rgba(0,0,0,0.28)', ...style }}>
+ <div className="super-module-card" style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 22, padding: 24, boxShadow: 'var(--apex-shadow-sm)', ...style }}>
  {children}
  </div>
 )
@@ -28,7 +28,7 @@ const Lbl = ({ children }) => (
  </label>
 )
 const Inp = ({ style = {}, ...p }) => (
- <input {...p} style={{ width: '100%', background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 10, color: C.silver, padding: '10px 14px', fontSize: 14, outline: 'none', boxSizing: 'border-box', ...style }} />
+ <input {...p} style={{ width: '100%', background: 'var(--apex-bg-surface-solid)', border: `1px solid ${C.border}`, borderRadius: 10, color: C.silver, padding: '10px 14px', fontSize: 14, outline: 'none', boxSizing: 'border-box', ...style }} />
 )
 const SHead = ({ icon, title, sub }) => (
  <div className="super-module-card" style={{ marginBottom: 20, paddingBottom: 12, borderBottom: `1px solid ${C.border}` }}>
@@ -54,8 +54,8 @@ const SwitchRow = ({ checked, onChange, title, description }) => (
  alignItems: 'center',
  padding: '14px 16px',
  borderRadius: 16,
- border: `1px solid ${checked ? 'rgba(232,180,32,.7)' : C.border}`,
- background: checked ? 'rgba(200,153,26,0.12)' : 'rgba(11,44,77,0.92)',
+ border: `1px solid ${checked ? 'color-mix(in srgb, var(--apex-action-primary) 36%, var(--apex-border-default))' : C.border}`,
+ background: checked ? 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-surface)',
  cursor: 'pointer',
  textAlign: 'left',
  }}
@@ -64,10 +64,10 @@ const SwitchRow = ({ checked, onChange, title, description }) => (
  width: 64,
  height: 34,
  borderRadius: 999,
- background: checked ? `linear-gradient(135deg, ${C.gold}, ${C.goldL})` : 'rgba(2,12,24,0.78)',
- border: `2px solid ${checked ? C.goldL : 'rgba(148,163,184,0.36)'}`,
+ background: checked ? 'var(--apex-action-primary)' : 'var(--apex-bg-muted)',
+ border: `2px solid ${checked ? 'color-mix(in srgb, var(--apex-action-primary) 50%, white)' : 'var(--apex-border-strong)'}`,
  position: 'relative',
- boxShadow: checked ? '0 8px 22px rgba(200,153,26,0.28)' : 'inset 0 0 0 1px rgba(255,255,255,0.05)',
+ boxShadow: checked ? '0 8px 22px color-mix(in srgb, var(--apex-action-primary) 18%, transparent)' : 'inset 0 0 0 1px var(--apex-border-subtle)',
  }}>
  <span style={{
  position: 'absolute',
@@ -198,7 +198,7 @@ function PaperGeneratorCategoriesCard() {
  alignItems: 'center',
  padding: 18,
  borderRadius: 16,
- background: 'rgba(7,30,52,0.35)',
+ background: 'var(--apex-bg-subtle)',
  border: `1px solid ${C.border}`,
  }}>
  <div>
@@ -677,7 +677,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  }
 
  return (
- <div className="super-module-card" style={{ minHeight: '100vh', background: '#071e34', color: C.silver, fontFamily: 'Inter, sans-serif' }}>
+ <div className="super-module-card" style={{ minHeight: '100vh', background: 'var(--apex-shell-gradient)', color: C.silver, fontFamily: 'Inter, sans-serif' }}>
  <div className="super-module-card" style={{ padding: '24px 24px', maxWidth: 1440, margin: '0 auto' }}>
 
  {/* Header */}
@@ -730,7 +730,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  }
  </div>
  <div className="super-module-card" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
- <button onClick={() => logoRef.current.click()} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', background: `linear-gradient(135deg,${C.gold},${C.goldL})`, color: '#071e34', border: 'none' }}>
+ <button onClick={() => logoRef.current.click()} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px', borderRadius: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', background: 'var(--apex-action-primary)', color: '#fff', border: 'none' }}>
   {paperSettings.logo ? 'Change Logo' : 'Upload Logo'}
  </button>
  {paperSettings.logo && (
@@ -1083,7 +1083,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  </div>
 
  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 18 }}>
- <button type="button" onClick={addSchoolAccess} style={{ padding: '10px 18px', borderRadius: 10, border: 'none', cursor: 'pointer', fontWeight: 600, background: `linear-gradient(135deg,${C.gold},${C.goldL})`, color: '#071e34' }}>
+ <button type="button" onClick={addSchoolAccess} style={{ padding: '10px 18px', borderRadius: 10, border: 'none', cursor: 'pointer', fontWeight: 600, background: 'var(--apex-action-primary)', color: '#fff' }}>
  Add School Access
  </button>
  <button type="button" onClick={() => upd('schoolAccess', [])} style={{ padding: '10px 18px', borderRadius: 10, border: '1px solid rgba(255,55,95,0.3)', cursor: 'pointer', fontWeight: 600, background: 'rgba(255,55,95,0.12)', color: C.red }}>
@@ -1100,7 +1100,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  No branch access configured yet.
  </div>
  ) : schoolAccess.map((school) => (
- <div key={school.id} style={{ padding: 16, borderRadius: 18, background: 'rgba(7,30,52,0.4)', border: `1px solid ${C.border}`, display: 'grid', gap: 14 }}>
+ <div key={school.id} style={{ padding: 16, borderRadius: 18, background: 'var(--apex-bg-subtle)', border: `1px solid ${C.border}`, display: 'grid', gap: 14 }}>
   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
   <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
     <div style={{
@@ -1251,7 +1251,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  </div>
 
  {/* Print header options */}
- <div className="super-module-card" style={{ marginTop: 18, padding: '14px 16px', background: 'rgba(7,30,52,0.4)', borderRadius: 12, border: `1px solid ${C.border}` }}>
+ <div className="super-module-card" style={{ marginTop: 18, padding: '14px 16px', background: 'var(--apex-bg-subtle)', borderRadius: 12, border: `1px solid ${C.border}` }}>
  <div className="super-module-card" style={{ color: C.muted, fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 12 }}>Print Header Options</div>
  <SwitchRow
  checked={showUrduHeader}
@@ -1280,7 +1280,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  </div>
 
  <div className="super-module-card" style={{ marginTop: 22, display: 'flex', alignItems: 'center', gap: 14 }}>
- <button onClick={flashSaved} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 22px', borderRadius: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', background: `linear-gradient(135deg,${C.gold},${C.goldL})`, color: '#071e34', border: 'none' }}>
+ <button onClick={flashSaved} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 22px', borderRadius: 10, fontWeight: 600, fontSize: 13, cursor: 'pointer', background: 'var(--apex-action-primary)', color: '#fff', border: 'none' }}>
   {saving ? 'Syncing...' : 'Save & Sync Branding'}
  </button>
  {saved && <span style={{ color: C.green, fontSize: 13, fontWeight: 700 }}> Saved!</span>}
