@@ -10,6 +10,7 @@ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('.
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
+const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
 
@@ -98,16 +99,6 @@ function dedupeStudents(rows = []) {
     if (classCompare !== 0) return classCompare
     return Number(a.roll_number || 0) - Number(b.roll_number || 0)
   })
-}
-
-function studentPortalPassword(student) {
-  const father = String(student.father_name || 'Student').trim().replace(/\s+/g, '').slice(0, 4) || 'Stud'
-  return `${father}${new Date().getFullYear()}`
-}
-
-function parentPortalPassword(student) {
-  const phone = String(student.parent_phone || student.parent_whatsapp || '').replace(/\D/g, '').slice(-4) || '0000'
-  return `${phone}@${new Date().getFullYear()}`
 }
 
 async function requireStudentInCurrentSchool(req, res, studentId) {
@@ -427,7 +418,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const autoGr = `GR-${currentYear}-${Math.floor(1000 + Math.random() * 9000)}`
     const finalGr = req.body.gr_number || autoGr
     const requestedClass = normalizeClassName(cls)
-    const requestedSection = section || 'Blue'
+    const requestedSection = section || ''
     const academicAssignment = await resolveAcademicAssignment({
       schoolId,
       className: requestedClass,
@@ -458,7 +449,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       ['section', normalizedSection],
       ['roll_number', finalRollNumber],
       ['date_of_birth', date_of_birth || null],
-      ['gender', gender || 'male'],
+      ['gender', gender || null],
       ['address', address || null],
       ['parent_phone', parent_phone || null],
       ['parent_whatsapp', parent_whatsapp || null],
@@ -498,11 +489,63 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const studentData = result.rows[0]
     const studentId = studentData.id
 
-    // Credentials Setup
+    // Portal accounts are real users, not browser-only credential cards.
+    const tenantId = currentTenantId(req) || null
     const studentEmail = `${finalGr.toLowerCase().replace(/[^a-z0-9]/g, '')}@assps.edu.pk`
-    const studentPassword = studentPortalPassword(studentData)
-    const parentEmail = (parent_phone || parent_whatsapp) ? `${(parent_phone || parent_whatsapp).replace(/\D/g, '').slice(-10)}@parents.assps.edu.pk` : null
-    const parentPassword = parentPortalPassword(studentData)
+    const parentDigits = String(parent_phone || parent_whatsapp || '').replace(/\D/g, '').slice(-10)
+    const parentEmail = parentDigits ? `${parentDigits}@parents.assps.edu.pk` : null
+    const studentPortalEnabled = student_portal_enabled !== false
+    const parentPortalEnabled = parent_portal_enabled !== false && Boolean(parentEmail)
+
+    let studentAccount = null
+    let parentAccount = null
+    if (studentPortalEnabled) {
+      studentAccount = await provisionPortalUser({
+        schoolId,
+        tenantId,
+        name: studentData.name,
+        email: studentEmail,
+        username: finalGr,
+        role: 'student',
+        designation: 'Student',
+        active: true,
+      })
+    }
+    if (parentPortalEnabled) {
+      parentAccount = await provisionPortalUser({
+        schoolId,
+        tenantId,
+        name: studentData.father_name || `${studentData.name} Parent`,
+        email: parentEmail,
+        username: `P-${parentDigits}`,
+        role: 'parent',
+        designation: 'Parent',
+        phone: parent_phone || parent_whatsapp || null,
+        active: true,
+      })
+    }
+
+    const userLinkUpdates = []
+    const userLinkParams = []
+    let userLinkIndex = 1
+    if (studentAccount?.user?.id && await hasColumn('students', 'student_user_id').catch(() => false)) {
+      userLinkUpdates.push(`student_user_id = $${userLinkIndex++}`)
+      userLinkParams.push(studentAccount.user.id)
+    }
+    if (parentAccount?.user?.id && await hasColumn('students', 'parent_user_id').catch(() => false)) {
+      userLinkUpdates.push(`parent_user_id = $${userLinkIndex++}`)
+      userLinkParams.push(parentAccount.user.id)
+    }
+    if (userLinkUpdates.length) {
+      userLinkParams.push(studentId, schoolId)
+      await query(`
+        UPDATE students
+        SET ${userLinkUpdates.join(', ')}, updated_at = NOW()
+        WHERE id = $${userLinkIndex++} AND school_id = $${userLinkIndex}
+      `, userLinkParams)
+      if (studentAccount?.user?.id) studentData.student_user_id = studentAccount.user.id
+      if (parentAccount?.user?.id) studentData.parent_user_id = parentAccount.user.id
+    }
 
     // Save Fee Profile
     let savedFeeProfile = null
@@ -563,15 +606,26 @@ router.post('/', protect, adminOnly, async (req, res) => {
       success: true,
       message: firstChallan
         ? 'Student add ho gaya, fee profile save ho gaya aur pehla challan ban gaya'
-        : 'Student add ho gaya aur credentials generate ho gaye',
+        : 'Student add ho gaya aur portal accounts sync ho gaye',
       data: studentData,
       fee_profile: savedFeeProfile,
       first_challan: firstChallan,
       credentials: {
-        parent: parentEmail ? { email: parentEmail, password: parentPassword } : null,
-        student: { email: studentEmail, password: studentPassword }
+        parent: parentAccount ? {
+          email: parentAccount.user?.email || parentEmail,
+          username: parentAccount.user?.username || `P-${parentDigits}`,
+          password: parentAccount.temporaryPassword,
+          created: parentAccount.created,
+        } : null,
+        student: studentAccount ? {
+          email: studentAccount.user?.email || studentEmail,
+          username: studentAccount.user?.username || finalGr,
+          password: studentAccount.temporaryPassword,
+          created: studentAccount.created,
+        } : null,
       },
-      dispatched: !!send_credentials
+      dispatched: false,
+      credentialDispatchRequested: Boolean(send_credentials)
     })
   } catch (err) {
     if (err.code === '23505')
@@ -579,6 +633,184 @@ router.post('/', protect, adminOnly, async (req, res) => {
     if (err.status === 422)
       return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
     res.status(500).json({ success: false, message: err.message })
+  }
+})
+
+// GET /api/students/:id/portal-accounts
+router.get('/:id/portal-accounts', protect, adminOnly, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const studentId = Number(req.params.id)
+    const studentResult = await query(`
+      SELECT id, name, father_name, gr_number, parent_phone, parent_whatsapp, student_user_id, parent_user_id
+      FROM students
+      WHERE id = $1 AND school_id = $2
+      LIMIT 1
+    `, [studentId, schoolId])
+    if (!studentResult.rowCount) return res.status(404).json({ success: false, message: 'Student not found.' })
+    const student = studentResult.rows[0]
+    const userIds = [student.student_user_id, student.parent_user_id].filter(Boolean)
+    let users = []
+    if (userIds.length) {
+      const supportsUsername = await hasColumn('users', 'username').catch(() => false)
+      const supportsLastLogin = await hasColumn('users', 'last_login').catch(() => false)
+      const result = await query(`
+        SELECT id, name, email, role, designation, is_active
+          ${supportsUsername ? ', username' : ''}
+          ${supportsLastLogin ? ', last_login' : ''}
+        FROM users
+        WHERE school_id = $1 AND id = ANY($2::int[])
+      `, [schoolId, userIds])
+      users = result.rows
+    }
+    const byId = new Map(users.map(user => [Number(user.id), user]))
+    res.json({
+      success: true,
+      data: {
+        student: student.student_user_id ? byId.get(Number(student.student_user_id)) || null : null,
+        parent: student.parent_user_id ? byId.get(Number(student.parent_user_id)) || null : null,
+      },
+    })
+  } catch (err) {
+    console.error('Student portal accounts read error:', err.message)
+    res.status(500).json({ success: false, message: 'Portal accounts could not be loaded.' })
+  }
+})
+
+async function provisionStudentPortalRole(req, role) {
+  const schoolId = currentSchoolId(req)
+  const studentId = Number(req.params.id)
+  const result = await query(`
+    SELECT id, name, father_name, gr_number, parent_phone, parent_whatsapp, student_user_id, parent_user_id
+    FROM students
+    WHERE id = $1 AND school_id = $2
+    LIMIT 1
+  `, [studentId, schoolId])
+  if (!result.rowCount) {
+    const err = new Error('Student not found.')
+    err.status = 404
+    throw err
+  }
+  const student = result.rows[0]
+  const tenantId = currentTenantId(req) || null
+  const gr = String(student.gr_number || '').trim()
+  if (role === 'student') {
+    const account = await provisionPortalUser({
+      schoolId,
+      tenantId,
+      userId: student.student_user_id || null,
+      name: student.name,
+      email: `${gr.toLowerCase().replace(/[^a-z0-9]/g, '')}@assps.edu.pk`,
+      username: gr,
+      role: 'student',
+      designation: 'Student',
+      active: true,
+    })
+    if (await hasColumn('students', 'student_user_id').catch(() => false)) {
+      await query('UPDATE students SET student_user_id = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [account.user.id, studentId, schoolId])
+    }
+    return account
+  }
+  const phone = String(student.parent_phone || student.parent_whatsapp || '').replace(/\D/g, '').slice(-10)
+  if (!phone) {
+    const err = new Error('Parent phone/WhatsApp number is required before creating parent access.')
+    err.status = 422
+    throw err
+  }
+  const account = await provisionPortalUser({
+    schoolId,
+    tenantId,
+    userId: student.parent_user_id || null,
+    name: student.father_name || `${student.name} Parent`,
+    email: `${phone}@parents.assps.edu.pk`,
+    username: `P-${phone}`,
+    role: 'parent',
+    designation: 'Parent',
+    phone: student.parent_phone || student.parent_whatsapp,
+    active: true,
+  })
+  if (await hasColumn('students', 'parent_user_id').catch(() => false)) {
+    await query('UPDATE students SET parent_user_id = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [account.user.id, studentId, schoolId])
+  }
+  return account
+}
+
+router.post('/:id/portal-accounts/:role', protect, adminOnly, async (req, res) => {
+  const role = String(req.params.role || '').toLowerCase()
+  if (!['student', 'parent'].includes(role)) return res.status(400).json({ success: false, message: 'Role must be student or parent.' })
+  try {
+    const account = await provisionStudentPortalRole(req, role)
+    res.status(account.created ? 201 : 200).json({
+      success: true,
+      data: account.user,
+      credentials: {
+        username: account.user?.username || account.user?.email || '',
+        email: account.user?.email || '',
+        password: account.temporaryPassword,
+        created: account.created,
+      },
+    })
+  } catch (err) {
+    res.status(err.status || 500).json({ success: false, message: err.message || 'Portal account could not be provisioned.' })
+  }
+})
+
+router.post('/:id/portal-accounts/:role/reset', protect, adminOnly, async (req, res) => {
+  const role = String(req.params.role || '').toLowerCase()
+  if (!['student', 'parent'].includes(role)) return res.status(400).json({ success: false, message: 'Role must be student or parent.' })
+  try {
+    const schoolId = currentSchoolId(req)
+    const linkColumn = role === 'student' ? 'student_user_id' : 'parent_user_id'
+    const student = await query(`SELECT ${linkColumn} AS user_id FROM students WHERE id = $1 AND school_id = $2 LIMIT 1`, [Number(req.params.id), schoolId])
+    const userId = student.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Portal account is not linked yet.' })
+    const reset = await resetPortalUserPassword({ schoolId, userId })
+    res.json({
+      success: true,
+      data: reset.user,
+      credentials: {
+        username: reset.user?.username || reset.user?.email || '',
+        email: reset.user?.email || '',
+        password: reset.temporaryPassword,
+        created: false,
+      },
+    })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Password reset failed.' })
+  }
+})
+
+router.put('/:id/portal-accounts/:role/active', protect, adminOnly, async (req, res) => {
+  const role = String(req.params.role || '').toLowerCase()
+  if (!['student', 'parent'].includes(role)) return res.status(400).json({ success: false, message: 'Role must be student or parent.' })
+  try {
+    const schoolId = currentSchoolId(req)
+    const linkColumn = role === 'student' ? 'student_user_id' : 'parent_user_id'
+    const student = await query(`SELECT ${linkColumn} AS user_id FROM students WHERE id = $1 AND school_id = $2 LIMIT 1`, [Number(req.params.id), schoolId])
+    const userId = student.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Portal account is not linked yet.' })
+    const user = await setPortalUserActive({ schoolId, userId, active: req.body?.active !== false })
+    res.json({ success: true, data: user })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Portal account state could not be updated.' })
+  }
+})
+
+router.delete('/:id/portal-accounts/:role', protect, adminOnly, async (req, res) => {
+  const role = String(req.params.role || '').toLowerCase()
+  if (!['student', 'parent'].includes(role)) return res.status(400).json({ success: false, message: 'Role must be student or parent.' })
+  try {
+    const schoolId = currentSchoolId(req)
+    const linkColumn = role === 'student' ? 'student_user_id' : 'parent_user_id'
+    const studentId = Number(req.params.id)
+    const student = await query(`SELECT ${linkColumn} AS user_id FROM students WHERE id = $1 AND school_id = $2 LIMIT 1`, [studentId, schoolId])
+    const userId = student.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Portal account is not linked yet.' })
+    await setPortalUserActive({ schoolId, userId, active: false })
+    await query(`UPDATE students SET ${linkColumn} = NULL, updated_at = NOW() WHERE id = $1 AND school_id = $2`, [studentId, schoolId])
+    res.json({ success: true })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Portal access could not be revoked.' })
   }
 })
 

@@ -9,7 +9,6 @@ import { useFamilyStore } from "../../services/useFamilyStore";
 import PhotoUploadAI from "../../components/PhotoUploadAI";
 import PhotoProfessionalizer from "../../components/PhotoProfessionalizer";
 import { BarChart, ChartLegend, DonutChart } from "../../components/Charts";
-import { useUserStore, getUserByEntity } from "../../services/useUserStore";
 import api from "../../services/api";
 import FeeSetupFields, { initFeeSetup } from "../fees/FeeSetupFields";
 import { feeProfileFromAmounts, sumFeeAmounts, MONTHS } from "../fees/feeConstants";
@@ -1293,7 +1292,7 @@ function Tip({ label, color = '#C8991A', children }) {
 }
 
 //  Add / Edit Student Modal
-function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCredGenerated, paperSettings }) {
+function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, paperSettings }) {
  const { classNames, sectionsForClass, localities } = useAcademicStore();
  const defaultClass = classNames[0] || "";
  const defaultSection = sectionsForClass(defaultClass)[0] || "";
@@ -1407,11 +1406,11 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  const res = await api.post("/api/students", body);
  const saved = res.data?.data || res.data;
  trackRecentAdded({ id: saved?.id, name: saved?.name || form.name, gr_number: saved?.gr_number || form.gr, class: form.class });
- onCredGenerated?.({ ...payload, ...(saved?.id ? saved : {}) });
+ if (res.data?.credentials) onCredentials?.(res.data.credentials, saved);
  if (withFirstChallan && res.data?.first_challan && paperSettings) {
  const ch = res.data.first_challan;
  printChallan(
- { ...ch, name: form.name, gr_number: form.gr, class: form.class, section: form.section, father_name: form.father },
+ { ...ch, name: form.name, gr_number: saved?.gr_number || form.gr, class: form.class, section: form.section, father_name: form.father },
  {
  name: paperSettings.schoolName,
  address: paperSettings.address,
@@ -1419,10 +1418,8 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  showUrduHeader: paperSettings.showUrduHeader,
  }
  );
- await refreshStudents();
- } else {
- await addStudent(payload);
  }
+ await refreshStudents();
  onClose();
  } catch (err) {
  alert(err.response?.data?.message || "Could not save student");
@@ -1457,9 +1454,9 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  <div><label style={lbl}>Class *</label><select style={{...inp,cursor:"pointer"}} value={form.class} onChange={e=>{
  const nextClass = e.target.value
  const nextSections = sectionsForClass(nextClass)
- setForm(f => ({ ...f, class: nextClass, section: nextSections[0] || "Blue" }))
+ setForm(f => ({ ...f, class: nextClass, section: nextSections[0] || "" }))
  }}>{classNames.map(c=><option key={c}>{c}</option>)}</select></div>
- <div><label style={lbl}>Section</label><select style={{...inp,cursor:"pointer"}} value={form.section} onChange={e=>set("section",e.target.value)}>{(sectionsForClass(form.class).length ? sectionsForClass(form.class) : ["Blue"]).map(s=><option key={s}>{s}</option>)}</select></div>
+ <div><label style={lbl}>Section</label><select style={{...inp,cursor:"pointer"}} value={form.section} onChange={e=>set("section",e.target.value)}>{sectionsForClass(form.class).map(s=><option key={s}>{s}</option>)}</select></div>
  <div><label style={lbl}>Date of Birth</label><input type="date" style={inp} value={form.dob} onChange={e=>set("dob",e.target.value)}/></div>
  <div><label style={lbl}>Locality / Town</label><select style={{...inp,cursor:'pointer'}} value={form.locality} onChange={e=>set("locality",e.target.value)}><option value="">-- Select --</option>{localities.map(l=><option key={l}>{l}</option>)}</select></div>
  {sh("Family Info")}
@@ -1530,136 +1527,146 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  ), document.body);
 }
 
-//  Access Tab (inside ProfileModal)
+//  Access Tab (inside ProfileModal) — server-backed portal accounts
 function AccessTab({ student }) {
- const { generateStudent, regenerateStudent, generateParent, regenerateParent, resetPassword, toggleBlock, deleteAccess } = useUserStore()
- const [showPass, setShowPass] = useState({})
- const [resetTarget, setResetTarget] = useState(null)
- const [newPass, setNewPass] = useState('')
- const [copied, setCopied] = useState(null)
+ const [accounts, setAccounts] = useState({ student: null, parent: null })
+ const [temporary, setTemporary] = useState({ student: null, parent: null })
+ const [loading, setLoading] = useState(true)
+ const [working, setWorking] = useState('')
+ const [copied, setCopied] = useState('')
+ const studentId = student.id
 
- const userRaw = localStorage.getItem('al_siddique_user')
- let isDemo = false
+ const loadAccounts = async () => {
+ if (!studentId) return
+ setLoading(true)
  try {
-   if (userRaw) {
-     const userObj = JSON.parse(userRaw)
-     isDemo = userObj?.email === 'demo@assps.edu.pk'
-   }
- } catch (e) {}
+ const response = await api.get(`/api/students/${studentId}/portal-accounts`)
+ setAccounts(response.data?.data || { student: null, parent: null })
+ } catch (err) {
+ console.error('Portal accounts load failed', err)
+ setAccounts({ student: null, parent: null })
+ } finally {
+ setLoading(false)
+ }
+ }
 
- const entityId = student.id || student.gr_number || student.gr
- const sUser = getUserByEntity(entityId, 'student')
- || getUserByEntity(student.gr, 'student')
- || getUserByEntity(student.gr_number, 'student')
- const pUser = getUserByEntity(entityId, 'parent')
- || getUserByEntity(student.gr, 'parent')
- || getUserByEntity(student.gr_number, 'parent')
+ useEffect(() => {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ void loadAccounts()
+ }, [studentId])
+
+ const provision = async (role) => {
+ setWorking(`${role}:provision`)
+ try {
+ const response = await api.post(`/api/students/${studentId}/portal-accounts/${role}`)
+ const credentials = response.data?.credentials || null
+ if (credentials) setTemporary(prev => ({ ...prev, [role]: credentials }))
+ await loadAccounts()
+ } catch (err) {
+ alert(err.response?.data?.message || 'Portal account could not be created.')
+ } finally {
+ setWorking('')
+ }
+ }
+
+ const resetSecurePassword = async (role) => {
+ setWorking(`${role}:reset`)
+ try {
+ const response = await api.post(`/api/students/${studentId}/portal-accounts/${role}/reset`)
+ setTemporary(prev => ({ ...prev, [role]: response.data?.credentials || null }))
+ await loadAccounts()
+ } catch (err) {
+ alert(err.response?.data?.message || 'Temporary password could not be generated.')
+ } finally {
+ setWorking('')
+ }
+ }
+
+ const toggleAccount = async (role, user) => {
+ setWorking(`${role}:toggle`)
+ try {
+ await api.put(`/api/students/${studentId}/portal-accounts/${role}/active`, { active: !user.is_active })
+ await loadAccounts()
+ } catch (err) {
+ alert(err.response?.data?.message || 'Portal status could not be updated.')
+ } finally {
+ setWorking('')
+ }
+ }
+
+ const revoke = async (role) => {
+ if (!window.confirm(`Revoke ${role} portal access for this student? The account will be disabled, not erased.`)) return
+ setWorking(`${role}:revoke`)
+ try {
+ await api.delete(`/api/students/${studentId}/portal-accounts/${role}`)
+ setTemporary(prev => ({ ...prev, [role]: null }))
+ await loadAccounts()
+ } catch (err) {
+ alert(err.response?.data?.message || 'Portal access could not be revoked.')
+ } finally {
+ setWorking('')
+ }
+ }
 
  const copy = (text, key) => {
- navigator.clipboard.writeText(text).catch(()=>{})
- setCopied(key); setTimeout(()=>setCopied(null), 1600)
+ if (!text) return
+ navigator.clipboard.writeText(text).catch(() => {})
+ setCopied(key)
+ setTimeout(() => setCopied(''), 1400)
  }
 
- const printCard = (u, type) => {
- const w = window.open('','_blank','width=420,height=340')
- w.document.write(`<html><head><title>${type} Login</title><style>
- body{font-family:Arial,sans-serif;padding:28px;background:#f8f9fa;margin:0}
- .card{background:#fff;border:2px solid ${type==='Student'?'#0A84FF':'#30D158'};border-radius:14px;padding:24px;max-width:360px}
- h2{color:${type==='Student'?'#0A84FF':'#1a7a3a'};margin:0 0 4px;font-size:17px}
- p{color:#555;font-size:12px;margin:0 0 18px}
- .row{display:flex;justify-content:space-between;padding:9px 13px;background:#f0f4ff;border-radius:8px;margin-bottom:8px}
- .lbl{color:#888;font-size:11px;font-weight:600}.val{color:#1a1a2e;font-size:14px;font-weight:700}
- </style></head><body><div class="card">
- <h2>${type} Login Card — Al Siddique OS</h2>
- <p>${student.name} · GR: ${student.gr || student.gr_number || ''} · Class ${student.class}</p>
- <div class="row"><span class="lbl">Login ID</span><span class="val">${u.username}</span></div>
- <div class="row"><span class="lbl">Password</span><span class="val">${u.password}</span></div>
- <div class="row"><span class="lbl">Portal</span><span class="val">alsiddique.edu.pk</span></div>
- </div></body></html>`)
- w.document.close(); setTimeout(()=>w.print(), 400)
+ const printCredential = (role, user) => {
+ const temp = temporary[role]
+ const w = window.open('', '_blank', 'width=440,height=380')
+ if (!w) return
+ const label = role === 'student' ? 'Student' : 'Parent'
+ const login = user?.username || user?.email || temp?.username || temp?.email || ''
+ const password = temp?.password || 'Use the existing password or generate a secure reset from APEX OS.'
+ w.document.write(`<html><head><title>${label} Login</title><style>
+ body{font-family:Arial,sans-serif;padding:28px;background:#f8f9fa;margin:0}.card{background:#fff;border:1px solid #dbe2ea;border-radius:16px;padding:24px;max-width:370px;box-shadow:0 12px 30px rgba(31,47,67,.12)}
+ h2{color:#152033;margin:0 0 5px;font-size:18px}p{color:#617188;font-size:12px;margin:0 0 18px}.row{padding:10px 13px;background:#f4f7fb;border-radius:9px;margin-bottom:8px}.lbl{color:#68788d;font-size:10px;font-weight:700;text-transform:uppercase}.val{display:block;color:#152033;font-size:14px;font-weight:700;margin-top:4px}
+ </style></head><body><div class="card"><h2>${label} Portal Access</h2><p>${student.name} · ${student.gr || student.gr_number || ''}</p><div class="row"><span class="lbl">Login ID</span><span class="val">${login}</span></div><div class="row"><span class="lbl">Temporary Password</span><span class="val">${password}</span></div></div></body></html>`)
+ w.document.close()
+ setTimeout(() => w.print(), 300)
  }
 
- const CredCard = ({ u, type, color, onGenerate, onRegen }) => (
- <div style={{ background:`rgba(7,30,52,0.5)`, border:`1px solid ${color}33`, borderRadius:14, padding:18 }}>
- <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:14 }}>
- <div style={{ color, fontWeight:800, fontSize:14 }}>{type==='Student'?'':''} {type} Login</div>
- {!u ? (
- <button onClick={onGenerate} style={{ background:`${color}22`, color, border:`1px solid ${color}44`, padding:'6px 14px', borderRadius:8, fontSize:12, fontWeight: 600, cursor:'pointer' }}>
- + Generate
- </button>
- ) : (
- <div style={{ display:'flex', gap:6 }}>
- <button onClick={onRegen} style={{ background:'rgba(255,159,10,.1)', color:'#FF9F0A', border:'1px solid #FF9F0A33', padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer' }}> Reset</button>
- <button onClick={()=>{ setResetTarget({...u,label:type}); setNewPass('') }} style={{ background:`${color}11`, color, border:`1px solid ${color}33`, padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer' }}> Pass</button>
- <button onClick={()=>toggleBlock(u.id)} style={{ background:u.isActive?'rgba(255,55,95,.1)':'rgba(48,209,88,.1)', color:u.isActive?'#FF375F':'#30D158', border:'1px solid #aaa3', padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer' }}>{u.isActive?'':''}</button>
- <button onClick={()=>printCard(u,type)} style={{ background:'rgba(191,90,242,.1)', color:'#BF5AF2', border:'1px solid #BF5AF233', padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer' }}></button>
- {!isDemo && (
- <button onClick={()=>{ if(window.confirm('Delete this access permanently?')) deleteAccess(u.id) }} style={{ background:'rgba(255,55,95,.08)', color:'#FF375F', border:'1px solid #FF375F22', padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer' }}></button>
- )}
- </div>
- )}
- </div>
- {u ? (
- <div style={{ display:'grid', gap:8 }}>
- {[['Login ID', u.username, `un_${u.id}`], ['Password', showPass[u.id] ? u.password : '••••••', `pw_${u.id}`]].map(([lbl,val,key])=>(
- <div key={key} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', background:'rgba(7,30,52,0.6)', borderRadius:10, padding:'10px 14px' }}>
- <div>
- <div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>{lbl}</div>
- <div style={{ color:'#C0C8D8', fontWeight:700, fontSize:15, fontFamily:'monospace' }}>{val}</div>
- </div>
- <div style={{ display:'flex', gap:6 }}>
- {lbl==='Password' && <button onClick={()=>setShowPass(p=>({...p,[u.id]:!p[u.id]}))} style={{ background:'none',border:'none',cursor:'pointer',color:'#8892A4',fontSize:14 }}>{showPass[u.id]?'':''}</button>}
- <button onClick={()=>copy(val,key)} style={{ background:'none',border:'none',cursor:'pointer',color:copied===key?'#30D158':'#8892A4',fontSize:14 }}>{copied===key?'':''}</button>
- </div>
- </div>
- ))}
- <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', background:'rgba(7,30,52,0.6)', borderRadius:10, padding:'10px 14px' }}>
- <div><div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>Status</div>
- <span style={{ color:u.isActive?'#30D158':'#FF375F', fontWeight:700, fontSize:13 }}>{u.isActive?' Active':' Blocked'}</span>
- </div>
- <div><div style={{ color:'#8892A4', fontSize:10, fontWeight:700, textTransform:'uppercase', marginBottom:3 }}>Last Login</div>
- <span style={{ color:'#C0C8D8', fontSize:12 }}>{u.lastLogin ? new Date(u.lastLogin).toLocaleDateString('en-PK') : '—'}</span>
- </div>
- </div>
- </div>
- ) : (
- <div style={{ textAlign:'center', padding:'20px 0', color:'#8892A4', fontSize:13 }}>
- No login credentials have been generated yet.<br/>
- Click <span style={{ color, fontWeight:700 }}>Generate</span> to create portal access.
- </div>
- )}
- </div>
- )
-
+ const AccountCard = ({ role, title }) => {
+ const user = accounts[role]
+ const temp = temporary[role]
+ const busy = working.startsWith(`${role}:`)
+ const login = user?.username || user?.email || ''
  return (
- <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
- <CredCard
- u={sUser} type="Student" color="#0A84FF"
- onGenerate={()=>generateStudent(student)}
- onRegen={()=>regenerateStudent(student)}
- />
- <CredCard
- u={pUser} type="Parent" color="#30D158"
- onGenerate={()=>generateParent(student)}
- onRegen={()=>regenerateParent(student)}
- />
+ <div style={{ ...card, padding:18, display:'grid', gap:14 }}>
+ <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12 }}>
+ <div>
+ <div style={{ color:'var(--apex-action-primary)', fontSize:11, fontWeight:800, textTransform:'uppercase', letterSpacing:.8 }}>{title}</div>
+ <div style={{ color:'var(--apex-text-tertiary)', fontSize:12, marginTop:4 }}>{user ? 'Server-linked portal account' : 'No linked portal account'}</div>
+ </div>
+ {user && <span style={{ padding:'5px 9px', borderRadius:999, background:user.is_active ? 'color-mix(in srgb, var(--apex-action-success) 9%, var(--apex-bg-surface-solid))' : 'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', color:user.is_active ? 'var(--apex-action-success)' : 'var(--apex-action-danger)', fontSize:10, fontWeight:800 }}>{user.is_active ? 'Active' : 'Blocked'}</span>}
+ </div>
 
- {resetTarget && (
- <div style={{ position:'fixed', inset:0, background:'rgba(7,30,52,.85)', backdropFilter:'blur(8px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center' }}>
- <div style={{ background:'#0B2C4D', border:'1px solid rgba(148,163,184,0.2)', borderRadius:18, padding:28, width:340 }}>
- <h3 style={{ color:'#C8991A', margin:'0 0 6px', fontSize:16 }}>New Password — {resetTarget.label}</h3>
- <p style={{ color:'#8892A4', fontSize:12, margin:'0 0 16px' }}>{student.name} · {resetTarget.username}</p>
- <input value={newPass} onChange={e=>setNewPass(e.target.value)} placeholder="Naya password..."
- style={{ width:'100%', background:'rgba(11,44,77,.8)', border:'1px solid rgba(148,163,184,.2)', borderRadius:10, color:'#C0C8D8', padding:'10px 13px', fontSize:14, outline:'none', boxSizing:'border-box', marginBottom:16 }}/>
- <div style={{ display:'flex', gap:10 }}>
- <button onClick={()=>setResetTarget(null)} style={{ flex:1, padding:'10px', borderRadius:10, background:'rgba(255,55,95,.1)', color:'#FF375F', border:'1px solid #FF375F33', cursor:'pointer', fontWeight: 600 }}>Cancel</button>
- <button onClick={()=>{ resetPassword(resetTarget.id, newPass.trim()); setResetTarget(null); setNewPass('') }} style={{ flex:1, padding:'10px', borderRadius:10, background:'linear-gradient(135deg,#C8991A,#e8b420)', color:'#071e34', border:'none', cursor:'pointer', fontWeight: 600 }}>Save</button>
+ {user ? <>
+ <div style={{ padding:12, borderRadius:12, background:'var(--apex-bg-subtle)', border:'1px solid var(--apex-border-subtle)' }}>
+ <div style={{ color:'var(--apex-text-tertiary)', fontSize:10, fontWeight:800, textTransform:'uppercase' }}>Login ID</div>
+ <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:10, marginTop:5 }}><strong style={{ color:'var(--apex-text-primary)', fontSize:13 }}>{login}</strong><button onClick={()=>copy(login, `${role}:login`)} style={{ ...btnSecondary, padding:'6px 9px', fontSize:11 }}>{copied === `${role}:login` ? 'Copied' : 'Copy'}</button></div>
  </div>
+ {temp?.password && <div style={{ padding:12, borderRadius:12, background:'color-mix(in srgb, var(--apex-action-highlight) 7%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-highlight) 24%, var(--apex-border-default))' }}>
+ <div style={{ color:'var(--apex-action-highlight)', fontSize:10, fontWeight:800, textTransform:'uppercase' }}>One-time temporary password</div>
+ <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:10, marginTop:5 }}><strong style={{ color:'var(--apex-text-primary)', fontSize:13, fontFamily:'monospace' }}>{temp.password}</strong><button onClick={()=>copy(temp.password, `${role}:password`)} style={{ ...btnSecondary, padding:'6px 9px', fontSize:11 }}>{copied === `${role}:password` ? 'Copied' : 'Copy'}</button></div>
+ </div>}
+ <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+ <button disabled={busy} onClick={()=>resetSecurePassword(role)} style={{ ...btnSecondary, fontSize:11 }}>Generate Secure Reset</button>
+ <button disabled={busy} onClick={()=>toggleAccount(role, user)} style={{ ...btnSecondary, fontSize:11 }}>{user.is_active ? 'Block' : 'Unblock'}</button>
+ <button disabled={busy} onClick={()=>printCredential(role, user)} style={{ ...btnSecondary, fontSize:11 }}>Print</button>
+ <button disabled={busy} onClick={()=>revoke(role)} style={{ ...btnSecondary, fontSize:11, color:'var(--apex-action-danger)' }}>Revoke</button>
  </div>
- </div>
- )}
+ </> : <button disabled={busy || loading} onClick={()=>provision(role)} style={{ ...btnPrimary, justifyContent:'center' }}>{busy ? 'Creating…' : `Create ${title} Access`}</button>}
  </div>
  )
+ }
+
+ if (loading) return <div style={{ ...card, color:'var(--apex-text-tertiary)', textAlign:'center' }}>Loading portal accounts…</div>
+ return <div style={{ display:'grid', gap:16 }}><AccountCard role="student" title="Student"/><AccountCard role="parent" title="Parent"/></div>
 }
 
 //  Profile Modal
@@ -2080,7 +2087,7 @@ function StudentSlips({ students, school }) {
 //  Main Component
 export default function StudentsModule() {
  const { classNames, allSections, activeClasses, subjectsForClass } = useAcademicStore();
- const { students: rawStudents, addStudent, deleteStudent, updateStudent } = useStudentStore();
+ const { students: rawStudents, deleteStudent, updateStudent } = useStudentStore();
  const [feeStatusByStudent, setFeeStatusByStudent] = useState({});
 
   const userRaw = localStorage.getItem('al_siddique_user')
@@ -2092,7 +2099,6 @@ export default function StudentsModule() {
     }
   } catch (e) {}
 
- const { generateStudent, generateParent } = useUserStore();
  const [searchParams] = useSearchParams();
  const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusByStudent[student.id] || "" }));
  const [search, setSearch] = useState("");
@@ -2105,6 +2111,7 @@ export default function StudentsModule() {
  const [viewStudent, setViewStudent] = useState(null);
  const [printList, setPrintList] = useState(null);
  const [moduleTab, setModuleTab] = useState("students");
+ const [newCredentials, setNewCredentials] = useState(null);
  const searchRef = useRef(null);
 
  const { paperSettings } = usePaperStore();
@@ -2479,10 +2486,31 @@ export default function StudentsModule() {
  {moduleTab==="locality" && <LocalityReports students={students}/>}
  {moduleTab==="form" && <AdmissionFormPrint school={paperSettings}/>}
 
- {showAdd && <AddStudentModal onClose={()=>setShowAdd(false)} addStudent={addStudent} paperSettings={paperSettings} onCredGenerated={s=>{ generateStudent(s); generateParent(s) }}/>}
+ {showAdd && <AddStudentModal onClose={()=>setShowAdd(false)} paperSettings={paperSettings} onCredentials={(credentials, student) => setNewCredentials({ credentials, student })}/>}
  {editStudent && <AddStudentModal onClose={()=>setEditStudent(null)} initialData={editStudent} updateStudent={updateStudent}/>}
  {viewStudent && <ProfileModal student={viewStudent} onClose={()=>setViewStudent(null)} paperSettings={paperSettings} onUpdatePhoto={(id, url) => { updateStudent(id, { photo: url }); setViewStudent(s => ({ ...s, photo: url })) }}/>}
  {printList && <PrintStudentList list={printList} school={paperSettings} onClose={()=>setPrintList(null)} />}
+ {newCredentials && (
+ <div style={{ position:'fixed', inset:0, zIndex:14000, background:'var(--apex-bg-overlay)', display:'grid', placeItems:'center', padding:20 }} onClick={()=>setNewCredentials(null)}>
+ <div style={{ ...card, width:'min(520px, 100%)', display:'grid', gap:16 }} onClick={e=>e.stopPropagation()}>
+ <div>
+ <div style={{ color:'var(--apex-action-primary)', fontSize:11, fontWeight:800, textTransform:'uppercase', letterSpacing:1 }}>One-time credentials</div>
+ <h3 style={{ margin:'5px 0 0', color:'var(--apex-text-primary)', fontSize:20 }}>{newCredentials.student?.name || 'New student'}</h3>
+ <p style={{ margin:'6px 0 0', color:'var(--apex-text-tertiary)', fontSize:12, lineHeight:1.6 }}>Temporary passwords are shown only when a new server account was created. Existing linked accounts are never given a fabricated password.</p>
+ </div>
+ {[['Student', newCredentials.credentials?.student], ['Parent', newCredentials.credentials?.parent]].map(([label, cred]) => cred ? (
+ <div key={label} style={{ padding:14, borderRadius:14, background:'var(--apex-bg-subtle)', border:'1px solid var(--apex-border-default)' }}>
+ <div style={{ color:'var(--apex-text-secondary)', fontSize:11, fontWeight:800, textTransform:'uppercase' }}>{label}</div>
+ <div style={{ marginTop:8, display:'grid', gap:5, color:'var(--apex-text-primary)', fontSize:13 }}>
+ <div>Login: <strong>{cred.username || cred.email || '—'}</strong></div>
+ <div>Password: <strong>{cred.password || (cred.created === false ? 'Existing account — unchanged' : 'Not returned')}</strong></div>
+ </div>
+ </div>
+ ) : null)}
+ <button onClick={()=>setNewCredentials(null)} style={btnPrimary}>Close</button>
+ </div>
+ </div>
+ )}
  </div>
  );
 }
