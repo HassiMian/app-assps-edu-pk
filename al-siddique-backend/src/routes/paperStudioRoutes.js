@@ -4,6 +4,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
+const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
 
 router.use(protect, requireRoles('super_admin','admin','principal','teacher'))
 
@@ -41,6 +42,50 @@ router.get('/papers', async (req,res) => {
 
 // This read-only review has the same owner/school guard as the paper detail route.
 // It does not change an existing paper or authorize canonical save, print or publication.
+// V6-D strict compare-and-save. This is the same school paper_vault's
+// current record with append-only revision snapshots; not a parallel Connect DB.
+router.patch('/papers/:id', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res);if(!schoolId)return
+    const result=await saveGuardedRevision({
+      schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,
+      expectedRevision:Number(req.body?.expectedRevision),
+      expectedSnapshotHash:req.body?.expectedSnapshotHash,
+      workingDocument:req.body?.workingDocument,
+    })
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data:result})
+  }catch(err){
+    const status=Number(err.status)||500
+    if(status>=500)console.error('V6-D strict paper save failed:',err.message)
+    return res.status(status).json({success:false,code:err.code||'REVISION_SAVE_FAILED',message:status>=500?'Revision could not be saved.':err.message})
+  }
+})
+router.get('/papers/:id/revisions', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res);if(!schoolId)return
+    const data=await listGuardedRevisions({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  }catch(err){
+    const status=Number(err.status)||500
+    if(status>=500)console.error('V6-D history lookup failed:',err.message)
+    return res.status(status).json({success:false,code:err.code||'HISTORY_FAILED',message:status>=500?'Revision history could not be verified.':err.message})
+  }
+})
+router.get('/papers/:id/revisions/:revision', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res);if(!schoolId)return
+    const data=await readGuardedRevision({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,revision:req.params.revision})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  }catch(err){
+    const status=Number(err.status)||500
+    if(status>=500)console.error('V6-D historical read failed:',err.message)
+    return res.status(status).json({success:false,code:err.code||'REVISION_READ_FAILED',message:status>=500?'Revision could not be verified.':err.message})
+  }
+})
+
 router.get('/papers/:id/document-review', async (req,res) => {
   try {
     const schoolId = schoolContext(req,res); if(!schoolId)return
