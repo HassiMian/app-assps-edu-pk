@@ -244,31 +244,31 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  cursor: 'pointer',
  justifyContent: effectiveCollapsed ? 'center' : 'flex-start',
  background: isActive
- ? `linear-gradient(135deg, ${item.color}24 0%, rgba(15,23,42,0.26) 100%)`
+ ? 'linear-gradient(135deg, color-mix(in srgb, var(--apex-action-primary) 12%, var(--apex-bg-surface-solid)) 0%, color-mix(in srgb, var(--apex-bg-subtle) 76%, transparent) 100%)'
  : 'transparent',
  borderLeft: isActive
- ? `3px solid ${item.color}`
+ ? `3px solid ${'var(--apex-action-primary)'}`
  : '3px solid transparent',
  marginLeft: -3,
- color: isActive ? item.color : 'rgba(192,200,216,0.75)',
- boxShadow: isActive ? `0 8px 18px ${item.color}10` : 'none',
+ color: isActive ? 'var(--apex-action-primary)' : 'var(--apex-text-secondary)',
+ boxShadow: isActive ? '0 8px 20px color-mix(in srgb, var(--apex-action-primary) 10%, transparent)' : 'none',
  })}
  >
  {({ isActive }) => (
  <>
  <div className="super-sidebar-brand-logo" style={{
  width: effectiveCollapsed ? 38 : 32, height: effectiveCollapsed ? 38 : 32, borderRadius: 10, flexShrink: 0,
- background: isActive ? `${item.color}26` : 'rgba(255,255,255,0.045)',
+ background: isActive ? 'color-mix(in srgb, var(--apex-action-primary) 12%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-subtle)',
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  transition: 'all 0.2s',
- boxShadow: isActive ? `0 0 12px ${item.color}24` : 'none',
+ boxShadow: isActive ? '0 0 0 1px color-mix(in srgb, var(--apex-action-primary) 14%, transparent)' : 'none',
  }}>
- <item.icon size={effectiveCollapsed ? 19 : 16} color={isActive ? item.color : inactiveIcon} />
+ <item.icon size={effectiveCollapsed ? 19 : 16} color={isActive ? 'var(--apex-action-primary)' : inactiveIcon} />
  </div>
  {!effectiveCollapsed && (
  <span style={{
  fontSize: 12, fontWeight: isActive ? 700 : 600, whiteSpace: 'nowrap',
- color: isActive ? item.color : inactiveText,
+ color: isActive ? 'var(--apex-action-primary)' : inactiveText,
  }}>
  {item.label}
  </span>
@@ -296,19 +296,19 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  cursor: 'pointer',
  transition: 'transform 0.24s cubic-bezier(0.34,1.2,0.64,1), background 0.24s ease, box-shadow 0.24s ease',
  justifyContent: effectiveCollapsed ? 'center' : 'flex-start',
- background: isOpen ? `linear-gradient(135deg, ${item.color}18, rgba(15,23,42,0.28))` : 'transparent',
+ background: isOpen ? `linear-gradient(135deg, ${'var(--apex-action-primary)'}18, rgba(15,23,42,0.28))` : 'transparent',
  borderLeft: '3px solid transparent',
  marginLeft: -3,
- boxShadow: isOpen ? `0 8px 18px ${item.color}10` : 'none',
+ boxShadow: isOpen ? `0 8px 18px ${'var(--apex-action-primary)'}10` : 'none',
  }}
  >
  <div style={{
  width: effectiveCollapsed ? 38 : 32, height: effectiveCollapsed ? 38 : 32, borderRadius: 10, flexShrink: 0,
- background: isOpen ? `${item.color}22` : 'rgba(255,255,255,0.045)',
+ background: isOpen ? 'color-mix(in srgb, var(--apex-action-primary) 11%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-subtle)',
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  transition: 'all 0.2s',
  }}>
- <item.icon size={effectiveCollapsed ? 19 : 16} color={isOpen ? item.color : inactiveIcon} />
+ <item.icon size={effectiveCollapsed ? 19 : 16} color={isOpen ? 'var(--apex-action-primary)' : inactiveIcon} />
  </div>
  {!effectiveCollapsed && (
  <>
@@ -317,7 +317,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  </span>
  <ChevronDown
  size={14}
- color="rgba(192,200,216,0.4)"
+ color="var(--apex-text-tertiary)"
  style={{ transition: 'transform 0.3s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0 }}
  />
  </>
@@ -327,7 +327,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  {!effectiveCollapsed && isOpen && (
  <div style={{
  marginLeft: 22,
- borderLeft: `2px solid ${item.color}30`,
+ borderLeft: '2px solid color-mix(in srgb, var(--apex-action-primary) 22%, var(--apex-border-default))',
  paddingLeft: 10,
  paddingTop: 3,
  paddingBottom: 3,
@@ -348,8 +348,8 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  textDecoration: 'none',
  fontSize: 11.5,
  fontWeight: isActive ? 700 : 500,
- color: isActive ? item.color : 'rgba(136,146,164,0.9)',
- background: isActive ? `${item.color}15` : 'transparent',
+ color: isActive ? 'var(--apex-action-primary)' : 'var(--apex-text-tertiary)',
+ background: isActive ? 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))' : 'transparent',
  transition: 'all 0.15s',
  })}
  >
@@ -447,10 +447,10 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
       to { background-position: 200% center; }
     }
   `}</style>
-  <div style={{ fontSize: 9, color: 'rgba(200,153,26,0.7)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+  <div style={{ fontSize: 9, color: 'var(--apex-action-highlight)', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
   Smart School Portal
   </div>
-  <div style={{ fontSize: 10, color: 'rgba(192,200,216,0.5)', marginTop: 3 }}>
+  <div style={{ fontSize: 10, color: 'var(--apex-text-tertiary)', marginTop: 3 }}>
   School operations at a glance
   </div>
   </div>
@@ -461,7 +461,7 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  <nav
  ref={navRef}
  className="custom-scrollbar"
- style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain', padding: effectiveCollapsed ? '12px 8px' : '12px 16px', display: 'flex', flexDirection: 'column', gap: 0, scrollbarWidth: 'thin', scrollbarColor: 'rgba(200,153,26,0.25) transparent' }}
+ style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain', padding: effectiveCollapsed ? '12px 8px' : '12px 16px', display: 'flex', flexDirection: 'column', gap: 0, scrollbarWidth: 'thin', scrollbarColor: 'color-mix(in srgb, var(--apex-action-primary) 25%, transparent) transparent' }}
  >
  {visibleGroups.map((group, gi) => (
  <div key={gi} style={{ marginBottom: 8 }}>
@@ -472,19 +472,19 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  padding: '10px 4px 6px',
  marginTop: gi === 0 ? 0 : 4,
  }}>
- <div style={{ height: 1, flex: 1, background: 'linear-gradient(90deg, rgba(200,153,26,0.06), rgba(200,153,26,0.18))' }} />
+ <div style={{ height: 1, flex: 1, background: 'linear-gradient(90deg, transparent, var(--apex-border-default))' }} />
  <span style={{
  fontSize: 9, fontWeight: 800, letterSpacing: '1.2px',
- color: 'rgba(200,153,26,0.45)',
+ color: 'var(--apex-text-tertiary)',
  textTransform: 'uppercase', whiteSpace: 'nowrap',
- background: 'rgba(200,153,26,0.06)',
- border: '1px solid rgba(200,153,26,0.12)',
+ background: 'var(--apex-bg-subtle)',
+ border: '1px solid var(--apex-border-subtle)',
  borderRadius: 999,
  padding: '3px 8px',
  }}>
  {group.label}
  </span>
- <div style={{ height: 1, flex: 1, background: 'linear-gradient(90deg, rgba(200,153,26,0.18), rgba(200,153,26,0.06))' }} />
+ <div style={{ height: 1, flex: 1, background: 'linear-gradient(90deg, var(--apex-border-default), transparent)' }} />
  </div>
  )}
  {/* Items */}
@@ -500,31 +500,31 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  {/* User & Actions */}
  <div style={{
  padding: effectiveCollapsed ? '12px 8px' : '12px 14px',
- borderTop: '1px solid rgba(148,163,184,0.12)',
+ borderTop: '1px solid var(--apex-border-subtle)',
  display: 'flex', flexDirection: 'column', gap: 8,
  flexShrink: 0,
  }}>
  {!effectiveCollapsed && (
  <div style={{
  padding: '10px 12px',
- background: 'rgba(11,44,77,0.92)',
- border: '1px solid rgba(148,163,184,0.16)',
+ background: 'var(--apex-bg-surface)',
+ border: '1px solid var(--apex-border-default)',
  borderRadius: 18,
  display: 'flex', alignItems: 'center', gap: 10,
  }}>
  <div style={{
  width: 34, height: 34, borderRadius: '50%',
- background: 'linear-gradient(135deg, #0A84FF, #22d3ee)',
+ background: 'linear-gradient(135deg, var(--apex-action-primary), var(--apex-action-secondary))',
  display: 'flex', alignItems: 'center', justifyContent: 'center',
- color: '#fff', fontWeight: 800, fontSize: 14, flexShrink: 0,
+ color: 'var(--apex-text-primary)', fontWeight: 800, fontSize: 14, flexShrink: 0,
  }}>
  {user?.name?.[0] || 'A'}
  </div>
  <div style={{ minWidth: 0 }}>
- <div style={{ color: '#fff', fontSize: 12, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+ <div style={{ color: 'var(--apex-text-primary)', fontSize: 12, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
  {user?.name || 'Admin User'}
  </div>
- <div style={{ color: 'rgba(200,153,26,0.7)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px' }}>
+ <div style={{ color: 'var(--apex-action-highlight)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.8px' }}>
  {user?.designation || 'Master'}
  </div>
  </div>
@@ -535,8 +535,8 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  onClick={() => { logout(); navigate('/login') }}
  style={{
  flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
- background: 'rgba(255,55,95,0.1)', color: '#FF375F',
- border: '1px solid rgba(255,55,95,0.2)', borderRadius: 12,
+ background: 'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', color: 'var(--apex-action-danger)',
+ border: '1px solid color-mix(in srgb, var(--apex-action-danger) 22%, var(--apex-border-default))', borderRadius: 12,
  padding: effectiveCollapsed ? '10px 0' : '9px 12px',
  fontSize: 12, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s',
  }}
@@ -548,9 +548,9 @@ function Sidebar({ collapsed, setCollapsed, isHovered, setIsHovered }) {
  style={{
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  padding: '9px 11px', borderRadius: 12,
- background: 'rgba(11,44,77,0.92)',
- border: '1px solid rgba(148,163,184,0.16)',
- color: 'rgba(192,200,216,0.6)', cursor: 'pointer', transition: 'all 0.2s',
+ background: 'var(--apex-bg-surface)',
+ border: '1px solid var(--apex-border-default)',
+ color: 'var(--apex-text-secondary)', cursor: 'pointer', transition: 'all 0.2s',
  fontSize: 13,
  }}
  >

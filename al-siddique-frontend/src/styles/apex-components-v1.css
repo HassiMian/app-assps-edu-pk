@@ -1,0 +1,126 @@
+/* Shared operational primitives. Protected print/document templates do not use these classes. */
+.apex-surface {
+  border: 1px solid var(--apex-border-default);
+  border-radius: var(--apex-radius-lg);
+  background: var(--apex-bg-surface);
+  color: var(--apex-text-primary);
+}
+
+.apex-surface--base { box-shadow: var(--apex-shadow-sm); }
+.apex-surface--raised { box-shadow: var(--apex-shadow-md); }
+.apex-surface--floating {
+  background: color-mix(in srgb, var(--apex-bg-surface-solid) 96%, transparent);
+  box-shadow: var(--apex-shadow-lg);
+  backdrop-filter: blur(24px) saturate(125%);
+}
+
+.apex-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--apex-radius-sm);
+  padding: 0 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform var(--apex-motion-fast) ease,
+    background var(--apex-motion-fast) ease,
+    border-color var(--apex-motion-fast) ease,
+    color var(--apex-motion-fast) ease,
+    box-shadow var(--apex-motion-fast) ease,
+    opacity var(--apex-motion-fast) ease;
+}
+
+.apex-button:hover:not(:disabled) { transform: translateY(-1px); }
+.apex-button:active:not(:disabled) { transform: translateY(0); }
+.apex-button:focus-visible { outline: none; box-shadow: var(--apex-focus-ring); }
+.apex-button:disabled { opacity: 0.52; cursor: not-allowed; }
+
+.apex-button--primary {
+  background: var(--apex-action-primary);
+  color: #fff;
+  box-shadow: 0 9px 22px color-mix(in srgb, var(--apex-action-primary) 22%, transparent);
+}
+.apex-button--primary:hover:not(:disabled) { background: var(--apex-action-primary-hover); }
+
+.apex-button--secondary {
+  background: color-mix(in srgb, var(--apex-action-primary) 8%, var(--apex-bg-surface-solid));
+  border-color: color-mix(in srgb, var(--apex-action-primary) 24%, var(--apex-border-default));
+  color: var(--apex-action-primary);
+}
+
+.apex-button--ghost {
+  background: transparent;
+  border-color: var(--apex-border-subtle);
+  color: var(--apex-text-secondary);
+}
+.apex-button--ghost:hover:not(:disabled) { background: var(--apex-bg-subtle); color: var(--apex-text-primary); }
+
+.apex-button--danger {
+  background: color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid));
+  border-color: color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default));
+  color: var(--apex-action-danger);
+}
+
+.apex-button--sm { min-height: 36px; padding: 0 11px; font-size: 12px; }
+.apex-button--lg { min-height: 48px; padding: 0 18px; font-size: 14px; }
+.apex-button--icon-only { width: 42px; padding: 0; }
+.apex-button--icon-only.apex-button--sm { width: 36px; }
+.apex-button__icon { display: inline-flex; align-items: center; justify-content: center; }
+
+.apex-status-chip {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid var(--apex-border-default);
+  border-radius: 999px;
+  background: var(--apex-bg-subtle);
+  color: var(--apex-text-secondary);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+.apex-status-chip--success {
+  border-color: color-mix(in srgb, var(--apex-action-success) 25%, var(--apex-border-default));
+  background: color-mix(in srgb, var(--apex-action-success) 8%, var(--apex-bg-surface-solid));
+  color: var(--apex-action-success);
+}
+.apex-status-chip--warning {
+  border-color: color-mix(in srgb, var(--apex-action-highlight) 28%, var(--apex-border-default));
+  background: color-mix(in srgb, var(--apex-action-highlight) 9%, var(--apex-bg-surface-solid));
+  color: var(--apex-action-highlight);
+}
+.apex-status-chip--danger {
+  border-color: color-mix(in srgb, var(--apex-action-danger) 25%, var(--apex-border-default));
+  background: color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid));
+  color: var(--apex-action-danger);
+}
+
+/* Shared command-shell popovers */
+.apex-command-popover {
+  background: color-mix(in srgb, var(--apex-bg-surface-solid) 97%, transparent);
+  border: 1px solid var(--apex-border-default);
+  box-shadow: var(--apex-shadow-lg);
+  backdrop-filter: blur(24px) saturate(130%);
+  color: var(--apex-text-primary);
+}
+
+.apex-command-row {
+  border-bottom: 1px solid var(--apex-border-subtle);
+  color: var(--apex-text-secondary);
+  transition: background var(--apex-motion-fast) ease, color var(--apex-motion-fast) ease;
+}
+.apex-command-row:hover { background: var(--apex-bg-subtle); color: var(--apex-text-primary); }
+
+.apex-command-row--danger { color: var(--apex-action-danger); }
+.apex-command-row--danger:hover {
+  background: color-mix(in srgb, var(--apex-action-danger) 7%, var(--apex-bg-surface-solid));
+  color: var(--apex-action-danger);
+}

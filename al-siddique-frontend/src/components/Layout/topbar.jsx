@@ -333,7 +333,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  width: 40, height: 40, borderRadius: 12, flexShrink: 0,
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  background: 'var(--apex-bg-subtle)',
- border: '1px solid rgba(148,163,184,0.18)',
+ border: '1px solid var(--apex-border-default)',
  cursor: 'pointer', color: 'var(--apex-text-primary)',
  }}
  >
@@ -361,9 +361,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  padding: '11px 18px',
  borderRadius: 18,
  ...glassCard,
- boxShadow: focused ? '0 8px 32px rgba(0, 0, 0, 0.3)' : '0 4px 16px rgba(0, 0, 0, 0.2)',
+ boxShadow: focused ? 'var(--apex-shadow-md)' : 'var(--apex-shadow-sm)',
  }}>
- <Search size={16} color="#94a3b8" />
+ <Search size={16} color="var(--apex-text-tertiary)" />
  <input
  type="text"
  value={searchText}
@@ -383,7 +383,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  }}
  />
  {searchText && (
- <X size={14} color="#8892A4" style={{ cursor: 'pointer', flexShrink: 0 }}
+ <X size={14} color="var(--apex-text-tertiary)" style={{ cursor: 'pointer', flexShrink: 0 }}
  onMouseDown={() => { setSearchText(''); setShowDropdown(false) }} />
  )}
  </div>
@@ -391,11 +391,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {showDropdown && suggestions.length > 0 && (
  <div className="super-search-dropdown" style={{
  position: 'absolute', top: 'calc(100% + 8px)', left: 0, right: 0,
- background: 'rgba(7,22,40,0.98)', backdropFilter: 'blur(24px)',
- border: '1px solid rgba(200,153,26,0.3)', borderRadius: 14,
- zIndex: 9999, boxShadow: '0 16px 48px rgba(0,0,0,0.6)', overflow: 'hidden',
+ background: 'color-mix(in srgb, var(--apex-bg-surface-solid) 97%, transparent)', backdropFilter: 'blur(24px)',
+ border: '1px solid var(--apex-border-default)', borderRadius: 14,
+ zIndex: 9999, boxShadow: 'var(--apex-shadow-lg)', overflow: 'hidden',
  }}>
- <div style={{ padding: '8px 14px 6px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+ <div style={{ padding: '8px 14px 6px', borderBottom: '1px solid var(--apex-border-subtle)' }}>
  <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 0.5 }}>
  Smart search assistant · {suggestions.length} match{suggestions.length > 1 ? 'es' : ''}
  </span>
@@ -407,15 +407,15 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  setSearchText(s.title || '')
  setShowDropdown(false)
  }}
- style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', cursor: 'pointer', borderBottom: '1px solid rgba(255,255,255,0.04)', transition: 'background 0.15s' }}
- onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,153,26,0.1)'}
+ style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', cursor: 'pointer', borderBottom: '1px solid var(--apex-border-subtle)', transition: 'background 0.15s' }}
+ onMouseEnter={e => e.currentTarget.style.background = 'var(--apex-bg-subtle)'}
  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
  >
- <div style={{ width: 34, height: 34, borderRadius: 10, background: 'linear-gradient(135deg,rgba(10,132,255,0.2),rgba(200,153,26,0.2))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>
+ <div style={{ width: 34, height: 34, borderRadius: 10, background: 'linear-gradient(135deg,color-mix(in srgb,var(--apex-action-primary) 14%,var(--apex-bg-surface-solid)),color-mix(in srgb,var(--apex-action-secondary) 9%,var(--apex-bg-surface-solid)))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>
  {s.kind === 'student' ? (s.photo || '') : s.kind === 'assistant' ? 'AI' : ''}
  </div>
  <div style={{ flex: 1, minWidth: 0 }}>
- <div style={{ color: '#f0f4ff', fontWeight: 600, fontSize: 13 }}>{s.title}</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontWeight: 600, fontSize: 13 }}>{s.title}</div>
  <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11, marginTop: 2 }}>
  {s.subtitle}
  </div>
@@ -440,7 +440,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  aria-label="Open search"
  style={{ ...iconButton, width:40, height:40, borderRadius:12, flexShrink:0 }}
  >
- <Search size={18} color="#f8fafc" />
+ <Search size={18} color="var(--apex-text-primary)" />
  </button>
  )}
 
@@ -448,7 +448,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {/* Date — hidden on mobile */}
  {!isMobile && (
  <div style={{
- color: '#94a3b8',
+ color: 'var(--apex-text-tertiary)',
  fontSize: 13,
  marginLeft: 'auto',
  whiteSpace: 'nowrap',
@@ -466,11 +466,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  gap: 8,
  padding: '8px 14px',
  borderRadius: 14,
- background: 'linear-gradient(135deg, rgba(200, 153, 26, 0.14), rgba(200, 153, 26, 0.08))',
- border: '1px solid rgba(200, 153, 26, 0.2)',
+ background: 'color-mix(in srgb, var(--apex-action-highlight) 8%, var(--apex-bg-surface-solid))',
+ border: '1px solid color-mix(in srgb, var(--apex-action-highlight) 22%, var(--apex-border-default))',
  }}>
  <span style={{
- color: '#C8991A',
+ color: 'var(--apex-action-highlight)',
  fontSize: 13,
  fontWeight: '700',
  letterSpacing: '-0.2px',
@@ -487,19 +487,19 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  gap: 6,
  padding: '8px 14px',
  borderRadius: 14,
- background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1))',
- border: '1px solid rgba(239, 68, 68, 0.4)',
- boxShadow: '0 0 12px rgba(239, 68, 68, 0.2)',
+ background: 'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))',
+ border: '1px solid color-mix(in srgb, var(--apex-action-danger) 26%, var(--apex-border-default))',
+ boxShadow: 'var(--apex-shadow-sm)',
  }}>
  <span style={{
  width: 6,
  height: 6,
  borderRadius: '50%',
- background: '#ef4444',
- boxShadow: '0 0 8px #ef4444',
+ background: 'var(--apex-action-danger)',
+ boxShadow: '0 0 8px color-mix(in srgb, var(--apex-action-danger) 55%, transparent)',
  }} />
  <span style={{
- color: '#fca5a5',
+ color: 'var(--apex-action-danger)',
  fontSize: 12,
  fontWeight: '700',
  textTransform: 'uppercase',
@@ -540,9 +540,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <div style={{
  position: 'absolute', top: 8, right: 8,
  minWidth: 16, height: 16, borderRadius: 8,
- background: '#C8991A', border: '1.5px solid #0f172a',
+ background: 'var(--apex-action-primary)', border: '1.5px solid var(--apex-bg-surface-solid)',
  display: 'flex', alignItems: 'center', justifyContent: 'center',
- fontSize: 9, fontWeight: 800, color: '#071e34', lineHeight: 1,
+ fontSize: 9, fontWeight: 800, color: '#fff', lineHeight: 1,
  padding: '0 3px',
  }}>
  {unreadCount}
@@ -554,7 +554,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <div style={{
  position: 'absolute', right: 0, top: 'calc(100% + 10px)',
  width: isMobile ? 'min(92vw, 340px)' : 340, zIndex: 9999,
- background: 'rgba(7, 22, 40, 0.97)',
+ background: 'color-mix(in srgb, var(--apex-bg-surface-solid) 97%, transparent)',
  backdropFilter: 'blur(24px)',
  border: '1px solid rgba(200,153,26,0.25)',
  borderRadius: 16,
@@ -568,11 +568,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  borderBottom: '1px solid rgba(255,255,255,0.07)',
  }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
- <Bell size={15} color="#C8991A" />
+ <Bell size={15} color="var(--apex-action-primary)" />
  <span style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 14 }}>Notifications</span>
  {unreadCount > 0 && (
  <span style={{
- background: 'rgba(200,153,26,0.2)', color: '#C8991A',
+ background: 'rgba(200,153,26,0.2)', color: 'var(--apex-action-highlight)',
  border: '1px solid rgba(200,153,26,0.35)',
  borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 700,
  }}>{unreadCount} new</span>
@@ -601,8 +601,8 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <div key={n.id} style={{
  display: 'flex', alignItems: 'flex-start', gap: 10,
  padding: '11px 16px',
- borderBottom: '1px solid rgba(255,255,255,0.04)',
- background: n.unread ? 'rgba(200,153,26,0.05)' : 'transparent',
+ borderBottom: '1px solid var(--apex-border-subtle)',
+ background: n.unread ? 'color-mix(in srgb, var(--apex-action-primary) 6%, transparent)' : 'transparent',
  transition: 'background 0.15s',
  }}
  onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
@@ -611,15 +611,15 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <span style={{ fontSize: 20, lineHeight: 1.3, flexShrink: 0 }}>{n.icon}</span>
  <div style={{ flex: 1, minWidth: 0 }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
- <span style={{ color: '#f0f4ff', fontSize: 13, fontWeight: 600 }}>{n.title}</span>
- {n.unread && <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#C8991A', flexShrink: 0 }} />}
+ <span style={{ color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 600 }}>{n.title}</span>
+ {n.unread && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--apex-action-primary)', flexShrink: 0 }} />}
  </div>
  <p style={{ color: 'var(--apex-text-tertiary)', fontSize: 12, margin: '2px 0 4px', lineHeight: 1.4 }}>{n.body}</p>
- <span style={{ color: '#556070', fontSize: 11 }}>{n.time}</span>
+ <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>{n.time}</span>
  </div>
  <button
  onClick={(e) => { e.stopPropagation(); dismiss(n.id) }}
- style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#556070', padding: 2, flexShrink: 0 }}
+ style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--apex-text-tertiary)', padding: 2, flexShrink: 0 }}
  onMouseEnter={e => e.currentTarget.style.color = '#FF375F'}
  onMouseLeave={e => e.currentTarget.style.color = '#556070'}
  >
@@ -635,7 +635,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  onClick={() => { navigate('/notifications'); setShowNotifs(false) }}
  style={{
  width: '100%', padding: '9px', borderRadius: 10, border: '1px solid rgba(200,153,26,0.25)',
- background: 'rgba(200,153,26,0.08)', color: '#C8991A', fontSize: 13, fontWeight: 600,
+ background: 'rgba(200,153,26,0.08)', color: 'var(--apex-action-highlight)', fontSize: 13, fontWeight: 600,
  cursor: 'pointer', transition: 'all 0.15s',
  }}
  onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,153,26,0.15)'}
@@ -674,11 +674,11 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  width: 40,
  height: 40,
  borderRadius: 12,
- background: 'linear-gradient(135deg, #C8991A, #a07814)',
+ background: 'linear-gradient(135deg, var(--apex-action-primary), color-mix(in srgb, var(--apex-action-primary) 76%, var(--apex-action-secondary)))',
  display: 'flex',
  alignItems: 'center',
  justifyContent: 'center',
- color: '#071e34',
+ color: '#fff',
  fontSize: 16,
  fontWeight: '800',
  border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -689,7 +689,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  <div style={{ color: 'var(--apex-text-primary)', fontSize: 14, fontWeight: '600', lineHeight: 1.3, marginBottom: '2px' }}>
  {user?.name?.split(' ').slice(0, 2).join(' ') || 'Admin'}
  </div>
- <div style={{ color: '#C8991A', fontSize: 12, fontWeight: '500' }}>
+ <div style={{ color: 'var(--apex-action-highlight)', fontSize: 12, fontWeight: '500' }}>
  {user?.designation || 'Principal'}
  </div>
  </div>
@@ -699,9 +699,9 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {showUserMenu && (
  <div style={{
  position: 'absolute', right: 0, top: 'calc(100% + 8px)',
- background: '#0B2C4D', border: '1px solid rgba(200,153,26,0.25)',
+ background: 'color-mix(in srgb, var(--apex-bg-surface-solid) 97%, transparent)', border: '1px solid var(--apex-border-default)',
  borderRadius: 16, zIndex: 9999, minWidth: 200,
- boxShadow: '0 16px 48px rgba(0,0,0,0.5)', overflow: 'hidden',
+ boxShadow: 'var(--apex-shadow-lg)', overflow: 'hidden',
  }}>
  <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
  <div style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 14 }}>{user?.name || 'Admin'}</div>
@@ -712,16 +712,16 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  { icon: <BookOpen size={14} />, label: 'Academic Setup', path: '/academic' },
  ].map(item => (
  <div key={item.path} onClick={() => { navigate(item.path); setShowUserMenu(false) }}
- style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', cursor: 'pointer', color: 'var(--apex-text-secondary)', fontSize: 13, borderBottom: '1px solid rgba(255,255,255,0.04)' }}
- onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,153,26,0.1)'}
+ style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', cursor: 'pointer', color: 'var(--apex-text-secondary)', fontSize: 13, borderBottom: '1px solid var(--apex-border-subtle)' }}
+ onMouseEnter={e => e.currentTarget.style.background = 'var(--apex-bg-subtle)'}
  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
  >
  <span style={{ display: 'inline-flex', alignItems: 'center' }}>{item.icon}</span><span>{item.label}</span>
  </div>
  ))}
  <div onClick={() => { logout(); navigate('/login'); setShowUserMenu(false) }}
- style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', cursor: 'pointer', color: '#FF375F', fontSize: 13 }}
- onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,55,95,0.08)'}
+ style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '11px 16px', cursor: 'pointer', color: 'var(--apex-action-danger)', fontSize: 13 }}
+ onMouseEnter={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--apex-action-danger) 7%, var(--apex-bg-surface-solid))'}
  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
  >
  <LogOut size={14}/><span>Sign Out</span>
@@ -732,7 +732,7 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  {isMobile && mobileSearchOpen && (
  <div ref={searchRef} className="super-mobile-search-panel">
  <div className="super-search-box">
- <Search size={16} color="#94a3b8" />
+ <Search size={16} color="var(--apex-text-tertiary)" />
  <input
  type="text"
  autoFocus
