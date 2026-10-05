@@ -37,14 +37,14 @@ const ATTENDANCE_DATA = [
 ]
 
 const QUICK_ACTIONS = [
-  { label: 'Add Student', icon: UserPlus, path: '/students?add=1', color: '#0A84FF', grad: 'linear-gradient(135deg,#0A84FF,#0060D0)' },
-  { label: 'Attendance', icon: CheckCircle2, path: '/attendance/mark', color: '#30D158', grad: 'linear-gradient(135deg,#30D158,#1A8C3A)' },
-  { label: 'Create Challan', icon: CreditCard, path: '/fees/create', color: '#C8991A', grad: 'linear-gradient(135deg,#C8991A,#9A7210)' },
-  { label: 'Paper Generator', icon: FileText, path: '/paper-generator', color: '#BF5AF2', grad: 'linear-gradient(135deg,#BF5AF2,#8E3AC0)' },
-  { label: 'Add Employee', icon: Users, path: '/employees?add=1', color: '#FF9F0A', grad: 'linear-gradient(135deg,#FF9F0A,#C07000)' },
+  { label: 'Add Student', icon: UserPlus, path: '/students?add=1', color: '#65A6FF', grad: 'linear-gradient(135deg,#65A6FF,#3F86F7)' },
+  { label: 'Attendance', icon: CheckCircle2, path: '/attendance/mark', color: '#42CFC2', grad: 'linear-gradient(135deg,#42CFC2,#20B8AD)' },
+  { label: 'Create Challan', icon: CreditCard, path: '/fees/create', color: '#DEB655', grad: 'linear-gradient(135deg,#DEB655,#C99A32)' },
+  { label: 'Paper Generator', icon: FileText, path: '/paper-generator', color: '#65A6FF', grad: 'linear-gradient(135deg,#65A6FF,#3F86F7)' },
+  { label: 'Add Employee', icon: Users, path: '/employees?add=1', color: '#42CFC2', grad: 'linear-gradient(135deg,#42CFC2,#20B8AD)' },
   { label: 'View Reports', icon: BarChart3, path: '/students/reports', color: '#64D2FF', grad: 'linear-gradient(135deg,#64D2FF,#2299CC)' },
-  { label: 'Send Message', icon: MessageCircle, path: '/messages', color: '#FF375F', grad: 'linear-gradient(135deg,#FF375F,#C01030)' },
-  { label: 'AI Analytics', icon: Zap, path: '/ai-analytics', color: '#30D158', grad: 'linear-gradient(135deg,#34C759,#248A3D)' },
+  { label: 'Send Message', icon: MessageCircle, path: '/messages', color: '#65A6FF', grad: 'linear-gradient(135deg,#65A6FF,#3F86F7)' },
+  { label: 'AI Analytics', icon: Zap, path: '/ai-analytics', color: '#42CFC2', grad: 'linear-gradient(135deg,#42CFC2,#20B8AD)' },
 ]
 
 const EVENTS = [
@@ -55,15 +55,15 @@ const EVENTS = [
 ]
 
 const glass = {
-  background: 'rgba(15,23,42,0.58)',
+  background: 'var(--apex-bg-surface)',
   backdropFilter: 'blur(20px)',
   WebkitBackdropFilter: 'blur(20px)',
   borderRadius: 20,
-  border: '1px solid rgba(148,163,184,0.18)',
-  boxShadow: '0 22px 50px rgba(0,0,0,0.32)',
+  border: '1px solid var(--apex-border-default)',
+  boxShadow: 'var(--apex-shadow-md)',
 }
 
-const cardColors = ['#0A84FF', '#30D158', '#C8991A', '#BF5AF2']
+const cardColors = ['#65A6FF', '#42CFC2', '#DEB655', '#7C93B7']
 
 import { motion } from 'framer-motion'
 
@@ -94,7 +94,7 @@ function StatCard({ stat, index, hidden, onToggle }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-            <p style={{ color: '#94A3B8', fontSize: 11, margin: 0, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800 }}>
+            <p style={{ color: 'var(--apex-text-tertiary)', fontSize: 11, margin: 0, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 800 }}>
               {stat.label}
             </p>
             {stat.sensitive && (
@@ -179,7 +179,7 @@ function whatsappHref(student, schoolName) {
   return normalized ? `https://wa.me/${normalized}?text=${encodeURIComponent(msg)}` : ''
 }
 
-function printBirthdayCertificate(student) {
+function printBirthdayCertificate(student, schoolName) {
   const today = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' })
   const html = `<!doctype html><html><head><meta charset="utf-8"><title>Birthday Certificate</title>
   <style>
@@ -292,6 +292,8 @@ export default function Dashboard() {
   }, [fetchAll])
 
   useEffect(() => {
+    // Initial server-state hydration for the dashboard.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchAll()
   }, [fetchAll])
 
@@ -304,8 +306,8 @@ export default function Dashboard() {
         sub: 'Active enrolments',
         icon: GraduationCap,
         color: cardColors[0],
-        grad: 'linear-gradient(135deg,#0A84FF,#0060D0)',
-        shadow: 'rgba(10,132,255,0.45)',
+        grad: 'linear-gradient(135deg,#65A6FF,#3F86F7)',
+        shadow: 'rgba(63,134,247,0.24)',
       },
       {
         label: "Today's Attendance",
@@ -313,8 +315,8 @@ export default function Dashboard() {
         sub: `${stats.presentCount} present`,
         icon: CheckCircle2,
         color: cardColors[1],
-        grad: 'linear-gradient(135deg,#30D158,#1A8C3A)',
-        shadow: 'rgba(48,209,88,0.45)',
+        grad: 'linear-gradient(135deg,#42CFC2,#20B8AD)',
+        shadow: 'rgba(32,184,173,0.22)',
       },
       {
         label: 'Fee Collected',
@@ -322,8 +324,8 @@ export default function Dashboard() {
         sub: `${stats.pendingCount} pending`,
         icon: CreditCard,
         color: cardColors[2],
-        grad: 'linear-gradient(135deg,#C8991A,#9A7210)',
-        shadow: 'rgba(200,153,26,0.45)',
+        grad: 'linear-gradient(135deg,#DEB655,#C99A32)',
+        shadow: 'rgba(201,154,50,0.20)',
         sensitive: true,
       },
       {
@@ -332,14 +334,12 @@ export default function Dashboard() {
         sub: 'Employees',
         icon: Users,
         color: cardColors[3],
-        grad: 'linear-gradient(135deg,#BF5AF2,#8E3AC0)',
-        shadow: 'rgba(191,90,242,0.45)',
+        grad: 'linear-gradient(135deg,#7C93B7,#617188)',
+        shadow: 'rgba(97,113,136,0.20)',
       },
     ]
   }, [stats])
 
-  const dayName = date.toLocaleDateString('en-US', { weekday: 'long' })
-  const monthYear = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
   const maxCount = classData.length > 0 ? Math.max(...classData.map((classItem) => classItem.count)) : 1
   const collectionRate = stats && stats.paidTotal + stats.pendingTotal > 0
     ? Math.round((stats.paidTotal / (stats.paidTotal + stats.pendingTotal)) * 100)
@@ -354,7 +354,7 @@ export default function Dashboard() {
       <style>{`
         .super-dashboard-shell {
           min-height: 100%;
-          color: #f8fafc;
+          color: var(--apex-text-primary);
           font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
         }
         .super-dashboard-inner {
@@ -370,7 +370,7 @@ export default function Dashboard() {
         .super-stat-card:hover {
           transform: translateY(-8px) rotateX(-5deg) scale(1.02);
           box-shadow: 0 28px 56px var(--glow), 0 10px 28px rgba(0,0,0,0.5) !important;
-          border-color: rgba(200, 153, 26, 0.45) !important;
+          border-color: color-mix(in srgb, var(--apex-action-primary) 28%, var(--apex-border-default)) !important;
         }
         .super-panel {
           position: relative;
@@ -380,7 +380,7 @@ export default function Dashboard() {
         }
         .super-panel:hover {
           transform: translateY(-4px) scale(1.005);
-          border-color: rgba(200, 153, 26, 0.28) !important;
+          border-color: color-mix(in srgb, var(--apex-action-primary) 20%, var(--apex-border-default)) !important;
           box-shadow: 0 22px 48px rgba(0,0,0,0.36), 0 0 26px rgba(200, 153, 26, 0.12) !important;
         }
         .super-glow {
@@ -436,8 +436,8 @@ export default function Dashboard() {
         .super-action:hover {
           transform: translateY(-6px) scale(1.04);
           box-shadow: 0 16px 32px rgba(200, 153, 26, 0.2), 0 4px 12px rgba(0,0,0,0.4);
-          border-color: rgba(200, 153, 26, 0.28) !important;
-          background: rgba(200, 153, 26, 0.08) !important;
+          border-color: color-mix(in srgb, var(--apex-action-primary) 20%, var(--apex-border-default)) !important;
+          background: color-mix(in srgb, var(--apex-action-primary) 6%, var(--apex-bg-surface)) !important;
         }
         .super-dashboard-analytics-row {
           display: grid;
@@ -452,7 +452,7 @@ export default function Dashboard() {
           transition: background 0.2s ease;
         }
         .super-table-row:hover {
-          background: rgba(10,132,255,0.07);
+          background: color-mix(in srgb, var(--apex-action-primary) 7%, transparent);
         }
         @keyframes superFadeUp {
           from { opacity: 0; transform: translateY(22px) rotateX(8deg); }
@@ -485,7 +485,7 @@ export default function Dashboard() {
         </div>
 
         {loading ? (
-          <Panel accent="#C8991A" style={{ padding: 60, marginBottom: 28, textAlign: 'center', color: '#94A3B8' }}>
+          <Panel accent="#C8991A" style={{ padding: 60, marginBottom: 28, textAlign: 'center', color: 'var(--apex-text-tertiary)' }}>
             <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 72, height: 72, marginBottom: 16 }}>
               <div style={{ position: 'absolute', inset: 0, border: '4px solid rgba(148,163,184,0.18)', borderTopColor: '#C8991A', borderRadius: '50%', animation: 'spin 0.9s linear infinite' }} />
               <Sparkles size={24} color="#C8991A" />
@@ -527,8 +527,8 @@ export default function Dashboard() {
                   <Sparkles size={18} color="white" />
                 </div>
                 <div>
-                  <h3 style={{ color:'#f8fafc', fontSize:17, fontWeight:900, margin:0 }}>Today&apos;s Birthdays</h3>
-                  <p style={{ color:'#94A3B8', fontSize:12, margin:'3px 0 0' }}>Click a student name to print a modern birthday certificate or send WhatsApp wishes.</p>
+                  <h3 style={{ color:'var(--apex-text-primary)', fontSize:17, fontWeight:900, margin:0 }}>Today&apos;s Birthdays</h3>
+                  <p style={{ color:'var(--apex-text-tertiary)', fontSize:12, margin:'3px 0 0' }}>Click a student name to print a modern birthday certificate or send WhatsApp wishes.</p>
                 </div>
               </div>
               <div style={{ color:'#FF9F0A', fontSize:28, fontWeight:900 }}>{birthdayStudents.length}</div>
@@ -538,18 +538,18 @@ export default function Dashboard() {
                 const wa = whatsappHref(student, schoolName)
                 return (
                   <div key={student.id || student.gr_number || student.name} style={{ padding:14, borderRadius:16, background:'rgba(255,255,255,.045)', border:'1px solid rgba(255,159,10,.22)', display:'flex', alignItems:'center', gap:12 }}>
-                    <button onClick={() => printBirthdayCertificate(student)} style={{ width:46, height:46, borderRadius:15, border:'1px solid rgba(255,159,10,.35)', background:'rgba(255,159,10,.14)', color:'#FF9F0A', fontWeight:900, fontSize:17, cursor:'pointer' }}>
+                    <button onClick={() => printBirthdayCertificate(student, schoolName)} style={{ width:46, height:46, borderRadius:15, border:'1px solid rgba(255,159,10,.35)', background:'rgba(255,159,10,.14)', color:'#FF9F0A', fontWeight:900, fontSize:17, cursor:'pointer' }}>
                       {(student.name || 'S').slice(0,1)}
                     </button>
                     <div style={{ flex:1, minWidth:0 }}>
-                      <button onClick={() => printBirthdayCertificate(student)} style={{ display:'block', width:'100%', textAlign:'left', background:'transparent', border:0, color:'#fff', fontSize:14, fontWeight:900, cursor:'pointer', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{student.name}</button>
-                      <div style={{ color:'#94A3B8', fontSize:11, marginTop:2 }}>Class {student.class || '-'} {student.section || ''} · {student.parent_phone || student.phone || '-'}</div>
+                      <button onClick={() => printBirthdayCertificate(student, schoolName)} style={{ display:'block', width:'100%', textAlign:'left', background:'transparent', border:0, color:'#fff', fontSize:14, fontWeight:900, cursor:'pointer', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{student.name}</button>
+                      <div style={{ color:'var(--apex-text-tertiary)', fontSize:11, marginTop:2 }}>Class {student.class || '-'} {student.section || ''} · {student.parent_phone || student.phone || '-'}</div>
                     </div>
                     {wa && <a href={wa} target="_blank" rel="noreferrer" style={{ padding:'8px 10px', borderRadius:10, background:'rgba(37,211,102,.12)', border:'1px solid rgba(37,211,102,.28)', color:'#25D366', textDecoration:'none', fontSize:12, fontWeight:900 }}>WhatsApp</a>}
                   </div>
                 )
               }) : (
-                <div style={{ gridColumn:'1 / -1', color:'#94A3B8', fontSize:13, padding:'10px 2px' }}>No student birthdays today.</div>
+                <div style={{ gridColumn:'1 / -1', color:'var(--apex-text-tertiary)', fontSize:13, padding:'10px 2px' }}>No student birthdays today.</div>
               )}
             </div>
           </Panel>
@@ -558,7 +558,7 @@ export default function Dashboard() {
         {!loading && stats && (
           <div className="super-grid-2" style={{ marginBottom: 20 }}>
             <Panel accent="#30D158">
-              <div style={{ position: 'relative', zIndex: 1, color: '#C0C8D8', fontSize: 13, fontWeight: 800, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ position: 'relative', zIndex: 1, color: 'var(--apex-text-secondary)', fontSize: 13, fontWeight: 800, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <CreditCard size={15} color="#C8991A" /> Fee Status
               </div>
               <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
@@ -588,7 +588,7 @@ export default function Dashboard() {
             </Panel>
 
             <Panel accent="#0A84FF">
-              <div style={{ position: 'relative', zIndex: 1, color: '#C0C8D8', fontSize: 13, fontWeight: 800, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ position: 'relative', zIndex: 1, color: 'var(--apex-text-secondary)', fontSize: 13, fontWeight: 800, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <Users size={15} color="#0A84FF" /> Class Distribution
               </div>
               <div style={{ position: 'relative', zIndex: 1 }}>
@@ -603,7 +603,7 @@ export default function Dashboard() {
                     showValues
                   />
                 ) : (
-                  <div style={{ color: '#94A3B8', fontSize: 12, textAlign: 'center', padding: '20px 0' }}>No class data</div>
+                  <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12, textAlign: 'center', padding: '20px 0' }}>No class data</div>
                 )}
               </div>
             </Panel>
@@ -615,7 +615,7 @@ export default function Dashboard() {
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <GraduationCap size={16} color="#C8991A" />
-                <h3 style={{ color: '#f8fafc', fontSize: 15, fontWeight: 800, margin: 0 }}>Enrolment Analysis</h3>
+                <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 15, fontWeight: 800, margin: 0 }}>Enrolment Analysis</h3>
               </div>
               <span style={{ color: '#C8991A', fontSize: 12, fontWeight: 800 }}>TOTAL: {stats?.totalStudents || 0}</span>
             </div>
@@ -635,7 +635,7 @@ export default function Dashboard() {
                       <text x="50" y="45" textAnchor="middle" fill="#f8fafc" fontSize="16" fontWeight="900">{pct}%</text>
                     </svg>
                     <div style={{ color, fontSize: 12, fontWeight: 800, marginTop: -5 }}>{label}</div>
-                    <div style={{ color: '#94A3B8', fontSize: 10 }}>{sub}</div>
+                    <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 10 }}>{sub}</div>
                   </div>
                 )
               }
@@ -651,14 +651,14 @@ export default function Dashboard() {
           <Panel accent="#30D158">
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
               <Activity size={15} color="#30D158" />
-              <h3 style={{ color: '#f8fafc', fontSize: 15, fontWeight: 800, margin: 0 }}>Attendance Trends</h3>
+              <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 15, fontWeight: 800, margin: 0 }}>Attendance Trends</h3>
             </div>
-            <p style={{ position: 'relative', zIndex: 1, color: '#94A3B8', fontSize: 12, margin: '0 0 20px' }}>Weekly participation rate</p>
+            <p style={{ position: 'relative', zIndex: 1, color: 'var(--apex-text-tertiary)', fontSize: 12, margin: '0 0 20px' }}>Weekly participation rate</p>
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'flex-end', gap: 10, height: 100 }}>
               {ATTENDANCE_DATA.map((day) => (
                 <div key={day.day} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
                   <div style={{ width: '100%', height: `${day.pct}%`, borderRadius: 4, background: `linear-gradient(to top,${day.pct >= 90 ? '#30D158' : '#0A84FF'},rgba(255,255,255,0.08))`, boxShadow: day.pct >= 90 ? '0 4px 12px rgba(48,209,88,0.3)' : '0 4px 12px rgba(10,132,255,0.2)' }} />
-                  <span style={{ color: '#94A3B8', fontSize: 10, fontWeight: 700 }}>{day.day}</span>
+                  <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 10, fontWeight: 700 }}>{day.day}</span>
                 </div>
               ))}
             </div>
@@ -667,23 +667,23 @@ export default function Dashboard() {
           <Panel accent="#C8991A">
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
               <BarChart3 size={15} color="#C8991A" />
-              <h3 style={{ color: '#f8fafc', fontSize: 15, fontWeight: 800, margin: 0 }}>Class Breakdown</h3>
+              <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 15, fontWeight: 800, margin: 0 }}>Class Breakdown</h3>
             </div>
-            <p style={{ position: 'relative', zIndex: 1, color: '#94A3B8', fontSize: 12, margin: '0 0 14px' }}>Enrollment by grade</p>
+            <p style={{ position: 'relative', zIndex: 1, color: 'var(--apex-text-tertiary)', fontSize: 12, margin: '0 0 14px' }}>Enrollment by grade</p>
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 120, overflowY: 'auto' }}>
               {classData.length > 0 ? classData.map((classItem, index) => {
                 const color = ['#0A84FF', '#30D158', '#C8991A', '#BF5AF2', '#FF375F'][index % 5]
                 return (
                   <div key={classItem.name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <span style={{ color: '#94A3B8', fontSize: 10, width: 44, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{classItem.name}</span>
+                    <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 10, width: 44, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{classItem.name}</span>
                     <div style={{ flex: 1, height: 7, background: 'rgba(255,255,255,0.06)', borderRadius: 4, overflow: 'hidden' }}>
                       <div style={{ width: `${(classItem.count / maxCount) * 100}%`, height: '100%', background: color, borderRadius: 4, boxShadow: `0 0 8px ${color}66` }} />
                     </div>
-                    <span style={{ color: '#f8fafc', fontSize: 10, fontWeight: 800, minWidth: 16 }}>{classItem.count}</span>
+                    <span style={{ color: 'var(--apex-text-primary)', fontSize: 10, fontWeight: 800, minWidth: 16 }}>{classItem.count}</span>
                   </div>
                 )
               }) : (
-                <p style={{ color: '#94A3B8', fontSize: 12 }}>No class data</p>
+                <p style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>No class data</p>
               )}
             </div>
           </Panel>
@@ -694,7 +694,7 @@ export default function Dashboard() {
             <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#C8991A,#9A7210)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Zap size={16} color="white" />
             </div>
-            <h3 style={{ color: '#f8fafc', fontSize: 17, fontWeight: 900, margin: 0 }}>Quick Actions</h3>
+            <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 17, fontWeight: 900, margin: 0 }}>Quick Actions</h3>
           </div>
           <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(110px,1fr))', gap: 14 }}>
             {QUICK_ACTIONS.map((action) => {
@@ -715,7 +715,7 @@ export default function Dashboard() {
                     borderRadius: 20,
                     border: '1px solid rgba(255,255,255,0.08)',
                     cursor: 'pointer',
-                    color: '#C0C8D8',
+                    color: 'var(--apex-text-secondary)',
                   }}
                 >
                   <div style={{ width: 48, height: 48, borderRadius: 14, background: action.grad, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 8px 20px ${action.color}40` }}>
@@ -735,7 +735,7 @@ export default function Dashboard() {
                 <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#0A84FF,#0060D0)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <GraduationCap size={16} color="white" />
                 </div>
-                <h3 style={{ color: '#f8fafc', fontSize: 16, fontWeight: 800, margin: 0 }}>Recent Students</h3>
+                <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 16, fontWeight: 800, margin: 0 }}>Recent Students</h3>
               </div>
               <button onClick={() => navigate('/students')} style={{ padding: '7px 14px', fontSize: 12, fontWeight: 700, color: '#0A84FF', background: 'rgba(10,132,255,0.1)', border: '1px solid rgba(10,132,255,0.25)', borderRadius: 10, cursor: 'pointer', whiteSpace: 'nowrap' }}>
                 View All
@@ -746,21 +746,21 @@ export default function Dashboard() {
                 <thead>
                   <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                     {['Name', 'GR No', 'Class', 'Phone'].map((heading) => (
-                      <th key={heading} style={{ padding: '10px 14px', textAlign: 'left', color: '#94A3B8', fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{heading}</th>
+                      <th key={heading} style={{ padding: '10px 14px', textAlign: 'left', color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{heading}</th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   {students.length > 0 ? students.slice(0, 5).map((student, index) => (
                     <tr key={`${student.gr_number || student.name}-${index}`} className="super-table-row" style={{ borderBottom: index < students.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
-                      <td style={{ padding: 14, color: '#f8fafc', fontSize: 13, fontWeight: 700 }}>{student.name}</td>
-                      <td style={{ padding: 14, color: '#94A3B8', fontSize: 12 }}>{student.gr_number || '-'}</td>
-                      <td style={{ padding: 14, color: '#94A3B8', fontSize: 12 }}>Class {student.class || '-'}</td>
-                      <td style={{ padding: 14, color: '#94A3B8', fontSize: 12 }}>{student.parent_phone || '-'}</td>
+                      <td style={{ padding: 14, color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700 }}>{student.name}</td>
+                      <td style={{ padding: 14, color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{student.gr_number || '-'}</td>
+                      <td style={{ padding: 14, color: 'var(--apex-text-tertiary)', fontSize: 12 }}>Class {student.class || '-'}</td>
+                      <td style={{ padding: 14, color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{student.parent_phone || '-'}</td>
                     </tr>
                   )) : (
                     <tr>
-                      <td colSpan="4" style={{ padding: 24, textAlign: 'center', color: '#94A3B8' }}>No students found</td>
+                      <td colSpan="4" style={{ padding: 24, textAlign: 'center', color: 'var(--apex-text-tertiary)' }}>No students found</td>
                     </tr>
                   )}
                 </tbody>
@@ -773,7 +773,7 @@ export default function Dashboard() {
               <div style={{ width: 32, height: 32, borderRadius: 10, background: 'linear-gradient(135deg,#C8991A,#9A7210)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <Calendar size={16} color="white" />
               </div>
-              <h3 style={{ color: '#f8fafc', fontSize: 16, fontWeight: 800, margin: 0 }}>Upcoming Events</h3>
+              <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 16, fontWeight: 800, margin: 0 }}>Upcoming Events</h3>
             </div>
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
               {EVENTS.map((event) => {
@@ -784,15 +784,15 @@ export default function Dashboard() {
                       <Icon size={16} color={event.color} />
                     </div>
                     <div>
-                      <div style={{ color: '#f8fafc', fontSize: 13, fontWeight: 700, marginBottom: 2 }}>{event.title}</div>
-                      <div style={{ color: '#94A3B8', fontSize: 11 }}>{event.date}</div>
+                      <div style={{ color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 2 }}>{event.title}</div>
+                      <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>{event.date}</div>
                     </div>
                   </div>
                 )
               })}
             </div>
 
-            <div style={{ position: 'relative', zIndex: 1, marginTop: 18, padding: 16, background: 'linear-gradient(135deg,rgba(200,153,26,0.1),rgba(200,153,26,0.04))', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 14 }}>
+            <div style={{ position: 'relative', zIndex: 1, marginTop: 18, padding: 16, background: 'linear-gradient(135deg,rgba(200,153,26,0.1),rgba(200,153,26,0.04))', border: '1px solid var(--apex-border-default)', borderRadius: 14 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
                 <ShieldAlert size={13} color="#C8991A" />
                 <h4 style={{ color: '#C8991A', fontSize: 11, fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Today's Summary</h4>
@@ -803,8 +803,8 @@ export default function Dashboard() {
                 ['Fee Pending', stats ? String(stats.pendingCount) : '-'],
               ].map(([label, value]) => (
                 <div key={label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-                  <span style={{ color: '#94A3B8', fontSize: 12 }}>{label}</span>
-                  <span style={{ color: '#f8fafc', fontSize: 13, fontWeight: 800 }}>{value}</span>
+                  <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{label}</span>
+                  <span style={{ color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 800 }}>{value}</span>
                 </div>
               ))}
             </div>

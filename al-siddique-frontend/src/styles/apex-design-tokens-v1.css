@@ -167,3 +167,357 @@
     transition: none !important;
   }
 }
+
+/* Login / identity shell -------------------------------------------------- */
+.apex-auth-shell {
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: clamp(72px, 8vw, 96px) 20px 32px;
+  background: var(--apex-shell-gradient);
+  color: var(--apex-text-primary);
+}
+
+.apex-auth-orb {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 999px;
+  filter: blur(2px);
+  opacity: 0.9;
+}
+
+.apex-auth-orb--primary {
+  width: min(46vw, 620px);
+  aspect-ratio: 1;
+  left: -18vw;
+  top: -24vw;
+  background: radial-gradient(circle, color-mix(in srgb, var(--apex-action-primary) 17%, transparent), transparent 68%);
+}
+
+.apex-auth-orb--secondary {
+  width: min(40vw, 520px);
+  aspect-ratio: 1;
+  right: -14vw;
+  bottom: -20vw;
+  background: radial-gradient(circle, color-mix(in srgb, var(--apex-action-secondary) 12%, transparent), transparent 70%);
+}
+
+.apex-auth-theme-switch {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 5;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--apex-border-default);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--apex-bg-surface) 92%, transparent);
+  box-shadow: var(--apex-shadow-sm);
+  backdrop-filter: blur(18px);
+}
+
+.apex-auth-theme-switch button {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--apex-text-tertiary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--apex-motion-fast) ease, color var(--apex-motion-fast) ease, box-shadow var(--apex-motion-fast) ease;
+}
+
+.apex-auth-theme-switch button.is-active {
+  background: var(--apex-bg-surface-solid);
+  color: var(--apex-text-primary);
+  box-shadow: var(--apex-shadow-sm);
+}
+
+.apex-auth-stage {
+  width: min(100%, 520px);
+  position: relative;
+  z-index: 2;
+}
+
+.apex-auth-brand {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+  padding: 0 6px;
+}
+
+.apex-auth-logo-plate {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--apex-border-subtle);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--apex-bg-surface-solid) 88%, transparent);
+  box-shadow: var(--apex-shadow-sm);
+  backdrop-filter: blur(18px);
+}
+
+.apex-auth-logo-plate img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.apex-auth-kicker {
+  margin: 0 0 6px;
+  color: var(--apex-action-primary);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.apex-auth-brand h1 {
+  margin: 0;
+  color: var(--apex-text-primary);
+  font-size: clamp(20px, 4vw, 28px);
+  line-height: 1.08;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+}
+
+.apex-auth-brand-copy {
+  margin: 7px 0 0;
+  max-width: 46ch;
+  color: var(--apex-text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.apex-auth-card {
+  padding: clamp(24px, 5vw, 34px);
+  border: 1px solid var(--apex-border-default);
+  border-radius: var(--apex-radius-xl);
+  background: color-mix(in srgb, var(--apex-bg-surface) 94%, transparent);
+  box-shadow: var(--apex-shadow-lg);
+  backdrop-filter: blur(26px) saturate(125%);
+}
+
+.apex-auth-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 26px;
+}
+
+.apex-auth-eyebrow {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--apex-action-secondary);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.apex-auth-card-head h2 {
+  margin: 0;
+  color: var(--apex-text-primary);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.apex-auth-card-head p {
+  margin: 6px 0 0;
+  color: var(--apex-text-tertiary);
+  font-size: 13px;
+}
+
+.apex-auth-trust {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--apex-action-secondary) 28%, var(--apex-border-default));
+  border-radius: 13px;
+  color: var(--apex-action-secondary);
+  background: color-mix(in srgb, var(--apex-action-secondary) 8%, var(--apex-bg-surface-solid));
+}
+
+.apex-auth-form {
+  display: grid;
+  gap: 10px;
+}
+
+.apex-auth-form label {
+  margin-top: 5px;
+  color: var(--apex-text-secondary);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.apex-auth-form input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--apex-border-default);
+  border-radius: var(--apex-radius-sm);
+  outline: none;
+  background: var(--apex-bg-surface-solid);
+  color: var(--apex-text-primary);
+  font: inherit;
+  font-size: 14px;
+  transition: border-color var(--apex-motion-fast) ease, box-shadow var(--apex-motion-fast) ease, background var(--apex-motion-fast) ease;
+}
+
+.apex-auth-form input::placeholder {
+  color: var(--apex-text-tertiary);
+  opacity: 0.8;
+}
+
+.apex-auth-form input:focus {
+  border-color: color-mix(in srgb, var(--apex-action-primary) 62%, var(--apex-border-default));
+  box-shadow: var(--apex-focus-ring);
+}
+
+.apex-auth-password-wrap {
+  position: relative;
+}
+
+.apex-auth-password-wrap input {
+  padding-right: 50px;
+}
+
+.apex-auth-password-toggle {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--apex-text-tertiary);
+  cursor: pointer;
+}
+
+.apex-auth-password-toggle:hover {
+  background: var(--apex-bg-subtle);
+  color: var(--apex-text-primary);
+}
+
+.apex-auth-error {
+  margin-top: 8px;
+  padding: 11px 13px;
+  border: 1px solid color-mix(in srgb, var(--apex-action-danger) 28%, var(--apex-border-default));
+  border-radius: var(--apex-radius-sm);
+  background: color-mix(in srgb, var(--apex-action-danger) 7%, var(--apex-bg-surface-solid));
+  color: var(--apex-action-danger);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.apex-auth-submit {
+  min-height: 50px;
+  margin-top: 12px;
+  padding: 0 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 0;
+  border-radius: var(--apex-radius-sm);
+  background: linear-gradient(135deg, var(--apex-action-primary), color-mix(in srgb, var(--apex-action-primary) 78%, var(--apex-action-secondary)));
+  color: #fff;
+  box-shadow: 0 12px 26px color-mix(in srgb, var(--apex-action-primary) 24%, transparent);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--apex-motion-fast) ease, box-shadow var(--apex-motion-fast) ease, opacity var(--apex-motion-fast) ease;
+}
+
+.apex-auth-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 15px 32px color-mix(in srgb, var(--apex-action-primary) 30%, transparent);
+}
+
+.apex-auth-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.apex-auth-security-note {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--apex-border-subtle);
+  color: var(--apex-text-tertiary);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.apex-auth-footer {
+  margin-top: 18px;
+  color: var(--apex-text-tertiary);
+  text-align: center;
+  font-size: 10px;
+}
+
+@media (max-width: 640px) {
+  .apex-auth-shell {
+    align-items: start;
+    padding: 82px 16px 26px;
+  }
+
+  .apex-auth-theme-switch {
+    top: 14px;
+    right: 14px;
+  }
+
+  .apex-auth-theme-switch button span {
+    display: none;
+  }
+
+  .apex-auth-theme-switch button {
+    width: 36px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .apex-auth-brand {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 13px;
+    margin-bottom: 16px;
+  }
+
+  .apex-auth-logo-plate {
+    width: 58px;
+    height: 58px;
+    border-radius: 17px;
+  }
+
+  .apex-auth-logo-plate img {
+    width: 46px;
+    height: 46px;
+  }
+
+  .apex-auth-brand-copy {
+    display: none;
+  }
+
+  .apex-auth-card {
+    border-radius: 22px;
+  }
+}
