@@ -10,7 +10,7 @@ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('.
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
 
 const CLASS_ALIASES = {

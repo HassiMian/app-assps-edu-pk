@@ -11,7 +11,7 @@ const {
   maskTwilioConfig,
   probeTwilioConfig,
 } = require('../services/twilioSettings')
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const fs = require('fs')
 const path = require('path')
 const multer = require('multer')

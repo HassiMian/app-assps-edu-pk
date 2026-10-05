@@ -1,55 +1,41 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Trophy, Plus, Save, Printer, BarChart2, FileText, Bookmark } from "lucide-react";
 import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
-const EXAMS = [
- { id: 1, name: "Mid-Term 2026", type: "TE", date: "2026-05-15", session: "2026-2027" },
- { id: 2, name: "Assessment 1", type: "AS", date: "2026-03-10", session: "2026-2027" },
- { id: 3, name: "Annual Exam 2025", type: "TE", date: "2025-11-20", session: "2025-2026" },
-];
-// Removed hardcoded SUBJECTS
-const STUDENTS = [
- { id: 1, gr: "GR-001", name: "Ahmed Ali", photo: "" },
- { id: 2, gr: "GR-002", name: "Fatima Noor", photo: "" },
- { id: 3, gr: "GR-003", name: "Usman Tariq", photo: "" },
- { id: 4, gr: "GR-004", name: "Ayesha Bibi", photo: "" },
- { id: 5, gr: "GR-005", name: "Hamza Ijaz", photo: "" },
- { id: 6, gr: "GR-006", name: "Zainab Malik", photo: "" },
-];
-
+import api from "../../services/api";
 const cardStyle = {
- background: 'rgba(11,44,77,0.62)',
+ background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(18px)',
- border: '1px solid rgba(148,163,184,0.18)',
+ border: '1px solid var(--apex-border-default)',
  borderRadius: 22,
  padding: 24,
 };
 const headerStyle = {
- color: '#C0C8D8',
+ color: 'var(--apex-text-primary)',
  fontSize: 19,
  fontWeight: 650,
 };
 const accentText = {
- color: '#C8991A',
+ color: 'var(--apex-action-primary)',
 };
 const btnPrimary = {
  display: 'flex', alignItems: 'center', gap: 8,
- background: 'linear-gradient(135deg,#C8991A,#e8b420)',
- color: '#071e34', border: 'none', borderRadius: 12,
+ background: 'var(--apex-action-primary)',
+ color: '#fff', border: 'none', borderRadius: 12,
  padding: '12px 20px', fontWeight: 500, fontSize: 14, cursor: 'pointer',
 };
 const btnSecondary = {
  display: 'flex', alignItems: 'center', gap: 8,
- background: 'rgba(11,44,77,0.45)', color: '#C0C8D8',
- border: '1px solid rgba(200,153,26,0.2)', borderRadius: 12,
+ background: 'var(--apex-bg-surface-solid)', color: 'var(--apex-text-primary)',
+ border: '1px solid var(--apex-border-default)', borderRadius: 12,
  padding: '12px 20px', fontWeight: 600, fontSize: 14, cursor: 'pointer',
 };
 const inputStyle = {
  width: '100%', padding: '12px 14px', borderRadius: 12,
- background: 'rgba(7,30,52,0.65)', border: '1px solid rgba(148,163,184,0.18)',
- color: '#C0C8D8', fontSize: 14, outline: 'none', boxSizing: 'border-box',
+ background: 'rgba(7,30,52,0.65)', border: '1px solid var(--apex-border-default)',
+ color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none', boxSizing: 'border-box',
 };
 const selectStyle = {
  ...inputStyle,
@@ -143,8 +129,8 @@ function printExamResultCard({ student, marks, subjects, examName }) {
 function AddExamModal({ onClose, onAdd }) {
  const [form, setForm] = useState({ name: '', type: 'TE', date: '', session: '2026-2027' });
  const set = (key, value) => setForm(prev => ({ ...prev, [key]: value }));
- const labelStyle = { color: '#8892A4', fontSize: 12, fontWeight: 600, marginBottom: 8, display: 'block', textTransform: 'uppercase', letterSpacing: 0.6 };
- const fieldStyle = { width: '100%', padding: '12px 14px', borderRadius: 12, background: 'rgba(7,30,52,0.65)', border: '1px solid rgba(148,163,184,0.18)', color: '#C0C8D8', fontSize: 14, outline: 'none' };
+ const labelStyle = { color: 'var(--apex-text-tertiary)', fontSize: 12, fontWeight: 600, marginBottom: 8, display: 'block', textTransform: 'uppercase', letterSpacing: 0.6 };
+ const fieldStyle = { width: '100%', padding: '12px 14px', borderRadius: 12, background: 'rgba(7,30,52,0.65)', border: '1px solid var(--apex-border-default)', color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none' };
 
  return createPortal(
  <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(7,30,52,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -152,9 +138,9 @@ function AddExamModal({ onClose, onAdd }) {
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginBottom: 20 }}>
  <div>
  <div style={{ ...accentText, fontSize: 18, fontWeight: 800 }}>Add New Exam</div>
- <div style={{ color: '#8892A4', fontSize: 12 }}>Create a new exam schedule for the session</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>Create a new exam schedule for the session</div>
  </div>
- <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#C0C8D8', fontSize: 24, cursor: 'pointer' }}></button>
+ <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--apex-text-primary)', fontSize: 24, cursor: 'pointer' }}></button>
  </div>
 
  <div style={{ display: 'grid', gap: 16 }}>
@@ -193,12 +179,12 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
  <div style={{ padding: 24, background: '#0b2c4d', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
  <div>
  <div style={{ ...accentText, fontSize: 18, fontWeight: 800 }}>Result Card</div>
- <div style={{ color: '#C0C8D8', fontSize: 12, marginTop: 4 }}>{examName}</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontSize: 12, marginTop: 4 }}>{examName}</div>
  </div>
- <button onClick={onClose} style={{ background: 'none', border: 'none', color: '#C0C8D8', fontSize: 24, cursor: 'pointer' }}></button>
+ <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--apex-text-primary)', fontSize: 24, cursor: 'pointer' }}></button>
  </div>
 
- <div style={{ padding: 24, color: '#C0C8D8', display: 'grid', gap: 18 }}>
+ <div style={{ padding: 24, color: 'var(--apex-text-primary)', display: 'grid', gap: 18 }}>
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 10, fontSize: 13 }}>
  <div>Student: <strong>{student.name}</strong></div>
  <div>GR No: <strong>{student.gr}</strong></div>
@@ -208,7 +194,7 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
 
  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
  <thead>
- <tr style={{ background: 'rgba(11,44,77,0.95)', color: '#C8991A' }}>
+ <tr style={{ background: 'rgba(11,44,77,0.95)', color: 'var(--apex-action-primary)' }}>
  <th style={{ padding: '10px', textAlign: 'left' }}>Subject</th>
  <th style={{ padding: '10px', textAlign: 'center' }}>Obtained</th>
  <th style={{ padding: '10px', textAlign: 'center' }}>Total</th>
@@ -230,7 +216,7 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
  })}
  </tbody>
  <tfoot>
- <tr style={{ background: 'rgba(11,44,77,0.95)', color: '#C0C8D8', fontWeight: 700 }}>
+ <tr style={{ background: 'rgba(11,44,77,0.95)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>
  <td style={{ padding: '10px' }}>Total</td>
  <td style={{ padding: '10px', textAlign: 'center' }}>{totalObtained}</td>
  <td style={{ padding: '10px', textAlign: 'center' }}>{totalMax}</td>
@@ -240,7 +226,7 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
  </table>
 
  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
- <div style={{ padding: '14px 18px', borderRadius: 20, background: c === '#30D158' ? 'rgba(48,209,88,0.14)' : 'rgba(200,153,26,0.14)', color: '#C0C8D8', fontWeight: 700 }}>Status: {pct >= 50 ? 'PASS' : 'FAIL'}</div>
+ <div style={{ padding: '14px 18px', borderRadius: 20, background: c === '#30D158' ? 'rgba(48,209,88,0.14)' : 'rgba(200,153,26,0.14)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>Status: {pct >= 50 ? 'PASS' : 'FAIL'}</div>
  <div style={{ display: 'flex', gap: 12, width: '100%', maxWidth: 320 }}>
  <button onClick={() => printExamResultCard({ student, marks, subjects, examName })} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Printer size={16} />Print</button>
  <button onClick={onClose} style={{ ...btnSecondary, flex: 1, justifyContent: 'center' }}>Close</button>
@@ -257,14 +243,48 @@ export default function ExaminationModule() {
  const { classNames: CLASSES, allSections: SECTIONS, subjectsForClass, subjects: rawSubjects, activeClasses } = useAcademicStore();
  const location = useLocation();
  const navigate = useNavigate();
- const [exams, setExams] = useState(EXAMS);
+ const [exams, setExams] = useState([]);
  const [showAdd, setShowAdd] = useState(false);
- const [selectedExam, setSelectedExam] = useState(EXAMS[0] || null);
+ const [selectedExam, setSelectedExam] = useState(null);
  const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter');
  const [selectedSection, setSelectedSection] = useState(SECTIONS[0] || 'Blue');
  const [marks, setMarks] = useState({});
  const [saved, setSaved] = useState(false);
  const [viewCard, setViewCard] = useState(null);
+ const [students, setStudents] = useState([]);
+ const [loading, setLoading] = useState(true);
+
+ useEffect(() => {
+ let cancelled = false;
+ async function hydrate() {
+ try {
+ const [examRes, studentRes] = await Promise.all([api.get('/api/exams'), api.get('/api/students')]);
+ if (cancelled) return;
+ const liveExams = Array.isArray(examRes.data?.data) ? examRes.data.data : [];
+ const liveStudents = Array.isArray(studentRes.data?.data) ? studentRes.data.data : [];
+ setExams(liveExams);
+ setStudents(liveStudents);
+ setSelectedExam(current => current && liveExams.some(item => item.id === current.id) ? current : (liveExams[0] || null));
+ } catch (err) {
+ if (!cancelled) {
+ console.error('Failed to load examination workspace', err);
+ setExams([]);
+ setStudents([]);
+ setSelectedExam(null);
+ }
+ } finally {
+ if (!cancelled) setLoading(false);
+ }
+ }
+ void hydrate();
+ return () => { cancelled = true; };
+ }, []);
+
+ const filteredStudents = useMemo(() => students.filter(student => {
+ const classMatch = !selectedClass || student.class === selectedClass;
+ const sectionMatch = !selectedSection || selectedSection === 'All' || student.section === selectedSection;
+ return classMatch && sectionMatch;
+ }), [students, selectedClass, selectedSection]);
 
  const subjects = subjectsForClass(selectedClass) || [];
  const path = location.pathname.replace(/\/$/, '');
@@ -276,7 +296,28 @@ export default function ExaminationModule() {
  setSaved(false);
  };
 
- const handleSave = () => { setSaved(true); setTimeout(() => setSaved(false), 3000); };
+ const handleSave = async () => {
+ if (!selectedExam || !filteredStudents.length || !subjects.length) return;
+ const results = [];
+ filteredStudents.forEach(student => {
+ subjects.forEach(subject => {
+ results.push({
+ exam_id: selectedExam.id,
+ student_id: student.id,
+ subject,
+ marks_obtained: Number(marks[student.id]?.[subject] || 0),
+ total_marks: 100,
+ });
+ });
+ });
+ try {
+ await api.post('/api/exams/results', { results });
+ setSaved(true);
+ setTimeout(() => setSaved(false), 3000);
+ } catch (err) {
+ console.error('Failed to save exam results', err);
+ }
+ };
 
  const tabs = [
  { key: 'exams', label: 'Manage Exams', icon: <Trophy size={14} />, path: '/examination/manage' },
@@ -285,7 +326,7 @@ export default function ExaminationModule() {
  { key: 'cards', label: 'Result Cards', icon: <FileText size={14} />, path: '/examination/cards' },
  ];
 
- const resultsData = STUDENTS.map(student => {
+ const resultsData = filteredStudents.map(student => {
  const total = subjects.reduce((sum, subject) => sum + (parseInt(marks[student.id]?.[subject]) || 0), 0);
  const pct = Math.round((total / (subjects.length * 100)) * 100);
  const grade = getGrade(pct);
@@ -293,8 +334,8 @@ export default function ExaminationModule() {
  });
 
  // Dashboard computed values
- const examTypeCounts = EXAMS.reduce((acc, e) => { acc[e.type] = (acc[e.type] || 0) + 1; return acc; }, {});
- const uniqueTypes = [...new Set(EXAMS.map(e => e.type))].length;
+ const examTypeCounts = exams.reduce((acc, e) => { acc[e.type] = (acc[e.type] || 0) + 1; return acc; }, {});
+ const uniqueTypes = [...new Set(exams.map(e => e.type))].length;
  const totalSubjectsCount = rawSubjects.length;
 
  const subjectPerClassBars = activeClasses
@@ -304,11 +345,11 @@ export default function ExaminationModule() {
  color: ['#0A84FF','#30D158','#C8991A','#BF5AF2','#FF375F','#64D2FF'][i % 6],
  }));
 
- const examDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 18, padding: 20 };
- const examDashTitle = { color: '#C0C8D8', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
+ const examDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid var(--apex-border-default)', borderRadius: 18, padding: 20 };
+ const examDashTitle = { color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
 
  return (
- <div style={{ minHeight: '100%', background: '#071e34', color: '#C0C8D8', padding: 24 }}>
+ <div style={{ minHeight: '100%', background: '#071e34', color: 'var(--apex-text-primary)', padding: 24 }}>
  <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gap: 24 }}>
 
  <div className="super-module-card" style={{ ...cardStyle, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16, marginBottom: 20 }}>
@@ -318,7 +359,7 @@ export default function ExaminationModule() {
  </div>
  <div>
  <div style={headerStyle}>Examination Module</div>
- <div style={{ color: '#8892A4', fontSize: 13 }}>Manage exams, enter marks, review results, and print result cards.</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 13 }}>Manage exams, enter marks, review results, and print result cards.</div>
  </div>
  </div>
  <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
@@ -335,9 +376,9 @@ export default function ExaminationModule() {
  {/* Stats Cards */}
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 12 }}>
  {[
- { label: 'Total Exams', value: EXAMS.length, icon: '', grad: 'linear-gradient(135deg,rgba(148,163,184,0.18),rgba(200,153,26,0.06))' },
+ { label: 'Total Exams', value: loading ? '…' : exams.length, icon: '', grad: 'linear-gradient(135deg,rgba(148,163,184,0.18),rgba(200,153,26,0.06))' },
  { label: 'Exam Types', value: uniqueTypes, icon: '', grad: 'linear-gradient(135deg,rgba(13,148,136,0.18),rgba(13,148,136,0.06))' },
- { label: 'Total Students', value: STUDENTS.length, icon: '', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
+ { label: 'Total Students', value: filteredStudents.length, icon: '', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
  { label: 'Total Subjects', value: totalSubjectsCount, icon: '', grad: 'linear-gradient(135deg,rgba(191,90,242,0.18),rgba(191,90,242,0.06))' },
  ].map(c => (
  <div key={c.label} style={{ ...examDashCard, background: c.grad, padding: '16px 18px' }}>
@@ -356,16 +397,16 @@ export default function ExaminationModule() {
  <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
  <DonutChart
  segments={[
- { value: examTypeCounts['TE'] || 0, color: '#C8991A' },
+ { value: examTypeCounts['TE'] || 0, color: 'var(--apex-action-primary)' },
  { value: examTypeCounts['AS'] || 0, color: '#0D9488' },
  ]}
  size={110}
  strokeWidth={14}
- label={String(EXAMS.length)}
+ label={String(exams.length)}
  sublabel="exams"
  />
  <ChartLegend items={[
- { label: 'Term Exam', color: '#C8991A', value: examTypeCounts['TE'] || 0 },
+ { label: 'Term Exam', color: 'var(--apex-action-primary)', value: examTypeCounts['TE'] || 0 },
  { label: 'Assessment', color: '#0D9488', value: examTypeCounts['AS'] || 0 },
  ]} />
  </div>
@@ -400,7 +441,7 @@ export default function ExaminationModule() {
  <div key={exam.id} style={{ ...cardStyle, display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: 16, alignItems: 'center' }}>
  <div>
  <div style={{ ...accentText, fontSize: 16, fontWeight: 800 }}>{exam.name}</div>
- <div style={{ color: '#8892A4', fontSize: 13, marginTop: 6 }}>Session {exam.session} · {exam.date}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 13, marginTop: 6 }}>Session {exam.session} · {exam.date}</div>
  </div>
  <div style={{ color: exam.type === 'TE' ? '#C8991A' : '#0A84FF', fontWeight: 700, minWidth: 110, textAlign: 'center', padding: '10px 14px', borderRadius: 14, background: exam.type === 'TE' ? 'rgba(200,153,26,0.12)' : 'rgba(10,132,255,0.12)' }}>
  {exam.type === 'TE' ? 'Term Exam' : 'Assessment'}
@@ -411,7 +452,7 @@ export default function ExaminationModule() {
  )) : (
  <div className="super-module-card" style={{ ...cardStyle, padding: 40, textAlign: 'center' }}>
  <div style={{ ...accentText, fontSize: 20, fontWeight: 800, marginBottom: 12 }}>No exams created yet</div>
- <div style={{ color: '#8892A4' }}>Start by adding a new exam using the button above.</div>
+ <div style={{ color: 'var(--apex-text-tertiary)' }}>Start by adding a new exam using the button above.</div>
  </div>
  )}
  </div>
@@ -436,23 +477,23 @@ export default function ExaminationModule() {
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
  <div>
  <div style={{ ...accentText, fontWeight: 800, fontSize: 15 }}>{selectedExam?.name || 'Select an exam'}</div>
- <div style={{ color: '#8892A4', fontSize: 13 }}>{selectedClass} · {selectedSection}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 13 }}>{selectedClass} · {selectedSection}</div>
  </div>
  {saved && <div style={{ padding: '10px 14px', borderRadius: 14, background: 'rgba(48,209,88,0.14)', border: '1px solid rgba(48,209,88,0.3)', color: '#30D158', fontWeight: 700 }}> Marks saved successfully</div>}
  </div>
  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 700 }}>
  <thead>
  <tr style={{ borderBottom: '2px solid rgba(200,153,26,0.3)' }}>
- <th style={{ padding: '10px 12px', textAlign: 'left', color: '#8892A4', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Student</th>
+ <th style={{ padding: '10px 12px', textAlign: 'left', color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase' }}>Student</th>
  {subjects.map(sub => (
- <th key={sub} style={{ padding: '10px 8px', textAlign: 'center', color: '#8892A4', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', minWidth: 80 }}>{sub}</th>
+ <th key={sub} style={{ padding: '10px 8px', textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 700, textTransform: 'uppercase', minWidth: 80 }}>{sub}</th>
  ))}
- <th style={{ padding: '10px 12px', textAlign: 'center', color: '#8892A4', fontSize: 11, fontWeight: 700 }}>Total</th>
- <th style={{ padding: '10px 12px', textAlign: 'center', color: '#8892A4', fontSize: 11, fontWeight: 700 }}>Grade</th>
+ <th style={{ padding: '10px 12px', textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 700 }}>Total</th>
+ <th style={{ padding: '10px 12px', textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight: 700 }}>Grade</th>
  </tr>
  </thead>
  <tbody>
- {STUDENTS.map((s, i) => {
+ {filteredStudents.map((s, i) => {
  const total = subjects.reduce((sum, sub) => sum + (parseInt(marks[s.id]?.[sub]) || 0), 0);
  const pct = Math.round((total / (subjects.length * 100)) * 100);
  const { g, c } = getGrade(pct);
@@ -462,8 +503,8 @@ export default function ExaminationModule() {
  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
  <span style={{ fontSize: 20 }}>{s.photo}</span>
  <div>
- <div style={{ color: '#C0C8D8', fontWeight: 600, fontSize: 13 }}>{s.name}</div>
- <div style={{ color: '#8892A4', fontSize: 11 }}>{s.gr}</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontWeight: 600, fontSize: 13 }}>{s.name}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>{s.gr}</div>
  </div>
  </div>
  </td>
@@ -477,7 +518,7 @@ export default function ExaminationModule() {
  style={{ ...inputStyle, width: 60 }} />
  </td>
  ))}
- <td style={{ padding: '10px 12px', textAlign: 'center', color: '#C8991A', fontWeight: 800, fontSize: 15 }}>{total}</td>
+ <td style={{ padding: '10px 12px', textAlign: 'center', color: 'var(--apex-action-primary)', fontWeight: 800, fontSize: 15 }}>{total}</td>
  <td style={{ padding: '10px 12px', textAlign: 'center' }}>
  <span style={{ padding: '3px 10px', background: `${c}22`, border: `1px solid ${c}55`, borderRadius: 20, fontSize: 12, color: c, fontWeight: 700 }}>{g}</span>
  </td>
@@ -494,18 +535,18 @@ export default function ExaminationModule() {
  <div>
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 20 }}>
  {[
- { label: 'Total Students', value: STUDENTS.length, color: '#0A84FF' },
- { label: 'Pass', value: STUDENTS.filter(s => { const t = subjects.reduce((sum, sub) => sum + (parseInt(marks[s.id]?.[sub]) || 0), 0); return (t / (subjects.length * 100)) * 100 >= 50; }).length, color: '#30D158' },
- { label: 'Fail', value: STUDENTS.filter(s => { const t = subjects.reduce((sum, sub) => sum + (parseInt(marks[s.id]?.[sub]) || 0), 0); return (t / (subjects.length * 100)) * 100 < 50; }).length, color: '#FF375F' },
+ { label: 'Total Students', value: filteredStudents.length, color: '#0A84FF' },
+ { label: 'Pass', value: filteredStudents.filter(s => { const t = subjects.reduce((sum, sub) => sum + (parseInt(marks[s.id]?.[sub]) || 0), 0); return (t / (subjects.length * 100)) * 100 >= 50; }).length, color: '#30D158' },
+ { label: 'Fail', value: filteredStudents.filter(s => { const t = subjects.reduce((sum, sub) => sum + (parseInt(marks[s.id]?.[sub]) || 0), 0); return (t / (subjects.length * 100)) * 100 < 50; }).length, color: '#FF375F' },
  ].map(s => (
  <div key={s.label} style={cardStyle}>
  <div style={{ color: s.color, fontSize: 32, fontWeight: 800 }}>{s.value}</div>
- <div style={{ color: '#8892A4', fontSize: 13 }}>{s.label}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 13 }}>{s.label}</div>
  </div>
  ))}
  </div>
  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
- {STUDENTS.map(s => {
+ {filteredStudents.map(s => {
  const total = subjects.reduce((sum, sub) => sum + (parseInt(marks[s.id]?.[sub]) || 0), 0);
  const pct = Math.round((total / (subjects.length * 100)) * 100);
  const { g, c } = getGrade(pct);
@@ -513,16 +554,16 @@ export default function ExaminationModule() {
  <div key={s.id} style={{ ...cardStyle, padding: '16px 20px', display: 'flex', alignItems: 'center', gap: 16 }}>
  <span style={{ fontSize: 28 }}>{s.photo}</span>
  <div style={{ flex: 1 }}>
- <div style={{ color: '#C0C8D8', fontWeight: 700, fontSize: 15 }}>{s.name}</div>
- <div style={{ color: '#8892A4', fontSize: 12 }}>{s.gr} · {selectedClass}</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 15 }}>{s.name}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{s.gr} · {selectedClass}</div>
  </div>
  <div style={{ textAlign: 'center', marginRight: 16 }}>
- <div style={{ color: '#C8991A', fontWeight: 800, fontSize: 20 }}>{total}/{subjects.length*100}</div>
- <div style={{ color: '#8892A4', fontSize: 11 }}>Total Marks</div>
+ <div style={{ color: 'var(--apex-action-primary)', fontWeight: 800, fontSize: 20 }}>{total}/{subjects.length*100}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>Total Marks</div>
  </div>
  <div style={{ textAlign: 'center', marginRight: 16 }}>
  <div style={{ color: c, fontWeight: 800, fontSize: 20 }}>{pct}%</div>
- <div style={{ color: '#8892A4', fontSize: 11 }}>Percentage</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>Percentage</div>
  </div>
  <span style={{ padding: '4px 14px', background: `${c}22`, border: `1px solid ${c}55`, borderRadius: 20, fontSize: 13, color: c, fontWeight: 700, marginRight: 12 }}>{g}</span>
  <button onClick={() => setViewCard(s)} style={btnSecondary}><Printer size={14}/> Result Card</button>
@@ -537,16 +578,16 @@ export default function ExaminationModule() {
  <div style={{ display: 'grid', gap: 16 }}>
  <div className="super-module-card" style={{ ...cardStyle, display: 'grid', gridTemplateColumns: 'repeat(3, minmax(180px, 1fr))', gap: 16 }}>
  <div>
- <div style={{ color: '#C8991A', fontWeight: 800, fontSize: 16 }}>Active Exam</div>
- <div style={{ color: '#C0C8D8', marginTop: 8 }}>{selectedExam?.name || 'Select an exam'}</div>
+ <div style={{ color: 'var(--apex-action-primary)', fontWeight: 800, fontSize: 16 }}>Active Exam</div>
+ <div style={{ color: 'var(--apex-text-primary)', marginTop: 8 }}>{selectedExam?.name || 'Select an exam'}</div>
  </div>
  <div>
- <div style={{ color: '#C8991A', fontWeight: 800, fontSize: 16 }}>Class</div>
- <div style={{ color: '#C0C8D8', marginTop: 8 }}>{selectedClass}</div>
+ <div style={{ color: 'var(--apex-action-primary)', fontWeight: 800, fontSize: 16 }}>Class</div>
+ <div style={{ color: 'var(--apex-text-primary)', marginTop: 8 }}>{selectedClass}</div>
  </div>
  <div>
- <div style={{ color: '#C8991A', fontWeight: 800, fontSize: 16 }}>Section</div>
- <div style={{ color: '#C0C8D8', marginTop: 8 }}>{selectedSection}</div>
+ <div style={{ color: 'var(--apex-action-primary)', fontWeight: 800, fontSize: 16 }}>Section</div>
+ <div style={{ color: 'var(--apex-text-primary)', marginTop: 8 }}>{selectedSection}</div>
  </div>
  </div>
 
@@ -554,9 +595,9 @@ export default function ExaminationModule() {
  {resultsData.map(item => (
  <div key={item.student.id} style={{ ...cardStyle, display: 'grid', gridTemplateColumns: '1fr auto', gap: 16, alignItems: 'center' }}>
  <div>
- <div style={{ color: '#C0C8D8', fontWeight: 700 }}>{item.student.name}</div>
- <div style={{ color: '#8892A4', fontSize: 12 }}>{item.student.gr}</div>
- <div style={{ color: '#C8991A', marginTop: 10, fontWeight: 700 }}>{item.grade.g} • {item.pct}%</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontWeight: 700 }}>{item.student.name}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{item.student.gr}</div>
+ <div style={{ color: 'var(--apex-action-primary)', marginTop: 10, fontWeight: 700 }}>{item.grade.g} • {item.pct}%</div>
  </div>
  <button onClick={() => setViewCard(item.student)} style={{ ...btnPrimary, justifyContent: 'center' }}><Printer size={16} /> Print Result</button>
  </div>
@@ -566,7 +607,22 @@ export default function ExaminationModule() {
  )}
  </div>
 
- {showAdd && <AddExamModal onClose={() => setShowAdd(false)} onAdd={exam => { setExams(prev => [...prev, exam]); setSelectedExam(exam); }} />}
+ {showAdd && <AddExamModal onClose={() => setShowAdd(false)} onAdd={async exam => {
+ try {
+ const response = await api.post('/api/exams', {
+ name: exam.name,
+ type: exam.type,
+ class: selectedClass,
+ session: exam.session,
+ start_date: exam.date,
+ end_date: exam.date,
+ total_marks: 100,
+ pass_marks: 33,
+ });
+ const savedExam = response.data?.data;
+ if (savedExam) { setExams(prev => [savedExam, ...prev]); setSelectedExam(savedExam); }
+ } catch (err) { console.error('Failed to create exam', err); }
+ }} />}
  {viewCard && <ResultCard student={viewCard} marks={marks} subjects={subjects} examName={selectedExam?.name || 'Exam'} onClose={() => setViewCard(null)} />}
  </div>
  );

@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
+import api from '../../services/api'
 
 // Dynamic lists will be used from the store.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const TEACHERS = ['Mr. Aamir', 'Ms. Saba', 'Mr. Bilal', 'Ms. Hira', 'Mr. Naveed', 'Ms. Farah', 'Mr. Qasim', 'Ms. Sana']
 const escapeHtml = (value) => String(value || '')
   .replaceAll('&', '&')
   .replaceAll('<', '&lt;')
@@ -26,7 +26,7 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
  return `
  <td>
  <strong>${escapeHtml(item.subject || 'English')}</strong>
- <span>${escapeHtml(item.teacher || 'Mr. Aamir')}</span>
+ <span>${escapeHtml(item.teacher || 'Unassigned')}</span>
  </td>
  `
  }).join('')}
@@ -122,13 +122,13 @@ const card = {
  border: '1px solid rgba(200,153,26,0.2)',
  borderRadius: 22,
  backdropFilter: 'blur(18px)',
- color: '#C0C8D8',
+ color: 'var(--apex-text-primary)',
 }
 
 const labelStyle = {
  display: 'block',
  fontSize: 12,
- color: '#8892A4',
+ color: 'var(--apex-text-tertiary)',
  marginBottom: 8,
  letterSpacing: '0.06em',
  textTransform: 'uppercase',
@@ -140,7 +140,7 @@ const inputStyle = {
  borderRadius: 14,
  border: '1px solid rgba(148,163,184,0.18)',
  background: 'rgba(7,30,52,0.75)',
- color: '#C0C8D8',
+ color: 'var(--apex-text-primary)',
  fontSize: 14,
  outline: 'none',
 }
@@ -150,6 +150,7 @@ function TimetableModule() {
  const { paperSettings } = usePaperStore()
  
  const [schoolClass, setSchoolClass] = useState(classOptions[0] || 'Starter')
+ const [teacherOptions, setTeacherOptions] = useState([])
  
  const selectedAcademicClass = activeClasses.find(c => c.name === schoolClass)
  const sectionOptions = selectedAcademicClass?.sections?.length ? selectedAcademicClass.sections : (allSections.length ? allSections : ['A'])
@@ -164,11 +165,34 @@ function TimetableModule() {
  initial[day] = {}
  for (let i = 1; i <= initialPeriods; i++) {
  const period = `Period ${i}`
- initial[day][period] = { subject: subjectOptions[0], teacher: TEACHERS[0] }
+ initial[day][period] = { subject: subjectOptions[0] || '', teacher: '' }
  }
  })
  return initial
  })
+
+ useEffect(() => {
+ let cancelled = false
+ async function loadTeachers() {
+ try {
+ const response = await api.get('/api/employees')
+ const rows = Array.isArray(response.data?.data) ? response.data.data : []
+ const names = rows
+ .filter(employee => employee?.is_active !== false)
+ .filter(employee => {
+ const role = String(employee?.role || employee?.designation || '').toLowerCase()
+ return !role || role.includes('teacher') || role.includes('subject') || role.includes('lecturer')
+ })
+ .map(employee => String(employee?.name || '').trim())
+ .filter(Boolean)
+ if (!cancelled) setTeacherOptions([...new Set(names)])
+ } catch {
+ if (!cancelled) setTeacherOptions([])
+ }
+ }
+ void loadTeachers()
+ return () => { cancelled = true }
+ }, [])
 
  const periods = useMemo(() => {
  const arr = []
@@ -221,17 +245,17 @@ function TimetableModule() {
  }
 
  return (
- <div style={{ minHeight: '100vh', background: '#071e34', color: '#C0C8D8', padding: 24, fontFamily: 'Inter, sans-serif' }}>
+ <div style={{ minHeight: '100vh', background: 'var(--apex-shell-gradient)', color: 'var(--apex-text-primary)', padding: 24, fontFamily: 'Inter, sans-serif' }}>
  <div style={{ width: '100%', maxWidth: 1600, margin: '0 auto', display: 'grid', gap: 22, minWidth: 0 }}>
  <div className="super-module-card" style={{ ...card, padding: 28, boxShadow: '0 18px 40px rgba(0,0,0,0.24)', borderRadius: 24 }}>
  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center', justifyContent: 'space-between' }}>
  <div>
- <div style={{ color: '#C8991A', fontSize: 28, fontWeight: 600, marginBottom: 10 }}>Timetable Manager</div>
- <div style={{ color: '#8892A4', fontSize: 14 }}>Choose class, section, and number of periods, then assign subjects and teachers across the school week.</div>
+ <div style={{ color: 'var(--apex-action-primary)', fontSize: 28, fontWeight: 600, marginBottom: 10 }}>Timetable Manager</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 14 }}>Choose class, section, and number of periods, then assign subjects and teachers across the school week.</div>
  </div>
  <button onClick={printTimetable} style={{
- background: 'linear-gradient(135deg, #C8991A, #e8b420)',
- color: '#071e34',
+ background: 'var(--apex-action-primary)',
+ color: '#fff',
  border: 'none',
  borderRadius: 14,
  padding: '14px 22px',
@@ -267,12 +291,12 @@ function TimetableModule() {
  <div className="super-module-card" style={{ ...card, padding: 24, minWidth: 0 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 20, flexWrap: 'wrap', marginBottom: 20 }}>
  <div>
- <div style={{ color: '#C8991A', fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Current Selection</div>
- <div style={{ color: '#C0C8D8' }}>{schoolClass} · Section {section}</div>
+ <div style={{ color: 'var(--apex-action-primary)', fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Current Selection</div>
+ <div style={{ color: 'var(--apex-text-primary)' }}>{schoolClass} · Section {section}</div>
  </div>
  <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
- <div style={{ color: '#8892A4', fontSize: 13 }}>Assigned lessons</div>
- <div style={{ background: 'rgba(200,153,26,0.16)', color: '#C8991A', borderRadius: 14, padding: '8px 14px', fontWeight: 700 }}>{activeLessonCount}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 13 }}>Assigned lessons</div>
+ <div style={{ background: 'rgba(200,153,26,0.16)', color: 'var(--apex-action-primary)', borderRadius: 14, padding: '8px 14px', fontWeight: 700 }}>{activeLessonCount}</div>
  </div>
  </div>
 
@@ -285,19 +309,19 @@ function TimetableModule() {
  </colgroup>
  <thead>
  <tr>
- <th style={{ padding: '12px 12px', textAlign: 'left', color: '#C8991A', borderBottom: '1px solid rgba(200,153,26,0.2)', position: 'sticky', left: 0, zIndex: 3, background: '#10223b' }}>Day</th>
+ <th style={{ padding: '12px 12px', textAlign: 'left', color: 'var(--apex-action-primary)', borderBottom: '1px solid var(--apex-border-default)', position: 'sticky', left: 0, zIndex: 3, background: 'var(--apex-bg-subtle)' }}>Day</th>
  {periods.map(period => (
- <th key={period} style={{ padding: '12px 10px', textAlign: 'center', color: '#C8991A', borderBottom: '1px solid rgba(200,153,26,0.2)' }}>{period}</th>
+ <th key={period} style={{ padding: '12px 10px', textAlign: 'center', color: 'var(--apex-action-primary)', borderBottom: '1px solid var(--apex-border-default)' }}>{period}</th>
  ))}
  </tr>
  </thead>
  <tbody>
  {DAYS.map(day => (
- <tr key={day} style={{ borderTop: '1px solid rgba(200,153,26,0.12)' }}>
- <td style={{ padding: '12px 12px', fontWeight: 700, color: '#fff', background: '#08243e', position: 'sticky', left: 0, zIndex: 2 }}>{day}</td>
+ <tr key={day} style={{ borderTop: '1px solid var(--apex-border-subtle)' }}>
+ <td style={{ padding: '12px 12px', fontWeight: 700, color: '#fff', background: 'var(--apex-bg-subtle)', position: 'sticky', left: 0, zIndex: 2 }}>{day}</td>
  {periods.map(period => (
  <td key={period} style={{ padding: 8, verticalAlign: 'top' }}>
- <div style={{ display: 'grid', gap: 8, padding: 10, borderRadius: 14, background: 'rgba(11,44,77,0.92)', border: '1px solid rgba(200,153,26,0.12)' }}>
+ <div style={{ display: 'grid', gap: 8, padding: 10, borderRadius: 14, background: 'var(--apex-bg-surface)', border: '1px solid var(--apex-border-subtle)' }}>
  <div>
  <span style={labelStyle}>Subject</span>
  <select value={assignments[day][period]?.subject || subjectOptions[0]} onChange={e => handleChange(day, period, 'subject', e.target.value)} style={inputStyle}>
@@ -306,8 +330,9 @@ function TimetableModule() {
  </div>
  <div>
  <span style={labelStyle}>Teacher</span>
- <select value={assignments[day][period]?.teacher || TEACHERS[0]} onChange={e => handleChange(day, period, 'teacher', e.target.value)} style={inputStyle}>
- {TEACHERS.map(teacher => <option key={teacher} value={teacher}>{teacher}</option>)}
+ <select value={assignments[day][period]?.teacher || ''} onChange={e => handleChange(day, period, 'teacher', e.target.value)} style={inputStyle}>
+ <option value="">Unassigned</option>
+ {teacherOptions.map(teacher => <option key={teacher} value={teacher}>{teacher}</option>)}
  </select>
  </div>
  </div>

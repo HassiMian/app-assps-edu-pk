@@ -1,12 +1,7 @@
 import { useState } from 'react'
 import { C, card, btnPrimary, btnSecondary, select, labelStyle, sectionHeader } from '../moduleStyles'
 
-const LOGS = [
- { id: 1, recipient: 'Ahmed Raza', phone: '0300-1234567', date: '2026-05-18', status: 'Delivered', message: 'Attendance alert sent.' },
- { id: 2, recipient: 'Fatima Noor', phone: '0301-2345678', date: '2026-05-18', status: 'Failed', message: 'Payment reminder failed.' },
- { id: 3, recipient: 'Bilal Hassan', phone: '0302-3456789', date: '2026-05-17', status: 'Delivered', message: 'Result card notification.' },
- { id: 4, recipient: 'Ayesha Malik', phone: '0303-4567890', date: '2026-05-16', status: 'Delivered', message: 'Fee reminder sent.' },
-]
+const LOGS = []
 const STATUSES = ['All', 'Delivered', 'Failed']
 
 const badgeStyle = (status) => {
@@ -33,7 +28,7 @@ export default function SMSReport() {
  <h1 style={sectionHeader}>SMS Report</h1>
  <p style={{ color: C.muted, marginTop: 8 }}>Track message delivery logs and retry failed sends.</p>
  </div>
- <button style={btnPrimary}>Retry Failed SMS</button>
+ <button style={{ ...btnPrimary, opacity:0.55, cursor:'not-allowed' }} disabled title="Retry becomes available when provider delivery logs are connected">Retry Failed SMS</button>
  </div>
 
  <div className="super-module-card" style={{ ...card, display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 20, alignItems: 'flex-end' }}>
@@ -74,7 +69,7 @@ export default function SMSReport() {
  ))}
  {filtered.length === 0 && (
  <tr>
- <td colSpan={6} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No SMS logs match this filter.</td>
+ <td colSpan={6} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No verified SMS/WhatsApp delivery logs are available yet. The system does not display fabricated delivery records.</td>
  </tr>
  )}
  </tbody>

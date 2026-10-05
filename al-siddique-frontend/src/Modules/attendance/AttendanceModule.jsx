@@ -29,6 +29,8 @@ const transformStudent = (student) => ({
  photo: student.photo || "",
  class: student.class || "",
  section: student.section || "",
+ parent_phone: student.parent_phone || student.phone_number || '',
+ parent_whatsapp: student.parent_whatsapp || student.whatsapp_number || '',
 })
 
 const card = {
@@ -94,6 +96,7 @@ export default function AttendanceModule() {
  const [students, setStudents] = useState([]);
  const [attendance, setAttendance] = useState({});
  const [saved, setSaved] = useState(false);
+ const [notificationQueueCount, setNotificationQueueCount] = useState(0);
  const [loading, setLoading] = useState(false);
 
  const loadAttendance = async () => {
@@ -166,7 +169,8 @@ export default function AttendanceModule() {
  date: selectedDate,
  status,
  }))
- await api.post('/api/attendance/mark', { records })
+ const response = await api.post('/api/attendance/mark', { records })
+ setNotificationQueueCount(Number(response.data?.notificationQueueCount || 0))
  emitAttendanceUpdated({ date: selectedDate, count: records.length })
  setSaved(true)
  setTimeout(() => setSaved(false), 3000)
@@ -389,7 +393,7 @@ export default function AttendanceModule() {
 
  {saved && (
  <div style={{ marginBottom: 16, padding: "10px 16px", background: "rgba(48,209,88,0.1)", border: "1px solid rgba(48,209,88,0.3)", borderRadius: 10 }}>
- <span style={{ color: "#30D158", fontWeight: 600 }}> Attendance saved successfully! SMS notifications sent to absent students.</span>
+ <span style={{ color: "#30D158", fontWeight: 600 }}> Attendance saved successfully! {notificationQueueCount > 0 ? `${notificationQueueCount} parent notification${notificationQueueCount === 1 ? '' : 's'} queued.` : 'No parent notifications were queued.'}</span>
  </div>
  )}
 
@@ -494,7 +498,7 @@ export default function AttendanceModule() {
  <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 16 }}> SMS/WhatsApp Notifications</h3>
  <div style={{ marginBottom: 20, padding: "14px 18px", background: "rgba(10,132,255,0.08)", border: "1px solid rgba(10,132,255,0.2)", borderRadius: 12 }}>
  <p style={{ color: "#0A84FF", fontSize: 13, margin: 0 }}>
- ℹ When attendance is saved, SMS is automatically sent to parents of absent students via WhatsApp Business API.
+ Attendance alerts for absent/late students are queued after a successful save when a valid parent contact and messaging configuration are available. Delivery is not claimed until provider confirmation is recorded.
  </p>
  </div>
  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -504,10 +508,10 @@ export default function AttendanceModule() {
  <span style={{ fontSize: 24 }}>{s.photo}</span>
  <div>
  <div style={{ color: "var(--apex-text-secondary)", fontWeight: 600 }}>{s.name}</div>
- <div style={{ color: "var(--apex-text-tertiary)", fontSize: 12 }}>Parent: 0300-1234567</div>
+ <div style={{ color: "var(--apex-text-tertiary)", fontSize: 12 }}>Parent contact: {s.parent_phone || s.parent_whatsapp || 'Not available'}</div>
  </div>
  </div>
- <span style={{ padding: "4px 12px", background: "rgba(48,209,88,0.1)", border: "1px solid rgba(48,209,88,0.3)", borderRadius: 20, fontSize: 12, color: "#30D158", fontWeight: 600 }}>SMS Sent </span>
+ <span style={{ padding: "4px 12px", background: "var(--apex-bg-surface-solid)", border: "1px solid var(--apex-border-default)", borderRadius: 20, fontSize: 12, color: "var(--apex-text-secondary)", fontWeight: 600 }}>{s.parent_phone || s.parent_whatsapp ? 'Contact ready' : 'No contact'}</span>
  </div>
  ))}
  </div>

@@ -6,7 +6,7 @@ const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tena
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const canReadResults = adminOrServiceScope('school.results.read')
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 function portalStudentScope(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()

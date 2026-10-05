@@ -14,17 +14,29 @@ import { renderVoucherCopyHtml } from './ViewChallans'
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 const FEE_HEADS = [
- { id: 1, name: 'Monthly Fee', defaultAmount: 1500 },
- { id: 2, name: 'Exam Fee', defaultAmount: 500 },
- { id: 3, name: 'Registration Fee', defaultAmount: 1000 },
- { id: 4, name: 'Library Fee', defaultAmount: 200 },
- { id: 5, name: 'Computer Fee', defaultAmount: 300 },
- { id: 6, name: 'Sports Fee', defaultAmount: 150 },
- { id: 7, name: 'Transport Fee', defaultAmount: 800 },
+ { id: 1, name: 'Monthly Fee', defaultAmount: 0 },
+ { id: 2, name: 'Exam Fee', defaultAmount: 0 },
+ { id: 3, name: 'Registration Fee', defaultAmount: 0 },
+ { id: 4, name: 'Library Fee', defaultAmount: 0 },
+ { id: 5, name: 'Computer Fee', defaultAmount: 0 },
+ { id: 6, name: 'Sports Fee', defaultAmount: 0 },
+ { id: 7, name: 'Transport Fee', defaultAmount: 0 },
 ]
 
-const normalizeChallan = (item) => {
- const student = STUDENTS.find(s => s.id === item.student_id)
+const normalizeStudent = (item) => ({
+ id: Number(item.id),
+ gr: item.gr_number || item.gr || '',
+ name: item.name || '',
+ father: item.father_name || item.father || '',
+ class: item.class || '',
+ section: item.section || '',
+ contact: item.parent_phone || item.phone_number || item.phone || '',
+ discount: Number(item.discount || 0),
+ familyCode: item.family_code || item.familyCode || '—',
+})
+
+const normalizeChallan = (item, students = []) => {
+ const student = students.find(s => Number(s.id) === Number(item.student_id))
  return {
  id: item.id,
  voucherNo: item.challan_no || item.voucherNo || '',
@@ -36,15 +48,15 @@ const normalizeChallan = (item) => {
  section: item.section || student?.section || 'Blue',
  familyCode: item.familyCode || student?.familyCode || '—',
  contact: item.parent_phone || item.contact || student?.contact || '',
- month: item.month || '05',
- year: item.year || '2026',
+ month: item.month || '',
+ year: item.year || '',
  feeHeads: [{ name: 'Monthly Fee', amount: Number(item.amount || 0) }],
  discount: 0,
  lateFee: 0,
  total: Number(item.amount || 0),
  paid: Number(item.paid_amount || 0),
  status: item.status ? `${item.status.charAt(0).toUpperCase()}${item.status.slice(1)}` : 'Unpaid',
- dueDate: item.due_date || '2026-05-10',
+ dueDate: item.due_date || '',
  paidDate: item.paid_date || null,
  }
 }
@@ -54,58 +66,6 @@ const TEMPLATE_OPTIONS = [
  { id: 'modern', label: 'Ultra Modern' },
  { id: 'elegant', label: 'Sleek Elegant' },
 ]
-
-const STUDENTS = [
- { id: 1, gr: 'GR-001', name: 'Ahmed Raza', father: 'Muhammad Raza', class: 'Pre Nine', section: 'Blue', contact: '0300-1234567', discount: 0, familyCode: '501' },
- { id: 2, gr: 'GR-002', name: 'Fatima Noor', father: 'Noor Ahmad', class: 'Pre Nine', section: 'Fatima', contact: '0301-2345678', discount: 200, familyCode: '502' },
- { id: 3, gr: 'GR-003', name: 'Bilal Hassan', father: 'Hassan Ali', class: 'Pre Nine', section: 'Usman', contact: '0302-3456789', discount: 0, familyCode: '503' },
- { id: 4, gr: 'GR-004', name: 'Ayesha Malik', father: 'Malik Usman', class: 'Eight', section: 'Blue', contact: '0303-4567890', discount: 300, familyCode: '504' },
- { id: 5, gr: 'GR-005', name: 'Usman Tariq', father: 'Tariq Mehmood', class: 'Seven', section: 'Blue', contact: '0304-5678901', discount: 0, familyCode: '505' },
- { id: 6, gr: 'GR-006', name: 'Zainab Khalid', father: 'Khalid Hussain', class: 'Six', section: 'Blue', contact: '0305-6789012', discount: 0, familyCode: '502' },
- { id: 7, gr: 'GR-007', name: 'Hamza Sheikh', father: 'Sheikh Imran', class: 'Five', section: 'Blue', contact: '0306-7890123', discount: 500, familyCode: '506' },
- { id: 8, gr: 'GR-008', name: 'Sana Iqbal', father: 'Iqbal Ahmed', class: 'Four', section: 'Blue', contact: '0307-8901234', discount: 0, familyCode: '507' },
- { id: 9, gr: 'GR-009', name: 'Ali Nawaz', father: 'Nawaz Khan', class: 'Three', section: 'Blue', contact: '0308-9012345', discount: 0, familyCode: '508' },
- { id: 10, gr: 'GR-010', name: 'Mariam Aslam', father: 'Aslam Khan', class: 'Two', section: 'Blue', contact: '0309-0123456', discount: 200, familyCode: '509' },
-]
-
-const generateChallans = () => {
- const items = []
- let nextId = 1001
- STUDENTS.forEach(student => {
- [3, 4, 5].forEach(monthIndex => {
- const month = MONTHS[monthIndex - 1]
- const total = 1500 + (monthIndex === 4 ? 500 : 0) - student.discount
- const paid = Math.random() > 0.35 ? total : 0
- items.push({
- id: nextId,
- voucherNo: `AL-${nextId}`,
- studentId: student.id,
- student: student.name,
- father: student.father,
- gr: student.gr,
- class: student.class,
- contact: student.contact,
- month,
- year: 2026,
- feeHeads: [
- { name: 'Monthly Fee', amount: 1500 },
- ...(monthIndex === 4 ? [{ name: 'Exam Fee', amount: 500 }] : []),
- ],
- discount: student.discount,
- lateFee: 0,
- total,
- paid,
- status: paid >= total ? 'Paid' : paid > 0 ? 'Partial' : 'Unpaid',
- dueDate: `2026-0${monthIndex}-10`,
- paidDate: paid > 0 ? `2026-0${monthIndex}-05` : null,
- })
- nextId += 1
- })
- })
- return items
-}
-
-const INITIAL_CHALLANS = generateChallans()
 
 const C = {
  card: 'rgba(11,44,77,0.92)',
@@ -791,6 +751,8 @@ function FeeModule() {
  }, [location.pathname])
 
  const [challans, setChallans] = useState([])
+ const [students, setStudents] = useState([])
+ const [feeClassSettings, setFeeClassSettings] = useState([])
  const [printChallan, setPrintChallan] = useState(null)
  const [printList, setPrintList] = useState(null) // { type: 'filtered' | 'defaulters' | 'all', data: [] }
  const [selectedTemplate, setSelectedTemplate] = useState(() => getStorage()?.getItem('feeTemplate') || 'classic')
@@ -801,23 +763,31 @@ function FeeModule() {
  }, [selectedTemplate])
 
  useEffect(() => {
- async function loadFees() {
+ async function loadFeeWorkspace() {
  try {
- const response = await api.get('/api/fees')
- const items = response.data?.data || []
- setChallans(items.map(normalizeChallan))
+ const [feeRes, studentRes, settingsRes] = await Promise.all([
+ api.get('/api/fees'),
+ api.get('/api/students'),
+ api.get('/api/fees/settings').catch(() => ({ data: { data: { classSettings: [] } } })),
+ ])
+ const liveStudents = (studentRes.data?.data || []).map(normalizeStudent)
+ setStudents(liveStudents)
+ setFeeClassSettings(settingsRes.data?.data?.classSettings || [])
+ setChallans((feeRes.data?.data || []).map(item => normalizeChallan(item, liveStudents)))
  } catch (err) {
- console.error('Failed to load fees', err)
+ console.error('Failed to load fee workspace', err)
+ setStudents([])
+ setChallans([])
  }
  }
- loadFees()
+ void loadFeeWorkspace()
  }, [])
 
  const addChallan = async () => {
  try {
  const response = await api.get('/api/fees')
  const items = response.data?.data || []
- setChallans(items.map(normalizeChallan))
+ setChallans(items.map(item => normalizeChallan(item, students)))
  } catch (err) {
  console.error('Failed to reload challans', err)
  }
@@ -884,15 +854,16 @@ function FeeModule() {
  </GCard>
 
  <div className="super-module-card" style={{ paddingTop: 28 }}>
- {routeTab === 'create' && <CreateChallan onCreate={addChallan} />}
+ {routeTab === 'create' && <CreateChallan onCreate={addChallan} students={students} classOptions={classOptions} feeClassSettings={feeClassSettings} />}
  {routeTab === 'view' && (
  <ViewChallans
  challans={challans}
+ classOptions={classOptions}
  onPrint={setPrintChallan}
  onPrintList={(type, data) => setPrintList({ type, data })}
  />
  )}
- {routeTab === 'reports' && <FeeReports challans={challans} />}
+ {routeTab === 'reports' && <FeeReports challans={challans} students={students} />}
  {routeTab === 'proofs' && <ProofReview />}
  {routeTab === 'settings' && (
  <FeeSettings
@@ -1016,20 +987,36 @@ function FeeSettings({ selectedTemplate, onTemplateChange }) {
  )
 }
 
-function CreateChallan({ onCreate }) {
- const [selectedClass, setSelectedClass] = useState('Pre Nine')
+function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
+ const now = new Date()
+ const [selectedClass, setSelectedClass] = useState(classOptions[0] || '')
  const [selectedStudent, setSelectedStudent] = useState('')
- const [selectedMonth, setSelectedMonth] = useState('May')
- const [selectedYear, setSelectedYear] = useState('2026')
- const [dueDate, setDueDate] = useState('2026-05-10')
+ const [selectedMonth, setSelectedMonth] = useState(MONTHS[now.getMonth()])
+ const [selectedYear, setSelectedYear] = useState(String(now.getFullYear()))
+ const [dueDate, setDueDate] = useState('')
  const [heads, setHeads] = useState({ 1: true, 2: false, 3: false, 4: false, 5: false, 6: false, 7: false })
  const [amounts, setAmounts] = useState(FEE_HEADS.reduce((acc, head) => ({ ...acc, [head.id]: head.defaultAmount }), {}))
  const [discount, setDiscount] = useState(0)
  const [lateFee, setLateFee] = useState(0)
  const [saved, setSaved] = useState(false)
 
- const availableStudents = STUDENTS.filter(student => student.class === selectedClass)
- const student = STUDENTS.find(student => student.id === Number(selectedStudent))
+ useEffect(() => {
+ if (classOptions.length && !classOptions.includes(selectedClass)) {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setSelectedClass(classOptions[0])
+ setSelectedStudent('')
+ }
+ }, [classOptions, selectedClass])
+
+ useEffect(() => {
+ const classSetting = feeClassSettings.find(item => item.class_name === selectedClass)
+ const monthlyFee = Number(classSetting?.monthly_fee || 0)
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setAmounts(prev => ({ ...prev, 1: monthlyFee }))
+ }, [feeClassSettings, selectedClass])
+
+ const availableStudents = students.filter(student => student.class === selectedClass)
+ const student = students.find(student => student.id === Number(selectedStudent))
 
  const total = useMemo(() => {
  const subtotal = FEE_HEADS.filter(head => heads[head.id]).reduce((sum, head) => sum + Number(amounts[head.id] || 0), 0)
@@ -1037,7 +1024,7 @@ function CreateChallan({ onCreate }) {
  }, [heads, amounts, discount, lateFee])
 
  const handleSubmit = async () => {
- if (!student) return
+ if (!student || !dueDate) return
  try {
  await api.post('/api/fees', {
  student_id: student.id,
@@ -1045,7 +1032,6 @@ function CreateChallan({ onCreate }) {
  year: Number(selectedYear),
  amount: total,
  due_date: dueDate,
- created_by: 1,
  })
  setSaved(true)
  setTimeout(() => setSaved(false), 2000)
@@ -1096,7 +1082,7 @@ function CreateChallan({ onCreate }) {
  <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 2 — Billing Period</h2>
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 16 }}>
  <div><Lbl>Month</Lbl><Sel value={selectedMonth} onChange={e => setSelectedMonth(e.target.value)}>{MONTHS.map(item => <option key={item} value={item}>{item}</option>)}</Sel></div>
- <div><Lbl>Year</Lbl><Sel value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>{['2025', '2026', '2027'].map(year => <option key={year} value={year}>{year}</option>)}</Sel></div>
+ <div><Lbl>Year</Lbl><Sel value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>{[now.getFullYear() - 1, now.getFullYear(), now.getFullYear() + 1].map(year => <option key={year} value={String(year)}>{year}</option>)}</Sel></div>
  <div><Lbl>Due Date</Lbl><Inp type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} /></div>
  </div>
  </GCard>
@@ -1157,7 +1143,7 @@ function CreateChallan({ onCreate }) {
  )
 }
 
-function ViewChallans({ challans, onPrint, onPrintList }) {
+function ViewChallans({ challans, classOptions, onPrint, onPrintList }) {
  const [classFilter, setClassFilter] = useState('All')
  const [monthFilter, setMonthFilter] = useState('All')
  const [statusFilter, setStatusFilter] = useState('All')
@@ -1254,10 +1240,10 @@ function ViewChallans({ challans, onPrint, onPrintList }) {
  )
 }
 
-function FeeReports({ challans }) {
+function FeeReports({ challans, students }) {
  const paidChallans = challans.filter(challan => challan.status === 'Paid')
  const unpaidChallans = challans.filter(challan => challan.status !== 'Paid')
- const defaulters = STUDENTS.filter(student => unpaidChallans.some(challan => challan.studentId === student.id))
+ const defaulters = students.filter(student => unpaidChallans.some(challan => Number(challan.studentId) === Number(student.id)))
 
  const totalCollected = paidChallans.reduce((sum, c) => sum + c.total, 0)
  const totalPending = unpaidChallans.reduce((sum, c) => sum + (c.total - c.paid), 0)

@@ -377,6 +377,7 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       message: `${saved} records save ho gaye`,
       savedCount: saved,
       requestedCount: normalizedRecords.length,
+      notificationQueueCount: toNotify.length,
     })
 
     for (const item of toNotify) {
