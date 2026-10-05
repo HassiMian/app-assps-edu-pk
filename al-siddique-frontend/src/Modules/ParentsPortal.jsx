@@ -6,11 +6,6 @@ import { CheckCircle, Award, CreditCard, BarChart2, AlertCircle, Eye, X, Refresh
 
 const SECTIONS = ['Overview', 'Attendance', 'Exams & Results', 'Fee Status', 'Messages']
 
-const INIT_MESSAGES = [
- { id: 1, from: 'School Administration', subject: 'Welcome to the Parent Portal', date: '2026-05-01', read: false, body: 'Welcome to Al Siddique Smart School Parent Portal. You can monitor your child\'s attendance, exam results, and fee status in real time.' },
- { id: 2, from: 'Principal', subject: 'Annual Sports Day Notice', date: '2026-05-02', read: true, body: 'Annual Sports Day will be held on 2026-05-20. All students must participate. Please ensure your child is present.' },
-]
-
 //  Helpers 
 function normalizeClass(v) { return String(v || '').replace(/^Class\s+/i, '').trim() }
 
@@ -29,14 +24,6 @@ const gradeColor = g =>
  g === 'A+' ? '#30D158' : g === 'A' ? C.green : g === 'B+' ? C.gold :
  g === 'B' ? '#FF9F0A' : g === 'C' ? '#0A84FF' : '#FF375F'
 
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
-}
-
 //  Main Component 
 export default function ParentsPortal() {
  const { user } = useAuth()
@@ -54,7 +41,7 @@ export default function ParentsPortal() {
  const [exams, setExams] = useState([])
  const [results, setResults] = useState([])
  const [fees, setFees] = useState([])
- const [messages, setMessages] = useState(INIT_MESSAGES)
+ const [messages, setMessages] = useState([])
  const [openMsg, setOpenMsg] = useState(null)
  const [error, setError] = useState('')
 
@@ -64,6 +51,7 @@ export default function ParentsPortal() {
  function readMsg(msg) {
  setOpenMsg(msg)
  setMessages(p => p.map(m => m.id === msg.id ? { ...m, read: true } : m))
+ if (!msg.read) void api.put(`/api/notify/${msg.id}/read`).catch(() => {})
  }
 
  //  Load real SaaS data 
@@ -84,12 +72,23 @@ export default function ParentsPortal() {
  const grNumber = myRecord?.gr_number
  const cls = normalizeClass(myRecord?.class || user?.class)
 
- // 2. Attendance
- const rawAtt = JSON.parse(getStorage()?.getItem('al_siddique_demo_attendance') || '[]')
- setAttRecords(rawAtt.filter(a =>
+ // 2. Attendance — scoped backend source of truth
+ const attendanceRes = await api.get('/api/attendance')
+ setAttRecords((attendanceRes.data?.data || []).filter(a =>
  String(a.student_id) === String(numericId) ||
- (grNumber && String(a.student_id) === String(grNumber))
+ (grNumber && String(a.gr_number || '') === String(grNumber))
  ))
+
+ // 2b. Notification inbox — real school notifications only
+ const inboxRes = await api.get('/api/notify/inbox').catch(() => ({ data: { data: [] } }))
+ setMessages((inboxRes.data?.data || []).map(item => ({
+ id: item.id,
+ from: item.metadata?.sender || item.recipient_role || 'School',
+ subject: item.title || 'School Notification',
+ date: item.sent_at ? new Date(item.sent_at).toLocaleDateString('en-GB') : '',
+ read: !item.unread,
+ body: item.message || '',
+ })))
 
  // 3. Exams for child's class
  const examRes = await api.get('/api/exams')
@@ -161,7 +160,7 @@ export default function ParentsPortal() {
  const childClass = studentRecord?.class ? `Class ${normalizeClass(studentRecord.class)}` : (user?.class || '—')
 
  return (
- <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+ <div style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
  <div style={{ maxWidth: 1220, margin: '0 auto', display: 'grid', gap: 22 }}>
 
  {/*  Header  */}

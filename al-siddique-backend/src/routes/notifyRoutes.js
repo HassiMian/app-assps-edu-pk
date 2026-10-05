@@ -369,6 +369,33 @@ router.get('/inbox', protect, async (req, res) => {
   }
 })
 
+
+// PUT /api/notify/:id/read
+router.put('/:id/read', protect, async (req, res) => {
+  try {
+    await ensureNotificationColumns()
+    const schoolId = currentSchoolId(req)
+    const recipientRole = req.user?.role || null
+    const scope = scopedNotificationPredicate(recipientRole, 2)
+    const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
+    const idParam = params.length + 1
+    const result = await pool.query(`
+      UPDATE notification_log n
+      SET read_at = COALESCE(read_at, NOW())
+      WHERE n.school_id = $1
+        ${scope.clause}
+        AND n.id = $${idParam}
+      RETURNING id, read_at
+    `, [...params, Number(req.params.id)])
+
+    if (!result.rowCount) return res.status(404).json({ success: false, message: 'Notification not found.' })
+    res.json({ success: true, data: result.rows[0] })
+  } catch (err) {
+    console.error('Notification read error:', err)
+    res.status(500).json({ success: false, message: 'Failed to update notification.' })
+  }
+})
+
 // PUT /api/notify/read-all
 router.put('/read-all', protect, async (req, res) => {
   try {
