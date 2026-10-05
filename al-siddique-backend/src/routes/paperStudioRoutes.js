@@ -4,6 +4,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
+const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
 
 router.use(protect, requireRoles('super_admin','admin','principal','teacher'))
@@ -83,6 +84,19 @@ router.get('/papers/:id/revisions/:revision', async (req,res) => {
     const status=Number(err.status)||500
     if(status>=500)console.error('V6-D historical read failed:',err.message)
     return res.status(status).json({success:false,code:err.code||'REVISION_READ_FAILED',message:status>=500?'Revision could not be verified.':err.message})
+  }
+})
+
+router.post('/papers/:id/delivery-manifest', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const manifest=await buildDeliveryManifest({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,revision:Number(req.body?.revision),snapshotHash:req.body?.snapshotHash})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data:manifest})
+  } catch(err) {
+    const status=Number(err?.status)||500
+    if(status>=500)console.error('Paper Studio delivery manifest error:',err.message)
+    return res.status(status).json({success:false,code:err?.code||'DELIVERY_MANIFEST_FAILED',message:status>=500?'Delivery manifest could not be created.':err.message})
   }
 })
 
