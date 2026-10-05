@@ -373,7 +373,10 @@ test('TEST 45: Source Immutability (V12, V13, B1 Manifest SHA-256 unchanged)', (
   const currentV13Buf = fs.readFileSync(v13Path)
   const currentManifestBuf = fs.readFileSync(manifestPath)
 
-  const curV12Sha = crypto.createHash('sha256').update(currentV12Buf).digest('hex')
+  // V12 lock is explicitly LF-normalized because its first lock was captured from a CRLF Windows checkout.
+  // This preserves content identity across Git's platform EOL materialization without changing the protected JSON.
+  const currentV12Normalized = Buffer.from(currentV12Buf.toString('utf8').replace(/\r\n/g, '\n'), 'utf8')
+  const curV12Sha = crypto.createHash('sha256').update(currentV12Normalized).digest('hex')
   const curV13Sha = crypto.createHash('sha256').update(currentV13Buf).digest('hex')
   const curManifestSha = crypto.createHash('sha256').update(currentManifestBuf).digest('hex')
 
