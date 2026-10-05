@@ -20,6 +20,8 @@ Verifier requirements:
 
 Any manifest tamper, artifact tamper, missing coordinate, stale build ID, source commit drift or renderer file drift automatically makes `canonicalRendererParityApproved=false` even if the environment approval flag remains set.
 
-Current reviewed evidence was generated from the exact preview artifact built from Connect source commit `1e5e87457599e5bb437cba3f2bc8340e248f2bd0`, build ID `DpeUflTtgNJ8Hii7M-no0`. F4 evidence manifest SHA-256: `6fb59fa7f7c7418de45e43e2b95feb0ca83edfc85112818e18b75bb3f7e4306f` under the root-only secure archive. Golden run: English/Urdu/Dual 3/3 PASS. Synthetic fixtures were removed.
+Current reviewed evidence was generated from the exact preview artifact built from Connect source commit `1e5e87457599e5bb437cba3f2bc8340e248f2bd0`, build ID `wmFkqb-UGlGoFMxeBjN84`. F4 evidence manifest SHA-256: `036ac6f6c02fc97d94342346bb15fb3044a525da95e0fde22aea09d26fb397c0` under the root-only secure archive. Golden run: English/Urdu/Dual 3/3 PASS. Synthetic fixtures were removed.
 
 This software parity approval does not claim physical-printer, iPhone/Samsung hardware or human typography signoff. It only closes the canonical renderer software parity gate. Canonical write remains disabled until the separate curriculum publisher and explicit registry-write gates are approved.
+
+Final approval evidence was regenerated after deployment through the real public `https://api.assps.edu.pk` path; archive `/root/secure-archive/apex-paper-v6f4-public-20261005/`. Public same-origin `/api/auth/me` was 200 and four-role authenticated shell regression passed before the public golden run.
