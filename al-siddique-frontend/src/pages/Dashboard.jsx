@@ -3,7 +3,6 @@ import {
   Activity,
   ArrowUpRight,
   BarChart3,
-  Book,
   Calendar,
   CheckCircle2,
   CreditCard,
@@ -14,7 +13,6 @@ import {
   MessageCircle,
   ShieldAlert,
   Sparkles,
-  Trophy,
   UserPlus,
   Users,
   Zap,
@@ -26,15 +24,7 @@ import { BarChart, ChartLegend, DonutChart } from '../components/Charts'
 import SchoolHero from '../components/SchoolHero'
 import { AttendanceStatsCard, AdmissionWithdrawalStatsCard } from '../components/dashboard/DashboardAnalyticsCards'
 import { onAttendanceUpdated } from '../utils/attendanceEvents'
-
-const ATTENDANCE_DATA = [
-  { day: 'Mon', pct: 94 },
-  { day: 'Tue', pct: 88 },
-  { day: 'Wed', pct: 78 },
-  { day: 'Thu', pct: 90 },
-  { day: 'Fri', pct: 60 },
-  { day: 'Sat', pct: 72 },
-]
+import { useAcademicStore } from '../services/useAcademicStore'
 
 const QUICK_ACTIONS = [
   { label: 'Add Student', icon: UserPlus, path: '/students?add=1', color: '#65A6FF', grad: 'linear-gradient(135deg,#65A6FF,#3F86F7)' },
@@ -45,13 +35,6 @@ const QUICK_ACTIONS = [
   { label: 'View Reports', icon: BarChart3, path: '/students/reports', color: '#64D2FF', grad: 'linear-gradient(135deg,#64D2FF,#2299CC)' },
   { label: 'Send Message', icon: MessageCircle, path: '/messages', color: '#65A6FF', grad: 'linear-gradient(135deg,#65A6FF,#3F86F7)' },
   { label: 'AI Analytics', icon: Zap, path: '/ai-analytics', color: '#42CFC2', grad: 'linear-gradient(135deg,#42CFC2,#20B8AD)' },
-]
-
-const EVENTS = [
-  { title: 'Mid-Term Exams', date: 'May 15, 2026', icon: Book, color: '#BF5AF2' },
-  { title: 'Fee Due Date', date: 'May 10, 2026', icon: CreditCard, color: '#C8991A' },
-  { title: 'Parent Meeting', date: 'May 20, 2026', icon: MessageCircle, color: '#0A84FF' },
-  { title: 'Sports Day', date: 'May 25, 2026', icon: Trophy, color: '#30D158' },
 ]
 
 const glass = {
@@ -216,6 +199,7 @@ function printBirthdayCertificate(student, schoolName) {
 
 export default function Dashboard() {
   const branding = useTenantBranding()
+  const { classNames } = useAcademicStore()
   const schoolName = branding?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
   const navigate = useNavigate()
   const [date, setDate] = useState(new Date())
@@ -225,17 +209,20 @@ export default function Dashboard() {
   const [classData, setClassData] = useState([])
   const [loading, setLoading] = useState(true)
   const [dashApi, setDashApi] = useState(null)
+  const [upcomingEvents, setUpcomingEvents] = useState([])
 
   const fetchAll = useCallback(async (silent = false) => {
     try {
       if (!silent) setLoading(true)
-      const [studentRes, dashRes] = await Promise.all([
+      const [studentRes, dashRes, eventRes] = await Promise.all([
         api.get('/api/students').catch(() => ({ data: { data: [] } })),
         api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
+        api.get('/api/events/upcoming').catch(() => ({ data: { data: [] } })),
       ])
       const allStudents = studentRes.data.data || []
       const dash = dashRes.data || {}
       setDashApi(dash)
+      setUpcomingEvents(Array.isArray(eventRes.data?.data) ? eventRes.data.data : [])
 
       const presentCount = Number(dash.today_present ?? 0)
       const attPct = Number(dash.today_pct ?? (allStudents.length > 0 ? Math.round((presentCount / allStudents.length) * 100) : 0))
@@ -252,14 +239,12 @@ export default function Dashboard() {
       const empRes = await api.get('/api/employees').catch(() => ({ data: { data: [] } }))
       const empCount = (empRes.data.data || []).length
 
-      const classCounts = {}
+      const classCounts = new Map(classNames.map((name) => [name, 0]))
       allStudents.forEach((student) => {
-        const className = student.class || 'Unassigned'
-        classCounts[className] = (classCounts[className] || 0) + 1
+        const className = String(student.class || '').trim()
+        if (classCounts.has(className)) classCounts.set(className, classCounts.get(className) + 1)
       })
-      const classArr = Object.entries(classCounts)
-        .map(([name, count]) => ({ name, count }))
-        .sort((a, b) => String(a.name).localeCompare(String(b.name)))
+      const classArr = classNames.map((name) => ({ name, count: classCounts.get(name) || 0 }))
 
       setStats({
         totalStudents: allStudents.length,
@@ -278,7 +263,7 @@ export default function Dashboard() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [classNames])
 
   useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 60000)
@@ -348,6 +333,12 @@ export default function Dashboard() {
     const parts = studentDobParts(student)
     return parts && parts.day === date.getDate() && parts.month === date.getMonth()
   })
+  const weeklyAttendance = Array.isArray(dashApi?.weekly_attendance) ? dashApi.weekly_attendance : []
+  const hasWeeklyAttendance = weeklyAttendance.some((day) => Number(day.total || 0) > 0)
+  const dashboardEvents = upcomingEvents.slice(0, 4).map((event) => ({
+    ...event,
+    dateLabel: event.event_date ? new Date(event.event_date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : 'Date not set',
+  }))
 
   return (
     <div className="super-dashboard-shell">
@@ -617,7 +608,7 @@ export default function Dashboard() {
                 <GraduationCap size={16} color="#C8991A" />
                 <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 15, fontWeight: 800, margin: 0 }}>Enrolment Analysis</h3>
               </div>
-              <span style={{ color: '#C8991A', fontSize: 12, fontWeight: 800 }}>TOTAL: {stats?.totalStudents || 0}</span>
+              <span style={{ color: 'var(--apex-action-primary)', fontSize: 12, fontWeight: 800 }}>TOTAL: {stats?.totalStudents || 0}</span>
             </div>
             {stats && (() => {
               const boys = Math.round((stats.totalStudents || 100) * 0.58)
@@ -655,12 +646,17 @@ export default function Dashboard() {
             </div>
             <p style={{ position: 'relative', zIndex: 1, color: 'var(--apex-text-tertiary)', fontSize: 12, margin: '0 0 20px' }}>Weekly participation rate</p>
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'flex-end', gap: 10, height: 100 }}>
-              {ATTENDANCE_DATA.map((day) => (
-                <div key={day.day} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                  <div style={{ width: '100%', height: `${day.pct}%`, borderRadius: 4, background: `linear-gradient(to top,${day.pct >= 90 ? '#30D158' : '#0A84FF'},rgba(255,255,255,0.08))`, boxShadow: day.pct >= 90 ? '0 4px 12px rgba(48,209,88,0.3)' : '0 4px 12px rgba(10,132,255,0.2)' }} />
-                  <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 10, fontWeight: 700 }}>{day.day}</span>
-                </div>
-              ))}
+              {hasWeeklyAttendance ? weeklyAttendance.map((day) => {
+                const pct = Number(day.percent || 0)
+                return (
+                  <div key={day.date || day.day} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                    <div style={{ width: '100%', height: `${pct}%`, minHeight: 8, borderRadius: 4, background: `linear-gradient(to top,${pct >= 90 ? 'var(--apex-action-success)' : 'var(--apex-action-primary)'},color-mix(in srgb, var(--apex-bg-surface-solid) 82%, transparent))`, boxShadow: 'var(--apex-shadow-sm)' }} />
+                    <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 10, fontWeight: 700 }}>{day.day}</span>
+                  </div>
+                )
+              }) : (
+                <div style={{ width: '100%', alignSelf: 'center', textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 12 }}>No attendance has been recorded for the last 7 days.</div>
+              )}
             </div>
           </Panel>
 
@@ -776,26 +772,25 @@ export default function Dashboard() {
               <h3 style={{ color: 'var(--apex-text-primary)', fontSize: 16, fontWeight: 800, margin: 0 }}>Upcoming Events</h3>
             </div>
             <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {EVENTS.map((event) => {
-                const Icon = event.icon
-                return (
-                  <div key={event.title} className="super-action" style={{ '--accent': event.color, display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', background: 'rgba(255,255,255,0.03)', borderRadius: 14, border: '1px solid rgba(255,255,255,0.08)', cursor: 'default' }}>
-                    <div style={{ width: 40, height: 40, borderRadius: 12, background: `linear-gradient(135deg,${event.color}30,${event.color}10)`, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `1px solid ${event.color}25`, flexShrink: 0 }}>
-                      <Icon size={16} color={event.color} />
-                    </div>
-                    <div>
-                      <div style={{ color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 2 }}>{event.title}</div>
-                      <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>{event.date}</div>
-                    </div>
+              {dashboardEvents.length ? dashboardEvents.map((event) => (
+                <div key={event.id || `${event.title}-${event.event_date}`} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 14, border: '1px solid var(--apex-border-subtle)' }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 12, background: 'color-mix(in srgb, var(--apex-action-primary) 8%, var(--apex-bg-surface-solid))', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--apex-border-default)', flexShrink: 0 }}>
+                    <Calendar size={16} color="var(--apex-action-primary)" />
                   </div>
-                )
-              })}
+                  <div>
+                    <div style={{ color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 2 }}>{event.title}</div>
+                    <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>{event.dateLabel}</div>
+                  </div>
+                </div>
+              )) : (
+                <div style={{ padding: '18px 0', color: 'var(--apex-text-tertiary)', fontSize: 12 }}>No upcoming events in the next 30 days.</div>
+              )}
             </div>
 
-            <div style={{ position: 'relative', zIndex: 1, marginTop: 18, padding: 16, background: 'linear-gradient(135deg,rgba(200,153,26,0.1),rgba(200,153,26,0.04))', border: '1px solid var(--apex-border-default)', borderRadius: 14 }}>
+            <div style={{ position: 'relative', zIndex: 1, marginTop: 18, padding: 16, background: 'color-mix(in srgb, var(--apex-action-primary) 5%, var(--apex-bg-surface-solid))', border: '1px solid var(--apex-border-default)', borderRadius: 14 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
-                <ShieldAlert size={13} color="#C8991A" />
-                <h4 style={{ color: '#C8991A', fontSize: 11, fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Today's Summary</h4>
+                <ShieldAlert size={13} color="var(--apex-action-primary)" />
+                <h4 style={{ color: 'var(--apex-action-primary)', fontSize: 11, fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Today's Summary</h4>
               </div>
               {[
                 ['Total Students', stats ? String(stats.totalStudents) : '-'],

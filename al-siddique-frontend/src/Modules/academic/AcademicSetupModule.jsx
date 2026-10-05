@@ -23,6 +23,7 @@ function getStorage() {
 }
 
 const DEFAULT_ACADEMIC = {
+ periodsPerDay: 8,
  localities: ['Rayya Khas', 'Tharpal Sharif', 'Garoowal', 'Matteke', 'Fattoke', 'Jeewan Bhinder', 'Kulla Mandiala', 'Baddomalhi', 'Narowal', 'Lahore'],
  classes: [
  { level:'starter', name:'Starter', active:true, sections:['Blue'] },

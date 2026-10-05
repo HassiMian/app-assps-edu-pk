@@ -5,27 +5,6 @@ import { usePaperStore } from '../Paper-Generator/usePaperStore'
 // Dynamic lists will be used from the store.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const TEACHERS = ['Mr. Aamir', 'Ms. Saba', 'Mr. Bilal', 'Ms. Hira', 'Mr. Naveed', 'Ms. Farah', 'Mr. Qasim', 'Ms. Sana']
-const ACADEMIC_KEY = 'al_siddique_academic'
-
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
-}
-
-const loadAcademicPeriods = () => {
- try {
- const saved = JSON.parse(getStorage()?.getItem(ACADEMIC_KEY) || '{}')
- return Number(saved.periodsPerDay || 8)
- } catch {
- return 8
- }
-}
-
-
-
 const escapeHtml = (value) => String(value || '')
   .replaceAll('&', '&')
   .replaceAll('<', '&lt;')
@@ -167,7 +146,7 @@ const inputStyle = {
 }
 
 function TimetableModule() {
- const { classNames: classOptions, activeClasses, subjectsForClass, allSections } = useAcademicStore()
+ const { classNames: classOptions, activeClasses, subjectsForClass, allSections, periodsPerDay } = useAcademicStore()
  const { paperSettings } = usePaperStore()
  
  const [schoolClass, setSchoolClass] = useState(classOptions[0] || 'Starter')
@@ -177,9 +156,9 @@ function TimetableModule() {
  const subjectOptions = selectedAcademicClass ? subjectsForClass(selectedAcademicClass.level) : ['English']
  
  const [section, setSection] = useState(sectionOptions[0] || 'A')
- const [numPeriods, setNumPeriods] = useState(loadAcademicPeriods)
+ const [numPeriods, setNumPeriods] = useState(periodsPerDay)
  const [assignments, setAssignments] = useState(() => {
- const initialPeriods = loadAcademicPeriods()
+ const initialPeriods = periodsPerDay
  const initial = {}
  DAYS.forEach(day => {
  initial[day] = {}
@@ -208,6 +187,10 @@ function TimetableModule() {
  useEffect(() => {
  if (sectionOptions.length && !sectionOptions.includes(section)) setSection(sectionOptions[0])
  }, [sectionOptions, section])
+
+ useEffect(() => {
+ if (numPeriods !== periodsPerDay) setNumPeriods(periodsPerDay)
+ }, [periodsPerDay, numPeriods])
 
  const handleChange = (day, period, key, value) => {
  setAssignments(prev => ({

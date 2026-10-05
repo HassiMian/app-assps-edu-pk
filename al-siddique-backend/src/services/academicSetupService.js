@@ -1,5 +1,6 @@
 const DEFAULT_ACADEMIC_SETUP = Object.freeze({
   localities: ['Rayya Khas', 'Tharpal Sharif', 'Garoowal', 'Matteke', 'Fattoke', 'Jeewan Bhinder', 'Kulla Mandiala', 'Baddomalhi', 'Narowal', 'Lahore'],
+  periodsPerDay: 8,
   classes: [
     { level: 'starter', name: 'Starter', active: true, sections: ['Blue'] },
     { level: 'mover', name: 'Mover', active: true, sections: ['Blue'] },
@@ -42,6 +43,8 @@ function validateAcademicSetup(input = {}) {
 
   const errors = []
   const classes = Array.isArray(input.classes) ? input.classes : []
+  const periodsPerDayRaw = Number(input.periodsPerDay ?? 8)
+  const periodsPerDay = Number.isInteger(periodsPerDayRaw) ? Math.min(12, Math.max(1, periodsPerDayRaw)) : 8
   const subjects = Array.isArray(input.subjects) ? input.subjects : []
   const localities = uniqueStrings(input.localities || [], 120).slice(0, 250)
 
@@ -89,6 +92,7 @@ function validateAcademicSetup(input = {}) {
     errors,
     value: {
       localities,
+      periodsPerDay,
       classes: normalizedClasses,
       subjects: normalizedSubjects,
     },

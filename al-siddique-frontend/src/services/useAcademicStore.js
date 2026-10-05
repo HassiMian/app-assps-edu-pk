@@ -12,6 +12,7 @@ function getStorage() {
 }
 
 const DEFAULT_ACADEMIC = {
+ periodsPerDay: 8,
  localities: ['Rayya Khas', 'Tharpal Sharif', 'Garoowal', 'Matteke', 'Fattoke', 'Jeewan Bhinder', 'Kulla Mandiala', 'Baddomalhi', 'Narowal', 'Lahore'],
  classes: [
  { level: 'starter', name: 'Starter', active: true, sections: ['Blue'] },
@@ -277,6 +278,7 @@ export function useAcademicStore() {
  // Convenient arrays for dropdowns and UI components
  const classNames = activeClasses.map(c => c.name)
  const subjectNames = data.subjects.map(s => s.name)
+ const periodsPerDay = Number.isInteger(Number(data.periodsPerDay)) ? Math.min(12, Math.max(1, Number(data.periodsPerDay))) : 8
  const allSections = ['All', ...new Set(activeClasses.flatMap(c => c.sections || []))]
 
  function subjectsForClass(classIdentifier) {
@@ -304,6 +306,7 @@ export function useAcademicStore() {
  subjects: data.subjects, 
  classNames,
  subjectNames,
+ periodsPerDay,
  allSections,
  subjectsForClass,
  sectionsForClass,
