@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import { Key } from 'lucide-react'
 import Portal from '../../components/Portal'
 import api from '../../services/api'
@@ -10,10 +10,10 @@ import PhotoUploadAI from '../../components/PhotoUploadAI'
 
 // Removed hardcoded CLASSES and SECTIONS
 const FEE_HEADS = ['Monthly Fee', 'Exam Fee', 'Registration Fee', 'Library Fee', 'Transport Fee']
-const DEFAULT_AMOUNTS = { 'Monthly Fee': 1500, 'Exam Fee': 500, 'Registration Fee': 1000, 'Library Fee': 200, 'Transport Fee': 800 }
+const DEFAULT_AMOUNTS = { 'Monthly Fee': 0, 'Exam Fee': 0, 'Registration Fee': 0, 'Library Fee': 0, 'Transport Fee': 0 }
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
-const blank = { name: '', father_name: '', mother_name: '', father_cnic: '', father_occupation: '', locality: '', studentClass: 'Starter', section: 'Blue', date_of_birth: '', parent_phone: '', parent_whatsapp: '', b_form_number: '', blood_group: '', religion: '', previous_school: '', gender: 'male', address: '', photo: null }
+const blank = { name: '', father_name: '', mother_name: '', father_cnic: '', father_occupation: '', locality: '', studentClass: '', section: '', date_of_birth: '', parent_phone: '', parent_whatsapp: '', b_form_number: '', blood_group: '', religion: '', previous_school: '', gender: 'male', address: '', photo: null }
 
 import { renderCanonicalAdmissionFormHtml } from '../../services/canonicalDocumentTemplates'
 
@@ -27,15 +27,17 @@ function printAdmissionForm(student, school) {
 export default function AdmissionsModule() {
  const { classNames, sectionsForClass, localities } = useAcademicStore()
  const { paperSettings } = usePaperStore()
- const safeClassNames = Array.isArray(classNames) && classNames.length ? classNames : ['Starter']
+ const safeClassNames = Array.isArray(classNames) ? classNames : []
  const safeLocalities = Array.isArray(localities) ? localities : []
  const safeSectionsForClass = (className) => {
  const sections = sectionsForClass(className)
  return Array.isArray(sections) ? sections : []
  }
+ const defaultClass = safeClassNames[0] || ''
+ const defaultSection = safeSectionsForClass(defaultClass)[0] || ''
  const [activeTab, setActiveTab] = useState('form') // 'form' | 'applications'
  const [step, setStep] = useState('form') // 'form' | 'fee' | 'done'
- const [form, setForm] = useState(blank)
+ const [form, setForm] = useState(() => ({ ...blank, studentClass: defaultClass, section: defaultSection }))
  const [loading, setLoading] = useState(false)
  const [error, setError] = useState('')
  const [admitted, setAdmitted] = useState(null)
@@ -51,6 +53,34 @@ export default function AdmissionsModule() {
  const [feeError, setFeeError] = useState('')
 
  const [policyOpen, setPolicyOpen] = useState(false)
+
+ useEffect(() => {
+ if (!form.studentClass) return
+ const rawSections = sectionsForClass(form.studentClass)
+ const validSections = Array.isArray(rawSections) ? rawSections : []
+ if (validSections.length && !validSections.includes(form.section)) {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setForm(prev => ({ ...prev, section: validSections[0] }))
+ }
+ }, [form.studentClass, form.section, sectionsForClass])
+
+ useEffect(() => {
+ if (!form.studentClass) return
+ let cancelled = false
+ async function loadClassFee() {
+ try {
+ const response = await api.get('/api/fees/settings')
+ const list = response.data?.data?.classSettings || []
+ const found = list.find(item => item.class_name === form.studentClass && item.active !== false)
+ const monthlyFee = Number(found?.monthly_fee || 0)
+ if (!cancelled) setFeeAmounts(prev => ({ ...prev, 'Monthly Fee': monthlyFee }))
+ } catch {
+ if (!cancelled) setFeeAmounts(prev => ({ ...prev, 'Monthly Fee': 0 }))
+ }
+ }
+ void loadClassFee()
+ return () => { cancelled = true }
+ }, [form.studentClass])
 
  // Website applications state
  const [applications, setApplications] = useState([])
@@ -124,6 +154,10 @@ export default function AdmissionsModule() {
 
  async function handleSubmitAdmission(e) {
  e.preventDefault()
+ if (!form.studentClass || !form.section) {
+ setError('Select a valid class and section from Academic Setup before admission.')
+ return
+ }
  setLoading(true)
  setError('')
  try {
@@ -136,7 +170,6 @@ export default function AdmissionsModule() {
  parent_phone: form.parent_phone, parent_whatsapp: form.parent_whatsapp,
  b_form_number: form.b_form_number, blood_group: form.blood_group, religion: form.religion, previous_school: form.previous_school,
  gender: form.gender, address: form.address,
- gr_number: `GR-${Math.floor(1000 + Math.random() * 9000)}`,
  photo: form.photo || null,
  send_credentials: sendCredentials
  })
@@ -154,15 +187,18 @@ export default function AdmissionsModule() {
   setFeeSaving(true)
   setFeeError('')
   try {
-  await api.post('/api/fees', {
+  const feeResponse = await api.post('/api/fees', {
   student_id: admitted.id,
   month: feeMonth, year: Number(feeYear),
   amount: feeTotal,
   due_date: feeDueDate || null,
+  discount: Number(feeDiscount || 0),
   })
+  const createdChallan = feeResponse.data?.data || {}
   const challanToPrint = {
-  id: admitted.id,
-  challan_no: admitted.gr_number || `CH-${Math.floor(100000 + Math.random() * 900000)}`,
+  ...createdChallan,
+  id: createdChallan.id || admitted.id,
+  challan_no: createdChallan.challan_no || '',
   student_id: admitted.id,
   name: admitted.name,
   father_name: admitted.father_name,
@@ -197,10 +233,10 @@ export default function AdmissionsModule() {
   }
 
  function skipChallan() { setStep('done') }
- function resetAll() { setStep('form'); setForm(blank); setAdmitted(null); setError(''); setFeeError(''); setGeneratedCredentials(null); }
+ function resetAll() { setStep('form'); setForm({ ...blank, studentClass: defaultClass, section: defaultSection }); setAdmitted(null); setError(''); setFeeError(''); setGeneratedCredentials(null); }
 
  return (
- <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+ <div style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
  <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gap: 22 }}>
 
  {/* Policy Modal */}
