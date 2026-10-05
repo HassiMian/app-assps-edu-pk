@@ -5,6 +5,7 @@ const {createHash}=require('node:crypto')
 const {getProjectedPaper}=require('../paperStudioProjectionService')
 const {readGuardedRevision,digest}=require('./paperVaultRevisionV6D')
 const {reviewPortalPaperDocument}=require('./portalDocumentBoundaryV6C')
+const {reviewNativePresentation}=require('./nativePresentationPolicyV6E2')
 
 const failure=(status,message,code)=>Object.assign(new Error(message),{status,code})
 const stableHash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex')
@@ -84,16 +85,19 @@ async function buildDeliveryManifest(args){
   const inventory=review.family==='legacy-connect-vault'?legacyQuestionInventory(bound.document):canonicalQuestionInventory(bound.document)
   const online=onlineEligibility(inventory)
   const sourceValid=!['SOURCE_INVALID','UNKNOWN_DISCRIMINATOR','UNSUPPORTED'].includes(review.reviewStatus)
-  const rendererApproved=false // V6-E2 gate; never infer this from client state.
+  let nativePresentation=null
+  try{nativePresentation=await reviewNativePresentation(bound.document)}catch{}
+  const nativeGoldenApproved=false // explicit future acceptance gate; never infer from source unchanged.
+  const rendererReason=nativePresentation?.renderPolicy==='SOURCE_NATIVE_RENDER_ONLY'&&!nativeGoldenApproved?'SOURCE_NATIVE_RENDER_GOLDEN_APPROVAL_PENDING':'CANONICAL_RENDERER_PARITY_PENDING'
   const manifestCore={
-    architectureVersion:'v6-e1',paperId:String(bound.paper.id),revision:bound.revision,
+    architectureVersion:'v6-e2',paperId:String(bound.paper.id),revision:bound.revision,
     snapshotHash:bound.snapshotHash,currentRevision:bound.currentRevision,isCurrent:bound.isCurrent,
-    sourceFamily:review.family,sourceReviewStatus:review.reviewStatus,questionInventory:inventory,
+    sourceFamily:review.family,sourceReviewStatus:review.reviewStatus,questionInventory:inventory,nativePresentation,
     channels:{
       preview:{state:sourceValid?'available_compatibility_preview':'blocked',reason:sourceValid?null:'SOURCE_VALIDATION_FAILED'},
-      print:{state:'blocked',reason:rendererApproved?null:'CANONICAL_RENDERER_PARITY_PENDING'},
-      pdf:{state:'blocked',reason:rendererApproved?null:'CANONICAL_RENDERER_PARITY_PENDING'},
-      word:{state:'blocked',reason:rendererApproved?null:'CANONICAL_RENDERER_PARITY_PENDING'},
+      print:{state:'blocked',reason:rendererReason},
+      pdf:{state:'blocked',reason:rendererReason},
+      word:{state:'blocked',reason:rendererReason},
       onlineTest:{state:'blocked',reason:!sourceValid?'SOURCE_VALIDATION_FAILED':!online.contentEligible?'UNSUPPORTED_QUESTION_TYPES':!bound.isCurrent?'CURRENT_REVISION_REQUIRED':'ONLINE_TEST_PUBLISH_ADAPTER_PENDING',content:online,currentRevisionRequired:true},
     },
     canonicalWriteAllowed:false,printApprovalClaim:false,publishApprovalClaim:false,
