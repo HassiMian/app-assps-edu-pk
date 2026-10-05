@@ -17,10 +17,11 @@ V6-G pins the exact Phase3AB independent Curriculum readiness preflight bytes (S
 ## Current production evidence
 Evidence bundle: `/root/secure-archive/apex-paper-v6g-20261005/`.
 Canary source: Grade 9 Biology (English `pectaa-catalog-009`, Urdu `pectaa-catalog-010`).
-Curriculum source commit: `6fb16e5d678d57182c696bbf35f4360db4de7e36`.
-Evidence manifest SHA-256: `dcf7278814d8af1952b18b142c534c19640946e5c8c36bdb30223456da4a6a41`.
+Curriculum source commit: `d6b294db53a9aa5a8f19c6bae5ecbb673996be5c`.
+Evidence manifest SHA-256: `ac98f296f98f69ec9dadedd3021dffc90d614546151bb01ccdcea2be4487b7ca`.
 Official manifest SHA-256: `e20e727720359036a01aeb3b9b2faeeae169f27f6617b0744ddf72c2ad5fc293`.
 Dry-run report SHA-256: `8eda0b754c5f2a4f58c992ce02ebf8341c9f63933845f1e5a19865ad57867e2a`.
+Technical source reacquisition SHA-256: `c4afa9d06b2e4299b624a5f4f9ef6b17b32fd44978d9274923ee5b9a86286332`.
 
 Current evidence is intentionally **BLOCKED**, not approved:
 - no independently approved live academic seed records;

@@ -42,7 +42,7 @@ async function verifyCurriculumPublisherEvidence({env=process.env}={}){
  if(!evidencePath)issues.push('publisher evidence path is not configured')
  if(!isHash(expectedSha))issues.push('publisher evidence SHA-256 is not configured')
  if(!approvedCommit)issues.push('publisher source commit is not configured')
- let evidence=null,manifestSha=null,official=null,dryRun=null,preflight=null
+ let evidence=null,manifestSha=null,official=null,dryRun=null,technical=null,preflight=null
  if(evidencePath&&isHash(expectedSha)){
   try{
    manifestSha=shaFile(evidencePath)
@@ -57,10 +57,13 @@ async function verifyCurriculumPublisherEvidence({env=process.env}={}){
   const base=path.dirname(evidencePath)
   const officialFile=safeArtifact(base,evidence.artifacts?.officialSourceManifest,'official source manifest',issues)
   const dryFile=safeArtifact(base,evidence.artifacts?.dryRunReport,'dry run report',issues)
+  const technicalFile=safeArtifact(base,evidence.artifacts?.sourceReacquisitionEvidence,'source reacquisition evidence',issues)
   try{if(officialFile)official=JSON.parse(fs.readFileSync(officialFile,'utf8'))}catch{issues.push('official source manifest JSON invalid')}
   try{if(dryFile)dryRun=JSON.parse(fs.readFileSync(dryFile,'utf8'))}catch{issues.push('dry run report JSON invalid')}
+  try{if(technicalFile)technical=JSON.parse(fs.readFileSync(technicalFile,'utf8'))}catch{issues.push('source reacquisition evidence JSON invalid')}
   if(official&&evidence.sourceManifestSha256!==evidence.artifacts?.officialSourceManifest?.sha256)issues.push('publisher source-manifest hash coordinate mismatch')
   if(dryRun&&evidence.dryRunReportSha256!==evidence.artifacts?.dryRunReport?.sha256)issues.push('publisher dry-run hash coordinate mismatch')
+  if(technical&&evidence.technicalSourceReacquisitionSha256!==evidence.artifacts?.sourceReacquisitionEvidence?.sha256)issues.push('publisher source-reacquisition hash coordinate mismatch')
   if(official){
    const derived=deriveManifestCounts(official),declared=evidence.counts||{}
    for(const [k,v] of Object.entries(derived))if(Number(declared[k])!==v)issues.push(`publisher evidence count mismatch: ${k}`)
@@ -72,6 +75,23 @@ async function verifyCurriculumPublisherEvidence({env=process.env}={}){
    if(Number(evidence.counts?.wouldInsert)!==Number(dryRun.wouldInsert||0))issues.push('publisher dry-run insert count mismatch')
   }
   const scope=evidence.publicationScope||{}
+  if(technical){
+   if(technical.schemaVersion!=='assps-biology9-source-reacquisition-evidence-v1')issues.push('source reacquisition evidence schema mismatch')
+   if(Number(technical.scope?.grade)!==Number(scope.grade)||String(technical.scope?.subject||'').toLowerCase()!==String(scope.subject||'').toLowerCase())issues.push('source reacquisition scope mismatch')
+   if(technical.approval?.binaryIntegrityVerified!==true||technical.approval?.ledgerBindingVerified!==true)issues.push('source reacquisition binary/ledger integrity is not verified')
+   if(technical.approval?.productionPublisherApproved!==false)issues.push('technical source reacquisition must not self-approve publisher production')
+   if(official){
+    const pair={}
+    for(const [lang,medium] of [['en','English'],['ur','Urdu']]){
+     const matches=(official.entries||[]).filter(x=>Number(x?.grade)===Number(scope.grade)&&String(x?.subject||'').toLowerCase()===String(scope.subject||'').toLowerCase()&&x?.medium===medium)
+     if(matches.length===1)pair[lang]=matches[0]
+    }
+    for(const lang of ['en','ur']){
+     const t=technical.sources?.[lang],o=pair[lang]
+     if(!t||!o||t.pdfSha256!==o.pdfSha256||t.catalogRecordId!==o.recordId||t.matchesEvidenceLedger!==true)issues.push(`source reacquisition ${lang} identity mismatch`)
+    }
+   }
+  } else issues.push('source reacquisition evidence is missing')
   preflight=auditPhase3ABReadiness({manifest:official,grade:scope.grade,subject:scope.subject,editionEvidence:evidence.editionEvidence,signedPublication:evidence.signedPublication,operationalReviews:evidence.operationalReviews})
   if(preflight.status!=='EVIDENCE_COMPLETE_NOT_AUTHORIZED')issues.push(...preflight.blockers.map(x=>`preflight:${x}`))
   if(!Number.isSafeInteger(evidence.counts?.approvedQuestionCount)||evidence.counts.approvedQuestionCount<1)issues.push('publisher evidence has no independently approved questions')
