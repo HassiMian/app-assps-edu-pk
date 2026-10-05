@@ -1,0 +1,132 @@
+/*
+ * APEX OS Visual System V1 — token foundation only.
+ * IMPORTANT: this file intentionally does NOT style paper/print/editor content.
+ * It provides semantic tokens for gradual shell/module migration.
+ */
+
+:root {
+  /* Brand primitives */
+  --apex-ink-950: #101722;
+  --apex-ink-900: #152033;
+  --apex-ink-850: #18283b;
+  --apex-ink-800: #203247;
+  --apex-slate-700: #42536a;
+  --apex-slate-600: #617188;
+  --apex-slate-500: #7f8ca0;
+  --apex-slate-300: #c8d1dd;
+  --apex-slate-200: #dbe2ea;
+  --apex-slate-100: #edf2f7;
+  --apex-pearl-50: #f7f9fc;
+  --apex-white: #ffffff;
+
+  --apex-azure-600: #256fe8;
+  --apex-azure-500: #3f86f7;
+  --apex-azure-400: #65a6ff;
+  --apex-teal-500: #20b8ad;
+  --apex-teal-400: #42cfc2;
+  --apex-gold-500: #c99a32;
+  --apex-gold-400: #deb655;
+  --apex-red-500: #df4d62;
+  --apex-green-500: #27a86f;
+
+  /* Shared geometry */
+  --apex-radius-xs: 8px;
+  --apex-radius-sm: 12px;
+  --apex-radius-md: 16px;
+  --apex-radius-lg: 22px;
+  --apex-radius-xl: 28px;
+
+  --apex-space-1: 4px;
+  --apex-space-2: 8px;
+  --apex-space-3: 12px;
+  --apex-space-4: 16px;
+  --apex-space-5: 20px;
+  --apex-space-6: 24px;
+  --apex-space-8: 32px;
+  --apex-space-10: 40px;
+  --apex-space-12: 48px;
+
+  --apex-motion-fast: 140ms;
+  --apex-motion-normal: 200ms;
+  --apex-motion-slow: 280ms;
+
+  /* Light-first semantic tokens */
+  --apex-bg-canvas: #f4f7fb;
+  --apex-bg-canvas-elevated: #f8fafe;
+  --apex-bg-surface: rgba(255, 255, 255, 0.94);
+  --apex-bg-surface-solid: #ffffff;
+  --apex-bg-subtle: #edf3f8;
+  --apex-bg-muted: #e7edf4;
+  --apex-bg-overlay: rgba(16, 23, 34, 0.48);
+
+  --apex-text-primary: #152033;
+  --apex-text-secondary: #42536a;
+  --apex-text-tertiary: #68788d;
+  --apex-text-inverse: #f8fafc;
+
+  --apex-border-subtle: rgba(45, 65, 91, 0.11);
+  --apex-border-default: rgba(45, 65, 91, 0.17);
+  --apex-border-strong: rgba(45, 65, 91, 0.28);
+
+  --apex-action-primary: #256fe8;
+  --apex-action-primary-hover: #1f61cc;
+  --apex-action-secondary: #20a99f;
+  --apex-action-highlight: #c99a32;
+  --apex-action-danger: #d9465c;
+  --apex-action-success: #209765;
+
+  --apex-focus-ring: 0 0 0 3px rgba(37, 111, 232, 0.22);
+  --apex-shadow-sm: 0 4px 14px rgba(31, 47, 67, 0.07);
+  --apex-shadow-md: 0 14px 34px rgba(31, 47, 67, 0.10);
+  --apex-shadow-lg: 0 24px 60px rgba(31, 47, 67, 0.14);
+
+  --apex-shell-gradient:
+    radial-gradient(circle at 14% -8%, rgba(63, 134, 247, 0.11), transparent 34%),
+    radial-gradient(circle at 92% 8%, rgba(32, 184, 173, 0.08), transparent 30%),
+    linear-gradient(145deg, #f8fafe 0%, #f3f7fb 48%, #edf3f8 100%);
+}
+
+:root[data-theme='dark'] {
+  /* Dark is intentionally graphite/navy, not near-black navy. */
+  --apex-bg-canvas: #101722;
+  --apex-bg-canvas-elevated: #131d2a;
+  --apex-bg-surface: rgba(24, 40, 59, 0.88);
+  --apex-bg-surface-solid: #18283b;
+  --apex-bg-subtle: #1d3045;
+  --apex-bg-muted: #22364b;
+  --apex-bg-overlay: rgba(3, 8, 16, 0.66);
+
+  --apex-text-primary: #f5f8fc;
+  --apex-text-secondary: #c4cfdd;
+  --apex-text-tertiary: #91a0b4;
+  --apex-text-inverse: #152033;
+
+  --apex-border-subtle: rgba(198, 211, 226, 0.10);
+  --apex-border-default: rgba(198, 211, 226, 0.16);
+  --apex-border-strong: rgba(198, 211, 226, 0.25);
+
+  --apex-action-primary: #65a6ff;
+  --apex-action-primary-hover: #82b7ff;
+  --apex-action-secondary: #42cfc2;
+  --apex-action-highlight: #deb655;
+  --apex-action-danger: #ef6678;
+  --apex-action-success: #48c58b;
+
+  --apex-focus-ring: 0 0 0 3px rgba(101, 166, 255, 0.25);
+  --apex-shadow-sm: 0 5px 16px rgba(0, 0, 0, 0.17);
+  --apex-shadow-md: 0 16px 38px rgba(0, 0, 0, 0.22);
+  --apex-shadow-lg: 0 28px 70px rgba(0, 0, 0, 0.29);
+
+  --apex-shell-gradient:
+    radial-gradient(circle at 12% -10%, rgba(101, 166, 255, 0.13), transparent 36%),
+    radial-gradient(circle at 92% 4%, rgba(66, 207, 194, 0.09), transparent 31%),
+    linear-gradient(145deg, #111a27 0%, #142235 52%, #17283b 100%);
+}
+
+/* Protected rendering zones must never inherit SaaS shell styling by accident. */
+.paper-document,
+.paper-print-root,
+.canonical-paper-document,
+[data-paper-render-root='true'] {
+  --apex-shell-gradient: initial;
+}
