@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { TenantBrandingProvider } from './context/TenantBrandingContext'
 import { ThemeProvider } from './context/ThemeContext'
+import BrandHeadSync from './components/BrandHeadSync'
 import { hasPermission, ADMIN_ROLES } from './services/permissions'
 import { normalizeAppRole } from './utils/role'
 import PremiumProgressLoader from './components/PremiumProgressLoader'
@@ -392,6 +393,7 @@ export default function App() {
  <ThemeProvider>
  <AuthProvider>
  <TenantBrandingProvider>
+ <BrandHeadSync />
  <WindowScrollRestoration />
  <AppRoutes />
  </TenantBrandingProvider>

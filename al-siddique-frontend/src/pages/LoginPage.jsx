@@ -1,17 +1,54 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Moon, Sun } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
+import { useTenantBranding } from "../context/TenantBrandingContext";
 import { normalizeAppRole } from "../utils/role";
 
 export default function LoginPage() {
   const { login } = useAuth();
+  const { theme, setTheme } = useTheme();
+  const branding = useTenantBranding();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const isLight = theme === "light";
+  const schoolName = branding?.schoolName || "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL";
+  const logoUrl = branding?.logoUrl || "/school-logo.svg";
+  const palette = isLight
+    ? {
+        page: "linear-gradient(145deg, #f8fbff 0%, #eef5fb 55%, #f8fafc 100%)",
+        glowA: "rgba(14, 116, 144, 0.10)",
+        glowB: "rgba(200, 153, 26, 0.10)",
+        card: "rgba(255,255,255,0.90)",
+        border: "rgba(15,35,64,0.12)",
+        title: "#0f2340",
+        text: "#314155",
+        muted: "#66768a",
+        input: "#ffffff",
+        inputBorder: "rgba(15,35,64,0.16)",
+        shadow: "0 24px 70px rgba(15,35,64,0.14)",
+        toggle: "rgba(255,255,255,0.86)",
+      }
+    : {
+        page: "linear-gradient(145deg, #061523 0%, #0b2c4d 52%, #071e34 100%)",
+        glowA: "rgba(6, 182, 212, 0.18)",
+        glowB: "rgba(200, 153, 26, 0.12)",
+        card: "rgba(11,44,77,0.86)",
+        border: "rgba(192,200,216,0.16)",
+        title: "#ffffff",
+        text: "#d5deea",
+        muted: "#97a6ba",
+        input: "rgba(7,30,52,0.68)",
+        inputBorder: "rgba(192,200,216,0.18)",
+        shadow: "0 24px 70px rgba(0,0,0,0.34)",
+        toggle: "rgba(7,30,52,0.76)",
+      };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -43,217 +80,80 @@ export default function LoginPage() {
     setLoading(false);
   };
 
+  const fieldStyle = {
+    width: "100%",
+    boxSizing: "border-box",
+    borderRadius: 12,
+    border: `1px solid ${palette.inputBorder}`,
+    background: palette.input,
+    color: palette.title,
+    padding: "13px 14px",
+    outline: "none",
+    fontSize: 14,
+    transition: "border-color .2s, box-shadow .2s, background .2s",
+  };
+
   return (
     <div
       style={{
         minHeight: "100dvh",
-        background: "linear-gradient(135deg, #071e34 0%, #0B2C4D 50%, #071e34 100%)",
+        background: palette.page,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "clamp(12px, 3vw, 20px)",
-        fontFamily: "'DM Sans', sans-serif",
+        padding: "24px 16px",
         position: "relative",
-        overflowX: "hidden",
-        overflowY: "auto",
+        overflow: "hidden",
+        transition: "background .25s ease",
       }}
     >
-      {/* Decorative Orbs */}
-      <div
-        style={{
-          position: "absolute",
-          width: 450,
-          height: 450,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(200,153,26,0.08) 0%, transparent 70%)",
-          top: -150,
-          right: -100,
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          width: 350,
-          height: 350,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(10,132,255,0.06) 0%, transparent 70%)",
-          bottom: -100,
-          left: -100,
-          pointerEvents: "none",
-        }}
-      />
+      <div style={{ position: "absolute", width: 420, height: 420, borderRadius: "50%", background: palette.glowA, filter: "blur(90px)", top: -160, right: -100, pointerEvents: "none" }} />
+      <div style={{ position: "absolute", width: 360, height: 360, borderRadius: "50%", background: palette.glowB, filter: "blur(100px)", bottom: -170, left: -80, pointerEvents: "none" }} />
 
-      <div style={{ width: "100%", maxWidth: 460, position: "relative", zIndex: 1 }}>
-        
-        {/* Header Block with Premium Inline APEX Logo */}
-        <div style={{ textAlign: "center", marginBottom: "clamp(24px, 4.5vw, 36px)" }}>
-          <div style={{ width: 96, height: 96, margin: "0 auto 16px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <img src="/apex-logo.png" alt="APEX Logo" style={{ width: 120, height: 120, objectFit: 'contain' }} />
+      <div style={{ position: "absolute", top: 20, right: 20, zIndex: 3, display: "flex", gap: 6, padding: 5, borderRadius: 14, background: palette.toggle, border: `1px solid ${palette.border}`, boxShadow: isLight ? "0 8px 24px rgba(15,35,64,0.08)" : "0 8px 24px rgba(0,0,0,0.18)", backdropFilter: "blur(14px)" }}>
+        <button type="button" aria-label="Use light mode" title="Light mode" onClick={() => setTheme("light")} style={{ width: 38, height: 34, borderRadius: 10, border: "none", cursor: "pointer", display: "grid", placeItems: "center", background: isLight ? "#ffffff" : "transparent", color: isLight ? "#0f2340" : "#97a6ba", boxShadow: isLight ? "0 2px 8px rgba(15,35,64,0.10)" : "none" }}>
+          <Sun size={17} />
+        </button>
+        <button type="button" aria-label="Use dark mode" title="Dark mode" onClick={() => setTheme("dark")} style={{ width: 38, height: 34, borderRadius: 10, border: "none", cursor: "pointer", display: "grid", placeItems: "center", background: !isLight ? "rgba(255,255,255,0.09)" : "transparent", color: !isLight ? "#ffffff" : "#66768a" }}>
+          <Moon size={17} />
+        </button>
+      </div>
+
+      <div style={{ width: "100%", maxWidth: 440, position: "relative", zIndex: 2 }}>
+        <div style={{ textAlign: "center", marginBottom: 22 }}>
+          <div style={{ width: 92, height: 92, margin: "0 auto 14px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <img src={logoUrl} alt={`${schoolName} logo`} style={{ width: 88, height: 88, objectFit: "contain", filter: isLight ? "drop-shadow(0 8px 16px rgba(15,35,64,.14))" : "drop-shadow(0 8px 16px rgba(0,0,0,.25))" }} />
           </div>
-          
-          <h1 style={{ color: "#FFFFFF", fontSize: "clamp(26px, 6vw, 32px)", fontWeight: 900, margin: 0, letterSpacing: 2 }}>
-            APEX
-          </h1>
-          <p style={{ color: "#8892A4", fontSize: 11, marginTop: 4, fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase" }}>
-            Learn • Grow • Lead • Transform
-          </p>
-          <p style={{ color: "#C8991A", fontSize: 13, marginTop: 6, fontWeight: 500, letterSpacing: 0.5 }}>
-            School Management Operating System
-          </p>
+          <h1 style={{ color: palette.title, fontSize: "clamp(24px, 5vw, 30px)", fontWeight: 900, margin: 0, letterSpacing: 1.2 }}>APEX OS</h1>
+          <p style={{ color: palette.muted, fontSize: 12, margin: "7px auto 0", fontWeight: 700, letterSpacing: 0.6, maxWidth: 380 }}>{schoolName}</p>
+          <p style={{ color: "#b68712", fontSize: 12, marginTop: 6, fontWeight: 700 }}>School Management Operating System</p>
         </div>
 
-        {/* Form Container */}
-        <div
-          style={{
-            background: "rgba(11,44,77,0.85)",
-            backdropFilter: "blur(24px)",
-            border: "1px solid rgba(148,163,184,0.18)",
-            borderRadius: 24,
-            padding: "clamp(24px, 5vw, 40px)",
-            boxShadow: "0 24px 64px rgba(7,22,40,0.85)",
-          }}
-        >
-          <h2 style={{ color: "#C0C8D8", fontSize: 20, fontWeight: 700, margin: "0 0 6px" }}>Welcome back</h2>
-          <p style={{ color: "#8892A4", fontSize: 13, margin: "0 0 28px" }}>Sign in to the school operating system portal</p>
+        <div style={{ background: palette.card, backdropFilter: "blur(24px)", border: `1px solid ${palette.border}`, borderRadius: 24, padding: "clamp(24px, 5vw, 38px)", boxShadow: palette.shadow, transition: "all .25s ease" }}>
+          <h2 style={{ color: palette.title, fontSize: 21, fontWeight: 800, margin: "0 0 6px" }}>Welcome back</h2>
+          <p style={{ color: palette.muted, fontSize: 13, margin: "0 0 26px" }}>Sign in to continue to your school portal.</p>
 
           <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: 18 }}>
-              <label
-                style={{
-                  color: "#8892A4",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  display: "block",
-                  marginBottom: 8,
-                  textTransform: "uppercase",
-                  letterSpacing: 1,
-                }}
-              >
-                Email Address / Login ID
-              </label>
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="you@school.com"
-                style={{
-                  width: "100%",
-                  padding: "13px 18px",
-                  borderRadius: 12,
-                  boxSizing: "border-box",
-                  background: "rgba(7,22,40,0.92)",
-                  border: "1px solid rgba(200,153,26,0.2)",
-                  color: "#C0C8D8",
-                  fontSize: 14,
-                  outline: "none",
-                  transition: "border-color 0.2s",
-                }}
-                onFocus={(e) => (e.target.style.borderColor = "#C8991A")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(200,153,26,0.2)")}
-              />
+            <label htmlFor="login-email" style={{ display: "block", color: palette.text, fontSize: 12, fontWeight: 700, marginBottom: 7 }}>Email address</label>
+            <input id="login-email" type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="you@example.com" style={fieldStyle} />
+
+            <label htmlFor="login-password" style={{ display: "block", color: palette.text, fontSize: 12, fontWeight: 700, margin: "18px 0 7px" }}>Password</label>
+            <div style={{ position: "relative" }}>
+              <input id="login-password" type={showPass ? "text" : "password"} autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required placeholder="Enter your password" style={{ ...fieldStyle, paddingRight: 48 }} />
+              <button type="button" aria-label={showPass ? "Hide password" : "Show password"} onClick={() => setShowPass((v) => !v)} style={{ position: "absolute", right: 13, top: "50%", transform: "translateY(-50%)", border: "none", background: "transparent", cursor: "pointer", color: palette.muted, padding: 3, display: "flex", alignItems: "center" }}>
+                {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
             </div>
 
-            <div style={{ marginBottom: 12 }}>
-              <label
-                style={{
-                  color: "#8892A4",
-                  fontSize: 11,
-                  fontWeight: 700,
-                  display: "block",
-                  marginBottom: 8,
-                  textTransform: "uppercase",
-                  letterSpacing: 1,
-                }}
-              >
-                Password
-              </label>
-              <div style={{ position: "relative" }}>
-                <input
-                  type={showPass ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  placeholder="Enter your password"
-                  style={{
-                    width: "100%",
-                    padding: "13px 48px 13px 18px",
-                    borderRadius: 12,
-                    boxSizing: "border-box",
-                    background: "rgba(7,22,40,0.92)",
-                    border: "1px solid rgba(200,153,26,0.2)",
-                    color: "#C0C8D8",
-                    fontSize: 14,
-                    outline: "none",
-                    transition: "border-color 0.2s",
-                  }}
-                  onFocus={(e) => (e.target.style.borderColor = "#C8991A")}
-                  onBlur={(e) => (e.target.style.borderColor = "rgba(200,153,26,0.2)")}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPass((p) => !p)}
-                  style={{
-                    position: "absolute",
-                    right: 14,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    color: "#8892A4",
-                    padding: 0,
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </div>
+            {error && <div role="alert" style={{ padding: "10px 14px", background: "rgba(255,55,95,0.08)", border: "1px solid rgba(255,55,95,0.25)", borderRadius: 10, marginTop: 18 }}><span style={{ color: "#e11d48", fontSize: 13 }}>{error}</span></div>}
 
-            {error && (
-              <div
-                style={{
-                  padding: "10px 14px",
-                  background: "rgba(255,55,95,0.08)",
-                  border: "1px solid rgba(255,55,95,0.25)",
-                  borderRadius: 10,
-                  marginBottom: 18,
-                }}
-              >
-                <span style={{ color: "#FF375F", fontSize: 13 }}>{error}</span>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading}
-              style={{
-                width: "100%",
-                padding: "14px",
-                borderRadius: 12,
-                border: "none",
-                cursor: loading ? "not-allowed" : "pointer",
-                background: loading ? "rgba(200,153,26,0.4)" : "linear-gradient(135deg, #C8991A, #e8b420)",
-                color: "#071e34",
-                fontWeight: 800,
-                fontSize: 15,
-                marginTop: 20,
-                boxShadow: loading ? "none" : "0 4px 20px rgba(200,153,26,0.25)",
-                transition: "all 0.2s",
-              }}
-            >
+            <button type="submit" disabled={loading} style={{ width: "100%", padding: "14px", borderRadius: 12, border: "none", cursor: loading ? "not-allowed" : "pointer", background: loading ? "rgba(200,153,26,0.45)" : "linear-gradient(135deg, #C8991A, #e8b420)", color: "#071e34", fontWeight: 900, fontSize: 15, marginTop: 22, boxShadow: loading ? "none" : "0 8px 24px rgba(200,153,26,0.23)", transition: "all .2s" }}>
               {loading ? "Signing in..." : "Sign In →"}
             </button>
           </form>
-
         </div>
 
-        <p style={{ textAlign: "center", color: "#6B7280", fontSize: 11, marginTop: 24 }}>
-          © 2026 APEX Systems OS · All rights reserved
-        </p>
+        <p style={{ textAlign: "center", color: palette.muted, fontSize: 11, marginTop: 20 }}>© 2026 APEX Systems OS · All rights reserved</p>
       </div>
     </div>
   );
