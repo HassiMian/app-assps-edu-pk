@@ -7,6 +7,7 @@ const {
   validateSameTenantOrThrow,
   resolveTenantIdForSchool,
 } = require('../services/tenantCredentialGuard')
+const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
 
 const canViewAdmissions = requireRoles('super_admin', 'admin', 'principal')
 const canReadAdmissions = adminOrServiceScope('school.admissions.read')
@@ -236,6 +237,13 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Tenant ID is required before generating credentials.' });
     }
 
+    const academicAssignment = await resolveAcademicAssignment({
+      schoolId,
+      className: admission.class_applying,
+      section: '',
+      allowEmptySection: true,
+    });
+
     // Create student
     const supportsStudentTenantId = await hasColumn('students', 'tenant_id');
     const newStudentRes = supportsStudentTenantId
@@ -251,7 +259,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
         String(nextGr),
         admission.student_name,
         admission.father_name,
-        admission.class_applying,
+        academicAssignment.className,
         admission.parent_phone,
         admission.whatsapp_number || admission.parent_phone,
         admission.gender || 'Unknown'
@@ -267,7 +275,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
         String(nextGr),
         admission.student_name,
         admission.father_name,
-        admission.class_applying,
+        academicAssignment.className,
         admission.parent_phone,
         admission.whatsapp_number || admission.parent_phone,
         admission.gender || 'Unknown'
@@ -362,6 +370,9 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
     });
   } catch (err) {
     console.error('Approve error:', err.message);
+    if (err.status === 422) {
+      return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details });
+    }
     res.status(500).json({ success: false, message: 'Failed to approve application.' });
   }
 });

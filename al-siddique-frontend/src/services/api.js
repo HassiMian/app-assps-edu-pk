@@ -393,6 +393,13 @@ api.interceptors.response.use(
           timestamp: Date.now()
         })
       }
+    } else if (['post', 'put', 'patch', 'delete'].includes(method)) {
+      const urlKey = res.config?.url?.split('?')[0]
+      if (urlKey && CACHE_CONFIG[urlKey]) {
+        for (const cacheKey of requestCache.keys()) {
+          if (cacheKey?.split('?')[0] === urlKey) requestCache.delete(cacheKey)
+        }
+      }
     }
     return res
   },

@@ -230,6 +230,7 @@ async function ensureSettingsTable() {
   await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS school_access JSONB DEFAULT '[]'::jsonb;")
   await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS superapp_modules JSONB DEFAULT '{}'::jsonb;")
   await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS branding_config JSONB DEFAULT '{}'::jsonb;")
+  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS academic_setup JSONB DEFAULT '{}'::jsonb;")
   await pool.query('CREATE UNIQUE INDEX IF NOT EXISTS settings_school_id_unique ON settings (school_id);')
 
   // --- PHASE 1: ENTERPRISE HIERARCHY SCHEMA ---

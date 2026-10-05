@@ -228,6 +228,27 @@ export function useAcademicStore() {
  async function hydrate() {
  const localData = load()
  if (!cancelled) setData(localData)
+
+ try {
+ const academicResponse = await api.get('/api/academic/setup')
+ const configured = academicResponse.data?.configured === true
+ const serverData = academicResponse.data?.data
+ if (configured && serverData && Array.isArray(serverData.classes) && serverData.classes.length > 0) {
+ const next = {
+ ...DEFAULT_ACADEMIC,
+ ...serverData,
+ localities: Array.isArray(serverData.localities) ? serverData.localities : DEFAULT_ACADEMIC.localities,
+ classes: serverData.classes,
+ subjects: Array.isArray(serverData.subjects) ? serverData.subjects : DEFAULT_ACADEMIC.subjects,
+ }
+ if (!cancelled) setData(next)
+ try { getStorage()?.setItem(AK, JSON.stringify(next)) } catch {}
+ return
+ }
+ } catch {
+ // Transitional fallback while the server-side academic schema is not configured.
+ }
+
  try {
  const response = await api.get('/api/students')
  const students = Array.isArray(response.data?.data) ? response.data.data : []

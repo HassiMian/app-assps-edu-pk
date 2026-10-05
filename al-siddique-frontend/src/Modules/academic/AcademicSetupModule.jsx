@@ -1,7 +1,8 @@
 // AcademicSetupModule.jsx — Al Siddique Smart School OS
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GraduationCap, Plus, Trash2, Edit2, Check, X, Building2 } from 'lucide-react'
+import api from '../../services/api'
 
 function slugifyLevel(name) {
   const clean = String(name || '').toLowerCase().trim()
@@ -677,14 +678,35 @@ const TABS = [
 export default function AcademicSetupModule() {
  const [activeTab, setActiveTab] = useState('classes')
  const [data, setData] = useState(loadAcademic)
+ const [syncState, setSyncState] = useState('local')
 
- // Persist academic data whenever it changes
- function updateData(updater) {
- setData(prev => {
- const next = typeof updater === 'function' ? updater(prev) : updater
+ useEffect(() => {
+ let cancelled = false
+ async function hydrateFromServer() {
+ try {
+ const response = await api.get('/api/academic/setup')
+ if (cancelled || response.data?.configured !== true || !response.data?.data) return
+ const next = { ...DEFAULT_ACADEMIC, ...response.data.data }
+ setData(next)
  saveAcademic(next)
- return next
- })
+ setSyncState('synced')
+ } catch {
+ if (!cancelled) setSyncState('local')
+ }
+ }
+ void hydrateFromServer()
+ return () => { cancelled = true }
+ }, [])
+
+ // Browser storage is now only a cache; server academic setup is the shared authority once configured.
+ function updateData(updater) {
+ const next = typeof updater === 'function' ? updater(data) : updater
+ setData(next)
+ saveAcademic(next)
+ setSyncState('saving')
+ void api.put('/api/academic/setup', next)
+ .then(() => setSyncState('synced'))
+ .catch(() => setSyncState('local'))
  }
 
  return (
@@ -698,7 +720,7 @@ export default function AcademicSetupModule() {
  </div>
  <div className="super-module-card" style={{ flex:1 }}>
  <h1 style={{ margin:0, fontSize:26, color:'#fff', fontFamily:"'Playfair Display',serif", fontWeight:800 }}>Academic Setup</h1>
- <p style={{ margin:'4px 0 0', color:C.muted, fontSize:13 }}>Classes & sections · Subjects · Academic calendar</p>
+ <p style={{ margin:'4px 0 0', color:C.muted, fontSize:13 }}>Classes & sections · Subjects · Academic calendar · {syncState === 'synced' ? 'Server synced' : syncState === 'saving' ? 'Saving…' : 'Local cache'}</p>
  </div>
  <div className="super-module-card" style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
  {TABS.map(t => (

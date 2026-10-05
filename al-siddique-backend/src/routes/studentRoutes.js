@@ -9,6 +9,7 @@ const requireScopeForServiceOnly = auth.requireScopeForServiceOnly || (() => (re
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
+const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
 const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
 
@@ -425,7 +426,15 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const currentYear = new Date().getFullYear()
     const autoGr = `GR-${currentYear}-${Math.floor(1000 + Math.random() * 9000)}`
     const finalGr = req.body.gr_number || autoGr
-    const normalizedClass = normalizeClassName(cls)
+    const requestedClass = normalizeClassName(cls)
+    const requestedSection = section || 'Blue'
+    const academicAssignment = await resolveAcademicAssignment({
+      schoolId,
+      className: requestedClass,
+      section: requestedSection,
+    })
+    const normalizedClass = academicAssignment.className
+    const normalizedSection = academicAssignment.section
 
     // Calculate Roll Number automatically if not provided
     let finalRollNumber = roll_number
@@ -434,7 +443,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
         `SELECT COALESCE(MAX(NULLIF(regexp_replace(roll_number, '[^0-9]', '', 'g'), '')::integer), 0) + 1 AS next_roll
          FROM students
          WHERE class = $1 AND section = $2 AND school_id = $3`,
-        [normalizedClass, section || 'Blue', schoolId]
+        [normalizedClass, normalizedSection, schoolId]
       )
       finalRollNumber = String(rollRes.rows[0]?.next_roll || 1)
     }
@@ -446,7 +455,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       ['father_name', father_name],
       ['mother_name', mother_name || null],
       ['class', normalizedClass],
-      ['section', section || 'Blue'],
+      ['section', normalizedSection],
       ['roll_number', finalRollNumber],
       ['date_of_birth', date_of_birth || null],
       ['gender', gender || 'male'],
@@ -567,6 +576,8 @@ router.post('/', protect, adminOnly, async (req, res) => {
   } catch (err) {
     if (err.code === '23505')
       return res.status(400).json({ success: false, message: 'GR Number already exists' })
+    if (err.status === 422)
+      return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
     res.status(500).json({ success: false, message: err.message })
   }
 })
@@ -580,6 +591,12 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
       family_code, father_cnic, is_active
     } = req.body
 
+    const schoolId = currentSchoolId(req)
+    const academicAssignment = await resolveAcademicAssignment({
+      schoolId,
+      className: normalizeClassName(cls),
+      section: section || 'Blue',
+    })
     const supportsTenant = await hasColumn('students', 'school_id')
     const sql = `
       UPDATE students SET
@@ -595,7 +612,7 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
       RETURNING *
     `
     const params = [
-      name, father_name, mother_name, normalizeClassName(cls), section || 'Blue', roll_number,
+      name, father_name, mother_name, academicAssignment.className, academicAssignment.section, roll_number,
       date_of_birth, gender, address, parent_phone, parent_whatsapp, photo,
       family_code || null, father_cnic || null, is_active !== undefined ? is_active : null,
       req.params.id
@@ -608,6 +625,8 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
 
     res.json({ success: true, message: 'Student update ho gaya', data: result.rows[0] })
   } catch (err) {
+    if (err.status === 422)
+      return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
     res.status(500).json({ success: false, message: err.message })
   }
 })
@@ -659,17 +678,32 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     }
 
     const schoolId = currentSchoolId(req)
+    const validatedAssignments = new Map()
+    for (let index = 0; index < students.length; index += 1) {
+      const student = students[index]
+      if (!student?.name || !student?.class) continue
+      const assignment = await resolveAcademicAssignment({
+        schoolId,
+        className: normalizeClassName(student.class),
+        section: student.section || '',
+        allowEmptySection: true,
+      })
+      validatedAssignments.set(index, assignment)
+    }
+
     let imported = 0
 
-    for (const student of students) {
+    for (let index = 0; index < students.length; index += 1) {
+      const student = students[index]
       // Basic validation
       if (!student.name || !student.class) continue
 
       const name = student.name
       const gr_number = student.gr_number || ''
       const roll_number = student.roll_number || ''
-      const className = student.class
-      const section = student.section || ''
+      const assignment = validatedAssignments.get(index)
+      const className = assignment?.className || normalizeClassName(student.class)
+      const section = assignment?.section || student.section || ''
       const father_name = student.father_name || ''
       const father_cnic = student.father_cnic || ''
       const phone_number = student.phone_number || ''
@@ -687,6 +721,8 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     res.json({ success: true, message: `Successfully imported ${imported} students.` })
   } catch (err) {
     console.error('Bulk import error:', err.message)
+    if (err.status === 422)
+      return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
     res.status(500).json({ success: false, message: 'Server error during bulk import' })
   }
 })

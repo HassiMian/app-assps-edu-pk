@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
+import { useAcademicStore } from '../../services/useAcademicStore'
 import { getPakistanDateString, formatPakistanDateDisplay } from '../../utils/dateUtils'
 import { emitAttendanceUpdated, onAttendanceUpdated } from '../../utils/attendanceEvents'
 import {
@@ -101,6 +102,7 @@ function StatCell({ icon: Icon, label, value, color, bg, subtitle, onClick, clic
 
 function UnmarkedAttendanceModal({ onClose, onRefresh }) {
   const navigate = useNavigate()
+  const { classNames } = useAcademicStore()
   const today = getPakistanDateString()
   const todayDisplay = formatPakistanDateDisplay(undefined, 'long')
 
@@ -220,13 +222,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
     })
   }, [students, markedIds])
 
-  const classList = useMemo(() => {
-    const set = new Set()
-    unmarkedStudents.forEach((s) => {
-      if (s.class) set.add(s.class)
-    })
-    return ['All Classes', ...Array.from(set).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))]
-  }, [unmarkedStudents])
+  const classList = useMemo(() => ['All Classes', ...classNames], [classNames])
 
   const filteredUnmarked = useMemo(() => {
     return unmarkedStudents.filter((s) => {
