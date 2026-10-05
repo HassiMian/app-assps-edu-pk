@@ -32,11 +32,11 @@ const transformStudent = (student) => ({
  locality: student.locality || student.village || "",
  fatherCnic: student.father_cnic || student.cnic || "",
  fatherOccupation: student.father_occupation || "",
- religion: student.religion || "Muslim",
+ religion: student.religion || "",
  gender: student.gender || "",
  address: student.address || "",
  status: student.is_active ? "Active" : "Inactive",
- fee: student.fee_status || "Unpaid",
+ fee: student.fee_status || "",
  dob: student.date_of_birth ? student.date_of_birth.split("T")[0] : "",
  admissionDate: student.admission_date ? student.admission_date.split("T")[0] : "",
  photo: student.photo || "",
@@ -49,48 +49,29 @@ const normalizeGenderValue = (gender = "") => {
  return "";
 };
 
-const inferGenderFromStudent = (student = {}) => {
- const explicit = normalizeGenderValue(student.gender);
- if (explicit) return { gender: explicit, estimated: false };
-
- const name = `${student.name || ""} ${student.mother || ""}`.toLowerCase();
- const femaleSignals = [
- "bibi", "fatima", "zainab", "ayesha", "aisha", "maria", "maryam", "rabia", "hania",
- "dua", "eman", "iman", "noor", "noor ul", "amna", "amina", "sana", "iqra", "maham",
- "hafsa", "khadija", "khadeeja", "bisma", "laiba", "hira", "sidra", "saira", "maira",
- ];
- const maleSignals = [
- "muhammad", "ahmad", "ahmed", "ali", "hassan", "hasan", "hussain", "usman", "umar",
- "abdullah", "hamza", "ibrahim", "arslan", "arman", "bilal", "zubair", "talha", "saad",
- "waqas", "ramzan", "burhan", "subhan", "rehan", "rizwan", "danish", "salman",
- ];
-
- if (femaleSignals.some(signal => name.includes(signal))) return { gender: "female", estimated: true };
- if (maleSignals.some(signal => name.includes(signal))) return { gender: "male", estimated: true };
- return { gender: "", estimated: true };
-};
-
 const getGenderStats = (students = []) => {
  let male = 0;
  let female = 0;
- let estimated = 0;
+ let unknown = 0;
 
  students.forEach(student => {
- const result = inferGenderFromStudent(student);
- if (result.gender === "male") male += 1;
- if (result.gender === "female") female += 1;
- if (result.estimated) estimated += 1;
+ const gender = normalizeGenderValue(student.gender);
+ if (gender === "male") male += 1;
+ else if (gender === "female") female += 1;
+ else unknown += 1;
  });
 
- const remaining = Math.max(students.length - male - female, 0);
- if (remaining > 0) {
- const extraMale = Math.round(remaining * 0.58);
- male += extraMale;
- female += remaining - extraMale;
- estimated += remaining;
- }
+ return { male, female, unknown };
+};
 
- return { male, female, estimated };
+const normalizeFeeStatus = (status = "") => {
+ const value = String(status || "").trim().toLowerCase();
+ if (!value) return "";
+ if (value === "paid") return "Paid";
+ if (["unpaid", "pending"].includes(value)) return "Pending";
+ if (value === "partial") return "Partial";
+ if (value === "overdue") return "Overdue";
+ return String(status);
 };
 
 const exportToCSV = (data) => {
@@ -2100,6 +2081,7 @@ function StudentSlips({ students, school }) {
 export default function StudentsModule() {
  const { classNames, allSections, activeClasses, subjectsForClass } = useAcademicStore();
  const { students: rawStudents, addStudent, deleteStudent, updateStudent } = useStudentStore();
+ const [feeStatusByStudent, setFeeStatusByStudent] = useState({});
 
   const userRaw = localStorage.getItem('al_siddique_user')
   let isDemo = false
@@ -2112,7 +2094,7 @@ export default function StudentsModule() {
 
  const { generateStudent, generateParent } = useUserStore();
  const [searchParams] = useSearchParams();
- const students = rawStudents.map(transformStudent);
+ const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusByStudent[student.id] || "" }));
  const [search, setSearch] = useState("");
  const [showDropdown, setShowDropdown] = useState(false);
  const [filterClass, setFilterClass] = useState("All Classes");
@@ -2127,6 +2109,27 @@ export default function StudentsModule() {
 
  const { paperSettings } = usePaperStore();
  const { families, autoDetectFamilies, getFamilyForStudent } = useFamilyStore();
+
+ useEffect(() => {
+ let cancelled = false;
+ async function loadFeeStatuses() {
+ try {
+ const response = await api.get('/api/fees');
+ const rows = Array.isArray(response.data?.data) ? response.data.data : [];
+ const latest = {};
+ rows.forEach(row => {
+ const id = Number(row.student_id);
+ if (!id || Object.prototype.hasOwnProperty.call(latest, id)) return;
+ latest[id] = normalizeFeeStatus(row.status);
+ });
+ if (!cancelled) setFeeStatusByStudent(latest);
+ } catch {
+ if (!cancelled) setFeeStatusByStudent({});
+ }
+ }
+ void loadFeeStatuses();
+ return () => { cancelled = true; };
+ }, [rawStudents.length]);
 
  useEffect(() => {
  if (searchParams.get('add') === '1') setShowAdd(true);
@@ -2157,15 +2160,16 @@ export default function StudentsModule() {
  { label:"Total Students", value:students.length, icon:"ALL", color:"#0A84FF" },
  { label:"Active", value:students.filter(s=>s.status==="Active").length, icon:"OK", color:"#30D158" },
  { label:"Fee Paid", value:students.filter(s=>s.fee==="Paid").length, icon:"PAID", color:"#C8991A" },
- { label:"Fee Pending", value:students.filter(s=>s.fee==="Pending").length, icon:"DUE", color:"#FF9F0A" },
+ { label:"Fee Pending", value:students.filter(s=>["Pending","Partial","Overdue"].includes(s.fee)).length, icon:"DUE", color:"#FF9F0A" },
  ];
 
  // Dashboard computed values
  const genderStats = getGenderStats(students);
  const maleCount = genderStats.male;
  const femaleCount = genderStats.female;
- const malePct = students.length > 0 ? Math.round((maleCount / students.length) * 100) : 0;
- const femalePct = students.length > 0 ? 100 - malePct : 0;
+ const knownGenderCount = maleCount + femaleCount;
+ const malePct = knownGenderCount > 0 ? Math.round((maleCount / knownGenderCount) * 100) : 0;
+ const femalePct = knownGenderCount > 0 ? Math.round((femaleCount / knownGenderCount) * 100) : 0;
  const activeCount = students.filter(s => s.status === "Active").length;
  const activePct = students.length > 0 ? Math.round((activeCount / students.length) * 100) : 0;
 
@@ -2181,8 +2185,8 @@ export default function StudentsModule() {
  color: ['#0A84FF','#30D158','#C8991A','#BF5AF2','#FF375F','#64D2FF','#FF9F0A','#25D366'][i % 8],
  }));
 
- const dashCardStyle = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
- const dashTitleStyle = { color: '#C0C8D8', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
+ const dashCardStyle = { background: 'var(--apex-bg-surface)', backdropFilter: 'blur(20px)', border: '1px solid var(--apex-border-default)', borderRadius: 22, padding: 20, boxShadow:'var(--apex-shadow-sm)' };
+ const dashTitleStyle = { color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
  const metricCardStyle = {
  background: "linear-gradient(145deg, rgba(12,49,84,0.96), rgba(9,33,59,0.98))",
  border: "1px solid rgba(148,163,184,0.18)",
@@ -2242,10 +2246,10 @@ export default function StudentsModule() {
  <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "flex-start", marginBottom: 18 }}>
  <div>
  <div style={{ ...dashTitleStyle, marginBottom: 5 }}>Student Composition</div>
- <div style={{ color: "#EAF2FF", fontSize: 18, fontWeight: 850 }}>Boys / Girls Split</div>
+ <div style={{ color: "var(--apex-text-primary)", fontSize: 18, fontWeight: 850 }}>Boys / Girls Split</div>
  </div>
  <span style={{ color: "#C8991A", background: "rgba(200,153,26,0.12)", border: "1px solid rgba(200,153,26,0.22)", borderRadius: 999, padding: "5px 10px", fontSize: 11, fontWeight: 750 }}>
- {genderStats.estimated > 0 ? "Smart estimate" : "Verified data"}
+ {genderStats.unknown > 0 ? `${genderStats.unknown} missing` : "Verified data"}
  </span>
  </div>
  <div style={{ display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
@@ -2266,8 +2270,8 @@ export default function StudentsModule() {
  { label: "Active", color: "#30D158", value: `${activeCount} (${activePct}%)` },
  ]} />
  <div style={{ marginTop: 14, color: "rgba(192,200,216,0.72)", fontSize: 12, lineHeight: 1.55 }}>
- {genderStats.estimated > 0
- ? "Missing gender fields are displayed with a safe name-based estimate so the dashboard stays useful without changing student records."
+ {genderStats.unknown > 0
+ ? `${genderStats.unknown} student record${genderStats.unknown === 1 ? " is" : "s are"} missing a verified gender value. No estimate is being invented.`
  : "Gender values are coming directly from student records."}
  </div>
  </div>
@@ -2278,7 +2282,7 @@ export default function StudentsModule() {
  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 12 }}>
  <div>
  <div style={{ ...dashTitleStyle, marginBottom: 5 }}>Class Strength Map</div>
- <div style={{ color: "#EAF2FF", fontSize: 18, fontWeight: 850 }}>Enrollment by Class</div>
+ <div style={{ color: "var(--apex-text-primary)", fontSize: 18, fontWeight: 850 }}>Enrollment by Class</div>
  </div>
  <div style={{ color: "#8892A4", fontSize: 12, fontWeight: 700 }}>{Object.keys(classCounts).length} active classes</div>
  </div>
@@ -2421,7 +2425,7 @@ export default function StudentsModule() {
  </td>
  <td style={{ padding:"14px", color:"#8892A4", fontSize:13 }}>{s.contact}</td>
  <td style={{ padding:"14px" }}>
- <span style={{ padding:"3px 10px", background:s.fee==="Paid"?"rgba(48,209,88,0.1)":"rgba(255,159,10,0.1)", border:`1px solid ${s.fee==="Paid"?"rgba(48,209,88,0.3)":"rgba(255,159,10,0.3)"}`, borderRadius:20, fontSize:12, color:s.fee==="Paid"?"#30D158":"#FF9F0A", fontWeight:600 }}>{s.fee}</span>
+ <span style={{ padding:"3px 10px", background:s.fee==="Paid"?"color-mix(in srgb, var(--apex-action-success) 10%, transparent)":"var(--apex-bg-subtle)", border:`1px solid ${s.fee==="Paid"?"color-mix(in srgb, var(--apex-action-success) 28%, var(--apex-border-default))":"var(--apex-border-default)"}`, borderRadius:20, fontSize:12, color:s.fee==="Paid"?"var(--apex-action-success)":"var(--apex-text-tertiary)", fontWeight:600 }}>{s.fee || "No challan"}</span>
  </td>
  <td style={{ padding:"14px" }}>
  <span style={{ padding:"3px 10px", background:s.status==="Active"?"rgba(48,209,88,0.1)":"rgba(255,55,95,0.1)", border:`1px solid ${s.status==="Active"?"rgba(48,209,88,0.3)":"rgba(255,55,95,0.3)"}`, borderRadius:20, fontSize:12, color:s.status==="Active"?"#30D158":"#FF375F", fontWeight:600 }}>{s.status}</span>
