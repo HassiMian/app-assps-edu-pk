@@ -702,20 +702,23 @@ function StudentPerformanceSheet({ students, school, classNames, activeClasses, 
 
 
 const card = {
- background: "rgba(11,44,77,0.92)", backdropFilter: "blur(20px)",
- border: "1px solid rgba(148,163,184,0.18)", borderRadius: 20, padding: 24,
+ background: "var(--apex-bg-surface)", backdropFilter: "blur(20px)",
+ border: "1px solid var(--apex-border-default)", borderRadius: 20, padding: 24,
+ boxShadow: "var(--apex-shadow-sm)", color: "var(--apex-text-primary)",
 };
 const btnPrimary = {
  display: "flex", alignItems: "center", gap: 8,
- background: "linear-gradient(135deg, #C8991A, #e8b420)",
- color: "#071e34", border: "none", borderRadius: 10,
+ background: "var(--apex-action-primary)",
+ color: "#fff", border: "1px solid transparent", borderRadius: 10,
  padding: "10px 20px", fontWeight: 700, fontSize: 14, cursor: "pointer",
+ boxShadow: "0 8px 20px color-mix(in srgb, var(--apex-action-primary) 20%, transparent)",
 };
 const btnSecondary = {
  display: "flex", alignItems: "center", gap: 8,
- background: "rgba(11,44,77,0.6)", color: "#C0C8D8",
- border: "1px solid rgba(200,153,26,0.2)", borderRadius: 10,
+ background: "var(--apex-bg-surface-solid)", color: "var(--apex-text-secondary)",
+ border: "1px solid var(--apex-border-default)", borderRadius: 10,
  padding: "10px 20px", fontWeight: 600, fontSize: 14, cursor: "pointer",
+ boxShadow: "var(--apex-shadow-sm)",
 };
 
 //  Certificate print engine
@@ -1311,6 +1314,8 @@ function Tip({ label, color = '#C8991A', children }) {
 //  Add / Edit Student Modal
 function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCredGenerated, paperSettings }) {
  const { classNames, sectionsForClass, localities } = useAcademicStore();
+ const defaultClass = classNames[0] || "";
+ const defaultSection = sectionsForClass(defaultClass)[0] || "";
  const { families, addStudentToFamily, createFamily } = useFamilyStore();
  const isEdit = !!initialData
  const [feeSetup, setFeeSetup] = useState(() => initFeeSetup());
@@ -1321,8 +1326,8 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  name: initialData.name || '',
  father: initialData.father || '',
  mother: initialData.mother || '',
- class: initialData.class || classNames[0] || 'Starter',
- section: initialData.section || 'Blue',
+ class: initialData.class || defaultClass,
+ section: initialData.section || sectionsForClass(initialData.class || defaultClass)[0] || defaultSection,
  whatsapp: initialData.whatsapp || '',
  phone: initialData.phone || '',
  locality: initialData.locality || '',
@@ -1331,17 +1336,17 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  fatherOccupation: initialData.fatherOccupation || '',
  gr: initialData.gr || '',
  } : {
- name:"", father:"", mother:"", class:classNames[0] || "Starter", section:"Blue",
+ name:"", father:"", mother:"", class:defaultClass, section:defaultSection,
  whatsapp:"", phone:"", locality:"", dob:"", fatherCnic:"", fatherOccupation:"",
 
- gr:`GR-${Math.floor(1000 + Math.random() * 9000)}`,
+ gr:"",
  });
  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
- const inp = { width:"100%", padding:"10px 14px", borderRadius:10, boxSizing:"border-box", background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none" };
- const lbl = { color:"#8892A4", fontSize:12, fontWeight:600, display:"block", marginBottom:6, textTransform:"uppercase", letterSpacing:0.5 };
+ const inp = { width:"100%", padding:"10px 14px", borderRadius:10, boxSizing:"border-box", background:"var(--apex-bg-surface-solid)", border:"1px solid var(--apex-border-default)", color:"var(--apex-text-primary)", fontSize:14, outline:"none" };
+ const lbl = { color:"var(--apex-text-tertiary)", fontSize:12, fontWeight:600, display:"block", marginBottom:6, textTransform:"uppercase", letterSpacing:0.5 };
  const sh = (t) => (
- <div style={{ gridColumn:"1/-1", borderBottom:"1px solid rgba(200,153,26,0.12)", paddingBottom:6, marginBottom:2 }}>
- <span style={{ color:"#C8991A", fontSize:11, fontWeight:700, letterSpacing:1, textTransform:"uppercase" }}>{t}</span>
+ <div style={{ gridColumn:"1/-1", borderBottom:"1px solid var(--apex-border-subtle)", paddingBottom:6, marginBottom:2 }}>
+ <span style={{ color:"var(--apex-action-primary)", fontSize:11, fontWeight:700, letterSpacing:1, textTransform:"uppercase" }}>{t}</span>
  </div>
  );
  useEffect(() => {
@@ -1355,13 +1360,22 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  api.get("/api/fees/settings").then((r) => {
  const list = r.data?.data?.classSettings || []
  const found = list.find((item) => item.class_name === form.class && item.active !== false)
- const monthly = Number(found?.monthly_fee || 2500)
+ const monthly = Number(found?.monthly_fee || 0)
  setFeeSetup((prev) => ({
  ...prev,
  amounts: { ...prev.amounts, "Monthly Fee": monthly },
  }))
  }).catch(() => {})
  }, [form.class, isEdit])
+
+ useEffect(() => {
+ if (isEdit || !form.class) return
+ const validSections = sectionsForClass(form.class)
+ if (validSections.length && !validSections.includes(form.section)) {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setForm(prev => ({ ...prev, section: validSections[0] }))
+ }
+ }, [form.class, form.section, isEdit, sectionsForClass])
 
  const buildPayload = () => ({
  name: form.name,
@@ -1376,7 +1390,7 @@ function AddStudentModal({ onClose, addStudent, initialData, updateStudent, onCr
  father_cnic: form.fatherCnic,
  father_occupation: form.fatherOccupation,
  date_of_birth: form.dob,
- gr_number: form.gr,
+ ...(form.gr ? { gr_number: form.gr } : {}),
  photo: photo || undefined,
  });
 
@@ -1762,7 +1776,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  </div>
  <div style={{ flex:1 }}>
  <h3 style={{ color:"#C0C8D8", fontSize:17, fontWeight:800, margin:0 }}>{student.name}</h3>
- <p style={{ color:"#8892A4", fontSize:13, margin:"4px 0 0" }}>{student.gr} · {student.class} · Section {student.section}</p>
+ <p style={{ color:"var(--apex-text-tertiary)", fontSize:13, margin:"4px 0 0" }}>{student.gr} · {student.class} · Section {student.section}</p>
  </div>
  <span style={{ padding:"3px 12px", borderRadius:20, fontSize:11, fontWeight:700, background:student.status==="Active"?"rgba(48,209,88,0.15)":"rgba(255,55,95,0.15)", color:student.status==="Active"?"#30D158":"#FF375F", border:`1px solid ${student.status==="Active"?"#30D158":"#FF375F"}` }}>
  {student.status}
@@ -2180,16 +2194,16 @@ export default function StudentsModule() {
  };
 
  return (
- <div style={{ padding:24, width:"100%", maxWidth:1520, margin:"0 auto", boxSizing:"border-box" }}>
+ <div style={{ padding:24, width:"100%", maxWidth:1520, margin:"0 auto", boxSizing:"border-box", color:"var(--apex-text-primary)" }}>
 
  {/* Header */}
  <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", gap:16, flexWrap:"wrap", marginBottom:20 }}>
  <div style={{ display:"flex", alignItems:"center", gap:12 }}>
- <div style={{ width:40, height:40, borderRadius:12, background:"rgba(10,132,255,0.15)", display:"flex", alignItems:"center", justifyContent:"center" }}>
- <GraduationCap size={22} color="#0A84FF"/>
+ <div style={{ width:40, height:40, borderRadius:12, background:"color-mix(in srgb, var(--apex-action-primary) 10%, var(--apex-bg-surface-solid))", display:"flex", alignItems:"center", justifyContent:"center" }}>
+ <GraduationCap size={22} color="var(--apex-action-primary)"/>
  </div>
  <div>
- <h1 style={{ color:"#C0C8D8", fontSize:24, fontWeight:800, margin:0 }}>Student Management</h1>
+ <h1 style={{ color:"var(--apex-text-primary)", fontSize:24, fontWeight:800, margin:0 }}>Student Management</h1>
  <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session 2026-2027 · {students.length} total students</p>
  </div>
  </div>
@@ -2214,10 +2228,10 @@ export default function StudentsModule() {
  {MODULE_TABS.map(t=>(
  <button key={t.id} onClick={()=>setModuleTab(t.id)} style={{
  padding:"10px 18px", borderRadius:10, border:"none", cursor:"pointer", whiteSpace:"nowrap",
- background:moduleTab===t.id?"linear-gradient(135deg,#C8991A,#e8b420)":"rgba(11,44,77,0.92)",
- color:moduleTab===t.id?"#071e34":"#8892A4",
+ background:moduleTab===t.id?"var(--apex-action-primary)":"var(--apex-bg-surface)",
+ color:moduleTab===t.id?"#fff":"var(--apex-text-tertiary)",
  fontWeight:700, fontSize:13,
- border:moduleTab===t.id?"none":"1px solid rgba(148,163,184,0.18)",
+ border:moduleTab===t.id?"1px solid transparent":"1px solid var(--apex-border-default)",
  }}>{t.label}</button>
  ))}
  </div>
@@ -2301,14 +2315,14 @@ export default function StudentsModule() {
  {/* Filters */}
  <div className="super-module-card" style={{ ...card, marginBottom:20, display:"flex", gap:12, alignItems:"center", flexWrap:"wrap" }}>
  <div ref={searchRef} style={{ flex:1, minWidth:200, position:"relative" }}>
- <Search size={16} color="#8892A4" style={{ position:"absolute", left:12, top:"50%", transform:"translateY(-50%)", zIndex:1 }}/>
+ <Search size={16} color="var(--apex-text-tertiary)" style={{ position:"absolute", left:12, top:"50%", transform:"translateY(-50%)", zIndex:1 }}/>
  <input
  value={search}
  onChange={e=>{ setSearch(e.target.value); setShowDropdown(true); }}
  onFocus={()=>search.trim() && setShowDropdown(true)}
  onBlur={()=>setTimeout(()=>setShowDropdown(false), 150)}
  placeholder="Search by name, GR No, father name..."
- style={{ width:"100%", padding:"10px 12px 10px 38px", borderRadius:10, background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none", boxSizing:"border-box" }}
+ style={{ width:"100%", padding:"10px 12px 10px 38px", borderRadius:10, background:"var(--apex-bg-surface-solid)", border:"1px solid var(--apex-border-default)", color:"var(--apex-text-primary)", fontSize:14, outline:"none", boxSizing:"border-box" }}
  />
  {showDropdown && search.trim().length > 0 && (()=>{
  const q = search.toLowerCase();

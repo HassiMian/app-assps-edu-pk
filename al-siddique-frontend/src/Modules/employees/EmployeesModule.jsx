@@ -116,22 +116,22 @@ const transformEmployee = (e) => ({
 
 //  Color palette 
 const C = {
- card:'rgba(11,44,77,0.92)', gold:'#C8991A', goldL:'#e8b420',
- silver:'#C0C8D8', muted:'#8892A4', green:'#30D158', red:'#FF375F',
- orange:'#FF9F0A', blue:'#0A84FF', border:'rgba(148,163,184,0.18)',
+ card:'var(--apex-bg-surface)', gold:'var(--apex-action-highlight)', goldL:'color-mix(in srgb, var(--apex-action-highlight) 78%, white)',
+ silver:'var(--apex-text-primary)', muted:'var(--apex-text-tertiary)', green:'var(--apex-action-success)', red:'var(--apex-action-danger)',
+ orange:'var(--apex-action-highlight)', blue:'var(--apex-action-primary)', border:'var(--apex-border-default)',
 }
 
 //  Small UI pieces 
 const GCard = ({ children, style={} }) => (
- <div className="super-module-card" style={{ background:C.card, backdropFilter:'blur(20px)', WebkitBackdropFilter:'blur(20px)', border:`1px solid ${C.border}`, borderRadius:20, padding:24, boxShadow:'0 22px 50px rgba(0,0,0,0.32)', position:'relative', overflow:'hidden', ...style }}>
+ <div className="super-module-card" style={{ background:C.card, backdropFilter:'blur(20px)', WebkitBackdropFilter:'blur(20px)', border:`1px solid ${C.border}`, borderRadius:20, padding:24, boxShadow:'var(--apex-shadow-sm)', position:'relative', overflow:'hidden', ...style }}>
  {children}
  </div>
 )
 
 const TabBtn = ({ active, onClick, children }) => (
  <button onClick={onClick} style={{
- background: active ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'rgba(15,23,42,0.46)',
- color: active ? '#071e34' : C.silver, fontWeight:700, fontSize:14,
+ background: active ? 'var(--apex-action-primary)' : 'var(--apex-bg-surface-solid)',
+ color: active ? '#fff' : C.silver, fontWeight:700, fontSize:14,
  padding:'11px 22px', borderRadius:14, border: active ? 'none' : `1px solid ${C.border}`,
  cursor:'pointer', transition:'all 0.18s',
  }}>{children}</button>
@@ -1517,11 +1517,11 @@ function EmployeesModule() {
  color: ['#30D158','#0A84FF','#C8991A','#BF5AF2','#FF375F'][i % 5],
  }));
 
- const empDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
+ const empDashCard = { background: 'var(--apex-bg-surface)', backdropFilter: 'blur(20px)', border: '1px solid var(--apex-border-default)', borderRadius: 22, padding: 20, boxShadow:'var(--apex-shadow-sm)' };
  const empDashTitle = { color: '#C0C8D8', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
 
  return (
- <div className="super-module-card" style={{ minHeight:'100vh', background:'#071e34', color:C.silver, fontFamily:'Inter,sans-serif' }}>
+ <div className="super-module-card" style={{ minHeight:'100vh', background:'var(--apex-shell-gradient)', color:C.silver, fontFamily:'Inter,sans-serif' }}>
 
  <EmployeeFormModal
  isOpen={modalMode === 'add' || modalMode === 'edit'}
@@ -1538,13 +1538,13 @@ function EmployeesModule() {
  />
 
  <div className="super-module-card" style={{ padding:'24px 24px' }}>
- <div className="super-module-card" style={{ padding:'22px 26px', borderRadius:26, background:'linear-gradient(135deg,rgba(11,44,77,0.92),rgba(7,30,52,0.98))', border:`1px solid ${C.border}`, display:'flex', flexWrap:'wrap', gap:18, justifyContent:'space-between', alignItems:'center' }}>
+ <div className="super-module-card" style={{ padding:'22px 26px', borderRadius:26, background:'var(--apex-bg-surface)', border:`1px solid ${C.border}`, display:'flex', flexWrap:'wrap', gap:18, justifyContent:'space-between', alignItems:'center' }}>
  <div className="super-module-card" style={{ display:'flex', gap:16, alignItems:'center' }}>
- <div className="super-module-card" style={{ width:54, height:54, borderRadius:20, display:'grid', placeItems:'center', background:'rgba(200,153,26,0.16)', border:`1px solid rgba(200,153,26,0.35)`, color:C.gold }}>
+ <div className="super-module-card" style={{ width:54, height:54, borderRadius:20, display:'grid', placeItems:'center', background:'color-mix(in srgb, var(--apex-action-primary) 9%, var(--apex-bg-surface-solid))', border:'1px solid var(--apex-border-default)', color:C.gold }}>
  <BriefcaseBusiness size={25} />
  </div>
  <div>
- <h1 style={{ margin:0, fontSize:27, color:'#fff', fontFamily:"'Playfair Display',serif", fontWeight:800 }}>Employee Management</h1>
+ <h1 style={{ margin:0, fontSize:27, color:'var(--apex-text-primary)', fontFamily:"'Playfair Display',serif", fontWeight:800 }}>Employee Management</h1>
  <p style={{ margin:'5px 0 0', color:C.muted, fontSize:13 }}>Staff directory, attendance & salary management.</p>
  </div>
  </div>
@@ -1575,13 +1575,13 @@ function EmployeesModule() {
  { label: 'Male Staff', value: empMaleCount, Icon: VenusAndMars, color: C.gold },
  { label: 'Female Staff', value: empFemaleCount, Icon: VenusAndMars, color: C.red },
  ].map(c => (
- <div key={c.label} style={{ ...empDashCard, background: `linear-gradient(145deg, ${c.color}18, rgba(11,44,77,0.96) 52%, rgba(7,30,52,0.98))`, border:`1px solid ${c.color}33`, padding: '18px 20px', display:'flex', alignItems:'center', gap:14 }}>
+ <div key={c.label} style={{ ...empDashCard, background: `linear-gradient(145deg, color-mix(in srgb, ${c.color} 8%, var(--apex-bg-surface-solid)), var(--apex-bg-surface) 62%)`, border:`1px solid ${c.color}33`, padding: '18px 20px', display:'flex', alignItems:'center', gap:14 }}>
  <div className="super-module-card" style={{ width:46, height:46, borderRadius:15, display:'grid', placeItems:'center', background:`${c.color}1f`, border:`1px solid ${c.color}44`, color:c.color }}>
  <c.Icon size={22} />
  </div>
  <div>
  <div className="super-module-card" style={{ color: c.color, fontSize: 28, fontWeight: 850, letterSpacing:-0.4 }}>{c.value}</div>
- <div className="super-module-card" style={{ color: 'rgba(192,200,216,0.72)', fontSize: 11, fontWeight:650 }}>{c.label}</div>
+ <div className="super-module-card" style={{ color: 'var(--apex-text-tertiary)', fontSize: 11, fontWeight:650 }}>{c.label}</div>
  </div>
  </div>
  ))}
