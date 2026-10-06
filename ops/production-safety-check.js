@@ -1755,3 +1755,15 @@ for (const routeFile of [
     '500 responses must not expose raw internal error messages to clients.'
   )
 }
+
+assertNotContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  /res\.status\(500\)\.json\(\{ success: false, message: err\.message \}\)/,
+  'notification endpoints must not expose provider or internal errors to clients.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  'Notification provider is not available.',
+  'notification provider configuration failures must be explicit without leaking provider internals.'
+)

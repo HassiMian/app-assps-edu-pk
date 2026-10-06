@@ -300,7 +300,12 @@ router.post('/single', protect, canSendNotifications, async (req, res) => {
     const result = await sendOne(phone, message, channel, twilioConfig, twilioClient)
     res.json({ success: true, message: 'Message send ho gaya', ...result })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Single notification send error:', err.message)
+    const unavailable = ['Twilio not configured', 'TWILIO_SMS_FROM not set', 'TWILIO_WA_FROM not set'].includes(err.message)
+    res.status(unavailable ? 503 : 500).json({
+      success: false,
+      message: unavailable ? 'Notification provider is not available.' : 'Message could not be sent.'
+    })
   }
 })
 
@@ -438,7 +443,8 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
     const failed = results.filter(r => r.status === 'failed').length
     res.json({ success: true, sent, failed, results })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Bulk notification send error:', err.message)
+    res.status(500).json({ success: false, message: 'Notification batch could not be processed.' })
   }
 })
 
