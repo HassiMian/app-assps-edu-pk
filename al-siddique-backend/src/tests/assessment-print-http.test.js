@@ -1,3 +1,5 @@
+process.env.NODE_ENV='development'
+process.env.DEMO_LOGIN_ENABLED='true'
 const test=require('node:test')
 const assert=require('node:assert/strict')
 const express=require('express')
