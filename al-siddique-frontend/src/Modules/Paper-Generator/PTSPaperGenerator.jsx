@@ -815,7 +815,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   const [item] = sections.splice(from, 1); sections.splice(to, 0, item)
   return { ...current, official_section:resequenceOfficial(sections) }
  })
- const addOfficialSection = () => {
+ const addOfficialSection = (layoutPreset = 'auto') => {
   const newId = `${loadedPaper?.id || 'paper'}-manual-${Date.now()}-${Math.random().toString(36).slice(2,7)}`
   onPaperChange(current => {
   const sections = [...(current.official_section || [])]
@@ -823,7 +823,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   const serial = academicCount + 1
   const urdu = isUrduScriptPaper({ config:cfg, ...current })
   const heading = urdu ? `سوال نمبر ${serial}: نیا سوال۔` : `Q${serial}. New Question`
-  sections.push({ id:newId, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:sections.length + 1, priority:'manual' })
+  sections.push({ id:newId, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:sections.length + 1, priority:'manual', layoutPreset, ...(layoutPreset==='table'?{tablePurpose:'answer_table'}:{}) })
   return { ...current, official_section:resequenceOfficial(sections) }
   })
   setSelectedSectionId(newId)
@@ -1372,7 +1372,15 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     <textarea aria-label="Selected question raw content" value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} style={{...tinp,width:'100%',minHeight:110,resize:'vertical',marginTop:6,direction:isUrduScriptPaper({config:cfg,...paper})?'rtl':'ltr',fontFamily:isUrduScriptPaper({config:cfg,...paper})?URDU_FONT_STACK:"'Times New Roman',serif"}} />
    </details>
   </> : <div style={{fontSize:11,lineHeight:1.55,color:D.muted}}>The paper will not move in Edit mode. Click a question to open structural controls. Click its text to type directly. Select text to use the floating Word-style formatting bar.</div>}
-  <button type="button" onClick={addOfficialSection} style={{...tinp,width:'100%',marginTop:10,cursor:'pointer',fontWeight:900,color:D.gold}}>+ Add Question</button>
+  {loadedPaper?.userAuthored ? <details data-block-add-menu style={{marginTop:10}}>
+   <summary style={{...tinp,width:'100%',cursor:'pointer',fontWeight:900,color:D.gold,listStyle:'none'}}>+ Add Block</summary>
+   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,marginTop:6}}>
+    <button type="button" data-add-block="question" onClick={()=>addOfficialSection('auto')} style={{...tinp,cursor:'pointer'}}>Question</button>
+    <button type="button" data-add-block="table" onClick={()=>addOfficialSection('table')} style={{...tinp,cursor:'pointer'}}>Table</button>
+    <button type="button" data-add-block="matching" onClick={()=>addOfficialSection('matching')} style={{...tinp,cursor:'pointer'}}>Matching</button>
+    <button type="button" data-add-block="long" onClick={()=>addOfficialSection('long')} style={{...tinp,cursor:'pointer'}}>Long Answer</button>
+   </div>
+  </details> : <button type="button" onClick={()=>addOfficialSection('auto')} style={{...tinp,width:'100%',marginTop:10,cursor:'pointer',fontWeight:900,color:D.gold}}>+ Add Question</button>}
  </div>}
  <div id="paper-canvas" ref={canvasRef} style={{ flex:1, minHeight:0, overflowY:'auto', background:'var(--pg-canvas, #1e2a3a)', padding:'12px', display:'flex', flexDirection:'column', alignItems:'center', gap: half ? 8 : 0 }}>
  {totalQs === 0 ? (
