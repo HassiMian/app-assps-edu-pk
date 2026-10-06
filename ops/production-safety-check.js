@@ -2018,3 +2018,14 @@ assertContains(
   'No cached timetable was substituted for live data.',
   'date sheet source failures must be explicit instead of silently falling back to cached business data.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/services/useAcademicStore.js',
+  /tenantStorage|localStorage|DEFAULT_ACADEMIC|api\.get\(['"]\/api\/students|Transitional fallback|setData\(localData\)/,
+  'academic store must use confirmed academic API data instead of browser, student-derived, or hardcoded live fallbacks.'
+)
+assertContains(
+  'al-siddique-frontend/src/services/useAcademicStore.js',
+  "const [data, setData] = useState(EMPTY_ACADEMIC)",
+  'academic data must begin empty until the server confirms the tenant setup.'
+)

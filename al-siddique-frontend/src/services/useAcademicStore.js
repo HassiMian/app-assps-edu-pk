@@ -1,44 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import api from './api'
-import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
-const AK = 'al_siddique_academic'
-
-const DEFAULT_ACADEMIC = {
- periodsPerDay: 8,
- localities: ['Rayya Khas', 'Tharpal Sharif', 'Garoowal', 'Matteke', 'Fattoke', 'Jeewan Bhinder', 'Kulla Mandiala', 'Baddomalhi', 'Narowal', 'Lahore'],
- classes: [
- { level: 'starter', name: 'Starter', active: true, sections: ['Blue'] },
- { level: 'mover', name: 'Mover', active: true, sections: ['Blue'] },
- { level: 'flyer', name: 'Flyer', active: true, sections: ['Blue'] },
- { level: '1', name: 'One', active: true, sections: ['Blue'] },
- { level: '2', name: 'Two', active: true, sections: ['Blue'] },
- { level: '3', name: 'Three', active: true, sections: ['Blue'] },
- { level: '4', name: 'Four', active: true, sections: ['Blue'] },
- { level: '5', name: 'Five', active: true, sections: ['Blue'] },
- { level: '6', name: 'Six', active: true, sections: ['Blue'] },
- { level: '7', name: 'Seven', active: true, sections: ['Blue'] },
- { level: '8', name: 'Eight', active: true, sections: ['Blue'] },
- { level: '9', name: 'Nine', active: true, sections: ['Fatima','Usman','Blue'] },
- { level: 'hifaz', name: 'Hifaz Class', active: true, sections: ['Abubakar'] },
- ],
- subjects: [
- { id: 'sb1', name: 'Mathematics', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
- { id: 'sb2', name: 'English', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
- { id: 'sb3', name: 'Urdu', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
- { id: 'sb4', name: 'Science', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8'] },
- { id: 'sb5', name: 'Islamiyat', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine'] },
- { id: 'sb6', name: 'Social Studies', classes: ['1','2','3','4','5','6','7','8'] },
- { id: 'sb7', name: 'Computer', classes: ['5','6','7','8','9','pre-nine'] },
- { id: 'sb8', name: 'Physics', classes: ['9','pre-nine'] },
- { id: 'sb9', name: 'Chemistry', classes: ['9','pre-nine'] },
- { id: 'sb10', name: 'Biology', classes: ['9','pre-nine'] },
- { id: 'sb11', name: 'General Science', classes: ['9','pre-nine'] },
- { id: 'sb12', name: 'Quran / Nazra', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8','9','pre-nine','hifaz'] },
- { id: 'sb13', name: 'General Knowledge', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8'] },
- { id: 'sb14', name: 'GK', classes: ['starter','mover','flyer','1','2','3','4','5','6','7','8'] },
- ],
-}
+const EMPTY_ACADEMIC = Object.freeze({
+  periodsPerDay: null,
+  localities: [],
+  classes: [],
+  subjects: [],
+  sessionStart: '',
+  sessionEnd: '',
+})
 
 const CLASS_LEVEL_ALIASES = {
  starter: ['starter', 'playgroup', 'play-group', 'play group', 'pg'],
@@ -112,201 +82,135 @@ export function sortClassLevels(levels = []) {
  })
 }
 
-function mergeByName(defaultItems, savedItems = []) {
-  if (Array.isArray(savedItems) && savedItems.length > 0) {
-    return savedItems.map((item, idx) => ({
-      level: String(item.level || `c_${idx + 1}`),
-      name: String(item.name || `Class ${idx + 1}`).trim(),
-      active: item.active !== false,
-      sections: Array.isArray(item.sections) ? item.sections.filter(Boolean) : [],
-    }))
+
+function normalizeServerAcademic(value) {
+  const source = value && typeof value === 'object' ? value : {}
+  return {
+    periodsPerDay: Number.isInteger(Number(source.periodsPerDay)) ? Number(source.periodsPerDay) : null,
+    localities: Array.isArray(source.localities) ? source.localities : [],
+    classes: Array.isArray(source.classes) ? source.classes : [],
+    subjects: Array.isArray(source.subjects) ? source.subjects : [],
+    sessionStart: source.sessionStart || '',
+    sessionEnd: source.sessionEnd || '',
   }
-  return defaultItems
-}
-
-function load() {
- try {
- const raw = getTenantStorageItem(AK, { migrateLegacy:true, removeLegacyOnMigrate:true })
- if (!raw) return DEFAULT_ACADEMIC
- const saved = JSON.parse(raw)
- const localities = Array.isArray(saved.localities) ? [...new Set([...DEFAULT_ACADEMIC.localities, ...saved.localities])] : DEFAULT_ACADEMIC.localities
- const classes = Array.isArray(saved.classes) ? mergeByName(DEFAULT_ACADEMIC.classes, saved.classes) : DEFAULT_ACADEMIC.classes
- const subjects = Array.isArray(saved.subjects) ? saved.subjects : DEFAULT_ACADEMIC.subjects
- return {
- localities,
- classes,
- subjects,
- }
- } catch { return DEFAULT_ACADEMIC }
-}
-
-function normalizeApiClass(item, index) {
- const name = String(item?.name || item?.class_name || item?.label || '').trim()
- if (!name) return null
- const level = normalizeClassLevel(item?.level || item?.class_level || item?.id || name || index)
- const sections = Array.isArray(item?.sections)
- ? item.sections
- : item?.section
- ? [item.section]
- : item?.section_name
- ? [item.section_name]
- : []
-
- return {
- level: level || String(index + 1),
- name,
- active: item?.active !== false,
- sections,
- }
-}
-
-function mergeLiveAcademic(localData, liveClasses) {
-  if (!Array.isArray(liveClasses) || !liveClasses.length) return localData
-
-  const baseClasses = Array.isArray(localData.classes) ? [...localData.classes] : []
-  liveClasses.forEach((item, index) => {
-    const normalized = normalizeApiClass(item, index)
-    if (!normalized) return
-    const match = baseClasses.find(c => String(c.level) === String(normalized.level) || c.name.toLowerCase() === normalized.name.toLowerCase())
-    if (match) {
-      match.sections = [...new Set([...(match.sections || []), ...(normalized.sections || [])])]
-    }
-  })
-
-  return { ...localData, classes: baseClasses }
-}
-
-function classesFromStudents(students = []) {
- const classMap = new Map()
- students.forEach((student, index) => {
- const rawClass = student?.class || student?.class_name || student?.className || student?.class_level || student?.grade
- const name = String(rawClass || '').trim()
- if (!name) return
- const level = normalizeClassLevel(name) || String(index + 1)
- const section = String(student?.section || student?.section_name || '').trim()
- const key = `${level}:${name}`.toLowerCase()
- const existing = classMap.get(key) || { level, name: classLevelLabel(level) || name, active: true, sections: [] }
- if (section && !existing.sections.includes(section)) existing.sections.push(section)
- classMap.set(key, existing)
- })
- return Array.from(classMap.values())
 }
 
 export function useAcademicStore() {
- const [data, setData] = useState(load)
+  const [data, setData] = useState(EMPTY_ACADEMIC)
+  const [defaults, setDefaults] = useState(null)
+  const [configured, setConfigured] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  function updateAcademic(updates) {
-    setData(prev => {
-      const next = {
-        ...prev,
-        ...updates,
-        classes: Array.isArray(updates.classes) ? updates.classes : prev.classes,
-      }
-      try { setTenantStorageItem(AK, JSON.stringify(next)) } catch { /* browser cache is best-effort only */ }
-      window.dispatchEvent(new Event('storage'))
-      void api.put('/api/academic/setup', next).catch(async (error) => {
-        console.error('Academic setup sync failed', error)
-        try {
-          const response = await api.get('/api/academic/setup')
-          if (response.data?.configured && response.data?.data) {
-            setData(response.data.data)
-            try { setTenantStorageItem(AK, JSON.stringify(response.data.data)) } catch { /* cache only */ }
-          }
-        } catch { /* keep last visible value and surface the sync error */ }
-        window.dispatchEvent(new CustomEvent('academic-setup:sync-error'))
-      })
-      return next
-    })
+  async function refreshAcademic() {
+    setLoading(true)
+    setError('')
+    try {
+      const response = await api.get('/api/academic/setup', { skipCache:true })
+      if (response.data?.success === false) throw new Error(response.data?.message || 'Academic setup could not be loaded.')
+      const isConfigured = response.data?.configured === true
+      const serverData = isConfigured ? normalizeServerAcademic(response.data?.data) : EMPTY_ACADEMIC
+      setData(serverData)
+      setConfigured(isConfigured)
+      setDefaults(isConfigured ? null : (response.data?.defaults || null))
+      return { success:true, configured:isConfigured, data:serverData }
+    } catch (requestError) {
+      const message = requestError?.response?.data?.message || requestError?.message || 'Academic setup could not be loaded.'
+      setData(EMPTY_ACADEMIC)
+      setConfigured(false)
+      setDefaults(null)
+      setError(message)
+      return { success:false, error:message }
+    } finally {
+      setLoading(false)
+    }
   }
 
- useEffect(() => {
- let cancelled = false
+  async function updateAcademic(updates) {
+    const candidate = {
+      ...data,
+      ...updates,
+      classes: Array.isArray(updates?.classes) ? updates.classes : data.classes,
+      subjects: Array.isArray(updates?.subjects) ? updates.subjects : data.subjects,
+      localities: Array.isArray(updates?.localities) ? updates.localities : data.localities,
+    }
+    try {
+      const response = await api.put('/api/academic/setup', candidate)
+      if (response.data?.success === false || !response.data?.data) {
+        throw new Error(response.data?.message || 'Academic setup could not be saved.')
+      }
+      const confirmed = normalizeServerAcademic(response.data.data)
+      setData(confirmed)
+      setConfigured(true)
+      setDefaults(null)
+      setError('')
+      window.dispatchEvent(new CustomEvent('academic-setup:updated'))
+      return { success:true, data:confirmed }
+    } catch (requestError) {
+      const message = requestError?.response?.data?.message || requestError?.message || 'Academic setup could not be saved.'
+      setError(message)
+      window.dispatchEvent(new CustomEvent('academic-setup:sync-error', { detail:{ message } }))
+      return { success:false, error:message }
+    }
+  }
 
- async function hydrate() {
- const localData = load()
- if (!cancelled) setData(localData)
+  useEffect(() => {
+    let cancelled = false
+    async function hydrate() {
+      if (cancelled) return
+      await refreshAcademic()
+    }
+    void hydrate()
+    const handler = () => { if (!cancelled) void refreshAcademic() }
+    window.addEventListener('academic-setup:refresh', handler)
+    return () => {
+      cancelled = true
+      window.removeEventListener('academic-setup:refresh', handler)
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
- try {
- const academicResponse = await api.get('/api/academic/setup')
- const configured = academicResponse.data?.configured === true
- const serverData = academicResponse.data?.data
- if (configured && serverData && Array.isArray(serverData.classes) && serverData.classes.length > 0) {
- const next = {
- ...DEFAULT_ACADEMIC,
- ...serverData,
- localities: Array.isArray(serverData.localities) ? serverData.localities : DEFAULT_ACADEMIC.localities,
- classes: serverData.classes,
- subjects: Array.isArray(serverData.subjects) ? serverData.subjects : DEFAULT_ACADEMIC.subjects,
- }
- if (!cancelled) setData(next)
- try { setTenantStorageItem(AK, JSON.stringify(next)) } catch { /* cache writes are best-effort only */ }
- return
- }
- } catch {
- // Transitional fallback while the server-side academic schema is not configured.
- }
+  const activeClasses = data.classes.filter(c => c.active !== false)
+  const classNames = activeClasses.map(c => c.name)
+  const subjectNames = data.subjects.map(s => s.name)
+  const periodsPerDay = Number.isInteger(Number(data.periodsPerDay))
+    ? Math.min(12, Math.max(1, Number(data.periodsPerDay)))
+    : 0
+  const allSections = ['All', ...new Set(activeClasses.flatMap(c => c.sections || []))]
 
- try {
- const response = await api.get('/api/students')
- const students = Array.isArray(response.data?.data) ? response.data.data : []
- const derivedClasses = classesFromStudents(students)
- if (!cancelled) setData(mergeLiveAcademic(localData, derivedClasses))
- } catch {
- if (!cancelled) setData(localData)
- }
- }
+  function subjectsForClass(classIdentifier) {
+    if (!classIdentifier) return subjectNames
+    const targetClass = data.classes.find(c => String(c.level) === String(classIdentifier) || c.name === classIdentifier)
+    const levelToSearch = targetClass ? String(targetClass.level) : String(classIdentifier)
+    const compatibleLevels = equivalentClassLevels(levelToSearch)
+    const matched = data.subjects
+      .filter(s => (Array.isArray(s.classes) ? s.classes : []).some(level => compatibleLevels.includes(normalizeClassLevel(level))))
+      .map(s => s.name)
+    return matched.length > 0 ? matched : subjectNames
+  }
 
- void hydrate()
+  function sectionsForClass(className) {
+    const target = activeClasses.find(c => c.name === className)
+    return target?.sections?.length ? target.sections : []
+  }
 
- const handler = () => {
- void hydrate()
- }
- window.addEventListener('storage', handler)
- return () => {
- cancelled = true
- window.removeEventListener('storage', handler)
- }
- }, [])
-
- const activeClasses = data.classes.filter(c => c.active)
- 
- // Convenient arrays for dropdowns and UI components
- const classNames = activeClasses.map(c => c.name)
- const subjectNames = data.subjects.map(s => s.name)
- const periodsPerDay = Number.isInteger(Number(data.periodsPerDay)) ? Math.min(12, Math.max(1, Number(data.periodsPerDay))) : 8
- const allSections = ['All', ...new Set(activeClasses.flatMap(c => c.sections || []))]
-
- function subjectsForClass(classIdentifier) {
- if (!classIdentifier) return subjectNames
- const targetClass = data.classes.find(c => String(c.level) === String(classIdentifier) || c.name === classIdentifier)
- const levelToSearch = targetClass ? String(targetClass.level) : String(classIdentifier)
- const compatibleLevels = equivalentClassLevels(levelToSearch)
- 
- const matched = data.subjects
- .filter(s => (Array.isArray(s.classes) ? s.classes : []).some(level => compatibleLevels.includes(normalizeClassLevel(level))))
- .map(s => s.name)
- 
- return matched.length > 0 ? matched : subjectNames
- }
-
- function sectionsForClass(className) {
- const target = activeClasses.find(c => c.name === className)
- return target?.sections?.length ? target.sections : []
- }
-
- return { 
- localities: data.localities || [],
- classes: data.classes, 
- activeClasses, 
- subjects: data.subjects, 
- classNames,
- subjectNames,
- periodsPerDay,
- sessionStart: data.sessionStart || '',
- sessionEnd: data.sessionEnd || '',
- allSections,
- subjectsForClass,
- sectionsForClass,
- updateAcademic
- }
+  return {
+    localities: data.localities,
+    classes: data.classes,
+    activeClasses,
+    subjects: data.subjects,
+    classNames,
+    subjectNames,
+    periodsPerDay,
+    sessionStart: data.sessionStart,
+    sessionEnd: data.sessionEnd,
+    allSections,
+    subjectsForClass,
+    sectionsForClass,
+    updateAcademic,
+    refreshAcademic,
+    configured,
+    defaults,
+    loading,
+    error,
+  }
 }
