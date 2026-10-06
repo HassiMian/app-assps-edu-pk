@@ -466,6 +466,15 @@ async function migrate() {
     }
 
     try {
+      const feeProfileMigration = require('../../migrations/007_student_fee_profile_components')
+      await feeProfileMigration.up()
+      console.log('student fee profile components ready')
+    } catch (err) {
+      console.error('Student Fee Profile Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

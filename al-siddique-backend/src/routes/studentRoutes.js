@@ -9,7 +9,7 @@ const hasServiceScope = auth.hasServiceScope || (() => true)
 const requireScopeForServiceOnly = auth.requireScopeForServiceOnly || (() => (req, res, next) => next())
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
-const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
+const { ensureStudentFeeProfileSchema, upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
@@ -286,6 +286,8 @@ router.get('/:id', protect, requireScopeForServiceOnly('school.students.read'), 
 
 // POST /api/students
 router.post('/', protect, adminOnly, async (req, res) => {
+  let client = null
+  let transactionOpen = false
   try {
     const {
       name, father_name, mother_name, class: cls, section,
@@ -324,10 +326,27 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const normalizedClass = academicAssignment.className
     const normalizedSection = academicAssignment.section
 
+    const studentTenantSafe = await hasColumn('students', 'school_id').catch(() => false)
+    if (!studentTenantSafe) {
+      return res.status(503).json({ success: false, code: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for admission writes.' })
+    }
+    if (!schoolId) {
+      return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to admit a student.' })
+    }
+    await ensureStudentFeeProfileSchema()
+    if (create_challan && !(await hasColumn('fee_challans', 'school_id').catch(() => false))) {
+      return res.status(503).json({ success: false, code: 'FEE_TENANT_SCHEMA_REQUIRED', message: 'Fee storage is not tenant-safe for creating the first challan.' })
+    }
+
+    client = await pool.connect()
+    await client.query('BEGIN')
+    transactionOpen = true
+    await client.query('SELECT pg_advisory_xact_lock(hashtext($1))', [`student-roll:${schoolId}:${normalizedClass}:${normalizedSection}`])
+
     // Calculate Roll Number automatically if not provided
     let finalRollNumber = roll_number
     if (!finalRollNumber) {
-      const rollRes = await query(
+      const rollRes = await client.query(
         `SELECT COALESCE(MAX(NULLIF(regexp_replace(roll_number, '[^0-9]', '', 'g'), '')::integer), 0) + 1 AS next_roll
          FROM students
          WHERE class = $1 AND section = $2 AND school_id = $3`,
@@ -382,7 +401,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       VALUES (${insertPlaceholders.join(', ')})
       RETURNING *
     `
-    const result = await query(sql, insertVals)
+    const result = await client.query(sql, insertVals)
     const studentData = result.rows[0]
     const studentId = studentData.id
 
@@ -406,6 +425,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
         role: 'student',
         designation: 'Student',
         active: true,
+        db: client,
       })
     }
     if (parentPortalEnabled) {
@@ -419,6 +439,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
         designation: 'Parent',
         phone: parent_phone || parent_whatsapp || null,
         active: true,
+        db: client,
       })
     }
 
@@ -435,7 +456,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     }
     if (userLinkUpdates.length) {
       userLinkParams.push(studentId, schoolId)
-      await query(`
+      await client.query(`
         UPDATE students
         SET ${userLinkUpdates.join(', ')}, updated_at = NOW()
         WHERE id = $${userLinkIndex++} AND school_id = $${userLinkIndex}
@@ -458,7 +479,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
         exam_fee: Number(exam_fee || 0),
         other_charges: Number(other_charges || 0),
         admission_fee: Number(admission_fee || 0)
-      })
+      }, client)
     }
 
     // Generate First Challan if requested
@@ -480,24 +501,21 @@ router.post('/', protect, adminOnly, async (req, res) => {
           : 0)
       )
 
-      const existing = await findExistingChallan({ studentId, month, year, schoolId })
+      const existing = await findExistingChallan({ studentId, month, year, schoolId, db: client })
       if (existing) {
         firstChallan = existing
       } else {
         const challan_no = `CH-${Date.now().toString().slice(-8)}`
-        const supportsTenantCh = await hasColumn('fee_challans', 'school_id').catch(() => false)
-        const ins = supportsTenantCh
-          ? await query(`
-            INSERT INTO fee_challans (school_id, challan_no, student_id, month, year, amount, due_date, created_by, discount, monthly_fee, gross_total, remaining_balance, status)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,'unpaid') RETURNING *
-          `, [schoolId, challan_no, studentId, month, year, grossAmount, due_date, req.user?.id || null, discount, grossAmount, grossAmount, grossAmount])
-          : await query(`
-            INSERT INTO fee_challans (challan_no, student_id, month, year, amount, due_date, created_by, discount, monthly_fee, gross_total, remaining_balance, status)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,'unpaid') RETURNING *
-          `, [challan_no, studentId, month, year, grossAmount, due_date, req.user?.id || null, discount, grossAmount, grossAmount, grossAmount])
+        const ins = await client.query(`
+          INSERT INTO fee_challans (school_id, challan_no, student_id, month, year, amount, due_date, created_by, discount, monthly_fee, gross_total, remaining_balance, status)
+          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,'unpaid') RETURNING *
+        `, [schoolId, challan_no, studentId, month, year, grossAmount, due_date, req.user?.id || null, discount, grossAmount, grossAmount, grossAmount])
         firstChallan = ins.rows[0] || null
       }
     }
+
+    await client.query('COMMIT')
+    transactionOpen = false
 
     res.status(201).json({
       success: true,
@@ -525,11 +543,15 @@ router.post('/', protect, adminOnly, async (req, res) => {
       credentialDispatchRequested: Boolean(send_credentials)
     })
   } catch (err) {
+    if (transactionOpen && client) await client.query('ROLLBACK').catch(() => {})
+    transactionOpen = false
     if (err.code === '23505')
       return res.status(400).json({ success: false, message: 'GR Number already exists' })
     if (err.status === 422)
       return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
     res.status(500).json({ success: false, message: err.message })
+  } finally {
+    client?.release()
   }
 })
 

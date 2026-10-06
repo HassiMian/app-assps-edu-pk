@@ -3,6 +3,10 @@ const bcrypt = require('bcryptjs')
 const { query } = require('../config/database')
 const { hasColumn } = require('../middleware/tenant')
 
+function runQuery(db, sql, params = []) {
+  return db?.query ? db.query(sql, params) : query(sql, params)
+}
+
 function generateTemporaryPassword() {
   const a = crypto.randomBytes(4).toString('hex').toUpperCase()
   const b = crypto.randomBytes(3).toString('hex').toUpperCase()
@@ -13,15 +17,15 @@ function clean(value, max = 255) {
   return String(value || '').trim().slice(0, max)
 }
 
-async function findExistingUser({ schoolId, userId, email, username, role }) {
+async function findExistingUser({ schoolId, userId, email, username, role, db = null }) {
   if (userId) {
-    const byId = await query('SELECT * FROM users WHERE id = $1 AND school_id = $2 LIMIT 1', [userId, schoolId])
+    const byId = await runQuery(db, 'SELECT * FROM users WHERE id = $1 AND school_id = $2 LIMIT 1', [userId, schoolId])
     if (byId.rows[0]) return byId.rows[0]
   }
 
   const identifiers = [clean(email).toLowerCase(), clean(username).toLowerCase()].filter(Boolean)
   if (!identifiers.length) return null
-  const result = await query(`
+  const result = await runQuery(db, `
     SELECT * FROM users
     WHERE school_id = $1
       AND role = $2
@@ -47,6 +51,7 @@ async function provisionPortalUser({
   phone = null,
   permissions = [],
   active = true,
+  db = null,
 }) {
   const normalizedRole = clean(role, 40).toLowerCase()
   const normalizedEmail = clean(email).toLowerCase()
@@ -61,6 +66,7 @@ async function provisionPortalUser({
     email: normalizedEmail,
     username: normalizedUsername,
     role: normalizedRole,
+    db,
   })
 
   if (existing) {
@@ -78,7 +84,7 @@ async function provisionPortalUser({
     if (supportsTenant && tenantId) { updates.push(`tenant_id = $${i++}`); params.push(tenantId) }
     updates.push('updated_at = NOW()')
     params.push(existing.id, schoolId)
-    const updated = await query(`
+    const updated = await runQuery(db, `
       UPDATE users SET ${updates.join(', ')}
       WHERE id = $${i++} AND school_id = $${i}
       RETURNING id, school_id, name, email, role, designation, is_active${supportsUsername ? ', username' : ''}${supportsPermissions ? ', permissions' : ''}
@@ -106,7 +112,7 @@ async function provisionPortalUser({
     const col = columns[idx]
     return col === 'permissions' ? `$${idx + 1}::jsonb` : `$${idx + 1}`
   })
-  const result = await query(`
+  const result = await runQuery(db, `
     INSERT INTO users (${columns.join(', ')})
     VALUES (${placeholders.join(', ')})
     RETURNING id, school_id, name, email, role, designation, is_active${supportsUsername ? ', username' : ''}${supportsPermissions ? ', permissions' : ''}
@@ -116,12 +122,12 @@ async function provisionPortalUser({
 }
 
 
-async function resetPortalUserPassword({ schoolId, userId }) {
+async function resetPortalUserPassword({ schoolId, userId, db = null }) {
   if (!schoolId || !userId) throw new Error('School and user are required.')
   const temporaryPassword = generateTemporaryPassword()
   const passwordHash = await bcrypt.hash(temporaryPassword, 12)
   const supportsMustChange = await hasColumn('users', 'must_change_password').catch(() => false)
-  const result = await query(`
+  const result = await runQuery(db, `
     UPDATE users
     SET password = $1${supportsMustChange ? ', must_change_password = true' : ''}, updated_at = NOW()
     WHERE id = $2 AND school_id = $3
@@ -131,8 +137,8 @@ async function resetPortalUserPassword({ schoolId, userId }) {
   return { user: result.rows[0], temporaryPassword }
 }
 
-async function setPortalUserActive({ schoolId, userId, active }) {
-  const result = await query(`
+async function setPortalUserActive({ schoolId, userId, active, db = null }) {
+  const result = await runQuery(db, `
     UPDATE users
     SET is_active = $1, updated_at = NOW()
     WHERE id = $2 AND school_id = $3

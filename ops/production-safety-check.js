@@ -847,6 +847,56 @@ assertNotContains(
   'fee schema initialization failures must never be silently ignored.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  'RETURNING *',
+  'student fee profile upsert must return the persisted canonical profile.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  'computer_fee = EXCLUDED.computer_fee',
+  'student fee profile must preserve computer fee instead of silently dropping it.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  'lab_fee = EXCLUDED.lab_fee',
+  'student fee profile must preserve lab fee instead of silently dropping it.'
+)
+
+
+assertContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  "await client.query('BEGIN')",
+  'student admission creation must be transactional.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  'pg_advisory_xact_lock',
+  'student roll-number assignment must be serialized inside the admission transaction.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  /supportsTenantCh|INSERT INTO fee_challans \(challan_no, student_id/,
+  'student admission must not create an unscoped first fee challan.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/portalAccountService.js',
+  'db = null',
+  'portal account provisioning must support the caller transaction.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/007_student_fee_profile_components.js',
+  'CREATE TABLE IF NOT EXISTS student_fee_profiles',
+  'fee profile migration must be safe on a fresh database.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
