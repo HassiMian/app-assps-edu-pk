@@ -40,8 +40,8 @@ export default function MarksSheet() {
  const [selectedClass, setSelectedClass] = useState('')
  const [selectedSubject, setSelectedSubject] = useState('')
  const [selectedExamId, setSelectedExamId] = useState('')
- const [totalMarks, setTotalMarks] = useState(100)
- const [passMarks, setPassMarks] = useState(33)
+ const [totalMarks, setTotalMarks] = useState('')
+ const [passMarks, setPassMarks] = useState('')
  const [marks, setMarks] = useState({})
  const [saving, setSaving] = useState(false)
  const [loadingData, setLoadingData] = useState(false)
@@ -71,7 +71,7 @@ export default function MarksSheet() {
 
  const examTypes = Array.from(new Set([...FALLBACK_EXAM_TYPES, ...exams.map(exam => exam.type).filter(Boolean)]))
  const matchingExams = exams.filter(exam => {
- const typeOk = !selectedExamType || (exam.type || FALLBACK_EXAM_TYPES[0]) === selectedExamType
+ const typeOk = !selectedExamType || exam.type === selectedExamType
  const classOk = !selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'
  return typeOk && classOk
  })
@@ -82,19 +82,19 @@ export default function MarksSheet() {
  setMarks({})
  setSelectedExamId(nextExam ? String(nextExam.id) : '')
  if (nextExam) {
- setTotalMarks(Number(nextExam.total_marks || 100))
- setPassMarks(Number(nextExam.pass_marks || 33))
+ setTotalMarks(nextExam.total_marks ?? '')
+ setPassMarks(nextExam.pass_marks ?? '')
  }
  }
 
  const changeExamType = (value) => {
- const nextExam = exams.find(exam => (exam.type || FALLBACK_EXAM_TYPES[0]) === value && (!selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'))
+ const nextExam = exams.find(exam => exam.type === value && (!selectedClass || normalizeClass(exam.class) === selectedClass || exam.class === 'All Classes'))
  setSelectedExamType(value)
  syncExamDefaults(nextExam)
  }
 
  const changeClass = (value) => {
- const nextExam = exams.find(exam => (!selectedExamType || (exam.type || FALLBACK_EXAM_TYPES[0]) === selectedExamType) && (normalizeClass(exam.class) === value || exam.class === 'All Classes'))
+ const nextExam = exams.find(exam => (!selectedExamType || exam.type === selectedExamType) && (normalizeClass(exam.class) === value || exam.class === 'All Classes'))
  setSelectedClass(value)
  syncExamDefaults(nextExam)
  }
@@ -134,8 +134,8 @@ export default function MarksSheet() {
   }
   setMarks(loaded)
   if (exam) {
-  setTotalMarks(Number(exam.total_marks || totalMarks || 100))
-  setPassMarks(Number(exam.pass_marks || passMarks || 33))
+  setTotalMarks(exam.total_marks ?? '')
+  setPassMarks(exam.pass_marks ?? '')
   }
   } catch (err) {
   setStudents([])
@@ -154,6 +154,10 @@ export default function MarksSheet() {
 
   const saveMarks = async () => {
   if (!selectedExamType || !selectedClass || !selectedSubject || !students.length) return
+ if (!Number.isFinite(Number(totalMarks)) || Number(totalMarks) <= 0 || !Number.isFinite(Number(passMarks)) || Number(passMarks) < 0 || Number(passMarks) > Number(totalMarks)) {
+ setMessage('Enter valid total marks and passing marks before saving.')
+ return
+ }
 
   setSaving(true)
   setMessage('')

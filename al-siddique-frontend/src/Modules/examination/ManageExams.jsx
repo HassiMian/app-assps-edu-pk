@@ -5,7 +5,7 @@ import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHe
 import { useAcademicStore } from '../../services/useAcademicStore'
 
 const EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
-const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: '' }
+const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: '', total_marks: '', pass_marks: '' }
 
 function typeLabel(value) {
  if (value === 'TE') return 'Term Exam'
@@ -59,7 +59,10 @@ export default function ManageExams() {
 
  const addExam = async (event) => {
  event.preventDefault()
- if (!form.name.trim()) return
+ if (!form.name.trim() || !form.session || Number(form.total_marks) <= 0 || Number(form.pass_marks) < 0 || Number(form.pass_marks) > Number(form.total_marks)) {
+ setMessage('Enter exam name, academic session, total marks and valid passing marks.')
+ return
+ }
  setSaving(true)
  setMessage('')
  
@@ -73,8 +76,8 @@ export default function ManageExams() {
  type: resolvedType,
  class: form.class,
  session: form.session,
- total_marks: 100,
- pass_marks: 33,
+ total_marks: Number(form.total_marks),
+ pass_marks: Number(form.pass_marks),
  })
  setForm({ ...emptyForm, session: activeSession })
  setMessage('Exam added successfully.')
@@ -118,9 +121,9 @@ export default function ManageExams() {
  <div className="super-module-card" style={card}>
  <div style={{ color: C.muted, fontSize: 11, fontWeight: 700, textTransform: 'uppercase', marginBottom: 8 }}>Session Load</div>
  <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, height: 58 }}>
- {SESSIONS.map(session => {
- const count = exams.filter(exam => (exam.session || SESSIONS[0]) === session).length
- const max = Math.max(...SESSIONS.map(item => exams.filter(exam => (exam.session || SESSIONS[0]) === item).length), 1)
+ {sessionOptions.map(session => {
+ const count = exams.filter(exam => exam.session === session).length
+ const max = Math.max(...sessionOptions.map(item => exams.filter(exam => exam.session === item).length), 1)
  return (
  <div key={session} style={{ flex: 1, display: 'grid', gap: 6, alignItems: 'end' }}>
  <div style={{ height: `${Math.max(8, (count / max) * 58)}px`, background: count ? `linear-gradient(to top, #0A84FF, ${C.gold})` : 'rgba(255,255,255,0.04)', borderRadius: 4 }} />
@@ -133,7 +136,7 @@ export default function ManageExams() {
  </div>
 
  <form className="super-module-card" onSubmit={addExam} style={{ ...card, display: 'grid', gap: 18 }}>
- <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr 1fr', gap: 16 }}>
+ <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(170px,1fr))', gap: 16 }}>
  <div>
  <label style={labelStyle}>Exam Name</label>
  <input style={input} value={form.name} onChange={set('name')} placeholder="e.g. First Term 2026" required />
@@ -153,8 +156,16 @@ export default function ManageExams() {
  <div>
  <label style={labelStyle}>Session</label>
  <select style={select} value={form.session} onChange={set('session')}>
- {SESSIONS.map(session => <option key={session} value={session}>{session}</option>)}
+ {sessionOptions.map(session => <option key={session} value={session}>{session}</option>)}
  </select>
+ </div>
+ <div>
+ <label style={labelStyle}>Total Marks</label>
+ <input type="number" min="1" style={input} value={form.total_marks} onChange={set('total_marks')} required />
+ </div>
+ <div>
+ <label style={labelStyle}>Passing Marks</label>
+ <input type="number" min="0" max={form.total_marks || undefined} style={input} value={form.pass_marks} onChange={set('pass_marks')} required />
  </div>
  </div>
  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>

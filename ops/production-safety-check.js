@@ -501,6 +501,25 @@ assertNotContains(
   'marks sheet must not invent a session when an exam has no session.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  /DB offline.*mock exam|Mid Term Examination.*2025-2026|total_marks \|\| 100|pass_marks \|\| 33/,
+  'exam APIs must not fabricate exam lists or marks policy defaults.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'passing marks must be between zero and total marks',
+  'exam creation must validate its marks policy explicitly.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ManageExams.jsx',
+  /total_marks:\s*100|pass_marks:\s*33|SESSIONS\.map/,
+  'exam management must collect marks policy and session from real configuration/user input.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

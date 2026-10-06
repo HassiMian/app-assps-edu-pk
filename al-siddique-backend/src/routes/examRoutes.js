@@ -154,20 +154,8 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
     const result = await query(sql, tenant.params)
     res.json({ success: true, data: result.rows })
   } catch (err) {
-    console.error('Exams list error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    // DB offline â€” return mock exam list
-    const today = new Date().toISOString().split('T')[0]
-    res.json({
-      success: true,
-      data: [
-        { id: 1, name: 'Mid Term Examination', type: 'midterm', class: '9', session: '2025-2026', start_date: today, end_date: today, total_marks: 100, pass_marks: 33, created_at: new Date().toISOString() },
-        { id: 2, name: 'Final Term Examination', type: 'final', class: '10', session: '2025-2026', start_date: today, end_date: today, total_marks: 100, pass_marks: 33, created_at: new Date().toISOString() },
-        { id: 3, name: 'Class Assessment - Mathematics', type: 'assessment', class: '8', session: '2025-2026', start_date: today, end_date: today, total_marks: 50, pass_marks: 17, created_at: new Date().toISOString() },
-      ]
-    })
+    console.error('Exam list error:', err.message)
+    return res.status(503).json({ success: false, message: 'Database unavailable. Exams could not be loaded.' })
   }
 })
 
@@ -175,16 +163,28 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
 router.post('/', protect, canManageExams, async (req, res) => {
   try {
     const { name, type, class: cls, session, start_date, end_date, total_marks, pass_marks, created_by } = req.body
+    const examName = String(name || '').trim().slice(0, 180)
+    const examType = String(type || '').trim().slice(0, 60)
+    const examClass = String(cls || '').trim().slice(0, 80)
+    const examSession = String(session || '').trim().slice(0, 80)
+    const totalMarks = Number(total_marks)
+    const passMarks = Number(pass_marks)
+    if (!examName || !examType || !examClass || !examSession) {
+      return res.status(422).json({ success: false, message: 'Exam name, type, class and academic session are required.' })
+    }
+    if (!Number.isFinite(totalMarks) || totalMarks <= 0 || !Number.isFinite(passMarks) || passMarks < 0 || passMarks > totalMarks) {
+      return res.status(422).json({ success: false, message: 'Total marks must be greater than zero and passing marks must be between zero and total marks.' })
+    }
     const supportsTenant = await hasColumn('exams', 'school_id')
     const result = supportsTenant
       ? await query(`
         INSERT INTO exams (school_id, name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
-      `, [currentSchoolId(req), name, type, cls, session, start_date, end_date, total_marks || 100, pass_marks || 33, created_by])
+      `, [currentSchoolId(req), examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
       : await query(`
         INSERT INTO exams (name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *
-      `, [name, type, cls, session, start_date, end_date, total_marks || 100, pass_marks || 33, created_by])
+      `, [examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
