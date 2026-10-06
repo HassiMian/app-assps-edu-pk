@@ -21,6 +21,7 @@ async function buildCanonicalCanaryPreflight({ schoolId, userId, role, paperId, 
 
   const readPaper = deps.getProjectedPaper || require('../paperStudioProjectionService').getProjectedPaper
   const reviewDocument = deps.reviewPortalPaperDocument || require('./portalDocumentBoundaryV6C').reviewPortalPaperDocument
+  const readBinding = deps.verifyCanonicalCanaryBinding || require('./paperCanonicalCanaryBindingV6H1').verifyCanonicalCanaryBinding
   const readReadiness = deps.buildCanonicalCutoverReadiness || require('./paperCanonicalCutoverReadinessV6F').buildCanonicalCutoverReadiness
 
   const paper = await readPaper({ schoolId, userId, role: normalizedRole, paperId: String(paperId) })
@@ -41,7 +42,9 @@ async function buildCanonicalCanaryPreflight({ schoolId, userId, role, paperId, 
   // Infrastructure and publication readiness is only evaluated after the source
   // itself passes the reviewed authoring boundary. Legacy/unknown papers fail
   // locally and never trigger deeper canonical storage inspection.
-  const readiness = sourceApprovedFamily && sourceStructureValid ? await readReadiness() : null
+  const binding = sourceApprovedFamily && sourceStructureValid ? await readBinding() : null
+  if (binding && !binding.valid) blockers.push('CANARY_SOURCE_BINDING_SCHEMA_NOT_READY')
+  const readiness = sourceApprovedFamily && sourceStructureValid && binding?.valid ? await readReadiness() : null
   if (readiness) blockers.push(...(Array.isArray(readiness.blockers) ? readiness.blockers : []))
 
   // V6-C deliberately says canonicalWriteAllowed=false even for structurally valid
@@ -53,6 +56,7 @@ async function buildCanonicalCanaryPreflight({ schoolId, userId, role, paperId, 
     architectureVersion: 'v6-h0-canary-preflight-1',
     mode: 'READ_ONLY_CANARY_PREFLIGHT',
     eligible,
+    bindingEvaluated: Boolean(binding),
     readinessEvaluated: Boolean(readiness),
     writeAttempted: false,
     writeEnabledByThisProbe: false,
@@ -65,6 +69,7 @@ async function buildCanonicalCanaryPreflight({ schoolId, userId, role, paperId, 
       snapshotHash: review?.snapshotHash || null,
       structuralIssues: Array.isArray(review?.issues) ? review.issues : [],
     },
+    sourceBinding: binding ? { valid:Boolean(binding.valid), issues:Array.isArray(binding.issues)?binding.issues:[], missingColumns:Array.isArray(binding.missingColumns)?binding.missingColumns:[], uniqueIndex:binding.uniqueIndex||null } : null,
     gates: {
       curriculumPublisherEvidenceVerified: Boolean(readiness?.gates?.curriculumPublisherEvidenceVerified),
       curriculumPublisherProductionApproved: Boolean(readiness?.gates?.curriculumPublisherProductionApproved),
