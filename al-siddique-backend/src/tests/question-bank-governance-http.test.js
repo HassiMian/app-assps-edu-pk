@@ -16,6 +16,7 @@ function request(port, method, path, body, token='mock-jwt-token', headers={}) {
 
 test('Question Bank governance capture is idempotent, duplicate-aware, revisioned and lifecycle-gated',{timeout:30000},async t=>{
   const app=express();app.use(express.json());app.use((req,res,next)=>tenantContext.run({rlsEnabled:false,isSuperAdmin:false,tenantId:null},next));app.use('/api/question-bank',require('../routes/questionBankRoutes'))
+  await pool.query("INSERT INTO users(id,school_id,name,email,password,role,is_active,tenant_id,must_change_password) VALUES(999,1,'Governance Test Admin','question-governance-999@example.invalid','test-only','admin',true,'assps',false) ON CONFLICT (id) DO NOTHING")
   const server=await new Promise(resolve=>{const s=app.listen(0,'127.0.0.1',()=>resolve(s))});const port=server.address().port
   t.after(async()=>{await new Promise(r=>server.close(r));await pool.end()})
 
