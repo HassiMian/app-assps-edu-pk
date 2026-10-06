@@ -13,14 +13,12 @@ import {
  resultCardPrintCss,
 } from './resultCardTemplates'
 
-function gradeLabel(pct) {
- if (pct >= 90) return 'A+'
- if (pct >= 80) return 'A'
- if (pct >= 70) return 'B'
- if (pct >= 60) return 'C'
- if (pct >= 50) return 'D'
- return 'F'
+function gradeLabel(pct, bands = []) {
+ const value = Math.max(0, Math.min(100, Number(pct) || 0))
+ const match = (Array.isArray(bands) ? bands : []).find(row => value >= Number(row.from) && value <= Number(row.to))
+ return match?.label || '—'
 }
+
 
 const TEACHER_REMARK_PRESETS = [
  'Excellent performance. Keep up the outstanding effort and consistency.',
@@ -30,215 +28,8 @@ const TEACHER_REMARK_PRESETS = [
  'Irregular preparation affected performance. Regular homework and revision are required.',
 ]
 
-//  Template designs 
-const TEMPLATES = [
- { id: 'geometric', label: 'Geometric Frame', color: '#C8991A', accent: '#8B6914' },
- { id: 'diagonal', label: 'Diagonal Stripe', color: '#0A84FF', accent: '#055EC0' },
- { id: 'circle', label: 'Circle & Arc', color: '#BF5AF2', accent: '#8A30BB' },
- { id: 'ribbon', label: 'Ribbon Fold', color: '#FF375F', accent: '#CC1A40' },
- { id: 'board-pattern', label: 'Board Pattern', color: '#333333', accent: '#111111' },
- { id: 'performance-analytics', label: 'Performance Analytics', color: '#4F46E5', accent: '#3730A3' },
- { id: 'modern-hexagon', label: 'Modern Hexagon', color: '#EC4899', accent: '#BE185D' },
- { id: 'minimal-corporate', label: 'Minimal Corporate', color: '#111111', accent: '#000000' },
- { id: 'playful-primary', label: 'Playful Primary', color: '#FF9A9E', accent: '#FECFEF' },
-]
-
-//  Print result card 
-function printResultCard(student, exam, studentMarks, opts, school) {
- const t = TEMPLATES.find(t => t.id === opts.template) || TEMPLATES[0]
- const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
- const totalPossible = studentMarks.length * (exam?.total_marks || 100)
- const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
- const grade = gradeLabel(pct)
- const today = opts.resultDate || new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
-
- const html = `<!DOCTYPE html><html><head><title>Result Card - ${student.name}</title>
- <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
- <style>
- body{margin:0;padding:30px;font-family:Arial,sans-serif;background:#fff;color:#000;}
- .card{max-width:700px;margin:0 auto;border:3px solid ${t.color};border-radius:12px;overflow:hidden;}
- .header{background:linear-gradient(135deg,${t.color},${t.accent});color:#fff;padding:20px;text-align:center;}
- .header img{height:60px;object-fit:contain;margin-bottom:8px;}
- .header h1{margin:0;font-size:20px;}
- .header p{margin:4px 0 0;font-size:12px;opacity:0.9;}
- .badge{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-top:8px;}
- .student-row{display:flex;justify-content:space-between;padding:14px 20px;background:#f9f7f0;border-bottom:2px solid ${t.color};}
- .student-row div{font-size:13px;}
- .student-row strong{font-size:14px;}
- table{width:100%;border-collapse:collapse;}
- th{background:${t.color};color:#fff;padding:10px 14px;text-align:left;font-size:12px;}
- td{padding:9px 14px;border-bottom:1px solid #eee;font-size:13px;}
- tr:nth-child(even) td{background:#fafafa;}
- .summary{display:flex;justify-content:space-between;padding:16px 20px;background:${t.color}14;border-top:2px solid ${t.color};}
- .summary-item{text-align:center;}
- .summary-item .val{font-size:24px;font-weight:900;color:${t.color};}
- .summary-item .lbl{font-size:11px;color:#555;margin-top:2px;}
- .footer{display:flex;justify-content:space-between;padding:16px 20px;border-top:1px solid #ddd;}
- .footer div{text-align:center;font-size:11px;color:#555;}
- .footer div span{display:block;border-top:1px solid #333;width:120px;margin:32px auto 4px;}
- @media print{body{padding:10px;}.card{border-radius:0;}}
- </style></head><body>
- <div class="card">
- <div class="header">
- ${school.logo ? `<img src="${school.logo.startsWith('http') || school.logo.startsWith('blob:') || school.logo.startsWith('data:') ? school.logo : (school.logo.startsWith('/') ? 'https://api.assps.edu.pk' + school.logo : 'https://api.assps.edu.pk/' + school.logo)}" alt="logo">` : ''}
- <div style="font-family:'Noto Nastaliq Urdu',serif;font-size:18px;direction:rtl;margin-bottom:4px">${school.urdu || ''}</div>
- <h1>${school.name || 'Al Siddique Scholars Public School'}</h1>
- <p>${school.address || ''}</p>
- <div class="badge"> RESULT CARD  ${exam?.name || ''}</div>
- </div>
-
- <div class="student-row">
- <div>Student Name: <strong>${student.name}</strong><br>Class/Section: <strong>${exam?.class || '—'}</strong></div>
- <div style="text-align:right">Father Name: <strong>${student.father_name || '—'}</strong><br>Session: <strong>2026-2027</strong> &nbsp; Reg No: <strong>${student.gr_number || '—'}</strong></div>
- </div>
-
- <table>
- <thead><tr>
- <th>S.No</th><th>Subject</th><th>Total</th><th>Obtained</th><th>Percentage</th><th>Grade</th>
- </tr></thead>
- <tbody>
- ${studentMarks.map((r, i) => {
- const rowPct = totalPossible > 0 ? Math.round((Number(r.marks_obtained) / (exam?.total_marks || 100)) * 100) : 0
- return `<tr>
- <td>${i + 1}</td>
- <td>${r.subject}</td>
- <td>${exam?.total_marks || 100}</td>
- <td style="font-weight:700">${r.marks_obtained}</td>
- <td>${rowPct}%</td>
- <td style="font-weight:700;color:${rowPct >= 50 ? 'green' : 'red'}">${gradeLabel(rowPct)}</td>
- </tr>`
- }).join('')}
- <tr style="font-weight:700;background:#f0ead8">
- <td colspan="2">TOTAL</td>
- <td>${totalPossible}</td>
- <td>${totalObtained}</td>
- <td>${pct}%</td>
- <td>${grade}</td>
- </tr>
- </tbody>
- </table>
-
- <div class="summary">
- <div class="summary-item"><div class="val">1st</div><div class="lbl">Position</div></div>
- <div class="summary-item"><div class="val">${grade}</div><div class="lbl">Grade</div></div>
- <div class="summary-item"><div class="val" style="color:${pct>=50?'green':'red'}">${pct>=50?'Pass':'Fail'}</div><div class="lbl">Remarks</div></div>
- <div class="summary-item"><div class="val" style="font-size:14px">${today}</div><div class="lbl">Result Date</div></div>
- </div>
-
- <div style="padding:10px 20px;background:#fffcf0;border-top:1px solid #eee;font-size:12px;">
- <strong>Teacher Remarks:</strong> With more hard work he/she can make his/her position better in future.
- </div>
-
- <div class="footer">
- <div><span></span>Class Teacher</div>
- <div><span></span>Principal</div>
- </div>
- </div>
- <script>window.onload=()=>window.print()</script>
- </body></html>`
-
- const w = window.open('', '_blank', 'width=800,height=700')
- w.document.write(html)
- w.document.close()
-}
-
-//  Parameters Modal 
-function ParametersModal({ student, exam, studentMarks, school, onClose }) {
- const [template, setTemplate] = useState('geometric')
- const [dispAttendance, setDispAttendance] = useState('No')
- const [dispPerformance, setDispPerformance] = useState('No')
- const [dispBlank, setDispBlank] = useState('No')
- const [resultDate, setResultDate] = useState(new Date().toISOString().slice(0,10))
- const [dispSummary, setDispSummary] = useState('No')
- const [showAdvanced, setShowAdvanced] = useState(false)
- const [headingSize, setHeadingSize] = useState('23px')
- const [tableSize, setTableSize] = useState('12px')
- const [nameSize, setNameSize] = useState('17px')
-
- const selStyle = { padding:'8px 12px', borderRadius:8, background:'rgba(11,44,77,0.6)', border:'1px solid rgba(200,153,26,0.2)', color:'#C0C8D8', fontSize:13, outline:'none', width:'100%' }
- const inpStyle = { ...selStyle, width:'100%' }
-
- return createPortal(
- <div style={{ position:'fixed', inset:0, background:'rgba(7,30,52,0.85)', backdropFilter:'blur(8px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
- <div style={{ background:'#0D2C4A', border:'1px solid rgba(200,153,26,0.25)', borderRadius:18, width:'100%', maxWidth:560, maxHeight:'90vh', overflowY:'auto', boxShadow:'0 24px 60px rgba(0,0,0,0.6)' }}>
- <div style={{ background:'linear-gradient(135deg,#C8991A,#e8b420)', padding:'16px 24px', borderRadius:'18px 18px 0 0' }}>
- <h2 style={{ margin:0, color:'#071e34', fontSize:16, fontWeight:800 }}>Choose Parameters to Display in Result Cards</h2>
- </div>
-
- <div style={{ padding:24, display:'flex', flexDirection:'column', gap:20 }}>
- {/* Template Selection */}
- <div>
- <div style={{ color:'#C8991A', fontSize:12, fontWeight:700, letterSpacing:1, textTransform:'uppercase', marginBottom:12 }}>
-  Select Template Design — <span style={{ color:'#C0C8D8' }}>{TEMPLATES.find(t=>t.id===template)?.label}</span>
- </div>
- <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:10 }}>
- {TEMPLATES.map(t => (
- <div key={t.id} onClick={()=>setTemplate(t.id)}
- style={{ cursor:'pointer', border:`2px solid ${template===t.id?t.color:'rgba(148,163,184,0.18)'}`, borderRadius:10, overflow:'hidden', background:'rgba(15,23,42,0.46)' }}>
- <div style={{ height:64, background:`linear-gradient(135deg,${t.color}30,${t.accent}15)`, display:'flex', alignItems:'center', justifyContent:'center', fontSize:11, color:t.color, fontWeight:700 }}>
- {t.id==='geometric'?'':t.id==='diagonal'?'':t.id==='circle'?'⊙':''}
- </div>
- <div style={{ padding:'6px', textAlign:'center', fontSize:10, color:template===t.id?'#C8991A':'#8892A4', fontWeight:600 }}>{t.label}</div>
- </div>
- ))}
- </div>
- </div>
-
- {/* Display Options */}
- <div>
- <div style={{ color:'#C8991A', fontSize:12, fontWeight:700, letterSpacing:1, textTransform:'uppercase', marginBottom:12 }}> Display Options</div>
- <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:12 }}>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Display Attendance</label><select style={selStyle} value={dispAttendance} onChange={e=>setDispAttendance(e.target.value)}><option>No</option><option>Yes</option></select></div>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Academic Performance</label><select style={selStyle} value={dispPerformance} onChange={e=>setDispPerformance(e.target.value)}><option>No</option><option>Yes</option></select></div>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Display Blank Subjects</label><select style={selStyle} value={dispBlank} onChange={e=>setDispBlank(e.target.value)}><option>No</option><option>Yes</option></select></div>
- </div>
- </div>
-
- {/* Result Settings */}
- <div>
- <div style={{ color:'#C8991A', fontSize:12, fontWeight:700, letterSpacing:1, textTransform:'uppercase', marginBottom:12 }}> Result Settings</div>
- <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Result Declaration Date</label><input type="date" style={inpStyle} value={resultDate} onChange={e=>setResultDate(e.target.value)}/></div>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Display Result Summary</label><select style={selStyle} value={dispSummary} onChange={e=>setDispSummary(e.target.value)}><option>No</option><option>Yes</option></select></div>
- </div>
- <div style={{ marginTop:10, padding:'10px 14px', background:'rgba(200,153,26,0.06)', border:'1px solid rgba(148,163,184,0.18)', borderRadius:8, fontSize:11, color:'#8892A4' }}>
-  Selected items will be displayed on the result card<br/>
- <span style={{ color:'rgba(192,200,216,0.6)' }}>Percentage, Grade, Position, Overall Grade, Total Marks, Obtained Marks, Remark</span>
- </div>
- </div>
-
- {/* Advanced Settings toggle */}
- <div>
- <button onClick={()=>setShowAdvanced(a=>!a)} style={{ background:'none', border:'none', color:'#C8991A', cursor:'pointer', fontSize:13, fontWeight: 600, padding:0 }}>
-  Advanced Settings {showAdvanced?'':''}
- </button>
- {showAdvanced && (
- <div style={{ marginTop:12, display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:12 }}>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Heading Font Size</label><select style={selStyle} value={headingSize} onChange={e=>setHeadingSize(e.target.value)}>{['18px','20px','23px','26px'].map(s=><option key={s}>{s}</option>)}</select></div>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Table Font Size</label><select style={selStyle} value={tableSize} onChange={e=>setTableSize(e.target.value)}>{['10px','11px','12px','13px','14px'].map(s=><option key={s}>{s}</option>)}</select></div>
- <div><label style={{ color:'#8892A4', fontSize:11, display:'block', marginBottom:5 }}>Name Font Size</label><select style={selStyle} value={nameSize} onChange={e=>setNameSize(e.target.value)}>{['14px','15px','16px','17px','18px','20px'].map(s=><option key={s}>{s}</option>)}</select></div>
- </div>
- )}
- </div>
- </div>
-
- <div style={{ display:'flex', gap:12, padding:'16px 24px', borderTop:'1px solid rgba(148,163,184,0.18)' }}>
- <button onClick={onClose} style={{ ...btnSecondary, flex:1, justifyContent:'center' }}> Close</button>
- <button onClick={()=>{
- printResultCard(student, exam, studentMarks,
- { template, resultDate:new Date(resultDate).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}) },
- school)
- onClose()
- }} style={{ ...btnPrimary, flex:1, justifyContent:'center' }}> Generate Report Cards</button>
- </div>
- </div>
- </div>,
- document.body
- )
-}
-
 //  Main Component 
-function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, onClose }) {
+function ProfessionalParametersModal({ cards, student, exam, studentMarks, school, gradeBands, onClose }) {
  const [options, setOptions] = useState(DEFAULT_RESULT_OPTIONS)
  const [remarksOpen, setRemarksOpen] = useState(false)
  const previewRef = useRef(null)
@@ -246,7 +37,7 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  const sourceCards = cards?.length ? cards : [{ student, exam, studentMarks }]
  const dataList = sourceCards
  .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
- .map(item => buildResultCardData({ ...item, options, school }))
+ .map(item => buildResultCardData({ ...item, options: { ...options, gradeBands }, school }))
  const data = dataList[0]
 
  useEffect(() => {
@@ -356,14 +147,22 @@ export default function ResultCards() {
  const [printCards, setPrintCards] = useState([])
  const [loading, setLoading] = useState(false)
  const [showParams, setShowParams] = useState(false)
+ const [gradeBands, setGradeBands] = useState([])
+ const [loadError, setLoadError] = useState('')
  const { paperSettings } = usePaperStore()
 
  useEffect(() => {
- api.get('/api/exams').then(r => {
- const list = r.data.data || []
+ Promise.all([api.get('/api/exams'), api.get('/api/exams/grade-settings')])
+ .then(([examResponse, gradeResponse]) => {
+ const list = examResponse.data.data || []
  setExams(list)
+ setGradeBands(Array.isArray(gradeResponse.data?.data) ? gradeResponse.data.data : [])
  if (list.length) setSelectedExam(String(list[0].id))
- }).catch(() => {})
+ setLoadError('')
+ })
+ .catch(err => {
+ setLoadError(err.response?.data?.message || 'Exams or grading policy could not be loaded.')
+ })
  }, [])
 
  const loadResults = () => {
@@ -378,7 +177,7 @@ export default function ResultCards() {
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
  })
- .catch(() => setResults([]))
+ .catch(err => { setResults([]); setLoadError(err.response?.data?.message || 'Exam results could not be loaded.') })
  .finally(() => setLoading(false))
  }
 
@@ -633,7 +432,7 @@ export default function ResultCards() {
  {studentMarks.map(row=>(
  <div key={row.id || row.subject} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'11px 14px', borderRadius:12, background:'rgba(255,255,255,0.04)' }}>
  <span style={{ color:C.silver }}>{row.subject}</span>
- <span style={{ color:Number(row.marks_obtained)>=(exam?.pass_marks||33)?C.green:C.red, fontWeight:700 }}>
+ <span style={{ color:Number.isFinite(Number(exam?.pass_marks)) && Number(row.marks_obtained) >= Number(exam.pass_marks)?C.green:C.red, fontWeight:700 }}>
  {row.marks_obtained} / {row.total_marks || exam?.total_marks || 100}
  </span>
  </div>
@@ -642,8 +441,8 @@ export default function ResultCards() {
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:16, borderRadius:20, background:'rgba(255,255,255,0.08)' }}>
  <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalObtained} / {totalPossible}</div></div>
  <div style={{ textAlign:'right' }}>
- <div style={{ color:pct>=(exam?.pass_marks||33)?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
- <div style={{ color:C.muted }}>Grade: {gradeLabel(pct)}</div>
+ <div style={{ color:Number.isFinite(Number(exam?.pass_marks)) && studentMarks.every(row => Number(row.marks_obtained) >= Number(exam.pass_marks))?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
+ <div style={{ color:C.muted }}>Grade: {gradeLabel(pct, gradeBands)}</div>
  </div>
  </div>
  </div>
@@ -661,6 +460,7 @@ export default function ResultCards() {
  exam={printCards[0]?.exam}
  studentMarks={printCards[0]?.studentMarks}
  school={school}
+ gradeBands={gradeBands}
  onClose={()=>setShowParams(false)}
  />
  )}

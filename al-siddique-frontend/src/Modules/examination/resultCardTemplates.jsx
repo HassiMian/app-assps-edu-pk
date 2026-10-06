@@ -37,13 +37,10 @@ const termFields = [
  ['includeFinalTerm', 'finalTermMarks', 'Final Term'],
 ]
 
-export function gradeLabel(pct) {
- if (pct >= 90) return 'A+'
- if (pct >= 80) return 'A'
- if (pct >= 70) return 'B'
- if (pct >= 60) return 'C'
- if (pct >= 50) return 'D'
- return 'F'
+export function gradeLabel(pct, bands = []) {
+ const value = Math.max(0, Math.min(100, Number(pct) || 0))
+ const match = (Array.isArray(bands) ? bands : []).find(row => value >= Number(row.from) && value <= Number(row.to))
+ return match?.label || ''
 }
 
 function currentTermField(exam = {}) {
@@ -79,7 +76,7 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  const subjects = (studentMarks || []).map((row) => {
  const perTermTotal = Number(row.total_marks || exam?.total_marks || 100)
  const subject = {
- subjectName: row.subjectName || row.subject || 'Subject',
+ subjectName: row.subjectName || row.subject || '—',
  assessmentMarks: numberOrNull(row.assessmentMarks | row.assessment_marks),
  firstTermMarks: numberOrNull(row.firstTermMarks | row.first_term_marks),
  secondTermMarks: numberOrNull(row.secondTermMarks | row.second_term_marks),
@@ -98,8 +95,8 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  totalMarks,
  obtainedMarks,
  percentage,
- grade: row.grade || gradeLabel(percentage),
- remarks: row.remarks || (percentage >= 80 ? 'Excellent' : percentage >= 60 ? 'Good' : percentage >= 50 ? 'Satisfactory' : 'Needs improvement'),
+ grade: row.grade || gradeLabel(percentage, opts.gradeBands),
+ remarks: row.remarks || '',
  }
  })
 
@@ -110,36 +107,36 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
 
  return {
  student: {
- name: student?.name || 'Demo Student',
- fatherName: student?.fatherName || student?.father_name || 'Father Name',
- rollNo: student?.rollNo || student?.gr_number || student?.admissionNo || 'GR-0001',
- className: student?.className || exam?.class || 'Class',
+ name: student?.name || '—',
+ fatherName: student?.fatherName || student?.father_name || '—',
+ rollNo: student?.rollNo || student?.gr_number || student?.admissionNo || '—',
+ className: student?.className || exam?.class || '—',
  section: student?.section || '-',
  photo: student?.photo || student?.image || student?.profile_photo || student?.profileImage || student?.profile_image || student?.photo_url || student?.image_url || '',
  admissionNo: student?.admissionNo || student?.gr_number || '',
  },
  school: {
- name: school?.name || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
+ name: school?.name || '—',
  logo: school?.logo || '',
  slogan: school?.slogan || (school?.showUrduHeader === false ? '' : school?.urdu) || '',
- address: school?.address || 'Sharif Chowk, Rayya Khas',
+ address: school?.address || '',
  phone: school?.phone || '',
  email: school?.email || '',
  principalSignature: school?.principalSignature || '',
  },
  result: {
- session: exam?.session || '2026-2027',
- term: exam?.name || 'Annual Result',
- classTeacher: exam?.classTeacher || 'Class Teacher',
+ session: exam?.session || '—',
+ term: exam?.name || '—',
+ classTeacher: exam?.classTeacher || '—',
  issueDate: today,
  subjects,
  attendance: {
- totalDays: exam?.totalSchoolDays || 220,
- attended: exam?.attended || 205,
- absent: exam?.absent || 15,
+ totalDays: exam?.totalSchoolDays ?? '—',
+ attended: exam?.attended ?? '—',
+ absent: exam?.absent ?? '—',
  },
  teacherRemarks: options.teacherRemarks || exam?.teacherRemarks || DEFAULT_RESULT_OPTIONS.teacherRemarks,
- principalRemarks: exam?.principalRemarks || 'Promoted as per school assessment policy.',
+ principalRemarks: exam?.principalRemarks || '',
  totalMarks,
  obtainedMarks,
  percentage,

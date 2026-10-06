@@ -1280,15 +1280,15 @@ function StudentIdTab({ school }) {
  const [cardOptions,setCardOptions]= useState(defaultIdCardOptions)
  const [cardsPerPage,setCardsPerPage]= useState('')
  const [studentId, setStudentId] = useState('')
- const [cls, setCls] = useState('Starter')
+ const [cls, setCls] = useState('')
  const [sec, setSec] = useState('All')
  const [status, setStatus] = useState('')
- const classOptions = classNames?.length ? classNames : ['Starter']
+ const classOptions = classNames?.length ? classNames : []
  const sectionOptions = sectionsForClass?.(cls) || []
  const sectionSelectOptions = ['All', ...sectionOptions.filter(Boolean)]
 
  useEffect(() => {
- if (!classOptions.includes(cls)) setCls(classOptions[0] || 'Starter')
+ if (!classOptions.includes(cls)) setCls(classOptions[0] || '')
  }, [classOptions, cls])
 
  useEffect(() => {

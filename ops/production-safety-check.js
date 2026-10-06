@@ -1167,6 +1167,28 @@ assertNotContains(
   'admission approval must not claim unsent credentials were dispatched or generate predictable phone-derived passwords.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/resultCardTemplates.jsx',
+  /['"]Demo Student['"]|['"]GR-0001['"]|2026-2027|Sharif Chowk, Rayya Khas|totalSchoolDays \|\| 220|Promoted as per school assessment policy/,
+  'protected result-card templates must never fabricate student, school, session, attendance, or promotion facts.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  "/api/exams/grade-settings",
+  'result-card workflow must consume the configured grading policy.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  /2026-2027|Position<\/div>|Al Siddique Scholars Public School/,
+  'result-card workflow must not keep legacy hardcoded session, position, or tenant identity output.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  /classNames\?\.length \? classNames : \['Starter'\]|setCls\(classOptions\[0\] \|\| 'Starter'\)/,
+  'card generation must not invent Starter as an academic class.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
