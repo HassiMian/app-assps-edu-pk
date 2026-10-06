@@ -2,6 +2,7 @@ const fs=require('node:fs')
 const path=require('node:path')
 const crypto=require('node:crypto')
 const {auditPhase3ABReadiness}=require('./saasReviewedContract/curriculumReadinessPreflightPhase3AB.cjs')
+const {validateReviewRecord}=require('./paperIndependentReviewIntakeV6G4')
 const PRECHECK_SHA='18d871d93648a78f13e539e4000e9dfeb20f4722f18024b8df0e8b939325084e'
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex')
 const shaFile=f=>sha(fs.readFileSync(f))
@@ -93,6 +94,11 @@ async function verifyCurriculumPublisherEvidence({env=process.env}={}){
    }
   } else issues.push('source reacquisition evidence is missing')
   preflight=auditPhase3ABReadiness({manifest:official,grade:scope.grade,subject:scope.subject,editionEvidence:evidence.editionEvidence,signedPublication:evidence.signedPublication,operationalReviews:evidence.operationalReviews})
+  for(const [reviewName,review] of Object.entries(evidence.operationalReviews||{})){
+    if(review?.status!=='INDEPENDENTLY_APPROVED') continue
+    const strict=validateReviewRecord(reviewName,review,{grade:scope.grade,subject:scope.subject})
+    for(const issue of strict.issues) issues.push(`operational review ${reviewName} invalid: ${issue}`)
+  }
   if(preflight.status!=='EVIDENCE_COMPLETE_NOT_AUTHORIZED')issues.push(...preflight.blockers.map(x=>`preflight:${x}`))
   if(!Number.isSafeInteger(evidence.counts?.approvedQuestionCount)||evidence.counts.approvedQuestionCount<1)issues.push('publisher evidence has no independently approved questions')
   const required=['liveImportAuthorized','academicSignoffComplete','bilingualSignoffComplete','tenantScopedBankSnapshotReviewed','publisherKeyCustodyApproved','institutionRosterBindingApproved']
