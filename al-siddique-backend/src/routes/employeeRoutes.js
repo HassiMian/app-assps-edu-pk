@@ -313,7 +313,8 @@ router.post('/', protect, canManageStaff, async (req, res) => {
   } catch (err) {
     if (err.code === '23505')
       return res.status(400).json({ success: false, message: 'EMP ID already exists' })
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Employee create error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee could not be created.' })
   }
 })
 
@@ -403,7 +404,8 @@ router.post('/:id/portal-account', protect, canManageStaff, async (req, res) => 
     })
   } catch (err) {
     console.error('Employee portal provision error:', err.message)
-    res.status(500).json({ success: false, message: err.message || 'Employee portal account could not be created.' })
+    console.error('Employee portal provision error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee portal account could not be created.' })
   }
 })
 
@@ -416,7 +418,8 @@ router.post('/:id/portal-account/reset', protect, canManageStaff, async (req, re
     const reset = await resetPortalUserPassword({ schoolId, userId })
     res.json({ success: true, data: reset.user, credentials: { username: reset.user?.username || reset.user?.email || '', email: reset.user?.email || '', password: reset.temporaryPassword, created: false } })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Password reset failed.' })
+    console.error('Employee portal password reset error:', err.message)
+    res.status(500).json({ success: false, message: 'Password reset failed.' })
   }
 })
 
@@ -430,7 +433,8 @@ router.put('/:id/portal-account/active', protect, canManageStaff, async (req, re
     await query('UPDATE employees SET portal_active = $1 WHERE id = $2 AND school_id = $3', [Boolean(req.body?.active !== false), Number(req.params.id), schoolId])
     res.json({ success: true, data: user })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Employee portal state could not be updated.' })
+    console.error('Employee portal state update error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee portal state could not be updated.' })
   }
 })
 
@@ -449,7 +453,8 @@ router.put('/:id/portal-account/permissions', protect, canManageStaff, async (re
     }
     res.json({ success: true, data: { permissions } })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Employee permissions could not be updated.' })
+    console.error('Employee permissions update error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee permissions could not be updated.' })
   }
 })
 
@@ -465,7 +470,8 @@ router.delete('/:id/portal-account', protect, canManageStaff, async (req, res) =
     await query('UPDATE employees SET user_id = NULL, portal_active = FALSE, portal_password = NULL WHERE id = $1 AND school_id = $2', [employeeId, schoolId])
     res.json({ success: true })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Employee portal access could not be revoked.' })
+    console.error('Employee portal revoke error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee portal access could not be revoked.' })
   }
 })
 
@@ -524,7 +530,8 @@ router.put('/:id', protect, canManageStaff, async (req, res) => {
 
     res.json({ success: true, message: 'Employee update ho gaya', data: updated })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Employee update error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee could not be updated.' })
   }
 })
 
@@ -548,7 +555,8 @@ router.delete('/:id', protect, canManageStaff, async (req, res) => {
 
     res.json({ success: true, message: 'Employee delete ho gaya', data: deleted })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Employee delete error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee could not be deleted.' })
   }
 })
 

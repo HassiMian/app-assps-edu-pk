@@ -1743,3 +1743,15 @@ assertNotContains(
   /res\.status\(500\)\.json\(\{ success: false, message: err\.message \}\)/,
   'fee endpoints must not expose raw internal error messages to clients.'
 )
+
+for (const routeFile of [
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  'al-siddique-backend/src/routes/timetableRoutes.js',
+]) {
+  assertNotContains(
+    routeFile,
+    /res\.status\(500\)\.json\(\{ success: false, message: err\.message(?: \|\| '[^']*')? \}\)/,
+    '500 responses must not expose raw internal error messages to clients.'
+  )
+}

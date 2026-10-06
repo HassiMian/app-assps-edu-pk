@@ -202,7 +202,8 @@ router.get('/:id/fee-profile', protect, requireScopeForServiceOnly('school.fees.
     const profile = await getStudentFeeProfile(studentId, currentSchoolId(req))
     res.json({ success: true, data: profile })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Student fee profile load error:', err.message)
+    res.status(500).json({ success: false, message: 'Student fee profile could not be loaded.' })
   }
 })
 
@@ -216,7 +217,8 @@ router.put('/:id/fee-profile', protect, adminOnly, async (req, res) => {
     const profile = await getStudentFeeProfile(studentId, schoolId)
     res.json({ success: true, message: 'Fee profile saved', data: profile })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Student fee profile save error:', err.message)
+    res.status(500).json({ success: false, message: 'Student fee profile could not be saved.' })
   }
 })
 
@@ -270,7 +272,8 @@ router.get('/family-search', protect, adminOnly, async (req, res) => {
     })
   } catch (err) {
     console.error('Family search error:', err.message)
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Family search error:', err.message)
+    res.status(500).json({ success: false, message: 'Family search could not be completed.' })
   }
 })
 
@@ -562,7 +565,8 @@ router.post('/', protect, adminOnly, async (req, res) => {
       return res.status(400).json({ success: false, message: 'GR Number already exists' })
     if (err.status === 422)
       return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Student create error:', err.message)
+    res.status(500).json({ success: false, message: 'Student could not be created.' })
   } finally {
     client?.release()
   }
@@ -708,7 +712,8 @@ router.post('/:id/portal-accounts/:role/reset', protect, adminOnly, async (req, 
       },
     })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Password reset failed.' })
+    console.error('Student portal password reset error:', err.message)
+    res.status(500).json({ success: false, message: 'Password reset failed.' })
   }
 })
 
@@ -724,7 +729,8 @@ router.put('/:id/portal-accounts/:role/active', protect, adminOnly, async (req, 
     const user = await setPortalUserActive({ schoolId, userId, active: req.body?.active !== false })
     res.json({ success: true, data: user })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Portal account state could not be updated.' })
+    console.error('Student portal state update error:', err.message)
+    res.status(500).json({ success: false, message: 'Portal account state could not be updated.' })
   }
 })
 
@@ -742,7 +748,8 @@ router.delete('/:id/portal-accounts/:role', protect, adminOnly, async (req, res)
     await query(`UPDATE students SET ${linkColumn} = NULL, updated_at = NOW() WHERE id = $1 AND school_id = $2`, [studentId, schoolId])
     res.json({ success: true })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message || 'Portal access could not be revoked.' })
+    console.error('Student portal revoke error:', err.message)
+    res.status(500).json({ success: false, message: 'Portal access could not be revoked.' })
   }
 })
 
@@ -909,7 +916,8 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
       return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
     }
     console.error('Student update error:', err.message)
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Student update error:', err.message)
+    res.status(500).json({ success: false, message: 'Student could not be updated.' })
   }
 })
 
