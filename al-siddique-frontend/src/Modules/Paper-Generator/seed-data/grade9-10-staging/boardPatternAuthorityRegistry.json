@@ -108,6 +108,37 @@
         "question-stem-copying",
         "academic-content-authority"
       ]
+    },
+    {
+      "id": "PECTAA-G9-2026-MATRIC-TECH-PRACTICAL-551",
+      "authority": "PECTAA",
+      "scope": "Grade 9 Matric-Tech practical pairing schemes, practical lists and model papers for Agriculture Sciences, Health Sciences, Fashion Designing and ICT",
+      "url": "https://pectaa.edu.pk/wp-content/uploads/2026/01/Pairing-Scheme-List-of-Practicals-and-Model-Papers-of-Agriculture-Sciences-Health-Sciences-Fashion-Designing-ICT-Grade-9-2.pdf",
+      "notificationNumber": "PECTAA/C&C Unit/2026/551",
+      "publicationDate": "2026-01-08",
+      "verificationState": "OFFICIAL_PDF_HASHED_AND_VISUALLY_INSPECTED",
+      "sha256": "071244f0ecf8b78b8a47b368a0918da69c3c7536086b47c08034e1d9de399be5",
+      "pageCount": 17,
+      "byteLength": 1348396,
+      "curriculumTrack": "MATRIC_TECH",
+      "assessmentDimension": "PRACTICAL",
+      "subjects": [
+        "Agriculture Sciences-Tech",
+        "Health Sciences-Tech",
+        "Fashion Designing-Tech",
+        "Information & Communication Technologies-Tech"
+      ],
+      "useFor": [
+        "practical-assessment-shape",
+        "practical-pairing-scheme",
+        "practical-model-paper-pattern",
+        "practical-inventory"
+      ],
+      "mustNotUseFor": [
+        "theory-pattern-substitution",
+        "academic-content-authority",
+        "question-task-wording-copying"
+      ]
     }
   ],
   "grade10NewEditionPattern": {
@@ -115,5 +146,5 @@
     "state": "PENDING_OFFICIAL_MODEL_PAPER_OR_PAIRING_PUBLICATION",
     "rule": "Do not infer a new-edition 2027 question pattern from old-edition 2026 papers. Historical papers may inform generic item taxonomy only."
   },
-  "trackIsolationRule": "Mainstream and Matric-Tech pattern identities are separate even when subject names are similar; no implicit fallback or merging is allowed."
+  "trackIsolationRule": "Mainstream and Matric-Tech pattern identities are separate even when subject names are similar; no implicit fallback or merging is allowed. Practical and theory assessment dimensions remain independent; no implicit cross-dimension fallback."
 }
