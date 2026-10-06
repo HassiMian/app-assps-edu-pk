@@ -2040,3 +2040,9 @@ assertContains(
   'setFamilies([])',
   'family source failures must clear stale family data instead of preserving it as live truth.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/services/tenantStorage.js',
+  /legacyValue|migrateLegacy|removeLegacyOnMigrate|storage\.getItem\(baseKey\)/,
+  'tenant storage must never import an unscoped legacy key into an authenticated tenant scope.'
+)
