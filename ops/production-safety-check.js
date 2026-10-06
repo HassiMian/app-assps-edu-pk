@@ -1904,3 +1904,27 @@ assertContains(
   "const { query } = require('../config/database')",
   'portal routes must execute through the RLS-aware database wrapper.'
 )
+
+assertNotContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  /pool\.query/,
+  'daily diary routes must use the RLS-aware query wrapper instead of direct pool queries.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  "const { query } = require('../config/database')",
+  'daily diary routes must execute through the RLS-aware database wrapper.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  /pool\.query/,
+  'notification routes must use the RLS-aware query wrapper instead of direct pool queries.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  "const { query } = require('../config/database')",
+  'notification routes must execute through the RLS-aware database wrapper.'
+)

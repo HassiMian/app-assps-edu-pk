@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 const { protect, requireRoles } = require('../middleware/auth')
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 const { currentSchoolId } = require('../middleware/tenant')
 const {
   getTwilioConfigForSchool,
@@ -15,7 +15,7 @@ const canSendNotifications = requireRoles('super_admin', 'admin', 'principal', '
 let messageDraftSchemaReady = null
 async function ensureMessageDraftTable() {
   if (messageDraftSchemaReady) return true
-  const result = await pool.query("SELECT to_regclass('public.message_drafts') AS table_name")
+  const result = await query("SELECT to_regclass('public.message_drafts') AS table_name")
   if (!result.rows[0]?.table_name) {
     const err = new Error('message_drafts schema migration is not applied.')
     err.code = 'DOMAIN_SCHEMA_NOT_READY'
@@ -121,7 +121,7 @@ async function loadSourceBackedRecipients(req) {
   const limit = Math.min(Number(req.query.limit || 250) || 250, 500)
 
   if (type === 'attendance') {
-    const result = await pool.query(`
+    const result = await query(`
       SELECT s.id, s.id AS student_id, s.name, s.gr_number, s.roll_number, s.class, s.section,
              s.parent_phone, s.parent_whatsapp, a.status
       FROM attendance a
@@ -169,7 +169,7 @@ async function loadSourceBackedRecipients(req) {
     sql += ` ORDER BY f.year DESC, f.id DESC, s.class, s.section, s.roll_number, s.name LIMIT $${i}`
     params.push(limit)
 
-    const result = await pool.query(sql, params)
+    const result = await query(sql, params)
     return {
       type,
       source: 'fee_challans',
@@ -179,7 +179,7 @@ async function loadSourceBackedRecipients(req) {
   }
 
   if (type === 'results') {
-    const result = await pool.query(`
+    const result = await query(`
       SELECT DISTINCT ON (s.id) s.id, s.id AS student_id, s.name, s.gr_number, s.roll_number,
              s.class, s.section, s.parent_phone, s.parent_whatsapp, er.grade
       FROM exam_results er
@@ -199,7 +199,7 @@ async function loadSourceBackedRecipients(req) {
   }
 
   if (type === 'custom') {
-    const result = await pool.query(`
+    const result = await query(`
       SELECT s.id, s.id AS student_id, s.name, s.gr_number, s.roll_number, s.class, s.section,
              s.parent_phone, s.parent_whatsapp
       FROM students s
@@ -229,7 +229,7 @@ async function loadSourceBackedRecipients(req) {
 let notificationSchemaReady = null
 async function ensureNotificationColumns() {
   if (notificationSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT COUNT(*)::int AS count
     FROM information_schema.columns
     WHERE table_schema = 'public'
@@ -318,7 +318,7 @@ router.get('/group-recipients', protect, canSendNotifications, async (req, res) 
     let result
 
     if (group === 'parents') {
-      result = await pool.query(`
+      result = await query(`
         SELECT s.id AS student_id, s.name, COALESCE(NULLIF(s.parent_whatsapp,''), NULLIF(s.parent_phone,'')) AS phone
         FROM students s
         WHERE s.school_id = $1 AND s.is_active = true
@@ -327,7 +327,7 @@ router.get('/group-recipients', protect, canSendNotifications, async (req, res) 
         LIMIT $2
       `, [schoolId, limit])
     } else if (group === 'students') {
-      result = await pool.query(`
+      result = await query(`
         SELECT s.id AS student_id, s.name, NULLIF(s.phone_number,'') AS phone
         FROM students s
         WHERE s.school_id = $1 AND s.is_active = true AND NULLIF(s.phone_number,'') IS NOT NULL
@@ -338,7 +338,7 @@ router.get('/group-recipients', protect, canSendNotifications, async (req, res) 
       const teacherFilter = group === 'teachers'
         ? `AND (LOWER(COALESCE(e.designation,'')) LIKE '%teacher%' OR LOWER(COALESCE(e.department,'')) LIKE '%academic%')`
         : ''
-      result = await pool.query(`
+      result = await query(`
         SELECT NULL::integer AS student_id, e.name, NULLIF(e.phone,'') AS phone
         FROM employees e
         WHERE e.school_id = $1 AND e.is_active = true AND NULLIF(e.phone,'') IS NOT NULL
@@ -416,7 +416,7 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
         provider_error: delivery.error || null,
         requested_channel: channel,
       }
-      await pool.query(`
+      await query(`
         INSERT INTO notification_log (
           school_id, student_id, recipient_role, title, type, channel, phone, message,
           metadata, status, sent_by, sent_at, provider_sid
@@ -452,7 +452,7 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
 router.get('/message-draft', protect, canSendNotifications, async (req, res) => {
   try {
     await ensureMessageDraftTable()
-    const result = await pool.query(`
+    const result = await query(`
       SELECT id, recipient_group, subject, body, updated_at
       FROM message_drafts
       WHERE school_id = $1 AND user_id = $2
@@ -475,7 +475,7 @@ router.put('/message-draft', protect, canSendNotifications, async (req, res) => 
       return res.status(422).json({ success: false, message: 'Invalid recipient group.' })
     }
     if (!subject && !body) return res.status(422).json({ success: false, message: 'Draft subject or body is required.' })
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO message_drafts (school_id, user_id, recipient_group, subject, body)
       VALUES ($1,$2,$3,$4,$5)
       ON CONFLICT (school_id, user_id)
@@ -492,7 +492,7 @@ router.put('/message-draft', protect, canSendNotifications, async (req, res) => 
 router.delete('/message-draft', protect, canSendNotifications, async (req, res) => {
   try {
     await ensureMessageDraftTable()
-    await pool.query('DELETE FROM message_drafts WHERE school_id = $1 AND user_id = $2', [currentSchoolId(req), req.user?.id])
+    await query('DELETE FROM message_drafts WHERE school_id = $1 AND user_id = $2', [currentSchoolId(req), req.user?.id])
     res.json({ success: true })
   } catch (err) {
     console.error('Message draft delete error:', err.message)
@@ -505,7 +505,7 @@ router.get('/history', protect, canSendNotifications, async (req, res) => {
   try {
     await ensureNotificationColumns()
     const schoolId = currentSchoolId(req)
-    const result = await pool.query(`
+    const result = await query(`
       SELECT id, student_id, title, type, channel, phone, message, metadata, status, sent_at, provider_sid
       FROM notification_log
       WHERE school_id = $1
@@ -528,7 +528,7 @@ router.get('/inbox', protect, async (req, res) => {
     const recipientRole = req.user?.role || null
     const scope = scopedNotificationPredicate(recipientRole, 2)
     const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
-    const result = await pool.query(`
+    const result = await query(`
       SELECT id, school_id, student_id, recipient_role, title, type, message, metadata, read_at, status, sent_at
       FROM notification_log n
       WHERE n.school_id = $1
@@ -562,7 +562,7 @@ router.put('/:id/archive', protect, async (req, res) => {
     const scope = scopedNotificationPredicate(recipientRole, 2)
     const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
     const idParam = params.length + 1
-    const result = await pool.query(`
+    const result = await query(`
       UPDATE notification_log n
       SET archived_at = COALESCE(archived_at, NOW()), read_at = COALESCE(read_at, NOW())
       WHERE n.school_id = $1
@@ -587,7 +587,7 @@ router.put('/:id/read', protect, async (req, res) => {
     const scope = scopedNotificationPredicate(recipientRole, 2)
     const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
     const idParam = params.length + 1
-    const result = await pool.query(`
+    const result = await query(`
       UPDATE notification_log n
       SET read_at = COALESCE(read_at, NOW())
       WHERE n.school_id = $1
@@ -612,7 +612,7 @@ router.put('/read-all', protect, async (req, res) => {
     const recipientRole = req.user?.role || null
     const scope = scopedNotificationPredicate(recipientRole, 2)
     const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
-    await pool.query(`
+    await query(`
       UPDATE notification_log n
       SET read_at = NOW()
       WHERE n.school_id = $1

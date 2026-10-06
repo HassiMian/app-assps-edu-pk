@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 
@@ -10,7 +10,7 @@ const canManageDiary = requireRoles('super_admin', 'admin', 'school_admin', 'pri
 let dailyDiarySchemaReady = null
 async function ensureDailyDiaryTable() {
   if (dailyDiarySchemaReady) return true
-  const result = await pool.query("SELECT to_regclass('public.daily_diaries') AS table_name")
+  const result = await query("SELECT to_regclass('public.daily_diaries') AS table_name")
   if (!result.rows[0]?.table_name) {
     const err = new Error('daily_diaries schema migration is not applied.')
     err.code = 'DAILY_DIARY_SCHEMA_NOT_READY'
@@ -27,7 +27,7 @@ function resolveDiarySchoolId(req) {
 }
 
 async function resolveDiarySchoolName(schoolId) {
-  const result = await pool.query(
+  const result = await query(
     `SELECT COALESCE(NULLIF(TRIM(st.school_name), ''), s.name) AS school_name
      FROM schools s
      LEFT JOIN settings st ON st.school_id = s.id
@@ -87,13 +87,13 @@ router.get('/', async (req, res) => {
     if (!isSuperAdmin && !schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
 
     const result = isSuperAdmin
-      ? await pool.query(
+      ? await query(
         `SELECT * FROM daily_diaries
          ORDER BY created_at DESC
          LIMIT $1`,
         [limit]
       )
-      : await pool.query(
+      : await query(
         `SELECT * FROM daily_diaries
          WHERE school_id = $1
          ORDER BY created_at DESC
@@ -120,7 +120,7 @@ router.get('/:id', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid diary id.' })
     }
 
-    const result = await pool.query('SELECT * FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
+    const result = await query('SELECT * FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
     const diary = result.rows[0]
     if (!diary) {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
@@ -152,7 +152,7 @@ router.post('/', async (req, res) => {
     if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
     payload.school_name = canonicalSchoolName
 
-    const result = await pool.query(
+    const result = await query(
       `INSERT INTO daily_diaries (
         school_id, template_id, school_name, tagline, logo_url,
         class_level, class_name, diary_date, slips_per_page,
@@ -201,7 +201,7 @@ router.put('/:id', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid diary id.' })
     }
 
-    const existing = await pool.query('SELECT * FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
+    const existing = await query('SELECT * FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
     const current = existing.rows[0]
     if (!current) {
       return res.status(404).json({ success: false, notFound: true, message: 'Daily diary not found.' })
@@ -216,7 +216,7 @@ router.put('/:id', async (req, res) => {
     const canonicalSchoolName = await resolveDiarySchoolName(Number(current.school_id))
     if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
     payload.school_name = canonicalSchoolName
-    const result = await pool.query(
+    const result = await query(
       `UPDATE daily_diaries SET
         template_id = $1,
         school_name = $2,
@@ -271,7 +271,7 @@ router.delete('/:id', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid diary id.' })
     }
 
-    const existing = await pool.query('SELECT id, school_id FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
+    const existing = await query('SELECT id, school_id FROM daily_diaries WHERE id = $1 LIMIT 1', [id])
     const diary = existing.rows[0]
     if (!diary) {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
@@ -281,7 +281,7 @@ router.delete('/:id', async (req, res) => {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
 
-    await pool.query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2', [id, Number(diary.school_id)])
+    await query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2', [id, Number(diary.school_id)])
     res.json({ success: true, message: 'Daily diary deleted successfully.' })
   } catch (error) {
     console.error('Daily diary delete error:', error)
