@@ -342,6 +342,19 @@ assertNotContains(
   /One Student \(1 Copy\)|One Student \(1 Copy - Thermal\)|One Student \(2 Copies\)|One Student \(3 Copies\)/,
   'fee action menu must not advertise print variants that route to the same renderer.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/SMSReport.jsx',
+  /\['sent','delivered','queued','accepted'\]\.includes\(normalized\).*Delivered/,
+  'message report must not label sent/queued provider states as delivered.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/SMSReport.jsx',
+  "const sent = Number(response.data?.sent || 0)",
+  'message retry UI must inspect the provider result before claiming success.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
