@@ -66,7 +66,7 @@ function Remote($script) {
   }
   $payload = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($normalized))
   $remoteCommand = "printf '%s' '$payload' | base64 -d | bash"
-  & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $remoteCommand
+  & $SshExe -n -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $remoteCommand
   Assert-NativeSuccess "ssh $HostSpec"
 }
 
