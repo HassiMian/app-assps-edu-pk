@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "assps-qbank-source-authority-v1",
+  "checkedOn": "2026-10-06",
+  "purpose": "Fail-closed authority and edition routing before any Grade IX/X question authoring.",
+  "rules": {
+    "academicContentAuthority": "CURRENT_OFFICIAL_TEXTBOOK_OR_AUTHORIZED_GRAMMAR_ONLY",
+    "assessmentPatternAuthority": "OFFICIAL_CURRENT_MODEL_PAIRING_OR_VISUALLY_INSPECTED_ACTUAL_PAPER",
+    "alpRole": "OPTIONAL_EXAM_FILTER_NEVER_CANONICAL_CORPUS_DELETION",
+    "actualPaperContentUse": "SKILL_TAXONOMY_ONLY_NO_STEM_PASSAGE_ANSWER_COPY",
+    "grade10NewEditionRule": "OLDER_ACTUAL_PAPERS_STRUCTURE_ONLY_UNTIL_CURRENT_OFFICIAL_PATTERN_EXISTS",
+    "liveUrlRule": "A dead origin URL does not erase previously hashed evidence; preserve hash, retrieval date and availability state.",
+    "identityFields": [
+      "grade",
+      "subject",
+      "curriculumTrack",
+      "medium",
+      "editionOrSession"
+    ]
+  },
+  "authorities": [
+    {
+      "id": "PECTAA-G9-2026-REVISED-ALP",
+      "authority": "PECTAA",
+      "grade": 9,
+      "artifactType": "REVISED_ALP_PAIRING_MODEL_PACKAGE",
+      "session": "Annual Examination 2026",
+      "notification": "PECTAA/C&C Unit/2025/376",
+      "date": "2025-11-07",
+      "supersedes": "PECTAA/C&C Unit/2025/325 dated 2025-10-24",
+      "url": "https://pectaa.edu.pk/uploads/Revised%20ALP%20Notification%2007.11.2025.pdf",
+      "status": "OFFICIAL_CURRENT_AUTHORITY",
+      "contentUse": "ASSESSMENT_PATTERN_AND_OPTIONAL_ALP_FILTER"
+    },
+    {
+      "id": "PECTAA-CURRICULUM-CATALOG",
+      "authority": "PECTAA",
+      "artifactType": "CURRENT_CURRICULUM_CATALOG",
+      "url": "https://pectaa.edu.pk/curriculum-compliance/",
+      "status": "OFFICIAL_LIVE_CATALOG",
+      "contentUse": "EDITION_MEDIUM_TRACK_RESOLUTION"
+    },
+    {
+      "id": "PECTAA-G9-TECH-PRACTICAL-2026",
+      "authority": "PECTAA",
+      "grade": 9,
+      "curriculumTrack": "MATRIC_TECH",
+      "artifactType": "PRACTICAL_PAIRING_LIST_MODEL_PACKAGE",
+      "notification": "PECTAA/C&C Unit/2026/551",
+      "date": "2026-01-08",
+      "url": "https://pectaa.edu.pk/wp-content/uploads/2026/01/Pairing-Scheme-List-of-Practicals-and-Model-Papers-of-Agriculture-Sciences-Health-Sciences-Fashion-Designing-ICT-Grade-9-2.pdf",
+      "status": "OFFICIAL_LIVE_ARTIFACT",
+      "subjects": [
+        "Agriculture Sciences",
+        "Health Sciences",
+        "Fashion Designing",
+        "ICT"
+      ],
+      "contentUse": "PRACTICAL_TAXONOMY_AND_BLUEPRINT"
+    }
+  ],
+  "trackSeparation": {
+    "required": true,
+    "rule": "Never merge MAINSTREAM and MATRIC_TECH because labels are similar.",
+    "examples": [
+      "Physics / MAINSTREAM != Physics / MATRIC_TECH",
+      "Computer Science & Entrepreneurship / MAINSTREAM != Computer & Entrepreneurship-Tech / MATRIC_TECH"
+    ]
+  },
+  "releaseGuards": [
+    "BLOCK_AUTHORING_IF_CURRENT_TEXTBOOK_EDITION_UNRESOLVED",
+    "BLOCK_PAGE_METADATA_IF_PAGE_NOT_VISUALLY_VERIFIED",
+    "BLOCK_PATTERN_APPROVAL_IF_ONLY_THIRD_PARTY_REPRODUCTION_EXISTS",
+    "BLOCK_UNIVERSAL_COMPLETION_IF_ANY_IN_SCOPE_TRACK_OR_MEDIUM_IS_MISSING",
+    "BLOCK_ACADEMIC_REVIEW_CLAIM_WITHOUT_REVIEW_EVIDENCE"
+  ]
+}
