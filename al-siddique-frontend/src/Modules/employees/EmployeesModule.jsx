@@ -3,7 +3,6 @@ import Portal from '../../components/Portal'
 import { useSearchParams } from 'react-router-dom'
 import api from '../../services/api'
 import { DonutChart, BarChart, ChartLegend } from '../../components/Charts'
-import { useUserStore } from '../../services/useUserStore'
 import { PERMISSION_GROUPS, ALL_PERMISSIONS, DEFAULT_TEACHER_PERMISSIONS } from '../../services/permissions'
 import { BadgeCheck, BriefcaseBusiness, Clock3, Percent, UserCheck, Users, VenusAndMars, Wallet } from 'lucide-react'
 
@@ -1006,409 +1005,157 @@ function SettingsTab({ designations, onUpdateDesignations, subjects, onUpdateSub
 //  Main Module 
 //  Staff Permissions Tab 
 function StaffPermissionsTab({ employees }) {
- const { users, setPermissions, getByEntity } = useUserStore()
  const [selectedEmpId, setSelectedEmpId] = useState(null)
+ const [account, setAccount] = useState(null)
  const [localPerms, setLocalPerms] = useState([])
  const [saved, setSaved] = useState(false)
-
- const selectedEmp = employees.find(e => e.id === selectedEmpId)
- const storeUser = selectedEmpId ? getByEntity(selectedEmpId, 'teacher') : null
- const dbUser = selectedEmp?.portal_username ? {
- id: `db_${selectedEmp.id}`,
- username: selectedEmp.portal_username,
- email: selectedEmp.email,
- permissions: selectedEmp.portal_permissions?.length ? selectedEmp.portal_permissions : DEFAULT_TEACHER_PERMISSIONS,
- } : null
- const accessUser = storeUser || dbUser
+ const [loading, setLoading] = useState(false)
+ const selectedEmp = employees.find(e => e.id === selectedEmpId) || null
 
  useEffect(() => {
- if (accessUser) setLocalPerms(accessUser.permissions || [...DEFAULT_TEACHER_PERMISSIONS])
- else if (selectedEmpId) setLocalPerms([...DEFAULT_TEACHER_PERMISSIONS])
- }, [selectedEmpId, accessUser?.id])
-
- const toggle = (key) => {
- setLocalPerms(p => p.includes(key) ? p.filter(k => k !== key) : [...p, key])
- setSaved(false)
- }
-
- const toggleGroup = (group) => {
- const keys = group.perms.map(p => p.key)
- const allOn = keys.every(k => localPerms.includes(k))
- if (allOn) setLocalPerms(p => p.filter(k => !keys.includes(k)))
- else setLocalPerms(p => [...new Set([...p, ...keys])])
- setSaved(false)
- }
-
- const handleSave = async () => {
- if (!accessUser) { alert('Please generate a Login ID for this employee first (Login Access tab).'); return }
- if (storeUser) setPermissions(storeUser.id, localPerms)
+ if (!selectedEmpId) { setAccount(null); setLocalPerms([]); return }
+ let cancelled = false
+ async function loadAccount() {
+ setLoading(true)
  try {
- await api.put(`/api/employees/${selectedEmp.id}`, { portal_permissions: localPerms, app_access: localPerms })
- setSaved(true)
- setTimeout(() => setSaved(false), 2000)
+ const response = await api.get(`/api/employees/${selectedEmpId}/portal-account`)
+ if (cancelled) return
+ const user = response.data?.data || null
+ setAccount(user)
+ setLocalPerms(Array.isArray(user?.permissions) && user.permissions.length ? user.permissions : [...DEFAULT_TEACHER_PERMISSIONS])
  } catch (err) {
- alert('Permissions save failed: ' + (err.response?.data?.message || err.message))
+ if (!cancelled) { setAccount(null); setLocalPerms([...DEFAULT_TEACHER_PERMISSIONS]) }
+ console.error('Could not load employee portal account', err)
+ } finally {
+ if (!cancelled) setLoading(false)
  }
  }
+ void loadAccount()
+ return () => { cancelled = true }
+ }, [selectedEmpId])
 
- const handleSelectAll = () => { setLocalPerms(ALL_PERMISSIONS.map(p => p.key)); setSaved(false) }
- const handleClearAll = () => { setLocalPerms([]); setSaved(false) }
+ const toggle = key => { setLocalPerms(prev => prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]); setSaved(false) }
+ const toggleGroup = group => {
+ const keys = group.perms.map(item => item.key)
+ const allOn = keys.every(key => localPerms.includes(key))
+ setLocalPerms(prev => allOn ? prev.filter(key => !keys.includes(key)) : [...new Set([...prev, ...keys])])
+ setSaved(false)
+ }
  const handleDefault = () => { setLocalPerms([...DEFAULT_TEACHER_PERMISSIONS]); setSaved(false) }
+ const handleSelectAll = () => { setLocalPerms(ALL_PERMISSIONS.map(item => item.key)); setSaved(false) }
+ const handleClearAll = () => { setLocalPerms([]); setSaved(false) }
+ const handleSave = async () => {
+ if (!selectedEmp) return
+ if (!account) { alert('Create this employee portal account in Login Access first.'); return }
+ try {
+ await api.put(`/api/employees/${selectedEmp.id}/portal-account/permissions`, { permissions: localPerms })
+ setAccount(prev => prev ? { ...prev, permissions: localPerms } : prev)
+ setSaved(true)
+ setTimeout(() => setSaved(false), 2200)
+ } catch (err) {
+ alert(err.response?.data?.message || 'Permissions could not be saved.')
+ }
+ }
 
  return (
- <GCard>
- <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:22, flexWrap:'wrap', gap:12 }}>
- <div>
- <h2 style={{ color:C.gold, fontSize:18, fontWeight:800, margin:'0 0 4px' }}> Staff Access Permissions</h2>
- <p style={{ color:C.muted, fontSize:13, margin:0 }}>Grant or restrict access to specific features for each staff member</p>
+ <div style={{ display:'grid', gridTemplateColumns:'minmax(230px,.65fr) minmax(0,1.7fr)', gap:18 }}>
+ <GCard style={{ padding:16, maxHeight:720, overflowY:'auto' }}>
+ <div style={{ color:C.gold, fontSize:13, fontWeight:800, marginBottom:12 }}>Staff Members</div>
+ <div style={{ display:'grid', gap:7 }}>
+ {employees.map(emp => <button key={emp.id} onClick={()=>setSelectedEmpId(emp.id)} style={{ textAlign:'left', padding:'10px 12px', borderRadius:11, cursor:'pointer', border:selectedEmpId===emp.id ? '1px solid color-mix(in srgb, var(--apex-action-primary) 34%, var(--apex-border-default))' : `1px solid ${C.border}`, background:selectedEmpId===emp.id ? 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-surface-solid)', color:C.silver }}>
+ <div style={{ fontWeight:750, fontSize:13 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11, marginTop:3 }}>{emp.designation}</div>
+ </button>)}
  </div>
- </div>
-
- {/* Employee selector */}
- <div style={{ marginBottom:24 }}>
- <div style={{ color:C.muted, fontSize:11, fontWeight:700, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8 }}>Select Staff Member</div>
- <div style={{ display:'flex', flexWrap:'wrap', gap:8 }}>
- {employees.map(emp => {
- const u = getByEntity(emp.id, 'teacher')
- return (
- <button key={emp.id} onClick={() => { setSelectedEmpId(emp.id); setSaved(false) }} style={{
- padding:'8px 14px', borderRadius:10, border:`1px solid ${selectedEmpId===emp.id?C.gold:C.border}`,
- background: selectedEmpId===emp.id ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'rgba(15,23,42,0.5)',
- color: selectedEmpId===emp.id ? '#071e34' : C.silver,
- cursor:'pointer', fontWeight:600, fontSize:13, display:'flex', alignItems:'center', gap:6,
- }}>
- {emp.name}
- <span style={{ fontSize:10, opacity:0.7 }}>{emp.designation ? `· ${emp.designation}` : ''}</span>
- {u ? <span style={{ color:selectedEmpId===emp.id?'#071e34':C.green, fontSize:10 }}></span> : <span style={{ color:selectedEmpId===emp.id?'#071e34':C.red, fontSize:10 }}></span>}
- </button>
- )
- })}
- </div>
- </div>
-
- {selectedEmp ? (
- <>
- {/* Header for selected employee */}
- <div style={{ background:'rgba(200,153,26,.08)', border:`1px solid ${C.gold}33`, borderRadius:14, padding:'14px 18px', marginBottom:20, display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:12 }}>
- <div>
- <div style={{ color:C.gold, fontWeight:800, fontSize:15 }}>{selectedEmp.name}</div>
- <div style={{ color:C.muted, fontSize:12, marginTop:2 }}>{selectedEmp.designation} {accessUser ? `· Login ID: ${accessUser.username}` : '·  No login ID yet — generate one in the Login Access tab first'}</div>
- </div>
- <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
- <button onClick={handleDefault} style={{ background:'rgba(10,132,255,.12)', color:C.blue, border:`1px solid ${C.blue}33`, padding:'7px 14px', borderRadius:9, fontSize:12, cursor:'pointer', fontWeight:600 }}> Teacher Defaults</button>
- <button onClick={handleSelectAll} style={{ background:'rgba(48,209,88,.1)', color:C.green, border:`1px solid ${C.green}33`, padding:'7px 14px', borderRadius:9, fontSize:12, cursor:'pointer', fontWeight:600 }}> Select All</button>
- <button onClick={handleClearAll} style={{ background:'rgba(255,55,95,.1)', color:C.red, border:`1px solid ${C.red}33`, padding:'7px 14px', borderRadius:9, fontSize:12, cursor:'pointer', fontWeight:600 }}> Clear All</button>
- </div>
- </div>
-
- {/* Permission groups */}
- <div style={{ display:'grid', gap:16 }}>
- {PERMISSION_GROUPS.map(group => {
- const allOn = group.perms.every(p => localPerms.includes(p.key))
- const someOn = group.perms.some(p => localPerms.includes(p.key))
- return (
- <div key={group.group} style={{ background:'rgba(7,30,52,0.5)', border:`1px solid ${C.border}`, borderRadius:14, overflow:'hidden' }}>
- {/* Group header */}
- <div style={{ padding:'12px 18px', background:'rgba(11,44,77,0.6)', display:'flex', alignItems:'center', justifyContent:'space-between', borderBottom:`1px solid ${C.border}` }}>
- <div style={{ display:'flex', alignItems:'center', gap:10 }}>
- <span style={{ fontSize:18 }}>{group.icon}</span>
- <span style={{ color:C.silver, fontWeight:700, fontSize:14 }}>{group.group}</span>
- <span style={{ color:C.muted, fontSize:11 }}>({group.perms.filter(p=>localPerms.includes(p.key)).length}/{group.perms.length})</span>
- </div>
- <button onClick={() => toggleGroup(group)} style={{
- padding:'5px 12px', borderRadius:8, border:'none', cursor:'pointer', fontSize:12, fontWeight:700,
- background: allOn ? `rgba(48,209,88,.15)` : someOn ? 'rgba(255,159,10,.15)' : 'rgba(255,255,255,.06)',
- color: allOn ? C.green : someOn ? C.orange : C.muted,
- }}>{allOn ? ' Sab On' : someOn ? '~ Kuch On' : 'Sab Off'}</button>
- </div>
- {/* Permission items */}
- <div style={{ padding:'8px 12px', display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px,1fr))', gap:4 }}>
- {group.perms.map(perm => {
- const on = localPerms.includes(perm.key)
- return (
- <label key={perm.key} onClick={() => toggle(perm.key)} style={{ display:'flex', alignItems:'center', gap:12, padding:'10px 12px', borderRadius:10, cursor:'pointer', background: on ? 'rgba(200,153,26,.08)' : 'transparent', transition:'background 0.15s' }}>
- <div style={{
- width:20, height:20, borderRadius:6, border:`2px solid ${on?C.gold:C.border}`,
- background: on ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'transparent',
- display:'grid', placeItems:'center', flexShrink:0, transition:'all 0.15s',
- }}>
- {on && <span style={{ color:'#071e34', fontSize:12, fontWeight:900 }}></span>}
- </div>
- <span style={{ color: on ? C.silver : C.muted, fontSize:13, lineHeight:1.3 }}>{perm.label}</span>
- </label>
- )
- })}
- </div>
- </div>
- )
- })}
- </div>
-
- {/* Save bar */}
- <div style={{ marginTop:20, display:'flex', justifyContent:'flex-end', alignItems:'center', gap:12 }}>
- <span style={{ color:C.muted, fontSize:12 }}>{localPerms.length} permissions selected</span>
- <button onClick={handleSave} style={{
- background: saved ? 'rgba(48,209,88,.2)' : `linear-gradient(135deg,${C.gold},${C.goldL})`,
- color: saved ? C.green : '#071e34',
- border: saved ? `1px solid ${C.green}` : 'none',
- padding:'11px 28px', borderRadius:12, fontWeight:800, fontSize:14, cursor:'pointer',
- }}>
- {saved ? ' Saved!' : ' Save Permissions'}
- </button>
- </div>
- </>
- ) : (
- <div style={{ textAlign:'center', padding:'48px 24px', color:C.muted }}>
- <div style={{ fontSize:34, marginBottom:16, fontWeight:900, color:C.gold }}>KEY</div>
- <div style={{ fontSize:15, fontWeight:600 }}>Select a staff member to configure their module permissions</div>
- <div style={{ fontSize:13, marginTop:8 }}>Each employee can be granted access to specific modules independently</div>
- </div>
- )}
  </GCard>
+ <GCard>
+ {!selectedEmp ? <div style={{ padding:40, textAlign:'center', color:C.muted }}>Select an employee to configure permissions.</div> : <>
+ <div style={{ display:'flex', justifyContent:'space-between', gap:14, flexWrap:'wrap', alignItems:'center', marginBottom:18 }}>
+ <div><h2 style={{ margin:0, color:C.silver, fontSize:18 }}>{selectedEmp.name}</h2><div style={{ color:C.muted, fontSize:12, marginTop:4 }}>{loading ? 'Loading account…' : account ? `Server account · ${account.username || account.email || ''}` : 'No server portal account linked'}</div></div>
+ <div style={{ display:'flex', gap:7, flexWrap:'wrap' }}><button onClick={handleDefault} style={btnSecondary}>Teacher Defaults</button><button onClick={handleSelectAll} style={btnSecondary}>Select All</button><button onClick={handleClearAll} style={btnSecondary}>Clear</button></div>
+ </div>
+ <div style={{ display:'grid', gap:14 }}>
+ {PERMISSION_GROUPS.map(group => {
+ const keys = group.perms.map(item => item.key); const allOn = keys.every(key => localPerms.includes(key))
+ return <div key={group.label} style={{ padding:14, borderRadius:14, border:`1px solid ${C.border}`, background:'var(--apex-bg-subtle)' }}>
+ <button type="button" onClick={()=>toggleGroup(group)} style={{ width:'100%', display:'flex', justifyContent:'space-between', alignItems:'center', border:0, background:'transparent', color:C.silver, fontWeight:800, cursor:'pointer', padding:0 }}><span>{group.label}</span><span style={{ color:allOn ? C.green : C.muted, fontSize:11 }}>{allOn ? 'All enabled' : `${keys.filter(key=>localPerms.includes(key)).length}/${keys.length}`}</span></button>
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(210px,1fr))', gap:8, marginTop:12 }}>{group.perms.map(permission => <label key={permission.key} style={{ display:'flex', alignItems:'center', gap:9, color:C.silver, fontSize:12, cursor:'pointer' }}><input type="checkbox" checked={localPerms.includes(permission.key)} onChange={()=>toggle(permission.key)}/><span>{permission.label}</span></label>)}</div>
+ </div>
+ })}
+ </div>
+ <div style={{ display:'flex', justifyContent:'flex-end', marginTop:18 }}><button disabled={!account || loading} onClick={handleSave} style={{ ...btnPrimary, opacity:!account ? .5 : 1 }}>{saved ? 'Saved' : 'Save Permissions'}</button></div>
+ </>}
+ </GCard>
+ </div>
  )
 }
 
-//  Login Access Tab 
-function LoginAccessTab({ employees }) {
- const { users, generateTeacher, regenerateTeacher, resetPassword, toggleBlock, deleteAccess, getByEntity } = useUserStore()
- const [showPass, setShowPass] = useState({})
- const [resetTarget, setResetTarget] = useState(null)
- const [newPass, setNewPass] = useState('')
- const [copied, setCopied] = useState(null)
+function LoginAccessTab({ employees, onReload }) {
+ const [accounts, setAccounts] = useState({})
+ const [temporary, setTemporary] = useState({})
+ const [working, setWorking] = useState('')
 
-  const userRaw = localStorage.getItem('al_siddique_user')
-  let isDemo = false
-  try {
-    if (userRaw) {
-      const userObj = JSON.parse(userRaw)
-      isDemo = userObj?.email === 'demo@assps.edu.pk'
-    }
-  } catch (e) {}
-
- const dbPortalUsers = employees
- .filter(emp => emp.portal_username)
- .map(emp => ({
- id: `db_${emp.id}`,
- username: emp.portal_username,
- email: emp.email,
- password: emp.portal_password || '',
- role: emp.portal_role || 'teacher',
- entityId: emp.id,
- name: emp.name,
- designation: emp.designation,
- isActive: emp.portal_active,
- permissions: emp.portal_permissions || DEFAULT_TEACHER_PERMISSIONS,
- lastLogin: null,
- dbBacked: true,
- }))
- const localTeacherUsers = users.filter(u => u.role === 'teacher')
- const teacherUsers = [
- ...localTeacherUsers,
- ...dbPortalUsers.filter(dbUser => !localTeacherUsers.some(localUser => localUser.entityId === dbUser.entityId)),
- ]
-
- const copyText = (text, key) => {
- navigator.clipboard.writeText(text).catch(() => {})
- setCopied(key)
- setTimeout(() => setCopied(null), 1800)
- }
-
- const handleBulkGenerate = () => {
- if (!window.confirm(`${employees.length} employees k liye login IDs generate karain?`)) return
- employees.forEach(emp => generateTeacher(emp))
- }
-
- const handleReset = async (u) => {
- if (!newPass.trim()) return
- resetPassword(u.id, newPass.trim())
- if (u.dbBacked) {
+ const loadAccount = useCallback(async emp => {
  try {
- await api.put('/api/auth/users/password', { email: u.email, newPassword: newPass.trim() })
- } catch (err) {
- alert('Database password update failed: ' + (err.response?.data?.message || err.message))
- return
+ const response = await api.get(`/api/employees/${emp.id}/portal-account`)
+ setAccounts(prev => ({ ...prev, [emp.id]: response.data?.data || null }))
+ } catch { setAccounts(prev => ({ ...prev, [emp.id]: null })) }
+ }, [])
+
+ useEffect(() => {
+ let cancelled = false
+ async function hydrate() {
+ const pairs = await Promise.all(employees.map(async emp => {
+ try { const response = await api.get(`/api/employees/${emp.id}/portal-account`); return [emp.id, response.data?.data || null] } catch { return [emp.id, null] }
+ }))
+ if (!cancelled) setAccounts(Object.fromEntries(pairs))
  }
+ void hydrate()
+ return () => { cancelled = true }
+ }, [employees])
+
+ const provision = async emp => {
+ setWorking(`${emp.id}:create`)
+ try {
+ const response = await api.post(`/api/employees/${emp.id}/portal-account`, { role:'teacher', permissions: DEFAULT_TEACHER_PERMISSIONS })
+ setTemporary(prev => ({ ...prev, [emp.id]: response.data?.credentials || null }))
+ await loadAccount(emp); await onReload?.()
+ } catch (err) { alert(err.response?.data?.message || 'Portal access could not be created.') }
+ finally { setWorking('') }
  }
- setResetTarget(null)
- setNewPass('')
+ const reset = async emp => {
+ setWorking(`${emp.id}:reset`)
+ try {
+ const response = await api.post(`/api/employees/${emp.id}/portal-account/reset`)
+ setTemporary(prev => ({ ...prev, [emp.id]: response.data?.credentials || null }))
+ await loadAccount(emp)
+ } catch (err) { alert(err.response?.data?.message || 'Secure reset failed.') }
+ finally { setWorking('') }
+ }
+ const toggle = async (emp, account) => {
+ setWorking(`${emp.id}:toggle`)
+ try { await api.put(`/api/employees/${emp.id}/portal-account/active`, { active: !account.is_active }); await loadAccount(emp); await onReload?.() }
+ catch (err) { alert(err.response?.data?.message || 'Access state could not be changed.') }
+ finally { setWorking('') }
+ }
+ const revoke = async emp => {
+ if (!window.confirm(`Revoke portal access for ${emp.name}? The user account will be disabled, not erased.`)) return
+ setWorking(`${emp.id}:revoke`)
+ try { await api.delete(`/api/employees/${emp.id}/portal-account`); setTemporary(prev=>({ ...prev, [emp.id]:null })); await loadAccount(emp); await onReload?.() }
+ catch (err) { alert(err.response?.data?.message || 'Portal access could not be revoked.') }
+ finally { setWorking('') }
+ }
+ const printCredential = (emp, account) => {
+ const temp=temporary[emp.id]; const w=window.open('','_blank','width=440,height=380'); if(!w)return
+ const login=account?.username||account?.email||temp?.username||temp?.email||''; const password=temp?.password||'Use the existing password or generate a secure reset from APEX OS.'
+ w.document.write(`<html><head><title>Staff Login</title><style>body{font-family:Arial;padding:28px;background:#f7f9fc}.card{background:white;border:1px solid #dbe2ea;border-radius:16px;padding:24px}.row{padding:10px 13px;background:#f4f7fb;border-radius:9px;margin:8px 0}.lbl{font-size:10px;color:#68788d;font-weight:700;text-transform:uppercase}.val{display:block;margin-top:4px;font-weight:700;color:#152033}</style></head><body><div class="card"><h2>${emp.name}</h2><p>${emp.designation}</p><div class="row"><span class="lbl">Login ID</span><span class="val">${login}</span></div><div class="row"><span class="lbl">Temporary password</span><span class="val">${password}</span></div></div></body></html>`); w.document.close(); setTimeout(()=>w.print(),300)
  }
 
- const handleToggleAccess = async (u, emp) => {
- if (u.dbBacked) {
- await api.put(`/api/employees/${emp.id}`, { portal_active: !u.isActive })
- window.location.reload()
- return
- }
- toggleBlock(u.id)
- }
-
- const handleDeleteAccess = async (u, emp) => {
- if (!window.confirm('Permanently block this login access?')) return
- if (u.dbBacked) {
- await api.put(`/api/employees/${emp.id}`, { portal_active: false, portal_permissions: [] })
- window.location.reload()
- return
- }
- deleteAccess(u.id)
- }
-
- const printCredentials = (u, emp) => {
- const w = window.open('', '_blank', 'width=420,height=320')
- w.document.write(`<html><head><title>Login Card</title><style>
- body{font-family:Arial,sans-serif;padding:28px;background:#f8f9fa;margin:0}
- .card{background:#fff;border:2px solid #C8991A;border-radius:14px;padding:22px;max-width:360px}
- h2{color:#C8991A;margin:0 0 4px;font-size:17px}
- p{color:#444;font-size:12px;margin:0 0 18px}
- .row{display:flex;justify-content:space-between;padding:8px 12px;background:#f0f4ff;border-radius:8px;margin-bottom:8px}
- .lbl{color:#888;font-size:11px;font-weight:600}
- .val{color:#1a1a2e;font-size:14px;font-weight:700}
- </style></head><body>
- <div class="card">
- <h2>Al Siddique OS — Staff Login</h2>
- <p>${u.name} · ${u.designation || 'Teacher'}</p>
- <div class="row"><span class="lbl">Login ID</span><span class="val">${u.username}</span></div>
- <div class="row"><span class="lbl">Password</span><span class="val">${u.password}</span></div>
- <div class="row"><span class="lbl">Portal</span><span class="val">alsiddique.edu.pk</span></div>
- </div></body></html>`)
- w.document.close()
- setTimeout(() => w.print(), 400)
- }
-
- return (
- <GCard>
- <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20, flexWrap:'wrap', gap:12 }}>
- <div>
- <h2 style={{ color:C.gold, fontSize:17, fontWeight:800, margin:0 }}> Teacher Login Access</h2>
- <p style={{ color:C.muted, fontSize:13, margin:'4px 0 0' }}>Manage login IDs and passwords for all staff members</p>
- </div>
- <div style={{ display:'flex', gap:10 }}>
- <button onClick={handleBulkGenerate} style={{ background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', fontWeight: 600, fontSize:13, padding:'10px 18px', borderRadius:11, border:'none', cursor:'pointer' }}>
-  Generate for All
- </button>
- </div>
- </div>
-
- {/* Stats */}
- <div style={{ display:'flex', gap:12, marginBottom:20, flexWrap:'wrap' }}>
- {[
- { label:'Total Staff', val:employees.length, color:C.blue },
- { label:'Access Generated', val:teacherUsers.length, color:C.green },
- { label:'Active', val:teacherUsers.filter(u=>u.isActive).length, color:C.gold },
- { label:'Blocked', val:teacherUsers.filter(u=>!u.isActive).length, color:C.red },
- ].map(s => (
- <div key={s.label} style={{ background:`rgba(${s.color==='#0A84FF'?'10,132,255':s.color==='#30D158'?'48,209,88':s.color==='#C8991A'?'200,153,26':'255,55,95'},.1)`, border:`1px solid ${s.color}33`, borderRadius:12, padding:'12px 18px', flex:1, minWidth:100 }}>
- <div style={{ color:s.color, fontSize:22, fontWeight:800 }}>{s.val}</div>
- <div style={{ color:C.muted, fontSize:11, marginTop:2 }}>{s.label}</div>
- </div>
- ))}
- </div>
-
- {/* Table */}
- <div style={{ overflowX:'auto' }}>
- <table style={{ width:'100%', borderCollapse:'collapse' }}>
- <thead>
- <tr style={{ borderBottom:`1px solid ${C.border}` }}>
- {['Employee','Designation','Login ID','Password','Status','Last Login','Actions'].map(h => (
- <th key={h} style={{ color:C.muted, fontSize:11, fontWeight:700, padding:'8px 12px', textAlign:'left', textTransform:'uppercase', letterSpacing:'0.06em', whiteSpace:'nowrap' }}>{h}</th>
- ))}
- </tr>
- </thead>
- <tbody>
- {employees.map(emp => {
- const localUser = getByEntity(emp.id, 'teacher')
- const dbUser = emp.portal_username ? dbPortalUsers.find(item => item.entityId === emp.id) : null
- const u = localUser || dbUser
- return (
- <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}22` }}>
- <td style={{ padding:'10px 12px' }}>
- <div style={{ color:C.silver, fontWeight:700, fontSize:13 }}>{emp.name}</div>
- <div style={{ color:C.muted, fontSize:11 }}>{emp.emp_id}</div>
- </td>
- <td style={{ padding:'10px 12px', color:C.muted, fontSize:12 }}>{emp.designation}</td>
- <td style={{ padding:'10px 12px' }}>
- {u ? (
- <div style={{ display:'flex', alignItems:'center', gap:6 }}>
- <span style={{ background:'rgba(10,132,255,.12)', color:C.blue, padding:'4px 10px', borderRadius:8, fontWeight:700, fontSize:13, fontFamily:'monospace' }}>{u.username}</span>
- <button onClick={() => copyText(u.username, `un_${u.id}`)} style={{ background:'none', border:'none', cursor:'pointer', color:copied===`un_${u.id}`?C.green:C.muted, fontSize:13 }}>{copied===`un_${u.id}`?'':''}</button>
- </div>
- ) : <span style={{ color:C.muted, fontSize:12 }}>—</span>}
- </td>
- <td style={{ padding:'10px 12px' }}>
- {u ? (
- <div style={{ display:'flex', alignItems:'center', gap:6 }}>
- <span style={{ fontFamily:'monospace', fontSize:13, color:C.silver }}>
- {showPass[u.id] ? u.password : '••••••••'}
- </span>
- <button onClick={() => setShowPass(p=>({...p,[u.id]:!p[u.id]}))} style={{ background:'none', border:'none', cursor:'pointer', color:C.muted, fontSize:12 }}>
- {showPass[u.id]?'':''}
- </button>
- <button onClick={() => copyText(u.password, `pw_${u.id}`)} style={{ background:'none', border:'none', cursor:'pointer', color:copied===`pw_${u.id}`?C.green:C.muted, fontSize:13 }}>
- {copied===`pw_${u.id}`?'':''}
- </button>
- </div>
- ) : <span style={{ color:C.muted, fontSize:12 }}>—</span>}
- </td>
- <td style={{ padding:'10px 12px' }}>
- {u ? (
- <span style={{ background:u.isActive?'rgba(48,209,88,.12)':'rgba(255,55,95,.12)', color:u.isActive?C.green:C.red, padding:'3px 10px', borderRadius:20, fontSize:11, fontWeight:700 }}>
- {u.isActive ? ' Active' : ' Blocked'}
- </span>
- ) : <span style={{ color:C.muted, fontSize:11 }}>No Access</span>}
- </td>
- <td style={{ padding:'10px 12px', color:C.muted, fontSize:11 }}>
- {u?.lastLogin ? new Date(u.lastLogin).toLocaleDateString('en-PK') : '—'}
- </td>
- <td style={{ padding:'10px 12px' }}>
- <div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>
- {!u ? (
- <button onClick={() => generateTeacher(emp)} style={{ background:`rgba(200,153,26,.15)`, color:C.gold, border:`1px solid ${C.gold}44`, padding:'5px 10px', borderRadius:8, fontSize:11, fontWeight: 600, cursor:'pointer', whiteSpace:'nowrap' }}>
- + Generate
- </button>
- ) : (<>
- <button onClick={() => regenerateTeacher(emp)} style={{ background:'rgba(10,132,255,.1)', color:C.blue, border:`1px solid ${C.blue}33`, padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer', whiteSpace:'nowrap' }}>
-  Reset
- </button>
- <button onClick={() => { setResetTarget(u); setNewPass('') }} style={{ background:'rgba(255,159,10,.1)', color:C.orange, border:`1px solid ${C.orange}33`, padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer', whiteSpace:'nowrap' }}>
-  New Pass
- </button>
- <button onClick={() => handleToggleAccess(u, emp)} style={{ background:u.isActive?'rgba(255,55,95,.1)':'rgba(48,209,88,.1)', color:u.isActive?C.red:C.green, border:`1px solid ${(u.isActive?C.red:C.green)}33`, padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer', whiteSpace:'nowrap' }}>
- {u.isActive?' Block':' Unblock'}
- </button>
- <button onClick={() => printCredentials(u, emp)} style={{ background:'rgba(191,90,242,.1)', color:'#BF5AF2', border:'1px solid #BF5AF233', padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer', whiteSpace:'nowrap' }}>
-  Print
- </button>
- {!isDemo && (
- <button onClick={() => handleDeleteAccess(u, emp)} style={{ background:'rgba(255,55,95,.08)', color:C.red, border:`1px solid ${C.red}22`, padding:'5px 10px', borderRadius:8, fontSize:11, cursor:'pointer', whiteSpace:'nowrap' }}>
-  Remove
- </button>
- )}
- </>)}
- </div>
- </td>
- </tr>
- )
- })}
- </tbody>
- </table>
- </div>
-
- {/* Custom password reset modal */}
- {resetTarget && (
- <div style={{ position:'fixed', inset:0, background:'rgba(7,30,52,.85)', backdropFilter:'blur(8px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center' }}>
- <div style={{ background:'#0B2C4D', border:`1px solid ${C.border}`, borderRadius:18, padding:28, width:340 }}>
- <h3 style={{ color:C.gold, margin:'0 0 6px', fontSize:16 }}>Set New Password</h3>
- <p style={{ color:C.muted, fontSize:12, margin:'0 0 16px' }}>{resetTarget.name} — {resetTarget.username}</p>
- <input value={newPass} onChange={e=>setNewPass(e.target.value)} placeholder="Naya password likhen..."
- style={{ width:'100%', background:'rgba(11,44,77,.8)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:14, outline:'none', boxSizing:'border-box', marginBottom:16 }} />
- <div style={{ display:'flex', gap:10 }}>
- <button onClick={()=>setResetTarget(null)} style={{ flex:1, padding:'10px', borderRadius:10, background:'rgba(255,55,95,.1)', color:C.red, border:`1px solid ${C.red}33`, cursor:'pointer', fontWeight: 600 }}>Cancel</button>
- <button onClick={()=>handleReset(resetTarget)} style={{ flex:1, padding:'10px', borderRadius:10, background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', border:'none', cursor:'pointer', fontWeight: 600 }}>Save</button>
- </div>
- </div>
- </div>
- )}
+ return <GCard>
+ <div style={{ marginBottom:18 }}><h2 style={{ color:C.silver, fontSize:18, margin:0 }}>Staff Login Access</h2><p style={{ color:C.muted, fontSize:12, margin:'5px 0 0' }}>Portal credentials are server-backed. Temporary passwords are shown only when newly created or securely reset.</p></div>
+ <div style={{ overflowX:'auto' }}><table style={{ width:'100%', borderCollapse:'collapse', minWidth:780 }}><thead><tr>{['Employee','Login','Status','Temporary Password','Actions'].map(label=><th key={label} style={{ padding:'11px 12px', textAlign:'left', color:C.muted, fontSize:10, textTransform:'uppercase', borderBottom:`1px solid ${C.border}` }}>{label}</th>)}</tr></thead><tbody>
+ {employees.map(emp=>{ const account=accounts[emp.id]; const temp=temporary[emp.id]; const busy=working.startsWith(`${emp.id}:`); return <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}><td style={{ padding:12 }}><div style={{ color:C.silver, fontWeight:750 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.designation}</div></td><td style={{ padding:12, color:C.silver }}>{account?.username||account?.email||'—'}</td><td style={{ padding:12 }}><span style={{ color:account?.is_active?C.green:account?C.red:C.muted, fontSize:12, fontWeight:700 }}>{account ? (account.is_active?'Active':'Blocked') : 'Not linked'}</span></td><td style={{ padding:12, color:temp?.password?C.gold:C.muted, fontFamily:temp?.password?'monospace':'inherit', fontSize:12 }}>{temp?.password||'—'}</td><td style={{ padding:12 }}><div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>{!account ? <button disabled={busy} onClick={()=>provision(emp)} style={btnPrimary}>{busy?'Creating…':'Create Access'}</button> : <><button disabled={busy} onClick={()=>reset(emp)} style={btnSecondary}>Secure Reset</button><button disabled={busy} onClick={()=>toggle(emp,account)} style={btnSecondary}>{account.is_active?'Block':'Unblock'}</button><button disabled={busy} onClick={()=>printCredential(emp,account)} style={btnSecondary}>Print</button><button disabled={busy} onClick={()=>revoke(emp)} style={{ ...btnSecondary, color:C.red }}>Revoke</button></>}</div></td></tr> })}
+ </tbody></table></div>
  </GCard>
- )
 }
 
 function EmployeesModule() {
@@ -1423,7 +1170,6 @@ function EmployeesModule() {
  const [editEmp, setEditEmp] = useState(null)
  const [designations, setDesignations] = useState(() => loadList(DESIG_KEY, DEFAULT_DESIGNATIONS))
  const [subjects, setSubjects] = useState(() => loadList(SUBJECT_KEY, DEFAULT_SUBJECTS))
- const { generateTeacher } = useUserStore()
 
  const updateDesignations = list => { setDesignations(list); persistList(DESIG_KEY, list) }
  const updateSubjects = list => { setSubjects(list); persistList(SUBJECT_KEY, list) }
@@ -1456,10 +1202,7 @@ function EmployeesModule() {
  if (editEmp) {
  await api.put(`/api/employees/${editEmp.id}`, payload)
  } else {
- const res = await api.post('/api/employees', payload)
- const saved = res.data?.data || payload
- // Auto-generate login credentials for new employee
- generateTeacher(saved)
+ await api.post('/api/employees', payload)
  }
  await reload()
  setModalMode(null)
@@ -1638,7 +1381,7 @@ function EmployeesModule() {
  )}
  {tab === 'attendance' && <AttendanceTab />}
  {tab === 'salary' && <SalaryTab employees={employees} />}
- {tab === 'login' && <LoginAccessTab employees={employees} />}
+ {tab === 'login' && <LoginAccessTab employees={employees} onReload={reload} />}
  {tab === 'permissions' && <StaffPermissionsTab employees={employees} />}
  {tab === 'settings' && (
  <SettingsTab

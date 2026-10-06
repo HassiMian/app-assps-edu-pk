@@ -5,7 +5,8 @@ const express = require('express')
 const router  = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
-const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
+const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
+const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
@@ -242,6 +243,164 @@ router.post('/', protect, canManageStaff, async (req, res) => {
     if (err.code === '23505')
       return res.status(400).json({ success: false, message: 'EMP ID already exists' })
     res.status(500).json({ success: false, message: err.message })
+  }
+})
+
+// GET /api/employees/:id/portal-account
+router.get('/:id/portal-account', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const employee = await query(`
+      SELECT id, name, designation, phone, email, user_id, portal_role, portal_permissions, portal_active
+      FROM employees
+      WHERE id = $1 AND school_id = $2
+      LIMIT 1
+    `, [Number(req.params.id), schoolId])
+    if (!employee.rowCount) return res.status(404).json({ success: false, message: 'Employee not found.' })
+    const row = employee.rows[0]
+    if (!row.user_id) return res.json({ success: true, data: null })
+    const supportsUsername = await hasColumn('users', 'username').catch(() => false)
+    const supportsPermissions = await hasColumn('users', 'permissions').catch(() => false)
+    const supportsLastLogin = await hasColumn('users', 'last_login').catch(() => false)
+    const user = await query(`
+      SELECT id, name, email, role, designation, is_active
+        ${supportsUsername ? ', username' : ''}
+        ${supportsPermissions ? ', permissions' : ''}
+        ${supportsLastLogin ? ', last_login' : ''}
+      FROM users
+      WHERE id = $1 AND school_id = $2
+      LIMIT 1
+    `, [row.user_id, schoolId])
+    res.json({ success: true, data: user.rows[0] || null })
+  } catch (err) {
+    console.error('Employee portal read error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee portal account could not be loaded.' })
+  }
+})
+
+router.post('/:id/portal-account', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const employee = await query(`
+      SELECT id, emp_id, name, designation, phone, email, user_id, portal_role, portal_permissions, portal_active
+      FROM employees
+      WHERE id = $1 AND school_id = $2
+      LIMIT 1
+    `, [Number(req.params.id), schoolId])
+    if (!employee.rowCount) return res.status(404).json({ success: false, message: 'Employee not found.' })
+    const row = employee.rows[0]
+    const role = String(req.body?.role || row.portal_role || 'teacher').trim().toLowerCase()
+    const username = String(req.body?.username || row.emp_id || `EMP-${row.id}`).trim()
+    const email = String(row.email || `${username.toLowerCase().replace(/[^a-z0-9]/g, '')}@staff.assps.edu.pk`).trim().toLowerCase()
+    const permissions = Array.isArray(req.body?.permissions)
+      ? req.body.permissions
+      : (Array.isArray(row.portal_permissions) ? row.portal_permissions : [])
+    const account = await provisionPortalUser({
+      schoolId,
+      tenantId: currentTenantId(req) || null,
+      userId: row.user_id || null,
+      name: row.name,
+      email,
+      username,
+      role,
+      designation: row.designation || 'Staff',
+      phone: row.phone || null,
+      permissions,
+      active: row.portal_active !== false,
+    })
+
+    const updates = []
+    const params = []
+    let i = 1
+    if (await hasColumn('employees', 'user_id').catch(() => false)) { updates.push(`user_id = $${i++}`); params.push(account.user.id) }
+    if (await hasColumn('employees', 'portal_username').catch(() => false)) { updates.push(`portal_username = $${i++}`); params.push(account.user.username || username) }
+    if (await hasColumn('employees', 'portal_role').catch(() => false)) { updates.push(`portal_role = $${i++}`); params.push(role) }
+    if (await hasColumn('employees', 'portal_active').catch(() => false)) { updates.push(`portal_active = $${i++}`); params.push(true) }
+    if (await hasColumn('employees', 'portal_password').catch(() => false)) { updates.push(`portal_password = NULL`) }
+    if (updates.length) {
+      params.push(row.id, schoolId)
+      await query(`UPDATE employees SET ${updates.join(', ')} WHERE id = $${i++} AND school_id = $${i}`, params)
+    }
+
+    res.status(account.created ? 201 : 200).json({
+      success: true,
+      data: account.user,
+      credentials: {
+        username: account.user?.username || username,
+        email: account.user?.email || email,
+        password: account.temporaryPassword,
+        created: account.created,
+      },
+    })
+  } catch (err) {
+    console.error('Employee portal provision error:', err.message)
+    res.status(500).json({ success: false, message: err.message || 'Employee portal account could not be created.' })
+  }
+})
+
+router.post('/:id/portal-account/reset', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const employee = await query('SELECT user_id FROM employees WHERE id = $1 AND school_id = $2 LIMIT 1', [Number(req.params.id), schoolId])
+    const userId = employee.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
+    const reset = await resetPortalUserPassword({ schoolId, userId })
+    res.json({ success: true, data: reset.user, credentials: { username: reset.user?.username || reset.user?.email || '', email: reset.user?.email || '', password: reset.temporaryPassword, created: false } })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Password reset failed.' })
+  }
+})
+
+router.put('/:id/portal-account/active', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const employee = await query('SELECT user_id FROM employees WHERE id = $1 AND school_id = $2 LIMIT 1', [Number(req.params.id), schoolId])
+    const userId = employee.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
+    const user = await setPortalUserActive({ schoolId, userId, active: req.body?.active !== false })
+    if (await hasColumn('employees', 'portal_active').catch(() => false)) {
+      await query('UPDATE employees SET portal_active = $1 WHERE id = $2 AND school_id = $3', [Boolean(req.body?.active !== false), Number(req.params.id), schoolId])
+    }
+    res.json({ success: true, data: user })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Employee portal state could not be updated.' })
+  }
+})
+
+router.put('/:id/portal-account/permissions', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const permissions = Array.isArray(req.body?.permissions) ? req.body.permissions : []
+    const employee = await query('SELECT user_id FROM employees WHERE id = $1 AND school_id = $2 LIMIT 1', [Number(req.params.id), schoolId])
+    const userId = employee.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
+    if (await hasColumn('users', 'permissions').catch(() => false)) {
+      await query('UPDATE users SET permissions = $1::jsonb, updated_at = NOW() WHERE id = $2 AND school_id = $3', [JSON.stringify(permissions), userId, schoolId])
+    }
+    if (await hasColumn('employees', 'portal_permissions').catch(() => false)) {
+      await query('UPDATE employees SET portal_permissions = $1::jsonb WHERE id = $2 AND school_id = $3', [JSON.stringify(permissions), Number(req.params.id), schoolId])
+    }
+    res.json({ success: true, data: { permissions } })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Employee permissions could not be updated.' })
+  }
+})
+
+router.delete('/:id/portal-account', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const employeeId = Number(req.params.id)
+    const employee = await query('SELECT user_id FROM employees WHERE id = $1 AND school_id = $2 LIMIT 1', [employeeId, schoolId])
+    const userId = employee.rows[0]?.user_id
+    if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
+    await setPortalUserActive({ schoolId, userId, active: false })
+    const assignments = ['user_id = NULL']
+    if (await hasColumn('employees', 'portal_active').catch(() => false)) assignments.push('portal_active = false')
+    if (await hasColumn('employees', 'portal_password').catch(() => false)) assignments.push('portal_password = NULL')
+    await query(`UPDATE employees SET ${assignments.join(', ')} WHERE id = $1 AND school_id = $2`, [employeeId, schoolId])
+    res.json({ success: true })
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message || 'Employee portal access could not be revoked.' })
   }
 })
 
