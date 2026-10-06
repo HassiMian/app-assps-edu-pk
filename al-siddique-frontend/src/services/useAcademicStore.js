@@ -302,6 +302,8 @@ export function useAcademicStore() {
  classNames,
  subjectNames,
  periodsPerDay,
+ sessionStart: data.sessionStart || '',
+ sessionEnd: data.sessionEnd || '',
  allSections,
  subjectsForClass,
  sectionsForClass,

@@ -5,13 +5,12 @@ import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHe
 import { useAcademicStore } from '../../services/useAcademicStore'
 
 const EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
-const SESSIONS = ['2026-2027', '2025-2026', '2024-2025']
-const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: SESSIONS[0] }
+const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: '' }
 
 function typeLabel(value) {
  if (value === 'TE') return 'Term Exam'
  if (value === 'AS') return 'Assessment'
- return value || 'Term Exam'
+ return value || ''
 }
 
 function classLabel(value) {
@@ -23,18 +22,19 @@ function normalizeExam(exam) {
  ...exam,
  type: typeLabel(exam.type),
  class: exam.class || 'All Classes',
- session: exam.session || SESSIONS[0],
+ session: exam.session || '',
  }
 }
 
 export default function ManageExams() {
- const { classNames } = useAcademicStore()
+ const { classNames, sessionStart, sessionEnd } = useAcademicStore()
+ const activeSession = sessionStart && sessionEnd ? `${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)}` : ''
  const CLASS_OPTIONS = ['All Classes', ...classNames]
  const [exams, setExams] = useState([])
  const [loading, setLoading] = useState(true)
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
- const [form, setForm] = useState(emptyForm)
+ const [form, setForm] = useState(() => ({ ...emptyForm, session: activeSession }))
 
  const load = async () => {
  setLoading(true)
@@ -76,7 +76,7 @@ export default function ManageExams() {
  total_marks: 100,
  pass_marks: 33,
  })
- setForm(emptyForm)
+ setForm({ ...emptyForm, session: activeSession })
  setMessage('Exam added successfully.')
  await load()
  setTimeout(() => setMessage(''), 3000)
@@ -87,10 +87,11 @@ export default function ManageExams() {
  }
  }
 
- const currentSessionCount = exams.filter(exam => (exam.session || SESSIONS[0]) === form.session).length
+ const sessionOptions = [...new Set([activeSession, ...exams.map(exam => exam.session)].filter(Boolean))]
+ const currentSessionCount = exams.filter(exam => exam.session === form.session).length
 
  return (
- <div style={{ minHeight: '100%', padding: 24, background: '#071e34', color: C.silver }}>
+ <div style={{ minHeight: '100%', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
  <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gap: 24 }}>
  <div className="super-module-card" style={{ ...card, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
  <div>
@@ -181,9 +182,9 @@ export default function ManageExams() {
  {exams.map((exam, i) => (
  <tr key={exam.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
  <td style={{ padding: '14px 16px', color: C.gold, fontWeight: 800 }}>{exam.name}</td>
- <td style={{ padding: '14px 16px', color: C.silver }}>{exam.type || 'Term Exam'}</td>
+ <td style={{ padding: '14px 16px', color: C.silver }}>{exam.type || '—'}</td>
  <td style={{ padding: '14px 16px' }}>{classLabel(exam.class || 'All Classes')}</td>
- <td style={{ padding: '14px 16px' }}>{exam.session || SESSIONS[0]}</td>
+ <td style={{ padding: '14px 16px' }}>{exam.session || '—'}</td>
  </tr>
  ))}
  {exams.length === 0 && (

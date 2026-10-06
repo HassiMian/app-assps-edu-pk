@@ -8,6 +8,18 @@ const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && proces
 const REAL_CLASS_NAMES = ['Starter', 'Mover', 'Flyer', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Pre Nine', 'Hifaz Class']
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
+async function resolveAcademicSession(schoolId, year) {
+  try {
+    const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
+    const setup = result.rows[0]?.academic_setup
+    const startYear = String(setup?.sessionStart || '').slice(0, 4)
+    const endYear = String(setup?.sessionEnd || '').slice(0, 4)
+    if (/^\d{4}$/.test(startYear) && /^\d{4}$/.test(endYear)) return `${startYear}-${endYear}`
+  } catch { /* fall through to the requested year if academic setup is unavailable */ }
+  const numericYear = Number(year)
+  return Number.isInteger(numericYear) && numericYear >= 2000 && numericYear <= 2100 ? `${numericYear}-${numericYear + 1}` : ''
+}
+
 function canManageFeeRecord(req) {
   return FEE_ADMIN_ROLES.has(String(req.user?.role || '').toLowerCase())
 }
@@ -736,7 +748,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     }
 
     const student = studentResult.rows[0]
-    const session = String(year || '2026') === '2026' ? '2026-2027' : `${year}-${Number(year) + 1}`
+    const session = await resolveAcademicSession(schoolId, year)
     const configuredMonthly = await getClassMonthlyFee(schoolId, student.class, session)
     const monthlyFee = asMoney(amount || configuredMonthly)
     const arrears = previous_arrears !== undefined
@@ -843,7 +855,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     
     let generatedCount = 0
     let skippedCount = 0
-    const session = String(year || '2026') === '2026' ? '2026-2027' : `${year}-${Number(year) + 1}`
+    const session = await resolveAcademicSession(schoolId, year)
     const configuredMonthly = await getClassMonthlyFee(schoolId, className, session)
 
     for (const student of studentsResult.rows) {

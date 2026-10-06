@@ -18,7 +18,7 @@ function normalizeClass(value) {
 function typeLabel(value) {
  if (value === 'TE') return 'Term Exam'
  if (value === 'AS') return 'Assessment'
- return value || 'Term Exam'
+ return value || ''
 }
 
 function normalizeExam(exam) {
@@ -26,12 +26,13 @@ function normalizeExam(exam) {
  ...exam,
  type: typeLabel(exam.type),
  class: exam.class === 'All Classes' ? exam.class : normalizeClass(exam.class),
- session: exam.session || '2026-2027',
+ session: exam.session || '',
  }
 }
 
 export default function MarksSheet() {
- const { classNames, subjectsForClass } = useAcademicStore()
+ const { classNames, subjectsForClass, sessionStart, sessionEnd } = useAcademicStore()
+ const activeSession = sessionStart && sessionEnd ? `${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)}` : ''
  const { paperSettings } = usePaperStore()
  const [exams, setExams] = useState([])
  const [students, setStudents] = useState([])
@@ -168,7 +169,7 @@ export default function MarksSheet() {
   name: `${selectedExamType} - Class ${selectedClass}`,
   type: resolvedType,
   class: selectedClass,
-  session: '2026-2027',
+  session: activeSession,
   total_marks: Number(totalMarks),
   pass_marks: Number(passMarks),
   })

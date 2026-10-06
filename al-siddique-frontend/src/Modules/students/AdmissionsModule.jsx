@@ -483,7 +483,7 @@ export default function AdmissionsModule() {
  <select style={select} value={form.studentClass} onChange={e => {
  const nextClass = e.target.value
  const nextSections = safeSectionsForClass(nextClass)
- setForm(prev => ({ ...prev, studentClass: nextClass, section: nextSections[0] || 'Blue' }))
+ setForm(prev => ({ ...prev, studentClass: nextClass, section: nextSections[0] || '' }))
  }}>
  {safeClassNames.map(v=><option key={v} value={v}>{v}</option>)}
  </select>

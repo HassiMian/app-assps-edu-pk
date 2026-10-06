@@ -355,6 +355,31 @@ assertContains(
   'message retry UI must inspect the provider result before claiming success.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/AdmissionsModule.jsx',
+  /nextSections\[0\] \|\| ['"]Blue['"]/,
+  'admissions must never invent a Blue section when a class has no configured section.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
+  /CLASSES\[0\] \|\| ['"]Starter['"]|SECTIONS\[0\] \|\| ['"]Blue['"]/,
+  'examination filters must come from Academic Setup without invented class/section defaults.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx',
+  /session:\s*['"]2026-2027['"]/,
+  'marks sheet must use the configured academic session rather than a hardcoded year.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /String\(year \|\| ['"]2026['"]\).*2026-2027/,
+  'fee discount/session logic must not special-case the 2026 academic year.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

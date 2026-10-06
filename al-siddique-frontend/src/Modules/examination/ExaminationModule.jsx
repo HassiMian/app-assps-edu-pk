@@ -242,14 +242,15 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
 }
 
 export default function ExaminationModule() {
- const { classNames: CLASSES, allSections: SECTIONS, subjectsForClass, subjects: rawSubjects, activeClasses } = useAcademicStore();
+ const { classNames: CLASSES, sectionsForClass, subjectsForClass, subjects: rawSubjects, activeClasses } = useAcademicStore();
  const location = useLocation();
  const navigate = useNavigate();
  const [exams, setExams] = useState([]);
  const [showAdd, setShowAdd] = useState(false);
  const [selectedExam, setSelectedExam] = useState(null);
- const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter');
- const [selectedSection, setSelectedSection] = useState(SECTIONS[0] || 'Blue');
+ const initialClass = CLASSES[0] || '';
+ const [selectedClass, setSelectedClass] = useState(initialClass);
+ const [selectedSection, setSelectedSection] = useState(() => sectionsForClass(initialClass)[0] || '');
  const [marks, setMarks] = useState({});
  const [saved, setSaved] = useState(false);
  const [viewCard, setViewCard] = useState(null);
@@ -470,7 +471,7 @@ export default function ExaminationModule() {
  <option value="">Select Exam</option>
  {exams.map(ex => <option key={ex.id} value={ex.id}>{ex.name}</option>)}
  </select>
- <select value={selectedClass} onChange={e => setSelectedClass(e.target.value)} style={selectStyle}>
+ <select value={selectedClass} onChange={e => { const nextClass = e.target.value; setSelectedClass(nextClass); setSelectedSection(sectionsForClass(nextClass)[0] || ''); }} style={selectStyle}>
  {CLASSES.map(cls => <option key={cls}>{cls}</option>)}
  </select>
  <select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} style={selectStyle}>
