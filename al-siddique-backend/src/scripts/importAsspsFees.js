@@ -87,65 +87,42 @@ function findMatch(record, students) {
 }
 
 async function ensureSchema(client) {
-  await client.query(`
-    ALTER TABLE fee_challans
-      ADD COLUMN IF NOT EXISTS discount DECIMAL(10,2) DEFAULT 0,
-      ADD COLUMN IF NOT EXISTS monthly_fee DECIMAL(10,2),
-      ADD COLUMN IF NOT EXISTS previous_arrears DECIMAL(10,2) DEFAULT 0,
-      ADD COLUMN IF NOT EXISTS gross_total DECIMAL(10,2),
-      ADD COLUMN IF NOT EXISTS remaining_balance DECIMAL(10,2),
-      ADD COLUMN IF NOT EXISTS discount_package_id INTEGER,
-      ADD COLUMN IF NOT EXISTS discount_label VARCHAR(150),
-      ADD COLUMN IF NOT EXISTS fee_source VARCHAR(80),
-      ADD COLUMN IF NOT EXISTS source_serial INTEGER,
-      ADD COLUMN IF NOT EXISTS migration_batch VARCHAR(80);
+  const required = {
+    fee_challans: [
+      'discount', 'monthly_fee', 'previous_arrears', 'gross_total', 'remaining_balance',
+      'discount_package_id', 'discount_label', 'fee_source', 'source_serial', 'migration_batch',
+    ],
+    fee_class_settings: ['school_id', 'class_name', 'session', 'monthly_fee', 'active'],
+    fee_discount_packages: [
+      'school_id', 'name', 'discount_type', 'discount_value', 'min_sibling_count',
+      'applicable_classes', 'applicable_sessions', 'active', 'auto_apply',
+    ],
+    fee_discount_applications: ['school_id', 'challan_id', 'student_id', 'package_id', 'amount'],
+  }
+  const result = await client.query(
+    `SELECT table_name, column_name
+     FROM information_schema.columns
+     WHERE table_schema = 'public' AND table_name = ANY($1::text[])`,
+    [Object.keys(required)]
+  )
+  const available = new Map()
+  for (const row of result.rows) {
+    if (!available.has(row.table_name)) available.set(row.table_name, new Set())
+    available.get(row.table_name).add(row.column_name)
+  }
+  const missing = []
+  for (const [table, columns] of Object.entries(required)) {
+    const present = available.get(table) || new Set()
+    for (const column of columns) {
+      if (!present.has(column)) missing.push(`${table}.${column}`)
+    }
+  }
+  if (missing.length) {
+    const error = new Error(`Fee schema migration 014 is required before import. Missing: ${missing.join(', ')}`)
+    error.code = 'FEE_SCHEMA_MIGRATION_REQUIRED'
+    throw error
+  }
 
-    CREATE TABLE IF NOT EXISTS fee_class_settings (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER REFERENCES schools(id) DEFAULT 1,
-      class_name VARCHAR(100) NOT NULL,
-      session VARCHAR(20) DEFAULT '2026-2027',
-      monthly_fee DECIMAL(10,2) NOT NULL DEFAULT 0,
-      active BOOLEAN DEFAULT true,
-      created_at TIMESTAMP DEFAULT NOW(),
-      updated_at TIMESTAMP DEFAULT NOW(),
-      UNIQUE(school_id, class_name, session)
-    );
-
-    CREATE TABLE IF NOT EXISTS fee_discount_packages (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER REFERENCES schools(id) DEFAULT 1,
-      name VARCHAR(150) NOT NULL,
-      description TEXT,
-      discount_type VARCHAR(20) NOT NULL DEFAULT 'percentage' CHECK (discount_type IN ('percentage','fixed')),
-      discount_value DECIMAL(10,2) NOT NULL DEFAULT 0,
-      min_sibling_count INTEGER NOT NULL DEFAULT 1,
-      applicable_classes JSONB DEFAULT '[]'::jsonb,
-      applicable_sessions JSONB DEFAULT '[]'::jsonb,
-      active BOOLEAN DEFAULT true,
-      auto_apply BOOLEAN DEFAULT true,
-      start_date DATE,
-      end_date DATE,
-      created_at TIMESTAMP DEFAULT NOW(),
-      updated_at TIMESTAMP DEFAULT NOW(),
-      UNIQUE(school_id, name)
-    );
-
-    CREATE TABLE IF NOT EXISTS fee_discount_applications (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER REFERENCES schools(id) DEFAULT 1,
-      challan_id INTEGER REFERENCES fee_challans(id) ON DELETE CASCADE,
-      student_id INTEGER REFERENCES students(id) ON DELETE CASCADE,
-      package_id INTEGER REFERENCES fee_discount_packages(id),
-      amount DECIMAL(10,2) NOT NULL DEFAULT 0,
-      reason TEXT,
-      applied_at TIMESTAMP DEFAULT NOW(),
-      UNIQUE(challan_id, package_id)
-    );
-
-    CREATE INDEX IF NOT EXISTS idx_fee_challans_source_serial ON fee_challans(fee_source, source_serial);
-    CREATE INDEX IF NOT EXISTS idx_fee_challans_migration_batch ON fee_challans(migration_batch);
-  `)
 
   for (const [className, fee] of DEFAULT_CLASS_FEES) {
     await client.query(`
@@ -186,11 +163,17 @@ async function ensureSchema(client) {
 }
 
 async function backupTables(client, batch) {
-  await client.query('CREATE SCHEMA IF NOT EXISTS migration_backups')
-  const stamp = batch.replace(/[^a-zA-Z0-9_]/g, '_')
-  for (const table of ['fee_challans', 'fee_class_settings', 'fee_discount_packages', 'fee_discount_applications']) {
-    await client.query(`CREATE TABLE IF NOT EXISTS migration_backups.${table}_${stamp} AS TABLE ${table}`)
+  const tables = ['fee_challans', 'fee_class_settings', 'fee_discount_packages', 'fee_discount_applications']
+  const snapshot = { batch, createdAt: new Date().toISOString(), tables: {} }
+  for (const table of tables) {
+    const result = await client.query(`SELECT * FROM ${table}`)
+    snapshot.tables[table] = result.rows
   }
+  const backupDir = path.resolve(process.cwd(), 'migration-output', 'backups')
+  fs.mkdirSync(backupDir, { recursive: true, mode: 0o700 })
+  const backupPath = path.join(backupDir, `${batch}_fee_snapshot.json`)
+  fs.writeFileSync(backupPath, JSON.stringify(snapshot, null, 2), { mode: 0o600 })
+  return backupPath
 }
 
 async function main() {
@@ -237,7 +220,7 @@ async function main() {
   try {
     await client.query('BEGIN')
     await ensureSchema(client)
-    await backupTables(client, batch)
+    if (!dryRun) report.backupPath = await backupTables(client, batch)
 
     const studentsResult = await client.query(`
       SELECT id, name, father_name, class, section, family_code, parent_phone, father_cnic, parent_user_id, gr_number

@@ -37,6 +37,12 @@ assertNotContains(
   'remote database seeding must not disable TLS certificate verification by default.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/scripts/importAsspsFees.js',
+  /\b(?:ALTER|CREATE|DROP|TRUNCATE)\s+(?:TABLE|SCHEMA|INDEX)\b/i,
+  'fee imports must validate migrated schema instead of mutating schema at runtime.'
+)
+
 assertContains(
   'al-siddique-backend/src/server.js',
   "mount('/ai-analytics', './routes/aiAnalyticsRoutes')",
