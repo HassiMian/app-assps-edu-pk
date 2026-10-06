@@ -256,7 +256,7 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/examRoutes.js',
-  'const gradeBands = await loadGradeBandsForSchool(schoolId)',
+  'gradeBands = await loadGradeBandsForSchool(schoolId)',
   'saved exam grades must use the school grading policy.'
 )
 
@@ -757,6 +757,25 @@ assertNotContains(
   'al-siddique-backend/src/routes/attendanceRoutes.js',
   /student\.school_id \|\| schoolId \|\| null|student\.tenant_id \|\| tenantId \|\| null/,
   'attendance persistence must never silently write null tenant ownership.'
+)
+
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "code: 'RESULT_TENANT_SCHEMA_REQUIRED'",
+  'exam result writes must fail closed unless student, exam, and result tables are tenant-safe.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "await client.query('BEGIN')",
+  'exam result bulk writes must run transactionally.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  /INSERT INTO exams \(name, type, class, session/,
+  'exam creation must never fall back to an unscoped legacy insert.'
 )
 
 if (failures.length) {

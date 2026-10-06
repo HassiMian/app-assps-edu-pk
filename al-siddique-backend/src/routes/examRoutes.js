@@ -175,15 +175,17 @@ router.post('/', protect, canManageExams, async (req, res) => {
       return res.status(422).json({ success: false, message: 'Total marks must be greater than zero and passing marks must be between zero and total marks.' })
     }
     const supportsTenant = await hasColumn('exams', 'school_id')
-    const result = supportsTenant
-      ? await query(`
-        INSERT INTO exams (school_id, name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
-      `, [currentSchoolId(req), examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
-      : await query(`
-        INSERT INTO exams (name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *
-      `, [examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
+    const schoolId = currentSchoolId(req)
+    if (!supportsTenant) {
+      return res.status(503).json({ success: false, code: 'EXAM_TENANT_SCHEMA_REQUIRED', message: 'Exam storage is not tenant-safe for writes.' })
+    }
+    if (!schoolId) {
+      return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to create an exam.' })
+    }
+    const result = await query(`
+      INSERT INTO exams (school_id, name, type, class, session, start_date, end_date, total_marks, pass_marks, created_by)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING *
+    `, [schoolId, examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
@@ -200,10 +202,14 @@ router.delete('/:id', protect, canManageExams, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
     const supportsTenant = await hasColumn('exams', 'school_id')
+    if (!supportsTenant) {
+      return res.status(503).json({ success: false, code: 'EXAM_TENANT_SCHEMA_REQUIRED', message: 'Exam storage is not tenant-safe for deletion.' })
+    }
+    if (!schoolId) {
+      return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to delete an exam.' })
+    }
     await client.query('BEGIN')
-    const lookup = supportsTenant && req.user?.role !== 'super_admin'
-      ? await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1', [examId, schoolId])
-      : await client.query('SELECT id, name FROM exams WHERE id = $1 LIMIT 1', [examId])
+    const lookup = await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1', [examId, schoolId])
     if (!lookup.rowCount) {
       await client.query('ROLLBACK')
       return res.status(404).json({ success: false, message: 'Exam not found.' })
@@ -221,110 +227,102 @@ router.delete('/:id', protect, canManageExams, async (req, res) => {
   }
 })
 
-// POST /api/exams/results
+// POST /api/exams/results — tenant-scoped, transactional bulk result save
 router.post('/results', protect, canManageExams, async (req, res) => {
+  const { results = [] } = req.body
+  if (!Array.isArray(results) || !results.length) {
+    return res.status(400).json({ success: false, message: 'results must be a non-empty array' })
+  }
+
+  const schoolId = currentSchoolId(req)
+  const [supportsStudentTenant, supportsExamTenant, supportsResultTenant] = await Promise.all([
+    hasColumn('students', 'school_id'),
+    hasColumn('exams', 'school_id'),
+    hasColumn('exam_results', 'school_id'),
+  ])
+  if (!supportsStudentTenant || !supportsExamTenant || !supportsResultTenant) {
+    return res.status(503).json({
+      success: false,
+      code: 'RESULT_TENANT_SCHEMA_REQUIRED',
+      message: 'Student, exam, and result storage must all be tenant-safe before results can be written.',
+    })
+  }
+  if (!schoolId) {
+    return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to save results.' })
+  }
+
+  let gradeBands
   try {
-    const { results = [] } = req.body
-    if (!Array.isArray(results)) {
-      return res.status(400).json({ success: false, message: 'results must be an array' })
-    }
-
-    const supportsStudentTenant = await hasColumn('students', 'school_id')
-    const supportsExamTenant = await hasColumn('exams', 'school_id')
-    const supportsResultTenant = await hasColumn('exam_results', 'school_id')
-    const schoolId = currentSchoolId(req)
-    const isSuperAdmin = req.user?.role === 'super_admin'
-    const gradeBands = await loadGradeBandsForSchool(schoolId)
-
-    for (const r of results) {
-      if (!r?.exam_id || !r?.student_id || !r?.subject) {
-        return res.status(400).json({ success: false, message: 'exam_id, student_id and subject are required' })
-      }
-
-      const marksObtained = Number(r.marks_obtained)
-      const totalMarks = Number(r.total_marks)
-      if (!Number.isFinite(marksObtained) || !Number.isFinite(totalMarks) || totalMarks <= 0 || marksObtained < 0 || marksObtained > totalMarks) {
-        return res.status(422).json({ success: false, message: 'Marks must be numeric, total marks must be greater than zero, and obtained marks cannot exceed total marks.' })
-      }
-      const grade = gradeFromBands(marksObtained, totalMarks, gradeBands)
-
-      if (!isSuperAdmin && supportsStudentTenant) {
-        const studentCheck = await query(`
-          SELECT id
-          FROM students
-          WHERE id = $1 AND school_id = $2
-          LIMIT 1
-        `, [r.student_id, schoolId])
-        if (studentCheck.rowCount === 0) {
-          return res.status(403).json({ success: false, message: 'Student does not belong to this school' })
-        }
-      }
-
-      if (!isSuperAdmin && supportsExamTenant) {
-        const examCheck = await query(`
-          SELECT id
-          FROM exams
-          WHERE id = $1 AND school_id = $2
-          LIMIT 1
-        `, [r.exam_id, schoolId])
-        if (examCheck.rowCount === 0) {
-          return res.status(403).json({ success: false, message: 'Exam does not belong to this school' })
-        }
-      }
-
-      const existingSql = supportsResultTenant && !isSuperAdmin
-        ? `
-        SELECT id
-        FROM exam_results
-        WHERE exam_id = $1 AND student_id = $2 AND subject = $3 AND school_id = $4
-        LIMIT 1
-      `
-        : `
-        SELECT id
-        FROM exam_results
-        WHERE exam_id = $1 AND student_id = $2 AND subject = $3
-        LIMIT 1
-      `
-      const existingParams = supportsResultTenant && !isSuperAdmin
-        ? [r.exam_id, r.student_id, r.subject, schoolId]
-        : [r.exam_id, r.student_id, r.subject]
-      const existing = await query(existingSql, existingParams)
-
-      if (existing.rows.length) {
-        const updateSql = supportsResultTenant
-          ? `
-            UPDATE exam_results
-            SET marks_obtained=$1, total_marks=$2, grade=$3, school_id = COALESCE(school_id, $5)
-            WHERE id=$4
-          `
-          : `
-            UPDATE exam_results
-            SET marks_obtained=$1, total_marks=$2, grade=$3
-            WHERE id=$4
-          `
-        const updateParams = supportsResultTenant
-          ? [marksObtained, totalMarks, grade, existing.rows[0].id, schoolId]
-          : [marksObtained, totalMarks, grade, existing.rows[0].id]
-        await query(updateSql, updateParams)
-      } else {
-        const insertSql = supportsResultTenant
-          ? `
-            INSERT INTO exam_results (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade)
-            VALUES ($1,$2,$3,$4,$5,$6,$7)
-          `
-          : `
-            INSERT INTO exam_results (exam_id, student_id, subject, marks_obtained, total_marks, grade)
-            VALUES ($1,$2,$3,$4,$5,$6)
-          `
-        const insertParams = supportsResultTenant
-          ? [schoolId, r.exam_id, r.student_id, r.subject, marksObtained, totalMarks, grade]
-          : [r.exam_id, r.student_id, r.subject, marksObtained, totalMarks, grade]
-        await query(insertSql, insertParams)
-      }
-    }
-    res.json({ success: true, message: 'Results save ho gaye' })
+    gradeBands = await loadGradeBandsForSchool(schoolId)
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Grade policy load error:', err.message)
+    return res.status(500).json({ success: false, message: 'School grading policy could not be loaded.' })
+  }
+
+  const normalized = []
+  for (const row of results) {
+    const examId = Number(row?.exam_id)
+    const studentId = Number(row?.student_id)
+    const subject = String(row?.subject || '').trim().slice(0, 160)
+    const marksObtained = Number(row?.marks_obtained)
+    const totalMarks = Number(row?.total_marks)
+    if (!Number.isInteger(examId) || examId <= 0 || !Number.isInteger(studentId) || studentId <= 0 || !subject) {
+      return res.status(422).json({ success: false, message: 'Valid exam_id, student_id and subject are required for every result.' })
+    }
+    if (!Number.isFinite(marksObtained) || !Number.isFinite(totalMarks) || totalMarks <= 0 || marksObtained < 0 || marksObtained > totalMarks) {
+      return res.status(422).json({ success: false, message: 'Marks must be numeric, total marks must be greater than zero, and obtained marks cannot exceed total marks.' })
+    }
+    normalized.push({
+      examId,
+      studentId,
+      subject,
+      marksObtained,
+      totalMarks,
+      grade: gradeFromBands(marksObtained, totalMarks, gradeBands),
+    })
+  }
+
+  const client = await pool.connect()
+  try {
+    await client.query('BEGIN')
+    const studentIds = [...new Set(normalized.map(row => row.studentId))]
+    const examIds = [...new Set(normalized.map(row => row.examId))]
+    const [studentScope, examScope] = await Promise.all([
+      client.query('SELECT id FROM students WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, studentIds]),
+      client.query('SELECT id FROM exams WHERE school_id = $1 AND id = ANY($2::int[])', [schoolId, examIds]),
+    ])
+    const validStudents = new Set(studentScope.rows.map(row => Number(row.id)))
+    const validExams = new Set(examScope.rows.map(row => Number(row.id)))
+    const foreignStudent = studentIds.find(id => !validStudents.has(id))
+    const foreignExam = examIds.find(id => !validExams.has(id))
+    if (foreignStudent || foreignExam) {
+      await client.query('ROLLBACK')
+      return res.status(403).json({
+        success: false,
+        message: foreignStudent ? 'One or more students do not belong to this school.' : 'One or more exams do not belong to this school.',
+      })
+    }
+
+    for (const row of normalized) {
+      await client.query(`
+        INSERT INTO exam_results (school_id, exam_id, student_id, subject, marks_obtained, total_marks, grade)
+        VALUES ($1,$2,$3,$4,$5,$6,$7)
+        ON CONFLICT (exam_id, student_id, subject)
+        DO UPDATE SET
+          school_id = EXCLUDED.school_id,
+          marks_obtained = EXCLUDED.marks_obtained,
+          total_marks = EXCLUDED.total_marks,
+          grade = EXCLUDED.grade
+      `, [schoolId, row.examId, row.studentId, row.subject, row.marksObtained, row.totalMarks, row.grade])
+    }
+    await client.query('COMMIT')
+    return res.json({ success: true, savedCount: normalized.length, message: 'Results saved successfully.' })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Exam result save error:', err.message)
+    return res.status(500).json({ success: false, message: 'Results could not be saved.' })
+  } finally {
+    client.release()
   }
 })
 
