@@ -20,6 +20,102 @@ function portalStudentScope(req, alias = 's', startIndex = 1) {
   return { clause: '', params: [], nextIndex: startIndex }
 }
 
+let gradeSchemaReady = null
+function ensureGradeSettingsSchema() {
+  if (!gradeSchemaReady) {
+    gradeSchemaReady = query(`
+      CREATE TABLE IF NOT EXISTS grade_settings (
+        id BIGSERIAL PRIMARY KEY,
+        school_id INTEGER NOT NULL REFERENCES schools(id),
+        label VARCHAR(24) NOT NULL,
+        min_percentage INTEGER NOT NULL CHECK (min_percentage BETWEEN 0 AND 100),
+        max_percentage INTEGER NOT NULL CHECK (max_percentage BETWEEN 0 AND 100),
+        sort_order INTEGER NOT NULL DEFAULT 0,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (school_id, label)
+      )
+    `).then(() => query('CREATE INDEX IF NOT EXISTS idx_grade_settings_school_order ON grade_settings (school_id, sort_order)'))
+      .catch(err => { gradeSchemaReady = null; throw err })
+  }
+  return gradeSchemaReady
+}
+
+const DEFAULT_GRADE_SETTINGS = [
+  { label:'A+', from:90, to:100 },
+  { label:'A', from:80, to:89 },
+  { label:'B', from:70, to:79 },
+  { label:'C', from:60, to:69 },
+  { label:'D', from:50, to:59 },
+  { label:'F', from:0, to:49 },
+]
+
+function validateGradeSettings(rows) {
+  if (!Array.isArray(rows) || !rows.length) return { errors:['At least one grade band is required.'], rows:[] }
+  const normalized = rows.map((row, index) => ({
+    label: String(row?.label || '').trim().slice(0, 24),
+    from: Number(row?.from),
+    to: Number(row?.to),
+    sortOrder: index,
+  }))
+  const errors = []
+  const seen = new Set()
+  normalized.forEach((row, index) => {
+    if (!row.label) errors.push(`Row ${index + 1}: grade label is required.`)
+    if (seen.has(row.label.toLowerCase())) errors.push(`Row ${index + 1}: duplicate grade label.`)
+    seen.add(row.label.toLowerCase())
+    if (!Number.isInteger(row.from) || !Number.isInteger(row.to) || row.from < 0 || row.to > 100 || row.from > row.to) {
+      errors.push(`Row ${index + 1}: percentage range must be valid and between 0 and 100.`)
+    }
+  })
+  const coverage = Array.from({ length: 101 }, () => 0)
+  normalized.forEach(row => {
+    if (!Number.isInteger(row.from) || !Number.isInteger(row.to)) return
+    for (let pct = Math.max(0, row.from); pct <= Math.min(100, row.to); pct += 1) coverage[pct] += 1
+  })
+  if (coverage.some(value => value === 0)) errors.push('Grade bands must cover every percentage from 0 to 100.')
+  if (coverage.some(value => value > 1)) errors.push('Grade bands must not overlap.')
+  return { errors, rows: normalized }
+}
+
+router.get('/grade-settings', protect, canReadResults, async (req, res) => {
+  try {
+    await ensureGradeSettingsSchema()
+    const schoolId = currentSchoolId(req)
+    const result = await query(`SELECT label, min_percentage, max_percentage FROM grade_settings WHERE school_id = $1 ORDER BY sort_order, max_percentage DESC`, [schoolId])
+    const rows = result.rowCount
+      ? result.rows.map(row => ({ label:row.label, from:Number(row.min_percentage), to:Number(row.max_percentage) }))
+      : DEFAULT_GRADE_SETTINGS
+    res.json({ success:true, data:rows, configured:result.rowCount > 0 })
+  } catch (err) {
+    console.error('Grade settings read error:', err.message)
+    res.status(500).json({ success:false, message:'Grade settings could not be loaded.' })
+  }
+})
+
+router.put('/grade-settings', protect, canManageExams, async (req, res) => {
+  const parsed = validateGradeSettings(req.body?.grades)
+  if (parsed.errors.length) return res.status(422).json({ success:false, message:'Grade settings validation failed.', fieldErrors:parsed.errors })
+  const schoolId = currentSchoolId(req)
+  const client = await require('../config/database').pool.connect()
+  try {
+    await ensureGradeSettingsSchema()
+    await client.query('BEGIN')
+    await client.query('DELETE FROM grade_settings WHERE school_id = $1', [schoolId])
+    for (const row of parsed.rows) {
+      await client.query(`INSERT INTO grade_settings (school_id, label, min_percentage, max_percentage, sort_order) VALUES ($1,$2,$3,$4,$5)`, [schoolId,row.label,row.from,row.to,row.sortOrder])
+    }
+    await client.query('COMMIT')
+    res.json({ success:true, data:parsed.rows.map(({sortOrder,...row}) => row), message:'Grade settings saved successfully.' })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Grade settings save error:', err.message)
+    res.status(500).json({ success:false, message:'Grade settings could not be saved.' })
+  } finally {
+    client.release()
+  }
+})
+
 // GET /api/exams
 router.get('/', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {
   try {

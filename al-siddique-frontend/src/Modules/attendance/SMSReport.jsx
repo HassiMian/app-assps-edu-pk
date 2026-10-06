@@ -1,80 +1,95 @@
-import { useState } from 'react'
-import { C, card, btnPrimary, btnSecondary, select, labelStyle, sectionHeader } from '../moduleStyles'
+import { useEffect, useMemo, useState } from 'react'
+import api from '../../services/api'
+import { C, card, btnSecondary, select, labelStyle, sectionHeader } from '../moduleStyles'
 
-const LOGS = []
-const STATUSES = ['All', 'Delivered', 'Failed']
+const STATUSES = ['All','Delivered','Failed']
 
-const badgeStyle = (status) => {
- if (status === 'Delivered') return { background: 'rgba(48,209,88,0.14)', color: C.green }
- if (status === 'Failed') return { background: 'rgba(255,55,95,0.14)', color: C.red }
- return { background: 'rgba(200,153,26,0.14)', color: C.gold }
+function displayStatus(status) {
+ const normalized = String(status || '').toLowerCase()
+ if (['sent','delivered','queued','accepted'].includes(normalized)) return 'Delivered'
+ if (['failed','undelivered','error'].includes(normalized)) return 'Failed'
+ return status || 'Unknown'
+}
+
+const badgeStyle = status => {
+ if (status === 'Delivered') return { background:'color-mix(in srgb,var(--apex-action-success) 10%,transparent)', color:C.green }
+ if (status === 'Failed') return { background:'color-mix(in srgb,var(--apex-action-danger) 10%,transparent)', color:C.red }
+ return { background:'var(--apex-bg-subtle)', color:C.muted }
 }
 
 export default function SMSReport() {
- const [selectedStatus, setSelectedStatus] = useState('All')
- const [search, setSearch] = useState('')
+ const [logs,setLogs] = useState([])
+ const [selectedStatus,setSelectedStatus] = useState('All')
+ const [search,setSearch] = useState('')
+ const [loading,setLoading] = useState(true)
+ const [retryingId,setRetryingId] = useState(null)
+ const [message,setMessage] = useState('')
 
- const filtered = LOGS.filter((item) => {
- const matchesStatus = selectedStatus === 'All' || item.status === selectedStatus
- const matchesSearch = item.recipient.toLowerCase().includes(search.toLowerCase()) || item.phone.includes(search)
+ async function loadLogs() {
+ setLoading(true)
+ try {
+ const response = await api.get('/api/notify/history', { skipCache:true })
+ setLogs(Array.isArray(response.data?.data) ? response.data.data : [])
+ } catch (err) {
+ console.error('Notification history load failed', err)
+ setLogs([])
+ setMessage(err.response?.data?.message || 'Delivery history could not be loaded.')
+ } finally { setLoading(false) }
+ }
+
+ useEffect(() => {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ void loadLogs()
+ }, [])
+
+ const rows = useMemo(() => logs.map(item => ({
+ ...item,
+ recipient:item.metadata?.recipient_name || item.metadata?.name || item.title || 'Recipient',
+ displayStatus:displayStatus(item.status),
+ date:item.sent_at ? new Date(item.sent_at).toLocaleString('en-PK') : '',
+ })), [logs])
+
+ const filtered = rows.filter(item => {
+ const matchesStatus = selectedStatus === 'All' || item.displayStatus === selectedStatus
+ const q = search.trim().toLowerCase()
+ const matchesSearch = !q || String(item.recipient).toLowerCase().includes(q) || String(item.phone || '').includes(q) || String(item.message || '').toLowerCase().includes(q)
  return matchesStatus && matchesSearch
  })
 
+ const retry = async item => {
+ if (!item.phone || !item.message || item.displayStatus !== 'Failed') return
+ setRetryingId(item.id); setMessage('')
+ try {
+ await api.post('/api/notify/bulk', { recipients:[{ phone:item.phone, message:item.message, student_id:item.student_id || null, name:item.recipient, title:item.title || 'School Notification', type:item.type || 'retry', recipient_role:item.metadata?.recipient_role || 'parent' }], channel:item.channel || 'auto' })
+ setMessage('Message retry submitted successfully.')
+ await loadLogs()
+ } catch (err) {
+ setMessage(err.response?.data?.message || 'Retry failed.')
+ } finally { setRetryingId(null) }
+ }
+
  return (
- <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
- <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gap: 24 }}>
- <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16 }}>
- <div>
- <h1 style={sectionHeader}>SMS Report</h1>
- <p style={{ color: C.muted, marginTop: 8 }}>Track message delivery logs and retry failed sends.</p>
+ <div style={{ minHeight:'100vh', padding:24, background:'var(--apex-shell-gradient)', color:C.silver }}>
+ <div style={{ maxWidth:1180, margin:'0 auto', display:'grid', gap:24 }}>
+ <div className="super-module-card" style={{ ...card, display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:16 }}>
+ <div><h1 style={sectionHeader}>SMS / WhatsApp Delivery Report</h1><p style={{ color:C.muted, marginTop:8 }}>Verified provider delivery ledger only; no fabricated message records.</p></div>
+ <button style={btnSecondary} onClick={()=>void loadLogs()} disabled={loading}>{loading?'Refreshing…':'Refresh'}</button>
  </div>
- <button style={{ ...btnPrimary, opacity:0.55, cursor:'not-allowed' }} disabled title="Retry becomes available when provider delivery logs are connected">Retry Failed SMS</button>
- </div>
-
- <div className="super-module-card" style={{ ...card, display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 20, alignItems: 'flex-end' }}>
- <div>
- <label style={labelStyle}>Search Recipient</label>
- <input style={{ ...select, padding: '12px 14px' }} value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Recipient name or phone" />
- </div>
- <div>
- <label style={labelStyle}>Status</label>
- <select style={select} value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
- {STATUSES.map((status) => <option key={status} value={status}>{status}</option>)}
- </select>
- </div>
- <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
- <span style={{ color: C.muted, fontSize: 13, paddingTop: 6 }}>{filtered.length} log entries</span>
- </div>
+ <div className="super-module-card" style={{ ...card, display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:20, alignItems:'flex-end' }}>
+ <div><label style={labelStyle}>Search Recipient</label><input style={{ ...select,padding:'10px 12px' }} value={search} onChange={e=>setSearch(e.target.value)} placeholder="Name, phone or message" /></div>
+ <div><label style={labelStyle}>Delivery Status</label><select style={select} value={selectedStatus} onChange={e=>setSelectedStatus(e.target.value)}>{STATUSES.map(item=><option key={item}>{item}</option>)}</select></div>
+ <div style={{ color:C.muted,fontSize:13 }}>{filtered.length} verified records</div>
  </div>
 
- <div className="super-module-card" style={{ ...card, overflowX: 'auto' }}>
- <table style={{ width: '100%', borderCollapse: 'collapse' }}>
- <thead>
- <tr style={{ borderBottom: `1px solid ${C.border}` }}>
- {['Recipient', 'Phone', 'Date', 'Status', 'Message', 'Action'].map((header) => (
- <th key={header} style={{ padding: '14px 16px', textAlign: 'left', color: C.muted, fontSize: 12, textTransform: 'uppercase', letterSpacing: 0.06 }}>{header}</th>
- ))}
- </tr>
- </thead>
- <tbody>
- {filtered.map((item, index) => (
- <tr key={item.id} style={{ background: index % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
- <td style={{ padding: '14px 16px', color: C.silver }}>{item.recipient}</td>
- <td style={{ padding: '14px 16px', color: C.gold }}>{item.phone}</td>
- <td style={{ padding: '14px 16px', color: C.muted }}>{item.date}</td>
- <td style={{ padding: '14px 16px' }}><span style={{ padding: '6px 12px', borderRadius: 14, ...badgeStyle(item.status), fontWeight: 700 }}>{item.status}</span></td>
- <td style={{ padding: '14px 16px', color: C.silver }}>{item.message}</td>
- <td style={{ padding: '14px 16px' }}><button style={{ ...btnSecondary, minWidth: 100 }}>Retry</button></td>
- </tr>
- ))}
- {filtered.length === 0 && (
- <tr>
- <td colSpan={6} style={{ padding: 28, textAlign: 'center', color: C.muted }}>No verified SMS/WhatsApp delivery logs are available yet. The system does not display fabricated delivery records.</td>
- </tr>
- )}
- </tbody>
- </table>
+ <div className="super-module-card" style={{ ...card, overflowX:'auto' }}>
+ <table style={{ width:'100%', borderCollapse:'collapse' }}><thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>{['Recipient','Phone','Date','Status','Channel','Message','Action'].map(header=><th key={header} style={{ padding:'14px 16px', textAlign:'left', color:C.muted, fontSize:12, textTransform:'uppercase' }}>{header}</th>)}</tr></thead>
+ <tbody>{filtered.map((item,index)=><tr key={item.id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent' }}>
+ <td style={{ padding:'14px 16px' }}>{item.recipient}</td><td style={{ padding:'14px 16px', color:'var(--apex-action-primary)' }}>{item.phone || '—'}</td><td style={{ padding:'14px 16px', color:C.muted }}>{item.date}</td>
+ <td style={{ padding:'14px 16px' }}><span style={{ padding:'6px 12px',borderRadius:999,...badgeStyle(item.displayStatus),fontWeight:700 }}>{item.displayStatus}</span></td><td style={{ padding:'14px 16px' }}>{item.channel || '—'}</td><td style={{ padding:'14px 16px',maxWidth:340 }}>{item.message}</td>
+ <td style={{ padding:'14px 16px' }}>{item.displayStatus==='Failed'?<button style={btnSecondary} onClick={()=>void retry(item)} disabled={retryingId===item.id}>{retryingId===item.id?'Retrying…':'Retry'}</button>:<span style={{ color:C.muted,fontSize:12 }}>—</span>}</td>
+ </tr>)}{!loading&&!filtered.length&&<tr><td colSpan={7} style={{ padding:28,textAlign:'center',color:C.muted }}>No verified delivery records match this filter.</td></tr>}</tbody></table>
  </div>
+ {message&&<div style={{ color:message.includes('success')?'var(--apex-action-success)':'var(--apex-action-danger)',fontSize:13,fontWeight:700 }}>{message}</div>}
  </div>
  </div>
  )
