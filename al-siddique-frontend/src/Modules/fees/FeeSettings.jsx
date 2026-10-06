@@ -3,35 +3,28 @@ import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { useAcademicStore } from '../../services/useAcademicStore'
 
-const FALLBACK_FEES = {
-  Starter: 2500,
-  Mover: 2500,
-  Flyer: 2500,
-  One: 2500,
-  Two: 2500,
-  Three: 2500,
-  Four: 2500,
-  Five: 2500,
-  Six: 2800,
-  Seven: 2800,
-  Eight: 2800,
-  'Pre Nine': 3000,
-  'Hifaz Class': 2500,
+function sessionLabel(sessionStart, sessionEnd) {
+  const start = String(sessionStart || '').slice(0, 4)
+  const end = String(sessionEnd || '').slice(0, 4)
+  return /^\d{4}$/.test(start) && /^\d{4}$/.test(end) ? `${start}-${end}` : ''
 }
 
-const emptyPackage = {
-  name: 'Triple Star Discount Package',
-  description: 'Automatically applies when a family has 3 or more active enrolled children.',
-  discount_type: 'percentage',
-  discount_value: 10,
-  min_sibling_count: 3,
-  applicable_classes: [],
-  applicable_sessions: ['2026-2027'],
-  active: true,
-  auto_apply: true,
-  start_date: '',
-  end_date: '',
+function makeEmptyPackage(activeSession = '') {
+  return {
+    name: '',
+    description: '',
+    discount_type: 'percentage',
+    discount_value: 0,
+    min_sibling_count: 1,
+    applicable_classes: [],
+    applicable_sessions: activeSession ? [activeSession] : [],
+    active: false,
+    auto_apply: false,
+    start_date: '',
+    end_date: '',
+  }
 }
+
 
 function Toggle({ checked, onChange }) {
   return (
@@ -124,7 +117,8 @@ function MultiSelect({ items, values, onChange, placeholder }) {
 }
 
 export default function FeeSettings() {
-  const { classNames: CLASSES } = useAcademicStore()
+  const { classNames: CLASSES, sessionStart, sessionEnd } = useAcademicStore()
+  const activeSession = sessionLabel(sessionStart, sessionEnd)
   const [classSettings, setClassSettings] = useState([])
   const [discountPackages, setDiscountPackages] = useState([])
   const [loading, setLoading] = useState(true)
@@ -133,8 +127,7 @@ export default function FeeSettings() {
   const [error, setError] = useState('')
 
   const availableClasses = useMemo(() => {
-    const merged = [...new Set([...(CLASSES || []), ...Object.keys(FALLBACK_FEES)])]
-    return merged.filter(Boolean)
+    return [...new Set(CLASSES || [])].filter(Boolean)
   }, [CLASSES])
 
   useEffect(() => {
@@ -149,17 +142,17 @@ export default function FeeSettings() {
           const found = remoteClasses.find(item => item.class_name === className)
           return found || {
             class_name: className,
-            session: '2026-2027',
-            monthly_fee: FALLBACK_FEES[className] || 2500,
-            active: true,
+            session: activeSession,
+            monthly_fee: '',
+            active: false,
           }
         })
         setClassSettings(merged)
-        setDiscountPackages((data.discountPackages?.length ? data.discountPackages : [emptyPackage]).map(pkg => ({
-          ...emptyPackage,
+        setDiscountPackages((data.discountPackages || []).map(pkg => ({
+          ...makeEmptyPackage(activeSession),
           ...pkg,
           applicable_classes: Array.isArray(pkg.applicable_classes) ? pkg.applicable_classes : [],
-          applicable_sessions: Array.isArray(pkg.applicable_sessions) ? pkg.applicable_sessions : ['2026-2027'],
+          applicable_sessions: Array.isArray(pkg.applicable_sessions) ? pkg.applicable_sessions : (activeSession ? [activeSession] : []),
           start_date: pkg.start_date || '',
           end_date: pkg.end_date || '',
         })))
@@ -169,15 +162,15 @@ export default function FeeSettings() {
         setError('Fee settings could not be loaded from server.')
         setClassSettings(availableClasses.map(className => ({
           class_name: className,
-          session: '2026-2027',
-          monthly_fee: FALLBACK_FEES[className] || 2500,
-          active: true,
+          session: activeSession,
+          monthly_fee: '',
+          active: false,
         })))
-        setDiscountPackages([emptyPackage])
+        setDiscountPackages([])
       })
       .finally(() => alive && setLoading(false))
     return () => { alive = false }
-  }, [availableClasses])
+  }, [availableClasses, activeSession])
 
   const updateClass = (index, patch) => {
     setClassSettings(prev => prev.map((item, i) => i === index ? { ...item, ...patch } : item))
@@ -188,15 +181,28 @@ export default function FeeSettings() {
   }
 
   const addPackage = () => {
-    setDiscountPackages(prev => [...prev, { ...emptyPackage, name: `New Discount Package ${prev.length + 1}`, active: false }])
+    setDiscountPackages(prev => [...prev, makeEmptyPackage(activeSession)])
   }
 
   const save = async () => {
     setSaving(true)
     setError('')
     setMessage('')
+    if (!activeSession) {
+      setError('Configure the academic session in Academic Setup before saving fee settings.')
+      setSaving(false)
+      return
+    }
+    const invalidFee = classSettings.find(item => item.active && (item.monthly_fee === '' || !Number.isFinite(Number(item.monthly_fee)) || Number(item.monthly_fee) < 0))
+    if (invalidFee) {
+      setError(`Enter a valid monthly fee for ${invalidFee.class_name}.`)
+      setSaving(false)
+      return
+    }
+    const normalizedClassSettings = classSettings.map(item => ({ ...item, session: item.session || activeSession, monthly_fee: Number(item.monthly_fee || 0) }))
+    const normalizedPackages = discountPackages.filter(pkg => String(pkg.name || '').trim())
     try {
-      await api.put('/api/fees/settings', { classSettings, discountPackages })
+      await api.put('/api/fees/settings', { classSettings: normalizedClassSettings, discountPackages: normalizedPackages })
       setMessage('Fee settings saved. Defaults and discount packages are now active for challan generation.')
       setTimeout(() => setMessage(''), 5000)
     } catch (err) {
@@ -308,7 +314,7 @@ export default function FeeSettings() {
                     style={input}
                     value={(pkg.applicable_sessions || []).join(', ')}
                     onChange={e => updatePackage(index, { applicable_sessions: e.target.value.split(',').map(v => v.trim()).filter(Boolean) })}
-                    placeholder="2026-2027"
+                    placeholder={activeSession || "YYYY-YYYY"}
                   />
                 </div>
                 <div>

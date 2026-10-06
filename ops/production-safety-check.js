@@ -1330,6 +1330,23 @@ assertNotContains(
   'virtual branches must inherit canonical school feature policy instead of a hardcoded feature set.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  /2026-2027|Triple Star Discount Package|monthly_fee:\s*2500|monthly_fee:\s*2800|monthly_fee:\s*3000/,
+  'fee settings must not invent academic session, class fees, or discount policy.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  'const activeSession = sessionLabel(sessionStart, sessionEnd)',
+  'fee settings must derive their session from Academic Setup.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /getClassMonthlyFee\(schoolId, className, session = ['"]2026-2027['"]\)/,
+  'fee lookup must not fall back to a hardcoded academic session.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

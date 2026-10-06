@@ -133,14 +133,16 @@ function monthNumber(value) {
   return MONTH_ORDER[String(value || '').trim().toLowerCase()] || null
 }
 
-async function getClassMonthlyFee(schoolId, className, session = '2026-2027') {
+async function getClassMonthlyFee(schoolId, className, session) {
   await ensureFeeSystemSchema(schoolId)
+  const normalizedSession = String(session || '').trim()
+  if (!/^\d{4}-\d{4}$/.test(normalizedSession)) return 0
   const result = await query(`
     SELECT monthly_fee
     FROM fee_class_settings
     WHERE school_id = $1 AND class_name = $2 AND session = $3 AND active = true
     LIMIT 1
-  `, [schoolId, normalizeClassName(className), session])
+  `, [schoolId, normalizeClassName(className), normalizedSession])
   return result.rows[0] ? asMoney(result.rows[0].monthly_fee) : 0
 }
 
