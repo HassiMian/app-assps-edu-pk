@@ -3,8 +3,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 EXPECTED_BRANCH="${ASSPS_OFFLOAD_BRANCH:-feat/free-cloud-workstation-zero-paid-20261004}"
-branch="$(git branch --show-current)"
-dirty="$(git status --porcelain)"
+branch="$(git -c safe.directory="$ROOT" branch --show-current)"
+dirty="$(git -c safe.directory="$ROOT" status --porcelain)"
 echo "ASSPS ZERO-PAID PREFLIGHT"
 echo "repo=$ROOT"
 echo "branch=$branch"
@@ -30,7 +30,7 @@ if (( disk_kb < 5242880 )); then
   echo "REFUSE: less than 5 GiB disk available" >&2
   exit 24
 fi
-echo "production=$(git -C /opt/assps-editor-worker/repo status --short --branch | head -1)"
+echo "production=$(git -c safe.directory=/opt/assps-editor-worker/repo -C /opt/assps-editor-worker/repo status --short --branch | head -1)"
 echo "ram_available_kb=$avail_kb"
 echo "disk_available_kb=$disk_kb"
 echo "PREFLIGHT_PASS"

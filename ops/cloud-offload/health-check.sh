@@ -22,8 +22,8 @@ free -h
 echo '=== Storage ==='
 df -h /
 echo '=== Isolated repository ==='
-git -C /opt/assps-cloud-worktrees/free-cloud status --short --branch
+git -c safe.directory=/opt/assps-cloud-worktrees/free-cloud -C /opt/assps-cloud-worktrees/free-cloud status --short --branch
 echo '=== Production repository ==='
-git -C /opt/assps-editor-worker/repo status --short --branch
+git -c safe.directory=/opt/assps-editor-worker/repo -C /opt/assps-editor-worker/repo status --short --branch
 if [ "$fail" -eq 0 ]; then echo 'HEALTH_PASS'; else echo 'HEALTH_FAIL'; fi
 exit "$fail"
