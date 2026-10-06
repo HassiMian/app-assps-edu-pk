@@ -86,6 +86,24 @@ assertContains(
 )
 
 assertContains(
+  'al-siddique-backend/src/routes/dashboardRoutes.js',
+  'LEFT JOIN attendance_today a\n      ON a.student_id = s.id AND a.school_id = s.school_id',
+  'dashboard attendance aggregates must preserve tenant scope and avoid raw join multiplication.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/dashboardRoutes.js',
+  'LEFT JOIN fee_totals f\n      ON f.student_id = s.id AND f.school_id = s.school_id',
+  'dashboard fee aggregates must preserve tenant scope and avoid raw join multiplication.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/dashboardRoutes.js',
+  /LEFT JOIN attendance a ON a\.student_id = s\.id\s*\n\s*LEFT JOIN fee_challans f ON f\.student_id = s\.id/,
+  'dashboard must not raw-join attendance and fee facts because that multiplies aggregate rows.'
+)
+
+assertContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
   'const currentList = sourceRecipients',
   'notifications must use source-backed recipients in every environment.'

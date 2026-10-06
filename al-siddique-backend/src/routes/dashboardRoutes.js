@@ -232,24 +232,39 @@ router.get('/class-stats', protect, async (req, res) => {
   const schoolId = currentSchoolId(req)
   const isSuperAdmin = req.user?.role === 'super_admin'
   const result = await safe(() => query(`
+    WITH attendance_today AS (
+      SELECT
+        student_id,
+        school_id,
+        MAX(CASE WHEN status = 'present' THEN 1 ELSE 0 END)::int AS present_today
+      FROM attendance
+      WHERE date = CURRENT_DATE
+      GROUP BY student_id, school_id
+    ), fee_totals AS (
+      SELECT
+        student_id,
+        school_id,
+        COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END), 0) AS fee_collected,
+        COALESCE(SUM(CASE WHEN status IN ('unpaid', 'pending') THEN amount ELSE 0 END), 0) AS fee_pending
+      FROM fee_challans
+      GROUP BY student_id, school_id
+    )
     SELECT
-      s.class                                                               AS class_id,
-      s.class                                                               AS class_name,
-      COUNT(DISTINCT s.id)::int                                             AS total,
-      COALESCE(SUM(CASE WHEN a.status='present' AND a.date=CURRENT_DATE
-                        THEN 1 ELSE 0 END), 0)::int                        AS present_today,
-      CASE WHEN COUNT(DISTINCT s.id) > 0
-        THEN ROUND(COALESCE(SUM(CASE WHEN a.status='present' AND a.date=CURRENT_DATE
-                                     THEN 1 ELSE 0 END),0)*100.0
-             / NULLIF(COUNT(DISTINCT s.id),0))::int
-        ELSE 0 END                                                          AS attendance_percent,
-      COALESCE(SUM(CASE WHEN f.status='paid' THEN f.amount ELSE 0 END),0)::int
-                                                                            AS fee_collected,
-      COALESCE(SUM(CASE WHEN f.status IN('unpaid','pending') THEN f.amount ELSE 0 END),0)::int
-                                                                           AS fee_pending
+      s.class                                                     AS class_id,
+      s.class                                                     AS class_name,
+      COUNT(s.id)::int                                            AS total,
+      COALESCE(SUM(a.present_today), 0)::int                       AS present_today,
+      CASE WHEN COUNT(s.id) > 0
+        THEN ROUND(COALESCE(SUM(a.present_today), 0) * 100.0
+             / NULLIF(COUNT(s.id), 0))::int
+        ELSE 0 END                                                AS attendance_percent,
+      COALESCE(SUM(f.fee_collected), 0)::int                      AS fee_collected,
+      COALESCE(SUM(f.fee_pending), 0)::int                        AS fee_pending
     FROM students s
-    LEFT JOIN attendance a ON a.student_id = s.id
-    LEFT JOIN fee_challans f ON f.student_id = s.id
+    LEFT JOIN attendance_today a
+      ON a.student_id = s.id AND a.school_id = s.school_id
+    LEFT JOIN fee_totals f
+      ON f.student_id = s.id AND f.school_id = s.school_id
     WHERE s.is_active = true${isSuperAdmin ? '' : ' AND s.school_id = $1'}
     GROUP BY s.class
     ORDER BY s.class
