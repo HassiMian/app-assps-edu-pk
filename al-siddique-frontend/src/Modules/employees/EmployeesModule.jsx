@@ -133,11 +133,11 @@ const Lbl = ({ children }) => (
 )
 
 const Inp = ({ style={}, ...props }) => (
- <input {...props} style={{ width:'100%', background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:14, outline:'none', boxSizing:'border-box', ...style }} />
+ <input {...props} style={{ width:'100%', background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:14, outline:'none', boxSizing:'border-box', ...style }} />
 )
 
 const Sel = ({ style={}, children, ...props }) => (
- <select {...props} style={{ width:'100%', background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:14, outline:'none', cursor:'pointer', boxSizing:'border-box', ...style }}>
+ <select {...props} style={{ width:'100%', background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:14, outline:'none', cursor:'pointer', boxSizing:'border-box', ...style }}>
  {children}
  </select>
 )
@@ -160,7 +160,7 @@ const StatusBadge = ({ status }) => {
 }
 
 const StatCard = ({ icon, label, value, color }) => (
- <GCard style={{ display:'flex', alignItems:'center', gap:16, padding:'20px 22px', background:`linear-gradient(145deg, ${color}18, rgba(11,44,77,0.96) 48%, rgba(7,30,52,0.98))`, border:`1px solid ${color}35`, borderRadius:22, boxShadow:`0 18px 42px rgba(0,0,0,0.22), 0 0 28px ${color}12` }}>
+ <GCard style={{ display:'flex', alignItems:'center', gap:16, padding:'20px 22px', background:`linear-gradient(145deg, color-mix(in srgb, ${color} 9%, var(--apex-bg-surface-solid)), var(--apex-bg-surface) 62%)`, border:`1px solid ${color}35`, borderRadius:22, boxShadow:`0 18px 42px rgba(0,0,0,0.22), 0 0 28px ${color}12` }}>
  <div className="super-module-card" style={{ width:50, height:50, borderRadius:16, background:`linear-gradient(135deg, ${color}2e, rgba(255,255,255,0.045))`, border:`1px solid ${color}55`, display:'grid', placeItems:'center', color, flexShrink:0, boxShadow:`0 12px 24px ${color}18` }}>{icon}</div>
  <div>
  <div className="super-module-card" style={{ color, fontSize:24, fontWeight:850, letterSpacing:-0.3 }}>{value}</div>
@@ -225,8 +225,8 @@ function EmployeeFormModal({ isOpen, onClose, onSave, initialData, designations,
  {TABS.map((t, i) => (
  <button key={i} onClick={() => setTab(i)} style={{
  padding:'7px 14px', borderRadius:9, border:'none', cursor:'pointer', fontWeight:700, fontSize:12, transition:'all 0.14s',
- background: tab === i ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'rgba(11,44,77,0.92)',
- color: tab === i ? '#071e34' : C.muted,
+ background:tab===i?'var(--apex-action-primary)':'var(--apex-bg-surface-solid)',
+ color:tab===i?'#fff':C.muted,
  }}>{t.icon} {t.label}</button>
  ))}
  </div>
@@ -250,7 +250,7 @@ function EmployeeFormModal({ isOpen, onClose, onSave, initialData, designations,
  type="file"
  accept="image/*"
  onChange={e=>loadPhoto(e.target.files?.[0])}
- style={{ width:'100%', background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:13, outline:'none', boxSizing:'border-box' }}
+ style={{ width:'100%', background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 13px', fontSize:13, outline:'none', boxSizing:'border-box' }}
  />
  <div style={{ display:'flex', gap:8, marginTop:8 }}>
  <Inp value={form.photo} onChange={e=>set('photo', e.target.value)} placeholder="or paste image URL / /uploads/photo.jpg" style={{ fontSize:12, padding:'8px 10px' }} />
@@ -455,7 +455,7 @@ function EmployeeFormModal({ isOpen, onClose, onSave, initialData, designations,
  ].map(p => (
  <button key={p.label} type="button"
  onClick={() => setForm(prev => ({ ...prev, app_access: p.keys }))}
- style={{ padding:'6px 13px', borderRadius:8, border:`1px solid ${C.border}`, background:'rgba(11,44,77,0.92)', color:C.silver, cursor:'pointer', fontSize:12, fontWeight:600 }}>
+ style={{ padding:'6px 13px', borderRadius:8, border:`1px solid ${C.border}`, background:'var(--apex-bg-surface-solid)', color:C.silver, cursor:'pointer', fontSize:12, fontWeight:600 }}>
  {p.label}
  </button>
  ))}
@@ -470,16 +470,16 @@ function EmployeeFormModal({ isOpen, onClose, onSave, initialData, designations,
  <div className="super-module-card" style={{ display:'flex', gap:8 }}>
  <button onClick={() => setTab(t => Math.max(0, t-1))} disabled={tab===0} style={{
  padding:'9px 16px', borderRadius:9, border:`1px solid ${C.border}`,
- background:'rgba(11,44,77,0.92)', color: tab===0 ? C.muted : C.silver, cursor: tab===0 ? 'default':'pointer', fontWeight:600,
+ background:'var(--apex-bg-surface-solid)', color: tab===0 ? C.muted : C.silver, cursor: tab===0 ? 'default':'pointer', fontWeight:600,
  }}>← Back</button>
- {tab < 5 && <button onClick={() => setTab(t => t+1)} style={{ padding:'9px 16px', borderRadius:9, border:'none', background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', cursor:'pointer', fontWeight: 600 }}>Next →</button>}
+ {tab < 5 && <button onClick={() => setTab(t => t+1)} style={{ padding:'9px 16px', borderRadius:9, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:'pointer', fontWeight: 600 }}>Next →</button>}
  </div>
  <div className="super-module-card" style={{ display:'flex', gap:10 }}>
  <button onClick={onClose} style={{ padding:'9px 18px', borderRadius:9, background:'rgba(255,55,95,0.12)', border:`1px solid rgba(255,55,95,0.3)`, color:C.red, cursor:'pointer', fontWeight:600 }}>Cancel</button>
  <button onClick={() => {
  if (!form.name || !form.designation || !form.phone) { alert('Required: Full Name, Designation, Phone'); return }
  onSave(form)
- }} style={{ padding:'9px 22px', borderRadius:9, border:'none', background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', cursor:'pointer', fontWeight:700 }}>
+ }} style={{ padding:'9px 22px', borderRadius:9, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:'pointer', fontWeight:700 }}>
   {initialData ? 'Update Employee' : 'Add Employee'}
  </button>
  </div>
@@ -521,7 +521,7 @@ function EmployeeProfileModal({ employee, onClose, onEdit }) {
  {/* Profile header */}
  <div className="super-module-card" style={{ padding:'20px 28px', background:'linear-gradient(135deg,rgba(200,153,26,0.14),rgba(7,30,52,0.5))', borderBottom:`1px solid ${C.border}`, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
  <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:16 }}>
- <div className="super-module-card" style={{ width:62, height:62, borderRadius:18, background:'linear-gradient(135deg,#C8991A,#8a6610)', display:'flex', alignItems:'center', justifyContent:'center', color:'#071e34', fontWeight:900, fontSize:26, border:`2px solid ${C.gold}` }}>
+ <div className="super-module-card" style={{ width:62, height:62, borderRadius:18, background:'linear-gradient(135deg,var(--apex-action-primary),var(--apex-action-secondary))', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:900, fontSize:26, border:`2px solid ${C.gold}` }}>
  {employee.name.charAt(0)}
  </div>
  <div>
@@ -532,7 +532,7 @@ function EmployeeProfileModal({ employee, onClose, onEdit }) {
  </div>
  <div className="super-module-card" style={{ display:'flex', gap:10, alignItems:'center' }}>
  <StatusBadge status={employee.status} />
- <button onClick={() => onEdit(employee)} style={{ padding:'8px 16px', borderRadius:10, border:'none', background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', cursor:'pointer', fontWeight: 600, fontSize:13 }}> Edit</button>
+ <button onClick={() => onEdit(employee)} style={{ padding:'8px 16px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:'pointer', fontWeight: 600, fontSize:13 }}> Edit</button>
  <button onClick={onClose} style={{ width:32, height:32, borderRadius:8, background:'rgba(255,55,95,0.15)', border:`1px solid rgba(255,55,95,0.3)`, color:C.red, cursor:'pointer', fontSize:18 }}>×</button>
  </div>
  </div>
@@ -704,7 +704,7 @@ function DirectoryTab({ employees, search, setSearch, designationFilter, setDesi
  <GCard>
  <div className="super-module-card" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:18 }}>
  <h3 style={{ color:C.gold, fontSize:18, margin:0, fontFamily:"'Playfair Display',serif" }}>Staff Directory</h3>
- <button onClick={onAdd} style={{ background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', border:'none', padding:'10px 18px', borderRadius:11, cursor:'pointer', fontWeight: 600 }}> Add Employee</button>
+ <button onClick={onAdd} style={{ background:'var(--apex-action-primary)', color:'#fff', border:'none', padding:'10px 18px', borderRadius:11, cursor:'pointer', fontWeight: 600 }}> Add Employee</button>
  </div>
  <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'2fr 1fr', gap:16 }}>
  <div><Lbl>Search</Lbl><Inp placeholder="Search by name, CNIC, phone, designation…" value={search} onChange={e=>setSearch(e.target.value)} /></div>
@@ -729,10 +729,10 @@ function DirectoryTab({ employees, search, setSearch, designationFilter, setDesi
  {employees.length === 0 ? (
  <tr><td colSpan={8} style={{ padding:42, textAlign:'center', color:C.muted }}>No employees found.</td></tr>
  ) : employees.map((emp, i) => (
- <tr key={emp.id} style={{ background: i%2===0 ? 'transparent' : 'rgba(11,44,77,0.2)', borderBottom:`1px solid rgba(200,153,26,0.05)` }}>
+ <tr key={emp.id} style={{ background:i%2===0?'transparent':'var(--apex-bg-subtle)', borderBottom:`1px solid rgba(200,153,26,0.05)` }}>
  <td style={{ padding:'12px 15px' }}>
  <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:10 }}>
- <div className="super-module-card" style={{ width:38, height:38, borderRadius:11, background:'linear-gradient(135deg,#C8991A,#8a6610)', display:'flex', alignItems:'center', justifyContent:'center', color:'#071e34', fontWeight:900, fontSize:15, flexShrink:0 }}>
+ <div className="super-module-card" style={{ width:38, height:38, borderRadius:11, background:'linear-gradient(135deg,var(--apex-action-primary),var(--apex-action-secondary))', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:900, fontSize:15, flexShrink:0 }}>
  {emp.name.charAt(0)}
  </div>
  <div>
@@ -838,10 +838,10 @@ function SalaryTab({ employees=[] }) {
  ) : records.map((rec, i) => {
  const emp = employees.find(e => e.id === rec.employeeId)
  return (
- <tr key={rec.id} style={{ background: i%2===0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+ <tr key={rec.id} style={{ background:i%2===0?'transparent':'var(--apex-bg-subtle)' }}>
  <td style={{ padding:'13px 15px' }}>
  <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:10 }}>
- <div className="super-module-card" style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,#C8991A,#8a6610)', display:'flex', alignItems:'center', justifyContent:'center', color:'#071e34', fontWeight:900, fontSize:13 }}>
+ <div className="super-module-card" style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,var(--apex-action-primary),var(--apex-action-secondary))', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:900, fontSize:13 }}>
  {emp?.name?.charAt(0) || '?'}
  </div>
  <div>
@@ -915,7 +915,7 @@ function ListManager({ title, icon, items, onUpdate, defaults, placeholder }) {
  style={{ flex: 1 }}
  />
  {(
- <button onClick={add} style={{ padding:'10px 20px', borderRadius:10, border:'none', background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', fontWeight: 600, cursor:'pointer', whiteSpace:'nowrap' }}>
+ <button onClick={add} style={{ padding:'10px 20px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', fontWeight: 600, cursor:'pointer', whiteSpace:'nowrap' }}>
  + Add
  </button>
  )}
@@ -924,11 +924,11 @@ function ListManager({ title, icon, items, onUpdate, defaults, placeholder }) {
  {/* List */}
  <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(200px, 1fr))', gap:8 }}>
  {items.map((item, i) => (
- <div key={item} style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px', borderRadius:10, background:'rgba(11,44,77,0.92)', border:`1px solid ${C.border}` }}>
+ <div key={item} style={{ display:'flex', alignItems:'center', gap:8, padding:'9px 12px', borderRadius:10, background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}` }}>
  {editIdx === i ? (
  <>
  <input value={editVal} onChange={e=>setEditVal(e.target.value)} onKeyDown={e=>e.key==='Enter'&&saveEdit()}
- style={{ flex:1, background:'rgba(11,44,77,0.8)', border:`1px solid ${C.gold}`, borderRadius:7, color:C.silver, padding:'4px 8px', fontSize:13, outline:'none' }} autoFocus />
+ style={{ flex:1, background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.gold}`, borderRadius:7, color:C.silver, padding:'4px 8px', fontSize:13, outline:'none' }} autoFocus />
  <button onClick={saveEdit} style={{ background:'none', border:'none', color:C.green, cursor:'pointer', fontSize:15, fontWeight: 600 }}></button>
  <button onClick={()=>setEditIdx(null)} style={{ background:'none', border:'none', color:C.muted, cursor:'pointer', fontSize:15 }}></button>
  </>
@@ -1237,7 +1237,7 @@ function EmployeesModule() {
  }));
 
  const empDashCard = { background: 'var(--apex-bg-surface)', backdropFilter: 'blur(20px)', border: '1px solid var(--apex-border-default)', borderRadius: 22, padding: 20, boxShadow:'var(--apex-shadow-sm)' };
- const empDashTitle = { color: '#C0C8D8', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
+ const empDashTitle = { color:'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
 
  return (
  <div className="super-module-card" style={{ minHeight:'100vh', background:'var(--apex-shell-gradient)', color:C.silver, fontFamily:'Inter,sans-serif' }}>
@@ -1278,7 +1278,7 @@ function EmployeesModule() {
   </div>
 
   {employeeLoadError && (
-  <div style={{ marginTop:16, padding:'12px 16px', borderRadius:14, border:'1px solid rgba(255,159,10,0.28)', background:'rgba(255,159,10,0.10)', color:'#ffd37a', fontSize:13, fontWeight:700 }}>
+  <div style={{ marginTop:16, padding:'12px 16px', borderRadius:14, border:'1px solid color-mix(in srgb,var(--apex-action-danger) 24%,var(--apex-border-default))', background:'color-mix(in srgb,var(--apex-action-danger) 7%,var(--apex-bg-surface-solid))', color:'var(--apex-action-danger)', fontSize:13, fontWeight:700 }}>
   Employees could not be loaded from SaaS: {employeeLoadError}
   </div>
   )}
