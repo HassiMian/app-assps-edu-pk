@@ -191,7 +191,7 @@ export default function ManageExams() {
  </thead>
  <tbody>
  {exams.map((exam, i) => (
- <tr key={exam.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+ <tr key={exam.id} style={{ background: i % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '14px 16px', color: C.gold, fontWeight: 800 }}>{exam.name}</td>
  <td style={{ padding: '14px 16px', color: C.silver }}>{exam.type || '—'}</td>
  <td style={{ padding: '14px 16px' }}>{classLabel(exam.class || 'All Classes')}</td>

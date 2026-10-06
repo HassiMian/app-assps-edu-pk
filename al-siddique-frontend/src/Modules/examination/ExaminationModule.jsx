@@ -87,8 +87,8 @@ function printExamResultCard({ student, marks, subjects, examName, totalMarks = 
  @page{size:A4 portrait;margin:10mm}
  *{box-sizing:border-box}
  body{margin:0;background:#eef2f7;color:#101827;font-family:Arial,sans-serif}
- .toolbar{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 14px;background:#071e34;color:#d9dee8;box-shadow:0 6px 18px rgba(15,23,42,.22)}
- .toolbar strong{color:#e8b420}.toolbar button{margin-left:auto;border:0;border-radius:7px;padding:9px 18px;background:#c8991a;color:#071e34;font-weight:800;cursor:pointer}
+ .toolbar{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 14px;background:#256FE8;color:#fff;box-shadow:0 6px 18px rgba(15,23,42,.22)}
+ .toolbar strong{color:#e8b420}.toolbar button{margin-left:auto;border:0;border-radius:7px;padding:9px 18px;background:#20A99F;color:#fff;font-weight:800;cursor:pointer}
  .card{width:190mm;min-height:270mm;margin:14px auto;background:white;border:2px solid #0b2c4d;padding:12mm;display:flex;flex-direction:column}
  header{text-align:center;border-bottom:2px solid #c8991a;padding-bottom:10px;margin-bottom:14px}
  h1{margin:0;color:#0b2c4d;font-size:23px;letter-spacing:.02em} h2{margin:8px 0 0;color:#c8991a;font-size:18px}

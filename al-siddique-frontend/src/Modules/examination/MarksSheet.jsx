@@ -246,7 +246,7 @@ export default function MarksSheet() {
  w.document.write(`<!doctype html><html><head><meta charset="UTF-8"><title>${title}</title><style>
  *{box-sizing:border-box}body{font-family:Arial,sans-serif;margin:0;background:#eef2f7;color:#111;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  @page{size:A4 landscape;margin:8mm}@media print{body{background:white}.no-print{display:none!important;height:0!important;overflow:hidden!important}}
- .bar.no-print{background:#071e34;color:white;padding:12px 18px;display:flex;gap:12px;align-items:center}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:8px;padding:9px 18px;font-weight:800;cursor:pointer}
+ .bar.no-print{background:#256FE8;color:white;padding:12px 18px;display:flex;gap:12px;align-items:center}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:8px;padding:9px 18px;font-weight:800;cursor:pointer}
  .page{background:white;margin:14px auto;padding:16px;max-width:1120px;box-shadow:0 12px 30px rgba(15,23,42,.16)}
  .head{display:flex;align-items:center;gap:14px;border-bottom:3px solid #13224A;padding-bottom:10px;margin-bottom:10px}
  .head img,.logo-fallback{width:62px;height:62px;object-fit:contain;border:1px solid #CBD5E1;border-radius:50%;padding:5px;display:grid;place-items:center;font-weight:900;color:#13224A}

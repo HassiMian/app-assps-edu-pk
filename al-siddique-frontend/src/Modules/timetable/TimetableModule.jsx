@@ -42,9 +42,9 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
  @page { size: A4 landscape; margin: 9mm; }
  * { box-sizing: border-box; }
  body { margin: 0; background: #eef2f7; color: #101827; font-family: Arial, sans-serif; }
- .toolbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #071e34; color: #d9dee8; box-shadow: 0 6px 18px rgba(15,23,42,.22); }
+ .toolbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #256FE8; color: #fff; box-shadow: 0 6px 18px rgba(15,23,42,.22); }
  .toolbar strong { color: #e8b420; }
- .toolbar button { margin-left: auto; border: 0; border-radius: 7px; padding: 9px 18px; background: #c8991a; color: #071e34; font-weight: 800; cursor: pointer; }
+ .toolbar button { margin-left: auto; border: 0; border-radius: 7px; padding: 9px 18px; background: #20A99F; color: #fff; font-weight: 800; cursor: pointer; }
  .sheet { width: 279mm; min-height: 190mm; margin: 14px auto; padding: 10mm; background: white; box-shadow: 0 16px 45px rgba(15,23,42,.18); }
  header { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #c8991a; padding-bottom: 9px; margin-bottom: 10px; }
  .logo { width: 54px; height: 54px; object-fit: contain; border: 1px solid #d9dee8; border-radius: 10px; padding: 3px; }

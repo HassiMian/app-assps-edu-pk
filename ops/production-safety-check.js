@@ -1527,6 +1527,34 @@ for (const uiFile of [
   )
 }
 
+
+for (const uiFile of [
+  'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx',
+  'al-siddique-frontend/src/Modules/examination/ManageExams.jsx',
+  'al-siddique-frontend/src/Modules/attendance/SmartAttendance.jsx',
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+]) {
+  assertNotContains(
+    uiFile,
+    /rgba\(11,44,77|rgba\(7,30,52|#071e34|#0B2C4D/i,
+    `${uiFile} operational chrome must not reintroduce the legacy heavy navy palette.`
+  )
+}
+
+// Print/document renderers may retain their approved document palette, but their no-print toolbars use the current app accent colors.
+for (const documentHostFile of [
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+]) {
+  assertContains(
+    documentHostFile,
+    '#256FE8',
+    `${documentHostFile} no-print/document controls should use the current app primary accent without rewriting approved document styling.`
+  )
+}
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

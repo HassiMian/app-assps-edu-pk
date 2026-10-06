@@ -235,7 +235,7 @@ export default function Analytics() {
   }
 
   return (
-    <div className="attendance-analytics-page" style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+    <div className="attendance-analytics-page" style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: 'var(--apex-text-primary)' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gap: 20 }}>
         <div className="super-module-card analytics-header" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16 }}>
           <div>

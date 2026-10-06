@@ -147,7 +147,7 @@ export default function SmartAttendance() {
  {!scanning && (
  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, color: C.muted }}>
  <div style={{ fontSize: 64, filter:'drop-shadow(0 0 12px rgba(200,153,26,0.3))' }}></div>
- <button onClick={startCamera} style={{ background: `linear-gradient(135deg,${C.gold},${C.goldL})`, border: 'none', color: '#071e34', padding: '12px 32px', borderRadius: 14, fontWeight: 600, cursor: 'pointer', fontSize:15 }}>Start Intelligence Scanner</button>
+ <button onClick={startCamera} style={{ background: 'var(--apex-action-primary)', border: 'none', color: '#fff', padding: '12px 32px', borderRadius: 14, fontWeight: 600, cursor: 'pointer', fontSize:15 }}>Start Intelligence Scanner</button>
  </div>
  )}
  {scanning && mode === 'qr' && (

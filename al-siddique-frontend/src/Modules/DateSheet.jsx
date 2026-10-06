@@ -193,7 +193,7 @@ function templateCss(template) {
   const isNew = ['orange-executive', 'yellow-academic', 'purple-royal', 'red-formal', 'pink-modern'].includes(template)
   return `
   @page{size:A4 portrait;margin:0}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{margin:0;background:#e5e7eb;font-family:'Segoe UI',Roboto,Arial,sans-serif;color:#102033}.bar{background:#071e34;color:white;padding:10px 16px;display:flex;gap:10px}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:6px;padding:8px 18px;font-weight:800;cursor:pointer}
+  body{margin:0;background:#e5e7eb;font-family:'Segoe UI',Roboto,Arial,sans-serif;color:#102033}.bar{background:#256FE8;color:white;padding:10px 16px;display:flex;gap:10px}.bar button{margin-left:auto;background:#C8991A;border:0;border-radius:6px;padding:8px 18px;font-weight:800;cursor:pointer}
   @media print{body{background:white}.bar{display:none!important}}
   .sheet{position:relative;width:190mm;height:277mm;background:#fff;margin:10mm auto;padding:12mm 14mm;break-after:page;overflow:hidden;border:1px solid ${theme.border}}
   .two .sheet{height:133mm;margin:0;width:190mm;padding:7mm 11mm;break-after:auto;border:1px solid ${theme.border}}.pair{width:210mm;height:297mm;padding:7mm 10mm;background:white;display:flex;flex-direction:column;gap:5mm;break-after:page}
