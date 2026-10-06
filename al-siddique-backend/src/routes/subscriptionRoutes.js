@@ -7,7 +7,7 @@ const router = express.Router()
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
-const { pool } = require('../config/database')
+const { pool, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { sendRejectionEmail } = require('../services/emailService')
 const { generateSchoolAdminCredentials } = require('../services/apexCredentials')
@@ -279,6 +279,7 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
     }
 
     await client.query('BEGIN')
+    await applyTenantContext(client)
 
     // Generate unique school tenantId
     const baseSlug = request.school_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')

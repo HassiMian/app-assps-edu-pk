@@ -3,7 +3,7 @@
 
 const express = require('express')
 const router = express.Router()
-const { pool } = require('../config/database')
+const { pool, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, currentTenantId } = require('../middleware/tenant')
 const {
@@ -270,6 +270,7 @@ router.post('/branding', protect, canManageSettings, async (req, res) => {
 
       client = await pool.connect()
       await client.query('BEGIN')
+    await applyTenantContext(client)
       const result = await client.query(
         `INSERT INTO tenant_branding (
            id, tenant_id, logo_url, primary_color, secondary_color, updated_at

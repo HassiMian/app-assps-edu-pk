@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
-const { pool } = require('../config/database')
+const { pool, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 
 const canManageSchools = requireRoles('super_admin')
@@ -93,6 +93,7 @@ router.post('/', protect, canManageSchools, async (req, res) => {
     const username = adminEmail.split('@')[0]
 
     await client.query('BEGIN')
+    await applyTenantContext(client)
 
     // 1. Create school
     const schoolRes = await client.query(

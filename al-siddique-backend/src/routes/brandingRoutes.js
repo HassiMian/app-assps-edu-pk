@@ -3,7 +3,7 @@ const router = express.Router()
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
-const { pool } = require('../config/database')
+const { pool, applyTenantContext } = require('../config/database')
 const { protect } = require('../middleware/auth')
 
 const canManageBranding = (req, res, next) => {
@@ -141,6 +141,7 @@ router.put('/branding', protect, canManageBranding, async (req, res) => {
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
+        await applyTenantContext(client)
     const school = await client.query(
       `UPDATE schools
        SET school_name = COALESCE($1, school_name),
@@ -210,6 +211,7 @@ router.post('/branding/logo', protect, canManageBranding, (req, res) => {
       const client = await pool.connect()
       try {
         await client.query('BEGIN')
+        await applyTenantContext(client)
         const result = await client.query(
           'UPDATE schools SET logo_url = $1, updated_at = NOW() WHERE id = $2 RETURNING id, tenant_id, logo_url',
           [logoUrl, schoolId]

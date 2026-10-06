@@ -1176,7 +1176,7 @@ for (const routeFile of [
   )
   assertContains(
     routeFile,
-    "const { pool } = require('../config/database')",
+    /const\s+\{[^}]*\bpool\b[^}]*\}\s*=\s*require\(['"]\.\.\/config\/database['"]\)/,
     `${routeFile} must use the shared pg Pool export.`
   )
 }
@@ -1952,5 +1952,20 @@ for (const routePath of [
     routePath,
     'applyTenantContext(client)',
     'high-risk tenant transactions must apply the active request RLS context before data access.'
+  )
+}
+
+for (const routePath of [
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  'al-siddique-backend/src/routes/schoolRoutes.js',
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+]) {
+  assertContains(
+    routePath,
+    'applyTenantContext(client)',
+    'protected provisioning/settings transactions must apply tenant or super-admin RLS context.'
   )
 }

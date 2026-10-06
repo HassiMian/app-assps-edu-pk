@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
-const { pool } = require('../config/database')
+const { pool, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {
@@ -240,6 +240,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
 
     client = await pool.connect()
     await client.query('BEGIN')
+    await applyTenantContext(client)
     // Serialize GR allocation and duplicate detection per school.
     await client.query('SELECT pg_advisory_xact_lock($1)', [schoolId])
 

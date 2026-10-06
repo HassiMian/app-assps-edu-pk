@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const multer = require('multer')
-const { pool } = require('../config/database')
+const { pool, applyTenantContext } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -144,6 +144,7 @@ router.post('/tenant/branding/upload', protect, canManageTenantBranding, (req, r
       let result
       try {
         await client.query('BEGIN')
+        await applyTenantContext(client)
         result = await client.query(
           `INSERT INTO tenant_branding (id, tenant_id, logo_url, updated_at)
            VALUES ($1, $2, $3, NOW())
