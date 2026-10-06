@@ -2029,3 +2029,14 @@ assertContains(
   "const [data, setData] = useState(EMPTY_ACADEMIC)",
   'academic data must begin empty until the server confirms the tenant setup.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/services/useFamilyStore.js',
+  /tenantStorage|loadCache|saveCache|getTenantStorageItem|setTenantStorageItem/,
+  'family membership must come from the tenant backend, not browser cache.'
+)
+assertContains(
+  'al-siddique-frontend/src/services/useFamilyStore.js',
+  'setFamilies([])',
+  'family source failures must clear stale family data instead of preserving it as live truth.'
+)

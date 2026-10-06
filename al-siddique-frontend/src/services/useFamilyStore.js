@@ -1,9 +1,7 @@
 // Server-backed family grouping store. Browser storage is cache only; student.family_code is canonical.
 import { useCallback, useEffect, useState } from 'react'
 import api from './api'
-import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
-const STORE_KEY = 'al_siddique_families_v2_cache'
 
 function normalizeId(value) {
  if (value === null || value === undefined) return ''
@@ -30,21 +28,9 @@ function normalizeFamilies(value) {
  }))
 }
 
-function loadCache() {
- try {
- const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy:true, removeLegacyOnMigrate:true })
- return normalizeFamilies(raw ? JSON.parse(raw) : [])
- } catch {
- return []
- }
-}
-
-function saveCache(families) {
- try { setTenantStorageItem(STORE_KEY, JSON.stringify(families)) } catch { /* cache writes are best-effort only */ }
-}
 
 export function useFamilyStore() {
- const [families, setFamilies] = useState(loadCache)
+ const [families, setFamilies] = useState([])
  const [loading, setLoading] = useState(false)
  const [error, setError] = useState('')
 
@@ -55,9 +41,9 @@ export function useFamilyStore() {
  const response = await api.get('/api/families')
  const next = normalizeFamilies(response.data?.data)
  setFamilies(next)
- saveCache(next)
  return next
  } catch (err) {
+ setFamilies([])
  setError(err.response?.data?.message || 'Families could not be loaded.')
  return null
  } finally {
@@ -66,7 +52,7 @@ export function useFamilyStore() {
  }, [])
 
  useEffect(() => {
- // Server is authoritative; cache only prevents an empty flash while hydrating.
+ // Server is authoritative; stale browser data is never substituted on failure.
  // eslint-disable-next-line react-hooks/set-state-in-effect
  void refreshFamilies()
  }, [refreshFamilies])
