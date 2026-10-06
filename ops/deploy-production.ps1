@@ -74,6 +74,12 @@ function CopyToRemote($localPath, $remotePath) {
   Assert-NativeSuccess "scp $localPath"
 }
 
+$targetCommit = (& git -C $repoRoot rev-parse HEAD).Trim()
+Assert-NativeSuccess 'git rev-parse HEAD'
+$dirtyState = & git -C $repoRoot status --porcelain
+Assert-NativeSuccess 'git status --porcelain'
+if ($dirtyState) { throw 'Refusing production deploy from a dirty working tree.' }
+
 if ($Apply -and -not $ConfirmProduction) {
   throw 'Refusing production deploy without -ConfirmProduction.'
 }
@@ -94,8 +100,12 @@ if ($Apply -and -not (Test-Path $KnownHostsFile)) {
   throw "Known hosts file not found: $KnownHostsFile"
 }
 
-Step "mode=$Mode apply=$Apply timestamp=$timestamp host=$(HostLabel)"
+Step "mode=$Mode apply=$Apply timestamp=$timestamp host=$(HostLabel) target=$targetCommit"
 RunAlways 'npm run production:safety'
+
+if ($Apply) {
+  Remote "/usr/local/sbin/assps-production-lineage-guard $targetCommit /opt/assps-editor-worker/repo /var/www/apex-os/release-meta.json /var/www/apex-backend/release-meta.json $Mode"
+}
 
 if ($Apply -and ($Mode -in @('Backend', 'Both'))) {
   Remote @"
@@ -119,6 +129,7 @@ cp -a /var/www/apex-os /var/www/apex-os.bak-$timestamp
 rm -rf /var/www/apex-os.new-$timestamp
 mkdir -p /var/www/apex-os.new-$timestamp
 tar -xf /tmp/assps-frontend-dist-$timestamp.tar -C /var/www/apex-os.new-$timestamp
+printf '%s\n' '{"commit":"$targetCommit","deployedAt":"$timestamp","component":"frontend"}' > /var/www/apex-os.new-$timestamp/release-meta.json
 chown -R www-data:www-data /var/www/apex-os.new-$timestamp
 find /var/www/apex-os.new-$timestamp -type d -exec chmod 755 {} \;
 find /var/www/apex-os.new-$timestamp -type f -exec chmod 644 {} \;
@@ -156,12 +167,13 @@ for item in server.js package.json package-lock.json config middleware routes se
   fi
 done
 cp -a /var/www/apex-backend/src/.env /var/www/apex-backend/.env
+printf '%s\n' '{"commit":"$targetCommit","deployedAt":"$timestamp","component":"backend"}' > /var/www/apex-backend/release-meta.json
 node -c /var/www/apex-backend/server.js
 node -c /var/www/apex-backend/middleware/auth.js
 node -c /var/www/apex-backend/routes/authRoutes.js
-pm2 restart apex-backend --update-env
+PORT=5000 TRUST_PROXY=true pm2 restart apex-backend --update-env
 pm2 status --no-color
-curl -fsS https://api.assps.edu.pk/health >/dev/null
+curl -fsS http://127.0.0.1:5000/health >/dev/null
 "@
 }
 
