@@ -5,7 +5,6 @@ const { pool, query } = require('../config/database')
 const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
-const { DEFAULT_ACADEMIC_SETUP } = require('../services/academicSetupService')
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
 function generateChallanNumber() {
@@ -31,28 +30,21 @@ async function requireFeeWriteContext(req, res) {
   return schoolId
 }
 
-async function resolveAcademicSession(schoolId, year) {
-  try {
-    const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
-    const setup = result.rows[0]?.academic_setup
-    const startYear = String(setup?.sessionStart || '').slice(0, 4)
-    const endYear = String(setup?.sessionEnd || '').slice(0, 4)
-    if (/^\d{4}$/.test(startYear) && /^\d{4}$/.test(endYear)) return `${startYear}-${endYear}`
-  } catch { /* fall through to the requested year if academic setup is unavailable */ }
-  const numericYear = Number(year)
-  return Number.isInteger(numericYear) && numericYear >= 2000 && numericYear <= 2100 ? `${numericYear}-${numericYear + 1}` : ''
+async function resolveAcademicSession(schoolId) {
+  const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
+  const setup = result.rows[0]?.academic_setup
+  const startYear = String(setup?.sessionStart || '').slice(0, 4)
+  const endYear = String(setup?.sessionEnd || '').slice(0, 4)
+  return /^\d{4}$/.test(startYear) && /^\d{4}$/.test(endYear) ? `${startYear}-${endYear}` : ''
 }
 
 async function resolveAcademicClassNames(schoolId) {
-  try {
-    const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
-    const setup = result.rows[0]?.academic_setup
-    const configured = Array.isArray(setup?.classes)
-      ? setup.classes.filter(item => item?.active !== false).map(item => String(item?.name || '').trim()).filter(Boolean)
-      : []
-    if (configured.length) return [...new Set(configured)]
-  } catch { /* fall through to canonical defaults if academic setup is unavailable */ }
-  return DEFAULT_ACADEMIC_SETUP.classes.filter(item => item.active !== false).map(item => item.name)
+  const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
+  const setup = result.rows[0]?.academic_setup
+  const configured = Array.isArray(setup?.classes)
+    ? setup.classes.filter(item => item?.active !== false).map(item => String(item?.name || '').trim()).filter(Boolean)
+    : []
+  return [...new Set(configured)]
 }
 
 function canManageFeeRecord(req) {
