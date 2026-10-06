@@ -1,6 +1,6 @@
 ﻿const express = require('express')
 const router  = express.Router()
-const { query } = require('../config/database')
+const { pool, query } = require('../config/database')
 const auth = require('../middleware/auth')
 const protect = auth.protect
 const adminOnly = auth.adminOnly
@@ -811,6 +811,69 @@ router.delete('/:id/portal-accounts/:role', protect, adminOnly, async (req, res)
     res.json({ success: true })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message || 'Portal access could not be revoked.' })
+  }
+})
+
+// POST /api/students/bulk-class-assignment — atomic class/section transitions
+router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
+  const assignments = Array.isArray(req.body?.assignments) ? req.body.assignments : []
+  if (!assignments.length || assignments.length > 500) {
+    return res.status(422).json({ success: false, message: 'Provide between 1 and 500 student assignments.' })
+  }
+
+  const schoolId = currentSchoolId(req)
+  const normalized = []
+  const seen = new Set()
+  try {
+    for (const [index, item] of assignments.entries()) {
+      const studentId = Number(item?.student_id || item?.id)
+      if (!Number.isInteger(studentId) || studentId <= 0) {
+        return res.status(422).json({ success:false, message:`Row ${index + 1}: valid student id is required.` })
+      }
+      if (seen.has(studentId)) {
+        return res.status(422).json({ success:false, message:`Row ${index + 1}: duplicate student id.` })
+      }
+      seen.add(studentId)
+      const assignment = await resolveAcademicAssignment({
+        schoolId,
+        className: normalizeClassName(item?.class),
+        section: String(item?.section || '').trim(),
+      })
+      normalized.push({ studentId, className:assignment.className, section:assignment.section })
+    }
+  } catch (err) {
+    if (err.status === 422) return res.status(422).json({ success:false, code:err.code, message:err.message, details:err.details })
+    return res.status(500).json({ success:false, message:'Academic assignment validation failed.' })
+  }
+
+  const client = await pool.connect()
+  try {
+    await client.query('BEGIN')
+    const ids = normalized.map(item => item.studentId)
+    const existing = await client.query('SELECT id FROM students WHERE school_id = $1 AND id = ANY($2::int[]) FOR UPDATE', [schoolId, ids])
+    if (existing.rowCount !== normalized.length) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success:false, message:'One or more selected students were not found in this school.' })
+    }
+
+    const updated = []
+    for (const item of normalized) {
+      const result = await client.query(`
+        UPDATE students
+        SET class = $1, section = $2, updated_at = NOW()
+        WHERE id = $3 AND school_id = $4
+        RETURNING id, gr_number, name, class, section
+      `, [item.className, item.section, item.studentId, schoolId])
+      updated.push(result.rows[0])
+    }
+    await client.query('COMMIT')
+    res.json({ success:true, count:updated.length, data:updated, message:`${updated.length} student assignments updated.` })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Bulk student class assignment error:', err.message)
+    res.status(500).json({ success:false, message:'Student class assignments could not be updated.' })
+  } finally {
+    client.release()
   }
 })
 
