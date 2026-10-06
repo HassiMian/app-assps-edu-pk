@@ -55,7 +55,7 @@ export default function ForcePasswordChangePage() {
         setError(res.data?.message || "Password change failed");
       }
     } catch (err) {
-      console.error("Change password error:", err);
+      console.error("Change password request failed", { status: err.response?.status, code: err.code });
       setError(err.response?.data?.message || "Server error occurred. Please try again.");
     } finally {
       setLoading(false);
