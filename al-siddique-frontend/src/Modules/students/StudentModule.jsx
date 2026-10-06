@@ -123,9 +123,9 @@ function PrintStudentList({ list, onClose, school, academicSession }) {
   const { type, data } = list;
   const today = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
   const logo = school?.logo || "";
-  const schoolName = school?.schoolName || "Al Siddique Scholars Public School";
-  const schoolAddress = school?.address || "Sharif Chowk, Rayya Khas, Narowal";
-  const schoolPhone = school?.phone || "0300-1291959";
+  const schoolName = school?.schoolName || "—";
+  const schoolAddress = school?.address || "";
+  const schoolPhone = school?.phone || "";
   // Read principalSignature directly from the store (usePaperStore already imported above)
   const { paperSettings } = usePaperStore();
   const sigImg = paperSettings?.principalSignature || school?.principalSignature || null;
@@ -593,8 +593,8 @@ function StudentPerformanceSheet({ students, school, classNames, activeClasses, 
  const pages = generatedClass === sheetClass ? createPerformancePages({ subjects, roster }) : [];
  const previewPages = pages.slice(0, 1);
  const month = new Date().toLocaleDateString("en-GB", { month: "long", year: "numeric" });
- const schoolName = school?.schoolName || "Al Siddique Scholars Public School";
- const schoolAddress = school?.address || "Sharif Chowk, Rayya Khas, Narowal";
+ const schoolName = school?.schoolName || "—";
+ const schoolAddress = school?.address || "";
  const schoolPhone = school?.phone || "";
  const logo = school?.logo || "";
 
@@ -710,9 +710,9 @@ const btnSecondary = {
 
 //  Certificate print engine
 function printCertificate(docType, student, school = {}, requestedOrientation = "auto", academicSession = "") {
- const sn = school.schoolName || "Al Siddique Scholars Public School";
+ const sn = school.schoolName || "—";
  const su = school.schoolUrdu || "Ø§Ù„ØµØ¯ÛŒÙ‚ Ø§Ø³Ú©Ø§Ù„Ø±Ø² Ù¾Ø¨Ù„Ú© Ø§Ø³Ú©ÙˆÙ„";
- const sa = school.address || "Sharif Chowk, Rayya Khas, Narowal";
+ const sa = school.address || "";
  const showUrduHdr = school.showUrduHeader !== false;
  const sp = school.phone || "";
  const sl = school.logo || "";

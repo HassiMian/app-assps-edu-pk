@@ -1285,6 +1285,12 @@ assertContains(
   'student management must derive its visible academic session from Academic Setup.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /Al Siddique Scholars Public School|Sharif Chowk, Rayya Khas, Narowal|0300-1291959/,
+  'student reports and certificates must not fabricate ASSPS identity for other tenants.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
