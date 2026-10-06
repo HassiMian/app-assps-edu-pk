@@ -7,3 +7,14 @@ test('Physics Chemistry and Biology each reconcile to 60 marks',()=>{for(const k
 test('short-question offered pools exactly match official counts',()=>{for(const s of d.subjects){for(const q of s.subjective.shortQuestions){assert.equal(sum(q.chapterCounts),q.offered);}}});
 test('Mathematics reconciles 15 objective plus 60 subjective marks',()=>{const s=by.Mathematics;assert.equal(s.totalMarks,75);assert.equal(sum(s.objective.chapterCounts),15);const shorts=s.subjective.shortQuestions.reduce((a,q)=>a+q.attempt*q.marksEach,0);const longs=s.subjective.longPartII.attempt*s.subjective.longPartII.marksEach+s.subjective.longPartIII.attempt*s.subjective.longPartIII.marksEach;assert.equal(shorts,36);assert.equal(longs,24);assert.equal(15+shorts+longs,75);});
 test('pattern taxonomy never replaces full-book corpus or ASSPS layout',()=>{assert.equal(d.rules.fullBookQuestionBankDefault,true);assert.equal(d.rules.alpIsOptionalExamFilter,true);assert.equal(d.rules.patternControlsTaxonomyNotASSPSVisualTemplate,true);assert.equal(d.rules.pastPaperStemsMayNotBeCopied,true);});
+
+test('Computer Science & Entrepreneurship reconciles to 50 marks and preserves chapter exclusions',()=>{
+ const s=by['Computer Science & Entrepreneurship'];assert(s);
+ assert.equal(s.totalMarks,50);assert.equal(sum(s.objective.chapterCounts),10);
+ assert.equal(Object.hasOwn(s.objective.chapterCounts,'5'),false);
+ assert.equal(Object.hasOwn(s.objective.chapterCounts,'12'),false);
+ const shorts=s.subjective.shortQuestions.reduce((a,q)=>a+q.attempt*q.marksEach,0);
+ const longs=s.subjective.longQuestions.attempt*s.subjective.longQuestions.marksEach;
+ assert.equal(shorts,24);assert.equal(longs,16);assert.equal(10+shorts+longs,50);
+ assert.deepEqual(s.subjective.longQuestions.questionChapterRules['7'],[9,12]);
+});
