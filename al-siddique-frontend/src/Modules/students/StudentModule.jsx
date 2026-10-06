@@ -2481,13 +2481,10 @@ export default function StudentsModule() {
  <button onClick={()=>setEditStudent(s)} style={{ width:30, height:30, borderRadius:8, background:"rgba(148,163,184,0.18)", border:"1px solid rgba(200,153,26,0.2)", color:"#C8991A", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Edit size={14}/></button>
  </Tip>
  {s.status === "Active" ? (
- !isDemo && (
  <Tip label="Struck-off / Remove Student" color="#FF375F">
  <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to struck-off / remove ${s.name} (GR: ${s.gr})?`)) { await deleteStudent(s.id); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
  </Tip>
- )
  ) : (
- !isDemo && (
  <>
  <Tip label="Reactivate / Restore Student" color="#30D158">
  <button onClick={async ()=>{ if(window.confirm(`Reactivate ${s.name} (GR: ${s.gr}) to Active student roster?`)) { await updateStudent(s.id, { is_active: true }); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(48,209,88,0.15)", border:"1px solid rgba(48,209,88,0.25)", color:"#30D158", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><RotateCcw size={14}/></button>
@@ -2496,7 +2493,6 @@ export default function StudentsModule() {
  <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to permanently delete ${s.name} (GR: ${s.gr})? This will completely remove the student.`)) { await deleteStudent(s.id, true); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
  </Tip>
  </>
- )
  )}
  </div>
  </td>

@@ -122,6 +122,73 @@ assertNotContains(
   'application startup must not seed demo academic or paper data.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/transport',  './routes/transportRoutes')",
+  'transport must use the tenant-backed backend route.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/library',    './routes/libraryRoutes')",
+  'library must use the tenant-backed backend route.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/date-sheets', './routes/dateSheetRoutes')",
+  'date sheets must use the tenant-backed backend route.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Transport.jsx',
+  /North Ridge|South Garden|Bus 101|Bus 207/,
+  'transport must not ship seeded fake route records.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Library.jsx',
+  /Mathematics Simplified|History of Pakistan|Stories for Young Minds/,
+  'library must not ship seeded fake inventory.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /localStorage|getStorage\(\)/,
+  'employee operational preferences must not use unscoped browser storage.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /localStorage|getStorage\(\)/,
+  'fee operational preferences must not use unscoped browser storage.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /demo@assps\.edu\.pk|isDemo/,
+  'student operations must not branch on a browser-local demo identity.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  'archived_at',
+  'notification dismissal must be persisted server-side.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/authRoutes.js',
+  "router.put('/me/profile', protect",
+  'self profile edits must use an authenticated server endpoint.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  /section\s*:\s*section\s*\|\|\s*['"]Blue['"]/,
+  'student writes must never invent a Blue section fallback.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
