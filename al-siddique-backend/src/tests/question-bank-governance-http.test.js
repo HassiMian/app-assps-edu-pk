@@ -15,6 +15,9 @@ function request(port, method, path, body, token='mock-jwt-token', headers={}) {
 }
 
 test('Question Bank governance capture is idempotent, duplicate-aware, revisioned and lifecycle-gated',{timeout:30000},async t=>{
+  assert.equal(process.env.NODE_ENV,'test','HTTP governance integration test must run only in NODE_ENV=test')
+  assert.notEqual(process.env.DB_NAME,'apexos','HTTP governance integration test must never target production DB')
+  await pool.query(`INSERT INTO users (id, school_id, name, email, password, role, is_active) VALUES (999, 1, 'Question Bank HTTP Fixture', 'qbank-http-fixture@invalid.local', 'not-used', 'admin', true) ON CONFLICT (id) DO NOTHING`)
   const app=express();app.use(express.json());app.use((req,res,next)=>tenantContext.run({rlsEnabled:false,isSuperAdmin:false,tenantId:null},next));app.use('/api/question-bank',require('../routes/questionBankRoutes'))
   const server=await new Promise(resolve=>{const s=app.listen(0,'127.0.0.1',()=>resolve(s))});const port=server.address().port
   t.after(async()=>{await new Promise(r=>server.close(r));await pool.end()})
