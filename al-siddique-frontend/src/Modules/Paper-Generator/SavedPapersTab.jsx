@@ -229,14 +229,10 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
 
  {/* Actions */}
  <div style={{ display: 'flex', gap: 8, flexWrap:'wrap' }}>
- <button onClick={() => onLoadPaper(paper)}
- style={{ flex: '1 1 110px', background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
-  Load & Preview
- </button>
  <button onClick={() => onLoadPaper(paper, 'build')}
- title="Open in the single rules-driven Paper Workspace"
- style={{ background:'rgba(48,209,88,0.15)', border:'1px solid rgba(48,209,88,0.35)', borderRadius:10, padding:'9px 10px', color:'#4ade80', fontWeight:700, cursor:'pointer', fontSize:12, whiteSpace:'nowrap' }}>
-  Edit in Workspace
+ title="Open this paper in the single Paper Workspace editor"
+ style={{ flex: '1 1 150px', background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 800, cursor: 'pointer', fontSize: 13 }}>
+  Open in Workspace
  </button>
  {canDuplicatePaperInWorkspace(paper) && <button type="button" onClick={() => onDuplicatePaper?.(paper)} aria-label={`Duplicate ${paper.name} as new paper`}
  title="Create independent editable copy; original paper stays unchanged"
