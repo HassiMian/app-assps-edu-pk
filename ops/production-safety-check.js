@@ -1671,6 +1671,19 @@ assertContains(
 )
 
 
+
+assertNotContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  /\b(?:CREATE|ALTER|DROP|TRUNCATE)\s+(?:TABLE|SCHEMA|INDEX)\b/i,
+  'fee challan services must validate migrated schema instead of running request-time DDL.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  'STUDENT_FEE_PROFILE_SCHEMA_REQUIRED',
+  'student fee profile operations must fail closed when migration 007 is missing.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
@@ -1834,4 +1847,22 @@ assertContains(
   'al-siddique-backend/src/config/migrate.js',
   "console.error('RLS Migration Error:', err.message)\n      throw err",
   'migration runner must fail closed when RLS policy application fails.'
+)
+
+assertContains(
+  'al-siddique-backend/src/middleware/auth.js',
+  'function activateRequestRlsContext(req)',
+  'authenticated requests must centrally activate the RLS request context.'
+)
+
+assertContains(
+  'al-siddique-backend/src/middleware/auth.js',
+  'ctx.rlsEnabled = true',
+  'successful authentication must enable RLS for downstream query-wrapper calls.'
+)
+
+assertContains(
+  'al-siddique-backend/src/middleware/auth.js',
+  "ctx.tenantId = isSuperAdmin ? null : normalizeSchoolId(req.school_id || req.user?.school_id)",
+  'non-super-admin authenticated requests must bind RLS context to their school.'
 )

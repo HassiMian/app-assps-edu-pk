@@ -8,33 +8,24 @@ function runQuery(db, sql, params = []) {
 let studentFeeProfileReady = false
 
 async function ensureStudentFeeProfileSchema() {
-  if (studentFeeProfileReady) return
-  await query(`
-    CREATE TABLE IF NOT EXISTS student_fee_profiles (
-      student_id INTEGER PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
-      school_id INTEGER REFERENCES schools(id),
-      monthly_fee DECIMAL(10,2) DEFAULT 0,
-      tuition_fee DECIMAL(10,2) DEFAULT 0,
-      computer_fee DECIMAL(10,2) DEFAULT 0,
-      lab_fee DECIMAL(10,2) DEFAULT 0,
-      admission_fee DECIMAL(10,2) DEFAULT 0,
-      registration_fee DECIMAL(10,2) DEFAULT 0,
-      library_fee DECIMAL(10,2) DEFAULT 0,
-      transport_fee DECIMAL(10,2) DEFAULT 0,
-      exam_fee DECIMAL(10,2) DEFAULT 0,
-      other_charges DECIMAL(10,2) DEFAULT 0,
-      updated_at TIMESTAMP DEFAULT NOW()
-    );
-    CREATE INDEX IF NOT EXISTS idx_student_fee_profiles_school ON student_fee_profiles(school_id);
+  if (studentFeeProfileReady) return true
+  const result = await query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'student_fee_profiles'
+      AND column_name IN (
+        'student_id','school_id','monthly_fee','tuition_fee','computer_fee','lab_fee',
+        'admission_fee','registration_fee','library_fee','transport_fee','exam_fee','other_charges','updated_at'
+      )
   `)
-  await query(`
-    ALTER TABLE student_fee_profiles
-      ADD COLUMN IF NOT EXISTS tuition_fee DECIMAL(10,2) DEFAULT 0,
-      ADD COLUMN IF NOT EXISTS computer_fee DECIMAL(10,2) DEFAULT 0,
-      ADD COLUMN IF NOT EXISTS lab_fee DECIMAL(10,2) DEFAULT 0;
-  `)
-  await query('ALTER TABLE student_fee_profiles ALTER COLUMN school_id DROP DEFAULT').catch(() => {})
+  if (Number(result.rows[0]?.count || 0) !== 13) {
+    const error = new Error('student fee profile schema migration 007 is not applied.')
+    error.code = 'STUDENT_FEE_PROFILE_SCHEMA_REQUIRED'
+    throw error
+  }
   studentFeeProfileReady = true
+  return true
 }
 
 function asMoney(value) {
