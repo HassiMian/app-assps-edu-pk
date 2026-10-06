@@ -1703,6 +1703,13 @@ assertNotContains(
   'challan numbers must not rely on timestamp-only uniqueness.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /DEFAULT_ACADEMIC_SETUP|fall through to canonical defaults|fall through to the requested year/,
+  'fee workflows must not turn missing or failed academic setup reads into guessed classes or sessions.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
@@ -1884,4 +1891,16 @@ assertContains(
   'al-siddique-backend/src/middleware/auth.js',
   "ctx.tenantId = isSuperAdmin ? null : normalizeSchoolId(req.school_id || req.user?.school_id)",
   'non-super-admin authenticated requests must bind RLS context to their school.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  /pool\.query/,
+  'portal routes must use the RLS-aware query wrapper instead of direct pool queries.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  "const { query } = require('../config/database')",
+  'portal routes must execute through the RLS-aware database wrapper.'
 )

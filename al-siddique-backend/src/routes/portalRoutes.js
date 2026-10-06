@@ -3,7 +3,7 @@
 
 const express = require('express')
 const router  = express.Router()
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -26,7 +26,7 @@ function buildNotificationMessage({ title, className, section, subject, classDat
 let onlineClassSchemaReady = null
 async function ensureOnlineClassTables() {
   if (onlineClassSchemaReady) return true
-  const result = await pool.query("SELECT to_regclass('public.online_classes') AS table_name")
+  const result = await query("SELECT to_regclass('public.online_classes') AS table_name")
   if (!result.rows[0]?.table_name) {
     const err = new Error('online_classes schema migration is not applied.')
     err.code = 'PORTAL_SCHEMA_NOT_READY'
@@ -39,7 +39,7 @@ async function ensureOnlineClassTables() {
 let portalNotificationSchemaReady = null
 async function ensureNotificationColumns() {
   if (portalNotificationSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT COUNT(*)::int AS count
     FROM information_schema.columns
     WHERE table_schema = 'public'
@@ -96,18 +96,18 @@ router.get('/dashboard', protect, async (req, res) => {
       const feesParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
 
       const [r1, r2, r3] = await Promise.all([
-        pool.query(studentQuery, studentParams),
-        pool.query(attendanceQuery, attendanceParams),
-        pool.query(feesQuery, feesParams),
+        query(studentQuery, studentParams),
+        query(attendanceQuery, attendanceParams),
+        query(feesQuery, feesParams),
       ])
       studentsRes = r1
       attendanceRes = r2
       feesRes = r3
 
       const optionalQueries = await Promise.allSettled([
-        scopedPortalRole ? Promise.resolve({ rows: [] }) : pool.query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]),
-        pool.query('SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 5', [schoolId]),
-        pool.query('SELECT * FROM exams WHERE school_id = $1 ORDER BY exam_date DESC LIMIT 10', [schoolId]),
+        scopedPortalRole ? Promise.resolve({ rows: [] }) : query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]),
+        query('SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 5', [schoolId]),
+        query('SELECT * FROM exams WHERE school_id = $1 ORDER BY exam_date DESC LIMIT 10', [schoolId]),
       ])
       const optionalWarnings = []
       const [employeeResult, noticeResult, examResult] = optionalQueries
@@ -177,7 +177,7 @@ router.get('/dashboard', protect, async (req, res) => {
     const feeMonthlyParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
     let feeMonthlyRes = { rows: [] }
     try {
-      feeMonthlyRes = await pool.query(feeMonthlyQuery, feeMonthlyParams)
+      feeMonthlyRes = await query(feeMonthlyQuery, feeMonthlyParams)
     } catch (err) {
       console.error('Portal fee trend error:', err.message)
       req.portalWarnings = [...(req.portalWarnings || []), 'Fee collection trend is temporarily unavailable.']
@@ -234,7 +234,7 @@ router.get('/dashboard', protect, async (req, res) => {
     const attendanceTrendParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
     let attendanceTrendRes = { rows: [] }
     try {
-      attendanceTrendRes = await pool.query(attendanceTrendQuery, attendanceTrendParams)
+      attendanceTrendRes = await query(attendanceTrendQuery, attendanceTrendParams)
     } catch (err) {
       console.error('Portal attendance trend error:', err.message)
       req.portalWarnings = [...(req.portalWarnings || []), 'Attendance trend is temporarily unavailable.']
@@ -281,7 +281,7 @@ router.get('/timetable', protect, async (req, res) => {
     let dbError = null
 
     try {
-      const result = await pool.query(
+      const result = await query(
         `SELECT * FROM timetable WHERE school_id = $1 AND teacher_id = $2 ORDER BY day_order, start_time`,
         [schoolId, req.user?.id]
       )
@@ -293,7 +293,7 @@ router.get('/timetable', protect, async (req, res) => {
 
     try {
       await ensureOnlineClassTables()
-      const onlineClassResult = await pool.query(
+      const onlineClassResult = await query(
         `
           SELECT
             oc.id,
@@ -353,7 +353,7 @@ router.get('/timetable', protect, async (req, res) => {
 router.get('/teaching-options', protect, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
-    const result = await pool.query(`
+    const result = await query(`
       SELECT class, section
       FROM students
       WHERE school_id = $1 AND (is_active = true OR is_active IS NULL)
@@ -408,7 +408,7 @@ router.get('/online-classes', protect, async (req, res) => {
         LIMIT 100
       `
     const params = isTeacher ? [schoolId, req.user?.id] : [schoolId]
-    const result = await pool.query(queryText, params)
+    const result = await query(queryText, params)
 
     res.json({ success: true, data: result.rows })
   } catch (error) {
@@ -453,7 +453,7 @@ router.post('/online-classes', protect, requireRoles('teacher', 'admin', 'princi
       return res.status(400).json({ success: false, message: 'End time must be later than start time.' })
     }
 
-    const classResult = await pool.query(`
+    const classResult = await query(`
       INSERT INTO online_classes (
         school_id, teacher_id, class_name, section, subject, title,
         class_date, start_time, end_time, meeting_link, description, timezone
@@ -476,7 +476,7 @@ router.post('/online-classes', protect, requireRoles('teacher', 'admin', 'princi
 
     const insertedClass = classResult.rows[0]
 
-    const studentsResult = await pool.query(`
+    const studentsResult = await query(`
       SELECT id, name, parent_phone
       FROM students
       WHERE school_id = $1
@@ -541,7 +541,7 @@ router.post('/online-classes', protect, requireRoles('teacher', 'admin', 'princi
     }
 
     for (const row of notificationRows) {
-      await pool.query(`
+      await query(`
         INSERT INTO notification_log (
           school_id, student_id, recipient_role, type, title, message, metadata, status, sent_by
         ) VALUES ($1, $2, $3, $4, $5, $6, $7::jsonb, 'sent', $8)
