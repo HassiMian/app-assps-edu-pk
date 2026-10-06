@@ -6,7 +6,6 @@ const router = express.Router()
 const { pool } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
 async function ensureNoticesTable() {
@@ -98,67 +97,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), asyn
     res.json({ success: true, data: result.rows })
   } catch (error) {
     console.error('Notices GET error:', error.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning high-fidelity mock notices.');
-    const mockNotices = [
-      {
-        id: 1,
-        school_id: 1,
-        title: 'Summer Vacation Announcement 2026',
-        content: 'Dear parents, teachers, and students, the school will remain closed for summer vacation from June 1st to August 14th, 2026. Online homework assignments have been uploaded to the student portal.',
-        content_english: 'Dear parents, teachers, and students, the school will remain closed for summer vacation from June 1st to August 14th, 2026. Online homework assignments have been uploaded to the student portal.',
-        content_urdu: '',
-        template_key: 'holiday',
-        language: 'english',
-        issued_by: 'Principal Malik Ahmed',
-        recipient_type: ['parents', 'students', 'teachers'],
-        teacher_ids: [],
-        mentioned_teacher_ids: [],
-        priority: 'normal',
-        is_pinned: false,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      },
-      {
-        id: 2,
-        school_id: 1,
-        title: 'Urgent: Teacher Training Workshop on AI Tools',
-        content: 'There is a mandatory training workshop for all teaching staff on incorporating AI Paper Generator and Lesson Planning tools in the classroom. Date: May 25th, 2026 at 2:00 PM in the Computer Lab.',
-        content_english: 'There is a mandatory training workshop for all teaching staff on incorporating AI Paper Generator and Lesson Planning tools in the classroom. Date: May 25th, 2026 at 2:00 PM in the Computer Lab.',
-        content_urdu: '',
-        template_key: 'teacher_meeting',
-        language: 'english',
-        issued_by: 'Super Admin',
-        recipient_type: ['teachers'],
-        teacher_ids: [],
-        mentioned_teacher_ids: [],
-        priority: 'high',
-        is_pinned: true,
-        created_at: new Date(Date.now() - 86400000).toISOString(),
-        updated_at: new Date(Date.now() - 86400000).toISOString()
-      },
-      {
-        id: 3,
-        school_id: 1,
-        title: 'Monthly Tuition Fee Submission Deadline',
-        content: 'This is a gentle reminder that the deadline for monthly tuition fee challan submission for May 2026 is May 15th. Late fee surcharge will be applicable post the due date.',
-        content_english: 'This is a gentle reminder that the deadline for monthly tuition fee challan submission for May 2026 is May 15th. Late fee surcharge will be applicable post the due date.',
-        content_urdu: '',
-        template_key: 'fee_reminder',
-        language: 'english',
-        issued_by: 'Accounts Department',
-        recipient_type: ['parents'],
-        teacher_ids: [],
-        mentioned_teacher_ids: [],
-        priority: 'high',
-        is_pinned: false,
-        created_at: new Date(Date.now() - 86400000 * 3).toISOString(),
-        updated_at: new Date(Date.now() - 86400000 * 3).toISOString()
-      }
-    ];
-    return res.json({ success: true, data: mockNotices });
+    return res.status(503).json({ success: false, message: 'Database unavailable. Notices could not be loaded.' })
   }
 })
 
@@ -202,30 +141,7 @@ router.post('/', protect, canManageNotices, async (req, res) => {
     res.status(201).json({ success: true, data: result.rows[0], message: 'Notice created successfully' })
   } catch (error) {
     console.error('Notice create error:', error.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Notice could not be created.' })
-    }
-    console.warn('PostgreSQL offline. Simulating successful notice creation (Mock Fallback).');
-    const mockCreated = {
-      id: Math.floor(Math.random() * 1000) + 10,
-      school_id: 1,
-      title,
-      content,
-      issued_by: notice.issuedBy,
-      recipient_type: notice.recipientType,
-      teacher_ids: notice.teacherIds,
-      mentioned_teacher_ids: notice.mentionedTeacherIds,
-      template_key: notice.templateKey,
-      language: notice.language,
-      content_english: notice.contentEnglish,
-      content_urdu: notice.contentUrdu,
-      priority: notice.priority,
-      is_pinned: notice.isPinned,
-      expires_at: notice.expiresAt,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    }
-    return res.status(201).json({ success: true, data: mockCreated, message: 'Notice created successfully (Mock Fallback)' })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Notice could not be created.' })
   }
 })
 
@@ -285,32 +201,7 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
     res.json({ success: true, data: result.rows[0], message: 'Notice updated successfully' })
   } catch (error) {
     console.error('Notice update error:', error.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Notice could not be updated.' })
-    }
-    console.warn('PostgreSQL offline. Simulating successful notice update (Mock Fallback).');
-    return res.json({
-      success: true,
-      data: {
-        id: req.params.id,
-        school_id: 1,
-        title,
-        content,
-        issued_by: notice.issuedBy,
-        recipient_type: notice.recipientType,
-        teacher_ids: notice.teacherIds,
-        mentioned_teacher_ids: notice.mentionedTeacherIds,
-        template_key: notice.templateKey,
-        language: notice.language,
-        content_english: notice.contentEnglish,
-        content_urdu: notice.contentUrdu,
-        priority: notice.priority,
-        is_pinned: notice.isPinned,
-        expires_at: notice.expiresAt,
-        updated_at: new Date().toISOString()
-      },
-      message: 'Notice updated successfully (Mock Fallback)'
-    })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Notice could not be updated.' })
   }
 })
 
@@ -332,11 +223,7 @@ router.delete('/:id', protect, canManageNotices, async (req, res) => {
     res.json({ success: true, message: 'Notice deleted' })
   } catch (error) {
     console.error('Notice delete error:', error.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Notice could not be deleted.' })
-    }
-    console.warn('PostgreSQL offline. Simulating notice deletion (Mock Fallback).');
-    return res.json({ success: true, message: 'Notice deleted (Mock Fallback)' })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Notice could not be deleted.' })
   }
 })
 

@@ -9,7 +9,6 @@ const {
   buildTwilioClient,
 } = require('../services/twilioSettings')
 
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canMarkAttendance = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const ATTENDANCE_STATUSES = ['present', 'absent', 'leave', 'late']
 const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'teacher'])
@@ -245,54 +244,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), a
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Attendance GET error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-
-    const mockAttendance = [
-      {
-        id: 1,
-        student_id: 1,
-        date: req.query.date || new Date().toISOString().split('T')[0],
-        status: 'present',
-        marked_by: 'Ahmed Raza',
-        name: 'Muhammad Ali',
-        gr_number: 'GR-1001',
-        roll_number: '1',
-        class: '10',
-        section: 'A',
-      },
-      {
-        id: 2,
-        student_id: 2,
-        date: req.query.date || new Date().toISOString().split('T')[0],
-        status: 'absent',
-        marked_by: 'Ahmed Raza',
-        name: 'Ayesha Fatima',
-        gr_number: 'GR-1002',
-        roll_number: '2',
-        class: '10',
-        section: 'A',
-      },
-      {
-        id: 3,
-        student_id: 3,
-        date: req.query.date || new Date().toISOString().split('T')[0],
-        status: 'late',
-        marked_by: 'Ahmed Raza',
-        name: 'Zainab Bibi',
-        gr_number: 'GR-1003',
-        roll_number: '5',
-        class: '9',
-        section: 'B',
-      }
-    ]
-
-    let filtered = mockAttendance
-    const { class: cls, section } = req.query
-    if (cls) filtered = filtered.filter(a => a.class === cls)
-    if (section) filtered = filtered.filter(a => a.section === section)
-    return res.json({ success: true, count: filtered.length, data: filtered })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Attendance could not be loaded.' })
   }
 })
 

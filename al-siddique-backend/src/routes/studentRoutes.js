@@ -12,7 +12,6 @@ const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard
 const { upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
 
 const CLASS_ALIASES = {
@@ -178,86 +177,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.students.read'), asy
     res.json({ success: true, count: students.length, total_rows: result.rowCount, data: students })
   } catch (err) {
     console.error('Student list error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning high-fidelity mock students.');
-    const mockStudents = [
-      {
-        id: 1,
-        school_id: 1,
-        gr_number: 'GR-1001',
-        name: 'Muhammad Ali',
-        father_name: 'Ahmed Khan',
-        mother_name: 'Sobia Ahmed',
-        class: '10',
-        section: 'A',
-        roll_number: '1',
-        date_of_birth: '2010-05-15',
-        gender: 'male',
-        address: 'Street 4, Sector G-9, Islamabad',
-        parent_phone: '03001234567',
-        parent_whatsapp: '03001234567',
-        photo: null,
-        is_active: true,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        id: 2,
-        school_id: 1,
-        gr_number: 'GR-1002',
-        name: 'Ayesha Fatima',
-        father_name: 'Tariq Mahmood',
-        mother_name: 'Fariha Tariq',
-        class: '10',
-        section: 'A',
-        roll_number: '2',
-        date_of_birth: '2011-02-20',
-        gender: 'female',
-        address: 'House 12, Block C, Lahore',
-        parent_phone: '03007654321',
-        parent_whatsapp: '03007654321',
-        photo: null,
-        is_active: true,
-        created_at: new Date(),
-        updated_at: new Date()
-      },
-      {
-        id: 3,
-        school_id: 1,
-        gr_number: 'GR-1003',
-        name: 'Zainab Bibi',
-        father_name: 'Muhammad Asif',
-        mother_name: 'Sadia Bibi',
-        class: '9',
-        section: 'B',
-        roll_number: '5',
-        date_of_birth: '2012-08-11',
-        gender: 'female',
-        address: 'Flat 5, Al-Rehman Heights, Karachi',
-        parent_phone: '03123456789',
-        parent_whatsapp: '03123456789',
-        photo: null,
-        is_active: true,
-        created_at: new Date(),
-        updated_at: new Date()
-      }
-    ];
-
-    let filtered = mockStudents;
-    const { class: cls, section, search } = req.query;
-    if (cls) filtered = filtered.filter(s => s.class === cls);
-    if (section) filtered = filtered.filter(s => s.section === section);
-    if (search) {
-      const q = search.toLowerCase();
-      filtered = filtered.filter(s =>
-        s.name.toLowerCase().includes(q) ||
-        s.gr_number.toLowerCase().includes(q) ||
-        s.father_name.toLowerCase().includes(q)
-      );
-    }
-    return res.json({ success: true, count: filtered.length, data: filtered });
+    return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
   }
 })
 
@@ -360,31 +280,7 @@ router.get('/:id', protect, requireScopeForServiceOnly('school.students.read'), 
     res.json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Student detail error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning high-fidelity mock student details.');
-    const mockStudent = {
-      id: req.params.id || 1,
-      school_id: 1,
-      gr_number: 'GR-1001',
-      name: 'Muhammad Ali',
-      father_name: 'Ahmed Khan',
-      mother_name: 'Sobia Ahmed',
-      class: '10',
-      section: 'A',
-      roll_number: '1',
-      date_of_birth: '2010-05-15',
-      gender: 'male',
-      address: 'Street 4, Sector G-9, Islamabad',
-      parent_phone: '03001234567',
-      parent_whatsapp: '03001234567',
-      photo: null,
-      is_active: true,
-      created_at: new Date(),
-      updated_at: new Date()
-    };
-    return res.json({ success: true, data: mockStudent });
+    return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
   }
 })
 

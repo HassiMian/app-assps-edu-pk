@@ -419,12 +419,6 @@ assertNotContains(
 )
 
 
-assertContains(
-  'al-siddique-backend/src/routes/noticesRoutes.js',
-  "process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'",
-  'notice mock fallback must require explicit opt-in and remain impossible in production.'
-)
-
 assertNotContains(
   'al-siddique-backend/src/routes/admissionRoutes.js',
   /Math\.random\(\)/,
@@ -454,6 +448,25 @@ assertNotContains(
   'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
   /Status: \{pct >= 50|total_marks:\s*100,\s*\n\s*\}\);/,
   'examination result UI must not hardcode pass thresholds or saved total marks.'
+)
+
+
+assertNotContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  /mockStudents|mockStudent|high-fidelity mock student/,
+  'student APIs must never synthesize school records when storage is unavailable.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  /mockAttendance|Mock Fallback/,
+  'attendance APIs must never synthesize attendance records.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/noticesRoutes.js',
+  /Mock Fallback|mockNotices|Simulating notice/,
+  'notice APIs must fail explicitly rather than simulate CRUD success.'
 )
 
 if (failures.length) {
