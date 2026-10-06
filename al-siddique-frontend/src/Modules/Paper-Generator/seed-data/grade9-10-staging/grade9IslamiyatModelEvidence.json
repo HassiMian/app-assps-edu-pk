@@ -1,0 +1,21 @@
+{
+  "schemaVersion":"assps-grade9-islamiyat-model-evidence-v1",
+  "checkedOn":"2026-10-06",
+  "authority":"BISE Sargodha",
+  "sourceUrl":"https://site.bisesargodha.edu.pk/Downloads/ModelPapers/Matric/ModelPaper_Islamiyat_9thClass.pdf",
+  "indexUrl":"https://site.bisesargodha.edu.pk/MatricModelPapers",
+  "artifact":{"sha256":"3ed9931871e0eb2834c1a4af52661db05f25ea3c438e51df084602932b0e4b49","byteLength":2769453,"pageCount":4,"visibleWatermark":"Web version of PCTB Model Paper"},
+  "classification":"OFFICIAL_BOARD_HOSTED_MODEL_YEAR_UNRESOLVED",
+  "current2026PatternAuthority":false,
+  "reason":"The official Sargodha model-paper index hosts this Grade IX Islamiat model separately from the explicitly labelled Annual Examination 2026 bundles. The PDF pages do not visibly establish a session/year, so it is structural evidence only until current applicability is independently verified.",
+  "visibleStructure":{"totalMarks":100,"durationHours":3,"sections":[
+    {"question":1,"type":"mcq","marks":20},
+    {"question":2,"type":"short","marks":12,"attempt":6,"offered":9},
+    {"question":3,"type":"short","marks":12,"attempt":6,"offered":9},
+    {"question":4,"type":"short","marks":16,"attempt":8,"offered":12},
+    {"question":5,"type":"hadith_translation","marks":10},
+    {"question":6,"type":"personalities_short_note","marks":10},
+    {"question":7,"type":"detailed","marks":20,"attempt":2,"offered":4}
+  ]},
+  "guards":{"mayEnterVerified2026PatternRegistry":false,"questionStemsCopied":false,"actual2026PaperStillRequired":true,"currentTextbookContentAuthorityRequiredSeparately":true}
+}
