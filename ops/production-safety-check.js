@@ -1446,6 +1446,22 @@ assertNotContains(
   /background:\s*['"]#071e34['"]|rgba\(11,44,77,0\.2\)/,
   'student reporting UI must use semantic APEX surfaces.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /2026-2027|classNames\?\.length \? classNames : \['Starter'\]/,
+  'fee operations must use Academic Setup session/classes without hardcoded fallbacks.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  'const academicSession = academicSessionLabel(sessionStart, sessionEnd)',
+  'fee report printing must derive its session from Academic Setup.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/AdmissionsModule.jsx',
+  /selectedSections\.length \? selectedSections : \['Blue'\]/,
+  'admissions must not invent a Blue section when none is configured.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

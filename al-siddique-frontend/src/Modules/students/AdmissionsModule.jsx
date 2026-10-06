@@ -93,7 +93,7 @@ export default function AdmissionsModule() {
  const [generatedCredentials, setGeneratedCredentials] = useState(null)
 
  const selectedSections = safeSectionsForClass(form.studentClass)
- const safeSectionNames = selectedSections.length ? selectedSections : ['Blue']
+ const safeSectionNames = selectedSections
 
  async function fetchApplications(status) {
  const s = status || appsFilter

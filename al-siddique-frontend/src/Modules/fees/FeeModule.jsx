@@ -14,6 +14,12 @@ import { renderVoucherCopyHtml } from './ViewChallans'
 import { btnPrimary, btnSecondary } from '../moduleStyles'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+function academicSessionLabel(sessionStart, sessionEnd) {
+ const start = String(sessionStart || '').slice(0, 4)
+ const end = String(sessionEnd || '').slice(0, 4)
+ return /^\d{4}$/.test(start) && /^\d{4}$/.test(end) ? `${start}-${end}` : ''
+}
+
 
 const FEE_HEADS = [
  { id: 1, name: 'Monthly Fee', defaultAmount: 0 },
@@ -382,7 +388,7 @@ function PrintVoucher({ challan, selectedTemplate, onClose, school }) {
   )
 }
 
-function PrintStudentList({ list, onClose, school }) {
+function PrintStudentList({ list, onClose, school, academicSession }) {
   if (!list) return null
   const { type, data } = list
   const logo = school?.logo || ''
@@ -531,7 +537,7 @@ function PrintStudentList({ list, onClose, school }) {
     <div>
       <h1 class="school-title">${schoolName}</h1>
       <div class="school-meta">${schoolAddress} · ${schoolPhone}</div>
-      <h2 class="report-title">${type} — Session 2026-2027</h2>
+      <h2 class="report-title">${type} — Session ${academicSession || '—'}</h2>
     </div>
   </div>
 
@@ -733,8 +739,9 @@ function FeeModule() {
  const location = useLocation()
  const navigate = useNavigate()
  const { paperSettings } = usePaperStore()
- const { classNames, allSections } = useAcademicStore()
- const classOptions = classNames?.length ? classNames : ['Starter']
+ const { classNames, allSections, sessionStart, sessionEnd } = useAcademicStore()
+ const academicSession = academicSessionLabel(sessionStart, sessionEnd)
+ const classOptions = classNames?.length ? classNames : []
  const routeTab = useMemo(() => {
  if (location.pathname.includes('/fees/reporting')) return 'reports'
  if (location.pathname.includes('/fees/challans')) return 'view'
@@ -807,6 +814,7 @@ function FeeModule() {
  list={printList}
  onClose={() => setPrintList(null)}
  school={paperSettings}
+ academicSession={academicSession}
  />
  )}
  <div className="super-module-card" style={{ padding: '24px 24px' }}>
