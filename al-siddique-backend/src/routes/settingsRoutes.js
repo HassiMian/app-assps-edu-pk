@@ -121,19 +121,17 @@ function parseCookieHeader(header = '') {
     }, {})
 }
 
+let tenantBrandingSchemaReady = null
 async function ensureTenantBrandingTable() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS tenant_branding (
-      id TEXT PRIMARY KEY,
-      tenant_id VARCHAR(120) UNIQUE NOT NULL,
-      logo_url TEXT,
-      primary_color VARCHAR(40),
-      secondary_color VARCHAR(40),
-      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );
-    CREATE INDEX IF NOT EXISTS tenant_branding_tenant_id_idx ON tenant_branding (tenant_id);
-  `)
+  if (tenantBrandingSchemaReady) return true
+  const result = await pool.query("SELECT to_regclass('public.tenant_branding') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('tenant_branding schema migration is not applied.')
+    err.code = 'SETTINGS_SCHEMA_NOT_READY'
+    throw err
+  }
+  tenantBrandingSchemaReady = true
+  return true
 }
 
 async function resolveBrandingTenant(req) {
@@ -197,73 +195,26 @@ function pickSetting(incoming, existing, key, fallback = '') {
   return fallback
 }
 
+let settingsSchemaReady = null
 async function ensureSettingsTable() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS settings (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER,
-      school_name VARCHAR(255) NOT NULL,
-      school_address TEXT,
-      school_phone VARCHAR(50),
-      school_email VARCHAR(255),
-      principal_name VARCHAR(255),
-      academic_year VARCHAR(10),
-      fee_due_date VARCHAR(10),
-      attendance_threshold VARCHAR(10),
-      school_logo TEXT,
-      twilio_config JSONB DEFAULT '{}'::jsonb,
-      school_urdu TEXT,
-      show_urdu_on_login BOOLEAN DEFAULT FALSE,
-      module_access JSONB DEFAULT '{}'::jsonb,
-      school_access JSONB DEFAULT '[]'::jsonb,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
+  if (settingsSchemaReady) return true
+  const result = await pool.query(`
+    SELECT
+      to_regclass('public.settings') AS settings_table,
+      to_regclass('public.organizations') AS organizations_table,
+      to_regclass('public.campuses') AS campuses_table,
+      COUNT(*) FILTER (WHERE column_name IN ('school_id','school_logo','twilio_config','module_access','school_access','superapp_modules','branding_config','academic_setup'))::int AS settings_columns
+    FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'settings'
   `)
-  await pool.query('ALTER TABLE settings ADD COLUMN IF NOT EXISTS school_id INTEGER;')
-  await pool.query('ALTER TABLE settings ALTER COLUMN school_id DROP DEFAULT;').catch(() => {})
-  await pool.query('ALTER TABLE settings ADD COLUMN IF NOT EXISTS school_logo TEXT;')
-  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS twilio_config JSONB DEFAULT '{}'::jsonb;")
-  await pool.query('ALTER TABLE settings ADD COLUMN IF NOT EXISTS school_urdu TEXT;')
-  await pool.query('ALTER TABLE settings ADD COLUMN IF NOT EXISTS show_urdu_on_login BOOLEAN DEFAULT FALSE;')
-  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS module_access JSONB DEFAULT '{}'::jsonb;")
-  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS school_access JSONB DEFAULT '[]'::jsonb;")
-  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS superapp_modules JSONB DEFAULT '{}'::jsonb;")
-  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS branding_config JSONB DEFAULT '{}'::jsonb;")
-  await pool.query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS academic_setup JSONB DEFAULT '{}'::jsonb;")
-  await pool.query('CREATE UNIQUE INDEX IF NOT EXISTS settings_school_id_unique ON settings (school_id);')
-
-  // --- PHASE 1: ENTERPRISE HIERARCHY SCHEMA ---
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS organizations (
-      id SERIAL PRIMARY KEY,
-      owner_id INTEGER,
-      name VARCHAR(255) NOT NULL DEFAULT 'Default Organization',
-      branding_payload JSONB DEFAULT '{}'::jsonb,
-      ai_settings JSONB DEFAULT '{}'::jsonb,
-      subscription_tier VARCHAR(50) DEFAULT 'enterprise',
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `)
-
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS campuses (
-      id SERIAL PRIMARY KEY,
-      org_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
-      name VARCHAR(255) NOT NULL,
-      code VARCHAR(50) UNIQUE,
-      principal_id INTEGER,
-      campus_branding JSONB DEFAULT '{}'::jsonb,
-      module_access JSONB DEFAULT '{}'::jsonb,
-      is_active BOOLEAN DEFAULT TRUE,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-  `)
-
-  // Safely prepare the users table for Phase 2 Identity system
-  await pool.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS org_id INTEGER REFERENCES organizations(id);').catch(() => {})
-  await pool.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS campus_id INTEGER REFERENCES campuses(id);').catch(() => {})
-  await pool.query('ALTER TABLE users ADD COLUMN IF NOT EXISTS role_level INTEGER DEFAULT 4;').catch(() => {})
+  const row = result.rows[0] || {}
+  if (!row.settings_table || !row.organizations_table || !row.campuses_table || Number(row.settings_columns || 0) !== 8) {
+    const err = new Error('settings/identity schema migration is not applied.')
+    err.code = 'SETTINGS_SCHEMA_NOT_READY'
+    throw err
+  }
+  settingsSchemaReady = true
+  return true
 }
 
 router.get('/branding', protect, async (req, res) => {
@@ -296,7 +247,7 @@ router.get('/branding', protect, async (req, res) => {
     })
   } catch (error) {
     console.error('Tenant branding fetch error:', error.message)
-    return res.status(500).json({ success: false, message: 'Failed to load branding' })
+    return res.status(error.code === 'SETTINGS_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: error.code === 'SETTINGS_SCHEMA_NOT_READY' ? 'Branding storage is not initialized.' : 'Failed to load branding' })
   }
 })
 

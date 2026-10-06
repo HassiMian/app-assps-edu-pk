@@ -493,6 +493,15 @@ async function migrate() {
     }
 
     try {
+      const settingsIdentityMigration = require('../../migrations/010_settings_identity_schema')
+      await settingsIdentityMigration.up()
+      console.log('settings + identity hierarchy schema ready')
+    } catch (err) {
+      console.error('Settings/Identity Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

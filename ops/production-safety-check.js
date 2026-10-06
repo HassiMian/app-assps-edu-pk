@@ -992,6 +992,19 @@ assertContains(
   'Daily Diary schema must be versioned in migration 009.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  /CREATE TABLE IF NOT EXISTS settings|CREATE TABLE IF NOT EXISTS organizations|CREATE TABLE IF NOT EXISTS campuses|CREATE TABLE IF NOT EXISTS tenant_branding|ALTER TABLE settings ADD COLUMN|ALTER TABLE users ADD COLUMN/,
+  'settings request handlers must not mutate settings/identity schema.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/010_settings_identity_schema.js',
+  'CREATE TABLE IF NOT EXISTS tenant_branding',
+  'settings and branding schema must be versioned in migration 010.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
