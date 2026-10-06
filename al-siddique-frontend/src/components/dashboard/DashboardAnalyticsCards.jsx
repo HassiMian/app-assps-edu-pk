@@ -301,7 +301,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
         position: 'fixed',
         inset: 0,
         zIndex: 10002,
-        background: 'rgba(7,22,40,0.94)',
+        background: 'color-mix(in srgb, var(--apex-bg-overlay) 92%, transparent)',
         backdropFilter: 'blur(16px)',
         display: 'flex',
         alignItems: 'center',
@@ -317,10 +317,10 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
         style={{
           width: 'min(1100px, 100%)',
           maxHeight: '92vh',
-          background: 'rgba(11,44,77,0.98)',
-          border: '1px solid rgba(200,153,26,0.3)',
+          background: 'var(--apex-bg-surface-solid)',
+          border: '1px solid var(--apex-border-default)',
           borderRadius: 24,
-          boxShadow: '0 28px 80px rgba(0,0,0,0.6)',
+          boxShadow: 'var(--apex-shadow-lg)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
@@ -330,8 +330,8 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
         <div
           style={{
             padding: '18px 24px',
-            background: 'linear-gradient(135deg, rgba(7,30,52,0.95), rgba(11,44,77,0.95))',
-            borderBottom: '1px solid rgba(200,153,26,0.2)',
+            background: 'linear-gradient(135deg, color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid)), color-mix(in srgb, var(--apex-action-secondary) 5%, var(--apex-bg-surface-solid)))',
+            borderBottom: '1px solid var(--apex-border-subtle)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -346,7 +346,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                 height: 44,
                 borderRadius: 14,
                 background: 'rgba(200,153,26,0.15)',
-                border: '1px solid rgba(200,153,26,0.3)',
+                border: '1px solid var(--apex-border-default)',
                 display: 'grid',
                 placeItems: 'center',
                 color: '#C8991A',
@@ -507,7 +507,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
               disabled={saving || pendingCount === 0}
               style={{
                 background: pendingCount > 0 ? 'linear-gradient(135deg, #C8991A, #e8b420)' : 'rgba(148,163,184,0.2)',
-                color: pendingCount > 0 ? '#071e34' : '#8892A4',
+                color: pendingCount > 0 ? '#fff' : 'var(--apex-text-tertiary)',
                 border: 'none',
                 padding: '8px 18px',
                 borderRadius: 10,
@@ -586,7 +586,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
           ) : (
             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
-                <tr style={{ borderBottom: '1px solid rgba(200,153,26,0.2)' }}>
+                <tr style={{ borderBottom: '1px solid var(--apex-border-subtle)' }}>
                   {['Sr#', 'GR No', 'Student', 'Father Name', 'Class & Sec', 'Quick Attendance Action'].map((h) => (
                     <th
                       key={h}
@@ -613,7 +613,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                       key={s.id}
                       style={{
                         borderBottom: '1px solid rgba(200,153,26,0.06)',
-                        background: idx % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)',
+                        background: idx % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)',
                       }}
                     >
                       <td style={{ padding: '12px', color: '#8892A4', fontSize: 12, width: 45 }}>{idx + 1}</td>
@@ -724,7 +724,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                           {currentMark && (
                             <span
                               data-testid={`staged-tag-${s.id}`}
-                              style={{ fontSize: 10, color: '#C8991A', fontWeight: 800, background: 'rgba(200,153,26,0.15)', padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(200,153,26,0.3)', letterSpacing: '0.04em' }}
+                              style={{ fontSize: 10, color: '#C8991A', fontWeight: 800, background: 'rgba(200,153,26,0.15)', padding: '1px 6px', borderRadius: 4, border: '1px solid var(--apex-border-default)', letterSpacing: '0.04em' }}
                             >
                               STAGED (UNSAVED)
                             </span>
@@ -743,7 +743,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
         <div
           style={{
             padding: '14px 24px',
-            background: 'rgba(7,30,52,0.95)',
+            background: 'var(--apex-bg-surface-solid)',
             borderTop: '1px solid rgba(200,153,26,0.2)',
             display: 'flex',
             justifyContent: 'space-between',
@@ -763,7 +763,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
               disabled={saving || pendingCount === 0}
               style={{
                 background: pendingCount > 0 ? 'linear-gradient(135deg, #C8991A, #e8b420)' : 'rgba(148,163,184,0.18)',
-                color: pendingCount > 0 ? '#071e34' : '#8892A4',
+                color: pendingCount > 0 ? '#fff' : 'var(--apex-text-tertiary)',
                 border: 'none',
                 padding: '8px 18px',
                 borderRadius: 8,
@@ -806,7 +806,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
             <div
               data-testid="unsaved-changes-dialog"
               style={{
-                background: '#0B2C4D',
+                background: 'var(--apex-bg-surface-solid)',
                 border: '1px solid rgba(255,159,10,0.4)',
                 borderRadius: 16,
                 padding: 24,
@@ -863,7 +863,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
                   style={{
                     background: 'linear-gradient(135deg, #C8991A, #e8b420)',
                     border: 'none',
-                    color: '#071e34',
+                    color: '#fff',
                     padding: '8px 16px',
                     borderRadius: 8,
                     cursor: 'pointer',

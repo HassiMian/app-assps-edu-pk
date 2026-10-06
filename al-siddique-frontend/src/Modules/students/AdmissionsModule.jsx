@@ -274,8 +274,8 @@ export default function AdmissionsModule() {
  {[{id:'form',label:' New Admission'},{id:'applications',label:' Website Applications'}].map(tab=>(
  <button key={tab.id} onClick={()=> tab.id==='applications' ? switchToApplications() : setActiveTab('form')}
  style={{ padding:'6px 16px', borderRadius:20, fontSize:12, fontWeight:700, border:'none', cursor:'pointer',
- background: activeTab===tab.id ? `linear-gradient(135deg,${C.gold},#e8b420)` : 'rgba(11,44,77,0.92)',
- color: activeTab===tab.id ? '#071e34' : C.muted }}>
+ background: activeTab===tab.id ? 'var(--apex-action-primary)' : 'var(--apex-bg-surface-solid)',
+ color: activeTab===tab.id ? '#fff' : 'var(--apex-text-secondary)' }}>
  {tab.label}
  </button>
  ))}
@@ -284,8 +284,8 @@ export default function AdmissionsModule() {
  {i>0 && <span style={{ color:C.border }}>›</span>}
  <span style={{
  padding:'5px 14px', borderRadius:20, fontSize:12, fontWeight:700,
- background: step===s ? `linear-gradient(135deg,${C.gold},#e8b420)` : step>s ? 'rgba(48,209,88,0.15)' : 'rgba(11,44,77,0.92)',
- color: step===s ? '#071e34' : step>s ? C.green : C.muted,
+ background: step===s ? 'var(--apex-action-primary)' : step>s ? 'color-mix(in srgb, var(--apex-action-success) 10%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-surface-solid)',
+ color: step===s ? '#fff' : step>s ? 'var(--apex-action-success)' : 'var(--apex-text-tertiary)',
  }}>{i===0?'1. Admission':i===1?'2. Fee Setup':'3. Done'}</span>
  </div>
  ))}
@@ -309,8 +309,8 @@ export default function AdmissionsModule() {
  {['pending','approved','rejected','all'].map(f=>(
  <button key={f} onClick={()=>{ setAppsFilter(f); fetchApplications(f) }}
  style={{ padding:'5px 14px', borderRadius:20, fontSize:12, fontWeight:700, border:'none', cursor:'pointer',
- background: appsFilter===f ? `linear-gradient(135deg,${C.gold},#e8b420)` : 'rgba(11,44,77,0.92)',
- color: appsFilter===f ? '#071e34' : C.muted, textTransform:'capitalize' }}>
+ background: appsFilter===f ? 'var(--apex-action-primary)' : 'var(--apex-bg-surface-solid)',
+ color: appsFilter===f ? '#fff' : 'var(--apex-text-secondary)', textTransform:'capitalize' }}>
  {f}
  </button>
  ))}
@@ -332,14 +332,14 @@ export default function AdmissionsModule() {
       <h3 style={{ color: C.gold, margin: '0 0 12px 0', fontSize: 16, display: 'flex', alignItems: 'center', gap: 8 }}><Key size={18} /> Super App Login Credentials Generated</h3>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
         {generatedCredentials.parent && (
-          <div style={{ background: 'rgba(7,30,52,0.6)', padding: 12, borderRadius: 8 }}>
+          <div style={{ background: 'var(--apex-bg-subtle)', padding: 12, borderRadius: 8 }}>
             <strong style={{ color: C.silver, display: 'block', marginBottom: 4 }}>Parent Portal</strong>
             <div style={{ fontSize: 13, color: C.muted }}>Email: <span style={{ color: '#fff' }}>{generatedCredentials.parent.email}</span></div>
             <div style={{ fontSize: 13, color: C.muted }}>Password: <span style={{ color: '#fff' }}>{generatedCredentials.parent.password}</span></div>
           </div>
         )}
         {generatedCredentials.student && (
-          <div style={{ background: 'rgba(7,30,52,0.6)', padding: 12, borderRadius: 8 }}>
+          <div style={{ background: 'var(--apex-bg-subtle)', padding: 12, borderRadius: 8 }}>
             <strong style={{ color: C.silver, display: 'block', marginBottom: 4 }}>Student Portal</strong>
             <div style={{ fontSize: 13, color: C.muted }}>Email: <span style={{ color: '#fff' }}>{generatedCredentials.student.email}</span></div>
             <div style={{ fontSize: 13, color: C.muted }}>Password: <span style={{ color: '#fff' }}>{generatedCredentials.student.password}</span></div>
@@ -430,7 +430,7 @@ export default function AdmissionsModule() {
  <form className="super-module-card" onSubmit={handleSubmitAdmission} style={{ ...card, display:'grid', gap:20, borderRadius: 22 }}>
 
  {/* Photo upload section */}
- <div style={{ display:'flex', gap:24, padding:'16px 18px', background:'rgba(7,30,52,0.35)', borderRadius:14, border:'1px solid rgba(200,153,26,0.12)', alignItems:'flex-start' }}>
+ <div style={{ display:'flex', gap:24, padding:'16px 18px', background:'var(--apex-bg-subtle)', borderRadius:14, border:'1px solid var(--apex-border-subtle)', alignItems:'flex-start' }}>
  <PhotoUploadAI
  value={form.photo}
  onChange={v => setForm(f => ({ ...f, photo: v }))}
