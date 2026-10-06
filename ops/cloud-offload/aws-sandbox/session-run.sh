@@ -13,6 +13,11 @@ checkpoint() {
 }
 trap checkpoint EXIT INT TERM
 
+# Preserve any existing tracked work before bootstrap refreshes the sandbox clone.
+if [[ -d "$ROOT/.git" ]]; then
+  checkpoint
+fi
+
 "$SCRIPT_DIR/bootstrap.sh"
 
 echo "ASSPS_SANDBOX_SESSION_READY"
