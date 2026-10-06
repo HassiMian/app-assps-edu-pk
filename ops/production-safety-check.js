@@ -1701,3 +1701,21 @@ assertContains(
   'TENANT_CONTEXT_REQUIRED',
   'account creation must require a resolvable tenant context.'
 )
+
+assertNotContains(
+  'al-siddique-backend/src/services/portalAccountService.js',
+  /hasColumn\('users', 'tenant_id'\)\.catch\(\(\) => false\)/,
+  'portal account provisioning must not fail open when tenant schema lookup fails.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/portalAccountService.js',
+  "error.code = 'USER_TENANT_SCHEMA_REQUIRED'",
+  'portal account provisioning must require tenant-safe user storage.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/portalAccountService.js',
+  "error.code = 'TENANT_CONTEXT_REQUIRED'",
+  'portal account provisioning must require an explicit tenant context.'
+)

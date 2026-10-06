@@ -60,6 +60,18 @@ async function provisionPortalUser({
     throw new Error('Portal user requires school, name, role and a login identifier.')
   }
 
+  const supportsTenant = await hasColumn('users', 'tenant_id')
+  if (!supportsTenant) {
+    const error = new Error('User storage is not tenant-safe for portal account provisioning.')
+    error.code = 'USER_TENANT_SCHEMA_REQUIRED'
+    throw error
+  }
+  if (!tenantId) {
+    const error = new Error('Portal account provisioning requires a tenant context.')
+    error.code = 'TENANT_CONTEXT_REQUIRED'
+    throw error
+  }
+
   const existing = await findExistingUser({
     schoolId,
     userId,
@@ -73,7 +85,6 @@ async function provisionPortalUser({
     const supportsUsername = await hasColumn('users', 'username').catch(() => false)
     const supportsPhone = await hasColumn('users', 'phone').catch(() => false)
     const supportsPermissions = await hasColumn('users', 'permissions').catch(() => false)
-    const supportsTenant = await hasColumn('users', 'tenant_id').catch(() => false)
     const updates = ['name = $1', 'designation = $2', 'is_active = $3']
     const params = [clean(name, 180), designation || null, Boolean(active)]
     let i = params.length + 1
@@ -81,7 +92,7 @@ async function provisionPortalUser({
     if (supportsUsername && normalizedUsername) { updates.push(`username = $${i++}`); params.push(normalizedUsername) }
     if (supportsPhone && phone) { updates.push(`phone = $${i++}`); params.push(clean(phone, 40)) }
     if (supportsPermissions) { updates.push(`permissions = $${i++}::jsonb`); params.push(JSON.stringify(Array.isArray(permissions) ? permissions : [])) }
-    if (supportsTenant && tenantId) { updates.push(`tenant_id = $${i++}`); params.push(tenantId) }
+    updates.push(`tenant_id = $${i++}`); params.push(tenantId)
     updates.push('updated_at = NOW()')
     params.push(existing.id, schoolId)
     const updated = await runQuery(db, `
@@ -97,12 +108,11 @@ async function provisionPortalUser({
   const supportsUsername = await hasColumn('users', 'username').catch(() => false)
   const supportsPhone = await hasColumn('users', 'phone').catch(() => false)
   const supportsPermissions = await hasColumn('users', 'permissions').catch(() => false)
-  const supportsTenant = await hasColumn('users', 'tenant_id').catch(() => false)
   const supportsMustChange = await hasColumn('users', 'must_change_password').catch(() => false)
 
   const columns = ['school_id', 'name', 'email', 'password', 'role', 'designation', 'is_active']
   const values = [schoolId, clean(name, 180), normalizedEmail || null, passwordHash, normalizedRole, designation || null, Boolean(active)]
-  if (supportsTenant) { columns.push('tenant_id'); values.push(tenantId || null) }
+  columns.push('tenant_id'); values.push(tenantId)
   if (supportsUsername) { columns.push('username'); values.push(normalizedUsername || normalizedEmail) }
   if (supportsPhone) { columns.push('phone'); values.push(phone ? clean(phone, 40) : null) }
   if (supportsPermissions) { columns.push('permissions'); values.push(JSON.stringify(Array.isArray(permissions) ? permissions : [])) }
