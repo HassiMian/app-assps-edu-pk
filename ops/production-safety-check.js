@@ -1599,6 +1599,23 @@ assertContains(
   'fee summary must fail closed if its tenant-safe schema is unavailable.'
 )
 
+
+assertContains(
+  '.github/workflows/verify.yml',
+  'run: npm run production:safety',
+  'CI must execute the production safety gate on every verified branch/PR.'
+)
+assertContains(
+  '.github/workflows/verify.yml',
+  'run: npm run verify:local',
+  'CI must execute the complete local verification pipeline.'
+)
+assertContains(
+  '.github/workflows/verify.yml',
+  'run: npm run verify:templates',
+  'CI must enforce protected template integrity.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -1,0 +1,60 @@
+name: Verify SaaS
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - audit/**
+      - feat/**
+      - fix/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            al-siddique-frontend/package-lock.json
+            al-siddique-backend/src/package-lock.json
+
+      - name: Install root dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install frontend dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-frontend
+
+      - name: Install backend dependencies
+        run: npm ci --no-audit --no-fund
+        working-directory: al-siddique-backend/src
+
+      - name: Production safety gates
+        run: npm run production:safety
+
+      - name: Protected template integrity
+        run: npm run verify:templates
+        working-directory: al-siddique-frontend
+
+      - name: Pure academic validation tests
+        run: node --test tests/academic-assignment-guard.test.js tests/academic-setup-validation.test.js
+        working-directory: al-siddique-backend/src
+
+      - name: Full local verification
+        run: npm run verify:local
