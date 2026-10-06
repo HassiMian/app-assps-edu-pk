@@ -450,6 +450,10 @@ async function migrate() {
     try {
       const assessmentStudioMigration = require('./migrations/006_assessment_studio_v1')
       await assessmentStudioMigration.up()
+      const questionGovernanceMigration = require('./migrations/007_question_bank_governance_v1')
+      await questionGovernanceMigration.up()
+      const curriculumResourceMigration = require('./migrations/008_curriculum_resource_model_v1')
+      await curriculumResourceMigration.up()
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
