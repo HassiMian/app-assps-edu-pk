@@ -6,6 +6,7 @@ import { useState, useMemo, useEffect } from 'react'
 import Portal from '../../components/Portal'
 import { useLocation, useNavigate } from 'react-router-dom'
 import api from '../../services/api'
+import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { BadgeCheck, CreditCard, ReceiptText, Wallet, X } from 'lucide-react'
@@ -735,13 +736,6 @@ function FeeModule() {
  const { paperSettings } = usePaperStore()
  const { classNames } = useAcademicStore()
  const classOptions = classNames?.length ? classNames : ['Starter']
- const getStorage = () => {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
- }
  const routeTab = useMemo(() => {
  if (location.pathname.includes('/fees/reporting')) return 'reports'
  if (location.pathname.includes('/fees/challans')) return 'view'
@@ -755,11 +749,10 @@ function FeeModule() {
  const [feeClassSettings, setFeeClassSettings] = useState([])
  const [printChallan, setPrintChallan] = useState(null)
  const [printList, setPrintList] = useState(null) // { type: 'filtered' | 'defaulters' | 'all', data: [] }
- const [selectedTemplate, setSelectedTemplate] = useState(() => getStorage()?.getItem('feeTemplate') || 'classic')
+ const [selectedTemplate, setSelectedTemplate] = useState(() => getTenantStorageItem('feeTemplate', { migrateLegacy:true, removeLegacyOnMigrate:true }) || 'classic')
 
  useEffect(() => {
- const storage = getStorage()
- try { storage?.setItem('feeTemplate', selectedTemplate) } catch {}
+ try { setTenantStorageItem('feeTemplate', selectedTemplate) } catch { /* preference cache is best-effort */ }
  }, [selectedTemplate])
 
  useEffect(() => {

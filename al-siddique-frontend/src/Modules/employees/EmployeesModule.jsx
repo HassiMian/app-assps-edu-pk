@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import Portal from '../../components/Portal'
 import { useSearchParams } from 'react-router-dom'
 import api from '../../services/api'
+import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import { DonutChart, BarChart, ChartLegend } from '../../components/Charts'
 import { PERMISSION_GROUPS, ALL_PERMISSIONS, DEFAULT_TEACHER_PERMISSIONS } from '../../services/permissions'
 import { BadgeCheck, BriefcaseBusiness, Clock3, Percent, UserCheck, Users, VenusAndMars, Wallet } from 'lucide-react'
@@ -12,17 +13,9 @@ const DEFAULT_SUBJECTS = ['Mathematics','English','Urdu','Science','Social Studi
 const DESIG_KEY = 'al_siddique_designations'
 const SUBJECT_KEY = 'al_siddique_emp_subjects'
 
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
-}
-
 const loadList = (key, def) => {
  try {
- const raw = getStorage()?.getItem(key)
+ const raw = getTenantStorageItem(key, { migrateLegacy:true, removeLegacyOnMigrate:true })
  if (!raw) return def
  const parsed = JSON.parse(raw)
  return Array.isArray(parsed) ? parsed.filter(Boolean) : def
@@ -31,8 +24,7 @@ const loadList = (key, def) => {
  }
 }
 const persistList = (key, list) => {
- const storage = getStorage()
- try { storage?.setItem(key, JSON.stringify(list)) } catch {}
+ try { setTenantStorageItem(key, JSON.stringify(list)) } catch { /* preference cache is best-effort */ }
 }
 const emptyToNull = value => value === '' ? null : value
 const cleanEmployeePayload = (form) => {
@@ -636,14 +628,6 @@ function EmployeeProfileModal({ employee, onClose, onEdit }) {
 
 //  Directory Tab 
 function DirectoryTab({ employees, search, setSearch, designationFilter, setDesignationFilter, totalSalary, activeEmployees, onAdd, onView, onEdit, onDelete, designations }) {
-  const userRaw = localStorage.getItem('al_siddique_user')
-  let isDemo = false
-  try {
-    if (userRaw) {
-      const userObj = JSON.parse(userRaw)
-      isDemo = userObj?.email === 'demo@assps.edu.pk'
-    }
-  } catch (e) {}
  const workforceStats = useMemo(() => {
  const males = employees.filter(e => e.gender === 'Male').length
  const females = employees.length - males
@@ -772,7 +756,7 @@ function DirectoryTab({ employees, search, setSearch, designationFilter, setDesi
  <td style={{ padding:'12px 15px' }}>
  <div className="super-module-card" style={{ display:'flex', gap:6 }}>
  <button onClick={() => onView(emp)} style={{ padding:'5px 11px', borderRadius:8, border:`1px solid rgba(10,132,255,0.3)`, background:'rgba(10,132,255,0.12)', color:C.blue, cursor:'pointer', fontSize:12, fontWeight:600 }}> View</button>
- {!isDemo && (
+ {(
  <>
  <button onClick={() => onEdit(emp)} style={{ padding:'5px 11px', borderRadius:8, border:`1px solid rgba(200,153,26,0.3)`, background:'rgba(200,153,26,0.12)', color:C.gold, cursor:'pointer', fontSize:12, fontWeight:600 }}> Edit</button>
  <button onClick={() => onDelete(emp)} style={{ padding:'5px 11px', borderRadius:8, border:`1px solid rgba(255,55,95,0.28)`, background:'rgba(255,55,95,0.08)', color:C.red, cursor:'pointer', fontSize:12, fontWeight:600 }}> Delete</button>
@@ -887,14 +871,6 @@ function ListManager({ title, icon, items, onUpdate, defaults, placeholder }) {
  const [editIdx, setEditIdx] = useState(null)
  const [editVal, setEditVal] = useState('')
 
-  const userRaw = localStorage.getItem('al_siddique_user')
-  let isDemo = false
-  try {
-    if (userRaw) {
-      const userObj = JSON.parse(userRaw)
-      isDemo = userObj?.email === 'demo@assps.edu.pk'
-    }
-  } catch (e) {}
 
  function add() {
  const v = newItem.trim()
@@ -923,7 +899,7 @@ function ListManager({ title, icon, items, onUpdate, defaults, placeholder }) {
  <div className="super-module-card" style={{ color:C.muted, fontSize:12, marginTop:2 }}>{items.length} items · drag to reorder</div>
  </div>
  </div>
- {!isDemo && (
+ {(
  <button onClick={() => onUpdate(defaults)} style={{ padding:'6px 14px', borderRadius:8, border:`1px solid rgba(255,55,95,0.3)`, background:'rgba(255,55,95,0.1)', color:C.red, cursor:'pointer', fontSize:12, fontWeight:600 }}>
   Reset to Defaults
  </button>
@@ -938,7 +914,7 @@ function ListManager({ title, icon, items, onUpdate, defaults, placeholder }) {
  placeholder={placeholder}
  style={{ flex: 1 }}
  />
- {!isDemo && (
+ {(
  <button onClick={add} style={{ padding:'10px 20px', borderRadius:10, border:'none', background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', fontWeight: 600, cursor:'pointer', whiteSpace:'nowrap' }}>
  + Add
  </button>
@@ -959,7 +935,7 @@ function ListManager({ title, icon, items, onUpdate, defaults, placeholder }) {
  ) : (
  <>
  <span style={{ flex:1, color:C.silver, fontSize:13, fontWeight:600 }}>{item}</span>
- {!isDemo && (
+ {(
  <>
  <button onClick={()=>startEdit(i)} title="Edit" style={{ background:'none', border:'none', color:C.muted, cursor:'pointer', fontSize:13 }}></button>
  <button onClick={()=>remove(item)} title="Delete" style={{ background:'none', border:'none', color:'rgba(255,55,95,0.6)', cursor:'pointer', fontSize:14, fontWeight: 600 }}>×</button>

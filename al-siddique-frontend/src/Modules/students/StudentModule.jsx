@@ -2090,14 +2090,6 @@ export default function StudentsModule() {
  const { students: rawStudents, deleteStudent, updateStudent } = useStudentStore();
  const [feeStatusByStudent, setFeeStatusByStudent] = useState({});
 
-  const userRaw = localStorage.getItem('al_siddique_user')
-  let isDemo = false
-  try {
-    if (userRaw) {
-      const userObj = JSON.parse(userRaw)
-      isDemo = userObj?.email === 'demo@assps.edu.pk'
-    }
-  } catch (e) {}
 
  const [searchParams] = useSearchParams();
  const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusByStudent[student.id] || "" }));
