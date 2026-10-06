@@ -1494,6 +1494,21 @@ assertNotContains(
   /\.catch\(\(\) => setEmployees\(\[\]\)\)/,
   'employee card generation must not turn API failures into an empty employee dataset.'
 )
+
+for (const uiFile of [
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  'al-siddique-frontend/src/pages/ForcePasswordChangePage.jsx',
+  'al-siddique-frontend/src/Modules/subscriptions/SubscriptionRequests.jsx',
+  'al-siddique-frontend/src/Modules/settings/SettingsModule.jsx',
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+]) {
+  assertNotContains(
+    uiFile,
+    /rgba\(11,44,77|rgba\(7,30,52|#071e34|#0B2C4D/,
+    `${uiFile} operational chrome must use semantic APEX visual tokens.`
+  )
+}
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

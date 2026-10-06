@@ -378,7 +378,7 @@ export default function NotificationModule() {
  <button key={c.v} onClick={() => setChannel(c.v)}
  style={{ padding: '6px 12px', borderRadius: 7, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
  background: channel === c.v ? '#C8991A' : 'rgba(255,255,255,0.07)',
- color: channel === c.v ? '#0B2C4D' : '#C0C8D8' }}>
+ color: channel === c.v ? '#fff' : 'var(--apex-text-secondary)' }}>
  {c.l}
  </button>
  ))}
@@ -434,7 +434,7 @@ export default function NotificationModule() {
  <button key={f.v} onClick={() => setFeeType(f.v)}
  style={{ padding: '6px 14px', borderRadius: 8, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
  background: feeType === f.v ? '#FF9F0A' : 'rgba(255,255,255,0.07)',
- color: feeType === f.v ? '#0B2C4D' : '#C0C8D8' }}>
+ color: feeType === f.v ? '#fff' : 'var(--apex-text-secondary)' }}>
  {f.l}
  </button>
  ))}
@@ -485,7 +485,7 @@ export default function NotificationModule() {
  background: sel ? 'rgba(148,163,184,0.18)' : 'rgba(255,255,255,0.04)',
  border: sel ? '1px solid rgba(200,153,26,0.5)' : '1px solid transparent' }}>
  <div style={{ width: 18, height: 18, borderRadius: 4, border: sel ? 'none' : '1px solid rgba(255,255,255,0.25)', background: sel ? '#C8991A' : 'transparent', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
- {sel && <span style={{ color: '#0B2C4D', fontSize: 11, fontWeight: 900 }}></span>}
+ {sel && <span style={{ color: '#fff', fontSize: 11, fontWeight: 900 }}></span>}
  </div>
  <div style={{ flex: 1 }}>
  <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{s.name}</div>

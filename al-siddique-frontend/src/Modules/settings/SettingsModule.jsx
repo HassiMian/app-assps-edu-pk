@@ -368,7 +368,7 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
             </div>
           </div>
           
-          <div style={{ flex: 1, minHeight: 560, background: previewLoginBackground ? `url(${previewLoginBackground}) center/cover` : 'linear-gradient(180deg, rgba(7,30,52,0.8), rgba(2,12,24,0.9))', borderRadius: 16, padding: '40px 20px', border: '1px solid rgba(148,163,184,0.08)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ flex: 1, minHeight: 560, background: previewLoginBackground ? `url(${previewLoginBackground}) center/cover` : 'var(--apex-shell-gradient)', borderRadius: 16, padding: '40px 20px', border: '1px solid rgba(148,163,184,0.08)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}>
             {previewLoginBackground && <div style={{ position: 'absolute', inset: 0, background: brandingConfig.darkMode !== false ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)', backdropFilter: brandingConfig.glassEffect !== false ? 'blur(12px)' : 'none' }} />}
 
             <div style={{ width: 90, height: 90, borderRadius: 24, background: brandingConfig.glassEffect !== false ? 'rgba(200,153,26,0.15)' : 'rgba(200,153,26,0.05)', backdropFilter: brandingConfig.glassEffect !== false ? 'blur(10px)' : 'none', border: `1px solid ${brandingConfig.primaryColor || 'rgba(200,153,26,0.3)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20, zIndex: 10, boxShadow: '0 8px 24px rgba(0,0,0,0.3), inset 0 2px 10px rgba(255,255,255,0.1)' }}>
@@ -958,7 +958,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  style={{
  width: 'min(100%, 520px)',
  borderRadius: 24,
- background: 'linear-gradient(135deg, rgba(7,30,52,0.98), rgba(11,44,77,0.96))',
+ background: 'var(--apex-bg-surface-solid)',
  border: `1px solid ${C.border}`,
  boxShadow: '0 30px 80px rgba(0,0,0,0.45)',
  padding: 20,

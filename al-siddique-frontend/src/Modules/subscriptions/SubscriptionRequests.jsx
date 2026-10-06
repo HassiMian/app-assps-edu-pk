@@ -111,7 +111,7 @@ export default function SubscriptionRequests() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver, fontFamily: '"DM Sans", sans-serif' }}>
+    <div style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver, fontFamily: '"DM Sans", sans-serif' }}>
       <div style={{ maxWidth: 1220, margin: '0 auto', display: 'grid', gap: 22 }}>
         
         {/* Header section */}
@@ -187,7 +187,7 @@ export default function SubscriptionRequests() {
               </thead>
               <tbody>
                 {requests.map((req, index) => (
-                  <tr key={req.id} style={{ background: index % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+                  <tr key={req.id} style={{ background: index % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
                     <td style={{ padding: '14px 16px', color: C.gold, fontWeight: 700 }}>{req.request_id}</td>
                     <td style={{ padding: '14px 16px', fontWeight: 600 }}>{req.school_name}</td>
                     <td style={{ padding: '14px 16px' }}>{req.owner_name}</td>
@@ -233,7 +233,7 @@ export default function SubscriptionRequests() {
           <div style={{
             ...card, width: '100%', maxWidth: 760, maxHeight: '90vh',
             overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 20,
-            borderRadius: 24, padding: 30, background: '#0B2C4D', border: `1px solid ${C.gold}55`
+            borderRadius: 24, padding: 30, background: 'var(--apex-bg-surface-solid)', border: `1px solid ${C.gold}55`
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${C.border}`, paddingBottom: 16 }}>
               <div>

@@ -204,7 +204,7 @@ export default function AttendanceModule() {
  { key: "report", label: "SMS Report", icon: MessageSquare },
  ];
 
- const attDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
+ const attDashCard = { background: 'var(--apex-bg-surface)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
  const attDashTitle = { color: '#C0C8D8', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
  const totalStudents = students.length;
 
@@ -345,10 +345,10 @@ export default function AttendanceModule() {
  </div>
 
  {/* Tabs */}
- <div style={{ display: "flex", gap: 4, background: "rgba(7,30,52,0.5)", borderRadius: 14, padding: 4, marginBottom: 24, width: "fit-content", border:"1px solid rgba(148,163,184,0.18)", boxShadow: "0 8px 24px rgba(7,30,52,0.18)" }}>
+ <div style={{ display: "flex", gap: 4, background: "var(--apex-bg-surface)", borderRadius: 14, padding: 4, marginBottom: 24, width: "fit-content", border:"1px solid rgba(148,163,184,0.18)", boxShadow: "var(--apex-shadow-sm)" }}>
  {tabs.map(t => (
  <button key={t.key} onClick={() => setTab(t.key)}
- style={{ padding: "10px 20px", borderRadius: 12, border: "none", cursor: "pointer", background: tab === t.key ? "linear-gradient(135deg, #C8991A, #e8b420)" : "transparent", color: tab === t.key ? "#071e34" : "#8892A4", fontWeight: 600, fontSize: 13, transition: "all 0.2s" }}>
+ style={{ padding: "10px 20px", borderRadius: 12, border: "none", cursor: "pointer", background: tab === t.key ? "var(--apex-action-primary)" : "transparent", color: tab === t.key ? "#fff" : "var(--apex-text-tertiary)", fontWeight: 600, fontSize: 13, transition: "all 0.2s" }}>
  {t.label}
  </button>
  ))}

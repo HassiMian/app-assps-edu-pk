@@ -66,7 +66,7 @@ export default function ForcePasswordChangePage() {
     <main 
       className="flex min-h-screen items-center justify-center px-6 py-20 text-white relative"
       style={{
-        background: "linear-gradient(135deg, #071e34 0%, #0B2C4D 50%, #071e34 100%)",
+        background: "var(--apex-shell-gradient)",
         fontFamily: '"Aptos", "Avenir Next", "Segoe UI", sans-serif'
       }}
     >

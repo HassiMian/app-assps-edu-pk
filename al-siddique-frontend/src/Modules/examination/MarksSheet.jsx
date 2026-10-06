@@ -260,7 +260,7 @@ export default function MarksSheet() {
  }
 
  return (
- <div style={{ minHeight: '100%', background: '#071e34', color: C.silver, padding: 24 }}>
+ <div style={{ minHeight: '100%', background: 'var(--apex-shell-gradient)', color: 'var(--apex-text-primary)', padding: 24 }}>
  <div style={{ maxWidth: 1180, margin: '0 auto', display: 'grid', gap: 24 }}>
  <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16 }}>
  <div>
@@ -348,7 +348,7 @@ export default function MarksSheet() {
  </thead>
  <tbody>
  {students.map((student, i) => (
- <tr key={student.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+ <tr key={student.id} style={{ background: i % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '14px 16px', color: C.gold, fontWeight: 800 }}>{student.name}</td>
  <td style={{ padding: '14px 16px' }}>{student.gr_number || '-'}</td>
  <td style={{ padding: '14px 16px' }}>{student.father_name || '-'}</td>
