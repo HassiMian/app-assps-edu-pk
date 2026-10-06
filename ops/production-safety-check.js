@@ -291,6 +291,19 @@ assertNotContains(
   'parent portal must avoid N+1 result requests and use the scoped result list endpoint.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/SmartAttendance.jsx',
+  /STAFF-BIOMETRIC|FACE-001|Face Matched: Muhammad Ali|Biometric Match Success/,
+  'smart attendance must never simulate biometric or facial identities.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/SmartAttendance.jsx',
+  'Requires a verified identity-provider integration before it can mark attendance',
+  'unconfigured biometric/facial modes must be explicitly disabled instead of simulated.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

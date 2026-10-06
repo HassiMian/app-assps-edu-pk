@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import jsQR from 'jsqr'
 import api from '../../services/api'
-import { C, card, btnPrimary, btnSecondary, sectionHeader } from '../moduleStyles'
+import { C, card, btnSecondary, sectionHeader } from '../moduleStyles'
 import { ScanFace } from 'lucide-react'
 
 const GCard = ({ children, style = {} }) => (
@@ -20,11 +20,10 @@ export default function SmartAttendance() {
  const rafRef = useRef(null)
  const lastScan = useRef({}) 
 
- const [mode, setMode] = useState('qr') // 'qr' | 'facial' | 'fingerprint'
+ const mode = 'qr'
  const [scanning, setScanning] = useState(false)
  const [type, setType] = useState('student') 
  const [log, setLog] = useState([])
- const [camError, setCamError] = useState('')
  const [statusMsg, setStatusMsg] = useState('')
 
  const addLog = useCallback((entry) => {
@@ -65,23 +64,15 @@ export default function SmartAttendance() {
  const ctx = canvas.getContext('2d')
  ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
  
- if (mode === 'qr') {
  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
  const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: 'dontInvert' })
  if (code?.data) markAttendance(code.data)
- } else if (mode === 'facial') {
- ctx.strokeStyle = C.blue
- ctx.lineWidth = 2
- ctx.strokeRect(canvas.width*0.3, canvas.height*0.2, canvas.width*0.4, canvas.height*0.6)
- ctx.fillStyle = 'rgba(10,132,255,0.1)'
- ctx.fillRect(canvas.width*0.3, canvas.height*0.2, canvas.width*0.4, canvas.height*0.6)
- }
 
  rafRef.current = requestAnimationFrame(tick)
- }, [markAttendance, mode])
+ }, [markAttendance])
 
  const startCamera = useCallback(async () => {
- setCamError('')
+ setStatusMsg('')
  try {
  const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
  streamRef.current = stream
@@ -90,7 +81,7 @@ export default function SmartAttendance() {
  setScanning(true)
  rafRef.current = requestAnimationFrame(tick)
  } catch (err) {
- setCamError('Camera access denied: ' + err.message)
+ setStatusMsg('Error: Camera access denied: ' + err.message)
  }
  }, [tick])
 
@@ -102,28 +93,9 @@ export default function SmartAttendance() {
 
  useEffect(() => () => stopCamera(), [stopCamera])
 
- const handleFingerprint = async () => {
- if (type !== 'employee') {
- alert("Fingerprint attendance is for Staff only.")
- return
- }
- setStatusMsg('Waiting for biometric authentication…')
- setTimeout(() => {
- markAttendance('STAFF-BIOMETRIC')
- setStatusMsg('Biometric Match Success!')
- }, 1500)
- }
-
- const handleFacialScan = () => {
- setStatusMsg('Analyzing face…')
- setTimeout(() => {
- markAttendance('FACE-001')
- setStatusMsg('Face Matched: Muhammad Ali')
- }, 2000)
- }
 
  return (
- <div style={{ minHeight: '100vh', background: '#071e34', color: C.silver, padding: 24, fontFamily: 'Inter, sans-serif' }}>
+ <div style={{ minHeight: '100vh', background: 'var(--apex-shell-gradient)', color: 'var(--apex-text-primary)', padding: 24, fontFamily: 'Inter, sans-serif' }}>
  <div style={{ maxWidth: 1120, margin: '0 auto', display: 'grid', gap: 24 }}>
 
  {/* Header */}
@@ -134,15 +106,16 @@ export default function SmartAttendance() {
  </div>
  <div>
  <h1 style={sectionHeader}>Smart Attendance</h1>
- <p style={{ margin: '4px 0 0', color: C.muted, fontSize: 13 }}>QR, Facial & Biometric based instant attendance</p>
+ <p style={{ margin: '4px 0 0', color: C.muted, fontSize: 13 }}>Verified QR/barcode attendance. Facial and biometric modes remain disabled until a trusted identity-provider integration is connected.</p>
  </div>
  </div>
- <div style={{ display: 'flex', gap: 4, background: 'rgba(7,30,52,0.5)', borderRadius: 10, padding: 4 }}>
- {[{id:'qr',label:'QR/Barcode Scan'},{id:'facial',label:'Facial AI'},{id:'fingerprint',label:'Biometric'}].map(m => (
- <button key={m.id} onClick={() => { setMode(m.id); if(m.id!=='qr') stopCamera(); }} 
- style={{ padding: '8px 18px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 12, 
- background: mode === m.id ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'transparent', 
- color: mode === m.id ? '#071e34' : C.muted, transition:'all 0.2s' }}>
+ <div style={{ display: 'flex', gap: 4, background: 'var(--apex-bg-subtle)', borderRadius: 10, padding: 4, flexWrap:'wrap' }}>
+ {[{id:'qr',label:'QR/Barcode Scan',available:true},{id:'facial',label:'Facial AI · Not configured',available:false},{id:'fingerprint',label:'Biometric · Not configured',available:false}].map(m => (
+ <button key={m.id} disabled={!m.available}
+ title={m.available ? 'Verified server-backed attendance scanner' : 'Requires a verified identity-provider integration before it can mark attendance'}
+ style={{ padding: '8px 18px', borderRadius: 8, border: 'none', cursor: m.available ? 'default' : 'not-allowed', fontWeight: 700, fontSize: 12,
+ background: m.available ? 'var(--apex-action-primary)' : 'transparent',
+ color: m.available ? '#fff' : 'var(--apex-text-tertiary)', opacity:m.available ? 1 : .62, transition:'all 0.2s' }}>
  {m.label}
  </button>
  ))}
@@ -167,7 +140,7 @@ export default function SmartAttendance() {
  </div>
 
  {/* Viewport */}
- {(mode === 'qr' || mode === 'facial') && (
+ {mode === 'qr' && (
  <div style={{ position: 'relative', background: '#000', borderRadius: 20, overflow: 'hidden', marginBottom: 20, aspectRatio: '16/10', border: `2px solid ${scanning ? C.gold : C.border}`, boxShadow:'0 12px 32px rgba(0,0,0,0.4)' }}>
  <video ref={videoRef} style={{ width: '100%', height: '100%', objectFit: 'cover', display: scanning ? 'block' : 'none' }} playsInline muted />
  <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
@@ -192,20 +165,7 @@ export default function SmartAttendance() {
  </div>
  )}
 
- {mode === 'fingerprint' && (
- <div style={{ height: 340, background: 'rgba(15,23,42,0.4)', borderRadius: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 24, border: `2px dashed ${C.border}`, marginBottom:20 }}>
- <div style={{ fontSize: 84, animation: 'pulse 2s infinite', filter:'drop-shadow(0 0 20px rgba(200,153,26,0.2))' }}></div>
- <div style={{ textAlign: 'center' }}>
- <div style={{ color: '#fff', fontWeight: 700, fontSize:18 }}>Biometric Ready</div>
- <div style={{ color: C.muted, fontSize: 13, marginTop: 6 }}>Place staff finger on the scanner for verification</div>
- </div>
- <button onClick={handleFingerprint} style={{ background: `linear-gradient(135deg,${C.gold},${C.goldL})`, border: 'none', color: '#071e34', padding: '14px 40px', borderRadius: 14, fontWeight: 600, cursor: 'pointer', fontSize:16 }}>Activate Scanner</button>
- </div>
- )}
 
- {mode === 'facial' && scanning && (
- <button onClick={handleFacialScan} style={{ width: '100%', padding: '16px', borderRadius: 14, border: 'none', background: `linear-gradient(135deg,#0A84FF,#64D2FF)`, color: '#fff', fontWeight: 600, cursor: 'pointer', marginBottom: 14, fontSize:15, boxShadow:'0 4px 15px rgba(10,132,255,0.3)' }}> Capture & Recognize Face</button>
- )}
 
  {statusMsg && (
  <div style={{ background: statusMsg.startsWith('Error') ? 'rgba(255,55,95,0.12)' : 'rgba(48,209,88,0.12)', padding: '14px', borderRadius: 12, color: statusMsg.startsWith('Error') ? C.red : C.green, fontSize: 14, fontWeight: 700, textAlign: 'center', marginBottom: 14, border: `1px solid ${statusMsg.startsWith('Error') ? 'rgba(255,55,95,0.2)' : 'rgba(48,209,88,0.2)'}` }}>
@@ -251,7 +211,7 @@ export default function SmartAttendance() {
  { lbl: 'Failed', val: log.filter(e=>!e.ok).length, col: C.red },
  { lbl: 'Total', val: log.length, col: C.gold }
  ].map(s => (
- <div key={s.lbl} style={{ textAlign: 'center', background:'rgba(7,30,52,0.4)', padding:'12px', borderRadius:12, border:`1px solid ${C.border}` }}>
+ <div key={s.lbl} style={{ textAlign: 'center', background:'var(--apex-bg-subtle)', padding:'12px', borderRadius:12, border:`1px solid ${C.border}` }}>
  <div style={{ color: s.col, fontSize: 24, fontWeight: 900 }}>{s.val}</div>
  <div style={{ color: C.muted, fontSize: 10, textTransform: 'uppercase', letterSpacing:1, marginTop:4, fontWeight:700 }}>{s.lbl}</div>
  </div>
@@ -268,13 +228,13 @@ export default function SmartAttendance() {
  <div style={{ display: 'grid', gap: 16 }}>
  {[
  { t: 'Digital Identity QR', d: 'Print student/staff cards via Cards Generator with QR enabled.', i: '' },
- { t: 'Biometric Integration', d: 'Supports USB scanners and device-native biometric sensors.', i: '' },
- { t: 'Facial Recognition', d: 'AI models use portrait photos from the Student Profile section.', i: '' }
+ { t: 'Biometric Integration', d: 'Not configured. Enable only after a verified hardware/provider adapter is connected.', i: '' },
+ { t: 'Facial Recognition', d: 'Not configured. No face match can mark attendance until a verified server-side identity service is connected.', i: '' }
  ].map(r => (
  <div key={r.t} style={{ display:'flex', gap:12 }}>
  <span style={{ fontSize:18 }}>{r.i}</span>
  <div>
- <div style={{ color: '#fff', fontSize: 13, fontWeight: 700 }}>{r.t}</div>
+ <div style={{ color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700 }}>{r.t}</div>
  <div style={{ color: C.muted, fontSize: 12, marginTop: 2, lineHeight:1.5 }}>{r.d}</div>
  </div>
  </div>
