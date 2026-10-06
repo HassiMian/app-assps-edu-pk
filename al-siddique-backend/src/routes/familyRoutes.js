@@ -1,7 +1,7 @@
 const express = require('express')
 const { randomUUID } = require('crypto')
 const router = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -147,6 +147,7 @@ router.post('/:code/students/:studentId', protect, canManageFamilies, async (req
     if (!code || !Number.isInteger(studentId)) return res.status(400).json({ success: false, message: 'Valid family code and student are required.' })
 
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const familyResult = await client.query(`
       SELECT id, code FROM family_groups WHERE school_id = $1 AND code = $2 LIMIT 1
     `, [schoolId, code])

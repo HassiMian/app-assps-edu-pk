@@ -188,12 +188,13 @@ router.put('/attendance/bulk', protect, canManageStaff, async (req, res) => {
     normalized.push({ employeeId, status, note })
   }
 
-  const { pool } = require('../config/database')
+  const { pool, applyTenantContext } = require('../config/database')
   const client = await pool.connect()
   try {
     await ensureEmployeeAttendanceSchema()
     const schoolId = currentSchoolId(req)
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const employeeIds = [...new Set(normalized.map(item => item.employeeId))]
     const owned = await client.query('SELECT id FROM employees WHERE school_id=$1 AND is_active=true AND id = ANY($2::int[])', [schoolId, employeeIds])
     if (owned.rowCount !== employeeIds.length) {

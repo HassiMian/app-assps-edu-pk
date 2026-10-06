@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const router = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {
@@ -316,6 +316,7 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     if (supportsStudentTenant) studentColumns.push('tenant_id')
 
     await client.query('BEGIN')
+    await applyTenantContext(client)
 
     // 1. Bulk pre-validate all requested student IDs
     const requestedIds = [...new Set(normalizedRecords.map(r => Number(r.student_id)).filter(id => Number.isInteger(id)))]

@@ -1928,3 +1928,16 @@ assertContains(
   "const { query } = require('../config/database')",
   'notification routes must execute through the RLS-aware database wrapper.'
 )
+
+for (const routePath of [
+  'al-siddique-backend/src/routes/familyRoutes.js',
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  'al-siddique-backend/src/routes/dateSheetRoutes.js',
+]) {
+  assertContains(
+    routePath,
+    'applyTenantContext(client)',
+    'tenant-bound transactions must apply the active request RLS context before data access.'
+  )
+}

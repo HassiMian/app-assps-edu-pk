@@ -39,6 +39,21 @@ pool.connect((err, client, release) => {
 const { AsyncLocalStorage } = require('async_hooks');
 const tenantContext = new AsyncLocalStorage();
 
+async function applyTenantContext(client) {
+  const context = tenantContext.getStore()
+  if (!context || !context.rlsEnabled) return false
+
+  await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
+  if (context.isSuperAdmin) {
+    await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
+    await client.query(`SELECT set_config('app.tenant_id', '', true)`)
+  } else {
+    await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
+    await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId ? String(context.tenantId) : ''])
+  }
+  return true
+}
+
 // Helper: simple query
 async function query(text, params) {
   const start = Date.now()
@@ -48,14 +63,7 @@ async function query(text, params) {
     const client = await pool.connect()
     try {
       await client.query('BEGIN')
-      await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
-      
-      if (context.isSuperAdmin) {
-        await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
-      } else if (context.tenantId) {
-        await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId])
-        await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
-      }
+      await applyTenantContext(client)
 
       const res = await client.query(text, params)
       await client.query('COMMIT')
@@ -90,4 +98,4 @@ async function query(text, params) {
   }
 }
 
-module.exports = { pool, query, tenantContext }
+module.exports = { pool, query, tenantContext, applyTenantContext }

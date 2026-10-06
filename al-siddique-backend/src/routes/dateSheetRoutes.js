@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -90,6 +90,7 @@ router.put('/bulk', protect, canManage, async (req, res) => {
   try {
     await ensureSchema()
     await client.query('BEGIN')
+    await applyTenantContext(client)
     await client.query('DELETE FROM date_sheet_records WHERE school_id = $1 AND session = $2 AND term = $3', [schoolId, session, term])
     for (const entry of normalized) {
       const row = entry.value
