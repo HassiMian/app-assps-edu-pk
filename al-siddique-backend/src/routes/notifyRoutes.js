@@ -219,6 +219,7 @@ async function ensureNotificationColumns() {
     ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
     ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS read_at TIMESTAMP;
     ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS provider_sid VARCHAR(128);
+    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS archived_at TIMESTAMP;
     CREATE INDEX IF NOT EXISTS idx_notification_log_school_role_sent ON notification_log(school_id, recipient_role, sent_at DESC);
   `).catch(() => {})
 }
@@ -453,6 +454,7 @@ router.get('/inbox', protect, async (req, res) => {
       FROM notification_log n
       WHERE n.school_id = $1
         ${scope.clause}
+        AND n.archived_at IS NULL
       ORDER BY COALESCE(read_at, sent_at) DESC
       LIMIT 50
     `, params)
@@ -471,6 +473,31 @@ router.get('/inbox', protect, async (req, res) => {
   }
 })
 
+
+// PUT /api/notify/:id/archive — persist bell dismissal for the current recipient scope
+router.put('/:id/archive', protect, async (req, res) => {
+  try {
+    await ensureNotificationColumns()
+    const schoolId = currentSchoolId(req)
+    const recipientRole = req.user?.role || null
+    const scope = scopedNotificationPredicate(recipientRole, 2)
+    const params = scopedNotificationParams(schoolId, recipientRole, req.user?.id, scope)
+    const idParam = params.length + 1
+    const result = await pool.query(`
+      UPDATE notification_log n
+      SET archived_at = COALESCE(archived_at, NOW()), read_at = COALESCE(read_at, NOW())
+      WHERE n.school_id = $1
+        ${scope.clause}
+        AND n.id = $${idParam}
+      RETURNING id, archived_at, read_at
+    `, [...params, Number(req.params.id)])
+    if (!result.rowCount) return res.status(404).json({ success: false, message: 'Notification not found.' })
+    res.json({ success: true, data: result.rows[0] })
+  } catch (err) {
+    console.error('Notification archive error:', err)
+    res.status(500).json({ success: false, message: 'Failed to dismiss notification.' })
+  }
+})
 
 // PUT /api/notify/:id/read
 router.put('/:id/read', protect, async (req, res) => {

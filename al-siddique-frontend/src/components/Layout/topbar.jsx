@@ -187,7 +187,16 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  setNotifs(n => n.map(x => ({ ...x, unread: false })))
  } catch { /* leave local inbox unchanged if read-all fails */ }
  }
- const dismiss = (id) => setNotifs(n => n.filter(x => x.id !== id))
+ const markRead = async (id) => {
+ setNotifs(items => items.map(item => item.id === id ? { ...item, unread:false } : item))
+ try { await api.put(`/api/notify/${id}/read`) }
+ catch { void syncNotifications() }
+ }
+ const dismiss = async (id) => {
+ setNotifs(items => items.filter(item => item.id !== id))
+ try { await api.put(`/api/notify/${id}/archive`) }
+ catch { void syncNotifications() }
+ }
 
  useEffect(() => {
  // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -498,22 +507,22 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  backdropFilter: 'blur(24px)',
  border: '1px solid rgba(200,153,26,0.25)',
  borderRadius: 16,
- boxShadow: '0 20px 60px rgba(0,0,0,0.6)',
+ boxShadow: 'var(--apex-shadow-lg)',
  overflow: 'hidden',
  }}>
  {/* Header */}
  <div style={{
  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
  padding: '14px 16px',
- borderBottom: '1px solid rgba(255,255,255,0.07)',
+ borderBottom: '1px solid var(--apex-border-subtle)',
  }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
  <Bell size={15} color="var(--apex-action-primary)" />
  <span style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 14 }}>Notifications</span>
  {unreadCount > 0 && (
  <span style={{
- background: 'rgba(200,153,26,0.2)', color: 'var(--apex-action-highlight)',
- border: '1px solid rgba(200,153,26,0.35)',
+ background: 'color-mix(in srgb, var(--apex-action-primary) 9%, var(--apex-bg-surface-solid))', color: 'var(--apex-action-primary)',
+ border: '1px solid var(--apex-border-default)',
  borderRadius: 6, padding: '1px 7px', fontSize: 11, fontWeight: 700,
  }}>{unreadCount} new</span>
  )}
@@ -545,8 +554,12 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  background: n.unread ? 'color-mix(in srgb, var(--apex-action-primary) 6%, transparent)' : 'transparent',
  transition: 'background 0.15s',
  }}
- onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
- onMouseLeave={e => e.currentTarget.style.background = n.unread ? 'rgba(200,153,26,0.05)' : 'transparent'}
+ role="button"
+ tabIndex={0}
+ onClick={() => { if (n.unread) void markRead(n.id) }}
+ onKeyDown={e => { if ((e.key === 'Enter' || e.key === ' ') && n.unread) void markRead(n.id) }}
+ onMouseEnter={e => e.currentTarget.style.background = 'var(--apex-bg-subtle)'}
+ onMouseLeave={e => e.currentTarget.style.background = n.unread ? 'color-mix(in srgb, var(--apex-action-primary) 6%, transparent)' : 'transparent'}
  >
  <span style={{ fontSize: 20, lineHeight: 1.3, flexShrink: 0 }}>{n.icon}</span>
  <div style={{ flex: 1, minWidth: 0 }}>
@@ -558,10 +571,10 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  <span style={{ color: 'var(--apex-text-tertiary)', fontSize: 11 }}>{n.time}</span>
  </div>
  <button
- onClick={(e) => { e.stopPropagation(); dismiss(n.id) }}
+ onClick={(e) => { e.stopPropagation(); void dismiss(n.id) }}
  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--apex-text-tertiary)', padding: 2, flexShrink: 0 }}
- onMouseEnter={e => e.currentTarget.style.color = '#FF375F'}
- onMouseLeave={e => e.currentTarget.style.color = '#556070'}
+ onMouseEnter={e => e.currentTarget.style.color = 'var(--apex-action-danger)'}
+ onMouseLeave={e => e.currentTarget.style.color = 'var(--apex-text-tertiary)'}
  >
  <X size={13} />
  </button>
@@ -570,16 +583,16 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  </div>
 
  {/* Footer */}
- <div style={{ padding: '10px 16px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+ <div style={{ padding: '10px 16px', borderTop: '1px solid var(--apex-border-subtle)' }}>
  <button
  onClick={() => { navigate('/notifications'); setShowNotifs(false) }}
  style={{
- width: '100%', padding: '9px', borderRadius: 10, border: '1px solid rgba(200,153,26,0.25)',
- background: 'rgba(200,153,26,0.08)', color: 'var(--apex-action-highlight)', fontSize: 13, fontWeight: 600,
+ width: '100%', padding: '9px', borderRadius: 10, border: '1px solid var(--apex-border-default)',
+ background: 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))', color: 'var(--apex-action-primary)', fontSize: 13, fontWeight: 600,
  cursor: 'pointer', transition: 'all 0.15s',
  }}
- onMouseEnter={e => e.currentTarget.style.background = 'rgba(200,153,26,0.15)'}
- onMouseLeave={e => e.currentTarget.style.background = 'rgba(200,153,26,0.08)'}
+ onMouseEnter={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--apex-action-primary) 12%, var(--apex-bg-surface-solid))'}
+ onMouseLeave={e => e.currentTarget.style.background = 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))'}
  >
  View All Notifications →
  </button>
