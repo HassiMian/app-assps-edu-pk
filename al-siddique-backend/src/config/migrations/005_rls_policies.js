@@ -86,6 +86,8 @@ async function up() {
       [table]
     )
     if (!schoolIdColumn.rowCount) continue
+    await query(`ALTER TABLE ${table} ENABLE ROW LEVEL SECURITY;`)
+    await query(`ALTER TABLE ${table} FORCE ROW LEVEL SECURITY;`)
     await query(`DROP POLICY IF EXISTS tenant_isolation_policy ON ${table};`)
     await query(`
       CREATE POLICY tenant_isolation_policy ON ${table}
