@@ -40,3 +40,16 @@ For every independently approved review, record a stable `evidenceId`, a real `r
 
 ## Canonical-write policy
 Even after evidence completion, canonical writes remain blocked until the separate registry write flag is explicitly enabled after a single-paper canary execution review. H0/H1 do not authorize writes.
+
+## 2026-10-06 evidence refresh
+The production publisher evidence pointer is now bound to the resealed G3 manifest SHA-256:
+`da182ee85839cdb2b123b408093e68cea48cccf3fadbb3f15b428de3cb47d2c8`.
+
+Additional review artifacts are sealed in `/root/secure-archive/apex-paper-v6g3-review-pack-20261006/`:
+- `question-bank-baseline.txt` — production Question Bank baseline is empty; approved question count is 0.
+- `biology9-ch1-academic-review-queue.json` — 50 source-referenced Chapter 1 review items (25 English, 25 Urdu), with no invented question text and `DO_NOT_INSERT` live-bank policy.
+- `biology9-ch1-conflict-review-dossier.json` — the two open Chapter 1 academic/source conflicts with required named reviewer outputs.
+- `operational-review-evidence-draft.json` — technical evidence matrix; technical PASS is explicitly not independent approval.
+- `SHA256SUMS.final` — cryptographic seal for the review pack.
+
+The publisher verifier now reports only genuine approval/release blockers. There are no publisher artifact hash/count/source-coordinate mismatch errors in the G3 snapshot.
