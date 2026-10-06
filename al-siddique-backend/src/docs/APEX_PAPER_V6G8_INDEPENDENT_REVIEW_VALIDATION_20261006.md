@@ -60,3 +60,8 @@ No human/reviewer identity, academic decision, publisher signature, or approval 
 - Canonical registry write enablement remains false.
 
 At this checkpoint, remaining progression requires real independent academic/publisher review evidence; no further technical step is allowed to synthesize or self-approve those decisions.
+
+## Deterministic full-regression runner
+`./scripts/run-paper-studio-full-regression-v6g8.sh` now creates a fresh timestamped test database, launches a backend on an isolated test port, verifies the protected Paper Studio router, runs the 61-test suite once, and automatically destroys the synthetic DB/process on exit.
+
+A harness bug found during development is explicitly fixed: sourcing the live `.env` overwrote the shell variable `PORT` with production `5000`, causing tests to hit production while the isolated server listened elsewhere. The runner now uses immutable `TEST_RUN_PORT` for server and test targeting. Proof run: 61/61 PASS on isolated port 5038.
