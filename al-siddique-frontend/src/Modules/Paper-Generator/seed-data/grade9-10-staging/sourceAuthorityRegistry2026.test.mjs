@@ -36,3 +36,14 @@ test('release guards fail closed on unresolved evidence',()=>{
  assert(data.releaseGuards.includes('BLOCK_PAGE_METADATA_IF_PAGE_NOT_VISUALLY_VERIFIED'));
  assert(data.releaseGuards.includes('BLOCK_ACADEMIC_REVIEW_CLAIM_WITHOUT_REVIEW_EVIDENCE'));
 });
+
+test('source promotion is fail-closed and ordered before authoring',()=>{
+ assert.deepEqual(data.sourcePromotionStates,['DISCOVERED','OFFICIAL_CATALOG_LINK_VERIFIED','BYTES_HASHED','VISUALLY_INSPECTED','CONTENT_MAP_VERIFIED','AUTHORING_ELIGIBLE']);
+ assert.match(data.promotionRules['BYTES_HASHED->VISUALLY_INSPECTED'],/visually inspected/i);
+});
+
+test('language acquisition queue cannot skip byte hashing',()=>{
+ assert.equal(data.currentAcquisitionQueue.length,6);
+ assert(data.currentAcquisitionQueue.every(x=>x.state==='OFFICIAL_CATALOG_LINK_VERIFIED'));
+ assert(data.currentAcquisitionQueue.every(x=>x.nextGate==='BYTES_HASHED'));
+});

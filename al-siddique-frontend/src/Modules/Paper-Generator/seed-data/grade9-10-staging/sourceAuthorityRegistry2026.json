@@ -72,5 +72,78 @@
     "BLOCK_PATTERN_APPROVAL_IF_ONLY_THIRD_PARTY_REPRODUCTION_EXISTS",
     "BLOCK_UNIVERSAL_COMPLETION_IF_ANY_IN_SCOPE_TRACK_OR_MEDIUM_IS_MISSING",
     "BLOCK_ACADEMIC_REVIEW_CLAIM_WITHOUT_REVIEW_EVIDENCE"
+  ],
+  "sourcePromotionStates": [
+    "DISCOVERED",
+    "OFFICIAL_CATALOG_LINK_VERIFIED",
+    "BYTES_HASHED",
+    "VISUALLY_INSPECTED",
+    "CONTENT_MAP_VERIFIED",
+    "AUTHORING_ELIGIBLE"
+  ],
+  "promotionRules": {
+    "DISCOVERED->OFFICIAL_CATALOG_LINK_VERIFIED": "authority page directly links the artifact and grade/subject/edition identity is resolved",
+    "OFFICIAL_CATALOG_LINK_VERIFIED->BYTES_HASHED": "artifact bytes acquired and SHA-256 recorded",
+    "BYTES_HASHED->VISUALLY_INSPECTED": "relevant pages visually inspected; document identity and page anchors verified",
+    "VISUALLY_INSPECTED->CONTENT_MAP_VERIFIED": "chapter/grammar competency map built without copying protected passages",
+    "CONTENT_MAP_VERIFIED->AUTHORING_ELIGIBLE": "required source anchors exist and no unresolved edition/medium conflict remains"
+  },
+  "currentAcquisitionQueue": [
+    {
+      "id": "G9-ENGLISH-TEXTBOOK-2025-26",
+      "grade": 9,
+      "subject": "English",
+      "editionOrSession": "2025-26",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
+      "nextGate": "BYTES_HASHED"
+    },
+    {
+      "id": "G9-URDU-TEXTBOOK-2025-26",
+      "grade": 9,
+      "subject": "Urdu",
+      "editionOrSession": "2025-26",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
+      "nextGate": "BYTES_HASHED"
+    },
+    {
+      "id": "G9-10-ENGLISH-GRAMMAR-2023-24",
+      "gradeRange": "9-10",
+      "subject": "English Grammar & Composition",
+      "editionOrSession": "2023-24",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
+      "nextGate": "BYTES_HASHED"
+    },
+    {
+      "id": "G9-10-URDU-QUAID-E-INSHA-2023-24",
+      "gradeRange": "9-10",
+      "subject": "Urdu Quaid-e-Insha",
+      "editionOrSession": "2023-24",
+      "requiredRole": "ACADEMIC_CONTENT",
+      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
+      "nextGate": "BYTES_HASHED"
+    },
+    {
+      "id": "G9-2026-MULTAN-ENGLISH-ACTUAL",
+      "grade": 9,
+      "subject": "English",
+      "board": "Multan",
+      "exam": "First Annual 2026",
+      "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
+      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
+      "nextGate": "BYTES_HASHED"
+    },
+    {
+      "id": "G9-2026-MULTAN-URDU-ACTUAL",
+      "grade": 9,
+      "subject": "Urdu",
+      "board": "Multan",
+      "exam": "First Annual 2026",
+      "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
+      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
+      "nextGate": "BYTES_HASHED"
+    }
   ]
 }
