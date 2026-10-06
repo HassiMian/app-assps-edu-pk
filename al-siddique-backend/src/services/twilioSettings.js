@@ -1,5 +1,5 @@
 const twilio = require('twilio')
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 
 function normalizeWhatsAppFrom(value) {
   const raw = String(value || '').trim()
@@ -60,7 +60,7 @@ async function getTwilioConfigForSchool(schoolId) {
   }
 
   const fallback = normalizeTwilioConfig({}, process.env)
-  const result = await pool.query(
+  const result = await query(
     'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
     [normalizedSchoolId]
   )

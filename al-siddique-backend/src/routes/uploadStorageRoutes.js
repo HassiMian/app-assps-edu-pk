@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 const multer = require('multer')
-const { pool, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -50,7 +50,7 @@ function cleanupFile(file) {
 let tenantBrandingSchemaReady = null
 async function ensureTenantBrandingTable() {
   if (tenantBrandingSchemaReady) return true
-  const result = await pool.query("SELECT to_regclass('public.tenant_branding') AS table_name")
+  const result = await query("SELECT to_regclass('public.tenant_branding') AS table_name")
   if (!result.rows[0]?.table_name) {
     const err = new Error('tenant_branding schema migration is not applied.')
     err.code = 'BRANDING_SCHEMA_NOT_READY'
@@ -88,7 +88,7 @@ async function resolveTenantIdForBranding(req) {
   const schoolId = currentSchoolId(req)
   if (!schoolId) return ''
 
-  const result = await pool.query('SELECT tenant_id FROM schools WHERE id = $1 LIMIT 1', [schoolId])
+  const result = await query('SELECT tenant_id FROM schools WHERE id = $1 LIMIT 1', [schoolId])
   return String(result.rows[0]?.tenant_id || '').trim()
 }
 

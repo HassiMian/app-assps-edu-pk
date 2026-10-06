@@ -3,7 +3,7 @@
 
 const express = require('express')
 const router = express.Router()
-const { pool, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, currentTenantId } = require('../middleware/tenant')
 const {
@@ -123,7 +123,7 @@ function parseCookieHeader(header = '') {
 let tenantBrandingSchemaReady = null
 async function ensureTenantBrandingTable() {
   if (tenantBrandingSchemaReady) return true
-  const result = await pool.query("SELECT to_regclass('public.tenant_branding') AS table_name")
+  const result = await query("SELECT to_regclass('public.tenant_branding') AS table_name")
   if (!result.rows[0]?.table_name) {
     const err = new Error('tenant_branding schema migration is not applied.')
     err.code = 'SETTINGS_SCHEMA_NOT_READY'
@@ -150,7 +150,7 @@ async function resolveBrandingTenant(req) {
   const cookieUserId = cookies.userId || null
 
   if (cookieUserId) {
-    const result = await pool.query(
+    const result = await query(
       `SELECT
          u.id,
          u.role,
@@ -197,7 +197,7 @@ function pickSetting(incoming, existing, key, fallback = '') {
 let settingsSchemaReady = null
 async function ensureSettingsTable() {
   if (settingsSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT
       to_regclass('public.settings') AS settings_table,
       to_regclass('public.organizations') AS organizations_table,
@@ -225,7 +225,7 @@ router.get('/branding', protect, async (req, res) => {
       return res.status(401).json({ success: false, message: 'Unauthorized' })
     }
 
-    const result = await pool.query(
+    const result = await query(
       `SELECT
          id,
          tenant_id AS "tenantId",
@@ -332,7 +332,7 @@ router.get('/', protect, async (req, res) => {
     await ensureSettingsTable()
     const schoolId = Number(currentSchoolId(req) || 0)
     if (!schoolId) return res.status(403).json({ success: false, message: 'School context is required.' })
-    const schoolResult = await pool.query(
+    const schoolResult = await query(
       `SELECT id, code, COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name,
               address, logo_url, subscription_plan, feature_flags
        FROM schools WHERE id = $1 LIMIT 1`,
@@ -343,7 +343,7 @@ router.get('/', protect, async (req, res) => {
     const schoolCode = canonicalSchool.code || null
 
     // Now query the settings
-    const result = await pool.query(`
+    const result = await query(`
       SELECT * FROM settings
       WHERE school_id = $1
       ORDER BY id DESC
@@ -406,7 +406,7 @@ router.put('/', protect, canManageSettings, async (req, res) => {
     await ensureSettingsTable()
     let schoolCode = null
     try {
-      const schoolResult = await pool.query(
+      const schoolResult = await query(
         'SELECT code FROM schools WHERE id = $1 LIMIT 1',
         [currentSchoolId(req)]
       )
@@ -415,7 +415,7 @@ router.put('/', protect, canManageSettings, async (req, res) => {
       console.warn('Could not resolve updated school code:', err.message)
     }
     const incoming = req.body && typeof req.body === 'object' ? req.body : {}
-    const existingResult = await pool.query(
+    const existingResult = await query(
       `SELECT school_name, school_address, school_phone, school_email, principal_name,
               academic_year, fee_due_date, attendance_threshold, school_logo, twilio_config,
               school_urdu, show_urdu_on_login, module_access, school_access, superapp_modules, branding_config
@@ -425,7 +425,7 @@ router.put('/', protect, canManageSettings, async (req, res) => {
       [currentSchoolId(req)]
     )
     const existing = existingResult.rows[0] || {}
-    const existingTwilio = await pool.query(
+    const existingTwilio = await query(
       'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
       [currentSchoolId(req)]
     )
@@ -445,7 +445,7 @@ router.put('/', protect, canManageSettings, async (req, res) => {
     brandingConfigToSave = processBrandingConfig(brandingConfigToSave, schoolId)
 
     // Insert or update settings
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO settings (
         school_id, school_name, school_address, school_phone, school_email,
         principal_name, academic_year, fee_due_date, attendance_threshold,
@@ -490,7 +490,7 @@ router.put('/', protect, canManageSettings, async (req, res) => {
       brandingConfigToSave,
     ])
 
-    await pool.query(
+    await query(
       `UPDATE schools
        SET
          school_name = COALESCE($1, school_name),
@@ -529,7 +529,7 @@ router.get('/twilio', protect, canManageSettings, async (req, res) => {
   try {
     await ensureSettingsTable()
     const schoolId = currentSchoolId(req)
-    const result = await pool.query(
+    const result = await query(
       'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
       [schoolId]
     )
@@ -556,7 +556,7 @@ router.put('/twilio', protect, canManageSettings, async (req, res) => {
   try {
     await ensureSettingsTable()
     const schoolId = currentSchoolId(req)
-    const existing = await pool.query(
+    const existing = await query(
       'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
       [schoolId]
     )
@@ -565,10 +565,10 @@ router.put('/twilio', protect, canManageSettings, async (req, res) => {
       ...(req.body && typeof req.body === 'object' ? req.body : {}),
       auth_token: req.body?.auth_token || req.body?.authToken || existing.rows[0]?.twilio_config?.auth_token || existing.rows[0]?.twilio_config?.authToken || '',
     })
-    const canonicalSchool = await pool.query("SELECT COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name FROM schools WHERE id = $1 LIMIT 1", [schoolId])
+    const canonicalSchool = await query("SELECT COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name FROM schools WHERE id = $1 LIMIT 1", [schoolId])
     const schoolName = String(req.body?.school_name || canonicalSchool.rows[0]?.school_name || '').trim()
     if (!schoolName) return res.status(422).json({ success: false, message: 'School name is required before updating messaging settings.' })
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO settings (school_id, school_name, twilio_config)
       VALUES ($1, $2, $3)
       ON CONFLICT (school_id) DO UPDATE SET
@@ -597,7 +597,7 @@ router.get('/twilio/test', protect, canManageSettings, async (req, res) => {
   try {
     await ensureSettingsTable()
     const schoolId = currentSchoolId(req)
-    const result = await pool.query(
+    const result = await query(
       'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
       [schoolId]
     )
@@ -623,10 +623,10 @@ router.patch('/logo', protect, canManageSettings, async (req, res) => {
       school_logo = saveBase64Image(school_logo, schoolId, 'logo')
     }
     await ensureSettingsTable()
-    const canonicalSchool = await pool.query("SELECT COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name FROM schools WHERE id = $1 LIMIT 1", [schoolId])
+    const canonicalSchool = await query("SELECT COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name FROM schools WHERE id = $1 LIMIT 1", [schoolId])
     const schoolName = String(req.body?.school_name || canonicalSchool.rows[0]?.school_name || '').trim()
     if (!schoolName) return res.status(422).json({ success: false, message: 'School name is required before updating the logo.' })
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO settings (school_id, school_name, school_logo)
       VALUES ($1, $2, $3)
       ON CONFLICT (school_id) DO UPDATE SET
@@ -664,7 +664,7 @@ router.get('/public', async (req, res) => {
       const schoolSql = schoolQuery === 'code'
         ? 'SELECT id, code, status, subscription_plan, feature_flags FROM schools WHERE LOWER(code) = LOWER($1) LIMIT 1'
         : 'SELECT id, code, status, subscription_plan, feature_flags FROM schools WHERE id = $1 LIMIT 1'
-      const schoolResult = await pool.query(schoolSql, [schoolValue])
+      const schoolResult = await query(schoolSql, [schoolValue])
       school = schoolResult.rows[0] || null
     } catch (err) {
       // schools table might not exist yet in single-tenant setups
@@ -674,7 +674,7 @@ router.get('/public', async (req, res) => {
     let branchSettings = null;
     let branchSchoolId = null;
     if (!school && requestedSchoolCode) {
-      const allSettings = await pool.query('SELECT school_id, school_access FROM settings WHERE school_access IS NOT NULL');
+      const allSettings = await query('SELECT school_id, school_access FROM settings WHERE school_access IS NOT NULL');
       for (const row of allSettings.rows) {
         if (!Array.isArray(row.school_access)) continue;
         const branch = row.school_access.find(b => b.schoolCode && b.schoolCode.toLowerCase() === requestedSchoolCode.toLowerCase() && b.active);
@@ -690,7 +690,7 @@ router.get('/public', async (req, res) => {
       return res.status(404).json({ success: false, message: 'School not found.' })
     }
     const settingsSchoolId = school ? school.id : (branchSchoolId || 1)
-    const result = await pool.query(
+    const result = await query(
       'SELECT school_name, school_address, school_phone, school_email, school_logo, principal_name, school_urdu, show_urdu_on_login, superapp_modules, branding_config FROM settings WHERE school_id = $1 LIMIT 1',
       [settingsSchoolId]
     )

@@ -7,7 +7,7 @@ const multer = require('multer')
 const router = express.Router()
 
 const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const {
   getAiEnvConfig,
@@ -284,14 +284,14 @@ router.post('/notify-admin', protect, requireRoles('teacher', 'admin', 'principa
     sql += tenant.clause
     params.push(...tenant.params)
 
-    const result = await pool.query(sql, params)
+    const result = await query(sql, params)
     const count = parseInt(result.rows[0].count, 10) || 0
 
     const message = `Paper for ${subjectName} (${classLevel}) is saved. Number of students is ${count}, so ${count} prints are needed.`
 
     // Insert into notification_log
     // Ensure table structure exists implicitly or assume it does
-    await pool.query(`
+    await query(`
       INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
       VALUES ($1, 'admin', 'Paper Saved by Teacher', $2, 'info', NOW())
     `, [schoolId, message])

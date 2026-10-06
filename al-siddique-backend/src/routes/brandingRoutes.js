@@ -3,7 +3,7 @@ const router = express.Router()
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
-const { pool, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect } = require('../middleware/auth')
 
 const canManageBranding = (req, res, next) => {
@@ -56,7 +56,7 @@ function publicAssetUrl(value) {
 }
 
 async function loadCurrentSchoolSettings(schoolId) {
-  const result = await pool.query(
+  const result = await query(
     `SELECT
        s.id AS school_id,
        s.tenant_id,

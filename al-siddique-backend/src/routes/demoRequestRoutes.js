@@ -1,6 +1,6 @@
 ﻿const express = require('express')
 const router = express.Router()
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -9,7 +9,7 @@ const canReviewDemoRequests = requireRoles('super_admin', 'admin', 'principal')
 let demoRequestsSchemaReady = null
 async function ensureDemoRequestsTable() {
   if (demoRequestsSchemaReady) return true
-  const result = await pool.query("SELECT to_regclass('public.demo_requests') AS table_name")
+  const result = await query("SELECT to_regclass('public.demo_requests') AS table_name")
   if (!result.rows[0]?.table_name) {
     const err = new Error('demo_requests schema migration is not applied.')
     err.code = 'DEMO_REQUEST_SCHEMA_NOT_READY'
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
       })
     }
 
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO demo_requests (
         school_id, school_name, contact_name, phone, email, city, students_count, message, status
       ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'pending_approval')
@@ -86,7 +86,7 @@ router.get('/', protect, canReviewDemoRequests, async (req, res) => {
       sql += ` AND status = $${params.length}`
     }
     sql += ' ORDER BY created_at DESC LIMIT 100'
-    const result = await pool.query(sql, params)
+    const result = await query(sql, params)
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Demo request list error:', err.message)
@@ -119,7 +119,7 @@ router.patch('/:id/status', protect, canReviewDemoRequests, async (req, res) => 
     }
     sql += ' RETURNING *'
 
-    const result = await pool.query(sql, params)
+    const result = await query(sql, params)
 
     if (!result.rows.length) {
       return res.status(404).json({ success: false, message: 'Demo request not found.' })

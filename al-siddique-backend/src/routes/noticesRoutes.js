@@ -3,7 +3,7 @@
 
 const express = require('express')
 const router = express.Router()
-const { pool } = require('../config/database')
+const { query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
@@ -20,7 +20,7 @@ function requireNoticeSchoolContext(req, res) {
 let noticesSchemaReady = null
 async function ensureNoticesTable() {
   if (noticesSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT COUNT(*)::int AS count
     FROM information_schema.columns
     WHERE table_schema = 'public'
@@ -78,7 +78,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), asyn
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)
     if (!schoolId) return
-    const result = await pool.query(
+    const result = await query(
       'SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 50',
       [schoolId]
     )
@@ -102,7 +102,7 @@ router.post('/', protect, canManageNotices, async (req, res) => {
     if (!schoolId) return
     const issuedBy = notice.issuedBy || String(req.user?.name || req.user?.email || '').trim()
     if (!issuedBy) return res.status(422).json({ success: false, message: 'Notice issuer identity is required.' })
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO notices (
         school_id, title, content, issued_by, recipient_type, teacher_ids,
         mentioned_teacher_ids, template_key, language, content_english, content_urdu,
@@ -146,7 +146,7 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
     if (!schoolId) return
     const issuedBy = notice.issuedBy || String(req.user?.name || req.user?.email || '').trim()
     if (!issuedBy) return res.status(422).json({ success: false, message: 'Notice issuer identity is required.' })
-    const result = await pool.query(`
+    const result = await query(`
       UPDATE notices
       SET title = $1,
           content = $2,
@@ -199,7 +199,7 @@ router.delete('/:id', protect, canManageNotices, async (req, res) => {
     await ensureNoticesTable()
     const schoolId = requireNoticeSchoolContext(req, res)
     if (!schoolId) return
-    const result = await pool.query(
+    const result = await query(
       'DELETE FROM notices WHERE id = $1 AND school_id = $2',
       [req.params.id, schoolId]
     )

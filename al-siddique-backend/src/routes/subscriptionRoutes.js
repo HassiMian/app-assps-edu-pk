@@ -7,7 +7,7 @@ const router = express.Router()
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
-const { pool, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { sendRejectionEmail } = require('../services/emailService')
 const { generateSchoolAdminCredentials } = require('../services/apexCredentials')
@@ -54,7 +54,7 @@ function generateRequestId() {
 let subscriptionRequestSchemaReady = null
 async function ensureSubscriptionRequestFormColumns() {
   if (subscriptionRequestSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT COUNT(*)::int AS count
     FROM information_schema.columns
     WHERE table_schema='public' AND table_name='subscription_requests'
@@ -93,7 +93,7 @@ async function createSubscriptionRequestFromBody({ body, file }) {
   const requestId = generateRequestId()
   const savedTransactionId = transactionId || requestId
 
-  const result = await pool.query(`
+  const result = await query(`
     INSERT INTO subscription_requests (
       request_id, plan_id, plan_name, plan_price,
       owner_name, school_name, school_address, contact_number,
@@ -163,7 +163,7 @@ router.post('/', upload.single('screenshot'), async (req, res) => {
 
     const requestId = generateRequestId()
 
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO subscription_requests (
         request_id, owner_name, school_name, school_address, contact_number,
         email, city, selected_plan, billing_cycle, payment_method,
@@ -234,7 +234,7 @@ router.get('/', protect, requireRoles('super_admin'), async (req, res) => {
 
     queryText += ' ORDER BY created_at DESC'
 
-    const result = await pool.query(queryText, queryParams)
+    const result = await query(queryText, queryParams)
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Admin fetch subscriptions error:', err.message)
@@ -247,7 +247,7 @@ router.get('/', protect, requireRoles('super_admin'), async (req, res) => {
  */
 router.get('/:id', protect, requireRoles('super_admin'), async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [req.params.id])
+    const result = await query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [req.params.id])
     if (result.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Subscription request not found.' })
     }
@@ -405,7 +405,7 @@ router.post('/:id/reject', protect, requireRoles('super_admin'), async (req, res
     }
 
     // Fetch the request
-    const requestResult = await pool.query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [requestId])
+    const requestResult = await query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [requestId])
     if (requestResult.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Subscription request not found.' })
     }
@@ -417,7 +417,7 @@ router.post('/:id/reject', protect, requireRoles('super_admin'), async (req, res
     }
 
     // Update request
-    await pool.query(`
+    await query(`
       UPDATE subscription_requests 
       SET status = 'rejected', rejection_reason = $1, updated_at = NOW() 
       WHERE id = $2

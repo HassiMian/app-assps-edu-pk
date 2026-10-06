@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
-const { pool, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {
@@ -16,7 +16,7 @@ const canReadAdmissions = adminOrServiceScope('school.admissions.read')
 let admissionsSchemaReady = null
 async function ensureAdmissionsTable() {
   if (admissionsSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT COUNT(*)::int AS count
     FROM information_schema.columns
     WHERE table_schema='public' AND table_name='admissions'
@@ -96,7 +96,7 @@ router.post('/', async (req, res) => {
     }
 
     const placeholders = values.map((_, i) => `$${i + 1}`).join(',')
-    const result = await pool.query(
+    const result = await query(
       `INSERT INTO admissions (${columns.join(',')}) VALUES (${placeholders}) RETURNING id`,
       values
     )
@@ -110,7 +110,7 @@ router.post('/', async (req, res) => {
     // Send notifications to admins
     try {
       const msg = `New admission: ${student_name} for Class ${class_applying} (${parent_phone})`;
-      await pool.query(`
+      await query(`
         INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
         VALUES ($1, 'admin', 'New Admission Application', $2, 'info', NOW()),
                ($1, 'super_admin', 'New Admission Application', $2, 'info', NOW())
@@ -137,11 +137,11 @@ router.get('/', protect, canReadAdmissions, async (req, res) => {
       })
     }
     const result = req.user?.role !== 'super_admin'
-      ? await pool.query(
+      ? await query(
         `SELECT * FROM admissions WHERE school_id = $1 ORDER BY created_at DESC LIMIT 200`,
         [currentSchoolId(req)]
       )
-      : await pool.query(`SELECT * FROM admissions ORDER BY created_at DESC LIMIT 200`)
+      : await query(`SELECT * FROM admissions ORDER BY created_at DESC LIMIT 200`)
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Admissions list error:', err.message)
@@ -161,8 +161,8 @@ router.put('/:id/status', protect, canViewAdmissions, async (req, res) => {
 
     const schoolScope = req.user?.role === 'super_admin' ? null : Number(currentSchoolId(req) || 0);
     const check = schoolScope
-      ? await pool.query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, schoolScope])
-      : await pool.query('SELECT * FROM admissions WHERE id = $1', [id]);
+      ? await query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, schoolScope])
+      : await query('SELECT * FROM admissions WHERE id = $1', [id]);
     if (check.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Admission application not found.' });
     }
@@ -177,11 +177,11 @@ router.put('/:id/status', protect, canViewAdmissions, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Admission is missing school context and cannot be updated.' });
     }
 
-    await pool.query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [status, id, schoolId]);
+    await query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [status, id, schoolId]);
 
     // Log notification
     try {
-      await pool.query(`
+      await query(`
         INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
         VALUES ($1, 'admin', 'Admission Application Updated', $2, 'info', NOW()),
                ($1, 'super_admin', 'Admission Application Updated', $2, 'info', NOW())
@@ -205,8 +205,8 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
     const requestSchoolId = req.user?.role === 'super_admin' ? null : Number(currentSchoolId(req) || 0)
 
     const initial = requestSchoolId
-      ? await pool.query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, requestSchoolId])
-      : await pool.query('SELECT * FROM admissions WHERE id = $1', [id])
+      ? await query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, requestSchoolId])
+      : await query('SELECT * FROM admissions WHERE id = $1', [id])
     if (!initial.rows.length) {
       return res.status(404).json({ success: false, message: 'Admission application not found.' })
     }
@@ -382,7 +382,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
 
     // Notifications are best-effort and do not compromise the atomic admission transaction.
     try {
-      await pool.query(`
+      await query(`
         INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
         VALUES ($1, 'admin', 'Admission Approved', $2, 'success', NOW()),
                ($1, 'super_admin', 'Admission Approved', $2, 'success', NOW())

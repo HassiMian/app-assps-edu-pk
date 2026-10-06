@@ -1969,3 +1969,22 @@ for (const routePath of [
     'protected provisioning/settings transactions must apply tenant or super-admin RLS context.'
   )
 }
+
+for (const routePath of [
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  'al-siddique-backend/src/routes/demoRequestRoutes.js',
+  'al-siddique-backend/src/routes/noticesRoutes.js',
+  'al-siddique-backend/src/routes/paperRoute.js',
+  'al-siddique-backend/src/routes/schoolRoutes.js',
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+  'al-siddique-backend/src/services/twilioSettings.js',
+]) {
+  assertNotContains(
+    routePath,
+    /pool\.query/,
+    'request/service database access must flow through the RLS-aware query wrapper.'
+  )
+}

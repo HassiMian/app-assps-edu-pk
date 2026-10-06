@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
-const { pool, applyTenantContext } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 
 const canManageSchools = requireRoles('super_admin')
@@ -15,7 +15,7 @@ function normalizeSchoolCode(value) {
 let schoolSchemaReady = null
 async function ensureSchoolSchema() {
   if (schoolSchemaReady) return true
-  const result = await pool.query(`
+  const result = await query(`
     SELECT COUNT(*)::int AS count
     FROM information_schema.columns
     WHERE table_schema='public' AND table_name='schools'
@@ -33,7 +33,7 @@ async function ensureSchoolSchema() {
 router.get('/', protect, canManageSchools, async (req, res) => {
   try {
     await ensureSchoolSchema()
-    const result = await pool.query(
+    const result = await query(
       `SELECT id, name, code, status, subscription_plan, feature_flags, created_at, updated_at
        FROM schools
        ORDER BY id ASC`
@@ -48,7 +48,7 @@ router.get('/', protect, canManageSchools, async (req, res) => {
 router.get('/:id', protect, canManageSchools, async (req, res) => {
   try {
     await ensureSchoolSchema()
-    const result = await pool.query(
+    const result = await query(
       `SELECT id, name, code, status, subscription_plan, feature_flags, created_at, updated_at
        FROM schools WHERE id = $1 LIMIT 1`,
       [Number(req.params.id)]
@@ -190,7 +190,7 @@ router.put('/:id', protect, canManageSchools, async (req, res) => {
     }
 
     params.push(schoolId)
-    const result = await pool.query(
+    const result = await query(
       `UPDATE schools SET ${updates.join(', ')}, updated_at = NOW() WHERE id = $${paramIndex} RETURNING id, name, code, status, subscription_plan, feature_flags, created_at, updated_at`,
       params
     )
@@ -213,7 +213,7 @@ router.delete('/:id', protect, canManageSchools, async (req, res) => {
       return res.status(403).json({ success: false, message: 'Default school cannot be removed.' })
     }
 
-    const result = await pool.query('DELETE FROM schools WHERE id = $1 RETURNING id, name', [schoolId])
+    const result = await query('DELETE FROM schools WHERE id = $1 RETURNING id, name', [schoolId])
     if (!result.rows.length) {
       return res.status(404).json({ success: false, message: 'School not found.' })
     }
