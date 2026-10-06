@@ -11,6 +11,7 @@ import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { BadgeCheck, CreditCard, ReceiptText, Wallet, X } from 'lucide-react'
 import { renderVoucherCopyHtml } from './ViewChallans'
+import { btnPrimary, btnSecondary } from '../moduleStyles'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -734,7 +735,7 @@ function FeeModule() {
  const location = useLocation()
  const navigate = useNavigate()
  const { paperSettings } = usePaperStore()
- const { classNames } = useAcademicStore()
+ const { classNames, allSections } = useAcademicStore()
  const classOptions = classNames?.length ? classNames : ['Starter']
  const routeTab = useMemo(() => {
  if (location.pathname.includes('/fees/reporting')) return 'reports'
@@ -776,19 +777,25 @@ function FeeModule() {
  void loadFeeWorkspace()
  }, [])
 
- const addChallan = async () => {
+ const refreshChallans = async () => {
  try {
- const response = await api.get('/api/fees')
+ const response = await api.get('/api/fees', { skipCache:true })
  const items = response.data?.data || []
  setChallans(items.map(item => normalizeChallan(item, students)))
+ return items
  } catch (err) {
  console.error('Failed to reload challans', err)
+ return []
  }
+ }
+
+ const addChallan = async () => {
+ await refreshChallans()
  navigate('/fees/challans')
  }
 
  return (
- <div className="super-module-card" style={{ minHeight: '100vh', background: '#071e34', color: C.silver, fontFamily: 'Inter, sans-serif' }}>
+ <div style={{ minHeight:'100vh', background:'var(--apex-shell-gradient)', color:'var(--apex-text-primary)', fontFamily:'Inter, sans-serif' }}>
  {printChallan && (
  <PrintVoucher
  challan={printChallan}
@@ -808,7 +815,8 @@ function FeeModule() {
  <div className="super-module-card" style={{
  padding: '24px 26px',
  borderRadius: 26,
- background: 'linear-gradient(135deg, rgba(11,44,77,0.92), rgba(7,30,52,0.98))',
+ background:'var(--apex-bg-surface)',
+ boxShadow:'var(--apex-shadow-md)',
  border: `1px solid ${C.border}`,
  display: 'flex',
  flexWrap: 'wrap',
@@ -821,7 +829,7 @@ function FeeModule() {
  <CreditCard size={26} />
  </div>
  <div>
- <h1 style={{ margin: 0, fontSize: 28, color: '#fff', fontFamily: "'Playfair Display',serif", fontWeight: 800 }}>Fee Collection</h1>
+ <h1 style={{ margin:0, fontSize:28, color:'var(--apex-text-primary)', fontFamily: "'Playfair Display',serif", fontWeight: 800 }}>Fee Collection</h1>
  <p style={{ margin: '6px 0 0', color: C.muted, fontSize: 13 }}>Create challans, view collections, and manage defaulters.</p>
  </div>
  </div>
@@ -852,8 +860,10 @@ function FeeModule() {
  <ViewChallans
  challans={challans}
  classOptions={classOptions}
+ sectionOptions={allSections}
  onPrint={setPrintChallan}
  onPrintList={(type, data) => setPrintList({ type, data })}
+ onRefresh={refreshChallans}
  />
  )}
  {routeTab === 'reports' && <FeeReports challans={challans} students={students} />}
@@ -1136,22 +1146,58 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  )
 }
 
-function ViewChallans({ challans, classOptions, onPrint, onPrintList }) {
+function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, onPrintList, onRefresh }) {
  const [classFilter, setClassFilter] = useState('All')
  const [monthFilter, setMonthFilter] = useState('All')
  const [statusFilter, setStatusFilter] = useState('All')
+ const [sectionFilter, setSectionFilter] = useState('All')
+ const [yearFilter, setYearFilter] = useState('All')
  const [search, setSearch] = useState('')
+ const [pageSize, setPageSize] = useState(10)
+ const [page, setPage] = useState(1)
+ const [paymentTarget, setPaymentTarget] = useState(null)
+ const [paymentForm, setPaymentForm] = useState({ paid_amount:'', payment_mode:'cash', discount:'0', payment_note:'' })
+ const [paymentSaving, setPaymentSaving] = useState(false)
+ const [actionMessage, setActionMessage] = useState('')
 
  const filtered = useMemo(() => challans.filter(item => {
  if (classFilter !== 'All' && item.class !== classFilter) return false
+ if (sectionFilter !== 'All' && item.section !== sectionFilter) return false
+ if (yearFilter !== 'All' && String(item.year) !== String(yearFilter)) return false
  if (monthFilter !== 'All' && item.month !== monthFilter) return false
  if (statusFilter !== 'All' && item.status !== statusFilter) return false
  if (search && !item.student.toLowerCase().includes(search.toLowerCase()) && !item.gr.toLowerCase().includes(search.toLowerCase())) return false
  return true
- }), [challans, classFilter, monthFilter, statusFilter, search])
+ }), [challans, classFilter, sectionFilter, yearFilter, monthFilter, statusFilter, search])
 
- const totalAmount = filtered.reduce((sum, item) => sum + item.total, 0)
- const collectedAmount = filtered.reduce((sum, item) => sum + item.paid, 0)
+ const years = [...new Set(challans.map(item => String(item.year || '')).filter(Boolean))].sort((a,b)=>Number(b)-Number(a))
+ const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize))
+ const currentPage = Math.min(page, totalPages)
+ const pageRows = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+
+ const clearFilters = () => {
+ setClassFilter('All'); setSectionFilter('All'); setYearFilter('All'); setMonthFilter('All'); setStatusFilter('All'); setSearch(''); setPage(1)
+ }
+ const openPayment = challan => {
+ setPaymentTarget(challan)
+ setPaymentForm({ paid_amount:String(Math.max(0, Number(challan.total || 0) - Number(challan.paid || 0))), payment_mode:'cash', discount:'0', payment_note:'' })
+ setActionMessage('')
+ }
+ const savePayment = async () => {
+ if (!paymentTarget) return
+ setPaymentSaving(true); setActionMessage('')
+ try {
+ await api.put(`/api/fees/${paymentTarget.id}/pay`, {
+ paid_amount:Number(paymentForm.paid_amount || 0), payment_mode:paymentForm.payment_mode,
+ discount:Number(paymentForm.discount || 0), payment_note:paymentForm.payment_note || null,
+ })
+ await onRefresh?.()
+ setPaymentTarget(null)
+ setActionMessage('Payment updated successfully.')
+ } catch (err) {
+ setActionMessage(err.response?.data?.message || 'Payment could not be updated.')
+ } finally { setPaymentSaving(false) }
+ }
 
  const handlePrintDefaulters = () => {
  const defaulters = challans.filter(c => c.status !== 'Paid')
@@ -1170,28 +1216,27 @@ function ViewChallans({ challans, classOptions, onPrint, onPrintList }) {
  <button onClick={handlePrintAllClasses} style={{ background: C.blue, color: '#fff', border: 'none', borderRadius: 20, padding: '8px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}> Print All Classes</button>
  <button onClick={handlePrintDefaulters} style={{ background: C.red, color: '#fff', border: 'none', borderRadius: 20, padding: '8px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}> Print Defaulters</button>
  <button onClick={() => onPrintList(`${classFilter==='All'?'Current':classFilter} List`, filtered)} style={{ background: C.gold, color: '#fff', border: 'none', borderRadius: 20, padding: '8px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}> Print Filtered List</button>
- <button style={{ background: C.orange, color: '#fff', border: 'none', borderRadius: 20, padding: '8px 20px', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Class Wise View Challan</button>
+ <button onClick={() => onPrintList('Class Wise Challan List', [...filtered].sort((a,b)=>String(a.class).localeCompare(String(b.class))))} style={{ background:C.orange, color:'#fff', border:'none', borderRadius:20, padding:'8px 20px', fontSize:13, fontWeight:600, cursor:'pointer' }}>Class Wise List</button>
  </div>
 
  <GCard>
  <h3 style={{ color: '#fff', fontSize: 16, marginBottom: 18 }}>View Fee Challans ({filtered.length} records)</h3>
- <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr', gap: 12 }}>
- <div><Lbl>Session</Lbl><Sel><option>2026-2027</option></Sel></div>
- <div><Lbl>Class Head</Lbl><Sel><option>All</option></Sel></div>
- <div><Lbl>Class</Lbl><Sel value={classFilter} onChange={e => setClassFilter(e.target.value)}><option>All</option>{classOptions.map(item => <option key={item} value={item}>{item}</option>)}</Sel></div>
- <div><Lbl>Section</Lbl><Sel><option>All</option><option>Blue</option><option>Red</option><option>Green</option></Sel></div>
- <div><Lbl>Challan Month</Lbl><Sel value={monthFilter} onChange={e => setMonthFilter(e.target.value)}><option>All</option>{MONTHS.map(item => <option key={item} value={item}>{item}</option>)}</Sel></div>
- <div><Lbl>Fee Status</Lbl><Sel value={statusFilter} onChange={e => setStatusFilter(e.target.value)}><option>All</option><option>Paid</option><option>Partial</option><option>Unpaid</option></Sel></div>
+ <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap: 12 }}>
+ <div><Lbl>Year</Lbl><Sel value={yearFilter} onChange={e => { setYearFilter(e.target.value); setPage(1) }}><option>All</option>{years.map(y=><option key={y} value={y}>{y}</option>)}</Sel></div>
+ <div><Lbl>Class</Lbl><Sel value={classFilter} onChange={e => { setClassFilter(e.target.value); setPage(1) }}><option>All</option>{classOptions.map(item => <option key={item} value={item}>{item}</option>)}</Sel></div>
+ <div><Lbl>Section</Lbl><Sel value={sectionFilter} onChange={e => { setSectionFilter(e.target.value); setPage(1) }}>{(sectionOptions.length ? sectionOptions : ['All']).map(item=><option key={item} value={item}>{item}</option>)}</Sel></div>
+ <div><Lbl>Challan Month</Lbl><Sel value={monthFilter} onChange={e => { setMonthFilter(e.target.value); setPage(1) }}><option>All</option>{MONTHS.map(item => <option key={item} value={item}>{item}</option>)}</Sel></div>
+ <div><Lbl>Fee Status</Lbl><Sel value={statusFilter} onChange={e => { setStatusFilter(e.target.value); setPage(1) }}><option>All</option><option>Paid</option><option>Partial</option><option>Unpaid</option></Sel></div>
  </div>
  <div className="super-module-card" style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
- <button style={{ background: C.blue, color: '#fff', border: 'none', borderRadius: 4, padding: '8px 24px', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>Filter</button>
+ <button onClick={clearFilters} style={{ background:C.blue, color:'#fff', border:'none', borderRadius:10, padding:'8px 18px', fontSize:13, fontWeight:700, cursor:'pointer' }}>Clear Filters</button>
  </div>
  </GCard>
 
  <GCard style={{ padding: 0, overflow: 'visible' }}>
  <div className="super-module-card" style={{ padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
- <div>Show <Sel style={{ width: 80, display: 'inline-block' }}><option>10</option><option>25</option><option>50</option></Sel> entries</div>
- <div>Search: <Inp style={{ width: 200, display: 'inline-block' }} value={search} onChange={e => setSearch(e.target.value)} /></div>
+ <div>Show <Sel style={{ width:80, display:'inline-block' }} value={pageSize} onChange={e=>{ setPageSize(Number(e.target.value)); setPage(1) }}><option>10</option><option>25</option><option>50</option></Sel> entries</div>
+ <div>Search: <Inp style={{ width: 200, display: 'inline-block' }} value={search} onChange={e => { setSearch(e.target.value); setPage(1) }} /></div>
  </div>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
@@ -1204,7 +1249,7 @@ function ViewChallans({ challans, classOptions, onPrint, onPrintList }) {
  <tbody>
  {filtered.length === 0 ? (
  <tr><td colSpan={10} style={{ padding: 42, textAlign: 'center', color: C.muted }}>No challans found.</td></tr>
- ) : filtered.map((challan, index) => (
+ ) : pageRows.map((challan, index) => (
  <tr key={challan.id} style={{ background: index % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
  <td style={{ padding: '14px 16px', color: C.silver }}>{challan.gr}</td>
  <td style={{ padding: '14px 16px' }}>
@@ -1216,7 +1261,7 @@ function ViewChallans({ challans, classOptions, onPrint, onPrintList }) {
  <td style={{ padding: '14px 16px', color: C.silver }}>{challan.total}</td>
  <td style={{ padding: '14px 16px', color: C.silver }}>{challan.total}</td>
  <td style={{ padding: '14px 16px' }}>
- <button style={{ background: C.green, color: '#fff', border: 'none', borderRadius: 4, padding: '4px 10px', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>Pay Now</button>
+ <button onClick={()=>openPayment(challan)} style={{ background:C.green, color:'#fff', border:'none', borderRadius:8, padding:'6px 10px', fontSize:12, fontWeight:700, cursor:'pointer' }}>Pay Now</button>
  </td>
  <td style={{ padding: '14px 16px' }}>
  <ActionDropdown onPrint={() => onPrint(challan)} />
@@ -1229,6 +1274,12 @@ function ViewChallans({ challans, classOptions, onPrint, onPrintList }) {
  </tbody>
  </table>
  </GCard>
+ <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', gap:12, flexWrap:'wrap', color:C.muted, fontSize:12 }}>
+ <span>Page {currentPage} of {totalPages} · {filtered.length} records</span>
+ <div style={{ display:'flex', gap:8 }}><button style={btnSecondary} disabled={currentPage<=1} onClick={()=>setPage(p=>Math.max(1,p-1))}>Previous</button><button style={btnSecondary} disabled={currentPage>=totalPages} onClick={()=>setPage(p=>Math.min(totalPages,p+1))}>Next</button></div>
+ </div>
+ {actionMessage&&<div style={{ padding:12,borderRadius:12,background:'var(--apex-bg-subtle)',border:'1px solid var(--apex-border-default)',color:actionMessage.includes('success')?C.green:C.red,fontSize:12,fontWeight:700 }}>{actionMessage}</div>}
+ {paymentTarget&&<div style={{ position:'fixed',inset:0,zIndex:12000,background:'var(--apex-bg-overlay)',display:'grid',placeItems:'center',padding:20 }} onMouseDown={e=>{if(e.target===e.currentTarget)setPaymentTarget(null)}}><div style={{ width:'min(460px,100%)',padding:22,borderRadius:20,background:'var(--apex-bg-surface-solid)',border:'1px solid var(--apex-border-default)',boxShadow:'var(--apex-shadow-lg)',display:'grid',gap:14 }}><div><div style={{ color:'var(--apex-action-primary)',fontSize:11,fontWeight:800,textTransform:'uppercase' }}>Record Payment</div><h3 style={{ margin:'5px 0 0',color:'var(--apex-text-primary)' }}>{paymentTarget.student}</h3><div style={{ color:'var(--apex-text-tertiary)',fontSize:12,marginTop:3 }}>{paymentTarget.voucherNo} · Balance Rs. {Math.max(0,paymentTarget.total-paymentTarget.paid).toLocaleString()}</div></div><div><Lbl>Paid Amount</Lbl><Inp type="number" min="0" value={paymentForm.paid_amount} onChange={e=>setPaymentForm({...paymentForm,paid_amount:e.target.value})}/></div><div><Lbl>Payment Mode</Lbl><Sel value={paymentForm.payment_mode} onChange={e=>setPaymentForm({...paymentForm,payment_mode:e.target.value})}><option value="cash">Cash</option><option value="bank">Bank</option><option value="online">Online</option></Sel></div><div><Lbl>Discount</Lbl><Inp type="number" min="0" value={paymentForm.discount} onChange={e=>setPaymentForm({...paymentForm,discount:e.target.value})}/></div><div><Lbl>Note</Lbl><Inp value={paymentForm.payment_note} onChange={e=>setPaymentForm({...paymentForm,payment_note:e.target.value})} placeholder="Optional"/></div><div style={{ display:'flex',justifyContent:'flex-end',gap:10 }}><button style={btnSecondary} onClick={()=>setPaymentTarget(null)} disabled={paymentSaving}>Cancel</button><button style={{ ...btnPrimary,minWidth:120 }} onClick={()=>void savePayment()} disabled={paymentSaving}>{paymentSaving?'Saving…':'Save Payment'}</button></div></div></div>}
  </div>
  )
 }
