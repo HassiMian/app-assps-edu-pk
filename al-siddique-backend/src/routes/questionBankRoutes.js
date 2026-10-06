@@ -4,7 +4,7 @@
 const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
-const { query } = require('../config/database')
+const { query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
@@ -243,6 +243,7 @@ router.post('/import/approve', async (req, res) => {
     const client = await require('../config/database').pool.connect()
     try {
       await client.query('BEGIN')
+      await applyTenantContext(client)
 
       const insertedQuestions = []
       

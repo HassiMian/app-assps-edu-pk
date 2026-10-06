@@ -1,7 +1,7 @@
 ﻿const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const auth = require('../middleware/auth')
 const protect = auth.protect
 const adminOnly = auth.adminOnly
@@ -356,6 +356,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
 
     client = await pool.connect()
     await client.query('BEGIN')
+    await applyTenantContext(client)
     transactionOpen = true
     await client.query('SELECT pg_advisory_xact_lock(hashtext($1))', [`student-roll:${schoolId}:${normalizedClass}:${normalizedSection}`])
 
@@ -792,6 +793,7 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const ids = normalized.map(item => item.studentId)
     const existing = await client.query('SELECT id FROM students WHERE school_id = $1 AND id = ANY($2::int[]) FOR UPDATE', [schoolId, ids])
     if (existing.rowCount !== normalized.length) {
@@ -952,6 +954,7 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const locked = await client.query(
       'SELECT id, student_user_id, parent_user_id FROM students WHERE id = $1 AND school_id = $2 FOR UPDATE',
       [studentId, schoolId]

@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
@@ -918,6 +918,7 @@ router.put('/:id/approve-proof', protect, adminOnly, async (req, res) => {
   try {
     await ensureFeePaymentColumns()
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const locked = await client.query(`
       SELECT id, student_id, amount, monthly_fee, previous_arrears, discount, gross_total,
              paid_amount, proof_amount, proof_method, proof_status
@@ -1049,6 +1050,7 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const rowResult = await client.query(`
       SELECT id, student_id, school_id, amount, monthly_fee, previous_arrears, paid_amount, discount
       FROM fee_challans

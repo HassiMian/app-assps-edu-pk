@@ -1941,3 +1941,16 @@ for (const routePath of [
     'tenant-bound transactions must apply the active request RLS context before data access.'
   )
 }
+
+for (const routePath of [
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  'al-siddique-backend/src/routes/questionBankRoutes.js',
+]) {
+  assertContains(
+    routePath,
+    'applyTenantContext(client)',
+    'high-risk tenant transactions must apply the active request RLS context before data access.'
+  )
+}

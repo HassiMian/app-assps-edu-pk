@@ -1,6 +1,6 @@
 const express = require('express')
 const router  = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 
@@ -121,6 +121,7 @@ router.put('/grade-settings', protect, canManageExams, async (req, res) => {
   try {
     await ensureGradeSettingsSchema()
     await client.query('BEGIN')
+    await applyTenantContext(client)
     await client.query('DELETE FROM grade_settings WHERE school_id = $1', [schoolId])
     for (const row of parsed.rows) {
       await client.query(`INSERT INTO grade_settings (school_id, label, min_percentage, max_percentage, sort_order) VALUES ($1,$2,$3,$4,$5)`, [schoolId,row.label,row.from,row.to,row.sortOrder])
@@ -202,6 +203,7 @@ router.delete('/:id', protect, canManageExams, async (req, res) => {
       return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to delete an exam.' })
     }
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const lookup = await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1', [examId, schoolId])
     if (!lookup.rowCount) {
       await client.query('ROLLBACK')
@@ -278,6 +280,7 @@ router.post('/results', protect, canManageExams, async (req, res) => {
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
+    await applyTenantContext(client)
     const studentIds = [...new Set(normalized.map(row => row.studentId))]
     const examIds = [...new Set(normalized.map(row => row.examId))]
     const [studentScope, examScope] = await Promise.all([
