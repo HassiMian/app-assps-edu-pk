@@ -6,27 +6,17 @@ const { currentSchoolId } = require('../middleware/tenant')
 
 const canReviewDemoRequests = requireRoles('super_admin', 'admin', 'principal')
 
+let demoRequestsSchemaReady = null
 async function ensureDemoRequestsTable() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS demo_requests (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER,
-      school_name VARCHAR(255) NOT NULL,
-      contact_name VARCHAR(255) NOT NULL,
-      phone VARCHAR(80) NOT NULL,
-      email VARCHAR(255),
-      city VARCHAR(120),
-      students_count VARCHAR(80),
-      message TEXT,
-      status VARCHAR(40) NOT NULL DEFAULT 'pending_approval',
-      reviewed_by INTEGER,
-      reviewed_at TIMESTAMP,
-      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )
-  `)
-  await pool.query('ALTER TABLE demo_requests ALTER COLUMN school_id DROP DEFAULT').catch(() => {})
-  await pool.query('CREATE INDEX IF NOT EXISTS demo_requests_school_status_idx ON demo_requests (school_id, status, created_at DESC)')
+  if (demoRequestsSchemaReady) return true
+  const result = await pool.query("SELECT to_regclass('public.demo_requests') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('demo_requests schema migration is not applied.')
+    err.code = 'DEMO_REQUEST_SCHEMA_NOT_READY'
+    throw err
+  }
+  demoRequestsSchemaReady = true
+  return true
 }
 
 function normalizeBody(body = {}) {
@@ -75,7 +65,7 @@ router.post('/', async (req, res) => {
     })
   } catch (err) {
     console.error('Demo request create error:', err.message)
-    res.status(500).json({ success: false, message: 'Failed to submit demo request.' })
+    res.status(err.code === 'DEMO_REQUEST_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DEMO_REQUEST_SCHEMA_NOT_READY' ? 'Demo request storage is not initialized.' : 'Failed to submit demo request.' })
   }
 })
 
@@ -100,7 +90,7 @@ router.get('/', protect, canReviewDemoRequests, async (req, res) => {
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Demo request list error:', err.message)
-    res.status(500).json({ success: false, message: 'Failed to load demo requests.' })
+    res.status(err.code === 'DEMO_REQUEST_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DEMO_REQUEST_SCHEMA_NOT_READY' ? 'Demo request storage is not initialized.' : 'Failed to load demo requests.' })
   }
 })
 
@@ -138,7 +128,7 @@ router.patch('/:id/status', protect, canReviewDemoRequests, async (req, res) => 
     res.json({ success: true, data: result.rows[0], message: 'Demo request updated.' })
   } catch (err) {
     console.error('Demo request update error:', err.message)
-    res.status(500).json({ success: false, message: 'Failed to update demo request.' })
+    res.status(err.code === 'DEMO_REQUEST_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DEMO_REQUEST_SCHEMA_NOT_READY' ? 'Demo request storage is not initialized.' : 'Failed to update demo request.' })
   }
 })
 

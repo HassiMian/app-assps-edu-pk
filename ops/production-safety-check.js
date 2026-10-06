@@ -1043,6 +1043,31 @@ assertContains(
   'notice schema must be versioned in migration 011.'
 )
 
+
+for (const routeFile of [
+  'al-siddique-backend/src/routes/expenseRoutes.js',
+  'al-siddique-backend/src/routes/eventsRoutes.js',
+  'al-siddique-backend/src/routes/demoRequestRoutes.js',
+]) {
+  assertNotContains(
+    routeFile,
+    /CREATE TABLE IF NOT EXISTS|ALTER TABLE .*ADD COLUMN|CREATE INDEX IF NOT EXISTS/,
+    `${routeFile} must not mutate schema from request handlers.`
+  )
+}
+
+assertNotContains(
+  'al-siddique-backend/src/routes/eventsRoutes.js',
+  /hasColumn\('events'|SELECT \* FROM events ORDER BY event_date|DELETE FROM events WHERE id = \$1 RETURNING/,
+  'event reads and mutations must never fall back to cross-tenant unscoped SQL.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/012_auxiliary_operations_schema.js',
+  'CREATE TABLE IF NOT EXISTS expenses',
+  'auxiliary operational schema must be versioned in migration 012.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -7,29 +7,16 @@ const { currentSchoolId } = require('../middleware/tenant')
 const canManageExpenses = requireRoles('super_admin', 'admin', 'principal', 'accountant', 'school_admin')
 
 let schemaReady = null
-function ensureExpenseSchema() {
-  if (!schemaReady) {
-    schemaReady = (async () => {
-      await query(`
-        CREATE TABLE IF NOT EXISTS expenses (
-          id BIGSERIAL PRIMARY KEY,
-          school_id INTEGER NOT NULL REFERENCES schools(id),
-          category VARCHAR(80) NOT NULL,
-          description TEXT NOT NULL,
-          amount NUMERIC(12,2) NOT NULL CHECK (amount >= 0),
-          expense_date DATE NOT NULL,
-          created_by INTEGER REFERENCES users(id),
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        )
-      `)
-      await query('CREATE INDEX IF NOT EXISTS idx_expenses_school_date ON expenses (school_id, expense_date DESC)')
-    })().catch(err => {
-      schemaReady = null
-      throw err
-    })
+async function ensureExpenseSchema() {
+  if (schemaReady) return true
+  const result = await query("SELECT to_regclass('public.expenses') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('expenses schema migration is not applied.')
+    err.code = 'EXPENSE_SCHEMA_NOT_READY'
+    throw err
   }
-  return schemaReady
+  schemaReady = true
+  return true
 }
 
 function normalizeExpense(body = {}) {
@@ -59,7 +46,7 @@ router.get('/', protect, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Expense list error:', err.message)
-    res.status(500).json({ success: false, message: 'Expenses could not be loaded.' })
+    res.status(err.code === 'EXPENSE_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'EXPENSE_SCHEMA_NOT_READY' ? 'Expense storage is not initialized.' : 'Expenses could not be loaded.' })
   }
 })
 
@@ -80,7 +67,7 @@ router.post('/', protect, canManageExpenses, async (req, res) => {
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Expense create error:', err.message)
-    res.status(500).json({ success: false, message: 'Expense could not be saved.' })
+    res.status(err.code === 'EXPENSE_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'EXPENSE_SCHEMA_NOT_READY' ? 'Expense storage is not initialized.' : 'Expense could not be saved.' })
   }
 })
 
