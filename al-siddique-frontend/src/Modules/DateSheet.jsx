@@ -1,19 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Printer, Save, Plus, X, Edit2, RotateCcw } from 'lucide-react'
+import { Printer, Save, Plus, X, Edit2 } from 'lucide-react'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../services/useAcademicStore'
 import { useStudentStore } from '../services/useStudentStore'
 import { usePaperStore } from './Paper-Generator/usePaperStore'
 import api from '../services/api'
-import { getTenantStorageItem, setTenantStorageItem } from '../services/tenantStorage'
-import {
-  FINAL_EXAM_PAPER_TIME,
-  FINAL_EXAM_SEED_KEY,
-  FINAL_EXAM_SEED_VERSION,
-  FINAL_EXAM_SESSION,
-  FINAL_EXAM_TERM,
-  mergeFinalExamRows,
-  validateFinalExamRows,
-} from './dateSheetFinalExam2026'
 
 function academicSessionLabel(sessionStart, sessionEnd) {
   const start = String(sessionStart || '').slice(0, 4)
@@ -21,7 +11,6 @@ function academicSessionLabel(sessionStart, sessionEnd) {
   return /^\d{4}$/.test(start) && /^\d{4}$/.test(end) ? `${start}-${end}` : ''
 }
 
-const STORE_KEY = 'al_siddique_date_sheets'
 const TERMS = ['First Term Exam', 'Second Term Exam', 'Annual Exam', 'Monthly Assessment']
 const TEMPLATES = [
   { id: 'classic', label: 'Template 1 - Classic' },
@@ -34,27 +23,6 @@ const TEMPLATES = [
   { id: 'pink-modern', label: 'Template 8 - Modern Pink' },
 ]
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-
-function readSheets() {
-  try {
-    const saved = JSON.parse(getTenantStorageItem(STORE_KEY, { migrateLegacy:true, removeLegacyOnMigrate:true }) || '[]')
-    const rows = Array.isArray(saved) ? saved : []
-    if (getTenantStorageItem(FINAL_EXAM_SEED_KEY, { migrateLegacy:true, removeLegacyOnMigrate:true }) === FINAL_EXAM_SEED_VERSION) return rows
-    const seeded = mergeFinalExamRows(rows)
-    if (validateFinalExamRows(seeded).length) return rows
-    setTenantStorageItem(STORE_KEY, JSON.stringify(seeded))
-    setTenantStorageItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
-    return seeded
-  } catch {
-    return []
-  }
-}
-
-function writeSheets(rows) {
-  try { setTenantStorageItem(STORE_KEY, JSON.stringify(rows)) } catch {
-    // localStorage can be blocked in private/restricted browser contexts.
-  }
-}
 
 function sameClass(left, right) {
   if (!left || !right) return false
@@ -106,7 +74,7 @@ function extractLoadedGrid(sessionVal, termVal, allSheets, classOpts) {
   const loadedColumns = uniqueDates.map((d, index) => {
     const sample = matching.find(m => m.date === d && Array.isArray(m.times) && m.times.some(Boolean))
     const rawTimes = sample?.times || []
-    const times = [rawTimes[0] || FINAL_EXAM_PAPER_TIME || '10:00 AM - 12:00 PM', rawTimes[1] || '', rawTimes[2] || '']
+    const times = [rawTimes[0] || '', rawTimes[1] || '', rawTimes[2] || '']
     return { id: index, date: d, times }
   })
 
@@ -273,7 +241,7 @@ export default function DateSheet() {
   const { paperSettings } = usePaperStore()
   const classOptions = activeClasses.map(c => ({ value: c.level, label: c.name }))
   const [session, setSession] = useState(activeAcademicSession || paperSettings.academicYear || '')
-  const [term, setTerm] = useState(FINAL_EXAM_TERM)
+  const [term, setTerm] = useState(TERMS[0])
   const [dayCount, setDayCount] = useState(12)
   const [warning, setWarning] = useState('')
   const [gridReady, setGridReady] = useState(false)
@@ -283,11 +251,11 @@ export default function DateSheet() {
   const [classRows, setClassRows] = useState([])
   const [openCell, setOpenCell] = useState(null)
   const [subjectSearch, setSubjectSearch] = useState('')
-  const [sheets, setSheets] = useState(readSheets)
+  const [sheets, setSheets] = useState([])
   const [syncState, setSyncState] = useState('loading')
   const [printClass, setPrintClass] = useState(classOptions[0]?.value || '1')
   const [printSession, setPrintSession] = useState(activeAcademicSession || paperSettings.academicYear || '')
-  const [printTerm, setPrintTerm] = useState(FINAL_EXAM_TERM)
+  const [printTerm, setPrintTerm] = useState(TERMS[0])
   const [template, setTemplate] = useState('classic')
   const [layout, setLayout] = useState('single')
 
@@ -309,7 +277,7 @@ export default function DateSheet() {
       setWarning(`Loaded ${loaded.totalRecords} date sheet records (${loaded.classCount} classes, ${loaded.dateCount} dates) for ${targetTerm} (${targetSession}). You can now edit dates, times, and subjects directly.`)
     } else {
       const count = Math.max(1, Math.min(20, Number(dayCount) || 5))
-      setColumns(Array.from({ length: count }, (_, i) => ({ id: i, date: '', times: [FINAL_EXAM_PAPER_TIME || '10:00 AM - 12:00 PM', '', ''] })))
+      setColumns(Array.from({ length: count }, (_, i) => ({ id: i, date: '', times: ['', '', ''] })))
       setClassRows([])
       setCellSubjects({})
       setGridReady(true)
@@ -321,54 +289,24 @@ export default function DateSheet() {
     loadDateSheet(session, term)
   }
 
-  // One-time server hydration/migration; the initial session/term define the startup view.
+  // Server is authoritative. Browser caches are never auto-promoted into tenant data.
   useEffect(() => {
     let cancelled = false
     async function hydrateServerSheets() {
-      const cached = readSheets()
       try {
         const response = await api.get('/api/date-sheets', { skipCache:true })
         const serverRows = Array.isArray(response.data?.data) ? response.data.data : []
         if (cancelled) return
-        if (serverRows.length) {
-          setSheets(serverRows)
-          writeSheets(serverRows)
-          setSyncState('synced')
-          loadDateSheet(session, term, serverRows)
-          return
-        }
-
-        // One-time migration path: preserve any existing browser date sheets by publishing them to the tenant backend.
-        if (cached.length) {
-          const groups = new Map()
-          cached.forEach(row => {
-            const key = `${row.session}|||${row.term}`
-            if (!groups.has(key)) groups.set(key, { session:row.session, term:row.term, rows:[] })
-            groups.get(key).rows.push(row)
-          })
-          for (const group of groups.values()) {
-            if (!group.session || !group.term) continue
-            await api.put('/api/date-sheets/bulk', group)
-          }
-          const migrated = await api.get('/api/date-sheets', { skipCache:true })
-          const rows = Array.isArray(migrated.data?.data) ? migrated.data.data : []
-          if (cancelled) return
-          setSheets(rows)
-          writeSheets(rows)
-          setSyncState('synced')
-          loadDateSheet(session, term, rows)
-          return
-        }
-
-        setSheets([])
+        setSheets(serverRows)
         setSyncState('synced')
-        loadDateSheet(session, term, [])
+        loadDateSheet(session, term, serverRows)
       } catch (err) {
         console.error('Date sheet server sync failed', err)
         if (!cancelled) {
-          setSheets(cached)
+          setSheets([])
           setSyncState('error')
-          loadDateSheet(session, term, cached)
+          loadDateSheet(session, term, [])
+          setWarning(err.response?.data?.message || 'Date sheet server is unavailable. No cached timetable was substituted for live data.')
         }
       }
     }
@@ -414,7 +352,7 @@ export default function DateSheet() {
   const addColumn = () => {
     setColumns(prev => [
       ...prev,
-      { id: Date.now(), date: '', times: [FINAL_EXAM_PAPER_TIME || '10:00 AM - 12:00 PM', '', ''] }
+      { id: Date.now(), date: '', times: ['', '', ''] }
     ])
   }
 
@@ -478,44 +416,12 @@ export default function DateSheet() {
       const savedRows = Array.isArray(response.data?.data) ? response.data.data : []
       const next = [...sheets.filter(s => !(s.session === session && s.term === term)), ...savedRows]
       setSheets(next)
-      writeSheets(next)
       setSyncState('synced')
       setWarning(`Successfully saved ${savedRows.length} date sheet records for ${term} (${session}).`)
     } catch (err) {
       console.error('Date sheet save failed', err)
       setSyncState('error')
       setWarning(err.response?.data?.message || 'Date sheet could not be saved to the server.')
-    }
-  }
-
-  const restoreDefaultSeed = async () => {
-    if (typeof window !== 'undefined' && !window.confirm('Restore official First Term Exam 2026-2027 staggered timetable? Any custom changes made to First Term Exam will be replaced by the official schedule.')) return
-    const seeded = mergeFinalExamRows([])
-    setSyncState('saving')
-    try {
-      const response = await api.put('/api/date-sheets/bulk', { session:FINAL_EXAM_SESSION, term:FINAL_EXAM_TERM, rows:seeded })
-      const savedRows = Array.isArray(response.data?.data) ? response.data.data : []
-      const cleaned = sheets.filter(s => !(s.session === FINAL_EXAM_SESSION && s.term === FINAL_EXAM_TERM))
-      const combined = [...cleaned, ...savedRows]
-      writeSheets(combined)
-      setTenantStorageItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
-      setSheets(combined)
-      setSession(FINAL_EXAM_SESSION)
-      setTerm(FINAL_EXAM_TERM)
-      setSyncState('synced')
-      const loaded = extractLoadedGrid(FINAL_EXAM_SESSION, FINAL_EXAM_TERM, combined, classOptions)
-      if (loaded) {
-        setColumns(loaded.columns)
-        setClassRows(loaded.classRows)
-        setCellSubjects(loaded.cellSubjects)
-        setDayCount(loaded.columns.length)
-        setGridReady(true)
-        setWarning(`Restored official First Term Exam 2026-2027 timetable with ${savedRows.length} records.`)
-      }
-    } catch (err) {
-      console.error('Official date sheet restore failed', err)
-      setSyncState('error')
-      setWarning(err.response?.data?.message || 'Official timetable could not be restored to the server.')
     }
   }
 
@@ -567,11 +473,6 @@ export default function DateSheet() {
                     <button type="button" onClick={addColumn} style={{ ...styles.button, height:34, fontSize:13, padding:'0 14px', background:'linear-gradient(135deg, #0A84FF 0%, #22d3ee 100%)' }}>
                       <Plus size={14} /> Add Exam Date
                     </button>
-                    {session === FINAL_EXAM_SESSION && term === FINAL_EXAM_TERM && (
-                      <button type="button" onClick={() => void restoreDefaultSeed()} style={{ ...styles.button, height:34, fontSize:13, padding:'0 14px', background:'rgba(245,166,35,0.15)', color:'#f5a623', border:'1px solid rgba(245,166,35,0.3)', boxShadow:'none' }}>
-                        <RotateCcw size={13} /> Restore Default Timetable
-                      </button>
-                    )}
                   </div>
                 </div>
 

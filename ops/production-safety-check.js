@@ -2007,3 +2007,14 @@ for (const shellFile of [
     'shared SaaS shell must not impersonate the ASSPS tenant when branding data is missing.'
   )
 }
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+  /dateSheetFinalExam2026|FINAL_EXAM_|mergeFinalExamRows|validateFinalExamRows|getTenantStorageItem|setTenantStorageItem|writeSheets\(|readSheets\(/,
+  'date sheet UI must use server truth and must not seed, migrate, or substitute browser-local timetable data.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+  'No cached timetable was substituted for live data.',
+  'date sheet source failures must be explicit instead of silently falling back to cached business data.'
+)
