@@ -14,7 +14,6 @@ function canReadResults(req, res, next) {
   if (['super_admin', 'admin', 'principal', 'teacher', 'parent', 'student'].includes(role)) return next()
   return res.status(403).json({ success: false, message: 'Results access denied.' })
 }
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 function portalStudentScope(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
@@ -378,19 +377,7 @@ router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Exam results fetch error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    // DB offline â€” return mock results
-    res.json({
-      success: true,
-      data: [
-        { id: 1, exam_id: req.params.exam_id, student_id: 1, name: 'Muhammad Ali', gr_number: 'GR-1001', roll_number: '01', subject: 'Mathematics', marks_obtained: 78, total_marks: 100, grade: 'A' },
-        { id: 2, exam_id: req.params.exam_id, student_id: 1, name: 'Muhammad Ali', gr_number: 'GR-1001', roll_number: '01', subject: 'Physics', marks_obtained: 65, total_marks: 100, grade: 'B' },
-        { id: 3, exam_id: req.params.exam_id, student_id: 2, name: 'Ayesha Khan', gr_number: 'GR-1002', roll_number: '02', subject: 'Mathematics', marks_obtained: 91, total_marks: 100, grade: 'A+' },
-        { id: 4, exam_id: req.params.exam_id, student_id: 2, name: 'Ayesha Khan', gr_number: 'GR-1002', roll_number: '02', subject: 'Physics', marks_obtained: 88, total_marks: 100, grade: 'A+' },
-      ]
-    })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Exam results could not be loaded.' })
   }
 })
 
@@ -421,17 +408,7 @@ router.get('/student-results/:student_id', protect, requireScopeForServiceOnly('
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Student results fetch error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    res.json({
-      success: true,
-      data: [
-        { id: 1, exam_id: 1, student_id: req.params.student_id, student_name: 'Mock Student', exam_name: 'Mid Term', subject: 'Mathematics', marks_obtained: 85, total_marks: 100, grade: 'A' },
-        { id: 2, exam_id: 1, student_id: req.params.student_id, student_name: 'Mock Student', exam_name: 'Mid Term', subject: 'Physics', marks_obtained: 78, total_marks: 100, grade: 'B' },
-        { id: 3, exam_id: 1, student_id: req.params.student_id, student_name: 'Mock Student', exam_name: 'Mid Term', subject: 'Chemistry', marks_obtained: 92, total_marks: 100, grade: 'A+' },
-      ]
-    })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Student results could not be loaded.' })
   }
 })
 

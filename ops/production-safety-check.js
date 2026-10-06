@@ -520,6 +520,13 @@ assertNotContains(
   'exam management must collect marks policy and session from real configuration/user input.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  /ALLOW_MOCK_FALLBACK|Mock Student|DB offline.*mock results/,
+  'exam result APIs must never fabricate grades or student results.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
