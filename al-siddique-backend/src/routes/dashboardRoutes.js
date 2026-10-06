@@ -3,7 +3,6 @@ const router  = express.Router()
 const { query } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 // ── helpers ───────────────────────────────────────────────────────────────────
 const safe = async (fn) => { try { return await fn() } catch (err) { console.error('Dashboard query failed:', err.message); return null } }

@@ -26,18 +26,6 @@ function assertNotContains(relativePath, pattern, message) {
 const failures = []
 
 assertContains(
-  'al-siddique-backend/src/routes/dashboardRoutes.js',
-  "process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'",
-  'dashboard mock fallback must be explicitly opt-in and disabled in production.'
-)
-
-assertNotContains(
-  'al-siddique-backend/src/routes/dashboardRoutes.js',
-  /const\s+ALLOW_MOCK_FALLBACK\s*=\s*true\b/,
-  'hardcoded dashboard mock fallback is forbidden.'
-)
-
-assertContains(
   'al-siddique-backend/src/server.js',
   "mount('/ai-analytics', './routes/aiAnalyticsRoutes')",
   'AI analytics must use the protected route module.'
@@ -1408,6 +1396,17 @@ assertNotContains(
   'settings previews must not display ASSPS-specific identity, session, or establishment facts for every tenant.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  /ALLOW_MOCK_FALLBACK/,
+  'portal routes must fail closed directly and must not reference an undefined mock-fallback flag.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/dashboardRoutes.js',
+  /ALLOW_MOCK_FALLBACK/,
+  'dashboard routes must not keep obsolete mock-fallback configuration.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

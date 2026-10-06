@@ -327,7 +327,7 @@ router.get('/timetable', protect, async (req, res) => {
       console.error('Online classes join error:', onlineErr.message)
     }
 
-    if (dbError && !ALLOW_MOCK_FALLBACK) {
+    if (dbError) {
       return res.status(503).json({ success: false, message: 'Database unavailable. Timetable cannot be loaded.' })
     }
 
