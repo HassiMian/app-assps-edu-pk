@@ -16,6 +16,12 @@ import { trackRecentAdded, trackRecentViewed } from "../fees/feeWorkflowStorage"
 import StudentFeePanel from "../fees/StudentFeePanel";
 import { printChallan } from "../fees/ViewChallans";
 
+function academicSessionLabel(sessionStart, sessionEnd) {
+ const start = String(sessionStart || '').slice(0, 4)
+ const end = String(sessionEnd || '').slice(0, 4)
+ return /^\d{4}$/.test(start) && /^\d{4}$/.test(end) ? `${start}-${end}` : ''
+}
+
 const transformStudent = (student) => ({
  id: student.id,
  gr: student.gr_number || student.gr || "",
@@ -112,7 +118,7 @@ const STUDENT_DOCS = [
  { id: "leaving", label: "Leaving Certificate", icon: "LVC" },
 ];
 
-function PrintStudentList({ list, onClose, school }) {
+function PrintStudentList({ list, onClose, school, academicSession }) {
   if (!list) return null;
   const { type, data } = list;
   const today = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
@@ -261,7 +267,7 @@ function PrintStudentList({ list, onClose, school }) {
     <div>
       <h1 class="school-title">${schoolName}</h1>
       <div class="school-meta">${schoolAddress} · ${schoolPhone}</div>
-      <h2 class="report-title">${type} — Session 2026-2027</h2>
+      <h2 class="report-title">${type} — Session ${academicSession || '—'}</h2>
     </div>
   </div>
 
@@ -442,7 +448,7 @@ function PrintStudentList({ list, onClose, school }) {
             <div>
               <h1 style={{ margin: 0, fontSize: 22, color: "#0b2c4d", fontFamily: "'Cinzel', serif" }}>{schoolName}</h1>
               <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>{schoolAddress} - {schoolPhone}</div>
-              <h2 style={{ margin: "8px 0 0", fontSize: 16, color: "#C8991A" }}>{type} &mdash; Session 2026-2027</h2>
+              <h2 style={{ margin: "8px 0 0", fontSize: 16, color: "#C8991A" }}>{type} &mdash; Session {academicSession || '—'}</h2>
             </div>
           </div>
 
@@ -703,14 +709,14 @@ const btnSecondary = {
 };
 
 //  Certificate print engine
-function printCertificate(docType, student, school = {}, requestedOrientation = "auto") {
+function printCertificate(docType, student, school = {}, requestedOrientation = "auto", academicSession = "") {
  const sn = school.schoolName || "Al Siddique Scholars Public School";
  const su = school.schoolUrdu || "Ø§Ù„ØµØ¯ÛŒÙ‚ Ø§Ø³Ú©Ø§Ù„Ø±Ø² Ù¾Ø¨Ù„Ú© Ø§Ø³Ú©ÙˆÙ„";
  const sa = school.address || "Sharif Chowk, Rayya Khas, Narowal";
  const showUrduHdr = school.showUrduHeader !== false;
  const sp = school.phone || "";
  const sl = school.logo || "";
- const session = "2026-2027";
+ const session = academicSession || "—";
  const today = new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" });
 
  const FONTS = `<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,700;1,400&family=Raleway:wght@300;400;600;700&family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">`;
@@ -1671,7 +1677,7 @@ function AccessTab({ student }) {
 }
 
 //  Profile Modal
-function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
+function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academicSession }) {
  const [tab, setTab] = useState("profile");
  const [attendanceRows, setAttendanceRows] = useState([]);
  const [attendanceLoading, setAttendanceLoading] = useState(false);
@@ -1765,7 +1771,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  </select>
  </div>
  {STUDENT_DOCS.map(d => (
- <div key={d.id} onClick={()=>{printCertificate(d.id,student,paperSettings,certificateOrientation);setDocsOpen(false)}}
+ <div key={d.id} onClick={()=>{printCertificate(d.id,student,paperSettings,certificateOrientation,academicSession);setDocsOpen(false)}}
  style={{ display:"flex", alignItems:"center", gap:10, padding:"10px 16px", cursor:"pointer", color:"#C0C8D8", fontSize:13, borderBottom:"1px solid rgba(255,255,255,0.04)" }}
  onMouseEnter={e=>e.currentTarget.style.background="rgba(200,153,26,0.1)"}
  onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
@@ -1938,7 +1944,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
 }
 
 //  Classwise Reports
-function ClasswiseReports({ students, onPrintClass }) {
+function ClasswiseReports({ students, onPrintClass, academicSession }) {
  const classMap = {};
  students.forEach(s => {
  if (!classMap[s.class]) classMap[s.class] = { total:0, active:0, boys:0, girls:0, students:[] };
@@ -1949,7 +1955,7 @@ function ClasswiseReports({ students, onPrintClass }) {
  const classes = Object.entries(classMap).sort(([a],[b])=>a.localeCompare(b));
  return (
  <div className="super-module-card" style={card}>
- <h2 style={{ color:"#C8991A", fontSize:16, fontWeight:800, margin:"0 0 20px" }}> Classwise Student Report — Session 2026-2027</h2>
+ <h2 style={{ color:"#C8991A", fontSize:16, fontWeight:800, margin:"0 0 20px" }}> Classwise Student Report — Session {academicSession || "—"}</h2>
  <div style={{ display:"flex", justifyContent:"flex-end", marginBottom:16 }}>
  <button onClick={() => onPrintClass?.("All Classes Student List", students)} style={{ ...btnSecondary, padding:"8px 12px" }}><Printer size={14}/> Print All Details</button>
  </div>
@@ -2032,10 +2038,10 @@ function LocalityReports({ students }) {
 }
 
 //  Admission Form Print
-function AdmissionFormPrint({ school }) {
+function AdmissionFormPrint({ school, academicSession }) {
  function printBlankForm() {
  const blank = { name:"", father:"", mother:"", gr:"", class:"", section:"", dob:"", fatherCnic:"", whatsapp:"", phone:"", locality:"", religion:"Muslim", address:"", admissionDate:"", fatherOccupation:"" };
- printCertificate("admission", blank, school);
+ printCertificate("admission", blank, school, "auto", academicSession);
  }
  return (
  <div className="super-module-card" style={{ ...card, textAlign:"center", padding:60 }}>
@@ -2095,10 +2101,10 @@ function AdmissionsReport({ students }) {
 }
 
 //  Student Slips
-function StudentSlips({ students, school }) {
+function StudentSlips({ students, school, academicSession }) {
  const [sel, setSel] = useState(null);
  function printSlip(s) {
- printCertificate("study", s, school);
+ printCertificate("study", s, school, "auto", academicSession);
  }
  return (
  <div className="super-module-card" style={card}>
@@ -2129,7 +2135,8 @@ function StudentSlips({ students, school }) {
 
 //  Main Component
 export default function StudentsModule() {
- const { classNames, allSections, activeClasses, subjectsForClass } = useAcademicStore();
+ const { classNames, allSections, activeClasses, subjectsForClass, sessionStart, sessionEnd } = useAcademicStore();
+ const academicSession = academicSessionLabel(sessionStart, sessionEnd);
  const { students: rawStudents, deleteStudent, updateStudent } = useStudentStore();
  const [feeStatusByStudent, setFeeStatusByStudent] = useState({});
 
@@ -2250,7 +2257,7 @@ export default function StudentsModule() {
  </div>
  <div>
  <h1 style={{ color:"var(--apex-text-primary)", fontSize:24, fontWeight:800, margin:0 }}>Student Management</h1>
- <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session 2026-2027 · {students.length} total students</p>
+ <p style={{ color:"#8892A4", fontSize:13, margin:0 }}>Session {academicSession || "—"} · {students.length} total students</p>
  </div>
  </div>
  <div style={{ display:"flex", gap:10 }}>
@@ -2510,17 +2517,17 @@ export default function StudentsModule() {
  </>
  )}
 
- {moduleTab==="classwise" && <ClasswiseReports students={students} onPrintClass={(type, data) => setPrintList({ type, data })}/>}
+ {moduleTab==="classwise" && <ClasswiseReports students={students} academicSession={academicSession} onPrintClass={(type, data) => setPrintList({ type, data })}/>}
  {moduleTab==="performance" && <StudentPerformanceSheet students={students} school={paperSettings} classNames={classNames} activeClasses={activeClasses} subjectsForClass={subjectsForClass}/>}
  {moduleTab==="admissions" && <AdmissionsReport students={students}/>}
- {moduleTab==="slips" && <StudentSlips students={filtered} school={paperSettings}/>}
+ {moduleTab==="slips" && <StudentSlips students={filtered} school={paperSettings} academicSession={academicSession}/>}
  {moduleTab==="locality" && <LocalityReports students={students}/>}
- {moduleTab==="form" && <AdmissionFormPrint school={paperSettings}/>}
+ {moduleTab==="form" && <AdmissionFormPrint school={paperSettings} academicSession={academicSession}/>}
 
  {showAdd && <AddStudentModal onClose={()=>setShowAdd(false)} paperSettings={paperSettings} onCredentials={(credentials, student) => setNewCredentials({ credentials, student })}/>}
  {editStudent && <AddStudentModal onClose={()=>setEditStudent(null)} initialData={editStudent} updateStudent={updateStudent}/>}
- {viewStudent && <ProfileModal student={viewStudent} onClose={()=>setViewStudent(null)} paperSettings={paperSettings} onUpdatePhoto={(id, url) => { updateStudent(id, { photo: url }); setViewStudent(s => ({ ...s, photo: url })) }}/>}
- {printList && <PrintStudentList list={printList} school={paperSettings} onClose={()=>setPrintList(null)} />}
+ {viewStudent && <ProfileModal student={viewStudent} onClose={()=>setViewStudent(null)} paperSettings={paperSettings} academicSession={academicSession} onUpdatePhoto={(id, url) => { updateStudent(id, { photo: url }); setViewStudent(s => ({ ...s, photo: url })) }}/>}
+ {printList && <PrintStudentList list={printList} school={paperSettings} academicSession={academicSession} onClose={()=>setPrintList(null)} />}
  {newCredentials && (
  <div style={{ position:'fixed', inset:0, zIndex:14000, background:'var(--apex-bg-overlay)', display:'grid', placeItems:'center', padding:20 }} onClick={()=>setNewCredentials(null)}>
  <div style={{ ...card, width:'min(520px, 100%)', display:'grid', gap:16 }} onClick={e=>e.stopPropagation()}>

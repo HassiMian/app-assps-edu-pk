@@ -1273,6 +1273,18 @@ assertContains(
   'school branding writes must mirror changes into tenant_branding.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /2026-2027/,
+  'student management and student documents must use Academic Setup session dates rather than a hardcoded session.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'const academicSession = academicSessionLabel(sessionStart, sessionEnd);',
+  'student management must derive its visible academic session from Academic Setup.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
