@@ -17,42 +17,23 @@ function requireNoticeSchoolContext(req, res) {
   return schoolId
 }
 
+let noticesSchemaReady = null
 async function ensureNoticesTable() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS notices (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER,
-      title VARCHAR(500) NOT NULL,
-      content TEXT NOT NULL,
-      issued_by VARCHAR(255),
-      recipient_type JSONB DEFAULT '[]',
-      teacher_ids JSONB DEFAULT '[]',
-      mentioned_teacher_ids JSONB DEFAULT '[]',
-      template_key VARCHAR(100) DEFAULT 'custom',
-      language VARCHAR(20) DEFAULT 'bilingual',
-      content_english TEXT,
-      content_urdu TEXT,
-      priority VARCHAR(30) DEFAULT 'normal',
-      is_pinned BOOLEAN DEFAULT FALSE,
-      expires_at DATE,
-      read_count INTEGER DEFAULT 0,
-      total_recipients INTEGER DEFAULT 0,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )
+  if (noticesSchemaReady) return true
+  const result = await pool.query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'notices'
+      AND column_name IN ('school_id','title','content','recipient_type','teacher_ids','mentioned_teacher_ids','template_key','language','content_english','content_urdu','priority','is_pinned','expires_at','read_count','total_recipients')
   `)
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS school_id INTEGER;')
-  await pool.query('ALTER TABLE notices ALTER COLUMN school_id DROP DEFAULT;').catch(() => {})
-  await pool.query("ALTER TABLE notices ADD COLUMN IF NOT EXISTS mentioned_teacher_ids JSONB DEFAULT '[]';")
-  await pool.query("ALTER TABLE notices ADD COLUMN IF NOT EXISTS template_key VARCHAR(100) DEFAULT 'custom';")
-  await pool.query("ALTER TABLE notices ADD COLUMN IF NOT EXISTS language VARCHAR(20) DEFAULT 'bilingual';")
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS content_english TEXT;')
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS content_urdu TEXT;')
-  await pool.query("ALTER TABLE notices ADD COLUMN IF NOT EXISTS priority VARCHAR(30) DEFAULT 'normal';")
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS is_pinned BOOLEAN DEFAULT FALSE;')
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS expires_at DATE;')
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS read_count INTEGER DEFAULT 0;')
-  await pool.query('ALTER TABLE notices ADD COLUMN IF NOT EXISTS total_recipients INTEGER DEFAULT 0;')
+  if (Number(result.rows[0]?.count || 0) !== 15) {
+    const err = new Error('notices schema migration is not applied.')
+    err.code = 'NOTICES_SCHEMA_NOT_READY'
+    throw err
+  }
+  noticesSchemaReady = true
+  return true
 }
 
 function listValue(value) {

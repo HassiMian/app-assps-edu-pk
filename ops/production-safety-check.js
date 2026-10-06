@@ -1030,6 +1030,19 @@ for (const uiFile of [
   )
 }
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/noticesRoutes.js',
+  /CREATE TABLE IF NOT EXISTS notices|ALTER TABLE notices|CREATE INDEX IF NOT EXISTS notices_/,
+  'notice request handlers must not mutate notice schema.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/011_notices_schema.js',
+  'CREATE TABLE IF NOT EXISTS notices',
+  'notice schema must be versioned in migration 011.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -502,6 +502,15 @@ async function migrate() {
     }
 
     try {
+      const noticesMigration = require('../../migrations/011_notices_schema')
+      await noticesMigration.up()
+      console.log('notices schema ready')
+    } catch (err) {
+      console.error('Notices Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
