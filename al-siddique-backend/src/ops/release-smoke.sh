@@ -21,11 +21,21 @@ expect_status() {
   }
 }
 
+expect_post_status() {
+  local path="$1" expected="$2" code
+  code="$(curl -sS -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d '{}' "$BASE$path")"
+  [ "$code" = "$expected" ] || {
+    echo "BACKEND_RELEASE_SMOKE_FAIL method=POST path=$path expected=$expected actual=$code" >&2
+    exit 53
+  }
+}
+
 expect_status /api/assessment-studio/papers 401
 expect_status /api/portal/paper-studio/context 401
 expect_status /api/portal/paper-studio/papers 401
 expect_status /api/portal/paper-studio/canonical-readiness 401
 expect_status /api/portal/paper-studio/canonical-canary/1/preflight 401
+expect_post_status /api/portal/paper-studio/publisher-review/validate 401
 expect_status /api/question-bank 401
 expect_status /api/paper/vault 401
 
