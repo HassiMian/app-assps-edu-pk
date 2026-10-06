@@ -1261,6 +1261,18 @@ assertContains(
   'branding read failures must be explicit to the client.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  'keep schools + tenant_branding synchronized atomically',
+  'school branding writes must keep both branding sources synchronized.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  'ON CONFLICT (tenant_id)',
+  'school branding writes must mirror changes into tenant_branding.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

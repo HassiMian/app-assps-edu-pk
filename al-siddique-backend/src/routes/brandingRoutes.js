@@ -130,44 +130,61 @@ router.get('/branding', protect, async (req, res) => {
   }
 })
 
-// PUT /api/school/branding
+// PUT /api/school/branding — keep schools + tenant_branding synchronized atomically
 router.put('/branding', protect, canManageBranding, async (req, res) => {
+  const schoolId = Number(req.school_id || 0)
+  if (!schoolId) return res.status(400).json({ success: false, message: 'School context is missing.' })
+
+  const schoolName = String(req.body?.schoolName || '').trim() || null
+  const primaryColor = String(req.body?.primaryColor || '').trim() || null
+  const secondaryColor = String(req.body?.secondaryColor || '').trim() || null
+  const client = await pool.connect()
   try {
-    const schoolId = req.school_id
-    if (!schoolId) {
-      return res.status(400).json({ success: false, message: 'School context is missing.' })
-    }
-
-    const { schoolName, primaryColor, secondaryColor } = req.body
-
-    const result = await pool.query(
-      `UPDATE schools 
-       SET school_name = COALESCE($1, school_name), 
-           primary_color = COALESCE($2, primary_color), 
+    await client.query('BEGIN')
+    const school = await client.query(
+      `UPDATE schools
+       SET school_name = COALESCE($1, school_name),
+           primary_color = COALESCE($2, primary_color),
            secondary_color = COALESCE($3, secondary_color),
-           updated_at = NOW() 
-       WHERE id = $4 
-       RETURNING id, school_name, primary_color, secondary_color`,
-      [schoolName || null, primaryColor || null, secondaryColor || null, schoolId]
+           updated_at = NOW()
+       WHERE id = $4
+       RETURNING id, tenant_id, school_name, primary_color, secondary_color`,
+      [schoolName, primaryColor, secondaryColor, schoolId]
     )
-
-    if (result.rows.length === 0) {
+    if (!school.rowCount) {
+      await client.query('ROLLBACK')
       return res.status(404).json({ success: false, message: 'School not found.' })
     }
 
-    const updatedSchool = result.rows[0]
+    const updatedSchool = school.rows[0]
+    if (updatedSchool.tenant_id) {
+      await client.query(
+        `INSERT INTO tenant_branding (id, tenant_id, primary_color, secondary_color, updated_at)
+         VALUES ($1,$2,$3,$4,NOW())
+         ON CONFLICT (tenant_id)
+         DO UPDATE SET
+           primary_color = COALESCE(EXCLUDED.primary_color, tenant_branding.primary_color),
+           secondary_color = COALESCE(EXCLUDED.secondary_color, tenant_branding.secondary_color),
+           updated_at = NOW()`,
+        [crypto.randomUUID(), updatedSchool.tenant_id, primaryColor, secondaryColor]
+      )
+    }
 
+    await client.query('COMMIT')
     return res.json({
       success: true,
       school: {
         schoolName: updatedSchool.school_name,
         primaryColor: updatedSchool.primary_color,
-        secondaryColor: updatedSchool.secondary_color
-      }
+        secondaryColor: updatedSchool.secondary_color,
+      },
     })
   } catch (error) {
+    await client.query('ROLLBACK').catch(() => {})
     console.error('Update branding error:', error)
     return res.status(500).json({ success: false, message: 'Server error updating branding.' })
+  } finally {
+    client.release()
   }
 })
 
@@ -190,20 +207,36 @@ router.post('/branding/logo', protect, canManageBranding, (req, res) => {
 
       const logoUrl = `/uploads/${req.file.filename}`
 
-      const result = await pool.query(
-        'UPDATE schools SET logo_url = $1, updated_at = NOW() WHERE id = $2 RETURNING id, logo_url',
-        [logoUrl, schoolId]
-      )
-
-      if (result.rows.length === 0) {
-        await cleanupFile(req.file.path)
-        return res.status(404).json({ success: false, message: 'School not found.' })
+      const client = await pool.connect()
+      try {
+        await client.query('BEGIN')
+        const result = await client.query(
+          'UPDATE schools SET logo_url = $1, updated_at = NOW() WHERE id = $2 RETURNING id, tenant_id, logo_url',
+          [logoUrl, schoolId]
+        )
+        if (!result.rowCount) {
+          await client.query('ROLLBACK')
+          await cleanupFile(req.file.path)
+          return res.status(404).json({ success: false, message: 'School not found.' })
+        }
+        const tenantId = result.rows[0].tenant_id
+        if (tenantId) {
+          await client.query(
+            `INSERT INTO tenant_branding (id, tenant_id, logo_url, updated_at)
+             VALUES ($1,$2,$3,NOW())
+             ON CONFLICT (tenant_id)
+             DO UPDATE SET logo_url = EXCLUDED.logo_url, updated_at = NOW()`,
+            [crypto.randomUUID(), tenantId, logoUrl]
+          )
+        }
+        await client.query('COMMIT')
+        return res.json({ success: true, logoUrl })
+      } catch (transactionError) {
+        await client.query('ROLLBACK').catch(() => {})
+        throw transactionError
+      } finally {
+        client.release()
       }
-
-      return res.json({
-        success: true,
-        logoUrl
-      })
     } catch (dbErr) {
       console.error('DB Update branding logo error:', dbErr)
       await cleanupFile(req.file.path)
