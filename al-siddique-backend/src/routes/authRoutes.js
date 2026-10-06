@@ -1032,19 +1032,25 @@ router.post('/users', protect, async (req, res) => {
     }
 
     const hashed = await bcrypt.hash(password, 10);
-    const supportsTenantId = await hasColumn('users', 'tenant_id').catch(() => false)
-    const tenantId = supportsTenantId ? (school.tenant_id || currentTenantId(req) || null) : null
-    const result = supportsTenantId
-      ? await query(
-        `INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, true) RETURNING id, name, email, role, school_id, tenant_id`,
-        [name, email, hashed, role, designation || role, schoolId, tenantId]
-      )
-      : await query(
-        `INSERT INTO users (name, email, password, role, designation, school_id, is_active)
-         VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING id, name, email, role, school_id`,
-        [name, email, hashed, role, designation || role, schoolId]
-      )
+    const supportsTenantId = await hasColumn('users', 'tenant_id')
+    if (!supportsTenantId) {
+      return sendJson(res, 503, {
+        code: 'USER_TENANT_SCHEMA_REQUIRED',
+        message: 'User storage is not tenant-safe for account creation.'
+      })
+    }
+    const tenantId = school.tenant_id || currentTenantId(req) || null
+    if (!tenantId) {
+      return sendJson(res, 503, {
+        code: 'TENANT_CONTEXT_REQUIRED',
+        message: 'The selected school does not have a valid tenant context.'
+      })
+    }
+    const result = await query(
+      `INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, true) RETURNING id, name, email, role, school_id, tenant_id`,
+      [name, email, hashed, role, designation || role, schoolId, tenantId]
+    )
     return sendJson(res, 201, { message: 'User created successfully', user: result.rows[0] });
   } catch (err) {
     if (err.code === '23505') {

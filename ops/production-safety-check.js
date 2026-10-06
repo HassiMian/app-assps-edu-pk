@@ -1683,3 +1683,21 @@ assertContains(
   'JOIN students s ON s.id = f.student_id AND s.school_id = f.school_id',
   'fee history must bind challans to students within the same school.'
 )
+
+assertNotContains(
+  'al-siddique-backend/src/routes/authRoutes.js',
+  /hasColumn\('users', 'tenant_id'\)\.catch\(\(\) => false\)/,
+  'account creation must not turn tenant-schema lookup failures into tenantless users.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/authRoutes.js',
+  'USER_TENANT_SCHEMA_REQUIRED',
+  'account creation must fail closed when users.tenant_id is unavailable.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/authRoutes.js',
+  'TENANT_CONTEXT_REQUIRED',
+  'account creation must require a resolvable tenant context.'
+)
