@@ -15,6 +15,12 @@ import {
   validateFinalExamRows,
 } from './dateSheetFinalExam2026'
 
+function academicSessionLabel(sessionStart, sessionEnd) {
+  const start = String(sessionStart || '').slice(0, 4)
+  const end = String(sessionEnd || '').slice(0, 4)
+  return /^\d{4}$/.test(start) && /^\d{4}$/.test(end) ? `${start}-${end}` : ''
+}
+
 const STORE_KEY = 'al_siddique_date_sheets'
 const TERMS = ['First Term Exam', 'Second Term Exam', 'Annual Exam', 'Monthly Assessment']
 const TEMPLATES = [
@@ -228,8 +234,8 @@ function buildCard({ student, rows, school, term, session, template }) {
   <div class="head">
     ${logo}
     <div class="school">
-      <h1>${esc(school.schoolName || 'Al Siddique Scholars Public School')}</h1>
-      <small>${esc(school.address || 'Sharif Chowk, Rayya Khas, Narowal')}${school.phone ? ` | Ph: ${esc(school.phone)}` : ''}</small>
+      <h1>${esc(school.schoolName || '—')}</h1>
+      <small>${esc(school.address || '')}${school.phone ? ` | Ph: ${esc(school.phone)}` : ''}</small>
     </div>
     <div class="meta">
       <span class="meta-kicker">Date Sheet</span>
@@ -261,11 +267,12 @@ function openPrint({ students, rows, school, term, session, template, layout }) 
 }
 
 export default function DateSheet() {
-  const { activeClasses, subjectsForClass } = useAcademicStore()
+  const { activeClasses, subjectsForClass, sessionStart, sessionEnd } = useAcademicStore()
+  const activeAcademicSession = academicSessionLabel(sessionStart, sessionEnd)
   const { students } = useStudentStore()
   const { paperSettings } = usePaperStore()
   const classOptions = activeClasses.map(c => ({ value: c.level, label: c.name }))
-  const [session, setSession] = useState(paperSettings.academicYear || FINAL_EXAM_SESSION)
+  const [session, setSession] = useState(activeAcademicSession || paperSettings.academicYear || '')
   const [term, setTerm] = useState(FINAL_EXAM_TERM)
   const [dayCount, setDayCount] = useState(12)
   const [warning, setWarning] = useState('')
@@ -279,7 +286,7 @@ export default function DateSheet() {
   const [sheets, setSheets] = useState(readSheets)
   const [syncState, setSyncState] = useState('loading')
   const [printClass, setPrintClass] = useState(classOptions[0]?.value || '1')
-  const [printSession, setPrintSession] = useState(paperSettings.academicYear || FINAL_EXAM_SESSION)
+  const [printSession, setPrintSession] = useState(activeAcademicSession || paperSettings.academicYear || '')
   const [printTerm, setPrintTerm] = useState(FINAL_EXAM_TERM)
   const [template, setTemplate] = useState('classic')
   const [layout, setLayout] = useState('single')

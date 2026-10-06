@@ -1347,6 +1347,33 @@ assertNotContains(
   'fee lookup must not fall back to a hardcoded academic session.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  /const SCHOOL_NAME = ['"]Al Siddique Scholars Public School['"]/,
+  'notification templates must use authenticated tenant identity rather than a hardcoded school name.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  "api.get('/api/settings')",
+  'notification center must load the current tenant school identity.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+  /Al Siddique Scholars Public School|Sharif Chowk, Rayya Khas, Narowal|useState\([^\n]*FINAL_EXAM_SESSION/,
+  'date sheet authoring/printing must use live tenant identity and Academic Setup session.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+  'const activeAcademicSession = academicSessionLabel(sessionStart, sessionEnd)',
+  'date sheet default session must come from Academic Setup.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /Al Siddique Scholars Public School|Sharif Chowk, Rayya Khas, Narowal|0300-1291959/,
+  'fee operational output must not fabricate ASSPS identity for other tenants.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

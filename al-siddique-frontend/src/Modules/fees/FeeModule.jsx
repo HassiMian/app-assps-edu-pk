@@ -277,7 +277,7 @@ function PrintVoucher({ challan, selectedTemplate, onClose, school }) {
   const templateId = templateIdMap[template] || 1
 
   const schoolObj = {
-    name: school?.schoolName || school?.name || 'Al Siddique Scholars Public School',
+    name: school?.schoolName || school?.name || '—',
     logo: school?.logo || '',
     address: school?.address || ''
   }
@@ -386,9 +386,9 @@ function PrintStudentList({ list, onClose, school }) {
   if (!list) return null
   const { type, data } = list
   const logo = school?.logo || ''
-  const schoolName = school?.schoolName || 'Al Siddique Scholars Public School'
-  const schoolAddress = school?.address || 'Sharif Chowk, Rayya Khas, Narowal'
-  const schoolPhone = school?.phone || '0300-1291959'
+  const schoolName = school?.schoolName || '—'
+  const schoolAddress = school?.address || ''
+  const schoolPhone = school?.phone || ''
   const { paperSettings } = usePaperStore()
   const sigImg = paperSettings?.principalSignature || school?.principalSignature || null
   const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })

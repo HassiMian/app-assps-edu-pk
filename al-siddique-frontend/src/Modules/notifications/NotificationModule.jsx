@@ -22,7 +22,6 @@ const card = {
 }
 
 const API_BASE = '/api/notify'
-const SCHOOL_NAME = 'Al Siddique Scholars Public School'
 
 //  Helpers 
 
@@ -134,6 +133,20 @@ export default function NotificationModule() {
  const [sourceRecipients, setSourceRecipients] = useState([])
  const [sourceLoading, setSourceLoading] = useState(false)
  const [sourceMessage, setSourceMessage] = useState('')
+ const [schoolName, setSchoolName] = useState('')
+
+ useEffect(() => {
+ let cancelled = false
+ api.get('/api/settings')
+ .then(res => {
+ if (cancelled) return
+ setSchoolName(String(res.data?.data?.school_name || '').trim())
+ })
+ .catch(() => {
+ if (!cancelled) setSchoolName('')
+ })
+ return () => { cancelled = true }
+ }, [])
 
  // Sync tab when URL ?tab= changes
  useEffect(() => {
@@ -214,15 +227,16 @@ export default function NotificationModule() {
  }
 
  function buildMessage(templateKey, data) {
- const d = { ...data, schoolName: SCHOOL_NAME }
+ const d = { ...data, schoolName }
+ const signature = d.schoolName ? `${signature}` : ''
  // Simple inline template (no import needed in frontend)
  const templates = {
- attendance_absent: { english: `Dear Parent, ${d.name} (Class ${d.class}) was ABSENT today ${d.date}. — ${d.schoolName}`, urdu: `محترم والدین، ${d.name} (کلاس ${d.class}) نے آج ${d.date} غیر حاضری کی۔ — ${d.schoolName}` },
- attendance_late: { english: `Dear Parent, ${d.name} (Class ${d.class}) arrived LATE today ${d.date}. — ${d.schoolName}`, urdu: `محترم والدین، ${d.name} (کلاس ${d.class}) آج ${d.date} دیر سے آئے۔ — ${d.schoolName}` },
- fee_reminder: { english: `Dear Parent, Fee of Rs. ${d.feeAmount} for ${d.name} (${d.class}) for ${d.feeMonth} is UNPAID. Please pay soon. — ${d.schoolName}`, urdu: `محترم والدین، ${d.name} (کلاس ${d.class}) کی ${d.feeMonth} کی فیس ${d.feeAmount} روپے ادا نہیں ہوئی۔ جلد ادا کریں۔ — ${d.schoolName}` },
- fee_overdue: { english: ` URGENT — Fee of Rs. ${d.feeAmount} for ${d.name} (${d.class}) is OVERDUE. Pay immediately. — ${d.schoolName}`, urdu: ` فوری — ${d.name} (کلاس ${d.class}) کی فیس ${d.feeAmount} روپے واجب الادا ہے۔ فوری ادا کریں۔ — ${d.schoolName}` },
- result_pass: { english: ` ${d.name} (${d.class}) PASSED ${d.examName}. Marks: ${d.marks}/${d.total} Grade: ${d.grade}. Congratulations! — ${d.schoolName}`, urdu: ` ${d.name} (کلاس ${d.class}) نے ${d.examName} میں کامیابی حاصل کی۔ نمبر: ${d.marks}/${d.total} گریڈ: ${d.grade}۔ مبارک ہو! — ${d.schoolName}` },
- result_fail: { english: `${d.name} (${d.class}) FAILED ${d.examName}. Marks: ${d.marks}/${d.total} Grade: ${d.grade}. Please meet the teacher. — ${d.schoolName}`, urdu: `${d.name} (کلاس ${d.class}) ${d.examName} میں ناکام ہوئے۔ نمبر: ${d.marks}/${d.total} گریڈ: ${d.grade}۔ استاد سے ملیں۔ — ${d.schoolName}` },
+ attendance_absent: { english: `Dear Parent, ${d.name} (Class ${d.class}) was ABSENT today ${d.date}.${signature}`, urdu: `محترم والدین، ${d.name} (کلاس ${d.class}) نے آج ${d.date} غیر حاضری کی۔${signature}` },
+ attendance_late: { english: `Dear Parent, ${d.name} (Class ${d.class}) arrived LATE today ${d.date}.${signature}`, urdu: `محترم والدین، ${d.name} (کلاس ${d.class}) آج ${d.date} دیر سے آئے۔${signature}` },
+ fee_reminder: { english: `Dear Parent, Fee of Rs. ${d.feeAmount} for ${d.name} (${d.class}) for ${d.feeMonth} is UNPAID. Please pay soon.${signature}`, urdu: `محترم والدین، ${d.name} (کلاس ${d.class}) کی ${d.feeMonth} کی فیس ${d.feeAmount} روپے ادا نہیں ہوئی۔ جلد ادا کریں۔${signature}` },
+ fee_overdue: { english: ` URGENT — Fee of Rs. ${d.feeAmount} for ${d.name} (${d.class}) is OVERDUE. Pay immediately.${signature}`, urdu: ` فوری — ${d.name} (کلاس ${d.class}) کی فیس ${d.feeAmount} روپے واجب الادا ہے۔ فوری ادا کریں۔${signature}` },
+ result_pass: { english: ` ${d.name} (${d.class}) PASSED ${d.examName}. Marks: ${d.marks}/${d.total} Grade: ${d.grade}. Congratulations!${signature}`, urdu: ` ${d.name} (کلاس ${d.class}) نے ${d.examName} میں کامیابی حاصل کی۔ نمبر: ${d.marks}/${d.total} گریڈ: ${d.grade}۔ مبارک ہو!${signature}` },
+ result_fail: { english: `${d.name} (${d.class}) FAILED ${d.examName}. Marks: ${d.marks}/${d.total} Grade: ${d.grade}. Please meet the teacher.${signature}`, urdu: `${d.name} (کلاس ${d.class}) ${d.examName} میں ناکام ہوئے۔ نمبر: ${d.marks}/${d.total} گریڈ: ${d.grade}۔ استاد سے ملیں۔${signature}` },
  custom: { english: d.customMsg || '', urdu: d.customMsg || '' },
  }
  const tmpl = templates[templateKey] || templates.custom
