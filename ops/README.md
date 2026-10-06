@@ -9,6 +9,7 @@ This folder contains operational and historical helper scripts related to the Sa
 - `release-candidate-manifest.js` - dirty tree inventory with deploy-impact categories
 - `live-route-contract-check.js` - read-only public/protected route contract check
 - `verify-local.js` - local verification runner for safety, syntax, ops tests, PowerShell parse, and frontend build
+- `verify-rollback-snapshot.sh` - verifies frontend/backend rollback copies, release metadata, and PostgreSQL custom-format dump readability before a production mutation
 - `tests/` - ops and safety regression tests
 
 ## Safety
@@ -38,7 +39,7 @@ Apply mode requires:
 - `ASSPS_DEPLOY_KNOWN_HOSTS`
 - `-ConfirmProduction`
 - reviewed release candidate
-- rollback plan
+- rollback plan with a machine-verified snapshot (`ops/verify-rollback-snapshot.sh <snapshot-dir>`)
 - backend `.env` containing `NODE_ENV=production`
 - backend `.env` containing `AUTO_MIGRATE_ON_BOOT=false`
 

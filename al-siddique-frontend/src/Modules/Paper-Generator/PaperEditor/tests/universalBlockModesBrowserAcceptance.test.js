@@ -12,6 +12,7 @@ async function openAdd(page,type){
  const menu=page.locator('[data-block-add-menu]')
  await menu.evaluate(el=>{el.open=true})
  await page.locator(`[data-add-block="${type}"]`).click()
+ assert.equal(await menu.evaluate(el=>el.open),false,`Add Block menu should collapse after ${type} is inserted`)
 }
 
 test('universal add-block modes persist canonical node types and balanced marks', {timeout:90000}, async t=>{
