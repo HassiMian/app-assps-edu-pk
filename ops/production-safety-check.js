@@ -80,6 +80,30 @@ assertContains(
 )
 
 assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/assessment-studio', './routes/assessmentStudioRoutes')",
+  'canonical Assessment Studio route must remain mounted.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/question-bank', './routes/questionBankRoutes')",
+  'canonical Question Bank route must remain mounted.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/portal/paper-studio', './routes/paperStudioRoutes')",
+  'APEX Connect must project Paper Studio through the shared backend facade.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  'Security-critical authoring migration failed:',
+  'paper governance/RLS migrations must fail closed.'
+)
+
+assertContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
   'productionHost ? sourceRecipients',
   'production notifications must use source-backed recipients.'
