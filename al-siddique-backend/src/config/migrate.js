@@ -454,6 +454,8 @@ async function migrate() {
       await questionGovernanceMigration.up()
       const assessmentPrintJobsMigration = require('./migrations/008_assessment_print_jobs_v1')
       await assessmentPrintJobsMigration.up()
+      const curriculumResourceMigration = require('./migrations/009_curriculum_resource_model_v1')
+      await curriculumResourceMigration.up()
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
