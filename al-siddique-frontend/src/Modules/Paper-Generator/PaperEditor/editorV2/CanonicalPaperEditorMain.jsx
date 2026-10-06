@@ -9,6 +9,7 @@ import {
   loadWorkingDraft,
 } from './workingDraftStorage.js'
 import { StructuredFocusProvider, INTERACTION_MODE } from './structured/StructuredFocusContext.jsx'
+import { downloadCanonicalDocx } from '../export/canonicalDocxExport.js'
 import { ZoomIn, ZoomOut, ArrowLeft } from 'lucide-react'
 
 export default function CanonicalPaperEditorMain({
@@ -31,6 +32,7 @@ export default function CanonicalPaperEditorMain({
   const [zoomLevel, setZoomLevel] = useState(100)
   const [saveStatus, setSaveStatus] = useState('')
   const [isSaving, setIsSaving] = useState(false)
+  const [isExportingDocx, setIsExportingDocx] = useState(false)
   const [externalRevisionToken, setExternalRevisionToken] = useState(1)
 
   // 2. Subscribe to working store updates (only fired on explicit document-level changes)
@@ -190,6 +192,25 @@ export default function CanonicalPaperEditorMain({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [store])
 
+  const handleExportDocx = useCallback(async () => {
+    if (isExportingDocx) return
+    setIsExportingDocx(true)
+    try {
+      const doc = workingDoc
+      const meta = doc?.metadata || {}
+      const base = `${meta.subjectName || meta.subject || 'Assessment'}_${meta.className || meta.classLevel || ''}`
+        .replace(/[^\p{L}\p{N}_-]+/gu, '_').replace(/^_+|_+$/g, '') || 'Assessment_Paper'
+      await downloadCanonicalDocx(doc, `${base}.docx`)
+      setSaveStatus('DOCX exported successfully!')
+      setTimeout(() => setSaveStatus(''), 3000)
+    } catch (err) {
+      console.error('Canonical DOCX export failed:', err)
+      setSaveStatus('DOCX export failed. Please try again.')
+    } finally {
+      setIsExportingDocx(false)
+    }
+  }, [isExportingDocx, workingDoc])
+
   const zoomTransform = `scale(${zoomLevel / 100})`
 
   return (
@@ -223,6 +244,8 @@ export default function CanonicalPaperEditorMain({
         activeFieldKey={activeFieldKey}
         activeStructuredKey={activeStructuredKey}
         onPrint={handlePrint}
+        onExportDocx={handleExportDocx}
+        exportingDocx={isExportingDocx}
       />
 
       {/* 2. Sub-Toolbar with Mode Toggle & Zoom */}

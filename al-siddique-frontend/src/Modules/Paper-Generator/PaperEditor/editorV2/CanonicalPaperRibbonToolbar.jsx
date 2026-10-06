@@ -4,7 +4,7 @@ import {
   Undo2, Redo2, Bold, Italic, Underline, Strikethrough,
   Superscript, Subscript, AlignLeft, AlignCenter, AlignRight,
   AlignJustify, ArrowLeft, ArrowRight, Highlighter, RemoveFormatting,
-  Save, Edit3, CheckCircle2, Printer
+  Save, Edit3, CheckCircle2, Printer, FileDown
 } from 'lucide-react'
 import {
   SUPPORTED_FONTS,
@@ -28,6 +28,8 @@ export default function CanonicalPaperRibbonToolbar({
   activeFieldKey = null,
   activeStructuredKey = null,
   onPrint = null,
+  onExportDocx = null,
+  exportingDocx = false,
 }) {
   const [, setSelectionRev] = useState(0)
 
@@ -229,6 +231,23 @@ export default function CanonicalPaperRibbonToolbar({
 
         {/* Save Draft & Print Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {onExportDocx && (
+            <button
+              type="button"
+              id="canonical-docx-btn"
+              onClick={onExportDocx}
+              disabled={exportingDocx}
+              title="Export this canonical PaperDocument as Microsoft Word (.docx)"
+              style={{
+                display: 'flex', alignItems: 'center', gap: '5px',
+                padding: '5px 12px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.16)',
+                background: 'rgba(255,255,255,0.08)', color: '#e2e8f0', fontWeight: 700, fontSize: '11px',
+                cursor: exportingDocx ? 'wait' : 'pointer', opacity: exportingDocx ? 0.65 : 1,
+              }}
+            >
+              <FileDown size={13} /> {exportingDocx ? 'Exporting…' : 'Word (.docx)'}
+            </button>
+          )}
           {onPrint && (
             <button
               type="button"
