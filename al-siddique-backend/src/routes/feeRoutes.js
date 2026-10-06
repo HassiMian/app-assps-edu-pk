@@ -261,7 +261,7 @@ router.get('/settings', protect, async (req, res) => {
     res.json({ success: true, data: { classSettings: classSettings.rows, discountPackages: packages.rows } })
   } catch (err) {
     console.error('Fee settings error:', err.message)
-    res.status(500).json({ success: false, message: err.message })
+    res.status(500).json({ success: false, message: 'Fee settings could not be loaded.' })
   }
 })
 
@@ -330,7 +330,7 @@ router.put('/settings', protect, adminOnly, async (req, res) => {
     res.json({ success: true, message: 'Fee settings saved' })
   } catch (err) {
     console.error('Fee settings save error:', err.message)
-    res.status(500).json({ success: false, message: err.message })
+    res.status(500).json({ success: false, message: 'Fee settings could not be saved.' })
   }
 })
 
@@ -384,7 +384,8 @@ router.get('/summary', protect, adminOnly, async (req, res) => {
       },
     })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Fee summary error:', err.message)
+    res.status(500).json({ success: false, message: 'Fee summary could not be loaded.' })
   }
 })
 
@@ -403,7 +404,8 @@ router.get('/existing', protect, adminOnly, async (req, res) => {
     })
     res.json({ success: true, exists: !!existing, data: existing })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Fee existence check error:', err.message)
+    res.status(500).json({ success: false, message: 'Fee challan status could not be checked.' })
   }
 })
 
@@ -493,7 +495,7 @@ router.get('/:id', protect, async (req, res) => {
     res.json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Fee get by id error:', err.message)
-    res.status(500).json({ success: false, message: err.message })
+    res.status(500).json({ success: false, message: 'Fee challan could not be loaded.' })
   }
 })
 
@@ -744,7 +746,8 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan updated', data: result.rows[0] })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Challan update failed:', err.message)
+    res.status(500).json({ success: false, message: 'Fee challan could not be updated.' })
   }
 })
 
@@ -757,7 +760,8 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan deleted' })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Challan delete failed:', err.message)
+    res.status(500).json({ success: false, message: 'Fee challan could not be deleted.' })
   }
 })
 
@@ -812,7 +816,8 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan regenerated', data: result.rows[0] })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Challan regeneration failed:', err.message)
+    res.status(500).json({ success: false, message: 'Fee challan could not be regenerated.' })
   }
 })
 

@@ -1737,3 +1737,9 @@ assertContains(
   'Exams could not be loaded.',
   'exam-list failures must be visible to the operator.'
 )
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /res\.status\(500\)\.json\(\{ success: false, message: err\.message \}\)/,
+  'fee endpoints must not expose raw internal error messages to clients.'
+)
