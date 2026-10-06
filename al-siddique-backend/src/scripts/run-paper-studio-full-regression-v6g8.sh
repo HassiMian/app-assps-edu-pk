@@ -63,8 +63,10 @@ node --test --test-concurrency=1 \
   tests/paper-v6g6-question-page-coverage.test.js \
   tests/paper-v6g7-academic-conflict-evidence.test.js \
   tests/paper-v6g8-independent-review-http.test.js \
-  tests/paper-v6g8-review-cli.test.js | tee "$LOG"
+  tests/paper-v6g8-review-cli.test.js \
+  tests/paper-v6g9-promotion-precheck.test.js \
+  tests/paper-v6g9-promotion-precheck-http.test.js | tee "$LOG"
 
-grep -q '^# pass 61$' "$LOG"
+grep -q '^# pass 65$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
 echo "V6G8_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"

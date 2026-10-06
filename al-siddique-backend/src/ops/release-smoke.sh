@@ -36,6 +36,7 @@ expect_status /api/portal/paper-studio/papers 401
 expect_status /api/portal/paper-studio/canonical-readiness 401
 expect_status /api/portal/paper-studio/canonical-canary/1/preflight 401
 expect_post_status /api/portal/paper-studio/publisher-review/validate 401
+expect_post_status /api/portal/paper-studio/publisher-review/promotion-precheck 401
 expect_status /api/question-bank 401
 expect_status /api/paper/vault 401
 

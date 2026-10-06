@@ -6,6 +6,7 @@ const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper }
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
 const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
+const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPublisherPromotionPrecheckV6G9')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -32,6 +33,22 @@ router.get('/canonical-readiness', async (req,res) => {
 })
 
 
+
+
+router.post('/publisher-review/promotion-precheck', express.json({limit:'256kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=buildPublisherPromotionPrecheck(req.body||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,persisted:false,approvalChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio publisher promotion precheck error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PUBLISHER_PROMOTION_PRECHECK_FAILED',message:status>=500?'Publisher promotion precheck could not be verified.':err.message})
+  }
+})
 
 router.post('/publisher-review/validate', express.json({limit:'256kb'}), async (req,res) => {
   try {
