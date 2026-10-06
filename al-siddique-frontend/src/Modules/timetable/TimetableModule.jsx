@@ -25,7 +25,7 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
  const item = assignments[day]?.[period] || {}
  return `
  <td>
- <strong>${escapeHtml(item.subject || 'English')}</strong>
+ <strong>${escapeHtml(item.subject || '—')}</strong>
  <span>${escapeHtml(item.teacher || 'Unassigned')}</span>
  </td>
  `
@@ -80,7 +80,7 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
  <div style="color:#64748b;font-size:11px;margin-top:4px">${escapeHtml(school?.address || '')}</div>
  </div>
  <div class="meta">
- <div><strong>Session:</strong> ${escapeHtml(school?.examYear || '2026-2027')}</div>
+ <div><strong>Session:</strong> ${escapeHtml(school?.examYear || 'Not set')}</div>
  <div><strong>Date:</strong> ${escapeHtml(today)}</div>
  <div><strong>Phone:</strong> ${escapeHtml(school?.phone || '')}</div>
  </div>

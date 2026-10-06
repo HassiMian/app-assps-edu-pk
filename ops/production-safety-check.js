@@ -476,6 +476,31 @@ assertNotContains(
   'fee APIs must never fabricate challans, proofs, or payments when storage is unavailable.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/DateSheet.jsx',
+  /student\.section \|\| ['"]A['"]/,
+  'date sheet print must not invent a section for students with missing section data.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  /item\.subject \|\| ['"]English['"]|examYear \|\| ['"]2026-2027['"]/,
+  'timetable print must not invent subject or academic session values.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  /item\.session \|\| ['"]2026-2027['"]/,
+  'fee settings must not display a hardcoded academic session.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx',
+  /selectedExam\.session \|\| ['"]2026-2027['"]/,
+  'marks sheet must not invent a session when an exam has no session.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

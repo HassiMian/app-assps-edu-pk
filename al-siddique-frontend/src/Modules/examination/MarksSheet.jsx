@@ -320,7 +320,7 @@ export default function MarksSheet() {
 
  {selectedExam && (
  <div style={{ color: C.muted, fontSize: 13 }}>
- Using exam: <strong style={{ color: C.silver }}>{selectedExam.name}</strong> · {classLabel(normalizeClass(selectedExam.class))} · {selectedExam.session || '2026-2027'}
+ Using exam: <strong style={{ color: C.silver }}>{selectedExam.name}</strong> · {classLabel(normalizeClass(selectedExam.class))} · {selectedExam.session || 'Session not set'}
  </div>
  )}
  </div>

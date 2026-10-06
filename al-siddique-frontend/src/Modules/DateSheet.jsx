@@ -241,7 +241,7 @@ function buildCard({ student, rows, school, term, session, template }) {
     <div><span>Student</span><strong>${esc(student.name)}</strong></div>
     <div><span>GR No</span><strong>${esc(student.gr_number || '-')}</strong></div>
     <div><span>Father</span><strong>${esc(student.father_name || '-')}</strong></div>
-    <div><span>Class</span><strong>${esc(clsLabel(student.class))} - ${esc(student.section || 'A')}</strong></div>
+    <div><span>Class</span><strong>${esc(clsLabel(student.class))}${student.section ? ` - ${esc(student.section)}` : ''}</strong></div>
   </div>
   <table><thead><tr><th>#</th><th>Date</th><th>Day</th><th>Subject</th><th>Time</th></tr></thead><tbody>${lines}</tbody></table>
   <div class="foot"><span>Prepared by Exam Office</span><span>Controller of Examination</span></div>

@@ -231,7 +231,7 @@ export default function FeeSettings() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
                   <div>
                     <div style={{ color: '#fff', fontWeight: 800 }}>{item.class_name}</div>
-                    <div style={{ color: C.muted, fontSize: 12 }}>{item.session || '2026-2027'}</div>
+                    <div style={{ color: C.muted, fontSize: 12 }}>{item.session || 'Session not set'}</div>
                   </div>
                   <Toggle checked={item.active !== false} onChange={(checked) => updateClass(index, { active: checked })} />
                 </div>
