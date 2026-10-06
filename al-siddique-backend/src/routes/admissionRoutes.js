@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
       ['previous_school', previous_school || null],
       ['message', message || null],
     ]
-    const supported = await Promise.all(baseColumns.map(([col]) => hasColumn('admissions', col).catch(() => false)))
+    const supported = await Promise.all(baseColumns.map(([col]) => hasColumn('admissions', col)))
     const columns = []
     const values = []
     baseColumns.forEach(([col, val], i) => {
