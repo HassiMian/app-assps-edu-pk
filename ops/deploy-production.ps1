@@ -151,7 +151,7 @@ if ($Mode -in @('Backend', 'Both')) {
 
   $archive = Join-Path $env:TEMP "assps-backend-src-$timestamp.tar"
   $backendTree = "${targetCommit}:al-siddique-backend/src"
-  Run "git -C `"$repoRoot`" archive --format=tar --output=`"$archive`" `"$backendTree`""
+  Run "git -c core.autocrlf=false -c core.eol=lf -C `"$repoRoot`" archive --format=tar --output=`"$archive`" `"$backendTree`""
   CopyToRemote $archive "/tmp/assps-backend-src-$timestamp.tar"
   Remote @"
 set -e

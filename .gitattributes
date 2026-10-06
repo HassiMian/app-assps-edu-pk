@@ -1,0 +1,11 @@
+# Backend runtime artifacts are deployed to Linux and several V6 contracts are byte-pinned.
+al-siddique-backend/src/**/*.js text eol=lf
+al-siddique-backend/src/**/*.mjs text eol=lf
+al-siddique-backend/src/**/*.cjs text eol=lf
+al-siddique-backend/src/**/*.json text eol=lf
+al-siddique-backend/src/**/*.sql text eol=lf
+al-siddique-backend/src/**/*.sh text eol=lf
+al-siddique-backend/src/**/*.md text eol=lf
+al-siddique-backend/src/*.js text eol=lf
+al-siddique-backend/src/*.json text eol=lf
+al-siddique-backend/src/*.sh text eol=lf
