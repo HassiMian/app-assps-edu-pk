@@ -136,6 +136,40 @@ async function notifyParent(phone, studentName, status, date, twilioClient, twil
   }).catch(() => {})
 }
 
+// GET /api/attendance/monthly-class-summary — canonical month aggregate by class
+router.get('/monthly-class-summary', protect, requireAttendanceAnalyticsAccess, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const year = Number(req.query.year || new Date().getFullYear())
+    const month = Number(req.query.month || new Date().getMonth() + 1)
+    if (!Number.isInteger(year) || year < 2000 || year > 2100 || !Number.isInteger(month) || month < 1 || month > 12) {
+      return res.status(400).json({ success: false, message: 'Valid year and month are required.' })
+    }
+
+    const result = await query(`
+      SELECT
+        s.class,
+        COUNT(a.student_id)::int AS total,
+        SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END)::int AS present,
+        CASE WHEN COUNT(a.student_id) > 0
+          THEN ROUND(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END) * 100.0 / COUNT(a.student_id))::int
+          ELSE 0 END AS percent
+      FROM attendance a
+      JOIN students s ON s.id = a.student_id
+      WHERE s.school_id = $1
+        AND a.date >= make_date($2, $3, 1)
+        AND a.date < (make_date($2, $3, 1) + INTERVAL '1 month')::date
+      GROUP BY s.class
+      ORDER BY MIN(s.id), s.class
+    `, [schoolId, year, month])
+
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Monthly class attendance summary error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to load class attendance summary.' })
+  }
+})
+
 // GET /api/attendance/monthly — canonical monthly trend for one class/section
 router.get('/monthly', protect, requireAttendanceAnalyticsAccess, async (req, res) => {
   try {

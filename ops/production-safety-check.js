@@ -221,6 +221,19 @@ assertNotContains(
   'employee attendance must not regress to a placeholder.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  "router.get('/monthly-class-summary', protect, requireAttendanceAnalyticsAccess",
+  'class-wise attendance analytics must come from a protected server aggregate.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  /Math\.random\(\)/,
+  'attendance analytics must never fabricate percentages.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -71,8 +71,9 @@ export default function AttendanceModule() {
  }
  }, [tab, navigate]);
 
- const [selectedClass, setSelectedClass] = useState(CLASSES[0] || "Class 6");
- const [selectedSection, setSelectedSection] = useState("Blue");
+ const defaultClass = CLASSES[0] || "";
+ const [selectedClass, setSelectedClass] = useState(defaultClass);
+ const [selectedSection, setSelectedSection] = useState(() => sectionsForClass(defaultClass)[0] || "");
  const [selectedDate, setSelectedDate] = useState(getPakistanDateString());
  const [students, setStudents] = useState([]);
  const [attendance, setAttendance] = useState({});
@@ -80,6 +81,7 @@ export default function AttendanceModule() {
  const [notificationQueueCount, setNotificationQueueCount] = useState(0);
  const [loading, setLoading] = useState(false);
  const [monthlyTrend, setMonthlyTrend] = useState([]);
+ const [monthlyClassSummary, setMonthlyClassSummary] = useState([]);
 
  const loadAttendance = async () => {
  setLoading(true)
@@ -124,18 +126,30 @@ export default function AttendanceModule() {
  useEffect(() => {
  if (tab !== 'analytics' || !selectedClass || !selectedSection) return
  let cancelled = false
- async function loadMonthlyTrend() {
+ async function loadMonthlyAnalytics() {
+ const [yearText, monthText] = String(selectedDate || '').split('-')
+ const year = Number(yearText)
+ const month = Number(monthText)
+ if (!Number.isInteger(year) || !Number.isInteger(month)) {
+ if (!cancelled) { setMonthlyTrend([]); setMonthlyClassSummary([]) }
+ return
+ }
  try {
- const d = new Date(selectedDate)
- const response = await api.get('/api/attendance/monthly', {
- params: { class: selectedClass, section: selectedSection, year: d.getFullYear(), month: d.getMonth() + 1 },
- })
- if (!cancelled) setMonthlyTrend(response.data?.data || [])
+ const [trendResponse, classResponse] = await Promise.all([
+ api.get('/api/attendance/monthly', {
+ params: { class: selectedClass, section: selectedSection, year, month },
+ }),
+ api.get('/api/attendance/monthly-class-summary', { params: { year, month } }),
+ ])
+ if (!cancelled) {
+ setMonthlyTrend(Array.isArray(trendResponse.data?.data) ? trendResponse.data.data : [])
+ setMonthlyClassSummary(Array.isArray(classResponse.data?.data) ? classResponse.data.data : [])
+ }
  } catch {
- if (!cancelled) setMonthlyTrend([])
+ if (!cancelled) { setMonthlyTrend([]); setMonthlyClassSummary([]) }
  }
  }
- void loadMonthlyTrend()
+ void loadMonthlyAnalytics()
  return () => { cancelled = true }
  }, [tab, selectedClass, selectedSection, selectedDate])
 
@@ -473,19 +487,20 @@ export default function AttendanceModule() {
  <div className="super-module-card" style={card}>
  <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 16 }}>Class-wise Attendance %</h3>
  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
- {CLASSES.slice(0, 7).map(c => {
- const pct = Math.floor(Math.random() * 20) + 78;
+ {monthlyClassSummary.length ? monthlyClassSummary.map(row => {
+ const pct = Number(row.percent || 0);
  return (
- <div key={c} style={{ display: "flex", alignItems: "center", gap: 10 }}>
- <span style={{ color: "var(--apex-text-tertiary)", fontSize: 12, width: 60 }}>{c}</span>
+ <div key={row.class} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+ <span style={{ color: "var(--apex-text-tertiary)", fontSize: 12, width: 72, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }} title={row.class}>{row.class}</span>
  <div style={{ flex: 1, height: 18, background: "var(--apex-bg-surface)", borderRadius: 6, overflow: "hidden" }}>
- <div style={{ width: `${pct}%`, height: "100%", background: pct >= 90 ? "#30D158" : pct >= 80 ? "#C8991A" : "#FF375F", borderRadius: 6, display: "flex", alignItems: "center", paddingLeft: 8 }}>
+ <div style={{ width: `${Math.max(0, Math.min(100, pct))}%`, height: "100%", background: pct >= 90 ? "var(--apex-action-success)" : pct >= 80 ? "var(--apex-action-highlight)" : "var(--apex-action-danger)", borderRadius: 6, display: "flex", alignItems: "center", paddingLeft: 8, minWidth:pct > 0 ? 34 : 0 }}>
  <span style={{ color: "white", fontSize: 10, fontWeight: 700 }}>{pct}%</span>
  </div>
  </div>
+ <span style={{ color:'var(--apex-text-tertiary)', fontSize:10, width:64, textAlign:'right' }}>{row.present}/{row.total}</span>
  </div>
  );
- })}
+ }) : <div style={{ color:'var(--apex-text-tertiary)', fontSize:12, padding:'16px 0', textAlign:'center' }}>No class attendance records for this month.</div>}
  </div>
  </div>
  </div>
