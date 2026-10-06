@@ -10,6 +10,7 @@ This is a surgical operational patch under the template-preservation policy. `Cr
 - Replaced hardcoded September 2026 / 2026–2027 filter choices with live calendar defaults and a complete month list.
 - Removed ASSPS name/address/phone fallbacks from the generic multi-tenant challan viewer.
 - API failures now render an explicit error instead of a misleading empty challan list.
+- “Mark as Unpaid” no longer swallows a failed backend mutation; the user is told when the challan status was not actually updated.
 
 ## Preservation statement
 No voucher template ID, printable voucher geometry, copy layout, typography architecture, A4 dimensions, branding geometry, or canonical voucher renderer was intentionally redesigned by this patch. Changes are limited to operational state, filtering, tenant identity sourcing, and error/data fidelity.

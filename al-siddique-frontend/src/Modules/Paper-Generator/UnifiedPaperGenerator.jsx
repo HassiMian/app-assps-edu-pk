@@ -1,6 +1,7 @@
 'use client'
 import { useMemo, useState } from 'react'
 import { usePaperStore } from './usePaperStore'
+import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 import { extractQuestionsFromFile, generateWithGemini } from './geminiService'
 import PTSPaperGenerator from './PTSPaperGenerator'
 import {
@@ -1589,12 +1590,12 @@ function adaptUnifiedForPTS(config, sections) {
 }
 
 function readDrafts() {
-  try { return JSON.parse(localStorage.getItem(DRAFT_KEY) || '[]') } catch { return [] }
+  try { return JSON.parse(getTenantStorageItem(DRAFT_KEY) || '[]') } catch { return [] }
 }
 
 function writeDraft(draft) {
   const drafts = readDrafts().filter(x => x.id !== draft.id)
-  localStorage.setItem(DRAFT_KEY, JSON.stringify([draft, ...drafts].slice(0, 20)))
+  setTenantStorageItem(DRAFT_KEY, JSON.stringify([draft, ...drafts].slice(0, 20)))
 }
 
 function Field({ label, children }) {

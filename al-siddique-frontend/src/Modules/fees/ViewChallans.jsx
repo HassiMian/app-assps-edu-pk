@@ -610,7 +610,7 @@ window.removeEventListener('resize', syncPrintMenuPosition)
  setActionMenuPos({ top, right: window.innerWidth - rect.right })
  setActionMenuItems([
  { label:'Edit Challan / Fee', fn:()=>{ openEdit(item); setOpenActionId(null) } },
- { label:'Mark as Unpaid', fn:()=>{ api.put(`/api/fees/${item.id}/pay`,{paid_amount:0,discount:0,payment_note:'Reverted'}).then(load).catch(()=>{}); setOpenActionId(null) } },
+ { label:'Mark as Unpaid', fn:async()=>{ try { await api.put(`/api/fees/${item.id}/pay`,{paid_amount:0,discount:0,payment_note:'Reverted'}); await load(); } catch (error) { alert(error?.response?.data?.message || error?.message || 'Challan status could not be updated.'); } finally { setOpenActionId(null) } } },
  { label:'View Fee History', fn:()=>{ alert('Fee history coming soon'); setOpenActionId(null) } },
  { label:'One Student (1 Copy)', fn:()=>{ printChallan(item,school,1,1); setOpenActionId(null) } },
  { label:'One Student (3 Copies)', fn:()=>{ printChallan(item,school,1,3); setOpenActionId(null) } },

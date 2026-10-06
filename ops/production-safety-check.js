@@ -2079,3 +2079,19 @@ assertContains(
   'Student update could not be saved.',
   'student edit UI must surface backend write failures instead of closing as if the mutation succeeded.'
 )
+
+for (const draftFile of [
+  'al-siddique-frontend/src/Modules/Paper-Generator/LessonPlanTab.jsx',
+  'al-siddique-frontend/src/Modules/Paper-Generator/UnifiedPaperGenerator.jsx',
+]) {
+  assertNotContains(
+    draftFile,
+    /localStorage\.(?:getItem|setItem)/,
+    'paper/lesson draft persistence must use tenant-scoped storage instead of global browser keys.'
+  )
+}
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/ViewChallans.jsx',
+  'Challan status could not be updated.',
+  'fee status mutation failures must be visible instead of being silently swallowed.'
+)
