@@ -1126,7 +1126,6 @@ assertNotContains(
 
 for (const routeFile of [
   'al-siddique-backend/src/routes/admissionRoutes.js',
-  'al-siddique-backend/src/routes/admissionsRoutes.js',
 ]) {
   assertNotContains(
     routeFile,
@@ -1187,6 +1186,28 @@ assertNotContains(
   'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
   /classNames\?\.length \? classNames : \['Starter'\]|setCls\(classOptions\[0\] \|\| 'Starter'\)/,
   'card generation must not invent Starter as an academic class.'
+)
+
+
+// Route handlers are runtime request code, not a migration engine.
+// Any future domain schema evolution must be added under al-siddique-backend/migrations.
+const routeDir = path.join(repoRoot, 'al-siddique-backend/src/routes')
+for (const fileName of fs.readdirSync(routeDir).filter(name => name.endsWith('.js'))) {
+  const relativePath = `al-siddique-backend/src/routes/${fileName}`
+  assertNotContains(
+    relativePath,
+    /CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS|ALTER\s+TABLE\s+[A-Za-z0-9_]+\s+ADD\s+COLUMN\s+IF\s+NOT\s+EXISTS|CREATE\s+(?:UNIQUE\s+)?INDEX\s+IF\s+NOT\s+EXISTS/i,
+    'request routes must not perform runtime schema DDL; use a versioned migration.'
+  )
+}
+
+if (fs.existsSync(path.join(routeDir, 'admissionsRoutes.js'))) {
+  fail('al-siddique-backend/src/routes/admissionsRoutes.js: duplicate legacy admission router must not coexist with canonical admissionRoutes.js.')
+}
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "mount('/admissions', './routes/admissionRoutes')",
+  'the canonical admissions API must mount admissionRoutes.js exactly once.'
 )
 
 if (failures.length) {
