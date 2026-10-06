@@ -1396,6 +1396,18 @@ assertNotContains(
   'paper AI generated identifiers must use a secure random source.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  /Al Siddique Scholars Public School|\.replaceAll\('&', '&'\)/,
+  'timetable output must use tenant identity and correctly escape ampersands.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/settings/SettingsModule.jsx',
+  /Al Siddique Scholars Public School|Sharif Chowk, Rayya Khas, Narowal|2026-2027|EST\. 2026/,
+  'settings previews must not display ASSPS-specific identity, session, or establishment facts for every tenant.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

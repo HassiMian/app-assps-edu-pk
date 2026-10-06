@@ -376,7 +376,7 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
             </div>
             
             <h2 style={{ margin: 0, color: brandingConfig.darkMode !== false ? '#fff' : '#000', fontSize: 24, fontFamily: brandingConfig.typography || "'Playfair Display', serif", fontWeight: 900, textAlign: 'center', lineHeight: 1.2, zIndex: 10 }}>
-              {schoolName || 'Al Siddique Scholars Public School'}
+              {schoolName || 'School Name'}
             </h2>
             
             <div style={{ marginTop: 32, fontSize: 13, color: C.silver, textAlign: 'center', padding: '12px 18px', background: 'rgba(255,255,255,0.04)', borderRadius: 10, border: '1px solid rgba(255,255,255,0.05)', zIndex: 10 }}>
@@ -965,7 +965,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  Login Preview
  </div>
  <div style={{ color: '#fff', fontSize: 18, fontWeight: 800, marginTop: 4 }}>
- {paperSettings.schoolName || 'Al Siddique Scholars Public School'}
+ {paperSettings.schoolName || 'School Name'}
  </div>
  </div>
  <button
@@ -1026,7 +1026,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  )}
  </div>
  <div style={{ color: '#C8991A', fontSize: 24, fontWeight: 900, lineHeight: 1.2 }}>
- {paperSettings.schoolName || 'Al Siddique Scholars Public School'}
+ {paperSettings.schoolName || 'School Name'}
  </div>
  <div style={{ color: C.muted, marginTop: 8, fontSize: 14 }}>
  {paperSettings.schoolUrdu || 'School name in Urdu'}
@@ -1212,7 +1212,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
  <div className="super-module-card" style={{ gridColumn: '1/-1' }}>
  <Lbl>School Name (English)</Lbl>
- <Inp value={paperSettings.schoolName || ''} onChange={e => upd('schoolName', e.target.value)} placeholder="Al Siddique Scholars Public School" />
+ <Inp value={paperSettings.schoolName || ''} onChange={e => upd('schoolName', e.target.value)} placeholder="School name" />
  </div>
  <div className="super-module-card" style={{ gridColumn: '1/-1' }}>
  <Lbl>School Name (Urdu)</Lbl>
@@ -1220,7 +1220,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  </div>
  <div className="super-module-card" style={{ gridColumn: '1/-1' }}>
  <Lbl>Address</Lbl>
- <Inp value={paperSettings.address || ''} onChange={e => upd('address', e.target.value)} placeholder="Sharif Chowk, Rayya Khas, Narowal" />
+ <Inp value={paperSettings.address || ''} onChange={e => upd('address', e.target.value)} placeholder="School address" />
  </div>
  <div>
  <Lbl>Principal Name</Lbl>
@@ -1257,7 +1257,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  </div>
  <div>
  <Lbl>Academic Year / Session</Lbl>
- <Inp value={paperSettings.examYear || ''} onChange={e => upd('examYear', e.target.value)} placeholder="2026-2027" />
+ <Inp value={paperSettings.examYear || ''} onChange={e => upd('examYear', e.target.value)} placeholder="YYYY-YYYY" />
  </div>
  </div>
 
@@ -1363,12 +1363,11 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  )}
  <div>
  {showUrduHeader && <div style={{ fontFamily: 'Noto Nastaliq Urdu, serif', fontSize: 20, direction: 'rtl', color: '#102A4C', marginBottom: 6, lineHeight: 1 }}>{paperSettings.schoolUrdu || 'School name in Urdu'}</div>}
- <h2 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#0B1F3A', letterSpacing: '-0.5px', textTransform: 'uppercase', lineHeight: 1 }}>{paperSettings.schoolName || 'Al Siddique Scholars Public School'}</h2>
- <p style={{ margin: '6px 0 0', fontSize: 12, color: '#4b5563', fontWeight: 600 }}>{paperSettings.address || 'Sharif Chowk, Rayya Khas, Narowal'}</p>
+ <h2 style={{ margin: 0, fontSize: 24, fontWeight: 900, color: '#0B1F3A', letterSpacing: '-0.5px', textTransform: 'uppercase', lineHeight: 1 }}>{paperSettings.schoolName || 'School Name'}</h2>
+ <p style={{ margin: '6px 0 0', fontSize: 12, color: '#4b5563', fontWeight: 600 }}>{paperSettings.address || 'School address'}</p>
  </div>
  </div>
  <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', justifyContent: 'center' }}>
- <div style={{ display: 'inline-block', padding: '4px 10px', background: '#0B1F3A', color: '#fff', fontSize: 11, fontWeight: 800, borderRadius: 20, letterSpacing: '1px' }}>EST. 2026</div>
  {paperSettings.phone && <div style={{ marginTop: 10, fontSize: 13, color: '#0B1F3A', fontWeight: 700 }}> {paperSettings.phone}</div>}
  </div>
  </div>

@@ -6,7 +6,7 @@ import api from '../../services/api'
 // Dynamic lists will be used from the store.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const escapeHtml = (value) => String(value || '')
-  .replaceAll('&', '&')
+  .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;')
@@ -15,7 +15,7 @@ const escapeHtml = (value) => String(value || '')
 const printTimetableDocument = ({ school, schoolClass, section, periods, days, assignments }) => {
  const title = `${schoolClass} - Section ${section} Timetable`
  const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
- const schoolName = school?.schoolName || 'Al Siddique Scholars Public School'
+ const schoolName = school?.schoolName || '—'
  const schoolUrdu = school?.showUrduHeader ? school?.schoolUrdu : ''
  const logo = school?.logo
  const rows = days.map(day => `
