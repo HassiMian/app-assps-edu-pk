@@ -656,6 +656,19 @@ assertContains(
   'mark-attendance load failures must remain visible.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  /pool\.query\([^\n]+\)\.catch\(\(\) => \(\{ rows: \[\] \}\)\)/,
+  'portal queries must not silently convert database failures into valid-looking empty datasets.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  'partial: warnings.length > 0',
+  'portal API must explicitly report partial-data responses.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -102,20 +102,29 @@ router.get('/dashboard', protect, async (req, res) => {
         : 'SELECT status, COALESCE(SUM(amount::numeric),0) as total, COUNT(*) as count FROM fee_challans WHERE school_id = $1 GROUP BY status'
       const feesParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
 
-      const [r1, r2, r3, r4, r5, r6] = await Promise.all([
+      const [r1, r2, r3] = await Promise.all([
         pool.query(studentQuery, studentParams),
         pool.query(attendanceQuery, attendanceParams),
         pool.query(feesQuery, feesParams),
-        scopedPortalRole ? Promise.resolve({ rows: [] }) : pool.query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]).catch(() => ({ rows: [] })),
-        pool.query('SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 5', [schoolId]).catch(() => ({ rows: [] })),
-        pool.query('SELECT * FROM exams WHERE school_id = $1 ORDER BY exam_date DESC LIMIT 10', [schoolId]).catch(() => ({ rows: [] })),
       ])
       studentsRes = r1
       attendanceRes = r2
       feesRes = r3
-      empRes = r4
-      noticesRes = r5
-      examsRes = r6
+
+      const optionalQueries = await Promise.allSettled([
+        scopedPortalRole ? Promise.resolve({ rows: [] }) : pool.query('SELECT * FROM employees WHERE school_id = $1 ORDER BY created_at DESC LIMIT 20', [schoolId]),
+        pool.query('SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 5', [schoolId]),
+        pool.query('SELECT * FROM exams WHERE school_id = $1 ORDER BY exam_date DESC LIMIT 10', [schoolId]),
+      ])
+      const optionalWarnings = []
+      const [employeeResult, noticeResult, examResult] = optionalQueries
+      if (employeeResult.status === 'fulfilled') empRes = employeeResult.value
+      else if (!scopedPortalRole) optionalWarnings.push('Employee summary is temporarily unavailable.')
+      if (noticeResult.status === 'fulfilled') noticesRes = noticeResult.value
+      else optionalWarnings.push('Recent notices are temporarily unavailable.')
+      if (examResult.status === 'fulfilled') examsRes = examResult.value
+      else optionalWarnings.push('Recent exams are temporarily unavailable.')
+      req.portalWarnings = optionalWarnings
     } catch (e) {
       console.error('Portal dashboard error:', e.message)
       return res.status(503).json({ success: false, message: 'Database unavailable. Portal dashboard is temporarily offline.' })
@@ -173,7 +182,13 @@ router.get('/dashboard', protect, async (req, res) => {
       ORDER BY DATE_TRUNC('month', created_at)
     `
     const feeMonthlyParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
-    const feeMonthlyRes = await pool.query(feeMonthlyQuery, feeMonthlyParams).catch(() => ({ rows: [] }))
+    let feeMonthlyRes = { rows: [] }
+    try {
+      feeMonthlyRes = await pool.query(feeMonthlyQuery, feeMonthlyParams)
+    } catch (err) {
+      console.error('Portal fee trend error:', err.message)
+      req.portalWarnings = [...(req.portalWarnings || []), 'Fee collection trend is temporarily unavailable.']
+    }
 
     const revenueData = feeMonthlyRes.rows.map(r => ({
       name:      r.month,
@@ -224,7 +239,13 @@ router.get('/dashboard', protect, async (req, res) => {
         LIMIT 6
       `
     const attendanceTrendParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
-    const attendanceTrendRes = await pool.query(attendanceTrendQuery, attendanceTrendParams).catch(() => ({ rows: [] }))
+    let attendanceTrendRes = { rows: [] }
+    try {
+      attendanceTrendRes = await pool.query(attendanceTrendQuery, attendanceTrendParams)
+    } catch (err) {
+      console.error('Portal attendance trend error:', err.message)
+      req.portalWarnings = [...(req.portalWarnings || []), 'Attendance trend is temporarily unavailable.']
+    }
     const attendanceTrend = attendanceTrendRes.rows.slice().reverse().map(row => ({
       name: toSafeDate(row.attendance_date)?.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'Asia/Karachi' }) || String(row.attendance_date || ''),
       present: Number(row.present || 0),
@@ -354,8 +375,11 @@ router.get('/teaching-options', protect, async (req, res) => {
       }))
       .filter(item => item.class_name)
 
+    const warnings = [...new Set(req.portalWarnings || [])]
     res.json({
       success: true,
+      partial: warnings.length > 0,
+      warnings,
       data: {
         classes,
         timezone: 'Asia/Karachi',
