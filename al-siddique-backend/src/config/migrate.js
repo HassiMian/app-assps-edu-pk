@@ -484,6 +484,15 @@ async function migrate() {
     }
 
     try {
+      const dailyDiaryMigration = require('../../migrations/009_daily_diary_schema')
+      await dailyDiaryMigration.up()
+      console.log('daily diary schema ready')
+    } catch (err) {
+      console.error('Daily Diary Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

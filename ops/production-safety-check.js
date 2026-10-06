@@ -979,6 +979,19 @@ assertContains(
   'online class schema must be versioned in migration 008.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  /CREATE TABLE IF NOT EXISTS daily_diaries|ALTER TABLE daily_diaries|CREATE INDEX IF NOT EXISTS daily_diaries/,
+  'Daily Diary request handlers must not mutate their database schema.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/009_daily_diary_schema.js',
+  'CREATE TABLE IF NOT EXISTS daily_diaries',
+  'Daily Diary schema must be versioned in migration 009.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
