@@ -1,4 +1,5 @@
-﻿const express = require('express')
+﻿const crypto = require('crypto')
+const express = require('express')
 const router  = express.Router()
 const { pool, query } = require('../config/database')
 const auth = require('../middleware/auth')
@@ -415,7 +416,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     }
 
     const currentYear = new Date().getFullYear()
-    const autoGr = `GR-${currentYear}-${Math.floor(1000 + Math.random() * 9000)}`
+    const autoGr = `GR-${currentYear}-${crypto.randomInt(1000, 10000)}`
     const finalGr = req.body.gr_number || autoGr
     const requestedClass = normalizeClassName(cls)
     const requestedSection = section || ''

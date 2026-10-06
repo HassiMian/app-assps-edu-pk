@@ -1,6 +1,7 @@
 // src/routes/subscriptionRoutes.js
 // Subscription onboarding and administrative approvals API
 
+const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
@@ -22,7 +23,7 @@ if (!fs.existsSync(uploadDir)) {
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`
+    const unique = `${Date.now()}-${crypto.randomBytes(8).toString('hex')}`
     cb(null, 'screenshot_' + unique + path.extname(file.originalname))
   }
 })
@@ -45,8 +46,8 @@ const upload = multer({
 
 // Generate premium Request ID (REQ-XXXX-XXXX)
 function generateRequestId() {
-  const segment1 = Math.random().toString(36).substring(2, 6).toUpperCase()
-  const segment2 = Math.random().toString(36).substring(2, 6).toUpperCase()
+  const segment1 = crypto.randomBytes(3).toString('hex').slice(0, 4).toUpperCase()
+  const segment2 = crypto.randomBytes(3).toString('hex').slice(0, 4).toUpperCase()
   return `REQ-${segment1}-${segment2}`
 }
 

@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
 const pool    = require('../config/database')
@@ -316,7 +317,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
     });
 
     // Generate student credentials
-    const studentPin = Math.floor(100000 + Math.random() * 900000); // 6 digit PIN
+    const studentPin = crypto.randomInt(100000, 1000000); // 6 digit PIN
     const studentEmail = `student_${studentId}@assps.edu.pk`;
     const studentPassword = `Stu@${studentPin}`;
 

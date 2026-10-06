@@ -1,3 +1,4 @@
+const crypto   = require('crypto')
 const express = require('express')
 const router  = require('express').Router()
 const multer  = require('multer')
@@ -15,7 +16,7 @@ if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true })
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`
+    const unique = `${Date.now()}-${crypto.randomBytes(8).toString('hex')}`
     cb(null, unique + path.extname(file.originalname))
   }
 })

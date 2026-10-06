@@ -418,6 +418,31 @@ assertNotContains(
   'timetable authoring must not invent class, section, or subject defaults.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/noticesRoutes.js',
+  "process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'",
+  'notice mock fallback must require explicit opt-in and remain impossible in production.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  /Math\.random\(\)/,
+  'portal credential generation must not use Math.random.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  /Math\.random\(\)/,
+  'subscription request identifiers and uploaded filenames must not use Math.random.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/uploadRoutes.js',
+  /Math\.random\(\)/,
+  'uploaded filename uniqueness must use a cryptographically secure random source.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

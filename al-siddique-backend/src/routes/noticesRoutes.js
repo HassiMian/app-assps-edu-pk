@@ -6,7 +6,7 @@ const router = express.Router()
 const { pool } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
 async function ensureNoticesTable() {
