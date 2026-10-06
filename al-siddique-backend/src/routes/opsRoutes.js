@@ -99,9 +99,9 @@ router.get('/diagnostics', protect, adminOnly, async (req, res) => {
       query(`SELECT COUNT(*)::int AS count FROM exams${schoolFilter}`, schoolParams),
       query(`SELECT COUNT(*)::int AS count FROM exam_results${schoolFilter}`, schoolParams),
       query(`SELECT COUNT(*)::int AS count FROM attendance${schoolFilter}`, schoolParams),
-      query(`SELECT COUNT(*)::int AS count FROM notices${schoolFilter}`, schoolParams).catch(() => ({ rows: [{ count: 0 }] })),
-      query(`SELECT COUNT(*)::int AS count FROM admissions${schoolFilter}`, schoolParams).catch(() => ({ rows: [{ count: 0 }] })),
-      query(`SELECT COUNT(*)::int AS count FROM ai_queue_events WHERE created_at >= NOW() - INTERVAL '30 minutes'`).catch(() => ({ rows: [{ count: 0 }] })),
+      query(`SELECT COUNT(*)::int AS count FROM notices${schoolFilter}`, schoolParams).catch((err) => { console.error('Diagnostics notices query failed:', err.message); return null }),
+      query(`SELECT COUNT(*)::int AS count FROM admissions${schoolFilter}`, schoolParams).catch((err) => { console.error('Diagnostics admissions query failed:', err.message); return null }),
+      query(`SELECT COUNT(*)::int AS count FROM ai_queue_events WHERE created_at >= NOW() - INTERVAL '30 minutes'`).catch((err) => { console.error('Diagnostics AI activity query failed:', err.message); return null }),
       query(`
         SELECT
           COUNT(*) FILTER (WHERE event_type = 'job_completed')::int AS completed,
@@ -109,7 +109,7 @@ router.get('/diagnostics', protect, adminOnly, async (req, res) => {
           COUNT(*) FILTER (WHERE event_type = 'job_cancelled')::int AS cancelled
         FROM ai_queue_events
         WHERE created_at >= NOW() - INTERVAL '24 hours'
-      `).catch(() => ({ rows: [{ completed: 0, failed: 0, cancelled: 0 }] })),
+      `).catch((err) => { console.error('Diagnostics AI outcomes query failed:', err.message); return null }),
     ])
 
     const ai = getAiEnvConfig()
@@ -117,11 +117,24 @@ router.get('/diagnostics', protect, adminOnly, async (req, res) => {
     const queueEvents = await listQueueEvents(1)
     const latestQueueEvent = queueEvents[0] || null
     const latestQueueEventAgeMinutes = latestQueueEvent?.createdAt ? Math.max(0, Math.round((Date.now() - new Date(latestQueueEvent.createdAt).getTime()) / 60000)) : null
-    const health = buildDiagnosticsHealth(ai, queue, {
+    const outcomeMetrics = queueOutcomeR ? {
       completed: Number(queueOutcomeR.rows[0]?.completed || 0),
       failed: Number(queueOutcomeR.rows[0]?.failed || 0),
       cancelled: Number(queueOutcomeR.rows[0]?.cancelled || 0),
-    })
+    } : null
+    const health = buildDiagnosticsHealth(ai, queue, outcomeMetrics || {})
+    const unavailableSources = []
+    if (!noticesR) unavailableSources.push('notices')
+    if (!admissionsR) unavailableSources.push('admissions')
+    if (!queueActivityR) unavailableSources.push('ai_queue_activity')
+    if (!queueOutcomeR) unavailableSources.push('ai_queue_outcomes')
+    if (unavailableSources.length) {
+      health.warnings.push(`Diagnostics source unavailable: ${unavailableSources.join(', ')}.`)
+      if (health.status === 'healthy') health.status = 'warning'
+      if (health.recommendation === 'System is healthy. Keep monitoring queue depth and DB latency.') {
+        health.recommendation = 'Restore unavailable diagnostics sources before treating the system as fully healthy.'
+      }
+    }
     const database = 'ok'
     const databaseLatencyMs = Date.now() - dbStartedAt
     if (databaseLatencyMs > 1500) {
@@ -146,8 +159,8 @@ router.get('/diagnostics', protect, adminOnly, async (req, res) => {
         exams: Number(examsR.rows[0]?.count || 0),
         examResults: Number(resultsR.rows[0]?.count || 0),
         attendance: Number(attendanceR.rows[0]?.count || 0),
-        notices: Number(noticesR.rows[0]?.count || 0),
-        admissions: Number(admissionsR.rows[0]?.count || 0),
+        notices: noticesR ? Number(noticesR.rows[0]?.count || 0) : null,
+        admissions: admissionsR ? Number(admissionsR.rows[0]?.count || 0) : null,
       },
       ai: {
         configured: Boolean(ai.apiKey),
@@ -164,14 +177,11 @@ router.get('/diagnostics', protect, adminOnly, async (req, res) => {
           createdAt: latestQueueEvent.createdAt,
           ageMinutes: latestQueueEventAgeMinutes,
         } : null,
-        recentActivity30m: Number(queueActivityR.rows[0]?.count || 0),
-        recentOutcomes24h: {
-          completed: Number(queueOutcomeR.rows[0]?.completed || 0),
-          failed: Number(queueOutcomeR.rows[0]?.failed || 0),
-          cancelled: Number(queueOutcomeR.rows[0]?.cancelled || 0),
-        },
-        failureRate24h: health.failureRate24h,
+        recentActivity30m: queueActivityR ? Number(queueActivityR.rows[0]?.count || 0) : null,
+        recentOutcomes24h: outcomeMetrics,
+        failureRate24h: queueOutcomeR ? health.failureRate24h : null,
       },
+      unavailableSources,
       generatedAt: new Date().toISOString(),
     })
   } catch (err) {

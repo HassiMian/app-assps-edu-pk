@@ -85,6 +85,18 @@ assertNotContains(
   'unguarded mock JWT token acceptance is forbidden.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/routes/opsRoutes.js',
+  /catch\(\(\) => \(\{ rows: \[\{ count: 0 \}\] \}\)\)/,
+  'operations diagnostics must not convert source failures into real zero counts.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/opsRoutes.js',
+  'unavailableSources',
+  'operations diagnostics must expose unavailable metric sources explicitly.'
+)
+
 assertContains(
   'al-siddique-backend/src/routes/dashboardRoutes.js',
   'Database unavailable. Dashboard is temporarily offline.',
