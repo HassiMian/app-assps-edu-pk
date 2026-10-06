@@ -77,9 +77,18 @@ router.post('/', protect, canManageSchools, async (req, res) => {
       return res.status(400).json({ success: false, message: 'School name is required.' })
     }
 
-    const adminEmail = String(req.body.adminEmail || `admin@${code || 'school'}.apex.com`).trim().toLowerCase()
-    const adminPassword = String(req.body.adminPassword || crypto.randomBytes(6).toString('hex') + 'Pass!').trim()
-    const adminName = String(req.body.adminName || `Admin - ${name}`).trim()
+    const adminEmail = String(req.body.adminEmail || '').trim().toLowerCase()
+    const adminPassword = String(req.body.adminPassword || crypto.randomBytes(12).toString('base64url') + '!9Aa').trim()
+    const adminName = String(req.body.adminName || '').trim()
+    if (!adminName) {
+      return res.status(422).json({ success: false, message: 'School administrator name is required.' })
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(adminEmail)) {
+      return res.status(422).json({ success: false, message: 'A valid school administrator email is required.' })
+    }
+    if (adminPassword.length < 10) {
+      return res.status(422).json({ success: false, message: 'Administrator password must be at least 10 characters.' })
+    }
     const username = adminEmail.split('@')[0]
 
     await client.query('BEGIN')
@@ -99,14 +108,21 @@ router.post('/', protect, canManageSchools, async (req, res) => {
       `INSERT INTO settings (school_id, school_name, school_address, school_phone, school_email, principal_name, twilio_config, module_access, school_access, superapp_modules, branding_config)
        VALUES ($1, $2, $3, $4, $5, $6, '{}'::jsonb, '{}'::jsonb, '[]'::jsonb, '{}'::jsonb, '{}'::jsonb)
        ON CONFLICT (school_id) DO NOTHING`,
-      [schoolId, name, req.body.address || 'School Address', req.body.phone || '', req.body.email || '', req.body.principalName || 'Principal']
+      [
+        schoolId,
+        name,
+        String(req.body.address || '').trim(),
+        String(req.body.phone || '').trim(),
+        String(req.body.email || '').trim(),
+        String(req.body.principalName || '').trim(),
+      ]
     )
 
     // 3. Create admin user
     const hashed = await bcrypt.hash(adminPassword, 10)
     await client.query(
       `INSERT INTO users (school_id, name, email, password, role, designation, is_active, username, permissions)
-       VALUES ($1, $2, $3, $4, 'admin', 'Principal', true, $5, '[]'::jsonb)`,
+       VALUES ($1, $2, $3, $4, 'admin', 'School Administrator', true, $5, '[]'::jsonb)`,
       [schoolId, adminName, adminEmail, hashed, username]
     )
 
@@ -120,7 +136,7 @@ router.post('/', protect, canManageSchools, async (req, res) => {
         password: adminPassword,
         name: adminName
       },
-      message: 'School created and default settings/admin credentials provisioned successfully.'
+      message: 'School created and administrator credentials provisioned successfully.'
     })
   } catch (err) {
     await client.query('ROLLBACK')

@@ -695,6 +695,19 @@ assertContains(
   'student fee profile may map only a real 404 to an absent profile.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/schoolRoutes.js',
+  /admin@\$\{code \|\| ['"]school['"]\}\.apex\.com|req\.body\.address \|\| ['"]School Address['"]|req\.body\.principalName \|\| ['"]Principal['"]/,
+  'school provisioning must not invent administrator email, address, or principal identity.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/schoolRoutes.js',
+  'A valid school administrator email is required.',
+  'school provisioning must require a real administrator email.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
