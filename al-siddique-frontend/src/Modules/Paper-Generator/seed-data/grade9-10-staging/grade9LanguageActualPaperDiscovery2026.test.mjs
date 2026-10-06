@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./grade9LanguageActualPaperDiscovery2026.json',import.meta.url),'utf8'));
+test('discovery ledger does not promote secondary or key artifacts',()=>{assert(d.records.length>=7);assert(d.records.every(x=>x.authorityForFullPaperHierarchy===false));assert.equal(d.gate.verifiedFullActualQuestionPapers,0);});
+test('internally inconsistent 2026 upload is rejected',()=>{const x=d.records.find(x=>x.classification==='REJECTED_INTERNAL_IDENTITY_CONFLICT');assert(x);assert.match(x.reason,/Grade IX objective header.*Class X subjective header/i);});
+test('answer keys and update dates cannot masquerade as actual paper evidence',()=>{assert.equal(d.records.filter(x=>x.classification==='OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE').length,2);assert(d.records.some(x=>x.classification==='SECONDARY_INDEX_NO_2026_ARTIFACT'));assert.equal(d.gate.requiredBeforeEnglishOrUrduAuthoring,true);});
