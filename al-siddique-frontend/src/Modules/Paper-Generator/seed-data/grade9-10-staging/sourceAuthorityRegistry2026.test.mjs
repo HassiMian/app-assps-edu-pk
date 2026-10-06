@@ -44,6 +44,8 @@ test('source promotion is fail-closed and ordered before authoring',()=>{
 
 test('language acquisition queue cannot skip byte hashing',()=>{
  assert.equal(data.currentAcquisitionQueue.length,6);
- assert(data.currentAcquisitionQueue.every(x=>x.state==='OFFICIAL_CATALOG_LINK_VERIFIED'));
- assert(data.currentAcquisitionQueue.every(x=>x.nextGate==='BYTES_HASHED'));
+ assert(data.currentAcquisitionQueue.every(x=>x.state==='BYTES_HASHED'));
+ assert(data.currentAcquisitionQueue.every(x=>x.nextGate==='VISUALLY_INSPECTED'));
+ assert(data.currentAcquisitionQueue.every(x=>/^[a-f0-9]{64}$/.test(x.sha256)));
+ assert(data.currentAcquisitionQueue.every(x=>x.byteLength>0));
 });

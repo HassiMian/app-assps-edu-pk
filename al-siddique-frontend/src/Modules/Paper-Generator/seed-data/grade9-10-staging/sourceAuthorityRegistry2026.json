@@ -95,8 +95,12 @@
       "subject": "English",
       "editionOrSession": "2025-26",
       "requiredRole": "ACADEMIC_CONTENT",
-      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
-      "nextGate": "BYTES_HASHED"
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+      "byteLength": 19576377,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-"
     },
     {
       "id": "G9-URDU-TEXTBOOK-2025-26",
@@ -104,8 +108,12 @@
       "subject": "Urdu",
       "editionOrSession": "2025-26",
       "requiredRole": "ACADEMIC_CONTENT",
-      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
-      "nextGate": "BYTES_HASHED"
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+      "byteLength": 10242198,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-"
     },
     {
       "id": "G9-10-ENGLISH-GRAMMAR-2023-24",
@@ -113,8 +121,12 @@
       "subject": "English Grammar & Composition",
       "editionOrSession": "2023-24",
       "requiredRole": "ACADEMIC_CONTENT",
-      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
-      "nextGate": "BYTES_HASHED"
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "f9d449a6075b17282831c95521f060ac246c422f7169a1bc80cf6568fd185a62",
+      "byteLength": 57906765,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-"
     },
     {
       "id": "G9-10-URDU-QUAID-E-INSHA-2023-24",
@@ -122,8 +134,12 @@
       "subject": "Urdu Quaid-e-Insha",
       "editionOrSession": "2023-24",
       "requiredRole": "ACADEMIC_CONTENT",
-      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
-      "nextGate": "BYTES_HASHED"
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "byteLength": 131046901,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-"
     },
     {
       "id": "G9-2026-MULTAN-ENGLISH-ACTUAL",
@@ -132,8 +148,12 @@
       "board": "Multan",
       "exam": "First Annual 2026",
       "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
-      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
-      "nextGate": "BYTES_HASHED"
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "35060a1bea551ac2908526c41759d8aa5941eceaef8894d6bf90738d8e3f2173",
+      "byteLength": 1635062,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-"
     },
     {
       "id": "G9-2026-MULTAN-URDU-ACTUAL",
@@ -142,8 +162,12 @@
       "board": "Multan",
       "exam": "First Annual 2026",
       "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
-      "state": "OFFICIAL_CATALOG_LINK_VERIFIED",
-      "nextGate": "BYTES_HASHED"
+      "state": "BYTES_HASHED",
+      "nextGate": "VISUALLY_INSPECTED",
+      "sha256": "5f932f7c6331bda19338cf087641081bec5df5aaa45096a05cd14cc883ab8e13",
+      "byteLength": 932229,
+      "hashedOn": "2026-10-06",
+      "byteSignature": "%PDF-"
     }
   ]
 }
