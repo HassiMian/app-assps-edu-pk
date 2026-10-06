@@ -380,6 +380,25 @@ assertNotContains(
   'fee discount/session logic must not special-case the 2026 academic year.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  /Math\.random\(|Muhammad Ali|Ayesha Khan|Summer Vacations Announcement|Generate a realistic sample timetable/,
+  'portal dashboards and timetables must never synthesize school records.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  /\|\| ['"]A['"]\s*,/,
+  'portal teaching options must not invent an A section.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  'Recent attendance trend — exact aggregates from the last six recorded school dates.',
+  'portal attendance trend must be based on real attendance aggregates.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -6,7 +6,6 @@ const router  = express.Router()
 const { pool } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const ALLOW_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
 
 function toSafeDate(value) {
   const date = new Date(value)
@@ -78,7 +77,6 @@ router.get('/dashboard', protect, async (req, res) => {
     let empRes = { rows: [] }
     let noticesRes = { rows: [] }
     let examsRes = { rows: [] }
-    let isDbOffline = false
 
     try {
       const studentQuery = scopedPortalRole
@@ -120,103 +118,7 @@ router.get('/dashboard', protect, async (req, res) => {
       examsRes = r6
     } catch (e) {
       console.error('Portal dashboard error:', e.message)
-      isDbOffline = true
-    }
-
-    if (isDbOffline) {
-      if (!ALLOW_MOCK_FALLBACK) {
-        return res.status(503).json({ success: false, message: 'Database unavailable. Portal dashboard is temporarily offline.' })
-      }
-      const totalStudents = 125
-      const totalStaff = 14
-      const presentCount = 112
-      const absentCount = 8
-      const lateCount = 3
-      const leaveCount = 2
-      const unmarkedCount = 0
-      const attPct = 90
-      
-      const paidTotal = 450000
-      const pendingTotal = 85000
-      const pendingCount = 18
-      const collectionRate = 84
-
-      const revenueData = [
-        { name: 'Jan', collected: 380, pending: 60 },
-        { name: 'Feb', collected: 410, pending: 50 },
-        { name: 'Mar', collected: 390, pending: 70 },
-        { name: 'Apr', collected: 430, pending: 45 },
-        { name: 'May', collected: 450, pending: 85 }
-      ]
-
-      const classDistribution = [
-        { name: 'Class 1', value: 12 },
-        { name: 'Class 2', value: 15 },
-        { name: 'Class 3', value: 14 },
-        { name: 'Class 4', value: 18 },
-        { name: 'Class 5', value: 16 },
-        { name: 'Class 6', value: 15 },
-        { name: 'Class 7', value: 12 },
-        { name: 'Class 8', value: 11 },
-        { name: 'Class 9', value: 8 },
-        { name: 'Class 10', value: 4 }
-      ]
-
-      const genderData = [
-        { name: 'Boys', value: 72 },
-        { name: 'Girls', value: 53 }
-      ]
-
-      const attendanceTrend = [
-        { name: 'Mon', present: 110, absent: 10 },
-        { name: 'Tue', present: 112, absent: 8 },
-        { name: 'Wed', present: 109, absent: 11 },
-        { name: 'Thu', present: 114, absent: 6 },
-        { name: 'Fri', present: 111, absent: 9 },
-        { name: 'Sat', present: 105, absent: 15 }
-      ]
-
-      const recentStudents = [
-        { id: 1, name: 'Muhammad Ali', gr: 'GR-1002', class: '9', phone: '03001234567' },
-        { id: 2, name: 'Ayesha Khan', gr: 'GR-1005', class: '9', phone: '03217654321' },
-        { id: 3, name: 'Zainab Fatima', gr: 'GR-1008', class: '10', phone: '03339876543' },
-        { id: 4, name: 'Hamza Ahmed', gr: 'GR-1011', class: '8', phone: '03456543210' },
-        { id: 5, name: 'Fatima Noor', gr: 'GR-1014', class: '7', phone: '03123456789' }
-      ]
-
-      const recentNotices = [
-        { id: 1, title: 'Summer Vacations Announcement', message: 'School will remain closed for summer holidays from June 1st.', date: today },
-        { id: 2, title: 'Parent-Teacher Meeting', message: 'PTM for Class 9 and 10 will be held on Saturday.', date: today }
-      ]
-
-      const recentExams = [
-        { id: 1, name: 'Mid Term Examination', exam_date: today },
-        { id: 2, name: 'Class Test - Mathematics', exam_date: today }
-      ]
-
-      const employees = [
-        { id: 1, name: 'Sajid Mahmood', role: 'Teacher', email: 'teacher@alsiddique.edu.pk' }
-      ]
-
-      return res.json({
-        success: true,
-        data: {
-          stats: {
-            totalStudents, totalStaff, presentCount, absentCount,
-            lateCount, leaveCount, unmarkedCount, attPct,
-            paidTotal, pendingTotal, pendingCount, collectionRate
-          },
-          revenueData,
-          classDistribution,
-          genderData,
-          attendanceTrend,
-          recentStudents,
-          recentNotices,
-          recentExams,
-          employees,
-          role: req.user?.role
-        }
-      })
+      return res.status(503).json({ success: false, message: 'Database unavailable. Portal dashboard is temporarily offline.' })
     }
 
     const allStudents  = studentsRes.rows
@@ -288,20 +190,46 @@ router.get('/dashboard', protect, async (req, res) => {
       phone: s.parent_phone || s.phone,
     }))
 
-    // Gender split
-    const boys  = allStudents.filter(s => (s.gender || '').toLowerCase() === 'male').length   || Math.round(totalStudents * 0.57)
-    const girls = allStudents.filter(s => (s.gender || '').toLowerCase() === 'female').length || (totalStudents - Math.round(totalStudents * 0.57))
+    // Gender split — only recorded values are counted; unknown values stay explicit.
+    const boys = allStudents.filter(student => String(student.gender || '').toLowerCase() === 'male').length
+    const girls = allStudents.filter(student => String(student.gender || '').toLowerCase() === 'female').length
+    const genderUnknown = Math.max(0, totalStudents - boys - girls)
     const genderData = [
-      { name: 'Boys',  value: boys  },
+      { name: 'Boys', value: boys },
       { name: 'Girls', value: girls },
+      ...(genderUnknown ? [{ name: 'Not recorded', value: genderUnknown }] : []),
     ]
 
-    // Weekly attendance trend (mock week based on real today's %age)
-    const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const attendanceTrend = weekDays.map((day, i) => ({
-      name:    day,
-      present: Math.max(0, presentCount + Math.floor(Math.random() * 4 - 2)),
-      absent:  Math.max(0, absentCount  + Math.floor(Math.random() * 2)),
+    // Recent attendance trend — exact aggregates from the last six recorded school dates.
+    const attendanceTrendQuery = scopedPortalRole
+      ? `
+        SELECT a.date::date AS attendance_date,
+               SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END)::int AS present,
+               SUM(CASE WHEN a.status = 'absent' THEN 1 ELSE 0 END)::int AS absent
+        FROM attendance a
+        JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
+        WHERE a.school_id = $1 AND s.${studentOwnerColumn} = $2
+        GROUP BY a.date::date
+        ORDER BY a.date::date DESC
+        LIMIT 6
+      `
+      : `
+        SELECT date::date AS attendance_date,
+               SUM(CASE WHEN status = 'present' THEN 1 ELSE 0 END)::int AS present,
+               SUM(CASE WHEN status = 'absent' THEN 1 ELSE 0 END)::int AS absent
+        FROM attendance
+        WHERE school_id = $1
+        GROUP BY date::date
+        ORDER BY date::date DESC
+        LIMIT 6
+      `
+    const attendanceTrendParams = scopedPortalRole ? [schoolId, req.user?.id || null] : [schoolId]
+    const attendanceTrendRes = await pool.query(attendanceTrendQuery, attendanceTrendParams).catch(() => ({ rows: [] }))
+    const attendanceTrend = attendanceTrendRes.rows.slice().reverse().map(row => ({
+      name: toSafeDate(row.attendance_date)?.toLocaleDateString('en-US', { weekday: 'short', timeZone: 'Asia/Karachi' }) || String(row.attendance_date || ''),
+      present: Number(row.present || 0),
+      absent: Number(row.absent || 0),
+      date: row.attendance_date,
     }))
 
     res.json({
@@ -390,39 +318,7 @@ router.get('/timetable', protect, async (req, res) => {
     }
 
     if (entries.length === 0) {
-      if (!ALLOW_MOCK_FALLBACK) {
-        return res.json({ success: true, data: { timetable: [], byDay: {} } })
-      }
-
-      // Generate a realistic sample timetable based on the teacher's profile
-      const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-      const PERIODS = [
-        { start: '08:00', end: '08:45' },
-        { start: '08:45', end: '09:30' },
-        { start: '09:45', end: '10:30' },
-        { start: '10:30', end: '11:15' },
-        { start: '11:30', end: '12:15' },
-        { start: '12:15', end: '13:00' },
-      ]
-      const SUBJECTS = ['Mathematics', 'Physics', 'Chemistry', 'English', 'Computer Science', 'Biology']
-      const CLASSES  = ['Class 9A', 'Class 9B', 'Class 10A', 'Class 10B', 'Class 11', 'Class 12']
-      let id = 1
-      DAYS.forEach((day, di) => {
-        PERIODS.forEach((p) => {
-          if (Math.random() > 0.35) {
-            entries.push({
-              id: id++,
-              day,
-              day_order: di,
-              start_time: p.start,
-              end_time: p.end,
-              subject: SUBJECTS[Math.floor(Math.random() * SUBJECTS.length)],
-              class_name: CLASSES[Math.floor(Math.random() * CLASSES.length)],
-              room: `Room ${100 + Math.floor(Math.random() * 20)}`,
-            })
-          }
-        })
-      })
+      return res.json({ success: true, data: { timetable: [], byDay: {} } })
     }
 
     const byDay = {}
@@ -454,7 +350,7 @@ router.get('/teaching-options', protect, async (req, res) => {
     const classes = result.rows
       .map(row => ({
         class_name: String(row.class || '').trim(),
-        section: String(row.section || '').trim() || 'A',
+        section: String(row.section || '').trim(),
       }))
       .filter(item => item.class_name)
 
