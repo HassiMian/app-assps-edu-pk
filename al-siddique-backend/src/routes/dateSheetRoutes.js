@@ -8,30 +8,16 @@ const canRead = requireRoles('super_admin', 'admin', 'principal', 'school_admin'
 const canManage = requireRoles('super_admin', 'admin', 'principal', 'school_admin')
 
 let schemaReady = null
-function ensureSchema() {
-  if (!schemaReady) {
-    schemaReady = (async () => {
-      await query(`
-        CREATE TABLE IF NOT EXISTS date_sheet_records (
-          id BIGSERIAL PRIMARY KEY,
-          school_id INTEGER NOT NULL REFERENCES schools(id),
-          session VARCHAR(80) NOT NULL,
-          term VARCHAR(120) NOT NULL,
-          class_level VARCHAR(80) NOT NULL,
-          section VARCHAR(80) NOT NULL DEFAULT '',
-          exam_date DATE NOT NULL,
-          day_label VARCHAR(32),
-          times JSONB NOT NULL DEFAULT '[]'::jsonb,
-          subjects JSONB NOT NULL DEFAULT '[]'::jsonb,
-          created_by INTEGER REFERENCES users(id),
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        )
-      `)
-      await query('CREATE INDEX IF NOT EXISTS idx_date_sheet_school_session_term ON date_sheet_records (school_id, session, term, exam_date, class_level)')
-    })().catch(err => { schemaReady = null; throw err })
+async function ensureSchema() {
+  if (schemaReady) return true
+  const result = await query("SELECT to_regclass('public.date_sheet_records') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('date_sheet_records schema migration is not applied.')
+    err.code = 'DOMAIN_SCHEMA_NOT_READY'
+    throw err
   }
-  return schemaReady
+  schemaReady = true
+  return true
 }
 
 function cleanString(value, max) {
@@ -86,7 +72,7 @@ router.get('/', protect, canRead, async (req, res) => {
     res.json({ success: true, data: result.rows.map(mapRow) })
   } catch (err) {
     console.error('Date sheet list error:', err.message)
-    res.status(500).json({ success: false, message: 'Date sheets could not be loaded.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Date sheet storage is not initialized.' : 'Date sheets could not be loaded.' })
   }
 })
 
@@ -123,7 +109,7 @@ router.put('/bulk', protect, canManage, async (req, res) => {
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
     console.error('Date sheet save error:', err.message)
-    res.status(500).json({ success: false, message: 'Date sheet could not be saved.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Date sheet storage is not initialized.' : 'Date sheet could not be saved.' })
   } finally {
     client.release()
   }

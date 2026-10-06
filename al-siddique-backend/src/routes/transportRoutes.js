@@ -9,26 +9,16 @@ const canManage = requireRoles('super_admin', 'admin', 'principal', 'school_admi
 const STATUSES = new Set(['Active', 'Paused', 'Maintenance'])
 
 let schemaReady = null
-function ensureSchema() {
-  if (!schemaReady) {
-    schemaReady = (async () => {
-      await query(`
-        CREATE TABLE IF NOT EXISTS transport_routes (
-          id BIGSERIAL PRIMARY KEY,
-          school_id INTEGER NOT NULL REFERENCES schools(id),
-          name VARCHAR(160) NOT NULL,
-          vehicle VARCHAR(160) NOT NULL,
-          capacity INTEGER NOT NULL DEFAULT 0 CHECK (capacity >= 0),
-          status VARCHAR(32) NOT NULL DEFAULT 'Active',
-          created_by INTEGER REFERENCES users(id),
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        )
-      `)
-      await query('CREATE INDEX IF NOT EXISTS idx_transport_routes_school ON transport_routes (school_id, name)')
-    })().catch(err => { schemaReady = null; throw err })
+async function ensureSchema() {
+  if (schemaReady) return true
+  const result = await query("SELECT to_regclass('public.transport_routes') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('transport_routes schema migration is not applied.')
+    err.code = 'DOMAIN_SCHEMA_NOT_READY'
+    throw err
   }
-  return schemaReady
+  schemaReady = true
+  return true
 }
 
 function normalize(body = {}) {
@@ -52,7 +42,7 @@ router.get('/', protect, canRead, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Transport list error:', err.message)
-    res.status(500).json({ success: false, message: 'Transport routes could not be loaded.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Transport storage is not initialized.' : 'Transport routes could not be loaded.' })
   }
 })
 
@@ -67,7 +57,7 @@ router.post('/', protect, canManage, async (req, res) => {
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Transport create error:', err.message)
-    res.status(500).json({ success: false, message: 'Transport route could not be saved.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Transport storage is not initialized.' : 'Transport route could not be saved.' })
   }
 })
 
@@ -83,7 +73,7 @@ router.put('/:id', protect, canManage, async (req, res) => {
     res.json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Transport update error:', err.message)
-    res.status(500).json({ success: false, message: 'Transport route could not be updated.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Transport storage is not initialized.' : 'Transport route could not be updated.' })
   }
 })
 

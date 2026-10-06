@@ -9,26 +9,16 @@ const canManage = requireRoles('super_admin', 'admin', 'principal', 'school_admi
 const CATEGORIES = new Set(['Textbook', 'Reference', 'Fiction', 'Non-fiction'])
 
 let schemaReady = null
-function ensureSchema() {
-  if (!schemaReady) {
-    schemaReady = (async () => {
-      await query(`
-        CREATE TABLE IF NOT EXISTS library_books (
-          id BIGSERIAL PRIMARY KEY,
-          school_id INTEGER NOT NULL REFERENCES schools(id),
-          title VARCHAR(220) NOT NULL,
-          author VARCHAR(180) NOT NULL,
-          category VARCHAR(60) NOT NULL,
-          available BOOLEAN NOT NULL DEFAULT true,
-          created_by INTEGER REFERENCES users(id),
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-        )
-      `)
-      await query('CREATE INDEX IF NOT EXISTS idx_library_books_school_title ON library_books (school_id, title)')
-    })().catch(err => { schemaReady = null; throw err })
+async function ensureSchema() {
+  if (schemaReady) return true
+  const result = await query("SELECT to_regclass('public.library_books') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('library_books schema migration is not applied.')
+    err.code = 'DOMAIN_SCHEMA_NOT_READY'
+    throw err
   }
-  return schemaReady
+  schemaReady = true
+  return true
 }
 
 function normalize(body = {}) {
@@ -50,7 +40,7 @@ router.get('/', protect, canRead, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Library list error:', err.message)
-    res.status(500).json({ success: false, message: 'Library inventory could not be loaded.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Library storage is not initialized.' : 'Library inventory could not be loaded.' })
   }
 })
 
@@ -64,7 +54,7 @@ router.post('/', protect, canManage, async (req, res) => {
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Library create error:', err.message)
-    res.status(500).json({ success: false, message: 'Book could not be saved.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Library storage is not initialized.' : 'Book could not be saved.' })
   }
 })
 
@@ -79,7 +69,7 @@ router.put('/:id', protect, canManage, async (req, res) => {
     res.json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Library update error:', err.message)
-    res.status(500).json({ success: false, message: 'Book could not be updated.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Library storage is not initialized.' : 'Book could not be updated.' })
   }
 })
 

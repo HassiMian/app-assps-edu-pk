@@ -13,24 +13,16 @@ const canSendNotifications = requireRoles('super_admin', 'admin', 'principal', '
 
 
 let messageDraftSchemaReady = null
-function ensureMessageDraftTable() {
-  if (!messageDraftSchemaReady) {
-    messageDraftSchemaReady = pool.query(`
-      CREATE TABLE IF NOT EXISTS message_drafts (
-        id BIGSERIAL PRIMARY KEY,
-        school_id INTEGER NOT NULL REFERENCES schools(id),
-        user_id INTEGER NOT NULL REFERENCES users(id),
-        recipient_group VARCHAR(32) NOT NULL DEFAULT 'parents',
-        subject VARCHAR(255) NOT NULL DEFAULT '',
-        body TEXT NOT NULL DEFAULT '',
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        UNIQUE (school_id, user_id)
-      );
-      CREATE INDEX IF NOT EXISTS idx_message_drafts_school_user ON message_drafts (school_id, user_id);
-    `).catch(err => { messageDraftSchemaReady = null; throw err })
+async function ensureMessageDraftTable() {
+  if (messageDraftSchemaReady) return true
+  const result = await pool.query("SELECT to_regclass('public.message_drafts') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('message_drafts schema migration is not applied.')
+    err.code = 'DOMAIN_SCHEMA_NOT_READY'
+    throw err
   }
-  return messageDraftSchemaReady
+  messageDraftSchemaReady = true
+  return true
 }
 
 function isScopedPortalRole(role) {
@@ -456,7 +448,7 @@ router.get('/message-draft', protect, canSendNotifications, async (req, res) => 
     res.json({ success: true, data: result.rows[0] || null })
   } catch (err) {
     console.error('Message draft load error:', err.message)
-    res.status(500).json({ success: false, message: 'Message draft could not be loaded.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Message draft storage is not initialized.' : 'Message draft could not be loaded.' })
   }
 })
 
@@ -480,7 +472,7 @@ router.put('/message-draft', protect, canSendNotifications, async (req, res) => 
     res.json({ success: true, data: result.rows[0], message: 'Draft saved.' })
   } catch (err) {
     console.error('Message draft save error:', err.message)
-    res.status(500).json({ success: false, message: 'Message draft could not be saved.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Message draft storage is not initialized.' : 'Message draft could not be saved.' })
   }
 })
 
@@ -491,7 +483,7 @@ router.delete('/message-draft', protect, canSendNotifications, async (req, res) 
     res.json({ success: true })
   } catch (err) {
     console.error('Message draft delete error:', err.message)
-    res.status(500).json({ success: false, message: 'Message draft could not be cleared.' })
+    res.status(err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'DOMAIN_SCHEMA_NOT_READY' ? 'Message draft storage is not initialized.' : 'Message draft could not be cleared.' })
   }
 })
 

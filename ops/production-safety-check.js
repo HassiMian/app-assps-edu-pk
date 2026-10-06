@@ -929,6 +929,31 @@ assertContains(
   'notice reads and mutations must require explicit school context.'
 )
 
+
+for (const routeFile of [
+  'al-siddique-backend/src/routes/transportRoutes.js',
+  'al-siddique-backend/src/routes/libraryRoutes.js',
+  'al-siddique-backend/src/routes/dateSheetRoutes.js',
+]) {
+  assertNotContains(
+    routeFile,
+    /CREATE TABLE IF NOT EXISTS|CREATE INDEX IF NOT EXISTS|ALTER TABLE/,
+    `${routeFile} must not mutate database schema from request handlers; migrations own schema changes.`
+  )
+}
+
+assertNotContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  /CREATE TABLE IF NOT EXISTS message_drafts|CREATE INDEX IF NOT EXISTS idx_message_drafts_school_user/,
+  'message draft request handlers must not create their schema at runtime.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/005_operational_domain_storage.js',
+  'CREATE TABLE IF NOT EXISTS message_drafts',
+  'message draft schema must remain versioned in migrations.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
