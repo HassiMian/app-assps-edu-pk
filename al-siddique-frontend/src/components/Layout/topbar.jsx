@@ -7,12 +7,6 @@ import { useTenantBranding } from '../../context/TenantBrandingContext'
 import { useTheme } from '../../context/ThemeContext'
 import api from '../../services/api'
 
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- }
-}
 const MODULE_SEARCH_ITEMS = [
  { id:'dashboard', type:'Module', title:'Dashboard', subtitle:'School overview, stats, shortcuts', path:'/dashboard', keywords:['home','overview','stats','analytics'] },
  { id:'students', type:'Module', title:'Students', subtitle:'Admissions, profiles, lists, certificates', path:'/students', keywords:['student','gr','admission','profile','certificate','parent'] },
@@ -26,36 +20,6 @@ const MODULE_SEARCH_ITEMS = [
  { id:'cards', type:'Module', title:'ID Cards', subtitle:'Student and staff ID cards', path:'/cards', keywords:['id card','card','barcode','qr'] },
  { id:'settings', type:'Module', title:'System Settings', subtitle:'School logo, Urdu name, print headers', path:'/settings', keywords:['settings','logo','urdu','school profile','signature'] },
 ]
-const FEE_STORE_KEY = 'al_siddique_demo_fees'
-const RESULT_STORE_KEY = 'al_siddique_demo_exam_results'
-const DEFAULT_FEE_ROWS = [
- { id: 1, student_id: 1, challan_no: 'CH-1001', month: 'May', amount: 2500, status: 'paid' },
- { id: 2, student_id: 2, challan_no: 'CH-1002', month: 'May', amount: 3500, status: 'unpaid' },
- { id: 3, student_id: 3, challan_no: 'CH-1003', month: 'May', amount: 2800, status: 'paid' },
- { id: 4, student_id: 4, challan_no: 'CH-1004', month: 'May', amount: 2200, status: 'paid' },
- { id: 5, student_id: 5, challan_no: 'CH-1005', month: 'May', amount: 4000, status: 'unpaid' },
-]
-const DEFAULT_EXAM_RESULTS = {
- 1: [
- { id: 1, student_id: 1, student_name: 'Zaid Ahmed', subject: 'Mathematics', marks_obtained: 85, total_marks: 100, grade: 'A+' },
- { id: 2, student_id: 1, student_name: 'Zaid Ahmed', subject: 'Physics', marks_obtained: 78, total_marks: 100, grade: 'A' },
- { id: 3, student_id: 2, student_name: 'Ayesha Noor', subject: 'Mathematics', marks_obtained: 92, total_marks: 100, grade: 'A+' },
- { id: 4, student_id: 2, student_name: 'Ayesha Noor', subject: 'Physics', marks_obtained: 88, total_marks: 100, grade: 'A+' },
- ],
- 2: [
- { id: 5, student_id: 4, student_name: 'Esha Fatima', subject: 'English', marks_obtained: 42, total_marks: 50, grade: 'A+' },
- ],
-}
-
-function readJson(key, fallback) {
- try {
- const raw = getStorage()?.getItem(key)
- return raw ? JSON.parse(raw) : fallback
- } catch {
- return fallback
- }
-}
-
 function nameTokens(value = '') {
  return String(value).toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(t => t.length > 1)
 }
@@ -86,45 +50,20 @@ function buildAssistantSuggestion(query, students) {
  return {
  kind:'assistant',
  id:`assistant-${wantsFee ? 'fee' : 'marks'}-missing`,
- title:'Assistant needs a student name',
- subtitle:wantsFee ? "Try: What is Abdul Wahab's fee?" : "Try: What are Husnain's assessment marks?",
- badge:'Ask',
+ title:'Add a student name to search',
+ subtitle:wantsFee ? 'Open Fees to view verified challan data.' : 'Open Examinations to view verified result data.',
+ badge:'Navigate',
  path:wantsFee ? '/fees/view' : '/examination/results',
  score:100,
  }
  }
- if (wantsFee) {
- const fees = readJson(FEE_STORE_KEY, DEFAULT_FEE_ROWS)
- const fee = [...fees].reverse().find(f => String(f.student_id) === String(student.id) || String(f.name || '').toLowerCase().includes(String(student.name || '').toLowerCase()))
- const amount = Number(fee?.amount || 0)
- const paid = Number(fee?.paid_amount || 0)
- const discount = Number(fee?.discount || 0)
- const balance = Math.max(0, amount - discount - paid)
  return {
  kind:'assistant',
- id:`assistant-fee-${student.id}`,
- title:`${student.name} fee: Rs. ${amount.toLocaleString()}`,
- subtitle:fee ? `Status: ${fee.status || 'unpaid'} · Paid Rs. ${paid.toLocaleString()} · Discount Rs. ${discount.toLocaleString()} · Balance Rs. ${balance.toLocaleString()}` : 'No fee challan found for this student.',
- badge:'Fee',
- path:'/fees/view',
- score:120,
- }
- }
- const storedResults = readJson(RESULT_STORE_KEY, DEFAULT_EXAM_RESULTS)
- const rows = Object.values(storedResults || {}).flat()
- const studentRows = rows.filter(r => String(r.student_id) === String(student.id) || String(r.student_name || '').toLowerCase().includes(String(student.name || '').toLowerCase()))
- const assessmentRows = q.includes('assessment') ? studentRows.filter(r => String(r.exam_type || r.type || r.exam_name || '').toLowerCase().includes('assessment')) : studentRows
- const finalRows = assessmentRows.length ? assessmentRows : studentRows
- const summary = finalRows.length
- ? finalRows.slice(0, 3).map(r => `${r.subject}: ${r.marks_obtained}/${r.total_marks || 100}`).join(' · ')
- : 'No saved marks found for this student.'
- return {
- kind:'assistant',
- id:`assistant-marks-${student.id}`,
- title:`${student.name} marks`,
- subtitle:summary,
- badge:'Marks',
- path:'/examination/results',
+ id:`assistant-${wantsFee ? 'fee' : 'marks'}-${student.id}`,
+ title:wantsFee ? `Open ${student.name}'s fee records` : `Open ${student.name}'s result records`,
+ subtitle:wantsFee ? 'Verified amounts and payment status are shown in the Fees module.' : 'Verified marks are shown in the Examination module.',
+ badge:wantsFee ? 'Fees' : 'Results',
+ path:wantsFee ? '/fees/view' : '/examination/results',
  score:120,
  }
 }
@@ -150,7 +89,7 @@ function normalizeNotification(n) {
  }
 }
 
-export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
+export default function Topbar({ onMenuToggle, isMobile }) {
  const { user, logout } = useAuth()
  const branding = useTenantBranding()
  const { isLight, toggleTheme } = useTheme()
@@ -233,7 +172,8 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  }
 
  useEffect(() => {
- syncNotifications()
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ void syncNotifications()
  const handleFocus = () => syncNotifications()
  window.addEventListener('focus', handleFocus)
  return () => window.removeEventListener('focus', handleFocus)
@@ -245,12 +185,12 @@ export default function Topbar({ collapsed, onMenuToggle, isMobile }) {
  try {
  await api.put('/api/notify/read-all')
  setNotifs(n => n.map(x => ({ ...x, unread: false })))
- } catch {
- }
+ } catch { /* leave local inbox unchanged if read-all fails */ }
  }
  const dismiss = (id) => setNotifs(n => n.filter(x => x.id !== id))
 
  useEffect(() => {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
  if (!isMobile) setMobileSearchOpen(false)
  }, [isMobile])
 
