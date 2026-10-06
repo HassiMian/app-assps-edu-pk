@@ -48,18 +48,23 @@ const normalizeChallan = (item, students = []) => {
  gr: item.gr_number || item.gr || student?.gr || '',
  class: item.class || student?.class || '',
  section: item.section || student?.section || '',
- familyCode: item.familyCode || student?.familyCode || '—',
+ familyCode: item.family_code || item.familyCode || student?.familyCode || '—',
  contact: item.parent_phone || item.contact || student?.contact || '',
  month: item.month || '',
  year: item.year || '',
- feeHeads: [{ name: 'Monthly Fee', amount: Number(item.amount || 0) }],
- discount: 0,
- lateFee: 0,
- total: Number(item.amount || 0),
+ feeHeads: [{ name: 'Monthly Fee', amount: Number(item.monthly_fee ?? item.amount ?? 0) }],
+ monthlyFee: Number(item.monthly_fee ?? item.amount ?? 0),
+ previousArrears: Number(item.previous_arrears || 0),
+ discount: Number(item.discount || 0),
+ lateFee: Number(item.late_fee || 0),
+ total: Number(item.gross_total ?? item.amount ?? 0),
+ remainingBalance: Number(item.remaining_balance ?? Math.max(0, Number(item.amount || 0) - Number(item.paid_amount || 0))),
  paid: Number(item.paid_amount || 0),
  status: item.status ? `${item.status.charAt(0).toUpperCase()}${item.status.slice(1)}` : 'Unpaid',
  dueDate: item.due_date || '',
  paidDate: item.paid_date || null,
+ paymentMode: item.payment_mode || '',
+ paymentNote: item.payment_note || '',
  }
 }
 
@@ -176,21 +181,17 @@ const StatusBadge = ({ status }) => {
  )
 }
 
-function ActionDropdown({ onPrint }) {
+function ActionDropdown({ onPrint, onEdit, onDelete, onHistory }) {
  const [open, setOpen] = useState(false)
 
  const options = [
- { label: 'Edit Challan', color: C.silver },
- { label: 'Delete Challan', color: C.red },
- { label: 'View Fee History', color: C.blue },
+ { label: 'Edit Challan', color: C.silver, action: onEdit },
+ { label: 'Delete Challan', color: C.red, action: onDelete },
+ { label: 'View Fee History', color: C.blue, action: onHistory },
  { label: 'One Student (1 Copy)', action: () => onPrint('1c') },
  { label: 'One Student (1 Copy - Thermal)', action: () => onPrint('thermal') },
  { label: 'One Student (2 Copies)', action: () => onPrint('2c') },
  { label: 'One Student (3 Copies)', action: () => onPrint('3c') },
- { label: 'Family Single Voucher', action: () => alert('Printing Family Single Voucher...') },
- { label: 'Family Double Voucher', action: () => alert('Printing Family Double Voucher...') },
- { label: 'Family Triple Voucher', action: () => alert('Printing Family Triple Voucher...') },
- { label: 'Family Fee Report', action: () => alert('Generating Family Fee Report...') },
  ]
 
  return (
@@ -1156,6 +1157,12 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
  const [pageSize, setPageSize] = useState(10)
  const [page, setPage] = useState(1)
  const [paymentTarget, setPaymentTarget] = useState(null)
+ const [historyTarget, setHistoryTarget] = useState(null)
+ const [historyRows, setHistoryRows] = useState([])
+ const [historyLoading, setHistoryLoading] = useState(false)
+ const [editTarget, setEditTarget] = useState(null)
+ const [editRecord, setEditRecord] = useState({ challan_no:'', month:'', year:'', monthly_fee:0, previous_arrears:0, discount:0, due_date:'' })
+ const [actionError, setActionError] = useState('')
  const [paymentForm, setPaymentForm] = useState({ paid_amount:'', payment_mode:'cash', discount:'0', payment_note:'' })
  const [paymentSaving, setPaymentSaving] = useState(false)
  const [actionMessage, setActionMessage] = useState('')
@@ -1183,6 +1190,52 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
  setPaymentForm({ paid_amount:String(Math.max(0, Number(challan.total || 0) - Number(challan.paid || 0))), payment_mode:'cash', discount:'0', payment_note:'' })
  setActionMessage('')
  }
+ const openHistory = async (challan) => {
+ setHistoryTarget(challan)
+ setHistoryRows([])
+ setHistoryLoading(true)
+ setActionError('')
+ try {
+ const response = await api.get(`/api/fees/history/student/${challan.studentId}`)
+ setHistoryRows(Array.isArray(response.data?.data) ? response.data.data.map(row => normalizeChallan(row)) : [])
+ } catch (err) {
+ setActionError(err.response?.data?.message || 'Fee history could not be loaded.')
+ } finally { setHistoryLoading(false) }
+ }
+
+ const openEditRecord = (challan) => {
+ setActionError('')
+ setEditTarget(challan)
+ setEditRecord({
+ challan_no: challan.voucherNo,
+ month: challan.month,
+ year: challan.year,
+ monthly_fee: challan.monthlyFee,
+ previous_arrears: challan.previousArrears,
+ discount: challan.discount,
+ due_date: challan.dueDate ? String(challan.dueDate).slice(0,10) : '',
+ })
+ }
+
+ const saveEditRecord = async () => {
+ if (!editTarget) return
+ setActionError('')
+ try {
+ await api.put(`/api/fees/${editTarget.id}`, editRecord)
+ setEditTarget(null)
+ await onRefresh?.()
+ } catch (err) { setActionError(err.response?.data?.message || 'Challan could not be updated.') }
+ }
+
+ const deleteRecord = async (challan) => {
+ if (!window.confirm(`Delete challan ${challan.voucherNo} for ${challan.student}? This action cannot be undone.`)) return
+ setActionError('')
+ try {
+ await api.delete(`/api/fees/${challan.id}`)
+ await onRefresh?.()
+ } catch (err) { setActionError(err.response?.data?.message || 'Challan could not be deleted.') }
+ }
+
  const savePayment = async () => {
  if (!paymentTarget) return
  setPaymentSaving(true); setActionMessage('')
@@ -1258,13 +1311,13 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
  <td style={{ padding: '14px 16px', color: C.silver, textAlign: 'center' }}>{challan.familyCode}</td>
  <td style={{ padding: '14px 16px', color: C.silver }}>{challan.class} / {challan.section}</td>
  <td style={{ padding: '14px 16px', color: C.silver }}>{challan.voucherNo.replace('AL-','')}</td>
- <td style={{ padding: '14px 16px', color: C.silver }}>{challan.total}</td>
- <td style={{ padding: '14px 16px', color: C.silver }}>{challan.total}</td>
+ <td style={{ padding: '14px 16px', color: C.silver }}>{challan.monthlyFee.toLocaleString()}</td>
+ <td style={{ padding: '14px 16px', color: C.silver }}>{challan.total.toLocaleString()}</td>
  <td style={{ padding: '14px 16px' }}>
  <button onClick={()=>openPayment(challan)} style={{ background:C.green, color:'#fff', border:'none', borderRadius:8, padding:'6px 10px', fontSize:12, fontWeight:700, cursor:'pointer' }}>Pay Now</button>
  </td>
  <td style={{ padding: '14px 16px' }}>
- <ActionDropdown onPrint={() => onPrint(challan)} />
+ <ActionDropdown onPrint={() => onPrint(challan)} onEdit={() => openEditRecord(challan)} onDelete={() => void deleteRecord(challan)} onHistory={() => void openHistory(challan)} />
  </td>
  <td style={{ padding: '14px 16px', minWidth: 80 }}>
  <StatusBadge status={challan.status} />
@@ -1279,7 +1332,10 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
  <div style={{ display:'flex', gap:8 }}><button style={btnSecondary} disabled={currentPage<=1} onClick={()=>setPage(p=>Math.max(1,p-1))}>Previous</button><button style={btnSecondary} disabled={currentPage>=totalPages} onClick={()=>setPage(p=>Math.min(totalPages,p+1))}>Next</button></div>
  </div>
  {actionMessage&&<div style={{ padding:12,borderRadius:12,background:'var(--apex-bg-subtle)',border:'1px solid var(--apex-border-default)',color:actionMessage.includes('success')?C.green:C.red,fontSize:12,fontWeight:700 }}>{actionMessage}</div>}
- {paymentTarget&&<div style={{ position:'fixed',inset:0,zIndex:12000,background:'var(--apex-bg-overlay)',display:'grid',placeItems:'center',padding:20 }} onMouseDown={e=>{if(e.target===e.currentTarget)setPaymentTarget(null)}}><div style={{ width:'min(460px,100%)',padding:22,borderRadius:20,background:'var(--apex-bg-surface-solid)',border:'1px solid var(--apex-border-default)',boxShadow:'var(--apex-shadow-lg)',display:'grid',gap:14 }}><div><div style={{ color:'var(--apex-action-primary)',fontSize:11,fontWeight:800,textTransform:'uppercase' }}>Record Payment</div><h3 style={{ margin:'5px 0 0',color:'var(--apex-text-primary)' }}>{paymentTarget.student}</h3><div style={{ color:'var(--apex-text-tertiary)',fontSize:12,marginTop:3 }}>{paymentTarget.voucherNo} · Balance Rs. {Math.max(0,paymentTarget.total-paymentTarget.paid).toLocaleString()}</div></div><div><Lbl>Paid Amount</Lbl><Inp type="number" min="0" value={paymentForm.paid_amount} onChange={e=>setPaymentForm({...paymentForm,paid_amount:e.target.value})}/></div><div><Lbl>Payment Mode</Lbl><Sel value={paymentForm.payment_mode} onChange={e=>setPaymentForm({...paymentForm,payment_mode:e.target.value})}><option value="cash">Cash</option><option value="bank">Bank</option><option value="online">Online</option></Sel></div><div><Lbl>Discount</Lbl><Inp type="number" min="0" value={paymentForm.discount} onChange={e=>setPaymentForm({...paymentForm,discount:e.target.value})}/></div><div><Lbl>Note</Lbl><Inp value={paymentForm.payment_note} onChange={e=>setPaymentForm({...paymentForm,payment_note:e.target.value})} placeholder="Optional"/></div><div style={{ display:'flex',justifyContent:'flex-end',gap:10 }}><button style={btnSecondary} onClick={()=>setPaymentTarget(null)} disabled={paymentSaving}>Cancel</button><button style={{ ...btnPrimary,minWidth:120 }} onClick={()=>void savePayment()} disabled={paymentSaving}>{paymentSaving?'Saving…':'Save Payment'}</button></div></div></div>}
+ {actionError&&<div style={{ color:'var(--apex-action-danger)',fontSize:12,fontWeight:700 }}>{actionError}</div>}
+ {historyTarget&&<div style={{ position:'fixed',inset:0,zIndex:12000,background:'var(--apex-bg-overlay)',display:'grid',placeItems:'center',padding:20 }} onMouseDown={e=>{if(e.target===e.currentTarget)setHistoryTarget(null)}}><div style={{ width:'min(760px,100%)',maxHeight:'80vh',overflow:'auto',padding:22,borderRadius:20,background:'var(--apex-bg-surface-solid)',border:'1px solid var(--apex-border-default)',boxShadow:'var(--apex-shadow-lg)' }}><div style={{ display:'flex',justifyContent:'space-between',gap:12,alignItems:'center',marginBottom:16 }}><div><div style={{ color:'var(--apex-action-primary)',fontSize:11,fontWeight:800,textTransform:'uppercase' }}>Verified Fee History</div><h3 style={{ margin:'5px 0 0',color:'var(--apex-text-primary)' }}>{historyTarget.student}</h3></div><button style={btnSecondary} onClick={()=>setHistoryTarget(null)}>Close</button></div>{historyLoading?<div style={{ color:'var(--apex-text-tertiary)',padding:20 }}>Loading fee history…</div>:<div style={{ display:'grid',gap:8 }}>{historyRows.length?historyRows.map(row=><div key={row.id} style={{ display:'grid',gridTemplateColumns:'1.1fr .8fr .8fr .8fr',gap:10,padding:12,borderRadius:12,background:'var(--apex-bg-subtle)',border:'1px solid var(--apex-border-subtle)',fontSize:12 }}><strong style={{ color:'var(--apex-text-primary)' }}>{row.month} {row.year}</strong><span>Rs. {row.total.toLocaleString()}</span><span>Paid: Rs. {row.paid.toLocaleString()}</span><span style={{ color:row.status==='Paid'?'var(--apex-action-success)':'var(--apex-action-danger)',fontWeight:800 }}>{row.status}</span></div>):<div style={{ color:'var(--apex-text-tertiary)',padding:20,textAlign:'center' }}>No fee history found.</div>}</div>}</div></div>}
+ {editTarget&&<div style={{ position:'fixed',inset:0,zIndex:12000,background:'var(--apex-bg-overlay)',display:'grid',placeItems:'center',padding:20 }} onMouseDown={e=>{if(e.target===e.currentTarget)setEditTarget(null)}}><div style={{ width:'min(560px,100%)',padding:22,borderRadius:20,background:'var(--apex-bg-surface-solid)',border:'1px solid var(--apex-border-default)',boxShadow:'var(--apex-shadow-lg)',display:'grid',gap:12 }}><div><div style={{ color:'var(--apex-action-primary)',fontSize:11,fontWeight:800,textTransform:'uppercase' }}>Edit Challan</div><h3 style={{ margin:'5px 0 0',color:'var(--apex-text-primary)' }}>{editTarget.student}</h3></div><div style={{ display:'grid',gridTemplateColumns:'1fr 1fr',gap:10 }}><div><Lbl>Challan No.</Lbl><Inp value={editRecord.challan_no} onChange={e=>setEditRecord({...editRecord,challan_no:e.target.value})}/></div><div><Lbl>Due Date</Lbl><Inp type="date" value={editRecord.due_date} onChange={e=>setEditRecord({...editRecord,due_date:e.target.value})}/></div><div><Lbl>Monthly Fee</Lbl><Inp type="number" min="0" value={editRecord.monthly_fee} onChange={e=>setEditRecord({...editRecord,monthly_fee:Number(e.target.value)||0})}/></div><div><Lbl>Previous Arrears</Lbl><Inp type="number" min="0" value={editRecord.previous_arrears} onChange={e=>setEditRecord({...editRecord,previous_arrears:Number(e.target.value)||0})}/></div><div><Lbl>Discount</Lbl><Inp type="number" min="0" value={editRecord.discount} onChange={e=>setEditRecord({...editRecord,discount:Number(e.target.value)||0})}/></div></div><div style={{ display:'flex',justifyContent:'flex-end',gap:10 }}><button style={btnSecondary} onClick={()=>setEditTarget(null)}>Cancel</button><button style={btnPrimary} onClick={()=>void saveEditRecord()}>Save Changes</button></div></div></div>}
+  {paymentTarget&&<div style={{ position:'fixed',inset:0,zIndex:12000,background:'var(--apex-bg-overlay)',display:'grid',placeItems:'center',padding:20 }} onMouseDown={e=>{if(e.target===e.currentTarget)setPaymentTarget(null)}}><div style={{ width:'min(460px,100%)',padding:22,borderRadius:20,background:'var(--apex-bg-surface-solid)',border:'1px solid var(--apex-border-default)',boxShadow:'var(--apex-shadow-lg)',display:'grid',gap:14 }}><div><div style={{ color:'var(--apex-action-primary)',fontSize:11,fontWeight:800,textTransform:'uppercase' }}>Record Payment</div><h3 style={{ margin:'5px 0 0',color:'var(--apex-text-primary)' }}>{paymentTarget.student}</h3><div style={{ color:'var(--apex-text-tertiary)',fontSize:12,marginTop:3 }}>{paymentTarget.voucherNo} · Balance Rs. {Math.max(0,paymentTarget.total-paymentTarget.paid).toLocaleString()}</div></div><div><Lbl>Paid Amount</Lbl><Inp type="number" min="0" value={paymentForm.paid_amount} onChange={e=>setPaymentForm({...paymentForm,paid_amount:e.target.value})}/></div><div><Lbl>Payment Mode</Lbl><Sel value={paymentForm.payment_mode} onChange={e=>setPaymentForm({...paymentForm,payment_mode:e.target.value})}><option value="cash">Cash</option><option value="bank">Bank</option><option value="online">Online</option></Sel></div><div><Lbl>Discount</Lbl><Inp type="number" min="0" value={paymentForm.discount} onChange={e=>setPaymentForm({...paymentForm,discount:e.target.value})}/></div><div><Lbl>Note</Lbl><Inp value={paymentForm.payment_note} onChange={e=>setPaymentForm({...paymentForm,payment_note:e.target.value})} placeholder="Optional"/></div><div style={{ display:'flex',justifyContent:'flex-end',gap:10 }}><button style={btnSecondary} onClick={()=>setPaymentTarget(null)} disabled={paymentSaving}>Cancel</button><button style={{ ...btnPrimary,minWidth:120 }} onClick={()=>void savePayment()} disabled={paymentSaving}>{paymentSaving?'Saving…':'Save Payment'}</button></div></div></div>}
  </div>
  )
 }

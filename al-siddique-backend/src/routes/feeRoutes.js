@@ -496,6 +496,38 @@ router.get('/pending-proofs', protect, adminOnly, async (req, res) => {
   }
 })
 
+// GET /api/fees/history/student/:student_id — tenant-safe challan/payment history for one student
+router.get('/history/student/:student_id', protect, async (req, res) => {
+  try {
+    const studentId = Number(req.params.student_id)
+    if (!Number.isInteger(studentId) || studentId <= 0) {
+      return res.status(400).json({ success: false, message: 'Valid student id is required.' })
+    }
+    const schoolId = currentSchoolId(req)
+    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
+    let sql = `
+      SELECT f.*, s.name, s.gr_number, s.class, s.section, s.father_name, s.family_code
+      FROM fee_challans f
+      JOIN students s ON s.id = f.student_id
+      WHERE f.student_id = $1
+    `
+    const params = [studentId]
+    if (supportsTenant && req.user?.role !== 'super_admin') {
+      sql += ' AND f.school_id = $2 AND s.school_id = $2'
+      params.push(schoolId)
+    }
+    const readScope = scopedFeeReadClause(req, 's', params.length + 1)
+    sql += readScope.clause
+    params.push(...readScope.params)
+    sql += ' ORDER BY f.year DESC, CASE LOWER(f.month) WHEN \'january\' THEN 1 WHEN \'february\' THEN 2 WHEN \'march\' THEN 3 WHEN \'april\' THEN 4 WHEN \'may\' THEN 5 WHEN \'june\' THEN 6 WHEN \'july\' THEN 7 WHEN \'august\' THEN 8 WHEN \'september\' THEN 9 WHEN \'october\' THEN 10 WHEN \'november\' THEN 11 WHEN \'december\' THEN 12 ELSE 0 END DESC, f.created_at DESC'
+    const result = await query(sql, params)
+    res.json({ success: true, count: result.rowCount, data: result.rows })
+  } catch (err) {
+    console.error('Fee history error:', err.message)
+    res.status(500).json({ success: false, message: 'Fee history could not be loaded.' })
+  }
+})
+
 router.get('/:id', protect, async (req, res) => {
   try {
     const id = Number(req.params.id)

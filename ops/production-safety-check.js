@@ -317,6 +317,25 @@ assertContains(
   'notification delivery UI must reflect the backend provider result set.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /Printing Family Single Voucher|Printing Family Double Voucher|Printing Family Triple Voucher|Generating Family Fee Report/,
+  'fee actions must not present fake success alerts for unimplemented family outputs.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  "router.get('/history/student/:student_id', protect",
+  'fee history must be served from a tenant-safe backend endpoint.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  'monthlyFee: Number(item.monthly_fee ?? item.amount ?? 0)',
+  'fee UI must distinguish monthly fee from gross challan total.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
