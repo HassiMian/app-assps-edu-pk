@@ -455,8 +455,8 @@ async function migrate() {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
-      console.error('RLS Migration Error:', err.message)
-      // Non-fatal, let the app start but log heavily
+      console.error('Security-critical authoring migration failed:', err.message)
+      throw err
     }
 
     console.log('\nMigration complete.\n')
