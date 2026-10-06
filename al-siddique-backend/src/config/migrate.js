@@ -457,6 +457,15 @@ async function migrate() {
     }
 
     try {
+      const feeLedgerMigration = require('../../migrations/006_fee_payment_ledger')
+      await feeLedgerMigration.up()
+      console.log('fee payment ledger ready')
+    } catch (err) {
+      console.error('Fee Ledger Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

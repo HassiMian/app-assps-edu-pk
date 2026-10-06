@@ -579,6 +579,31 @@ assertContains(
   'fee schema initialization must remain data-neutral.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'INSERT INTO fee_payment_transactions',
+  'fee payments must append to the durable payment ledger.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'if (cumulativePaid < previousPaid)',
+  'fee payment workflow must prevent accidental rollback of recorded paid amounts.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  'paid_amount:Math.min(payable, alreadyPaid + receivedNow)',
+  'fee payment UI must submit cumulative paid state, not overwrite prior partial payments.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  /paid_amount:\s*challan\.amount/,
+  'student fee quick-pay must use canonical payable totals rather than the legacy amount field.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

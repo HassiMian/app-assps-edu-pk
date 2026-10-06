@@ -18,8 +18,8 @@ const subTabBtn = (active) => ({
 })
 
 const badge = (status) => {
-  const s = (status || 'unpaid').toLowerCase()
-  const color = s === 'paid' ? '#30D158' : s === 'partial' ? '#C8991A' : '#FF375F'
+  const s = String(status || '').toLowerCase()
+  const color = s === 'paid' ? '#30D158' : s === 'partial' ? '#C8991A' : s === 'unpaid' ? '#FF375F' : '#8892A4'
   return { color, fontWeight: 700, fontSize: 12, textTransform: 'capitalize' }
 }
 
@@ -62,9 +62,12 @@ export default function StudentFeePanel({ student, school }) {
     if (!challan?.id) return
     setPaying(true)
     try {
+      const payable = Math.max(0, Number(challan.gross_total ?? challan.amount ?? 0))
       await api.put(`/api/fees/${challan.id}/pay`, {
-        paid_amount: challan.amount,
+        paid_amount: payable,
         payment_mode: 'cash',
+        discount: Number(challan.discount || 0),
+        payment_note: 'Quick mark-paid action from student fee panel',
       })
       await load()
     } finally {
@@ -80,7 +83,7 @@ export default function StudentFeePanel({ student, school }) {
     }
     const clean = String(phone).replace(/\D/g, '')
     const msg = encodeURIComponent(
-      `Fee challan for ${student.name} (${student.gr || student.gr_number}) — ${currentChallan?.month} ${currentChallan?.year} — Rs. ${Number(currentChallan?.amount || 0).toLocaleString()}`
+      `Fee challan for ${student.name} (${student.gr || student.gr_number}) — ${currentChallan?.month} ${currentChallan?.year} — outstanding Rs. ${Number(currentChallan?.remaining_balance ?? Math.max(0, Number(currentChallan?.gross_total ?? currentChallan?.amount ?? 0) - Number(currentChallan?.paid_amount || 0))).toLocaleString()}`
     )
     window.open(`https://wa.me/92${clean.replace(/^0/, '')}?text=${msg}`, '_blank')
   }
@@ -139,10 +142,10 @@ export default function StudentFeePanel({ student, school }) {
                     <div style={{ color: '#C0C8D8', fontWeight: 800 }}>{currentChallan.month} {currentChallan.year}</div>
                     <div style={{ color: '#8892A4', fontSize: 12 }}>{currentChallan.challan_no}</div>
                   </div>
-                  <div style={badge(currentChallan.status)}>{currentChallan.status || 'unpaid'}</div>
+                  <div style={badge(currentChallan.status)}>{currentChallan.status || 'Not recorded'}</div>
                 </div>
                 <div style={{ marginTop: 10, color: '#C8991A', fontSize: 22, fontWeight: 800 }}>
-                  Rs. {Number(currentChallan.amount || 0).toLocaleString()}
+                  Rs. {Number(currentChallan.remaining_balance ?? Math.max(0, Number(currentChallan.gross_total ?? currentChallan.amount ?? 0) - Number(currentChallan.paid_amount || 0))).toLocaleString()} outstanding
                 </div>
                 <div style={{ color: '#8892A4', fontSize: 12, marginTop: 6 }}>
                   Due: {currentChallan.due_date ? new Date(currentChallan.due_date).toLocaleDateString('en-PK') : '—'}

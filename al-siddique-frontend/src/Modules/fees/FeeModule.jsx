@@ -1235,17 +1235,24 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
 
  const savePayment = async () => {
  if (!paymentTarget) return
+ const discount = Math.max(0, Number(paymentForm.discount || 0))
+ const baseTotal = Math.max(0, Number(paymentTarget.monthlyFee || 0) + Number(paymentTarget.previousArrears || 0))
+ const payable = Math.max(0, baseTotal - discount)
+ const alreadyPaid = Math.max(0, Number(paymentTarget.paid || 0))
+ const receivedNow = Math.max(0, Number(paymentForm.paid_amount || 0))
+ if (discount > baseTotal) { setActionMessage('Discount cannot exceed the challan total.'); return }
+ if (receivedNow > Math.max(0, payable - alreadyPaid)) { setActionMessage('Received amount cannot exceed the remaining balance.'); return }
  setPaymentSaving(true); setActionMessage('')
  try {
  await api.put(`/api/fees/${paymentTarget.id}/pay`, {
- paid_amount:Number(paymentForm.paid_amount || 0), payment_mode:paymentForm.payment_mode,
- discount:Number(paymentForm.discount || 0), payment_note:paymentForm.payment_note || null,
+ paid_amount:Math.min(payable, alreadyPaid + receivedNow), payment_mode:paymentForm.payment_mode,
+ discount, payment_note:paymentForm.payment_note || null,
  })
  await onRefresh?.()
  setPaymentTarget(null)
- setActionMessage('Payment updated successfully.')
+ setActionMessage('Payment recorded successfully.')
  } catch (err) {
- setActionMessage(err.response?.data?.message || 'Payment could not be updated.')
+ setActionMessage(err.response?.data?.message || 'Payment could not be recorded.')
  } finally { setPaymentSaving(false) }
  }
 

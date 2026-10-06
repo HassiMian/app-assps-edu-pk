@@ -1,6 +1,6 @@
 const express = require('express')
 const router  = express.Router()
-const { query } = require('../config/database')
+const { pool, query } = require('../config/database')
 const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
@@ -1063,54 +1063,116 @@ router.get('/pending-proofs', protect, adminOnly, async (req, res) => {
   }
 })
 
-// PUT /api/fees/:id/pay
+// PUT /api/fees/:id/pay — cumulative challan state + append-only payment ledger
 router.put('/:id/pay', protect, adminOnly, async (req, res) => {
+  const challanId = Number(req.params.id)
+  if (!Number.isInteger(challanId) || challanId <= 0) {
+    return res.status(400).json({ success: false, message: 'Valid fee challan id is required.' })
+  }
+
+  const cumulativePaid = Number(req.body?.paid_amount)
+  const discount = Number(req.body?.discount || 0)
+  const paymentMode = String(req.body?.payment_mode || 'cash').trim().toLowerCase()
+  const paymentNote = req.body?.payment_note == null ? null : String(req.body.payment_note).trim().slice(0, 1000)
+  const allowedModes = new Set(['cash', 'online', 'bank', 'jazzcash', 'easypaisa', 'card', 'other'])
+
+  if (!Number.isFinite(cumulativePaid) || cumulativePaid < 0) {
+    return res.status(422).json({ success: false, message: 'Valid cumulative paid amount is required.' })
+  }
+  if (!Number.isFinite(discount) || discount < 0) {
+    return res.status(422).json({ success: false, message: 'Discount cannot be negative.' })
+  }
+  if (!allowedModes.has(paymentMode)) {
+    return res.status(422).json({ success: false, message: 'Invalid payment mode.' })
+  }
+
+  const schoolId = currentSchoolId(req)
+  const client = await pool.connect()
   try {
-    try {
-      await ensureFeePaymentColumns()
-    } catch (e) {
-      console.warn('Skipping column verification due to offline db');
-    }
-    await tenantClause(req)
-    const { paid_amount, payment_mode = 'cash', discount = 0, payment_note = null } = req.body
-    const paid = Number(paid_amount)
-    const disc = Number(discount) || 0
-    if (!Number.isFinite(paid) || paid < 0) {
-      return res.status(400).json({ success: false, message: 'Valid paid amount is required' })
-    }
-    if (disc < 0) {
-      return res.status(400).json({ success: false, message: 'Discount cannot be negative' })
-    }
+    await client.query('BEGIN')
     const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const result = await query(`
+    const rowResult = await client.query(`
+      SELECT id, student_id, school_id, amount, monthly_fee, previous_arrears, paid_amount, discount
+      FROM fee_challans
+      WHERE id = $1
+        ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''}
+      FOR UPDATE
+    `, supportsTenant && req.user?.role !== 'super_admin' ? [challanId, schoolId] : [challanId])
+
+    if (!rowResult.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Fee challan not found.' })
+    }
+
+    const current = rowResult.rows[0]
+    const baseTotal = Math.max(0, Number(current.monthly_fee ?? current.amount ?? 0) + Number(current.previous_arrears || 0))
+    const previousPaid = Math.max(0, Number(current.paid_amount || 0))
+    if (discount > baseTotal) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({ success: false, message: 'Discount cannot exceed the challan amount.' })
+    }
+    const grossTotal = Math.max(0, baseTotal - discount)
+    if (cumulativePaid > grossTotal) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({ success: false, message: 'Paid amount cannot exceed the payable challan total.' })
+    }
+    if (cumulativePaid < previousPaid) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({ success: false, message: 'Recorded paid amount cannot be reduced through the payment workflow.' })
+    }
+
+    const paymentIncrement = Number((cumulativePaid - previousPaid).toFixed(2))
+    const updateResult = await client.query(`
       UPDATE fee_challans
-      SET paid_amount=$1,
-          payment_mode=$2,
-          discount=$4,
-          payment_note=$5,
-          gross_total=GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(previous_arrears, 0) - $4, 0),
-          remaining_balance=GREATEST(GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(previous_arrears, 0) - $4, 0) - $1, 0),
-          status=CASE
+      SET paid_amount = $1,
+          payment_mode = $2,
+          discount = $3,
+          payment_note = $4,
+          gross_total = $5,
+          remaining_balance = GREATEST($5 - $1, 0),
+          status = CASE
             WHEN $1 <= 0 THEN 'unpaid'
-            WHEN $1 < GREATEST(COALESCE(monthly_fee, amount, 0) + COALESCE(previous_arrears, 0) - $4, 0) THEN 'partial'
+            WHEN $1 < $5 THEN 'partial'
             ELSE 'paid'
           END,
-          paid_date=CASE WHEN $1 > 0 THEN CURRENT_DATE ELSE NULL END,
-          updated_at=NOW()
-      WHERE id=$3
-        ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $6' : ''}
+          paid_date = CASE WHEN $1 > 0 THEN COALESCE(paid_date, CURRENT_DATE) ELSE NULL END,
+          updated_at = NOW()
+      WHERE id = $6
       RETURNING *
-    `, supportsTenant && req.user?.role !== 'super_admin'
-      ? [paid, payment_mode, req.params.id, disc, payment_note, currentSchoolId(req)]
-      : [paid, payment_mode, req.params.id, disc, payment_note])
+    `, [cumulativePaid, paymentMode, discount, paymentNote, grossTotal, challanId])
 
-    if (result.rows.length === 0)
-      return res.status(404).json({ success: false, message: 'Fee challan not found' })
+    if (paymentIncrement > 0) {
+      await client.query(`
+        INSERT INTO fee_payment_transactions (
+          school_id, challan_id, student_id, amount, cumulative_paid,
+          payment_mode, discount_snapshot, payment_note, recorded_by
+        ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+      `, [
+        Number(current.school_id || schoolId),
+        challanId,
+        current.student_id || null,
+        paymentIncrement,
+        cumulativePaid,
+        paymentMode,
+        discount,
+        paymentNote,
+        req.user?.id || null,
+      ])
+    }
 
-    res.json({ success: true, message: 'Fee paid mark ho gayi', data: result.rows[0] })
+    await client.query('COMMIT')
+    return res.json({
+      success: true,
+      message: paymentIncrement > 0 ? 'Payment recorded successfully.' : 'Payment state updated successfully.',
+      payment_increment: paymentIncrement,
+      data: updateResult.rows[0],
+    })
   } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
     console.error('Fee payment error:', err.message)
-    return res.status(503).json({ success: false, message: 'Database unavailable. Payment could not be recorded.' })
+    return res.status(500).json({ success: false, message: 'Payment could not be recorded.' })
+  } finally {
+    client.release()
   }
 })
 
