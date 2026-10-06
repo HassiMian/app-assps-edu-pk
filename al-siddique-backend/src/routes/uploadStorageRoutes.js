@@ -47,19 +47,17 @@ function cleanupFile(file) {
   return fs.promises.unlink(file.path).catch(() => {})
 }
 
+let tenantBrandingSchemaReady = null
 async function ensureTenantBrandingTable() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS tenant_branding (
-      id TEXT PRIMARY KEY,
-      tenant_id VARCHAR(120) UNIQUE NOT NULL,
-      logo_url TEXT,
-      primary_color VARCHAR(40),
-      secondary_color VARCHAR(40),
-      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    );
-    CREATE INDEX IF NOT EXISTS tenant_branding_tenant_id_idx ON tenant_branding (tenant_id);
-  `)
+  if (tenantBrandingSchemaReady) return true
+  const result = await pool.query("SELECT to_regclass('public.tenant_branding') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('tenant_branding schema migration is not applied.')
+    err.code = 'BRANDING_SCHEMA_NOT_READY'
+    throw err
+  }
+  tenantBrandingSchemaReady = true
+  return true
 }
 
 function canManageTenantBranding(req, res, next) {

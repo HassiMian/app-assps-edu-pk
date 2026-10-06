@@ -9,29 +9,16 @@ const canReadFamilies = requireRoles('super_admin', 'admin', 'principal', 'schoo
 const canManageFamilies = requireRoles('super_admin', 'admin', 'principal', 'school_admin')
 
 let schemaReady = null
-function ensureFamilySchema() {
-  if (!schemaReady) {
-    schemaReady = (async () => {
-      await query(`
-        CREATE TABLE IF NOT EXISTS family_groups (
-          id BIGSERIAL PRIMARY KEY,
-          school_id INTEGER NOT NULL REFERENCES schools(id),
-          code VARCHAR(64) NOT NULL,
-          father_name VARCHAR(180),
-          phone VARCHAR(40),
-          created_by INTEGER REFERENCES users(id),
-          created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-          UNIQUE (school_id, code)
-        )
-      `)
-      await query('CREATE INDEX IF NOT EXISTS idx_family_groups_school ON family_groups (school_id, created_at DESC)')
-    })().catch(err => {
-      schemaReady = null
-      throw err
-    })
+async function ensureFamilySchema() {
+  if (schemaReady) return true
+  const result = await query("SELECT to_regclass('public.family_groups') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('family_groups schema migration is not applied.')
+    err.code = 'FAMILY_SCHEMA_NOT_READY'
+    throw err
   }
-  return schemaReady
+  schemaReady = true
+  return true
 }
 
 function normalizeFamilyCode(value) {
@@ -105,7 +92,7 @@ router.get('/', protect, canReadFamilies, async (req, res) => {
     res.json({ success: true, count: families.length, data: families })
   } catch (err) {
     console.error('Family list error:', err.message)
-    res.status(500).json({ success: false, message: 'Families could not be loaded.' })
+    res.status(err.code === 'FAMILY_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'FAMILY_SCHEMA_NOT_READY' ? 'Family storage is not initialized.' : 'Families could not be loaded.' })
   }
 })
 

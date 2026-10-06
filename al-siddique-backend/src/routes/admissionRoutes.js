@@ -13,29 +13,22 @@ const { resolveAcademicAssignment } = require('../services/academicAssignmentGua
 const canViewAdmissions = requireRoles('super_admin', 'admin', 'principal')
 const canReadAdmissions = adminOrServiceScope('school.admissions.read')
 
+let admissionsSchemaReady = null
 async function ensureAdmissionsTable() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS admissions (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER REFERENCES schools(id),
-      tenant_id VARCHAR(80),
-      student_name VARCHAR(150),
-      father_name VARCHAR(150),
-      parent_phone VARCHAR(30),
-      whatsapp_number VARCHAR(30),
-      class_applying VARCHAR(80),
-      gender VARCHAR(30),
-      date_of_birth DATE,
-      previous_school TEXT,
-      message TEXT,
-      status VARCHAR(20) DEFAULT 'pending',
-      created_at TIMESTAMP DEFAULT NOW(),
-      updated_at TIMESTAMP DEFAULT NOW()
-    )
+  if (admissionsSchemaReady) return true
+  const result = await pool.query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='admissions'
+      AND column_name IN ('id','school_id','tenant_id','student_name','father_name','parent_phone','class_applying','status','created_at')
   `)
-  await pool.query('ALTER TABLE admissions ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id)')
-  await pool.query('ALTER TABLE admissions ADD COLUMN IF NOT EXISTS tenant_id VARCHAR(80)')
-  await pool.query('CREATE INDEX IF NOT EXISTS idx_admissions_school_created ON admissions(school_id, created_at DESC)')
+  if (Number(result.rows[0]?.count || 0) !== 9) {
+    const err = new Error('admissions schema migration is not applied.')
+    err.code = 'ADMISSION_SCHEMA_NOT_READY'
+    throw err
+  }
+  admissionsSchemaReady = true
+  return true
 }
 
 // POST /api/admissions — public, no auth required

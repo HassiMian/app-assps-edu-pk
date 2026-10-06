@@ -12,21 +12,22 @@ function normalizeSchoolCode(value) {
   return value.trim().toLowerCase().replace(/[^a-z0-9_-]+/g, '-')
 }
 
+let schoolSchemaReady = null
 async function ensureSchoolSchema() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS schools (
-      id                SERIAL PRIMARY KEY,
-      name              VARCHAR(150) NOT NULL,
-      code              VARCHAR(50) UNIQUE,
-      status            VARCHAR(20) DEFAULT 'active' CHECK (status IN ('active','trial','suspended','closed')),
-      subscription_plan VARCHAR(50) DEFAULT 'basic',
-      feature_flags     JSONB DEFAULT '[]'::jsonb,
-      created_at        TIMESTAMP DEFAULT NOW(),
-      updated_at        TIMESTAMP DEFAULT NOW()
-    );
+  if (schoolSchemaReady) return true
+  const result = await pool.query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='schools'
+      AND column_name IN ('id','name','code','status','subscription_plan','feature_flags')
   `)
-  await pool.query('ALTER TABLE schools ADD COLUMN IF NOT EXISTS subscription_plan VARCHAR(50) DEFAULT \'basic\';')
-  await pool.query('ALTER TABLE schools ADD COLUMN IF NOT EXISTS feature_flags JSONB DEFAULT \'[]\'::jsonb;')
+  if (Number(result.rows[0]?.count || 0) !== 6) {
+    const err = new Error('schools schema migration is not applied.')
+    err.code = 'SCHOOL_SCHEMA_NOT_READY'
+    throw err
+  }
+  schoolSchemaReady = true
+  return true
 }
 
 router.get('/', protect, canManageSchools, async (req, res) => {
@@ -40,7 +41,7 @@ router.get('/', protect, canManageSchools, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('School list error:', err.message)
-    res.status(500).json({ success: false, message: 'Unable to load schools.' })
+    res.status(err.code === 'SCHOOL_SCHEMA_NOT_READY' ? 503 : 500).json({ success: false, message: err.code === 'SCHOOL_SCHEMA_NOT_READY' ? 'School storage is not initialized.' : 'Unable to load schools.' })
   }
 })
 

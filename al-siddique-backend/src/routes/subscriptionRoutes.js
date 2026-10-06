@@ -51,12 +51,22 @@ function generateRequestId() {
   return `REQ-${segment1}-${segment2}`
 }
 
+let subscriptionRequestSchemaReady = null
 async function ensureSubscriptionRequestFormColumns() {
-  await pool.query(`
-    ALTER TABLE subscription_requests ADD COLUMN IF NOT EXISTS plan_id VARCHAR(80);
-    ALTER TABLE subscription_requests ADD COLUMN IF NOT EXISTS plan_name VARCHAR(100);
-    ALTER TABLE subscription_requests ADD COLUMN IF NOT EXISTS plan_price INTEGER;
+  if (subscriptionRequestSchemaReady) return true
+  const result = await pool.query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='subscription_requests'
+      AND column_name IN ('plan_id','plan_name','plan_price')
   `)
+  if (Number(result.rows[0]?.count || 0) !== 3) {
+    const err = new Error('subscription request schema migration is not applied.')
+    err.code = 'SUBSCRIPTION_SCHEMA_NOT_READY'
+    throw err
+  }
+  subscriptionRequestSchemaReady = true
+  return true
 }
 
 async function createSubscriptionRequestFromBody({ body, file }) {

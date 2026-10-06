@@ -520,6 +520,15 @@ async function migrate() {
     }
 
     try {
+      const coreAdjunctMigration = require('../../migrations/013_core_adjunct_schema')
+      await coreAdjunctMigration.up()
+      console.log('core adjunct schema ready')
+    } catch (err) {
+      console.error('Core Adjunct Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

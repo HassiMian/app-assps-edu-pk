@@ -1068,6 +1068,29 @@ assertContains(
   'auxiliary operational schema must be versioned in migration 012.'
 )
 
+
+for (const routeFile of [
+  'al-siddique-backend/src/routes/schoolRoutes.js',
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  'al-siddique-backend/src/routes/familyRoutes.js',
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+]) {
+  assertNotContains(
+    routeFile,
+    /CREATE TABLE IF NOT EXISTS|ALTER TABLE .*ADD COLUMN IF NOT EXISTS|CREATE INDEX IF NOT EXISTS/,
+    `${routeFile} must not mutate schema from request handlers.`
+  )
+}
+
+assertContains(
+  'al-siddique-backend/migrations/013_core_adjunct_schema.js',
+  'CREATE TABLE IF NOT EXISTS employee_attendance',
+  'core adjunct schema must be versioned in migration 013.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

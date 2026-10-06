@@ -28,24 +28,16 @@ function portalStudentScope(req, alias = 's', startIndex = 1) {
 }
 
 let gradeSchemaReady = null
-function ensureGradeSettingsSchema() {
-  if (!gradeSchemaReady) {
-    gradeSchemaReady = query(`
-      CREATE TABLE IF NOT EXISTS grade_settings (
-        id BIGSERIAL PRIMARY KEY,
-        school_id INTEGER NOT NULL REFERENCES schools(id),
-        label VARCHAR(24) NOT NULL,
-        min_percentage INTEGER NOT NULL CHECK (min_percentage BETWEEN 0 AND 100),
-        max_percentage INTEGER NOT NULL CHECK (max_percentage BETWEEN 0 AND 100),
-        sort_order INTEGER NOT NULL DEFAULT 0,
-        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-        UNIQUE (school_id, label)
-      )
-    `).then(() => query('CREATE INDEX IF NOT EXISTS idx_grade_settings_school_order ON grade_settings (school_id, sort_order)'))
-      .catch(err => { gradeSchemaReady = null; throw err })
+async function ensureGradeSettingsSchema() {
+  if (gradeSchemaReady) return true
+  const result = await query("SELECT to_regclass('public.grade_settings') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('grade_settings schema migration is not applied.')
+    err.code = 'GRADE_SCHEMA_NOT_READY'
+    throw err
   }
-  return gradeSchemaReady
+  gradeSchemaReady = true
+  return true
 }
 
 const DEFAULT_GRADE_SETTINGS = [
@@ -117,7 +109,7 @@ router.get('/grade-settings', protect, canReadResults, async (req, res) => {
     res.json({ success:true, data:rows, configured:Number(result.rows[0]?.count || 0) > 0 })
   } catch (err) {
     console.error('Grade settings read error:', err.message)
-    res.status(500).json({ success:false, message:'Grade settings could not be loaded.' })
+    res.status(err.code === 'GRADE_SCHEMA_NOT_READY' ? 503 : 500).json({ success:false, message:err.code === 'GRADE_SCHEMA_NOT_READY' ? 'Grade settings storage is not initialized.' : 'Grade settings could not be loaded.' })
   }
 })
 
