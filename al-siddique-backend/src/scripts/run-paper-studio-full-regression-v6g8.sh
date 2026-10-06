@@ -85,8 +85,9 @@ node --test --test-concurrency=1 \
   tests/paper-v6g18-human-authority-boundary.test.js \
   tests/paper-v6g18-human-authority-boundary-http.test.js \
   tests/paper-v6g19-release-signature.test.js \
-  tests/paper-v6g19-release-signature-http.test.js | tee "$LOG"
+  tests/paper-v6g19-release-signature-http.test.js \
+  tests/paper-v6h2-canary-plan.test.js | tee "$LOG"
 
-grep -q '^# pass 114$' "$LOG"
+grep -q '^# pass 118$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
-echo "V6G19_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"
+echo "V6G19_H2_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"
