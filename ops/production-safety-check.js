@@ -916,6 +916,19 @@ assertContains(
   'permanent student deletion must lock and verify the school-scoped student transactionally.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/noticesRoutes.js',
+  /Skipping notices table creation due to offline db|\|\| ['"]Administration['"]/,
+  'notice workflows must not swallow schema failures or invent an Administration author.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/noticesRoutes.js',
+  'const schoolId = requireNoticeSchoolContext(req, res)',
+  'notice reads and mutations must require explicit school context.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

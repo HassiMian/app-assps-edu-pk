@@ -8,6 +8,15 @@ const { protect, requireRoles, requireScopeForServiceOnly } = require('../middle
 const { currentSchoolId } = require('../middleware/tenant')
 const canManageNotices = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
+function requireNoticeSchoolContext(req, res) {
+  const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for notices.' })
+    return null
+  }
+  return schoolId
+}
+
 async function ensureNoticesTable() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS notices (
@@ -68,7 +77,7 @@ function normalizeNoticePayload(body) {
   return {
     title: body.title,
     content,
-    issuedBy: body.issued_by || body.issuedBy || body.author || 'Administration',
+    issuedBy: body.issued_by || body.issuedBy || body.author || '',
     recipientType: listValue(body.recipient_type ?? body.recipientType),
     teacherIds: listValue(body.teacher_ids ?? body.teacherIds),
     mentionedTeacherIds: listValue(body.mentioned_teacher_ids ?? body.mentionedTeacherIds),
@@ -85,14 +94,12 @@ function normalizeNoticePayload(body) {
 // GET all notices for this school
 router.get('/', protect, requireScopeForServiceOnly('school.notices.read'), async (req, res) => {
   try {
-    try {
-      await ensureNoticesTable()
-    } catch (e) {
-      console.warn('Skipping notices table creation due to offline db');
-    }
+    await ensureNoticesTable()
+    const schoolId = requireNoticeSchoolContext(req, res)
+    if (!schoolId) return
     const result = await pool.query(
       'SELECT * FROM notices WHERE school_id = $1 ORDER BY created_at DESC LIMIT 50',
-      [currentSchoolId(req)]
+      [schoolId]
     )
     res.json({ success: true, data: result.rows })
   } catch (error) {
@@ -109,11 +116,11 @@ router.post('/', protect, canManageNotices, async (req, res) => {
     return res.status(400).json({ success: false, message: 'Title and content are required' })
   }
   try {
-    try {
-      await ensureNoticesTable()
-    } catch (e) {
-      console.warn('Skipping notices table creation due to offline db');
-    }
+    await ensureNoticesTable()
+    const schoolId = requireNoticeSchoolContext(req, res)
+    if (!schoolId) return
+    const issuedBy = notice.issuedBy || String(req.user?.name || req.user?.email || '').trim()
+    if (!issuedBy) return res.status(422).json({ success: false, message: 'Notice issuer identity is required.' })
     const result = await pool.query(`
       INSERT INTO notices (
         school_id, title, content, issued_by, recipient_type, teacher_ids,
@@ -123,10 +130,10 @@ router.post('/', protect, canManageNotices, async (req, res) => {
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
       RETURNING *
     `, [
-      currentSchoolId(req),
+      schoolId,
       title,
       content,
-      notice.issuedBy,
+      issuedBy,
       JSON.stringify(notice.recipientType),
       JSON.stringify(notice.teacherIds),
       JSON.stringify(notice.mentionedTeacherIds),
@@ -153,11 +160,11 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
     return res.status(400).json({ success: false, message: 'Title and content are required' })
   }
   try {
-    try {
-      await ensureNoticesTable()
-    } catch (e) {
-      console.warn('Skipping notices table creation due to offline db');
-    }
+    await ensureNoticesTable()
+    const schoolId = requireNoticeSchoolContext(req, res)
+    if (!schoolId) return
+    const issuedBy = notice.issuedBy || String(req.user?.name || req.user?.email || '').trim()
+    if (!issuedBy) return res.status(422).json({ success: false, message: 'Notice issuer identity is required.' })
     const result = await pool.query(`
       UPDATE notices
       SET title = $1,
@@ -179,7 +186,7 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
     `, [
       title,
       content,
-      notice.issuedBy,
+      issuedBy,
       JSON.stringify(notice.recipientType),
       JSON.stringify(notice.teacherIds),
       JSON.stringify(notice.mentionedTeacherIds),
@@ -191,7 +198,7 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
       notice.isPinned,
       notice.expiresAt,
       req.params.id,
-      currentSchoolId(req),
+      schoolId,
     ])
 
     if (!result.rowCount) {
@@ -208,14 +215,12 @@ router.put('/:id', protect, canManageNotices, async (req, res) => {
 // DELETE a notice
 router.delete('/:id', protect, canManageNotices, async (req, res) => {
   try {
-    try {
-      await ensureNoticesTable()
-    } catch (e) {
-      console.warn('Skipping notices table creation due to offline db');
-    }
+    await ensureNoticesTable()
+    const schoolId = requireNoticeSchoolContext(req, res)
+    if (!schoolId) return
     const result = await pool.query(
       'DELETE FROM notices WHERE id = $1 AND school_id = $2',
-      [req.params.id, currentSchoolId(req)]
+      [req.params.id, schoolId]
     )
     if (!result.rowCount) {
       return res.status(404).json({ success: false, message: 'Notice not found' })
