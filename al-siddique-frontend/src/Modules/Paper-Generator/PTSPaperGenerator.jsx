@@ -633,6 +633,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [printAns, setPrintAns] = useState(Boolean(editorSettings.printAnswerKey))
  const [modalOpen, setModalOpen] = useState(!loadedPaper)
  const persistedPaperIdRef = useRef(loadedPaper?.id || '')
+ const blockAddMenuRef = useRef(null)
  const [finalizing, setFinalizing] = useState(false)
  const [persistenceNotice, setPersistenceNotice] = useState('')
  const [personalizedDuplex, setPersonalizedDuplex] = useState(true)
@@ -833,6 +834,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   setSelectedSectionId(newId)
   setActiveEditable(null)
   if (loadedPaper?.userAuthored) setEditMode(true)
+  if (blockAddMenuRef.current) blockAddMenuRef.current.open = false
  }
  const applyWorkspaceRules = () => {
   if (!isOfficialPaper) return
@@ -1529,7 +1531,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     <textarea aria-label="Selected question raw content" value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} style={{...tinp,width:'100%',minHeight:110,resize:'vertical',marginTop:6,direction:isUrduScriptPaper({config:cfg,...paper})?'rtl':'ltr',fontFamily:isUrduScriptPaper({config:cfg,...paper})?URDU_FONT_STACK:"'Times New Roman',serif"}} />
    </details>
   </> : <div style={{fontSize:11,lineHeight:1.55,color:D.muted}}>The paper will not move in Edit mode. Click a question to open structural controls. Click its text to type directly. Select text to use the floating Word-style formatting bar.</div>}
-  {loadedPaper?.userAuthored ? <details data-block-add-menu style={{marginTop:10}}>
+  {loadedPaper?.userAuthored ? <details ref={blockAddMenuRef} data-block-add-menu style={{marginTop:10}}>
    <summary style={{...tinp,width:'100%',cursor:'pointer',fontWeight:900,color:D.gold,listStyle:'none'}}>+ Add Block</summary>
    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,marginTop:6}}>
     <button type="button" data-add-block="question" onClick={()=>addOfficialSection('auto')} style={{...tinp,cursor:'pointer'}}>Question</button>
