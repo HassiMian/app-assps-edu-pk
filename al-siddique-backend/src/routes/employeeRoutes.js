@@ -331,9 +331,11 @@ router.get('/:id/portal-account', protect, canManageStaff, async (req, res) => {
     if (!employee.rowCount) return res.status(404).json({ success: false, message: 'Employee not found.' })
     const row = employee.rows[0]
     if (!row.user_id) return res.json({ success: true, data: null })
-    const supportsUsername = await hasColumn('users', 'username').catch(() => false)
-    const supportsPermissions = await hasColumn('users', 'permissions').catch(() => false)
-    const supportsLastLogin = await hasColumn('users', 'last_login').catch(() => false)
+    const [supportsUsername, supportsPermissions, supportsLastLogin] = await Promise.all([
+      hasColumn('users', 'username'),
+      hasColumn('users', 'permissions'),
+      hasColumn('users', 'last_login'),
+    ])
     const user = await query(`
       SELECT id, name, email, role, designation, is_active
         ${supportsUsername ? ', username' : ''}
