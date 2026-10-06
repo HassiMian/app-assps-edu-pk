@@ -435,16 +435,19 @@ router.get('/history/student/:student_id', protect, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Valid student id is required.' })
     }
     const schoolId = currentSchoolId(req)
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
+    const supportsTenant = await hasColumn('fee_challans', 'school_id')
+    if (!supportsTenant) {
+      return res.status(503).json({ success: false, code: 'FEE_TENANT_SCHEMA_REQUIRED', message: 'Fee storage is not tenant-safe for history reads.' })
+    }
     let sql = `
       SELECT f.*, s.name, s.gr_number, s.class, s.section, s.father_name, s.family_code
       FROM fee_challans f
-      JOIN students s ON s.id = f.student_id
+      JOIN students s ON s.id = f.student_id AND s.school_id = f.school_id
       WHERE f.student_id = $1
     `
     const params = [studentId]
-    if (supportsTenant && req.user?.role !== 'super_admin') {
-      sql += ' AND f.school_id = $2 AND s.school_id = $2'
+    if (req.user?.role !== 'super_admin') {
+      sql += ' AND f.school_id = $2'
       params.push(schoolId)
     }
     const readScope = scopedFeeReadClause(req, 's', params.length + 1)
@@ -466,16 +469,19 @@ router.get('/:id', protect, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid challan id' })
     }
     await tenantClause(req)
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
+    const supportsTenant = await hasColumn('fee_challans', 'school_id')
+    if (!supportsTenant) {
+      return res.status(503).json({ success: false, code: 'FEE_TENANT_SCHEMA_REQUIRED', message: 'Fee storage is not tenant-safe for challan reads.' })
+    }
     let sql = `
       SELECT f.*, s.name, s.gr_number, s.class, s.section, s.parent_phone, s.father_name,
              s.family_code, s.photo
       FROM fee_challans f
       JOIN students s ON f.student_id = s.id AND s.school_id = f.school_id
       WHERE f.id = $1
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND f.school_id = $2' : ''}
+      ${req.user?.role !== 'super_admin' ? 'AND f.school_id = $2' : ''}
     `
-    const params = supportsTenant && req.user?.role !== 'super_admin'
+    const params = req.user?.role !== 'super_admin'
       ? [id, currentSchoolId(req)]
       : [id]
     const readScope = scopedFeeReadClause(req, 's', params.length + 1)

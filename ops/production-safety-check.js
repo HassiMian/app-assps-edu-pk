@@ -1671,3 +1671,15 @@ if (failures.length) {
 }
 
 console.log('Production safety check passed.')
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /hasColumn\('fee_challans', 'school_id'\)\.catch\(\(\) => false\)/,
+  'fee routes must not convert tenant-schema lookup failures into unscoped reads.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'JOIN students s ON s.id = f.student_id AND s.school_id = f.school_id',
+  'fee history must bind challans to students within the same school.'
+)
