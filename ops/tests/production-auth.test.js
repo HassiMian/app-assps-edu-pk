@@ -39,13 +39,14 @@ function withEnv(env, fn) {
 function loadAuth(env, queryImpl = async () => ({ rows: [] })) {
   delete require.cache[authPath]
   delete require.cache[databasePath]
+  const rlsStore = { rlsEnabled: false, isSuperAdmin: false, tenantId: null }
   require.cache[databasePath] = {
     id: databasePath,
     filename: databasePath,
     loaded: true,
-    exports: { query: queryImpl },
+    exports: { query: queryImpl, tenantContext: { getStore: () => rlsStore } },
   }
-  return withEnv(env, () => require(authPath))
+  return withEnv(env, () => ({ ...require(authPath), __rlsStore: rlsStore }))
 }
 
 function responseRecorder() {
@@ -130,7 +131,7 @@ test('production auth accepts a valid active user and active school', async () =
     return { rows: [] }
   }
 
-  const { protect } = loadAuth({ NODE_ENV: 'production', JWT_SECRET: secret }, query)
+  const { protect, __rlsStore } = loadAuth({ NODE_ENV: 'production', JWT_SECRET: secret }, query)
   const req = { headers: { authorization: `Bearer ${token}` }, method: 'GET', originalUrl: '/api/students' }
   const res = responseRecorder()
   let nextCalled = false
@@ -142,6 +143,9 @@ test('production auth accepts a valid active user and active school', async () =
   assert.equal(req.tenant_id, 'assps')
   assert.equal(req.user.role, 'principal')
   assert.equal(calls.length, 2)
+  assert.equal(__rlsStore.rlsEnabled, true)
+  assert.equal(__rlsStore.isSuperAdmin, false)
+  assert.equal(__rlsStore.tenantId, 1)
 })
 
 test('production service token requires explicit service claims', async () => {

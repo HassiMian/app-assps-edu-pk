@@ -1,6 +1,6 @@
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
-const { query } = require('../config/database')
+const { query, tenantContext } = require('../config/database')
 
 const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev-jwt-secret')
 
@@ -148,6 +148,16 @@ function normalizeSchoolId(value) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : null
 }
 
+function activateRequestRlsContext(req) {
+  const ctx = tenantContext.getStore()
+  if (!ctx) return
+  const role = String(req.user?.role || '').toLowerCase()
+  const isSuperAdmin = role === 'super_admin' || role === 'platform_owner'
+  ctx.rlsEnabled = true
+  ctx.isSuperAdmin = isSuperAdmin
+  ctx.tenantId = isSuperAdmin ? null : normalizeSchoolId(req.school_id || req.user?.school_id)
+}
+
 function buildUserContext(user, school = null) {
   return {
     id: user.id,
@@ -203,7 +213,10 @@ async function protect(req, res, next) {
   if (!token) return sendJson(res, 401, { message: 'Token required' })
 
   const serviceAuth = await authenticateServiceToken(token, req)
-  if (serviceAuth === true) return next()
+  if (serviceAuth === true) {
+    activateRequestRlsContext(req)
+    return next()
+  }
   if (serviceAuth && serviceAuth.errorStatus) {
     return sendJson(res, serviceAuth.errorStatus, { message: serviceAuth.message })
   }
@@ -221,6 +234,7 @@ async function protect(req, res, next) {
     req.school_id = 1
     req.school = await fetchSchoolById(1)
     req.school_code = req.school?.code || 'assps'
+    activateRequestRlsContext(req)
     return next()
   }
 
@@ -274,6 +288,7 @@ async function protect(req, res, next) {
       }
     }
 
+    activateRequestRlsContext(req)
     return next()
   } catch (err) {
     console.warn('JWT verification failed:', err.name || 'JwtError')
