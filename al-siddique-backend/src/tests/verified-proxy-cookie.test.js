@@ -6,10 +6,11 @@ const crypto=require('node:crypto')
 const bcrypt=require('bcryptjs')
 const {pool}=require('../config/database')
 const BASE=new URL(process.env.TEST_CONNECT_URL || 'https://api.assps.edu.pk')
+const CONNECT_HOST=process.env.TEST_CONNECT_HOST || BASE.host
 function request(method,path,body,cookie) { return new Promise((resolve,reject)=>{
  const payload=body?JSON.stringify(body):null
  const transport=BASE.protocol==='https:'?https:http
- const req=transport.request({hostname:BASE.hostname,port:BASE.port||undefined,path,method,timeout:6000,headers:{...(cookie?{Cookie:cookie}:{}),'Content-Type':'application/json',...(payload?{'Content-Length':Buffer.byteLength(payload)}:{})}},res=>{let raw='';res.on('data',x=>raw+=x);res.on('end',()=>{let data={};try{data=JSON.parse(raw)}catch{}resolve({status:res.statusCode,headers:res.headers,body:data})})});req.on('timeout',()=>req.destroy(new Error('timeout')));req.on('error',reject);if(payload)req.write(payload);req.end()
+ const req=transport.request({hostname:BASE.hostname,port:BASE.port||undefined,path,method,timeout:6000,headers:{Host:CONNECT_HOST,...(cookie?{Cookie:cookie}:{}),'Content-Type':'application/json',...(payload?{'Content-Length':Buffer.byteLength(payload)}:{})}},res=>{let raw='';res.on('data',x=>raw+=x);res.on('end',()=>{let data={};try{data=JSON.parse(raw)}catch{}resolve({status:res.statusCode,headers:res.headers,body:data})})});req.on('timeout',()=>req.destroy(new Error('timeout')));req.on('error',reject);if(payload)req.write(payload);req.end()
 })}
 async function run(){
  const c=await pool.connect(); let schoolId
