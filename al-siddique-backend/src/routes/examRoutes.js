@@ -1,11 +1,19 @@
 const express = require('express')
 const router  = express.Router()
 const { query } = require('../config/database')
-const { protect, requireRoles, adminOrServiceScope, requireScopeForServiceOnly } = require('../middleware/auth')
+const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 
 const canManageExams = requireRoles('super_admin', 'admin', 'principal', 'teacher')
-const canReadResults = adminOrServiceScope('school.results.read')
+function canReadResults(req, res, next) {
+  if (req.user?.account_type === 'service') {
+    if (hasServiceScope(req, 'school.results.read')) return next()
+    return res.status(403).json({ success: false, message: 'Service permission denied. Required scope: school.results.read' })
+  }
+  const role = String(req.user?.role || '').toLowerCase()
+  if (['super_admin', 'admin', 'principal', 'teacher', 'parent', 'student'].includes(role)) return next()
+  return res.status(403).json({ success: false, message: 'Results access denied.' })
+}
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 function portalStudentScope(req, alias = 's', startIndex = 1) {
@@ -305,6 +313,9 @@ router.get('/results', protect, canReadResults, async (req, res) => {
       const examTenant = await tenantClause(req, { table: 'exams', alias: 'e', paramIndex: studentTenant.nextIndex })
       sql += studentTenant.clause + examTenant.clause
       params.push(...studentTenant.params, ...examTenant.params)
+      const portalScope = portalStudentScope(req, 's', examTenant.nextIndex)
+      sql += portalScope.clause
+      params.push(...portalScope.params)
     }
 
     sql += ` ORDER BY e.created_at DESC, s.class, s.roll_number, er.subject LIMIT 500`
@@ -333,6 +344,9 @@ router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
       const examTenant = await tenantClause(req, { table: 'exams', alias: 'e', paramIndex: studentTenant.nextIndex })
       sql += studentTenant.clause + examTenant.clause
       params.push(...studentTenant.params, ...examTenant.params)
+      const portalScope = portalStudentScope(req, 's', examTenant.nextIndex)
+      sql += portalScope.clause
+      params.push(...portalScope.params)
     }
     sql += ` ORDER BY s.roll_number, er.subject`
     const result = await query(sql, params)

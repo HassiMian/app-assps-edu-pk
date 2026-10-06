@@ -11,7 +11,7 @@ import {
 
 const SECTIONS = ['Dashboard', 'My Exams', 'Attendance', 'Fee Status', 'Messages']
 
-// Messages not yet stored in SaaS backend — kept as local demo
+// Notifications and messages are loaded from the scoped server inbox.
 //  Helpers 
 function normalizeClass(v) { return String(v || '').replace(/^Class\s+/i, '').trim() }
 
@@ -49,7 +49,7 @@ export default function StudentPortal() {
  const [fees, setFees] = useState([]) // fee challans for this student
  const [error, setError] = useState('')
 
- //  Local-only state 
+ // Portal interaction state
  const [messages, setMessages] = useState([])
  const [openMsg, setOpenMsg] = useState(null)
  const [notice, setNotice] = useState('')
@@ -207,7 +207,7 @@ export default function StudentPortal() {
  <button key={s} onClick={() => setSection(s)} style={{
  ...btnSecondary, position: 'relative',
  background: section === s ? `linear-gradient(135deg,${C.gold},${C.goldL})` : undefined,
- color: section === s ? '#071e34' : C.silver, opacity: section === s ? 1 : 0.75,
+ color: section === s ? '#fff' : C.silver, opacity: section === s ? 1 : 0.75,
  borderRadius: 14,
  }}>
  {s}
@@ -254,11 +254,11 @@ export default function StudentPortal() {
  </div>
  <button onClick={() => setOpenMsg(null)} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer' }}><X size={20} /></button>
  </div>
- <div style={{ background: 'rgba(11,44,77,0.92)', borderRadius: 10, padding: 16, color: C.silver, lineHeight: 1.75, fontSize: 14 }}>
+ <div style={{ background: 'var(--apex-bg-surface-solid)', borderRadius: 10, padding: 16, color: C.silver, lineHeight: 1.75, fontSize: 14 }}>
  {openMsg.body}
  </div>
  <button onClick={() => setOpenMsg(null)}
- style={{ marginTop: 18, width: '100%', padding: 11, borderRadius: 10, border: 'none', background: `linear-gradient(135deg,${C.gold},${C.goldL})`, color: '#071e34', fontWeight: 700, cursor: 'pointer' }}>
+ style={{ marginTop: 18, width: '100%', padding: 11, borderRadius: 10, border: 'none', background: 'var(--apex-action-primary)', color: '#fff', fontWeight: 700, cursor: 'pointer' }}>
  Close
  </button>
  </Modal>
@@ -270,7 +270,7 @@ export default function StudentPortal() {
 //  Shared small components 
 function Badge({ n, color }) {
  return (
- <span style={{ position: 'absolute', top: -5, right: -5, background: color, color: color === '#FF9F0A' ? '#071e34' : '#fff', borderRadius: '50%', width: 17, height: 17, fontSize: 9, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
+ <span style={{ position: 'absolute', top: -5, right: -5, background: color, color: '#fff', borderRadius: '50%', width: 17, height: 17, fontSize: 9, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{n}</span>
  )
 }
 
@@ -473,7 +473,7 @@ function ExamsSection({ exams, results }) {
  {group.rows.map((r, i) => {
  const pct = r.total > 0 ? Math.round((r.obtained / r.total) * 100) : 0
  return (
- <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)', borderBottom: `1px solid ${C.border}22` }}>
+ <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)', borderBottom: `1px solid ${C.border}22` }}>
  <td style={{ padding: '10px 12px', color: C.silver, fontWeight: 600 }}>{r.subject}</td>
  <td style={{ padding: '10px 12px', color: C.gold, fontWeight: 700 }}>{r.obtained}</td>
  <td style={{ padding: '10px 12px', color: C.muted }}>{r.total}</td>
@@ -603,7 +603,7 @@ function FeeSection({ fees }) {
  const paid = Math.min(Number(f.paid_amount || 0), Number(f.amount || 0))
  const balance = Math.max(0, Number(f.amount || 0) - paid)
  return (
- <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)', borderBottom: `1px solid ${C.border}22` }}>
+ <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)', borderBottom: `1px solid ${C.border}22` }}>
  <td style={{ padding: '10px 12px', color: C.silver, fontFamily: 'monospace' }}>{f.challan_no || '—'}</td>
  <td style={{ padding: '10px 12px', color: C.silver }}>{f.month || f.description || '—'}</td>
  <td style={{ padding: '10px 12px', color: C.silver }}>Rs {Number(f.amount || 0).toLocaleString()}</td>
@@ -637,7 +637,7 @@ function MessagesSection({ messages, readMsg }) {
  {messages.map(msg => (
  <div key={msg.id} onClick={() => readMsg(msg)} style={{
  ...card, cursor: 'pointer',
- background: msg.read ? 'rgba(11,44,77,0.35)' : 'rgba(200,153,26,0.08)',
+ background: msg.read ? 'var(--apex-bg-subtle)' : 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))',
  borderLeft: `3px solid ${msg.read ? C.border : C.gold}`,
  }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>

@@ -234,6 +234,25 @@ assertNotContains(
   'attendance analytics must never fabricate percentages.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "['super_admin', 'admin', 'principal', 'teacher', 'parent', 'student'].includes(role)",
+  'exam result reads must support legitimate staff and portal roles.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "const portalScope = portalStudentScope(req, 's', examTenant.nextIndex)",
+  'portal result reads must be row-scoped to the linked student.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  /local demo|not yet stored in SaaS backend/,
+  'student portal must not describe live notification data as demo/local.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
