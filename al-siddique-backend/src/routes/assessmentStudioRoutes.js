@@ -5,6 +5,7 @@ const router = express.Router()
 const { pool, query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
+const { createPrintJobBinding, printJobTransition } = require('../services/assessmentPrintJobs')
 
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -246,6 +247,155 @@ router.post('/papers/:paperId/releases', async (req, res) => {
   } catch (error) {
     console.error('Assessment Studio release error:', error.message)
     return res.status(500).json({ success:false, message:'Could not finalize assessment release.' })
+  }
+})
+
+router.post('/papers/:paperId/print-jobs', async (req, res) => {
+  try {
+    const publicId = safePublicId(req.params.paperId)
+    const schoolId = schoolIdForRequest(req, req.body || {})
+    if (!publicId) return res.status(400).json({ success:false, message:'Invalid paper id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+    const body = req.body || {}
+    const printJobId = safePublicId(body.printJobId) || `print-${crypto.randomUUID()}`
+    const reprintMode = String(body.reprintMode || 'NEW_JOB').toUpperCase()
+    const parentPrintJobId = safePublicId(body.parentPrintJobId)
+
+    const data = await withTenantTransaction(req, schoolId, async client => {
+      const paper = (await client.query(
+        `SELECT id FROM assessment_papers WHERE school_id=$1 AND public_id=$2 LIMIT 1`,
+        [schoolId, publicId]
+      )).rows[0]
+      if (!paper) return { missingPaper:true }
+
+      if (reprintMode === 'REPRINT_ORIGINAL') {
+        if (!parentPrintJobId) return { invalid:'parentPrintJobId is required for REPRINT_ORIGINAL.' }
+        const parent = (await client.query(
+          `SELECT j.* FROM assessment_print_jobs j
+             JOIN assessment_releases ar ON ar.school_id=j.school_id AND ar.release_id=j.release_id
+            WHERE j.school_id=$1 AND j.print_job_id=$2 AND ar.paper_id=$3 LIMIT 1`,
+          [schoolId, parentPrintJobId, paper.id]
+        )).rows[0]
+        if (!parent) return { missingParent:true }
+        const inserted = (await client.query(
+          `INSERT INTO assessment_print_jobs
+            (school_id,print_job_id,release_id,roster_snapshot_id,binding_snapshot_json,render_settings_json,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_by_key)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'REPRINT_ORIGINAL',$11,'CREATED',0,$12)
+           RETURNING print_job_id,release_id,roster_snapshot_id,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_at`,
+          [schoolId, printJobId, parent.release_id, parent.roster_snapshot_id, JSON.stringify(parent.binding_snapshot_json), JSON.stringify(parent.render_settings_json), parent.copy_count, parent.personalized, parent.duplex, parent.student_boundary_policy, parentPrintJobId, actorKey(req)]
+        )).rows[0]
+        return { printJob:inserted }
+      }
+
+      let binding
+      try {
+        binding = createPrintJobBinding({
+          releaseId:body.releaseId,
+          roster:body.roster,
+          teacherBinding:body.teacherBinding,
+          renderSettings:body.renderSettings,
+          personalized:Boolean(body.personalized),
+          reprintMode,
+          parentPrintJobId,
+        })
+      } catch (error) {
+        return { invalid:error.message }
+      }
+      if (binding.reprintMode === 'NEW_JOB' && binding.parentPrintJobId) return { invalid:'NEW_JOB cannot reference a parent print job.' }
+      if (binding.reprintMode === 'UPDATED_JOB' && !binding.parentPrintJobId) return { invalid:'UPDATED_JOB requires parentPrintJobId.' }
+      if (binding.parentPrintJobId) {
+        const parent = (await client.query(`SELECT 1 FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 LIMIT 1`, [schoolId,binding.parentPrintJobId])).rows[0]
+        if (!parent) return { missingParent:true }
+      }
+      const release = (await client.query(
+        `SELECT ar.release_id FROM assessment_releases ar
+           WHERE ar.school_id=$1 AND ar.paper_id=$2 AND ar.release_id=$3 LIMIT 1`,
+        [schoolId,paper.id,binding.releaseId]
+      )).rows[0]
+      if (!release) return { missingRelease:true }
+
+      let rosterSnapshotId = null
+      if (binding.personalized) {
+        rosterSnapshotId = `roster-${printJobId}`
+        await client.query(
+          `INSERT INTO assessment_roster_snapshots
+            (school_id,snapshot_id,context_json,students_json,student_count,roster_hash,created_by_key)
+           VALUES ($1,$2,$3,$4,$5,$6,$7)`,
+          [schoolId,rosterSnapshotId,JSON.stringify(binding.rosterSnapshot.context),JSON.stringify(binding.rosterSnapshot.students),binding.rosterSnapshot.studentCount,binding.rosterSnapshot.rosterHash,actorKey(req)]
+        )
+      }
+      const inserted = (await client.query(
+        `INSERT INTO assessment_print_jobs
+          (school_id,print_job_id,release_id,roster_snapshot_id,binding_snapshot_json,render_settings_json,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_by_key)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,'CREATED',0,$13)
+         RETURNING print_job_id,release_id,roster_snapshot_id,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_at`,
+        [schoolId,printJobId,binding.releaseId,rosterSnapshotId,JSON.stringify(binding.bindingSnapshot),JSON.stringify(binding.renderSettings),binding.copyCount,binding.personalized,binding.duplex,binding.studentBoundaryPolicy,binding.reprintMode,binding.parentPrintJobId,actorKey(req)]
+      )).rows[0]
+      return { printJob:inserted, rosterHash:binding.rosterSnapshot?.rosterHash || null, bindingHash:binding.bindingHash }
+    })
+
+    if (data.missingPaper) return res.status(404).json({ success:false, message:'Paper not found.' })
+    if (data.missingRelease) return res.status(404).json({ success:false, message:'Assessment release not found for this paper.' })
+    if (data.missingParent) return res.status(404).json({ success:false, message:'Parent print job not found.' })
+    if (data.invalid) return res.status(400).json({ success:false, message:data.invalid })
+    return res.status(201).json({ success:true, data })
+  } catch (error) {
+    if (error?.code === '23505') return res.status(409).json({ success:false, message:'Print job id already exists.' })
+    console.error('Assessment Studio print job create error:', error.message)
+    return res.status(500).json({ success:false, message:'Could not create print job.' })
+  }
+})
+
+router.get('/print-jobs/:printJobId', async (req, res) => {
+  try {
+    const printJobId = safePublicId(req.params.printJobId)
+    const schoolId = schoolIdForRequest(req)
+    if (!printJobId) return res.status(400).json({ success:false, message:'Invalid print job id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+    await tenantClause(req, { table:'assessment_print_jobs' })
+    const result = await query(
+      `SELECT j.print_job_id,j.release_id,j.copy_count,j.personalized,j.duplex,j.student_boundary_policy,j.reprint_mode,j.parent_print_job_id,j.status,j.attempt_count,j.last_error,j.created_at,j.updated_at,
+              r.snapshot_id AS roster_snapshot_id,r.student_count,r.roster_hash,r.context_json AS roster_context
+         FROM assessment_print_jobs j
+         LEFT JOIN assessment_roster_snapshots r ON r.school_id=j.school_id AND r.snapshot_id=j.roster_snapshot_id
+        WHERE j.school_id=$1 AND j.print_job_id=$2 LIMIT 1`,
+      [schoolId,printJobId]
+    )
+    if (!result.rowCount) return res.status(404).json({ success:false, message:'Print job not found.' })
+    return res.json({ success:true, data:result.rows[0] })
+  } catch (error) {
+    console.error('Assessment Studio print job read error:', error.message)
+    return res.status(500).json({ success:false, message:'Could not read print job.' })
+  }
+})
+
+router.patch('/print-jobs/:printJobId/status', async (req, res) => {
+  try {
+    const printJobId = safePublicId(req.params.printJobId)
+    const schoolId = schoolIdForRequest(req, req.body || {})
+    if (!printJobId) return res.status(400).json({ success:false, message:'Invalid print job id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+    const target = String(req.body?.status || '').toUpperCase()
+    const data = await withTenantTransaction(req, schoolId, async client => {
+      const current = (await client.query(`SELECT status,attempt_count FROM assessment_print_jobs WHERE school_id=$1 AND print_job_id=$2 FOR UPDATE`,[schoolId,printJobId])).rows[0]
+      if (!current) return { missing:true }
+      let transition
+      try { transition = printJobTransition(current.status,target,current.attempt_count) }
+      catch (error) { return { invalid:error.message, currentStatus:current.status } }
+      const lastError = target === 'FAILED' ? String(req.body?.lastError || '').slice(0,1000) || null : null
+      const updated = (await client.query(
+        `UPDATE assessment_print_jobs SET status=$3,attempt_count=$4,last_error=$5 WHERE school_id=$1 AND print_job_id=$2
+         RETURNING print_job_id,status,attempt_count,last_error,updated_at`,
+        [schoolId,printJobId,transition.status,transition.attemptCount,lastError]
+      )).rows[0]
+      return { printJob:updated }
+    })
+    if (data.missing) return res.status(404).json({ success:false, message:'Print job not found.' })
+    if (data.invalid) return res.status(409).json({ success:false, code:'INVALID_PRINT_JOB_TRANSITION', message:data.invalid, currentStatus:data.currentStatus })
+    return res.json({ success:true, data:data.printJob })
+  } catch (error) {
+    console.error('Assessment Studio print job status error:', error.message)
+    return res.status(500).json({ success:false, message:'Could not update print job status.' })
   }
 })
 
