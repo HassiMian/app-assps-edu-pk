@@ -43,6 +43,7 @@ expect_post_status /api/portal/paper-studio/publisher-review/approval-decision-v
 expect_post_status /api/portal/paper-studio/publisher-review/approval-activation-precheck 401
 expect_post_status /api/portal/paper-studio/publisher-review/key-custody-precheck 401
 expect_post_status /api/portal/paper-studio/publisher-review/edition-review-precheck 401
+expect_post_status /api/portal/paper-studio/publisher-review/academic-publication-precheck 401
 expect_status /api/question-bank 401
 expect_status /api/paper/vault 401
 
