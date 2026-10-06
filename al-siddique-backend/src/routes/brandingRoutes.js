@@ -19,13 +19,19 @@ const uploadDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true })
+const BRANDING_EXTENSION_BY_MIME = Object.freeze({
+  'image/jpeg': '.jpg',
+  'image/jpg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+})
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => {
     const tenantId = req.user?.tenant_id || 'logo'
     const unique = `${tenantId}-logo-${Date.now()}`
-    cb(null, unique + path.extname(file.originalname))
+    cb(null, unique + (BRANDING_EXTENSION_BY_MIME[file.mimetype] || '.bin'))
   }
 })
 
@@ -33,12 +39,11 @@ const upload = multer({
   storage,
   limits: { fileSize: 2 * 1024 * 1024 }, // 2MB
   fileFilter: (req, file, cb) => {
-    const allowedExt = /\.(jpe?g|png|webp|svg)$/i
-    const allowedMime = /^image\/(jpeg|jpg|png|webp|svg\+xml)$/i
-    const ext = allowedExt.test(path.extname(file.originalname || '').toLowerCase())
-    const mime = allowedMime.test(file.mimetype || '')
-    if (ext && mime) cb(null, true)
-    else cb(new Error('Invalid logo file type. Only jpg, png, webp, and svg are allowed.'))
+    const ext = path.extname(file.originalname || '').toLowerCase()
+    const expectedExt = BRANDING_EXTENSION_BY_MIME[file.mimetype]
+    const compatibleExt = expectedExt === '.jpg' ? ['.jpg', '.jpeg'].includes(ext) : ext === expectedExt
+    if (expectedExt && compatibleExt) cb(null, true)
+    else cb(new Error('Invalid logo file type. Only JPG, PNG, and WEBP are allowed.'))
   }
 })
 

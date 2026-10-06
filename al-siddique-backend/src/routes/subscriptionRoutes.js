@@ -16,6 +16,13 @@ const { generateSchoolAdminCredentials } = require('../services/apexCredentials'
 const uploadDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
+const UPLOAD_EXTENSION_BY_MIME = Object.freeze({
+  'image/jpeg': '.jpg',
+  'image/jpg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+  'application/pdf': '.pdf',
+})
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true })
 }
@@ -24,7 +31,8 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => {
     const unique = `${Date.now()}-${crypto.randomBytes(8).toString('hex')}`
-    cb(null, 'screenshot_' + unique + path.extname(file.originalname))
+    const ext = UPLOAD_EXTENSION_BY_MIME[file.mimetype] || '.bin'
+    cb(null, 'screenshot_' + unique + ext)
   }
 })
 
@@ -32,11 +40,10 @@ const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
-    const allowedExt = /\.(jpe?g|png|webp|pdf)$/i
-    const allowedMime = /^(image\/(jpeg|jpg|png|webp)|application\/pdf)$/i
-    const ext = allowedExt.test(path.extname(file.originalname || '').toLowerCase())
-    const mime = allowedMime.test(file.mimetype || '')
-    if (ext && mime) {
+    const ext = path.extname(file.originalname || '').toLowerCase()
+    const expectedExt = UPLOAD_EXTENSION_BY_MIME[file.mimetype]
+    const compatibleExt = expectedExt === '.jpg' ? ['.jpg', '.jpeg'].includes(ext) : ext === expectedExt
+    if (expectedExt && compatibleExt) {
       cb(null, true)
     } else {
       cb(new Error('Only JPEG, PNG, WEBP images or PDF files are allowed.'))

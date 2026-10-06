@@ -93,16 +93,16 @@ const uploadsDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
-app.use('/uploads', express.static(uploadsDir, {
+const uploadStaticOptions = {
   index: false,
   fallthrough: false,
   maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
-}))
-app.use('/api/uploads', express.static(uploadsDir, {
-  index: false,
-  fallthrough: false,
-  maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
-}))
+  setHeaders: (res) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff')
+  },
+}
+app.use('/uploads', express.static(uploadsDir, uploadStaticOptions))
+app.use('/api/uploads', express.static(uploadsDir, uploadStaticOptions))
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/health', (req, res) => {

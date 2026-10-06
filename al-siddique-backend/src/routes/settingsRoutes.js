@@ -60,12 +60,13 @@ function saveBase64Image(base64Str, schoolId, type = 'logo') {
   }
   
   try {
-    const matches = base64Str.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+    const matches = base64Str.match(/^data:image\/(jpeg|jpg|png|webp);base64,([A-Za-z0-9+/=]+)$/i);
     if (!matches || matches.length !== 3) {
-      return base64Str;
+      throw new Error('Unsupported branding image type. Only JPG, PNG, and WEBP are allowed.');
     }
-    
-    const ext = matches[1] === 'svg+xml' ? 'svg' : matches[1];
+
+    const type = matches[1].toLowerCase();
+    const ext = type === 'jpeg' ? 'jpg' : type;
     const data = Buffer.from(matches[2], 'base64');
     
     let uploadsDir = path.join(__dirname, '../../../uploads');

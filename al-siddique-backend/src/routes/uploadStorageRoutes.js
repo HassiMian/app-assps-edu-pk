@@ -10,6 +10,12 @@ const { currentSchoolId } = require('../middleware/tenant')
 const router = express.Router()
 const MAX_FILE_SIZE = 5 * 1024 * 1024
 const ALLOWED_IMAGE_TYPES = new Set(['image/png', 'image/jpeg', 'image/jpg', 'image/webp'])
+const IMAGE_EXTENSION_BY_MIME = Object.freeze({
+  'image/jpeg': '.jpg',
+  'image/jpg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+})
 
 const rootUploadDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
@@ -27,7 +33,7 @@ function uploadFor(folder) {
     storage: multer.diskStorage({
       destination: (req, file, cb) => cb(null, destination),
       filename: (req, file, cb) => {
-        const ext = path.extname(file.originalname || '.png').toLowerCase() || '.png'
+        const ext = IMAGE_EXTENSION_BY_MIME[file.mimetype] || '.bin'
         cb(null, `${crypto.randomUUID()}${ext}`)
       },
     }),

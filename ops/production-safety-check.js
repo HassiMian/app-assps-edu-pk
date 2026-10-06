@@ -2095,3 +2095,24 @@ assertContains(
   'Challan status could not be updated.',
   'fee status mutation failures must be visible instead of being silently swallowed.'
 )
+
+assertNotContains(
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  /svg\+xml|\|svg/,
+  'public branding uploads must not accept active SVG content.'
+)
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "res.setHeader('X-Content-Type-Options', 'nosniff')",
+  'public upload responses must disable MIME sniffing.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  'UPLOAD_EXTENSION_BY_MIME[file.mimetype]',
+  'subscription uploads must choose stored extensions from the accepted MIME type.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+  'IMAGE_EXTENSION_BY_MIME[file.mimetype]',
+  'generic image uploads must choose stored extensions from the accepted MIME type.'
+)
