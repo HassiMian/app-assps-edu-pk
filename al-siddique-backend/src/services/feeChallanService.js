@@ -30,6 +30,9 @@ function asMoney(value) {
 }
 
 async function upsertStudentFeeProfile(studentId, schoolId, profile = {}) {
+  if (!Number.isInteger(Number(studentId)) || Number(studentId) <= 0 || !Number.isInteger(Number(schoolId)) || Number(schoolId) <= 0) {
+    throw new Error('Valid student and school context are required for the fee profile.')
+  }
   await ensureStudentFeeProfileSchema()
   await query(`
     INSERT INTO student_fee_profiles (
@@ -60,30 +63,36 @@ async function upsertStudentFeeProfile(studentId, schoolId, profile = {}) {
   ])
 }
 
-async function getStudentFeeProfile(studentId) {
+async function getStudentFeeProfile(studentId, schoolId) {
+  if (!Number.isInteger(Number(studentId)) || Number(studentId) <= 0 || !Number.isInteger(Number(schoolId)) || Number(schoolId) <= 0) {
+    throw new Error('Valid student and school context are required for the fee profile.')
+  }
   await ensureStudentFeeProfileSchema()
   const result = await query(
-    'SELECT * FROM student_fee_profiles WHERE student_id = $1 LIMIT 1',
-    [studentId]
+    'SELECT * FROM student_fee_profiles WHERE student_id = $1 AND school_id = $2 LIMIT 1',
+    [studentId, schoolId]
   )
   return result.rows[0] || null
 }
 
 async function findExistingChallan({ studentId, month, year, schoolId }) {
+  if (!Number.isInteger(Number(studentId)) || Number(studentId) <= 0 || !Number.isInteger(Number(schoolId)) || Number(schoolId) <= 0) {
+    throw new Error('Valid student and school context are required to find a challan.')
+  }
   const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-  const sql = supportsTenant
-    ? `SELECT f.*, s.name, s.gr_number, s.class, s.section, s.father_name, s.parent_phone
-       FROM fee_challans f
-       JOIN students s ON f.student_id = s.id
-       WHERE f.student_id = $1 AND f.month = $2 AND f.year = $3 AND f.school_id = $4 AND s.school_id = $4
-       LIMIT 1`
-    : `SELECT f.*, s.name, s.gr_number, s.class, s.section, s.father_name, s.parent_phone
-       FROM fee_challans f
-       JOIN students s ON f.student_id = s.id
-       WHERE f.student_id = $1 AND f.month = $2 AND f.year = $3
-       LIMIT 1`
-  const params = supportsTenant ? [studentId, month, year, schoolId] : [studentId, month, year]
-  const result = await query(sql, params)
+  if (!supportsTenant) {
+    const error = new Error('Fee challan storage is not tenant-safe yet.')
+    error.code = 'FEE_SCHEMA_NOT_TENANT_SAFE'
+    throw error
+  }
+  const result = await query(
+    `SELECT f.*, s.name, s.gr_number, s.class, s.section, s.father_name, s.parent_phone
+     FROM fee_challans f
+     JOIN students s ON f.student_id = s.id AND s.school_id = f.school_id
+     WHERE f.student_id = $1 AND f.month = $2 AND f.year = $3 AND f.school_id = $4
+     LIMIT 1`,
+    [studentId, month, year, schoolId]
+  )
   return result.rows[0] || null
 }
 

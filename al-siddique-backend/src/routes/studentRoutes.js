@@ -186,7 +186,7 @@ router.get('/:id/fee-profile', protect, requireScopeForServiceOnly('school.fees.
   try {
     const studentId = Number(req.params.id)
     if (!(await requireStudentInCurrentSchool(req, res, studentId))) return
-    const profile = await getStudentFeeProfile(studentId)
+    const profile = await getStudentFeeProfile(studentId, currentSchoolId(req))
     res.json({ success: true, data: profile })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
@@ -200,7 +200,7 @@ router.put('/:id/fee-profile', protect, adminOnly, async (req, res) => {
     if (!(await requireStudentInCurrentSchool(req, res, studentId))) return
     const schoolId = currentSchoolId(req)
     await upsertStudentFeeProfile(studentId, schoolId, req.body || {})
-    const profile = await getStudentFeeProfile(studentId)
+    const profile = await getStudentFeeProfile(studentId, schoolId)
     res.json({ success: true, message: 'Fee profile saved', data: profile })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })

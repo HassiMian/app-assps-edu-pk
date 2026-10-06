@@ -721,6 +721,25 @@ assertContains(
   'daily diary documents must snapshot the canonical tenant school name.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  'WHERE student_id = $1 AND school_id = $2',
+  'student fee profile reads must be school scoped in the service layer.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  /WHERE f\.student_id = \$1 AND f\.month = \$2 AND f\.year = \$3\s*\n\s*LIMIT 1/,
+  'fee challan lookup must never retain an unscoped legacy fallback.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/feeChallanService.js',
+  "error.code = 'FEE_SCHEMA_NOT_TENANT_SAFE'",
+  'fee challan lookup must fail closed when tenant schema support is missing.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
