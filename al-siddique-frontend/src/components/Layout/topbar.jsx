@@ -424,7 +424,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  fontWeight: '700',
  letterSpacing: '-0.2px',
  }}>
- 2026-2027
+ {branding?.academicYear || 'Academic Session'}
  </span>
  </div>
  )}

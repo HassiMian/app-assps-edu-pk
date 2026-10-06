@@ -16,7 +16,7 @@ function lazyRetry(importer, name) {
       const alreadyRetried = storage?.getItem(storageKey) === '1'
 
       if (!alreadyRetried && typeof window !== 'undefined') {
-        try { storage?.setItem(storageKey, '1') } catch {}
+        try { storage?.setItem(storageKey, '1') } catch { /* session retry marker is best-effort */ }
         // Use replace so browser back-button works; do NOT use reload() — causes blank loop
         const freshUrl = window.location.pathname + window.location.search
         window.location.replace(freshUrl)
@@ -75,21 +75,8 @@ const AcademicSetupModule = lazyRetry(() => import('./Modules/academic/AcademicS
 const FamilyModule = lazyRetry(() => import('./Modules/families/FamilyModule'), 'FamilyModule')
 const SubscriptionRequests = lazyRetry(() => import('./Modules/subscriptions/SubscriptionRequests'), 'SubscriptionRequests')
 
-const ComingSoon = ({ name }) => (
- <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 300 }}>
- <div style={{
- textAlign: 'center', padding: 40,
- background: 'rgba(11,44,77,0.5)', borderRadius: 20,
- border: '1px solid rgba(200,153,26,0.2)',
- }}>
- <div style={{ fontSize: 52, marginBottom: 16 }}></div>
- <h2 style={{ color: '#C8991A', marginBottom: 8, fontSize: 22 }}>{name}</h2>
- <p style={{ color: '#8892A4', fontSize: 15 }}>This module is coming soon!</p>
- </div>
- </div>
-)
 
-const AppRouteLoader = ({ label = 'Loading module...' }) => (
+const AppRouteLoader = () => (
   <PremiumProgressLoader />
 )
 
@@ -375,7 +362,7 @@ function AppRoutes() {
  <Route path="/datesheet" element={<W roles={ROLES.academicStaff} permKey="datesheet"><DateSheet /></W>} />
  <Route path="/cards" element={<W roles={ROLES.schoolStaff} permKey="cards"><CardsGeneratorModule /></W>} />
  <Route path="/academic" element={<W roles={ROLES.leadership} permKey="academic_setup"><AcademicSetupModule /></W>} />
- <Route path="/id-cards" element={<W roles={ROLES.schoolStaff} permKey="cards"><ComingSoon name="ID Cards Generator" /></W>} />
+ <Route path="/id-cards" element={<W roles={ROLES.schoolStaff} permKey="cards"><CardsGeneratorModule /></W>} />
  <Route path="/academic-setup" element={<W roles={ROLES.leadership} permKey="academic_setup"><AcademicSetupModule /></W>} />
  <Route path="/families" element={<W roles={ROLES.schoolStaff} permKey="families"><FamilyModule /></W>} />
  <Route path="/profile" element={<ProfilePage />} />
