@@ -46,7 +46,7 @@ test('URDU RECOVERY 2: Urdu-script V13 papers use canonical editor; legacy V12 r
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Urdu', language: 'urdu' },
   }
-  assert.strictEqual(resolvePaperRoute(class8Urdu), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(class8Urdu), 'build')
 
   const class5Urdu = {
     id: 'official-first-term-2026-class-5-urdu',
@@ -62,7 +62,7 @@ test('URDU RECOVERY 2: Urdu-script V13 papers use canonical editor; legacy V12 r
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Islamiyat' },
   }
-  assert.strictEqual(resolvePaperRoute(islamiyatPaper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(islamiyatPaper), 'build')
 
   const pakStudiesPaper = {
     id: 'official-first-term-2026-class-8-pak-studies',
@@ -70,7 +70,7 @@ test('URDU RECOVERY 2: Urdu-script V13 papers use canonical editor; legacy V12 r
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Pak Studies' },
   }
-  assert.strictEqual(resolvePaperRoute(pakStudiesPaper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(pakStudiesPaper), 'build')
 
   const quranPaper = {
     id: 'official-first-term-2026-class-8-tarjuma-tul-quran',
@@ -78,7 +78,7 @@ test('URDU RECOVERY 2: Urdu-script V13 papers use canonical editor; legacy V12 r
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Tarjuma-tul-Quran' },
   }
-  assert.strictEqual(resolvePaperRoute(quranPaper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(quranPaper), 'build')
 })
 
 test('URDU RECOVERY 3: Urdu-script V13 uses canonical route and retains emergency stable-workspace rollback', () => {
@@ -88,7 +88,7 @@ test('URDU RECOVERY 3: Urdu-script V13 uses canonical route and retains emergenc
     documentFormat: 'pts-native-v13',
     config: { classLevel: '8', subject: 'Urdu', language: 'urdu' },
   }
-  assert.strictEqual(resolvePaperRoute(class8Urdu, 'word_editor'), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(class8Urdu, 'word_editor'), 'build')
   assert.strictEqual(
     resolvePaperRoute(class8Urdu, null, { forceOfficialLegacyRoute: true }),
     'build'
@@ -102,7 +102,7 @@ test('URDU RECOVERY 4: English official V13 papers share the canonical editor de
     documentFormat: 'pts-native-v13',
     config: { classLevel: '5', subject: 'English', language: 'english' },
   }
-  assert.strictEqual(resolvePaperRoute(class5English), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(class5English), 'build')
 
   const class7English = {
     id: 'official-first-term-2026-class-7-english',
@@ -110,7 +110,7 @@ test('URDU RECOVERY 4: English official V13 papers share the canonical editor de
     documentFormat: 'pts-native-v13',
     config: { classLevel: '7', subject: 'English', language: 'english' },
   }
-  assert.strictEqual(resolvePaperRoute(class7English), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(class7English), 'build')
 })
 
 test('URDU RECOVERY 5: Early Years papers strictly retain early_years route', () => {

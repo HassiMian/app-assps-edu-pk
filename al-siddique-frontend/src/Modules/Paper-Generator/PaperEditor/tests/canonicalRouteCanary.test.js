@@ -15,19 +15,14 @@ const __dirname = path.dirname(__filename)
 const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
 const v13 = JSON.parse(fs.readFileSync(v13Path, 'utf8'))
 
-test('Phase 18: default official V13 routing enters guarded canonical chain', () => {
+test('Unified Workspace: all 43 official V13 papers always open in Paper Workspace', () => {
+  assert.strictEqual(v13.papers.length, 43)
   for (const paper of v13.papers) {
-    assert.strictEqual(resolvePaperRoute(paper), 'word_editor', paper.id)
-    assert.strictEqual(
-      resolvePaperRoute(paper, 'build'),
-      'word_editor',
-      `${paper.id}: targetTab must not bypass canonical cutover`
-    )
-    assert.strictEqual(
-      resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }),
-      'build',
-      `${paper.id}: emergency legacy rollback must remain available`
-    )
+    assert.ok(Array.isArray(paper.official_section) && paper.official_section.length > 0, `${paper.id}: Workspace mirror required`)
+    assert.strictEqual(resolvePaperRoute(paper), 'build', paper.id)
+    assert.strictEqual(resolvePaperRoute(paper, 'build'), 'build', `${paper.id}: build stays Workspace`)
+    assert.strictEqual(resolvePaperRoute(paper, 'word_editor'), 'build', `${paper.id}: Canonical UI must not override Workspace`)
+    assert.strictEqual(resolvePaperRoute(paper, null, { officialCanonicalCanary: true }), 'build', `${paper.id}: old canary flag must not expose Canonical UI`)
   }
 })
 
@@ -37,8 +32,8 @@ test('Phase 15: explicit official canary sends all pristine V13 papers through c
     assert.strictEqual(isPristineOfficialV13Paper(paper), true, `${paper.id} must be pristine`)
     assert.strictEqual(
       resolvePaperRoute(paper, null, { officialCanonicalCanary: true }),
-      'word_editor',
-      `${paper.id}: canary must enter guarded editor chain`
+      'build',
+      `${paper.id}: teacher-facing route remains Workspace even while internal canonical conversion stays testable`
     )
     const decision = resolvePaperEditorRoute(paper)
     assert.strictEqual(decision.route, 'CANONICAL_V2', `${paper.id}: ${decision.reason}`)
@@ -58,7 +53,7 @@ test('Phase 20: modified official V13 imports safely into the unified canonical 
     )
 
   assert.strictEqual(isPristineOfficialV13Paper(modified), false)
-  assert.strictEqual(resolvePaperRoute(modified), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(modified), 'build')
   const decision = resolvePaperEditorRoute(modified)
   assert.strictEqual(decision.route, 'CANONICAL_V2')
   assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
@@ -91,16 +86,16 @@ test('Phase 15: legacy V12, Early Years and board-pattern routes do not change u
   )
 })
 
-test('Phase 18: canonical official document uses canonical editor by default and supports emergency rollback', () => {
+test('Unified Workspace: canonical official document stays in teacher-facing Workspace', () => {
   const canonicalPaper = {
     id: 'doc__official-first-term-2026-class-5-english',
     schemaVersion: 2,
     documentFormat: 'canonical-v2',
   }
-  assert.strictEqual(resolvePaperRoute(canonicalPaper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(canonicalPaper), 'build')
   assert.strictEqual(
     resolvePaperRoute(canonicalPaper, null, { officialCanonicalCanary: true }),
-    'word_editor'
+    'build'
   )
   assert.strictEqual(
     resolvePaperRoute(canonicalPaper, null, { forceOfficialLegacyRoute: true }),
