@@ -9,6 +9,7 @@ test('source catalog manifest is well-formed and IDs unique',()=>{
 });
 test('Biology IX English and Urdu have verified PDF bytes; ALL edition/page/exercise audits remain pending',()=>{
  const downloaded=new Map([
+  ['pectaa-catalog-007',{bytes:56635737,sha:'05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518',pages:192,status:'PDF_BYTES_VERIFIED',chapter:'VERIFIED'}],
   ['pectaa-catalog-009',{bytes:31362949,sha:'f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5'}],
   ['pectaa-catalog-010',{bytes:84697797,sha:'7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd',pages:212}],
  ]);
@@ -16,15 +17,16 @@ test('Biology IX English and Urdu have verified PDF bytes; ALL edition/page/exer
    if(downloaded.has(e.recordId)){
      const expected=downloaded.get(e.recordId);
      assert.match(e.pdfUrl,/drive.google.com/);
-     assert.equal(e.downloadStatus,'PDF_BYTES_VERIFIED_EDITION_UNREVIEWED');
+     assert.equal(e.downloadStatus,expected.status||'PDF_BYTES_VERIFIED_EDITION_UNREVIEWED');
      assert.equal(e.downloadByteLength,expected.bytes);
      assert.equal(e.pdfSha256,expected.sha);
      if(expected.pages)assert.equal(e.pdfPageCount,expected.pages);
+     if(expected.chapter)assert.equal(e.chapterIndexStatus,expected.chapter);
    }else{
      assert.equal(e.pdfUrl,null);
      assert.equal(e.pdfSha256,null);
    }
-   assert.equal(e.chapterIndexStatus,'PENDING');
+   if(!downloaded.get(e.recordId)?.chapter) assert.equal(e.chapterIndexStatus,'PENDING');
    assert.equal(e.exerciseIndexStatus,'PENDING');
    assert.match(e.questionGenerationStatus,/^BLOCKED/);
  }

@@ -1,0 +1,22 @@
+{
+  "schemaVersion":"assps-chemistry9-english-source-map-v1",
+  "checkedOn":"2026-10-06",
+  "source":{"recordId":"pectaa-catalog-007","authority":"PECTAA/PCTB official catalogue asset","catalogLabel":"Chemistry (EM) 2025-26","edition":"2025-26","medium":"English","sha256":"05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518","byteLength":56635737,"pageCount":192,"textLayerPages":192,"identityAnchors":["Punjab Curriculum and Textbook Board, Lahore","Updated/Revised National Curriculum of Pakistan 2023"]},
+  "chapters":[
+    {"number":1,"title":"States of Matter and Phase Changes","printedStartPage":1,"pdfStartPage":5},
+    {"number":2,"title":"Atomic Structure","printedStartPage":7,"pdfStartPage":11},
+    {"number":3,"title":"Chemical Bonding","printedStartPage":32,"pdfStartPage":36},
+    {"number":4,"title":"Stoichiometry","printedStartPage":52,"pdfStartPage":56},
+    {"number":5,"title":"Energetics","printedStartPage":67,"pdfStartPage":71},
+    {"number":6,"title":"Equilibria","printedStartPage":83,"pdfStartPage":87},
+    {"number":7,"title":"Acid, Base Chemistry","printedStartPage":93,"pdfStartPage":97},
+    {"number":8,"title":"Periodic Table and Periodicity","printedStartPage":105,"pdfStartPage":109},
+    {"number":9,"title":"Group Properties and Elements","printedStartPage":119,"pdfStartPage":123},
+    {"number":10,"title":"Environmental Chemistry","printedStartPage":129,"pdfStartPage":133},
+    {"number":11,"title":"Hydrocarbons","printedStartPage":145,"pdfStartPage":149},
+    {"number":12,"title":"Empirical Data Collection and Analysis","printedStartPage":157,"pdfStartPage":161},
+    {"number":13,"title":"Laboratory and Practical Skills","printedStartPage":166,"pdfStartPage":170}
+  ],
+  "verification":{"tocPage":3,"chapterStartPagesRendered":[5,11,36,56,71,87,97,109,123,133,149,161,170],"chapterIndexStatus":"VERIFIED","exerciseIndexStatus":"PENDING","topicPageRangesStatus":"PENDING","authoringEligible":false},
+  "rules":{"fullBookDefault":true,"annual2026AlpOptionalFilterOnly":true,"copyTextbookPassages":false,"questionAuthoringRequiresTopicAndExerciseVerification":true}
+}

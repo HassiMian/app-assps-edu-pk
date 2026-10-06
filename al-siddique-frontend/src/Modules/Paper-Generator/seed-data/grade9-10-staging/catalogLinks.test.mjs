@@ -8,9 +8,12 @@ test('official-page anchor inventory is explicit about downloads versus links',(
  for(const e of m.entries){
   assert.equal(e.catalogEvidenceUrl,m.catalogUrl);
   if(e.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND') assert.match(e.catalogAssetUrl,/^https:\/\//);
-  if(!['pectaa-catalog-009','pectaa-catalog-010'].includes(e.recordId)){
+  if(!['pectaa-catalog-007','pectaa-catalog-009','pectaa-catalog-010'].includes(e.recordId)){
    assert.equal(e.pdfUrl,null);
    assert.equal(e.pdfSha256,null);
+  }else if(e.recordId==='pectaa-catalog-007'){
+   assert.equal(e.downloadStatus,'PDF_BYTES_VERIFIED');
+   assert.match(e.pdfSha256,/^[a-f0-9]{64}$/);
   }else{
    assert.equal(e.downloadStatus,'PDF_BYTES_VERIFIED_EDITION_UNREVIEWED');
   }
