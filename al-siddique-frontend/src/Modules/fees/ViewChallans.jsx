@@ -309,7 +309,7 @@ export function printChallan(challan, school = {}, templateId = 1, copies = 3, p
 <body>
   <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:10px 20px; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
     <div style="display:flex; align-items:center; gap:12px;">
-      <strong style="color:#C8991A; font-size:15px;">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</strong>
+      <strong style="color:#C8991A; font-size:15px;">${String(school?.schoolName || school?.name || 'School').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]))}</strong>
       <span style="font-size:13px; color:#C0C8D8;">• Voucher: ${challan.challan_no || challan.name || 'Single Voucher'}</span>
     </div>
     <div style="display:flex; gap:10px;">
@@ -389,7 +389,7 @@ export function printCompactBatch(challans, school = {}, printWin = null) {
 <body>
   <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:10px 20px; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
     <div style="display:flex; align-items:center; gap:12px;">
-      <strong style="color:#C8991A; font-size:15px;">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</strong>
+      <strong style="color:#C8991A; font-size:15px;">${String(school?.schoolName || school?.name || 'School').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]))}</strong>
       <span style="font-size:13px; color:#C0C8D8;">• Batch of ${challans.length} Compact Vouchers Ready</span>
     </div>
     <div style="display:flex; gap:10px;">
@@ -457,7 +457,7 @@ export function printBatchChallans(challans, school = {}, templateId = 1, printW
 <body>
   <div class="no-print" style="position:sticky; top:0; z-index:99999; background:#0B2C4D; color:#fff; padding:12px 24px; border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; font-family:sans-serif; border:1px solid rgba(200,153,26,0.3);">
     <div style="display:flex; align-items:center; gap:14px;">
-      <strong style="color:#C8991A; font-size:16px; letter-spacing:0.5px;">AL SIDDIQUE SCHOLARS PUBLIC SCHOOL</strong>
+      <strong style="color:#C8991A; font-size:16px; letter-spacing:0.5px;">${String(school?.schoolName || school?.name || 'School').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch]))}</strong>
       <span style="font-size:13px; color:#C0C8D8;">• Batch Print: <strong>${challans.length} Students</strong> (${challans.length * 3} Vouchers)</span>
     </div>
     <div style="display:flex; gap:12px;">
@@ -495,14 +495,16 @@ export default function ViewChallans() {
  const navigate = useNavigate()
  const [challans, setChallans] = useState([])
  const [loading, setLoading] = useState(true)
- const MONTH_OPTIONS = ['September', 'August', 'July', 'June', 'May', 'All Months']
- const YEAR_OPTIONS = ['2026', '2027', 'All Years']
+ const MONTH_OPTIONS = ['January','February','March','April','May','June','July','August','September','October','November','December','All Months']
+ const currentYear = new Date().getFullYear()
+ const YEAR_OPTIONS = [String(currentYear - 1), String(currentYear), String(currentYear + 1), 'All Years']
 
  const [selectedStatus, setSelectedStatus] = useState('All')
  const [selectedClass, setSelectedClass] = useState('All Classes')
- const [selectedMonth, setSelectedMonth] = useState('September')
- const [selectedYear, setSelectedYear] = useState('2026')
+ const [selectedMonth, setSelectedMonth] = useState(() => new Date().toLocaleDateString('en-US', { month:'long' }))
+ const [selectedYear, setSelectedYear] = useState(() => String(new Date().getFullYear()))
  const [search, setSearch] = useState('')
+ const [loadError, setLoadError] = useState('')
  const [paymentChallan, setPaymentChallan] = useState(null)
  const [paymentForm, setPaymentForm] = useState({ discount: 0, paid_amount: 0, payment_mode: 'cash', payment_note: '' })
  const [paymentError, setPaymentError] = useState('')
@@ -523,21 +525,22 @@ export default function ViewChallans() {
  const { paperSettings } = usePaperStore()
  const { families, getFamilyForStudent } = useFamilyStore()
  const { classNames } = useAcademicStore()
- const classOptions = ['All Classes', ...(classNames?.length ? classNames : ['Starter'])]
+ const classOptions = ['All Classes', ...(classNames?.length ? classNames : [])]
  const branding = useTenantBranding()
 
  const school = {
-   name: branding?.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
-   schoolName: branding?.schoolName || paperSettings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL',
+   name: branding?.schoolName || paperSettings?.schoolName || '—',
+   schoolName: branding?.schoolName || paperSettings?.schoolName || '—',
    urdu: paperSettings?.schoolUrdu || '',
-   address: branding?.address || paperSettings?.address || paperSettings?.schoolAddress || 'Sharif Chowk, Rayya Khas, Narowal',
-   phone: paperSettings?.phone || '03001291959',
+   address: branding?.address || paperSettings?.address || paperSettings?.schoolAddress || '',
+   phone: paperSettings?.phone || '',
    logo: branding?.logoUrl || paperSettings?.logo || '',
    showUrduHeader: paperSettings?.showUrduHeader || false,
  }
 
  const load = () => {
    setLoading(true)
+   setLoadError('')
    const params = {}
    if (selectedStatus !== 'All') params.status = selectedStatus
    if (selectedClass !== 'All Classes') params.class = selectedClass
@@ -545,7 +548,7 @@ export default function ViewChallans() {
    if (selectedYear !== 'All Years') params.year = selectedYear
    api.get('/api/fees', { params })
      .then(r => setChallans(r.data.data || []))
-     .catch(() => setChallans([]))
+     .catch(err => { setChallans([]); setLoadError(err.response?.data?.message || 'Challans could not be loaded.') })
      .finally(() => setLoading(false))
  }
 
@@ -863,6 +866,7 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
     </div>
   </div>
 
+ {loadError && <div className="super-module-card" style={{ ...card, marginBottom:12, padding:'12px 14px', color:'var(--apex-action-danger)', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)' }}>{loadError}</div>}
  {/* Filters */}
  <div className="super-module-card" style={{ ...card, display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(170px, 1fr))', gap:14, alignItems:'end', position:'relative', zIndex:40 }}>
  <div>
@@ -1127,7 +1131,7 @@ const paymentAlreadyPaid = Number(paymentChallan?.paid_amount || 0)
  type="number"
  value={editForm.year}
  onChange={e=>setEditForm(f=>({ ...f, year:e.target.value }))}
- placeholder="2026"
+ placeholder="YYYY"
  />
  </div>
  <div>

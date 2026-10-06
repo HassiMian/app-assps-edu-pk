@@ -51,7 +51,9 @@ export default function CreateChallan() {
   const [clsError, setClsError] = useState('')
 
   useEffect(() => {
-    api.get('/api/fees/settings').then((r) => setFeeSettings(r.data?.data?.classSettings || [])).catch(() => setFeeSettings([]))
+    api.get('/api/fees/settings')
+      .then((r) => setFeeSettings(r.data?.data?.classSettings || []))
+      .catch((err) => { setFeeSettings([]); setError(err.response?.data?.message || 'Fee settings could not be loaded. Enter fee amounts manually before saving.') })
   }, [])
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function CreateChallan() {
 
   const classMonthlyFee = (className) => {
     const found = feeSettings.find((item) => item.class_name === className && item.active !== false)
-    return Number(found?.monthly_fee || 2500)
+    return Number(found?.monthly_fee || 0)
   }
 
   const applyStudentFeeAuto = async (student) => {
@@ -99,14 +101,14 @@ export default function CreateChallan() {
   const total = useMemo(() => Math.max(0, sumFeeAmounts(amounts, selectedHeads) - Number(discount || 0)), [amounts, selectedHeads, discount])
   const clsTotal = useMemo(() => Math.max(0, sumFeeAmounts(clsAmounts, clsHeads) - Number(clsDiscount || 0)), [clsAmounts, clsHeads, clsDiscount])
 
-  const sectionOptions = clsClass ? (sectionsForClass(clsClass).length ? sectionsForClass(clsClass) : ['Blue']) : ['Blue']
+  const sectionOptions = clsClass ? sectionsForClass(clsClass) : []
 
   useEffect(() => {
     if (!clsClass) return
     const fee = classMonthlyFee(clsClass)
     setClsAmounts((prev) => ({ ...prev, 'Monthly Fee': fee }))
     const sections = sectionsForClass(clsClass)
-    if (sections.length && !sections.includes(clsSection)) setClsSection(sections[0])
+    if (!sections.includes(clsSection)) setClsSection(sections[0] || '')
   }, [clsClass, feeSettings]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const submit = async (event) => {

@@ -1462,6 +1462,22 @@ assertNotContains(
   /selectedSections\.length \? selectedSections : \['Blue'\]/,
   'admissions must not invent a Blue section when none is configured.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/CreateChallan.jsx',
+  /monthly_fee \|\| 2500|\['Blue'\]|catch\(\(\) => setFeeSettings\(\[\]\)\)/,
+  'challan creation must not invent fee amounts/sections or hide fee-settings failures.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/ViewChallans.jsx',
+  /useState\(['"]September['"]\)|useState\(['"]2026['"]\)|\['Starter'\]|AL SIDDIQUE SCHOLARS PUBLIC SCHOOL|Sharif Chowk, Rayya Khas, Narowal|03001291959/,
+  'challan viewing must use live calendar/class/tenant data rather than protected-file legacy defaults.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/ViewChallans.jsx',
+  'const [loadError, setLoadError] = useState',
+  'challan viewing must expose source failures instead of converting them to empty data.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
