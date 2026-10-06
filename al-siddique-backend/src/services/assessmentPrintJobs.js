@@ -60,16 +60,63 @@ function normalizeTeacherBinding(binding = {}) {
   }
 }
 
-function normalizeRenderSettings(settings = {}, { personalized = false } = {}) {
+function normalizeRenderSettings(settings = {}, { personalized = false, rosterSnapshot = null } = {}) {
   const duplex = Boolean(settings.duplex)
   const copyCount = Number.parseInt(settings.copyCount ?? 1, 10)
   if (!Number.isFinite(copyCount) || copyCount < 1 || copyCount > 1000) throw new Error('copyCount must be between 1 and 1000')
+
+  const rendererVersion = cleanText(settings.rendererVersion || 'assps-paper-workspace-v1', 120) || 'assps-paper-workspace-v1'
+  const browserEngineVersion = cleanText(settings.browserEngineVersion, 240)
+  const includeStudentName = settings.includeStudentName !== false
+  const includeRollNumber = settings.includeRollNumber !== false
+
+  const bookletPlan = []
+  let totalPages = null
+  if (personalized && rosterSnapshot) {
+    const rawCounts = settings.studentPageCounts
+    if (!rawCounts || typeof rawCounts !== 'object' || Array.isArray(rawCounts)) {
+      throw new Error('studentPageCounts are required for personalized printing')
+    }
+    const allowedIds = new Set(rosterSnapshot.students.map(student => student.studentId))
+    for (const key of Object.keys(rawCounts)) {
+      if (!allowedIds.has(String(key))) throw new Error('Unknown roster student id in page counts: ' + key)
+    }
+    let cursor = 1
+    rosterSnapshot.students.forEach((student, index) => {
+      const contentPages = Number.parseInt(rawCounts[student.studentId], 10)
+      if (!Number.isFinite(contentPages) || contentPages < 1 || contentPages > 100) {
+        throw new Error('Invalid page count for roster student ' + student.studentId)
+      }
+      const paddingPages = duplex && contentPages % 2 === 1 ? 1 : 0
+      const bookletPages = contentPages + paddingPages
+      const startPage = cursor
+      const endPage = cursor + bookletPages - 1
+      if (duplex && startPage % 2 !== 1) throw new Error('Duplex booklet boundary must start on a front side')
+      bookletPlan.push({
+        studentId: student.studentId,
+        ordinal: index + 1,
+        contentPages,
+        paddingPages,
+        startPage,
+        endPage,
+      })
+      cursor = endPage + 1
+    })
+    totalPages = cursor - 1
+  }
+
   return {
     copyCount,
     duplex,
     pageSize: cleanText(settings.pageSize || 'A4', 32) || 'A4',
     orientation: cleanText(settings.orientation || 'portrait', 32) || 'portrait',
     studentBoundaryPolicy: personalized ? 'START_EACH_STUDENT_ON_FRONT' : 'NOT_APPLICABLE',
+    rendererVersion,
+    browserEngineVersion,
+    includeStudentName,
+    includeRollNumber,
+    bookletPlan,
+    totalPages,
   }
 }
 
@@ -80,12 +127,21 @@ function createPrintJobBinding({ releaseId, roster = null, teacherBinding = {}, 
   if (!allowedReprintModes.has(reprintMode)) throw new Error('Invalid reprint mode')
   const rosterSnapshot = personalized ? normalizeRosterSnapshot(roster || {}) : null
   const bindingSnapshot = normalizeTeacherBinding(teacherBinding)
-  const render = normalizeRenderSettings(renderSettings, { personalized })
+  const render = normalizeRenderSettings(renderSettings, { personalized, rosterSnapshot })
   return {
     releaseId: safeReleaseId,
     rosterSnapshot,
     bindingSnapshot,
-    renderSettings: { pageSize: render.pageSize, orientation: render.orientation },
+    renderSettings: {
+      pageSize: render.pageSize,
+      orientation: render.orientation,
+      rendererVersion: render.rendererVersion,
+      browserEngineVersion: render.browserEngineVersion,
+      includeStudentName: render.includeStudentName,
+      includeRollNumber: render.includeRollNumber,
+      bookletPlan: render.bookletPlan,
+      totalPages: render.totalPages,
+    },
     copyCount: render.copyCount,
     personalized: Boolean(personalized),
     duplex: render.duplex,
@@ -96,7 +152,16 @@ function createPrintJobBinding({ releaseId, roster = null, teacherBinding = {}, 
       releaseId: safeReleaseId,
       rosterHash: rosterSnapshot?.rosterHash || null,
       bindingSnapshot,
-      renderSettings: { pageSize: render.pageSize, orientation: render.orientation },
+      renderSettings: {
+      pageSize: render.pageSize,
+      orientation: render.orientation,
+      rendererVersion: render.rendererVersion,
+      browserEngineVersion: render.browserEngineVersion,
+      includeStudentName: render.includeStudentName,
+      includeRollNumber: render.includeRollNumber,
+      bookletPlan: render.bookletPlan,
+      totalPages: render.totalPages,
+    },
       copyCount: render.copyCount,
       personalized: Boolean(personalized),
       duplex: render.duplex,

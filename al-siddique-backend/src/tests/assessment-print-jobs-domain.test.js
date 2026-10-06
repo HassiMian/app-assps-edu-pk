@@ -14,12 +14,37 @@ test('duplicate student ids fail closed',()=>{
   assert.throws(()=>normalizeRosterSnapshot({students:[{id:1},{id:1}]}),/Duplicate roster student id/)
 })
 
-test('personalized duplex job binds immutable front-side student boundary',()=>{
-  const job=createPrintJobBinding({releaseId:'release-paper-r1',personalized:true,roster:{students:[{id:1,name:'One'},{id:2,name:'Two'}]},teacherBinding:{id:44,name:'Sir Haseeb',subject:'Science',classId:7,section:'A'},renderSettings:{duplex:true,copyCount:1,pageSize:'A4'}})
+test('personalized duplex job freezes exact front-side booklet plan into immutable binding',()=>{
+  const job=createPrintJobBinding({
+    releaseId:'release-paper-r1',
+    personalized:true,
+    roster:{students:[{id:1,name:'One'},{id:2,name:'Two'}]},
+    teacherBinding:{id:44,name:'Sir Haseeb',subject:'Science',classId:7,section:'A'},
+    renderSettings:{
+      duplex:true,copyCount:1,pageSize:'A4',
+      rendererVersion:'renderer-test',
+      browserEngineVersion:'chromium-test',
+      studentPageCounts:{'1':3,'2':4},
+    },
+  })
   assert.equal(job.studentBoundaryPolicy,'START_EACH_STUDENT_ON_FRONT')
-  assert.equal(job.rosterSnapshot.studentCount,2); assert.match(job.bindingHash,/^[a-f0-9]{64}$/)
+  assert.equal(job.rosterSnapshot.studentCount,2)
+  assert.match(job.bindingHash,/^[a-f0-9]{64}$/)
+  assert.deepEqual(job.renderSettings.bookletPlan,[
+    {studentId:'1',ordinal:1,contentPages:3,paddingPages:1,startPage:1,endPage:4},
+    {studentId:'2',ordinal:2,contentPages:4,paddingPages:0,startPage:5,endPage:8},
+  ])
+  assert.equal(job.renderSettings.totalPages,8)
+  assert.equal(job.renderSettings.rendererVersion,'renderer-test')
+  assert.equal(job.renderSettings.browserEngineVersion,'chromium-test')
   assert.equal(paddedPageCount(3,{personalized:true,duplex:true}),4)
   assert.equal(paddedPageCount(4,{personalized:true,duplex:true}),4)
+  assert.throws(()=>createPrintJobBinding({
+    releaseId:'release-paper-r1',
+    personalized:true,
+    roster:{students:[{id:1,name:'One'}]},
+    renderSettings:{duplex:true,studentPageCounts:{'1':1,'999':1}},
+  }),/Unknown roster student id/)
 })
 
 test('generic copies do not require roster and never claim personalized boundary',()=>{
