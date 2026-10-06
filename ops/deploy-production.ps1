@@ -59,11 +59,12 @@ function RunAlways($command, $workingDirectory = $repoRoot) {
 
 function Remote($script) {
   Step "remote command on $(HostLabel)"
+  $normalized = ([string]$script) -replace "`r`n", "`n"
   if (-not $Apply) {
-    Write-Host $script
+    Write-Host $normalized
     return
   }
-  & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $script
+  $normalized | & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec 'bash -s'
   Assert-NativeSuccess "ssh $HostSpec"
 }
 
