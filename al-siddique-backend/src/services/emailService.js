@@ -19,26 +19,23 @@ if (!fs.existsSync(logsDir)) {
 const fallbackLogPath = path.join(logsDir, 'email_fallbacks.log')
 
 /**
- * Appends email content to local log file
+ * Records delivery diagnostics without persisting message bodies or credentials.
  */
-function logEmailFallback(to, subject, text, html) {
+function logEmailFallback(to, subject) {
   const timestamp = new Date().toISOString()
+  const safeTo = String(to || '').replace(/[\r\n]+/g, ' ').slice(0, 320)
+  const safeSubject = String(subject || '').replace(/[\r\n]+/g, ' ').slice(0, 320)
   const logEntry = `
 ========================================
 [EMAIL SEND FALLBACK] - ${timestamp}
-To: ${to}
-Subject: ${subject}
-----------------------------------------
-Text Body:
-${text}
-----------------------------------------
-HTML Body:
-${html}
+To: ${safeTo}
+Subject: ${safeSubject}
+Message body omitted for security.
 ========================================
 \n`
 
-  fs.appendFileSync(fallbackLogPath, logEntry, 'utf8')
-  console.log(`✉️ Email fallback logged to logs/email_fallbacks.log [Subject: "${subject}" to "${to}"]`)
+  fs.appendFileSync(fallbackLogPath, logEntry, { encoding: 'utf8', mode: 0o600 })
+  console.log(`✉️ Email fallback logged to logs/email_fallbacks.log [Subject: "${safeSubject}" to "${safeTo}"]`)
 }
 
 /**
@@ -54,7 +51,7 @@ async function sendEmail({ to, subject, text, html }) {
   const isSmtpConfigured = host && user && pass
 
   if (!nodemailer || !isSmtpConfigured) {
-    logEmailFallback(to, subject, text, html)
+    logEmailFallback(to, subject)
     return {
       success: false,
       delivered: false,
@@ -83,7 +80,7 @@ async function sendEmail({ to, subject, text, html }) {
     return { success: true, delivered: true, method: 'smtp', messageId: info.messageId }
   } catch (err) {
     console.error('❌ SMTP send failed. Attempt logged locally; delivery not confirmed. Error:', err.message)
-    logEmailFallback(to, subject, text, html)
+    logEmailFallback(to, subject)
     return { success: false, delivered: false, method: 'fallback_logger_after_error', error: err.message }
   }
 }
