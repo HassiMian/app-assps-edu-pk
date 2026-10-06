@@ -59,12 +59,14 @@ function RunAlways($command, $workingDirectory = $repoRoot) {
 
 function Remote($script) {
   Step "remote command on $(HostLabel)"
-  $normalized = ([string]$script) -replace "`r`n", "`n"
+  $normalized = ([string]$script) -replace "`r`n", "`n" -replace "`r", ""
   if (-not $Apply) {
     Write-Host $normalized
     return
   }
-  $normalized | & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec 'bash -s'
+  $payload = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($normalized))
+  $remoteCommand = "printf '%s' '$payload' | base64 -d | bash"
+  & $SshExe -i $SshKey -o BatchMode=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$KnownHostsFile" $HostSpec $remoteCommand
   Assert-NativeSuccess "ssh $HostSpec"
 }
 
