@@ -572,7 +572,12 @@
           "attempt": 4,
           "offered": 6,
           "marksEach": 2,
-          "distributionState": "VISIBLE_TABLE_PARTIALLY_OCR_UNENCODED"
+          "chapterCounts": {
+            "1": 1,
+            "2": 2,
+            "3": 2,
+            "4": 1
+          }
         },
         {
           "question": 3,
@@ -580,9 +585,10 @@
           "offered": 6,
           "marksEach": 2,
           "chapterCounts": {
+            "5": 1,
             "6": 1,
             "7": 1,
-            "8": 2,
+            "8": 1,
             "9": 2
           }
         }
@@ -600,9 +606,22 @@
           4,
           3
         ],
-        "distributionState": "VISIBLE_TABLE_PARTIALLY_OCR_UNENCODED"
+        "questionChapterChoices": {
+          "4": [
+            1,
+            3
+          ],
+          "5": [
+            6,
+            7
+          ],
+          "6": [
+            8,
+            9
+          ]
+        }
       },
-      "evidenceResolution": "OBJECTIVE_AND_Q3_RESOLVED_Q2_AND_LONG_PENDING"
+      "evidenceResolution": "PAIRING_TABLE_PLUS_MODEL_CONTENT_CROSSCHECK"
     },
     {
       "subject": "General Science-Tech",
