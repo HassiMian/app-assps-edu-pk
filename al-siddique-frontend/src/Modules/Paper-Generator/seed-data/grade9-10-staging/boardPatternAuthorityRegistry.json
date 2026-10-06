@@ -29,7 +29,14 @@
       ],
       "mustNotUseFor": [
         "deleting-full-book-question-bank-coverage"
-      ]
+      ],
+      "notificationNumber": "PECTAA/C&C Unit/2025/376",
+      "supersedes": "PECTAA/C&C Unit/2025/325 dated 2025-10-24",
+      "originAvailabilityCheckedOn": "2026-10-06",
+      "originAvailabilityState": "ORIGIN_URL_404_RECOVERED_FROM_OFFICIAL_BOARD_MIRROR",
+      "recoveryUrl": "https://site.bisesargodha.edu.pk/Downloads/ModelPapers/Matric/9thRevisedALPNotification.pdf",
+      "retrievedSha256": "c71ea8446015df8fe61adbe869508f8301b21797fd9f4f7a89e96472f140e45c",
+      "retrievedPageCount": 65
     },
     {
       "id": "BISE-LAHORE-SSC-SCHEME-2025-27",
@@ -67,11 +74,46 @@
       "url": "https://home.biselahore.com/notifications",
       "verificationState": "OFFICIAL_ARCHIVE_VERIFIED",
       "note": "Archive includes updated SSC syllabus/scheme notices and explicitly warns against unauthorized guess papers/pairing schemes; board-specific occurrence claims still require a verified paper artifact."
+    },
+    {
+      "id": "PECTAA-G9-2026-MATRIC-TECH-PAIRING-MODELS-SARGODHA",
+      "authority": "PECTAA via BISE Sargodha official model-paper index",
+      "scope": "Grade 9 Matric-Tech Annual Examination 2026 theory pairing schemes and model papers",
+      "url": "https://site.bisesargodha.edu.pk/Downloads/ModelPapers/Matric/PS&MP_MatricTech.pdf",
+      "indexUrl": "https://site.bisesargodha.edu.pk/MatricModelPapers",
+      "verificationState": "OFFICIAL_BOARD_HOSTED_PDF_HASHED_AND_PAGE_REVIEWED",
+      "sha256": "37fdc6f7ff360e6eb67e10ef9a304a5a611e9c1fd391fa6824d26b5cae845f2f",
+      "pageCount": 40,
+      "byteLength": 20250153,
+      "curriculumTrack": "MATRIC_TECH",
+      "subjects": [
+        "Health Sciences-Tech",
+        "Agriculture Sciences-Tech",
+        "Fashion Designing-Tech",
+        "Information & Communication Technologies-Tech",
+        "Communication Skills & Personal Grooming-Tech",
+        "Physics-Tech",
+        "Chemistry-Tech",
+        "Biology-Tech",
+        "General Science-Tech",
+        "Computer Science & Entrepreneurship-Tech"
+      ],
+      "useFor": [
+        "assessment-shape",
+        "pairing-scheme",
+        "model-paper-pattern"
+      ],
+      "mustNotUseFor": [
+        "merging-Matric-Tech-with-mainstream",
+        "question-stem-copying",
+        "academic-content-authority"
+      ]
     }
   ],
   "grade10NewEditionPattern": {
     "targetCohort": "Grade X 2026-27 textbooks / expected first annual 2027",
     "state": "PENDING_OFFICIAL_MODEL_PAPER_OR_PAIRING_PUBLICATION",
     "rule": "Do not infer a new-edition 2027 question pattern from old-edition 2026 papers. Historical papers may inform generic item taxonomy only."
-  }
+  },
+  "trackIsolationRule": "Mainstream and Matric-Tech pattern identities are separate even when subject names are similar; no implicit fallback or merging is allowed."
 }
