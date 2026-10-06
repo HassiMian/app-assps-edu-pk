@@ -277,6 +277,20 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     const supportsAttendanceSchool = await hasColumn('attendance', 'school_id')
     const supportsAttendanceTenant = await hasColumn('attendance', 'tenant_id')
     const supportsAttendanceNote = await hasColumn('attendance', 'note')
+
+    if (!supportsStudentSchool && !supportsStudentTenant) {
+      return res.status(503).json({ success: false, error: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for attendance writes.' })
+    }
+    if (!supportsAttendanceSchool && !supportsAttendanceTenant) {
+      return res.status(503).json({ success: false, error: 'ATTENDANCE_TENANT_SCHEMA_REQUIRED', message: 'Attendance storage is not tenant-safe for writes.' })
+    }
+    if (req.user?.role !== 'super_admin') {
+      const hasStudentContext = (supportsStudentTenant && tenantId) || (supportsStudentSchool && schoolId)
+      const hasAttendanceContext = (supportsAttendanceTenant && tenantId) || (supportsAttendanceSchool && schoolId)
+      if (!hasStudentContext || !hasAttendanceContext) {
+        return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to mark attendance.' })
+      }
+    }
     const toNotify = []
 
     const studentColumns = ['id', 'name', 'parent_phone']
@@ -350,13 +364,13 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       if (supportsAttendanceSchool) {
         columns.push('school_id')
         values.push(`$${attendanceParams.length + 1}`)
-        attendanceParams.push(student.school_id || schoolId || null)
+        attendanceParams.push(student.school_id || schoolId)
       }
 
       if (supportsAttendanceTenant) {
         columns.push('tenant_id')
         values.push(`$${attendanceParams.length + 1}`)
-        attendanceParams.push(student.tenant_id || tenantId || null)
+        attendanceParams.push(student.tenant_id || tenantId)
       }
 
       columns.push('student_id', 'date', 'status', 'marked_by')
@@ -441,7 +455,17 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     const supportsStudentSchool = await hasColumn('students', 'school_id')
     const supportsStudentTenant = await hasColumn('students', 'tenant_id')
 
-    let studentSql = `SELECT id, name, gr_number, class, section, parent_phone FROM students WHERE LOWER(TRIM(gr_number)) = LOWER(TRIM($1)) AND is_active = true`
+    if (!supportsStudentSchool && !supportsStudentTenant) {
+      return res.status(503).json({ success: false, error: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for attendance scanning.' })
+    }
+    if (req.user?.role !== 'super_admin' && !((supportsStudentTenant && tenantId) || (supportsStudentSchool && schoolId))) {
+      return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to scan attendance.' })
+    }
+
+    const studentColumns = ['id', 'name', 'gr_number', 'class', 'section', 'parent_phone']
+    if (supportsStudentSchool) studentColumns.push('school_id')
+    if (supportsStudentTenant) studentColumns.push('tenant_id')
+    let studentSql = `SELECT ${studentColumns.join(', ')} FROM students WHERE LOWER(TRIM(gr_number)) = LOWER(TRIM($1)) AND is_active = true`
     const params = [gr_number]
     let idx = 2
     if (req.user?.role !== 'super_admin') {
@@ -465,6 +489,12 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
 
     const supportsAttendanceSchool = await hasColumn('attendance', 'school_id')
     const supportsAttendanceTenant = await hasColumn('attendance', 'tenant_id')
+    if (!supportsAttendanceSchool && !supportsAttendanceTenant) {
+      return res.status(503).json({ success: false, error: 'ATTENDANCE_TENANT_SCHEMA_REQUIRED', message: 'Attendance storage is not tenant-safe for scanning.' })
+    }
+    if (req.user?.role !== 'super_admin' && !((supportsAttendanceTenant && tenantId) || (supportsAttendanceSchool && schoolId))) {
+      return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to store scanned attendance.' })
+    }
 
     const cols = ['student_id', 'date', 'status', 'marked_by']
     const vals = ['$1', '$2', '$3', '$4']
@@ -474,12 +504,12 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     if (supportsAttendanceSchool) {
       cols.push('school_id')
       vals.push(`$${attParams.length + 1}`)
-      attParams.push(student.school_id || schoolId || null)
+      attParams.push(student.school_id || schoolId)
     }
     if (supportsAttendanceTenant) {
       cols.push('tenant_id')
       vals.push(`$${attParams.length + 1}`)
-      attParams.push(student.tenant_id || tenantId || null)
+      attParams.push(student.tenant_id || tenantId)
     }
 
     const updateParts = ['status = EXCLUDED.status', 'marked_by = EXCLUDED.marked_by']

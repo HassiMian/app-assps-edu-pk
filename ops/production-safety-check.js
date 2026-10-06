@@ -740,6 +740,25 @@ assertContains(
   'fee challan lookup must fail closed when tenant schema support is missing.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  "error: 'ATTENDANCE_TENANT_SCHEMA_REQUIRED'",
+  'attendance writes must fail closed when tenant-safe storage columns are unavailable.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  "error: 'TENANT_CONTEXT_REQUIRED'",
+  'attendance writes must require explicit tenant/school context for non-super-admin users.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  /student\.school_id \|\| schoolId \|\| null|student\.tenant_id \|\| tenantId \|\| null/,
+  'attendance persistence must never silently write null tenant ownership.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
