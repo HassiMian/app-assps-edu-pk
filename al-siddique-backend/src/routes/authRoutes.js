@@ -886,6 +886,43 @@ router.post('/password-reset/confirm', async (req, res) => {
   }
 })
 
+router.put('/me/profile', protect, async (req, res) => {
+  try {
+    const userId = Number(req.user?.id)
+    if (!Number.isInteger(userId) || userId <= 0) return sendJson(res, 401, { message: 'Unauthorized user.' })
+    if (req.user?.account_type === 'service') return sendJson(res, 403, { message: 'Service identities do not have editable personal profiles.' })
+
+    const name = String(req.body?.name || '').trim().slice(0, 180)
+    const phone = String(req.body?.phone || '').trim().slice(0, 40)
+    if (!name) return sendJson(res, 422, { message: 'Profile name is required.' })
+
+    const assignments = ['name = $1']
+    const params = [name]
+    let index = 2
+    if (await hasColumn('users', 'phone').catch(() => false)) {
+      assignments.push(`phone = $${index++}`)
+      params.push(phone || null)
+    }
+    if (await hasColumn('users', 'updated_at').catch(() => false)) assignments.push('updated_at = NOW()')
+    params.push(userId)
+    const result = await query(`
+      UPDATE users
+      SET ${assignments.join(', ')}
+      WHERE id = $${index}
+      RETURNING *
+    `, params)
+    if (!result.rowCount) return sendJson(res, 404, { message: 'User account was not found.' })
+
+    const user = result.rows[0]
+    delete user.password
+    delete user.password_hash
+    return sendJson(res, 200, { success: true, message: 'Profile updated successfully.', user })
+  } catch (err) {
+    console.error('Self profile update error:', err.message)
+    return sendJson(res, 500, { message: 'Profile could not be updated.' })
+  }
+})
+
 router.get('/me', protect, async (req, res) => {
   try {
     const decoded = req.user || {}

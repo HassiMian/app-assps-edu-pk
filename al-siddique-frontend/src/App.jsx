@@ -33,6 +33,7 @@ const LoginPage = lazyRetry(() => import('./pages/LoginPage'), 'LoginPage')
 const ForcePasswordChangePage = lazyRetry(() => import('./pages/ForcePasswordChangePage'), 'ForcePasswordChangePage')
 const AppLayout = lazyRetry(() => import('./components/Layout/AppLayout'), 'AppLayout')
 const Dashboard = lazyRetry(() => import('./pages/Dashboard'), 'Dashboard')
+const ProfilePage = lazyRetry(() => import('./pages/ProfilePage'), 'ProfilePage')
 const AIAnalytics = lazyRetry(() => import('./pages/AIAnalytics'), 'AIAnalytics')
 
 const PaperGenerator = lazyRetry(() => import('./Modules/Paper-Generator/PaperGenerator'), 'PaperGenerator')
@@ -377,6 +378,7 @@ function AppRoutes() {
  <Route path="/id-cards" element={<W roles={ROLES.schoolStaff} permKey="cards"><ComingSoon name="ID Cards Generator" /></W>} />
  <Route path="/academic-setup" element={<W roles={ROLES.leadership} permKey="academic_setup"><AcademicSetupModule /></W>} />
  <Route path="/families" element={<W roles={ROLES.schoolStaff} permKey="families"><FamilyModule /></W>} />
+ <Route path="/profile" element={<ProfilePage />} />
  <Route path="/settings" element={<W roles={ROLES.leadership} permKey="settings"><SettingsModule /></W>} />
  <Route path="/admin/subscription-requests" element={<W roles={['super_admin']}><SubscriptionRequests /></W>} />
 

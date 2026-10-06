@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { Search, Bell, LogOut, CheckCheck, X, Menu, Settings2, BookOpen, Moon, Sun } from 'lucide-react'
+import { Search, Bell, LogOut, CheckCheck, X, Menu, Settings2, BookOpen, Moon, Sun, UserRound } from 'lucide-react'
 import { useStudentStore } from '../../services/useStudentStore'
 import { useTenantBranding } from '../../context/TenantBrandingContext'
 import { useTheme } from '../../context/ThemeContext'
@@ -661,6 +661,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{user?.designation || 'Principal'}</div>
  </div>
  {[
+ { icon: <UserRound size={14} />, label: 'My Profile', path: '/profile' },
  { icon: <Settings2 size={14} />, label: 'System Settings', path: '/settings' },
  { icon: <BookOpen size={14} />, label: 'Academic Setup', path: '/academic' },
  ].map(item => (

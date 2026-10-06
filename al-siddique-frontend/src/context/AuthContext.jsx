@@ -98,12 +98,21 @@ export function AuthProvider({ children }) {
  setUser(null)
  }
 
+ async function refreshUser() {
+ const response = await api.get('/api/auth/me', { skipCache:true })
+ const verifiedUser = response.data?.user || null
+ if (!verifiedUser) throw new Error('Profile refresh returned no user.')
+ setUser(verifiedUser)
+ setAuthSession(getAuthToken(), getRefreshToken(), verifiedUser)
+ return verifiedUser
+ }
+
  const isAdmin = ['admin', 'principal', 'school_admin', 'super_admin'].includes(user?.role)
  const isTeacher = user?.role === 'teacher'
  const token = getAuthToken()
 
  return (
- <AuthContext.Provider value={{ user, loading, login, logout, isAdmin, isTeacher, token }}>
+ <AuthContext.Provider value={{ user, loading, login, logout, refreshUser, isAdmin, isTeacher, token }}>
  {children}
  </AuthContext.Provider>
  )
