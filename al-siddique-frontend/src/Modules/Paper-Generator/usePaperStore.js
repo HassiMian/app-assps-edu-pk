@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { resolveAssetUrl } from '../../services/api'
 import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../services/useAcademicStore'
-import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
+import { getTenantStorageItem, setTenantStorageItem, tenantStorageKey } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
 
@@ -700,48 +700,31 @@ function normalizeSubjectKey({ name = '', classLevel = '', publisher = '' }) {
 
 function readJson(key, fallback) {
  try {
- const raw = getStorage()?.getItem(key)
+ const raw = getTenantStorageItem(key)
  return raw ? JSON.parse(raw) : fallback
  } catch {
  return fallback
  }
 }
 
-function estimatePrints(classLevel) {
- const storage = getStorage()
- try {
-  const localStudents = JSON.parse(storage?.getItem('saas_students') || storage?.getItem('al_siddique_students') || '[]')
-  if (Array.isArray(localStudents) && localStudents.length) {
-   const target = normalizeClassLevel(classLevel)
-   const count = localStudents.filter(s => normalizeClassLevel(s.class || s.classLevel || s.class_name) === target && String(s.status || 'Active').toLowerCase() !== 'inactive').length
-   if (count > 0) return count
-  }
- } catch {}
- const counts = { starter: 33, mover: 42, flyer: 29, '1': 34, '2': 34, '3': 33, '4': 21, '5': 22, '6': 19, '7': 18, '8': 13, 'pre-nine': 16, hifaz: 3 }
- return counts[normalizeClassLevel(classLevel)] || 30
-}
-
 function notifyPaperSaved(paper) {
  const className = paper.config?.classLevel ? classLevelLabel(paper.config.classLevel) : 'selected class'
- const prints = estimatePrints(paper.config?.classLevel)
+ const subjectLabel = `${paper.config?.subject || 'Paper'} ${paper.config?.examType || ''}`.trim()
  const notification = {
  id: Date.now(),
  type: 'success',
  icon: 'print',
  title: 'Paper Saved',
- message: `${paper.config?.subject || 'Paper'} ${paper.config?.examType || ''} paper saved for ${className}. ${prints} students in this class, please prepare ${prints} prints.`,
- body: `${paper.config?.subject || 'Paper'} ${paper.config?.examType || ''} saved for ${className}. ${prints} prints required.`,
+ message: `${subjectLabel} paper saved for ${className}. Confirm the live roster before deciding print quantity.`,
+ body: `${subjectLabel} saved for ${className}. Print quantity is not inferred from local or historical data.`,
  time: 'Just now',
  unread: true,
  paperId: paper.id,
  classLevel: paper.config?.classLevel || '',
- students: prints,
- printsRequired: prints,
  }
  const existing = readJson(NOTIFICATIONS_KEY, [])
- const storage = getStorage()
- try { storage?.setItem(NOTIFICATIONS_KEY, JSON.stringify([notification, ...existing])) } catch {}
- window.dispatchEvent(new StorageEvent('storage', { key: NOTIFICATIONS_KEY }))
+ try { setTenantStorageItem(NOTIFICATIONS_KEY, JSON.stringify([notification, ...existing])) } catch {}
+ window.dispatchEvent(new StorageEvent('storage', { key: tenantStorageKey(NOTIFICATIONS_KEY) }))
 }
 
 let globalStore = null;
