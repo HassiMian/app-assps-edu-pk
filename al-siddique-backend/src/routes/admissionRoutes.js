@@ -129,7 +129,14 @@ router.get('/', protect, canReadAdmissions, async (req, res) => {
   try {
     await ensureAdmissionsTable()
     const supportsTenant = await hasColumn('admissions', 'school_id')
-    const result = supportsTenant && req.user?.role !== 'super_admin'
+    if (!supportsTenant) {
+      return res.status(503).json({
+        success: false,
+        code: 'ADMISSION_TENANT_SCHEMA_REQUIRED',
+        message: 'Admission storage is not tenant-safe for reads.'
+      })
+    }
+    const result = req.user?.role !== 'super_admin'
       ? await pool.query(
         `SELECT * FROM admissions WHERE school_id = $1 ORDER BY created_at DESC LIMIT 200`,
         [currentSchoolId(req)]

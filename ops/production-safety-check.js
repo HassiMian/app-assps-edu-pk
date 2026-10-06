@@ -1774,3 +1774,15 @@ assertContains(
   'Notification provider is not available.',
   'notification provider configuration failures must be explicit without leaking provider internals.'
 )
+
+assertContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'ADMISSION_TENANT_SCHEMA_REQUIRED',
+  'admission reads must fail closed when tenant schema support is unavailable.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  /const result = supportsTenant && req\.user\?\.role !== 'super_admin'/,
+  'admission reads must never fall back to an unscoped query when tenant support is missing.'
+)
