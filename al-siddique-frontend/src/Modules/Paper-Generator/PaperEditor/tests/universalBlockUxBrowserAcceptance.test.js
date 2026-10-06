@@ -13,6 +13,8 @@ test('manual add-block menu persists canonical semantic table', {timeout:90000},
  await context.route('**/api/assessment-studio/papers/**/revisions',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({data:{currentRevision:1,contentHash:'universal-block-test-hash'}})}))
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ let revision=0
+ await context.route('**/api/assessment-studio/papers/*/revisions',route=>{revision+=1;return route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{publicId:'browser-table-paper',currentRevision:revision,contentHash:'b'.repeat(64),status:'DRAFT'}})})})
  const page=await context.newPage(); page.on('dialog',d=>d.accept().catch(()=>{}))
  await page.goto('http://localhost:5243/paper-workspace-test.html?new',{waitUntil:'domcontentloaded'})
  await page.locator('[data-creation-option="blank"]').click(); await page.locator('[data-create-blank-paper]').waitFor()
