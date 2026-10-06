@@ -13,7 +13,7 @@ async function ensureDailyDiaryTable() {
       id SERIAL PRIMARY KEY,
       school_id INTEGER NOT NULL,
       template_id INTEGER NOT NULL DEFAULT 1,
-      school_name VARCHAR(255) NOT NULL DEFAULT 'Al Siddique Scholars Public School',
+      school_name VARCHAR(255) NOT NULL,
       tagline TEXT,
       logo_url TEXT,
       class_level VARCHAR(100),
@@ -34,7 +34,8 @@ async function ensureDailyDiaryTable() {
   await pool.query('ALTER TABLE daily_diaries ALTER COLUMN school_id DROP DEFAULT')
   await pool.query('ALTER TABLE daily_diaries ALTER COLUMN school_id SET NOT NULL').catch(() => {})
   await pool.query('ALTER TABLE daily_diaries ADD COLUMN IF NOT EXISTS template_id INTEGER NOT NULL DEFAULT 1')
-  await pool.query("ALTER TABLE daily_diaries ADD COLUMN IF NOT EXISTS school_name VARCHAR(255) NOT NULL DEFAULT 'Al Siddique Scholars Public School'")
+  await pool.query("ALTER TABLE daily_diaries ADD COLUMN IF NOT EXISTS school_name VARCHAR(255)")
+  await pool.query('ALTER TABLE daily_diaries ALTER COLUMN school_name DROP DEFAULT').catch(() => {})
   await pool.query('ALTER TABLE daily_diaries ADD COLUMN IF NOT EXISTS tagline TEXT')
   await pool.query('ALTER TABLE daily_diaries ADD COLUMN IF NOT EXISTS logo_url TEXT')
   await pool.query('ALTER TABLE daily_diaries ADD COLUMN IF NOT EXISTS class_level VARCHAR(100)')
@@ -52,6 +53,24 @@ async function ensureDailyDiaryTable() {
   await pool.query('CREATE INDEX IF NOT EXISTS daily_diaries_school_date_idx ON daily_diaries (school_id, diary_date DESC)')
 }
 
+function resolveDiarySchoolId(req) {
+  const explicit = req.user?.role === 'super_admin' ? Number(req.body?.school_id || req.query?.school_id || 0) : 0
+  const candidate = explicit || Number(currentSchoolId(req) || req.user?.school_id || 0)
+  return Number.isInteger(candidate) && candidate > 0 ? candidate : null
+}
+
+async function resolveDiarySchoolName(schoolId) {
+  const result = await pool.query(
+    `SELECT COALESCE(NULLIF(TRIM(st.school_name), ''), s.name) AS school_name
+     FROM schools s
+     LEFT JOIN settings st ON st.school_id = s.id
+     WHERE s.id = $1
+     LIMIT 1`,
+    [schoolId],
+  )
+  return String(result.rows[0]?.school_name || '').trim()
+}
+
 function normalizeText(value, fallback = '') {
   if (value === null || value === undefined) return fallback
   const str = String(value).trim()
@@ -67,7 +86,7 @@ function normalizePayload(body = {}) {
 
   return {
     template_id: templateId,
-    school_name: normalizeText(body.school_name ?? body.schoolName, 'Al Siddique Scholars Public School'),
+    school_name: normalizeText(body.school_name ?? body.schoolName, ''),
     tagline: normalizeText(body.tagline, ''),
     logo_url: normalizeText(body.logo_url ?? body.logoUrl, ''),
     class_level: normalizeText(body.class_level ?? body.classLevel, ''),
@@ -96,8 +115,9 @@ router.get('/', async (req, res) => {
     await tenantClause(req)
     await ensureDailyDiaryTable()
     const limit = Math.max(1, Math.min(Number(req.query.limit || 20), 100))
-    const schoolId = currentSchoolId(req) || req.user?.school_id || 1
+    const schoolId = resolveDiarySchoolId(req)
     const isSuperAdmin = req.user?.role === 'super_admin'
+    if (!isSuperAdmin && !schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
 
     const result = isSuperAdmin
       ? await pool.query(
@@ -139,7 +159,7 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
 
-    const userSchoolId = currentSchoolId(req) || req.user?.school_id || 1
+    const userSchoolId = resolveDiarySchoolId(req)
     if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
@@ -158,8 +178,12 @@ router.post('/', async (req, res) => {
   try {
     await tenantClause(req)
     await ensureDailyDiaryTable()
-    const schoolId = currentSchoolId(req) || req.user?.school_id || 1
+    const schoolId = resolveDiarySchoolId(req)
+    if (!schoolId) return res.status(400).json({ success: false, message: 'School context is required.' })
     const payload = normalizePayload(req.body || {})
+    const canonicalSchoolName = await resolveDiarySchoolName(schoolId)
+    if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
+    payload.school_name = canonicalSchoolName
 
     const result = await pool.query(
       `INSERT INTO daily_diaries (
@@ -216,12 +240,15 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ success: false, notFound: true, message: 'Daily diary not found.' })
     }
 
-    const userSchoolId = currentSchoolId(req) || req.user?.school_id || 1
+    const userSchoolId = resolveDiarySchoolId(req)
     if (req.user?.role !== 'super_admin' && current.school_id !== userSchoolId) {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
 
     const payload = normalizePayload({ ...current, ...(req.body || {}) })
+    const canonicalSchoolName = await resolveDiarySchoolName(Number(current.school_id))
+    if (!canonicalSchoolName) return res.status(422).json({ success: false, message: 'School identity is not configured for this diary.' })
+    payload.school_name = canonicalSchoolName
     const result = await pool.query(
       `UPDATE daily_diaries SET
         template_id = $1,
@@ -281,7 +308,7 @@ router.delete('/:id', async (req, res) => {
     if (!diary) {
       return res.status(404).json({ success: false, message: 'Daily diary not found.' })
     }
-    const userSchoolId = currentSchoolId(req) || req.user?.school_id || 1
+    const userSchoolId = resolveDiarySchoolId(req)
     if (req.user?.role !== 'super_admin' && diary.school_id !== userSchoolId) {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }

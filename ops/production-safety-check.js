@@ -708,6 +708,19 @@ assertContains(
   'school provisioning must require a real administrator email.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  /currentSchoolId\(req\).*\|\| 1|req\.user\?\.school_id \|\| 1|Al Siddique Scholars Public School['"]\)|school_name VARCHAR\(255\) NOT NULL DEFAULT/,
+  'daily diary storage must not invent school id 1 or a hardcoded school identity.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  'payload.school_name = canonicalSchoolName',
+  'daily diary documents must snapshot the canonical tenant school name.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
