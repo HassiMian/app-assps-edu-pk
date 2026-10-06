@@ -58,6 +58,29 @@ const DEFAULT_GRADE_SETTINGS = [
   { label:'F', from:0, to:49 },
 ]
 
+function gradeFromBands(obtained, total, bands = DEFAULT_GRADE_SETTINGS) {
+  const obtainedValue = Number(obtained)
+  const totalValue = Number(total)
+  if (!Number.isFinite(obtainedValue) || !Number.isFinite(totalValue) || totalValue <= 0) return ''
+  const pct = Math.max(0, Math.min(100, (obtainedValue / totalValue) * 100))
+  const match = (Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_SETTINGS)
+    .find(row => pct >= Number(row.from) && pct <= Number(row.to))
+  return match?.label || ''
+}
+
+async function loadGradeBandsForSchool(schoolId) {
+  await ensureGradeSettingsSchema()
+  const result = await query(`
+    SELECT label, min_percentage, max_percentage
+    FROM grade_settings
+    WHERE school_id = $1
+    ORDER BY sort_order, max_percentage DESC
+  `, [schoolId])
+  return result.rowCount
+    ? result.rows.map(row => ({ label: row.label, from: Number(row.min_percentage), to: Number(row.max_percentage) }))
+    : DEFAULT_GRADE_SETTINGS
+}
+
 function validateGradeSettings(rows) {
   if (!Array.isArray(rows) || !rows.length) return { errors:['At least one grade band is required.'], rows:[] }
   const normalized = rows.map((row, index) => ({
@@ -90,11 +113,9 @@ router.get('/grade-settings', protect, canReadResults, async (req, res) => {
   try {
     await ensureGradeSettingsSchema()
     const schoolId = currentSchoolId(req)
-    const result = await query(`SELECT label, min_percentage, max_percentage FROM grade_settings WHERE school_id = $1 ORDER BY sort_order, max_percentage DESC`, [schoolId])
-    const rows = result.rowCount
-      ? result.rows.map(row => ({ label:row.label, from:Number(row.min_percentage), to:Number(row.max_percentage) }))
-      : DEFAULT_GRADE_SETTINGS
-    res.json({ success:true, data:rows, configured:result.rowCount > 0 })
+    const result = await query(`SELECT COUNT(*)::int AS count FROM grade_settings WHERE school_id = $1`, [schoolId])
+    const rows = await loadGradeBandsForSchool(schoolId)
+    res.json({ success:true, data:rows, configured:Number(result.rows[0]?.count || 0) > 0 })
   } catch (err) {
     console.error('Grade settings read error:', err.message)
     res.status(500).json({ success:false, message:'Grade settings could not be loaded.' })
@@ -183,15 +204,19 @@ router.post('/results', protect, canManageExams, async (req, res) => {
     const supportsResultTenant = await hasColumn('exam_results', 'school_id')
     const schoolId = currentSchoolId(req)
     const isSuperAdmin = req.user?.role === 'super_admin'
+    const gradeBands = await loadGradeBandsForSchool(schoolId)
 
     for (const r of results) {
       if (!r?.exam_id || !r?.student_id || !r?.subject) {
         return res.status(400).json({ success: false, message: 'exam_id, student_id and subject are required' })
       }
 
-      const marksObtained = Number(r.marks_obtained) || 0
-      const totalMarks = Number(r.total_marks) || 0
-      const grade = calcGrade(marksObtained, totalMarks)
+      const marksObtained = Number(r.marks_obtained)
+      const totalMarks = Number(r.total_marks)
+      if (!Number.isFinite(marksObtained) || !Number.isFinite(totalMarks) || totalMarks <= 0 || marksObtained < 0 || marksObtained > totalMarks) {
+        return res.status(422).json({ success: false, message: 'Marks must be numeric, total marks must be greater than zero, and obtained marks cannot exceed total marks.' })
+      }
+      const grade = gradeFromBands(marksObtained, totalMarks, gradeBands)
 
       if (!isSuperAdmin && supportsStudentTenant) {
         const studentCheck = await query(`
@@ -369,17 +394,6 @@ router.get('/results/:exam_id', protect, canReadResults, async (req, res) => {
   }
 })
 
-
-function calcGrade(obtained, total) {
-  const pct = (obtained / total) * 100
-  if (pct >= 90) return 'A+'
-  if (pct >= 80) return 'A'
-  if (pct >= 70) return 'B'
-  if (pct >= 60) return 'C'
-  if (pct >= 50) return 'D'
-  if (pct >= 33) return 'E'
-  return 'F'
-}
 
 // GET /api/exams/student-results/:student_id
 router.get('/student-results/:student_id', protect, requireScopeForServiceOnly('school.results.read'), async (req, res) => {

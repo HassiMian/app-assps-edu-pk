@@ -9,15 +9,22 @@ const SECTIONS = ['Overview', 'Attendance', 'Exams & Results', 'Fee Status', 'Me
 //  Helpers 
 function normalizeClass(v) { return String(v || '').replace(/^Class\s+/i, '').trim() }
 
-function computeGrade(obtained, total) {
- const pct = total > 0 ? (obtained / total) * 100 : 0
- if (pct >= 90) return 'A+'
- if (pct >= 80) return 'A'
- if (pct >= 70) return 'B+'
- if (pct >= 60) return 'B'
- if (pct >= 50) return 'C'
- if (pct >= 40) return 'D'
- return 'F'
+const DEFAULT_GRADE_BANDS = [
+ { label:'A+', from:90, to:100 },
+ { label:'A', from:80, to:89 },
+ { label:'B', from:70, to:79 },
+ { label:'C', from:60, to:69 },
+ { label:'D', from:50, to:59 },
+ { label:'F', from:0, to:49 },
+]
+
+function computeGrade(obtained, total, bands = DEFAULT_GRADE_BANDS) {
+ const obtainedValue = Number(obtained)
+ const totalValue = Number(total)
+ if (!Number.isFinite(obtainedValue) || !Number.isFinite(totalValue) || totalValue <= 0) return ''
+ const pct = Math.max(0, Math.min(100, (obtainedValue / totalValue) * 100))
+ const match = (Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_BANDS).find(row => pct >= Number(row.from) && pct <= Number(row.to))
+ return match?.label || ''
 }
 
 const gradeColor = g =>
@@ -41,6 +48,7 @@ export default function ParentsPortal() {
  const [exams, setExams] = useState([])
  const [results, setResults] = useState([])
  const [fees, setFees] = useState([])
+ const [gradeBands, setGradeBands] = useState(DEFAULT_GRADE_BANDS)
  const [messages, setMessages] = useState([])
  const [openMsg, setOpenMsg] = useState(null)
  const [error, setError] = useState('')
@@ -90,6 +98,11 @@ export default function ParentsPortal() {
  body: item.message || '',
  })))
 
+ // 2c. Grading policy — same server settings used by the examination workflow
+ const gradeResponse = await api.get('/api/exams/grade-settings').catch(() => ({ data: { data: DEFAULT_GRADE_BANDS } }))
+ const activeGradeBands = Array.isArray(gradeResponse.data?.data) && gradeResponse.data.data.length ? gradeResponse.data.data : DEFAULT_GRADE_BANDS
+ setGradeBands(activeGradeBands)
+
  // 3. Exams for child's class
  const examRes = await api.get('/api/exams')
  const allExams = examRes.data?.data || []
@@ -113,7 +126,7 @@ export default function ParentsPortal() {
  subject: r.subject,
  obtained: Number(r.marks_obtained || 0),
  total: Number(r.total_marks || exam.total_marks || 100),
- grade: r.grade || computeGrade(Number(r.marks_obtained || 0), Number(r.total_marks || exam.total_marks || 100)),
+ grade: r.grade || computeGrade(Number(r.marks_obtained || 0), Number(r.total_marks || exam.total_marks || 100), activeGradeBands),
  }))
  } catch {}
  }))
@@ -151,10 +164,10 @@ export default function ParentsPortal() {
  const avgObt = Math.round(rows.reduce((s, r) => s + r.obtained, 0) / rows.length)
  const avgTotal = Math.round(rows.reduce((s, r) => s + r.total, 0) / rows.length)
  const pct = avgTotal > 0 ? Math.round((avgObt / avgTotal) * 100) : 0
- return { subject, pct, grade: computeGrade(avgObt, avgTotal) }
+ return { subject, pct, grade: computeGrade(avgObt, avgTotal, gradeBands) }
  })
  const avgPct = subjectSummary.length > 0 ? Math.round(subjectSummary.reduce((s, x) => s + x.pct, 0) / subjectSummary.length) : null
- const overallGrade = avgPct !== null ? computeGrade(avgPct, 100) : null
+ const overallGrade = avgPct !== null ? computeGrade(avgPct, 100, gradeBands) : null
  const totalFeeAmt = fees.reduce((s, f) => s + Number(f.amount || 0), 0)
  const paidFeeAmt = fees.reduce((s, f) => s + Math.min(Number(f.paid_amount || 0), Number(f.amount || 0)), 0)
  const childClass = studentRecord?.class ? `Class ${normalizeClass(studentRecord.class)}` : (user?.class || '—')
@@ -407,7 +420,7 @@ function ExamsSection({ exams, results }) {
  <div key={gi} style={{ marginBottom: 20 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 14px', background: 'rgba(200,153,26,0.08)', borderRadius: 10, border: `1px solid ${C.border}`, marginBottom: 10 }}>
  <div><div style={{ color: C.gold, fontWeight: 700 }}>{group.examName}</div><div style={{ color: C.muted, fontSize: 12 }}>{group.examType}</div></div>
- <div style={{ textAlign: 'right' }}><div style={{ color: C.gold, fontWeight: 800, fontSize: 18 }}>{pct}%</div><div style={{ color: gradeColor(computeGrade(totObt, totPos)), fontSize: 12, fontWeight: 700 }}>{totObt}/{totPos} · {computeGrade(totObt, totPos)}</div></div>
+ <div style={{ textAlign: 'right' }}><div style={{ color: C.gold, fontWeight: 800, fontSize: 18 }}>{pct}%</div><div style={{ color: gradeColor(computeGrade(totObt, totPos, gradeBands)), fontSize: 12, fontWeight: 700 }}>{totObt}/{totPos} · {computeGrade(totObt, totPos, gradeBands)}</div></div>
  </div>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead><tr style={{ borderBottom: `1px solid ${C.border}` }}>{['Subject','Marks','Total','%','Grade'].map(h => <th key={h} style={{ padding: '8px 12px', textAlign: 'left', color: C.muted, fontSize: 11, textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>

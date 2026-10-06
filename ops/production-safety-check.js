@@ -253,6 +253,31 @@ assertNotContains(
   'student portal must not describe live notification data as demo/local.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'const gradeBands = await loadGradeBandsForSchool(schoolId)',
+  'saved exam grades must use the school grading policy.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  /const grade = calcGrade\(/,
+  'exam result writes must not bypass configured grade settings.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  "/api/exams/grade-settings",
+  'student portal aggregate grades must use the school grading policy.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
+  "/api/exams/grade-settings",
+  'parent portal aggregate grades must use the school grading policy.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

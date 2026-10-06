@@ -15,15 +15,22 @@ const SECTIONS = ['Dashboard', 'My Exams', 'Attendance', 'Fee Status', 'Messages
 //  Helpers 
 function normalizeClass(v) { return String(v || '').replace(/^Class\s+/i, '').trim() }
 
-function computeGrade(obtained, total) {
- const pct = total > 0 ? (obtained / total) * 100 : 0
- if (pct >= 90) return 'A+'
- if (pct >= 80) return 'A'
- if (pct >= 70) return 'B+'
- if (pct >= 60) return 'B'
- if (pct >= 50) return 'C'
- if (pct >= 40) return 'D'
- return 'F'
+const DEFAULT_GRADE_BANDS = [
+ { label:'A+', from:90, to:100 },
+ { label:'A', from:80, to:89 },
+ { label:'B', from:70, to:79 },
+ { label:'C', from:60, to:69 },
+ { label:'D', from:50, to:59 },
+ { label:'F', from:0, to:49 },
+]
+
+function computeGrade(obtained, total, bands = DEFAULT_GRADE_BANDS) {
+ const obtainedValue = Number(obtained)
+ const totalValue = Number(total)
+ if (!Number.isFinite(obtainedValue) || !Number.isFinite(totalValue) || totalValue <= 0) return ''
+ const pct = Math.max(0, Math.min(100, (obtainedValue / totalValue) * 100))
+ const match = (Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_BANDS).find(row => pct >= Number(row.from) && pct <= Number(row.to))
+ return match?.label || ''
 }
 
 const gradeColor = g =>
@@ -46,7 +53,8 @@ export default function StudentPortal() {
  const [attRecords, setAttRecords] = useState([]) // raw { date, status }
  const [exams, setExams] = useState([]) // exams for this class
  const [results, setResults] = useState([]) // { examId, examName, examType, subject, obtained, total, grade }
- const [fees, setFees] = useState([]) // fee challans for this student
+ const [fees, setFees] = useState([])
+ const [gradeBands, setGradeBands] = useState(DEFAULT_GRADE_BANDS) // fee challans for this student
  const [error, setError] = useState('')
 
  // Portal interaction state
@@ -100,6 +108,11 @@ export default function StudentPortal() {
  body: item.message || '',
  })))
 
+ // 2c. Grading policy — same server settings used by the examination workflow
+ const gradeResponse = await api.get('/api/exams/grade-settings').catch(() => ({ data: { data: DEFAULT_GRADE_BANDS } }))
+ const activeGradeBands = Array.isArray(gradeResponse.data?.data) && gradeResponse.data.data.length ? gradeResponse.data.data : DEFAULT_GRADE_BANDS
+ setGradeBands(activeGradeBands)
+
  // 3. Exams for this class
  const examRes = await api.get('/api/exams')
  const allExams = (examRes.data?.data || [])
@@ -125,7 +138,7 @@ export default function StudentPortal() {
  subject: r.subject,
  obtained: Number(r.marks_obtained || 0),
  total: Number(r.total_marks || exam.total_marks || 100),
- grade: r.grade || computeGrade(Number(r.marks_obtained || 0), Number(r.total_marks || exam.total_marks || 100)),
+ grade: r.grade || computeGrade(Number(r.marks_obtained || 0), Number(r.total_marks || exam.total_marks || 100), activeGradeBands),
  }))
  } catch {}
  }))
@@ -168,10 +181,10 @@ export default function StudentPortal() {
  const avgObt = Math.round(rows.reduce((s, r) => s + r.obtained, 0) / rows.length)
  const avgTotal = Math.round(rows.reduce((s, r) => s + r.total, 0) / rows.length)
  const pct = avgTotal > 0 ? Math.round((avgObt / avgTotal) * 100) : 0
- return { subject, pct, grade: computeGrade(avgObt, avgTotal), rows }
+ return { subject, pct, grade: computeGrade(avgObt, avgTotal, gradeBands), rows }
  })
  const avgPct = subjectSummary.length > 0 ? Math.round(subjectSummary.reduce((s, x) => s + x.pct, 0) / subjectSummary.length) : null
- const overallGrade = avgPct !== null ? computeGrade(avgPct, 100) : null
+ const overallGrade = avgPct !== null ? computeGrade(avgPct, 100, gradeBands) : null
 
  const pendingFees = fees.filter(f => f.status !== 'paid')
  const totalFeeAmt = fees.reduce((s, f) => s + Number(f.amount || 0), 0)
@@ -456,8 +469,8 @@ function ExamsSection({ exams, results }) {
  </div>
  <div style={{ textAlign: 'right' }}>
  <div style={{ color: C.gold, fontWeight: 800, fontSize: 18 }}>{overallPct}%</div>
- <div style={{ color: gradeColor(computeGrade(totalObt, totalPos)), fontSize: 13, fontWeight: 700 }}>
- {totalObt}/{totalPos} · {computeGrade(totalObt, totalPos)}
+ <div style={{ color: gradeColor(computeGrade(totalObt, totalPos, gradeBands)), fontSize: 13, fontWeight: 700 }}>
+ {totalObt}/{totalPos} · {computeGrade(totalObt, totalPos, gradeBands)}
  </div>
  </div>
  </div>
