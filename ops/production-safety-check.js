@@ -51,8 +51,14 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/aiAnalyticsRoutes.js',
-  "process.env.NODE_ENV === 'production'",
-  'AI analytics must fail closed in production instead of returning fallback facts.'
+  "res.status(503).json({ success:false, message:'Analytics is temporarily unavailable.', source:'live_database' })",
+  'AI analytics must fail closed instead of returning fallback facts.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/aiAnalyticsRoutes.js',
+  /development_fallback|insight-m1|insight-m2|studentCount:\s*23|studentCount:\s*15/,
+  'AI analytics must not contain synthetic fallback facts in any environment.'
 )
 
 assertContains(
