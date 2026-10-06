@@ -219,8 +219,8 @@ function PaperGeneratorCategoriesCard() {
  borderRadius: 10,
  border: 'none',
  cursor: 'pointer',
- background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`,
- color: '#071e34',
+ background:'var(--apex-action-primary)',
+ color:'#fff',
  fontWeight: 800,
  fontSize: 13,
  whiteSpace: 'nowrap',
@@ -408,7 +408,7 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
             
             <div>
               <Lbl>Typography Style</Lbl>
-              <select value={brandingConfig.typography || "'Playfair Display', serif"} onChange={e => setBrandingConfig({ ...brandingConfig, typography: e.target.value })} style={{ width: '100%', background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 10, color: C.silver, padding: '10px 14px', fontSize: 14, outline: 'none' }}>
+              <select value={brandingConfig.typography || "'Playfair Display', serif"} onChange={e => setBrandingConfig({ ...brandingConfig, typography: e.target.value })} style={{ width: '100%', background:'var(--apex-bg-surface-solid)', border: `1px solid ${C.border}`, borderRadius: 10, color: C.silver, padding: '10px 14px', fontSize: 14, outline: 'none' }}>
                 <option value="'Playfair Display', serif">Playfair Display (Elegant)</option>
                 <option value="'Inter', sans-serif">Inter (Modern & Clean)</option>
                 <option value="'Outfit', sans-serif">Outfit (Tech & Bold)</option>
@@ -670,7 +670,18 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  } catch (error) {
  console.error('Branding sync failed:', error)
  setSaved(false)
- alert('Unable to sync branding to the live server right now. Local changes were still saved.')
+ try {
+ const authoritative = await api.get('/api/settings', { skipCache:true })
+ const serverSettings = normalizeSettingsResponse(authoritative.data?.data || {})
+ updatePaperSettings({
+ schoolCode: serverSettings.schoolCode || '', schoolName: serverSettings.schoolName || '', address: serverSettings.schoolAddress || '',
+ phone: serverSettings.schoolPhone || '', email: serverSettings.schoolEmail || '', principalName: serverSettings.principalName || '',
+ examYear: serverSettings.academicYear || '', fee_due_date: serverSettings.feeDueDate || '10', attendance_threshold: serverSettings.attendanceThreshold || '75',
+ logo: serverSettings.logo || null, schoolUrdu: serverSettings.schoolUrdu || '', showUrduOnLogin: serverSettings.showUrduOnLogin,
+ moduleAccess: serverSettings.moduleAccess, schoolAccess: serverSettings.schoolAccess, superappModules: serverSettings.superappModules, brandingConfig: serverSettings.brandingConfig,
+ })
+ } catch (restoreError) { console.error('Settings restore failed:', restoreError) }
+ alert('Server sync failed. The settings view has been restored from the authoritative server copy where available.')
  } finally {
  setSaving(false)
  }
@@ -683,13 +694,13 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  {/* Header */}
  <GCard style={{ marginBottom: 24, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-   <div className="super-module-card" style={{ width: 52, height: 52, borderRadius: 20, background: 'rgba(142,142,147,0.15)', border: '1px solid rgba(142,142,147,0.3)', display: 'grid', placeItems: 'center' }}><Settings size={26} color="#fff" /></div>
+   <div className="super-module-card" style={{ width: 52, height: 52, borderRadius: 20, background: 'rgba(142,142,147,0.15)', border: '1px solid rgba(142,142,147,0.3)', display: 'grid', placeItems: 'center' }}><Settings size={26} color="var(--apex-action-primary)" /></div>
    <div>
-   <h1 style={{ margin: 0, fontSize: 26, color: '#fff', fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>System Settings</h1>
+   <h1 style={{ margin:0, fontSize:26, color:'var(--apex-text-primary)', fontFamily: "'Playfair Display', serif", fontWeight: 800 }}>System Settings</h1>
    <p style={{ margin: '4px 0 0', color: C.muted, fontSize: 13 }}>Enterprise Control Center · Branding · Access</p>
    </div>
  </div>
- <button onClick={flashSaved} disabled={saving} style={{ padding: '12px 24px', borderRadius: 12, border: 'none', cursor: 'pointer', background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, color: '#071e34', fontWeight: 800, fontSize: 14, boxShadow: '0 8px 24px rgba(200,153,26,0.3)' }}>
+ <button onClick={flashSaved} disabled={saving} style={{ padding: '12px 24px', borderRadius: 12, border: 'none', cursor: 'pointer', background:'var(--apex-action-primary)', color:'#fff', fontWeight: 800, fontSize: 14, boxShadow: '0 8px 24px rgba(200,153,26,0.3)' }}>
    {saving ? 'Syncing...' : 'Sync Enterprise Configurations'}
  </button>
  </GCard>
@@ -750,7 +761,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  marginTop: 18,
  padding: 16,
  borderRadius: 14,
- background: 'rgba(7,30,52,0.35)',
+ background:'var(--apex-bg-subtle)',
  border: `1px solid ${C.border}`,
  display: 'flex',
  alignItems: 'center',
@@ -864,7 +875,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  marginTop: 18,
  padding: 16,
  borderRadius: 16,
- background: 'rgba(7,30,52,0.35)',
+ background:'var(--apex-bg-subtle)',
  border: `1px solid ${C.border}`,
  display: 'grid',
  gridTemplateColumns: '1.2fr .8fr',
@@ -891,7 +902,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  borderRadius: 12,
  border: 'none',
  cursor: twilioTesting || twilioLoading ? 'not-allowed' : 'pointer',
- background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`,
+ background:'var(--apex-action-primary)',
  color: '#fff',
  fontWeight: 800,
  fontSize: 13,
@@ -1096,7 +1107,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
 
  <div style={{ display: 'grid', gap: 14 }}>
  {schoolAccess.length === 0 ? (
- <div style={{ color: C.muted, fontSize: 13, padding: '14px 16px', borderRadius: 14, background: 'rgba(7,30,52,0.35)', border: `1px dashed ${C.border}` }}>
+ <div style={{ color: C.muted, fontSize: 13, padding: '14px 16px', borderRadius: 14, background:'var(--apex-bg-subtle)', border: `1px dashed ${C.border}` }}>
  No branch access configured yet.
  </div>
  ) : schoolAccess.map((school) => (
@@ -1235,7 +1246,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  ? <img src={paperSettings.principalSignature} alt="Principal signature" style={{ maxWidth:'100%', maxHeight:'100%', objectFit:'contain', padding:8 }} />
  : <span style={{ color:'#94A3B8', fontSize:12 }}>No signature</span>}
  </div>
- <button type="button" onClick={() => signatureRef.current.click()} style={{ padding:'10px 18px', borderRadius:10, border:'none', cursor:'pointer', fontWeight: 600, background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34' }}>{paperSettings.principalSignature ? 'Change Signature' : 'Upload Signature'}</button>
+ <button type="button" onClick={() => signatureRef.current.click()} style={{ padding:'10px 18px', borderRadius:10, border:'none', cursor:'pointer', fontWeight: 600, background:'var(--apex-action-primary)', color:'#fff' }}>{paperSettings.principalSignature ? 'Change Signature' : 'Upload Signature'}</button>
  {paperSettings.principalSignature && <button type="button" onClick={() => upd('principalSignature', null)} style={{ padding:'9px 16px', borderRadius:10, cursor:'pointer', fontWeight: 600, background:'rgba(255,55,95,0.15)', color:C.red, border:'1px solid rgba(255,55,95,0.3)' }}>Remove</button>}
  </div>
  <input ref={signatureRef} type="file" accept="image/*" style={{ display:'none' }} onChange={handleSignature} />
@@ -1284,7 +1295,7 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
   {saving ? 'Syncing...' : 'Save & Sync Branding'}
  </button>
  {saved && <span style={{ color: C.green, fontSize: 13, fontWeight: 700 }}> Saved!</span>}
- <span style={{ color: C.muted, fontSize: 12 }}>Changes are saved locally and synced to the live branding API</span>
+ <span style={{ color:C.muted, fontSize:12 }}>Saved settings are verified against the live tenant settings API.</span>
  </div>
  </GCard>
 
