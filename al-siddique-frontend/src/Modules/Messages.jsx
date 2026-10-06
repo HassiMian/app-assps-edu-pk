@@ -15,6 +15,8 @@ export default function Messages() {
  const [alert, setAlert] = useState('')
  const [sending, setSending] = useState(false)
  const [recipientCount, setRecipientCount] = useState(0)
+ const [savingDraft, setSavingDraft] = useState(false)
+ const [draftUpdatedAt, setDraftUpdatedAt] = useState('')
 
  async function loadHistory() {
  try {
@@ -34,8 +36,23 @@ export default function Messages() {
  }
 
  useEffect(() => {
+ let cancelled = false
+ async function loadDraft() {
+ try {
+ const response = await api.get('/api/notify/message-draft')
+ const saved = response.data?.data
+ if (!cancelled && saved) {
+ setDraft({ recipient:saved.recipient_group || 'parents', subject:saved.subject || '', body:saved.body || '' })
+ setDraftUpdatedAt(saved.updated_at || '')
+ }
+ } catch (err) {
+ console.error('Failed to load message draft', err)
+ }
+ }
+ void loadDraft()
  // eslint-disable-next-line react-hooks/set-state-in-effect
  void loadHistory()
+ return () => { cancelled = true }
  }, [])
 
  useEffect(() => {
@@ -51,6 +68,27 @@ export default function Messages() {
  void loadRecipients()
  return () => { cancelled = true }
  }, [draft.recipient])
+
+ async function saveDraft() {
+ if (savingDraft) return
+ if (!draft.subject.trim() && !draft.body.trim()) {
+ setAlert('Add a subject or message before saving a draft.')
+ return
+ }
+ setSavingDraft(true)
+ setAlert('')
+ try {
+ const response = await api.put('/api/notify/message-draft', draft)
+ setDraftUpdatedAt(response.data?.data?.updated_at || new Date().toISOString())
+ setAlert('Draft saved securely on the server.')
+ } catch (err) {
+ setAlert(err.response?.data?.message || 'Draft could not be saved.')
+ } finally {
+ setSavingDraft(false)
+ setTimeout(() => setAlert(''), 3000)
+ }
+ }
+
 
  const sendMessage = async (event) => {
  event.preventDefault()
@@ -75,7 +113,9 @@ export default function Messages() {
  recipient_role: draft.recipient === 'parents' ? 'parent' : draft.recipient === 'students' ? 'student' : draft.recipient === 'teachers' ? 'teacher' : 'staff',
  })),
  })
+ await api.delete('/api/notify/message-draft').catch(() => {})
  setDraft({ recipient: draft.recipient, subject: '', body: '' })
+ setDraftUpdatedAt('')
  setAlert('Message batch processed. Delivery status is available in the verified log.')
  await loadHistory()
  } catch (err) {
@@ -105,8 +145,9 @@ export default function Messages() {
  <div><label style={labelStyle}>Message</label><textarea style={{ ...input, minHeight: 130, resize: 'vertical' }} value={draft.body} onChange={e => setDraft({ ...draft, body: e.target.value })} required /></div>
  <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
  <button type="submit" style={btnPrimary} disabled={sending || recipientCount === 0}>{sending ? 'Sending…' : 'Send Message'}</button>
- <button type="button" style={{ ...btnSecondary, opacity:0.55, cursor:'not-allowed' }} disabled title="Draft persistence is not enabled yet">Save Draft</button>
- {alert && <span style={{ color: alert.startsWith('Message batch') ? C.green : C.red, fontWeight: 700 }}>{alert}</span>}
+ <button type="button" style={btnSecondary} onClick={() => void saveDraft()} disabled={savingDraft}>{savingDraft ? 'Saving…' : 'Save Draft'}</button>
+ {draftUpdatedAt && <span style={{ color:C.muted, fontSize:11 }}>Draft saved {new Date(draftUpdatedAt).toLocaleString('en-PK')}</span>}
+ {alert && <span style={{ color: alert.includes('saved') || alert.startsWith('Message batch') ? C.green : C.red, fontWeight: 700 }}>{alert}</span>}
  </div>
  </form>
 

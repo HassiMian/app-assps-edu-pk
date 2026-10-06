@@ -63,6 +63,21 @@ async function up(options = {}) {
     `)
 
     await client.query(`
+      CREATE TABLE IF NOT EXISTS message_drafts (
+        id BIGSERIAL PRIMARY KEY,
+        school_id INTEGER NOT NULL REFERENCES schools(id),
+        user_id INTEGER NOT NULL REFERENCES users(id),
+        recipient_group VARCHAR(32) NOT NULL DEFAULT 'parents',
+        subject VARCHAR(255) NOT NULL DEFAULT '',
+        body TEXT NOT NULL DEFAULT '',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (school_id, user_id)
+      );
+      CREATE INDEX IF NOT EXISTS idx_message_drafts_school_user ON message_drafts (school_id, user_id);
+    `)
+
+    await client.query(`
       ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS archived_at TIMESTAMP;
       CREATE INDEX IF NOT EXISTS idx_notification_log_school_archive_sent
         ON notification_log (school_id, archived_at, sent_at DESC);

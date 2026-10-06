@@ -189,6 +189,19 @@ assertNotContains(
   'student writes must never invent a Blue section fallback.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  "router.put('/message-draft', protect, canSendNotifications",
+  'message drafts must persist through an authenticated server endpoint.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Messages.jsx',
+  /Draft persistence is not enabled yet|Save Draft<\/button>\s*$/m,
+  'message composer must not ship a knowingly disabled draft control.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

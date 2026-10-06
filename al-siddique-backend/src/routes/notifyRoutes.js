@@ -11,6 +11,28 @@ const {
 
 const canSendNotifications = requireRoles('super_admin', 'admin', 'principal', 'accountant')
 
+
+let messageDraftSchemaReady = null
+function ensureMessageDraftTable() {
+  if (!messageDraftSchemaReady) {
+    messageDraftSchemaReady = pool.query(`
+      CREATE TABLE IF NOT EXISTS message_drafts (
+        id BIGSERIAL PRIMARY KEY,
+        school_id INTEGER NOT NULL REFERENCES schools(id),
+        user_id INTEGER NOT NULL REFERENCES users(id),
+        recipient_group VARCHAR(32) NOT NULL DEFAULT 'parents',
+        subject VARCHAR(255) NOT NULL DEFAULT '',
+        body TEXT NOT NULL DEFAULT '',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (school_id, user_id)
+      );
+      CREATE INDEX IF NOT EXISTS idx_message_drafts_school_user ON message_drafts (school_id, user_id);
+    `).catch(err => { messageDraftSchemaReady = null; throw err })
+  }
+  return messageDraftSchemaReady
+}
+
 function isScopedPortalRole(role) {
   return ['parent', 'student'].includes(String(role || '').toLowerCase())
 }
@@ -418,6 +440,58 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
     res.json({ success: true, sent, failed, results })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
+  }
+})
+
+// GET /api/notify/message-draft — one durable draft per authenticated staff user
+router.get('/message-draft', protect, canSendNotifications, async (req, res) => {
+  try {
+    await ensureMessageDraftTable()
+    const result = await pool.query(`
+      SELECT id, recipient_group, subject, body, updated_at
+      FROM message_drafts
+      WHERE school_id = $1 AND user_id = $2
+      LIMIT 1
+    `, [currentSchoolId(req), req.user?.id])
+    res.json({ success: true, data: result.rows[0] || null })
+  } catch (err) {
+    console.error('Message draft load error:', err.message)
+    res.status(500).json({ success: false, message: 'Message draft could not be loaded.' })
+  }
+})
+
+router.put('/message-draft', protect, canSendNotifications, async (req, res) => {
+  try {
+    await ensureMessageDraftTable()
+    const recipientGroup = String(req.body?.recipient || req.body?.recipient_group || 'parents').trim().toLowerCase()
+    const subject = String(req.body?.subject || '').trim().slice(0, 255)
+    const body = String(req.body?.body || '').trim().slice(0, 10000)
+    if (!['parents', 'students', 'teachers', 'staff'].includes(recipientGroup)) {
+      return res.status(422).json({ success: false, message: 'Invalid recipient group.' })
+    }
+    if (!subject && !body) return res.status(422).json({ success: false, message: 'Draft subject or body is required.' })
+    const result = await pool.query(`
+      INSERT INTO message_drafts (school_id, user_id, recipient_group, subject, body)
+      VALUES ($1,$2,$3,$4,$5)
+      ON CONFLICT (school_id, user_id)
+      DO UPDATE SET recipient_group = EXCLUDED.recipient_group, subject = EXCLUDED.subject, body = EXCLUDED.body, updated_at = NOW()
+      RETURNING id, recipient_group, subject, body, updated_at
+    `, [currentSchoolId(req), req.user?.id, recipientGroup, subject, body])
+    res.json({ success: true, data: result.rows[0], message: 'Draft saved.' })
+  } catch (err) {
+    console.error('Message draft save error:', err.message)
+    res.status(500).json({ success: false, message: 'Message draft could not be saved.' })
+  }
+})
+
+router.delete('/message-draft', protect, canSendNotifications, async (req, res) => {
+  try {
+    await ensureMessageDraftTable()
+    await pool.query('DELETE FROM message_drafts WHERE school_id = $1 AND user_id = $2', [currentSchoolId(req), req.user?.id])
+    res.json({ success: true })
+  } catch (err) {
+    console.error('Message draft delete error:', err.message)
+    res.status(500).json({ success: false, message: 'Message draft could not be cleared.' })
   }
 })
 
