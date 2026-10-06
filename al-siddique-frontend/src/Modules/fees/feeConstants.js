@@ -23,7 +23,7 @@ export const MONTHS = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ]
 
-export function defaultFeeAmounts(monthly = 2500) {
+export function defaultFeeAmounts(monthly = 0) {
   return {
     'Monthly Fee': monthly,
     'Admission Fee': 0,

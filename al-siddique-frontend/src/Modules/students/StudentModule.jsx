@@ -1306,6 +1306,7 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
  const { families, addStudentToFamily, createFamily } = useFamilyStore();
  const isEdit = !!initialData
  const [feeSetup, setFeeSetup] = useState(() => initFeeSetup());
+ const [feeSettingsError, setFeeSettingsError] = useState('');
  const [generateChallan, setGenerateChallan] = useState(true);
  const [savingCombo, setSavingCombo] = useState(false);
  const [photo, setPhoto] = useState(initialData?.photo || null)
@@ -1344,15 +1345,24 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
 
  useEffect(() => {
  if (isEdit || !form.class) return
+ setFeeSettingsError('')
  api.get("/api/fees/settings").then((r) => {
  const list = r.data?.data?.classSettings || []
  const found = list.find((item) => item.class_name === form.class && item.active !== false)
- const monthly = Number(found?.monthly_fee || 0)
+ if (!found) {
+ setFeeSettingsError(`No active monthly fee is configured for ${form.class}.`)
+ setFeeSetup((prev) => ({ ...prev, amounts: { ...prev.amounts, "Monthly Fee": 0 } }))
+ return
+ }
+ const monthly = Number(found.monthly_fee || 0)
  setFeeSetup((prev) => ({
  ...prev,
  amounts: { ...prev.amounts, "Monthly Fee": monthly },
  }))
- }).catch(() => {})
+ }).catch((err) => {
+ setFeeSettingsError(err.response?.data?.message || 'Fee settings could not be loaded. Enter fee amounts manually before generating a challan.')
+ setFeeSetup((prev) => ({ ...prev, amounts: { ...prev.amounts, "Monthly Fee": 0 } }))
+ })
  }, [form.class, isEdit])
 
  useEffect(() => {
@@ -1497,6 +1507,9 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
  <input type="checkbox" checked={generateChallan} onChange={(e) => setGenerateChallan(e.target.checked)} />
  Configure fee & generate first challan on save
  </label>
+ {generateChallan && feeSettingsError && (
+ <div style={{ marginBottom:10, padding:"9px 11px", borderRadius:10, border:"1px solid color-mix(in srgb,var(--apex-action-highlight) 35%,transparent)", background:"color-mix(in srgb,var(--apex-action-highlight) 8%,var(--apex-bg-surface-solid))", color:"var(--apex-text-secondary)", fontSize:11, lineHeight:1.5 }}>{feeSettingsError}</div>
+ )}
  {generateChallan && (
  <FeeSetupFields
  compact

@@ -50,7 +50,7 @@ export default function FeeSetupFields({
   )
 }
 
-export function initFeeSetup(monthlyFee = 2500) {
+export function initFeeSetup(monthlyFee = 0) {
   return {
     amounts: defaultFeeAmounts(monthlyFee),
     selectedHeads: FEE_HEADS.reduce((a, h) => ({ ...a, [h]: h === 'Monthly Fee' || h === 'Admission Fee' }), {}),

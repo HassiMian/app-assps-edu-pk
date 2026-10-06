@@ -482,6 +482,7 @@ export default function SettingsModule() {
    probe: null,
  })
  const [twilioLoading, setTwilioLoading] = useState(false)
+ const [twilioLoadError, setTwilioLoadError] = useState('')
  const [twilioTesting, setTwilioTesting] = useState(false)
 
  const upd = (k, v) => updatePaperSettings({ [k]: v })
@@ -502,6 +503,7 @@ export default function SettingsModule() {
  useEffect(() => {
  let mounted = true
  setTwilioLoading(true)
+ setTwilioLoadError('')
  api.get('/api/settings/twilio')
  .then((res) => {
  const data = res.data?.data || {}
@@ -519,7 +521,9 @@ export default function SettingsModule() {
  probe: data.probe || null,
  }))
  })
- .catch(() => {})
+ .catch((err) => {
+ if (mounted) setTwilioLoadError(err.response?.data?.message || 'Messaging settings could not be loaded.')
+ })
  .finally(() => {
  if (mounted) setTwilioLoading(false)
  })
@@ -884,8 +888,9 @@ address: savedSettings.schoolAddress || paperSettings.address || '',
  <div>
  <div style={{ color: C.muted, fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>Current Status</div>
  <div style={{ color: '#fff', fontSize: 18, fontWeight: 900, marginBottom: 8 }}>
- {twilioLoading ? 'Loading Twilio settings...' : twilioConfig.probe?.ok ? 'Twilio Verified' : 'Twilio Not Verified Yet'}
+ {twilioLoading ? 'Loading Twilio settings...' : twilioLoadError ? 'Messaging Settings Unavailable' : twilioConfig.probe?.ok ? 'Twilio Verified' : 'Twilio Not Verified Yet'}
  </div>
+ {twilioLoadError && <div style={{ color:'var(--apex-action-danger)', fontSize:12, lineHeight:1.5, marginBottom:8 }}>{twilioLoadError}</div>}
  <div style={{ color: C.silver, fontSize: 13, lineHeight: 1.7 }}>
  {twilioConfig.probe?.ok
  ? `Account ${twilioConfig.probe.account?.friendlyName || twilioConfig.accountSid || 'connected'} is ${twilioConfig.probe.account?.status || 'active'} (${twilioConfig.probe.account?.type || 'unknown'}).`

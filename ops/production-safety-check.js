@@ -1407,6 +1407,28 @@ assertNotContains(
   /ALLOW_MOCK_FALLBACK/,
   'dashboard routes must not keep obsolete mock-fallback configuration.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/feeConstants.js',
+  /defaultFeeAmounts\(monthly = 2500\)/,
+  'fee helper defaults must not invent a monthly fee amount.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSetupFields.jsx',
+  /initFeeSetup\(monthlyFee = 2500\)/,
+  'student/admission fee setup must start from zero until a canonical fee is loaded.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /api\.get\(["']\/api\/fees\/settings["']\)[\s\S]{0,500}\.catch\(\(\) => \{\}\)/,
+  'student fee setup must surface fee-source failures instead of silently swallowing them.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/settings/SettingsModule.jsx',
+  'Messaging Settings Unavailable',
+  'settings UI must distinguish a load failure from an unverified messaging account.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
