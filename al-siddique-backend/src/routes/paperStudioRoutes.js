@@ -6,6 +6,7 @@ const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper }
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
 const { buildCanonicalCanaryPlan } = require('../services/papers/paperCanonicalCanaryPlanV6H2')
+const { buildCanonicalCanaryRollbackPlan } = require('../services/papers/paperCanonicalCanaryRollbackPlanV6H3')
 const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
 const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPublisherPromotionPrecheckV6G9')
 const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPublisherPromotionEnvelopeV6G10')
@@ -260,6 +261,19 @@ router.get('/canonical-canary/:id/plan', async (req,res) => {
     const status=Number(err.status)||500
     if(status>=500)console.error('Paper Studio canonical canary plan error:',err.message)
     return res.status(status).json({success:false,code:err.code||'CANARY_PLAN_FAILED',message:status>=500?'Canonical canary plan could not be generated.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
+
+router.get('/canonical-canary/:id/rollback-plan', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=await buildCanonicalCanaryRollbackPlan({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{planOnly:true,deleteAttempted:false,persisted:false,canonicalWriteChanged:false}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio canonical canary rollback plan error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'CANARY_ROLLBACK_PLAN_FAILED',message:status>=500?'Canonical canary rollback plan could not be generated.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
   }
 })
 
