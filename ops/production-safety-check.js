@@ -275,6 +275,12 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/config/migrate.js',
+  /\.catch\(\(\) => \{\}\)/,
+  'schema migration steps must fail closed instead of swallowing database errors.'
+)
+
 assertContains(
   'al-siddique-backend/migrations/018_notification_delivery_status_schema.js',
   "'pending','accepted','queued','sent','delivered','failed','undelivered'",

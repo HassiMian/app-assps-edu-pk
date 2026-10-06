@@ -48,11 +48,11 @@ async function migrate() {
       ALTER TABLE users ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
       DROP INDEX IF EXISTS idx_users_email;
       CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email);
-    `).catch(() => {})
+    `)
     await pool.query(`
       ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
       ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('super_admin','admin','principal','teacher','accountant','parent','student'));
-    `).catch(() => {})
+    `)
     console.log('users table ready')
 
     await pool.query(`
@@ -82,7 +82,7 @@ async function migrate() {
       ALTER TABLE students ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
       CREATE INDEX IF NOT EXISTS idx_students_school_class ON students(school_id, class);
       CREATE INDEX IF NOT EXISTS idx_students_school_active ON students(school_id, is_active);
-    `).catch(() => {})
+    `)
     console.log('students table ready')
 
     await pool.query(`
@@ -105,7 +105,7 @@ async function migrate() {
       WHERE a.school_id IS NULL OR a.school_id = 1;
       CREATE INDEX IF NOT EXISTS idx_attendance_school_id ON attendance(school_id);
       CREATE INDEX IF NOT EXISTS idx_attendance_student_date ON attendance(student_id, date);
-    `).catch(() => {})
+    `)
     console.log('attendance table ready')
 
     await pool.query(`
@@ -140,7 +140,7 @@ async function migrate() {
       ALTER TABLE fee_challans ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
       CREATE INDEX IF NOT EXISTS idx_fee_challans_school_id ON fee_challans(school_id);
       CREATE INDEX IF NOT EXISTS idx_fee_challans_student_status ON fee_challans(student_id, status);
-    `).catch(() => {})
+    `)
     console.log('fee_challans table ready')
 
     await pool.query(`
@@ -164,7 +164,7 @@ async function migrate() {
       ALTER TABLE exams ALTER COLUMN class TYPE VARCHAR(50);
       CREATE INDEX IF NOT EXISTS idx_exams_school_id ON exams(school_id);
       CREATE INDEX IF NOT EXISTS idx_exams_school_class ON exams(school_id, class);
-    `).catch(() => {})
+    `)
     console.log('exams table ready')
 
     await pool.query(`
@@ -193,7 +193,7 @@ async function migrate() {
       WHERE er.school_id IS NULL OR er.school_id = 1;
       CREATE INDEX IF NOT EXISTS idx_exam_results_school_id ON exam_results(school_id);
       CREATE INDEX IF NOT EXISTS idx_exam_results_exam_student ON exam_results(exam_id, student_id);
-    `).catch(() => {})
+    `)
     console.log('exam_results table ready')
 
     await pool.query(`
@@ -215,7 +215,7 @@ async function migrate() {
     await pool.query(`
       ALTER TABLE employees ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
       CREATE INDEX IF NOT EXISTS idx_employees_school_id ON employees(school_id);
-    `).catch(() => {})
+    `)
     console.log('employees table ready')
 
     await pool.query(`
@@ -244,7 +244,7 @@ async function migrate() {
       ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS read_at TIMESTAMP;
       CREATE INDEX IF NOT EXISTS idx_notification_log_school_id ON notification_log(school_id);
       CREATE INDEX IF NOT EXISTS idx_notification_log_school_role_sent ON notification_log(school_id, recipient_role, sent_at DESC);
-    `).catch(() => {})
+    `)
     console.log('notification_log table ready')
 
     await pool.query(`
@@ -289,7 +289,7 @@ async function migrate() {
       CREATE INDEX IF NOT EXISTS idx_qbank_chapter ON question_bank(school_id, subject, chapter_name);
       CREATE INDEX IF NOT EXISTS idx_qbank_type ON question_bank(school_id, question_type);
       CREATE INDEX IF NOT EXISTS idx_qbank_approved ON question_bank(school_id, is_approved);
-    `).catch(() => {})
+    `)
     console.log('question_bank table ready')
 
     await pool.query(`
@@ -343,7 +343,7 @@ async function migrate() {
       ALTER TABLE online_classes ADD COLUMN IF NOT EXISTS timezone VARCHAR(64) DEFAULT 'Asia/Karachi';
       CREATE INDEX IF NOT EXISTS idx_online_classes_school_date ON online_classes(school_id, class_date);
       CREATE INDEX IF NOT EXISTS idx_online_classes_teacher_date ON online_classes(teacher_id, class_date);
-      `).catch(() => {})
+      `)
       console.log('online_classes table ready')
 
       await pool.query(`
@@ -362,7 +362,7 @@ async function migrate() {
         period_label   VARCHAR(120) DEFAULT '',
         created_at    TIMESTAMP DEFAULT NOW()
       )
-    `).catch(() => {})
+    `)
       await pool.query(`
         ALTER TABLE timetable ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
         ALTER TABLE timetable ADD COLUMN IF NOT EXISTS teacher_id INTEGER REFERENCES users(id);
@@ -376,7 +376,7 @@ async function migrate() {
         ALTER TABLE timetable ADD COLUMN IF NOT EXISTS room VARCHAR(80) DEFAULT '';
         ALTER TABLE timetable ADD COLUMN IF NOT EXISTS period_label VARCHAR(120) DEFAULT '';
         CREATE INDEX IF NOT EXISTS idx_timetable_school_teacher_day ON timetable(school_id, teacher_id, day_order, start_time);
-      `).catch(() => {})
+      `)
       console.log('timetable table ready')
 
       await pool.query(`
@@ -397,7 +397,7 @@ async function migrate() {
       ALTER TABLE events ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
       UPDATE events SET school_id = 1 WHERE school_id IS NULL OR school_id = 0;
       CREATE INDEX IF NOT EXISTS idx_events_school_date ON events(school_id, event_date);
-    `).catch(() => {})
+    `)
     console.log('events table ready')
 
     await pool.query(`
@@ -416,7 +416,7 @@ async function migrate() {
     await pool.query(`
       ALTER TABLE cards ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id) DEFAULT 1;
       CREATE INDEX IF NOT EXISTS idx_cards_school_id ON cards(school_id);
-    `).catch(() => {})
+    `)
     console.log('cards table ready')
 
     const adminSeedPassword = process.env.MIGRATE_ADMIN_SEED_PASSWORD || ''
