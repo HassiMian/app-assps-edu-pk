@@ -298,7 +298,7 @@ router.post('/single', protect, canSendNotifications, async (req, res) => {
     const twilioConfig = await getTwilioConfigForSchool(schoolId)
     const twilioClient = buildTwilioClient(twilioConfig)
     const result = await sendOne(phone, message, channel, twilioConfig, twilioClient)
-    res.json({ success: true, message: 'Message send ho gaya', ...result })
+    res.json({ success: true, status: 'accepted', message: 'Message accepted by the messaging provider; final delivery is not yet confirmed.', ...result })
   } catch (err) {
     console.error('Single notification send error:', err.message)
     const unavailable = ['Twilio not configured', 'TWILIO_SMS_FROM not set', 'TWILIO_WA_FROM not set'].includes(err.message)
@@ -405,7 +405,7 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
       let delivery
       try {
         const result = await sendOne(job.phone, job.message, channel, twilioConfig, twilioClient)
-        delivery = { phone: formatPhone(job.phone), status: 'sent', ...result }
+        delivery = { phone: formatPhone(job.phone), status: 'accepted', ...result }
       } catch (e) {
         delivery = { phone: formatPhone(job.phone), status: 'failed', channel: channel === 'auto' ? null : channel, error: e.message }
       }
@@ -439,9 +439,9 @@ router.post('/bulk', protect, canSendNotifications, async (req, res) => {
       results.push({ ...delivery, student_id: job.student_id || null, name: job.name || null })
     }
 
-    const sent = results.filter(r => r.status === 'sent').length
+    const accepted = results.filter(r => r.status === 'accepted').length
     const failed = results.filter(r => r.status === 'failed').length
-    res.json({ success: true, sent, failed, results })
+    res.json({ success: true, accepted, failed, results })
   } catch (err) {
     console.error('Bulk notification send error:', err.message)
     res.status(500).json({ success: false, message: 'Notification batch could not be processed.' })

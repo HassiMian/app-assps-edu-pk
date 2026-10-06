@@ -147,6 +147,18 @@ assertContains(
 
 
 assertNotContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  /status:\s*'sent',\s*\.\.\.result/,
+  'provider API acceptance must not be recorded as final message delivery.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  /messages sent successfully|sent, \${failedCount} failed/,
+  'notification UI must not present provider acceptance as final delivery.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/services/api.js',
   /DEMO_DATA|ALLOW_DEMO_FALLBACK|al_siddique_demo_|demo@assps\.edu\.pk/,
   'core API client must never synthesize demo business data.'
@@ -393,8 +405,8 @@ assertNotContains(
 
 assertContains(
   'al-siddique-frontend/src/Modules/attendance/SMSReport.jsx',
-  "const sent = Number(response.data?.sent || 0)",
-  'message retry UI must inspect the provider result before claiming success.'
+  "const accepted = Number(response.data?.accepted || 0)",
+  'message retry UI must inspect provider acceptance before reporting retry outcome.'
 )
 
 
@@ -2132,4 +2144,20 @@ assertNotContains(
   'al-siddique-backend/src/routes/settingsRoutes.js',
   /Failed to save base64 image:[\s\S]{0,100}return base64Str/,
   'branding image persistence failures must fail closed instead of storing the original data URI.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/usePaperStore.js',
+  /starter:\s*33|mover:\s*42|printsRequired:\s*prints|students:\s*prints/,
+  'paper save notifications must not invent class strength or print quantities.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/usePaperStore.js',
+  'setTenantStorageItem(NOTIFICATIONS_KEY',
+  'paper save notifications must be tenant scoped.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/usePaperStore.js',
+  /storage\?\.setItem\(NOTIFICATIONS_KEY/,
+  'paper save notifications must not use an unscoped browser key.'
 )

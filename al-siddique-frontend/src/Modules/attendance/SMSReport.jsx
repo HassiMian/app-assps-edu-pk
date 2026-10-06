@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from 'react'
 import api from '../../services/api'
 import { C, card, btnSecondary, select, labelStyle, sectionHeader } from '../moduleStyles'
 
-const STATUSES = ['All','Sent','Delivered','Queued','Failed']
+const STATUSES = ['All','Accepted','Sent','Delivered','Queued','Failed']
 
 function displayStatus(status) {
  const normalized = String(status || '').toLowerCase()
  if (normalized === 'delivered') return 'Delivered'
- if (['sent','accepted'].includes(normalized)) return 'Sent'
+ if (normalized === 'accepted') return 'Accepted'
+ if (normalized === 'sent') return 'Sent'
  if (['queued','pending'].includes(normalized)) return 'Queued'
  if (['failed','undelivered','error'].includes(normalized)) return 'Failed'
  return status || 'Unknown'
@@ -15,7 +16,8 @@ function displayStatus(status) {
 
 const badgeStyle = status => {
  if (status === 'Delivered') return { background:'color-mix(in srgb,var(--apex-action-success) 10%,transparent)', color:C.green }
- if (status === 'Sent') return { background:'color-mix(in srgb,var(--apex-action-primary) 10%,transparent)', color:'var(--apex-action-primary)' }
+ if (status === 'Accepted') return { background:'color-mix(in srgb,var(--apex-action-primary) 10%,transparent)', color:'var(--apex-action-primary)' }
+ if (status === 'Sent') return { background:'color-mix(in srgb,var(--apex-action-success) 10%,transparent)', color:C.green }
  if (status === 'Queued') return { background:'color-mix(in srgb,var(--apex-action-highlight) 10%,transparent)', color:'var(--apex-action-highlight)' }
  if (status === 'Failed') return { background:'color-mix(in srgb,var(--apex-action-danger) 10%,transparent)', color:C.red }
  return { background:'var(--apex-bg-subtle)', color:C.muted }
@@ -65,9 +67,9 @@ export default function SMSReport() {
  setRetryingId(item.id); setMessage('')
  try {
  const response = await api.post('/api/notify/bulk', { recipients:[{ phone:item.phone, message:item.message, student_id:item.student_id || null, name:item.recipient, title:item.title || 'School Notification', type:item.type || 'retry', recipient_role:item.metadata?.recipient_role || 'parent' }], channel:item.channel || 'auto' })
- const sent = Number(response.data?.sent || 0)
+ const accepted = Number(response.data?.accepted || 0)
  const failed = Number(response.data?.failed || 0)
- setMessage(failed > 0 ? `Retry failed for ${failed} message.` : sent > 0 ? 'Retry accepted by the messaging provider.' : 'Retry returned no delivery result.')
+ setMessage(failed > 0 ? `Retry failed for ${failed} message.` : accepted > 0 ? 'Retry accepted by the messaging provider; final delivery is pending verification.' : 'Retry returned no provider acceptance result.')
  await loadLogs()
  } catch (err) {
  setMessage(err.response?.data?.message || 'Retry failed.')
@@ -78,7 +80,7 @@ export default function SMSReport() {
  <div style={{ minHeight:'100vh', padding:24, background:'var(--apex-shell-gradient)', color:C.silver }}>
  <div style={{ maxWidth:1180, margin:'0 auto', display:'grid', gap:24 }}>
  <div className="super-module-card" style={{ ...card, display:'flex', flexWrap:'wrap', justifyContent:'space-between', gap:16 }}>
- <div><h1 style={sectionHeader}>SMS / WhatsApp Delivery Report</h1><p style={{ color:C.muted, marginTop:8 }}>Verified provider delivery ledger only; no fabricated message records.</p></div>
+ <div><h1 style={sectionHeader}>SMS / WhatsApp Delivery Report</h1><p style={{ color:C.muted, marginTop:8 }}>Provider status ledger only; provider acceptance is not presented as final delivery.</p></div>
  <button style={btnSecondary} onClick={()=>void loadLogs()} disabled={loading}>{loading?'Refreshing…':'Refresh'}</button>
  </div>
  <div className="super-module-card" style={{ ...card, display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))', gap:20, alignItems:'flex-end' }}>

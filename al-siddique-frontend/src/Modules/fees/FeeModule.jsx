@@ -1379,8 +1379,8 @@ function FeeReports({ challans, students }) {
  try {
  const message = `Fee reminder: ${student.name} has an outstanding school fee balance of Rs. ${Number(pending || 0).toLocaleString()}. Please contact the school office if payment has already been made.`
  const response = await api.post('/api/notify/bulk', { recipients:[{ phone:student.contact, message, student_id:student.id, name:student.name, title:'Fee Reminder', type:'fee_reminder', recipient_role:'parent' }], channel:'auto' })
- if (Number(response.data?.sent || 0) > 0) setSendMessage(`Fee reminder sent to ${student.name}.`)
- else setSendMessage(response.data?.results?.[0]?.error || `Fee reminder could not be delivered to ${student.name}.`)
+ if (Number(response.data?.accepted || 0) > 0) setSendMessage(`Fee reminder accepted by the messaging provider for ${student.name}; final delivery is pending verification.`)
+ else setSendMessage(response.data?.results?.[0]?.error || `Fee reminder was not accepted for ${student.name}.`)
  } catch (err) {
  setSendMessage(err.response?.data?.message || `Fee reminder could not be sent to ${student.name}.`)
  } finally { setSendingId(null) }
@@ -1396,8 +1396,8 @@ function FeeReports({ challans, students }) {
  setSendingId('all'); setSendMessage('')
  try {
  const response = await api.post('/api/notify/bulk', { recipients, channel:'auto' })
- const sent = Number(response.data?.sent || 0); const failed = Number(response.data?.failed || 0)
- setSendMessage(`Fee reminders processed: ${sent} sent${failed ? `, ${failed} failed` : ''}.`)
+ const accepted = Number(response.data?.accepted || 0); const failed = Number(response.data?.failed || 0)
+ setSendMessage(`Fee reminders processed: ${accepted} accepted by provider${failed ? `, ${failed} failed` : ''}; final delivery remains pending verification.`)
  } catch (err) { setSendMessage(err.response?.data?.message || 'Bulk fee reminders could not be sent.') }
  finally { setSendingId(null) }
  }

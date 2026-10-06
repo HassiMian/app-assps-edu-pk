@@ -153,15 +153,15 @@ export default function Messages() {
 
  <div className="super-module-card" style={{ ...card, overflowX: 'auto', borderRadius: 22 }}>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
- <thead><tr style={{ borderBottom: `1px solid ${C.border}` }}>{['Sent Date','Recipient','Subject','Status'].map(label => <th key={label} style={{ padding:'14px 16px', textAlign:'left', color:C.muted, fontSize:12, textTransform:'uppercase' }}>{label}</th>)}</tr></thead>
+ <thead><tr style={{ borderBottom: `1px solid ${C.border}` }}>{['Provider Date','Recipient','Subject','Status'].map(label => <th key={label} style={{ padding:'14px 16px', textAlign:'left', color:C.muted, fontSize:12, textTransform:'uppercase' }}>{label}</th>)}</tr></thead>
  <tbody>
  {messages.map((msg, index) => <tr key={msg.id} style={{ background:index % 2 ? 'var(--apex-bg-subtle)' : 'transparent' }}>
  <td style={{ padding:'14px 16px', color:C.gold }}>{msg.date}</td>
  <td style={{ padding:'14px 16px' }}>{msg.recipient}</td>
  <td style={{ padding:'14px 16px' }}>{msg.subject}</td>
- <td style={{ padding:'14px 16px' }}><span style={{ padding:'6px 12px', borderRadius:14, background:msg.status === 'sent' ? 'color-mix(in srgb, var(--apex-action-success) 10%, transparent)' : 'var(--apex-bg-subtle)', color:msg.status === 'sent' ? C.green : C.muted, fontWeight:700 }}>{msg.status}</span></td>
+ <td style={{ padding:'14px 16px' }}><span style={{ padding:'6px 12px', borderRadius:14, background:['sent','delivered'].includes(msg.status) ? 'color-mix(in srgb, var(--apex-action-success) 10%, transparent)' : msg.status === 'accepted' ? 'color-mix(in srgb, var(--apex-action-primary) 10%, transparent)' : 'var(--apex-bg-subtle)', color:['sent','delivered'].includes(msg.status) ? C.green : msg.status === 'accepted' ? 'var(--apex-action-primary)' : C.muted, fontWeight:700 }}>{msg.status}</span></td>
  </tr>)}
- {!messages.length && <tr><td colSpan={4} style={{ padding:28, textAlign:'center', color:C.muted }}>No verified message deliveries recorded yet.</td></tr>}
+ {!messages.length && <tr><td colSpan={4} style={{ padding:28, textAlign:'center', color:C.muted }}>No provider message status records are available yet.</td></tr>}
  </tbody>
  </table>
  </div>

@@ -96,12 +96,12 @@ function PreviewModal({ messages, onClose, onSend, sending }) {
 //  Log Item 
 
 function LogItem({ log }) {
- const statusColor = { sent: '#30D158', failed: '#FF375F', pending: '#FF9F0A' }
+ const statusColor = { accepted: '#0A84FF', sent: '#30D158', delivered: '#30D158', failed: '#FF375F', pending: '#FF9F0A', queued: '#FF9F0A' }
  const channelIcon = log.channel === 'whatsapp' ? <MessageCircle size={13} /> : <Smartphone size={13} />
  return (
  <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', borderRadius: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
  <div style={{ color: statusColor[log.status] }}>
- {log.status === 'sent' ? <CheckCircle size={16} /> : log.status === 'failed' ? <XCircle size={16} /> : <Clock size={16} />}
+ {['sent','delivered'].includes(log.status) ? <CheckCircle size={16} /> : log.status === 'failed' ? <XCircle size={16} /> : <Clock size={16} />}
  </div>
  <div style={{ flex: 1 }}>
  <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{log.name}</div>
@@ -318,10 +318,10 @@ export default function NotificationModule() {
  message: preview[index]?.message || '',
  }))
  setLog(prev => [...newLogs, ...prev])
- const sentCount = Number(res.data?.sent || 0)
+ const acceptedCount = Number(res.data?.accepted || 0)
  const failedCount = Number(res.data?.failed || 0)
- if (failedCount > 0) showToast(`${sentCount} sent, ${failedCount} failed. Open Delivery Log for verified status.`, '#FF9F0A')
- else showToast(`${sentCount} messages sent successfully!`)
+ if (failedCount > 0) showToast(`${acceptedCount} accepted by provider, ${failedCount} failed. Open Provider Status Log for details.`, '#FF9F0A')
+ else showToast(`${acceptedCount} messages accepted by the provider; final delivery is not yet confirmed.`)
  } catch (err) {
  showToast(err?.response?.data?.message || err?.message || 'Notification send failed.', '#FF375F')
  }
@@ -413,7 +413,7 @@ export default function NotificationModule() {
  {activeTab === 'log' ? (
  <div className="super-module-card" style={{ ...card, padding: 20, borderRadius: 22 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
- <h3 style={{ color: 'var(--apex-action-primary)', margin: 0 }}>Verified Delivery Log</h3>
+ <h3 style={{ color: 'var(--apex-action-primary)', margin: 0 }}>Provider Status Log</h3>
  {log.length > 0 && <Btn variant="ghost" size="sm" onClick={() => setLog([])}><X size={13} /> Hide Loaded Log</Btn>}
  </div>
  {log.length === 0
