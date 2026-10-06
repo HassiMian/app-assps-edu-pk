@@ -14,6 +14,19 @@ const { resolveAcademicAssignment } = require('../services/academicAssignmentGua
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
 
+async function requireStudentWriteContext(req, res) {
+  const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for student changes.' })
+    return null
+  }
+  if (!(await hasColumn('students', 'school_id').catch(() => false))) {
+    res.status(503).json({ success: false, code: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for writes.' })
+    return null
+  }
+  return schoolId
+}
+
 const CLASS_ALIASES = {
   starter: 'Starter',
   mover: 'Mover',
@@ -799,20 +812,17 @@ router.post('/bulk-class-assignment', protect, adminOnly, async (req, res) => {
 // PUT /api/students/:id — partial, tenant-safe update
 router.put('/:id', protect, adminOnly, async (req, res) => {
   try {
-    const schoolId = currentSchoolId(req)
-    const supportsTenant = await hasColumn('students', 'school_id')
+    const schoolId = await requireStudentWriteContext(req, res)
+    if (!schoolId) return
     const studentId = Number(req.params.id)
     if (!Number.isInteger(studentId) || studentId <= 0) {
       return res.status(400).json({ success: false, message: 'Valid student id is required.' })
     }
 
-    const currentSql = supportsTenant && req.user?.role !== 'super_admin'
-      ? 'SELECT * FROM students WHERE id = $1 AND school_id = $2 LIMIT 1'
-      : 'SELECT * FROM students WHERE id = $1 LIMIT 1'
-    const currentParams = supportsTenant && req.user?.role !== 'super_admin'
-      ? [studentId, schoolId]
-      : [studentId]
-    const currentResult = await query(currentSql, currentParams)
+    const currentResult = await query(
+      'SELECT * FROM students WHERE id = $1 AND school_id = $2 LIMIT 1',
+      [studentId, schoolId]
+    )
     const current = currentResult.rows[0]
     if (!current) return res.status(404).json({ success: false, message: 'Student nahi mila' })
 
@@ -880,11 +890,10 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
 
     assignments.push('updated_at = NOW()')
     values.push(studentId)
-    let where = `id = $${paramIndex++}`
-    if (supportsTenant && req.user?.role !== 'super_admin') {
-      values.push(schoolId)
-      where += ` AND school_id = $${paramIndex++}`
-    }
+    const studentParam = paramIndex++
+    values.push(schoolId)
+    const schoolParam = paramIndex++
+    const where = `id = $${studentParam} AND school_id = $${schoolParam}`
 
     const result = await query(`
       UPDATE students
@@ -904,40 +913,67 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
   }
 })
 
-// DELETE /api/students/:id
+// DELETE /api/students/:id — school-scoped deactivate or transactional permanent purge
 router.delete('/:id', protect, adminOnly, async (req, res) => {
+  const schoolId = await requireStudentWriteContext(req, res)
+  if (!schoolId) return
+  const studentId = Number(req.params.id)
+  if (!Number.isInteger(studentId) || studentId <= 0) {
+    return res.status(400).json({ success: false, message: 'Valid student id is required.' })
+  }
+  const permanent = req.query.permanent === 'true'
+
+  if (!permanent) {
+    try {
+      const result = await query(
+        'UPDATE students SET is_active = false, updated_at = NOW() WHERE id = $1 AND school_id = $2 RETURNING id',
+        [studentId, schoolId]
+      )
+      if (!result.rowCount) return res.status(404).json({ success: false, message: 'Student not found.' })
+      return res.json({ success: true, message: 'Student deactivated successfully.' })
+    } catch (err) {
+      console.error('Student deactivate error:', err.message)
+      return res.status(500).json({ success: false, message: 'Student could not be deactivated.' })
+    }
+  }
+
+  const client = await pool.connect()
   try {
-    const supportsTenant = await hasColumn('students', 'school_id')
-    const permanent = req.query.permanent === 'true'
-    const schoolId = currentSchoolId(req)
-    const studentId = req.params.id
-
-    if (permanent) {
-      // Clean non-cascading foreign keys safely
-      await query('DELETE FROM cards WHERE student_id = $1', [studentId]).catch(() => {})
-      await query('DELETE FROM notification_log WHERE student_id = $1', [studentId]).catch(() => {})
-      await query('DELETE FROM online_exam_attempts WHERE student_id = $1', [studentId]).catch(() => {})
-
-      const sql = supportsTenant && req.user?.role !== 'super_admin'
-        ? 'DELETE FROM students WHERE id = $1 AND school_id = $2'
-        : 'DELETE FROM students WHERE id = $1'
-      const params = supportsTenant && req.user?.role !== 'super_admin'
-        ? [studentId, schoolId]
-        : [studentId]
-      await query(sql, params)
-      return res.json({ success: true, message: 'Student permanently delete ho gaya' })
+    await client.query('BEGIN')
+    const locked = await client.query(
+      'SELECT id, student_user_id, parent_user_id FROM students WHERE id = $1 AND school_id = $2 FOR UPDATE',
+      [studentId, schoolId]
+    )
+    if (!locked.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Student not found.' })
     }
 
-    const sql = supportsTenant && req.user?.role !== 'super_admin'
-      ? 'UPDATE students SET is_active = false WHERE id = $1 AND school_id = $2'
-      : 'UPDATE students SET is_active = false WHERE id = $1'
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [studentId, schoolId]
-      : [studentId]
-    await query(sql, params)
-    res.json({ success: true, message: 'Student delete ho gaya' })
+    const cleanup = [
+      ['cards', 'student_id'],
+      ['notification_log', 'student_id'],
+      ['online_exam_attempts', 'student_id'],
+      ['exam_results', 'student_id'],
+      ['attendance', 'student_id'],
+      ['fee_payment_transactions', 'student_id'],
+      ['fee_challans', 'student_id'],
+      ['student_fee_profiles', 'student_id'],
+    ]
+    for (const [table, column] of cleanup) {
+      if (await hasColumn(table, column).catch(() => false)) {
+        await client.query(`DELETE FROM ${table} WHERE ${column} = $1`, [studentId])
+      }
+    }
+
+    await client.query('DELETE FROM students WHERE id = $1 AND school_id = $2', [studentId, schoolId])
+    await client.query('COMMIT')
+    return res.json({ success: true, message: 'Student permanently deleted.' })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Permanent student deletion error:', err.message)
+    return res.status(500).json({ success: false, message: 'Student could not be permanently deleted.' })
+  } finally {
+    client.release()
   }
 })
 

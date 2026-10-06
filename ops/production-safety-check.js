@@ -897,6 +897,25 @@ assertContains(
   'fee profile migration must be safe on a fresh database.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  "code: 'STUDENT_TENANT_SCHEMA_REQUIRED'",
+  'student mutations must fail closed unless student storage is school scoped.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  /UPDATE students SET is_active = false WHERE id = \$1['"]|DELETE FROM students WHERE id = \$1['"]/,
+  'student update/delete mutations must never use unscoped legacy paths.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/studentRoutes.js',
+  'SELECT id, student_user_id, parent_user_id FROM students WHERE id = $1 AND school_id = $2 FOR UPDATE',
+  'permanent student deletion must lock and verify the school-scoped student transactionally.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
