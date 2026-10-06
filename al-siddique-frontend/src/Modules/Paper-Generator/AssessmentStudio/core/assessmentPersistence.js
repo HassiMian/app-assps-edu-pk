@@ -1,6 +1,5 @@
 import api from '../../../../services/api.js'
 import { getTenantStorageItem, setTenantStorageItem } from '../../../../services/tenantStorage.js'
-import { markPaperServerRecovered } from '../../usePaperStore.js'
 
 const QUEUE_KEY = 'assps_assessment_studio_offline_queue_v1'
 const clone = value => JSON.parse(JSON.stringify(value))
@@ -23,6 +22,18 @@ function enqueue(operation) {
 }
 
 export function getAssessmentOfflineQueue() { return queue() }
+
+export function bindQueuedAssessmentSave(queueId, localPaperId) {
+  if (!queueId || !localPaperId) return false
+  const items=queue(); let changed=false
+  const next=items.map(item=>{
+    if (item.id!==queueId) return item
+    changed=true
+    return { ...item, localPaperId:String(localPaperId) }
+  })
+  if (changed) writeQueue(next)
+  return changed
+}
 
 export async function saveAssessmentRevision({ paperId, expectedRevision = 0, title = '', document, allowQueue = true }) {
   try {
@@ -58,8 +69,7 @@ export async function flushAssessmentOfflineQueue() {
     try {
       const result = await saveAssessmentRevision({ paperId:item.paperId, expectedRevision:item.expectedRevision, title:item.title, document:item.document, allowQueue:false })
       flushed += 1
-      markPaperServerRecovered(item.paperId, Number(item.expectedRevision||0)+1)
-      synced.push({ paperId:item.paperId, data:result.data })
+      synced.push({ paperId:item.paperId, localPaperId:item.localPaperId || null, data:result.data })
     } catch (error) {
       if (error?.code === 'REVISION_CONFLICT') conflicts += 1
       remaining.push({ ...item, attempts:Number(item.attempts||0)+1, lastAttemptAt:new Date().toISOString(), lastError:error?.code || error?.message || 'RETRY_FAILED' })

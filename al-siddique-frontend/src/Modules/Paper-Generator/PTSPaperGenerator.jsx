@@ -21,7 +21,7 @@ import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normaliz
 import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
 import { createBlankPaperDraft } from './paperCreationDraft.js'
 import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
-import { AssessmentRevisionConflictError, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
+import { AssessmentRevisionConflictError, bindQueuedAssessmentSave, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
 
 function storeQToTemplate(q) {
  return {
@@ -639,7 +639,10 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   if (!loadedPaper?.userAuthored) return undefined
   const retry = () => flushAssessmentOfflineQueue().then(result => {
    const serverPaperId = loadedPaper?.serverPaperId || paper?.serverPaperId || loadedPaper?.canonicalDocument?.id
-   const synced = result.synced?.find(item => item.paperId === serverPaperId)
+   const synced = result.synced?.find(item =>
+    (item.localPaperId && String(item.localPaperId)===String(persistedPaperIdRef.current)) ||
+    (serverPaperId && item.paperId===serverPaperId)
+   )
    if (synced && persistedPaperIdRef.current) {
     const recovered = updateSavedPaper(persistedPaperIdRef.current, {
      serverRevision:Number(synced.data?.currentRevision || 0), serverContentHash:synced.data?.contentHash || null,
@@ -968,6 +971,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const saved = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, payload) : savePaper(payload)
  if (saved?.id) persistedPaperIdRef.current = saved.id
  if (!saved) return null
+ if (persistence?.degraded && persistence?.queueId) bindQueuedAssessmentSave(persistence.queueId, saved.id)
  onPaperChange(current => ({ ...current, serverRevision:saved.serverRevision, serverContentHash:saved.serverContentHash, persistenceAuthority:saved.persistenceAuthority, persistenceMode:saved.persistenceMode }))
  const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
   name: overrideConfig?.subjectName || overrideConfig?.subject || subjectName || '',
