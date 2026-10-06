@@ -1123,6 +1123,23 @@ assertNotContains(
   'Daily Diary updates and deletes must be scoped by school_id in SQL.'
 )
 
+
+for (const routeFile of [
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'al-siddique-backend/src/routes/admissionsRoutes.js',
+]) {
+  assertNotContains(
+    routeFile,
+    /const\s+pool\s*=\s*require\(['"]\.\.\/config\/database['"]\)/,
+    `${routeFile} must import the actual pg Pool instance instead of the database module object.`
+  )
+  assertContains(
+    routeFile,
+    "const { pool } = require('../config/database')",
+    `${routeFile} must use the shared pg Pool export.`
+  )
+}
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

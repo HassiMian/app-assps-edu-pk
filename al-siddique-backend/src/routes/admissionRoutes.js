@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
-const pool    = require('../config/database')
+const { pool } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const {

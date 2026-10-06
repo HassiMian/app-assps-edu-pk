@@ -1,6 +1,6 @@
 const express = require('express')
 const router  = express.Router()
-const pool    = require('../config/database')
+const { pool } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, hasColumn } = require('../middleware/tenant')
 
