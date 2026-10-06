@@ -5,6 +5,7 @@ const { currentSchoolId } = require('../middleware/tenant')
 const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
+const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -30,6 +31,21 @@ router.get('/canonical-readiness', async (req,res) => {
   }
 })
 
+
+
+router.post('/publisher-review/validate', express.json({limit:'256kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=validateReviewBundle(req.body||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,persisted:false,approvalChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    console.error('Paper Studio publisher review validation error:',err.message)
+    return res.status(500).json({success:false,message:'Publisher review bundle could not be validated.'})
+  }
+})
 
 router.get('/canonical-canary/:id/preflight', async (req,res) => {
   try {
