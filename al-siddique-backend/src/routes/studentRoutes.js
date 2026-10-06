@@ -814,51 +814,110 @@ router.delete('/:id/portal-accounts/:role', protect, adminOnly, async (req, res)
   }
 })
 
-// PUT /api/students/:id
+// PUT /api/students/:id — partial, tenant-safe update
 router.put('/:id', protect, adminOnly, async (req, res) => {
   try {
-    const {
-      name, father_name, mother_name, class: cls, section,
-      roll_number, date_of_birth, gender, address, parent_phone, parent_whatsapp, photo,
-      family_code, father_cnic, is_active
-    } = req.body
-
     const schoolId = currentSchoolId(req)
-    const academicAssignment = await resolveAcademicAssignment({
-      schoolId,
-      className: normalizeClassName(cls),
-      section: section || 'Blue',
-    })
     const supportsTenant = await hasColumn('students', 'school_id')
-    const sql = `
-      UPDATE students SET
-        name=$1, father_name=$2, mother_name=$3, class=$4, section=$5,
-        roll_number=$6, date_of_birth=$7, gender=$8, address=$9,
-        parent_phone=$10, parent_whatsapp=$11, photo=$12,
-        family_code=COALESCE($13, family_code),
-        father_cnic=COALESCE($14, father_cnic),
-        is_active=COALESCE($15, is_active),
-        updated_at=NOW()
-      WHERE id=$16
-        ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $17' : ''}
-      RETURNING *
-    `
-    const params = [
-      name, father_name, mother_name, academicAssignment.className, academicAssignment.section, roll_number,
-      date_of_birth, gender, address, parent_phone, parent_whatsapp, photo,
-      family_code || null, father_cnic || null, is_active !== undefined ? is_active : null,
-      req.params.id
+    const studentId = Number(req.params.id)
+    if (!Number.isInteger(studentId) || studentId <= 0) {
+      return res.status(400).json({ success: false, message: 'Valid student id is required.' })
+    }
+
+    const currentSql = supportsTenant && req.user?.role !== 'super_admin'
+      ? 'SELECT * FROM students WHERE id = $1 AND school_id = $2 LIMIT 1'
+      : 'SELECT * FROM students WHERE id = $1 LIMIT 1'
+    const currentParams = supportsTenant && req.user?.role !== 'super_admin'
+      ? [studentId, schoolId]
+      : [studentId]
+    const currentResult = await query(currentSql, currentParams)
+    const current = currentResult.rows[0]
+    if (!current) return res.status(404).json({ success: false, message: 'Student nahi mila' })
+
+    const body = req.body || {}
+    const hasOwn = key => Object.prototype.hasOwnProperty.call(body, key)
+    const requestedClassRaw = hasOwn('class') ? body.class : current.class
+    const requestedSectionRaw = hasOwn('section') ? body.section : current.section
+    let academicAssignment = null
+    if (hasOwn('class') || hasOwn('section')) {
+      academicAssignment = await resolveAcademicAssignment({
+        schoolId: current.school_id || schoolId,
+        className: normalizeClassName(requestedClassRaw),
+        section: requestedSectionRaw == null ? '' : String(requestedSectionRaw),
+      })
+    }
+
+    const candidateFields = [
+      ['name', 'name'],
+      ['father_name', 'father_name'],
+      ['mother_name', 'mother_name'],
+      ['roll_number', 'roll_number'],
+      ['date_of_birth', 'date_of_birth'],
+      ['gender', 'gender'],
+      ['address', 'address'],
+      ['parent_phone', 'parent_phone'],
+      ['parent_whatsapp', 'parent_whatsapp'],
+      ['photo', 'photo'],
+      ['family_code', 'family_code'],
+      ['father_cnic', 'father_cnic'],
+      ['father_occupation', 'father_occupation'],
+      ['locality', 'locality'],
+      ['b_form', 'b_form'],
+      ['b_form_number', 'b_form'],
+      ['emergency_contact', 'emergency_contact'],
+      ['previous_school', 'previous_school'],
+      ['remarks', 'remarks'],
+      ['blood_group', 'blood_group'],
+      ['religion', 'religion'],
+      ['is_active', 'is_active'],
     ]
-    if (supportsTenant && req.user?.role !== 'super_admin') params.push(currentSchoolId(req))
-    const result = await query(sql, params)
 
-    if (result.rows.length === 0)
-      return res.status(404).json({ success: false, message: 'Student nahi mila' })
+    const assignments = []
+    const values = []
+    const usedColumns = new Set()
+    let paramIndex = 1
+    const addAssignment = async (column, value) => {
+      if (usedColumns.has(column)) return
+      if (!(await hasColumn('students', column).catch(() => false))) return
+      usedColumns.add(column)
+      assignments.push(`${column} = $${paramIndex++}`)
+      values.push(value === '' ? null : value)
+    }
 
+    for (const [bodyKey, column] of candidateFields) {
+      if (hasOwn(bodyKey)) await addAssignment(column, body[bodyKey])
+    }
+    if (academicAssignment) {
+      await addAssignment('class', academicAssignment.className)
+      await addAssignment('section', academicAssignment.section)
+    }
+
+    if (!assignments.length) {
+      return res.json({ success: true, message: 'No student fields changed', data: current })
+    }
+
+    assignments.push('updated_at = NOW()')
+    values.push(studentId)
+    let where = `id = $${paramIndex++}`
+    if (supportsTenant && req.user?.role !== 'super_admin') {
+      values.push(schoolId)
+      where += ` AND school_id = $${paramIndex++}`
+    }
+
+    const result = await query(`
+      UPDATE students
+      SET ${assignments.join(', ')}
+      WHERE ${where}
+      RETURNING *
+    `, values)
+
+    if (!result.rowCount) return res.status(404).json({ success: false, message: 'Student nahi mila' })
     res.json({ success: true, message: 'Student update ho gaya', data: result.rows[0] })
   } catch (err) {
-    if (err.status === 422)
+    if (err.status === 422) {
       return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
+    }
+    console.error('Student update error:', err.message)
     res.status(500).json({ success: false, message: err.message })
   }
 })

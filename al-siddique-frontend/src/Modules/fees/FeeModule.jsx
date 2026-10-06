@@ -45,7 +45,7 @@ const normalizeChallan = (item, students = []) => {
  father: item.father_name || item.father || student?.father || '',
  gr: item.gr_number || item.gr || student?.gr || '',
  class: item.class || student?.class || '',
- section: item.section || student?.section || 'Blue',
+ section: item.section || student?.section || '',
  familyCode: item.familyCode || student?.familyCode || '—',
  contact: item.parent_phone || item.contact || student?.contact || '',
  month: item.month || '',
