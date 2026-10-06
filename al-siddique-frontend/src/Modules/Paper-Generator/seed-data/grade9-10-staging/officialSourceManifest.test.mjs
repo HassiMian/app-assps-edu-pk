@@ -65,3 +65,15 @@ test('Grade X current catalogue refresh preserves unresolved medium/session fact
  assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-018').edition,'CURRENT_CATALOG_LABEL_NO_SESSION');
  assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-019').edition,'CURRENT_CATALOG_LABEL_NO_SESSION');
 });
+
+test('Grade IX Matric-Tech catalogue identities are expanded without collapsing media or similarly named subjects',()=>{
+ const tech=m.entries.filter(x=>x.grade===9&&x.curriculumTrack==='MATRIC_TECH');
+ assert.equal(tech.length,17);
+ assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech IX'),false);
+ assert(tech.some(x=>x.subject==='Computer-Tech'));
+ assert(tech.some(x=>x.subject==='Computer Science & Entrepreneurship-Tech'));
+ assert.notEqual(tech.find(x=>x.subject==='Computer-Tech').catalogAssetUrl,tech.find(x=>x.subject==='Computer Science & Entrepreneurship-Tech').catalogAssetUrl);
+ const bio=tech.filter(x=>x.subject==='Biology-Tech');assert.deepEqual(new Set(bio.map(x=>x.medium)),new Set(['English','Urdu']));
+ const physics=tech.filter(x=>x.subject==='Physics-Tech');assert.deepEqual(new Set(physics.map(x=>x.medium)),new Set(['English','Urdu']));
+});
