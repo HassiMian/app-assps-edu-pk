@@ -97,6 +97,25 @@ assertContains(
   'notification delivery log must use the durable backend history source.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/services/api.js',
+  /DEMO_DATA|ALLOW_DEMO_FALLBACK|al_siddique_demo_|demo@assps\.edu\.pk/,
+  'core API client must never synthesize demo business data.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/context/AuthContext.jsx',
+  /local_|getUserByUsername|useUserStore/,
+  'authentication must never accept browser-local credentials or local tokens.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/main.jsx',
+  /demoSeeder|seedPaperStore/,
+  'application startup must not seed demo academic or paper data.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
