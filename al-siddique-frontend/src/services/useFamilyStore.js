@@ -1,16 +1,9 @@
 // Server-backed family grouping store. Browser storage is cache only; student.family_code is canonical.
 import { useCallback, useEffect, useState } from 'react'
 import api from './api'
+import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
 const STORE_KEY = 'al_siddique_families_v2_cache'
-
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
-}
 
 function normalizeId(value) {
  if (value === null || value === undefined) return ''
@@ -39,7 +32,7 @@ function normalizeFamilies(value) {
 
 function loadCache() {
  try {
- const raw = getStorage()?.getItem(STORE_KEY)
+ const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy:true, removeLegacyOnMigrate:true })
  return normalizeFamilies(raw ? JSON.parse(raw) : [])
  } catch {
  return []
@@ -47,7 +40,7 @@ function loadCache() {
 }
 
 function saveCache(families) {
- try { getStorage()?.setItem(STORE_KEY, JSON.stringify(families)) } catch { /* cache writes are best-effort only */ }
+ try { setTenantStorageItem(STORE_KEY, JSON.stringify(families)) } catch { /* cache writes are best-effort only */ }
 }
 
 export function useFamilyStore() {

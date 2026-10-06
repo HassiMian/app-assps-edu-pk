@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { GraduationCap, Plus, Trash2, Edit2, Check, X, Building2 } from 'lucide-react'
 import api from '../../services/api'
+import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 
 function slugifyLevel(name) {
   const clean = String(name || '').toLowerCase().trim()
@@ -14,16 +15,7 @@ function slugifyLevel(name) {
 //  Academic data (classes, subjects, calendar) stored separately 
 const AK = 'al_siddique_academic'
 
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
-}
-
 const DEFAULT_ACADEMIC = {
- periodsPerDay: 8,
  localities: ['Rayya Khas', 'Tharpal Sharif', 'Garoowal', 'Matteke', 'Fattoke', 'Jeewan Bhinder', 'Kulla Mandiala', 'Baddomalhi', 'Narowal', 'Lahore'],
  classes: [
  { level:'starter', name:'Starter', active:true, sections:['Blue'] },
@@ -66,13 +58,6 @@ const DEFAULT_ACADEMIC = {
  ],
 }
 
-const REAL_CLASS_NAMES = DEFAULT_ACADEMIC.classes.map(cls => cls.name)
-
-function isLegacyDefaultClass(cls) {
- const name = String(cls?.name || '')
- return !REAL_CLASS_NAMES.includes(name) || ['Nursery', 'KG', 'Play Group', 'Prep'].includes(name) || /^Class\s+\d+$/i.test(name)
-}
-
 function mergeClasses(savedClasses = []) {
   if (!Array.isArray(savedClasses) || savedClasses.length === 0) {
     return DEFAULT_ACADEMIC.classes
@@ -87,7 +72,7 @@ function mergeClasses(savedClasses = []) {
 
 function loadAcademic() {
   try {
-    const saved = JSON.parse(getStorage()?.getItem(AK))
+    const saved = JSON.parse(getTenantStorageItem(AK, { migrateLegacy:true, removeLegacyOnMigrate:true }))
     if (!saved) return DEFAULT_ACADEMIC
     return {
       ...DEFAULT_ACADEMIC,
@@ -99,8 +84,7 @@ function loadAcademic() {
   catch { return DEFAULT_ACADEMIC }
 }
 function saveAcademic(d) {
-  const storage = getStorage()
-  try { storage?.setItem(AK, JSON.stringify(d)) } catch {}
+  try { setTenantStorageItem(AK, JSON.stringify(d)) } catch { /* cache writes are best-effort only */ }
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new Event('storage'))
   }

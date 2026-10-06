@@ -1,15 +1,17 @@
+import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
+
 const KEY = 'assps_fee_workflow_v1'
 
 function read() {
   try {
-    return JSON.parse(localStorage.getItem(KEY) || '{}')
+    return JSON.parse(getTenantStorageItem(KEY, { migrateLegacy:true, removeLegacyOnMigrate:true }) || '{}')
   } catch {
     return {}
   }
 }
 
 function write(data) {
-  localStorage.setItem(KEY, JSON.stringify(data))
+  setTenantStorageItem(KEY, JSON.stringify(data))
 }
 
 function pushUnique(list = [], entry, max = 8) {

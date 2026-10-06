@@ -4,6 +4,7 @@ import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../services
 import { useStudentStore } from '../services/useStudentStore'
 import { usePaperStore } from './Paper-Generator/usePaperStore'
 import api from '../services/api'
+import { getTenantStorageItem, setTenantStorageItem } from '../services/tenantStorage'
 import {
   FINAL_EXAM_PAPER_TIME,
   FINAL_EXAM_SEED_KEY,
@@ -28,24 +29,15 @@ const TEMPLATES = [
 ]
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-function getStorage() {
-  try {
-    return typeof window !== 'undefined' ? window.localStorage : null
-  } catch {
-    return null
-  }
-}
-
 function readSheets() {
   try {
-    const storage = getStorage()
-    const saved = JSON.parse(storage?.getItem(STORE_KEY) || '[]')
+    const saved = JSON.parse(getTenantStorageItem(STORE_KEY, { migrateLegacy:true, removeLegacyOnMigrate:true }) || '[]')
     const rows = Array.isArray(saved) ? saved : []
-    if (storage?.getItem(FINAL_EXAM_SEED_KEY) === FINAL_EXAM_SEED_VERSION) return rows
+    if (getTenantStorageItem(FINAL_EXAM_SEED_KEY, { migrateLegacy:true, removeLegacyOnMigrate:true }) === FINAL_EXAM_SEED_VERSION) return rows
     const seeded = mergeFinalExamRows(rows)
     if (validateFinalExamRows(seeded).length) return rows
-    storage?.setItem(STORE_KEY, JSON.stringify(seeded))
-    storage?.setItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
+    setTenantStorageItem(STORE_KEY, JSON.stringify(seeded))
+    setTenantStorageItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
     return seeded
   } catch {
     return []
@@ -53,8 +45,7 @@ function readSheets() {
 }
 
 function writeSheets(rows) {
-  const storage = getStorage()
-  try { storage?.setItem(STORE_KEY, JSON.stringify(rows)) } catch {
+  try { setTenantStorageItem(STORE_KEY, JSON.stringify(rows)) } catch {
     // localStorage can be blocked in private/restricted browser contexts.
   }
 }
@@ -500,7 +491,7 @@ export default function DateSheet() {
       const cleaned = sheets.filter(s => !(s.session === FINAL_EXAM_SESSION && s.term === FINAL_EXAM_TERM))
       const combined = [...cleaned, ...savedRows]
       writeSheets(combined)
-      getStorage()?.setItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
+      setTenantStorageItem(FINAL_EXAM_SEED_KEY, FINAL_EXAM_SEED_VERSION)
       setSheets(combined)
       setSession(FINAL_EXAM_SESSION)
       setTerm(FINAL_EXAM_TERM)

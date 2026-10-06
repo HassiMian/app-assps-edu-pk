@@ -1,15 +1,8 @@
 import { useState, useEffect } from 'react'
 import api from './api'
+import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
 const AK = 'al_siddique_academic'
-
-function getStorage() {
- try {
- return typeof window !== 'undefined' ? window.localStorage : null
- } catch {
- return null
- }
-}
 
 const DEFAULT_ACADEMIC = {
  periodsPerDay: 8,
@@ -119,13 +112,6 @@ export function sortClassLevels(levels = []) {
  })
 }
 
-const REAL_CLASS_NAMES = DEFAULT_ACADEMIC.classes.map(cls => cls.name)
-
-function isLegacyDefaultClass(cls) {
- const name = String(cls?.name || '')
- return !REAL_CLASS_NAMES.includes(name) || ['Nursery', 'KG', 'Play Group', 'Prep'].includes(name) || /^Class\s+\d+$/i.test(name)
-}
-
 function mergeByName(defaultItems, savedItems = []) {
   if (Array.isArray(savedItems) && savedItems.length > 0) {
     return savedItems.map((item, idx) => ({
@@ -140,7 +126,7 @@ function mergeByName(defaultItems, savedItems = []) {
 
 function load() {
  try {
- const raw = getStorage()?.getItem(AK)
+ const raw = getTenantStorageItem(AK, { migrateLegacy:true, removeLegacyOnMigrate:true })
  if (!raw) return DEFAULT_ACADEMIC
  const saved = JSON.parse(raw)
  const localities = Array.isArray(saved.localities) ? [...new Set([...DEFAULT_ACADEMIC.localities, ...saved.localities])] : DEFAULT_ACADEMIC.localities
@@ -216,8 +202,7 @@ export function useAcademicStore() {
         ...updates,
         classes: Array.isArray(updates.classes) ? updates.classes : prev.classes,
       }
-      const storage = getStorage()
-      try { storage?.setItem(AK, JSON.stringify(next)) } catch { /* browser cache is best-effort only */ }
+      try { setTenantStorageItem(AK, JSON.stringify(next)) } catch { /* browser cache is best-effort only */ }
       window.dispatchEvent(new Event('storage'))
       void api.put('/api/academic/setup', next).catch(async (error) => {
         console.error('Academic setup sync failed', error)
@@ -225,7 +210,7 @@ export function useAcademicStore() {
           const response = await api.get('/api/academic/setup')
           if (response.data?.configured && response.data?.data) {
             setData(response.data.data)
-            try { storage?.setItem(AK, JSON.stringify(response.data.data)) } catch { /* cache only */ }
+            try { setTenantStorageItem(AK, JSON.stringify(response.data.data)) } catch { /* cache only */ }
           }
         } catch { /* keep last visible value and surface the sync error */ }
         window.dispatchEvent(new CustomEvent('academic-setup:sync-error'))
@@ -254,7 +239,7 @@ export function useAcademicStore() {
  subjects: Array.isArray(serverData.subjects) ? serverData.subjects : DEFAULT_ACADEMIC.subjects,
  }
  if (!cancelled) setData(next)
- try { getStorage()?.setItem(AK, JSON.stringify(next)) } catch {}
+ try { setTenantStorageItem(AK, JSON.stringify(next)) } catch { /* cache writes are best-effort only */ }
  return
  }
  } catch {

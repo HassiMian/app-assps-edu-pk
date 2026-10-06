@@ -44,7 +44,7 @@ export function tenantStorageKey(baseKey, user) {
  return scope === 'public' ? baseKey : `${baseKey}__${scope}`
 }
 
-export function getTenantStorageItem(baseKey, { migrateLegacy = false } = {}) {
+export function getTenantStorageItem(baseKey, { migrateLegacy = false, removeLegacyOnMigrate = false } = {}) {
  const storage = getStorage()
  if (!storage) return null
  const scopedKey = tenantStorageKey(baseKey)
@@ -54,7 +54,10 @@ export function getTenantStorageItem(baseKey, { migrateLegacy = false } = {}) {
  if (!migrateLegacy || scopedKey === baseKey) return null
  const legacyValue = storage.getItem(baseKey)
  if (legacyValue !== null) {
- try { storage.setItem(scopedKey, legacyValue) } catch {}
+ try {
+ storage.setItem(scopedKey, legacyValue)
+ if (removeLegacyOnMigrate) storage.removeItem(baseKey)
+ } catch { /* legacy migration is best-effort */ }
  return legacyValue
  }
 
