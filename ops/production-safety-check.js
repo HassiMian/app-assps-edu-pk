@@ -1018,6 +1018,18 @@ for (const uiFile of [
   )
 }
 
+
+for (const uiFile of [
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'al-siddique-frontend/src/Modules/families/FamilyModule.jsx',
+]) {
+  assertNotContains(
+    uiFile,
+    /rgba\(11,44,77|rgba\(7,30,52|#071e34/,
+    `${uiFile} operational chrome must use semantic APEX surfaces.`
+  )
+}
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

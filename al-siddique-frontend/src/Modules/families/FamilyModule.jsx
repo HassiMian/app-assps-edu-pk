@@ -332,7 +332,7 @@ export default function FamilyModule() {
 
  {/* Create Family Modal */}
  {showCreate && (
- <div style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'rgba(7,30,52,0.92)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+ <div style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'var(--apex-bg-overlay)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
  onClick={() => setShowCreate(false)}>
  <div style={{ ...card, maxWidth: 440, width: '100%', margin: 16 }} onClick={e => e.stopPropagation()}>
  <h3 style={{ margin: '0 0 20px', color: C.gold, fontSize: 18, fontWeight: 800 }}>Create New Family</h3>
@@ -348,7 +348,7 @@ export default function FamilyModule() {
  </div>
  <div style={{ display: 'flex', gap: 10, marginTop: 20, justifyContent: 'flex-end' }}>
  <button onClick={() => setShowCreate(false)} style={{ background: 'rgba(255,255,255,0.06)', border: `1px solid ${C.border}`, color: C.muted, borderRadius: 10, padding: '9px 20px', cursor: 'pointer', fontWeight: 600 }}>Cancel</button>
- <button onClick={handleCreateFamily} disabled={!newFatherName.trim()} style={{ background: newFatherName.trim() ? `linear-gradient(135deg,${C.gold},#e8b420)` : 'rgba(148,163,184,0.18)', border: 'none', color: '#071e34', borderRadius: 10, padding: '9px 20px', cursor: newFatherName.trim() ? 'pointer' : 'not-allowed', fontWeight: 600 }}>Create Family</button>
+ <button onClick={handleCreateFamily} disabled={!newFatherName.trim()} style={{ background: newFatherName.trim() ? 'var(--apex-action-primary)' : 'var(--apex-bg-subtle)', border: 'none', color: newFatherName.trim() ? '#fff' : 'var(--apex-text-tertiary)', borderRadius: 10, padding: '9px 20px', cursor: newFatherName.trim() ? 'pointer' : 'not-allowed', fontWeight: 600 }}>Create Family</button>
  </div>
  </div>
  </div>
@@ -356,7 +356,7 @@ export default function FamilyModule() {
 
  {/* Add Student to Family Modal */}
  {addStudentFamilyCode && (
- <div style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'rgba(7,30,52,0.92)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+ <div style={{ position: 'fixed', inset: 0, zIndex: 9000, background: 'var(--apex-bg-overlay)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
  onClick={() => setAddStudentFamilyCode(null)}>
  <div style={{ ...card, maxWidth: 480, width: '100%', margin: 16 }} onClick={e => e.stopPropagation()}>
  <h3 style={{ margin: '0 0 6px', color: C.gold, fontSize: 18, fontWeight: 800 }}>Add Student</h3>
@@ -375,7 +375,7 @@ export default function FamilyModule() {
  {searchResults.map(s => (
  <div key={s.id}
  onClick={() => confirmAddStudent(s)}
- style={{ padding: '10px 14px', borderRadius: 10, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4, background: 'rgba(11,44,77,0.5)', border: `1px solid ${C.border}`, transition: 'all .15s' }}
+ style={{ padding: '10px 14px', borderRadius: 10, cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4, background: 'var(--apex-bg-subtle)', border: `1px solid ${C.border}`, transition: 'all .15s' }}
  onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(200,153,26,0.4)'}
  onMouseLeave={e => e.currentTarget.style.borderColor = C.border}
  >

@@ -314,7 +314,7 @@ function PrintStudentList({ list, onClose, school }) {
   return createPortal(
     <div className="app-modal-overlay" style={{
       position: "fixed", inset: 0, zIndex: 10001,
-      background: "rgba(7,30,52,0.98)",
+      background: "var(--apex-bg-surface-solid)",
       display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
       isolation: "isolate",
     }}>
@@ -428,7 +428,7 @@ function PrintStudentList({ list, onClose, school }) {
         <div style={{ padding: "14px 20px", background: "#0b2c4d", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }} className="no-print">
           <h3 style={{ margin: 0, fontSize: 16 }}> {type}</h3>
           <div style={{ display: "flex", gap: 10 }}>
-            <button onClick={handlePrint} style={{ background: "#C8991A", border: "none", padding: "8px 18px", borderRadius: 8, cursor: "pointer", fontWeight: 600, color: "#071e34" }}>Print Now</button>
+            <button onClick={handlePrint} style={{ background: "var(--apex-action-primary)", border: "none", padding: "8px 18px", borderRadius: 8, cursor: "pointer", fontWeight: 700, color: "#fff" }}>Print Now</button>
             <button onClick={onClose} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", padding: "8px 16px", borderRadius: 8, cursor: "pointer" }}>Close</button>
           </div>
         </div>
@@ -662,7 +662,7 @@ function StudentPerformanceSheet({ students, school, classNames, activeClasses, 
    <div className="super-module-card" style={{ ...card, display: "grid", gridTemplateColumns: "minmax(220px, 1fr) auto auto", gap: 14, alignItems: "end" }}>
     <label style={{ display: "flex", flexDirection: "column", gap: 8, color: "#8892A4", fontSize: 12, fontWeight: 800, textTransform: "uppercase", letterSpacing: .7 }}>
      Class
-     <select value={sheetClass} onChange={e => { setSelectedClass(e.target.value); setGeneratedClass(""); }} style={{ background: "rgba(7,30,52,0.7)", color: "#C0C8D8", border: "1px solid rgba(148,163,184,0.18)", borderRadius: 12, padding: "12px 14px", outline: "none", textTransform: "none", letterSpacing: 0 }}>
+     <select value={sheetClass} onChange={e => { setSelectedClass(e.target.value); setGeneratedClass(""); }} style={{ background: "var(--apex-bg-surface-solid)", color: "var(--apex-text-primary)", border: "1px solid rgba(148,163,184,0.18)", borderRadius: 12, padding: "12px 14px", outline: "none", textTransform: "none", letterSpacing: 0 }}>
       {classes.map(cls => <option key={cls} value={cls}>{cls}</option>)}
      </select>
     </label>

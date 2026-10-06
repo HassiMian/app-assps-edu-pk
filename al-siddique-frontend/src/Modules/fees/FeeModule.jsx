@@ -75,7 +75,7 @@ const TEMPLATE_OPTIONS = [
 ]
 
 const C = {
- card: 'rgba(11,44,77,0.92)',
+ card: 'var(--apex-bg-surface)',
  gold: '#C8991A',
  goldL: '#e8b420',
  silver: '#C0C8D8',
@@ -94,7 +94,7 @@ const GCard = ({ children, style = {} }) => (
  border: `1px solid ${C.border}`,
  borderRadius: 22,
  padding: 24,
- boxShadow: '0 12px 32px rgba(7,30,52,0.28)',
+ boxShadow: 'var(--apex-shadow-sm)',
  ...style,
  }}>
  {children}
@@ -104,7 +104,7 @@ const GCard = ({ children, style = {} }) => (
 const TabBtn = ({ active, onClick, children }) => (
  <button onClick={onClick} style={{
  background: active ? `linear-gradient(135deg, ${C.gold}, ${C.goldL})` : 'rgba(15,23,42,0.46)',
- color: active ? '#071e34' : C.silver,
+ color: active ? '#fff' : 'var(--apex-text-primary)',
  fontWeight: 700,
  fontSize: 14,
  padding: '10px 22px',
@@ -124,7 +124,7 @@ const Lbl = ({ children }) => (
 const Inp = ({ style = {}, ...props }) => (
  <input {...props} style={{
  width: '100%',
- background: 'rgba(11,44,77,0.6)',
+ background: 'var(--apex-bg-surface-solid)',
  border: `1px solid ${C.border}`,
  borderRadius: 12,
  color: C.silver,
@@ -139,7 +139,7 @@ const Inp = ({ style = {}, ...props }) => (
 const Sel = ({ style = {}, children, ...props }) => (
  <select {...props} style={{
  width: '100%',
- background: 'rgba(11,44,77,0.6)',
+ background: 'var(--apex-bg-surface-solid)',
  border: `1px solid ${C.border}`,
  borderRadius: 12,
  color: C.silver,
@@ -251,7 +251,7 @@ function ActionDropdown({ onPrint, onEdit, onDelete, onHistory }) {
 }
 
 const StatCard = ({ icon, label, value, color }) => (
- <GCard style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '22px 24px', background: `linear-gradient(145deg, ${color}18, rgba(11,44,77,0.96) 48%, rgba(7,30,52,0.98))`, border: `1px solid ${color}35`, borderRadius: 22, boxShadow: `0 18px 42px rgba(0,0,0,0.22), 0 0 28px ${color}12` }}>
+ <GCard style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '22px 24px', background: `linear-gradient(145deg, color-mix(in srgb, ${color} 8%, var(--apex-bg-surface-solid)), var(--apex-bg-surface-solid))`, border: `1px solid ${color}35`, borderRadius: 22, boxShadow: `0 18px 42px rgba(0,0,0,0.22), 0 0 28px ${color}12` }}>
  <div className="super-module-card" style={{
  width: 52,
  height: 52,
@@ -286,7 +286,7 @@ function PrintVoucher({ challan, selectedTemplate, onClose, school }) {
     <Portal>
       <div className="super-module-card" style={{
         position: 'fixed', inset: 0, zIndex: 10000,
-        background: 'rgba(7,30,52,0.95)',
+        background: 'var(--apex-bg-surface-solid)',
         backdropFilter: 'blur(12px)',
         display: 'flex',
         flexDirection: 'column',
@@ -343,7 +343,7 @@ function PrintVoucher({ challan, selectedTemplate, onClose, school }) {
           <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
             <button onClick={() => window.print()} style={{
               background: 'linear-gradient(135deg, #c8991a, #e8c87a)',
-              color: '#071e34', border: 'none', padding: '10px 18px', borderRadius: 12, cursor: 'pointer', fontWeight: 700,
+              color: '#fff', border: 'none', padding: '10px 18px', borderRadius: 12, cursor: 'pointer', fontWeight: 700,
             }}>Print</button>
             <button onClick={onClose} style={{
               background: 'rgba(255,55,95,0.18)',
@@ -586,7 +586,7 @@ function PrintStudentList({ list, onClose, school }) {
     <Portal>
       <div className="super-module-card" style={{
         position: 'fixed', inset: 0, zIndex: 10001,
-        background: 'rgba(7,30,52,0.98)',
+        background: 'var(--apex-bg-surface-solid)',
         display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24,
       }}>
         <style>{`
@@ -1096,7 +1096,7 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  display: 'grid', gridTemplateColumns: 'auto 1fr 100px', gap: 12,
  alignItems: 'center', padding: '12px 14px', borderRadius: 14,
  border: `1px solid ${heads[head.id] ? 'rgba(200,153,26,0.35)' : C.border}`,
- background: heads[head.id] ? 'rgba(200,153,26,0.08)' : 'rgba(11,44,77,0.28)',
+ background: heads[head.id] ? 'color-mix(in srgb, var(--apex-action-primary) 7%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-subtle)',
  }}>
  <input type="checkbox" checked={!!heads[head.id]} onChange={e => setHeads(prev => ({ ...prev, [head.id]: e.target.checked }))} style={{ width: 18, height: 18, accentColor: C.gold, cursor: 'pointer' }} />
  <div className="super-module-card" style={{ color: heads[head.id] ? '#fff' : C.muted, fontWeight: 600 }}>{head.name}</div>
@@ -1119,7 +1119,7 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', color: C.muted }}><span>Month</span><span>{`${selectedMonth} ${selectedYear}`}</span></div>
  <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', color: C.muted }}><span>Due Date</span><span>{dueDate}</span></div>
  </div>
- <div className="super-module-card" style={{ background: 'rgba(7,30,52,0.4)', borderRadius: 18, padding: 18, display: 'grid', gap: 12 }}>
+ <div className="super-module-card" style={{ background: 'var(--apex-bg-subtle)', borderRadius: 18, padding: 18, display: 'grid', gap: 12 }}>
  {FEE_HEADS.filter(head => heads[head.id]).map(head => (
  <div key={head.id} style={{ display: 'flex', justifyContent: 'space-between', color: C.silver }}>
  <span>{head.name}</span>
@@ -1136,7 +1136,7 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  <button onClick={handleSubmit} disabled={!student} style={{
  width: '100%', padding: '14px 0', borderRadius: 20, border: 'none', cursor: student ? 'pointer' : 'not-allowed',
  background: student ? `linear-gradient(135deg, ${C.gold}, ${C.goldL})` : 'rgba(148,163,184,0.18)',
- color: student ? '#071e34' : C.muted, fontWeight: 700, fontSize: 15,
+ color: student ? '#fff' : C.muted, fontWeight: 700, fontSize: 15,
  }}>{saved ? ' Challan Created' : 'Create Challan'}</button>
  </GCard>
  </div>
@@ -1432,7 +1432,7 @@ function FeeReports({ challans, students }) {
  </div>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
- <tr style={{ background: 'rgba(7,30,52,0.95)', borderBottom: `1px solid ${C.border}` }}>
+ <tr style={{ background: 'var(--apex-bg-surface-solid)', borderBottom: `1px solid ${C.border}` }}>
  {['Student', 'GR No', 'Class', 'Contact', 'Pending', 'Action'].map(header => (
  <th key={header} style={{ padding: '14px 16px', textAlign: 'left', color: C.gold, fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{header}</th>
  ))}

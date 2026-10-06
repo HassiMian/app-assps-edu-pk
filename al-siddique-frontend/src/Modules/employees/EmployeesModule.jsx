@@ -209,7 +209,7 @@ function EmployeeFormModal({ isOpen, onClose, onSave, initialData, designations,
 
  return (
  <Portal>
- <div className="super-module-card" style={{ position:'fixed', inset:0, zIndex:9999, background:'rgba(7,30,52,0.97)', backdropFilter:'blur(12px)', display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
+ <div className="super-module-card" style={{ position:'fixed', inset:0, zIndex:9999, background:'var(--apex-bg-overlay)', backdropFilter:'blur(12px)', display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
  <GCard style={{ width:'100%', maxWidth:820, maxHeight:'93vh', display:'flex', flexDirection:'column', padding:0, overflow:'hidden' }}>
 
  {/* Header */}
@@ -237,7 +237,7 @@ function EmployeeFormModal({ isOpen, onClose, onSave, initialData, designations,
  {/*  Tab 0: Personal  */}
  {tab === 0 && (
  <div className="super-module-card" style={{ display:'grid', gap:14 }}>
- <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'92px 1fr', gap:16, alignItems:'center', padding:'14px', border:`1px solid ${C.border}`, borderRadius:14, background:'rgba(7,30,52,0.34)' }}>
+ <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'92px 1fr', gap:16, alignItems:'center', padding:'14px', border:`1px solid ${C.border}`, borderRadius:14, background:'var(--apex-bg-subtle)' }}>
  <div className="super-module-card" style={{ width:86, height:102, borderRadius:14, overflow:'hidden', border:`1px solid ${form.photo ? C.gold : C.border}`, background:'rgba(15,23,42,0.7)', display:'flex', alignItems:'center', justifyContent:'center', color:C.gold, fontWeight:900, fontSize:24 }}>
  {form.photo
  ? <img src={form.photo} alt="Employee" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
@@ -515,11 +515,11 @@ function EmployeeProfileModal({ employee, onClose, onEdit }) {
 
  return (
  <Portal>
- <div className="super-module-card" style={{ position:'fixed', inset:0, zIndex:9999, background:'rgba(7,30,52,0.97)', backdropFilter:'blur(12px)', display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
+ <div className="super-module-card" style={{ position:'fixed', inset:0, zIndex:9999, background:'var(--apex-bg-overlay)', backdropFilter:'blur(12px)', display:'flex', alignItems:'center', justifyContent:'center', padding:20 }}>
  <GCard style={{ width:'100%', maxWidth:920, maxHeight:'93vh', display:'flex', flexDirection:'column', padding:0, overflow:'hidden' }}>
 
  {/* Profile header */}
- <div className="super-module-card" style={{ padding:'20px 28px', background:'linear-gradient(135deg,rgba(200,153,26,0.14),rgba(7,30,52,0.5))', borderBottom:`1px solid ${C.border}`, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+ <div className="super-module-card" style={{ padding:'20px 28px', background:'linear-gradient(135deg,color-mix(in srgb,var(--apex-action-primary) 7%,var(--apex-bg-surface-solid)),var(--apex-bg-surface-solid))', borderBottom:`1px solid ${C.border}`, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
  <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:16 }}>
  <div className="super-module-card" style={{ width:62, height:62, borderRadius:18, background:'linear-gradient(135deg,var(--apex-action-primary),var(--apex-action-secondary))', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:900, fontSize:26, border:`2px solid ${C.gold}` }}>
  {employee.name.charAt(0)}
@@ -719,7 +719,7 @@ function DirectoryTab({ employees, search, setSearch, designationFilter, setDesi
  <GCard style={{ padding:0, overflow:'hidden' }}>
  <table style={{ width:'100%', borderCollapse:'collapse' }}>
  <thead>
- <tr style={{ background:'rgba(7,30,52,0.95)', borderBottom:`1px solid ${C.border}` }}>
+ <tr style={{ background:'var(--apex-bg-subtle)', borderBottom:`1px solid ${C.border}` }}>
  {['Employee','CNIC','Designation','Contact','Contract','Salary','Status','Actions'].map(col => (
  <th key={col} style={{ padding:'13px 15px', textAlign:'left', color:C.gold, fontSize:11, letterSpacing:'0.08em', textTransform:'uppercase' }}>{col}</th>
  ))}
@@ -914,7 +914,7 @@ function SalaryTab({ employees=[] }) {
  <GCard style={{ padding:0, overflow:'hidden' }}>
  <table style={{ width:'100%', borderCollapse:'collapse' }}>
  <thead>
- <tr style={{ background:'rgba(7,30,52,0.95)', borderBottom:`1px solid ${C.border}` }}>
+ <tr style={{ background:'var(--apex-bg-subtle)', borderBottom:`1px solid ${C.border}` }}>
  {['Employee','Basic Salary','Allowances','Deductions','Net Salary','Status'].map(col => (
  <th key={col} style={{ padding:'13px 15px', textAlign:'left', color:C.gold, fontSize:11, letterSpacing:'0.08em', textTransform:'uppercase' }}>{col}</th>
  ))}
