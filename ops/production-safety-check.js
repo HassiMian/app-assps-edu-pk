@@ -617,6 +617,19 @@ assertContains(
   'attendance load failures must remain visible to the user.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  /api\.get\(['"]\/api\/students['"]\)\.catch\(\(\) => \(\{ data: \{ data: \[\] \} \}\)\)|api\.get\(['"]\/api\/dashboard\/stats['"]\)\.catch/,
+  'dashboard must not disguise core API failures as zero/empty school data.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  "setDashboardError(err.response?.data?.message || 'Core dashboard data could not be loaded from the server.')",
+  'dashboard core data failures must be visible and explicit.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

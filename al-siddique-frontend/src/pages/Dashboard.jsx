@@ -210,34 +210,43 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [dashApi, setDashApi] = useState(null)
   const [upcomingEvents, setUpcomingEvents] = useState([])
+  const [dashboardError, setDashboardError] = useState('')
+  const [dashboardWarning, setDashboardWarning] = useState('')
 
   const fetchAll = useCallback(async (silent = false) => {
     try {
       if (!silent) setLoading(true)
-      const [studentRes, dashRes, eventRes] = await Promise.all([
-        api.get('/api/students').catch(() => ({ data: { data: [] } })),
-        api.get('/api/dashboard/stats').catch(() => ({ data: {} })),
-        api.get('/api/events/upcoming').catch(() => ({ data: { data: [] } })),
+      setDashboardError('')
+      setDashboardWarning('')
+
+      const [studentRes, dashRes, empRes] = await Promise.all([
+        api.get('/api/students'),
+        api.get('/api/dashboard/stats'),
+        api.get('/api/employees'),
       ])
-      const allStudents = studentRes.data.data || []
+      const allStudents = Array.isArray(studentRes.data?.data) ? studentRes.data.data : []
       const dash = dashRes.data || {}
+      const employees = Array.isArray(empRes.data?.data) ? empRes.data.data : []
       setDashApi(dash)
-      setUpcomingEvents(Array.isArray(eventRes.data?.data) ? eventRes.data.data : [])
+
+      try {
+        const eventRes = await api.get('/api/events/upcoming')
+        setUpcomingEvents(Array.isArray(eventRes.data?.data) ? eventRes.data.data : [])
+      } catch (eventErr) {
+        console.error('Dashboard events fetch error:', eventErr)
+        setUpcomingEvents([])
+        setDashboardWarning('Core dashboard data is live, but upcoming events could not be loaded.')
+      }
 
       const presentCount = Number(dash.today_present ?? 0)
       const attPct = Number(dash.today_pct ?? (allStudents.length > 0 ? Math.round((presentCount / allStudents.length) * 100) : 0))
 
       const feeRes = await api.get('/api/fees/summary').catch(() => api.get('/api/fees'))
       const feeSummary = feeRes.data?.data?.collected !== undefined ? feeRes.data.data : null
-      const allFees = feeSummary ? [] : (feeRes.data.data || [])
+      const allFees = feeSummary ? [] : (Array.isArray(feeRes.data?.data) ? feeRes.data.data : [])
       const paidTotal = feeSummary ? Number(feeSummary.collected || 0) : allFees.filter((fee) => fee.status === 'paid').reduce((sum, fee) => sum + Number(fee.paid_amount || fee.amount || 0), 0)
-      const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.amount || 0), 0)
-      const pendingFees = feeSummary
-        ? Array.from({ length: Number(feeSummary.unpaid_students || 0) })
-        : allFees.filter((fee) => fee.status !== 'paid')
-
-      const empRes = await api.get('/api/employees').catch(() => ({ data: { data: [] } }))
-      const empCount = (empRes.data.data || []).length
+      const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.remaining_balance ?? fee.amount ?? 0), 0)
+      const pendingCount = feeSummary ? Number(feeSummary.unpaid_students || 0) : allFees.filter((fee) => fee.status !== 'paid').length
 
       const classCounts = new Map(classNames.map((name) => [name, 0]))
       allStudents.forEach((student) => {
@@ -252,14 +261,20 @@ export default function Dashboard() {
         presentCount,
         paidTotal,
         pendingTotal,
-        empCount,
-        pendingCount: feeSummary ? Number(feeSummary.unpaid_students || 0) : pendingFees.length,
+        empCount: employees.length,
+        pendingCount,
         overdueChallans: feeSummary ? Number(feeSummary.overdue_challans || 0) : 0,
       })
       setStudents(allStudents)
       setClassData(classArr)
     } catch (err) {
       console.error('Dashboard fetch error:', err)
+      setDashboardError(err.response?.data?.message || 'Core dashboard data could not be loaded from the server.')
+      if (!silent) {
+        setStats(null)
+        setStudents([])
+        setClassData([])
+      }
     } finally {
       setLoading(false)
     }
@@ -468,6 +483,7 @@ export default function Dashboard() {
       `}</style>
 
       <div className="super-dashboard-inner">
+        {(dashboardError || dashboardWarning) && <div style={{ marginBottom:14, padding:'11px 14px', borderRadius:12, background:dashboardError ? 'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))' : 'color-mix(in srgb, var(--apex-action-highlight) 8%, var(--apex-bg-surface-solid))', border:`1px solid ${dashboardError ? 'color-mix(in srgb, var(--apex-action-danger) 25%, var(--apex-border-default))' : 'color-mix(in srgb, var(--apex-action-highlight) 25%, var(--apex-border-default))'}`, color:dashboardError ? 'var(--apex-action-danger)' : 'var(--apex-action-highlight)', fontSize:12, fontWeight:700 }}>{dashboardError || dashboardWarning}</div>}
         <div className="mb-7">
           <SchoolHero
             schoolName={schoolName}
