@@ -41,6 +41,7 @@ expect_post_status /api/portal/paper-studio/publisher-review/promotion-envelope 
 expect_post_status /api/portal/paper-studio/publisher-review/signature-verify 401
 expect_post_status /api/portal/paper-studio/publisher-review/approval-decision-validate 401
 expect_post_status /api/portal/paper-studio/publisher-review/approval-activation-precheck 401
+expect_post_status /api/portal/paper-studio/publisher-review/key-custody-precheck 401
 expect_status /api/question-bank 401
 expect_status /api/paper/vault 401
 
