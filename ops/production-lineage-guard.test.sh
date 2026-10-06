@@ -8,47 +8,59 @@ trap 'rm -rf "$TMP"' EXIT
 git -C "$TMP" init -q
 git -C "$TMP" config user.name test
 git -C "$TMP" config user.email test@example.invalid
-echo one > "$TMP/x"
-git -C "$TMP" add x
-git -C "$TMP" commit -q -m one
+mkdir -p "$TMP/al-siddique-frontend" "$TMP/al-siddique-backend"
+echo front-a > "$TMP/al-siddique-frontend/app.txt"
+echo back-a > "$TMP/al-siddique-backend/app.txt"
+git -C "$TMP" add . && git -C "$TMP" commit -q -m base
 A="$(git -C "$TMP" rev-parse HEAD)"
-echo two >> "$TMP/x"
-git -C "$TMP" commit -qam two
+
+echo back-b >> "$TMP/al-siddique-backend/app.txt"
+git -C "$TMP" commit -qam backend-b
 B="$(git -C "$TMP" rev-parse HEAD)"
-git -C "$TMP" checkout -q -b side "$A"
-echo side > "$TMP/y"
-git -C "$TMP" add y
-git -C "$TMP" commit -q -m side
-SIDE="$(git -C "$TMP" rev-parse HEAD)"
+echo back-c >> "$TMP/al-siddique-backend/app.txt"
+git -C "$TMP" commit -qam backend-c
+C="$(git -C "$TMP" rev-parse HEAD)"
 
-printf '{"commit":"%s"}
-' "$A" > "$TMP/front.json"
-printf '{"commit":"%s"}
-' "$A" > "$TMP/back.json"
-"$GUARD" "$B" "$TMP" "$TMP/front.json" "$TMP/back.json" | grep -q ASSPS_LINEAGE_GUARD_PASS
+git -C "$TMP" checkout -q -b frontend-line "$A"
+echo front-f >> "$TMP/al-siddique-frontend/app.txt"
+git -C "$TMP" commit -qam frontend-f
+F="$(git -C "$TMP" rev-parse HEAD)"
 
-# Actual reverse: production is B, target is older A.
-printf '{"commit":"%s"}
-' "$B" > "$TMP/front.json"
-printf '{"commit":"%s"}
-' "$B" > "$TMP/back.json"
+git -C "$TMP" checkout -q master
+git -C "$TMP" reset -q --hard "$B"
+echo bad-front >> "$TMP/al-siddique-frontend/app.txt"
+git -C "$TMP" commit -qam bad-backend-target
+BAD="$(git -C "$TMP" rev-parse HEAD)"
+
+meta(){ printf '{"commit":"%s","component":"%s"}\n' "$1" "$2" > "$3"; }
+meta "$A" frontend "$TMP/front.json"
+meta "$B" backend "$TMP/back.json"
+
+# Split production lineages are valid: backend can advance B -> C while frontend stays A.
+"$GUARD" "$C" "$TMP" "$TMP/front.json" "$TMP/back.json" Backend | grep -q ASSPS_LINEAGE_GUARD_PASS
+# Frontend can independently advance A -> F while backend stays B.
+"$GUARD" "$F" "$TMP" "$TMP/front.json" "$TMP/back.json" Frontend | grep -q ASSPS_LINEAGE_GUARD_PASS
+
+# Backend reverse is blocked independently of frontend metadata.
 set +e
-"$GUARD" "$A" "$TMP" "$TMP/front.json" "$TMP/back.json" >"$TMP/guard.out" 2>"$TMP/guard.err"
-RC=$?
+"$GUARD" "$A" "$TMP" "$TMP/front.json" "$TMP/back.json" Backend >"$TMP/o" 2>"$TMP/e"
+rc=$?
 set -e
-[ "$RC" -eq 43 ]
-grep -q REVERSE_DEPLOY_BLOCKED "$TMP/guard.err"
+[ "$rc" -eq 43 ] && grep -q 'component=backend' "$TMP/e"
 
-# Frontend/backend lineage disagreement is also a hard block.
-printf '{"commit":"%s"}
-' "$A" > "$TMP/front.json"
-printf '{"commit":"%s"}
-' "$B" > "$TMP/back.json"
+# Backend-only target that changes frontend is blocked.
 set +e
-"$GUARD" "$B" "$TMP" "$TMP/front.json" "$TMP/back.json" >"$TMP/guard.out" 2>"$TMP/guard.err"
-RC=$?
+"$GUARD" "$BAD" "$TMP" "$TMP/front.json" "$TMP/back.json" Backend >"$TMP/o" 2>"$TMP/e"
+rc=$?
 set -e
-[ "$RC" -eq 42 ]
-grep -q 'frontend/backend production lineage mismatch' "$TMP/guard.err"
+[ "$rc" -eq 42 ] && grep -q 'Backend-only deploy target contains frontend changes' "$TMP/e"
 
-echo PRODUCTION_LINEAGE_GUARD_TEST_PASS
+# Frontend reverse is blocked after frontend advances to F.
+meta "$F" frontend "$TMP/front.json"
+set +e
+"$GUARD" "$A" "$TMP" "$TMP/front.json" "$TMP/back.json" Frontend >"$TMP/o" 2>"$TMP/e"
+rc=$?
+set -e
+[ "$rc" -eq 43 ] && grep -q 'component=frontend' "$TMP/e"
+
+echo PRODUCTION_LINEAGE_GUARD_V2_TEST_PASS
