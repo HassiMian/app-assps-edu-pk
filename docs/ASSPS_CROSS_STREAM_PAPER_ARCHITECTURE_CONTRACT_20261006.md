@@ -10,7 +10,7 @@ APEX Connect is a role-aware projection/client of the canonical SaaS paper platf
 Primary Teacher Paper Studio workspaces are: Studio Home, Create Paper, Question Bank, My Papers. AI/PDF/scan/board-pattern are Create Paper ingestion methods; Online Test is a delivery/publish mode.
 
 ## SaaS Repairing boundary
-SaaS Repairing owns app-shell/UI/UX/workflow repair only. It may improve navigation, responsive behavior, hierarchy, theme tokens, accessibility and frontend reliability. It must not redefine PaperDocument, paper-family routing, Question Bank governance, persistence/revisions, renderer semantics, protected templates, marks/numbering, RTL rules or tenant/auth policy.
+SaaS Repairing owns app-shell/UI/UX/workflow repair only. Its authoritative presentation flow is `Canonical DB -> Domain API -> Typed Contract -> UI View Model -> Screen`. It may improve navigation, responsive behavior, hierarchy, theme tokens, accessibility and frontend reliability. It must not redefine PaperDocument, paper-family routing, Question Bank governance, persistence/revisions, renderer semantics, marks/numbering, RTL rules or tenant/auth policy. Approved paper, report-card, voucher and other protected templates must not be redesigned; only verified defect-driven surgical fixes may alter them, while preserving data and print geometry.
 
 ## Canonical pipeline
 Source/Blank/Bank/Duplicate/AI/PDF/Scan/Board Pattern -> canonical PaperDocument -> universal Paper Workspace -> validation/RTL/layout -> preview -> immutable revision persistence -> Print/PDF/Word/Publish.
