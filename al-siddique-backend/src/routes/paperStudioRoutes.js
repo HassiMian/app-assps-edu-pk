@@ -15,6 +15,7 @@ const { validatePublisherKeyCustodyPreflight } = require('../services/papers/pap
 const { validatePublisherEditionReviewPreflight } = require('../services/papers/paperPublisherEditionReviewPreflightV6G15')
 const { buildAcademicPublicationPrecheck } = require('../services/papers/paperAcademicPublicationPrecheckV6G16')
 const { buildPublisherReleaseEnvelope } = require('../services/papers/paperPublisherReleaseEnvelopeV6G17')
+const { buildHumanAuthorityBoundary } = require('../services/papers/paperHumanAuthorityBoundaryV6G18')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -37,6 +38,19 @@ router.get('/canonical-readiness', async (req,res) => {
   } catch(err) {
     console.error('Paper Studio canonical readiness error:',err.message)
     return res.status(500).json({success:false,message:'Canonical storage readiness could not be verified.'})
+  }
+})
+
+router.get('/canonical-readiness/human-authority-boundary', async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const data=await buildHumanAuthorityBoundary()
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{readOnly:true,persisted:false,envChanged:false,approvalChanged:false,canonicalWriteChanged:false}})
+  } catch(err) {
+    console.error('Paper Studio human authority boundary error:',err.message)
+    return res.status(500).json({success:false,message:'Human authority boundary could not be verified.'})
   }
 })
 

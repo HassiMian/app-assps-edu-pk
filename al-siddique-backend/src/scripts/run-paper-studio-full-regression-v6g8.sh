@@ -79,8 +79,11 @@ node --test --test-concurrency=1 \
   tests/paper-v6g15-edition-review-preflight.test.js \
   tests/paper-v6g15-edition-review-preflight-http.test.js \
   tests/paper-v6g16-academic-publication-precheck.test.js \
-  tests/paper-v6g16-academic-publication-http.test.js | tee "$LOG"
+  tests/paper-v6g16-academic-publication-http.test.js \
+  tests/paper-v6g17-release-envelope.test.js \
+  tests/paper-v6g18-human-authority-boundary.test.js \
+  tests/paper-v6g18-human-authority-boundary-http.test.js | tee "$LOG"
 
-grep -q '^# pass 100$' "$LOG"
+grep -q '^# pass 108$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
-echo "V6G8_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"
+echo "V6G18_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"
