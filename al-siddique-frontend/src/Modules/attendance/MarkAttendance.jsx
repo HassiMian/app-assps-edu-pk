@@ -162,7 +162,7 @@ function StatCard({ state, value, delay }) {
 }
 
 export default function MarkAttendance() {
- const { classNames: CLASSES, allSections: SECTIONS, sectionsForClass } = useAcademicStore()
+ const { classNames: CLASSES, sectionsForClass } = useAcademicStore()
  const attendanceClasses = useMemo(
  () => [...new Set(CLASSES.map(attendanceClassLabel))],
  [CLASSES]
@@ -178,30 +178,38 @@ export default function MarkAttendance() {
  const [message, setMessage] = useState('')
 
  const loadStudents = () => {
+ if (!selectedClass || !selectedSection) {
+ setStudents([])
+ setAttendance({})
+ setMessage(selectedClass ? 'Failed to load: no section is configured for this class.' : 'Failed to load: no active class is configured in Academic Setup.')
+ return
+ }
  setLoading(true)
  setMessage('')
  Promise.all([
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }).catch(() => ({ data: { data: [] } })),
- api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }),
+ api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }),
  ])
  .then(([stuRes, attRes]) => {
- const list = stuRes.data?.data || []
- const attList = attRes.data?.data || []
+ const list = Array.isArray(stuRes.data?.data) ? stuRes.data.data : []
+ const attList = Array.isArray(attRes.data?.data) ? attRes.data.data : []
  const attMap = {}
  attList.forEach((row) => {
  const sid = row.student_id || row.id
- if (sid) attMap[sid] = row.status
+ if (sid && row.status) attMap[sid] = row.status
  })
  setStudents(list)
  const initialMarks = {}
- list.forEach((s) => {
- if (attMap[s.id]) initialMarks[s.id] = attMap[s.id]
+ list.forEach((student) => {
+ if (attMap[student.id]) initialMarks[student.id] = attMap[student.id]
  })
  setAttendance(initialMarks)
  })
- .catch(() => {
+ .catch((err) => {
+ console.error('Attendance roster load failed', err)
  setStudents([])
  setAttendance({})
+ setMessage(`Failed to load attendance roster: ${err.response?.data?.message || err.message || 'server unavailable'}`)
  })
  .finally(() => setLoading(false))
  }

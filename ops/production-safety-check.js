@@ -643,6 +643,19 @@ assertContains(
   'dashboard attendance load failures must remain explicit.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  /api\.get\(['"]\/api\/students['"].*\.catch\(\(\) => \(\{ data: \{ data: \[\] \} \}\)\)/s,
+  'mark-attendance roster must not turn API failures into an empty class.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  'Failed to load attendance roster:',
+  'mark-attendance load failures must remain visible.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
