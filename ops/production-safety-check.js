@@ -1374,6 +1374,28 @@ assertNotContains(
   'fee operational output must not fabricate ASSPS identity for other tenants.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/services/ai/paperAiQueue.js',
+  /CREATE TABLE IF NOT EXISTS|CREATE INDEX IF NOT EXISTS|Math\.random\(/,
+  'AI queue runtime service must use versioned migrations and secure identifiers.'
+)
+assertContains(
+  'al-siddique-backend/migrations/016_ai_job_queue_schema.js',
+  'CREATE TABLE IF NOT EXISTS ai_jobs',
+  'AI queue schema must be versioned in migration 016.'
+)
+assertContains(
+  'al-siddique-backend/src/services/ai/paperAiPipeline.js',
+  'const ALLOW_AI_MOCK_FALLBACK = false',
+  'paper AI pipeline must never fabricate scanner/question output when the AI provider is unavailable.'
+)
+assertNotContains(
+  'al-siddique-backend/src/services/ai/paperAiPipeline.js',
+  /Math\.random\(/,
+  'paper AI generated identifiers must use a secure random source.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

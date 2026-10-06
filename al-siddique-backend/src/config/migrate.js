@@ -547,6 +547,15 @@ async function migrate() {
     }
 
     try {
+      const aiQueueMigration = require('../../migrations/016_ai_job_queue_schema')
+      await aiQueueMigration.up()
+      console.log('AI job queue schema ready')
+    } catch (err) {
+      console.error('AI Job Queue Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

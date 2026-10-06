@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
@@ -32,70 +33,43 @@ function toMs(value) {
 }
 
 function createJobId() {
-  return `aj_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
+  return `aj_${Date.now()}_${crypto.randomBytes(8).toString('hex')}`
 }
 
 async function ensureTable() {
-  if (tableReady) return
-  try {
-    await query(`
-      CREATE TABLE IF NOT EXISTS ai_jobs (
-        id TEXT PRIMARY KEY,
-        job_type TEXT NOT NULL,
-        status TEXT NOT NULL,
-        progress INTEGER DEFAULT 0,
-        message TEXT,
-        payload JSONB,
-        result JSONB,
-        error JSONB,
-        meta JSONB,
-        created_at TIMESTAMPTZ DEFAULT NOW(),
-        updated_at TIMESTAMPTZ DEFAULT NOW()
-      )
-    `)
-    await query(`
-      CREATE INDEX IF NOT EXISTS idx_ai_jobs_status_updated ON ai_jobs(status, updated_at DESC);
-      CREATE INDEX IF NOT EXISTS idx_ai_jobs_type_created ON ai_jobs(job_type, created_at DESC);
-    `).catch(() => {})
-    tableReady = true
-  } catch (err) {
-    console.warn('AI job table bootstrap skipped:', err.message)
+  if (tableReady) return true
+  const result = await query("SELECT to_regclass('public.ai_jobs') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('ai_jobs schema migration is not applied.')
+    err.code = 'AI_QUEUE_SCHEMA_NOT_READY'
+    throw err
   }
+  tableReady = true
+  return true
 }
 
 async function ensureQueueStateTable() {
-  if (queueStateReady) return
-  try {
-    await query(`
-      CREATE TABLE IF NOT EXISTS ai_queue_state (
-        key TEXT PRIMARY KEY,
-        value TEXT NOT NULL,
-        updated_at TIMESTAMPTZ DEFAULT NOW()
-      )
-    `)
-    queueStateReady = true
-  } catch (err) {
-    console.warn('AI queue state bootstrap skipped:', err.message)
+  if (queueStateReady) return true
+  const result = await query("SELECT to_regclass('public.ai_queue_state') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('ai_queue_state schema migration is not applied.')
+    err.code = 'AI_QUEUE_SCHEMA_NOT_READY'
+    throw err
   }
+  queueStateReady = true
+  return true
 }
 
 async function ensureQueueEventsTable() {
-  if (queueEventsReady) return
-  try {
-    await query(`
-      CREATE TABLE IF NOT EXISTS ai_queue_events (
-        id BIGSERIAL PRIMARY KEY,
-        event_type TEXT NOT NULL,
-        message TEXT NOT NULL,
-        meta JSONB,
-        created_at TIMESTAMPTZ DEFAULT NOW()
-      )
-    `)
-    await query(`CREATE INDEX IF NOT EXISTS idx_ai_queue_events_created ON ai_queue_events(created_at DESC)`).catch(() => {})
-    queueEventsReady = true
-  } catch (err) {
-    console.warn('AI queue events bootstrap skipped:', err.message)
+  if (queueEventsReady) return true
+  const result = await query("SELECT to_regclass('public.ai_queue_events') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('ai_queue_events schema migration is not applied.')
+    err.code = 'AI_QUEUE_SCHEMA_NOT_READY'
+    throw err
   }
+  queueEventsReady = true
+  return true
 }
 
 async function loadQueuePausedState() {

@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 const { createCanvas, loadImage } = require('@napi-rs/canvas')
@@ -18,7 +19,7 @@ const VISION_BATCH_PAGES = 3
 const MIN_PAGE_TEXT_CHARS = 35
 const IMAGE_MAX_WIDTH = 1800
 const IMAGE_QUALITY = 0.84
-const ALLOW_AI_MOCK_FALLBACK = process.env.NODE_ENV !== 'production'
+const ALLOW_AI_MOCK_FALLBACK = false
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -43,7 +44,7 @@ function assertNotCancelled(job) {
 }
 
 function uid(prefix = 'q') {
-  return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`
+  return `${prefix}_${Date.now()}_${crypto.randomBytes(6).toString('hex')}`
 }
 
 function fingerprintQuestion(q) {
