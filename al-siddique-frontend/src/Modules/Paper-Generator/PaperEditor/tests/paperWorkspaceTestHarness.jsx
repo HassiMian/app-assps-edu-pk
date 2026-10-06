@@ -5,6 +5,7 @@ import { usePaperStore } from '../../usePaperStore.js'
 import { ThemeProvider, useTheme } from '@/context/ThemeContext.jsx'
 import '@/index.css'
 import recoverySource from '../../seed-data/exam-night-recovery-v3.json'
+import officialV13 from '../../seed-data/official-first-term-2026-v13.json'
 import { buildRecoverySavedPapers } from '../../seed-data/examNightRecoveryAdapter.js'
 
 const paper = {
@@ -103,7 +104,9 @@ function ThemeFixture() {
  const reopenName = params.get('reopenName') || 'Phase1 Browser Urdu'
  const reopenId = params.get('reopenId') || ''
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('recovery8') ? classEightUrduFixture : paper
+ const officialId = params.get('officialId') || ''
+ const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

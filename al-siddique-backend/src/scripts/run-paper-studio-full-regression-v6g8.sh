@@ -76,9 +76,11 @@ node --test --test-concurrency=1 \
   tests/paper-v6g13-approval-activation-preflight-http.test.js \
   tests/paper-v6g14-key-custody-preflight.test.js \
   tests/paper-v6g14-key-custody-preflight-http.test.js \
-  tests/paper-v6g15-academic-publication-precheck.test.js \
-  tests/paper-v6g15-academic-publication-http.test.js | tee "$LOG"
+  tests/paper-v6g15-edition-review-preflight.test.js \
+  tests/paper-v6g15-edition-review-preflight-http.test.js \
+  tests/paper-v6g16-academic-publication-precheck.test.js \
+  tests/paper-v6g16-academic-publication-http.test.js | tee "$LOG"
 
-grep -q '^# pass 95$' "$LOG"
+grep -q '^# pass 100$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
 echo "V6G8_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"

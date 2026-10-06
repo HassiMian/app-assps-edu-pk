@@ -450,11 +450,13 @@ async function migrate() {
     try {
       const assessmentStudioMigration = require('./migrations/006_assessment_studio_v1')
       await assessmentStudioMigration.up()
+      const questionGovernanceMigration = require('./migrations/007_question_bank_governance_v1')
+      await questionGovernanceMigration.up()
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
-      console.error('RLS Migration Error:', err.message)
-      // Non-fatal, let the app start but log heavily
+      console.error('Security-critical authoring migration failed:', err.message)
+      throw err
     }
 
     console.log('\nMigration complete.\n')

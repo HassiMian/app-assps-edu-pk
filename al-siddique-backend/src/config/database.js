@@ -24,8 +24,8 @@ const pool = new Pool({
   connectionTimeoutMillis: Number(envOrDev('DB_POOL_CONNECTION_TIMEOUT', 2000)),
 })
 
-// Test connection on startup
-pool.connect((err, client, release) => {
+// Test connection on startup. Pure tests may opt out to avoid a background DB handle.
+if (process.env.DB_STARTUP_PROBE !== 'false') pool.connect((err, client, release) => {
   if (err) {
     console.error('❌ PostgreSQL Connection Failed:', err.message || err)
     console.error('   Check: DB_HOST, DB_USER, DB_PASSWORD in .env and ensure PostgreSQL is running on port 5432')

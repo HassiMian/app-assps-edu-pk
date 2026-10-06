@@ -18,6 +18,13 @@ test('Assessment persistence adversarial: offline queue recovery + two-tab confl
  const vite=await createServer({root,server:{port:5242,strictPort:true},appType:'spa'}); await vite.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']}); const context=await browser.newContext({viewport:{width:1640,height:960}})
  await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
+
+ const serverRevisions=new Map()
+ await context.route('**/api/assessment-studio/papers/**/revisions',async route=>{
+  const req=route.request(); const body=req.postDataJSON(); const parts=new URL(req.url()).pathname.split('/'); const id=decodeURIComponent(parts[4]||''); const current=serverRevisions.get(id)||0; const expected=Number(body?.expectedRevision||0);
+  if(expected!==current) return route.fulfill({status:409,contentType:'application/json',body:JSON.stringify({code:'REVISION_CONFLICT',currentRevision:current,message:'Assessment changed elsewhere.'})});
+  const next=current+1; serverRevisions.set(id,next); return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({data:{currentRevision:next,contentHash:'test-hash-'+next}})});
+ })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
 
@@ -32,7 +39,7 @@ test('Assessment persistence adversarial: offline queue recovery + two-tab confl
  const a=await context.newPage(); a.on('dialog',d=>d.accept().catch(()=>{})); const conflictName=`Two Tab ${Date.now()}`; await createManual(a,conflictName,'Version one'); await a.getByRole('button',{name:'Save Draft'}).click(); await a.waitForFunction(n=>{const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'));return keys.some(k=>{try{return (JSON.parse(localStorage.getItem(k)).savedPapers||[]).some(p=>p.name===n&&p.serverRevision===1)}catch{return false}})},conflictName,{timeout:12000})
  const b=await context.newPage(); await b.evaluate(()=>localStorage.removeItem('al_siddique_assessment_server_reopen_v1')).catch(()=>{}); const bDialogs=[]; b.on('dialog',d=>{bDialogs.push(d.message());d.accept().catch(()=>{})}); await b.goto(`http://localhost:5242/paper-workspace-test.html?reopen&reopenName=${encodeURIComponent(conflictName)}`,{waitUntil:'domcontentloaded'}); await b.locator('#paper-canvas').waitFor({timeout:15000})
  await a.getByLabel('Selected question content').fill('Version from tab A'); await a.getByRole('button',{name:'Save Draft'}).click(); await a.waitForFunction(n=>{const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'));return keys.some(k=>{try{return (JSON.parse(localStorage.getItem(k)).savedPapers||[]).some(p=>p.name===n&&p.serverRevision===2)}catch{return false}})},conflictName,{timeout:12000})
- await b.getByRole('button',{name:'Edit Paper'}).click().catch(()=>{}); const labels=await b.locator('textarea').evaluateAll(xs=>xs.map(x=>x.getAttribute('aria-label'))); console.log('B_TEXTAREA_LABELS',labels); console.log('B_BUTTONS',await b.locator('button').evaluateAll(xs=>xs.map(x=>x.textContent.trim()).filter(Boolean).slice(-25))); await b.getByLabel('Question 1 content').fill('Stale version from tab B'); await b.getByRole('button',{name:'Save Draft'}).click(); await b.waitForFunction(()=>document.querySelector('[data-assessment-persistence-status]')?.textContent?.includes('Conflict'),null,{timeout:12000})
+ await b.getByRole('button',{name:'Edit Paper'}).click().catch(()=>{}); await b.getByLabel('Edit question content').fill('Stale version from tab B'); await b.getByRole('button',{name:'Save Draft'}).click(); await b.waitForFunction(()=>document.querySelector('[data-assessment-persistence-status]')?.textContent?.includes('Conflict'),null,{timeout:12000})
  assert.ok(bDialogs.some(m=>m.includes('SAVE CONFLICT'))); const conflicted=await stored(b,conflictName); assert.equal(conflicted.persistenceAuthority,'LOCAL_RECOVERY_CONFLICT'); assert.equal(conflicted.serverRevision,2)
  console.log('ASSESSMENT_PERSISTENCE_BROWSER_ADVERSARIAL 2/2 PASS')
 })
