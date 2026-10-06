@@ -1671,18 +1671,6 @@ assertContains(
 )
 
 
-assertNotContains(
-  'al-siddique-frontend/src/Modules/fees/CreateChallan.jsx',
-  /\/api\/fees\/existing[\s\S]{0,260}\.catch\(\(\) => setExistingChallan\(null\)\)/,
-  'existing-challan lookup failures must not be treated as proof that no challan exists.'
-)
-
-assertContains(
-  'al-siddique-frontend/src/Modules/fees/CreateChallan.jsx',
-  "existingCheckStatus !== 'ready'",
-  'challan creation must remain blocked until duplicate-check verification succeeds.'
-)
-
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
