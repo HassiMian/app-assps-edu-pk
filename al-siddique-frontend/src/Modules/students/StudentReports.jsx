@@ -11,22 +11,24 @@ export default function StudentReports() {
  const [loading, setLoading] = useState(false)
  const [search, setSearch] = useState('')
  const [selectedClass, setSelectedClass] = useState('All Classes')
+ const [loadError, setLoadError] = useState('')
 
  const loadStudents = () => {
  setLoading(true)
+ setLoadError('')
  const params = {}
  if (selectedClass !== 'All Classes') params.class = selectedClass
  if (search) params.search = search
  api.get('/api/students', { params })
  .then(r => setStudents(r.data.data || []))
- .catch(() => setStudents([]))
+ .catch(err => { setStudents([]); setLoadError(err.response?.data?.message || 'Student report data could not be loaded.') })
  .finally(() => setLoading(false))
  }
 
  useEffect(() => { loadStudents() }, [])
 
  return (
- <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+ <div style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
  <div style={{ maxWidth: 1220, margin: '0 auto', display: 'grid', gap: 22 }}>
  <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16, borderRadius: 22 }}>
  <div>
@@ -38,7 +40,7 @@ export default function StudentReports() {
  setLoading(true);
  api.get('/api/students', { params: {} })
  .then(r => setStudents(r.data.data || []))
- .catch(() => setStudents([]))
+ .catch(err => { setStudents([]); setLoadError(err.response?.data?.message || 'Student report data could not be loaded.') })
  .finally(() => setLoading(false))
  }}>Reset Filters</button>
  </div>
@@ -62,6 +64,8 @@ export default function StudentReports() {
  <div className="super-module-card" style={{ ...card, overflowX: 'auto', borderRadius: 22 }}>
  {loading ? (
  <div style={{ padding: 40, textAlign: 'center', color: C.muted }}>Loading students…</div>
+ ) : loadError ? (
+ <div style={{ padding:32, textAlign:'center', color:'var(--apex-action-danger)' }}>{loadError}</div>
  ) : (
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
@@ -73,7 +77,7 @@ export default function StudentReports() {
  </thead>
  <tbody>
  {students.map((s, i) => (
- <tr key={s.id} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+ <tr key={s.id} style={{ background: i % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '14px 16px', color: C.gold }}>{s.gr_number}</td>
  <td style={{ padding: '14px 16px', color: C.silver }}>
  <Link to={`/students?viewId=${s.id}`} style={{ color: C.blue, textDecoration: 'none', fontWeight: 700 }}>

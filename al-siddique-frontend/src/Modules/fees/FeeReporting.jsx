@@ -24,11 +24,13 @@ export default function FeeReporting() {
  const [challans, setChallans] = useState([])
  const [loading, setLoading] = useState(true)
  const [year, setYear] = useState(String(new Date().getFullYear()))
+ const [loadError, setLoadError] = useState('')
 
  useEffect(() => {
+ setLoadError('')
  api.get('/api/fees')
  .then(r => setChallans(r.data.data || []))
- .catch(() => setChallans([]))
+ .catch(err => { setChallans([]); setLoadError(err.response?.data?.message || 'Fee report data could not be loaded.') })
  .finally(() => setLoading(false))
  }, [])
 
@@ -68,6 +70,8 @@ export default function FeeReporting() {
 
  {loading ? (
  <div className="super-module-card" style={{ ...card, padding: 40, textAlign: 'center', color: C.muted }}>Loading…</div>
+ ) : loadError ? (
+ <div className="super-module-card" style={{ ...card, padding:32, textAlign:'center', color:'var(--apex-action-danger)' }}>{loadError}</div>
  ) : (
  <>
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>

@@ -1429,6 +1429,23 @@ assertContains(
   'settings UI must distinguish a load failure from an unverified messaging account.'
 )
 
+
+for (const uiFile of [
+  'al-siddique-frontend/src/Modules/families/FamilyModule.jsx',
+  'al-siddique-frontend/src/Modules/fees/FeeReporting.jsx',
+  'al-siddique-frontend/src/Modules/students/StudentReports.jsx',
+]) {
+  assertNotContains(
+    uiFile,
+    /\.catch\(\(\) => set(?:Students|Challans)\(\[\]\)\)/,
+    `${uiFile} must not turn API failures into a misleading empty-state dataset.`
+  )
+}
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentReports.jsx',
+  /background:\s*['"]#071e34['"]|rgba\(11,44,77,0\.2\)/,
+  'student reporting UI must use semantic APEX surfaces.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -139,6 +139,7 @@ export default function FamilyModule() {
  const [searchParams] = useSearchParams()
  const [students, setStudents] = useState([])
  const [loading, setLoading] = useState(true)
+ const [loadError, setLoadError] = useState('')
  // Pre-fill search from ?code=FAM-XXXX query param (from ViewChallans click)
  const [search, setSearch] = useState(() => searchParams.get('code') || '')
  const [showCreate, setShowCreate] = useState(false)
@@ -154,6 +155,7 @@ export default function FamilyModule() {
 
  // Load students from API
  useEffect(() => {
+ setLoadError('')
  api.get('/api/students')
  .then(r => {
  const list = r.data?.data || r.data || []
@@ -178,7 +180,7 @@ export default function FamilyModule() {
  father_cnic: s.father_cnic,
  })))
  })
- .catch(() => setStudents([]))
+ .catch(err => { setStudents([]); setLoadError(err.response?.data?.message || 'Student data could not be loaded for family detection.') })
  .finally(() => setLoading(false))
  }, [autoDetectFamilies])
 
@@ -290,6 +292,8 @@ export default function FamilyModule() {
  {/* Family list */}
  {loading ? (
  <div style={{ textAlign: 'center', padding: 60, color: C.muted }}>Loading students and detecting families…</div>
+ ) : loadError ? (
+ <div style={{ ...card, textAlign:'center', padding:32, color:'var(--apex-action-danger)' }}>{loadError}</div>
  ) : filteredFamilies.length === 0 ? (
  <div style={{ ...card, textAlign: 'center', padding: 60, color: C.muted }}>
  <div style={{ fontSize: 48, marginBottom: 12 }}></div>
