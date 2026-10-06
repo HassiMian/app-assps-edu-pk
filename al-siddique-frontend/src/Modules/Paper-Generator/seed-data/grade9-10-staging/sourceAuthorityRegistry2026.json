@@ -95,12 +95,26 @@
       "subject": "English",
       "editionOrSession": "2025-26",
       "requiredRole": "ACADEMIC_CONTENT",
-      "state": "BYTES_HASHED",
-      "nextGate": "VISUALLY_INSPECTED",
+      "state": "VISUALLY_INSPECTED",
+      "nextGate": "CONTENT_MAP_VERIFIED",
       "sha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
       "byteLength": 19576377,
       "hashedOn": "2026-10-06",
-      "byteSignature": "%PDF-"
+      "byteSignature": "%PDF-",
+      "pageCount": 168,
+      "embeddedTextPages": 168,
+      "identityAnchors": [
+        "ENGLISH 9",
+        "PUNJAB CURRICULUM AND TEXTBOOK BOARD, LAHORE",
+        "Aligned with Revised/Updated NCP-2023"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        168
+      ]
     },
     {
       "id": "G9-URDU-TEXTBOOK-2025-26",
@@ -113,7 +127,19 @@
       "sha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
       "byteLength": 10242198,
       "hashedOn": "2026-10-06",
-      "byteSignature": "%PDF-"
+      "byteSignature": "%PDF-",
+      "pageCount": 144,
+      "embeddedTextPages": 0,
+      "identityAnchors": [
+        "visual identity inspection required; image-only/no extractable text"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        144
+      ]
     },
     {
       "id": "G9-10-ENGLISH-GRAMMAR-2023-24",
@@ -121,12 +147,32 @@
       "subject": "English Grammar & Composition",
       "editionOrSession": "2023-24",
       "requiredRole": "ACADEMIC_CONTENT",
-      "state": "BYTES_HASHED",
-      "nextGate": "VISUALLY_INSPECTED",
+      "state": "VISUALLY_INSPECTED",
+      "nextGate": "CONTENT_MAP_VERIFIED",
       "sha256": "f9d449a6075b17282831c95521f060ac246c422f7169a1bc80cf6568fd185a62",
       "byteLength": 57906765,
       "hashedOn": "2026-10-06",
-      "byteSignature": "%PDF-"
+      "byteSignature": "%PDF-",
+      "pageCount": 200,
+      "embeddedTextPages": 199,
+      "identityAnchors": [
+        "Vocabulary",
+        "Forms of verb",
+        "Tenses",
+        "Parts of Speech",
+        "Story Writing",
+        "Paragraph Writing",
+        "Writing an Essay"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        200
+      ]
     },
     {
       "id": "G9-10-URDU-QUAID-E-INSHA-2023-24",
@@ -139,7 +185,19 @@
       "sha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
       "byteLength": 131046901,
       "hashedOn": "2026-10-06",
-      "byteSignature": "%PDF-"
+      "byteSignature": "%PDF-",
+      "pageCount": 160,
+      "embeddedTextPages": 0,
+      "identityAnchors": [
+        "visual identity inspection required; image-only/no extractable text"
+      ],
+      "inspectionPages": [
+        1,
+        2,
+        3,
+        4,
+        160
+      ]
     },
     {
       "id": "G9-2026-MULTAN-ENGLISH-ACTUAL",
@@ -195,5 +253,6 @@
     "ocrRole": "DISCOVERY_AID_ONLY_NOT_AUTHORITY",
     "pageAnchorRule": "Store exact inspected page number and visible anchor for every promoted hierarchy claim."
   },
-  "actualPaperClassificationRule": "Official archive linkage does not make an answer-key bundle a full actual question paper. Full objective+subjective hierarchy requires the question-paper artifact itself."
+  "actualPaperClassificationRule": "Official archive linkage does not make an answer-key bundle a full actual question paper. Full objective+subjective hierarchy requires the question-paper artifact itself.",
+  "textExtractionRule": "Embedded PDF text may support indexing and competency discovery, but page/edition claims still require visible-page inspection; image-only Urdu sources remain blocked until visual inspection."
 }

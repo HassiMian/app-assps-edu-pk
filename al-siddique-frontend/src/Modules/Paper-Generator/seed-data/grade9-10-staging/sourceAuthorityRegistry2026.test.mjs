@@ -45,8 +45,8 @@ test('source promotion is fail-closed and ordered before authoring',()=>{
 test('language acquisition queue cannot skip byte hashing',()=>{
  assert.equal(data.currentAcquisitionQueue.length,6);
  const academic=data.currentAcquisitionQueue.filter(x=>x.requiredRole==='ACADEMIC_CONTENT');
- assert(academic.every(x=>x.state==='BYTES_HASHED'));
- assert(academic.every(x=>x.nextGate==='VISUALLY_INSPECTED'));
+ assert(academic.every(x=>['BYTES_HASHED','VISUALLY_INSPECTED'].includes(x.state)));
+ assert(academic.every(x=>['VISUALLY_INSPECTED','CONTENT_MAP_VERIFIED'].includes(x.nextGate)));
  assert(data.currentAcquisitionQueue.every(x=>['BYTES_HASHED','VISUALLY_INSPECTED'].includes(x.state)));
  assert(data.currentAcquisitionQueue.every(x=>/^[a-f0-9]{64}$/.test(x.sha256)));
  assert(data.currentAcquisitionQueue.every(x=>x.byteLength>0));
@@ -68,4 +68,15 @@ test('rendered Multan language bundles are classified as keys, never full papers
  assert(p.every(x=>x.artifactClassification==='OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE'));
  assert(p.every(x=>x.patternHierarchyEligible===false));
  assert.match(data.actualPaperClassificationRule,/does not make an answer-key bundle a full actual question paper/i);
+});
+
+test('academic source preflight records page counts and blocks image-only Urdu promotion',()=>{
+ const byId=Object.fromEntries(data.currentAcquisitionQueue.map(x=>[x.id,x]));
+ assert.equal(byId['G9-ENGLISH-TEXTBOOK-2025-26'].pageCount,168);
+ assert.equal(byId['G9-10-ENGLISH-GRAMMAR-2023-24'].pageCount,200);
+ assert.equal(byId['G9-URDU-TEXTBOOK-2025-26'].embeddedTextPages,0);
+ assert.equal(byId['G9-10-URDU-QUAID-E-INSHA-2023-24'].embeddedTextPages,0);
+ assert.equal(byId['G9-URDU-TEXTBOOK-2025-26'].state,'BYTES_HASHED');
+ assert.equal(byId['G9-10-URDU-QUAID-E-INSHA-2023-24'].state,'BYTES_HASHED');
+ assert.match(data.textExtractionRule,/image-only Urdu sources remain blocked/i);
 });
