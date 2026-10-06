@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const { normalizeClassName } = require('../config/firstTermExam2026')
 let _pool = null
 function getPool() {
   if (!_pool) _pool = require('../config/database').pool
@@ -103,7 +104,8 @@ async function withTenantTransaction(schoolId, fn) {
 
 async function createRosterSnapshot({ schoolId, className, section = null, userId = null } = {}) {
   return withTenantTransaction(schoolId, async (client,tenantId)=>{
-    const params=[tenantId,clean(className)]
+    const normalizedClass=normalizeClassName(className)
+    const params=[tenantId,normalizedClass]
     let sql=`SELECT id,gr_number,name,roll_number,class,section FROM students WHERE school_id=$1 AND class=$2 AND COALESCE(is_active,true)=true`
     if (section != null && clean(section)) { params.push(clean(section)); sql += ` AND COALESCE(section,'')=$3` }
     sql += ` ORDER BY NULLIF(regexp_replace(COALESCE(roll_number,''),'[^0-9]','','g'),'')::int NULLS LAST,COALESCE(roll_number,''),name,id`
@@ -111,7 +113,7 @@ async function createRosterSnapshot({ schoolId, className, section = null, userI
     const members=result.rows.map((row,index)=>({ordinal:index+1,studentId:row.id,studentKey:row.gr_number||String(row.id),displayName:row.name,rollNumber:row.roll_number||'',className:row.class,section:row.section||''}))
     const rosterHash=sha256(members)
     const publicId=`roster-${crypto.randomUUID()}`
-    const snapshot=await client.query(`INSERT INTO roster_snapshots(school_id,public_id,class_name,section,student_count,roster_hash,created_by) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[tenantId,publicId,clean(className),clean(section)||null,members.length,rosterHash,userId])
+    const snapshot=await client.query(`INSERT INTO roster_snapshots(school_id,public_id,class_name,section,student_count,roster_hash,created_by) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[tenantId,publicId,normalizedClass,clean(section)||null,members.length,rosterHash,userId])
     const persistedMembers=[]
     for (const member of members) {
       const inserted=await client.query(`INSERT INTO roster_snapshot_members(school_id,roster_snapshot_id,ordinal,student_id,student_key,display_name,roll_number,class_name,section) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id`,[tenantId,snapshot.rows[0].id,member.ordinal,member.studentId,member.studentKey,member.displayName,member.rollNumber,member.className,member.section])
@@ -128,7 +130,8 @@ async function createTeacherBindingSnapshot({ schoolId, className, section = nul
       if (!clean(override.teacherName) || !clean(override.reason)) { const e=new Error('Manual teacher override requires teacherName and reason'); e.code='TEACHER_OVERRIDE_REASON_REQUIRED'; throw e }
       teacher={teacher_user_id:override.teacherUserId||null,teacher_name:clean(override.teacherName),binding_source:'manual_override',source_assignment_id:null,override_reason:clean(override.reason)}
     } else {
-      const params=[tenantId,clean(className),clean(subject)]
+      const normalizedClass=normalizeClassName(className)
+      const params=[tenantId,normalizedClass,clean(subject)]
       let where=`tca.school_id=$1 AND tca.class_name=$2 AND LOWER(COALESCE(tca.subject,''))=LOWER($3) AND tca.is_active=true`
       if (section != null && clean(section)) { params.push(clean(section)); where += ` AND COALESCE(tca.section,'')=$4` }
       const found=await client.query(`SELECT tca.id AS assignment_id,tca.teacher_user_id,u.name AS teacher_name FROM teacher_class_assignments tca JOIN users u ON u.id=tca.teacher_user_id AND u.school_id=tca.school_id WHERE ${where} ORDER BY tca.id`,params)
@@ -137,7 +140,7 @@ async function createTeacherBindingSnapshot({ schoolId, className, section = nul
       teacher={teacher_user_id:found.rows[0].teacher_user_id,teacher_name:found.rows[0].teacher_name,binding_source:'assignment',source_assignment_id:found.rows[0].assignment_id,override_reason:null}
     }
     const publicId=`teacher-binding-${crypto.randomUUID()}`
-    const inserted=await client.query(`INSERT INTO teacher_binding_snapshots(school_id,public_id,class_name,section,subject,teacher_user_id,teacher_name,binding_source,source_assignment_id,override_reason,created_by) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *`,[tenantId,publicId,clean(className),clean(section)||null,clean(subject),teacher.teacher_user_id,teacher.teacher_name,teacher.binding_source,teacher.source_assignment_id,teacher.override_reason,userId])
+    const inserted=await client.query(`INSERT INTO teacher_binding_snapshots(school_id,public_id,class_name,section,subject,teacher_user_id,teacher_name,binding_source,source_assignment_id,override_reason,created_by) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING *`,[tenantId,publicId,normalizeClassName(className),clean(section)||null,clean(subject),teacher.teacher_user_id,teacher.teacher_name,teacher.binding_source,teacher.source_assignment_id,teacher.override_reason,userId])
     return inserted.rows[0]
   })
 }

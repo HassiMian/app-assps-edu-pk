@@ -22,6 +22,7 @@ import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
 import { createBlankPaperDraft } from './paperCreationDraft.js'
 import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
 import { AssessmentRevisionConflictError, bindQueuedAssessmentSave, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
+import { createRosterSnapshot as createPrintRosterSnapshot, createTeacherBindingSnapshot as createPrintTeacherBindingSnapshot, createPersonalizedPrintJob, freezeBookletPlan, recordPrintAttempt } from './AssessmentStudio/core/printJobClient.js'
 
 function storeQToTemplate(q) {
  return {
@@ -634,6 +635,9 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const persistedPaperIdRef = useRef(loadedPaper?.id || '')
  const [finalizing, setFinalizing] = useState(false)
  const [persistenceNotice, setPersistenceNotice] = useState('')
+ const [personalizedDuplex, setPersonalizedDuplex] = useState(true)
+ const [personalizedPreparing, setPersonalizedPreparing] = useState(false)
+ const [personalizedStatus, setPersonalizedStatus] = useState('')
 
  useEffect(() => {
   if (!loadedPaper?.userAuthored) return undefined
@@ -1021,6 +1025,132 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }
  }
 
+ async function doPersonalizedPrint() {
+  const release = paper?.assessmentRelease || loadedPaper?.assessmentRelease
+  const releaseId = release?.releaseId
+  if (!releaseId || String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase() !== 'FINALIZED') {
+   alert('PERSONALIZED PRINT BLOCKED — finalize this assessment first so the batch is tied to an immutable release.')
+   return
+  }
+  if (printMode !== 'a4') {
+   alert('PERSONALIZED PRINT uses Single A4 so student and duplex boundaries remain deterministic. Standard 2-per-A4 printing is still available from Print.')
+   return
+  }
+  if (totalQs === 0 || draftQuality.errorCount > 0 || printAudit.blocked) {
+   alert('PERSONALIZED PRINT BLOCKED — resolve the paper quality/print checks first.')
+   return
+  }
+  const canonicalClass = classLevelLabel(cfg.className || cfg.classLevel || className)
+  const section = String(overrideConfig?.section || loadedPaper?.section || '').trim() || null
+  let answerKeyWasEnabled = false
+  setPersonalizedPreparing(true)
+  setPersonalizedStatus('Snapshotting class roster…')
+  try {
+   const roster = await createPrintRosterSnapshot({ className:canonicalClass, section })
+   const members = Array.isArray(roster?.members) ? roster.members : []
+   if (!members.length) throw new Error(`No active students were found for ${canonicalClass}${section ? ` / ${section}` : ''}. Standard blank printing is still available.`)
+
+   let teacherBinding = null
+   try {
+    teacherBinding = await createPrintTeacherBindingSnapshot({ className:canonicalClass, section, subject:cfg.subjectName || cfg.subject })
+   } catch (error) {
+    console.warn('Teacher binding snapshot unavailable; personalized printing will continue without it:', error?.message || error)
+   }
+
+   setPersonalizedStatus(`Preparing ${members.length} student booklets…`)
+   const job = await createPersonalizedPrintJob({
+    releaseId,
+    rosterSnapshotId:roster.id,
+    teacherBindingSnapshotId:teacherBinding?.id || null,
+    artifactKind:'student_batch',
+    duplex:personalizedDuplex,
+    copyCount:1,
+    rendererVersion:release.rendererVersion || 'assps-paper-workspace-v1',
+    browserEngineVersion:navigator.userAgent,
+    settings:{ studentName:true, rollNumber:true, className:canonicalClass, section, answerKey:false, printMode:'a4' },
+   })
+
+   if (editMode) {
+    setEditMode(false)
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+   }
+   if (printAns) {
+    answerKeyWasEnabled = true
+    setPrintAns(false)
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+   }
+
+   const canvas = document.getElementById('paper-canvas')
+   const master = canvas?.querySelector('.preview-container')
+   if (!master) throw new Error('Printable A4 preview is not available.')
+   const old = document.getElementById('__personalized_print_frame')
+   if (old) old.remove()
+   const iframe = document.createElement('iframe')
+   iframe.id='__personalized_print_frame'
+   iframe.style.cssText='position:fixed;top:0;left:-9999px;width:210mm;height:297mm;border:0;background:white'
+   document.body.appendChild(iframe)
+   const doc=iframe.contentDocument || iframe.contentWindow.document
+   doc.open()
+   doc.write(`<!doctype html><html><head><meta charset="utf-8"><style>
+    @page{size:A4 portrait;margin:4mm}html,body{margin:0;padding:0;background:#fff}*{box-sizing:border-box}
+    .student-booklet{width:100%;margin:0;padding:0}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;background:#fff!important;break-after:page;page-break-after:always}
+    .preview-container>[data-premium-template]{width:100%!important;min-height:0!important}.duplex-blank-page{height:288mm;width:100%;break-after:page;page-break-after:always;background:#fff}.no-print,[data-edit-guide]{display:none!important}[contenteditable]{outline:none!important;border-color:transparent!important}
+    table{border-collapse:collapse}
+   </style></head><body></body></html>`)
+   doc.close()
+
+   const probe=doc.createElement('div')
+   probe.style.cssText='position:absolute;visibility:hidden;height:288mm;width:1px;pointer-events:none'
+   doc.body.appendChild(probe)
+   const printablePageHeight=Math.max(1,probe.getBoundingClientRect().height)
+   probe.remove()
+   const pageCounts={}
+   const bookletNodes=[]
+   members.forEach(member=>{
+    const wrapper=doc.createElement('section')
+    wrapper.className='student-booklet'
+    wrapper.dataset.rosterMemberId=String(member.id)
+    const clone=master.cloneNode(true)
+    clone.removeAttribute('id')
+    clone.style.zoom='1'
+    clone.querySelectorAll('script,iframe,object,embed,form').forEach(node=>node.remove())
+    clone.querySelectorAll('[data-personalization-field="student.name"]').forEach(node=>{node.textContent=member.displayName || '';node.style.borderBottom='none';node.style.height='auto';node.style.minHeight='13px'})
+    clone.querySelectorAll('[data-personalization-field="student.rollNumber"]').forEach(node=>{node.textContent=member.rollNumber || '';node.style.borderBottom='none';node.style.height='auto';node.style.minHeight='13px'})
+    wrapper.appendChild(clone)
+    doc.body.appendChild(wrapper)
+    bookletNodes.push({member,wrapper,clone})
+   })
+   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch (_) {}
+   bookletNodes.forEach(({member,wrapper,clone})=>{
+    const contentHeight=Math.max(1,clone.scrollHeight || clone.getBoundingClientRect().height || printablePageHeight)
+    const pages=Math.max(1,Math.ceil((contentHeight-2)/printablePageHeight))
+    pageCounts[String(member.id)]=pages
+    if (personalizedDuplex && pages % 2 === 1) {
+     const blank=doc.createElement('div')
+     blank.className='duplex-blank-page'
+     blank.setAttribute('aria-hidden','true')
+     wrapper.appendChild(blank)
+    }
+   })
+
+   const plan = await freezeBookletPlan(job.public_id, pageCounts)
+   await recordPrintAttempt(job.public_id, { note:`${members.length} personalized student booklets; ${plan.totalPages} planned pages` })
+   setPersonalizedStatus(`${members.length} students • ${plan.totalPages} pages${personalizedDuplex ? ' • duplex-safe' : ''}`)
+   if (answerKeyWasEnabled) setPrintAns(true)
+   setTimeout(()=>{
+    try { iframe.contentWindow.focus(); iframe.contentWindow.print() } catch (error) { console.error('Personalized print failed:',error) }
+    setTimeout(()=>iframe.remove(),2500)
+   },150)
+  } catch (error) {
+   if (answerKeyWasEnabled) setPrintAns(true)
+   console.error('Personalized print preparation failed:', error)
+   alert(`PERSONALIZED PRINT BLOCKED — ${error?.response?.data?.message || error?.message || 'Could not prepare student batch.'}`)
+   setPersonalizedStatus('')
+  } finally {
+   setPersonalizedPreparing(false)
+  }
+ }
+
  async function doPrint() {
  if (loadedPaper?.userAuthored && totalQs===0) {
   alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
@@ -1155,6 +1285,16 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <DBtn color="green" onClick={()=>doSave()} disabled={!totalQs && !loadedPaper?.userAuthored} style={{ padding:'8px 16px', fontSize:13 }}>{loadedPaper?.userAuthored ? 'Save Draft' : 'Save'}</DBtn>
  {loadedPaper?.userAuthored && <button data-finalize-assessment type="button" onClick={doFinalize} disabled={finalizing || !totalQs} style={{ padding:'8px 14px',borderRadius:9,border:`1px solid ${D.gold}`,background:'rgba(200,153,26,.10)',color:D.gold,fontWeight:900,fontSize:12,cursor:finalizing?'wait':'pointer',opacity:(finalizing||!totalQs)?0.55:1 }}>{finalizing?'Finalizing…':paper.assessmentRelease?.status==='FINALIZED'?'Finalized ✓':'Finalize'}</button>}
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
+ {Boolean((paper?.assessmentRelease || loadedPaper?.assessmentRelease)?.releaseId) && String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase()==='FINALIZED' && <details data-personalized-print-options style={{position:'relative'}}>
+  <summary style={{...tinp,cursor:'pointer',listStyle:'none',fontWeight:800,color:D.gold,padding:'8px 10px'}}>Batch ▾</summary>
+  <div style={{position:'absolute',right:0,top:'calc(100% + 6px)',zIndex:30,width:270,background:D.panel,border:`1px solid ${D.border}`,borderRadius:12,padding:12,boxShadow:'0 16px 40px rgba(0,0,0,.35)'}}>
+   <div style={{fontSize:12,fontWeight:900,color:D.silver,marginBottom:4}}>Personalized Class Print</div>
+   <div style={{fontSize:10,color:D.muted,lineHeight:1.5,marginBottom:9}}>Uses one immutable release + roster snapshot. Standard Print remains unchanged.</div>
+   <label style={{display:'flex',alignItems:'center',gap:7,fontSize:11,color:D.silver,marginBottom:9}}><input type="checkbox" checked={personalizedDuplex} onChange={e=>setPersonalizedDuplex(e.target.checked)} style={{accentColor:D.gold}} /> Duplex-safe boundaries</label>
+   <button type="button" data-personalized-print-action disabled={personalizedPreparing} onClick={doPersonalizedPrint} style={{...tinp,width:'100%',cursor:personalizedPreparing?'wait':'pointer',fontWeight:900,color:D.gold}}>{personalizedPreparing?'Preparing…':'Print Entire Class'}</button>
+   {personalizedStatus && <div data-personalized-print-status style={{fontSize:10,color:'#86efac',fontWeight:700,marginTop:8,lineHeight:1.4}}>{personalizedStatus}</div>}
+  </div>
+ </details>}
  </div>
  </div>
  <details data-paper-metadata-editor style={{ marginTop:8 }}>
@@ -2103,7 +2243,7 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
    <div style={{ order:composition.badge, gridColumn:composition.badgeColumn || 'auto', justifySelf:variant==='minimal'?'center':'stretch', background:variant==='editorial'?theme.accent:theme.soft, border:`1px solid ${theme.line}`, borderRadius:variant==='emerald'?8:2, padding:'5px 8px', color:variant==='editorial'?'#fff':theme.accent, fontWeight:800, textAlign:variant==='editorial'?'left':'center', fontSize:`${9 * fs}px`, lineHeight:1.25, whiteSpace:'nowrap' }}>{examBadge}</div>
   </header>
   <table data-student-info style={{ direction:'ltr', width:'100%', borderCollapse:'collapse', tableLayout:'fixed', margin:`${7 * fs}px 0 ${10 * fs}px`, fontFamily:'Arial, sans-serif' }}><tbody>
-   {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
+   {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div data-personalization-field={label==='Student Name'?'student.name':label==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px`, fontWeight:700, color:'#172033', fontSize:`${10 * fs}px`, direction:'ltr' }} />}</td>)}</tr>)}
   </tbody></table>
   {printBubble && <ObjectiveBubbleSheet paper={paper} isUrdu={isUrdu} themeColor={theme.accent} showAnswers={printAns} />}
   <main style={{ position:'relative', zIndex:2 }}>
