@@ -275,6 +275,18 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertContains(
+  'al-siddique-backend/src/routes/eventsRoutes.js',
+  'normalizeEventPayload',
+  'event writes must use explicit domain validation instead of relying on database errors.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/eventsRoutes.js',
+  "res.status(422).json({ success: false, message: 'Event validation failed.'",
+  'invalid event writes must return a validation response.'
+)
+
 assertNotContains(
   'al-siddique-backend/src/config/migrate.js',
   /\.catch\(\(\) => \{\}\)/,

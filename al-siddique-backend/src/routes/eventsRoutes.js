@@ -18,6 +18,22 @@ async function ensureTable() {
   return true
 }
 
+function normalizeEventPayload(body = {}) {
+  const title = String(body.title || '').trim().slice(0, 200)
+  const description = String(body.description || '').trim().slice(0, 4000) || null
+  const eventDate = String(body.event_date || '').trim()
+  const eventType = String(body.event_type || 'general').trim().slice(0, 60) || 'general'
+  const color = String(body.color || 'gold').trim().slice(0, 40) || 'gold'
+  const errors = []
+
+  if (!title) errors.push('Event title is required.')
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(eventDate) || Number.isNaN(Date.parse(`${eventDate}T00:00:00Z`))) {
+    errors.push('Event date must be a valid YYYY-MM-DD date.')
+  }
+
+  return { errors, value: { title, description, event_date: eventDate, event_type: eventType, color } }
+}
+
 function requireEventSchoolId(req, res) {
   const schoolId = Number(currentSchoolId(req) || 0)
   if (!Number.isInteger(schoolId) || schoolId <= 0) {
@@ -56,17 +72,19 @@ router.get('/upcoming', protect, async (req, res) => {
 // POST /api/events
 router.post('/', protect, canManageEvents, async (req, res) => {
   try {
-    const { title, description, event_date, event_type = 'general', color = 'gold' } = req.body
-    if (!title || !event_date)
-      return res.status(400).json({ success: false, message: 'Title and date are required.' })
+    const parsed = normalizeEventPayload(req.body)
+    if (parsed.errors.length) {
+      return res.status(422).json({ success: false, message: 'Event validation failed.', fieldErrors: parsed.errors })
+    }
 
     await ensureTable()
     const schoolId = requireEventSchoolId(req, res)
     if (!schoolId) return
+    const { title, description, event_date, event_type, color } = parsed.value
     const result = await query(
       `INSERT INTO events (school_id, title, description, event_date, event_type, color, created_by)
        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-      [schoolId, title, description || null, event_date, event_type, color, req.user?.id || null]
+      [schoolId, title, description, event_date, event_type, color, req.user?.id || null]
     )
     res.json({ success: true, data: result.rows[0] })
   } catch (err) {
@@ -77,11 +95,15 @@ router.post('/', protect, canManageEvents, async (req, res) => {
 // PUT /api/events/:id
 router.put('/:id', protect, canManageEvents, async (req, res) => {
   try {
-    const { title, description, event_date, event_type, color } = req.body
+    const parsed = normalizeEventPayload(req.body)
+    if (parsed.errors.length) {
+      return res.status(422).json({ success: false, message: 'Event validation failed.', fieldErrors: parsed.errors })
+    }
     await ensureTable()
     const schoolId = requireEventSchoolId(req, res)
     if (!schoolId) return
-    const result = await query(`UPDATE events SET title=$1, description=$2, event_date=$3, event_type=$4, color=$5, updated_at=NOW() WHERE id=$6 AND school_id=$7 RETURNING *`, [title, description || null, event_date, event_type || 'general', color || 'gold', req.params.id, schoolId])
+    const { title, description, event_date, event_type, color } = parsed.value
+    const result = await query(`UPDATE events SET title=$1, description=$2, event_date=$3, event_type=$4, color=$5, updated_at=NOW() WHERE id=$6 AND school_id=$7 RETURNING *`, [title, description, event_date, event_type, color, req.params.id, schoolId])
     if (!result.rows.length)
       return res.status(404).json({ success: false, message: 'Event not found.' })
     res.json({ success: true, data: result.rows[0] })
