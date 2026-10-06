@@ -578,7 +578,7 @@ async function migrate() {
       await rlsMigration.up()
     } catch (err) {
       console.error('RLS Migration Error:', err.message)
-      // Non-fatal, let the app start but log heavily
+      throw err
     }
 
     console.log('\nMigration complete.\n')

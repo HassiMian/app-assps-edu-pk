@@ -1670,6 +1670,19 @@ assertContains(
   'CI must enforce protected template integrity.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/CreateChallan.jsx',
+  /\/api\/fees\/existing[\s\S]{0,260}\.catch\(\(\) => setExistingChallan\(null\)\)/,
+  'existing-challan lookup failures must not be treated as proof that no challan exists.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/CreateChallan.jsx',
+  "existingCheckStatus !== 'ready'",
+  'challan creation must remain blocked until duplicate-check verification succeeds.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
@@ -1821,4 +1834,16 @@ assertNotContains(
   'al-siddique-backend/src/services/portalAccountService.js',
   /hasColumn\('users', 'permissions'\)\.catch\(\(\) => false\)/,
   'portal account provisioning must not silently omit authoritative permissions on schema lookup failure.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/config/migrate.js',
+  /RLS Migration Error:[\s\S]{0,160}Non-fatal/,
+  'RLS migration failures must never be treated as non-fatal.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  "console.error('RLS Migration Error:', err.message)\n      throw err",
+  'migration runner must fail closed when RLS policy application fails.'
 )
