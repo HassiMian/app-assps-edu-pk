@@ -55,7 +55,7 @@ function buildStudentSafeProjection(releaseSnapshot = {}, bindings = {}) {
 }
 
 function buildStaffAnswerKeyProjection(releaseSnapshot = {}, { role } = {}) {
-  const allowed=new Set(['super_admin','admin','principal','teacher'])
+  const allowed=new Set(['super_admin','admin','school_admin','principal','teacher'])
   if (!allowed.has(String(role||'').toLowerCase())) {
     const error=new Error('Staff authorization is required for answer-key projection')
     error.code='ANSWER_KEY_ROLE_REQUIRED'
@@ -180,9 +180,14 @@ async function recordBookletPlan({ schoolId, printJobPublicId, pageCounts = {} }
     if (!found.rowCount) { const e=new Error('Print job not found'); e.code='PRINT_JOB_NOT_FOUND'; throw e }
     const job=found.rows[0]
     if (job.artifact_kind!=='student_batch' || !job.roster_snapshot_id) { const e=new Error('Booklet planning is only valid for personalized student batches'); e.code='BOOKLET_PLAN_REQUIRES_STUDENT_BATCH'; throw e }
-    const membersResult=await client.query('SELECT id,ordinal FROM roster_snapshot_members WHERE school_id=$1 AND roster_snapshot_id=$2 ORDER BY ordinal',[tenantId,job.roster_snapshot_id])
-    const members=membersResult.rows.map(row=>({id:row.id,ordinal:row.ordinal}))
-    const plan=planPersonalizedBooklets({members,pageCounts,duplex:job.duplex})
+    const membersResult=await client.query('SELECT id,ordinal,student_key FROM roster_snapshot_members WHERE school_id=$1 AND roster_snapshot_id=$2 ORDER BY ordinal',[tenantId,job.roster_snapshot_id])
+    const members=membersResult.rows.map(row=>({id:row.id,ordinal:row.ordinal,studentKey:row.student_key}))
+    const normalizedPageCounts={}
+    for (const member of members) {
+      const raw=pageCounts?.[member.studentKey] ?? pageCounts?.[String(member.ordinal)] ?? pageCounts?.[member.ordinal-1]
+      if (raw != null) normalizedPageCounts[String(member.id)]=raw
+    }
+    const plan=planPersonalizedBooklets({members,pageCounts:normalizedPageCounts,duplex:job.duplex})
     const existing=await client.query('SELECT roster_member_id,booklet_index,start_page,content_pages,padding_pages FROM print_job_booklets WHERE school_id=$1 AND print_job_id=$2 ORDER BY booklet_index',[tenantId,job.id])
     if (existing.rowCount) {
       const same=existing.rows.length===plan.booklets.length && existing.rows.every((row,index)=>{
