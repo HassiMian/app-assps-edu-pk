@@ -122,27 +122,18 @@ export default function StudentPortal() {
  })
  setExams(myExams)
 
- // 4. Results: for each exam, fetch marks filtered to this student
- const allResults = []
- await Promise.all(myExams.map(async (exam) => {
- try {
- const res = await api.get(`/api/exams/results/${exam.id}`)
- const rows = (res.data?.data || []).filter(r =>
- String(r.student_id) === String(numericId) ||
- (grNumber && String(r.student_id) === String(grNumber))
- )
- rows.forEach(r => allResults.push({
- examId: exam.id,
- examName: exam.name,
- examType: exam.type,
+ // 4. Results — one scoped server query, avoiding per-exam N+1 requests
+ const resultsResponse = await api.get('/api/exams/results', { params: { student_id: numericId } })
+ const scopedResults = Array.isArray(resultsResponse.data?.data) ? resultsResponse.data.data : []
+ setResults(scopedResults.map(r => ({
+ examId: r.exam_id,
+ examName: r.exam_name || 'Exam',
+ examType: r.exam_type || '',
  subject: r.subject,
  obtained: Number(r.marks_obtained || 0),
- total: Number(r.total_marks || exam.total_marks || 100),
- grade: r.grade || computeGrade(Number(r.marks_obtained || 0), Number(r.total_marks || exam.total_marks || 100), activeGradeBands),
- }))
- } catch {}
- }))
- setResults(allResults)
+ total: Number(r.total_marks || 0),
+ grade: r.grade || computeGrade(Number(r.marks_obtained || 0), Number(r.total_marks || 0), activeGradeBands),
+ })))
 
  // 5. Fee challans for this student
  const feeRes = await api.get('/api/fees')

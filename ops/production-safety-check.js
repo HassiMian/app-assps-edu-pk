@@ -278,6 +278,19 @@ assertContains(
   'parent portal aggregate grades must use the school grading policy.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  /\/api\/exams\/results\/\$\{exam\.id\}/,
+  'student portal must avoid N+1 result requests and use the scoped result list endpoint.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
+  /\/api\/exams\/results\/\$\{exam\.id\}/,
+  'parent portal must avoid N+1 result requests and use the scoped result list endpoint.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
