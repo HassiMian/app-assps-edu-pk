@@ -119,20 +119,27 @@ function normalizePakistanPhone(phone) {
   return `+92${String(phone).replace(/^0/, '').replace(/\D/g, '')}`
 }
 
-async function notifyParent(phone, studentName, status, date, twilioClient, twilioConfig) {
-  if (!twilioClient || !twilioConfig?.waFrom || !phone) return
+async function notifyParent(phone, studentName, status, date, schoolName, twilioClient, twilioConfig) {
   const statusLabel = status === 'absent' ? 'Absent' : status === 'late' ? 'Late' : null
-  if (!statusLabel) return
+  if (!statusLabel || !phone) return { status: 'skipped', reason: 'No attendance alert is required.' }
+  if (!twilioClient || !twilioConfig?.waFrom) return { status: 'not_configured', reason: 'WhatsApp provider is not configured.' }
 
   const formattedPhone = `whatsapp:${normalizePakistanPhone(phone)}`
   const dateStr = new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-  const msg = `*Al Siddique Scholars Public School*\n\nAttendance Alert - ${dateStr}\n\nStudent: *${studentName}*\nStatus: *${statusLabel}*\n\nFor queries, contact the school office.`
+  const safeSchoolName = String(schoolName || '').trim() || 'School'
+  const msg = `*${safeSchoolName}*\n\nAttendance Alert - ${dateStr}\n\nStudent: *${studentName}*\nStatus: *${statusLabel}*\n\nFor queries, contact the school office.`
 
-  twilioClient.messages.create({
-    to: formattedPhone,
-    from: twilioConfig.waFrom,
-    body: msg,
-  }).catch(() => {})
+  try {
+    const providerMessage = await twilioClient.messages.create({
+      to: formattedPhone,
+      from: twilioConfig.waFrom,
+      body: msg,
+    })
+    return { status: providerMessage?.status || 'sent', sid: providerMessage?.sid || null }
+  } catch (error) {
+    console.error('Attendance parent notification failed:', error.message)
+    return { status: 'failed', reason: error.message || 'Provider rejected attendance alert.' }
+  }
 }
 
 // GET /api/attendance/monthly-class-summary — canonical month aggregate by class
@@ -270,6 +277,17 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
+    let schoolName = ''
+    if (schoolId) {
+      const schoolIdentity = await query(`
+        SELECT COALESCE(NULLIF(TRIM(st.school_name), ''), s.name) AS school_name
+        FROM schools s
+        LEFT JOIN settings st ON st.school_id = s.id
+        WHERE s.id = $1
+        LIMIT 1
+      `, [schoolId])
+      schoolName = String(schoolIdentity.rows[0]?.school_name || '').trim()
+    }
     const twilioConfig = await getTwilioConfigForSchool(schoolId)
     const twilioClient = buildTwilioClient(twilioConfig)
     const supportsStudentSchool = await hasColumn('students', 'school_id')
@@ -418,17 +436,23 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
 
     await client.query('COMMIT')
 
-    res.json({
+    const notificationResults = await Promise.all(
+      toNotify.map(item => notifyParent(item.phone, item.name, item.status, item.date, schoolName, twilioClient, twilioConfig))
+    )
+    const notificationSummary = notificationResults.reduce((summary, item) => {
+      const key = item?.status || 'unknown'
+      summary[key] = (summary[key] || 0) + 1
+      return summary
+    }, {})
+
+    return res.json({
       success: true,
-      message: `${saved} records save ho gaye`,
+      message: `${saved} attendance records saved.`,
       savedCount: saved,
       requestedCount: normalizedRecords.length,
-      notificationQueueCount: toNotify.length,
+      notificationRequestedCount: toNotify.length,
+      notificationSummary,
     })
-
-    for (const item of toNotify) {
-      void notifyParent(item.phone, item.name, item.status, item.date, twilioClient, twilioConfig)
-    }
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
     console.error('Attendance mark error:', err.message)

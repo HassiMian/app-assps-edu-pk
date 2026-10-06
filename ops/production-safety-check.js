@@ -1210,6 +1210,18 @@ assertContains(
   'the canonical admissions API must mount admissionRoutes.js exactly once.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  /Al Siddique Scholars Public School|\.messages\.create\([\s\S]{0,300}\)\.catch\(\(\) => \{\}\)/,
+  'attendance alerts must use canonical tenant identity and must not silently swallow provider failures.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  'notificationSummary',
+  'attendance marking must report provider notification outcomes instead of fire-and-forget success.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
