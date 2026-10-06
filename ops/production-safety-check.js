@@ -1555,6 +1555,23 @@ for (const documentHostFile of [
   )
 }
 
+
+assertContains(
+  'al-siddique-frontend/src/index.css',
+  '--app-bg: var(--apex-bg-canvas);',
+  'legacy application aliases must resolve through semantic APEX background tokens.'
+)
+assertContains(
+  'al-siddique-frontend/src/index.css',
+  ':root[data-theme="dark"] { color-scheme: dark; }',
+  'browser native controls must follow the explicit dark theme mode.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/index.css',
+  /--app-bg:\s*#071e34|--app-surface-strong:\s*rgba\(11,44,77|--app-input:\s*rgba\(7,30,52/,
+  'root application theme aliases must not fall back to the legacy heavy navy palette.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -4,71 +4,44 @@
 @import "./styles/apex-components-v1.css";
 
 :root {
-  --navy: #0B2C4D;
-  --navy-light: #0d3563;
-  --navy-dark: #071e34;
-  --gold: #C8991A;
-  --gold-light: #e8b420;
-  --gold-muted: #a07814;
-  --silver: #C0C8D8;
-  --silver-dark: #8892A4;
-  --grey: #6B7280;
-  --grey-light: #F1F3F7;
-  --glass-bg: rgba(11, 44, 77, 0.4);
-  --glass-border: rgba(200, 153, 26, 0.25);
-  --glass-white: rgba(255, 255, 255, 0.06);
-  --shadow-gold: 0 0 30px rgba(200, 153, 26, 0.15);
-  --shadow-navy: 0 20px 60px rgba(7, 30, 52, 0.6);
-  --glow-gold: 0 0 20px rgba(200, 153, 26, 0.4);
+  /* Compatibility aliases now resolve through the semantic APEX system. */
+  --navy: var(--apex-bg-surface-solid);
+  --navy-light: var(--apex-bg-canvas-elevated);
+  --navy-dark: var(--apex-bg-canvas);
+  --gold: var(--apex-action-highlight);
+  --gold-light: var(--apex-action-highlight);
+  --gold-muted: var(--apex-action-highlight);
+  --silver: var(--apex-text-secondary);
+  --silver-dark: var(--apex-text-tertiary);
+  --grey: var(--apex-text-tertiary);
+  --grey-light: var(--apex-bg-subtle);
+  --glass-bg: var(--apex-bg-surface);
+  --glass-border: var(--apex-border-default);
+  --glass-white: color-mix(in srgb, var(--apex-bg-surface-solid) 70%, transparent);
+  --shadow-gold: var(--apex-shadow-sm);
+  --shadow-navy: var(--apex-shadow-lg);
+  --glow-gold: 0 0 20px color-mix(in srgb, var(--apex-action-highlight) 24%, transparent);
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
   --font-urdu: 'Noto Nastaliq Urdu', serif;
-  --app-bg: #071e34;
-  --app-bg-soft: #0b2c4d;
-  --app-surface: rgba(15,23,42,0.58);
-  --app-surface-strong: rgba(11,44,77,0.88);
-  --app-border: rgba(148,163,184,0.18);
-  --app-text: #f8fafc;
-  --app-text-soft: #C0C8D8;
-  --app-muted: #8892A4;
-  --app-input: rgba(7,30,52,0.58);
-  --app-shadow: 0 22px 50px rgba(0,0,0,0.32);
-  --chart-text: #f8fafc;
-  --chart-muted: rgba(255,255,255,0.55);
-  --chart-track: rgba(255,255,255,0.08);
-  color-scheme: dark;
-}
-
-:root[data-theme="light"] {
-  --navy: #f7fbff;
-  --navy-light: #eef6ff;
-  --navy-dark: #edf3f8;
-  --gold: #a16f00;
-  --gold-light: #c98b08;
-  --gold-muted: #b8860b;
-  --silver: #162235;
-  --silver-dark: #5d6b7e;
-  --glass-bg: rgba(255,255,255,0.72);
-  --glass-border: rgba(15,35,60,0.14);
-  --glass-white: rgba(15,35,60,0.04);
-  --shadow-gold: 0 14px 34px rgba(161,111,0,0.14);
-  --shadow-navy: 0 20px 60px rgba(58,77,105,0.18);
-  --glow-gold: 0 0 18px rgba(161,111,0,0.18);
-  --app-bg: #edf3f8;
-  --app-bg-soft: #f7fbff;
-  --app-surface: rgba(255,255,255,0.78);
-  --app-surface-strong: rgba(255,255,255,0.94);
-  --app-border: rgba(15,35,60,0.14);
-  --app-text: #0f172a;
-  --app-text-soft: #233044;
-  --app-muted: #5d6b7e;
-  --app-input: rgba(255,255,255,0.86);
-  --app-shadow: 0 18px 42px rgba(58,77,105,0.16);
-  --chart-text: #0f172a;
-  --chart-muted: #64748b;
-  --chart-track: rgba(15,23,42,0.10);
+  --app-bg: var(--apex-bg-canvas);
+  --app-bg-soft: var(--apex-bg-canvas-elevated);
+  --app-surface: var(--apex-bg-surface);
+  --app-surface-strong: var(--apex-bg-surface-solid);
+  --app-border: var(--apex-border-default);
+  --app-text: var(--apex-text-primary);
+  --app-text-soft: var(--apex-text-secondary);
+  --app-muted: var(--apex-text-tertiary);
+  --app-input: var(--apex-bg-surface-solid);
+  --app-shadow: var(--apex-shadow-md);
+  --chart-text: var(--apex-text-primary);
+  --chart-muted: var(--apex-text-tertiary);
+  --chart-track: var(--apex-border-subtle);
   color-scheme: light;
 }
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -557,7 +530,7 @@ body {
 .btn-gold {
   background: linear-gradient(135deg, #C8991A, #e8b420, #C8991A);
   background-size: 200% auto;
-  color: #071e34;
+  color: #fff;
   font-family: "Aptos", "Avenir Next", "Segoe UI", sans-serif;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -715,7 +688,7 @@ body {
   border: 0;
   border-radius: 10px;
   padding: 10px 16px;
-  background: #071e34;
+  background: var(--apex-action-primary);
   color: #fff;
   font-weight: 800;
   cursor: pointer;
@@ -730,7 +703,7 @@ body {
 }
 
 .result-options-panel {
-  background: rgba(7,30,52,0.62);
+  background: var(--apex-bg-surface-solid);
   border: 1px solid rgba(148,163,184,0.18);
   border-radius: 16px;
   padding: 16px;
@@ -2137,7 +2110,7 @@ video {
   gap: 10px;
   padding: 10px 12px;
   border-radius: 16px;
-  background: rgba(11,44,77,0.98);
+  background: var(--apex-bg-surface-solid);
   border: 1px solid rgba(148,163,184,0.18);
   box-shadow: 0 16px 48px rgba(0,0,0,0.45);
 }
