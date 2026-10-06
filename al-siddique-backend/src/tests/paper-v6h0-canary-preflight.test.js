@@ -18,6 +18,7 @@ function deps({review=approvedReview,ready=true,blockers=[]}={}) {
   return {
     getProjectedPaper: async()=>paper,
     reviewPortalPaperDocument: async()=>review,
+    verifyCanonicalCanaryBinding: async()=>({valid:true,issues:[],missingColumns:[],uniqueIndex:{present:true}}),
     buildCanonicalCutoverReadiness: async()=>({ready,gates:{...gates,canonicalRegistryWriteEnabled:ready},blockers}),
   }
 }
@@ -35,6 +36,20 @@ test('approved authoring source remains blocked while publisher/write readiness 
   assert.equal(r.eligible,false)
   assert.equal(r.writeAttempted,false)
   assert.deepEqual(r.blockers,['CURRICULUM_PUBLISHER_EVIDENCE_INVALID','CANONICAL_REGISTRY_WRITE_DISABLED'])
+})
+
+
+test('approved source stops before publisher readiness when H1 binding is invalid', async()=>{
+  let readinessCalls=0
+  const d=deps()
+  d.verifyCanonicalCanaryBinding=async()=>({valid:false,issues:['missing binding'],missingColumns:['source_paper_id'],uniqueIndex:{present:false}})
+  d.buildCanonicalCutoverReadiness=async()=>{readinessCalls++;return {ready:true,gates,blockers:[]}}
+  const r=await buildCanonicalCanaryPreflight({schoolId:1,userId:2,role:'admin',paperId:91,deps:d})
+  assert.equal(r.eligible,false)
+  assert.equal(r.bindingEvaluated,true)
+  assert.equal(r.readinessEvaluated,false)
+  assert.equal(readinessCalls,0)
+  assert.ok(r.blockers.includes('CANARY_SOURCE_BINDING_SCHEMA_NOT_READY'))
 })
 
 test('fully approved simulated readiness only produces an eligible read-only execution review', async()=>{
