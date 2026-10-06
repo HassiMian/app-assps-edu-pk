@@ -1,6 +1,6 @@
 // AcademicSetupModule.jsx — Al Siddique Smart School OS
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { GraduationCap, Plus, Trash2, Edit2, Check, X, Building2 } from 'lucide-react'
 import api from '../../services/api'
 
@@ -8,7 +8,7 @@ function slugifyLevel(name) {
   const clean = String(name || '').toLowerCase().trim()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
-  return clean || `c_${Date.now()}`
+  return clean || `class-${globalThis.crypto?.randomUUID?.().slice(0, 8) || Date.now()}`
 }
 
 //  Academic data (classes, subjects, calendar) stored separately 
@@ -81,7 +81,7 @@ function mergeClasses(savedClasses = []) {
     level: String(item.level || `c_${idx + 1}`),
     name: String(item.name || `Class ${idx + 1}`).trim(),
     active: item.active !== false,
-    sections: Array.isArray(item.sections) && item.sections.length > 0 ? item.sections : ['Blue'],
+    sections: Array.isArray(item.sections) ? item.sections.filter(Boolean) : [],
   }))
 }
 
@@ -160,7 +160,7 @@ function ClassesTab({ data, setData }) {
   const [editingName, setEditingName] = useState({})
   const [tempName, setTempName] = useState({})
   const [newClassName, setNewClassName] = useState('')
-  const [newClassSection, setNewClassSection] = useState('Blue')
+  const [newClassSection, setNewClassSection] = useState('')
   const [addingClass, setAddingClass] = useState(false)
 
   function toggleClass(level) {
@@ -209,7 +209,11 @@ function ClassesTab({ data, setData }) {
     }
     const safeLevel = slugifyLevel(trimmed)
     const finalLevel = data.classes.some(c => c.level === safeLevel) ? `${safeLevel}_${Date.now()}` : safeLevel
-    const initialSec = newClassSection.trim() || 'Blue'
+    const initialSec = newClassSection.trim()
+    if (!initialSec) {
+      alert('Add at least one real section for this class. A default section will not be invented.')
+      return
+    }
     const newCls = {
       level: finalLevel,
       name: trimmed,
@@ -221,7 +225,7 @@ function ClassesTab({ data, setData }) {
       classes: [...d.classes, newCls],
     }))
     setNewClassName('')
-    setNewClassSection('Blue')
+    setNewClassSection('')
     setAddingClass(false)
   }
 
@@ -282,7 +286,7 @@ function ClassesTab({ data, setData }) {
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <Btn variant="gold" onClick={addClass}>Save Class</Btn>
-                <Btn variant="ghost" onClick={() => { setAddingClass(false); setNewClassName(''); setNewClassSection('Blue'); }}>Cancel</Btn>
+                <Btn variant="ghost" onClick={() => { setAddingClass(false); setNewClassName(''); setNewClassSection(''); }}>Cancel</Btn>
               </div>
             </div>
           </div>
@@ -602,7 +606,7 @@ function CalendarTab({ data, setData }) {
  </div>
  {data.sessionStart && data.sessionEnd && (
  <div className="super-module-card" style={{ background:'rgba(200,153,26,0.08)', borderRadius:10, padding:'12px 16px', marginBottom:20, fontSize:13, color:C.silver }}>
-  Session Duration: <strong style={{ color:C.gold }}>{daysBetween(data.sessionStart, data.sessionEnd)} days</strong> · Approx <strong style={{ color:C.gold }}>{Math.round(daysBetween(data.sessionStart, data.sessionEnd) / 30)} months</strong>
+  Session Duration: <strong style={{ color:'var(--apex-action-primary)' }}>{daysBetween(data.sessionStart, data.sessionEnd)} days</strong> · Approx <strong style={{ color:C.gold }}>{Math.round(daysBetween(data.sessionStart, data.sessionEnd) / 30)} months</strong>
  </div>
  )}
  <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:16 }}>
@@ -680,6 +684,7 @@ export default function AcademicSetupModule() {
  const [activeTab, setActiveTab] = useState('classes')
  const [data, setData] = useState(loadAcademic)
  const [syncState, setSyncState] = useState('local')
+ const saveRevision = useRef(0)
 
  useEffect(() => {
  let cancelled = false
@@ -702,31 +707,46 @@ export default function AcademicSetupModule() {
  // Browser storage is now only a cache; server academic setup is the shared authority once configured.
  function updateData(updater) {
  const next = typeof updater === 'function' ? updater(data) : updater
+ const revision = ++saveRevision.current
  setData(next)
  saveAcademic(next)
  setSyncState('saving')
  void api.put('/api/academic/setup', next)
- .then(() => setSyncState('synced'))
- .catch(() => setSyncState('local'))
+ .then(() => {
+ if (revision === saveRevision.current) setSyncState('synced')
+ })
+ .catch(async (error) => {
+ console.error('Academic setup save failed', error)
+ if (revision !== saveRevision.current) return
+ setSyncState('error')
+ try {
+ const response = await api.get('/api/academic/setup')
+ if (response.data?.configured && response.data?.data) {
+ const authoritative = response.data.data
+ setData(authoritative)
+ saveAcademic(authoritative)
+ }
+ } catch { /* keep the explicit error state; never invent replacement academic data */ }
+ })
  }
 
  return (
- <div className="super-module-card" style={{ minHeight:'100vh', background:'#071e34', color:C.silver, fontFamily:'Inter, sans-serif' }}>
+ <div className="super-module-card" style={{ minHeight:'100vh', background:'var(--apex-shell-gradient)', color:'var(--apex-text-primary)', fontFamily:'Inter, sans-serif' }}>
  <div className="super-module-card" style={{ padding:'24px 24px' }}>
 
  {/* Header */}
  <GCard style={{ marginBottom:24, display:'flex', alignItems:'center', gap:16, flexWrap:'wrap' }}>
- <div className="super-module-card" style={{ width:52, height:52, borderRadius:22, background:'rgba(255,159,10,0.15)', border:'1px solid rgba(255,159,10,0.35)', display:'grid', placeItems:'center', color:C.gold }}>
+ <div className="super-module-card" style={{ width:52, height:52, borderRadius:22, background:'color-mix(in srgb, var(--apex-action-primary) 9%, var(--apex-bg-surface-solid))', border:'1px solid var(--apex-border-default)', display:'grid', placeItems:'center', color:C.gold }}>
  <GraduationCap size={26} />
  </div>
  <div className="super-module-card" style={{ flex:1 }}>
- <h1 style={{ margin:0, fontSize:26, color:'#fff', fontFamily:"'Playfair Display',serif", fontWeight:800 }}>Academic Setup</h1>
- <p style={{ margin:'4px 0 0', color:C.muted, fontSize:13 }}>Classes & sections · Subjects · Academic calendar · {syncState === 'synced' ? 'Server synced' : syncState === 'saving' ? 'Saving…' : 'Local cache'}</p>
+ <h1 style={{ margin:0, fontSize:26, color:'var(--apex-text-primary)', fontFamily:"'Playfair Display',serif", fontWeight:800 }}>Academic Setup</h1>
+ <p style={{ margin:'4px 0 0', color:C.muted, fontSize:13 }}>Classes & sections · Subjects · Academic calendar · {syncState === 'synced' ? 'Server synced' : syncState === 'saving' ? 'Saving…' : syncState === 'error' ? 'Sync failed — server copy restored' : 'Local cache'}</p>
  </div>
  <div className="super-module-card" style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
  {TABS.map(t => (
  <button key={t.id} onClick={() => setActiveTab(t.id)}
- style={{ background: activeTab === t.id ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'rgba(15,23,42,0.46)', color: activeTab === t.id ? '#071e34' : C.silver, fontWeight: 600, fontSize:13, padding:'9px 18px', borderRadius:14, border: activeTab === t.id ? 'none' : `1px solid ${C.border}`, cursor:'pointer', whiteSpace:'nowrap' }}>
+ style={{ background: activeTab === t.id ? 'var(--apex-action-primary)' : 'var(--apex-bg-surface-solid)', color: activeTab === t.id ? '#fff' : 'var(--apex-text-secondary)', fontWeight: 600, fontSize:13, padding:'9px 18px', borderRadius:14, border: activeTab === t.id ? 'none' : `1px solid ${C.border}`, cursor:'pointer', whiteSpace:'nowrap' }}>
  {t.label}
  </button>
  ))}

@@ -132,7 +132,7 @@ function mergeByName(defaultItems, savedItems = []) {
       level: String(item.level || `c_${idx + 1}`),
       name: String(item.name || `Class ${idx + 1}`).trim(),
       active: item.active !== false,
-      sections: Array.isArray(item.sections) && item.sections.length > 0 ? item.sections : ['Blue'],
+      sections: Array.isArray(item.sections) ? item.sections.filter(Boolean) : [],
     }))
   }
   return defaultItems
@@ -217,9 +217,19 @@ export function useAcademicStore() {
         classes: Array.isArray(updates.classes) ? updates.classes : prev.classes,
       }
       const storage = getStorage()
-      try { storage?.setItem(AK, JSON.stringify(next)) } catch {}
+      try { storage?.setItem(AK, JSON.stringify(next)) } catch { /* browser cache is best-effort only */ }
       window.dispatchEvent(new Event('storage'))
-      void api.put('/api/academic/setup', next).catch(() => {})
+      void api.put('/api/academic/setup', next).catch(async (error) => {
+        console.error('Academic setup sync failed', error)
+        try {
+          const response = await api.get('/api/academic/setup')
+          if (response.data?.configured && response.data?.data) {
+            setData(response.data.data)
+            try { storage?.setItem(AK, JSON.stringify(response.data.data)) } catch { /* cache only */ }
+          }
+        } catch { /* keep last visible value and surface the sync error */ }
+        window.dispatchEvent(new CustomEvent('academic-setup:sync-error'))
+      })
       return next
     })
   }

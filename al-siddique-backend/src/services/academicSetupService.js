@@ -71,11 +71,13 @@ function validateAcademicSetup(input = {}) {
     if (name) classNames.add(nameKey)
     if (level) classLevels.add(levelKey)
 
+    if (!sections.length) errors.push(`Class ${name || index + 1}: at least one section is required.`)
+
     normalizedClasses.push({
       level,
       name,
       active: item?.active !== false,
-      sections: sections.length ? sections : ['Blue'],
+      sections,
     })
   })
 
