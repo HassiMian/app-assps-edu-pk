@@ -448,6 +448,15 @@ async function migrate() {
     }
 
     try {
+      const operationalMigration = require('../../migrations/005_operational_domain_storage')
+      await operationalMigration.up()
+      console.log('operational domain storage ready')
+    } catch (err) {
+      console.error('Operational Domain Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
