@@ -66,6 +66,12 @@ async function provisionPortalUser({
     error.code = 'USER_TENANT_SCHEMA_REQUIRED'
     throw error
   }
+  const supportsPermissions = await hasColumn('users', 'permissions')
+  if (!supportsPermissions) {
+    const error = new Error('User permission storage is not ready for portal account provisioning.')
+    error.code = 'USER_PERMISSIONS_SCHEMA_REQUIRED'
+    throw error
+  }
   if (!tenantId) {
     const error = new Error('Portal account provisioning requires a tenant context.')
     error.code = 'TENANT_CONTEXT_REQUIRED'
@@ -84,14 +90,13 @@ async function provisionPortalUser({
   if (existing) {
     const supportsUsername = await hasColumn('users', 'username').catch(() => false)
     const supportsPhone = await hasColumn('users', 'phone').catch(() => false)
-    const supportsPermissions = await hasColumn('users', 'permissions').catch(() => false)
     const updates = ['name = $1', 'designation = $2', 'is_active = $3']
     const params = [clean(name, 180), designation || null, Boolean(active)]
     let i = params.length + 1
     if (normalizedEmail) { updates.push(`email = $${i++}`); params.push(normalizedEmail) }
     if (supportsUsername && normalizedUsername) { updates.push(`username = $${i++}`); params.push(normalizedUsername) }
     if (supportsPhone && phone) { updates.push(`phone = $${i++}`); params.push(clean(phone, 40)) }
-    if (supportsPermissions) { updates.push(`permissions = $${i++}::jsonb`); params.push(JSON.stringify(Array.isArray(permissions) ? permissions : [])) }
+    updates.push(`permissions = $${i++}::jsonb`); params.push(JSON.stringify(Array.isArray(permissions) ? permissions : []))
     updates.push(`tenant_id = $${i++}`); params.push(tenantId)
     updates.push('updated_at = NOW()')
     params.push(existing.id, schoolId)
@@ -107,7 +112,6 @@ async function provisionPortalUser({
   const passwordHash = await bcrypt.hash(temporaryPassword, 12)
   const supportsUsername = await hasColumn('users', 'username').catch(() => false)
   const supportsPhone = await hasColumn('users', 'phone').catch(() => false)
-  const supportsPermissions = await hasColumn('users', 'permissions').catch(() => false)
   const supportsMustChange = await hasColumn('users', 'must_change_password').catch(() => false)
 
   const columns = ['school_id', 'name', 'email', 'password', 'role', 'designation', 'is_active']
@@ -115,7 +119,7 @@ async function provisionPortalUser({
   columns.push('tenant_id'); values.push(tenantId)
   if (supportsUsername) { columns.push('username'); values.push(normalizedUsername || normalizedEmail) }
   if (supportsPhone) { columns.push('phone'); values.push(phone ? clean(phone, 40) : null) }
-  if (supportsPermissions) { columns.push('permissions'); values.push(JSON.stringify(Array.isArray(permissions) ? permissions : [])) }
+  columns.push('permissions'); values.push(JSON.stringify(Array.isArray(permissions) ? permissions : []))
   if (supportsMustChange) { columns.push('must_change_password'); values.push(true) }
 
   const placeholders = values.map((_, idx) => {

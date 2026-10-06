@@ -441,16 +441,21 @@ router.put('/:id/portal-account/active', protect, canManageStaff, async (req, re
 router.put('/:id/portal-account/permissions', protect, canManageStaff, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
+    await ensureEmployeePortalSchema()
+    const supportsUserPermissions = await hasColumn('users', 'permissions')
+    if (!supportsUserPermissions) {
+      return res.status(503).json({
+        success: false,
+        code: 'USER_PERMISSIONS_SCHEMA_REQUIRED',
+        message: 'User permission storage is not ready.'
+      })
+    }
     const permissions = Array.isArray(req.body?.permissions) ? req.body.permissions : []
     const employee = await query('SELECT user_id FROM employees WHERE id = $1 AND school_id = $2 LIMIT 1', [Number(req.params.id), schoolId])
     const userId = employee.rows[0]?.user_id
     if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
-    if (await hasColumn('users', 'permissions').catch(() => false)) {
-      await query('UPDATE users SET permissions = $1::jsonb, updated_at = NOW() WHERE id = $2 AND school_id = $3', [JSON.stringify(permissions), userId, schoolId])
-    }
-    if (await hasColumn('employees', 'portal_permissions').catch(() => false)) {
-      await query('UPDATE employees SET portal_permissions = $1::jsonb WHERE id = $2 AND school_id = $3', [JSON.stringify(permissions), Number(req.params.id), schoolId])
-    }
+    await query('UPDATE users SET permissions = $1::jsonb, updated_at = NOW() WHERE id = $2 AND school_id = $3', [JSON.stringify(permissions), userId, schoolId])
+    await query('UPDATE employees SET portal_permissions = $1::jsonb WHERE id = $2 AND school_id = $3', [JSON.stringify(permissions), Number(req.params.id), schoolId])
     res.json({ success: true, data: { permissions } })
   } catch (err) {
     console.error('Employee permissions update error:', err.message)

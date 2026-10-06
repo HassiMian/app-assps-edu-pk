@@ -565,6 +565,15 @@ async function migrate() {
     }
 
     try {
+      const userPermissionsMigration = require('../../migrations/017_user_permissions_schema')
+      await userPermissionsMigration.up()
+      console.log('user permissions schema ready')
+    } catch (err) {
+      console.error('User Permissions Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

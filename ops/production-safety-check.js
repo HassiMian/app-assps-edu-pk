@@ -1792,3 +1792,33 @@ assertNotContains(
   /const result = supportsTenant && req\.user\?\.role !== 'super_admin'/,
   'admission reads must never fall back to an unscoped query when tenant support is missing.'
 )
+
+assertContains(
+  'al-siddique-backend/migrations/017_user_permissions_schema.js',
+  "ADD COLUMN IF NOT EXISTS permissions JSONB NOT NULL DEFAULT '[]'::jsonb",
+  'authoritative user permissions storage must be versioned in migration 017.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  "require('../../migrations/017_user_permissions_schema')",
+  'migration runner must apply user permissions schema migration 017.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  'USER_PERMISSIONS_SCHEMA_REQUIRED',
+  'staff permission writes must fail closed when authoritative permission storage is unavailable.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  /hasColumn\('users', 'permissions'\)\.catch\(\(\) => false\)/,
+  'staff permission writes must not silently degrade when users.permissions lookup fails.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/services/portalAccountService.js',
+  /hasColumn\('users', 'permissions'\)\.catch\(\(\) => false\)/,
+  'portal account provisioning must not silently omit authoritative permissions on schema lookup failure.'
+)
