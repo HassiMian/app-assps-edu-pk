@@ -94,6 +94,21 @@ router.post('/publisher-review/academic-publication-precheck', express.json({lim
   }
 })
 
+router.post('/publisher-review/release-envelope', express.json({limit:'1mb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=buildPublisherReleaseEnvelope(req.body||{}, {forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,signatureCreated:false,privateKeyAccepted:false,privateKeyAccessed:false,persisted:false,publisherApprovalChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio publisher release envelope error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PUBLISHER_RELEASE_ENVELOPE_FAILED',message:status>=500?'Publisher release envelope could not be generated.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
+
 router.post('/publisher-review/key-custody-precheck', express.json({limit:'256kb'}), async (req,res) => {
   try {
     const role=normalizedRole(req)
