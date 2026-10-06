@@ -34,7 +34,7 @@ const btnSecondary = {
 };
 const inputStyle = {
  width: '100%', padding: '12px 14px', borderRadius: 12,
- background: 'rgba(7,30,52,0.65)', border: '1px solid var(--apex-border-default)',
+ background:'var(--apex-bg-surface-solid)', border: '1px solid var(--apex-border-default)',
  color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none', boxSizing: 'border-box',
 };
 const selectStyle = {
@@ -126,14 +126,16 @@ function printExamResultCard({ student, marks, subjects, examName }) {
  w.focus()
 }
 
-function AddExamModal({ onClose, onAdd }) {
- const [form, setForm] = useState({ name: '', type: 'TE', date: '', session: '2026-2027' });
+function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
+ const fallbackSession = `${new Date().getFullYear()}-${new Date().getFullYear()+1}`;
+ const sessions = sessionOptions.length ? sessionOptions : [fallbackSession];
+ const [form, setForm] = useState({ name:'', type:'TE', date:'', session:sessions[0] });
  const set = (key, value) => setForm(prev => ({ ...prev, [key]: value }));
  const labelStyle = { color: 'var(--apex-text-tertiary)', fontSize: 12, fontWeight: 600, marginBottom: 8, display: 'block', textTransform: 'uppercase', letterSpacing: 0.6 };
- const fieldStyle = { width: '100%', padding: '12px 14px', borderRadius: 12, background: 'rgba(7,30,52,0.65)', border: '1px solid var(--apex-border-default)', color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none' };
+ const fieldStyle = { width:'100%', padding:'12px 14px', borderRadius:12, background:'var(--apex-bg-surface-solid)', border: '1px solid var(--apex-border-default)', color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none' };
 
  return createPortal(
- <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(7,30,52,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+ <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background:'var(--apex-bg-overlay)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
  <div className="super-module-card" style={{ ...cardStyle, width: '100%', maxWidth: 520 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, flexWrap: 'wrap', marginBottom: 20 }}>
  <div>
@@ -154,7 +156,7 @@ function AddExamModal({ onClose, onAdd }) {
  </div>
  </div>
  <div><label style={labelStyle}>Exam Date</label><input type="date" style={fieldStyle} value={form.date} onChange={e => set('date', e.target.value)} /></div>
- <div><label style={labelStyle}>Session</label><select style={fieldStyle} value={form.session} onChange={e => set('session', e.target.value)}>{['2026-2027','2025-2026','2024-2025'].map(session => <option key={session}>{session}</option>)}</select></div>
+ <div><label style={labelStyle}>Session</label><select style={fieldStyle} value={form.session} onChange={e => set('session', e.target.value)}>{sessions.map(session => <option key={session}>{session}</option>)}</select></div>
  </div>
 
  <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
@@ -174,9 +176,9 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
  const { g, c } = getGrade(pct);
 
  return createPortal(
- <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(7,30,52,0.94)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
- <div style={{ width: '100%', maxWidth: 560, borderRadius: 24, overflow: 'hidden', background: '#071e34', border: '1px solid rgba(200,153,26,0.25)' }}>
- <div style={{ padding: 24, background: '#0b2c4d', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+ <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background:'var(--apex-bg-overlay)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+ <div style={{ width: '100%', maxWidth: 560, borderRadius: 24, overflow: 'hidden', background:'var(--apex-bg-surface-solid)', border:'1px solid var(--apex-border-default)', boxShadow:'var(--apex-shadow-lg)' }}>
+ <div style={{ padding: 24, background:'var(--apex-bg-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
  <div>
  <div style={{ ...accentText, fontSize: 18, fontWeight: 800 }}>Result Card</div>
  <div style={{ color: 'var(--apex-text-primary)', fontSize: 12, marginTop: 4 }}>{examName}</div>
@@ -337,6 +339,9 @@ export default function ExaminationModule() {
  const examTypeCounts = exams.reduce((acc, e) => { acc[e.type] = (acc[e.type] || 0) + 1; return acc; }, {});
  const uniqueTypes = [...new Set(exams.map(e => e.type))].length;
  const totalSubjectsCount = rawSubjects.length;
+ const examSessionOptions = [...new Set(exams.map(exam => exam.session).filter(Boolean))];
+ const currentSession = `${new Date().getFullYear()}-${new Date().getFullYear()+1}`;
+ if (!examSessionOptions.includes(currentSession)) examSessionOptions.unshift(currentSession);
 
  const subjectPerClassBars = activeClasses
  .map((cls, i) => ({
@@ -345,17 +350,17 @@ export default function ExaminationModule() {
  color: ['#0A84FF','#30D158','#C8991A','#BF5AF2','#FF375F','#64D2FF'][i % 6],
  }));
 
- const examDashCard = { background: 'rgba(11,44,77,0.92)', backdropFilter: 'blur(20px)', border: '1px solid var(--apex-border-default)', borderRadius: 18, padding: 20 };
+ const examDashCard = { background:'var(--apex-bg-surface)', backdropFilter:'blur(18px)', border:'1px solid var(--apex-border-default)', borderRadius:18, padding:20, boxShadow:'var(--apex-shadow-sm)' };
  const examDashTitle = { color: 'var(--apex-text-primary)', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
 
  return (
- <div style={{ minHeight: '100%', background: '#071e34', color: 'var(--apex-text-primary)', padding: 24 }}>
+ <div style={{ minHeight:'100%', background:'var(--apex-shell-gradient)', color:'var(--apex-text-primary)', padding:24 }}>
  <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gap: 24 }}>
 
  <div className="super-module-card" style={{ ...cardStyle, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16, marginBottom: 20 }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
  <div style={{ width: 52, height: 52, borderRadius: 20, background: 'rgba(148,163,184,0.18)', display: 'grid', placeItems: 'center' }}>
- <Trophy size={24} color="#C8991A" />
+ <Trophy size={24} color="var(--apex-action-primary)" />
  </div>
  <div>
  <div style={headerStyle}>Examination Module</div>
@@ -383,8 +388,8 @@ export default function ExaminationModule() {
  ].map(c => (
  <div key={c.label} style={{ ...examDashCard, background: c.grad, padding: '16px 18px' }}>
  <div style={{ fontSize: 22 }}>{c.icon}</div>
- <div style={{ color: 'white', fontSize: 28, fontWeight: 900, marginTop: 6 }}>{c.value}</div>
- <div style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11 }}>{c.label}</div>
+ <div style={{ color:'var(--apex-text-primary)', fontSize:28, fontWeight:900, marginTop:6 }}>{c.value}</div>
+ <div style={{ color:'var(--apex-text-tertiary)', fontSize:11 }}>{c.label}</div>
  </div>
  ))}
  </div>
@@ -607,7 +612,7 @@ export default function ExaminationModule() {
  )}
  </div>
 
- {showAdd && <AddExamModal onClose={() => setShowAdd(false)} onAdd={async exam => {
+ {showAdd && <AddExamModal sessionOptions={examSessionOptions} onClose={() => setShowAdd(false)} onAdd={async exam => {
  try {
  const response = await api.post('/api/exams', {
  name: exam.name,
