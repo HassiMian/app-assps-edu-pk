@@ -44,12 +44,12 @@ test('Phase 17 readiness: canonical corpus is complete and semantically clean', 
   }
 })
 
-test('Phase 18 cutover: default production route uses guarded canonical chain with emergency rollback', () => {
+test('Unified Workspace: default production route keeps official papers in Paper Workspace', () => {
   for (const paper of v13.papers) {
-    assert.strictEqual(resolvePaperRoute(paper), 'word_editor', paper.id)
+    assert.strictEqual(resolvePaperRoute(paper), 'build', paper.id)
     assert.strictEqual(
       resolvePaperRoute(paper, 'build'),
-      'word_editor',
+      'build',
       `${paper.id}: targetTab must not bypass canonical default`
     )
     assert.strictEqual(
@@ -60,12 +60,12 @@ test('Phase 18 cutover: default production route uses guarded canonical chain wi
   }
 })
 
-test('Phase 17 readiness: explicit canary resolves all 43 pristine V13 papers to Canonical V2', () => {
+test('Unified Workspace: old canary flag cannot expose Canonical UI; internal conversion remains valid', () => {
   for (const paper of v13.papers) {
     assert.strictEqual(isPristineOfficialV13Paper(paper), true, paper.id)
     assert.strictEqual(
       resolvePaperRoute(paper, null, { officialCanonicalCanary: true }),
-      'word_editor',
+      'build',
       paper.id
     )
     const decision = resolvePaperEditorRoute(paper)
@@ -74,7 +74,7 @@ test('Phase 17 readiness: explicit canary resolves all 43 pristine V13 papers to
   }
 })
 
-test('Phase 17 readiness: rollback/fallback remains safe for academic mutations', () => {
+test('Phase 20 readiness: academic mutations remain preserved by internal canonical working-copy import', () => {
   const source = v13.papers.find(
     paper => paper.id === 'official-first-term-2026-class-5-english'
   )
@@ -83,12 +83,12 @@ test('Phase 17 readiness: rollback/fallback remains safe for academic mutations'
   const modifiedContent = structuredClone(source)
   modifiedContent.selectedQuestions.official_section.questions[0].content += '\nUSER ACADEMIC EDIT'
   assert.strictEqual(isPristineOfficialV13Paper(modifiedContent), false)
-  assert.strictEqual(resolvePaperEditorRoute(modifiedContent).route, 'LEGACY_CANVAS_V2')
+  assert.strictEqual(resolvePaperEditorRoute(modifiedContent).route, 'CANONICAL_V2')
 
   const modifiedMarks = structuredClone(source)
   modifiedMarks.config.totalMarks = Number(modifiedMarks.config.totalMarks || 0) + 1
   assert.strictEqual(isPristineOfficialV13Paper(modifiedMarks), false)
-  assert.strictEqual(resolvePaperEditorRoute(modifiedMarks).route, 'LEGACY_CANVAS_V2')
+  assert.strictEqual(resolvePaperEditorRoute(modifiedMarks).route, 'CANONICAL_V2')
 })
 
 test('Phase 17 readiness: operational schedule metadata remains canonical-safe', () => {
