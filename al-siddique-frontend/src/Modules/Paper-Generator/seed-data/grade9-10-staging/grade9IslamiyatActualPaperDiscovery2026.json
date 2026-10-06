@@ -1,0 +1,12 @@
+{
+  "schemaVersion":"assps-grade9-islamiyat-actual-paper-discovery-v1",
+  "checkedOn":"2026-10-06",
+  "officialArchive":{"authority":"BISE Multan","indexUrl":"https://web.bisemultan.edu.pk/question-papers-with-key-ssc-part-i-9th-1st-annual-2026-examination/","artifactLabel":"Islamic Studies","driveId":"1RXt3tZ3Hnj6KOSjHBMyvcoX7Xq66O4Mw"},
+  "artifact":{"fileName":"ISLA.pdf","sha256":"72f48582eb4ed52335eefc4fb11c67f9a4ed9f3ea7222f6026ee6ba27cad27c2","byteLength":2108312,"pageCount":36,"imageOnlyScan":true},
+  "classification":"OFFICIAL_MULTI_VERSION_OBJECTIVE_KEY_BUNDLE_NOT_FULL_PAPER",
+  "evidence":[
+    {"page":36,"visibleAnchor":"Paper Code 2026 (1st-A); OLD SCHEME OF STUDIES SESSIONS (2022-2024 & 2023-2025); NEW COURSE 50 MARKS","meaning":"Bundle contains versioned objective/key material, including an old-scheme/new-course variant; it is not a single full current question paper."}
+  ],
+  "current2026FullPaperHierarchyAuthority":false,
+  "rules":{"doNotInferSubjectiveHierarchy":true,"doNotTreatArchiveBundleAsSinglePaper":true,"questionStemsCopied":false,"genuineCurrentFullPaperStillRequired":true}
+}

@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./grade9IslamiyatActualPaperDiscovery2026.json',import.meta.url),'utf8'));
+test('Multan Islamiat 2026 archive artifact is byte/page locked',()=>{assert.match(d.artifact.sha256,/^[a-f0-9]{64}$/);assert.equal(d.artifact.pageCount,36);assert.equal(d.artifact.imageOnlyScan,true);});
+test('multi-version objective bundle cannot become a full-paper hierarchy source',()=>{assert.equal(d.classification,'OFFICIAL_MULTI_VERSION_OBJECTIVE_KEY_BUNDLE_NOT_FULL_PAPER');assert.equal(d.current2026FullPaperHierarchyAuthority,false);assert.equal(d.rules.doNotInferSubjectiveHierarchy,true);assert.equal(d.rules.doNotTreatArchiveBundleAsSinglePaper,true);});
+test('visible version anchor is preserved without copying question stems',()=>{const e=d.evidence.find(x=>x.page===36);assert(e);assert.match(e.visibleAnchor,/OLD SCHEME OF STUDIES/);assert.match(e.visibleAnchor,/NEW COURSE 50 MARKS/);assert.equal(d.rules.questionStemsCopied,false);assert.equal(d.rules.genuineCurrentFullPaperStillRequired,true);});
