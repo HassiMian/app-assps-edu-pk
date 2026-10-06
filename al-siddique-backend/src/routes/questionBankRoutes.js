@@ -8,6 +8,7 @@ const { query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
+const { captureQuestionGovernance, transitionQuestionLifecycle } = require('../services/questionBankGovernance')
 
 const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
@@ -31,6 +32,45 @@ function requireSchoolContext(req, res) {
 function generateId() {
   return `q_${Date.now()}_${crypto.randomBytes(6).toString('hex')}`
 }
+
+// Governance V1 — duplicate-safe capture and lifecycle control.
+router.post('/governance/capture', canManageQuestionBank, async (req, res) => {
+  try {
+    const schoolId = requireSchoolContext(req, res)
+    if (!schoolId) return
+    const idempotencyKey = req.get('Idempotency-Key') || req.body?.idempotencyKey
+    const result = await captureQuestionGovernance({
+      schoolId,
+      userId:req.user?.id || null,
+      idempotencyKey,
+      question:req.body?.question || req.body || {},
+      sourceQuestionBankId:req.body?.sourceQuestionBankId || req.body?.question?.id || req.body?.id || null,
+    })
+    res.status(result.replayed ? 200 : (result.created ? 201 : 200)).json({ success:true, data:result })
+  } catch (error) {
+    const status = Number(error.status) || 500
+    if (status >= 500) console.error('Question governance capture failed:', error)
+    res.status(status).json({ success:false, code:error.code || 'QUESTION_GOVERNANCE_CAPTURE_FAILED', message:error.message || 'Question governance capture failed' })
+  }
+})
+
+router.patch('/governance/:publicId/status', canManageQuestionBank, async (req, res) => {
+  try {
+    const schoolId = requireSchoolContext(req, res)
+    if (!schoolId) return
+    const data = await transitionQuestionLifecycle({
+      schoolId,
+      userId:req.user?.id || null,
+      publicId:req.params.publicId,
+      toStatus:req.body?.status,
+    })
+    res.json({ success:true, data })
+  } catch (error) {
+    const status = Number(error.status) || (error.code === 'INVALID_QUESTION_LIFECYCLE_TRANSITION' ? 409 : 500)
+    if (status >= 500) console.error('Question governance lifecycle failed:', error)
+    res.status(status).json({ success:false, code:error.code || 'QUESTION_GOVERNANCE_LIFECYCLE_FAILED', message:error.message || 'Question governance lifecycle failed' })
+  }
+})
 
 // ─── 1. Get List of Questions (with filters) ──────────────────────────────────
 router.get('/', async (req, res) => {
