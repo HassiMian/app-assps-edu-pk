@@ -304,6 +304,19 @@ assertContains(
   'unconfigured biometric/facial modes must be explicitly disabled instead of simulated.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  /Date\.now\(\) \+ Math\.random\(\)|status:\s*['"]sent['"]\s*,\s*time:\s*now/,
+  'notification UI must use provider delivery results instead of fabricating sent status.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  'const deliveryResults = Array.isArray(res.data?.results)',
+  'notification delivery UI must reflect the backend provider result set.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

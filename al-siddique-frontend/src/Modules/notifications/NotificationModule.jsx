@@ -15,9 +15,9 @@ import api from '../../services/api'
 //  Design tokens 
 
 const card = {
- background: 'rgba(11,44,77,0.92)',
+ background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(20px)',
- border: '1px solid rgba(148,163,184,0.18)',
+ border: '1px solid var(--apex-border-default)',
  borderRadius: 22,
 }
 
@@ -37,7 +37,7 @@ function Badge({ children, color = '#C8991A', size = 'sm' }) {
 
 function Btn({ children, onClick, variant = 'gold', size = 'md', disabled = false, style: s = {} }) {
  const v = {
- gold: { background: disabled ? 'rgba(200,153,26,0.3)' : '#C8991A', color: '#0B2C4D' },
+ gold: { background: disabled ? 'color-mix(in srgb, var(--apex-action-primary) 30%, transparent)' : 'var(--apex-action-primary)', color: '#fff' },
  ghost: { background: 'rgba(255,255,255,0.06)', color: '#C0C8D8', border: '1px solid rgba(255,255,255,0.12)' },
  green: { background: 'rgba(48,209,88,0.15)', color: '#30D158', border: '1px solid rgba(48,209,88,0.3)' },
  red: { background: 'rgba(255,55,95,0.15)', color: '#FF375F', border: '1px solid rgba(255,55,95,0.3)' },
@@ -292,18 +292,22 @@ export default function NotificationModule() {
  throw new Error(res.data?.message || 'Notification send failed.')
  }
 
- // Log results
- const newLogs = preview.map(m => ({
- id: Date.now() + Math.random(),
- name: m.name,
- phone: m.phone,
+ const deliveryResults = Array.isArray(res.data?.results) ? res.data.results : []
+ const newLogs = deliveryResults.map((delivery, index) => ({
+ id: `${delivery.sid || 'delivery'}-${delivery.student_id || index}-${Date.now()}`,
+ name: delivery.name || preview[index]?.name || 'Recipient',
+ phone: delivery.phone || preview[index]?.phone || '—',
  type: activeTab,
- channel,
- status: 'sent',
+ channel: delivery.channel || channel,
+ status: delivery.status || 'failed',
  time: now,
+ message: preview[index]?.message || '',
  }))
  setLog(prev => [...newLogs, ...prev])
- showToast(` ${preview.length} messages sent successfully!`)
+ const sentCount = Number(res.data?.sent || 0)
+ const failedCount = Number(res.data?.failed || 0)
+ if (failedCount > 0) showToast(`${sentCount} sent, ${failedCount} failed. Open Delivery Log for verified status.`, '#FF9F0A')
+ else showToast(`${sentCount} messages sent successfully!`)
  } catch (err) {
  showToast(err?.response?.data?.message || err?.message || 'Notification send failed.', '#FF375F')
  }
@@ -395,11 +399,11 @@ export default function NotificationModule() {
  {activeTab === 'log' ? (
  <div className="super-module-card" style={{ ...card, padding: 20, borderRadius: 22 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
- <h3 style={{ color: '#C8991A', margin: 0 }}>Delivery Log</h3>
- {log.length > 0 && <Btn variant="ghost" size="sm" onClick={() => setLog([])}><X size={13} /> Clear</Btn>}
+ <h3 style={{ color: 'var(--apex-action-primary)', margin: 0 }}>Verified Delivery Log</h3>
+ {log.length > 0 && <Btn variant="ghost" size="sm" onClick={() => setLog([])}><X size={13} /> Hide Loaded Log</Btn>}
  </div>
  {log.length === 0
- ? <div style={{ textAlign: 'center', padding: 40, color: 'rgba(192,200,216,0.4)' }}>No notifications sent yet</div>
+ ? <div style={{ textAlign: 'center', padding: 40, color: 'rgba(192,200,216,0.4)' }}>No verified delivery records found</div>
  : <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>{log.map(l => <LogItem key={l.id} log={l} />)}</div>
  }
  </div>
