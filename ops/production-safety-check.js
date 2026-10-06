@@ -2046,3 +2046,19 @@ assertNotContains(
   /legacyValue|migrateLegacy|removeLegacyOnMigrate|storage\.getItem\(baseKey\)/,
   'tenant storage must never import an unscoped legacy key into an authenticated tenant scope.'
 )
+
+assertContains(
+  'al-siddique-frontend/src/services/api.js',
+  'scopedRequestCacheKey(config.url)',
+  'frontend GET cache must be scoped by the authenticated tenant/user context.'
+)
+assertContains(
+  'al-siddique-frontend/src/services/api.js',
+  'requestCache.clear()',
+  'auth session transitions must clear in-memory API cache state.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/services/api.js',
+  /requestCache\.get\(config\.url\)|requestCache\.set\(res\.config\.url/,
+  'frontend API cache must never be keyed by URL alone.'
+)

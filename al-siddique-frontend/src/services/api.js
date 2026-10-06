@@ -12,8 +12,15 @@ const CACHE_CONFIG = {
 const requestCache = new Map()
 
 export function clearApiCache(endpoint) {
-  if (endpoint) requestCache.delete(endpoint)
-  else requestCache.clear()
+  if (!endpoint) {
+    requestCache.clear()
+    return
+  }
+  const target = String(endpoint).split('?')[0]
+  for (const key of requestCache.keys()) {
+    const scopedUrl = String(key).split('::').slice(1).join('::')
+    if (scopedUrl.split('?')[0] === target) requestCache.delete(key)
+  }
 }
 
 export function resolveAssetUrl(value) {
@@ -56,7 +63,18 @@ export function getAuthUser() {
   }
 }
 
+function requestCacheScope() {
+  const user = getAuthUser() || {}
+  const raw = user.tenant_id || user.tenantId || user.school_id || user.schoolId || user.school_code || user.schoolCode || user.email || 'public'
+  return String(raw).trim().toLowerCase().replace(/[^a-z0-9@._-]+/g, '-') || 'public'
+}
+
+function scopedRequestCacheKey(url) {
+  return `${requestCacheScope()}::${String(url || '')}`
+}
+
 export function setAuthSession(token, refreshToken, user) {
+  requestCache.clear()
   const storage = getStorage()
   if (!storage) return
   try {
@@ -67,6 +85,7 @@ export function setAuthSession(token, refreshToken, user) {
 }
 
 export function clearAuthSession() {
+  requestCache.clear()
   const storage = getStorage()
   if (!storage) return
   try {
@@ -85,7 +104,7 @@ api.interceptors.request.use((config) => {
     const urlKey = config.url?.split('?')[0]
     const ttl = CACHE_CONFIG[urlKey]
     if (ttl) {
-      const cached = requestCache.get(config.url)
+      const cached = requestCache.get(scopedRequestCacheKey(config.url))
       if (cached && Date.now() - cached.timestamp < ttl) {
         config.adapter = () => Promise.resolve({
           data: cached.data,
@@ -107,7 +126,7 @@ api.interceptors.response.use(
     if (method === 'get' && !res.config?.skipCache && res.status === 200) {
       const urlKey = res.config?.url?.split('?')[0]
       if (CACHE_CONFIG[urlKey]) {
-        requestCache.set(res.config.url, {
+        requestCache.set(scopedRequestCacheKey(res.config.url), {
           data: res.data,
           headers: res.headers,
           timestamp: Date.now(),
@@ -115,11 +134,7 @@ api.interceptors.response.use(
       }
     } else if (['post', 'put', 'patch', 'delete'].includes(method)) {
       const urlKey = res.config?.url?.split('?')[0]
-      if (urlKey && CACHE_CONFIG[urlKey]) {
-        for (const cacheKey of requestCache.keys()) {
-          if (cacheKey?.split('?')[0] === urlKey) requestCache.delete(cacheKey)
-        }
-      }
+      if (urlKey && CACHE_CONFIG[urlKey]) clearApiCache(urlKey)
     }
     return res
   },
