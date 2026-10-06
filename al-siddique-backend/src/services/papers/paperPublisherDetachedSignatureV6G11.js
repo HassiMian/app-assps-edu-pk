@@ -44,6 +44,7 @@ function verifyPublisherDetachedSignature(bundle, signatureRecord, options={}) {
     publicKeyFingerprintSha256:actualFingerprint,
     signatureAlgorithm:'Ed25519',
     signatureVerified:true,
+    detachedSignatureSha256:crypto.createHash('sha256').update(signature).digest('hex'),
     signedAt:text(signatureRecord?.signedAt)||null,
     signerId:text(signatureRecord?.signerId)||null,
     policy:{verificationOnly:true,signatureCreated:false,privateKeyAccessed:false,persisted:false,publisherApprovalChanged:false,canonicalWriteChanged:false},
