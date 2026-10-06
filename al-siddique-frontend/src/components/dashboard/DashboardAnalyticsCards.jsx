@@ -115,6 +115,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
   const [saving, setSaving] = useState(false)
   const [saveSuccess, setSaveSuccess] = useState(false)
   const [saveError, setSaveError] = useState(null)
+  const [loadError, setLoadError] = useState(null)
   const [showDiscardConfirm, setShowDiscardConfirm] = useState(false)
   const [pendingNavigation, setPendingNavigation] = useState(null)
 
@@ -185,17 +186,21 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
 
   const loadData = async () => {
     setLoading(true)
+    setLoadError(null)
     try {
       const [stuRes, attRes] = await Promise.all([
-        api.get('/api/students').catch(() => ({ data: { data: [] } })),
-        api.get(`/api/attendance?date=${today}`).catch(() => ({ data: { data: [] } })),
+        api.get('/api/students'),
+        api.get(`/api/attendance?date=${today}`),
       ])
-      const stuList = stuRes.data?.data || []
-      const attList = attRes.data?.data || []
+      const stuList = Array.isArray(stuRes.data?.data) ? stuRes.data.data : []
+      const attList = Array.isArray(attRes.data?.data) ? attRes.data.data : []
       setStudents(stuList)
       setMarkedToday(attList)
     } catch (err) {
       console.error('Failed to load unmarked attendance data:', err)
+      setStudents([])
+      setMarkedToday([])
+      setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be loaded from the server.')
     } finally {
       setLoading(false)
     }
@@ -255,7 +260,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
   const handleSaveAttendance = async (closeAfter = false) => {
     const entries = Object.entries(selectedStatus).filter(([_, val]) => !!val)
     if (entries.length === 0) {
-      alert('Please select attendance status for at least one student before saving.')
+      setSaveError('Select attendance status for at least one student before saving.')
       return
     }
 
@@ -526,6 +531,12 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
           </div>
         </div>
 
+        {loadError && (
+          <div style={{ padding:'10px 24px', background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', borderBottom:'1px solid color-mix(in srgb, var(--apex-action-danger) 28%, var(--apex-border-default))', color:'var(--apex-action-danger)', fontSize:13, fontWeight:700, display:'flex', alignItems:'center', gap:8 }}>
+            <AlertTriangle size={16} /> {loadError}
+          </div>
+        )}
+
         {saveSuccess && (
           <div
             data-testid="attendance-save-success"
@@ -571,6 +582,8 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
               <Loader2 size={32} style={{ animation: 'spin 1s linear infinite', margin: '0 auto 12px' }} />
               <p>Loading unmarked students list...</p>
             </div>
+          ) : loadError ? (
+            <div style={{ textAlign:'center', padding:50, color:'var(--apex-action-danger)' }}><AlertTriangle size={36} style={{ margin:'0 auto 12px' }}/><p style={{ margin:0 }}>{loadError}</p></div>
           ) : filteredUnmarked.length === 0 ? (
             <div style={{ textAlign: 'center', padding: 50, color: '#8892A4' }}>
               <CheckCircle2 size={40} color="#30D158" style={{ margin: '0 auto 12px' }} />

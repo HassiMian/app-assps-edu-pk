@@ -630,6 +630,19 @@ assertContains(
   'dashboard core data failures must be visible and explicit.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
+  /api\.get\(['"]\/api\/students['"]\)\.catch\(\(\) => \(\{ data: \{ data: \[\] \} \}\)\)|api\.get\(`\/api\/attendance\?date=\$\{today\}`\)\.catch/,
+  'dashboard attendance modal must not treat core API failures as an empty school.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
+  "setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be loaded from the server.')",
+  'dashboard attendance load failures must remain explicit.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
