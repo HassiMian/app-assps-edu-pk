@@ -231,7 +231,7 @@ async function migrate() {
         message     TEXT,
         metadata    JSONB DEFAULT '{}'::jsonb,
         read_at     TIMESTAMP,
-        status      VARCHAR(10) DEFAULT 'sent' CHECK (status IN ('sent','failed','pending')),
+        status      VARCHAR(20) DEFAULT 'pending' CHECK (status IN ('pending','accepted','queued','sent','delivered','failed','undelivered')),
         sent_by     INTEGER REFERENCES users(id),
         sent_at     TIMESTAMP DEFAULT NOW()
       );
@@ -570,6 +570,15 @@ async function migrate() {
       console.log('user permissions schema ready')
     } catch (err) {
       console.error('User Permissions Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
+      const notificationDeliveryStatusMigration = require('../../migrations/018_notification_delivery_status_schema')
+      await notificationDeliveryStatusMigration.up()
+      console.log('notification delivery status schema ready')
+    } catch (err) {
+      console.error('Notification Delivery Status Schema Migration Error:', err.message)
       throw err
     }
 

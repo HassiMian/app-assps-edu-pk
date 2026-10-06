@@ -276,6 +276,24 @@ assertNotContains(
 )
 
 assertContains(
+  'al-siddique-backend/migrations/018_notification_delivery_status_schema.js',
+  "'pending','accepted','queued','sent','delivered','failed','undelivered'",
+  'notification provider and final delivery states must be versioned distinctly.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  "require('../../migrations/018_notification_delivery_status_schema')",
+  'migration runner must apply notification delivery status migration 018.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/config/migrate.js',
+  /VARCHAR\(10\) DEFAULT 'sent' CHECK \(status IN \('sent','failed','pending'\)\)/,
+  'fresh databases must not collapse provider acceptance into sent status.'
+)
+
+assertContains(
   'al-siddique-backend/src/routes/employeeRoutes.js',
   "router.put('/attendance/bulk', protect, canManageStaff",
   'employee attendance must persist through the tenant-backed bulk endpoint.'
