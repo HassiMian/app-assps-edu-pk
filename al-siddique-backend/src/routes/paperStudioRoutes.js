@@ -15,6 +15,7 @@ const { validatePublisherKeyCustodyPreflight } = require('../services/papers/pap
 const { validatePublisherEditionReviewPreflight } = require('../services/papers/paperPublisherEditionReviewPreflightV6G15')
 const { buildAcademicPublicationPrecheck } = require('../services/papers/paperAcademicPublicationPrecheckV6G16')
 const { buildPublisherReleaseEnvelope } = require('../services/papers/paperPublisherReleaseEnvelopeV6G17')
+const { verifyPublisherReleaseDetachedSignature } = require('../services/papers/paperPublisherReleaseSignatureV6G19')
 const { buildHumanAuthorityBoundary } = require('../services/papers/paperHumanAuthorityBoundaryV6G18')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
@@ -106,6 +107,22 @@ router.post('/publisher-review/release-envelope', express.json({limit:'1mb'}), a
     const status=Number(err.status)||500
     if(status>=500)console.error('Paper Studio publisher release envelope error:',err.message)
     return res.status(status).json({success:false,code:err.code||'PUBLISHER_RELEASE_ENVELOPE_FAILED',message:status>=500?'Publisher release envelope could not be generated.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
+
+router.post('/publisher-review/release-signature-verify', express.json({limit:'1mb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const body=req.body||{}
+    const data=verifyPublisherReleaseDetachedSignature(body.releaseBundle||{},body.signatureRecord||{}, {forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{verificationOnly:true,signatureCreated:false,privateKeyAccepted:false,privateKeyAccessed:false,persisted:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio publisher release signature verification error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PUBLISHER_RELEASE_SIGNATURE_VERIFY_FAILED',message:status>=500?'Publisher release signature could not be verified.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
   }
 })
 
