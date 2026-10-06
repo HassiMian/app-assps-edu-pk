@@ -22,6 +22,7 @@ import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
 import { createBlankPaperDraft } from './paperCreationDraft.js'
 import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
 import { AssessmentRevisionConflictError, bindQueuedAssessmentSave, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
+import { createAssessmentPrintJob, fetchActivePrintRosterStudents, transitionAssessmentPrintJob } from './AssessmentStudio/core/printJobClient.js'
 
 function storeQToTemplate(q) {
  return {
@@ -600,6 +601,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  : SUBJECTS.find(s=>s.id===subjectId)
  
  const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
+ const isUserAuthoredPaper = Boolean(paper?.userAuthored || loadedPaper?.userAuthored || overrideConfig?.userAuthored)
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
  if (paper && allQuestionTypes) {
@@ -635,9 +637,12 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const blockAddMenuRef = useRef(null)
  const [finalizing, setFinalizing] = useState(false)
  const [persistenceNotice, setPersistenceNotice] = useState('')
+ const [personalizedDuplex, setPersonalizedDuplex] = useState(true)
+ const [personalizedPreparing, setPersonalizedPreparing] = useState(false)
+ const [personalizedStatus, setPersonalizedStatus] = useState('')
 
  useEffect(() => {
-  if (!loadedPaper?.userAuthored) return undefined
+  if (!isUserAuthoredPaper) return undefined
   const retry = () => flushAssessmentOfflineQueue().then(result => {
    const serverPaperId = loadedPaper?.serverPaperId || paper?.serverPaperId || loadedPaper?.canonicalDocument?.id
    const synced = result.synced?.find(item =>
@@ -657,7 +662,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   retry()
   window.addEventListener('online', retry)
   return () => window.removeEventListener('online', retry)
- }, [loadedPaper?.userAuthored])
+ }, [isUserAuthoredPaper])
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
  const [priority, setPriority] = useState('all')
@@ -829,7 +834,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   })
   setSelectedSectionId(newId)
   setActiveEditable(null)
-  if (loadedPaper?.userAuthored) setEditMode(true)
+  if (isUserAuthoredPaper) setEditMode(true)
   if (blockAddMenuRef.current) blockAddMenuRef.current.open = false
  }
  const applyWorkspaceRules = () => {
@@ -904,7 +909,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
 
  async function doSave(options = {}) {
  const silent = options?.silent === true
- if (!totalQs && !loadedPaper?.userAuthored) return
+ if (!totalQs && !isUserAuthoredPaper) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
  const selectedQuestions = {}
  questionTypes.forEach(t => { selectedQuestions[t.value] = { questions: paper[t.value] || [], marks: t.value==='official_section' ? marksLedger.questionTotal : (paper[`${t.value}_marks`] ?? t.marks ?? 1) } })
@@ -918,7 +923,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   printBubbleSheet:printBub, printAnswerKey:printAns,
   showWatermark, watermarkOpacity, watermarkScale,
  }
- const canonicalDocument = loadedPaper?.userAuthored
+ const canonicalDocument = isUserAuthoredPaper
   ? createManualAssessmentDocument({ paper:{ ...loadedPaper, ...paper }, config:cfg, paperSettings })
   : null
  let persistence = null
@@ -957,7 +962,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
        selectedMCQ: paper.mcq || [], selectedShort: paper.short || [], selectedLong: paper.long || [],
        teacherHidden: overrideConfig?.teacherHidden || false,
        editorSettings:editorState,
-       printReadiness: loadedPaper?.userAuthored
+       printReadiness: isUserAuthoredPaper
         ? (totalQs>0 && marksLedger.balanced && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : 'DRAFT')
         : (isOfficialPaper && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness)),
        selectedQuestions,
@@ -994,7 +999,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  }
 
  async function doFinalize() {
-  if (!loadedPaper?.userAuthored || finalizing) return
+  if (!isUserAuthoredPaper || finalizing) return
   if (!totalQs) { alert('FINALIZE BLOCKED — add at least one question first.'); return }
   if (draftQuality.errorCount > 0 || printAudit.blocked) {
     alert('FINALIZE BLOCKED — resolve paper quality/print issues first.')
@@ -1023,8 +1028,187 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   }
  }
 
+ async function doPersonalizedPrint() {
+  const release = paper?.assessmentRelease || loadedPaper?.assessmentRelease
+  const releaseId = release?.releaseId
+  const activeCanonicalDocument = paper?.canonicalDocument || loadedPaper?.canonicalDocument || release?.snapshot || null
+  const paperId = loadedPaper?.serverPaperId || paper?.serverPaperId || activeCanonicalDocument?.id
+  if (!releaseId || !paperId || String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase() !== 'FINALIZED') {
+   alert('PERSONALIZED PRINT BLOCKED — finalize this assessment first so the batch is tied to an immutable release.')
+   return
+  }
+  if (printMode !== 'a4') {
+   alert('PERSONALIZED PRINT uses Single A4 so every student booklet has deterministic page boundaries.')
+   return
+  }
+  if (totalQs === 0 || draftQuality.errorCount > 0 || printAudit.blocked) {
+   alert('PERSONALIZED PRINT BLOCKED — resolve the paper quality/print checks first.')
+   return
+  }
+
+  const canonicalClass = classLevelLabel(cfg.className || cfg.classLevel || className)
+  const section = String(overrideConfig?.section || loadedPaper?.section || '').trim()
+  let iframe = null
+  let answerKeyWasEnabled = false
+  setPersonalizedPreparing(true)
+  setPersonalizedStatus('Loading active class roster…')
+
+  try {
+   const studentRows = await fetchActivePrintRosterStudents()
+   const seen = new Set()
+   const members = studentRows.filter(student => {
+    const active = student?.is_active !== false && String(student?.status || '').toLowerCase() !== 'inactive'
+    const studentClass = student?.class || student?.class_name || student?.className || student?.grade || ''
+    const studentSection = String(student?.section || student?.section_name || '').trim()
+    return active && classLevelsMatch(studentClass, canonicalClass) && (!section || !studentSection || studentSection.toLowerCase() === section.toLowerCase())
+   }).map(student => {
+    const id = String(student?.id ?? student?.student_id ?? student?.gr_number ?? '').trim()
+    return {
+     id,
+     displayName:String(student?.name || student?.student_name || '').trim(),
+     rollNumber:String(student?.roll_number ?? student?.roll_no ?? student?.gr_number ?? '').trim(),
+     section:String(student?.section || student?.section_name || section || '').trim(),
+    }
+   }).filter(member => {
+    if (!member.id || seen.has(member.id)) return false
+    seen.add(member.id)
+    return true
+   })
+
+   if (!members.length) throw new Error('No active students were found for ' + canonicalClass + (section ? ' / ' + section : '') + '. Standard blank printing is still available.')
+
+   setPersonalizedStatus('Preparing ' + members.length + ' student booklets…')
+   if (editMode) {
+    setEditMode(false)
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+   }
+   if (printAns) {
+    answerKeyWasEnabled = true
+    setPrintAns(false)
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+   }
+
+   const canvas = document.getElementById('paper-canvas')
+   const master = canvas?.querySelector('.preview-container')
+   if (!master) throw new Error('Printable A4 preview is not available.')
+
+   const old = document.getElementById('__personalized_print_frame')
+   if (old) old.remove()
+   iframe = document.createElement('iframe')
+   iframe.id='__personalized_print_frame'
+   iframe.style.cssText='position:fixed;top:0;left:-9999px;width:210mm;height:297mm;border:0;background:white'
+   document.body.appendChild(iframe)
+   const doc=iframe.contentDocument || iframe.contentWindow.document
+   doc.open()
+   doc.write('<!doctype html><html><head><meta charset="utf-8"><style>@page{size:A4 portrait;margin:4mm}html,body{margin:0;padding:0;background:#fff}*{box-sizing:border-box}.student-booklet{width:100%;margin:0;padding:0}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;background:#fff!important;break-after:page;page-break-after:always}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}.duplex-blank-page{height:288mm;width:100%;break-after:page;page-break-after:always;background:#fff}.no-print,[data-edit-guide]{display:none!important}[contenteditable]{outline:none!important;border-color:transparent!important}table{border-collapse:collapse}</style></head><body></body></html>')
+   doc.close()
+
+   const probe=doc.createElement('div')
+   probe.style.cssText='position:absolute;visibility:hidden;height:288mm;width:1px;pointer-events:none'
+   doc.body.appendChild(probe)
+   const printablePageHeight=Math.max(1,probe.getBoundingClientRect().height)
+   probe.remove()
+
+   const pageCounts={}
+   const bookletNodes=[]
+   members.forEach(member=>{
+    const wrapper=doc.createElement('section')
+    wrapper.className='student-booklet'
+    wrapper.dataset.rosterMemberId=member.id
+    const clone=master.cloneNode(true)
+    clone.removeAttribute('id')
+    clone.style.zoom='1'
+    clone.querySelectorAll('script,iframe,object,embed,form').forEach(node=>node.remove())
+    clone.querySelectorAll('*').forEach(node=>{
+     for (const attribute of [...node.attributes]) {
+      if (/^on/i.test(attribute.name) || ((attribute.name === 'href' || attribute.name === 'src') && /^\s*javascript:/i.test(attribute.value))) node.removeAttribute(attribute.name)
+     }
+     node.removeAttribute('contenteditable')
+    })
+    clone.querySelectorAll('[data-answer-key],[data-correct-answer]').forEach(node=>node.remove())
+    clone.querySelectorAll('[data-personalization-field="student.name"]').forEach(node=>{node.textContent=member.displayName;node.style.borderBottom='none';node.style.height='auto';node.style.minHeight='13px'})
+    clone.querySelectorAll('[data-personalization-field="student.rollNumber"]').forEach(node=>{node.textContent=member.rollNumber;node.style.borderBottom='none';node.style.height='auto';node.style.minHeight='13px'})
+    wrapper.appendChild(clone)
+    doc.body.appendChild(wrapper)
+    bookletNodes.push({member,wrapper,clone})
+   })
+
+   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch (_) {}
+   bookletNodes.forEach(({member,wrapper,clone})=>{
+    const contentHeight=Math.max(1,clone.scrollHeight || clone.getBoundingClientRect().height || printablePageHeight)
+    const pages=Math.max(1,Math.ceil((contentHeight-2)/printablePageHeight))
+    pageCounts[member.id]=pages
+    if (personalizedDuplex && pages % 2 === 1) {
+     const blank=doc.createElement('div')
+     blank.className='duplex-blank-page'
+     blank.setAttribute('aria-hidden','true')
+     wrapper.appendChild(blank)
+    }
+   })
+
+   const roster = {
+    context:{ classId:canonicalClass, className:canonicalClass, section:section || null, session:headerSession || cfg.session || null },
+    students:members.map(member=>({ studentId:member.id, displayName:member.displayName, rollNo:member.rollNumber, section:member.section || null })),
+   }
+   const teacherName=String(overrideConfig?.subjectTeacher || loadedPaper?.subjectTeacher || paper?.subjectTeacher || '').trim()
+   const teacherBinding={
+    teacherName:teacherName || null,
+    subjectName:cfg.subjectName || cfg.subject || '',
+    className:canonicalClass,
+    classId:canonicalClass,
+    section:section || null,
+   }
+   const created=await createAssessmentPrintJob({
+    paperId,
+    releaseId,
+    roster,
+    teacherBinding,
+    personalized:true,
+    renderSettings:{
+     duplex:personalizedDuplex,
+     copyCount:1,
+     pageSize:'A4',
+     orientation:'portrait',
+     rendererVersion:release.rendererVersion || 'assps-paper-workspace-v1',
+     browserEngineVersion:navigator.userAgent,
+     includeStudentName:true,
+     includeRollNumber:true,
+     studentPageCounts:pageCounts,
+    },
+   })
+   const job=created?.printJob || created
+   const printJobId=job?.print_job_id || job?.printJobId
+   if (!printJobId) throw new Error('Server did not return a durable print job id.')
+
+   await transitionAssessmentPrintJob(printJobId,'QUEUED')
+   await transitionAssessmentPrintJob(printJobId,'PRINTING')
+   const totalPlannedPages=Number(created?.totalPages || Object.values(pageCounts).reduce((sum,pages)=>sum+pages+(personalizedDuplex&&pages%2===1?1:0),0))
+   setPersonalizedStatus(members.length + ' students • ' + totalPlannedPages + ' pages' + (personalizedDuplex ? ' • duplex-safe' : '') + ' • job ' + printJobId)
+
+   if (answerKeyWasEnabled) setPrintAns(true)
+   setTimeout(()=>{
+    try {
+     iframe.contentWindow.focus()
+     iframe.contentWindow.print()
+    } catch (error) {
+     console.error('Personalized print failed:',error)
+     void transitionAssessmentPrintJob(printJobId,'FAILED',error?.message || 'Print dialog failed').catch(()=>{})
+    }
+    setTimeout(()=>iframe?.remove(),2500)
+   },150)
+  } catch (error) {
+   if (answerKeyWasEnabled) setPrintAns(true)
+   if (iframe) iframe.remove()
+   console.error('Personalized print preparation failed:', error)
+   alert('PERSONALIZED PRINT BLOCKED — ' + (error?.response?.data?.message || error?.message || 'Could not prepare student batch.'))
+   setPersonalizedStatus('')
+  } finally {
+   setPersonalizedPreparing(false)
+  }
+ }
+
  async function doPrint() {
- if (loadedPaper?.userAuthored && totalQs===0) {
+ if (isUserAuthoredPaper && totalQs===0) {
   alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
   return
  }
@@ -1149,13 +1333,21 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printBub} onChange={e=>setPrintBub(e.target.checked)} style={{ accentColor:D.gold }} />Bubble Sheet</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printAns} onChange={e=>setPrintAns(e.target.checked)} style={{ accentColor:D.gold }} />Answer Keys</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
- {loadedPaper?.userAuthored && persistenceNotice && <div data-assessment-persistence-status style={{ fontSize:10, maxWidth:220, color:persistenceNotice.includes('Conflict')||persistenceNotice.includes('Offline')?'#fbbf24':'#86efac', fontWeight:700 }}>{persistenceNotice}</div>}
+ {isUserAuthoredPaper && persistenceNotice && <div data-assessment-persistence-status style={{ fontSize:10, maxWidth:220, color:persistenceNotice.includes('Conflict')||persistenceNotice.includes('Offline')?'#fbbf24':'#86efac', fontWeight:700 }}>{persistenceNotice}</div>}
  <div data-paper-actions style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
  {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
- <DBtn color="green" onClick={()=>doSave()} disabled={!totalQs && !loadedPaper?.userAuthored} style={{ padding:'8px 16px', fontSize:13 }}>{loadedPaper?.userAuthored ? 'Save Draft' : 'Save'}</DBtn>
- {loadedPaper?.userAuthored && <button data-finalize-assessment type="button" onClick={doFinalize} disabled={finalizing || !totalQs} style={{ padding:'8px 14px',borderRadius:9,border:`1px solid ${D.gold}`,background:'rgba(200,153,26,.10)',color:D.gold,fontWeight:900,fontSize:12,cursor:finalizing?'wait':'pointer',opacity:(finalizing||!totalQs)?0.55:1 }}>{finalizing?'Finalizing…':paper.assessmentRelease?.status==='FINALIZED'?'Finalized ✓':'Finalize'}</button>}
+ <DBtn color="green" onClick={()=>doSave()} disabled={!totalQs && !isUserAuthoredPaper} style={{ padding:'8px 16px', fontSize:13 }}>{isUserAuthoredPaper ? 'Save Draft' : 'Save'}</DBtn>
+ {isUserAuthoredPaper && <button data-finalize-assessment type="button" onClick={doFinalize} disabled={finalizing || !totalQs} style={{ padding:'8px 14px',borderRadius:9,border:`1px solid ${D.gold}`,background:'rgba(200,153,26,.10)',color:D.gold,fontWeight:900,fontSize:12,cursor:finalizing?'wait':'pointer',opacity:(finalizing||!totalQs)?0.55:1 }}>{finalizing?'Finalizing…':paper.assessmentRelease?.status==='FINALIZED'?'Finalized ✓':'Finalize'}</button>}
+ {isUserAuthoredPaper && (paper?.assessmentRelease?.status==='FINALIZED' || loadedPaper?.assessmentRelease?.status==='FINALIZED' || String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase()==='FINALIZED') && <details data-personalized-print-controls style={{position:'relative'}}>
+  <summary style={{padding:'8px 12px',borderRadius:9,border:'1px solid '+D.border,background:'rgba(255,255,255,.035)',color:D.silver,fontWeight:800,fontSize:12,cursor:'pointer',listStyle:'none'}}>Class Print</summary>
+  <div style={{position:'absolute',right:0,top:'calc(100% + 6px)',zIndex:30,width:240,padding:10,border:'1px solid '+D.border,borderRadius:10,background:D.panel,boxShadow:'0 12px 30px rgba(0,0,0,.28)'}}>
+   <label style={{display:'flex',alignItems:'center',gap:7,fontSize:11,color:D.silver,marginBottom:8,cursor:'pointer'}}><input data-personalized-duplex type="checkbox" checked={personalizedDuplex} onChange={e=>setPersonalizedDuplex(e.target.checked)} style={{accentColor:D.gold}} /> Duplex-safe student boundaries</label>
+   <button data-personalized-print type="button" onClick={doPersonalizedPrint} disabled={personalizedPreparing} style={{...tinp,width:'100%',cursor:personalizedPreparing?'wait':'pointer',fontWeight:900,color:D.gold}}>{personalizedPreparing?'Preparing…':'Prepare & Print Class'}</button>
+   {personalizedStatus && <div data-personalized-print-status style={{fontSize:9,lineHeight:1.5,color:D.muted,marginTop:7}}>{personalizedStatus}</div>}
+  </div>
+ </details>}
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
  </div>
  </div>
@@ -1306,7 +1498,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
      <input type="number" min="0" value={selectedSectionMarks||''} onChange={e=>{const next=Math.max(0,Number(e.target.value)||0);const urdu=isUrduScriptPaper({config:cfg,...paper});const heading=replaceSectionMarks(selectedSection.heading||'',next,urdu);updateSelectedSection({marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
     </label>
    </div>
-   {loadedPaper?.userAuthored && <>
+   {isUserAuthoredPaper && <>
     <label style={{display:'block',fontSize:11,fontWeight:800,color:D.muted,marginTop:9}}>Question Heading
       <input aria-label="Selected question heading" value={selectedSection.heading||''} onChange={e=>updateSelectedSection({heading:e.target.value,text:e.target.value,textUrdu:selectedSectionIsUrdu?e.target.value:''})} style={{...tinp,width:'100%',marginTop:4}} />
     </label>
@@ -1374,7 +1566,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     <textarea aria-label="Selected question raw content" value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} style={{...tinp,width:'100%',minHeight:110,resize:'vertical',marginTop:6,direction:isUrduScriptPaper({config:cfg,...paper})?'rtl':'ltr',fontFamily:isUrduScriptPaper({config:cfg,...paper})?URDU_FONT_STACK:"'Times New Roman',serif"}} />
    </details>
   </> : <div style={{fontSize:11,lineHeight:1.55,color:D.muted}}>The paper will not move in Edit mode. Click a question to open structural controls. Click its text to type directly. Select text to use the floating Word-style formatting bar.</div>}
-  {loadedPaper?.userAuthored ? <details ref={blockAddMenuRef} data-block-add-menu style={{marginTop:10}}>
+  {isUserAuthoredPaper ? <details ref={blockAddMenuRef} data-block-add-menu style={{marginTop:10}}>
    <summary style={{...tinp,width:'100%',cursor:'pointer',fontWeight:900,color:D.gold,listStyle:'none'}}>+ Add Block</summary>
    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,marginTop:6}}>
     <button type="button" data-add-block="question" onClick={()=>addOfficialSection('auto')} style={{...tinp,cursor:'pointer'}}>Question</button>
@@ -1871,8 +2063,8 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  <tbody>
  <tr>
  <td rowSpan={2} style={{ ...cell, width: half?44:64, textAlign:'center', verticalAlign:'middle' }}><Logo size={half?38:52} src={settings?.logo} /></td>
- <td style={cell}><div style={cellLbl}>{isUrdu?'طالب علم کا نام':'Student Name'}</div><div style={{ borderBottom:'1px solid #888', minWidth: half?55:80, height:`${14*fs}px` }} /></td>
- <td style={cell}><div style={cellLbl}>{isUrdu?'رول نمبر':'Roll Number'}</div><div style={{ borderBottom:'1px solid #888', minWidth:40, height:`${14*fs}px` }} /></td>
+ <td style={cell}><div style={cellLbl}>{isUrdu?'طالب علم کا نام':'Student Name'}</div><div data-personalization-field="student.name" style={{ borderBottom:'1px solid #888', minWidth: half?55:80, height:`${14*fs}px` }} /></td>
+ <td style={cell}><div style={cellLbl}>{isUrdu?'رول نمبر':'Roll Number'}</div><div data-personalization-field="student.rollNumber" style={{ borderBottom:'1px solid #888', minWidth:40, height:`${14*fs}px` }} /></td>
  <td style={{ ...cell, minWidth:60 }}><div style={cellLbl}>{isUrdu?'جماعت':'Class Name'}</div><div style={cellVal}>{cfg.className}</div></td>
  <td style={{ ...cell, minWidth:60 }}><div style={cellLbl}>{isUrdu?'پیپر کوڈ':'Paper Code'}</div><div style={cellVal}>{cfg.paperCode}</div></td>
  </tr>
@@ -1928,7 +2120,7 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
  <tbody>
  <tr style={{ background:'#e8eaf6' }}>
  <td rowSpan={2} style={{ border:'1px solid #c5cae9', padding:`${4*fs}px`, textAlign:'center', verticalAlign:'middle' }}><Logo size={half?36:50} src={settings?.logo} /></td>
- {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:'1px solid #c5cae9', padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:'#5c6bc0', fontWeight:700, fontSize:`${9*fs}px` }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px`, color:'#1a237e' }}>{val}</div> : <div style={{ borderBottom:'2px solid #1a237e', height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
+ {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:'1px solid #c5cae9', padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:'#5c6bc0', fontWeight:700, fontSize:`${9*fs}px` }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px`, color:'#1a237e' }}>{val}</div> : <div data-personalization-field={lbl==='Student Name'?'student.name':lbl==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:'2px solid #1a237e', height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
  </tr>
  <tr>{[ ['Subject', cfg.subjectName], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Exam Date', cfg.examDate] ].map(([lbl,val])=>(<td key={lbl} style={{ border:'1px solid #c5cae9', padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:'#5c6bc0', fontWeight:700, fontSize:`${9*fs}px` }}>{lbl}</div><div style={{ fontWeight:700, fontSize:`${11*fs}px`, color:'#1a237e' }}>{val}</div></td>))}</tr>
  </tbody>
@@ -1976,7 +2168,7 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
  <tbody>
  <tr>
  <td rowSpan={2} style={{ border:`1px solid ${gold}`, padding:`${5*fs}px`, textAlign:'center', verticalAlign:'middle', background:'#fffef8' }}><Logo size={half?36:50} src={settings?.logo} /></td>
- {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:`1px solid ${gold}`, padding:`${3*fs}px ${7*fs}px` }}><div style={{ color:gold, fontWeight:700, fontSize:`${8*fs}px`, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px` }}>{val}</div> : <div style={{ borderBottom:`1.5px solid ${gold}`, height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
+ {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:`1px solid ${gold}`, padding:`${3*fs}px ${7*fs}px` }}><div style={{ color:gold, fontWeight:700, fontSize:`${8*fs}px`, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px` }}>{val}</div> : <div data-personalization-field={lbl==='Student Name'?'student.name':lbl==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1.5px solid ${gold}`, height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
  </tr>
  <tr>{[ ['Subject', cfg.subjectName], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Date', cfg.examDate] ].map(([lbl,val])=>(<td key={lbl} style={{ border:`1px solid ${gold}`, padding:`${3*fs}px ${7*fs}px` }}><div style={{ color:gold, fontWeight:700, fontSize:`${8*fs}px`, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div><div style={{ fontWeight:700, fontSize:`${11*fs}px` }}>{val}</div></td>))}</tr>
  </tbody>
@@ -2021,7 +2213,7 @@ function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  return (
  <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:`linear-gradient(90deg,${teal} 0%,${tealL} 50%,#26a69a 100%)`, borderRadius:`${4*fs}px`, overflow:'hidden', marginBottom:`${7*fs}px` }}><div style={{ padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, display:'flex', alignItems:'center', gap:`${10*fs}px` }}><Logo size={half?36:50} src={settings?.logo} /><div style={{ flex:1, textAlign:'center' }}><div style={{ color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px`, marginTop:2 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div></div></div>
- <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:`${4*fs}px`, marginBottom:`${8*fs}px` }}>{[ ['Student Name', null], ['Subject', cfg.subjectName], ['Class', cfg.className], ['Date', cfg.examDate], ['Roll Number', null], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<div key={lbl} style={{ background:mint, borderRadius:`${3*fs}px`, border:`1px solid ${tealL}44`, padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:teal, fontWeight:700, fontSize:`${8*fs}px`, textTransform:'uppercase', letterSpacing:'0.05em' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${10*fs}px`, color:'#004d40' }}>{val}</div> : <div style={{ borderBottom:`1.5px solid ${teal}`, height:`${12*fs}px`, marginTop:`${2*fs}px` }} />}</div>))}</div>
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:`${4*fs}px`, marginBottom:`${8*fs}px` }}>{[ ['Student Name', null], ['Subject', cfg.subjectName], ['Class', cfg.className], ['Date', cfg.examDate], ['Roll Number', null], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<div key={lbl} style={{ background:mint, borderRadius:`${3*fs}px`, border:`1px solid ${tealL}44`, padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:teal, fontWeight:700, fontSize:`${8*fs}px`, textTransform:'uppercase', letterSpacing:'0.05em' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${10*fs}px`, color:'#004d40' }}>{val}</div> : <div data-personalization-field={lbl==='Student Name'?'student.name':lbl==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1.5px solid ${teal}`, height:`${12*fs}px`, marginTop:`${2*fs}px` }} />}</div>))}</div>
  <div style={{ border:`2px solid ${teal}`, borderRadius:`${6*fs}px`, padding:`${8*fs}px`, position:'relative', overflow:'hidden' }}><div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', pointerEvents:'none', overflow:'hidden' }}><div style={{ transform:'rotate(-30deg)', opacity:0.04, fontSize:half?70:110, fontWeight:900, color:teal, lineHeight:1, textAlign:'center' }}></div></div>
  <div style={{ position:'relative' }}>
  {printBubble && mcqs.length>0 && (
@@ -2105,7 +2297,7 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
    <div style={{ order:composition.badge, gridColumn:composition.badgeColumn || 'auto', justifySelf:variant==='minimal'?'center':'stretch', background:variant==='editorial'?theme.accent:theme.soft, border:`1px solid ${theme.line}`, borderRadius:variant==='emerald'?8:2, padding:'5px 8px', color:variant==='editorial'?'#fff':theme.accent, fontWeight:800, textAlign:variant==='editorial'?'left':'center', fontSize:`${9 * fs}px`, lineHeight:1.25, whiteSpace:'nowrap' }}>{examBadge}</div>
   </header>
   <table data-student-info style={{ direction:'ltr', width:'100%', borderCollapse:'collapse', tableLayout:'fixed', margin:`${7 * fs}px 0 ${10 * fs}px`, fontFamily:'Arial, sans-serif' }}><tbody>
-   {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
+   {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div data-personalization-field={label==='Student Name'?'student.name':label==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
   </tbody></table>
   {printBubble && <ObjectiveBubbleSheet paper={paper} isUrdu={isUrdu} themeColor={theme.accent} showAnswers={printAns} />}
   <main style={{ position:'relative', zIndex:2 }}>
@@ -2138,7 +2330,7 @@ function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editM
  return (
  <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Times New Roman', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ borderBottom:'2px solid #000', paddingBottom:5, marginBottom:15 }}><div style={{ fontSize:`${(half?18:24)*fs}px`, fontWeight:700, textAlign:'center' }}>ASSESSMENT PAPER</div><div style={{ display:'flex', justifyContent:'space-between', marginTop:10, fontWeight:700, fontSize:`${11*fs}px` }}><span>Subject: {cfg.subjectName}</span><span>Class: {cfg.className}</span><span>Marks: {total}</span></div></div>
- <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: __________________________</span><span>Date: {cfg.examDate}</span></div>
+ <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: <span data-personalization-field="student.name">__________________________</span> &nbsp; Roll No: <span data-personalization-field="student.rollNumber">__________</span></span><span>Date: {cfg.examDate}</span></div>
  {questionTypes.map((type, idx) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null

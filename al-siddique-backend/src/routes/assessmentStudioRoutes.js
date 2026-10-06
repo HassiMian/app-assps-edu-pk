@@ -331,7 +331,7 @@ router.post('/papers/:paperId/print-jobs', async (req, res) => {
          RETURNING print_job_id,release_id,roster_snapshot_id,copy_count,personalized,duplex,student_boundary_policy,reprint_mode,parent_print_job_id,status,attempt_count,created_at`,
         [schoolId,printJobId,binding.releaseId,rosterSnapshotId,JSON.stringify(binding.bindingSnapshot),JSON.stringify(binding.renderSettings),binding.copyCount,binding.personalized,binding.duplex,binding.studentBoundaryPolicy,binding.reprintMode,binding.parentPrintJobId,actorKey(req)]
       )).rows[0]
-      return { printJob:inserted, rosterHash:binding.rosterSnapshot?.rosterHash || null, bindingHash:binding.bindingHash }
+      return { printJob:inserted, rosterHash:binding.rosterSnapshot?.rosterHash || null, bindingHash:binding.bindingHash, totalPages:binding.renderSettings.totalPages, bookletPlan:binding.renderSettings.bookletPlan }
     })
 
     if (data.missingPaper) return res.status(404).json({ success:false, message:'Paper not found.' })
