@@ -1277,15 +1277,15 @@ function Tip({ label, color = '#C8991A', children }) {
  <div style={{
  position:'absolute', bottom:'calc(100% + 7px)', left:'50%',
  transform:'translateX(-50%)',
- background:'#071e34', border:`1px solid ${color}55`,
+ background:'var(--apex-bg-surface-solid)', border:`1px solid ${color}55`,
  borderRadius:7, padding:'5px 10px',
  color, fontSize:11, fontWeight:700,
  whiteSpace:'nowrap', zIndex:9999,
- boxShadow:'0 6px 18px rgba(0,0,0,0.55)',
+ boxShadow:'var(--apex-shadow-md)',
  pointerEvents:'none',
  }}>
  {label}
- <div style={{ position:'absolute', bottom:-5, left:'50%', transform:'translateX(-50%) rotate(45deg)', width:8, height:8, background:'#071e34', borderRight:`1px solid ${color}55`, borderBottom:`1px solid ${color}55` }} />
+ <div style={{ position:'absolute', bottom:-5, left:'50%', transform:'translateX(-50%) rotate(45deg)', width:8, height:8, background:'var(--apex-bg-surface-solid)', borderRight:`1px solid ${color}55`, borderBottom:`1px solid ${color}55` }} />
  </div>
  )}
  </div>
@@ -1430,15 +1430,15 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
  };
 
  return createPortal((
- <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }} style={{ position:"fixed", inset:0, background:"rgba(7,30,52,0.88)", backdropFilter:"blur(8px)", zIndex:12000, display:"flex", alignItems:"flex-start", justifyContent:"center", padding:"18px 20px 28px", overflowY:"auto", overflowX:"hidden" }}>
+ <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }} style={{ position:"fixed", inset:0, background:"var(--apex-bg-overlay)", backdropFilter:"blur(8px)", zIndex:12000, display:"flex", alignItems:"flex-start", justifyContent:"center", padding:"18px 20px 28px", overflowY:"auto", overflowX:"hidden" }}>
  <div className="super-module-card" onMouseDown={(e) => e.stopPropagation()} style={{ ...card, width:"min(760px, calc(100vw - 40px))", maxHeight:"calc(100vh - 46px)", overflowY:"auto", overflowX:"hidden", position:"relative", transform:"none" }}>
- <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", margin:"-24px -24px 24px", padding:"18px 24px 16px", position:"sticky", top:0, zIndex:5, background:"rgba(7,30,52,0.96)", borderBottom:"1px solid rgba(200,153,26,0.14)", backdropFilter:"blur(14px)" }}>
+ <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", margin:"-24px -24px 24px", padding:"18px 24px 16px", position:"sticky", top:0, zIndex:5, background:"color-mix(in srgb,var(--apex-bg-surface-solid) 96%,transparent)", borderBottom:"1px solid var(--apex-border-subtle)", backdropFilter:"blur(14px)" }}>
  <h2 style={{ color:"#C8991A", fontSize:20, fontWeight:800, margin:0 }}>{isEdit ? 'Edit Student' : 'Add New Student'}</h2>
  <button aria-label="Close student form" title="Close" onClick={onClose} style={{ width:36, height:36, display:"grid", placeItems:"center", background:"rgba(255,255,255,0.06)", border:"1px solid rgba(148,163,184,0.18)", borderRadius:10, color:"#C0C8D8", cursor:"pointer" }}><X size={18}/></button>
  </div>
 
  {/* Photo upload row */}
- <div style={{ display:"flex", gap:24, marginBottom:24, padding:"16px 18px", background:"rgba(7,30,52,0.45)", borderRadius:14, border:"1px solid rgba(200,153,26,0.12)", alignItems:"flex-start", flexWrap:"wrap" }}>
+ <div style={{ display:"flex", gap:24, marginBottom:24, padding:"16px 18px", background:"var(--apex-bg-subtle)", borderRadius:14, border:"1px solid var(--apex-border-subtle)", alignItems:"flex-start", flexWrap:"wrap" }}>
  <PhotoUploadAI value={photo} onChange={setPhoto} size={110} label="Student Photo" />
  <div style={{ flex:"1 1 260px", minWidth:0, display:"flex", flexDirection:"column", gap:8, paddingTop:4 }}>
  <div style={{ color:"#C8991A", fontSize:13, fontWeight:800 }}>Profile Photo</div>
@@ -1486,7 +1486,7 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
  <p style={{ fontSize:10, color:"#8892A4", marginTop:6 }}>If left blank, the system will automatically group this student with siblings based on Father Name and Phone.</p>
  </div>
  {!isEdit && (
- <div style={{ gridColumn:"1/-1", padding:"14px 16px", background:"rgba(7,30,52,0.45)", borderRadius:12, border:"1px solid rgba(200,153,26,0.15)" }}>
+ <div style={{ gridColumn:"1/-1", padding:"14px 16px", background:"var(--apex-bg-subtle)", borderRadius:12, border:"1px solid var(--apex-border-default)" }}>
  <label style={{ display:"flex", alignItems:"center", gap:8, color:"#C8991A", fontWeight:700, fontSize:13, marginBottom:12 }}>
  <input type="checkbox" checked={generateChallan} onChange={(e) => setGenerateChallan(e.target.checked)} />
  Configure fee & generate first challan on save
@@ -1506,7 +1506,7 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
  </div>
  )}
  </div>
- <div style={{ display:"flex", gap:12, margin:"24px -24px -24px", padding:"16px 24px", position:"sticky", bottom:0, zIndex:5, background:"rgba(7,30,52,0.96)", borderTop:"1px solid rgba(200,153,26,0.14)", backdropFilter:"blur(14px)", flexWrap:"wrap" }}>
+ <div style={{ display:"flex", gap:12, margin:"24px -24px -24px", padding:"16px 24px", position:"sticky", bottom:0, zIndex:5, background:"color-mix(in srgb,var(--apex-bg-surface-solid) 96%,transparent)", borderTop:"1px solid var(--apex-border-subtle)", backdropFilter:"blur(14px)", flexWrap:"wrap" }}>
  <button onClick={onClose} style={{...btnSecondary,flex:1,minWidth:120,justifyContent:"center"}}>Cancel</button>
  {!isEdit ? (
  <>
@@ -1724,7 +1724,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  const tabs = ["profile","fee","attendance","results","notes","access","ai-portrait"];
 
  const InfoBlock = ({ label, value }) => (
- <div style={{ padding:"12px 16px", background:"rgba(7,30,52,0.4)", borderRadius:10 }}>
+ <div style={{ padding:"12px 16px", background:"var(--apex-bg-subtle)", borderRadius:10 }}>
  <div style={{ color:"#8892A4", fontSize:11, marginBottom:4, textTransform:"uppercase", letterSpacing:0.5 }}>{label}</div>
  <div style={{ color:"#C0C8D8", fontWeight:600, fontSize:14 }}>{value||"—"}</div>
  </div>
@@ -1737,11 +1737,11 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  }, [onClose])
 
  return createPortal((
- <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }} style={{ position:"fixed", inset:0, background:"rgba(7,30,52,0.88)", backdropFilter:"blur(8px)", zIndex:12000, display:"flex", alignItems:"flex-start", justifyContent:"center", padding:"18px 20px 28px", overflowY:"auto", overflowX:"hidden" }}>
+ <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }} style={{ position:"fixed", inset:0, background:"var(--apex-bg-overlay)", backdropFilter:"blur(8px)", zIndex:12000, display:"flex", alignItems:"flex-start", justifyContent:"center", padding:"18px 20px 28px", overflowY:"auto", overflowX:"hidden" }}>
  <div className="super-module-card" onMouseDown={(e)=>e.stopPropagation()} style={{ ...card, width:"min(860px, calc(100vw - 40px))", maxHeight:"calc(100vh - 48px)", overflowY:"auto", overflowX:"hidden", transform:"none" }}>
 
  {/* Header row */}
- <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", margin:"-24px -24px 20px", padding:"18px 24px 16px", gap:12, flexWrap:"wrap", position:"sticky", top:0, zIndex:8, background:"rgba(7,30,52,0.96)", borderBottom:"1px solid rgba(200,153,26,0.14)", backdropFilter:"blur(14px)" }}>
+ <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", margin:"-24px -24px 20px", padding:"18px 24px 16px", gap:12, flexWrap:"wrap", position:"sticky", top:0, zIndex:8, background:"color-mix(in srgb,var(--apex-bg-surface-solid) 96%,transparent)", borderBottom:"1px solid var(--apex-border-subtle)", backdropFilter:"blur(14px)" }}>
  <h2 style={{ color:"#C8991A", fontSize:18, fontWeight:800, margin:0 }}>{student.name} | {student.father}</h2>
  <div style={{ display:"flex", gap:8, alignItems:"center" }}>
 
@@ -1751,13 +1751,13 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
   Student Documents <ChevronDown size={13}/>
  </button>
  {docsOpen && (
- <div style={{ position:"absolute", right:0, top:"calc(100% + 6px)", background:"#0B2C4D", border:"1px solid rgba(200,153,26,0.25)", borderRadius:12, zIndex:100, minWidth:220, boxShadow:"0 12px 40px rgba(0,0,0,0.5)", overflow:"hidden" }}>
+ <div style={{ position:"absolute", right:0, top:"calc(100% + 6px)", background:"var(--apex-bg-surface-solid)", border:"1px solid rgba(200,153,26,0.25)", borderRadius:12, zIndex:100, minWidth:220, boxShadow:"0 12px 40px rgba(0,0,0,0.5)", overflow:"hidden" }}>
  <div style={{ padding:"10px 14px", borderBottom:"1px solid rgba(255,255,255,0.06)" }}>
  <div style={{ color:"#8892A4", fontSize:10, fontWeight:800, textTransform:"uppercase", letterSpacing:0.8, marginBottom:6 }}>Print Layout</div>
  <select
  value={certificateOrientation}
  onChange={e=>setCertificateOrientation(e.target.value)}
- style={{ width:"100%", borderRadius:8, border:"1px solid rgba(148,163,184,0.2)", background:"#071e34", color:"#C0C8D8", padding:"7px 9px", outline:"none", fontSize:12 }}
+ style={{ width:"100%", borderRadius:8, border:"1px solid rgba(148,163,184,0.2)", background:"var(--apex-bg-surface-solid)", color:"#C0C8D8", padding:"7px 9px", outline:"none", fontSize:12 }}
  >
  <option value="auto">Auto by certificate</option>
  <option value="portrait">Portrait A4</option>
@@ -1781,7 +1781,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  </div>
 
  {/* Avatar + status */}
- <div style={{ display:"flex", alignItems:"center", gap:16, padding:20, background:"rgba(7,30,52,0.5)", borderRadius:12, marginBottom:20 }}>
+ <div style={{ display:"flex", alignItems:"center", gap:16, padding:20, background:"var(--apex-bg-subtle)", borderRadius:12, marginBottom:20 }}>
  {/* Photo — real image or emoji fallback */}
  <div style={{ position:"relative", flexShrink:0 }}>
  {student.photo && !student.photo.includes('') && !student.photo.includes('') ? (
@@ -1797,7 +1797,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  )}
  <button
  onClick={() => setPhotoEditOpen(o => !o)}
- style={{ position:"absolute", bottom:3, left:"50%", transform:"translateX(-50%)", background:"rgba(7,30,52,0.88)", border:"1px solid rgba(200,153,26,0.35)", borderRadius:5, color:"#C8991A", fontSize:9, fontWeight:700, padding:"2px 7px", cursor:"pointer", whiteSpace:"nowrap" }}
+ style={{ position:"absolute", bottom:3, left:"50%", transform:"translateX(-50%)", background:"var(--apex-bg-overlay)", border:"1px solid rgba(200,153,26,0.35)", borderRadius:5, color:"#C8991A", fontSize:9, fontWeight:700, padding:"2px 7px", cursor:"pointer", whiteSpace:"nowrap" }}
  >
  Edit Photo
  </button>
@@ -1813,7 +1813,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
 
  {/* Inline photo editor */}
  {photoEditOpen && (
- <div style={{ padding:16, background:"rgba(7,30,52,0.55)", borderRadius:12, border:"1px solid rgba(13,148,136,0.25)", marginBottom:16, display:"flex", gap:20, alignItems:"flex-start" }}>
+ <div style={{ padding:16, background:"var(--apex-bg-subtle)", borderRadius:12, border:"1px solid rgba(13,148,136,0.25)", marginBottom:16, display:"flex", gap:20, alignItems:"flex-start" }}>
  <PhotoUploadAI
  value={student.photo && !student.photo.startsWith('') && !student.photo.startsWith('') ? student.photo : null}
  onChange={(url) => { onUpdatePhoto?.(student.id, url) }}
@@ -1830,7 +1830,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  )}
 
  {/* Tabs */}
- <div style={{ display:"flex", gap:4, background:"rgba(7,30,52,0.5)", borderRadius:10, padding:4, marginBottom:20, overflowX:"auto" }}>
+ <div style={{ display:"flex", gap:4, background:"var(--apex-bg-subtle)", borderRadius:10, padding:4, marginBottom:20, overflowX:"auto" }}>
  {tabs.map(t=>(
  <button key={t} onClick={()=>setTab(t)} style={{ flex:1, padding:"8px 10px", borderRadius:8, border:"none", cursor:"pointer", background:tab===t?"rgba(200,153,26,0.2)":"transparent", color:tab===t?"#C8991A":"#8892A4", fontWeight:600, fontSize:12, textTransform:"capitalize", whiteSpace:"nowrap" }}>
  {t==="fee"?"Fees":t==="notes"?"Notes":t==="ai-portrait"?" AI Portrait":t}
@@ -1966,7 +1966,7 @@ function ClasswiseReports({ students, onPrintClass }) {
  </thead>
  <tbody>
  {classes.map(([cls,d],i)=>(
- <tr key={cls} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"rgba(11,44,77,0.2)" }}>
+ <tr key={cls} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"var(--apex-bg-subtle)" }}>
  <td style={{ padding:"14px 16px", color:"#C8991A", fontWeight:700 }}>{cls}</td>
  <td style={{ padding:"14px 16px", color:"#C0C8D8", fontWeight:700 }}>{d.total}</td>
  <td style={{ padding:"14px 16px" }}><span style={{ padding:"3px 10px", borderRadius:20, background:"rgba(48,209,88,0.1)", color:"#30D158", fontSize:12, fontWeight:600 }}>{d.active}</span></td>
@@ -2014,11 +2014,11 @@ function LocalityReports({ students }) {
  </thead>
  <tbody>
  {entries.map(([loc,cnt],i)=>(
- <tr key={loc} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"rgba(11,44,77,0.2)" }}>
+ <tr key={loc} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"var(--apex-bg-subtle)" }}>
  <td style={{ padding:"14px 16px", color:"#C0C8D8", fontWeight:600 }}>{loc}</td>
  <td style={{ padding:"14px 16px", color:"#C8991A", fontWeight:700 }}>{cnt}</td>
  <td style={{ padding:"14px 16px" }}>
- <div style={{ background:"rgba(11,44,77,0.92)", borderRadius:8, height:16, overflow:"hidden" }}>
+ <div style={{ background:"var(--apex-bg-muted)", borderRadius:8, height:16, overflow:"hidden" }}>
  <div style={{ width:`${(cnt/students.length)*100}%`, height:"100%", background:"rgba(200,153,26,0.6)", borderRadius:8 }}/>
  </div>
  </td>
@@ -2079,7 +2079,7 @@ function AdmissionsReport({ students }) {
  ))}
  </tr></thead>
  <tbody>{monthNew.map((s,i)=>(
- <tr key={s.id} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"rgba(11,44,77,0.2)" }}>
+ <tr key={s.id} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"var(--apex-bg-subtle)" }}>
  <td style={{ padding:"12px 14px", color:"#C8991A", fontWeight:700 }}>{s.gr}</td>
  <td style={{ padding:"12px 14px", color:"#C0C8D8" }}>{s.name}</td>
  <td style={{ padding:"12px 14px", color:"#8892A4" }}>{s.father}</td>
@@ -2113,7 +2113,7 @@ function StudentSlips({ students, school }) {
  ))}
  </tr></thead>
  <tbody>{students.slice(0,30).map((s,i)=>(
- <tr key={s.id} onClick={()=>setSel(s)} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:sel?.id===s.id?"rgba(200,153,26,0.08)":i%2===0?"transparent":"rgba(11,44,77,0.2)", cursor:"pointer" }}>
+ <tr key={s.id} onClick={()=>setSel(s)} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:sel?.id===s.id?"color-mix(in srgb,var(--apex-action-primary) 8%,var(--apex-bg-surface-solid))":i%2===0?"transparent":"var(--apex-bg-subtle)", cursor:"pointer" }}>
  <td style={{ padding:"10px 14px" }}><input type="radio" readOnly checked={sel?.id===s.id}/></td>
  <td style={{ padding:"10px 14px", color:"#C8991A", fontWeight:700 }}>{s.gr}</td>
  <td style={{ padding:"10px 14px", color:"#C0C8D8" }}>{s.name}</td>
@@ -2377,7 +2377,7 @@ export default function StudentsModule() {
  ).slice(0, 8);
  if (!suggestions.length) return null;
  return (
- <div style={{ position:"absolute", top:"calc(100% + 6px)", left:0, right:0, background:"#0B2C4D", border:"1px solid rgba(200,153,26,0.3)", borderRadius:10, zIndex:999, boxShadow:"0 8px 24px rgba(0,0,0,0.5)", overflow:"hidden" }}>
+ <div style={{ position:"absolute", top:"calc(100% + 6px)", left:0, right:0, background:"var(--apex-bg-surface-solid)", border:"1px solid var(--apex-border-default)", borderRadius:10, zIndex:999, boxShadow:"var(--apex-shadow-lg)", overflow:"hidden" }}>
  {suggestions.map(s=>(
  <div
  key={s.id}
@@ -2399,15 +2399,15 @@ export default function StudentsModule() {
  })()}
  </div>
  <select value={filterClass} onChange={e=>setFilterClass(e.target.value)}
- style={{ padding:"10px 14px", borderRadius:10, background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none", cursor:"pointer" }}>
+ style={{ padding:"10px 14px", borderRadius:10, background:"var(--apex-bg-surface-solid)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none", cursor:"pointer" }}>
  {['All Classes', ...classNames].map(c=><option key={c}>{c}</option>)}
  </select>
  <select value={filterSection} onChange={e=>setFilterSection(e.target.value)}
- style={{ padding:"10px 14px", borderRadius:10, background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none", cursor:"pointer" }}>
+ style={{ padding:"10px 14px", borderRadius:10, background:"var(--apex-bg-surface-solid)", border:"1px solid rgba(200,153,26,0.2)", color:"#C0C8D8", fontSize:14, outline:"none", cursor:"pointer" }}>
  {allSections.map(s=><option key={s}>{s}</option>)}
  </select>
  <select value={filterStatus} onChange={e=>setFilterStatus(e.target.value)}
- style={{ padding:"10px 14px", borderRadius:10, background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", color:filterStatus==="Active"?"#30D158":filterStatus==="Struck-off"?"#FF375F":"#C0C8D8", fontSize:14, fontWeight:700, outline:"none", cursor:"pointer" }}>
+ style={{ padding:"10px 14px", borderRadius:10, background:"var(--apex-bg-surface-solid)", border:"1px solid rgba(200,153,26,0.2)", color:filterStatus==="Active"?"#30D158":filterStatus==="Struck-off"?"#FF375F":"#C0C8D8", fontSize:14, fontWeight:700, outline:"none", cursor:"pointer" }}>
  <option value="Active">ðŸŸ¢ Active ({students.filter(s=>s.status==="Active").length})</option>
  <option value="Struck-off">ðŸ”´ Struck-off ({students.filter(s=>s.status!=="Active").length})</option>
  <option value="All">ðŸ“‹ All Enrolled ({students.length})</option>
@@ -2435,7 +2435,7 @@ export default function StudentsModule() {
  </thead>
  <tbody>
  {filtered.map((s,i)=>(
- <tr key={s.id} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"rgba(11,44,77,0.2)" }}>
+ <tr key={s.id} style={{ borderBottom:"1px solid rgba(200,153,26,0.06)", background:i%2===0?"transparent":"var(--apex-bg-subtle)" }}>
  <td style={{ padding:"14px", color:"#C8991A", fontSize:13, fontWeight:700 }}>{s.gr}</td>
  <td style={{ padding:"14px" }}>
  <div style={{ display:"flex", alignItems:"center", gap:10 }}>
