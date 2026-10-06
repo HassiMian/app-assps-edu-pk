@@ -954,6 +954,31 @@ assertContains(
   'message draft schema must remain versioned in migrations.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/academicRoutes.js',
+  /ALTER TABLE|CREATE UNIQUE INDEX/,
+  'academic request handlers must not mutate schema; migration 004 owns academic_setup storage.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/portalRoutes.js',
+  /CREATE TABLE IF NOT EXISTS online_classes|ALTER TABLE online_classes|CREATE INDEX IF NOT EXISTS idx_online_classes/,
+  'portal request handlers must not create or alter online_classes schema.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/notifyRoutes.js',
+  /ALTER TABLE notification_log|CREATE INDEX IF NOT EXISTS idx_notification_log_school_role_sent/,
+  'notification request handlers must not mutate notification schema.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/008_portal_notification_schema.js',
+  'CREATE TABLE IF NOT EXISTS online_classes',
+  'online class schema must be versioned in migration 008.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

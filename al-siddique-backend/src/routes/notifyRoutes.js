@@ -226,16 +226,23 @@ async function loadSourceBackedRecipients(req) {
   }
 }
 
+let notificationSchemaReady = null
 async function ensureNotificationColumns() {
-  await pool.query(`
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS recipient_role VARCHAR(20);
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS title VARCHAR(255);
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS read_at TIMESTAMP;
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS provider_sid VARCHAR(128);
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS archived_at TIMESTAMP;
-    CREATE INDEX IF NOT EXISTS idx_notification_log_school_role_sent ON notification_log(school_id, recipient_role, sent_at DESC);
-  `).catch(() => {})
+  if (notificationSchemaReady) return true
+  const result = await pool.query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'notification_log'
+      AND column_name IN ('recipient_role','title','metadata','read_at','provider_sid','archived_at')
+  `)
+  if (Number(result.rows[0]?.count || 0) !== 6) {
+    const err = new Error('notification_log schema migration is not applied.')
+    err.code = 'NOTIFICATION_SCHEMA_NOT_READY'
+    throw err
+  }
+  notificationSchemaReady = true
+  return true
 }
 
 async function sendOne(phone, message, channel, twilioConfig, twilioClient) {

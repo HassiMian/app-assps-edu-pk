@@ -23,43 +23,36 @@ function buildNotificationMessage({ title, className, section, subject, classDat
   return `${title} scheduled on ${classDate} at ${startTime} for ${subject} (${className}${sectionSuffix}).`
 }
 
+let onlineClassSchemaReady = null
 async function ensureOnlineClassTables() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS online_classes (
-      id            SERIAL PRIMARY KEY,
-      school_id     INTEGER REFERENCES schools(id),
-      teacher_id    INTEGER REFERENCES users(id),
-      class_name    VARCHAR(50) NOT NULL,
-      section       VARCHAR(20),
-      subject       VARCHAR(100) NOT NULL,
-      title         VARCHAR(255) NOT NULL,
-      class_date    DATE NOT NULL,
-      start_time    TIME NOT NULL,
-      end_time      TIME NOT NULL,
-      meeting_link  TEXT NOT NULL,
-      description   TEXT,
-      timezone      VARCHAR(64) DEFAULT 'Asia/Karachi',
-      created_at    TIMESTAMP DEFAULT NOW()
-    );
-  `)
-  await pool.query(`
-    ALTER TABLE online_classes ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id);
-    ALTER TABLE online_classes ADD COLUMN IF NOT EXISTS teacher_id INTEGER REFERENCES users(id);
-    ALTER TABLE online_classes ADD COLUMN IF NOT EXISTS timezone VARCHAR(64) DEFAULT 'Asia/Karachi';
-    ALTER TABLE online_classes ALTER COLUMN school_id DROP DEFAULT;
-    CREATE INDEX IF NOT EXISTS idx_online_classes_school_date ON online_classes(school_id, class_date);
-    CREATE INDEX IF NOT EXISTS idx_online_classes_teacher_date ON online_classes(teacher_id, class_date);
-  `).catch(() => {})
+  if (onlineClassSchemaReady) return true
+  const result = await pool.query("SELECT to_regclass('public.online_classes') AS table_name")
+  if (!result.rows[0]?.table_name) {
+    const err = new Error('online_classes schema migration is not applied.')
+    err.code = 'PORTAL_SCHEMA_NOT_READY'
+    throw err
+  }
+  onlineClassSchemaReady = true
+  return true
 }
 
+let portalNotificationSchemaReady = null
 async function ensureNotificationColumns() {
-  await pool.query(`
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS recipient_role VARCHAR(20);
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS title VARCHAR(255);
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS metadata JSONB DEFAULT '{}'::jsonb;
-    ALTER TABLE notification_log ADD COLUMN IF NOT EXISTS read_at TIMESTAMP;
-    CREATE INDEX IF NOT EXISTS idx_notification_log_school_role_sent ON notification_log(school_id, recipient_role, sent_at DESC);
-  `).catch(() => {})
+  if (portalNotificationSchemaReady) return true
+  const result = await pool.query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'notification_log'
+      AND column_name IN ('recipient_role','title','metadata','read_at')
+  `)
+  if (Number(result.rows[0]?.count || 0) !== 4) {
+    const err = new Error('notification_log portal schema migration is not applied.')
+    err.code = 'PORTAL_SCHEMA_NOT_READY'
+    throw err
+  }
+  portalNotificationSchemaReady = true
+  return true
 }
 
 // GET /api/portal/dashboard — returns real school data for all portal roles

@@ -475,6 +475,15 @@ async function migrate() {
     }
 
     try {
+      const portalNotificationMigration = require('../../migrations/008_portal_notification_schema')
+      await portalNotificationMigration.up()
+      console.log('portal + notification schema ready')
+    } catch (err) {
+      console.error('Portal/Notification Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

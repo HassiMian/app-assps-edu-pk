@@ -8,17 +8,22 @@ const { DEFAULT_ACADEMIC_SETUP, validateAcademicSetup } = require('../services/a
 const canEditAcademic = requireRoles('super_admin', 'admin', 'principal', 'school_admin')
 
 let academicStorageReady = null
-function ensureAcademicStorage() {
-  if (!academicStorageReady) {
-    academicStorageReady = (async () => {
-      await query("ALTER TABLE settings ADD COLUMN IF NOT EXISTS academic_setup JSONB DEFAULT '{}'::jsonb")
-      await query('CREATE UNIQUE INDEX IF NOT EXISTS settings_school_id_unique ON settings (school_id)')
-    })().catch(err => {
-      academicStorageReady = null
-      throw err
-    })
+async function ensureAcademicStorage() {
+  if (academicStorageReady) return true
+  const result = await query(`
+    SELECT EXISTS (
+      SELECT 1
+      FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = 'settings' AND column_name = 'academic_setup'
+    ) AS ready
+  `)
+  if (!result.rows[0]?.ready) {
+    const err = new Error('academic_setup schema migration is not applied.')
+    err.code = 'ACADEMIC_SETUP_SCHEMA_NOT_READY'
+    throw err
   }
-  return academicStorageReady
+  academicStorageReady = true
+  return true
 }
 
 router.get('/setup', protect, requireScopeForServiceOnly('school.classes.read'), async (req, res) => {
@@ -43,7 +48,7 @@ router.get('/setup', protect, requireScopeForServiceOnly('school.classes.read'),
       defaults: configured ? undefined : DEFAULT_ACADEMIC_SETUP,
     })
   } catch (err) {
-    if (String(err?.message || '').includes('academic_setup')) {
+    if (err.code === 'ACADEMIC_SETUP_SCHEMA_NOT_READY') {
       return res.status(503).json({
         success: false,
         code: 'ACADEMIC_SETUP_SCHEMA_NOT_READY',
@@ -86,7 +91,7 @@ router.put('/setup', protect, canEditAcademic, async (req, res) => {
 
     return res.json({ success: true, configured: true, data: result.rows[0].academic_setup })
   } catch (err) {
-    if (String(err?.message || '').includes('academic_setup')) {
+    if (err.code === 'ACADEMIC_SETUP_SCHEMA_NOT_READY') {
       return res.status(503).json({ success: false, code: 'ACADEMIC_SETUP_SCHEMA_NOT_READY', message: 'Academic setup storage is not initialized yet.' })
     }
     return res.status(500).json({ success: false, code: 'ACADEMIC_SETUP_WRITE_FAILED', message: 'Academic setup could not be saved.' })
