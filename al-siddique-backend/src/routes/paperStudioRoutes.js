@@ -11,6 +11,9 @@ const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPub
 const { verifyPublisherDetachedSignature } = require('../services/papers/paperPublisherDetachedSignatureV6G11')
 const { validatePublisherApprovalDecision } = require('../services/papers/paperPublisherApprovalDecisionV6G12')
 const { buildPublisherApprovalActivationPreflight } = require('../services/papers/paperPublisherApprovalActivationPreflightV6G13')
+const { validatePublisherKeyCustodyPreflight } = require('../services/papers/paperPublisherKeyCustodyPreflightV6G14')
+const { validatePublisherEditionReviewPreflight } = require('../services/papers/paperPublisherEditionReviewPreflightV6G15')
+const { buildAcademicPublicationPrecheck } = require('../services/papers/paperAcademicPublicationPrecheckV6G16')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -42,6 +45,55 @@ router.get('/canonical-readiness', async (req,res) => {
 
 
 
+
+
+
+router.post('/publisher-review/edition-review-precheck', express.json({limit:'512kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=validatePublisherEditionReviewPreflight(req.body||{}, {forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,manifestMutated:false,persisted:false,academicQuestionReleased:false,approvalFlagChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio publisher edition review precheck error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PUBLISHER_EDITION_REVIEW_PRECHECK_FAILED',message:status>=500?'Publisher edition review precheck could not be verified.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
+
+
+router.post('/publisher-review/academic-publication-precheck', express.json({limit:'768kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=buildAcademicPublicationPrecheck(req.body||{}, {forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,persisted:false,manifestMutated:false,questionBankChanged:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio academic publication precheck error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'ACADEMIC_PUBLICATION_PRECHECK_FAILED',message:status>=500?'Academic publication precheck could not be verified.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
+
+router.post('/publisher-review/key-custody-precheck', express.json({limit:'256kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const body=req.body||{}
+    const data=validatePublisherKeyCustodyPreflight(body.publicKeyPem,body.custody||{}, {forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,publicKeyPersisted:false,privateKeyAccepted:false,envChanged:false,approvalFlagChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio publisher key custody precheck error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PUBLISHER_KEY_CUSTODY_PRECHECK_FAILED',message:status>=500?'Publisher key custody precheck could not be verified.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
 
 router.post('/publisher-review/approval-activation-precheck', express.json({limit:'512kb'}), async (req,res) => {
   try {
