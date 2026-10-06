@@ -118,7 +118,7 @@ const printTimetableDocument = ({ school, schoolClass, section, periods, days, a
 }
 
 const card = {
- background: 'rgba(11,44,77,0.6)',
+ background: 'var(--apex-bg-surface-solid)',
  border: '1px solid rgba(200,153,26,0.2)',
  borderRadius: 22,
  backdropFilter: 'blur(18px)',
@@ -139,7 +139,7 @@ const inputStyle = {
  padding: '12px 14px',
  borderRadius: 14,
  border: '1px solid rgba(148,163,184,0.18)',
- background: 'rgba(7,30,52,0.75)',
+ background: 'var(--apex-bg-subtle)',
  color: 'var(--apex-text-primary)',
  fontSize: 14,
  outline: 'none',

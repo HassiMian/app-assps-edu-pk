@@ -1005,6 +1005,19 @@ assertContains(
   'settings and branding schema must be versioned in migration 010.'
 )
 
+
+for (const uiFile of [
+  'al-siddique-frontend/src/Modules/attendance/QRAttendance.jsx',
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+]) {
+  assertNotContains(
+    uiFile,
+    /#071e34|rgba\(11,44,77|rgba\(7,30,52/,
+    `${uiFile} must use semantic APEX surfaces instead of the legacy heavy navy shell.`
+  )
+}
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

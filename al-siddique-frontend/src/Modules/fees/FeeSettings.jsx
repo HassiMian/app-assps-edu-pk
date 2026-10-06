@@ -90,7 +90,7 @@ function MultiSelect({ items, values, onChange, placeholder }) {
         overflowY: 'auto',
         padding: 10,
         borderRadius: 16,
-        background: 'rgba(11,44,77,0.98)',
+        background: 'var(--apex-bg-surface-solid)',
         border: '1px solid rgba(200,153,26,0.24)',
         boxShadow: '0 18px 44px rgba(0,0,0,0.4)',
       }}>
@@ -207,9 +207,9 @@ export default function FeeSettings() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+    <div style={{ minHeight: '100vh', padding: 24, background: 'var(--apex-shell-gradient)', color: C.silver }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gap: 22 }}>
-        <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, borderRadius: 22, background: 'rgba(11,44,77,0.9)' }}>
+        <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, borderRadius: 22, background: 'var(--apex-bg-surface)' }}>
           <div>
             <h1 style={sectionHeader}>Fee Settings</h1>
             <p style={{ color: C.muted, marginTop: 8 }}>Database-backed class fee defaults, challan rules, and automatic family discounts.</p>
@@ -220,14 +220,14 @@ export default function FeeSettings() {
         {error && <div style={{ padding: 14, borderRadius: 14, background: 'rgba(255,55,95,0.12)', border: '1px solid rgba(255,55,95,0.22)', color: C.red, fontWeight: 700 }}>{error}</div>}
         {message && <div style={{ padding: 14, borderRadius: 14, background: 'rgba(48,209,88,0.12)', border: '1px solid rgba(48,209,88,0.22)', color: C.green, fontWeight: 700 }}>{message}</div>}
 
-        <div className="super-module-card" style={{ ...card, display: 'grid', gap: 18, borderRadius: 22, background: 'rgba(11,44,77,0.9)' }}>
+        <div className="super-module-card" style={{ ...card, display: 'grid', gap: 18, borderRadius: 22, background: 'var(--apex-bg-surface)' }}>
           <div>
             <h2 style={{ margin: 0, color: C.gold, fontSize: 20 }}>Class Monthly Fee Structure</h2>
             <p style={{ color: C.muted, margin: '8px 0 0' }}>These values feed future automatic challan generation unless an admin manually overrides a student voucher.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14 }}>
             {classSettings.map((item, index) => (
-              <div key={`${item.class_name}-${item.session}`} style={{ padding: 16, borderRadius: 18, background: 'rgba(7,30,52,0.46)', border: '1px solid rgba(148,163,184,0.12)', display: 'grid', gap: 10 }}>
+              <div key={`${item.class_name}-${item.session}`} style={{ padding: 16, borderRadius: 18, background: 'var(--apex-bg-subtle)', border: '1px solid rgba(148,163,184,0.12)', display: 'grid', gap: 10 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
                   <div>
                     <div style={{ color: '#fff', fontWeight: 800 }}>{item.class_name}</div>
@@ -249,7 +249,7 @@ export default function FeeSettings() {
           </div>
         </div>
 
-        <div className="super-module-card" style={{ ...card, display: 'grid', gap: 18, borderRadius: 22, background: 'rgba(11,44,77,0.9)' }}>
+        <div className="super-module-card" style={{ ...card, display: 'grid', gap: 18, borderRadius: 22, background: 'var(--apex-bg-surface)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
             <div>
               <h2 style={{ margin: 0, color: C.gold, fontSize: 20 }}>Discount Packages</h2>
@@ -259,7 +259,7 @@ export default function FeeSettings() {
           </div>
 
           {discountPackages.map((pkg, index) => (
-            <div key={`${pkg.name}-${index}`} style={{ padding: 18, borderRadius: 20, background: 'rgba(7,30,52,0.46)', border: '1px solid rgba(148,163,184,0.12)', display: 'grid', gap: 16 }}>
+            <div key={`${pkg.name}-${index}`} style={{ padding: 18, borderRadius: 20, background: 'var(--apex-bg-subtle)', border: '1px solid rgba(148,163,184,0.12)', display: 'grid', gap: 16 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
                 <div style={{ color: '#fff', fontWeight: 850, fontSize: 16 }}>{pkg.name || 'Discount Package'}</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>

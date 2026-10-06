@@ -155,7 +155,7 @@ function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
  <label style={labelStyle}>Exam Type</label>
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10 }}>
  {[[ 'TE', 'Term Exam' ], [ 'AS', 'Assessment' ]].map(([value, label]) => (
- <button key={value} onClick={() => set('type', value)} style={{ padding: 12, borderRadius: 12, border: `1px solid ${form.type === value ? '#C8991A' : 'rgba(148,163,184,0.18)'}`, background: form.type === value ? 'rgba(148,163,184,0.18)' : 'rgba(11,44,77,0.35)', color: form.type === value ? '#C8991A' : '#C0C8D8', fontWeight: 600, cursor: 'pointer' }}>{label}</button>
+ <button key={value} onClick={() => set('type', value)} style={{ padding: 12, borderRadius: 12, border: `1px solid ${form.type === value ? '#C8991A' : 'rgba(148,163,184,0.18)'}`, background: form.type === value ? 'color-mix(in srgb, var(--apex-action-primary) 10%, var(--apex-bg-surface-solid))' : 'var(--apex-bg-surface-solid)', color: form.type === value ? '#C8991A' : '#C0C8D8', fontWeight: 600, cursor: 'pointer' }}>{label}</button>
  ))}
  </div>
  </div>
@@ -203,7 +203,7 @@ function ResultCard({ student, marks, subjects, examName, totalMarks = 100, pass
 
  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
  <thead>
- <tr style={{ background: 'rgba(11,44,77,0.95)', color: 'var(--apex-action-primary)' }}>
+ <tr style={{ background: 'var(--apex-bg-subtle)', color: 'var(--apex-action-primary)' }}>
  <th style={{ padding: '10px', textAlign: 'left' }}>Subject</th>
  <th style={{ padding: '10px', textAlign: 'center' }}>Obtained</th>
  <th style={{ padding: '10px', textAlign: 'center' }}>Total</th>
@@ -215,7 +215,7 @@ function ResultCard({ student, marks, subjects, examName, totalMarks = 100, pass
  const obtained = parseInt(marks[student.id]?.[subject]) || 0;
  const { g: sg, c: sc } = getGrade((obtained / perSubjectTotal) * 100, gradeBands);
  return (
- <tr key={subject} style={{ background: index % 2 === 0 ? 'rgba(11,44,77,0.35)' : 'rgba(11,44,77,0.18)' }}>
+ <tr key={subject} style={{ background: index % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '10px' }}>{subject}</td>
  <td style={{ padding: '10px', textAlign: 'center', fontWeight: 700 }}>{obtained}</td>
  <td style={{ padding: '10px', textAlign: 'center' }}>{perSubjectTotal}</td>
@@ -225,7 +225,7 @@ function ResultCard({ student, marks, subjects, examName, totalMarks = 100, pass
  })}
  </tbody>
  <tfoot>
- <tr style={{ background: 'rgba(11,44,77,0.95)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>
+ <tr style={{ background: 'var(--apex-bg-subtle)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>
  <td style={{ padding: '10px' }}>Total</td>
  <td style={{ padding: '10px', textAlign: 'center' }}>{totalObtained}</td>
  <td style={{ padding: '10px', textAlign: 'center' }}>{totalMax}</td>
@@ -527,7 +527,7 @@ export default function ExaminationModule() {
  const pct = Math.round((total / (subjects.length * 100)) * 100);
  const { g, c } = getGrade(pct);
  return (
- <tr key={s.id} style={{ borderBottom: '1px solid rgba(200,153,26,0.06)', background: i % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+ <tr key={s.id} style={{ borderBottom: '1px solid rgba(200,153,26,0.06)', background: i % 2 === 0 ? 'transparent' : 'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '10px 12px' }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
  <span style={{ fontSize: 20 }}>{s.photo}</span>

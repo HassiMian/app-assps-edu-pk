@@ -4,7 +4,7 @@ import api from '../../services/api'
 import { QrCode } from 'lucide-react'
 
 const C = {
- bg: '#071e34', card: 'rgba(11,44,77,0.92)', gold: '#C8991A', goldL: '#e8b420',
+ bg: 'var(--apex-shell-gradient)', card: 'var(--apex-bg-surface)', gold: '#C8991A', goldL: '#e8b420',
  silver: '#C0C8D8', muted: '#8892A4', green: '#30D158', red: '#FF375F',
  blue: '#0A84FF', border: 'rgba(148,163,184,0.18)',
 }
@@ -132,9 +132,9 @@ export default function QRAttendance() {
  <GCard>
  <div className="super-module-card" style={{ marginBottom: 16 }}>
  <div className="super-module-card" style={{ color: C.muted, fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>Scan Type</div>
- <div className="super-module-card" style={{ display: 'flex', gap: 4, background: 'rgba(7,30,52,0.5)', borderRadius: 10, padding: 4, width: 'fit-content' }}>
+ <div className="super-module-card" style={{ display: 'flex', gap: 4, background: 'var(--apex-bg-subtle)', borderRadius: 10, padding: 4, width: 'fit-content' }}>
  {[{id:'student',label:' Student'},{id:'employee',label:' Employee'}].map(t => (
- <button key={t.id} onClick={() => setType(t.id)} style={{ padding: '8px 18px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 13, background: type === t.id ? `linear-gradient(135deg,${C.gold},${C.goldL})` : 'transparent', color: type === t.id ? '#071e34' : C.muted, transition: 'all 0.15s' }}>{t.label}</button>
+ <button key={t.id} onClick={() => setType(t.id)} style={{ padding: '8px 18px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 13, background: type === t.id ? 'var(--apex-action-primary)' : 'transparent', color: type === t.id ? '#fff' : 'var(--apex-text-secondary)', transition: 'all 0.15s' }}>{t.label}</button>
  ))}
  </div>
  </div>
@@ -160,7 +160,7 @@ export default function QRAttendance() {
 
  <div className="super-module-card" style={{ display: 'flex', gap: 10 }}>
  {!scanning
- ? <button onClick={startCamera} style={{ flex: 1, padding: '11px 0', borderRadius: 10, border: 'none', background: `linear-gradient(135deg,${C.gold},${C.goldL})`, color: '#071e34', fontWeight: 600, cursor: 'pointer' }}> Start Scanner</button>
+ ? <button onClick={startCamera} style={{ flex: 1, padding: '11px 0', borderRadius: 10, border: 'none', background: 'var(--apex-action-primary)', color: '#fff', fontWeight: 600, cursor: 'pointer' }}> Start Scanner</button>
  : <button onClick={stopCamera} style={{ flex: 1, padding: '11px 0', borderRadius: 10, border: 'none', background: 'rgba(255,55,95,0.15)', color: C.red, border: `1px solid rgba(255,55,95,0.3)`, fontWeight: 600, cursor: 'pointer' }}> Stop Scanner</button>
  }
  </div>
@@ -169,8 +169,8 @@ export default function QRAttendance() {
  <div className="super-module-card" style={{ marginTop: 18, paddingTop: 16, borderTop: `1px solid ${C.border}` }}>
  <div className="super-module-card" style={{ color: C.muted, fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>Manual Entry</div>
  <div className="super-module-card" style={{ display: 'flex', gap: 8 }}>
- <input value={manualId} onChange={e => setManualId(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleManual()} placeholder={type === 'student' ? 'GR Number (e.g. GR-4005)' : 'Employee ID'} style={{ flex: 1, background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 10, color: C.silver, padding: '10px 13px', fontSize: 13, outline: 'none' }}/>
- <button onClick={handleManual} style={{ padding: '10px 16px', borderRadius: 10, border: 'none', background: `linear-gradient(135deg,${C.gold},${C.goldL})`, color: '#071e34', fontWeight: 600, cursor: 'pointer' }}>Mark</button>
+ <input value={manualId} onChange={e => setManualId(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleManual()} placeholder={type === 'student' ? 'GR Number (e.g. GR-4005)' : 'Employee ID'} style={{ flex: 1, background: 'var(--apex-bg-surface-solid)', border: `1px solid ${C.border}`, borderRadius: 10, color: C.silver, padding: '10px 13px', fontSize: 13, outline: 'none' }}/>
+ <button onClick={handleManual} style={{ padding: '10px 16px', borderRadius: 10, border: 'none', background: 'var(--apex-action-primary)', color: '#fff', fontWeight: 600, cursor: 'pointer' }}>Mark</button>
  </div>
  {manualStatus && <div className="super-module-card" style={{ color: manualStatus === 'Marked present!' ? C.green : C.red, fontSize: 12, marginTop: 8, fontWeight: 600 }}>{manualStatus}</div>}
  </div>

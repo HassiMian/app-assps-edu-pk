@@ -34,7 +34,7 @@ const C = {
 }
 
 const glass = {
- background: 'rgba(11,44,77,0.92)',
+ background: 'var(--apex-bg-surface)',
  backdropFilter: 'blur(20px)',
  WebkitBackdropFilter: 'blur(20px)',
  border: '1px solid rgba(148,163,184,0.18)',
@@ -363,8 +363,8 @@ export default function MarkAttendance() {
  border: 0;
  border-radius: 16px;
  padding: 0 22px;
- color: #071e34;
- background: linear-gradient(135deg,#C8991A,#e8b420);
+ color: #fff;
+ background: var(--apex-action-primary);
  box-shadow: 0 14px 30px rgba(200,153,26,0.22);
  cursor: pointer;
  font-weight: 900;
@@ -419,7 +419,7 @@ export default function MarkAttendance() {
  }
  .att-table td {
  padding: 16px 20px;
- background: rgba(7,30,52,0.36);
+ background: var(--apex-bg-subtle);
  border-top: 1px solid rgba(148,163,184,0.12);
  border-bottom: 1px solid rgba(148,163,184,0.12);
  }
@@ -461,7 +461,7 @@ export default function MarkAttendance() {
  font-size: 13px;
  font-weight: 900;
  cursor: pointer;
- background: rgba(7,30,52,0.32);
+ background: var(--apex-bg-subtle);
  }
  @keyframes attFadeUp {
  from { opacity: 0; transform: translateY(22px) rotateX(8deg); }
@@ -655,7 +655,7 @@ export default function MarkAttendance() {
  style={{
  color: item.color,
  border: `1px solid ${status === key ? item.color : 'rgba(148,163,184,0.16)'}`,
- background: status === key ? item.bg : 'rgba(7,30,52,0.32)',
+ background: status === key ? item.bg : 'var(--apex-bg-subtle)',
  boxShadow: status === key ? `0 8px 22px ${item.color}22` : 'none',
  }}
  >
