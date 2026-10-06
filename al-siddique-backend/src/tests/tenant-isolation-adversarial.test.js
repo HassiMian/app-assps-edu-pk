@@ -45,22 +45,37 @@ async function runAdversarialSuite() {
   console.log('==================================================')
 
   const client = await pool.connect()
-  const tenantBId = 98765
-  const userBId = 88888
+  const idSeed = await client.query(`
+    SELECT
+      GREATEST(COALESCE((SELECT MAX(id) FROM schools), 0), 100000) + 1000 AS tenant_b_id,
+      GREATEST(COALESCE((SELECT MAX(id) FROM users), 0), 100000) + 2000 AS user_b_id
+  `)
+  const tenantBId = Number(idSeed.rows[0].tenant_b_id)
+  const userBId = Number(idSeed.rows[0].user_b_id)
+  const tenantBKey = `adv_test_${tenantBId}`
+  const tenantBEmail = `admin+${userBId}@adv-test.com`
 
   try {
-    // 1. Ensure Tenant A (school 1) and Tenant B (school 98765) exist in DB
+    // 1. Resolve the real Tenant A identity and create an isolated collision-free Tenant B fixture
+    const tenantAResult = await client.query(`
+      SELECT id, email, role, school_id, tenant_id
+      FROM users
+      WHERE id = 1 AND is_active = true
+      LIMIT 1
+    `)
+    assert.ok(tenantAResult.rows[0], 'Active Tenant A admin fixture (user id 1) is required')
+    const tenantA = tenantAResult.rows[0]
     await client.query(`
       INSERT INTO schools (id, name, code, status, tenant_id)
-      VALUES ($1, 'Tenant B Adversarial School', 'adv_test', 'active', 'adv_test')
+      VALUES ($1, 'Tenant B Adversarial School', $2, 'active', $2)
       ON CONFLICT (id) DO UPDATE SET status = 'active'
-    `, [tenantBId])
+    `, [tenantBId, tenantBKey])
 
     await client.query(`
       INSERT INTO users (id, school_id, name, email, password, role, is_active, tenant_id)
-      VALUES ($1, $2, 'Tenant B Admin', 'admin@adv-test.com', 'dummy_hash', 'admin', true, 'adv_test')
+      VALUES ($1, $2, 'Tenant B Admin', $3, 'dummy_hash', 'admin', true, $4)
       ON CONFLICT (id) DO UPDATE SET is_active = true, school_id = $2
-    `, [userBId, tenantBId])
+    `, [userBId, tenantBId, tenantBEmail, tenantBKey])
 
     // 2. Insert test daily diary records
     const diaryTagA = `DIARY_TENANT_A_${Date.now()}`
@@ -68,8 +83,8 @@ async function runAdversarialSuite() {
 
     await client.query(`
       INSERT INTO daily_diaries (school_id, school_name, tagline, class_name, rows)
-      VALUES (1, 'ASSPS', $1, 'Class 1', '[]'::jsonb)
-    `, [diaryTagA])
+      VALUES ($1, 'ASSPS', $2, 'Class 1', '[]'::jsonb)
+    `, [tenantA.school_id, diaryTagA])
 
     await client.query(`
       INSERT INTO daily_diaries (school_id, school_name, tagline, class_name, rows)
@@ -77,10 +92,12 @@ async function runAdversarialSuite() {
     `, [tenantBId, diaryTagB])
 
     // 3. Issue Tokens
-    const tokenA = jwt.sign({ id: 1, email: 'admin@alsiddique.edu.pk', role: 'admin' }, JWT_SECRET, { expiresIn: '1h' })
-    const tokenB = jwt.sign({ id: userBId, email: 'admin@adv-test.com', role: 'admin' }, JWT_SECRET, { expiresIn: '1h' })
-    const expiredTokenA = jwt.sign({ id: 1, email: 'admin@alsiddique.edu.pk', role: 'admin' }, JWT_SECRET, { expiresIn: '-10s' })
-    const forgedToken = jwt.sign({ id: 1, email: 'admin@alsiddique.edu.pk', role: 'admin' }, 'WRONG_SECRET_KEY_FOR_TAMPER_TEST', { expiresIn: '1h' })
+    const tenantAClaims = { id: tenantA.id, email: tenantA.email, role: tenantA.role, school_id: tenantA.school_id, tenant_id: tenantA.tenant_id }
+    const tenantBClaims = { id: userBId, email: tenantBEmail, role: 'admin', school_id: tenantBId, tenant_id: tenantBKey }
+    const tokenA = jwt.sign(tenantAClaims, JWT_SECRET, { expiresIn: '1h' })
+    const tokenB = jwt.sign(tenantBClaims, JWT_SECRET, { expiresIn: '1h' })
+    const expiredTokenA = jwt.sign(tenantAClaims, JWT_SECRET, { expiresIn: '-10s' })
+    const forgedToken = jwt.sign(tenantAClaims, 'WRONG_SECRET_KEY_FOR_TAMPER_TEST', { expiresIn: '1h' })
 
     // TEST T1: Tenant A fetches daily diary -> receives only Tenant A
     const resT1 = await makeRequest('GET', '/api/daily-diary', { Authorization: `Bearer ${tokenA}` })
@@ -114,7 +131,7 @@ async function runAdversarialSuite() {
     const resT4 = await makeRequest('GET', '/api/daily-diary', {
       Authorization: `Bearer ${tokenA}`,
       'x-school-id': String(tenantBId),
-      'x-tenant-id': 'adv_test'
+      'x-tenant-id': tenantBKey
     })
     assert.strictEqual(resT4.status, 200)
     const forgedHeaderDiaries = resT4.body?.data || []
