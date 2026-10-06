@@ -52,6 +52,7 @@ export default function ParentsPortal() {
  const [messages, setMessages] = useState([])
  const [openMsg, setOpenMsg] = useState(null)
  const [error, setError] = useState('')
+ const [warning, setWarning] = useState('')
 
  const unread = messages.filter(m => !m.read).length
  const pendingFees = fees.filter(f => f.status !== 'paid')
@@ -66,6 +67,7 @@ export default function ParentsPortal() {
  async function loadData() {
  setLoading(true)
  setError('')
+ setWarning('')
  try {
  // 1. Locate the student's full record
  const studRes = await api.get('/api/students')
@@ -88,8 +90,9 @@ export default function ParentsPortal() {
  ))
 
  // 2b. Notification inbox — real school notifications only
- const inboxRes = await api.get('/api/notify/inbox').catch(() => ({ data: { data: [] } }))
- setMessages((inboxRes.data?.data || []).map(item => ({
+ try {
+ const inboxRes = await api.get('/api/notify/inbox')
+ setMessages((Array.isArray(inboxRes.data?.data) ? inboxRes.data.data : []).map(item => ({
  id: item.id,
  from: item.metadata?.sender || item.recipient_role || 'School',
  subject: item.title || 'School Notification',
@@ -97,9 +100,14 @@ export default function ParentsPortal() {
  read: !item.unread,
  body: item.message || '',
  })))
+ } catch (notifyErr) {
+ console.error('Portal notification inbox load error:', notifyErr)
+ setMessages([])
+ setWarning('Academic and fee data is live, but notifications could not be loaded.')
+ }
 
  // 2c. Grading policy — same server settings used by the examination workflow
- const gradeResponse = await api.get('/api/exams/grade-settings').catch(() => ({ data: { data: DEFAULT_GRADE_BANDS } }))
+ const gradeResponse = await api.get('/api/exams/grade-settings')
  const activeGradeBands = Array.isArray(gradeResponse.data?.data) && gradeResponse.data.data.length ? gradeResponse.data.data : DEFAULT_GRADE_BANDS
  setGradeBands(activeGradeBands)
 
@@ -134,7 +142,7 @@ export default function ParentsPortal() {
  ))
 
  } catch (err) {
- setError('Could not load data. Please check your connection.')
+ setError(err.response?.data?.message || 'Could not load parent portal data from the server.')
  console.error('ParentsPortal load error:', err)
  } finally {
  setLoading(false)
@@ -210,6 +218,12 @@ export default function ParentsPortal() {
  {error && (
  <div style={{ padding: '14px 18px', borderRadius: 12, background: 'rgba(255,55,95,0.08)', border: '1px solid rgba(255,55,95,0.2)', color: '#FF375F', display: 'flex', gap: 10, alignItems: 'center' }}>
  <AlertCircle size={16} /> {error}
+ </div>
+ )}
+
+ {warning && (
+ <div style={{ padding:'12px 16px', borderRadius:12, background:'color-mix(in srgb, var(--apex-action-highlight) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-highlight) 24%, var(--apex-border-default))', color:'var(--apex-action-highlight)', fontSize:12, fontWeight:700 }}>
+ {warning}
  </div>
  )}
 

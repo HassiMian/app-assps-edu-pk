@@ -669,6 +669,19 @@ assertContains(
   'portal API must explicitly report partial-data responses.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  /\/api\/notify\/inbox['"]\)\.catch|\/api\/exams\/grade-settings['"]\)\.catch/,
+  'student portal must not silently replace notification or grading API failures with valid-looking defaults.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
+  /\/api\/notify\/inbox['"]\)\.catch|\/api\/exams\/grade-settings['"]\)\.catch/,
+  'parent portal must not silently replace notification or grading API failures with valid-looking defaults.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
