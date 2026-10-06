@@ -15,7 +15,7 @@ for c in git node npm; do
 done
 
 if [[ -e "$TARGET/.git" ]]; then
-  git -C "$TARGET" fetch origin "$BRANCH"
+  git -C "$TARGET" fetch origin "$BRANCH:refs/remotes/origin/$BRANCH"
   git -C "$TARGET" checkout "$BRANCH"
   git -C "$TARGET" reset --hard "origin/$BRANCH"
 else
