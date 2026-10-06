@@ -4,6 +4,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
+const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -26,6 +27,22 @@ router.get('/canonical-readiness', async (req,res) => {
   } catch(err) {
     console.error('Paper Studio canonical readiness error:',err.message)
     return res.status(500).json({success:false,message:'Canonical storage readiness could not be verified.'})
+  }
+})
+
+
+router.get('/canonical-canary/:id/preflight', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=await buildCanonicalCanaryPreflight({
+      schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,
+    })
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio canonical canary preflight error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'CANARY_PREFLIGHT_FAILED',message:status>=500?'Canonical canary preflight could not be verified.':err.message})
   }
 })
 
