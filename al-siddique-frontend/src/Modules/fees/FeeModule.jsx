@@ -1285,6 +1285,8 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
 }
 
 function FeeReports({ challans, students }) {
+ const [sendingId, setSendingId] = useState(null)
+ const [sendMessage, setSendMessage] = useState('')
  const paidChallans = challans.filter(challan => challan.status === 'Paid')
  const unpaidChallans = challans.filter(challan => challan.status !== 'Paid')
  const defaulters = students.filter(student => unpaidChallans.some(challan => Number(challan.studentId) === Number(student.id)))
@@ -1292,26 +1294,40 @@ function FeeReports({ challans, students }) {
  const totalCollected = paidChallans.reduce((sum, c) => sum + c.total, 0)
  const totalPending = unpaidChallans.reduce((sum, c) => sum + (c.total - c.paid), 0)
 
- const monthlySummary = MONTHS.slice(2, 5).map(month => {
+ const monthlySummary = MONTHS.map(month => {
  const rows = challans.filter(challan => challan.month === month)
  return {
  month,
  collected: rows.filter(item => item.status === 'Paid').reduce((sum, item) => sum + item.total, 0),
  pending: rows.filter(item => item.status !== 'Paid').reduce((sum, item) => sum + (item.total - item.paid), 0),
  }
- })
+ }).filter(item => item.collected + item.pending > 0)
 
  const maxValue = Math.max(...monthlySummary.map(item => item.collected + item.pending), 1)
 
+ const sendFeeReminder = async (student, pending) => {
+ if (!student.contact) { setSendMessage(`${student.name}: no contact number is recorded.`); return }
+ setSendingId(student.id); setSendMessage('')
+ try {
+ const message = `Fee reminder: ${student.name} has an outstanding school fee balance of Rs. ${Number(pending || 0).toLocaleString()}. Please contact the school office if payment has already been made.`
+ const response = await api.post('/api/notify/bulk', { recipients:[{ phone:student.contact, message, student_id:student.id, name:student.name, title:'Fee Reminder', type:'fee_reminder', recipient_role:'parent' }], channel:'auto' })
+ if (Number(response.data?.sent || 0) > 0) setSendMessage(`Fee reminder sent to ${student.name}.`)
+ else setSendMessage(response.data?.results?.[0]?.error || `Fee reminder could not be delivered to ${student.name}.`)
+ } catch (err) {
+ setSendMessage(err.response?.data?.message || `Fee reminder could not be sent to ${student.name}.`)
+ } finally { setSendingId(null) }
+ }
+
+
  return (
  <div className="super-module-card" style={{ display: 'grid', gap: 24 }}>
- <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}>
+ <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns:'repeat(auto-fit,minmax(190px,1fr))', gap: 16 }}>
  <StatCard icon={<Wallet size={23} />} label="Collected" value={`Rs.${(totalCollected / 1000).toFixed(1)}K`} color={C.green} />
  <StatCard icon={<ReceiptText size={23} />} label="Pending" value={`Rs.${(totalPending / 1000).toFixed(1)}K`} color={C.red} />
  <StatCard icon={<BadgeCheck size={23} />} label="Defaulters" value={defaulters.length} color={C.orange} />
  </div>
  <GCard>
- <h3 style={{ color: C.gold, fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700, marginBottom: 22 }}>Monthly Collection Overview</h3>
+ <h3 style={{ color:'var(--apex-text-primary)', fontSize:18, fontWeight:800, marginBottom:22 }}>Monthly Collection Overview</h3>
  <div className="super-module-card" style={{ display: 'flex', alignItems: 'flex-end', gap: 26, minHeight: 170 }}>
  {monthlySummary.map(item => {
  const total = item.collected + item.pending
@@ -1352,24 +1368,25 @@ function FeeReports({ challans, students }) {
  ) : defaulters.map((student, index) => {
  const pending = challans.filter(ch => ch.studentId === student.id && ch.status !== 'Paid').reduce((sum, ch) => sum + (ch.total - ch.paid), 0)
  return (
- <tr key={student.id} style={{ background: index % 2 === 0 ? 'transparent' : 'rgba(11,44,77,0.2)' }}>
+ <tr key={student.id} style={{ background:index%2===0?'transparent':'var(--apex-bg-subtle)' }}>
  <td style={{ padding: '14px 16px' }}>
  <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
  <div className="super-module-card" style={{ width: 32, height: 32, borderRadius: 10, background: 'rgba(255,55,95,0.16)', display: 'grid', placeItems: 'center', color: C.red, fontWeight: 800 }}>{student.name.charAt(0)}</div>
- <span style={{ color: '#fff', fontWeight: 700 }}>{student.name}</span>
+ <span style={{ color:'var(--apex-text-primary)', fontWeight:700 }}>{student.name}</span>
  </div>
  </td>
  <td style={{ padding: '14px 16px' }}><span style={{ background: 'rgba(200,153,26,0.12)', color: C.gold, padding: '5px 10px', borderRadius: 10, fontWeight: 700 }}>{student.gr}</span></td>
  <td style={{ padding: '14px 16px', color: C.silver }}>{student.class}</td>
  <td style={{ padding: '14px 16px', color: C.muted }}>{student.contact}</td>
  <td style={{ padding: '14px 16px' }}><span style={{ background: 'rgba(255,55,95,0.12)', color: C.red, padding: '6px 12px', borderRadius: 10, fontWeight: 700 }}>Rs. {pending.toLocaleString()}</span></td>
- <td style={{ padding: '14px 16px' }}><button style={{ background: 'rgba(255,159,10,0.15)', border: '1px solid rgba(255,159,10,0.4)', borderRadius: 10, padding: '8px 14px', color: C.orange, fontWeight: 600, cursor: 'pointer' }}>SMS</button></td>
+ <td style={{ padding:'14px 16px' }}><button onClick={()=>void sendFeeReminder(student,pending)} disabled={sendingId===student.id||!student.contact} style={{ background:'color-mix(in srgb,var(--apex-action-highlight) 10%,var(--apex-bg-surface-solid))', border:'1px solid var(--apex-border-default)', borderRadius:10, padding:'8px 14px', color:C.orange, fontWeight:700, cursor:student.contact?'pointer':'not-allowed', opacity:student.contact?1:.5 }}>{sendingId===student.id?'Sending…':'Send Reminder'}</button></td>
  </tr>
  )
  })}
  </tbody>
  </table>
  </GCard>
+ {sendMessage&&<div style={{ padding:12,borderRadius:12,background:'var(--apex-bg-subtle)',border:'1px solid var(--apex-border-default)',color:sendMessage.includes('sent')?C.green:C.red,fontSize:12,fontWeight:700 }}>{sendMessage}</div>}
  </div>
  )
 }
