@@ -10,6 +10,22 @@ const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tena
 const canGenerateCards = requireRoles('super_admin', 'admin', 'principal', 'teacher', 'accountant')
 const canDeleteCards = requireRoles('super_admin', 'admin', 'principal')
 
+async function requireCardTenantContext(req, res, sourceTables = []) {
+  const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for card operations.' })
+    return null
+  }
+  const tables = ['cards', ...sourceTables]
+  const support = await Promise.all(tables.map(table => hasColumn(table, 'school_id')))
+  const unsafeTable = tables.find((_, index) => !support[index])
+  if (unsafeTable) {
+    res.status(503).json({ success: false, code: 'CARD_TENANT_SCHEMA_REQUIRED', message: `${unsafeTable} storage is not tenant-safe for card operations.` })
+    return null
+  }
+  return schoolId
+}
+
 router.get('/', protect, canGenerateCards, async (req, res) => {
   try {
     let sql = 'SELECT * FROM cards WHERE 1=1'
@@ -30,16 +46,14 @@ router.post('/student-id', protect, canGenerateCards, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Student ID is required' })
     }
 
-    const supportsStudentTenant = await hasColumn('students', 'school_id')
+    const schoolId = await requireCardTenantContext(req, res, ['students'])
+    if (!schoolId) return
     const studentResult = await query(
       `SELECT id, gr_number, name, father_name, class, section, roll_number,
               date_of_birth, parent_phone, address, photo
        FROM students
-       WHERE id = $1 AND is_active = true
-         ${supportsStudentTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''}`,
-      supportsStudentTenant && req.user?.role !== 'super_admin'
-        ? [student_id, currentSchoolId(req)]
-        : [student_id]
+       WHERE id = $1 AND school_id = $2 AND is_active = true`,
+      [student_id, schoolId]
     )
 
     if (!studentResult.rows.length) {
@@ -65,20 +79,12 @@ router.post('/student-id', protect, canGenerateCards, async (req, res) => {
       status: 'generated'
     }
 
-    const supportsCardsTenant = await hasColumn('cards', 'school_id')
-    const insertResult = supportsCardsTenant
-      ? await query(
-        `INSERT INTO cards (school_id, type, student_id, card_data, template, status)
-         VALUES ($1, $2, $3, $4, $5, 'generated')
-         RETURNING id`,
-        [currentSchoolId(req), 'student_id', student.id, cardData, template]
-      )
-      : await query(
-        `INSERT INTO cards (type, student_id, card_data, template, status)
-         VALUES ($1, $2, $3, $4, 'generated')
-         RETURNING id`,
-        ['student_id', student.id, cardData, template]
-      )
+    const insertResult = await query(
+      `INSERT INTO cards (school_id, type, student_id, card_data, template, status)
+       VALUES ($1, $2, $3, $4, $5, 'generated')
+       RETURNING id`,
+      [schoolId, 'student_id', student.id, cardData, template]
+    )
 
     res.json({
       success: true,
@@ -98,16 +104,14 @@ router.post('/fee-receipt', protect, canGenerateCards, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Challan ID is required' })
     }
 
-    const supportsFeeTenant = await hasColumn('fee_challans', 'school_id')
+    const schoolId = await requireCardTenantContext(req, res, ['fee_challans', 'students'])
+    if (!schoolId) return
     const challanResult = await query(
       `SELECT f.*, s.name AS student_name, s.father_name, s.class, s.section, s.gr_number
        FROM fee_challans f
        JOIN students s ON f.student_id = s.id AND s.school_id = f.school_id
-       WHERE f.id = $1
-         ${supportsFeeTenant && req.user?.role !== 'super_admin' ? 'AND f.school_id = $2' : ''}`,
-      supportsFeeTenant && req.user?.role !== 'super_admin'
-        ? [challan_id, currentSchoolId(req)]
-        : [challan_id]
+       WHERE f.id = $1 AND f.school_id = $2`,
+      [challan_id, schoolId]
     )
 
     if (!challanResult.rows.length) {
@@ -137,20 +141,12 @@ router.post('/fee-receipt', protect, canGenerateCards, async (req, res) => {
       generated_at: new Date().toISOString()
     }
 
-    const supportsCardsTenant = await hasColumn('cards', 'school_id')
-    const insertResult = supportsCardsTenant
-      ? await query(
-        `INSERT INTO cards (school_id, type, student_id, card_data, template, status)
-         VALUES ($1, $2, $3, $4, $5, 'generated')
-         RETURNING id`,
-        [currentSchoolId(req), 'fee_receipt', challan.student_id, receiptData, template]
-      )
-      : await query(
-        `INSERT INTO cards (type, student_id, card_data, template, status)
-         VALUES ($1, $2, $3, $4, 'generated')
-         RETURNING id`,
-        ['fee_receipt', challan.student_id, receiptData, template]
-      )
+    const insertResult = await query(
+      `INSERT INTO cards (school_id, type, student_id, card_data, template, status)
+       VALUES ($1, $2, $3, $4, $5, 'generated')
+       RETURNING id`,
+      [schoolId, 'fee_receipt', challan.student_id, receiptData, template]
+    )
 
     res.json({
       success: true,
@@ -170,19 +166,17 @@ router.post('/result-card', protect, canGenerateCards, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Student ID and Exam ID are required' })
     }
 
-    const supportsStudentTenant = await hasColumn('students', 'school_id')
+    const schoolId = await requireCardTenantContext(req, res, ['students', 'exams', 'exam_results'])
+    if (!schoolId) return
     const resultQuery = await query(
       `SELECT er.*, e.name AS exam_name, e.type AS exam_type, e.session,
               s.name AS student_name, s.father_name, s.class, s.section, s.gr_number, s.roll_number
        FROM exam_results er
-       JOIN exams e ON er.exam_id = e.id
-       JOIN students s ON er.student_id = s.id AND s.school_id = e.school_id
-       WHERE er.student_id = $1 AND er.exam_id = $2
-         ${supportsStudentTenant && req.user?.role !== 'super_admin' ? 'AND s.school_id = $3' : ''}
+       JOIN exams e ON er.exam_id = e.id AND e.school_id = er.school_id
+       JOIN students s ON er.student_id = s.id AND s.school_id = er.school_id
+       WHERE er.student_id = $1 AND er.exam_id = $2 AND er.school_id = $3
        ORDER BY er.subject`,
-      supportsStudentTenant && req.user?.role !== 'super_admin'
-        ? [student_id, exam_id, currentSchoolId(req)]
-        : [student_id, exam_id]
+      [student_id, exam_id, schoolId]
     )
 
     if (!resultQuery.rows.length) {
@@ -222,20 +216,12 @@ router.post('/result-card', protect, canGenerateCards, async (req, res) => {
       generated_at: new Date().toISOString()
     }
 
-    const supportsCardsTenant = await hasColumn('cards', 'school_id')
-    const insertResult = supportsCardsTenant
-      ? await query(
-        `INSERT INTO cards (school_id, type, student_id, card_data, template, status)
-         VALUES ($1, $2, $3, $4, $5, 'generated')
-         RETURNING id`,
-        [currentSchoolId(req), 'result_card', student.student_id, resultCardData, template]
-      )
-      : await query(
-        `INSERT INTO cards (type, student_id, card_data, template, status)
-         VALUES ($1, $2, $3, $4, 'generated')
-         RETURNING id`,
-        ['result_card', student.student_id, resultCardData, template]
-      )
+    const insertResult = await query(
+      `INSERT INTO cards (school_id, type, student_id, card_data, template, status)
+       VALUES ($1, $2, $3, $4, $5, 'generated')
+       RETURNING id`,
+      [schoolId, 'result_card', student.student_id, resultCardData, template]
+    )
 
     res.json({
       success: true,
@@ -250,10 +236,11 @@ router.post('/result-card', protect, canGenerateCards, async (req, res) => {
 
 router.delete('/:id', protect, canDeleteCards, async (req, res) => {
   try {
-    const supportsCardsTenant = await hasColumn('cards', 'school_id')
+    const schoolId = await requireCardTenantContext(req, res)
+    if (!schoolId) return
     const result = await query(
-      `DELETE FROM cards WHERE id = $1 ${supportsCardsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''} RETURNING id`,
-      supportsCardsTenant && req.user?.role !== 'super_admin' ? [req.params.id, currentSchoolId(req)] : [req.params.id]
+      'DELETE FROM cards WHERE id = $1 AND school_id = $2 RETURNING id',
+      [req.params.id, schoolId]
     )
     if (!result.rows.length) {
       return res.status(404).json({ success: false, message: 'Card not found' })

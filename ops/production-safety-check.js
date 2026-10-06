@@ -778,6 +778,25 @@ assertNotContains(
   'exam creation must never fall back to an unscoped legacy insert.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/cardsRoutes.js',
+  "code: 'CARD_TENANT_SCHEMA_REQUIRED'",
+  'card generation must fail closed when any required source is not tenant-safe.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/cardsRoutes.js',
+  /INSERT INTO cards \(type, student_id|DELETE FROM cards WHERE id = \$1 \$\{/,
+  'card writes and deletes must never use unscoped legacy paths.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/cardsRoutes.js',
+  'WHERE er.student_id = $1 AND er.exam_id = $2 AND er.school_id = $3',
+  'result-card generation must read results from the selected school only.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
