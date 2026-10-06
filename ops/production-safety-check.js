@@ -1140,6 +1140,33 @@ for (const routeFile of [
   )
 }
 
+
+assertContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  "await client.query('BEGIN')",
+  'admission approval must create student/accounts and update application status atomically.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'SELECT pg_advisory_xact_lock($1)',
+  'admission approval must serialize school-scoped GR allocation.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'student_user_id = $',
+  'admission approval must link generated student portal accounts back to the student row.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'parent_user_id = $',
+  'admission approval must link generated parent portal accounts back to the student row.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  /Credentials Dispatched|dispatched:\s*!!send_credentials|Parent@\$\{cleanPhone\.slice/,
+  'admission approval must not claim unsent credentials were dispatched or generate predictable phone-derived passwords.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -1,7 +1,7 @@
 const { query } = require('../config/database')
 
-async function hasColumn(tableName, columnName) {
-  const result = await query(
+async function hasColumn(tableName, columnName, dbQuery = query) {
+  const result = await dbQuery(
     `SELECT 1
      FROM information_schema.columns
      WHERE table_schema = 'public'
@@ -19,13 +19,14 @@ async function validateSameTenantOrThrow({
   studentId,
   parentId,
   parentUserId,
+  dbQuery = query,
 }) {
   if (!tenantId) {
     throw new Error('Tenant ID is required')
   }
 
-  if (studentId && await hasColumn('students', 'tenant_id')) {
-    const student = await query(
+  if (studentId && await hasColumn('students', 'tenant_id', dbQuery)) {
+    const student = await dbQuery(
       `SELECT id
        FROM students
        WHERE id = $1
@@ -40,8 +41,8 @@ async function validateSameTenantOrThrow({
   }
 
   const userId = parentUserId || parentId
-  if (userId && await hasColumn('users', 'tenant_id')) {
-    const parent = await query(
+  if (userId && await hasColumn('users', 'tenant_id', dbQuery)) {
+    const parent = await dbQuery(
       `SELECT id
        FROM users
        WHERE id = $1

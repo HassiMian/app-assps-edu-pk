@@ -187,194 +187,229 @@ router.put('/:id/status', protect, canViewAdmissions, async (req, res) => {
   }
 });
 
-// POST /api/admissions/:id/approve — admin only, approve application & create student
+// POST /api/admissions/:id/approve — atomic approval + student/account creation
 router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
+  let client = null
   try {
-    const { id } = req.params;
-    const { send_credentials } = req.body || {};
-    
-    const schoolScope = req.user?.role === 'super_admin' ? null : Number(currentSchoolId(req) || 0);
-    const check = schoolScope
-      ? await pool.query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, schoolScope])
-      : await pool.query('SELECT * FROM admissions WHERE id = $1', [id]);
-    if (check.rows.length === 0) {
-      return res.status(404).json({ success: false, message: 'Admission application not found.' });
-    }
-    const admission = check.rows[0];
+    await ensureAdmissionsTable()
+    const { id } = req.params
+    const sendCredentialsRequested = Boolean(req.body?.send_credentials)
+    const requestSchoolId = req.user?.role === 'super_admin' ? null : Number(currentSchoolId(req) || 0)
 
-    // Ensure we don't cross tenant boundaries
-    if (req.user?.role !== 'super_admin' && admission.school_id && admission.school_id !== currentSchoolId(req)) {
-      return res.status(403).json({ success: false, message: 'Unauthorized' });
+    const initial = requestSchoolId
+      ? await pool.query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, requestSchoolId])
+      : await pool.query('SELECT * FROM admissions WHERE id = $1', [id])
+    if (!initial.rows.length) {
+      return res.status(404).json({ success: false, message: 'Admission application not found.' })
     }
 
-    if (admission.status === 'approved') {
-      return res.status(400).json({ success: false, message: 'Application is already approved.' });
+    const initialAdmission = initial.rows[0]
+    const schoolId = Number(initialAdmission.school_id)
+    if (!Number.isInteger(schoolId) || schoolId <= 0) {
+      return res.status(422).json({ success: false, message: 'Admission is missing school context and cannot be approved.' })
+    }
+    if (req.user?.role !== 'super_admin' && schoolId !== Number(currentSchoolId(req))) {
+      return res.status(403).json({ success: false, message: 'Unauthorized' })
     }
 
-    const schoolId = Number(admission.school_id);
-    if (!Number.isFinite(schoolId) || schoolId <= 0) {
-      return res.status(400).json({ success: false, message: 'Admission is missing school context and cannot be approved.' });
-    }
-
-    // Check for duplicate student (by phone and name)
-    const duplicate = await pool.query(
-      'SELECT id FROM students WHERE name ILIKE $1 AND parent_phone = $2 AND school_id = $3 LIMIT 1',
-      [admission.student_name, admission.parent_phone, schoolId]
-    );
-
-    if (duplicate.rows.length > 0) {
-      // Just update status if student already exists
-      await pool.query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', ['approved', id, schoolId]);
-      return res.json({ success: true, message: 'Application approved (student record already exists).' });
-    }
-
-    // Auto-generate gr_number based on max
-    const grRes = await pool.query('SELECT MAX(CAST(gr_number AS INTEGER)) as max_gr FROM students WHERE school_id = $1 AND gr_number ~ \'^[0-9]+$\'', [schoolId]);
-    const nextGr = (grRes.rows[0]?.max_gr || 1000) + 1;
-
-    const tenantId = currentTenantId(req) || await resolveTenantIdForSchool(schoolId);
+    const tenantId = currentTenantId(req) || await resolveTenantIdForSchool(schoolId)
     if (!tenantId) {
-      return res.status(400).json({ success: false, message: 'Tenant ID is required before generating credentials.' });
+      return res.status(422).json({ success: false, message: 'Tenant ID is required before generating credentials.' })
     }
 
     const academicAssignment = await resolveAcademicAssignment({
       schoolId,
-      className: admission.class_applying,
+      className: initialAdmission.class_applying,
       section: '',
       allowEmptySection: true,
-    });
+    })
 
-    // Create student
-    const supportsStudentTenantId = await hasColumn('students', 'tenant_id');
-    const newStudentRes = supportsStudentTenantId
-      ? await pool.query(`
-        INSERT INTO students (
-          school_id, tenant_id, gr_number, name, father_name, class,
-          parent_phone, whatsapp_number, gender, admission_date, status
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), 'active')
-        RETURNING id
-      `, [
-        schoolId,
-        tenantId,
-        String(nextGr),
-        admission.student_name,
-        admission.father_name,
-        academicAssignment.className,
-        admission.parent_phone,
-        admission.whatsapp_number || admission.parent_phone,
-        admission.gender || 'Unknown'
-      ])
-      : await pool.query(`
-        INSERT INTO students (
-          school_id, gr_number, name, father_name, class,
-          parent_phone, whatsapp_number, gender, admission_date, status
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), 'active')
-        RETURNING id
-      `, [
-        schoolId,
-        String(nextGr),
-        admission.student_name,
-        admission.father_name,
-        academicAssignment.className,
-        admission.parent_phone,
-        admission.whatsapp_number || admission.parent_phone,
-        admission.gender || 'Unknown'
-      ]);
-    const studentId = newStudentRes.rows[0].id;
+    const [supportsStudentTenantId, supportsStudentUserLink, supportsParentUserLink] = await Promise.all([
+      hasColumn('students', 'tenant_id'),
+      hasColumn('students', 'student_user_id'),
+      hasColumn('students', 'parent_user_id'),
+    ])
 
-    await validateSameTenantOrThrow({
-      tenantId,
-      studentId,
-    });
+    client = await pool.connect()
+    await client.query('BEGIN')
+    // Serialize GR allocation and duplicate detection per school.
+    await client.query('SELECT pg_advisory_xact_lock($1)', [schoolId])
 
-    // --- AUTO GENERATE SUPER APP CREDENTIALS ---
-    const bcrypt = require('bcryptjs');
-    
-    // Generate parent credentials
-    const cleanPhone = admission.parent_phone.replace(/[^0-9]/g, '');
-    const parentEmail = `parent_${cleanPhone}@assps.edu.pk`;
-    const parentPassword = `Parent@${cleanPhone.slice(-4)}`; // e.g., Parent@1234
-    
-    // Check if parent user exists
-    let parentUserRes = await pool.query(
+    const locked = await client.query(
+      'SELECT * FROM admissions WHERE id = $1 AND school_id = $2 FOR UPDATE',
+      [id, schoolId]
+    )
+    if (!locked.rows.length) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Admission application not found.' })
+    }
+    const admission = locked.rows[0]
+    if (admission.status === 'approved') {
+      await client.query('ROLLBACK')
+      return res.status(409).json({ success: false, message: 'Application is already approved.' })
+    }
+
+    const duplicate = await client.query(
+      'SELECT id FROM students WHERE name ILIKE $1 AND parent_phone = $2 AND school_id = $3 LIMIT 1',
+      [admission.student_name, admission.parent_phone, schoolId]
+    )
+    if (duplicate.rows.length) {
+      await client.query(
+        'UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3',
+        ['approved', id, schoolId]
+      )
+      await client.query('COMMIT')
+      client.release(); client = null
+      return res.json({
+        success: true,
+        message: 'Application approved; the matching student record already exists.',
+        student_id: duplicate.rows[0].id,
+        credentials: null,
+        delivery: { requested: sendCredentialsRequested, dispatched: false, reason: 'No new credentials were created.' },
+      })
+    }
+
+    const grRes = await client.query(
+      "SELECT MAX(CAST(gr_number AS INTEGER)) AS max_gr FROM students WHERE school_id = $1 AND gr_number ~ '^[0-9]+$'",
+      [schoolId]
+    )
+    const nextGr = Number(grRes.rows[0]?.max_gr || 1000) + 1
+
+    const studentInsert = supportsStudentTenantId
+      ? await client.query(`
+          INSERT INTO students (
+            school_id, tenant_id, gr_number, name, father_name, class,
+            parent_phone, whatsapp_number, gender, admission_date, status
+          ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,NOW(),'active')
+          RETURNING id
+        `, [
+          schoolId, tenantId, String(nextGr), admission.student_name, admission.father_name,
+          academicAssignment.className, admission.parent_phone,
+          admission.whatsapp_number || admission.parent_phone, admission.gender || null,
+        ])
+      : await client.query(`
+          INSERT INTO students (
+            school_id, gr_number, name, father_name, class,
+            parent_phone, whatsapp_number, gender, admission_date, status
+          ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,NOW(),'active')
+          RETURNING id
+        `, [
+          schoolId, String(nextGr), admission.student_name, admission.father_name,
+          academicAssignment.className, admission.parent_phone,
+          admission.whatsapp_number || admission.parent_phone, admission.gender || null,
+        ])
+    const studentId = Number(studentInsert.rows[0].id)
+
+    const bcrypt = require('bcryptjs')
+    const cleanPhone = String(admission.parent_phone || '').replace(/[^0-9]/g, '')
+    const parentEmail = `parent_${schoolId}_${cleanPhone}@assps.edu.pk`
+    const parentPassword = `Par@${crypto.randomBytes(8).toString('base64url')}`
+
+    let parentUser = await client.query(
       'SELECT id FROM users WHERE email = $1 AND tenant_id = $2 AND LOWER(role) = $3 LIMIT 1',
       [parentEmail, tenantId, 'parent']
-    );
-    if (parentUserRes.rows.length === 0) {
-      const hashedParentPw = await bcrypt.hash(parentPassword, 10);
-      parentUserRes = await pool.query(`
+    )
+    let parentPasswordCreated = null
+    if (!parentUser.rows.length) {
+      const hashedParentPw = await bcrypt.hash(parentPassword, 10)
+      parentUser = await client.query(`
         INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
-        VALUES ($1, $2, $3, 'parent', 'Parent', $4, $5, true)
+        VALUES ($1,$2,$3,'parent','Parent',$4,$5,true)
         RETURNING id
-      `, [admission.father_name || 'Parent', parentEmail, hashedParentPw, schoolId, tenantId]);
+      `, [admission.father_name || 'Parent', parentEmail, hashedParentPw, schoolId, tenantId])
+      parentPasswordCreated = parentPassword
     }
 
+    const studentEmail = `student_${studentId}@assps.edu.pk`
+    const studentPassword = `Stu@${crypto.randomBytes(8).toString('base64url')}`
+    let studentUser = await client.query(
+      `SELECT id FROM users WHERE tenant_id = $1 AND LOWER(role) = 'student' AND email = $2 LIMIT 1`,
+      [tenantId, studentEmail]
+    )
+    let studentPasswordCreated = null
+    if (!studentUser.rows.length) {
+      const hashedStudentPw = await bcrypt.hash(studentPassword, 10)
+      studentUser = await client.query(`
+        INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
+        VALUES ($1,$2,$3,'student','Student',$4,$5,true)
+        RETURNING id
+      `, [admission.student_name, studentEmail, hashedStudentPw, schoolId, tenantId])
+      studentPasswordCreated = studentPassword
+    }
+
+    const parentUserId = Number(parentUser.rows[0]?.id || 0)
+    const studentUserId = Number(studentUser.rows[0]?.id || 0)
     await validateSameTenantOrThrow({
       tenantId,
       studentId,
-      parentUserId: parentUserRes.rows[0]?.id,
-    });
+      parentUserId,
+      dbQuery: client.query.bind(client),
+    })
 
-    // Generate student credentials
-    const studentPin = crypto.randomInt(100000, 1000000); // 6 digit PIN
-    const studentEmail = `student_${studentId}@assps.edu.pk`;
-    const studentPassword = `Stu@${studentPin}`;
-
-    const existingStudentCredential = await pool.query(
-      `SELECT id
-       FROM users
-       WHERE tenant_id = $1
-         AND LOWER(role) = 'student'
-         AND email = $2
-       LIMIT 1`,
-      [tenantId, studentEmail]
-    );
-
-    if (existingStudentCredential.rows.length === 0) {
-      const hashedStudentPw = await bcrypt.hash(studentPassword, 10);
-      await pool.query(`
-        INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
-        VALUES ($1, $2, $3, 'student', 'Student', $4, $5, true)
-      `, [admission.student_name, studentEmail, hashedStudentPw, schoolId, tenantId]);
+    const linkSets = []
+    const linkValues = []
+    if (supportsStudentUserLink && studentUserId) {
+      linkValues.push(studentUserId)
+      linkSets.push(`student_user_id = $${linkValues.length}`)
+    }
+    if (supportsParentUserLink && parentUserId) {
+      linkValues.push(parentUserId)
+      linkSets.push(`parent_user_id = $${linkValues.length}`)
+    }
+    if (linkSets.length) {
+      linkValues.push(studentId, schoolId)
+      await client.query(
+        `UPDATE students SET ${linkSets.join(', ')}, updated_at = NOW() WHERE id = $${linkValues.length - 1} AND school_id = $${linkValues.length}`,
+        linkValues
+      )
     }
 
-    // Update status
-    await pool.query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', ['approved', id, schoolId]);
+    await client.query(
+      'UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3',
+      ['approved', id, schoolId]
+    )
+    await client.query('COMMIT')
+    client.release(); client = null
 
-    // Log notification
+    // Notifications are best-effort and do not compromise the atomic admission transaction.
     try {
       await pool.query(`
         INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
         VALUES ($1, 'admin', 'Admission Approved', $2, 'success', NOW()),
                ($1, 'super_admin', 'Admission Approved', $2, 'success', NOW())
-      `, [schoolId, `Admission approved for ${admission.student_name} (${admission.class_applying}). Student record & credentials created.`]);
-      
-      if (send_credentials) {
-        await pool.query(`
-          INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
-          VALUES ($1, 'admin', 'Credentials Dispatched', $2, 'info', NOW())
-        `, [schoolId, `Super App credentials sent via WhatsApp to ${admission.parent_phone}`]);
-      }
-    } catch (e) {
-      console.error('Notification log error:', e.message);
+      `, [schoolId, `Admission approved for ${admission.student_name} (${academicAssignment.className}). Student record and portal accounts created.`])
+    } catch (notificationError) {
+      console.error('Admission notification log error:', notificationError.message)
     }
 
-    res.json({ 
-      success: true, 
-      message: 'Application approved. Student record and Super App credentials created successfully.',
+    return res.json({
+      success: true,
+      message: 'Application approved. Student record and linked portal accounts were created atomically.',
+      student_id: studentId,
       credentials: {
-        parent: { email: parentEmail, password: parentPassword },
-        student: { email: studentEmail, password: studentPassword }
+        parent: { email: parentEmail, password: parentPasswordCreated },
+        student: { email: studentEmail, password: studentPasswordCreated },
       },
-      dispatched: !!send_credentials
-    });
+      delivery: {
+        requested: sendCredentialsRequested,
+        dispatched: false,
+        reason: sendCredentialsRequested
+          ? 'Automatic credential delivery is not configured in this workflow; credentials were generated but not sent.'
+          : null,
+      },
+    })
   } catch (err) {
-    console.error('Approve error:', err.message);
-    if (err.status === 422) {
-      return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details });
+    if (client) {
+      await client.query('ROLLBACK').catch(() => {})
+      client.release()
+      client = null
     }
-    res.status(500).json({ success: false, message: 'Failed to approve application.' });
+    console.error('Approve error:', err.message)
+    if (err.status === 422) {
+      return res.status(422).json({ success: false, code: err.code, message: err.message, details: err.details })
+    }
+    return res.status(500).json({ success: false, message: 'Failed to approve application.' })
   }
-});
+})
 
 module.exports = router
