@@ -71,8 +71,10 @@ node --test --test-concurrency=1 \
   tests/paper-v6g11-detached-signature.test.js \
   tests/paper-v6g11-detached-signature-http.test.js \
   tests/paper-v6g12-approval-decision.test.js \
-  tests/paper-v6g12-approval-decision-http.test.js | tee "$LOG"
+  tests/paper-v6g12-approval-decision-http.test.js \
+  tests/paper-v6g13-approval-activation-preflight.test.js \
+  tests/paper-v6g13-approval-activation-preflight-http.test.js | tee "$LOG"
 
-grep -q '^# pass 79$' "$LOG"
+grep -q '^# pass 85$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
 echo "V6G8_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"
