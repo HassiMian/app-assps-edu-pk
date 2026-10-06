@@ -682,6 +682,19 @@ assertNotContains(
   'parent portal must not silently replace notification or grading API failures with valid-looking defaults.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  /fee-profile['"`]\)\.catch\(\(\) => \(\{ data: \{ data: null \} \}\)\)|alert\(['"]Parent WhatsApp/,
+  'student fee panel must not hide server failures or use blocking alerts for missing contact data.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  "if (err.response?.status === 404) return { data: { data: null } }",
+  'student fee profile may map only a real 404 to an absent profile.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

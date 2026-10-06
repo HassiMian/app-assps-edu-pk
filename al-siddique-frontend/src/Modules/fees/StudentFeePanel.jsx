@@ -10,8 +10,8 @@ const subTabBtn = (active) => ({
   borderRadius: 8,
   border: 'none',
   cursor: 'pointer',
-  background: active ? 'rgba(200,153,26,0.2)' : 'transparent',
-  color: active ? '#C8991A' : '#8892A4',
+  background: active ? 'color-mix(in srgb, var(--apex-action-primary) 10%, var(--apex-bg-surface-solid))' : 'transparent',
+  color: active ? 'var(--apex-action-primary)' : 'var(--apex-text-tertiary)',
   fontWeight: 600,
   fontSize: 12,
   whiteSpace: 'nowrap',
@@ -30,17 +30,29 @@ export default function StudentFeePanel({ student, school }) {
   const [challans, setChallans] = useState([])
   const [loading, setLoading] = useState(true)
   const [paying, setPaying] = useState(false)
+  const [loadError, setLoadError] = useState('')
+  const [actionMessage, setActionMessage] = useState('')
 
   const load = useCallback(async () => {
     if (!studentId) return
     setLoading(true)
+    setLoadError('')
     try {
+      const profilePromise = api.get(`/api/students/${studentId}/fee-profile`).catch((err) => {
+        if (err.response?.status === 404) return { data: { data: null } }
+        throw err
+      })
       const [profileRes, feesRes] = await Promise.all([
-        api.get(`/api/students/${studentId}/fee-profile`).catch(() => ({ data: { data: null } })),
+        profilePromise,
         api.get('/api/fees', { params: { student_id: studentId } }),
       ])
       setProfile(profileRes.data?.data || null)
-      setChallans(feesRes.data?.data || [])
+      setChallans(Array.isArray(feesRes.data?.data) ? feesRes.data.data : [])
+    } catch (err) {
+      console.error('Student fee panel load failed', err)
+      setProfile(null)
+      setChallans([])
+      setLoadError(err.response?.data?.message || 'Student fee records could not be loaded from the server.')
     } finally {
       setLoading(false)
     }
@@ -61,6 +73,7 @@ export default function StudentFeePanel({ student, school }) {
   const markPaid = async (challan) => {
     if (!challan?.id) return
     setPaying(true)
+    setActionMessage('')
     try {
       const payable = Math.max(0, Number(challan.gross_total ?? challan.amount ?? 0))
       await api.put(`/api/fees/${challan.id}/pay`, {
@@ -69,7 +82,10 @@ export default function StudentFeePanel({ student, school }) {
         discount: Number(challan.discount || 0),
         payment_note: 'Quick mark-paid action from student fee panel',
       })
+      setActionMessage('Payment recorded successfully.')
       await load()
+    } catch (err) {
+      setActionMessage(err.response?.data?.message || 'Payment could not be recorded.')
     } finally {
       setPaying(false)
     }
@@ -78,7 +94,7 @@ export default function StudentFeePanel({ student, school }) {
   const sendToParent = () => {
     const phone = student?.whatsapp || student?.phone || student?.parent_phone
     if (!phone) {
-      alert('Parent WhatsApp/phone not set on student record.')
+      setActionMessage('Parent WhatsApp/phone is not set on the student record.')
       return
     }
     const clean = String(phone).replace(/\D/g, '')
@@ -89,7 +105,11 @@ export default function StudentFeePanel({ student, school }) {
   }
 
   if (loading) {
-    return <div style={{ color: '#8892A4', padding: 16 }}>Loading fee records…</div>
+    return <div style={{ color: 'var(--apex-text-tertiary)', padding: 16 }}>Loading fee records…</div>
+  }
+
+  if (loadError) {
+    return <div style={{ padding:16, borderRadius:12, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))', color:'var(--apex-action-danger)', fontSize:12, fontWeight:700 }}>{loadError}</div>
   }
 
   const subTabs = [
@@ -101,11 +121,13 @@ export default function StudentFeePanel({ student, school }) {
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
-      <div style={{ display: 'flex', gap: 4, overflowX: 'auto', background: 'rgba(7,30,52,0.5)', borderRadius: 10, padding: 4 }}>
+      <div style={{ display: 'flex', gap: 4, overflowX: 'auto', background: 'var(--apex-bg-subtle)', borderRadius: 10, padding: 4 }}>
         {subTabs.map((t) => (
           <button key={t.id} type="button" style={subTabBtn(subTab === t.id)} onClick={() => setSubTab(t.id)}>{t.label}</button>
         ))}
       </div>
+
+      {actionMessage && <div style={{ padding:'10px 12px', borderRadius:10, background:actionMessage.includes('success') ? 'color-mix(in srgb, var(--apex-action-success) 8%, var(--apex-bg-surface-solid))' : 'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:`1px solid ${actionMessage.includes('success') ? 'color-mix(in srgb, var(--apex-action-success) 24%, var(--apex-border-default))' : 'color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))'}`, color:actionMessage.includes('success') ? 'var(--apex-action-success)' : 'var(--apex-action-danger)', fontSize:12, fontWeight:700 }}>{actionMessage}</div>}
 
       {subTab === 'profile' && (
         <div style={{ display: 'grid', gap: 10 }}>
@@ -120,7 +142,7 @@ export default function StudentFeePanel({ student, school }) {
                 ['Exam', profile.exam_fee],
                 ['Other', profile.other_charges],
               ].map(([label, val]) => (
-                <div key={label} style={{ padding: '12px 14px', background: 'rgba(7,30,52,0.4)', borderRadius: 10 }}>
+                <div key={label} style={{ padding: '12px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 10 }}>
                   <div style={{ color: '#8892A4', fontSize: 11 }}>{label}</div>
                   <div style={{ color: '#C0C8D8', fontWeight: 700 }}>Rs. {Number(val || 0).toLocaleString()}</div>
                 </div>
@@ -136,7 +158,7 @@ export default function StudentFeePanel({ student, school }) {
         <div style={{ display: 'grid', gap: 12 }}>
           {currentChallan ? (
             <>
-              <div style={{ padding: 16, background: 'rgba(7,30,52,0.45)', borderRadius: 12, border: '1px solid rgba(200,153,26,0.15)' }}>
+              <div style={{ padding: 16, background: 'var(--apex-bg-subtle)', borderRadius: 12, border: '1px solid var(--apex-border-subtle)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
                   <div>
                     <div style={{ color: '#C0C8D8', fontWeight: 800 }}>{currentChallan.month} {currentChallan.year}</div>
@@ -168,7 +190,7 @@ export default function StudentFeePanel({ student, school }) {
         <div style={{ display: 'grid', gap: 8 }}>
           {challans.length === 0 && <div style={{ color: '#8892A4' }}>No challans yet.</div>}
           {challans.map((ch) => (
-            <div key={ch.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, padding: '12px 14px', background: 'rgba(7,30,52,0.4)', borderRadius: 10, alignItems: 'center' }}>
+            <div key={ch.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, padding: '12px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 10, alignItems: 'center' }}>
               <div>
                 <div style={{ color: '#C0C8D8', fontWeight: 700 }}>{ch.month} {ch.year}</div>
                 <div style={{ color: '#8892A4', fontSize: 11 }}>
@@ -187,7 +209,7 @@ export default function StudentFeePanel({ student, school }) {
       {subTab === 'vouchers' && (
         <div style={{ display: 'grid', gap: 8 }}>
           {challans.map((ch) => (
-            <div key={`v-${ch.id}`} style={{ padding: '10px 14px', background: 'rgba(7,30,52,0.35)', borderRadius: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+            <div key={`v-${ch.id}`} style={{ padding: '10px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
               <div>
                 <div style={{ fontWeight: 700, color: '#C0C8D8' }}>{ch.challan_no || `CH-${ch.id}`}</div>
                 <div style={{ fontSize: 11, color: '#8892A4' }}>{ch.month} {ch.year}</div>
