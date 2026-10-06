@@ -1318,6 +1318,22 @@ function FeeReports({ challans, students }) {
  } finally { setSendingId(null) }
  }
 
+ const sendAllFeeReminders = async () => {
+ const recipients = defaulters.map(student => {
+ const pending = challans.filter(ch => Number(ch.studentId) === Number(student.id) && ch.status !== 'Paid').reduce((sum,ch)=>sum + Math.max(0,Number(ch.total||0)-Number(ch.paid||0)),0)
+ if (!student.contact || pending <= 0) return null
+ return { phone:student.contact, message:`Fee reminder: ${student.name} has an outstanding school fee balance of Rs. ${pending.toLocaleString()}. Please contact the school office if payment has already been made.`, student_id:student.id, name:student.name, title:'Fee Reminder', type:'fee_reminder', recipient_role:'parent' }
+ }).filter(Boolean)
+ if (!recipients.length) { setSendMessage('No defaulters with a valid contact number and outstanding balance were found.'); return }
+ setSendingId('all'); setSendMessage('')
+ try {
+ const response = await api.post('/api/notify/bulk', { recipients, channel:'auto' })
+ const sent = Number(response.data?.sent || 0); const failed = Number(response.data?.failed || 0)
+ setSendMessage(`Fee reminders processed: ${sent} sent${failed ? `, ${failed} failed` : ''}.`)
+ } catch (err) { setSendMessage(err.response?.data?.message || 'Bulk fee reminders could not be sent.') }
+ finally { setSendingId(null) }
+ }
+
 
  return (
  <div className="super-module-card" style={{ display: 'grid', gap: 24 }}>
@@ -1352,7 +1368,7 @@ function FeeReports({ challans, students }) {
  <GCard style={{ padding: 0, overflow: 'hidden' }}>
  <div className="super-module-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 24px', borderBottom: `1px solid ${C.border}` }}>
  <h3 style={{ color: C.red, fontFamily: "'Playfair Display',serif", fontSize: 18, fontWeight: 700, margin: 0 }}>Fee Defaulters</h3>
- <button style={{ background: 'rgba(255,55,95,0.15)', border: '1px solid rgba(255,55,95,0.35)', borderRadius: 12, padding: '10px 16px', color: C.red, fontWeight: 600, cursor: 'pointer' }}>SMS Defaulters</button>
+ <button onClick={()=>void sendAllFeeReminders()} disabled={sendingId==='all'||!defaulters.length} style={{ background:'color-mix(in srgb,var(--apex-action-danger) 8%,var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 24%,var(--apex-border-default))', borderRadius:12, padding:'10px 16px', color:C.red, fontWeight:700, cursor:defaulters.length?'pointer':'not-allowed', opacity:defaulters.length?1:.5 }}>{sendingId==='all'?'Sending…':'Send All Reminders'}</button>
  </div>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
