@@ -1444,21 +1444,29 @@ function ResultCardTab({ school }) {
  const [selectedStudent,setSelectedStudent]= useState('')
  const [template, setTemplate] = useState('royal')
  const [loading, setLoading] = useState(false)
+ const [loadError, setLoadError] = useState('')
 
  const loadResults = () => {
  if (!selectedExam) return
- setLoading(true); setResults([]); setSelectedStudent('')
+ setLoading(true); setLoadError(''); setResults([]); setSelectedStudent('')
  api.get(`/api/exams/results/${selectedExam}`)
  .then(r => {
  const list = r.data.data || []
  setResults(list)
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
- }).catch(()=>setResults([])).finally(()=>setLoading(false))
+ }).catch(err => {
+ setResults([])
+ setLoadError(err.response?.data?.message || 'Exam results could not be loaded.')
+ }).finally(()=>setLoading(false))
  }
 
  useEffect(() => {
- api.get('/api/exams').then(r => { const l=r.data.data||[]; setExams(l); if(l.length) setSelectedExam(String(l[0].id)) }).catch(()=>{})
+ setLoadError('')
+ api.get('/api/exams').then(r => { const l=r.data.data||[]; setExams(l); if(l.length) setSelectedExam(String(l[0].id)) }).catch(err => {
+ setExams([])
+ setLoadError(err.response?.data?.message || 'Exams could not be loaded.')
+ })
  }, [])
 
  const students = [...new Map(results.map(r => [r.student_id, { id:r.student_id, name:r.name, gr_number:r.gr_number, father_name:r.father_name }])).values()]
@@ -1478,6 +1486,7 @@ function ResultCardTab({ school }) {
  <GCard>
  <h3 style={{ color:C.gold, fontSize:17, margin:'0 0 4px', fontFamily:"'Playfair Display',serif" }}>Result Cards</h3>
  <p style={{ color:C.muted, fontSize:13, margin:'0 0 20px' }}>4 world-class templates. A4 portrait with pie chart, bar chart &amp; signatures.</p>
+ {loadError && <div className="cards-node" style={{ color:C.red, fontWeight:700, fontSize:13, marginBottom:16 }}>{loadError}</div>}
 
  {/* Exam + Student */}
  <div className="cards-node" style={{ display:'grid', gridTemplateColumns:'1fr 1fr auto', gap:14, marginBottom:20, alignItems:'flex-end' }}>

@@ -1719,3 +1719,21 @@ assertContains(
   "error.code = 'TENANT_CONTEXT_REQUIRED'",
   'portal account provisioning must require an explicit tenant context.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  /api\.get\(`\/api\/exams\/results\/\$\{selectedExam\}`\)[\s\S]{0,320}\.catch\(\(\)=>setResults\(\[\]\)\)/,
+  'result-card data loads must not convert API failures into an indistinguishable empty result set.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  'Exam results could not be loaded.',
+  'result-card data failures must be visible to the operator.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  'Exams could not be loaded.',
+  'exam-list failures must be visible to the operator.'
+)
