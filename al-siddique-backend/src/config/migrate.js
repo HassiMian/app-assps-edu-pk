@@ -529,6 +529,15 @@ async function migrate() {
     }
 
     try {
+      const feeSystemMigration = require('../../migrations/014_fee_system_schema')
+      await feeSystemMigration.up()
+      console.log('fee system schema ready')
+    } catch (err) {
+      console.error('Fee System Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

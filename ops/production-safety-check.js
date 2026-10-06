@@ -1091,6 +1091,19 @@ assertContains(
   'core adjunct schema must be versioned in migration 013.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /CREATE TABLE IF NOT EXISTS fee_|ALTER TABLE fee_challans\s*\n?\s*ADD COLUMN IF NOT EXISTS|CREATE INDEX IF NOT EXISTS idx_fee_|CREATE UNIQUE INDEX IF NOT EXISTS uq_fee_challans/,
+  'fee request handlers must not mutate fee schema at runtime.'
+)
+
+assertContains(
+  'al-siddique-backend/migrations/014_fee_system_schema.js',
+  'CREATE TABLE IF NOT EXISTS fee_discount_packages',
+  'fee schema must be versioned in migration 014.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
