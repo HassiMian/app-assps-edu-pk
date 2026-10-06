@@ -1,4 +1,4 @@
-const test = require('node:test')
+const { test, after } = require('node:test')
 const assert = require('node:assert/strict')
 const {
   normalizeQuestionForGovernance,
@@ -7,6 +7,8 @@ const {
   assertLifecycleTransition,
   assertIdempotencyKey,
 } = require('../services/questionBankGovernance')
+const { pool } = require('../config/database')
+after(async()=>{ await pool.end() })
 
 test('canonical fingerprint collapses superficial spacing/case but ignores answer metadata', () => {
   const a={class_level:'7',subject:'Science',medium:'English',question_type:'short',question_text:'  What   is force? ',answer:'A push or pull',marks:2}
