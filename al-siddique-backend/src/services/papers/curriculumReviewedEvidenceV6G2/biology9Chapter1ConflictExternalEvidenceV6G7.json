@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "assps-biology9-ch1-conflict-external-evidence-v6g7",
+  "basePinnedArtifact": "biology9Chapter1SourceIssues.json",
+  "basePinnedSha256": "8b94fbb99340ca5558c936e7cefe0e628bf083b174bacfc7c4a16d6d5b83f524",
+  "generatedOn": "2026-10-06",
+  "policy": {
+    "baseEvidenceImmutable": true,
+    "externalEvidenceDoesNotResolveConflict": true,
+    "curriculumReplacementAllowed": false,
+    "namedAcademicReviewStillRequired": true
+  },
+  "issues": [
+    {
+      "id": "BIO9-C1-THEORY-LAW-001",
+      "status": "OPEN",
+      "additionalAuthoritativeEvidence": [
+        {
+          "authority": "NSTA",
+          "url": "https://www.nsta.org/nstas-official-positions/nature-science",
+          "retrievedOn": "2026-10-06",
+          "finding": "NSTA distinguishes theories from laws and states that theories do not become laws even with additional evidence.",
+          "evidenceRole": "EXTERNAL_ERRATA_CONTEXT_NOT_CURRICULUM_REPLACEMENT"
+        },
+        {
+          "authority": "NSTA",
+          "url": "https://my.nsta.org/ngss/NSforSEP.aspx?id=4",
+          "retrievedOn": "2026-10-06",
+          "finding": "High-school Nature of Science guidance states that theories and laws are different forms of scientific knowledge and theories do not with time become laws or facts.",
+          "evidenceRole": "EXTERNAL_ERRATA_CONTEXT_NOT_CURRICULUM_REPLACEMENT"
+        }
+      ]
+    },
+    {
+      "id": "BIO9-C1-MALARIA-CHRONOLOGY-002",
+      "status": "OPEN",
+      "additionalAuthoritativeEvidence": [
+        {
+          "authority": "WHO",
+          "url": "https://www.who.int/news/item/22-05-2019-algeria-and-argentina-certified-malaria-free-by-who",
+          "retrievedOn": "2026-10-06",
+          "finding": "WHO states that Alphonse Laveran discovered the malaria parasite in Algeria in 1880.",
+          "evidenceRole": "EXTERNAL_ERRATA_CONTEXT_NOT_CURRICULUM_REPLACEMENT"
+        },
+        {
+          "authority": "WHO",
+          "url": "https://iris.who.int/bitstream/10665/126463/1/RD_Speeches_04NOV05.pdf",
+          "retrievedOn": "2026-10-06",
+          "finding": "WHO commemorative address identifies Laveran in 1880 and Ronald Ross transmission discovery in 1897 as landmark malaria research dates.",
+          "evidenceRole": "EXTERNAL_ERRATA_CONTEXT_NOT_CURRICULUM_REPLACEMENT"
+        },
+        {
+          "authority": "NobelPrize.org",
+          "url": "https://www.nobelprize.org/prizes/medicine/1902/ross/biographical/",
+          "retrievedOn": "2026-10-06",
+          "finding": "Nobel biography records Ross research on malaria and his demonstration of the parasite life-cycle in mosquitoes, underpinning the mosquito-transmission discovery.",
+          "evidenceRole": "EXTERNAL_ERRATA_CONTEXT_NOT_CURRICULUM_REPLACEMENT"
+        }
+      ],
+      "chronologyEvidenceSummary": {
+        "LaveranParasiteDiscoveryYear": 1880,
+        "RossMosquitoTransmissionDiscoveryYear": 1897,
+        "status": "AUTHORITATIVE_EXTERNAL_RECORD_CONFLICTS_WITH_TEXTBOOK_DATES_REVIEW_REQUIRED"
+      }
+    }
+  ]
+}

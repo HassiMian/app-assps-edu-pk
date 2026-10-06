@@ -53,3 +53,6 @@ Additional review artifacts are sealed in `/root/secure-archive/apex-paper-v6g3-
 - `SHA256SUMS.final` — cryptographic seal for the review pack.
 
 The publisher verifier now reports only genuine approval/release blockers. There are no publisher artifact hash/count/source-coordinate mismatch errors in the G3 snapshot.
+
+## V6-G5 source-page mapping evidence
+Chapter 1 individual question-page mapping is now complete without copying textbook question text. The immutable sidecar is `services/papers/curriculumReviewedEvidenceV6G2/biology9Chapter1QuestionPageMapV6G5.json` and the review pack contains the same file plus `biology9-ch1-academic-review-queue-v2.json`. All 50 source refs have exact visually verified physical-page coordinates; the original G2 section ranges remain unchanged.
