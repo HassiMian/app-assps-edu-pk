@@ -39,6 +39,7 @@ const transformStudent = (student) => ({
  dob: student.date_of_birth ? student.date_of_birth.split("T")[0] : "",
  admissionDate: student.admission_date ? student.admission_date.split("T")[0] : "",
  photo: student.photo || "",
+ remarks: student.remarks || "",
 });
 
 const normalizeGenderValue = (gender = "") => {
@@ -1672,14 +1673,53 @@ function AccessTab({ student }) {
 //  Profile Modal
 function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  const [tab, setTab] = useState("profile");
+ const [attendanceRows, setAttendanceRows] = useState([]);
+ const [attendanceLoading, setAttendanceLoading] = useState(false);
+ const [resultsRows, setResultsRows] = useState([]);
+ const [resultsLoading, setResultsLoading] = useState(false);
+ const [note, setNote] = useState(student.remarks || "");
+ const [noteSaving, setNoteSaving] = useState(false);
+ const [noteMessage, setNoteMessage] = useState("");
 
  useEffect(() => {
  trackRecentViewed({ id: student.id, name: student.name, gr_number: student.gr || student.gr_number, class: student.class });
- }, [student.id]);
+ }, [student.id, student.name, student.gr, student.gr_number, student.class]);
  const [docsOpen, setDocsOpen] = useState(false);
  const [photoEditOpen, setPhotoEditOpen] = useState(false);
  const [certificateOrientation, setCertificateOrientation] = useState("auto");
  const docsRef = useRef();
+
+ useEffect(() => {
+ let cancelled = false;
+ if (tab === "attendance") {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setAttendanceLoading(true);
+ api.get(`/api/attendance/history/${student.id}`, { skipCache:true })
+ .then(response => { if (!cancelled) setAttendanceRows(Array.isArray(response.data?.data) ? response.data.data : []); })
+ .catch(() => { if (!cancelled) setAttendanceRows([]); })
+ .finally(() => { if (!cancelled) setAttendanceLoading(false); });
+ }
+ if (tab === "results") {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ setResultsLoading(true);
+ api.get(`/api/exams/student-results/${student.id}`, { skipCache:true })
+ .then(response => { if (!cancelled) setResultsRows(Array.isArray(response.data?.data) ? response.data.data : []); })
+ .catch(() => { if (!cancelled) setResultsRows([]); })
+ .finally(() => { if (!cancelled) setResultsLoading(false); });
+ }
+ return () => { cancelled = true; };
+ }, [tab, student.id]);
+
+ const saveNote = async () => {
+ setNoteSaving(true);
+ setNoteMessage("");
+ try {
+ await api.put(`/api/students/${student.id}`, { remarks: note });
+ setNoteMessage("Note saved to the student record.");
+ } catch (err) {
+ setNoteMessage(err.response?.data?.message || "Note could not be saved.");
+ } finally { setNoteSaving(false); }
+ };
 
  const tabs = ["profile","fee","attendance","results","notes","access","ai-portrait"];
 
@@ -1818,7 +1858,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  <div>
  <div style={{ color:"#C8991A", fontSize:11, fontWeight:700, letterSpacing:1, textTransform:"uppercase", marginBottom:8 }}>Academic Details</div>
  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
- <InfoBlock label="Session" value="2026-2027"/>
+ <InfoBlock label="Session" value={paperSettings?.examYear || paperSettings?.academicYear || "—"}/>
  <InfoBlock label="Class / Section" value={`${student.class} / ${student.section}`}/>
  </div>
  </div>
@@ -1845,32 +1885,35 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto }) {
  />
  )}
  {tab==="attendance" && (
- <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:6 }}>
- {Array.from({length:31}).map((_,i)=>(
- <div key={i} style={{ height:34, borderRadius:6, background:i%7===0?"rgba(255,55,95,0.1)":"rgba(48,209,88,0.1)", border:`1px solid ${i%7===0?"#FF375F22":"#30D15822"}`, display:"grid", placeItems:"center", color:i%7===0?"#FF375F":"#30D158", fontSize:11, fontWeight:700 }}>
- {i+1}<br/><span style={{fontSize:8}}>{i%7===0?'A':'P'}</span>
+ <div style={{ display:"grid", gap:10 }}>
+ {attendanceLoading ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>Loading verified attendance…</div> : attendanceRows.length ? attendanceRows.slice(0,31).map(row => {
+ const status = String(row.status || "").toLowerCase();
+ const present = status === "present";
+ return <div key={row.id} style={{ display:"flex", justifyContent:"space-between", gap:12, alignItems:"center", padding:"11px 14px", borderRadius:12, background:"var(--apex-bg-subtle)", border:"1px solid var(--apex-border-subtle)" }}>
+ <div><div style={{ color:"var(--apex-text-primary)", fontWeight:700, fontSize:13 }}>{row.date ? new Date(row.date).toLocaleDateString('en-PK') : '—'}</div><div style={{ color:"var(--apex-text-tertiary)", fontSize:11, marginTop:2 }}>{row.class || student.class} · {row.section || student.section}</div></div>
+ <span style={{ padding:"5px 10px", borderRadius:999, background:present?"color-mix(in srgb,var(--apex-action-success) 9%,transparent)":"color-mix(in srgb,var(--apex-action-danger) 9%,transparent)", color:present?"var(--apex-action-success)":"var(--apex-action-danger)", fontSize:11, fontWeight:800, textTransform:"capitalize" }}>{status || 'Unknown'}</span>
  </div>
- ))}
+ }) : <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>No attendance records found for this student.</div>}
  </div>
  )}
  {tab==="results" && (
  <div style={{ display:"grid", gap:10 }}>
- {[
- { exam:"First Term 2026", marks:"88/100", pct:"88%", grade:"A+" },
- { exam:"Monthly Test March", marks:"45/50", pct:"90%", grade:"A+" },
- ].map((r,i)=>(
- <div key={i} style={{ display:"flex", justifyContent:"space-between", padding:"14px 18px", background:"rgba(7,30,52,0.4)", borderRadius:12, border:"1px solid rgba(10,132,255,0.15)" }}>
- <div><div style={{ color:"#C0C8D8", fontWeight:700 }}>{r.exam}</div><div style={{ color:"#8892A4", fontSize:12 }}>Obtained: {r.marks}</div></div>
- <div style={{ textAlign:"right" }}><div style={{ color:"#0A84FF", fontWeight:800, fontSize:18 }}>{r.pct}</div><div style={{ color:"#C8991A", fontSize:11, fontWeight:700 }}>Grade: {r.grade}</div></div>
+ {resultsLoading ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>Loading verified results…</div> : resultsRows.length ? resultsRows.map((r,i)=>{
+ const obtained = Number(r.marks_obtained || 0);
+ const total = Number(r.total_marks || 0);
+ const pct = total > 0 ? Math.round((obtained / total) * 100) : 0;
+ return <div key={r.id || `${r.exam_id}-${r.subject}-${i}`} style={{ display:"flex", justifyContent:"space-between", gap:14, padding:"14px 18px", background:"var(--apex-bg-subtle)", borderRadius:12, border:"1px solid var(--apex-border-subtle)" }}>
+ <div><div style={{ color:"var(--apex-text-primary)", fontWeight:700 }}>{r.exam_name || 'Exam'} · {r.subject || 'Subject'}</div><div style={{ color:"var(--apex-text-tertiary)", fontSize:12, marginTop:3 }}>Obtained: {obtained}/{total || '—'}</div></div>
+ <div style={{ textAlign:"right" }}><div style={{ color:"var(--apex-action-primary)", fontWeight:800, fontSize:18 }}>{total > 0 ? `${pct}%` : '—'}</div><div style={{ color:"var(--apex-action-highlight)", fontSize:11, fontWeight:700 }}>Grade: {r.grade || '—'}</div></div>
  </div>
- ))}
+ }) : <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>No recorded exam results found for this student.</div>}
  </div>
  )}
  {tab==="notes" && (
  <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
- <textarea placeholder="Add notes about this student..." rows={5}
- style={{ width:"100%", background:"rgba(7,22,40,0.92)", border:"1px solid rgba(200,153,26,0.2)", borderRadius:10, color:"#C0C8D8", padding:"12px 14px", fontSize:14, outline:"none", resize:"vertical", boxSizing:"border-box" }}/>
- <button style={{ ...btnPrimary, alignSelf:"flex-start" }}>Save Note</button>
+ <textarea placeholder="Add notes about this student..." rows={5} value={note} onChange={e=>setNote(e.target.value)}
+ style={{ width:"100%", background:"var(--apex-bg-surface-solid)", border:"1px solid var(--apex-border-default)", borderRadius:10, color:"var(--apex-text-primary)", padding:"12px 14px", fontSize:14, outline:"none", resize:"vertical", boxSizing:"border-box" }}/>
+ <div style={{ display:"flex", gap:10, alignItems:"center", flexWrap:"wrap" }}><button onClick={()=>void saveNote()} disabled={noteSaving} style={{ ...btnPrimary, alignSelf:"flex-start" }}>{noteSaving?'Saving…':'Save Note'}</button>{noteMessage&&<span style={{ color:noteMessage.includes('saved')?'var(--apex-action-success)':'var(--apex-action-danger)', fontSize:12, fontWeight:700 }}>{noteMessage}</span>}</div>
  </div>
  )}
 
