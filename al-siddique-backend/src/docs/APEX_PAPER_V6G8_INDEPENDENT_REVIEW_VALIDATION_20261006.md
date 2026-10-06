@@ -1,30 +1,47 @@
-# APEX Paper Studio V6-G8 — Independent Review Validation Endpoint
+# APEX Paper Studio V6-G8 — Independent Review Validation
 
-V6-G8 exposes the existing fail-closed G4 review validator through a signed-session admin endpoint without persisting or approving any review.
+V6-G8 turns the prepared reviewer evidence into a mechanically verifiable, read-only intake workflow. It does not persist reviews and does not grant publication or canonical-write approval.
 
-## Endpoint
+## Admin/Principal API
 `POST /api/portal/paper-studio/publisher-review/validate`
 
-## Access
-Only `super_admin`, `admin`, and `principal` sessions may use the endpoint. Teachers receive 403. Unauthenticated requests receive 401.
+Security:
+- signed portal session required;
+- roles limited to `super_admin`, `admin`, `principal`;
+- teacher access is denied;
+- caller user id is rejected as an independent reviewer id;
+- response is `Cache-Control: private, no-store` through the protected Paper Studio surface;
+- no review record is persisted;
+- no publisher approval flag is changed;
+- no canonical write flag is changed.
 
-## Behavior
-The request body is evaluated through `validateReviewBundle` for the Grade 9 Biology publisher scope. The response reports structural validity and per-review issues only.
+The response policy explicitly returns:
+- `validationOnly: true`
+- `persisted: false`
+- `approvalChanged: false`
+- `canonicalWriteChanged: false`
 
-The endpoint explicitly returns policy evidence that it:
-- does not persist the submitted bundle;
-- does not change publisher approval;
-- does not change canonical-write state;
-- does not create Question Bank rows.
+## Offline CLI
+`node scripts/validate-independent-review-v6g8.js <review-bundle.json> [forbidden-reviewer-id ...]`
 
-The authenticated caller's own user id is forbidden as an independent reviewer id, preventing a caller from self-approving the operational review bundle.
+Exit codes:
+- `0`: bundle structurally valid;
+- `3`: bundle read successfully but fails independent-review validation;
+- `2`: file/usage error.
+
+## Reviewer package
+Sealed evidence is stored under:
+`/root/secure-archive/apex-paper-v6g3-review-pack-20261006/`
+
+The pack includes one immutable review-artifact manifest per technical review plus:
+`independent-review-submission-template-v6g8.json`.
+
+The independent subject/live-source technical dossier is complete, but its manifest deliberately remains `TECHNICAL_DOSSIER_COMPLETE_EXTERNAL_GRANT_PENDING`; this is not approval.
 
 ## Verification
-- teacher access blocked;
-- draft bundle validates as incomplete with zero persistence;
-- self-reviewer bundle rejected;
-- structurally complete external reviewer bundle validates read-only.
+- G8 signed-session HTTP flow: 4/4 PASS.
+- G8 offline CLI: 3/3 PASS.
+- G4-G7 regression with G8 development: 22/22 PASS.
+- Live production signed-session G8 flow: 4/4 PASS.
 
-HTTP gate: 4/4 PASS on a cloned production database.
-G4-G7 supporting regression: 22/22 PASS.
-Deployment release-smoke now requires the G8 route to return 401 unauthenticated.
+No human/reviewer identity, academic decision, publisher signature, or approval result is fabricated by this workflow.
