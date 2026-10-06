@@ -14,6 +14,7 @@ const { buildPublisherApprovalActivationPreflight } = require('../services/paper
 const { validatePublisherKeyCustodyPreflight } = require('../services/papers/paperPublisherKeyCustodyPreflightV6G14')
 const { validatePublisherEditionReviewPreflight } = require('../services/papers/paperPublisherEditionReviewPreflightV6G15')
 const { buildAcademicPublicationPrecheck } = require('../services/papers/paperAcademicPublicationPrecheckV6G16')
+const { buildPublisherReleaseEnvelope } = require('../services/papers/paperPublisherReleaseEnvelopeV6G17')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
