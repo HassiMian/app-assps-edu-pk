@@ -96,10 +96,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1IHxM96F221JY3uL4jEIRWQ8NxskXyilF/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1IHxM96F221JY3uL4jEIRWQ8NxskXyilF/view?usp=sharing",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-006",
@@ -115,10 +117,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1uSduNMyaebkeOlAis_oh4KUBKssMAT2M/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1uSduNMyaebkeOlAis_oh4KUBKssMAT2M/view?usp=sharing",
+      "providerAccessState": "SIGN_IN_PAGE",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-007",
@@ -134,17 +138,19 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1OY1Unpm8VkLCGQfbLFrE8wLn3fzXmZpc/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1OY1Unpm8VkLCGQfbLFrE8wLn3fzXmZpc/view?usp=sharing",
+      "providerAccessState": "SIGN_IN_PAGE",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-008",
       "grade": 9,
       "stream": "Science",
       "subject": "Chemistry",
-      "edition": "VERIFY",
+      "edition": "2026-09-03",
       "medium": "Urdu",
       "catalogLabel": "Chemistry 9 (UM) 03.09.26",
       "pdfUrl": null,
@@ -153,10 +159,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1sbP5nnysHqXB-T3qVb55chS93LdqqBoN/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1sbP5nnysHqXB-T3qVb55chS93LdqqBoN/view?usp=sharing",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-009",
@@ -187,7 +195,7 @@
       "grade": 9,
       "stream": "Science",
       "subject": "Biology",
-      "edition": "VERIFY",
+      "edition": "2026-09-03",
       "medium": "Urdu",
       "catalogLabel": "Biology 9 (UM) 03.09.26",
       "pdfUrl": "https://drive.google.com/file/d/1LxUO75kyWQQWZZPTpg9oGYetAgYAjql3/view?usp=sharing",
@@ -196,7 +204,7 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_EDITION_CHAPTER_AND_EXERCISE_VALIDATION",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1LxUO75kyWQQWZZPTpg9oGYetAgYAjql3/view?usp=sharing",
@@ -206,7 +214,9 @@
       "downloadVerifiedOn": "2026-10-02",
       "downloadStatus": "PDF_BYTES_VERIFIED_EDITION_UNREVIEWED",
       "sourceCacheRef": "IX/biology9_um_catalog010.pdf",
-      "editionEvidenceNote": "Official catalog label is Biology 9 (UM) 03.09.26. Binary/cover verified; equivalence to the Grade IX 2025-26 English cohort is NOT yet established."
+      "editionEvidenceNote": "Official catalog label is Biology 9 (UM) 03.09.26. Binary/cover verified; equivalence to the Grade IX 2025-26 English cohort is NOT yet established.",
+      "providerAccessState": "SIGN_IN_PAGE",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-011",
@@ -222,10 +232,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1Afzgg1sukw1-qBOj61VnMGs6-b1x82ae/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1Afzgg1sukw1-qBOj61VnMGs6-b1x82ae/view?usp=sharing",
+      "providerAccessState": "SIGN_IN_PAGE",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-012",
@@ -241,10 +253,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/17UbTKUKdiVeK-_AZRFXgqnzBfwjtq92p/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/17UbTKUKdiVeK-_AZRFXgqnzBfwjtq92p/view?usp=sharing",
+      "providerAccessState": "SIGN_IN_PAGE",
+      "providerAccessNote": "Official PECTAA catalogue anchor is current; linked Google Drive provider may require sign-in. This blocks fresh byte acquisition but does not erase catalogue identity."
     },
     {
       "recordId": "pectaa-catalog-013",

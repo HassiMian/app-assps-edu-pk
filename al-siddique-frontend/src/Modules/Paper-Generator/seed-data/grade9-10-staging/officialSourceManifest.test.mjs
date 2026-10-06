@@ -34,3 +34,21 @@ test('revised cohorts remain independently catalogued',()=>{
  assert.ok(m.entries.some(s=>s.grade===10&&s.edition==='2026-27'));
  assert.equal(m.liveSeedCount,0);
 });
+
+test('current Urdu science catalogue dates are resolved without pretending provider access equals content verification',()=>{
+ const chem=m.entries.find(x=>x.recordId==='pectaa-catalog-008');
+ const bio=m.entries.find(x=>x.recordId==='pectaa-catalog-010');
+ assert.equal(chem.edition,'2026-09-03');
+ assert.equal(bio.edition,'2026-09-03');
+ for(const e of [chem,bio]){
+  assert.equal(e.catalogLinkCheckedOn,'2026-10-06');
+  assert.match(e.providerAccessState,/AUTH_REQUIRED_OR_401|SIGN_IN_PAGE/);
+  assert.match(e.questionGenerationStatus,/^BLOCKED/);
+ }
+});
+
+test('current science provider access failures remain separate from official catalogue identity',()=>{
+ for(const rid of ['pectaa-catalog-005','pectaa-catalog-006','pectaa-catalog-007','pectaa-catalog-011','pectaa-catalog-012']){
+  const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);assert.match(e.questionGenerationStatus,/^BLOCKED/);
+ }
+});
