@@ -11,7 +11,6 @@ const {
   maskTwilioConfig,
   probeTwilioConfig,
 } = require('../services/twilioSettings')
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const fs = require('fs')
 const path = require('path')
 const multer = require('multer')
@@ -330,17 +329,17 @@ router.post('/branding', protect, canManageSettings, async (req, res) => {
 router.get('/', protect, async (req, res) => {
   try {
     await ensureSettingsTable()
-    let schoolCode = null
-    try {
-      const schoolResult = await pool.query(
-        'SELECT code FROM schools WHERE id = $1 LIMIT 1',
-        [currentSchoolId(req)]
-      )
-      schoolCode = schoolResult.rows[0]?.code || null
-    } catch (err) {
-      // schools table may not be present in single-tenant installs
-      console.warn('Could not resolve authenticated school code:', err.message)
-    }
+    const schoolId = Number(currentSchoolId(req) || 0)
+    if (!schoolId) return res.status(403).json({ success: false, message: 'School context is required.' })
+    const schoolResult = await pool.query(
+      `SELECT id, code, COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name,
+              address, logo_url, subscription_plan, feature_flags
+       FROM schools WHERE id = $1 LIMIT 1`,
+      [schoolId]
+    )
+    if (!schoolResult.rowCount) return res.status(404).json({ success: false, message: 'School not found.' })
+    const canonicalSchool = schoolResult.rows[0]
+    const schoolCode = canonicalSchool.code || null
 
     // Now query the settings
     const result = await pool.query(`
@@ -351,19 +350,21 @@ router.get('/', protect, async (req, res) => {
     `, [currentSchoolId(req)])
 
     if (result.rows.length === 0) {
-      // Return default settings if none exist
       return res.json({
         success: true,
+        configured: false,
         data: {
-          school_name: 'Al Siddique Smart School',
-          school_address: 'Your School Address',
-          school_phone: '+92-XXX-XXXXXXX',
-          school_email: 'info@alsiddique.edu.pk',
-          principal_name: 'Principal Name',
-          academic_year: new Date().getFullYear().toString(),
-          fee_due_date: '10',
-          attendance_threshold: '75',
-          school_logo: null,
+          school_id: schoolId,
+          school_code: schoolCode,
+          school_name: canonicalSchool.school_name || '',
+          school_address: canonicalSchool.address || '',
+          school_phone: '',
+          school_email: '',
+          principal_name: '',
+          academic_year: '',
+          fee_due_date: '',
+          attendance_threshold: '',
+          school_logo: canonicalSchool.logo_url || null,
           twilio_config: maskTwilioConfig({}),
           school_urdu: '',
           show_urdu_on_login: false,
@@ -371,6 +372,8 @@ router.get('/', protect, async (req, res) => {
           school_access: [],
           superapp_modules: {},
           branding_config: {},
+          subscription_plan: canonicalSchool.subscription_plan || null,
+          feature_flags: Array.isArray(canonicalSchool.feature_flags) ? canonicalSchool.feature_flags : [],
         }
       })
     }
@@ -388,36 +391,12 @@ router.get('/', protect, async (req, res) => {
     })
   } catch (error) {
     console.error('Settings fetch error:', error)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({
-        success: false,
-        message: 'Database unavailable. Settings cannot be loaded.'
-      })
-    }
-
-    res.json({
-      success: true,
-      data: {
-        school_name: 'Al Siddique Smart School',
-        school_address: 'Your School Address',
-        school_phone: '+92-XXX-XXXXXXX',
-        school_email: 'info@alsiddique.edu.pk',
-        principal_name: 'Principal Name',
-        academic_year: new Date().getFullYear().toString(),
-        fee_due_date: '10',
-        attendance_threshold: '75',
-        school_code: null,
-        school_logo: null,
-        twilio_config: maskTwilioConfig({}),
-        school_urdu: '',
-        show_urdu_on_login: false,
-        module_access: {},
-        school_access: [],
-        superapp_modules: {},
-        branding_config: {},
-      }
+    return res.status(error.code === 'SETTINGS_SCHEMA_NOT_READY' ? 503 : 500).json({
+      success: false,
+      message: error.code === 'SETTINGS_SCHEMA_NOT_READY' ? 'Settings storage is not initialized.' : 'Database unavailable. Settings cannot be loaded.'
     })
   }
+
 })
 
 // Update school settings
@@ -492,7 +471,7 @@ router.put('/', protect, canManageSettings, async (req, res) => {
       RETURNING *
     `, [
       schoolId,
-      pickSetting(incoming, existing, 'school_name', 'Al Siddique Smart School'),
+      pickSetting(incoming, existing, 'school_name', ''),
       pickSetting(incoming, existing, 'school_address', ''),
       pickSetting(incoming, existing, 'school_phone', ''),
       pickSetting(incoming, existing, 'school_email', ''),
@@ -585,6 +564,9 @@ router.put('/twilio', protect, canManageSettings, async (req, res) => {
       ...(req.body && typeof req.body === 'object' ? req.body : {}),
       auth_token: req.body?.auth_token || req.body?.authToken || existing.rows[0]?.twilio_config?.auth_token || existing.rows[0]?.twilio_config?.authToken || '',
     })
+    const canonicalSchool = await pool.query("SELECT COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name FROM schools WHERE id = $1 LIMIT 1", [schoolId])
+    const schoolName = String(req.body?.school_name || canonicalSchool.rows[0]?.school_name || '').trim()
+    if (!schoolName) return res.status(422).json({ success: false, message: 'School name is required before updating messaging settings.' })
     const result = await pool.query(`
       INSERT INTO settings (school_id, school_name, twilio_config)
       VALUES ($1, $2, $3)
@@ -592,11 +574,7 @@ router.put('/twilio', protect, canManageSettings, async (req, res) => {
         twilio_config = EXCLUDED.twilio_config,
         updated_at = CURRENT_TIMESTAMP
       RETURNING *
-    `, [
-      schoolId,
-      req.body?.school_name || 'Al Siddique Smart School',
-      merged,
-    ])
+    `, [schoolId, schoolName, merged])
 
     res.json({
       success: true,
@@ -644,6 +622,9 @@ router.patch('/logo', protect, canManageSettings, async (req, res) => {
       school_logo = saveBase64Image(school_logo, schoolId, 'logo')
     }
     await ensureSettingsTable()
+    const canonicalSchool = await pool.query("SELECT COALESCE(NULLIF(TRIM(school_name), ''), name) AS school_name FROM schools WHERE id = $1 LIMIT 1", [schoolId])
+    const schoolName = String(req.body?.school_name || canonicalSchool.rows[0]?.school_name || '').trim()
+    if (!schoolName) return res.status(422).json({ success: false, message: 'School name is required before updating the logo.' })
     const result = await pool.query(`
       INSERT INTO settings (school_id, school_name, school_logo)
       VALUES ($1, $2, $3)
@@ -651,11 +632,7 @@ router.patch('/logo', protect, canManageSettings, async (req, res) => {
         school_logo = EXCLUDED.school_logo,
         updated_at = CURRENT_TIMESTAMP
       RETURNING *
-    `, [
-      schoolId,
-      req.body?.school_name || 'Al Siddique Smart School',
-      school_logo,
-    ])
+    `, [schoolId, schoolName, school_logo])
 
     res.json({
       success: true,
@@ -677,8 +654,9 @@ router.get('/public', async (req, res) => {
     await ensureSettingsTable()
     const requestedSchoolId = Number(req.query.school_id || req.query.schoolId)
     const requestedSchoolCode = String(req.query.school_code || req.query.schoolCode || '').trim()
+    const hasExplicitSchoolRef = Boolean(requestedSchoolCode || (Number.isInteger(requestedSchoolId) && requestedSchoolId > 0))
     const schoolQuery = requestedSchoolCode ? 'code' : 'id'
-    const schoolValue = requestedSchoolCode || requestedSchoolId || 1
+    const schoolValue = requestedSchoolCode || (Number.isInteger(requestedSchoolId) && requestedSchoolId > 0 ? requestedSchoolId : 1)
 
     let school = null
     try {
@@ -707,17 +685,24 @@ router.get('/public', async (req, res) => {
       }
     }
 
+    if (!school && !branchSchoolId && hasExplicitSchoolRef) {
+      return res.status(404).json({ success: false, message: 'School not found.' })
+    }
     const settingsSchoolId = school ? school.id : (branchSchoolId || 1)
     const result = await pool.query(
       'SELECT school_name, school_address, school_phone, school_email, school_logo, principal_name, school_urdu, show_urdu_on_login, superapp_modules, branding_config FROM settings WHERE school_id = $1 LIMIT 1',
       [settingsSchoolId]
     )
 
+    if (!result.rows[0] && !branchSettings) {
+      return res.status(404).json({ success: false, message: 'School settings not found.' })
+    }
+
     res.json({
       success: true,
       data: {
-        school_name: branchSettings ? branchSettings.schoolName : (result.rows[0]?.school_name || 'Al Siddique Scholars Public School'),
-        school_address: result.rows[0]?.school_address || 'Sharif Chowk, Rayya Khas, Narowal',
+        school_name: branchSettings ? branchSettings.schoolName : (result.rows[0]?.school_name || ''),
+        school_address: result.rows[0]?.school_address || '',
         school_phone: result.rows[0]?.school_phone || '',
         school_email: result.rows[0]?.school_email || '',
         school_logo: toPublicAssetUrl(req, branchSettings ? (branchSettings.schoolLogo || null) : (result.rows[0]?.school_logo || null)),
@@ -735,30 +720,9 @@ router.get('/public', async (req, res) => {
     })
   } catch (error) {
     console.error('Public settings fetch error:', error)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({
-        success: false,
-        message: 'Service unavailable. Public settings cannot be loaded.'
-      })
-    }
-
-    res.json({
-      success: true,
-      data: {
-        school_name: 'Al Siddique Scholars Public School',
-        school_address: 'Sharif Chowk, Rayya Khas, Narowal',
-        school_phone: '',
-        school_email: '',
-        school_logo: null,
-        principal_name: 'Principal',
-        school_urdu: '',
-        show_urdu_on_login: false,
-        school_id: 1,
-        school_code: 'default',
-        status: 'active',
-        superapp_modules: {},
-        branding_config: {},
-      }
+    return res.status(503).json({
+      success: false,
+      message: 'Service unavailable. Public settings cannot be loaded.'
     })
   }
 })

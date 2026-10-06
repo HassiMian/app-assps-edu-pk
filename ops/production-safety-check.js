@@ -1291,6 +1291,45 @@ assertNotContains(
   /Al Siddique Scholars Public School|Sharif Chowk, Rayya Khas, Narowal|0300-1291959/,
   'student reports and certificates must not fabricate ASSPS identity for other tenants.'
 )
+
+assertNotContains(
+  'al-siddique-backend/src/routes/authRoutes.js',
+  /returning development mock school|Al Siddique Scholars Public School|feature_flags:\s*\['paper_generator'/,
+  'authentication must fail closed instead of inventing a school when storage is unavailable.'
+)
+assertNotContains(
+  'al-siddique-backend/src/middleware/auth.js',
+  /returning development mock active school|Al Siddique Scholars Public School/,
+  'auth middleware must not invent an active school on database failure.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  /school_name:\s*'Al Siddique Scholars Public School'|school_address:\s*'Sharif Chowk, Rayya Khas, Narowal'|req\.body\?\.school_name \|\| 'Al Siddique Smart School'/,
+  'public/settings identity endpoints must not fabricate tenant identity.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  "return res.status(404).json({ success: false, message: 'School not found.' })",
+  'explicit unknown school references must fail instead of falling back to school 1.'
+)
+
+
+assertNotContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  /['"]Al Siddique Smart School['"]|['"]Your School Address['"]|['"]\+92-XXX-XXXXXXX['"]|['"]info@alsiddique\.edu\.pk['"]|['"]Principal Name['"]/,
+  'settings endpoints must not return fabricated school identity or contact placeholders.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  'configured: false',
+  'unconfigured settings must be represented explicitly instead of with fabricated defaults.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/authRoutes.js',
+  /feature_flags:\s*\['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees'\]/,
+  'virtual branches must inherit canonical school feature policy instead of a hardcoded feature set.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

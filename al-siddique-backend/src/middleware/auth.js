@@ -134,18 +134,8 @@ async function fetchSchoolById(schoolId) {
     const result = await query('SELECT id, name, code, tenant_id, status, feature_flags FROM schools WHERE id = $1 LIMIT 1', [schoolId])
     return result.rows[0] || null
   } catch (err) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error('Database connection failed in fetchSchoolById:', err.message)
-      return null
-    }
-    console.error('Database connection failed in fetchSchoolById, returning development mock active school:', err.message)
-    return {
-      id: schoolId || 1,
-      name: 'Al Siddique Scholars Public School',
-      code: 'assps',
-      status: 'active',
-      feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees']
-    }
+    console.error('Database connection failed in fetchSchoolById:', err.message)
+    return null
   }
 }
 

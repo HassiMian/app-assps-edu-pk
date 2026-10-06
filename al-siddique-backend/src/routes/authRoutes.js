@@ -192,7 +192,7 @@ async function sendPasswordOtp(user, otp) {
   }
 }
 
-function normalizeSchoolId(value, fallback = 1) {
+function normalizeSchoolId(value, fallback = null) {
   const parsed = Number.parseInt(value, 10)
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback
 }
@@ -208,23 +208,8 @@ async function fetchSchoolById(schoolId) {
     )
     return result.rows[0] || null
   } catch (err) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error('Database connection failed in fetchSchoolById:', err.message)
-      return null
-    }
-    console.error('Database connection failed in fetchSchoolById, returning development mock school:', err.message)
-    return {
-      id: schoolId || 1,
-      name: 'Al Siddique Scholars Public School',
-      code: 'assps',
-      tenant_id: 'assps',
-      school_name: 'Al Siddique Scholars Public School',
-      logo_url: null,
-      primary_color: null,
-      secondary_color: null,
-      status: 'active',
-      feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees']
-    }
+    console.error('Database connection failed in fetchSchoolById:', err.message)
+    return null
   }
 }
 
@@ -240,23 +225,8 @@ async function fetchSchoolByCode(code) {
     )
     return result.rows[0] || null
   } catch (err) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error('Database connection failed in fetchSchoolByCode:', err.message)
-      return null
-    }
-    console.error('Database connection failed in fetchSchoolByCode, returning development mock school:', err.message)
-    return {
-      id: 1,
-      name: 'Al Siddique Scholars Public School',
-      code: code || 'assps',
-      tenant_id: code || 'assps',
-      school_name: 'Al Siddique Scholars Public School',
-      logo_url: null,
-      primary_color: null,
-      secondary_color: null,
-      status: 'active',
-      feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees']
-    }
+    console.error('Database connection failed in fetchSchoolByCode:', err.message)
+    return null
   }
 }
 
@@ -299,12 +269,13 @@ async function resolveRequestedSchool(req) {
         if (!Array.isArray(row.school_access)) continue
         const branch = row.school_access.find(b => b.schoolCode && b.schoolCode.toLowerCase() === requestedSchoolCode.toLowerCase() && b.active)
         if (branch) {
+          const parentSchool = await fetchSchoolById(row.school_id)
+          if (!parentSchool || !isSchoolActive(parentSchool)) return null
           return {
+            ...parentSchool,
             id: row.school_id,
-            name: branch.schoolName,
+            name: branch.schoolName || parentSchool.school_name || parentSchool.name || '',
             code: branch.schoolCode,
-            status: 'active',
-            feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees'],
             isVirtualBranch: true,
             branchDetails: branch
           }
@@ -693,7 +664,7 @@ router.post('/refresh', async (req, res) => {
   try {
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET)
     if (decoded?.role !== 'super_admin') {
-      const school = await fetchSchoolById(normalizeSchoolId(decoded.school_id, 1))
+      const school = await fetchSchoolById(normalizeSchoolId(decoded.school_id))
       if (!school || !isSchoolActive(school)) {
         return sendJson(res, 403, { message: `School access disabled. Subscription status: ${school?.status || 'unknown'}.` })
       }
