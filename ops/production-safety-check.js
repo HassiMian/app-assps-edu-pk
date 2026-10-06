@@ -559,6 +559,26 @@ assertNotContains(
   'examination workspace must use configured session and class-specific sections.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /item\.session \|\| ['"]2026-2027['"]|REAL_CLASS_NAMES|\['Starter', 2500\]|Triple Star Discount Package|session VARCHAR\(20\) DEFAULT ['"]2026-2027['"]/,
+  'fee settings must use Academic Setup classes and session instead of hardcoded school defaults.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'const academicClasses = await resolveAcademicClassNames(schoolId)',
+  'fee settings must validate classes against the active Academic Setup.'
+)
+
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'Schema bootstrap must never invent fee amounts, sessions, or discount packages.',
+  'fee schema initialization must remain data-neutral.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -4,7 +4,7 @@ const { query } = require('../config/database')
 const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
-const REAL_CLASS_NAMES = ['Starter', 'Mover', 'Flyer', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Pre Nine', 'Hifaz Class']
+const { DEFAULT_ACADEMIC_SETUP } = require('../services/academicSetupService')
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
 async function resolveAcademicSession(schoolId, year) {
@@ -17,6 +17,18 @@ async function resolveAcademicSession(schoolId, year) {
   } catch { /* fall through to the requested year if academic setup is unavailable */ }
   const numericYear = Number(year)
   return Number.isInteger(numericYear) && numericYear >= 2000 && numericYear <= 2100 ? `${numericYear}-${numericYear + 1}` : ''
+}
+
+async function resolveAcademicClassNames(schoolId) {
+  try {
+    const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
+    const setup = result.rows[0]?.academic_setup
+    const configured = Array.isArray(setup?.classes)
+      ? setup.classes.filter(item => item?.active !== false).map(item => String(item?.name || '').trim()).filter(Boolean)
+      : []
+    if (configured.length) return [...new Set(configured)]
+  } catch { /* fall through to canonical defaults if academic setup is unavailable */ }
+  return DEFAULT_ACADEMIC_SETUP.classes.filter(item => item.active !== false).map(item => item.name)
 }
 
 function canManageFeeRecord(req) {
@@ -70,7 +82,7 @@ async function ensureFeeSystemSchema(schoolId) {
       id SERIAL PRIMARY KEY,
       school_id INTEGER REFERENCES schools(id),
       class_name VARCHAR(100) NOT NULL,
-      session VARCHAR(20) DEFAULT '2026-2027',
+      session VARCHAR(20) NOT NULL,
       monthly_fee DECIMAL(10,2) NOT NULL DEFAULT 0,
       active BOOLEAN DEFAULT true,
       created_at TIMESTAMP DEFAULT NOW(),
@@ -114,6 +126,7 @@ async function ensureFeeSystemSchema(schoolId) {
     CREATE INDEX IF NOT EXISTS idx_fee_challans_migration_batch ON fee_challans(migration_batch);
     CREATE UNIQUE INDEX IF NOT EXISTS uq_fee_challans_student_month_year ON fee_challans (student_id, LOWER(TRIM(month)), year);
   `)
+  await query('ALTER TABLE fee_class_settings ALTER COLUMN session DROP DEFAULT').catch(() => {})
   for (const tableName of ['fee_class_settings', 'fee_discount_packages', 'fee_discount_applications']) {
     await query(`ALTER TABLE ${tableName} ALTER COLUMN school_id DROP DEFAULT`).catch(() => {})
   }
@@ -123,51 +136,8 @@ async function ensureFeeSystemSchema(schoolId) {
     return
   }
 
-  const defaults = [
-    ['Starter', 2500], ['Mover', 2500], ['Flyer', 2500], ['One', 2500], ['Two', 2500], ['Three', 2500], ['Four', 2500], ['Five', 2500],
-    ['Six', 2800], ['Seven', 2800], ['Eight', 2800],
-    ['Pre Nine', 3000], ['Hifaz Class', 2500],
-  ]
-  for (const [className, monthlyFee] of defaults) {
-    await query(`
-      INSERT INTO fee_class_settings (school_id, class_name, session, monthly_fee, active)
-      VALUES ($1, $2, '2026-2027', $3, true)
-      ON CONFLICT (school_id, class_name, session)
-      DO UPDATE SET monthly_fee = EXCLUDED.monthly_fee, active = true, updated_at = NOW()
-    `, [schoolId, className, monthlyFee])
-  }
-  await query(`
-    UPDATE fee_class_settings
-    SET active = false, updated_at = NOW()
-    WHERE school_id = $1 AND NOT (class_name = ANY($2::text[]))
-  `, [schoolId, REAL_CLASS_NAMES])
-  await query(`
-    INSERT INTO fee_discount_packages (
-      school_id, name, description, discount_type, discount_value, min_sibling_count,
-      applicable_classes, applicable_sessions, active, auto_apply
-    )
-    VALUES (
-      $1,
-      'Triple Star Discount Package',
-      'Automatically applies when a family has 3 or more active enrolled children.',
-      'percentage',
-      10,
-      3,
-      '[]'::jsonb,
-      '["2026-2027"]'::jsonb,
-      true,
-      true
-    )
-    ON CONFLICT (school_id, name)
-    DO UPDATE SET
-      description = EXCLUDED.description,
-      discount_type = EXCLUDED.discount_type,
-      discount_value = EXCLUDED.discount_value,
-      min_sibling_count = EXCLUDED.min_sibling_count,
-      active = true,
-      auto_apply = true,
-      updated_at = NOW()
-  `, [schoolId])
+  // Schema bootstrap must never invent fee amounts, sessions, or discount packages.
+  // Existing tenant data is preserved; business values are configured explicitly through Fee Settings.
   feeSystemSchemaReady = true
 }
 
@@ -331,12 +301,13 @@ router.get('/settings', protect, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
     await ensureFeeSystemSchema(schoolId)
+    const academicClasses = await resolveAcademicClassNames(schoolId)
     const classSettings = await query(`
       SELECT id, class_name, session, monthly_fee, active
       FROM fee_class_settings
       WHERE school_id = $1 AND active = true AND class_name = ANY($2::text[])
       ORDER BY id
-    `, [schoolId, REAL_CLASS_NAMES])
+    `, [schoolId, academicClasses])
     const packages = await query(`
       SELECT *
       FROM fee_discount_packages
@@ -356,14 +327,25 @@ router.put('/settings', protect, adminOnly, async (req, res) => {
     const schoolId = currentSchoolId(req)
     await ensureFeeSystemSchema(schoolId)
     const { classSettings = [], discountPackages = [] } = req.body
+    const academicClasses = await resolveAcademicClassNames(schoolId)
+    const academicClassSet = new Set(academicClasses)
+    const activeSession = await resolveAcademicSession(schoolId, new Date().getFullYear())
     for (const item of classSettings) {
-      if (!item.class_name) continue
+      const className = String(item?.class_name || '').trim()
+      if (!className) continue
+      if (!academicClassSet.has(className)) {
+        return res.status(422).json({ success: false, message: `Class ${className} is not part of the active Academic Setup.` })
+      }
+      const session = String(item?.session || activeSession || '').trim()
+      if (!/^\d{4}-\d{4}$/.test(session)) {
+        return res.status(422).json({ success: false, message: 'A valid academic session is required for fee settings.' })
+      }
       await query(`
         INSERT INTO fee_class_settings (school_id, class_name, session, monthly_fee, active)
         VALUES ($1,$2,$3,$4,$5)
         ON CONFLICT (school_id, class_name, session)
         DO UPDATE SET monthly_fee = EXCLUDED.monthly_fee, active = EXCLUDED.active, updated_at = NOW()
-      `, [schoolId, item.class_name, item.session || '2026-2027', asMoney(item.monthly_fee), item.active !== false])
+      `, [schoolId, className, session, asMoney(item.monthly_fee), item.active !== false])
     }
     for (const pkg of discountPackages) {
       if (!pkg.name) continue
