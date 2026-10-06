@@ -27,6 +27,24 @@ async function requireEmployeeWriteContext(req, res) {
   return schoolId
 }
 
+let employeePortalSchemaReady = null
+async function ensureEmployeePortalSchema() {
+  if (employeePortalSchemaReady) return true
+  const result = await query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='employees'
+      AND column_name IN ('user_id','portal_username','portal_role','portal_permissions','portal_active','portal_password')
+  `)
+  if (Number(result.rows[0]?.count || 0) !== 6) {
+    const err = new Error('employee portal schema migration is not applied.')
+    err.code = 'EMPLOYEE_PORTAL_SCHEMA_NOT_READY'
+    throw err
+  }
+  employeePortalSchemaReady = true
+  return true
+}
+
 let employeeAttendanceSchemaReady = null
 async function ensureEmployeeAttendanceSchema() {
   if (employeeAttendanceSchemaReady) return true
@@ -333,6 +351,7 @@ router.get('/:id/portal-account', protect, canManageStaff, async (req, res) => {
 
 router.post('/:id/portal-account', protect, canManageStaff, async (req, res) => {
   try {
+    await ensureEmployeePortalSchema()
     const schoolId = currentSchoolId(req)
     const employee = await query(`
       SELECT id, emp_id, name, designation, phone, email, user_id, portal_role, portal_permissions, portal_active
@@ -362,18 +381,15 @@ router.post('/:id/portal-account', protect, canManageStaff, async (req, res) => 
       active: row.portal_active !== false,
     })
 
-    const updates = []
-    const params = []
-    let i = 1
-    if (await hasColumn('employees', 'user_id').catch(() => false)) { updates.push(`user_id = $${i++}`); params.push(account.user.id) }
-    if (await hasColumn('employees', 'portal_username').catch(() => false)) { updates.push(`portal_username = $${i++}`); params.push(account.user.username || username) }
-    if (await hasColumn('employees', 'portal_role').catch(() => false)) { updates.push(`portal_role = $${i++}`); params.push(role) }
-    if (await hasColumn('employees', 'portal_active').catch(() => false)) { updates.push(`portal_active = $${i++}`); params.push(true) }
-    if (await hasColumn('employees', 'portal_password').catch(() => false)) { updates.push(`portal_password = NULL`) }
-    if (updates.length) {
-      params.push(row.id, schoolId)
-      await query(`UPDATE employees SET ${updates.join(', ')} WHERE id = $${i++} AND school_id = $${i}`, params)
-    }
+    await query(`
+      UPDATE employees
+      SET user_id = $1,
+          portal_username = $2,
+          portal_role = $3,
+          portal_active = TRUE,
+          portal_password = NULL
+      WHERE id = $4 AND school_id = $5
+    `, [account.user.id, account.user.username || username, role, row.id, schoolId])
 
     res.status(account.created ? 201 : 200).json({
       success: true,
@@ -411,9 +427,7 @@ router.put('/:id/portal-account/active', protect, canManageStaff, async (req, re
     const userId = employee.rows[0]?.user_id
     if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
     const user = await setPortalUserActive({ schoolId, userId, active: req.body?.active !== false })
-    if (await hasColumn('employees', 'portal_active').catch(() => false)) {
-      await query('UPDATE employees SET portal_active = $1 WHERE id = $2 AND school_id = $3', [Boolean(req.body?.active !== false), Number(req.params.id), schoolId])
-    }
+    await query('UPDATE employees SET portal_active = $1 WHERE id = $2 AND school_id = $3', [Boolean(req.body?.active !== false), Number(req.params.id), schoolId])
     res.json({ success: true, data: user })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message || 'Employee portal state could not be updated.' })
@@ -441,16 +455,14 @@ router.put('/:id/portal-account/permissions', protect, canManageStaff, async (re
 
 router.delete('/:id/portal-account', protect, canManageStaff, async (req, res) => {
   try {
+    await ensureEmployeePortalSchema()
     const schoolId = currentSchoolId(req)
     const employeeId = Number(req.params.id)
     const employee = await query('SELECT user_id FROM employees WHERE id = $1 AND school_id = $2 LIMIT 1', [employeeId, schoolId])
     const userId = employee.rows[0]?.user_id
     if (!userId) return res.status(404).json({ success: false, message: 'Employee portal account is not linked yet.' })
     await setPortalUserActive({ schoolId, userId, active: false })
-    const assignments = ['user_id = NULL']
-    if (await hasColumn('employees', 'portal_active').catch(() => false)) assignments.push('portal_active = false')
-    if (await hasColumn('employees', 'portal_password').catch(() => false)) assignments.push('portal_password = NULL')
-    await query(`UPDATE employees SET ${assignments.join(', ')} WHERE id = $1 AND school_id = $2`, [employeeId, schoolId])
+    await query('UPDATE employees SET user_id = NULL, portal_active = FALSE, portal_password = NULL WHERE id = $1 AND school_id = $2', [employeeId, schoolId])
     res.json({ success: true })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message || 'Employee portal access could not be revoked.' })

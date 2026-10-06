@@ -338,9 +338,11 @@ router.put('/settings', protect, adminOnly, async (req, res) => {
 router.get('/summary', protect, adminOnly, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const tenantFilter = supportsTenant ? 'AND f.school_id = $1' : ''
-    const params = supportsTenant ? [schoolId] : []
+    if (!schoolId) return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for fee summary.' })
+    const supportsTenant = await hasColumn('fee_challans', 'school_id')
+    if (!supportsTenant) return res.status(503).json({ success: false, code: 'FEE_TENANT_SCHEMA_REQUIRED', message: 'Fee storage is not tenant-safe for summary reads.' })
+    const tenantFilter = 'AND f.school_id = $1'
+    const params = [schoolId]
     const agg = await query(`
       SELECT
         COALESCE(SUM(COALESCE(f.paid_amount, 0)), 0) AS collected,

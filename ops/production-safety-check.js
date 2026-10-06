@@ -1572,6 +1572,33 @@ assertNotContains(
   'root application theme aliases must not fall back to the legacy heavy navy palette.'
 )
 
+
+assertContains(
+  'al-siddique-backend/migrations/016_employee_portal_schema.js',
+  'ALTER TABLE employees ADD COLUMN IF NOT EXISTS portal_active BOOLEAN DEFAULT TRUE',
+  'employee portal linkage schema must be versioned in migration 016.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  /hasColumn\('employees', '(?:user_id|portal_username|portal_role|portal_active|portal_password)'\)\.catch\(\(\) => false\)/,
+  'employee portal writes must not silently degrade when required portal columns are missing.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  'await ensureEmployeePortalSchema()',
+  'employee portal workflows must explicitly require their versioned schema.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /const tenantFilter = supportsTenant \? 'AND f\.school_id = \$1' : ''/,
+  'fee summary must never fall back to a cross-tenant aggregate.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  "code: 'FEE_TENANT_SCHEMA_REQUIRED'",
+  'fee summary must fail closed if its tenant-safe schema is unavailable.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

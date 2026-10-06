@@ -556,6 +556,15 @@ async function migrate() {
     }
 
     try {
+      const employeePortalMigration = require('../../migrations/016_employee_portal_schema')
+      await employeePortalMigration.up()
+      console.log('employee portal schema ready')
+    } catch (err) {
+      console.error('Employee Portal Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
