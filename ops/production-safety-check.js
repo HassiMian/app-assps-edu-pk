@@ -797,6 +797,25 @@ assertContains(
   'result-card generation must read results from the selected school only.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  "code: 'EMPLOYEE_TENANT_SCHEMA_REQUIRED'",
+  'employee writes must fail closed when school ownership is unavailable.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  /UPDATE employees SET is_active = false WHERE id = \$1['"]|supportsTenant \? \['school_id'\] :/,
+  'employee mutations must never fall back to unscoped legacy writes.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  'AND school_id = $3',
+  'employee-linked user updates must remain school scoped.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -1,4 +1,5 @@
 ﻿// src/routes/employeeRoutes.js
+const crypto = require('crypto')
 // Al Siddique Smart School OS â€” Employee Routes
 
 const express = require('express')
@@ -11,6 +12,20 @@ const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = re
 const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
 const canReadStaff = adminOrServiceScope('school.staff.read')
 
+
+async function requireEmployeeWriteContext(req, res) {
+  const supportsTenant = await hasColumn('employees', 'school_id')
+  if (!supportsTenant) {
+    res.status(503).json({ success: false, code: 'EMPLOYEE_TENANT_SCHEMA_REQUIRED', message: 'Employee storage is not tenant-safe for writes.' })
+    return null
+  }
+  const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for employee changes.' })
+    return null
+  }
+  return schoolId
+}
 
 let employeeAttendanceSchemaReady = null
 function ensureEmployeeAttendanceSchema() {
@@ -250,13 +265,13 @@ router.post('/', protect, canManageStaff, async (req, res) => {
     if (!name || !designation)
       return res.status(400).json({ success: false, message: 'Name aur Designation zaroori hai' })
 
-    const emp = emp_id || `EMP-${Date.now().toString().slice(-6)}`
-
-    const supportsTenant = await hasColumn('employees', 'school_id')
+    const emp = emp_id || `EMP-${crypto.randomBytes(4).toString('hex').toUpperCase()}`
+    const schoolId = await requireEmployeeWriteContext(req, res)
+    if (!schoolId) return
     const optionalFields = await existingEmployeeWriteFields()
     const requestFields = optionalFields.filter(field => Object.prototype.hasOwnProperty.call(req.body, field))
     const columns = [
-      ...(supportsTenant ? ['school_id'] : []),
+      'school_id',
       'emp_id',
       'name',
       'designation',
@@ -268,7 +283,7 @@ router.post('/', protect, canManageStaff, async (req, res) => {
       ...requestFields,
     ]
     const values = [
-      ...(supportsTenant ? [currentSchoolId(req)] : []),
+      schoolId,
       emp,
       name,
       designation,
@@ -459,7 +474,8 @@ router.put('/:id', protect, canManageStaff, async (req, res) => {
       name, designation, department, phone, email, salary, join_date, is_active
     } = req.body
 
-    const supportsTenant = await hasColumn('employees', 'school_id')
+    const schoolId = await requireEmployeeWriteContext(req, res)
+    if (!schoolId) return
     const optionalFields = await existingEmployeeWriteFields()
     const updateFields = [
       ...(Object.prototype.hasOwnProperty.call(req.body, 'name') ? [['name', name]] : []),
@@ -483,11 +499,10 @@ router.put('/:id', protect, canManageStaff, async (req, res) => {
     const idParam = params.length
     const sql = `
       UPDATE employees SET ${setClause}
-      WHERE id=$${idParam}
-        ${supportsTenant && req.user?.role !== 'super_admin' ? `AND school_id = $${idParam + 1}` : ''}
+      WHERE id=$${idParam} AND school_id = $${idParam + 1}
       RETURNING *
     `
-    if (supportsTenant && req.user?.role !== 'super_admin') params.push(currentSchoolId(req))
+    params.push(schoolId)
     const result = await query(sql, params)
 
     if (result.rows.length === 0)
@@ -496,17 +511,13 @@ router.put('/:id', protect, canManageStaff, async (req, res) => {
     const updated = result.rows[0]
     if (updated.user_id && Object.prototype.hasOwnProperty.call(req.body, 'portal_permissions')) {
       const userParams = [JSON.stringify(Array.isArray(req.body.portal_permissions) ? req.body.portal_permissions : []), updated.user_id]
-      const userScope = req.user?.role === 'super_admin' ? '' : ' AND school_id = $3'
-      if (userScope) userParams.push(currentSchoolId(req))
-      await query(`UPDATE users SET permissions = $1::jsonb, updated_at = NOW() WHERE id = $2${userScope}`, userParams)
-        .catch(err => console.warn('Could not sync employee permissions to user:', err.message))
+      userParams.push(schoolId)
+      await query('UPDATE users SET permissions = $1::jsonb, updated_at = NOW() WHERE id = $2 AND school_id = $3', userParams)
     }
     if (updated.user_id && Object.prototype.hasOwnProperty.call(req.body, 'portal_active')) {
       const userParams = [Boolean(req.body.portal_active), updated.user_id]
-      const userScope = req.user?.role === 'super_admin' ? '' : ' AND school_id = $3'
-      if (userScope) userParams.push(currentSchoolId(req))
-      await query(`UPDATE users SET is_active = $1, updated_at = NOW() WHERE id = $2${userScope}`, userParams)
-        .catch(err => console.warn('Could not sync employee active state to user:', err.message))
+      userParams.push(schoolId)
+      await query('UPDATE users SET is_active = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', userParams)
     }
 
     res.json({ success: true, message: 'Employee update ho gaya', data: updated })
@@ -518,24 +529,19 @@ router.put('/:id', protect, canManageStaff, async (req, res) => {
 // DELETE /api/employees/:id â€” soft delete
 router.delete('/:id', protect, canManageStaff, async (req, res) => {
   try {
-    const supportsTenant = await hasColumn('employees', 'school_id')
-    const sql = supportsTenant && req.user?.role !== 'super_admin'
-      ? 'UPDATE employees SET is_active = false WHERE id = $1 AND school_id = $2'
-      : 'UPDATE employees SET is_active = false WHERE id = $1'
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [req.params.id, currentSchoolId(req)]
-      : [req.params.id]
-    const result = await query(`${sql} RETURNING id, user_id`, params)
+    const schoolId = await requireEmployeeWriteContext(req, res)
+    if (!schoolId) return
+    const result = await query(
+      'UPDATE employees SET is_active = false WHERE id = $1 AND school_id = $2 RETURNING id, user_id',
+      [req.params.id, schoolId]
+    )
     const deleted = result.rows?.[0]
     if (!deleted) {
       return res.status(404).json({ success: false, message: 'Employee nahi mila' })
     }
 
     if (deleted.user_id) {
-      const userParams = [deleted.user_id]
-      const userScope = req.user?.role === 'super_admin' ? '' : ' AND school_id = $2'
-      if (userScope) userParams.push(currentSchoolId(req))
-      await query(`UPDATE users SET is_active = false, updated_at = NOW() WHERE id = $1${userScope}`, userParams)
+      await query('UPDATE users SET is_active = false, updated_at = NOW() WHERE id = $1 AND school_id = $2', [deleted.user_id, schoolId])
     }
 
     res.json({ success: true, message: 'Employee delete ho gaya', data: deleted })
