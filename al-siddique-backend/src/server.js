@@ -99,7 +99,7 @@ const loginNetworkLimiter = rateLimit({
 // The auth route separately blocks repeated incorrect passwords (5 failures).
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 60,
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req) => {

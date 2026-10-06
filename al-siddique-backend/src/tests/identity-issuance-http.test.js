@@ -4,7 +4,7 @@ const http=require('node:http')
 const crypto=require('node:crypto')
 const jwt=require('jsonwebtoken')
 const {pool}=require('../config/database')
-const base='http://127.0.0.1:5000'
+const base=process.env.TEST_API_URL || 'http://127.0.0.1:5000'
 function httpReq(method,path,token,body) { return new Promise((resolve,reject)=>{
  const u=new URL(path,base); const input=body?JSON.stringify(body):null
  const req=http.request({hostname:u.hostname,port:u.port,path:u.pathname+u.search,method,headers:{...(token?{Authorization:`Bearer ${token}`} : {}), 'Content-Type':'application/json', ...(input?{'Content-Length':Buffer.byteLength(input)}:{})}},res=>{let raw='';res.on('data',c=>raw+=c);res.on('end',()=>{let j={};try{j=JSON.parse(raw)}catch{}resolve({status:res.statusCode,body:j,headers:res.headers})})});req.on('error',reject);if(input)req.write(input);req.end()

@@ -4,6 +4,7 @@ const router = express.Router()
 const { pool, query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
+const { teacherStudentScopeClause } = require('../services/teacherAssignmentService')
 const {
   getTwilioConfigForSchool,
   buildTwilioClient,
@@ -12,7 +13,7 @@ const {
 const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canMarkAttendance = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const ATTENDANCE_STATUSES = ['present', 'absent', 'leave', 'late']
-const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'teacher'])
+const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin'])
 
 function getPakistanDateOnly(date = new Date()) {
   try {
@@ -31,6 +32,7 @@ function scopedAttendanceReadClause(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
   const prefix = alias ? `${alias}.` : ''
   if (ATTENDANCE_READ_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (role === 'teacher') return teacherStudentScopeClause(req, alias, startIndex)
   if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.attendance.read')) {
     return { clause: '', params: [], nextIndex: startIndex }
   }

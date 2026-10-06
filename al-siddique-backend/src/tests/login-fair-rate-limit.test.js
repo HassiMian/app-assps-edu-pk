@@ -1,10 +1,11 @@
 const assert=require('node:assert/strict')
 const http=require('node:http')
 const crypto=require('node:crypto')
+const BASE=new URL(process.env.TEST_API_URL || 'http://127.0.0.1:5000')
 function send(path,method='GET',body=null,ip='192.0.2.144'){
  return new Promise((resolve,reject)=>{
  const raw=body?JSON.stringify(body):null
- const req=http.request({host:'127.0.0.1',port:5000,path,method,timeout:5000,headers:{'X-Forwarded-For':ip,'Content-Type':'application/json',...(raw?{'Content-Length':Buffer.byteLength(raw)}:{})}},r=>{let out='';r.on('data',x=>out+=x);r.on('end',()=>resolve({status:r.statusCode,headers:r.headers,body:out}))});req.on('error',reject);if(raw)req.write(raw);req.end()
+ const req=http.request({host:BASE.hostname,port:BASE.port||80,path,method,timeout:5000,headers:{'X-Forwarded-For':ip,'Content-Type':'application/json',...(raw?{'Content-Length':Buffer.byteLength(raw)}:{})}},r=>{let out='';r.on('data',x=>out+=x);r.on('end',()=>resolve({status:r.statusCode,headers:r.headers,body:out}))});req.on('error',reject);if(raw)req.write(raw);req.end()
  })
 }
 async function main(){const id=crypto.randomBytes(6).toString('hex'),ip='192.0.2.'+String(150+crypto.randomInt(60))
