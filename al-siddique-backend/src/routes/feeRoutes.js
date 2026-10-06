@@ -4,7 +4,6 @@ const { query } = require('../config/database')
 const { protect, adminOnly } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 const { findExistingChallan } = require('../services/feeChallanService')
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const REAL_CLASS_NAMES = ['Starter', 'Mover', 'Flyer', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Pre Nine', 'Hifaz Class']
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
@@ -500,11 +499,7 @@ router.get('/pending-proofs', protect, adminOnly, async (req, res) => {
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Pending proofs list error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning empty pending-proofs list (Mock Fallback).');
-    return res.json({ success: true, count: 0, data: [] })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Pending payment proofs could not be loaded.' })
   }
 })
 
@@ -612,85 +607,7 @@ router.get('/', protect, async (req, res) => {
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Fee list error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning high-fidelity mock fee challans.');
-    const mockChallans = [
-      {
-        id: 1,
-        challan_no: 'CH-26051901',
-        student_id: 1,
-        month: 'May',
-        year: 2026,
-        amount: 3500.00,
-        paid_amount: 3500.00,
-        discount: 0.00,
-        status: 'paid',
-        payment_mode: 'cash',
-        paid_date: '2026-05-10T00:00:00.000Z',
-        due_date: '2026-05-15T00:00:00.000Z',
-        created_by: 'Ahmed Raza',
-        created_at: '2026-05-01T10:00:00.000Z',
-        name: 'Muhammad Ali',
-        gr_number: 'GR-1001',
-        class: '10',
-        section: 'A',
-        parent_phone: '03001234567',
-        proof_status: 'approved'
-      },
-      {
-        id: 2,
-        challan_no: 'CH-26051902',
-        student_id: 2,
-        month: 'May',
-        year: 2026,
-        amount: 3500.00,
-        paid_amount: 0.00,
-        discount: 500.00,
-        status: 'unpaid',
-        payment_mode: null,
-        paid_date: null,
-        due_date: '2026-05-15T00:00:00.000Z',
-        created_by: 'Ahmed Raza',
-        created_at: '2026-05-01T10:05:00.000Z',
-        name: 'Ayesha Fatima',
-        gr_number: 'GR-1002',
-        class: '10',
-        section: 'A',
-        parent_phone: '03007654321',
-        proof_status: 'none'
-      },
-      {
-        id: 3,
-        challan_no: 'CH-26051903',
-        student_id: 3,
-        month: 'May',
-        year: 2026,
-        amount: 3000.00,
-        paid_amount: 1500.00,
-        discount: 0.00,
-        status: 'partial',
-        payment_mode: 'online',
-        paid_date: '2026-05-12T00:00:00.000Z',
-        due_date: '2026-05-15T00:00:00.000Z',
-        created_by: 'Ahmed Raza',
-        created_at: '2026-05-01T10:10:00.000Z',
-        name: 'Zainab Bibi',
-        gr_number: 'GR-1003',
-        class: '9',
-        section: 'B',
-        parent_phone: '03009988776',
-        proof_status: 'none'
-      }
-    ];
-    let filtered = mockChallans;
-    const { class: cls, status, month: reqMonth, student_id } = req.query;
-    if (status) filtered = filtered.filter(f => f.status === status);
-    if (reqMonth) filtered = filtered.filter(f => f.month === reqMonth);
-    if (cls) filtered = filtered.filter(f => f.class === cls);
-    if (student_id) filtered = filtered.filter(f => f.student_id === Number(student_id));
-    return res.json({ success: true, count: filtered.length, data: filtered });
+    return res.status(503).json({ success: false, message: 'Database unavailable. Fee challans could not be loaded.' })
   }
 })
 
@@ -808,27 +725,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     res.status(201).json({ success: true, message: 'Challan ban gaya', data: result.rows[0] })
   } catch (err) {
     console.error('Fee create error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Fee challan could not be created.' })
-    }
-    console.warn('PostgreSQL offline. Simulating successful fee challan creation (Mock Fallback).');
-    const { student_id, month, year, amount, due_date, created_by, discount = 0 } = req.body
-    const challan_no = `CH-${Date.now().toString().slice(-8)}`
-    const mockCreated = {
-      id: Math.floor(Math.random() * 1000) + 100,
-      challan_no,
-      student_id: Number(student_id),
-      month,
-      year: Number(year),
-      amount: Number(amount),
-      paid_amount: 0.00,
-      discount: Number(discount) || 0,
-      status: 'unpaid',
-      due_date,
-      created_by,
-      created_at: new Date().toISOString()
-    }
-    return res.status(201).json({ success: true, message: 'Challan ban gaya (Mock Fallback)', data: mockCreated })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Fee challan could not be created.' })
   }
 })
 
@@ -1105,19 +1002,7 @@ router.post('/:id/upload-proof', protect, async (req, res) => {
     res.json({ success: true, message: 'Proof submitted. Admin will verify soon.', data: result.rows[0] })
   } catch (err) {
     console.error('Proof upload error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Proof could not be submitted.' })
-    }
-    console.warn('PostgreSQL offline. Simulating screenshot proof upload (Mock Fallback).');
-    return res.json({
-      success: true,
-      message: 'Proof submitted. Admin will verify soon. (Mock Fallback)',
-      data: {
-        id: Number(req.params.id) || 1,
-        proof_status: 'pending',
-        proof_submitted_at: new Date().toISOString()
-      }
-    })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Proof could not be submitted.' })
   }
 })
 
@@ -1168,32 +1053,7 @@ router.put('/:id/approve-proof', protect, adminOnly, async (req, res) => {
     }
   } catch (err) {
     console.error('Proof approval/rejection error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Proof could not be updated.' })
-    }
-    console.warn('PostgreSQL offline. Simulating proof approval/rejection (Mock Fallback).');
-    const { action } = req.body
-    if (action === 'approve') {
-      return res.json({
-        success: true,
-        message: 'Fee approved and marked as paid (Mock Fallback)',
-        data: {
-          id: Number(req.params.id) || 1,
-          status: 'paid',
-          proof_status: 'approved',
-          updated_at: new Date().toISOString()
-        }
-      })
-    } else {
-      return res.json({
-        success: true,
-        message: 'Proof rejected (Mock Fallback)',
-        data: {
-          id: Number(req.params.id) || 1,
-          proof_status: 'rejected'
-        }
-      })
-    }
+    return res.status(503).json({ success: false, message: 'Database unavailable. Proof status could not be updated.' })
   }
 })
 
@@ -1217,11 +1077,7 @@ router.get('/pending-proofs', protect, adminOnly, async (req, res) => {
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Pending proofs list error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning empty pending-proofs list (Mock Fallback).');
-    return res.json({ success: true, count: 0, data: [] })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Pending payment proofs could not be loaded.' })
   }
 })
 
@@ -1272,28 +1128,7 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
     res.json({ success: true, message: 'Fee paid mark ho gayi', data: result.rows[0] })
   } catch (err) {
     console.error('Fee payment error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Payment could not be recorded.' })
-    }
-    console.warn('PostgreSQL offline. Simulating payment update (Mock Fallback).');
-    const { paid_amount, payment_mode = 'cash', discount = 0, payment_note = null } = req.body
-    const paid = Number(paid_amount)
-    const disc = Number(discount) || 0
-    const status = paid <= 0 ? 'unpaid' : paid < Math.max(3500 - disc, 0) ? 'partial' : 'paid'
-    return res.json({
-      success: true,
-      message: 'Fee paid mark ho gayi (Mock Fallback)',
-      data: {
-        id: Number(req.params.id) || 1,
-        paid_amount: paid,
-        payment_mode,
-        discount: disc,
-        payment_note,
-        status,
-        paid_date: paid > 0 ? new Date().toISOString().split('T')[0] : null,
-        updated_at: new Date().toISOString()
-      }
-    })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Payment could not be recorded.' })
   }
 })
 

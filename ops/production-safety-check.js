@@ -469,6 +469,13 @@ assertNotContains(
   'notice APIs must fail explicitly rather than simulate CRUD success.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /ALLOW_MOCK_FALLBACK|Mock Fallback|mockChallans|Simulating successful fee|Simulating payment update/,
+  'fee APIs must never fabricate challans, proofs, or payments when storage is unavailable.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
