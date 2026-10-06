@@ -6,12 +6,12 @@ import { getTenantStorageItem, setTenantStorageItem } from "../services/tenantSt
 const DEFAULT_BRANDING = {
   schoolId: null,
   tenantId: null,
-  schoolName: "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+  schoolName: "",
   logoUrl: null,
   address: "",
   primaryColor: "#256FE8",
   secondaryColor: "#06b6d4",
-  academicYear: String(new Date().getFullYear()),
+  academicYear: "",
   loading: false,
   error: null,
   refresh: async () => {},
@@ -21,7 +21,7 @@ const TenantBrandingContext = createContext(DEFAULT_BRANDING);
 
 let initialBrandingState = DEFAULT_BRANDING;
 try {
-  const cached = typeof window !== "undefined" ? getTenantStorageItem("apex_tenant_branding", { migrateLegacy: true }) : null;
+  const cached = typeof window !== "undefined" ? getTenantStorageItem("apex_tenant_branding") : null;
   if (cached) {
     initialBrandingState = { ...DEFAULT_BRANDING, ...JSON.parse(cached), loading: false };
   }
@@ -78,10 +78,13 @@ export function TenantBrandingProvider({ children }) {
 
   const loadBranding = useCallback(async () => {
     if (!user) {
-      return branding;
+      const neutral = { ...DEFAULT_BRANDING, refresh: loadBranding };
+      setBranding(neutral);
+      applyCssVars(neutral);
+      return neutral;
     }
 
-    setBranding((current) => ({ ...DEFAULT_BRANDING, ...current, loading: true, error: null }));
+    setBranding({ ...DEFAULT_BRANDING, loading: true, error: null, refresh: loadBranding });
 
     const endpoints = ["/api/school/settings/current", "/api/school/branding", "/api/settings"];
     let lastError = null;

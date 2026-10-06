@@ -1988,3 +1988,22 @@ for (const routePath of [
     'request/service database access must flow through the RLS-aware query wrapper.'
   )
 }
+
+assertNotContains(
+  'al-siddique-frontend/src/context/TenantBrandingContext.jsx',
+  /schoolName:\s*["']AL SIDDIQUE SCHOLARS PUBLIC SCHOOL["']|migrateLegacy:\s*true|String\(new Date\(\)\.getFullYear\(\)\)/,
+  'tenant branding must not guess ASSPS identity, migrate unscoped branding across tenants, or guess the academic year.'
+)
+
+for (const shellFile of [
+  'al-siddique-frontend/src/components/BrandHeadSync.jsx',
+  'al-siddique-frontend/src/components/Layout/sidebar.jsx',
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  'al-siddique-frontend/src/pages/LoginPage.jsx',
+]) {
+  assertNotContains(
+    shellFile,
+    /AL SIDDIQUE SCHOLARS PUBLIC SCHOOL/,
+    'shared SaaS shell must not impersonate the ASSPS tenant when branding data is missing.'
+  )
+}

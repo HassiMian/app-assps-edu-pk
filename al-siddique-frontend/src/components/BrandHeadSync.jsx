@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useTenantBranding } from '../context/TenantBrandingContext'
 
 const FALLBACK_ICON = '/favicon.svg'
-const FALLBACK_SCHOOL_NAME = 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
+const FALLBACK_SCHOOL_NAME = 'APEX'
 
 export default function BrandHeadSync() {
   const branding = useTenantBranding()

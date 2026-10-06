@@ -200,7 +200,7 @@ function printBirthdayCertificate(student, schoolName) {
 export default function Dashboard() {
   const branding = useTenantBranding()
   const { classNames } = useAcademicStore()
-  const schoolName = branding?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
+  const schoolName = branding?.schoolName || 'School'
   const navigate = useNavigate()
   const [date, setDate] = useState(new Date())
   const [hidden, setHidden] = useState({})

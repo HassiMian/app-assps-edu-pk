@@ -19,8 +19,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
 
   const isLight = theme === 'light'
-  const schoolName = branding?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'
-  const logoUrl = branding?.logoUrl || '/school-logo.svg'
+  const schoolName = branding?.schoolName || 'APEX Education Gateway'
+  const logoUrl = branding?.logoUrl || '/favicon.svg'
 
   const handleLogin = async (event) => {
     event.preventDefault()
