@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "assps-grade9-english-competency-map-v1",
+  "status": "SOURCE_STRUCTURE_VERIFIED_AUTHORING_PENDING",
+  "academicAuthority": {
+    "sourceId": "G9-ENGLISH-TEXTBOOK-2025-26",
+    "pageCount": 168,
+    "curriculumAnchor": "Revised/Updated NCP-2023",
+    "publisherAnchor": "Punjab Curriculum and Textbook Board, Lahore"
+  },
+  "units": [
+    {"unit":1,"title":"The Saviour of Mankind","printedStartPage":1,"pdfStartPage":5,"titleVerification":"OCR_FROM_RENDERED_SOURCE_PAGE"},
+    {"unit":2,"title":"Patriotism","printedStartPage":16,"pdfStartPage":20,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":3,"title":"Daffodils","printedStartPage":31,"pdfStartPage":35,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":4,"title":"Hazrat Asma","printedStartPage":49,"pdfStartPage":53,"titleVerification":"OCR_FROM_RENDERED_SOURCE_PAGE"},
+    {"unit":5,"title":"Women Empowerment through Entrepreneurship","printedStartPage":58,"pdfStartPage":62,"titleVerification":"OCR_FROM_RENDERED_SOURCE_PAGE"},
+    {"unit":6,"title":"The Value of Time","printedStartPage":72,"pdfStartPage":76,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":7,"title":"If","printedStartPage":86,"pdfStartPage":90,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":8,"title":"The Impact of Globalisation on Culture and Economy","printedStartPage":93,"pdfStartPage":97,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":9,"title":"Quality Education: A Key to Success","printedStartPage":106,"pdfStartPage":110,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":10,"title":"The Silent Predator and the Majestic Prey – Snow Leopard and Markhor","printedStartPage":120,"pdfStartPage":124,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"},
+    {"unit":11,"title":"The Dear Departed","printedStartPage":132,"pdfStartPage":136,"titleVerification":"EMBEDDED_TEXT_SOURCE_PAGE"}
+  ],
+  "grammarAuthority": {
+    "sourceId": "G9-10-ENGLISH-GRAMMAR-2023-24",
+    "pageCount": 200,
+    "grade9Competencies": [
+      "Vocabulary",
+      "Forms of Verb",
+      "Tenses",
+      "Translation",
+      "Parts of Speech",
+      "Pair of Words",
+      "Story Writing",
+      "Comprehension",
+      "Paragraph Writing",
+      "Active and Passive Voice",
+      "Direct and Indirect Speech"
+    ],
+    "verificationPages": [3,4,5,6]
+  },
+  "authoringRules": {
+    "originalQuestionsOnly": true,
+    "copySourcePassages": false,
+    "copyPastPaperStems": false,
+    "mapEveryQuestionToUnitOrGrammarCompetency": true,
+    "answerAndRubricRequired": true,
+    "releaseState": "NOT_AUTHORING_ELIGIBLE_UNTIL_CONTENT_MAP_REVIEW"
+  }
+}
