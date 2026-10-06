@@ -49,3 +49,12 @@ test('language acquisition queue cannot skip byte hashing',()=>{
  assert(data.currentAcquisitionQueue.every(x=>/^[a-f0-9]{64}$/.test(x.sha256)));
  assert(data.currentAcquisitionQueue.every(x=>x.byteLength>0));
 });
+
+test('image-only actual papers require renderer inspection before promotion',()=>{
+ const papers=data.currentAcquisitionQueue.filter(x=>x.requiredRole==='ACTUAL_PAPER_SKILL_TAXONOMY');
+ assert.equal(papers.length,2);
+ assert(papers.every(x=>x.structuralPreflight.scanMode==='IMAGE_ONLY_CCITT_FAX'));
+ assert(papers.every(x=>x.structuralPreflight.visualInspectionStatus==='PENDING_RENDERER'));
+ assert.match(data.visualInspectionPolicy.rule,/Render pages and inspect visible/i);
+ assert.match(data.visualInspectionPolicy.ocrRole,/NOT_AUTHORITY/);
+});

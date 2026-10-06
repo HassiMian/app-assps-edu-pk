@@ -153,7 +153,13 @@
       "sha256": "35060a1bea551ac2908526c41759d8aa5941eceaef8894d6bf90738d8e3f2173",
       "byteLength": 1635062,
       "hashedOn": "2026-10-06",
-      "byteSignature": "%PDF-"
+      "byteSignature": "%PDF-",
+      "structuralPreflight": {
+        "creator": "Canon",
+        "creationDate": "2026-06-16T14:58:07+05:00",
+        "scanMode": "IMAGE_ONLY_CCITT_FAX",
+        "visualInspectionStatus": "PENDING_RENDERER"
+      }
     },
     {
       "id": "G9-2026-MULTAN-URDU-ACTUAL",
@@ -167,7 +173,18 @@
       "sha256": "5f932f7c6331bda19338cf087641081bec5df5aaa45096a05cd14cc883ab8e13",
       "byteLength": 932229,
       "hashedOn": "2026-10-06",
-      "byteSignature": "%PDF-"
+      "byteSignature": "%PDF-",
+      "structuralPreflight": {
+        "creator": "Canon",
+        "creationDate": "2026-06-17T09:33:16+05:00",
+        "scanMode": "IMAGE_ONLY_CCITT_FAX",
+        "visualInspectionStatus": "PENDING_RENDERER"
+      }
     }
-  ]
+  ],
+  "visualInspectionPolicy": {
+    "rule": "Image-only scans cannot be promoted from BYTES_HASHED using strings/OCR guesses. Render pages and inspect visible board/year/group/objective-subjective hierarchy before VISUALLY_INSPECTED.",
+    "ocrRole": "DISCOVERY_AID_ONLY_NOT_AUTHORITY",
+    "pageAnchorRule": "Store exact inspected page number and visible anchor for every promoted hierarchy claim."
+  }
 }
