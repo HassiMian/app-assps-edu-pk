@@ -1,12 +1,15 @@
 require('dotenv').config()
 const assert=require('node:assert/strict')
+const http=require('node:http')
 const https=require('node:https')
 const crypto=require('node:crypto')
 const bcrypt=require('bcryptjs')
 const {pool}=require('../config/database')
+const BASE=new URL(process.env.TEST_CONNECT_URL || 'https://api.assps.edu.pk')
 function request(method,path,body,cookie) { return new Promise((resolve,reject)=>{
  const payload=body?JSON.stringify(body):null
- const req=https.request({hostname:'api.assps.edu.pk',path,method,timeout:6000,headers:{...(cookie?{Cookie:cookie}:{}),'Content-Type':'application/json',...(payload?{'Content-Length':Buffer.byteLength(payload)}:{})}},res=>{let raw='';res.on('data',x=>raw+=x);res.on('end',()=>{let data={};try{data=JSON.parse(raw)}catch{}resolve({status:res.statusCode,headers:res.headers,body:data})})});req.on('timeout',()=>req.destroy(new Error('timeout')));req.on('error',reject);if(payload)req.write(payload);req.end()
+ const transport=BASE.protocol==='https:'?https:http
+ const req=transport.request({hostname:BASE.hostname,port:BASE.port||undefined,path,method,timeout:6000,headers:{...(cookie?{Cookie:cookie}:{}),'Content-Type':'application/json',...(payload?{'Content-Length':Buffer.byteLength(payload)}:{})}},res=>{let raw='';res.on('data',x=>raw+=x);res.on('end',()=>{let data={};try{data=JSON.parse(raw)}catch{}resolve({status:res.statusCode,headers:res.headers,body:data})})});req.on('timeout',()=>req.destroy(new Error('timeout')));req.on('error',reject);if(payload)req.write(payload);req.end()
 })}
 async function run(){
  const c=await pool.connect(); let schoolId
@@ -18,13 +21,13 @@ async function run(){
   const cookies=(login.headers['set-cookie']||[]).map(x=>x.split(';')[0]);assert.ok(cookies.some(x=>x.startsWith('authToken=')))
   const forgedRole=cookies.filter(x=>!x.startsWith('role=')).concat(['role=student']).join('; ')
   let response=await request('GET','/student',null,forgedRole)
-  assert.equal(response.status,307);assert.equal(new URL(response.headers.location,'https://api.assps.edu.pk').pathname,'/admin')
+  assert.equal(response.status,307);assert.equal(new URL(response.headers.location,BASE).pathname,'/admin')
   console.log('Verified proxy ignores forged student-role cookie: PASS')
   response=await request('GET','/admin',null,'userId=123456; role=admin; tenantId=assps; authToken=invalid')
-  assert.ok([302,307].includes(response.status));assert.equal(new URL(response.headers.location,'https://api.assps.edu.pk').pathname,'/login')
+  assert.ok([302,307].includes(response.status));assert.equal(new URL(response.headers.location,BASE).pathname,'/login')
   console.log('Forged session cannot enter admin shell: PASS')
   response=await request('GET','/teacher',null,cookies.join('; '))
-  assert.equal(response.status,307);assert.equal(new URL(response.headers.location,'https://api.assps.edu.pk').pathname,'/admin')
+  assert.equal(response.status,307);assert.equal(new URL(response.headers.location,BASE).pathname,'/admin')
   console.log('Valid admin redirected from teacher portal: PASS')
  } finally {
   if(schoolId){await c.query('DELETE FROM users WHERE school_id=$1',[schoolId]).catch(()=>{});await c.query('DELETE FROM schools WHERE id=$1',[schoolId]).catch(()=>{})}c.release()
