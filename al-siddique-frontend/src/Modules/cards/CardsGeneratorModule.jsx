@@ -818,7 +818,7 @@ function printResultCard(student, exam, results, template, school) {
  <!-- Student Info -->
  <div style="padding:16px 30px;background:#fdf8f0;border-bottom:2px solid #e8d9b5">
  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px">
- ${[['Student Name', student.name],['Father Name', student.father_name||'-'],['Class', exam?.class||'-'],['Session','2026-2027'],['GR Number',student.gr_number||'-'],['Date',today],['Total Subjects',results.length],['Exam Type',exam?.type||'-']].map(([l,v])=>`<div style="background:white;border:1px solid #e8d9b5;border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:#8B6914;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-bottom:4px">${l}</div><div style="font-size:13px;font-weight:700;color:#1a0a00">${v}</div></div>`).join('')}
+ ${[['Student Name', student.name],['Father Name', student.father_name||'-'],['Class', exam?.class||'-'],['Session',exam?.session||'-'],['GR Number',student.gr_number||'-'],['Date',today],['Total Subjects',results.length],['Exam Type',exam?.type||'-']].map(([l,v])=>`<div style="background:white;border:1px solid #e8d9b5;border-radius:8px;padding:10px 12px"><div style="font-size:9px;color:#8B6914;text-transform:uppercase;letter-spacing:0.8px;font-weight:600;margin-bottom:4px">${l}</div><div style="font-size:13px;font-weight:700;color:#1a0a00">${v}</div></div>`).join('')}
  </div>
  </div>
 
@@ -914,7 +914,7 @@ function printResultCard(student, exam, results, template, school) {
  <!-- Student Info Bar -->
  <div style="background:rgba(0,245,255,0.04);border-bottom:1px solid rgba(0,245,255,0.1);padding:14px 28px">
  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
- ${[['Student',student.name],['Father',student.father_name||'-'],['Class',exam?.class||'-'],['GR No',student.gr_number||'-'],['Session','2026-2027'],['Exam',exam?.type||'-'],['Subjects',results.length],['Date',today]].map(([l,v])=>`<div style="background:rgba(255,255,255,0.7);border:1px solid #B8CFCE;border-radius:8px;padding:8px 12px"><div style="font-size:9px;color:#5EA8A7;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:3px">${l}</div><div style="font-size:12px;font-weight:700;color:#243041">${v}</div></div>`).join('')}
+ ${[['Student',student.name],['Father',student.father_name||'-'],['Class',exam?.class||'-'],['GR No',student.gr_number||'-'],['Session',exam?.session||'-'],['Exam',exam?.type||'-'],['Subjects',results.length],['Date',today]].map(([l,v])=>`<div style="background:rgba(255,255,255,0.7);border:1px solid #B8CFCE;border-radius:8px;padding:8px 12px"><div style="font-size:9px;color:#5EA8A7;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:3px">${l}</div><div style="font-size:12px;font-weight:700;color:#243041">${v}</div></div>`).join('')}
  </div>
  </div>
 
@@ -1012,7 +1012,7 @@ function printResultCard(student, exam, results, template, school) {
  ${[['Student Name',student.name],['Father Name',student.father_name||'-'],['Class/Section',exam?.class||'-'],['GR Number',student.gr_number||'-']].map(([l,v])=>`<td style="padding:6px 10px;font-size:12px"><span style="font-weight:600;color:#1565C0">${l}:</span> ${v}</td>`).join('')}
  </tr>
  <tr>
- ${[['Session','2026-2027'],['Exam Type',exam?.type||'-'],['Result Date',today],['Total Subjects',results.length]].map(([l,v])=>`<td style="padding:6px 10px;font-size:12px"><span style="font-weight:600;color:#1565C0">${l}:</span> ${v}</td>`).join('')}
+ ${[['Session',exam?.session||'-'],['Exam Type',exam?.type||'-'],['Result Date',today],['Total Subjects',results.length]].map(([l,v])=>`<td style="padding:6px 10px;font-size:12px"><span style="font-weight:600;color:#1565C0">${l}:</span> ${v}</td>`).join('')}
  </tr>
  </table>
  </div>
@@ -1111,7 +1111,7 @@ function printResultCard(student, exam, results, template, school) {
  <!-- Student Info Colorful Cards -->
  <div style="padding:14px 28px;background:#fafafa;border-bottom:1px solid #eee">
  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
- ${[['Student',student.name,'#C9867D'],['Father',student.father_name||'-','#8BCFC3'],['Class',exam?.class||'-','#8EB6D8'],['GR No',student.gr_number||'-','#D8A047'],['Session','2026-2027','#A987C6'],['Exam',exam?.type||'-','#7DA58A'],['Subjects',results.length,'#C9867D'],['Date',today,'#8EB6D8']].map(([l,v,c])=>`<div style="background:${c}18;border-left:3px solid ${c};border-radius:8px;padding:8px 12px"><div style="font-size:10px;color:${c};font-weight:700;margin-bottom:3px">${l}</div><div style="font-size:12px;font-weight:700;color:#333">${v}</div></div>`).join('')}
+ ${[['Student',student.name,'#C9867D'],['Father',student.father_name||'-','#8BCFC3'],['Class',exam?.class||'-','#8EB6D8'],['GR No',student.gr_number||'-','#D8A047'],['Session',exam?.session||'-','#A987C6'],['Exam',exam?.type||'-','#7DA58A'],['Subjects',results.length,'#C9867D'],['Date',today,'#8EB6D8']].map(([l,v,c])=>`<div style="background:${c}18;border-left:3px solid ${c};border-radius:8px;padding:8px 12px"><div style="font-size:10px;color:${c};font-weight:700;margin-bottom:3px">${l}</div><div style="font-size:12px;font-weight:700;color:#333">${v}</div></div>`).join('')}
  </div>
  </div>
 
@@ -1574,6 +1574,7 @@ function ResultCardTab({ school }) {
 function EmployeeIdTab({ school }) {
  const [employees, setEmployees] = useState([])
  const [loading, setLoading] = useState(false)
+ const [loadError, setLoadError] = useState('')
  const [mode, setMode] = useState('all')
  const [empId, setEmpId] = useState('')
  const [dept, setDept] = useState('')
@@ -1589,9 +1590,10 @@ function EmployeeIdTab({ school }) {
  useEffect(() => {
  // eslint-disable-next-line react-hooks/set-state-in-effect
  setLoading(true)
+ setLoadError('')
  api.get('/api/employees')
  .then(r => { const list = r.data.data || r.data || []; setEmployees(list); if (list.length) setDept(list[0].department || '') })
- .catch(() => setEmployees([]))
+ .catch(err => { setEmployees([]); setLoadError(err.response?.data?.message || 'Employee data could not be loaded.') })
  .finally(() => setLoading(false))
  }, [])
 
@@ -1664,6 +1666,7 @@ function EmployeeIdTab({ school }) {
  <button onClick={handleGenerate} disabled={loading} style={{ padding:'10px 22px', border:'none', borderRadius:10, background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', fontWeight: 600, cursor:'pointer', whiteSpace:'nowrap' }}>Generate &amp; Print</button>
  </div>
  </div>
+ {loadError && <div className="cards-node" style={{ color:C.red, fontWeight:700, fontSize:13, marginBottom:16 }}>{loadError}</div>}
  {status && <div className="cards-node" style={{ color:status.includes('not found')||status.includes('No ')?C.red:C.green, fontWeight:600, fontSize:13, marginBottom:16 }}>{status}</div>}
 
  {/* Template */}

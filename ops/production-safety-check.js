@@ -1478,6 +1478,22 @@ assertContains(
   'const [loadError, setLoadError] = useState',
   'challan viewing must expose source failures instead of converting them to empty data.'
 )
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  /\['Session','2026-2027'/,
+  'result-card variants in Cards Generator must use the selected exam session rather than a hardcoded year.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  "setLoadError(err.response?.data?.message || 'Employee data could not be loaded.')",
+  'employee card generation must surface employee-source failures.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  /\.catch\(\(\) => setEmployees\(\[\]\)\)/,
+  'employee card generation must not turn API failures into an empty employee dataset.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

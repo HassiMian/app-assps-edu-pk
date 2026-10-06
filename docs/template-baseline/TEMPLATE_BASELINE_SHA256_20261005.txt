@@ -3,4 +3,4 @@
 e5b3d4aad1ae3da9af667516823c603bcb9a03d7c57a4a114580dcf7dbb4f1f4  al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/templates/paperTemplates.js
 778eeef1563b87877b0e62d681d397afca0bbe6744eb1955b3eaf0648be4415d  al-siddique-frontend/src/Modules/fees/CreateChallan.jsx
 9336549b141cf9e2b25fc9d9d485f7bf8a9fe8006b61f1a77ad6f6481f554b00  al-siddique-frontend/src/Modules/fees/ViewChallans.jsx
-96475bf25b825e8e6b08d60e9e7a7a06317d3a6d2088856972206e91d0519fc4  al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx
+65133b8de8077d8e2942097c1af8eb2f09f8557ae8f516fe6e504c149c02f636  al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx
