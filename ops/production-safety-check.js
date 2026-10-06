@@ -399,6 +399,25 @@ assertContains(
   'portal attendance trend must be based on real attendance aggregates.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  /attendance\[student\.id\] \|\| ['"]present['"]|attMap\[s\.id\] \|\| ['"]present['"]/,
+  'attendance must never infer Present for unmarked students.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  "label: 'Unmarked'",
+  'attendance UI must preserve an explicit unmarked state.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  /\|\| ['"]Starter['"]|\['A'\]|\['English'\]/,
+  'timetable authoring must not invent class, section, or subject defaults.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

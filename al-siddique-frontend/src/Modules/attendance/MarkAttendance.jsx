@@ -57,6 +57,14 @@ const fieldStyle = {
 }
 
 const statusMeta = {
+ unmarked: {
+ label: 'Unmarked',
+ icon: UserMinus,
+ color: C.muted,
+ bg: 'var(--apex-bg-subtle)',
+ border: 'var(--apex-border-default)',
+ grad: 'linear-gradient(135deg,#64748b,#475569)',
+ },
  present: {
  label: 'Present',
  icon: UserCheck,
@@ -159,8 +167,9 @@ export default function MarkAttendance() {
  () => [...new Set(CLASSES.map(attendanceClassLabel))],
  [CLASSES]
  )
- const [selectedClass, setSelectedClass] = useState(CLASSES[0] || 'Starter')
- const [selectedSection, setSelectedSection] = useState('Blue')
+ const initialClass = CLASSES[0] || ''
+ const [selectedClass, setSelectedClass] = useState(initialClass)
+ const [selectedSection, setSelectedSection] = useState(() => attendanceSectionsForClass(initialClass, sectionsForClass)[0] || '')
  const [date, setDate] = useState(getPakistanDateString())
  const [students, setStudents] = useState([])
  const [attendance, setAttendance] = useState({})
@@ -186,7 +195,7 @@ export default function MarkAttendance() {
  setStudents(list)
  const initialMarks = {}
  list.forEach((s) => {
- initialMarks[s.id] = attMap[s.id] || 'present'
+ if (attMap[s.id]) initialMarks[s.id] = attMap[s.id]
  })
  setAttendance(initialMarks)
  })
@@ -220,7 +229,14 @@ export default function MarkAttendance() {
  const saveAttendance = async () => {
  setSaving(true)
  try {
- const records = students.map((student) => ({ student_id: student.id, date, status: attendance[student.id] || 'present' }))
+ const records = students
+ .filter(student => attendance[student.id] && attendance[student.id] !== 'unmarked')
+ .map(student => ({ student_id: student.id, date, status: attendance[student.id] }))
+ if (!records.length) {
+ setMessage('Mark at least one student before saving.')
+ setSaving(false)
+ return
+ }
  await api.post('/api/attendance/mark', { records })
  emitAttendanceUpdated({ date, count: records.length })
  setMessage('Attendance saved successfully.')
@@ -597,7 +613,7 @@ export default function MarkAttendance() {
  </thead>
  <tbody>
  {students.map((student) => {
- const status = attendance[student.id] || 'present'
+ const status = attendance[student.id] || 'unmarked'
  const meta = statusMeta[status]
  const StatusIcon = meta.icon
 
@@ -660,7 +676,7 @@ export default function MarkAttendance() {
  <Panel accent={C.green} style={{ padding: 22 }}>
  <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 12, color: C.muted, fontSize: 13, fontWeight: 700 }}>
  <Calendar size={17} color={C.green} />
- Attendance defaults to present when a class is loaded, then updates instantly as you mark each student.
+ Students remain unmarked until attendance is explicitly recorded. Bulk actions are available when you intentionally want one status for the full class.
  </div>
  </Panel>
  </div>

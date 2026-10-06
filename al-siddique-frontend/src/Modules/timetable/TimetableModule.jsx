@@ -146,17 +146,17 @@ const inputStyle = {
 }
 
 function TimetableModule() {
- const { classNames: classOptions, activeClasses, subjectsForClass, allSections, periodsPerDay } = useAcademicStore()
+ const { classNames: classOptions, activeClasses, subjectsForClass, periodsPerDay } = useAcademicStore()
  const { paperSettings } = usePaperStore()
  
- const [schoolClass, setSchoolClass] = useState(classOptions[0] || 'Starter')
+ const [schoolClass, setSchoolClass] = useState(classOptions[0] || '')
  const [teacherOptions, setTeacherOptions] = useState([])
  
  const selectedAcademicClass = activeClasses.find(c => c.name === schoolClass)
- const sectionOptions = selectedAcademicClass?.sections?.length ? selectedAcademicClass.sections : (allSections.length ? allSections : ['A'])
- const subjectOptions = selectedAcademicClass ? subjectsForClass(selectedAcademicClass.level) : ['English']
+ const sectionOptions = selectedAcademicClass?.sections?.length ? selectedAcademicClass.sections : []
+ const subjectOptions = selectedAcademicClass ? subjectsForClass(selectedAcademicClass.level) : []
  
- const [section, setSection] = useState(sectionOptions[0] || 'A')
+ const [section, setSection] = useState(sectionOptions[0] || '')
  const [numPeriods, setNumPeriods] = useState(periodsPerDay)
  const [assignments, setAssignments] = useState(() => {
  const initialPeriods = periodsPerDay
@@ -209,7 +209,7 @@ function TimetableModule() {
  }, [classOptions, schoolClass])
 
  useEffect(() => {
- if (sectionOptions.length && !sectionOptions.includes(section)) setSection(sectionOptions[0])
+ if (!sectionOptions.includes(section)) setSection(sectionOptions[0] || '')
  }, [sectionOptions, section])
 
  useEffect(() => {
