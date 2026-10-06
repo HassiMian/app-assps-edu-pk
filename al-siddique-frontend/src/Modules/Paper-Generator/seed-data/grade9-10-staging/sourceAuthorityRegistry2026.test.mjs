@@ -44,8 +44,10 @@ test('source promotion is fail-closed and ordered before authoring',()=>{
 
 test('language acquisition queue cannot skip byte hashing',()=>{
  assert.equal(data.currentAcquisitionQueue.length,6);
- assert(data.currentAcquisitionQueue.every(x=>x.state==='BYTES_HASHED'));
- assert(data.currentAcquisitionQueue.every(x=>x.nextGate==='VISUALLY_INSPECTED'));
+ const academic=data.currentAcquisitionQueue.filter(x=>x.requiredRole==='ACADEMIC_CONTENT');
+ assert(academic.every(x=>x.state==='BYTES_HASHED'));
+ assert(academic.every(x=>x.nextGate==='VISUALLY_INSPECTED'));
+ assert(data.currentAcquisitionQueue.every(x=>['BYTES_HASHED','VISUALLY_INSPECTED'].includes(x.state)));
  assert(data.currentAcquisitionQueue.every(x=>/^[a-f0-9]{64}$/.test(x.sha256)));
  assert(data.currentAcquisitionQueue.every(x=>x.byteLength>0));
 });
@@ -57,4 +59,13 @@ test('image-only actual papers require renderer inspection before promotion',()=
  assert(papers.every(x=>x.structuralPreflight.visualInspectionStatus==='PENDING_RENDERER'));
  assert.match(data.visualInspectionPolicy.rule,/Render pages and inspect visible/i);
  assert.match(data.visualInspectionPolicy.ocrRole,/NOT_AUTHORITY/);
+});
+
+test('rendered Multan language bundles are classified as keys, never full papers',()=>{
+ const p=data.currentAcquisitionQueue.filter(x=>x.id.includes('MULTAN'));
+ assert.deepEqual(p.map(x=>x.renderedPageCount),[24,25]);
+ assert(p.every(x=>x.state==='VISUALLY_INSPECTED'));
+ assert(p.every(x=>x.artifactClassification==='OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE'));
+ assert(p.every(x=>x.patternHierarchyEligible===false));
+ assert.match(data.actualPaperClassificationRule,/does not make an answer-key bundle a full actual question paper/i);
 });
