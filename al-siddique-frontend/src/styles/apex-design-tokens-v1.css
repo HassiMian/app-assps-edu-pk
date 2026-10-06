@@ -51,11 +51,11 @@
   --apex-motion-slow: 280ms;
 
   /* Light-first semantic tokens */
-  --apex-bg-canvas: #f4f7fb;
-  --apex-bg-canvas-elevated: #f8fafe;
+  --apex-bg-canvas: #f5f8fc;
+  --apex-bg-canvas-elevated: #fbfcfe;
   --apex-bg-surface: rgba(255, 255, 255, 0.94);
   --apex-bg-surface-solid: #ffffff;
-  --apex-bg-subtle: #edf3f8;
+  --apex-bg-subtle: #eef3f8;
   --apex-bg-muted: #e7edf4;
   --apex-bg-overlay: rgba(16, 23, 34, 0.48);
 
@@ -68,7 +68,7 @@
   --apex-border-default: rgba(45, 65, 91, 0.17);
   --apex-border-strong: rgba(45, 65, 91, 0.28);
 
-  --apex-action-primary: #256fe8;
+  --apex-action-primary: #2f7bf4;
   --apex-action-primary-hover: #1f61cc;
   --apex-action-secondary: #20a99f;
   --apex-action-highlight: #c99a32;
@@ -88,12 +88,12 @@
 
 :root[data-theme='dark'] {
   /* Dark is intentionally graphite/navy, not near-black navy. */
-  --apex-bg-canvas: #101722;
-  --apex-bg-canvas-elevated: #131d2a;
-  --apex-bg-surface: rgba(24, 40, 59, 0.88);
-  --apex-bg-surface-solid: #18283b;
-  --apex-bg-subtle: #1d3045;
-  --apex-bg-muted: #22364b;
+  --apex-bg-canvas: #151a21;
+  --apex-bg-canvas-elevated: #19212b;
+  --apex-bg-surface: rgba(31, 40, 51, 0.92);
+  --apex-bg-surface-solid: #202a36;
+  --apex-bg-subtle: #273341;
+  --apex-bg-muted: #2d3a49;
   --apex-bg-overlay: rgba(3, 8, 16, 0.66);
 
   --apex-text-primary: #f5f8fc;
@@ -105,9 +105,9 @@
   --apex-border-default: rgba(198, 211, 226, 0.16);
   --apex-border-strong: rgba(198, 211, 226, 0.25);
 
-  --apex-action-primary: #65a6ff;
-  --apex-action-primary-hover: #82b7ff;
-  --apex-action-secondary: #42cfc2;
+  --apex-action-primary: #6ba8ff;
+  --apex-action-primary-hover: #86bbff;
+  --apex-action-secondary: #46d4c8;
   --apex-action-highlight: #deb655;
   --apex-action-danger: #ef6678;
   --apex-action-success: #48c58b;
@@ -120,7 +120,7 @@
   --apex-shell-gradient:
     radial-gradient(circle at 12% -10%, rgba(101, 166, 255, 0.13), transparent 36%),
     radial-gradient(circle at 92% 4%, rgba(66, 207, 194, 0.09), transparent 31%),
-    linear-gradient(145deg, #111a27 0%, #142235 52%, #17283b 100%);
+    linear-gradient(145deg, #141920 0%, #19222c 52%, #1c2933 100%);
 }
 
 /* Protected rendering zones must never inherit SaaS shell styling by accident. */
