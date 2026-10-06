@@ -1149,13 +1149,18 @@ router.post('/change-password', protect, async (req, res) => {
       return sendJson(res, 400, { message: 'Password must be at least 8 characters long.' });
     }
 
-    const hashed = await bcrypt.hash(newPassword, 12);
-    
     const userId = req.user?.id;
     if (!userId) {
       return sendJson(res, 401, { message: 'Unauthorized: missing user ID.' });
     }
 
+    const current = await query('SELECT must_change_password FROM users WHERE id = $1 AND is_active = true LIMIT 1', [userId]);
+    if (!current.rowCount) return sendJson(res, 404, { message: 'User not found.' });
+    if (!current.rows[0].must_change_password) {
+      return sendJson(res, 403, { message: 'Use the authenticated profile security flow for regular password changes.' });
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 12);
     const result = await query(
       'UPDATE users SET password = $1, must_change_password = false WHERE id = $2 RETURNING id',
       [hashed, userId]
