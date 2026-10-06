@@ -5,6 +5,7 @@ const { currentSchoolId } = require('../middleware/tenant')
 const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
+const { buildCanonicalCanaryPlan } = require('../services/papers/paperCanonicalCanaryPlanV6H2')
 const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
 const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPublisherPromotionPrecheckV6G9')
 const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPublisherPromotionEnvelopeV6G10')
@@ -214,6 +215,19 @@ router.get('/canonical-canary/:id/preflight', async (req,res) => {
     const status=Number(err.status)||500
     if(status>=500)console.error('Paper Studio canonical canary preflight error:',err.message)
     return res.status(status).json({success:false,code:err.code||'CANARY_PREFLIGHT_FAILED',message:status>=500?'Canonical canary preflight could not be verified.':err.message})
+  }
+})
+
+router.get('/canonical-canary/:id/plan', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=await buildCanonicalCanaryPlan({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{planOnly:true,persisted:false,canonicalWriteChanged:false}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio canonical canary plan error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'CANARY_PLAN_FAILED',message:status>=500?'Canonical canary plan could not be generated.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
   }
 })
 
