@@ -23,7 +23,7 @@ test('Class Eight Urdu recovery opens the editable workspace, not preview-only c
   assert.equal(resolvePaperRoute(p,'word_editor'),'build')
   assert.equal(p.config.totalMarks,75)
   assert.equal(p.official_section.reduce((n,q)=>n+(Number(q.marks)||0),0),70)
-  assert.equal(resolvePaperRoute({id:'official-first-term-2026-class-5-english',documentFormat:'pts-native-v13'}),'word_editor')
+  assert.equal(resolvePaperRoute({id:'official-first-term-2026-class-5-english',documentFormat:'pts-native-v13'}),'build')
   assert.equal(resolvePaperRoute({id:'ey-flyer-urdu-2026',classStage:'flyer'}),'early_years')
   const source = fs.readFileSync(path.join(paperDir,'PTSPaperGenerator.jsx'),'utf8')
   assert.doesNotMatch(source,/data-marks-reconciliation/)

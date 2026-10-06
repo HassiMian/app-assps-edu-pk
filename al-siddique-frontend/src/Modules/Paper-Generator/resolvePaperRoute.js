@@ -81,21 +81,20 @@ export function resolvePaperRoute(paper, targetTab = null, routingPolicy = {}) {
   const isOfficialV12 = paper.documentFormat === 'official-v12'
   const isOfficialFirstTerm = id.startsWith('official-first-term-') || id.includes('first-term-2026')
 
-  // Phase 18 cutover: official V13/canonical First Term papers now enter the
-  // guarded canonical editor chain by default. PaperEditorRouter remains the final
-  // authority: pristine V13 is migrated to Canonical V2; modified/custom V13 is
-  // preserved in LEGACY_CANVAS_V2. The emergency rollback flag forces the proven
-  // stable Paper Workspace without deleting or bypassing any compatibility code.
+  // Unified teacher-facing editor policy (2026-10-06):
+  // every official / First-Term school paper opens in the Paper Workspace.
+  // Canonical V2 remains an internal document/validation engine and diagnostic
+  // surface, but it must not replace the normal editing UI for teachers.
+  // All official V13 papers already carry complete official_section mirrors,
+  // so routing to Workspace preserves questions, marks and print semantics.
   if (isOfficialV13 || isOfficialV12 || isOfficialFirstTerm) {
-    if (forceOfficialLegacyRoute) return 'build'
-    if (isOfficialV12) return 'build'
-    if (isOfficialV13 || isCanonicalV2) return 'word_editor'
     return 'build'
   }
 
   // Explicit editor choice is respected for non-official/custom documents.
   if (targetTab) return targetTab
 
+  if (isCanonicalV2 && Array.isArray(paper.official_section) && paper.official_section.length > 0) return 'build'
   if (isCanonicalV2) return 'word_editor'
   return 'build'
 }

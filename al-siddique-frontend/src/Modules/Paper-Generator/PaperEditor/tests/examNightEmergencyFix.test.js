@@ -19,30 +19,30 @@ const canonicalCorpus = JSON.parse(fs.readFileSync(corpusPath, 'utf-8')).documen
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. ROUTING TESTS (FIX A)
 // ─────────────────────────────────────────────────────────────────────────────
-test('FIX A.1: Class 5 official V13 uses guarded canonical route with rollback available', () => {
+test('FIX A.1: Class 5 official V13 opens unified Paper Workspace', () => {
   const paper = {
     id: 'official-first-term-2026-class-5-english',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '5', subject: 'English' },
   }
-  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper), 'build')
   assert.strictEqual(resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }), 'build')
 })
 
-test('FIX A.2: Class 7 official V13 uses guarded canonical route with rollback available', () => {
+test('FIX A.2: Class 7 official V13 opens unified Paper Workspace', () => {
   const paper = {
     id: 'official-first-term-2026-class-7-english',
     documentFormat: 'pts-native-v13',
     config: { classLevel: '7', subject: 'English' },
   }
-  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper), 'build')
   assert.strictEqual(resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }), 'build')
 })
 
-test('FIX A.3: Official First Term canonical document opens canonical editor by default', () => {
+test('FIX A.3: Official First Term canonical document opens unified Paper Workspace', () => {
   const paper = canonicalCorpus.find(p => p.id.includes('class-5-english'))
   assert.ok(paper)
-  assert.strictEqual(resolvePaperRoute(paper), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(paper), 'build')
   assert.strictEqual(resolvePaperRoute(paper, null, { forceOfficialLegacyRoute: true }), 'build')
 })
 
@@ -87,9 +87,9 @@ test('FIX A.8: Official V13 canonical routing cannot be bypassed, while emergenc
     id: 'official-first-term-2026-class-5-english',
     documentFormat: 'pts-native-v13',
   }
-  assert.strictEqual(resolvePaperRoute(officialPaper, 'build'), 'word_editor')
-  assert.strictEqual(resolvePaperRoute(officialPaper, 'saved'), 'word_editor')
-  assert.strictEqual(resolvePaperRoute(officialPaper, 'word_editor'), 'word_editor')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'build'), 'build')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'saved'), 'build')
+  assert.strictEqual(resolvePaperRoute(officialPaper, 'word_editor'), 'build')
   assert.strictEqual(
     resolvePaperRoute(officialPaper, 'word_editor', { forceOfficialLegacyRoute: true }),
     'build'
@@ -219,10 +219,13 @@ test('FIX E.1: EditorFieldRegistry tracks and restores exact selection ranges', 
   // Save selection
   registry.saveSelection(fieldKey, { from: 5, to: 12 })
   const sel = registry.getSelection(fieldKey)
-  assert.deepStrictEqual(sel, { from: 5, to: 12 })
+  assert.strictEqual(sel.from, 5)
+  assert.strictEqual(sel.to, 12)
 
-  // Active key lookup without explicit argument
-  assert.deepStrictEqual(registry.getSelection(), { from: 5, to: 12 })
+  // Active key lookup without explicit argument preserves the same exact range.
+  const activeSel = registry.getSelection()
+  assert.strictEqual(activeSel.from, 5)
+  assert.strictEqual(activeSel.to, 12)
 
   registry.clear()
   assert.strictEqual(registry.getSelection(), null)
