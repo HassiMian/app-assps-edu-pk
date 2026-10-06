@@ -88,8 +88,8 @@ async function provisionPortalUser({
   })
 
   if (existing) {
-    const supportsUsername = await hasColumn('users', 'username').catch(() => false)
-    const supportsPhone = await hasColumn('users', 'phone').catch(() => false)
+    const supportsUsername = await hasColumn('users', 'username')
+    const supportsPhone = await hasColumn('users', 'phone')
     const updates = ['name = $1', 'designation = $2', 'is_active = $3']
     const params = [clean(name, 180), designation || null, Boolean(active)]
     let i = params.length + 1
@@ -110,9 +110,9 @@ async function provisionPortalUser({
 
   const temporaryPassword = generateTemporaryPassword()
   const passwordHash = await bcrypt.hash(temporaryPassword, 12)
-  const supportsUsername = await hasColumn('users', 'username').catch(() => false)
-  const supportsPhone = await hasColumn('users', 'phone').catch(() => false)
-  const supportsMustChange = await hasColumn('users', 'must_change_password').catch(() => false)
+  const supportsUsername = await hasColumn('users', 'username')
+  const supportsPhone = await hasColumn('users', 'phone')
+  const supportsMustChange = await hasColumn('users', 'must_change_password')
 
   const columns = ['school_id', 'name', 'email', 'password', 'role', 'designation', 'is_active']
   const values = [schoolId, clean(name, 180), normalizedEmail || null, passwordHash, normalizedRole, designation || null, Boolean(active)]
@@ -140,12 +140,15 @@ async function resetPortalUserPassword({ schoolId, userId, db = null }) {
   if (!schoolId || !userId) throw new Error('School and user are required.')
   const temporaryPassword = generateTemporaryPassword()
   const passwordHash = await bcrypt.hash(temporaryPassword, 12)
-  const supportsMustChange = await hasColumn('users', 'must_change_password').catch(() => false)
+  const [supportsMustChange, supportsUsername] = await Promise.all([
+    hasColumn('users', 'must_change_password'),
+    hasColumn('users', 'username'),
+  ])
   const result = await runQuery(db, `
     UPDATE users
     SET password = $1${supportsMustChange ? ', must_change_password = true' : ''}, updated_at = NOW()
     WHERE id = $2 AND school_id = $3
-    RETURNING id, school_id, name, email, role, designation, is_active${await hasColumn('users', 'username').catch(() => false) ? ', username' : ''}
+    RETURNING id, school_id, name, email, role, designation, is_active${supportsUsername ? ', username' : ''}
   `, [passwordHash, userId, schoolId])
   if (!result.rowCount) throw new Error('Portal account not found.')
   return { user: result.rows[0], temporaryPassword }
