@@ -44,7 +44,7 @@ router.get('/', protect, async (req, res) => {
       query(`
         SELECT c.id, c.challan_no, c.month, c.year, c.status, s.name as student_name
         FROM fee_challans c
-        JOIN students s ON c.student_id = s.id
+        JOIN students s ON c.student_id = s.id AND c.school_id = s.school_id
         WHERE c.school_id = $1 
           AND (c.challan_no ILIKE $2 OR s.name ILIKE $2)
         LIMIT 5

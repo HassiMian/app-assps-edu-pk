@@ -42,7 +42,7 @@ router.get(['/', '/stats'], protect, async (req, res) => {
         COUNT(DISTINCT CASE WHEN a.status = 'leave' THEN a.student_id END)::int AS leave,
         COUNT(DISTINCT a.student_id)::int AS marked
       FROM attendance a
-      JOIN students s ON s.id = a.student_id AND s.is_active = true
+      JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id AND s.school_id = a.school_id AND s.is_active = true
       WHERE a.date::text = $2 AND ($1::int IS NULL OR s.school_id = $1)
     ),
     fee AS (
@@ -107,7 +107,7 @@ router.get(['/', '/stats'], protect, async (req, res) => {
     LEFT JOIN (
       SELECT a.*
       FROM attendance a
-      JOIN students s ON s.id = a.student_id
+      JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
       WHERE ($1::int IS NULL OR s.school_id = $1)
     ) a ON a.date = d.d
     GROUP BY d.d ORDER BY d.d
@@ -288,13 +288,13 @@ router.get('/activity', protect, async (req, res) => {
       ORDER BY created_at DESC LIMIT 3`, isSuperAdmin ? [] : [schoolId])),
     safe(() => query(`
       SELECT s.name, f.amount, f.status, f.updated_at
-      FROM fee_challans f JOIN students s ON s.id = f.student_id
+      FROM fee_challans f JOIN students s ON s.id = f.student_id AND s.school_id = f.school_id
       WHERE f.status = 'paid'${isSuperAdmin ? '' : ' AND s.school_id = $1'}
       ORDER BY f.updated_at DESC LIMIT 3`, isSuperAdmin ? [] : [schoolId])),
     safe(() => query(`
       SELECT COUNT(*) AS absent_count, MAX(a.date) AS date
       FROM attendance a
-      JOIN students s ON s.id = a.student_id
+      JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
       WHERE a.status != 'present' AND a.date = CURRENT_DATE${isSuperAdmin ? '' : ' AND s.school_id = $1'}`, isSuperAdmin ? [] : [schoolId])),
   ])
 

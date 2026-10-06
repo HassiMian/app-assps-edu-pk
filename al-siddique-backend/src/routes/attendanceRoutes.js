@@ -161,7 +161,7 @@ router.get('/monthly-class-summary', protect, requireAttendanceAnalyticsAccess, 
           THEN ROUND(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END) * 100.0 / COUNT(a.student_id))::int
           ELSE 0 END AS percent
       FROM attendance a
-      JOIN students s ON s.id = a.student_id
+      JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
       WHERE s.school_id = $1
         AND a.date >= make_date($2, $3, 1)
         AND a.date < (make_date($2, $3, 1) + INTERVAL '1 month')::date
@@ -206,7 +206,7 @@ router.get('/monthly', protect, requireAttendanceAnalyticsAccess, async (req, re
       LEFT JOIN (
         SELECT a.student_id, a.date, a.status
         FROM attendance a
-        JOIN students s ON s.id = a.student_id
+        JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
         WHERE s.school_id = $1
           AND s.class = $2
           AND s.section = $3
@@ -229,7 +229,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), a
     let sql = `
       SELECT a.*, s.name, s.gr_number, s.roll_number, s.class, s.section
       FROM attendance a
-      JOIN students s ON a.student_id = s.id
+      JOIN students s ON a.student_id = s.id AND a.school_id = s.school_id
       WHERE 1=1
     `
     const params = []
@@ -594,7 +594,7 @@ router.get('/history', protect, requireScopeForServiceOnly('school.attendance.re
         s.class,
         s.section
       FROM attendance a
-      JOIN students s ON a.student_id = s.id
+      JOIN students s ON a.student_id = s.id AND a.school_id = s.school_id
       WHERE a.date >= $1 AND a.date <= $2
     `
     const params = [fromDate, toDate]
@@ -676,7 +676,7 @@ router.get('/history/:studentId', protect, requireScopeForServiceOnly('school.at
         a.id, a.date, a.status, a.marked_by, a.created_at,
         s.name, s.class, s.section, s.gr_number
       FROM attendance a
-      JOIN students s ON a.student_id = s.id
+      JOIN students s ON a.student_id = s.id AND a.school_id = s.school_id
       WHERE a.student_id = $1
     `
     const params = [studentId]

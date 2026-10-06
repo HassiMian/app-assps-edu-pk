@@ -103,6 +103,24 @@ assertNotContains(
   'dashboard must not raw-join attendance and fee facts because that multiplies aggregate rows.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
+  /JOIN students s ON (?:s\.id = a\.student_id|a\.student_id = s\.id)(?![^\n]*school_id)/,
+  'attendance/student joins must bind both student id and school id.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/globalSearchRoutes.js',
+  /JOIN students s ON c\.student_id = s\.id(?![^\n]*school_id)/,
+  'global fee search must not join a challan to a student outside its school.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/dashboardRoutes.js',
+  /JOIN students s ON s\.id = (?:a|f)\.student_id(?![^\n]*school_id)/,
+  'dashboard fact joins must bind both student id and school id.'
+)
+
 assertContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
   'const currentList = sourceRecipients',
