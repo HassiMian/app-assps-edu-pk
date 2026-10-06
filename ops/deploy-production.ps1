@@ -150,7 +150,8 @@ if ($Mode -in @('Backend', 'Both')) {
   }
 
   $archive = Join-Path $env:TEMP "assps-backend-src-$timestamp.tar"
-  Run "tar --exclude='.env' --exclude='node_modules' --exclude='uploads' --exclude='logs' -cf `"$archive`" -C `"$backendSrc`" ."
+  $backendTree = "${targetCommit}:al-siddique-backend/src"
+  Run "git -C `"$repoRoot`" archive --format=tar --output=`"$archive`" `"$backendTree`""
   CopyToRemote $archive "/tmp/assps-backend-src-$timestamp.tar"
   Remote @"
 set -e
@@ -163,7 +164,7 @@ tar -xf /tmp/assps-backend-src-$timestamp.tar -C /var/www/apex-backend/src.new-$
 cp -a /var/www/apex-backend/.env /var/www/apex-backend/src.new-$timestamp/.env
 rm -rf /var/www/apex-backend/src
 mv /var/www/apex-backend/src.new-$timestamp /var/www/apex-backend/src
-for item in server.js package.json package-lock.json config middleware routes services utils scripts; do
+for item in server.js package.json package-lock.json config middleware routes services utils scripts migrations prisma ops; do
   if [ -e "/var/www/apex-backend/src/`$item" ]; then
     rm -rf "/var/www/apex-backend/`$item"
     cp -a "/var/www/apex-backend/src/`$item" "/var/www/apex-backend/`$item"
@@ -176,7 +177,8 @@ node -c /var/www/apex-backend/middleware/auth.js
 node -c /var/www/apex-backend/routes/authRoutes.js
 PORT=5000 TRUST_PROXY=true pm2 restart apex-backend --update-env
 pm2 status --no-color
-curl -fsS http://127.0.0.1:5000/health >/dev/null
+chmod +x /var/www/apex-backend/ops/release-smoke.sh
+/var/www/apex-backend/ops/release-smoke.sh http://127.0.0.1:5000
 "@
 }
 
