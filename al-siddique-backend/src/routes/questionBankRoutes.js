@@ -1,6 +1,7 @@
 // src/routes/questionBankRoutes.js
 // Al Siddique Smart School OS - Question Bank API
 
+const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
 const { query } = require('../config/database')
@@ -26,7 +27,7 @@ function requireSchoolContext(req, res) {
 
 // Helper to generate IDs
 function generateId() {
-  return `q_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
+  return `q_${Date.now()}_${crypto.randomBytes(6).toString('hex')}`
 }
 
 // ─── 1. Get List of Questions (with filters) ──────────────────────────────────

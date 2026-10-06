@@ -527,6 +527,19 @@ assertNotContains(
   'exam result APIs must never fabricate grades or student results.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/paperRoute.js',
+  /Math\.random\(\)/,
+  'paper upload filenames must use a secure random source.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/questionBankRoutes.js',
+  /Math\.random\(\)/,
+  'question bank identifiers must use a secure random source.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

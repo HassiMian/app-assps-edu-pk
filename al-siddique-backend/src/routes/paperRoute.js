@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
@@ -60,7 +61,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_ROOT),
   filename: (req, file, cb) => {
     const safe = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')
-    cb(null, `${Date.now()}_${Math.random().toString(36).slice(2, 7)}_${safe}`)
+    cb(null, `${Date.now()}_${crypto.randomBytes(6).toString('hex')}_${safe}`)
   },
 })
 
