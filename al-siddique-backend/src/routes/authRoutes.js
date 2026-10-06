@@ -870,11 +870,11 @@ router.put('/me/profile', protect, async (req, res) => {
     const assignments = ['name = $1']
     const params = [name]
     let index = 2
-    if (await hasColumn('users', 'phone').catch(() => false)) {
+    if (await hasColumn('users', 'phone')) {
       assignments.push(`phone = $${index++}`)
       params.push(phone || null)
     }
-    if (await hasColumn('users', 'updated_at').catch(() => false)) assignments.push('updated_at = NOW()')
+    if (await hasColumn('users', 'updated_at')) assignments.push('updated_at = NOW()')
     params.push(userId)
     const result = await query(`
       UPDATE users

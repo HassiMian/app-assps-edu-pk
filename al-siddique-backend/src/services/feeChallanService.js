@@ -91,7 +91,7 @@ async function findExistingChallan({ studentId, month, year, schoolId, db = null
   if (!Number.isInteger(Number(studentId)) || Number(studentId) <= 0 || !Number.isInteger(Number(schoolId)) || Number(schoolId) <= 0) {
     throw new Error('Valid student and school context are required to find a challan.')
   }
-  const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
+  const supportsTenant = await hasColumn('fee_challans', 'school_id')
   if (!supportsTenant) {
     const error = new Error('Fee challan storage is not tenant-safe yet.')
     error.code = 'FEE_SCHEMA_NOT_TENANT_SAFE'
