@@ -20,7 +20,7 @@ async function requireStudentWriteContext(req, res) {
     res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for student changes.' })
     return null
   }
-  if (!(await hasColumn('students', 'school_id').catch(() => false))) {
+  if (!(await hasColumn('students', 'school_id'))) {
     res.status(503).json({ success: false, code: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for writes.' })
     return null
   }
@@ -342,7 +342,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const normalizedClass = academicAssignment.className
     const normalizedSection = academicAssignment.section
 
-    const studentTenantSafe = await hasColumn('students', 'school_id').catch(() => false)
+    const studentTenantSafe = await hasColumn('students', 'school_id')
     if (!studentTenantSafe) {
       return res.status(503).json({ success: false, code: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for admission writes.' })
     }
@@ -350,7 +350,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
       return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required to admit a student.' })
     }
     await ensureStudentFeeProfileSchema()
-    if (create_challan && !(await hasColumn('fee_challans', 'school_id').catch(() => false))) {
+    if (create_challan && !(await hasColumn('fee_challans', 'school_id'))) {
       return res.status(503).json({ success: false, code: 'FEE_TENANT_SCHEMA_REQUIRED', message: 'Fee storage is not tenant-safe for creating the first challan.' })
     }
 
@@ -404,7 +404,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const insertPlaceholders = []
 
     for (const [col, val] of candidateColumns) {
-      const colExists = await hasColumn('students', col).catch(() => false)
+      const colExists = await hasColumn('students', col)
       if (colExists) {
         insertCols.push(col)
         insertVals.push(val)
@@ -462,11 +462,11 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const userLinkUpdates = []
     const userLinkParams = []
     let userLinkIndex = 1
-    if (studentAccount?.user?.id && await hasColumn('students', 'student_user_id').catch(() => false)) {
+    if (studentAccount?.user?.id && await hasColumn('students', 'student_user_id')) {
       userLinkUpdates.push(`student_user_id = $${userLinkIndex++}`)
       userLinkParams.push(studentAccount.user.id)
     }
-    if (parentAccount?.user?.id && await hasColumn('students', 'parent_user_id').catch(() => false)) {
+    if (parentAccount?.user?.id && await hasColumn('students', 'parent_user_id')) {
       userLinkUpdates.push(`parent_user_id = $${userLinkIndex++}`)
       userLinkParams.push(parentAccount.user.id)
     }
@@ -588,8 +588,8 @@ router.get('/:id/portal-accounts', protect, adminOnly, async (req, res) => {
     const userIds = [student.student_user_id, student.parent_user_id].filter(Boolean)
     let users = []
     if (userIds.length) {
-      const supportsUsername = await hasColumn('users', 'username').catch(() => false)
-      const supportsLastLogin = await hasColumn('users', 'last_login').catch(() => false)
+      const supportsUsername = await hasColumn('users', 'username')
+      const supportsLastLogin = await hasColumn('users', 'last_login')
       const result = await query(`
         SELECT id, name, email, role, designation, is_active
           ${supportsUsername ? ', username' : ''}
@@ -642,7 +642,7 @@ async function provisionStudentPortalRole(req, role) {
       designation: 'Student',
       active: true,
     })
-    if (await hasColumn('students', 'student_user_id').catch(() => false)) {
+    if (await hasColumn('students', 'student_user_id')) {
       await query('UPDATE students SET student_user_id = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [account.user.id, studentId, schoolId])
     }
     return account
@@ -665,7 +665,7 @@ async function provisionStudentPortalRole(req, role) {
     phone: student.parent_phone || student.parent_whatsapp,
     active: true,
   })
-  if (await hasColumn('students', 'parent_user_id').catch(() => false)) {
+  if (await hasColumn('students', 'parent_user_id')) {
     await query('UPDATE students SET parent_user_id = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [account.user.id, studentId, schoolId])
   }
   return account
@@ -881,7 +881,7 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
     let paramIndex = 1
     const addAssignment = async (column, value) => {
       if (usedColumns.has(column)) return
-      if (!(await hasColumn('students', column).catch(() => false))) return
+      if (!(await hasColumn('students', column))) return
       usedColumns.add(column)
       assignments.push(`${column} = $${paramIndex++}`)
       values.push(value === '' ? null : value)
@@ -972,7 +972,7 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
       ['student_fee_profiles', 'student_id'],
     ]
     for (const [table, column] of cleanup) {
-      if (await hasColumn(table, column).catch(() => false)) {
+      if (await hasColumn(table, column)) {
         await client.query(`DELETE FROM ${table} WHERE ${column} = $1`, [studentId])
       }
     }
