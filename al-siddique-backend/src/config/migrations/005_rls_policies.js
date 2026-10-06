@@ -76,7 +76,7 @@ async function up() {
 
   // High-value authoring data is default-deny at the database layer.
   // Unlike legacy tables, an unset request RLS context must never become a bypass.
-  const strictTables = ['question_bank', 'question_bank_imports', 'question_masters', 'question_revisions', 'question_mappings', 'question_capture_requests', 'assessment_papers', 'assessment_paper_revisions', 'assessment_releases']
+  const strictTables = ['question_bank', 'question_bank_imports', 'question_masters', 'question_revisions', 'question_mappings', 'question_capture_requests', 'academic_sessions', 'subject_offerings', 'curriculum_profiles', 'learning_scopes', 'publishers', 'publisher_aliases', 'resource_series', 'resources', 'resource_versions', 'resource_sets', 'resource_set_items', 'resource_scope_mappings', 'curriculum_migration_runs', 'assessment_papers', 'assessment_paper_revisions', 'assessment_releases']
   for (const table of strictTables) {
     assertSafeTableName(table)
     const exists = await query('SELECT to_regclass($1) AS table_name', [`public.${table}`])
