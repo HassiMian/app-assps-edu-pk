@@ -18,6 +18,13 @@ test('Assessment persistence adversarial: offline queue recovery + two-tab confl
  const vite=await createServer({root,server:{port:5242,strictPort:true},appType:'spa'}); await vite.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']}); const context=await browser.newContext({viewport:{width:1640,height:960}})
  await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
+
+ const serverRevisions=new Map()
+ await context.route('**/api/assessment-studio/papers/**/revisions',async route=>{
+  const req=route.request(); const body=req.postDataJSON(); const parts=new URL(req.url()).pathname.split('/'); const id=decodeURIComponent(parts[4]||''); const current=serverRevisions.get(id)||0; const expected=Number(body?.expectedRevision||0);
+  if(expected!==current) return route.fulfill({status:409,contentType:'application/json',body:JSON.stringify({code:'REVISION_CONFLICT',currentRevision:current,message:'Assessment changed elsewhere.'})});
+  const next=current+1; serverRevisions.set(id,next); return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({data:{currentRevision:next,contentHash:'test-hash-'+next}})});
+ })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
 

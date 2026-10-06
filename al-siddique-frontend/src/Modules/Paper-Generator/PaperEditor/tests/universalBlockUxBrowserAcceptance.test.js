@@ -10,6 +10,7 @@ test('manual add-block menu persists canonical semantic table', {timeout:90000},
  const vite=await createServer({root,server:{port:5243,strictPort:true},appType:'spa'}); await vite.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']}); const context=await browser.newContext({viewport:{width:1640,height:960}})
  await context.addInitScript(()=>{localStorage.setItem('al_siddique_token','mock-jwt-token');localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))})
+ await context.route('**/api/assessment-studio/papers/**/revisions',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({data:{currentRevision:1,contentHash:'universal-block-test-hash'}})}))
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
  const page=await context.newPage(); page.on('dialog',d=>d.accept().catch(()=>{}))
