@@ -6,6 +6,14 @@ function getStorage() {
  }
 }
 
+function getSessionStorage() {
+ try {
+ return typeof window !== 'undefined' ? window.sessionStorage : null
+ } catch {
+ return null
+ }
+}
+
 function readAuthUser() {
  try {
  const raw = getStorage()?.getItem('al_siddique_user')
@@ -46,16 +54,18 @@ export function tenantStorageKey(baseKey, user) {
 
 export function getTenantStorageItem(baseKey, { migrateLegacy = false } = {}) {
  const storage = getStorage()
- if (!storage) return null
+ const session = getSessionStorage()
  const scopedKey = tenantStorageKey(baseKey)
- const scopedValue = storage.getItem(scopedKey)
- if (scopedValue !== null) return scopedValue
+ const emergencyValue = session?.getItem(scopedKey)
+ if (emergencyValue !== null && emergencyValue !== undefined) return emergencyValue
+ const scopedValue = storage?.getItem(scopedKey)
+ if (scopedValue !== null && scopedValue !== undefined) return scopedValue
 
  if (!migrateLegacy || scopedKey === baseKey) return null
- const legacyValue = storage.getItem(baseKey)
- if (legacyValue !== null) {
- try { storage.setItem(scopedKey, legacyValue) } catch {}
- return legacyValue
+ const legacyValue = storage?.getItem(baseKey) ?? session?.getItem(baseKey)
+ if (legacyValue !== null && legacyValue !== undefined) {
+  try { storage?.setItem(scopedKey, legacyValue) } catch { try { session?.setItem(scopedKey, legacyValue) } catch {} }
+  return legacyValue
  }
 
  return null
@@ -63,12 +73,27 @@ export function getTenantStorageItem(baseKey, { migrateLegacy = false } = {}) {
 
 export function setTenantStorageItem(baseKey, value) {
  const storage = getStorage()
- if (!storage) return
- storage.setItem(tenantStorageKey(baseKey), value)
+ const session = getSessionStorage()
+ const key = tenantStorageKey(baseKey)
+ if (!storage) {
+  if (!session) return null
+  session.setItem(key, value)
+  return 'session'
+ }
+ try {
+  storage.setItem(key, value)
+  try { session?.removeItem(key) } catch {}
+  return 'local'
+ } catch (error) {
+  const quota = error?.name === 'QuotaExceededError' || error?.name === 'NS_ERROR_DOM_QUOTA_REACHED' || error?.code === 22 || error?.code === 1014
+  if (!quota || !session) throw error
+  session.setItem(key, value)
+  return 'session'
+ }
 }
 
 export function removeTenantStorageItem(baseKey) {
- const storage = getStorage()
- if (!storage) return
- storage.removeItem(tenantStorageKey(baseKey))
+ const key = tenantStorageKey(baseKey)
+ try { getStorage()?.removeItem(key) } catch {}
+ try { getSessionStorage()?.removeItem(key) } catch {}
 }
