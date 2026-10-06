@@ -84,7 +84,7 @@ function saveBase64Image(base64Str, schoolId, type = 'logo') {
     return `/uploads/${fileName}`;
   } catch (error) {
     console.error('Failed to save base64 image:', error);
-    return base64Str;
+    throw error;
   }
 }
 
@@ -657,8 +657,11 @@ router.get('/public', async (req, res) => {
     const requestedSchoolId = Number(req.query.school_id || req.query.schoolId)
     const requestedSchoolCode = String(req.query.school_code || req.query.schoolCode || '').trim()
     const hasExplicitSchoolRef = Boolean(requestedSchoolCode || (Number.isInteger(requestedSchoolId) && requestedSchoolId > 0))
+    if (!hasExplicitSchoolRef) {
+      return res.status(400).json({ success: false, message: 'school_id or school_code is required.' })
+    }
     const schoolQuery = requestedSchoolCode ? 'code' : 'id'
-    const schoolValue = requestedSchoolCode || (Number.isInteger(requestedSchoolId) && requestedSchoolId > 0 ? requestedSchoolId : 1)
+    const schoolValue = requestedSchoolCode || requestedSchoolId
 
     let school = null
     try {
@@ -690,7 +693,7 @@ router.get('/public', async (req, res) => {
     if (!school && !branchSchoolId && hasExplicitSchoolRef) {
       return res.status(404).json({ success: false, message: 'School not found.' })
     }
-    const settingsSchoolId = school ? school.id : (branchSchoolId || 1)
+    const settingsSchoolId = school ? school.id : branchSchoolId
     const result = await query(
       'SELECT school_name, school_address, school_phone, school_email, school_logo, principal_name, school_urdu, show_urdu_on_login, superapp_modules, branding_config FROM settings WHERE school_id = $1 LIMIT 1',
       [settingsSchoolId]

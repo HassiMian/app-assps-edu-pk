@@ -2116,3 +2116,20 @@ assertContains(
   'IMAGE_EXTENSION_BY_MIME[file.mimetype]',
   'generic image uploads must choose stored extensions from the accepted MIME type.'
 )
+
+assertContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  "school_id or school_code is required.",
+  'public school settings must require explicit tenant/school context.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  /branchSchoolId \|\| 1|requestedSchoolId : 1/,
+  'public settings must never fall open to school 1.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  /Failed to save base64 image:[\s\S]{0,100}return base64Str/,
+  'branding image persistence failures must fail closed instead of storing the original data URI.'
+)
