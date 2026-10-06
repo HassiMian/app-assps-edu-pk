@@ -52,3 +52,14 @@ test('current science provider access failures remain separate from official cat
   const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);assert.match(e.questionGenerationStatus,/^BLOCKED/);
  }
 });
+
+test('Grade X current catalogue refresh preserves unresolved medium/session facts explicitly',()=>{
+ for(const rid of ['pectaa-catalog-015','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-018','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-021','pectaa-catalog-022','pectaa-catalog-023','pectaa-catalog-024','pectaa-catalog-025']){
+  const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);assert.match(e.questionGenerationStatus,/^BLOCKED/);
+ }
+ assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-017').medium,'UNSPECIFIED_BY_CATALOG_LABEL');
+ assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-024').medium,'UNSPECIFIED_BY_CATALOG_LABEL');
+ assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-025').medium,'UNSPECIFIED_BY_CATALOG_LABEL');
+ assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-018').edition,'CURRENT_CATALOG_LABEL_NO_SESSION');
+ assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-019').edition,'CURRENT_CATALOG_LABEL_NO_SESSION');
+});

@@ -312,10 +312,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1rvX2aIfWwwH_N7V4jsGwMmkpwteDlUmB/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1rvX2aIfWwwH_N7V4jsGwMmkpwteDlUmB/view?usp=drive_link",
+      "providerAccessState": "SIGN_IN_PAGE",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-016",
@@ -331,10 +333,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1DIhnZpXMa_5-GiS4KLq9B0ITTAOnPlr4/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1DIhnZpXMa_5-GiS4KLq9B0ITTAOnPlr4/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-017",
@@ -342,7 +346,7 @@
       "stream": "Compulsory",
       "subject": "Mathematics",
       "edition": "2026-27",
-      "medium": "VERIFY",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Mthematics 10(2026-27)",
       "pdfUrl": null,
       "pdfSha256": null,
@@ -350,17 +354,19 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1oiEZlsGqnwvAzHgB8Yp1RWi6AnvJ-UE1/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1oiEZlsGqnwvAzHgB8Yp1RWi6AnvJ-UE1/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-018",
       "grade": 10,
       "stream": "Compulsory",
       "subject": "Pakistan Studies",
-      "edition": "VERIFY",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "Urdu",
       "catalogLabel": "Mutalia Pakistan 10 UM",
       "pdfUrl": null,
@@ -369,17 +375,19 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1HeCYkhQimYehdXb6R4vEisIa3qUQtsTt/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1HeCYkhQimYehdXb6R4vEisIa3qUQtsTt/view?usp=drive_link",
+      "providerAccessState": "PROVIDER_503_ON_CHECK",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-019",
       "grade": 10,
       "stream": "Compulsory",
       "subject": "Pakistan Studies",
-      "edition": "VERIFY",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "English",
       "catalogLabel": "Pakistan Studies 10 EM",
       "pdfUrl": null,
@@ -388,10 +396,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1-4tyA97RPFni6fju0-vTA_w1thjBjtVs/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1-4tyA97RPFni6fju0-vTA_w1thjBjtVs/view?usp=sharing",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-020",
@@ -407,10 +417,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1-8TsnRfFOQ3JxAT9QXsBGH4Xf5fquZEo/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1-8TsnRfFOQ3JxAT9QXsBGH4Xf5fquZEo/view?usp=sharing",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-021",
@@ -426,10 +438,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/10Vy5cqKK9eAlv9k-zW6jqjmTJZngUAk-/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/10Vy5cqKK9eAlv9k-zW6jqjmTJZngUAk-/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-022",
@@ -445,10 +459,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1O30gCpTFypPnG8BR8fsFmYrxEWXOzS17/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1O30gCpTFypPnG8BR8fsFmYrxEWXOzS17/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-023",
@@ -464,10 +480,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1uJ52QDD3klP-CwbfXWHlV_d4Y4aTJws5/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1uJ52QDD3klP-CwbfXWHlV_d4Y4aTJws5/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-024",
@@ -475,7 +493,7 @@
       "stream": "Science",
       "subject": "Physics",
       "edition": "2026-27",
-      "medium": "VERIFY",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Physics 10 (2026-27)",
       "pdfUrl": null,
       "pdfSha256": null,
@@ -483,10 +501,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1BqP9RHrXtqCpZZ1soQcyvJ90ACUSAWar/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1BqP9RHrXtqCpZZ1soQcyvJ90ACUSAWar/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-025",
@@ -494,7 +514,7 @@
       "stream": "Science",
       "subject": "Computer Science",
       "edition": "2026-27",
-      "medium": "VERIFY",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Computer Science 10 (2026-27)",
       "pdfUrl": null,
       "pdfSha256": null,
@@ -502,10 +522,12 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
+      "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1bfJ7yeruNQ-dKlYeMtCNua2t4k3QbxBU/view?usp=drive_link"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1bfJ7yeruNQ-dKlYeMtCNua2t4k3QbxBU/view?usp=drive_link",
+      "providerAccessState": "AUTH_REQUIRED_OR_401",
+      "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content."
     },
     {
       "recordId": "pectaa-catalog-026",
