@@ -22,7 +22,7 @@ export default function ProfilePage() {
  const [profile, setProfile] = useState(() => ({ name:user?.name || '', phone:user?.phone || '' }))
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
- const [passwords, setPasswords] = useState({ next:'', confirm:'' })
+ const [passwords, setPasswords] = useState({ current:'', next:'', confirm:'' })
  const [passwordMessage, setPasswordMessage] = useState('')
  const [changingPassword, setChangingPassword] = useState(false)
 
@@ -45,8 +45,8 @@ export default function ProfilePage() {
  if (passwords.next !== passwords.confirm) return setPasswordMessage('Passwords do not match.')
  setChangingPassword(true)
  try {
- await api.post('/api/auth/change-password', { newPassword:passwords.next })
- setPasswords({ next:'', confirm:'' })
+ await api.post('/api/auth/me/password', { currentPassword:passwords.current, newPassword:passwords.next })
+ setPasswords({ current:'', next:'', confirm:'' })
  setPasswordMessage('Password changed successfully.')
  } catch (err) {
  setPasswordMessage(err.response?.data?.message || 'Password could not be changed.')
@@ -78,6 +78,7 @@ export default function ProfilePage() {
  <form onSubmit={changePassword} style={{ ...surface,padding:22,display:'grid',gap:16,alignContent:'start' }}>
  <div style={{ display:'flex',alignItems:'center',gap:10 }}><KeyRound size={19} color="var(--apex-action-highlight)"/><h2 style={{ margin:0,fontSize:18 }}>Security</h2></div>
  <p style={{ margin:0,color:'var(--apex-text-tertiary)',fontSize:13,lineHeight:1.6 }}>Set a new password for this server account. Temporary/local browser passwords are not used.</p>
+ <div><label style={label}>Current Password</label><input style={input} type="password" autoComplete="current-password" value={passwords.current} onChange={e=>setPasswords({...passwords,current:e.target.value})} required /></div>
  <div><label style={label}>New Password</label><input style={input} type="password" autoComplete="new-password" value={passwords.next} onChange={e=>setPasswords({...passwords,next:e.target.value})} required minLength={8}/></div>
  <div><label style={label}>Confirm Password</label><input style={input} type="password" autoComplete="new-password" value={passwords.confirm} onChange={e=>setPasswords({...passwords,confirm:e.target.value})} required minLength={8}/></div>
  <button style={primary} disabled={changingPassword}>{changingPassword?'Updating…':'Change Password'}</button>

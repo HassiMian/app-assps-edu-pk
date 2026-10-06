@@ -1116,6 +1116,31 @@ router.put('/users/password', protect, async (req, res) => {
   }
 })
 
+router.post('/me/password', protect, async (req, res) => {
+  try {
+    const userId = Number(req.user?.id)
+    const currentPassword = String(req.body?.currentPassword || '')
+    const newPassword = String(req.body?.newPassword || '')
+    if (!Number.isInteger(userId) || userId <= 0) return sendJson(res, 401, { message: 'Unauthorized user.' })
+    if (!currentPassword || !newPassword) return sendJson(res, 400, { message: 'Current and new passwords are required.' })
+    if (newPassword.length < 8) return sendJson(res, 400, { message: 'New password must be at least 8 characters long.' })
+    if (currentPassword === newPassword) return sendJson(res, 400, { message: 'New password must be different from the current password.' })
+
+    const result = await query('SELECT id, password FROM users WHERE id = $1 AND is_active = true LIMIT 1', [userId])
+    const user = result.rows[0]
+    if (!user) return sendJson(res, 404, { message: 'User account was not found.' })
+    const valid = await bcrypt.compare(currentPassword, user.password)
+    if (!valid) return sendJson(res, 400, { message: 'Current password is incorrect.' })
+
+    const hashed = await bcrypt.hash(newPassword, 12)
+    await query('UPDATE users SET password = $1, must_change_password = false WHERE id = $2', [hashed, userId])
+    return sendJson(res, 200, { success:true, message:'Password changed successfully.' })
+  } catch (err) {
+    console.error('Self password change error:', err.message)
+    return sendJson(res, 500, { message: 'Password could not be changed.' })
+  }
+})
+
 router.post('/change-password', protect, async (req, res) => {
   try {
     const { newPassword } = req.body;
