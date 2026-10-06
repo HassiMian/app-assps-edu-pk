@@ -12,6 +12,7 @@ import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.j
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
+let quotaFallbackNotified = false
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
 const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V24_UNIVERSAL_PAPER_SYSTEM'
@@ -547,7 +548,11 @@ function saveStore(data) {
   const storage = getStorage()
   if (!storage) return false
   try { 
-    setTenantStorageItem(STORE_KEY, JSON.stringify(data)) 
+    const mode = setTenantStorageItem(STORE_KEY, JSON.stringify(data))
+    if (mode === 'session' && !quotaFallbackNotified) {
+      quotaFallbackNotified = true
+      alert('Browser storage is full. Your server copy remains authoritative and this tab is using emergency session recovery until space is freed.')
+    }
     return true
   } catch (e) {
     console.error('Failed to save to local storage:', e)

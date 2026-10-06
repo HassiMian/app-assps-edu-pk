@@ -949,6 +949,23 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
     if (!silent) alert('SAVE CONFLICT — this paper changed in another tab. Your local edits were preserved and were not allowed to overwrite the newer server revision.')
     return localConflict
    }
+   if (error?.response?.status === 401 || error?.response?.status === 403) {
+    const authPayload = {
+     ...paper,
+     name:loadedPaper?.name || name,
+     config:{ ...(loadedPaper?.config||{}), ...cfg },
+     selectedMCQ:paper.mcq || [], selectedShort:paper.short || [], selectedLong:paper.long || [], selectedQuestions,
+     editorSettings:editorState,
+     canonicalDocument, canonicalAuthority:'PaperDocumentV2', serverPaperId,
+     serverRevision:expectedRevision, serverContentHash:paper.serverContentHash || loadedPaper?.serverContentHash || null,
+     persistenceAuthority:'LOCAL_RECOVERY_AUTH_REQUIRED', persistenceMode:'AUTH_REQUIRED', authRecoveryRequired:true,
+    }
+    const localAuth = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, authPayload) : savePaper(authPayload)
+    if (localAuth?.id) persistedPaperIdRef.current = localAuth.id
+    setPersistenceNotice('Session expired — local recovery copy preserved. Sign in again to sync with the server.')
+    if (!silent) alert('SESSION EXPIRED — your current edits were preserved locally. Sign in again before finalizing or printing this assessment.')
+    return localAuth
+   }
    throw error
   }
  }
