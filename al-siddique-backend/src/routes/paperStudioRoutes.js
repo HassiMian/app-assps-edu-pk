@@ -10,6 +10,7 @@ const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPub
 const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPublisherPromotionEnvelopeV6G10')
 const { verifyPublisherDetachedSignature } = require('../services/papers/paperPublisherDetachedSignatureV6G11')
 const { validatePublisherApprovalDecision } = require('../services/papers/paperPublisherApprovalDecisionV6G12')
+const { buildPublisherApprovalActivationPreflight } = require('../services/papers/paperPublisherApprovalActivationPreflightV6G13')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
@@ -40,6 +41,23 @@ router.get('/canonical-readiness', async (req,res) => {
 
 
 
+
+
+router.post('/publisher-review/approval-activation-precheck', express.json({limit:'512kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const body=req.body||{}
+    const data=await buildPublisherApprovalActivationPreflight(body.reviewBundle||{},body.signature||{},body.approval||{}, {grade:9,subject:'Biology',forbidReviewerIds:[req.user?.id],forbidApproverIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,persisted:false,envChanged:false,approvalFlagChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio publisher approval activation precheck error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PUBLISHER_APPROVAL_ACTIVATION_PRECHECK_FAILED',message:status>=500?'Publisher approval activation precheck could not be verified.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
 
 router.post('/publisher-review/approval-decision-validate', express.json({limit:'512kb'}), async (req,res) => {
   try {
