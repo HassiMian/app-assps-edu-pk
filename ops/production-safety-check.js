@@ -540,6 +540,25 @@ assertNotContains(
   'question bank identifiers must use a secure random source.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  "router.delete('/:id', protect, canManageExams",
+  'exam deletion must be persisted through a protected backend workflow.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
+  /setExams\(prev => prev\.filter\(item => item\.id !== exam\.id\)\)\}\}\s*style/,
+  'exam delete controls must not remove rows only from browser state.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
+  /new Date\(\)\.getFullYear\(\).*getFullYear|SECTIONS\.map/,
+  'examination workspace must use configured session and class-specific sections.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

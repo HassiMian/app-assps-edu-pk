@@ -1,6 +1,6 @@
 const express = require('express')
 const router  = express.Router()
-const { query } = require('../config/database')
+const { pool, query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tenant')
 
@@ -187,6 +187,37 @@ router.post('/', protect, canManageExams, async (req, res) => {
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
     res.status(500).json({ success: false, message: err.message })
+  }
+})
+
+// DELETE /api/exams/:id — remove one exam and its result rows atomically
+router.delete('/:id', protect, canManageExams, async (req, res) => {
+  const examId = Number(req.params.id)
+  if (!Number.isInteger(examId) || examId <= 0) {
+    return res.status(400).json({ success: false, message: 'Valid exam id is required.' })
+  }
+  const client = await pool.connect()
+  try {
+    const schoolId = currentSchoolId(req)
+    const supportsTenant = await hasColumn('exams', 'school_id')
+    await client.query('BEGIN')
+    const lookup = supportsTenant && req.user?.role !== 'super_admin'
+      ? await client.query('SELECT id, name FROM exams WHERE id = $1 AND school_id = $2 LIMIT 1', [examId, schoolId])
+      : await client.query('SELECT id, name FROM exams WHERE id = $1 LIMIT 1', [examId])
+    if (!lookup.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Exam not found.' })
+    }
+    await client.query('DELETE FROM exam_results WHERE exam_id = $1', [examId])
+    await client.query('DELETE FROM exams WHERE id = $1', [examId])
+    await client.query('COMMIT')
+    return res.json({ success: true, message: 'Exam deleted successfully.', data: { id: examId, name: lookup.rows[0].name } })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Exam delete error:', err.message)
+    return res.status(500).json({ success: false, message: 'Exam could not be deleted.' })
+  } finally {
+    client.release()
   }
 })
 

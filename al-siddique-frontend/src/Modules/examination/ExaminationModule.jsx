@@ -132,9 +132,8 @@ function printExamResultCard({ student, marks, subjects, examName, totalMarks = 
 }
 
 function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
- const fallbackSession = `${new Date().getFullYear()}-${new Date().getFullYear()+1}`;
- const sessions = sessionOptions.length ? sessionOptions : [fallbackSession];
- const [form, setForm] = useState({ name:'', type:'TE', date:'', session:sessions[0] });
+ const sessions = sessionOptions.filter(Boolean);
+ const [form, setForm] = useState({ name:'', type:'TE', date:'', session:sessions[0] || '', total_marks:'', pass_marks:'' });
  const set = (key, value) => setForm(prev => ({ ...prev, [key]: value }));
  const labelStyle = { color: 'var(--apex-text-tertiary)', fontSize: 12, fontWeight: 600, marginBottom: 8, display: 'block', textTransform: 'uppercase', letterSpacing: 0.6 };
  const fieldStyle = { width:'100%', padding:'12px 14px', borderRadius:12, background:'var(--apex-bg-surface-solid)', border: '1px solid var(--apex-border-default)', color: 'var(--apex-text-primary)', fontSize: 14, outline: 'none' };
@@ -161,12 +160,14 @@ function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
  </div>
  </div>
  <div><label style={labelStyle}>Exam Date</label><input type="date" style={fieldStyle} value={form.date} onChange={e => set('date', e.target.value)} /></div>
- <div><label style={labelStyle}>Session</label><select style={fieldStyle} value={form.session} onChange={e => set('session', e.target.value)}>{sessions.map(session => <option key={session}>{session}</option>)}</select></div>
+ <div><label style={labelStyle}>Session</label><select style={fieldStyle} value={form.session} onChange={e => set('session', e.target.value)}><option value="">Select session</option>{sessions.map(session => <option key={session}>{session}</option>)}</select></div>
+ <div><label style={labelStyle}>Total Marks</label><input type="number" min="1" style={fieldStyle} value={form.total_marks} onChange={e => set('total_marks', e.target.value)} /></div>
+ <div><label style={labelStyle}>Passing Marks</label><input type="number" min="0" max={form.total_marks || undefined} style={fieldStyle} value={form.pass_marks} onChange={e => set('pass_marks', e.target.value)} /></div>
  </div>
 
  <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
  <button onClick={onClose} style={{ ...btnSecondary, flex: 1, justifyContent: 'center' }}>Cancel</button>
- <button onClick={() => { if (form.name && form.date) { onAdd({ ...form, id: Date.now() }); onClose(); } }} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Plus size={16} />Add Exam</button>
+ <button onClick={() => { const total=Number(form.total_marks); const pass=Number(form.pass_marks); if (form.name && form.date && form.session && total>0 && pass>=0 && pass<=total) { onAdd(form); onClose(); } }} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Plus size={16} />Add Exam</button>
  </div>
  </div>
  </div>,
@@ -248,7 +249,7 @@ function ResultCard({ student, marks, subjects, examName, totalMarks = 100, pass
 }
 
 export default function ExaminationModule() {
- const { classNames: CLASSES, sectionsForClass, subjectsForClass, subjects: rawSubjects, activeClasses } = useAcademicStore();
+ const { classNames: CLASSES, sectionsForClass, subjectsForClass, subjects: rawSubjects, activeClasses, sessionStart, sessionEnd } = useAcademicStore();
  const location = useLocation();
  const navigate = useNavigate();
  const [exams, setExams] = useState([]);
@@ -333,6 +334,17 @@ export default function ExaminationModule() {
  }
  };
 
+ const deleteExam = async (exam) => {
+ if (!exam?.id || !window.confirm(`Delete ${exam.name}? Its saved result rows will also be removed.`)) return;
+ try {
+ await api.delete(`/api/exams/${exam.id}`);
+ setExams(prev => prev.filter(item => item.id !== exam.id));
+ if (selectedExam?.id === exam.id) setSelectedExam(null);
+ } catch (err) {
+ console.error('Failed to delete exam', err);
+ }
+ };
+
  const tabs = [
  { key: 'exams', label: 'Manage Exams', icon: <Trophy size={14} />, path: '/examination/manage' },
  { key: 'marks', label: 'Enter Marks', icon: <Bookmark size={14} />, path: '/examination/marks' },
@@ -342,8 +354,9 @@ export default function ExaminationModule() {
 
  const resultsData = filteredStudents.map(student => {
  const total = subjects.reduce((sum, subject) => sum + (parseInt(marks[student.id]?.[subject]) || 0), 0);
- const pct = Math.round((total / (subjects.length * 100)) * 100);
- const grade = getGrade(pct);
+ const perSubjectTotal = Math.max(1, Number(selectedExam?.total_marks) || 1);
+ const pct = subjects.length ? Math.round((total / (subjects.length * perSubjectTotal)) * 100) : 0;
+ const grade = getGrade(pct, gradeBands);
  return { student, total, pct, grade };
  });
 
@@ -351,9 +364,8 @@ export default function ExaminationModule() {
  const examTypeCounts = exams.reduce((acc, e) => { acc[e.type] = (acc[e.type] || 0) + 1; return acc; }, {});
  const uniqueTypes = [...new Set(exams.map(e => e.type))].length;
  const totalSubjectsCount = rawSubjects.length;
- const examSessionOptions = [...new Set(exams.map(exam => exam.session).filter(Boolean))];
- const currentSession = `${new Date().getFullYear()}-${new Date().getFullYear()+1}`;
- if (!examSessionOptions.includes(currentSession)) examSessionOptions.unshift(currentSession);
+ const activeSession = sessionStart && sessionEnd ? `${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)}` : '';
+ const examSessionOptions = [...new Set([activeSession, ...exams.map(exam => exam.session)].filter(Boolean))];
 
  const subjectPerClassBars = activeClasses
  .map((cls, i) => ({
@@ -438,13 +450,13 @@ export default function ExaminationModule() {
 
 
 
- <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', background: 'rgba(7,30,52,0.55)', borderRadius: 20, padding: 6 }}>
+ <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', background: 'var(--apex-bg-subtle)', borderRadius: 20, padding: 6 }}>
  {tabs.map(item => (
  <button key={item.key} onClick={() => navigate(item.path)} style={{
  display: 'flex', alignItems: 'center', gap: 8,
  padding: '12px 18px', borderRadius: 14, border: 'none', cursor: 'pointer',
- color: activeTab === item.key ? '#071e34' : '#C0C8D8',
- background: activeTab === item.key ? 'linear-gradient(135deg,#C8991A,#e8b420)' : 'transparent',
+ color: activeTab === item.key ? '#fff' : 'var(--apex-text-secondary)',
+ background: activeTab === item.key ? 'var(--apex-action-primary)' : 'transparent',
  fontWeight: 700,
  }}>
  {item.icon} {item.label}
@@ -464,7 +476,7 @@ export default function ExaminationModule() {
  {exam.type === 'TE' ? 'Term Exam' : 'Assessment'}
  </div>
  <button onClick={() => { setSelectedExam(exam); navigate('/examination/marks'); }} style={btnSecondary}>Enter Marks</button>
- <button onClick={() => setExams(prev => prev.filter(item => item.id !== exam.id))} style={{ ...btnSecondary, background: 'rgba(255,55,95,0.12)', color: '#FF375F' }}>Delete</button>
+ <button onClick={() => void deleteExam(exam)} style={{ ...btnSecondary, background: 'color-mix(in srgb,var(--apex-action-danger) 9%,var(--apex-bg-surface-solid))', color: 'var(--apex-action-danger)' }}>Delete</button>
  </div>
  )) : (
  <div className="super-module-card" style={{ ...cardStyle, padding: 40, textAlign: 'center' }}>
@@ -486,7 +498,7 @@ export default function ExaminationModule() {
  {CLASSES.map(cls => <option key={cls}>{cls}</option>)}
  </select>
  <select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} style={selectStyle}>
- {SECTIONS.map(sec => <option key={sec}>{sec}</option>)}
+ {sectionsForClass(selectedClass).map(sec => <option key={sec}>{sec}</option>)}
  </select>
  </div>
 
@@ -633,14 +645,14 @@ export default function ExaminationModule() {
  session: exam.session,
  start_date: exam.date,
  end_date: exam.date,
- total_marks: 100,
- pass_marks: 33,
+ total_marks: Number(exam.total_marks),
+ pass_marks: Number(exam.pass_marks),
  });
  const savedExam = response.data?.data;
  if (savedExam) { setExams(prev => [savedExam, ...prev]); setSelectedExam(savedExam); }
  } catch (err) { console.error('Failed to create exam', err); }
  }} />}
- {viewCard && <ResultCard student={viewCard} marks={marks} subjects={subjects} examName={selectedExam?.name || 'Exam'} totalMarks={selectedExam?.total_marks || 100} passMarks={selectedExam?.pass_marks || 33} gradeBands={gradeBands} onClose={() => setViewCard(null)} />}
+ {viewCard && <ResultCard student={viewCard} marks={marks} subjects={subjects} examName={selectedExam?.name || 'Exam'} totalMarks={selectedExam?.total_marks} passMarks={selectedExam?.pass_marks} gradeBands={gradeBands} onClose={() => setViewCard(null)} />}
  </div>
  );
 }
