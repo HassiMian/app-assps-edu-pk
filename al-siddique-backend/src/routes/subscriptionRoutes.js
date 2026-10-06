@@ -422,17 +422,28 @@ router.post('/:id/reject', protect, requireRoles('super_admin'), async (req, res
       WHERE id = $2
     `, [rejectionReason, requestId])
 
-    // Send Rejection Email
-    await sendRejectionEmail({
+    // Notification is a separate side effect: rejection can succeed even when email delivery does not.
+    const emailResult = await sendRejectionEmail({
       ownerName: request.owner_name,
       schoolName: request.school_name,
       email: request.email,
       reason: rejectionReason
     }).catch(err => {
       console.error('⚠️ Rejection email send failed. Error:', err.message)
+      return { success: false, delivered: false, method: 'exception', error: err.message }
     })
 
-    res.json({ success: true, message: 'Subscription request rejected and notification emailed successfully.' })
+    const notificationDelivered = emailResult?.delivered === true
+    res.json({
+      success: true,
+      message: notificationDelivered
+        ? 'Subscription request rejected and notification email delivered.'
+        : 'Subscription request rejected, but notification email delivery was not confirmed.',
+      notification: {
+        delivered: notificationDelivered,
+        method: emailResult?.method || null
+      }
+    })
   } catch (err) {
     console.error('Rejection request failed:', err.message)
     res.status(500).json({ success: false, message: 'Failed to reject subscription request.' })

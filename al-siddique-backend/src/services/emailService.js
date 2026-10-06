@@ -1,5 +1,5 @@
 // src/services/emailService.js
-// SMTP email service with fallback logging to prevent execution crashes
+// SMTP email service. Local fallback logging is diagnostic only and never counts as delivery.
 
 const fs = require('fs')
 const path = require('path')
@@ -8,7 +8,7 @@ let nodemailer = null
 try {
   nodemailer = require('nodemailer')
 } catch (err) {
-  console.warn('⚠️ nodemailer is not installed. Outbound emails will use local logging fallback.')
+  console.warn('⚠️ nodemailer is not installed. Outbound emails cannot be delivered; attempts will be logged locally.')
 }
 
 // Log directory configuration
@@ -42,7 +42,7 @@ ${html}
 }
 
 /**
- * Sends email using SMTP if configured, or falls back to file logging
+ * Sends email using SMTP when configured. Local logging preserves diagnostics but is never reported as delivery.
  */
 async function sendEmail({ to, subject, text, html }) {
   const host = process.env.SMTP_HOST
@@ -54,9 +54,13 @@ async function sendEmail({ to, subject, text, html }) {
   const isSmtpConfigured = host && user && pass
 
   if (!nodemailer || !isSmtpConfigured) {
-    // Falls back gracefully
     logEmailFallback(to, subject, text, html)
-    return { success: true, method: 'fallback_logger' }
+    return {
+      success: false,
+      delivered: false,
+      method: 'fallback_logger',
+      error: !nodemailer ? 'EMAIL_PROVIDER_UNAVAILABLE' : 'SMTP_NOT_CONFIGURED'
+    }
   }
 
   try {
@@ -79,11 +83,11 @@ async function sendEmail({ to, subject, text, html }) {
     })
 
     console.log(`✉️ Email sent successfully via SMTP: ${info.messageId}`)
-    return { success: true, method: 'smtp', messageId: info.messageId }
+    return { success: true, delivered: true, method: 'smtp', messageId: info.messageId }
   } catch (err) {
-    console.error('❌ SMTP send failed. Falling back to log file. Error:', err.message)
+    console.error('❌ SMTP send failed. Attempt logged locally; delivery not confirmed. Error:', err.message)
     logEmailFallback(to, subject, text, html)
-    return { success: true, method: 'fallback_logger_after_error', error: err.message }
+    return { success: false, delivered: false, method: 'fallback_logger_after_error', error: err.message }
   }
 }
 

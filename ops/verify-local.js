@@ -54,6 +54,11 @@ if (process.platform === 'win32') {
   console.log('PASS syntax: ops/deploy-production.ps1')
 }
 run('ops regression', ['--test', ...sources(path.join(root, 'ops/tests')).filter(file => file.endsWith('.test.js'))])
+run('backend pure integrity', ['--test',
+  path.join(root, 'al-siddique-backend/src/tests/academic-assignment-guard.test.js'),
+  path.join(root, 'al-siddique-backend/src/tests/academic-setup-validation.test.js'),
+  path.join(root, 'al-siddique-backend/src/tests/email-delivery-truth.test.js'),
+])
 const npmCli = process.env.npm_execpath
 if (!npmCli || !fs.existsSync(npmCli)) {
   console.error('Run through npm run verify:local so the installed npm CLI can be resolved.')

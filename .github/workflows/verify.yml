@@ -53,7 +53,7 @@ jobs:
         working-directory: al-siddique-frontend
 
       - name: Pure academic validation tests
-        run: node --test tests/academic-assignment-guard.test.js tests/academic-setup-validation.test.js
+        run: node --test tests/academic-assignment-guard.test.js tests/academic-setup-validation.test.js tests/email-delivery-truth.test.js
         working-directory: al-siddique-backend/src
 
       - name: Full local verification
