@@ -1684,6 +1684,25 @@ assertContains(
   'student fee profile operations must fail closed when migration 007 is missing.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'ON CONFLICT DO NOTHING',
+  'fee challan creation must handle duplicate races atomically at the database boundary.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  "code: 'CHALLAN_EXISTS'",
+  'single challan duplicate conflicts must return an explicit conflict contract.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /CH-\$\{Date\.now\(\)\.toString\(\)\.slice/,
+  'challan numbers must not rely on timestamp-only uniqueness.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

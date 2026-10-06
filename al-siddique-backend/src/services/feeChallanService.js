@@ -101,7 +101,7 @@ async function findExistingChallan({ studentId, month, year, schoolId, db = null
     `SELECT f.*, s.name, s.gr_number, s.class, s.section, s.father_name, s.parent_phone
      FROM fee_challans f
      JOIN students s ON f.student_id = s.id AND s.school_id = f.school_id
-     WHERE f.student_id = $1 AND f.month = $2 AND f.year = $3 AND f.school_id = $4
+     WHERE f.student_id = $1 AND LOWER(TRIM(f.month)) = LOWER(TRIM($2)) AND f.year = $3 AND f.school_id = $4
      LIMIT 1`,
     [studentId, month, year, schoolId]
   )

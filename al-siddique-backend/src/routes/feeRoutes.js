@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const express = require('express')
 const router  = express.Router()
 const { pool, query } = require('../config/database')
@@ -6,6 +7,12 @@ const { tenantClause, currentSchoolId, hasColumn } = require('../middleware/tena
 const { findExistingChallan } = require('../services/feeChallanService')
 const { DEFAULT_ACADEMIC_SETUP } = require('../services/academicSetupService')
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
+
+function generateChallanNumber() {
+  const timePart = Date.now().toString(36).slice(-7).toUpperCase()
+  const randomPart = crypto.randomBytes(3).toString('hex').toUpperCase()
+  return `CH-${timePart}-${randomPart}`
+}
 
 async function requireFeeWriteContext(req, res) {
   const schoolId = currentSchoolId(req)
@@ -549,12 +556,12 @@ router.post('/', protect, adminOnly, async (req, res) => {
     await ensureFeePaymentColumns()
     await ensureFeeSystemSchema()
     const { student_id, month, year, amount, due_date, created_by, discount, previous_arrears } = req.body
-    const challan_no = `CH-${Date.now().toString().slice(-8)}`
+    const challan_no = generateChallanNumber()
     const schoolId = await requireFeeWriteContext(req, res)
     if (!schoolId) return
     const duplicateSql = `
       SELECT id FROM fee_challans
-      WHERE student_id = $1 AND month = $2 AND year = $3 AND school_id = $4
+      WHERE student_id = $1 AND LOWER(TRIM(month)) = LOWER(TRIM($2)) AND year = $3 AND school_id = $4
       LIMIT 1
     `
     const duplicateParams = [student_id, month, year, schoolId]
@@ -605,12 +612,26 @@ router.post('/', protect, adminOnly, async (req, res) => {
         discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
         discount_package_id, discount_label
       )
-      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
+      ON CONFLICT DO NOTHING
+      RETURNING *
     `, [
       schoolId, challan_no, student_id, month, year, grossTotal, due_date, creatorId,
       finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
       autoDiscount.packageId, autoDiscount.label,
     ])
+
+    if (!result.rows[0]) {
+      const existing = await findExistingChallan({
+        studentId: Number(student_id), month, year: Number(year), schoolId,
+      })
+      return res.status(409).json({
+        success: false,
+        code: 'CHALLAN_EXISTS',
+        message: 'A challan already exists for this student and month.',
+        data: existing,
+      })
+    }
 
     if (autoDiscount.packageId && result.rows[0]?.id) {
       await query(`
@@ -658,7 +679,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     const configuredMonthly = await getClassMonthlyFee(schoolId, className, session)
 
     for (const student of studentsResult.rows) {
-      const duplicateSql = 'SELECT id FROM fee_challans WHERE student_id = $1 AND month = $2 AND year = $3 AND school_id = $4 LIMIT 1'
+      const duplicateSql = 'SELECT id FROM fee_challans WHERE student_id = $1 AND LOWER(TRIM(month)) = LOWER(TRIM($2)) AND year = $3 AND school_id = $4 LIMIT 1'
       const duplicateParams = [student.id, month, year, schoolId]
       const duplicate = await query(duplicateSql, duplicateParams)
       
@@ -667,7 +688,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
         continue
       }
 
-      const challan_no = `CH-${Date.now().toString().slice(-8)}-${student.id}`
+      const challan_no = generateChallanNumber()
       const arrears = await calculatePreviousArrears(student.id, schoolId, month, year)
       const monthlyFee = asMoney(configuredMonthly)
       
@@ -683,12 +704,19 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
           discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
           discount_package_id, discount_label
         )
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING id
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15)
+        ON CONFLICT DO NOTHING
+        RETURNING id
       `, [
         schoolId, challan_no, student.id, month, year, grossTotal, due_date, creatorId,
         finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
         autoDiscount.packageId, autoDiscount.label,
       ])
+
+      if (!result.rows[0]) {
+        skippedCount++
+        continue
+      }
 
       if (autoDiscount.packageId && result.rows[0]?.id) {
         await query(`
@@ -791,7 +819,7 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
       ? asMoney(discount)
       : asMoney(current.discount)
     const gross = Math.max(0, monthly + arrears - disc)
-    const challan_no = `CH-${Date.now().toString().slice(-8)}`
+    const challan_no = generateChallanNumber()
     const sql = `
       UPDATE fee_challans SET
         challan_no = $1,
