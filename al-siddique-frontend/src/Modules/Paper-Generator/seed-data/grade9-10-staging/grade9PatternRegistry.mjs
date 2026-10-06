@@ -1,6 +1,6 @@
 import {buildGrade9CoreBlueprint} from './grade9PatternBlueprint.mjs';
 import {buildGrade9LanguageBlueprint} from './grade9LanguagePatternBlueprint.mjs';
-export const GRADE9_CORE_SUBJECTS=Object.freeze(['Physics','Chemistry','Biology','Mathematics','Computer Science & Entrepreneurship']);
+export const GRADE9_CORE_SUBJECTS=Object.freeze(['Physics','Chemistry','Biology','Mathematics','Computer Science & Entrepreneurship','Islamiat']);
 export const GRADE9_LANGUAGE_SUBJECTS=Object.freeze(['English','Urdu']);
 export const GRADE9_PATTERN_SUBJECTS=Object.freeze([...GRADE9_LANGUAGE_SUBJECTS,...GRADE9_CORE_SUBJECTS]);
 export function buildGrade9PatternBlueprint({corePattern,languageHierarchy,subject}){

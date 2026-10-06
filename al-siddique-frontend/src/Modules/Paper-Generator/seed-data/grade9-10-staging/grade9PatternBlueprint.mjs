@@ -8,13 +8,18 @@ export function buildGrade9CoreBlueprint(patternDoc,subject){
   const errors=[];
   const sections=[];
   const objective=src.objective||{};
-  if(sum(objective.chapterCounts)!==objective.mcqs) errors.push('Objective chapter distribution does not reconcile');
+  if(objective.chapterCounts&&sum(objective.chapterCounts)!==objective.mcqs) errors.push('Objective chapter distribution does not reconcile');
+  if(!objective.chapterCounts&&!objective.distributionState) errors.push('Objective distribution evidence missing');
   if(objective.marks!==objective.mcqs) errors.push('Objective marks must equal one-mark MCQ count');
-  sections.push(section('Q1','mcq',objective.marks,{attempt:objective.mcqs,offered:objective.mcqs,marksEach:1,chapterCounts:clone(objective.chapterCounts)}));
+  sections.push(section('Q1','mcq',objective.marks,{attempt:objective.mcqs,offered:objective.mcqs,marksEach:1,chapterCounts:clone(objective.chapterCounts||null),distributionState:objective.distributionState||null}));
   const subj=src.subjective||{};
   for(const q of subj.shortQuestions||[]){
-    if(sum(q.chapterCounts)!==q.offered) errors.push('Q'+q.question+' short-question chapter distribution does not reconcile');
-    sections.push(section('Q'+q.question,'short',q.attempt*q.marksEach,{attempt:q.attempt,offered:q.offered,marksEach:q.marksEach,chapterCounts:clone(q.chapterCounts)}));
+    if(q.chapterCounts&&sum(q.chapterCounts)!==q.offered) errors.push('Q'+q.question+' short-question chapter distribution does not reconcile');
+    if(!q.chapterCounts&&!q.distributionState) errors.push('Q'+q.question+' short-question distribution evidence missing');
+    sections.push(section('Q'+q.question,'short',q.attempt*q.marksEach,{attempt:q.attempt,offered:q.offered,marksEach:q.marksEach,chapterCounts:clone(q.chapterCounts||null),distributionState:q.distributionState||null}));
+  }
+  for(const q of subj.specialQuestions||[]){
+    sections.push(section('Q'+q.question,q.taskSubtype,q.sectionMarks,{attempt:q.attempt,offered:q.offered,marksEach:q.marksEach}));
   }
   if(subj.longQuestions){
     const l=subj.longQuestions;

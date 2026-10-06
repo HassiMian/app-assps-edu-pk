@@ -498,6 +498,75 @@
           }
         }
       }
+    },
+    {
+      "subject": "Islamiat",
+      "sourcePages": [
+        62,
+        63,
+        64,
+        65
+      ],
+      "totalMarks": 100,
+      "durationMinutes": 180,
+      "objective": {
+        "marks": 20,
+        "minutes": null,
+        "mcqs": 20,
+        "distributionState": "CURRENT_REVISED_STRUCTURE_VERIFIED_CHAPTER_DISTRIBUTION_NOT_ENCODED"
+      },
+      "subjective": {
+        "marks": 80,
+        "shortQuestions": [
+          {
+            "question": 2,
+            "attempt": 6,
+            "offered": 9,
+            "marksEach": 2,
+            "distributionState": "CURRENT_REVISED_STRUCTURE_VERIFIED"
+          },
+          {
+            "question": 3,
+            "attempt": 6,
+            "offered": 9,
+            "marksEach": 2,
+            "distributionState": "CURRENT_REVISED_STRUCTURE_VERIFIED"
+          },
+          {
+            "question": 4,
+            "attempt": 8,
+            "offered": 12,
+            "marksEach": 2,
+            "distributionState": "CURRENT_REVISED_STRUCTURE_VERIFIED"
+          }
+        ],
+        "specialQuestions": [
+          {
+            "question": 5,
+            "taskSubtype": "hadith_translation",
+            "attempt": 2,
+            "offered": 4,
+            "marksEach": 5,
+            "sectionMarks": 10
+          },
+          {
+            "question": 6,
+            "taskSubtype": "personalities_short_note",
+            "attempt": 2,
+            "offered": 4,
+            "marksEach": 5,
+            "sectionMarks": 10
+          },
+          {
+            "question": 7,
+            "taskSubtype": "detailed",
+            "attempt": 2,
+            "offered": 4,
+            "marksEach": 10,
+            "sectionMarks": 20
+          }
+        ]
+      }
     }
   ],
   "rules": {
