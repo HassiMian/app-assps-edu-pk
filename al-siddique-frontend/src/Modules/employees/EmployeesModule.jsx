@@ -773,14 +773,102 @@ function DirectoryTab({ employees, search, setSearch, designationFilter, setDesi
  )
 }
 
-//  Attendance Tab (placeholder) 
-function AttendanceTab() {
+//  Attendance Tab — server-backed staff attendance
+function AttendanceTab({ employees=[] }) {
+ const today = new Date().toISOString().slice(0,10)
+ const [date, setDate] = useState(today)
+ const [records, setRecords] = useState([])
+ const [summary, setSummary] = useState({})
+ const [loading, setLoading] = useState(true)
+ const [saving, setSaving] = useState(false)
+ const [message, setMessage] = useState('')
+
+ const loadAttendance = useCallback(async (targetDate=date) => {
+ setLoading(true)
+ setMessage('')
+ try {
+ const response = await api.get('/api/employees/attendance', { params:{ date:targetDate }, skipCache:true })
+ const rows = Array.isArray(response.data?.data) ? response.data.data : []
+ setRecords(rows.map(row => ({ ...row, status:row.status || 'Present', note:row.note || '' })))
+ const month = targetDate.slice(0,7)
+ const summaryResponse = await api.get('/api/employees/attendance/summary', { params:{ month }, skipCache:true })
+ const byEmployee = {}
+ ;(Array.isArray(summaryResponse.data?.data) ? summaryResponse.data.data : []).forEach(item => { byEmployee[Number(item.employee_id)] = item })
+ setSummary(byEmployee)
+ } catch (err) {
+ console.error('Employee attendance load failed', err)
+ setRecords([])
+ setMessage(err.response?.data?.message || 'Employee attendance could not be loaded.')
+ } finally { setLoading(false) }
+ }, [date])
+
+ useEffect(() => {
+ // eslint-disable-next-line react-hooks/set-state-in-effect
+ void loadAttendance(date)
+ }, [date, loadAttendance])
+
+ const setStatus = (employeeId, status) => setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, status } : row))
+ const setNote = (employeeId, note) => setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, note } : row))
+ const markAll = status => setRecords(prev => prev.map(row => ({ ...row, status })))
+
+ async function saveAttendance() {
+ if (!records.length || saving) return
+ setSaving(true); setMessage('')
+ try {
+ await api.put('/api/employees/attendance/bulk', {
+ date,
+ records:records.map(row => ({ employee_id:Number(row.employee_id), status:row.status, note:row.note || '' })),
+ })
+ setMessage(`Attendance saved for ${records.length} employees.`)
+ await loadAttendance(date)
+ } catch (err) {
+ setMessage(err.response?.data?.message || 'Employee attendance could not be saved.')
+ } finally { setSaving(false) }
+ }
+
+ const counts = records.reduce((acc,row) => { acc[row.status]=(acc[row.status]||0)+1; return acc }, {})
+ const statusOptions = ['Present','Absent','Leave','Late']
+
  return (
- <GCard style={{ textAlign:'center', padding:60 }}>
- <div className="super-module-card" style={{ fontSize:34, marginBottom:20, fontWeight:900, color:C.blue }}>ATT</div>
- <h3 style={{ color:C.gold, margin:'0 0 12px', fontFamily:"'Playfair Display',serif" }}>Employee Attendance</h3>
- <p style={{ color:C.muted, margin:0 }}>Coming Soon — Employee attendance tracking system</p>
+ <div style={{ display:'grid', gap:18 }}>
+ <GCard>
+ <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', gap:14, flexWrap:'wrap' }}>
+ <div>
+ <div style={{ color:C.blue, fontSize:11, fontWeight:900, textTransform:'uppercase', letterSpacing:1 }}>Staff Operations</div>
+ <h3 style={{ color:C.silver, margin:'5px 0 5px', fontSize:21 }}>Employee Attendance</h3>
+ <p style={{ color:C.muted, margin:0, fontSize:12 }}>Daily attendance is stored on the school tenant and can be reviewed month-wise.</p>
+ </div>
+ <div style={{ display:'flex', gap:10, alignItems:'flex-end', flexWrap:'wrap' }}>
+ <div><Lbl>Date</Lbl><Inp type="date" value={date} onChange={e=>setDate(e.target.value)} style={{ width:160 }}/></div>
+ <button onClick={()=>void loadAttendance(date)} style={{ ...TabBtn, padding:'10px 14px' }}>Refresh</button>
+ </div>
+ </div>
  </GCard>
+
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap:12 }}>
+ {[['Total',records.length,C.blue],['Present',counts.Present||0,C.green],['Absent',counts.Absent||0,C.red],['Leave',counts.Leave||0,C.orange],['Late',counts.Late||0,C.gold]].map(([label,value,color]) => (
+ <GCard key={label} style={{ padding:16 }}><div style={{ color:C.muted, fontSize:10, fontWeight:800, textTransform:'uppercase' }}>{label}</div><div style={{ color, fontSize:24, fontWeight:900, marginTop:5 }}>{value}</div></GCard>
+ ))}
+ </div>
+
+ <GCard style={{ padding:0, overflow:'hidden' }}>
+ <div style={{ padding:'14px 16px', borderBottom:`1px solid ${C.border}`, display:'flex', justifyContent:'space-between', gap:12, flexWrap:'wrap', alignItems:'center' }}>
+ <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>{['Present','Absent','Leave','Late'].map(status=><button key={status} onClick={()=>markAll(status)} style={{ padding:'7px 10px', borderRadius:9, border:`1px solid ${C.border}`, background:'var(--apex-bg-subtle)', color:C.silver, cursor:'pointer', fontSize:11, fontWeight:700 }}>Mark all {status}</button>)}</div>
+ <button onClick={()=>void saveAttendance()} disabled={saving || !records.length} style={{ padding:'9px 16px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:saving?'wait':'pointer', fontWeight:800, opacity:records.length?1:.55 }}>{saving?'Saving…':'Save Attendance'}</button>
+ </div>
+ {loading ? <div style={{ padding:28, color:C.muted }}>Loading employee attendance…</div> : <div style={{ overflowX:'auto' }}><table style={{ width:'100%', borderCollapse:'collapse', minWidth:780 }}>
+ <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>{['Employee','Designation','Status','Note','Month Summary'].map(h=><th key={h} style={{ padding:'12px 14px', textAlign:'left', color:C.muted, fontSize:11, textTransform:'uppercase' }}>{h}</th>)}</tr></thead>
+ <tbody>{records.map((row,index)=>{ const month=summary[Number(row.employee_id)]||{}; return <tr key={row.employee_id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent', borderBottom:`1px solid ${C.border}` }}>
+ <td style={{ padding:'12px 14px' }}><div style={{ color:C.silver, fontWeight:800 }}>{row.name}</div><div style={{ color:C.muted, fontSize:11 }}>{row.emp_id || `#${row.employee_id}`}</div></td>
+ <td style={{ padding:'12px 14px', color:C.muted }}>{row.designation || '—'}</td>
+ <td style={{ padding:'12px 14px' }}><Sel value={row.status} onChange={e=>setStatus(row.employee_id,e.target.value)} style={{ width:120 }}>{statusOptions.map(status=><option key={status}>{status}</option>)}</Sel></td>
+ <td style={{ padding:'12px 14px' }}><Inp value={row.note} onChange={e=>setNote(row.employee_id,e.target.value)} placeholder="Optional note" style={{ minWidth:180 }}/></td>
+ <td style={{ padding:'12px 14px', color:C.muted, fontSize:11 }}>{`P ${month.present||0} · A ${month.absent||0} · L ${month.leave||0} · Late ${month.late||0}`}</td>
+ </tr>})}{!records.length&&<tr><td colSpan={5} style={{ padding:28, textAlign:'center', color:C.muted }}>{employees.length ? 'No attendance records available.' : 'No active employees found.'}</td></tr>}</tbody>
+ </table></div>}
+ </GCard>
+ {message&&<div style={{ color:message.includes('saved')?C.green:C.red, fontSize:12, fontWeight:700 }}>{message}</div>}
+ </div>
  )
 }
 
@@ -1355,7 +1443,7 @@ function EmployeesModule() {
  designations={designations}
  />
  )}
- {tab === 'attendance' && <AttendanceTab />}
+ {tab === 'attendance' && <AttendanceTab employees={employees} />}
  {tab === 'salary' && <SalaryTab employees={employees} />}
  {tab === 'login' && <LoginAccessTab employees={employees} onReload={reload} />}
  {tab === 'permissions' && <StaffPermissionsTab employees={employees} />}

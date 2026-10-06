@@ -63,6 +63,23 @@ async function up(options = {}) {
     `)
 
     await client.query(`
+      CREATE TABLE IF NOT EXISTS employee_attendance (
+        id BIGSERIAL PRIMARY KEY,
+        school_id INTEGER NOT NULL REFERENCES schools(id),
+        employee_id INTEGER NOT NULL REFERENCES employees(id) ON DELETE CASCADE,
+        attendance_date DATE NOT NULL,
+        status VARCHAR(20) NOT NULL CHECK (status IN ('Present','Absent','Leave','Late')),
+        note TEXT,
+        marked_by INTEGER REFERENCES users(id),
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (school_id, employee_id, attendance_date)
+      );
+      CREATE INDEX IF NOT EXISTS idx_employee_attendance_school_date ON employee_attendance (school_id, attendance_date, employee_id);
+      CREATE INDEX IF NOT EXISTS idx_employee_attendance_employee_date ON employee_attendance (employee_id, attendance_date DESC);
+    `)
+
+    await client.query(`
       CREATE TABLE IF NOT EXISTS message_drafts (
         id BIGSERIAL PRIMARY KEY,
         school_id INTEGER NOT NULL REFERENCES schools(id),

@@ -202,6 +202,25 @@ assertNotContains(
   'message composer must not ship a knowingly disabled draft control.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  /ALLOW_MOCK_FALLBACK|mockEmployees|mockEmployee|high-fidelity mock/,
+  'employee APIs must fail closed instead of synthesizing staff data.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  "router.put('/attendance/bulk', protect, canManageStaff",
+  'employee attendance must persist through the tenant-backed bulk endpoint.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /Coming Soon — Employee attendance tracking system/,
+  'employee attendance must not regress to a placeholder.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

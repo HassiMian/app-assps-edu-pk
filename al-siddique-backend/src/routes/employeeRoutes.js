@@ -7,10 +7,33 @@ const { query } = require('../config/database')
 const { protect, requireRoles, adminOrServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 
 const canManageStaff = requireRoles('super_admin', 'admin', 'principal')
 const canReadStaff = adminOrServiceScope('school.staff.read')
+
+
+let employeeAttendanceSchemaReady = null
+function ensureEmployeeAttendanceSchema() {
+  if (!employeeAttendanceSchemaReady) {
+    employeeAttendanceSchemaReady = query(`
+      CREATE TABLE IF NOT EXISTS employee_attendance (
+        id BIGSERIAL PRIMARY KEY,
+        school_id INTEGER NOT NULL REFERENCES schools(id),
+        employee_id INTEGER NOT NULL REFERENCES employees(id) ON DELETE CASCADE,
+        attendance_date DATE NOT NULL,
+        status VARCHAR(20) NOT NULL CHECK (status IN ('Present','Absent','Leave','Late')),
+        note TEXT,
+        marked_by INTEGER REFERENCES users(id),
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+        UNIQUE (school_id, employee_id, attendance_date)
+      );
+      CREATE INDEX IF NOT EXISTS idx_employee_attendance_school_date ON employee_attendance (school_id, attendance_date, employee_id);
+      CREATE INDEX IF NOT EXISTS idx_employee_attendance_employee_date ON employee_attendance (employee_id, attendance_date DESC);
+    `).catch(err => { employeeAttendanceSchemaReady = null; throw err })
+  }
+  return employeeAttendanceSchemaReady
+}
 
 const EMPLOYEE_WRITE_FIELDS = [
   'father_name',
@@ -75,6 +98,104 @@ function nullableDate(value) {
   return value === '' || value === undefined ? null : value
 }
 
+
+// GET /api/employees/attendance?date=YYYY-MM-DD
+router.get('/attendance', protect, canReadStaff, async (req, res) => {
+  try {
+    await ensureEmployeeAttendanceSchema()
+    const schoolId = currentSchoolId(req)
+    const date = String(req.query.date || '').trim()
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return res.status(422).json({ success:false, message:'Valid attendance date is required.' })
+    const result = await query(`
+      SELECT e.id AS employee_id, e.emp_id, e.name, e.designation, e.department,
+             a.id AS attendance_id, a.status, a.note, a.updated_at
+      FROM employees e
+      LEFT JOIN employee_attendance a
+        ON a.employee_id = e.id AND a.school_id = e.school_id AND a.attendance_date = $2
+      WHERE e.school_id = $1 AND e.is_active = true
+      ORDER BY e.name, e.id
+    `, [schoolId, date])
+    res.json({ success:true, date, count:result.rowCount, data:result.rows })
+  } catch (err) {
+    console.error('Employee attendance load error:', err.message)
+    res.status(500).json({ success:false, message:'Employee attendance could not be loaded.' })
+  }
+})
+
+// GET /api/employees/attendance/summary?month=YYYY-MM
+router.get('/attendance/summary', protect, canReadStaff, async (req, res) => {
+  try {
+    await ensureEmployeeAttendanceSchema()
+    const schoolId = currentSchoolId(req)
+    const month = String(req.query.month || '').trim()
+    if (!/^\d{4}-\d{2}$/.test(month)) return res.status(422).json({ success:false, message:'Valid month is required.' })
+    const result = await query(`
+      SELECT employee_id,
+             COUNT(*) FILTER (WHERE status = 'Present')::int AS present,
+             COUNT(*) FILTER (WHERE status = 'Absent')::int AS absent,
+             COUNT(*) FILTER (WHERE status = 'Leave')::int AS leave,
+             COUNT(*) FILTER (WHERE status = 'Late')::int AS late,
+             COUNT(*)::int AS marked_days
+      FROM employee_attendance
+      WHERE school_id = $1 AND to_char(attendance_date, 'YYYY-MM') = $2
+      GROUP BY employee_id
+    `, [schoolId, month])
+    res.json({ success:true, month, data:result.rows })
+  } catch (err) {
+    console.error('Employee attendance summary error:', err.message)
+    res.status(500).json({ success:false, message:'Employee attendance summary could not be loaded.' })
+  }
+})
+
+// PUT /api/employees/attendance/bulk
+router.put('/attendance/bulk', protect, canManageStaff, async (req, res) => {
+  const date = String(req.body?.date || '').trim()
+  const records = Array.isArray(req.body?.records) ? req.body.records : []
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return res.status(422).json({ success:false, message:'Valid attendance date is required.' })
+  if (!records.length) return res.status(422).json({ success:false, message:'At least one attendance record is required.' })
+  const allowed = new Set(['Present','Absent','Leave','Late'])
+  const normalized = []
+  for (const record of records) {
+    const employeeId = Number(record?.employee_id)
+    const status = String(record?.status || '').trim()
+    const note = String(record?.note || '').trim().slice(0, 1000)
+    if (!Number.isInteger(employeeId) || employeeId <= 0 || !allowed.has(status)) {
+      return res.status(422).json({ success:false, message:'Each attendance record requires a valid employee and status.' })
+    }
+    normalized.push({ employeeId, status, note })
+  }
+
+  const { pool } = require('../config/database')
+  const client = await pool.connect()
+  try {
+    await ensureEmployeeAttendanceSchema()
+    const schoolId = currentSchoolId(req)
+    await client.query('BEGIN')
+    const employeeIds = [...new Set(normalized.map(item => item.employeeId))]
+    const owned = await client.query('SELECT id FROM employees WHERE school_id=$1 AND is_active=true AND id = ANY($2::int[])', [schoolId, employeeIds])
+    if (owned.rowCount !== employeeIds.length) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({ success:false, message:'One or more employees do not belong to this school or are inactive.' })
+    }
+    for (const item of normalized) {
+      await client.query(`
+        INSERT INTO employee_attendance (school_id, employee_id, attendance_date, status, note, marked_by)
+        VALUES ($1,$2,$3,$4,$5,$6)
+        ON CONFLICT (school_id, employee_id, attendance_date)
+        DO UPDATE SET status=EXCLUDED.status, note=EXCLUDED.note, marked_by=EXCLUDED.marked_by, updated_at=NOW()
+      `, [schoolId, item.employeeId, date, item.status, item.note || null, req.user?.id || null])
+    }
+    await client.query('COMMIT')
+    res.json({ success:true, count:normalized.length, message:'Employee attendance saved.' })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Employee attendance save error:', err.message)
+    res.status(500).json({ success:false, message:'Employee attendance could not be saved.' })
+  } finally {
+    client.release()
+  }
+})
+
 // GET /api/employees â€” list with search/filter
 router.get('/', protect, canReadStaff, async (req, res) => {
   try {
@@ -97,63 +218,7 @@ router.get('/', protect, canReadStaff, async (req, res) => {
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Employee list error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning high-fidelity mock employees.');
-    const mockEmployees = [
-      {
-        id: 1,
-        school_id: 1,
-        emp_id: 'EMP-1001',
-        name: 'Sir Ahmed Raza',
-        designation: 'Teacher',
-        department: 'Science',
-        phone: '03001112223',
-        email: 'ahmed.raza@alsiddique.edu.pk',
-        salary: 45000,
-        join_date: '2022-08-01',
-        is_active: true
-      },
-      {
-        id: 2,
-        school_id: 1,
-        emp_id: 'EMP-1002',
-        name: 'Miss Sadia Kiran',
-        designation: 'Teacher',
-        department: 'English',
-        phone: '03004445556',
-        email: 'sadia.kiran@alsiddique.edu.pk',
-        salary: 42000,
-        join_date: '2023-03-15',
-        is_active: true
-      },
-      {
-        id: 3,
-        school_id: 1,
-        emp_id: 'EMP-1003',
-        name: 'Kamran Shah',
-        designation: 'Accountant',
-        department: 'Accounts',
-        phone: '03009998887',
-        email: 'kamran.shah@alsiddique.edu.pk',
-        salary: 50000,
-        join_date: '2021-01-10',
-        is_active: true
-      }
-    ];
-
-    let filtered = mockEmployees;
-    const { search } = req.query;
-    if (search) {
-      const q = search.toLowerCase();
-      filtered = filtered.filter(e =>
-        e.name.toLowerCase().includes(q) ||
-        e.emp_id.toLowerCase().includes(q) ||
-        e.designation.toLowerCase().includes(q)
-      );
-    }
-    return res.json({ success: true, count: filtered.length, data: filtered });
+    return res.status(503).json({ success: false, message: 'Employee directory is temporarily unavailable.' })
   }
 })
 
@@ -171,24 +236,7 @@ router.get('/:id', protect, canReadStaff, async (req, res) => {
     res.json({ success: true, data: result.rows[0] })
   } catch (err) {
     console.error('Employee detail error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-    console.warn('PostgreSQL offline. Returning high-fidelity mock employee details.');
-    const mockEmployee = {
-      id: req.params.id || 1,
-      school_id: 1,
-      emp_id: 'EMP-1001',
-      name: 'Sir Ahmed Raza',
-      designation: 'Teacher',
-      department: 'Science',
-      phone: '03001112223',
-      email: 'ahmed.raza@alsiddique.edu.pk',
-      salary: 45000,
-      join_date: '2022-08-01',
-      is_active: true
-    };
-    return res.json({ success: true, data: mockEmployee });
+    return res.status(503).json({ success: false, message: 'Employee record is temporarily unavailable.' })
   }
 })
 
