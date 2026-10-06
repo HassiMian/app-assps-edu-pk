@@ -68,10 +68,7 @@ async function sendEmail({ to, subject, text, html }) {
       host,
       port,
       secure: port === 465,
-      auth: { user, pass },
-      tls: {
-        rejectUnauthorized: false
-      }
+      auth: { user, pass }
     })
 
     const info = await transporter.sendMail({

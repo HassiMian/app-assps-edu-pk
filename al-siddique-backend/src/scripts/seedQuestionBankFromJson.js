@@ -50,9 +50,15 @@ function loadEnv() {
 function createPool() {
   if (process.env.DATABASE_URL) {
     const isLocal = /localhost|127\.0\.0\.1/i.test(process.env.DATABASE_URL)
+    const allowInsecureTls = process.env.DB_SSL_ALLOW_INSECURE === 'true'
+
+    if (!isLocal && allowInsecureTls && process.env.NODE_ENV === 'production') {
+      throw new Error('DB_SSL_ALLOW_INSECURE is forbidden in production')
+    }
+
     return new Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: isLocal ? false : { rejectUnauthorized: false },
+      ssl: isLocal ? false : { rejectUnauthorized: !allowInsecureTls },
     })
   }
 

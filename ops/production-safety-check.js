@@ -25,6 +25,18 @@ function assertNotContains(relativePath, pattern, message) {
 
 const failures = []
 
+assertNotContains(
+  'al-siddique-backend/src/services/emailService.js',
+  /rejectUnauthorized\s*:\s*false/,
+  'SMTP transport must validate provider TLS certificates.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/scripts/seedQuestionBankFromJson.js',
+  /ssl:\s*isLocal\s*\?\s*false\s*:\s*\{\s*rejectUnauthorized:\s*false/,
+  'remote database seeding must not disable TLS certificate verification by default.'
+)
+
 assertContains(
   'al-siddique-backend/src/server.js',
   "mount('/ai-analytics', './routes/aiAnalyticsRoutes')",
