@@ -429,35 +429,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  </div>
  )}
 
- {user?.email === 'demo@assps.edu.pk' && (
- <div style={{
- display: 'flex',
- alignItems: 'center',
- gap: 6,
- padding: '8px 14px',
- borderRadius: 14,
- background: 'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))',
- border: '1px solid color-mix(in srgb, var(--apex-action-danger) 26%, var(--apex-border-default))',
- boxShadow: 'var(--apex-shadow-sm)',
- }}>
- <span style={{
- width: 6,
- height: 6,
- borderRadius: '50%',
- background: 'var(--apex-action-danger)',
- boxShadow: '0 0 8px color-mix(in srgb, var(--apex-action-danger) 55%, transparent)',
- }} />
- <span style={{
- color: 'var(--apex-action-danger)',
- fontSize: 12,
- fontWeight: '700',
- textTransform: 'uppercase',
- letterSpacing: '0.5px',
- }}>
- Demo Mode
- </span>
- </div>
- )}
+
 
  <button
  type="button"

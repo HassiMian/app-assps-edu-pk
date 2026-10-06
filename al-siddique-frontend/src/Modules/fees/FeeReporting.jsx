@@ -2,6 +2,24 @@ import { useState, useEffect, useMemo } from 'react'
 import api from '../../services/api'
 import { C, card, btnSecondary, sectionHeader } from '../moduleStyles'
 
+
+function downloadFeeReport(rows, year) {
+ const headers = ['Challan No','Student','GR No','Class','Section','Month','Year','Amount','Paid Amount','Status']
+ const data = rows.map(item => [
+ item.challan_no || item.id || '', item.student_name || item.name || '', item.gr_number || item.gr || '',
+ item.class || '', item.section || '', item.month || '', item.year || '', Number(item.amount || 0),
+ Number(item.paid_amount || 0), item.status || '',
+ ])
+ const csv = [headers, ...data].map(row => row.map(value => `"${String(value ?? '').replace(/"/g,'""')}"`).join(',')).join('\n')
+ const blob = new Blob([csv], { type:'text/csv;charset=utf-8' })
+ const url = URL.createObjectURL(blob)
+ const link = document.createElement('a')
+ link.href = url
+ link.download = `fee-report-${year}.csv`
+ link.click()
+ URL.revokeObjectURL(url)
+}
+
 export default function FeeReporting() {
  const [challans, setChallans] = useState([])
  const [loading, setLoading] = useState(true)
@@ -14,6 +32,11 @@ export default function FeeReporting() {
  .finally(() => setLoading(false))
  }, [])
 
+ const years = useMemo(() => {
+ const set = new Set(challans.map(item => String(item.year || '')).filter(Boolean))
+ set.add(String(new Date().getFullYear()))
+ return [...set].sort((a,b)=>Number(b)-Number(a))
+ }, [challans])
  const filtered = challans.filter(c => String(c.year) === year)
 
  const byMonth = useMemo(() => {
@@ -33,14 +56,14 @@ export default function FeeReporting() {
  const maxValue = Math.max(...byMonth.map(r => r.collected + r.pending), 1)
 
  return (
- <div style={{ minHeight: '100vh', padding: 24, background: '#071e34', color: C.silver }}>
+ <div style={{ minHeight:'100vh', padding:24, background:'var(--apex-shell-gradient)', color:C.silver }}>
  <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gap: 22 }}>
  <div className="super-module-card" style={{ ...card, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, borderRadius: 22 }}>
  <div>
  <h1 style={sectionHeader}>Fee Reporting</h1>
  <p style={{ color: C.muted, marginTop: 8 }}>Visualize fee collection progress and pending accounts.</p>
  </div>
- <button style={btnSecondary}>Download Report</button>
+ <button style={btnSecondary} onClick={()=>downloadFeeReport(filtered,year)} disabled={!filtered.length}>Download Report</button>
  </div>
 
  {loading ? (
@@ -63,9 +86,9 @@ export default function FeeReporting() {
  <div className="super-module-card" style={{ ...card, padding: 20, display: 'grid', gap: 20, borderRadius: 22 }}>
  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
  <div style={{ color: C.gold, fontWeight: 700 }}>Monthly Collection Overview · {year}</div>
- <select style={{ width: 140, padding: '12px 14px', borderRadius: 14, background: 'rgba(7,22,40,0.92)', border: `1px solid ${C.border}`, color: C.silver, cursor: 'pointer' }}
+ <select style={{ width: 140, padding: '12px 14px', borderRadius: 14, background:'var(--apex-bg-surface-solid)', border: `1px solid ${C.border}`, color: C.silver, cursor: 'pointer' }}
  value={year} onChange={e => setYear(e.target.value)}>
- {['2024', '2025', '2026', '2027'].map(y => <option key={y} value={y}>{y}</option>)}
+ {years.map(y => <option key={y} value={y}>{y}</option>)}
  </select>
  </div>
  {byMonth.length === 0 ? (
@@ -77,7 +100,7 @@ export default function FeeReporting() {
  const height = Math.max(36, (total / maxValue) * 180)
  return (
  <div key={item.month} style={{ flex: 1, display: 'grid', gap: 10, alignItems: 'end', minHeight: 220 }}>
- <div style={{ height, borderRadius: 20, background: 'rgba(255,255,255,0.08)', display: 'grid', alignContent: 'end' }}>
+ <div style={{ height, borderRadius: 20, background:'var(--apex-bg-subtle)', display: 'grid', alignContent: 'end' }}>
  <div style={{ height: `${(item.collected / total) * 100}%`, background: `linear-gradient(180deg, ${C.green}, ${C.gold})`, borderRadius: '0 0 20px 20px' }} />
  </div>
  <div style={{ textAlign: 'center', color: C.muted, fontSize: 12 }}>{item.month}</div>
