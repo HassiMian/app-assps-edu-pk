@@ -7,6 +7,7 @@ const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCano
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
 const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
 const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPublisherPromotionPrecheckV6G9')
+const { buildAcademicPublicationPrecheck } = require('../services/papers/paperAcademicPublicationPrecheckV6G15')
 const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPublisherPromotionEnvelopeV6G10')
 const { verifyPublisherDetachedSignature } = require('../services/papers/paperPublisherDetachedSignatureV6G11')
 const { validatePublisherApprovalDecision } = require('../services/papers/paperPublisherApprovalDecisionV6G12')
@@ -121,6 +122,22 @@ router.post('/publisher-review/promotion-envelope', express.json({limit:'256kb'}
     const status=Number(err.status)||500
     if(status>=500)console.error('Paper Studio publisher promotion envelope error:',err.message)
     return res.status(status).json({success:false,code:err.code||'PUBLISHER_PROMOTION_ENVELOPE_FAILED',message:status>=500?'Publisher promotion envelope could not be generated.':err.message,issues:Array.isArray(err.issues)?err.issues:undefined})
+  }
+})
+
+
+router.post('/publisher-review/academic-publication-precheck', express.json({limit:'256kb'}), async (req,res) => {
+  try {
+    const role=normalizedRole(req)
+    if(!['super_admin','admin','principal'].includes(role))return res.status(403).json({success:false,message:'Admin or Principal role is required.'})
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=buildAcademicPublicationPrecheck(req.body||{}, {forbidReviewerIds:[req.user?.id]})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data,policy:{validationOnly:true,persisted:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,schoolId:String(schoolId)}})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio academic publication precheck error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'ACADEMIC_PUBLICATION_PRECHECK_FAILED',message:status>=500?'Academic publication precheck could not be verified.':err.message})
   }
 })
 
