@@ -62,3 +62,21 @@ test('assessment release is immutable snapshot with deterministic SHA-256 conten
  const second=await createAssessmentRelease(release.snapshot)
  assert.equal(second.contentHash,release.contentHash)
 })
+
+test('manual semantic layouts map into canonical block types',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[
+   {id:'short1',heading:'Q1. Short. (2)',content:'Define force.',marks:2,layoutPreset:'short'},
+   {id:'match1',heading:'Q2. Match. (4)',content:'Book | Kitab\nPen | Qalam',marks:4,layoutPreset:'matching'},
+   {id:'table1',heading:'Q3. Complete table. (4)',content:'Noun | Plural\nBook | Books',marks:4,layoutPreset:'table',tablePurpose:'grammar_plural'},
+  ]},
+  config:{...base.config,totalMarks:10},
+ })
+ assert.equal(doc.sections[0].nodes[0].type,'short_question')
+ assert.equal(doc.sections[1].nodes[0].type,'matching_columns')
+ assert.equal(doc.sections[2].nodes[0].type,'grammar_table')
+ assert.equal(doc.sections[2].nodes[0].tableSemantic,'grammar_plural')
+ assert.equal(doc.sections[2].nodes[0].rows[1].rightText,'Books')
+ assert.deepEqual(validateCanonicalPaperDocument(doc),{valid:true,errors:[]})
+})
