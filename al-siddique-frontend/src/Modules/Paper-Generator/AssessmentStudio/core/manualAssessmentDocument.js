@@ -14,8 +14,13 @@ import {
   createCanonicalSection,
   createProvenanceField,
   createRichTextNode,
+  createShortQuestionNode,
+  createLongQuestionNode,
+  createGrammarTableNode,
+  createMatchingColumnsNode,
   validateCanonicalPaperDocument,
 } from '../../PaperEditor/core/PaperDocumentV2.js'
+import { DEFAULT_BLOCK_REGISTRY, normalizeNodeForBlockRegistry } from './BlockRegistry.js'
 import { resolveSectionTotalMarks } from '../../paperSystemRules.js'
 
 const text = value => String(value ?? '').trim()
@@ -32,6 +37,37 @@ function directionOf(language) {
   return language === DocumentLanguage.URDU ? DocumentDirection.RTL
     : language === DocumentLanguage.ENGLISH ? DocumentDirection.LTR
       : DocumentDirection.AUTO
+}
+
+function parseTableRows(content = '') {
+  return String(content).split(/\r?\n/).map(line=>line.trim()).filter(Boolean).map(line=>{
+    const parts=line.split('|').map(x=>x.trim())
+    return { leftText:parts[0]||'', rightText:parts.slice(1).join(' | ')||'', leftIsBlank:false, rightIsBlank:false }
+  })
+}
+
+function nodeFromSection(section,{ nodeId, body, direction, marks }) {
+  const base={
+    id:nodeId, direction, operationalNodeMarks:marks, authoritativeNodeMarks:marks,
+    nodeMarksOrigin:NodeMarksOrigin.ITEM_LEVEL_EXPLICIT, marksEvidenceString:marks?String(marks):null,
+    provenance:{ classificationCertainty:ClassificationCertainty.EXPLICIT, academicTextMutated:true, sourceSegmentIds:[], rawSourceSnapshot:null },
+  }
+  const layout=String(section.layoutPreset||'auto').toLowerCase()
+  if(layout==='short') return createShortQuestionNode({ ...base, stemText:body })
+  if(layout==='long') return createLongQuestionNode({ ...base, stemText:body })
+  if(layout==='matching') return createMatchingColumnsNode({
+    ...base,
+    leftItems:parseTableRows(body).map((row,i)=>({id:`${nodeId}-l${i+1}`,text:row.leftText})),
+    rightItems:parseTableRows(body).map((row,i)=>({id:`${nodeId}-r${i+1}`,text:row.rightText})),
+    correctMappings:null,
+  })
+  if(layout==='table' || layout==='pair_table' || layout==='sentence_usage') return createGrammarTableNode({
+    ...base,
+    tableSemantic:section.tablePurpose||section.tableSemantic||(layout==='sentence_usage'?'sentence_usage':'answer_table'),
+    columns:Array.isArray(section.tableHeaders)&&section.tableHeaders.length?section.tableHeaders:['Column A','Column B'],
+    rows:parseTableRows(body),
+  })
+  return createRichTextNode({ ...base, content:body })
 }
 
 export function createManualAssessmentDocument({ paper = {}, config = {}, paperSettings = {} } = {}) {
@@ -60,21 +96,7 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
       attemptRuleOrigin: AttemptRuleOrigin.TEACHER_EXPLICIT,
       attemptCount: 1,
       actualItemCount: 1,
-      nodes: [createRichTextNode({
-        id: nodeId,
-        content: body,
-        direction,
-        operationalNodeMarks: marks,
-        authoritativeNodeMarks: marks,
-        nodeMarksOrigin: NodeMarksOrigin.ITEM_LEVEL_EXPLICIT,
-        marksEvidenceString: marks ? String(marks) : null,
-        provenance: {
-          classificationCertainty: ClassificationCertainty.EXPLICIT,
-          academicTextMutated: true,
-          sourceSegmentIds: [],
-          rawSourceSnapshot: null,
-        },
-      })],
+      nodes: [normalizeNodeForBlockRegistry(nodeFromSection(section,{ nodeId, body, direction, marks }), DEFAULT_BLOCK_REGISTRY)],
       provenance: { sourceSectionId: null, sourceSegmentIds: [] },
     })
   })
