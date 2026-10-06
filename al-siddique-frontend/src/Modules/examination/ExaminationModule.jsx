@@ -43,13 +43,17 @@ const selectStyle = {
  cursor: 'pointer',
 };
 
-function getGrade(pct) {
- if (pct >= 90) return { g: 'A+', c: '#30D158' };
- if (pct >= 80) return { g: 'A', c: '#30D158' };
- if (pct >= 70) return { g: 'B', c: '#C8991A' };
- if (pct >= 60) return { g: 'C', c: '#C8991A' };
- if (pct >= 50) return { g: 'D', c: '#FF9F0A' };
- return { g: 'F', c: '#FF375F' };
+const DEFAULT_GRADE_BANDS = [
+ { label:'A+', from:90, to:100 }, { label:'A', from:80, to:89 }, { label:'B', from:70, to:79 },
+ { label:'C', from:60, to:69 }, { label:'D', from:50, to:59 }, { label:'F', from:0, to:49 },
+];
+
+function getGrade(pct, bands = DEFAULT_GRADE_BANDS) {
+ const value = Math.max(0, Math.min(100, Number(pct) || 0));
+ const match = (Array.isArray(bands) && bands.length ? bands : DEFAULT_GRADE_BANDS).find(row => value >= Number(row.from) && value <= Number(row.to));
+ const grade = match?.label || '';
+ const c = grade === 'F' ? '#FF375F' : value >= 80 ? '#30D158' : value >= 60 ? '#C8991A' : '#FF9F0A';
+ return { g: grade, c };
 }
 
 const esc = (value) => String(value || '')
@@ -59,19 +63,20 @@ const esc = (value) => String(value || '')
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;')
 
-function printExamResultCard({ student, marks, subjects, examName }) {
+function printExamResultCard({ student, marks, subjects, examName, totalMarks = 100, passMarks = 33, gradeBands = DEFAULT_GRADE_BANDS }) {
  const totalObtained = subjects.reduce((sum, subject) => sum + (parseInt(marks[student.id]?.[subject]) || 0), 0)
- const totalMax = subjects.length * 100
+ const perSubjectTotal = Math.max(1, Number(totalMarks) || 100)
+ const totalMax = subjects.length * perSubjectTotal
  const pct = totalMax > 0 ? Math.round((totalObtained / totalMax) * 100) : 0
- const { g, c } = getGrade(pct)
+ const { g, c } = getGrade(pct, gradeBands)
  const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
  const rows = subjects.map((subject, index) => {
  const obtained = parseInt(marks[student.id]?.[subject]) || 0
- const { g: sg, c: sc } = getGrade(obtained)
+ const { g: sg, c: sc } = getGrade((obtained / perSubjectTotal) * 100, gradeBands)
  return `<tr>
  <td>${index + 1}</td>
  <td>${esc(subject)}</td>
- <td>100</td>
+ <td>${perSubjectTotal}</td>
  <td><strong>${obtained}</strong></td>
  <td style="color:${sc};font-weight:800">${sg}</td>
  </tr>`
@@ -169,11 +174,12 @@ function AddExamModal({ onClose, onAdd, sessionOptions = [] }) {
  );
 }
 
-function ResultCard({ student, marks, subjects, examName, onClose }) {
+function ResultCard({ student, marks, subjects, examName, totalMarks = 100, passMarks = 33, gradeBands = DEFAULT_GRADE_BANDS, onClose }) {
  const totalObtained = subjects.reduce((sum, subject) => sum + (parseInt(marks[student.id]?.[subject]) || 0), 0);
- const totalMax = subjects.length * 100;
+ const perSubjectTotal = Math.max(1, Number(totalMarks) || 100)
+ const totalMax = subjects.length * perSubjectTotal;
  const pct = Math.round((totalObtained / totalMax) * 100);
- const { g, c } = getGrade(pct);
+ const { g, c } = getGrade(pct, gradeBands);
 
  return createPortal(
  <div style={{ position: 'fixed', inset: 0, zIndex: 9999, background:'var(--apex-bg-overlay)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -206,12 +212,12 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
  <tbody>
  {subjects.map((subject, index) => {
  const obtained = parseInt(marks[student.id]?.[subject]) || 0;
- const { g: sg, c: sc } = getGrade(obtained);
+ const { g: sg, c: sc } = getGrade((obtained / perSubjectTotal) * 100, gradeBands);
  return (
  <tr key={subject} style={{ background: index % 2 === 0 ? 'rgba(11,44,77,0.35)' : 'rgba(11,44,77,0.18)' }}>
  <td style={{ padding: '10px' }}>{subject}</td>
  <td style={{ padding: '10px', textAlign: 'center', fontWeight: 700 }}>{obtained}</td>
- <td style={{ padding: '10px', textAlign: 'center' }}>100</td>
+ <td style={{ padding: '10px', textAlign: 'center' }}>{perSubjectTotal}</td>
  <td style={{ padding: '10px', textAlign: 'center', color: sc, fontWeight: 700 }}>{sg}</td>
  </tr>
  );
@@ -228,9 +234,9 @@ function ResultCard({ student, marks, subjects, examName, onClose }) {
  </table>
 
  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
- <div style={{ padding: '14px 18px', borderRadius: 20, background: c === '#30D158' ? 'rgba(48,209,88,0.14)' : 'rgba(200,153,26,0.14)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>Status: {pct >= 50 ? 'PASS' : 'FAIL'}</div>
+ <div style={{ padding: '14px 18px', borderRadius: 20, background: c === '#30D158' ? 'rgba(48,209,88,0.14)' : 'rgba(200,153,26,0.14)', color: 'var(--apex-text-primary)', fontWeight: 700 }}>Status: {totalMax > 0 && totalObtained >= subjects.length * Number(passMarks || 0) ? 'PASS' : 'FAIL'}</div>
  <div style={{ display: 'flex', gap: 12, width: '100%', maxWidth: 320 }}>
- <button onClick={() => printExamResultCard({ student, marks, subjects, examName })} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Printer size={16} />Print</button>
+ <button onClick={() => printExamResultCard({ student, marks, subjects, examName, totalMarks, passMarks, gradeBands })} style={{ ...btnPrimary, flex: 1, justifyContent: 'center' }}><Printer size={16} />Print</button>
  <button onClick={onClose} style={{ ...btnSecondary, flex: 1, justifyContent: 'center' }}>Close</button>
  </div>
  </div>
@@ -256,17 +262,20 @@ export default function ExaminationModule() {
  const [viewCard, setViewCard] = useState(null);
  const [students, setStudents] = useState([]);
  const [loading, setLoading] = useState(true);
+ const [gradeBands, setGradeBands] = useState(DEFAULT_GRADE_BANDS);
 
  useEffect(() => {
  let cancelled = false;
  async function hydrate() {
  try {
- const [examRes, studentRes] = await Promise.all([api.get('/api/exams'), api.get('/api/students')]);
+ const [examRes, studentRes, gradeRes] = await Promise.all([api.get('/api/exams'), api.get('/api/students'), api.get('/api/exams/grade-settings')]);
  if (cancelled) return;
  const liveExams = Array.isArray(examRes.data?.data) ? examRes.data.data : [];
  const liveStudents = Array.isArray(studentRes.data?.data) ? studentRes.data.data : [];
  setExams(liveExams);
  setStudents(liveStudents);
+ const liveBands = Array.isArray(gradeRes.data?.data) && gradeRes.data.data.length ? gradeRes.data.data : DEFAULT_GRADE_BANDS;
+ setGradeBands(liveBands);
  setSelectedExam(current => current && liveExams.some(item => item.id === current.id) ? current : (liveExams[0] || null));
  } catch (err) {
  if (!cancelled) {
@@ -294,7 +303,8 @@ export default function ExaminationModule() {
  const activeTab = path === '/examination' || path === '/examination/manage' ? 'exams' : path === '/examination/marks' ? 'marks' : path === '/examination/results' ? 'results' : path === '/examination/cards' ? 'cards' : 'exams';
 
  const setMark = (studentId, subject, value) => {
- const parsed = Math.min(100, Math.max(0, parseInt(value) || 0));
+ const examTotal = Math.max(1, Number(selectedExam?.total_marks) || 100);
+ const parsed = Math.min(examTotal, Math.max(0, parseInt(value) || 0));
  setMarks(prev => ({ ...prev, [studentId]: { ...(prev[studentId] || {}), [subject]: parsed } }));
  setSaved(false);
  };
@@ -309,7 +319,8 @@ export default function ExaminationModule() {
  student_id: student.id,
  subject,
  marks_obtained: Number(marks[student.id]?.[subject] || 0),
- total_marks: 100,
+ total_marks: Math.max(1, Number(selectedExam?.total_marks) || 100),
+ pass_marks: Math.max(0, Number(selectedExam?.pass_marks) || 0),
  });
  });
  });
@@ -629,7 +640,7 @@ export default function ExaminationModule() {
  if (savedExam) { setExams(prev => [savedExam, ...prev]); setSelectedExam(savedExam); }
  } catch (err) { console.error('Failed to create exam', err); }
  }} />}
- {viewCard && <ResultCard student={viewCard} marks={marks} subjects={subjects} examName={selectedExam?.name || 'Exam'} onClose={() => setViewCard(null)} />}
+ {viewCard && <ResultCard student={viewCard} marks={marks} subjects={subjects} examName={selectedExam?.name || 'Exam'} totalMarks={selectedExam?.total_marks || 100} passMarks={selectedExam?.pass_marks || 33} gradeBands={gradeBands} onClose={() => setViewCard(null)} />}
  </div>
  );
 }

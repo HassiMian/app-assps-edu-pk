@@ -443,6 +443,19 @@ assertNotContains(
   'uploaded filename uniqueness must use a cryptographically secure random source.'
 )
 
+
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
+  "/api/exams/grade-settings",
+  'examination workspace must use the configured school grading policy.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ExaminationModule.jsx',
+  /Status: \{pct >= 50|total_marks:\s*100,\s*\n\s*\}\);/,
+  'examination result UI must not hardcode pass thresholds or saved total marks.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
