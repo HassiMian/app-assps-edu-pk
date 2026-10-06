@@ -67,8 +67,10 @@ node --test --test-concurrency=1 \
   tests/paper-v6g9-promotion-precheck.test.js \
   tests/paper-v6g9-promotion-precheck-http.test.js \
   tests/paper-v6g10-promotion-envelope.test.js \
-  tests/paper-v6g10-promotion-envelope-http.test.js | tee "$LOG"
+  tests/paper-v6g10-promotion-envelope-http.test.js \
+  tests/paper-v6g11-detached-signature.test.js \
+  tests/paper-v6g11-detached-signature-http.test.js | tee "$LOG"
 
-grep -q '^# pass 69$' "$LOG"
+grep -q '^# pass 74$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
 echo "V6G8_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"
