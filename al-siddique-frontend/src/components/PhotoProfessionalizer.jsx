@@ -25,8 +25,8 @@ function Steps({ current }) {
  width: 26, height: 26, borderRadius: '50%', flexShrink: 0,
  display: 'flex', alignItems: 'center', justifyContent: 'center',
  fontSize: 11, fontWeight: 800,
- background: i < current ? '#30D158' : i === current ? 'linear-gradient(135deg,#C8991A,#E8B420)' : 'rgba(11,44,77,0.6)',
- color: i <= current ? '#071e34' : '#8892A4',
+ background: i < current ? 'var(--apex-action-success)' : i === current ? 'var(--apex-action-primary)' : 'var(--apex-bg-subtle)',
+ color: i <= current ? '#fff' : 'var(--apex-text-tertiary)',
  border: i === current ? 'none' : '1px solid rgba(200,153,26,0.2)',
  }}>
  {i < current ? '' : i + 1}
@@ -294,12 +294,12 @@ export default function PhotoProfessionalizer({ studentId, studentName, studentG
  }
 
  const card = {
- background: 'rgba(11,44,77,0.5)', backdropFilter: 'blur(20px)',
+ background: 'var(--apex-bg-surface)', backdropFilter: 'blur(20px)',
  border: '1px solid rgba(200,153,26,0.15)', borderRadius: 16, padding: 24,
  }
  const btn = (color = '#C8991A') => ({
  background: `linear-gradient(135deg, ${color}, ${color}bb)`,
- border: 'none', borderRadius: 10, color: color === '#C8991A' ? '#071e34' : '#fff',
+ border: 'none', borderRadius: 10, color: '#fff',
  padding: '10px 22px', fontWeight: 800, fontSize: 13, cursor: 'pointer',
  display: 'flex', alignItems: 'center', gap: 7,
  })
@@ -338,7 +338,7 @@ export default function PhotoProfessionalizer({ studentId, studentName, studentG
  style={{
  border: `2px dashed ${dragging ? '#C8991A' : rawPhoto ? 'rgba(48,209,88,0.4)' : 'rgba(200,153,26,0.25)'}`,
  borderRadius: 14, padding: 20, cursor: 'pointer',
- background: dragging ? 'rgba(200,153,26,0.07)' : 'rgba(7,30,52,0.3)',
+ background: dragging ? 'color-mix(in srgb,var(--apex-action-primary) 8%,var(--apex-bg-surface))' : 'var(--apex-bg-subtle)',
  transition: 'all 0.2s',
  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
  minHeight: 180,
@@ -373,8 +373,8 @@ export default function PhotoProfessionalizer({ studentId, studentName, studentG
  <button key={g} onClick={() => setGenderOverride(g)}
  style={{
  flex: 1, padding: '10px 6px', borderRadius: 10, border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 12, textTransform: 'capitalize',
- background: genderOverride === g ? 'linear-gradient(135deg,#C8991A,#E8B420)' : 'rgba(11,44,77,0.6)',
- color: genderOverride === g ? '#071e34' : '#8892A4',
+ background: genderOverride === g ? 'var(--apex-action-primary)' : 'var(--apex-bg-subtle)',
+ color: genderOverride === g ? '#fff' : 'var(--apex-text-tertiary)',
  }}>
  {g === 'auto' ? ' Auto' : g === 'male' ? ' Boys' : ' Girls'}
  </button>
@@ -478,8 +478,8 @@ export default function PhotoProfessionalizer({ studentId, studentName, studentG
  {['auto', 'male', 'female'].map(g => (
  <button key={g} onClick={() => setGenderOverride(g)}
  style={{ flex: 1, padding: '8px 4px', borderRadius: 8, border: 'none', cursor: 'pointer', fontWeight: 700, fontSize: 11, textTransform: 'capitalize',
- background: genderOverride === g ? 'linear-gradient(135deg,#C8991A,#E8B420)' : 'rgba(11,44,77,0.6)',
- color: genderOverride === g ? '#071e34' : '#8892A4' }}>
+ background: genderOverride === g ? 'var(--apex-action-primary)' : 'var(--apex-bg-subtle)',
+ color: genderOverride === g ? '#fff' : 'var(--apex-text-tertiary)' }}>
  {g === 'auto' ? '' : g === 'male' ? '' : ''} {g.charAt(0).toUpperCase() + g.slice(1)}
  </button>
  ))}

@@ -1509,6 +1509,24 @@ for (const uiFile of [
   )
 }
 
+
+for (const uiFile of [
+  'al-siddique-frontend/src/context/TenantBrandingContext.jsx',
+  'al-siddique-frontend/src/App.jsx',
+  'al-siddique-frontend/src/components/PremiumLogo.jsx',
+  'al-siddique-frontend/src/components/PremiumProgressLoader.jsx',
+  'al-siddique-frontend/src/components/PhotoProfessionalizer.jsx',
+  'al-siddique-frontend/src/components/PhotoUploadAI.jsx',
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  'al-siddique-frontend/src/Modules/fees/SearchableStudentPicker.jsx',
+]) {
+  assertNotContains(
+    uiFile,
+    /rgba\(11,44,77|rgba\(7,30,52|#071e34|#0B2C4D/,
+    `${uiFile} must use semantic APEX visual surfaces instead of the legacy navy shell.`
+  )
+}
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

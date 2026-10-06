@@ -38,7 +38,7 @@ export default function PremiumProgressLoader({ label = 'Preparing workspace' })
           width: 'min(360px, calc(100vw - 48px))',
           padding: 22,
           borderRadius: 24,
-          background: 'linear-gradient(180deg, rgba(11,44,77,0.96), rgba(7,30,52,0.94))',
+          background: 'linear-gradient(180deg, var(--apex-bg-surface-solid), var(--apex-bg-canvas-elevated))',
           border: '1px solid rgba(200,153,26,0.24)',
           boxShadow: '0 24px 70px rgba(0,0,0,0.36)',
         }}

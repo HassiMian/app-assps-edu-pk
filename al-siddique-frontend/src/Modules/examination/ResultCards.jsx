@@ -55,7 +55,7 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
 
  return createPortal(
  <div onMouseDown={(e) => { if (e.target === e.currentTarget) onClose() }}
- style={{ position:'fixed', inset:0, background:'rgba(7,30,52,0.88)', backdropFilter:'blur(10px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:'22px' }}>
+ style={{ position:'fixed', inset:0, background:'var(--apex-bg-overlay)', backdropFilter:'blur(10px)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center', padding:'22px' }}>
  <div onMouseDown={(e) => e.stopPropagation()}
  style={{ width:'min(1320px, 100%)', maxHeight:'calc(100vh - 44px)', background:'#0D2C4A', border:'1px solid rgba(200,153,26,0.25)', borderRadius:18, boxShadow:'0 24px 60px rgba(0,0,0,0.6)', display:'flex', flexDirection:'column', overflow:'hidden' }}>
  <style>{resultCardPrintCss}</style>
@@ -78,7 +78,7 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  onPrint={() => openResultPrintWindow(dataList)}
  onExportPdf={() => openResultPrintWindow(dataList, true)}
  />
- <div style={{ marginTop:14, border:'1px solid rgba(148,163,184,0.18)', borderRadius:14, overflow:'hidden', background:'rgba(7,30,52,0.35)' }}>
+ <div style={{ marginTop:14, border:'1px solid rgba(148,163,184,0.18)', borderRadius:14, overflow:'hidden', background:'var(--apex-bg-subtle)' }}>
  <button
  type="button"
  onClick={() => setRemarksOpen(v => !v)}
@@ -106,7 +106,7 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  onChange={e => setOptions(prev => ({ ...prev, teacherRemarks:e.target.value }))}
  placeholder="Write custom teacher remarks..."
  rows={4}
- style={{ width:'100%', resize:'vertical', borderRadius:10, border:'1px solid rgba(148,163,184,0.18)', background:'#071e34', color:'#C0C8D8', padding:'10px 12px', outline:'none', fontSize:12, lineHeight:1.5 }}
+ style={{ width:'100%', resize:'vertical', borderRadius:10, border:'1px solid rgba(148,163,184,0.18)', background:'var(--apex-bg-surface-solid)', color:'var(--apex-text-primary)', padding:'10px 12px', outline:'none', fontSize:12, lineHeight:1.5 }}
  />
  <div style={{ color:'#8892A4', fontSize:11, lineHeight:1.5 }}>
  Rule-based presets. No AI required, and this text can be fully customized before print.
@@ -282,7 +282,7 @@ export default function ResultCards() {
  <span style={{
  width:24, height:24, borderRadius:999, display:'grid', placeItems:'center',
  background: done ? C.green : active ? C.gold : 'rgba(148,163,184,0.16)',
- color: done || active ? '#071e34' : C.muted,
+ color: done || active ? '#fff' : C.muted,
  fontSize:12, fontWeight:900,
  }}>{done ? '' : num}</span>
  {title}
@@ -300,7 +300,7 @@ export default function ResultCards() {
  }
 
  return (
- <div style={{ minHeight:'100%', padding:24, background:'#071e34', color:C.silver }}>
+ <div style={{ minHeight:'100%', padding:24, background:'var(--apex-shell-gradient)', color:'var(--apex-text-primary)' }}>
  <div style={{ maxWidth:1180, margin:'0 auto', display:'grid', gap:24 }}>
 
  <div className="super-module-card" style={{ ...card, display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:16, alignItems:'center' }}>
@@ -419,7 +419,7 @@ export default function ResultCards() {
  {loading ? (
  <div className="super-module-card" style={{ ...card, padding:40, textAlign:'center', color:C.muted }}>Loading results…</div>
  ) : student && studentMarks.length > 0 ? (
- <div className="super-module-card" style={{ ...card, background:'rgba(11,44,77,0.72)', borderRadius:20, padding:28, color:'#fff' }}>
+ <div className="super-module-card" style={{ ...card, background:'var(--apex-bg-surface)', borderRadius:20, padding:28, color:'#fff' }}>
  <div style={{ display:'flex', justifyContent:'space-between', gap:16, marginBottom:24, alignItems:'center', flexWrap:'wrap' }}>
  <div>
  <div style={{ color:C.gold, fontWeight:800, fontSize:22 }}>Result Card Preview</div>

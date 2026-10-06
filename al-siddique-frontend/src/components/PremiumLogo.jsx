@@ -59,7 +59,7 @@ export default function PremiumLogo({ src, alt = 'Logo', size = 48, className = 
         <div
           className="h-full w-full rounded-full"
           style={{
-            background: 'linear-gradient(145deg, rgba(11,44,77,0.98), rgba(8,18,32,0.94))',
+            background: 'linear-gradient(145deg, var(--apex-bg-surface-solid), var(--apex-bg-canvas-elevated))',
             boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -14px 22px rgba(0,0,0,0.25)',
           }}
         />
@@ -120,8 +120,8 @@ export default function PremiumLogo({ src, alt = 'Logo', size = 48, className = 
               height: isHero ? '88%' : '84%',
               objectFit: 'contain',
               filter: isHero
-                ? 'drop-shadow(0 4px 16px rgba(11,44,77,0.18)) saturate(1.08) contrast(1.04)'
-                : 'drop-shadow(0 2px 10px rgba(11,44,77,0.14)) saturate(1.06)',
+                ? 'drop-shadow(0 4px 16px color-mix(in srgb,var(--apex-text-primary) 14%,transparent)) saturate(1.08) contrast(1.04)'
+                : 'drop-shadow(0 2px 10px color-mix(in srgb,var(--apex-text-primary) 12%,transparent)) saturate(1.06)',
               transform: 'translateZ(0)',
             }}
           />
@@ -137,7 +137,7 @@ export default function PremiumLogo({ src, alt = 'Logo', size = 48, className = 
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: 'linear-gradient(145deg, #071e34, #0B2C4D)',
+              background: 'linear-gradient(145deg, var(--apex-bg-surface-solid), var(--apex-bg-canvas-elevated))',
               color: '#F7D774',
               border: '1px solid rgba(200,153,26,0.38)',
               fontSize: Math.max(14, Math.round(size * 0.26)),

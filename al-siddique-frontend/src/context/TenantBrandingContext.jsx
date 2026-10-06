@@ -9,7 +9,7 @@ const DEFAULT_BRANDING = {
   schoolName: "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
   logoUrl: null,
   address: "",
-  primaryColor: "#071e34",
+  primaryColor: "#256FE8",
   secondaryColor: "#06b6d4",
   academicYear: String(new Date().getFullYear()),
   loading: false,

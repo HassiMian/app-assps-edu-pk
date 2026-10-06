@@ -184,7 +184,7 @@ export default function PhotoUploadAI({
 
  {/* Photo / Drop zone */}
  {processing ? (
- <div style={{ width: W, minHeight: H, background: 'rgba(7,30,52,0.5)', borderRadius: 12, border: '1px solid rgba(200,153,26,0.2)', overflow: 'hidden' }}>
+ <div style={{ width: W, minHeight: H, background: 'var(--apex-bg-surface)', borderRadius: 12, border: '1px solid rgba(200,153,26,0.2)', overflow: 'hidden' }}>
  <ProcessingBar active />
  </div>
  ) : finalPhoto ? (
@@ -220,7 +220,7 @@ export default function PhotoUploadAI({
  onClick={() => fileRef.current.click()}
  style={{
  position: 'absolute', bottom: 5, left: '50%', transform: 'translateX(-50%)',
- background: 'rgba(7,30,52,0.9)', border: '1px solid rgba(200,153,26,0.4)',
+ background: 'var(--apex-bg-surface-solid)', border: '1px solid rgba(200,153,26,0.4)',
  borderRadius: 6, color: '#C8991A', fontSize: 10, fontWeight: 700,
  padding: '3px 10px', cursor: 'pointer', whiteSpace: 'nowrap',
  }}
@@ -237,7 +237,7 @@ export default function PhotoUploadAI({
  style={{
  width: W, height: H, borderRadius: 12, cursor: 'pointer',
  border: `2px dashed ${dragging ? '#C8991A' : 'rgba(200,153,26,0.28)'}`,
- background: dragging ? 'rgba(200,153,26,0.09)' : 'rgba(7,30,52,0.45)',
+ background: dragging ? 'color-mix(in srgb,var(--apex-action-primary) 9%,var(--apex-bg-surface))' : 'var(--apex-bg-subtle)',
  display: 'flex', flexDirection: 'column',
  alignItems: 'center', justifyContent: 'center', gap: 8,
  transition: 'all 0.2s',

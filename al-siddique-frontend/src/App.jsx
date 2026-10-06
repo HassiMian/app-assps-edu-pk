@@ -197,7 +197,7 @@ class RouteErrorBoundary extends Component {
  borderRadius: 14,
  border: '1px solid rgba(200,153,26,0.28)',
  background: 'linear-gradient(135deg, #C8991A, #e5b82f)',
- color: '#071e34',
+ color: '#fff',
  fontSize: 14,
  fontWeight: 500,
  letterSpacing: '0.01em',
@@ -236,7 +236,7 @@ class AppErrorBoundary extends Component {
  alignItems: 'center',
  justifyContent: 'center',
  padding: 24,
- background: '#071e34',
+ background: 'var(--apex-shell-gradient)',
  color: '#f8fafc',
  fontFamily: 'Inter, system-ui, sans-serif',
  }}>
@@ -262,7 +262,7 @@ class AppErrorBoundary extends Component {
  borderRadius: 12,
  padding: '11px 18px',
  background: 'linear-gradient(135deg,#C8991A,#9A7210)',
- color: '#071e34',
+ color: '#fff',
  fontWeight: 900,
  cursor: 'pointer',
  }}
