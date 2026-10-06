@@ -137,7 +137,8 @@ router.get('/', protect, canReadAdmissions, async (req, res) => {
       : await pool.query(`SELECT * FROM admissions ORDER BY created_at DESC LIMIT 200`)
     res.json({ success: true, data: result.rows })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Admissions list error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to load admissions.' })
   }
 })
 

@@ -687,7 +687,11 @@ router.post('/:id/portal-accounts/:role', protect, adminOnly, async (req, res) =
       },
     })
   } catch (err) {
-    res.status(err.status || 500).json({ success: false, message: err.message || 'Portal account could not be provisioned.' })
+    const status = Number(err.status) || 500
+    res.status(status).json({
+      success: false,
+      message: status >= 500 ? 'Portal account could not be provisioned.' : (err.message || 'Portal account request was invalid.'),
+    })
   }
 })
 

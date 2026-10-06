@@ -186,7 +186,7 @@ router.post('/tenant/branding/upload', protect, canManageTenantBranding, (req, r
     } catch (error) {
       console.error('Branding upload error:', error)
       await cleanupFile(req.file)
-      return res.status(500).json({ success: false, message: error.message || 'Branding upload failed' })
+      return res.status(500).json({ success: false, message: 'Branding upload failed.' })
     }
   })
 })

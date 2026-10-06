@@ -552,7 +552,7 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     })
   } catch (err) {
     console.error('mark-by-gr error:', err)
-    return res.status(500).json({ success: false, message: err.message || 'Failed to mark attendance by GR' })
+    return res.status(500).json({ success: false, message: 'Failed to mark attendance by GR.' })
   }
 })
 
@@ -662,7 +662,7 @@ router.get('/history', protect, requireScopeForServiceOnly('school.attendance.re
     })
   } catch (err) {
     console.error('Attendance history query error:', err.message)
-    res.status(500).json({ success: false, message: err.message || 'Failed to load attendance history' })
+    res.status(500).json({ success: false, message: 'Failed to load attendance history.' })
   }
 })
 

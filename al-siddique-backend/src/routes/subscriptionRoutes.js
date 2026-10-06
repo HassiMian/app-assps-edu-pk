@@ -128,7 +128,7 @@ router.post('/request', upload.single('paymentScreenshot'), async (req, res) => 
     console.error('Subscription request form error:', err.message)
     return res.status(status).json({
       success: false,
-      message: err.message || 'Failed to submit request',
+      message: status >= 500 ? 'Failed to submit subscription request.' : (err.message || 'Invalid subscription request.'),
     })
   }
 })

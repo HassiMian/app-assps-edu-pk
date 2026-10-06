@@ -180,7 +180,8 @@ router.post('/', protect, canManageExams, async (req, res) => {
     `, [schoolId, examName, examType, examClass, examSession, start_date || null, end_date || null, totalMarks, passMarks, created_by || req.user?.id || null])
     res.status(201).json({ success: true, data: result.rows[0] })
   } catch (err) {
-    res.status(500).json({ success: false, message: err.message })
+    console.error('Exam create error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to create exam.' })
   }
 })
 
@@ -368,7 +369,7 @@ router.get('/results', protect, canReadResults, async (req, res) => {
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Exam results list error:', err.message)
-    res.status(500).json({ success: false, message: err.message })
+    res.status(500).json({ success: false, message: 'Failed to load exam results.' })
   }
 })
 

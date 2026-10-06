@@ -1745,9 +1745,16 @@ assertNotContains(
 )
 
 for (const routeFile of [
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'al-siddique-backend/src/routes/attendanceRoutes.js',
   'al-siddique-backend/src/routes/employeeRoutes.js',
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'al-siddique-backend/src/routes/opsRoutes.js',
+  'al-siddique-backend/src/routes/paperRoute.js',
   'al-siddique-backend/src/routes/studentRoutes.js',
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
   'al-siddique-backend/src/routes/timetableRoutes.js',
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
 ]) {
   assertNotContains(
     routeFile,
