@@ -816,6 +816,37 @@ assertContains(
   'employee-linked user updates must remain school scoped.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  "code: 'FEE_TENANT_SCHEMA_REQUIRED'",
+  'fee mutations must fail closed unless fee and student storage are tenant-safe.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /DELETE FROM fee_challans WHERE id = \$1 RETURNING|WHERE id = \$6\s*\n\s*RETURNING \*/,
+  'fee mutation paths must stay explicitly school scoped.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  'Approved submitted payment proof',
+  'approved payment proofs must append an auditable payment ledger entry.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  "status = CASE WHEN $1 >= $2 THEN 'paid' ELSE 'partial' END",
+  'proof approval must preserve partial-payment state when a proof covers only part of the balance.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /Skipping column verification due to offline db/,
+  'fee schema initialization failures must never be silently ignored.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

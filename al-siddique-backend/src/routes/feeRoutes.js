@@ -7,6 +7,23 @@ const { findExistingChallan } = require('../services/feeChallanService')
 const { DEFAULT_ACADEMIC_SETUP } = require('../services/academicSetupService')
 const FEE_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'accountant'])
 
+async function requireFeeWriteContext(req, res) {
+  const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for fee changes.' })
+    return null
+  }
+  const [feeTenantSafe, studentTenantSafe] = await Promise.all([
+    hasColumn('fee_challans', 'school_id'),
+    hasColumn('students', 'school_id'),
+  ])
+  if (!feeTenantSafe || !studentTenantSafe) {
+    res.status(503).json({ success: false, code: 'FEE_TENANT_SCHEMA_REQUIRED', message: 'Fee and student storage must be tenant-safe before fee changes are allowed.' })
+    return null
+  }
+  return schoolId
+}
+
 async function resolveAcademicSession(schoolId, year) {
   try {
     const result = await query('SELECT academic_setup FROM settings WHERE school_id = $1 LIMIT 1', [schoolId])
@@ -250,53 +267,31 @@ async function calculateAutoDiscount({ studentId, schoolId, className, session, 
   return { packageId: null, label: null, amount: 0, siblingCount }
 }
 
-async function calculatePreviousArrears(studentId, schoolId, supportsTenant, targetMonth, targetYear) {
+async function calculatePreviousArrears(studentId, schoolId, targetMonth, targetYear) {
   const targetMonthNumber = monthNumber(targetMonth)
   const targetYearNumber = Number(targetYear)
   const monthCase = `
     CASE LOWER(TRIM(month))
-      WHEN 'january' THEN 1
-      WHEN 'february' THEN 2
-      WHEN 'march' THEN 3
-      WHEN 'april' THEN 4
-      WHEN 'may' THEN 5
-      WHEN 'june' THEN 6
-      WHEN 'july' THEN 7
-      WHEN 'august' THEN 8
-      WHEN 'september' THEN 9
-      WHEN 'october' THEN 10
-      WHEN 'november' THEN 11
-      WHEN 'december' THEN 12
+      WHEN 'january' THEN 1 WHEN 'february' THEN 2 WHEN 'march' THEN 3 WHEN 'april' THEN 4
+      WHEN 'may' THEN 5 WHEN 'june' THEN 6 WHEN 'july' THEN 7 WHEN 'august' THEN 8
+      WHEN 'september' THEN 9 WHEN 'october' THEN 10 WHEN 'november' THEN 11 WHEN 'december' THEN 12
       ELSE NULL
     END
   `
-  const priorPeriodFilter = targetMonthNumber && Number.isFinite(targetYearNumber)
-    ? ` AND (
-          year < $${supportsTenant ? 3 : 2}
-          OR (year = $${supportsTenant ? 3 : 2} AND ${monthCase} < $${supportsTenant ? 4 : 3})
-        )`
-    : ''
-  const sql = supportsTenant 
-    ? `SELECT COALESCE(SUM(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0)), 0) AS total_arrears
-       FROM fee_challans
-       WHERE student_id = $1 AND school_id = $2 AND status IN ('unpaid', 'partial')${priorPeriodFilter}`
-    : `SELECT COALESCE(SUM(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0)), 0) AS total_arrears
-       FROM fee_challans
-       WHERE student_id = $1 AND status IN ('unpaid', 'partial')${priorPeriodFilter}`
-  const params = supportsTenant ? [studentId, schoolId] : [studentId]
+  const params = [studentId, schoolId]
+  let priorPeriodFilter = ''
   if (targetMonthNumber && Number.isFinite(targetYearNumber)) {
+    priorPeriodFilter = ` AND (year < $3 OR (year = $3 AND ${monthCase} < $4))`
     params.push(targetYearNumber, targetMonthNumber)
   }
-  try {
-    const result = await query(sql, params)
-    return asMoney(result.rows[0]?.total_arrears || 0)
-  } catch (err) {
-    console.error('Error calculating arrears:', err)
-    return 0
-  }
+  const result = await query(`
+    SELECT COALESCE(SUM(GREATEST(COALESCE(remaining_balance, gross_total, amount, 0), 0)), 0) AS total_arrears
+    FROM fee_challans
+    WHERE student_id = $1 AND school_id = $2 AND status IN ('unpaid', 'partial')${priorPeriodFilter}
+  `, params)
+  return asMoney(result.rows[0]?.total_arrears || 0)
 }
 
-// GET /api/fees/settings
 router.get('/settings', protect, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
@@ -464,11 +459,7 @@ router.get('/existing', protect, adminOnly, async (req, res) => {
 // GET /api/fees/:id â€” get single challan by ID
 router.get('/pending-proofs', protect, adminOnly, async (req, res) => {
   try {
-    try {
-      await ensureFeePaymentColumns()
-    } catch (e) {
-      console.warn('Skipping column verification due to offline db');
-    }
+    await ensureFeePaymentColumns()
     const tenant = await tenantClause(req, { table: 'fee_challans', alias: 'f', paramIndex: 1 })
     const result = await query(`
       SELECT f.id, f.challan_no, f.month, f.year, f.amount, f.proof_amount, f.proof_method,
@@ -596,32 +587,18 @@ router.get('/', protect, async (req, res) => {
 // POST /api/fees
 router.post('/', protect, adminOnly, async (req, res) => {
   try {
-    try {
-      await ensureFeePaymentColumns()
-      await ensureFeeSystemSchema()
-    } catch (e) {
-      console.warn('Skipping column verification due to offline db');
-    }
-    await tenantClause(req)
+    await ensureFeePaymentColumns()
+    await ensureFeeSystemSchema()
     const { student_id, month, year, amount, due_date, created_by, discount, previous_arrears } = req.body
     const challan_no = `CH-${Date.now().toString().slice(-8)}`
-    const schoolId = currentSchoolId(req)
-
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const duplicateSql = supportsTenant
-      ? `
-        SELECT id FROM fee_challans
-        WHERE student_id = $1 AND month = $2 AND year = $3 AND school_id = $4
-        LIMIT 1
-      `
-      : `
-        SELECT id FROM fee_challans
-        WHERE student_id = $1 AND month = $2 AND year = $3
-        LIMIT 1
-      `
-    const duplicateParams = supportsTenant
-      ? [student_id, month, year, currentSchoolId(req)]
-      : [student_id, month, year]
+    const schoolId = await requireFeeWriteContext(req, res)
+    if (!schoolId) return
+    const duplicateSql = `
+      SELECT id FROM fee_challans
+      WHERE student_id = $1 AND month = $2 AND year = $3 AND school_id = $4
+      LIMIT 1
+    `
+    const duplicateParams = [student_id, month, year, schoolId]
     const duplicate = await query(duplicateSql, duplicateParams)
     if (duplicate.rows.length) {
       const existing = await findExistingChallan({
@@ -639,8 +616,8 @@ router.post('/', protect, adminOnly, async (req, res) => {
     }
 
     const studentResult = await query(
-      `SELECT id, class, section FROM students WHERE id = $1 ${supportsTenant ? 'AND school_id = $2' : ''} LIMIT 1`,
-      supportsTenant ? [student_id, schoolId] : [student_id]
+      'SELECT id, class, section FROM students WHERE id = $1 AND school_id = $2 LIMIT 1',
+      [student_id, schoolId]
     )
     if (!studentResult.rows.length) {
       return res.status(404).json({ success: false, message: 'Student not found for this challan.' })
@@ -652,7 +629,7 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const monthlyFee = asMoney(amount || configuredMonthly)
     const arrears = previous_arrears !== undefined
       ? asMoney(previous_arrears)
-      : await calculatePreviousArrears(student_id, schoolId, supportsTenant, month, year)
+      : await calculatePreviousArrears(student_id, schoolId, month, year)
     const autoDiscount = discount === undefined || discount === null || discount === ''
       ? await calculateAutoDiscount({ studentId: Number(student_id), schoolId, className: student.class, session, baseAmount: monthlyFee })
       : { packageId: null, label: null, amount: 0, siblingCount: 1 }
@@ -663,31 +640,18 @@ router.post('/', protect, adminOnly, async (req, res) => {
     const remainingBalance = grossTotal
     const creatorId = Number.isFinite(Number(created_by)) ? Number(created_by) : (req.user?.id || null)
 
-    const result = supportsTenant
-      ? await query(`
-        INSERT INTO fee_challans (
-          school_id, challan_no, student_id, month, year, amount, due_date, created_by,
-          discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
-          discount_package_id, discount_label
-        )
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *
-      `, [
-        schoolId, challan_no, student_id, month, year, grossTotal, due_date, creatorId,
-        finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
-        autoDiscount.packageId, autoDiscount.label,
-      ])
-      : await query(`
-        INSERT INTO fee_challans (
-          challan_no, student_id, month, year, amount, due_date, created_by,
-          discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
-          discount_package_id, discount_label
-        )
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *
-      `, [
-        challan_no, student_id, month, year, grossTotal, due_date, creatorId,
-        finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
-        autoDiscount.packageId, autoDiscount.label,
-      ])
+    const result = await query(`
+      INSERT INTO fee_challans (
+        school_id, challan_no, student_id, month, year, amount, due_date, created_by,
+        discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
+        discount_package_id, discount_label
+      )
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING *
+    `, [
+      schoolId, challan_no, student_id, month, year, grossTotal, due_date, creatorId,
+      finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
+      autoDiscount.packageId, autoDiscount.label,
+    ])
 
     if (autoDiscount.packageId && result.rows[0]?.id) {
       await query(`
@@ -714,13 +678,10 @@ router.post('/', protect, adminOnly, async (req, res) => {
 // POST /api/fees/bulk
 router.post('/bulk', protect, adminOnly, async (req, res) => {
   try {
-    try {
-      await ensureFeePaymentColumns()
-      await ensureFeeSystemSchema()
-    } catch (e) {}
-    await tenantClause(req)
-    const schoolId = currentSchoolId(req)
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
+    await ensureFeePaymentColumns()
+    await ensureFeeSystemSchema()
+    const schoolId = await requireFeeWriteContext(req, res)
+    if (!schoolId) return
     const { class: className, month, year, due_date } = req.body
     
     if (!className || !month || !year) {
@@ -728,8 +689,8 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     }
 
     const studentsResult = await query(
-      `SELECT id, class, section FROM students WHERE class = $1 AND is_active = true ${supportsTenant ? 'AND school_id = $2' : ''}`,
-      supportsTenant ? [className, schoolId] : [className]
+      'SELECT id, class, section FROM students WHERE class = $1 AND is_active = true AND school_id = $2',
+      [className, schoolId]
     )
     
     let generatedCount = 0
@@ -738,12 +699,8 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     const configuredMonthly = await getClassMonthlyFee(schoolId, className, session)
 
     for (const student of studentsResult.rows) {
-      const duplicateSql = supportsTenant
-        ? `SELECT id FROM fee_challans WHERE student_id = $1 AND month = $2 AND year = $3 AND school_id = $4 LIMIT 1`
-        : `SELECT id FROM fee_challans WHERE student_id = $1 AND month = $2 AND year = $3 LIMIT 1`
-      const duplicateParams = supportsTenant
-        ? [student.id, month, year, schoolId]
-        : [student.id, month, year]
+      const duplicateSql = 'SELECT id FROM fee_challans WHERE student_id = $1 AND month = $2 AND year = $3 AND school_id = $4 LIMIT 1'
+      const duplicateParams = [student.id, month, year, schoolId]
       const duplicate = await query(duplicateSql, duplicateParams)
       
       if (duplicate.rows.length) {
@@ -752,7 +709,7 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
       }
 
       const challan_no = `CH-${Date.now().toString().slice(-8)}-${student.id}`
-      const arrears = await calculatePreviousArrears(student.id, schoolId, supportsTenant, month, year)
+      const arrears = await calculatePreviousArrears(student.id, schoolId, month, year)
       const monthlyFee = asMoney(configuredMonthly)
       
       const autoDiscount = await calculateAutoDiscount({ studentId: student.id, schoolId, className: student.class, session, baseAmount: monthlyFee })
@@ -761,31 +718,18 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
       const remainingBalance = grossTotal
       const creatorId = req.user?.id || null
 
-      const result = supportsTenant
-        ? await query(`
-          INSERT INTO fee_challans (
-            school_id, challan_no, student_id, month, year, amount, due_date, created_by,
-            discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
-            discount_package_id, discount_label
-          )
-          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING id
-        `, [
-          schoolId, challan_no, student.id, month, year, grossTotal, due_date, creatorId,
-          finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
-          autoDiscount.packageId, autoDiscount.label,
-        ])
-        : await query(`
-          INSERT INTO fee_challans (
-            challan_no, student_id, month, year, amount, due_date, created_by,
-            discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
-            discount_package_id, discount_label
-          )
-          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING id
-        `, [
-          challan_no, student.id, month, year, grossTotal, due_date, creatorId,
-          finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
-          autoDiscount.packageId, autoDiscount.label,
-        ])
+      const result = await query(`
+        INSERT INTO fee_challans (
+          school_id, challan_no, student_id, month, year, amount, due_date, created_by,
+          discount, monthly_fee, previous_arrears, gross_total, remaining_balance,
+          discount_package_id, discount_label
+        )
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15) RETURNING id
+      `, [
+        schoolId, challan_no, student.id, month, year, grossTotal, due_date, creatorId,
+        finalDiscount, monthlyFee, arrears, grossTotal, remainingBalance,
+        autoDiscount.packageId, autoDiscount.label,
+      ])
 
       if (autoDiscount.packageId && result.rows[0]?.id) {
         await query(`
@@ -812,7 +756,8 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
   try {
     await ensureFeePaymentColumns()
     const { amount, due_date, discount, month, year, monthly_fee, previous_arrears, challan_no } = req.body
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
+    const schoolId = await requireFeeWriteContext(req, res)
+    if (!schoolId) return
     const monthly = amount !== undefined ? asMoney(amount) : (monthly_fee !== undefined ? asMoney(monthly_fee) : null)
     const arrears = previous_arrears !== undefined ? asMoney(previous_arrears) : null
     const disc = discount !== undefined ? asMoney(discount) : null
@@ -834,13 +779,10 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
           ELSE 'paid'
         END,
         updated_at = NOW()
-      WHERE id = $8
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $9' : ''}
+      WHERE id = $8 AND school_id = $9
       RETURNING *
     `
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [challan_no || null, monthly, arrears, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id, currentSchoolId(req)]
-      : [challan_no || null, monthly, arrears, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id]
+    const params = [challan_no || null, monthly, arrears, disc, due_date || null, month || null, year ? Number(year) : null, req.params.id, schoolId]
     const result = await query(sql, params)
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan updated', data: result.rows[0] })
@@ -852,14 +794,9 @@ router.put('/:id', protect, adminOnly, async (req, res) => {
 // DELETE /api/fees/:id
 router.delete('/:id', protect, adminOnly, async (req, res) => {
   try {
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const sql = supportsTenant && req.user?.role !== 'super_admin'
-      ? 'DELETE FROM fee_challans WHERE id = $1 AND school_id = $2 RETURNING id'
-      : 'DELETE FROM fee_challans WHERE id = $1 RETURNING id'
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [req.params.id, currentSchoolId(req)]
-      : [req.params.id]
-    const result = await query(sql, params)
+    const schoolId = await requireFeeWriteContext(req, res)
+    if (!schoolId) return
+    const result = await query('DELETE FROM fee_challans WHERE id = $1 AND school_id = $2 RETURNING id', [req.params.id, schoolId])
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan deleted' })
   } catch (err) {
@@ -871,18 +808,15 @@ router.delete('/:id', protect, adminOnly, async (req, res) => {
 router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
   try {
     const { amount, discount, due_date, previous_arrears } = req.body
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const schoolId = currentSchoolId(req)
+    const schoolId = await requireFeeWriteContext(req, res)
+    if (!schoolId) return
     const existingSql = `
       SELECT student_id, month, year, amount, monthly_fee, discount
       FROM fee_challans
-      WHERE id = $1
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''}
+      WHERE id = $1 AND school_id = $2
       LIMIT 1
     `
-    const existingParams = supportsTenant && req.user?.role !== 'super_admin'
-      ? [req.params.id, schoolId]
-      : [req.params.id]
+    const existingParams = [req.params.id, schoolId]
     const existing = await query(existingSql, existingParams)
     if (!existing.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     const current = existing.rows[0]
@@ -891,7 +825,7 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
       : asMoney(current.monthly_fee || current.amount)
     const arrears = previous_arrears !== undefined
       ? asMoney(previous_arrears)
-      : await calculatePreviousArrears(current.student_id, schoolId, supportsTenant, current.month, current.year)
+      : await calculatePreviousArrears(current.student_id, schoolId, current.month, current.year)
     const disc = discount !== undefined
       ? asMoney(discount)
       : asMoney(current.discount)
@@ -913,13 +847,10 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
           ELSE 'paid'
         END,
         updated_at = NOW()
-      WHERE id = $8
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $9' : ''}
+      WHERE id = $8 AND school_id = $9
       RETURNING *
     `
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [challan_no, monthly, gross, arrears, gross, disc, due_date || null, req.params.id, schoolId]
-      : [challan_no, monthly, gross, arrears, gross, disc, due_date || null, req.params.id]
+    const params = [challan_no, monthly, gross, arrears, gross, disc, due_date || null, req.params.id, schoolId]
     const result = await query(sql, params)
     if (!result.rows.length) return res.status(404).json({ success: false, message: 'Challan not found' })
     res.json({ success: true, message: 'Challan regenerated', data: result.rows[0] })
@@ -928,125 +859,170 @@ router.post('/:id/regenerate', protect, adminOnly, async (req, res) => {
   }
 })
 
-// POST /api/fees/:id/upload-proof â€” parent submits payment screenshot
+// POST /api/fees/:id/upload-proof — parent/student/admin submits payment screenshot
 router.post('/:id/upload-proof', protect, async (req, res) => {
   try {
-    try {
-      await ensureFeePaymentColumns()
-      await ensureFeeSystemSchema()
-    } catch (e) {
-      console.warn('Skipping column verification due to offline db');
-    }
+    await ensureFeePaymentColumns()
+    await ensureFeeSystemSchema()
+    const schoolId = await requireFeeWriteContext(req, res)
+    if (!schoolId) return
+
     const { proof_image, proof_amount, proof_method } = req.body
     if (!proof_image) return res.status(400).json({ success: false, message: 'Screenshot required' })
-    if (Buffer.byteLength(proof_image, 'utf8') > 5 * 1024 * 1024)
+    if (Buffer.byteLength(proof_image, 'utf8') > 5 * 1024 * 1024) {
       return res.status(400).json({ success: false, message: 'Image too large (max 5MB)' })
+    }
+    const amountValue = proof_amount === '' || proof_amount === null || proof_amount === undefined ? null : Number(proof_amount)
+    if (amountValue !== null && (!Number.isFinite(amountValue) || amountValue <= 0)) {
+      return res.status(422).json({ success: false, message: 'Proof amount must be greater than zero when provided.' })
+    }
 
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
     const role = String(req.user?.role || '').toLowerCase()
     const userId = req.user?.id || null
     if (!canManageFeeRecord(req) && !['parent', 'student'].includes(role)) {
       return res.status(403).json({ success: false, message: 'Only admins, parents, or students can submit fee proofs.' })
     }
-    const scopedUserFilter = !canManageFeeRecord(req) && ['parent', 'student'].includes(role)
-      ? `AND EXISTS (
-           SELECT 1
-           FROM students s
-           WHERE s.id = fee_challans.student_id
-             AND s.school_id = fee_challans.school_id
-             AND (
-               ($${supportsTenant && req.user?.role !== 'super_admin' ? 6 : 5}::text = 'parent' AND s.parent_user_id = $${supportsTenant && req.user?.role !== 'super_admin' ? 7 : 6})
-               OR
-               ($${supportsTenant && req.user?.role !== 'super_admin' ? 6 : 5}::text = 'student' AND s.student_user_id = $${supportsTenant && req.user?.role !== 'super_admin' ? 7 : 6})
-             )
-         )`
-      : ''
-    const sql = `
-      UPDATE fee_challans
-      SET proof_image = $1, proof_amount = $2, proof_method = $3,
-          proof_status = 'pending', proof_submitted_at = NOW(), updated_at = NOW()
-      WHERE id = $4
-      ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $5' : ''}
-      ${scopedUserFilter}
-      RETURNING id, proof_status, proof_submitted_at
-    `
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [proof_image, proof_amount || null, proof_method || null, req.params.id, currentSchoolId(req)]
-      : [proof_image, proof_amount || null, proof_method || null, req.params.id]
-    if (scopedUserFilter) {
+
+    const params = [proof_image, amountValue, proof_method || null, Number(req.params.id), schoolId]
+    let ownerFilter = ''
+    if (!canManageFeeRecord(req)) {
       params.push(role, userId)
+      ownerFilter = `AND EXISTS (
+        SELECT 1
+        FROM students s
+        WHERE s.id = fee_challans.student_id
+          AND s.school_id = fee_challans.school_id
+          AND (
+            ($6::text = 'parent' AND s.parent_user_id = $7)
+            OR ($6::text = 'student' AND s.student_user_id = $7)
+          )
+      )`
     }
-    const result = await query(sql, params)
 
-    if (!result.rows.length)
-      return res.status(404).json({ success: false, message: 'Fee challan not found' })
-
-    res.json({ success: true, message: 'Proof submitted. Admin will verify soon.', data: result.rows[0] })
+    const result = await query(`
+      UPDATE fee_challans
+      SET proof_image = $1,
+          proof_amount = $2,
+          proof_method = $3,
+          proof_status = 'pending',
+          proof_submitted_at = NOW(),
+          updated_at = NOW()
+      WHERE id = $4 AND school_id = $5
+        ${ownerFilter}
+      RETURNING id, proof_status, proof_submitted_at, proof_amount, proof_method
+    `, params)
+    if (!result.rows.length) return res.status(404).json({ success: false, message: 'Fee challan not found or not accessible.' })
+    return res.json({ success: true, message: 'Payment proof submitted for review', data: result.rows[0] })
   } catch (err) {
     console.error('Proof upload error:', err.message)
-    return res.status(503).json({ success: false, message: 'Database unavailable. Proof could not be submitted.' })
+    return res.status(500).json({ success: false, message: 'Payment proof could not be submitted.' })
   }
 })
 
-// PUT /api/fees/:id/approve-proof â€” admin approves or rejects screenshot
+// PUT /api/fees/:id/approve-proof — review proof transactionally and preserve payment history
 router.put('/:id/approve-proof', protect, adminOnly, async (req, res) => {
+  const { action } = req.body
+  if (!['approve', 'reject'].includes(action)) {
+    return res.status(400).json({ success: false, message: 'action must be approve or reject' })
+  }
+  const challanId = Number(req.params.id)
+  if (!Number.isInteger(challanId) || challanId <= 0) {
+    return res.status(400).json({ success: false, message: 'Valid challan id is required.' })
+  }
+  const schoolId = await requireFeeWriteContext(req, res)
+  if (!schoolId) return
+
+  const client = await pool.connect()
   try {
-    try {
-      await ensureFeePaymentColumns()
-    } catch (e) {
-      console.warn('Skipping column verification due to offline db');
+    await ensureFeePaymentColumns()
+    await client.query('BEGIN')
+    const locked = await client.query(`
+      SELECT id, student_id, amount, monthly_fee, previous_arrears, discount, gross_total,
+             paid_amount, proof_amount, proof_method, proof_status
+      FROM fee_challans
+      WHERE id = $1 AND school_id = $2
+      FOR UPDATE
+    `, [challanId, schoolId])
+    if (!locked.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Fee challan not found.' })
     }
-    const { action } = req.body  // 'approve' | 'reject'
-    if (!['approve', 'reject'].includes(action))
-      return res.status(400).json({ success: false, message: 'action must be approve or reject' })
+    const current = locked.rows[0]
+    if (current.proof_status !== 'pending') {
+      await client.query('ROLLBACK')
+      return res.status(409).json({ success: false, message: 'Only a pending payment proof can be reviewed.' })
+    }
 
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
-    const tenantFilter = supportsTenant && req.user?.role !== 'super_admin'
-      ? 'AND school_id = $2'
-      : ''
-    const params = supportsTenant && req.user?.role !== 'super_admin'
-      ? [req.params.id, currentSchoolId(req)]
-      : [req.params.id]
-
-    if (action === 'approve') {
-      const result = await query(`
-        UPDATE fee_challans
-        SET status = 'paid',
-            paid_amount = COALESCE(proof_amount, gross_total, GREATEST(amount - COALESCE(discount, 0), 0)),
-            remaining_balance = GREATEST(COALESCE(gross_total, GREATEST(amount - COALESCE(discount, 0), 0)) - COALESCE(proof_amount, gross_total, GREATEST(amount - COALESCE(discount, 0), 0)), 0),
-            payment_mode = COALESCE(proof_method, 'online'),
-            paid_date = CURRENT_DATE,
-            proof_status = 'approved',
-            updated_at = NOW()
-        WHERE id = $1 ${tenantFilter}
-        RETURNING *
-      `, params)
-      if (!result.rows.length) return res.status(404).json({ success: false, message: 'Fee challan not found' })
-      return res.json({ success: true, message: 'Fee approved and marked as paid', data: result.rows[0] })
-    } else {
-      const result = await query(`
+    if (action === 'reject') {
+      const result = await client.query(`
         UPDATE fee_challans
         SET proof_status = 'rejected', proof_image = NULL, updated_at = NOW()
-        WHERE id = $1 ${tenantFilter}
+        WHERE id = $1 AND school_id = $2
         RETURNING id, proof_status
-      `, params)
-      if (!result.rows.length) return res.status(404).json({ success: false, message: 'Fee challan not found' })
-      return res.json({ success: true, message: 'Proof rejected', data: result.rows[0] })
+      `, [challanId, schoolId])
+      await client.query('COMMIT')
+      return res.json({ success: true, message: 'Proof rejected.', data: result.rows[0] })
     }
+
+    const baseTotal = Math.max(0, Number(current.monthly_fee ?? current.amount ?? 0) + Number(current.previous_arrears || 0))
+    const discount = Math.max(0, Number(current.discount || 0))
+    const grossTotal = Math.max(0, Number(current.gross_total ?? (baseTotal - discount)))
+    const previousPaid = Math.max(0, Number(current.paid_amount || 0))
+    const remainingBefore = Math.max(0, grossTotal - previousPaid)
+    const proofIncrement = current.proof_amount == null
+      ? remainingBefore
+      : Number(current.proof_amount)
+    if (!Number.isFinite(proofIncrement) || proofIncrement <= 0 || proofIncrement > remainingBefore) {
+      await client.query('ROLLBACK')
+      return res.status(422).json({ success: false, message: 'Proof amount must be positive and cannot exceed the remaining balance.' })
+    }
+    const cumulativePaid = Number((previousPaid + proofIncrement).toFixed(2))
+    const paymentMode = String(current.proof_method || 'online').trim().toLowerCase().slice(0, 32) || 'online'
+    const result = await client.query(`
+      UPDATE fee_challans
+      SET paid_amount = $1,
+          remaining_balance = GREATEST($2 - $1, 0),
+          status = CASE WHEN $1 >= $2 THEN 'paid' ELSE 'partial' END,
+          payment_mode = $3,
+          paid_date = COALESCE(paid_date, CURRENT_DATE),
+          proof_status = 'approved',
+          updated_at = NOW()
+      WHERE id = $4 AND school_id = $5
+      RETURNING *
+    `, [cumulativePaid, grossTotal, paymentMode, challanId, schoolId])
+
+    await client.query(`
+      INSERT INTO fee_payment_transactions (
+        school_id, challan_id, student_id, amount, cumulative_paid,
+        payment_mode, discount_snapshot, payment_note, recorded_by
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    `, [
+      schoolId,
+      challanId,
+      current.student_id || null,
+      proofIncrement,
+      cumulativePaid,
+      paymentMode,
+      discount,
+      'Approved submitted payment proof',
+      req.user?.id || null,
+    ])
+
+    await client.query('COMMIT')
+    return res.json({ success: true, message: 'Payment proof approved and recorded.', payment_increment: proofIncrement, data: result.rows[0] })
   } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
     console.error('Proof approval/rejection error:', err.message)
-    return res.status(503).json({ success: false, message: 'Database unavailable. Proof status could not be updated.' })
+    return res.status(500).json({ success: false, message: 'Payment proof review could not be completed.' })
+  } finally {
+    client.release()
   }
 })
 
 // GET /api/fees/pending-proofs â€” admin reviews submitted screenshots
 router.get('/pending-proofs', protect, adminOnly, async (req, res) => {
   try {
-    try {
-      await ensureFeePaymentColumns()
-    } catch (e) {
-      console.warn('Skipping column verification due to offline db');
-    }
+    await ensureFeePaymentColumns()
     const tenant = await tenantClause(req, { table: 'fee_challans', alias: 'f', paramIndex: 1 })
     const result = await query(`
       SELECT f.id, f.challan_no, f.month, f.year, f.amount, f.proof_amount, f.proof_method,
@@ -1086,18 +1062,17 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
     return res.status(422).json({ success: false, message: 'Invalid payment mode.' })
   }
 
-  const schoolId = currentSchoolId(req)
+  const schoolId = await requireFeeWriteContext(req, res)
+  if (!schoolId) return
   const client = await pool.connect()
   try {
     await client.query('BEGIN')
-    const supportsTenant = await hasColumn('fee_challans', 'school_id').catch(() => false)
     const rowResult = await client.query(`
       SELECT id, student_id, school_id, amount, monthly_fee, previous_arrears, paid_amount, discount
       FROM fee_challans
-      WHERE id = $1
-        ${supportsTenant && req.user?.role !== 'super_admin' ? 'AND school_id = $2' : ''}
+      WHERE id = $1 AND school_id = $2
       FOR UPDATE
-    `, supportsTenant && req.user?.role !== 'super_admin' ? [challanId, schoolId] : [challanId])
+    `, [challanId, schoolId])
 
     if (!rowResult.rowCount) {
       await client.query('ROLLBACK')
@@ -1137,9 +1112,9 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
           END,
           paid_date = CASE WHEN $1 > 0 THEN COALESCE(paid_date, CURRENT_DATE) ELSE NULL END,
           updated_at = NOW()
-      WHERE id = $6
+      WHERE id = $6 AND school_id = $7
       RETURNING *
-    `, [cumulativePaid, paymentMode, discount, paymentNote, grossTotal, challanId])
+    `, [cumulativePaid, paymentMode, discount, paymentNote, grossTotal, challanId, schoolId])
 
     if (paymentIncrement > 0) {
       await client.query(`
