@@ -1,0 +1,9 @@
+{
+  "schemaVersion":"assps-grade9-language-cross-check-v1",
+  "checkedOn":"2026-10-06",
+  "primaryHierarchy":"officialGrade9LanguageModelHierarchy2026.json",
+  "secondaryArtifact":{"authority":"PECTAA","notification":"PECTAA/C&C Unit/2025/376","sha256":"c71ea8446015df8fe61adbe869508f8301b21797fd9f4f7a89e96472f140e45c","pageCount":65,"identityPage":1,"status":"INDEPENDENT_COPY_HASHED_AND_PAGE_REVIEWED"},
+  "english":{"sourcePages":[55,56],"crossCheckState":"FULL_HIERARCHY_MATCH_ON_INSTRUCTIONS","verified":{"totalMarks":75,"objectiveMarks":19,"subjectiveMarks":56,"totalDurationMinutes":150,"objectiveDurationMinutes":20,"subjectiveDurationMinutes":130,"q1Children":{"verbForm":5,"spelling":4,"wordMeaning":5,"grammar":5},"q2Marks":10,"q3Marks":8,"q4Marks":5,"q5Marks":5,"q6Marks":8,"q7Marks":10,"q8Marks":5,"q9Marks":5},"note":"Only hierarchy/marks/task families were cross-checked; model question wording is not copied into the bank."},
+  "urdu":{"sourcePages":[46,47,48,49,50,51,52,53],"crossCheckState":"PARTIAL_VISUAL_OCR_MATCH_PRIMARY_HIERARCHY_REMAINS_AUTHORITY","verified":{"totalMarks":75,"objectiveMarks":15,"subjectiveMarks":60,"objectiveModelPage":50,"subjectiveModelPages":[52,53],"visibleQ2Marks":10,"visibleQ4Attempt":5,"visibleQ4Offered":8},"note":"Secondary-copy Urdu pages are image-heavy and OCR is noisy. Only clearly visible structural facts are cross-checked; the previously page-reviewed primary hierarchy remains the authority for detailed Urdu task taxonomy."},
+  "guards":{"secondaryCopyCanOverridePrimaryHierarchy":false,"ocrTextCanSeedQuestions":false,"pastOrModelStemsCopied":false,"actualAnnualPaperStillRequiredByOwnerRule":true}
+}
