@@ -2062,3 +2062,20 @@ assertNotContains(
   /requestCache\.get\(config\.url\)|requestCache\.set\(res\.config\.url/,
   'frontend API cache must never be keyed by URL alone.'
 )
+
+assertContains(
+  'al-siddique-frontend/src/services/useStudentStore.js',
+  'resetForScope(scope)',
+  'student in-memory cache must reset when the authenticated tenant/user scope changes.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/services/useStudentStore.js',
+  /Keep the last known cache|_cache\s*=\s*_cache\.map|_cache\s*=\s*_cache\.filter|res\.data\?\.data \|\| res\.data \|\| data/,
+  'student store must not preserve stale source data, optimistically mutate business truth, or substitute request payloads for confirmed records.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'Student update could not be saved.',
+  'student edit UI must surface backend write failures instead of closing as if the mutation succeeded.'
+)

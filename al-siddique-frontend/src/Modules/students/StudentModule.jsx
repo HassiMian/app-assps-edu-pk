@@ -1398,8 +1398,12 @@ function AddStudentModal({ onClose, initialData, updateStudent, onCredentials, p
  }
  const payload = buildPayload();
  if (isEdit) {
+ try {
  await updateStudent(initialData.id, payload);
  onClose();
+ } catch (error) {
+ alert(error?.response?.data?.message || error?.message || 'Student update could not be saved.');
+ }
  return;
  }
  setSavingCombo(withFirstChallan);
@@ -2502,15 +2506,15 @@ export default function StudentsModule() {
  </Tip>
  {s.status === "Active" ? (
  <Tip label="Struck-off / Remove Student" color="#FF375F">
- <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to struck-off / remove ${s.name} (GR: ${s.gr})?`)) { await deleteStudent(s.id); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
+ <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to struck-off / remove ${s.name} (GR: ${s.gr})?`)) { try { await deleteStudent(s.id); } catch (error) { alert(error?.response?.data?.message || error?.message || 'Student could not be removed.'); } } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
  </Tip>
  ) : (
  <>
  <Tip label="Reactivate / Restore Student" color="#30D158">
- <button onClick={async ()=>{ if(window.confirm(`Reactivate ${s.name} (GR: ${s.gr}) to Active student roster?`)) { await updateStudent(s.id, { is_active: true }); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(48,209,88,0.15)", border:"1px solid rgba(48,209,88,0.25)", color:"#30D158", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><RotateCcw size={14}/></button>
+ <button onClick={async ()=>{ if(window.confirm(`Reactivate ${s.name} (GR: ${s.gr}) to Active student roster?`)) { try { await updateStudent(s.id, { is_active: true }); } catch (error) { alert(error?.response?.data?.message || error?.message || 'Student could not be reactivated.'); } } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(48,209,88,0.15)", border:"1px solid rgba(48,209,88,0.25)", color:"#30D158", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><RotateCcw size={14}/></button>
  </Tip>
  <Tip label="Permanently Delete Student" color="#FF375F">
- <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to permanently delete ${s.name} (GR: ${s.gr})? This will completely remove the student.`)) { await deleteStudent(s.id, true); } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
+ <button onClick={async ()=>{ if(window.confirm(`Are you sure you want to permanently delete ${s.name} (GR: ${s.gr})? This will completely remove the student.`)) { try { await deleteStudent(s.id, true); } catch (error) { alert(error?.response?.data?.message || error?.message || 'Student could not be permanently deleted.'); } } }} style={{ width:30, height:30, borderRadius:8, background:"rgba(255,55,95,0.15)", border:"1px solid rgba(255,55,95,0.2)", color:"#FF375F", cursor:"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}><Trash2 size={14}/></button>
  </Tip>
  </>
  )}
@@ -2539,7 +2543,7 @@ export default function StudentsModule() {
 
  {showAdd && <AddStudentModal onClose={()=>setShowAdd(false)} paperSettings={paperSettings} onCredentials={(credentials, student) => setNewCredentials({ credentials, student })}/>}
  {editStudent && <AddStudentModal onClose={()=>setEditStudent(null)} initialData={editStudent} updateStudent={updateStudent}/>}
- {viewStudent && <ProfileModal student={viewStudent} onClose={()=>setViewStudent(null)} paperSettings={paperSettings} academicSession={academicSession} onUpdatePhoto={(id, url) => { updateStudent(id, { photo: url }); setViewStudent(s => ({ ...s, photo: url })) }}/>}
+ {viewStudent && <ProfileModal student={viewStudent} onClose={()=>setViewStudent(null)} paperSettings={paperSettings} academicSession={academicSession} onUpdatePhoto={async (id, url) => { try { await updateStudent(id, { photo: url }); setViewStudent(s => ({ ...s, photo: url })) } catch (error) { alert(error?.response?.data?.message || error?.message || 'Student photo could not be saved.'); } }}/>}
  {printList && <PrintStudentList list={printList} school={paperSettings} academicSession={academicSession} onClose={()=>setPrintList(null)} />}
  {newCredentials && (
  <div style={{ position:'fixed', inset:0, zIndex:14000, background:'var(--apex-bg-overlay)', display:'grid', placeItems:'center', padding:20 }} onClick={()=>setNewCredentials(null)}>

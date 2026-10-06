@@ -1,10 +1,25 @@
 import { useState, useEffect, useCallback } from 'react'
 import api from './api'
+import { useAuth } from '../context/AuthContext'
 
 let _cache = []
+let _cacheScope = null
 let _listeners = []
 
 function notify() { _listeners.forEach(fn => fn()) }
+
+function studentScope(user = {}) {
+ const raw = user?.tenant_id || user?.tenantId || user?.school_id || user?.schoolId || user?.school_code || user?.schoolCode || user?.email || 'public'
+ return String(raw).trim().toLowerCase() || 'public'
+}
+
+function resetForScope(scope) {
+ const nextScope = String(scope || 'public')
+ if (_cacheScope === nextScope) return
+ _cacheScope = nextScope
+ _cache = []
+ notify()
+}
 
 function normalizeText(value) {
  return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim()
@@ -50,61 +65,58 @@ function dedupeStudents(students = []) {
  return Array.from(byKey.values())
 }
 
-async function fetchFromAPI() {
+async function fetchFromAPI(scope = _cacheScope || 'public') {
+  const requestScope = String(scope || 'public')
   try {
-    const res = await api.get('/api/students?active=all')
-    _cache = dedupeStudents(res.data?.data || [])
+    const res = await api.get('/api/students?active=all', { skipCache:true })
+    if (_cacheScope !== requestScope) return []
+    _cache = dedupeStudents(Array.isArray(res.data?.data) ? res.data.data : [])
     notify()
-  } catch {
-    // Keep the last known cache if the student API is temporarily unavailable.
+    return _cache
+  } catch (error) {
+    if (_cacheScope === requestScope) {
+      _cache = []
+      notify()
+    }
+    throw error
   }
 }
 
 export async function refreshStudents() {
-  await fetchFromAPI()
+  return fetchFromAPI()
 }
 
 export function useStudentStore() {
-  const [students, setStudents] = useState(_cache)
+  const { user } = useAuth()
+  const scope = studentScope(user)
+  const [students, setStudents] = useState([])
 
   useEffect(() => {
+    resetForScope(scope)
     const refresh = () => setStudents([..._cache])
     _listeners.push(refresh)
-    fetchFromAPI()
+    refresh()
+    void fetchFromAPI(scope).catch((error) => console.error('Student directory load failed:', error?.message || error))
     return () => { _listeners = _listeners.filter(f => f !== refresh) }
-  }, [])
+  }, [scope])
 
   const addStudent = useCallback(async (data) => {
     const res = await api.post('/api/students', data)
-    await fetchFromAPI()
-    return res.data?.data || res.data || data
-  }, [])
+    await fetchFromAPI(scope)
+    return res.data?.data || null
+  }, [scope])
 
   const deleteStudent = useCallback(async (id, permanent = false) => {
-    if (permanent) {
-      _cache = _cache.filter(s => s.id !== id && String(s.id) !== String(id))
-    } else {
-      _cache = _cache.map(s => (s.id === id || String(s.id) === String(id) ? { ...s, is_active: false } : s))
-    }
-    notify()
-    try {
-      await api.delete(`/api/students/${id}${permanent ? '?permanent=true' : ''}`)
-    } catch (err) {
-      console.error('Delete student API error:', err)
-    }
-    await fetchFromAPI()
-  }, [])
+    const res = await api.delete(`/api/students/${id}${permanent ? '?permanent=true' : ''}`)
+    await fetchFromAPI(scope)
+    return res.data?.data || { success: res.data?.success !== false }
+  }, [scope])
 
   const updateStudent = useCallback(async (id, patch) => {
-    _cache = _cache.map(s => (s.id === id || String(s.id) === String(id) ? { ...s, ...patch } : s))
-    notify()
-    try {
-      await api.put(`/api/students/${id}`, patch)
-    } catch (err) {
-      console.error('Update student API error:', err)
-    }
-    await fetchFromAPI()
-  }, [])
+    const res = await api.put(`/api/students/${id}`, patch)
+    await fetchFromAPI(scope)
+    return res.data?.data || null
+  }, [scope])
 
   return { students, addStudent, deleteStudent, updateStudent }
 }
