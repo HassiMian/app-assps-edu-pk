@@ -231,7 +231,7 @@ router.put('/:id', async (req, res) => {
         rows = $11::jsonb,
         style_settings = $12::jsonb,
         updated_at = CURRENT_TIMESTAMP
-      WHERE id = $13
+      WHERE id = $13 AND school_id = $14
       RETURNING *`,
       [
         payload.template_id,
@@ -247,6 +247,7 @@ router.put('/:id', async (req, res) => {
         JSON.stringify(payload.rows),
         JSON.stringify(payload.style_settings),
         id,
+        Number(current.school_id),
       ]
     )
 
@@ -280,7 +281,7 @@ router.delete('/:id', async (req, res) => {
       return res.status(403).json({ success: false, message: 'Unauthorized.' })
     }
 
-    await pool.query('DELETE FROM daily_diaries WHERE id = $1', [id])
+    await pool.query('DELETE FROM daily_diaries WHERE id = $1 AND school_id = $2', [id, Number(diary.school_id)])
     res.json({ success: true, message: 'Daily diary deleted successfully.' })
   } catch (error) {
     console.error('Daily diary delete error:', error)

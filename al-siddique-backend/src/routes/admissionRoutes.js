@@ -151,7 +151,10 @@ router.put('/:id/status', protect, canViewAdmissions, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid status' });
     }
 
-    const check = await pool.query('SELECT * FROM admissions WHERE id = $1', [id]);
+    const schoolScope = req.user?.role === 'super_admin' ? null : Number(currentSchoolId(req) || 0);
+    const check = schoolScope
+      ? await pool.query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, schoolScope])
+      : await pool.query('SELECT * FROM admissions WHERE id = $1', [id]);
     if (check.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Admission application not found.' });
     }
@@ -166,7 +169,7 @@ router.put('/:id/status', protect, canViewAdmissions, async (req, res) => {
       return res.status(400).json({ success: false, message: 'Admission is missing school context and cannot be updated.' });
     }
 
-    await pool.query('UPDATE admissions SET status = $1 WHERE id = $2', [status, id]);
+    await pool.query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', [status, id, schoolId]);
 
     // Log notification
     try {
@@ -190,7 +193,10 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
     const { id } = req.params;
     const { send_credentials } = req.body || {};
     
-    const check = await pool.query('SELECT * FROM admissions WHERE id = $1', [id]);
+    const schoolScope = req.user?.role === 'super_admin' ? null : Number(currentSchoolId(req) || 0);
+    const check = schoolScope
+      ? await pool.query('SELECT * FROM admissions WHERE id = $1 AND school_id = $2', [id, schoolScope])
+      : await pool.query('SELECT * FROM admissions WHERE id = $1', [id]);
     if (check.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Admission application not found.' });
     }
@@ -218,7 +224,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
 
     if (duplicate.rows.length > 0) {
       // Just update status if student already exists
-      await pool.query('UPDATE admissions SET status = $1 WHERE id = $2', ['approved', id]);
+      await pool.query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', ['approved', id, schoolId]);
       return res.json({ success: true, message: 'Application approved (student record already exists).' });
     }
 
@@ -333,7 +339,7 @@ router.post('/:id/approve', protect, canViewAdmissions, async (req, res) => {
     }
 
     // Update status
-    await pool.query('UPDATE admissions SET status = $1 WHERE id = $2', ['approved', id]);
+    await pool.query('UPDATE admissions SET status = $1, updated_at = NOW() WHERE id = $2 AND school_id = $3', ['approved', id, schoolId]);
 
     // Log notification
     try {

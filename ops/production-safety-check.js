@@ -1104,6 +1104,25 @@ assertContains(
   'fee schema must be versioned in migration 014.'
 )
 
+
+assertNotContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  /UPDATE admissions SET status = \$1 WHERE id = \$2/,
+  'admission status mutations must be scoped by school_id.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/admissionRoutes.js',
+  'WHERE id = $2 AND school_id = $3',
+  'admission status mutations must bind the target school in SQL.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  /DELETE FROM daily_diaries WHERE id = \$1['"]|WHERE id = \$13\n\s*RETURNING/,
+  'Daily Diary updates and deletes must be scoped by school_id in SQL.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
