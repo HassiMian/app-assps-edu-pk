@@ -188,10 +188,7 @@ function ActionDropdown({ onPrint, onEdit, onDelete, onHistory }) {
  { label: 'Edit Challan', color: C.silver, action: onEdit },
  { label: 'Delete Challan', color: C.red, action: onDelete },
  { label: 'View Fee History', color: C.blue, action: onHistory },
- { label: 'One Student (1 Copy)', action: () => onPrint('1c') },
- { label: 'One Student (1 Copy - Thermal)', action: () => onPrint('thermal') },
- { label: 'One Student (2 Copies)', action: () => onPrint('2c') },
- { label: 'One Student (3 Copies)', action: () => onPrint('3c') },
+ { label: 'Print Challan', action: onPrint },
  ]
 
  return (

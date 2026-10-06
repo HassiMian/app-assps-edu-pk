@@ -336,6 +336,12 @@ assertContains(
   'fee UI must distinguish monthly fee from gross challan total.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /One Student \(1 Copy\)|One Student \(1 Copy - Thermal\)|One Student \(2 Copies\)|One Student \(3 Copies\)/,
+  'fee action menu must not advertise print variants that route to the same renderer.'
+)
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
