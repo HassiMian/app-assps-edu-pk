@@ -604,6 +604,19 @@ assertNotContains(
   'student fee quick-pay must use canonical payable totals rather than the legacy amount field.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  /\.catch\(\(\) => \(\{ data: \{ data: \[\] \} \}\)\)|Session 2026-2027|SECTION_LIST\.filter/,
+  'attendance workspace must not disguise server errors as empty data or invent session/section context.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  "setLoadError(err.response?.data?.message || 'Attendance data could not be loaded from the server.')",
+  'attendance load failures must remain visible to the user.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

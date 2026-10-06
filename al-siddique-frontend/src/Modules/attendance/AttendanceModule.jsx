@@ -61,7 +61,7 @@ const selectStyle = {
 export default function AttendanceModule() {
  const navigate = useNavigate();
  const [tab, setTab] = useState("mark");
- const { classNames: CLASSES, allSections: SECTION_LIST, sectionsForClass } = useAcademicStore();
+ const { classNames: CLASSES, sectionsForClass, sessionStart, sessionEnd } = useAcademicStore();
  const attendanceClasses = CLASSES;
 
  useEffect(() => {
@@ -82,32 +82,38 @@ export default function AttendanceModule() {
  const [loading, setLoading] = useState(false);
  const [monthlyTrend, setMonthlyTrend] = useState([]);
  const [monthlyClassSummary, setMonthlyClassSummary] = useState([]);
+ const [loadError, setLoadError] = useState('');
+ const [saveError, setSaveError] = useState('');
 
  const loadAttendance = async () => {
+ if (!selectedClass || !selectedSection) {
+ setStudents([])
+ setAttendance({})
+ setLoadError(selectedClass ? 'No section is configured for this class in Academic Setup.' : 'No active class is configured in Academic Setup.')
+ return
+ }
  setLoading(true)
+ setLoadError('')
  try {
  const [attendanceRes, studentRes] = await Promise.all([
- api.get('/api/attendance', {
- params: { class: selectedClass, section: selectedSection, date: selectedDate },
- }).catch(() => ({ data: { data: [] } })),
- api.get('/api/students', {
- params: { class: selectedClass, section: selectedSection },
- }).catch(() => ({ data: { data: [] } })),
+ api.get('/api/attendance', { params: { class: selectedClass, section: selectedSection, date: selectedDate } }),
+ api.get('/api/students', { params: { class: selectedClass, section: selectedSection } }),
  ])
 
- const attendanceData = attendanceRes.data?.data || []
- const studentData = studentRes.data?.data || []
-
+ const attendanceData = Array.isArray(attendanceRes.data?.data) ? attendanceRes.data.data : []
+ const studentData = Array.isArray(studentRes.data?.data) ? studentRes.data.data : []
  const markMap = {}
  attendanceData.forEach((row) => {
  const sid = row.student_id || row.id
- if (sid) markMap[sid] = row.status
+ if (sid && row.status) markMap[sid] = row.status
  })
-
  setStudents(studentData.map(transformStudent))
  setAttendance(markMap)
  } catch (err) {
  console.error('Could not load attendance', err)
+ setStudents([])
+ setAttendance({})
+ setLoadError(err.response?.data?.message || 'Attendance data could not be loaded from the server.')
  } finally {
  setLoading(false)
  }
@@ -173,16 +179,13 @@ export default function AttendanceModule() {
 
  const handleSave = async () => {
  const entries = Object.entries(attendance).filter(([_, status]) => !!status)
+ setSaveError('')
  if (!entries.length) {
- alert('Please select attendance status for at least one student before saving.')
+ setSaveError('Select attendance status for at least one student before saving.')
  return
  }
  try {
- const records = entries.map(([studentId, status]) => ({
- student_id: Number(studentId),
- date: selectedDate,
- status,
- }))
+ const records = entries.map(([studentId, status]) => ({ student_id: Number(studentId), date: selectedDate, status }))
  const response = await api.post('/api/attendance/mark', { records })
  setNotificationQueueCount(Number(response.data?.notificationQueueCount || 0))
  emitAttendanceUpdated({ date: selectedDate, count: records.length })
@@ -190,7 +193,7 @@ export default function AttendanceModule() {
  setTimeout(() => setSaved(false), 3000)
  } catch (err) {
  console.error('Failed to save attendance', err)
- alert('Failed to save attendance: ' + (err.response?.data?.message || err.message))
+ setSaveError(err.response?.data?.message || 'Attendance could not be saved.')
  }
  };
 
@@ -216,10 +219,12 @@ export default function AttendanceModule() {
  </div>
  <div>
  <h1 style={{ color: "var(--apex-text-secondary)", fontSize: 24, fontWeight: 800, margin: 0 }}>Attendance System</h1>
- <p style={{ color: "var(--apex-text-tertiary)", fontSize: 13, margin: 0 }}>Session 2026-2027 · Mark & track student attendance</p>
+ <p style={{ color: "var(--apex-text-tertiary)", fontSize: 13, margin: 0 }}>{sessionStart && sessionEnd ? `Session ${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)} · ` : ""}Mark & track student attendance</p>
  </div>
  </div>
  </div>
+
+ {(loadError || saveError) && <div style={{ marginBottom:16, padding:'12px 14px', borderRadius:12, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 25%, var(--apex-border-default))', color:'var(--apex-action-danger)', fontSize:12, fontWeight:700 }}>{saveError || loadError}</div>}
 
  {/* Attendance Dashboard */}
  {/* Stats Cards */}
@@ -358,7 +363,7 @@ export default function AttendanceModule() {
  {attendanceClasses.map(c => <option key={c}>{c}</option>)}
  </select>
  <select value={selectedSection} onChange={e => setSelectedSection(e.target.value)} style={selectStyle}>
- {(attendanceSectionsForClass(selectedClass, sectionsForClass).length ? attendanceSectionsForClass(selectedClass, sectionsForClass) : SECTION_LIST.filter(item => item !== 'All')).map(s => <option key={s}>{s}</option>)}
+ {attendanceSectionsForClass(selectedClass, sectionsForClass).map(s => <option key={s}>{s}</option>)}
  </select>
  <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)}
  style={{ ...selectStyle }} />
