@@ -92,7 +92,7 @@ function saveAcademic(d) {
 
 //  Palette 
 const C = {
- card: 'rgba(11,44,77,0.92)',
+ card:'var(--apex-bg-surface)',
  gold: '#C8991A', goldL: '#e8b420',
  silver: '#C0C8D8', muted: '#8892A4',
  green: '#30D158', red: '#FF375F',
@@ -108,11 +108,11 @@ const Lbl = ({ children }) => (
  <label style={{ color:C.muted, fontSize:12, fontWeight:700, display:'block', marginBottom:7, textTransform:'uppercase', letterSpacing:'0.06em' }}>{children}</label>
 )
 const Inp = ({ style={}, ...p }) => (
- <input {...p} style={{ width:'100%', background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 14px', fontSize:14, outline:'none', boxSizing:'border-box', ...style }} />
+ <input {...p} style={{ width:'100%', background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 14px', fontSize:14, outline:'none', boxSizing:'border-box', ...style }} />
 )
 const Btn = ({ children, onClick, variant='gold', style:s={} }) => {
  const v = {
- gold: { background:`linear-gradient(135deg,${C.gold},${C.goldL})`, color:'#071e34', border:'none' },
+ gold:{ background:'var(--apex-action-primary)', color:'#fff', border:'none' },
  ghost: { background:'rgba(15,23,42,0.46)', color:C.silver, border:`1px solid ${C.border}` },
  red: { background:'rgba(255,55,95,0.15)', color:C.red, border:'1px solid rgba(255,55,95,0.3)' },
  blue: { background:'rgba(10,132,255,0.15)', color:C.blue, border:'1px solid rgba(10,132,255,0.3)' },
@@ -279,7 +279,7 @@ function ClassesTab({ data, setData }) {
         {/* Grid of classes */}
         <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px,1fr))', gap: 14 }}>
           {data.classes.map(cls => (
-            <div key={cls.level} style={{ background: 'rgba(7,30,52,0.5)', borderRadius: 14, padding: 16, border: `1px solid ${cls.active ? C.border : 'rgba(255,55,95,0.2)'}`, opacity: cls.active ? 1 : 0.7 }}>
+            <div key={cls.level} style={{ background:'var(--apex-bg-subtle)', borderRadius: 14, padding: 16, border: `1px solid ${cls.active ? C.border : 'rgba(255,55,95,0.2)'}`, opacity: cls.active ? 1 : 0.7 }}>
               <div className="super-module-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12, gap: 8 }}>
                 {/* Editable class name */}
                 {editingName[cls.level] ? (
@@ -294,7 +294,7 @@ function ClassesTab({ data, setData }) {
                         if (e.key === 'Escape') setEditingName(x => ({ ...x, [cls.level]: false }))
                       }}
                       style={{
-                        background: 'rgba(11,44,77,0.95)',
+                        background:'var(--apex-bg-surface-solid)',
                         border: `1.5px solid ${C.gold}`,
                         borderRadius: 8,
                         color: '#fff',
@@ -411,11 +411,11 @@ function ClassesTab({ data, setData }) {
                   onKeyDown={e => e.key === 'Enter' && addSection(cls.level, sectionInput[cls.level] || '')}
                   placeholder="Add section..."
                   maxLength={10}
-                  style={{ flex: 1, background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 8, color: C.silver, padding: '6px 10px', fontSize: 12, outline: 'none' }}
+                  style={{ flex: 1, background:'var(--apex-bg-surface-solid)', border: `1px solid ${C.border}`, borderRadius: 8, color: C.silver, padding: '6px 10px', fontSize: 12, outline: 'none' }}
                 />
                 <button
                   onClick={() => addSection(cls.level, sectionInput[cls.level] || '')}
-                  style={{ background: C.gold, border: 'none', borderRadius: 8, padding: '6px 12px', color: '#071e34', fontWeight: 600, cursor: 'pointer', fontSize: 12 }}
+                  style={{ background:'var(--apex-action-primary)', border:'none', borderRadius:8, padding:'6px 12px', color:'#fff', fontWeight: 600, cursor: 'pointer', fontSize: 12 }}
                 >
                   +
                 </button>
@@ -495,8 +495,8 @@ function SubjectsTab({ data, setData }) {
  {LEVELS.map(l => (
  <button key={l} onClick={() => toggleNewClass(l)}
  style={{ padding:'5px 12px', borderRadius:20, border:'none', cursor:'pointer', fontWeight:700, fontSize:12,
- background: newSubj.classes.includes(l) ? C.gold : 'rgba(11,44,77,0.92)',
- color: newSubj.classes.includes(l) ? '#071e34' : C.muted }}>
+ background:newSubj.classes.includes(l)?'var(--apex-action-primary)':'var(--apex-bg-surface-solid)',
+ color:newSubj.classes.includes(l)?'#fff':C.muted }}>
  {l}
  </button>
  ))}
@@ -521,7 +521,7 @@ function SubjectsTab({ data, setData }) {
  {/* Subject list */}
  <div className="super-module-card" style={{ display:'flex', flexDirection:'column', gap:10 }}>
  {data.subjects.map(subj => (
- <div key={subj.id} style={{ background:'rgba(7,30,52,0.4)', borderRadius:12, padding:'14px 16px', border:`1px solid ${C.border}` }}>
+ <div key={subj.id} style={{ background:'var(--apex-bg-subtle)', borderRadius:12, padding:'14px 16px', border:`1px solid ${C.border}` }}>
  <div className="super-module-card" style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:12 }}>
  <div className="super-module-card" style={{ flex:1 }}>
  <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:8, marginBottom:8, flexWrap:'wrap' }}>
@@ -597,14 +597,14 @@ function CalendarTab({ data, setData }) {
  <div>
  <Lbl>Periods per Day</Lbl>
  <select value={data.periodsPerDay} onChange={e => setData(d => ({ ...d, periodsPerDay:Number(e.target.value) }))}
- style={{ width:'100%', background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 14px', fontSize:14, outline:'none' }}>
+ style={{ width:'100%', background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 14px', fontSize:14, outline:'none' }}>
  {[5,6,7,8,9,10].map(n => <option key={n} value={n}>{n} periods</option>)}
  </select>
  </div>
  <div>
  <Lbl>Period Duration</Lbl>
  <select value={data.periodDuration} onChange={e => setData(d => ({ ...d, periodDuration:Number(e.target.value) }))}
- style={{ width:'100%', background:'rgba(11,44,77,0.6)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 14px', fontSize:14, outline:'none' }}>
+ style={{ width:'100%', background:'var(--apex-bg-surface-solid)', border:`1px solid ${C.border}`, borderRadius:10, color:C.silver, padding:'10px 14px', fontSize:14, outline:'none' }}>
  {[30,35,40,45,50,55,60].map(n => <option key={n} value={n}>{n} minutes</option>)}
  </select>
  </div>
@@ -633,7 +633,7 @@ function CalendarTab({ data, setData }) {
  const dayName = d.toLocaleDateString('en-GB', { weekday:'long' })
  const formatted = d.toLocaleDateString('en-GB', { day:'2-digit', month:'long', year:'numeric' })
  return (
- <div key={h.id} style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', background:'rgba(7,30,52,0.4)', borderRadius:10, border:`1px solid ${C.border}` }}>
+ <div key={h.id} style={{ display:'flex', alignItems:'center', gap:12, padding:'12px 16px', background:'var(--apex-bg-subtle)', borderRadius:10, border:`1px solid ${C.border}` }}>
  <div className="super-module-card" style={{ width:44, height:44, borderRadius:10, background:'rgba(200,153,26,0.12)', border:`1px solid rgba(200,153,26,0.25)`, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
  <div className="super-module-card" style={{ color:C.gold, fontWeight:800, fontSize:16, lineHeight:1 }}>{d.getDate()}</div>
  <div className="super-module-card" style={{ color:C.muted, fontSize:9, textTransform:'uppercase' }}>{d.toLocaleDateString('en-GB', { month:'short' })}</div>
