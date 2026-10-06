@@ -1222,6 +1222,45 @@ assertContains(
   'attendance marking must report provider notification outcomes instead of fire-and-forget success.'
 )
 
+
+assertContains(
+  'al-siddique-backend/migrations/015_school_branding_schema.js',
+  'ALTER TABLE schools ADD COLUMN IF NOT EXISTS logo_url TEXT',
+  'school branding mirror columns must be versioned in migration 015.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  /UPDATE schools[\s\S]{0,300}\.catch\(\(\) => \{\}\)/,
+  'settings branding must not report success when its school mirror update fails.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  "await client.query('BEGIN')",
+  'tenant branding and school branding mirror updates must be atomic.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+  /UPDATE schools SET logo_url[\s\S]{0,180}\.catch\(\(\) => undefined\)/,
+  'branding upload must not silently ignore school mirror failures.'
+)
+assertNotContains(
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  /schoolName:[^\n]*\|\| ['"]APEX['"]|academicYear:[^\n]*new Date\(\)\.getFullYear\(\)|#071e34/,
+  'branding read model must not invent tenant identity, academic year, or legacy heavy-navy defaults.'
+)
+
+
+assertNotContains(
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  /safeDefaultSettings|success:\s*true[^\n]*temporarily unavailable|schoolName:\s*['"]APEX['"]/,
+  'school branding/settings reads must fail closed instead of returning invented tenant identity.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/brandingRoutes.js',
+  "return res.status(503).json({ success: false, message: 'School branding is temporarily unavailable.' })",
+  'branding read failures must be explicit to the client.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)

@@ -538,6 +538,15 @@ async function migrate() {
     }
 
     try {
+      const schoolBrandingMigration = require('../../migrations/015_school_branding_schema')
+      await schoolBrandingMigration.up()
+      console.log('school branding schema ready')
+    } catch (err) {
+      console.error('School Branding Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {

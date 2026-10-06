@@ -84,27 +84,15 @@ async function loadCurrentSchoolSettings(schoolId) {
   return {
     schoolId: row.school_id || schoolId,
     tenantId: row.tenant_id || null,
-    schoolName: row.settings_school_name || row.school_name || row.name || 'APEX',
+    schoolName: row.settings_school_name || row.school_name || row.name || '',
     logoUrl: publicAssetUrl(row.school_logo || row.logo_url || null),
     address: row.school_address || row.address || '',
-    primaryColor: row.primary_color || brandingConfig.primaryColor || '#071e34',
-    secondaryColor: row.secondary_color || brandingConfig.secondaryColor || '#06b6d4',
-    academicYear: row.academic_year || String(new Date().getFullYear()),
+    primaryColor: row.primary_color || brandingConfig.primaryColor || '#256FE8',
+    secondaryColor: row.secondary_color || brandingConfig.secondaryColor || '#20A99F',
+    academicYear: row.academic_year || '',
   }
 }
 
-function safeDefaultSettings(schoolId) {
-  return {
-    schoolId: schoolId || null,
-    tenantId: null,
-    schoolName: 'APEX',
-    logoUrl: null,
-    address: '',
-    primaryColor: '#071e34',
-    secondaryColor: '#06b6d4',
-    academicYear: String(new Date().getFullYear()),
-  }
-}
 
 // GET /api/school/settings/current
 router.get('/settings/current', protect, async (req, res) => {
@@ -118,7 +106,7 @@ router.get('/settings/current', protect, async (req, res) => {
     return res.json({ success: true, data: settings })
   } catch (error) {
     console.error('Fetch current school settings error:', error)
-    return res.json({ success: true, data: safeDefaultSettings(schoolId) })
+    return res.status(503).json({ success: false, message: 'School settings are temporarily unavailable.' })
   }
 })
 
@@ -138,7 +126,7 @@ router.get('/branding', protect, async (req, res) => {
     })
   } catch (error) {
     console.error('Fetch branding error:', error)
-    return res.json({ success: true, branding: safeDefaultSettings(req.school_id), data: safeDefaultSettings(req.school_id) })
+    return res.status(503).json({ success: false, message: 'School branding is temporarily unavailable.' })
   }
 })
 

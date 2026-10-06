@@ -140,26 +140,37 @@ router.post('/tenant/branding/upload', protect, canManageTenantBranding, (req, r
       const logoUrl = `/uploads/branding/${req.file.filename}`
       await ensureTenantBrandingTable()
 
-      const result = await pool.query(
-        `INSERT INTO tenant_branding (id, tenant_id, logo_url, updated_at)
-         VALUES ($1, $2, $3, NOW())
-         ON CONFLICT (tenant_id)
-         DO UPDATE SET logo_url = EXCLUDED.logo_url, updated_at = NOW()
-         RETURNING
-           id,
-           tenant_id AS "tenantId",
-           logo_url AS "logoUrl",
-           primary_color AS "primaryColor",
-           secondary_color AS "secondaryColor",
-           created_at AS "createdAt",
-           updated_at AS "updatedAt"`,
-        [crypto.randomUUID(), tenantId, logoUrl]
-      )
-
-      await pool.query(
-        'UPDATE schools SET logo_url = $1, updated_at = NOW() WHERE tenant_id = $2',
-        [logoUrl, tenantId]
-      ).catch(() => undefined)
+      const client = await pool.connect()
+      let result
+      try {
+        await client.query('BEGIN')
+        result = await client.query(
+          `INSERT INTO tenant_branding (id, tenant_id, logo_url, updated_at)
+           VALUES ($1, $2, $3, NOW())
+           ON CONFLICT (tenant_id)
+           DO UPDATE SET logo_url = EXCLUDED.logo_url, updated_at = NOW()
+           RETURNING
+             id,
+             tenant_id AS "tenantId",
+             logo_url AS "logoUrl",
+             primary_color AS "primaryColor",
+             secondary_color AS "secondaryColor",
+             created_at AS "createdAt",
+             updated_at AS "updatedAt"`,
+          [crypto.randomUUID(), tenantId, logoUrl]
+        )
+        const schoolUpdate = await client.query(
+          'UPDATE schools SET logo_url = $1, updated_at = NOW() WHERE tenant_id = $2 RETURNING id',
+          [logoUrl, tenantId]
+        )
+        if (!schoolUpdate.rowCount) throw new Error('Tenant school record was not found for branding upload.')
+        await client.query('COMMIT')
+      } catch (transactionError) {
+        await client.query('ROLLBACK').catch(() => {})
+        throw transactionError
+      } finally {
+        client.release()
+      }
 
       return res.json({
         success: true,

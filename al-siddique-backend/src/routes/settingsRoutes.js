@@ -257,10 +257,10 @@ router.post('/branding', protect, canManageSettings, async (req, res) => {
       return res.status(400).json({ success: false, message: err.message || 'Branding upload failed' })
     }
 
+    let client = null
     try {
       await ensureTenantBrandingTable()
       const ctx = await resolveBrandingTenant(req)
-
       if (!ctx?.tenantId) {
         return res.status(401).json({ success: false, message: 'Unauthorized' })
       }
@@ -269,11 +269,12 @@ router.post('/branding', protect, canManageSettings, async (req, res) => {
       const secondaryColor = String(req.body?.secondaryColor || '').trim() || null
       const logoUrl = req.file ? `/uploads/${req.file.filename}` : null
 
-      const result = await pool.query(
+      client = await pool.connect()
+      await client.query('BEGIN')
+      const result = await client.query(
         `INSERT INTO tenant_branding (
            id, tenant_id, logo_url, primary_color, secondary_color, updated_at
-         )
-         VALUES ($1, $2, $3, $4, $5, NOW())
+         ) VALUES ($1,$2,$3,$4,$5,NOW())
          ON CONFLICT (tenant_id)
          DO UPDATE SET
            logo_url = COALESCE(EXCLUDED.logo_url, tenant_branding.logo_url),
@@ -291,25 +292,36 @@ router.post('/branding', protect, canManageSettings, async (req, res) => {
         [crypto.randomUUID(), ctx.tenantId, logoUrl, primaryColor, secondaryColor]
       )
 
-      await pool.query(
+      const schoolUpdate = await client.query(
         `UPDATE schools
-         SET
-           logo_url = COALESCE($1, logo_url),
-           primary_color = COALESCE($2, primary_color),
-           secondary_color = COALESCE($3, secondary_color),
-           updated_at = NOW()
-         WHERE tenant_id = $4`,
+         SET logo_url = COALESCE($1, logo_url),
+             primary_color = COALESCE($2, primary_color),
+             secondary_color = COALESCE($3, secondary_color),
+             updated_at = NOW()
+         WHERE tenant_id = $4
+         RETURNING id`,
         [logoUrl, primaryColor, secondaryColor, ctx.tenantId]
-      ).catch(() => {})
+      )
+      if (!schoolUpdate.rowCount) {
+        const error = new Error('Tenant school record was not found for branding update.')
+        error.statusCode = 404
+        throw error
+      }
 
-      return res.json({
-        success: true,
-        message: 'Branding updated successfully',
-        data: result.rows[0],
-      })
+      await client.query('COMMIT')
+      client.release(); client = null
+      return res.json({ success: true, message: 'Branding updated successfully', data: result.rows[0] })
     } catch (error) {
+      if (client) {
+        await client.query('ROLLBACK').catch(() => {})
+        client.release(); client = null
+      }
+      if (req.file?.path) await fs.promises.unlink(req.file.path).catch(() => {})
       console.error('Tenant branding update error:', error.message)
-      return res.status(500).json({ success: false, message: 'Failed to update branding' })
+      return res.status(error.statusCode || (error.code === 'SETTINGS_SCHEMA_NOT_READY' ? 503 : 500)).json({
+        success: false,
+        message: error.code === 'SETTINGS_SCHEMA_NOT_READY' ? 'Branding storage is not initialized.' : 'Failed to update branding',
+      })
     }
   })
 })
