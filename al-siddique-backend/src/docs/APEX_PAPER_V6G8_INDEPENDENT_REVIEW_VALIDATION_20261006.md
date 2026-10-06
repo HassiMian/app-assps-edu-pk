@@ -45,3 +45,18 @@ The independent subject/live-source technical dossier is complete, but its manif
 - Live production signed-session G8 flow: 4/4 PASS.
 
 No human/reviewer identity, academic decision, publisher signature, or approval result is fabricated by this workflow.
+
+## Final technical checkpoint
+- Live backend runtime release: `1febac2cc37b4426b9704ad380e6215e856f765b`.
+- Branch reviewer-tooling head: `c84fc7d65d5a401858082bfe718463bc72e603d3`.
+- Final runtime-aligned publisher evidence snapshot: `/root/secure-archive/apex-paper-v6g8c-20261006/curriculum-publisher-evidence.json`.
+- Evidence SHA-256: `e33bc6f28aeb3dac1cdd4fdbace44804b095097b1b232a663288468fb8b3abc9`.
+- Sealed operational review pack: 28 artifacts.
+- Fresh production-clone full regression: 61/61 PASS (`full-regression-fresh-clone-c84fc7d.tap`, SHA-256 `60b7c523e8ae63848ec651fda730a41c82377d250fb993de09cab3f7dc2572a7`).
+- Reused-DB rerun is preserved separately as a negative harness artifact and is not counted as a product failure.
+- Canonical registry remains empty: 0 documents / 0 revisions.
+- Production Question Bank remains empty: 0 questions.
+- Publisher production approval remains false.
+- Canonical registry write enablement remains false.
+
+At this checkpoint, remaining progression requires real independent academic/publisher review evidence; no further technical step is allowed to synthesize or self-approve those decisions.
