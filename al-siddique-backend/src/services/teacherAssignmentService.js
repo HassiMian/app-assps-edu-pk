@@ -1,33 +1,25 @@
 const { query } = require('../config/database')
 
 async function ensureTeacherAssignmentSchema() {
-  await query(`
-    CREATE TABLE IF NOT EXISTS teacher_class_assignments (
-      id SERIAL PRIMARY KEY,
-      school_id INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
-      teacher_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      employee_id INTEGER REFERENCES employees(id) ON DELETE SET NULL,
-      class_name VARCHAR(100) NOT NULL,
-      section VARCHAR(50),
-      subject VARCHAR(120),
-      source VARCHAR(40) NOT NULL DEFAULT 'manual',
-      is_active BOOLEAN NOT NULL DEFAULT true,
-      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-      updated_at TIMESTAMP NOT NULL DEFAULT NOW()
-    );
-    CREATE INDEX IF NOT EXISTS idx_teacher_assignments_teacher
-      ON teacher_class_assignments(school_id, teacher_user_id, is_active);
-    CREATE INDEX IF NOT EXISTS idx_teacher_assignments_class
-      ON teacher_class_assignments(school_id, class_name, section, is_active);
-    CREATE UNIQUE INDEX IF NOT EXISTS uq_teacher_assignment_scope
-      ON teacher_class_assignments(
-        school_id,
-        teacher_user_id,
-        LOWER(class_name),
-        LOWER(COALESCE(section,'')),
-        LOWER(COALESCE(subject,''))
-      );
+  const result = await query(`
+    SELECT
+      to_regclass('public.teacher_class_assignments') AS table_name,
+      COUNT(*) FILTER (WHERE column_name IN (
+        'school_id','teacher_user_id','employee_id','class_name','section','subject','source','is_active'
+      ))::int AS required_columns
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'teacher_class_assignments'
   `)
+
+  const row = result.rows?.[0] || {}
+  if (!row.table_name || Number(row.required_columns || 0) < 8) {
+    const err = new Error('Teacher assignment schema is not initialized. Apply migration 019_teacher_assignment_schema before serving teacher-scoped workflows.')
+    err.code = 'TEACHER_ASSIGNMENT_SCHEMA_NOT_READY'
+    err.status = 503
+    throw err
+  }
+  return true
 }
 
 function teacherStudentScopeClause(req, alias = 's', startIndex = 1) {

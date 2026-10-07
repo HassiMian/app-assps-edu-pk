@@ -377,6 +377,24 @@ assertContains(
   'tenant schema lookup failures must propagate explicitly and fail closed.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/services/teacherAssignmentService.js',
+  /CREATE TABLE IF NOT EXISTS teacher_class_assignments|ALTER TABLE teacher_class_assignments/,
+  'teacher assignment services must validate migrated schema instead of mutating schema at runtime.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/teacherAssignmentService.js',
+  'TEACHER_ASSIGNMENT_SCHEMA_NOT_READY',
+  'teacher assignment workflows must fail closed when migration 019 is unavailable.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  "../../migrations/019_teacher_assignment_schema",
+  'migration runner must own teacher assignment schema evolution.'
+)
+
 assertContains(
   'al-siddique-backend/src/package.json',
   '"seed": "node seed.js"',

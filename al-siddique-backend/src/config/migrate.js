@@ -583,6 +583,15 @@ async function migrate() {
     }
 
     try {
+      const teacherAssignmentMigration = require('../../migrations/019_teacher_assignment_schema')
+      await teacherAssignmentMigration.up()
+      console.log('teacher assignment schema ready')
+    } catch (err) {
+      console.error('Teacher Assignment Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const rlsMigration = require('./migrations/005_rls_policies')
       await rlsMigration.up()
     } catch (err) {
