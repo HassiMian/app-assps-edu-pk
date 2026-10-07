@@ -275,6 +275,30 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "Payment proof files are not publicly accessible.",
+  'financial payment proof files must be blocked from the public static upload tree.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+  "router.get('/subscription/payment-screenshot/:fileName', protect, requireRoles('super_admin', 'admin')",
+  'payment proof retrieval must require authenticated administrative access.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/uploadStorageRoutes.js',
+  /const url = `\/uploads\/payment-screenshots\//,
+  'new payment proof uploads must never return a public static URL.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/subscriptions/SubscriptionRequests.jsx',
+  /resolveAssetUrl\(selectedRequest\.payment_screenshot_url\)/,
+  'subscription admin UI must fetch payment proof through the authenticated API instead of a public asset URL.'
+)
+
 assertNotContains(
   'al-siddique-backend/src/middleware/tenant.js',
   /Assuming false/,

@@ -2,7 +2,7 @@
 // Administrative portal for approving school subscription requests
 
 import { useState, useEffect } from 'react'
-import api, { resolveAssetUrl } from '../../services/api'
+import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 
 export default function SubscriptionRequests() {
@@ -14,6 +14,9 @@ export default function SubscriptionRequests() {
   const [actionLoading, setActionLoading] = useState(false)
   const [successMsg, setSuccessMsg] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
+  const [proofUrl, setProofUrl] = useState('')
+  const [proofLoading, setProofLoading] = useState(false)
+  const [proofError, setProofError] = useState('')
 
   // Filters state
   const [search, setSearch] = useState('')
@@ -46,6 +49,42 @@ export default function SubscriptionRequests() {
   useEffect(() => {
     fetchRequests()
   }, [statusFilter, planFilter])
+
+  useEffect(() => {
+    let objectUrl = ''
+    let cancelled = false
+    const raw = selectedRequest?.payment_screenshot_url
+
+    setProofUrl('')
+    setProofError('')
+    if (!raw) return undefined
+
+    const fileName = String(raw).split('?')[0].split('/').pop()
+    if (!fileName) {
+      setProofError('Payment proof reference is invalid.')
+      return undefined
+    }
+
+    setProofLoading(true)
+    api.get(`/api/subscription/payment-screenshot/${encodeURIComponent(fileName)}`, { responseType: 'blob', skipCache: true })
+      .then((response) => {
+        if (cancelled) return
+        objectUrl = URL.createObjectURL(response.data)
+        setProofUrl(objectUrl)
+      })
+      .catch((err) => {
+        if (cancelled) return
+        setProofError(err.response?.data?.message || 'Payment proof could not be loaded securely.')
+      })
+      .finally(() => {
+        if (!cancelled) setProofLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+      if (objectUrl) URL.revokeObjectURL(objectUrl)
+    }
+  }, [selectedRequest?.payment_screenshot_url])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -308,22 +347,26 @@ export default function SubscriptionRequests() {
                 <h3 style={{ color: C.gold, fontSize: 14, margin: 0, textTransform: 'uppercase', letterSpacing: 1 }}>Payment screenshot</h3>
                 {selectedRequest.payment_screenshot_url ? (
                   <div style={{ border: `1px solid ${C.border}`, borderRadius: 14, overflow: 'hidden', background: 'rgba(0,0,0,0.2)', height: 280, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    {selectedRequest.payment_screenshot_url.toLowerCase().endsWith('.pdf') ? (
-                      <a 
-                        href={resolveAssetUrl(selectedRequest.payment_screenshot_url)} 
-                        target="_blank" 
+                    {proofLoading ? (
+                      <div style={{ color: C.muted }}>Loading payment proof securely…</div>
+                    ) : proofError ? (
+                      <div style={{ color: C.red, padding: 20, textAlign: 'center' }}>{proofError}</div>
+                    ) : proofUrl && selectedRequest.payment_screenshot_url.toLowerCase().endsWith('.pdf') ? (
+                      <a
+                        href={proofUrl}
+                        target="_blank"
                         rel="noreferrer"
                         style={{ color: C.gold, textDecoration: 'underline', fontWeight: 600 }}
                       >
                         View PDF Proof
                       </a>
-                    ) : (
-                      <img 
-                        src={resolveAssetUrl(selectedRequest.payment_screenshot_url)} 
-                        alt="Payment screenshot" 
+                    ) : proofUrl ? (
+                      <img
+                        src={proofUrl}
+                        alt="Payment screenshot"
                         style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
                       />
-                    )}
+                    ) : null}
                   </div>
                 ) : (
                   <div style={{ border: `1px solid ${C.border}`, borderRadius: 14, padding: 30, textAlign: 'center', color: C.muted, height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

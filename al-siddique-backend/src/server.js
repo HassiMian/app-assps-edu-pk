@@ -93,6 +93,10 @@ const uploadsDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
+app.use(['/uploads/payment-screenshots', '/api/uploads/payment-screenshots'], (req, res) => {
+  res.status(404).json({ success: false, message: 'Payment proof files are not publicly accessible.' })
+})
+
 const uploadStaticOptions = {
   index: false,
   fallthrough: false,

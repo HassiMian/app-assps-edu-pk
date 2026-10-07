@@ -4,7 +4,7 @@ const path = require('path')
 const crypto = require('crypto')
 const multer = require('multer')
 const { pool, query, applyTenantContext } = require('../config/database')
-const { protect } = require('../middleware/auth')
+const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 
 const router = express.Router()
@@ -98,6 +98,26 @@ async function resolveTenantIdForBranding(req) {
   return String(result.rows[0]?.tenant_id || '').trim()
 }
 
+router.get('/subscription/payment-screenshot/:fileName', protect, requireRoles('super_admin', 'admin'), async (req, res) => {
+  const fileName = path.basename(String(req.params.fileName || ''))
+  if (!/^[a-f0-9-]+\.(?:png|jpe?g|webp|pdf)$/i.test(fileName)) {
+    return res.status(400).json({ success: false, message: 'Invalid payment proof file name.' })
+  }
+
+  const filePath = path.join(rootUploadDir, 'payment-screenshots', fileName)
+  try {
+    const stat = await fs.promises.stat(filePath)
+    if (!stat.isFile()) return res.status(404).json({ success: false, message: 'Payment proof not found.' })
+    res.setHeader('Cache-Control', 'private, no-store')
+    res.setHeader('X-Content-Type-Options', 'nosniff')
+    return res.sendFile(filePath)
+  } catch (err) {
+    if (err.code === 'ENOENT') return res.status(404).json({ success: false, message: 'Payment proof not found.' })
+    console.error('Payment proof read error:', err.message)
+    return res.status(500).json({ success: false, message: 'Payment proof could not be loaded.' })
+  }
+})
+
 router.post('/subscription/upload-screenshot', (req, res) => {
   const upload = uploadFor('payment-screenshots').single('screenshot')
   upload(req, res, async (err) => {
@@ -110,7 +130,7 @@ router.post('/subscription/upload-screenshot', (req, res) => {
       return res.status(400).json({ success: false, message: 'Payment screenshot is required' })
     }
 
-    const url = `/uploads/payment-screenshots/${req.file.filename}`
+    const url = `/api/subscription/payment-screenshot/${req.file.filename}`
     return res.json({
       success: true,
       message: 'Payment screenshot uploaded successfully',
