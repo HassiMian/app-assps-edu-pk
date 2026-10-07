@@ -55,6 +55,18 @@ assertContains(
 
 assertNotContains(
   'al-siddique-backend/src/server.js',
+  /app\.get\('\/'[\s\S]{0,700}endpoints\s*:/,
+  'public API root must not expose an internal endpoint catalogue.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "service: 'ASSPS API'",
+  'public API root should return only minimal service metadata.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/server.js',
   /router\.use\('\/ai-analytics',\s*\(req,\s*res\)/,
   'inline AI analytics route is forbidden because it bypasses route-level auth and source authority.'
 )

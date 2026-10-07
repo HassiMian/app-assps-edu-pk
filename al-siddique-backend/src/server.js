@@ -153,20 +153,8 @@ app.get('/health/ai', (req, res) => {
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    app:  'Al Siddique Smart School OS',
-    endpoints: {
-      health:     'GET  /health',
-      auth:       'POST /api/auth/login',
-      students:   'GET  /api/students',
-      attendance: 'GET  /api/attendance',
-      fees:       'GET  /api/fees',
-      exams:      'GET  /api/exams',
-      notify:      'POST /api/notify/bulk',
-      admissions:  'POST /api/admissions (public), GET /api/admissions (admin)',
-      demoRequests: 'POST /api/demo-requests (public), GET /api/demo-requests (admin)',
-      transport:   'GET, POST, PUT, DELETE /api/transport (admin)',
-      aiAnalytics: 'GET /api/ai-analytics (admin)',
-    }
+    status: 'ok',
+    service: 'ASSPS API',
   })
 })
 
