@@ -869,6 +869,47 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   return next
  })
  const updateSelectedSection = changes => selectedSection && updatePaperQuestion('official_section', selectedSection.id, changes)
+ const selectedAttemptRule = String(selectedSection?.attemptRule || 'ALL').toUpperCase()
+ const selectedActualItemCount = Math.max(0, Number(selectedSection?.actualItemCount || 0))
+ const selectedAttemptCount = Math.max(0, Number(selectedSection?.attemptCount || 0))
+ const selectedMarksPerItem = Math.max(0, Number(selectedSection?.marksPerItem || 0))
+ const applySelectedScoringRule = changes => {
+  if (!selectedSection) return
+  const nextRule = String(changes.attemptRule ?? selectedSection.attemptRule ?? 'ALL').toUpperCase()
+  if (nextRule === 'ALL') {
+   updateSelectedSection({
+    ...changes,
+    attemptRule:'ALL',
+    actualItemCount:null,
+    attemptCount:null,
+    marksPerItem:null,
+    maximumObtainableMarks:null,
+   })
+   return
+  }
+  const actualRaw = Number(changes.actualItemCount ?? selectedSection.actualItemCount ?? 0)
+  const attemptRaw = Number(changes.attemptCount ?? selectedSection.attemptCount ?? 0)
+  const eachRaw = Number(changes.marksPerItem ?? selectedSection.marksPerItem ?? 0)
+  const actualItemCount = Number.isFinite(actualRaw) && actualRaw > 0 ? Math.floor(actualRaw) : null
+  const attemptCount = Number.isFinite(attemptRaw) && attemptRaw > 0 ? Math.floor(attemptRaw) : null
+  const marksPerItem = Number.isFinite(eachRaw) && eachRaw > 0 ? eachRaw : null
+  const patch = { ...changes, attemptRule:nextRule, actualItemCount, attemptCount, marksPerItem, maximumObtainableMarks:null }
+  if (actualItemCount && attemptCount && marksPerItem && attemptCount <= actualItemCount) {
+   const maximumObtainableMarks = attemptCount * marksPerItem
+   const urdu = isUrduScriptPaper({config:cfg,...paper})
+   const heading = replaceSectionMarks(selectedSection.heading || '', maximumObtainableMarks, urdu)
+   Object.assign(patch, {
+    marks:maximumObtainableMarks,
+    operationalMarks:maximumObtainableMarks,
+    maximumObtainableMarks,
+    marksManuallyEdited:true,
+    heading,
+    text:heading,
+    textUrdu:urdu?heading:'',
+   })
+  }
+  updateSelectedSection(patch)
+ }
  const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
 
  function doSearch() {
@@ -1512,9 +1553,39 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
      <input type="number" min="1" value={Number(selectedSection.sourceOrder||1)} onChange={e=>{const next=Math.max(1,Number(e.target.value)||1);const heading=replaceQuestionSerial(selectedSection.heading||'',next,isUrduScriptPaper({config:cfg,...paper}));updateSelectedSection({sourceOrder:next,heading,text:heading,textUrdu:isUrduScriptPaper({config:cfg,...paper})?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
     </label>
     <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Marks
-     <input type="number" min="0" value={selectedSectionMarks||''} onChange={e=>{const next=Math.max(0,Number(e.target.value)||0);const urdu=isUrduScriptPaper({config:cfg,...paper});const heading=replaceSectionMarks(selectedSection.heading||'',next,urdu);updateSelectedSection({marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
+     <input type="number" min="0" value={selectedSectionMarks||''} disabled={selectedAttemptRule!=='ALL'} title={selectedAttemptRule!=='ALL'?'Calculated from the choice / attempt rule':'Section marks'} onChange={e=>{const next=Math.max(0,Number(e.target.value)||0);const urdu=isUrduScriptPaper({config:cfg,...paper});const heading=replaceSectionMarks(selectedSection.heading||'',next,urdu);updateSelectedSection({marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})}} style={{...tinp,width:'100%',marginTop:3,opacity:selectedAttemptRule!=='ALL'?.65:1}} />
     </label>
    </div>
+   {isUserAuthoredPaper && <details data-scoring-rule-panel style={{marginTop:9,border:'1px solid '+D.border,borderRadius:8,padding:'6px 8px',background:'rgba(11,44,77,.38)'}}>
+    <summary style={{cursor:'pointer',fontSize:10,fontWeight:900,color:D.gold}}>Choice / Attempt Rule</summary>
+    <div style={{marginTop:8}}>
+     <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted}}>Rule
+      <select aria-label="Scoring attempt rule" value={selectedAttemptRule} onChange={e=>{const rule=e.target.value;applySelectedScoringRule(rule==='ALL'?{attemptRule:'ALL'}:{attemptRule:rule,actualItemCount:selectedActualItemCount||2,attemptCount:selectedAttemptCount||1})}} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
+       <option value="ALL">All items</option>
+       <option value="ATTEMPT_ANY">Attempt any</option>
+       <option value="CHOICE_GROUP">OR choice</option>
+      </select>
+     </label>
+     {selectedAttemptRule!=='ALL' && <>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:6,marginTop:7}}>
+       <label style={{fontSize:9,fontWeight:800,color:D.muted}}>Available
+        <input aria-label="Available items" type="number" min="1" value={selectedActualItemCount||''} onChange={e=>applySelectedScoringRule({actualItemCount:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} />
+       </label>
+       <label style={{fontSize:9,fontWeight:800,color:D.muted}}>Attempt
+        <input aria-label="Items to attempt" type="number" min="1" value={selectedAttemptCount||''} onChange={e=>applySelectedScoringRule({attemptCount:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} />
+       </label>
+       <label style={{fontSize:9,fontWeight:800,color:D.muted}}>Marks / Item
+        <input aria-label="Marks per item" type="number" min="0" step="0.5" value={selectedMarksPerItem||''} onChange={e=>applySelectedScoringRule({marksPerItem:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} />
+       </label>
+      </div>
+      <div data-scoring-max-preview style={{marginTop:7,fontSize:9,lineHeight:1.45,color:(selectedActualItemCount&&selectedAttemptCount&&selectedMarksPerItem&&selectedAttemptCount<=selectedActualItemCount)?D.silver:'#f59e0b'}}>
+       {(selectedActualItemCount&&selectedAttemptCount&&selectedMarksPerItem&&selectedAttemptCount<=selectedActualItemCount)
+        ? ('Max obtainable: '+(selectedAttemptCount*selectedMarksPerItem)+' • Available: '+(selectedActualItemCount*selectedMarksPerItem))
+        : 'Complete a valid available / attempt / marks-per-item rule before finalizing.'}
+      </div>
+     </>}
+    </div>
+   </details>}
    {isUserAuthoredPaper && <>
     <label style={{display:'block',fontSize:11,fontWeight:800,color:D.muted,marginTop:9}}>Question Heading
       <input aria-label="Selected question heading" value={selectedSection.heading||''} onChange={e=>updateSelectedSection({heading:e.target.value,text:e.target.value,textUrdu:selectedSectionIsUrdu?e.target.value:''})} style={{...tinp,width:'100%',marginTop:4}} />
