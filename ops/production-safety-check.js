@@ -147,6 +147,18 @@ assertContains(
 
 assertNotContains(
   'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /catch \{ setAccounts\(prev => \(\{ \.\.\.prev, \[emp\.id\]: null \}\)\) \}/,
+  'staff login access must not convert a portal-account source failure into a confirmed not-linked state.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'const known = Object.prototype.hasOwnProperty.call(accounts, emp.id)',
+  'staff login access must distinguish a server-confirmed null account from an unknown/unavailable state.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
   /SALARY_RECORDS|const records = SALARY_RECORDS/,
   'employee salary workflow must not use a hardcoded empty ledger that renders false zero financial metrics.'
 )

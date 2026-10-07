@@ -1124,6 +1124,9 @@ function StaffPermissionsTab({ employees }) {
 
 function LoginAccessTab({ employees, onReload }) {
  const [accounts, setAccounts] = useState({})
+ const [accountErrors, setAccountErrors] = useState({})
+ const [accountSourceError, setAccountSourceError] = useState('')
+ const [hydratingAccounts, setHydratingAccounts] = useState(true)
  const [temporary, setTemporary] = useState({})
  const [working, setWorking] = useState('')
 
@@ -1131,19 +1134,32 @@ function LoginAccessTab({ employees, onReload }) {
  try {
  const response = await api.get(`/api/employees/${emp.id}/portal-account`)
  setAccounts(prev => ({ ...prev, [emp.id]: response.data?.data || null }))
- } catch { setAccounts(prev => ({ ...prev, [emp.id]: null })) }
+ setAccountErrors(prev => ({ ...prev, [emp.id]: '' }))
+ return true
+ } catch (err) {
+ console.error('Could not refresh employee portal account', err)
+ setAccountErrors(prev => ({ ...prev, [emp.id]: err.response?.data?.message || 'Portal account state is temporarily unavailable.' }))
+ return false
+ }
  }, [])
 
  useEffect(() => {
  let cancelled = false
  async function hydrate() {
+ setHydratingAccounts(true)
+ setAccountSourceError('')
  try {
  const response = await api.get('/api/employees/portal-accounts')
  const rows = Array.isArray(response.data?.data) ? response.data.data : []
  const next = Object.fromEntries(rows.map(row => [row.employee_id, row.account || null]))
- if (!cancelled) setAccounts(next)
+ if (!cancelled) { setAccounts(next); setAccountErrors({}); setAccountSourceError('') }
  } catch (err) {
- if (!cancelled) console.error('Could not load employee portal accounts', err)
+ if (!cancelled) {
+ console.error('Could not load employee portal accounts', err)
+ setAccountSourceError(err.response?.data?.message || 'Staff portal account states are temporarily unavailable. Existing loaded states were preserved.')
+ }
+ } finally {
+ if (!cancelled) setHydratingAccounts(false)
  }
  }
  void hydrate()
@@ -1189,8 +1205,18 @@ function LoginAccessTab({ employees, onReload }) {
 
  return <GCard>
  <div style={{ marginBottom:18 }}><h2 style={{ color:C.silver, fontSize:18, margin:0 }}>Staff Login Access</h2><p style={{ color:C.muted, fontSize:12, margin:'5px 0 0' }}>Portal credentials are server-backed. Temporary passwords are shown only when newly created or securely reset.</p></div>
+ {accountSourceError && <div style={{ marginBottom:14, padding:'10px 12px', borderRadius:10, color:C.red, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))' }}>{accountSourceError}</div>}
  <div style={{ overflowX:'auto' }}><table style={{ width:'100%', borderCollapse:'collapse', minWidth:780 }}><thead><tr>{['Employee','Login','Status','Temporary Password','Actions'].map(label=><th key={label} style={{ padding:'11px 12px', textAlign:'left', color:C.muted, fontSize:10, textTransform:'uppercase', borderBottom:`1px solid ${C.border}` }}>{label}</th>)}</tr></thead><tbody>
- {employees.map(emp=>{ const account=accounts[emp.id]; const temp=temporary[emp.id]; const busy=working.startsWith(`${emp.id}:`); return <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}><td style={{ padding:12 }}><div style={{ color:C.silver, fontWeight:750 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.designation}</div></td><td style={{ padding:12, color:C.silver }}>{account?.username||account?.email||'—'}</td><td style={{ padding:12 }}><span style={{ color:account?.is_active?C.green:account?C.red:C.muted, fontSize:12, fontWeight:700 }}>{account ? (account.is_active?'Active':'Blocked') : 'Not linked'}</span></td><td style={{ padding:12, color:temp?.password?C.gold:C.muted, fontFamily:temp?.password?'monospace':'inherit', fontSize:12 }}>{temp?.password||'—'}</td><td style={{ padding:12 }}><div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>{!account ? <button disabled={busy} onClick={()=>provision(emp)} style={btnPrimary}>{busy?'Creating…':'Create Access'}</button> : <><button disabled={busy} onClick={()=>reset(emp)} style={btnSecondary}>Secure Reset</button><button disabled={busy} onClick={()=>toggle(emp,account)} style={btnSecondary}>{account.is_active?'Block':'Unblock'}</button><button disabled={busy} onClick={()=>printCredential(emp,account)} style={btnSecondary}>Print</button><button disabled={busy} onClick={()=>revoke(emp)} style={{ ...btnSecondary, color:C.red }}>Revoke</button></>}</div></td></tr> })}
+ {employees.map(emp=>{
+ const known = Object.prototype.hasOwnProperty.call(accounts, emp.id)
+ const account = known ? accounts[emp.id] : null
+ const error = accountErrors[emp.id] || (!known && accountSourceError)
+ const temp=temporary[emp.id]
+ const busy=working.startsWith(`${emp.id}:`)
+ const statusLabel = error ? 'Unavailable' : !known ? (hydratingAccounts ? 'Loading…' : 'Unavailable') : account ? (account.is_active?'Active':'Blocked') : 'Not linked'
+ const statusColor = error || !known ? C.orange : account?.is_active ? C.green : account ? C.red : C.muted
+ return <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}><td style={{ padding:12 }}><div style={{ color:C.silver, fontWeight:750 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.designation}</div>{error&&<div style={{ color:C.orange, fontSize:10, marginTop:3 }}>{error}</div>}</td><td style={{ padding:12, color:C.silver }}>{known ? (account?.username||account?.email||'—') : '—'}</td><td style={{ padding:12 }}><span style={{ color:statusColor, fontSize:12, fontWeight:700 }}>{statusLabel}</span></td><td style={{ padding:12, color:temp?.password?C.gold:C.muted, fontFamily:temp?.password?'monospace':'inherit', fontSize:12 }}>{temp?.password||'—'}</td><td style={{ padding:12 }}><div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>{error || !known ? <button disabled={busy || hydratingAccounts} onClick={()=>void loadAccount(emp)} style={btnSecondary}>Retry</button> : !account ? <button disabled={busy} onClick={()=>provision(emp)} style={btnPrimary}>{busy?'Creating…':'Create Access'}</button> : <><button disabled={busy} onClick={()=>reset(emp)} style={btnSecondary}>Secure Reset</button><button disabled={busy} onClick={()=>toggle(emp,account)} style={btnSecondary}>{account.is_active?'Block':'Unblock'}</button><button disabled={busy} onClick={()=>printCredential(emp,account)} style={btnSecondary}>Print</button><button disabled={busy} onClick={()=>revoke(emp)} style={{ ...btnSecondary, color:C.red }}>Revoke</button></>}</div></td></tr>
+ })}
  </tbody></table></div>
  </GCard>
 }
