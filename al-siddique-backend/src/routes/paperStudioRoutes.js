@@ -21,6 +21,7 @@ const { buildPublisherReleaseEnvelope } = require('../services/papers/paperPubli
 const { verifyPublisherReleaseDetachedSignature } = require('../services/papers/paperPublisherReleaseSignatureV6G19')
 const { buildHumanAuthorityBoundary } = require('../services/papers/paperHumanAuthorityBoundaryV6G18')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
+const { buildCanonicalDocxBuffer, extractCanonicalDocument, assessCanonicalDocxEligibility } = require('../services/papers/paperCanonicalDocxProjectionV6G21')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
 
@@ -373,6 +374,34 @@ router.post('/papers/:id/delivery-manifest', async (req,res) => {
     const status=Number(err?.status)||500
     if(status>=500)console.error('Paper Studio delivery manifest error:',err.message)
     return res.status(status).json({success:false,code:err?.code||'DELIVERY_MANIFEST_FAILED',message:status>=500?'Delivery manifest could not be created.':err.message})
+  }
+})
+
+router.get('/papers/:id/docx', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    if(!/^\d+$/.test(String(req.params.id||'')))return res.status(400).json({success:false,code:'INVALID_PAPER_ID',message:'Invalid paper id.'})
+    const paper=await getProjectedPaper({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id})
+    if(!paper)return res.status(404).json({success:false,code:'PAPER_NOT_FOUND',message:'Paper not found in your accessible library.'})
+    const review=await reviewPortalPaperDocument(paper.document)
+    const eligibility=assessCanonicalDocxEligibility(review)
+    if(!eligibility.eligible){
+      res.set('Cache-Control','private, no-store')
+      return res.status(409).json({success:false,code:'CANONICAL_DOCX_NOT_ELIGIBLE',message:'This paper is not yet eligible for canonical Word export.',data:{family:eligibility.family,reviewStatus:eligibility.reviewStatus,reason:eligibility.reason}})
+    }
+    const canonicalDocument=extractCanonicalDocument(paper.document)
+    const exported=await buildCanonicalDocxBuffer(canonicalDocument)
+    const encoded=encodeURIComponent(exported.filename)
+    res.set('Cache-Control','private, no-store')
+    res.set('Content-Type','application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+    res.set('Content-Disposition',`attachment; filename*=UTF-8''${encoded}`)
+    res.set('X-ASSPS-Paper-Family',eligibility.family)
+    res.set('X-ASSPS-Paper-Revision',String(paper.revision))
+    if(eligibility.snapshotHash)res.set('X-ASSPS-Snapshot-SHA256',eligibility.snapshotHash)
+    return res.status(200).send(exported.buffer)
+  } catch(err) {
+    console.error('Paper Studio canonical DOCX error:',err.message)
+    return res.status(500).json({success:false,code:'CANONICAL_DOCX_EXPORT_FAILED',message:'Canonical Word export could not be generated.'})
   }
 })
 
