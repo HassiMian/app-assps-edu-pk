@@ -80,3 +80,110 @@ test('manual semantic layouts map into canonical block types',()=>{
  assert.equal(doc.sections[2].nodes[0].rows[1].rightText,'Books')
  assert.deepEqual(validateCanonicalPaperDocument(doc),{valid:true,errors:[]})
 })
+
+test('choice-aware scoring computes attempt-any maximum separately from available marks',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[{
+   id:'short-choice',
+   heading:'Q1. Attempt any 10 questions.',
+   content:'Twelve short questions',
+   marks:24,
+   attemptRule:'ATTEMPT_ANY',
+   actualItemCount:12,
+   attemptCount:10,
+   marksPerItem:2,
+  }]},
+  config:{...base.config,totalMarks:20},
+ })
+ const section=doc.sections[0]
+ assert.equal(section.attemptRule,'ATTEMPT_ANY')
+ assert.equal(section.actualItemCount,12)
+ assert.equal(section.attemptCount,10)
+ assert.equal(section.operationalSectionTotal,20)
+ assert.equal(section.listedPotentialItemMarksTotal,24)
+ assert.equal(doc.scoringPlan.strategy,'CHOICE_AWARE')
+ assert.equal(doc.scoringPlan.maximumObtainableMarks,20)
+ assert.equal(doc.scoringPlan.availableItemMarksTotal,24)
+ assert.equal(doc.scoringPlan.choiceGroups.length,1)
+ assert.deepEqual(doc.scoringPlan.choiceGroups[0],{
+  id:'choice-short-choice',
+  sectionId:'manual-section-short-choice',
+  mode:'ATTEMPT_ANY',
+  availableItemCount:12,
+  attemptCount:10,
+  marksPerItem:2,
+  maximumObtainableMarks:20,
+  listedPotentialItemMarksTotal:24,
+ })
+ assert.equal(doc.scoringPlan.balanced,true)
+ assert.deepEqual(validateManualAssessmentForRelease(doc),{valid:true,errors:[]})
+})
+
+test('choice-aware scoring models OR choice as one obtainable alternative',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[{
+   id:'long-or',
+   heading:'Q1. Attempt either A or B.',
+   content:'A) Explain photosynthesis. OR B) Explain respiration.',
+   marks:10,
+   attemptRule:'CHOICE_GROUP',
+   actualItemCount:2,
+   attemptCount:1,
+   marksPerItem:5,
+  }]},
+  config:{...base.config,totalMarks:5},
+ })
+ assert.equal(doc.sections[0].attemptRule,'CHOICE_GROUP')
+ assert.equal(doc.sections[0].operationalSectionTotal,5)
+ assert.equal(doc.sections[0].listedPotentialItemMarksTotal,10)
+ assert.equal(doc.scoringPlan.maximumObtainableMarks,5)
+ assert.equal(doc.scoringPlan.availableItemMarksTotal,10)
+ assert.equal(doc.scoringPlan.choiceGroups[0].mode,'OR')
+ assert.equal(doc.scoringPlan.balanced,true)
+})
+
+test('invalid attempt rule fails closed instead of silently clamping counts',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[{
+   id:'bad-choice',
+   heading:'Q1. Invalid choice.',
+   content:'Three questions',
+   marks:6,
+   attemptRule:'ATTEMPT_ANY',
+   actualItemCount:3,
+   attemptCount:4,
+   marksPerItem:2,
+  }]},
+  config:{...base.config,totalMarks:6},
+ })
+ assert.equal(doc.scoringPlan.balanced,false)
+ assert.ok(doc.scoringPlan.errors.some(error=>error.includes('attempt count cannot exceed available item count')))
+ const validation=validateManualAssessmentForRelease(doc)
+ assert.equal(validation.valid,false)
+ assert.ok(validation.errors.some(error=>error.includes('attempt count cannot exceed available item count')))
+})
+
+test('header total cannot override the scoring-plan maximum when totals conflict',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[{
+   id:'choice-header-conflict',
+   heading:'Q1. Attempt any 2.',
+   content:'Three items',
+   marks:6,
+   attemptRule:'ATTEMPT_ANY',
+   actualItemCount:3,
+   attemptCount:2,
+   marksPerItem:2,
+  }]},
+  config:{...base.config,totalMarks:6},
+ })
+ assert.equal(doc.scoringPlan.maximumObtainableMarks,4)
+ assert.equal(doc.authority.authoritativePaperTotal,4)
+ assert.equal(doc.authority.originalTeacherHeaderTotal,6)
+ assert.equal(doc.authority.flags.hasSourceHeaderConflict,true)
+ assert.equal(doc.scoringPlan.balanced,false)
+})
