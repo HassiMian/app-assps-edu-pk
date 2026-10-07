@@ -28,6 +28,7 @@ export default function StudentFeePanel({ student, school }) {
   const [subTab, setSubTab] = useState('current')
   const [profile, setProfile] = useState(null)
   const [challans, setChallans] = useState([])
+  const [loadedStudentId, setLoadedStudentId] = useState('')
   const [loading, setLoading] = useState(true)
   const [paying, setPaying] = useState(false)
   const [loadError, setLoadError] = useState('')
@@ -48,11 +49,10 @@ export default function StudentFeePanel({ student, school }) {
       ])
       setProfile(profileRes.data?.data || null)
       setChallans(Array.isArray(feesRes.data?.data) ? feesRes.data.data : [])
+      setLoadedStudentId(String(studentId))
     } catch (err) {
       console.error('Student fee panel load failed', err)
-      setProfile(null)
-      setChallans([])
-      setLoadError(err.response?.data?.message || 'Student fee records could not be loaded from the server.')
+      setLoadError(err.response?.data?.message || 'Student fee records could not be refreshed. Existing loaded fee data was preserved for its original student.')
     } finally {
       setLoading(false)
     }
@@ -60,15 +60,19 @@ export default function StudentFeePanel({ student, school }) {
 
   useEffect(() => { load() }, [load])
 
+  const scopeMatches = String(loadedStudentId) === String(studentId)
+  const activeProfile = scopeMatches ? profile : null
+  const activeChallans = scopeMatches ? challans : []
+
   const currentChallan = useMemo(() => {
     const now = new Date()
     const month = MONTHS[now.getMonth()]
     const year = now.getFullYear()
-    return challans.find((c) => c.month === month && Number(c.year) === year)
-      || challans.find((c) => (c.status || '').toLowerCase() !== 'paid')
-      || challans[0]
+    return activeChallans.find((c) => c.month === month && Number(c.year) === year)
+      || activeChallans.find((c) => (c.status || '').toLowerCase() !== 'paid')
+      || activeChallans[0]
       || null
-  }, [challans])
+  }, [activeChallans])
 
   const markPaid = async (challan) => {
     if (!challan?.id) return
@@ -108,7 +112,7 @@ export default function StudentFeePanel({ student, school }) {
     return <div style={{ color: 'var(--apex-text-tertiary)', padding: 16 }}>Loading fee records…</div>
   }
 
-  if (loadError) {
+  if (loadError && !scopeMatches) {
     return <div style={{ padding:16, borderRadius:12, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))', color:'var(--apex-action-danger)', fontSize:12, fontWeight:700 }}>{loadError}</div>
   }
 
@@ -121,6 +125,9 @@ export default function StudentFeePanel({ student, school }) {
 
   return (
     <div style={{ display: 'grid', gap: 16 }}>
+      {loadError && scopeMatches && (
+        <div style={{ padding:12, borderRadius:10, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))', color:'var(--apex-action-danger)', fontSize:12, fontWeight:700 }}>{loadError}</div>
+      )}
       <div style={{ display: 'flex', gap: 4, overflowX: 'auto', background: 'var(--apex-bg-subtle)', borderRadius: 10, padding: 4 }}>
         {subTabs.map((t) => (
           <button key={t.id} type="button" style={subTabBtn(subTab === t.id)} onClick={() => setSubTab(t.id)}>{t.label}</button>
@@ -131,16 +138,16 @@ export default function StudentFeePanel({ student, school }) {
 
       {subTab === 'profile' && (
         <div style={{ display: 'grid', gap: 10 }}>
-          {profile ? (
+          {activeProfile ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 10 }}>
               {[
-                ['Monthly', profile.monthly_fee],
-                ['Admission', profile.admission_fee],
-                ['Registration', profile.registration_fee],
-                ['Library', profile.library_fee],
-                ['Transport', profile.transport_fee],
-                ['Exam', profile.exam_fee],
-                ['Other', profile.other_charges],
+                ['Monthly', activeProfile.monthly_fee],
+                ['Admission', activeProfile.admission_fee],
+                ['Registration', activeProfile.registration_fee],
+                ['Library', activeProfile.library_fee],
+                ['Transport', activeProfile.transport_fee],
+                ['Exam', activeProfile.exam_fee],
+                ['Other', activeProfile.other_charges],
               ].map(([label, val]) => (
                 <div key={label} style={{ padding: '12px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 10 }}>
                   <div style={{ color: '#8892A4', fontSize: 11 }}>{label}</div>
@@ -188,8 +195,8 @@ export default function StudentFeePanel({ student, school }) {
 
       {subTab === 'challans' && (
         <div style={{ display: 'grid', gap: 8 }}>
-          {challans.length === 0 && <div style={{ color: '#8892A4' }}>No challans yet.</div>}
-          {challans.map((ch) => (
+          {activeChallans.length === 0 && <div style={{ color: '#8892A4' }}>No challans yet.</div>}
+          {activeChallans.map((ch) => (
             <div key={ch.id} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, padding: '12px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 10, alignItems: 'center' }}>
               <div>
                 <div style={{ color: '#C0C8D8', fontWeight: 700 }}>{ch.month} {ch.year}</div>
@@ -208,7 +215,7 @@ export default function StudentFeePanel({ student, school }) {
 
       {subTab === 'vouchers' && (
         <div style={{ display: 'grid', gap: 8 }}>
-          {challans.map((ch) => (
+          {activeChallans.map((ch) => (
             <div key={`v-${ch.id}`} style={{ padding: '10px 14px', background: 'var(--apex-bg-subtle)', borderRadius: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
               <div>
                 <div style={{ fontWeight: 700, color: '#C0C8D8' }}>{ch.challan_no || `CH-${ch.id}`}</div>

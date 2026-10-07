@@ -146,6 +146,18 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  /Student fee panel load failed[\s\S]{0,180}setProfile\(null\)[\s\S]{0,120}setChallans\(\[\]\)/,
+  'student fee panel refresh failures must preserve the last known-good fee state.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  'const activeChallans = scopeMatches ? challans : []',
+  'student fee rows must remain bound to the student they were actually loaded for.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
   /Failed to fetch attendance history:[\s\S]{0,180}setRecords\(\[\]\)/,
   'attendance analytics refresh failures must preserve the last known-good history instead of reporting an empty month.'
