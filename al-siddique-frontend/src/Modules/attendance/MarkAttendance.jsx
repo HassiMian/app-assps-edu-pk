@@ -177,6 +177,15 @@ export default function MarkAttendance() {
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
 
+ // Academic classes hydrate from the server after the first render. A useState
+ // initializer alone leaves the class picker blank even when the API succeeds.
+ useEffect(() => {
+   if (!CLASSES.length) return
+   if (!selectedClass || !CLASSES.includes(selectedClass)) {
+     setSelectedClass(CLASSES[0])
+   }
+ }, [CLASSES, selectedClass])
+
  const loadStudents = () => {
  if (!selectedClass || !selectedSection) {
  setStudents([])
@@ -213,10 +222,6 @@ export default function MarkAttendance() {
  })
  .finally(() => setLoading(false))
  }
-
- useEffect(() => {
- loadStudents()
- }, [])
 
  useEffect(() => {
  const available = attendanceSectionsForClass(selectedClass, sectionsForClass)
