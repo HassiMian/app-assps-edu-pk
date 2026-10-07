@@ -327,9 +327,13 @@ router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princi
       return res.status(404).json({ success: false, message: 'Paper not found in your accessible library.' })
     }
     const row = existing.rows[0]
-    if (req.body?.expectedRevision !== undefined && Number(req.body.expectedRevision) !== Number(row.revision)) {
+    if (req.body?.expectedRevision === undefined || !Number.isInteger(Number(req.body.expectedRevision))) {
       await client.query('ROLLBACK')
-      return res.status(409).json({ success: false, message: 'This paper changed in another session. Reload before saving again.', revision: row.revision })
+      return res.status(428).json({ success: false, code: 'EXPECTED_REVISION_REQUIRED', message: 'expectedRevision is required for legacy Paper Vault mutations.', revision: row.revision })
+    }
+    if (Number(req.body.expectedRevision) !== Number(row.revision)) {
+      await client.query('ROLLBACK')
+      return res.status(409).json({ success: false, code: 'REVISION_CONFLICT', message: 'This paper changed in another session. Reload before saving again.', revision: row.revision })
     }
     const nextPayload = req.body?.paper && typeof req.body.paper === 'object' && !Array.isArray(req.body.paper)
       ? req.body.paper : row.payload
@@ -357,28 +361,53 @@ router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princi
 })
 
 router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+  const client = await pool.connect()
   try {
     await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
+    await client.query('BEGIN')
     const params = [id, schoolId]
     let ownerClause = ''
     if (!isPaperAdmin(req)) {
       params.push(req.user?.id)
       ownerClause = ` AND owner_user_id=$${params.length}`
     }
-    const result = await pool.query(
+    const existing = await client.query(
+      `SELECT id, revision FROM paper_vault WHERE id=$1 AND school_id=$2 AND deleted_at IS NULL${ownerClause} FOR UPDATE`, params)
+    if (!existing.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Paper not found in your accessible library.' })
+    }
+    const row = existing.rows[0]
+    if (req.body?.expectedRevision === undefined || !Number.isInteger(Number(req.body.expectedRevision))) {
+      await client.query('ROLLBACK')
+      return res.status(428).json({ success: false, code: 'EXPECTED_REVISION_REQUIRED', message: 'expectedRevision is required for legacy Paper Vault mutations.', revision: row.revision })
+    }
+    if (Number(req.body.expectedRevision) !== Number(row.revision)) {
+      await client.query('ROLLBACK')
+      return res.status(409).json({ success: false, code: 'REVISION_CONFLICT', message: 'This paper changed in another session. Reload before deleting.', revision: row.revision })
+    }
+    const result = await client.query(
       `UPDATE paper_vault SET deleted_at=NOW(), updated_at=NOW()
        WHERE id=$1 AND school_id=$2 AND deleted_at IS NULL${ownerClause}
        RETURNING id`, params)
-    if (!result.rowCount) return res.status(404).json({ success: false, message: 'Paper not found in your accessible library.' })
+    if (!result.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Paper not found in your accessible library.' })
+    }
+    await client.query('COMMIT')
     return res.json({ success: true })
   } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
     console.error('Paper vault delete error:', err.message)
     return res.status(500).json({ success: false, message: 'Paper could not be deleted.' })
+  } finally {
+    client.release()
   }
 })
+
 
 router.get('/ai/config', protect, canUsePaperAi, async (req, res) => {
   const ai = getAiEnvConfig()

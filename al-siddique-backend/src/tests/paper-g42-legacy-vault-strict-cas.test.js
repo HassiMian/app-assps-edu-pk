@@ -1,0 +1,13 @@
+const test=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const path=require('node:path')
+const route=fs.readFileSync(path.resolve(__dirname,'../routes/paperRoute.js'),'utf8')
+test('G42 legacy Paper Vault mutations require explicit revision preconditions',()=>{
+  assert.match(route,/EXPECTED_REVISION_REQUIRED/)
+  assert.match(route,/REVISION_CONFLICT/)
+  assert.match(route,/router\.patch\('\/vault\/:id'/)
+  assert.match(route,/router\.delete\('\/vault\/:id'/)
+  assert.match(route,/SELECT id, revision FROM paper_vault[\s\S]*FOR UPDATE/)
+  assert.match(route,/expectedRevision is required for legacy Paper Vault mutations/)
+})
