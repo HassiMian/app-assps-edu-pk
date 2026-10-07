@@ -1,0 +1,85 @@
+{
+  "files": [
+    {
+      "hashMode": "utf8-lf-normalized",
+      "immutable": true,
+      "name": "official-first-term-2026-v12.json",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/seed-data/official-first-term-2026-v12.json",
+      "role": "historical-reference",
+      "sha256": "6e2ba2feae54f8e772357b5303cc569faefd6e01772ddc89adc9c2b4c9b2a014",
+      "baselineCommit": "8609421571dc5a459ffd23aa27ef047c41ab3f45"
+    },
+    {
+      "baselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
+      "hashMode": "raw-bytes",
+      "immutable": true,
+      "name": "official-first-term-2026-v13.json",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/seed-data/official-first-term-2026-v13.json",
+      "role": "operational-authority",
+      "sha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f"
+    },
+    {
+      "baselineCommit": "76e12543fd30fa8484dfbe4ae2ae53474d8fdde5",
+      "hashMode": "utf8-lf-normalized",
+      "immutable": true,
+      "name": "early-years-first-term-2026-source-v2.json",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/earlyYears/data/early-years-first-term-2026-source-v2.json",
+      "role": "protected-early-years-source",
+      "sha256": "a3fc7077bec4fd7af5f682e48145e545792984d6a13e9229f7cc17b241b49ac0"
+    },
+    {
+      "derivedFromSha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f",
+      "hashMode": "raw-bytes",
+      "name": "normalizationManifestV13.json",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/normalizationManifestV13.json",
+      "role": "derived-normalization-manifest",
+      "sha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2"
+    },
+    {
+      "derivedFromSha256": "51e6a42582d08e300778071d3f04900f7faa57b2b2de56bddf24df4f576d86d2",
+      "hashMode": "raw-bytes",
+      "name": "canonical-first-term-2026-paperdoc-v2-schema3.json",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json",
+      "role": "derived-canonical-corpus",
+      "sha256": "39a2dcd58e064dd63985c7f5b57d4bed55fdb949e99db0b00bc4b1735f2f1843"
+    }
+  ],
+  "historicalGitReferences": [
+    {
+      "commit": "350e947c6202e7ac607351f03c9b62f7135aea80",
+      "name": "canonical-v2-pre-convergence",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json",
+      "ref": "350e947",
+      "sha256": "58a9f345c0f83611a6c419df72abcafb9f0cfd252d713d62636e9b94d4af7e86"
+    },
+    {
+      "commit": "6eea6773d3cf8166aee3ef80a7acc3a71847ea2c",
+      "name": "normalization-manifest-initial-freeze",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/normalizationManifestV13.json",
+      "ref": "6eea677",
+      "sha256": "f40cf8a5ae627ba32924f19dd6b9bc6172ed61d9b46654ff9084ae9e395095d4"
+    },
+    {
+      "commit": "a2fbb7a7e6ee4767027d35ba56039248879f1324",
+      "name": "first-committed-v13",
+      "path": "al-siddique-frontend/src/Modules/Paper-Generator/seed-data/official-first-term-2026-v13.json",
+      "ref": "a2fbb7a",
+      "sha256": "e27dca45f833fb05e38a9e898c190301a7964249a2d727f943d7a032123b937e"
+    }
+  ],
+  "policy": "ASSPS_REFERENCE_CORPUS_IMMUTABILITY",
+  "rules": {
+    "derivedArtifactsMustMatchSource": true,
+    "historicalArtifactsRemainAvailableThroughGit": true,
+    "productionRouteSwitchRequiresParityGate": true,
+    "sourceChangesRequireReviewedReconciliation": true
+  },
+  "schemaVersion": "1.0.0",
+  "sourceAuthority": {
+    "baselineCommit": "16764ca8551ab0b76165c5b437ba09915581944b",
+    "dataset": "official-first-term-2026-v13.json",
+    "datasetVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13",
+    "paperCount": 43,
+    "sha256": "870dea760ff40585f37cc9c3d919ed3b2041d2bffc2366d66fbe73c35a1a7b7f"
+  }
+}

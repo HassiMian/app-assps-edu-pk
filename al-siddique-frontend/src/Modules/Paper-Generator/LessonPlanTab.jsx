@@ -6,13 +6,20 @@ import { Edit, Trash2, X, Send, BookOpen, Plus, Printer, Check } from 'lucide-re
 import Portal from '../../components/Portal'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { usePaperStore } from './usePaperStore'
-import { getTenantStorageItem, setTenantStorageItem } from '../../services/tenantStorage'
 
 //  Storage 
 const LP_KEY = 'al_siddique_lesson_plans'
-const loadPlans = () => { try { return JSON.parse(getTenantStorageItem(LP_KEY) || '[]') } catch { return [] } }
+function getStorage() {
+ try {
+ return typeof window !== 'undefined' ? window.localStorage : null
+ } catch {
+ return null
+ }
+}
+const loadPlans = () => { try { return JSON.parse(getStorage()?.getItem(LP_KEY)) || [] } catch { return [] } }
 const storePlans = (plans) => {
- try { setTenantStorageItem(LP_KEY, JSON.stringify(plans)) } catch { /* local draft persistence is best-effort */ }
+ const storage = getStorage()
+ try { storage?.setItem(LP_KEY, JSON.stringify(plans)) } catch {}
 }
 
 //  Palette 

@@ -2,6 +2,8 @@
 import { extractQuestionsFromFile, MODEL_OPTIONS, DEFAULT_MODEL, getAiConfig, testAiConnection, generateWithGemini } from './geminiService'
 import { CHAPTERS, SUBJECTS } from './data/questionBank'
 import PaperAiJobsPanel from './PaperAiJobsPanel'
+import QuickQuestionEntry from './QuickQuestionEntry.jsx'
+import { QUICK_TEXT_KINDS } from './quickQuestionRecord.js'
 import api from '../../services/api'
 
 import { useState, useRef, useMemo, useCallback, useEffect } from 'react'
@@ -1941,6 +1943,7 @@ export default function QuestionBank() {
 
  const [subjectModal, setSubjectModal] = useState(null)
  const [questionModal, setQuestionModal] = useState(null)
+ const [quickAddOpen, setQuickAddOpen] = useState(false)
  const [bulkModal, setBulkModal] = useState(false)
  const [aiModal, setAiModal] = useState(false)
  const [aiImportResult, setAiImportResult] = useState(null)
@@ -2236,8 +2239,11 @@ export default function QuestionBank() {
  </div>
  <Btn variant="ai" size="sm" onClick={() => setAiModal(true)} ><Sparkles size={13} /> AI Import</Btn>
  <Btn variant="blue" size="sm" onClick={() => setBulkModal(true)} ><Upload size={13} /> Paste Text</Btn>
- <Btn variant="gold" size="sm" onClick={() => setQuestionModal('add')}><Plus size={13} /> Add</Btn>
+ <Btn variant="gold" size="sm" disabled={!filteredTypes.some(t=>QUICK_TEXT_KINDS.has(t.value))} onClick={() => setQuickAddOpen(v=>!v)}><Plus size={13} /> Quick Add</Btn>
+ <Btn variant="ghost" size="sm" onClick={() => { setQuickAddOpen(false); setQuestionModal('add') }}><Plus size={13} /> Advanced Add</Btn>
  </div>
+
+ {quickAddOpen && currentSubject && filteredTypes.some(t=>QUICK_TEXT_KINDS.has(t.value)) && <QuickQuestionEntry key={currentSubject.id} subject={currentSubject} types={filteredTypes} existingQuestions={store.questions} onSave={question=>store.addQuestion(question)} onAdvanced={()=>{setQuickAddOpen(false);setQuestionModal('add')}} onClose={()=>setQuickAddOpen(false)} />}
 
  {/* Toolbar — row 2: type chips (horizontally scrollable) */}
  <div style={{ padding: '10px 20px', borderBottom: '1px solid rgba(200,153,26,0.08)' }}>

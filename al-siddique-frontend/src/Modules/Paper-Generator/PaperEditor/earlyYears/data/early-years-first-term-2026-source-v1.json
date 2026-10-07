@@ -1,0 +1,978 @@
+{
+  "version": "1.0.0",
+  "corpusId": "early-years-first-term-2026",
+  "academicSession": "2026",
+  "term": "First Term",
+  "paperCount": 9,
+  "sourcePresentCount": 9,
+  "sourceMissingCount": 0,
+  "classes": ["starter", "mover", "flyer"],
+  "subjects": ["english", "urdu", "math"],
+  "papers": [
+    {
+      "id": "ey-starter-english-2026",
+      "classStage": "starter",
+      "classDisplayName": "Starter",
+      "subject": "english",
+      "language": "english",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Starter",
+        "subject": "English",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "SOURCE_OK"
+      },
+      "questions": [
+        {
+          "id": "ey-starter-eng-q1",
+          "questionNumber": 1,
+          "label": "Q1",
+          "instruction": "Trace the Alphabets.",
+          "marks": 10,
+          "presentationType": "TraceGlyphGrid",
+          "content": {
+            "glyphs": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+            "gridColumns": 5,
+            "practiceLane": true
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-eng-q2",
+          "questionNumber": 2,
+          "label": "Q2",
+          "instruction": "Match capital letters with small letters.",
+          "marks": 10,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-text",
+            "leftItems": [
+              { "id": "l1", "text": "B" },
+              { "id": "l2", "text": "A" },
+              { "id": "l3", "text": "C" },
+              { "id": "l4", "text": "D" },
+              { "id": "l5", "text": "E" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "c" },
+              { "id": "r2", "text": "e" },
+              { "id": "r3", "text": "b" },
+              { "id": "r4", "text": "d" },
+              { "id": "r5", "text": "a" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-eng-q3",
+          "questionNumber": 3,
+          "label": "Q3",
+          "instruction": "Color it.",
+          "marks": 10,
+          "presentationType": "PictureColoringBlock",
+          "content": {
+            "items": [
+              { "id": "c1", "label": "Apple", "sketchId": "sketch.apple.v1" },
+              { "id": "c2", "label": "Mango", "sketchId": "sketch.mango.v1" },
+              { "id": "c3", "label": "Grapes", "sketchId": "sketch.grapes.v1" },
+              { "id": "c4", "label": "Banana", "sketchId": "sketch.banana.v1" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-eng-q4",
+          "questionNumber": 4,
+          "label": "Q4",
+          "instruction": "Match picture with its letter/name.",
+          "marks": 10,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-sketch",
+            "leftItems": [
+              { "id": "l1", "text": "Apple" },
+              { "id": "l2", "text": "Doll" },
+              { "id": "l3", "text": "Kite" },
+              { "id": "l4", "text": "Flower" },
+              { "id": "l5", "text": "Lion" }
+            ],
+            "rightItems": [
+              { "id": "r1", "sketchId": "sketch.lion.v1", "label": "Lion Drawing" },
+              { "id": "r2", "sketchId": "sketch.flower.v1", "label": "Flower Drawing" },
+              { "id": "r3", "sketchId": "sketch.doll.v1", "label": "Doll Drawing" },
+              { "id": "r4", "sketchId": "sketch.kite.v1", "label": "Kite Drawing" },
+              { "id": "r5", "sketchId": "sketch.apple.v1", "label": "Apple Drawing" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-eng-q5",
+          "questionNumber": 5,
+          "label": "Q5",
+          "instruction": "Circle the small letters of given Capital letters.",
+          "marks": 10,
+          "presentationType": "ChoiceLetterRow",
+          "content": {
+            "rows": [
+              { "id": "r1", "prompt": "A", "choices": ["w", "e", "a"] },
+              { "id": "r2", "prompt": "B", "choices": ["d", "b", "t"] },
+              { "id": "r3", "prompt": "C", "choices": ["c", "s", "u"] },
+              { "id": "r4", "prompt": "D", "choices": ["p", "r", "d"] }
+            ]
+          },
+          "qaFlags": ["SOURCE_ITEM_COUNT_MARKS_AMBIGUITY"]
+        }
+      ],
+      "qaFlags": ["SOURCE_ITEM_COUNT_MARKS_AMBIGUITY"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-starter-urdu-2026",
+      "classStage": "starter",
+      "classDisplayName": "Starter",
+      "subject": "urdu",
+      "language": "urdu",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Starter",
+        "subject": "Urdu",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 80,
+        "hasConflict": true,
+        "conflictStatus": "SOURCE_TOTAL_CONFLICT"
+      },
+      "questions": [
+        {
+          "id": "ey-starter-urdu-q1",
+          "questionNumber": 1,
+          "label": "سوال نمبر 1",
+          "instruction": "حروف تہجی پر پنسل پھیریں اور لکھیں۔",
+          "marks": 20,
+          "presentationType": "TraceGlyphGrid",
+          "content": {
+            "glyphs": ["ا", "ب", "پ", "ت", "ٹ", "ث"],
+            "gridColumns": 3,
+            "practiceLane": true
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-urdu-q2",
+          "questionNumber": 2,
+          "label": "سوال نمبر 2",
+          "instruction": "تصویر دیکھ کر درست حرف کے گرد دائرہ لگائیں۔",
+          "marks": 20,
+          "presentationType": "CircleChoiceWithSketch",
+          "content": {
+            "items": [
+              { "id": "i1", "sketchId": "sketch.chicken.v1", "prompt": "مرغی", "choices": ["م", "س", "ر"] },
+              { "id": "i2", "sketchId": "sketch.hand-fan.v1", "prompt": "پنکھا", "choices": ["پ", "ک", "ت"] },
+              { "id": "i3", "sketchId": "sketch.tomato.v1", "prompt": "ٹماٹر", "choices": ["ٹ", "ڈ", "ب"] }
+            ]
+          },
+          "qaFlags": ["SUSPICIOUS_PICTURE_LETTER_OPTIONS"]
+        },
+        {
+          "id": "ey-starter-urdu-q3",
+          "questionNumber": 3,
+          "label": "سوال نمبر 3",
+          "instruction": "ف اور ب کے گرد دائرہ لگائیں۔",
+          "marks": 10,
+          "presentationType": "CircleChoiceGrid",
+          "content": {
+            "targetLetters": ["ف", "ب"],
+            "letterGrid": [
+              ["ا", "ب", "ت", "ث"],
+              ["ج", "ف", "خ", "ب"],
+              ["د", "ر", "ف", "س"],
+              ["ب", "ش", "ف", "ک"]
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-urdu-q4",
+          "questionNumber": 4,
+          "label": "سوال نمبر 4",
+          "instruction": "رنگ بھریں۔",
+          "marks": 10,
+          "presentationType": "PictureColoringBlock",
+          "content": {
+            "items": [
+              { "id": "c1", "label": "پنسل", "sketchId": "sketch.pencil.v1" },
+              { "id": "c2", "label": "آم", "sketchId": "sketch.mango.v1" },
+              { "id": "c3", "label": "انگور", "sketchId": "sketch.grapes.v1" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-urdu-q5",
+          "questionNumber": 5,
+          "label": "سوال نمبر 5",
+          "instruction": "درست جوڑ ملائیں۔",
+          "marks": 20,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-sketch",
+            "leftItems": [
+              { "id": "l1", "text": "ا" },
+              { "id": "l2", "text": "ب" },
+              { "id": "l3", "text": "ت" }
+            ],
+            "rightItems": [
+              { "id": "r1", "sketchId": "sketch.butterfly.v1", "label": "تتلی" },
+              { "id": "r2", "sketchId": "sketch.grapes.v1", "label": "انگور" },
+              { "id": "r3", "sketchId": "sketch.cricket-bat.v1", "label": "بلا" }
+            ]
+          },
+          "qaFlags": []
+        }
+      ],
+      "qaFlags": ["SOURCE_TOTAL_CONFLICT", "SUSPICIOUS_PICTURE_LETTER_OPTIONS"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-starter-math-2026",
+      "classStage": "starter",
+      "classDisplayName": "Starter",
+      "subject": "math",
+      "language": "english",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Starter",
+        "subject": "Math",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "SOURCE_OK"
+      },
+      "questions": [
+        {
+          "id": "ey-starter-math-q1",
+          "questionNumber": 1,
+          "label": "Q1",
+          "instruction": "Trace the numbers.",
+          "marks": 10,
+          "presentationType": "CaterpillarNumberTrace",
+          "content": {
+            "sourceMarker": "Drawing of cartipiler",
+            "numbers": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "assetId": "sketch.caterpillar.v1"
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-math-q2",
+          "questionNumber": 2,
+          "label": "Q2",
+          "instruction": "Count the apples in each box, match with Correct numbers.",
+          "marks": 10,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "count-text",
+            "leftItems": [
+              { "id": "l1", "count": 4, "sketchId": "sketch.apple.v1", "label": "4 apples" },
+              { "id": "l2", "count": 3, "sketchId": "sketch.apple.v1", "label": "3 apples" },
+              { "id": "l3", "count": 5, "sketchId": "sketch.apple.v1", "label": "5 apples" },
+              { "id": "l4", "count": 2, "sketchId": "sketch.apple.v1", "label": "2 apples" },
+              { "id": "l5", "count": 1, "sketchId": "sketch.apple.v1", "label": "1 apple" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "5" },
+              { "id": "r2", "text": "4" },
+              { "id": "r3", "text": "3" },
+              { "id": "r4", "text": "1" },
+              { "id": "r5", "text": "2" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-math-q3",
+          "questionNumber": 3,
+          "label": "Q3",
+          "instruction": "Trace the shapes using led pencil and colour it.",
+          "marks": 10,
+          "presentationType": "TraceShapeBlock",
+          "content": {
+            "sourceMarker": "[Square shape dotted]",
+            "shapeId": "shape.square.v1",
+            "shapeName": "square",
+            "isDotted": true
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-math-q4",
+          "questionNumber": 4,
+          "label": "Q4",
+          "instruction": "Look above and write it yourself.",
+          "marks": 10,
+          "presentationType": "NumberCopyPractice",
+          "content": {
+            "referenceRow": [1, 2, 3, 4, 5]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-starter-math-q5",
+          "questionNumber": 5,
+          "label": "Q5",
+          "instruction": "Match the Same words.",
+          "marks": 10,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-text",
+            "leftItems": [
+              { "id": "l1", "text": "15" },
+              { "id": "l2", "text": "17" },
+              { "id": "l3", "text": "18" },
+              { "id": "l4", "text": "19" },
+              { "id": "l5", "text": "11" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "20" },
+              { "id": "r2", "text": "18" },
+              { "id": "r3", "text": "19" },
+              { "id": "r4", "text": "17" },
+              { "id": "r5", "text": "11" }
+            ]
+          },
+          "qaFlags": ["SOURCE_AMBIGUOUS"]
+        }
+      ],
+      "qaFlags": ["SOURCE_AMBIGUOUS"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-mover-english-2026",
+      "classStage": "mover",
+      "classDisplayName": "Mover",
+      "subject": "english",
+      "language": "english",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Mover",
+        "subject": "English",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "SOURCE_OK"
+      },
+      "questions": [
+        {
+          "id": "ey-mover-eng-q1",
+          "questionNumber": 1,
+          "label": "Q1",
+          "instruction": "Supply the missing letters.",
+          "marks": 10,
+          "presentationType": "MissingLetterGrid",
+          "content": {
+            "sequence": ["A", null, "C", null, "E", null, "G", null, "I", null, "K", null, "M", null, "O", null, "Q", null, "S", null]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-eng-q2",
+          "questionNumber": 2,
+          "label": "Q2",
+          "instruction": "Tick the correct name of the picture.",
+          "marks": 10,
+          "presentationType": "CircleChoiceWithSketch",
+          "content": {
+            "items": [
+              { "id": "i1", "sketchId": "sketch.fish.v1", "options": ["Fish", "Dish"] },
+              { "id": "i2", "sketchId": "sketch.mouse.v1", "options": ["Mouse", "House"] }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-eng-q3",
+          "questionNumber": 3,
+          "label": "Q3",
+          "instruction": "Write Alphabets A to Z.",
+          "marks": 15,
+          "presentationType": "AlphabetWritingArea",
+          "content": {
+            "range": "A to Z",
+            "lines": 4
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-eng-q4",
+          "questionNumber": 4,
+          "label": "Q4",
+          "instruction": "Match capital with small letters.",
+          "marks": 15,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-text",
+            "leftItems": [
+              { "id": "l1", "text": "F" },
+              { "id": "l2", "text": "G" },
+              { "id": "l3", "text": "H" },
+              { "id": "l4", "text": "I" },
+              { "id": "l5", "text": "J" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "g" },
+              { "id": "r2", "text": "h" },
+              { "id": "r3", "text": "f" },
+              { "id": "r4", "text": "j" },
+              { "id": "r5", "text": "i" }
+            ]
+          },
+          "qaFlags": []
+        }
+      ],
+      "qaFlags": [],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-mover-urdu-2026",
+      "classStage": "mover",
+      "classDisplayName": "Mover",
+      "subject": "urdu",
+      "language": "urdu",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Mover",
+        "subject": "Urdu",
+        "totalMarks": null
+      },
+      "totalMarksSource": {
+        "headerTotal": null,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "AUTHORITATIVE_HEADER_TOTAL_ABSENT",
+        "derivedPotentialTotal": 50
+      },
+      "questions": [
+        {
+          "id": "ey-mover-urdu-q1",
+          "questionNumber": 1,
+          "label": "سوال نمبر 1",
+          "instruction": "حروف تہجی لکھیں (الف تا ے)۔",
+          "marks": 15,
+          "presentationType": "UrduAlphabetWritingArea",
+          "content": {
+            "range": "ا تا ے",
+            "lineCount": 4
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-urdu-q2",
+          "questionNumber": 2,
+          "label": "سوال نمبر 2",
+          "instruction": "خالی جگہ پر کریں۔",
+          "marks": 10,
+          "presentationType": "MissingUrduLetterGrid",
+          "content": {
+            "sequence": ["ا", null, "پ", null, "ٹ", null, "ج", null, "خ"]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-urdu-q3",
+          "questionNumber": 3,
+          "label": "سوال نمبر 3",
+          "instruction": "الف تا ش خوشخط لکھیں۔",
+          "marks": 15,
+          "presentationType": "UrduHandwritingResponse",
+          "content": {
+            "prompt": "الف تا ش",
+            "lineCount": 3
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-urdu-q4",
+          "questionNumber": 4,
+          "label": "سوال نمبر 4",
+          "instruction": "ملتے جلتے حروف کو آپس میں ملائیں۔",
+          "marks": 10,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-text",
+            "leftItems": [
+              { "id": "l1", "text": "ب" },
+              { "id": "l2", "text": "ج" },
+              { "id": "l3", "text": "د" },
+              { "id": "l4", "text": "ر" },
+              { "id": "l5", "text": "س" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "ج" },
+              { "id": "r2", "text": "ب" },
+              { "id": "r3", "text": "ر" },
+              { "id": "r4", "text": "س" },
+              { "id": "r5", "text": "ب" }
+            ]
+          },
+          "qaFlags": ["REPEATED_MATCHING_VALUE"]
+        }
+      ],
+      "qaFlags": ["AUTHORITATIVE_HEADER_TOTAL_ABSENT", "REPEATED_MATCHING_VALUE"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-mover-math-2026",
+      "classStage": "mover",
+      "classDisplayName": "Mover",
+      "subject": "math",
+      "language": "english",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Mover",
+        "subject": "Math",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "SOURCE_OK"
+      },
+      "questions": [
+        {
+          "id": "ey-mover-math-q1",
+          "questionNumber": 1,
+          "label": "Q1",
+          "instruction": "Fill in the missing numbers.",
+          "marks": 10,
+          "presentationType": "MissingNumberGrid",
+          "content": {
+            "grid": [1, null, 3, null, 5, null, 7, null, 9, null, 11, null, 13, null, 15, null, 17, null, 19, null]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-math-q2",
+          "questionNumber": 2,
+          "label": "Q2",
+          "instruction": "Draw pattern one by one.",
+          "marks": 10,
+          "presentationType": "PatternCopyBlock",
+          "content": {
+            "patterns": [
+              { "shapeId": "shape.triangle.v1", "name": "Triangle" },
+              { "shapeId": "shape.arrow.v1", "name": "Arrow" },
+              { "shapeId": "shape.circle.v1", "name": "Circle" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-math-q3",
+          "questionNumber": 3,
+          "label": "Q3",
+          "instruction": "Write counting 1 to 30.",
+          "marks": 15,
+          "presentationType": "CountingWritingGrid",
+          "content": {
+            "countTo": 30,
+            "gridColumns": 6,
+            "gridRows": 5
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-mover-math-q4",
+          "questionNumber": 4,
+          "label": "Q4",
+          "instruction": "Match the numbers.",
+          "marks": 15,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-text",
+            "leftItems": [
+              { "id": "l1", "text": "6" },
+              { "id": "l2", "text": "8" },
+              { "id": "l3", "text": "10" },
+              { "id": "l4", "text": "12" },
+              { "id": "l5", "text": "14" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "8" },
+              { "id": "r2", "text": "6" },
+              { "id": "r3", "text": "12" },
+              { "id": "r4", "text": "14" },
+              { "id": "r5", "text": "10" }
+            ]
+          },
+          "qaFlags": []
+        }
+      ],
+      "qaFlags": [],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-flyer-english-2026",
+      "classStage": "flyer",
+      "classDisplayName": "Flyer",
+      "subject": "english",
+      "language": "english",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Flyer",
+        "subject": "English",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "SOURCE_OK"
+      },
+      "questions": [
+        {
+          "id": "ey-flyer-eng-q1",
+          "questionNumber": 1,
+          "label": "Q1",
+          "instruction": "Choose the correct spelling.",
+          "marks": 10,
+          "presentationType": "ChoiceLetterRow",
+          "content": {
+            "rows": [
+              { "id": "r1", "prompt": "1.", "choices": ["ball", "ball", "bill"] },
+              { "id": "r2", "prompt": "2.", "choices": ["cat", "cot", "cut"] },
+              { "id": "r3", "prompt": "3.", "choices": ["pen", "pin", "pan"] },
+              { "id": "r4", "prompt": "4.", "choices": ["sun", "son", "sin"] }
+            ]
+          },
+          "qaFlags": ["DUPLICATE_CANDIDATE"]
+        },
+        {
+          "id": "ey-flyer-eng-q2",
+          "questionNumber": 2,
+          "label": "Q2",
+          "instruction": "Fill in the missing letter.",
+          "marks": 10,
+          "presentationType": "MissingLetterGrid",
+          "content": {
+            "items": ["Ball _", "C _ t", "D _ g", "F _ sh", "B _ ok"]
+          },
+          "qaFlags": ["AMBIGUOUS_PROMPT"]
+        },
+        {
+          "id": "ey-flyer-eng-q3",
+          "questionNumber": 3,
+          "label": "Q3",
+          "instruction": "Write small letters A a to S",
+          "marks": 10,
+          "presentationType": "AlphabetWritingArea",
+          "content": {
+            "prompt": "A a to S",
+            "lines": 3
+          },
+          "qaFlags": ["WORDING_AMBIGUITY"]
+        },
+        {
+          "id": "ey-flyer-eng-q4",
+          "questionNumber": 4,
+          "label": "Q4",
+          "instruction": "Write capital letters A to P.",
+          "marks": 10,
+          "presentationType": "AlphabetWritingArea",
+          "content": {
+            "prompt": "A to P",
+            "lines": 3
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-eng-q5",
+          "questionNumber": 5,
+          "label": "Q5",
+          "instruction": "Match capital letters with small letters.",
+          "marks": 10,
+          "presentationType": "VisualMatchingColumns",
+          "content": {
+            "matchType": "text-text",
+            "leftItems": [
+              { "id": "l1", "text": "K" },
+              { "id": "l2", "text": "L" },
+              { "id": "l3", "text": "M" },
+              { "id": "l4", "text": "N" },
+              { "id": "l5", "text": "O" }
+            ],
+            "rightItems": [
+              { "id": "r1", "text": "l" },
+              { "id": "r2", "text": "m" },
+              { "id": "r3", "text": "k" },
+              { "id": "r4", "text": "o" },
+              { "id": "r5", "text": "n" }
+            ]
+          },
+          "qaFlags": []
+        }
+      ],
+      "qaFlags": ["DUPLICATE_CANDIDATE", "AMBIGUOUS_PROMPT", "WORDING_AMBIGUITY"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-flyer-urdu-2026",
+      "classStage": "flyer",
+      "classDisplayName": "Flyer",
+      "subject": "urdu",
+      "language": "urdu",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Flyer",
+        "subject": "Urdu",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 60,
+        "hasConflict": true,
+        "conflictStatus": "SOURCE_TOTAL_CONFLICT"
+      },
+      "questions": [
+        {
+          "id": "ey-flyer-urdu-q1",
+          "questionNumber": 1,
+          "label": "سوال نمبر 1",
+          "instruction": "حروف کو جوڑ کر لکھیں۔",
+          "marks": 10,
+          "presentationType": "UrduJoinLettersExercise",
+          "content": {
+            "expressions": [
+              { "id": "e1", "parts": ["ا", "ن", "ا", "ر"], "raw": "ا + ن + ا + ر = _______" },
+              { "id": "e2", "parts": ["ب", "ت", "ا", "پ"], "raw": "ب + ت + ا + پ = _______" },
+              { "id": "e3", "parts": ["م", "و", "م"], "raw": "م + و + م = _______" },
+              { "id": "e4", "parts": ["ب", "ل", "ی"], "raw": "ب + ل + ی = _______" },
+              { "id": "e5", "parts": ["ک", "ت", "ا", "ب"], "raw": "ک + ت + ا + ب = _______" }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-urdu-q2",
+          "questionNumber": 2,
+          "label": "سوال نمبر 2",
+          "instruction": "کوئی سے تین پھلوں کے نام لکھیں۔",
+          "marks": 20,
+          "presentationType": "UrduHandwritingResponse",
+          "content": {
+            "lineCount": 3,
+            "placeholders": ["1.", "2.", "3."]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-urdu-q3",
+          "questionNumber": 3,
+          "label": "سوال نمبر 3",
+          "instruction": "خالی جگہ پر کریں۔",
+          "marks": 10,
+          "presentationType": "MissingUrduLetterGrid",
+          "content": {
+            "sequences": [
+              ["ا", null, "ب", null, "ت"],
+              ["ث", null, "ج", null, "خ"]
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-urdu-q4",
+          "questionNumber": 4,
+          "label": "سوال نمبر 4",
+          "instruction": "حروف تہجی لکھیں۔",
+          "marks": 10,
+          "presentationType": "UrduAlphabetWritingArea",
+          "content": {
+            "lineCount": 4
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-urdu-q5",
+          "questionNumber": 5,
+          "label": "سوال نمبر 5",
+          "instruction": "کوئی سی تین سبزیوں کے نام لکھیں۔",
+          "marks": 5,
+          "presentationType": "UrduHandwritingResponse",
+          "content": {
+            "lineCount": 3,
+            "placeholders": ["1.", "2.", "3."]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-urdu-q6",
+          "questionNumber": 6,
+          "label": "سوال نمبر 6",
+          "instruction": "ہفتے کے دنوں کے نام لکھیں (کوئی سے چار)۔",
+          "marks": 5,
+          "presentationType": "UrduHandwritingResponse",
+          "content": {
+            "lineCount": 4,
+            "placeholders": ["1.", "2.", "3.", "4."]
+          },
+          "qaFlags": []
+        }
+      ],
+      "qaFlags": ["SOURCE_TOTAL_CONFLICT"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    },
+    {
+      "id": "ey-flyer-math-2026",
+      "classStage": "flyer",
+      "classDisplayName": "Flyer",
+      "subject": "math",
+      "language": "english",
+      "headerSource": {
+        "schoolName": "AL SIDDIQUE SCHOLARS PUBLIC SCHOOL",
+        "campus": "Sharif Chowk, Rayya Khas, Narowal",
+        "day": "",
+        "date": "",
+        "class": "Flyer",
+        "subject": "Math",
+        "totalMarks": 50
+      },
+      "totalMarksSource": {
+        "headerTotal": 50,
+        "listedQuestionTotal": 50,
+        "hasConflict": false,
+        "conflictStatus": "SOURCE_OK"
+      },
+      "questions": [
+        {
+          "id": "ey-flyer-math-q1",
+          "questionNumber": 1,
+          "label": "Q1",
+          "instruction": "Fill in the missing numbers from 1 to 20.",
+          "marks": 10,
+          "presentationType": "MissingNumberGrid",
+          "content": {
+            "grid": [1, 2, null, 4, 5, null, 7, 8, null, 10, 11, null, 13, 14, null, 16, 17, null, 19, 20]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-math-q2",
+          "questionNumber": 2,
+          "label": "Q2",
+          "instruction": "What comes before.",
+          "marks": 10,
+          "presentationType": "BeforeAfterGrid",
+          "content": {
+            "mode": "before",
+            "items": [
+              { "id": "b1", "target": 5 },
+              { "id": "b2", "target": 9 },
+              { "id": "b3", "target": 12 },
+              { "id": "b4", "target": 15 },
+              { "id": "b5", "target": 20 }
+            ]
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-math-q3",
+          "questionNumber": 3,
+          "label": "Q3",
+          "instruction": "Write english counting 1 to 10",
+          "marks": 10,
+          "presentationType": "CountingWritingGrid",
+          "content": {
+            "prompt": "Write english counting 1 to 10",
+            "countTo": 10,
+            "gridColumns": 5,
+            "gridRows": 2
+          },
+          "qaFlags": ["SEMANTIC_AMBIGUITY"]
+        },
+        {
+          "id": "ey-flyer-math-q4",
+          "questionNumber": 4,
+          "label": "Q4",
+          "instruction": "Write counting 1 to 50.",
+          "marks": 10,
+          "presentationType": "CountingWritingGrid",
+          "content": {
+            "countTo": 50,
+            "gridColumns": 5,
+            "gridRows": 10
+          },
+          "qaFlags": []
+        },
+        {
+          "id": "ey-flyer-math-q5",
+          "questionNumber": 5,
+          "label": "Q5",
+          "instruction": "What comes after.",
+          "marks": 10,
+          "presentationType": "BeforeAfterGrid",
+          "content": {
+            "mode": "after",
+            "items": [
+              { "id": "a1", "target": 7 },
+              { "id": "a2", "target": 14 },
+              { "id": "a3", "target": 21 },
+              { "id": "a4", "target": 29 },
+              { "id": "a5", "target": 35 }
+            ]
+          },
+          "qaFlags": []
+        }
+      ],
+      "qaFlags": ["SEMANTIC_AMBIGUITY"],
+      "status": "SOURCE_PRESENT",
+      "printable": true
+    }
+  ]
+}

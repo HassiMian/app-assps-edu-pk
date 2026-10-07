@@ -1,0 +1,75 @@
+import { test, before, after } from 'node:test'
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { chromium } from 'playwright'
+import { createServer } from 'vite'
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../../../..')
+let server,browser,page
+const chrome=['C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+ `${process.env.LOCALAPPDATA}/Google/Chrome/Application/chrome.exe`].find(p=>fs.existsSync(p))
+before(async()=>{
+ server=await createServer({root,server:{port:5198,strictPort:true}});await server.listen()
+ browser=await chromium.launch({headless:true,executablePath:chrome,args:['--no-sandbox']})
+ const ctx=await browser.newContext({viewport:{width:1440,height:1000}});page=await ctx.newPage()
+})
+after(async()=>{if(browser)await browser.close();if(server)await server.close()})
+async function openStudio(){
+ await page.goto('http://localhost:5198/ey-test.html?mode=generator',{waitUntil:'domcontentloaded'})
+ await page.getByRole('button',{name:'Pre Classes Papers'}).click()
+ await page.locator('[data-early-years-paper-selector]').waitFor()
+}
+test('P2 browser: nine references remain accessible; new document uses its own library',async()=>{
+ await openStudio()
+ assert.equal(await page.locator('[data-early-years-paper-selector] option').count(),9)
+ await page.locator('[data-pre-class-mode="mine"]').click()
+ await page.getByLabel('New pre subject').fill('Mathematics')
+ await page.locator('[data-create-user-early-years]').click()
+ await page.locator('[data-user-early-years-preview] .early-years-sheet-a4').waitFor()
+ assert.equal(await page.locator('[data-user-activity-row]').count(),0)
+ assert.equal(await page.locator('[data-user-early-years-draft-warning]').count(),1)
+ await page.getByLabel('Activity type').selectOption('TraceGlyphGrid')
+ await page.locator('[data-add-early-years-activity]').click()
+ await page.getByLabel('Activity content').fill('1, 2, 3')
+ await page.getByLabel('Activity instruction').fill('Trace the numbers.')
+ await page.getByLabel('Activity marks').fill('5')
+ await page.locator('[data-apply-early-years-activity]').click()
+ await page.locator('.early-years-trace-glyph-grid').waitFor()
+ assert.equal(await page.locator('[data-user-activity-row]').count(),1)
+ assert.match(await page.locator('[data-user-activity-row]').first().innerText(),/5 marks/)
+ await page.locator('[data-save-user-early-years]').click()
+ assert.match(await page.locator('[data-user-early-years-studio] header').first().innerText(),/rev 1/)
+ await page.getByLabel('My pre-class template').selectOption('coral-creative')
+ await page.locator('[data-save-user-early-years]').click()
+ await page.getByRole('button',{name:'My Papers'}).click()
+ assert.match(await page.getByText('Saved Personal Drafts').innerText(),/1/)
+ await page.getByRole('button',{name:'Open Draft'}).first().click()
+ assert.equal(await page.locator('[data-user-activity-row]').count(),1)
+ assert.equal(await page.locator('[data-user-early-years-preview] .early-years-sheet-a4').getAttribute('data-template-id'),'coral-creative')
+ assert.equal(await page.locator('[data-early-years-paper-selector]').count(),0)
+ await page.getByRole('button',{name:'Duplicate as New'}).click()
+ await page.locator('[data-save-user-early-years]').click()
+ await page.getByRole('button',{name:'My Papers'}).click()
+ assert.match(await page.getByText('Saved Personal Drafts').innerText(),/2/)
+ await page.locator('[data-pre-class-mode="references"]').click()
+ assert.equal(await page.locator('[data-early-years-paper-selector] option').count(),9)
+})
+test('P2 browser: Urdu blank paper uses RTL and editable handwriting activity',async()=>{
+ await page.locator('[data-pre-class-mode="mine"]').click()
+ await page.getByLabel('New pre class').selectOption('mover')
+ await page.getByLabel('New pre subject').fill('Urdu')
+ await page.getByLabel('New pre language').selectOption('urdu')
+ await page.locator('[data-create-user-early-years]').click()
+ await page.getByLabel('Activity type').selectOption('UrduAlphabetWritingArea')
+ await page.locator('[data-add-early-years-activity]').click()
+ await page.getByLabel('Activity marks').fill('10')
+ await page.locator('[data-apply-early-years-activity]').click()
+ assert.equal(await page.locator('[data-user-early-years-preview] .early-years-sheet-a4').getAttribute('dir'),null)
+ assert.equal(await page.locator('[data-user-early-years-preview] .early-years-sheet-a4').evaluate(el=>getComputedStyle(el).direction),'rtl')
+ await page.locator('[data-save-user-early-years]').click()
+ await page.reload({waitUntil:'domcontentloaded'})
+ await page.getByRole('button',{name:'Pre Classes Papers'}).click()
+ await page.locator('[data-pre-class-mode="mine"]').click()
+ assert.match(await page.getByText('Saved Personal Drafts').innerText(),/3/)
+})

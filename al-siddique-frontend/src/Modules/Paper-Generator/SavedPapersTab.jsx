@@ -3,7 +3,10 @@
 import { useState } from 'react'
 import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
+import { canDuplicatePaperInWorkspace } from './paperCreationDraft.js'
 import { useAuth } from '../../context/AuthContext'
+import { isUrduScriptPaper } from './resolvePaperRoute.js'
+import { inferOfficialSectionKind, countOfficialMcqs, countNumberedItems } from './officialSectionSemantics.js'
 
 const C = {
  card: 'rgba(11,44,77,0.92)', gold: '#C8991A', goldL: '#e8b420',
@@ -39,11 +42,23 @@ function categoryStats(paper = {}) {
   const sections = paper.documentFormat === 'pts-native-v13'
    ? (paper.official_section || paper.selectedQuestions?.official_section?.questions || [])
    : (Array.isArray(paper.sections) ? paper.sections : [])
+  const mcqCount = sections.reduce((sum, section) => sum + countOfficialMcqs(section), 0)
+  const shortCount = sections.reduce((sum, section) => {
+   if (inferOfficialSectionKind(section) !== 'short') return sum
+   return sum + Math.max(1, countNumberedItems(section.content))
+  }, 0)
+  const longCount = sections.filter(section => inferOfficialSectionKind(section) === 'long').length
+  const totalQuestions = sections.reduce((sum, section) => {
+   const kind = inferOfficialSectionKind(section)
+   if (kind === 'marker') return sum
+   if (kind === 'mcq') return sum + Math.max(1, countOfficialMcqs(section))
+   return sum + Math.max(1, countNumberedItems(section.content))
+  }, 0)
   return {
-   mcqCount: sections.filter(section => section.type === 'mcq').length,
-   shortCount: sections.filter(section => section.type === 'short').length,
-   longCount: sections.filter(section => section.type === 'long').length,
-   totalQuestions: sections.length,
+   mcqCount,
+   shortCount,
+   longCount,
+   totalQuestions,
    totalMarks: Number(paper.config?.totalMarks) || 0,
   }
  }
@@ -72,7 +87,7 @@ function categoryStats(paper = {}) {
  }
 }
 
-export default function SavedPapersTab({ onLoadPaper }) {
+export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  const { savedPapers, deleteSavedPaper, renameSavedPaper } = usePaperStore()
  const { isTeacher } = useAuth()
  const [renaming, setRenaming] = useState(null) // paper id
@@ -147,6 +162,8 @@ export default function SavedPapersTab({ onLoadPaper }) {
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 16 }}>
  {filtered.map(paper => {
  const stats = categoryStats(paper)
+ const isUrdu = isUrduScriptPaper(paper)
+ const isOfficial = paper.documentFormat === 'pts-native-v13' || paper.documentFormat === 'official-v12' || String(paper.id || '').startsWith('official-first-term-')
 
  return (
  <div key={paper.id} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, overflow: 'hidden' }}>
@@ -211,16 +228,17 @@ export default function SavedPapersTab({ onLoadPaper }) {
  </div>
 
  {/* Actions */}
- <div style={{ display: 'flex', gap: 8 }}>
- <button onClick={() => onLoadPaper(paper)}
- style={{ flex: 1, background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 700, cursor: 'pointer', fontSize: 13 }}>
-  Load & Preview
+ <div style={{ display: 'flex', gap: 8, flexWrap:'wrap' }}>
+ <button onClick={() => onLoadPaper(paper, 'build')}
+ title="Open this paper in the single Paper Workspace editor"
+ style={{ flex: '1 1 150px', background: `linear-gradient(135deg, ${C.gold}, ${C.goldL})`, border: 'none', borderRadius: 10, padding: '9px 0', color: '#071e34', fontWeight: 800, cursor: 'pointer', fontSize: 13 }}>
+  Open in Workspace
  </button>
- <button onClick={() => onLoadPaper(paper, 'word_editor')}
- title="Open in Word-like Ribbon Editor"
- style={{ background: 'rgba(10,132,255,0.2)', border: '1px solid rgba(10,132,255,0.4)', borderRadius: 10, padding: '9px 10px', color: '#60a5fa', fontWeight: 700, cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap' }}>
-  Word Edit
- </button>
+ {canDuplicatePaperInWorkspace(paper) && <button type="button" onClick={() => onDuplicatePaper?.(paper)} aria-label={`Duplicate ${paper.name} as new paper`}
+ title="Create independent editable copy; original paper stays unchanged"
+ style={{ background:'rgba(100,210,255,.12)', border:'1px solid rgba(100,210,255,.35)', borderRadius:10, padding:'9px 10px', color:'#64D2FF', fontWeight:800, cursor:'pointer', fontSize:12, whiteSpace:'nowrap' }}>
+  Duplicate
+ </button>}
  <button onClick={() => startRename(paper)}
  style={{ background: 'rgba(15,23,42,0.46)', border: `1px solid ${C.border}`, borderRadius: 10, padding: '9px 12px', color: C.silver, fontWeight: 600, cursor: 'pointer', fontSize: 12 }}>
  

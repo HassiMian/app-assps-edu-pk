@@ -219,3 +219,26 @@ export function mergeFinalExamRows(existingRows = []) {
   )
   return [...keptRows, ...buildFinalExamRows()]
 }
+
+// Read-only compatibility with the existing first-term reference matrix.
+// This does not modify persisted exam schedules or students.
+function normalizeScheduledSubject(value = '') {
+  return String(value).trim().toLowerCase()
+    .replace(/\bwritten\b/g, '')
+    .replace(/countdown\s*\(mathematics\)/g, 'mathematics')
+    .replace(/\bmaths?\b/g, 'mathematics')
+    .replace(/quran\s*\/\s*nazra|quran|nazra/g, 'quran nazra')
+    .replace(/\s+/g, ' ').trim()
+}
+
+export function getFinalExamScheduleForPaper(classLevel, subject) {
+  const cls = String(classLevel || '').trim().toLowerCase()
+  const wanted = normalizeScheduledSubject(subject)
+  if (!cls || !wanted) return null
+  for (const date of REQUIRED_DATES) {
+    const scheduledSubject = MATRIX[date]?.[cls]
+    if (!scheduledSubject || normalizeScheduledSubject(scheduledSubject) !== wanted) continue
+    return { classLevel: cls, subject: scheduledSubject, date, day: dayName(date), time: FINAL_EXAM_PAPER_TIME, timeAllowed: '2 Hours' }
+  }
+  return null
+}
