@@ -146,6 +146,18 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
+  /Failed to load unmarked attendance data:[\s\S]{0,180}setStudents\(\[\]\)[\s\S]{0,120}setMarkedToday\(\[\]\)/,
+  'dashboard unmarked-attendance refresh failures must preserve the last known-good roster and marks.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
+  'Existing loaded attendance state was preserved.',
+  'dashboard unmarked-attendance source failure must be explicit while preserving current state.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
   /mockStudents|mockAttendance|productionHost/,
   'notification UI must not contain demo/mock recipient paths.'
@@ -1155,8 +1167,8 @@ assertNotContains(
 
 assertContains(
   'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
-  "setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be loaded from the server.')",
-  'dashboard attendance load failures must remain explicit.'
+  "setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be refreshed. Existing loaded attendance state was preserved.')",
+  'dashboard attendance load failures must remain explicit without erasing loaded state.'
 )
 
 
