@@ -10,6 +10,8 @@ The download path is revision-bound: `paper_vault current revision + exact snaps
 
 `POST /api/portal/paper-studio/papers/:id/canonical-docx` with `revision` and `snapshotHash`. The existing role/tenant/owner projection is reused. Cross-owner teacher access remains non-leaking. Historical revisions are rejected for DOCX delivery.
 
+The obsolete unbound `GET /api/portal/paper-studio/papers/:id/docx` path is explicitly fail-closed with `409 REVISION_BOUND_DOCX_REQUIRED`; it never generates a document.
+
 ## Delivery Center
 
 The existing delivery manifest exposes `channels.word.state=available_canonical_docx` only when the exact current revision is G21-eligible. The adapter identifier is `V6_G21_SERVER_CANONICAL_DOCX`. All other Word delivery stays blocked with an explicit reason.

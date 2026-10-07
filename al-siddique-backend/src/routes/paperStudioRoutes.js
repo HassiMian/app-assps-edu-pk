@@ -377,6 +377,12 @@ router.post('/papers/:id/delivery-manifest', async (req,res) => {
   }
 })
 
+router.get('/papers/:id/docx', async (req,res) => {
+  const schoolId=schoolContext(req,res); if(!schoolId)return
+  res.set('Cache-Control','private, no-store')
+  return res.status(409).json({success:false,code:'REVISION_BOUND_DOCX_REQUIRED',message:'Canonical DOCX requires the current immutable revision and exact snapshot hash.'})
+})
+
 router.post('/papers/:id/canonical-docx', async (req,res) => {
   try {
     const schoolId=schoolContext(req,res); if(!schoolId)return
