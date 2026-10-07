@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
@@ -7,7 +6,7 @@ const multer = require('multer')
 const router = express.Router()
 
 const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
-const { query } = require('../config/database')
+const { pool } = require('../config/database')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { teacherCanAccessClass, ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
 const {
@@ -149,7 +148,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_ROOT),
   filename: (req, file, cb) => {
     const safe = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')
-    cb(null, `${Date.now()}_${crypto.randomBytes(6).toString('hex')}_${safe}`)
+    cb(null, `${Date.now()}_${Math.random().toString(36).slice(2, 7)}_${safe}`)
   },
 })
 
@@ -506,14 +505,14 @@ router.post('/notify-admin', protect, requireRoles('teacher', 'admin', 'principa
     sql += tenant.clause
     params.push(...tenant.params)
 
-    const result = await query(sql, params)
+    const result = await pool.query(sql, params)
     const count = parseInt(result.rows[0].count, 10) || 0
 
     const message = `Paper for ${subjectName} (${classLevel}) is saved. Number of students is ${count}, so ${count} prints are needed.`
 
     // Insert into notification_log
     // Ensure table structure exists implicitly or assume it does
-    await query(`
+    await pool.query(`
       INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
       VALUES ($1, 'admin', 'Paper Saved by Teacher', $2, 'info', NOW())
     `, [schoolId, message])
@@ -797,7 +796,7 @@ router.delete('/jobs/events', protect, canUsePaperAi, async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'Could not clear queue events.',
+      message: err.message || 'Could not clear queue events.',
       code: err.code || 'AI_QUEUE_EVENT_CLEAR_FAILED',
     })
   }
