@@ -93,13 +93,12 @@ async function createProjectedPaper({ schoolId, userId, role, payload }) {
 }
 
 function serializePaper(row) {
-  const payload = row?.payload && typeof row.paper_json === 'object' ? row.paper_json : {}
   return {
     id: String(row.id),
-    name: row.name || payload.name || 'Untitled Paper',
-    className: row.class_name || payload?.config?.classLevel || payload?.config?.className || '',
-    section: row.section || payload?.config?.section || '',
-    subjectName: row.subject_name || payload?.config?.subject || payload?.config?.subjectName || '',
+    name: row.name || 'Untitled Paper',
+    className: row.class_name || '',
+    section: row.section || '',
+    subjectName: row.subject_name || '',
     status: row.status || 'draft',
     revision: Number(row.revision || 1),
     author: { userId: String(row.owner_user_id) },
@@ -132,7 +131,7 @@ async function listProjectedPapers({ schoolId, userId, role, limit = 100 }) {
   else if (!['super_admin','admin','principal'].includes(role)) return []
   params.push(Math.max(1, Math.min(Number(limit) || 100, 200)))
   const result = await query(
-    `SELECT id, owner_user_id, name, class_name, section, subject_name, status, revision, payload, created_at, updated_at
+    `SELECT id, owner_user_id, name, class_name, section, subject_name, status, revision, created_at, updated_at
      FROM paper_vault
      WHERE school_id=$1 AND deleted_at IS NULL${ownerClause}
      ORDER BY updated_at DESC LIMIT $${params.length}`,
