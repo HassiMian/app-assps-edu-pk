@@ -89,8 +89,9 @@ node --test --test-concurrency=1 \
   tests/paper-v6h2-canary-plan.test.js \
   tests/paper-v6h3-canary-rollback-plan.test.js \
   tests/paper-v6h4-canary-review-packet.test.js \
-  tests/paper-v6g21-docx-projection.test.js | tee "$LOG"
+  tests/paper-v6g21-docx-projection.test.js \
+  tests/paper-v6g21-docx-projection-http.test.js | tee "$LOG"
 
-grep -q '^# pass 132$' "$LOG"
+grep -q '^# pass 133$' "$LOG"
 grep -q '^# fail 0$' "$LOG"
 echo "V6G21_H4_FULL_REGRESSION_PASS db=$DB port=$TEST_RUN_PORT log=$LOG"

@@ -1,0 +1,35 @@
+const {pool}=require('../config/database')
+const bcrypt=require('bcryptjs')
+const http=require('node:http')
+const crypto=require('node:crypto')
+const fs=require('node:fs')
+const path=require('node:path')
+const PORT=Number(process.env.TEST_API_PORT||5033)
+const corpusPath=path.resolve(__dirname,'../../../al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
+const raw=JSON.parse(fs.readFileSync(corpusPath,'utf8'));const corpus=Array.isArray(raw)?raw:(raw.papers||raw.documents||[])
+const canonical=corpus.find(x=>x.metadata?.language==='urdu')
+function request(pathname,{method='GET',body=null,cookie=''}={}){return new Promise((resolve,reject)=>{const rawBody=body?Buffer.from(JSON.stringify(body)):null;const q=http.request({host:'127.0.0.1',port:PORT,path:'/api'+pathname,method,headers:{Host:'api.assps.edu.pk',...(rawBody?{'Content-Type':'application/json','Content-Length':rawBody.length}:{}),...(cookie?{Cookie:cookie}:{})},timeout:8000},r=>{const chunks=[];r.on('data',c=>chunks.push(c));r.on('end',()=>resolve({status:r.statusCode,headers:r.headers,body:Buffer.concat(chunks)}))});q.on('error',reject);if(rawBody)q.write(rawBody);q.end()})}
+async function login(email,password,role,code){const r=await request('/auth/login',{method:'POST',body:{email,password,role,school_code:code}});if(r.status!==200)throw Error(`login ${role} ${r.status} ${r.body}`);return(r.headers['set-cookie']||[]).map(x=>x.split(';')[0]).join('; ')}
+;(async()=>{const c=await pool.connect();let sid;try{
+ const suf=crypto.randomBytes(5).toString('hex'),code=`g21${suf}`,password=crypto.randomBytes(18).toString('base64url'),hash=await bcrypt.hash(password,10)
+ sid=(await c.query("insert into schools(name,code,status,tenant_id) values('Synthetic G21 QA',$1,'active',$1) returning id",[code])).rows[0].id
+ const users={}
+ for(const [key,role] of [['teacherA','teacher'],['teacherB','teacher'],['admin','admin']]){const email=`${key}-${suf}@invalid.example`;const id=(await c.query('insert into users(school_id,tenant_id,name,email,role,password,is_active) values($1,$2,$3,$4,$5,$6,true) returning id',[sid,code,`G21 ${key}`,email,role,hash])).rows[0].id;users[key]={id,email,cookie:await login(email,password,role,code)}}
+ const canonicalId=(await c.query(`insert into paper_vault(school_id,owner_user_id,name,class_name,subject_name,status,payload) values($1,$2,'Canonical Urdu','1','Urdu','draft',$3::jsonb) returning id`,[sid,users.teacherA.id,JSON.stringify(canonical)])).rows[0].id
+ const legacyPayload={name:'Legacy Paper',config:{className:'1',subject:'English'},questionTypes:{mcq:[{id:'q1',text:'Legacy?'}]}}
+ const legacyId=(await c.query(`insert into paper_vault(school_id,owner_user_id,name,class_name,subject_name,status,payload) values($1,$2,'Legacy','1','English','draft',$3::jsonb) returning id`,[sid,users.teacherA.id,JSON.stringify(legacyPayload)])).rows[0].id
+ let r=await request(`/portal/paper-studio/papers/${canonicalId}/document-review`,{cookie:users.teacherA.cookie});let review={};try{review=JSON.parse(r.body.toString())}catch{};if(r.status!==200||review.review?.family!=='historical-v13'||review.review?.reviewStatus!=='SOURCE_VALIDATED')throw Error(`canonical review failed ${r.status} ${r.body}`);const canonicalHash=review.review.snapshotHash
+ r=await request(`/portal/paper-studio/papers/${legacyId}/document-review`,{cookie:users.teacherA.cookie});let legacyReview={};try{legacyReview=JSON.parse(r.body.toString())}catch{};if(r.status!==200)throw Error(`legacy review failed ${r.status}`);const legacyHash=legacyReview.review.snapshotHash
+ r=await request(`/portal/paper-studio/papers/${canonicalId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:canonicalHash},cookie:users.teacherA.cookie})
+ if(r.status!==200||!String(r.headers['content-type']||'').includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document')||r.body.subarray(0,2).toString()!=='PK'||r.body.length<5000||!String(r.headers['content-disposition']||'').includes('.docx')||String(r.headers['x-assps-paper-revision'])!=='1'||String(r.headers['x-assps-snapshot-hash'])!==canonicalHash)throw Error(`canonical DOCX response invalid status=${r.status} type=${r.headers['content-type']} bytes=${r.body.length}`)
+ console.log('PASS teacher downloads owner canonical DOCX with exact revision and snapshot')
+ r=await request(`/portal/paper-studio/papers/${canonicalId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:'f'.repeat(64)},cookie:users.teacherA.cookie});let j={};try{j=JSON.parse(r.body.toString())}catch{};if(r.status!==409||j.code!=='DELIVERY_SOURCE_MISMATCH')throw Error(`stale hash accepted ${r.status} ${r.body}`);console.log('PASS stale or forged snapshot hash fails closed')
+ r=await request(`/portal/paper-studio/papers/${legacyId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:legacyHash},cookie:users.teacherA.cookie});j={};try{j=JSON.parse(r.body.toString())}catch{}
+ if(r.status!==409||j.code!=='CANONICAL_DOCX_NOT_ELIGIBLE'||!Array.isArray(j.issues)||!j.issues.includes('CANONICAL_DOCX_REQUIRES_SOURCE_VALIDATED_V13'))throw Error(`legacy did not fail closed ${r.status} ${r.body}`)
+ console.log('PASS legacy Connect paper DOCX fails closed 409')
+ r=await request(`/portal/paper-studio/papers/${canonicalId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:canonicalHash},cookie:users.teacherB.cookie});if(r.status!==404)throw Error(`cross-teacher DOCX leaked ${r.status}`)
+ console.log('PASS cross-teacher canonical DOCX is non-leaking 404')
+ r=await request(`/portal/paper-studio/papers/${canonicalId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:canonicalHash},cookie:users.admin.cookie});if(r.status!==200||r.body.subarray(0,2).toString()!=='PK')throw Error(`admin school-wide DOCX failed ${r.status}`)
+ console.log('PASS admin can download school canonical DOCX')
+ console.log('V6G21_DOCX_HTTP 5/5 PASS')
+}finally{if(sid){await c.query('delete from paper_vault where school_id=$1',[sid]).catch(()=>{});await c.query('delete from users where school_id=$1',[sid]).catch(()=>{});await c.query('delete from schools where id=$1',[sid]).catch(()=>{})}c.release();await pool.end();console.log('V6G21_SYNTHETIC_FIXTURES_CLEANED')}})().catch(e=>{console.error('V6G21_FAIL',e.stack||e.message);process.exit(1)})
