@@ -275,6 +275,18 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertContains(
+  'al-siddique-backend/src/package.json',
+  '"seed": "node seed.js"',
+  'backend seed command must target the guarded seed entrypoint that actually exists.'
+)
+
+assertContains(
+  'al-siddique-backend/src/seed.js',
+  "process.env.ALLOW_DUMMY_SEED !== 'true'",
+  'dummy academic seed data must require an explicit non-production opt-in.'
+)
+
 assertNotContains(
   'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryFeature.jsx',
   /loadSavedDiaries\(\)\.catch\(\(\) => \[\]\)/,

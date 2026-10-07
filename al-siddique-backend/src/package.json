@@ -1,13 +1,13 @@
 {
   "name": "al-siddique-backend",
   "version": "1.0.0",
-  "description": "AL SIDDIQUE SMART SCHOOL OS — Backend API",
+  "description": "AL SIDDIQUE SMART SCHOOL OS \u2014 Backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
     "migrate": "node config/migrate.js",
-    "seed": "node config/seed.js",
+    "seed": "node seed.js",
     "smoke:paper-ai": "node scripts/aiSmokeTest.js",
     "test:attendance": "node tests/attendance-integrity.test.js",
     "test:dashboard": "node tests/dashboard-concurrency.test.js",
