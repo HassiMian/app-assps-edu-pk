@@ -387,7 +387,6 @@ router.get('/', protect, async (req, res) => {
         school_code: schoolCode,
         module_access: result.rows[0]?.module_access || {},
         school_access: result.rows[0]?.school_access || [],
-        superapp_modules: result.rows[0]?.superapp_modules || {},
         branding_config: result.rows[0]?.branding_config || {},
       }, req),
     })
@@ -666,8 +665,8 @@ router.get('/public', async (req, res) => {
     let school = null
     try {
       const schoolSql = schoolQuery === 'code'
-        ? 'SELECT id, code, status, subscription_plan, feature_flags FROM schools WHERE LOWER(code) = LOWER($1) LIMIT 1'
-        : 'SELECT id, code, status, subscription_plan, feature_flags FROM schools WHERE id = $1 LIMIT 1'
+        ? 'SELECT id, code, status FROM schools WHERE LOWER(code) = LOWER($1) LIMIT 1'
+        : 'SELECT id, code, status FROM schools WHERE id = $1 LIMIT 1'
       const schoolResult = await query(schoolSql, [schoolValue])
       school = schoolResult.rows[0] || null
     } catch (err) {
@@ -695,7 +694,7 @@ router.get('/public', async (req, res) => {
     }
     const settingsSchoolId = school ? school.id : branchSchoolId
     const result = await query(
-      'SELECT school_name, school_address, school_phone, school_email, school_logo, principal_name, school_urdu, show_urdu_on_login, superapp_modules, branding_config FROM settings WHERE school_id = $1 LIMIT 1',
+      'SELECT school_name, school_address, school_phone, school_email, school_logo, principal_name, school_urdu, show_urdu_on_login, branding_config FROM settings WHERE school_id = $1 LIMIT 1',
       [settingsSchoolId]
     )
 
@@ -717,9 +716,6 @@ router.get('/public', async (req, res) => {
         school_id: settingsSchoolId,
         school_code: branchSettings ? branchSettings.schoolCode : (school?.code || null),
         status: branchSettings ? 'active' : (school?.status || 'active'),
-        subscription_plan: school?.subscription_plan || 'basic',
-        feature_flags: school?.feature_flags || [],
-        superapp_modules: result.rows[0]?.superapp_modules || {},
         branding_config: result.rows[0]?.branding_config || {},
       }
     })
