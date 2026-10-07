@@ -97,6 +97,50 @@ const classEightUrduFixture = (() => {
   return { ...recovered, config: { ...recovered.config, totalMarks: 70 }, printReadiness: 'READY' }
 })()
 
+
+const nestedScoringPaper = {
+ clientDraftId:'nested-scoring-browser-paper',
+ name:'Nested Scoring Browser Paper',
+ userAuthored:true,
+ documentFormat:'pts-native-v13',
+ config:{
+  className:'7',classLevel:'7',subjectName:'Science',subject:'Science',language:'english',
+  paperCode:'NESTED-SCORING',timeAllowed:'30 minutes',examDate:'2026-10-07',totalMarks:9,title:'Nested Scoring Browser Paper',
+ },
+ official_section:[{
+  id:'nested-choice',
+  type:'official_section',
+  sourceOrder:1,
+  heading:'Q1. Complete both groups using the stated choices. (9)',
+  text:'Q1. Complete both groups using the stated choices. (9)',
+  content:'Group A: choose one long question. Group B: attempt any two short questions.',
+  marks:9,
+  operationalMarks:9,
+  listedPotentialItemMarksTotal:16,
+  attemptRule:'ALL',
+  choiceGroups:[
+   {
+    id:'long-or',
+    mode:'OR',
+    children:[
+     {id:'long-a',maximumObtainableMarks:5,listedPotentialItemMarksTotal:5},
+     {id:'long-b',maximumObtainableMarks:5,listedPotentialItemMarksTotal:5},
+    ],
+   },
+   {
+    id:'short-any',
+    mode:'ATTEMPT_ANY',
+    attemptCount:2,
+    children:[
+     {id:'short-1',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+     {id:'short-2',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+     {id:'short-3',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+    ],
+   },
+  ],
+ }],
+}
+
 function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
  const { savedPapers } = usePaperStore()
@@ -106,7 +150,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('nestedScoring') ? nestedScoringPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

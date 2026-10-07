@@ -7,6 +7,7 @@ import {
 import {
   createAssessmentRelease,
   createManualAssessmentDocument,
+  mergeServerDocumentIntoLocalPaper,
   validateManualAssessmentForRelease,
 } from '../../AssessmentStudio/core/manualAssessmentDocument.js'
 
@@ -186,4 +187,88 @@ test('header total cannot override the scoring-plan maximum when totals conflict
  assert.equal(doc.authority.originalTeacherHeaderTotal,6)
  assert.equal(doc.authority.flags.hasSourceHeaderConflict,true)
  assert.equal(doc.scoringPlan.balanced,false)
+})
+
+
+test('nested choice scoring supports required groups containing OR and attempt-any subgroups',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[{
+   id:'nested-choice',
+   heading:'Q3. Complete both groups using the stated choices.',
+   content:'Group A: choose one long question. Group B: attempt any two short questions.',
+   marks:16,
+   attemptRule:'ALL',
+   choiceGroups:[
+    {
+     id:'long-or',
+     mode:'OR',
+     children:[
+      {id:'long-a',maximumObtainableMarks:5,listedPotentialItemMarksTotal:5},
+      {id:'long-b',maximumObtainableMarks:5,listedPotentialItemMarksTotal:5},
+     ],
+    },
+    {
+     id:'short-any',
+     mode:'ATTEMPT_ANY',
+     attemptCount:2,
+     children:[
+      {id:'short-1',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+      {id:'short-2',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+      {id:'short-3',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+     ],
+    },
+   ],
+  }]},
+  config:{...base.config,totalMarks:9},
+ })
+ const section=doc.sections[0]
+ assert.equal(section.operationalSectionTotal,9)
+ assert.equal(section.listedPotentialItemMarksTotal,16)
+ assert.equal(doc.scoringPlan.version,3)
+ assert.equal(doc.scoringPlan.maximumObtainableMarks,9)
+ assert.equal(doc.scoringPlan.availableItemMarksTotal,16)
+ assert.equal(doc.scoringPlan.choiceGroups.length,1)
+ assert.equal(doc.scoringPlan.choiceGroups[0].mode,'ALL')
+ assert.equal(doc.scoringPlan.choiceGroups[0].children[0].mode,'OR')
+ assert.equal(doc.scoringPlan.choiceGroups[0].children[0].maximumObtainableMarks,5)
+ assert.equal(doc.scoringPlan.choiceGroups[0].children[1].mode,'ATTEMPT_ANY')
+ assert.equal(doc.scoringPlan.choiceGroups[0].children[1].attemptCount,2)
+ assert.equal(doc.scoringPlan.choiceGroups[0].children[1].maximumObtainableMarks,4)
+ assert.equal(section.formula.children.length,2)
+ assert.deepEqual(validateManualAssessmentForRelease(doc),{valid:true,errors:[]})
+
+ const reopened=mergeServerDocumentIntoLocalPaper(base.paper,doc,{currentRevision:2,contentHash:'nested-hash'})
+ assert.equal(reopened.config.totalMarks,9)
+ assert.equal(reopened.official_section[0].nestedChoiceMode,'ALL')
+ assert.equal(reopened.official_section[0].choiceGroups.length,2)
+ assert.equal(reopened.official_section[0].choiceGroups[0].mode,'OR')
+ assert.equal(reopened.official_section[0].choiceGroups[1].mode,'ATTEMPT_ANY')
+})
+
+test('nested choice scoring blocks impossible subgroup attempt counts',()=>{
+ const doc=createManualAssessmentDocument({
+  ...base,
+  paper:{...base.paper,official_section:[{
+   id:'invalid-nested-choice',
+   heading:'Attempt any three of two alternatives.',
+   content:'Invalid nested choice',
+   attemptRule:'ALL',
+   choiceGroups:[{
+    id:'invalid-any',
+    mode:'ATTEMPT_ANY',
+    attemptCount:3,
+    children:[
+     {id:'a',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+     {id:'b',maximumObtainableMarks:2,listedPotentialItemMarksTotal:2},
+    ],
+   }],
+  }]},
+  config:{...base.config,totalMarks:6},
+ })
+ assert.equal(doc.scoringPlan.balanced,false)
+ assert.ok(doc.scoringPlan.errors.some(error=>error.includes('cannot exceed available alternatives')))
+ const releaseCheck=validateManualAssessmentForRelease(doc)
+ assert.equal(releaseCheck.valid,false)
+ assert.ok(releaseCheck.errors.some(error=>error.includes('cannot exceed available alternatives')))
 })
