@@ -117,10 +117,18 @@ export default function Messages() {
  recipient_role: draft.recipient === 'parents' ? 'parent' : draft.recipient === 'students' ? 'student' : draft.recipient === 'teachers' ? 'teacher' : 'staff',
  })),
  })
- await api.delete('/api/notify/message-draft').catch(() => {})
+ let draftCleanupConfirmed = true
+ try {
+ await api.delete('/api/notify/message-draft')
+ } catch (cleanupErr) {
+ draftCleanupConfirmed = false
+ console.error('Message sent but saved draft cleanup failed', cleanupErr)
+ }
  setDraft({ recipient: draft.recipient, subject: '', body: '' })
  setDraftUpdatedAt('')
- setAlert('Message batch processed. Delivery status is available in the verified log.')
+ setAlert(draftCleanupConfirmed
+ ? 'Message batch processed. Delivery status is available in the verified log.'
+ : 'Message batch processed, but saved draft cleanup could not be confirmed. Check the provider log before resending.')
  await loadHistory()
  } catch (err) {
  setAlert(err.response?.data?.message || 'Message could not be sent.')
