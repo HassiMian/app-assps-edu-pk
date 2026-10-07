@@ -3,6 +3,7 @@ import {
   computeFieldDirtyState,
   computeCanonicalFingerprint,
   extractPlainTextFromTiptap,
+  canonicalTextToTiptapDoc,
   SUPPORTED_FONTS,
   SUPPORTED_SIZES,
   SUPPORTED_COLORS,
@@ -496,6 +497,19 @@ export class EditorWorkingStore {
       }
     }
     return fieldOverlay
+  }
+
+
+  setNodeMathSource(sectionId, nodeId, value) {
+    const nodeOverlay = this._workingDoc.sections
+      .find(section => section.id === sectionId)
+      ?.nodeOverlays?.find(node => node.nodeId === nodeId)
+    const fieldOverlay = nodeOverlay?.editableFields?.mathSource
+    if (!fieldOverlay) return false
+    const normalized = String(value ?? '')
+    const fieldKey = buildFieldKey(this._workingDoc.baseCanonicalDocumentId, sectionId, nodeId, 'mathSource')
+    const rich = canonicalTextToTiptapDoc(normalized, 'ltr')
+    return Boolean(this.updateField(fieldKey, rich, normalized, { publishDocument: true }))
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -1192,6 +1206,7 @@ export class EditorWorkingStore {
     return {
       templateVersion: 1,
       metadata: {
+        // School identity (name/logo) lives outside editable metadata and is never template-controlled.
         fields: Object.fromEntries(Object.entries(this._workingDoc.metadata || {}).filter(([k]) => !['dirtyFields','customFields','customFieldsDirty','hiddenHeaderFields','hiddenHeaderFieldsDirty','language','direction'].includes(k))),
         customFields: JSON.parse(JSON.stringify(this._workingDoc.metadata?.customFields || [])),
         hiddenHeaderFields: [...(this._workingDoc.metadata?.hiddenHeaderFields || [])],
