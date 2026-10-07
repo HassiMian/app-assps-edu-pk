@@ -18,10 +18,32 @@ test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -
  await server.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
  const context=await browser.newContext({viewport:{width:1640,height:960}})
- await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
+ await context.addInitScript(()=>{
+  localStorage.setItem('al_siddique_token','mock-jwt-token')
+  localStorage.setItem('al_siddique_login_at',String(Date.now()))
+  localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'}))
+ })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
+ await context.route('**/api/auth/me',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({user:{id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'}})}))
+ await context.route('**/api/school/settings/current',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/school/branding',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/settings',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/notify/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[],notifications:[]})}))
+ await context.route('**/api/academic/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{classes:[],subjects:[]}})}))
+ await context.route('**/api/dashboard/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/employees**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[]})}))
  await context.route('**/api/students**',route=>route.fulfill({status:200,contentType:'application/json',body:'[]'}))
  await context.route('**/api/settings/public**',route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ let revision=0
+ await context.route('**/api/assessment-studio/papers/*/revisions',route=>{
+   revision+=1
+   return route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{publicId:'browser-weekly-paper',currentRevision:revision,contentHash:'c'.repeat(64),status:'DRAFT'}})})
+ })
+ await context.route('**/api/assessment-studio/papers/*/releases',route=>route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{release_id:'browser-release',revision_number:revision,content_hash:'c'.repeat(64)}})}))
+ await context.route('**/api/assessment-studio/papers/*',route=>{
+   if(route.request().method()==='GET') return route.fulfill({status:404,contentType:'application/json',body:JSON.stringify({success:false,message:'Harness uses local recovery copy'})})
+   return route.continue()
+ })
  const page=await context.newPage()
  const dialogs=[]
  page.on('dialog',async dialog=>{dialogs.push(dialog.message());await dialog.accept().catch(()=>{})})
