@@ -6,6 +6,7 @@ const {getProjectedPaper}=require('../paperStudioProjectionService')
 const {readGuardedRevision,digest}=require('./paperVaultRevisionV6D')
 const {reviewPortalPaperDocument}=require('./portalDocumentBoundaryV6C')
 const {reviewNativePresentation}=require('./nativePresentationPolicyV6E2')
+const {assessCanonicalDocxEligibility}=require('./paperCanonicalDocxProjectionV6G21')
 
 const failure=(status,message,code)=>Object.assign(new Error(message),{status,code})
 const stableHash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex')
@@ -85,6 +86,9 @@ async function buildDeliveryManifest(args){
   const inventory=review.family==='legacy-connect-vault'?legacyQuestionInventory(bound.document):canonicalQuestionInventory(bound.document)
   const online=onlineEligibility(inventory)
   const sourceValid=!['SOURCE_INVALID','UNKNOWN_DISCRIMINATOR','UNSUPPORTED'].includes(review.reviewStatus)
+  const docxProjection=assessCanonicalDocxEligibility(review)
+  const docxAvailable=Boolean(docxProjection.eligible&&bound.isCurrent)
+  const docxReason=!sourceValid?'SOURCE_VALIDATION_FAILED':!docxProjection.eligible?(docxProjection.reason||'CANONICAL_DOCX_NOT_ELIGIBLE'):!bound.isCurrent?'CURRENT_REVISION_REQUIRED':null
   let nativePresentation=null
   try{nativePresentation=await reviewNativePresentation(bound.document)}catch{}
   const nativeGoldenApproved=false // explicit future acceptance gate; never infer from source unchanged.
@@ -97,10 +101,10 @@ async function buildDeliveryManifest(args){
       preview:{state:sourceValid?'available_compatibility_preview':'blocked',reason:sourceValid?null:'SOURCE_VALIDATION_FAILED'},
       print:{state:'blocked',reason:rendererReason},
       pdf:{state:'blocked',reason:rendererReason},
-      word:{state:'blocked',reason:rendererReason},
+      word:{state:docxAvailable?'available_canonical_docx':'blocked',reason:docxReason,currentRevisionRequired:true},
       onlineTest:{state:'blocked',reason:!sourceValid?'SOURCE_VALIDATION_FAILED':!online.contentEligible?'UNSUPPORTED_QUESTION_TYPES':!bound.isCurrent?'CURRENT_REVISION_REQUIRED':'ONLINE_TEST_PUBLISH_ADAPTER_PENDING',content:online,currentRevisionRequired:true},
     },
-    canonicalWriteAllowed:false,printApprovalClaim:false,publishApprovalClaim:false,
+    docxProjection,canonicalWriteAllowed:false,printApprovalClaim:false,publishApprovalClaim:false,
   }
   return {...manifestCore,deliveryKey:stableHash(manifestCore)}
 }

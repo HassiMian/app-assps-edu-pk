@@ -65,7 +65,7 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   t.after(()=>{try{child?.kill('SIGTERM')}catch{}})
   await waitHealth()
 
-  let r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/docx')
+  let r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:'0'.repeat(64)}})
   assert.equal(r.status,401)
 
   const cookieA=await login(emailA,password,'admin',codeA)
@@ -74,22 +74,39 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/document-review',{cookie:cookieA})
   let review=json(r)
   assert.equal(r.status,200);assert.equal(review.capabilities?.canonicalDocx?.eligible,true);assert.equal(review.capabilities?.canonicalDocx?.family,'historical-v13')
+  const canonicalHash=String(review.review?.snapshotHash||'')
+  assert.match(canonicalHash,/^[a-f0-9]{64}$/)
 
   r=await req('/api/portal/paper-studio/papers/'+legacyId+'/document-review',{cookie:cookieA})
   review=json(r)
   assert.equal(r.status,200);assert.equal(review.capabilities?.canonicalDocx?.eligible,false);assert.equal(review.capabilities?.canonicalDocx?.family,'legacy-connect-vault')
+  const legacyHash=String(review.review?.snapshotHash||'')
 
-  r=await req('/api/portal/paper-studio/papers/not-a-number/docx',{cookie:cookieA})
-  assert.equal(r.status,400);assert.equal(json(r).code,'INVALID_PAPER_ID')
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/delivery-manifest',{method:'POST',body:{revision:3,snapshotHash:canonicalHash},cookie:cookieA})
+  let manifest=json(r).data
+  assert.equal(r.status,200);assert.equal(manifest.isCurrent,true);assert.equal(manifest.docxProjection?.eligible,true);assert.equal(manifest.channels?.word?.state,'available_canonical_docx')
 
-  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/docx',{cookie:cookieA})
-  assert.equal(r.status,409);assert.equal(json(r).code,'CANONICAL_DOCX_NOT_ELIGIBLE')
-
-  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/docx',{cookie:cookieB})
-  assert.equal(r.status,404);assert.equal(json(r).code,'PAPER_NOT_FOUND')
+  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/delivery-manifest',{method:'POST',body:{revision:1,snapshotHash:legacyHash},cookie:cookieA})
+  manifest=json(r).data
+  assert.equal(r.status,200);assert.equal(manifest.docxProjection?.eligible,false);assert.equal(manifest.channels?.word?.state,'blocked')
 
   r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/docx',{cookie:cookieA})
-  assert.equal(r.status,200,'eligible export failed '+r.buffer.toString('utf8').slice(0,300)+' serverErr='+serverErr.slice(-500))
+  assert.equal(r.status,409);assert.equal(json(r).code,'REVISION_BOUND_DOCX_REQUIRED')
+
+  r=await req('/api/portal/paper-studio/papers/not-a-number/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:canonicalHash},cookie:cookieA})
+  assert.equal(r.status,400);assert.equal(json(r).code,'INVALID_PAPER_ID')
+
+  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/canonical-docx',{method:'POST',body:{revision:1,snapshotHash:legacyHash},cookie:cookieA})
+  assert.equal(r.status,409);assert.equal(json(r).code,'CANONICAL_DOCX_NOT_ELIGIBLE')
+
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:canonicalHash},cookie:cookieB})
+  assert.equal(r.status,404);assert.equal(json(r).code,'NOT_FOUND')
+
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:'0'.repeat(64)},cookie:cookieA})
+  assert.equal(r.status,409);assert.equal(json(r).code,'DELIVERY_SOURCE_MISMATCH')
+
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:canonicalHash},cookie:cookieA})
+  assert.equal(r.status,200,'eligible revision-bound export failed '+r.buffer.toString('utf8').slice(0,300)+' serverErr='+serverErr.slice(-500))
   assert.equal(r.buffer.subarray(0,2).toString(),'PK')
   assert.ok(r.buffer.length>5000)
   assert.match(String(r.headers['content-type']||''),/application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document/)
@@ -98,7 +115,7 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   assert.equal(r.headers['x-assps-paper-family'],'historical-v13')
   assert.equal(r.headers['x-assps-paper-revision'],'3')
   assert.match(String(r.headers['x-assps-snapshot-sha256']||''),/^[a-f0-9]{64}$/)
-  console.log('G21_DOCX_HTTP 7/7 PASS')
+  console.log('G21_DOCX_HTTP 11/11 PASS')
  } finally {
   try{child?.kill('SIGTERM')}catch{}
   if(sidA)await c.query('delete from paper_vault where school_id=$1',[sidA]).catch(()=>{})
