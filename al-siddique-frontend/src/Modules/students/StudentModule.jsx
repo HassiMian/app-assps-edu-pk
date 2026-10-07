@@ -2160,10 +2160,11 @@ export default function StudentsModule() {
  const academicSession = academicSessionLabel(sessionStart, sessionEnd);
  const { students: rawStudents, deleteStudent, updateStudent } = useStudentStore();
  const [feeStatusByStudent, setFeeStatusByStudent] = useState({});
+ const [feeStatusError, setFeeStatusError] = useState("");
 
 
  const [searchParams] = useSearchParams();
- const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusByStudent[student.id] || "" }));
+ const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusError ? "Unavailable" : (feeStatusByStudent[student.id] || "") }));
  const [search, setSearch] = useState("");
  const [showDropdown, setShowDropdown] = useState(false);
  const [filterClass, setFilterClass] = useState("All Classes");
@@ -2192,9 +2193,9 @@ export default function StudentsModule() {
  if (!id || Object.prototype.hasOwnProperty.call(latest, id)) return;
  latest[id] = normalizeFeeStatus(row.status);
  });
- if (!cancelled) setFeeStatusByStudent(latest);
- } catch {
- if (!cancelled) setFeeStatusByStudent({});
+ if (!cancelled) { setFeeStatusByStudent(latest); setFeeStatusError(""); }
+ } catch (err) {
+ if (!cancelled) setFeeStatusError(err.response?.data?.message || "Fee status data could not be refreshed. Existing loaded fee statuses were preserved.");
  }
  }
  void loadFeeStatuses();
@@ -2296,6 +2297,11 @@ export default function StudentsModule() {
  </div>
  </div>
 
+ {feeStatusError && (
+ <div style={{ marginBottom:16, padding:"12px 14px", borderRadius:12, color:"var(--apex-action-danger)", border:"1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)", background:"color-mix(in srgb,var(--apex-action-danger) 8%,transparent)" }}>
+ {feeStatusError}
+ </div>
+ )}
 
  {/* Module Sub-tabs */}
  <div style={{ display:"flex", gap:6, marginBottom:20, overflowX:"auto", paddingBottom:2 }}>

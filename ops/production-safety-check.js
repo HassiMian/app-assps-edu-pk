@@ -487,6 +487,18 @@ assertContains(
   'promotion/demotion must distinguish roster source failure from an empty school.'
 )
 
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /catch \(err\)[\s\S]{0,180}setFeeStatusByStudent\(\{\}\)/,
+  'student fee-status refresh failure must preserve the last known-good map.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'fee: feeStatusError ? "Unavailable"',
+  'student fee status source failure must not render as No challan.'
+)
+
 assertContains(
   'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
   'Attendance history is temporarily unavailable for this student.',
