@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const m=JSON.parse(readFileSync(new URL('./officialSourceManifest.json',import.meta.url)));
 test('official-page anchor inventory is explicit about downloads versus links',()=>{
- assert.equal(m.entries.filter(e=>e.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND').length,44);
+ assert.equal(m.entries.filter(e=>e.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND').length,61);
  assert.equal(m.entries.filter(e=>e.catalogLinkStatus==='AMBIGUOUS_REPEATED_LABEL').length,2);
  for(const e of m.entries){
   assert.equal(e.catalogEvidenceUrl,m.catalogUrl);

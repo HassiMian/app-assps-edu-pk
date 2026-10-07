@@ -878,9 +878,319 @@
         "releaseValidation"
       ],
       "identityRule": "Do not merge with similarly named mainstream or other Matric-Tech catalog identities without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Agriculture Sciences-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-060",
+        "pectaa-catalog-061"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Biology-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-062",
+        "pectaa-catalog-063"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Chemistry-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-047",
+        "pectaa-catalog-048"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-049"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Computer (Matric-Tech catalog identity)",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-051"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Computer Science-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-052"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Computer-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-050"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Fashion Designing-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-053"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "General Science-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-058",
+        "pectaa-catalog-059"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Health Sciences-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-054"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Information & Communication Technologies-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-055"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 10,
+      "subject": "Physics-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "streams": [
+        "Matric-Tech"
+      ],
+      "media": [
+        "Urdu",
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-056",
+        "pectaa-catalog-057"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
     }
   ],
-  "manifestRecordCount": 46,
+  "manifestRecordCount": 63,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -927,11 +1237,27 @@
     "pectaa-catalog-043",
     "pectaa-catalog-044",
     "pectaa-catalog-045",
-    "pectaa-catalog-046"
+    "pectaa-catalog-046",
+    "pectaa-catalog-047",
+    "pectaa-catalog-048",
+    "pectaa-catalog-049",
+    "pectaa-catalog-050",
+    "pectaa-catalog-051",
+    "pectaa-catalog-052",
+    "pectaa-catalog-053",
+    "pectaa-catalog-054",
+    "pectaa-catalog-055",
+    "pectaa-catalog-056",
+    "pectaa-catalog-057",
+    "pectaa-catalog-058",
+    "pectaa-catalog-059",
+    "pectaa-catalog-060",
+    "pectaa-catalog-061",
+    "pectaa-catalog-062",
+    "pectaa-catalog-063"
   ],
   "catalogExpansionRequired": [
     "Humanities/Arts electives listed by PECTAA but not yet represented in officialSourceManifest.json",
-    "Matric-Tech X subjects listed by PECTAA but not yet represented in officialSourceManifest.json",
     "Religious Education alternatives where ASSPS offers/enrols those subjects",
     "Practical notebook subjects not yet represented as source identities",
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"

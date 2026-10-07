@@ -76,7 +76,6 @@ test('existing question/release contracts remain architecture dependencies',()=>
 
 test('unrepresented catalog families remain blockers to universal completion',()=>{
   assert(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)));
-  assert(goal.catalogExpansionRequired.some(x=>/Matric-Tech/.test(x)));
   assert.equal(goal.completionGate.allInScopeSubjectsComplete,false);
   assert.equal(goal.completionGate.verifiedGitHubRemoteCommit,false);
 });
@@ -90,4 +89,11 @@ test('Grade IX Matric-Tech goal scope preserves every distinct official subject 
   const practical=tech.filter(s=>['Agriculture Sciences-Tech','Health Sciences-Tech','Fashion Designing-Tech','Information & Communication Technologies-Tech'].includes(s.subject));
   assert.equal(practical.length,4);
   assert(practical.every(s=>s.requiredArtifacts.includes('practicalPatternMapping')&&s.requiredArtifacts.includes('practicalInventoryCoverage')));
+});
+
+test('Grade X Matric-Tech source scope is explicit while new-edition exam pattern remains pending',()=>{
+ const tech=goal.subjects.filter(s=>s.grade===10&&s.curriculumTrack==='MATRIC_TECH');
+ assert.equal(tech.length,12);assert(tech.every(s=>s.completionState==='NOT_COMPLETE'&&s.identityRule));
+ assert(tech.some(s=>s.subject==='Computer-Tech'));assert(tech.some(s=>s.subject==='Computer Science-Tech'));assert(tech.some(s=>s.subject==='Computer (Matric-Tech catalog identity)'));
+ assert.equal(board.grade10NewEditionPattern.state,'PENDING_OFFICIAL_MODEL_PAPER_OR_PAIRING_PUBLICATION');
 });

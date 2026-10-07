@@ -77,3 +77,12 @@ test('Grade IX Matric-Tech catalogue identities are expanded without collapsing 
  const bio=tech.filter(x=>x.subject==='Biology-Tech');assert.deepEqual(new Set(bio.map(x=>x.medium)),new Set(['English','Urdu']));
  const physics=tech.filter(x=>x.subject==='Physics-Tech');assert.deepEqual(new Set(physics.map(x=>x.medium)),new Set(['English','Urdu']));
 });
+
+test('Grade X Matric-Tech current catalogue identities are represented without equivalence guessing',()=>{
+ const tech=m.entries.filter(x=>x.grade===10&&x.curriculumTrack==='MATRIC_TECH');
+ assert.equal(tech.length,17);assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech X'),false);
+ assert(tech.some(x=>x.subject==='Computer-Tech'));assert(tech.some(x=>x.subject==='Computer Science-Tech'));assert(tech.some(x=>x.subject==='Computer (Matric-Tech catalog identity)'));
+ const physics=tech.filter(x=>x.subject==='Physics-Tech');assert.deepEqual(new Set(physics.map(x=>x.medium)),new Set(['English','Urdu']));
+ const bio=tech.filter(x=>x.subject==='Biology-Tech');assert.deepEqual(new Set(bio.map(x=>x.medium)),new Set(['English','Urdu']));
+});
