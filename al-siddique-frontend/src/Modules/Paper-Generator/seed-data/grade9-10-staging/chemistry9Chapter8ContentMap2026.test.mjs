@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./chemistry9Chapter8ContentMap2026.json',import.meta.url),'utf8'));
+test('Periodic Table chapter map covers four verified source topic groups',()=>{assert.deepEqual(d.chapter.pdfPages,[109,122]);assert.deepEqual(d.topics.map(x=>x.topicId),['8.1','8.2','8.3','8.4']);});
+test('periodic trend families include radius ionization affinity and electronegativity',()=>{for(const k of ['atomic-radius trend across periods and down groups','ionization-energy trend across periods and down groups','electron-affinity trend and atomic size relation','electronegativity trend across periods and down groups'])assert(d.verifiedConceptFamilies.includes(k));});
+test('exercise families are located while exercise authoring remains blocked',()=>{assert(d.exerciseFamilies.families.includes('Investigative Questions'));assert.equal(d.exerciseFamilies.itemLevelExerciseMap,'PENDING');assert.equal(d.authoring.exerciseOriginAllowed,false);assert.equal(d.authoring.publicationAllowed,false);});

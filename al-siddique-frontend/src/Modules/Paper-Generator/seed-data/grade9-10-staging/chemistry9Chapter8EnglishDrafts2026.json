@@ -1,0 +1,1530 @@
+{
+  "schemaVersion": "assps-chemistry9-ch8-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "8.1",
+      "draftCount": 5
+    },
+    {
+      "topicId": "8.2",
+      "draftCount": 5
+    },
+    {
+      "topicId": "8.3",
+      "draftCount": 5
+    },
+    {
+      "topicId": "8.4",
+      "draftCount": 5
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C08-T01-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Modern Periodic Table"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "What determines the left-to-right order of elements in the modern periodic table?",
+          "answer": "Increasing atomic number",
+          "options": [
+            {
+              "id": "A",
+              "text": "Increasing atomic number"
+            },
+            {
+              "id": "B",
+              "text": "Alphabetical symbol order"
+            },
+            {
+              "id": "C",
+              "text": "Increasing neutron number only"
+            },
+            {
+              "id": "D",
+              "text": "Decreasing atomic mass in every case"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T01-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Modern Periodic Table"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "What is a vertical column in the periodic table called?",
+          "answer": "Group",
+          "options": [
+            {
+              "id": "A",
+              "text": "Period"
+            },
+            {
+              "id": "B",
+              "text": "Group"
+            },
+            {
+              "id": "C",
+              "text": "Shell"
+            },
+            {
+              "id": "D",
+              "text": "Block row"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T01-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Modern Periodic Table"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Distinguish between a period and a group in the modern periodic table.",
+          "answer": "A period is a horizontal row of elements, while a group is a vertical column of elements."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T01-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Modern Periodic Table"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why do elements in the same group often have similar chemical properties?",
+          "answer": "They have similar outer-shell electronic configurations, especially similar numbers of valence electrons, which leads to similar chemical behavior."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T01-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.1",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Modern Periodic Table"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Explain how atomic number, periods and groups organize the modern periodic table.",
+          "answer": "Award 1 mark for increasing atomic-number order, 1 for defining periods, 1 for defining groups, 1 for linking periods to changing electron shells/configurations, and 1 for linking groups to similar valence-shell patterns and chemical properties."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T02-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electronic configuration and periodic position"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "An element has three occupied electron shells. Which periodic-table feature is most directly indicated?",
+          "answer": "Its period number",
+          "options": [
+            {
+              "id": "A",
+              "text": "Its period number"
+            },
+            {
+              "id": "B",
+              "text": "Its atomic mass"
+            },
+            {
+              "id": "C",
+              "text": "Its isotope count"
+            },
+            {
+              "id": "D",
+              "text": "Its neutron excess"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T02-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 111,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electronic configuration and periodic position"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which information is most useful for locating an element in a group when its atomic number is known?",
+          "answer": "Its outer-shell electron arrangement",
+          "options": [
+            {
+              "id": "A",
+              "text": "Its outer-shell electron arrangement"
+            },
+            {
+              "id": "B",
+              "text": "Its physical state only"
+            },
+            {
+              "id": "C",
+              "text": "Its isotope abundance only"
+            },
+            {
+              "id": "D",
+              "text": "Its colour only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T02-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electronic configuration and periodic position"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "How can electronic configuration help identify the period of an element?",
+          "answer": "The number of occupied principal electron shells indicates the period in which the element is located."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T02-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 111,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electronic configuration and periodic position"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "How can valence electrons help predict the group behavior of a main-group element?",
+          "answer": "Elements with similar numbers of valence electrons tend to fall in related groups and show similar bonding or ion-forming behavior."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T02-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.2",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 110,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electronic configuration and periodic position"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Describe how electronic configuration can be used to predict an element’s period, group tendency and broad chemical behavior.",
+          "answer": "Award 1 mark for using occupied shells to identify period, 1 for using valence electrons to infer group tendency, 1 for linking valence electrons to ion formation, 1 for linking group placement to similar chemical properties, and 1 for a consistent example or explanation."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T03-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "group number and ionic charge"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "A Group 1 element most commonly forms which ion?",
+          "answer": "1+",
+          "options": [
+            {
+              "id": "A",
+              "text": "1+"
+            },
+            {
+              "id": "B",
+              "text": "2+"
+            },
+            {
+              "id": "C",
+              "text": "1-"
+            },
+            {
+              "id": "D",
+              "text": "2-"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T03-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "group number and ionic charge"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "A Group 17 element commonly forms an ion with which charge?",
+          "answer": "1-",
+          "options": [
+            {
+              "id": "A",
+              "text": "1+"
+            },
+            {
+              "id": "B",
+              "text": "2+"
+            },
+            {
+              "id": "C",
+              "text": "1-"
+            },
+            {
+              "id": "D",
+              "text": "2-"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T03-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "group number and ionic charge"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why do many Group 1 elements form 1+ ions?",
+          "answer": "They can lose one valence electron to reach a more stable outer-shell arrangement, leaving the atom with one more proton than electrons."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T03-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "group number and ionic charge"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why do many Group 17 elements form 1- ions?",
+          "answer": "They tend to gain one electron to complete the outer shell, giving the ion one more electron than protons."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T03-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.3",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 114,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "group number and ionic charge"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Explain how periodic-table group position can help predict common ionic charges for main-group elements.",
+          "answer": "Award 1 mark for linking group position to valence electrons, 1 for explaining electron loss by metals, 1 for explaining electron gain by non-metals, 1 for a correct Group 1 or 2 example, and 1 for a correct Group 16 or 17 example."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T04-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 115,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "atomic radius trend"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Across a period from left to right, atomic radius generally does what?",
+          "answer": "Decreases",
+          "options": [
+            {
+              "id": "A",
+              "text": "Decreases"
+            },
+            {
+              "id": "B",
+              "text": "Increases sharply in every step"
+            },
+            {
+              "id": "C",
+              "text": "Remains exactly constant"
+            },
+            {
+              "id": "D",
+              "text": "Becomes zero"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T04-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 117,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electronegativity trend"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Across a period from left to right, electronegativity generally does what?",
+          "answer": "Increases",
+          "options": [
+            {
+              "id": "A",
+              "text": "Increases"
+            },
+            {
+              "id": "B",
+              "text": "Decreases"
+            },
+            {
+              "id": "C",
+              "text": "Always remains zero"
+            },
+            {
+              "id": "D",
+              "text": "Becomes independent of nuclear charge"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T04-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 115,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "atomic radius trend"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why does atomic radius generally increase down a group?",
+          "answer": "Additional electron shells are added down the group and inner electrons shield the outer electrons from the nucleus, increasing atomic size."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T04-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 116,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ionization energy trend"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why does first ionization energy generally increase across a period?",
+          "answer": "Effective nuclear attraction on the outer electrons generally increases while atomic radius decreases, so more energy is required to remove an electron."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C08-T04-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "8.4",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 115,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "periodic property trends"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 8. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Compare the general trends of atomic radius, ionization energy and electronegativity across a period and down a group.",
+          "answer": "Award 1 mark for radius decreasing across a period, 1 for radius increasing down a group, 1 for ionization energy generally increasing across and decreasing down, 1 for electronegativity generally increasing across and decreasing down, and 1 for explaining these trends using nuclear attraction, shells and shielding."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 20,
+    "mcq": 8,
+    "short": 8,
+    "long": 4
+  }
+}
