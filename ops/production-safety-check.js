@@ -468,6 +468,24 @@ assertNotContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /Failed to load fee workspace[\s\S]{0,180}setStudents\(\[\]\)|Failed to load fee workspace[\s\S]{0,220}setChallans\(\[\]\)/,
+  'fee workspace source failures must preserve already loaded students and challans.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeReporting.jsx',
+  /catch\(err => \{ setChallans\(\[\]\)/,
+  'fee reporting source failures must not turn unavailable data into an empty report.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+  /Unable to load student filters:[\s\S]{0,160}setStudents\(\[\]\)/,
+  'attendance analytics filter source failures must preserve the last known-good student list.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/services/useStudentStore.js',
   /catch \(error\)[\s\S]{0,180}_cache = \[\][\s\S]{0,80}notify\(\)/,
   'student roster refresh failures must preserve the last known-good cache instead of reporting zero students.'

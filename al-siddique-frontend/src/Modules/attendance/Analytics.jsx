@@ -71,7 +71,7 @@ export default function Analytics() {
       })
       .catch((err) => {
         console.warn('Unable to load student filters:', err?.message || err)
-        if (alive) setStudents([])
+        if (alive) setError(err.response?.data?.message || 'Student filters could not be refreshed. Existing loaded filters were preserved.')
       })
     return () => { alive = false }
   }, [])

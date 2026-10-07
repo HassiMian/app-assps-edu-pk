@@ -761,6 +761,7 @@ function FeeModule() {
  const [challans, setChallans] = useState([])
  const [students, setStudents] = useState([])
  const [feeClassSettings, setFeeClassSettings] = useState([])
+ const [workspaceLoadError, setWorkspaceLoadError] = useState('')
  const [printChallan, setPrintChallan] = useState(null)
  const [printList, setPrintList] = useState(null) // { type: 'filtered' | 'defaulters' | 'all', data: [] }
  const [selectedTemplate, setSelectedTemplate] = useState(() => getTenantStorageItem('feeTemplate', { migrateLegacy:true, removeLegacyOnMigrate:true }) || 'classic')
@@ -771,6 +772,7 @@ function FeeModule() {
 
  useEffect(() => {
  async function loadFeeWorkspace() {
+ setWorkspaceLoadError('')
  try {
  const [feeRes, studentRes, settingsRes] = await Promise.all([
  api.get('/api/fees'),
@@ -781,10 +783,10 @@ function FeeModule() {
  setStudents(liveStudents)
  setFeeClassSettings(settingsRes.data?.data?.classSettings || [])
  setChallans((feeRes.data?.data || []).map(item => normalizeChallan(item, liveStudents)))
+ setWorkspaceLoadError('')
  } catch (err) {
  console.error('Failed to load fee workspace', err)
- setStudents([])
- setChallans([])
+ setWorkspaceLoadError(err.response?.data?.message || 'Fee workspace could not be refreshed. Existing loaded data was preserved.')
  }
  }
  void loadFeeWorkspace()
@@ -798,7 +800,8 @@ function FeeModule() {
  return items
  } catch (err) {
  console.error('Failed to reload challans', err)
- return []
+ setWorkspaceLoadError(err.response?.data?.message || 'Fee challans could not be refreshed. Existing loaded data was preserved.')
+ return null
  }
  }
 
@@ -809,6 +812,11 @@ function FeeModule() {
 
  return (
  <div style={{ minHeight:'100vh', background:'var(--apex-shell-gradient)', color:'var(--apex-text-primary)', fontFamily:'Inter, sans-serif' }}>
+ {workspaceLoadError && (
+ <div style={{ margin:'16px 24px 0', padding:'12px 16px', borderRadius:12, border:'1px solid rgba(255,55,95,0.35)', background:'rgba(255,55,95,0.08)', color:'var(--apex-action-danger)', fontWeight:700 }}>
+ {workspaceLoadError}
+ </div>
+ )}
  {printChallan && (
  <PrintVoucher
  challan={printChallan}

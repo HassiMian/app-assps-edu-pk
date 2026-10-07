@@ -30,7 +30,7 @@ export default function FeeReporting() {
  setLoadError('')
  api.get('/api/fees')
  .then(r => setChallans(r.data.data || []))
- .catch(err => { setChallans([]); setLoadError(err.response?.data?.message || 'Fee report data could not be loaded.') })
+ .catch(err => { setLoadError(err.response?.data?.message || 'Fee report data could not be loaded. Existing loaded data was preserved.') })
  .finally(() => setLoading(false))
  }, [])
 
@@ -70,10 +70,11 @@ export default function FeeReporting() {
 
  {loading ? (
  <div className="super-module-card" style={{ ...card, padding: 40, textAlign: 'center', color: C.muted }}>Loading…</div>
- ) : loadError ? (
+ ) : loadError && challans.length === 0 ? (
  <div className="super-module-card" style={{ ...card, padding:32, textAlign:'center', color:'var(--apex-action-danger)' }}>{loadError}</div>
  ) : (
  <>
+ {loadError && <div className="super-module-card" style={{ ...card, padding:16, color:'var(--apex-action-danger)' }}>{loadError}</div>}
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
  {[
  { label: 'Total Collected', value: `Rs. ${(totalCollected / 1000).toFixed(1)}K`, color: C.green },
