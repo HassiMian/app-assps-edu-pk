@@ -56,6 +56,7 @@ export default function Analytics() {
   const [selectedMonth, setSelectedMonth] = useState(currentMonth)
   const [search, setSearch] = useState('')
   const [records, setRecords] = useState([])
+  const [loadedScope, setLoadedScope] = useState('')
   const [students, setStudents] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -90,6 +91,7 @@ export default function Analytics() {
   }, [selectedClass, students])
 
   const fetchHistory = async () => {
+    const requestScope = [from, to, selectedClass || '*', selectedSection || '*'].join('|')
     setLoading(true)
     setError('')
     try {
@@ -103,10 +105,10 @@ export default function Analytics() {
       })
       const data = res.data?.data || {}
       setRecords(Array.isArray(data.records) ? data.records : [])
+      setLoadedScope(requestScope)
     } catch (err) {
       console.error('Failed to fetch attendance history:', err)
-      setError(err?.response?.data?.message || err?.message || 'Attendance history could not be loaded.')
-      setRecords([])
+      setError(err?.response?.data?.message || err?.message || 'Attendance history could not be refreshed. Existing loaded history was preserved for its original scope.')
     } finally {
       setLoading(false)
     }
@@ -117,10 +119,13 @@ export default function Analytics() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [from, to, selectedClass, selectedSection])
 
+  const currentScope = useMemo(() => [from, to, selectedClass || '*', selectedSection || '*'].join('|'), [from, to, selectedClass, selectedSection])
+  const activeRecords = loadedScope === currentScope ? records : []
+
   const filteredRecords = useMemo(() => {
     const q = search.trim().toLowerCase()
-    if (!q) return records
-    return records.filter((record) => {
+    if (!q) return activeRecords
+    return activeRecords.filter((record) => {
       const student = record.student || {}
       return [
         student.name,
@@ -135,7 +140,7 @@ export default function Analytics() {
         record.section,
       ].some((value) => String(value || '').toLowerCase().includes(q))
     })
-  }, [records, search])
+  }, [activeRecords, search])
 
   const summary = useMemo(() => {
     const counts = { present: 0, absent: 0, late: 0, leave: 0 }
