@@ -915,14 +915,20 @@ function ProofReview() {
  const [preview, setPreview] = useState(null)
  const [acting, setActing] = useState(null)
  const [alert, setAlert] = useState(null)
+ const [proofLoadError, setProofLoadError] = useState('')
 
  const load = async () => {
  setLoading(true)
+ setProofLoadError('')
  try {
  const res = await api.get('/api/fees/pending-proofs')
  setProofs(res.data?.data || [])
- } catch { setProofs([]) }
+ } catch (err) {
+ console.error('Failed to load pending fee proofs', err)
+ setProofLoadError(err?.response?.data?.message || 'Pending fee proofs could not be refreshed. Existing loaded proofs were preserved.')
+ } finally {
  setLoading(false)
+ }
  }
  useEffect(() => { load() }, [])
 
@@ -956,7 +962,8 @@ function ProofReview() {
  <button onClick={load} style={{ background: 'rgba(200,153,26,0.15)', border: '1px solid rgba(200,153,26,0.3)', color: C.gold, borderRadius: 8, padding: '6px 16px', cursor: 'pointer', fontSize: 13, fontWeight: 600 }}> Refresh</button>
  </div>
  {loading && <p style={{ color: C.muted, fontSize: 14 }}>Loading...</p>}
- {!loading && proofs.length === 0 && (
+ {proofLoadError && <div style={{ marginBottom:14, padding:'10px 12px', borderRadius:10, color:'var(--apex-action-danger)', background:'rgba(255,55,95,0.08)', border:'1px solid rgba(255,55,95,0.28)' }}>{proofLoadError}</div>}
+ {!loading && !proofLoadError && proofs.length === 0 && (
  <div style={{ textAlign: 'center', padding: '40px 0', color: C.muted }}>
  <div style={{ fontSize: 40, marginBottom: 12 }}></div>
  <p>No pending proof submissions.</p>
