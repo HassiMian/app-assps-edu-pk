@@ -6,10 +6,11 @@ const router  = express.Router()
 const bcrypt  = require('bcryptjs')
 const jwt     = require('jsonwebtoken')
 const crypto  = require('crypto')
-const { query } = require('../config/database')
+const { query, pool } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentTenantId, hasColumn } = require('../middleware/tenant')
 const { getTwilioConfigForSchool, buildTwilioClient } = require('../services/twilioSettings')
+const { provisionStudentIdentities, ensureTeacherIdentity } = require('../services/portalIdentityService')
 
 function resolveSecret(name, fallback) {
   const value = process.env[name]
@@ -62,11 +63,21 @@ function isValidPassword(password) {
   return typeof password === 'string' && password.length >= 8
 }
 
+const ADMIN_PORTAL_ROLES = new Set(['admin', 'school_admin', 'schooladmin', 'principal'])
+
+function roleMatchesPortal(requestedRole, actualRole) {
+  const requested = String(requestedRole || '').trim().toLowerCase()
+  const actual = String(actualRole || '').trim().toLowerCase()
+  if (!requested) return true
+  if (requested === 'admin') return ADMIN_PORTAL_ROLES.has(actual)
+  return requested === actual
+}
+
 function loginAliases(loginId, schoolCode = null) {
   const raw = normalizeLoginId(loginId)
   const lower = raw.toLowerCase()
   const aliases = new Set([raw, lower])
-  
+
   let domainSuffix = 'assps.edu.pk'
   if (schoolCode && schoolCode !== 'default' && schoolCode !== 'demo') {
     domainSuffix = `${schoolCode}.apex.com`
@@ -104,7 +115,7 @@ async function findUserByLoginId(loginId, role = null, schoolId = null, schoolCo
 
   if (role) {
     if (role === 'admin') {
-      sql += ` AND role IN ('admin', 'super_admin', 'saas_admin')`
+      sql += ` AND role IN ('admin', 'school_admin', 'schooladmin', 'principal')`
     } else {
       sql += ` AND role = $${paramIdx++}`
       params.push(role)
@@ -192,7 +203,7 @@ async function sendPasswordOtp(user, otp) {
   }
 }
 
-function normalizeSchoolId(value, fallback = null) {
+function normalizeSchoolId(value, fallback = 1) {
   const parsed = Number.parseInt(value, 10)
   return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback
 }
@@ -208,8 +219,23 @@ async function fetchSchoolById(schoolId) {
     )
     return result.rows[0] || null
   } catch (err) {
-    console.error('Database connection failed in fetchSchoolById:', err.message)
-    return null
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Database connection failed in fetchSchoolById:', err.message)
+      return null
+    }
+    console.error('Database connection failed in fetchSchoolById, returning development mock school:', err.message)
+    return {
+      id: schoolId || 1,
+      name: 'Al Siddique Scholars Public School',
+      code: 'assps',
+      tenant_id: 'assps',
+      school_name: 'Al Siddique Scholars Public School',
+      logo_url: null,
+      primary_color: null,
+      secondary_color: null,
+      status: 'active',
+      feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees']
+    }
   }
 }
 
@@ -225,8 +251,23 @@ async function fetchSchoolByCode(code) {
     )
     return result.rows[0] || null
   } catch (err) {
-    console.error('Database connection failed in fetchSchoolByCode:', err.message)
-    return null
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Database connection failed in fetchSchoolByCode:', err.message)
+      return null
+    }
+    console.error('Database connection failed in fetchSchoolByCode, returning development mock school:', err.message)
+    return {
+      id: 1,
+      name: 'Al Siddique Scholars Public School',
+      code: code || 'assps',
+      tenant_id: code || 'assps',
+      school_name: 'Al Siddique Scholars Public School',
+      logo_url: null,
+      primary_color: null,
+      secondary_color: null,
+      status: 'active',
+      feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees']
+    }
   }
 }
 
@@ -269,13 +310,12 @@ async function resolveRequestedSchool(req) {
         if (!Array.isArray(row.school_access)) continue
         const branch = row.school_access.find(b => b.schoolCode && b.schoolCode.toLowerCase() === requestedSchoolCode.toLowerCase() && b.active)
         if (branch) {
-          const parentSchool = await fetchSchoolById(row.school_id)
-          if (!parentSchool || !isSchoolActive(parentSchool)) return null
           return {
-            ...parentSchool,
             id: row.school_id,
-            name: branch.schoolName || parentSchool.school_name || parentSchool.name || '',
+            name: branch.schoolName,
             code: branch.schoolCode,
+            status: 'active',
+            feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees'],
             isVirtualBranch: true,
             branchDetails: branch
           }
@@ -292,9 +332,12 @@ function isSchoolActive(school) {
   return school && ['active', 'trial'].includes(String(school.status || '').toLowerCase())
 }
 
-function getClientKey(req) {
-  return req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip || 'unknown'
+function getClientKey(req, loginId = '') {
+  const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip || 'unknown'
+  const identity = normalizeLoginId(loginId).toLowerCase()
+  return identity ? `${ip}:${identity}` : ip
 }
+
 
 function getLoginAttempt(key) {
   const entry = loginAttempts.get(key)
@@ -357,19 +400,31 @@ function roleCookieValue(role) {
     : String(role || '')
 }
 
-function setLoginCookies(res, userPayload, token = null) {
-  const options = {
+function setLoginCookies(res, userPayload, token = null, refreshToken = null) {
+  const baseOptions = {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',
     path: '/',
-    maxAge: 7 * 24 * 60 * 60 * 1000,
   }
-  res.cookie('userId', String(userPayload.id), options)
-  res.cookie('tenantId', userPayload.tenant_id || userPayload.tenantId || '', options)
-  res.cookie('role', roleCookieValue(userPayload.role), options)
-  if (token) {
-    res.cookie('authToken', token, options)
+  const sessionOptions = { ...baseOptions, maxAge: 24 * 60 * 60 * 1000 }
+  const accessOptions = { ...baseOptions, maxAge: 20 * 60 * 1000 }
+  const refreshOptions = { ...baseOptions, maxAge: 30 * 24 * 60 * 60 * 1000 }
+  res.cookie('userId', String(userPayload.id), sessionOptions)
+  res.cookie('tenantId', userPayload.tenant_id || userPayload.tenantId || '', sessionOptions)
+  res.cookie('role', roleCookieValue(userPayload.role), sessionOptions)
+  if (token) res.cookie('authToken', token, accessOptions)
+  if (refreshToken) res.cookie('refreshToken', refreshToken, refreshOptions)
+}
+
+function readCookie(req, name) {
+  const cookieHeader = String(req.headers?.cookie || '')
+  const pair = cookieHeader.split(';').map(part => part.trim()).find(part => part.startsWith(`${name}=`))
+  if (!pair) return ''
+  try {
+    return decodeURIComponent(pair.slice(name.length + 1))
+  } catch {
+    return pair.slice(name.length + 1)
   }
 }
 
@@ -380,7 +435,15 @@ async function findVirtualBranchUser(email, password = null) {
       if (!Array.isArray(row.school_access)) continue
       const branch = row.school_access.find(b => b.adminEmail && b.adminEmail.toLowerCase() === email.toLowerCase() && b.active)
       if (branch) {
-        if (password !== null && branch.adminPassword !== password) continue
+        if (password !== null) {
+          const storedPassword = String(branch.adminPassword || '')
+          const isBcrypt = /^\$2[aby]\$/.test(storedPassword)
+          // Legacy plaintext branch secrets are intentionally rejected.
+          // Branch/admin identities must use a bcrypt hash or a canonical users record.
+          if (!isBcrypt) continue
+          const passwordOk = await bcrypt.compare(password, storedPassword)
+          if (!passwordOk) continue
+        }
         return {
           id: 9000000 + row.school_id, // Virtual high ID
           school_id: row.school_id,
@@ -470,12 +533,12 @@ async function createDemoSession(email) {
 
 router.post('/login', async (req, res) => {
   try {
-    const ipKey = getClientKey(req)
+    const loginId = normalizeLoginId(req.body?.email || req.body?.username || req.body?.loginId)
+    const ipKey = getClientKey(req, loginId)
     if (isBlocked(ipKey)) {
       return sendJson(res, 429, { message: 'Too many failed login attempts. Please wait 15 minutes and try again.' })
     }
 
-    const loginId = normalizeLoginId(req.body?.email || req.body?.username || req.body?.loginId)
     const email = normalizeEmail(loginId)
     const password = req.body?.password
     const requestedRole = String(req.body?.role || '').trim().toLowerCase() || null
@@ -515,11 +578,11 @@ router.post('/login', async (req, res) => {
         if (requestedSchool && requestedSchool.id !== 1) {
           return sendJson(res, 403, { message: 'Demo login is only available for the default school.' })
         }
-        if (requestedRole && demoAccounts[email].role !== requestedRole) {
+        if (!roleMatchesPortal(requestedRole, demoAccounts[email].role)) {
           return sendJson(res, 403, { message: 'Selected portal role does not match the demo account.' })
         }
         const session = await createDemoSession(email)
-        setLoginCookies(res, session.user, session.token)
+        setLoginCookies(res, session.user, session.token, session.refreshToken)
         return sendJson(res, 200, { message: 'Login successful (Demo)', ...session })
       }
       throw err
@@ -531,11 +594,11 @@ router.post('/login', async (req, res) => {
         if (requestedSchool && requestedSchool.id !== 1 && !requestedSchool.isVirtualBranch) {
           return sendJson(res, 403, { message: 'Demo login is only available for the default school.' })
         }
-        if (requestedRole && demoAccounts[email].role !== requestedRole) {
+        if (!roleMatchesPortal(requestedRole, demoAccounts[email].role)) {
           return sendJson(res, 403, { message: 'Selected portal role does not match the demo account.' })
         }
         const session = await createDemoSession(email)
-        setLoginCookies(res, session.user, session.token)
+        setLoginCookies(res, session.user, session.token, session.refreshToken)
         return sendJson(res, 200, { message: 'Login successful (Demo)', ...session })
       }
 
@@ -551,7 +614,7 @@ router.post('/login', async (req, res) => {
         const token = createAccessToken(virtualUser)
         const refreshToken = createRefreshToken(virtualUser)
         const virtualPayload = buildUserPayload(virtualUser)
-        setLoginCookies(res, virtualPayload, token)
+        setLoginCookies(res, virtualPayload, token, refreshToken)
         return sendJson(res, 200, {
           message: 'Login successful (Branch Admin)',
           token,
@@ -572,23 +635,19 @@ router.post('/login', async (req, res) => {
         if (requestedSchool && requestedSchool.id !== 1) {
           return sendJson(res, 403, { message: 'Demo login is only available for the default school.' })
         }
-        if (requestedRole && demoAccounts[email].role !== requestedRole) {
+        if (!roleMatchesPortal(requestedRole, demoAccounts[email].role)) {
           return sendJson(res, 403, { message: 'Selected portal role does not match the demo account.' })
         }
         const session = await createDemoSession(email)
-        setLoginCookies(res, session.user, session.token)
+        setLoginCookies(res, session.user, session.token, session.refreshToken)
         return sendJson(res, 200, { message: 'Login successful (Demo Fallback)', ...session })
       }
       recordLoginFailure(ipKey)
       return sendJson(res, 401, { message: 'Email or password is incorrect.' })
     }
 
-    if (requestedRole && user.role !== requestedRole) {
-      if (requestedRole === 'admin' && ['super_admin', 'saas_admin'].includes(user.role)) {
-        // Allow super_admin/saas_admin to log in through the admin portal
-      } else {
-        return sendJson(res, 403, { message: 'Selected portal role does not match your account.' })
-      }
+    if (!roleMatchesPortal(requestedRole, user.role)) {
+      return sendJson(res, 403, { message: 'Selected portal role does not match your account.' })
     }
 
     if (requestedSchool && user.role !== 'super_admin' && Number(user.school_id) !== Number(requestedSchool.id)) {
@@ -596,6 +655,9 @@ router.post('/login', async (req, res) => {
     }
 
     const loginSchool = requestedSchool || (user.school_id ? await fetchSchoolById(user.school_id) : null)
+    if (!DEMO_LOGIN_ENABLED && String(loginSchool?.code || '').trim().toLowerCase() === 'demo') {
+      return sendJson(res, 403, { message: 'Demo access is currently disabled.' })
+    }
     if (user.role !== 'super_admin' && loginSchool && !isSchoolActive(loginSchool)) {
       return sendJson(res, 403, {
         message: `School access disabled. Subscription status: ${loginSchool.status}. Contact your administrator.`,
@@ -615,7 +677,7 @@ router.post('/login', async (req, res) => {
       tenant_id: user.tenant_id || loginSchool?.tenant_id || null,
       code: loginSchool?.code || null,
     })
-    setLoginCookies(res, userPayload, token)
+    setLoginCookies(res, userPayload, token, refreshToken)
 
     return sendJson(res, 200, {
       message: 'Login successful',
@@ -635,7 +697,7 @@ router.post('/login', async (req, res) => {
 })
 
 router.post('/refresh', async (req, res) => {
-  const refreshToken = req.body?.refreshToken
+  const refreshToken = req.body?.refreshToken || readCookie(req, 'refreshToken')
   if (!refreshToken) {
     return sendJson(res, 401, { message: 'Refresh token is required.' })
   }
@@ -652,6 +714,7 @@ router.post('/refresh', async (req, res) => {
     }
     const newToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
     const newRefreshToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRES_IN })
+    setLoginCookies(res, newPayload, newToken, newRefreshToken)
     return sendJson(res, 200, {
       message: 'Token refreshed successfully (Demo Mock).',
       token: newToken,
@@ -664,7 +727,7 @@ router.post('/refresh', async (req, res) => {
   try {
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET)
     if (decoded?.role !== 'super_admin') {
-      const school = await fetchSchoolById(normalizeSchoolId(decoded.school_id))
+      const school = await fetchSchoolById(normalizeSchoolId(decoded.school_id, 1))
       if (!school || !isSchoolActive(school)) {
         return sendJson(res, 403, { message: `School access disabled. Subscription status: ${school?.status || 'unknown'}.` })
       }
@@ -690,6 +753,7 @@ router.post('/refresh', async (req, res) => {
         }
         const newToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
         const newRefreshToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRES_IN })
+        setLoginCookies(res, newPayload, newToken, newRefreshToken)
         return sendJson(res, 200, {
           message: 'Token refreshed successfully (Demo).',
           token: newToken,
@@ -706,11 +770,13 @@ router.post('/refresh', async (req, res) => {
       if (virtualUser) {
         const newToken = createAccessToken(virtualUser)
         const newRefreshToken = createRefreshToken(virtualUser)
+        const branchPayload = buildUserPayload(virtualUser)
+        setLoginCookies(res, branchPayload, newToken, newRefreshToken)
         return sendJson(res, 200, {
           message: 'Token refreshed successfully (Branch Admin).',
           token: newToken,
           refreshToken: newRefreshToken,
-          user: buildUserPayload(virtualUser),
+          user: branchPayload,
           schoolBranding: buildSchoolBranding(virtualUser.branchDetails),
         })
       }
@@ -727,6 +793,7 @@ router.post('/refresh', async (req, res) => {
         }
         const newToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
         const newRefreshToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id }, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRES_IN })
+        setLoginCookies(res, newPayload, newToken, newRefreshToken)
         return sendJson(res, 200, {
           message: 'Token refreshed successfully (Demo).',
           token: newToken,
@@ -747,6 +814,7 @@ router.post('/refresh', async (req, res) => {
       code: refreshedSchool?.code || null,
     })
 
+    setLoginCookies(res, refreshedUser, token, newRefreshToken)
     return sendJson(res, 200, {
       message: 'Token refreshed successfully.',
       token,
@@ -771,6 +839,7 @@ router.post('/logout', async (req, res) => {
   res.clearCookie('tenantId', options)
   res.clearCookie('role', options)
   res.clearCookie('authToken', options)
+  res.clearCookie('refreshToken', options)
   return sendJson(res, 200, { message: 'Logged out successfully.' })
 })
 
@@ -788,7 +857,7 @@ router.post('/password-reset/request', async (req, res) => {
     let requestedSchool = await resolveRequestedSchool(req)
     const user = await findUserByLoginId(loginId, requestedRole, requestedSchool?.id, requestedSchool?.code)
     if (!user) {
-      return sendJson(res, 404, { message: 'No active account found for this Login ID.' })
+      return sendJson(res, 200, { message: 'If the account details are valid, recovery instructions will be sent to the registered contact.' })
     }
 
     const otp = String(crypto.randomInt(100000, 1000000))
@@ -894,6 +963,7 @@ router.put('/me/profile', protect, async (req, res) => {
   }
 })
 
+
 router.get('/me', protect, async (req, res) => {
   try {
     const decoded = req.user || {}
@@ -945,7 +1015,7 @@ router.get('/me', protect, async (req, res) => {
       const virtualUser = await findVirtualBranchUser(decoded.email)
       if (virtualUser) {
         return sendJson(res, 200, {
-          user: buildUserPayload(virtualUser),
+          user: branchPayload,
           schoolBranding: buildSchoolBranding(virtualUser.branchDetails),
         })
       }
@@ -1003,14 +1073,224 @@ router.get('/me', protect, async (req, res) => {
   }
 })
 
-router.post('/users', protect, async (req, res) => {
-  if (req.user?.role !== 'super_admin' && req.user?.role !== 'admin') {
+router.get('/users', protect, async (req, res) => {
+  const role = String(req.user?.role || '').trim().toLowerCase()
+  if (role !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(role)) {
     return sendJson(res, 403, { message: 'Permission denied.' })
   }
-  
+
+  const schoolId = role === 'super_admin'
+    ? Number(req.query.school_id || req.query.schoolId || req.user?.school_id)
+    : Number(req.user?.school_id)
+
+  if (!Number.isFinite(schoolId) || schoolId <= 0) {
+    return sendJson(res, 400, { message: 'A valid school_id is required.' })
+  }
+
+  try {
+    const result = await query(
+      `SELECT id, name, email, username, role, designation, is_active, must_change_password,
+              entity_type, entity_id, school_id, tenant_id
+       FROM users
+       WHERE school_id = $1
+       ORDER BY role, name, id`,
+      [schoolId],
+    )
+    return sendJson(res, 200, { count: result.rowCount, data: result.rows })
+  } catch (err) {
+    console.error('List users error:', err.message)
+    return sendJson(res, 500, { message: 'Failed to load users.' })
+  }
+})
+
+router.get('/users/reconciliation', protect, async (req, res) => {
+  const role = String(req.user?.role || '').trim().toLowerCase()
+  if (role !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(role)) return sendJson(res, 403, { message: 'Permission denied.' })
+  const schoolId = role === 'super_admin'
+    ? Number(req.query.school_id || req.user?.school_id)
+    : Number(req.user?.school_id)
+  if (!Number.isInteger(schoolId) || schoolId < 1) return sendJson(res, 400, { message: 'Valid school is required.' })
+  try {
+    const [student, teacher, orphan] = await Promise.all([
+      query(`SELECT COUNT(*)::int AS total,
+         COUNT(*) FILTER (WHERE student_user_id IS NULL)::int AS missing_student,
+         COUNT(*) FILTER (WHERE parent_user_id IS NULL)::int AS missing_parent,
+         COUNT(*) FILTER (WHERE student_user_id IS NULL AND parent_user_id IS NULL)::int AS missing_both
+         FROM students WHERE school_id=$1 AND is_active=true`, [schoolId]),
+      query(`SELECT COUNT(*) FILTER (WHERE user_id IS NULL)::int AS missing_teacher
+         FROM employees WHERE school_id=$1 AND is_active=true
+           AND (LOWER(COALESCE(portal_role,''))='teacher' OR LOWER(COALESCE(designation,'')) LIKE '%teacher%')`, [schoolId]),
+      query(`SELECT role, COUNT(*)::int AS n FROM users u WHERE school_id=$1 AND is_active=true
+        AND ((role='student' AND NOT EXISTS (SELECT 1 FROM students s WHERE s.school_id=u.school_id AND s.is_active=true AND s.student_user_id=u.id))
+          OR (role='parent' AND NOT EXISTS (SELECT 1 FROM students s WHERE s.school_id=u.school_id AND s.is_active=true AND s.parent_user_id=u.id))
+          OR (role='teacher' AND NOT EXISTS (SELECT 1 FROM employees e WHERE e.school_id=u.school_id AND e.is_active=true AND e.user_id=u.id)))
+        GROUP BY role`, [schoolId]),
+    ])
+    res.set('Cache-Control', 'private, no-store')
+    return sendJson(res, 200, { data: {
+      ...student.rows[0], ...teacher.rows[0],
+      unreferenced_users: Object.fromEntries(orphan.rows.map(r => [r.role, r.n])),
+    } })
+  } catch (err) {
+    console.error('Identity reconciliation status error:', err.message)
+    return sendJson(res, 500, { message: 'Unable to load identity reconciliation.' })
+  }
+})
+
+router.get('/users/missing-portal-links', protect, async (req, res) => {
+  const operatorRole = String(req.user?.role || '').trim().toLowerCase()
+  if (operatorRole !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(operatorRole)) {
+    return sendJson(res, 403, { message: 'Permission denied.' })
+  }
+  const schoolId = Number(req.user?.school_id)
+  if (!Number.isInteger(schoolId) || schoolId <= 0) return sendJson(res, 400, { message: 'Valid school required.' })
+  try {
+    const [students, teachers] = await Promise.all([
+      query(`SELECT id, name, gr_number AS login_reference,
+          (student_user_id IS NULL) AS missing_student,
+          (parent_user_id IS NULL) AS missing_parent,
+          (parent_user_id IS NULL AND NULLIF(regexp_replace(
+             COALESCE(NULLIF(parent_phone,''),NULLIF(parent_whatsapp,''),''),
+             '[^0-9]','','g'),'') IS NULL) AS requires_guardian_contact
+        FROM students WHERE school_id=$1 AND is_active=true
+          AND (student_user_id IS NULL OR parent_user_id IS NULL)
+        ORDER BY class, gr_number, id`, [schoolId]),
+      query(`SELECT id, name, emp_id AS login_reference
+        FROM employees WHERE school_id=$1 AND is_active=true AND user_id IS NULL
+          AND (LOWER(COALESCE(portal_role,''))='teacher' OR LOWER(COALESCE(designation,'')) LIKE '%teacher%')
+        ORDER BY name, id`, [schoolId]),
+    ])
+    res.set('Cache-Control', 'private, no-store, max-age=0')
+    return sendJson(res, 200, { data: {
+      students: students.rows,
+      teachers: teachers.rows,
+    } })
+  } catch (err) {
+    console.error('Missing identity list error:', err.code || err.name)
+    return sendJson(res, 500, { message: 'Unable to load missing portal identities.' })
+  }
+})
+
+// A guardian contact can only be entered after it has been verified by school staff.
+router.patch('/users/guardian-contact', protect, async (req, res) => {
+  const role = String(req.user?.role || '').trim().toLowerCase()
+  if (role !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(role)) return sendJson(res, 403, { message: 'Permission denied.' })
+  const schoolId = Number(req.user?.school_id)
+  const studentId = Number(req.body?.studentId)
+  const digits = String(req.body?.phone || '').replace(/\D/g, '')
+  const number = digits.startsWith('92') && digits.length === 12 ? `0${digits.slice(2)}` : digits
+  if (!Number.isInteger(schoolId) || schoolId < 1 || !Number.isInteger(studentId) || studentId < 1 ||
+      !/^03[0-9]{9}$/.test(number) || req.body?.verified !== true) {
+    return sendJson(res, 400, { message: 'A verified Pakistani mobile number and valid record are required.' })
+  }
+  try {
+    const result = await query(
+      `UPDATE students SET parent_phone=$1, updated_at=NOW()
+       WHERE id=$2 AND school_id=$3 AND is_active=true AND parent_user_id IS NULL
+         AND NULLIF(regexp_replace(COALESCE(NULLIF(parent_phone,''),NULLIF(parent_whatsapp,''),''),'[^0-9]','','g'),'') IS NULL
+       RETURNING id`, [number,studentId,schoolId],
+    )
+    if (!result.rowCount) return sendJson(res, 409, { message: 'Record is not eligible for contact repair or has changed.' })
+    res.set('Cache-Control', 'private, no-store')
+    return sendJson(res, 200, { message: 'Verified guardian contact saved. Portal login may now be issued.' })
+  } catch (err) {
+    console.error('Guardian contact repair failed:', err.code || err.name)
+    return sendJson(res, 500, { message: 'Guardian contact could not be saved.' })
+  }
+})
+
+// A single-record repair operation: never bulk-issue undistributed credentials.
+router.post('/users/provision-one', protect, async (req, res) => {
+  const operatorRole = String(req.user?.role || '').trim().toLowerCase()
+  if (operatorRole !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(operatorRole)) {
+    return sendJson(res, 403, { message: 'Permission denied.' })
+  }
+  const schoolId = Number(req.user?.school_id)
+  const entityId = Number(req.body?.entityId)
+  const kind = String(req.body?.kind || '').toLowerCase()
+  if (!Number.isInteger(schoolId) || schoolId <= 0 || !Number.isInteger(entityId) || entityId <= 0 || !['student', 'teacher'].includes(kind)) {
+    return sendJson(res, 400, { message: 'Valid school, record and kind required.' })
+  }
+  const client = await pool.connect()
+  try {
+    await client.query('BEGIN')
+    let result
+    if (kind === 'student') {
+      const row = await client.query(
+        'SELECT * FROM students WHERE id=$1 AND school_id=$2 AND is_active=true FOR UPDATE',
+        [entityId, schoolId],
+      )
+      const student = row.rows[0]
+      if (!student) {
+        await client.query('ROLLBACK')
+        return sendJson(res, 404, { message: 'Active student not found in this school.' })
+      }
+      if (student.student_user_id && student.parent_user_id) {
+        await client.query('ROLLBACK')
+        return sendJson(res, 409, { message: 'Both portal identities are already linked.' })
+      }
+      const guardianContact = String(student.parent_phone || student.parent_whatsapp || '').replace(/\D/g, '')
+      if (!student.parent_user_id && !guardianContact) {
+        await client.query('ROLLBACK')
+        return sendJson(res, 409, { message: 'Verify and save the guardian contact before issuing a parent login.' })
+      }
+      result = await provisionStudentIdentities(client, { schoolId, student })
+    } else {
+      const row = await client.query(
+        `SELECT * FROM employees WHERE id=$1 AND school_id=$2 AND is_active=true
+         AND (LOWER(COALESCE(portal_role,''))='teacher' OR LOWER(COALESCE(designation,'')) LIKE '%teacher%')
+         FOR UPDATE`,
+        [entityId, schoolId],
+      )
+      const teacher = row.rows[0]
+      if (!teacher) {
+        await client.query('ROLLBACK')
+        return sendJson(res, 404, { message: 'Active teacher not found in this school.' })
+      }
+      if (teacher.user_id) {
+        await client.query('ROLLBACK')
+        return sendJson(res, 409, { message: 'Teacher already has a linked portal identity.' })
+      }
+      result = { teacher: await ensureTeacherIdentity(client, { schoolId, employee: teacher }) }
+    }
+    const issued = Object.entries(result).filter(([key]) => key === 'student' || key === 'parent' || key === 'teacher').map(([key, value]) => ({
+      kind: key,
+      loginId: value.loginId,
+      email: value.email,
+      created: !!value.created,
+      temporaryPassword: value.created ? value.temporaryPassword : null,
+    }))
+    await client.query('COMMIT')
+    res.set('Cache-Control', 'private, no-store, max-age=0')
+    res.set('Pragma', 'no-cache')
+    return sendJson(res, 200, {
+      message: 'Record linked. Copy newly issued credentials once and deliver privately.',
+      entityId, kind, issued,
+    })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    console.error('Single-record provisioning failed:', err.code || err.name)
+    return sendJson(res, 409, { message: 'Provisioning could not be completed. Record was not partially changed.' })
+  } finally {
+    client.release()
+  }
+})
+
+router.post('/users', protect, async (req, res) => {
+  if (req.user?.role !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(String(req.user?.role || '').toLowerCase())) {
+    return sendJson(res, 403, { message: 'Permission denied.' })
+  }
+
   const { name, email, password, role, designation } = req.body;
   if (!name || !email || !password || !role) {
     return sendJson(res, 400, { message: 'Name, email, password, and role are required.' })
+  }
+
+  const normalizedRole = String(role || '').trim().toLowerCase()
+  if (['student', 'parent', 'teacher'].includes(normalizedRole)) {
+    return sendJson(res, 409, {
+      message: 'Student, parent, and teacher logins must be provisioned from their linked Student or Employee record.',
+    })
   }
 
   const schoolId = req.user.role === 'super_admin'
@@ -1032,25 +1312,19 @@ router.post('/users', protect, async (req, res) => {
     }
 
     const hashed = await bcrypt.hash(password, 10);
-    const supportsTenantId = await hasColumn('users', 'tenant_id')
-    if (!supportsTenantId) {
-      return sendJson(res, 503, {
-        code: 'USER_TENANT_SCHEMA_REQUIRED',
-        message: 'User storage is not tenant-safe for account creation.'
-      })
-    }
-    const tenantId = school.tenant_id || currentTenantId(req) || null
-    if (!tenantId) {
-      return sendJson(res, 503, {
-        code: 'TENANT_CONTEXT_REQUIRED',
-        message: 'The selected school does not have a valid tenant context.'
-      })
-    }
-    const result = await query(
-      `INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, true) RETURNING id, name, email, role, school_id, tenant_id`,
-      [name, email, hashed, role, designation || role, schoolId, tenantId]
-    )
+    const supportsTenantId = await hasColumn('users', 'tenant_id').catch(() => false)
+    const tenantId = supportsTenantId ? (school.tenant_id || currentTenantId(req) || null) : null
+    const result = supportsTenantId
+      ? await query(
+        `INSERT INTO users (name, email, password, role, designation, school_id, tenant_id, is_active)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, true) RETURNING id, name, email, role, school_id, tenant_id`,
+        [name, email, hashed, role, designation || role, schoolId, tenantId]
+      )
+      : await query(
+        `INSERT INTO users (name, email, password, role, designation, school_id, is_active)
+         VALUES ($1, $2, $3, $4, $5, $6, true) RETURNING id, name, email, role, school_id`,
+        [name, email, hashed, role, designation || role, schoolId]
+      )
     return sendJson(res, 201, { message: 'User created successfully', user: result.rows[0] });
   } catch (err) {
     if (err.code === '23505') {
@@ -1062,7 +1336,7 @@ router.post('/users', protect, async (req, res) => {
 })
 
 router.put('/users/password', protect, async (req, res) => {
-  if (req.user?.role !== 'super_admin' && req.user?.role !== 'admin') {
+  if (req.user?.role !== 'super_admin' && !ADMIN_PORTAL_ROLES.has(String(req.user?.role || '').toLowerCase())) {
     return sendJson(res, 403, { message: 'Permission denied.' })
   }
 
@@ -1075,46 +1349,21 @@ router.put('/users/password', protect, async (req, res) => {
     const hashed = await bcrypt.hash(newPassword, 10);
     let sql = 'UPDATE users SET password = $1 WHERE email = $2';
     const params = [hashed, email];
-    
+
     if (req.user.role !== 'super_admin') {
       sql += ' AND school_id = $3';
       params.push(req.user.school_id);
     }
-    
+
     const result = await query(sql, params);
     if (result.rowCount === 0) {
       return sendJson(res, 404, { message: 'User not found or permission denied.' });
     }
-    
+
     return sendJson(res, 200, { message: 'Password updated successfully' });
   } catch (err) {
     console.error('Update password error:', err.message);
     return sendJson(res, 500, { message: 'Failed to update password.' })
-  }
-})
-
-router.post('/me/password', protect, async (req, res) => {
-  try {
-    const userId = Number(req.user?.id)
-    const currentPassword = String(req.body?.currentPassword || '')
-    const newPassword = String(req.body?.newPassword || '')
-    if (!Number.isInteger(userId) || userId <= 0) return sendJson(res, 401, { message: 'Unauthorized user.' })
-    if (!currentPassword || !newPassword) return sendJson(res, 400, { message: 'Current and new passwords are required.' })
-    if (newPassword.length < 8) return sendJson(res, 400, { message: 'New password must be at least 8 characters long.' })
-    if (currentPassword === newPassword) return sendJson(res, 400, { message: 'New password must be different from the current password.' })
-
-    const result = await query('SELECT id, password FROM users WHERE id = $1 AND is_active = true LIMIT 1', [userId])
-    const user = result.rows[0]
-    if (!user) return sendJson(res, 404, { message: 'User account was not found.' })
-    const valid = await bcrypt.compare(currentPassword, user.password)
-    if (!valid) return sendJson(res, 400, { message: 'Current password is incorrect.' })
-
-    const hashed = await bcrypt.hash(newPassword, 12)
-    await query('UPDATE users SET password = $1, must_change_password = false WHERE id = $2', [hashed, userId])
-    return sendJson(res, 200, { success:true, message:'Password changed successfully.' })
-  } catch (err) {
-    console.error('Self password change error:', err.message)
-    return sendJson(res, 500, { message: 'Password could not be changed.' })
   }
 })
 
@@ -1126,18 +1375,13 @@ router.post('/change-password', protect, async (req, res) => {
       return sendJson(res, 400, { message: 'Password must be at least 8 characters long.' });
     }
 
+    const hashed = await bcrypt.hash(newPassword, 12);
+
     const userId = req.user?.id;
     if (!userId) {
       return sendJson(res, 401, { message: 'Unauthorized: missing user ID.' });
     }
 
-    const current = await query('SELECT must_change_password FROM users WHERE id = $1 AND is_active = true LIMIT 1', [userId]);
-    if (!current.rowCount) return sendJson(res, 404, { message: 'User not found.' });
-    if (!current.rows[0].must_change_password) {
-      return sendJson(res, 403, { message: 'Use the authenticated profile security flow for regular password changes.' });
-    }
-
-    const hashed = await bcrypt.hash(newPassword, 12);
     const result = await query(
       'UPDATE users SET password = $1, must_change_password = false WHERE id = $2 RETURNING id',
       [hashed, userId]
