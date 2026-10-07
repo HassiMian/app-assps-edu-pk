@@ -32,8 +32,7 @@ export default function Library() {
  setBooks(Array.isArray(response.data?.data) ? response.data.data : [])
  } catch (err) {
  console.error('Failed to load library inventory', err)
- setBooks([])
- setMessage(err.response?.data?.message || 'Library inventory could not be loaded.')
+ setMessage(err.response?.data?.message || 'Library inventory could not be refreshed. Existing loaded inventory was preserved.')
  } finally { setLoading(false) }
  }
 
