@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
+const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper, createProjectedPaper } = require('../services/paperStudioProjectionService')
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
 const { buildCanonicalCanaryPlan } = require('../services/papers/paperCanonicalCanaryPlanV6H2')
@@ -302,6 +302,20 @@ router.get('/context', async (req,res) => {
   } catch (err) {
     console.error('Paper Studio context error:', err.message)
     return res.status(500).json({ success:false, message:'Paper Studio context could not be verified.' })
+  }
+})
+
+router.post('/papers', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const role=normalizedRole(req)
+    const data=await createProjectedPaper({schoolId,userId:req.user?.id,role,payload:req.body?.paper})
+    res.set('Cache-Control','private, no-store')
+    return res.status(201).json({success:true,data})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio create error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PAPER_CREATE_FAILED',message:status>=500?'Paper could not be saved.':err.message})
   }
 })
 
