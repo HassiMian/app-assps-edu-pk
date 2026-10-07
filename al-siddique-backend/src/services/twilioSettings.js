@@ -1,5 +1,5 @@
 const twilio = require('twilio')
-const { query } = require('../config/database')
+const { pool } = require('../config/database')
 
 function normalizeWhatsAppFrom(value) {
   const raw = String(value || '').trim()
@@ -51,24 +51,24 @@ function buildTwilioClient(config = {}) {
   }
 }
 
-async function getTwilioConfigForSchool(schoolId) {
-  const normalizedSchoolId = Number(schoolId)
-  if (!Number.isInteger(normalizedSchoolId) || normalizedSchoolId <= 0) {
-    const error = new Error('A valid school context is required for notification provider settings.')
-    error.code = 'SCHOOL_CONTEXT_REQUIRED'
-    throw error
-  }
-
+async function getTwilioConfigForSchool(schoolId = 1) {
   const fallback = normalizeTwilioConfig({}, process.env)
-  const result = await query(
-    'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
-    [normalizedSchoolId]
-  )
-  const dbConfig = result.rows[0]?.twilio_config || {}
-  return {
-    ...fallback,
-    ...normalizeTwilioConfig(dbConfig, process.env),
-    source: result.rows[0]?.twilio_config ? 'database' : 'env',
+  try {
+    const result = await pool.query(
+      'SELECT twilio_config FROM settings WHERE school_id = $1 LIMIT 1',
+      [schoolId]
+    )
+    const dbConfig = result.rows[0]?.twilio_config || {}
+    return {
+      ...fallback,
+      ...normalizeTwilioConfig(dbConfig, process.env),
+      source: result.rows[0]?.twilio_config ? 'database' : 'env',
+    }
+  } catch {
+    return {
+      ...fallback,
+      source: 'env',
+    }
   }
 }
 

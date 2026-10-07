@@ -24,8 +24,8 @@ const pool = new Pool({
   connectionTimeoutMillis: Number(envOrDev('DB_POOL_CONNECTION_TIMEOUT', 2000)),
 })
 
-// Test connection on startup
-pool.connect((err, client, release) => {
+// Test connection on startup. Pure tests may opt out to avoid a background DB handle.
+if (process.env.DB_STARTUP_PROBE !== 'false') pool.connect((err, client, release) => {
   if (err) {
     console.error('❌ PostgreSQL Connection Failed:', err.message || err)
     console.error('   Check: DB_HOST, DB_USER, DB_PASSWORD in .env and ensure PostgreSQL is running on port 5432')
@@ -39,21 +39,6 @@ pool.connect((err, client, release) => {
 const { AsyncLocalStorage } = require('async_hooks');
 const tenantContext = new AsyncLocalStorage();
 
-async function applyTenantContext(client) {
-  const context = tenantContext.getStore()
-  if (!context || !context.rlsEnabled) return false
-
-  await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
-  if (context.isSuperAdmin) {
-    await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
-    await client.query(`SELECT set_config('app.tenant_id', '', true)`)
-  } else {
-    await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
-    await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId ? String(context.tenantId) : ''])
-  }
-  return true
-}
-
 // Helper: simple query
 async function query(text, params) {
   const start = Date.now()
@@ -63,11 +48,18 @@ async function query(text, params) {
     const client = await pool.connect()
     try {
       await client.query('BEGIN')
-      await applyTenantContext(client)
+      await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
+
+      if (context.isSuperAdmin) {
+        await client.query(`SELECT set_config('app.is_super_admin', 'true', true)`)
+      } else if (context.tenantId) {
+        await client.query(`SELECT set_config('app.tenant_id', $1, true)`, [context.tenantId])
+        await client.query(`SELECT set_config('app.is_super_admin', 'false', true)`)
+      }
 
       const res = await client.query(text, params)
       await client.query('COMMIT')
-      
+
       const duration = Date.now() - start
       if (process.env.NODE_ENV === 'development') {
         console.log('DB Query (RLS):', { text: text.slice(0, 60), duration: `${duration}ms`, rows: res.rowCount })
@@ -98,4 +90,4 @@ async function query(text, params) {
   }
 }
 
-module.exports = { pool, query, tenantContext, applyTenantContext }
+module.exports = { pool, query, tenantContext }

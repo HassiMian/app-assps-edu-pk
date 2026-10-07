@@ -1,6 +1,5 @@
-// al-siddique-backend/src/tests/attendance-integrity.test.js
-// GATE D: Comprehensive Attendance End-to-End & Integrity Test Suite
-
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 const assert = require('assert')
 const http = require('http')
 const jwt = require('jsonwebtoken')
@@ -71,9 +70,9 @@ async function runAttendanceIntegritySuite() {
 
     // Find 5 active students from School A
     const stuRes = await client.query(`
-      SELECT id, name, class, section, school_id 
-      FROM students 
-      WHERE school_id = $1 AND is_active = true 
+      SELECT id, name, class, section, school_id
+      FROM students
+      WHERE school_id = $1 AND is_active = true
       ORDER BY id ASC LIMIT 5
     `, [schoolAId])
     assert.ok(stuRes.rows.length >= 5, 'Need at least 5 active students for School A')
@@ -89,14 +88,14 @@ async function runAttendanceIntegritySuite() {
     `, [foreignStudentId, schoolBId])
 
     const tokenA = jwt.sign(
-      { id: 1, email: 'admin@alsiddique.edu.pk', role: 'admin', school_id: schoolAId, tenant_id: 'school_1' },
+      { id: 1, email: 'admin@assps.edu.pk', role: 'admin', school_id: schoolAId, tenant_id: 'assps' },
       JWT_SECRET,
       { expiresIn: '1h' }
     )
 
     // Clean any existing attendance for our 5 test students for today
     await client.query(`
-      DELETE FROM attendance 
+      DELETE FROM attendance
       WHERE student_id = ANY($1::int[]) AND date = $2
     `, [[s1.id, s2.id, s3.id, s4.id, s5.id, foreignStudentId], todayPkt])
 
@@ -164,7 +163,7 @@ async function runAttendanceIntegritySuite() {
     assert.strictEqual(res5.body?.requestedCount, 5)
 
     const db5 = await client.query(`
-      SELECT student_id, status FROM attendance 
+      SELECT student_id, status FROM attendance
       WHERE student_id = ANY($1::int[]) AND date = $2
     `, [[s1.id, s2.id, s3.id, s4.id, s5.id], todayPkt])
     assert.strictEqual(db5.rows.length, 5)
@@ -393,7 +392,7 @@ async function runAttendanceIntegritySuite() {
     // ── TEST 15 & 16: Reopen Modal & Browser Reload Persistence Assertion ──────
     console.log('\n[15/16] Testing Modal Reopening & Unmarked Exclusion...')
     console.log('[16/16] Testing Simulated Browser Reload Persistence Assertion...')
-    
+
     // Step A: Mark student s5 explicitly as 'present'
     const resSave = await makeRequest('POST', '/api/attendance/mark', { Authorization: `Bearer ${tokenA}` }, {
       records: [{ student_id: s5.id, status: 'present', date: todayPkt }]

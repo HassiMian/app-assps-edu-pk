@@ -34,8 +34,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.timetable.read'), as
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Timetable list error:', err.message)
-    console.error('Timetable list error:', err.message)
-    res.status(500).json({ success: false, message: 'Timetable could not be loaded.' })
+    res.status(500).json({ success: false, message: err.message })
   }
 })
 

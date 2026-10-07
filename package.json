@@ -15,6 +15,7 @@
     "live:contract": "node ops/live-route-contract-check.js",
     "verify:local": "node ops/verify-local.js",
     "deploy:production:dry-run": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1",
-    "deploy:production": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1 -Apply"
+    "deploy:production": "powershell -NoProfile -ExecutionPolicy Bypass -File ops/deploy-production.ps1 -Apply",
+    "smoke:production-school": "npm --prefix al-siddique-backend/src run smoke:production-school"
   }
 }

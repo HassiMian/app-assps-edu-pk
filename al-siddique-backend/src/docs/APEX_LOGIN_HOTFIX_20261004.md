@@ -1,0 +1,9 @@
+# APEX Connect login role and fair rate-limit recovery (2026-10-04)
+
+- `LoginClient.tsx` infers initial selected portal role from `/login?next=/teacher`, `/student`, `/parent` or `/admin`, and does not use stale UI role in preference to the requested destination. It clears old form fields when the destination changes.
+- On HTTP 429, the login form reads the server `Retry-After` header, displays a countdown and temporarily disables repeated login submissions.
+- Backend `authLimiter` is mounted only on the canonical login endpoints and keyed by normalized login identifier (SHA-256) AND trusted client network IP. Normal `/auth/me` and other session checks no longer consume the login request quota. Existing 5-failed-attempt/account+network block remains in `authRoutes.js`. Password recovery has an independent 20 requests/15 min per-IP limiter.
+- Nginx apex virtual host includes `ops/apex-cloudflare-realip.conf` (official Cloudflare published IPv4/IPv6 trusted ranges); `CF-Connecting-IP` is accepted only from these listed edge peers. Nginx `X-Real-IP` is passed by the Next `/api/[...path]` proxy as a single `X-Forwarded-For` address to Express (backend `TRUST_PROXY=true`). A public IP must never be trusted from arbitrary browser-supplied `X-Forwarded-For` chains.
+- Official range source: https://www.cloudflare.com/ips-v4 and https://www.cloudflare.com/ips-v6. Refresh the snippet when Cloudflare publishes changes.
+- Checked HTTP: backend and Connect health 200; public fair limiter on two distinct login IDs from one IP: remaining 59 / 59 / 58; isolated test from two distinct forwarded client IPs: 59 / 59 / 58; unauthorized session regression passes. Tests do not submit or log real passwords.
+- Live green Next.js release BUILD_ID: `RJkvbW2_JttT63kkWq5kh`; the previous green folder has a preserved VPS rollback copy `.next-candidate-before-loginfix-20261004` and backend/Nginx pre-hotfix files are in `/root/secure-archive/apex-login-hotfix-20261004`.

@@ -1,0 +1,487 @@
+{
+  "schemaVersion": "assps-biology9-c1-question-page-map-v6g5",
+  "verifiedOn": "2026-10-06T10:15:40.390871+00:00",
+  "scope": {
+    "grade": 9,
+    "subject": "Biology",
+    "chapter": 1
+  },
+  "policy": {
+    "questionTextCopied": false,
+    "visualMappingOnly": true,
+    "sourceLedgersMutated": false
+  },
+  "sources": {
+    "English": {
+      "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+      "ledgerStatus": "CHAPTER_1_TOPIC_PAGES_VERIFIED_REMAINDER_FIRST_PASS",
+      "items": [
+        {
+          "sourceRef": "EX-C01-A-Q01",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 22,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q02",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 22,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q03",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 22,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q04",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 22,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q05",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 22,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q06",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 22,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q07",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q08",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q09",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-A-Q10",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-B-Q01",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-B-Q02",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-B-Q03",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-B-Q04",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-B-Q05",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-B-Q06",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q01",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q02",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q03",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q04",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q05",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q06",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-UNLABELLED_AFTER_B-Q07",
+          "section": "UNLABELLED_AFTER_B",
+          "questionType": "long_or_unclassified",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-D-Q01",
+          "section": "D",
+          "questionType": "inquisitive",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "EX-C01-D-Q02",
+          "section": "D",
+          "questionType": "inquisitive",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        }
+      ]
+    },
+    "Urdu": {
+      "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+      "ledgerStatus": "FIRST_PASS_VISUAL_NOT_IN_APPROVED_BANK",
+      "items": [
+        {
+          "sourceRef": "UM-EX-C01-A-Q01",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q02",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q03",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q04",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q05",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 23,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q06",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q07",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q08",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q09",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-A-Q10",
+          "section": "A",
+          "questionType": "mcq",
+          "verifiedPhysicalPage": 24,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-B-Q01",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-B-Q02",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-B-Q03",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-B-Q04",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-B-Q05",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-B-Q06",
+          "section": "B",
+          "questionType": "short",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q01",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q02",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q03",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q04",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q05",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q06",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-C-Q07",
+          "section": "C",
+          "questionType": "long",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-D-Q01",
+          "section": "D",
+          "questionType": "inquisitive",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        },
+        {
+          "sourceRef": "UM-EX-C01-D-Q02",
+          "section": "D",
+          "questionType": "inquisitive",
+          "verifiedPhysicalPage": 25,
+          "verificationStatus": "VISUALLY_VERIFIED_EXACT_PAGE"
+        }
+      ]
+    }
+  },
+  "corrections": [
+    {
+      "medium": "English",
+      "section": "A",
+      "ledgerDeclaredRange": [
+        22,
+        23
+      ],
+      "visuallyVerifiedPages": [
+        22,
+        23
+      ],
+      "status": "SECTION_RANGE_CONFIRMED_INDIVIDUAL_MAP_COMPLETED"
+    },
+    {
+      "medium": "English",
+      "section": "B",
+      "ledgerDeclaredRange": [
+        23,
+        23
+      ],
+      "visuallyVerifiedPages": [
+        23
+      ],
+      "status": "CONFIRMED"
+    },
+    {
+      "medium": "English",
+      "section": "UNLABELLED_AFTER_B",
+      "ledgerDeclaredRange": [
+        24,
+        24
+      ],
+      "visuallyVerifiedPages": [
+        24
+      ],
+      "status": "CONFIRMED"
+    },
+    {
+      "medium": "English",
+      "section": "D",
+      "ledgerDeclaredRange": [
+        24,
+        24
+      ],
+      "visuallyVerifiedPages": [
+        24
+      ],
+      "status": "CONFIRMED"
+    },
+    {
+      "medium": "Urdu",
+      "section": "A",
+      "ledgerDeclaredRange": [
+        23,
+        24
+      ],
+      "visuallyVerifiedPages": [
+        23,
+        24
+      ],
+      "status": "SECTION_RANGE_CONFIRMED_INDIVIDUAL_MAP_COMPLETED"
+    },
+    {
+      "medium": "Urdu",
+      "section": "B",
+      "ledgerDeclaredRange": [
+        25,
+        25
+      ],
+      "visuallyVerifiedPages": [
+        25
+      ],
+      "status": "CONFIRMED"
+    },
+    {
+      "medium": "Urdu",
+      "section": "C",
+      "ledgerDeclaredRange": [
+        25,
+        25
+      ],
+      "visuallyVerifiedPages": [
+        25
+      ],
+      "status": "CONFIRMED"
+    },
+    {
+      "medium": "Urdu",
+      "section": "D",
+      "ledgerDeclaredRange": [
+        25,
+        25
+      ],
+      "visuallyVerifiedPages": [
+        25
+      ],
+      "status": "CONFIRMED"
+    }
+  ],
+  "summary": {
+    "englishItems": 25,
+    "urduItems": 25,
+    "totalItems": 50,
+    "exactPageMappings": 50,
+    "questionTextIncluded": 0,
+    "sectionRangeCorrectionsRequired": 0,
+    "individualQuestionPageMappingsCompleted": 50
+  }
+}

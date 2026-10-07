@@ -1,0 +1,24 @@
+const test=require('node:test'), assert=require('node:assert/strict'), express=require('express'), http=require('http')
+const {tenantContext,pool}=require('../config/database')
+function req(port,method,path,body,token='mock-jwt-token'){return new Promise((resolve,reject)=>{const payload=body==null?'':JSON.stringify(body);const r=http.request({hostname:'127.0.0.1',port,path,method,headers:{'content-type':'application/json',...(token?{authorization:`Bearer ${token}`}:{}) ,...(payload?{'content-length':Buffer.byteLength(payload)}:{})}},res=>{let raw='';res.on('data',c=>raw+=c);res.on('end',()=>{let json=null;try{json=JSON.parse(raw)}catch{}resolve({status:res.statusCode,body:json,raw})})});r.on('error',reject);if(payload)r.write(payload);r.end()})}
+test('Assessment PrintJob HTTP lifecycle and reprint',{timeout:30000},async t=>{
+ assert.equal(process.env.NODE_ENV,'test');assert.notEqual(process.env.DB_NAME,'apexos')
+ await pool.query(`INSERT INTO users(id,school_id,name,email,password,role,is_active) VALUES(999,1,'Print Fixture','print-fixture@invalid.local','x','admin',true) ON CONFLICT(id) DO NOTHING`)
+ const paper=(await pool.query(`INSERT INTO assessment_papers(school_id,public_id,title,status,current_revision) VALUES(1,'print-http-paper','Print HTTP','FINALIZED',1) ON CONFLICT(school_id,public_id) DO UPDATE SET title=EXCLUDED.title RETURNING id`)).rows[0]
+ await pool.query(`INSERT INTO assessment_paper_revisions(school_id,paper_id,revision_number,document_json,content_hash) VALUES(1,$1,1,'{}',$2) ON CONFLICT DO NOTHING`,[paper.id,'c'.repeat(64)])
+ await pool.query(`INSERT INTO assessment_releases(school_id,paper_id,release_id,revision_number,content_hash,renderer_version,snapshot_json) VALUES(1,$1,'print-http-release',1,$2,'test','{}') ON CONFLICT DO NOTHING`,[paper.id,'c'.repeat(64)])
+ const app=express();app.use(express.json());app.use((q,s,n)=>tenantContext.run({rlsEnabled:false,isSuperAdmin:false,tenantId:null},n));app.use('/api/assessment-studio',require('../routes/assessmentStudioRoutes'))
+ const server=await new Promise(ok=>{const s=app.listen(0,'127.0.0.1',()=>ok(s))});const port=server.address().port;t.after(async()=>{await new Promise(r=>server.close(r));await pool.end()})
+ const created=await req(port,'POST','/api/assessment-studio/papers/print-http-paper/print-jobs',{printJobId:'print-http-job-1',releaseId:'print-http-release',personalized:true,roster:{context:{classId:'7',section:'A'},students:[{id:'s1',name:'One',roll_no:'1',phone:'private'},{id:'s2',name:'Two'}]},teacherBinding:{id:'t1',name:'Teacher',subject:'Science',classId:'7',section:'A'},renderSettings:{duplex:true,copyCount:1,rendererVersion:'http-test',browserEngineVersion:'chromium-test',studentPageCounts:{s1:3,s2:2}}})
+ assert.equal(created.status,201,created.raw);assert.equal(created.body.data.printJob.student_boundary_policy,'START_EACH_STUDENT_ON_FRONT');assert.match(created.body.data.rosterHash,/^[a-f0-9]{64}$/);assert.equal(created.body.data.totalPages,6);assert.equal(created.body.data.bookletPlan[1].startPage,5)
+ const storedPlan=(await pool.query("SELECT render_settings_json FROM assessment_print_jobs WHERE school_id=1 AND print_job_id='print-http-job-1'")).rows[0].render_settings_json
+ assert.equal(storedPlan.totalPages,6);assert.deepEqual(storedPlan.bookletPlan.map(x=>[x.studentId,x.contentPages,x.paddingPages,x.startPage]),[['s1',3,1,1],['s2',2,0,5]])
+ const read=await req(port,'GET','/api/assessment-studio/print-jobs/print-http-job-1');assert.equal(read.status,200,read.raw);assert.equal(read.body.data.student_count,2);assert.equal('students_json' in read.body.data,false)
+ let step=await req(port,'PATCH','/api/assessment-studio/print-jobs/print-http-job-1/status',{status:'QUEUED'});assert.equal(step.status,200,step.raw);assert.equal(step.body.data.attempt_count,0)
+ step=await req(port,'PATCH','/api/assessment-studio/print-jobs/print-http-job-1/status',{status:'PRINTING'});assert.equal(step.status,200,step.raw);assert.equal(step.body.data.attempt_count,1)
+ step=await req(port,'PATCH','/api/assessment-studio/print-jobs/print-http-job-1/status',{status:'COMPLETED'});assert.equal(step.status,200,step.raw)
+ const invalid=await req(port,'PATCH','/api/assessment-studio/print-jobs/print-http-job-1/status',{status:'QUEUED'});assert.equal(invalid.status,409,invalid.raw);assert.equal(invalid.body.code,'INVALID_PRINT_JOB_TRANSITION')
+ const reprint=await req(port,'POST','/api/assessment-studio/papers/print-http-paper/print-jobs',{printJobId:'print-http-job-2',reprintMode:'REPRINT_ORIGINAL',parentPrintJobId:'print-http-job-1'})
+ assert.equal(reprint.status,201,reprint.raw);assert.equal(reprint.body.data.printJob.release_id,'print-http-release');assert.equal(reprint.body.data.printJob.roster_snapshot_id,'roster-print-http-job-1');assert.equal(reprint.body.data.printJob.parent_print_job_id,'print-http-job-1')
+ console.log('ASSESSMENT_PRINT_JOBS_HTTP 8/8 PASS')
+})

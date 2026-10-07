@@ -1,0 +1,5 @@
+const express = require('express')
+const { tenantContext } = require('../config/database')
+const app=express(); app.use(express.json({limit:'10mb'})); app.use((req,res,next)=>tenantContext.run({rlsEnabled:false,isSuperAdmin:false,tenantId:null},next)); app.use('/api/assessment-studio',require('../routes/assessmentStudioRoutes'))
+app.get('/health',(_req,res)=>res.json({ok:true}))
+const port=Number(process.env.PORT||3411); app.listen(port,'127.0.0.1',()=>console.log(`ASSESSMENT_BROWSER_SERVER_READY:${port}`))
