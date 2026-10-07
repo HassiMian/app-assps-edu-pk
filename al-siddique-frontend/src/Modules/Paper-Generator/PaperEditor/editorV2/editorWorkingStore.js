@@ -133,6 +133,53 @@ export class EditorWorkingStore {
 
   getBaselineDocument() { return this._baselineDoc }
   getWorkingDocument() { return this._workingDoc }
+
+  materializeCanonicalDocument() {
+    const canonical = JSON.parse(JSON.stringify(this._baselineDoc))
+    const working = this._workingDoc
+    const meta = working?.metadata || {}
+    const internalMetaKeys = new Set(['dirtyFields','customFields','customFieldsDirty','hiddenHeaderFields','hiddenHeaderFieldsDirty'])
+    canonical.metadata = { ...(canonical.metadata || {}) }
+    for (const [key,value] of Object.entries(meta)) {
+      if (!internalMetaKeys.has(key) && value !== undefined) canonical.metadata[key] = value
+    }
+
+    canonical.sections = (canonical.sections || []).map((baselineSection) => {
+      const sectionOverlay = working.sections?.find(sec => sec.id === baselineSection.id)
+      const resolvedItems = resolveWorkingSectionNodes(baselineSection, working.structured)
+      const section = {
+        ...baselineSection,
+        title: sectionOverlay?.title ?? baselineSection.title,
+        titleUrdu: sectionOverlay?.titleUrdu ?? baselineSection.titleUrdu,
+        heading: sectionOverlay?.heading ?? baselineSection.heading,
+        instructions: sectionOverlay?.instructions ?? baselineSection.instructions,
+        direction: sectionOverlay?.direction ?? baselineSection.direction,
+        operationalSectionTotal: this.getEffectiveSectionTotal(baselineSection.id) ?? baselineSection.operationalSectionTotal ?? null,
+        nodes: resolvedItems.map(({ resolvedNode, nodeId }) => {
+          const node = JSON.parse(JSON.stringify(resolvedNode || {}))
+          const overlay = sectionOverlay?.nodeOverlays?.find(item => item.nodeId === nodeId)
+          for (const [fieldName, field] of Object.entries(overlay?.editableFields || {})) {
+            const value = field?.workingPlainText ?? field?.baselinePlainText ?? ''
+            if (fieldName === 'stem') node.stemText = value
+            else if (fieldName === 'content') node.content = value
+            else if (fieldName === 'rawText') node.rawText = value
+            else if (fieldName === 'mathSource') node.math = { ...(node.math || {}), source: value }
+          }
+          const effectiveMarks = this.getEffectiveNodeMarks(baselineSection.id, nodeId)
+          if (effectiveMarks !== null && effectiveMarks !== undefined) node.operationalNodeMarks = effectiveMarks
+          return node
+        }),
+      }
+      return section
+    })
+
+    const effectivePaperTotal = this.getEffectivePaperTotal()
+    canonical.authority = { ...(canonical.authority || {}) }
+    if (effectivePaperTotal !== null && effectivePaperTotal !== undefined) {
+      canonical.authority.operationalPaperTotal = effectivePaperTotal
+    }
+    return canonical
+  }
   getStructuredHistory() { return this._structuredHistory }
   getIdAllocator() { return this._idAllocator }
 

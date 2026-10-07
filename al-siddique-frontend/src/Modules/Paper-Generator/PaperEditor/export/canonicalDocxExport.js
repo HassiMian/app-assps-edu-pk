@@ -1,5 +1,5 @@
 import {
-  AlignmentType, Document, HeadingLevel, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType,
+  AlignmentType, Document, HeadingLevel, ImageRun, Math as OfficeMath, MathRun, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType,
 } from 'docx'
 import { buildCanonicalDocxModel } from './canonicalDocxModel.js'
 
@@ -13,6 +13,23 @@ const para = (value, opts={}) => new Paragraph({
   spacing:{before:opts.before??0,after:opts.after??100},
 })
 const marksSuffix = value => Number.isFinite(Number(value)) ? `  [${Number(value)}]` : ''
+const imageTypeFromMime = mime => ({'image/png':'png','image/jpeg':'jpg','image/jpg':'jpg','image/gif':'gif','image/bmp':'bmp'}[String(mime||'').toLowerCase()] || null)
+function decodeEmbeddedDataUrl(dataUrl=''){
+  const match=String(dataUrl).match(/^data:([^;,]+);base64,([A-Za-z0-9+/=\s]+)$/)
+  if(!match)return null
+  const binary=globalThis.atob ? globalThis.atob(match[2].replace(/\s+/g,'')) : null
+  if(binary===null)return null
+  const bytes=new Uint8Array(binary.length)
+  for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i)
+  return {mimeType:match[1].toLowerCase(),bytes}
+}
+function imageSize(block={}){
+  const width=Math.max(1,Number(block.widthPx)||320)
+  const height=Math.max(1,Number(block.heightPx)||200)
+  const maxWidth=560
+  const scale=Math.min(1,maxWidth/width)
+  return {width:Math.max(1,Math.round(width*scale)),height:Math.max(1,Math.round(height*scale))}
+}
 
 function blockToDocx(block){
   const isRtl=rtl(block.direction)
@@ -24,6 +41,19 @@ function blockToDocx(block){
     return out
   }
   if(block.kind==='paragraph')return [para(`${block.content}${marksSuffix(block.marks)}`.trim(),{rtl:isRtl,size:22,after:90})]
+  if(block.kind==='math_capability'){
+    const source=String(block.source||'')
+    if(!source.trim())return []
+    return [new Paragraph({alignment:block.display==='inline'?AlignmentType.LEFT:AlignmentType.CENTER,children:[new OfficeMath({children:[new MathRun(source)]})],spacing:{after:100}})]
+  }
+  if(block.kind==='image_asset'){
+    const decoded=block.storage==='embedded'?decodeEmbeddedDataUrl(block.contentDataUrl):null
+    const type=imageTypeFromMime(block.mimeType||decoded?.mimeType)
+    if(!decoded||!type)return [para(block.altText||block.description||'Image asset',{center:true,italics:true,size:18,after:80})]
+    const size=imageSize(block)
+    const image=new ImageRun({data:decoded.bytes,type,transformation:size,altText:{title:block.altText||block.assetId||'Assessment image',description:block.description||block.altText||'',name:block.assetId||'assessment-image'}})
+    return [new Paragraph({alignment:AlignmentType.CENTER,children:[image],spacing:{after:100}})]
+  }
   if(block.kind==='vertical_math'){
     const lines=[]
     ;(block.operands||[]).forEach((v,i)=>lines.push(`${i===(block.operands||[]).length-1&&block.operator?block.operator+' ':''}${v}`))

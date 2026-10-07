@@ -200,7 +200,8 @@ export default function CanonicalPaperEditorMain({
     if (isExportingDocx) return
     setIsExportingDocx(true)
     try {
-      const doc = workingDoc
+      store.publishDocumentChange()
+      const doc = store.materializeCanonicalDocument()
       const meta = doc?.metadata || {}
       const base = `${meta.subjectName || meta.subject || 'Assessment'}_${meta.className || meta.classLevel || ''}`
         .replace(/[^\p{L}\p{N}_-]+/gu, '_').replace(/^_+|_+$/g, '') || 'Assessment_Paper'
@@ -213,7 +214,7 @@ export default function CanonicalPaperEditorMain({
     } finally {
       setIsExportingDocx(false)
     }
-  }, [isExportingDocx, workingDoc])
+  }, [isExportingDocx, store])
 
   const zoomTransform = `scale(${zoomLevel / 100})`
 

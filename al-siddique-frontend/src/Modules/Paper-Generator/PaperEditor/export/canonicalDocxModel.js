@@ -55,10 +55,18 @@ export function buildCanonicalDocxModel(doc={}){
  const metadata=doc.metadata||{}
  const documentDirection=dir(metadata.direction,metadata.language==='urdu'?'rtl':'ltr')
  const blocks=[]
+ const assetsById=new Map((Array.isArray(doc.assets)?doc.assets:[]).map(asset=>[String(asset.id),asset]))
  for(const [index,section] of (Array.isArray(doc.sections)?doc.sections:[]).entries()){
   const sectionDirection=dir(section?.direction,documentDirection)
   blocks.push({kind:'section_heading',sectionId:section?.id||null,sectionIndex:index+1,direction:sectionDirection,title:text(section?.title??section?.heading??''),titleUrdu:text(section?.titleUrdu??''),instructions:text(section?.instructions??''),marks:section?.authoritativeSectionTotal??section?.operationalSectionTotal??null})
-  for(const node of (Array.isArray(section?.nodes)?section.nodes:[]))blocks.push(...projectCanonicalNodeToDocxBlocks(node,sectionDirection).map(b=>({...b,sectionId:section?.id||null})))
+  for(const node of (Array.isArray(section?.nodes)?section.nodes:[])){
+   blocks.push(...projectCanonicalNodeToDocxBlocks(node,sectionDirection).map(b=>({...b,sectionId:section?.id||null})))
+   if(node?.math&&text(node.math.source).trim())blocks.push({kind:'math_capability',sectionId:section?.id||null,nodeId:node.id||null,direction:'ltr',format:text(node.math.format||'latex'),display:text(node.math.display||'block'),source:text(node.math.source)})
+   for(const assetId of (Array.isArray(node?.assetRefs)?node.assetRefs:[])){
+    const asset=assetsById.get(String(assetId));if(!asset)continue
+    blocks.push({kind:'image_asset',sectionId:section?.id||null,nodeId:node.id||null,direction:'ltr',assetId:String(asset.id),storage:text(asset.storage),mimeType:text(asset.mimeType),sha256:text(asset.sha256),widthPx:Number(asset.widthPx)||null,heightPx:Number(asset.heightPx)||null,altText:text(asset.altText),description:text(asset.description),contentDataUrl:asset.contentDataUrl?text(asset.contentDataUrl):null,contentRef:asset.contentRef?text(asset.contentRef):null})
+   }
+  }
  }
  return {architectureVersion:'canonical-docx-model-v1',sourceDocumentId:doc.id||null,schemaVersion:doc.schemaVersion??null,direction:documentDirection,metadata:{title:text(metadata.title),examType:text(metadata.examType),className:text(metadata.className??metadata.classLevel),subject:text(metadata.subjectName??metadata.subject),paperCode:text(metadata.paperCode),examDate:text(metadata.examDate),timeAllowed:text(metadata.timeAllowed),session:text(metadata.session),language:text(metadata.language),totalMarks:doc.authority?.authoritativePaperTotal??doc.authority?.storedConfiguredTotal??null},blocks}
 }
@@ -71,7 +79,9 @@ export function canonicalDocxModelText(model={}){
   if(b.kind==='section_heading'){if(b.title)out.push(b.title);if(b.titleUrdu&&b.titleUrdu!==b.title)out.push(b.titleUrdu);if(b.instructions)out.push(b.instructions);continue}
   if(b.kind==='paragraph'){if(b.content)out.push(b.content);continue}
   if(b.kind==='table'){for(const c of b.columns||[])if(c)out.push(c);for(const r of b.rows||[])for(const c of r||[])if(c)out.push(c);continue}
-  if(b.kind==='vertical_math'){out.push(...(b.operands||[]));if(b.operator)out.push(b.operator);if(b.result)out.push(b.result)}
+  if(b.kind==='vertical_math'){out.push(...(b.operands||[]));if(b.operator)out.push(b.operator);if(b.result)out.push(b.result);continue}
+  if(b.kind==='math_capability'){if(b.source)out.push(b.source);continue}
+  if(b.kind==='image_asset'){if(b.altText)out.push(b.altText);if(b.description)out.push(b.description)}
  }
  return out.join('\n')
 }
