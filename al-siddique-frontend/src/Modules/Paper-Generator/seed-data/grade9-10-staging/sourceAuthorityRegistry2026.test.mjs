@@ -56,18 +56,20 @@ test('image-only actual papers require renderer inspection before promotion',()=
  const papers=data.currentAcquisitionQueue.filter(x=>x.requiredRole==='ACTUAL_PAPER_SKILL_TAXONOMY');
  assert.equal(papers.length,2);
  assert(papers.every(x=>x.structuralPreflight.scanMode==='IMAGE_ONLY_CCITT_FAX'));
- assert(papers.every(x=>x.structuralPreflight.visualInspectionStatus==='PENDING_RENDERER'));
+ assert(papers.every(x=>x.structuralPreflight.visualInspectionStatus==='RENDERED_AND_INSPECTED'));
  assert.match(data.visualInspectionPolicy.rule,/Render pages and inspect visible/i);
  assert.match(data.visualInspectionPolicy.ocrRole,/NOT_AUTHORITY/);
 });
 
-test('rendered Multan language bundles are classified as keys, never full papers',()=>{
+test('rendered Multan language bundles classify actual-paper pages independently from key pages',()=>{
  const p=data.currentAcquisitionQueue.filter(x=>x.id.includes('MULTAN'));
  assert.deepEqual(p.map(x=>x.renderedPageCount),[24,25]);
  assert(p.every(x=>x.state==='VISUALLY_INSPECTED'));
- assert(p.every(x=>x.artifactClassification==='OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE'));
- assert(p.every(x=>x.patternHierarchyEligible===false));
- assert.match(data.actualPaperClassificationRule,/does not make an answer-key bundle a full actual question paper/i);
+ assert(p.every(x=>x.artifactClassification==='OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE'));
+ const en=p.find(x=>x.subject==='English');const ur=p.find(x=>x.subject==='Urdu');
+ assert.equal(en.patternHierarchyEligible,true);assert.equal(en.hierarchyInspectionState,'TOP_LEVEL_OBJECTIVE_AND_SUBJECTIVE_CONFIRMED');
+ assert.equal(ur.patternHierarchyEligible,false);assert.equal(ur.partialPatternTaxonomyEligible,true);
+ assert.match(data.actualPaperClassificationRule,/Classify page roles independently/i);
 });
 
 test('academic source preflight records page counts and blocks image-only Urdu promotion',()=>{

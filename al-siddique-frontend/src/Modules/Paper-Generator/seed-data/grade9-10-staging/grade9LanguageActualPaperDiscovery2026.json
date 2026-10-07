@@ -1,15 +1,97 @@
 {
-  "schemaVersion":"assps-grade9-language-actual-paper-discovery-v1",
-  "checkedOn":"2026-10-06",
-  "purpose":"Track 2026 Grade IX English/Urdu actual-paper discovery without promoting transcriptions, answer keys, SEO pages, or internally inconsistent uploads to pattern authority.",
-  "records":[
-    {"id":"MULTAN-ENGLISH-KEY-BUNDLE","subject":"English","board":"Multan","url":"https://drive.google.com/file/d/1eeLsV3uADEYxmGWuZMiLLZiHRqzIixNZ/view","classification":"OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE","authorityForFullPaperHierarchy":false,"reason":"Official archive artifact is a key bundle, not the full objective+subjective question paper."},
-    {"id":"MULTAN-URDU-KEY-BUNDLE","subject":"Urdu","board":"Multan","url":"https://drive.google.com/file/d/13E1TwasHAO1fazKHp9GEpDUAz1DNiBaO/view","classification":"OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE","authorityForFullPaperHierarchy":false,"reason":"Official archive artifact is a key bundle, not the full objective+subjective question paper."},
-    {"id":"LAHORE-ENGLISH-SIRNADIR-TRANSCRIPTION","subject":"English","board":"Lahore","url":"https://sirnadir.com/9th-english-2026-paper-bise-lahore/","classification":"SECONDARY_SOLVED_TRANSCRIPTION","authorityForFullPaperHierarchy":false,"reason":"Publisher explicitly states it is independently prepared and not issued by BISE Lahore; wording may be reconstructed."},
-    {"id":"THIRDPARTY-2026-ENGLISH-MIXED-HEADER-UPLOAD","subject":"English","board":"Unresolved","url":"https://www.scribd.com/document/1023800458/9th-English-Test-29-03-2026-PB","classification":"REJECTED_INTERNAL_IDENTITY_CONFLICT","authorityForFullPaperHierarchy":false,"reason":"Indexed content mixes a Grade IX objective header with a Class X subjective header, so artifact identity is not trustworthy."},
-    {"id":"LAHORE-ENGLISH-YOUTUBE-DISCOVERY","subject":"English","board":"Lahore","url":"https://www.youtube.com/watch?v=ue-E0NxD9e8","classification":"DISCOVERY_ONLY_VIDEO","authorityForFullPaperHierarchy":false,"reason":"Video title/date can locate a candidate scan, but paper pages are not yet archived, hashed and visually authenticated."},
-    {"id":"MULTAN-ENGLISH-YOUTUBE-DISCOVERY","subject":"English","board":"Multan","url":"https://www.youtube.com/watch?v=WaoUTyxwzV0","classification":"DISCOVERY_ONLY_VIDEO","authorityForFullPaperHierarchy":false,"reason":"Candidate subjective-paper discovery only; page artifact not yet archived, hashed and visually authenticated."},
-    {"id":"GUJRANWALA-ENGLISH-ILMKIDUNYA-INDEX","subject":"English","board":"Gujranwala","url":"https://www.ilmkidunya.com/past_papers/gujranwala-board-9th-english.aspx","classification":"SECONDARY_INDEX_NO_2026_ARTIFACT","authorityForFullPaperHierarchy":false,"reason":"Index was updated in 2026 but visible paper listings retrieved in research stop at older years; update date is not paper-year evidence."}
+  "schemaVersion": "assps-grade9-language-actual-paper-discovery-v1",
+  "checkedOn": "2026-10-06",
+  "purpose": "Track 2026 Grade IX English/Urdu actual-paper discovery without promoting transcriptions, answer keys, SEO pages, or internally inconsistent uploads to pattern authority.",
+  "records": [
+    {
+      "id": "MULTAN-ENGLISH-ACTUAL-PLUS-KEY-BUNDLE",
+      "subject": "English",
+      "board": "Multan",
+      "url": "https://drive.google.com/file/d/1eeLsV3uADEYxmGWuZMiLLZiHRqzIixNZ/view",
+      "classification": "OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE",
+      "authorityForFullPaperHierarchy": true,
+      "reason": "Visual inspection confirms the official archive PDF contains both objective-key material and authentic 2026 Grade IX English question-paper pages, including subjective and objective paper pages.",
+      "verifiedPaperPages": {
+        "subjective": [
+          2
+        ],
+        "objective": [
+          24
+        ]
+      }
+    },
+    {
+      "id": "MULTAN-URDU-ACTUAL-PLUS-KEY-BUNDLE",
+      "subject": "Urdu",
+      "board": "Multan",
+      "url": "https://drive.google.com/file/d/13E1TwasHAO1fazKHp9GEpDUAz1DNiBaO/view",
+      "classification": "OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE",
+      "authorityForFullPaperHierarchy": false,
+      "reason": "Visual inspection confirms authentic 2026 Grade IX Urdu objective question-paper pages coexist with key pages; subjective hierarchy is not yet page-verified, so full-paper hierarchy remains gated.",
+      "verifiedPaperPages": {
+        "objective": [
+          3,
+          4,
+          5,
+          6,
+          9,
+          18,
+          24
+        ]
+      },
+      "partialPatternTaxonomyEligible": true
+    },
+    {
+      "id": "LAHORE-ENGLISH-SIRNADIR-TRANSCRIPTION",
+      "subject": "English",
+      "board": "Lahore",
+      "url": "https://sirnadir.com/9th-english-2026-paper-bise-lahore/",
+      "classification": "SECONDARY_SOLVED_TRANSCRIPTION",
+      "authorityForFullPaperHierarchy": false,
+      "reason": "Publisher explicitly states it is independently prepared and not issued by BISE Lahore; wording may be reconstructed."
+    },
+    {
+      "id": "THIRDPARTY-2026-ENGLISH-MIXED-HEADER-UPLOAD",
+      "subject": "English",
+      "board": "Unresolved",
+      "url": "https://www.scribd.com/document/1023800458/9th-English-Test-29-03-2026-PB",
+      "classification": "REJECTED_INTERNAL_IDENTITY_CONFLICT",
+      "authorityForFullPaperHierarchy": false,
+      "reason": "Indexed content mixes a Grade IX objective header with a Class X subjective header, so artifact identity is not trustworthy."
+    },
+    {
+      "id": "LAHORE-ENGLISH-YOUTUBE-DISCOVERY",
+      "subject": "English",
+      "board": "Lahore",
+      "url": "https://www.youtube.com/watch?v=ue-E0NxD9e8",
+      "classification": "DISCOVERY_ONLY_VIDEO",
+      "authorityForFullPaperHierarchy": false,
+      "reason": "Video title/date can locate a candidate scan, but paper pages are not yet archived, hashed and visually authenticated."
+    },
+    {
+      "id": "MULTAN-ENGLISH-YOUTUBE-DISCOVERY",
+      "subject": "English",
+      "board": "Multan",
+      "url": "https://www.youtube.com/watch?v=WaoUTyxwzV0",
+      "classification": "DISCOVERY_ONLY_VIDEO",
+      "authorityForFullPaperHierarchy": false,
+      "reason": "Candidate subjective-paper discovery only; page artifact not yet archived, hashed and visually authenticated."
+    },
+    {
+      "id": "GUJRANWALA-ENGLISH-ILMKIDUNYA-INDEX",
+      "subject": "English",
+      "board": "Gujranwala",
+      "url": "https://www.ilmkidunya.com/past_papers/gujranwala-board-9th-english.aspx",
+      "classification": "SECONDARY_INDEX_NO_2026_ARTIFACT",
+      "authorityForFullPaperHierarchy": false,
+      "reason": "Index was updated in 2026 but visible paper listings retrieved in research stop at older years; update date is not paper-year evidence."
+    }
   ],
-  "gate":{"verifiedFullActualQuestionPapers":0,"requiredBeforeEnglishOrUrduAuthoring":true,"officialModelMayNotSubstituteForOwnerLockedActualPaperInspection":true,"nextAction":"Acquire and hash a genuine 2026 full objective+subjective paper scan with internally consistent grade, year, group and subject anchors."}
+  "gate": {
+    "verifiedFullActualQuestionPapers": 1,
+    "requiredBeforeEnglishOrUrduAuthoring": true,
+    "officialModelMayNotSubstituteForOwnerLockedActualPaperInspection": true,
+    "nextAction": "Complete Urdu subjective-page hierarchy inspection and acquire/cross-check additional Lahore/Gujranwala 2026 actual-paper artifacts without copying stems.",
+    "verifiedPartialActualQuestionPapers": 1
+  }
 }

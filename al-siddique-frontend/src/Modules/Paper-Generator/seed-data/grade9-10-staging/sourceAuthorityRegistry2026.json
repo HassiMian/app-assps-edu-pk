@@ -207,7 +207,7 @@
       "exam": "First Annual 2026",
       "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
       "state": "VISUALLY_INSPECTED",
-      "nextGate": "PATTERN_HIERARCHY_NOT_ELIGIBLE",
+      "nextGate": "CONTENT_PATTERN_CROSSCHECK",
       "sha256": "35060a1bea551ac2908526c41759d8aa5941eceaef8894d6bf90738d8e3f2173",
       "byteLength": 1635062,
       "hashedOn": "2026-10-06",
@@ -216,12 +216,22 @@
         "creator": "Canon",
         "creationDate": "2026-06-16T14:58:07+05:00",
         "scanMode": "IMAGE_ONLY_CCITT_FAX",
-        "visualInspectionStatus": "PENDING_RENDERER"
+        "visualInspectionStatus": "RENDERED_AND_INSPECTED"
       },
-      "artifactClassification": "OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE",
+      "artifactClassification": "OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE",
       "renderedPageCount": 24,
-      "inspectionOutcome": "NOT_A_FULL_QUESTION_PAPER",
-      "patternHierarchyEligible": false
+      "inspectionOutcome": "CONTAINS_AUTHENTIC_2026_ACTUAL_OBJECTIVE_AND_SUBJECTIVE_PAPER_PAGES_PLUS_KEY_PAGES",
+      "patternHierarchyEligible": true,
+      "actualPaperPagesPresent": true,
+      "actualPaperEvidencePages": {
+        "subjective": [
+          2
+        ],
+        "objective": [
+          24
+        ]
+      },
+      "hierarchyInspectionState": "TOP_LEVEL_OBJECTIVE_AND_SUBJECTIVE_CONFIRMED"
     },
     {
       "id": "G9-2026-MULTAN-URDU-ACTUAL",
@@ -231,7 +241,7 @@
       "exam": "First Annual 2026",
       "requiredRole": "ACTUAL_PAPER_SKILL_TAXONOMY",
       "state": "VISUALLY_INSPECTED",
-      "nextGate": "PATTERN_HIERARCHY_NOT_ELIGIBLE",
+      "nextGate": "SUBJECTIVE_PAGE_HIERARCHY_INSPECTION",
       "sha256": "5f932f7c6331bda19338cf087641081bec5df5aaa45096a05cd14cc883ab8e13",
       "byteLength": 932229,
       "hashedOn": "2026-10-06",
@@ -240,12 +250,26 @@
         "creator": "Canon",
         "creationDate": "2026-06-17T09:33:16+05:00",
         "scanMode": "IMAGE_ONLY_CCITT_FAX",
-        "visualInspectionStatus": "PENDING_RENDERER"
+        "visualInspectionStatus": "RENDERED_AND_INSPECTED"
       },
-      "artifactClassification": "OFFICIAL_OBJECTIVE_ANSWER_KEY_BUNDLE",
+      "artifactClassification": "OFFICIAL_ACTUAL_PAPER_AND_OBJECTIVE_KEY_BUNDLE",
       "renderedPageCount": 25,
-      "inspectionOutcome": "NOT_A_FULL_QUESTION_PAPER",
-      "patternHierarchyEligible": false
+      "inspectionOutcome": "CONTAINS_AUTHENTIC_2026_ACTUAL_OBJECTIVE_PAPER_PAGES_PLUS_KEY_PAGES_SUBJECTIVE_HIERARCHY_PENDING",
+      "patternHierarchyEligible": false,
+      "partialPatternTaxonomyEligible": true,
+      "actualPaperPagesPresent": true,
+      "actualPaperEvidencePages": {
+        "objective": [
+          3,
+          4,
+          5,
+          6,
+          9,
+          18,
+          24
+        ]
+      },
+      "hierarchyInspectionState": "OBJECTIVE_CONFIRMED_SUBJECTIVE_PENDING"
     }
   ],
   "visualInspectionPolicy": {
@@ -253,6 +277,6 @@
     "ocrRole": "DISCOVERY_AID_ONLY_NOT_AUTHORITY",
     "pageAnchorRule": "Store exact inspected page number and visible anchor for every promoted hierarchy claim."
   },
-  "actualPaperClassificationRule": "Official archive linkage does not make an answer-key bundle a full actual question paper. Full objective+subjective hierarchy requires the question-paper artifact itself.",
+  "actualPaperClassificationRule": "A board-hosted bundle may contain both answer-key pages and authentic question-paper pages. Classify page roles independently after visible inspection; key pages never invalidate verified actual-paper pages, and full-hierarchy authority requires both objective and subjective question-paper evidence.",
   "textExtractionRule": "Embedded PDF text may support indexing and competency discovery, but page/edition claims still require visible-page inspection; image-only Urdu sources remain blocked until visual inspection."
 }
