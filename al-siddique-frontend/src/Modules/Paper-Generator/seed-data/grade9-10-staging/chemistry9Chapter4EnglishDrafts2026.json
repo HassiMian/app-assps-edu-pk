@@ -87,7 +87,7 @@
       "content": {
         "en": {
           "stem": "How many atoms are represented by a single formula unit of Na2CO3?",
-          "answer": "Six atoms (2 sodium, 1 carbon and 3 oxygen).",
+          "answer": "6",
           "options": [
             {
               "id": "A",

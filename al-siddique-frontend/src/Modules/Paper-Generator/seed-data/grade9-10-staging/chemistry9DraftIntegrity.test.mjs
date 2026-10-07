@@ -7,3 +7,12 @@ test('cross-chapter Chemistry IX draft IDs and academic stem signatures remain u
 test('all Chemistry IX drafts remain chapter-bound to the verified current source',()=>{for(const d of datasets){for(const q of d.bank.drafts){assert.equal(q.chapter.number,d.chapter,q.id);assert.equal(q.source.catalogRecordId,'pectaa-catalog-007');assert.equal(q.source.pdfSha256,d.source.sourcePdfSha256);assert(q.source.page>=d.source.chapter.pdfPages[0]&&q.source.page<=d.source.chapter.pdfPages[1],q.id);assert.equal(q.curriculum.edition,'2025-26');assert.equal(q.medium,'english');assert.equal(validateQuestion(q).valid,true,q.id);}}});
 test('cross-chapter drafts cannot be silently promoted or treated as validated translations',()=>{for(const d of datasets){assert.equal(d.bank.publicationAllowed,false);assert.equal(d.bank.liveImportAllowed,false);}assert.equal(selectApprovedQuestions(all,{medium:'english'}).length,0);for(const q of all){assert.equal(q.review.status,'draft');assert(Object.values(q.review.checks).every(x=>x===false));assert.equal(q.boardEvidence.length,0);assert.equal(q.origin==='exercise',false);}});
 test('each current chapter and numbered topic has at least one unapproved original English concept draft',()=>{for(const d of datasets){assert(d.bank.topicCoverage.every(x=>x.draftCount>=2));for(const t of d.source.topics)assert(d.bank.drafts.some(q=>q.topicId===t.topicId));}});
+
+test('all Chemistry IX MCQ answer strings agree with the keyed option text',()=>{
+ const normalize=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,'');
+ for(const q of all.filter(x=>x.type==='mcq')){
+  const correct=q.content.en.options.find(o=>o.id===q.correctOptionId);
+  assert(correct,q.id);
+  assert.equal(normalize(q.content.en.answer),normalize(correct.text),q.id);
+ }
+});
