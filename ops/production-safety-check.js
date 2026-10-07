@@ -2156,6 +2156,27 @@ assertContains(
   'notification bell must remain visible in both light and dark themes.'
 )
 
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/resolvePaperRoute.js',
+  "const isOfficialV13 = paper.documentFormat === 'pts-native-v13'",
+  'official V13 papers must remain explicitly classified for Paper Workspace routing.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/resolvePaperRoute.js',
+  "const isOfficialV12 = paper.documentFormat === 'official-v12'",
+  'official V12 papers must remain explicitly classified for Paper Workspace routing.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/resolvePaperRoute.js',
+  "const isOfficialFirstTerm = id.startsWith('official-first-term-') || id.includes('first-term-2026')",
+  'First Term papers must remain explicitly classified for Paper Workspace routing.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/resolvePaperRoute.js',
+  /if \(isOfficialV13 \|\| isOfficialV12 \|\| isOfficialFirstTerm\) \{[\s\S]{0,80}return 'build'/,
+  'official and First Term papers must always route to the Paper Workspace build flow.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
