@@ -74,8 +74,10 @@ test('existing question/release contracts remain architecture dependencies',()=>
   assert.equal(goal.questionArchitecture.releaseAudit,'releaseAudit.mjs');
 });
 
-test('unrepresented catalog families remain blockers to universal completion',()=>{
-  assert(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)));
+test('remaining unrepresented catalog families still block universal completion',()=>{
+  assert.equal(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)),false);
+  assert(goal.catalogExpansionRequired.some(x=>/Religious Education alternatives/.test(x)));
+  assert(goal.catalogExpansionRequired.some(x=>/Practical notebook subjects/.test(x)));
   assert.equal(goal.completionGate.allInScopeSubjectsComplete,false);
   assert.equal(goal.completionGate.verifiedGitHubRemoteCommit,false);
 });
@@ -96,4 +98,13 @@ test('Grade X Matric-Tech source scope is explicit while new-edition exam patter
  assert.equal(tech.length,12);assert(tech.every(s=>s.completionState==='NOT_COMPLETE'&&s.identityRule));
  assert(tech.some(s=>s.subject==='Computer-Tech'));assert(tech.some(s=>s.subject==='Computer Science-Tech'));assert(tech.some(s=>s.subject==='Computer (Matric-Tech catalog identity)'));
  assert.equal(board.grade10NewEditionPattern.state,'PENDING_OFFICIAL_MODEL_PAPER_OR_PAIRING_PUBLICATION');
+});
+
+test('arts/elective goal scope now follows the expanded official catalogue',()=>{
+ const arts=goal.subjects.filter(s=>s.streams?.some(x=>/Arts/.test(x)));
+ assert(arts.length>=15);
+ assert(arts.some(s=>s.grade===9&&s.subject==='Ghiza aur Ghizayat'));
+ assert(arts.some(s=>s.grade===10&&s.subject==='Parcha Bafi (Textile and Clothing)'));
+ assert(arts.some(s=>s.grade===0&&s.subject==='Economics'));
+ assert.equal(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)),false);
 });

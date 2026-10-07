@@ -86,3 +86,15 @@ test('Grade X Matric-Tech current catalogue identities are represented without e
  const physics=tech.filter(x=>x.subject==='Physics-Tech');assert.deepEqual(new Set(physics.map(x=>x.medium)),new Set(['English','Urdu']));
  const bio=tech.filter(x=>x.subject==='Biology-Tech');assert.deepEqual(new Set(bio.map(x=>x.medium)),new Set(['English','Urdu']));
 });
+
+test('Grade IX/X arts and shared IX-X elective catalogue identities are represented separately',()=>{
+ const arts=m.entries.filter(x=>['Arts/Elective','IX–X Arts Supplement'].includes(x.stream));
+ assert.equal(arts.length,18);
+ assert.equal(arts.filter(x=>x.grade===9).length,5);
+ assert.equal(arts.filter(x=>x.grade===10).length,5);
+ assert.equal(arts.filter(x=>x.grade===0).length,8);
+ assert.equal(m.additionalCatalogStreamsPending.includes('Humanities/Arts'),false);
+ const art9=arts.filter(x=>x.grade===9&&x.subject==='Art & Model Drawing');assert.deepEqual(new Set(art9.map(x=>x.medium)),new Set(['English','Urdu']));
+ const econ=arts.filter(x=>x.grade===0&&x.subject==='Economics');assert.deepEqual(new Set(econ.map(x=>x.medium)),new Set(['English','Urdu']));
+ assert(arts.every(x=>x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'));
+});

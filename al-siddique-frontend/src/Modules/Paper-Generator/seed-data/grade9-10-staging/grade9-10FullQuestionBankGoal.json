@@ -1188,9 +1188,375 @@
         "releaseValidation"
       ],
       "identityRule": "Grade X 2026-27 textbook identity does not imply a 2027 paper pattern; do not merge similarly named Matric-Tech catalog records without independent equivalence evidence."
+    },
+    {
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-065",
+        "pectaa-catalog-068"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 9,
+      "subject": "Ghiza aur Ghizayat",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-064"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 9,
+      "subject": "Home Economics",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-066"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 9,
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-067"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 10,
+      "subject": "Art & Model Drawing",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "Urdu",
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-071",
+        "pectaa-catalog-072"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 10,
+      "subject": "Ghiza aur Ghizayat",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-069"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 10,
+      "subject": "Home Economics",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-073"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 10,
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "streams": [
+        "Arts/Elective"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-070"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Civics",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-081"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Economics",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "Urdu",
+        "English"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-075",
+        "pectaa-catalog-076"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Education",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-080"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Farsi",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-074"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Health & Physical Education",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-079"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Punjabi Ikhtari",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-077"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 0,
+      "subject": "Zari Pedawar Workbook",
+      "streams": [
+        "IX–X Arts Supplement"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-078"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
     }
   ],
-  "manifestRecordCount": 63,
+  "manifestRecordCount": 81,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -1254,10 +1620,27 @@
     "pectaa-catalog-060",
     "pectaa-catalog-061",
     "pectaa-catalog-062",
-    "pectaa-catalog-063"
+    "pectaa-catalog-063",
+    "pectaa-catalog-064",
+    "pectaa-catalog-065",
+    "pectaa-catalog-066",
+    "pectaa-catalog-067",
+    "pectaa-catalog-068",
+    "pectaa-catalog-069",
+    "pectaa-catalog-070",
+    "pectaa-catalog-071",
+    "pectaa-catalog-072",
+    "pectaa-catalog-073",
+    "pectaa-catalog-074",
+    "pectaa-catalog-075",
+    "pectaa-catalog-076",
+    "pectaa-catalog-077",
+    "pectaa-catalog-078",
+    "pectaa-catalog-079",
+    "pectaa-catalog-080",
+    "pectaa-catalog-081"
   ],
   "catalogExpansionRequired": [
-    "Humanities/Arts electives listed by PECTAA but not yet represented in officialSourceManifest.json",
     "Religious Education alternatives where ASSPS offers/enrols those subjects",
     "Practical notebook subjects not yet represented as source identities",
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"
