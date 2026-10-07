@@ -11,8 +11,9 @@ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('.
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { ensureStudentFeeProfileSchema, upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
+const { teacherStudentScopeClause } = require('../services/teacherAssignmentService')
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
-const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant', 'teacher'])
+const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant'])
 
 async function requireStudentWriteContext(req, res) {
   const schoolId = currentSchoolId(req)
@@ -143,6 +144,7 @@ function scopedStudentReadClause(req, alias = '', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
   const prefix = alias ? `${alias}.` : ''
   if (STUDENT_ADMIN_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (role === 'teacher') return teacherStudentScopeClause(req, alias || 'students', startIndex)
   if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.students.read')) return { clause: '', params: [], nextIndex: startIndex }
   if (role === 'parent') {
     return { clause: ` AND ${prefix}parent_user_id = $${startIndex}`, params: [req.user?.id || null], nextIndex: startIndex + 1 }

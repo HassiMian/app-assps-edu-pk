@@ -50,7 +50,6 @@ const Analytics = lazyRetry(() => import('./Modules/attendance/Analytics'), 'Att
 const SMSReport = lazyRetry(() => import('./Modules/attendance/SMSReport'), 'SMSReport')
 const QRAttendance = lazyRetry(() => import('./Modules/attendance/SmartAttendance'), 'QRAttendance')
 const FeeModule = lazyRetry(() => import('./Modules/fees/FeeModule'), 'FeeModule')
-const CreateChallan = lazyRetry(() => import('./Modules/fees/CreateChallan'), 'CreateChallan')
 const ViewChallans = lazyRetry(() => import('./Modules/fees/ViewChallans'), 'ViewChallans')
 const FeeReporting = lazyRetry(() => import('./Modules/fees/FeeReporting'), 'FeeReporting')
 const FeeSettings = lazyRetry(() => import('./Modules/fees/FeeSettings'), 'FeeSettings')
@@ -329,7 +328,7 @@ function AppRoutes() {
  <Route path="/attendance/qr-scan" element={<W roles={ROLES.academicStaff} permKey="attendance_qr"><QRAttendance /></W>} />
 
  <Route path="/fees" element={<W roles={ROLES.adminOffice} permKey="fees_view"><FeeModule /></W>} />
- <Route path="/fees/create" element={<W roles={ROLES.adminOffice} permKey="fees_create"><CreateChallan /></W>} />
+ <Route path="/fees/create" element={<W roles={ROLES.adminOffice} permKey="fees_create"><FeeModule /></W>} />
  <Route path="/fees/challans" element={<W roles={ROLES.adminOffice} permKey="fees_view"><ViewChallans /></W>} />
  <Route path="/fees/view" element={<W roles={ROLES.adminOffice} permKey="fees_view"><ViewChallans /></W>} />
  <Route path="/fees/reporting" element={<W roles={ROLES.adminOffice} permKey="fees_reports"><FeeReporting /></W>} />
