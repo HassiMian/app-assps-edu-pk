@@ -317,6 +317,30 @@ assertContains(
   'financial payment proof files must be blocked from the public static upload tree.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  /paymentScreenshotUrl = file \? `\/uploads\//,
+  'legacy subscription request uploads must not store public payment proof URLs.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  'sendEmail: false',
+  'subscription provisioning must defer credential email until after the database transaction commits.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/subscriptionRoutes.js',
+  'credentialDelivery',
+  'subscription approval response must expose credential delivery truth separately from provisioning success.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/apexCredentials.js',
+  'return sendActivationEmail({',
+  'credential email helper must return provider delivery truth to its caller.'
+)
+
 assertContains(
   'al-siddique-backend/src/routes/uploadStorageRoutes.js',
   "router.get('/subscription/payment-screenshot/:fileName', protect, requireRoles('super_admin', 'admin')",

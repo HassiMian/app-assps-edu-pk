@@ -27,6 +27,7 @@ async function generateSchoolAdminCredentials({
   tenantId,
   schoolId,
   loginUrl,
+  sendEmail = true,
 }) {
   if (!client) throw new Error('Database client is required')
   if (!request?.email) throw new Error('Request email is required')
@@ -56,17 +57,21 @@ async function generateSchoolAdminCredentials({
     username,
   ])
 
-  await sendCredentialsEmail({
-    ownerName: request.owner_name || request.ownerName,
-    schoolName: request.school_name || request.schoolName,
-    loginUrl,
-    email: adminEmail,
-    temporaryPassword,
-  })
+  let delivery = null
+  if (sendEmail) {
+    delivery = await sendCredentialsEmail({
+      ownerName: request.owner_name || request.ownerName,
+      schoolName: request.school_name || request.schoolName,
+      loginUrl,
+      email: adminEmail,
+      temporaryPassword,
+    })
+  }
 
   return {
     user: userResult.rows[0],
     temporaryPassword,
+    delivery,
   }
 }
 
@@ -77,7 +82,7 @@ async function sendCredentialsEmail({
   email,
   temporaryPassword,
 }) {
-  await sendActivationEmail({
+  return sendActivationEmail({
     ownerName,
     schoolName,
     loginUrl: loginUrl || process.env.NEXT_PUBLIC_SAAS_LOGIN_URL || 'https://app.assps.edu.pk/login',

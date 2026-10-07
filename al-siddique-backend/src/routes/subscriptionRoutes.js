@@ -10,12 +10,13 @@ const fs = require('fs')
 const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { sendRejectionEmail } = require('../services/emailService')
-const { generateSchoolAdminCredentials } = require('../services/apexCredentials')
+const { generateSchoolAdminCredentials, sendCredentialsEmail } = require('../services/apexCredentials')
 
 // Storage configuration (aligns with uploadRoutes.js)
 const uploadDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
+const paymentScreenshotDir = path.join(uploadDir, 'payment-screenshots')
 const UPLOAD_EXTENSION_BY_MIME = Object.freeze({
   'image/jpeg': '.jpg',
   'image/jpg': '.jpg',
@@ -26,9 +27,12 @@ const UPLOAD_EXTENSION_BY_MIME = Object.freeze({
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true })
 }
+if (!fs.existsSync(paymentScreenshotDir)) {
+  fs.mkdirSync(paymentScreenshotDir, { recursive: true })
+}
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
+  destination: (req, file, cb) => cb(null, paymentScreenshotDir),
   filename: (req, file, cb) => {
     const unique = `${Date.now()}-${crypto.randomBytes(8).toString('hex')}`
     const ext = UPLOAD_EXTENSION_BY_MIME[file.mimetype] || '.bin'
@@ -96,7 +100,7 @@ async function createSubscriptionRequestFromBody({ body, file }) {
 
   await ensureSubscriptionRequestFormColumns()
 
-  const paymentScreenshotUrl = file ? `/uploads/${file.filename}` : null
+  const paymentScreenshotUrl = file ? `/api/subscription/payment-screenshot/${file.filename}` : null
   const requestId = generateRequestId()
   const savedTransactionId = transactionId || requestId
 
@@ -340,12 +344,13 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
 
     const baseDomain = req.headers.host || 'apex.assps.edu.pk'
     const loginUrl = `${req.secure ? 'https' : 'http'}://${baseDomain}/login/saas`
-    const { user } = await generateSchoolAdminCredentials({
+    const { user, temporaryPassword } = await generateSchoolAdminCredentials({
       client,
       request,
       tenantId,
       schoolId,
       loginUrl,
+      sendEmail: false,
     })
 
     await client.query(`
@@ -381,13 +386,31 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
 
     await client.query('COMMIT')
 
+    const emailResult = await sendCredentialsEmail({
+      ownerName: request.owner_name,
+      schoolName: request.school_name,
+      loginUrl,
+      email: user.email,
+      temporaryPassword,
+    }).catch((emailErr) => {
+      console.error('Activation credential email failed after provisioning commit:', emailErr.message)
+      return { success: false, delivered: false, method: 'exception', error: emailErr.message }
+    })
+    const credentialsDelivered = emailResult?.delivered === true
+
     res.json({
       success: true,
-      message: 'Subscription approved, school tenant created, and login credentials emailed successfully.',
+      message: credentialsDelivered
+        ? 'Subscription approved, school tenant created, and login credentials delivered by email.'
+        : 'Subscription approved and school tenant created, but login credential email delivery was not confirmed.',
       data: {
         tenantId,
         email: user.email,
         schoolId
+      },
+      credentialDelivery: {
+        delivered: credentialsDelivered,
+        method: emailResult?.method || null,
       }
     })
   } catch (err) {

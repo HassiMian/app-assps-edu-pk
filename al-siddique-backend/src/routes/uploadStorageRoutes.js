@@ -100,7 +100,7 @@ async function resolveTenantIdForBranding(req) {
 
 router.get('/subscription/payment-screenshot/:fileName', protect, requireRoles('super_admin', 'admin'), async (req, res) => {
   const fileName = path.basename(String(req.params.fileName || ''))
-  if (!/^[a-f0-9-]+\.(?:png|jpe?g|webp|pdf)$/i.test(fileName)) {
+  if (!/^(?:[a-f0-9-]+|screenshot_[0-9]+-[a-f0-9]+)\.(?:png|jpe?g|webp|pdf)$/i.test(fileName)) {
     return res.status(400).json({ success: false, message: 'Invalid payment proof file name.' })
   }
 
