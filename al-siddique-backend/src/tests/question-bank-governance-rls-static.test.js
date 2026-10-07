@@ -5,7 +5,8 @@ const path=require('node:path')
 
 test('governance tables are in strict FORCE-RLS migration path and failures are fatal',()=>{
  const rls=fs.readFileSync(path.join(__dirname,'../config/migrations/005_rls_policies.js'),'utf8')
- for(const table of ['question_masters','question_revisions','question_mappings','question_capture_requests','assessment_roster_snapshots','assessment_print_jobs']) assert.match(rls,new RegExp(`strictTables[^\\n]*${table}`))
+ const strictBlock=rls.match(/const strictTables\s*=\s*\[([\s\S]*?)\]/)?.[1] || ''
+ for(const table of ['question_bank','question_bank_imports','question_masters','question_revisions','question_mappings','question_capture_requests','assessment_roster_snapshots','assessment_print_jobs']) assert.match(strictBlock,new RegExp(`['\"]${table}['\"]`))
  assert.match(rls,/ALTER TABLE \$\{table\} ENABLE ROW LEVEL SECURITY/)
  assert.match(rls,/ALTER TABLE \$\{table\} FORCE ROW LEVEL SECURITY/)
  assert.match(rls,/WITH CHECK/)

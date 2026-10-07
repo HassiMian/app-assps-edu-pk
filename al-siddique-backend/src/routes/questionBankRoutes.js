@@ -277,67 +277,53 @@ router.delete('/:id', canManageQuestionBank, async (req, res) => {
   }
 })
 
-// ─── 6. Bulk Add / Approve AI Imported Questions ──────────────────────────────
+// ─── 6. Bulk AI import intake — governance Candidate only ─────────────────────
 router.post('/import/approve', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
-    const { questions, importJobId } = req.body
+    const { questions, importJobId } = req.body || {}
     const userId = req.user?.id || null
+    if (!Array.isArray(questions) || questions.length === 0) return res.status(400).json({ success:false, message:'No questions provided' })
+    if (questions.length > 250) return res.status(400).json({ success:false, message:'Maximum 250 questions per import approval request' })
 
-    if (!Array.isArray(questions) || questions.length === 0) {
-      return res.status(400).json({ success: false, message: 'No questions provided' })
+    const baseKey = String(req.get('Idempotency-Key') || req.body?.idempotencyKey || '').trim()
+    if (!baseKey) return res.status(400).json({ success:false, code:'IDEMPOTENCY_KEY_REQUIRED', message:'Idempotency-Key is required for governed bulk import.' })
+
+    const captured = []
+    for (let index=0; index<questions.length; index += 1) {
+      const q = questions[index] || {}
+      const question = {
+        ...q,
+        class_level: q.class_level || q.classLevel,
+        medium: q.medium || 'english',
+        chapter_no: q.chapter_no || q.chapterNo,
+        chapter_name: q.chapter_name || q.chapterName || q.chapter,
+        question_type: q.question_type || q.type,
+        question_text: q.question_text || q.en || q.text,
+        question_text_urdu: q.question_text_urdu || q.ur || q.textUrdu,
+        source_type: 'ai_import',
+        source_file_id: importJobId || q.source_file_id || null,
+        is_approved: false,
+      }
+      const governance = await captureQuestionGovernance({
+        schoolId, userId,
+        idempotencyKey: `${baseKey}:${index}`,
+        question,
+      })
+      captured.push({ ...question, governance, is_approved:false })
     }
 
-    const client = await require('../config/database').pool.connect()
-    try {
-      await client.query('BEGIN')
-      await applyTenantContext(client)
-
-      const insertedQuestions = []
-      
-      for (const q of questions) {
-        const id = generateId()
-        const result = await client.query(
-          `INSERT INTO question_bank (
-            id, school_id, class_level, subject, medium, 
-            chapter_no, chapter_name, question_type, 
-            question_text, question_text_urdu, options, answer, marks, 
-            source_type, source_file_id, is_approved, created_by
-          ) VALUES (
-            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
-          ) RETURNING *`,
-          [
-            id, schoolId, q.class_level || q.classLevel, q.subject, q.medium || 'english',
-            q.chapter_no || q.chapterNo, q.chapter_name || q.chapterName || q.chapter, q.question_type || q.type,
-            q.question_text || q.en || q.text, q.question_text_urdu || q.ur || q.textUrdu, 
-            JSON.stringify(q.options || []), q.answer, q.marks || 1,
-            'ai_import', importJobId, true, userId
-          ]
-        )
-        insertedQuestions.push(result.rows[0])
-      }
-
-      if (importJobId) {
-        await client.query(
-          `UPDATE question_bank_imports 
-           SET questions_approved = questions_approved + $1, status = 'completed', updated_at = NOW() 
-           WHERE id = $2 AND school_id = $3`,
-          [insertedQuestions.length, importJobId, schoolId]
-        )
-      }
-
-      await client.query('COMMIT')
-      res.status(201).json({ success: true, count: insertedQuestions.length, data: insertedQuestions })
-    } catch (e) {
-      await client.query('ROLLBACK')
-      throw e
-    } finally {
-      client.release()
+    if (importJobId) {
+      await query(`UPDATE question_bank_imports
+        SET questions_approved = questions_approved + $1, status = 'review_pending', updated_at = NOW()
+        WHERE id = $2 AND school_id = $3`, [captured.filter(item=>!item.governance.replayed).length, importJobId, schoolId])
     }
+    res.status(201).json({ success:true, count:captured.length, lifecycleStatus:'candidate', requiresReview:true, data:captured })
   } catch (error) {
-    console.error('Error approving imported questions:', error)
-    res.status(500).json({ success: false, message: 'Failed to approve questions' })
+    const status=Number(error.statusCode||error.status||500)
+    if(status>=500) console.error('Governed import intake failed:', error)
+    res.status(status).json({ success:false, code:error.code||'QUESTION_IMPORT_GOVERNANCE_FAILED', message:error.message||'Failed to capture imported questions' })
   }
 })
 
