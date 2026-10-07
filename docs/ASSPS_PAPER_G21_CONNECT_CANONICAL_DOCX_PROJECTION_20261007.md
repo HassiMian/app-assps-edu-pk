@@ -8,7 +8,7 @@ G21 lets APEX Connect request Microsoft Word output from the canonical SaaS pape
 
 ## Server authority
 
-`GET /api/portal/paper-studio/papers/:id/docx`
+`POST /api/portal/paper-studio/papers/:id/canonical-docx` with `revision` and `snapshotHash`
 
 The endpoint:
 - reuses the existing signed-session school/owner paper projection guard;
@@ -30,11 +30,11 @@ The Next proxy now preserves binary response bytes plus Content-Disposition and 
 
 ## Verification
 
-- G21 model/binary/eligibility unit tests: 3/3 PASS.
-- G21 isolated HTTP lifecycle: 4/4 PASS (owner canonical 200 DOCX, legacy 409, cross-teacher 404, admin school-scope 200).
-- Full isolated Paper Studio regression: 126/126 PASS, fail 0.
+- G21 model/binary/eligibility/revision-binding unit tests: 6/6 PASS.
+- G21 isolated HTTP lifecycle: 5/5 PASS (owner current canonical 200 DOCX, stale/forged snapshot 409, legacy 409, cross-teacher 404, admin school-scope 200).
+- Full isolated Paper Studio regression: 133/133 PASS, fail 0.
 - Connect G21 projection source gate: 8/8 PASS.
 - Existing cross-stream boundary PASS.
-- Connect provenance-attested production build PASS at renderer source commit `d6d65c852db9db2cd70ece2b29d5844e0fa76987`.
+- Connect production build artifact PASS at source commit `a0207a63144463aeb6c74515d1c39c60bc4a9c6f`, build ID `7mxg9e3GuuXKXlxYlCq_P`, with renderer paths attested to that commit. This build artifact is verified but is not claimed live until deployed and live provenance is rechecked.
 
 G21 does not alter publisher approval, academic approval, canonical registry write state, or the G18 human-authority boundary.
