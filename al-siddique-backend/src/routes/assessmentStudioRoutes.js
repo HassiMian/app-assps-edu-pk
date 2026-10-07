@@ -5,7 +5,7 @@ const router = express.Router()
 const { pool, query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
-const { createPrintJobBinding, printJobTransition } = require('../services/assessmentPrintJobs')
+const { createPrintJobBinding, printJobTransition, buildStudentSafeProjection, buildStaffAnswerKeyProjection, sha256 } = require('../services/assessmentPrintJobs')
 
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -396,6 +396,95 @@ router.patch('/print-jobs/:printJobId/status', async (req, res) => {
   } catch (error) {
     console.error('Assessment Studio print job status error:', error.message)
     return res.status(500).json({ success:false, message:'Could not update print job status.' })
+  }
+})
+
+router.get('/print-jobs/:printJobId/student-projection/:studentId', async (req, res) => {
+  try {
+    const printJobId = safePublicId(req.params.printJobId)
+    const studentId = safePublicId(req.params.studentId)
+    const schoolId = schoolIdForRequest(req)
+    if (!printJobId) return res.status(400).json({ success:false, message:'Invalid print job id.' })
+    if (!studentId) return res.status(400).json({ success:false, message:'Invalid student id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+
+    const data = await withTenantTransaction(req, schoolId, async client => {
+      const row = (await client.query(
+        `SELECT j.print_job_id,j.personalized,j.binding_snapshot_json,j.render_settings_json,
+                ar.snapshot_json,ar.content_hash,
+                rs.context_json,rs.students_json,rs.roster_hash
+           FROM assessment_print_jobs j
+           JOIN assessment_releases ar ON ar.school_id=j.school_id AND ar.release_id=j.release_id
+           LEFT JOIN assessment_roster_snapshots rs ON rs.school_id=j.school_id AND rs.snapshot_id=j.roster_snapshot_id
+          WHERE j.school_id=$1 AND j.print_job_id=$2 LIMIT 1`,
+        [schoolId, printJobId]
+      )).rows[0]
+      if (!row) return { missing:true }
+      if (!row.personalized || !row.students_json) return { notPersonalized:true }
+      if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
+      const rosterEnvelope = { context: row.context_json || {}, students: row.students_json || [] }
+      if (sha256(rosterEnvelope) !== String(row.roster_hash || '')) return { rosterHashMismatch:true }
+      const student = (row.students_json || []).find(item => String(item.studentId) === studentId)
+      if (!student) return { missingStudent:true }
+      const context = row.context_json || {}
+      const teacher = row.binding_snapshot_json || {}
+      const settings = row.render_settings_json || {}
+      const projection = buildStudentSafeProjection(row.snapshot_json || {}, {
+        student: {
+          ...student,
+          displayName: settings.includeStudentName === false ? null : student.displayName,
+          rollNumber: settings.includeRollNumber === false ? null : student.rollNo,
+          className: context.className,
+          section: student.section || context.section,
+        },
+        teacher: {
+          displayName: teacher.teacherName,
+          subject: teacher.subjectName,
+        },
+      })
+      return { projection }
+    })
+
+    if (data.missing) return res.status(404).json({ success:false, code:'PRINT_JOB_NOT_FOUND', message:'Print job not found.' })
+    if (data.notPersonalized) return res.status(409).json({ success:false, code:'PRINT_JOB_NOT_PERSONALIZED', message:'Student projection requires a personalized print job.' })
+    if (data.missingStudent) return res.status(404).json({ success:false, code:'PRINT_ROSTER_STUDENT_NOT_FOUND', message:'Student is not present in the immutable print roster.' })
+    if (data.releaseHashMismatch) return res.status(409).json({ success:false, code:'PRINT_RELEASE_HASH_MISMATCH', message:'Release snapshot integrity check failed.' })
+    if (data.rosterHashMismatch) return res.status(409).json({ success:false, code:'PRINT_ROSTER_HASH_MISMATCH', message:'Roster snapshot integrity check failed.' })
+    return res.json({ success:true, data:data.projection })
+  } catch (error) {
+    const status = Number(error.status) || 500
+    if (status >= 500) console.error('Assessment Studio student projection error:', error.message)
+    return res.status(status).json({ success:false, code:error.code || 'STUDENT_PROJECTION_FAILED', message:status >= 500 ? 'Could not build student-safe print projection.' : error.message })
+  }
+})
+
+router.get('/print-jobs/:printJobId/answer-key', async (req, res) => {
+  try {
+    const printJobId = safePublicId(req.params.printJobId)
+    const schoolId = schoolIdForRequest(req)
+    if (!printJobId) return res.status(400).json({ success:false, message:'Invalid print job id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+
+    const data = await withTenantTransaction(req, schoolId, async client => {
+      const row = (await client.query(
+        `SELECT ar.snapshot_json,ar.content_hash
+           FROM assessment_print_jobs j
+           JOIN assessment_releases ar ON ar.school_id=j.school_id AND ar.release_id=j.release_id
+          WHERE j.school_id=$1 AND j.print_job_id=$2 LIMIT 1`,
+        [schoolId, printJobId]
+      )).rows[0]
+      if (!row) return { missing:true }
+      if (sha256(row.snapshot_json || {}) !== String(row.content_hash || '')) return { releaseHashMismatch:true }
+      return { projection:buildStaffAnswerKeyProjection(row.snapshot_json || {}, { role:req.user?.role }) }
+    })
+
+    if (data.missing) return res.status(404).json({ success:false, code:'PRINT_JOB_NOT_FOUND', message:'Print job not found.' })
+    if (data.releaseHashMismatch) return res.status(409).json({ success:false, code:'PRINT_RELEASE_HASH_MISMATCH', message:'Release snapshot integrity check failed.' })
+    return res.json({ success:true, data:data.projection })
+  } catch (error) {
+    const status = Number(error.status) || 500
+    if (status >= 500) console.error('Assessment Studio answer-key projection error:', error.message)
+    return res.status(status).json({ success:false, code:error.code || 'ANSWER_KEY_PROJECTION_FAILED', message:status >= 500 ? 'Could not build answer-key projection.' : error.message })
   }
 })
 

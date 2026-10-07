@@ -2553,6 +2553,43 @@ assertContains(
   'student portal must roll back optimistic read state when server persistence fails.'
 )
 
+
+assertContains(
+  'al-siddique-backend/src/services/assessmentPrintJobs.js',
+  'STUDENT_PROJECTION_ANSWER_LEAK',
+  'Assessment student projections must fail closed if answer material survives sanitization.'
+)
+assertContains(
+  'al-siddique-backend/src/services/assessmentPrintJobs.js',
+  'ANSWER_KEY_ROLE_REQUIRED',
+  'Assessment answer-key projections must remain staff-role gated.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/assessmentStudioRoutes.js',
+  '/print-jobs/:printJobId/student-projection/:studentId',
+  'Assessment Studio must expose the tenant-bound student-safe print projection route.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/assessmentStudioRoutes.js',
+  '/print-jobs/:printJobId/answer-key',
+  'Assessment Studio must expose the staff-only answer-key projection route.'
+)
+assertContains(
+  'al-siddique-frontend/src/services/tenantStorage.js',
+  "error?.name === 'QuotaExceededError'",
+  'tenant storage must preserve edits with a quota-only emergency session fallback.'
+)
+assertContains(
+  'al-siddique-frontend/src/services/tenantStorage.js',
+  'window.sessionStorage',
+  'tenant storage quota recovery must use sessionStorage as the emergency copy.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/services/tenantStorage.js',
+  /legacyValue|migrateLegacy|removeLegacyOnMigrate|storage\.getItem\(baseKey\)/,
+  'tenant storage must never import an unscoped legacy key into an authenticated tenant scope.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
