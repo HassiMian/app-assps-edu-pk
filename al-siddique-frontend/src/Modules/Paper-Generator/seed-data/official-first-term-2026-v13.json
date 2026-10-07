@@ -10,7 +10,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT02_URDU_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "1",
@@ -22,10 +22,10 @@
         "totalMarks": 50,
         "session": "2026-2027",
         "paperCode": "FT26-1-URDU",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-02"
       },
-      "sourceTotalNote": "Inferred from five questions marked 10 each.",
+      "sourceTotalNote": "Five source questions are explicitly 10 marks each; total 50 is internally balanced.",
       "sourceContentSha256": "2451fd23872894614637526177174e9881f52cce76776051de66d405a028195a",
       "qaNotes": "preserve source, do not invent corrections:\n- Q2 contains the same letter sequence د+ر+ی+ا twice in the supplied source; retained.",
       "selectedQuestions": {
@@ -171,7 +171,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-1-countdown-mathematics",
@@ -195,9 +196,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "Provisional: five major questions; source did not state a total.",
+      "sourceTotalNote": "Working header total 50 retained from the five-major-question source package; teacher source did not assign question-wise marks.",
       "sourceContentSha256": "c9bf48bc88d59920b89810686c480b8eaa32865b93fee06a46c9e9f354e79a71",
-      "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated in source; 50 is provisional and should be confirmed.\n- Q1 source contained mixed + and - operations under an Addition heading; operations were preserved.",
+      "qaNotes": "Do not invent section marks. Preserve mixed + and - operators in Q1 exactly as supplied. Mathematics print layout must use aligned operation/comparison/response structures.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -341,7 +342,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY_WITH_UNRESOLVED_SECTION_MARKS"
     },
     {
       "id": "official-first-term-2026-class-1-english",
@@ -350,7 +352,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_PRINCIPAL_MARKS_CORRECTION_20260927",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "1",
@@ -359,15 +361,15 @@
         "subjectName": "English",
         "examType": "First Term Examination 2026",
         "language": "english",
-        "totalMarks": 36,
+        "totalMarks": 50,
         "session": "2026-2027",
         "paperCode": "FT26-1-ENGLISH",
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "Calculated from explicit question marks: 6+10+10+5+5.",
+      "sourceTotalNote": "Principal correction 2026-09-27: five major questions, 10 marks each; total 50.",
       "sourceContentSha256": "12f7c89816cd965d97628279f73191def300f5f41bb2d4507e5f85ae62161c51",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source has only 8 items under Q2 although Q2 is marked 10.\n- Total 36 is the sum of explicit marks and is unusual for a term paper; confirm intended total.",
+      "qaNotes": "Authoritative correction from school principal: Q1-Q5 are 10 marks each; total marks 50. Preserve question text/content unchanged.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -375,11 +377,11 @@
               "id": "official-first-term-2026-class-1-english-section-1",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q1. Write one word with each given letter. (6)",
+              "heading": "Q1. Write one word with each given letter. (10)",
               "content": "B = __________\nG = __________\nI = __________\nM = __________\nT = __________\nV = __________",
-              "text": "Q1. Write one word with each given letter. (6)",
+              "text": "Q1. Write one word with each given letter. (10)",
               "textUrdu": "",
-              "marks": 6,
+              "marks": 10,
               "sourceOrder": 1,
               "priority": "all"
             },
@@ -411,11 +413,11 @@
               "id": "official-first-term-2026-class-1-english-section-4",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q4. Singular and Plural. (5)",
+              "heading": "Q4. Singular and Plural. (10)",
               "content": "Boy, Women, Cow, Apple, Watch",
-              "text": "Q4. Singular and Plural. (5)",
+              "text": "Q4. Singular and Plural. (10)",
               "textUrdu": "",
-              "marks": 5,
+              "marks": 10,
               "sourceOrder": 4,
               "priority": "all"
             },
@@ -423,16 +425,16 @@
               "id": "official-first-term-2026-class-1-english-section-5",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q5. Masculine and Feminine. (5)",
+              "heading": "Q5. Masculine and Feminine. (10)",
               "content": "Bull, Father, Waiter, Horse, Sir",
-              "text": "Q5. Masculine and Feminine. (5)",
+              "text": "Q5. Masculine and Feminine. (10)",
               "textUrdu": "",
-              "marks": 5,
+              "marks": 10,
               "sourceOrder": 5,
               "priority": "all"
             }
           ],
-          "marks": 0
+          "marks": 50
         }
       },
       "official_section": [
@@ -440,11 +442,11 @@
           "id": "official-first-term-2026-class-1-english-section-1",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q1. Write one word with each given letter. (6)",
+          "heading": "Q1. Write one word with each given letter. (10)",
           "content": "B = __________\nG = __________\nI = __________\nM = __________\nT = __________\nV = __________",
-          "text": "Q1. Write one word with each given letter. (6)",
+          "text": "Q1. Write one word with each given letter. (10)",
           "textUrdu": "",
-          "marks": 6,
+          "marks": 10,
           "sourceOrder": 1,
           "priority": "all"
         },
@@ -476,11 +478,11 @@
           "id": "official-first-term-2026-class-1-english-section-4",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q4. Singular and Plural. (5)",
+          "heading": "Q4. Singular and Plural. (10)",
           "content": "Boy, Women, Cow, Apple, Watch",
-          "text": "Q4. Singular and Plural. (5)",
+          "text": "Q4. Singular and Plural. (10)",
           "textUrdu": "",
-          "marks": 5,
+          "marks": 10,
           "sourceOrder": 4,
           "priority": "all"
         },
@@ -488,16 +490,16 @@
           "id": "official-first-term-2026-class-1-english-section-5",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q5. Masculine and Feminine. (5)",
+          "heading": "Q5. Masculine and Feminine. (10)",
           "content": "Bull, Father, Waiter, Horse, Sir",
-          "text": "Q5. Masculine and Feminine. (5)",
+          "text": "Q5. Masculine and Feminine. (10)",
           "textUrdu": "",
-          "marks": 5,
+          "marks": 10,
           "sourceOrder": 5,
           "priority": "all"
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 50,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
@@ -762,7 +764,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "2",
@@ -774,8 +776,9 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-2-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "As stated by teacher source.",
       "sourceContentSha256": "13f5d0d731a7c7f6957ed6163507ad8e6e3ca3cf1d301a2c9148510ee03f2b15",
@@ -793,7 +796,8 @@
               "textUrdu": "",
               "marks": 25,
               "sourceOrder": 1,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-2-english-section-2",
@@ -853,7 +857,8 @@
               "textUrdu": "",
               "marks": 5,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 3
             },
             {
               "id": "official-first-term-2026-class-2-english-section-7",
@@ -865,7 +870,8 @@
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             }
           ],
           "marks": 0
@@ -882,7 +888,8 @@
           "textUrdu": "",
           "marks": 25,
           "sourceOrder": 1,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-2-english-section-2",
@@ -942,7 +949,8 @@
           "textUrdu": "",
           "marks": 5,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 3
         },
         {
           "id": "official-first-term-2026-class-2-english-section-7",
@@ -954,7 +962,8 @@
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         }
       ],
       "official_section_marks": 0,
@@ -966,12 +975,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-2-islamiyat",
@@ -1248,7 +1270,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "2",
@@ -1260,12 +1282,12 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-2-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "As stated; six questions at 10 marks each.",
+      "sourceTotalNote": "As stated; six questions at 10 marks each. Q2 instruction was normalized to >, <, or = because the supplied item 81 □ 81 requires equality.",
       "sourceContentSha256": "68c1868d9ba86c52ea1f08dd102213345305999a8d9ad63c78b8e60f100db9e6",
-      "qaNotes": "preserve source, do not invent corrections:\n- Class label in source read \"Two / Starter\"; classified under Class Two because the paper itself is presented with Class Two papers.\n- Q2 includes 81 □ 81 though instruction asks only > or <; equality symbol may also be required.",
+      "qaNotes": "Principal-approved print normalization: Q2 now explicitly allows = so every supplied comparison item is answerable. Academic numbers/items otherwise preserved.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -1285,9 +1307,9 @@
               "id": "official-first-term-2026-class-2-mathematics-section-2",
               "type": "official_section",
               "medium": "english",
-              "heading": "Q2. Write > or < in the empty boxes. (10)",
+              "heading": "Q2. Write >, <, or = in the empty boxes. (10)",
               "content": "1. 35 □ 48\n2. 219 □ 20\n3. 92 □ 89\n4. 81 □ 81\n5. 34 □ 48",
-              "text": "Q2. Write > or < in the empty boxes. (10)",
+              "text": "Q2. Write >, <, or = in the empty boxes. (10)",
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 2,
@@ -1362,9 +1384,9 @@
           "id": "official-first-term-2026-class-2-mathematics-section-2",
           "type": "official_section",
           "medium": "english",
-          "heading": "Q2. Write > or < in the empty boxes. (10)",
+          "heading": "Q2. Write >, <, or = in the empty boxes. (10)",
           "content": "1. 35 □ 48\n2. 219 □ 20\n3. 92 □ 89\n4. 81 □ 81\n5. 34 □ 48",
-          "text": "Q2. Write > or < in the empty boxes. (10)",
+          "text": "Q2. Write >, <, or = in the empty boxes. (10)",
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 2,
@@ -1433,7 +1455,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-3-urdu",
@@ -1442,7 +1465,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT02_URDU_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "3",
@@ -1454,12 +1477,12 @@
         "totalMarks": 100,
         "session": "2026-2027",
         "paperCode": "FT26-3-URDU",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-02"
       },
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total is 100, while explicit section marks total 85. Missing 15 marks are not source-authorized and are not invented.",
       "sourceContentSha256": "1162e950a8bc5e97aae8cdbd41d75d4c9f1ffd2bcf8a49506fe6bd9ea76f832b",
-      "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Stated total is 100 but listed marks total 85; 15 marks appear missing.\n- Several Urdu question phrases are ambiguous/garbled in source; retained rather than guessed.\nPRINT HOLD 2026-09-27: confirm the missing 15 marks / omitted section before printing.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -1627,7 +1650,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-3-science",
@@ -2292,7 +2316,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "4",
@@ -2304,8 +2328,9 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-4-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "As stated by teacher source.",
       "sourceContentSha256": "02020bb9245ecccb95a7b7a6f8608e688744e4336c4204d799352ec2629606d8",
@@ -2383,7 +2408,8 @@
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-4-english-section-7",
@@ -2395,7 +2421,8 @@
               "textUrdu": "",
               "marks": 8,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-4-english-section-8",
@@ -2407,7 +2434,8 @@
               "textUrdu": "",
               "marks": 8,
               "sourceOrder": 8,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-4-english-section-9",
@@ -2419,7 +2447,8 @@
               "textUrdu": "",
               "marks": 4,
               "sourceOrder": 9,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-4-english-section-10",
@@ -2508,7 +2537,8 @@
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-4-english-section-7",
@@ -2520,7 +2550,8 @@
           "textUrdu": "",
           "marks": 8,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-4-english-section-8",
@@ -2532,7 +2563,8 @@
           "textUrdu": "",
           "marks": 8,
           "sourceOrder": 8,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-4-english-section-9",
@@ -2544,7 +2576,8 @@
           "textUrdu": "",
           "marks": 4,
           "sourceOrder": 9,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-4-english-section-10",
@@ -2568,12 +2601,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "HOLD_FOR_MARKS_CONFIRMATION"
     },
     {
       "id": "official-first-term-2026-class-4-urdu",
@@ -3358,7 +3404,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "4",
@@ -3370,12 +3416,12 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-4-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "As stated; section marks sum to 60.",
+      "sourceTotalNote": "Teacher/header total is 60 and authoritative section totals are 15+16+16+13=60.",
       "sourceContentSha256": "9dcf61c9c7b963229de182fb50bcdd28458d70c181f047ceab45ebf5a0e686fb",
-      "qaNotes": "preserve source, do not invent corrections:\n- Q4 source says \"Attempt any Two questions. 13\" but lists four tasks; retained with 13 marks.\n- Some number spacing/circled-digit notation in Q2(3) is ambiguous because the source text lost the visual circles.",
+      "qaNotes": "Formula headings 2×8=16 are treated as section totals (16), not marks-per-item. Q4 remains 13 marks exactly as supplied.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -3399,7 +3445,7 @@
               "content": "1. Write the name of this number in words: 300 801\n2. Write the number in figures: Seven hundred and twenty-five thousand one hundred and twenty.\n3. Write the value of the circled digit: 64 9 767; 3 4 8 0 27.\n4. Write each number in expanded form: 627 051.\n5. Fill in the blanks with > or <: (i) 47 863 □ 47 859  (ii) 10 198 □ 10 197\n6. Write these numbers in descending order: 43 892, 43 961, 43 691, 44 001.\n7. Add: 32 943 + 28 127.\n8. 200 more than 25 000.\n9. Complete the number pattern: 5, 10, ___, ___, 80.\n10. Which of the following is divisible by 2? (i) 200  (ii) 345",
               "text": "Q2. Attempt any eight questions. (2×8=16)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 16,
               "sourceOrder": 2,
               "priority": "all"
             },
@@ -3411,7 +3457,7 @@
               "content": "1. Multiply: 1964 × 14.\n2. Find the rule, then find the next two numbers: 6, 9, 12, 15, ___, ___. Rule: ______.\n3. Write first six numbers of a pattern: add 15, start with 20.\n4. Find the factors of 35.\n5. Find the prime factors of 84 using the division method.\n6. Write the factors of 25 and 15 and circle the common factor.\n7. Find the common factors of 48 and 30.\n8. Circle the sets of like fractions: (i) 4/14, 1/15, 6/15   (ii) 9/20, 8/10, 16/20\n9. Change the mixed number into an improper fraction: 2 6/8 = ___/8.\n10. Change into a mixed fraction: 50/7.",
               "text": "Q3. Attempt any eight questions. (2×8=16)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 16,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -3452,7 +3498,7 @@
           "content": "1. Write the name of this number in words: 300 801\n2. Write the number in figures: Seven hundred and twenty-five thousand one hundred and twenty.\n3. Write the value of the circled digit: 64 9 767; 3 4 8 0 27.\n4. Write each number in expanded form: 627 051.\n5. Fill in the blanks with > or <: (i) 47 863 □ 47 859  (ii) 10 198 □ 10 197\n6. Write these numbers in descending order: 43 892, 43 961, 43 691, 44 001.\n7. Add: 32 943 + 28 127.\n8. 200 more than 25 000.\n9. Complete the number pattern: 5, 10, ___, ___, 80.\n10. Which of the following is divisible by 2? (i) 200  (ii) 345",
           "text": "Q2. Attempt any eight questions. (2×8=16)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 16,
           "sourceOrder": 2,
           "priority": "all"
         },
@@ -3464,7 +3510,7 @@
           "content": "1. Multiply: 1964 × 14.\n2. Find the rule, then find the next two numbers: 6, 9, 12, 15, ___, ___. Rule: ______.\n3. Write first six numbers of a pattern: add 15, start with 20.\n4. Find the factors of 35.\n5. Find the prime factors of 84 using the division method.\n6. Write the factors of 25 and 15 and circle the common factor.\n7. Find the common factors of 48 and 30.\n8. Circle the sets of like fractions: (i) 4/14, 1/15, 6/15   (ii) 9/20, 8/10, 16/20\n9. Change the mixed number into an improper fraction: 2 6/8 = ___/8.\n10. Change into a mixed fraction: 50/7.",
           "text": "Q3. Attempt any eight questions. (2×8=16)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 16,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -3495,7 +3541,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-5-social-studies",
@@ -3674,7 +3721,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT02_URDU_REVIEW_20260927_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "5",
@@ -3686,10 +3733,10 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-5-URDU",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-02"
       },
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total 75; explicit question marks total 75 and are internally balanced.",
       "sourceContentSha256": "75f96ae93b25243875b67151248b1aa86b27acc0c3d8a6e17213f3cfeb2882a3",
       "qaNotes": "preserve source, do not invent corrections:\n- Q6 source heading included \"10*6\" though five questions are listed; treated as 10 marks to reconcile the stated 75.\n- Several Urdu phrases are garbled in source, especially Q6(3) and Q7; retained rather than guessed.",
       "selectedQuestions": {
@@ -3931,7 +3978,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-5-science",
@@ -4247,9 +4295,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "As stated; 15+16+16+12=59 in source arithmetic, though Q4 says 2x6=12; header retained at 60.",
+      "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 59 (15+16+16+12); preserve both values and do not invent the missing 1 mark.",
       "sourceContentSha256": "819f5aeaeaa9d3441df5708b858480a1c745d98b45f845fb703c08d3e6529ebe",
-      "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 59 (15+16+16+12).\n- Several MCQ options appear mathematically inconsistent; they are preserved as teacher-submitted content, not silently rewritten.",
+      "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 section marks reflect the full expressions printed in the headings, not the attempt-count multiplier alone.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -4273,7 +4321,7 @@
               "content": "1. Write the following number in words: 4 000 000.\n2. Write the following number in expanded form: 403 075.\n3. Arrange in descending order: 9 603 298; 9 630 928; 9 613 829.\n4. 5000 more than 245 624.\n5. 90 000 less than 194 523.\n6. Divide by 10: 38 200.\n7. Identify the pattern rule and complete the missing terms: 38, 45, ___, 59, 66, ___, 80.\n8. Use random number to make patterns: 49, 37, 53, 41, 45, 57.\n9. Find the HCF by prime factorisation method: 26, 96, 12.\n10. Which of the following numbers are divisible by 4? a) 1996  b) 2000",
               "text": "Q2. Attempt any eight questions. (8×2=16)",
               "textUrdu": "",
-              "marks": 8,
+              "marks": 16,
               "sourceOrder": 2,
               "priority": "all"
             },
@@ -4285,7 +4333,7 @@
               "content": "1. Find the HCF for each group of prime factors: 2×3×3×5; 2×3×5×7; 2×3×3×7.\n2. Add: 5/13 + 7/26.\n3. Subtract: 6/7 - 4/5.\n4. Solve: 6×1/2; 1/2×1/2.\n5. Find product: 1/5×7/8.\n6. Divide: 1/4 ÷ 1/2.\n7. 7/3 ÷ 14/15.\n8. Solve: 302.48 - 208.24.\n9. Rewrite in ascending order: 3.48, 5.2, 3.8, 5.02.\n10. Solve: 482.11 + 653.93.",
               "text": "Q3. Attempt any eight questions. (8×2=16)",
               "textUrdu": "",
-              "marks": 8,
+              "marks": 16,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -4297,12 +4345,12 @@
               "content": "1. Find the difference between the greatest 6-digit number and the greatest 5-digit number.\n2. 34 396 ÷ 64.\n3. Using division method find the HCF of 35, 42, 77.",
               "text": "Q4. Attempt any two questions. (2×6=12)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 12,
               "sourceOrder": 4,
               "priority": "all"
             }
           ],
-          "marks": 0
+          "marks": 59
         }
       },
       "official_section": [
@@ -4326,7 +4374,7 @@
           "content": "1. Write the following number in words: 4 000 000.\n2. Write the following number in expanded form: 403 075.\n3. Arrange in descending order: 9 603 298; 9 630 928; 9 613 829.\n4. 5000 more than 245 624.\n5. 90 000 less than 194 523.\n6. Divide by 10: 38 200.\n7. Identify the pattern rule and complete the missing terms: 38, 45, ___, 59, 66, ___, 80.\n8. Use random number to make patterns: 49, 37, 53, 41, 45, 57.\n9. Find the HCF by prime factorisation method: 26, 96, 12.\n10. Which of the following numbers are divisible by 4? a) 1996  b) 2000",
           "text": "Q2. Attempt any eight questions. (8×2=16)",
           "textUrdu": "",
-          "marks": 8,
+          "marks": 16,
           "sourceOrder": 2,
           "priority": "all"
         },
@@ -4338,7 +4386,7 @@
           "content": "1. Find the HCF for each group of prime factors: 2×3×3×5; 2×3×5×7; 2×3×3×7.\n2. Add: 5/13 + 7/26.\n3. Subtract: 6/7 - 4/5.\n4. Solve: 6×1/2; 1/2×1/2.\n5. Find product: 1/5×7/8.\n6. Divide: 1/4 ÷ 1/2.\n7. 7/3 ÷ 14/15.\n8. Solve: 302.48 - 208.24.\n9. Rewrite in ascending order: 3.48, 5.2, 3.8, 5.02.\n10. Solve: 482.11 + 653.93.",
           "text": "Q3. Attempt any eight questions. (8×2=16)",
           "textUrdu": "",
-          "marks": 8,
+          "marks": 16,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -4350,12 +4398,12 @@
           "content": "1. Find the difference between the greatest 6-digit number and the greatest 5-digit number.\n2. 34 396 ÷ 64.\n3. Using division method find the HCF of 35, 42, 77.",
           "text": "Q4. Attempt any two questions. (2×6=12)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 12,
           "sourceOrder": 4,
           "priority": "all"
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 59,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
@@ -4369,7 +4417,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY_WITH_SOURCE_CONFLICT"
     },
     {
       "id": "official-first-term-2026-class-5-english",
@@ -4984,7 +5033,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_FINAL_20260927_V2",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "6",
@@ -4993,15 +5042,15 @@
         "subjectName": "Mathematics",
         "examType": "First Term Examination 2026",
         "language": "english",
-        "totalMarks": 50,
+        "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-6-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "As stated by teacher source; marking scheme is internally inconsistent.",
+      "sourceTotalNote": "Principal-approved scheme: 5 MCQs ×1=5, 5 fill in the blanks ×1=5, 10 short questions ×3=30, and attempt any 2 of 3 long questions ×10=20. Total 60.",
       "sourceContentSha256": "46ad66c19ce891c455d0400557f93f3e52ba7ca5fd0c9379f528baa141cb6fed",
-      "qaNotes": "preserve source, do not invent corrections:\n- MCQ section says 5 marks but contains 6 MCQs.\n- Short Questions alone are labelled 10×3=30 and Long Questions 10×2=20, already totaling 50 before MCQs/fill blanks; source marking scheme is inconsistent.\n- No marks are stated for Fill in the blanks.",
+      "qaNotes": "One middle MCQ from the six-item source was removed by principal instruction (the former MCQ 4: 5×(-3)-(-3)); remaining MCQs were renumbered 1-5. All 10 short questions are compulsory. Long section has one-question choice: attempt any 2 of 3.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -5021,9 +5070,9 @@
               "id": "official-first-term-2026-class-6-mathematics-section-2",
               "type": "official_section",
               "medium": "english",
-              "heading": "MCQs. (5)",
-              "content": "1. Which of the following sets is an empty set?\n   a) A={1,2,3,4,5}   b) B={}   c) C={1,3,5}   d) D={2,4,6,8,...}\n2. The set of whole numbers is:\n   a) finite   b) infinite   c) empty   d) none of the above\n3. On the number line which is greater, -15 or -3?\n   a) -15   b) -3   c) They are equal   d) None of the above\n4. The value of 5×(-3)-(-3) is:\n   a) -12   b) 18   c) -18   d) 12\n5. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n6. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
-              "text": "MCQs. (5)",
+              "heading": "Q1. Select the correct answer. (5×1=5)",
+              "content": "1. Which of the following sets is an empty set?\n   a) A={1,2,3,4,5}   b) B={}   c) C={1,3,5}   d) D={2,4,6,8,...}\n2. The set of whole numbers is:\n   a) finite   b) infinite   c) empty   d) none of the above\n3. On the number line which is greater, -15 or -3?\n   a) -15   b) -3   c) They are equal   d) None of the above\n4. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n5. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
+              "text": "Q1. Select the correct answer. (5×1=5)",
               "textUrdu": "",
               "marks": 5,
               "sourceOrder": 2,
@@ -5033,11 +5082,11 @@
               "id": "official-first-term-2026-class-6-mathematics-section-3",
               "type": "official_section",
               "medium": "english",
-              "heading": "Fill in the blanks.",
+              "heading": "Q2. Fill in the blanks. (5×1=5)",
               "content": "1. 5×(7+2) = (5×___) + (5×___)\n2. 12 ÷ ___ = 12\n3. ___ ÷ 10 = 0\n4. 54 + (36+40) = (54+___) + 40\n5. The smallest whole number is ___",
-              "text": "Fill in the blanks.",
+              "text": "Q2. Fill in the blanks. (5×1=5)",
               "textUrdu": "",
-              "marks": 0,
+              "marks": 5,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -5045,11 +5094,11 @@
               "id": "official-first-term-2026-class-6-mathematics-section-4",
               "type": "official_section",
               "medium": "english",
-              "heading": "Short Questions. (10×3)",
+              "heading": "Q3. Answer all ten short questions. (10×3=30)",
               "content": "1. Write in tabular form: A = set of natural numbers between 2 and 7.\n2. Rewrite using set-builder form: C={2,3,4,5,6,...}.\n3. Find the value: 6×612 + 4×612.\n4. Write next three integers: 7, 4, 1, ___, ___, ___.\n5. Write the integers in decreasing sequence: -1, -2, 4, 2.\n6. Give two possible integers: a) <0   b) <-3.\n7. Simplify: (-231)+5+(-20).\n8. Find an integer which divides -100 to give -5.\n9. Perform the division: (-231)÷(-11).\n10. List the multiples of 11 less than 50.",
-              "text": "Short Questions. (10×3)",
+              "text": "Q3. Answer all ten short questions. (10×3=30)",
               "textUrdu": "",
-              "marks": 10,
+              "marks": 30,
               "sourceOrder": 4,
               "priority": "all"
             },
@@ -5057,11 +5106,11 @@
               "id": "official-first-term-2026-class-6-mathematics-section-5",
               "type": "official_section",
               "medium": "english",
-              "heading": "Long Questions. (10×2)",
+              "heading": "Q4. Attempt any two long questions. (2×10=20)",
               "content": "1. Find the prime factors of 663.\n2. Solve: (2x-5)/(7x-3) = 5/4.\n3. Find LCM of 42, 48, 56.",
-              "text": "Long Questions. (10×2)",
+              "text": "Q4. Attempt any two long questions. (2×10=20)",
               "textUrdu": "",
-              "marks": 10,
+              "marks": 20,
               "sourceOrder": 5,
               "priority": "all"
             }
@@ -5086,9 +5135,9 @@
           "id": "official-first-term-2026-class-6-mathematics-section-2",
           "type": "official_section",
           "medium": "english",
-          "heading": "MCQs. (5)",
-          "content": "1. Which of the following sets is an empty set?\n   a) A={1,2,3,4,5}   b) B={}   c) C={1,3,5}   d) D={2,4,6,8,...}\n2. The set of whole numbers is:\n   a) finite   b) infinite   c) empty   d) none of the above\n3. On the number line which is greater, -15 or -3?\n   a) -15   b) -3   c) They are equal   d) None of the above\n4. The value of 5×(-3)-(-3) is:\n   a) -12   b) 18   c) -18   d) 12\n5. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n6. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
-          "text": "MCQs. (5)",
+          "heading": "Q1. Select the correct answer. (5×1=5)",
+          "content": "1. Which of the following sets is an empty set?\n   a) A={1,2,3,4,5}   b) B={}   c) C={1,3,5}   d) D={2,4,6,8,...}\n2. The set of whole numbers is:\n   a) finite   b) infinite   c) empty   d) none of the above\n3. On the number line which is greater, -15 or -3?\n   a) -15   b) -3   c) They are equal   d) None of the above\n4. 3294 is divisible by:\n   a) 9   b) 3   c) 27   d) all of the above\n5. Evaluate 2 + 7×9:\n   a) 65   b) 126   c) 81   d) 32",
+          "text": "Q1. Select the correct answer. (5×1=5)",
           "textUrdu": "",
           "marks": 5,
           "sourceOrder": 2,
@@ -5098,11 +5147,11 @@
           "id": "official-first-term-2026-class-6-mathematics-section-3",
           "type": "official_section",
           "medium": "english",
-          "heading": "Fill in the blanks.",
+          "heading": "Q2. Fill in the blanks. (5×1=5)",
           "content": "1. 5×(7+2) = (5×___) + (5×___)\n2. 12 ÷ ___ = 12\n3. ___ ÷ 10 = 0\n4. 54 + (36+40) = (54+___) + 40\n5. The smallest whole number is ___",
-          "text": "Fill in the blanks.",
+          "text": "Q2. Fill in the blanks. (5×1=5)",
           "textUrdu": "",
-          "marks": 0,
+          "marks": 5,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -5110,11 +5159,11 @@
           "id": "official-first-term-2026-class-6-mathematics-section-4",
           "type": "official_section",
           "medium": "english",
-          "heading": "Short Questions. (10×3)",
+          "heading": "Q3. Answer all ten short questions. (10×3=30)",
           "content": "1. Write in tabular form: A = set of natural numbers between 2 and 7.\n2. Rewrite using set-builder form: C={2,3,4,5,6,...}.\n3. Find the value: 6×612 + 4×612.\n4. Write next three integers: 7, 4, 1, ___, ___, ___.\n5. Write the integers in decreasing sequence: -1, -2, 4, 2.\n6. Give two possible integers: a) <0   b) <-3.\n7. Simplify: (-231)+5+(-20).\n8. Find an integer which divides -100 to give -5.\n9. Perform the division: (-231)÷(-11).\n10. List the multiples of 11 less than 50.",
-          "text": "Short Questions. (10×3)",
+          "text": "Q3. Answer all ten short questions. (10×3=30)",
           "textUrdu": "",
-          "marks": 10,
+          "marks": 30,
           "sourceOrder": 4,
           "priority": "all"
         },
@@ -5122,11 +5171,11 @@
           "id": "official-first-term-2026-class-6-mathematics-section-5",
           "type": "official_section",
           "medium": "english",
-          "heading": "Long Questions. (10×2)",
+          "heading": "Q4. Attempt any two long questions. (2×10=20)",
           "content": "1. Find the prime factors of 663.\n2. Solve: (2x-5)/(7x-3) = 5/4.\n3. Find LCM of 42, 48, 56.",
-          "text": "Long Questions. (10×2)",
+          "text": "Q4. Attempt any two long questions. (2×10=20)",
           "textUrdu": "",
-          "marks": 10,
+          "marks": 20,
           "sourceOrder": 5,
           "priority": "all"
         }
@@ -5145,7 +5194,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-6-islamiyat",
@@ -5614,7 +5664,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "6",
@@ -5626,12 +5676,13 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-6-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "As stated by teacher source.",
       "sourceContentSha256": "5780fd3bb6f5fbe9e686f32be9b62f091773d4804c216c393f7e3e13cd31f8d8",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Source states total 75 but gives no section-wise marks.\n- Minor obvious spelling typos were normalized; unusual phrase \"One even five zero\" is retained as source content.\\n29 Sep print rule: teacher source states total 75 but gives no section-wise marks; do not invent question marks.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -5693,7 +5744,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 5,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 6
             },
             {
               "id": "official-first-term-2026-class-6-english-section-6",
@@ -5705,7 +5757,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-6-english-section-7",
@@ -5717,7 +5770,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 10
             },
             {
               "id": "official-first-term-2026-class-6-english-section-8",
@@ -5729,7 +5783,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 8,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-6-english-section-9",
@@ -5741,7 +5796,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 9,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 10
             }
           ],
           "marks": 0
@@ -5806,7 +5862,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 5,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 6
         },
         {
           "id": "official-first-term-2026-class-6-english-section-6",
@@ -5818,7 +5875,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-6-english-section-7",
@@ -5830,7 +5888,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 10
         },
         {
           "id": "official-first-term-2026-class-6-english-section-8",
@@ -5842,7 +5901,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 8,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-6-english-section-9",
@@ -5854,7 +5914,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 9,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 10
         }
       ],
       "official_section_marks": 0,
@@ -5866,12 +5927,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "READY_LAYOUT"
     },
     {
       "id": "official-first-term-2026-class-7-science",
@@ -6050,7 +6124,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_UNIVERSAL_PAPER_SYSTEM_V1_20260927",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "7",
@@ -6065,9 +6139,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "Corrected from source top-line \"کل نمبر: 10\" because explicit section marks total 50.",
+      "sourceTotalNote": "Explicit section totals are 10 + 15 + 15 + 10 = 50; the earlier source top-line total was inconsistent and is superseded by the explicit section formulas.",
       "sourceContentSha256": "04779de4861f68401a2f52a2500250b0eaec3cfea766907926c306f8d0321c9a",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source top line said total 10 but explicit sections total 50; total corrected to 50.\n- Several terms (e.g. \"عربیاں کالی\", \"عمل کرلاؤ\") are garbled in source and retained.",
+      "qaNotes": "Principal corrections 2026-09-27: MCQ1 = قشر الارض کی کتنی بڑی پلیٹیں ہیں؟ options 6, 7, 8; MCQ8 = فصلوں کی کتنی اقسام ہیں؟; MCQ9 = بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟ options ہوائی، بحری، زمینی. Urdu option labels render as الف) ب) ج) with the closing bracket between label and option text.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -6076,12 +6150,13 @@
               "type": "official_section",
               "medium": "urdu",
               "heading": "سوال نمبر 1: درست جواب کی نشان دہی کریں۔ (10)",
-              "content": "1. قطر الارض کی کتنی بڑی پیمائش ہے؟\n   ا) ایشیا   ب) چین   ج) ساوت\n2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n8. صحراؤں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n9. بین الاقوامی تجارت کو اسٹوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
+              "content": "1. قشر الارض کی کتنی بڑی پلیٹیں ہیں؟\n   ا) 6   ب) 7   ج) 8\n2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n8. فصلوں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n9. بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
               "text": "سوال نمبر 1: درست جواب کی نشان دہی کریں۔ (10)",
               "textUrdu": "سوال نمبر 1: درست جواب کی نشان دہی کریں۔ (10)",
               "marks": 10,
               "sourceOrder": 1,
-              "priority": "all"
+              "priority": "all",
+              "operationalMarks": 10
             },
             {
               "id": "official-first-term-2026-class-7-social-studies-section-2",
@@ -6091,9 +6166,10 @@
               "content": "1. دراڑیں یا فالٹ کسے کہتے ہیں؟\n2. آتش فشانی عمل سے کیا مراد ہے؟\n3. عربیاں کالی سے کیا مراد ہے؟\n4. عربیاں کالی کی کتنی اقسام ہیں؟ نام لکھیں۔\n5. عمل کرلاؤ کی تعریف بیان کریں۔",
               "text": "سوال نمبر 2: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
               "textUrdu": "سوال نمبر 2: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
-              "marks": 3,
+              "marks": 15,
               "sourceOrder": 2,
-              "priority": "all"
+              "priority": "all",
+              "operationalMarks": 15
             },
             {
               "id": "official-first-term-2026-class-7-social-studies-section-3",
@@ -6103,9 +6179,10 @@
               "content": "1. ارض زلزلہ سے کیا مراد ہے؟ اس کی کتنی اقسام ہیں؟\n2. سردیاباد سے کیا مراد ہے؟\n3. پاکستان میں بجلی پیدا کرنے کے ذرائع کے نام لکھیں۔\n4. صنعت سے کیا مراد ہے؟\n5. پاکستان کی کوئی 3 فصلوں کے نام لکھیں۔",
               "text": "سوال نمبر 3: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
               "textUrdu": "سوال نمبر 3: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
-              "marks": 3,
+              "marks": 15,
               "sourceOrder": 3,
-              "priority": "all"
+              "priority": "all",
+              "operationalMarks": 15
             },
             {
               "id": "official-first-term-2026-class-7-social-studies-section-4",
@@ -6115,12 +6192,13 @@
               "content": "1. پاکستان میں بجلی پیدا کرنے والے ذرائع کی وضاحت کریں۔\n2. بادل اور ان کی اقسام کی وضاحت کریں۔\n3. عربیاں کالی اور اس کی اقسام کے متعلق بیان کریں۔",
               "text": "سوال نمبر 4: تفصیلی سوالوں کے جوابات دیں۔ کوئی 2۔ (2×5=10)",
               "textUrdu": "سوال نمبر 4: تفصیلی سوالوں کے جوابات دیں۔ کوئی 2۔ (2×5=10)",
-              "marks": 2,
+              "marks": 10,
               "sourceOrder": 4,
-              "priority": "all"
+              "priority": "all",
+              "operationalMarks": 10
             }
           ],
-          "marks": 0
+          "marks": 50
         }
       },
       "official_section": [
@@ -6129,12 +6207,13 @@
           "type": "official_section",
           "medium": "urdu",
           "heading": "سوال نمبر 1: درست جواب کی نشان دہی کریں۔ (10)",
-          "content": "1. قطر الارض کی کتنی بڑی پیمائش ہے؟\n   ا) ایشیا   ب) چین   ج) ساوت\n2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n8. صحراؤں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n9. بین الاقوامی تجارت کو اسٹوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
+          "content": "1. قشر الارض کی کتنی بڑی پلیٹیں ہیں؟\n   ا) 6   ب) 7   ج) 8\n2. زمین سے بالائی مینٹل کی موٹائی کتنے کلومیٹر ہے؟\n   ا) 670 کلومیٹر   ب) 770 کلومیٹر   ج) 870 کلومیٹر\n3. عربیاں کالی کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n4. پہاڑوں کا ٹوٹ پھوٹ کر چھوٹے ذرات میں تبدیل ہونا کہلاتا ہے؟\n   ا) کیمیائی   ب) طبعی فرسودگی   ج) تودی زمین\n5. ہماری زمین پر روشنی اور حرارت کا سب سے بڑا ذریعہ ہے؟\n   ا) بجلی   ب) چاند   ج) سورج\n6. ہوا کا دباؤ معلوم کرنے والا آلہ کیا کہلاتا ہے؟\n   ا) تھرمامیٹر   ب) بیرومیٹر   ج) بارش ناپا\n7. پاکستان میں بجلی پیدا کرنے کا سب سے سستا ذریعہ کون سا ہے؟\n   ا) تھرمل بجلی   ب) پن بجلی   ج) ایٹمی توانائی\n8. فصلوں کی کتنی اقسام ہیں؟\n   ا) تین   ب) چار   ج) پانچ\n9. بین الاقوامی تجارت کن راستوں سے ہوتی ہے؟\n   ا) ہوائی   ب) بحری   ج) زمینی\n10. آمد و رفت کا تیز ترین ذریعہ کون سا ہے؟\n   ا) ریل   ب) بس   ج) ہوائی جہاز",
           "text": "سوال نمبر 1: درست جواب کی نشان دہی کریں۔ (10)",
           "textUrdu": "سوال نمبر 1: درست جواب کی نشان دہی کریں۔ (10)",
           "marks": 10,
           "sourceOrder": 1,
-          "priority": "all"
+          "priority": "all",
+          "operationalMarks": 10
         },
         {
           "id": "official-first-term-2026-class-7-social-studies-section-2",
@@ -6144,9 +6223,10 @@
           "content": "1. دراڑیں یا فالٹ کسے کہتے ہیں؟\n2. آتش فشانی عمل سے کیا مراد ہے؟\n3. عربیاں کالی سے کیا مراد ہے؟\n4. عربیاں کالی کی کتنی اقسام ہیں؟ نام لکھیں۔\n5. عمل کرلاؤ کی تعریف بیان کریں۔",
           "text": "سوال نمبر 2: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
           "textUrdu": "سوال نمبر 2: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
-          "marks": 3,
+          "marks": 15,
           "sourceOrder": 2,
-          "priority": "all"
+          "priority": "all",
+          "operationalMarks": 15
         },
         {
           "id": "official-first-term-2026-class-7-social-studies-section-3",
@@ -6156,9 +6236,10 @@
           "content": "1. ارض زلزلہ سے کیا مراد ہے؟ اس کی کتنی اقسام ہیں؟\n2. سردیاباد سے کیا مراد ہے؟\n3. پاکستان میں بجلی پیدا کرنے کے ذرائع کے نام لکھیں۔\n4. صنعت سے کیا مراد ہے؟\n5. پاکستان کی کوئی 3 فصلوں کے نام لکھیں۔",
           "text": "سوال نمبر 3: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
           "textUrdu": "سوال نمبر 3: مختصر سوالوں کے جوابات دیں۔ (3×5=15)",
-          "marks": 3,
+          "marks": 15,
           "sourceOrder": 3,
-          "priority": "all"
+          "priority": "all",
+          "operationalMarks": 15
         },
         {
           "id": "official-first-term-2026-class-7-social-studies-section-4",
@@ -6168,12 +6249,13 @@
           "content": "1. پاکستان میں بجلی پیدا کرنے والے ذرائع کی وضاحت کریں۔\n2. بادل اور ان کی اقسام کی وضاحت کریں۔\n3. عربیاں کالی اور اس کی اقسام کے متعلق بیان کریں۔",
           "text": "سوال نمبر 4: تفصیلی سوالوں کے جوابات دیں۔ کوئی 2۔ (2×5=10)",
           "textUrdu": "سوال نمبر 4: تفصیلی سوالوں کے جوابات دیں۔ کوئی 2۔ (2×5=10)",
-          "marks": 2,
+          "marks": 10,
           "sourceOrder": 4,
-          "priority": "all"
+          "priority": "all",
+          "operationalMarks": 10
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 50,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
@@ -6187,7 +6269,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-7-mathematics",
@@ -6211,9 +6294,9 @@
         "timeAllowed": "As announced",
         "examDate": "__________"
       },
-      "sourceTotalNote": "As stated by teacher source.",
+      "sourceTotalNote": "Teacher/header total is 60. Explicit section labels total 50 (10+16+14+10); preserve both values and do not invent the missing 10 marks.",
       "sourceContentSha256": "da9a3105a4766040ac3a0331d29263498653265d1d3d14aa29223e435ca3738a",
-      "qaNotes": "preserve source, do not invent corrections:\n- Header states 60 but explicit section marks total 50; 10 marks appear missing.\n- Q4(1a) supplied A and A′ overlap, which is mathematically unusual; preserved as source.\n- Some encircled-digit formatting was lost in plain-text source.",
+      "qaNotes": "Source conflict retained intentionally. Q2/Q3/Q4 marks reflect the full expressions in the source headings.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -6237,7 +6320,7 @@
               "content": "1. Express set in tabular form: O = set of any odd numbers which are divisible by 3.\n2. If A={2,4,6,8}, B={1,3,5,7}, find A∪B.\n3. If R={1,2,3,4,5,6}, S={0,3,6,9}, find R∩S.\n4. If U={1,2,3,...10} and A={0,1,2,3}, find A'.\n5. If A={0,2,4,6,8}, B={1,3,5,7,9}, find A/B.\n6. Write down the rational number whose numerator is (-7)×2 and denominator is 21-2.\n7. Represent the rational number -2 on the number line.\n8. Fill in the blanks: 4/5 = -12/? = 20/?.\n9. Add: 3/5 and -2/5.\n10. Simplify: (6/15) ÷ (4/35).",
               "text": "Q2. Attempt any eight questions. (8×2=16)",
               "textUrdu": "",
-              "marks": 8,
+              "marks": 16,
               "sourceOrder": 2,
               "priority": "all"
             },
@@ -6249,7 +6332,7 @@
               "content": "1. Multiply: 4/15 by 3/8.\n2. Round off to the decimal place indicated by encircled digits: a) 416.595  b) 7.91659.\n3. Which rational numbers can be terminating or non-terminating decimal? i) -13/4  ii) -5/7  iii) -5/80.\n4. Express the decimals as fractions: i) 5.04  ii) 0.25.\n5. Find decimal value: 6.6/7.\n6. Find the square of 4/3.\n7. Find the positive square root: 1764.\n8. Find square root: 56.25.\n9. Find square root of 1.7×34×0.8.\n10. The total cost of 10 tickets is Rs 200. Find the cost of 25 tickets.",
               "text": "Q3. Attempt any seven questions. (7×2=14)",
               "textUrdu": "",
-              "marks": 7,
+              "marks": 14,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -6261,12 +6344,12 @@
               "content": "1. a) Find universal set of A={1,3,5,7,9} and A'={4,5,6,7,12}.\n   b) Arrange in ascending order: 2/5, -1/2, 8/-15, -3/10.\n2. a) Show that (-8/5×3/4) + (7/8×-16/25).\n   b) Hassan had a piece of cloth measuring 674.95 cm. He cuts off a 217.43 cm long piece. What length remains? Round off to one decimal place.\n3. a) If U={1,2,3,4,5,6,7}, A={5,6,7} and B={1,3,5}, show that (A∪B)'=A'∩B'.\n   b) Write 1/5 in decimal form by changing the denominator to a power of 10.",
               "text": "Q4. Long Questions - Attempt any 2. (2×5=10)",
               "textUrdu": "",
-              "marks": 2,
+              "marks": 10,
               "sourceOrder": 4,
               "priority": "all"
             }
           ],
-          "marks": 0
+          "marks": 50
         }
       },
       "official_section": [
@@ -6290,7 +6373,7 @@
           "content": "1. Express set in tabular form: O = set of any odd numbers which are divisible by 3.\n2. If A={2,4,6,8}, B={1,3,5,7}, find A∪B.\n3. If R={1,2,3,4,5,6}, S={0,3,6,9}, find R∩S.\n4. If U={1,2,3,...10} and A={0,1,2,3}, find A'.\n5. If A={0,2,4,6,8}, B={1,3,5,7,9}, find A/B.\n6. Write down the rational number whose numerator is (-7)×2 and denominator is 21-2.\n7. Represent the rational number -2 on the number line.\n8. Fill in the blanks: 4/5 = -12/? = 20/?.\n9. Add: 3/5 and -2/5.\n10. Simplify: (6/15) ÷ (4/35).",
           "text": "Q2. Attempt any eight questions. (8×2=16)",
           "textUrdu": "",
-          "marks": 8,
+          "marks": 16,
           "sourceOrder": 2,
           "priority": "all"
         },
@@ -6302,7 +6385,7 @@
           "content": "1. Multiply: 4/15 by 3/8.\n2. Round off to the decimal place indicated by encircled digits: a) 416.595  b) 7.91659.\n3. Which rational numbers can be terminating or non-terminating decimal? i) -13/4  ii) -5/7  iii) -5/80.\n4. Express the decimals as fractions: i) 5.04  ii) 0.25.\n5. Find decimal value: 6.6/7.\n6. Find the square of 4/3.\n7. Find the positive square root: 1764.\n8. Find square root: 56.25.\n9. Find square root of 1.7×34×0.8.\n10. The total cost of 10 tickets is Rs 200. Find the cost of 25 tickets.",
           "text": "Q3. Attempt any seven questions. (7×2=14)",
           "textUrdu": "",
-          "marks": 7,
+          "marks": 14,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -6314,12 +6397,12 @@
           "content": "1. a) Find universal set of A={1,3,5,7,9} and A'={4,5,6,7,12}.\n   b) Arrange in ascending order: 2/5, -1/2, 8/-15, -3/10.\n2. a) Show that (-8/5×3/4) + (7/8×-16/25).\n   b) Hassan had a piece of cloth measuring 674.95 cm. He cuts off a 217.43 cm long piece. What length remains? Round off to one decimal place.\n3. a) If U={1,2,3,4,5,6,7}, A={5,6,7} and B={1,3,5}, show that (A∪B)'=A'∩B'.\n   b) Write 1/5 in decimal form by changing the denominator to a power of 10.",
           "text": "Q4. Long Questions - Attempt any 2. (2×5=10)",
           "textUrdu": "",
-          "marks": 2,
+          "marks": 10,
           "sourceOrder": 4,
           "priority": "all"
         }
       ],
-      "official_section_marks": 0,
+      "official_section_marks": 50,
       "editorSettings": {
         "template": "academic",
         "printMode": "a4",
@@ -6333,7 +6416,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY_WITH_SOURCE_CONFLICT"
     },
     {
       "id": "official-first-term-2026-class-7-english",
@@ -7240,7 +7324,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "ASSPS_OCT1_MATH_FINAL_20260927_V2",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "8",
@@ -7252,12 +7336,12 @@
         "totalMarks": 60,
         "session": "2026-2027",
         "paperCode": "FT26-8-MATHEMATICS",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-10-01"
       },
-      "sourceTotalNote": "Provisional: total not stated; 60 inferred from 10 MCQ + 30 short + likely 20 long.",
+      "sourceTotalNote": "Principal-approved scheme: 10 MCQs ×1=10, attempt any 10 of 12 short questions ×3=30, and attempt any 2 of 3 long questions ×10=20. Total 60.",
       "sourceContentSha256": "45c95c04434a3cf8ca6e8440c01100622c5d554db7ef91d390372300440ffd16",
-      "qaNotes": "preserve source, do not invent corrections:\n- Total marks were not stated; 60 is provisional.\n- Short heading says 10×3=30 but lists 12 questions and does not state how many to attempt.\n- Long-question marks/attempt rule were not stated; 20 is provisional to reach 60.",
+      "qaNotes": "Choice statements are explicit. Two of twelve short questions are optional; one of three long questions is optional. No question content changed.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -7277,9 +7361,9 @@
               "id": "official-first-term-2026-class-8-mathematics-section-2",
               "type": "official_section",
               "medium": "english",
-              "heading": "MCQs. (10×1=10)",
+              "heading": "Q1. Select the correct answer. (10×1=10)",
               "content": "1. Which is not a rational number?\n   a) 4.26   b) 2.252525...   c) √5   d) 3√9\n2. The value of -|-3| is:\n   a) -3   b) 3   c) 9   d) √3\n3. Number of significant figures in 0.062 is:\n   a) 1   b) 2   c) 3   d) 4\n4. Number 1.48356 up to 4 significant figures is:\n   a) 1.48360   b) 1.48300   c) 1.484   d) 1.4835\n5. ____ is a rational number.\n   a) π   b) √25   c) √30   d) √11\n6. In the sequence 3, 1, -1, -3, -5, the term-to-term rule is:\n   a) Add -1   b) Add 2   c) Multiply by -1   d) Subtract 2\n7. Putting a₁=4, n=5 and d=-2 in aₙ=a₁+(n-1)d, a₅ is:\n   a) -2   b) -4   c) 2   d) 4\n8. The next term in the sequence 888, 444, 222, ... is:\n   a) 889   b) 887   c) 333   d) 111\n9. In -5x⁴y³z² the coefficient is:\n   a) 5   b) -5   c) 4   d) x⁷\n10. Which is a polynomial?\n   a) 4x⁻³y   b) 3x/y   c) √3x   d) 6x³y²",
-              "text": "MCQs. (10×1=10)",
+              "text": "Q1. Select the correct answer. (10×1=10)",
               "textUrdu": "",
               "marks": 10,
               "sourceOrder": 2,
@@ -7289,11 +7373,11 @@
               "id": "official-first-term-2026-class-8-mathematics-section-3",
               "type": "official_section",
               "medium": "english",
-              "heading": "Short Questions. (10×3=30)",
+              "heading": "Q2. Attempt any ten short questions. (10×3=30)",
               "content": "1. Find absolute value: -9.\n2. Locate 6.75 on the number line.\n3. Round off to 3 significant figures: i) 672879   ii) 325708.\n4. Estimate: 89×27.\n5. Find the square of 14.\n6. Which is the perfect square: 432.\n7. Find square root of 121 by division method.\n8. Find cube of 8.\n9. Find cube root of 512.\n10. Identify the term-to-term rule: 64, 32, 16, ___, ___.\n11. Write in scientific notation: 6,780,000.\n12. Write in standard form: 6.75×10⁶.",
-              "text": "Short Questions. (10×3=30)",
+              "text": "Q2. Attempt any ten short questions. (10×3=30)",
               "textUrdu": "",
-              "marks": 10,
+              "marks": 30,
               "sourceOrder": 3,
               "priority": "all"
             },
@@ -7301,9 +7385,9 @@
               "id": "official-first-term-2026-class-8-mathematics-section-4",
               "type": "official_section",
               "medium": "english",
-              "heading": "Long Questions. (20 - provisional)",
+              "heading": "Q3. Attempt any two long questions. (2×10=20)",
               "content": "1. Find the value of x² + 1/x² when x + 1/x = 7.\n2. Find the cube of 2m + 1.\n3. Resolve by using formula a²-b²=(a+b)(a-b): 2y² - 128.",
-              "text": "Long Questions. (20 - provisional)",
+              "text": "Q3. Attempt any two long questions. (2×10=20)",
               "textUrdu": "",
               "marks": 20,
               "sourceOrder": 4,
@@ -7330,9 +7414,9 @@
           "id": "official-first-term-2026-class-8-mathematics-section-2",
           "type": "official_section",
           "medium": "english",
-          "heading": "MCQs. (10×1=10)",
+          "heading": "Q1. Select the correct answer. (10×1=10)",
           "content": "1. Which is not a rational number?\n   a) 4.26   b) 2.252525...   c) √5   d) 3√9\n2. The value of -|-3| is:\n   a) -3   b) 3   c) 9   d) √3\n3. Number of significant figures in 0.062 is:\n   a) 1   b) 2   c) 3   d) 4\n4. Number 1.48356 up to 4 significant figures is:\n   a) 1.48360   b) 1.48300   c) 1.484   d) 1.4835\n5. ____ is a rational number.\n   a) π   b) √25   c) √30   d) √11\n6. In the sequence 3, 1, -1, -3, -5, the term-to-term rule is:\n   a) Add -1   b) Add 2   c) Multiply by -1   d) Subtract 2\n7. Putting a₁=4, n=5 and d=-2 in aₙ=a₁+(n-1)d, a₅ is:\n   a) -2   b) -4   c) 2   d) 4\n8. The next term in the sequence 888, 444, 222, ... is:\n   a) 889   b) 887   c) 333   d) 111\n9. In -5x⁴y³z² the coefficient is:\n   a) 5   b) -5   c) 4   d) x⁷\n10. Which is a polynomial?\n   a) 4x⁻³y   b) 3x/y   c) √3x   d) 6x³y²",
-          "text": "MCQs. (10×1=10)",
+          "text": "Q1. Select the correct answer. (10×1=10)",
           "textUrdu": "",
           "marks": 10,
           "sourceOrder": 2,
@@ -7342,11 +7426,11 @@
           "id": "official-first-term-2026-class-8-mathematics-section-3",
           "type": "official_section",
           "medium": "english",
-          "heading": "Short Questions. (10×3=30)",
+          "heading": "Q2. Attempt any ten short questions. (10×3=30)",
           "content": "1. Find absolute value: -9.\n2. Locate 6.75 on the number line.\n3. Round off to 3 significant figures: i) 672879   ii) 325708.\n4. Estimate: 89×27.\n5. Find the square of 14.\n6. Which is the perfect square: 432.\n7. Find square root of 121 by division method.\n8. Find cube of 8.\n9. Find cube root of 512.\n10. Identify the term-to-term rule: 64, 32, 16, ___, ___.\n11. Write in scientific notation: 6,780,000.\n12. Write in standard form: 6.75×10⁶.",
-          "text": "Short Questions. (10×3=30)",
+          "text": "Q2. Attempt any ten short questions. (10×3=30)",
           "textUrdu": "",
-          "marks": 10,
+          "marks": 30,
           "sourceOrder": 3,
           "priority": "all"
         },
@@ -7354,9 +7438,9 @@
           "id": "official-first-term-2026-class-8-mathematics-section-4",
           "type": "official_section",
           "medium": "english",
-          "heading": "Long Questions. (20 - provisional)",
+          "heading": "Q3. Attempt any two long questions. (2×10=20)",
           "content": "1. Find the value of x² + 1/x² when x + 1/x = 7.\n2. Find the cube of 2m + 1.\n3. Resolve by using formula a²-b²=(a+b)(a-b): 2y² - 128.",
-          "text": "Long Questions. (20 - provisional)",
+          "text": "Q3. Attempt any two long questions. (2×10=20)",
           "textUrdu": "",
           "marks": 20,
           "sourceOrder": 4,
@@ -7377,7 +7461,8 @@
         "urduLineHeight": 2.2,
         "englishLineHeight": 1.55
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "printReadiness": "READY"
     },
     {
       "id": "official-first-term-2026-class-8-english",
@@ -7386,7 +7471,7 @@
       "structureMode": "paper_studio_native",
       "paperSource": "official-first-term-v12-word-reference",
       "sourceTab": "saved",
-      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13",
+      "sourceVersion": "MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V12_NATIVE_EDITOR_V13_DATESHEET_20260929_LAYOUT_RULES_V1",
       "config": {
         "title": "FIRST TERM EXAMINATION 2026",
         "classLevel": "8",
@@ -7398,12 +7483,13 @@
         "totalMarks": 75,
         "session": "2026-2027",
         "paperCode": "FT26-8-ENGLISH",
-        "timeAllowed": "As announced",
-        "examDate": "__________"
+        "timeAllowed": "2 Hours",
+        "examDate": "2026-09-29",
+        "paperTime": "10:00 AM - 12:00 PM"
       },
       "sourceTotalNote": "Provisional: source did not state a total; 75 used to match neighboring English term-paper pattern.",
       "sourceContentSha256": "3615bc946f134d948473001b40071ed1bed048c424e6e24c64348730a86155d9",
-      "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.",
+      "qaNotes": "preserve source, do not invent corrections:\n- Source did not state total marks; 75 is provisional based on neighboring class English papers.\n- Only 9 MCQs are supplied; a 10th MCQ may be missing.\n- Source gives no section-wise marks.\\n29 Sep print rule: total 75 remains provisional from prior source package; source gives no section-wise marks and only 9 MCQs; do not invent a 10th MCQ or section marks.",
       "selectedQuestions": {
         "official_section": {
           "questions": [
@@ -7441,7 +7527,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 3,
-              "priority": "all"
+              "priority": "all",
+              "answerLinesPerItem": 1
             },
             {
               "id": "official-first-term-2026-class-8-english-section-4",
@@ -7477,7 +7564,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 6,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 10
             },
             {
               "id": "official-first-term-2026-class-8-english-section-7",
@@ -7489,7 +7577,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 7,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             },
             {
               "id": "official-first-term-2026-class-8-english-section-8",
@@ -7501,7 +7590,8 @@
               "textUrdu": "",
               "marks": 0,
               "sourceOrder": 8,
-              "priority": "all"
+              "priority": "all",
+              "answerLines": 8
             }
           ],
           "marks": 0
@@ -7542,7 +7632,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 3,
-          "priority": "all"
+          "priority": "all",
+          "answerLinesPerItem": 1
         },
         {
           "id": "official-first-term-2026-class-8-english-section-4",
@@ -7578,7 +7669,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 6,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 10
         },
         {
           "id": "official-first-term-2026-class-8-english-section-7",
@@ -7590,7 +7682,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 7,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         },
         {
           "id": "official-first-term-2026-class-8-english-section-8",
@@ -7602,7 +7695,8 @@
           "textUrdu": "",
           "marks": 0,
           "sourceOrder": 8,
-          "priority": "all"
+          "priority": "all",
+          "answerLines": 8
         }
       ],
       "official_section_marks": 0,
@@ -7614,12 +7708,25 @@
         "showAnswerLines": false,
         "showUrduHeaders": false,
         "showSectionLine": true,
-        "fontSize": 11,
-        "headingSize": 12,
+        "fontSize": 13,
+        "headingSize": 14,
         "urduLineHeight": 2.2,
-        "englishLineHeight": 1.55
+        "englishLineHeight": 1.5,
+        "fontFamily": "'Times New Roman', Times, serif",
+        "letterSpacing": 0,
+        "wordSpacing": 0,
+        "mcqLayout": "matrix-table",
+        "shortLayout": "1-column"
       },
-      "createdAt": "2026-09-20T00:00:00.000Z"
+      "createdAt": "2026-09-20T00:00:00.000Z",
+      "examSchedule": {
+        "date": "2026-09-29",
+        "day": "Tuesday",
+        "paperTime": "10:00 AM - 12:00 PM",
+        "dateSheetVersion": "assps-first-term-exam-2026-2027-v4"
+      },
+      "paperRulesVersion": "ASSPS_OFFICIAL_PAPER_RULES_2026_09_29_V1",
+      "printReadiness": "REVIEW_SOURCE_MCQS"
     },
     {
       "id": "official-first-term-2026-class-1-science",

@@ -1,0 +1,119 @@
+// CanonicalEditorExtensions.js — Safe Tiptap / ProseMirror extensions for Canonical Paper Editor V2 (Rules 15, 22)
+import StarterKit from '@tiptap/starter-kit'
+import { TextStyle } from '@tiptap/extension-text-style'
+import TextAlign from '@tiptap/extension-text-align'
+import Highlight from '@tiptap/extension-highlight'
+import Superscript from '@tiptap/extension-superscript'
+import Subscript from '@tiptap/extension-subscript'
+import { TableKit } from '@tiptap/extension-table'
+
+import {
+  SUPPORTED_FONTS,
+  SUPPORTED_SIZES,
+  SUPPORTED_COLORS,
+  SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
+} from './editorProjection.js'
+
+export {
+  SUPPORTED_FONTS,
+  SUPPORTED_SIZES,
+  SUPPORTED_COLORS,
+  SUPPORTED_HIGHLIGHTS,
+  SUPPORTED_LINE_HEIGHTS,
+  SUPPORTED_PARAGRAPH_SPACING,
+}
+
+export const CanonicalTextStyle = TextStyle.extend({
+  addAttributes() {
+    return {
+      ...(this.parent?.() || {}),
+      fontFamily: {
+        default: null,
+        parseHTML: element => element.style.fontFamily || null,
+        renderHTML: attrs => (attrs.fontFamily ? { style: `font-family: ${attrs.fontFamily}` } : {}),
+      },
+      fontSize: {
+        default: null,
+        parseHTML: element => element.style.fontSize || null,
+        renderHTML: attrs => (attrs.fontSize ? { style: `font-size: ${attrs.fontSize}` } : {}),
+      },
+      color: {
+        default: null,
+        parseHTML: element => element.style.color || null,
+        renderHTML: attrs => (attrs.color ? { style: `color: ${attrs.color}` } : {}),
+      },
+    }
+  },
+})
+
+export const CanonicalTextAlign = TextAlign.extend({
+  addGlobalAttributes() {
+    return [
+      ...(this.parent?.() || []),
+      {
+        types: ['paragraph', 'heading'],
+        attributes: {
+          dir: {
+            default: null,
+            parseHTML: element => element.getAttribute('dir') || null,
+            renderHTML: attrs => (attrs.dir ? { dir: attrs.dir } : {}),
+          },
+          lineHeight: {
+            default: null,
+            parseHTML: element => element.style.lineHeight || null,
+            renderHTML: attrs => (
+              SUPPORTED_LINE_HEIGHTS.includes(String(attrs.lineHeight || ''))
+                ? { style: `line-height: ${attrs.lineHeight}` }
+                : {}
+            ),
+          },
+          paragraphSpacing: {
+            default: null,
+            parseHTML: element => element.style.marginBottom || null,
+            renderHTML: attrs => (
+              SUPPORTED_PARAGRAPH_SPACING.includes(String(attrs.paragraphSpacing || ''))
+                ? { style: `margin-bottom: ${attrs.paragraphSpacing}` }
+                : {}
+            ),
+          },
+        },
+      },
+    ]
+  },
+})
+
+/**
+ * Returns the exact list of safe extensions for in-place text editing in B3 (Rule 22).
+ * Structural input-rules that can destabilize question boundaries remain disabled.
+ * Horizontal rules and tables are enabled explicitly for the Unified Editor INSERT tab.
+ */
+export function getCanonicalEditorExtensions() {
+  return [
+    StarterKit.configure({
+      history: true,
+      heading: { levels: [1, 2, 3, 4] },
+      hardBreak: true,
+      bulletList: false,
+      orderedList: false,
+      listItem: false,
+      blockquote: false,
+      codeBlock: false,
+      horizontalRule: true,
+      dropcursor: false,
+      gapcursor: false,
+    }),
+    CanonicalTextStyle,
+    CanonicalTextAlign.configure({
+      types: ['paragraph', 'heading'],
+      alignments: ['left', 'center', 'right', 'justify'],
+    }),
+    Highlight.configure({ multicolor: true }),
+    Superscript,
+    Subscript,
+    TableKit.configure({
+      table: { resizable: false },
+    }),
+  ]
+}

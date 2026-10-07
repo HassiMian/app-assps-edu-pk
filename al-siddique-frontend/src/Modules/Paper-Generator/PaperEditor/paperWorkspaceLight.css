@@ -1,0 +1,117 @@
+/* V11 – Paper Workspace controls only. The printable paper is deliberately excluded.
+   Theme hues: navy, warm gold, neutral white/grey. Status colors stay semantic. */
+
+.pts-paper-generator-shell[data-paper-theme="light"] .pts-generator-surface {
+  color: var(--pg-text, #102b4c);
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls] {
+  background: var(--pg-toolbar, #fff) !important;
+  border-bottom: 1px solid var(--pg-border, #cbd5e1);
+  box-shadow: 0 2px 14px rgba(16,43,76,.06);
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+:is(input:not([type="checkbox"]):not([type="range"]):not([type="color"]), select, textarea),
+.pts-paper-generator-shell[data-paper-theme="light"] [data-section-inspector]
+:is(input:not([type="checkbox"]):not([type="range"]):not([type="color"]), select, textarea) {
+  background: var(--pg-input-bg, #f8fafc) !important;
+  color: var(--pg-text, #102b4c) !important;
+  border: 1px solid var(--pg-border, #cbd5e1) !important;
+  color-scheme: light;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+:is(input, select, textarea, button):focus-visible,
+.pts-paper-generator-shell[data-paper-theme="light"] [data-section-inspector]
+:is(input, select, textarea, button):focus-visible,
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar]
+:is(input, select, button):focus-visible {
+  outline: 2px solid var(--pg-gold, #966a13) !important;
+  outline-offset: 2px;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[aria-pressed],
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[title^="Zoom"],
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[aria-label="Full screen"],
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[aria-label="Exit full screen"],
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[data-edit-paper-toggle] {
+  color: var(--pg-text, #102b4c) !important;
+  background: var(--pg-chip, #f2f5f9) !important;
+  border: 1px solid var(--pg-border, #cbd5e1) !important;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[aria-pressed="true"],
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls]
+button[data-edit-paper-toggle]:hover {
+  background: #f8eed8 !important;
+  border-color: var(--pg-gold, #966a13) !important;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-actions] button:nth-last-child(3),
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-actions] button:nth-last-child(2) {
+  background: #102b4c !important;
+  color: #ffffff !important;
+  border: 1px solid #102b4c !important;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-actions] button:last-child {
+  background: #dfbb69 !important;
+  color: #102b4c !important;
+  border: 1px solid #966a13 !important;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-section-inspector],
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar] {
+  background: #ffffff !important;
+  color: #102b4c !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 32px rgba(16,43,76,.12) !important;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-section-inspector] button:not(:disabled),
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar] button:not(:disabled),
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar] select {
+  color: #102b4c;
+  border-color: #cbd5e1;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar]
+button[aria-pressed="true"] {
+  background: #dfbb69 !important;
+  color: #102b4c !important;
+  border-color: #966a13 !important;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar]
+input[type="color"] {
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-paper-controls] ::placeholder,
+.pts-paper-generator-shell[data-paper-theme="light"] [data-section-inspector] ::placeholder {
+  color: #536782 !important;
+  opacity: 1;
+}
+
+.pts-paper-generator-shell[data-paper-theme="light"] [data-inline-selection-toolbar] button:disabled,
+.pts-paper-generator-shell[data-paper-theme="light"] [data-section-inspector] button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+@media print {
+  .pts-paper-generator-shell [data-paper-controls],
+  .pts-paper-generator-shell [data-section-inspector],
+  .pts-paper-generator-shell [data-inline-selection-toolbar] {
+    display: none !important;
+  }
+}

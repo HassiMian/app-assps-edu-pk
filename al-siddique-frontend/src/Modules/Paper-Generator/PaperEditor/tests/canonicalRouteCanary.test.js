@@ -1,0 +1,150 @@
+import { test } from 'node:test'
+import assert from 'node:assert'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+import { resolvePaperRoute } from '../../resolvePaperRoute.js'
+import {
+  resolvePaperEditorRoute,
+  isPristineOfficialV13Paper,
+} from '../editorV2/canonicalRouteGuards.js'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
+const v13 = JSON.parse(fs.readFileSync(v13Path, 'utf8'))
+
+test('Unified Workspace: all 43 official V13 papers always open in Paper Workspace', () => {
+  assert.strictEqual(v13.papers.length, 43)
+  for (const paper of v13.papers) {
+    assert.ok(Array.isArray(paper.official_section) && paper.official_section.length > 0, `${paper.id}: Workspace mirror required`)
+    assert.strictEqual(resolvePaperRoute(paper), 'build', paper.id)
+    assert.strictEqual(resolvePaperRoute(paper, 'build'), 'build', `${paper.id}: build stays Workspace`)
+    assert.strictEqual(resolvePaperRoute(paper, 'word_editor'), 'build', `${paper.id}: Canonical UI must not override Workspace`)
+    assert.strictEqual(resolvePaperRoute(paper, null, { officialCanonicalCanary: true }), 'build', `${paper.id}: old canary flag must not expose Canonical UI`)
+  }
+})
+
+test('Phase 15: explicit official canary sends all pristine V13 papers through canonical guard', () => {
+  assert.strictEqual(v13.papers.length, 43)
+  for (const paper of v13.papers) {
+    assert.strictEqual(isPristineOfficialV13Paper(paper), true, `${paper.id} must be pristine`)
+    assert.strictEqual(
+      resolvePaperRoute(paper, null, { officialCanonicalCanary: true }),
+      'build',
+      `${paper.id}: teacher-facing route remains Workspace even while internal canonical conversion stays testable`
+    )
+    const decision = resolvePaperEditorRoute(paper)
+    assert.strictEqual(decision.route, 'CANONICAL_V2', `${paper.id}: ${decision.reason}`)
+    assert.strictEqual(decision.reason, 'PRISTINE_V13_CONVERTED_TO_CANONICAL')
+    assert.strictEqual(decision.resolvedPaper?.schemaVersion, 3)
+    assert.ok(decision.resolvedPaper?.id?.startsWith('doc__'))
+  }
+})
+test('Phase 20: modified official V13 imports safely into the unified canonical editor', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
+  assert.ok(source)
+  const modified = structuredClone(source)
+  modified.selectedQuestions.official_section.questions[1].content =
+    modified.selectedQuestions.official_section.questions[1].content.replace(
+      'Why did Saba cry suddenly?',
+      'USER MODIFICATION SENTINEL?'
+    )
+
+  assert.strictEqual(isPristineOfficialV13Paper(modified), false)
+  assert.strictEqual(resolvePaperRoute(modified), 'build')
+  const decision = resolvePaperEditorRoute(modified)
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+  const allText = decision.resolvedPaper.sections
+    .flatMap(section => section.nodes || [])
+    .map(node => node.stemText || node.rawText || '')
+    .join(' | ')
+  assert.ok(allText.includes('USER MODIFICATION SENTINEL?'))
+})
+
+test('Phase 15: legacy V12, Early Years and board-pattern routes do not change under canary', () => {
+  const policy = { officialCanonicalCanary: true }
+
+  assert.strictEqual(
+    resolvePaperRoute({
+      id: 'official-first-term-2026-class-5-urdu',
+      documentFormat: 'official-v12',
+    }, null, policy),
+    'build'
+  )
+
+  assert.strictEqual(
+    resolvePaperRoute({ id: 'ey-starter-english-2026', classStage: 'starter' }, null, policy),
+    'early_years'
+  )
+
+  assert.strictEqual(
+    resolvePaperRoute({ id: 'custom-board', structureMode: 'board_pattern' }, null, policy),
+    'board_pattern'
+  )
+})
+
+test('Unified Workspace: canonical official document stays in teacher-facing Workspace', () => {
+  const canonicalPaper = {
+    id: 'doc__official-first-term-2026-class-5-english',
+    schemaVersion: 2,
+    documentFormat: 'canonical-v2',
+  }
+  assert.strictEqual(resolvePaperRoute(canonicalPaper), 'build')
+  assert.strictEqual(
+    resolvePaperRoute(canonicalPaper, null, { officialCanonicalCanary: true }),
+    'build'
+  )
+  assert.strictEqual(
+    resolvePaperRoute(canonicalPaper, null, { forceOfficialLegacyRoute: true }),
+    'build'
+  )
+})
+
+test('Phase 16: schedule-only header metadata changes remain canonical-safe', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-1-countdown-mathematics')
+  assert.ok(source)
+
+  const scheduled = structuredClone(source)
+  scheduled.config.examDate = '2026-09-30'
+  scheduled.config.timeAllowed = '2 Hours'
+
+  assert.strictEqual(isPristineOfficialV13Paper(scheduled), true)
+  const decision = resolvePaperEditorRoute(scheduled)
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.resolvedPaper?.metadata?.examDate, '2026-09-30')
+  assert.strictEqual(decision.resolvedPaper?.metadata?.timeAllowed, '2 Hours')
+})
+
+test('Phase 20: academic marks mutation fails pristine check but is preserved by canonical working-copy import', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
+  assert.ok(source)
+
+  const modified = structuredClone(source)
+  modified.config.totalMarks = Number(modified.config.totalMarks || 0) + 1
+
+  assert.strictEqual(isPristineOfficialV13Paper(modified), false)
+  const decision = resolvePaperEditorRoute(modified)
+  assert.strictEqual(decision.route, 'CANONICAL_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORTED_TO_CANONICAL')
+  assert.strictEqual(
+    decision.resolvedPaper.authority.authoritativePaperTotal,
+    modified.config.totalMarks
+  )
+})
+
+test('Phase 20: contradictory dual legacy mirrors retain emergency legacy fallback', () => {
+  const source = v13.papers.find(paper => paper.id === 'official-first-term-2026-class-5-english')
+  assert.ok(source)
+  const modified = structuredClone(source)
+  modified.official_section[1].content =
+    modified.official_section[1].content.replace('Why did Saba cry suddenly?', 'OFFICIAL CONFLICT?')
+  modified.selectedQuestions.official_section.questions[1].content =
+    modified.selectedQuestions.official_section.questions[1].content.replace('Why did Saba cry suddenly?', 'MIRROR CONFLICT?')
+
+  const decision = resolvePaperEditorRoute(modified)
+  assert.strictEqual(decision.route, 'LEGACY_CANVAS_V2')
+  assert.strictEqual(decision.reason, 'MODIFIED_V13_IMPORT_FAILED_SAFE_LEGACY_FALLBACK')
+})

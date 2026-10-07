@@ -1,16 +1,29 @@
 // PTSPaperGenerator.jsx — PTS clone, dark SaaS theme
 import { useEffect, useState, useRef } from 'react'
+import { useTheme } from '../../context/ThemeContext.jsx'
 import { Maximize, Minimize, ZoomIn, ZoomOut } from 'lucide-react'
 import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
 import { usePaperStore } from './usePaperStore'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
+import { PaperSelectionToolbar } from './PaperInlineEditor.jsx'
+import './PaperEditor/paperWorkspaceLight.css'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
 import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
-import { getDisplayOptionLabel } from './PaperEditor/layouts/urduRtlEngine.js'
+import { buildPaperTextFlow, resolvePaperFontFamily } from './PaperEditor/layouts/paperWorkspaceStyleEngine.js'
+import { isUrduScriptPaper, URDU_FONT_STACK } from './resolvePaperRoute.js'
+import { inferOfficialSectionKind, parseMcqRows as parseOfficialMcqRows, extractMarksLabel, stripTrailingMarks, splitContentWithMarkers } from './officialSectionSemantics.js'
+import OfficialSectionRenderer from './PaperEditor/official/OfficialSectionRenderer.jsx'
+import StableClosingBracket from './PaperEditor/StableClosingBracket.jsx'
+import { auditOfficialPaperForPrint, paperPrintBlockMessage } from './officialPaperRules.js'
+import { applyAsspsPaperRules, buildMarksLedger, buildPaperRuleProfile, normalizeSectionOrder, optionLabelParts, replaceQuestionSerial, replaceSectionMarks, resolveSectionTotalMarks, stampWorkingCopy, validatePaperDraft } from './paperSystemRules.js'
+import { PaperCreationWelcome, BlankPaperSetup } from './PaperCreationStart.jsx'
+import { createBlankPaperDraft } from './paperCreationDraft.js'
+import { createAssessmentRelease, createManualAssessmentDocument, validateManualAssessmentForRelease } from './AssessmentStudio/core/manualAssessmentDocument.js'
+import { AssessmentRevisionConflictError, bindQueuedAssessmentSave, finalizeAssessmentRelease, flushAssessmentOfflineQueue, saveAssessmentRevision } from './AssessmentStudio/core/assessmentPersistence.js'
+import { createAssessmentPrintJob, fetchActivePrintRosterStudents, transitionAssessmentPrintJob } from './AssessmentStudio/core/printJobClient.js'
 
-// Normalize a store question to the template question format
 function storeQToTemplate(q) {
  return {
  id: q.id, type: q.type,
@@ -66,26 +79,126 @@ function PreviewWatermark({ logo, show, opacity, scale }) {
  return <div className="preview-wm" style={watermarkPreviewStyle(logo, opacity, scale)} />
 }
 
+function normalizeAnswerToken(value='') {
+ return String(value || '').trim().replace(/[().\s]/g,'').toUpperCase()
+}
+
+function sectionAnswerAt(section={}, row={}, rowIndex=0) {
+ const key = String(row?.number ?? rowIndex + 1)
+ const raw = Array.isArray(section.answerKey)
+  ? section.answerKey[rowIndex]
+  : (section.answerKey?.[key] ?? section.answerKey?.[rowIndex] ?? section.correctAnswers?.[key] ?? section.correctAnswers?.[rowIndex])
+ return normalizeAnswerToken(raw)
+}
+
+function collectObjectiveRows(paper={}) {
+ const rows=[]
+ for (const section of paper.official_section || []) {
+  if (inferOfficialSectionKind(section) !== 'mcq') continue
+  const parsed=parseOfficialMcqRows(section.content || '')
+  parsed.forEach((row,rowIndex)=>rows.push({
+   section,
+   sectionId:section.id,
+   row,
+   rowIndex,
+   answer:sectionAnswerAt(section,row,rowIndex),
+   globalIndex:rows.length + 1,
+  }))
+ }
+ if (rows.length) return rows
+ for (const [rowIndex,question] of (paper.mcq || []).entries()) {
+  const options=(question.options || []).map((option,index)=>({
+   label:option.label || option.key || String.fromCharCode(65+index),
+   text:option.text || option.en || option.ur || '',
+  }))
+  const explicit=question.answer || question.correctAnswer || question.correct
+  const correctOption=(question.options || []).find(option=>option.correct)
+  const answer=normalizeAnswerToken(explicit || correctOption?.label || correctOption?.key || '')
+  rows.push({
+   section:null,
+   sectionId:'',
+   row:{ number:rowIndex+1, prompt:question.text || question.en || question.ur || '', options },
+   rowIndex,
+   answer,
+   globalIndex:rows.length + 1,
+  })
+ }
+ return rows
+}
+
+function ObjectiveBubbleSheet({ paper, isUrdu=false, themeColor='#123b67', showAnswers=false }) {
+ const rows=collectObjectiveRows(paper)
+ if (!rows.length) return null
+ return <section data-workspace-bubble-sheet style={{ margin:'10px 0 12px', border:`1.5px solid ${themeColor}88`, borderRadius:6, padding:'8px 10px', breakInside:'avoid', direction:isUrdu?'rtl':'ltr', background:`${themeColor}08` }}>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, marginBottom:7, borderBottom:`1px solid ${themeColor}55`, paddingBottom:5 }}>
+   <b style={{ color:themeColor, fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif' }}>{isUrdu?'جوابی ببل شیٹ':'OBJECTIVE BUBBLE SHEET'}</b>
+   <span style={{ fontFamily:'Arial,sans-serif', fontSize:10, color:'#64748b' }}>{rows.length} MCQs</span>
+  </div>
+  <div style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:'5px 18px', direction:'ltr' }}>
+   {rows.map(({row,answer,globalIndex})=>{
+    const opts=(row.options||[]).slice(0,8)
+    return <div key={globalIndex} data-bubble-row style={{ display:'grid', gridTemplateColumns:'28px repeat('+Math.max(opts.length,1)+',26px)', alignItems:'center', gap:4, minHeight:24 }}>
+     <b style={{ fontFamily:'Arial,sans-serif', fontSize:10, color:themeColor }}>{globalIndex}.</b>
+     {opts.map((opt,index)=>{
+      const normalized=normalizeAnswerToken(opt.label || String.fromCharCode(65+index))
+      const active=Boolean(showAnswers && answer && (answer===normalized || answer===String(index+1)))
+      const display=isUrdu?optionLabelParts(opt.label,index,true).label:String(opt.label||String.fromCharCode(65+index)).replace(/[().]/g,'').toUpperCase()
+      return <span key={index} data-bubble-option data-selected={active?'true':'false'} style={{ width:22,height:22,borderRadius:'50%',border:`1.4px solid ${themeColor}`,display:'grid',placeItems:'center',fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif',fontSize:isUrdu?10:8,fontWeight:800,color:active?'#fff':themeColor,background:active?themeColor:'#fff' }}>{display}</span>
+     })}
+    </div>
+   })}
+  </div>
+ </section>
+}
+
+function ObjectiveAnswerKey({ paper, isUrdu=false, themeColor='#123b67' }) {
+ const rows=collectObjectiveRows(paper)
+ if (!rows.length) return null
+ return <section data-workspace-answer-key style={{ margin:'10px 0 12px', border:`1.5px dashed ${themeColor}99`, borderRadius:6, padding:'8px 10px', breakInside:'avoid', direction:isUrdu?'rtl':'ltr' }}>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, marginBottom:7 }}>
+   <b style={{ color:themeColor, fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif' }}>{isUrdu?'جوابی کلید':'ANSWER KEY'}</b>
+   <span style={{ fontFamily:'Arial,sans-serif', fontSize:9, color:'#64748b' }}>{isUrdu?'اساتذہ کے لیے':'Teacher copy'}</span>
+  </div>
+  <div style={{ display:'grid', gridTemplateColumns:'repeat(5,minmax(0,1fr))', gap:5, direction:'ltr' }}>
+   {rows.map(({row,answer,globalIndex})=>{
+    const optionIndex=(row.options||[]).findIndex((opt,index)=>normalizeAnswerToken(opt.label||String.fromCharCode(65+index))===answer)
+    const display=answer
+      ? (isUrdu && optionIndex>=0 ? optionLabelParts(row.options[optionIndex]?.label,optionIndex,true).label : answer)
+      : '—'
+    return <div key={globalIndex} data-answer-key-row style={{ border:`1px solid ${themeColor}44`, borderRadius:4, padding:'4px 5px', textAlign:'center', background:answer?`${themeColor}08`:'#fff', fontFamily:isUrdu?URDU_FONT_STACK:'Arial,sans-serif' }}>
+     <span style={{ fontFamily:'Arial,sans-serif', fontSize:9, color:'#64748b' }}>{globalIndex}</span>
+     <b style={{ marginInlineStart:5, color:answer?themeColor:'#94a3b8', fontSize:11 }}>{display}</b>
+    </div>
+   })}
+  </div>
+ </section>
+}
+
 const themeVars = (mode) => mode === 'light'
  ? {
- '--pg-bg': 'linear-gradient(135deg, #f7f9fc 0%, #edf3f8 48%, #e7eff8 100%)',
- '--pg-card': 'rgba(255,255,255,0.68)',
- '--pg-card-strong': 'rgba(255,255,255,0.82)',
- '--pg-gold': '#9a6500',
- '--pg-gold-light': '#c78505',
- '--pg-text': '#162235',
- '--pg-muted': '#5d6b7e',
+ '--pg-bg': '#f4f7fb',
+ '--pg-card': '#ffffff',
+ '--pg-card-strong': '#ffffff',
+ '--pg-gold': '#966a13',
+ '--pg-gold-light': '#dfbb69',
+ '--pg-text': '#102b4c',
+ '--pg-muted': '#536782',
  '--pg-green': '#138a36',
  '--pg-red': '#d32246',
  '--pg-orange': '#c26b00',
  '--pg-blue': '#075fb8',
- '--pg-border': 'rgba(15,35,60,0.16)',
- '--pg-border-hover': 'rgba(161,111,0,0.36)',
- '--pg-toolbar': 'rgba(248,252,255,0.94)',
- '--pg-canvas': '#d8e1eb',
- '--pg-chip': 'rgba(255,255,255,0.86)',
+ '--pg-border': '#cbd5e1',
+ '--pg-border-hover': '#b48a34',
+ '--pg-toolbar': '#ffffff',
+ '--pg-canvas': '#e8edf3',
+ '--pg-chip': '#f2f5f9',
+ '--pg-input-bg': '#f8fafc',
+ '--pg-panel-bg': '#ffffff',
+ '--pg-panel-border': '#cbd5e1',
+ '--pg-panel-shadow': '0 8px 26px rgba(16,43,76,0.10)',
+ '--pg-tool-bg': '#f2f5f9',
  '--pg-option-bg': '#ffffff',
- '--pg-option-text': '#162235',
+ '--pg-option-text': '#102b4c',
  }
  : {
  '--pg-bg': '#071e34',
@@ -104,23 +217,24 @@ const themeVars = (mode) => mode === 'light'
  '--pg-toolbar': 'rgba(7,25,48,0.97)',
  '--pg-canvas': '#1e2a3a',
  '--pg-chip': 'rgba(11,44,77,0.92)',
+ '--pg-input-bg': 'rgba(11,44,77,0.6)',
+ '--pg-panel-bg': 'rgba(7,25,48,.98)',
+ '--pg-panel-border': '#ef4444',
+ '--pg-panel-shadow': '0 10px 34px rgba(0,0,0,.42)',
+ '--pg-tool-bg': '#0b1f36',
  '--pg-option-bg': '#0a1e35',
  '--pg-option-text': '#e6eef8',
  }
 
-function getInitialPaperTheme() {
- try {
- const stored = window.localStorage?.getItem('al_siddique_theme')
- const rootTheme = document.documentElement?.dataset?.theme
- return stored === 'light' || rootTheme === 'light' ? 'light' : 'dark'
- } catch {
- return 'dark'
- }
+// The Paper Workspace and the portal header share ONE theme authority.
+// A second localStorage key caused light controls inside a dark shell and vice versa.
+function togglePaperWorkspaceTheme(setTheme){
+ setTheme(current=>current==='light'?'dark':'light')
 }
 
 const ThemeToggle = ({ mode, onToggle }) => (
  <button onClick={onToggle} style={{
- background: mode === 'light' ? 'rgba(7,95,184,0.10)' : 'rgba(255,255,255,0.06)',
+ background: mode === 'light' ? 'rgba(16,43,76,0.08)' : 'rgba(255,255,255,0.06)',
  border:`1px solid ${D.border}`,
  color:D.silver,
  borderRadius:9,
@@ -156,7 +270,7 @@ const DBtn = ({ children, onClick, color='gold', style={}, disabled=false }) => 
  gold: `linear-gradient(135deg,${D.gold},${D.goldL})`,
  green: `linear-gradient(135deg,#1b5e20,#2e7d32)`,
  red: `linear-gradient(135deg,#b71c1c,#c62828)`,
- ghost: 'rgba(15,23,42,0.46)',
+ ghost: 'var(--pg-chip,rgba(15,23,42,0.46))',
  }[color]
  const fg = color === 'ghost' ? D.silver : (color === 'gold' ? '#071e34' : 'white')
  return (
@@ -171,7 +285,7 @@ const DBtn = ({ children, onClick, color='gold', style={}, disabled=false }) => 
 }
 
 const DBreadcrumb = ({ steps }) => (
- <div style={{ background:'rgba(15,23,42,0.46)', borderBottom:`1px solid ${D.border}`,
+ <div style={{ background:'var(--pg-card-strong,rgba(15,23,42,0.46))', borderBottom:`1px solid ${D.border}`,
  padding:'9px 24px', fontSize:13, color:D.muted, display:'flex', gap:6, alignItems:'center' }}>
  <span style={{ color:D.gold, cursor: steps[0]?.onClick ? 'pointer' : 'default' }}
  onClick={steps[0]?.onClick}>Dashboard</span>
@@ -195,7 +309,7 @@ const GoBack = ({ onClick }) => (
 )
 
 const pbStyle = `1px solid ${D.border}`
-const dinp = { background:'rgba(11,44,77,0.6)', border: pbStyle, borderRadius:9,
+const dinp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border: pbStyle, borderRadius:9,
  color:D.silver, padding:'9px 12px', fontSize:14, outline:'none', boxSizing:'border-box', width:'100%' }
 
 //  Step 1  Syllabus 
@@ -486,29 +600,69 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  ? { name: storeSubjectInfo?.name || '', color: D.gold, emoji: '', edition: storeSubjectInfo?.publisher || '' }
  : SUBJECTS.find(s=>s.id===subjectId)
  
+ const isOfficialPaper = Boolean(loadedPaper?.documentFormat === 'pts-native-v13' || loadedPaper?.documentFormat === 'official-v12' || loadedPaper?.official_section?.length)
+ const isUserAuthoredPaper = Boolean(paper?.userAuthored || loadedPaper?.userAuthored || overrideConfig?.userAuthored)
  let questionTypes = getFilteredQuestionTypes(subject?.name || '')
  // Ensure that any type with active questions is always shown, even if filtered out by subject
  if (paper && allQuestionTypes) {
  const activeTypes = new Set(allQuestionTypes.filter(t => paper[t.value]?.length > 0).map(t => t.value))
  questionTypes = allQuestionTypes.filter(t => questionTypes.some(qt => qt.value === t.value) || activeTypes.has(t.value))
  }
- if (paper?.official_section?.length && !questionTypes.some(type => type.value === 'official_section')) {
+ if ((isOfficialPaper || paper?.official_section?.length) && !questionTypes.some(type => type.value === 'official_section')) {
   questionTypes = [...questionTypes, { value:'official_section', label:'Official Questions', labelUrdu:'امتحانی سوالات', marks:0 }]
  }
 
  const editorSettings = loadedPaper?.editorSettings || {}
-
+ const ruleProfile = buildPaperRuleProfile(loadedPaper || { config:overrideConfig || {} })
  const [tmpl, setTmpl] = useState(editorSettings.template || 'classic')
  const [printMode, setPrintMode] = useState(editorSettings.printMode || 'a4')
- const [mcqLayout, setMcqLayout] = useState(editorSettings.mcqLayout || 'compact-grid')
- const [shortLayout, setShortLayout] = useState(editorSettings.shortLayout || '2-column-balanced')
+ const [mcqLayout, setMcqLayout] = useState(editorSettings.mcqLayout || (isOfficialPaper ? ruleProfile.presentation.mcqLayout : 'compact-grid'))
+ const [shortLayout, setShortLayout] = useState(editorSettings.shortLayout || (isOfficialPaper ? ruleProfile.presentation.shortLayout : '2-column-balanced'))
  const [language, setLanguage] = useState(()=> overrideConfig?.language || 'english')
  const [paperCode, setPaperCode] = useState(()=> overrideConfig?.paperCode || String(Math.floor(1000+Math.random()*9000)))
  const [timeAllwd, setTimeAllwd] = useState(()=> overrideConfig?.timeAllowed || '30 minutes')
  const [examDate, setExamDate] = useState(()=> overrideConfig?.examDate || new Date().toLocaleDateString('en-GB').replace(/\//g,'-'))
- const [printBub, setPrintBub] = useState(true)
- const [printAns, setPrintAns] = useState(false)
+ const [headerClass, setHeaderClass] = useState(()=> overrideConfig?.className || overrideConfig?.classLevel || '')
+ const [headerSubject, setHeaderSubject] = useState(()=> overrideConfig?.subjectName || overrideConfig?.subject || '')
+ const [headerTotalMarks, setHeaderTotalMarks] = useState(()=> Number(overrideConfig?.totalMarks || 0))
+ const [headerTitle, setHeaderTitle] = useState(()=> overrideConfig?.title || '')
+ const [headerExamType, setHeaderExamType] = useState(()=> overrideConfig?.examType || '')
+ const [headerSession, setHeaderSession] = useState(()=> overrideConfig?.session || '')
+ const [headerAddress, setHeaderAddress] = useState(()=> overrideConfig?.address || overrideConfig?.campus || '')
+ const [marksAuthorityEdited, setMarksAuthorityEdited] = useState(false)
+ const [printBub, setPrintBub] = useState(Boolean(editorSettings.printBubbleSheet))
+ const [printAns, setPrintAns] = useState(Boolean(editorSettings.printAnswerKey))
  const [modalOpen, setModalOpen] = useState(!loadedPaper)
+ const persistedPaperIdRef = useRef(loadedPaper?.id || '')
+ const blockAddMenuRef = useRef(null)
+ const [finalizing, setFinalizing] = useState(false)
+ const [persistenceNotice, setPersistenceNotice] = useState('')
+ const [personalizedDuplex, setPersonalizedDuplex] = useState(true)
+ const [personalizedPreparing, setPersonalizedPreparing] = useState(false)
+ const [personalizedStatus, setPersonalizedStatus] = useState('')
+
+ useEffect(() => {
+  if (!isUserAuthoredPaper) return undefined
+  const retry = () => flushAssessmentOfflineQueue().then(result => {
+   const serverPaperId = loadedPaper?.serverPaperId || paper?.serverPaperId || loadedPaper?.canonicalDocument?.id
+   const synced = result.synced?.find(item =>
+    (item.localPaperId && String(item.localPaperId)===String(persistedPaperIdRef.current)) ||
+    (serverPaperId && item.paperId===serverPaperId)
+   )
+   if (synced && persistedPaperIdRef.current) {
+    const recovered = updateSavedPaper(persistedPaperIdRef.current, {
+     serverRevision:Number(synced.data?.currentRevision || 0), serverContentHash:synced.data?.contentHash || null,
+     persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE', syncConflict:false,
+    })
+    if (recovered) onPaperChange(current => ({ ...current, serverRevision:recovered.serverRevision, serverContentHash:recovered.serverContentHash, persistenceAuthority:recovered.persistenceAuthority, persistenceMode:recovered.persistenceMode }))
+   }
+   if (result.flushed) setPersistenceNotice(`Recovered ${result.flushed} queued save${result.flushed===1?'':'s'} to server.`)
+   else if (result.conflicts) setPersistenceNotice('Queued save needs conflict resolution before server sync.')
+  }).catch(() => {})
+  retry()
+  window.addEventListener('online', retry)
+  return () => window.removeEventListener('online', retry)
+ }, [isUserAuthoredPaper])
 
  const [qType, setQType] = useState(questionTypes[0]?.value || 'mcq')
  const [priority, setPriority] = useState('all')
@@ -523,26 +677,38 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  const [selIds, setSelIds] = useState(new Set())
  const [limitWarn, setLimitWarn] = useState(false)
 
- const [editMode, setEditMode] = useState(false)
- const [letterSp, setLetterSp] = useState(0)
- const [engLineH, setEngLineH] = useState(editorSettings.englishLineHeight || 1.5)
- const [urdLineH, setUrdLineH] = useState(editorSettings.urduLineHeight || 2.0)
+ const [editMode, setEditMode] = useState(Boolean(loadedPaper?.creationMethod && !loadedPaper?.id))
+ const [selectedSectionId, setSelectedSectionId] = useState('')
+ const [activeEditable, setActiveEditable] = useState(null)
+ const activateEditable = payload => {
+  if(!payload?.sectionId)return
+  setActiveEditable(previous=>previous?.element===payload.element&&previous?.fieldKey===payload.fieldKey&&previous?.sectionId===payload.sectionId?previous:payload)
+  setSelectedSectionId(previous=>String(previous||'')===String(payload.sectionId)?previous:String(payload.sectionId))
+ }
+ const [letterSp, setLetterSp] = useState(editorSettings.letterSpacing || 0)
+ const [wordSp, setWordSp] = useState(editorSettings.wordSpacing || 0)
+ const [engLineH, setEngLineH] = useState(editorSettings.englishLineHeight || (isOfficialPaper ? ruleProfile.presentation.englishLineHeight : 1.5))
+ const [urdLineH, setUrdLineH] = useState(editorSettings.urduLineHeight || (isOfficialPaper ? ruleProfile.presentation.urduLineHeight : 2.0))
  const [showAnsLines, setShowAnsLines] = useState(Boolean(editorSettings.showAnswerLines))
  const [fontColor, setFontColor] = useState(editorSettings.fontColor || '#1a1a1a')
- const [fontFamily, setFontFamily] = useState(editorSettings.fontFamily || "'Times New Roman', Times, serif")
- const [baseFontSz, setBaseFontSz] = useState(editorSettings.fontSize || 13)
- const [headFontSz, setHeadFontSz] = useState(editorSettings.headingSize || 14)
+ const [fontFamily, setFontFamily] = useState(() => {
+  if (editorSettings.fontFamily) return editorSettings.fontFamily
+  const isUrduPaper = isUrduScriptPaper({ config: overrideConfig || loadedPaper?.config, ...loadedPaper })
+  return isUrduPaper ? URDU_FONT_STACK : "'Times New Roman', Times, serif"
+ })
+ const [baseFontSz, setBaseFontSz] = useState(editorSettings.fontSize || (isOfficialPaper ? ruleProfile.presentation.bodyFontSize : 13))
+ const [headFontSz, setHeadFontSz] = useState(editorSettings.headingSize || (isOfficialPaper ? ruleProfile.presentation.headingFontSize : 14))
  const [fontBold, setFontBold] = useState(Boolean(editorSettings.fontBold))
  const [fontItalic, setFontItalic] = useState(Boolean(editorSettings.fontItalic))
  const [fontUnderline, setFontUnderline] = useState(Boolean(editorSettings.fontUnderline))
  const [textAlign, setTextAlign] = useState(editorSettings.textAlign || 'start')
- const [qBorderStyle, setQBorderStyle] = useState(editorSettings.questionBorder || 'none')
- const [pageBorder, setPageBorder] = useState(editorSettings.pageBorder || 'none')
+ const [qBorderStyle, setQBorderStyle] = useState(editorSettings.questionBorder || (isOfficialPaper ? ruleProfile.presentation.questionBorder : 'none'))
+ const [pageBorder, setPageBorder] = useState(editorSettings.pageBorder === 'thick' ? 'scholar' : (editorSettings.pageBorder || (isOfficialPaper ? ruleProfile.presentation.pageBorder : 'none')))
  const [showUrduHeaders, setShowUrduHeaders] = useState(Boolean(editorSettings.showUrduHeaders))
- const [showSectionLine, setShowSectionLine] = useState(Boolean(editorSettings.showSectionLine))
- const [showWatermark, setShowWatermark] = useState(false)
- const [watermarkOpacity, setWatermarkOpacity] = useState(0.08)
- const [watermarkScale, setWatermarkScale] = useState(1.18)
+ const [showSectionLine, setShowSectionLine] = useState(editorSettings.showSectionLine !== undefined ? Boolean(editorSettings.showSectionLine) : isOfficialPaper)
+ const [showWatermark, setShowWatermark] = useState(Boolean(editorSettings.showWatermark))
+ const [watermarkOpacity, setWatermarkOpacity] = useState(Number(editorSettings.watermarkOpacity ?? 0.08))
+ const [watermarkScale, setWatermarkScale] = useState(Number(editorSettings.watermarkScale ?? 1.18))
  const canvasRef = useRef(null)
  const [canvasSize, setCanvasSize] = useState({ width:794, height:1123 })
  const [zoomMode, setZoomMode] = useState('fit-width')
@@ -563,51 +729,52 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   return () => document.removeEventListener('fullscreenchange', onFullscreenChange)
  }, [])
 
- let subjectName = '', className = ''
+ let derivedSubjectName = '', derivedClassName = ''
  if (isLoaded) {
- subjectName = overrideConfig.subjectName || overrideConfig.subject || ''
- className = overrideConfig.className || overrideConfig.classLevel || ''
+  derivedSubjectName = overrideConfig.subjectName || overrideConfig.subject || ''
+  derivedClassName = overrideConfig.className || overrideConfig.classLevel || ''
  } else if (isStore) {
- subjectName = storeSubjectInfo?.name || ''
- className = storeSubjectInfo?.classLevel || ''
+  derivedSubjectName = storeSubjectInfo?.name || ''
+  derivedClassName = storeSubjectInfo?.classLevel || ''
  } else {
- const subj = SUBJECTS.find(s=>s.id===subjectId)
- subjectName = subj?.name || ''
- className = CLASSES.find(c=>c.id===subj?.classId)?.label || ''
+  const subj = SUBJECTS.find(s=>s.id===subjectId)
+  derivedSubjectName = subj?.name || ''
+  derivedClassName = CLASSES.find(c=>c.id===subj?.classId)?.label || ''
  }
-
- const cfg = { 
-    className, 
-    subjectName, 
-    paperCode, 
-    timeAllowed: timeAllwd, 
-    examDate, 
+ const subjectName = headerSubject || derivedSubjectName
+ const className = headerClass || derivedClassName
+ const cfg = {
+    ...(overrideConfig || {}),
+    title: headerTitle || overrideConfig?.title || '',
+    examType: headerExamType || overrideConfig?.examType || '',
+    session: headerSession || overrideConfig?.session || '',
+    address: headerAddress || overrideConfig?.address || overrideConfig?.campus || '',
+    className,
+    subjectName,
+    paperCode,
+    timeAllowed: timeAllwd,
+    examDate,
     language,
     classLevel: className,
     subject: subjectName,
-    totalMarks: Number(overrideConfig?.totalMarks || 0),
+    totalMarks: Number(headerTotalMarks || 0),
   }
- const TemplateComp = {
- academic: (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- modern: (props) => <PremiumPaperTemplate {...props} variant="modern" />,
- emerald: (props) => <PremiumPaperTemplate {...props} variant="emerald" />,
- gold: (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- coral: (props) => <PremiumPaperTemplate {...props} variant="coral" />,
- violet: (props) => <PremiumPaperTemplate {...props} variant="violet" />,
- minimal: (props) => <PremiumPaperTemplate {...props} variant="minimal" />,
- editorial: (props) => <PremiumPaperTemplate {...props} variant="editorial" />,
- // Compatibility aliases keep previously saved papers opening without migration.
- classic: (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- elite: (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- 'docx-assessment': (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- 'royal-elite': (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- 'board-blue': (props) => <PremiumPaperTemplate {...props} variant="modern" />,
- 'compact-classic': (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- 'serif-gold': (props) => <PremiumPaperTemplate {...props} variant="gold" />,
- 'clean-minimal': (props) => <PremiumPaperTemplate {...props} variant="coral" />,
- 'exam-grid': (props) => <PremiumPaperTemplate {...props} variant="violet" />,
- 'scholar-classic': (props) => <PremiumPaperTemplate {...props} variant="academic" />,
- }[tmpl]
+ const liveAuditPaper = {
+  ...(loadedPaper || {}),
+  ...paper,
+  config: cfg,
+  official_section: paper.official_section || loadedPaper?.official_section || [],
+  printReadiness: marksAuthorityEdited ? 'READY' : loadedPaper?.printReadiness,
+ }
+ const marksLedger = isOfficialPaper ? buildMarksLedger(liveAuditPaper) : { headerTotal:Number(headerTotalMarks || 0), questionTotal:0, balanced:false, difference:0 }
+ const draftQuality = isOfficialPaper ? validatePaperDraft(liveAuditPaper) : { ready:true, issues:[], errorCount:0, warningCount:0, academicQuestionCount:0 }
+ const printAudit = isOfficialPaper ? auditOfficialPaperForPrint(liveAuditPaper) : { blocked:false, issues:[] }
+ const templateVariant = ({
+  academic:'academic', modern:'modern', emerald:'emerald', gold:'gold', coral:'coral', violet:'violet', minimal:'minimal', editorial:'editorial',
+  // Compatibility aliases keep previously saved papers opening without migration.
+  classic:'academic', elite:'gold', 'docx-assessment':'academic', 'royal-elite':'gold', 'board-blue':'modern', 'compact-classic':'academic',
+  'serif-gold':'gold', 'clean-minimal':'coral', 'exam-grid':'violet', 'scholar-classic':'academic',
+ }[tmpl] || 'academic')
  const half = printMode === 'half'
  const fitWidthZoom = (canvasSize.width - 24) / 794
  const fitPageZoom = Math.min(fitWidthZoom, (canvasSize.height - 24) / 1123)
@@ -617,12 +784,92 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
   setZoomMode('custom')
  }
  const totalQs = questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0), 0)
- const pageBorderMap = { none: 'none', thin: '1px solid #111', thick: '3px solid #111', double: '4px double #111' }
- const pageBorderStyle = pageBorderMap[pageBorder] || 'none'
+ const pageFrameStyles = {
+  none:{ border:'none' },
+  thin:{ border:'1px solid #9aaabd' },
+  scholar:{ border:'2px solid #173b66', boxShadow:'inset 0 0 0 4px #fff, inset 0 0 0 5px #b9c8d8' },
+  double:{ border:'4px double #173b66' },
+  premium:{ border:'1px solid #8195aa', boxShadow:'inset 0 0 0 3px #fff, inset 0 0 0 4.5px #173b66', borderRadius:2 },
+ }
+ const pageFrameStyle = pageFrameStyles[pageBorder] || pageFrameStyles.none
+ const pageBorderStyle = pageFrameStyle.border
  const updatePaperQuestion = (type, id, changes) => {
+  if (Object.prototype.hasOwnProperty.call(changes || {}, 'marks')) setMarksAuthorityEdited(true)
   onPaperChange(current => ({ ...current, [type]:(current[type] || []).map(question => question.id === id ? { ...question, ...changes } : question) }))
  }
- const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, onQuestionChange:updatePaperQuestion, mcqLayout, shortLayout }
+ const resequenceOfficial = sections => normalizeSectionOrder(
+  sections,
+  isUrduScriptPaper({ config:cfg, ...paper })
+ )
+ const deleteOfficialSection = id => {
+  if (String(selectedSectionId||'') === String(id||'')) { setSelectedSectionId(''); setActiveEditable(null) }
+  onPaperChange(current => ({ ...current, official_section:resequenceOfficial((current.official_section || []).filter(section => section.id !== id)) }))
+ }
+ const duplicateOfficialSection = id => onPaperChange(current => {
+  const sections = [...(current.official_section || [])]
+  const index = sections.findIndex(section => section.id === id)
+  if (index < 0) return current
+  const copy = { ...sections[index], id:`${sections[index].id || 'section'}-copy-${Date.now()}` }
+  sections.splice(index + 1, 0, copy)
+  return { ...current, official_section:resequenceOfficial(sections) }
+ })
+ const moveOfficialSection = (id, delta) => onPaperChange(current => {
+  const sections = [...(current.official_section || [])]
+  const from = sections.findIndex(section => section.id === id)
+  const to = Math.max(0, Math.min(sections.length - 1, from + Number(delta || 0)))
+  if (from < 0 || from === to) return current
+  const [item] = sections.splice(from, 1); sections.splice(to, 0, item)
+  return { ...current, official_section:resequenceOfficial(sections) }
+ })
+ const addOfficialSection = (layoutPreset = 'auto') => {
+  const newId = `${loadedPaper?.id || 'paper'}-manual-${Date.now()}-${Math.random().toString(36).slice(2,7)}`
+  onPaperChange(current => {
+  const sections = [...(current.official_section || [])]
+  const academicCount = sections.filter(section => inferOfficialSectionKind(section) !== 'marker').length
+  const serial = academicCount + 1
+  const urdu = isUrduScriptPaper({ config:cfg, ...current })
+  const heading = urdu ? `سوال نمبر ${serial}: نیا سوال۔` : `Q${serial}. New Question`
+  sections.push({ id:newId, type:'official_section', medium:urdu?'urdu':'english', heading, text:heading, textUrdu:urdu?heading:'', content:'', marks:0, sourceOrder:sections.length + 1, priority:'manual', layoutPreset, ...(layoutPreset==='table'?{tablePurpose:'answer_table'}:{}) })
+  return { ...current, official_section:resequenceOfficial(sections) }
+  })
+  setSelectedSectionId(newId)
+  setActiveEditable(null)
+  if (isUserAuthoredPaper) setEditMode(true)
+  if (blockAddMenuRef.current) blockAddMenuRef.current.open = false
+ }
+ const applyWorkspaceRules = () => {
+  if (!isOfficialPaper) return
+  const next = applyAsspsPaperRules({ ...liveAuditPaper, config:cfg, official_section:paper.official_section || [] })
+  onPaperChange(current => ({
+   ...current,
+   official_section: next.official_section,
+   selectedQuestions: next.selectedQuestions,
+   paperSystemVersion: next.paperSystemVersion,
+   paperSystem: next.paperSystem,
+  }))
+  setMcqLayout(next.editorSettings.mcqLayout)
+  setShortLayout(next.editorSettings.shortLayout)
+  setPageBorder(next.editorSettings.pageBorder === 'thick' ? 'scholar' : (next.editorSettings.pageBorder || 'none'))
+  setQBorderStyle(next.editorSettings.questionBorder)
+  setFontFamily(next.editorSettings.fontFamily)
+  setBaseFontSz(next.editorSettings.fontSize)
+  setHeadFontSz(next.editorSettings.headingSize)
+  setEngLineH(next.editorSettings.englishLineHeight)
+  setUrdLineH(next.editorSettings.urduLineHeight)
+  setShowSectionLine(next.editorSettings.showSectionLine)
+ }
+ const selectedSection = (paper.official_section || []).find(section => String(section.id||'') === String(selectedSectionId||'')) || null
+ const selectedSectionKind = selectedSection ? inferOfficialSectionKind(selectedSection) : 'auto'
+ const selectedSectionMarks = selectedSection ? resolveSectionTotalMarks(selectedSection) : 0
+ const selectedSectionIsUrdu = isUrduScriptPaper({config:cfg,...paper})
+ const selectedMcqRows = selectedSectionKind === 'mcq' ? parseOfficialMcqRows(selectedSection?.content || '') : []
+ const toggleEditMode = () => setEditMode(current => {
+  const next = !current
+  if (!next) { setSelectedSectionId(''); setActiveEditable(null) }
+  return next
+ })
+ const updateSelectedSection = changes => selectedSection && updatePaperQuestion('official_section', selectedSection.id, changes)
+ const tplProps = { paper, cfg, printBubble:printBub, printAns, half, editMode, letterSp, wordSp, engLineH, urdLineH, showAnsLines, fontColor, fontFamily, baseFontSz, headFontSz, fontBold, fontItalic, fontUnderline, textAlign, qBorderStyle, showUrduHeaders, showSectionLine, questionTypes, settings: paperSettings, pbStyle: pageBorderStyle, pageFrameStyle, onQuestionChange:updatePaperQuestion, onDeleteSection:deleteOfficialSection, onDuplicateSection:duplicateOfficialSection, onMoveSection:moveOfficialSection, onAddSection:addOfficialSection, onSelectSection:setSelectedSectionId, selectedSectionId, onActiveEditable:activateEditable, mcqLayout, shortLayout }
 
  function doSearch() {
  const addedIds = new Set((paper[qType]||[]).map(q=>q.id))
@@ -660,56 +907,336 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  setSelIds(n)
  }
 
- function doSave() {
- if (!totalQs) return
+ async function doSave(options = {}) {
+ const silent = options?.silent === true
+ if (!totalQs && !isUserAuthoredPaper) return
  const name = `${subjectName} ${className} — ${new Date().toLocaleDateString('en-GB')}`
  const selectedQuestions = {}
- questionTypes.forEach(t => { selectedQuestions[t.value] = { questions: paper[t.value] || [], marks: paper[`${t.value}_marks`] || t.marks || 1 } })
+ questionTypes.forEach(t => { selectedQuestions[t.value] = { questions: paper[t.value] || [], marks: t.value==='official_section' ? marksLedger.questionTotal : (paper[`${t.value}_marks`] ?? t.marks ?? 1) } })
  const editorState = {
   template:tmpl, printMode, questionBorder:qBorderStyle, pageBorder,
   showAnswerLines:showAnsLines, showUrduHeaders, showSectionLine,
   fontColor, fontFamily, fontSize:baseFontSz, headingSize:headFontSz,
   fontBold, fontItalic, fontUnderline, textAlign,
-  urduLineHeight:urdLineH, englishLineHeight:engLineH, letterSpacing:letterSp,
+  urduLineHeight:urdLineH, englishLineHeight:engLineH, letterSpacing:letterSp, wordSpacing:wordSp,
   mcqLayout, shortLayout,
+  printBubbleSheet:printBub, printAnswerKey:printAns,
+  showWatermark, watermarkOpacity, watermarkScale,
  }
- const payload = {
+ const canonicalDocument = isUserAuthoredPaper
+  ? createManualAssessmentDocument({ paper:{ ...loadedPaper, ...paper }, config:cfg, paperSettings })
+  : null
+ let persistence = null
+ let serverPaperId = loadedPaper?.serverPaperId || paper.serverPaperId || null
+ if (canonicalDocument) {
+  const paperId = serverPaperId || canonicalDocument.id
+  serverPaperId = paperId
+  const expectedRevision = Number(paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
+  try {
+   persistence = await saveAssessmentRevision({ paperId, expectedRevision, title:name, document:canonicalDocument })
+   if (persistence.degraded) setPersistenceNotice('Offline/degraded mode — saved locally and queued for server recovery.')
+   else setPersistenceNotice(`Server revision ${persistence.data.currentRevision} saved.`)
+  } catch (error) {
+   if (error instanceof AssessmentRevisionConflictError || error?.code === 'REVISION_CONFLICT') {
+    const conflictPayload = {
+     ...paper, name:loadedPaper?.name || name, config:{ ...(loadedPaper?.config||{}), ...cfg }, canonicalDocument,
+     canonicalAuthority:'PaperDocumentV2', serverPaperId, persistenceAuthority:'LOCAL_RECOVERY_CONFLICT', persistenceMode:'CONFLICT',
+     serverRevision:Number(error.currentRevision || expectedRevision), syncConflict:true,
+    }
+    const localConflict = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, conflictPayload) : savePaper(conflictPayload)
+    if (localConflict?.id) persistedPaperIdRef.current = localConflict.id
+    setPersistenceNotice(`Conflict detected at server revision ${error.currentRevision}. Local edits preserved; overwrite blocked.`)
+    if (!silent) alert('SAVE CONFLICT — this paper changed in another tab. Your local edits were preserved and were not allowed to overwrite the newer server revision.')
+    return localConflict
+   }
+   if (error?.response?.status === 401 || error?.response?.status === 403) {
+    const authPayload = {
+     ...paper,
+     name:loadedPaper?.name || name,
+     config:{ ...(loadedPaper?.config||{}), ...cfg },
+     selectedMCQ:paper.mcq || [], selectedShort:paper.short || [], selectedLong:paper.long || [], selectedQuestions,
+     editorSettings:editorState,
+     canonicalDocument, canonicalAuthority:'PaperDocumentV2', serverPaperId,
+     serverRevision:expectedRevision, serverContentHash:paper.serverContentHash || loadedPaper?.serverContentHash || null,
+     persistenceAuthority:'LOCAL_RECOVERY_AUTH_REQUIRED', persistenceMode:'AUTH_REQUIRED', authRecoveryRequired:true,
+    }
+    const localAuth = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, authPayload) : savePaper(authPayload)
+    if (localAuth?.id) persistedPaperIdRef.current = localAuth.id
+    setPersistenceNotice('Session expired — local recovery copy preserved. Sign in again to sync with the server.')
+    if (!silent) alert('SESSION EXPIRED — your current edits were preserved locally. Sign in again before finalizing or printing this assessment.')
+    return localAuth
+   }
+   throw error
+  }
+ }
+ const serverRevision = persistence?.degraded
+  ? Number(paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
+  : Number(persistence?.data?.currentRevision ?? paper.serverRevision ?? loadedPaper?.serverRevision ?? 0)
+ const payloadBase = {
+       ...paper,
        name: loadedPaper?.name || name,
        config: { ...(loadedPaper?.config || {}), ...cfg },
-       ...paper, 
-       selectedMCQ: paper.mcq || [],
-       selectedShort: paper.short || [],
-       selectedLong: paper.long || [],
-       selectedQuestions, 
+       selectedMCQ: paper.mcq || [], selectedShort: paper.short || [], selectedLong: paper.long || [],
        teacherHidden: overrideConfig?.teacherHidden || false,
        editorSettings:editorState,
+       printReadiness: isUserAuthoredPaper
+        ? (totalQs>0 && marksLedger.balanced && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : 'DRAFT')
+        : (isOfficialPaper && !printAudit.blocked && draftQuality.errorCount===0 ? 'READY' : (loadedPaper?.printReadiness || paper.printReadiness)),
        selectedQuestions,
+       ...(canonicalDocument ? {
+        canonicalDocument, canonicalAuthority:'PaperDocumentV2', serverPaperId, serverRevision,
+        serverContentHash:persistence?.data?.contentHash || paper.serverContentHash || loadedPaper?.serverContentHash || null,
+        persistenceAuthority:persistence?.degraded ? 'LOCAL_RECOVERY_QUEUED' : 'SERVER_REVISION_SOURCE_OF_TRUTH',
+        persistenceMode:persistence?.degraded ? 'DEGRADED_OFFLINE' : 'ONLINE',
+       } : {}),
+       ...(isOfficialPaper ? { official_section_marks:marksLedger.questionTotal } : {}),
      }
- const saved = loadedPaper?.id ? updateSavedPaper(loadedPaper.id, payload) : savePaper(payload)
-  if (!saved) return // Failed due to quota exceeded
-  
-  const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
+ const payload = isOfficialPaper && loadedPaper?.creationMethod !== 'blank' ? stampWorkingCopy(payloadBase, loadedPaper || payloadBase) : payloadBase
+ const saved = persistedPaperIdRef.current ? updateSavedPaper(persistedPaperIdRef.current, payload) : savePaper(payload)
+ if (saved?.id) persistedPaperIdRef.current = saved.id
+ if (!saved) return null
+ if (persistence?.degraded && persistence?.queueId) bindQueuedAssessmentSave(persistence.queueId, saved.id)
+ onPaperChange(current => ({ ...current, serverRevision:saved.serverRevision, serverContentHash:saved.serverContentHash, persistenceAuthority:saved.persistenceAuthority, persistenceMode:saved.persistenceMode }))
+ const questionBankMeta = loadedPaper?.questionBankSubjectMeta || {
   name: overrideConfig?.subjectName || overrideConfig?.subject || subjectName || '',
   classLevel: overrideConfig?.classLevel || className || '',
   publisher: overrideConfig?.publisher || (storeSubjectInfo?.publisher || ''),
-  }
-  const shouldImport = Boolean(loadedPaper?.importToQuestionBank || overrideConfig?.importToQuestionBank)
-  if (shouldImport) {
+ }
+ const shouldImport = Boolean(loadedPaper?.importToQuestionBank || overrideConfig?.importToQuestionBank)
+ if (shouldImport) {
   importPaperQuestionsToBank({
-  subjectId: loadedPaper?.questionBankSubjectId || overrideConfig?.questionBankSubjectId || '',
-  subjectMeta: questionBankMeta,
-  selectedMCQ: paper.mcq || [],
-  selectedShort: paper.short || [],
-  selectedLong: paper.long || [],
-  selectedQuestions,
-  medium: loadedPaper?.config?.language || loadedPaper?.config?.medium || overrideConfig?.language || overrideConfig?.medium || 'english',
-  source: loadedPaper?.paperSource || overrideConfig?.paperSource || 'paper',
+   subjectId: loadedPaper?.questionBankSubjectId || overrideConfig?.questionBankSubjectId || '', subjectMeta: questionBankMeta,
+   selectedMCQ: paper.mcq || [], selectedShort: paper.short || [], selectedLong: paper.long || [], selectedQuestions,
+   medium: loadedPaper?.config?.language || loadedPaper?.config?.medium || overrideConfig?.language || overrideConfig?.medium || 'english',
+   source: loadedPaper?.paperSource || overrideConfig?.paperSource || 'paper',
   })
+ }
+ if (!silent) alert(persistence?.degraded ? `Paper saved locally. Server recovery is queued.` : `Paper saved! "${payload.name}" (${totalQs} questions)`)
+ return saved
+ }
+
+ async function doFinalize() {
+  if (!isUserAuthoredPaper || finalizing) return
+  if (!totalQs) { alert('FINALIZE BLOCKED — add at least one question first.'); return }
+  if (draftQuality.errorCount > 0 || printAudit.blocked) {
+    alert('FINALIZE BLOCKED — resolve paper quality/print issues first.')
+    return
   }
-  alert(`Paper saved! "${payload.name}" (${totalQs} questions)`)
+  setFinalizing(true)
+  try {
+    const saved = await doSave({ silent:true })
+    if (!saved?.canonicalDocument) throw new Error('Canonical PaperDocument was not saved.')
+    if (saved.persistenceAuthority !== 'SERVER_REVISION_SOURCE_OF_TRUTH') throw new Error('Server persistence is required before finalization. Local recovery copy is preserved.')
+    const check = validateManualAssessmentForRelease(saved.canonicalDocument)
+    if (!check.valid) throw new Error(check.errors.join(' | '))
+    const release = await createAssessmentRelease(saved.canonicalDocument)
+    await finalizeAssessmentRelease({ paperId:saved.serverPaperId || saved.canonicalDocument.id, expectedRevision:Number(saved.serverRevision), release })
+    const finalized = updateSavedPaper(saved.id, {
+      assessmentRelease:release, lifecycleStatus:'FINALIZED', printReadiness:'READY',
+      finalizedAt:release.releasedAt, persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE',
+    })
+    if (!finalized) throw new Error('Finalized release could not be persisted.')
+    onPaperChange(current => ({ ...current, assessmentRelease:release, lifecycleStatus:'FINALIZED', printReadiness:'READY' }))
+    alert(`Assessment finalized. Release hash: ${release.contentHash.slice(0,12)}…`)
+  } catch (error) {
+    alert(`FINALIZE BLOCKED — ${error.message}`)
+  } finally {
+    setFinalizing(false)
+  }
+ }
+
+ async function doPersonalizedPrint() {
+  const release = paper?.assessmentRelease || loadedPaper?.assessmentRelease
+  const releaseId = release?.releaseId
+  const activeCanonicalDocument = paper?.canonicalDocument || loadedPaper?.canonicalDocument || release?.snapshot || null
+  const paperId = loadedPaper?.serverPaperId || paper?.serverPaperId || activeCanonicalDocument?.id
+  if (!releaseId || !paperId || String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase() !== 'FINALIZED') {
+   alert('PERSONALIZED PRINT BLOCKED — finalize this assessment first so the batch is tied to an immutable release.')
+   return
+  }
+  if (printMode !== 'a4') {
+   alert('PERSONALIZED PRINT uses Single A4 so every student booklet has deterministic page boundaries.')
+   return
+  }
+  if (totalQs === 0 || draftQuality.errorCount > 0 || printAudit.blocked) {
+   alert('PERSONALIZED PRINT BLOCKED — resolve the paper quality/print checks first.')
+   return
+  }
+
+  const canonicalClass = classLevelLabel(cfg.className || cfg.classLevel || className)
+  const section = String(overrideConfig?.section || loadedPaper?.section || '').trim()
+  let iframe = null
+  let answerKeyWasEnabled = false
+  setPersonalizedPreparing(true)
+  setPersonalizedStatus('Loading active class roster…')
+
+  try {
+   const studentRows = await fetchActivePrintRosterStudents()
+   const seen = new Set()
+   const members = studentRows.filter(student => {
+    const active = student?.is_active !== false && String(student?.status || '').toLowerCase() !== 'inactive'
+    const studentClass = student?.class || student?.class_name || student?.className || student?.grade || ''
+    const studentSection = String(student?.section || student?.section_name || '').trim()
+    return active && classLevelsMatch(studentClass, canonicalClass) && (!section || !studentSection || studentSection.toLowerCase() === section.toLowerCase())
+   }).map(student => {
+    const id = String(student?.id ?? student?.student_id ?? student?.gr_number ?? '').trim()
+    return {
+     id,
+     displayName:String(student?.name || student?.student_name || '').trim(),
+     rollNumber:String(student?.roll_number ?? student?.roll_no ?? student?.gr_number ?? '').trim(),
+     section:String(student?.section || student?.section_name || section || '').trim(),
+    }
+   }).filter(member => {
+    if (!member.id || seen.has(member.id)) return false
+    seen.add(member.id)
+    return true
+   })
+
+   if (!members.length) throw new Error('No active students were found for ' + canonicalClass + (section ? ' / ' + section : '') + '. Standard blank printing is still available.')
+
+   setPersonalizedStatus('Preparing ' + members.length + ' student booklets…')
+   if (editMode) {
+    setEditMode(false)
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+   }
+   if (printAns) {
+    answerKeyWasEnabled = true
+    setPrintAns(false)
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+   }
+
+   const canvas = document.getElementById('paper-canvas')
+   const master = canvas?.querySelector('.preview-container')
+   if (!master) throw new Error('Printable A4 preview is not available.')
+
+   const old = document.getElementById('__personalized_print_frame')
+   if (old) old.remove()
+   iframe = document.createElement('iframe')
+   iframe.id='__personalized_print_frame'
+   iframe.style.cssText='position:fixed;top:0;left:-9999px;width:210mm;height:297mm;border:0;background:white'
+   document.body.appendChild(iframe)
+   const doc=iframe.contentDocument || iframe.contentWindow.document
+   doc.open()
+   doc.write('<!doctype html><html><head><meta charset="utf-8"><style>@page{size:A4 portrait;margin:4mm}html,body{margin:0;padding:0;background:#fff}*{box-sizing:border-box}.student-booklet{width:100%;margin:0;padding:0}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;background:#fff!important;break-after:page;page-break-after:always}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}.duplex-blank-page{height:288mm;width:100%;break-after:page;page-break-after:always;background:#fff}.no-print,[data-edit-guide]{display:none!important}[contenteditable]{outline:none!important;border-color:transparent!important}table{border-collapse:collapse}</style></head><body></body></html>')
+   doc.close()
+
+   const probe=doc.createElement('div')
+   probe.style.cssText='position:absolute;visibility:hidden;height:288mm;width:1px;pointer-events:none'
+   doc.body.appendChild(probe)
+   const printablePageHeight=Math.max(1,probe.getBoundingClientRect().height)
+   probe.remove()
+
+   const pageCounts={}
+   const bookletNodes=[]
+   members.forEach(member=>{
+    const wrapper=doc.createElement('section')
+    wrapper.className='student-booklet'
+    wrapper.dataset.rosterMemberId=member.id
+    const clone=master.cloneNode(true)
+    clone.removeAttribute('id')
+    clone.style.zoom='1'
+    clone.querySelectorAll('script,iframe,object,embed,form').forEach(node=>node.remove())
+    clone.querySelectorAll('*').forEach(node=>{
+     for (const attribute of [...node.attributes]) {
+      if (/^on/i.test(attribute.name) || ((attribute.name === 'href' || attribute.name === 'src') && /^\s*javascript:/i.test(attribute.value))) node.removeAttribute(attribute.name)
+     }
+     node.removeAttribute('contenteditable')
+    })
+    clone.querySelectorAll('[data-answer-key],[data-correct-answer]').forEach(node=>node.remove())
+    clone.querySelectorAll('[data-personalization-field="student.name"]').forEach(node=>{node.textContent=member.displayName;node.style.borderBottom='none';node.style.height='auto';node.style.minHeight='13px'})
+    clone.querySelectorAll('[data-personalization-field="student.rollNumber"]').forEach(node=>{node.textContent=member.rollNumber;node.style.borderBottom='none';node.style.height='auto';node.style.minHeight='13px'})
+    wrapper.appendChild(clone)
+    doc.body.appendChild(wrapper)
+    bookletNodes.push({member,wrapper,clone})
+   })
+
+   try { await Promise.race([doc.fonts?.ready || Promise.resolve(), new Promise(resolve=>setTimeout(resolve,1800))]) } catch (_) {}
+   bookletNodes.forEach(({member,wrapper,clone})=>{
+    const contentHeight=Math.max(1,clone.scrollHeight || clone.getBoundingClientRect().height || printablePageHeight)
+    const pages=Math.max(1,Math.ceil((contentHeight-2)/printablePageHeight))
+    pageCounts[member.id]=pages
+    if (personalizedDuplex && pages % 2 === 1) {
+     const blank=doc.createElement('div')
+     blank.className='duplex-blank-page'
+     blank.setAttribute('aria-hidden','true')
+     wrapper.appendChild(blank)
+    }
+   })
+
+   const roster = {
+    context:{ classId:canonicalClass, className:canonicalClass, section:section || null, session:headerSession || cfg.session || null },
+    students:members.map(member=>({ studentId:member.id, displayName:member.displayName, rollNo:member.rollNumber, section:member.section || null })),
+   }
+   const teacherName=String(overrideConfig?.subjectTeacher || loadedPaper?.subjectTeacher || paper?.subjectTeacher || '').trim()
+   const teacherBinding={
+    teacherName:teacherName || null,
+    subjectName:cfg.subjectName || cfg.subject || '',
+    className:canonicalClass,
+    classId:canonicalClass,
+    section:section || null,
+   }
+   const created=await createAssessmentPrintJob({
+    paperId,
+    releaseId,
+    roster,
+    teacherBinding,
+    personalized:true,
+    renderSettings:{
+     duplex:personalizedDuplex,
+     copyCount:1,
+     pageSize:'A4',
+     orientation:'portrait',
+     rendererVersion:release.rendererVersion || 'assps-paper-workspace-v1',
+     browserEngineVersion:navigator.userAgent,
+     includeStudentName:true,
+     includeRollNumber:true,
+     studentPageCounts:pageCounts,
+    },
+   })
+   const job=created?.printJob || created
+   const printJobId=job?.print_job_id || job?.printJobId
+   if (!printJobId) throw new Error('Server did not return a durable print job id.')
+
+   await transitionAssessmentPrintJob(printJobId,'QUEUED')
+   await transitionAssessmentPrintJob(printJobId,'PRINTING')
+   const totalPlannedPages=Number(created?.totalPages || Object.values(pageCounts).reduce((sum,pages)=>sum+pages+(personalizedDuplex&&pages%2===1?1:0),0))
+   setPersonalizedStatus(members.length + ' students • ' + totalPlannedPages + ' pages' + (personalizedDuplex ? ' • duplex-safe' : '') + ' • job ' + printJobId)
+
+   if (answerKeyWasEnabled) setPrintAns(true)
+   setTimeout(()=>{
+    try {
+     iframe.contentWindow.focus()
+     iframe.contentWindow.print()
+    } catch (error) {
+     console.error('Personalized print failed:',error)
+     void transitionAssessmentPrintJob(printJobId,'FAILED',error?.message || 'Print dialog failed').catch(()=>{})
+    }
+    setTimeout(()=>iframe?.remove(),2500)
+   },150)
+  } catch (error) {
+   if (answerKeyWasEnabled) setPrintAns(true)
+   if (iframe) iframe.remove()
+   console.error('Personalized print preparation failed:', error)
+   alert('PERSONALIZED PRINT BLOCKED — ' + (error?.response?.data?.message || error?.message || 'Could not prepare student batch.'))
+   setPersonalizedStatus('')
+  } finally {
+   setPersonalizedPreparing(false)
+  }
  }
 
  async function doPrint() {
+ if (isUserAuthoredPaper && totalQs===0) {
+  alert('PRINT BLOCKED — please add at least one question. Your empty draft can still be saved.')
+  return
+ }
+ if (draftQuality.errorCount > 0) {
+  alert(['PRINT BLOCKED — paper quality gate found errors.', ...draftQuality.issues.filter(issue=>issue.level==='error').map(issue=>`• ${issue.text}`)].join('\n'))
+  return
+ }
+ if (printAudit.blocked) {
+  alert(paperPrintBlockMessage(printAudit))
+  return
+ }
  if (editMode) {
   setEditMode(false)
   await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
@@ -737,36 +1264,85 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  })
  doc.open()
  const wmCss = (showWatermark && paperSettings?.logo && watermarkOpacity > 0) ? `body::before { content: ""; position: fixed; top: 52%; left: 50%; transform: translate(-50%, -50%); width: ${145 * watermarkScale}mm; height: ${145 * watermarkScale}mm; background-image: url('${paperSettings.logo}'); background-repeat: no-repeat; background-position: center; background-size: contain; opacity: ${watermarkOpacity}; z-index: 0; pointer-events: none; } body > * { position: relative; z-index: 1; } .preview-wm { display: none !important; }` : ''
- doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>@font-face{font-family:'Jameel Noori Nastaleeq';src:url('/fonts/JameelNooriNastaleeqKasheeda.ttf') format('truetype');font-display:swap}*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}table{border-collapse:collapse}[data-edit-guide]{border:none!important}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
+ doc.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+@font-face{
+  font-family:'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda');
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+@font-face{
+  font-family:'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda');
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+[data-option-bracket] {
+  direction: rtl !important;
+  unicode-bidi: isolate !important;
+  font-family: Arial, sans-serif !important;
+}
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0;background:white}@page{size:A4 portrait;margin:4mm}body{width:100%}#paper-canvas{display:block!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;background:#fff!important}.preview-container{zoom:1!important;width:100%!important;min-height:0!important;height:auto!important;aspect-ratio:auto!important;box-shadow:none!important;margin:0!important;overflow:visible!important;break-after:page}.preview-container:last-child{break-after:auto}${half ? '.preview-container{height:288mm!important;min-height:288mm!important}.half-paper{height:144mm!important;overflow:hidden!important;break-inside:avoid!important}' : ''}.preview-container>[data-premium-template]{width:100%!important;min-height:0!important}[contenteditable]{outline:none!important;border:none!important;background:transparent!important}.no-print,[data-edit-guide]{display:none!important}table{border-collapse:collapse}hr{display:block}${wmCss}</style></head><body>${printable.outerHTML}</body></html>`)
  doc.close()
- setTimeout(() => {
+ try {
+  if (doc.fonts) {
+   await Promise.race([
+    Promise.all([
+     doc.fonts.load("16px 'ASSPS Jameel Noori'"),
+     doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
+     doc.fonts.ready,
+    ]),
+    new Promise(resolve => setTimeout(resolve, 2000))
+   ])
+  }
+ } catch (err) {
+  console.warn('Urdu print font preload warning in doPrint:', err)
+ }
  try { iframe.contentWindow.focus(); iframe.contentWindow.print() } catch(e) { console.error('iframe print failed:', e) }
- setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 3000)
- }, 1200)
+ // Chrome may need several seconds to render a multi-page Urdu print preview.
+ // Removing the source iframe after 3 seconds closes the preview before printing.
+ // Keep it alive while the operator selects a printer or saves the PDF; the next
+ // print removes any previous frame, and this timer is only a fallback cleanup.
+ setTimeout(() => { if (document.body.contains(iframe)) iframe.remove() }, 180000)
  }
 
- const tinp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box', border: pageBorderStyle }
- const filterInp = { background:'rgba(11,44,77,0.6)', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:13, outline:'none', boxSizing:'border-box', border: pageBorderStyle }
+ const tinp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:12, outline:'none', boxSizing:'border-box' }
+ const filterInp = { background:'var(--pg-input-bg,rgba(11,44,77,0.6))', border:`1px solid ${D.border}`, borderRadius:8, color:D.silver, padding:'7px 10px', fontSize:13, outline:'none', boxSizing:'border-box' }
  const filterSel = { ...filterInp, cursor:'pointer' }
 
  return (
  <div className="pts-generator-surface" style={{ display:'flex', flexDirection:'column', minHeight:'calc(100vh - 82px)', height:'calc(100vh - 82px)', width:'100%', position:'relative', ...themeVars(uiTheme) }}>
  <style>{`.pts-generator-surface select option, .pts-generator-surface select optgroup { background: var(--pg-option-bg, #0a1e35); color: var(--pg-option-text, #e6eef8); }`}</style>
- <div style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
+ <div data-paper-controls style={{ background:'var(--pg-toolbar, rgba(7,25,48,0.97))', backdropFilter:blur, borderBottom:`1px solid ${D.border}`, padding:'12px 20px', flexShrink:0 }}>
  <div style={{ display:'flex', gap:8, marginBottom:12, flexWrap:'wrap', alignItems:'center' }}>
- {TEMPLATES.map(t=>(<button key={t.id} onClick={()=>setTmpl(t.id)} style={{ padding:'9px 18px', borderRadius:10, border:'none', cursor:'pointer', fontWeight: 600, fontSize:13, transition:'all .15s', background: tmpl===t.id ? `linear-gradient(135deg,${D.gold},${D.goldL})` : 'rgba(11,44,77,0.92)', color: tmpl===t.id ? '#071e34' : D.muted, boxShadow: tmpl===t.id ? `0 4px 14px rgba(200,153,26,0.3)` : 'none', }}>{t.label}</button>))}
+ <div style={{display:'flex',alignItems:'center',gap:7}}>
+  <span style={{fontSize:11,color:D.muted,fontWeight:800}}>Template</span>
+  <select aria-label="Paper template" value={tmpl} onChange={e=>setTmpl(e.target.value)} style={{...tinp,minWidth:170,cursor:'pointer',fontWeight:700,color:D.gold}}>
+   {TEMPLATES.map(t=><option key={t.id} value={t.id}>{t.label}</option>)}
+  </select>
+ </div>
  <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <ThemeToggle mode={uiTheme} onToggle={onToggleTheme} />
  {PRINT_MODES.map(m=>(<button key={m.id} onClick={()=>setPrintMode(m.id)} style={{ padding:'8px 16px', borderRadius:9, border:`1px solid ${D.border}`, cursor:'pointer', fontWeight:600, fontSize:12, transition:'all .15s', background: printMode===m.id ? `rgba(48,209,88,0.15)` : 'rgba(15,23,42,0.46)', color: printMode===m.id ? D.green : D.muted, borderColor: printMode===m.id ? `rgba(48,209,88,0.4)` : D.border, }}>{printMode===m.id?' ':' '}{m.label}</button>))}
  </div>
  </div>
- <div style={{ display:'flex', gap:12, flexWrap:'wrap', alignItems:'center' }}>
- {[['Paper Code', paperCode, setPaperCode, 70, 'text'], ['Time Allowed', timeAllwd, setTimeAllwd, 110, 'text'], ['Exam Date', examDate, setExamDate, 110, 'text']].map(([lbl, val, set, w, type])=>(
+ <div data-paper-header-controls style={{ display:'flex', gap:12, flexWrap:'wrap', alignItems:'center' }}>
+ {[['Class', headerClass, setHeaderClass, 70, 'text'], ['Subject', headerSubject, setHeaderSubject, 120, 'text'], ['Paper Code', paperCode, setPaperCode, 105, 'text'], ['Time Allowed', timeAllwd, setTimeAllwd, 110, 'text'], ['Exam Date', examDate, setExamDate, 110, 'text']].map(([lbl, val, set, w, type])=>(
  <div key={lbl} style={{ display:'flex', gap:6, alignItems:'center' }}>
  <span style={{ fontSize:12, color:D.muted, fontWeight:600 }}>{lbl}</span>
  <input type={type} value={val} onChange={e=>set(e.target.value)} style={{ ...tinp, width:w }} />
  </div>
  ))}
+ <div style={{ display:'flex', gap:6, alignItems:'center' }}>
+ <span style={{ fontSize:12, color:D.muted, fontWeight:600 }}>Total Marks</span>
+ <input aria-label="Total Marks" type="number" min="0" value={headerTotalMarks || ''} onChange={e=>{ setHeaderTotalMarks(Math.max(0,Number(e.target.value)||0)); setMarksAuthorityEdited(true) }} style={{ ...tinp, width:72 }} />
+ </div>
  <div style={{ display:'flex', gap:6, alignItems:'center' }}>
  <span style={{ fontSize:12, color:D.muted, fontWeight:600 }}>Language</span>
  <select value={language} onChange={e=>setLanguage(e.target.value)} style={{ ...tinp, cursor:'pointer', width:120 }}><option value="english">English</option><option value="urdu">Urdu (اردو)</option><option value="dual">Dual Medium</option></select>
@@ -774,35 +1350,71 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printBub} onChange={e=>setPrintBub(e.target.checked)} style={{ accentColor:D.gold }} />Bubble Sheet</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={printAns} onChange={e=>setPrintAns(e.target.checked)} style={{ accentColor:D.gold }} />Answer Keys</label>
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showAnsLines} onChange={e=>setShowAnsLines(e.target.checked)} style={{ accentColor:D.gold }} />Ans Lines</label>
- <div style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
+ {isUserAuthoredPaper && persistenceNotice && <div data-assessment-persistence-status style={{ fontSize:10, maxWidth:220, color:persistenceNotice.includes('Conflict')||persistenceNotice.includes('Offline')?'#fbbf24':'#86efac', fontWeight:700 }}>{persistenceNotice}</div>}
+ <div data-paper-actions style={{ marginLeft:'auto', display:'flex', gap:8, alignItems:'center' }}>
  <DBtn color="ghost" onClick={onBack} style={{ padding:'8px 14px', fontSize:12 }}>← Back</DBtn>
+ {isOfficialPaper && <button data-edit-paper-toggle type="button" onClick={toggleEditMode} style={{ padding:'8px 15px', borderRadius:9, border:`1px solid ${editMode?'#ef4444':D.border}`, cursor:'pointer', fontWeight:800, fontSize:12, background:editMode?'rgba(239,68,68,.16)':'rgba(11,44,77,.92)', color:editMode?'#fecaca':D.silver }}>{editMode?'Done Editing':'Edit Paper'}</button>}
  <button onClick={()=>setModalOpen(true)} style={{ background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:10, padding:'8px 18px', fontWeight: 600, fontSize:13, cursor:'pointer', display:'flex', alignItems:'center', gap:7, }}> Question Menu {totalQs > 0 && (<span style={{ background:'rgba(255,255,255,0.25)', borderRadius:9, padding:'1px 8px', fontSize:11, fontWeight: 600 }}>{totalQs}</span>)}</button>
- <DBtn color="green" onClick={doSave} disabled={!totalQs} style={{ padding:'8px 16px', fontSize:13 }}> Save</DBtn>
+ <DBtn color="green" onClick={()=>doSave()} disabled={!totalQs && !isUserAuthoredPaper} style={{ padding:'8px 16px', fontSize:13 }}>{isUserAuthoredPaper ? 'Save Draft' : 'Save'}</DBtn>
+ {isUserAuthoredPaper && <button data-finalize-assessment type="button" onClick={doFinalize} disabled={finalizing || !totalQs} style={{ padding:'8px 14px',borderRadius:9,border:`1px solid ${D.gold}`,background:'rgba(200,153,26,.10)',color:D.gold,fontWeight:900,fontSize:12,cursor:finalizing?'wait':'pointer',opacity:(finalizing||!totalQs)?0.55:1 }}>{finalizing?'Finalizing…':paper.assessmentRelease?.status==='FINALIZED'?'Finalized ✓':'Finalize'}</button>}
+ {isUserAuthoredPaper && (paper?.assessmentRelease?.status==='FINALIZED' || loadedPaper?.assessmentRelease?.status==='FINALIZED' || String(paper?.lifecycleStatus || loadedPaper?.lifecycleStatus || '').toUpperCase()==='FINALIZED') && <details data-personalized-print-controls style={{position:'relative'}}>
+  <summary style={{padding:'8px 12px',borderRadius:9,border:'1px solid '+D.border,background:'rgba(255,255,255,.035)',color:D.silver,fontWeight:800,fontSize:12,cursor:'pointer',listStyle:'none'}}>Class Print</summary>
+  <div style={{position:'absolute',right:0,top:'calc(100% + 6px)',zIndex:30,width:240,padding:10,border:'1px solid '+D.border,borderRadius:10,background:D.panel,boxShadow:'0 12px 30px rgba(0,0,0,.28)'}}>
+   <label style={{display:'flex',alignItems:'center',gap:7,fontSize:11,color:D.silver,marginBottom:8,cursor:'pointer'}}><input data-personalized-duplex type="checkbox" checked={personalizedDuplex} onChange={e=>setPersonalizedDuplex(e.target.checked)} style={{accentColor:D.gold}} /> Duplex-safe student boundaries</label>
+   <button data-personalized-print type="button" onClick={doPersonalizedPrint} disabled={personalizedPreparing} style={{...tinp,width:'100%',cursor:personalizedPreparing?'wait':'pointer',fontWeight:900,color:D.gold}}>{personalizedPreparing?'Preparing…':'Prepare & Print Class'}</button>
+   {personalizedStatus && <div data-personalized-print-status style={{fontSize:9,lineHeight:1.5,color:D.muted,marginTop:7}}>{personalizedStatus}</div>}
+  </div>
+ </details>}
  <GoldBtn onClick={doPrint} style={{ padding:'8px 20px', fontSize:13 }}> Print</GoldBtn>
  </div>
  </div>
- <details open style={{ marginTop:8 }}>
- <summary style={{ cursor:'pointer', color:D.silver, fontSize:12, fontWeight:700, userSelect:'none' }}>Advanced formatting</summary>
+ <details data-paper-metadata-editor style={{ marginTop:8 }}>
+ <summary style={{ cursor:'pointer', color:D.gold, fontSize:12, fontWeight:800, userSelect:'none' }}>Paper Information — edit all header fields</summary>
+ <div style={{ display:'grid', gridTemplateColumns:'2fr 1.4fr 1fr', gap:10, marginTop:8, alignItems:'end' }}>
+  <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Paper / Exam Title<input value={headerTitle} onChange={e=>setHeaderTitle(e.target.value)} style={{...tinp,width:'100%',marginTop:4}} /></label>
+  <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Exam Type<input value={headerExamType} onChange={e=>setHeaderExamType(e.target.value)} style={{...tinp,width:'100%',marginTop:4}} /></label>
+  <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Session<input value={headerSession} onChange={e=>setHeaderSession(e.target.value)} style={{...tinp,width:'100%',marginTop:4}} /></label>
+ </div>
+ <div style={{ display:'grid', gridTemplateColumns:'2fr 1fr auto', gap:10, marginTop:8, alignItems:'end' }}>
+  <label style={{ fontSize:11, color:D.muted, fontWeight:700 }}>Campus / Address<input value={headerAddress} onChange={e=>setHeaderAddress(e.target.value)} placeholder={paperSettings?.address || 'Sharif Chowk, Rayya Khas, Narowal'} style={{...tinp,width:'100%',marginTop:4}} /></label>
+  {isOfficialPaper && <div data-marks-ledger style={{ border:`1px solid ${marksLedger.balanced?'rgba(48,209,88,.45)':'rgba(255,159,10,.55)'}`, borderRadius:8, padding:'7px 9px', background:marksLedger.balanced?'rgba(48,209,88,.08)':'rgba(255,159,10,.08)', fontFamily:'Arial,sans-serif' }}><div style={{fontSize:10,color:D.muted,fontWeight:800}}>MARKS LEDGER</div><div style={{fontSize:12,color:marksLedger.balanced?D.green:D.orange,fontWeight:900}}>Header {marksLedger.headerTotal || 0} / Questions {marksLedger.questionTotal || 0}</div></div>}
+  {isOfficialPaper && <button type="button" disabled={!marksLedger.questionTotal || marksLedger.headerTotal===marksLedger.questionTotal} onClick={()=>{setHeaderTotalMarks(marksLedger.questionTotal);setMarksAuthorityEdited(true)}} style={{...tinp,cursor:'pointer',fontWeight:800,color:D.gold,minWidth:128}}>Use Question Total</button>}
+ </div>
+ {isOfficialPaper && <div style={{ display:'grid', gridTemplateColumns:'minmax(0,1fr) auto', gap:10, marginTop:8, alignItems:'start' }}>
+  <div data-paper-quality-gate style={{ border:`1px solid ${draftQuality.errorCount?'rgba(255,55,95,.55)':draftQuality.warningCount?'rgba(255,159,10,.55)':'rgba(48,209,88,.45)'}`, borderRadius:8, padding:'8px 10px', background:draftQuality.errorCount?'rgba(255,55,95,.08)':draftQuality.warningCount?'rgba(255,159,10,.08)':'rgba(48,209,88,.08)', fontFamily:'Arial,sans-serif' }}>
+   <div style={{ display:'flex', gap:8, alignItems:'center', flexWrap:'wrap' }}><b style={{ fontSize:11, color:draftQuality.errorCount?D.red:draftQuality.warningCount?D.orange:D.green }}>PAPER QUALITY GATE</b><span style={{ fontSize:11, color:D.silver }}>{draftQuality.academicQuestionCount} questions · {draftQuality.errorCount} errors · {draftQuality.warningCount} warnings</span></div>
+   {draftQuality.issues.length > 0 && <div style={{ marginTop:5, fontSize:10, color:D.muted }}>{draftQuality.issues.slice(0,4).map(issue=><div key={`${issue.code}-${issue.question||0}-${issue.item||0}`}>• {issue.text}</div>)}{draftQuality.issues.length>4&&<div>• +{draftQuality.issues.length-4} more issue(s)</div>}</div>}
+  </div>
+  <button data-apply-assps-rules type="button" onClick={applyWorkspaceRules} style={{...tinp,cursor:'pointer',fontWeight:900,color:D.gold,minWidth:158,padding:'9px 12px'}}>Apply ASSPS Rules</button>
+ </div>}
+ <div style={{ marginTop:7, fontSize:10, color:D.muted }}>School name and logo are locked to school branding. Every other paper field is editable. Official source data stays locked; Save writes an editable working copy.</div>
+ </details>
+ <details style={{ marginTop:8 }}>
+ <summary style={{ cursor:'pointer', color:D.silver, fontSize:12, fontWeight:700, userSelect:'none' }}>Paper Style &amp; Layout</summary>
  <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:10 }}>
- <button onClick={()=>setEditMode(p=>!p)} style={{ padding:'6px 14px', borderRadius:9, border:`1px solid ${D.border}`, cursor:'pointer', fontWeight: 600, fontSize:12, background: editMode ? `linear-gradient(135deg,${D.gold},${D.goldL})` : 'rgba(11,44,77,0.92)', color: editMode ? '#071e34' : D.silver, }}>{editMode ? ' Done Edit' : ' Manual Edit'}</button>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Letter Sp</span>
- <input type="range" min={0} max={3} step={0.5} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Paper Letter Spacing" type="range" min={-1} max={5} step={0.1} value={letterSp} onChange={e=>setLetterSp(Number(e.target.value))} style={{ width:82, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{letterSp}px</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
+ <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Word Sp</span>
+ <input aria-label="Paper Word Spacing" type="range" min={-2} max={14} step={0.5} value={wordSp} onChange={e=>setWordSp(Number(e.target.value))} style={{ width:82, accentColor:D.gold }} />
+ <span style={{ fontSize:11, color:D.gold, minWidth:22 }}>{wordSp}px</span>
+ </div>
+ <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Line H (En)</span>
- <input type="range" min={1} max={3} step={0.1} value={engLineH} onChange={e=>setEngLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="English Line Height" type="range" min={1} max={3} step={0.1} value={engLineH} onChange={e=>setEngLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:26 }}>{engLineH}</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Line H (Ur)</span>
- <input type="range" min={1.5} max={4} step={0.1} value={urdLineH} onChange={e=>setUrdLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Urdu Line Height" type="range" min={1.5} max={4} step={0.1} value={urdLineH} onChange={e=>setUrdLineH(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
  <span style={{ fontSize:11, color:D.gold, minWidth:26 }}>{urdLineH}</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Font</span>
- <select value={fontFamily} onChange={e=>setFontFamily(e.target.value)} style={{ background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.silver, padding:'4px 8px', fontSize:11, outline:'none', cursor:'pointer' }}>
+ <select aria-label="Paper Font Family" value={fontFamily} onChange={e=>setFontFamily(e.target.value)} style={{ background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.silver, padding:'4px 8px', fontSize:11, outline:'none', cursor:'pointer' }}>
  <option value="">Default</option>
  <option value="'Times New Roman', serif">Times New Roman</option>
  <option value="'Arial', sans-serif">Arial</option>
@@ -812,7 +1424,7 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <option value="'Calibri', sans-serif">Calibri</option>
  <option value="'Garamond', serif">Garamond</option>
  <option value="'Book Antiqua', serif">Book Antiqua</option>
- <option value="'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif">Jameel Noori Nastaleeq</option>
+ <option value="'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif">Jameel Noori Nastaleeq</option>
  <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
  <option value="'Palatino Linotype', serif">Palatino Linotype</option>
  </select>
@@ -825,15 +1437,15 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Color</span>
- <input type="color" value={fontColor} onChange={e=>setFontColor(e.target.value)} style={{ width:30, height:26, padding:2, borderRadius:6, border:`1px solid ${D.border}`, background:'transparent', cursor:'pointer' }} />
+ <input aria-label="Paper Font Color" type="color" value={fontColor} onChange={e=>setFontColor(e.target.value)} style={{ width:30, height:26, padding:2, borderRadius:6, border:`1px solid ${D.border}`, background:'transparent', cursor:'pointer' }} />
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Size</span>
- <input type="number" min={8} max={16} value={baseFontSz} onChange={e=>setBaseFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
+ <input aria-label="Paper Body Font Size" type="number" min={8} max={16} value={baseFontSz} onChange={e=>setBaseFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Head Size</span>
- <input type="number" min={8} max={24} value={headFontSz} onChange={e=>setHeadFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
+ <input aria-label="Paper Heading Font Size" type="number" min={8} max={24} value={headFontSz} onChange={e=>setHeadFontSz(Number(e.target.value))} style={{ width:46, background:'rgba(11,44,77,0.7)', border:`1px solid ${D.border}`, borderRadius:6, color:D.gold, padding:'3px 6px', fontSize:12, outline:'none', fontWeight:700, textAlign:'center' }} />
  </div>
  </div>
  <div style={{ display:'flex', gap:14, flexWrap:'wrap', alignItems:'center', marginTop:8, paddingTop:8, borderTop:`1px solid ${D.border}` }}>
@@ -841,39 +1453,39 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Q Border</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['none','None'],['box','Box'],['table','Table']].map(([v,l])=>(<button key={v} onClick={()=>setQBorderStyle(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${qBorderStyle===v?D.gold:D.border}`, cursor:'pointer', fontWeight:qBorderStyle===v?700:400, fontSize:11, background: qBorderStyle===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: qBorderStyle===v?D.gold:D.muted, }}>{l}</button>))}
+ {[['none','None'],['box','Box'],['table','Table']].map(([v,l])=>(<button key={v} aria-label={`Question border ${l}`} aria-pressed={qBorderStyle===v} onClick={()=>setQBorderStyle(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${qBorderStyle===v?D.gold:D.border}`, cursor:'pointer', fontWeight:qBorderStyle===v?700:400, fontSize:11, background: qBorderStyle===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: qBorderStyle===v?D.gold:D.muted, }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>MCQ Layout</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['compact-grid','Grid'],['matrix-table','Table'],['classic','Classic']].map(([v,l])=>(<button key={v} onClick={()=>setMcqLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${mcqLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:mcqLayout===v?700:400, fontSize:11, background: mcqLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: mcqLayout===v?D.gold:D.muted }}>{l}</button>))}
+ {[['compact-grid','Grid'],['matrix-table','Table'],['classic','Classic']].map(([v,l])=>(<button key={v} aria-label={`MCQ layout ${l}`} aria-pressed={mcqLayout===v} onClick={()=>setMcqLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${mcqLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:mcqLayout===v?700:400, fontSize:11, background: mcqLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: mcqLayout===v?D.gold:D.muted }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Short Qs</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['2-column-balanced','2-Col (1-5|6-10)'],['1-column','1-Col'],['table','Table']].map(([v,l])=>(<button key={v} onClick={()=>setShortLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${shortLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:shortLayout===v?700:400, fontSize:11, background: shortLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: shortLayout===v?D.gold:D.muted }}>{l}</button>))}
+ {[['2-column-balanced','2 Columns'],['1-column','1 Column'],['table','Table 1-Col'],['table-2-column','Table 2-Col']].map(([v,l])=>(<button key={v} aria-label={`Short questions layout ${l}`} aria-pressed={shortLayout===v} onClick={()=>setShortLayout(v)} style={{ padding:'3px 9px', borderRadius:6, border:`1px solid ${shortLayout===v?D.gold:D.border}`, cursor:'pointer', fontWeight:shortLayout===v?700:400, fontSize:11, background: shortLayout===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: shortLayout===v?D.gold:D.muted }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Page Border</span>
  <div style={{ display:'flex', gap:3 }}>
- {[['none','None'],['thin','Thin'],['thick','Thick'],['double','Double']].map(([v,l])=>(<button key={v} onClick={()=>setPageBorder(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${pageBorder===v?D.gold:D.border}`, cursor:'pointer', fontWeight:pageBorder===v?700:400, fontSize:11, background: pageBorder===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: pageBorder===v?D.gold:D.muted, }}>{l}</button>))}
+ {[['none','None'],['thin','Fine'],['scholar','Scholar'],['double','Double'],['premium','Premium']].map(([v,l])=>(<button key={v} aria-label={`Page border ${l}`} aria-pressed={pageBorder===v} onClick={()=>setPageBorder(v)} style={{ padding:'3px 10px', borderRadius:6, border:`1px solid ${pageBorder===v?D.gold:D.border}`, cursor:'pointer', fontWeight:pageBorder===v?800:500, fontSize:11, background: pageBorder===v?`rgba(200,153,26,0.2)`:'rgba(11,44,77,0.92)', color: pageBorder===v?D.gold:D.muted, }}>{l}</button>))}
  </div>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showWatermark} onChange={e=>setShowWatermark(e.target.checked)} style={{ accentColor:D.gold }} />Logo WM</label>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>Watermark</span>
- <input type="range" min={0.03} max={0.22} step={0.01} value={watermarkOpacity} onChange={e=>setWatermarkOpacity(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Watermark Opacity" type="range" min={0.02} max={0.24} step={0.01} value={watermarkOpacity} onChange={e=>setWatermarkOpacity(Number(e.target.value))} style={{ width:74, accentColor:D.gold }} /><span style={{fontSize:10,color:D.gold,minWidth:30}}>{Math.round(watermarkOpacity*100)}%</span>
  </div>
  <div style={{ display:'flex', gap:5, alignItems:'center' }}>
  <span style={{ fontSize:11, color:D.muted, fontWeight:600 }}>WM Size</span>
- <input type="range" min={0.8} max={1.6} step={0.05} value={watermarkScale} onChange={e=>setWatermarkScale(Number(e.target.value))} style={{ width:70, accentColor:D.gold }} />
+ <input aria-label="Watermark Size" type="range" min={0.65} max={1.9} step={0.05} value={watermarkScale} onChange={e=>setWatermarkScale(Number(e.target.value))} style={{ width:74, accentColor:D.gold }} /><span style={{fontSize:10,color:D.gold,minWidth:28}}>{Math.round(watermarkScale*100)}%</span>
  </div>
  <div style={{ width:1, height:18, background:D.border }} />
  <label style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color:D.silver }}><input type="checkbox" checked={showUrduHeaders} onChange={e=>setShowUrduHeaders(e.target.checked)} style={{ accentColor:D.gold }} />حصہ معروضی / انشائیہ</label>
@@ -888,20 +1500,113 @@ function QuestionPanel({ subjectId, selectedChapters, paper, onPaperChange, onBa
  <button type="button" title={isFullscreen?'Exit full screen':'Full screen'} aria-label={isFullscreen?'Exit full screen':'Full screen'} onClick={()=>isFullscreen?document.exitFullscreen?.():document.querySelector('.pts-generator-surface')?.requestFullscreen?.()} style={{ width:30, height:30, display:'grid', placeItems:'center', background:'rgba(11,44,77,.8)', color:D.silver, border:`1px solid ${D.border}`, borderRadius:5, cursor:'pointer' }}>{isFullscreen?<Minimize size={16} />:<Maximize size={16} />}</button>
  </div>
  </div>
+ <PaperSelectionToolbar editMode={editMode} active={activeEditable} />
+ {editMode && isOfficialPaper && <div className="no-print" data-section-inspector style={{ position:'fixed', right:14, top:150, zIndex:11500, width:300, maxHeight:'calc(100vh - 185px)', overflowY:'auto', padding:12, border:'1px solid var(--pg-panel-border,#ef4444)', borderRadius:12, background:'var(--pg-panel-bg,rgba(7,25,48,.98))', color:D.silver, boxShadow:'var(--pg-panel-shadow,0 10px 34px rgba(0,0,0,.42))', fontFamily:'Arial,sans-serif', direction:'ltr' }}>
+  <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:8, marginBottom:10 }}>
+   <div><b style={{ color:D.gold, fontSize:12 }}>EDIT PAPER</b><div style={{ color:D.muted, fontSize:10, marginTop:2 }}>{selectedSection ? 'Question settings — paper layout stays fixed' : 'Click any question or editable line'}</div></div>
+   {selectedSection && <button type="button" aria-label="Close question inspector" onClick={()=>{setSelectedSectionId('');setActiveEditable(null)}} style={{border:0,background:'transparent',color:D.muted,fontSize:18,cursor:'pointer'}}>×</button>}
+  </div>
+  {selectedSection ? <>
+   <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Question No.
+     <input type="number" min="1" value={Number(selectedSection.sourceOrder||1)} onChange={e=>{const next=Math.max(1,Number(e.target.value)||1);const heading=replaceQuestionSerial(selectedSection.heading||'',next,isUrduScriptPaper({config:cfg,...paper}));updateSelectedSection({sourceOrder:next,heading,text:heading,textUrdu:isUrduScriptPaper({config:cfg,...paper})?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
+    </label>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Marks
+     <input type="number" min="0" value={selectedSectionMarks||''} onChange={e=>{const next=Math.max(0,Number(e.target.value)||0);const urdu=isUrduScriptPaper({config:cfg,...paper});const heading=replaceSectionMarks(selectedSection.heading||'',next,urdu);updateSelectedSection({marks:next,operationalMarks:next,marksManuallyEdited:true,heading,text:heading,textUrdu:urdu?heading:''})}} style={{...tinp,width:'100%',marginTop:3}} />
+    </label>
+   </div>
+   {isUserAuthoredPaper && <>
+    <label style={{display:'block',fontSize:11,fontWeight:800,color:D.muted,marginTop:9}}>Question Heading
+      <input aria-label="Selected question heading" value={selectedSection.heading||''} onChange={e=>updateSelectedSection({heading:e.target.value,text:e.target.value,textUrdu:selectedSectionIsUrdu?e.target.value:''})} style={{...tinp,width:'100%',marginTop:4}} />
+    </label>
+    <label style={{display:'block',fontSize:11,fontWeight:800,color:D.muted,marginTop:9}}>Question Content
+      <textarea aria-label="Selected question content" dir={selectedSectionIsUrdu?'rtl':'ltr'} value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} placeholder="Type your question or activity here..." style={{...tinp,width:'100%',minHeight:95,resize:'vertical',marginTop:4,fontFamily:selectedSectionIsUrdu?URDU_FONT_STACK:"'Times New Roman',serif"}} />
+    </label>
+   </>}
+   <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Question Type
+    <select value={selectedSection.layoutPreset||'auto'} onChange={e=>updateSelectedSection({layoutPreset:e.target.value})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
+     <option value="auto">Auto ({selectedSectionKind})</option><option value="mcq">MCQ</option><option value="short">Short Questions</option><option value="long">Long Question</option><option value="fill_blank">Fill Blanks</option><option value="true_false">True / False</option><option value="matching">Matching</option><option value="pair_table">Word Pair Table</option><option value="sentence_usage">Sentence Usage — الفاظ / جملے</option><option value="table">Table</option><option value="list">List</option><option value="vertical_math">Math Operations</option><option value="math_compare">Math Compare</option><option value="math_number_name">Number Names</option><option value="math_place_value">Place Value</option><option value="math_order">Number Order</option><option value="math_table">Math Table</option>
+    </select>
+   </label>
+   <label style={{display:'block',fontSize:10,fontWeight:800,color:D.muted,marginTop:8}}>Section Divider
+    <select value={selectedSection.showDivider===true?'show':selectedSection.showDivider===false?'hide':'inherit'} onChange={e=>updateSelectedSection({showDivider:e.target.value==='inherit'?undefined:e.target.value==='show'})} style={{...tinp,width:'100%',marginTop:3,cursor:'pointer'}}>
+     <option value="inherit">Use global setting</option><option value="show">Show divider</option><option value="hide">Hide divider</option>
+    </select>
+   </label>
+   {selectedSectionKind==='mcq' && selectedMcqRows.length>0 && <div data-answer-key-editor style={{marginTop:10,padding:9,border:'1px solid rgba(148,163,184,.2)',borderRadius:9,background:'rgba(255,255,255,.025)'}}>
+    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:8,marginBottom:7}}>
+     <b style={{fontSize:10,color:D.gold}}>ANSWER KEY</b>
+     <span style={{fontSize:9,color:D.muted}}>Set correct option</span>
+    </div>
+    <div style={{display:'grid',gap:6}}>
+     {selectedMcqRows.map((row,rowIndex)=>{
+      const currentAnswer=sectionAnswerAt(selectedSection,row,rowIndex)
+      return <div key={String(row.number)+'-'+rowIndex} style={{display:'grid',gridTemplateColumns:'30px 1fr',alignItems:'center',gap:6}}>
+       <b style={{fontSize:10,color:D.silver,textAlign:'center'}}>{row.number}.</b>
+       <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+        {(row.options||[]).map((opt,optIndex)=>{
+         const token=normalizeAnswerToken(opt.label||String.fromCharCode(65+optIndex))
+         const active=currentAnswer===token
+         const label=selectedSectionIsUrdu?optionLabelParts(opt.label,optIndex,true).label:String(opt.label||String.fromCharCode(65+optIndex)).replace(/[().]/g,'').toUpperCase()
+         return <button key={optIndex} type="button" aria-label={`Set MCQ ${row.number} answer ${label}`} aria-pressed={active} onClick={()=>{
+          const existing=Array.isArray(selectedSection.answerKey)
+           ? Object.fromEntries(selectedSection.answerKey.map((value,index)=>[String(index+1),value]))
+           : {...(selectedSection.answerKey||{})}
+          existing[String(row.number||rowIndex+1)]=token
+          updateSelectedSection({answerKey:existing})
+         }} style={{minWidth:30,height:28,padding:'0 7px',borderRadius:6,border:`1px solid ${active?D.gold:D.border}`,background:active?'rgba(200,153,26,.22)':'rgba(11,44,77,.65)',color:active?D.gold:D.silver,cursor:'pointer',fontFamily:selectedSectionIsUrdu?URDU_FONT_STACK:'Arial,sans-serif',fontWeight:900}}>{label}</button>
+        })}
+        <button type="button" aria-label={`Clear MCQ ${row.number} answer`} onClick={()=>{
+         const existing=Array.isArray(selectedSection.answerKey)
+          ? Object.fromEntries(selectedSection.answerKey.map((value,index)=>[String(index+1),value]))
+          : {...(selectedSection.answerKey||{})}
+         delete existing[String(row.number||rowIndex+1)]
+         updateSelectedSection({answerKey:existing})
+        }} style={{height:28,padding:'0 7px',borderRadius:6,border:`1px solid ${D.border}`,background:'transparent',color:D.muted,cursor:'pointer',fontSize:9}}>Clear</button>
+       </div>
+      </div>
+     })}
+    </div>
+   </div>}
+   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginTop:8}}>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Answer Lines<input type="number" min="0" max="20" value={Number(selectedSection.answerLines||0)} onChange={e=>updateSelectedSection({answerLines:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} /></label>
+    <label style={{fontSize:10,fontWeight:800,color:D.muted}}>Lines / Item<input type="number" min="0" max="5" value={Number(selectedSection.answerLinesPerItem||0)} onChange={e=>updateSelectedSection({answerLinesPerItem:Math.max(0,Number(e.target.value)||0)})} style={{...tinp,width:'100%',marginTop:3}} /></label>
+   </div>
+   <div style={{display:'flex',gap:5,flexWrap:'wrap',marginTop:10}}>
+    <button type="button" onClick={()=>moveOfficialSection(selectedSection.id,-1)} style={{...tinp,cursor:'pointer',padding:'6px 9px'}}>↑ Up</button>
+    <button type="button" onClick={()=>moveOfficialSection(selectedSection.id,1)} style={{...tinp,cursor:'pointer',padding:'6px 9px'}}>↓ Down</button>
+    <button type="button" onClick={()=>duplicateOfficialSection(selectedSection.id)} style={{...tinp,cursor:'pointer',padding:'6px 9px'}}>Duplicate</button>
+    <button type="button" onClick={()=>deleteOfficialSection(selectedSection.id)} style={{...tinp,cursor:'pointer',padding:'6px 9px',color:'#fca5a5',borderColor:'rgba(239,68,68,.5)'}}>Delete</button>
+   </div>
+   <details style={{marginTop:10}}>
+    <summary style={{fontSize:10,color:D.muted,cursor:'pointer',fontWeight:800}}>Advanced raw content</summary>
+    <textarea aria-label="Selected question raw content" value={selectedSection.content||''} onChange={e=>updateSelectedSection({content:e.target.value})} style={{...tinp,width:'100%',minHeight:110,resize:'vertical',marginTop:6,direction:isUrduScriptPaper({config:cfg,...paper})?'rtl':'ltr',fontFamily:isUrduScriptPaper({config:cfg,...paper})?URDU_FONT_STACK:"'Times New Roman',serif"}} />
+   </details>
+  </> : <div style={{fontSize:11,lineHeight:1.55,color:D.muted}}>The paper will not move in Edit mode. Click a question to open structural controls. Click its text to type directly. Select text to use the floating Word-style formatting bar.</div>}
+  {isUserAuthoredPaper ? <details ref={blockAddMenuRef} data-block-add-menu style={{marginTop:10}}>
+   <summary style={{...tinp,width:'100%',cursor:'pointer',fontWeight:900,color:D.gold,listStyle:'none'}}>+ Add Block</summary>
+   <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:6,marginTop:6}}>
+    <button type="button" data-add-block="question" onClick={()=>addOfficialSection('auto')} style={{...tinp,cursor:'pointer'}}>Question</button>
+    <button type="button" data-add-block="table" onClick={()=>addOfficialSection('table')} style={{...tinp,cursor:'pointer'}}>Table</button>
+    <button type="button" data-add-block="matching" onClick={()=>addOfficialSection('matching')} style={{...tinp,cursor:'pointer'}}>Matching</button>
+    <button type="button" data-add-block="long" onClick={()=>addOfficialSection('long')} style={{...tinp,cursor:'pointer'}}>Long Answer</button>
+   </div>
+  </details> : <button type="button" onClick={()=>addOfficialSection('auto')} style={{...tinp,width:'100%',marginTop:10,cursor:'pointer',fontWeight:900,color:D.gold}}>+ Add Question</button>}
+ </div>}
  <div id="paper-canvas" ref={canvasRef} style={{ flex:1, minHeight:0, overflowY:'auto', background:'var(--pg-canvas, #1e2a3a)', padding:'12px', display:'flex', flexDirection:'column', alignItems:'center', gap: half ? 8 : 0 }}>
  {totalQs === 0 ? (
  <div style={{ flex:1, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:60 }}>
  <div style={{ fontSize:72, marginBottom:16, opacity:0.4 }}></div>
  <div style={{ fontSize:22, fontWeight:700, color:D.silver, marginBottom:10 }}>Paper Preview</div>
  <div style={{ fontSize:14, color:D.muted, maxWidth:380, lineHeight:1.7 }}>Click <strong style={{color:'#4da6ff'}}>Question Menu</strong> to add questions.<br/>Your paper will appear here live as you add them.</div>
- <button onClick={()=>setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}> Open Question Menu</button>
+ <button onClick={()=>isOfficialPaper ? addOfficialSection() : setModalOpen(true)} style={{ marginTop:28, background:`linear-gradient(135deg,#0A84FF,#0055cc)`, color:'white', border:'none', borderRadius:12, padding:'13px 34px', fontWeight: 600, fontSize:16, cursor:'pointer', boxShadow:'0 6px 20px rgba(10,132,255,0.35)', }}>{isOfficialPaper ? '+ Type First Question' : 'Open Question Menu'}</button>
  </div>
  ) : half ? (
- <div className="preview-container" style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
- {[0,1].map(index=><div key={index} className="half-paper" style={{ height:544, overflow:'hidden', borderBottom:index===0?'1px dashed #b9c5d0':'none', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><TemplateComp {...tplProps} half={true} /></div>)}
+ <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, height:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 20px rgba(0,0,0,0.35)', overflow:'hidden', position:'relative' }}>
+ {[0,1].map(index=><div key={index} className="half-paper" style={{ height:544, overflow:'hidden', borderBottom:index===0?'1px dashed #b9c5d0':'none', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={true} /></div>)}
  </div>
  ) : (
- <div className="preview-container" style={{ width:794, minHeight:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 24px rgba(0,0,0,0.4)', overflowX:'hidden', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><TemplateComp {...tplProps} half={false} /></div>
+ <div className="preview-container" data-watermark-enabled={showWatermark?'true':'false'} data-watermark-scale={watermarkScale} data-watermark-opacity={watermarkOpacity} style={{ width:794, minHeight:1123, zoom:previewZoom, flexShrink:0, background:'white', boxShadow:'0 4px 24px rgba(0,0,0,0.4)', overflowX:'hidden', position:'relative' }}><PreviewWatermark logo={paperSettings?.logo} show={showWatermark} opacity={watermarkOpacity} scale={watermarkScale} /><PremiumPaperTemplate {...tplProps} variant={templateVariant} half={false} /></div>
  )}
  </div>
  <style>{`@media print { body { display: none !important; } }`}</style>
@@ -1097,61 +1802,101 @@ function ColumnResponseGrid({ content, isUrdu, fs, qFs, themeColor, columns=2 })
  })}</div>
 }
 
-function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeColor }) {
- const heading = String(question.heading || '')
- const requestedLayout = question.layoutPreset || 'auto'
- const requestedColumns = Number(question.columnCount || 2)
- if (requestedLayout === 'rich') return <PaperRichTextRenderer value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} />
- if (requestedLayout === 'columns' || (requestedLayout === 'auto' && /احادیث|حدیث/i.test(heading))) return <ColumnResponseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} columns={requestedLayout === 'auto' ? 3 : requestedColumns} />
- if (requestedLayout === 'true-false' || /(?:true\s*(?:or|\/)?\s*false|tick the true|cross the false|درست.*غلط)/i.test(heading)) return <TrueFalseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />
- if (/(?:write\s+the\s+tables?|table\s+of|پہاڑ)/i.test(heading)) return <MultiplicationTableGrid heading={heading} content={question.content} fs={fs} qFs={qFs} themeColor={themeColor} />
- const mcqs = (requestedLayout === 'mcq' || /(?:choose|correct answer|mcq|درست جواب|صحیح جواب)/i.test(heading)) ? parseMcqRows(question.content) : []
- if (mcqs.length) return <div data-mcq-grid>{mcqs.map(row => {
-  const requested = Number(question.mcqColumns || 0)
-  const columns = requested >= 1 && requested <= 4 ? requested : (row.options.some(option => option.text.length > 22) ? 2 : Math.min(4, row.options.length))
-  return <table key={row.number} style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${5 * fs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px`, breakInside:'avoid' }}><tbody>
-   <tr><td colSpan={columns} style={{ border:`1px solid ${themeColor}99`, padding:`${4 * fs}px ${6 * fs}px`, fontWeight:700 }}><b dir="ltr">{row.number}.</b> {row.prompt}</td></tr>
-   {chunk(row.options, columns).map((optionRow, optionRowIndex) => <tr key={optionRowIndex}>{optionRow.map(option => <td key={option.label} style={{ width:`${100/columns}%`, border:`1px solid ${themeColor}99`, padding:`${4 * fs}px`, textAlign:isUrdu?'right':'left', overflowWrap:'anywhere' }}><b dir="ltr" style={{ display:'inline-block', marginInlineEnd:5 }}>{option.label})</b><span dir={isUrdu?'rtl':'ltr'}>{option.text}</span></td>)}{optionRow.length < columns && <td colSpan={columns - optionRow.length} style={{ border:`1px solid ${themeColor}99` }} />}</tr>)}
-  </tbody></table>
- })}</div>
-
- const sums = /(?:sums?|addition|subtract|vertical|جمع|تفریق)/i.test(heading) ? parseVerticalSums(question.content) : []
- if (sums.length) return <table data-vertical-math-grid style={{ width:'100%', borderCollapse:'separate', borderSpacing:`${8 * fs}px`, tableLayout:'fixed', direction:'ltr', margin:`${4 * fs}px 0` }}><tbody>{sums.map((sumRow, rowIndex) => <tr key={rowIndex} style={{ breakInside:'avoid' }}>{sumRow.map((sum, index) => <td key={index} style={{ border:`1px solid ${themeColor}55`, padding:`${8 * fs}px`, textAlign:'right', fontFamily:'Arial, sans-serif', fontSize:`${Math.max(qFs + 3, 14)}px`, fontWeight:700 }}><div>{sum.top}</div><div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8 }}><span>{sum.operator}</span><span>{sum.bottom}</span></div><div style={{ borderTop:`1.5px solid ${themeColor}`, height:`${18 * fs}px`, marginTop:3 }} /></td>)}</tr>)}</tbody></table>
-
- const plainLines = String(question.content || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
- if (plainLines.length >= 2 && !blocks.some(block => block.type === 'table')) return <NumberedResponseList content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} />
-
- return blocks.map((block, blockIndex) => block.type === 'table'
-  ? <table key={blockIndex} data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5 * fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed' }}><tbody>{block.rows.map((row, rowIndex) => <tr key={rowIndex}>{row.map((cell, cellIndex) => <td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5 * fs}px ${7 * fs}px`, textAlign:isUrdu ? 'right' : 'left', fontWeight:rowIndex === 0 ? 700 : 500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
-  : <div key={blockIndex} style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, lineHeight:isUrdu ? 2.1 : 1.55, marginBottom:`${5 * fs}px`, textAlign:isUrdu ? 'right' : 'left' }}><TextWithAnswerLines text={block.text} /></div>)
+function ShortResponseLayout({ content, isUrdu, fs, qFs, themeColor, layout='1-column' }) {
+ const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+ const clean = lines.map((line,index) => {
+  const match = line.match(/^((?:\d+|[ivxlcdm]+|[a-z]))[.)]\s*(.*)$/i)
+  return { serial:match?.[1] || String(index+1), body:match?.[2] || line }
+ })
+ if (layout === 'table') return <table data-short-layout="table" style={{ width:'100%', borderCollapse:'collapse', fontSize:`${qFs}px`, direction:isUrdu?'rtl':'ltr' }}><tbody>{clean.map(item => <tr key={item.serial}><td style={{ width:42, border:`1px solid ${themeColor}77`, padding:5, textAlign:'center', fontWeight:800 }}>{item.serial}.</td><td style={{ border:`1px solid ${themeColor}77`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left' }}><TextWithAnswerLines text={item.body} /></td></tr>)}</tbody></table>
+ const twoCol = layout === '2-column-balanced'
+ return <div data-short-layout={layout} style={twoCol ? { display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${4*fs}px ${16*fs}px` } : {}}>{clean.map(item => <div key={item.serial} style={{ display:'grid', gridTemplateColumns:isUrdu?'1fr 34px':'34px 1fr', gap:7, alignItems:'start', marginBottom:`${4*fs}px`, breakInside:'avoid' }}><b dir="ltr" style={{ gridColumn:isUrdu?2:1, textAlign:'center' }}>{item.serial}.</b><div dir={isUrdu?'rtl':'ltr'} style={{ gridColumn:isUrdu?1:2, textAlign:isUrdu?'right':'left', lineHeight:isUrdu?1.8:1.45 }}><TextWithAnswerLines text={item.body} /></div></div>)}</div>
 }
 
-function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, onQuestionChange }) {
- const ordered = [...questions].sort((a, b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
- return <div style={{ direction:isUrdu ? 'rtl' : 'ltr' }}>
-  {ordered.map((question, index) => {
-   const blocks = parseOfficialContentBlocks(question.content)
-   const rawHeading = String(question.heading || '').trim()
-   const inlineMarks = rawHeading.match(/\(([^)]*\d+[^)]*)\)\s*$/)
-   const hasSerial = /^(?:Q(?:uestion)?\s*\d+|سوال(?:\s+نمبر)?\s*\d+)/i.test(rawHeading)
-   const displayHeading = hasSerial ? rawHeading : `${isUrdu ? `سوال نمبر ${index + 1}:` : `Q${index + 1}.`} ${rawHeading}`.trim()
-   const headingHasMarks = /\([^)]*\d+\s*(?:marks?|نمبر)?[^)]*\)/i.test(rawHeading)
-   const controlStyle = { width:'100%', boxSizing:'border-box', border:`1px solid ${themeColor}66`, borderRadius:6, padding:7, background:'#fff', color:'#111', fontFamily:'inherit', direction:isUrdu ? 'rtl' : 'ltr', textAlign:isUrdu ? 'right' : 'left' }
-   const answerLines = Number.isFinite(Number(question.answerLines)) ? Number(question.answerLines) : 0
-   return <section key={question.id || index} data-official-section style={{ marginBottom:`${9 * fs}px`, breakInside:'auto' }}>
-    {editMode ? <input aria-label={`Question ${index + 1} heading`} value={question.heading || ''} onChange={event => onQuestionChange?.(question.id, { heading:event.target.value, text:event.target.value, textUrdu:isUrdu ? event.target.value : '' })} style={{ ...controlStyle, fontWeight:800, marginBottom:6 }} /> : <div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:10, alignItems:'center', paddingBottom:`${4 * fs}px`, marginBottom:`${6 * fs}px`, borderBottom:`2px solid ${themeColor}`, fontWeight:800, fontSize:`${Math.max(qFs + 1, 13)}px`, lineHeight:isUrdu ? 2 : 1.4, direction:'ltr' }}><span data-marks-badge style={{ minWidth:56, whiteSpace:'nowrap', color:themeColor, border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 7px', textAlign:'center', direction:'ltr' }}>{inlineMarks?.[1] || (Number(question.marks) > 0 ? question.marks : '—')}</span><span style={{ direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }}>{displayHeading.replace(inlineMarks?.[0] || '', '').trim()}</span></div>}
-    {editMode && <div style={{ display:'flex', alignItems:'center', gap:12, flexWrap:'wrap', marginBottom:6, fontFamily:'Arial,sans-serif', direction:'ltr', fontSize:11, color:themeColor }}><label style={{ display:'flex', alignItems:'center', gap:6 }}>Answer lines <input aria-label={`Question ${index + 1} answer lines`} type="number" min="0" max="30" value={answerLines} onChange={event => onQuestionChange?.(question.id, { answerLines:Math.max(0, Number(event.target.value) || 0) })} style={{ ...controlStyle, width:64, padding:4 }} /></label><label style={{ display:'flex', alignItems:'center', gap:6 }}>Layout <select aria-label={`Question ${index + 1} layout`} value={question.layoutPreset || 'auto'} onChange={event => onQuestionChange?.(question.id, { layoutPreset:event.target.value })} style={{ ...controlStyle, width:130, padding:4, direction:'ltr' }}><option value="auto">Auto</option><option value="list">Numbered list</option><option value="columns">Columns</option><option value="table">Table</option><option value="mcq">MCQ grid</option><option value="true-false">True / False</option><option value="rich">Rich text</option></select></label>{(question.layoutPreset === 'columns') && <label style={{ display:'flex', alignItems:'center', gap:6 }}>Columns <input aria-label={`Question ${index + 1} columns`} type="number" min="1" max="4" value={question.columnCount || 2} onChange={event => onQuestionChange?.(question.id, { columnCount:Math.max(1, Math.min(4, Number(event.target.value) || 2)) })} style={{ ...controlStyle, width:56, padding:4 }} /></label>}</div>}
-    {editMode ? question.layoutPreset === 'rich' ? <PaperRichTextEditor ariaLabel={`Question ${index + 1} rich content`} value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} onChange={richContent => onQuestionChange?.(question.id, { richContent })} /> : <textarea aria-label={`Question ${index + 1} content`} value={question.content || ''} onChange={event => onQuestionChange?.(question.id, { content:event.target.value })} style={{ ...controlStyle, minHeight:Math.max(110, String(question.content || '').split('\n').length * 24), resize:'vertical', lineHeight:isUrdu ? 2.1 : 1.55 }} /> : <><StructuredOfficialContent question={question} blocks={blocks} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />{answerLines > 0 && <div data-configurable-answer-lines>{Array.from({ length:answerLines }, (_, lineIndex) => <div key={lineIndex} style={{ height:`${22*fs}px`, borderBottom:'1px solid #7b8794' }} />)}</div>}</>}
-   </section>
-  })}
- </div>
+function SentenceUsageResponseTable({ content, isUrdu, fs, qFs, themeColor }) {
+ const lines = String(content).split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+ const items = lines.map((line,index) => {
+  const match = line.match(/^((?:\d+|[ivxlcdm]+|[a-z]|الف|ب|ج|د|ہ|و))[.)]\s*(.*)$/i)
+  return { serial:match?.[1] || String(index+1), word:match?.[2] || line }
+ })
+ return <table data-sentence-usage-table style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}>
+  <thead><tr><th style={{ width:44, border:`1px solid ${themeColor}77`, padding:5 }}>#</th><th style={{ width:'31%', border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'الفاظ':'Words'}</th><th style={{ border:`1px solid ${themeColor}77`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'جملے':'Sentences'}</th></tr></thead>
+  <tbody>{items.map(item=><tr key={item.serial}><td style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontFamily:'Arial,sans-serif', direction:'ltr' }}>{item.serial}</td><td style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, fontWeight:700, textAlign:isUrdu?'right':'left' }}>{item.word}</td><td style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px` }}><span style={{ display:'inline-block', width:'94%', minHeight:'1.25em', borderBottom:`1px solid ${themeColor}88` }} /></td></tr>)}</tbody>
+ </table>
+}
+
+function OfficialMcqLayout({ rows, isUrdu, fs, qFs, themeColor, layout='matrix-table' }) {
+ if (!rows.length) return null
+ const maxOptions = Math.max(2, ...rows.map(row => row.options.length))
+ if (layout === 'classic') return <div data-mcq-layout="classic">{rows.map(row => <div key={row.number} style={{ marginBottom:`${7*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, textAlign:isUrdu?'right':'left' }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ marginTop:3, textAlign:isUrdu?'right':'left' }}>{row.options.map((opt,optIndex) => <span key={opt.label} style={{ marginInlineEnd:18 }}><PaperOptionLabel label={opt.label} index={optIndex} isUrdu={isUrdu} color={themeColor} />{' '}{opt.text}</span>)}</div></div>)}</div>
+ if (layout === 'compact-grid') return <div data-mcq-layout="grid" style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${7*fs}px` }}>{rows.map(row => <div key={row.number} style={{ border:`1px solid ${themeColor}66`, padding:`${6*fs}px`, breakInside:'avoid' }}><div style={{ fontWeight:700, marginBottom:4 }}><b dir="ltr">{row.number}.</b> {row.prompt}</div><div style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:4 }}>{row.options.map((opt,optIndex) => <div key={opt.label}><PaperOptionLabel label={opt.label} index={optIndex} isUrdu={isUrdu} color={themeColor} />{' '}{opt.text}</div>)}</div></div>)}</div>
+ return <table data-mcq-layout="matrix-table" style={{ width:'100%', borderCollapse:'collapse', tableLayout:'fixed', direction:isUrdu?'rtl':'ltr', fontSize:`${qFs}px` }}><thead><tr><th style={{ width:38, border:`1px solid ${themeColor}88`, padding:5 }}>#</th><th style={{ width:'42%', border:`1px solid ${themeColor}88`, padding:5, textAlign:isUrdu?'right':'left' }}>{isUrdu?'سوال':'Question'}</th>{Array.from({length:maxOptions},(_,i)=><th key={i} style={{ border:`1px solid ${themeColor}88`, padding:5 }}><PaperOptionLabel label={String.fromCharCode(65+i)} index={i} isUrdu={isUrdu} color={themeColor} /></th>)}</tr></thead><tbody>{rows.map(row => <tr key={row.number} style={{ breakInside:'avoid' }}><td style={{ border:`1px solid ${themeColor}88`, padding:5, textAlign:'center', fontWeight:800 }}>{row.number}</td><td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:600 }}>{row.prompt}</td>{Array.from({length:maxOptions},(_,i)=>{ const opt=row.options[i]; return <td key={i} style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}>{opt ? <><PaperOptionLabel label={opt.label} index={i} isUrdu={isUrdu} color={themeColor} />{' '}{opt.text}</> : null}</td> })}</tr>)}</tbody></table>
+}
+
+function StructuredOfficialContent({ question, blocks, isUrdu, fs, qFs, themeColor, mcqLayout='matrix-table', shortLayout='1-column' }) {
+ const heading = String(question.heading || '')
+ const inferredKind = inferOfficialSectionKind(question)
+ const requestedLayout = question.layoutPreset || 'auto'
+ const kind = requestedLayout === 'mcq' ? 'mcq' : requestedLayout === 'true-false' ? 'true_false' : requestedLayout === 'columns' ? 'matching' : requestedLayout === 'table' ? 'table' : inferredKind
+ if (requestedLayout === 'rich') return <PaperRichTextRenderer value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} />
+ if (kind === 'marker') return <>{splitContentWithMarkers(question.content).map((part,i) => part.type === 'marker' ? <div key={i} data-section-label style={{ fontWeight:900, textAlign:'center', padding:`${5*fs}px`, borderBottom:`1px solid ${themeColor}` }}>{part.text}</div> : null)}</>
+ if (kind === 'mcq') {
+  const rows = parseOfficialMcqRows(question.content)
+  if (rows.length) return <OfficialMcqLayout rows={rows} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} layout={question.mcqLayout || mcqLayout} />
+ }
+ if (kind === 'true_false') return <TrueFalseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />
+ if (kind === 'vertical_math' || /(?:write\s+the\s+tables?|table\s+of|پہاڑ)/i.test(heading)) {
+  if (/(?:write\s+the\s+tables?|table\s+of|پہاڑ)/i.test(heading)) return <MultiplicationTableGrid heading={heading} content={question.content} fs={fs} qFs={qFs} themeColor={themeColor} />
+  const sums = parseVerticalSums(question.content)
+  if (sums.length) return <table data-vertical-math-grid style={{ width:'100%', borderCollapse:'separate', borderSpacing:`${7*fs}px`, tableLayout:'fixed', direction:'ltr', margin:`${4*fs}px 0`, fontFamily:"'Cambria Math','Times New Roman',serif" }}><tbody>{sums.map((sumRow,rowIndex)=><tr key={rowIndex}>{sumRow.map((sum,index)=><td key={index} style={{ border:`1px solid ${themeColor}55`, padding:`${7*fs}px`, textAlign:'right', fontSize:`${Math.max(qFs+2,14)}px`, fontWeight:700 }}><div>{sum.top}</div><div style={{ display:'grid', gridTemplateColumns:'auto 1fr', gap:8 }}><span>{sum.operator}</span><span>{sum.bottom}</span></div><div style={{ borderTop:`1.5px solid ${themeColor}`, height:`${17*fs}px`, marginTop:3 }} /></td>)}</tr>)}</tbody></table>
+ }
+ if (kind === 'short') return <ShortResponseLayout content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} layout={question.shortLayout || shortLayout} />
+ if (kind === 'sentence_usage') return <SentenceUsageResponseTable content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} />
+ if (kind === 'matching' || kind === 'table') {
+  const tableBlock = blocks.find(block => block.type === 'table')
+  if (tableBlock) return <table data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5*fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr' }}><tbody>{tableBlock.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?700:500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
+  if (kind === 'matching') return <ColumnResponseGrid content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} columns={2} />
+ }
+ const plainLines = String(question.content || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean)
+ if (plainLines.length >= 2 && !blocks.some(block => block.type === 'table')) return <NumberedResponseList content={question.content} isUrdu={isUrdu} fs={fs} qFs={qFs} />
+ return blocks.map((block,blockIndex) => block.type === 'table'
+  ? <table key={blockIndex} data-source-table style={{ width:'100%', borderCollapse:'collapse', margin:`${5*fs}px 0`, fontSize:`${qFs}px`, tableLayout:'fixed', direction:isUrdu?'rtl':'ltr' }}><tbody>{block.rows.map((row,rowIndex)=><tr key={rowIndex}>{row.map((cell,cellIndex)=><td key={cellIndex} style={{ border:`1px solid ${themeColor}99`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', fontWeight:rowIndex===0?700:500 }}><TextWithAnswerLines text={cell} /></td>)}</tr>)}</tbody></table>
+  : <div key={blockIndex} style={{ whiteSpace:'pre-wrap', fontSize:`${qFs}px`, lineHeight:isUrdu?1.9:1.5, marginBottom:`${5*fs}px`, textAlign:isUrdu?'right':'left' }}><TextWithAnswerLines text={block.text} /></div>)
+}
+
+function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, onQuestionChange, mcqLayout='matrix-table', shortLayout='1-column', qBorderStyle='none', showAnsLines=false, showSectionLine=true }) {
+ const ordered = [...questions].sort((a,b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
+ return <div style={{ direction:isUrdu?'rtl':'ltr' }}>{ordered.map((question,index) => {
+  const blocks = parseOfficialContentBlocks(question.content)
+  const kind = inferOfficialSectionKind(question)
+  const rawHeading = String(question.heading || '').trim()
+  const hasSerial = /^(?:Q(?:uestion)?\s*\d+|سوال(?:\s+نمبر)?\s*\d+)/i.test(rawHeading)
+  const cleanHeading = stripTrailingMarks(rawHeading)
+  const displayHeading = hasSerial ? cleanHeading : `${isUrdu ? `سوال نمبر ${index+1}:` : `Q${index+1}.`} ${cleanHeading}`.trim()
+  const marksLabel = extractMarksLabel(rawHeading, question.marks)
+  const answerLines = Number.isFinite(Number(question.answerLines)) ? Number(question.answerLines) : (showAnsLines && ['short','long','list'].includes(kind) ? 1 : 0)
+  const borderStyle = qBorderStyle === 'box' ? { border:`1px solid ${themeColor}55`, borderRadius:5, padding:`${7*fs}px` } : qBorderStyle === 'table' ? { border:`1.5px solid ${themeColor}`, padding:`${6*fs}px` } : {}
+  const controlStyle = { width:'100%', boxSizing:'border-box', border:`1px solid ${themeColor}66`, borderRadius:6, padding:7, background:'#fff', color:'#111', fontFamily:'inherit', direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left' }
+  if (kind === 'marker' && !rawHeading) return <div key={question.id || index}>{splitContentWithMarkers(question.content).map((part,i) => part.type === 'marker' ? <div key={i} data-section-label style={{ fontWeight:900, textAlign:'center', padding:`${5*fs}px`, marginBottom:`${5*fs}px`, borderBottom:`1px solid ${themeColor}` }}>{part.text}</div> : null)}</div>
+  return <section key={question.id || index} data-official-section data-section-kind={kind} style={{ marginBottom:`${10*fs}px`, breakInside:'avoid', ...borderStyle }}>
+   {editMode
+    ? <input aria-label={`Question ${index+1} heading`} value={question.heading || ''} onChange={event => onQuestionChange?.(question.id,{ heading:event.target.value, text:event.target.value, textUrdu:isUrdu?event.target.value:'' })} style={{ ...controlStyle, fontWeight:800, marginBottom:6 }} />
+    : <div data-official-heading data-language={isUrdu?'urdu':'english'} style={{ display:'grid', gridTemplateColumns:isUrdu?'auto minmax(0,1fr)':'minmax(0,1fr) auto', gap:10, alignItems:'center', paddingBottom:`${4*fs}px`, marginBottom:`${6*fs}px`, borderBottom:showSectionLine?`2px solid ${themeColor}`:'1px solid #d7dee7', fontWeight:800, fontSize:`${Math.max(qFs+1,13)}px`, lineHeight:isUrdu?1.9:1.35, direction:'ltr' }}>
+      {isUrdu ? <>{marksLabel && <span data-marks-badge style={{ justifySelf:'start', minWidth:52, whiteSpace:'nowrap', color:themeColor, border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 7px', textAlign:'center', direction:'ltr', fontFamily:'Arial,sans-serif', fontSize:`${Math.max(10,qFs*.66)}px` }}>{marksLabel}</span>}<span dir="rtl" style={{ textAlign:'right', justifySelf:'stretch' }}>{displayHeading}</span></> : <><span dir="ltr" style={{ textAlign:'left', justifySelf:'stretch' }}>{displayHeading}</span>{marksLabel && <span data-marks-badge style={{ justifySelf:'end', minWidth:52, whiteSpace:'nowrap', color:themeColor, border:`1px solid ${themeColor}`, borderRadius:4, padding:'2px 7px', textAlign:'center', direction:'ltr', fontFamily:'Arial,sans-serif', fontSize:`${Math.max(10,qFs*.66)}px` }}>{marksLabel}</span>}</>}
+     </div>}
+   {editMode && <div className="no-print" style={{ display:'flex', alignItems:'center', gap:10, flexWrap:'wrap', marginBottom:6, fontFamily:'Arial,sans-serif', direction:'ltr', fontSize:11, color:themeColor }}><label>Answer lines <input type="number" min="0" max="12" value={answerLines} onChange={e=>onQuestionChange?.(question.id,{answerLines:Math.max(0,Number(e.target.value)||0)})} style={{...controlStyle,width:60,padding:4}} /></label><label>Layout <select value={question.layoutPreset || 'auto'} onChange={e=>onQuestionChange?.(question.id,{layoutPreset:e.target.value})} style={{...controlStyle,width:140,padding:4,direction:'ltr'}}><option value="auto">Auto</option><option value="mcq">MCQ</option><option value="list">List</option><option value="columns">Columns</option><option value="table">Table</option><option value="true-false">True / False</option><option value="rich">Rich Text</option></select></label></div>}
+   {editMode
+    ? question.layoutPreset === 'rich' ? <PaperRichTextEditor ariaLabel={`Question ${index+1} rich content`} value={question.richContent} fallbackText={question.content} direction={isUrdu?'rtl':'ltr'} onChange={richContent=>onQuestionChange?.(question.id,{richContent})} /> : <textarea aria-label={`Question ${index+1} content`} value={question.content || ''} onChange={event=>onQuestionChange?.(question.id,{content:event.target.value})} style={{...controlStyle,minHeight:Math.max(95,String(question.content||'').split('\n').length*22),resize:'vertical',lineHeight:isUrdu?1.9:1.5}} />
+    : <><StructuredOfficialContent question={question} blocks={blocks} isUrdu={isUrdu} fs={fs} qFs={qFs} themeColor={themeColor} mcqLayout={mcqLayout} shortLayout={shortLayout} />{answerLines > 0 && <div data-configurable-answer-lines>{Array.from({length:answerLines},(_,lineIndex)=><div key={lineIndex} style={{ height:`${21*fs}px`, borderBottom:'1px solid #7b8794' }} />)}</div>}</>}
+  </section>
+ })}</div>
 }
 
 //  Shared Section Renderer 
-function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, urdLineH, engLineH, letterSp, printAns, showAnsLines, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange }) {
+function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs, qFs, qFsSm, qFsHead, qBorderStyle, mcqLayout='matrix-table', shortLayout='1-column', urdLineH, engLineH, letterSp, wordSp=0, textAlign='start', fontFamily='', fontBold=false, fontItalic=false, fontUnderline=false, showUrduHeaders=false, printAns, showAnsLines, showSectionLine=true, qn, half, themeColor='#1a237e', urduHeader='', onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable }) {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
- if (type.value === 'official_section') return <OfficialSections questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} themeColor={themeColor} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} />
+ if (type.value === 'official_section') return <OfficialSectionRenderer questions={qs} isUrdu={isUrdu} editMode={editMode} fs={fs} qFs={qFs} headingFs={qFsHead} themeColor={themeColor} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} showAnsLines={showAnsLines} showSectionLine={showSectionLine} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={fontFamily} fontBold={fontBold} fontItalic={fontItalic} fontUnderline={fontUnderline} showUrduHeaders={showUrduHeaders} onQuestionChange={(id, changes) => onQuestionChange?.(type.value, id, changes)} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} />
  const marks = paper[`${type.value}_marks`] || type.marks || 1
  const isMcq = type.value === 'mcq'
  
@@ -1174,11 +1919,11 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  
  return (
  <div key={type.value} style={{ marginBottom:`${10*fs}px` }}>
- {urduHeader && <div style={{ textAlign:'center', fontFamily:'Noto Nastaliq Urdu,serif', fontSize:`${14*fs}px`, fontWeight:800, color:'#1a237e', marginBottom:`${5*fs}px`, direction:'rtl' }}>{urduHeader}</div>}
+ {urduHeader && <div style={{ textAlign:'center', fontFamily:URDU_FONT_STACK, fontSize:`${14*fs}px`, fontWeight:800, color:'#1a237e', marginBottom:`${5*fs}px`, direction:'rtl' }}>{urduHeader}</div>}
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:`${6*fs}px`, paddingBottom:`${4*fs}px`, borderBottom:`2.1px solid ${themeColor}`, direction: isUrdu ? 'rtl' : 'ltr' }}>
  {isUrdu ? (
  <>
- <span style={{ fontWeight:700, fontSize:`${12*fs}px`, fontFamily:'Noto Nastaliq Urdu,serif' }}>سوال نمبر {qn}. {type.labelUrdu}</span>
+ <span style={{ fontWeight:700, fontSize:`${12*fs}px`, fontFamily:URDU_FONT_STACK }}>سوال نمبر {qn}. {type.labelUrdu}</span>
  <span style={{ fontWeight:700, fontSize:`${10*fs}px`, color:themeColor }}>({marks} × {qs.length} = {qs.length*marks})</span>
  </>
  ) : (
@@ -1195,12 +1940,12 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <thead><tr style={{ background:`${themeColor}11` }}>
  <th style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', width:'5%' }}>No.</th>
  <th style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px ${5*fs}px` }}>{isUrdu?'سوال':'Question'}</th>
- {['A','B','C','D'].map(l=><th key={l} style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', width:'11%' }}>({l})</th>)}
+ {['A','B','C','D'].map((l,optIndex)=><th key={l} style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', width:'11%' }}><PaperOptionLabel label={l} index={optIndex} isUrdu={isUrdu} color={themeColor} /></th>)}
  </tr></thead>
  <tbody>{qs.map((q,i)=>(
  <tr key={q.id || `${type.value}-row-${i}`}>
  <td style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px`, textAlign:'center', fontWeight:700, color:themeColor }}>{i+1}.</td>
- <td style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px ${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH }}>
+ <td style={{ border:`1px solid ${themeColor}88`, padding:`${3*fs}px ${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH }}>
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </td>
  {q.options?.map((opt, optIndex)=>(
@@ -1215,13 +1960,13 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  ) : (
  qs.map((q,i)=>(
  <div key={q.id || `${type.value}-card-${i}`} style={{ marginBottom:`${8*fs}px`, ...(qBorderStyle==='box'?{border:`1px solid ${themeColor}44`,borderRadius:`${3*fs}px`,padding:`${6*fs}px ${8*fs}px`}:{}) }}>
- <div style={{ fontWeight:700, fontSize:`${qFs}px`, marginBottom:`${3*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
+ <div style={{ fontWeight:700, fontSize:`${qFs}px`, marginBottom:`${3*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
  <span style={{ color:themeColor }}>{i+1}.</span>{' '}<span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </div>
  <div style={{ display:'grid', gridTemplateColumns:`repeat(${half?2:4},1fr)`, gap:`${2*fs}px`, paddingLeft:isUrdu?0:`${14*fs}px`, paddingRight:isUrdu?`${14*fs}px`:0 }}>
  {q.options?.map((opt, optIndex)=>(
- <div key={opt.key || opt.label || `${type.value}-choice-${i}-${optIndex}`} style={{ fontSize:`${qFsSm}px`, direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
- <strong style={{color:themeColor}}>({opt.key || opt.label || String.fromCharCode(65 + optIndex)})</strong>{' '}
+ <div key={opt.key || opt.label || `${type.value}-choice-${i}-${optIndex}`} style={{ fontSize:`${qFsSm}px`, direction:isUrdu?'rtl':'ltr', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
+ <PaperOptionLabel label={opt.key || opt.label || String.fromCharCode(65 + optIndex)} index={optIndex} isUrdu={isUrdu} color={themeColor} />{' '}
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitOptionText(q, optIndex, event.currentTarget.textContent || '')} style={editStyle}>{getT(opt)}</span>
  {printAns&&opt.correct&&<span style={{color:'#c00',fontWeight:700}}> </span>}
  </div>
@@ -1240,7 +1985,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <tbody>{qs.map((q,i)=>(
  <tr key={q.id || `${type.value}-table-${i}`}>
  <td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, textAlign:'center', fontWeight:700, color:themeColor, verticalAlign:'top' }}>{i+1}.</td>
- <td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, minHeight:`${20*fs}px` }}>
+ <td style={{ border:`1px solid ${themeColor}88`, padding:`${5*fs}px`, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, minHeight:`${20*fs}px` }}>
  <span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </td>
  </tr>
@@ -1250,7 +1995,7 @@ function SectionRenderer({ type, paper, isUrdu, isDual, editMode, editStyle, fs,
  <div style={{ display: (type.value==='short'||type.value.includes('short')) ? 'grid' : 'block', gridTemplateColumns: (type.value==='short'||type.value.includes('short')) ? '1fr 1fr' : 'none', gap:`${4*fs}px ${14*fs}px` }}>
  {qs.map((q,i)=>(
  <div key={q.id || `${type.value}-item-${i}`} style={{ fontSize:`${qFs}px`, marginBottom: (type.value==='short'||type.value.includes('short')) ? 0 : `${12*fs}px`, ...(qBorderStyle==='box'?{border:`1px solid ${themeColor}44`,borderRadius:`${3*fs}px`,padding: (type.value==='short'||type.value.includes('short')) ? `${5*fs}px ${7*fs}px` : `${6*fs}px ${8*fs}px`}:{}) }}>
- <div style={{ fontWeight: (type.value==='short'||type.value.includes('short')) ? 600 : 700, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?'Noto Nastaliq Urdu,serif':'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
+ <div style={{ fontWeight: (type.value==='short'||type.value.includes('short')) ? 600 : 700, direction:isUrdu?'rtl':'ltr', textAlign:isUrdu?'right':'left', fontFamily:isUrdu?URDU_FONT_STACK:'inherit', lineHeight:isUrdu?urdLineH:engLineH, letterSpacing:`${letterSp}px` }}>
  <span style={{ color:themeColor, fontWeight: 600 }}>{i+1}.</span>{' '}<span contentEditable={editMode} suppressContentEditableWarning onBlur={event => commitQuestionText(q, event.currentTarget.textContent || '')} style={editStyle}>{getT(q)}</span>
  </div>
  {showAnsLines && ((type.value==='short'||type.value.includes('short')) ? (
@@ -1284,14 +2029,29 @@ function Logo({ size=50, src=null }) {
 
 function editablePaperProps(edit) { return edit ? { 'data-manual-edit': 'true' } : {} }
 
-function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) {
- return { lineHeight: isUrdu ? urdLineH : engLineH, letterSpacing: `${letterSp}px` }
+function PaperOptionLabel({ label, index=0, isUrdu=false, color='currentColor' }) {
+ const parts = optionLabelParts(label, index, isUrdu)
+ if (!isUrdu) return <b dir="ltr" style={{ color, fontFamily:'Arial,sans-serif', whiteSpace:'nowrap' }}>({parts.label})</b>
+ return <span data-workspace-option-label data-language="urdu" style={{ display:'inline-flex', flexDirection:'row', direction:'rtl', unicodeBidi:'isolate', alignItems:'baseline', gap:1, color, whiteSpace:'nowrap', fontWeight:900 }}>
+  <b data-option-label-text style={{ fontFamily:URDU_FONT_STACK }}>{parts.label}</b>
+  <StableClosingBracket color={color} />
+ </span>
+}
+
+function paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp=0, wordSp=0 }) {
+ return buildPaperTextFlow({
+  isUrdu,
+  englishLineHeight:engLineH,
+  urduLineHeight:urdLineH,
+  letterSpacing:letterSp,
+  wordSpacing:wordSp,
+ })
 }
 
 //  Template 1: AS Classic (exact PDF replica) 
-function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #cc0000', borderRadius:2, minWidth:20, display:'inline-block' } : {}
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -1299,7 +2059,7 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
   const qFs = 11 * fs
  const qFsSm = Math.max(7, 10 * fs)
  const qFsHead = 12 * fs
- const wrap = { width:'100%', background:'white', color: fontColor, fontFamily: fontFamily || 'Arial, sans-serif', fontSize: `${baseFontSz*fs}px`, direction: isUrdu ? 'rtl' : 'ltr', padding: half ? '3mm 3mm' : '4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }
+ const wrap = { width:'100%', background:'white', color: fontColor, fontFamily: resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:'Arial, sans-serif' }), fontSize: `${baseFontSz*fs}px`, direction: isUrdu ? 'rtl' : 'ltr', padding: half ? '3mm 3mm' : '4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }
  const cell = { border:'1px solid #aaa', padding:`${Math.round(3*fs)}px ${Math.round(7*fs)}px` }
  const cellLbl = { color:'#666', fontSize:`${9*fs}px` }
  const cellVal = { fontWeight:700, fontSize:`${10*fs}px` }
@@ -1320,8 +2080,8 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  <tbody>
  <tr>
  <td rowSpan={2} style={{ ...cell, width: half?44:64, textAlign:'center', verticalAlign:'middle' }}><Logo size={half?38:52} src={settings?.logo} /></td>
- <td style={cell}><div style={cellLbl}>{isUrdu?'طالب علم کا نام':'Student Name'}</div><div style={{ borderBottom:'1px solid #888', minWidth: half?55:80, height:`${14*fs}px` }} /></td>
- <td style={cell}><div style={cellLbl}>{isUrdu?'رول نمبر':'Roll Number'}</div><div style={{ borderBottom:'1px solid #888', minWidth:40, height:`${14*fs}px` }} /></td>
+ <td style={cell}><div style={cellLbl}>{isUrdu?'طالب علم کا نام':'Student Name'}</div><div data-personalization-field="student.name" style={{ borderBottom:'1px solid #888', minWidth: half?55:80, height:`${14*fs}px` }} /></td>
+ <td style={cell}><div style={cellLbl}>{isUrdu?'رول نمبر':'Roll Number'}</div><div data-personalization-field="student.rollNumber" style={{ borderBottom:'1px solid #888', minWidth:40, height:`${14*fs}px` }} /></td>
  <td style={{ ...cell, minWidth:60 }}><div style={cellLbl}>{isUrdu?'جماعت':'Class Name'}</div><div style={cellVal}>{cfg.className}</div></td>
  <td style={{ ...cell, minWidth:60 }}><div style={cellLbl}>{isUrdu?'پیپر کوڈ':'Paper Code'}</div><div style={cellVal}>{cfg.paperCode}</div></td>
  </tr>
@@ -1356,9 +2116,9 @@ function ClassicTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
 }
 
 //  Template 2: Modern Pro 
-function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #1565c0', borderRadius:2, minWidth:20, display:'inline-block' } : {}
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -1371,13 +2131,13 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
  const themeColor = '#1565c0'
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: fontFamily || 'Arial, sans-serif', fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} data-paper-style-root style={{ width:'100%', background:'white', color: fontColor, fontFamily: resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:'Arial, sans-serif' }), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:'linear-gradient(135deg,#1a237e 0%,#0d47a1 60%,#1565c0 100%)', padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, marginBottom:`${6*fs}px`, borderRadius:`${4*fs}px` }}><div style={{ textAlign:'center', color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, marginBottom:`${3*fs}px`, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px` }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, border:'1px solid #e0e0e0', fontSize:`${10*fs}px` }}>
  <tbody>
  <tr style={{ background:'#e8eaf6' }}>
  <td rowSpan={2} style={{ border:'1px solid #c5cae9', padding:`${4*fs}px`, textAlign:'center', verticalAlign:'middle' }}><Logo size={half?36:50} src={settings?.logo} /></td>
- {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:'1px solid #c5cae9', padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:'#5c6bc0', fontWeight:700, fontSize:`${9*fs}px` }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px`, color:'#1a237e' }}>{val}</div> : <div style={{ borderBottom:'2px solid #1a237e', height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
+ {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:'1px solid #c5cae9', padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:'#5c6bc0', fontWeight:700, fontSize:`${9*fs}px` }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px`, color:'#1a237e' }}>{val}</div> : <div data-personalization-field={lbl==='Student Name'?'student.name':lbl==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:'2px solid #1a237e', height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
  </tr>
  <tr>{[ ['Subject', cfg.subjectName], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Exam Date', cfg.examDate] ].map(([lbl,val])=>(<td key={lbl} style={{ border:'1px solid #c5cae9', padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:'#5c6bc0', fontWeight:700, fontSize:`${9*fs}px` }}>{lbl}</div><div style={{ fontWeight:700, fontSize:`${11*fs}px`, color:'#1a237e' }}>{val}</div></td>))}</tr>
  </tbody>
@@ -1404,9 +2164,9 @@ function ModernTemplate({ paper, cfg, printBubble, printAns, half, editMode=fals
 }
 
 //  Template 3: Elite Premium 
-function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const editStyle = editMode ? { outline:'1.5px dashed #B8860B', borderRadius:2, minWidth:20, display:'inline-block' } : {}
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
@@ -1419,13 +2179,13 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#fffef8', color: fontColor, fontFamily: fontFamily || "'Georgia', Times, serif", fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#fffef8', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Georgia', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:'#0a0a14', padding:`${(half?12:16)*fs}px ${(half?14:20)*fs}px`, marginBottom:`${8*fs}px` }}><div style={{ textAlign:'center', color:goldL, fontSize:`${(half?20:26)*hFs}px`, fontWeight:700, letterSpacing:2, marginBottom:`${4*fs}px`, fontFamily:"Georgia, serif", textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ textAlign:'center', display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}><div style={{ flex:1, height:1, background:`linear-gradient(to right, transparent, ${gold})` }} /><div style={{ color:'#aaa', fontSize:`${9*hFs}px`, letterSpacing:1 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div><div style={{ flex:1, height:1, background:`linear-gradient(to left, transparent, ${gold})` }} /></div></div>
  <table style={{ width:'100%', borderCollapse:'collapse', marginBottom:`${8*fs}px`, fontSize:`${10*fs}px` }}>
  <tbody>
  <tr>
  <td rowSpan={2} style={{ border:`1px solid ${gold}`, padding:`${5*fs}px`, textAlign:'center', verticalAlign:'middle', background:'#fffef8' }}><Logo size={half?36:50} src={settings?.logo} /></td>
- {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:`1px solid ${gold}`, padding:`${3*fs}px ${7*fs}px` }}><div style={{ color:gold, fontWeight:700, fontSize:`${8*fs}px`, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px` }}>{val}</div> : <div style={{ borderBottom:`1.5px solid ${gold}`, height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
+ {[ ['Student Name', null], ['Roll Number', null], ['Class', cfg.className], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<td key={lbl} style={{ border:`1px solid ${gold}`, padding:`${3*fs}px ${7*fs}px` }}><div style={{ color:gold, fontWeight:700, fontSize:`${8*fs}px`, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${11*fs}px` }}>{val}</div> : <div data-personalization-field={lbl==='Student Name'?'student.name':lbl==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1.5px solid ${gold}`, height:`${14*fs}px`, marginTop:`${2*fs}px` }} />}</td>))}
  </tr>
  <tr>{[ ['Subject', cfg.subjectName], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Date', cfg.examDate] ].map(([lbl,val])=>(<td key={lbl} style={{ border:`1px solid ${gold}`, padding:`${3*fs}px ${7*fs}px` }}><div style={{ color:gold, fontWeight:700, fontSize:`${8*fs}px`, letterSpacing:'0.06em', textTransform:'uppercase' }}>{lbl}</div><div style={{ fontWeight:700, fontSize:`${11*fs}px` }}>{val}</div></td>))}</tr>
  </tbody>
@@ -1453,9 +2213,9 @@ function EliteTemplate({ paper, cfg, printBubble, printAns, half, editMode=false
 }
 
 //  Template 4: Emerald Green 
-function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
+function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[], settings, pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const hFs = (half ? 0.82 : 1) * (headFontSz / 11)
@@ -1468,9 +2228,9 @@ function EmeraldTemplate({ paper, cfg, printBubble, printAns, half, editMode=fal
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: fontFamily || 'Arial, sans-serif', fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'#f9fffe', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || 'Arial, sans-serif'), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'3mm 3mm':'4mm 6mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ background:`linear-gradient(90deg,${teal} 0%,${tealL} 50%,#26a69a 100%)`, borderRadius:`${4*fs}px`, overflow:'hidden', marginBottom:`${7*fs}px` }}><div style={{ padding:`${(half?10:14)*fs}px ${(half?12:18)*fs}px`, display:'flex', alignItems:'center', gap:`${10*fs}px` }}><Logo size={half?36:50} src={settings?.logo} /><div style={{ flex:1, textAlign:'center' }}><div style={{ color:'white', fontSize:`${(half?20:26)*hFs}px`, fontWeight:900, letterSpacing:1, textTransform:'uppercase' }}>{(settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()}</div><div style={{ color:'rgba(255,255,255,0.8)', fontSize:`${10*fs}px`, marginTop:2 }}>{settings?.address || 'SHARIF CHOWK, RAYYA KHAS PH: 0300-1291959'}</div></div></div></div>
- <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:`${4*fs}px`, marginBottom:`${8*fs}px` }}>{[ ['Student Name', null], ['Subject', cfg.subjectName], ['Class', cfg.className], ['Date', cfg.examDate], ['Roll Number', null], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<div key={lbl} style={{ background:mint, borderRadius:`${3*fs}px`, border:`1px solid ${tealL}44`, padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:teal, fontWeight:700, fontSize:`${8*fs}px`, textTransform:'uppercase', letterSpacing:'0.05em' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${10*fs}px`, color:'#004d40' }}>{val}</div> : <div style={{ borderBottom:`1.5px solid ${teal}`, height:`${12*fs}px`, marginTop:`${2*fs}px` }} />}</div>))}</div>
+ <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:`${4*fs}px`, marginBottom:`${8*fs}px` }}>{[ ['Student Name', null], ['Subject', cfg.subjectName], ['Class', cfg.className], ['Date', cfg.examDate], ['Roll Number', null], ['Time', cfg.timeAllowed], ['Total Marks', String(total)], ['Paper Code', cfg.paperCode] ].map(([lbl,val])=>(<div key={lbl} style={{ background:mint, borderRadius:`${3*fs}px`, border:`1px solid ${tealL}44`, padding:`${3*fs}px ${6*fs}px` }}><div style={{ color:teal, fontWeight:700, fontSize:`${8*fs}px`, textTransform:'uppercase', letterSpacing:'0.05em' }}>{lbl}</div>{val ? <div style={{ fontWeight:700, fontSize:`${10*fs}px`, color:'#004d40' }}>{val}</div> : <div data-personalization-field={lbl==='Student Name'?'student.name':lbl==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1.5px solid ${teal}`, height:`${12*fs}px`, marginTop:`${2*fs}px` }} />}</div>))}</div>
  <div style={{ border:`2px solid ${teal}`, borderRadius:`${6*fs}px`, padding:`${8*fs}px`, position:'relative', overflow:'hidden' }}><div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', pointerEvents:'none', overflow:'hidden' }}><div style={{ transform:'rotate(-30deg)', opacity:0.04, fontSize:half?70:110, fontWeight:900, color:teal, lineHeight:1, textAlign:'center' }}></div></div>
  <div style={{ position:'relative' }}>
  {printBubble && mcqs.length>0 && (
@@ -1503,15 +2263,16 @@ const PREMIUM_PAPER_THEMES = {
  editorial:{ accent:'#39566a', soft:'#eaf0f3', line:'#a6bbc6', heading:'Georgia, serif', label:'Editorial Slate', header:'masthead' },
 }
 
-function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, questionTypes=[], settings, pbStyle, onQuestionChange, mcqLayout='compact-grid', shortLayout='2-column-balanced' }) {
+function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#172033', fontFamily="'Times New Roman', Times, serif", baseFontSz=13, headFontSz=14, fontBold=false, fontItalic=false, fontUnderline=false, textAlign='start', qBorderStyle='none', showUrduHeaders=false, showSectionLine=true, questionTypes=[], settings, pbStyle, pageFrameStyle={}, onQuestionChange, onDeleteSection, onDuplicateSection, onMoveSection, onAddSection, onSelectSection, selectedSectionId, onActiveEditable, mcqLayout='matrix-table', shortLayout='1-column' }) {
  const theme = PREMIUM_PAPER_THEMES[variant] || PREMIUM_PAPER_THEMES.academic
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, type) => sum + (paper[type.value]?.length || 0) * (paper[`${type.value}_marks`] || type.marks || 1), 0)
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const qFs = baseFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)
- const contentFont = isUrdu ? "'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif" : (fontFamily || 'Arial, sans-serif')
+ const contentFont = resolvePaperFontFamily({ isUrdu, fontFamily, englishFallback:"'Times New Roman', Times, serif" })
  const schoolName = (settings?.schoolName || 'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL').toUpperCase()
+ const examBadge = cfg.title || [cfg.examType, cfg.session].filter(Boolean).join(' ') || 'EXAMINATION'
  const compositions = {
   academic:{ columns:'60px minmax(0,1fr) 218px', background:'#fff', radius:0, logo:1, title:2, badge:3, titleAlign:'center', border:`3px solid ${theme.accent}` },
   modern:{ columns:'1fr 64px', background:theme.soft, radius:10, logo:2, title:1, badge:3, titleAlign:'left', border:`8px solid ${theme.accent}`, badgeColumn:'1 / -1' },
@@ -1527,23 +2288,41 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   ['Student Name', ''], ['Roll Number', ''], ['Class', cfg.className], ['Paper Code', cfg.paperCode],
   ['Subject', cfg.subjectName], ['Time Allowed', cfg.timeAllowed], ['Total Marks', String(total)], ['Exam Date', cfg.examDate],
  ]
- let questionNumber = 0
- return <div {...editablePaperProps(editMode)} data-premium-template={variant} style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ const visibleQuestionTypes = questionTypes.filter(type => (paper[type.value] || []).length)
+ return <div
+  {...editablePaperProps(editMode)}
+  data-premium-template={variant}
+  data-paper-style-root
+  data-letter-spacing={letterSp}
+  data-word-spacing={wordSp}
+  data-english-line-height={engLineH}
+  data-urdu-line-height={urdLineH}
+  data-paper-font-family={fontFamily || (isUrdu?'urdu-default':'english-default')}
+  data-whole-bold={fontBold?'true':'false'}
+  data-whole-italic={fontItalic?'true':'false'}
+  data-whole-underline={fontUnderline?'true':'false'}
+  style={{ width:'100%', minHeight:half?'':'297mm', boxSizing:'border-box', padding:half?'4mm':'7mm 8mm', background:'#fff', color:fontColor, border:pbStyle, ...pageFrameStyle, fontFamily:contentFont, fontSize:`${qFs}px`, fontWeight:fontBold?700:400, fontStyle:fontItalic?'italic':'normal', textDecoration:fontUnderline?'underline':'none', textAlign, direction:isUrdu?'rtl':'ltr', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
+  {(fontBold||fontItalic||fontUnderline) && <style>{`
+   [data-paper-style-root][data-whole-bold="true"] [data-official-sections] * { font-weight: 700; }
+   [data-paper-style-root][data-whole-italic="true"] [data-official-sections] * { font-style: italic; }
+   [data-paper-style-root][data-whole-underline="true"] [data-official-sections] *:not(svg):not(path) { text-decoration-line: underline; }
+   [data-paper-style-root] [data-question-heading], [data-paper-style-root] [data-option-label], [data-paper-style-root] [data-section-banner] { font-weight: 900; }
+  `}</style>}
   <header style={{ direction:'ltr', borderTop:composition.border, borderBottom:`2px solid ${theme.accent}`, borderLeft:variant==='modern'||variant==='coral'?composition.border:'none', padding:`${5 * fs}px ${8 * fs}px`, background:composition.background, borderRadius:composition.radius, display:'grid', gridTemplateColumns:composition.columns, alignItems:'center', gap:8 }}>
    <div style={{ order:composition.logo, gridColumn:composition.logoColumn || 'auto', display:'grid', placeItems:'center' }}><Logo size={half?42:54} src={settings?.logo} /></div>
-   <div style={{ order:composition.title, gridColumn:composition.titleColumn || 'auto', textAlign:composition.titleAlign, minWidth:0 }}><div style={{ color:theme.accent, fontFamily:theme.heading, fontWeight:800, fontSize:`${Math.min(24, (half?18:22) * Math.max(.9, headFontSz/14))}px`, lineHeight:1.15 }}>{schoolName}</div><div style={{ color:'#526174', fontSize:`${9 * fs}px`, marginTop:4 }}>{settings?.address || 'Sharif Chowk, Rayya Khas, Narowal | 03001291959'}</div></div>
-   <div style={{ order:composition.badge, gridColumn:composition.badgeColumn || 'auto', justifySelf:variant==='minimal'?'center':'stretch', background:variant==='editorial'?theme.accent:theme.soft, border:`1px solid ${theme.line}`, borderRadius:variant==='emerald'?8:2, padding:'5px 8px', color:variant==='editorial'?'#fff':theme.accent, fontWeight:800, textAlign:variant==='editorial'?'left':'center', fontSize:`${9 * fs}px`, lineHeight:1.25, whiteSpace:'nowrap' }}>FIRST TERM EXAMINATION 2026-2027</div>
+   <div style={{ order:composition.title, gridColumn:composition.titleColumn || 'auto', textAlign:composition.titleAlign, minWidth:0 }}><div style={{ color:theme.accent, fontFamily:theme.heading, fontWeight:800, fontSize:`${Math.min(24, (half?18:22) * Math.max(.9, headFontSz/14))}px`, lineHeight:1.15 }}>{schoolName}</div><div style={{ color:'#526174', fontSize:`${9 * fs}px`, marginTop:4 }}>{cfg.address || settings?.address || 'Sharif Chowk, Rayya Khas, Narowal | 03001291959'}</div></div>
+   <div style={{ order:composition.badge, gridColumn:composition.badgeColumn || 'auto', justifySelf:variant==='minimal'?'center':'stretch', background:variant==='editorial'?theme.accent:theme.soft, border:`1px solid ${theme.line}`, borderRadius:variant==='emerald'?8:2, padding:'5px 8px', color:variant==='editorial'?'#fff':theme.accent, fontWeight:800, textAlign:variant==='editorial'?'left':'center', fontSize:`${9 * fs}px`, lineHeight:1.25, whiteSpace:'nowrap' }}>{examBadge}</div>
   </header>
   <table data-student-info style={{ direction:'ltr', width:'100%', borderCollapse:'collapse', tableLayout:'fixed', margin:`${7 * fs}px 0 ${10 * fs}px`, fontFamily:'Arial, sans-serif' }}><tbody>
-   {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
+   {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div data-personalization-field={label==='Student Name'?'student.name':label==='Roll Number'?'student.rollNumber':undefined} style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
   </tbody></table>
+  {printBubble && <ObjectiveBubbleSheet paper={paper} isUrdu={isUrdu} themeColor={theme.accent} showAnswers={printAns} />}
   <main style={{ position:'relative', zIndex:2 }}>
-   {questionTypes.map(type => {
-    if (!(paper[type.value] || []).length) return null
-    questionNumber += 1
-    return <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={12*fs} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} printAns={printAns} showAnsLines={showAnsLines} qn={questionNumber} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
-   })}
+   {visibleQuestionTypes.map((type, typeIndex) => (
+    <SectionRenderer key={type.value} type={type} paper={paper} isUrdu={isUrdu} isDual={isDual} editMode={editMode} editStyle={{}} fs={fs} qFs={qFs} qFsSm={Math.max(8,10*fs)} qFsHead={headFontSz * (isUrdu ? 1.6 : 4 / 3) * (half ? 0.82 : 1)} qBorderStyle={qBorderStyle} mcqLayout={mcqLayout} shortLayout={shortLayout} urdLineH={urdLineH} engLineH={engLineH} letterSp={letterSp} wordSp={wordSp} textAlign={textAlign} fontFamily={contentFont} fontBold={fontBold} fontItalic={fontItalic} fontUnderline={fontUnderline} showUrduHeaders={showUrduHeaders} printAns={printAns} showAnsLines={showAnsLines} showSectionLine={showSectionLine} qn={typeIndex + 1} half={half} themeColor={theme.accent} onQuestionChange={onQuestionChange} onDeleteSection={onDeleteSection} onDuplicateSection={onDuplicateSection} onMoveSection={onMoveSection} onAddSection={onAddSection} onSelectSection={onSelectSection} selectedSectionId={selectedSectionId} onActiveEditable={onActiveEditable} urduHeader={showUrduHeaders ? (type.value === 'mcq' ? 'حصہ معروضی' : 'حصہ انشائیہ') : ''} />
+   ))}
   </main>
+  {printAns && <ObjectiveAnswerKey paper={paper} isUrdu={isUrdu} themeColor={theme.accent} />}
  </div>
 }
 
@@ -1552,9 +2331,9 @@ function AcademicClassicTemplate(props) {
 }
 
 //  Template 5: Docx Assessment 
-function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
+function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, wordSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
- const isUrdu = cfg.language === 'urdu'
+ const isUrdu = isUrduScriptPaper({ config: cfg, ...paper })
  const isDual = cfg.language === 'dual'
  const fs = (half ? 0.82 : 1) * (baseFontSz / 11)
  const hFs = (half ? 0.82 : 1) * (headFontSz / 11)
@@ -1566,9 +2345,9 @@ function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editM
  const mcqs = paper['mcq'] || []
 
  return (
- <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: fontFamily || "'Times New Roman', Times, serif", fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp }) }}>
+ <div {...editablePaperProps(editMode)} style={{ width:'100%', background:'white', color: fontColor, fontFamily: isUrdu ? URDU_FONT_STACK : (fontFamily || "'Times New Roman', Times, serif"), fontSize:`${baseFontSz*fs}px`, direction:isUrdu?'rtl':'ltr', padding:half?'8mm 6mm':'12mm 15mm', boxSizing:'border-box', border: pbStyle, minHeight:half?'':'297mm', ...paperTextFlow({ isUrdu, engLineH, urdLineH, letterSp, wordSp }) }}>
  <div style={{ borderBottom:'2px solid #000', paddingBottom:5, marginBottom:15 }}><div style={{ fontSize:`${(half?18:24)*fs}px`, fontWeight:700, textAlign:'center' }}>ASSESSMENT PAPER</div><div style={{ display:'flex', justifyContent:'space-between', marginTop:10, fontWeight:700, fontSize:`${11*fs}px` }}><span>Subject: {cfg.subjectName}</span><span>Class: {cfg.className}</span><span>Marks: {total}</span></div></div>
- <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: __________________________</span><span>Date: {cfg.examDate}</span></div>
+ <div style={{ marginBottom:15, display:'flex', justifyContent:'space-between', fontSize:`${10*fs}px` }}><span>Student Name: <span data-personalization-field="student.name">__________________________</span> &nbsp; Roll No: <span data-personalization-field="student.rollNumber">__________</span></span><span>Date: {cfg.examDate}</span></div>
  {questionTypes.map((type, idx) => {
  const qs = paper[type.value] || []
  if (qs.length === 0) return null
@@ -1610,7 +2389,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
  const [status, setStatus] = useState('')
  const printRef = useRef(null)
  const theme = OFFICIAL_TEMPLATE_THEMES.find(item => item.id === template) || OFFICIAL_TEMPLATE_THEMES[0]
- const isUrdu = draft.config?.language === 'urdu'
+ const isUrdu = isUrduScriptPaper(draft)
 
  const updateConfig = (key, value) => setDraft(current => ({
   ...current,
@@ -1638,7 +2417,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   setEditing(false)
  }
 
- function printPaper() {
+ async function printPaper() {
   const node = printRef.current
   if (!node) return
   const frame = document.createElement('iframe')
@@ -1646,13 +2425,47 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
   document.body.appendChild(frame)
   const doc = frame.contentDocument
   doc.open()
-  doc.write(`<!doctype html><html><head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet"><style>@page{size:A4 portrait;margin:10mm}*{box-sizing:border-box}body{margin:0;background:#fff}textarea,input,button,.official-qa-notes{display:none!important}.official-paper{width:100%!important;min-height:auto!important;box-shadow:none!important;margin:0!important}.official-section{break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body>${node.outerHTML}</body></html>`)
+  doc.write(`<!doctype html><html><head><meta charset="UTF-8"><style>
+@font-face{
+  font-family:'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda');
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+@font-face{
+  font-family:'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda');
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+}
+[dir="rtl"], .urdu, .urdu-text, [data-urdu="true"], .official-paper[dir="rtl"], .official-paper[dir="rtl"] * {
+  font-family: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
+}
+@page{size:A4 portrait;margin:10mm}*{box-sizing:border-box}body{margin:0;background:#fff}textarea,input,button,.official-qa-notes{display:none!important}.official-paper{width:100%!important;min-height:auto!important;box-shadow:none!important;margin:0!important}.official-section{break-inside:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body>${node.outerHTML}</body></html>`)
   doc.close()
-  setTimeout(() => {
-   frame.contentWindow?.focus()
-   frame.contentWindow?.print()
-   setTimeout(() => frame.remove(), 2500)
-  }, 700)
+  try {
+   if (doc.fonts) {
+    await Promise.race([
+     Promise.all([
+      doc.fonts.load("16px 'ASSPS Jameel Noori'"),
+      doc.fonts.load("16px 'Jameel Noori Nastaleeq'"),
+      doc.fonts.ready,
+     ]),
+     new Promise(resolve => setTimeout(resolve, 2000))
+    ])
+   }
+  } catch (err) {
+   console.warn('Urdu print font preload warning in printPaper:', err)
+  }
+  frame.contentWindow?.focus()
+  frame.contentWindow?.print()
+  setTimeout(() => frame.remove(), 3000)
  }
 
  const inputStyle = { width:'100%', boxSizing:'border-box', border:`1px solid ${theme.border}`, borderRadius:6, padding:'8px 10px', font:'inherit', color:'#111827', background:'#fff' }
@@ -1676,7 +2489,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
     {draft.sourceTotalNote && <div style={{ marginTop:8 }}>{draft.sourceTotalNote}</div>}
     {draft.qaNotes && <pre style={{ margin:'8px 0 0', whiteSpace:'pre-wrap', fontFamily:'inherit' }}>{draft.qaNotes}</pre>}
    </details>}
-   <div ref={printRef} className="official-paper" dir={isUrdu ? 'rtl' : 'ltr'} style={{ width:'210mm', minHeight:'297mm', margin:'0 auto', background:'#fff', color:'#111827', padding:'12mm', boxSizing:'border-box', boxShadow:'0 12px 40px rgba(0,0,0,.4)', fontFamily:isUrdu ? "'Noto Nastaliq Urdu', serif" : "'Times New Roman', serif", borderTop:`8px solid ${theme.accent}` }}>
+   <div ref={printRef} className="official-paper" dir={isUrdu ? 'rtl' : 'ltr'} style={{ width:'210mm', minHeight:'297mm', margin:'0 auto', background:'#fff', color:'#111827', padding:'12mm', boxSizing:'border-box', boxShadow:'0 12px 40px rgba(0,0,0,.4)', fontFamily:isUrdu ? URDU_FONT_STACK : "'Times New Roman', serif", borderTop:`8px solid ${theme.accent}` }}>
     <header style={{ display:'grid', gridTemplateColumns:'80px 1fr 150px', gap:14, alignItems:'center', borderBottom:`3px solid ${theme.accent}`, paddingBottom:12, marginBottom:12 }}>
      <div style={{ width:72, height:72, display:'grid', placeItems:'center', background:'#fff' }}>{paperSettings?.logo ? <img src={paperSettings.logo} alt="School logo" style={{ maxWidth:'100%', maxHeight:'100%', objectFit:'contain' }} /> : <strong style={{ color:theme.accent }}>ASSPS</strong>}</div>
      <div style={{ textAlign:isUrdu ? 'right' : 'left' }}>
@@ -1713,9 +2526,10 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
 }
 
 //  Main Component 
-function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
- const [uiTheme, setUiTheme] = useState(getInitialPaperTheme)
- const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'syllabus')
+function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSaved = null }) {
+ const { theme:uiTheme, setTheme:setUiTheme } = useTheme()
+ const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'choose')
+ const [creationDraft, setCreationDraft] = useState(null)
  const [syllabusId, setSyllabusId] = useState(null)
  const [classId, setClassId] = useState(null)
  const [subjectId, setSubjectId] = useState(null)
@@ -1751,8 +2565,21 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  questionTypes.forEach(t => { initial[t.value] = []; initial[`${t.value}_marks`] = t.marks || 1 })
  return initial
  })
+ const createNewBlankPaper = input => {
+  const fresh = createBlankPaperDraft(input)
+  setCreationDraft(fresh)
+  setPaper(() => {
+   const next = { ...fresh }
+   questionTypes.forEach(type => { next[type.value]=[]; next[`${type.value}_marks`]=type.marks||1 })
+   return next
+  })
+  setStep('questions')
+ }
+ const activePaper = creationDraft || loadedPaper
 
  const crumbs = {
+ choose:[{label:'Choose Creation Method'}],
+ blank_setup:[{label:'Create Blank Paper'}],
  syllabus: [{ label:'Syllabus Selection' }],
  class: [{ label:'Syllabus Selection', onClick:()=>setStep('syllabus') }, { label:'Class Selection' }],
  subject: [{ label:'Syllabus Selection', onClick:()=>setStep('syllabus') }, { label:'Class', onClick:()=>setStep('class') }, { label:'Subject Selection' }],
@@ -1760,29 +2587,23 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
  questions: [{ label:'Build Paper' }],
  }
 
- useEffect(() => {
- const syncTheme = () => setUiTheme(getInitialPaperTheme())
- const observer = new MutationObserver(syncTheme)
- observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
- window.addEventListener('storage', syncTheme)
- return () => {
- observer.disconnect()
- window.removeEventListener('storage', syncTheme)
- }
- }, [])
-
+ // The portal theme is authoritative. Never force-reset a user's Dark/Light
+ // choice when revisiting this route; both header and workspace follow it.
  return (
  <div className="pts-paper-generator-shell" data-paper-theme={uiTheme} style={{ background:D.bg, minHeight:'100vh', fontFamily:'Inter, Segoe UI, sans-serif', position:'relative', ...themeVars(uiTheme) }}>
  <DBreadcrumb steps={crumbs[step]||[]} />
- {step !== 'questions' && (<div style={{ position:'absolute', top:8, right:18, zIndex:5 }}><ThemeToggle mode={uiTheme} onToggle={() => setUiTheme(m => m === 'dark' ? 'light' : 'dark')} /></div>)}
+ {step !== 'questions' && (<div style={{ position:'absolute', top:8, right:18, zIndex:5 }}><ThemeToggle mode={uiTheme} onToggle={() => togglePaperWorkspaceTheme(setUiTheme)} /></div>)}
  <div style={{ padding:'24px', maxWidth:1100, margin:'0 auto' }}>
+ {step==='choose' && <PaperCreationWelcome onBlank={()=>setStep('blank_setup')} onBank={()=>setStep('syllabus')} onDuplicate={()=>onOpenSaved?.()} />}
+ {step==='blank_setup' && <BlankPaperSetup onBack={()=>setStep('choose')} onCreate={createNewBlankPaper} />}
  {step==='syllabus' && (<SyllabusStep onSelect={id => { setSyllabusId(id); setStep('class') }} />)}
  {step==='class' && (<ClassStep syllabusId={syllabusId} onSelect={id => { setClassId(id); setStep('subject') }} onBack={() => setStep('syllabus')} />)}
  {step==='subject' && (<SubjectStep syllabusId={syllabusId} classId={classId} onSelect={id => { setSubjectId(id); setStep('chapters') }} onBack={() => setStep('class')} />)}
  {step==='chapters' && (<ChapterStep subjectId={subjectId} selectedChapters={selChapters} selectedTopics={selTopics} onChange={(c,t) => { setSelChapters(c); setSelTopics(t) }} onNext={() => setStep('questions')} onBack={() => setStep('subject')} />)}
- {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={loadedPaper?.config || null} loadedPaper={loadedPaper || null} uiTheme={uiTheme} onToggleTheme={() => setUiTheme(m => m === 'dark' ? 'light' : 'dark')} onBack={() => {
- if (loadedPaper && onReturnToSource) onReturnToSource();
- else setStep(loadedPaper ? 'syllabus' : 'chapters');
+ {step==='questions' && (<QuestionPanel subjectId={subjectId || 'loaded'} selectedChapters={selChapters} paper={paper} onPaperChange={setPaper} overrideConfig={activePaper?.config || null} loadedPaper={activePaper || null} uiTheme={uiTheme} onToggleTheme={() => togglePaperWorkspaceTheme(setUiTheme)} onBack={() => {
+ if (creationDraft) { setCreationDraft(null); setStep('choose') }
+ else if (loadedPaper && onReturnToSource) onReturnToSource()
+ else setStep('chapters')
  }} />)}
  </div>
  </div>
@@ -1790,5 +2611,7 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null }) {
 }
 
 export default function PTSPaperGenerator(props) {
+ // Official first-term papers use the full Paper Studio surface so all templates,
+ // spacing, borders, structured MCQs/tables and print settings share one renderer.
  return <PTSPaperGeneratorCore {...props} />
 }

@@ -5,13 +5,39 @@ import { classLevelLabel, classLevelsMatch, normalizeClassLevel } from '../../se
 import { getTenantStorageItem, setTenantStorageItem, tenantStorageKey } from '../../services/tenantStorage'
 import asspsQuestionBankSeed from './seed-data/assps-question-bank-class4-7-8.json'
 import officialFirstTermPapers from './seed-data/official-first-term-2026-v13.json'
+import { getFinalExamScheduleForPaper } from '../dateSheetFinalExam2026.js'
+import examNightRecoverySeed from './seed-data/exam-night-recovery-v3.json'
+import { buildRecoverySavedPapers } from './seed-data/examNightRecoveryAdapter.js'
 
 const STORE_KEY = 'al_siddique_paper_store'
 const NOTIFICATIONS_KEY = 'saas_admin_notifications'
 const STORE_SYNC_EVENT = 'al_siddique_paper_store_updated'
+let quotaFallbackNotified = false
 const ASSPS_QBANK_SEED_VERSION = 'class4-7-8-2026-06'
 const OFFICIAL_EXAM_DATA_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V13'
-const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V15'
+const OFFICIAL_EXAM_SEED_VERSION = 'MASTER_AGENT_PROMPT_ALL_CLASSES_FINAL_V13_NATIVE_EDITOR_V24_UNIVERSAL_PAPER_SYSTEM'
+const OFFICIAL_EXAM_FORCE_REFRESH_IDS = new Set([
+ 'official-first-term-2026-class-2-english',
+ 'official-first-term-2026-class-4-english',
+ 'official-first-term-2026-class-6-english',
+ 'official-first-term-2026-class-8-english',
+ 'official-first-term-2026-class-1-countdown-mathematics',
+ 'official-first-term-2026-class-5-mathematics',
+ 'official-first-term-2026-class-7-mathematics',
+ 'official-first-term-2026-class-2-mathematics',
+ 'official-first-term-2026-class-4-mathematics',
+ 'official-first-term-2026-class-6-mathematics',
+ 'official-first-term-2026-class-8-mathematics',
+ 'official-first-term-2026-class-1-urdu',
+ 'official-first-term-2026-class-3-urdu',
+ 'official-first-term-2026-class-5-urdu',
+ 'official-first-term-2026-class-7-social-studies',
+])
+const EXAM_NIGHT_RECOVERY_SEED_VERSION = 'ASSPS_EXAM_NIGHT_RECOVERY_SOURCE_V5_OCT02_URDU_REFRESH'
+const EXAM_NIGHT_FORCE_REFRESH_IDS = new Set([
+ 'recovery-first-term-2026-class-3-mathematics',
+ 'recovery-first-term-2026-class-7-urdu',
+])
 
 const SEED_TYPE_MAP = {
  mcq: 'mcq',
@@ -185,6 +211,9 @@ function normalizeSeedOptions(options = [], isRtl = false) {
 
 function withAsspsQuestionBankSeed(store) {
  if (!isAsspsTenantUser()) return store
+ // The large question-bank merge must run only once for each seed release.
+ // Re-running it on every cross-tab storage event rewrites the entire store.
+ if (store.seedInfo?.asspsQuestionBank?.version === ASSPS_QBANK_SEED_VERSION) return store
  const seedRows = Array.isArray(asspsQuestionBankSeed) ? asspsQuestionBankSeed : []
  if (!seedRows.length) return store
 
@@ -326,8 +355,16 @@ function withOfficialExamPaperSeed(store) {
  const withReadableOfficialTypography = paper => {
   const fontSize = Number(paper?.editorSettings?.fontSize || 0)
   const headingSize = Number(paper?.editorSettings?.headingSize || 0)
+  const schedule = getFinalExamScheduleForPaper(
+   paper?.config?.classLevel || paper?.config?.className,
+   paper?.config?.subject || paper?.config?.subjectName
+  )
   return {
    ...paper,
+   config: {
+    ...(paper.config || {}),
+    ...(schedule ? { examDate: schedule.date, timeAllowed: schedule.timeAllowed || '2 Hours', paperTime: schedule.time } : {}),
+   },
    editorSettings: {
     ...(paper.editorSettings || {}),
     fontFamily: paper.editorSettings?.fontFamily || "'Times New Roman', Times, serif",
@@ -337,35 +374,28 @@ function withOfficialExamPaperSeed(store) {
   }
  }
  const upgraded = savedPapers.map(existing => {
-  const seedPaper = seedById.get(String(existing?.id || ''))
+  const existingId = String(existing?.id || '')
+  const seedPaper = seedById.get(existingId)
   if (!seedPaper) return existing
-  if (existing.documentFormat !== 'official-v12') {
-   const legacySize = Number(existing.editorSettings?.fontSize || 0)
-   const legacyHeadingSize = Number(existing.editorSettings?.headingSize || 0)
-   if (legacySize > 11 && existing.editorSettings?.fontFamily) return existing
-   styled += 1
-   return {
-    ...existing,
-    editorSettings: {
-     ...(existing.editorSettings || {}),
-     fontFamily: existing.editorSettings?.fontFamily || "'Times New Roman', Times, serif",
-     fontSize: legacySize > 11 ? legacySize : 13,
-     headingSize: legacyHeadingSize > 12 ? legacyHeadingSize : 14,
-    },
-   }
-  }
+  // A saved editor revision is a working copy. Never let a later seed bump
+  // overwrite principal/teacher edits; the source seed remains the locked baseline.
+  if (existing?.userEdited || existing?.paperSystem?.workingCopy) return existing
+  // Exam-day seed bumps are surgical: refresh only papers explicitly changed in
+  // this release so already-reviewed papers and deliberate manual edits survive.
+  if (!OFFICIAL_EXAM_FORCE_REFRESH_IDS.has(existingId)) return existing
+
+  // The V13 teacher dataset is authoritative for the scheduled papers refreshed here.
+  // Rehydrate the selected IDs from that source so stale local shapes cannot
+  // silently remove MCQs/tables, dates, answer-space rules, or source ordering.
   const next = withReadableOfficialTypography(cloneJson(seedPaper))
-  const oldSections = Array.isArray(existing.sections) ? existing.sections : []
-  const nativeSections = next.selectedQuestions?.official_section?.questions || []
-  nativeSections.forEach((question, index) => {
-   const old = oldSections[index]
-   if (!old) return
-   question.heading = old.heading ?? question.heading
-   question.content = old.content ?? question.content
-   question.text = question.heading
-   question.textUrdu = next.config?.language === 'urdu' ? question.heading : ''
-  })
+  const nativeSections = cloneJson(next.selectedQuestions?.official_section?.questions || next.official_section || [])
   next.official_section = nativeSections
+  if (next.selectedQuestions?.official_section) {
+   next.selectedQuestions.official_section.questions = nativeSections
+  }
+
+  // Preserve only user-facing identity/timestamps. Presentation resets to the
+  // known-good seed defaults; the editor can then persist deliberate changes.
   next.name = existing.name || next.name
   next.createdAt = existing.createdAt || next.createdAt
   next.updatedAt = new Date().toISOString()
@@ -395,11 +425,54 @@ function withOfficialExamPaperSeed(store) {
  }
 }
 
+function withExamNightRecoverySeed(store) {
+ if (!isAsspsTenantUser()) return store
+ const source = examNightRecoverySeed && typeof examNightRecoverySeed === 'object' ? examNightRecoverySeed : null
+ const recoveryPapers = buildRecoverySavedPapers(source)
+ if (!recoveryPapers.length) return store
+
+ const savedPapers = Array.isArray(store.savedPapers) ? [...store.savedPapers] : []
+ const alreadyCurrent = store.seedInfo?.examNightRecovery?.version === EXAM_NIGHT_RECOVERY_SEED_VERSION
+ const knownIds = new Set(savedPapers.map(paper => String(paper?.id || '')))
+ // A current seed with every expected record is immutable: no refresh, no write.
+ if (alreadyCurrent && recoveryPapers.every(paper => knownIds.has(String(paper.id)))) return store
+ const recoveryById = new Map(recoveryPapers.map(paper => [String(paper.id), paper]))
+ let refreshed = 0
+ const refreshedSaved = savedPapers.map(existing => {
+  const id = String(existing?.id || '')
+  // Version bumps never overwrite a principal's working copy, and an unchanged
+  // seed version cannot regenerate the same paper on every storage read.
+  if (alreadyCurrent || existing?.userEdited || existing?.paperSystem?.workingCopy) return existing
+  if (!EXAM_NIGHT_FORCE_REFRESH_IDS.has(id)) return existing
+  const next = recoveryById.get(id)
+  if (!next) return existing
+  refreshed += 1
+  return { ...next, name: existing.name || next.name, createdAt: existing.createdAt || next.createdAt, updatedAt: new Date().toISOString() }
+ })
+ const existingIds = new Set(refreshedSaved.map(paper => String(paper?.id || '')))
+ const missing = recoveryPapers.filter(paper => !existingIds.has(String(paper.id)))
+ if (!missing.length && !refreshed && alreadyCurrent) return store
+
+ return {
+  ...store,
+  savedPapers: [...missing, ...refreshedSaved],
+  seedInfo: {
+   ...(store.seedInfo || {}),
+   examNightRecovery: {
+    version: EXAM_NIGHT_RECOVERY_SEED_VERSION,
+    inserted: missing.length,
+    total: recoveryPapers.length,
+    appliedAt: new Date().toISOString(),
+   },
+  },
+ }
+}
+
 function loadStore() {
  try {
  const raw = getTenantStorageItem(STORE_KEY, { migrateLegacy: true })
  if (!raw) {
- const seeded = withOfficialExamPaperSeed(withAsspsQuestionBankSeed(defaultStore))
+ const seeded = withExamNightRecoverySeed(withOfficialExamPaperSeed(withAsspsQuestionBankSeed(defaultStore)))
  saveStore(seeded)
  return seeded
  }
@@ -460,7 +533,7 @@ function loadStore() {
  paperSettings: safePaperSettings,
  }
  const questionSeeded = withAsspsQuestionBankSeed(nextStore)
- const seeded = withOfficialExamPaperSeed(questionSeeded)
+ const seeded = withExamNightRecoverySeed(withOfficialExamPaperSeed(questionSeeded))
  if (seeded !== nextStore) {
   saveStore(seeded)
  }
@@ -475,7 +548,11 @@ function saveStore(data) {
   const storage = getStorage()
   if (!storage) return false
   try { 
-    setTenantStorageItem(STORE_KEY, JSON.stringify(data)) 
+    const mode = setTenantStorageItem(STORE_KEY, JSON.stringify(data))
+    if (mode === 'session' && !quotaFallbackNotified) {
+      quotaFallbackNotified = true
+      alert('Browser storage is full. Your server copy remains authoritative and this tab is using emergency session recovery until space is freed.')
+    }
     return true
   } catch (e) {
     console.error('Failed to save to local storage:', e)
@@ -734,6 +811,17 @@ function emit() {
   listeners.forEach(l => l());
 }
 
+
+export function markPaperServerRecovered(serverPaperId, serverRevision) {
+ const store = loadStore()
+ const updatedAt = new Date().toISOString()
+ const savedPapers = (store.savedPapers || []).map(paper => {
+  if (paper.serverPaperId !== serverPaperId && paper.canonicalDocument?.id !== serverPaperId) return paper
+  return { ...paper, serverPaperId, serverRevision:Number(serverRevision||0), persistenceAuthority:'SERVER_REVISION_SOURCE_OF_TRUTH', persistenceMode:'ONLINE', syncConflict:false, updatedAt }
+ })
+ return saveStore({ ...store, savedPapers })
+}
+
 export function usePaperStore() {
   // Initialize global store on first use if null
   if (!globalStore) {
@@ -826,8 +914,8 @@ export function usePaperStore() {
   structuredData, leftColumn, rightColumn,
   createdAt: new Date().toISOString(),
   }
- update(s => ({ ...s, questions: [...s.questions, q] }))
- return q
+ const success = update(s => ({ ...s, questions: [...s.questions, q] }))
+ return success ? q : null
  }
 
  function editQuestion(id, changes) {
