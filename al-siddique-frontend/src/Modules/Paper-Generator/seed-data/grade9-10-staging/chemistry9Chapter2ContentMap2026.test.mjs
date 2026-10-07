@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./chemistry9Chapter2ContentMap2026.json',import.meta.url),'utf8'));
+test('Chemistry IX Chapter 2 has four verified numbered topics',()=>{assert.deepEqual(d.topics.map(x=>x.topicId),['2.1','2.2','2.3','2.4']);assert.deepEqual(d.chapter.pdfPages,[21,35]);assert(d.topics.every(x=>x.status==='VISUALLY_VERIFIED_HEADING'));});
+test('chapter 2 concept map includes atomic structure through relative atomic mass',()=>{for(const x of ['subatomic particles and atomic models','atomic number and mass number','isotopes and radioactivity','relative atomic mass and isotopic abundance'])assert(d.verifiedConceptFamilies.includes(x));});
+test('exercise-origin remains blocked while original additional/conceptual drafting is allowed',()=>{assert.equal(d.exerciseFamilies.itemLevelExerciseMap,'PENDING');assert.equal(d.authoring.exerciseOriginAllowed,false);assert.equal(d.authoring.additionalAndConceptualAllowed,true);assert.equal(d.authoring.copyPastPaperStems,false);assert.equal(d.authoring.publicationAllowed,false);});

@@ -1,0 +1,17 @@
+{
+  "schemaVersion":"assps-chemistry9-ch2-content-map-v1",
+  "checkedOn":"2026-10-06",
+  "sourceRecordId":"pectaa-catalog-007",
+  "sourcePdfSha256":"05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter":{"number":2,"title":"Atomic Structure","printedPages":[17,31],"pdfPages":[21,35]},
+  "topics":[
+    {"topicId":"2.1","title":"Structure of Atom","pdfStartPage":23,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"2.2","title":"Atomic Number and Mass Number","pdfStartPage":26,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"2.3","title":"Isotopes and their Masses","pdfStartPage":28,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"2.4","title":"Relative Atomic Mass","pdfStartPage":30,"status":"VISUALLY_VERIFIED_HEADING"}
+  ],
+  "verifiedConceptFamilies":["subatomic particles and atomic models","electron shells and energy levels","atomic number and mass number","ions versus isotopes","isotopes and radioactivity","relative atomic mass and isotopic abundance"],
+  "exerciseFamilies":{"pdfPages":[34,35],"families":["Questions for Short Answers","Constructed Response Questions","Descriptive Questions","Investigative Questions"],"itemLevelExerciseMap":"PENDING"},
+  "actual2026Evidence":{"artifact":"multanGrade9ScienceActual2026Evidence.json","chemistryGroupIObjectivePage":3,"chemistryGroupISubjectivePage":2,"gate":"SATISFIED_FOR_GROUP_I_TOP_LEVEL_PATTERN"},
+  "authoring":{"additionalAndConceptualAllowed":true,"exerciseOriginAllowed":false,"copyTextbookPassages":false,"copyPastPaperStems":false,"publicationAllowed":false,"urduCounterpartStatus":"BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION"}
+}
