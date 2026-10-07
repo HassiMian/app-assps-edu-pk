@@ -31,7 +31,7 @@ The Next proxy now preserves binary response bytes plus Content-Disposition and 
 ## Verification
 
 - G21 model/binary/eligibility/revision-binding unit tests: 6/6 PASS.
-- G21 isolated HTTP lifecycle: 5/5 PASS (owner current canonical 200 DOCX, stale/forged snapshot 409, legacy 409, cross-teacher 404, admin school-scope 200).
+- G21 isolated HTTP lifecycle: 6/6 PASS (owner current canonical 200 DOCX, stale/forged snapshot 409, legacy 409, cross-teacher 404, admin school-scope 200).
 - Full isolated Paper Studio regression: 133/133 PASS, fail 0.
 - Connect G21 projection source gate: 8/8 PASS.
 - Existing cross-stream boundary PASS.
