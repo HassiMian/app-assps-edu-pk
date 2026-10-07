@@ -141,6 +141,7 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
 export default function ResultCards() {
  const [exams, setExams] = useState([])
  const [results, setResults] = useState([])
+ const [loadedExamId, setLoadedExamId] = useState('')
  const [selectedExam, setSelectedExam] = useState('')
  const [selectedStudent, setSelectedStudent] = useState('')
  const [outputMode, setOutputMode] = useState('single')
@@ -167,17 +168,21 @@ export default function ResultCards() {
 
  const loadResults = () => {
  if (!selectedExam) return
+ const requestExamId = String(selectedExam)
  setLoading(true)
- setResults([])
  setSelectedStudent('')
- api.get(`/api/exams/results/${selectedExam}`)
+ setLoadError('')
+ api.get(`/api/exams/results/${requestExamId}`)
  .then(r => {
  const list = r.data.data || []
  setResults(list)
+ setLoadedExamId(requestExamId)
  const ids = [...new Set(list.map(r => r.student_id))]
  if (ids.length) setSelectedStudent(String(ids[0]))
  })
- .catch(err => { setResults([]); setLoadError(err.response?.data?.message || 'Exam results could not be loaded.') })
+ .catch(err => {
+ setLoadError(err.response?.data?.message || 'Exam results could not be loaded. Existing loaded results were preserved for their original exam.')
+ })
  .finally(() => setLoading(false))
  }
 
@@ -212,11 +217,12 @@ export default function ResultCards() {
  studentMarks: rows.filter(r => String(r.student_id) === String(s.id)),
  })).filter(item => item.studentMarks.length > 0)
 
- const students = buildStudentsFromRows(results)
- const studentMarks = results.filter(r => String(r.student_id) === selectedStudent)
+ const activeResults = String(loadedExamId) === String(selectedExam) ? results : []
+ const students = buildStudentsFromRows(activeResults)
+ const studentMarks = activeResults.filter(r => String(r.student_id) === selectedStudent)
  const student = students.find(s => String(s.id) === selectedStudent)
  const exam = exams.find(e => String(e.id) === selectedExam)
- const classPrintCards = buildPrintCards(results, exam, students)
+ const classPrintCards = buildPrintCards(activeResults, exam, students)
  const totalObtained = studentMarks.reduce((s, r) => s + Number(r.marks_obtained || 0), 0)
  const totalPossible = studentMarks.reduce((s, r) => s + Number(r.total_marks || exam?.total_marks || 100), 0)
  const pct = totalPossible > 0 ? Math.round((totalObtained / totalPossible) * 100) : 0
@@ -323,7 +329,7 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ ...card, display:'flex', flexDirection:'column', gap:12 }}>
  <div style={{ color:C.gold, fontSize:13, fontWeight:900 }}>1. Exam / Term</div>
  <div style={{ color:C.muted, fontSize:12 }}>Select the exam whose saved marks should appear on result cards.</div>
- <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setResults([]); setSelectedStudent('') }}>
+ <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
  <option value="">Select exam</option>
  {exams.map(e=><option key={e.id} value={e.id}>{e.name} - {e.class}</option>)}
  </select>
@@ -399,7 +405,7 @@ export default function ResultCards() {
  <div className="super-module-card" style={{ display:'none' }}>
  <div style={{ flex:'1 1 240px' }}>
  <div style={{ color:C.muted, fontSize:12, fontWeight:700, marginBottom:8 }}>Select Exam</div>
- <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setResults([]); setSelectedStudent('') }}>
+ <select style={select} value={selectedExam} onChange={e=>{ setSelectedExam(e.target.value); setSelectedStudent(''); setLoadError('') }}>
  {exams.map(e=><option key={e.id} value={e.id}>{e.name} ({e.class})</option>)}
  </select>
  </div>
@@ -416,8 +422,13 @@ export default function ResultCards() {
  )}
  </div>
 
+ {loadError && (
+ <div className="super-module-card" style={{ ...card, padding:16, marginBottom:12, color:C.red, borderColor:'rgba(255,55,95,0.35)' }}>{loadError}</div>
+ )}
  {loading ? (
  <div className="super-module-card" style={{ ...card, padding:40, textAlign:'center', color:C.muted }}>Loading results…</div>
+ ) : loadError && String(loadedExamId) !== String(selectedExam) ? (
+ <div className="super-module-card" style={{ ...card, padding:40, textAlign:'center', color:C.muted }}>Results for this exam are temporarily unavailable.</div>
  ) : student && studentMarks.length > 0 ? (
  <div className="super-module-card" style={{ ...card, background:'var(--apex-bg-surface)', borderRadius:20, padding:28, color:'#fff' }}>
  <div style={{ display:'flex', justifyContent:'space-between', gap:16, marginBottom:24, alignItems:'center', flexWrap:'wrap' }}>

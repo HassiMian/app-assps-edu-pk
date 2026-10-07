@@ -226,6 +226,24 @@ assertNotContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
+  /catch\(err => \{ setEmployees\(\[\]\)/,
+  'employee card source failures must preserve the last known-good staff list.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  /catch\(err => \{ setResults\(\[\]\)/,
+  'result-card source failures must not be reported as an authoritative empty result set.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  "const activeResults = String(loadedExamId) === String(selectedExam) ? results : []",
+  'result-card rows must remain bound to the exam they were actually loaded for.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'
@@ -1852,8 +1870,8 @@ assertNotContains(
 )
 assertContains(
   'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',
-  "setLoadError(err.response?.data?.message || 'Employee data could not be loaded.')",
-  'employee card generation must surface employee-source failures.'
+  "Employee data could not be refreshed. Existing loaded employees were preserved.",
+  'employee card generation must surface employee-source failures without erasing loaded staff.'
 )
 assertNotContains(
   'al-siddique-frontend/src/Modules/cards/CardsGeneratorModule.jsx',

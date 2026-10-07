@@ -1602,7 +1602,7 @@ function EmployeeIdTab({ school }) {
  setLoadError('')
  api.get('/api/employees')
  .then(r => { const list = r.data.data || r.data || []; setEmployees(list); if (list.length) setDept(list[0].department || '') })
- .catch(err => { setEmployees([]); setLoadError(err.response?.data?.message || 'Employee data could not be loaded.') })
+ .catch(err => { setLoadError(err.response?.data?.message || 'Employee data could not be refreshed. Existing loaded employees were preserved.') })
  .finally(() => setLoading(false))
  }, [])
 
