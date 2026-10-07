@@ -25,6 +25,10 @@ function assertNotContains(relativePath, pattern, message) {
 
 const failures = []
 
+if (fs.existsSync(path.join(repoRoot, 'al-siddique-frontend/src/pages/Dashboard_clean.jsx'))) {
+  fail('al-siddique-frontend/src/pages/Dashboard_clean.jsx: legacy duplicate dashboard with static attendance data must not exist in canonical source.')
+}
+
 assertNotContains(
   'al-siddique-backend/src/services/emailService.js',
   /rejectUnauthorized\s*:\s*false/,
