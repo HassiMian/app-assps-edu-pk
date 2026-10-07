@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "assps-chemistry9-ch12-content-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 12,
+    "title": "Measurement in Chemistry",
+    "printedPages": [
+      157,
+      165
+    ],
+    "pdfPages": [
+      161,
+      169
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "12.1",
+      "title": "SI Units in Chemistry",
+      "pdfStartPage": 163,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "12.2",
+      "title": "Tools and Techniques to Manage Accuracy and Precision",
+      "pdfStartPage": 166,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "12.3",
+      "title": "Accuracy and Precision",
+      "pdfStartPage": 167,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "verifiedConceptFamilies": [
+    "SI base and derived units used in chemistry",
+    "standardized units for scientific communication",
+    "prefixes and practical small units",
+    "measurement tools and techniques",
+    "accuracy versus precision",
+    "systematic versus random error"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      168,
+      169
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigative Questions"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}

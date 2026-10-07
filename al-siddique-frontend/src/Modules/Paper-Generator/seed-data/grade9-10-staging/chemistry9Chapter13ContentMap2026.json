@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-chemistry9-ch13-content-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 13,
+    "title": "Laboratory and Chemical Safety",
+    "printedPages": [
+      166,
+      176
+    ],
+    "pdfPages": [
+      170,
+      180
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "13.1",
+      "title": "Chemical Hazards in the Laboratory",
+      "pdfStartPage": 171,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "13.2",
+      "title": "Hazard Signs",
+      "pdfStartPage": 175,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "13.3",
+      "title": "Personal Protective Equipment (PPE)",
+      "pdfStartPage": 176,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "13.4",
+      "title": "Location and Operation of Safety Equipment",
+      "pdfStartPage": 176,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "13.5",
+      "title": "Emergency Situation in the Lab",
+      "pdfStartPage": 176,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "verifiedConceptFamilies": [
+    "chemical hazard classes and safe handling",
+    "hazard signs and warning symbols",
+    "personal protective equipment",
+    "location and correct use of safety equipment",
+    "emergency response and drills",
+    "chemical waste and safe disposal principles"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      179,
+      180
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigative Questions"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}
