@@ -1,3 +1,4 @@
+const crypto=require('node:crypto')
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType, AlignmentType, HeadingLevel } = require('docx')
 
 const DIRS = new Set(['ltr','rtl'])
@@ -121,7 +122,9 @@ async function buildCanonicalDocxBuffer(doc={}) {
   if(metaRows.length){children.push(new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:metaRows.map(([k,v])=>new TableRow({children:[new TableCell({children:[para(k,{bold:true,size:20,after:0})]}),new TableCell({children:[para(v,{rtl:docRtl,size:20,after:0})]})]}))}));children.push(para('',{after:60}))}
   for(const block of model.blocks||[])children.push(...blockToDocx(block))
   const document=new Document({styles:{default:{document:{run:{font:'Times New Roman',size:22},paragraph:{spacing:{after:100}}}}},sections:[{properties:{},children}]})
-  return {buffer:await Packer.toBuffer(document),model,filename:canonicalFilename(doc)}
+  const buffer=await Packer.toBuffer(document)
+  const docxSha256=crypto.createHash('sha256').update(buffer).digest('hex')
+  return {buffer,model,filename:canonicalFilename(doc),docxSha256}
 }
 
 function assessCanonicalDocxEligibility(review={}) {
@@ -148,6 +151,7 @@ async function buildRevisionBoundCanonicalDocx({schoolId,userId,role,paperId,rev
     buffer:built.buffer,
     filename:built.filename,
     model:built.model,
+    docxSha256:built.docxSha256,
     source:{paperId:String(bound.paper?.id||paperId),revision:Number(bound.revision),snapshotHash:String(bound.snapshotHash),family:review.family,reviewStatus:review.reviewStatus,reviewedContract:review.reviewedContract},
     policy:{downloadOnly:true,currentRevisionRequired:true,legacyDomExporterUsed:false,sourceMutated:false,persisted:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,approvalClaim:false},
   }

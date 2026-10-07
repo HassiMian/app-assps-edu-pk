@@ -117,7 +117,9 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   assert.equal(r.headers['x-assps-paper-family'],'historical-v13')
   assert.equal(r.headers['x-assps-paper-revision'],'3')
   assert.match(String(r.headers['x-assps-snapshot-sha256']||''),/^[a-f0-9]{64}$/)
-  console.log('G21_DOCX_HTTP 8/8 PASS')
+  const bodySha=crypto.createHash('sha256').update(r.buffer).digest('hex')
+  assert.equal(r.headers['x-assps-docx-sha256'],bodySha)
+  console.log('G21_DOCX_HTTP 9/9 PASS')
  } finally {
   try{child?.kill('SIGTERM')}catch{}
   if(sidA)await c.query('delete from paper_vault where school_id=$1',[sidA]).catch(()=>{})
