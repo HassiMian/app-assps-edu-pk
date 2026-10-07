@@ -1,0 +1,18 @@
+{
+  "schemaVersion":"assps-chemistry9-ch1-content-map-v1",
+  "checkedOn":"2026-10-06",
+  "sourceRecordId":"pectaa-catalog-007",
+  "sourcePdfSha256":"05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter":{"number":1,"title":"States of Matter and Phase Changes","printedPages":[1,16],"pdfPages":[5,20]},
+  "topics":[
+    {"topicId":"1.1","title":"What is Chemistry","pdfStartPage":6,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"1.2","title":"States of Matter","pdfStartPage":8,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"1.3","title":"Element","pdfStartPage":10,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"1.4","title":"Allotropic Forms of Substances","pdfStartPage":12,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"1.5","title":"Differences between Elements, Compounds and Mixtures","pdfStartPage":13,"status":"VISUALLY_VERIFIED_HEADING"},
+    {"topicId":"1.6","title":"Solution, Colloidal Solution and Suspension","pdfStartPage":14,"status":"VISUALLY_VERIFIED_HEADING"}
+  ],
+  "exerciseFamilies":{"pdfPages":[19,20],"families":["Questions for Short Answers","Constructed Response Questions","Descriptive Questions","Investigative Questions"],"itemLevelExerciseMap":"PENDING"},
+  "actual2026Evidence":{"artifact":"multanGrade9ScienceActual2026Evidence.json","chemistryGroupIObjectivePage":3,"chemistryGroupISubjectivePage":2,"gate":"SATISFIED_FOR_GROUP_I_TOP_LEVEL_PATTERN"},
+  "authoring":{"additionalAndConceptualAllowed":true,"exerciseOriginAllowed":false,"copyTextbookPassages":false,"copyPastPaperStems":false,"publicationAllowed":false,"urduCounterpartStatus":"BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION"}
+}

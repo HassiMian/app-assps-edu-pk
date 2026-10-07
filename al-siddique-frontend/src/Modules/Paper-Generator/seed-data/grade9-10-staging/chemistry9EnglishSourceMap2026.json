@@ -26,8 +26,8 @@
     {
       "number": 2,
       "title": "Atomic Structure",
-      "printedStartPage": 7,
-      "pdfStartPage": 11
+      "printedStartPage": 17,
+      "pdfStartPage": 21
     },
     {
       "number": 3,
@@ -100,7 +100,7 @@
     "tocPage": 3,
     "chapterStartPagesRendered": [
       5,
-      11,
+      21,
       36,
       56,
       71,
@@ -115,7 +115,7 @@
     ],
     "chapterIndexStatus": "VERIFIED",
     "exerciseIndexStatus": "PARTIAL",
-    "topicPageRangesStatus": "PENDING",
+    "topicPageRangesStatus": "PARTIAL_CHAPTER1_VERIFIED",
     "authoringEligible": false
   },
   "rules": {
@@ -133,7 +133,7 @@
       "Investigative Questions"
     ],
     "reviewedChapterEndPrintedPages": {
-      "1": 6,
+      "1": 16,
       "2": 31,
       "3": 51,
       "4": 66,
@@ -148,6 +148,7 @@
       "13": 176
     },
     "chaptersWithVisibleExerciseFamilies": [
+      1,
       2,
       3,
       4,
@@ -161,8 +162,12 @@
       12,
       13
     ],
-    "chapter1Status": "EXERCISE_HEADING_NOT_CONFIRMED_ON_RENDERED_END_PAGE",
+    "chapter1Status": "EXERCISE_FAMILIES_CONFIRMED_ON_PDF_PAGES_19_20",
     "individualQuestionPageMapStatus": "PENDING",
-    "note": "OCR is used only to locate visible exercise-family headings; exact item/page mapping and academic content remain unapproved."
+    "note": "Chapter 1 exercise families are now visually/OCR located on PDF pages 19-20; exact textbook item wording is not copied and individual exercise-origin authoring remains disabled pending item-level source review.",
+    "chapter1ExercisePages": [
+      19,
+      20
+    ]
   }
 }

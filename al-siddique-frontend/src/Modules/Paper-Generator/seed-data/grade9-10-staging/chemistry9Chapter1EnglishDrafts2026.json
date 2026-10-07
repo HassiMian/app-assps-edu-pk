@@ -8,7 +8,7 @@
   "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
   "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
   "patternAuthority": "officialGrade9CorePattern2026.json",
-  "scope": "Grade IX Chemistry 2025-26 Chapter 1 first original English-medium authoring batch; additional/conceptual only; no textbook or past-paper stem copying.",
+  "scope": "Grade IX Chemistry 2025-26 Chapter 1 all six visually verified topics; first original English-medium additional/conceptual batch; no textbook or past-paper stem copying.",
   "topicCoverage": [
     {
       "topicId": "1.1",
@@ -28,6 +28,27 @@
       "topicId": "1.3",
       "title": "Element",
       "sourcePdfPage": 10,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "1.4",
+      "title": "Allotropic Forms of Substances",
+      "sourcePdfPage": 12,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "1.5",
+      "title": "Differences between Elements, Compounds and Mixtures",
+      "sourcePdfPage": 13,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "1.6",
+      "title": "Solution, Colloidal Solution and Suspension",
+      "sourcePdfPage": 14,
       "draftCount": 6,
       "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
     }
@@ -1352,15 +1373,1335 @@
       "boardEvidence": [],
       "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
       "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T14-M19",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 12,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Allotropic Forms of Substances"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is the term for different structural forms of the same element?",
+          "answer": "Allotropy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Allotropy"
+            },
+            {
+              "id": "B",
+              "text": "Ionization"
+            },
+            {
+              "id": "C",
+              "text": "Neutralization"
+            },
+            {
+              "id": "D",
+              "text": "Hydration"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T14-M20",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.4",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 12,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Allotropic Forms of Substances"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which pair represents different structural forms of the same element?",
+          "answer": "Diamond and graphite",
+          "options": [
+            {
+              "id": "A",
+              "text": "Diamond and graphite"
+            },
+            {
+              "id": "B",
+              "text": "Water and steam"
+            },
+            {
+              "id": "C",
+              "text": "Sodium and sodium chloride"
+            },
+            {
+              "id": "D",
+              "text": "Hydrogen and water"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T14-S21",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 12,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Allotropic Forms of Substances"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Define allotropy and give one example of an element that shows it.",
+          "answer": "Allotropy is the existence of an element in two or more different structural forms. Carbon is an example because it can occur as diamond, graphite and fullerene."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T14-S22",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.4",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 12,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Allotropic Forms of Substances"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why can allotropes of the same element have different physical properties?",
+          "answer": "Their atoms are arranged or bonded differently, which changes structure and therefore properties even though the chemical element is the same."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T14-S23",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 12,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Allotropic Forms of Substances"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Give one structural difference between diamond and graphite.",
+          "answer": "Diamond has a three-dimensional giant covalent network, whereas graphite consists of layered sheets of carbon atoms."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T14-L24",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.4",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 12,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Allotropic Forms of Substances"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how structural arrangement can produce different allotropes of one element. Use carbon as an example.",
+          "answer": "A complete answer should state that allotropes contain the same element but differ in atomic arrangement or bonding. Carbon can form a three-dimensional network in diamond, layered sheets in graphite, and cage-like fullerene structures, leading to different properties."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T15-M25",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Differences between Elements, Compounds and Mixtures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which sample is formed when substances are physically combined without a fixed chemical ratio?",
+          "answer": "A mixture",
+          "options": [
+            {
+              "id": "A",
+              "text": "A mixture"
+            },
+            {
+              "id": "B",
+              "text": "An element"
+            },
+            {
+              "id": "C",
+              "text": "A pure compound only"
+            },
+            {
+              "id": "D",
+              "text": "A single atom"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T15-M26",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.5",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Differences between Elements, Compounds and Mixtures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which statement best distinguishes a compound from a mixture?",
+          "answer": "A compound has constituents chemically combined in a fixed ratio",
+          "options": [
+            {
+              "id": "A",
+              "text": "A compound has constituents chemically combined in a fixed ratio"
+            },
+            {
+              "id": "B",
+              "text": "A compound can always be separated by filtration"
+            },
+            {
+              "id": "C",
+              "text": "A mixture always contains only two substances"
+            },
+            {
+              "id": "D",
+              "text": "A mixture has a fixed chemical formula"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T15-S27",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Differences between Elements, Compounds and Mixtures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "State one difference between an element and a compound.",
+          "answer": "An element contains one kind of atom and cannot be chemically decomposed into simpler substances, while a compound contains two or more elements chemically combined in a fixed ratio."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T15-S28",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.5",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Differences between Elements, Compounds and Mixtures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why can the components of a mixture often be separated by physical methods?",
+          "answer": "The components are not chemically bonded into a new substance, so differences in physical properties can be used to separate them."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T15-S29",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Differences between Elements, Compounds and Mixtures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare the composition of a compound with the composition of a mixture.",
+          "answer": "A compound has a fixed composition determined by a definite ratio of elements, whereas a mixture can have variable composition."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T15-L30",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.5",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Differences between Elements, Compounds and Mixtures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare elements, compounds and mixtures in terms of composition, particle identity, separation and purity.",
+          "answer": "A complete answer should explain that an element is a pure substance of one kind of atom; a compound is a pure substance of elements chemically combined in fixed ratios and separated only by chemical means; and a mixture contains physically combined substances in variable proportions that can often be separated physically."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T16-M31",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.6",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 14,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Solution, Colloidal Solution and Suspension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which type of mixture has particles that settle on standing and can be removed by ordinary filtration?",
+          "answer": "Suspension",
+          "options": [
+            {
+              "id": "A",
+              "text": "Suspension"
+            },
+            {
+              "id": "B",
+              "text": "True solution"
+            },
+            {
+              "id": "C",
+              "text": "Element"
+            },
+            {
+              "id": "D",
+              "text": "Pure compound"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T16-M32",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.6",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 14,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Solution, Colloidal Solution and Suspension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why do particles of a true solution pass through ordinary filter paper?",
+          "answer": "They are dispersed at a very small particle scale",
+          "options": [
+            {
+              "id": "A",
+              "text": "They are dispersed at a very small particle scale"
+            },
+            {
+              "id": "B",
+              "text": "They are always heavier than the solvent"
+            },
+            {
+              "id": "C",
+              "text": "They are chemically converted into the filter paper"
+            },
+            {
+              "id": "D",
+              "text": "They settle before reaching the filter"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T16-S33",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.6",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 14,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Solution, Colloidal Solution and Suspension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Differentiate between a true solution and a suspension using particle visibility and settling.",
+          "answer": "In a true solution the dissolved particles are not visible and do not settle, while in a suspension larger particles may be visible and settle on standing."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T16-S34",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.6",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 14,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Solution, Colloidal Solution and Suspension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why is filtration effective for many suspensions but not for true solutions?",
+          "answer": "Suspension particles are large enough to be trapped by filter pores, while dissolved particles in a true solution are small enough to pass through."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T16-S35",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.6",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 14,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Solution, Colloidal Solution and Suspension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "How does a colloidal solution differ from both a true solution and a suspension?",
+          "answer": "Colloidal particles are larger than particles in a true solution but smaller than typical suspension particles. They generally do not settle on standing and are not easily removed by ordinary filtration."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T16-L36",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.6",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 14,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Solution, Colloidal Solution and Suspension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare true solutions, colloidal solutions and suspensions in terms of particle size behaviour, visibility, settling and filtration.",
+          "answer": "A complete answer should state that true solutions have very small dispersed particles that are not visible, do not settle and pass through ordinary filter paper; colloids have intermediate-sized particles that generally remain dispersed; and suspensions have larger particles that may be visible, settle on standing and can often be filtered."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from a verified Chapter 1 topic heading. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
     }
   ],
   "totals": {
-    "drafts": 18,
+    "drafts": 36,
     "approved": 0,
-    "mcq": 6,
-    "short": 9,
-    "long": 3,
-    "englishOnly": 18,
+    "mcq": 12,
+    "short": 18,
+    "long": 6,
+    "englishOnly": 36,
     "exercise": 0
   }
 }
