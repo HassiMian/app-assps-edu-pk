@@ -2104,6 +2104,32 @@ assertContains(
   'Paper Store public settings fallback must carry an explicit school id.'
 )
 
+assertContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  'const classNamesKey = classNames.join(',
+  'dashboard academic hydration must keep a stable class-name signature to prevent render/fetch loops.'
+)
+assertContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  'const stableClassNames = useMemo(',
+  'dashboard must derive a stable class list from the class-name signature.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+  'Existing loaded filters were preserved.',
+  'attendance analytics must preserve last known-good student filters when refresh fails.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  'const { classNames: CLASSES, sectionsForClass } = useAcademicStore()',
+  'mark attendance must hydrate classes and sections from the academic store.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  'if (!selectedClass || !CLASSES.includes(selectedClass))',
+  'mark attendance must reconcile selected class after academic hydration.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
