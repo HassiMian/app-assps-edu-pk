@@ -2,6 +2,8 @@ import {
   AttemptRule,
   AttemptRuleOrigin,
   ClassificationCertainty,
+  ContentCapability,
+  MathSourceFormat,
   DocumentDirection,
   DocumentLanguage,
   DocumentOrigin,
@@ -11,6 +13,7 @@ import {
   PaperTotalOrigin,
   SectionMarksOrigin,
   createCanonicalPaperDocument,
+  createCanonicalAsset,
   createCanonicalSection,
   createProvenanceField,
   createRichTextNode,
@@ -47,13 +50,27 @@ function parseTableRows(content = '') {
   })
 }
 
+function assetFromSection(section = {}) {
+  const asset=section.asset
+  if(!asset || typeof asset!=='object' || !text(asset.id)) return null
+  return createCanonicalAsset(asset)
+}
+
 function nodeFromSection(section,{ nodeId, body, direction, marks }) {
+  const layout=String(section.layoutPreset||'auto').toLowerCase()
+  const capabilities=[]
+  if(layout==='math') capabilities.push(ContentCapability.MATH)
+  if(layout==='image') capabilities.push(ContentCapability.IMAGE)
   const base={
     id:nodeId, direction, operationalNodeMarks:marks, authoritativeNodeMarks:marks,
     nodeMarksOrigin:NodeMarksOrigin.ITEM_LEVEL_EXPLICIT, marksEvidenceString:marks?String(marks):null,
+    ...(capabilities.length?{contentCapabilities:capabilities}:{}),
+    ...(layout==='math'?{math:{format:section.math?.format||MathSourceFormat.LATEX,source:text(section.math?.source),display:section.math?.display==='inline'?'inline':'block'}}:{}),
+    ...(layout==='image'&&text(section.asset?.id)?{assetRefs:[text(section.asset.id)]}:{}),
     provenance:{ classificationCertainty:ClassificationCertainty.EXPLICIT, academicTextMutated:true, sourceSegmentIds:[], rawSourceSnapshot:null },
   }
-  const layout=String(section.layoutPreset||'auto').toLowerCase()
+  if(layout==='math') return createShortQuestionNode({ ...base, stemText:body })
+  if(layout==='image') return createRichTextNode({ ...base, content:body })
   if(layout==='short') return createShortQuestionNode({ ...base, stemText:body })
   if(layout==='long') return createLongQuestionNode({ ...base, stemText:body })
   if(layout==='matching') return createMatchingColumnsNode({
@@ -75,6 +92,9 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
   const language = languageOf(config.language)
   const direction = directionOf(language)
   const sections = Array.isArray(paper.official_section) ? paper.official_section : []
+  const assetMap=new Map()
+  sections.forEach(section=>{const asset=assetFromSection(section);if(asset) assetMap.set(asset.id,asset)})
+  const canonicalAssets=[...assetMap.values()]
   const sectionScoring = sections.map((section, index) => resolveManualSectionScoring(section, finiteMarks(resolveSectionTotalMarks(section)), index))
   const canonicalSections = sections.map((section, index) => {
     const scoring = sectionScoring[index]
@@ -159,6 +179,7 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
       qaNotes: null,
     },
     sourceIdentity: null,
+    assets: canonicalAssets,
     sections: canonicalSections,
     sourceCoverageLedger: [],
     createdAt: paper.createdAt || null,
