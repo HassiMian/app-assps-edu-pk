@@ -2188,6 +2188,22 @@ assertContains(
   'topbar notification refresh failure must be explicit while preserving current inbox state.'
 )
 
+assertContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  "setSyncState('offline')",
+  'academic setup hydration failures must expose server-unavailable state while preserving cached classes.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  'Server unavailable — cached setup shown',
+  'academic setup must tell users when cached classes are shown because server hydration failed.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  /hydrateFromServer[\s\S]{0,500}catch \{[\s\S]{0,100}setSyncState\('local'\)/,
+  'academic setup server hydration failure must not be mislabeled as a normal local-cache state.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
