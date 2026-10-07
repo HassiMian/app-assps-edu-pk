@@ -340,6 +340,24 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx',
+  /catch \{[\s\S]{0,120}setExams\(\[\]\)/,
+  'marks-sheet exam refresh failures must preserve the last known-good exam list.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  "setSyncState('unavailable')",
+  'academic setup must distinguish server unavailability from a healthy local-cache state.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  'Server unavailable — showing local cache',
+  'academic setup must tell the operator when cached academic data may be stale.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'

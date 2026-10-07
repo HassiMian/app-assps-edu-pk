@@ -56,8 +56,7 @@ export default function MarksSheet() {
  setExams(list)
  if (!selectedExamType && list.length) setSelectedExamType(list[0].type || FALLBACK_EXAM_TYPES[0])
  } catch {
- setExams([])
- setMessage('Refresh failed. Please check the backend connection.')
+ setMessage('Refresh failed. Existing loaded exams were preserved; please check the backend connection.')
  } finally {
  setRefreshing(false)
  }
