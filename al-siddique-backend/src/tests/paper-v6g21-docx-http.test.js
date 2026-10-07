@@ -9,6 +9,7 @@ const dotenv=require('dotenv')
 dotenv.config({path:path.resolve(__dirname,'../.env')})
 const bcrypt=require('bcryptjs')
 const {pool}=require('../config/database')
+const {digest}=require('../services/papers/paperVaultRevisionV6D')
 
 const PORT=Number(process.env.TEST_G21_PORT||5021)
 function req(pathname,{method='GET',body=null,cookie=''}={}){
@@ -57,30 +58,56 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   userA=(await c.query("insert into users(school_id,tenant_id,name,email,role,password,is_active) values($1,$2,'G21 Admin A',$3,'admin',$4,true) returning id",[sidA,codeA,emailA,hash])).rows[0].id
   userB=(await c.query("insert into users(school_id,tenant_id,name,email,role,password,is_active) values($1,$2,'G21 Admin B',$3,'admin',$4,true) returning id",[sidB,codeB,emailB,hash])).rows[0].id
   const canonical=canonicalFixture()
+  const legacy={name:'Legacy',config:{classLevel:'Seven',subject:'Science'}}
+  let canonicalHash='0'.repeat(64),legacyHash='0'.repeat(64)
   eligibleId=(await c.query("insert into paper_vault(school_id,owner_user_id,name,class_name,subject_name,status,revision,payload) values($1,$2,'G21 Canonical','Seven','Urdu','finalized',3,$3::jsonb) returning id",[sidA,userA,JSON.stringify(canonical)])).rows[0].id
-  legacyId=(await c.query("insert into paper_vault(school_id,owner_user_id,name,class_name,subject_name,status,revision,payload) values($1,$2,'G21 Legacy','Seven','Science','draft',1,$3::jsonb) returning id",[sidA,userA,JSON.stringify({name:'Legacy',config:{classLevel:'Seven',subject:'Science'}})])).rows[0].id
+  legacyId=(await c.query("insert into paper_vault(school_id,owner_user_id,name,class_name,subject_name,status,revision,payload) values($1,$2,'G21 Legacy','Seven','Science','draft',1,$3::jsonb) returning id",[sidA,userA,JSON.stringify(legacy)])).rows[0].id
 
   child=spawn(process.execPath,['server.js'],{cwd:path.resolve(__dirname,'..'),env:{...process.env,PORT:String(PORT),NODE_ENV:'production',AUTO_MIGRATE_ON_BOOT:'false'},stdio:['ignore','pipe','pipe']})
   let serverErr='';child.stderr.on('data',d=>{serverErr+=d.toString()})
   t.after(()=>{try{child?.kill('SIGTERM')}catch{}})
   await waitHealth()
 
-  let r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/docx')
+  let r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:canonicalHash}})
   assert.equal(r.status,401)
 
   const cookieA=await login(emailA,password,'admin',codeA)
   const cookieB=await login(emailB,password,'admin',codeB)
 
-  r=await req('/api/portal/paper-studio/papers/not-a-number/docx',{cookie:cookieA})
+  let hashResponse=await req('/api/portal/paper-studio/papers/'+eligibleId+'/revisions',{cookie:cookieA})
+  assert.equal(hashResponse.status,200)
+  canonicalHash=String(json(hashResponse).data.currentSnapshotHash||'')
+  assert.match(canonicalHash,/^[a-f0-9]{64}$/)
+
+  hashResponse=await req('/api/portal/paper-studio/papers/'+legacyId+'/revisions',{cookie:cookieA})
+  assert.equal(hashResponse.status,200)
+  legacyHash=String(json(hashResponse).data.currentSnapshotHash||'')
+  assert.match(legacyHash,/^[a-f0-9]{64}$/)
+
+  r=await req('/api/portal/paper-studio/papers/not-a-number/canonical-docx',{method:'POST',cookie:cookieA,body:{revision:3,snapshotHash:canonicalHash}})
   assert.equal(r.status,400);assert.equal(json(r).code,'INVALID_PAPER_ID')
 
-  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/docx',{cookie:cookieA})
+  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/canonical-docx',{method:'POST',cookie:cookieA,body:{revision:1,snapshotHash:legacyHash}})
   assert.equal(r.status,409);assert.equal(json(r).code,'CANONICAL_DOCX_NOT_ELIGIBLE')
 
-  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/docx',{cookie:cookieB})
+  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/delivery-manifest',{method:'POST',cookie:cookieA,body:{revision:1,snapshotHash:legacyHash}})
+  assert.equal(r.status,200)
+  assert.equal(json(r).data.channels.word.state,'blocked')
+  assert.equal(json(r).data.channels.word.reason,'CANONICAL_DOCX_REQUIRES_SOURCE_VALIDATED_V13')
+
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/delivery-manifest',{method:'POST',cookie:cookieA,body:{revision:3,snapshotHash:canonicalHash}})
+  assert.equal(r.status,200)
+  assert.equal(json(r).data.channels.word.state,'available_canonical_docx')
+  assert.equal(json(r).data.channels.word.adapter,'V6_G21_SERVER_CANONICAL_DOCX')
+  assert.equal(json(r).data.docxProjection.eligible,true)
+
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',cookie:cookieB,body:{revision:3,snapshotHash:canonicalHash}})
   assert.equal(r.status,404);assert.equal(json(r).code,'PAPER_NOT_FOUND')
 
-  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/docx',{cookie:cookieA})
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',cookie:cookieA,body:{revision:3,snapshotHash:'f'.repeat(64)}})
+  assert.equal(r.status,409);assert.equal(json(r).code,'DELIVERY_SOURCE_MISMATCH')
+
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',cookie:cookieA,body:{revision:3,snapshotHash:canonicalHash}})
   assert.equal(r.status,200,'eligible export failed '+r.buffer.toString('utf8').slice(0,300)+' serverErr='+serverErr.slice(-500))
   assert.equal(r.buffer.subarray(0,2).toString(),'PK')
   assert.ok(r.buffer.length>5000)
@@ -90,7 +117,7 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   assert.equal(r.headers['x-assps-paper-family'],'historical-v13')
   assert.equal(r.headers['x-assps-paper-revision'],'3')
   assert.match(String(r.headers['x-assps-snapshot-sha256']||''),/^[a-f0-9]{64}$/)
-  console.log('G21_DOCX_HTTP 5/5 PASS')
+  console.log('G21_DOCX_HTTP 8/8 PASS')
  } finally {
   try{child?.kill('SIGTERM')}catch{}
   if(sidA)await c.query('delete from paper_vault where school_id=$1',[sidA]).catch(()=>{})

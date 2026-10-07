@@ -8,6 +8,7 @@ const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanon
 const { buildCanonicalCanaryPlan } = require('../services/papers/paperCanonicalCanaryPlanV6H2')
 const { buildCanonicalCanaryRollbackPlan } = require('../services/papers/paperCanonicalCanaryRollbackPlanV6H3')
 const { buildCanonicalCanaryReviewPacket } = require('../services/papers/paperCanonicalCanaryReviewPacketV6H4')
+const { buildRevisionBoundCanonicalDocx } = require('../services/papers/paperCanonicalDocxProjectionV6G21')
 const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
 const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPublisherPromotionPrecheckV6G9')
 const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPublisherPromotionEnvelopeV6G10')
@@ -21,7 +22,6 @@ const { buildPublisherReleaseEnvelope } = require('../services/papers/paperPubli
 const { verifyPublisherReleaseDetachedSignature } = require('../services/papers/paperPublisherReleaseSignatureV6G19')
 const { buildHumanAuthorityBoundary } = require('../services/papers/paperHumanAuthorityBoundaryV6G18')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
-const { buildCanonicalDocxBuffer, extractCanonicalDocument, assessCanonicalDocxEligibility } = require('../services/papers/paperCanonicalDocxProjectionV6G21')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
 const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
 
@@ -377,31 +377,25 @@ router.post('/papers/:id/delivery-manifest', async (req,res) => {
   }
 })
 
-router.get('/papers/:id/docx', async (req,res) => {
+router.post('/papers/:id/canonical-docx', async (req,res) => {
   try {
     const schoolId=schoolContext(req,res); if(!schoolId)return
-    if(!/^\d+$/.test(String(req.params.id||'')))return res.status(400).json({success:false,code:'INVALID_PAPER_ID',message:'Invalid paper id.'})
-    const paper=await getProjectedPaper({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id})
-    if(!paper)return res.status(404).json({success:false,code:'PAPER_NOT_FOUND',message:'Paper not found in your accessible library.'})
-    const review=await reviewPortalPaperDocument(paper.document)
-    const eligibility=assessCanonicalDocxEligibility(review)
-    if(!eligibility.eligible){
-      res.set('Cache-Control','private, no-store')
-      return res.status(409).json({success:false,code:'CANONICAL_DOCX_NOT_ELIGIBLE',message:'This paper is not yet eligible for canonical Word export.',data:{family:eligibility.family,reviewStatus:eligibility.reviewStatus,reason:eligibility.reason}})
-    }
-    const canonicalDocument=extractCanonicalDocument(paper.document)
-    const exported=await buildCanonicalDocxBuffer(canonicalDocument)
-    const encoded=encodeURIComponent(exported.filename)
+    const data=await buildRevisionBoundCanonicalDocx({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,revision:Number(req.body?.revision),snapshotHash:req.body?.snapshotHash})
+    const filename=String(data.filename||'paper.docx').replace(/[\r\n"]/g,'_')
     res.set('Cache-Control','private, no-store')
     res.set('Content-Type','application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-    res.set('Content-Disposition',`attachment; filename*=UTF-8''${encoded}`)
-    res.set('X-ASSPS-Paper-Family',eligibility.family)
-    res.set('X-ASSPS-Paper-Revision',String(paper.revision))
-    if(eligibility.snapshotHash)res.set('X-ASSPS-Snapshot-SHA256',eligibility.snapshotHash)
-    return res.status(200).send(exported.buffer)
+    res.set('Content-Disposition',`attachment; filename*=UTF-8''${encodeURIComponent(filename)}`)
+    res.set('Content-Length',String(data.buffer.length))
+    res.set('X-ASSPS-Paper-Family',String(data.source.family||''))
+    res.set('X-ASSPS-Paper-Revision',String(data.source.revision))
+    res.set('X-ASSPS-Snapshot-SHA256',String(data.source.snapshotHash))
+    res.set('X-ASSPS-Snapshot-Hash',String(data.source.snapshotHash))
+    return res.send(data.buffer)
   } catch(err) {
-    console.error('Paper Studio canonical DOCX error:',err.message)
-    return res.status(500).json({success:false,code:'CANONICAL_DOCX_EXPORT_FAILED',message:'Canonical Word export could not be generated.'})
+    const status=Number(err?.status)||500
+    if(status>=500)console.error('Paper Studio canonical DOCX projection error:',err.message)
+    const code=status===404?'PAPER_NOT_FOUND':(err?.code||'CANONICAL_DOCX_PROJECTION_FAILED')
+    return res.status(status).json({success:false,code,message:status>=500?'Canonical DOCX could not be generated.':err.message,issues:Array.isArray(err?.issues)?err.issues:undefined})
   }
 })
 

@@ -129,4 +129,28 @@ function assessCanonicalDocxEligibility(review={}) {
   return {eligible,family:review.family||'unsupported',reviewStatus:review.reviewStatus||'UNSUPPORTED',snapshotHash:review.snapshotHash||null,reason:eligible?null:'CANONICAL_DOCX_REQUIRES_SOURCE_VALIDATED_V13'}
 }
 
-module.exports={projectCanonicalNodeToDocxBlocks,buildCanonicalDocxModel,buildCanonicalDocxBuffer,extractCanonicalDocument,canonicalFilename,assessCanonicalDocxEligibility}
+function failure(status,code,message,issues=[]){const e=new Error(message);e.status=status;e.code=code;e.issues=issues;return e}
+
+async function buildRevisionBoundCanonicalDocx({schoolId,userId,role,paperId,revision,snapshotHash,deps={}}){
+  const resolve=deps.resolveRevisionBoundPaper||require('./paperDeliveryManifestV6E').resolveRevisionBoundPaper
+  const reviewFn=deps.reviewPortalPaperDocument||require('./portalDocumentBoundaryV6C').reviewPortalPaperDocument
+  const packFn=deps.buildCanonicalDocxBuffer||buildCanonicalDocxBuffer
+  const bound=await resolve({schoolId,userId,role,paperId,revision,snapshotHash})
+  if(!bound?.isCurrent)throw failure(409,'CANONICAL_DOCX_CURRENT_REVISION_REQUIRED','Canonical DOCX is available only for the current revision.')
+  const review=await reviewFn(bound.document)
+  const eligibility=assessCanonicalDocxEligibility(review)
+  if(!eligibility.eligible)throw failure(409,'CANONICAL_DOCX_NOT_ELIGIBLE','Canonical DOCX requires a source-validated historical V13 PaperDocument.',[eligibility.reason])
+  if(review?.snapshotHash&&String(review.snapshotHash).toLowerCase()!==String(bound.snapshotHash).toLowerCase())throw failure(409,'CANONICAL_DOCX_REVIEW_HASH_MISMATCH','Reviewed document hash does not match the revision-bound delivery source.')
+  const doc=extractCanonicalDocument(bound.document)
+  const built=await packFn(doc)
+  if(!Buffer.isBuffer(built?.buffer)||built.buffer.length<4)throw failure(500,'CANONICAL_DOCX_BUILD_FAILED','Canonical DOCX adapter did not produce a valid binary buffer.')
+  return {
+    buffer:built.buffer,
+    filename:built.filename,
+    model:built.model,
+    source:{paperId:String(bound.paper?.id||paperId),revision:Number(bound.revision),snapshotHash:String(bound.snapshotHash),family:review.family,reviewStatus:review.reviewStatus,reviewedContract:review.reviewedContract},
+    policy:{downloadOnly:true,currentRevisionRequired:true,legacyDomExporterUsed:false,sourceMutated:false,persisted:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,approvalClaim:false},
+  }
+}
+
+module.exports={projectCanonicalNodeToDocxBlocks,buildCanonicalDocxModel,buildCanonicalDocxBuffer,extractCanonicalDocument,canonicalFilename,assessCanonicalDocxEligibility,buildRevisionBoundCanonicalDocx}
