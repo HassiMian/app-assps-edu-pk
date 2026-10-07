@@ -1702,6 +1702,8 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academic
  const [resultsRows, setResultsRows] = useState([]);
  const [resultsLoading, setResultsLoading] = useState(false);
  const [resultsError, setResultsError] = useState('');
+ const attendanceStudentRef = useRef(null);
+ const resultsStudentRef = useRef(null);
  const [note, setNote] = useState(student.remarks || "");
  const [noteSaving, setNoteSaving] = useState(false);
  const [noteMessage, setNoteMessage] = useState("");
@@ -1718,20 +1720,26 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academic
  let cancelled = false;
  if (tab === "attendance") {
  // eslint-disable-next-line react-hooks/set-state-in-effect
+ if (attendanceStudentRef.current && attendanceStudentRef.current !== student.id) setAttendanceRows([]);
  setAttendanceLoading(true);
  setAttendanceError('');
  api.get(`/api/attendance/history/${student.id}`, { skipCache:true })
- .then(response => { if (!cancelled) { setAttendanceRows(Array.isArray(response.data?.data) ? response.data.data : []); setAttendanceError(''); } })
- .catch(err => { if (!cancelled) { setAttendanceRows([]); setAttendanceError(err.response?.data?.message || 'Attendance history is temporarily unavailable for this student.'); } })
+ .then(response => { if (!cancelled) { setAttendanceRows(Array.isArray(response.data?.data) ? response.data.data : []); attendanceStudentRef.current = student.id; setAttendanceError(''); } })
+ .catch(err => { if (!cancelled) { setAttendanceError(attendanceStudentRef.current === student.id
+ ? (err.response?.data?.message || 'Attendance history could not be refreshed. Existing loaded history was preserved.')
+ : (err.response?.data?.message || 'Attendance history is temporarily unavailable for this student.')); } })
  .finally(() => { if (!cancelled) setAttendanceLoading(false); });
  }
  if (tab === "results") {
  // eslint-disable-next-line react-hooks/set-state-in-effect
+ if (resultsStudentRef.current && resultsStudentRef.current !== student.id) setResultsRows([]);
  setResultsLoading(true);
  setResultsError('');
  api.get(`/api/exams/student-results/${student.id}`, { skipCache:true })
- .then(response => { if (!cancelled) { setResultsRows(Array.isArray(response.data?.data) ? response.data.data : []); setResultsError(''); } })
- .catch(err => { if (!cancelled) { setResultsRows([]); setResultsError(err.response?.data?.message || 'Exam results are temporarily unavailable for this student.'); } })
+ .then(response => { if (!cancelled) { setResultsRows(Array.isArray(response.data?.data) ? response.data.data : []); resultsStudentRef.current = student.id; setResultsError(''); } })
+ .catch(err => { if (!cancelled) { setResultsError(resultsStudentRef.current === student.id
+ ? (err.response?.data?.message || 'Exam results could not be refreshed. Existing loaded results were preserved.')
+ : (err.response?.data?.message || 'Exam results are temporarily unavailable for this student.')); } })
  .finally(() => { if (!cancelled) setResultsLoading(false); });
  }
  return () => { cancelled = true; };

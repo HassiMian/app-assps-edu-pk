@@ -22,32 +22,24 @@ function projectedPaperConfig(payload = {}) {
 }
 
 async function ensureProjectedPaperVaultSchema() {
-  await query(`
-    CREATE TABLE IF NOT EXISTS paper_vault (
-      id BIGSERIAL PRIMARY KEY,
-      school_id INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
-      owner_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      name VARCHAR(220) NOT NULL,
-      class_name VARCHAR(120),
-      section VARCHAR(60),
-      subject_name VARCHAR(160),
-      status VARCHAR(30) NOT NULL DEFAULT 'draft',
-      revision INTEGER NOT NULL DEFAULT 1,
-      payload JSONB NOT NULL,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      deleted_at TIMESTAMPTZ
-    );
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_school_updated
-      ON paper_vault(school_id, updated_at DESC)
-      WHERE deleted_at IS NULL;
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_owner_updated
-      ON paper_vault(school_id, owner_user_id, updated_at DESC)
-      WHERE deleted_at IS NULL;
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_class_subject
-      ON paper_vault(school_id, LOWER(COALESCE(class_name,'')), LOWER(COALESCE(subject_name,'')))
-      WHERE deleted_at IS NULL;
+  const result = await query(`
+    SELECT
+      to_regclass('public.paper_vault') AS table_name,
+      COUNT(*) FILTER (WHERE column_name IN (
+        'school_id','owner_user_id','name','class_name','section','subject_name',
+        'status','revision','payload','deleted_at'
+      ))::int AS required_columns
+    FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='paper_vault'
   `)
+  const row = result.rows?.[0] || {}
+  if (!row.table_name || Number(row.required_columns || 0) < 10) {
+    const err = new Error('Paper Vault schema is not initialized. Apply migration 020_paper_vault_schema before serving Paper Studio workflows.')
+    err.status = 503
+    err.code = 'PAPER_VAULT_SCHEMA_NOT_READY'
+    throw err
+  }
+  return true
 }
 
 async function createProjectedPaper({ schoolId, userId, role, payload }) {
@@ -126,6 +118,7 @@ async function teacherContext({ schoolId, userId, role }) {
 }
 
 async function listProjectedPapers({ schoolId, userId, role, limit = 100 }) {
+  await ensureProjectedPaperVaultSchema()
   const params = [schoolId]
   let ownerClause = ''
   if (role === 'teacher') { params.push(userId); ownerClause = ` AND owner_user_id=$${params.length}` }
@@ -142,6 +135,7 @@ async function listProjectedPapers({ schoolId, userId, role, limit = 100 }) {
 }
 
 async function getProjectedPaper({ schoolId, userId, role, paperId }) {
+  await ensureProjectedPaperVaultSchema()
   const params = [paperId, schoolId]
   let ownerClause = ''
   if (role === 'teacher') { params.push(userId); ownerClause = ` AND owner_user_id=$${params.length}` }

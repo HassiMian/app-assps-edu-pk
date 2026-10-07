@@ -416,6 +416,30 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-backend/src/services/paperStudioProjectionService.js',
+  /CREATE TABLE IF NOT EXISTS paper_vault|CREATE INDEX IF NOT EXISTS idx_paper_vault/,
+  'Paper Studio request paths must validate migration-owned vault schema instead of mutating schema at runtime.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/paperStudioProjectionService.js',
+  'PAPER_VAULT_SCHEMA_NOT_READY',
+  'Paper Studio must fail closed when migration 020 has not initialized the vault schema.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /attendanceStudentRef\.current === student\.id[\s\S]{0,220}setAttendanceRows\(\[\]\)/,
+  'same-student attendance history refresh failures must preserve loaded profile history.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /resultsStudentRef\.current === student\.id[\s\S]{0,220}setResultsRows\(\[\]\)/,
+  'same-student result refresh failures must preserve loaded profile results.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
   /Attendance roster load failed[\s\S]{0,180}setStudents\(\[\]\)[\s\S]{0,80}setAttendance\(\{\}\)/,
   'mark-attendance refresh failures must not erase the last known-good roster for the same scope.'
