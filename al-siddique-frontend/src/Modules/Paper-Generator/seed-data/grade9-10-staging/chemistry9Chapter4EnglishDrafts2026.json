@@ -1,0 +1,2042 @@
+{
+  "schemaVersion": "assps-chemistry9-ch4-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "4.1",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.2",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.3",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.4",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.5",
+      "draftCount": 2
+    },
+    {
+      "topicId": "4.6",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.7",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.8",
+      "draftCount": 3
+    },
+    {
+      "topicId": "4.9",
+      "draftCount": 4
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C04-T01-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 57,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "How many atoms are represented by a single formula unit of Na2CO3?",
+          "answer": "Six atoms (2 sodium, 1 carbon and 3 oxygen).",
+          "options": [
+            {
+              "id": "A",
+              "text": "4"
+            },
+            {
+              "id": "B",
+              "text": "5"
+            },
+            {
+              "id": "C",
+              "text": "6"
+            },
+            {
+              "id": "D",
+              "text": "7"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T01-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 57,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Interpret the subscripts in the formula Ca(OH)2.",
+          "answer": "The formula unit has one Ca, two O and two H atoms; the subscript 2 applies to both O and H inside the parentheses."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T01-N03",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.1",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 57,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Determine the total number of atoms represented by the formula Al2(SO4)3.",
+          "answer": "2 Al + 3 S + (4 × 3) O = 17 atoms per formula unit."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T02-M04",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 57,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Empirical Formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is the empirical formula of a compound with molecular formula C6H12O6?",
+          "answer": "CH2O",
+          "options": [
+            {
+              "id": "A",
+              "text": "C6H12O6"
+            },
+            {
+              "id": "B",
+              "text": "C3H6O3"
+            },
+            {
+              "id": "C",
+              "text": "CH2O"
+            },
+            {
+              "id": "D",
+              "text": "C2H4O2"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T02-S05",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 57,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Empirical Formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Distinguish an empirical formula from a molecular formula.",
+          "answer": "An empirical formula gives the simplest whole-number ratio of constituent atoms, while a molecular formula gives the actual number of each type of atom in one molecule."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T02-N06",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.2",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 57,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Empirical Formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Reduce the molecular formula C4H10 to its empirical formula.",
+          "answer": "Divide both subscripts by 2: C2H5."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T03-M07",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Formulas of Binary Ionic Compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which formula gives an electrically neutral compound from Mg2+ and F− ions?",
+          "answer": "MgF2",
+          "options": [
+            {
+              "id": "A",
+              "text": "MgF"
+            },
+            {
+              "id": "B",
+              "text": "Mg2F"
+            },
+            {
+              "id": "C",
+              "text": "MgF2"
+            },
+            {
+              "id": "D",
+              "text": "Mg2F2"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T03-S08",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Formulas of Binary Ionic Compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain why calcium nitride is represented by Ca3N2 rather than CaN.",
+          "answer": "Ca forms Ca2+ and nitrogen forms N3−; three Ca2+ ions (+6) balance two N3− ions (−6), giving Ca3N2."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T03-L09",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.3",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 58,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Formulas of Binary Ionic Compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Show how ionic charges determine the formulas of magnesium oxide and aluminium chloride.",
+          "answer": "For magnesium oxide identify Mg2+ and O2− (1 mark), balance 1:1 to write MgO (1). For aluminium chloride identify Al3+ and Cl− (1), balance 1:3 to write AlCl3 (1). Explain that each formula is electrically neutral (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T04-M10",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 59,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Formulas of Compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A molecular compound has empirical formula CH and molecular molar mass six times its empirical-formula mass. What is its molecular formula?",
+          "answer": "C6H6",
+          "options": [
+            {
+              "id": "A",
+              "text": "CH"
+            },
+            {
+              "id": "B",
+              "text": "C2H2"
+            },
+            {
+              "id": "C",
+              "text": "C3H3"
+            },
+            {
+              "id": "D",
+              "text": "C6H6"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "D"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T04-S11",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 59,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Formulas of Compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Write the relationship between empirical-formula mass, molecular molar mass and molecular formula.",
+          "answer": "n = molecular molar mass ÷ empirical-formula mass (a positive whole number); molecular formula = n × empirical-formula subscripts."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T04-L12",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.4",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 59,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Formulas of Compounds"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A compound has empirical formula CH2O and molecular molar mass 180 g mol−1. Calculate its molecular formula.",
+          "answer": "Empirical-formula mass = 12 + 2(1) + 16 = 30 g mol−1 (2 marks). n = 180/30 = 6 (1). Multiply CH2O subscripts by six to obtain C6H12O6 (2)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T05-M13",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 60,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Deduce the molecular formula from the structural formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What molecular formula follows from the displayed structural sequence CH3–CH2–OH?",
+          "answer": "C2H6O",
+          "options": [
+            {
+              "id": "A",
+              "text": "C2H5O"
+            },
+            {
+              "id": "B",
+              "text": "C2H6O"
+            },
+            {
+              "id": "C",
+              "text": "C2H4O2"
+            },
+            {
+              "id": "D",
+              "text": "CH4O"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T05-S14",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 60,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Deduce the molecular formula from the structural formula"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how you obtain the molecular formula from a structural formula.",
+          "answer": "Count each element symbol and all atoms of that element represented in the structural drawing, then write the totals as subscripts after the appropriate element symbols."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T06-M15",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.6",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 61,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Avogadro's Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which quantity approximately corresponds to one mole of separate particles?",
+          "answer": "6.02 × 10^23 particles",
+          "options": [
+            {
+              "id": "A",
+              "text": "6.02 × 10^20 particles"
+            },
+            {
+              "id": "B",
+              "text": "6.02 × 10^23 particles"
+            },
+            {
+              "id": "C",
+              "text": "1.00 × 10^6 particles"
+            },
+            {
+              "id": "D",
+              "text": "22 particles"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T06-S16",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.6",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 61,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Avogadro's Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is the purpose of Avogadro’s constant in chemistry?",
+          "answer": "It links amount of substance in moles to the number of specified entities: N = n × NA, where NA is approximately 6.02 × 10^23 mol−1."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T06-N17",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.6",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 61,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Avogadro's Number"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Calculate the number of molecules in 0.50 mol of a pure molecular substance, using 6.02 × 10^23 mol−1.",
+          "answer": "N = nNA = 0.50 × 6.02 × 10^23 = 3.01 × 10^23 molecules."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T07-M18",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.7",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 62,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Mole and Molar Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is the approximate molar mass of CO2 if C = 12 and O = 16?",
+          "answer": "44 g mol−1",
+          "options": [
+            {
+              "id": "A",
+              "text": "28 g mol−1"
+            },
+            {
+              "id": "B",
+              "text": "32 g mol−1"
+            },
+            {
+              "id": "C",
+              "text": "44 g mol−1"
+            },
+            {
+              "id": "D",
+              "text": "48 g mol−1"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T07-S19",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.7",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 62,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Mole and Molar Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "State the equation linking mass, molar mass and amount of substance, and give the SI-related units normally used in school calculations.",
+          "answer": "n = m/M, with n in mol, mass m in grams and molar mass M in g mol−1."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T07-N20",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.7",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 62,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "The Mole and Molar Mass"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "How many moles of CO2 are present in 22.0 g? Use M(CO2) = 44.0 g mol−1.",
+          "answer": "n = m/M = 22.0/44.0 = 0.500 mol."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T08-M21",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.8",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 64,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Equations and Chemical Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which is the balanced equation for hydrogen combining with oxygen to form water?",
+          "answer": "2H2 + O2 → 2H2O",
+          "options": [
+            {
+              "id": "A",
+              "text": "H2 + O2 → H2O"
+            },
+            {
+              "id": "B",
+              "text": "2H2 + O2 → 2H2O"
+            },
+            {
+              "id": "C",
+              "text": "H2 + 2O2 → H2O"
+            },
+            {
+              "id": "D",
+              "text": "2H2 + 2O2 → H2O"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T08-S22",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.8",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 64,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Equations and Chemical Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why must a correctly balanced chemical equation have the same number of atoms of each element on its two sides?",
+          "answer": "Chemical reactions rearrange atoms rather than creating or destroying them, so the number of atoms of each element must be conserved."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T08-L23",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.8",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 64,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Equations and Chemical Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Balance Fe + O2 → Fe2O3 and explain the physical meaning of the coefficients.",
+          "answer": "Balanced equation: 4Fe + 3O2 → 2Fe2O3 (2 marks). Explain that the coefficients express relative particle or mole counts 4:3:2 (1). Check Fe: 4 on each side and O: 6 on each side (2)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T09-M24",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.9",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Calculations Based on Chemical Equation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "For 2H2 + O2 → 2H2O, how many moles of water can form from 3 moles of O2 when hydrogen is in excess?",
+          "answer": "6 mol",
+          "options": [
+            {
+              "id": "A",
+              "text": "1.5 mol"
+            },
+            {
+              "id": "B",
+              "text": "3 mol"
+            },
+            {
+              "id": "C",
+              "text": "6 mol"
+            },
+            {
+              "id": "D",
+              "text": "9 mol"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct recall/application.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T09-S25",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.9",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Calculations Based on Chemical Equation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Outline the main steps for converting a given reactant mass into a predicted product mass using a balanced equation.",
+          "answer": "Convert given mass to moles using molar mass; use the balanced coefficient ratio to find moles of product; convert product moles to mass using its molar mass."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T09-N26",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.9",
+      "type": "numerical",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Calculations Based on Chemical Equation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "In 2H2 + O2 → 2H2O, what mass of water forms when 4.0 g of H2 reacts completely with excess O2? Use H2 = 2.0 g mol−1 and H2O = 18.0 g mol−1.",
+          "answer": "Moles H2 = 4.0/2.0 = 2.0 mol. The 2:2 ratio gives 2.0 mol H2O. Product mass = 2.0 × 18.0 = 36.0 g."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    },
+    {
+      "id": "IX-CHEM-2025-C04-T09-L27",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "4.9",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 65,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Calculations Based on Chemical Equation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "For N2 + 3H2 → 2NH3, determine the number of moles of NH3 expected from 1.5 mol N2 with excess H2 and explain your ratio.",
+          "answer": "Read the balanced 1:2 mole ratio between N2 and NH3 (2 marks). Calculate 1.5 × 2 = 3.0 mol NH3 (2). Mention that H2 is in excess so nitrogen is the limiting reactant (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft using a rendered current Grade IX Chemistry Chapter 4 concept. No reviewer or approval is claimed; answer verification and Urdu source parity are pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires a worked calculation, explanation or comparative reasoning."
+    }
+  ],
+  "totals": {
+    "drafts": 27,
+    "approved": 0,
+    "mcq": 9,
+    "short": 9,
+    "numerical": 5,
+    "long": 4,
+    "englishOnly": 27,
+    "exercise": 0
+  }
+}
