@@ -1032,6 +1032,18 @@ assertNotContains(
 )
 
 
+assertContains(
+  'al-siddique-backend/src/routes/paperRoute.js',
+  'PAPER_VAULT_SCHEMA_NOT_READY',
+  'paper vault routes must fail closed when migration 020 is unavailable.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  "../../migrations/020_paper_vault_schema",
+  'migration runner must own Paper Vault schema evolution.'
+)
+
 assertNotContains(
   'al-siddique-backend/src/routes/paperRoute.js',
   /Math\.random\(\)/,

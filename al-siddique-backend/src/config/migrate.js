@@ -592,6 +592,15 @@ async function migrate() {
     }
 
     try {
+      const paperVaultMigration = require('../../migrations/020_paper_vault_schema')
+      await paperVaultMigration.up()
+      console.log('paper vault schema ready')
+    } catch (err) {
+      console.error('Paper Vault Schema Migration Error:', err.message)
+      throw err
+    }
+
+    try {
       const assessmentStudioMigration = require('./migrations/006_assessment_studio_v1')
       await assessmentStudioMigration.up()
       const questionGovernanceMigration = require('./migrations/007_question_bank_governance_v1')

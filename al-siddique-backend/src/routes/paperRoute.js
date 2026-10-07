@@ -2,6 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
+const crypto = require('crypto')
 const multer = require('multer')
 const router = express.Router()
 
@@ -56,32 +57,28 @@ const canUsePaperAi = (req, res, next) => {
 
 
 async function ensurePaperVaultSchema() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS paper_vault (
-      id BIGSERIAL PRIMARY KEY,
-      school_id INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
-      owner_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      name VARCHAR(220) NOT NULL,
-      class_name VARCHAR(120),
-      section VARCHAR(60),
-      subject_name VARCHAR(160),
-      status VARCHAR(30) NOT NULL DEFAULT 'draft',
-      revision INTEGER NOT NULL DEFAULT 1,
-      payload JSONB NOT NULL,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      deleted_at TIMESTAMPTZ
-    );
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_school_updated
-      ON paper_vault(school_id, updated_at DESC)
-      WHERE deleted_at IS NULL;
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_owner_updated
-      ON paper_vault(school_id, owner_user_id, updated_at DESC)
-      WHERE deleted_at IS NULL;
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_class_subject
-      ON paper_vault(school_id, LOWER(COALESCE(class_name,'')), LOWER(COALESCE(subject_name,'')))
-      WHERE deleted_at IS NULL;
+  const result = await pool.query(`
+    SELECT
+      to_regclass('public.paper_vault') AS table_name,
+      (
+        SELECT COUNT(*)::int
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'paper_vault'
+          AND column_name IN (
+            'school_id','owner_user_id','name','class_name','section','subject_name',
+            'status','revision','payload','created_at','updated_at','deleted_at'
+          )
+      ) AS required_columns
   `)
+  const row = result.rows?.[0] || {}
+  if (!row.table_name || Number(row.required_columns || 0) < 12) {
+    const err = new Error('Paper Vault schema is not initialized. Apply migration 020_paper_vault_schema before serving vault workflows.')
+    err.code = 'PAPER_VAULT_SCHEMA_NOT_READY'
+    err.status = 503
+    throw err
+  }
+  return true
 }
 
 const PAPER_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal'])
@@ -148,7 +145,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_ROOT),
   filename: (req, file, cb) => {
     const safe = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')
-    cb(null, `${Date.now()}_${Math.random().toString(36).slice(2, 7)}_${safe}`)
+    cb(null, `${Date.now()}_${crypto.randomUUID()}_${safe}`)
   },
 })
 
