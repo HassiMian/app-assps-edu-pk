@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import {
  Calendar,
@@ -176,6 +176,7 @@ export default function MarkAttendance() {
  const [loading, setLoading] = useState(false)
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
+ const loadedScopeRef = useRef('')
 
  // Academic classes hydrate from the server after the first render. A useState
  // initializer alone leaves the class picker blank even when the API succeeds.
@@ -190,8 +191,14 @@ export default function MarkAttendance() {
  if (!selectedClass || !selectedSection) {
  setStudents([])
  setAttendance({})
+ loadedScopeRef.current = ''
  setMessage(selectedClass ? 'Failed to load: no section is configured for this class.' : 'Failed to load: no active class is configured in Academic Setup.')
  return
+ }
+ const scopeKey = `${selectedClass}|${selectedSection}|${date}`
+ if (loadedScopeRef.current && loadedScopeRef.current !== scopeKey) {
+ setStudents([])
+ setAttendance({})
  }
  setLoading(true)
  setMessage('')
@@ -213,12 +220,14 @@ export default function MarkAttendance() {
  if (attMap[student.id]) initialMarks[student.id] = attMap[student.id]
  })
  setAttendance(initialMarks)
+ loadedScopeRef.current = scopeKey
  })
  .catch((err) => {
  console.error('Attendance roster load failed', err)
- setStudents([])
- setAttendance({})
- setMessage(`Failed to load attendance roster: ${err.response?.data?.message || err.message || 'server unavailable'}`)
+ const detail = err.response?.data?.message || err.message || 'server unavailable'
+ setMessage(loadedScopeRef.current === scopeKey
+ ? `Attendance refresh failed: ${detail}. Existing loaded roster and marks were preserved.`
+ : `Attendance data for the selected class, section and date is temporarily unavailable: ${detail}`)
  })
  .finally(() => setLoading(false))
  }
@@ -240,6 +249,11 @@ export default function MarkAttendance() {
  }
 
  const saveAttendance = async () => {
+ const scopeKey = `${selectedClass}|${selectedSection}|${date}`
+ if (loadedScopeRef.current !== scopeKey) {
+ setMessage('Load the current class, section and date before saving attendance.')
+ return
+ }
  setSaving(true)
  try {
  const records = students

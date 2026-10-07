@@ -416,6 +416,18 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  /Attendance roster load failed[\s\S]{0,180}setStudents\(\[\]\)[\s\S]{0,80}setAttendance\(\{\}\)/,
+  'mark-attendance refresh failures must not erase the last known-good roster for the same scope.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
+  "if (loadedScopeRef.current !== scopeKey)",
+  'mark-attendance writes must be bound to the class, section and date that were actually loaded.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
   /catch \([^)]*\)[\s\S]{0,160}setMonthlyTrend\(\[\]\)[\s\S]{0,120}setMonthlyClassSummary\(\[\]\)/,
   'attendance analytics source failures must preserve the last known-good monthly analytics.'
@@ -1316,8 +1328,8 @@ assertNotContains(
 
 assertContains(
   'al-siddique-frontend/src/Modules/attendance/MarkAttendance.jsx',
-  'Failed to load attendance roster:',
-  'mark-attendance load failures must remain visible.'
+  /Attendance refresh failed:|Attendance data for the selected class, section and date is temporarily unavailable:/,
+  'mark-attendance load failures must remain visible for both same-scope refresh and new-scope failure.'
 )
 
 
