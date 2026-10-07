@@ -73,6 +73,42 @@ router.patch('/governance/:publicId/status', canManageQuestionBank, async (req, 
 })
 
 // ─── 1. Get List of Questions (with filters) ──────────────────────────────────
+async function loadQuestionGovernanceRevisionMap(schoolId, ids = []) {
+  const keys = [...new Set((ids || []).map(id => String(id || '')).filter(Boolean))]
+  if (!keys.length) return new Map()
+  const result = await query(
+    `SELECT source_id, MAX(current_revision)::int AS current_revision
+       FROM (
+         SELECT qm.source_question_bank_id AS source_id, qm.current_revision
+           FROM question_masters qm
+          WHERE qm.school_id=$1 AND qm.source_question_bank_id = ANY($2::text[])
+         UNION ALL
+         SELECT m.mapping_key AS source_id, qm.current_revision
+           FROM question_masters qm
+           JOIN question_mappings m ON m.school_id=qm.school_id AND m.question_master_id=qm.id
+          WHERE qm.school_id=$1 AND m.mapping_type='source_question_bank_id' AND m.mapping_key = ANY($2::text[])
+       ) governed
+      WHERE source_id IS NOT NULL
+      GROUP BY source_id`,
+    [schoolId, keys]
+  )
+  return new Map(result.rows.map(row => [String(row.source_id), Number(row.current_revision || 0)]))
+}
+
+function requireExpectedQuestionRevision(req, res) {
+  const raw = req.body?.expectedGovernanceRevision
+  if (raw == null || raw === '') {
+    res.status(428).json({ success:false, code:'QUESTION_REVISION_REQUIRED', message:'Current question revision is required. Reload the Question Bank and try again.' })
+    return null
+  }
+  const revision = Number(raw)
+  if (!Number.isInteger(revision) || revision < 0) {
+    res.status(400).json({ success:false, code:'INVALID_EXPECTED_QUESTION_REVISION', message:'Expected question revision must be a non-negative integer.' })
+    return null
+  }
+  return revision
+}
+
 router.get('/', async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
@@ -132,14 +168,16 @@ router.get('/', async (req, res) => {
     params.push(limit, offset)
 
     const result = await query(sql, params)
-    
+    const governanceRevisions = await loadQuestionGovernanceRevisionMap(schoolId, result.rows.map(row => row.id))
+    const hydratedRows = result.rows.map(row => ({ ...row, governance_revision: governanceRevisions.get(String(row.id)) || 0 }))
+
     // Get total count for pagination
     const countSql = sql.split('ORDER BY')[0].replace('SELECT *', 'SELECT COUNT(*) as total')
     const countResult = await query(countSql, params.slice(0, paramCount))
 
     res.json({
       success: true,
-      data: result.rows,
+      data: hydratedRows,
       meta: {
         total: parseInt(countResult.rows[0]?.total || 0),
         limit: parseInt(limit),
@@ -177,7 +215,8 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Question not found' })
     }
 
-    res.json({ success: true, data: result.rows[0] })
+    const governanceRevisions = await loadQuestionGovernanceRevisionMap(schoolId, [result.rows[0].id])
+    res.json({ success: true, data: { ...result.rows[0], governance_revision: governanceRevisions.get(String(result.rows[0].id)) || 0 } })
   } catch (error) {
     console.error('Error fetching question:', error)
     res.status(500).json({ success: false, message: 'Failed to fetch question' })
@@ -241,11 +280,13 @@ router.put('/:id', canManageQuestionBank, async (req, res) => {
     const schoolId=requireSchoolContext(req,res); if(!schoolId)return
     const existing=await loadLegacyQuestion(schoolId,req.params.id)
     if(!existing)return res.status(404).json({success:false,message:'Question not found or no permission'})
-    const merged={...existing,...(req.body||{}),id:existing.id,school_id:schoolId}
+    const expectedRevision=requireExpectedQuestionRevision(req,res); if(expectedRevision==null)return
+    const { expectedGovernanceRevision: _expectedGovernanceRevision, ...changes } = req.body || {}
+    const merged={...existing,...changes,id:existing.id,school_id:schoolId}
     const governance=await captureQuestionGovernance({
       schoolId,userId:req.user?.id||null,
       idempotencyKey:governanceIdempotencyKey('edit',req,existing.id),
-      question:merged,sourceQuestionBankId:existing.id,
+      question:merged,sourceQuestionBankId:existing.id,expectedRevision,
     })
     res.json({success:true,data:governedLegacyResponse(merged,governance)})
   } catch(error) {
@@ -260,10 +301,11 @@ router.delete('/:id', canManageQuestionBank, async (req, res) => {
     const schoolId=requireSchoolContext(req,res); if(!schoolId)return
     const existing=await loadLegacyQuestion(schoolId,req.params.id)
     if(!existing)return res.status(404).json({success:false,message:'Question not found or no permission'})
+    const expectedRevision=requireExpectedQuestionRevision(req,res); if(expectedRevision==null)return
     const captured=await captureQuestionGovernance({
       schoolId,userId:req.user?.id||null,
       idempotencyKey:governanceIdempotencyKey('retire-capture',req,existing.id),
-      question:existing,sourceQuestionBankId:existing.id,
+      question:existing,sourceQuestionBankId:existing.id,expectedRevision,
     })
     let lifecycle=captured.lifecycleStatus
     if(lifecycle==='candidate') lifecycle=(await transitionQuestionLifecycle({schoolId,userId:req.user?.id||null,publicId:captured.publicId,toStatus:'reviewed'})).lifecycle_status
@@ -277,67 +319,53 @@ router.delete('/:id', canManageQuestionBank, async (req, res) => {
   }
 })
 
-// ─── 6. Bulk Add / Approve AI Imported Questions ──────────────────────────────
+// ─── 6. Bulk AI import intake — governance Candidate only ─────────────────────
 router.post('/import/approve', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
-    const { questions, importJobId } = req.body
+    const { questions, importJobId } = req.body || {}
     const userId = req.user?.id || null
+    if (!Array.isArray(questions) || questions.length === 0) return res.status(400).json({ success:false, message:'No questions provided' })
+    if (questions.length > 250) return res.status(400).json({ success:false, message:'Maximum 250 questions per import approval request' })
 
-    if (!Array.isArray(questions) || questions.length === 0) {
-      return res.status(400).json({ success: false, message: 'No questions provided' })
+    const baseKey = String(req.get('Idempotency-Key') || req.body?.idempotencyKey || '').trim()
+    if (!baseKey) return res.status(400).json({ success:false, code:'IDEMPOTENCY_KEY_REQUIRED', message:'Idempotency-Key is required for governed bulk import.' })
+
+    const captured = []
+    for (let index=0; index<questions.length; index += 1) {
+      const q = questions[index] || {}
+      const question = {
+        ...q,
+        class_level: q.class_level || q.classLevel,
+        medium: q.medium || 'english',
+        chapter_no: q.chapter_no || q.chapterNo,
+        chapter_name: q.chapter_name || q.chapterName || q.chapter,
+        question_type: q.question_type || q.type,
+        question_text: q.question_text || q.en || q.text,
+        question_text_urdu: q.question_text_urdu || q.ur || q.textUrdu,
+        source_type: 'ai_import',
+        source_file_id: importJobId || q.source_file_id || null,
+        is_approved: false,
+      }
+      const governance = await captureQuestionGovernance({
+        schoolId, userId,
+        idempotencyKey: `${baseKey}:${index}`,
+        question,
+      })
+      captured.push({ ...question, governance, is_approved:false })
     }
 
-    const client = await require('../config/database').pool.connect()
-    try {
-      await client.query('BEGIN')
-      await applyTenantContext(client)
-
-      const insertedQuestions = []
-      
-      for (const q of questions) {
-        const id = generateId()
-        const result = await client.query(
-          `INSERT INTO question_bank (
-            id, school_id, class_level, subject, medium, 
-            chapter_no, chapter_name, question_type, 
-            question_text, question_text_urdu, options, answer, marks, 
-            source_type, source_file_id, is_approved, created_by
-          ) VALUES (
-            $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
-          ) RETURNING *`,
-          [
-            id, schoolId, q.class_level || q.classLevel, q.subject, q.medium || 'english',
-            q.chapter_no || q.chapterNo, q.chapter_name || q.chapterName || q.chapter, q.question_type || q.type,
-            q.question_text || q.en || q.text, q.question_text_urdu || q.ur || q.textUrdu, 
-            JSON.stringify(q.options || []), q.answer, q.marks || 1,
-            'ai_import', importJobId, true, userId
-          ]
-        )
-        insertedQuestions.push(result.rows[0])
-      }
-
-      if (importJobId) {
-        await client.query(
-          `UPDATE question_bank_imports 
-           SET questions_approved = questions_approved + $1, status = 'completed', updated_at = NOW() 
-           WHERE id = $2 AND school_id = $3`,
-          [insertedQuestions.length, importJobId, schoolId]
-        )
-      }
-
-      await client.query('COMMIT')
-      res.status(201).json({ success: true, count: insertedQuestions.length, data: insertedQuestions })
-    } catch (e) {
-      await client.query('ROLLBACK')
-      throw e
-    } finally {
-      client.release()
+    if (importJobId) {
+      await query(`UPDATE question_bank_imports
+        SET questions_approved = questions_approved + $1, status = 'review_pending', updated_at = NOW()
+        WHERE id = $2 AND school_id = $3`, [captured.filter(item=>!item.governance.replayed).length, importJobId, schoolId])
     }
+    res.status(201).json({ success:true, count:captured.length, lifecycleStatus:'candidate', requiresReview:true, data:captured })
   } catch (error) {
-    console.error('Error approving imported questions:', error)
-    res.status(500).json({ success: false, message: 'Failed to approve questions' })
+    const status=Number(error.statusCode||error.status||500)
+    if(status>=500) console.error('Governed import intake failed:', error)
+    res.status(status).json({ success:false, code:error.code||'QUESTION_IMPORT_GOVERNANCE_FAILED', message:error.message||'Failed to capture imported questions' })
   }
 })
 
@@ -346,13 +374,13 @@ router.get('/filters/metadata', async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
-    
+
     // Get unique subjects
     const subjectsRes = await query(
       `SELECT DISTINCT subject FROM question_bank WHERE school_id = $1 AND subject IS NOT NULL ORDER BY subject`,
       [schoolId]
     )
-    
+
     // Get unique classes
     const classesRes = await query(
       `SELECT DISTINCT class_level FROM question_bank WHERE school_id = $1 AND class_level IS NOT NULL ORDER BY class_level`,
@@ -377,21 +405,21 @@ router.get('/filters/chapters', async (req, res) => {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return
     const { subject, classLevel } = req.query
-    
+
     if (!subject) return res.status(400).json({ success: false, message: 'Subject is required' })
 
     let sql = `SELECT DISTINCT chapter_name FROM question_bank WHERE school_id = $1 AND subject = $2 AND chapter_name IS NOT NULL`
     const params = [schoolId, subject]
-    
+
     if (classLevel) {
       sql += ` AND class_level = $3`
       params.push(classLevel)
     }
-    
+
     sql += ` ORDER BY chapter_name`
-    
+
     const result = await query(sql, params)
-    
+
     res.json({
       success: true,
       data: result.rows.map(r => r.chapter_name)
@@ -413,9 +441,9 @@ router.post('/parse-text', async (req, res) => {
     if (!text) {
       return res.status(400).json({ success: false, message: 'Text is required' })
     }
-    
+
     const parsedQuestions = parseBulkText(text)
-    
+
     res.json({
       success: true,
       data: parsedQuestions

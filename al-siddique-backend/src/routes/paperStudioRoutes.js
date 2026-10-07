@@ -429,6 +429,7 @@ router.post('/papers/:id/canonical-docx', async (req,res) => {
     res.set('X-ASSPS-Paper-Revision',String(data.source.revision))
     res.set('X-ASSPS-Snapshot-SHA256',String(data.source.snapshotHash))
     res.set('X-ASSPS-Snapshot-Hash',String(data.source.snapshotHash))
+    res.set('X-ASSPS-DOCX-SHA256',String(data.docxSha256))
     return res.send(data.buffer)
   } catch(err) {
     const status=Number(err?.status)||500

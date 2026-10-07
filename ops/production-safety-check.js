@@ -2955,3 +2955,16 @@ assertNotContains(
   /storage\?\.setItem\(NOTIFICATIONS_KEY/,
   'paper save notifications must not use an unscoped browser key.'
 )
+
+assertContains(
+  'al-siddique-backend/src/package.json',
+  'verify:live-backend-drift',
+  'backend package must retain the live runtime/compatibility artifact drift verification command.'
+)
+
+
+assertContains(
+  'ops/deploy-production.ps1',
+  'liveArtifactDriftCheck.js',
+  'production deploy must verify backend runtime/compatibility artifact drift before restart.'
+)

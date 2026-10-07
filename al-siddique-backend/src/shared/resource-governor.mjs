@@ -1,0 +1,8 @@
+import os from 'node:os';
+export class ResourceGovernor{
+ constructor({memorySoft=0.78,memoryHard=0.88,cpuSoft=0.85,maxHeavy=1}={}){this.memorySoft=memorySoft;this.memoryHard=memoryHard;this.cpuSoft=cpuSoft;this.maxHeavy=maxHeavy;this.heavyActive=0;this.paused=false;this.lastDecision=null;}
+ snapshot(){const total=os.totalmem(),free=os.freemem(),usedRatio=1-free/total,cpus=os.cpus().length,load1=os.loadavg()[0],cpuRatio=cpus?load1/cpus:0;return {total,free,usedRatio,load:os.loadavg(),cpuRatio,cpus,heavyActive:this.heavyActive,memorySoft:this.memorySoft,memoryHard:this.memoryHard,cpuSoft:this.cpuSoft,paused:this.paused,recommendation:usedRatio>=this.memoryHard?'STOP_HEAVY':usedRatio>=this.memorySoft||cpuRatio>=this.cpuSoft?'DEFER_HEAVY':'NORMAL'};}
+ canStart({className='normal',priority=50}={}){const s=this.snapshot();let allowed=true,reason='ok';if(this.paused&&priority>10){allowed=false;reason='governor-paused';}if(className==='heavy'){if(s.usedRatio>=this.memoryHard){allowed=false;reason='memory-hard-limit';}else if(s.usedRatio>=this.memorySoft){allowed=false;reason='memory-soft-limit';}else if(s.cpuRatio>=this.cpuSoft){allowed=false;reason='cpu-soft-limit';}else if(this.heavyActive>=this.maxHeavy){allowed=false;reason='heavy-concurrency-limit';}}this.lastDecision={at:new Date().toISOString(),className,priority,allowed,reason,usedRatio:s.usedRatio,cpuRatio:s.cpuRatio};return this.lastDecision;}
+ enter(className='normal'){if(className==='heavy')this.heavyActive++;return()=>{if(className==='heavy')this.heavyActive=Math.max(0,this.heavyActive-1)}}
+ setPaused(v){this.paused=Boolean(v);return this.snapshot()}
+}

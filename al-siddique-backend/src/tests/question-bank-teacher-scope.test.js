@@ -1,12 +1,170 @@
-require('/var/www/apex-backend/node_modules/dotenv').config({path:'/var/www/apex-backend/.env'});
-const {pool}=require('/var/www/apex-backend/config/database');const bcrypt=require('/var/www/apex-backend/node_modules/bcryptjs');const http=require('node:http');const crypto=require('node:crypto');
-const PORT=Number(process.env.TEST_API_PORT || 5000);function req(path,method='GET',body=null,cookie=''){return new Promise((resolve,reject)=>{const raw=body?JSON.stringify(body):null;const q=http.request({host:'127.0.0.1',port:PORT,path:'/api'+path,method,headers:{Host:'api.assps.edu.pk','Content-Type':'application/json',...(raw?{'Content-Length':Buffer.byteLength(raw)}:{}),...(cookie?{Cookie:cookie}:{})},timeout:7000},r=>{let t='';r.on('data',c=>t+=c);r.on('end',()=>{let j={};try{j=JSON.parse(t)}catch{}resolve({status:r.statusCode,json:j,headers:r.headers})})});q.on('error',reject);if(raw)q.write(raw);q.end()})}
-async function login(email,password,role,code){const r=await req('/auth/login','POST',{email,password,role,school_code:code});if(r.status!==200)throw Error(`login ${role} ${r.status}`);return (r.headers['set-cookie']||[]).map(x=>x.split(';')[0]).join('; ')}
-(async()=>{const c=await pool.connect();let sid;try{const suf=crypto.randomBytes(5).toString('hex'),code=`qbqa${suf}`,password=crypto.randomBytes(18).toString('base64url'),hash=await bcrypt.hash(password,10);sid=(await c.query("insert into schools(name,code,status,tenant_id) values('Synthetic QBank QA',$1,'active',$1) returning id",[code])).rows[0].id;const users={};for(const spec of [['admin','admin'],['teacherA','teacher'],['teacherB','teacher']]){const email=`${spec[0]}-${suf}@invalid.example`;const id=(await c.query('insert into users(school_id,tenant_id,name,email,role,password,is_active) values($1,$2,$3,$4,$5,$6,true) returning id',[sid,code,spec[0],email,spec[1],hash])).rows[0].id;users[spec[0]]={id,email,role:spec[1]}}await c.query("insert into teacher_class_assignments(school_id,teacher_user_id,class_name,section,subject,is_active) values($1,$2,'Seven','','Science',true),($1,$3,'Eight','','Math',true)",[sid,users.teacherA.id,users.teacherB.id]);for(const u of Object.values(users))u.cookie=await login(u.email,password,u.role,code);
-const make=(cls,subject,text)=>({class_level:cls,subject,question_type:'short',question_text:text,marks:2,is_approved:true});let r=await req('/question-bank','POST',make('Seven','Science','Science QA '+suf),users.admin.cookie);if(r.status!==201)throw Error('admin add Science '+r.status+' '+JSON.stringify(r.json));const scienceId=r.json.data.id;r=await req('/question-bank','POST',make('Eight','Math','Math QA '+suf),users.admin.cookie);if(r.status!==201)throw Error('admin add Math '+r.status);const mathId=r.json.data.id;console.log('PASS admin creates approved school questions');
-r=await req('/question-bank?limit=50', 'GET',null,users.teacherA.cookie);if(r.status!==200)throw Error('teacherA list '+r.status);const ids=(r.json.data||[]).map(x=>String(x.id));if(!ids.includes(String(scienceId))||ids.includes(String(mathId)))throw Error('teacherA scope leak '+JSON.stringify(ids));console.log('PASS teacher A sees assigned Science, not Math');
-r=await req('/question-bank?approved=false&limit=50','GET',null,users.teacherA.cookie);if((r.json.data||[]).some(x=>!x.is_approved))throw Error('teacher forced unapproved visibility');console.log('PASS teacher cannot request unapproved questions');
-r=await req('/question-bank','POST',make('Seven','Science','Teacher mutation'),users.teacherA.cookie);if(r.status!==403)throw Error('teacher POST expected403 got '+r.status);console.log('PASS teacher cannot add question');
-r=await req(`/question-bank/${scienceId}`,'DELETE',null,users.teacherA.cookie);if(r.status!==403)throw Error('teacher DELETE expected403 got '+r.status);console.log('PASS teacher cannot delete question');
-r=await req('/question-bank?limit=50','GET',null,users.admin.cookie);if(r.status!==200)throw Error('admin list '+r.status);const adminIds=(r.json.data||[]).map(x=>String(x.id));if(!adminIds.includes(String(scienceId))||!adminIds.includes(String(mathId)))throw Error('admin missing school questions');console.log('PASS admin retains school-wide Question Bank');console.log('QUESTION_BANK_SCOPE 6/6 PASS');
-}finally{if(sid){await c.query('delete from question_bank where school_id=$1',[sid]).catch(()=>{});await c.query('delete from teacher_class_assignments where school_id=$1',[sid]).catch(()=>{});await c.query('delete from users where school_id=$1',[sid]).catch(()=>{});await c.query('delete from schools where id=$1',[sid]).catch(()=>{});}c.release();await pool.end();console.log('SYNTHETIC_QBANK_FIXTURES_CLEANED')}})().catch(e=>{console.error('FAIL',e.stack||e.message);process.exit(1)});
+const { test, after } = require('node:test')
+const assert = require('node:assert/strict')
+const express = require('express')
+const http = require('node:http')
+const jwt = require('jsonwebtoken')
+const crypto = require('node:crypto')
+const { tenantContext, pool } = require('../config/database')
+
+let server
+let syntheticSchoolId = null
+
+function request(port, method, path, body, token) {
+  return new Promise((resolve, reject) => {
+    const payload = body == null ? '' : JSON.stringify(body)
+    const req = http.request({
+      hostname: '127.0.0.1',
+      port,
+      path: `/api/question-bank${path}`,
+      method,
+      headers: {
+        'content-type': 'application/json',
+        ...(token ? { authorization: `Bearer ${token}` } : {}),
+        ...(payload ? { 'content-length': Buffer.byteLength(payload) } : {}),
+      },
+    }, res => {
+      let raw = ''
+      res.on('data', chunk => { raw += chunk })
+      res.on('end', () => {
+        let json = {}
+        try { json = raw ? JSON.parse(raw) : {} } catch {}
+        resolve({ status: res.statusCode, body: json, raw })
+      })
+    })
+    req.on('error', reject)
+    if (payload) req.write(payload)
+    req.end()
+  })
+}
+
+function signUser(user) {
+  return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { algorithm: 'HS256', expiresIn: '5m' })
+}
+
+async function transition(port, publicId, status, token) {
+  const r = await request(port, 'PATCH', `/governance/${publicId}/status`, { status }, token)
+  assert.equal(r.status, 200, r.raw)
+  assert.equal(r.body.data.lifecycle_status, status)
+}
+
+test('teacher Question Bank scope follows governed Candidate -> Ready -> Retired lifecycle', { timeout: 30000 }, async () => {
+  assert.equal(process.env.NODE_ENV, 'test', 'Teacher scope integration test must run only in NODE_ENV=test')
+  assert.notEqual(process.env.DB_NAME, 'apexos', 'Teacher scope integration test must never target production DB')
+
+  const suffix = crypto.randomBytes(6).toString('hex')
+  const schoolCode = `qbscope${suffix}`
+  const school = await pool.query(
+    `INSERT INTO schools(name,code,status,tenant_id) VALUES($1,$2,'active',$2) RETURNING id`,
+    [`Synthetic QBank Scope ${suffix}`, schoolCode]
+  )
+  syntheticSchoolId = school.rows[0].id
+
+  const users = {}
+  for (const [key, role] of [['admin','admin'], ['teacherA','teacher'], ['teacherB','teacher']]) {
+    const email = `${key}-${suffix}@invalid.example`
+    const result = await pool.query(
+      `INSERT INTO users(school_id,tenant_id,name,email,role,password,is_active)
+       VALUES($1,$2,$3,$4,$5,'not-used',true) RETURNING id,email,role`,
+      [syntheticSchoolId, schoolCode, key, email, role]
+    )
+    users[key] = result.rows[0]
+  }
+
+  await pool.query(
+    `INSERT INTO teacher_class_assignments(school_id,teacher_user_id,class_name,section,subject,is_active)
+     VALUES($1,$2,'Seven','','Science',true),($1,$3,'Eight','','Math',true)`,
+    [syntheticSchoolId, users.teacherA.id, users.teacherB.id]
+  )
+
+  const app = express()
+  app.use(express.json())
+  app.use((req,res,next) => tenantContext.run({ rlsEnabled:false, isSuperAdmin:false, tenantId:null }, next))
+  app.use('/api/question-bank', require('../routes/questionBankRoutes'))
+  server = await new Promise(resolve => {
+    const s = app.listen(0, '127.0.0.1', () => resolve(s))
+  })
+  const port = server.address().port
+  const adminToken = signUser(users.admin)
+  const teacherAToken = signUser(users.teacherA)
+  const teacherBToken = signUser(users.teacherB)
+
+  const make = (classLevel, subject, text) => ({
+    class_level: classLevel,
+    subject,
+    question_type: 'short',
+    question_text: text,
+    marks: 2,
+  })
+
+  let r = await request(port, 'POST', '/', make('Seven','Science',`Science governed ${suffix}?`), adminToken)
+  assert.equal(r.status, 201, r.raw)
+  assert.equal(r.body.data.is_approved, false)
+  assert.equal(r.body.data.governance.lifecycleStatus, 'candidate')
+  const scienceId = r.body.data.id
+  const sciencePublicId = r.body.data.governance.publicId
+
+  r = await request(port, 'POST', '/', make('Eight','Math',`Math governed ${suffix}?`), adminToken)
+  assert.equal(r.status, 201, r.raw)
+  assert.equal(r.body.data.governance.lifecycleStatus, 'candidate')
+  const mathId = r.body.data.id
+  const mathPublicId = r.body.data.governance.publicId
+
+  r = await request(port, 'GET', '?limit=50', null, teacherAToken)
+  assert.equal(r.status, 200, r.raw)
+  assert.ok(!(r.body.data || []).some(q => [scienceId, mathId].includes(q.id)), 'Candidate questions must be hidden from teachers')
+
+  await transition(port, sciencePublicId, 'reviewed', adminToken)
+  await transition(port, sciencePublicId, 'ready', adminToken)
+  await transition(port, mathPublicId, 'reviewed', adminToken)
+  await transition(port, mathPublicId, 'ready', adminToken)
+
+  const legacyProjection = await pool.query(
+    `SELECT id,is_approved FROM question_bank WHERE school_id=$1 AND id = ANY($2::text[]) ORDER BY id`,
+    [syntheticSchoolId, [scienceId, mathId]]
+  )
+  assert.equal(legacyProjection.rows.length, 2)
+  assert.ok(legacyProjection.rows.every(row => row.is_approved === true), 'Ready lifecycle must project approved=true to linked legacy rows')
+
+  r = await request(port, 'GET', '?limit=50', null, teacherAToken)
+  assert.equal(r.status, 200, r.raw)
+  const teacherAIds = (r.body.data || []).map(q => q.id)
+  assert.ok(teacherAIds.includes(scienceId), 'Assigned teacher must see Ready Science question')
+  assert.ok(!teacherAIds.includes(mathId), 'Assigned teacher must not see unassigned Math question')
+
+  r = await request(port, 'GET', '?limit=50', null, teacherBToken)
+  assert.equal(r.status, 200, r.raw)
+  const teacherBIds = (r.body.data || []).map(q => q.id)
+  assert.ok(teacherBIds.includes(mathId), 'Assigned teacher must see Ready Math question')
+  assert.ok(!teacherBIds.includes(scienceId), 'Assigned teacher must not see unassigned Science question')
+
+  r = await request(port, 'POST', '/', make('Seven','Science','Teacher mutation attempt'), teacherAToken)
+  assert.equal(r.status, 403, r.raw)
+  r = await request(port, 'DELETE', `/${scienceId}`, null, teacherAToken)
+  assert.equal(r.status, 403, r.raw)
+
+  await transition(port, sciencePublicId, 'retired', adminToken)
+  const retiredProjection = await pool.query('SELECT is_approved FROM question_bank WHERE school_id=$1 AND id=$2', [syntheticSchoolId, scienceId])
+  assert.equal(retiredProjection.rows[0].is_approved, false)
+
+  r = await request(port, 'GET', '?limit=50', null, teacherAToken)
+  assert.equal(r.status, 200, r.raw)
+  assert.ok(!(r.body.data || []).some(q => q.id === scienceId), 'Retired question must disappear from teacher visibility')
+
+  r = await request(port, 'GET', '?limit=50', null, adminToken)
+  assert.equal(r.status, 200, r.raw)
+  const adminIds = (r.body.data || []).map(q => q.id)
+  assert.ok(adminIds.includes(scienceId) && adminIds.includes(mathId), 'Admin keeps school-wide compatibility rows for history')
+
+  console.log('QUESTION_BANK_TEACHER_LIFECYCLE_SCOPE 10/10 PASS')
+})
+
+after(async () => {
+  if (server) await new Promise(resolve => server.close(resolve))
+  if (syntheticSchoolId) {
+    for (const table of ['question_capture_requests','question_mappings','question_revisions','question_masters','question_bank','teacher_class_assignments','users']) {
+      await pool.query(`DELETE FROM ${table} WHERE school_id=$1`, [syntheticSchoolId]).catch(() => {})
+    }
+    await pool.query('DELETE FROM schools WHERE id=$1', [syntheticSchoolId]).catch(() => {})
+  }
+  await pool.end()
+})

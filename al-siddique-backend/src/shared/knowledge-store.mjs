@@ -1,0 +1,9 @@
+import fs from 'node:fs';import path from 'node:path';import {openDb,ensureDir,now,id} from './lib.mjs';
+const ALLOWED=new Set(['school','growth','argus','system']);
+export class KnowledgeStore{
+ constructor(dbPath){ensureDir(path.dirname(dbPath));this.db=openDb(dbPath,`CREATE TABLE IF NOT EXISTS knowledge(id TEXT PRIMARY KEY,namespace TEXT,created_at TEXT,updated_at TEXT,kind TEXT,title TEXT,content TEXT,tags_json TEXT,source TEXT,confidence REAL DEFAULT 0.5);CREATE INDEX IF NOT EXISTS idx_knowledge_ns ON knowledge(namespace,updated_at);`)}
+ add({namespace,kind='lesson',title='',content='',tags=[],source='operator',confidence=.5}){if(!ALLOWED.has(namespace))throw new Error('invalid knowledge namespace');if(!String(content).trim())throw new Error('content required');const kid=id('know'),t=now();this.db.prepare('INSERT INTO knowledge VALUES(?,?,?,?,?,?,?,?,?,?)').run(kid,namespace,t,t,kind,String(title),String(content),JSON.stringify(tags),String(source),Math.max(0,Math.min(1,Number(confidence)||0)));return this.get(kid)}
+ get(kid){const r=this.db.prepare('SELECT * FROM knowledge WHERE id=?').get(kid);return r?{...r,tags:JSON.parse(r.tags_json||'[]')}:null}
+ list(namespace,{limit=100}={}){if(!ALLOWED.has(namespace))throw new Error('invalid knowledge namespace');return this.db.prepare('SELECT * FROM knowledge WHERE namespace=? ORDER BY updated_at DESC LIMIT ?').all(namespace,limit).map(r=>({...r,tags:JSON.parse(r.tags_json||'[]')}))}
+ search(namespace,q,{limit=20}={}){if(!ALLOWED.has(namespace))throw new Error('invalid knowledge namespace');const term=`%${String(q||'').replaceAll('%','')}%`;return this.db.prepare('SELECT * FROM knowledge WHERE namespace=? AND (title LIKE ? OR content LIKE ? OR tags_json LIKE ?) ORDER BY updated_at DESC LIMIT ?').all(namespace,term,term,term,limit).map(r=>({...r,tags:JSON.parse(r.tags_json||'[]')}))}
+}

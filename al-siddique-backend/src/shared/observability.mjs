@@ -1,0 +1,3 @@
+import os from 'node:os';
+export function systemMetrics(extra={}){const total=os.totalmem(),free=os.freemem();return {at:new Date().toISOString(),uptimeSec:os.uptime(),memoryTotalBytes:total,memoryFreeBytes:free,memoryUsedRatio:1-free/total,load1:os.loadavg()[0],load5:os.loadavg()[1],load15:os.loadavg()[2],cpuCount:os.cpus().length,...extra};}
+export function prometheus(metrics,prefix='jarvis'){const lines=[];for(const [k,v] of Object.entries(metrics)){if(typeof v!=='number'||!Number.isFinite(v))continue;const name=`${prefix}_${k.replace(/[A-Z]/g,m=>'_'+m.toLowerCase()).replace(/[^a-zA-Z0-9_:]/g,'_')}`;lines.push(`# TYPE ${name} gauge`,`${name} ${v}`);}return lines.join('\n')+'\n';}
