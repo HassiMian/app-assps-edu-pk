@@ -59,10 +59,10 @@ app.use(generalLimiter)
 // ─── CORS ────────────────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
   /^http:\/\/localhost(:\d+)?$/,
-  /^https?:\/\/(www\.)?assps\.edu\.pk$/,
-  /^https?:\/\/app\.assps\.edu\.pk$/,
-  /^https?:\/\/apex\.assps\.edu\.pk$/,
-  /^https?:\/\/api\.assps\.edu\.pk$/,
+  /^https:\/\/(www\.)?assps\.edu\.pk$/,
+  /^https:\/\/app\.assps\.edu\.pk$/,
+  /^https:\/\/apex\.assps\.edu\.pk$/,
+  /^https:\/\/api\.assps\.edu\.pk$/,
 ]
 app.use((req, res, next) => {
   const origin = req.headers.origin;
@@ -112,10 +112,8 @@ app.use('/api/uploads', express.static(uploadsDir, uploadStaticOptions))
 app.get('/health', (req, res) => {
   res.json({
     success: true,
-    message: 'Al Siddique Smart School OS — API Running!',
-    version: '1.0.0',
-    time:    new Date().toISOString(),
-    env:     process.env.NODE_ENV || 'development',
+    status: 'ok',
+    time: new Date().toISOString(),
   })
 })
 
@@ -141,17 +139,10 @@ app.get('/health/ready', async (req, res) => {
 
 app.get('/health/ai', (req, res) => {
   const ai = getAiEnvConfig()
-  res.json({
-    success: true,
-    configured: Boolean(ai.apiKey),
-    models: {
-      primary: ai.primaryModel,
-      fallback: ai.fallbackModel,
-      vision: ai.visionModel,
-      text: ai.textModel,
-    },
-    status: ai.apiKey ? 'ready' : 'unconfigured',
-    message: ai.apiKey ? 'AI service configured' : 'AI service not configured',
+  const configured = Boolean(ai.apiKey)
+  res.status(configured ? 200 : 503).json({
+    success: configured,
+    status: configured ? 'ready' : 'unavailable',
     time: new Date().toISOString(),
   })
 })

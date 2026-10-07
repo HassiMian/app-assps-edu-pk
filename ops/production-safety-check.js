@@ -275,6 +275,18 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/server.js',
+  /\^https\?:\\\/\\\/.*assps/,
+  'production ASSPS CORS origins must be HTTPS-only.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/server.js',
+  /env:\s*process\.env\.NODE_ENV|primary:\s*ai\.primaryModel|fallback:\s*ai\.fallbackModel/,
+  'public health endpoints must not expose environment or AI model internals.'
+)
+
 assertContains(
   'al-siddique-backend/src/server.js',
   "Payment proof files are not publicly accessible.",
