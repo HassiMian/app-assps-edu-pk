@@ -1,5 +1,5 @@
-require('/var/www/apex-backend/node_modules/dotenv').config({path:'/var/www/apex-backend/.env'});
-const {pool}=require('/var/www/apex-backend/config/database');const bcrypt=require('/var/www/apex-backend/node_modules/bcryptjs');const http=require('node:http');const crypto=require('node:crypto');
+require('dotenv').config({path:'/var/www/apex-backend/.env'});
+const {pool}=require('../config/database');const bcrypt=require('bcryptjs');const http=require('node:http');const crypto=require('node:crypto');
 const PORT=Number(process.env.TEST_API_PORT || 5000);
 function request(path,method='GET',body=null,cookie=''){return new Promise((resolve,reject)=>{const raw=body?JSON.stringify(body):null;const req=http.request({host:'127.0.0.1',port:PORT,path:'/api'+path,method,headers:{Host:'api.assps.edu.pk','Content-Type':'application/json',...(raw?{'Content-Length':Buffer.byteLength(raw)}:{}),...(cookie?{Cookie:cookie}:{})},timeout:7000},res=>{let text='';res.on('data',c=>text+=c);res.on('end',()=>{let json={};try{json=JSON.parse(text)}catch{}resolve({status:res.statusCode,json,headers:res.headers})})});req.on('error',reject);if(raw)req.write(raw);req.end()})}
 async function login(email,password,role,code){const r=await request('/auth/login','POST',{email,password,role,school_code:code});if(r.status!==200)throw Error(`login ${email} ${r.status}`);return (r.headers['set-cookie']||[]).map(x=>x.split(';')[0]).join('; ')}

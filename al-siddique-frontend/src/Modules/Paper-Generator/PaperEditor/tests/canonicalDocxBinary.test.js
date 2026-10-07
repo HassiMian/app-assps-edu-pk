@@ -3,9 +3,11 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
+import {fileURLToPath} from 'node:url'
 import {execFileSync} from 'node:child_process'
 import {packCanonicalDocx} from '../export/canonicalDocxExport.js'
-const corpusPath=path.join(process.cwd(),'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
+const __filename=fileURLToPath(import.meta.url),__dirname=path.dirname(__filename)
+const corpusPath=path.resolve(__dirname,'../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const raw=JSON.parse(fs.readFileSync(corpusPath,'utf8'));const corpus=Array.isArray(raw)?raw:(raw.papers||raw.documents||[])
 const pick=lang=>corpus.find(d=>d.metadata?.language===lang)
 function xmlOf(buffer){const dir=fs.mkdtempSync(path.join(os.tmpdir(),'g20-docx-'));const file=path.join(dir,'paper.docx');fs.writeFileSync(file,buffer);try{return execFileSync('unzip',['-p',file,'word/document.xml'],{encoding:'utf8',maxBuffer:20*1024*1024})}finally{fs.rmSync(dir,{recursive:true,force:true})}}

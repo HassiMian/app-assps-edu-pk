@@ -23,7 +23,7 @@
   --glow-gold: 0 0 20px color-mix(in srgb, var(--apex-action-highlight) 24%, transparent);
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
-  --font-urdu: 'Noto Nastaliq Urdu', serif;
+  --font-urdu: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
   --app-bg: var(--apex-bg-canvas);
   --app-bg-soft: var(--apex-bg-canvas-elevated);
   --app-surface: var(--apex-bg-surface);
