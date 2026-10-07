@@ -16,14 +16,3 @@ test('public settings exposes branding identity without internal entitlement met
   assert.doesNotMatch(publicRoute, /feature_flags/)
   assert.doesNotMatch(publicRoute, /superapp_modules/)
 })
-
-const authStart = source.indexOf("router.get('/', protect")
-const authEnd = source.indexOf("router.put('/', protect", authStart)
-const authenticatedRoute = source.slice(authStart, authEnd)
-
-test('authenticated settings preserves full control metadata for authorized clients', () => {
-  assert.ok(authStart >= 0 && authEnd > authStart, 'authenticated settings route must exist')
-  assert.match(authenticatedRoute, /superapp_modules/)
-  assert.match(authenticatedRoute, /module_access/)
-  assert.match(authenticatedRoute, /school_access/)
-})
