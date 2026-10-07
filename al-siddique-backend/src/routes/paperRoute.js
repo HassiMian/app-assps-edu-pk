@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
@@ -7,8 +6,9 @@ const multer = require('multer')
 const router = express.Router()
 
 const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
-const { query } = require('../config/database')
+const { pool } = require('../config/database')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
+const { teacherCanAccessClass, ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
 const {
   getAiEnvConfig,
   publicMessageFor,
@@ -54,6 +54,93 @@ const canUsePaperAi = (req, res, next) => {
   })
 }
 
+
+async function ensurePaperVaultSchema() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS paper_vault (
+      id BIGSERIAL PRIMARY KEY,
+      school_id INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
+      owner_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      name VARCHAR(220) NOT NULL,
+      class_name VARCHAR(120),
+      section VARCHAR(60),
+      subject_name VARCHAR(160),
+      status VARCHAR(30) NOT NULL DEFAULT 'draft',
+      revision INTEGER NOT NULL DEFAULT 1,
+      payload JSONB NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      deleted_at TIMESTAMPTZ
+    );
+    CREATE INDEX IF NOT EXISTS idx_paper_vault_school_updated
+      ON paper_vault(school_id, updated_at DESC)
+      WHERE deleted_at IS NULL;
+    CREATE INDEX IF NOT EXISTS idx_paper_vault_owner_updated
+      ON paper_vault(school_id, owner_user_id, updated_at DESC)
+      WHERE deleted_at IS NULL;
+    CREATE INDEX IF NOT EXISTS idx_paper_vault_class_subject
+      ON paper_vault(school_id, LOWER(COALESCE(class_name,'')), LOWER(COALESCE(subject_name,'')))
+      WHERE deleted_at IS NULL;
+  `)
+}
+
+const PAPER_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal'])
+function isPaperAdmin(req) {
+  return PAPER_ADMIN_ROLES.has(String(req.user?.role || '').toLowerCase())
+}
+function cleanPaperText(value, limit) {
+  const text = String(value || '').trim()
+  return text ? text.slice(0, limit) : null
+}
+function paperConfig(payload = {}) {
+  const cfg = payload?.config || payload?.metadata || {}
+  return {
+    name: cleanPaperText(payload?.name || cfg?.name || cfg?.title || 'Untitled Paper', 220) || 'Untitled Paper',
+    className: cleanPaperText(cfg?.className || cfg?.classLevel || cfg?.class || '', 120),
+    section: cleanPaperText(cfg?.section || '', 60),
+    subjectName: cleanPaperText(cfg?.subjectName || cfg?.subject || '', 160),
+  }
+}
+function serializeVaultPaper(row) {
+  const payload = row?.payload && typeof row.payload === 'object' ? row.payload : {}
+  return {
+    ...payload,
+    id: String(row.id),
+    name: row.name,
+    ownerUserId: String(row.owner_user_id),
+    className: row.class_name,
+    subjectName: row.subject_name,
+    status: row.status,
+    revision: row.revision,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    serverSynced: true,
+  }
+}
+async function enforceTeacherPaperScope(req, payload) {
+  if (String(req.user?.role || '').toLowerCase() !== 'teacher') return
+  const schoolId = currentSchoolId(req)
+  const cfg = paperConfig(payload)
+  if (!cfg.className) {
+    const err = new Error('Select an assigned class before saving this paper.')
+    err.status = 400
+    throw err
+  }
+  await ensureTeacherAssignmentSchema()
+  const allowed = await teacherCanAccessClass({
+    schoolId,
+    teacherUserId: req.user?.id,
+    className: cfg.className,
+    section: cfg.section,
+    subject: cfg.subjectName,
+  })
+  if (!allowed) {
+    const err = new Error('Teachers can save papers only for their assigned class and subject.')
+    err.status = 403
+    throw err
+  }
+}
+
 const UPLOAD_ROOT = path.join(os.tmpdir(), 'al-siddique-paper-uploads')
 if (!fs.existsSync(UPLOAD_ROOT)) fs.mkdirSync(UPLOAD_ROOT, { recursive: true })
 
@@ -61,7 +148,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_ROOT),
   filename: (req, file, cb) => {
     const safe = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')
-    cb(null, `${Date.now()}_${crypto.randomBytes(6).toString('hex')}_${safe}`)
+    cb(null, `${Date.now()}_${Math.random().toString(36).slice(2, 7)}_${safe}`)
   },
 })
 
@@ -160,6 +247,140 @@ registerHandlers({
 })
 void hydrateJobsFromDb().catch((err) => {
   console.warn('AI jobs hydrate skipped:', err.message)
+})
+
+
+// Canonical server-authoritative Paper Vault.
+// Teachers see/edit only their own papers; admins/principals can inspect the school library.
+router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+  try {
+    await ensurePaperVaultSchema()
+    const schoolId = currentSchoolId(req)
+    if (!schoolId && String(req.user?.role || '').toLowerCase() !== 'super_admin') {
+      return res.status(403).json({ success: false, message: 'School context is required.' })
+    }
+    const params = [schoolId]
+    let ownerClause = ''
+    if (!isPaperAdmin(req)) {
+      params.push(req.user?.id)
+      ownerClause = ` AND owner_user_id=$${params.length}`
+    }
+    const result = await pool.query(
+      `SELECT id, school_id, owner_user_id, name, class_name, section, subject_name, status, revision,
+              payload, created_at, updated_at
+       FROM paper_vault
+       WHERE school_id=$1 AND deleted_at IS NULL${ownerClause}
+       ORDER BY updated_at DESC
+       LIMIT 200`, params)
+    return res.json({
+      success: true,
+      scope: isPaperAdmin(req) ? 'school' : 'mine',
+      papers: result.rows.map(serializeVaultPaper),
+    })
+  } catch (err) {
+    console.error('Paper vault list error:', err.message)
+    return res.status(500).json({ success: false, message: 'Saved papers could not be loaded.' })
+  }
+})
+
+router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+  try {
+    await ensurePaperVaultSchema()
+    const schoolId = currentSchoolId(req)
+    if (!schoolId) return res.status(403).json({ success: false, message: 'School context is required.' })
+    const payload = req.body?.paper
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+      return res.status(400).json({ success: false, message: 'A structured paper document is required.' })
+    }
+    await enforceTeacherPaperScope(req, payload)
+    const cfg = paperConfig(payload)
+    const result = await pool.query(
+      `INSERT INTO paper_vault
+       (school_id, owner_user_id, name, class_name, section, subject_name, status, payload)
+       VALUES ($1,$2,$3,$4,$5,$6,'draft',$7)
+       RETURNING id, school_id, owner_user_id, name, class_name, section, subject_name, status, revision,
+                 payload, created_at, updated_at`,
+      [schoolId, req.user?.id, cfg.name, cfg.className, cfg.section, cfg.subjectName, JSON.stringify(payload)])
+    return res.status(201).json({ success: true, paper: serializeVaultPaper(result.rows[0]) })
+  } catch (err) {
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault save error:', err.message)
+    return res.status(status).json({ success: false, message: status >= 500 ? 'Paper could not be saved.' : err.message })
+  }
+})
+
+router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+  const client = await pool.connect()
+  try {
+    await ensurePaperVaultSchema()
+    const schoolId = currentSchoolId(req)
+    const id = String(req.params.id || '').trim()
+    if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
+    await client.query('BEGIN')
+    const params = [id, schoolId]
+    let ownerClause = ''
+    if (!isPaperAdmin(req)) {
+      params.push(req.user?.id)
+      ownerClause = ` AND owner_user_id=$${params.length}`
+    }
+    const existing = await client.query(
+      `SELECT * FROM paper_vault WHERE id=$1 AND school_id=$2 AND deleted_at IS NULL${ownerClause} FOR UPDATE`, params)
+    if (!existing.rowCount) {
+      await client.query('ROLLBACK')
+      return res.status(404).json({ success: false, message: 'Paper not found in your accessible library.' })
+    }
+    const row = existing.rows[0]
+    if (req.body?.expectedRevision !== undefined && Number(req.body.expectedRevision) !== Number(row.revision)) {
+      await client.query('ROLLBACK')
+      return res.status(409).json({ success: false, message: 'This paper changed in another session. Reload before saving again.', revision: row.revision })
+    }
+    const nextPayload = req.body?.paper && typeof req.body.paper === 'object' && !Array.isArray(req.body.paper)
+      ? req.body.paper : row.payload
+    await enforceTeacherPaperScope(req, nextPayload)
+    const cfg = paperConfig(nextPayload)
+    const nextName = cleanPaperText(req.body?.name, 220) || cfg.name || row.name
+    const nextStatus = isPaperAdmin(req) && ['draft','review','approved','archived'].includes(String(req.body?.status || ''))
+      ? String(req.body.status) : row.status
+    const updated = await client.query(
+      `UPDATE paper_vault
+       SET name=$1, class_name=$2, section=$3, subject_name=$4, status=$5,
+           payload=$6, revision=revision+1, updated_at=NOW()
+       WHERE id=$7
+       RETURNING id, school_id, owner_user_id, name, class_name, section, subject_name, status, revision,
+                 payload, created_at, updated_at`,
+      [nextName, cfg.className, cfg.section, cfg.subjectName, nextStatus, JSON.stringify(nextPayload), id])
+    await client.query('COMMIT')
+    return res.json({ success: true, paper: serializeVaultPaper(updated.rows[0]) })
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault update error:', err.message)
+    return res.status(status).json({ success: false, message: status >= 500 ? 'Paper could not be updated.' : err.message })
+  } finally { client.release() }
+})
+
+router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+  try {
+    await ensurePaperVaultSchema()
+    const schoolId = currentSchoolId(req)
+    const id = String(req.params.id || '').trim()
+    if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
+    const params = [id, schoolId]
+    let ownerClause = ''
+    if (!isPaperAdmin(req)) {
+      params.push(req.user?.id)
+      ownerClause = ` AND owner_user_id=$${params.length}`
+    }
+    const result = await pool.query(
+      `UPDATE paper_vault SET deleted_at=NOW(), updated_at=NOW()
+       WHERE id=$1 AND school_id=$2 AND deleted_at IS NULL${ownerClause}
+       RETURNING id`, params)
+    if (!result.rowCount) return res.status(404).json({ success: false, message: 'Paper not found in your accessible library.' })
+    return res.json({ success: true })
+  } catch (err) {
+    console.error('Paper vault delete error:', err.message)
+    return res.status(500).json({ success: false, message: 'Paper could not be deleted.' })
+  }
 })
 
 router.get('/ai/config', protect, canUsePaperAi, async (req, res) => {
@@ -284,14 +505,14 @@ router.post('/notify-admin', protect, requireRoles('teacher', 'admin', 'principa
     sql += tenant.clause
     params.push(...tenant.params)
 
-    const result = await query(sql, params)
+    const result = await pool.query(sql, params)
     const count = parseInt(result.rows[0].count, 10) || 0
 
     const message = `Paper for ${subjectName} (${classLevel}) is saved. Number of students is ${count}, so ${count} prints are needed.`
 
     // Insert into notification_log
     // Ensure table structure exists implicitly or assume it does
-    await query(`
+    await pool.query(`
       INSERT INTO notification_log (school_id, recipient_role, title, message, type, sent_at)
       VALUES ($1, 'admin', 'Paper Saved by Teacher', $2, 'info', NOW())
     `, [schoolId, message])
@@ -575,7 +796,7 @@ router.delete('/jobs/events', protect, canUsePaperAi, async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: 'Could not clear queue events.',
+      message: err.message || 'Could not clear queue events.',
       code: err.code || 'AI_QUEUE_EVENT_CLEAR_FAILED',
     })
   }
