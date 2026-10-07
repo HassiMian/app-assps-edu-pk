@@ -31,7 +31,7 @@ export default function PromoteDemote() {
 
  useEffect(() => {
  let cancelled = false
- api.get('/api/students').then(r => { if (!cancelled) { setStudents(r.data?.data || []); setLoadError('') } }).catch(err => { if (!cancelled) { setStudents([]); setLoadError(err.response?.data?.message || 'Student roster could not be loaded for promotion/demotion.') } }).finally(() => { if (!cancelled) setLoading(false) })
+ api.get('/api/students').then(r => { if (!cancelled) { setStudents(r.data?.data || []); setLoadError('') } }).catch(err => { if (!cancelled) { setLoadError(err.response?.data?.message || 'Student roster could not be loaded for promotion/demotion. Existing loaded roster was preserved.') } }).finally(() => { if (!cancelled) setLoading(false) })
  return () => { cancelled = true }
  }, [])
 

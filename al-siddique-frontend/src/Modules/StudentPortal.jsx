@@ -69,8 +69,13 @@ export default function StudentPortal() {
  function flash(msg) { setNotice(msg); setTimeout(() => setNotice(''), 3000) }
  function readMsg(msg) {
  setOpenMsg(msg)
+ if (msg.read) return
  setMessages(p => p.map(m => m.id === msg.id ? { ...m, read: true } : m))
- if (!msg.read) void api.put(`/api/notify/${msg.id}/read`).catch(() => {})
+ void api.put(`/api/notify/${msg.id}/read`).catch((err) => {
+ console.error('Student portal notification read receipt failed', err)
+ setMessages(p => p.map(m => m.id === msg.id ? { ...m, read: false } : m))
+ setWarning('Notification opened, but its read status could not be saved. It remains unread on the server.')
+ })
  }
 
  //  Load real SaaS data 
