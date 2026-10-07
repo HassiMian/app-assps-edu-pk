@@ -33,7 +33,7 @@ export default function SearchableStudentPicker({
     if (query.trim().length >= 2) params.search = query.trim()
     api.get('/api/students', { params })
       .then((r) => { if (!cancelled) { setStudents(r.data?.data || []); setLoadError('') } })
-      .catch((err) => { if (!cancelled) { setStudents([]); setLoadError(err.response?.data?.message || 'Student search is temporarily unavailable.') } })
+      .catch((err) => { if (!cancelled) { setLoadError(err.response?.data?.message || 'Student search is temporarily unavailable. Existing loaded students were preserved.') } })
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
   }, [query, activeClassFilter])

@@ -2516,6 +2516,43 @@ assertContains(
   'public settings must retain regression coverage that blocks internal superapp entitlement metadata.'
 )
 
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/SearchableStudentPicker.jsx',
+  /catch\(\(err\) => \{ if \(!cancelled\) \{ setStudents\(\[\]\)/,
+  'fee student picker refresh failure must preserve already loaded students.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/PromoteDemote.jsx',
+  /catch\(err => \{ if \(!cancelled\) \{ setStudents\(\[\]\)/,
+  'promotion/demotion roster refresh failures must preserve the last known-good roster.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
+  /api\.put\(`\/api\/notify\/\$\{msg\.id\}\/read`\)\.catch\(\(\) => \{\}\)/,
+  'parent portal notification read-receipt failures must not be silently ignored.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  /api\.put\(`\/api\/notify\/\$\{msg\.id\}\/read`\)\.catch\(\(\) => \{\}\)/,
+  'student portal notification read-receipt failures must not be silently ignored.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
+  'It remains unread on the server.',
+  'parent portal must roll back optimistic read state when server persistence fails.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  'It remains unread on the server.',
+  'student portal must roll back optimistic read state when server persistence fails.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
