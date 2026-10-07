@@ -38,8 +38,7 @@ export default function SMSReport() {
  setLogs(Array.isArray(response.data?.data) ? response.data.data : [])
  } catch (err) {
  console.error('Notification history load failed', err)
- setLogs([])
- setMessage(err.response?.data?.message || 'Delivery history could not be loaded.')
+ setMessage(err.response?.data?.message || 'Delivery history could not be refreshed. Existing loaded delivery history was preserved.')
  } finally { setLoading(false) }
  }
 
