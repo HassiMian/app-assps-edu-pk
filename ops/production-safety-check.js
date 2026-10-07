@@ -146,6 +146,18 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+  /Failed to fetch attendance history:[\s\S]{0,180}setRecords\(\[\]\)/,
+  'attendance analytics refresh failures must preserve the last known-good history instead of reporting an empty month.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+  'const activeRecords = loadedScope === currentScope ? records : []',
+  'attendance analytics cached rows must remain bound to the class/section/date scope they were loaded for.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
   /Failed to load unmarked attendance data:[\s\S]{0,180}setStudents\(\[\]\)[\s\S]{0,120}setMarkedToday\(\[\]\)/,
   'dashboard unmarked-attendance refresh failures must preserve the last known-good roster and marks.'
