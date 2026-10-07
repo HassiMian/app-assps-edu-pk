@@ -665,15 +665,6 @@ async function hydrateBackendSettings() {
   try {
    const snapshots = []
 
-   const publicRes = await window.fetch('/api/settings/public', {
-    credentials: 'same-origin',
-    cache: 'no-store',
-   })
-   if (publicRes.ok) {
-    const publicJson = await publicRes.json()
-    snapshots.push(normalizeBackendSettings(publicJson?.data || {}))
-   }
-
    const token = storage.getItem('al_siddique_token')
    if (token) {
     const authRes = await window.fetch('/api/settings', {
@@ -687,6 +678,24 @@ async function hydrateBackendSettings() {
     if (authRes.ok) {
      const authJson = await authRes.json()
      snapshots.push(normalizeBackendSettings(authJson?.data || {}))
+    }
+   } else {
+    let explicitSchoolId = null
+    try {
+     const storedUser = JSON.parse(storage.getItem('al_siddique_user') || 'null')
+     const candidate = Number(storedUser?.school_id ?? storedUser?.schoolId)
+     if (Number.isInteger(candidate) && candidate > 0) explicitSchoolId = candidate
+    } catch {}
+
+    if (explicitSchoolId) {
+     const publicRes = await window.fetch(`/api/settings/public?school_id=${encodeURIComponent(explicitSchoolId)}`, {
+      credentials: 'same-origin',
+      cache: 'no-store',
+     })
+     if (publicRes.ok) {
+      const publicJson = await publicRes.json()
+      snapshots.push(normalizeBackendSettings(publicJson?.data || {}))
+     }
     }
    }
 
