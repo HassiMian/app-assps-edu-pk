@@ -14,11 +14,23 @@ test('finalized manual paper creates one durable personalized duplex print job',
   const browser=await chromium.launch({headless:true,args:['--no-sandbox']})
   const context=await browser.newContext({viewport:{width:1640,height:960}})
   await context.addInitScript(()=>{
-    localStorage.setItem('al_siddique_token','mock-jwt-token')
+    localStorage.setItem('al_siddique_token','local_browser_test_token')
     localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))
     window.print=()=>{ window.__asspsPrintCalled=true }
   })
   t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
+
+  await context.route('**/api/auth/me',r=>r.fulfill({
+    status:200,
+    contentType:'application/json',
+    body:JSON.stringify({user:{id:999,role:'admin',school_id:1,tenant_id:'assps'}}),
+  }))
+
+  await context.route('**/api/academic/setup',r=>r.fulfill({
+    status:200,
+    contentType:'application/json',
+    body:JSON.stringify({success:true,data:{classes:[{level:'7',name:'Seven',active:true,sections:['Blue']}],subjects:['Science'],localities:[]}}),
+  }))
 
   await context.route('**/api/students**',r=>r.fulfill({
     status:200,
