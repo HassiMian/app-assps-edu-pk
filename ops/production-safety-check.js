@@ -408,6 +408,24 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/services/useAcademicStore.js',
+  /catch \(requestError\)[\s\S]{0,280}setData\(EMPTY_ACADEMIC\)/,
+  'academic setup refresh failures must preserve the last known-good class configuration.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/services/useAcademicStore.js',
+  'const refreshAcademic = useCallback(async () => {',
+  'academic setup refresh must expose a stable callback to avoid consumer render loops.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/services/useAcademicStore.js',
+  'const sectionsForClass = useCallback((className) => {',
+  'academic class helpers must keep stable function identity for dependent modules.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryFeature.jsx',
   /loadSavedDiaries\(\)\.catch\(\(\) => \[\]\)/,
   'daily diary list failures must not be converted into authoritative empty data.'

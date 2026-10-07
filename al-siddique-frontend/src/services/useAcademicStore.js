@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import api from './api'
 
 let academicSetupInflight = null
@@ -124,7 +124,7 @@ export function useAcademicStore() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  async function refreshAcademic() {
+  const refreshAcademic = useCallback(async () => {
     setLoading(true)
     setError('')
     try {
@@ -137,17 +137,15 @@ export function useAcademicStore() {
       return { success:true, configured:resolved.configured, data:resolved.data }
     } catch (requestError) {
       const message = requestError?.response?.data?.message || requestError?.message || 'Academic setup could not be loaded.'
-      setData(EMPTY_ACADEMIC)
-      setConfigured(false)
-      setDefaults(null)
+      // Preserve the last known-good academic state on transient refresh failure.
       setError(message)
       return { success:false, error:message }
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
 
-  async function updateAcademic(updates) {
+  const updateAcademic = useCallback(async (updates) => {
     const candidate = {
       ...data,
       ...updates,
@@ -173,7 +171,7 @@ export function useAcademicStore() {
       window.dispatchEvent(new CustomEvent('academic-setup:sync-error', { detail:{ message } }))
       return { success:false, error:message }
     }
-  }
+  }, [data])
 
   useEffect(() => {
     let cancelled = false
@@ -188,7 +186,7 @@ export function useAcademicStore() {
       cancelled = true
       window.removeEventListener('academic-setup:refresh', handler)
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [refreshAcademic])
 
   const activeClasses = useMemo(() => data.classes.filter(c => c.active !== false), [data.classes])
   const classNames = useMemo(() => activeClasses.map(c => c.name), [activeClasses])
@@ -198,7 +196,7 @@ export function useAcademicStore() {
     : 0
   const allSections = useMemo(() => ['All', ...new Set(activeClasses.flatMap(c => c.sections || []))], [activeClasses])
 
-  function subjectsForClass(classIdentifier) {
+  const subjectsForClass = useCallback((classIdentifier) => {
     if (!classIdentifier) return subjectNames
     const targetClass = data.classes.find(c => String(c.level) === String(classIdentifier) || c.name === classIdentifier)
     const levelToSearch = targetClass ? String(targetClass.level) : String(classIdentifier)
@@ -207,12 +205,12 @@ export function useAcademicStore() {
       .filter(s => (Array.isArray(s.classes) ? s.classes : []).some(level => compatibleLevels.includes(normalizeClassLevel(level))))
       .map(s => s.name)
     return matched.length > 0 ? matched : subjectNames
-  }
+  }, [data.classes, data.subjects, subjectNames])
 
-  function sectionsForClass(className) {
+  const sectionsForClass = useCallback((className) => {
     const target = activeClasses.find(c => c.name === className)
     return target?.sections?.length ? target.sections : []
-  }
+  }, [activeClasses])
 
   return {
     localities: data.localities,
