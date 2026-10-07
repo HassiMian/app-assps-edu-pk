@@ -9,7 +9,7 @@ import { createServer } from 'vite'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const frontendRoot = path.resolve(__dirname, '../../../../..')
-const PORT = 5193
+const PORT = Number(process.env.ASSPS_METADATA_TEST_PORT || 5193)
 const PAPER_ID = 'doc__official-first-term-2026-class-6-science'
 const BASE_URL = `http://localhost:${PORT}/b3-test.html?mode=${PAPER_ID}`
 

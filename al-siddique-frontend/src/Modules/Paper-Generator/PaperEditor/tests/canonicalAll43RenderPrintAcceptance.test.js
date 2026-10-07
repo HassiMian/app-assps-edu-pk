@@ -12,7 +12,7 @@ const frontendRoot = path.resolve(__dirname, '../../../../..')
 const corpusPath = path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const corpus = JSON.parse(fs.readFileSync(corpusPath, 'utf8')).documents
 
-const PORT = 5194
+const PORT = Number(process.env.ASSPS_ALL43_TEST_PORT || 5194)
 const BASE_URL = `http://localhost:${PORT}/b3-test.html`
 
 let server
