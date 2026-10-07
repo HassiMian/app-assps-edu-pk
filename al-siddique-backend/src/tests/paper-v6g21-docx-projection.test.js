@@ -1,6 +1,7 @@
 const test=require('node:test')
 const assert=require('node:assert/strict')
 const fs=require('node:fs')
+const crypto=require('node:crypto')
 const path=require('node:path')
 const {pathToFileURL}=require('node:url')
 const {buildCanonicalDocxModel,buildCanonicalDocxBuffer,assessCanonicalDocxEligibility,extractCanonicalDocument,buildRevisionBoundCanonicalDocx}=require('../services/papers/paperCanonicalDocxProjectionV6G21')
@@ -59,6 +60,8 @@ test('G21 revision-bound download preserves exact source identity without granti
   assert.equal(result.policy.publisherApprovalChanged,false)
   assert.equal(result.policy.canonicalWriteChanged,false)
   assert.equal(result.policy.approvalClaim,false)
+  assert.equal(result.docxSha256,crypto.createHash('sha256').update(result.buffer).digest('hex'))
+  assert.equal(result.policy.byteIntegrityBound,true)
 })
 
 test('G21 refuses historical revisions even when their snapshot is otherwise valid',async()=>{

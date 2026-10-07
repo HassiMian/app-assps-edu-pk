@@ -34,6 +34,7 @@ async function login(email,password,role,code){const r=await request('/auth/logi
  r=await request(`/portal/paper-studio/papers/${canonicalId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:canonicalHash},cookie:users.teacherB.cookie});if(r.status!==404)throw Error(`cross-teacher DOCX leaked ${r.status}`)
  console.log('PASS cross-teacher canonical DOCX is non-leaking 404')
  r=await request(`/portal/paper-studio/papers/${canonicalId}/canonical-docx`,{method:'POST',body:{revision:1,snapshotHash:canonicalHash},cookie:users.admin.cookie});if(r.status!==200||r.body.subarray(0,2).toString()!=='PK')throw Error(`admin school-wide DOCX failed ${r.status}`)
- console.log('PASS admin can download school canonical DOCX')
+ const docxSha=crypto.createHash('sha256').update(r.body).digest('hex');if(r.headers['x-assps-docx-sha256']!==docxSha)throw Error(`DOCX SHA header mismatch ${r.headers['x-assps-docx-sha256']} ${docxSha}`)
+ console.log('PASS admin can download school canonical DOCX with exact byte SHA-256 binding')
  console.log('V6G21_DOCX_HTTP 9/9 PASS')
 }finally{if(sid){await c.query('delete from paper_vault where school_id=$1',[sid]).catch(()=>{});await c.query('delete from users where school_id=$1',[sid]).catch(()=>{});await c.query('delete from schools where id=$1',[sid]).catch(()=>{})}c.release();await pool.end();console.log('V6G21_SYNTHETIC_FIXTURES_CLEANED')}})().catch(e=>{console.error('V6G21_FAIL',e.stack||e.message);process.exit(1)})

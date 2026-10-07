@@ -1,3 +1,4 @@
+const crypto=require('node:crypto')
 const { Document, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType, AlignmentType, HeadingLevel } = require('docx')
 
 const DIRS = new Set(['ltr','rtl'])
@@ -144,12 +145,14 @@ async function buildRevisionBoundCanonicalDocx({schoolId,userId,role,paperId,rev
   const doc=extractCanonicalDocument(bound.document)
   const built=await packFn(doc)
   if(!Buffer.isBuffer(built?.buffer)||built.buffer.length<4)throw failure(500,'CANONICAL_DOCX_BUILD_FAILED','Canonical DOCX adapter did not produce a valid binary buffer.')
+  const docxSha256=crypto.createHash('sha256').update(built.buffer).digest('hex')
   return {
     buffer:built.buffer,
     filename:built.filename,
     model:built.model,
+    docxSha256,
     source:{paperId:String(bound.paper?.id||paperId),revision:Number(bound.revision),snapshotHash:String(bound.snapshotHash),family:review.family,reviewStatus:review.reviewStatus,reviewedContract:review.reviewedContract},
-    policy:{downloadOnly:true,currentRevisionRequired:true,legacyDomExporterUsed:false,sourceMutated:false,persisted:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,approvalClaim:false},
+    policy:{downloadOnly:true,currentRevisionRequired:true,byteIntegrityBound:true,legacyDomExporterUsed:false,sourceMutated:false,persisted:false,academicApprovalChanged:false,publisherApprovalChanged:false,canonicalWriteChanged:false,approvalClaim:false},
   }
 }
 
