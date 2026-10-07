@@ -29,7 +29,31 @@ test('finalized manual paper creates one durable personalized duplex print job',
       {id:8001,name:'Other Class',class:'Eight',section:'',roll_number:'X-1',phone:'PRIVATE-3',is_active:true},
     ]}),
   }))
-  await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+  let publicSettingsRequests=0
+  await context.route('**/api/settings/public**',r=>{
+    publicSettingsRequests+=1
+    return r.fulfill({status:400,contentType:'application/json',body:JSON.stringify({success:false,message:'school_id or school_code is required.'})})
+  })
+  await context.route('**/api/auth/me',r=>r.fulfill({
+    status:200,
+    contentType:'application/json',
+    body:JSON.stringify({success:true,user:{id:999,email:'admin@example.test',role:'admin',school_id:1,tenant_id:'assps'}}),
+  }))
+  await context.route('**/api/settings',r=>r.fulfill({
+    status:200,
+    contentType:'application/json',
+    body:JSON.stringify({success:true,data:{school_id:1,school_name:'AL SIDDIQUE SCHOLARS PUBLIC SCHOOL'}}),
+  }))
+  await context.route('**/api/academic/setup',r=>r.fulfill({
+    status:200,
+    contentType:'application/json',
+    body:JSON.stringify({success:true,configured:true,data:{periodsPerDay:8,classes:[
+      {level:'7',name:'Seven',active:true,sections:['Blue']},
+      {level:'8',name:'Eight',active:true,sections:['Blue']},
+    ],subjects:[]}}),
+  }))
+  await context.route('**/api/school/settings/current',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+  await context.route('**/api/school/branding',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
 
   let revision=0
   await context.route('**/api/assessment-studio/papers/*/revisions',r=>{
@@ -139,5 +163,6 @@ test('finalized manual paper creates one durable personalized duplex print job',
   assert.deepEqual(Object.keys(requests.job.renderSettings.studentPageCounts).sort(),['7001','7002'])
   assert.deepEqual(requests.statuses,['QUEUED','PRINTING'])
   assert.equal(dialogs.some(x=>x.includes('PERSONALIZED PRINT BLOCKED')),false)
+  assert.equal(publicSettingsRequests,0,'authenticated Paper Workspace must not request /api/settings/public without a school reference')
   console.log('PERSONALIZED_PRINT_DURABLE_BROWSER 1/1 PASS')
 })
