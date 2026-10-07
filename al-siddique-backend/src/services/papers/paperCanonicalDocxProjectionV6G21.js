@@ -1,5 +1,5 @@
 const crypto=require('node:crypto')
-const { Document, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType, AlignmentType, HeadingLevel } = require('docx')
+const { Document, ImageRun, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType, AlignmentType, HeadingLevel } = require('docx')
 
 const DIRS = new Set(['ltr','rtl'])
 const text = v => v == null ? '' : String(v)
@@ -13,6 +13,40 @@ function paragraph(node, content, direction, extra={}) {
 }
 function table(node, columns, rows, direction, extra={}) {
   return { kind:'table', nodeId:node?.id || null, nodeType:node?.type || null, direction, columns:columns.map(text), rows:rows.map(r=>r.map(text)), marks:marks(node), ...extra }
+}
+
+
+function projectCanonicalCapabilitiesToDocxBlocks(node={}, assetsById=new Map()) {
+  const blocks=[]
+  if (node?.math && typeof node.math === 'object' && text(node.math.source).trim()) {
+    blocks.push({kind:'math_capability',nodeId:node.id||null,nodeType:node.type||null,direction:'ltr',format:text(node.math.format||'latex'),display:text(node.math.display||'block'),source:text(node.math.source),marks:null})
+  }
+  for (const assetId of (Array.isArray(node?.assetRefs) ? node.assetRefs : [])) {
+    const asset=assetsById.get(String(assetId))
+    if (!asset || asset.kind !== 'image') continue
+    blocks.push({kind:'image_capability',nodeId:node.id||null,nodeType:node.type||null,direction:'ltr',assetId:text(asset.id),mimeType:text(asset.mimeType||'image/png'),sha256:text(asset.sha256),byteLength:Number(asset.byteLength)||null,widthPx:Number(asset.widthPx)||null,heightPx:Number(asset.heightPx)||null,altText:text(asset.altText),description:text(asset.description),storage:text(asset.storage),contentDataUrl:text(asset.contentDataUrl),marks:null})
+  }
+  return blocks
+}
+
+function imageTypeFromMime(mime) {
+  const value=text(mime).toLowerCase()
+  if (value.includes('jpeg') || value.includes('jpg')) return 'jpg'
+  if (value.includes('gif')) return 'gif'
+  if (value.includes('bmp')) return 'bmp'
+  if (value.includes('svg')) return 'svg'
+  return 'png'
+}
+function dataUrlToBuffer(dataUrl) {
+  const match=text(dataUrl).match(/^data:([^;,]+)?;base64,(.+)$/i)
+  return match ? Buffer.from(match[2], 'base64') : null
+}
+function imageTransformation(block) {
+  const rawWidth=Number(block.widthPx)||320
+  const rawHeight=Number(block.heightPx)||Math.round(rawWidth*0.625)
+  const width=Math.max(48,Math.min(560,rawWidth))
+  const height=Math.max(24,Math.round(rawHeight*(width/rawWidth)))
+  return {width,height}
 }
 
 function projectCanonicalNodeToDocxBlocks(node={}, sectionDirection='ltr') {
@@ -64,10 +98,14 @@ function buildCanonicalDocxModel(doc={}) {
   const metadata = doc.metadata || {}
   const documentDirection = dir(metadata.direction, metadata.language === 'urdu' ? 'rtl' : 'ltr')
   const blocks=[]
+  const assetsById=new Map((Array.isArray(doc.assets)?doc.assets:[]).map(asset=>[String(asset.id),asset]))
   for (const [index,section] of (Array.isArray(doc.sections)?doc.sections:[]).entries()) {
     const sectionDirection = dir(section?.direction, documentDirection)
     blocks.push({kind:'section_heading',sectionId:section?.id||null,sectionIndex:index+1,direction:sectionDirection,title:text(section?.title??section?.heading??''),titleUrdu:text(section?.titleUrdu??''),instructions:text(section?.instructions??''),marks:section?.authoritativeSectionTotal??section?.operationalSectionTotal??null})
-    for (const node of (Array.isArray(section?.nodes)?section.nodes:[])) blocks.push(...projectCanonicalNodeToDocxBlocks(node,sectionDirection).map(b=>({...b,sectionId:section?.id||null})))
+    for (const node of (Array.isArray(section?.nodes)?section.nodes:[])) {
+      blocks.push(...projectCanonicalNodeToDocxBlocks(node,sectionDirection).map(b=>({...b,sectionId:section?.id||null})))
+      blocks.push(...projectCanonicalCapabilitiesToDocxBlocks(node,assetsById).map(b=>({...b,sectionId:section?.id||null})))
+    }
   }
   return {architectureVersion:'canonical-docx-model-v1',sourceDocumentId:doc.id||null,schemaVersion:doc.schemaVersion??null,direction:documentDirection,metadata:{title:text(metadata.title),examType:text(metadata.examType),className:text(metadata.className??metadata.classLevel),subject:text(metadata.subjectName??metadata.subject),paperCode:text(metadata.paperCode),examDate:text(metadata.examDate),timeAllowed:text(metadata.timeAllowed),session:text(metadata.session),language:text(metadata.language),totalMarks:doc.authority?.authoritativePaperTotal??doc.authority?.storedConfiguredTotal??null},blocks}
 }
@@ -91,6 +129,18 @@ function blockToDocx(block) {
     ;(block.operands||[]).forEach((v,i)=>lines.push(`${i===(block.operands||[]).length-1&&block.operator?block.operator+' ':''}${v}`))
     if(block.result)lines.push(`= ${block.result}`)
     return [new Paragraph({alignment:AlignmentType.RIGHT,children:lines.map((line,i)=>new TextRun({text:line,font:'Courier New',size:24,bold:true,break:i?1:0})),spacing:{after:120}})]
+  }
+  if (block.kind === 'math_capability') {
+    return [new Paragraph({alignment:block.display==='inline'?AlignmentType.LEFT:AlignmentType.CENTER,children:[new TextRun({text:text(block.source),font:'Cambria Math',size:24})],spacing:{before:40,after:100}})]
+  }
+  if (block.kind === 'image_capability') {
+    const data=dataUrlToBuffer(block.contentDataUrl)
+    if (!data || !data.length) {
+      const label=block.altText||block.description||`Image ${block.assetId||''}`
+      return [para(`[Image: ${label}]`,{size:20,italics:true,center:true,after:90})]
+    }
+    const title=block.altText||block.description||'Assessment image'
+    return [new Paragraph({alignment:AlignmentType.CENTER,children:[new ImageRun({data,type:imageTypeFromMime(block.mimeType),transformation:imageTransformation(block),altText:{title,description:block.description||title,name:block.assetId||title}})],spacing:{before:50,after:100}})]
   }
   if (block.kind === 'table') {
     const cols=block.columns||[]
