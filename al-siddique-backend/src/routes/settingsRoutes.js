@@ -387,6 +387,7 @@ router.get('/', protect, async (req, res) => {
         school_code: schoolCode,
         module_access: result.rows[0]?.module_access || {},
         school_access: result.rows[0]?.school_access || [],
+        superapp_modules: result.rows[0]?.superapp_modules || {},
         branding_config: result.rows[0]?.branding_config || {},
       }, req),
     })
