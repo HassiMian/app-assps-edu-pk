@@ -2226,6 +2226,32 @@ assertContains(
   'mark attendance must reconcile selected class after academic hydration.'
 )
 
+assertContains(
+  'al-siddique-frontend/src/App.jsx',
+  '<Route path="/paper-generator/unified" element={<Navigate to="/paper-generator?tab=build" replace />} />',
+  'legacy unified Paper Generator route must continue to open the Paper Workspace build tab.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/PaperGenerator.jsx',
+  "{ id:'build', label:'Paper Workspace' }",
+  'Paper Generator must keep Paper Workspace as the build tab.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/PaperGenerator.jsx',
+  "{ id:'saved', label:'Saved Papers' }",
+  'Paper Generator must keep Saved Papers available.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/PaperGenerator.jsx',
+  "{ id:'bank', label:'Question Bank' }",
+  'Paper Generator must keep Question Bank available.'
+)
+assertContains(
+  'al-siddique-frontend/src/components/Layout/topbar.jsx',
+  "<Bell size={18} color={isLight ? '#061A3A' : '#f8fafc'} />",
+  'notification bell must remain visible in both light and dark themes.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
