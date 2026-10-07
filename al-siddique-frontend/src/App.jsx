@@ -37,7 +37,6 @@ const ProfilePage = lazyRetry(() => import('./pages/ProfilePage'), 'ProfilePage'
 const AIAnalytics = lazyRetry(() => import('./pages/AIAnalytics'), 'AIAnalytics')
 
 const PaperGenerator = lazyRetry(() => import('./Modules/Paper-Generator/PaperGenerator'), 'PaperGenerator')
-const UnifiedPaperGenerator = lazyRetry(() => import('./Modules/Paper-Generator/UnifiedPaperGenerator'), 'UnifiedPaperGenerator')
 const OnlineTest = lazyRetry(() => import('./Modules/Paper-Generator/OnlineTest'), 'OnlineTest')
 const QuestionBank = lazyRetry(() => import('./Modules/Paper-Generator/QuestionBank'), 'QuestionBank')
 const StudentModule = lazyRetry(() => import('./Modules/students/StudentModule'), 'StudentModule')
@@ -312,7 +311,7 @@ function AppRoutes() {
  <Route path="/ai-analytics" element={<W roles={ROLES.leadership} permKey="ai_analytics"><AIAnalytics /></W>} />
 
  <Route path="/paper-generator" element={<W roles={ROLES.academicStaff} permKey="paper_generator"><PaperGenerator /></W>} />
- <Route path="/paper-generator/unified" element={<W roles={ROLES.academicStaff} permKey="paper_generator"><UnifiedPaperGenerator /></W>} />
+ <Route path="/paper-generator/unified" element={<Navigate to="/paper-generator?tab=build" replace />} />
  <Route path="/paper-generator/saved" element={<Navigate to="/paper-generator" replace />} />
  <Route path="/online-test/:examId" element={<W roles={[...ROLES.academicStaff, 'student']}><OnlineTest /></W>} />
 
