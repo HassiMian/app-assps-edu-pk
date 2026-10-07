@@ -329,6 +329,20 @@ router.get('/results', protect, canReadResults, async (req, res) => {
     const params = []
     let idx = 1
 
+    let explicitExamIds = []
+    if (req.query.exam_ids) {
+      explicitExamIds = String(req.query.exam_ids)
+        .split(',')
+        .map(value => Number(value.trim()))
+        .filter(value => Number.isInteger(value) && value > 0)
+      explicitExamIds = [...new Set(explicitExamIds)]
+      if (!explicitExamIds.length || explicitExamIds.length > 100) {
+        return res.status(422).json({ success: false, message: 'exam_ids must contain between 1 and 100 valid exam IDs.' })
+      }
+      filters.push(`er.exam_id = ANY($${idx++}::int[])`)
+      params.push(explicitExamIds)
+    }
+
     if (req.query.student_id) {
       filters.push(`er.student_id = $${idx++}`)
       params.push(req.query.student_id)
@@ -367,7 +381,8 @@ router.get('/results', protect, canReadResults, async (req, res) => {
       params.push(...portalScope.params)
     }
 
-    sql += ` ORDER BY e.created_at DESC, s.class, s.roll_number, er.subject LIMIT 500`
+    sql += ` ORDER BY e.created_at DESC, s.class, s.roll_number, er.subject`
+    if (!explicitExamIds.length) sql += ` LIMIT 500`
     const result = await query(sql, params)
     res.json({ success: true, data: result.rows })
   } catch (err) {

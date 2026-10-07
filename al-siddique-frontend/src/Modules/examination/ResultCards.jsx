@@ -262,12 +262,20 @@ export default function ResultCards() {
 
  setLoading(true)
  try {
- const all = await Promise.all(exams.map(async (item) => {
- const res = await api.get(`/api/exams/results/${item.id}`)
- const rows = res.data.data || []
- return buildPrintCards(rows, item, buildStudentsFromRows(rows))
- }))
- const flat = all.flat()
+ const examIds = exams.map(item => Number(item.id)).filter(Number.isInteger)
+ if (!examIds.length) return alert('No exams are available to load.')
+ const response = await api.get('/api/exams/results', { params: { exam_ids: examIds.join(',') } })
+ const rows = Array.isArray(response.data?.data) ? response.data.data : []
+ const byExam = new Map()
+ rows.forEach(row => {
+ const key = String(row.exam_id)
+ if (!byExam.has(key)) byExam.set(key, [])
+ byExam.get(key).push(row)
+ })
+ const flat = exams.flatMap(item => {
+ const examRows = byExam.get(String(item.id)) || []
+ return buildPrintCards(examRows, item, buildStudentsFromRows(examRows))
+ })
  if (!flat.length) return alert('No marks found in any class/exam')
  setPrintCards(flat)
  setShowParams(true)

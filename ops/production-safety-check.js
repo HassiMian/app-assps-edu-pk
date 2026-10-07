@@ -357,6 +357,24 @@ assertContains(
   'academic setup must tell the operator when cached academic data may be stale.'
 )
 
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'exam_ids must contain between 1 and 100 valid exam IDs.',
+  'exam result batching must bound and validate explicit exam IDs.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  /Promise\.all\(exams\.map[\s\S]{0,240}\/api\/exams\/results\//,
+  'result-card all-exam printing must not fan out one HTTP request per exam.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  "api.get('/api/exams/results', { params: { exam_ids: examIds.join(',') } })",
+  'result-card all-exam printing must use the tenant-scoped batch result endpoint.'
+)
+
 assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
