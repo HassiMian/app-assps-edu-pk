@@ -76,6 +76,14 @@ async function main() {
   await expectJson('fee summary', '/api/fees/summary', token, body => assert(body?.success === true, 'fee summary success=false'))
   await expectJson('daily diary', '/api/daily-diary?limit=1', token, body => assert(body?.success === true && Array.isArray(body?.data), 'daily diary payload invalid'))
 
+  const examList = await expectJson('exam list', '/api/exams', token, body => assert(body?.success === true && Array.isArray(body?.data), 'exam list payload invalid'))
+  const examIds = examList.data.map(item => Number(item.id)).filter(Number.isInteger).slice(0, 8)
+  if (examIds.length) {
+    await expectJson('exam result batch', `/api/exams/results?exam_ids=${encodeURIComponent(examIds.join(','))}`, token, body => {
+      assert(body?.success === true && Array.isArray(body?.data), 'exam result batch payload invalid')
+    })
+  }
+
   await expectPage('dashboard page', '/dashboard')
   await expectPage('attendance page', '/attendance/mark')
   await expectPage('paper generator page', '/paper-generator')
