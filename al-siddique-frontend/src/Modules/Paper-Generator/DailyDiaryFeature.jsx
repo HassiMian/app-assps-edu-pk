@@ -365,7 +365,11 @@ export default function DailyDiaryFeature() {
         } else if (diaries[0]) {
           hydrateDiary(diaries[0])
         }
-      } catch {}
+      } catch (err) {
+        if (cancelled) return
+        console.error('Daily diary list load failed:', err)
+        setStatus('Saved diary list is temporarily unavailable. Existing loaded entries were preserved.')
+      }
     }
     void restore()
     return () => { cancelled = true }
@@ -448,9 +452,14 @@ export default function DailyDiaryFeature() {
         if (typeof window !== 'undefined') setTenantStorageItem('dailyDiaryDraft', JSON.stringify({ ...payload, id: undefined }))
       }
       setSavedDiaryId(null)
-      const diaries = await loadSavedDiaries().catch(() => [])
-      if (Array.isArray(diaries)) setSavedDiaries(diaries)
-      setStatus('Draft saved to server successfully.')
+      try {
+        const diaries = await loadSavedDiaries()
+        setSavedDiaries(diaries)
+        setStatus('Draft saved to server successfully.')
+      } catch (listErr) {
+        console.error('Daily diary list refresh failed after save:', listErr)
+        setStatus('Draft saved to server successfully, but the saved diary list could not be refreshed.')
+      }
     } catch (err) {
       console.error('Daily diary save error:', err)
       const serverMsg = err.response?.data?.message
@@ -602,8 +611,13 @@ export default function DailyDiaryFeature() {
     if (!window.confirm('Delete this saved diary draft?')) return
     try {
       await api.delete(`/api/daily-diary/${record.id}`)
-      const diaries = await loadSavedDiaries().catch(() => [])
-      setSavedDiaries(Array.isArray(diaries) ? diaries : [])
+      try {
+        const diaries = await loadSavedDiaries()
+        setSavedDiaries(diaries)
+      } catch (listErr) {
+        console.error('Daily diary list refresh failed after delete:', listErr)
+        setSavedDiaries((current) => current.filter((item) => Number(item.id) !== Number(record.id)))
+      }
       if (savedDiaryId === record.id) {
         setSavedDiaryId(null)
         if (typeof window !== 'undefined') {
@@ -619,7 +633,7 @@ export default function DailyDiaryFeature() {
           }
         }
       }
-      setStatus('Draft deleted.')
+      setStatus('Draft deleted. Saved diary list reflects confirmed local removal if server refresh was unavailable.')
       window.setTimeout(() => setStatus(''), 2500)
     } catch (err) {
       console.error('Delete diary error:', err)

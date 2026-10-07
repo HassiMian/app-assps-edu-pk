@@ -275,6 +275,18 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryFeature.jsx',
+  /loadSavedDiaries\(\)\.catch\(\(\) => \[\]\)/,
+  'daily diary list failures must not be converted into authoritative empty data.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/DailyDiaryFeature.jsx',
+  'Saved diary list is temporarily unavailable. Existing loaded entries were preserved.',
+  'daily diary UI must surface list-source failure without erasing known state.'
+)
+
 assertContains(
   'al-siddique-backend/src/routes/eventsRoutes.js',
   'normalizeEventPayload',
