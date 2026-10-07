@@ -28,3 +28,11 @@
 ## Backups retained
 
 Operational backups under `/var/www/apex-os.bak-*` and `/var/www/apex-backend.bak-*` are retained until a later deliberate retention cleanup. Do not delete them as part of routine releases.
+
+## Synthetic fee-write release gate
+
+Before a fee-affecting production release, run the opt-in synthetic write gate after the backend is staged and healthy:
+
+`ASSPS_SMOKE_SCHOOL_ID=<school-id> ASSPS_SMOKE_ALLOW_WRITES=true npm run smoke:production-fee-write`
+
+The gate creates a uniquely named temporary student and challan, exercises the real `/api/fees/:id/pay` HTTP endpoint, verifies the paid state and append-only ledger row, and removes all synthetic rows in `finally`. It must never be run without the explicit write opt-in.
