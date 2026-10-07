@@ -2236,6 +2236,17 @@ assertContains(
   'public settings must retain regression coverage that blocks internal superapp entitlement metadata.'
 )
 
+assertContains(
+  'al-siddique-backend/src/package.json',
+  'verify:live-backend-drift',
+  'backend package must retain the live runtime/compatibility artifact drift verification command.'
+)
+assertContains(
+  'ops/deploy-production.ps1',
+  'liveArtifactDriftCheck.js',
+  'production deploy must verify backend runtime/compatibility artifact drift before restart.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
