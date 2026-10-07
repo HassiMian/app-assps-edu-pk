@@ -151,6 +151,7 @@ function TimetableModule() {
  
  const [schoolClass, setSchoolClass] = useState(classOptions[0] || '')
  const [teacherOptions, setTeacherOptions] = useState([])
+ const [teacherLoadError, setTeacherLoadError] = useState('')
  
  const selectedAcademicClass = activeClasses.find(c => c.name === schoolClass)
  const sectionOptions = selectedAcademicClass?.sections?.length ? selectedAcademicClass.sections : []
@@ -175,6 +176,7 @@ function TimetableModule() {
  let cancelled = false
  async function loadTeachers() {
  try {
+ setTeacherLoadError('')
  const response = await api.get('/api/employees')
  const rows = Array.isArray(response.data?.data) ? response.data.data : []
  const names = rows
@@ -186,8 +188,8 @@ function TimetableModule() {
  .map(employee => String(employee?.name || '').trim())
  .filter(Boolean)
  if (!cancelled) setTeacherOptions([...new Set(names)])
- } catch {
- if (!cancelled) setTeacherOptions([])
+ } catch (err) {
+ if (!cancelled) setTeacherLoadError(err.response?.data?.message || 'Teacher list could not be refreshed. Existing loaded teacher options were preserved.')
  }
  }
  void loadTeachers()
@@ -267,6 +269,11 @@ function TimetableModule() {
  </div>
 
  <div style={{ display: 'grid', gap: 22 }}>
+ {teacherLoadError && (
+ <div className="super-module-card" style={{ ...card, padding:'12px 14px', color:'var(--apex-action-danger)', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)' }}>
+ {teacherLoadError}
+ </div>
+ )}
  <div className="super-module-card timetable-controls" style={{ ...card, padding: 24, display: 'grid', gridTemplateColumns: 'minmax(180px,1fr) minmax(160px,1fr) minmax(160px,0.7fr)', gap: 20 }}>
  <div>
  <span style={labelStyle}>Class</span>

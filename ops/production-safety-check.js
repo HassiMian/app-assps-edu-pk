@@ -316,6 +316,30 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  /catch \([^)]*\)[\s\S]{0,160}setMonthlyTrend\(\[\]\)[\s\S]{0,120}setMonthlyClassSummary\(\[\]\)/,
+  'attendance analytics source failures must preserve the last known-good monthly analytics.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  'const [analyticsError, setAnalyticsError] = useState',
+  'attendance analytics source availability must be represented separately from empty analytics data.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  /catch \([^)]*\)[\s\S]{0,140}setTeacherOptions\(\[\]\)/,
+  'timetable teacher-source failures must preserve the last known-good teacher list.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  'const [teacherLoadError, setTeacherLoadError] = useState',
+  'timetable teacher-source availability must be represented separately from an empty teacher list.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'

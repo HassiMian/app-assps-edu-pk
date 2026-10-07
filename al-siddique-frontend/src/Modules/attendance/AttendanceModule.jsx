@@ -82,6 +82,7 @@ export default function AttendanceModule() {
  const [loading, setLoading] = useState(false);
  const [monthlyTrend, setMonthlyTrend] = useState([]);
  const [monthlyClassSummary, setMonthlyClassSummary] = useState([]);
+ const [analyticsError, setAnalyticsError] = useState('');
  const [loadError, setLoadError] = useState('');
  const [saveError, setSaveError] = useState('');
 
@@ -133,6 +134,7 @@ export default function AttendanceModule() {
  if (tab !== 'analytics' || !selectedClass || !selectedSection) return
  let cancelled = false
  async function loadMonthlyAnalytics() {
+ setAnalyticsError('')
  const [yearText, monthText] = String(selectedDate || '').split('-')
  const year = Number(yearText)
  const month = Number(monthText)
@@ -151,8 +153,8 @@ export default function AttendanceModule() {
  setMonthlyTrend(Array.isArray(trendResponse.data?.data) ? trendResponse.data.data : [])
  setMonthlyClassSummary(Array.isArray(classResponse.data?.data) ? classResponse.data.data : [])
  }
- } catch {
- if (!cancelled) { setMonthlyTrend([]); setMonthlyClassSummary([]) }
+ } catch (err) {
+ if (!cancelled) setAnalyticsError(err.response?.data?.message || 'Monthly attendance analytics could not be refreshed. Existing loaded analytics were preserved.')
  }
  }
  void loadMonthlyAnalytics()
@@ -465,6 +467,11 @@ export default function AttendanceModule() {
  {/* ANALYTICS TAB */}
  {tab === "analytics" && (
  <div>
+ {analyticsError && (
+ <div className="super-module-card" style={{ ...card, marginBottom:16, padding:'12px 14px', color:'var(--apex-action-danger)', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)' }}>
+ {analyticsError}
+ </div>
+ )}
  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
  <div className="super-module-card" style={card}>
  <h3 style={{ color: "var(--apex-action-highlight)", fontSize: 15, fontWeight: 700, marginBottom: 20 }}>Monthly Attendance — {new Date(selectedDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</h3>
