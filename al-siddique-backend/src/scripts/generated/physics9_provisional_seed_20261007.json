@@ -1,0 +1,1824 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-PHY-2025-C01-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "SI units",
+      "category": "mcq",
+      "question_text": "Which SI base unit is used for length?",
+      "options": [
+        {
+          "id": "A",
+          "text": "metre"
+        },
+        {
+          "id": "B",
+          "text": "newton"
+        },
+        {
+          "id": "C",
+          "text": "joule"
+        },
+        {
+          "id": "D",
+          "text": "pascal"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "metre",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 5",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "SI units"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C01-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "measurement quality",
+      "category": "mcq",
+      "question_text": "Which term describes closeness of repeated measurements to one another?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Precision"
+        },
+        {
+          "id": "B",
+          "text": "Power"
+        },
+        {
+          "id": "C",
+          "text": "Momentum"
+        },
+        {
+          "id": "D",
+          "text": "Density"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Precision",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 5",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "measurement quality"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C01-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "physical quantities",
+      "category": "short",
+      "question_text": "Differentiate between base and derived physical quantities.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Base quantities are independent fundamental quantities; derived quantities are formed by mathematical combinations of base quantities, such as speed or force.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 5",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "physical quantities"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C01-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "measurement quality",
+      "category": "short",
+      "question_text": "Differentiate accuracy and precision.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accuracy is closeness to the accepted or true value; precision is closeness of repeated measurements to each other.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 5",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "measurement quality"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C01-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "scientific notation",
+      "category": "numerical",
+      "question_text": "Write 0.00072 m in scientific notation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "0.00072 m = 7.2 × 10^-4 m.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 5",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scientific notation"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C01-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Physical Quantities and Measurements",
+      "topic_name": "measuring instruments",
+      "category": "long",
+      "question_text": "Explain how least count and correct instrument choice affect measurement quality.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for defining least count, linking smaller least count with finer resolution, selecting an instrument suited to the dimension, reading scale correctly without parallax, and reporting an appropriate number of significant figures.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 5",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "measuring instruments"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C02-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "scalars and vectors",
+      "category": "mcq",
+      "question_text": "Which quantity is a vector?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Velocity"
+        },
+        {
+          "id": "B",
+          "text": "Time"
+        },
+        {
+          "id": "C",
+          "text": "Temperature"
+        },
+        {
+          "id": "D",
+          "text": "Energy"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 28",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scalars and vectors"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C02-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "motion",
+      "category": "mcq",
+      "question_text": "Acceleration is the rate of change of what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Velocity"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Distance only"
+        },
+        {
+          "id": "D",
+          "text": "Energy"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 28",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "motion"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C02-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "distance and displacement",
+      "category": "short",
+      "question_text": "Differentiate distance and displacement.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Distance is the total path length travelled and is scalar; displacement is the straight-line change in position with direction and is vector.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 28",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "distance and displacement"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C02-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "graphs",
+      "category": "short",
+      "question_text": "What does the gradient of a velocity-time graph represent?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It represents acceleration.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 28",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "graphs"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C02-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "uniform acceleration",
+      "category": "numerical",
+      "question_text": "A car starts at 5 m/s and accelerates uniformly at 2 m/s² for 4 s. Find its final velocity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Using v = u + at: v = 5 + (2)(4) = 13 m/s.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 28",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "uniform acceleration"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C02-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Kinematics",
+      "topic_name": "motion graphs",
+      "category": "long",
+      "question_text": "Explain how distance-time and velocity-time graphs can be used to analyze motion.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for slope of distance-time graph as speed, horizontal distance-time line as rest, slope of velocity-time graph as acceleration, area under velocity-time graph as displacement, and interpretation of uniform/non-uniform motion.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 28",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "motion graphs"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C03-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "Newton laws",
+      "category": "mcq",
+      "question_text": "Newton’s second law relates net force to mass and what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Acceleration"
+        },
+        {
+          "id": "B",
+          "text": "Temperature"
+        },
+        {
+          "id": "C",
+          "text": "Volume"
+        },
+        {
+          "id": "D",
+          "text": "Charge"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Acceleration",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 52",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Newton laws"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C03-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "momentum",
+      "category": "mcq",
+      "question_text": "Momentum equals mass multiplied by what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Velocity"
+        },
+        {
+          "id": "B",
+          "text": "Acceleration"
+        },
+        {
+          "id": "C",
+          "text": "Power"
+        },
+        {
+          "id": "D",
+          "text": "Pressure"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Velocity",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 52",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "momentum"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C03-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "mass and weight",
+      "category": "short",
+      "question_text": "Differentiate mass and weight.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Mass measures amount of matter/inertia and is measured in kg; weight is gravitational force W = mg and is measured in newtons.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 52",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mass and weight"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C03-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "friction",
+      "category": "short",
+      "question_text": "State one useful and one harmful effect of friction.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Useful: provides grip/braking. Harmful: causes wear or dissipates mechanical energy as heat.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 52",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "friction"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C03-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "force and acceleration",
+      "category": "numerical",
+      "question_text": "What net force is required to accelerate a 4 kg object at 3 m/s²?",
+      "options": [],
+      "correct_option": "",
+      "answer": "F = ma = 4 × 3 = 12 N.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 52",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "force and acceleration"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C03-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Dynamics",
+      "topic_name": "Newton laws",
+      "category": "long",
+      "question_text": "Explain Newton’s three laws of motion with one everyday example for each.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for correct statement of each law and suitable examples, with remaining marks for clear relation among force, inertia, acceleration and action-reaction pairs.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 52",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Newton laws"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C04-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Forces",
+      "topic_name": "moment of force",
+      "category": "mcq",
+      "question_text": "The turning effect of a force about a pivot is called what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Moment"
+        },
+        {
+          "id": "B",
+          "text": "Pressure"
+        },
+        {
+          "id": "C",
+          "text": "Density"
+        },
+        {
+          "id": "D",
+          "text": "Impulse only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Moment",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 80",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "moment of force"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C04-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Forces",
+      "topic_name": "equilibrium",
+      "category": "mcq",
+      "question_text": "For rotational equilibrium, clockwise moments are equal to what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Anticlockwise moments"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Pressure"
+        },
+        {
+          "id": "D",
+          "text": "Kinetic energy"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Anticlockwise moments",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 80",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C04-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Forces",
+      "topic_name": "centre of gravity",
+      "category": "short",
+      "question_text": "What is meant by centre of gravity?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is the point through which the resultant weight of a body may be considered to act.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 80",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "centre of gravity"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C04-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Forces",
+      "topic_name": "stability",
+      "category": "short",
+      "question_text": "How can lowering the centre of gravity improve stability?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It makes tipping more difficult because a larger tilt is generally needed before the line of action of weight passes outside the base.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 80",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "stability"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C04-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Forces",
+      "topic_name": "moment of force",
+      "category": "numerical",
+      "question_text": "A 20 N force acts perpendicular to a spanner 0.30 m from the pivot. Calculate the moment.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Moment = F × perpendicular distance = 20 × 0.30 = 6.0 N·m.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 80",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "moment of force"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C04-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Turning Effects of Forces",
+      "topic_name": "equilibrium",
+      "category": "long",
+      "question_text": "State and explain the conditions for equilibrium of a rigid body.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for zero resultant force, zero resultant moment, equality of clockwise and anticlockwise moments about a point, translational equilibrium, and rotational equilibrium.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 80",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C05-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "work",
+      "category": "mcq",
+      "question_text": "Work done by a constant force equals force multiplied by what component?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Displacement in the force direction"
+        },
+        {
+          "id": "B",
+          "text": "Mass only"
+        },
+        {
+          "id": "C",
+          "text": "Time only"
+        },
+        {
+          "id": "D",
+          "text": "Temperature"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Displacement in the force direction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 105",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "work"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C05-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "power",
+      "category": "mcq",
+      "question_text": "Power is the rate of doing what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Work"
+        },
+        {
+          "id": "B",
+          "text": "Mass"
+        },
+        {
+          "id": "C",
+          "text": "Distance only"
+        },
+        {
+          "id": "D",
+          "text": "Volume"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Work",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 105",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "power"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C05-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "energy",
+      "category": "short",
+      "question_text": "Differentiate kinetic and gravitational potential energy.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Kinetic energy is energy due to motion; gravitational potential energy is energy due to position in a gravitational field.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 105",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "energy"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C05-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "conservation of energy",
+      "category": "short",
+      "question_text": "State the law of conservation of energy.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Energy cannot be created or destroyed; it can be transferred or transformed, while total energy of an isolated system remains constant.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 105",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "conservation of energy"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C05-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "power",
+      "category": "numerical",
+      "question_text": "A machine does 1200 J of work in 6 s. Calculate its power.",
+      "options": [],
+      "correct_option": "",
+      "answer": "P = W/t = 1200/6 = 200 W.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 105",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "power"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C05-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Work, Energy and Power",
+      "topic_name": "energy transformations",
+      "category": "long",
+      "question_text": "Explain energy transformations in a falling object and relate them to conservation of energy.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for gravitational potential energy decreasing, kinetic energy increasing, total mechanical energy ideally remaining constant, effect of air resistance transferring energy to surroundings, and correct use of conservation principle.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 105",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "energy transformations"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C06-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "Hooke law",
+      "category": "mcq",
+      "question_text": "Within the elastic limit, extension of a spring is directly proportional to what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Applied force"
+        },
+        {
+          "id": "B",
+          "text": "Density"
+        },
+        {
+          "id": "C",
+          "text": "Temperature only"
+        },
+        {
+          "id": "D",
+          "text": "Time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Applied force",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 127",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Hooke law"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C06-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "pressure",
+      "category": "mcq",
+      "question_text": "Pressure equals force divided by what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Area"
+        },
+        {
+          "id": "B",
+          "text": "Volume"
+        },
+        {
+          "id": "C",
+          "text": "Mass"
+        },
+        {
+          "id": "D",
+          "text": "Distance"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Area",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 127",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "pressure"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C06-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "density",
+      "category": "short",
+      "question_text": "Define density and give its SI unit.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Density is mass per unit volume, ρ = m/V. Its SI unit is kg/m³.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 127",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "density"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C06-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "Pascal law",
+      "category": "short",
+      "question_text": "State Pascal’s law.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Pressure applied to a confined fluid is transmitted equally and undiminished throughout the fluid in all directions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 127",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Pascal law"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C06-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "pressure",
+      "category": "numerical",
+      "question_text": "A force of 600 N acts normally on an area of 0.20 m². Calculate pressure.",
+      "options": [],
+      "correct_option": "",
+      "answer": "P = F/A = 600/0.20 = 3000 Pa.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 127",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "pressure"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C06-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Mechanical Properties of Matter",
+      "topic_name": "fluids and pressure",
+      "category": "long",
+      "question_text": "Explain how pressure in fluids leads to useful hydraulic applications.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for definition P=F/A, pressure transmission in confined liquid, Pascal’s law, force multiplication using different piston areas, and a suitable hydraulic application.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 127",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "fluids and pressure"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C07-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "temperature and heat",
+      "category": "mcq",
+      "question_text": "Which statement best distinguishes temperature from heat?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Temperature measures thermal state while heat is energy transferred due to temperature difference"
+        },
+        {
+          "id": "B",
+          "text": "They are identical quantities"
+        },
+        {
+          "id": "C",
+          "text": "Heat is measured in kelvin"
+        },
+        {
+          "id": "D",
+          "text": "Temperature is measured in joules"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Temperature measures thermal state while heat is energy transferred due to temperature difference",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 148",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "temperature and heat"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C07-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "particle model",
+      "category": "mcq",
+      "question_text": "Heating a substance generally causes its particles to do what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gain kinetic energy"
+        },
+        {
+          "id": "B",
+          "text": "Lose all motion"
+        },
+        {
+          "id": "C",
+          "text": "Lose mass"
+        },
+        {
+          "id": "D",
+          "text": "Become electrically neutral in every case"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Gain kinetic energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 148",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "particle model"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C07-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "kinetic molecular theory",
+      "category": "short",
+      "question_text": "How does the kinetic molecular model explain heating?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heating increases the average kinetic energy of particles, so their random motion becomes more vigorous.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 148",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "kinetic molecular theory"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C07-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "thermometers",
+      "category": "short",
+      "question_text": "What two properties are important when choosing a thermometer for a task?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Suitable range and sensitivity/resolution are important; response time and linearity can also matter.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 148",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "thermometers"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C07-N01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "temperature scale",
+      "category": "numerical",
+      "question_text": "Convert 27 °C to kelvin using K = °C + 273.",
+      "options": [],
+      "correct_option": "",
+      "answer": "27 + 273 = 300 K.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 148",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "temperature scale"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C07-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thermal Properties of Matter",
+      "topic_name": "thermal behavior",
+      "category": "long",
+      "question_text": "Explain the particle-model differences among solids, liquids and gases and how heating affects them.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for particle arrangement/motion in solids, liquids and gases, differences in intermolecular spacing/forces, increased kinetic energy on heating, and relation to expansion or change of state.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 148",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "thermal behavior"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C08-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnetic poles",
+      "category": "mcq",
+      "question_text": "What happens when two like magnetic poles are brought together?",
+      "options": [
+        {
+          "id": "A",
+          "text": "They repel"
+        },
+        {
+          "id": "B",
+          "text": "They attract"
+        },
+        {
+          "id": "C",
+          "text": "They disappear"
+        },
+        {
+          "id": "D",
+          "text": "They produce gravity only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "They repel",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 161",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "magnetic poles"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C08-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnetic field",
+      "category": "mcq",
+      "question_text": "Outside a bar magnet, magnetic field lines are conventionally drawn from which pole to which?",
+      "options": [
+        {
+          "id": "A",
+          "text": "North to south"
+        },
+        {
+          "id": "B",
+          "text": "South to north only outside"
+        },
+        {
+          "id": "C",
+          "text": "East to west"
+        },
+        {
+          "id": "D",
+          "text": "They have no direction"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "North to south",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 161",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "magnetic field"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C08-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "induced magnetism",
+      "category": "short",
+      "question_text": "What is induced magnetism?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is magnetization of a magnetic material caused by the presence of an external magnetic field, often temporarily.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 161",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "induced magnetism"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C08-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "electromagnets",
+      "category": "short",
+      "question_text": "Why is soft iron commonly used as the core of an electromagnet?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It magnetizes strongly when current flows and loses most of its magnetism quickly when the field is removed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 161",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electromagnets"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C08-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnetic fields",
+      "category": "long",
+      "question_text": "Describe magnetic field patterns around a bar magnet and explain how an electromagnet can be made stronger.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for field direction, closer lines indicating stronger field, field shape around poles, increasing current/turns, and using a suitable soft-iron core.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 161",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "magnetic fields"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C08-L02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Magnetism",
+      "topic_name": "magnet applications",
+      "category": "long",
+      "question_text": "Compare permanent magnets and electromagnets and give two uses of each type.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for persistence/control differences, material/core differences, two valid permanent-magnet uses, and two valid electromagnet uses.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 161",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "magnet applications"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C09-M01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Nature of Science",
+      "topic_name": "scope of physics",
+      "category": "mcq",
+      "question_text": "Physics primarily studies matter, energy, space, time and what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Their interactions"
+        },
+        {
+          "id": "B",
+          "text": "Only living cells"
+        },
+        {
+          "id": "C",
+          "text": "Only historical events"
+        },
+        {
+          "id": "D",
+          "text": "Only chemical names"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Their interactions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 181",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scope of physics"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C09-M02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Nature of Science",
+      "topic_name": "scientific method",
+      "category": "mcq",
+      "question_text": "A scientific hypothesis should be what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Testable"
+        },
+        {
+          "id": "B",
+          "text": "Impossible to check"
+        },
+        {
+          "id": "C",
+          "text": "Based only on authority"
+        },
+        {
+          "id": "D",
+          "text": "Unrelated to evidence"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Testable",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 181",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scientific method"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C09-S01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Nature of Science",
+      "topic_name": "branches of physics",
+      "category": "short",
+      "question_text": "Give two examples of interdisciplinary fields involving physics.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include biophysics, astrophysics, geophysics, medical physics, materials science or physical chemistry; any two suitable examples earn credit.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 181",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "branches of physics"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C09-S02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Nature of Science",
+      "topic_name": "scientific method",
+      "category": "short",
+      "question_text": "Why is reproducibility important in science?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Independent repetition helps show that a result is reliable and not due to chance, bias or an unnoticed procedural error.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 181",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scientific method"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C09-L01",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Nature of Science",
+      "topic_name": "science and technology",
+      "category": "long",
+      "question_text": "Explain how scientific knowledge and technology influence each other.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for science producing explanations, technology applying knowledge, technology enabling new measurements/experiments, feedback from applications creating new scientific questions, and a relevant example.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 181",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "science and technology"
+      ]
+    },
+    {
+      "id": "IX-PHY-2025-C09-L02",
+      "class_level": "9th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Nature of Science",
+      "topic_name": "scientific inquiry",
+      "category": "long",
+      "question_text": "Describe a sound scientific investigation from question formation to communication of results.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for clear question, testable hypothesis, controlled method/data collection, analysis/conclusion, and communication/reproducibility.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-011 | a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794 | page 181",
+      "tags": [
+        "grade9",
+        "physics",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "scientific inquiry"
+      ]
+    }
+  ]
+}

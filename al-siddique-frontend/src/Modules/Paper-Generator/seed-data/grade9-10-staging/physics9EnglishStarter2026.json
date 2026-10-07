@@ -1,0 +1,3980 @@
+{
+  "schemaVersion": "assps-physics9-english-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-011",
+  "sourcePdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+  "scope": "CURRENT_TEXTBOOK_RAPID_PROVISIONAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-PHY-2025-C01-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "SI units",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "SI units"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which SI base unit is used for length?",
+          "answer": "metre",
+          "options": [
+            {
+              "id": "A",
+              "text": "metre"
+            },
+            {
+              "id": "B",
+              "text": "newton"
+            },
+            {
+              "id": "C",
+              "text": "joule"
+            },
+            {
+              "id": "D",
+              "text": "pascal"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C01-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "measurement quality",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "measurement quality"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which term describes closeness of repeated measurements to one another?",
+          "answer": "Precision",
+          "options": [
+            {
+              "id": "A",
+              "text": "Precision"
+            },
+            {
+              "id": "B",
+              "text": "Power"
+            },
+            {
+              "id": "C",
+              "text": "Momentum"
+            },
+            {
+              "id": "D",
+              "text": "Density"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C01-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "physical quantities",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "physical quantities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate between base and derived physical quantities.",
+          "answer": "Base quantities are independent fundamental quantities; derived quantities are formed by mathematical combinations of base quantities, such as speed or force."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C01-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "measurement quality",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "measurement quality"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate accuracy and precision.",
+          "answer": "Accuracy is closeness to the accepted or true value; precision is closeness of repeated measurements to each other."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C01-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "scientific notation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "scientific notation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Write 0.00072 m in scientific notation.",
+          "answer": "0.00072 m = 7.2 × 10^-4 m."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C01-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "measuring instruments",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "measuring instruments"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how least count and correct instrument choice affect measurement quality.",
+          "answer": "Award marks for defining least count, linking smaller least count with finer resolution, selecting an instrument suited to the dimension, reading scale correctly without parallax, and reporting an appropriate number of significant figures."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C02-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "scalars and vectors",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "scalars and vectors"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which quantity is a vector?",
+          "answer": "Velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Velocity"
+            },
+            {
+              "id": "B",
+              "text": "Time"
+            },
+            {
+              "id": "C",
+              "text": "Temperature"
+            },
+            {
+              "id": "D",
+              "text": "Energy"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C02-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "motion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "motion"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Acceleration is the rate of change of what?",
+          "answer": "Velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Velocity"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Distance only"
+            },
+            {
+              "id": "D",
+              "text": "Energy"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C02-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "distance and displacement",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "distance and displacement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate distance and displacement.",
+          "answer": "Distance is the total path length travelled and is scalar; displacement is the straight-line change in position with direction and is vector."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C02-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "graphs",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What does the gradient of a velocity-time graph represent?",
+          "answer": "It represents acceleration."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C02-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "uniform acceleration",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "uniform acceleration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "A car starts at 5 m/s and accelerates uniformly at 2 m/s² for 4 s. Find its final velocity.",
+          "answer": "Using v = u + at: v = 5 + (2)(4) = 13 m/s."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C02-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "motion graphs",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 28,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "motion graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how distance-time and velocity-time graphs can be used to analyze motion.",
+          "answer": "Award marks for slope of distance-time graph as speed, horizontal distance-time line as rest, slope of velocity-time graph as acceleration, area under velocity-time graph as displacement, and interpretation of uniform/non-uniform motion."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C03-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Newton laws",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Newton laws"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Newton’s second law relates net force to mass and what?",
+          "answer": "Acceleration",
+          "options": [
+            {
+              "id": "A",
+              "text": "Acceleration"
+            },
+            {
+              "id": "B",
+              "text": "Temperature"
+            },
+            {
+              "id": "C",
+              "text": "Volume"
+            },
+            {
+              "id": "D",
+              "text": "Charge"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C03-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "momentum",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "momentum"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Momentum equals mass multiplied by what?",
+          "answer": "Velocity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Velocity"
+            },
+            {
+              "id": "B",
+              "text": "Acceleration"
+            },
+            {
+              "id": "C",
+              "text": "Power"
+            },
+            {
+              "id": "D",
+              "text": "Pressure"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C03-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "mass and weight",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "mass and weight"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate mass and weight.",
+          "answer": "Mass measures amount of matter/inertia and is measured in kg; weight is gravitational force W = mg and is measured in newtons."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C03-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "friction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "friction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one useful and one harmful effect of friction.",
+          "answer": "Useful: provides grip/braking. Harmful: causes wear or dissipates mechanical energy as heat."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C03-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "force and acceleration",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "force and acceleration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What net force is required to accelerate a 4 kg object at 3 m/s²?",
+          "answer": "F = ma = 4 × 3 = 12 N."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C03-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Newton laws",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 52,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Newton laws"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain Newton’s three laws of motion with one everyday example for each.",
+          "answer": "Award marks for correct statement of each law and suitable examples, with remaining marks for clear relation among force, inertia, acceleration and action-reaction pairs."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C04-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "moment of force",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 80,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "moment of force"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "The turning effect of a force about a pivot is called what?",
+          "answer": "Moment",
+          "options": [
+            {
+              "id": "A",
+              "text": "Moment"
+            },
+            {
+              "id": "B",
+              "text": "Pressure"
+            },
+            {
+              "id": "C",
+              "text": "Density"
+            },
+            {
+              "id": "D",
+              "text": "Impulse only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C04-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "equilibrium",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 80,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "For rotational equilibrium, clockwise moments are equal to what?",
+          "answer": "Anticlockwise moments",
+          "options": [
+            {
+              "id": "A",
+              "text": "Anticlockwise moments"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Pressure"
+            },
+            {
+              "id": "D",
+              "text": "Kinetic energy"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C04-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "centre of gravity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 80,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "centre of gravity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is meant by centre of gravity?",
+          "answer": "It is the point through which the resultant weight of a body may be considered to act."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C04-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "stability",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 80,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "stability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How can lowering the centre of gravity improve stability?",
+          "answer": "It makes tipping more difficult because a larger tilt is generally needed before the line of action of weight passes outside the base."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C04-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "moment of force",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 80,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "moment of force"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "A 20 N force acts perpendicular to a spanner 0.30 m from the pivot. Calculate the moment.",
+          "answer": "Moment = F × perpendicular distance = 20 × 0.30 = 6.0 N·m."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C04-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "equilibrium",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 80,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State and explain the conditions for equilibrium of a rigid body.",
+          "answer": "Award marks for zero resultant force, zero resultant moment, equality of clockwise and anticlockwise moments about a point, translational equilibrium, and rotational equilibrium."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C05-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "work",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 105,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "work"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Work done by a constant force equals force multiplied by what component?",
+          "answer": "Displacement in the force direction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Displacement in the force direction"
+            },
+            {
+              "id": "B",
+              "text": "Mass only"
+            },
+            {
+              "id": "C",
+              "text": "Time only"
+            },
+            {
+              "id": "D",
+              "text": "Temperature"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C05-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 105,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "power"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Power is the rate of doing what?",
+          "answer": "Work",
+          "options": [
+            {
+              "id": "A",
+              "text": "Work"
+            },
+            {
+              "id": "B",
+              "text": "Mass"
+            },
+            {
+              "id": "C",
+              "text": "Distance only"
+            },
+            {
+              "id": "D",
+              "text": "Volume"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C05-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "energy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 105,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate kinetic and gravitational potential energy.",
+          "answer": "Kinetic energy is energy due to motion; gravitational potential energy is energy due to position in a gravitational field."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C05-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "conservation of energy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 105,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "conservation of energy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State the law of conservation of energy.",
+          "answer": "Energy cannot be created or destroyed; it can be transferred or transformed, while total energy of an isolated system remains constant."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C05-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "power",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 105,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "power"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "A machine does 1200 J of work in 6 s. Calculate its power.",
+          "answer": "P = W/t = 1200/6 = 200 W."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C05-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "energy transformations",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 105,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "energy transformations"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain energy transformations in a falling object and relate them to conservation of energy.",
+          "answer": "Award marks for gravitational potential energy decreasing, kinetic energy increasing, total mechanical energy ideally remaining constant, effect of air resistance transferring energy to surroundings, and correct use of conservation principle."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C06-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Hooke law",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hooke law"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Within the elastic limit, extension of a spring is directly proportional to what?",
+          "answer": "Applied force",
+          "options": [
+            {
+              "id": "A",
+              "text": "Applied force"
+            },
+            {
+              "id": "B",
+              "text": "Density"
+            },
+            {
+              "id": "C",
+              "text": "Temperature only"
+            },
+            {
+              "id": "D",
+              "text": "Time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C06-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "pressure",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "pressure"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Pressure equals force divided by what?",
+          "answer": "Area",
+          "options": [
+            {
+              "id": "A",
+              "text": "Area"
+            },
+            {
+              "id": "B",
+              "text": "Volume"
+            },
+            {
+              "id": "C",
+              "text": "Mass"
+            },
+            {
+              "id": "D",
+              "text": "Distance"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C06-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "density",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "density"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Define density and give its SI unit.",
+          "answer": "Density is mass per unit volume, ρ = m/V. Its SI unit is kg/m³."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C06-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Pascal law",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Pascal law"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State Pascal’s law.",
+          "answer": "Pressure applied to a confined fluid is transmitted equally and undiminished throughout the fluid in all directions."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C06-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "pressure",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "pressure"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "A force of 600 N acts normally on an area of 0.20 m². Calculate pressure.",
+          "answer": "P = F/A = 600/0.20 = 3000 Pa."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C06-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "fluids and pressure",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "fluids and pressure"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how pressure in fluids leads to useful hydraulic applications.",
+          "answer": "Award marks for definition P=F/A, pressure transmission in confined liquid, Pascal’s law, force multiplication using different piston areas, and a suitable hydraulic application."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C07-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "temperature and heat",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 148,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "temperature and heat"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which statement best distinguishes temperature from heat?",
+          "answer": "Temperature measures thermal state while heat is energy transferred due to temperature difference",
+          "options": [
+            {
+              "id": "A",
+              "text": "Temperature measures thermal state while heat is energy transferred due to temperature difference"
+            },
+            {
+              "id": "B",
+              "text": "They are identical quantities"
+            },
+            {
+              "id": "C",
+              "text": "Heat is measured in kelvin"
+            },
+            {
+              "id": "D",
+              "text": "Temperature is measured in joules"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C07-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "particle model",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 148,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "particle model"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Heating a substance generally causes its particles to do what?",
+          "answer": "Gain kinetic energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Gain kinetic energy"
+            },
+            {
+              "id": "B",
+              "text": "Lose all motion"
+            },
+            {
+              "id": "C",
+              "text": "Lose mass"
+            },
+            {
+              "id": "D",
+              "text": "Become electrically neutral in every case"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C07-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "kinetic molecular theory",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 148,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "kinetic molecular theory"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How does the kinetic molecular model explain heating?",
+          "answer": "Heating increases the average kinetic energy of particles, so their random motion becomes more vigorous."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C07-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "thermometers",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 148,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "thermometers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What two properties are important when choosing a thermometer for a task?",
+          "answer": "Suitable range and sensitivity/resolution are important; response time and linearity can also matter."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C07-N01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "temperature scale",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 148,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "temperature scale"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Convert 27 °C to kelvin using K = °C + 273.",
+          "answer": "27 + 273 = 300 K."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C07-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "thermal behavior",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 148,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "thermal behavior"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain the particle-model differences among solids, liquids and gases and how heating affects them.",
+          "answer": "Award marks for particle arrangement/motion in solids, liquids and gases, differences in intermolecular spacing/forces, increased kinetic energy on heating, and relation to expansion or change of state."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C08-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "magnetic poles",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 161,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "magnetic poles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What happens when two like magnetic poles are brought together?",
+          "answer": "They repel",
+          "options": [
+            {
+              "id": "A",
+              "text": "They repel"
+            },
+            {
+              "id": "B",
+              "text": "They attract"
+            },
+            {
+              "id": "C",
+              "text": "They disappear"
+            },
+            {
+              "id": "D",
+              "text": "They produce gravity only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C08-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "magnetic field",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 161,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "magnetic field"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Outside a bar magnet, magnetic field lines are conventionally drawn from which pole to which?",
+          "answer": "North to south",
+          "options": [
+            {
+              "id": "A",
+              "text": "North to south"
+            },
+            {
+              "id": "B",
+              "text": "South to north only outside"
+            },
+            {
+              "id": "C",
+              "text": "East to west"
+            },
+            {
+              "id": "D",
+              "text": "They have no direction"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C08-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "induced magnetism",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 161,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "induced magnetism"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is induced magnetism?",
+          "answer": "It is magnetization of a magnetic material caused by the presence of an external magnetic field, often temporarily."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C08-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "electromagnets",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 161,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "electromagnets"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is soft iron commonly used as the core of an electromagnet?",
+          "answer": "It magnetizes strongly when current flows and loses most of its magnetism quickly when the field is removed."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C08-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "magnetic fields",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 161,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "magnetic fields"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe magnetic field patterns around a bar magnet and explain how an electromagnet can be made stronger.",
+          "answer": "Award marks for field direction, closer lines indicating stronger field, field shape around poles, increasing current/turns, and using a suitable soft-iron core."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C08-L02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "magnet applications",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 161,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "magnet applications"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare permanent magnets and electromagnets and give two uses of each type.",
+          "answer": "Award marks for persistence/control differences, material/core differences, two valid permanent-magnet uses, and two valid electromagnet uses."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C09-M01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "scope of physics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 181,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "scope of physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Physics primarily studies matter, energy, space, time and what?",
+          "answer": "Their interactions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Their interactions"
+            },
+            {
+              "id": "B",
+              "text": "Only living cells"
+            },
+            {
+              "id": "C",
+              "text": "Only historical events"
+            },
+            {
+              "id": "D",
+              "text": "Only chemical names"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C09-M02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "scientific method",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 181,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "scientific method"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "A scientific hypothesis should be what?",
+          "answer": "Testable",
+          "options": [
+            {
+              "id": "A",
+              "text": "Testable"
+            },
+            {
+              "id": "B",
+              "text": "Impossible to check"
+            },
+            {
+              "id": "C",
+              "text": "Based only on authority"
+            },
+            {
+              "id": "D",
+              "text": "Unrelated to evidence"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-PHY-2025-C09-S01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "branches of physics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 181,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "branches of physics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Give two examples of interdisciplinary fields involving physics.",
+          "answer": "Examples include biophysics, astrophysics, geophysics, medical physics, materials science or physical chemistry; any two suitable examples earn credit."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C09-S02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "scientific method",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 181,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "scientific method"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is reproducibility important in science?",
+          "answer": "Independent repetition helps show that a result is reliable and not due to chance, bias or an unnoticed procedural error."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C09-L01",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "science and technology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 181,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "science and technology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how scientific knowledge and technology influence each other.",
+          "answer": "Award marks for science producing explanations, technology applying knowledge, technology enabling new measurements/experiments, feedback from applications creating new scientific questions, and a relevant example."
+        }
+      }
+    },
+    {
+      "id": "IX-PHY-2025-C09-L02",
+      "chapter": {
+        "id": "IX-PHY-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "scientific inquiry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-011",
+        "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+        "page": 181,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "scientific inquiry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "physics",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-PHYSICS-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Physics IX starter item grounded in the current textbook chapter/SLO map. No reviewer approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe a sound scientific investigation from question formation to communication of results.",
+          "answer": "Award marks for clear question, testable hypothesis, controlled method/data collection, analysis/conclusion, and communication/reproducibility."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 54,
+    "mcq": 18,
+    "short": 18,
+    "long": 11,
+    "numerical": 7,
+    "chapters": 9
+  }
+}

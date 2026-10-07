@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "assps-physics9-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-011",
+  "sourcePdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+  "sourceByteLength": 51384536,
+  "pageCount": 204,
+  "identity": [
+    "PHYSICS 9",
+    "Updated / Revised National Curriculum of Pakistan 2023",
+    "PECTAA/PCTB"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Physical Quantities and Measurements",
+      "pdfStartPage": 5,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Kinematics",
+      "pdfStartPage": 28,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Dynamics",
+      "pdfStartPage": 52,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Turning Effects of Forces",
+      "pdfStartPage": 80,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Work, Energy and Power",
+      "pdfStartPage": 105,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Mechanical Properties of Matter",
+      "pdfStartPage": 127,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Thermal Properties of Matter",
+      "pdfStartPage": 148,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Magnetism",
+      "pdfStartPage": 161,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Nature of Science",
+      "pdfStartPage": 181,
+      "status": "TOC_AND_RENDERED_CHAPTER_START_VERIFIED"
+    }
+  ],
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "fullBookDefault": true,
+    "annual2026AlpOptionalFilterOnly": true
+  }
+}

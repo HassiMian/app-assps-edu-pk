@@ -1,0 +1,4859 @@
+{
+  "schemaVersion": "assps-biology9-english-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-009",
+  "sourcePdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "scope": "CURRENT_TEXTBOOK_RAPID_PROVISIONAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-BIO-2025-C01-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "Biology and its branches",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biology and its branches"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which branch of biology studies plants?",
+          "answer": "Botany",
+          "options": [
+            {
+              "id": "A",
+              "text": "Botany"
+            },
+            {
+              "id": "B",
+              "text": "Zoology"
+            },
+            {
+              "id": "C",
+              "text": "Pathology"
+            },
+            {
+              "id": "D",
+              "text": "Anatomy"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C01-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "Biology and its branches",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biology and its branches"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How is biochemistry related to biology?",
+          "answer": "Biochemistry explains the chemical substances and reactions that occur in living organisms."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C01-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "Biology and its branches",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biology and its branches"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how biology connects with at least three other sciences.",
+          "answer": "Award marks for three valid links such as biochemistry with chemistry, biophysics with physics, biostatistics/computational biology with mathematics or computing, plus a clear explanation of why interdisciplinary study improves biological understanding."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C01-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "Scientific method and biological problem solving",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Scientific method and biological problem solving"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is a hypothesis?",
+          "answer": "A testable proposed explanation",
+          "options": [
+            {
+              "id": "A",
+              "text": "A testable proposed explanation"
+            },
+            {
+              "id": "B",
+              "text": "A permanent scientific law"
+            },
+            {
+              "id": "C",
+              "text": "A random guess that cannot be tested"
+            },
+            {
+              "id": "D",
+              "text": "A measurement unit"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C01-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "Scientific method and biological problem solving",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Scientific method and biological problem solving"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why must a scientific hypothesis be testable?",
+          "answer": "It must allow observations or experiments that can support or refute the proposed explanation."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C01-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "Scientific method and biological problem solving",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 5,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Scientific method and biological problem solving"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the main steps of the biological method from observation to conclusion.",
+          "answer": "Award marks for observation/problem identification, hypothesis, deductions/predictions, experimentation/data collection, and conclusion with possible revision of the hypothesis."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C02-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "Classification and taxonomic ranks",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 25,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Classification and taxonomic ranks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which taxonomic rank is more specific than genus?",
+          "answer": "Species",
+          "options": [
+            {
+              "id": "A",
+              "text": "Species"
+            },
+            {
+              "id": "B",
+              "text": "Family"
+            },
+            {
+              "id": "C",
+              "text": "Order"
+            },
+            {
+              "id": "D",
+              "text": "Class"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C02-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "Classification and taxonomic ranks",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 25,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Classification and taxonomic ranks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is biological classification useful?",
+          "answer": "It organizes biodiversity, helps identify organisms, and allows scientists to communicate about relationships and differences systematically."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C02-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "Classification and taxonomic ranks",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 25,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Classification and taxonomic ranks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain the purpose of taxonomic ranks and arrange the major ranks from broad to specific.",
+          "answer": "Award marks for purpose of classification and correct sequence from domain/kingdom through phylum, class, order, family, genus and species, with recognition that lower ranks are more specific."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C02-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "Domains and binomial nomenclature",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 25,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Domains and binomial nomenclature"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "In binomial nomenclature, how many words make up a scientific species name?",
+          "answer": "Two",
+          "options": [
+            {
+              "id": "A",
+              "text": "Two"
+            },
+            {
+              "id": "B",
+              "text": "One"
+            },
+            {
+              "id": "C",
+              "text": "Three"
+            },
+            {
+              "id": "D",
+              "text": "Four"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C02-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "Domains and binomial nomenclature",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 25,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Domains and binomial nomenclature"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State the basic rule for writing a binomial scientific name.",
+          "answer": "It contains the genus name followed by the specific epithet; the genus begins with a capital letter and both words are conventionally italicized or underlined when handwritten."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C02-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C02",
+        "number": 2
+      },
+      "topicId": "Domains and binomial nomenclature",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 25,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Domains and binomial nomenclature"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare the three-domain system and explain why viruses are treated differently in classification.",
+          "answer": "Award marks for naming Bacteria, Archaea and Eukarya, noting cellular organization differences, and explaining that viruses are acellular and depend on host cells for replication."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C03-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Cell as the basic unit of life",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell as the basic unit of life"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which statement best describes the cell?",
+          "answer": "The basic structural and functional unit of life",
+          "options": [
+            {
+              "id": "A",
+              "text": "The basic structural and functional unit of life"
+            },
+            {
+              "id": "B",
+              "text": "A non-living tissue only"
+            },
+            {
+              "id": "C",
+              "text": "A type of organ system"
+            },
+            {
+              "id": "D",
+              "text": "A chemical element"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C03-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Cell as the basic unit of life",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell as the basic unit of life"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State two ideas of cell theory.",
+          "answer": "Living organisms are made of cells, and the cell is the basic unit of structure and function; new cells arise from pre-existing cells."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C03-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Cell as the basic unit of life",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell as the basic unit of life"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how cell theory links microscopic observations with the organization of living organisms.",
+          "answer": "Award marks for organisms being cellular, cell as basic unit, cells arising from existing cells, evidence from microscopy, and relation of cells to tissues/organs."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C03-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Plant and animal cell structures",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant and animal cell structures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which organelle contains most of a eukaryotic cell’s genetic material?",
+          "answer": "Nucleus",
+          "options": [
+            {
+              "id": "A",
+              "text": "Nucleus"
+            },
+            {
+              "id": "B",
+              "text": "Ribosome"
+            },
+            {
+              "id": "C",
+              "text": "Cell wall"
+            },
+            {
+              "id": "D",
+              "text": "Vacuole only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C03-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Plant and animal cell structures",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant and animal cell structures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Give two differences between typical plant and animal cells.",
+          "answer": "Plant cells typically have a cellulose cell wall and chloroplasts/large central vacuole; animal cells lack a cell wall and chloroplasts."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C03-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C03",
+        "number": 3
+      },
+      "topicId": "Plant and animal cell structures",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant and animal cell structures"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare the functions of nucleus, mitochondria, ribosomes, cell membrane and chloroplasts.",
+          "answer": "Award one mark for each correct function: genetic control, aerobic energy release, protein synthesis, selective exchange, and photosynthesis respectively."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C04-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "Cell cycle and mitosis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 63,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell cycle and mitosis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is the main result of mitosis?",
+          "answer": "Two genetically similar daughter cells",
+          "options": [
+            {
+              "id": "A",
+              "text": "Two genetically similar daughter cells"
+            },
+            {
+              "id": "B",
+              "text": "Four genetically different gametes"
+            },
+            {
+              "id": "C",
+              "text": "One cell with half the chromosome number"
+            },
+            {
+              "id": "D",
+              "text": "A non-living tissue"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C04-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "Cell cycle and mitosis",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 63,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell cycle and mitosis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is mitosis important for growth?",
+          "answer": "It increases cell number while maintaining chromosome number and genetic continuity in body tissues."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C04-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "Cell cycle and mitosis",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 63,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Cell cycle and mitosis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the role of the cell cycle and mitosis in growth and tissue repair.",
+          "answer": "Award marks for interphase preparation/DNA replication, chromosome separation in mitosis, cytokinesis, maintenance of chromosome number, and contribution to growth/repair."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C04-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "Meiosis and its significance",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 63,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Meiosis and its significance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What happens to chromosome number during meiosis?",
+          "answer": "It is reduced by half in the products",
+          "options": [
+            {
+              "id": "A",
+              "text": "It is reduced by half in the products"
+            },
+            {
+              "id": "B",
+              "text": "It always doubles"
+            },
+            {
+              "id": "C",
+              "text": "It becomes zero"
+            },
+            {
+              "id": "D",
+              "text": "It never changes from the parent cell"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C04-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "Meiosis and its significance",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 63,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Meiosis and its significance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one way meiosis differs from mitosis.",
+          "answer": "Meiosis involves two divisions and produces haploid cells with genetic variation, while mitosis produces two genetically similar cells with the same chromosome number as the parent."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C04-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C04",
+        "number": 4
+      },
+      "topicId": "Meiosis and its significance",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 63,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Meiosis and its significance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how meiosis supports sexual reproduction and genetic variation.",
+          "answer": "Award marks for chromosome-number reduction, formation of gametes, two divisions, genetic variation through recombination/independent assortment, and restoration of diploid number at fertilization."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C05-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "Levels of organization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Levels of organization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which sequence is correct from simpler to more complex?",
+          "answer": "Cell → tissue → organ → organ system",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cell → tissue → organ → organ system"
+            },
+            {
+              "id": "B",
+              "text": "Organ → cell → tissue → organ system"
+            },
+            {
+              "id": "C",
+              "text": "Tissue → cell → organ system → organ"
+            },
+            {
+              "id": "D",
+              "text": "Organ system → organ → tissue → cell"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C05-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "Levels of organization",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Levels of organization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate tissue and organ.",
+          "answer": "A tissue is a group of similar cells performing related functions; an organ contains multiple tissues working together for a larger function."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C05-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "Levels of organization",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Levels of organization"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain levels of biological organization using one plant or human example.",
+          "answer": "Award marks for cell, tissue, organ, organ system and organism levels, plus a logically linked example such as muscle cell → muscle tissue → heart → circulatory system."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C05-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "Organ systems and homeostasis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organ systems and homeostasis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is homeostasis?",
+          "answer": "Maintenance of relatively stable internal conditions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Maintenance of relatively stable internal conditions"
+            },
+            {
+              "id": "B",
+              "text": "Production of all body cells"
+            },
+            {
+              "id": "C",
+              "text": "Only food digestion"
+            },
+            {
+              "id": "D",
+              "text": "Only movement of limbs"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C05-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "Organ systems and homeostasis",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organ systems and homeostasis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is homeostasis important for cells?",
+          "answer": "Stable internal conditions help enzymes and cellular processes operate within suitable ranges despite external changes."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C05-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "Organ systems and homeostasis",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Organ systems and homeostasis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how organ systems cooperate to maintain homeostasis.",
+          "answer": "Award marks for concept of stable internal environment and coordinated roles of at least four systems such as circulatory transport, respiratory gas exchange, urinary regulation, nervous/endocrine control, or skin/temperature regulation."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C06-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Carbohydrates proteins and lipids",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 93,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carbohydrates proteins and lipids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which biomolecule is a major immediate source of cellular energy?",
+          "answer": "Carbohydrate",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbohydrate"
+            },
+            {
+              "id": "B",
+              "text": "DNA"
+            },
+            {
+              "id": "C",
+              "text": "Mineral ion"
+            },
+            {
+              "id": "D",
+              "text": "Water only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C06-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Carbohydrates proteins and lipids",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 93,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carbohydrates proteins and lipids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one major role of proteins and one of lipids.",
+          "answer": "Proteins can act as enzymes or structural/transport molecules; lipids store energy and are important in membranes and insulation."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C06-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Carbohydrates proteins and lipids",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 93,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Carbohydrates proteins and lipids"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare carbohydrates, proteins and lipids in terms of building components and biological roles.",
+          "answer": "Award marks for monomers/components and key roles: sugars/polysaccharides for energy/structure, amino acids/proteins for enzymes/structure, and fatty acids/glycerol-based lipids for energy storage/membranes."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C06-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Nucleic acids and information flow",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 93,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nucleic acids and information flow"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which nucleic acid stores most hereditary information?",
+          "answer": "DNA",
+          "options": [
+            {
+              "id": "A",
+              "text": "DNA"
+            },
+            {
+              "id": "B",
+              "text": "ATP only"
+            },
+            {
+              "id": "C",
+              "text": "Glycogen"
+            },
+            {
+              "id": "D",
+              "text": "Cellulose"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C06-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Nucleic acids and information flow",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 93,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nucleic acids and information flow"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How are DNA and RNA related to protein production?",
+          "answer": "DNA stores genetic instructions; RNA carries or helps interpret those instructions during protein synthesis."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C06-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "Nucleic acids and information flow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 93,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nucleic acids and information flow"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain the flow of genetic information from DNA to a functional protein.",
+          "answer": "Award marks for gene/DNA information, transcription to RNA, RNA movement/function, translation at ribosomes, and amino-acid sequence forming a functional protein."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C07-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "Enzymes as biological catalysts",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzymes as biological catalysts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is the main role of an enzyme?",
+          "answer": "To speed a specific biochemical reaction without being consumed",
+          "options": [
+            {
+              "id": "A",
+              "text": "To speed a specific biochemical reaction without being consumed"
+            },
+            {
+              "id": "B",
+              "text": "To supply chromosomes"
+            },
+            {
+              "id": "C",
+              "text": "To store all genetic information"
+            },
+            {
+              "id": "D",
+              "text": "To form cell walls only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C07-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "Enzymes as biological catalysts",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzymes as biological catalysts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is meant by enzyme specificity?",
+          "answer": "An enzyme’s active site fits particular substrate(s), so it catalyzes only certain reactions or closely related reactions."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C07-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "Enzymes as biological catalysts",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enzymes as biological catalysts"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the enzyme-substrate mechanism and why enzymes can be reused.",
+          "answer": "Award marks for active site, substrate binding, enzyme-substrate complex, product formation/release, and enzyme remaining chemically available for another cycle."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C07-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "Factors affecting enzyme activity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factors affecting enzyme activity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which factor can change enzyme activity by altering molecular motion and protein shape?",
+          "answer": "Temperature",
+          "options": [
+            {
+              "id": "A",
+              "text": "Temperature"
+            },
+            {
+              "id": "B",
+              "text": "Taxonomic rank"
+            },
+            {
+              "id": "C",
+              "text": "Chromosome count only"
+            },
+            {
+              "id": "D",
+              "text": "Binomial name"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C07-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "Factors affecting enzyme activity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factors affecting enzyme activity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why can very high temperature reduce enzyme activity?",
+          "answer": "High temperature can disrupt the enzyme’s three-dimensional structure and active site, reducing substrate binding and catalysis."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C07-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C07",
+        "number": 7
+      },
+      "topicId": "Factors affecting enzyme activity",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 109,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Factors affecting enzyme activity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how temperature, pH, substrate concentration and inhibitors can affect enzyme activity.",
+          "answer": "Award marks for each factor’s effect and a final explanation that enzyme activity depends on collisions/active-site structure and availability."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C08-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "ATP and energy transfer",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 120,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ATP and energy transfer"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is ATP mainly used for in cells?",
+          "answer": "Short-term transfer of usable energy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Short-term transfer of usable energy"
+            },
+            {
+              "id": "B",
+              "text": "Permanent storage of all hereditary information"
+            },
+            {
+              "id": "C",
+              "text": "Building cell walls only"
+            },
+            {
+              "id": "D",
+              "text": "Naming species"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C08-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "ATP and energy transfer",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 120,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ATP and energy transfer"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Why is ATP called an energy currency of the cell?",
+          "answer": "Cells can form ATP when energy is available and hydrolyze it to transfer manageable amounts of energy to cellular processes."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C08-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "ATP and energy transfer",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 120,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ATP and energy transfer"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain the ATP-ADP cycle and how it links energy-releasing and energy-requiring reactions.",
+          "answer": "Award marks for ATP formation from ADP + phosphate, energy storage, ATP hydrolysis, coupling to cellular work, and recycling of ADP."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C08-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "Photosynthesis and cellular respiration",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 120,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Photosynthesis and cellular respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which process captures light energy to build organic molecules?",
+          "answer": "Photosynthesis",
+          "options": [
+            {
+              "id": "A",
+              "text": "Photosynthesis"
+            },
+            {
+              "id": "B",
+              "text": "Mitosis"
+            },
+            {
+              "id": "C",
+              "text": "Excretion"
+            },
+            {
+              "id": "D",
+              "text": "Transpiration only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C08-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "Photosynthesis and cellular respiration",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 120,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Photosynthesis and cellular respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "How are photosynthesis and cellular respiration related?",
+          "answer": "Photosynthesis stores energy in organic molecules using carbon dioxide and water, while respiration releases usable energy by breaking down organic molecules; their reactants/products are broadly complementary."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C08-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C08",
+        "number": 8
+      },
+      "topicId": "Photosynthesis and cellular respiration",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 120,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Photosynthesis and cellular respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare photosynthesis and cellular respiration in terms of purpose, main inputs, main outputs and cellular location.",
+          "answer": "Award marks for purpose, inputs/outputs and correct locations such as chloroplasts for photosynthesis and mitochondria for most aerobic respiration."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C09-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "Plant nutrition and transport",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 134,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant nutrition and transport"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which tissue mainly transports water and mineral salts upward in plants?",
+          "answer": "Xylem",
+          "options": [
+            {
+              "id": "A",
+              "text": "Xylem"
+            },
+            {
+              "id": "B",
+              "text": "Phloem"
+            },
+            {
+              "id": "C",
+              "text": "Epidermis only"
+            },
+            {
+              "id": "D",
+              "text": "Meristem only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C09-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "Plant nutrition and transport",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 134,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant nutrition and transport"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate xylem and phloem transport.",
+          "answer": "Xylem mainly carries water/mineral ions from roots upward; phloem translocates organic nutrients such as sucrose between sources and sinks."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C09-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "Plant nutrition and transport",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 134,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Plant nutrition and transport"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how roots, xylem and phloem cooperate in plant nutrition and transport.",
+          "answer": "Award marks for root absorption, xylem water/mineral transport, photosynthetic production of sugars, phloem translocation, and source-sink relationship."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C09-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "Transpiration gaseous exchange and excretion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 134,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transpiration gaseous exchange and excretion"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is transpiration?",
+          "answer": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
+          "options": [
+            {
+              "id": "A",
+              "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
+            },
+            {
+              "id": "B",
+              "text": "Movement of sugar in phloem only"
+            },
+            {
+              "id": "C",
+              "text": "Cell division in roots"
+            },
+            {
+              "id": "D",
+              "text": "Formation of pollen only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C09-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "Transpiration gaseous exchange and excretion",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 134,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transpiration gaseous exchange and excretion"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State one benefit and one cost of transpiration.",
+          "answer": "It helps pull water/minerals upward and can cool leaves, but excessive water loss can cause wilting or water stress."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C09-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "Transpiration gaseous exchange and excretion",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 134,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transpiration gaseous exchange and excretion"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Explain how stomata participate in both gaseous exchange and water regulation.",
+          "answer": "Award marks for stomatal pores, CO2 entry, O2/water-vapour exit, guard-cell regulation, and balance between photosynthesis and water conservation."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C10-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "Asexual reproduction and artificial propagation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 151,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Asexual reproduction and artificial propagation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which feature is typical of asexual reproduction?",
+          "answer": "One parent and no fusion of gametes",
+          "options": [
+            {
+              "id": "A",
+              "text": "One parent and no fusion of gametes"
+            },
+            {
+              "id": "B",
+              "text": "Fusion of two gametes is required"
+            },
+            {
+              "id": "C",
+              "text": "Only seeds can be produced"
+            },
+            {
+              "id": "D",
+              "text": "Chromosome number must double every generation"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C10-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "Asexual reproduction and artificial propagation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 151,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Asexual reproduction and artificial propagation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is artificial vegetative propagation?",
+          "answer": "It is deliberate production of new plants from vegetative parts using methods such as cuttings, grafting or layering."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C10-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "Asexual reproduction and artificial propagation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 151,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Asexual reproduction and artificial propagation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Compare natural asexual reproduction with artificial propagation in plants.",
+          "answer": "Award marks for one-parent/no-gamete-fusion concept, examples of natural methods, examples of artificial methods, genetic similarity of offspring, and agricultural advantages/limitations."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C10-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "Sexual reproduction in plants",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 151,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sexual reproduction in plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What process transfers pollen from anther to stigma?",
+          "answer": "Pollination",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pollination"
+            },
+            {
+              "id": "B",
+              "text": "Germination"
+            },
+            {
+              "id": "C",
+              "text": "Transpiration"
+            },
+            {
+              "id": "D",
+              "text": "Translocation"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C10-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "Sexual reproduction in plants",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 151,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sexual reproduction in plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate pollination and fertilization.",
+          "answer": "Pollination is transfer of pollen to a stigma; fertilization is fusion of male and female gamete nuclei after pollen-tube growth."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C10-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C10",
+        "number": 10
+      },
+      "topicId": "Sexual reproduction in plants",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 151,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Sexual reproduction in plants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe the sequence from pollination to seed and fruit formation in a flowering plant.",
+          "answer": "Award marks for pollination, pollen germination/tube growth, fertilization, zygote/embryo and seed formation, and ovary/fruit development."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C11-B01-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "Mean median and mode",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mean median and mode"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "What is the arithmetic mean?",
+          "answer": "Sum of observations divided by number of observations",
+          "options": [
+            {
+              "id": "A",
+              "text": "Sum of observations divided by number of observations"
+            },
+            {
+              "id": "B",
+              "text": "Most frequent value only"
+            },
+            {
+              "id": "C",
+              "text": "Middle value only"
+            },
+            {
+              "id": "D",
+              "text": "Largest value minus smallest value"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C11-B01-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "Mean median and mode",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mean median and mode"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Differentiate median and mode.",
+          "answer": "Median is the middle value when data are ordered; mode is the value occurring most frequently."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C11-B01-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "Mean median and mode",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Mean median and mode"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "For a biological dataset, explain how mean, median and mode provide different summaries.",
+          "answer": "Award marks for correct definition of each measure, one contrast between them, an example of when each may be informative, and recognition that unusual values can affect the mean strongly."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C11-B02-M01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "Bar charts and biological data",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bar charts and biological data"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Which graph is appropriate for comparing counts across discrete categories?",
+          "answer": "Bar chart",
+          "options": [
+            {
+              "id": "A",
+              "text": "Bar chart"
+            },
+            {
+              "id": "B",
+              "text": "Continuous line with no scale"
+            },
+            {
+              "id": "C",
+              "text": "Unlabelled sketch only"
+            },
+            {
+              "id": "D",
+              "text": "Taxonomic key"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-BIO-2025-C11-B02-S01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "Bar charts and biological data",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bar charts and biological data"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "State two features of a well-constructed bar chart.",
+          "answer": "It should have labelled axes with an appropriate scale/categories and separate bars of consistent width; a clear title is also useful."
+        }
+      }
+    },
+    {
+      "id": "IX-BIO-2025-C11-B02-L01",
+      "chapter": {
+        "id": "IX-BIO-2025-EM-C11",
+        "number": 11
+      },
+      "topicId": "Bar charts and biological data",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-009",
+        "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+        "page": 167,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_AND_RENDERED_CHAPTER_START",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Bar charts and biological data"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "biology",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-BIOLOGY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Biology starter draft grounded in the current 2025-26 source map. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Starter test-session item; academic review gate remains closed.",
+      "content": {
+        "en": {
+          "stem": "Describe how to organize and present categorical biological data in a bar chart.",
+          "answer": "Award marks for identifying categories, calculating/recording frequencies, choosing a suitable scale, drawing labelled separate bars, and adding clear title/axis labels."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 66,
+    "mcq": 22,
+    "short": 22,
+    "long": 22,
+    "chapters": 11
+  }
+}

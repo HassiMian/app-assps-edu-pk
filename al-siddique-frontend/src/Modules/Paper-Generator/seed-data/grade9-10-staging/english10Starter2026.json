@@ -1,0 +1,3561 @@
+{
+  "schemaVersion": "assps-english10-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-016",
+  "sourcePdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+  "scope": "CURRENT_TEXTBOOK_COMPETENCY_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-ENG-2026-U01-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U01",
+        "number": 1
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about ethics, dignity and social responsibility, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U01-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U01",
+        "number": 1
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of ethics, dignity and social responsibility.",
+          "answer": "A fair society protects vulnerable people and treats everyone with dignity."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U01-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U01",
+        "number": 1
+      },
+      "topicId": "proofreading",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "proofreading"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Correct the sentence: “Every student have a responsibility to respect others.”",
+          "answer": "Every student has a responsibility to respect others."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U01-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U01",
+        "number": 1
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “A fair society protects vulnerable people and treats everyone with dignity.” What is its central idea?",
+          "answer": "A fair society protects vulnerable people and treats everyone with dignity."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U01-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U01",
+        "number": 1
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on ethics, dignity and social responsibility.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U02-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U02",
+        "number": 2
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about patriotism and national pride, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U02-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U02",
+        "number": 2
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of patriotism and national pride.",
+          "answer": "Responsible patriotism includes service, honesty and care for shared public spaces."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U02-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U02",
+        "number": 2
+      },
+      "topicId": "figurative language",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "figurative language"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Identify the figure of speech: “The city lights shone like a necklace.”",
+          "answer": "Simile, because the comparison uses “like”."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U02-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U02",
+        "number": 2
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Responsible patriotism includes service, honesty and care for shared public spaces.” What is its central idea?",
+          "answer": "Responsible patriotism includes service, honesty and care for shared public spaces."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U02-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U02",
+        "number": 2
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on patriotism and national pride.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U03-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U03",
+        "number": 3
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about digital communication and language change, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U03-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U03",
+        "number": 3
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of digital communication and language change.",
+          "answer": "Digital communication spreads new expressions quickly, but writers still need language suited to audience and purpose."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U03-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U03",
+        "number": 3
+      },
+      "topicId": "context clues",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "context clues"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "In the sentence “The update was gradual, happening little by little,” what does “gradual” mean?",
+          "answer": "It means slow and happening in small stages."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U03-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U03",
+        "number": 3
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Digital communication spreads new expressions quickly, but writers still need language suited to audience and purpose.” What is its central idea?",
+          "answer": "Digital communication spreads new expressions quickly, but writers still need language suited to audience and purpose."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U03-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U03",
+        "number": 3
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on digital communication and language change.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U04-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U04",
+        "number": 4
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about climate action and sustainability, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U04-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U04",
+        "number": 4
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of climate action and sustainability.",
+          "answer": "Practical environmental action works best when individuals, schools and communities share responsibility."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U04-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U04",
+        "number": 4
+      },
+      "topicId": "sentence combining",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "sentence combining"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Combine clearly: “The school planted trees. The playground became cooler.”",
+          "answer": "After the school planted trees, the playground became cooler."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U04-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U04",
+        "number": 4
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Practical environmental action works best when individuals, schools and communities share responsibility.” What is its central idea?",
+          "answer": "Practical environmental action works best when individuals, schools and communities share responsibility."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U04-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U04",
+        "number": 4
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on climate action and sustainability.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U05-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U05",
+        "number": 5
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about compassion and character perspective, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U05-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U05",
+        "number": 5
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of compassion and character perspective.",
+          "answer": "A character’s choices can reveal compassion, sacrifice and changing priorities."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U05-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U05",
+        "number": 5
+      },
+      "topicId": "cause and effect",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "cause and effect"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Rewrite with a clear cause-and-effect link: “She saw a neighbour in need. She offered help.”",
+          "answer": "Because she saw a neighbour in need, she offered help."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U05-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U05",
+        "number": 5
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “A character’s choices can reveal compassion, sacrifice and changing priorities.” What is its central idea?",
+          "answer": "A character’s choices can reveal compassion, sacrifice and changing priorities."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U05-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U05",
+        "number": 5
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on compassion and character perspective.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U06-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U06",
+        "number": 6
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about health, prevention and responsible choices, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U06-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U06",
+        "number": 6
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of health, prevention and responsible choices.",
+          "answer": "Prevention is strengthened by accurate education, healthy routines and support from trusted adults and professionals."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U06-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U06",
+        "number": 6
+      },
+      "topicId": "precise word choice",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "precise word choice"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Replace the vague phrase “did good things” with a more precise phrase in: “The campaign did good things for students.”",
+          "answer": "One precise revision is: “The campaign increased students’ awareness of healthy choices and support services.”"
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U06-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U06",
+        "number": 6
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Prevention is strengthened by accurate education, healthy routines and support from trusted adults and professionals.” What is its central idea?",
+          "answer": "Prevention is strengthened by accurate education, healthy routines and support from trusted adults and professionals."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U06-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U06",
+        "number": 6
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on health, prevention and responsible choices.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U07-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U07",
+        "number": 7
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about time management and priorities, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U07-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U07",
+        "number": 7
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of time management and priorities.",
+          "answer": "Effective planning balances important tasks, rest and realistic deadlines."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U07-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U07",
+        "number": 7
+      },
+      "topicId": "punctuation",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "punctuation"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Add punctuation: “Plan your work Sara and leave time for rest”",
+          "answer": "Plan your work, Sara, and leave time for rest."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U07-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U07",
+        "number": 7
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Effective planning balances important tasks, rest and realistic deadlines.” What is its central idea?",
+          "answer": "Effective planning balances important tasks, rest and realistic deadlines."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U07-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U07",
+        "number": 7
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on time management and priorities.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U08-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U08",
+        "number": 8
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about environment and civic action, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U08-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U08",
+        "number": 8
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of environment and civic action.",
+          "answer": "Cleaner transport, responsible waste management and green spaces can improve urban environments."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U08-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U08",
+        "number": 8
+      },
+      "topicId": "subject verb agreement",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "subject verb agreement"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Correct: “Trees not only improves air quality but also provides shade.”",
+          "answer": "Trees not only improve air quality but also provide shade."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U08-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U08",
+        "number": 8
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Cleaner transport, responsible waste management and green spaces can improve urban environments.” What is its central idea?",
+          "answer": "Cleaner transport, responsible waste management and green spaces can improve urban environments."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U08-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U08",
+        "number": 8
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on environment and civic action.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U09-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U09",
+        "number": 9
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about choice and reflection, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U09-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U09",
+        "number": 9
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of choice and reflection.",
+          "answer": "Thoughtful decisions require considering consequences rather than simply copying others."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U09-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U09",
+        "number": 9
+      },
+      "topicId": "personification",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "personification"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Identify the figure of speech: “Opportunity knocked at the door.”",
+          "answer": "Personification, because an abstract idea is given a human action."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U09-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U09",
+        "number": 9
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Thoughtful decisions require considering consequences rather than simply copying others.” What is its central idea?",
+          "answer": "Thoughtful decisions require considering consequences rather than simply copying others."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U09-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U09",
+        "number": 9
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on choice and reflection.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U10-M01",
+      "chapter": {
+        "id": "X-ENG-2026-U10",
+        "number": 10
+      },
+      "topicId": "reading and critical thinking",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reading and critical thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "When answering a question about wisdom and thoughtful action, which response is strongest?",
+          "answer": "A clear idea supported by relevant evidence",
+          "options": [
+            {
+              "id": "A",
+              "text": "A clear idea supported by relevant evidence"
+            },
+            {
+              "id": "B",
+              "text": "A random statement unrelated to the topic"
+            },
+            {
+              "id": "C",
+              "text": "A sentence with no understandable meaning"
+            },
+            {
+              "id": "D",
+              "text": "A copied phrase used without context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-ENG-2026-U10-S01",
+      "chapter": {
+        "id": "X-ENG-2026-U10",
+        "number": 10
+      },
+      "topicId": "theme response",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "theme response"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "State one constructive idea connected with the theme of wisdom and thoughtful action.",
+          "answer": "Wise decisions often depend on listening carefully, judging priorities and responding to immediate needs."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U10-G01",
+      "chapter": {
+        "id": "X-ENG-2026-U10",
+        "number": 10
+      },
+      "topicId": "indirect narration",
+      "type": "grammar",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "indirect narration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Change to indirect speech: Ali said, “I will finish the task today.”",
+          "answer": "Ali said that he would finish the task that day."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U10-C01",
+      "chapter": {
+        "id": "X-ENG-2026-U10",
+        "number": 10
+      },
+      "topicId": "original comprehension",
+      "type": "comprehension",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "original comprehension"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Read this original statement: “Wise decisions often depend on listening carefully, judging priorities and responding to immediate needs.” What is its central idea?",
+          "answer": "Wise decisions often depend on listening carefully, judging priorities and responding to immediate needs."
+        }
+      }
+    },
+    {
+      "id": "X-ENG-2026-U10-E01",
+      "chapter": {
+        "id": "X-ENG-2026-U10",
+        "number": 10
+      },
+      "topicId": "paragraph writing",
+      "type": "essay",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-016",
+        "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+        "page": 3,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_OR_SKILLS_TABLE",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "paragraph writing"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "english",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-ENGLISH-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X English language-skill starter. No textbook passage or poem line is reproduced. No review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original language-skill starter aligned to the current unit/competency map.",
+      "content": {
+        "en": {
+          "stem": "Write a short, well-organized paragraph on wisdom and thoughtful action.",
+          "answer": "A strong response should include a clear topic sentence, two or three relevant supporting points, logical linking, accurate grammar and a concluding sentence."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 50,
+    "mcq": 10,
+    "short": 10,
+    "grammar": 10,
+    "comprehension": 10,
+    "essay": 10,
+    "units": 10
+  }
+}

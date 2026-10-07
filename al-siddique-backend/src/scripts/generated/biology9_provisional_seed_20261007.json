@@ -1,0 +1,2228 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-BIO-2025-C01-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "Biology and its branches",
+      "category": "mcq",
+      "question_text": "Which branch of biology studies plants?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Botany"
+        },
+        {
+          "id": "B",
+          "text": "Zoology"
+        },
+        {
+          "id": "C",
+          "text": "Pathology"
+        },
+        {
+          "id": "D",
+          "text": "Anatomy"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Botany",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 5",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Biology and its branches"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "Biology and its branches",
+      "category": "short",
+      "question_text": "How is biochemistry related to biology?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Biochemistry explains the chemical substances and reactions that occur in living organisms.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 5",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Biology and its branches"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "Biology and its branches",
+      "category": "long",
+      "question_text": "Explain how biology connects with at least three other sciences.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for three valid links such as biochemistry with chemistry, biophysics with physics, biostatistics/computational biology with mathematics or computing, plus a clear explanation of why interdisciplinary study improves biological understanding.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 5",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Biology and its branches"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "Scientific method and biological problem solving",
+      "category": "mcq",
+      "question_text": "What is a hypothesis?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A testable proposed explanation"
+        },
+        {
+          "id": "B",
+          "text": "A permanent scientific law"
+        },
+        {
+          "id": "C",
+          "text": "A random guess that cannot be tested"
+        },
+        {
+          "id": "D",
+          "text": "A measurement unit"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A testable proposed explanation",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 5",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Scientific method and biological problem solving"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "Scientific method and biological problem solving",
+      "category": "short",
+      "question_text": "Why must a scientific hypothesis be testable?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It must allow observations or experiments that can support or refute the proposed explanation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 5",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Scientific method and biological problem solving"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C01-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "Scientific method and biological problem solving",
+      "category": "long",
+      "question_text": "Describe the main steps of the biological method from observation to conclusion.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for observation/problem identification, hypothesis, deductions/predictions, experimentation/data collection, and conclusion with possible revision of the hypothesis.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 5",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Scientific method and biological problem solving"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C02-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "Classification and taxonomic ranks",
+      "category": "mcq",
+      "question_text": "Which taxonomic rank is more specific than genus?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Species"
+        },
+        {
+          "id": "B",
+          "text": "Family"
+        },
+        {
+          "id": "C",
+          "text": "Order"
+        },
+        {
+          "id": "D",
+          "text": "Class"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Species",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 25",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Classification and taxonomic ranks"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C02-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "Classification and taxonomic ranks",
+      "category": "short",
+      "question_text": "Why is biological classification useful?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It organizes biodiversity, helps identify organisms, and allows scientists to communicate about relationships and differences systematically.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 25",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Classification and taxonomic ranks"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C02-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "Classification and taxonomic ranks",
+      "category": "long",
+      "question_text": "Explain the purpose of taxonomic ranks and arrange the major ranks from broad to specific.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for purpose of classification and correct sequence from domain/kingdom through phylum, class, order, family, genus and species, with recognition that lower ranks are more specific.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 25",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Classification and taxonomic ranks"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C02-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "Domains and binomial nomenclature",
+      "category": "mcq",
+      "question_text": "In binomial nomenclature, how many words make up a scientific species name?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Two"
+        },
+        {
+          "id": "B",
+          "text": "One"
+        },
+        {
+          "id": "C",
+          "text": "Three"
+        },
+        {
+          "id": "D",
+          "text": "Four"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Two",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 25",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Domains and binomial nomenclature"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C02-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "Domains and binomial nomenclature",
+      "category": "short",
+      "question_text": "State the basic rule for writing a binomial scientific name.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It contains the genus name followed by the specific epithet; the genus begins with a capital letter and both words are conventionally italicized or underlined when handwritten.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 25",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Domains and binomial nomenclature"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C02-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "Domains and binomial nomenclature",
+      "category": "long",
+      "question_text": "Compare the three-domain system and explain why viruses are treated differently in classification.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for naming Bacteria, Archaea and Eukarya, noting cellular organization differences, and explaining that viruses are acellular and depend on host cells for replication.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 25",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Domains and binomial nomenclature"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C03-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "Cell as the basic unit of life",
+      "category": "mcq",
+      "question_text": "Which statement best describes the cell?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The basic structural and functional unit of life"
+        },
+        {
+          "id": "B",
+          "text": "A non-living tissue only"
+        },
+        {
+          "id": "C",
+          "text": "A type of organ system"
+        },
+        {
+          "id": "D",
+          "text": "A chemical element"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "The basic structural and functional unit of life",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 42",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Cell as the basic unit of life"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C03-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "Cell as the basic unit of life",
+      "category": "short",
+      "question_text": "State two ideas of cell theory.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Living organisms are made of cells, and the cell is the basic unit of structure and function; new cells arise from pre-existing cells.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 42",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Cell as the basic unit of life"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C03-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "Cell as the basic unit of life",
+      "category": "long",
+      "question_text": "Explain how cell theory links microscopic observations with the organization of living organisms.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for organisms being cellular, cell as basic unit, cells arising from existing cells, evidence from microscopy, and relation of cells to tissues/organs.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 42",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Cell as the basic unit of life"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C03-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "Plant and animal cell structures",
+      "category": "mcq",
+      "question_text": "Which organelle contains most of a eukaryotic cell’s genetic material?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nucleus"
+        },
+        {
+          "id": "B",
+          "text": "Ribosome"
+        },
+        {
+          "id": "C",
+          "text": "Cell wall"
+        },
+        {
+          "id": "D",
+          "text": "Vacuole only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Nucleus",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 42",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Plant and animal cell structures"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C03-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "Plant and animal cell structures",
+      "category": "short",
+      "question_text": "Give two differences between typical plant and animal cells.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Plant cells typically have a cellulose cell wall and chloroplasts/large central vacuole; animal cells lack a cell wall and chloroplasts.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 42",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Plant and animal cell structures"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C03-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "Plant and animal cell structures",
+      "category": "long",
+      "question_text": "Compare the functions of nucleus, mitochondria, ribosomes, cell membrane and chloroplasts.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award one mark for each correct function: genetic control, aerobic energy release, protein synthesis, selective exchange, and photosynthesis respectively.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 42",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Plant and animal cell structures"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C04-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "Cell cycle and mitosis",
+      "category": "mcq",
+      "question_text": "What is the main result of mitosis?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Two genetically similar daughter cells"
+        },
+        {
+          "id": "B",
+          "text": "Four genetically different gametes"
+        },
+        {
+          "id": "C",
+          "text": "One cell with half the chromosome number"
+        },
+        {
+          "id": "D",
+          "text": "A non-living tissue"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Two genetically similar daughter cells",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 63",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Cell cycle and mitosis"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C04-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "Cell cycle and mitosis",
+      "category": "short",
+      "question_text": "Why is mitosis important for growth?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It increases cell number while maintaining chromosome number and genetic continuity in body tissues.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 63",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Cell cycle and mitosis"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C04-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "Cell cycle and mitosis",
+      "category": "long",
+      "question_text": "Describe the role of the cell cycle and mitosis in growth and tissue repair.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for interphase preparation/DNA replication, chromosome separation in mitosis, cytokinesis, maintenance of chromosome number, and contribution to growth/repair.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 63",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Cell cycle and mitosis"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C04-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "Meiosis and its significance",
+      "category": "mcq",
+      "question_text": "What happens to chromosome number during meiosis?",
+      "options": [
+        {
+          "id": "A",
+          "text": "It is reduced by half in the products"
+        },
+        {
+          "id": "B",
+          "text": "It always doubles"
+        },
+        {
+          "id": "C",
+          "text": "It becomes zero"
+        },
+        {
+          "id": "D",
+          "text": "It never changes from the parent cell"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "It is reduced by half in the products",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 63",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Meiosis and its significance"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C04-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "Meiosis and its significance",
+      "category": "short",
+      "question_text": "State one way meiosis differs from mitosis.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Meiosis involves two divisions and produces haploid cells with genetic variation, while mitosis produces two genetically similar cells with the same chromosome number as the parent.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 63",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Meiosis and its significance"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C04-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "Meiosis and its significance",
+      "category": "long",
+      "question_text": "Explain how meiosis supports sexual reproduction and genetic variation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for chromosome-number reduction, formation of gametes, two divisions, genetic variation through recombination/independent assortment, and restoration of diploid number at fertilization.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 63",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Meiosis and its significance"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C05-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "Levels of organization",
+      "category": "mcq",
+      "question_text": "Which sequence is correct from simpler to more complex?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cell → tissue → organ → organ system"
+        },
+        {
+          "id": "B",
+          "text": "Organ → cell → tissue → organ system"
+        },
+        {
+          "id": "C",
+          "text": "Tissue → cell → organ system → organ"
+        },
+        {
+          "id": "D",
+          "text": "Organ system → organ → tissue → cell"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Cell → tissue → organ → organ system",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 81",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Levels of organization"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C05-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "Levels of organization",
+      "category": "short",
+      "question_text": "Differentiate tissue and organ.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A tissue is a group of similar cells performing related functions; an organ contains multiple tissues working together for a larger function.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 81",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Levels of organization"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C05-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "Levels of organization",
+      "category": "long",
+      "question_text": "Explain levels of biological organization using one plant or human example.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for cell, tissue, organ, organ system and organism levels, plus a logically linked example such as muscle cell → muscle tissue → heart → circulatory system.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 81",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Levels of organization"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C05-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "Organ systems and homeostasis",
+      "category": "mcq",
+      "question_text": "What is homeostasis?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Maintenance of relatively stable internal conditions"
+        },
+        {
+          "id": "B",
+          "text": "Production of all body cells"
+        },
+        {
+          "id": "C",
+          "text": "Only food digestion"
+        },
+        {
+          "id": "D",
+          "text": "Only movement of limbs"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Maintenance of relatively stable internal conditions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 81",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Organ systems and homeostasis"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C05-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "Organ systems and homeostasis",
+      "category": "short",
+      "question_text": "Why is homeostasis important for cells?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Stable internal conditions help enzymes and cellular processes operate within suitable ranges despite external changes.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 81",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Organ systems and homeostasis"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C05-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "Organ systems and homeostasis",
+      "category": "long",
+      "question_text": "Explain how organ systems cooperate to maintain homeostasis.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for concept of stable internal environment and coordinated roles of at least four systems such as circulatory transport, respiratory gas exchange, urinary regulation, nervous/endocrine control, or skin/temperature regulation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 81",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Organ systems and homeostasis"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C06-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Biomolecules",
+      "topic_name": "Carbohydrates proteins and lipids",
+      "category": "mcq",
+      "question_text": "Which biomolecule is a major immediate source of cellular energy?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbohydrate"
+        },
+        {
+          "id": "B",
+          "text": "DNA"
+        },
+        {
+          "id": "C",
+          "text": "Mineral ion"
+        },
+        {
+          "id": "D",
+          "text": "Water only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbohydrate",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 93",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Carbohydrates proteins and lipids"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C06-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Biomolecules",
+      "topic_name": "Carbohydrates proteins and lipids",
+      "category": "short",
+      "question_text": "State one major role of proteins and one of lipids.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Proteins can act as enzymes or structural/transport molecules; lipids store energy and are important in membranes and insulation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 93",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Carbohydrates proteins and lipids"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C06-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Biomolecules",
+      "topic_name": "Carbohydrates proteins and lipids",
+      "category": "long",
+      "question_text": "Compare carbohydrates, proteins and lipids in terms of building components and biological roles.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for monomers/components and key roles: sugars/polysaccharides for energy/structure, amino acids/proteins for enzymes/structure, and fatty acids/glycerol-based lipids for energy storage/membranes.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 93",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Carbohydrates proteins and lipids"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C06-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Biomolecules",
+      "topic_name": "Nucleic acids and information flow",
+      "category": "mcq",
+      "question_text": "Which nucleic acid stores most hereditary information?",
+      "options": [
+        {
+          "id": "A",
+          "text": "DNA"
+        },
+        {
+          "id": "B",
+          "text": "ATP only"
+        },
+        {
+          "id": "C",
+          "text": "Glycogen"
+        },
+        {
+          "id": "D",
+          "text": "Cellulose"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "DNA",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 93",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Nucleic acids and information flow"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C06-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Biomolecules",
+      "topic_name": "Nucleic acids and information flow",
+      "category": "short",
+      "question_text": "How are DNA and RNA related to protein production?",
+      "options": [],
+      "correct_option": "",
+      "answer": "DNA stores genetic instructions; RNA carries or helps interpret those instructions during protein synthesis.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 93",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Nucleic acids and information flow"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C06-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Biomolecules",
+      "topic_name": "Nucleic acids and information flow",
+      "category": "long",
+      "question_text": "Explain the flow of genetic information from DNA to a functional protein.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for gene/DNA information, transcription to RNA, RNA movement/function, translation at ribosomes, and amino-acid sequence forming a functional protein.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 93",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Nucleic acids and information flow"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C07-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Enzymes",
+      "topic_name": "Enzymes as biological catalysts",
+      "category": "mcq",
+      "question_text": "What is the main role of an enzyme?",
+      "options": [
+        {
+          "id": "A",
+          "text": "To speed a specific biochemical reaction without being consumed"
+        },
+        {
+          "id": "B",
+          "text": "To supply chromosomes"
+        },
+        {
+          "id": "C",
+          "text": "To store all genetic information"
+        },
+        {
+          "id": "D",
+          "text": "To form cell walls only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "To speed a specific biochemical reaction without being consumed",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 109",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Enzymes as biological catalysts"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C07-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Enzymes",
+      "topic_name": "Enzymes as biological catalysts",
+      "category": "short",
+      "question_text": "What is meant by enzyme specificity?",
+      "options": [],
+      "correct_option": "",
+      "answer": "An enzyme’s active site fits particular substrate(s), so it catalyzes only certain reactions or closely related reactions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 109",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Enzymes as biological catalysts"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C07-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Enzymes",
+      "topic_name": "Enzymes as biological catalysts",
+      "category": "long",
+      "question_text": "Describe the enzyme-substrate mechanism and why enzymes can be reused.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for active site, substrate binding, enzyme-substrate complex, product formation/release, and enzyme remaining chemically available for another cycle.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 109",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Enzymes as biological catalysts"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C07-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Enzymes",
+      "topic_name": "Factors affecting enzyme activity",
+      "category": "mcq",
+      "question_text": "Which factor can change enzyme activity by altering molecular motion and protein shape?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Temperature"
+        },
+        {
+          "id": "B",
+          "text": "Taxonomic rank"
+        },
+        {
+          "id": "C",
+          "text": "Chromosome count only"
+        },
+        {
+          "id": "D",
+          "text": "Binomial name"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Temperature",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 109",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Factors affecting enzyme activity"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C07-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Enzymes",
+      "topic_name": "Factors affecting enzyme activity",
+      "category": "short",
+      "question_text": "Why can very high temperature reduce enzyme activity?",
+      "options": [],
+      "correct_option": "",
+      "answer": "High temperature can disrupt the enzyme’s three-dimensional structure and active site, reducing substrate binding and catalysis.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 109",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Factors affecting enzyme activity"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C07-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Enzymes",
+      "topic_name": "Factors affecting enzyme activity",
+      "category": "long",
+      "question_text": "Explain how temperature, pH, substrate concentration and inhibitors can affect enzyme activity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for each factor’s effect and a final explanation that enzyme activity depends on collisions/active-site structure and availability.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 109",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Factors affecting enzyme activity"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C08-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "ATP and energy transfer",
+      "category": "mcq",
+      "question_text": "What is ATP mainly used for in cells?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Short-term transfer of usable energy"
+        },
+        {
+          "id": "B",
+          "text": "Permanent storage of all hereditary information"
+        },
+        {
+          "id": "C",
+          "text": "Building cell walls only"
+        },
+        {
+          "id": "D",
+          "text": "Naming species"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Short-term transfer of usable energy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 120",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ATP and energy transfer"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C08-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "ATP and energy transfer",
+      "category": "short",
+      "question_text": "Why is ATP called an energy currency of the cell?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cells can form ATP when energy is available and hydrolyze it to transfer manageable amounts of energy to cellular processes.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 120",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ATP and energy transfer"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C08-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "ATP and energy transfer",
+      "category": "long",
+      "question_text": "Explain the ATP-ADP cycle and how it links energy-releasing and energy-requiring reactions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for ATP formation from ADP + phosphate, energy storage, ATP hydrolysis, coupling to cellular work, and recycling of ADP.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 120",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ATP and energy transfer"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C08-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "Photosynthesis and cellular respiration",
+      "category": "mcq",
+      "question_text": "Which process captures light energy to build organic molecules?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Photosynthesis"
+        },
+        {
+          "id": "B",
+          "text": "Mitosis"
+        },
+        {
+          "id": "C",
+          "text": "Excretion"
+        },
+        {
+          "id": "D",
+          "text": "Transpiration only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Photosynthesis",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 120",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Photosynthesis and cellular respiration"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C08-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "Photosynthesis and cellular respiration",
+      "category": "short",
+      "question_text": "How are photosynthesis and cellular respiration related?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Photosynthesis stores energy in organic molecules using carbon dioxide and water, while respiration releases usable energy by breaking down organic molecules; their reactants/products are broadly complementary.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 120",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Photosynthesis and cellular respiration"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C08-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "Photosynthesis and cellular respiration",
+      "category": "long",
+      "question_text": "Compare photosynthesis and cellular respiration in terms of purpose, main inputs, main outputs and cellular location.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for purpose, inputs/outputs and correct locations such as chloroplasts for photosynthesis and mitochondria for most aerobic respiration.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 120",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Photosynthesis and cellular respiration"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C09-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "Plant nutrition and transport",
+      "category": "mcq",
+      "question_text": "Which tissue mainly transports water and mineral salts upward in plants?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xylem"
+        },
+        {
+          "id": "B",
+          "text": "Phloem"
+        },
+        {
+          "id": "C",
+          "text": "Epidermis only"
+        },
+        {
+          "id": "D",
+          "text": "Meristem only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Xylem",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 134",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Plant nutrition and transport"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C09-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "Plant nutrition and transport",
+      "category": "short",
+      "question_text": "Differentiate xylem and phloem transport.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Xylem mainly carries water/mineral ions from roots upward; phloem translocates organic nutrients such as sucrose between sources and sinks.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 134",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Plant nutrition and transport"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C09-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "Plant nutrition and transport",
+      "category": "long",
+      "question_text": "Explain how roots, xylem and phloem cooperate in plant nutrition and transport.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for root absorption, xylem water/mineral transport, photosynthetic production of sugars, phloem translocation, and source-sink relationship.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 134",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Plant nutrition and transport"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C09-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "Transpiration gaseous exchange and excretion",
+      "category": "mcq",
+      "question_text": "What is transpiration?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
+        },
+        {
+          "id": "B",
+          "text": "Movement of sugar in phloem only"
+        },
+        {
+          "id": "C",
+          "text": "Cell division in roots"
+        },
+        {
+          "id": "D",
+          "text": "Formation of pollen only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 134",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Transpiration gaseous exchange and excretion"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C09-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "Transpiration gaseous exchange and excretion",
+      "category": "short",
+      "question_text": "State one benefit and one cost of transpiration.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps pull water/minerals upward and can cool leaves, but excessive water loss can cause wilting or water stress.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 134",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Transpiration gaseous exchange and excretion"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C09-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "Transpiration gaseous exchange and excretion",
+      "category": "long",
+      "question_text": "Explain how stomata participate in both gaseous exchange and water regulation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for stomatal pores, CO2 entry, O2/water-vapour exit, guard-cell regulation, and balance between photosynthesis and water conservation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 134",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Transpiration gaseous exchange and excretion"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C10-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "Asexual reproduction and artificial propagation",
+      "category": "mcq",
+      "question_text": "Which feature is typical of asexual reproduction?",
+      "options": [
+        {
+          "id": "A",
+          "text": "One parent and no fusion of gametes"
+        },
+        {
+          "id": "B",
+          "text": "Fusion of two gametes is required"
+        },
+        {
+          "id": "C",
+          "text": "Only seeds can be produced"
+        },
+        {
+          "id": "D",
+          "text": "Chromosome number must double every generation"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "One parent and no fusion of gametes",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 151",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Asexual reproduction and artificial propagation"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C10-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "Asexual reproduction and artificial propagation",
+      "category": "short",
+      "question_text": "What is artificial vegetative propagation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is deliberate production of new plants from vegetative parts using methods such as cuttings, grafting or layering.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 151",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Asexual reproduction and artificial propagation"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C10-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "Asexual reproduction and artificial propagation",
+      "category": "long",
+      "question_text": "Compare natural asexual reproduction with artificial propagation in plants.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for one-parent/no-gamete-fusion concept, examples of natural methods, examples of artificial methods, genetic similarity of offspring, and agricultural advantages/limitations.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 151",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Asexual reproduction and artificial propagation"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C10-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "Sexual reproduction in plants",
+      "category": "mcq",
+      "question_text": "What process transfers pollen from anther to stigma?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pollination"
+        },
+        {
+          "id": "B",
+          "text": "Germination"
+        },
+        {
+          "id": "C",
+          "text": "Transpiration"
+        },
+        {
+          "id": "D",
+          "text": "Translocation"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Pollination",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 151",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Sexual reproduction in plants"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C10-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "Sexual reproduction in plants",
+      "category": "short",
+      "question_text": "Differentiate pollination and fertilization.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Pollination is transfer of pollen to a stigma; fertilization is fusion of male and female gamete nuclei after pollen-tube growth.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 151",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Sexual reproduction in plants"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C10-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "Sexual reproduction in plants",
+      "category": "long",
+      "question_text": "Describe the sequence from pollination to seed and fruit formation in a flowering plant.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for pollination, pollen germination/tube growth, fertilization, zygote/embryo and seed formation, and ovary/fruit development.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 151",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Sexual reproduction in plants"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C11-B01-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Biostatistics",
+      "topic_name": "Mean median and mode",
+      "category": "mcq",
+      "question_text": "What is the arithmetic mean?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sum of observations divided by number of observations"
+        },
+        {
+          "id": "B",
+          "text": "Most frequent value only"
+        },
+        {
+          "id": "C",
+          "text": "Middle value only"
+        },
+        {
+          "id": "D",
+          "text": "Largest value minus smallest value"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Sum of observations divided by number of observations",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 167",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Mean median and mode"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C11-B01-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Biostatistics",
+      "topic_name": "Mean median and mode",
+      "category": "short",
+      "question_text": "Differentiate median and mode.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Median is the middle value when data are ordered; mode is the value occurring most frequently.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 167",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Mean median and mode"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C11-B01-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Biostatistics",
+      "topic_name": "Mean median and mode",
+      "category": "long",
+      "question_text": "For a biological dataset, explain how mean, median and mode provide different summaries.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for correct definition of each measure, one contrast between them, an example of when each may be informative, and recognition that unusual values can affect the mean strongly.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 167",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Mean median and mode"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C11-B02-M01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Biostatistics",
+      "topic_name": "Bar charts and biological data",
+      "category": "mcq",
+      "question_text": "Which graph is appropriate for comparing counts across discrete categories?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Bar chart"
+        },
+        {
+          "id": "B",
+          "text": "Continuous line with no scale"
+        },
+        {
+          "id": "C",
+          "text": "Unlabelled sketch only"
+        },
+        {
+          "id": "D",
+          "text": "Taxonomic key"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Bar chart",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 167",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Bar charts and biological data"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C11-B02-S01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Biostatistics",
+      "topic_name": "Bar charts and biological data",
+      "category": "short",
+      "question_text": "State two features of a well-constructed bar chart.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It should have labelled axes with an appropriate scale/categories and separate bars of consistent width; a clear title is also useful.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 167",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Bar charts and biological data"
+      ]
+    },
+    {
+      "id": "IX-BIO-2025-C11-B02-L01",
+      "class_level": "9th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Biostatistics",
+      "topic_name": "Bar charts and biological data",
+      "category": "long",
+      "question_text": "Describe how to organize and present categorical biological data in a bar chart.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for identifying categories, calculating/recording frequencies, choosing a suitable scale, drawing labelled separate bars, and adding clear title/axis labels.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-009 | f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5 | page 167",
+      "tags": [
+        "grade9",
+        "biology",
+        "2025-26",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Bar charts and biological data"
+      ]
+    }
+  ]
+}

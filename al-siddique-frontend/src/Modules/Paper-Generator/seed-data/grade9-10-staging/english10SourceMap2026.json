@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "assps-english10-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-016",
+  "sourcePdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+  "sourceByteLength": 48593549,
+  "pageCount": 132,
+  "identity": [
+    "English 10",
+    "PECTAA",
+    "2026-27 catalogue identity"
+  ],
+  "units": [
+    {
+      "number": 1,
+      "title": "Hazrat Muhammad's Social Reforms for the Rights of Women, Orphans and Slaves",
+      "theme": "ethics, dignity and social responsibility",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "My Beloved Pakistan",
+      "theme": "patriotism and national pride",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Digital Globalisation: Transforming the English Language",
+      "theme": "digital communication and language change",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "The Earth: Act Now for Tomorrow",
+      "theme": "climate action and sustainability",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "The Happy Prince",
+      "theme": "compassion and character perspective",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Drug Abuse",
+      "theme": "health, prevention and responsible choices",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Time",
+      "theme": "time management and priorities",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Pollution-Free Pakistan with Greenery All Around",
+      "theme": "environment and civic action",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "The Road Not Taken",
+      "theme": "choice and reflection",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "title": "The Three Questions",
+      "theme": "wisdom and thoughtful action",
+      "tocPdfPage": 2,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "competencyMap": {
+    "tocPdfPages": [
+      2,
+      3
+    ],
+    "skills": [
+      "comprehension",
+      "context clues",
+      "idioms and proverbs",
+      "figurative language",
+      "phrases",
+      "sentence patterns",
+      "direct and indirect narration",
+      "summary and precis",
+      "proofreading and editing",
+      "paragraph and explanatory writing"
+    ]
+  },
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPoemLines": false,
+    "copyModelPaperStems": false
+  }
+}
