@@ -21,7 +21,7 @@ export default function StudentReports() {
  if (search) params.search = search
  api.get('/api/students', { params })
  .then(r => setStudents(r.data.data || []))
- .catch(err => { setStudents([]); setLoadError(err.response?.data?.message || 'Student report data could not be loaded.') })
+ .catch(err => { setLoadError(err.response?.data?.message || 'Student report data could not be refreshed. Existing loaded rows were preserved.') })
  .finally(() => setLoading(false))
  }
 
@@ -40,7 +40,7 @@ export default function StudentReports() {
  setLoading(true);
  api.get('/api/students', { params: {} })
  .then(r => setStudents(r.data.data || []))
- .catch(err => { setStudents([]); setLoadError(err.response?.data?.message || 'Student report data could not be loaded.') })
+ .catch(err => { setLoadError(err.response?.data?.message || 'Student report data could not be refreshed. Existing loaded rows were preserved.') })
  .finally(() => setLoading(false))
  }}>Reset Filters</button>
  </div>
@@ -61,10 +61,13 @@ export default function StudentReports() {
  </button>
  </div>
 
+ {loadError && students.length > 0 && (
+ <div className="super-module-card" style={{ ...card, padding:16, color:'var(--apex-action-danger)' }}>{loadError}</div>
+ )}
  <div className="super-module-card" style={{ ...card, overflowX: 'auto', borderRadius: 22 }}>
  {loading ? (
  <div style={{ padding: 40, textAlign: 'center', color: C.muted }}>Loading students…</div>
- ) : loadError ? (
+ ) : loadError && students.length === 0 ? (
  <div style={{ padding:32, textAlign:'center', color:'var(--apex-action-danger)' }}>{loadError}</div>
  ) : (
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>

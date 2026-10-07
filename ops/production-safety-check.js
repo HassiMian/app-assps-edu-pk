@@ -238,6 +238,18 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/families/FamilyModule.jsx',
+  /catch\(err => \{ setStudents\(\[\]\)/,
+  'family detection source failures must preserve the last known-good student list.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentReports.jsx',
+  /catch\(err => \{ setStudents\(\[\]\)/,
+  'student report source failures must preserve previously loaded rows.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'

@@ -180,7 +180,7 @@ export default function FamilyModule() {
  father_cnic: s.father_cnic,
  })))
  })
- .catch(err => { setStudents([]); setLoadError(err.response?.data?.message || 'Student data could not be loaded for family detection.') })
+ .catch(err => { setLoadError(err.response?.data?.message || 'Student data could not be refreshed for family detection. Existing loaded students were preserved.') })
  .finally(() => setLoading(false))
  }, [autoDetectFamilies])
 
@@ -290,9 +290,12 @@ export default function FamilyModule() {
  </div>
 
  {/* Family list */}
+ {loadError && students.length > 0 && (
+ <div style={{ ...card, marginBottom:12, padding:16, color:'var(--apex-action-danger)' }}>{loadError}</div>
+ )}
  {loading ? (
  <div style={{ textAlign: 'center', padding: 60, color: C.muted }}>Loading students and detecting families…</div>
- ) : loadError ? (
+ ) : loadError && students.length === 0 ? (
  <div style={{ ...card, textAlign:'center', padding:32, color:'var(--apex-action-danger)' }}>{loadError}</div>
  ) : filteredFamilies.length === 0 ? (
  <div style={{ ...card, textAlign: 'center', padding: 60, color: C.muted }}>
