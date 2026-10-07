@@ -384,6 +384,18 @@ assertNotContains(
 )
 
 assertContains(
+  'al-siddique-backend/src/config/database.js',
+  'async function applyTenantContext(client)',
+  'database transaction helpers must expose the canonical tenant/RLS context applicator.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/database.js',
+  'module.exports = { pool, query, tenantContext, applyTenantContext }',
+  'routes using explicit transactions must be able to import applyTenantContext.'
+)
+
+assertContains(
   'al-siddique-backend/src/services/teacherAssignmentService.js',
   'TEACHER_ASSIGNMENT_SCHEMA_NOT_READY',
   'teacher assignment workflows must fail closed when migration 019 is unavailable.'
