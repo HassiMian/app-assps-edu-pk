@@ -239,8 +239,7 @@ export default function Dashboard() {
         setUpcomingEvents(Array.isArray(eventRes.data?.data) ? eventRes.data.data : [])
       } catch (eventErr) {
         console.error('Dashboard events fetch error:', eventErr)
-        setUpcomingEvents([])
-        setDashboardWarning('Core dashboard data is live, but upcoming events could not be loaded.')
+        setDashboardWarning('Core dashboard data is live, but upcoming events could not be refreshed. Existing loaded events were preserved.')
       }
 
       const presentCount = Number(dash.today_present ?? 0)
