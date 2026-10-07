@@ -1,0 +1,21 @@
+{
+  "schemaVersion":"assps-chemistry9-ch3-content-map-v1",
+  "checkedOn":"2026-10-06",
+  "sourceRecordId":"pectaa-catalog-007",
+  "sourcePdfSha256":"05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter":{"number":3,"title":"Chemical Bonding","printedPages":[32,51],"pdfPages":[36,55],"textLayer":"IMAGE_ONLY_BUT_RENDERED"},
+  "topics":[
+    {"topicId":"3.1","title":"Why do atoms form chemical bonds?","pdfStartPage":37,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.2","title":"Chemical Bond","pdfStartPage":37,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.3","title":"Metallic Bond","pdfStartPage":45,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.4","title":"Electropositive Character of Metals","pdfStartPage":47,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.5","title":"Electronegative character of Non-metals","pdfStartPage":47,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.6","title":"Compare the properties of ionic and covalent compounds","pdfStartPage":48,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.7","title":"Intermolecular Forces of Attraction","pdfStartPage":48,"status":"RENDERED_PAGE_HEADING_REVIEWED"},
+    {"topicId":"3.8","title":"Nature of Bonding and Properties","pdfStartPage":50,"status":"RENDERED_PAGE_HEADING_REVIEWED"}
+  ],
+  "verifiedConceptFamilies":["stable electronic arrangement and chemical bonding","ionic electron transfer and crystal lattice","covalent electron sharing and coordinate bond formation","metallic bonding and mobile electrons","electropositive/electronegative tendencies","ionic versus covalent property comparison","dipole-dipole attraction and hydrogen bonding","bonding and electrical conductivity"],
+  "exerciseFamilies":{"pdfPages":[53,54,55],"families":["Multiple Choice Questions","Questions for Short Answers","Constructed Response Questions","Descriptive Questions","Investigative Questions"],"itemLevelExerciseMap":"PENDING"},
+  "actual2026Evidence":{"artifact":"multanGrade9ScienceActual2026Evidence.json","gate":"SATISFIED_FOR_GROUP_I_TOP_LEVEL_PATTERN_ONLY"},
+  "authoring":{"originalAdditionalConceptualAllowed":true,"exerciseOriginAllowed":false,"copyTextbookPassages":false,"copyPastPaperStems":false,"publicationAllowed":false,"urduCounterpartStatus":"BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION","ocrMayLocateHeadingsButNotApproveQuestionContent":true}
+}
