@@ -103,6 +103,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  const [showNotifs, setShowNotifs] = useState(false)
  const [notifs, setNotifs] = useState([])
  const [notifsLoading, setNotifsLoading] = useState(false)
+ const [notifsError, setNotifsError] = useState('')
  const menuRef = useRef()
  const bellRef = useRef()
  const searchRef = useRef()
@@ -164,8 +165,10 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  const res = await api.get('/api/notify/inbox')
  const rows = Array.isArray(res.data?.data) ? res.data.data : []
  setNotifs(rows.map(normalizeNotification))
+ setNotifsError('')
  } catch (err) {
  console.warn('Topbar notification inbox refresh failed; preserving existing notifications:', err?.message || err)
+ setNotifsError('Notification source is currently unavailable.')
  } finally {
  setNotifsLoading(false)
  }
@@ -508,11 +511,21 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  </button>
  </div>
 
+ {notifsError && notifs.length > 0 && !notifsLoading && (
+ <div style={{ padding: '8px 16px', color: 'var(--apex-text-tertiary)', fontSize: 11, borderBottom: '1px solid var(--apex-border-subtle)' }}>
+ Notification refresh failed. Showing previously loaded notifications.
+ </div>
+ )}
+
  {/* Items */}
  <div style={{ maxHeight: 340, overflowY: 'auto' }}>
  {notifsLoading ? (
  <div style={{ padding: 32, textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 13 }}>
  Loading notifications...
+ </div>
+ ) : notifsError && notifs.length === 0 ? (
+ <div style={{ padding: 32, textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 13 }}>
+ Notifications are currently unavailable.
  </div>
  ) : notifs.length === 0 ? (
  <div style={{ padding: 32, textAlign: 'center', color: 'var(--apex-text-tertiary)', fontSize: 13 }}>

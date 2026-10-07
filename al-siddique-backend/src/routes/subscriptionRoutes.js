@@ -11,6 +11,7 @@ const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { sendRejectionEmail } = require('../services/emailService')
 const { generateSchoolAdminCredentials, sendCredentialsEmail } = require('../services/apexCredentials')
+const { resolveSaasLoginUrl } = require('../services/saasPublicUrls')
 
 // Storage configuration (aligns with uploadRoutes.js)
 const uploadDir = fs.existsSync('/var/uploads')
@@ -273,8 +274,11 @@ router.get('/:id', protect, requireRoles('super_admin'), async (req, res) => {
  * 4. POST /:id/approve (Super Admin Approve Request & Auto-Provision)
  */
 router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, res) => {
-  const client = await pool.connect()
+  let client = null
+  let transactionStarted = false
   try {
+    const loginUrl = resolveSaasLoginUrl()
+    client = await pool.connect()
     const requestId = req.params.id
 
     // Fetch the request
@@ -290,6 +294,7 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
     }
 
     await client.query('BEGIN')
+    transactionStarted = true
     await applyTenantContext(client)
 
     // Generate unique school tenantId
@@ -342,8 +347,6 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
       request.email, request.owner_name
     ])
 
-    const baseDomain = req.headers.host || 'apex.assps.edu.pk'
-    const loginUrl = `${req.secure ? 'https' : 'http'}://${baseDomain}/login/saas`
     const { user, temporaryPassword } = await generateSchoolAdminCredentials({
       client,
       request,
@@ -385,6 +388,7 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
     ])
 
     await client.query('COMMIT')
+    transactionStarted = false
 
     const emailResult = await sendCredentialsEmail({
       ownerName: request.owner_name,
@@ -414,11 +418,23 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
       }
     })
   } catch (err) {
-    await client.query('ROLLBACK')
+    if (client && transactionStarted) {
+      try {
+        await client.query('ROLLBACK')
+      } catch (rollbackErr) {
+        console.error('Approval rollback failed:', rollbackErr.message)
+      }
+    }
     console.error('Approval transaction failed:', err.message)
-    res.status(500).json({ success: false, message: 'Failed to approve subscription and provision school.' })
+    const configurationFailure = err?.code === 'SAAS_LOGIN_URL_INVALID'
+    res.status(configurationFailure ? 503 : 500).json({
+      success: false,
+      message: configurationFailure
+        ? 'Subscription provisioning is temporarily unavailable.'
+        : 'Failed to approve subscription and provision school.'
+    })
   } finally {
-    client.release()
+    if (client) client.release()
   }
 })
 
