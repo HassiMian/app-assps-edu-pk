@@ -271,7 +271,7 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
 async function transitionQuestionLifecycle({ schoolId, userId = null, publicId, toStatus }) {
   return withTenantTransaction(schoolId, async (client, tenantId) => {
     const found = await client.query(
-      `SELECT id,public_id,lifecycle_status,current_revision FROM question_masters WHERE school_id=$1 AND public_id=$2 FOR UPDATE`,
+      `SELECT id,public_id,lifecycle_status,current_revision,source_question_bank_id FROM question_masters WHERE school_id=$1 AND public_id=$2 FOR UPDATE`,
       [tenantId, text(publicId)]
     )
     if (!found.rowCount) throw governanceError(404, 'QUESTION_MASTER_NOT_FOUND', 'Governed question was not found.')
@@ -280,10 +280,17 @@ async function transitionQuestionLifecycle({ schoolId, userId = null, publicId, 
     if (lower(toStatus)==='ready' && Number(master.current_revision||0)<1) {
       throw governanceError(409, 'QUESTION_MASTER_HAS_NO_REVISION', 'A question must have an immutable revision before it can be ready.')
     }
+    const nextStatus = lower(toStatus)
     const updated = await client.query(
       `UPDATE question_masters SET lifecycle_status=$1,updated_by=$2,updated_at=NOW() WHERE school_id=$3 AND id=$4 RETURNING public_id,lifecycle_status,current_revision,updated_at`,
-      [lower(toStatus), userId, tenantId, master.id]
+      [nextStatus, userId, tenantId, master.id]
     )
+    if (master.source_question_bank_id && (nextStatus === 'ready' || nextStatus === 'retired')) {
+      await client.query(
+        `UPDATE question_bank SET is_approved=$1 WHERE school_id=$2 AND id=$3`,
+        [nextStatus === 'ready', tenantId, master.source_question_bank_id]
+      )
+    }
     return updated.rows[0]
   })
 }
