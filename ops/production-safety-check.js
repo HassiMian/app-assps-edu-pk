@@ -275,6 +275,18 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertNotContains(
+  'al-siddique-backend/src/middleware/tenant.js',
+  /Assuming false/,
+  'tenant schema lookup failures must never be treated as missing tenant columns.'
+)
+
+assertContains(
+  'al-siddique-backend/src/middleware/tenant.js',
+  "lookupError.code = 'TENANT_SCHEMA_LOOKUP_FAILED'",
+  'tenant schema lookup failures must propagate explicitly and fail closed.'
+)
+
 assertContains(
   'al-siddique-backend/src/package.json',
   '"seed": "node seed.js"',

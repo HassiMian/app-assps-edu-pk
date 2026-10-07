@@ -21,8 +21,10 @@ async function hasColumn(tableName, columnName) {
     columnCache.set(key, exists)
     return exists
   } catch (err) {
-    console.warn(`Database offline during hasColumn check for ${key}. Assuming false. Error: ${err.message}`)
-    return false
+    const lookupError = new Error(`Tenant schema lookup failed for ${key}`)
+    lookupError.code = 'TENANT_SCHEMA_LOOKUP_FAILED'
+    lookupError.cause = err
+    throw lookupError
   }
 }
 
