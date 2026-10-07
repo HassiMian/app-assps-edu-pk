@@ -112,8 +112,7 @@ export default function StudentPortal() {
  })))
  } catch (notifyErr) {
  console.error('Portal notification inbox load error:', notifyErr)
- setMessages([])
- setWarning('Academic and fee data is live, but notifications could not be loaded.')
+ setWarning('Academic and fee data is live, but notifications could not be refreshed. Existing loaded notifications were preserved.')
  }
 
  // 2c. Grading policy — same server settings used by the examination workflow

@@ -250,6 +250,30 @@ assertNotContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
+  /Portal notification inbox load error:[\s\S]{0,140}setMessages\(\[\]\)/,
+  'parent portal notification source failures must preserve the last known-good inbox.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/StudentPortal.jsx',
+  /Portal notification inbox load error:[\s\S]{0,140}setMessages\(\[\]\)/,
+  'student portal notification source failures must preserve the last known-good inbox.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Messages.jsx',
+  /Failed to load message history[\s\S]{0,160}setMessages\(\[\]\)/,
+  'message history failures must preserve the last known-good provider history.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/Messages.jsx',
+  "recipientCount == null ? 'Verified recipient count is temporarily unavailable; send will verify live.'",
+  'recipient-count source failure must be distinguished from a verified zero-recipient group.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'

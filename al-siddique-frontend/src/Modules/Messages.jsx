@@ -14,11 +14,13 @@ export default function Messages() {
  const [draft, setDraft] = useState({ recipient: 'parents', subject: '', body: '' })
  const [alert, setAlert] = useState('')
  const [sending, setSending] = useState(false)
- const [recipientCount, setRecipientCount] = useState(0)
+ const [recipientCount, setRecipientCount] = useState(null)
+ const [historyError, setHistoryError] = useState('')
  const [savingDraft, setSavingDraft] = useState(false)
  const [draftUpdatedAt, setDraftUpdatedAt] = useState('')
 
  async function loadHistory() {
+ setHistoryError('')
  try {
  const response = await api.get('/api/notify/history')
  const rows = Array.isArray(response.data?.data) ? response.data.data : []
@@ -31,7 +33,7 @@ export default function Messages() {
  })))
  } catch (err) {
  console.error('Failed to load message history', err)
- setMessages([])
+ setHistoryError(err.response?.data?.message || 'Message history could not be refreshed. Existing loaded history was preserved.')
  }
  }
 
@@ -57,12 +59,14 @@ export default function Messages() {
 
  useEffect(() => {
  let cancelled = false
+ setRecipientCount(null)
  async function loadRecipients() {
  try {
  const response = await api.get('/api/notify/group-recipients', { params: { group: draft.recipient } })
  if (!cancelled) setRecipientCount(Number(response.data?.count || 0))
- } catch {
- if (!cancelled) setRecipientCount(0)
+ } catch (err) {
+ console.error('Failed to load verified recipient count', err)
+ if (!cancelled) setRecipientCount(null)
  }
  }
  void loadRecipients()
@@ -134,7 +138,7 @@ export default function Messages() {
  <h1 style={sectionHeader}>School Messaging</h1>
  <p style={{ color: C.muted, marginTop: 8 }}>Send source-backed announcements to verified school contacts.</p>
  </div>
- <div style={{ color:C.muted, fontSize:12, alignSelf:'center' }}>{recipientCount} verified recipients in selected group</div>
+ <div style={{ color:C.muted, fontSize:12, alignSelf:'center' }}>{recipientCount == null ? 'Verified recipient count is temporarily unavailable; send will verify live.' : `${recipientCount} verified recipients in selected group`}</div>
  </div>
 
  <form className="super-module-card" onSubmit={sendMessage} style={{ ...card, display: 'grid', gap: 18, borderRadius: 22 }}>
@@ -151,6 +155,7 @@ export default function Messages() {
  </div>
  </form>
 
+ {historyError && <div className="super-module-card" style={{ ...card, padding:16, color:C.red, fontWeight:700 }}>{historyError}</div>}
  <div className="super-module-card" style={{ ...card, overflowX: 'auto', borderRadius: 22 }}>
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead><tr style={{ borderBottom: `1px solid ${C.border}` }}>{['Provider Date','Recipient','Subject','Status'].map(label => <th key={label} style={{ padding:'14px 16px', textAlign:'left', color:C.muted, fontSize:12, textTransform:'uppercase' }}>{label}</th>)}</tr></thead>
