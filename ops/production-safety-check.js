@@ -288,6 +288,18 @@ assertNotContains(
 )
 
 assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  "/^data:image\\/(?:png|jpe?g|webp);base64,",
+  'fee payment proof submissions must accept only trusted image data URLs.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
+  /const \{ proof_image[^\n]+\n\s*if \(!proof_image\)[\s\S]{0,180}Buffer\.byteLength/,
+  'fee proof validation must reject arbitrary strings before size-only validation.'
+)
+
+assertContains(
   'al-siddique-backend/src/server.js',
   "Payment proof files are not publicly accessible.",
   'financial payment proof files must be blocked from the public static upload tree.'

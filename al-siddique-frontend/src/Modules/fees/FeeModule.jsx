@@ -963,7 +963,7 @@ function ProofReview() {
  <div style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>{preview.name} — Payment Screenshot</div>
  <button onClick={() => setPreview(null)} style={{ background: 'none', border: 'none', color: C.muted, cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 4 }}><X size={18} /></button>
  </div>
- <img src={preview.proof_image} alt="Proof" style={{ width: '100%', borderRadius: 12, marginBottom: 16, maxHeight: 320, objectFit: 'contain', background: '#1e293b' }} />
+ {/^data:image\/(?:png|jpe?g|webp);base64,/i.test(String(preview.proof_image || '')) ? <img src={preview.proof_image} alt="Proof" style={{ width: '100%', borderRadius: 12, marginBottom: 16, maxHeight: 320, objectFit: 'contain', background: '#1e293b' }} /> : <div style={{ padding: 16, borderRadius: 12, marginBottom: 16, background: 'var(--apex-bg-subtle)', color: C.red, fontWeight: 700 }}>Stored payment proof is not a trusted image source.</div>}
  <div style={{ display: 'flex', gap: 10 }}>
  <button onClick={() => { handleAction(preview.id, 'approve'); setPreview(null) }} style={{ flex: 1, padding: '10px 0', borderRadius: 10, background: 'rgba(16,185,129,0.2)', border: '1px solid rgba(16,185,129,0.4)', color: '#34d399', fontWeight: 600, cursor: 'pointer' }}> Approve & Mark Paid</button>
  <button onClick={() => { handleAction(preview.id, 'reject'); setPreview(null) }} style={{ flex: 1, padding: '10px 0', borderRadius: 10, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', color: '#f87171', fontWeight: 600, cursor: 'pointer' }}> Reject</button>

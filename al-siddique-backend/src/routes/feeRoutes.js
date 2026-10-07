@@ -851,6 +851,9 @@ router.post('/:id/upload-proof', protect, async (req, res) => {
 
     const { proof_image, proof_amount, proof_method } = req.body
     if (!proof_image) return res.status(400).json({ success: false, message: 'Screenshot required' })
+    if (typeof proof_image !== 'string' || !/^data:image\/(?:png|jpe?g|webp);base64,[A-Za-z0-9+/=\r\n]+$/i.test(proof_image)) {
+      return res.status(422).json({ success: false, message: 'Payment proof must be a PNG, JPG, JPEG, or WEBP image.' })
+    }
     if (Buffer.byteLength(proof_image, 'utf8') > 5 * 1024 * 1024) {
       return res.status(400).json({ success: false, message: 'Image too large (max 5MB)' })
     }
