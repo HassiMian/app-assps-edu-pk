@@ -26,6 +26,28 @@ export const DocumentDirection = Object.freeze({
   AUTO: 'auto',
 })
 
+export const ContentCapability = Object.freeze({
+  TEXT: 'text',
+  MATH: 'math',
+  IMAGE: 'image',
+  TABLE: 'table',
+  BIDI: 'bidi',
+})
+
+export const MathSourceFormat = Object.freeze({
+  LATEX: 'latex',
+  MATHML: 'mathml',
+})
+
+export const AssetKind = Object.freeze({
+  IMAGE: 'image',
+})
+
+export const AssetStorage = Object.freeze({
+  EMBEDDED: 'embedded',
+  MANAGED: 'managed',
+})
+
 export const AttemptRule = Object.freeze({
   ATTEMPT_ANY: 'ATTEMPT_ANY',
   ALL: 'ALL',
@@ -136,6 +158,10 @@ export const VALID_FIELD_PROVENANCE_ORIGINS = new Set(Object.values(FieldProvena
 export const VALID_COVERAGE_STATUSES = new Set(Object.values(CoverageStatus))
 export const VALID_LABEL_ORIGINS = new Set(Object.values(LabelOrigin))
 export const VALID_NODE_TYPES = new Set(Object.values(CanonicalNodeType))
+export const VALID_CONTENT_CAPABILITIES = new Set(Object.values(ContentCapability))
+export const VALID_MATH_SOURCE_FORMATS = new Set(Object.values(MathSourceFormat))
+export const VALID_ASSET_KINDS = new Set(Object.values(AssetKind))
+export const VALID_ASSET_STORAGE = new Set(Object.values(AssetStorage))
 export const VALID_CLASSIFICATION_CERTAINTIES = new Set(Object.values(ClassificationCertainty))
 
 export function createProvenanceField(value = null, origin = FieldProvenanceOrigin.UNSET) {
@@ -146,10 +172,26 @@ export function createProvenanceField(value = null, origin = FieldProvenanceOrig
 }
 
 export function createBaseNode(overrides = {}) {
+  const contentCapabilities = Array.isArray(overrides.contentCapabilities)
+    ? [...new Set(overrides.contentCapabilities.map(String))]
+    : null
+  const math = overrides.math && typeof overrides.math === 'object'
+    ? {
+        format: overrides.math.format || MathSourceFormat.LATEX,
+        source: String(overrides.math.source ?? ''),
+        display: overrides.math.display === 'inline' ? 'inline' : 'block',
+      }
+    : null
+  const assetRefs = Array.isArray(overrides.assetRefs)
+    ? [...new Set(overrides.assetRefs.map(String).filter(Boolean))]
+    : null
   return {
     id: overrides.id,
     type: overrides.type,
     direction: overrides.direction || DocumentDirection.AUTO,
+    ...(contentCapabilities ? { contentCapabilities } : {}),
+    ...(math ? { math } : {}),
+    ...(assetRefs ? { assetRefs } : {}),
     operationalNodeMarks: overrides.operationalNodeMarks ?? null,
     authoritativeNodeMarks: overrides.authoritativeNodeMarks ?? null,
     nodeMarksOrigin: overrides.nodeMarksOrigin || NodeMarksOrigin.UNSTATED,
@@ -506,6 +548,24 @@ export function createCanonicalSection(overrides = {}) {
   }
 }
 
+export function createCanonicalAsset(overrides = {}) {
+  return {
+    id: String(overrides.id ?? ''),
+    kind: overrides.kind || AssetKind.IMAGE,
+    storage: overrides.storage || AssetStorage.EMBEDDED,
+    mimeType: String(overrides.mimeType ?? ''),
+    sha256: String(overrides.sha256 ?? '').toLowerCase(),
+    byteLength: Number.isFinite(Number(overrides.byteLength)) ? Number(overrides.byteLength) : null,
+    widthPx: Number.isFinite(Number(overrides.widthPx)) ? Number(overrides.widthPx) : null,
+    heightPx: Number.isFinite(Number(overrides.heightPx)) ? Number(overrides.heightPx) : null,
+    effectiveDpi: Number.isFinite(Number(overrides.effectiveDpi)) ? Number(overrides.effectiveDpi) : null,
+    altText: String(overrides.altText ?? ''),
+    description: String(overrides.description ?? ''),
+    contentDataUrl: overrides.contentDataUrl ? String(overrides.contentDataUrl) : null,
+    contentRef: overrides.contentRef ? String(overrides.contentRef) : null,
+  }
+}
+
 export function createCanonicalPaperDocument(overrides = {}) {
   const meta = overrides.metadata || {}
   const pres = overrides.presentation || {}
@@ -582,6 +642,7 @@ export function createCanonicalPaperDocument(overrides = {}) {
           manifestPaperIndex: sid.manifestPaperIndex,
         }
       : null,
+    ...(overrides.assets !== undefined ? { assets: Array.isArray(overrides.assets) ? overrides.assets.map(createCanonicalAsset) : [] } : {}),
     sections: Array.isArray(overrides.sections) ? [...overrides.sections] : [],
     sourceCoverageLedger: Array.isArray(overrides.sourceCoverageLedger)
       ? [...overrides.sourceCoverageLedger]
@@ -725,6 +786,51 @@ export function validateCanonicalPaperDocument(doc) {
     }
   }
 
+  // 6.5 Optional immutable asset registry
+  const assetIds = new Set()
+  if (doc.assets !== undefined && !Array.isArray(doc.assets)) {
+    errors.push('assets must be an array when provided')
+  } else if (Array.isArray(doc.assets)) {
+    doc.assets.forEach((asset, assetIndex) => {
+      const assetPath = `assets[${assetIndex}]`
+      if (!asset || typeof asset !== 'object') {
+        errors.push(`${assetPath} must be an object`)
+        return
+      }
+      if (typeof asset.id !== 'string' || !asset.id.trim()) {
+        errors.push(`${assetPath}.id must be a non-empty string`)
+      } else if (assetIds.has(asset.id)) {
+        errors.push(`Duplicate asset id "${asset.id}"`)
+      } else {
+        assetIds.add(asset.id)
+      }
+      if (!VALID_ASSET_KINDS.has(asset.kind)) errors.push(`Invalid ${assetPath}.kind: "${asset.kind}"`)
+      if (!VALID_ASSET_STORAGE.has(asset.storage)) errors.push(`Invalid ${assetPath}.storage: "${asset.storage}"`)
+      if (typeof asset.mimeType !== 'string' || !asset.mimeType.startsWith('image/')) {
+        errors.push(`${assetPath}.mimeType must be an image/* MIME type`)
+      }
+      if (typeof asset.sha256 !== 'string' || !/^[a-f0-9]{64}$/i.test(asset.sha256)) {
+        errors.push(`${assetPath}.sha256 must be a 64-char hex SHA-256`)
+      }
+      for (const numericKey of ['byteLength','widthPx','heightPx','effectiveDpi']) {
+        const value = asset[numericKey]
+        if (value !== null && value !== undefined && (!Number.isFinite(Number(value)) || Number(value) <= 0)) {
+          errors.push(`${assetPath}.${numericKey} must be a positive finite number or null`)
+        }
+      }
+      if (typeof asset.altText !== 'string') errors.push(`${assetPath}.altText must be a string`)
+      if (typeof asset.description !== 'string') errors.push(`${assetPath}.description must be a string`)
+      if (asset.storage === AssetStorage.EMBEDDED) {
+        if (typeof asset.contentDataUrl !== 'string' || !/^data:image\/(png|jpeg|webp);base64,/i.test(asset.contentDataUrl)) {
+          errors.push(`${assetPath}.contentDataUrl must be a PNG/JPEG/WebP data URL for embedded assets`)
+        }
+      }
+      if (asset.storage === AssetStorage.MANAGED && (typeof asset.contentRef !== 'string' || !asset.contentRef.trim())) {
+        errors.push(`${assetPath}.contentRef must be a non-empty string for managed assets`)
+      }
+    })
+  }
+
   // 7. Section & Node Validation
   if (!Array.isArray(doc.sections)) {
     errors.push('sections must be an array')
@@ -795,6 +901,49 @@ export function validateCanonicalPaperDocument(doc) {
 
         if (!VALID_NODE_TYPES.has(node.type)) {
           errors.push(`Invalid ${nodePath}.type: "${node.type}"`)
+        }
+
+        if (node.contentCapabilities !== undefined && !Array.isArray(node.contentCapabilities)) {
+          errors.push(`${nodePath}.contentCapabilities must be an array when provided`)
+        } else if (Array.isArray(node.contentCapabilities)) {
+          const seenCapabilities = new Set()
+          node.contentCapabilities.forEach((capability, capabilityIndex) => {
+            if (!VALID_CONTENT_CAPABILITIES.has(capability)) {
+              errors.push(`Invalid ${nodePath}.contentCapabilities[${capabilityIndex}]: "${capability}"`)
+            }
+            if (seenCapabilities.has(capability)) {
+              errors.push(`${nodePath}.contentCapabilities contains duplicate "${capability}"`)
+            }
+            seenCapabilities.add(capability)
+          })
+        }
+        if (node.math !== null && node.math !== undefined) {
+          if (!node.math || typeof node.math !== 'object') {
+            errors.push(`${nodePath}.math must be an object or null`)
+          } else {
+            if (!VALID_MATH_SOURCE_FORMATS.has(node.math.format)) errors.push(`Invalid ${nodePath}.math.format: "${node.math.format}"`)
+            if (typeof node.math.source !== 'string' || !node.math.source.trim()) errors.push(`${nodePath}.math.source must be a non-empty string`)
+            if (!['inline','block'].includes(node.math.display)) errors.push(`${nodePath}.math.display must be "inline" or "block"`)
+          }
+          if (!node.contentCapabilities?.includes(ContentCapability.MATH)) {
+            errors.push(`${nodePath}.math requires contentCapabilities to include "math"`)
+          }
+        } else if (node.contentCapabilities?.includes(ContentCapability.MATH)) {
+          errors.push(`${nodePath}.contentCapabilities includes "math" but node.math is missing`)
+        }
+        if (node.assetRefs !== undefined && !Array.isArray(node.assetRefs)) {
+          errors.push(`${nodePath}.assetRefs must be an array when provided`)
+        } else if (Array.isArray(node.assetRefs)) {
+          node.assetRefs.forEach((assetId, assetRefIndex) => {
+            if (typeof assetId !== 'string' || !assetId.trim()) {
+              errors.push(`${nodePath}.assetRefs[${assetRefIndex}] must be a non-empty string`)
+            } else if (!assetIds.has(assetId)) {
+              errors.push(`${nodePath}.assetRefs[${assetRefIndex}] references missing asset "${assetId}"`)
+            }
+          })
+        }
+        if (node.contentCapabilities?.includes(ContentCapability.IMAGE) && (!Array.isArray(node.assetRefs) || node.assetRefs.length === 0)) {
+          errors.push(`${nodePath}.contentCapabilities includes "image" but assetRefs is empty`)
         }
 
         if (node.direction === 'dual') {
