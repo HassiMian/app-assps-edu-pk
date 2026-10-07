@@ -1192,6 +1192,7 @@ export class EditorWorkingStore {
     return {
       templateVersion: 1,
       metadata: {
+        // School identity (name/logo) lives outside editable metadata and is never template-controlled.
         fields: Object.fromEntries(Object.entries(this._workingDoc.metadata || {}).filter(([k]) => !['dirtyFields','customFields','customFieldsDirty','hiddenHeaderFields','hiddenHeaderFieldsDirty','language','direction'].includes(k))),
         customFields: JSON.parse(JSON.stringify(this._workingDoc.metadata?.customFields || [])),
         hiddenHeaderFields: [...(this._workingDoc.metadata?.hiddenHeaderFields || [])],

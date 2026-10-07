@@ -244,6 +244,11 @@ export default function CanonicalDocumentRenderer({
     { id: 'examDate', label: 'Date', value: meta.examDate ?? '', metadataKey: 'examDate' },
   ]
   const hiddenHeaderFields = new Set(meta.hiddenHeaderFields || [])
+  const headerFieldStyle = (fieldKey) => {
+    const raw = store?.getHeaderFieldStyle?.(fieldKey) || pres.headerFieldStyles?.[fieldKey] || {}
+    const { paragraphSpacing, direction, ...visual } = raw
+    return { ...visual, ...(paragraphSpacing ? { marginBottom: paragraphSpacing } : {}), ...(direction ? { direction } : {}) }
+  }
   const visibleHeaderInfoFields = headerInfoFields.filter(field => !hiddenHeaderFields.has(field.id))
 
   const pageBorder = pres.pageBorder || 'none'
@@ -384,7 +389,7 @@ export default function CanonicalDocumentRenderer({
                   ariaLabel="Total marks"
                   minWidth="36px"
                   numeric
-                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}
+                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700, ...headerFieldStyle('totalMarks') }}
                 />
               ) : (
                 <CanonicalInlineField
@@ -394,7 +399,7 @@ export default function CanonicalDocumentRenderer({
                   placeholder="__________"
                   ariaLabel={field.label}
                   minWidth="58px"
-                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700 }}
+                  style={{ color: '#1e293b', fontSize: '11px', fontWeight: 700, ...headerFieldStyle(field.id) }}
                 />
               )}
               {isEditing && (

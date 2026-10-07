@@ -24,6 +24,10 @@ export default function CanonicalPaperEditorMain({
   // 1. Initialize stable EditorWorkingStore and EditorFieldRegistry
   const store = useMemo(() => new EditorWorkingStore(loadedPaper), [loadedPaper])
   const registry = useMemo(() => new EditorFieldRegistry(), [loadedPaper])
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.__B3_DIAGNOSTICS__) window.__B3_EDITOR_STORE__ = store
+    return () => { if (typeof window !== 'undefined' && window.__B3_EDITOR_STORE__ === store) delete window.__B3_EDITOR_STORE__ }
+  }, [store])
 
   const [workingDoc, setWorkingDoc] = useState(() => store.getWorkingDocument())
   const [activeFieldKey, setActiveFieldKey] = useState(null)
