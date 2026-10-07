@@ -2204,6 +2204,27 @@ assertNotContains(
   'academic setup server hydration failure must not be mislabeled as a normal local-cache state.'
 )
 
+assertNotContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  /Dashboard events fetch error:[\s\S]{0,120}setUpcomingEvents\(\[\]\)/,
+  'dashboard event refresh failures must preserve the last known-good upcoming events.'
+)
+assertContains(
+  'al-siddique-frontend/src/pages/Dashboard.jsx',
+  'Existing loaded events were preserved.',
+  'dashboard must explicitly report that loaded events were preserved when refresh fails.'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/SMSReport.jsx',
+  /Notification history load failed[\s\S]{0,120}setLogs\(\[\]\)/,
+  'attendance SMS delivery-history refresh failures must preserve the last known-good log.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/SMSReport.jsx',
+  'Existing loaded delivery history was preserved.',
+  'attendance SMS delivery-history refresh failure must be explicit while preserving current rows.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
