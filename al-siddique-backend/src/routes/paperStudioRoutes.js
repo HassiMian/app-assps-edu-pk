@@ -8,6 +8,7 @@ const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanon
 const { buildCanonicalCanaryPlan } = require('../services/papers/paperCanonicalCanaryPlanV6H2')
 const { buildCanonicalCanaryRollbackPlan } = require('../services/papers/paperCanonicalCanaryRollbackPlanV6H3')
 const { buildCanonicalCanaryReviewPacket } = require('../services/papers/paperCanonicalCanaryReviewPacketV6H4')
+const { buildRevisionBoundCanonicalDocx } = require('../services/papers/paperCanonicalDocxProjectionV6G21')
 const { validateReviewBundle } = require('../services/papers/paperIndependentReviewIntakeV6G4')
 const { buildPublisherPromotionPrecheck } = require('../services/papers/paperPublisherPromotionPrecheckV6G9')
 const { buildPublisherPromotionEnvelope } = require('../services/papers/paperPublisherPromotionEnvelopeV6G10')
@@ -373,6 +374,25 @@ router.post('/papers/:id/delivery-manifest', async (req,res) => {
     const status=Number(err?.status)||500
     if(status>=500)console.error('Paper Studio delivery manifest error:',err.message)
     return res.status(status).json({success:false,code:err?.code||'DELIVERY_MANIFEST_FAILED',message:status>=500?'Delivery manifest could not be created.':err.message})
+  }
+})
+
+router.post('/papers/:id/canonical-docx', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const data=await buildRevisionBoundCanonicalDocx({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,revision:Number(req.body?.revision),snapshotHash:req.body?.snapshotHash})
+    const filename=String(data.filename||'paper.docx').replace(/[\r\n"]/g,'_')
+    res.set('Cache-Control','private, no-store')
+    res.set('Content-Type','application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+    res.set('Content-Disposition',`attachment; filename*=UTF-8''${encodeURIComponent(filename)}`)
+    res.set('Content-Length',String(data.buffer.length))
+    res.set('X-ASSPS-Paper-Revision',String(data.source.revision))
+    res.set('X-ASSPS-Snapshot-Hash',String(data.source.snapshotHash))
+    return res.send(data.buffer)
+  } catch(err) {
+    const status=Number(err?.status)||500
+    if(status>=500)console.error('Paper Studio canonical DOCX projection error:',err.message)
+    return res.status(status).json({success:false,code:err?.code||'CANONICAL_DOCX_PROJECTION_FAILED',message:status>=500?'Canonical DOCX could not be generated.':err.message,issues:Array.isArray(err?.issues)?err.issues:undefined})
   }
 })
 
