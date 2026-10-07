@@ -77,13 +77,12 @@ test('existing question/release contracts remain architecture dependencies',()=>
 test('remaining unrepresented catalog families still block universal completion',()=>{
   assert.equal(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)),false);
   assert(goal.catalogExpansionRequired.some(x=>/Religious Education alternatives/.test(x)));
-  assert(goal.catalogExpansionRequired.some(x=>/Practical notebook subjects/.test(x)));
   assert.equal(goal.completionGate.allInScopeSubjectsComplete,false);
   assert.equal(goal.completionGate.verifiedGitHubRemoteCommit,false);
 });
 
 test('Grade IX Matric-Tech goal scope preserves every distinct official subject identity',()=>{
-  const tech=goal.subjects.filter(s=>s.grade===9&&s.curriculumTrack==='MATRIC_TECH');
+  const tech=goal.subjects.filter(s=>s.grade===9&&s.curriculumTrack==='MATRIC_TECH'&&!s.assessmentDimension);
   assert.equal(tech.length,11);
   assert(tech.some(s=>s.subject==='Computer-Tech'));
   assert(tech.some(s=>s.subject==='Computer Science & Entrepreneurship-Tech'));
@@ -107,4 +106,12 @@ test('arts/elective goal scope now follows the expanded official catalogue',()=>
  assert(arts.some(s=>s.grade===10&&s.subject==='Parcha Bafi (Textile and Clothing)'));
  assert(arts.some(s=>s.grade===0&&s.subject==='Economics'));
  assert.equal(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)),false);
+});
+
+test('Practical Notebook goal dimensions are represented without replacing theory goals',()=>{
+ const pnb=goal.subjects.filter(s=>s.assessmentDimension==='PRACTICAL_NOTEBOOK');
+ assert.equal(pnb.length,13);assert(pnb.every(s=>s.completionState==='NOT_COMPLETE'&&s.requiredArtifacts.includes('practicalNotebookCoverage')));
+ assert.equal(goal.catalogExpansionRequired.some(x=>/Practical notebook subjects/.test(x)),false);
+ assert(pnb.some(s=>s.grade===9&&s.subject==='Chemistry'&&s.curriculumTrack==='MAINSTREAM'));
+ assert(goal.subjects.some(s=>s.grade===9&&s.subject==='Chemistry'&&!s.assessmentDimension));
 });

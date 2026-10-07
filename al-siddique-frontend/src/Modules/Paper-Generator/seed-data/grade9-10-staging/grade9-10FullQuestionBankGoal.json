@@ -1554,9 +1554,352 @@
         "releaseValidation"
       ],
       "identityRule": "Keep grade-specific and shared IX-X catalogue identities separate until equivalence/applicability is independently verified."
+    },
+    {
+      "grade": 9,
+      "subject": "Computer Science",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-082",
+        "pectaa-catalog-083"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Biology",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-084",
+        "pectaa-catalog-085"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Chemistry",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-086",
+        "pectaa-catalog-087"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Physics",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-088",
+        "pectaa-catalog-089"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Information & Communication Technologies-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-090"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-091",
+        "pectaa-catalog-092"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Health Sciences-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-093"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Biology Practical Notebook (catalog track unresolved)",
+      "curriculumTrack": "UNRESOLVED_CATALOG_CONTEXT",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-094"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "curriculumTrack": "MATRIC_TECH",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-095"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 10,
+      "subject": "Computer Science",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-096",
+        "pectaa-catalog-097"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 10,
+      "subject": "Biology",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-098",
+        "pectaa-catalog-099"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 10,
+      "subject": "Chemistry",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-100",
+        "pectaa-catalog-101"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 10,
+      "subject": "Physics",
+      "curriculumTrack": "MAINSTREAM",
+      "assessmentDimension": "PRACTICAL_NOTEBOOK",
+      "streams": [
+        "Practical Notebook"
+      ],
+      "media": [
+        "English",
+        "Urdu"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-102",
+        "pectaa-catalog-103"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "practicalNotebookCoverage",
+        "topicCoverageAudit",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
     }
   ],
-  "manifestRecordCount": 81,
+  "manifestRecordCount": 103,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -1638,11 +1981,32 @@
     "pectaa-catalog-078",
     "pectaa-catalog-079",
     "pectaa-catalog-080",
-    "pectaa-catalog-081"
+    "pectaa-catalog-081",
+    "pectaa-catalog-082",
+    "pectaa-catalog-083",
+    "pectaa-catalog-084",
+    "pectaa-catalog-085",
+    "pectaa-catalog-086",
+    "pectaa-catalog-087",
+    "pectaa-catalog-088",
+    "pectaa-catalog-089",
+    "pectaa-catalog-090",
+    "pectaa-catalog-091",
+    "pectaa-catalog-092",
+    "pectaa-catalog-093",
+    "pectaa-catalog-094",
+    "pectaa-catalog-095",
+    "pectaa-catalog-096",
+    "pectaa-catalog-097",
+    "pectaa-catalog-098",
+    "pectaa-catalog-099",
+    "pectaa-catalog-100",
+    "pectaa-catalog-101",
+    "pectaa-catalog-102",
+    "pectaa-catalog-103"
   ],
   "catalogExpansionRequired": [
     "Religious Education alternatives where ASSPS offers/enrols those subjects",
-    "Practical notebook subjects not yet represented as source identities",
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"
   ],
   "completionGate": {

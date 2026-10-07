@@ -67,7 +67,7 @@ test('Grade X current catalogue refresh preserves unresolved medium/session fact
 });
 
 test('Grade IX Matric-Tech catalogue identities are expanded without collapsing media or similarly named subjects',()=>{
- const tech=m.entries.filter(x=>x.grade===9&&x.curriculumTrack==='MATRIC_TECH');
+ const tech=m.entries.filter(x=>x.grade===9&&x.curriculumTrack==='MATRIC_TECH'&&x.stream==='Matric-Tech');
  assert.equal(tech.length,17);
  assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
  assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech IX'),false);
@@ -97,4 +97,13 @@ test('Grade IX/X arts and shared IX-X elective catalogue identities are represen
  const art9=arts.filter(x=>x.grade===9&&x.subject==='Art & Model Drawing');assert.deepEqual(new Set(art9.map(x=>x.medium)),new Set(['English','Urdu']));
  const econ=arts.filter(x=>x.grade===0&&x.subject==='Economics');assert.deepEqual(new Set(econ.map(x=>x.medium)),new Set(['English','Urdu']));
  assert(arts.every(x=>x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'));
+});
+
+test('Grade IX/X Practical Notebook sources are explicit and dimension-isolated',()=>{
+ const pnb=m.entries.filter(x=>x.assessmentDimension==='PRACTICAL_NOTEBOOK');
+ assert.equal(pnb.length,22);assert.equal(pnb.filter(x=>x.grade===9).length,14);assert.equal(pnb.filter(x=>x.grade===10).length,8);
+ assert.equal(m.additionalCatalogStreamsPending.includes('Practical notebook subjects'),false);
+ assert(pnb.every(x=>x.stream==='Practical Notebook'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert(pnb.some(x=>x.subject==='Biology Practical Notebook (catalog track unresolved)'&&x.curriculumTrack==='UNRESOLVED_CATALOG_CONTEXT'));
+ const bio9=pnb.filter(x=>x.grade===9&&x.subject==='Biology'&&x.curriculumTrack==='MAINSTREAM');assert.deepEqual(new Set(bio9.map(x=>x.medium)),new Set(['English','Urdu']));
 });
