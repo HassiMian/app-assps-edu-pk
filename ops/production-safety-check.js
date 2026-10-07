@@ -291,6 +291,18 @@ assertContains(
   'recipient-count source failure must be distinguished from a verified zero-recipient group.'
 )
 
+assertContains(
+  'al-siddique-frontend/src/App.jsx',
+  '<Route path="/fees/create" element={<W roles={ROLES.adminOffice} permKey="fees_create"><FeeModule /></W>} />',
+  'the /fees/create route must use the canonical fee workspace instead of the duplicate protected legacy challan creator.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/App.jsx',
+  /lazyRetry\(\(\) => import\('\.\/Modules\/fees\/CreateChallan'\)/,
+  'the duplicate standalone challan creator must not remain mounted as a production route bundle.'
+)
+
 assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
