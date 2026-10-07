@@ -146,7 +146,19 @@ export function createNodeOverlay(node) {
       null
     )
   }
-  // READ_ONLY_STRUCTURED leaves editableFields = {} without creating dummy stem overlays
+
+  // Math is an orthogonal content capability, not a question interaction type.
+  // Keep its editable source in the same field-overlay engine so draft/conflict
+  // persistence stays identical to ordinary academic text edits.
+  if (node.math && typeof node.math === 'object' && String(node.math.source ?? '').trim()) {
+    editableFields.mathSource = createFieldOverlay(
+      'mathSource',
+      String(node.math.source),
+      'ltr',
+      null
+    )
+  }
+  // READ_ONLY_STRUCTURED leaves interaction editableFields empty; capability fields may still exist.
 
   const sourceNodeMarks = node.authoritativeNodeMarks ?? node.operationalNodeMarks ?? null
 

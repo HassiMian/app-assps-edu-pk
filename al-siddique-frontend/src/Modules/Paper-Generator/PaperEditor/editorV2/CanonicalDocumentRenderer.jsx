@@ -204,6 +204,7 @@ export default function CanonicalDocumentRenderer({
 
   const meta = workingDoc.metadata || canonicalBaseline?.metadata || {}
   const pres = workingDoc.presentationOverlay || workingDoc.presentation || {}
+  const canonicalAssetsById = new Map((canonicalBaseline?.assets || []).map(asset => [String(asset.id), asset]))
   const isUrdu = pres.language === 'urdu' || meta.language === 'urdu'
   const isHalf = pres.printMode === 'half' || pres.templateId === 'half_page'
   const template = getTemplatePreset(pres.templateId === 'half_page' ? 'academic' : (pres.templateId || 'academic'))
@@ -1279,6 +1280,89 @@ export default function CanonicalDocumentRenderer({
                                 ) : (
                                   <CanonicalStaticNode node={resolvedNode} direction={nodeDir} />
                                 )}
+
+                                {resolvedNode.math && (
+                                  <div
+                                    className="canonical-math-capability"
+                                    data-content-capability="math"
+                                    data-math-format={resolvedNode.math.format || 'latex'}
+                                    style={{
+                                      marginTop: '7px',
+                                      padding: '7px 9px',
+                                      border: '1px solid #cbd5e1',
+                                      borderRadius: '5px',
+                                      background: '#f8fafc',
+                                      direction: 'ltr',
+                                      textAlign: resolvedNode.math.display === 'inline' ? 'left' : 'center',
+                                      fontFamily: 'Times New Roman, serif',
+                                      fontSize: '13px',
+                                    }}
+                                  >
+                                    <CanonicalInlineField
+                                      value={nodeOverlay?.editableFields?.mathSource?.workingPlainText ?? resolvedNode.math.source ?? ''}
+                                      onCommit={(value) => store?.setNodeMathSource?.(section.id, nodeId, value)}
+                                      isEditing={isEditing}
+                                      placeholder="Enter math source"
+                                      ariaLabel={'Math expression for question ' + currentQNum}
+                                      minWidth="120px"
+                                      textAlign={resolvedNode.math.display === 'inline' ? 'left' : 'center'}
+                                      style={{
+                                        fontFamily: 'Times New Roman, serif',
+                                        fontSize: '13px',
+                                        background: isEditing ? 'rgba(255,255,255,0.75)' : 'transparent',
+                                      }}
+                                    />
+                                  </div>
+                                )}
+
+                                {Array.isArray(resolvedNode.assetRefs) && resolvedNode.assetRefs.map((assetId) => {
+                                  const asset = canonicalAssetsById.get(String(assetId))
+                                  if (!asset) return null
+                                  const embeddedSource = asset.storage === 'embedded' ? asset.contentDataUrl : null
+                                  return (
+                                    <figure
+                                      key={asset.id}
+                                      className="canonical-image-capability"
+                                      data-content-capability="image"
+                                      data-asset-id={asset.id}
+                                      data-asset-sha256={asset.sha256 || ''}
+                                      style={{ margin: '8px 0', textAlign: 'center', breakInside: 'avoid' }}
+                                    >
+                                      {embeddedSource ? (
+                                        <img
+                                          src={embeddedSource}
+                                          alt={asset.altText || asset.description || 'Assessment image'}
+                                          style={{
+                                            display: 'block',
+                                            maxWidth: '100%',
+                                            width: asset.widthPx ? `${Math.min(Number(asset.widthPx), 720)}px` : 'auto',
+                                            height: 'auto',
+                                            margin: '0 auto',
+                                            objectFit: 'contain',
+                                          }}
+                                        />
+                                      ) : (
+                                        <div
+                                          className="canonical-managed-asset-placeholder"
+                                          style={{
+                                            padding: '12px',
+                                            border: '1px dashed #94a3b8',
+                                            borderRadius: '5px',
+                                            color: '#475569',
+                                            fontSize: '11px',
+                                          }}
+                                        >
+                                          {asset.altText || asset.description || 'Managed image asset'}
+                                        </div>
+                                      )}
+                                      {(asset.description || asset.altText) && (
+                                        <figcaption style={{ marginTop: '4px', fontSize: '9px', color: '#64748b' }}>
+                                          {asset.description || asset.altText}
+                                        </figcaption>
+                                      )}
+                                    </figure>
+                                  )
+                                })}
 
                                 {/* Answer blank lines (FIX F, FIX H) */}
                                 {Boolean(answerLinesMap[nodeId] > 0) && (
