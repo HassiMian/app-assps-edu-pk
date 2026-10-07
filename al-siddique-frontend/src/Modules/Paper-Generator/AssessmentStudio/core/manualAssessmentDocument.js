@@ -101,13 +101,7 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
       attemptRuleOrigin: scoring.attemptRuleOrigin,
       attemptCount: scoring.attemptCount,
       actualItemCount: scoring.actualItemCount,
-      formula: scoring.attemptRule === AttemptRule.ALL ? null : {
-        mode: scoring.choiceGroup?.mode || 'ATTEMPT_ANY',
-        availableItemCount: scoring.actualItemCount,
-        attemptCount: scoring.attemptCount,
-        marksPerItem: scoring.marksPerItem,
-        maximumObtainableMarks: marks,
-      },
+      formula: scoring.choiceGroup ? clone(scoring.choiceGroup) : null,
       nodes: [normalizeNodeForBlockRegistry(nodeFromSection(section,{ nodeId, body, direction, marks }), DEFAULT_BLOCK_REGISTRY)],
       provenance: { sourceSectionId: null, sourceSegmentIds: [] },
     })
@@ -239,6 +233,15 @@ export function mergeServerDocumentIntoLocalPaper(localPaper = {}, doc = {}, ser
     instructions: section.instructions || '',
     content: section.nodes?.map(node => node.content || '').filter(Boolean).join('\n') || '',
     marks: finiteMarks(section.operationalSectionTotal ?? section.authoritativeSectionTotal),
+    attemptRule: section.attemptRule || AttemptRule.ALL,
+    attemptCount: Number.isInteger(section.attemptCount) ? section.attemptCount : null,
+    actualItemCount: Number.isInteger(section.actualItemCount) ? section.actualItemCount : null,
+    marksPerItem: finiteMarks(section.formula?.marksPerItem) || null,
+    maximumObtainableMarks: finiteMarks(section.operationalSectionTotal ?? section.authoritativeSectionTotal),
+    listedPotentialItemMarksTotal: finiteMarks(section.listedPotentialItemMarksTotal),
+    choiceGroupId: text(section.formula?.id) || null,
+    nestedChoiceMode: Array.isArray(section.formula?.children) && section.formula.children.length ? (section.formula?.mode || 'ALL') : null,
+    choiceGroups: Array.isArray(section.formula?.children) ? clone(section.formula.children) : [],
   }))
   return {
     ...localPaper,
