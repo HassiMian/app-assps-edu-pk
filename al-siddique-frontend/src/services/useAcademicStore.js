@@ -1,5 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import api from './api'
+
+let academicSetupInflight = null
+
+async function fetchAcademicSetup() {
+  if (!academicSetupInflight) {
+    academicSetupInflight = api.get('/api/academic/setup', { skipCache:true }).finally(() => {
+      academicSetupInflight = null
+    })
+  }
+  return academicSetupInflight
+}
 
 const EMPTY_ACADEMIC = Object.freeze({
   periodsPerDay: null,
@@ -93,6 +104,17 @@ function normalizeServerAcademic(value) {
     sessionStart: source.sessionStart || '',
     sessionEnd: source.sessionEnd || '',
   }
+
+}
+
+export function resolveAcademicReadPayload(payload = {}) {
+  const isConfigured = payload?.configured === true
+  const source = isConfigured ? payload?.data : (payload?.defaults || EMPTY_ACADEMIC)
+  return {
+    configured: isConfigured,
+    data: normalizeServerAcademic(source),
+    defaults: isConfigured ? null : (payload?.defaults || null),
+  }
 }
 
 export function useAcademicStore() {
@@ -106,14 +128,13 @@ export function useAcademicStore() {
     setLoading(true)
     setError('')
     try {
-      const response = await api.get('/api/academic/setup', { skipCache:true })
+      const response = await fetchAcademicSetup()
       if (response.data?.success === false) throw new Error(response.data?.message || 'Academic setup could not be loaded.')
-      const isConfigured = response.data?.configured === true
-      const serverData = isConfigured ? normalizeServerAcademic(response.data?.data) : EMPTY_ACADEMIC
-      setData(serverData)
-      setConfigured(isConfigured)
-      setDefaults(isConfigured ? null : (response.data?.defaults || null))
-      return { success:true, configured:isConfigured, data:serverData }
+      const resolved = resolveAcademicReadPayload(response.data)
+      setData(resolved.data)
+      setConfigured(resolved.configured)
+      setDefaults(resolved.defaults)
+      return { success:true, configured:resolved.configured, data:resolved.data }
     } catch (requestError) {
       const message = requestError?.response?.data?.message || requestError?.message || 'Academic setup could not be loaded.'
       setData(EMPTY_ACADEMIC)
@@ -169,13 +190,13 @@ export function useAcademicStore() {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const activeClasses = data.classes.filter(c => c.active !== false)
-  const classNames = activeClasses.map(c => c.name)
-  const subjectNames = data.subjects.map(s => s.name)
+  const activeClasses = useMemo(() => data.classes.filter(c => c.active !== false), [data.classes])
+  const classNames = useMemo(() => activeClasses.map(c => c.name), [activeClasses])
+  const subjectNames = useMemo(() => data.subjects.map(s => s.name), [data.subjects])
   const periodsPerDay = Number.isInteger(Number(data.periodsPerDay))
     ? Math.min(12, Math.max(1, Number(data.periodsPerDay)))
     : 0
-  const allSections = ['All', ...new Set(activeClasses.flatMap(c => c.sections || []))]
+  const allSections = useMemo(() => ['All', ...new Set(activeClasses.flatMap(c => c.sections || []))], [activeClasses])
 
   function subjectsForClass(classIdentifier) {
     if (!classIdentifier) return subjectNames

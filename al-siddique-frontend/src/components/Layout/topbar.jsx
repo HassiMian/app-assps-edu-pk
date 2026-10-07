@@ -456,7 +456,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
  onMouseLeave={e => e.currentTarget.style.opacity = '1'}
  >
- <Bell size={18} color="#f8fafc" />
+ <Bell size={18} color={isLight ? '#061A3A' : '#f8fafc'} />
  {unreadCount > 0 && (
  <div style={{
  position: 'absolute', top: 8, right: 8,
