@@ -2,8 +2,10 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
+import {fileURLToPath} from 'node:url'
 import {buildCanonicalDocxModel,canonicalDocxModelText} from '../export/canonicalDocxModel.js'
-const corpusPath=path.join(process.cwd(),'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
+const here=path.dirname(fileURLToPath(import.meta.url))
+const corpusPath=path.resolve(here,'../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const raw=JSON.parse(fs.readFileSync(corpusPath,'utf8'))
 const corpus=Array.isArray(raw)?raw:(raw.papers||raw.documents||[])
 const expectedTypes=new Set(['short_question','mcq','fill_blank','long_question','grammar_table','translation','true_false','letter','essay','section_banner','matching_columns','application','scope_header','vertical_math','definition'])
