@@ -43,8 +43,7 @@ export default function ManageExams() {
  const res = await api.get('/api/exams')
  setExams((res.data.data || []).map(normalizeExam))
  } catch {
- setExams([])
- setMessage('Refresh failed. Please check the backend connection.')
+ setMessage('Refresh failed. Existing loaded exams were preserved; please check the backend connection.')
  } finally {
  setLoading(false)
  }
@@ -180,6 +179,8 @@ export default function ManageExams() {
  <div className="super-module-card" style={{ ...card, overflowX: 'auto' }}>
  {loading ? (
  <div style={{ padding: 40, textAlign: 'center', color: C.muted }}>Loading exams...</div>
+ ) : message.startsWith('Refresh failed') && exams.length === 0 ? (
+ <div style={{ padding: 32, textAlign: 'center', color: C.red }}>{message}</div>
  ) : (
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead>
