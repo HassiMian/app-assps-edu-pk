@@ -36,7 +36,7 @@ async function migrate() {
         name        VARCHAR(100) NOT NULL,
         email       VARCHAR(100) UNIQUE NOT NULL,
         password    VARCHAR(255) NOT NULL,
-        role        VARCHAR(20) DEFAULT 'teacher' CHECK (role IN ('super_admin','admin','principal','teacher','accountant','parent','student')),
+        role        VARCHAR(20) DEFAULT 'teacher' CHECK (role IN ('super_admin','school_admin','admin','principal','teacher','accountant','parent','student')),
         designation VARCHAR(100),
         phone       VARCHAR(20),
         is_active   BOOLEAN DEFAULT true,
@@ -51,7 +51,7 @@ async function migrate() {
     `)
     await pool.query(`
       ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check;
-      ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('super_admin','admin','principal','teacher','accountant','parent','student'));
+      ALTER TABLE users ADD CONSTRAINT users_role_check CHECK (role IN ('super_admin','school_admin','admin','principal','teacher','accountant','parent','student'));
     `)
     console.log('users table ready')
 
