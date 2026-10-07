@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./chemistry9Chapter13ContentMap2026.json',import.meta.url),'utf8'));
+test('Laboratory safety chapter map covers five verified headings',()=>{assert.deepEqual(d.topics.map(x=>x.topicId),['13.1','13.2','13.3','13.4','13.5']);assert(d.topics.every(x=>x.status==='RENDERED_PAGE_HEADING_REVIEWED'));});
+test('laboratory safety concept families cover hazards PPE equipment emergencies and disposal',()=>{for(const k of ['chemical hazard classes and safe handling','hazard signs and warning symbols','personal protective equipment','location and correct use of safety equipment','emergency response and drills','chemical waste and safe disposal principles'])assert(d.verifiedConceptFamilies.includes(k));});
+test('exercise origin and publication remain blocked pending item review',()=>{assert.equal(d.exerciseFamilies.itemLevelExerciseMap,'PENDING');assert.equal(d.authoring.exerciseOriginAllowed,false);assert.equal(d.authoring.publicationAllowed,false);});
