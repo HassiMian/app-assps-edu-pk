@@ -1,0 +1,1907 @@
+{
+  "schemaVersion": "assps-chemistry9-ch9-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "9.1",
+      "draftCount": 5
+    },
+    {
+      "topicId": "9.2",
+      "draftCount": 5
+    },
+    {
+      "topicId": "9.3",
+      "draftCount": 5
+    },
+    {
+      "topicId": "9.4",
+      "draftCount": 5
+    },
+    {
+      "topicId": "9.5",
+      "draftCount": 5
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C09-T01-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 124,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 1 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why does Group 1 reactivity generally increase down the group?",
+          "answer": "The outer electron becomes easier to remove",
+          "options": [
+            {
+              "id": "A",
+              "text": "The outer electron becomes easier to remove"
+            },
+            {
+              "id": "B",
+              "text": "Atomic radius becomes zero"
+            },
+            {
+              "id": "C",
+              "text": "The nucleus loses all protons"
+            },
+            {
+              "id": "D",
+              "text": "Valence electrons become more tightly held"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T01-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 125,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 1 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which broad description best fits Group 1 elements except hydrogen?",
+          "answer": "Alkali metals",
+          "options": [
+            {
+              "id": "A",
+              "text": "Alkali metals"
+            },
+            {
+              "id": "B",
+              "text": "Halogens"
+            },
+            {
+              "id": "C",
+              "text": "Noble gases"
+            },
+            {
+              "id": "D",
+              "text": "Transition non-metals"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T01-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 124,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 1 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why are Group 1 metals generally very reactive?",
+          "answer": "They have one valence electron that can be removed relatively easily, allowing them to form stable positive ions and react readily."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T01-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 125,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 1 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "State one physical and one chemical trend down Group 1.",
+          "answer": "A suitable response is that melting point generally decreases while chemical reactivity generally increases down the group."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T01-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.1",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 124,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 1 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Explain the change in reactivity and selected physical properties of Group 1 elements down the group.",
+          "answer": "Award 1 mark for increasing atomic size, 1 for increased shielding/weaker attraction to the outer electron, 1 for easier electron loss, 1 for increased reactivity, and 1 for a correct physical trend such as decreasing melting point or changing density."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T02-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 125,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 17 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Group 17 elements are commonly called what?",
+          "answer": "Halogens",
+          "options": [
+            {
+              "id": "A",
+              "text": "Halogens"
+            },
+            {
+              "id": "B",
+              "text": "Alkali metals"
+            },
+            {
+              "id": "C",
+              "text": "Noble gases"
+            },
+            {
+              "id": "D",
+              "text": "Lanthanides"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T02-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 126,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 17 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "How does halogen reactivity generally change down Group 17?",
+          "answer": "Decreases",
+          "options": [
+            {
+              "id": "A",
+              "text": "Decreases"
+            },
+            {
+              "id": "B",
+              "text": "Increases without limit"
+            },
+            {
+              "id": "C",
+              "text": "Remains exactly constant"
+            },
+            {
+              "id": "D",
+              "text": "Becomes zero after chlorine"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T02-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 125,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 17 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why are Group 17 elements called halogens?",
+          "answer": "They readily form salts when they react with suitable metals, so the name reflects their salt-forming behavior."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T02-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 126,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 17 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why does the oxidizing strength of halogens generally decrease down the group?",
+          "answer": "Increasing atomic size and shielding reduce the attraction for an incoming electron, so the tendency to gain electrons generally decreases down the group."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T02-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.2",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 125,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group 17 Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Describe the general physical and chemical trends of Group 17 elements down the group.",
+          "answer": "Award 1 mark for increasing atomic size/density trend, 1 for change in physical state or boiling/melting tendencies, 1 for decreasing reactivity, 1 for decreasing oxidizing ability, and 1 for explaining the electron-gain trend using shielding and nuclear attraction."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T03-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 126,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transition Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which property is commonly associated with many transition elements?",
+          "answer": "Useful catalytic activity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Useful catalytic activity"
+            },
+            {
+              "id": "B",
+              "text": "Always being gases at room temperature"
+            },
+            {
+              "id": "C",
+              "text": "Extremely low density in every case"
+            },
+            {
+              "id": "D",
+              "text": "Complete chemical inertness"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T03-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transition Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Transition elements are best described broadly as what?",
+          "answer": "Metals with characteristic metallic properties",
+          "options": [
+            {
+              "id": "A",
+              "text": "Metals with characteristic metallic properties"
+            },
+            {
+              "id": "B",
+              "text": "Monatomic noble gases"
+            },
+            {
+              "id": "C",
+              "text": "Diatomic non-metals only"
+            },
+            {
+              "id": "D",
+              "text": "Water-soluble bases only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T03-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 126,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transition Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "State two general physical properties often shown by transition metals.",
+          "answer": "They commonly have relatively high densities and high melting points, and they also show metallic strength and conductivity."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T03-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transition Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why are transition metals important in industrial catalysis?",
+          "answer": "Many transition metals or their compounds can provide effective catalytic surfaces or pathways that increase reaction rates without being consumed overall."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T03-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.3",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 126,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Transition Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Summarize important physical and chemical features of transition elements and relate one feature to industrial use.",
+          "answer": "Award 1 mark for metallic character, 1 for high density, 1 for relatively high melting point/strength, 1 for catalytic behavior, and 1 for linking a catalyst property to a suitable industrial application."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T04-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Noble Gases"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why are noble gases generally unreactive?",
+          "answer": "Their outer electron shells are complete",
+          "options": [
+            {
+              "id": "A",
+              "text": "Their outer electron shells are complete"
+            },
+            {
+              "id": "B",
+              "text": "They have no electrons"
+            },
+            {
+              "id": "C",
+              "text": "They always carry a 2+ charge"
+            },
+            {
+              "id": "D",
+              "text": "They exist only as solids"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T04-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Noble Gases"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "How do noble gases normally exist under ordinary conditions?",
+          "answer": "As monatomic gases",
+          "options": [
+            {
+              "id": "A",
+              "text": "As monatomic gases"
+            },
+            {
+              "id": "B",
+              "text": "As diatomic metals"
+            },
+            {
+              "id": "C",
+              "text": "As ionic crystals"
+            },
+            {
+              "id": "D",
+              "text": "As aqueous alkalis"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T04-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Noble Gases"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "What feature of noble-gas electronic structure explains their low reactivity?",
+          "answer": "Their outermost electron shells are complete, giving them a stable electronic arrangement and little tendency to gain or lose electrons."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T04-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Noble Gases"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why are noble gases described as monatomic?",
+          "answer": "Their atoms normally exist as separate individual atoms rather than being bonded into molecules under ordinary conditions."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T04-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.4",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 127,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Noble Gases"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Explain the relationship between noble-gas electronic configuration, monatomic existence and chemical unreactivity.",
+          "answer": "Award 1 mark for complete outer shell, 1 for stable configuration, 1 for low tendency to gain electrons, 1 for low tendency to lose/share electrons, and 1 for relating this stability to monatomic, generally unreactive behavior."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T05-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 128,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metals and Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which property is more typical of metals than non-metals?",
+          "answer": "Good electrical conductivity",
+          "options": [
+            {
+              "id": "A",
+              "text": "Good electrical conductivity"
+            },
+            {
+              "id": "B",
+              "text": "Poor thermal conductivity in every case"
+            },
+            {
+              "id": "C",
+              "text": "Brittleness in every sample"
+            },
+            {
+              "id": "D",
+              "text": "Existence only as gases"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T05-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metals and Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which statement best describes many non-metals?",
+          "answer": "They are usually poor electrical conductors compared with metals",
+          "options": [
+            {
+              "id": "A",
+              "text": "They are usually poor electrical conductors compared with metals"
+            },
+            {
+              "id": "B",
+              "text": "They are all shiny malleable solids"
+            },
+            {
+              "id": "C",
+              "text": "They all form positive ions only"
+            },
+            {
+              "id": "D",
+              "text": "They all have high density"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T05-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 128,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metals and Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "State two physical differences between metals and non-metals.",
+          "answer": "Metals are generally better conductors and are often malleable/ductile, while non-metals are generally poorer conductors and solid non-metals are often brittle."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T05-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 129,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metals and Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why is graphite treated as an important exception when comparing metals and non-metals?",
+          "answer": "Graphite is a non-metal form of carbon but can conduct electricity, showing that broad metal/non-metal trends have exceptions."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C09-T05-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C09",
+        "number": 9
+      },
+      "topicId": "9.5",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 128,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Metals and Non-metals"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 9. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Compare the general physical properties of metals and non-metals and mention one important exception.",
+          "answer": "Award 1 mark for conductivity comparison, 1 for malleability/ductility comparison, 1 for lustre or density/strength comparison, 1 for state/brittleness comparison, and 1 for a correct exception such as graphite conducting electricity."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 25,
+    "mcq": 10,
+    "short": 10,
+    "long": 5
+  }
+}
