@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "assps-chemistry9-ch7-content-map-v1",
+  "checkedOn": "2026-10-06",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 7,
+    "title": "Acid, Base Chemistry",
+    "printedPages": [
+      93,
+      104
+    ],
+    "pdfPages": [
+      97,
+      108
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "7.1",
+      "title": "Acids and Bases",
+      "pdfStartPage": 97,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "7.2",
+      "title": "Different Concepts of Acids and Bases",
+      "pdfStartPage": 99,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "7.3",
+      "title": "Bronsted-Lowry Concepts of Acids and Bases",
+      "pdfStartPage": 102,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "7.4",
+      "title": "Properties of Acids and Bases",
+      "pdfStartPage": 104,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "7.5",
+      "title": "Acid Rain and its Effects",
+      "pdfStartPage": 106,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "verifiedConceptFamilies": [
+    "natural and mineral acids",
+    "bases and alkalis",
+    "Arrhenius acid/base definitions in water",
+    "strong versus weak acids and bases by extent of ionization",
+    "Bronsted-Lowry proton donor/acceptor definitions",
+    "conjugate acid-base pairs",
+    "amphoteric behavior of water",
+    "acid reactions with metals bases and carbonates",
+    "base reactions with acids and ammonium salts",
+    "acid rain formation and environmental effects"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      107,
+      108
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigative Questions"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}
