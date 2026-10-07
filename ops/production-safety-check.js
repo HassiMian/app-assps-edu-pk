@@ -2177,6 +2177,17 @@ assertContains(
   'official and First Term papers must always route to the Paper Workspace build flow.'
 )
 
+assertNotContains(
+  'al-siddique-frontend/src/components/Layout/topbar.jsx',
+  /catch[^\{]*\{[\s\S]{0,120}setNotifs\(\[\]\)/,
+  'topbar notification refresh failures must preserve the last known-good inbox instead of clearing it.'
+)
+assertContains(
+  'al-siddique-frontend/src/components/Layout/topbar.jsx',
+  'Topbar notification inbox refresh failed; preserving existing notifications:',
+  'topbar notification refresh failure must be explicit while preserving current inbox state.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
