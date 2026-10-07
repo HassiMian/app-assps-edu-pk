@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 const os = require('os')
 const multer = require('multer')
+const { randomUUID } = require('crypto')
 const router = express.Router()
 
 const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
@@ -54,35 +55,6 @@ const canUsePaperAi = (req, res, next) => {
   })
 }
 
-
-async function ensurePaperVaultSchema() {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS paper_vault (
-      id BIGSERIAL PRIMARY KEY,
-      school_id INTEGER NOT NULL REFERENCES schools(id) ON DELETE CASCADE,
-      owner_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      name VARCHAR(220) NOT NULL,
-      class_name VARCHAR(120),
-      section VARCHAR(60),
-      subject_name VARCHAR(160),
-      status VARCHAR(30) NOT NULL DEFAULT 'draft',
-      revision INTEGER NOT NULL DEFAULT 1,
-      payload JSONB NOT NULL,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-      deleted_at TIMESTAMPTZ
-    );
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_school_updated
-      ON paper_vault(school_id, updated_at DESC)
-      WHERE deleted_at IS NULL;
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_owner_updated
-      ON paper_vault(school_id, owner_user_id, updated_at DESC)
-      WHERE deleted_at IS NULL;
-    CREATE INDEX IF NOT EXISTS idx_paper_vault_class_subject
-      ON paper_vault(school_id, LOWER(COALESCE(class_name,'')), LOWER(COALESCE(subject_name,'')))
-      WHERE deleted_at IS NULL;
-  `)
-}
 
 const PAPER_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal'])
 function isPaperAdmin(req) {
@@ -148,7 +120,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, UPLOAD_ROOT),
   filename: (req, file, cb) => {
     const safe = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_')
-    cb(null, `${Date.now()}_${Math.random().toString(36).slice(2, 7)}_${safe}`)
+    cb(null, `${randomUUID()}_${safe}`)
   },
 })
 
@@ -254,7 +226,6 @@ void hydrateJobsFromDb().catch((err) => {
 // Teachers see/edit only their own papers; admins/principals can inspect the school library.
 router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   try {
-    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     if (!schoolId && String(req.user?.role || '').toLowerCase() !== 'super_admin') {
       return res.status(403).json({ success: false, message: 'School context is required.' })
@@ -285,7 +256,6 @@ router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 
 
 router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   try {
-    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     if (!schoolId) return res.status(403).json({ success: false, message: 'School context is required.' })
     const payload = req.body?.paper
@@ -312,7 +282,6 @@ router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal',
 router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   const client = await pool.connect()
   try {
-    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
@@ -366,7 +335,6 @@ router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princi
 router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   const client = await pool.connect()
   try {
-    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
