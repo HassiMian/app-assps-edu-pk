@@ -85,14 +85,19 @@ export default function AttendanceModule() {
  const [analyticsError, setAnalyticsError] = useState('');
  const [loadError, setLoadError] = useState('');
  const [saveError, setSaveError] = useState('');
+ const [loadedScopeKey, setLoadedScopeKey] = useState('');
+ const currentScopeKey = `${selectedClass}::${selectedSection}::${selectedDate}`;
+ const scopeMatches = loadedScopeKey === currentScopeKey;
+ const visibleStudents = scopeMatches ? students : [];
+ const visibleAttendance = scopeMatches ? attendance : {};
+ const scopeUnavailable = Boolean(loadError && !scopeMatches);
 
  const loadAttendance = async () => {
  if (!selectedClass || !selectedSection) {
- setStudents([])
- setAttendance({})
  setLoadError(selectedClass ? 'No section is configured for this class in Academic Setup.' : 'No active class is configured in Academic Setup.')
  return
  }
+ const requestScopeKey = currentScopeKey
  setLoading(true)
  setLoadError('')
  try {
@@ -110,11 +115,10 @@ export default function AttendanceModule() {
  })
  setStudents(studentData.map(transformStudent))
  setAttendance(markMap)
+ setLoadedScopeKey(requestScopeKey)
  } catch (err) {
  console.error('Could not load attendance', err)
- setStudents([])
- setAttendance({})
- setLoadError(err.response?.data?.message || 'Attendance data could not be loaded from the server.')
+ setLoadError(err.response?.data?.message || 'Attendance data could not be refreshed. Existing loaded attendance was preserved for its original class, section and date.')
  } finally {
  setLoading(false)
  }
@@ -168,19 +172,23 @@ export default function AttendanceModule() {
 
  const markAll = (status) => {
  const all = {};
- students.forEach(s => { all[s.id] = status })
+ visibleStudents.forEach(s => { all[s.id] = status })
  setAttendance(all);
  setSaved(false);
  };
 
- const presentCount = Object.values(attendance).filter(v => v === "present").length;
- const absentCount = Object.values(attendance).filter(v => v === "absent").length;
- const lateCount = Object.values(attendance).filter(v => v === "late").length;
- const leaveCount = Object.values(attendance).filter(v => v === "leave").length;
- const unmarked = students.length - Object.keys(attendance).length;
+ const presentCount = Object.values(visibleAttendance).filter(v => v === "present").length;
+ const absentCount = Object.values(visibleAttendance).filter(v => v === "absent").length;
+ const lateCount = Object.values(visibleAttendance).filter(v => v === "late").length;
+ const leaveCount = Object.values(visibleAttendance).filter(v => v === "leave").length;
+ const unmarked = visibleStudents.length - Object.keys(visibleAttendance).length;
 
  const handleSave = async () => {
- const entries = Object.entries(attendance).filter(([_, status]) => !!status)
+ if (!scopeMatches) {
+ setSaveError('Attendance for the selected class, section and date is not loaded yet.')
+ return
+ }
+ const entries = Object.entries(visibleAttendance).filter(([_, status]) => !!status)
  setSaveError('')
  if (!entries.length) {
  setSaveError('Select attendance status for at least one student before saving.')
@@ -208,7 +216,7 @@ export default function AttendanceModule() {
 
  const attDashCard = { background: 'var(--apex-bg-surface)', backdropFilter: 'blur(20px)', border: '1px solid rgba(148,163,184,0.18)', borderRadius: 22, padding: 20 };
  const attDashTitle = { color: '#C0C8D8', fontSize: 13, fontWeight: 700, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 8 };
- const totalStudents = students.length;
+ const totalStudents = visibleStudents.length;
 
  return (
  <div style={{ padding: 24, maxWidth: 1240, margin: "0 auto" }}>
@@ -232,11 +240,11 @@ export default function AttendanceModule() {
  {/* Stats Cards */}
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 16 }}>
  {[
- { label: 'Present', value: presentCount, Icon: UserCheck, color: '#30D158', grad: 'linear-gradient(135deg,rgba(48,209,88,0.18),rgba(48,209,88,0.06))' },
- { label: 'Absent', value: absentCount, Icon: UserX, color: '#FF375F', grad: 'linear-gradient(135deg,rgba(255,55,95,0.18),rgba(255,55,95,0.06))' },
- { label: 'Late', value: lateCount, Icon: Clock, color: '#FF9F0A', grad: 'linear-gradient(135deg,rgba(255,159,10,0.18),rgba(255,159,10,0.06))' },
- { label: 'Leave', value: leaveCount, Icon: CalendarOff, color: '#0A84FF', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
- { label: 'Total Students', value: totalStudents, Icon: Users, color: '#C8991A', grad: 'linear-gradient(135deg,rgba(200,153,26,0.18),rgba(200,153,26,0.06))' },
+ { label: 'Present', value: scopeUnavailable ? '—' : presentCount, Icon: UserCheck, color: '#30D158', grad: 'linear-gradient(135deg,rgba(48,209,88,0.18),rgba(48,209,88,0.06))' },
+ { label: 'Absent', value: scopeUnavailable ? '—' : absentCount, Icon: UserX, color: '#FF375F', grad: 'linear-gradient(135deg,rgba(255,55,95,0.18),rgba(255,55,95,0.06))' },
+ { label: 'Late', value: scopeUnavailable ? '—' : lateCount, Icon: Clock, color: '#FF9F0A', grad: 'linear-gradient(135deg,rgba(255,159,10,0.18),rgba(255,159,10,0.06))' },
+ { label: 'Leave', value: scopeUnavailable ? '—' : leaveCount, Icon: CalendarOff, color: '#0A84FF', grad: 'linear-gradient(135deg,rgba(10,132,255,0.18),rgba(10,132,255,0.06))' },
+ { label: 'Total Students', value: scopeUnavailable ? '—' : totalStudents, Icon: Users, color: '#C8991A', grad: 'linear-gradient(135deg,rgba(200,153,26,0.18),rgba(200,153,26,0.06))' },
  ].map(c => {
  const IconComp = c.Icon
  return (
@@ -309,7 +317,7 @@ export default function AttendanceModule() {
  <span style={{ color:"#30D158", fontSize:11, fontWeight:700 }}>LIVE STATUS</span>
  </div>
  {(() => {
- const total = students.length || 1
+ const total = visibleStudents.length || 1
  const pct = Math.round((presentCount / total) * 100)
  const r = 45, circ = Math.PI * r
  return (
@@ -320,7 +328,7 @@ export default function AttendanceModule() {
  <text x="70" y="55" textAnchor="middle" fill="#fff" fontSize="22" fontWeight="900">{pct}%</text>
  </svg>
  <div style={{ color:"#30D158", fontSize:13, fontWeight:700, marginTop:-10 }}>Presence Rate</div>
- <div style={{ color:"#8892A4", fontSize:11 }}>{presentCount} of {students.length} students present</div>
+ <div style={{ color:"#8892A4", fontSize:11 }}>{scopeUnavailable ? 'Attendance data unavailable for this selection.' : `${presentCount} of ${visibleStudents.length} students present`}</div>
  </div>
  )
  })()}
@@ -420,12 +428,14 @@ export default function AttendanceModule() {
 
  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
  {loading && <div style={{ padding: 18, color: '#8892A4', fontSize: 13, textAlign: 'center' }}>Loading attendance...</div>}
- {students.length === 0 ? (
+ {scopeUnavailable ? (
+ <div style={{ padding: 24, color: 'var(--apex-action-danger)', fontSize: 14, textAlign: 'center' }}>Attendance data for this class, section and date is temporarily unavailable.</div>
+ ) : visibleStudents.length === 0 ? (
  <div style={{ padding: 24, color: '#8892A4', fontSize: 14, textAlign: 'center' }}>
  No students found for this class, section or date.
  </div>
- ) : students.map((s, i) => {
- const status = attendance[s.id];
+ ) : visibleStudents.map((s, i) => {
+ const status = visibleAttendance[s.id];
  return (
  <div key={s.id} style={{
  display: "flex", alignItems: "center", gap: 16, padding: "14px 18px", borderRadius: 12,
@@ -529,7 +539,7 @@ export default function AttendanceModule() {
  </p>
  </div>
  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
- {students.slice(0, 3).map(s => (
+ {visibleStudents.slice(0, 3).map(s => (
  <div key={s.id} style={{ padding: "14px 18px", background: "var(--apex-bg-subtle)", borderRadius: 12, border: "1px solid var(--apex-border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
  <span style={{ fontSize: 24 }}>{s.photo}</span>

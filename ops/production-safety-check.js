@@ -1129,8 +1129,8 @@ assertNotContains(
 
 assertContains(
   'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
-  "setLoadError(err.response?.data?.message || 'Attendance data could not be loaded from the server.')",
-  'attendance load failures must remain visible to the user.'
+  "Attendance data could not be refreshed. Existing loaded attendance was preserved for its original class, section and date.",
+  'attendance load failures must remain visible while preserving the last known-good scoped state.'
 )
 
 
