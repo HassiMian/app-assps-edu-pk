@@ -1,0 +1,1366 @@
+{
+  "schemaVersion": "assps-chemistry9-ch1-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "DRAFT_ENGLISH_ONLY_URDU_AND_INDEPENDENT_ACADEMIC_REVIEW_PENDING",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "Grade IX Chemistry 2025-26 Chapter 1 first original English-medium authoring batch; additional/conceptual only; no textbook or past-paper stem copying.",
+  "topicCoverage": [
+    {
+      "topicId": "1.1",
+      "title": "What is Chemistry",
+      "sourcePdfPage": 6,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "1.2",
+      "title": "States of Matter",
+      "sourcePdfPage": 8,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    },
+    {
+      "topicId": "1.3",
+      "title": "Element",
+      "sourcePdfPage": 10,
+      "draftCount": 6,
+      "coverageStatus": "FIRST_AUTHORING_BATCH_NOT_EXHAUSTIVE"
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C01-T11-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "What is Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which science studies the composition, properties and transformations of matter?",
+          "answer": "Chemistry",
+          "options": [
+            {
+              "id": "A",
+              "text": "Chemistry"
+            },
+            {
+              "id": "B",
+              "text": "Astronomy"
+            },
+            {
+              "id": "C",
+              "text": "Geology"
+            },
+            {
+              "id": "D",
+              "text": "Ecology"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T11-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "What is Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which situation is most directly a chemistry question?",
+          "answer": "Why a substance changes into a different substance during a reaction",
+          "options": [
+            {
+              "id": "A",
+              "text": "Why a substance changes into a different substance during a reaction"
+            },
+            {
+              "id": "B",
+              "text": "Why a planet follows an orbit"
+            },
+            {
+              "id": "C",
+              "text": "Why a lens forms an image"
+            },
+            {
+              "id": "D",
+              "text": "Why a population migrates"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T11-S03",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "What is Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "State what chemistry studies and name two kinds of information chemists seek about matter.",
+          "answer": "Chemistry studies matter and its changes. Chemists investigate properties, composition, structure and transformations; any two are sufficient."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T11-S04",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "What is Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A metal sample changes colour after reacting with air. Explain why this observation belongs to chemistry.",
+          "answer": "It involves the properties of matter and a chemical transformation that produces material with different composition or properties."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T11-S05",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "What is Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why is energy often considered when studying chemical change?",
+          "answer": "Chemical changes involve rearrangement of particles and bonds, so energy can be absorbed, released or transferred during the change."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T11-L06",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.1",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 6,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "What is Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how chemistry connects the study of matter with observable changes. Include composition, properties and energy in your answer.",
+          "answer": "A complete answer should explain that chemistry examines what substances are made of, how their properties arise, how substances transform, and how energy may be absorbed or released during those transformations."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T12-M07",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 8,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which state of matter usually has a fixed shape and a fixed volume?",
+          "answer": "Solid",
+          "options": [
+            {
+              "id": "A",
+              "text": "Solid"
+            },
+            {
+              "id": "B",
+              "text": "Liquid"
+            },
+            {
+              "id": "C",
+              "text": "Gas"
+            },
+            {
+              "id": "D",
+              "text": "Plasma"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T12-M08",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.2",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 8,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why can a gas be compressed much more easily than a solid?",
+          "answer": "Gas particles are much farther apart",
+          "options": [
+            {
+              "id": "A",
+              "text": "Gas particles are much farther apart"
+            },
+            {
+              "id": "B",
+              "text": "Gas particles have no mass"
+            },
+            {
+              "id": "C",
+              "text": "Solid particles are always moving faster"
+            },
+            {
+              "id": "D",
+              "text": "Solids contain no empty space at all"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T12-S09",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 8,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare the arrangement of particles in a solid and a gas.",
+          "answer": "Solid particles are closely packed and remain near fixed positions, while gas particles are far apart and move freely through the available space."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T12-S10",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.2",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 8,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain why liquids can flow but are not compressed easily.",
+          "answer": "Liquid particles are close together, so there is little empty space for compression, but they can move past one another, allowing flow."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T12-S11",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 8,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is plasma, and how does it differ from an ordinary gas?",
+          "answer": "Plasma is an ionized state containing charged particles such as ions and electrons. An ordinary gas is largely made of neutral particles."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T12-L12",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.2",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 8,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare solids, liquids, gases and plasma in terms of particle spacing, movement, shape, volume and compressibility.",
+          "answer": "A strong answer should compare each state: solids have closely packed particles, fixed shape and volume, and low compressibility; liquids have close particles, fixed volume but variable shape, and can flow; gases have widely spaced particles, variable shape and volume, and high compressibility; plasma is an energetic ionized state containing charged particles."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T13-M13",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 10,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Element"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which description best defines an element?",
+          "answer": "A pure substance made of one kind of atom",
+          "options": [
+            {
+              "id": "A",
+              "text": "A pure substance made of one kind of atom"
+            },
+            {
+              "id": "B",
+              "text": "A mixture of two liquids"
+            },
+            {
+              "id": "C",
+              "text": "A substance that always contains ions"
+            },
+            {
+              "id": "D",
+              "text": "Any material that can be separated by filtration"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T13-M14",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.3",
+      "type": "mcq",
+      "origin": "conceptual",
+      "marks": 1,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 10,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Element"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which classification is used for elements according to general chemical and physical character?",
+          "answer": "Metals, non-metals, metalloids and noble gases",
+          "options": [
+            {
+              "id": "A",
+              "text": "Metals, non-metals, metalloids and noble gases"
+            },
+            {
+              "id": "B",
+              "text": "Solids, solutions, suspensions and colloids"
+            },
+            {
+              "id": "C",
+              "text": "Acids, bases, salts and oxides only"
+            },
+            {
+              "id": "D",
+              "text": "Atoms, molecules, mixtures and compounds"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept.",
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T13-S15",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 10,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Element"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Define an element and explain why it is considered a pure substance.",
+          "answer": "An element is made of one kind of atom. It is a pure substance because its particles have a single chemical identity and it cannot be separated into simpler substances by ordinary chemical means."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Recall/direct concept"
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T13-S16",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.3",
+      "type": "short",
+      "origin": "conceptual",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 10,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Element"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Can two different elements be in the same physical state? Explain with an example.",
+          "answer": "Yes. Physical state does not define chemical identity. For example, many different elements are solids at room temperature while still having different atomic identities."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T13-S17",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 10,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Element"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Name the four broad classes of elements highlighted in this chapter and state one feature used to distinguish them.",
+          "answer": "Metals, non-metals, metalloids and noble gases. They are distinguished using patterns in physical and chemical properties such as conductivity, reactivity or metallic character."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    },
+    {
+      "id": "IX-CHEM-2025-C01-T13-L18",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C01",
+        "number": 1
+      },
+      "topicId": "1.3",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 10,
+        "exerciseRef": null,
+        "topicIndexEvidence": "VISUALLY_VERIFIED_TOPIC_HEADING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Element"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain the idea of an element and describe how elements can be grouped by broad physical and chemical character.",
+          "answer": "A complete answer should define an element as a pure substance of one kind of atom, note that an element has its own chemical identity, and describe the broad groups metals, non-metals, metalloids and noble gases using general property differences."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium draft from verified Chapter 1 concept map. No reviewer or approval is claimed. Urdu counterpart remains blocked until the current Urdu-medium source is independently verified."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires comparison, explanation or application of a verified chapter concept."
+    }
+  ],
+  "totals": {
+    "drafts": 18,
+    "approved": 0,
+    "mcq": 6,
+    "short": 9,
+    "long": 3,
+    "englishOnly": 18,
+    "exercise": 0
+  }
+}
