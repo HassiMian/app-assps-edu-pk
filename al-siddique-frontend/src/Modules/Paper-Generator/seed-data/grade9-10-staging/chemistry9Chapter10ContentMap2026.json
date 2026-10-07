@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "assps-chemistry9-ch10-content-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "chapter": {
+    "number": 10,
+    "title": "Environmental Chemistry",
+    "printedPages": [
+      129,
+      144
+    ],
+    "pdfPages": [
+      133,
+      148
+    ],
+    "textLayer": "IMAGE_ONLY_BUT_RENDERED"
+  },
+  "topics": [
+    {
+      "topicId": "10.1",
+      "title": "Composition of Atmosphere",
+      "pdfStartPage": 135,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "10.2",
+      "title": "Air Pollutants",
+      "pdfStartPage": 135,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "10.3",
+      "title": "Acid Rain",
+      "pdfStartPage": 138,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "10.4",
+      "title": "Global Warming (Greenhouse Effect)",
+      "pdfStartPage": 140,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    },
+    {
+      "topicId": "10.5",
+      "title": "Strategies to Reduce Environmental Issues",
+      "pdfStartPage": 143,
+      "status": "RENDERED_PAGE_HEADING_REVIEWED"
+    }
+  ],
+  "verifiedConceptFamilies": [
+    "major and minor constituents of atmosphere",
+    "sources and harmful effects of major air pollutants",
+    "particulate matter and air-quality exposure",
+    "formation and environmental effects of acid rain",
+    "greenhouse gases and greenhouse effect",
+    "global warming and climate-change impacts",
+    "pollution-control strategies including catalytic converters",
+    "renewable-energy and tree-planting mitigation strategies"
+  ],
+  "exerciseFamilies": {
+    "pdfPages": [
+      146,
+      147,
+      148
+    ],
+    "families": [
+      "Multiple Choice Questions",
+      "Questions for Short Answers",
+      "Constructed Response Questions",
+      "Descriptive Questions",
+      "Investigative Questions"
+    ],
+    "itemLevelExerciseMap": "PENDING"
+  },
+  "authoring": {
+    "originalAdditionalConceptualAllowed": true,
+    "exerciseOriginAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPastPaperStems": false,
+    "publicationAllowed": false,
+    "urduCounterpartStatus": "BLOCKED_PENDING_CURRENT_URDU_SOURCE_VERIFICATION",
+    "chapterCompletionEligible": false,
+    "ocrMayLocateHeadingsButNotApproveQuestionContent": true
+  }
+}
