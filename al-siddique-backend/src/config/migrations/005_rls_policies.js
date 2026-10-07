@@ -82,7 +82,7 @@ async function up() {
     'learning_scope_identities', 'learning_scope_versions', 'publishers', 'resource_series', 'resource_books', 'resource_versions',
     'resource_sets', 'resource_set_items', 'resource_scope_mappings', 'curriculum_migration_plans',
     'assessment_papers', 'assessment_paper_revisions', 'assessment_releases',
-    'assessment_roster_snapshots', 'assessment_print_jobs'
+    'assessment_roster_snapshots', 'assessment_print_jobs', 'assessment_result_revisions', 'assessment_result_entries'
   ]
   for (const table of strictTables) {
     assertSafeTableName(table)

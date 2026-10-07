@@ -6,6 +6,7 @@ const { pool, query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { createPrintJobBinding, printJobTransition } = require('../services/assessmentPrintJobs')
+const { normalizeResultEntries } = require('../services/assessmentResults')
 
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -420,6 +421,201 @@ router.get('/papers/:paperId/releases/latest', async (req, res) => {
   } catch (error) {
     console.error('Assessment Studio release read error:', error.message)
     return res.status(500).json({ success:false, message:'Could not read assessment release.' })
+  }
+})
+
+router.get('/papers/:paperId/releases/:releaseId/results/latest', async (req, res) => {
+  try {
+    const publicId = safePublicId(req.params.paperId)
+    const releaseId = safePublicId(req.params.releaseId)
+    const schoolId = schoolIdForRequest(req)
+    const studentId = Number.parseInt(req.query.studentId ?? req.query.student_id, 10)
+    if (!publicId || !releaseId) return res.status(400).json({ success:false, message:'Invalid paper or release id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+    if (!Number.isInteger(studentId) || studentId <= 0) return res.status(400).json({ success:false, message:'Valid studentId is required.' })
+
+    await tenantClause(req, { table:'assessment_result_revisions' })
+    const revision = await query(
+      `SELECT rr.id, rr.revision_number, rr.result_status, rr.total_score, rr.maximum_score,
+              rr.effective_maximum_score, rr.result_hash, rr.reason, rr.created_at,
+              ar.release_id, ar.content_hash AS release_content_hash
+         FROM assessment_result_revisions rr
+         JOIN assessment_papers p ON p.id=rr.paper_id AND p.school_id=rr.school_id
+         JOIN assessment_releases ar ON ar.school_id=rr.school_id AND ar.release_id=rr.release_id
+        WHERE rr.school_id=$1 AND p.public_id=$2 AND rr.release_id=$3 AND rr.student_id=$4
+        ORDER BY rr.revision_number DESC
+        LIMIT 1`,
+      [schoolId, publicId, releaseId, studentId]
+    )
+    if (!revision.rowCount) return res.status(404).json({ success:false, message:'No assessment result revision found.' })
+
+    const entries = await query(
+      `SELECT question_instance_id, display_label, state, score, max_score, comment
+         FROM assessment_result_entries
+        WHERE school_id=$1 AND result_revision_id=$2
+        ORDER BY id`,
+      [schoolId, revision.rows[0].id]
+    )
+    return res.json({ success:true, data:{ ...revision.rows[0], student_id:studentId, entries:entries.rows } })
+  } catch (error) {
+    console.error('Assessment result read error:', error.message)
+    return res.status(500).json({ success:false, message:'Could not read assessment result.' })
+  }
+})
+
+router.post('/papers/:paperId/releases/:releaseId/results', async (req, res) => {
+  try {
+    const publicId = safePublicId(req.params.paperId)
+    const releaseId = safePublicId(req.params.releaseId)
+    const schoolId = schoolIdForRequest(req, req.body || {})
+    const studentId = Number.parseInt(req.body?.studentId ?? req.body?.student_id, 10)
+    const expectedRevision = Number.parseInt(req.body?.expectedRevision ?? req.body?.expected_revision ?? 0, 10)
+    if (!publicId || !releaseId) return res.status(400).json({ success:false, message:'Invalid paper or release id.' })
+    if (!schoolId) return res.status(400).json({ success:false, message:'School context required.' })
+    if (!Number.isInteger(studentId) || studentId <= 0) return res.status(400).json({ success:false, message:'Valid studentId is required.' })
+    if (!Number.isInteger(expectedRevision) || expectedRevision < 0) return res.status(400).json({ success:false, message:'expectedRevision must be a non-negative integer.' })
+
+    await tenantClause(req, { table:'assessment_result_revisions' })
+    const data = await withTenantTransaction(req, schoolId, async client => {
+      const release = await client.query(
+        `SELECT p.id AS paper_id, ar.release_id, ar.revision_number AS paper_revision_number,
+                ar.content_hash, ar.snapshot_json
+           FROM assessment_papers p
+           JOIN assessment_releases ar ON ar.paper_id=p.id AND ar.school_id=p.school_id
+          WHERE p.school_id=$1 AND p.public_id=$2 AND ar.release_id=$3
+          LIMIT 1`,
+        [schoolId, publicId, releaseId]
+      )
+      if (!release.rowCount) {
+        const error = new Error('Assessment release not found.')
+        error.httpStatus = 404
+        error.code = 'ASSESSMENT_RELEASE_NOT_FOUND'
+        throw error
+      }
+
+      const student = await client.query(
+        'SELECT id FROM students WHERE id=$1 AND school_id=$2 LIMIT 1',
+        [studentId, schoolId]
+      )
+      if (!student.rowCount) {
+        const error = new Error('Student not found in this school.')
+        error.httpStatus = 404
+        error.code = 'ASSESSMENT_STUDENT_NOT_FOUND'
+        throw error
+      }
+
+      const latest = await client.query(
+        `SELECT revision_number
+           FROM assessment_result_revisions
+          WHERE school_id=$1 AND release_id=$2 AND student_id=$3
+          ORDER BY revision_number DESC
+          LIMIT 1
+          FOR UPDATE`,
+        [schoolId, releaseId, studentId]
+      )
+      const latestRevision = latest.rowCount ? Number(latest.rows[0].revision_number) : 0
+      if (latestRevision !== expectedRevision) {
+        const error = new Error('Assessment result changed in another session.')
+        error.httpStatus = 409
+        error.code = 'RESULT_REVISION_CONFLICT'
+        error.currentRevision = latestRevision
+        throw error
+      }
+
+      const normalized = normalizeResultEntries(
+        release.rows[0].snapshot_json,
+        req.body?.entries || [],
+        {
+          resultStatus:req.body?.resultStatus ?? req.body?.result_status ?? 'DRAFT',
+          releaseId,
+          studentId,
+          reason:req.body?.reason || null,
+        }
+      )
+      const nextRevision = latestRevision + 1
+      const inserted = await client.query(
+        `INSERT INTO assessment_result_revisions(
+             school_id,paper_id,release_id,student_id,revision_number,result_status,
+             total_score,maximum_score,effective_maximum_score,result_hash,reason,created_by_key
+           ) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+           RETURNING id, revision_number, result_status, total_score, maximum_score,
+                     effective_maximum_score, result_hash, reason, created_at`,
+        [
+          schoolId,
+          release.rows[0].paper_id,
+          releaseId,
+          studentId,
+          nextRevision,
+          normalized.resultStatus,
+          normalized.totalScore,
+          normalized.maximumScore,
+          normalized.effectiveMaximumScore,
+          normalized.resultHash,
+          req.body?.reason || null,
+          actorKey(req),
+        ]
+      )
+      const resultRevisionId = inserted.rows[0].id
+      for (const entry of normalized.entries) {
+        await client.query(
+          `INSERT INTO assessment_result_entries(
+               school_id,result_revision_id,question_instance_id,display_label,state,score,max_score,comment
+             ) VALUES($1,$2,$3,$4,$5,$6,$7,$8)`,
+          [
+            schoolId,
+            resultRevisionId,
+            entry.questionInstanceId,
+            entry.displayLabel,
+            entry.state,
+            entry.score,
+            entry.maxScore,
+            entry.comment,
+          ]
+        )
+      }
+
+      return {
+        ...inserted.rows[0],
+        release_id:releaseId,
+        release_content_hash:release.rows[0].content_hash,
+        student_id:studentId,
+        entries:normalized.entries.map(entry => ({
+          question_instance_id:entry.questionInstanceId,
+          display_label:entry.displayLabel,
+          state:entry.state,
+          score:entry.score,
+          max_score:entry.maxScore,
+          comment:entry.comment,
+        })),
+      }
+    })
+
+    return res.status(201).json({ success:true, data })
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ success:false, code:'RESULT_REVISION_CONFLICT', message:'Assessment result changed in another session.' })
+    }
+    if (error.httpStatus) {
+      return res.status(error.httpStatus).json({
+        success:false,
+        code:error.code || 'ASSESSMENT_RESULT_ERROR',
+        message:error.message,
+        ...(Number.isInteger(error.currentRevision) ? { currentRevision:error.currentRevision } : {}),
+      })
+    }
+    if ([
+      'UNKNOWN_QUESTION_INSTANCE',
+      'INVALID_RESULT_STATE',
+      'INVALID_RESULT_SCORE',
+      'INVALID_RESULT_SCORE_STATE',
+      'INVALID_RESULT_STATUS',
+      'RESULT_NOT_FULLY_CHECKED',
+      'RESULT_TOTAL_EXCEEDS_RELEASE_MAX',
+    ].includes(error.code)) {
+      return res.status(422).json({ success:false, code:error.code, message:error.message })
+    }
+    console.error('Assessment result write error:', error.message)
+    return res.status(500).json({ success:false, message:'Could not save assessment result revision.' })
   }
 })
 
