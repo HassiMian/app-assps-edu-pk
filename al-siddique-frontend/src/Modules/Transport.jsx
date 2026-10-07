@@ -20,8 +20,7 @@ export default function Transport() {
  setRoutes(Array.isArray(response.data?.data) ? response.data.data : [])
  } catch (err) {
  console.error('Failed to load transport routes', err)
- setRoutes([])
- setMessage(err.response?.data?.message || 'Transport routes could not be loaded.')
+ setMessage(err.response?.data?.message || 'Transport routes could not be refreshed. Existing loaded routes were preserved.')
  } finally { setLoading(false) }
  }
 

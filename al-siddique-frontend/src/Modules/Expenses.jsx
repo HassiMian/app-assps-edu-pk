@@ -11,15 +11,18 @@ export default function Expenses() {
  const [message, setMessage] = useState('')
  const [loading, setLoading] = useState(true)
  const [saving, setSaving] = useState(false)
+ const [loadError, setLoadError] = useState('')
 
  async function loadExpenses() {
  setLoading(true)
+ setLoadError('')
  try {
  const response = await api.get('/api/expenses')
  setExpenses(Array.isArray(response.data?.data) ? response.data.data : [])
+ setLoadError('')
  } catch (err) {
  console.error('Failed to load expenses', err)
- setExpenses([])
+ setLoadError(err.response?.data?.message || 'Expense data could not be refreshed. Existing loaded entries were preserved.')
  } finally {
  setLoading(false)
  }
@@ -61,9 +64,11 @@ export default function Expenses() {
  </div>
  <div style={{ textAlign: 'right' }}>
  <div style={{ color: C.silver, fontSize: 12, marginBottom: 6 }}>Total expense</div>
- <div style={{ fontSize: 28, fontWeight: 800, color: C.red }}>Rs {total.toLocaleString()}</div>
+ <div style={{ fontSize: 28, fontWeight: 800, color: C.red }}>{loadError && expenses.length === 0 ? 'Unavailable' : `Rs ${total.toLocaleString()}`}</div>
  </div>
  </div>
+
+ {loadError && <div className="super-module-card" style={{ ...card, padding:16, color:C.red, borderRadius:16 }}>{loadError}</div>}
 
  <form className="super-module-card" onSubmit={addExpense} style={{ ...card, display: 'grid', gap: 18, borderRadius: 22 }}>
  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 16 }}>
@@ -79,7 +84,9 @@ export default function Expenses() {
  </form>
 
  <div className="super-module-card" style={{ ...card, overflowX: 'auto', borderRadius: 22 }}>
- {loading ? <div style={{ padding: 24, color: C.muted }}>Loading expenses…</div> : (
+ {loading ? <div style={{ padding: 24, color: C.muted }}>Loading expenses…</div> : loadError && expenses.length === 0 ? (
+ <div style={{ padding: 28, textAlign: 'center', color: C.red }}>Expense data is temporarily unavailable.</div>
+ ) : (
  <table style={{ width: '100%', borderCollapse: 'collapse' }}>
  <thead><tr style={{ borderBottom: `1px solid ${C.border}` }}>{['Date','Category','Description','Amount'].map(label => <th key={label} style={{ padding:'14px 16px', textAlign:'left', color:C.muted, fontSize:12, textTransform:'uppercase' }}>{label}</th>)}</tr></thead>
  <tbody>
