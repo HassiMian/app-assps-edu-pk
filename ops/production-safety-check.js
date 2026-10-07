@@ -464,6 +464,42 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  /Fee settings could not be loaded from server[\s\S]{0,420}setDiscountPackages\(\[\]\)/,
+  'fee settings source failure must not synthesize a blank editable configuration.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  'disabled={saving || loading || !sourceReady}',
+  'fee settings save must fail closed until current server configuration is loaded.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/SearchableStudentPicker.jsx',
+  'Student search is temporarily unavailable.',
+  'student picker must distinguish source failure from a verified empty search result.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/PromoteDemote.jsx',
+  'Student roster could not be loaded for promotion/demotion.',
+  'promotion/demotion must distinguish roster source failure from an empty school.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'Attendance history is temporarily unavailable for this student.',
+  'student profile must distinguish attendance source failure from no attendance records.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'Exam results are temporarily unavailable for this student.',
+  'student profile must distinguish results source failure from no exam results.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'
