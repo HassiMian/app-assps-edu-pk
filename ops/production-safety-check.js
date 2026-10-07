@@ -445,6 +445,12 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/employeeRoutes.js',
+  /router\.get\('\/portal-accounts'[\s\S]*router\.get\('\/:id'/,
+  'employee portal batch route must be registered before the generic /:id route.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
   "router.get('/portal-accounts', protect, canManageStaff",
   'employee portal account hydration must use a tenant-scoped protected batch endpoint.'
 )
