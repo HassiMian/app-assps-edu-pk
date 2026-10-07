@@ -1,29 +1,42 @@
 // src/routes/subscriptionRoutes.js
 // Subscription onboarding and administrative approvals API
 
+const crypto = require('crypto')
 const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
-const { pool } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { sendRejectionEmail } = require('../services/emailService')
-const { generateSchoolAdminCredentials } = require('../services/apexCredentials')
+const { generateSchoolAdminCredentials, sendCredentialsEmail } = require('../services/apexCredentials')
 
 // Storage configuration (aligns with uploadRoutes.js)
 const uploadDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
+const paymentScreenshotDir = path.join(uploadDir, 'payment-screenshots')
+const UPLOAD_EXTENSION_BY_MIME = Object.freeze({
+  'image/jpeg': '.jpg',
+  'image/jpg': '.jpg',
+  'image/png': '.png',
+  'image/webp': '.webp',
+  'application/pdf': '.pdf',
+})
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true })
 }
+if (!fs.existsSync(paymentScreenshotDir)) {
+  fs.mkdirSync(paymentScreenshotDir, { recursive: true })
+}
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadDir),
+  destination: (req, file, cb) => cb(null, paymentScreenshotDir),
   filename: (req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`
-    cb(null, 'screenshot_' + unique + path.extname(file.originalname))
+    const unique = `${Date.now()}-${crypto.randomBytes(8).toString('hex')}`
+    const ext = UPLOAD_EXTENSION_BY_MIME[file.mimetype] || '.bin'
+    cb(null, 'screenshot_' + unique + ext)
   }
 })
 
@@ -31,11 +44,10 @@ const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
-    const allowedExt = /\.(jpe?g|png|webp|pdf)$/i
-    const allowedMime = /^(image\/(jpeg|jpg|png|webp)|application\/pdf)$/i
-    const ext = allowedExt.test(path.extname(file.originalname || '').toLowerCase())
-    const mime = allowedMime.test(file.mimetype || '')
-    if (ext && mime) {
+    const ext = path.extname(file.originalname || '').toLowerCase()
+    const expectedExt = UPLOAD_EXTENSION_BY_MIME[file.mimetype]
+    const compatibleExt = expectedExt === '.jpg' ? ['.jpg', '.jpeg'].includes(ext) : ext === expectedExt
+    if (expectedExt && compatibleExt) {
       cb(null, true)
     } else {
       cb(new Error('Only JPEG, PNG, WEBP images or PDF files are allowed.'))
@@ -45,17 +57,27 @@ const upload = multer({
 
 // Generate premium Request ID (REQ-XXXX-XXXX)
 function generateRequestId() {
-  const segment1 = Math.random().toString(36).substring(2, 6).toUpperCase()
-  const segment2 = Math.random().toString(36).substring(2, 6).toUpperCase()
+  const segment1 = crypto.randomBytes(3).toString('hex').slice(0, 4).toUpperCase()
+  const segment2 = crypto.randomBytes(3).toString('hex').slice(0, 4).toUpperCase()
   return `REQ-${segment1}-${segment2}`
 }
 
+let subscriptionRequestSchemaReady = null
 async function ensureSubscriptionRequestFormColumns() {
-  await pool.query(`
-    ALTER TABLE subscription_requests ADD COLUMN IF NOT EXISTS plan_id VARCHAR(80);
-    ALTER TABLE subscription_requests ADD COLUMN IF NOT EXISTS plan_name VARCHAR(100);
-    ALTER TABLE subscription_requests ADD COLUMN IF NOT EXISTS plan_price INTEGER;
+  if (subscriptionRequestSchemaReady) return true
+  const result = await query(`
+    SELECT COUNT(*)::int AS count
+    FROM information_schema.columns
+    WHERE table_schema='public' AND table_name='subscription_requests'
+      AND column_name IN ('plan_id','plan_name','plan_price')
   `)
+  if (Number(result.rows[0]?.count || 0) !== 3) {
+    const err = new Error('subscription request schema migration is not applied.')
+    err.code = 'SUBSCRIPTION_SCHEMA_NOT_READY'
+    throw err
+  }
+  subscriptionRequestSchemaReady = true
+  return true
 }
 
 async function createSubscriptionRequestFromBody({ body, file }) {
@@ -78,11 +100,11 @@ async function createSubscriptionRequestFromBody({ body, file }) {
 
   await ensureSubscriptionRequestFormColumns()
 
-  const paymentScreenshotUrl = file ? `/uploads/${file.filename}` : null
+  const paymentScreenshotUrl = file ? `/api/subscription/payment-screenshot/${file.filename}` : null
   const requestId = generateRequestId()
   const savedTransactionId = transactionId || requestId
 
-  const result = await pool.query(`
+  const result = await query(`
     INSERT INTO subscription_requests (
       request_id, plan_id, plan_name, plan_price,
       owner_name, school_name, school_address, contact_number,
@@ -117,7 +139,7 @@ router.post('/request', upload.single('paymentScreenshot'), async (req, res) => 
     console.error('Subscription request form error:', err.message)
     return res.status(status).json({
       success: false,
-      message: err.message || 'Failed to submit request',
+      message: status >= 500 ? 'Failed to submit subscription request.' : (err.message || 'Invalid subscription request.'),
     })
   }
 })
@@ -152,7 +174,7 @@ router.post('/', upload.single('screenshot'), async (req, res) => {
 
     const requestId = generateRequestId()
 
-    const result = await pool.query(`
+    const result = await query(`
       INSERT INTO subscription_requests (
         request_id, owner_name, school_name, school_address, contact_number,
         email, city, selected_plan, billing_cycle, payment_method,
@@ -223,7 +245,7 @@ router.get('/', protect, requireRoles('super_admin'), async (req, res) => {
 
     queryText += ' ORDER BY created_at DESC'
 
-    const result = await pool.query(queryText, queryParams)
+    const result = await query(queryText, queryParams)
     res.json({ success: true, data: result.rows })
   } catch (err) {
     console.error('Admin fetch subscriptions error:', err.message)
@@ -236,7 +258,7 @@ router.get('/', protect, requireRoles('super_admin'), async (req, res) => {
  */
 router.get('/:id', protect, requireRoles('super_admin'), async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [req.params.id])
+    const result = await query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [req.params.id])
     if (result.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Subscription request not found.' })
     }
@@ -268,6 +290,7 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
     }
 
     await client.query('BEGIN')
+    await applyTenantContext(client)
 
     // Generate unique school tenantId
     const baseSlug = request.school_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -321,12 +344,13 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
 
     const baseDomain = req.headers.host || 'apex.assps.edu.pk'
     const loginUrl = `${req.secure ? 'https' : 'http'}://${baseDomain}/login/saas`
-    const { user } = await generateSchoolAdminCredentials({
+    const { user, temporaryPassword } = await generateSchoolAdminCredentials({
       client,
       request,
       tenantId,
       schoolId,
       loginUrl,
+      sendEmail: false,
     })
 
     await client.query(`
@@ -362,13 +386,31 @@ router.post('/:id/approve', protect, requireRoles('super_admin'), async (req, re
 
     await client.query('COMMIT')
 
+    const emailResult = await sendCredentialsEmail({
+      ownerName: request.owner_name,
+      schoolName: request.school_name,
+      loginUrl,
+      email: user.email,
+      temporaryPassword,
+    }).catch((emailErr) => {
+      console.error('Activation credential email failed after provisioning commit:', emailErr.message)
+      return { success: false, delivered: false, method: 'exception', error: emailErr.message }
+    })
+    const credentialsDelivered = emailResult?.delivered === true
+
     res.json({
       success: true,
-      message: 'Subscription approved, school tenant created, and login credentials emailed successfully.',
+      message: credentialsDelivered
+        ? 'Subscription approved, school tenant created, and login credentials delivered by email.'
+        : 'Subscription approved and school tenant created, but login credential email delivery was not confirmed.',
       data: {
         tenantId,
         email: user.email,
         schoolId
+      },
+      credentialDelivery: {
+        delivered: credentialsDelivered,
+        method: emailResult?.method || null,
       }
     })
   } catch (err) {
@@ -393,7 +435,7 @@ router.post('/:id/reject', protect, requireRoles('super_admin'), async (req, res
     }
 
     // Fetch the request
-    const requestResult = await pool.query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [requestId])
+    const requestResult = await query('SELECT * FROM subscription_requests WHERE id = $1 LIMIT 1', [requestId])
     if (requestResult.rows.length === 0) {
       return res.status(404).json({ success: false, message: 'Subscription request not found.' })
     }
@@ -405,23 +447,34 @@ router.post('/:id/reject', protect, requireRoles('super_admin'), async (req, res
     }
 
     // Update request
-    await pool.query(`
+    await query(`
       UPDATE subscription_requests 
       SET status = 'rejected', rejection_reason = $1, updated_at = NOW() 
       WHERE id = $2
     `, [rejectionReason, requestId])
 
-    // Send Rejection Email
-    await sendRejectionEmail({
+    // Notification is a separate side effect: rejection can succeed even when email delivery does not.
+    const emailResult = await sendRejectionEmail({
       ownerName: request.owner_name,
       schoolName: request.school_name,
       email: request.email,
       reason: rejectionReason
     }).catch(err => {
       console.error('⚠️ Rejection email send failed. Error:', err.message)
+      return { success: false, delivered: false, method: 'exception', error: err.message }
     })
 
-    res.json({ success: true, message: 'Subscription request rejected and notification emailed successfully.' })
+    const notificationDelivered = emailResult?.delivered === true
+    res.json({
+      success: true,
+      message: notificationDelivered
+        ? 'Subscription request rejected and notification email delivered.'
+        : 'Subscription request rejected, but notification email delivery was not confirmed.',
+      notification: {
+        delivered: notificationDelivered,
+        method: emailResult?.method || null
+      }
+    })
   } catch (err) {
     console.error('Rejection request failed:', err.message)
     res.status(500).json({ success: false, message: 'Failed to reject subscription request.' })

@@ -57,6 +57,7 @@ const generalSessionSubject = (req) => {
 
 const skipDedicatedLimits = (req) =>
   req.method === 'OPTIONS' || req.path === '/health' || req.path.startsWith('/health/') ||
+  req.path.startsWith('/api/whatsapp') || req.path.startsWith('/whatsapp') ||
   ['/api/auth/login','/api/admin/auth/login',
    '/api/auth/password-reset/request','/api/auth/password-reset/confirm',
    '/api/admin/auth/password-reset/request','/api/admin/auth/password-reset/confirm'].includes(req.path)
@@ -123,10 +124,10 @@ const recoveryLimiter = rateLimit({
 // ─── CORS ────────────────────────────────────────────────────────────────────
 const ALLOWED_ORIGINS = [
   /^http:\/\/localhost(:\d+)?$/,
-  /^https?:\/\/(www\.)?assps\.edu\.pk$/,
-  /^https?:\/\/app\.assps\.edu\.pk$/,
-  /^https?:\/\/apex\.assps\.edu\.pk$/,
-  /^https?:\/\/api\.assps\.edu\.pk$/,
+  /^https:\/\/(www\.)?assps\.edu\.pk$/,
+  /^https:\/\/app\.assps\.edu\.pk$/,
+  /^https:\/\/apex\.assps\.edu\.pk$/,
+  /^https:\/\/api\.assps\.edu\.pk$/,
 ]
 app.use((req, res, next) => {
   const origin = req.headers.origin;
@@ -149,7 +150,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.json({ limit: '10mb' }))          // PDF uploads are now multipart, not JSON
+app.use(express.json({
+  limit: '10mb',
+  verify: (req, res, buf) => { req.rawBody = buf },
+}))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 app.use(morgan('dev'))
 
@@ -157,26 +161,21 @@ const uploadsDir = fs.existsSync('/var/uploads')
   ? '/var/uploads'
   : path.join(__dirname, '../../uploads')
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
-app.use('/uploads', express.static(uploadsDir, {
+app.use(['/uploads/payment-screenshots', '/api/uploads/payment-screenshots'], (req, res) => {
+  res.status(404).json({ success: false, message: 'Payment proof files are not publicly accessible.' })
+})
+const uploadStaticOptions = {
   index: false,
   fallthrough: false,
   maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
-}))
-app.use('/api/uploads', express.static(uploadsDir, {
-  index: false,
-  fallthrough: false,
-  maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
-}))
+  setHeaders: (res) => res.setHeader('X-Content-Type-Options', 'nosniff'),
+}
+app.use('/uploads', express.static(uploadsDir, uploadStaticOptions))
+app.use('/api/uploads', express.static(uploadsDir, uploadStaticOptions))
 
 // ─── Health Check ─────────────────────────────────────────────────────────────
 app.get('/health', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Al Siddique Smart School OS — API Running!',
-    version: '1.0.0',
-    time:    new Date().toISOString(),
-    env:     process.env.NODE_ENV || 'development',
-  })
+  res.json({ success: true, status: 'ok', time: new Date().toISOString() })
 })
 
 app.get('/health/ready', async (req, res) => {
@@ -201,17 +200,10 @@ app.get('/health/ready', async (req, res) => {
 
 app.get('/health/ai', (req, res) => {
   const ai = getAiEnvConfig()
-  res.json({
-    success: true,
-    configured: Boolean(ai.apiKey),
-    models: {
-      primary: ai.primaryModel,
-      fallback: ai.fallbackModel,
-      vision: ai.visionModel,
-      text: ai.textModel,
-    },
-    status: ai.apiKey ? 'ready' : 'unconfigured',
-    message: ai.apiKey ? 'AI service configured' : 'AI service not configured',
+  const configured = Boolean(ai.apiKey)
+  res.status(configured ? 200 : 503).json({
+    success: configured,
+    status: configured ? 'ready' : 'unavailable',
     time: new Date().toISOString(),
   })
 })
@@ -243,12 +235,19 @@ const registerRoutes = (router) => {
       router.use(path, require(routeFile))
     } catch (e) {
       console.error(`Failed to register route ${path} from ${routeFile}:`, e.message)
+      if (process.env.NODE_ENV === 'production') throw e
     }
   }
 
   mount('/auth',       './routes/authRoutes')
   mount('/students',   './routes/studentRoutes')
+  mount('/families',   './routes/familyRoutes')
   mount('/attendance', './routes/attendanceRoutes')
+  mount('/academic',   './routes/academicRoutes')
+  mount('/expenses',   './routes/expenseRoutes')
+  mount('/transport',  './routes/transportRoutes')
+  mount('/library',    './routes/libraryRoutes')
+  mount('/date-sheets','./routes/dateSheetRoutes')
   mount('/fees',       './routes/feeRoutes')
   mount('/exams',      './routes/examRoutes')
   mount('/employees',  './routes/employeeRoutes')
@@ -275,6 +274,7 @@ const registerRoutes = (router) => {
   mount('/ops',        './routes/opsRoutes')
   mount('/daily-diary','./routes/dailyDiaryRoutes')
   mount('/ai-analytics', './routes/aiAnalyticsRoutes')
+  mount('/whatsapp',   './routes/whatsappRoutes')
 }
 
 const apiRouter = express.Router()
@@ -287,6 +287,13 @@ app.use([
 ], recoveryLimiter)
 app.use('/api', apiRouter)
 app.use('/api/admin', apiRouter) // Alias for Super App
+
+try {
+  app.use('/whatsapp', require('./routes/whatsappRoutes'))
+} catch (e) {
+  console.error('Failed to register root /whatsapp route:', e.message)
+  if (process.env.NODE_ENV === 'production') throw e
+}
 // ─── 404 Handler ──────────────────────────────────────────────────────────────
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route not found: ${req.method} ${req.path}` })
@@ -295,23 +302,24 @@ app.use((req, res) => {
 // ─── Error Handler ────────────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
   console.error('Error:', err.message)
-  res.status(err.status || 500).json({
-    success: false,
-    message: err.message || 'Internal server error',
-  })
+  const status = Number(err.status || err.statusCode || 500)
+  const exposeMessage = status < 500 || process.env.NODE_ENV !== 'production'
+  res.status(status).json({ success: false, message: exposeMessage ? (err.message || 'Request failed') : 'Internal server error' })
 })
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 async function bootstrap() {
-  if (process.env.AUTO_MIGRATE_ON_BOOT !== 'false') {
+  const isProduction = process.env.NODE_ENV === 'production'
+  const autoMigrate = process.env.AUTO_MIGRATE_ON_BOOT !== 'false'
+  if (isProduction && autoMigrate) {
+    throw new Error('AUTO_MIGRATE_ON_BOOT=false is required in production; apply versioned migrations before startup.')
+  }
+  if (autoMigrate) {
     try {
       await migrate()
       await migrateSubscriptionSchema()
     } catch (err) {
       console.error('Migration failed:', err.message)
-      if (process.env.NODE_ENV === 'production') {
-        throw err
-      }
       console.warn('Continuing startup in degraded mode because the database is unavailable.')
     }
   }

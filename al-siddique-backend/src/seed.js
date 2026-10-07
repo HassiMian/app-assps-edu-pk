@@ -7,6 +7,9 @@ async function seed() {
   if (process.env.NODE_ENV === 'production') {
     throw new Error('Refusing to run dummy seed data in production.')
   }
+  if (process.env.ALLOW_DUMMY_SEED !== 'true') {
+    throw new Error('Refusing to run dummy seed data unless ALLOW_DUMMY_SEED=true is explicitly set.')
+  }
 
   console.log('\n🚀 Seeding Dummy Data...\n')
   const client = await pool.connect()
