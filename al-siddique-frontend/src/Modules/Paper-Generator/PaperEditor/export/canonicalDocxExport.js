@@ -1,5 +1,5 @@
 import {
-  AlignmentType, Document, HeadingLevel, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType,
+  AlignmentType, Document, HeadingLevel, ImageRun, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType,
 } from 'docx'
 import { buildCanonicalDocxModel } from './canonicalDocxModel.js'
 
@@ -13,6 +13,30 @@ const para = (value, opts={}) => new Paragraph({
   spacing:{before:opts.before??0,after:opts.after??100},
 })
 const marksSuffix = value => Number.isFinite(Number(value)) ? `  [${Number(value)}]` : ''
+
+const imageTypeFromMime = mime => {
+  const value=String(mime||'').toLowerCase()
+  if(value.includes('jpeg')||value.includes('jpg'))return 'jpg'
+  if(value.includes('gif'))return 'gif'
+  if(value.includes('bmp'))return 'bmp'
+  if(value.includes('svg'))return 'svg'
+  return 'png'
+}
+const dataUrlToBytes = dataUrl => {
+  const match=String(dataUrl||'').match(/^data:([^;,]+)?;base64,(.+)$/i)
+  if(!match)return null
+  const base64=match[2]
+  if(typeof Buffer!=='undefined')return Uint8Array.from(Buffer.from(base64,'base64'))
+  const binary=atob(base64)
+  return Uint8Array.from(binary,c=>c.charCodeAt(0))
+}
+const imageTransformation = block => {
+  const rawWidth=Number(block.widthPx)||320
+  const rawHeight=Number(block.heightPx)||Math.round(rawWidth*0.625)
+  const width=Math.max(48,Math.min(560,rawWidth))
+  const height=Math.max(24,Math.round(rawHeight*(width/rawWidth)))
+  return {width,height}
+}
 
 function blockToDocx(block){
   const isRtl=rtl(block.direction)
@@ -29,6 +53,31 @@ function blockToDocx(block){
     ;(block.operands||[]).forEach((v,i)=>lines.push(`${i===(block.operands||[]).length-1&&block.operator?block.operator+' ':''}${v}`))
     if(block.result)lines.push(`= ${block.result}`)
     return [new Paragraph({alignment:AlignmentType.RIGHT,children:lines.map((line,i)=>new TextRun({text:line,font:'Courier New',size:24,bold:true,break:i?1:0})),spacing:{after:120}})]
+  }
+  if(block.kind==='math_capability'){
+    return [new Paragraph({
+      alignment:block.display==='inline'?AlignmentType.LEFT:AlignmentType.CENTER,
+      children:[new TextRun({text:String(block.source||''),font:'Cambria Math',size:24})],
+      spacing:{before:40,after:100},
+    })]
+  }
+  if(block.kind==='image_capability'){
+    const bytes=dataUrlToBytes(block.contentDataUrl)
+    if(!bytes||!bytes.length){
+      const label=block.altText||block.description||`Image ${block.assetId||''}`
+      return [para(`[Image: ${label}]`,{size:20,italics:true,center:true,after:90})]
+    }
+    const title=block.altText||block.description||'Assessment image'
+    return [new Paragraph({
+      alignment:AlignmentType.CENTER,
+      children:[new ImageRun({
+        data:bytes,
+        type:imageTypeFromMime(block.mimeType),
+        transformation:imageTransformation(block),
+        altText:{title,description:block.description||title,name:block.assetId||title},
+      })],
+      spacing:{before:50,after:100},
+    })]
   }
   if(block.kind==='table'){
     const cols=block.columns||[]
