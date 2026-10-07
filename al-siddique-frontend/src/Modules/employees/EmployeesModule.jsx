@@ -1168,10 +1168,14 @@ function LoginAccessTab({ employees, onReload }) {
  useEffect(() => {
  let cancelled = false
  async function hydrate() {
- const pairs = await Promise.all(employees.map(async emp => {
- try { const response = await api.get(`/api/employees/${emp.id}/portal-account`); return [emp.id, response.data?.data || null] } catch { return [emp.id, null] }
- }))
- if (!cancelled) setAccounts(Object.fromEntries(pairs))
+ try {
+ const response = await api.get('/api/employees/portal-accounts')
+ const rows = Array.isArray(response.data?.data) ? response.data.data : []
+ const next = Object.fromEntries(rows.map(row => [row.employee_id, row.account || null]))
+ if (!cancelled) setAccounts(next)
+ } catch (err) {
+ if (!cancelled) console.error('Could not load employee portal accounts', err)
+ }
  }
  void hydrate()
  return () => { cancelled = true }
@@ -1247,7 +1251,6 @@ function EmployeesModule() {
   .catch(err => {
   const message = err.response?.data?.message || err.message || 'Could not load employees'
   setEmployeeLoadError(message)
-  setEmployees([])
   console.error('Could not load employees', err)
   })
 

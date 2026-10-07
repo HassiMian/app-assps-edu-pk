@@ -319,6 +319,43 @@ router.post('/', protect, canManageStaff, async (req, res) => {
   }
 })
 
+// GET /api/employees/portal-accounts — batch account hydration for staff management
+router.get('/portal-accounts', protect, canManageStaff, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const [supportsUsername, supportsPermissions, supportsLastLogin] = await Promise.all([
+      hasColumn('users', 'username'),
+      hasColumn('users', 'permissions'),
+      hasColumn('users', 'last_login'),
+    ])
+    const result = await query(`
+      SELECT
+        e.id AS employee_id,
+        u.id, u.name, u.email, u.role, u.designation, u.is_active
+        ${supportsUsername ? ', u.username' : ''}
+        ${supportsPermissions ? ', u.permissions' : ''}
+        ${supportsLastLogin ? ', u.last_login' : ''}
+      FROM employees e
+      LEFT JOIN users u
+        ON u.id = e.user_id
+       AND u.school_id = e.school_id
+      WHERE e.school_id = $1
+      ORDER BY e.id
+    `, [schoolId])
+    res.json({
+      success: true,
+      count: result.rowCount,
+      data: result.rows.map(row => {
+        const { employee_id, ...account } = row
+        return { employee_id, account: account.id ? account : null }
+      }),
+    })
+  } catch (err) {
+    console.error('Employee portal batch read error:', err.message)
+    res.status(500).json({ success: false, message: 'Employee portal accounts could not be loaded.' })
+  }
+})
+
 // GET /api/employees/:id/portal-account
 router.get('/:id/portal-account', protect, canManageStaff, async (req, res) => {
   try {

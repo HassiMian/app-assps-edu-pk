@@ -444,6 +444,24 @@ assertNotContains(
 )
 
 assertContains(
+  'al-siddique-backend/src/routes/employeeRoutes.js',
+  "router.get('/portal-accounts', protect, canManageStaff",
+  'employee portal account hydration must use a tenant-scoped protected batch endpoint.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /Promise\.all\(employees\.map[\s\S]{0,260}\/portal-account/,
+  'employee login access must not issue one portal-account request per employee.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /setEmployeeLoadError\(message\)[\s\S]{0,100}setEmployees\(\[\]\)/,
+  'employee list refresh failures must preserve the last known-good staff roster.'
+)
+
+assertContains(
   'al-siddique-frontend/src/services/useAcademicStore.js',
   'const refreshAcademic = useCallback(async () => {',
   'academic setup refresh must expose a stable callback to avoid consumer render loops.'
