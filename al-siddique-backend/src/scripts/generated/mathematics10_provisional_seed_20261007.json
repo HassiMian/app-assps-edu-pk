@@ -1,0 +1,2094 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-MATH-C01-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Complex Numbers",
+      "topic_name": "imaginary unit",
+      "category": "mcq",
+      "question_text": "What is i²?",
+      "options": [
+        {
+          "id": "A",
+          "text": "-1"
+        },
+        {
+          "id": "B",
+          "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "i"
+        },
+        {
+          "id": "D",
+          "text": "0"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "-1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "imaginary unit"
+      ]
+    },
+    {
+      "id": "X-MATH-C01-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Complex Numbers",
+      "topic_name": "complex parts",
+      "category": "mcq",
+      "question_text": "For z=3-4i, Re(z)=?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "-4"
+        },
+        {
+          "id": "C",
+          "text": "4"
+        },
+        {
+          "id": "D",
+          "text": "-3"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "3",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "complex parts"
+      ]
+    },
+    {
+      "id": "X-MATH-C01-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Complex Numbers",
+      "topic_name": "complex form",
+      "category": "short",
+      "question_text": "Write the standard form of a complex number.",
+      "options": [],
+      "correct_option": "",
+      "answer": "z=a+bi, where a and b are real and i²=-1.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "complex form"
+      ]
+    },
+    {
+      "id": "X-MATH-C01-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Complex Numbers",
+      "topic_name": "conjugate",
+      "category": "short",
+      "question_text": "What is the conjugate of 5-2i?",
+      "options": [],
+      "correct_option": "",
+      "answer": "5+2i.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "conjugate"
+      ]
+    },
+    {
+      "id": "X-MATH-C01-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Complex Numbers",
+      "topic_name": "complex arithmetic",
+      "category": "numerical",
+      "question_text": "Simplify (3+2i)+(4-5i).",
+      "options": [],
+      "correct_option": "",
+      "answer": "7-3i.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "complex arithmetic"
+      ]
+    },
+    {
+      "id": "X-MATH-C02-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Quadratic Equations and Inequalities",
+      "topic_name": "quadratic equation",
+      "category": "mcq",
+      "question_text": "Which is quadratic in x?",
+      "options": [
+        {
+          "id": "A",
+          "text": "x²-5x+6=0"
+        },
+        {
+          "id": "B",
+          "text": "2x+1=0"
+        },
+        {
+          "id": "C",
+          "text": "1/x=2"
+        },
+        {
+          "id": "D",
+          "text": "x³=1"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "x²-5x+6=0",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "quadratic equation"
+      ]
+    },
+    {
+      "id": "X-MATH-C02-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Quadratic Equations and Inequalities",
+      "topic_name": "discriminant",
+      "category": "mcq",
+      "question_text": "The discriminant of ax²+bx+c=0 is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "b²-4ac"
+        },
+        {
+          "id": "B",
+          "text": "b²+4ac"
+        },
+        {
+          "id": "C",
+          "text": "2a+b"
+        },
+        {
+          "id": "D",
+          "text": "a²-c²"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "b²-4ac",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "discriminant"
+      ]
+    },
+    {
+      "id": "X-MATH-C02-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Quadratic Equations and Inequalities",
+      "topic_name": "roots",
+      "category": "short",
+      "question_text": "What does a positive discriminant indicate for a real quadratic equation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Two distinct real roots.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "roots"
+      ]
+    },
+    {
+      "id": "X-MATH-C02-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Quadratic Equations and Inequalities",
+      "topic_name": "inequality",
+      "category": "short",
+      "question_text": "What is a quadratic inequality?",
+      "options": [],
+      "correct_option": "",
+      "answer": "An inequality involving a quadratic expression, such as ax²+bx+c>0 with a≠0.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "inequality"
+      ]
+    },
+    {
+      "id": "X-MATH-C02-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Quadratic Equations and Inequalities",
+      "topic_name": "quadratic solving",
+      "category": "numerical",
+      "question_text": "Solve x²-5x+6=0.",
+      "options": [],
+      "correct_option": "",
+      "answer": "(x-2)(x-3)=0, so x=2 or x=3.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "quadratic solving"
+      ]
+    },
+    {
+      "id": "X-MATH-C03-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Matrices and Determinants",
+      "topic_name": "matrix order",
+      "category": "mcq",
+      "question_text": "A matrix with 2 rows and 3 columns has order?",
+      "options": [
+        {
+          "id": "A",
+          "text": "2×3"
+        },
+        {
+          "id": "B",
+          "text": "3×2"
+        },
+        {
+          "id": "C",
+          "text": "5×1"
+        },
+        {
+          "id": "D",
+          "text": "6×6"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "2×3",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "matrix order"
+      ]
+    },
+    {
+      "id": "X-MATH-C03-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Matrices and Determinants",
+      "topic_name": "determinant",
+      "category": "mcq",
+      "question_text": "For [[a,b],[c,d]], determinant is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "ad-bc"
+        },
+        {
+          "id": "B",
+          "text": "ab-cd"
+        },
+        {
+          "id": "C",
+          "text": "ac-bd"
+        },
+        {
+          "id": "D",
+          "text": "a+b+c+d"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ad-bc",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "determinant"
+      ]
+    },
+    {
+      "id": "X-MATH-C03-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Matrices and Determinants",
+      "topic_name": "identity matrix",
+      "category": "short",
+      "question_text": "What is the 2×2 identity matrix?",
+      "options": [],
+      "correct_option": "",
+      "answer": "[[1,0],[0,1]].",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "identity matrix"
+      ]
+    },
+    {
+      "id": "X-MATH-C03-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Matrices and Determinants",
+      "topic_name": "inverse",
+      "category": "short",
+      "question_text": "When does a 2×2 matrix have an inverse?",
+      "options": [],
+      "correct_option": "",
+      "answer": "When its determinant is non-zero.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "inverse"
+      ]
+    },
+    {
+      "id": "X-MATH-C03-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Matrices and Determinants",
+      "topic_name": "determinant",
+      "category": "numerical",
+      "question_text": "Find det[[2,3],[1,4]].",
+      "options": [],
+      "correct_option": "",
+      "answer": "2×4-3×1=5.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "determinant"
+      ]
+    },
+    {
+      "id": "X-MATH-C04-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Functions and Graphs",
+      "topic_name": "function composition",
+      "category": "mcq",
+      "question_text": "(f∘g)(x) means?",
+      "options": [
+        {
+          "id": "A",
+          "text": "f(g(x))"
+        },
+        {
+          "id": "B",
+          "text": "g(f(x)) only"
+        },
+        {
+          "id": "C",
+          "text": "f(x)+g(x)"
+        },
+        {
+          "id": "D",
+          "text": "f(x)g(x) always"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "f(g(x))",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "function composition"
+      ]
+    },
+    {
+      "id": "X-MATH-C04-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Functions and Graphs",
+      "topic_name": "inverse function",
+      "category": "mcq",
+      "question_text": "If f has an inverse, f⁻¹(f(x)) equals?",
+      "options": [
+        {
+          "id": "A",
+          "text": "x"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "1"
+        },
+        {
+          "id": "D",
+          "text": "f(x)"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "x",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "inverse function"
+      ]
+    },
+    {
+      "id": "X-MATH-C04-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Functions and Graphs",
+      "topic_name": "domain range",
+      "category": "short",
+      "question_text": "Differentiate domain and range.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Domain is the set of allowed inputs; range is the set of outputs actually produced.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "domain range"
+      ]
+    },
+    {
+      "id": "X-MATH-C04-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Functions and Graphs",
+      "topic_name": "one-to-one",
+      "category": "short",
+      "question_text": "Why is one-to-one behavior important for an inverse function?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Distinct inputs must give distinct outputs so the inverse can assign each output back to exactly one input.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "one-to-one"
+      ]
+    },
+    {
+      "id": "X-MATH-C04-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Functions and Graphs",
+      "topic_name": "function evaluation",
+      "category": "numerical",
+      "question_text": "If f(x)=2x²-3, find f(2).",
+      "options": [],
+      "correct_option": "",
+      "answer": "f(2)=2(4)-3=5.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "function evaluation"
+      ]
+    },
+    {
+      "id": "X-MATH-C05-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Algebraic Fractions",
+      "topic_name": "algebraic fractions",
+      "category": "mcq",
+      "question_text": "Which value is excluded from 1/(x-3)?",
+      "options": [
+        {
+          "id": "A",
+          "text": "3"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "1"
+        },
+        {
+          "id": "D",
+          "text": "-3"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "3",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "algebraic fractions"
+      ]
+    },
+    {
+      "id": "X-MATH-C05-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Algebraic Fractions",
+      "topic_name": "common denominator",
+      "category": "mcq",
+      "question_text": "To add algebraic fractions, first obtain?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A common denominator"
+        },
+        {
+          "id": "B",
+          "text": "A square root"
+        },
+        {
+          "id": "C",
+          "text": "A determinant"
+        },
+        {
+          "id": "D",
+          "text": "A tangent"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A common denominator",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "common denominator"
+      ]
+    },
+    {
+      "id": "X-MATH-C05-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Algebraic Fractions",
+      "topic_name": "domain restriction",
+      "category": "short",
+      "question_text": "Why must denominator zeros be excluded?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Division by zero is undefined, so values making a denominator zero are not allowed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "domain restriction"
+      ]
+    },
+    {
+      "id": "X-MATH-C05-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Algebraic Fractions",
+      "topic_name": "simplification",
+      "category": "short",
+      "question_text": "Simplify (x²-9)/(x+3), x≠-3.",
+      "options": [],
+      "correct_option": "",
+      "answer": "x-3.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "simplification"
+      ]
+    },
+    {
+      "id": "X-MATH-C05-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Algebraic Fractions",
+      "topic_name": "fraction operation",
+      "category": "numerical",
+      "question_text": "Simplify 1/x + 1/(2x), x≠0.",
+      "options": [],
+      "correct_option": "",
+      "answer": "2/(2x)+1/(2x)=3/(2x).",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "fraction operation"
+      ]
+    },
+    {
+      "id": "X-MATH-C06-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Vectors in Plane",
+      "topic_name": "vector magnitude",
+      "category": "mcq",
+      "question_text": "Magnitude of vector (3,4) is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "5"
+        },
+        {
+          "id": "B",
+          "text": "7"
+        },
+        {
+          "id": "C",
+          "text": "1"
+        },
+        {
+          "id": "D",
+          "text": "12"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "5",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "vector magnitude"
+      ]
+    },
+    {
+      "id": "X-MATH-C06-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Vectors in Plane",
+      "topic_name": "vector addition",
+      "category": "mcq",
+      "question_text": "Vectors are added component-wise by?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Adding corresponding components"
+        },
+        {
+          "id": "B",
+          "text": "Multiplying magnitudes only"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring direction"
+        },
+        {
+          "id": "D",
+          "text": "Subtracting every component"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Adding corresponding components",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "vector addition"
+      ]
+    },
+    {
+      "id": "X-MATH-C06-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Vectors in Plane",
+      "topic_name": "position vector",
+      "category": "short",
+      "question_text": "What is a position vector?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A vector from the origin to a point, representing that point’s coordinates as a vector.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "position vector"
+      ]
+    },
+    {
+      "id": "X-MATH-C06-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Vectors in Plane",
+      "topic_name": "unit vector",
+      "category": "short",
+      "question_text": "What is a unit vector?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A vector of magnitude 1 used to indicate direction.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "unit vector"
+      ]
+    },
+    {
+      "id": "X-MATH-C06-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Vectors in Plane",
+      "topic_name": "vector arithmetic",
+      "category": "numerical",
+      "question_text": "If a=(2,-1) and b=(3,4), find a+b.",
+      "options": [],
+      "correct_option": "",
+      "answer": "(5,3).",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "vector arithmetic"
+      ]
+    },
+    {
+      "id": "X-MATH-C07-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Trigonometry",
+      "topic_name": "identity",
+      "category": "mcq",
+      "question_text": "Which identity is correct?",
+      "options": [
+        {
+          "id": "A",
+          "text": "sin²θ+cos²θ=1"
+        },
+        {
+          "id": "B",
+          "text": "sinθ+cosθ=1 always"
+        },
+        {
+          "id": "C",
+          "text": "tan²θ=1 always"
+        },
+        {
+          "id": "D",
+          "text": "sinθ=cosθ always"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "sin²θ+cos²θ=1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "identity"
+      ]
+    },
+    {
+      "id": "X-MATH-C07-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Trigonometry",
+      "topic_name": "tan relation",
+      "category": "mcq",
+      "question_text": "tanθ equals?",
+      "options": [
+        {
+          "id": "A",
+          "text": "sinθ/cosθ"
+        },
+        {
+          "id": "B",
+          "text": "cosθ/sinθ"
+        },
+        {
+          "id": "C",
+          "text": "1/sinθ"
+        },
+        {
+          "id": "D",
+          "text": "1/cosθ"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "sinθ/cosθ",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tan relation"
+      ]
+    },
+    {
+      "id": "X-MATH-C07-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Trigonometry",
+      "topic_name": "angles",
+      "category": "short",
+      "question_text": "What is an angle of elevation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The angle measured upward from a horizontal line of sight to an object above the observer.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "angles"
+      ]
+    },
+    {
+      "id": "X-MATH-C07-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Trigonometry",
+      "topic_name": "trig use",
+      "category": "short",
+      "question_text": "Why are trigonometric ratios useful in indirect measurement?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They relate angles and side lengths, allowing unknown heights or distances to be calculated without direct measurement.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "trig use"
+      ]
+    },
+    {
+      "id": "X-MATH-C07-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Trigonometry",
+      "topic_name": "right triangle",
+      "category": "numerical",
+      "question_text": "If tanθ=3/4 and adjacent side=20 m, find opposite side.",
+      "options": [],
+      "correct_option": "",
+      "answer": "opposite/20=3/4, so opposite=15 m.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "right triangle"
+      ]
+    },
+    {
+      "id": "X-MATH-C08-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Chords and Arcs of a Circle",
+      "topic_name": "circle chord",
+      "category": "mcq",
+      "question_text": "A chord is a segment joining?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Two points on a circle"
+        },
+        {
+          "id": "B",
+          "text": "The centre to any point only"
+        },
+        {
+          "id": "C",
+          "text": "Two external points only"
+        },
+        {
+          "id": "D",
+          "text": "A tangent and radius"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Two points on a circle",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "circle chord"
+      ]
+    },
+    {
+      "id": "X-MATH-C08-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Chords and Arcs of a Circle",
+      "topic_name": "equal chords",
+      "category": "mcq",
+      "question_text": "Equal chords of the same circle subtend?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Equal angles at the centre"
+        },
+        {
+          "id": "B",
+          "text": "Unequal angles always"
+        },
+        {
+          "id": "C",
+          "text": "Right angles only"
+        },
+        {
+          "id": "D",
+          "text": "No angles"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Equal angles at the centre",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "equal chords"
+      ]
+    },
+    {
+      "id": "X-MATH-C08-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Chords and Arcs of a Circle",
+      "topic_name": "perpendicular from centre",
+      "category": "short",
+      "question_text": "What happens when a perpendicular from the centre meets a chord?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It bisects the chord.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "perpendicular from centre"
+      ]
+    },
+    {
+      "id": "X-MATH-C08-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Chords and Arcs of a Circle",
+      "topic_name": "arcs",
+      "category": "short",
+      "question_text": "How are equal chords related to arcs in the same circle?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Equal chords subtend equal arcs.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "arcs"
+      ]
+    },
+    {
+      "id": "X-MATH-C08-L01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Chords and Arcs of a Circle",
+      "topic_name": "chord theorem",
+      "category": "long",
+      "question_text": "Explain why the perpendicular from a circle’s centre to a chord bisects the chord.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Join the centre to both chord endpoints. The two radii are equal, the perpendicular gives right angles, and the shared perpendicular side makes the two right triangles congruent; therefore the chord segments are equal.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "chord theorem"
+      ]
+    },
+    {
+      "id": "X-MATH-C09-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Tangent and Angles of a Circle",
+      "topic_name": "tangent radius",
+      "category": "mcq",
+      "question_text": "A tangent at a point on a circle is perpendicular to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The radius through that point"
+        },
+        {
+          "id": "B",
+          "text": "Every chord"
+        },
+        {
+          "id": "C",
+          "text": "The diameter elsewhere"
+        },
+        {
+          "id": "D",
+          "text": "Any secant"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "The radius through that point",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tangent radius"
+      ]
+    },
+    {
+      "id": "X-MATH-C09-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Tangent and Angles of a Circle",
+      "topic_name": "tangent lengths",
+      "category": "mcq",
+      "question_text": "Tangents from the same external point to a circle have?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Equal lengths"
+        },
+        {
+          "id": "B",
+          "text": "Always unequal lengths"
+        },
+        {
+          "id": "C",
+          "text": "Zero length"
+        },
+        {
+          "id": "D",
+          "text": "No measurable relation"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Equal lengths",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tangent lengths"
+      ]
+    },
+    {
+      "id": "X-MATH-C09-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Tangent and Angles of a Circle",
+      "topic_name": "tangent",
+      "category": "short",
+      "question_text": "Define a tangent to a circle.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A line that touches the circle at exactly one point locally, called the point of contact.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tangent"
+      ]
+    },
+    {
+      "id": "X-MATH-C09-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Tangent and Angles of a Circle",
+      "topic_name": "angle theorem",
+      "category": "short",
+      "question_text": "State the tangent-radius angle relation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The tangent at a point on a circle is perpendicular to the radius drawn to that point.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "angle theorem"
+      ]
+    },
+    {
+      "id": "X-MATH-C09-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Tangent and Angles of a Circle",
+      "topic_name": "tangent length",
+      "category": "numerical",
+      "question_text": "From external point P, tangents PA and PB touch a circle. If PA=7 cm, find PB.",
+      "options": [],
+      "correct_option": "",
+      "answer": "PB=7 cm.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tangent length"
+      ]
+    },
+    {
+      "id": "X-MATH-C10-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Practical Geometry of Circles",
+      "topic_name": "circle construction",
+      "category": "mcq",
+      "question_text": "A circle through three non-collinear points has centre at intersection of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Perpendicular bisectors of two joining segments"
+        },
+        {
+          "id": "B",
+          "text": "Angle bisectors only"
+        },
+        {
+          "id": "C",
+          "text": "Tangents only"
+        },
+        {
+          "id": "D",
+          "text": "Any medians"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Perpendicular bisectors of two joining segments",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "circle construction"
+      ]
+    },
+    {
+      "id": "X-MATH-C10-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Practical Geometry of Circles",
+      "topic_name": "tangent construction",
+      "category": "mcq",
+      "question_text": "To construct a tangent at point A on a circle, construct a line through A perpendicular to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Radius OA"
+        },
+        {
+          "id": "B",
+          "text": "Any chord not through A"
+        },
+        {
+          "id": "C",
+          "text": "Diameter elsewhere"
+        },
+        {
+          "id": "D",
+          "text": "An arbitrary secant"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Radius OA",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tangent construction"
+      ]
+    },
+    {
+      "id": "X-MATH-C10-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Practical Geometry of Circles",
+      "topic_name": "circumcircle",
+      "category": "short",
+      "question_text": "How do you locate the circumcentre of a triangle?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Construct perpendicular bisectors of two sides; their intersection is the circumcentre.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "circumcircle"
+      ]
+    },
+    {
+      "id": "X-MATH-C10-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Practical Geometry of Circles",
+      "topic_name": "construction logic",
+      "category": "short",
+      "question_text": "Why do perpendicular bisectors locate a circle centre?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Every point on a perpendicular bisector is equidistant from the segment endpoints, so their intersection is equidistant from all chosen circle points.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "construction logic"
+      ]
+    },
+    {
+      "id": "X-MATH-C10-L01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Practical Geometry of Circles",
+      "topic_name": "tangent construction",
+      "category": "long",
+      "question_text": "Describe how to construct tangents from an external point P to a given circle with centre O.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Join OP, construct its midpoint M, draw the circle with centre M and radius MO; its intersections A,B with the given circle give tangency points. Join PA and PB.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "tangent construction"
+      ]
+    },
+    {
+      "id": "X-MATH-C11-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Information Handling",
+      "topic_name": "mean",
+      "category": "mcq",
+      "question_text": "For grouped or raw data, mean represents?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Average value"
+        },
+        {
+          "id": "B",
+          "text": "Largest value only"
+        },
+        {
+          "id": "C",
+          "text": "Smallest value only"
+        },
+        {
+          "id": "D",
+          "text": "Number of classes"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Average value",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mean"
+      ]
+    },
+    {
+      "id": "X-MATH-C11-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Information Handling",
+      "topic_name": "dispersion",
+      "category": "mcq",
+      "question_text": "Range measures?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Spread between maximum and minimum"
+        },
+        {
+          "id": "B",
+          "text": "Middle value only"
+        },
+        {
+          "id": "C",
+          "text": "Most frequent value only"
+        },
+        {
+          "id": "D",
+          "text": "Graph slope"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Spread between maximum and minimum",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "dispersion"
+      ]
+    },
+    {
+      "id": "X-MATH-C11-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Information Handling",
+      "topic_name": "median",
+      "category": "short",
+      "question_text": "What is the median?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The middle value of ordered data, or the average of the two middle values when the count is even.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "median"
+      ]
+    },
+    {
+      "id": "X-MATH-C11-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Information Handling",
+      "topic_name": "frequency table",
+      "category": "short",
+      "question_text": "Why are frequency tables useful?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They organize repeated values or class intervals and show how often observations occur, making patterns easier to analyze.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "frequency table"
+      ]
+    },
+    {
+      "id": "X-MATH-C11-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Information Handling",
+      "topic_name": "mean",
+      "category": "numerical",
+      "question_text": "Find the mean of 5,7,8,10,10.",
+      "options": [],
+      "correct_option": "",
+      "answer": "40/5=8.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mean"
+      ]
+    },
+    {
+      "id": "X-MATH-C12-M01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Probability",
+      "topic_name": "probability bounds",
+      "category": "mcq",
+      "question_text": "A probability must lie between?",
+      "options": [
+        {
+          "id": "A",
+          "text": "0 and 1 inclusive"
+        },
+        {
+          "id": "B",
+          "text": "-1 and 1 only"
+        },
+        {
+          "id": "C",
+          "text": "1 and 10"
+        },
+        {
+          "id": "D",
+          "text": "Any real numbers"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "0 and 1 inclusive",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "probability bounds"
+      ]
+    },
+    {
+      "id": "X-MATH-C12-M02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Probability",
+      "topic_name": "complement",
+      "category": "mcq",
+      "question_text": "P(A)+P(A′)=?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1"
+        },
+        {
+          "id": "B",
+          "text": "0"
+        },
+        {
+          "id": "C",
+          "text": "2"
+        },
+        {
+          "id": "D",
+          "text": "P(A)²"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "complement"
+      ]
+    },
+    {
+      "id": "X-MATH-C12-S01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Probability",
+      "topic_name": "experimental probability",
+      "category": "short",
+      "question_text": "What is experimental probability?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Observed frequency of an event divided by total number of trials.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "experimental probability"
+      ]
+    },
+    {
+      "id": "X-MATH-C12-S02",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Probability",
+      "topic_name": "mutually exclusive",
+      "category": "short",
+      "question_text": "What are mutually exclusive events?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Events that cannot occur at the same time in the same trial.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "mutually exclusive"
+      ]
+    },
+    {
+      "id": "X-MATH-C12-N01",
+      "class_level": "10th",
+      "subject": "Mathematics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Probability",
+      "topic_name": "simple probability",
+      "category": "numerical",
+      "question_text": "A bag has 3 red and 5 blue balls. Find probability of red on one random draw.",
+      "options": [],
+      "correct_option": "",
+      "answer": "3/(3+5)=3/8.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-017 | 4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece | page 2",
+      "tags": [
+        "grade10",
+        "mathematics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "simple probability"
+      ]
+    }
+  ]
+}

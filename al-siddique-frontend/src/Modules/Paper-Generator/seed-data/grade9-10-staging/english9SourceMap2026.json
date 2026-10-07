@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "assps-english9-source-map-v1",
+  "checkedOn": "2026-10-07",
+  "sourceRecordId": "pectaa-catalog-004",
+  "sourcePdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+  "sourceByteLength": 19576377,
+  "pageCount": 168,
+  "identity": [
+    "ENGLISH 9",
+    "Punjab Curriculum and Textbook Board, Lahore",
+    "Updated/Revised NCP-2023"
+  ],
+  "units": [
+    {
+      "number": 1,
+      "title": "The Saviour of Mankind",
+      "theme": "ethics, justice, trust and self-discipline",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Patriotism",
+      "theme": "patriotism and responsible citizenship",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Daffodils",
+      "theme": "nature, wonder and poetic expression",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Hazrat Asma",
+      "theme": "trust, courage, self-discipline and respect",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Women Empowerment through Entrepreneurship",
+      "theme": "entrepreneurship, opportunity and women empowerment",
+      "alp2026": "excluded",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "The Value of Time",
+      "theme": "time management and responsible use of time",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "If",
+      "theme": "bravery, resilience and poetic expression",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "The Impact of Globalisation on Culture and Economy",
+      "theme": "globalisation, culture and economy",
+      "alp2026": "excluded",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "title": "Quality Education: A Key to Success",
+      "theme": "quality education and sustainable development",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "title": "The Silent Predator and the Majestic Prey - Snow Leopard and Markhor",
+      "theme": "wildlife, conservation and natural resources",
+      "alp2026": "excluded",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "The Dear Departed",
+      "theme": "human relationships, character and drama",
+      "alp2026": "included",
+      "tocPdfPage": 2,
+      "skillsPdfPage": 3,
+      "status": "CURRENT_TEXTBOOK_TOC_VERIFIED"
+    }
+  ],
+  "annual2026Alp": {
+    "excludedUnits": [
+      5,
+      8,
+      10
+    ],
+    "fullBookBankDefault": true,
+    "filterOnly": true
+  },
+  "competencyMap": {
+    "skills": [
+      "dictionary/context use",
+      "tenses and verbals",
+      "figurative language",
+      "idioms and proverbs",
+      "punctuation",
+      "summary/paraphrase/precis",
+      "paragraph and essay writing",
+      "speech/book review/dialogue",
+      "direct and indirect narration"
+    ]
+  },
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPoemLines": false,
+    "copyPlayDialogue": false
+  }
+}

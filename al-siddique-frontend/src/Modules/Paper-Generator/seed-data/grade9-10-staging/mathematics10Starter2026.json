@@ -1,0 +1,4496 @@
+{
+  "schemaVersion": "assps-math10-starter-v1",
+  "createdOn": "2026-10-07",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-017",
+  "sourcePdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+  "scope": "CURRENT_TEXTBOOK_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-MATH-C01-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "imaginary unit",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Complex Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is i²?",
+          "answer": "-1",
+          "options": [
+            {
+              "id": "A",
+              "text": "-1"
+            },
+            {
+              "id": "B",
+              "text": "1"
+            },
+            {
+              "id": "C",
+              "text": "i"
+            },
+            {
+              "id": "D",
+              "text": "0"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C01-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "complex parts",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Complex Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "For z=3-4i, Re(z)=?",
+          "answer": "3",
+          "options": [
+            {
+              "id": "A",
+              "text": "3"
+            },
+            {
+              "id": "B",
+              "text": "-4"
+            },
+            {
+              "id": "C",
+              "text": "4"
+            },
+            {
+              "id": "D",
+              "text": "-3"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C01-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "complex form",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Complex Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Write the standard form of a complex number.",
+          "answer": "z=a+bi, where a and b are real and i²=-1."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C01-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "conjugate",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Complex Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the conjugate of 5-2i?",
+          "answer": "5+2i."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C01-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C01",
+        "number": 1
+      },
+      "topicId": "complex arithmetic",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Complex Numbers"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Simplify (3+2i)+(4-5i).",
+          "answer": "7-3i."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C02-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "quadratic equation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Quadratic Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which is quadratic in x?",
+          "answer": "x²-5x+6=0",
+          "options": [
+            {
+              "id": "A",
+              "text": "x²-5x+6=0"
+            },
+            {
+              "id": "B",
+              "text": "2x+1=0"
+            },
+            {
+              "id": "C",
+              "text": "1/x=2"
+            },
+            {
+              "id": "D",
+              "text": "x³=1"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C02-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "discriminant",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Quadratic Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "The discriminant of ax²+bx+c=0 is?",
+          "answer": "b²-4ac",
+          "options": [
+            {
+              "id": "A",
+              "text": "b²-4ac"
+            },
+            {
+              "id": "B",
+              "text": "b²+4ac"
+            },
+            {
+              "id": "C",
+              "text": "2a+b"
+            },
+            {
+              "id": "D",
+              "text": "a²-c²"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C02-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "roots",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Quadratic Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What does a positive discriminant indicate for a real quadratic equation?",
+          "answer": "Two distinct real roots."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C02-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "inequality",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Quadratic Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is a quadratic inequality?",
+          "answer": "An inequality involving a quadratic expression, such as ax²+bx+c>0 with a≠0."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C02-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C02",
+        "number": 2
+      },
+      "topicId": "quadratic solving",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Quadratic Equations and Inequalities"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Solve x²-5x+6=0.",
+          "answer": "(x-2)(x-3)=0, so x=2 or x=3."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C03-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "matrix order",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Matrices and Determinants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A matrix with 2 rows and 3 columns has order?",
+          "answer": "2×3",
+          "options": [
+            {
+              "id": "A",
+              "text": "2×3"
+            },
+            {
+              "id": "B",
+              "text": "3×2"
+            },
+            {
+              "id": "C",
+              "text": "5×1"
+            },
+            {
+              "id": "D",
+              "text": "6×6"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C03-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "determinant",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Matrices and Determinants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "For [[a,b],[c,d]], determinant is?",
+          "answer": "ad-bc",
+          "options": [
+            {
+              "id": "A",
+              "text": "ad-bc"
+            },
+            {
+              "id": "B",
+              "text": "ab-cd"
+            },
+            {
+              "id": "C",
+              "text": "ac-bd"
+            },
+            {
+              "id": "D",
+              "text": "a+b+c+d"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C03-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "identity matrix",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Matrices and Determinants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the 2×2 identity matrix?",
+          "answer": "[[1,0],[0,1]]."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C03-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "inverse",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Matrices and Determinants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "When does a 2×2 matrix have an inverse?",
+          "answer": "When its determinant is non-zero."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C03-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C03",
+        "number": 3
+      },
+      "topicId": "determinant",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Matrices and Determinants"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Find det[[2,3],[1,4]].",
+          "answer": "2×4-3×1=5."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C04-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "function composition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functions and Graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "(f∘g)(x) means?",
+          "answer": "f(g(x))",
+          "options": [
+            {
+              "id": "A",
+              "text": "f(g(x))"
+            },
+            {
+              "id": "B",
+              "text": "g(f(x)) only"
+            },
+            {
+              "id": "C",
+              "text": "f(x)+g(x)"
+            },
+            {
+              "id": "D",
+              "text": "f(x)g(x) always"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C04-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "inverse function",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functions and Graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "If f has an inverse, f⁻¹(f(x)) equals?",
+          "answer": "x",
+          "options": [
+            {
+              "id": "A",
+              "text": "x"
+            },
+            {
+              "id": "B",
+              "text": "0"
+            },
+            {
+              "id": "C",
+              "text": "1"
+            },
+            {
+              "id": "D",
+              "text": "f(x)"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C04-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "domain range",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functions and Graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Differentiate domain and range.",
+          "answer": "Domain is the set of allowed inputs; range is the set of outputs actually produced."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C04-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "one-to-one",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functions and Graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why is one-to-one behavior important for an inverse function?",
+          "answer": "Distinct inputs must give distinct outputs so the inverse can assign each output back to exactly one input."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C04-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C04",
+        "number": 4
+      },
+      "topicId": "function evaluation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Functions and Graphs"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "If f(x)=2x²-3, find f(2).",
+          "answer": "f(2)=2(4)-3=5."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C05-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "algebraic fractions",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Algebraic Fractions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which value is excluded from 1/(x-3)?",
+          "answer": "3",
+          "options": [
+            {
+              "id": "A",
+              "text": "3"
+            },
+            {
+              "id": "B",
+              "text": "0"
+            },
+            {
+              "id": "C",
+              "text": "1"
+            },
+            {
+              "id": "D",
+              "text": "-3"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C05-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "common denominator",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Algebraic Fractions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "To add algebraic fractions, first obtain?",
+          "answer": "A common denominator",
+          "options": [
+            {
+              "id": "A",
+              "text": "A common denominator"
+            },
+            {
+              "id": "B",
+              "text": "A square root"
+            },
+            {
+              "id": "C",
+              "text": "A determinant"
+            },
+            {
+              "id": "D",
+              "text": "A tangent"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C05-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "domain restriction",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Algebraic Fractions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why must denominator zeros be excluded?",
+          "answer": "Division by zero is undefined, so values making a denominator zero are not allowed."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C05-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "simplification",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Algebraic Fractions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Simplify (x²-9)/(x+3), x≠-3.",
+          "answer": "x-3."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C05-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C05",
+        "number": 5
+      },
+      "topicId": "fraction operation",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Algebraic Fractions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Simplify 1/x + 1/(2x), x≠0.",
+          "answer": "2/(2x)+1/(2x)=3/(2x)."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C06-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "vector magnitude",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Vectors in Plane"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Magnitude of vector (3,4) is?",
+          "answer": "5",
+          "options": [
+            {
+              "id": "A",
+              "text": "5"
+            },
+            {
+              "id": "B",
+              "text": "7"
+            },
+            {
+              "id": "C",
+              "text": "1"
+            },
+            {
+              "id": "D",
+              "text": "12"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C06-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "vector addition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Vectors in Plane"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Vectors are added component-wise by?",
+          "answer": "Adding corresponding components",
+          "options": [
+            {
+              "id": "A",
+              "text": "Adding corresponding components"
+            },
+            {
+              "id": "B",
+              "text": "Multiplying magnitudes only"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring direction"
+            },
+            {
+              "id": "D",
+              "text": "Subtracting every component"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C06-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "position vector",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Vectors in Plane"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is a position vector?",
+          "answer": "A vector from the origin to a point, representing that point’s coordinates as a vector."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C06-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "unit vector",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Vectors in Plane"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is a unit vector?",
+          "answer": "A vector of magnitude 1 used to indicate direction."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C06-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C06",
+        "number": 6
+      },
+      "topicId": "vector arithmetic",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Vectors in Plane"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "If a=(2,-1) and b=(3,4), find a+b.",
+          "answer": "(5,3)."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C07-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "identity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Which identity is correct?",
+          "answer": "sin²θ+cos²θ=1",
+          "options": [
+            {
+              "id": "A",
+              "text": "sin²θ+cos²θ=1"
+            },
+            {
+              "id": "B",
+              "text": "sinθ+cosθ=1 always"
+            },
+            {
+              "id": "C",
+              "text": "tan²θ=1 always"
+            },
+            {
+              "id": "D",
+              "text": "sinθ=cosθ always"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C07-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "tan relation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "tanθ equals?",
+          "answer": "sinθ/cosθ",
+          "options": [
+            {
+              "id": "A",
+              "text": "sinθ/cosθ"
+            },
+            {
+              "id": "B",
+              "text": "cosθ/sinθ"
+            },
+            {
+              "id": "C",
+              "text": "1/sinθ"
+            },
+            {
+              "id": "D",
+              "text": "1/cosθ"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C07-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "angles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is an angle of elevation?",
+          "answer": "The angle measured upward from a horizontal line of sight to an object above the observer."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C07-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "trig use",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why are trigonometric ratios useful in indirect measurement?",
+          "answer": "They relate angles and side lengths, allowing unknown heights or distances to be calculated without direct measurement."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C07-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C07",
+        "number": 7
+      },
+      "topicId": "right triangle",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Trigonometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "If tanθ=3/4 and adjacent side=20 m, find opposite side.",
+          "answer": "opposite/20=3/4, so opposite=15 m."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C08-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "circle chord",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chords and Arcs of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A chord is a segment joining?",
+          "answer": "Two points on a circle",
+          "options": [
+            {
+              "id": "A",
+              "text": "Two points on a circle"
+            },
+            {
+              "id": "B",
+              "text": "The centre to any point only"
+            },
+            {
+              "id": "C",
+              "text": "Two external points only"
+            },
+            {
+              "id": "D",
+              "text": "A tangent and radius"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C08-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "equal chords",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chords and Arcs of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Equal chords of the same circle subtend?",
+          "answer": "Equal angles at the centre",
+          "options": [
+            {
+              "id": "A",
+              "text": "Equal angles at the centre"
+            },
+            {
+              "id": "B",
+              "text": "Unequal angles always"
+            },
+            {
+              "id": "C",
+              "text": "Right angles only"
+            },
+            {
+              "id": "D",
+              "text": "No angles"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C08-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "perpendicular from centre",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chords and Arcs of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What happens when a perpendicular from the centre meets a chord?",
+          "answer": "It bisects the chord."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C08-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "arcs",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chords and Arcs of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "How are equal chords related to arcs in the same circle?",
+          "answer": "Equal chords subtend equal arcs."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C08-L01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C08",
+        "number": 8
+      },
+      "topicId": "chord theorem",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chords and Arcs of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Explain why the perpendicular from a circle’s centre to a chord bisects the chord.",
+          "answer": "Join the centre to both chord endpoints. The two radii are equal, the perpendicular gives right angles, and the shared perpendicular side makes the two right triangles congruent; therefore the chord segments are equal."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C09-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "tangent radius",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tangent and Angles of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A tangent at a point on a circle is perpendicular to?",
+          "answer": "The radius through that point",
+          "options": [
+            {
+              "id": "A",
+              "text": "The radius through that point"
+            },
+            {
+              "id": "B",
+              "text": "Every chord"
+            },
+            {
+              "id": "C",
+              "text": "The diameter elsewhere"
+            },
+            {
+              "id": "D",
+              "text": "Any secant"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C09-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "tangent lengths",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tangent and Angles of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Tangents from the same external point to a circle have?",
+          "answer": "Equal lengths",
+          "options": [
+            {
+              "id": "A",
+              "text": "Equal lengths"
+            },
+            {
+              "id": "B",
+              "text": "Always unequal lengths"
+            },
+            {
+              "id": "C",
+              "text": "Zero length"
+            },
+            {
+              "id": "D",
+              "text": "No measurable relation"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C09-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "tangent",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tangent and Angles of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Define a tangent to a circle.",
+          "answer": "A line that touches the circle at exactly one point locally, called the point of contact."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C09-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "angle theorem",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tangent and Angles of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "State the tangent-radius angle relation.",
+          "answer": "The tangent at a point on a circle is perpendicular to the radius drawn to that point."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C09-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C09",
+        "number": 9
+      },
+      "topicId": "tangent length",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Tangent and Angles of a Circle"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "From external point P, tangents PA and PB touch a circle. If PA=7 cm, find PB.",
+          "answer": "PB=7 cm."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C10-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "circle construction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Practical Geometry of Circles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A circle through three non-collinear points has centre at intersection of?",
+          "answer": "Perpendicular bisectors of two joining segments",
+          "options": [
+            {
+              "id": "A",
+              "text": "Perpendicular bisectors of two joining segments"
+            },
+            {
+              "id": "B",
+              "text": "Angle bisectors only"
+            },
+            {
+              "id": "C",
+              "text": "Tangents only"
+            },
+            {
+              "id": "D",
+              "text": "Any medians"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C10-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "tangent construction",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Practical Geometry of Circles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "To construct a tangent at point A on a circle, construct a line through A perpendicular to?",
+          "answer": "Radius OA",
+          "options": [
+            {
+              "id": "A",
+              "text": "Radius OA"
+            },
+            {
+              "id": "B",
+              "text": "Any chord not through A"
+            },
+            {
+              "id": "C",
+              "text": "Diameter elsewhere"
+            },
+            {
+              "id": "D",
+              "text": "An arbitrary secant"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C10-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "circumcircle",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Practical Geometry of Circles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "How do you locate the circumcentre of a triangle?",
+          "answer": "Construct perpendicular bisectors of two sides; their intersection is the circumcentre."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C10-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "construction logic",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Practical Geometry of Circles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why do perpendicular bisectors locate a circle centre?",
+          "answer": "Every point on a perpendicular bisector is equidistant from the segment endpoints, so their intersection is equidistant from all chosen circle points."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C10-L01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C10",
+        "number": 10
+      },
+      "topicId": "tangent construction",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Practical Geometry of Circles"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Describe how to construct tangents from an external point P to a given circle with centre O.",
+          "answer": "Join OP, construct its midpoint M, draw the circle with centre M and radius MO; its intersections A,B with the given circle give tangency points. Join PA and PB."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C11-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "mean",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "For grouped or raw data, mean represents?",
+          "answer": "Average value",
+          "options": [
+            {
+              "id": "A",
+              "text": "Average value"
+            },
+            {
+              "id": "B",
+              "text": "Largest value only"
+            },
+            {
+              "id": "C",
+              "text": "Smallest value only"
+            },
+            {
+              "id": "D",
+              "text": "Number of classes"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C11-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "dispersion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Range measures?",
+          "answer": "Spread between maximum and minimum",
+          "options": [
+            {
+              "id": "A",
+              "text": "Spread between maximum and minimum"
+            },
+            {
+              "id": "B",
+              "text": "Middle value only"
+            },
+            {
+              "id": "C",
+              "text": "Most frequent value only"
+            },
+            {
+              "id": "D",
+              "text": "Graph slope"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C11-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "median",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is the median?",
+          "answer": "The middle value of ordered data, or the average of the two middle values when the count is even."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C11-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "frequency table",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Why are frequency tables useful?",
+          "answer": "They organize repeated values or class intervals and show how often observations occur, making patterns easier to analyze."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C11-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C11",
+        "number": 11
+      },
+      "topicId": "mean",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Information Handling"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "Find the mean of 5,7,8,10,10.",
+          "answer": "40/5=8."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C12-M01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "probability bounds",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A probability must lie between?",
+          "answer": "0 and 1 inclusive",
+          "options": [
+            {
+              "id": "A",
+              "text": "0 and 1 inclusive"
+            },
+            {
+              "id": "B",
+              "text": "-1 and 1 only"
+            },
+            {
+              "id": "C",
+              "text": "1 and 10"
+            },
+            {
+              "id": "D",
+              "text": "Any real numbers"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C12-M02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "complement",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "P(A)+P(A′)=?",
+          "answer": "1",
+          "options": [
+            {
+              "id": "A",
+              "text": "1"
+            },
+            {
+              "id": "B",
+              "text": "0"
+            },
+            {
+              "id": "C",
+              "text": "2"
+            },
+            {
+              "id": "D",
+              "text": "P(A)²"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-MATH-C12-S01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "experimental probability",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What is experimental probability?",
+          "answer": "Observed frequency of an event divided by total number of trials."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C12-S02",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "mutually exclusive",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "What are mutually exclusive events?",
+          "answer": "Events that cannot occur at the same time in the same trial."
+        }
+      }
+    },
+    {
+      "id": "X-MATH-C12-N01",
+      "chapter": {
+        "id": "X-MATH-2026-EM-C12",
+        "number": 12
+      },
+      "topicId": "simple probability",
+      "type": "numerical",
+      "origin": "additional",
+      "marks": 3,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-017",
+        "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+        "page": 2,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_TEXTBOOK_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Probability"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "mathematics",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-MATHEMATICS-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Mathematics X starter aligned to current 2026-27 textbook. No annual-paper occurrence or review approval is claimed."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261007",
+      "difficultyRationale": "Original starter aligned to current unit scope.",
+      "content": {
+        "en": {
+          "stem": "A bag has 3 red and 5 blue balls. Find probability of red on one random draw.",
+          "answer": "3/(3+5)=3/8."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 60,
+    "mcq": 24,
+    "short": 24,
+    "numerical": 10,
+    "long": 2,
+    "chapters": 12
+  }
+}

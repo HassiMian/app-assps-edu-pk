@@ -1,0 +1,2094 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-PHY-C10-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "thermal expansion",
+      "category": "mcq",
+      "question_text": "When most solids are heated, their dimensions generally?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Increase"
+        },
+        {
+          "id": "B",
+          "text": "Become zero"
+        },
+        {
+          "id": "C",
+          "text": "Remain exactly fixed"
+        },
+        {
+          "id": "D",
+          "text": "Reverse sign"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Increase",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "thermal expansion"
+      ]
+    },
+    {
+      "id": "X-PHY-C10-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "specific heat capacity",
+      "category": "mcq",
+      "question_text": "Specific heat capacity is the energy required to raise the temperature of what mass by 1 K?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1 kg"
+        },
+        {
+          "id": "B",
+          "text": "1 g only"
+        },
+        {
+          "id": "C",
+          "text": "10 kg"
+        },
+        {
+          "id": "D",
+          "text": "Any mass with no reference"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1 kg",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "specific heat capacity"
+      ]
+    },
+    {
+      "id": "X-PHY-C10-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "thermal expansion",
+      "category": "short",
+      "question_text": "Why are expansion gaps left in bridges or railway structures?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They allow materials to expand when heated without producing damaging stresses or buckling.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "thermal expansion"
+      ]
+    },
+    {
+      "id": "X-PHY-C10-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "latent heat",
+      "category": "short",
+      "question_text": "What is latent heat?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Energy absorbed or released during a change of state without a temperature change at that stage.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "latent heat"
+      ]
+    },
+    {
+      "id": "X-PHY-C10-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "specific heat capacity",
+      "category": "numerical",
+      "question_text": "How much energy is needed to raise 2 kg of water by 5 K if c=4200 J kg⁻¹ K⁻¹?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Q=mcΔT=2×4200×5=42,000 J.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "specific heat capacity"
+      ]
+    },
+    {
+      "id": "X-PHY-C11-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "conduction",
+      "category": "mcq",
+      "question_text": "Which heat-transfer process dominates through a metal rod?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Conduction"
+        },
+        {
+          "id": "B",
+          "text": "Convection only"
+        },
+        {
+          "id": "C",
+          "text": "Radiation only"
+        },
+        {
+          "id": "D",
+          "text": "Evaporation only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Conduction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "conduction"
+      ]
+    },
+    {
+      "id": "X-PHY-C11-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "radiation",
+      "category": "mcq",
+      "question_text": "Thermal radiation can travel through?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Vacuum"
+        },
+        {
+          "id": "B",
+          "text": "Solids only"
+        },
+        {
+          "id": "C",
+          "text": "Liquids only"
+        },
+        {
+          "id": "D",
+          "text": "Air only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Vacuum",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "radiation"
+      ]
+    },
+    {
+      "id": "X-PHY-C11-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "convection",
+      "category": "short",
+      "question_text": "Why does warm fluid tend to rise?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heating usually lowers its density, so buoyancy causes the warmer fluid to rise while cooler denser fluid sinks.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "convection"
+      ]
+    },
+    {
+      "id": "X-PHY-C11-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "insulation",
+      "category": "short",
+      "question_text": "How does trapped air help thermal insulation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Trapped air is a poor conductor and, when prevented from circulating, also limits convection.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "insulation"
+      ]
+    },
+    {
+      "id": "X-PHY-C11-L01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "heat transfer",
+      "category": "long",
+      "question_text": "Compare conduction, convection and radiation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for particle/electron transfer in conduction, bulk fluid movement in convection, electromagnetic transfer in radiation, media requirements, and one suitable example of each.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "heat transfer"
+      ]
+    },
+    {
+      "id": "X-PHY-C12-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "wave quantities",
+      "category": "mcq",
+      "question_text": "Wave speed equals frequency multiplied by?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Wavelength"
+        },
+        {
+          "id": "B",
+          "text": "Amplitude"
+        },
+        {
+          "id": "C",
+          "text": "Period squared"
+        },
+        {
+          "id": "D",
+          "text": "Energy"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Wavelength",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "wave quantities"
+      ]
+    },
+    {
+      "id": "X-PHY-C12-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "wave types",
+      "category": "mcq",
+      "question_text": "In a transverse wave, particle vibration is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Perpendicular to wave travel"
+        },
+        {
+          "id": "B",
+          "text": "Parallel to wave travel"
+        },
+        {
+          "id": "C",
+          "text": "Always circular"
+        },
+        {
+          "id": "D",
+          "text": "Absent"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Perpendicular to wave travel",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "wave types"
+      ]
+    },
+    {
+      "id": "X-PHY-C12-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "frequency and period",
+      "category": "short",
+      "question_text": "State the relation between frequency and period.",
+      "options": [],
+      "correct_option": "",
+      "answer": "f=1/T and T=1/f.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "frequency and period"
+      ]
+    },
+    {
+      "id": "X-PHY-C12-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "wave behavior",
+      "category": "short",
+      "question_text": "What happens to frequency when a wave enters another medium but the source is unchanged?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The frequency remains the same; speed and wavelength may change.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "wave behavior"
+      ]
+    },
+    {
+      "id": "X-PHY-C12-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "wave equation",
+      "category": "numerical",
+      "question_text": "A wave has frequency 50 Hz and wavelength 2 m. Find its speed.",
+      "options": [],
+      "correct_option": "",
+      "answer": "v=fλ=50×2=100 m/s.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "wave equation"
+      ]
+    },
+    {
+      "id": "X-PHY-C13-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "sound waves",
+      "category": "mcq",
+      "question_text": "Sound in air is mainly what type of wave?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Longitudinal"
+        },
+        {
+          "id": "B",
+          "text": "Transverse electromagnetic"
+        },
+        {
+          "id": "C",
+          "text": "Stationary electric"
+        },
+        {
+          "id": "D",
+          "text": "Gravitational"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Longitudinal",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "sound waves"
+      ]
+    },
+    {
+      "id": "X-PHY-C13-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "pitch",
+      "category": "mcq",
+      "question_text": "Pitch depends mainly on?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Frequency"
+        },
+        {
+          "id": "B",
+          "text": "Amplitude"
+        },
+        {
+          "id": "C",
+          "text": "Speed only"
+        },
+        {
+          "id": "D",
+          "text": "Distance only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Frequency",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "pitch"
+      ]
+    },
+    {
+      "id": "X-PHY-C13-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "loudness",
+      "category": "short",
+      "question_text": "How is loudness related to wave amplitude?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Greater amplitude generally corresponds to greater sound intensity and perceived loudness.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "loudness"
+      ]
+    },
+    {
+      "id": "X-PHY-C13-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "echo",
+      "category": "short",
+      "question_text": "What condition is needed to hear a distinct echo?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Reflected sound must arrive after a sufficient time delay so it can be distinguished from the original sound.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "echo"
+      ]
+    },
+    {
+      "id": "X-PHY-C13-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "echo",
+      "category": "numerical",
+      "question_text": "An echo returns 0.40 s after a shout. If sound speed is 340 m/s, how far away is the reflecting wall?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Round-trip distance=340×0.40=136 m, so one-way distance=68 m.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "echo"
+      ]
+    },
+    {
+      "id": "X-PHY-C14-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "reflection",
+      "category": "mcq",
+      "question_text": "The angle of reflection is equal to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Angle of incidence"
+        },
+        {
+          "id": "B",
+          "text": "Twice the incidence angle"
+        },
+        {
+          "id": "C",
+          "text": "Zero always"
+        },
+        {
+          "id": "D",
+          "text": "90° always"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Angle of incidence",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "reflection"
+      ]
+    },
+    {
+      "id": "X-PHY-C14-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "refraction",
+      "category": "mcq",
+      "question_text": "Refraction occurs because light changes what when entering another medium?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Speed"
+        },
+        {
+          "id": "B",
+          "text": "Frequency source"
+        },
+        {
+          "id": "C",
+          "text": "Charge"
+        },
+        {
+          "id": "D",
+          "text": "Mass"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Speed",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "refraction"
+      ]
+    },
+    {
+      "id": "X-PHY-C14-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "lenses",
+      "category": "short",
+      "question_text": "Differentiate converging and diverging lenses.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A converging lens brings parallel rays toward a focus; a diverging lens spreads parallel rays as if from a focus.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "lenses"
+      ]
+    },
+    {
+      "id": "X-PHY-C14-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "refractive index",
+      "category": "short",
+      "question_text": "What does refractive index indicate?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It relates light speed in vacuum to its speed in a medium: n=c/v, and indicates how strongly the medium slows/refracts light.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "refractive index"
+      ]
+    },
+    {
+      "id": "X-PHY-C14-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "refractive index",
+      "category": "numerical",
+      "question_text": "Light travels at 2.0×10⁸ m/s in a medium. Find n using c=3.0×10⁸ m/s.",
+      "options": [],
+      "correct_option": "",
+      "answer": "n=c/v=(3.0×10⁸)/(2.0×10⁸)=1.5.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "refractive index"
+      ]
+    },
+    {
+      "id": "X-PHY-C15-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "electric charge",
+      "category": "mcq",
+      "question_text": "Like electric charges?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Repel"
+        },
+        {
+          "id": "B",
+          "text": "Attract"
+        },
+        {
+          "id": "C",
+          "text": "Always neutralize"
+        },
+        {
+          "id": "D",
+          "text": "Produce sound only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Repel",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electric charge"
+      ]
+    },
+    {
+      "id": "X-PHY-C15-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "electric field",
+      "category": "mcq",
+      "question_text": "Electric field direction is defined as the direction of force on a?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Positive test charge"
+        },
+        {
+          "id": "B",
+          "text": "Negative test charge only"
+        },
+        {
+          "id": "C",
+          "text": "Neutron"
+        },
+        {
+          "id": "D",
+          "text": "Mass"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Positive test charge",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electric field"
+      ]
+    },
+    {
+      "id": "X-PHY-C15-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "charging",
+      "category": "short",
+      "question_text": "What is charging by induction?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Producing charge separation and a net charge without direct charge transfer from the inducing body by contact.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "charging"
+      ]
+    },
+    {
+      "id": "X-PHY-C15-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "potential difference",
+      "category": "short",
+      "question_text": "What is electric potential difference?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Work done or energy transferred per unit charge between two points.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "potential difference"
+      ]
+    },
+    {
+      "id": "X-PHY-C15-L01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "electrostatics",
+      "category": "long",
+      "question_text": "Explain charging by friction, contact and induction.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for electron transfer by friction, charge sharing by contact, charge separation during induction, role of grounding in induction, and conservation of charge.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electrostatics"
+      ]
+    },
+    {
+      "id": "X-PHY-C16-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "Ohm law",
+      "category": "mcq",
+      "question_text": "Ohm’s law is expressed as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "V=IR"
+        },
+        {
+          "id": "B",
+          "text": "P=VI only"
+        },
+        {
+          "id": "C",
+          "text": "Q=mcΔT"
+        },
+        {
+          "id": "D",
+          "text": "F=ma"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "V=IR",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Ohm law"
+      ]
+    },
+    {
+      "id": "X-PHY-C16-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "series circuits",
+      "category": "mcq",
+      "question_text": "In a series circuit, current through components is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The same"
+        },
+        {
+          "id": "B",
+          "text": "Always zero"
+        },
+        {
+          "id": "C",
+          "text": "Different at every point"
+        },
+        {
+          "id": "D",
+          "text": "Infinite"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "The same",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "series circuits"
+      ]
+    },
+    {
+      "id": "X-PHY-C16-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "resistance",
+      "category": "short",
+      "question_text": "State two factors affecting resistance of a wire.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Length, cross-sectional area, material/resistivity and temperature are relevant factors; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "resistance"
+      ]
+    },
+    {
+      "id": "X-PHY-C16-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "parallel circuits",
+      "category": "short",
+      "question_text": "What is a key advantage of connecting household devices in parallel?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Each device receives the supply potential difference and can operate independently of the others.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "parallel circuits"
+      ]
+    },
+    {
+      "id": "X-PHY-C16-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "Ohm law",
+      "category": "numerical",
+      "question_text": "A 12 V supply drives 3 A through a resistor. Find R.",
+      "options": [],
+      "correct_option": "",
+      "answer": "R=V/I=12/3=4 Ω.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Ohm law"
+      ]
+    },
+    {
+      "id": "X-PHY-C17-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "magnetic effect of current",
+      "category": "mcq",
+      "question_text": "A current-carrying wire produces what around it?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Magnetic field"
+        },
+        {
+          "id": "B",
+          "text": "Gravitational field only"
+        },
+        {
+          "id": "C",
+          "text": "No field"
+        },
+        {
+          "id": "D",
+          "text": "Sound field only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Magnetic field",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "magnetic effect of current"
+      ]
+    },
+    {
+      "id": "X-PHY-C17-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "motor effect",
+      "category": "mcq",
+      "question_text": "A current-carrying conductor in a magnetic field can experience?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Force"
+        },
+        {
+          "id": "B",
+          "text": "Only cooling"
+        },
+        {
+          "id": "C",
+          "text": "Only charging"
+        },
+        {
+          "id": "D",
+          "text": "Mass loss"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Force",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "motor effect"
+      ]
+    },
+    {
+      "id": "X-PHY-C17-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "electromagnet",
+      "category": "short",
+      "question_text": "How can an electromagnet be made stronger?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Increase current, increase coil turns, and/or use a suitable soft-iron core.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electromagnet"
+      ]
+    },
+    {
+      "id": "X-PHY-C17-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "motor principle",
+      "category": "short",
+      "question_text": "State the basic motor principle.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A current-carrying conductor placed in a magnetic field experiences a force whose direction depends on current and field directions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "motor principle"
+      ]
+    },
+    {
+      "id": "X-PHY-C17-L01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "electric motor",
+      "category": "long",
+      "question_text": "Explain the working principle of a simple d.c. motor.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for magnetic field, current in coil, opposing forces/turning effect, split-ring commutator reversing current each half-turn, and continuous rotation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electric motor"
+      ]
+    },
+    {
+      "id": "X-PHY-C18-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction and Electromagnetic Waves",
+      "topic_name": "induction",
+      "category": "mcq",
+      "question_text": "An emf is induced when magnetic flux linking a circuit?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Changes"
+        },
+        {
+          "id": "B",
+          "text": "Is permanently zero only"
+        },
+        {
+          "id": "C",
+          "text": "Never changes"
+        },
+        {
+          "id": "D",
+          "text": "Has no relation to time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Changes",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "induction"
+      ]
+    },
+    {
+      "id": "X-PHY-C18-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction and Electromagnetic Waves",
+      "topic_name": "transformers",
+      "category": "mcq",
+      "question_text": "A transformer operates using?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Electromagnetic induction"
+        },
+        {
+          "id": "B",
+          "text": "Electrostatic charging only"
+        },
+        {
+          "id": "C",
+          "text": "Nuclear fission"
+        },
+        {
+          "id": "D",
+          "text": "Thermal expansion"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Electromagnetic induction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "transformers"
+      ]
+    },
+    {
+      "id": "X-PHY-C18-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction and Electromagnetic Waves",
+      "topic_name": "Lenz law",
+      "category": "short",
+      "question_text": "What does Lenz’s law state qualitatively?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The induced current/emf acts in a direction that opposes the change in magnetic flux that produced it.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Lenz law"
+      ]
+    },
+    {
+      "id": "X-PHY-C18-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction and Electromagnetic Waves",
+      "topic_name": "electromagnetic spectrum",
+      "category": "short",
+      "question_text": "Name two electromagnetic waves with frequencies higher than visible light.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ultraviolet, X-rays and gamma rays are valid; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electromagnetic spectrum"
+      ]
+    },
+    {
+      "id": "X-PHY-C18-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction and Electromagnetic Waves",
+      "topic_name": "transformer ratio",
+      "category": "numerical",
+      "question_text": "An ideal transformer has Np=500, Ns=100 and Vp=240 V. Find Vs.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Vs/Vp=Ns/Np=100/500=0.2, so Vs=48 V.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "transformer ratio"
+      ]
+    },
+    {
+      "id": "X-PHY-C19-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Electronics",
+      "topic_name": "semiconductors",
+      "category": "mcq",
+      "question_text": "A semiconductor has conductivity generally?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Between conductors and insulators"
+        },
+        {
+          "id": "B",
+          "text": "Exactly zero"
+        },
+        {
+          "id": "C",
+          "text": "Infinite"
+        },
+        {
+          "id": "D",
+          "text": "Unrelated to temperature"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Between conductors and insulators",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "semiconductors"
+      ]
+    },
+    {
+      "id": "X-PHY-C19-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Electronics",
+      "topic_name": "diodes",
+      "category": "mcq",
+      "question_text": "A diode is mainly used to allow current?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Preferentially in one direction"
+        },
+        {
+          "id": "B",
+          "text": "Equally in every direction"
+        },
+        {
+          "id": "C",
+          "text": "Only when cold"
+        },
+        {
+          "id": "D",
+          "text": "Only in vacuum"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Preferentially in one direction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "diodes"
+      ]
+    },
+    {
+      "id": "X-PHY-C19-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Electronics",
+      "topic_name": "transistor",
+      "category": "short",
+      "question_text": "State one use of a transistor.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can be used as an electronic switch or amplifier.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "transistor"
+      ]
+    },
+    {
+      "id": "X-PHY-C19-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Electronics",
+      "topic_name": "logic circuits",
+      "category": "short",
+      "question_text": "What is the output of an AND gate when both inputs are 1?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The output is 1.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "logic circuits"
+      ]
+    },
+    {
+      "id": "X-PHY-C19-L01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Electronics",
+      "topic_name": "electronics",
+      "category": "long",
+      "question_text": "Explain the roles of a diode, transistor and one logic gate in electronic systems.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for diode one-way conduction/rectification, transistor switching/amplification, correct logic-gate behavior, one example application, and clear distinction among components.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "electronics"
+      ]
+    },
+    {
+      "id": "X-PHY-C20-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Atomic and Nuclear Physics",
+      "topic_name": "atomic nucleus",
+      "category": "mcq",
+      "question_text": "The nucleus contains?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Protons and neutrons"
+        },
+        {
+          "id": "B",
+          "text": "Electrons only"
+        },
+        {
+          "id": "C",
+          "text": "Photons only"
+        },
+        {
+          "id": "D",
+          "text": "Ions only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Protons and neutrons",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "atomic nucleus"
+      ]
+    },
+    {
+      "id": "X-PHY-C20-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Atomic and Nuclear Physics",
+      "topic_name": "radioactivity",
+      "category": "mcq",
+      "question_text": "Radioactive decay is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Spontaneous nuclear change"
+        },
+        {
+          "id": "B",
+          "text": "Ordinary chemical combustion"
+        },
+        {
+          "id": "C",
+          "text": "Mechanical vibration"
+        },
+        {
+          "id": "D",
+          "text": "Thermal expansion"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Spontaneous nuclear change",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "radioactivity"
+      ]
+    },
+    {
+      "id": "X-PHY-C20-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Atomic and Nuclear Physics",
+      "topic_name": "isotopes",
+      "category": "short",
+      "question_text": "What are isotopes?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Atoms of the same element with the same proton number but different neutron numbers.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "isotopes"
+      ]
+    },
+    {
+      "id": "X-PHY-C20-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Atomic and Nuclear Physics",
+      "topic_name": "half life",
+      "category": "short",
+      "question_text": "Define half-life.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The time required for the number of undecayed nuclei or activity in a radioactive sample to fall to half its initial value.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "half life"
+      ]
+    },
+    {
+      "id": "X-PHY-C20-N01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Atomic and Nuclear Physics",
+      "topic_name": "half life",
+      "category": "numerical",
+      "question_text": "A sample starts with 800 undecayed nuclei. How many remain after three half-lives?",
+      "options": [],
+      "correct_option": "",
+      "answer": "800→400→200→100, so 100 remain.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "half life"
+      ]
+    },
+    {
+      "id": "X-PHY-C21-M01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Space and Environment",
+      "topic_name": "solar system",
+      "category": "mcq",
+      "question_text": "A planet remains in orbit primarily because gravity provides?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Centripetal acceleration"
+        },
+        {
+          "id": "B",
+          "text": "Thermal insulation"
+        },
+        {
+          "id": "C",
+          "text": "Electric resistance"
+        },
+        {
+          "id": "D",
+          "text": "Sound pressure"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Centripetal acceleration",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "solar system"
+      ]
+    },
+    {
+      "id": "X-PHY-C21-M02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Space and Environment",
+      "topic_name": "stars",
+      "category": "mcq",
+      "question_text": "A star produces much of its energy through?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nuclear fusion"
+        },
+        {
+          "id": "B",
+          "text": "Friction only"
+        },
+        {
+          "id": "C",
+          "text": "Chemical burning only"
+        },
+        {
+          "id": "D",
+          "text": "Electrostatic discharge only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Nuclear fusion",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "stars"
+      ]
+    },
+    {
+      "id": "X-PHY-C21-S01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Space and Environment",
+      "topic_name": "satellites",
+      "category": "short",
+      "question_text": "Differentiate natural and artificial satellites.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Natural satellites occur naturally in orbit, such as moons; artificial satellites are human-made objects placed in orbit for communication, observation, navigation or science.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "satellites"
+      ]
+    },
+    {
+      "id": "X-PHY-C21-S02",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Space and Environment",
+      "topic_name": "environment",
+      "category": "short",
+      "question_text": "State one environmental concern related to space activity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Space debris can threaten satellites and future missions; launch emissions and re-entry materials can also create environmental concerns.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "environment"
+      ]
+    },
+    {
+      "id": "X-PHY-C21-L01",
+      "class_level": "10th",
+      "subject": "Physics",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Space and Environment",
+      "topic_name": "space science",
+      "category": "long",
+      "question_text": "Explain how gravity, orbital motion and satellite technology are connected.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for gravity as attractive force, orbital centripetal requirement, suitable orbital speed, artificial-satellite placement, and practical uses such as communication, weather or navigation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-024 | 47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f | page 3",
+      "tags": [
+        "grade10",
+        "physics",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "space science"
+      ]
+    }
+  ]
+}
