@@ -55,8 +55,10 @@ export default function MarksSheet() {
  const list = (res.data.data || []).map(normalizeExam)
  setExams(list)
  if (!selectedExamType && list.length) setSelectedExamType(list[0].type || FALLBACK_EXAM_TYPES[0])
+ return true
  } catch {
  setMessage('Refresh failed. Existing loaded exams were preserved; please check the backend connection.')
+ return false
  } finally {
  setRefreshing(false)
  }
@@ -99,10 +101,12 @@ export default function MarksSheet() {
  }
 
  const refreshData = async () => {
+ setMessage('')
+ const refreshed = await loadExams()
+ if (refreshed) {
  setStudents([])
  setMarks({})
- setMessage('')
- await loadExams()
+ }
  }
 
   const searchStudents = async () => {
@@ -137,10 +141,8 @@ export default function MarksSheet() {
   setPassMarks(exam.pass_marks ?? '')
   }
   } catch (err) {
-  setStudents([])
-  setMarks({})
   const errMsg = err.response?.data?.message || err.message || 'Server error.'
-  setMessage(`Search failed: ${errMsg}. Please verify the backend service status.`)
+  setMessage(`Search failed: ${errMsg}. Existing loaded students and marks were preserved.`)
   } finally {
   setLoadingData(false)
   }
