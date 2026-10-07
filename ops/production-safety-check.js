@@ -277,6 +277,12 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/server.js',
+  "const exposeMessage = status < 500 || process.env.NODE_ENV !== 'production'",
+  'production 5xx responses must not expose raw internal exception messages.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
   "AUTO_MIGRATE_ON_BOOT=false is required in production",
   'production runtime must never apply schema migrations implicitly on boot.'
 )

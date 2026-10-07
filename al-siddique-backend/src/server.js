@@ -227,9 +227,11 @@ app.use((req, res) => {
 // ─── Error Handler ────────────────────────────────────────────────────────────
 app.use((err, req, res, next) => {
   console.error('Error:', err.message)
-  res.status(err.status || 500).json({
+  const status = Number(err.status || err.statusCode || 500)
+  const exposeMessage = status < 500 || process.env.NODE_ENV !== 'production'
+  res.status(status).json({
     success: false,
-    message: err.message || 'Internal server error',
+    message: exposeMessage ? (err.message || 'Request failed') : 'Internal server error',
   })
 })
 
