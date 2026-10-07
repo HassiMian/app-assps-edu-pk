@@ -157,6 +157,7 @@ cp -a /var/www/apex-backend/src/.env /var/www/apex-backend/.env
 node -c /var/www/apex-backend/server.js
 node -c /var/www/apex-backend/middleware/auth.js
 node -c /var/www/apex-backend/routes/authRoutes.js
+node /var/www/apex-backend/src/scripts/liveArtifactDriftCheck.js
 pm2 restart apex-backend --update-env
 pm2 status --no-color
 curl -fsS https://api.assps.edu.pk/health >/dev/null

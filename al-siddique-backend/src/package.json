@@ -15,7 +15,8 @@
     "tenant:audit": "tsx prisma/audit-tenant-data.ts",
     "tenant:fix": "tsx prisma/audit-tenant-data.ts --fix",
     "smoke:production-school": "node scripts/productionSchoolSmoke.js",
-    "smoke:production-fee-write": "node scripts/productionFeeWriteSmoke.js"
+    "smoke:production-fee-write": "node scripts/productionFeeWriteSmoke.js",
+    "verify:live-backend-drift": "node scripts/liveArtifactDriftCheck.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
