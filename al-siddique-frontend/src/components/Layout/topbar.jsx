@@ -164,8 +164,8 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  const res = await api.get('/api/notify/inbox')
  const rows = Array.isArray(res.data?.data) ? res.data.data : []
  setNotifs(rows.map(normalizeNotification))
- } catch {
- setNotifs([])
+ } catch (err) {
+ console.warn('Topbar notification inbox refresh failed; preserving existing notifications:', err?.message || err)
  } finally {
  setNotifsLoading(false)
  }
