@@ -74,10 +74,8 @@ async function fetchFromAPI(scope = _cacheScope || 'public') {
     notify()
     return _cache
   } catch (error) {
-    if (_cacheScope === requestScope) {
-      _cache = []
-      notify()
-    }
+    // Preserve the last known-good roster on transient refresh failure. A source
+    // outage must not be rendered as an authoritative zero-student school.
     throw error
   }
 }

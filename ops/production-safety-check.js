@@ -467,6 +467,12 @@ assertNotContains(
   'employee list refresh failures must preserve the last known-good staff roster.'
 )
 
+assertNotContains(
+  'al-siddique-frontend/src/services/useStudentStore.js',
+  /catch \(error\)[\s\S]{0,180}_cache = \[\][\s\S]{0,80}notify\(\)/,
+  'student roster refresh failures must preserve the last known-good cache instead of reporting zero students.'
+)
+
 assertContains(
   'al-siddique-frontend/src/services/useAcademicStore.js',
   'const refreshAcademic = useCallback(async () => {',
