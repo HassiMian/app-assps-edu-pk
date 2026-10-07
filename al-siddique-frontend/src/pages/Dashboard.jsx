@@ -200,6 +200,11 @@ function printBirthdayCertificate(student, schoolName) {
 export default function Dashboard() {
   const branding = useTenantBranding()
   const { classNames } = useAcademicStore()
+  // useAcademicStore derives a fresh array during render. Depend on its stable
+  // value signature, not array identity, otherwise fetchAll is recreated on
+  // every render and the hydration effect enters an API/loading loop.
+  const classNamesKey = classNames.join('\u001f')
+  const stableClassNames = useMemo(() => classNamesKey ? classNamesKey.split('\u001f') : [], [classNamesKey])
   const schoolName = branding?.schoolName || 'School'
   const navigate = useNavigate()
   const [date, setDate] = useState(new Date())
@@ -248,12 +253,12 @@ export default function Dashboard() {
       const pendingTotal = feeSummary ? Number(feeSummary.pending || 0) : allFees.filter((fee) => fee.status !== 'paid').reduce((sum, fee) => sum + Number(fee.remaining_balance ?? fee.amount ?? 0), 0)
       const pendingCount = feeSummary ? Number(feeSummary.unpaid_students || 0) : allFees.filter((fee) => fee.status !== 'paid').length
 
-      const classCounts = new Map(classNames.map((name) => [name, 0]))
+      const classCounts = new Map(stableClassNames.map((name) => [name, 0]))
       allStudents.forEach((student) => {
         const className = String(student.class || '').trim()
         if (classCounts.has(className)) classCounts.set(className, classCounts.get(className) + 1)
       })
-      const classArr = classNames.map((name) => ({ name, count: classCounts.get(name) || 0 }))
+      const classArr = stableClassNames.map((name) => ({ name, count: classCounts.get(name) || 0 }))
 
       setStats({
         totalStudents: allStudents.length,
@@ -278,7 +283,7 @@ export default function Dashboard() {
     } finally {
       setLoading(false)
     }
-  }, [classNames])
+  }, [stableClassNames])
 
   useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 60000)
