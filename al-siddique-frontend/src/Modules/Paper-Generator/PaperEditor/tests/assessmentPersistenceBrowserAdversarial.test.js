@@ -17,7 +17,7 @@ async function stored(page,name) { return page.evaluate(n=>{ const keys=Object.k
 test('Assessment persistence adversarial: offline queue recovery + two-tab conflict', {timeout:90000}, async t=>{
  const vite=await createServer({root,server:{port:5242,strictPort:true},appType:'spa'}); await vite.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']}); const context=await browser.newContext({viewport:{width:1640,height:960}})
- await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
+ await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','local_persistence_browser_token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
 
  const serverRevisions=new Map()
  await context.route('**/api/assessment-studio/papers/**/revisions',async route=>{
@@ -27,6 +27,7 @@ test('Assessment persistence adversarial: offline queue recovery + two-tab confl
  })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ await context.route('**/api/academic/setup',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:true,data:{periodsPerDay:8,classes:[{level:'7',name:'Seven',active:true,sections:['Blue']}],subjects:['Science']}})}))
 
  const offline=await context.newPage(); offline.on('dialog',d=>d.accept().catch(()=>{})); const offlineName=`Offline Recovery ${Date.now()}`; await createManual(offline,offlineName)
  const outage=async route=>route.abort('internetdisconnected'); await context.route('**/api/assessment-studio/**',outage)
