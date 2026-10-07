@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./chemistry9Chapter5ContentMap2026.json',import.meta.url),'utf8'));
+test('Energetics Chapter 5 contains five verified numbered topic headings',()=>{assert.deepEqual(d.chapter.pdfPages,[71,86]);assert.deepEqual(d.topics.map(x=>x.topicId),['5.1','5.2','5.3','5.4','5.5']);assert(d.topics.every(x=>x.status==='RENDERED_PAGE_HEADING_REVIEWED'&&x.pdfStartPage>=71&&x.pdfStartPage<=86));});
+test('chapter 5 concept taxonomy includes reaction energy and respiration',()=>{assert(d.verifiedConceptFamilies.includes('enthalpy change and sign convention'));assert(d.verifiedConceptFamilies.includes('activation energy and catalytic pathway'));assert(d.verifiedConceptFamilies.includes('aerobic and anaerobic respiration as energy processes'));});
+test('exercise wording and production authoring remain blocked',()=>{assert.equal(d.exerciseFamilies.itemLevelExerciseMap,'PENDING');assert.equal(d.authoring.copyTextbookPassages,false);assert.equal(d.authoring.exerciseOriginAllowed,false);assert.equal(d.authoring.publicationAllowed,false);});

@@ -1,0 +1,1910 @@
+{
+  "schemaVersion": "assps-chemistry9-ch5-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "5.1",
+      "draftCount": 5
+    },
+    {
+      "topicId": "5.2",
+      "draftCount": 5
+    },
+    {
+      "topicId": "5.3",
+      "draftCount": 5
+    },
+    {
+      "topicId": "5.4",
+      "draftCount": 5
+    },
+    {
+      "topicId": "5.5",
+      "draftCount": 5
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C05-T01-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System and Surrounding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A sealed reaction vessel is the chosen system. Which item is part of its surroundings?",
+          "answer": "The laboratory air outside the vessel.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The reaction mixture inside the vessel"
+            },
+            {
+              "id": "B",
+              "text": "The reaction products inside the vessel"
+            },
+            {
+              "id": "C",
+              "text": "The laboratory air outside the vessel"
+            },
+            {
+              "id": "D",
+              "text": "The reactants before mixing"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T01-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.1",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System and Surrounding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "When a chemical system gives heat to its surroundings, in which direction has heat moved?",
+          "answer": "Out of the system.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Into the system"
+            },
+            {
+              "id": "B",
+              "text": "Out of the system"
+            },
+            {
+              "id": "C",
+              "text": "From products to reactants only"
+            },
+            {
+              "id": "D",
+              "text": "No energy can cross the boundary"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T01-S03",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System and Surrounding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Define a system and its surroundings in a chemical experiment.",
+          "answer": "The system is the particular matter or reaction selected for study; the surroundings are everything outside that selected system."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T01-S04",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.1",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System and Surrounding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "For warm water in a beaker selected as the system, identify the system and one possible surrounding.",
+          "answer": "The water is the system. The beaker material and the surrounding room air are examples of the surroundings."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T01-L05",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.1",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 72,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "System and Surrounding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Describe how you would identify a system, surroundings and heat transfer while measuring a reaction temperature change.",
+          "answer": "Identify the reaction mixture as the system (1 mark), the vessel and external air as surroundings (1), specify the system boundary (1), explain that energy may cross the boundary as heat (1), and relate the observed temperature change to heat entering or leaving the selected system with suitable experimental caution (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T02-M06",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 73,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enthalpy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "A reaction has products with lower enthalpy than its reactants. What is the sign of ΔH?",
+          "answer": "Negative",
+          "options": [
+            {
+              "id": "A",
+              "text": "Positive"
+            },
+            {
+              "id": "B",
+              "text": "Negative"
+            },
+            {
+              "id": "C",
+              "text": "Always zero"
+            },
+            {
+              "id": "D",
+              "text": "Impossible to determine because no product masses are stated"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T02-M07",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 73,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enthalpy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which expression correctly represents enthalpy change at constant pressure for a reaction?",
+          "answer": "H(products) − H(reactants)",
+          "options": [
+            {
+              "id": "A",
+              "text": "H(reactants) + H(products)"
+            },
+            {
+              "id": "B",
+              "text": "H(reactants) − H(products)"
+            },
+            {
+              "id": "C",
+              "text": "H(products) − H(reactants)"
+            },
+            {
+              "id": "D",
+              "text": "H(products) × H(reactants)"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T02-S08",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 73,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enthalpy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "State the sign convention for enthalpy change in exothermic and endothermic reactions.",
+          "answer": "An exothermic reaction releases heat and usually has ΔH < 0. An endothermic reaction absorbs heat and usually has ΔH > 0."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T02-S09",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 73,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enthalpy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why is the enthalpy change of a reaction more useful experimentally than an absolute enthalpy value?",
+          "answer": "The heat transferred under specified conditions can be measured, allowing a difference between final and initial enthalpy to be determined; absolute total enthalpy is not directly measurable in a simple experiment."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T02-L10",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.2",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 73,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Enthalpy"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "The enthalpy assigned to reactants for a reaction is 180 kJ and to products is 125 kJ. Find ΔH and interpret its sign.",
+          "answer": "Use ΔH = H(products) − H(reactants) (2 marks). Substitute 125 − 180 = −55 kJ for the reaction as written (2). The negative sign indicates heat release/exothermic change (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T03-M11",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 74,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exothermic and Endothermic Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What is the best description of an endothermic chemical reaction?",
+          "answer": "The system absorbs heat from its surroundings.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The system always becomes a metal"
+            },
+            {
+              "id": "B",
+              "text": "The system absorbs heat from its surroundings"
+            },
+            {
+              "id": "C",
+              "text": "The system gives heat to its surroundings"
+            },
+            {
+              "id": "D",
+              "text": "The reaction cannot involve chemical bonds"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T03-M12",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 74,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exothermic and Endothermic Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which change requires energy input to overcome existing chemical bonds?",
+          "answer": "Bond breaking",
+          "options": [
+            {
+              "id": "A",
+              "text": "Bond formation only"
+            },
+            {
+              "id": "B",
+              "text": "Bond breaking"
+            },
+            {
+              "id": "C",
+              "text": "Formation of stronger bonds always"
+            },
+            {
+              "id": "D",
+              "text": "Attraction between product molecules only"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T03-S13",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 74,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exothermic and Endothermic Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why may the container feel warmer during an exothermic reaction?",
+          "answer": "Heat released by the reaction system is transferred to the container and surroundings, raising their temperature."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T03-S14",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 74,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exothermic and Endothermic Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain why making bonds and breaking bonds affect the energy balance of a reaction differently.",
+          "answer": "Breaking chemical bonds requires an input of energy, whereas forming new bonds releases energy; the net difference determines the reaction enthalpy change."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T03-L15",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.3",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 74,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Exothermic and Endothermic Reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare exothermic and endothermic energy profiles using the relative levels of reactants and products.",
+          "answer": "For an exothermic process product enthalpy is below reactant enthalpy (1) and ΔH is negative (1). For an endothermic process product enthalpy is above reactant enthalpy (1) and ΔH is positive (1). Both processes may require a positive activation-energy barrier to begin (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T04-M16",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 79,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "How does a Reaction take place?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What effect does a suitable catalyst typically have on a reaction pathway?",
+          "answer": "It lowers the activation-energy requirement without changing overall ΔH.",
+          "options": [
+            {
+              "id": "A",
+              "text": "It changes all reactants into different elements"
+            },
+            {
+              "id": "B",
+              "text": "It lowers the activation-energy requirement without changing overall ΔH"
+            },
+            {
+              "id": "C",
+              "text": "It makes product enthalpy equal to zero"
+            },
+            {
+              "id": "D",
+              "text": "It prevents bond breaking entirely"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T04-M17",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.4",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 79,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "How does a Reaction take place?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "What does activation energy describe?",
+          "answer": "The minimum collision energy needed to pass the reaction barrier.",
+          "options": [
+            {
+              "id": "A",
+              "text": "The mass of the catalyst"
+            },
+            {
+              "id": "B",
+              "text": "The heat capacity of the products"
+            },
+            {
+              "id": "C",
+              "text": "The minimum collision energy needed to pass the reaction barrier"
+            },
+            {
+              "id": "D",
+              "text": "The number of molecules in one mole"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T04-S18",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 79,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "How does a Reaction take place?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Why can an energetically favourable reaction still proceed slowly at room temperature?",
+          "answer": "Reacting particles still need to overcome an activation-energy barrier; too few collisions may have enough energy or suitable orientation under those conditions."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T04-S19",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.4",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 79,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "How does a Reaction take place?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Does a catalyst change the enthalpy difference between reactants and products? Explain briefly.",
+          "answer": "No. A catalyst changes the reaction pathway and lowers its activation barrier, but the initial and final enthalpy states, and hence ΔH, remain unchanged."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T04-L20",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.4",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 79,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "How does a Reaction take place?"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Explain how a catalyst changes the progress of a reaction on an energy-pathway diagram.",
+          "answer": "Describe the uncatalysed curve with an activation peak (1 mark). The catalysed pathway has a lower peak/activation energy (2). Both pathways begin at the same reactant energy and end at the same product energy (1), so their overall ΔH is unchanged (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T05-M21",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Aerobic and Anaerobic Respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which process normally releases more usable energy per glucose molecule in living cells?",
+          "answer": "Aerobic respiration, when oxygen is available.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Anaerobic respiration always"
+            },
+            {
+              "id": "B",
+              "text": "Aerobic respiration, when oxygen is available"
+            },
+            {
+              "id": "C",
+              "text": "Neither releases energy"
+            },
+            {
+              "id": "D",
+              "text": "Only photosynthesis"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T05-M22",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.5",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Aerobic and Anaerobic Respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Which condition especially favours anaerobic breakdown of glucose in a cell?",
+          "answer": "Insufficient oxygen for normal aerobic respiration",
+          "options": [
+            {
+              "id": "A",
+              "text": "Abundant oxygen in every cell"
+            },
+            {
+              "id": "B",
+              "text": "Insufficient oxygen for normal aerobic respiration"
+            },
+            {
+              "id": "C",
+              "text": "No organic fuel molecules exist"
+            },
+            {
+              "id": "D",
+              "text": "All enzymes have been destroyed"
+            }
+          ]
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Direct concept recall.",
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T05-S23",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Aerobic and Anaerobic Respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Give one fundamental difference between aerobic and anaerobic respiration.",
+          "answer": "Aerobic respiration uses oxygen and generally releases more usable energy from glucose; anaerobic respiration occurs without oxygen and yields less energy per glucose."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T05-S24",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.5",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Aerobic and Anaerobic Respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "How does cellular respiration connect a food molecule to a cell’s energy needs?",
+          "answer": "Cells break down energy-rich food molecules through enzyme-controlled reactions and transfer some of the released chemical energy into usable forms, especially ATP."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    },
+    {
+      "id": "IX-CHEM-2025-C05-T05-L25",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C05",
+        "number": 5
+      },
+      "topicId": "5.5",
+      "type": "long",
+      "origin": "conceptual",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 81,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Aerobic and Anaerobic Respiration"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "content": {
+        "en": {
+          "stem": "Compare aerobic and anaerobic respiration in oxygen requirement, products and relative energy output.",
+          "answer": "Aerobic respiration requires oxygen (1), commonly gives CO2 and water on complete glucose oxidation (1), and gives relatively more usable energy (1). Anaerobic processes do not require oxygen (1) and generally yield less usable energy; products vary, such as lactate in muscle cells or ethanol and CO2 in yeast (1)."
+        }
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium content draft grounded in the rendered current textbook Chapter 5. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application."
+    }
+  ],
+  "totals": {
+    "drafts": 25,
+    "approved": 0,
+    "mcq": 10,
+    "short": 10,
+    "long": 5,
+    "englishOnly": 25,
+    "exercise": 0
+  }
+}
