@@ -23,6 +23,7 @@ test('universal add-block modes persist canonical node types and balanced marks'
  await context.route('**/api/assessment-studio/papers/**/revisions',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({data:{currentRevision:1,contentHash:'universal-modes-test-hash'}})}))
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'}))
  await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ await context.route('**/api/academic/setup**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:true,data:{periodsPerDay:8,localities:[],classes:[{level:'7',name:'Seven',active:true,sections:[]}],subjects:[{name:'Science',classes:['7']}],sessionStart:'2026-04-01',sessionEnd:'2027-03-31'}})}))
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  const page=await context.newPage(); page.on('dialog',d=>d.accept().catch(()=>{}))
  await page.goto('http://localhost:5244/paper-workspace-test.html?new',{waitUntil:'domcontentloaded'})

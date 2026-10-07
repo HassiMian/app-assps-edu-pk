@@ -27,6 +27,7 @@ test('Assessment persistence adversarial: offline queue recovery + two-tab confl
  })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ await context.route('**/api/academic/setup**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:true,data:{periodsPerDay:8,localities:[],classes:[{level:'7',name:'Seven',active:true,sections:[]}],subjects:[{name:'Science',classes:['7']}],sessionStart:'2026-04-01',sessionEnd:'2027-03-31'}})}))
 
  const offline=await context.newPage(); offline.on('dialog',d=>d.accept().catch(()=>{})); const offlineName=`Offline Recovery ${Date.now()}`; await createManual(offline,offlineName)
  const outage=async route=>route.abort('internetdisconnected'); await context.route('**/api/assessment-studio/**',outage)

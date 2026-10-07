@@ -22,6 +22,17 @@ test('Manual Weekly Assessment: no Question Bank -> canonical save -> finalize -
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
  await context.route('**/api/students**',route=>route.fulfill({status:200,contentType:'application/json',body:'[]'}))
  await context.route('**/api/settings/public**',route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ await context.route('**/api/academic/setup**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:true,data:{periodsPerDay:8,localities:[],classes:[{level:'7',name:'Seven',active:true,sections:[]}],subjects:[{name:'Science',classes:['7']}],sessionStart:'2026-04-01',sessionEnd:'2027-03-31'}})}))
+ let revision=0
+ await context.route('**/api/assessment-studio/papers/*/revisions',route=>{
+   revision+=1
+   return route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{publicId:'browser-weekly-paper',currentRevision:revision,contentHash:'c'.repeat(64),status:'DRAFT'}})})
+ })
+ await context.route('**/api/assessment-studio/papers/*/releases',route=>route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{release_id:'browser-release',revision_number:revision,content_hash:'c'.repeat(64)}})}))
+ await context.route('**/api/assessment-studio/papers/*',route=>{
+   if(route.request().method()==='GET') return route.fulfill({status:404,contentType:'application/json',body:JSON.stringify({success:false,message:'Harness uses local recovery copy'})})
+   return route.continue()
+ })
  const page=await context.newPage()
  const dialogs=[]
  page.on('dialog',async dialog=>{dialogs.push(dialog.message());await dialog.accept().catch(()=>{})})

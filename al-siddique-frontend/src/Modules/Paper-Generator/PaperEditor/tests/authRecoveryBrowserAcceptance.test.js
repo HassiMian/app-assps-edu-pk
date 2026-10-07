@@ -20,6 +20,7 @@ test('expired server session preserves manual assessment as local auth-recovery 
   t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
   await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'}))
   await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
+  await context.route('**/api/academic/setup**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,configured:true,data:{periodsPerDay:8,localities:[],classes:[{level:'7',name:'Seven',active:true,sections:[]}],subjects:[{name:'Science',classes:['7']}],sessionStart:'2026-04-01',sessionEnd:'2027-03-31'}})}))
   await context.route('**/api/assessment-studio/papers/*/revisions',r=>r.fulfill({status:401,contentType:'application/json',body:JSON.stringify({success:false,message:'Session expired'})}))
 
   const page=await context.newPage()
