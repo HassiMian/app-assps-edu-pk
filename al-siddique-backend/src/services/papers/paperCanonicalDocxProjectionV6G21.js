@@ -1,5 +1,5 @@
 const crypto=require('node:crypto')
-const { Document, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType, AlignmentType, HeadingLevel } = require('docx')
+const { Document, ImageRun, Math: OfficeMath, MathRun, Packer, Paragraph, Table, TableCell, TableRow, TextRun, WidthType, AlignmentType, HeadingLevel } = require('docx')
 
 const DIRS = new Set(['ltr','rtl'])
 const text = v => v == null ? '' : String(v)
@@ -64,10 +64,18 @@ function buildCanonicalDocxModel(doc={}) {
   const metadata = doc.metadata || {}
   const documentDirection = dir(metadata.direction, metadata.language === 'urdu' ? 'rtl' : 'ltr')
   const blocks=[]
+  const assetsById=new Map((Array.isArray(doc.assets)?doc.assets:[]).map(asset=>[String(asset.id),asset]))
   for (const [index,section] of (Array.isArray(doc.sections)?doc.sections:[]).entries()) {
     const sectionDirection = dir(section?.direction, documentDirection)
     blocks.push({kind:'section_heading',sectionId:section?.id||null,sectionIndex:index+1,direction:sectionDirection,title:text(section?.title??section?.heading??''),titleUrdu:text(section?.titleUrdu??''),instructions:text(section?.instructions??''),marks:section?.authoritativeSectionTotal??section?.operationalSectionTotal??null})
-    for (const node of (Array.isArray(section?.nodes)?section.nodes:[])) blocks.push(...projectCanonicalNodeToDocxBlocks(node,sectionDirection).map(b=>({...b,sectionId:section?.id||null})))
+    for (const node of (Array.isArray(section?.nodes)?section.nodes:[])) {
+      blocks.push(...projectCanonicalNodeToDocxBlocks(node,sectionDirection).map(b=>({...b,sectionId:section?.id||null})))
+      if(node?.math&&text(node.math.source).trim())blocks.push({kind:'math_capability',sectionId:section?.id||null,nodeId:node.id||null,direction:'ltr',format:text(node.math.format||'latex'),display:text(node.math.display||'block'),source:text(node.math.source)})
+      for(const assetId of (Array.isArray(node?.assetRefs)?node.assetRefs:[])){
+        const asset=assetsById.get(String(assetId));if(!asset)continue
+        blocks.push({kind:'image_asset',sectionId:section?.id||null,nodeId:node.id||null,direction:'ltr',assetId:String(asset.id),storage:text(asset.storage),mimeType:text(asset.mimeType),sha256:text(asset.sha256),widthPx:Number(asset.widthPx)||null,heightPx:Number(asset.heightPx)||null,altText:text(asset.altText),description:text(asset.description),contentDataUrl:asset.contentDataUrl?text(asset.contentDataUrl):null,contentRef:asset.contentRef?text(asset.contentRef):null})
+      }
+    }
   }
   return {architectureVersion:'canonical-docx-model-v1',sourceDocumentId:doc.id||null,schemaVersion:doc.schemaVersion??null,direction:documentDirection,metadata:{title:text(metadata.title),examType:text(metadata.examType),className:text(metadata.className??metadata.classLevel),subject:text(metadata.subjectName??metadata.subject),paperCode:text(metadata.paperCode),examDate:text(metadata.examDate),timeAllowed:text(metadata.timeAllowed),session:text(metadata.session),language:text(metadata.language),totalMarks:doc.authority?.authoritativePaperTotal??doc.authority?.storedConfiguredTotal??null},blocks}
 }
@@ -76,6 +84,16 @@ const rtl = d => d === 'rtl'
 const run = (value, opts={}) => new TextRun({text:String(value??''),size:opts.size||22,bold:Boolean(opts.bold),italics:Boolean(opts.italics),font:opts.font||(opts.rtl?'Noto Nastaliq Urdu':'Times New Roman'),rightToLeft:Boolean(opts.rtl)})
 const para = (value,opts={}) => new Paragraph({heading:opts.heading,bidirectional:Boolean(opts.rtl),alignment:opts.center?AlignmentType.CENTER:(opts.rtl?AlignmentType.RIGHT:AlignmentType.LEFT),children:[run(value,{...opts,rtl:Boolean(opts.rtl)})],spacing:{before:opts.before??0,after:opts.after??100}})
 const marksSuffix = value => Number.isFinite(Number(value)) ? `  [${Number(value)}]` : ''
+const imageTypeFromMime = mime => ({'image/png':'png','image/jpeg':'jpg','image/jpg':'jpg','image/gif':'gif','image/bmp':'bmp'}[String(mime||'').toLowerCase()] || null)
+function decodeEmbeddedDataUrl(dataUrl=''){
+  const match=String(dataUrl).match(/^data:([^;,]+);base64,([A-Za-z0-9+/=\s]+)$/)
+  if(!match)return null
+  try{return {mimeType:match[1].toLowerCase(),bytes:Buffer.from(match[2].replace(/\s+/g,''),'base64')}}catch{return null}
+}
+function imageSize(block={}){
+  const width=Math.max(1,Number(block.widthPx)||320),height=Math.max(1,Number(block.heightPx)||200),maxWidth=560,scale=Math.min(1,maxWidth/width)
+  return {width:Math.max(1,Math.round(width*scale)),height:Math.max(1,Math.round(height*scale))}
+}
 
 function blockToDocx(block) {
   const isRtl = rtl(block.direction)
@@ -86,6 +104,19 @@ function blockToDocx(block) {
     return out
   }
   if (block.kind === 'paragraph') return [para(`${block.content}${marksSuffix(block.marks)}`.trim(),{rtl:isRtl,size:22,after:90})]
+  if (block.kind === 'math_capability') {
+    const source=String(block.source||'')
+    if(!source.trim())return []
+    return [new Paragraph({alignment:block.display==='inline'?AlignmentType.LEFT:AlignmentType.CENTER,children:[new OfficeMath({children:[new MathRun(source)]})],spacing:{after:100}})]
+  }
+  if (block.kind === 'image_asset') {
+    const decoded=block.storage==='embedded'?decodeEmbeddedDataUrl(block.contentDataUrl):null
+    const type=imageTypeFromMime(block.mimeType||decoded?.mimeType)
+    if(!decoded||!type)return [para(block.altText||block.description||'Image asset',{center:true,italics:true,size:18,after:80})]
+    const size=imageSize(block)
+    const image=new ImageRun({data:decoded.bytes,type,transformation:size,altText:{title:block.altText||block.assetId||'Assessment image',description:block.description||block.altText||'',name:block.assetId||'assessment-image'}})
+    return [new Paragraph({alignment:AlignmentType.CENTER,children:[image],spacing:{after:100}})]
+  }
   if (block.kind === 'vertical_math') {
     const lines=[]
     ;(block.operands||[]).forEach((v,i)=>lines.push(`${i===(block.operands||[]).length-1&&block.operator?block.operator+' ':''}${v}`))

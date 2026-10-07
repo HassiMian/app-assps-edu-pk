@@ -37,8 +37,14 @@ function canonicalFixture(){
  const file=path.resolve(__dirname,'../../../al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
  const raw=JSON.parse(fs.readFileSync(file,'utf8'))
  const papers=Array.isArray(raw)?raw:(raw.papers||raw.documents||[])
- const doc=papers.find(x=>x?.metadata?.language==='urdu')||papers[0]
- assert.ok(doc&&doc.format==='assps-canonical-paper')
+ const source=papers.find(x=>x?.metadata?.language==='urdu')||papers[0]
+ assert.ok(source&&source.format==='assps-canonical-paper')
+ const doc=structuredClone(source)
+ const png='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZQmcAAAAASUVORK5CYII='
+ doc.assets=[...(doc.assets||[]),{id:'asset-g21-http-image',kind:'image',storage:'embedded',mimeType:'image/png',sha256:'c'.repeat(64),byteLength:Buffer.from(png,'base64').length,widthPx:120,heightPx:80,altText:'G21 HTTP immutable diagram',description:'HTTP DOCX parity fixture',contentDataUrl:`data:image/png;base64,${png}`}]
+ const nodes=doc.sections.flatMap(section=>section.nodes||[]);assert.ok(nodes.length>=2)
+ nodes[0].math={format:'latex',source:'u^2 + v^2 = w^2',display:'block'}
+ nodes[1].assetRefs=[...(nodes[1].assetRefs||[]),'asset-g21-http-image']
  return doc
 }
 
@@ -119,7 +125,10 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   assert.match(String(r.headers['x-assps-snapshot-sha256']||''),/^[a-f0-9]{64}$/)
   const bodySha=crypto.createHash('sha256').update(r.buffer).digest('hex')
   assert.equal(r.headers['x-assps-docx-sha256'],bodySha)
-  console.log('G21_DOCX_HTTP 9/9 PASS')
+  const JSZip=require('jszip');const zip=await JSZip.loadAsync(r.buffer);const xml=await zip.file('word/document.xml').async('string')
+  assert.match(xml,/<m:oMath>/);assert.ok(xml.includes('u^2 + v^2 = w^2'));assert.ok(xml.includes('G21 HTTP immutable diagram'))
+  assert.ok(Object.keys(zip.files).some(name=>name.startsWith('word/media/')&&!zip.files[name].dir),'HTTP DOCX must contain embedded image media')
+  console.log('G21_DOCX_HTTP 9/9 PASS + MATH_IMAGE PASS')
  } finally {
   try{child?.kill('SIGTERM')}catch{}
   if(sidA)await c.query('delete from paper_vault where school_id=$1',[sidA]).catch(()=>{})

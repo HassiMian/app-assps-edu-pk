@@ -81,3 +81,26 @@ test('G21 refuses review-hash drift and noncanonical families',async()=>{
     reviewPortalPaperDocument:async()=>({family:'approved-curriculum-authoring',reviewStatus:'STRUCTURE_VALID_STAGING',reviewedContract:'PaperDocumentNewAuthoring',snapshotHash:hash}),
   }}),e=>e.code==='CANONICAL_DOCX_NOT_ELIGIBLE')
 })
+
+test('G21 backend DOCX emits Office Math and exact embedded image bytes',async()=>{
+  const JSZip=require('jszip')
+  const base=structuredClone(corpus.find(d=>d.metadata?.language==='english')||corpus[0])
+  const png='iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZQmcAAAAASUVORK5CYII='
+  base.assets=[{id:'asset-g21-image-1',kind:'image',storage:'embedded',mimeType:'image/png',sha256:'b'.repeat(64),byteLength:Buffer.from(png,'base64').length,widthPx:120,heightPx:80,altText:'G21 immutable diagram',description:'Server DOCX parity fixture',contentDataUrl:`data:image/png;base64,${png}`}]
+  const nodes=base.sections.flatMap(section=>section.nodes||[]);assert.ok(nodes.length>=2)
+  nodes[0].math={format:'latex',source:'m^2 + n^2 = h^2',display:'block'}
+  nodes[1].assetRefs=['asset-g21-image-1']
+  const model=buildCanonicalDocxModel(base)
+  assert.ok(model.blocks.some(block=>block.kind==='math_capability'&&block.source==='m^2 + n^2 = h^2'))
+  assert.ok(model.blocks.some(block=>block.kind==='image_asset'&&block.assetId==='asset-g21-image-1'))
+  const {buffer,docxSha256}=await buildCanonicalDocxBuffer(base)
+  assert.equal(docxSha256,crypto.createHash('sha256').update(buffer).digest('hex'))
+  const zip=await JSZip.loadAsync(buffer)
+  const xml=await zip.file('word/document.xml').async('string')
+  assert.match(xml,/<m:oMath>/);assert.ok(xml.includes('m^2 + n^2 = h^2'));assert.ok(xml.includes('G21 immutable diagram'))
+  const mediaName=Object.keys(zip.files).find(name=>name.startsWith('word/media/')&&!zip.files[name].dir)
+  assert.ok(mediaName)
+  const media=await zip.file(mediaName).async('nodebuffer')
+  assert.deepEqual(media,Buffer.from(png,'base64'))
+  console.log('G21_DOCX_MATH_IMAGE PASS')
+})
