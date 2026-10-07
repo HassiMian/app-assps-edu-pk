@@ -7,8 +7,11 @@ const router = express.Router()
 const { query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
+const { captureQuestionGovernance, transitionQuestionLifecycle } = require('../services/questionBankGovernance')
 
 const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'teacher')
+const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
 
 router.use(protect, canUseQuestionBank)
 
@@ -30,6 +33,45 @@ function generateId() {
   return `q_${Date.now()}_${crypto.randomBytes(6).toString('hex')}`
 }
 
+// Governance V1 — duplicate-safe capture and lifecycle control.
+router.post('/governance/capture', canManageQuestionBank, async (req, res) => {
+  try {
+    const schoolId = requireSchoolContext(req, res)
+    if (!schoolId) return
+    const idempotencyKey = req.get('Idempotency-Key') || req.body?.idempotencyKey
+    const result = await captureQuestionGovernance({
+      schoolId,
+      userId:req.user?.id || null,
+      idempotencyKey,
+      question:req.body?.question || req.body || {},
+      sourceQuestionBankId:req.body?.sourceQuestionBankId || req.body?.question?.id || req.body?.id || null,
+    })
+    res.status(result.replayed ? 200 : (result.created ? 201 : 200)).json({ success:true, data:result })
+  } catch (error) {
+    const status = Number(error.status) || 500
+    if (status >= 500) console.error('Question governance capture failed:', error)
+    res.status(status).json({ success:false, code:error.code || 'QUESTION_GOVERNANCE_CAPTURE_FAILED', message:error.message || 'Question governance capture failed' })
+  }
+})
+
+router.patch('/governance/:publicId/status', canManageQuestionBank, async (req, res) => {
+  try {
+    const schoolId = requireSchoolContext(req, res)
+    if (!schoolId) return
+    const data = await transitionQuestionLifecycle({
+      schoolId,
+      userId:req.user?.id || null,
+      publicId:req.params.publicId,
+      toStatus:req.body?.status,
+    })
+    res.json({ success:true, data })
+  } catch (error) {
+    const status = Number(error.status) || (error.code === 'INVALID_QUESTION_LIFECYCLE_TRANSITION' ? 409 : 500)
+    if (status >= 500) console.error('Question governance lifecycle failed:', error)
+    res.status(status).json({ success:false, code:error.code || 'QUESTION_GOVERNANCE_LIFECYCLE_FAILED', message:error.message || 'Question governance lifecycle failed' })
+  }
+})
+
 // ─── 1. Get List of Questions (with filters) ──────────────────────────────────
 router.get('/', async (req, res) => {
   try {
@@ -40,6 +82,20 @@ router.get('/', async (req, res) => {
     let sql = `SELECT * FROM question_bank WHERE school_id = $1`
     const params = [schoolId]
     let paramCount = 1
+    const role = String(req.user?.role || '').toLowerCase()
+    if (role === 'teacher') {
+      await ensureTeacherAssignmentSchema()
+      paramCount++
+      sql += ` AND is_approved = true AND EXISTS (
+        SELECT 1 FROM teacher_class_assignments tca
+        WHERE tca.school_id = question_bank.school_id
+          AND tca.teacher_user_id = $${paramCount}
+          AND tca.is_active = true
+          AND LOWER(tca.class_name) = LOWER(COALESCE(question_bank.class_level,''))
+          AND (COALESCE(tca.subject,'') = '' OR LOWER(tca.subject) = LOWER(COALESCE(question_bank.subject,'')))
+      )`
+      params.push(req.user?.id)
+    }
 
     if (subject) {
       paramCount++
@@ -66,7 +122,7 @@ router.get('/', async (req, res) => {
       sql += ` AND difficulty = $${paramCount}`
       params.push(difficulty)
     }
-    if (approved !== undefined) {
+    if (approved !== undefined && String(req.user?.role || '').toLowerCase() !== 'teacher') {
       paramCount++
       sql += ` AND is_approved = $${paramCount}`
       params.push(approved === 'true')
@@ -103,9 +159,18 @@ router.get('/:id', async (req, res) => {
     if (!schoolId) return
     const { id } = req.params
 
+    const role = String(req.user?.role || '').toLowerCase()
+    if (role === 'teacher') await ensureTeacherAssignmentSchema()
     const result = await query(
-      `SELECT * FROM question_bank WHERE id = $1 AND school_id = $2`,
-      [id, schoolId]
+      `SELECT * FROM question_bank q
+       WHERE q.id = $1 AND q.school_id = $2
+         ${role === 'teacher' ? `AND q.is_approved=true AND EXISTS (
+           SELECT 1 FROM teacher_class_assignments tca
+           WHERE tca.school_id=q.school_id AND tca.teacher_user_id=$3 AND tca.is_active=true
+             AND LOWER(tca.class_name)=LOWER(COALESCE(q.class_level,''))
+             AND (COALESCE(tca.subject,'')='' OR LOWER(tca.subject)=LOWER(COALESCE(q.subject,'')))
+         )` : ''}`,
+      role === 'teacher' ? [id, schoolId, req.user?.id] : [id, schoolId]
     )
 
     if (result.rows.length === 0) {
@@ -119,117 +184,101 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// ─── 3. Add Single Question (Manual Entry) ────────────────────────────────────
-router.post('/', async (req, res) => {
+// ─── 3-5. Legacy mutation compatibility through Governance V1 ─────────────────
+// Legacy callers keep their endpoint shape, but every mutation now converges on
+// QuestionMaster + immutable QuestionRevision. No direct row update/delete is allowed.
+function governanceIdempotencyKey(prefix, req, questionId = '') {
+  const supplied = String(req.get('Idempotency-Key') || req.body?.idempotencyKey || '').trim()
+  if (supplied) return supplied
+  const nonce = crypto.randomUUID()
+  return `legacy:${prefix}:${questionId || 'new'}:${nonce}`
+}
+
+async function loadLegacyQuestion(schoolId, id) {
+  const result = await query('SELECT * FROM question_bank WHERE school_id=$1 AND id=$2 LIMIT 1', [schoolId, id])
+  return result.rows[0] || null
+}
+
+function governedLegacyResponse(legacy, governance) {
+  return {
+    ...legacy,
+    is_approved: governance.lifecycleStatus === 'ready',
+    governance: {
+      publicId: governance.publicId,
+      lifecycleStatus: governance.lifecycleStatus,
+      currentRevision: governance.currentRevision,
+      revisionCreated: governance.revisionCreated,
+      duplicate: governance.duplicate,
+      replayed: governance.replayed,
+    },
+  }
+}
+
+router.post('/', canManageQuestionBank, async (req, res) => {
   try {
-    const schoolId = requireSchoolContext(req, res)
-    if (!schoolId) return
-    const data = req.body
-    const id = generateId()
-    const userId = req.user?.id || null
-
-    const result = await query(
-      `INSERT INTO question_bank (
-        id, school_id, class_level, subject, medium, board, 
-        chapter_no, chapter_name, topic_name, question_type, 
-        question_text, question_text_urdu, options, correct_option, 
-        answer, explanation, marks, difficulty, priority, 
-        is_approved, created_by
-      ) VALUES (
-        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21
-      ) RETURNING *`,
-      [
-        id, schoolId, data.class_level, data.subject, data.medium || 'english', data.board || 'Punjab Board',
-        data.chapter_no, data.chapter_name, data.topic_name, data.question_type,
-        data.question_text, data.question_text_urdu, JSON.stringify(data.options || []), data.correct_option,
-        data.answer, data.explanation, data.marks || 1, data.difficulty || 'medium', data.priority || 'exercise',
-        data.is_approved !== undefined ? data.is_approved : true, userId
-      ]
-    )
-
-    res.status(201).json({ success: true, data: result.rows[0] })
+    const schoolId = requireSchoolContext(req, res); if (!schoolId) return
+    const data = req.body || {}; const id = generateId(); const userId = req.user?.id || null
+    const governance = await captureQuestionGovernance({
+      schoolId, userId,
+      idempotencyKey: governanceIdempotencyKey('create', req, id),
+      question: { ...data, id },
+      sourceQuestionBankId: id,
+    })
+    const legacyResult=await query(`INSERT INTO question_bank
+      (id,school_id,class_level,subject,medium,board,chapter_no,chapter_name,topic_name,question_type,question_text,question_text_urdu,options,correct_option,answer,explanation,marks,difficulty,priority,is_approved,created_by)
+      VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13::jsonb,$14,$15,$16,$17,$18,$19,false,$20) RETURNING *`,
+      [id,schoolId,data.class_level,data.subject,data.medium||'english',data.board||null,data.chapter_no,data.chapter_name,data.topic_name,data.question_type,data.question_text,data.question_text_urdu,JSON.stringify(data.options||[]),data.correct_option,data.answer,data.explanation,data.marks||1,data.difficulty||'medium',data.priority||'exercise',userId])
+    res.status(201).json({ success:true, data:governedLegacyResponse(legacyResult.rows[0], governance) })
   } catch (error) {
-    console.error('Error adding question:', error)
-    res.status(500).json({ success: false, message: 'Failed to add question' })
+    const status=Number(error.statusCode||error.status||500)
+    if(status>=500) console.error('Governed question create failed:',error)
+    res.status(status).json({success:false,code:error.code||'QUESTION_CREATE_FAILED',message:error.message||'Failed to add question'})
   }
 })
 
-// ─── 4. Edit Question ─────────────────────────────────────────────────────────
-router.put('/:id', async (req, res) => {
+router.put('/:id', canManageQuestionBank, async (req, res) => {
   try {
-    const schoolId = requireSchoolContext(req, res)
-    if (!schoolId) return
-    const { id } = req.params
-    const data = req.body
-
-    const result = await query(
-      `UPDATE question_bank SET 
-        class_level = COALESCE($1, class_level),
-        subject = COALESCE($2, subject),
-        medium = COALESCE($3, medium),
-        chapter_no = COALESCE($4, chapter_no),
-        chapter_name = COALESCE($5, chapter_name),
-        topic_name = COALESCE($6, topic_name),
-        question_type = COALESCE($7, question_type),
-        question_text = COALESCE($8, question_text),
-        question_text_urdu = COALESCE($9, question_text_urdu),
-        options = COALESCE($10, options),
-        correct_option = COALESCE($11, correct_option),
-        answer = COALESCE($12, answer),
-        marks = COALESCE($13, marks),
-        difficulty = COALESCE($14, difficulty),
-        priority = COALESCE($15, priority),
-        is_approved = COALESCE($16, is_approved),
-        updated_at = NOW()
-      WHERE id = $17 AND school_id = $18
-      RETURNING *`,
-      [
-        data.class_level, data.subject, data.medium,
-        data.chapter_no, data.chapter_name, data.topic_name, data.question_type,
-        data.question_text, data.question_text_urdu, 
-        data.options ? JSON.stringify(data.options) : null, 
-        data.correct_option, data.answer, data.marks, data.difficulty, 
-        data.priority, data.is_approved,
-        id, schoolId
-      ]
-    )
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ success: false, message: 'Question not found or no permission' })
-    }
-
-    res.json({ success: true, data: result.rows[0] })
-  } catch (error) {
-    console.error('Error updating question:', error)
-    res.status(500).json({ success: false, message: 'Failed to update question' })
+    const schoolId=requireSchoolContext(req,res); if(!schoolId)return
+    const existing=await loadLegacyQuestion(schoolId,req.params.id)
+    if(!existing)return res.status(404).json({success:false,message:'Question not found or no permission'})
+    const merged={...existing,...(req.body||{}),id:existing.id,school_id:schoolId}
+    const governance=await captureQuestionGovernance({
+      schoolId,userId:req.user?.id||null,
+      idempotencyKey:governanceIdempotencyKey('edit',req,existing.id),
+      question:merged,sourceQuestionBankId:existing.id,
+    })
+    res.json({success:true,data:governedLegacyResponse(merged,governance)})
+  } catch(error) {
+    const status=Number(error.statusCode||error.status||500)
+    if(status>=500) console.error('Governed question edit failed:',error)
+    res.status(status).json({success:false,code:error.code||'QUESTION_EDIT_FAILED',message:error.message||'Failed to update question'})
   }
 })
 
-// ─── 5. Delete Question ───────────────────────────────────────────────────────
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', canManageQuestionBank, async (req, res) => {
   try {
-    const schoolId = requireSchoolContext(req, res)
-    if (!schoolId) return
-    const { id } = req.params
-
-    const result = await query(
-      `DELETE FROM question_bank WHERE id = $1 AND school_id = $2 RETURNING id`,
-      [id, schoolId]
-    )
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ success: false, message: 'Question not found or no permission' })
-    }
-
-    res.json({ success: true, message: 'Question deleted successfully' })
-  } catch (error) {
-    console.error('Error deleting question:', error)
-    res.status(500).json({ success: false, message: 'Failed to delete question' })
+    const schoolId=requireSchoolContext(req,res); if(!schoolId)return
+    const existing=await loadLegacyQuestion(schoolId,req.params.id)
+    if(!existing)return res.status(404).json({success:false,message:'Question not found or no permission'})
+    const captured=await captureQuestionGovernance({
+      schoolId,userId:req.user?.id||null,
+      idempotencyKey:governanceIdempotencyKey('retire-capture',req,existing.id),
+      question:existing,sourceQuestionBankId:existing.id,
+    })
+    let lifecycle=captured.lifecycleStatus
+    if(lifecycle==='candidate') lifecycle=(await transitionQuestionLifecycle({schoolId,userId:req.user?.id||null,publicId:captured.publicId,toStatus:'reviewed'})).lifecycle_status
+    if(lifecycle==='reviewed') lifecycle=(await transitionQuestionLifecycle({schoolId,userId:req.user?.id||null,publicId:captured.publicId,toStatus:'ready'})).lifecycle_status
+    if(lifecycle==='ready') lifecycle=(await transitionQuestionLifecycle({schoolId,userId:req.user?.id||null,publicId:captured.publicId,toStatus:'retired'})).lifecycle_status
+    res.json({success:true,message:'Question retired; historical revisions preserved.',data:{id:existing.id,governancePublicId:captured.publicId,lifecycleStatus:lifecycle,hardDeleted:false}})
+  } catch(error) {
+    const status=Number(error.statusCode||error.status||500)
+    if(status>=500) console.error('Governed question retirement failed:',error)
+    res.status(status).json({success:false,code:error.code||'QUESTION_RETIRE_FAILED',message:error.message||'Failed to retire question'})
   }
 })
 
 // ─── 6. Bulk Add / Approve AI Imported Questions ──────────────────────────────
-router.post('/import/approve', async (req, res) => {
+router.post('/import/approve', canManageQuestionBank, async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
     if (!schoolId) return

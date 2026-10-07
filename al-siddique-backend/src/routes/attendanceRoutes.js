@@ -4,7 +4,7 @@ const router = express.Router()
 const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
-const { teacherStudentScopeClause, getTeacherAssignments } = require('../services/teacherAssignmentService')
+const { teacherStudentScopeClause } = require('../services/teacherAssignmentService')
 const {
   getTwilioConfigForSchool,
   buildTwilioClient,
@@ -25,25 +25,6 @@ function getPakistanDateOnly(date = new Date()) {
   } catch {
     return date.toISOString().slice(0, 10)
   }
-}
-
-async function requireTeacherAssignmentsForAttendance(req, res) {
-  if (String(req.user?.role || '').toLowerCase() !== 'teacher') return true
-  const schoolId = currentSchoolId(req)
-  if (!schoolId) {
-    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for teacher attendance access.' })
-    return false
-  }
-  const assignments = await getTeacherAssignments({ schoolId, teacherUserId: req.user?.id })
-  if (!assignments.length) {
-    res.status(409).json({
-      success: false,
-      code: 'TEACHER_ASSIGNMENTS_REQUIRED',
-      message: 'No active class assignments are configured for this teacher. Ask an administrator to configure the teaching scope before using attendance.',
-    })
-    return false
-  }
-  return true
 }
 
 function scopedAttendanceReadClause(req, alias = 's', startIndex = 1) {
@@ -246,7 +227,6 @@ router.get('/monthly', protect, requireAttendanceAnalyticsAccess, async (req, re
 // GET /api/attendance
 router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), async (req, res) => {
   try {
-    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
     const { class: cls, section, date } = req.query
     let sql = `
       SELECT a.*, s.name, s.gr_number, s.roll_number, s.class, s.section
@@ -299,8 +279,6 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
-    const actorRole = String(req.user?.role || '').toLowerCase()
-    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
     let schoolName = ''
     if (schoolId) {
       const schoolIdentity = await query(`
@@ -367,12 +345,6 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
         rosterParams.push(schoolId)
       }
     }
-    if (actorRole === 'teacher') {
-      const teacherScope = teacherStudentScopeClause(req, 'students', pIdx)
-      rosterSql += teacherScope.clause
-      rosterParams.push(...teacherScope.params)
-      pIdx = teacherScope.nextIndex
-    }
 
     const rosterResult = await client.query(rosterSql, rosterParams)
     const studentMap = new Map(rosterResult.rows.map(s => [Number(s.id), s]))
@@ -391,10 +363,9 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
 
     // 2. Atomic upsert loop inside transaction
     let saved = 0
-    const authenticatedActorId = Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null
-    const markedByUserId = actorRole === 'teacher'
-      ? authenticatedActorId
-      : (Number.isInteger(Number(marked_by)) ? Number(marked_by) : authenticatedActorId)
+    const markedByUserId = Number.isInteger(Number(marked_by))
+      ? Number(marked_by)
+      : (Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null)
 
     for (const r of normalizedRecords) {
       const student = studentMap.get(Number(r.student_id))

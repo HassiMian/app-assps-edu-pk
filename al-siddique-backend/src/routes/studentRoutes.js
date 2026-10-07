@@ -11,28 +11,9 @@ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('.
 const { validateSameTenantOrThrow } = require('../services/tenantCredentialGuard')
 const { ensureStudentFeeProfileSchema, upsertStudentFeeProfile, getStudentFeeProfile, findExistingChallan } = require('../services/feeChallanService')
 const { resolveAcademicAssignment } = require('../services/academicAssignmentGuard')
-const { teacherStudentScopeClause, getTeacherAssignments } = require('../services/teacherAssignmentService')
+const { teacherStudentScopeClause } = require('../services/teacherAssignmentService')
 const { provisionPortalUser, resetPortalUserPassword, setPortalUserActive } = require('../services/portalAccountService')
 const STUDENT_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'accountant'])
-
-async function requireTeacherAssignmentsForStudentRead(req, res) {
-  if (String(req.user?.role || '').toLowerCase() !== 'teacher') return true
-  const schoolId = currentSchoolId(req)
-  if (!schoolId) {
-    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for teacher roster access.' })
-    return false
-  }
-  const assignments = await getTeacherAssignments({ schoolId, teacherUserId: req.user?.id })
-  if (!assignments.length) {
-    res.status(409).json({
-      success: false,
-      code: 'TEACHER_ASSIGNMENTS_REQUIRED',
-      message: 'No active class assignments are configured for this teacher. Ask an administrator to configure the teaching scope before loading students.',
-    })
-    return false
-  }
-  return true
-}
 
 async function requireStudentWriteContext(req, res) {
   const schoolId = currentSchoolId(req)
@@ -177,7 +158,6 @@ function scopedStudentReadClause(req, alias = '', startIndex = 1) {
 // GET /api/students
 router.get('/', protect, requireScopeForServiceOnly('school.students.read'), async (req, res) => {
   try {
-    if (!(await requireTeacherAssignmentsForStudentRead(req, res))) return
     const { class: cls, section, search, active = 'all' } = req.query
     const activeValue = String(active).trim().toLowerCase()
     let sql    = 'SELECT * FROM students WHERE 1=1'

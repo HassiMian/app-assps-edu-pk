@@ -13,3 +13,21 @@ CREATE TABLE IF NOT EXISTS paper_vault_revision_history (
 );
 CREATE INDEX IF NOT EXISTS idx_paper_vault_revision_owner_lookup
 ON paper_vault_revision_history(school_id,paper_id,revision DESC);
+
+-- G34: extend immutable journal event taxonomy without recreating the table.
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE conrelid = 'paper_vault_revision_history'::regclass
+      AND conname = 'paper_vault_revision_history_event_kind_check'
+      AND pg_get_constraintdef(oid) NOT LIKE '%v6d_guarded_rename%'
+  ) THEN
+    ALTER TABLE paper_vault_revision_history
+      DROP CONSTRAINT paper_vault_revision_history_event_kind_check;
+    ALTER TABLE paper_vault_revision_history
+      ADD CONSTRAINT paper_vault_revision_history_event_kind_check
+      CHECK (event_kind IN ('baseline_capture','v6d_guarded_edit','v6d_guarded_rename','v6d_guarded_delete'));
+  END IF;
+END $$;

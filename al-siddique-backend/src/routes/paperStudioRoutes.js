@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
-const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper } = require('../services/paperStudioProjectionService')
+const { normalizedRole, teacherContext, listProjectedPapers, getProjectedPaper, createProjectedPaper } = require('../services/paperStudioProjectionService')
 const { buildCanonicalCutoverReadiness } = require('../services/papers/paperCanonicalCutoverReadinessV6F')
 const { buildCanonicalCanaryPreflight } = require('../services/papers/paperCanonicalCanaryPreflightV6H0')
 const { buildCanonicalCanaryPlan } = require('../services/papers/paperCanonicalCanaryPlanV6H2')
@@ -23,7 +23,7 @@ const { verifyPublisherReleaseDetachedSignature } = require('../services/papers/
 const { buildHumanAuthorityBoundary } = require('../services/papers/paperHumanAuthorityBoundaryV6G18')
 const { reviewPortalPaperDocument } = require('../services/papers/portalDocumentBoundaryV6C')
 const { buildDeliveryManifest } = require('../services/papers/paperDeliveryManifestV6E')
-const { saveGuardedRevision, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
+const { saveGuardedRevision, renameGuardedPaper, deleteGuardedPaper, listGuardedRevisions, readGuardedRevision } = require('../services/papers/paperVaultRevisionV6D')
 
 router.use(protect, requireRoles('super_admin','admin','principal','teacher'))
 
@@ -305,6 +305,20 @@ router.get('/context', async (req,res) => {
   }
 })
 
+router.post('/papers', async (req,res) => {
+  try {
+    const schoolId=schoolContext(req,res); if(!schoolId)return
+    const role=normalizedRole(req)
+    const data=await createProjectedPaper({schoolId,userId:req.user?.id,role,payload:req.body?.paper})
+    res.set('Cache-Control','private, no-store')
+    return res.status(201).json({success:true,data})
+  } catch(err) {
+    const status=Number(err.status)||500
+    if(status>=500)console.error('Paper Studio create error:',err.message)
+    return res.status(status).json({success:false,code:err.code||'PAPER_CREATE_FAILED',message:status>=500?'Paper could not be saved.':err.message})
+  }
+})
+
 router.get('/papers', async (req,res) => {
   try {
     const schoolId = schoolContext(req,res); if(!schoolId)return
@@ -339,6 +353,31 @@ router.patch('/papers/:id', async (req,res) => {
     return res.status(status).json({success:false,code:err.code||'REVISION_SAVE_FAILED',message:status>=500?'Revision could not be saved.':err.message})
   }
 })
+router.patch('/papers/:id/metadata', async (req,res) => {
+  try{
+    const schoolId=schoolContext(req,res);if(!schoolId)return
+    const data=await renameGuardedPaper({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,expectedRevision:Number(req.body?.expectedRevision),expectedSnapshotHash:req.body?.expectedSnapshotHash,name:req.body?.name})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  }catch(err){
+    const status=Number(err.status)||500
+    if(status>=500)console.error('V6-D guarded rename failed:',err.message)
+    return res.status(status).json({success:false,code:err.code||'RENAME_FAILED',message:status>=500?'Paper could not be renamed.':err.message})
+  }
+})
+router.delete('/papers/:id', async (req,res) => {
+  try{
+    const schoolId=schoolContext(req,res);if(!schoolId)return
+    const data=await deleteGuardedPaper({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id,expectedRevision:Number(req.body?.expectedRevision),expectedSnapshotHash:req.body?.expectedSnapshotHash})
+    res.set('Cache-Control','private, no-store')
+    return res.json({success:true,data})
+  }catch(err){
+    const status=Number(err.status)||500
+    if(status>=500)console.error('V6-D guarded delete failed:',err.message)
+    return res.status(status).json({success:false,code:err.code||'DELETE_FAILED',message:status>=500?'Paper could not be deleted.':err.message})
+  }
+})
+
 router.get('/papers/:id/revisions', async (req,res) => {
   try {
     const schoolId=schoolContext(req,res);if(!schoolId)return

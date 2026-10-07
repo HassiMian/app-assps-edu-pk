@@ -199,6 +199,7 @@ const registerRoutes = (router) => {
   mount('/cards',      './routes/cardsRoutes')
   mount('/notify',     './routes/notifyRoutes')
   mount('/paper',      './routes/paperRoute')
+  mount('/assessment-studio', './routes/assessmentStudioRoutes')
   mount('/question-bank', './routes/questionBankRoutes')
   mount('/timetable',  './routes/timetableRoutes')
   mount('/global-search', './routes/globalSearchRoutes')
@@ -215,6 +216,7 @@ const registerRoutes = (router) => {
   mount('/ops',        './routes/opsRoutes')
   mount('/daily-diary','./routes/dailyDiaryRoutes')
   mount('/ai-analytics', './routes/aiAnalyticsRoutes')
+  mount('/whatsapp', './routes/whatsappRoutes')
 }
 
 const apiRouter = express.Router()

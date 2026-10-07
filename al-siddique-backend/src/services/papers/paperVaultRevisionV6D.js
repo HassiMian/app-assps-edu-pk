@@ -75,6 +75,49 @@ async function saveGuardedRevision({schoolId,userId,role,paperId,expectedRevisio
     return {unchanged:false,revision:Number(newRow.revision),snapshotHash:newHash,updatedAt:newRow.updated_at}
   }catch(err){await client.query('ROLLBACK').catch(()=>{});throw err}finally{client.release()}
 }
+
+async function renameGuardedPaper({schoolId,userId,role,paperId,expectedRevision,expectedSnapshotHash,name}){
+  if(!Number.isInteger(expectedRevision)||expectedRevision<1)throw failure(400,'expectedRevision must be an integer >= 1.','REVISION_REQUIRED')
+  if(!/^[a-f0-9]{64}$/.test(String(expectedSnapshotHash||'')))throw failure(400,'expectedSnapshotHash is required.','HASH_REQUIRED')
+  const nextName=String(name||'').trim().slice(0,220)
+  if(!nextName)throw failure(400,'A paper name is required.','NAME_REQUIRED')
+  await ensureJournal()
+  const client=await pool.connect()
+  try{
+    await client.query('BEGIN')
+    const row=await authorizedCurrent(client,{schoolId,userId,role,paperId,lock:true})
+    const priorHash=digest(row.payload)
+    if(Number(row.revision)!==expectedRevision||priorHash!==expectedSnapshotHash)throw failure(409,'This paper changed in another session. Reload before renaming.','STALE_REVISION')
+    const previous=await client.query(`INSERT INTO paper_vault_revision_history(school_id,paper_id,revision,actor_user_id,event_kind,payload_hash,payload) VALUES($1,$2,$3,NULL,'baseline_capture',$4,$5::jsonb) ON CONFLICT(school_id,paper_id,revision) DO NOTHING RETURNING payload_hash`,[schoolId,paperId,row.revision,priorHash,JSON.stringify(row.payload)])
+    if(!previous.rowCount){const seen=await client.query('SELECT payload_hash FROM paper_vault_revision_history WHERE school_id=$1 AND paper_id=$2 AND revision=$3',[schoolId,paperId,row.revision]);if(seen.rows[0]?.payload_hash?.trim()!==priorHash)throw failure(409,'Revision journal and current paper diverged. Manual review required.','JOURNAL_DIVERGENCE')}
+    const updated=await client.query(`UPDATE paper_vault SET name=$1,revision=revision+1,updated_at=NOW() WHERE id=$2 AND school_id=$3 AND revision=$4 AND deleted_at IS NULL RETURNING revision,payload,updated_at,name`,[nextName,paperId,schoolId,row.revision])
+    if(!updated.rowCount)throw failure(409,'Paper changed before rename.','STALE_REVISION')
+    const newRow=updated.rows[0],newHash=digest(newRow.payload)
+    await client.query(`INSERT INTO paper_vault_revision_history(school_id,paper_id,revision,actor_user_id,event_kind,payload_hash,payload) VALUES($1,$2,$3,$4,'v6d_guarded_rename',$5,$6::jsonb)`,[schoolId,paperId,newRow.revision,userId,newHash,JSON.stringify(newRow.payload)])
+    await client.query('COMMIT')
+    return {revision:Number(newRow.revision),snapshotHash:newHash,name:newRow.name,updatedAt:newRow.updated_at}
+  }catch(err){await client.query('ROLLBACK').catch(()=>{});throw err}finally{client.release()}
+}
+async function deleteGuardedPaper({schoolId,userId,role,paperId,expectedRevision,expectedSnapshotHash}){
+  if(!Number.isInteger(expectedRevision)||expectedRevision<1)throw failure(400,'expectedRevision must be an integer >= 1.','REVISION_REQUIRED')
+  if(!/^[a-f0-9]{64}$/.test(String(expectedSnapshotHash||'')))throw failure(400,'expectedSnapshotHash is required.','HASH_REQUIRED')
+  await ensureJournal()
+  const client=await pool.connect()
+  try{
+    await client.query('BEGIN')
+    const row=await authorizedCurrent(client,{schoolId,userId,role,paperId,lock:true})
+    const priorHash=digest(row.payload)
+    if(Number(row.revision)!==expectedRevision||priorHash!==expectedSnapshotHash)throw failure(409,'This paper changed in another session. Reload before deleting.','STALE_REVISION')
+    const previous=await client.query(`INSERT INTO paper_vault_revision_history(school_id,paper_id,revision,actor_user_id,event_kind,payload_hash,payload) VALUES($1,$2,$3,NULL,'baseline_capture',$4,$5::jsonb) ON CONFLICT(school_id,paper_id,revision) DO NOTHING RETURNING payload_hash`,[schoolId,paperId,row.revision,priorHash,JSON.stringify(row.payload)])
+    if(!previous.rowCount){const seen=await client.query('SELECT payload_hash FROM paper_vault_revision_history WHERE school_id=$1 AND paper_id=$2 AND revision=$3',[schoolId,paperId,row.revision]);if(seen.rows[0]?.payload_hash?.trim()!==priorHash)throw failure(409,'Revision journal and current paper diverged. Manual review required.','JOURNAL_DIVERGENCE')}
+    const updated=await client.query(`UPDATE paper_vault SET deleted_at=NOW(),revision=revision+1,updated_at=NOW() WHERE id=$1 AND school_id=$2 AND revision=$3 AND deleted_at IS NULL RETURNING revision,payload,updated_at`,[paperId,schoolId,row.revision])
+    if(!updated.rowCount)throw failure(409,'Paper changed before delete.','STALE_REVISION')
+    const newRow=updated.rows[0],newHash=digest(newRow.payload)
+    await client.query(`INSERT INTO paper_vault_revision_history(school_id,paper_id,revision,actor_user_id,event_kind,payload_hash,payload) VALUES($1,$2,$3,$4,'v6d_guarded_delete',$5,$6::jsonb)`,[schoolId,paperId,newRow.revision,userId,newHash,JSON.stringify(newRow.payload)])
+    await client.query('COMMIT')
+    return {deleted:true,revision:Number(newRow.revision),snapshotHash:newHash,updatedAt:newRow.updated_at}
+  }catch(err){await client.query('ROLLBACK').catch(()=>{});throw err}finally{client.release()}
+}
 async function listGuardedRevisions({schoolId,userId,role,paperId}){
   await ensureJournal()
   const client=await pool.connect()
@@ -97,4 +140,4 @@ async function readGuardedRevision({schoolId,userId,role,paperId,revision}){
     return {revision:Number(row.revision),event:row.event_kind,snapshotHash:row.payload_hash.trim(),document:row.payload,createdAt:row.created_at}
   }finally{client.release()}
 }
-module.exports={saveGuardedRevision,listGuardedRevisions,readGuardedRevision,ensureJournal,digest,VERIFIED_SHA}
+module.exports={saveGuardedRevision,renameGuardedPaper,deleteGuardedPaper,listGuardedRevisions,readGuardedRevision,ensureJournal,digest,VERIFIED_SHA}
