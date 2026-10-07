@@ -1,0 +1,2026 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-BIO-2026-C01-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "Nutrition and its Importance",
+      "category": "mcq",
+      "question_text": "Which process breaks large food molecules into smaller absorbable units?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Digestion"
+        },
+        {
+          "id": "B",
+          "text": "Excretion"
+        },
+        {
+          "id": "C",
+          "text": "Ventilation"
+        },
+        {
+          "id": "D",
+          "text": "Transpiration"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Digestion",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 5",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Nutrition and its Importance"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C01-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "Nutrition and its Importance",
+      "category": "short",
+      "question_text": "Differentiate ingestion and absorption.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ingestion is taking food into the body; absorption is the movement of digested nutrients into blood or lymph.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 5",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Nutrition and its Importance"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C01-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "Nutrition and its Importance",
+      "category": "long",
+      "question_text": "Describe the major stages by which food is processed and nutrients become available to body cells.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award 1 mark each for ingestion, digestion, absorption, assimilation/use by cells, and egestion of undigested material.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 5",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Nutrition and its Importance"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C01-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "Human Digestive System",
+      "category": "mcq",
+      "question_text": "Where does most nutrient absorption occur?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Small intestine"
+        },
+        {
+          "id": "B",
+          "text": "Oesophagus"
+        },
+        {
+          "id": "C",
+          "text": "Large intestine"
+        },
+        {
+          "id": "D",
+          "text": "Mouth"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Small intestine",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 5",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Digestive System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C01-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "Human Digestive System",
+      "category": "short",
+      "question_text": "State one function of the stomach and one of the small intestine.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The stomach mixes food and begins important digestion; the small intestine completes much digestion and absorbs most nutrients.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 5",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Digestive System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C01-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "Human Digestive System",
+      "category": "long",
+      "question_text": "Explain how the structure and functions of the alimentary canal support digestion and absorption.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for sequential transport, mechanical/chemical digestion, enzyme action, absorption surface, and movement of nutrients into circulation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 5",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Digestive System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C02-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "Human Respiratory System",
+      "category": "mcq",
+      "question_text": "Which structure is the main site of gas exchange in the lungs?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alveoli"
+        },
+        {
+          "id": "B",
+          "text": "Trachea"
+        },
+        {
+          "id": "C",
+          "text": "Larynx"
+        },
+        {
+          "id": "D",
+          "text": "Diaphragm"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Alveoli",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 16",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Respiratory System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C02-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "Human Respiratory System",
+      "category": "short",
+      "question_text": "Why are alveoli suitable for gas exchange?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They provide a large, thin, moist surface with a rich blood supply, allowing rapid diffusion of gases.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 16",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Respiratory System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C02-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "Human Respiratory System",
+      "category": "long",
+      "question_text": "Explain inhalation, exhalation and gas exchange in the human respiratory system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for rib/diaphragm changes during inhalation, pressure/volume change, reverse changes during exhalation, alveolar diffusion, and blood transport of gases.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 16",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Respiratory System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C02-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "The Mechanism of Breathing",
+      "category": "mcq",
+      "question_text": "During inhalation, what happens to the diaphragm?",
+      "options": [
+        {
+          "id": "A",
+          "text": "It contracts and flattens"
+        },
+        {
+          "id": "B",
+          "text": "It relaxes and rises"
+        },
+        {
+          "id": "C",
+          "text": "It closes the trachea"
+        },
+        {
+          "id": "D",
+          "text": "It stops moving permanently"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "It contracts and flattens",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 16",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "The Mechanism of Breathing"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C02-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "The Mechanism of Breathing",
+      "category": "short",
+      "question_text": "How does contraction of the diaphragm help air enter the lungs?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Contraction flattens the diaphragm, increasing thoracic volume and lowering pressure so air moves into the lungs.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 16",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "The Mechanism of Breathing"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C02-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "The Mechanism of Breathing",
+      "category": "long",
+      "question_text": "Compare inhalation and exhalation in terms of muscle action, thoracic volume and pressure.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for diaphragm action, rib movement, volume change, pressure change, and resulting direction of airflow.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 16",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "The Mechanism of Breathing"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C03-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "Blood and its Components",
+      "category": "mcq",
+      "question_text": "Which blood component is mainly responsible for oxygen transport?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Red blood cells"
+        },
+        {
+          "id": "B",
+          "text": "Platelets"
+        },
+        {
+          "id": "C",
+          "text": "Plasma proteins only"
+        },
+        {
+          "id": "D",
+          "text": "White blood cells"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Red blood cells",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 28",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Blood and its Components"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C03-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "Blood and its Components",
+      "category": "short",
+      "question_text": "State one function each of red blood cells and platelets.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Red blood cells transport oxygen; platelets help blood clot.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 28",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Blood and its Components"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C03-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "Blood and its Components",
+      "category": "long",
+      "question_text": "Describe the major components of blood and explain how each supports transport or protection.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for plasma, red blood cells, white blood cells, platelets, and an accurate function for each.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 28",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Blood and its Components"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C03-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "Human Heart",
+      "category": "mcq",
+      "question_text": "Which chamber pumps oxygenated blood into the systemic circulation?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Left ventricle"
+        },
+        {
+          "id": "B",
+          "text": "Right ventricle"
+        },
+        {
+          "id": "C",
+          "text": "Right atrium"
+        },
+        {
+          "id": "D",
+          "text": "Left atrium"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Left ventricle",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 28",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Heart"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C03-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "Human Heart",
+      "category": "short",
+      "question_text": "Why is the wall of the left ventricle thicker than that of the right ventricle?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It must generate higher pressure to pump blood through the whole body.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 28",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Heart"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C03-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "Human Heart",
+      "category": "long",
+      "question_text": "Trace blood flow through the four chambers of the heart and the pulmonary/systemic circuits.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for right atrium, right ventricle to lungs, return to left atrium, left ventricle to body, and correct valve/major-vessel direction.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 28",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Heart"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C04-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "Functioning of the Kidney",
+      "category": "mcq",
+      "question_text": "What is the functional unit of the kidney?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nephron"
+        },
+        {
+          "id": "B",
+          "text": "Alveolus"
+        },
+        {
+          "id": "C",
+          "text": "Neuron"
+        },
+        {
+          "id": "D",
+          "text": "Villus"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Nephron",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 42",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Functioning of the Kidney"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C04-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "Functioning of the Kidney",
+      "category": "short",
+      "question_text": "What is selective reabsorption in a nephron?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is the return of useful substances such as glucose, needed ions and much water from the filtrate to the blood.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 42",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Functioning of the Kidney"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C04-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "Functioning of the Kidney",
+      "category": "long",
+      "question_text": "Explain how filtration, selective reabsorption and secretion contribute to urine formation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for filtration, useful-substance reabsorption, water/ion regulation, secretion of selected wastes/ions, and formation of final urine.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 42",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Functioning of the Kidney"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C04-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "Human Urinary System",
+      "category": "mcq",
+      "question_text": "Which tube carries urine from a kidney to the urinary bladder?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ureter"
+        },
+        {
+          "id": "B",
+          "text": "Urethra"
+        },
+        {
+          "id": "C",
+          "text": "Renal artery"
+        },
+        {
+          "id": "D",
+          "text": "Vena cava"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Ureter",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 42",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Urinary System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C04-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "Human Urinary System",
+      "category": "short",
+      "question_text": "Differentiate the ureter and urethra.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A ureter carries urine from a kidney to the bladder; the urethra carries urine from the bladder to the outside.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 42",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Urinary System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C04-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "Human Urinary System",
+      "category": "long",
+      "question_text": "Describe the pathway of urine from its formation in the kidneys to elimination.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for nephron formation, collecting ducts/renal pelvis, ureters, bladder storage, and urethral elimination.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 42",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Human Urinary System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C05-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "Neurons - The Units of Nervous System",
+      "category": "mcq",
+      "question_text": "Which part of a neuron normally carries impulses away from the cell body?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Axon"
+        },
+        {
+          "id": "B",
+          "text": "Dendrite"
+        },
+        {
+          "id": "C",
+          "text": "Nucleus"
+        },
+        {
+          "id": "D",
+          "text": "Receptor only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Axon",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 52",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Neurons - The Units of Nervous System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C05-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "Neurons - The Units of Nervous System",
+      "category": "short",
+      "question_text": "State the roles of dendrites and axon.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Dendrites receive signals toward the cell body; the axon carries impulses away from the cell body.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 52",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Neurons - The Units of Nervous System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C05-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "Neurons - The Units of Nervous System",
+      "category": "long",
+      "question_text": "Explain how a nervous response can pass from receptor to effector.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for receptor, sensory neuron, central processing/relay, motor neuron, and effector response.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 52",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Neurons - The Units of Nervous System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C05-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "Endocrine System",
+      "category": "mcq",
+      "question_text": "Hormones are released into which transport medium?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Blood"
+        },
+        {
+          "id": "B",
+          "text": "Digestive lumen"
+        },
+        {
+          "id": "C",
+          "text": "Bone marrow cavity only"
+        },
+        {
+          "id": "D",
+          "text": "Alveolar air"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Blood",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 52",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Endocrine System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C05-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "Endocrine System",
+      "category": "short",
+      "question_text": "How does endocrine coordination differ from nervous coordination?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Endocrine control uses hormones carried in blood and is often slower/longer lasting; nervous control uses electrical impulses and is usually faster/more targeted.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 52",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Endocrine System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C05-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "Endocrine System",
+      "category": "long",
+      "question_text": "Compare nervous and endocrine coordination using signal type, route, speed, duration and target specificity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award one mark for each accurate comparison of signal, route, speed, duration and targeting.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 52",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Endocrine System"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C06-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Formation of Gametes and Fertilization",
+      "category": "mcq",
+      "question_text": "What is fertilization?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Fusion of male and female gametes"
+        },
+        {
+          "id": "B",
+          "text": "Formation of identical body cells"
+        },
+        {
+          "id": "C",
+          "text": "Release of urine"
+        },
+        {
+          "id": "D",
+          "text": "Digestion of food"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Fusion of male and female gametes",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 68",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Formation of Gametes and Fertilization"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C06-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Formation of Gametes and Fertilization",
+      "category": "short",
+      "question_text": "Why are gametes haploid?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They contain one set of chromosomes so fertilization restores the diploid chromosome number rather than doubling it each generation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 68",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Formation of Gametes and Fertilization"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C06-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Formation of Gametes and Fertilization",
+      "category": "long",
+      "question_text": "Explain how gamete formation and fertilization maintain chromosome number across generations.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for meiosis, haploid gametes, fusion at fertilization, diploid zygote restoration, and genetic variation/parental contribution.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 68",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Formation of Gametes and Fertilization"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C06-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Role of Hormones in Sexual Development",
+      "category": "mcq",
+      "question_text": "Which general role do reproductive hormones have during puberty?",
+      "options": [
+        {
+          "id": "A",
+          "text": "They regulate development of reproductive organs and secondary sexual characteristics"
+        },
+        {
+          "id": "B",
+          "text": "They digest proteins"
+        },
+        {
+          "id": "C",
+          "text": "They filter blood in nephrons"
+        },
+        {
+          "id": "D",
+          "text": "They carry oxygen"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "They regulate development of reproductive organs and secondary sexual characteristics",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 68",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Role of Hormones in Sexual Development"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C06-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Role of Hormones in Sexual Development",
+      "category": "short",
+      "question_text": "State one reason hormonal regulation is important in reproduction.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Hormones coordinate development and timing of reproductive functions such as gamete production and reproductive cycles.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 68",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Role of Hormones in Sexual Development"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C06-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Role of Hormones in Sexual Development",
+      "category": "long",
+      "question_text": "Describe how hormonal signals coordinate major reproductive changes during adolescence and adulthood.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for endocrine source, target tissues, puberty changes, gamete/reproductive function regulation, and feedback/coordination concept.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 68",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Role of Hormones in Sexual Development"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C07-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Structure of Chromosome",
+      "category": "mcq",
+      "question_text": "What molecule carries most hereditary information in chromosomes?",
+      "options": [
+        {
+          "id": "A",
+          "text": "DNA"
+        },
+        {
+          "id": "B",
+          "text": "Glycogen"
+        },
+        {
+          "id": "C",
+          "text": "Cellulose"
+        },
+        {
+          "id": "D",
+          "text": "Triglyceride"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "DNA",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 77",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Structure of Chromosome"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C07-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Structure of Chromosome",
+      "category": "short",
+      "question_text": "Define a gene in relation to DNA.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A gene is a functional segment of DNA that carries information contributing to a biological product or inherited characteristic.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 77",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Structure of Chromosome"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C07-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Structure of Chromosome",
+      "category": "long",
+      "question_text": "Relate chromosomes, DNA and genes to the transmission of hereditary information.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for chromosomes containing DNA, DNA structure/information role, genes as DNA segments, replication/transmission, and inheritance through gametes.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 77",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Structure of Chromosome"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C07-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Mendel’s Laws of Inheritance",
+      "category": "mcq",
+      "question_text": "What term describes alternative forms of the same gene?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alleles"
+        },
+        {
+          "id": "B",
+          "text": "Organs"
+        },
+        {
+          "id": "C",
+          "text": "Enzymes"
+        },
+        {
+          "id": "D",
+          "text": "Lipids"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Alleles",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 77",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Mendel’s Laws of Inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C07-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Mendel’s Laws of Inheritance",
+      "category": "short",
+      "question_text": "Differentiate genotype and phenotype.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Genotype is the allele combination/genetic constitution; phenotype is the observable characteristic produced by genotype together with environmental effects.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 77",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Mendel’s Laws of Inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C07-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Mendel’s Laws of Inheritance",
+      "category": "long",
+      "question_text": "Explain a simple monohybrid inheritance pattern using alleles, dominance, genotype and phenotype.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for allele symbols, parental genotypes, gametes, offspring genotype combinations, and correct phenotype interpretation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 77",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Mendel’s Laws of Inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C08-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Genetic Engineering",
+      "category": "mcq",
+      "question_text": "Genetic engineering directly involves what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Deliberate modification or transfer of genetic material"
+        },
+        {
+          "id": "B",
+          "text": "Only selective feeding"
+        },
+        {
+          "id": "C",
+          "text": "Only mechanical digestion"
+        },
+        {
+          "id": "D",
+          "text": "Only blood clotting"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Deliberate modification or transfer of genetic material",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 90",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Genetic Engineering"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C08-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Genetic Engineering",
+      "category": "short",
+      "question_text": "What is meant by genetic engineering?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is the deliberate manipulation of genetic material to introduce, remove or alter genetic information for a desired purpose.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 90",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Genetic Engineering"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C08-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Genetic Engineering",
+      "category": "long",
+      "question_text": "Describe a general sequence by which a useful gene can be identified, transferred and expressed in a host organism.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for gene identification/isolation, vector or delivery method, insertion into host, selection/verification, and expression/use of the product.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 90",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Genetic Engineering"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C08-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Applications of Biotechnology",
+      "category": "mcq",
+      "question_text": "Which is an example of biotechnology?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Using microorganisms or engineered cells to make useful products"
+        },
+        {
+          "id": "B",
+          "text": "Measuring body temperature only"
+        },
+        {
+          "id": "C",
+          "text": "Filtering sand from water only"
+        },
+        {
+          "id": "D",
+          "text": "Drawing a food web"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Using microorganisms or engineered cells to make useful products",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 90",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Applications of Biotechnology"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C08-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Applications of Biotechnology",
+      "category": "short",
+      "question_text": "State one benefit and one potential concern associated with biotechnology.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A benefit can be production of medicines or improved crops; a concern can involve environmental, ethical or biosafety risks that require assessment.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 90",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Applications of Biotechnology"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C08-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Applications of Biotechnology",
+      "category": "long",
+      "question_text": "Evaluate biotechnology by describing two applications, two potential benefits and one risk-management consideration.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for two valid applications, two relevant benefits, and one thoughtful risk/biosafety/ethical consideration.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 90",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Applications of Biotechnology"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C09-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Pathogens",
+      "category": "mcq",
+      "question_text": "A pathogen is best defined as what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A disease-causing biological agent"
+        },
+        {
+          "id": "B",
+          "text": "Any nutrient"
+        },
+        {
+          "id": "C",
+          "text": "A red blood cell"
+        },
+        {
+          "id": "D",
+          "text": "A digestive enzyme"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A disease-causing biological agent",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 100",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Pathogens"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C09-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Pathogens",
+      "category": "short",
+      "question_text": "Name two broad types of pathogens.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include viruses, bacteria, fungi and protozoan parasites; any two valid groups earn credit.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 100",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Pathogens"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C09-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Pathogens",
+      "category": "long",
+      "question_text": "Explain how pathogens cause disease and how transmission can be reduced.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for pathogen entry, multiplication/action, host damage or symptoms, transmission route, and a matching prevention/control method.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 100",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Pathogens"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C09-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Immunity",
+      "category": "mcq",
+      "question_text": "What is the main purpose of an immune response?",
+      "options": [
+        {
+          "id": "A",
+          "text": "To recognize and control harmful foreign agents"
+        },
+        {
+          "id": "B",
+          "text": "To digest food"
+        },
+        {
+          "id": "C",
+          "text": "To pump blood"
+        },
+        {
+          "id": "D",
+          "text": "To produce urine"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "To recognize and control harmful foreign agents",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 100",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Immunity"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C09-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Immunity",
+      "category": "short",
+      "question_text": "Differentiate innate and adaptive immunity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Innate immunity provides rapid non-specific defenses; adaptive immunity develops specific responses and can generate immunological memory.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 100",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Immunity"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C09-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Immunity",
+      "category": "long",
+      "question_text": "Compare innate and adaptive immunity and explain how vaccination can strengthen protection.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for innate features, adaptive specificity, lymphocyte/antibody or cellular response concept, memory, and vaccination stimulating protective memory without causing the full disease.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 100",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Immunity"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C10-B01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Theory of Evolution by Natural Selection",
+      "category": "mcq",
+      "question_text": "Natural selection acts most directly on what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Heritable variation affecting survival or reproduction"
+        },
+        {
+          "id": "B",
+          "text": "All acquired habits equally"
+        },
+        {
+          "id": "C",
+          "text": "Only non-heritable changes"
+        },
+        {
+          "id": "D",
+          "text": "Random choice by organisms"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Heritable variation affecting survival or reproduction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 110",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Theory of Evolution by Natural Selection"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C10-B01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Theory of Evolution by Natural Selection",
+      "category": "short",
+      "question_text": "What role does variation play in natural selection?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heritable variation creates differences among individuals; variants that improve survival or reproduction can become more common over generations.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 110",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Theory of Evolution by Natural Selection"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C10-B01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Theory of Evolution by Natural Selection",
+      "category": "long",
+      "question_text": "Explain natural selection from variation to change in a population over generations.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for heritable variation, environmental selection pressure, differential survival/reproduction, inheritance of advantageous variants, and changing trait/allele frequencies over generations.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 110",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Theory of Evolution by Natural Selection"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C10-B02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Evidences of Evolution",
+      "category": "mcq",
+      "question_text": "Which type of evidence can support common ancestry?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Comparative anatomy and molecular similarities"
+        },
+        {
+          "id": "B",
+          "text": "Only daily weather"
+        },
+        {
+          "id": "C",
+          "text": "Only individual exercise"
+        },
+        {
+          "id": "D",
+          "text": "Only soil colour"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Comparative anatomy and molecular similarities",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 110",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Evidences of Evolution"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C10-B02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Evidences of Evolution",
+      "category": "short",
+      "question_text": "State two kinds of evidence used to study evolution.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include fossils, comparative anatomy, embryological patterns, biogeography and molecular/DNA similarities; any two valid forms earn credit.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 110",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Evidences of Evolution"
+      ]
+    },
+    {
+      "id": "X-BIO-2026-C10-B02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Evidences of Evolution",
+      "category": "long",
+      "question_text": "Explain how multiple independent lines of evidence can support evolutionary relationships.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for fossil evidence, anatomical/homologous evidence, molecular/DNA evidence, biogeography or embryology, and synthesis showing agreement among independent evidence sources.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-020 | ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b | page 110",
+      "tags": [
+        "grade10",
+        "biology",
+        "2026-27",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "Evidences of Evolution"
+      ]
+    }
+  ]
+}
