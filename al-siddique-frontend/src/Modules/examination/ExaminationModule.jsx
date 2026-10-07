@@ -263,11 +263,13 @@ export default function ExaminationModule() {
  const [viewCard, setViewCard] = useState(null);
  const [students, setStudents] = useState([]);
  const [loading, setLoading] = useState(true);
+ const [loadError, setLoadError] = useState('');
  const [gradeBands, setGradeBands] = useState(DEFAULT_GRADE_BANDS);
 
  useEffect(() => {
  let cancelled = false;
  async function hydrate() {
+ setLoadError('');
  try {
  const [examRes, studentRes, gradeRes] = await Promise.all([api.get('/api/exams'), api.get('/api/students'), api.get('/api/exams/grade-settings')]);
  if (cancelled) return;
@@ -278,12 +280,11 @@ export default function ExaminationModule() {
  const liveBands = Array.isArray(gradeRes.data?.data) && gradeRes.data.data.length ? gradeRes.data.data : DEFAULT_GRADE_BANDS;
  setGradeBands(liveBands);
  setSelectedExam(current => current && liveExams.some(item => item.id === current.id) ? current : (liveExams[0] || null));
+ setLoadError('');
  } catch (err) {
  if (!cancelled) {
  console.error('Failed to load examination workspace', err);
- setExams([]);
- setStudents([]);
- setSelectedExam(null);
+ setLoadError(err?.response?.data?.message || 'Examination workspace could not be refreshed. Existing loaded exams and students were preserved.');
  }
  } finally {
  if (!cancelled) setLoading(false);
@@ -380,6 +381,12 @@ export default function ExaminationModule() {
  return (
  <div style={{ minHeight:'100%', background:'var(--apex-shell-gradient)', color:'var(--apex-text-primary)', padding:24 }}>
  <div style={{ maxWidth: 1240, margin: '0 auto', display: 'grid', gap: 24 }}>
+
+ {loadError && (
+ <div className="super-module-card" style={{ ...cardStyle, padding:'12px 16px', color:'var(--apex-action-danger)', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)' }}>
+ {loadError}
+ </div>
+ )}
 
  <div className="super-module-card" style={{ ...cardStyle, display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 16, marginBottom: 20 }}>
  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
