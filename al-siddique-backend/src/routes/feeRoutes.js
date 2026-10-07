@@ -1091,13 +1091,13 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
           discount = $3,
           payment_note = $4,
           gross_total = $5,
-          remaining_balance = GREATEST($5 - $1, 0),
+          remaining_balance = GREATEST($5::numeric - $1::numeric, 0::numeric),
           status = CASE
-            WHEN $1 <= 0 THEN 'unpaid'
-            WHEN $1 < $5 THEN 'partial'
+            WHEN $1::numeric <= 0 THEN 'unpaid'
+            WHEN $1::numeric < $5::numeric THEN 'partial'
             ELSE 'paid'
           END,
-          paid_date = CASE WHEN $1 > 0 THEN COALESCE(paid_date, CURRENT_DATE) ELSE NULL END,
+          paid_date = CASE WHEN $1::numeric > 0 THEN COALESCE(paid_date, CURRENT_DATE) ELSE NULL END,
           updated_at = NOW()
       WHERE id = $6 AND school_id = $7
       RETURNING *
