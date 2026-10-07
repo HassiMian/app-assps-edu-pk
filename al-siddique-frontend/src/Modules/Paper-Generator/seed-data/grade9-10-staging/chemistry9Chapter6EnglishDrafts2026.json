@@ -1,0 +1,1153 @@
+{
+  "schemaVersion": "assps-chemistry9-ch6-english-drafts-v1",
+  "createdOn": "2026-10-06",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-007",
+  "sourcePdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+  "actualPaperEvidence": "multanGrade9ScienceActual2026Evidence.json",
+  "patternAuthority": "officialGrade9CorePattern2026.json",
+  "scope": "CURRENT_TEXTBOOK_FULL_BOOK_NON_EXERCISE_CONCEPTUAL",
+  "topicCoverage": [
+    {
+      "topicId": "6.INTRO",
+      "draftCount": 5
+    },
+    {
+      "topicId": "6.2",
+      "draftCount": 5
+    },
+    {
+      "topicId": "6.3",
+      "draftCount": 5
+    }
+  ],
+  "drafts": [
+    {
+      "id": "IX-CHEM-2025-C06-T00-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.INTRO",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 87,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reversible and irreversible reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Which change best represents a reversible process under suitable conditions?",
+          "answer": "Hydrating and dehydrating a salt",
+          "options": [
+            {
+              "id": "A",
+              "text": "Burning paper to ash"
+            },
+            {
+              "id": "B",
+              "text": "Hydrating and dehydrating a salt"
+            },
+            {
+              "id": "C",
+              "text": "Rusting iron in moist air"
+            },
+            {
+              "id": "D",
+              "text": "Exploding a fuel mixture"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T00-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.INTRO",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 87,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reversible and irreversible reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "A reaction is called reversible when it can proceed in which way under the same set of conditions?",
+          "answer": "In both forward and reverse directions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Only from products to reactants"
+            },
+            {
+              "id": "B",
+              "text": "Only from reactants to products"
+            },
+            {
+              "id": "C",
+              "text": "In both forward and reverse directions"
+            },
+            {
+              "id": "D",
+              "text": "Without any energy transfer"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T00-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.INTRO",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 87,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reversible and irreversible reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "State one key difference between reversible and irreversible chemical reactions.",
+          "answer": "A reversible reaction can proceed in both forward and reverse directions under suitable conditions, whereas an irreversible reaction proceeds essentially in one direction under those conditions."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T00-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.INTRO",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 88,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reversible physical changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why can dehydration followed by rehydration of a suitable hydrated salt illustrate reversibility?",
+          "answer": "Because removal of water can convert the hydrated form to another form, and supplying water again can restore the hydrated form, showing that the change can proceed in opposite directions under suitable conditions."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T00-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.INTRO",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 87,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "reversible and irreversible reactions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Compare reversible and irreversible reactions and explain how a closed reaction vessel can help demonstrate reversibility.",
+          "answer": "Award 1 mark for defining irreversible reaction, 1 for defining reversible reaction, 1 for noting forward and reverse directions, 1 for explaining that a closed vessel prevents loss of participating substances, and 1 for linking retained reactants/products with the possibility of the reverse process."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T02-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamic Equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "At dynamic equilibrium, which statement about reaction rates is correct?",
+          "answer": "Forward and reverse rates are equal",
+          "options": [
+            {
+              "id": "A",
+              "text": "Both reaction rates are zero"
+            },
+            {
+              "id": "B",
+              "text": "Forward rate is greater than reverse rate"
+            },
+            {
+              "id": "C",
+              "text": "Reverse rate is greater than forward rate"
+            },
+            {
+              "id": "D",
+              "text": "Forward and reverse rates are equal"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "D"
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T02-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.2",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamic Equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why may a reaction mixture look unchanged at dynamic equilibrium?",
+          "answer": "Reactant and product concentrations remain macroscopically constant",
+          "options": [
+            {
+              "id": "A",
+              "text": "All particles have stopped moving"
+            },
+            {
+              "id": "B",
+              "text": "Reactant and product concentrations remain macroscopically constant"
+            },
+            {
+              "id": "C",
+              "text": "Only the forward reaction continues"
+            },
+            {
+              "id": "D",
+              "text": "The catalyst has been consumed"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "B"
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T02-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamic Equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Why is chemical equilibrium described as dynamic rather than static?",
+          "answer": "Because forward and reverse reactions continue simultaneously, but at equal rates, so no overall macroscopic change in composition is observed."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T02-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.2",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamic Equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Does dynamic equilibrium require equal concentrations of reactants and products? Explain briefly.",
+          "answer": "No. Dynamic equilibrium requires equal forward and reverse reaction rates. Reactant and product concentrations remain constant with time, but they do not have to be numerically equal."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T02-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.2",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 89,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Dynamic Equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Describe how a reversible reaction approaches dynamic equilibrium after reactants are mixed in a closed container.",
+          "answer": "Award 1 mark for initially dominant forward reaction, 1 for formation and accumulation of products, 1 for growth of the reverse reaction rate, 1 for equality of forward and reverse rates at equilibrium, and 1 for explaining that concentrations then remain constant macroscopically while both reactions continue."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T03-M01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 91,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "changing equilibrium conditions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "If some product is removed from a reversible system at equilibrium, which response helps restore equilibrium?",
+          "answer": "The forward reaction is favoured to replace some product",
+          "options": [
+            {
+              "id": "A",
+              "text": "The forward reaction is favoured to replace some product"
+            },
+            {
+              "id": "B",
+              "text": "All molecular collisions stop"
+            },
+            {
+              "id": "C",
+              "text": "The reverse reaction is permanently stopped"
+            },
+            {
+              "id": "D",
+              "text": "The equilibrium composition cannot change"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T03-M02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.3",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 92,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "catalyst and equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "What is the main effect of adding a suitable catalyst to a reversible reaction that can attain equilibrium?",
+          "answer": "It helps equilibrium to be reached faster by increasing both reaction rates",
+          "options": [
+            {
+              "id": "A",
+              "text": "It changes the equilibrium composition in favour of products"
+            },
+            {
+              "id": "B",
+              "text": "It changes the equilibrium composition in favour of reactants"
+            },
+            {
+              "id": "C",
+              "text": "It helps equilibrium to be reached faster by increasing both reaction rates"
+            },
+            {
+              "id": "D",
+              "text": "It makes the reverse reaction impossible"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "C"
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T03-S01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 91,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "changing equilibrium conditions"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "How can changing the concentration of one component disturb an equilibrium?",
+          "answer": "Changing a component concentration makes the forward and reverse rates temporarily unequal. The system then shifts through additional reaction until a new equilibrium with equal rates is established."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T03-S02",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.3",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 92,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "pressure temperature catalyst"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Distinguish the role of a catalyst from the role of temperature or pressure in an equilibrium system.",
+          "answer": "A catalyst mainly changes how quickly equilibrium is reached by accelerating both directions. Temperature or, for suitable gaseous systems, pressure can change the equilibrium position and therefore the equilibrium composition."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEM-2025-C06-T03-L01",
+      "chapter": {
+        "id": "IX-CHEM-2025-EM-C06",
+        "number": 6
+      },
+      "topicId": "6.3",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-007",
+        "pdfSha256": "05e0fcca2e1762cc8d9122546d4ff4a612f18f8f061db1a5c04f17d99315b518",
+        "page": 90,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_PAGE_CONCEPT_OR_HEADING_REVIEWED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "changing physical conditions of equilibrium"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry",
+        "edition": "2025-26",
+        "textbookId": "PECTAA-IX-CHEMISTRY-EM-2025-26",
+        "syllabusVersion": "ix-2025-26"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original English-medium concept draft grounded in the rendered current textbook Chapter 6. No reviewer or approval is claimed. Urdu parity and academic answer checking remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-CURRICULUM-DRAFT-AUTHOR-20261006",
+      "difficultyRationale": "Requires interpretation, explanation or application.",
+      "content": {
+        "en": {
+          "stem": "Explain how concentration, temperature, pressure and a catalyst can be used when managing a reversible reaction at equilibrium.",
+          "answer": "Award 1 mark for concentration change causing a shift that opposes the disturbance, 1 for temperature affecting the preferred direction according to heat effects, 1 for pressure affecting gaseous equilibria depending on gas amounts on each side, 1 for a catalyst speeding both directions and reducing time to equilibrium without changing equilibrium composition, and 1 for linking these controls to improved process yield or operating efficiency."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 15,
+    "mcq": 6,
+    "short": 6,
+    "long": 3
+  }
+}

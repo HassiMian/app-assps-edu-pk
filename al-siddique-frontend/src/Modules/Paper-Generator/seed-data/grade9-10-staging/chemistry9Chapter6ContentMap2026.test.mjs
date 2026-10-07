@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const d=JSON.parse(fs.readFileSync(new URL('./chemistry9Chapter6ContentMap2026.json',import.meta.url),'utf8'));
+test('Equilibria Chapter 6 uses page-bound confirmed topics and no invented 6.1 heading',()=>{assert.deepEqual(d.chapter.pdfPages,[87,96]);assert.deepEqual(d.topics.map(x=>x.topicId),['6.INTRO','6.2','6.3']);assert.equal(d.topics[0].status,'RENDERED_PAGE_CONCEPT_REVIEWED_NUMBERING_UNRESOLVED');assert.match(d.unresolved[0],/not visually established/);});
+test('dynamic equilibrium and physical-condition topics are source-grounded',()=>{assert.equal(d.topics[1].pdfStartPage,89);assert.equal(d.topics[2].pdfStartPage,90);assert(d.verifiedConceptFamilies.includes('closed-system reaction equilibrium'));});
+test('incomplete numbered-topic audit cannot approve chapter or exercise-origin content',()=>{assert.equal(d.authoring.chapterCompletionEligible,false);assert.equal(d.exerciseFamilies.itemLevelExerciseMap,'PENDING');assert.equal(d.authoring.exerciseOriginAllowed,false);assert.equal(d.authoring.publicationAllowed,false);});
