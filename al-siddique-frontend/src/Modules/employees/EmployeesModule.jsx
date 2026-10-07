@@ -779,6 +779,8 @@ function AttendanceTab({ employees=[] }) {
  const [date, setDate] = useState(today)
  const [records, setRecords] = useState([])
  const [summary, setSummary] = useState({})
+ const [loadedDate, setLoadedDate] = useState('')
+ const [loadedSummaryMonth, setLoadedSummaryMonth] = useState('')
  const [loading, setLoading] = useState(true)
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
@@ -790,15 +792,16 @@ function AttendanceTab({ employees=[] }) {
  const response = await api.get('/api/employees/attendance', { params:{ date:targetDate }, skipCache:true })
  const rows = Array.isArray(response.data?.data) ? response.data.data : []
  setRecords(rows.map(row => ({ ...row, status:row.status || 'Present', note:row.note || '' })))
+ setLoadedDate(targetDate)
  const month = targetDate.slice(0,7)
  const summaryResponse = await api.get('/api/employees/attendance/summary', { params:{ month }, skipCache:true })
  const byEmployee = {}
  ;(Array.isArray(summaryResponse.data?.data) ? summaryResponse.data.data : []).forEach(item => { byEmployee[Number(item.employee_id)] = item })
  setSummary(byEmployee)
+ setLoadedSummaryMonth(month)
  } catch (err) {
  console.error('Employee attendance load failed', err)
- setRecords([])
- setMessage(err.response?.data?.message || 'Employee attendance could not be loaded.')
+ setMessage(err.response?.data?.message || 'Employee attendance could not be refreshed. Existing loaded attendance remains bound to its original date.')
  } finally { setLoading(false) }
  }, [date])
 
@@ -807,26 +810,29 @@ function AttendanceTab({ employees=[] }) {
  void loadAttendance(date)
  }, [date, loadAttendance])
 
- const setStatus = (employeeId, status) => setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, status } : row))
- const setNote = (employeeId, note) => setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, note } : row))
- const markAll = status => setRecords(prev => prev.map(row => ({ ...row, status })))
+ const attendanceScopeMatches = loadedDate === date
+ const activeRecords = attendanceScopeMatches ? records : []
+ const activeSummary = loadedSummaryMonth === date.slice(0,7) ? summary : {}
+ const setStatus = (employeeId, status) => { if (attendanceScopeMatches) setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, status } : row)) }
+ const setNote = (employeeId, note) => { if (attendanceScopeMatches) setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, note } : row)) }
+ const markAll = status => { if (attendanceScopeMatches) setRecords(prev => prev.map(row => ({ ...row, status }))) }
 
  async function saveAttendance() {
- if (!records.length || saving) return
+ if (!attendanceScopeMatches || !activeRecords.length || saving) return
  setSaving(true); setMessage('')
  try {
  await api.put('/api/employees/attendance/bulk', {
  date,
- records:records.map(row => ({ employee_id:Number(row.employee_id), status:row.status, note:row.note || '' })),
+ records:activeRecords.map(row => ({ employee_id:Number(row.employee_id), status:row.status, note:row.note || '' })),
  })
- setMessage(`Attendance saved for ${records.length} employees.`)
+ setMessage(`Attendance saved for ${activeRecords.length} employees.`)
  await loadAttendance(date)
  } catch (err) {
  setMessage(err.response?.data?.message || 'Employee attendance could not be saved.')
  } finally { setSaving(false) }
  }
 
- const counts = records.reduce((acc,row) => { acc[row.status]=(acc[row.status]||0)+1; return acc }, {})
+ const counts = activeRecords.reduce((acc,row) => { acc[row.status]=(acc[row.status]||0)+1; return acc }, {})
  const statusOptions = ['Present','Absent','Leave','Late']
 
  return (
@@ -846,7 +852,7 @@ function AttendanceTab({ employees=[] }) {
  </GCard>
 
  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap:12 }}>
- {[['Total',records.length,C.blue],['Present',counts.Present||0,C.green],['Absent',counts.Absent||0,C.red],['Leave',counts.Leave||0,C.orange],['Late',counts.Late||0,C.gold]].map(([label,value,color]) => (
+ {[['Total',activeRecords.length,C.blue],['Present',counts.Present||0,C.green],['Absent',counts.Absent||0,C.red],['Leave',counts.Leave||0,C.orange],['Late',counts.Late||0,C.gold]].map(([label,value,color]) => (
  <GCard key={label} style={{ padding:16 }}><div style={{ color:C.muted, fontSize:10, fontWeight:800, textTransform:'uppercase' }}>{label}</div><div style={{ color, fontSize:24, fontWeight:900, marginTop:5 }}>{value}</div></GCard>
  ))}
  </div>
@@ -854,17 +860,17 @@ function AttendanceTab({ employees=[] }) {
  <GCard style={{ padding:0, overflow:'hidden' }}>
  <div style={{ padding:'14px 16px', borderBottom:`1px solid ${C.border}`, display:'flex', justifyContent:'space-between', gap:12, flexWrap:'wrap', alignItems:'center' }}>
  <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>{['Present','Absent','Leave','Late'].map(status=><button key={status} onClick={()=>markAll(status)} style={{ padding:'7px 10px', borderRadius:9, border:`1px solid ${C.border}`, background:'var(--apex-bg-subtle)', color:C.silver, cursor:'pointer', fontSize:11, fontWeight:700 }}>Mark all {status}</button>)}</div>
- <button onClick={()=>void saveAttendance()} disabled={saving || !records.length} style={{ padding:'9px 16px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:saving?'wait':'pointer', fontWeight:800, opacity:records.length?1:.55 }}>{saving?'Saving…':'Save Attendance'}</button>
+ <button onClick={()=>void saveAttendance()} disabled={saving || !attendanceScopeMatches || !activeRecords.length} style={{ padding:'9px 16px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:saving?'wait':'pointer', fontWeight:800, opacity:activeRecords.length&&attendanceScopeMatches?1:.55 }}>{saving?'Saving…':'Save Attendance'}</button>
  </div>
  {loading ? <div style={{ padding:28, color:C.muted }}>Loading employee attendance…</div> : <div style={{ overflowX:'auto' }}><table style={{ width:'100%', borderCollapse:'collapse', minWidth:780 }}>
  <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>{['Employee','Designation','Status','Note','Month Summary'].map(h=><th key={h} style={{ padding:'12px 14px', textAlign:'left', color:C.muted, fontSize:11, textTransform:'uppercase' }}>{h}</th>)}</tr></thead>
- <tbody>{records.map((row,index)=>{ const month=summary[Number(row.employee_id)]||{}; return <tr key={row.employee_id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent', borderBottom:`1px solid ${C.border}` }}>
+ <tbody>{activeRecords.map((row,index)=>{ const month=activeSummary[Number(row.employee_id)]||{}; return <tr key={row.employee_id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent', borderBottom:`1px solid ${C.border}` }}>
  <td style={{ padding:'12px 14px' }}><div style={{ color:C.silver, fontWeight:800 }}>{row.name}</div><div style={{ color:C.muted, fontSize:11 }}>{row.emp_id || `#${row.employee_id}`}</div></td>
  <td style={{ padding:'12px 14px', color:C.muted }}>{row.designation || '—'}</td>
  <td style={{ padding:'12px 14px' }}><Sel value={row.status} onChange={e=>setStatus(row.employee_id,e.target.value)} style={{ width:120 }}>{statusOptions.map(status=><option key={status}>{status}</option>)}</Sel></td>
  <td style={{ padding:'12px 14px' }}><Inp value={row.note} onChange={e=>setNote(row.employee_id,e.target.value)} placeholder="Optional note" style={{ minWidth:180 }}/></td>
  <td style={{ padding:'12px 14px', color:C.muted, fontSize:11 }}>{`P ${month.present||0} · A ${month.absent||0} · L ${month.leave||0} · Late ${month.late||0}`}</td>
- </tr>})}{!records.length&&<tr><td colSpan={5} style={{ padding:28, textAlign:'center', color:C.muted }}>{employees.length ? 'No attendance records available.' : 'No active employees found.'}</td></tr>}</tbody>
+ </tr>})}{!activeRecords.length&&<tr><td colSpan={5} style={{ padding:28, textAlign:'center', color:C.muted }}>{employees.length ? 'No attendance records available.' : 'No active employees found.'}</td></tr>}</tbody>
  </table></div>}
  </GCard>
  {message&&<div style={{ color:message.includes('saved')?C.green:C.red, fontSize:12, fontWeight:700 }}>{message}</div>}
@@ -1072,23 +1078,28 @@ function StaffPermissionsTab({ employees }) {
  const [selectedEmpId, setSelectedEmpId] = useState(null)
  const [account, setAccount] = useState(null)
  const [localPerms, setLocalPerms] = useState([])
+ const [loadedAccountEmployeeId, setLoadedAccountEmployeeId] = useState('')
+ const [accountError, setAccountError] = useState('')
  const [saved, setSaved] = useState(false)
  const [loading, setLoading] = useState(false)
  const selectedEmp = employees.find(e => e.id === selectedEmpId) || null
 
  useEffect(() => {
- if (!selectedEmpId) { setAccount(null); setLocalPerms([]); return }
+ if (!selectedEmpId) { setAccount(null); setLocalPerms([]); setLoadedAccountEmployeeId(''); setAccountError(''); return }
  let cancelled = false
  async function loadAccount() {
  setLoading(true)
+ setAccountError('')
  try {
  const response = await api.get(`/api/employees/${selectedEmpId}/portal-account`)
  if (cancelled) return
  const user = response.data?.data || null
  setAccount(user)
  setLocalPerms(Array.isArray(user?.permissions) && user.permissions.length ? user.permissions : [...DEFAULT_TEACHER_PERMISSIONS])
+ setLoadedAccountEmployeeId(String(selectedEmpId))
+ setAccountError('')
  } catch (err) {
- if (!cancelled) { setAccount(null); setLocalPerms([...DEFAULT_TEACHER_PERMISSIONS]) }
+ if (!cancelled) setAccountError(err.response?.data?.message || 'Portal account data could not be refreshed. Existing loaded account data remains bound to its original employee.')
  console.error('Could not load employee portal account', err)
  } finally {
  if (!cancelled) setLoading(false)
@@ -1098,7 +1109,9 @@ function StaffPermissionsTab({ employees }) {
  return () => { cancelled = true }
  }, [selectedEmpId])
 
- const toggle = key => { setLocalPerms(prev => prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]); setSaved(false) }
+ const accountScopeMatches = String(loadedAccountEmployeeId) === String(selectedEmpId)
+ const activeAccount = accountScopeMatches ? account : null
+ const toggle = key => { if (!accountScopeMatches) return; setLocalPerms(prev => prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]); setSaved(false) }
  const toggleGroup = group => {
  const keys = group.perms.map(item => item.key)
  const allOn = keys.every(key => localPerms.includes(key))
@@ -1109,8 +1122,8 @@ function StaffPermissionsTab({ employees }) {
  const handleSelectAll = () => { setLocalPerms(ALL_PERMISSIONS.map(item => item.key)); setSaved(false) }
  const handleClearAll = () => { setLocalPerms([]); setSaved(false) }
  const handleSave = async () => {
- if (!selectedEmp) return
- if (!account) { alert('Create this employee portal account in Login Access first.'); return }
+ if (!selectedEmp || !accountScopeMatches) return
+ if (!activeAccount) { alert('Create this employee portal account in Login Access first.'); return }
  try {
  await api.put(`/api/employees/${selectedEmp.id}/portal-account/permissions`, { permissions: localPerms })
  setAccount(prev => prev ? { ...prev, permissions: localPerms } : prev)
@@ -1134,10 +1147,11 @@ function StaffPermissionsTab({ employees }) {
  <GCard>
  {!selectedEmp ? <div style={{ padding:40, textAlign:'center', color:C.muted }}>Select an employee to configure permissions.</div> : <>
  <div style={{ display:'flex', justifyContent:'space-between', gap:14, flexWrap:'wrap', alignItems:'center', marginBottom:18 }}>
- <div><h2 style={{ margin:0, color:C.silver, fontSize:18 }}>{selectedEmp.name}</h2><div style={{ color:C.muted, fontSize:12, marginTop:4 }}>{loading ? 'Loading account…' : account ? `Server account · ${account.username || account.email || ''}` : 'No server portal account linked'}</div></div>
+ <div><h2 style={{ margin:0, color:C.silver, fontSize:18 }}>{selectedEmp.name}</h2><div style={{ color:C.muted, fontSize:12, marginTop:4 }}>{loading ? 'Loading account…' : accountError && !accountScopeMatches ? 'Portal account unavailable for selected employee' : activeAccount ? `Server account · ${activeAccount.username || activeAccount.email || ''}` : 'No server portal account linked'}</div></div>
  <div style={{ display:'flex', gap:7, flexWrap:'wrap' }}><button onClick={handleDefault} style={btnSecondary}>Teacher Defaults</button><button onClick={handleSelectAll} style={btnSecondary}>Select All</button><button onClick={handleClearAll} style={btnSecondary}>Clear</button></div>
  </div>
- <div style={{ display:'grid', gap:14 }}>
+ {accountError && <div style={{ marginBottom:12, padding:'10px 12px', borderRadius:10, color:C.red, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))' }}>{accountError}</div>}
+ {accountScopeMatches ? <div style={{ display:'grid', gap:14 }}>
  {PERMISSION_GROUPS.map(group => {
  const keys = group.perms.map(item => item.key); const allOn = keys.every(key => localPerms.includes(key))
  return <div key={group.label} style={{ padding:14, borderRadius:14, border:`1px solid ${C.border}`, background:'var(--apex-bg-subtle)' }}>
@@ -1145,8 +1159,8 @@ function StaffPermissionsTab({ employees }) {
  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(210px,1fr))', gap:8, marginTop:12 }}>{group.perms.map(permission => <label key={permission.key} style={{ display:'flex', alignItems:'center', gap:9, color:C.silver, fontSize:12, cursor:'pointer' }}><input type="checkbox" checked={localPerms.includes(permission.key)} onChange={()=>toggle(permission.key)}/><span>{permission.label}</span></label>)}</div>
  </div>
  })}
- </div>
- <div style={{ display:'flex', justifyContent:'flex-end', marginTop:18 }}><button disabled={!account || loading} onClick={handleSave} style={{ ...btnPrimary, opacity:!account ? .5 : 1 }}>{saved ? 'Saved' : 'Save Permissions'}</button></div>
+ </div> : !loading ? <div style={{ color:C.muted, padding:18, textAlign:'center' }}>Portal permission data is unavailable for the selected employee.</div> : null}
+ <div style={{ display:'flex', justifyContent:'flex-end', marginTop:18 }}><button disabled={!activeAccount || loading || !accountScopeMatches} onClick={handleSave} style={{ ...btnPrimary, opacity:activeAccount&&accountScopeMatches ? 1 : .5 }}>{saved ? 'Saved' : 'Save Permissions'}</button></div>
  </>}
  </GCard>
  </div>

@@ -146,6 +146,30 @@ assertContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /Employee attendance load failed[\s\S]{0,160}setRecords\(\[\]\)/,
+  'employee attendance refresh failures must preserve prior rows and never imply an empty roster.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'if (!attendanceScopeMatches || !activeRecords.length || saving) return',
+  'employee attendance writes must be blocked unless loaded rows belong to the selected date.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /Could not load employee portal account[\s\S]{0,180}setAccount\(null\)/,
+  'staff permission account refresh failures must preserve loaded account data for its original employee.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'const activeAccount = accountScopeMatches ? account : null',
+  'staff permission controls must only use account data loaded for the selected employee.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
   /Student fee panel load failed[\s\S]{0,180}setProfile\(null\)[\s\S]{0,120}setChallans\(\[\]\)/,
   'student fee panel refresh failures must preserve the last known-good fee state.'
