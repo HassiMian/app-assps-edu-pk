@@ -147,6 +147,18 @@ assertContains(
 
 assertNotContains(
   'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /SALARY_RECORDS|const records = SALARY_RECORDS/,
+  'employee salary workflow must not use a hardcoded empty ledger that renders false zero financial metrics.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'Payroll payment ledger is not configured.',
+  'salary workflow must explicitly distinguish configured salary data from unavailable payroll payment tracking.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
   /Employee attendance load failed[\s\S]{0,160}setRecords\(\[\]\)/,
   'employee attendance refresh failures must preserve prior rows and never imply an empty roster.'
 )

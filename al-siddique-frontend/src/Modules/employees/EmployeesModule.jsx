@@ -40,7 +40,6 @@ const PROVINCES = ['Punjab','Sindh','KPK','Balochistan','Gilgit-Baltistan','AJK'
 const EDU_LEVELS = ['Matric','Intermediate','Diploma','B.Ed','Bachelor','Master','M.Phil','PhD']
 const BANKS = ['HBL','UBL','MCB','NBP','ABL','Bank Alfalah','Meezan Bank','Faysal Bank','JS Bank','Standard Chartered','Other']
 const CONTRACT_TYPES= ['Permanent','Contract','Part-time','Probation','Intern']
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
 const APP_MODULES = [
  { key:'students', label:'Students Module', icon:'users' },
@@ -53,8 +52,6 @@ const APP_MODULES = [
  { key:'paper_gen', label:'Paper Generator', icon:'paper' },
  { key:'settings', label:'Settings', icon:'settings' },
 ]
-
-const SALARY_RECORDS = []
 
 const EMPTY_FORM = {
  name:'', father_name:'', gender:'Male', dob:'', blood_group:'', religion:'Islam',
@@ -878,82 +875,40 @@ function AttendanceTab({ employees=[] }) {
  )
 }
 
-//  Salary Tab 
+//  Salary Tab — configured salary truth only; payment ledger is not yet available
 function SalaryTab({ employees=[] }) {
- const [selectedMonth, setSelectedMonth] = useState('April')
- const [selectedYear, setSelectedYear] = useState('2026')
-
- const records = SALARY_RECORDS.filter(r => r.month === selectedMonth && r.year === parseInt(selectedYear))
- const totalPaid = records.filter(r => r.status==='Paid').reduce((s,r) => s+r.net, 0)
- const pending = records.filter(r => r.status==='Pending').reduce((s,r) => s+r.net, 0)
- const paidCount = records.filter(r => r.status==='Paid').length
+ const configured = employees.filter(emp => Number(emp.salary || 0) > 0)
+ const configuredMonthlyTotal = configured.reduce((sum, emp) => sum + Number(emp.salary || 0), 0)
 
  return (
  <div className="super-module-card" style={{ display:'grid', gap:24 }}>
- <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16 }}>
- <StatCard icon={<Wallet size={22} />} label="Total Paid" value={`Rs.${(totalPaid/1000).toFixed(0)}K`} color={C.green} />
- <StatCard icon={<Clock3 size={22} />} label="Pending Payment" value={`Rs.${(pending/1000).toFixed(0)}K`} color={C.orange} />
- <StatCard icon={<BadgeCheck size={22} />} label="Salaries Paid" value={paidCount} color={C.blue} />
- <StatCard icon={<Percent size={22} />} label="Payment Rate" value={`${records.length ? Math.round((paidCount/records.length)*100) : 0}%`} color={C.gold} />
+ <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:16 }}>
+ <StatCard icon={<Wallet size={22} />} label="Configured Monthly Salary" value={`Rs.${configuredMonthlyTotal.toLocaleString()}`} color={C.green} />
+ <StatCard icon={<BadgeCheck size={22} />} label="Employees With Salary" value={configured.length} color={C.blue} />
+ <StatCard icon={<Clock3 size={22} />} label="Paid This Month" value="Unavailable" color={C.orange} />
+ <StatCard icon={<Percent size={22} />} label="Payment Rate" value="Unavailable" color={C.gold} />
  </div>
 
  <GCard>
- <div className="super-module-card" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:18 }}>
- <h3 style={{ color:C.gold, fontSize:18, margin:0, fontFamily:"'Playfair Display',serif" }}>Salary Sheet</h3>
- <div className="super-module-card" style={{ display:'flex', gap:12 }}>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:8 }}>
- <Lbl>Month</Lbl>
- <Sel value={selectedMonth} onChange={e=>setSelectedMonth(e.target.value)} style={{ width:130 }}>
- {MONTHS.map(m=><option key={m}>{m}</option>)}
- </Sel>
+ <div style={{ padding:14, marginBottom:18, borderRadius:12, background:'color-mix(in srgb, var(--apex-action-highlight) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-highlight) 24%, var(--apex-border-default))', color:C.gold, fontSize:12, fontWeight:700 }}>
+ Payroll payment ledger is not configured. Configured employee salary amounts below are live employee records; paid, pending and payment-rate figures are intentionally not inferred.
  </div>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:8 }}>
- <Lbl>Year</Lbl>
- <Sel value={selectedYear} onChange={e=>setSelectedYear(e.target.value)} style={{ width:100 }}>
- {['2024','2025','2026','2027'].map(y=><option key={y}>{y}</option>)}
- </Sel>
- </div>
- </div>
- </div>
- </GCard>
-
- <GCard style={{ padding:0, overflow:'hidden' }}>
+ <div style={{ overflowX:'auto' }}>
  <table style={{ width:'100%', borderCollapse:'collapse' }}>
- <thead>
- <tr style={{ background:'var(--apex-bg-subtle)', borderBottom:`1px solid ${C.border}` }}>
- {['Employee','Basic Salary','Allowances','Deductions','Net Salary','Status'].map(col => (
- <th key={col} style={{ padding:'13px 15px', textAlign:'left', color:C.gold, fontSize:11, letterSpacing:'0.08em', textTransform:'uppercase' }}>{col}</th>
- ))}
- </tr>
- </thead>
+ <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>{['Employee','Designation','Configured Salary','Payment Status'].map(header => <th key={header} style={{ padding:'13px 15px', textAlign:'left', color:C.muted, fontSize:11, textTransform:'uppercase' }}>{header}</th>)}</tr></thead>
  <tbody>
- {records.length === 0 ? (
- <tr><td colSpan={6} style={{ padding:42, textAlign:'center', color:C.muted }}>No salary records found. Dummy salary data has been removed; generate payroll to populate this sheet.</td></tr>
- ) : records.map((rec, i) => {
- const emp = employees.find(e => e.id === rec.employeeId)
- return (
- <tr key={rec.id} style={{ background:i%2===0?'transparent':'var(--apex-bg-subtle)' }}>
- <td style={{ padding:'13px 15px' }}>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:10 }}>
- <div className="super-module-card" style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,var(--apex-action-primary),var(--apex-action-secondary))', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:900, fontSize:13 }}>
- {emp?.name?.charAt(0) || '?'}
- </div>
- <div>
- <div className="super-module-card" style={{ color:'#fff', fontWeight:600 }}>{emp?.name || 'Unknown'}</div>
- <div className="super-module-card" style={{ color:C.muted, fontSize:11 }}>{emp?.designation}</div>
- </div>
- </div>
- </td>
- <td style={{ padding:'13px 15px', color:C.silver }}>Rs. {rec.basic.toLocaleString()}</td>
- <td style={{ padding:'13px 15px', color:C.green }}>Rs. {rec.allowances.toLocaleString()}</td>
- <td style={{ padding:'13px 15px', color:C.red }}>Rs. {rec.deductions.toLocaleString()}</td>
- <td style={{ padding:'13px 15px', color:C.gold, fontWeight:700 }}>Rs. {rec.net.toLocaleString()}</td>
- <td style={{ padding:'13px 15px' }}><StatusBadge status={rec.status} /></td>
+ {employees.map(emp => (
+ <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}>
+ <td style={{ padding:'13px 15px' }}><div style={{ color:C.silver, fontWeight:700 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.emp_id || `#${emp.id}`}</div></td>
+ <td style={{ padding:'13px 15px', color:C.muted }}>{emp.designation || '—'}</td>
+ <td style={{ padding:'13px 15px', color:C.gold, fontWeight:700 }}>{Number(emp.salary || 0) > 0 ? `Rs. ${Number(emp.salary).toLocaleString()}` : 'Not configured'}</td>
+ <td style={{ padding:'13px 15px', color:C.muted }}>Not tracked</td>
  </tr>
- )
- })}
+ ))}
+ {!employees.length && <tr><td colSpan={4} style={{ padding:28, textAlign:'center', color:C.muted }}>No employee records available.</td></tr>}
  </tbody>
  </table>
+ </div>
  </GCard>
  </div>
  )
