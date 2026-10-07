@@ -218,6 +218,10 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
     let revisionCreated = false
     let revisionNumber = latestRevision.rows[0]?.revision_number || 0
     if (!latestRevision.rowCount || latestRevision.rows[0].content_hash !== revisionHash) {
+      const historicalRevision = await client.query("SELECT revision_number FROM question_revisions WHERE school_id=$1 AND question_master_id=$2 AND content_hash=$3 LIMIT 1", [tenantId, master.id, revisionHash])
+      if (historicalRevision.rowCount) {
+        revisionNumber = Number(latestRevision.rows[0]?.revision_number || historicalRevision.rows[0].revision_number)
+      } else {
       revisionNumber += 1
       await client.query(
         `INSERT INTO question_revisions
@@ -230,6 +234,7 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
         [revisionNumber, userId, tenantId, master.id]
       )
       revisionCreated = true
+      }
     }
 
     if (sourceId) {
