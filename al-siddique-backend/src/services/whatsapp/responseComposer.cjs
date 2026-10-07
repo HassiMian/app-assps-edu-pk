@@ -496,14 +496,11 @@ class WhatsAppResponseComposer {
 
   // ─── 13b. Market Intelligence ──────────────────────────────────────────────
   static _composeMarketIntelligence(data, lang) {
-    if (typeof data === 'string') return data;
-    try {
-      const { argusMarketEngine } = require('../../shared/argus-market-engine.cjs');
-      return argusMarketEngine.composeScenarioMessage(data, lang);
-    } catch {
-      return `Sir, market scenario details received.`;
-    }
+    if (lang === 'URDU_SCRIPT') return 'مارکیٹ یا ٹریڈنگ انٹیلیجنس ASSPS اسکول چینل پر دستیاب نہیں ہے۔';
+    if (lang === 'ENGLISH') return 'Market or trading intelligence is not available on the ASSPS school channel.';
+    return 'Market ya trading intelligence ASSPS school channel par available nahi hai.';
   }
+
 
   // ─── 14. Generic Fallback ─────────────────────────────────────────────────
   static _composeGeneric(data, lang, salutation) {

@@ -21,18 +21,15 @@ const { admissionWorkflowEngine, ADMISSION_STATES } = require('./admissionWorkfl
 const { semanticIntentResolver } = require('../../shared/semantic-intent-resolver.cjs');
 const { contextualEntityMemory } = require('../../shared/contextual-entity-memory.cjs');
 const { safeLearningStore } = require('../../shared/safe-learning-store.cjs');
-const { argusMarketEngine, resolveSymbol } = require('../../shared/argus-market-engine.cjs');
 const { StudentQueryParser } = require('../../shared/entity-extractor.cjs');
 const { ComprehensionEngine } = require('../../shared/comprehension-engine.cjs');
 const { cognitiveKernel } = require('../../shared/cognitive-kernel.cjs');
 const {
-  CANONICAL_OWNER_E164,
   normalizePhoneNumber,
   resolveUserRole,
   isOwner,
-  checkMarketAccess,
-  formatScopeRestrictionResponse
-} = require('../../shared/argus-channel-guard.cjs');
+  formatSchoolScopeRestriction
+} = require('./schoolChannelGuard.cjs');
 
 try {
   const dns = require('dns');
@@ -278,7 +275,7 @@ class WhatsAppRouter {
         forensicTrace.domain = 'DESKTOP';
         forensicTrace.selected_intent = 'DESKTOP_SCOPE_RESTRICTION';
       } else if (['ARGUS', 'MARKET'].includes(cognitiveKernelTrace.comprehensionObject?.DOMAIN)) {
-        denialReply = formatScopeRestrictionResponse(language);
+        denialReply = formatSchoolScopeRestriction(language);
         forensicTrace.market_access_denied = true;
         forensicTrace.argus_invoked = false;
         forensicTrace.domain = cognitiveKernelTrace.comprehensionObject?.DOMAIN || 'MARKET';
@@ -339,16 +336,7 @@ class WhatsAppRouter {
     if (isTaskResetCommand) {
       this.routingStats.tier0++;
       const wasAdmissionActive = (admissionSession.state !== ADMISSION_STATES.IDLE);
-      let hadActiveMktMission = false;
-      try {
-        if (argusMarketEngine.getActiveMission) {
-          const actM = await argusMarketEngine.getActiveMission(fromNumber);
-          hadActiveMktMission = Boolean(actM);
-          await argusMarketEngine.closeActiveMission(fromNumber);
-        }
-      } catch (e) {}
-
-      const hadActiveTask = wasAdmissionActive || hadActiveMktMission || Boolean(session.currentStudent || session.lastStudent || session.activeMission);
+      const hadActiveTask = wasAdmissionActive || Boolean(session.currentStudent || session.lastStudent || session.activeMission);
 
       admissionWorkflowEngine.resetSession(fromNumber);
       delete session.currentStudent;
@@ -407,7 +395,7 @@ class WhatsAppRouter {
         ? `وعلیکم السلام! میں جارویس ہوں۔ بتائیں آج اسکول یا مارکیٹ سے متعلق کیا کام کرنا ہے؟`
         : (language === 'ENGLISH')
           ? `Hello Sir! JARVIS here. How can I assist you with school operations or market intelligence today?`
-          : `Walaikum Assalam Sir! JARVIS at your service. Batayein aaj school management ya market analysis me kya help chahiye?`;
+          : `Walaikum Assalam Sir! JARVIS at your service. Batayein aaj school management me kya help chahiye?`;
 
       missionManager.transition(mission.missionId, 'FINAL_RESPONSE_SENT', {
         intent: 'GREETING',
@@ -436,64 +424,23 @@ class WhatsAppRouter {
     // Hard Boundary Check: NEVER allow market queries to touch admission/school data
 
     if (isMarketTradingDomain) {
-      const marketAccess = checkMarketAccess(fromNumber);
-      if (!marketAccess.allowed) {
-        // Strict Domain Firewall: DENY non-owner access to ARGUS!
-        // Invariant: NON_OWNER_ARGUS_INVOCATIONS = 0
-        this.routingStats.tier0++;
-        forensicTrace.selected_intent = 'SCHOOL_SCOPE_RESTRICTION';
-        forensicTrace.domain = 'SCHOOL';
-        forensicTrace.target_agent = 'SCHOOL_ASSISTANT';
-        forensicTrace.argus_invoked = false;
-        forensicTrace.market_access_denied = true;
-        forensicTrace.admission_workflow_invoked = false;
-        forensicTrace.school_data_engine_invoked = false;
-
-        const scopeReply = formatScopeRestrictionResponse(language);
-
-        missionManager.transition(mission.missionId, 'FINAL_RESPONSE_SENT', {
-          intent: 'SCHOOL_SCOPE_RESTRICTION',
-          finalResponseText: scopeReply
-        });
-        missionManager.markDelivered(fromNumber, mission.missionId);
-        return { reply: scopeReply, durationMs: Date.now() - startTime, missionId: mission.missionId, forensicTrace };
-      }
-
-      this.routingStats.modelPlanned++;
-      forensicTrace.argus_invoked = true;
-      // Hard Domain Switch Rule: Suspend / abandon any stale admission workflow
-      if (admissionSession.state === ADMISSION_STATES.COLLECTING || admissionSession.state === ADMISSION_STATES.PREVIEW) {
-        admissionWorkflowEngine.abandonSession(fromNumber, 'DOMAIN_SWITCH_TO_MARKET');
-        forensicTrace.mission_cancelled = true;
-      }
-
-      forensicTrace.selected_intent = 'MARKET_INTELLIGENCE';
-      forensicTrace.domain = 'MARKET';
-      forensicTrace.target_agent = 'ARGUS';
+      this.routingStats.tier0++;
+      forensicTrace.selected_intent = 'SCHOOL_SCOPE_RESTRICTION';
+      forensicTrace.domain = 'SCHOOL';
+      forensicTrace.target_agent = 'SCHOOL_ASSISTANT';
+      forensicTrace.market_access_denied = true;
+      forensicTrace.argus_invoked = false;
       forensicTrace.admission_workflow_invoked = false;
-
-      // ARGUS Handoff Contract: clean input without school/admission candidate pollution
-      const marketResult = await argusMarketEngine.processMarketQuestion(rawText, language, { userId: CANONICAL_OWNER_E164 });
-      let marketReply = marketResult.text || '';
-      if (marketResult.mission) {
-        session.activeMission = marketResult.mission.missionId;
-        forensicTrace.market_mission_id = marketResult.mission.missionId;
-      }
-      if (marketResult.temporalIntent) {
-        forensicTrace.temporal_mode = marketResult.temporalIntent.temporalMode;
-      }
-
-      // Response Transmission Firewall (Enforcing)
-      marketReply = this.enforceResponseFirewall('MARKET', marketReply, language) || marketReply;
-
+      forensicTrace.school_data_engine_invoked = false;
+      const scopeReply = formatSchoolScopeRestriction(language);
       missionManager.transition(mission.missionId, 'FINAL_RESPONSE_SENT', {
-        intent: 'MARKET_INTELLIGENCE',
-        finalResponseText: marketReply,
-        data: marketResult
+        intent: 'SCHOOL_SCOPE_RESTRICTION',
+        finalResponseText: scopeReply
       });
       missionManager.markDelivered(fromNumber, mission.missionId);
-      return { reply: marketReply, durationMs: Date.now() - startTime, missionId: mission.missionId, forensicTrace };
+      return { reply: scopeReply, durationMs: Date.now() - startTime, missionId: mission.missionId, forensicTrace };
     }
+
 
     // Mission Contradiction & User Intent Correction Detector (Sections 4, 5, 6)
     const extractedCandidate = admissionWorkflowEngine.extractCandidateFields(rawText);
@@ -1574,13 +1521,10 @@ class WhatsAppRouter {
 
         else if (semanticRes.intent === 'MARKET_INTELLIGENCE') {
           this.routingStats.tier0++;
-          const result = await argusMarketEngine.processMarketQuestion(rawText, language, { userId: fromNumber });
-          const reply = result.text || '';
-
+          const reply = formatSchoolScopeRestriction(language);
           missionManager.transition(mission.missionId, 'FINAL_RESPONSE_SENT', {
-            intent: 'MARKET_INTELLIGENCE',
-            finalResponseText: reply,
-            data: result
+            intent: 'SCHOOL_SCOPE_RESTRICTION',
+            finalResponseText: reply
           });
           missionManager.markDelivered(fromNumber, mission.missionId);
           return { reply, durationMs: Date.now() - startTime, missionId: mission.missionId };
@@ -1886,30 +1830,22 @@ class WhatsAppRouter {
         this.routingStats.tier0++;
       }
 
-      // 7b. ARGUS Market Intelligence Route (Escape School-Only Routing Cage)
-      // Kernel-authoritative: uses kernel domain when available
+      // Market/trading is deliberately out of scope for the ASSPS school channel.
       const isMarketTradingQuery = !isAcademicAchievement && (
         (isKernelAuthoritativeDomain && (kernelDomain === 'ARGUS' || kernelDomain === 'MARKET') && kernelComp?.INTENT === 'MARKET_INTELLIGENCE') ||
-        (!kernelDomain && (
-          /\b(xau|xauusd|forex|fx|eurusd|gbpusd|usdjpy|dxy|dollar|crude|oil|crypto|bitcoin|btc|market|trading|trade|setup|signal|signals|trend|levels?|pullback|entry|invalidation|cpi|fomc|bounce|resistance|support)\b/i.test(lower) ||
-          (/\b(gold|sona|sone|sonay)\b/i.test(lower) && !isAcademicAchievement) ||
-          /سونا|سونے|گولڈ|مارکیٹ|ٹریڈنگ|سیٹ\s*اپ|سگنل|تجزیہ|لیولز|خرید|فروخت|سیل|بائے/i.test(rawText)
-        ) && !/\b(student|students|bachay|bachon|school|class|attendance|dakhla|fee|fees|challan|balance|dues|pending|arrears|medal|award)\b/i.test(lower))
+        (!kernelDomain && /\b(xau|xauusd|forex|market|trading|trade|signal|crypto|bitcoin|btc|gold)\b/i.test(lower))
       );
 
       if (isMarketTradingQuery) {
-        this.routingStats.modelPlanned++;
-        const result = await argusMarketEngine.processMarketQuestion(rawText, language, { userId: fromNumber });
-        const marketReply = result.text || '';
-
+        const reply = formatSchoolScopeRestriction(language);
         missionManager.transition(mission.missionId, 'FINAL_RESPONSE_SENT', {
-          intent: 'MARKET_INTELLIGENCE',
-          finalResponseText: marketReply,
-          data: result
+          intent: 'SCHOOL_SCOPE_RESTRICTION',
+          finalResponseText: reply
         });
         missionManager.markDelivered(fromNumber, mission.missionId);
-        return { reply: marketReply, durationMs: Date.now() - startTime, missionId: mission.missionId };
+        return { reply, durationMs: Date.now() - startTime, missionId: mission.missionId };
       }
+
 
       // I. Student Record Search (by name, GR, roll number, profile)
       else if (

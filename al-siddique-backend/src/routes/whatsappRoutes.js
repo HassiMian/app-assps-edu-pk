@@ -89,33 +89,6 @@ async function sendWhatsAppMessage(to, text) {
   }
 }
 
-// =========================================================================
-// ARGUS 7.4.1 / 7.5 — Continuous Market Surveillance & Monitoring Worker
-// =========================================================================
-const {
-  CANONICAL_OWNER_E164,
-  validateMarketAlertRecipient
-} = require('../shared/argus-channel-guard.cjs')
-const { argusContinuousScanner } = require('../shared/argus-continuous-scanner.cjs')
-const { argusMonitoringWorker } = require('../shared/argus-monitoring-worker.cjs')
-
-// Wire Owner-Only notification hook with firewall protection: strictly to Canonical Owner
-const argusNotificationHook = async (recipient, text) => {
-  if (!validateMarketAlertRecipient(recipient)) {
-    console.error(`[ARGUS_FIREWALL] Blocked market notification to unauthorized recipient: ${recipient}`)
-    return false
-  }
-  return sendWhatsAppMessage(CANONICAL_OWNER_E164, text)
-}
-
-try {
-  argusContinuousScanner.notificationHook = argusNotificationHook
-  argusContinuousScanner.start().catch?.(err => console.error('[ARGUS Continuous Scanner Startup Error]', err?.message))
-  argusMonitoringWorker.start().catch?.(err => console.error('[ARGUS Monitoring Worker Startup Error]', err?.message))
-  console.log(`[ARGUS_STARTUP] Continuous Market Scanner & Monitoring Worker started for Canonical Owner (${CANONICAL_OWNER_E164})`)
-} catch (err) {
-  console.error('[ARGUS Worker Boot Error]', err.message)
-}
 
 /**
  * Durable PostgreSQL Idempotency Layer

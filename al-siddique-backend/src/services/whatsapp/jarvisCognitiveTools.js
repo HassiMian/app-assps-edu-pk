@@ -1,29 +1,36 @@
 /**
  * JARVIS 5.0 Cognitive Tools Suite
- * Direct Authoritative PostgreSQL Integration for Al-Siddique Smart School OS (apexos)
- * Fully Unrestricted, Production-Hardened & Fault-Tolerant
+ * Canonical tenant-scoped PostgreSQL integration for Al-Siddique Smart School OS (apexos)
+ * Production-hardened, fail-closed & auditable
  */
 
-const { Pool } = require('pg');
+const { pool } = require('../../config/database');
 const { execFile } = require('child_process');
 
-const pool = new Pool({
-  host: process.env.DB_HOST || '127.0.0.1',
-  port: parseInt(process.env.DB_PORT || '5432', 10),
-  database: process.env.DB_NAME || 'apexos',
-  user: process.env.DB_USER || 'apexos_user',
-  password: process.env.DB_PASSWORD || 'ApexDB@2026!',
-  max: 15,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 5000,
-});
+function requireWhatsAppSchoolId(env = process.env) {
+  const schoolId = Number.parseInt(String(env.WHATSAPP_SCHOOL_ID || ''), 10);
+  if (!Number.isInteger(schoolId) || schoolId <= 0) {
+    const error = new Error('WHATSAPP_SCHOOL_ID must be explicitly configured for the school channel.');
+    error.code = 'WHATSAPP_SCHOOL_CONTEXT_REQUIRED';
+    throw error;
+  }
+  return schoolId;
+}
 
 async function queryDb(text, params = []) {
+  const schoolId = requireWhatsAppSchoolId();
   const client = await pool.connect();
   try {
-    await client.query("SET app.is_super_admin = 'true'; SET app.tenant_id = '1';");
+    await client.query('BEGIN');
+    await client.query("SELECT set_config('app.rls_enabled', 'true', true)");
+    await client.query("SELECT set_config('app.is_super_admin', 'false', true)");
+    await client.query("SELECT set_config('app.tenant_id', $1, true)", [String(schoolId)]);
     const res = await client.query(text, params);
+    await client.query('COMMIT');
     return res;
+  } catch (err) {
+    try { await client.query('ROLLBACK'); } catch {}
+    throw err;
   } finally {
     client.release();
   }
@@ -753,47 +760,14 @@ async function manageClassesAndSettings({ action = 'list_classes', data = {} } =
   }
 }
 
-// ─── 8. Super-Admin Safe & Unrestricted SQL Execution ────────────────────────
+// ─── 8. Direct SQL execution boundary ───────────────────────────────────────
 
-async function executeSaasSqlQuery({ sqlQuery } = {}) {
-  try {
-    let q = String(sqlQuery || '').trim();
-    if (!q) return { success: false, error: 'SQL query cannot be empty' };
-
-    // Auto-append RETURNING * for UPDATE and DELETE queries if not already present
-    // so the LLM always receives the actual affected records in tool memory!
-    const isUpdateOrDelete = /^\s*(UPDATE|DELETE)\s+/i.test(q);
-    const hasReturning = /\bRETURNING\b/i.test(q);
-    if (isUpdateOrDelete && !hasReturning) {
-      if (q.endsWith(';')) q = q.slice(0, -1).trim();
-      q += ' RETURNING *;';
-    }
-
-    const isSelect = /^\s*(SELECT|WITH)\s+/i.test(q);
-    const res = await queryDb(q);
-
-    if (isSelect) {
-      return {
-        success: true,
-        type: 'SELECT',
-        rowCount: res.rowCount,
-        rows: res.rows.slice(0, 50)
-      };
-    } else {
-      return {
-        success: true,
-        type: 'MUTATION',
-        rowCount: res.rowCount,
-        command: res.command,
-        affectedRows: res.rows ? res.rows.slice(0, 50) : [],
-        rows: res.rows ? res.rows.slice(0, 50) : []
-      };
-    }
-  } catch (err) {
-    return { success: false, error: err.message };
-  }
+async function executeSaasSqlQuery() {
+  return {
+    success: false,
+    error: 'Direct SQL execution is disabled in the ASSPS school channel. Use scoped domain tools.'
+  };
 }
-
 // ─── 9. Database Schema Introspection Tool ──────────────────────────────────
 
 async function inspectDatabaseSchema({ action = 'list_tables', tableName, limit = 3 } = {}) {
@@ -830,16 +804,7 @@ async function inspectDatabaseSchema({ action = 'list_tables', tableName, limit 
     }
 
     if (action === 'sample_data') {
-      if (!tableName) return { success: false, error: 'tableName required for sample_data' };
-      const safeTable = tableName.trim().replace(/[^a-zA-Z0-9_]/g, '');
-      const lim = Math.min(Math.max(parseInt(limit, 10) || 3, 1), 10);
-      const res = await queryDb(`SELECT * FROM "${safeTable}" LIMIT ${lim};`);
-      return {
-        success: true,
-        table: safeTable,
-        rowCount: res.rowCount,
-        rows: res.rows
-      };
+      return { success: false, error: 'Sample-data introspection is disabled in the ASSPS school channel.' };
     }
 
     return { success: false, error: `Unknown introspection action: ${action}` };
@@ -1083,29 +1048,10 @@ async function manageExpensesAndAccounts({ action = 'list', category, amount, de
   }
 }
 
-// ─── 16. Market Intelligence (ARGUS) ────────────────────────────────────────
-
-async function getMarketIntelligence({ symbol = 'XAUUSD' } = {}) {
-  try {
-    const sym = (symbol || 'XAUUSD').toUpperCase();
-    return {
-      success: true,
-      asset: sym,
-      price: sym.includes('XAU') ? '2654.50' : '278.40',
-      change_24h: '+0.45%',
-      trend: 'BULLISH_CONSOLIDATION',
-      session: 'LONDON_NEWYORK_OVERLAP',
-      note: 'Spot Gold consolidating near key technical resistance. Data verified via ARGUS Market Intelligence.'
-    };
-  } catch (err) {
-    return { success: false, error: err.message };
-  }
-}
-
 // ─── 17. Assessment Studio & Question Bank Engine ───────────────────────────
 
-const GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY || 'AIzaSyCyOGItpsPEHI4_57aCa4TncjEY2moXOTk';
-const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || 'sk-7bbc46d205f545adb720eecd981c18c9';
+const GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
+const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || '';
 
 async function callAiJson(systemPrompt, userPrompt) {
   // 1. Try DeepSeek V4 Pro first
@@ -1546,17 +1492,13 @@ module.exports = {
   getOrManageTimetable,
   manageStudent,
   manageClassesAndSettings,
-  executeSaasSqlQuery,
-  inspectDatabaseSchema,
   dispatchDesktopTask,
   getOrManageDailyDiary,
   getOrManageStaff,
   getOrManageNotices,
   manageAdmissionsAndFamilies,
   manageExpensesAndAccounts,
-  getMarketIntelligence,
   generateAssessmentPaper,
   parseAndIngestPaperToVault,
   getPaperFromVault,
-  queryDb
 };

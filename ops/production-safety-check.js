@@ -1891,6 +1891,83 @@ assertNotContains(
 
 // Route handlers are runtime request code, not a migration engine.
 // Any future domain schema evolution must be added under al-siddique-backend/migrations.
+
+assertContains(
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  "router.post('/webhook'",
+  'mounted WhatsApp integration must have canonical route source in the repository.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/schoolChannelGuard.cjs',
+  'WHATSAPP_OWNER_NUMBER',
+  'WhatsApp privileged identities must come from production configuration, not source literals.'
+)
+
+for (const whatsappFile of [
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  'al-siddique-backend/src/services/whatsapp/whatsappRouter.js',
+  'al-siddique-backend/src/services/whatsapp/whatsappRouter.cjs',
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js',
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  'al-siddique-backend/src/services/whatsapp/responseComposer.js',
+  'al-siddique-backend/src/services/whatsapp/responseComposer.cjs',
+]) {
+  assertNotContains(
+    whatsappFile,
+    /argus-market-engine|argus-channel-guard|argusContinuousScanner|argusMonitoringWorker|argusMarketEngine/,
+    'ASSPS WhatsApp runtime must not execute or boot ARGUS/trading engines.'
+  )
+  assertNotContains(
+    whatsappFile,
+    /AIza[0-9A-Za-z_-]{20,}|sk-[0-9A-Za-z_-]{20,}/,
+    'WhatsApp/JARVIS provider credentials must never be embedded in source.'
+  )
+  assertNotContains(
+    whatsappFile,
+    /\b92\d{10}\b|\b03\d{9}\b/,
+    'WhatsApp privileged phone identities must never be embedded in source.'
+  )
+}
+
+assertNotContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js',
+  /UNRESTRICTED[^\n]*SUPER-USER|100% UNRESTRICTED|execute_saas_sql_query|inspect_database_schema/,
+  'school assistant must not advertise unrestricted authority or direct database escape hatches.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js',
+  "process.env.GOOGLE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || ''",
+  'WhatsApp cognitive core must use environment-only Gemini credentials.'
+)
+
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  "require('../../config/database')",
+  'WhatsApp cognitive tools must use the canonical production database pool.'
+)
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  'WHATSAPP_SCHOOL_ID',
+  'WhatsApp cognitive tools must require explicit school context.'
+)
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  "set_config('app.is_super_admin', 'false', true)",
+  'WhatsApp database access must not enable super-admin RLS bypass.'
+)
+assertNotContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  /new\s+Pool\s*\(|DB_PASSWORD\s*\|\||app\.is_super_admin\s*=\s*'true'|app\.tenant_id\s*=\s*'1'/,
+  'WhatsApp tools must not create fallback DB credentials or force a default tenant/super-admin context.'
+)
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  'Direct SQL execution is disabled in the ASSPS school channel',
+  'direct SQL escape hatch must fail closed in the school channel.'
+)
+
 const routeDir = path.join(repoRoot, 'al-siddique-backend/src/routes')
 for (const fileName of fs.readdirSync(routeDir).filter(name => name.endsWith('.js'))) {
   const relativePath = `al-siddique-backend/src/routes/${fileName}`
