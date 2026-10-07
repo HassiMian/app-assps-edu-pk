@@ -250,6 +250,24 @@ assertNotContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  /catch \(err\)[\s\S]{0,180}setSourceRecipients\(\[\]\)/,
+  'notification source failures must preserve the last known-good recipient list.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  /catch \(err\)[\s\S]{0,220}setLog\(\[\]\)/,
+  'notification history failures must preserve the last known-good provider log.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
+  'const [sourceError, setSourceError] = useState',
+  'notification source availability must be represented separately from empty recipient or history data.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/ParentsPortal.jsx',
   /Portal notification inbox load error:[\s\S]{0,140}setMessages\(\[\]\)/,
   'parent portal notification source failures must preserve the last known-good inbox.'

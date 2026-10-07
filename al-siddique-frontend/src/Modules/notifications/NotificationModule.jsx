@@ -133,6 +133,7 @@ export default function NotificationModule() {
  const [sourceRecipients, setSourceRecipients] = useState([])
  const [sourceLoading, setSourceLoading] = useState(false)
  const [sourceMessage, setSourceMessage] = useState('')
+ const [sourceError, setSourceError] = useState('')
  const [schoolName, setSchoolName] = useState('')
 
  useEffect(() => {
@@ -172,6 +173,7 @@ export default function NotificationModule() {
  async function loadSourceData() {
  setSourceLoading(true)
  setSourceMessage('')
+ setSourceError('')
  try {
  if (activeTab === 'log') {
  const res = await api.get(`${API_BASE}/history`)
@@ -200,9 +202,7 @@ export default function NotificationModule() {
  setSourceMessage(res.data?.message || `${rows.length} source-backed recipients loaded.`)
  } catch (err) {
  if (cancelled) return
- setSourceRecipients([])
- if (activeTab === 'log') setLog([])
- setSourceMessage(err?.response?.data?.message || 'Source-backed data load nahi ho saka.')
+ setSourceError(err?.response?.data?.message || 'Source-backed data could not be refreshed. Existing loaded data was preserved.')
  } finally {
  if (!cancelled) setSourceLoading(false)
  }
@@ -408,6 +408,12 @@ export default function NotificationModule() {
  </button>
  ))}
  </div>
+
+ {sourceError && (
+ <div className="super-module-card" style={{ ...card, marginBottom:16, padding:'12px 14px', color:'var(--apex-action-danger)', border:'1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)' }}>
+ {sourceError}
+ </div>
+ )}
 
  {/*  Log Tab  */}
  {activeTab === 'log' ? (
