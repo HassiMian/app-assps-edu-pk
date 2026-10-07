@@ -18,6 +18,7 @@ export default function SearchableStudentPicker({
   const [classFilter, setClassFilter] = useState(classFilterProp || '')
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [loadError, setLoadError] = useState('')
   const wrapRef = useRef(null)
 
   const activeClassFilter = classFilterProp !== undefined ? classFilterProp : classFilter
@@ -26,12 +27,13 @@ export default function SearchableStudentPicker({
   useEffect(() => {
     let cancelled = false
     setLoading(true)
+    setLoadError('')
     const params = { active: 'true' }
     if (activeClassFilter) params.class = activeClassFilter
     if (query.trim().length >= 2) params.search = query.trim()
     api.get('/api/students', { params })
-      .then((r) => { if (!cancelled) setStudents(r.data?.data || []) })
-      .catch(() => { if (!cancelled) setStudents([]) })
+      .then((r) => { if (!cancelled) { setStudents(r.data?.data || []); setLoadError('') } })
+      .catch((err) => { if (!cancelled) { setStudents([]); setLoadError(err.response?.data?.message || 'Student search is temporarily unavailable.') } })
       .finally(() => { if (!cancelled) setLoading(false) })
     return () => { cancelled = true }
   }, [query, activeClassFilter])
@@ -141,7 +143,10 @@ export default function SearchableStudentPicker({
             {loading && (
               <div style={{ padding: 12, color: C.muted, fontSize: 12 }}>Searching…</div>
             )}
-            {!loading && filtered.length === 0 && (
+            {!loading && loadError && (
+              <div style={{ padding: 12, color: C.red, fontSize: 12 }}>{loadError}</div>
+            )}
+            {!loading && !loadError && filtered.length === 0 && (
               <div style={{ padding: 12, color: C.muted, fontSize: 12 }}>No students found</div>
             )}
             {filtered.map((s) => (

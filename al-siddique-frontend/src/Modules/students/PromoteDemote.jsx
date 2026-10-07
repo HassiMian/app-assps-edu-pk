@@ -22,6 +22,7 @@ export default function PromoteDemote() {
  const [saving, setSaving] = useState(false)
  const [selectedIds, setSelectedIds] = useState([])
  const [message, setMessage] = useState('')
+ const [loadError, setLoadError] = useState('')
  const [targetClass, setTargetClass] = useState(activeClasses[0]?.name || '')
  const [targetSection, setTargetSection] = useState(activeClasses[0]?.sections?.[0] || '')
 
@@ -30,7 +31,7 @@ export default function PromoteDemote() {
 
  useEffect(() => {
  let cancelled = false
- api.get('/api/students').then(r => { if (!cancelled) setStudents(r.data?.data || []) }).catch(() => { if (!cancelled) setStudents([]) }).finally(() => { if (!cancelled) setLoading(false) })
+ api.get('/api/students').then(r => { if (!cancelled) { setStudents(r.data?.data || []); setLoadError('') } }).catch(err => { if (!cancelled) { setStudents([]); setLoadError(err.response?.data?.message || 'Student roster could not be loaded for promotion/demotion.') } }).finally(() => { if (!cancelled) setLoading(false) })
  return () => { cancelled = true }
  }, [])
 
@@ -112,10 +113,11 @@ export default function PromoteDemote() {
  <span style={{ color:C.muted,alignSelf:'center',fontSize:13 }}>{selectedIds.length} selected</span>
  </div>
  {message&&<div style={{ padding:14,borderRadius:14,background:message.includes('success')||message.includes('moved')?'color-mix(in srgb,var(--apex-action-success) 8%,transparent)':'color-mix(in srgb,var(--apex-action-danger) 8%,transparent)',border:'1px solid var(--apex-border-default)',color:message.includes('success')||message.includes('moved')?C.green:C.red }}>{message}</div>}
+ {loadError&&<div style={{ padding:14,borderRadius:14,border:'1px solid rgba(255,55,95,0.3)',color:C.red }}>{loadError}</div>}
 
  <div style={{ overflowX:'auto' }}>{loading?<div style={{ padding:40,textAlign:'center',color:C.muted }}>Loading students…</div>:<table style={{ width:'100%',borderCollapse:'collapse' }}>
  <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}><th style={{ padding:'14px 16px' }}><input type="checkbox" checked={selectedIds.length===students.length&&students.length>0} onChange={toggleAll}/></th>{['Student','GR No','Class','Section'].map(label=><th key={label} style={{ padding:'14px 16px',textAlign:'left',fontSize:12,color:C.muted,textTransform:'uppercase' }}>{label}</th>)}</tr></thead>
- <tbody>{students.map((s,index)=><tr key={s.id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent' }}><td style={{ padding:'14px 16px' }}><input type="checkbox" checked={selectedIds.includes(s.id)} onChange={()=>toggleStudent(s.id)}/></td><td style={{ padding:'14px 16px' }}>{s.name}</td><td style={{ padding:'14px 16px',color:'var(--apex-action-primary)' }}>{s.gr_number}</td><td style={{ padding:'14px 16px' }}>{s.class}</td><td style={{ padding:'14px 16px' }}>{s.section}</td></tr>)}{!students.length&&<tr><td colSpan={5} style={{ padding:28,textAlign:'center',color:C.muted }}>No students found.</td></tr>}</tbody>
+ <tbody>{students.map((s,index)=><tr key={s.id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent' }}><td style={{ padding:'14px 16px' }}><input type="checkbox" checked={selectedIds.includes(s.id)} onChange={()=>toggleStudent(s.id)}/></td><td style={{ padding:'14px 16px' }}>{s.name}</td><td style={{ padding:'14px 16px',color:'var(--apex-action-primary)' }}>{s.gr_number}</td><td style={{ padding:'14px 16px' }}>{s.class}</td><td style={{ padding:'14px 16px' }}>{s.section}</td></tr>)}{!students.length&&!loadError&&<tr><td colSpan={5} style={{ padding:28,textAlign:'center',color:C.muted }}>No students found.</td></tr>}</tbody>
  </table>}</div>
  </div>
  </div>
