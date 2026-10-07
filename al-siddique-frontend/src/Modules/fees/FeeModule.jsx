@@ -43,8 +43,16 @@ const normalizeStudent = (item) => ({
  familyCode: item.family_code || item.familyCode || '—',
 })
 
+const resolveStoredChallanTotal = item => {
+ const gross = Math.max(0, Number(item?.gross_total || 0))
+ const legacyAmount = Math.max(0, Number(item?.amount || 0))
+ return gross > 0 || legacyAmount <= 0 ? gross : legacyAmount
+}
+
 const normalizeChallan = (item, students = []) => {
  const student = students.find(s => Number(s.id) === Number(item.student_id))
+ const total = resolveStoredChallanTotal(item)
+ const paid = Math.max(0, Number(item.paid_amount || 0))
  return {
  id: item.id,
  voucherNo: item.challan_no || item.voucherNo || '',
@@ -63,9 +71,9 @@ const normalizeChallan = (item, students = []) => {
  previousArrears: Number(item.previous_arrears || 0),
  discount: Number(item.discount || 0),
  lateFee: Number(item.late_fee || 0),
- total: Number(item.gross_total ?? item.amount ?? 0),
- remainingBalance: Number(item.remaining_balance ?? Math.max(0, Number(item.amount || 0) - Number(item.paid_amount || 0))),
- paid: Number(item.paid_amount || 0),
+ total,
+ remainingBalance: Math.max(0, total - paid),
+ paid,
  status: item.status ? `${item.status.charAt(0).toUpperCase()}${item.status.slice(1)}` : 'Unpaid',
  dueDate: item.due_date || '',
  paidDate: item.paid_date || null,
@@ -1192,7 +1200,12 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
  }
  const openPayment = challan => {
  setPaymentTarget(challan)
- setPaymentForm({ paid_amount:String(Math.max(0, Number(challan.total || 0) - Number(challan.paid || 0))), payment_mode:'cash', discount:'0', payment_note:'' })
+ setPaymentForm({
+ paid_amount:String(Math.max(0, Number(challan.total || 0) - Number(challan.paid || 0))),
+ payment_mode:'cash',
+ discount:String(Math.max(0, Number(challan.discount || 0))),
+ payment_note:'',
+ })
  setActionMessage('')
  }
  const openHistory = async (challan) => {
@@ -1244,7 +1257,8 @@ function ViewChallans({ challans, classOptions, sectionOptions = [], onPrint, on
  const savePayment = async () => {
  if (!paymentTarget) return
  const discount = Math.max(0, Number(paymentForm.discount || 0))
- const baseTotal = Math.max(0, Number(paymentTarget.monthlyFee || 0) + Number(paymentTarget.previousArrears || 0))
+ const existingDiscount = Math.max(0, Number(paymentTarget.discount || 0))
+ const baseTotal = Math.max(0, Number(paymentTarget.total || 0) + existingDiscount)
  const payable = Math.max(0, baseTotal - discount)
  const alreadyPaid = Math.max(0, Number(paymentTarget.paid || 0))
  const receivedNow = Math.max(0, Number(paymentForm.paid_amount || 0))

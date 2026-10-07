@@ -385,6 +385,18 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/routes/feeRoutes.js',
+  'const currentPayable = storedGross > 0 || legacyAmount <= 0 ? storedGross : legacyAmount',
+  'fee payment must honor stored challan payable totals for legacy rows with monthly_fee=0.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  'remainingBalance: Math.max(0, total - paid)',
+  'fee UI must derive remaining balance from the normalized stored challan total.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/feeRoutes.js',
   'remaining_balance = GREATEST($5::numeric - $1::numeric, 0::numeric)',
   'fee payment SQL must type numeric bind arithmetic explicitly so PostgreSQL cannot reject payment writes as ambiguous.'
 )

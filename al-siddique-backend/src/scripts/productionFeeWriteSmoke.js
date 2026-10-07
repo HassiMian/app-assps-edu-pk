@@ -47,7 +47,7 @@ async function main() {
       `INSERT INTO fee_challans (
         school_id, student_id, challan_no, month, year, amount, monthly_fee,
         previous_arrears, paid_amount, discount, gross_total, status
-       ) VALUES ($1,$2,$3,'October',2026,100,100,0,0,0,100,'unpaid')
+       ) VALUES ($1,$2,$3,'October',2026,5300,0,0,0,0,5300,'unpaid')
        RETURNING id`,
       [schoolId, studentId, `SMK-${stamp}`],
     )
@@ -57,7 +57,7 @@ async function main() {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        paid_amount: 100,
+        paid_amount: 5300,
         discount: 0,
         payment_mode: 'cash',
         payment_note: 'automated synthetic fee write smoke',
@@ -81,11 +81,11 @@ async function main() {
 
     assert(verify.rowCount === 1, 'Synthetic challan disappeared before verification.')
     assert(String(verify.rows[0].status) === 'paid', 'Synthetic challan was not marked paid.')
-    assert(Number(verify.rows[0].paid_amount) === 100, 'Synthetic challan paid_amount mismatch.')
+    assert(Number(verify.rows[0].paid_amount) === 5300, 'Synthetic legacy challan paid_amount mismatch.')
     assert(Number(verify.rows[0].remaining_balance) === 0, 'Synthetic challan remaining balance mismatch.')
     assert(ledger.rowCount === 1, 'Synthetic payment ledger entry was not created.')
 
-    console.log(`PRODUCTION_FEE_WRITE_SMOKE_PASS school=${schoolId}`)
+    console.log(`PRODUCTION_FEE_WRITE_SMOKE_PASS school=${schoolId} legacy_monthly_fee_zero=true`)
   } finally {
     if (challanId) await client.query('DELETE FROM fee_payment_transactions WHERE challan_id=$1', [challanId]).catch(() => {})
     if (challanId) await client.query('DELETE FROM fee_challans WHERE id=$1', [challanId]).catch(() => {})

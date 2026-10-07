@@ -1055,7 +1055,7 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
     await client.query('BEGIN')
     await applyTenantContext(client)
     const rowResult = await client.query(`
-      SELECT id, student_id, school_id, amount, monthly_fee, previous_arrears, paid_amount, discount
+      SELECT id, student_id, school_id, amount, monthly_fee, previous_arrears, gross_total, paid_amount, discount
       FROM fee_challans
       WHERE id = $1 AND school_id = $2
       FOR UPDATE
@@ -1067,7 +1067,13 @@ router.put('/:id/pay', protect, adminOnly, async (req, res) => {
     }
 
     const current = rowResult.rows[0]
-    const baseTotal = Math.max(0, Number(current.monthly_fee ?? current.amount ?? 0) + Number(current.previous_arrears || 0))
+    const storedGross = Math.max(0, Number(current.gross_total || 0))
+    const legacyAmount = Math.max(0, Number(current.amount || 0))
+    const existingDiscount = Math.max(0, Number(current.discount || 0))
+    // Payment must honor the challan total that was actually issued. Legacy rows may
+    // have monthly_fee=0 while amount/gross_total still carries the real payable.
+    const currentPayable = storedGross > 0 || legacyAmount <= 0 ? storedGross : legacyAmount
+    const baseTotal = Math.max(0, currentPayable + existingDiscount)
     const previousPaid = Math.max(0, Number(current.paid_amount || 0))
     if (discount > baseTotal) {
       await client.query('ROLLBACK')
