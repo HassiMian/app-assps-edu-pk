@@ -56,6 +56,31 @@ const canUsePaperAi = (req, res, next) => {
 }
 
 
+async function ensurePaperVaultSchema() {
+  const result = await pool.query(`
+    SELECT
+      to_regclass('public.paper_vault') AS table_name,
+      (
+        SELECT COUNT(*)::int
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'paper_vault'
+          AND column_name IN (
+            'school_id','owner_user_id','name','class_name','section','subject_name',
+            'status','revision','payload','created_at','updated_at','deleted_at'
+          )
+      ) AS required_columns
+  `)
+  const row = result.rows?.[0] || {}
+  if (!row.table_name || Number(row.required_columns || 0) < 12) {
+    const err = new Error('Paper Vault schema is not initialized. Apply migration 020_paper_vault_schema before serving vault workflows.')
+    err.code = 'PAPER_VAULT_SCHEMA_NOT_READY'
+    err.status = 503
+    throw err
+  }
+  return true
+}
+
 const PAPER_ADMIN_ROLES = new Set(['super_admin', 'admin', 'principal'])
 function isPaperAdmin(req) {
   return PAPER_ADMIN_ROLES.has(String(req.user?.role || '').toLowerCase())
@@ -226,6 +251,7 @@ void hydrateJobsFromDb().catch((err) => {
 // Teachers see/edit only their own papers; admins/principals can inspect the school library.
 router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   try {
+    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     if (!schoolId && String(req.user?.role || '').toLowerCase() !== 'super_admin') {
       return res.status(403).json({ success: false, message: 'School context is required.' })
@@ -249,13 +275,15 @@ router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 
       papers: result.rows.map(serializeVaultPaper),
     })
   } catch (err) {
-    console.error('Paper vault list error:', err.message)
-    return res.status(500).json({ success: false, message: 'Saved papers could not be loaded.' })
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault list error:', err.message)
+    return res.status(status).json({ success: false, code: err.code || undefined, message: 'Saved papers could not be loaded.' })
   }
 })
 
 router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   try {
+    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     if (!schoolId) return res.status(403).json({ success: false, message: 'School context is required.' })
     const payload = req.body?.paper
@@ -282,6 +310,7 @@ router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal',
 router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   const client = await pool.connect()
   try {
+    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
@@ -335,6 +364,7 @@ router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princi
 router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
   const client = await pool.connect()
   try {
+    await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
@@ -372,8 +402,9 @@ router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princ
     return res.json({ success: true })
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
-    console.error('Paper vault delete error:', err.message)
-    return res.status(500).json({ success: false, message: 'Paper could not be deleted.' })
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault delete error:', err.message)
+    return res.status(status).json({ success: false, code: err.code || undefined, message: 'Paper could not be deleted.' })
   } finally {
     client.release()
   }

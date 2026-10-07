@@ -682,7 +682,7 @@ export default function AcademicSetupModule() {
  setSyncState('synced')
  } catch (error) {
  console.warn('Academic setup server hydration failed; showing cached setup:', error?.message || error)
- if (!cancelled) setSyncState('offline')
+ if (!cancelled) setSyncState('unavailable')
  }
  }
  void hydrateFromServer()
@@ -726,7 +726,7 @@ export default function AcademicSetupModule() {
  </div>
  <div className="super-module-card" style={{ flex:1 }}>
  <h1 style={{ margin:0, fontSize:26, color:'var(--apex-text-primary)', fontFamily:"'Playfair Display',serif", fontWeight:800 }}>Academic Setup</h1>
- <p style={{ margin:'4px 0 0', color:C.muted, fontSize:13 }}>Classes & sections · Subjects · Academic calendar · {syncState === 'synced' ? 'Server synced' : syncState === 'saving' ? 'Saving…' : syncState === 'error' ? 'Sync failed — server copy restored' : syncState === 'offline' ? 'Server unavailable — cached setup shown' : 'Local cache'}</p>
+ <p style={{ margin:'4px 0 0', color:syncState === 'unavailable' || syncState === 'error' ? 'var(--apex-action-danger)' : C.muted, fontSize:13 }}>Classes & sections · Subjects · Academic calendar · {syncState === 'synced' ? 'Server synced' : syncState === 'saving' ? 'Saving…' : syncState === 'error' ? 'Sync failed — server copy restored' : syncState === 'unavailable' ? 'Server unavailable — showing local cache' : 'Local cache'}</p>
  </div>
  <div className="super-module-card" style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
  {TABS.map(t => (

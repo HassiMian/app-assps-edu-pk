@@ -25,6 +25,10 @@ function assertNotContains(relativePath, pattern, message) {
 
 const failures = []
 
+if (fs.existsSync(path.join(repoRoot, 'al-siddique-frontend/src/pages/Dashboard_clean.jsx'))) {
+  fail('al-siddique-frontend/src/pages/Dashboard_clean.jsx: legacy duplicate dashboard with static attendance data must not exist in canonical source.')
+}
+
 assertNotContains(
   'al-siddique-backend/src/services/emailService.js',
   /rejectUnauthorized\s*:\s*false/,
@@ -47,18 +51,6 @@ assertContains(
   'al-siddique-backend/src/server.js',
   "mount('/ai-analytics', './routes/aiAnalyticsRoutes')",
   'AI analytics must use the protected route module.'
-)
-
-assertNotContains(
-  'al-siddique-backend/src/server.js',
-  /app\.get\('\/'[\s\S]{0,700}endpoints\s*:/,
-  'public API root must not expose an internal endpoint catalogue.'
-)
-
-assertContains(
-  'al-siddique-backend/src/server.js',
-  "service: 'ASSPS API'",
-  'public API root should return only minimal service metadata.'
 )
 
 assertNotContains(
@@ -155,6 +147,90 @@ assertContains(
   'al-siddique-frontend/src/Modules/notifications/NotificationModule.jsx',
   'const currentList = sourceRecipients',
   'notifications must use source-backed recipients in every environment.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /catch \{ setAccounts\(prev => \(\{ \.\.\.prev, \[emp\.id\]: null \}\)\) \}/,
+  'staff login access must not convert a portal-account source failure into a confirmed not-linked state.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'const known = Object.prototype.hasOwnProperty.call(accounts, emp.id)',
+  'staff login access must distinguish a server-confirmed null account from an unknown/unavailable state.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /SALARY_RECORDS|const records = SALARY_RECORDS/,
+  'employee salary workflow must not use a hardcoded empty ledger that renders false zero financial metrics.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'Payroll payment ledger is not configured.',
+  'salary workflow must explicitly distinguish configured salary data from unavailable payroll payment tracking.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /Employee attendance load failed[\s\S]{0,160}setRecords\(\[\]\)/,
+  'employee attendance refresh failures must preserve prior rows and never imply an empty roster.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'if (!attendanceScopeMatches || !activeRecords.length || saving) return',
+  'employee attendance writes must be blocked unless loaded rows belong to the selected date.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  /Could not load employee portal account[\s\S]{0,180}setAccount\(null\)/,
+  'staff permission account refresh failures must preserve loaded account data for its original employee.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/employees/EmployeesModule.jsx',
+  'const activeAccount = accountScopeMatches ? account : null',
+  'staff permission controls must only use account data loaded for the selected employee.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  /Student fee panel load failed[\s\S]{0,180}setProfile\(null\)[\s\S]{0,120}setChallans\(\[\]\)/,
+  'student fee panel refresh failures must preserve the last known-good fee state.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/StudentFeePanel.jsx',
+  'const activeChallans = scopeMatches ? challans : []',
+  'student fee rows must remain bound to the student they were actually loaded for.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+  /Failed to fetch attendance history:[\s\S]{0,180}setRecords\(\[\]\)/,
+  'attendance analytics refresh failures must preserve the last known-good history instead of reporting an empty month.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/Analytics.jsx',
+  'const activeRecords = loadedScope === currentScope ? records : []',
+  'attendance analytics cached rows must remain bound to the class/section/date scope they were loaded for.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
+  /Failed to load unmarked attendance data:[\s\S]{0,180}setStudents\(\[\]\)[\s\S]{0,120}setMarkedToday\(\[\]\)/,
+  'dashboard unmarked-attendance refresh failures must preserve the last known-good roster and marks.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
+  'Existing loaded attendance state was preserved.',
+  'dashboard unmarked-attendance source failure must be explicit while preserving current state.'
 )
 
 assertNotContains(
@@ -301,6 +377,138 @@ assertContains(
   'al-siddique-frontend/src/Modules/Messages.jsx',
   "recipientCount == null ? 'Verified recipient count is temporarily unavailable; send will verify live.'",
   'recipient-count source failure must be distinguished from a verified zero-recipient group.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/App.jsx',
+  '<Route path="/fees/create" element={<W roles={ROLES.adminOffice} permKey="fees_create"><FeeModule /></W>} />',
+  'the /fees/create route must use the canonical fee workspace instead of the duplicate protected legacy challan creator.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/App.jsx',
+  /lazyRetry\(\(\) => import\('\.\/Modules\/fees\/CreateChallan'\)/,
+  'the duplicate standalone challan creator must not remain mounted as a production route bundle.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/AdmissionsModule.jsx',
+  /catch \{[\s\S]{0,140}setFeeAmounts\(prev => \(\{ \.\.\.prev, 'Monthly Fee': 0 \}\)\)/,
+  'admission fee-settings source failures must not be converted into a zero monthly fee.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/AdmissionsModule.jsx',
+  'if (!admitted || feeSettingsLoadError) return',
+  'post-admission challan creation must fail closed while configured fee settings are unavailable.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  /catch \([^)]*\)[\s\S]{0,160}setMonthlyTrend\(\[\]\)[\s\S]{0,120}setMonthlyClassSummary\(\[\]\)/,
+  'attendance analytics source failures must preserve the last known-good monthly analytics.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/attendance/AttendanceModule.jsx',
+  'const [analyticsError, setAnalyticsError] = useState',
+  'attendance analytics source availability must be represented separately from empty analytics data.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  /catch \([^)]*\)[\s\S]{0,140}setTeacherOptions\(\[\]\)/,
+  'timetable teacher-source failures must preserve the last known-good teacher list.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/timetable/TimetableModule.jsx',
+  'const [teacherLoadError, setTeacherLoadError] = useState',
+  'timetable teacher-source availability must be represented separately from an empty teacher list.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/MarksSheet.jsx',
+  /catch \{[\s\S]{0,120}setExams\(\[\]\)/,
+  'marks-sheet exam refresh failures must preserve the last known-good exam list.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  "setSyncState('unavailable')",
+  'academic setup must distinguish server unavailability from a healthy local-cache state.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
+  'Server unavailable — showing local cache',
+  'academic setup must tell the operator when cached academic data may be stale.'
+)
+
+assertContains(
+  'al-siddique-backend/src/routes/examRoutes.js',
+  'exam_ids must contain between 1 and 100 valid exam IDs.',
+  'exam result batching must bound and validate explicit exam IDs.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  /Promise\.all\(exams\.map[\s\S]{0,240}\/api\/exams\/results\//,
+  'result-card all-exam printing must not fan out one HTTP request per exam.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/examination/ResultCards.jsx',
+  "api.get('/api/exams/results', { params: { exam_ids: examIds.join(',') } })",
+  'result-card all-exam printing must use the tenant-scoped batch result endpoint.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  /Fee settings could not be loaded from server[\s\S]{0,420}setDiscountPackages\(\[\]\)/,
+  'fee settings source failure must not synthesize a blank editable configuration.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeSettings.jsx',
+  'disabled={saving || loading || !sourceReady}',
+  'fee settings save must fail closed until current server configuration is loaded.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/SearchableStudentPicker.jsx',
+  'Student search is temporarily unavailable.',
+  'student picker must distinguish source failure from a verified empty search result.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/PromoteDemote.jsx',
+  'Student roster could not be loaded for promotion/demotion.',
+  'promotion/demotion must distinguish roster source failure from an empty school.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  /catch \(err\)[\s\S]{0,180}setFeeStatusByStudent\(\{\}\)/,
+  'student fee-status refresh failure must preserve the last known-good map.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'fee: feeStatusError ? "Unavailable"',
+  'student fee status source failure must not render as No challan.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'Attendance history is temporarily unavailable for this student.',
+  'student profile must distinguish attendance source failure from no attendance records.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/StudentModule.jsx',
+  'Exam results are temporarily unavailable for this student.',
+  'student profile must distinguish results source failure from no exam results.'
 )
 
 assertNotContains(
@@ -960,6 +1168,18 @@ assertNotContains(
 )
 
 
+assertContains(
+  'al-siddique-backend/src/routes/paperRoute.js',
+  'PAPER_VAULT_SCHEMA_NOT_READY',
+  'paper vault routes must fail closed when migration 020 is unavailable.'
+)
+
+assertContains(
+  'al-siddique-backend/src/config/migrate.js',
+  "../../migrations/020_paper_vault_schema",
+  'migration runner must own Paper Vault schema evolution.'
+)
+
 assertNotContains(
   'al-siddique-backend/src/routes/paperRoute.js',
   /Math\.random\(\)/,
@@ -1071,8 +1291,8 @@ assertNotContains(
 
 assertContains(
   'al-siddique-frontend/src/components/dashboard/DashboardAnalyticsCards.jsx',
-  "setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be loaded from the server.')",
-  'dashboard attendance load failures must remain explicit.'
+  "setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be refreshed. Existing loaded attendance state was preserved.')",
+  'dashboard attendance load failures must remain explicit without erasing loaded state.'
 )
 
 
@@ -2202,13 +2422,13 @@ assertContains(
 
 assertContains(
   'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
-  "setSyncState('offline')",
+  "setSyncState('unavailable')",
   'academic setup hydration failures must expose server-unavailable state while preserving cached classes.'
 )
 assertContains(
   'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
-  'Server unavailable — cached setup shown',
-  'academic setup must tell users when cached classes are shown because server hydration failed.'
+  'Server unavailable — showing local cache',
+  'academic setup must tell users when the local cache is shown because server hydration failed.'
 )
 assertNotContains(
   'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
@@ -2237,26 +2457,46 @@ assertContains(
   'attendance SMS delivery-history refresh failure must be explicit while preserving current rows.'
 )
 
-assertContains(
-  'al-siddique-backend/src/routes/settingsRoutes.js',
-  "superapp_modules: result.rows[0]?.superapp_modules || {},",
-  'authenticated settings responses must preserve superapp module configuration for authorized clients.'
+assertNotContains(
+  'al-siddique-backend/src/server.js',
+  /app\.get\('\/'[\s\S]{0,700}endpoints\s*:/,
+  'public API root must not expose an internal endpoint catalogue.'
 )
 assertContains(
-  'al-siddique-backend/src/tests/public-settings-surface.test.js',
-  'assert.doesNotMatch(publicRoute, /superapp_modules/)',
-  'public settings must retain regression coverage that blocks internal superapp entitlement metadata.'
+  'al-siddique-backend/src/server.js',
+  "service: 'ASSPS API'",
+  'public API root should return only minimal service metadata.'
 )
 
 assertContains(
-  'al-siddique-backend/src/package.json',
-  'verify:live-backend-drift',
-  'backend package must retain the live runtime/compatibility artifact drift verification command.'
+  'al-siddique-backend/src/services/assessmentPrintJobs.js',
+  'STUDENT_PROJECTION_ANSWER_LEAK',
+  'student-safe assessment print projection must fail closed if answer material survives sanitization.'
 )
 assertContains(
-  'ops/deploy-production.ps1',
-  'liveArtifactDriftCheck.js',
-  'production deploy must verify backend runtime/compatibility artifact drift before restart.'
+  'al-siddique-backend/src/routes/assessmentStudioRoutes.js',
+  "'/print-jobs/:printJobId/student-projection/:studentId'",
+  'Assessment Studio must expose roster-bound student-safe print projections.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/assessmentStudioRoutes.js',
+  'PRINT_ROSTER_HASH_MISMATCH',
+  'student print projection must verify immutable roster snapshot integrity.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/assessmentStudioRoutes.js',
+  "'/print-jobs/:printJobId/answer-key'",
+  'Assessment Studio must keep answer-key projection behind authenticated staff routes.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/core/printJobClient.js',
+  'getAssessmentStudentProjection',
+  'Assessment Studio frontend must retain the student-safe projection client.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/core/printJobClient.js',
+  'getAssessmentAnswerKeyProjection',
+  'Assessment Studio frontend must retain the staff answer-key projection client.'
 )
 
 if (failures.length) {

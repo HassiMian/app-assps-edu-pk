@@ -122,6 +122,7 @@ export default function FeeSettings() {
   const [classSettings, setClassSettings] = useState([])
   const [discountPackages, setDiscountPackages] = useState([])
   const [loading, setLoading] = useState(true)
+  const [sourceReady, setSourceReady] = useState(false)
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
@@ -133,6 +134,7 @@ export default function FeeSettings() {
   useEffect(() => {
     let alive = true
     setLoading(true)
+    setError('')
     api.get('/api/fees/settings')
       .then((res) => {
         if (!alive) return
@@ -148,6 +150,7 @@ export default function FeeSettings() {
           }
         })
         setClassSettings(merged)
+        setSourceReady(true)
         setDiscountPackages((data.discountPackages || []).map(pkg => ({
           ...makeEmptyPackage(activeSession),
           ...pkg,
@@ -159,14 +162,8 @@ export default function FeeSettings() {
       })
       .catch(() => {
         if (!alive) return
-        setError('Fee settings could not be loaded from server.')
-        setClassSettings(availableClasses.map(className => ({
-          class_name: className,
-          session: activeSession,
-          monthly_fee: '',
-          active: false,
-        })))
-        setDiscountPackages([])
+        setSourceReady(false)
+        setError('Fee settings could not be loaded from server. Existing loaded settings were preserved and saving is disabled until the source is available.')
       })
       .finally(() => alive && setLoading(false))
     return () => { alive = false }
@@ -185,6 +182,10 @@ export default function FeeSettings() {
   }
 
   const save = async () => {
+    if (!sourceReady) {
+      setError('Fee settings cannot be saved until the current server configuration is loaded successfully.')
+      return
+    }
     setSaving(true)
     setError('')
     setMessage('')
@@ -220,7 +221,7 @@ export default function FeeSettings() {
             <h1 style={sectionHeader}>Fee Settings</h1>
             <p style={{ color: C.muted, marginTop: 8 }}>Database-backed class fee defaults, challan rules, and automatic family discounts.</p>
           </div>
-          <button onClick={save} style={btnPrimary} disabled={saving || loading}>{saving ? 'Saving...' : 'Save Fee Settings'}</button>
+          <button onClick={save} style={btnPrimary} disabled={saving || loading || !sourceReady}>{saving ? 'Saving...' : 'Save Fee Settings'}</button>
         </div>
 
         {error && <div style={{ padding: 14, borderRadius: 14, background: 'rgba(255,55,95,0.12)', border: '1px solid rgba(255,55,95,0.22)', color: C.red, fontWeight: 700 }}>{error}</div>}
@@ -261,7 +262,7 @@ export default function FeeSettings() {
               <h2 style={{ margin: 0, color: C.gold, fontSize: 20 }}>Discount Packages</h2>
               <p style={{ color: C.muted, margin: '8px 0 0' }}>Create reusable, auto-applied sibling/family discount rules. Triple Star is active by default.</p>
             </div>
-            <button type="button" style={btnSecondary} onClick={addPackage}>Add Package</button>
+            <button type="button" style={btnSecondary} onClick={addPackage} disabled={!sourceReady}>Add Package</button>
           </div>
 
           {discountPackages.map((pkg, index) => (

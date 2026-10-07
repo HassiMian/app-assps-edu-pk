@@ -40,7 +40,6 @@ const PROVINCES = ['Punjab','Sindh','KPK','Balochistan','Gilgit-Baltistan','AJK'
 const EDU_LEVELS = ['Matric','Intermediate','Diploma','B.Ed','Bachelor','Master','M.Phil','PhD']
 const BANKS = ['HBL','UBL','MCB','NBP','ABL','Bank Alfalah','Meezan Bank','Faysal Bank','JS Bank','Standard Chartered','Other']
 const CONTRACT_TYPES= ['Permanent','Contract','Part-time','Probation','Intern']
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
 const APP_MODULES = [
  { key:'students', label:'Students Module', icon:'users' },
@@ -53,8 +52,6 @@ const APP_MODULES = [
  { key:'paper_gen', label:'Paper Generator', icon:'paper' },
  { key:'settings', label:'Settings', icon:'settings' },
 ]
-
-const SALARY_RECORDS = []
 
 const EMPTY_FORM = {
  name:'', father_name:'', gender:'Male', dob:'', blood_group:'', religion:'Islam',
@@ -779,6 +776,8 @@ function AttendanceTab({ employees=[] }) {
  const [date, setDate] = useState(today)
  const [records, setRecords] = useState([])
  const [summary, setSummary] = useState({})
+ const [loadedDate, setLoadedDate] = useState('')
+ const [loadedSummaryMonth, setLoadedSummaryMonth] = useState('')
  const [loading, setLoading] = useState(true)
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
@@ -790,15 +789,16 @@ function AttendanceTab({ employees=[] }) {
  const response = await api.get('/api/employees/attendance', { params:{ date:targetDate }, skipCache:true })
  const rows = Array.isArray(response.data?.data) ? response.data.data : []
  setRecords(rows.map(row => ({ ...row, status:row.status || 'Present', note:row.note || '' })))
+ setLoadedDate(targetDate)
  const month = targetDate.slice(0,7)
  const summaryResponse = await api.get('/api/employees/attendance/summary', { params:{ month }, skipCache:true })
  const byEmployee = {}
  ;(Array.isArray(summaryResponse.data?.data) ? summaryResponse.data.data : []).forEach(item => { byEmployee[Number(item.employee_id)] = item })
  setSummary(byEmployee)
+ setLoadedSummaryMonth(month)
  } catch (err) {
  console.error('Employee attendance load failed', err)
- setRecords([])
- setMessage(err.response?.data?.message || 'Employee attendance could not be loaded.')
+ setMessage(err.response?.data?.message || 'Employee attendance could not be refreshed. Existing loaded attendance remains bound to its original date.')
  } finally { setLoading(false) }
  }, [date])
 
@@ -807,26 +807,29 @@ function AttendanceTab({ employees=[] }) {
  void loadAttendance(date)
  }, [date, loadAttendance])
 
- const setStatus = (employeeId, status) => setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, status } : row))
- const setNote = (employeeId, note) => setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, note } : row))
- const markAll = status => setRecords(prev => prev.map(row => ({ ...row, status })))
+ const attendanceScopeMatches = loadedDate === date
+ const activeRecords = attendanceScopeMatches ? records : []
+ const activeSummary = loadedSummaryMonth === date.slice(0,7) ? summary : {}
+ const setStatus = (employeeId, status) => { if (attendanceScopeMatches) setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, status } : row)) }
+ const setNote = (employeeId, note) => { if (attendanceScopeMatches) setRecords(prev => prev.map(row => Number(row.employee_id)===Number(employeeId) ? { ...row, note } : row)) }
+ const markAll = status => { if (attendanceScopeMatches) setRecords(prev => prev.map(row => ({ ...row, status }))) }
 
  async function saveAttendance() {
- if (!records.length || saving) return
+ if (!attendanceScopeMatches || !activeRecords.length || saving) return
  setSaving(true); setMessage('')
  try {
  await api.put('/api/employees/attendance/bulk', {
  date,
- records:records.map(row => ({ employee_id:Number(row.employee_id), status:row.status, note:row.note || '' })),
+ records:activeRecords.map(row => ({ employee_id:Number(row.employee_id), status:row.status, note:row.note || '' })),
  })
- setMessage(`Attendance saved for ${records.length} employees.`)
+ setMessage(`Attendance saved for ${activeRecords.length} employees.`)
  await loadAttendance(date)
  } catch (err) {
  setMessage(err.response?.data?.message || 'Employee attendance could not be saved.')
  } finally { setSaving(false) }
  }
 
- const counts = records.reduce((acc,row) => { acc[row.status]=(acc[row.status]||0)+1; return acc }, {})
+ const counts = activeRecords.reduce((acc,row) => { acc[row.status]=(acc[row.status]||0)+1; return acc }, {})
  const statusOptions = ['Present','Absent','Leave','Late']
 
  return (
@@ -846,7 +849,7 @@ function AttendanceTab({ employees=[] }) {
  </GCard>
 
  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(150px,1fr))', gap:12 }}>
- {[['Total',records.length,C.blue],['Present',counts.Present||0,C.green],['Absent',counts.Absent||0,C.red],['Leave',counts.Leave||0,C.orange],['Late',counts.Late||0,C.gold]].map(([label,value,color]) => (
+ {[['Total',activeRecords.length,C.blue],['Present',counts.Present||0,C.green],['Absent',counts.Absent||0,C.red],['Leave',counts.Leave||0,C.orange],['Late',counts.Late||0,C.gold]].map(([label,value,color]) => (
  <GCard key={label} style={{ padding:16 }}><div style={{ color:C.muted, fontSize:10, fontWeight:800, textTransform:'uppercase' }}>{label}</div><div style={{ color, fontSize:24, fontWeight:900, marginTop:5 }}>{value}</div></GCard>
  ))}
  </div>
@@ -854,17 +857,17 @@ function AttendanceTab({ employees=[] }) {
  <GCard style={{ padding:0, overflow:'hidden' }}>
  <div style={{ padding:'14px 16px', borderBottom:`1px solid ${C.border}`, display:'flex', justifyContent:'space-between', gap:12, flexWrap:'wrap', alignItems:'center' }}>
  <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>{['Present','Absent','Leave','Late'].map(status=><button key={status} onClick={()=>markAll(status)} style={{ padding:'7px 10px', borderRadius:9, border:`1px solid ${C.border}`, background:'var(--apex-bg-subtle)', color:C.silver, cursor:'pointer', fontSize:11, fontWeight:700 }}>Mark all {status}</button>)}</div>
- <button onClick={()=>void saveAttendance()} disabled={saving || !records.length} style={{ padding:'9px 16px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:saving?'wait':'pointer', fontWeight:800, opacity:records.length?1:.55 }}>{saving?'Saving…':'Save Attendance'}</button>
+ <button onClick={()=>void saveAttendance()} disabled={saving || !attendanceScopeMatches || !activeRecords.length} style={{ padding:'9px 16px', borderRadius:10, border:'none', background:'var(--apex-action-primary)', color:'#fff', cursor:saving?'wait':'pointer', fontWeight:800, opacity:activeRecords.length&&attendanceScopeMatches?1:.55 }}>{saving?'Saving…':'Save Attendance'}</button>
  </div>
  {loading ? <div style={{ padding:28, color:C.muted }}>Loading employee attendance…</div> : <div style={{ overflowX:'auto' }}><table style={{ width:'100%', borderCollapse:'collapse', minWidth:780 }}>
  <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>{['Employee','Designation','Status','Note','Month Summary'].map(h=><th key={h} style={{ padding:'12px 14px', textAlign:'left', color:C.muted, fontSize:11, textTransform:'uppercase' }}>{h}</th>)}</tr></thead>
- <tbody>{records.map((row,index)=>{ const month=summary[Number(row.employee_id)]||{}; return <tr key={row.employee_id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent', borderBottom:`1px solid ${C.border}` }}>
+ <tbody>{activeRecords.map((row,index)=>{ const month=activeSummary[Number(row.employee_id)]||{}; return <tr key={row.employee_id} style={{ background:index%2?'var(--apex-bg-subtle)':'transparent', borderBottom:`1px solid ${C.border}` }}>
  <td style={{ padding:'12px 14px' }}><div style={{ color:C.silver, fontWeight:800 }}>{row.name}</div><div style={{ color:C.muted, fontSize:11 }}>{row.emp_id || `#${row.employee_id}`}</div></td>
  <td style={{ padding:'12px 14px', color:C.muted }}>{row.designation || '—'}</td>
  <td style={{ padding:'12px 14px' }}><Sel value={row.status} onChange={e=>setStatus(row.employee_id,e.target.value)} style={{ width:120 }}>{statusOptions.map(status=><option key={status}>{status}</option>)}</Sel></td>
  <td style={{ padding:'12px 14px' }}><Inp value={row.note} onChange={e=>setNote(row.employee_id,e.target.value)} placeholder="Optional note" style={{ minWidth:180 }}/></td>
  <td style={{ padding:'12px 14px', color:C.muted, fontSize:11 }}>{`P ${month.present||0} · A ${month.absent||0} · L ${month.leave||0} · Late ${month.late||0}`}</td>
- </tr>})}{!records.length&&<tr><td colSpan={5} style={{ padding:28, textAlign:'center', color:C.muted }}>{employees.length ? 'No attendance records available.' : 'No active employees found.'}</td></tr>}</tbody>
+ </tr>})}{!activeRecords.length&&<tr><td colSpan={5} style={{ padding:28, textAlign:'center', color:C.muted }}>{employees.length ? 'No attendance records available.' : 'No active employees found.'}</td></tr>}</tbody>
  </table></div>}
  </GCard>
  {message&&<div style={{ color:message.includes('saved')?C.green:C.red, fontSize:12, fontWeight:700 }}>{message}</div>}
@@ -872,82 +875,40 @@ function AttendanceTab({ employees=[] }) {
  )
 }
 
-//  Salary Tab 
+//  Salary Tab — configured salary truth only; payment ledger is not yet available
 function SalaryTab({ employees=[] }) {
- const [selectedMonth, setSelectedMonth] = useState('April')
- const [selectedYear, setSelectedYear] = useState('2026')
-
- const records = SALARY_RECORDS.filter(r => r.month === selectedMonth && r.year === parseInt(selectedYear))
- const totalPaid = records.filter(r => r.status==='Paid').reduce((s,r) => s+r.net, 0)
- const pending = records.filter(r => r.status==='Pending').reduce((s,r) => s+r.net, 0)
- const paidCount = records.filter(r => r.status==='Paid').length
+ const configured = employees.filter(emp => Number(emp.salary || 0) > 0)
+ const configuredMonthlyTotal = configured.reduce((sum, emp) => sum + Number(emp.salary || 0), 0)
 
  return (
  <div className="super-module-card" style={{ display:'grid', gap:24 }}>
- <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:16 }}>
- <StatCard icon={<Wallet size={22} />} label="Total Paid" value={`Rs.${(totalPaid/1000).toFixed(0)}K`} color={C.green} />
- <StatCard icon={<Clock3 size={22} />} label="Pending Payment" value={`Rs.${(pending/1000).toFixed(0)}K`} color={C.orange} />
- <StatCard icon={<BadgeCheck size={22} />} label="Salaries Paid" value={paidCount} color={C.blue} />
- <StatCard icon={<Percent size={22} />} label="Payment Rate" value={`${records.length ? Math.round((paidCount/records.length)*100) : 0}%`} color={C.gold} />
+ <div className="super-module-card" style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))', gap:16 }}>
+ <StatCard icon={<Wallet size={22} />} label="Configured Monthly Salary" value={`Rs.${configuredMonthlyTotal.toLocaleString()}`} color={C.green} />
+ <StatCard icon={<BadgeCheck size={22} />} label="Employees With Salary" value={configured.length} color={C.blue} />
+ <StatCard icon={<Clock3 size={22} />} label="Paid This Month" value="Unavailable" color={C.orange} />
+ <StatCard icon={<Percent size={22} />} label="Payment Rate" value="Unavailable" color={C.gold} />
  </div>
 
  <GCard>
- <div className="super-module-card" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:18 }}>
- <h3 style={{ color:C.gold, fontSize:18, margin:0, fontFamily:"'Playfair Display',serif" }}>Salary Sheet</h3>
- <div className="super-module-card" style={{ display:'flex', gap:12 }}>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:8 }}>
- <Lbl>Month</Lbl>
- <Sel value={selectedMonth} onChange={e=>setSelectedMonth(e.target.value)} style={{ width:130 }}>
- {MONTHS.map(m=><option key={m}>{m}</option>)}
- </Sel>
+ <div style={{ padding:14, marginBottom:18, borderRadius:12, background:'color-mix(in srgb, var(--apex-action-highlight) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-highlight) 24%, var(--apex-border-default))', color:C.gold, fontSize:12, fontWeight:700 }}>
+ Payroll payment ledger is not configured. Configured employee salary amounts below are live employee records; paid, pending and payment-rate figures are intentionally not inferred.
  </div>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:8 }}>
- <Lbl>Year</Lbl>
- <Sel value={selectedYear} onChange={e=>setSelectedYear(e.target.value)} style={{ width:100 }}>
- {['2024','2025','2026','2027'].map(y=><option key={y}>{y}</option>)}
- </Sel>
- </div>
- </div>
- </div>
- </GCard>
-
- <GCard style={{ padding:0, overflow:'hidden' }}>
+ <div style={{ overflowX:'auto' }}>
  <table style={{ width:'100%', borderCollapse:'collapse' }}>
- <thead>
- <tr style={{ background:'var(--apex-bg-subtle)', borderBottom:`1px solid ${C.border}` }}>
- {['Employee','Basic Salary','Allowances','Deductions','Net Salary','Status'].map(col => (
- <th key={col} style={{ padding:'13px 15px', textAlign:'left', color:C.gold, fontSize:11, letterSpacing:'0.08em', textTransform:'uppercase' }}>{col}</th>
- ))}
- </tr>
- </thead>
+ <thead><tr style={{ borderBottom:`1px solid ${C.border}` }}>{['Employee','Designation','Configured Salary','Payment Status'].map(header => <th key={header} style={{ padding:'13px 15px', textAlign:'left', color:C.muted, fontSize:11, textTransform:'uppercase' }}>{header}</th>)}</tr></thead>
  <tbody>
- {records.length === 0 ? (
- <tr><td colSpan={6} style={{ padding:42, textAlign:'center', color:C.muted }}>No salary records found. Dummy salary data has been removed; generate payroll to populate this sheet.</td></tr>
- ) : records.map((rec, i) => {
- const emp = employees.find(e => e.id === rec.employeeId)
- return (
- <tr key={rec.id} style={{ background:i%2===0?'transparent':'var(--apex-bg-subtle)' }}>
- <td style={{ padding:'13px 15px' }}>
- <div className="super-module-card" style={{ display:'flex', alignItems:'center', gap:10 }}>
- <div className="super-module-card" style={{ width:34, height:34, borderRadius:9, background:'linear-gradient(135deg,var(--apex-action-primary),var(--apex-action-secondary))', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:900, fontSize:13 }}>
- {emp?.name?.charAt(0) || '?'}
- </div>
- <div>
- <div className="super-module-card" style={{ color:'#fff', fontWeight:600 }}>{emp?.name || 'Unknown'}</div>
- <div className="super-module-card" style={{ color:C.muted, fontSize:11 }}>{emp?.designation}</div>
- </div>
- </div>
- </td>
- <td style={{ padding:'13px 15px', color:C.silver }}>Rs. {rec.basic.toLocaleString()}</td>
- <td style={{ padding:'13px 15px', color:C.green }}>Rs. {rec.allowances.toLocaleString()}</td>
- <td style={{ padding:'13px 15px', color:C.red }}>Rs. {rec.deductions.toLocaleString()}</td>
- <td style={{ padding:'13px 15px', color:C.gold, fontWeight:700 }}>Rs. {rec.net.toLocaleString()}</td>
- <td style={{ padding:'13px 15px' }}><StatusBadge status={rec.status} /></td>
+ {employees.map(emp => (
+ <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}>
+ <td style={{ padding:'13px 15px' }}><div style={{ color:C.silver, fontWeight:700 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.emp_id || `#${emp.id}`}</div></td>
+ <td style={{ padding:'13px 15px', color:C.muted }}>{emp.designation || '—'}</td>
+ <td style={{ padding:'13px 15px', color:C.gold, fontWeight:700 }}>{Number(emp.salary || 0) > 0 ? `Rs. ${Number(emp.salary).toLocaleString()}` : 'Not configured'}</td>
+ <td style={{ padding:'13px 15px', color:C.muted }}>Not tracked</td>
  </tr>
- )
- })}
+ ))}
+ {!employees.length && <tr><td colSpan={4} style={{ padding:28, textAlign:'center', color:C.muted }}>No employee records available.</td></tr>}
  </tbody>
  </table>
+ </div>
  </GCard>
  </div>
  )
@@ -1072,23 +1033,28 @@ function StaffPermissionsTab({ employees }) {
  const [selectedEmpId, setSelectedEmpId] = useState(null)
  const [account, setAccount] = useState(null)
  const [localPerms, setLocalPerms] = useState([])
+ const [loadedAccountEmployeeId, setLoadedAccountEmployeeId] = useState('')
+ const [accountError, setAccountError] = useState('')
  const [saved, setSaved] = useState(false)
  const [loading, setLoading] = useState(false)
  const selectedEmp = employees.find(e => e.id === selectedEmpId) || null
 
  useEffect(() => {
- if (!selectedEmpId) { setAccount(null); setLocalPerms([]); return }
+ if (!selectedEmpId) { setAccount(null); setLocalPerms([]); setLoadedAccountEmployeeId(''); setAccountError(''); return }
  let cancelled = false
  async function loadAccount() {
  setLoading(true)
+ setAccountError('')
  try {
  const response = await api.get(`/api/employees/${selectedEmpId}/portal-account`)
  if (cancelled) return
  const user = response.data?.data || null
  setAccount(user)
  setLocalPerms(Array.isArray(user?.permissions) && user.permissions.length ? user.permissions : [...DEFAULT_TEACHER_PERMISSIONS])
+ setLoadedAccountEmployeeId(String(selectedEmpId))
+ setAccountError('')
  } catch (err) {
- if (!cancelled) { setAccount(null); setLocalPerms([...DEFAULT_TEACHER_PERMISSIONS]) }
+ if (!cancelled) setAccountError(err.response?.data?.message || 'Portal account data could not be refreshed. Existing loaded account data remains bound to its original employee.')
  console.error('Could not load employee portal account', err)
  } finally {
  if (!cancelled) setLoading(false)
@@ -1098,7 +1064,9 @@ function StaffPermissionsTab({ employees }) {
  return () => { cancelled = true }
  }, [selectedEmpId])
 
- const toggle = key => { setLocalPerms(prev => prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]); setSaved(false) }
+ const accountScopeMatches = String(loadedAccountEmployeeId) === String(selectedEmpId)
+ const activeAccount = accountScopeMatches ? account : null
+ const toggle = key => { if (!accountScopeMatches) return; setLocalPerms(prev => prev.includes(key) ? prev.filter(item => item !== key) : [...prev, key]); setSaved(false) }
  const toggleGroup = group => {
  const keys = group.perms.map(item => item.key)
  const allOn = keys.every(key => localPerms.includes(key))
@@ -1109,8 +1077,8 @@ function StaffPermissionsTab({ employees }) {
  const handleSelectAll = () => { setLocalPerms(ALL_PERMISSIONS.map(item => item.key)); setSaved(false) }
  const handleClearAll = () => { setLocalPerms([]); setSaved(false) }
  const handleSave = async () => {
- if (!selectedEmp) return
- if (!account) { alert('Create this employee portal account in Login Access first.'); return }
+ if (!selectedEmp || !accountScopeMatches) return
+ if (!activeAccount) { alert('Create this employee portal account in Login Access first.'); return }
  try {
  await api.put(`/api/employees/${selectedEmp.id}/portal-account/permissions`, { permissions: localPerms })
  setAccount(prev => prev ? { ...prev, permissions: localPerms } : prev)
@@ -1134,10 +1102,11 @@ function StaffPermissionsTab({ employees }) {
  <GCard>
  {!selectedEmp ? <div style={{ padding:40, textAlign:'center', color:C.muted }}>Select an employee to configure permissions.</div> : <>
  <div style={{ display:'flex', justifyContent:'space-between', gap:14, flexWrap:'wrap', alignItems:'center', marginBottom:18 }}>
- <div><h2 style={{ margin:0, color:C.silver, fontSize:18 }}>{selectedEmp.name}</h2><div style={{ color:C.muted, fontSize:12, marginTop:4 }}>{loading ? 'Loading account…' : account ? `Server account · ${account.username || account.email || ''}` : 'No server portal account linked'}</div></div>
+ <div><h2 style={{ margin:0, color:C.silver, fontSize:18 }}>{selectedEmp.name}</h2><div style={{ color:C.muted, fontSize:12, marginTop:4 }}>{loading ? 'Loading account…' : accountError && !accountScopeMatches ? 'Portal account unavailable for selected employee' : activeAccount ? `Server account · ${activeAccount.username || activeAccount.email || ''}` : 'No server portal account linked'}</div></div>
  <div style={{ display:'flex', gap:7, flexWrap:'wrap' }}><button onClick={handleDefault} style={btnSecondary}>Teacher Defaults</button><button onClick={handleSelectAll} style={btnSecondary}>Select All</button><button onClick={handleClearAll} style={btnSecondary}>Clear</button></div>
  </div>
- <div style={{ display:'grid', gap:14 }}>
+ {accountError && <div style={{ marginBottom:12, padding:'10px 12px', borderRadius:10, color:C.red, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))' }}>{accountError}</div>}
+ {accountScopeMatches ? <div style={{ display:'grid', gap:14 }}>
  {PERMISSION_GROUPS.map(group => {
  const keys = group.perms.map(item => item.key); const allOn = keys.every(key => localPerms.includes(key))
  return <div key={group.label} style={{ padding:14, borderRadius:14, border:`1px solid ${C.border}`, background:'var(--apex-bg-subtle)' }}>
@@ -1145,8 +1114,8 @@ function StaffPermissionsTab({ employees }) {
  <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(210px,1fr))', gap:8, marginTop:12 }}>{group.perms.map(permission => <label key={permission.key} style={{ display:'flex', alignItems:'center', gap:9, color:C.silver, fontSize:12, cursor:'pointer' }}><input type="checkbox" checked={localPerms.includes(permission.key)} onChange={()=>toggle(permission.key)}/><span>{permission.label}</span></label>)}</div>
  </div>
  })}
- </div>
- <div style={{ display:'flex', justifyContent:'flex-end', marginTop:18 }}><button disabled={!account || loading} onClick={handleSave} style={{ ...btnPrimary, opacity:!account ? .5 : 1 }}>{saved ? 'Saved' : 'Save Permissions'}</button></div>
+ </div> : !loading ? <div style={{ color:C.muted, padding:18, textAlign:'center' }}>Portal permission data is unavailable for the selected employee.</div> : null}
+ <div style={{ display:'flex', justifyContent:'flex-end', marginTop:18 }}><button disabled={!activeAccount || loading || !accountScopeMatches} onClick={handleSave} style={{ ...btnPrimary, opacity:activeAccount&&accountScopeMatches ? 1 : .5 }}>{saved ? 'Saved' : 'Save Permissions'}</button></div>
  </>}
  </GCard>
  </div>
@@ -1155,6 +1124,9 @@ function StaffPermissionsTab({ employees }) {
 
 function LoginAccessTab({ employees, onReload }) {
  const [accounts, setAccounts] = useState({})
+ const [accountErrors, setAccountErrors] = useState({})
+ const [accountSourceError, setAccountSourceError] = useState('')
+ const [hydratingAccounts, setHydratingAccounts] = useState(true)
  const [temporary, setTemporary] = useState({})
  const [working, setWorking] = useState('')
 
@@ -1162,19 +1134,32 @@ function LoginAccessTab({ employees, onReload }) {
  try {
  const response = await api.get(`/api/employees/${emp.id}/portal-account`)
  setAccounts(prev => ({ ...prev, [emp.id]: response.data?.data || null }))
- } catch { setAccounts(prev => ({ ...prev, [emp.id]: null })) }
+ setAccountErrors(prev => ({ ...prev, [emp.id]: '' }))
+ return true
+ } catch (err) {
+ console.error('Could not refresh employee portal account', err)
+ setAccountErrors(prev => ({ ...prev, [emp.id]: err.response?.data?.message || 'Portal account state is temporarily unavailable.' }))
+ return false
+ }
  }, [])
 
  useEffect(() => {
  let cancelled = false
  async function hydrate() {
+ setHydratingAccounts(true)
+ setAccountSourceError('')
  try {
  const response = await api.get('/api/employees/portal-accounts')
  const rows = Array.isArray(response.data?.data) ? response.data.data : []
  const next = Object.fromEntries(rows.map(row => [row.employee_id, row.account || null]))
- if (!cancelled) setAccounts(next)
+ if (!cancelled) { setAccounts(next); setAccountErrors({}); setAccountSourceError('') }
  } catch (err) {
- if (!cancelled) console.error('Could not load employee portal accounts', err)
+ if (!cancelled) {
+ console.error('Could not load employee portal accounts', err)
+ setAccountSourceError(err.response?.data?.message || 'Staff portal account states are temporarily unavailable. Existing loaded states were preserved.')
+ }
+ } finally {
+ if (!cancelled) setHydratingAccounts(false)
  }
  }
  void hydrate()
@@ -1220,8 +1205,18 @@ function LoginAccessTab({ employees, onReload }) {
 
  return <GCard>
  <div style={{ marginBottom:18 }}><h2 style={{ color:C.silver, fontSize:18, margin:0 }}>Staff Login Access</h2><p style={{ color:C.muted, fontSize:12, margin:'5px 0 0' }}>Portal credentials are server-backed. Temporary passwords are shown only when newly created or securely reset.</p></div>
+ {accountSourceError && <div style={{ marginBottom:14, padding:'10px 12px', borderRadius:10, color:C.red, background:'color-mix(in srgb, var(--apex-action-danger) 8%, var(--apex-bg-surface-solid))', border:'1px solid color-mix(in srgb, var(--apex-action-danger) 24%, var(--apex-border-default))' }}>{accountSourceError}</div>}
  <div style={{ overflowX:'auto' }}><table style={{ width:'100%', borderCollapse:'collapse', minWidth:780 }}><thead><tr>{['Employee','Login','Status','Temporary Password','Actions'].map(label=><th key={label} style={{ padding:'11px 12px', textAlign:'left', color:C.muted, fontSize:10, textTransform:'uppercase', borderBottom:`1px solid ${C.border}` }}>{label}</th>)}</tr></thead><tbody>
- {employees.map(emp=>{ const account=accounts[emp.id]; const temp=temporary[emp.id]; const busy=working.startsWith(`${emp.id}:`); return <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}><td style={{ padding:12 }}><div style={{ color:C.silver, fontWeight:750 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.designation}</div></td><td style={{ padding:12, color:C.silver }}>{account?.username||account?.email||'—'}</td><td style={{ padding:12 }}><span style={{ color:account?.is_active?C.green:account?C.red:C.muted, fontSize:12, fontWeight:700 }}>{account ? (account.is_active?'Active':'Blocked') : 'Not linked'}</span></td><td style={{ padding:12, color:temp?.password?C.gold:C.muted, fontFamily:temp?.password?'monospace':'inherit', fontSize:12 }}>{temp?.password||'—'}</td><td style={{ padding:12 }}><div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>{!account ? <button disabled={busy} onClick={()=>provision(emp)} style={btnPrimary}>{busy?'Creating…':'Create Access'}</button> : <><button disabled={busy} onClick={()=>reset(emp)} style={btnSecondary}>Secure Reset</button><button disabled={busy} onClick={()=>toggle(emp,account)} style={btnSecondary}>{account.is_active?'Block':'Unblock'}</button><button disabled={busy} onClick={()=>printCredential(emp,account)} style={btnSecondary}>Print</button><button disabled={busy} onClick={()=>revoke(emp)} style={{ ...btnSecondary, color:C.red }}>Revoke</button></>}</div></td></tr> })}
+ {employees.map(emp=>{
+ const known = Object.prototype.hasOwnProperty.call(accounts, emp.id)
+ const account = known ? accounts[emp.id] : null
+ const error = accountErrors[emp.id] || (!known && accountSourceError)
+ const temp=temporary[emp.id]
+ const busy=working.startsWith(`${emp.id}:`)
+ const statusLabel = error ? 'Unavailable' : !known ? (hydratingAccounts ? 'Loading…' : 'Unavailable') : account ? (account.is_active?'Active':'Blocked') : 'Not linked'
+ const statusColor = error || !known ? C.orange : account?.is_active ? C.green : account ? C.red : C.muted
+ return <tr key={emp.id} style={{ borderBottom:`1px solid ${C.border}` }}><td style={{ padding:12 }}><div style={{ color:C.silver, fontWeight:750 }}>{emp.name}</div><div style={{ color:C.muted, fontSize:11 }}>{emp.designation}</div>{error&&<div style={{ color:C.orange, fontSize:10, marginTop:3 }}>{error}</div>}</td><td style={{ padding:12, color:C.silver }}>{known ? (account?.username||account?.email||'—') : '—'}</td><td style={{ padding:12 }}><span style={{ color:statusColor, fontSize:12, fontWeight:700 }}>{statusLabel}</span></td><td style={{ padding:12, color:temp?.password?C.gold:C.muted, fontFamily:temp?.password?'monospace':'inherit', fontSize:12 }}>{temp?.password||'—'}</td><td style={{ padding:12 }}><div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>{error || !known ? <button disabled={busy || hydratingAccounts} onClick={()=>void loadAccount(emp)} style={btnSecondary}>Retry</button> : !account ? <button disabled={busy} onClick={()=>provision(emp)} style={btnPrimary}>{busy?'Creating…':'Create Access'}</button> : <><button disabled={busy} onClick={()=>reset(emp)} style={btnSecondary}>Secure Reset</button><button disabled={busy} onClick={()=>toggle(emp,account)} style={btnSecondary}>{account.is_active?'Block':'Unblock'}</button><button disabled={busy} onClick={()=>printCredential(emp,account)} style={btnSecondary}>Print</button><button disabled={busy} onClick={()=>revoke(emp)} style={{ ...btnSecondary, color:C.red }}>Revoke</button></>}</div></td></tr>
+ })}
  </tbody></table></div>
  </GCard>
 }

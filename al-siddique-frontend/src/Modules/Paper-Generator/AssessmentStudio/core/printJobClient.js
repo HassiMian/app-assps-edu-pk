@@ -46,3 +46,16 @@ export async function transitionAssessmentPrintJob(printJobId, status, lastError
     { status, ...(lastError ? { lastError } : {}) },
   ))
 }
+
+export async function getAssessmentStudentProjection(printJobId, studentId) {
+  if (!printJobId) throw new Error('printJobId is required')
+  if (!studentId) throw new Error('studentId is required')
+  return unwrap(await api.get(
+    '/api/assessment-studio/print-jobs/' + encodeURIComponent(printJobId) + '/student-projection/' + encodeURIComponent(studentId),
+  ))
+}
+
+export async function getAssessmentAnswerKeyProjection(printJobId) {
+  if (!printJobId) throw new Error('printJobId is required')
+  return unwrap(await api.get('/api/assessment-studio/print-jobs/' + encodeURIComponent(printJobId) + '/answer-key'))
+}

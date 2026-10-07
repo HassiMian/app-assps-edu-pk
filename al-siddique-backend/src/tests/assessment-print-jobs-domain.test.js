@@ -1,6 +1,6 @@
 const test = require('node:test')
 const assert = require('node:assert/strict')
-const { createPrintJobBinding, normalizeRosterSnapshot, paddedPageCount, printJobTransition } = require('../services/assessmentPrintJobs')
+const { createPrintJobBinding, normalizeRosterSnapshot, paddedPageCount, printJobTransition, buildStudentSafeProjection, buildStaffAnswerKeyProjection, containsForbiddenAnswerMaterial } = require('../services/assessmentPrintJobs')
 
 test('roster snapshot is deterministic and privacy-minimal', () => {
   const input={context:{classId:7,className:'Seven',section:'A',session:'2026-27'},students:[{id:11,name:'Student One',roll_no:'07',section:'A',phone:'SECRET',address:'SECRET'}]}
@@ -65,3 +65,35 @@ test('print lifecycle increments attempts only when physical printing starts',()
   assert.deepEqual(printJobTransition('QUEUED','PRINTING',1),{status:'PRINTING',attemptCount:2})
   assert.throws(()=>printJobTransition('COMPLETED','QUEUED',1),/Invalid print job transition/)
 })
+
+test('student-safe projection recursively strips answer and teacher-only material', () => {
+  const release={
+    title:'Science Test',
+    sections:[{nodes:[{
+      id:'q1',prompt:'Water freezes at?',answer:'0 C',correctAnswer:'0 C',explanation:'Teacher explanation',
+      options:[{text:'0 C',isCorrect:true},{text:'100 C',isCorrect:false}],
+      markingScheme:{points:2},teacherNotes:'Do not show',
+    }]}],
+  }
+  const projection=buildStudentSafeProjection(release,{
+    student:{displayName:'Student One',rollNo:'07',className:'Seven',section:'A'},
+    teacher:{teacherName:'Sir Haseeb',subjectName:'Science'},
+  })
+  assert.equal(projection.projectionType,'STUDENT_SAFE')
+  assert.equal(projection.paper.sections[0].nodes[0].prompt,'Water freezes at?')
+  assert.equal(containsForbiddenAnswerMaterial(projection),false)
+  assert.equal(projection.personalization.student.rollNumber,'07')
+  assert.equal(projection.personalization.teacher.subject,'Science')
+})
+
+test('answer-key projection is staff-only and preserves release answers for authorized staff', () => {
+  const release={sections:[{nodes:[{id:'q1',answer:'A'}]}]}
+  assert.throws(
+    ()=>buildStaffAnswerKeyProjection(release,{role:'student'}),
+    error=>error.code==='ANSWER_KEY_ROLE_REQUIRED' && error.status===403,
+  )
+  const staff=buildStaffAnswerKeyProjection(release,{role:'teacher'})
+  assert.equal(staff.projectionType,'STAFF_ANSWER_KEY')
+  assert.equal(staff.paper.sections[0].nodes[0].answer,'A')
+})
+

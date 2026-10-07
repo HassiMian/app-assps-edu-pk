@@ -17,7 +17,7 @@ async function stored(page,name) { return page.evaluate(n=>{ const keys=Object.k
 test('Assessment persistence adversarial: offline queue recovery + two-tab conflict', {timeout:90000}, async t=>{
  const vite=await createServer({root,server:{port:5242,strictPort:true},appType:'spa'}); await vite.listen()
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']}); const context=await browser.newContext({viewport:{width:1640,height:960}})
- await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
+ await context.addInitScript(()=>{ localStorage.setItem('al_siddique_token','mock-jwt-token'); localStorage.setItem('al_siddique_login_at',String(Date.now())); localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'})) })
 
  const serverRevisions=new Map()
  await context.route('**/api/assessment-studio/papers/**/revisions',async route=>{
@@ -26,6 +26,17 @@ test('Assessment persistence adversarial: offline queue recovery + two-tab confl
   const next=current+1; serverRevisions.set(id,next); return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({data:{currentRevision:next,contentHash:'test-hash-'+next}})});
  })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await vite.close().catch(()=>{})})
+ await context.route('**/api/auth/me',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({user:{id:999,role:'admin',school_id:1,tenant_id:'assps',email:'admin@alsiddique.edu.pk'}})}))
+ await context.route('**/api/school/settings/current',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/school/branding',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/settings',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/notify/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[],notifications:[]})}))
+ await context.route('**/api/academic/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{classes:[],subjects:[]}})}))
+ await context.route('**/api/dashboard/**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/events/upcoming',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[]})}))
+ await context.route('**/api/fees/summary',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{total:0,paid:0,pending:0}})}))
+ await context.route('**/api/fees',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[]})}))
+ await context.route('**/api/employees**',r=>r.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:[]})}))
  await context.route('**/api/students**',r=>r.fulfill({status:200,contentType:'application/json',body:'[]'})); await context.route('**/api/settings/public**',r=>r.fulfill({status:200,contentType:'application/json',body:'{}'}))
 
  const offline=await context.newPage(); offline.on('dialog',d=>d.accept().catch(()=>{})); const offlineName=`Offline Recovery ${Date.now()}`; await createManual(offline,offlineName)

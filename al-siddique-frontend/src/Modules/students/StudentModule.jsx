@@ -1698,8 +1698,10 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academic
  const [tab, setTab] = useState("profile");
  const [attendanceRows, setAttendanceRows] = useState([]);
  const [attendanceLoading, setAttendanceLoading] = useState(false);
+ const [attendanceError, setAttendanceError] = useState('');
  const [resultsRows, setResultsRows] = useState([]);
  const [resultsLoading, setResultsLoading] = useState(false);
+ const [resultsError, setResultsError] = useState('');
  const [note, setNote] = useState(student.remarks || "");
  const [noteSaving, setNoteSaving] = useState(false);
  const [noteMessage, setNoteMessage] = useState("");
@@ -1717,17 +1719,19 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academic
  if (tab === "attendance") {
  // eslint-disable-next-line react-hooks/set-state-in-effect
  setAttendanceLoading(true);
+ setAttendanceError('');
  api.get(`/api/attendance/history/${student.id}`, { skipCache:true })
- .then(response => { if (!cancelled) setAttendanceRows(Array.isArray(response.data?.data) ? response.data.data : []); })
- .catch(() => { if (!cancelled) setAttendanceRows([]); })
+ .then(response => { if (!cancelled) { setAttendanceRows(Array.isArray(response.data?.data) ? response.data.data : []); setAttendanceError(''); } })
+ .catch(err => { if (!cancelled) { setAttendanceRows([]); setAttendanceError(err.response?.data?.message || 'Attendance history is temporarily unavailable for this student.'); } })
  .finally(() => { if (!cancelled) setAttendanceLoading(false); });
  }
  if (tab === "results") {
  // eslint-disable-next-line react-hooks/set-state-in-effect
  setResultsLoading(true);
+ setResultsError('');
  api.get(`/api/exams/student-results/${student.id}`, { skipCache:true })
- .then(response => { if (!cancelled) setResultsRows(Array.isArray(response.data?.data) ? response.data.data : []); })
- .catch(() => { if (!cancelled) setResultsRows([]); })
+ .then(response => { if (!cancelled) { setResultsRows(Array.isArray(response.data?.data) ? response.data.data : []); setResultsError(''); } })
+ .catch(err => { if (!cancelled) { setResultsRows([]); setResultsError(err.response?.data?.message || 'Exam results are temporarily unavailable for this student.'); } })
  .finally(() => { if (!cancelled) setResultsLoading(false); });
  }
  return () => { cancelled = true; };
@@ -1909,7 +1913,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academic
  )}
  {tab==="attendance" && (
  <div style={{ display:"grid", gap:10 }}>
- {attendanceLoading ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>Loading verified attendance…</div> : attendanceRows.length ? attendanceRows.slice(0,31).map(row => {
+ {attendanceLoading ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>Loading verified attendance…</div> : attendanceError ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-action-danger)" }}>{attendanceError}</div> : attendanceRows.length ? attendanceRows.slice(0,31).map(row => {
  const status = String(row.status || "").toLowerCase();
  const present = status === "present";
  return <div key={row.id} style={{ display:"flex", justifyContent:"space-between", gap:12, alignItems:"center", padding:"11px 14px", borderRadius:12, background:"var(--apex-bg-subtle)", border:"1px solid var(--apex-border-subtle)" }}>
@@ -1921,7 +1925,7 @@ function ProfileModal({ student, onClose, paperSettings, onUpdatePhoto, academic
  )}
  {tab==="results" && (
  <div style={{ display:"grid", gap:10 }}>
- {resultsLoading ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>Loading verified results…</div> : resultsRows.length ? resultsRows.map((r,i)=>{
+ {resultsLoading ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-text-tertiary)" }}>Loading verified results…</div> : resultsError ? <div style={{ padding:24, textAlign:"center", color:"var(--apex-action-danger)" }}>{resultsError}</div> : resultsRows.length ? resultsRows.map((r,i)=>{
  const obtained = Number(r.marks_obtained || 0);
  const total = Number(r.total_marks || 0);
  const pct = total > 0 ? Math.round((obtained / total) * 100) : 0;
@@ -2156,10 +2160,11 @@ export default function StudentsModule() {
  const academicSession = academicSessionLabel(sessionStart, sessionEnd);
  const { students: rawStudents, deleteStudent, updateStudent } = useStudentStore();
  const [feeStatusByStudent, setFeeStatusByStudent] = useState({});
+ const [feeStatusError, setFeeStatusError] = useState("");
 
 
  const [searchParams] = useSearchParams();
- const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusByStudent[student.id] || "" }));
+ const students = rawStudents.map(student => ({ ...transformStudent(student), fee: feeStatusError ? "Unavailable" : (feeStatusByStudent[student.id] || "") }));
  const [search, setSearch] = useState("");
  const [showDropdown, setShowDropdown] = useState(false);
  const [filterClass, setFilterClass] = useState("All Classes");
@@ -2188,9 +2193,9 @@ export default function StudentsModule() {
  if (!id || Object.prototype.hasOwnProperty.call(latest, id)) return;
  latest[id] = normalizeFeeStatus(row.status);
  });
- if (!cancelled) setFeeStatusByStudent(latest);
- } catch {
- if (!cancelled) setFeeStatusByStudent({});
+ if (!cancelled) { setFeeStatusByStudent(latest); setFeeStatusError(""); }
+ } catch (err) {
+ if (!cancelled) setFeeStatusError(err.response?.data?.message || "Fee status data could not be refreshed. Existing loaded fee statuses were preserved.");
  }
  }
  void loadFeeStatuses();
@@ -2292,6 +2297,11 @@ export default function StudentsModule() {
  </div>
  </div>
 
+ {feeStatusError && (
+ <div style={{ marginBottom:16, padding:"12px 14px", borderRadius:12, color:"var(--apex-action-danger)", border:"1px solid color-mix(in srgb,var(--apex-action-danger) 30%,transparent)", background:"color-mix(in srgb,var(--apex-action-danger) 8%,transparent)" }}>
+ {feeStatusError}
+ </div>
+ )}
 
  {/* Module Sub-tabs */}
  <div style={{ display:"flex", gap:6, marginBottom:20, overflowX:"auto", paddingBottom:2 }}>

@@ -141,6 +141,38 @@ const nestedScoringPaper = {
  }],
 }
 
+
+const mathAssetsPaper = {
+ name:'Math Assets Browser Fixture',
+ userAuthored:true,
+ documentOrigin:'USER_AUTHORED',
+ assessmentType:'Weekly Assessment',
+ config:{
+  className:'7',classLevel:'7',subjectName:'Mathematics',subject:'Mathematics',
+  language:'english',paperCode:'MATH-ASSET-BROWSER',timeAllowed:'20 minutes',
+  totalMarks:4,title:'Math & Image Assessment',
+ },
+ official_section:[
+  {
+   id:'math-1',type:'official_section',sourceOrder:1,heading:'Q1. Solve the expression.',
+   text:'Q1. Solve the expression.',marks:2,content:'Use the expression below.',
+   layoutPreset:'math',math:{format:'latex',source:'x^2 + y^2 = z^2',display:'block'},
+  },
+  {
+   id:'image-1',type:'official_section',sourceOrder:2,heading:'Q2. Study the diagram.',
+   text:'Q2. Study the diagram.',marks:2,content:'Name the object shown.',
+   layoutPreset:'image',
+   asset:{
+    id:'asset-image-browser-1',kind:'image',storage:'embedded',mimeType:'image/png',
+    sha256:'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    byteLength:68,widthPx:1,heightPx:1,effectiveDpi:25.4,
+    altText:'A one-pixel browser test image',description:'Deterministic browser fixture',
+    contentDataUrl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9ZQmcAAAAASUVORK5CYII=',
+   },
+  },
+ ],
+}
+
 function ThemeFixture() {
  const { theme, setTheme, toggleTheme } = useTheme()
  const { savedPapers } = usePaperStore()
@@ -150,7 +182,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('nestedScoring') ? nestedScoringPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

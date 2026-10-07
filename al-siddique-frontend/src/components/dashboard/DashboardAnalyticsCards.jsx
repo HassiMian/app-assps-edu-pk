@@ -198,9 +198,7 @@ function UnmarkedAttendanceModal({ onClose, onRefresh }) {
       setMarkedToday(attList)
     } catch (err) {
       console.error('Failed to load unmarked attendance data:', err)
-      setStudents([])
-      setMarkedToday([])
-      setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be loaded from the server.')
+      setLoadError(err.response?.data?.message || 'Unmarked attendance data could not be refreshed. Existing loaded attendance state was preserved.')
     } finally {
       setLoading(false)
     }
