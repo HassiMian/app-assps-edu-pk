@@ -2,9 +2,10 @@ const test = require('node:test')
 const assert = require('node:assert/strict')
 const express = require('express')
 const http = require('http')
+const jwt = require('jsonwebtoken')
 const { tenantContext, pool } = require('../config/database')
 
-function request(port, method, path, body, token='mock-jwt-token', headers={}) {
+function request(port, method, path, body, token=null, headers={}) {
   return new Promise((resolve,reject)=>{
     const payload=body==null?'':JSON.stringify(body)
     const req=http.request({hostname:'127.0.0.1',port,path,method,headers:{'content-type':'application/json',...(token?{authorization:`Bearer ${token}`}:{}) ,...headers,...(payload?{'content-length':Buffer.byteLength(payload)}:{})}},res=>{
@@ -17,34 +18,35 @@ function request(port, method, path, body, token='mock-jwt-token', headers={}) {
 test('Question Bank governance capture is idempotent, duplicate-aware, revisioned and lifecycle-gated',{timeout:30000},async t=>{
   assert.equal(process.env.NODE_ENV,'test','HTTP governance integration test must run only in NODE_ENV=test')
   assert.notEqual(process.env.DB_NAME,'apexos','HTTP governance integration test must never target production DB')
-  await pool.query(`INSERT INTO users (id, school_id, name, email, password, role, is_active) VALUES (999, 1, 'Question Bank HTTP Fixture', 'qbank-http-fixture@invalid.local', 'not-used', 'admin', true) ON CONFLICT (id) DO NOTHING`)
+  await pool.query("UPDATE users SET email='qbank-http-fixture@invalid.local', role='admin', is_active=true WHERE id=999")
   const app=express();app.use(express.json());app.use((req,res,next)=>tenantContext.run({rlsEnabled:false,isSuperAdmin:false,tenantId:null},next));app.use('/api/question-bank',require('../routes/questionBankRoutes'))
+  const token=jwt.sign({id:999,email:'qbank-http-fixture@invalid.local'},process.env.JWT_SECRET,{algorithm:'HS256',expiresIn:'5m'})
   const server=await new Promise(resolve=>{const s=app.listen(0,'127.0.0.1',()=>resolve(s))});const port=server.address().port
   t.after(async()=>{await new Promise(r=>server.close(r));await pool.end()})
 
   const suffix=Date.now().toString(36)
   const q={id:`legacy-q1-${suffix}`,class_level:'7',subject:'Science',medium:'english',question_type:'short',question_text:`What is force? ${suffix}`,answer:'A push or pull',marks:2}
-  const first=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:001`,question:q})
+  const first=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:001`,question:q},token)
   assert.equal(first.status,201,first.raw);assert.equal(first.body.data.created,true);assert.equal(first.body.data.currentRevision,1)
   const publicId=first.body.data.publicId
 
-  const replay=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:001`,question:q})
+  const replay=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:001`,question:q},token)
   assert.equal(replay.status,200,replay.raw);assert.equal(replay.body.data.replayed,true);assert.equal(replay.body.data.publicId,publicId)
 
-  const dup=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:002`,question:{...q,id:`legacy-q2-${suffix}`}})
+  const dup=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:002`,question:{...q,id:`legacy-q2-${suffix}`}},token)
   assert.equal(dup.status,200,dup.raw);assert.equal(dup.body.data.duplicate,true);assert.equal(dup.body.data.publicId,publicId);assert.equal(dup.body.data.currentRevision,1)
 
-  const revised=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:003`,question:{...q,answer:'A force is a push or pull.'}})
+  const revised=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:`capture:science:${suffix}:003`,question:{...q,answer:'A force is a push or pull.'}},token)
   assert.equal(revised.status,200,revised.raw);assert.equal(revised.body.data.publicId,publicId);assert.equal(revised.body.data.revisionCreated,true);assert.equal(revised.body.data.currentRevision,2)
 
-  const directReady=await request(port,'PATCH',`/api/question-bank/governance/${publicId}/status`,{status:'ready'})
+  const directReady=await request(port,'PATCH',`/api/question-bank/governance/${publicId}/status`,{status:'ready'},token)
   assert.equal(directReady.status,409,directReady.raw);assert.equal(directReady.body.code,'INVALID_QUESTION_LIFECYCLE_TRANSITION')
-  const reviewed=await request(port,'PATCH',`/api/question-bank/governance/${publicId}/status`,{status:'reviewed'})
+  const reviewed=await request(port,'PATCH',`/api/question-bank/governance/${publicId}/status`,{status:'reviewed'},token)
   assert.equal(reviewed.status,200,reviewed.raw);assert.equal(reviewed.body.data.lifecycle_status,'reviewed')
-  const ready=await request(port,'PATCH',`/api/question-bank/governance/${publicId}/status`,{status:'ready'})
+  const ready=await request(port,'PATCH',`/api/question-bank/governance/${publicId}/status`,{status:'ready'},token)
   assert.equal(ready.status,200,ready.raw);assert.equal(ready.body.data.lifecycle_status,'ready')
 
-  const badKey=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:'short',question:q})
+  const badKey=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:'short',question:q},token)
   assert.equal(badKey.status,400,badKey.raw);assert.equal(badKey.body.code,'INVALID_IDEMPOTENCY_KEY')
   const expired=await request(port,'POST','/api/question-bank/governance/capture',{idempotencyKey:'capture:expired:0001',question:q},'bad.token')
   assert.equal(expired.status,401,expired.raw)
