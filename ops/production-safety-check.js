@@ -2088,6 +2088,22 @@ assertNotContains(
   'fee workflows must not turn missing or failed academic setup reads into guessed classes or sessions.'
 )
 
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/usePaperStore.js',
+  "window.fetch('/api/settings/public',",
+  'authenticated Paper Store hydration must never issue an unscoped public settings request (single quotes).'
+)
+assertNotContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/usePaperStore.js',
+  'window.fetch("/api/settings/public",',
+  'authenticated Paper Store hydration must never issue an unscoped public settings request (double quotes).'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/usePaperStore.js',
+  '/api/settings/public?school_id=',
+  'Paper Store public settings fallback must carry an explicit school id.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
