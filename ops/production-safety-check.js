@@ -2225,6 +2225,17 @@ assertContains(
   'attendance SMS delivery-history refresh failure must be explicit while preserving current rows.'
 )
 
+assertContains(
+  'al-siddique-backend/src/routes/settingsRoutes.js',
+  "superapp_modules: result.rows[0]?.superapp_modules || {},",
+  'authenticated settings responses must preserve superapp module configuration for authorized clients.'
+)
+assertContains(
+  'al-siddique-backend/src/tests/public-settings-surface.test.js',
+  'assert.doesNotMatch(publicRoute, /superapp_modules/)',
+  'public settings must retain regression coverage that blocks internal superapp entitlement metadata.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
