@@ -235,15 +235,19 @@ app.use((err, req, res, next) => {
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 async function bootstrap() {
-  if (process.env.AUTO_MIGRATE_ON_BOOT !== 'false') {
+  const isProduction = process.env.NODE_ENV === 'production'
+  const autoMigrate = process.env.AUTO_MIGRATE_ON_BOOT !== 'false'
+
+  if (isProduction && autoMigrate) {
+    throw new Error('AUTO_MIGRATE_ON_BOOT=false is required in production; apply versioned migrations before startup.')
+  }
+
+  if (autoMigrate) {
     try {
       await migrate()
       await migrateSubscriptionSchema()
     } catch (err) {
       console.error('Migration failed:', err.message)
-      if (process.env.NODE_ENV === 'production') {
-        throw err
-      }
       console.warn('Continuing startup in degraded mode because the database is unavailable.')
     }
   }

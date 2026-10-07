@@ -277,6 +277,12 @@ assertNotContains(
 
 assertContains(
   'al-siddique-backend/src/server.js',
+  "AUTO_MIGRATE_ON_BOOT=false is required in production",
+  'production runtime must never apply schema migrations implicitly on boot.'
+)
+
+assertContains(
+  'al-siddique-backend/src/server.js',
   "if (process.env.NODE_ENV === 'production') throw e",
   'production startup must fail fast when any mounted route cannot be registered.'
 )
