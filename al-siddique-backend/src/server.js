@@ -174,6 +174,7 @@ const registerRoutes = (router) => {
       router.use(path, require(routeFile))
     } catch (e) {
       console.error(`Failed to register route ${path} from ${routeFile}:`, e.message)
+      if (process.env.NODE_ENV === 'production') throw e
     }
   }
 

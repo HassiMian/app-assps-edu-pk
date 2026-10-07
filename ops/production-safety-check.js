@@ -275,6 +275,12 @@ assertNotContains(
   'employee APIs must fail closed instead of synthesizing staff data.'
 )
 
+assertContains(
+  'al-siddique-backend/src/server.js',
+  "if (process.env.NODE_ENV === 'production') throw e",
+  'production startup must fail fast when any mounted route cannot be registered.'
+)
+
 assertNotContains(
   'al-siddique-backend/src/server.js',
   /\^https\?:\\\/\\\/.*assps/,
