@@ -304,6 +304,18 @@ assertNotContains(
 )
 
 assertNotContains(
+  'al-siddique-frontend/src/Modules/students/AdmissionsModule.jsx',
+  /catch \{[\s\S]{0,140}setFeeAmounts\(prev => \(\{ \.\.\.prev, 'Monthly Fee': 0 \}\)\)/,
+  'admission fee-settings source failures must not be converted into a zero monthly fee.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/students/AdmissionsModule.jsx',
+  'if (!admitted || feeSettingsLoadError) return',
+  'post-admission challan creation must fail closed while configured fee settings are unavailable.'
+)
+
+assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /localStorage|getStorage\(\)/,
   'fee operational preferences must not use unscoped browser storage.'

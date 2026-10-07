@@ -51,6 +51,7 @@ export default function AdmissionsModule() {
  const [feeDiscount, setFeeDiscount] = useState(0)
  const [feeSaving, setFeeSaving] = useState(false)
  const [feeError, setFeeError] = useState('')
+ const [feeSettingsLoadError, setFeeSettingsLoadError] = useState('')
 
  const [policyOpen, setPolicyOpen] = useState(false)
 
@@ -73,9 +74,12 @@ export default function AdmissionsModule() {
  const list = response.data?.data?.classSettings || []
  const found = list.find(item => item.class_name === form.studentClass && item.active !== false)
  const monthlyFee = Number(found?.monthly_fee || 0)
- if (!cancelled) setFeeAmounts(prev => ({ ...prev, 'Monthly Fee': monthlyFee }))
- } catch {
- if (!cancelled) setFeeAmounts(prev => ({ ...prev, 'Monthly Fee': 0 }))
+ if (!cancelled) {
+ setFeeAmounts(prev => ({ ...prev, 'Monthly Fee': monthlyFee }))
+ setFeeSettingsLoadError('')
+ }
+ } catch (err) {
+ if (!cancelled) setFeeSettingsLoadError(err.response?.data?.message || 'Fee settings are temporarily unavailable. Admission is saved, but challan creation is disabled until the configured fee can be verified.')
  }
  }
  void loadClassFee()
@@ -183,7 +187,7 @@ export default function AdmissionsModule() {
  }
 
  async function handleCreateChallan() {
-  if (!admitted) return
+  if (!admitted || feeSettingsLoadError) return
   setFeeSaving(true)
   setFeeError('')
   try {
@@ -604,10 +608,11 @@ export default function AdmissionsModule() {
  </div>
 
  <div style={{ display:'flex', gap:12, alignItems:'center', flexWrap:'wrap' }}>
- <button style={btnPrimary} onClick={handleCreateChallan} disabled={feeSaving}>
+ <button style={btnPrimary} onClick={handleCreateChallan} disabled={feeSaving || !!feeSettingsLoadError}>
  {feeSaving ? 'Creating…' : ' Create & Print Challan'}
  </button>
  <button style={btnSecondary} onClick={skipChallan}>Skip for now</button>
+ {feeSettingsLoadError && <span style={{ color:C.red, fontWeight:700 }}>{feeSettingsLoadError}</span>}
  {feeError && <span style={{ color:C.red, fontWeight:700 }}>{feeError}</span>}
  </div>
  </div>
