@@ -73,6 +73,42 @@ router.patch('/governance/:publicId/status', canManageQuestionBank, async (req, 
 })
 
 // ─── 1. Get List of Questions (with filters) ──────────────────────────────────
+async function loadQuestionGovernanceRevisionMap(schoolId, ids = []) {
+  const keys = [...new Set((ids || []).map(id => String(id || '')).filter(Boolean))]
+  if (!keys.length) return new Map()
+  const result = await query(
+    `SELECT source_id, MAX(current_revision)::int AS current_revision
+       FROM (
+         SELECT qm.source_question_bank_id AS source_id, qm.current_revision
+           FROM question_masters qm
+          WHERE qm.school_id=$1 AND qm.source_question_bank_id = ANY($2::text[])
+         UNION ALL
+         SELECT m.mapping_key AS source_id, qm.current_revision
+           FROM question_masters qm
+           JOIN question_mappings m ON m.school_id=qm.school_id AND m.question_master_id=qm.id
+          WHERE qm.school_id=$1 AND m.mapping_type='source_question_bank_id' AND m.mapping_key = ANY($2::text[])
+       ) governed
+      WHERE source_id IS NOT NULL
+      GROUP BY source_id`,
+    [schoolId, keys]
+  )
+  return new Map(result.rows.map(row => [String(row.source_id), Number(row.current_revision || 0)]))
+}
+
+function requireExpectedQuestionRevision(req, res) {
+  const raw = req.body?.expectedGovernanceRevision
+  if (raw == null || raw === '') {
+    res.status(428).json({ success:false, code:'QUESTION_REVISION_REQUIRED', message:'Current question revision is required. Reload the Question Bank and try again.' })
+    return null
+  }
+  const revision = Number(raw)
+  if (!Number.isInteger(revision) || revision < 0) {
+    res.status(400).json({ success:false, code:'INVALID_EXPECTED_QUESTION_REVISION', message:'Expected question revision must be a non-negative integer.' })
+    return null
+  }
+  return revision
+}
+
 router.get('/', async (req, res) => {
   try {
     const schoolId = requireSchoolContext(req, res)
@@ -132,6 +168,8 @@ router.get('/', async (req, res) => {
     params.push(limit, offset)
 
     const result = await query(sql, params)
+    const governanceRevisions = await loadQuestionGovernanceRevisionMap(schoolId, result.rows.map(row => row.id))
+    const hydratedRows = result.rows.map(row => ({ ...row, governance_revision: governanceRevisions.get(String(row.id)) || 0 }))
     
     // Get total count for pagination
     const countSql = sql.split('ORDER BY')[0].replace('SELECT *', 'SELECT COUNT(*) as total')
@@ -139,7 +177,7 @@ router.get('/', async (req, res) => {
 
     res.json({
       success: true,
-      data: result.rows,
+      data: hydratedRows,
       meta: {
         total: parseInt(countResult.rows[0]?.total || 0),
         limit: parseInt(limit),
@@ -177,7 +215,8 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ success: false, message: 'Question not found' })
     }
 
-    res.json({ success: true, data: result.rows[0] })
+    const governanceRevisions = await loadQuestionGovernanceRevisionMap(schoolId, [result.rows[0].id])
+    res.json({ success: true, data: { ...result.rows[0], governance_revision: governanceRevisions.get(String(result.rows[0].id)) || 0 } })
   } catch (error) {
     console.error('Error fetching question:', error)
     res.status(500).json({ success: false, message: 'Failed to fetch question' })
@@ -241,11 +280,13 @@ router.put('/:id', canManageQuestionBank, async (req, res) => {
     const schoolId=requireSchoolContext(req,res); if(!schoolId)return
     const existing=await loadLegacyQuestion(schoolId,req.params.id)
     if(!existing)return res.status(404).json({success:false,message:'Question not found or no permission'})
-    const merged={...existing,...(req.body||{}),id:existing.id,school_id:schoolId}
+    const expectedRevision=requireExpectedQuestionRevision(req,res); if(expectedRevision==null)return
+    const { expectedGovernanceRevision: _expectedGovernanceRevision, ...changes } = req.body || {}
+    const merged={...existing,...changes,id:existing.id,school_id:schoolId}
     const governance=await captureQuestionGovernance({
       schoolId,userId:req.user?.id||null,
       idempotencyKey:governanceIdempotencyKey('edit',req,existing.id),
-      question:merged,sourceQuestionBankId:existing.id,
+      question:merged,sourceQuestionBankId:existing.id,expectedRevision,
     })
     res.json({success:true,data:governedLegacyResponse(merged,governance)})
   } catch(error) {
@@ -260,10 +301,11 @@ router.delete('/:id', canManageQuestionBank, async (req, res) => {
     const schoolId=requireSchoolContext(req,res); if(!schoolId)return
     const existing=await loadLegacyQuestion(schoolId,req.params.id)
     if(!existing)return res.status(404).json({success:false,message:'Question not found or no permission'})
+    const expectedRevision=requireExpectedQuestionRevision(req,res); if(expectedRevision==null)return
     const captured=await captureQuestionGovernance({
       schoolId,userId:req.user?.id||null,
       idempotencyKey:governanceIdempotencyKey('retire-capture',req,existing.id),
-      question:existing,sourceQuestionBankId:existing.id,
+      question:existing,sourceQuestionBankId:existing.id,expectedRevision,
     })
     let lifecycle=captured.lifecycleStatus
     if(lifecycle==='candidate') lifecycle=(await transitionQuestionLifecycle({schoolId,userId:req.user?.id||null,publicId:captured.publicId,toStatus:'reviewed'})).lifecycle_status

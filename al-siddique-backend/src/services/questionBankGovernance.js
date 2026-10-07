@@ -137,13 +137,17 @@ async function withTenantTransaction(schoolId, fn) {
   }
 }
 
-async function captureQuestionGovernance({ schoolId, userId = null, idempotencyKey, question = {}, sourceQuestionBankId = null }) {
+async function captureQuestionGovernance({ schoolId, userId = null, idempotencyKey, question = {}, sourceQuestionBankId = null, expectedRevision = null }) {
   const key = assertIdempotencyKey(idempotencyKey)
   const fingerprint = buildCanonicalFingerprint(question)
   const revisionPayload = buildQuestionRevisionPayload(question)
   const revisionHash = buildRevisionHash(question)
   const sourceId = text(sourceQuestionBankId || question.id) || null
-  const requestHash = sha256({ fingerprint, revisionHash, sourceId })
+  const normalizedExpectedRevision = expectedRevision == null ? null : Number(expectedRevision)
+  if (normalizedExpectedRevision != null && (!Number.isInteger(normalizedExpectedRevision) || normalizedExpectedRevision < 0)) {
+    throw governanceError(400, 'INVALID_EXPECTED_QUESTION_REVISION', 'Expected question revision must be a non-negative integer.')
+  }
+  const requestHash = sha256({ fingerprint, revisionHash, sourceId, expectedRevision:normalizedExpectedRevision })
 
   return withTenantTransaction(schoolId, async (client, tenantId) => {
     const previous = await client.query(
@@ -181,6 +185,16 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
     )
 
     let master = masterResult.rows[0] || null
+    if (normalizedExpectedRevision != null) {
+      const currentRevision = Number(master?.current_revision || 0)
+      if (currentRevision !== normalizedExpectedRevision) {
+        throw governanceError(409, 'QUESTION_REVISION_CONFLICT', 'Question changed since it was loaded. Reload the Question Bank and try again.', {
+          expectedRevision: normalizedExpectedRevision,
+          currentRevision,
+          publicId: master?.public_id || null,
+        })
+      }
+    }
     let created = false
     let duplicate = false
     if (!master) {
