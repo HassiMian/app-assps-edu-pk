@@ -1,6 +1,7 @@
 // paperSystemRules.js — single source of truth for ASSPS paper authoring/presentation rules
 import { URDU_FONT_STACK, isUrduScriptPaper } from './resolvePaperRoute.js'
 import { inferOfficialSectionKind, parseMcqRows } from './officialSectionSemantics.js'
+import { resolveManualSectionScoring } from './PaperEditor/core/ScoringPlan.js'
 
 export const ASSPS_PAPER_SYSTEM_VERSION = 'ASSPS_PAPER_SYSTEM_V1_2026_09_27'
 export const PAPER_LOCKED_HEADER_FIELDS = Object.freeze(['schoolName', 'logo'])
@@ -52,7 +53,10 @@ export function resolvePaperTotalMarks(paper = {}) {
     ? paper.official_section
     : (paper.selectedQuestions?.official_section?.questions || [])
 
-  const total = sections.reduce((sum, section) => sum + resolveSectionTotalMarks(section), 0)
+  const total = sections.reduce((sum, section, index) => {
+    const scoring = resolveManualSectionScoring(section, resolveSectionTotalMarks(section), index)
+    return sum + Number(scoring.maximumObtainableMarks || 0)
+  }, 0)
   return total > 0 ? total : 0
 }
 
@@ -60,14 +64,22 @@ export function buildMarksLedger(paper = {}) {
   const sections = Array.isArray(paper.official_section)
     ? paper.official_section
     : (paper.selectedQuestions?.official_section?.questions || [])
-  const sectionTotals = sections.map(resolveSectionTotalMarks)
-  const questionTotal = sectionTotals.reduce((sum, marks) => sum + Number(marks || 0), 0)
+  const scoring = sections.map((section, index) => resolveManualSectionScoring(section, resolveSectionTotalMarks(section), index))
+  const sectionTotals = scoring.map(item => Number(item.maximumObtainableMarks || 0))
+  const sectionPotentialTotals = scoring.map(item => Number(item.listedPotentialItemMarksTotal || 0))
+  const questionTotal = sectionTotals.reduce((sum, marks) => sum + marks, 0)
+  const availableItemMarksTotal = sectionPotentialTotals.reduce((sum, marks) => sum + marks, 0)
   const headerTotal = safeNumber(paper.config?.totalMarks ?? paper.totalMarks) ?? 0
+  const scoringErrors = scoring.flatMap(item => item.errors || [])
   return {
     headerTotal,
     questionTotal,
+    availableItemMarksTotal,
     sectionTotals,
-    balanced: headerTotal > 0 && headerTotal === questionTotal,
+    sectionPotentialTotals,
+    choiceGroups: scoring.map(item => item.choiceGroup).filter(Boolean),
+    scoringErrors,
+    balanced: headerTotal > 0 && headerTotal === questionTotal && scoringErrors.length === 0,
     difference: headerTotal - questionTotal,
   }
 }

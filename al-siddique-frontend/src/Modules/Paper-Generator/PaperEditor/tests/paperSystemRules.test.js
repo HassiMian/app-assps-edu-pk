@@ -164,3 +164,27 @@ test('paper quality gate catches structural errors and marks mismatch without si
   assert.ok(gate.issues.some(x=>x.code==='QUESTION_CONTENT_MISSING'))
   assert.ok(gate.issues.some(x=>x.code==='MARKS_MISMATCH'))
 })
+
+test('marks ledger uses maximum obtainable marks for attempt-any instead of potential marks', () => {
+  const paper={
+    config:{totalMarks:20},
+    official_section:[{
+      id:'choice-short',
+      heading:'Q1. Attempt any 10 questions. (24)',
+      marks:24,
+      attemptRule:'ATTEMPT_ANY',
+      actualItemCount:12,
+      attemptCount:10,
+      marksPerItem:2,
+    }],
+  }
+  const ledger=buildMarksLedger(paper)
+  assert.equal(ledger.questionTotal,20)
+  assert.equal(ledger.availableItemMarksTotal,24)
+  assert.deepEqual(ledger.sectionTotals,[20])
+  assert.deepEqual(ledger.sectionPotentialTotals,[24])
+  assert.equal(ledger.choiceGroups.length,1)
+  assert.equal(ledger.choiceGroups[0].mode,'ATTEMPT_ANY')
+  assert.equal(ledger.balanced,true)
+  assert.equal(resolvePaperTotalMarks({...paper,config:{totalMarks:0}}),20)
+})

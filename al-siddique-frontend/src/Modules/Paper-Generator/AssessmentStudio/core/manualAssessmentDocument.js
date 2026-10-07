@@ -22,6 +22,7 @@ import {
 } from '../../PaperEditor/core/PaperDocumentV2.js'
 import { DEFAULT_BLOCK_REGISTRY, normalizeNodeForBlockRegistry } from './BlockRegistry.js'
 import { resolveSectionTotalMarks } from '../../paperSystemRules.js'
+import { buildManualScoringPlan, resolveManualSectionScoring } from '../../PaperEditor/core/ScoringPlan.js'
 
 const text = value => String(value ?? '').trim()
 const finiteMarks = value => Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0
@@ -74,8 +75,10 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
   const language = languageOf(config.language)
   const direction = directionOf(language)
   const sections = Array.isArray(paper.official_section) ? paper.official_section : []
+  const sectionScoring = sections.map((section, index) => resolveManualSectionScoring(section, finiteMarks(resolveSectionTotalMarks(section)), index))
   const canonicalSections = sections.map((section, index) => {
-    const marks = finiteMarks(resolveSectionTotalMarks(section))
+    const scoring = sectionScoring[index]
+    const marks = finiteMarks(scoring.maximumObtainableMarks)
     const nodeId = `manual-node-${text(section.id) || index + 1}`
     const sectionId = `manual-section-${text(section.id) || index + 1}`
     const body = text(section.content)
@@ -90,22 +93,33 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
       storedLegacyMarksValue: null,
       operationalSectionTotal: marks,
       authoritativeSectionTotal: marks,
-      sectionMarksOrigin: SectionMarksOrigin.TEACHER_EXPLICIT_SCALAR,
-      listedPotentialItemMarksTotal: marks,
-      attemptRule: AttemptRule.ALL,
-      attemptRuleOrigin: AttemptRuleOrigin.TEACHER_EXPLICIT,
-      attemptCount: 1,
-      actualItemCount: 1,
+      sectionMarksOrigin: scoring.attemptRule === AttemptRule.ALL
+        ? SectionMarksOrigin.TEACHER_EXPLICIT_SCALAR
+        : SectionMarksOrigin.TEACHER_EXPLICIT_FORMULA,
+      listedPotentialItemMarksTotal: finiteMarks(scoring.listedPotentialItemMarksTotal),
+      attemptRule: scoring.attemptRule,
+      attemptRuleOrigin: scoring.attemptRuleOrigin,
+      attemptCount: scoring.attemptCount,
+      actualItemCount: scoring.actualItemCount,
+      formula: scoring.attemptRule === AttemptRule.ALL ? null : {
+        mode: scoring.choiceGroup?.mode || 'ATTEMPT_ANY',
+        availableItemCount: scoring.actualItemCount,
+        attemptCount: scoring.attemptCount,
+        marksPerItem: scoring.marksPerItem,
+        maximumObtainableMarks: marks,
+      },
       nodes: [normalizeNodeForBlockRegistry(nodeFromSection(section,{ nodeId, body, direction, marks }), DEFAULT_BLOCK_REGISTRY)],
       provenance: { sourceSectionId: null, sourceSegmentIds: [] },
     })
   })
 
-  const questionTotal = canonicalSections.reduce((sum, section) => sum + finiteMarks(section.operationalSectionTotal), 0)
   const configuredTotal = finiteMarks(config.totalMarks)
+  const scoringPlan = buildManualScoringPlan(sectionScoring, configuredTotal)
+  const questionTotal = scoringPlan.maximumObtainableMarks
   const hasExplicitTotal = configuredTotal > 0
-  const balanced = hasExplicitTotal ? configuredTotal === questionTotal : questionTotal > 0
-  const effectiveTotal = hasExplicitTotal ? configuredTotal : questionTotal
+  const headerBalanced = scoringPlan.headerBalanced
+  const balanced = scoringPlan.balanced
+  const effectiveTotal = questionTotal
   const id = text(paper.id) || text(paper.clientDraftId) || `manual-${text(config.classLevel) || 'class'}-${text(config.subjectName || config.subject) || 'subject'}`
 
   const doc = createCanonicalPaperDocument({
@@ -135,13 +149,17 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
       storedConfiguredTotal: hasExplicitTotal ? configuredTotal : null,
       originalTeacherHeaderTotal: hasExplicitTotal ? configuredTotal : null,
       authoritativePaperTotal: effectiveTotal,
-      paperTotalOrigin: hasExplicitTotal ? PaperTotalOrigin.TEACHER_EXPLICIT : PaperTotalOrigin.DERIVED_FROM_EXPLICIT_SECTION_EVIDENCE,
-      paperMarksStatus: balanced ? PaperMarksStatus.BALANCED_EXPLICIT : PaperMarksStatus.SOURCE_TOTAL_CONFLICT,
+      paperTotalOrigin: hasExplicitTotal && headerBalanced
+        ? PaperTotalOrigin.TEACHER_EXPLICIT
+        : (hasExplicitTotal ? PaperTotalOrigin.CORRECTED_FROM_CONFLICTING_SOURCE_HEADER : PaperTotalOrigin.DERIVED_FROM_EXPLICIT_SECTION_EVIDENCE),
+      paperMarksStatus: scoringPlan.errors.length
+        ? PaperMarksStatus.MIXED_EXPLICIT_AND_UNRESOLVED
+        : (balanced ? PaperMarksStatus.BALANCED_EXPLICIT : PaperMarksStatus.SOURCE_TOTAL_CONFLICT),
       flags: {
-        hasItemCountConflict: false,
+        hasItemCountConflict: scoringPlan.errors.some(error => /item count|attempt count/i.test(error)),
         hasProvisionalMarks: false,
-        hasSourceHeaderConflict: hasExplicitTotal && !balanced,
-        hasUnresolvedAttemptRule: false,
+        hasSourceHeaderConflict: hasExplicitTotal && !headerBalanced,
+        hasUnresolvedAttemptRule: scoringPlan.errors.length > 0,
       },
       sourceTotalNote: null,
       qaNotes: null,
@@ -163,12 +181,9 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
     },
   }
   doc.scoringPlan = {
-    version: 1,
-    strategy: 'ALL_SECTIONS',
-    maximumObtainableMarks: effectiveTotal,
+    ...scoringPlan,
+    maximumObtainableMarks: questionTotal,
     questionMarksTotal: questionTotal,
-    balanced,
-    choiceGroups: [],
   }
   return doc
 }
@@ -179,6 +194,7 @@ export function validateManualAssessmentForRelease(doc) {
   if (doc?.documentOrigin !== DocumentOrigin.USER_AUTHORED) errors.push('Manual assessment must be USER_AUTHORED')
   if (!Array.isArray(doc?.sections) || doc.sections.length === 0) errors.push('At least one assessment section is required before finalization')
   if (!doc?.scoringPlan?.balanced) errors.push('Scoring plan must be balanced before finalization')
+  for (const scoringError of (doc?.scoringPlan?.errors || [])) errors.push(scoringError)
   if (!(Number(doc?.scoringPlan?.maximumObtainableMarks) > 0)) errors.push('Maximum obtainable marks must be greater than zero')
   return { valid: errors.length === 0, errors }
 }
