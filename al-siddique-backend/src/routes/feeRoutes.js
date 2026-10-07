@@ -669,6 +669,13 @@ router.post('/bulk', protect, adminOnly, async (req, res) => {
     let skippedCount = 0
     const session = await resolveAcademicSession(schoolId, year)
     const configuredMonthly = await getClassMonthlyFee(schoolId, className, session)
+    if (Number(configuredMonthly || 0) <= 0) {
+      return res.status(422).json({
+        success: false,
+        code: 'FEE_CLASS_RATE_NOT_CONFIGURED',
+        message: 'A positive monthly fee must be configured for this class and academic session before bulk challan generation.',
+      })
+    }
 
     for (const student of studentsResult.rows) {
       const duplicateSql = 'SELECT id FROM fee_challans WHERE student_id = $1 AND LOWER(TRIM(month)) = LOWER(TRIM($2)) AND year = $3 AND school_id = $4 LIMIT 1'
