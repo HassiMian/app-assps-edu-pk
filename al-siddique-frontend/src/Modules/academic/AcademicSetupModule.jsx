@@ -680,7 +680,8 @@ export default function AcademicSetupModule() {
  setData(next)
  saveAcademic(next)
  setSyncState('synced')
- } catch {
+ } catch (error) {
+ console.warn('Academic setup server hydration failed; showing cached setup:', error?.message || error)
  if (!cancelled) setSyncState('unavailable')
  }
  }

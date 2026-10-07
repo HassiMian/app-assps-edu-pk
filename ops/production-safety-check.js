@@ -2286,13 +2286,13 @@ assertContains(
 
 assertContains(
   'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
-  "setSyncState('offline')",
+  "setSyncState('unavailable')",
   'academic setup hydration failures must expose server-unavailable state while preserving cached classes.'
 )
 assertContains(
   'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
-  'Server unavailable — cached setup shown',
-  'academic setup must tell users when cached classes are shown because server hydration failed.'
+  'Server unavailable — showing local cache',
+  'academic setup must tell users when the local cache is shown because server hydration failed.'
 )
 assertNotContains(
   'al-siddique-frontend/src/Modules/academic/AcademicSetupModule.jsx',
