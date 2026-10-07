@@ -761,6 +761,7 @@ function FeeModule() {
  const [challans, setChallans] = useState([])
  const [students, setStudents] = useState([])
  const [feeClassSettings, setFeeClassSettings] = useState([])
+ const [feeSettingsLoadError, setFeeSettingsLoadError] = useState('')
  const [workspaceLoadError, setWorkspaceLoadError] = useState('')
  const [printChallan, setPrintChallan] = useState(null)
  const [printList, setPrintList] = useState(null) // { type: 'filtered' | 'defaulters' | 'all', data: [] }
@@ -774,16 +775,22 @@ function FeeModule() {
  async function loadFeeWorkspace() {
  setWorkspaceLoadError('')
  try {
- const [feeRes, studentRes, settingsRes] = await Promise.all([
+ const [feeRes, studentRes] = await Promise.all([
  api.get('/api/fees'),
  api.get('/api/students'),
- api.get('/api/fees/settings').catch(() => ({ data: { data: { classSettings: [] } } })),
  ])
  const liveStudents = (studentRes.data?.data || []).map(normalizeStudent)
  setStudents(liveStudents)
- setFeeClassSettings(settingsRes.data?.data?.classSettings || [])
  setChallans((feeRes.data?.data || []).map(item => normalizeChallan(item, liveStudents)))
  setWorkspaceLoadError('')
+ try {
+ const settingsRes = await api.get('/api/fees/settings')
+ setFeeClassSettings(settingsRes.data?.data?.classSettings || [])
+ setFeeSettingsLoadError('')
+ } catch (settingsErr) {
+ console.error('Failed to load fee settings', settingsErr)
+ setFeeSettingsLoadError(settingsErr.response?.data?.message || 'Fee settings are temporarily unavailable. Challan creation is disabled until the configured fees can be verified.')
+ }
  } catch (err) {
  console.error('Failed to load fee workspace', err)
  setWorkspaceLoadError(err.response?.data?.message || 'Fee workspace could not be refreshed. Existing loaded data was preserved.')
@@ -877,7 +884,7 @@ function FeeModule() {
  </GCard>
 
  <div className="super-module-card" style={{ paddingTop: 28 }}>
- {routeTab === 'create' && <CreateChallan onCreate={addChallan} students={students} classOptions={classOptions} feeClassSettings={feeClassSettings} />}
+ {routeTab === 'create' && <CreateChallan onCreate={addChallan} students={students} classOptions={classOptions} feeClassSettings={feeClassSettings} feeSettingsLoadError={feeSettingsLoadError} />}
  {routeTab === 'view' && (
  <ViewChallans
  challans={challans}
@@ -1012,7 +1019,7 @@ function FeeSettings({ selectedTemplate, onTemplateChange }) {
  )
 }
 
-function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
+function CreateChallan({ onCreate, students, classOptions, feeClassSettings, feeSettingsLoadError }) {
  const now = new Date()
  const [selectedClass, setSelectedClass] = useState(classOptions[0] || '')
  const [selectedStudent, setSelectedStudent] = useState('')
@@ -1049,7 +1056,7 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  }, [heads, amounts, discount, lateFee])
 
  const handleSubmit = async () => {
- if (!student || !dueDate) return
+ if (!student || !dueDate || feeSettingsLoadError) return
  try {
  await api.post('/api/fees', {
  student_id: student.id,
@@ -1070,6 +1077,11 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  return (
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 24 }}>
  <div className="super-module-card" style={{ display: 'grid', gap: 24 }}>
+ {feeSettingsLoadError && (
+ <div style={{ padding:'12px 16px', borderRadius:12, border:'1px solid rgba(255,55,95,0.35)', background:'rgba(255,55,95,0.08)', color:'var(--apex-action-danger)', fontWeight:700 }}>
+ {feeSettingsLoadError}
+ </div>
+ )}
  <GCard>
  <h2 style={{ color: C.gold, fontSize: 20, marginBottom: 18, fontFamily: "'Playfair Display',serif" }}>Step 1 — Select Student</h2>
  <div className="super-module-card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
@@ -1157,10 +1169,10 @@ function CreateChallan({ onCreate, students, classOptions, feeClassSettings }) {
  <span>Rs. {total.toLocaleString()}</span>
  </div>
  </div>
- <button onClick={handleSubmit} disabled={!student} style={{
- width: '100%', padding: '14px 0', borderRadius: 20, border: 'none', cursor: student ? 'pointer' : 'not-allowed',
- background: student ? `linear-gradient(135deg, ${C.gold}, ${C.goldL})` : 'rgba(148,163,184,0.18)',
- color: student ? '#fff' : C.muted, fontWeight: 700, fontSize: 15,
+ <button onClick={handleSubmit} disabled={!student || !!feeSettingsLoadError} style={{
+ width: '100%', padding: '14px 0', borderRadius: 20, border: 'none', cursor: student && !feeSettingsLoadError ? 'pointer' : 'not-allowed',
+ background: student && !feeSettingsLoadError ? `linear-gradient(135deg, ${C.gold}, ${C.goldL})` : 'rgba(148,163,184,0.18)',
+ color: student && !feeSettingsLoadError ? '#fff' : C.muted, fontWeight: 700, fontSize: 15,
  }}>{saved ? ' Challan Created' : 'Create Challan'}</button>
  </GCard>
  </div>

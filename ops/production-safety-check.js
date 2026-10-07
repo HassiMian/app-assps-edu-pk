@@ -469,6 +469,18 @@ assertNotContains(
 
 assertNotContains(
   'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  /api\.get\('\/api\/fees\/settings'\)\.catch\(\(\) => \(\{ data: \{ data: \{ classSettings: \[\] \} \} \}\)\)/,
+  'fee settings source failure must not be converted into an authoritative empty fee configuration.'
+)
+
+assertContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
+  'if (!student || !dueDate || feeSettingsLoadError) return',
+  'challan creation must fail closed while configured fee settings are unavailable.'
+)
+
+assertNotContains(
+  'al-siddique-frontend/src/Modules/fees/FeeModule.jsx',
   /Failed to load fee workspace[\s\S]{0,180}setStudents\(\[\]\)|Failed to load fee workspace[\s\S]{0,220}setChallans\(\[\]\)/,
   'fee workspace source failures must preserve already loaded students and challans.'
 )
