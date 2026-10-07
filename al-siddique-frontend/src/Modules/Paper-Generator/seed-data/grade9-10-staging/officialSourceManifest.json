@@ -2168,10 +2168,69 @@
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/17rtfHf3vy57EuCmxMpH5R8yJhLxcnoaS/view?usp=drive_link",
       "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+    },
+    {
+      "recordId": "pectaa-catalog-104",
+      "grade": 9,
+      "stream": "Religious Alternative",
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "catalogLabel": "Aklaqiat (For Religious Minorities)",
+      "pdfUrl": null,
+      "pdfSha256": null,
+      "chapterIndexStatus": "PENDING",
+      "exerciseIndexStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-06",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1vS1TQhpOttZRfPhkcUPMz-YxVAn8kD55/view?usp=sharing",
+      "identityNote": "Religious-alternative catalogue identity. Applicability depends on enrolled learner/approved offering; no equivalence with Islamiat or Tarjuma-tul-Quran is inferred."
+    },
+    {
+      "recordId": "pectaa-catalog-105",
+      "grade": 9,
+      "stream": "Religious Alternative",
+      "subject": "Christianity",
+      "edition": "2026-08-27",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "catalogLabel": "Christanity (27.08.2026)",
+      "pdfUrl": null,
+      "pdfSha256": null,
+      "chapterIndexStatus": "PENDING",
+      "exerciseIndexStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-06",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1XxgeUphI_i48YmKl4nrRoGZ5g85Gf1Pm/view?usp=sharing",
+      "identityNote": "Religious-alternative catalogue identity. Applicability depends on enrolled learner/approved offering; no equivalence with Islamiat or Tarjuma-tul-Quran is inferred."
+    },
+    {
+      "recordId": "pectaa-catalog-106",
+      "grade": 10,
+      "stream": "Religious Alternative",
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "catalogLabel": "Aklaqiat (For Religious Minorities)",
+      "pdfUrl": null,
+      "pdfSha256": null,
+      "chapterIndexStatus": "PENDING",
+      "exerciseIndexStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "catalogLinkCheckedOn": "2026-10-06",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
+      "catalogAssetUrl": "https://drive.google.com/file/d/1WySlT2PhoDU-Ulym-UBArfsC3SM7BUb-/view?usp=sharing",
+      "identityNote": "Religious-alternative catalogue identity. Applicability depends on enrolled learner/approved offering; no equivalence with Islamiat or Tarjuma-tul-Quran is inferred."
     }
   ],
   "additionalCatalogStreamsPending": [
-    "Religious alternatives and approved textbooks",
     "New 2026-27 IX editions where applicable"
   ],
   "liveSeedCount": 0,
@@ -2179,6 +2238,7 @@
     "2026-10-06: Grade IX Matric-Tech official catalogue identities expanded as separate records; dual-media and similarly named Computer-Tech/Computer Science & Entrepreneurship-Tech titles remain non-equivalent until independently verified.",
     "2026-10-06: Grade X Matric-Tech current catalogue identities expanded separately. The ambiguous label Computer 10 (2026-27) remains its own Matric-Tech catalog identity rather than being merged with Computer-Tech or Computer Science-Tech.",
     "2026-10-06: Grade IX/X Optional Arts plus shared IX-X arts/elective catalogue identities expanded. Grade-specific files and shared IX-X resources remain distinct records.",
-    "2026-10-06: Grade IX/X Practical Notebook catalogue identities expanded separately from theory sources. Ambiguous PNB Biology -9 track remains unresolved rather than merged."
+    "2026-10-06: Grade IX/X Practical Notebook catalogue identities expanded separately from theory sources. Ambiguous PNB Biology -9 track remains unresolved rather than merged.",
+    "2026-10-06: Grade IX/X religious-alternative catalogue identities represented separately from Muslim compulsory subjects; applicability remains enrolment/approved-offering scoped."
   ]
 }

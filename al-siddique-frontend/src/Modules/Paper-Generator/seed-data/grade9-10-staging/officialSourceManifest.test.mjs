@@ -107,3 +107,11 @@ test('Grade IX/X Practical Notebook sources are explicit and dimension-isolated'
  assert(pnb.some(x=>x.subject==='Biology Practical Notebook (catalog track unresolved)'&&x.curriculumTrack==='UNRESOLVED_CATALOG_CONTEXT'));
  const bio9=pnb.filter(x=>x.grade===9&&x.subject==='Biology'&&x.curriculumTrack==='MAINSTREAM');assert.deepEqual(new Set(bio9.map(x=>x.medium)),new Set(['English','Urdu']));
 });
+
+test('religious-alternative catalogue identities are represented without inheriting Muslim-subject identity',()=>{
+ const alt=m.entries.filter(x=>x.stream==='Religious Alternative');assert.equal(alt.length,3);
+ assert(alt.some(x=>x.grade===9&&x.subject==='Christianity'&&x.edition==='2026-08-27'));
+ assert.equal(alt.filter(x=>x.subject==='Akhlaqiat (Religious Minorities)').length,2);
+ assert(alt.every(x=>x.medium==='UNSPECIFIED_BY_CATALOG_LABEL'&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert.equal(m.additionalCatalogStreamsPending.some(x=>x.startsWith('Religious alternatives')),false);
+});

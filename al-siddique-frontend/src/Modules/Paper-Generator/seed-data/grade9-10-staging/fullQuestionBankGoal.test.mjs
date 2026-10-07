@@ -76,7 +76,7 @@ test('existing question/release contracts remain architecture dependencies',()=>
 
 test('remaining unrepresented catalog families still block universal completion',()=>{
   assert.equal(goal.catalogExpansionRequired.some(x=>/Humanities\/Arts/.test(x)),false);
-  assert(goal.catalogExpansionRequired.some(x=>/Religious Education alternatives/.test(x)));
+  assert(goal.catalogExpansionRequired.some(x=>/newly notified 2026-27\/2027 exam source/i));
   assert.equal(goal.completionGate.allInScopeSubjectsComplete,false);
   assert.equal(goal.completionGate.verifiedGitHubRemoteCommit,false);
 });
@@ -114,4 +114,11 @@ test('Practical Notebook goal dimensions are represented without replacing theor
  assert.equal(goal.catalogExpansionRequired.some(x=>/Practical notebook subjects/.test(x)),false);
  assert(pnb.some(s=>s.grade===9&&s.subject==='Chemistry'&&s.curriculumTrack==='MAINSTREAM'));
  assert(goal.subjects.some(s=>s.grade===9&&s.subject==='Chemistry'&&!s.assessmentDimension));
+});
+
+test('religious alternatives are applicability-scoped and independently gated',()=>{
+ const alt=goal.subjects.filter(s=>s.streams?.includes('Religious Alternative'));assert.equal(alt.length,3);
+ assert(alt.every(s=>s.applicability==='ONLY_WHERE_ENROLLED_OR_APPROVED'));
+ assert(alt.every(s=>/never inherit Islamiat\/Tarjuma/i.test(s.identityRule)));
+ assert.equal(goal.catalogExpansionRequired.some(x=>/Religious Education alternatives/.test(x)),false);
 });

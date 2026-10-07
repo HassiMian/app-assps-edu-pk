@@ -1897,9 +1897,84 @@
         "releaseValidation"
       ],
       "identityRule": "Practical-notebook evidence stays separate from theory textbook/pattern evidence; unresolved catalog track labels are never auto-merged."
+    },
+    {
+      "grade": 9,
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "streams": [
+        "Religious Alternative"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-104"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "applicability": "ONLY_WHERE_ENROLLED_OR_APPROVED",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Religious alternatives never inherit Islamiat/Tarjuma content or pattern without their own verified authority."
+    },
+    {
+      "grade": 9,
+      "subject": "Christianity",
+      "streams": [
+        "Religious Alternative"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-105"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "applicability": "ONLY_WHERE_ENROLLED_OR_APPROVED",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Religious alternatives never inherit Islamiat/Tarjuma content or pattern without their own verified authority."
+    },
+    {
+      "grade": 10,
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "streams": [
+        "Religious Alternative"
+      ],
+      "media": [
+        "UNSPECIFIED_BY_CATALOG_LABEL"
+      ],
+      "manifestRecordIds": [
+        "pectaa-catalog-106"
+      ],
+      "completionState": "NOT_COMPLETE",
+      "applicability": "ONLY_WHERE_ENROLLED_OR_APPROVED",
+      "requiredArtifacts": [
+        "verifiedSourceEdition",
+        "topicCoverageAudit",
+        "boardPatternMapping",
+        "originalQuestionCorpus",
+        "answerAndRubricReview",
+        "duplicateAudit",
+        "releaseValidation"
+      ],
+      "identityRule": "Religious alternatives never inherit Islamiat/Tarjuma content or pattern without their own verified authority."
     }
   ],
-  "manifestRecordCount": 103,
+  "manifestRecordCount": 106,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -2003,10 +2078,12 @@
     "pectaa-catalog-100",
     "pectaa-catalog-101",
     "pectaa-catalog-102",
-    "pectaa-catalog-103"
+    "pectaa-catalog-103",
+    "pectaa-catalog-104",
+    "pectaa-catalog-105",
+    "pectaa-catalog-106"
   ],
   "catalogExpansionRequired": [
-    "Religious Education alternatives where ASSPS offers/enrols those subjects",
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"
   ],
   "completionGate": {
