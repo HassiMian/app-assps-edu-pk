@@ -3,6 +3,26 @@
 @import "./styles/apex-design-tokens-v1.css";
 @import "./styles/apex-components-v1.css";
 
+@font-face {
+  font-family: 'ASSPS Jameel Noori';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Jameel Noori Nastaleeq';
+  src:
+    local('Jameel Noori Nastaleeq'),
+    local('Jameel Noori Nastaleeq Kasheeda');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   /* Compatibility aliases now resolve through the semantic APEX system. */
   --navy: var(--apex-bg-surface-solid);
@@ -23,7 +43,7 @@
   --glow-gold: 0 0 20px color-mix(in srgb, var(--apex-action-highlight) 24%, transparent);
   --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
-  --font-urdu: 'Noto Nastaliq Urdu', serif;
+  --font-urdu: 'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
   --app-bg: var(--apex-bg-canvas);
   --app-bg-soft: var(--apex-bg-canvas-elevated);
   --app-surface: var(--apex-bg-surface);
