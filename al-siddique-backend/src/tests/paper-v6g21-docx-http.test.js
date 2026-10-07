@@ -71,6 +71,14 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   const cookieA=await login(emailA,password,'admin',codeA)
   const cookieB=await login(emailB,password,'admin',codeB)
 
+  r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/document-review',{cookie:cookieA})
+  let review=json(r)
+  assert.equal(r.status,200);assert.equal(review.capabilities?.canonicalDocx?.eligible,true);assert.equal(review.capabilities?.canonicalDocx?.family,'historical-v13')
+
+  r=await req('/api/portal/paper-studio/papers/'+legacyId+'/document-review',{cookie:cookieA})
+  review=json(r)
+  assert.equal(r.status,200);assert.equal(review.capabilities?.canonicalDocx?.eligible,false);assert.equal(review.capabilities?.canonicalDocx?.family,'legacy-connect-vault')
+
   r=await req('/api/portal/paper-studio/papers/not-a-number/docx',{cookie:cookieA})
   assert.equal(r.status,400);assert.equal(json(r).code,'INVALID_PAPER_ID')
 
@@ -90,7 +98,7 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   assert.equal(r.headers['x-assps-paper-family'],'historical-v13')
   assert.equal(r.headers['x-assps-paper-revision'],'3')
   assert.match(String(r.headers['x-assps-snapshot-sha256']||''),/^[a-f0-9]{64}$/)
-  console.log('G21_DOCX_HTTP 5/5 PASS')
+  console.log('G21_DOCX_HTTP 7/7 PASS')
  } finally {
   try{child?.kill('SIGTERM')}catch{}
   if(sidA)await c.query('delete from paper_vault where school_id=$1',[sidA]).catch(()=>{})

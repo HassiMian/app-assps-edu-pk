@@ -412,8 +412,9 @@ router.get('/papers/:id/document-review', async (req,res) => {
     const paper=await getProjectedPaper({schoolId,userId:req.user?.id,role:normalizedRole(req),paperId:req.params.id})
     if(!paper)return res.status(404).json({success:false,message:'Paper not found in your accessible library.'})
     const review=await reviewPortalPaperDocument(paper.document)
+    const canonicalDocx=assessCanonicalDocxEligibility(review)
     res.set('Cache-Control','private, no-store')
-    return res.json({success:true,paperId:paper.id,revision:paper.revision,review})
+    return res.json({success:true,paperId:paper.id,revision:paper.revision,review,capabilities:{canonicalDocx}})
   } catch(err) {
     console.error('Paper Studio document review error:',err.message)
     return res.status(500).json({success:false,message:'Paper document review could not be completed.'})
