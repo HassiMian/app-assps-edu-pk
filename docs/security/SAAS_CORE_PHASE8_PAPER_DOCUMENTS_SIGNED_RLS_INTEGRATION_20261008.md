@@ -1,0 +1,33 @@
+# ASSPS SaaS Core — Phase 8 Paper Studio / Signed RLS Integration Checkpoint
+**8 Oct 2026 UTC · SAFELY ISOLATED DEVELOPMENT ONLY · PRODUCTION HOLD**
+
+## Exact source and ownership
+- BASE Core Phase 7: `3d2f0e4ae4765f119462db923eff7f97a2f967bb` (pushed clean).
+- Independent Paper Studio Phase 7: `fc8e769d4b082d4e3a04f241b1351de6b49cce92` (pushed clean). Paper Studio's owned source is the origin of the **Lesson Plan, Daily Diary, cognitive date planner and teacher-owned-document access** fixes; its preexisting G43 saved-paper metadata hardening is identical in Core and was NOT recopied.
+- Isolated worktree/branch: `feat/saas-core-phase8-paper-auth-integration-20261008` at `/root/workspace/assps-core-phase8-paper-auth-integration-20261008`, created from clean Core Phase 7 without switching or editing another agent's worktree.
+- Production FRONTEND (last checked): `24cbcae33b96f1bb058ad9b005f0eb8bfe5eac92`; BACKEND `16ab8f346ba27aa6b2e29a8f03c68db32a326cb9`. No production app change, DB migration/role/credential change, service restart, physical print or firewall/SSH change.
+
+## New engineering executed
+1. Selectively forward-ported Paper-owned `src/routes/lessonPlanRoutes.js`, `src/routes/dailyDiaryRoutes.js`, `src/services/lessonPlanningEngine.js`, and `src/services/teacherDocumentAccess.js`. SHA256 parity with Paper Studio for Diary, Engine and access helper was verified; Lesson Plan route has one **Core-specific security integration** on top.
+2. The Lesson Plan route's existing manual `pool.connect()` transaction previously set bare `app.tenant_id`/super-admin GUCs, which are insufficient against Core Phase 7 signed database policy. In opt-in signed mode it now **requires** an authenticated request AsyncLocalStorage context, matching trusted school ID, actual actor ID, RLS enabled, non-super-admin, then calls shared `applyTenantContext(client)` **inside the same transaction**, including transaction-bound HMAC. Invalid contexts fail closed `403`; rollback and awaited release preserve pool hygiene. When signed mode is off, the existing unsigned development/production-compatible behavior is retained.
+3. Paper Studio management-only SHARE and immutable-revision controls prevent teachers from publishing lesson plans through an initial `sentToPortal:true` payload, sharing their own drafts without review, or modifying a published revision. Management edits revoke publication until re-review. Teacher-owned records are invisible to other same-school teachers and other schools.
+4. Daily Diary update strict ISO date validation, PostgreSQL Date normalization, partial style/footer/slips settings and owner-scoped record access forward-ported and verified on a **real restricted database route**.
+5. Added clone-only test fixture SQL guarded by disposable DB name and loopback port; grants to restricted role exist only in isolated cluster. Added actual Express/JWT/real non-BYPASS PostgreSQL HTTP integration test for create, view, edit, revision-bound share, same-school peer/foreign-school denial and invalid date handling.
+6. Updated stale `lesson-plans-static.test.js` string-pattern assertion to recognize the **stronger new actor-verifying middleware** without weakening any authorization assertion. Initial old static test failed as expected; rerun passed.
+7. Repeatable test fixtures use unique synthetic IDs and assert visibility of the **exact new record**, not an incorrect assumption that the disposable DB is empty on every test run.
+
+## Actual test evidence (not production acceptance)
+- Independent PostgreSQL16 **localhost-only 127.0.0.1:55432**, `assps_core_signed_p7_20261008`, 87 restored production-schema tables, 77 FORCE-RLS plus 77 signed policies, two wholly synthetic tenants/users/docs. Restricted login `assps_core_test_login` NO BYPASSRLS; `apex_app_runtime` NOLOGIN, requires valid JWT-bound HMAC for row visibility. No actual student/paper/fee rows were used.
+- NEW combined signed security tests: **15 / 15 PASS** including the new Lesson Plans + Daily Diary authenticated HTTP test and 14 previous Phase7 security tests (HMAC tamper/replay/role escalation and signed results/attendance/fees/Paper reads).
+- **35 / 35 PASS** existing Phase6–7 security, teacher permission, Paper Vault protected G43/G21/G23 DOCX/math, cognitive lesson planning and static tests, with new signed mode OFF. These are tests, not a general proof that every production endpoint is integrated.
+- **246 / 246** backend JS files `node --check` PASS.
+- Isolated frontend `npm ci` (315 dependencies) + Vite build PASS (3.00s), protected official templates **6 / 6 unchanged**. No frontend artifact deployed.
+- Synthetic pg_dump and independent restore to `assps_core_phase8_restore_20261008`: **87 public tables, 77 FORCE-RLS, 77 signed policies**, 2 synthetic schools, 3 synthetic lesson plans, 2 synthetic diaries restored; snapshot private SHA256 `787ecf5d9980c8eece59b1f4b340a405b7bb01f72565dc3f9c3a23ef3ae69847`. **This does not certify production rollback or actual school records.**
+
+## Remaining release HOLDs
+- Signed RLS clone SQL from Phase7 is **not** an approved production migration. Need schema/role and actor/tenant policy review on latest real schema, distinct managed non-BYPASS application login, HMAC vault provisioning/rotation, explicit bootstrap/revoke/GRANT/rollback and all 77 protected tables' read/write/multi-role tests.
+- Signed-mode super-admin/platform owner pathways intentionally fail closed in Lesson Plan; full correct elevated authorization design is outstanding. Service tokens, admin/accountant, student/parent, sensitive finance and attendance writes, lesson context/Diary share, privileged cron/bootstrap SQL and APEX Connect API integration require complete non-BYPASS acceptance. The separate ARCHV1 signed Paper pool is still an independent dirty/branch-owner integration gate.
+- Paper Studio independently owns the human-approved source. Owner's full protected 43/43 browser print corpus was previously reported in its own branch; no Phase8 claim of rerunning physical printer/multi-page English–Urdu pagination. Grade IX–X content remains academically unapproved.
+- Hostinger upstream firewall status/external reachability, SSH recoverability and safe port binding hardening remain unverified; **no firewall changes applied**.
+- Full integration merge against latest independently verified frontend/backend heads, complete eslint/build reproducibility, production migration recovery simulation and protected browser acceptance required before SaaS Core release certification.
+- **Nothing was deployed to production.**

@@ -13,7 +13,7 @@ test('lesson plans are versioned, mounted, tenant/RLS protected and revision bou
  assert.match(migrate,/022_lesson_plans_schema/)
  assert.match(server,/mount\('\/lesson-plans','\.\/routes\/lessonPlanRoutes'\)/)
  assert.match(rls,/['"]lesson_plans['"]/)
- assert.match(route,/router\.use\(protect, canManageLessonPlans\)/)
+ assert.match(route,/router\.use\(protect, canManageLessonPlans,/)
  assert.match(route,/set_config\('app\.tenant_id'/)
  assert.match(route,/LESSON_PLAN_REVISION_REQUIRED/)
  assert.match(route,/LESSON_PLAN_REVISION_CONFLICT/)

@@ -27,7 +27,7 @@ function parseIsoDate(value) {
   const text = String(value || '').slice(0, 10)
   if (!/^\d{4}-\d{2}-\d{2}$/.test(text)) return null
   const date = new Date(`${text}T12:00:00Z`)
-  return Number.isNaN(date.getTime()) ? null : date
+  return Number.isNaN(date.getTime()) || iso(date) !== text ? null : date
 }
 
 function iso(date) {
@@ -38,6 +38,9 @@ function enumerateDates(startValue, endValue) {
   const start = parseIsoDate(startValue)
   const end = parseIsoDate(endValue || startValue)
   if (!start || !end || end < start) return []
+  if (Math.round((end - start) / 86400000) + 1 > MAX_RANGE_DAYS) {
+    throw new RangeError(`Lesson planning range exceeds ${MAX_RANGE_DAYS} calendar days.`)
+  }
   const dates = []
   const cursor = new Date(start)
   while (cursor <= end && dates.length < MAX_RANGE_DAYS) {
@@ -48,7 +51,7 @@ function enumerateDates(startValue, endValue) {
 }
 
 function normalizeBlackoutDates(values = []) {
-  return new Set((Array.isArray(values) ? values : []).map(v => String(v).slice(0, 10)).filter(v => /^\d{4}-\d{2}-\d{2}$/.test(v)))
+  return new Set((Array.isArray(values) ? values : []).map(v => String(v).trim()).filter(v => /^\d{4}-\d{2}-\d{2}$/.test(v) && parseIsoDate(v)))
 }
 
 function classMatches(a, b) {
@@ -193,23 +196,25 @@ function buildUnitsForSubject({ subject, curriculumScopes = [], questionSignals 
 
 function allocatePeriods(units, usablePeriods) {
   if (!units.length) return []
-  const available = Math.max(0, Number(usablePeriods || 0))
-  if (!available) return units.map(unit => ({ ...unit, allocatedPeriods: 0 }))
-  const totalWeight = units.reduce((sum, unit) => sum + Number(unit.weight || 1), 0) || units.length
-  const draft = units.map(unit => ({ ...unit, allocatedPeriods: Math.max(1, Math.floor(available * (Number(unit.weight || 1) / totalWeight))) }))
-  let assigned = draft.reduce((sum, unit) => sum + unit.allocatedPeriods, 0)
-  let cursor = 0
-  while (assigned < available && draft.length) {
-    draft[cursor % draft.length].allocatedPeriods += 1
-    assigned += 1
-    cursor += 1
-  }
-  while (assigned > available && draft.some(unit => unit.allocatedPeriods > 1)) {
-    const item = draft.slice().sort((a, b) => b.allocatedPeriods - a.allocatedPeriods)[0]
-    if (!item || item.allocatedPeriods <= 1) break
-    item.allocatedPeriods -= 1
-    assigned -= 1
-  }
+  const available = Number.isFinite(Number(usablePeriods)) ? Math.max(0, Math.floor(Number(usablePeriods))) : 0
+  const draft = units.map(unit => ({ ...unit, allocatedPeriods: 0 }))
+  if (!available) return draft
+
+  const weights = units.map(unit => {
+    const value = Number(unit.weight)
+    return Number.isFinite(value) && value > 0 ? value : 1
+  })
+  const base = available >= units.length ? 1 : 0
+  draft.forEach(item => { item.allocatedPeriods = base })
+  const remaining = available - base * units.length
+  const totalWeight = weights.reduce((sum, value) => sum + value, 0)
+  const quotas = weights.map(weight => remaining * weight / totalWeight)
+  const floors = quotas.map(Math.floor)
+  floors.forEach((value, i) => { draft[i].allocatedPeriods += value })
+  const left = remaining - floors.reduce((sum, value) => sum + value, 0)
+  const order = quotas.map((quota, i) => ({ i, remainder: quota - floors[i], weight: weights[i] }))
+    .sort((a, b) => b.remainder - a.remainder || b.weight - a.weight || a.i - b.i)
+  for (let i = 0; i < left; i += 1) draft[order[i].i].allocatedPeriods += 1
   return draft
 }
 
@@ -219,7 +224,8 @@ function buildDeterministicPlan(input, context) {
   const section = clean(input.section, 80)
   const startDate = clean(input.startDate || input.date, 10)
   const endDate = clean(input.endDate || input.date || input.startDate, 10)
-  const bufferRatio = Math.max(0, Math.min(Number(input.bufferRatio ?? 0.1), 0.3))
+  const requestedBufferRatio = Number(input.bufferRatio ?? 0.1)
+  const bufferRatio = Number.isFinite(requestedBufferRatio) ? Math.max(0, Math.min(requestedBufferRatio, 0.3)) : 0.1
   const selectedSubjects = [...new Set((Array.isArray(input.subjects) ? input.subjects : []).map(value => clean(value, 160)).filter(Boolean))].slice(0, MAX_SUBJECTS)
   const slots = buildTimetableSlots({ timetable: context.timetable, classLevel, section, startDate, endDate, blackoutDates: input.blackoutDates })
   const slotGroups = groupBySubject(slots)
@@ -473,6 +479,9 @@ module.exports = {
   normalizeClassKey,
   classMatches,
   enumerateDates,
+  parseIsoDate,
+  MAX_RANGE_DAYS,
+  allocatePeriods,
   buildTimetableSlots,
   buildUnitsForSubject,
   buildDeterministicPlan,
