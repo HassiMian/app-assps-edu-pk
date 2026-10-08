@@ -24,5 +24,7 @@ test('Paper Vault migration grants only its table and sequence to the runtime ro
 test('Paper Vault participates in strict tenant RLS coverage', () => {
   const rls = read('al-siddique-backend/src/config/migrations/005_rls_policies.js')
   assert.match(rls, /'paper_vault'/)
+  assert.match(rls, /'paper_vault', 'paper_vault_revision_history'/)
+  assert.ok(rls.indexOf("'paper_vault', 'paper_vault_revision_history'") > rls.indexOf('const strictTables'))
   assert.match(rls, /ALTER TABLE \$\{table\} FORCE ROW LEVEL SECURITY/)
 })
