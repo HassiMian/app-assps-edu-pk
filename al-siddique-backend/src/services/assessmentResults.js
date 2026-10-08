@@ -204,6 +204,7 @@ function normalizeResultEntries(snapshot, entries = [], { resultStatus = 'DRAFT'
     maximumScore,
     effectiveMaximumScore,
     entries: normalized,
+    reason: text(reason),
     resultHash: sha256(hashPayload),
   }
 }

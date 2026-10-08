@@ -119,16 +119,46 @@ test('Assessment result revisions are release-bound, immutable and CAS-safe',{ti
   assert.equal(Number(finalized.body.data.effective_maximum_score),15)
   assert.equal(finalized.body.data.reason,'approved exemption after recheck')
 
+  const missingReason=await req(port,'POST',base,{
+    studentId:student.id,
+    expectedRevision:2,
+    resultStatus:'FINALIZED',
+    entries:[
+      {questionInstanceId:'q-1',state:'SCORED',score:9},
+      {questionInstanceId:'q-2a',state:'SCORED',score:4},
+      {questionInstanceId:'q-2b',state:'EXEMPT'},
+    ],
+  })
+  assert.equal(missingReason.status,422,missingReason.raw)
+  assert.equal(missingReason.body.code,'RESULT_REVISION_REASON_REQUIRED')
+
+  const regrade=await req(port,'POST',base,{
+    studentId:student.id,
+    expectedRevision:2,
+    resultStatus:'FINALIZED',
+    reason:'score corrected after moderation',
+    entries:[
+      {questionInstanceId:'q-1',state:'SCORED',score:9},
+      {questionInstanceId:'q-2a',state:'SCORED',score:4},
+      {questionInstanceId:'q-2b',state:'EXEMPT'},
+    ],
+  })
+  assert.equal(regrade.status,201,regrade.raw)
+  assert.equal(regrade.body.data.revision_number,3)
+  assert.equal(Number(regrade.body.data.total_score),13)
+  assert.equal(regrade.body.data.reason,'score corrected after moderation')
+
   read=await req(port,'GET',base+`/latest?studentId=${student.id}`)
   assert.equal(read.status,200,read.raw)
-  assert.equal(read.body.data.revision_number,2)
+  assert.equal(read.body.data.revision_number,3)
   assert.equal(read.body.data.entries.length,3)
   assert.equal(read.body.data.entries.find(x=>x.question_instance_id==='q-2b').state,'EXEMPT')
 
   const unknown=await req(port,'POST',base,{
     studentId:student.id,
-    expectedRevision:2,
+    expectedRevision:3,
     resultStatus:'DRAFT',
+    reason:'invalid instance test',
     entries:[{questionInstanceId:'not-in-release',state:'SCORED',score:1}],
   })
   assert.equal(unknown.status,422,unknown.raw)
@@ -150,9 +180,11 @@ test('Assessment result revisions are release-bound, immutable and CAS-safe',{ti
     FROM assessment_result_revisions
     WHERE school_id=1 AND release_id='result-http-release' AND student_id=$1
     ORDER BY revision_number`,[student.id])
-  assert.deepEqual(revisions.rows.map(x=>Number(x.revision_number)),[1,2])
+  assert.deepEqual(revisions.rows.map(x=>Number(x.revision_number)),[1,2,3])
   assert.equal(revisions.rows[1].reason,'approved exemption after recheck')
   assert.equal(String(revisions.rows[1].created_by_key),'999')
+  assert.equal(revisions.rows[2].reason,'score corrected after moderation')
+  assert.equal(String(revisions.rows[2].created_by_key),'999')
 
-  console.log('ASSESSMENT_RESULTS_HTTP 9/9 PASS')
+  console.log('ASSESSMENT_RESULTS_HTTP 11/11 PASS')
 })

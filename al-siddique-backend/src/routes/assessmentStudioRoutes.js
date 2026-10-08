@@ -505,7 +505,7 @@ router.post('/papers/:paperId/releases/:releaseId/results', async (req, res) => 
       }
 
       const latest = await client.query(
-        `SELECT revision_number
+        `SELECT revision_number, result_status
            FROM assessment_result_revisions
           WHERE school_id=$1 AND release_id=$2 AND student_id=$3
           ORDER BY revision_number DESC
@@ -514,11 +514,18 @@ router.post('/papers/:paperId/releases/:releaseId/results', async (req, res) => 
         [schoolId, releaseId, studentId]
       )
       const latestRevision = latest.rowCount ? Number(latest.rows[0].revision_number) : 0
+      const latestStatus = latest.rowCount ? String(latest.rows[0].result_status || '').toUpperCase() : ''
       if (latestRevision !== expectedRevision) {
         const error = new Error('Assessment result changed in another session.')
         error.httpStatus = 409
         error.code = 'RESULT_REVISION_CONFLICT'
         error.currentRevision = latestRevision
+        throw error
+      }
+      if (latestRevision > 0 && latestStatus === 'FINALIZED' && !String(req.body?.reason || '').trim()) {
+        const error = new Error('A reason is required when revising a finalized assessment result.')
+        error.httpStatus = 422
+        error.code = 'RESULT_REVISION_REASON_REQUIRED'
         throw error
       }
 
@@ -551,7 +558,7 @@ router.post('/papers/:paperId/releases/:releaseId/results', async (req, res) => 
           normalized.maximumScore,
           normalized.effectiveMaximumScore,
           normalized.resultHash,
-          req.body?.reason || null,
+          normalized.reason,
           actorKey(req),
         ]
       )
@@ -611,6 +618,7 @@ router.post('/papers/:paperId/releases/:releaseId/results', async (req, res) => 
       'INVALID_RESULT_STATUS',
       'RESULT_NOT_FULLY_CHECKED',
       'RESULT_TOTAL_EXCEEDS_RELEASE_MAX',
+      'RESULT_REVISION_REASON_REQUIRED',
     ].includes(error.code)) {
       return res.status(422).json({ success:false, code:error.code, message:error.message })
     }
