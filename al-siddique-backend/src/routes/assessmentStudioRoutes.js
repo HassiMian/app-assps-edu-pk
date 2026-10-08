@@ -1,5 +1,7 @@
 const crypto = require('crypto')
 const express = require('express')
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
+
 const router = express.Router()
 
 const { pool, query } = require('../config/database')
@@ -75,6 +77,7 @@ async function withTenantTransaction(req, schoolId, fn) {
 }
 
 router.use(protect, canAuthorAssessments)
+router.use(paperRestrictedDatabase)
 
 router.get('/papers', async (req, res) => {
   try {
@@ -181,7 +184,10 @@ router.post('/papers/:paperId/revisions', async (req, res) => {
   }
 })
 
-router.post('/papers/:paperId/releases', async (req, res) => {
+// Release is an independent academic authority decision, not a teacher's
+// drafting operation. Retain the existing teacher create/edit/print paths.
+const releaseApproverOnly = requireRoles('super_admin', 'admin', 'school_admin', 'principal')
+router.post('/papers/:paperId/releases', releaseApproverOnly, async (req, res) => {
   const publicId = safePublicId(req.params.paperId)
   const schoolId = schoolIdForRequest(req, req.body || {})
   const expectedRevision = Number(req.body?.expectedRevision)

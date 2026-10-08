@@ -8,6 +8,7 @@ const router = express.Router()
 
 const { protect, requireRoles, requireFeature: maybeRequireFeature } = require('../middleware/auth')
 const { pool } = require('../config/database')
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { teacherCanAccessClass, ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
 const {
@@ -249,7 +250,7 @@ void hydrateJobsFromDb().catch((err) => {
 
 // Canonical server-authoritative Paper Vault.
 // Teachers see/edit only their own papers; admins/principals can inspect the school library.
-router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), paperRestrictedDatabase, async (req, res) => {
   try {
     await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
@@ -280,7 +281,7 @@ router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 
   }
 })
 
-router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), paperRestrictedDatabase, async (req, res) => {
   try {
     await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
@@ -306,7 +307,7 @@ router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal',
   }
 })
 
-router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), paperRestrictedDatabase, async (req, res) => {
   const client = await pool.connect()
   try {
     await ensurePaperVaultSchema()
@@ -360,7 +361,7 @@ router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princi
   } finally { client.release() }
 })
 
-router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), async (req, res) => {
+router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'principal', 'teacher'), paperRestrictedDatabase, async (req, res) => {
   const client = await pool.connect()
   try {
     await ensurePaperVaultSchema()
