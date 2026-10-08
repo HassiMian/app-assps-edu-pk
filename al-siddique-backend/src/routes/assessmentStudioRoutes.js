@@ -6,6 +6,7 @@ const { pool, query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { createPrintJobBinding, printJobTransition, buildStudentSafeProjection, buildStaffAnswerKeyProjection, sha256 } = require('../services/assessmentPrintJobs')
+const { captureFinalizedAssessmentQuestions } = require('../services/assessmentQuestionAutoCapture')
 
 const canAuthorAssessments = requireRoles('super_admin', 'admin', 'school_admin', 'principal', 'teacher')
 
@@ -243,7 +244,34 @@ router.post('/papers/:paperId/releases', async (req, res) => {
     if (data.missing) return res.status(404).json({ success:false, message:'Assessment paper not found.' })
     if (data.conflict) return res.status(409).json({ success:false, code:'REVISION_CONFLICT', currentRevision:data.currentRevision, message:'Paper changed before finalization.' })
     if (data.hashMismatch) return res.status(409).json({ success:false, code:'RELEASE_HASH_MISMATCH', serverHash:data.serverHash, message:'Release snapshot does not match the current server revision.' })
-    return res.status(201).json({ success:true, data })
+
+    let questionBankCapture = null
+    try {
+      const rawUserId = Number(req.user?.id)
+      const userId = Number.isInteger(rawUserId) && rawUserId > 0 ? rawUserId : null
+      questionBankCapture = await captureFinalizedAssessmentQuestions({
+        schoolId,
+        userId,
+        releaseId:data.release_id,
+        paperPublicId:publicId,
+        snapshot:release.snapshot,
+        enabled:release.captureToQuestionBank !== false,
+      })
+    } catch (captureError) {
+      console.warn('Assessment Question Bank auto-capture failed after release:', captureError?.code || captureError?.message || captureError)
+      questionBankCapture = {
+        eligible:true,
+        total:0,
+        captured:0,
+        created:0,
+        duplicates:0,
+        revisions:0,
+        failed:1,
+        results:[{ ok:false, code:captureError?.code || 'QUESTION_CAPTURE_FAILED' }],
+      }
+    }
+
+    return res.status(201).json({ success:true, data:{ ...data, questionBankCapture } })
   } catch (error) {
     console.error('Assessment Studio release error:', error.message)
     return res.status(500).json({ success:false, message:'Could not finalize assessment release.' })

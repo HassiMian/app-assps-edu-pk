@@ -32,7 +32,7 @@ function normalizeQuestionForGovernance(input = {}) {
     classLevel: text(input.class_level ?? input.classLevel),
     subject: lower(input.subject),
     medium: lower(input.medium || 'english'),
-    board: lower(input.board || 'Punjab Board'),
+    board: lower(input.board || ''),
     chapterNo: text(input.chapter_no ?? input.chapterNo),
     chapterName: lower(input.chapter_name ?? input.chapterName ?? input.chapter),
     topicName: lower(input.topic_name ?? input.topicName),
@@ -65,6 +65,37 @@ function buildQuestionRevisionPayload(input = {}) {
 
 function buildRevisionHash(input = {}) {
   return sha256(buildQuestionRevisionPayload(input))
+}
+
+function normalizeGovernanceMappings(mappings = []) {
+  if (!Array.isArray(mappings)) return []
+  const seen = new Set()
+  const allowedStatus = new Set(['candidate','reviewed','ready','retired'])
+  const out = []
+  for (const raw of mappings) {
+    const mappingType = lower(raw?.mappingType ?? raw?.mapping_type ?? raw?.type).slice(0,40)
+    const mappingKey = text(raw?.mappingKey ?? raw?.mapping_key ?? raw?.key)
+    if (!mappingType || !mappingKey) continue
+    const dedupeKey = mappingType + '\u0000' + mappingKey
+    if (seen.has(dedupeKey)) continue
+    seen.add(dedupeKey)
+    const status = lower(raw?.mappingStatus ?? raw?.mapping_status ?? raw?.status ?? 'candidate')
+    const confidenceRaw = raw?.confidence
+    const confidence = Number.isFinite(Number(confidenceRaw))
+      ? Math.max(0, Math.min(1, Number(confidenceRaw)))
+      : null
+    const metadata = raw?.metadata && typeof raw.metadata === 'object' && !Array.isArray(raw.metadata)
+      ? stable(raw.metadata)
+      : {}
+    out.push({
+      mappingType,
+      mappingKey,
+      mappingStatus: allowedStatus.has(status) ? status : 'candidate',
+      confidence,
+      metadata,
+    })
+  }
+  return out
 }
 
 const lifecycleTransitions = Object.freeze({
@@ -105,6 +136,7 @@ module.exports = {
   buildCanonicalFingerprint,
   buildQuestionRevisionPayload,
   buildRevisionHash,
+  normalizeGovernanceMappings,
   assertLifecycleTransition,
   assertIdempotencyKey,
 }
@@ -137,7 +169,7 @@ async function withTenantTransaction(schoolId, fn) {
   }
 }
 
-async function captureQuestionGovernance({ schoolId, userId = null, idempotencyKey, question = {}, sourceQuestionBankId = null, expectedRevision = null }) {
+async function captureQuestionGovernance({ schoolId, userId = null, idempotencyKey, question = {}, sourceQuestionBankId = null, expectedRevision = null, mappings = [] }) {
   const key = assertIdempotencyKey(idempotencyKey)
   const fingerprint = buildCanonicalFingerprint(question)
   const revisionPayload = buildQuestionRevisionPayload(question)
@@ -147,7 +179,10 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
   if (normalizedExpectedRevision != null && (!Number.isInteger(normalizedExpectedRevision) || normalizedExpectedRevision < 0)) {
     throw governanceError(400, 'INVALID_EXPECTED_QUESTION_REVISION', 'Expected question revision must be a non-negative integer.')
   }
-  const requestHash = sha256({ fingerprint, revisionHash, sourceId, expectedRevision:normalizedExpectedRevision })
+  const normalizedMappings = normalizeGovernanceMappings(mappings)
+  const requestHashPayload = { fingerprint, revisionHash, sourceId, expectedRevision:normalizedExpectedRevision }
+  if (normalizedMappings.length) requestHashPayload.mappings = normalizedMappings
+  const requestHash = sha256(requestHashPayload)
 
   return withTenantTransaction(schoolId, async (client, tenantId) => {
     const previous = await client.query(
@@ -261,6 +296,16 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
       )
     }
 
+    for (const mapping of normalizedMappings) {
+      await client.query(
+        `INSERT INTO question_mappings
+          (school_id,question_master_id,mapping_type,mapping_key,mapping_status,confidence,metadata,created_by)
+         VALUES ($1,$2,$3,$4,$5,$6,$7::jsonb,$8)
+         ON CONFLICT (school_id,question_master_id,mapping_type,mapping_key) DO NOTHING`,
+        [tenantId, master.id, mapping.mappingType, mapping.mappingKey, mapping.mappingStatus, mapping.confidence, JSON.stringify(mapping.metadata), userId]
+      )
+    }
+
     const result = {
       publicId:master.public_id,
       lifecycleStatus:master.lifecycle_status,
@@ -270,6 +315,7 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
       created,
       duplicate,
       revisionCreated,
+      mappingCount:normalizedMappings.length,
       replayed:false,
     }
     await client.query(
