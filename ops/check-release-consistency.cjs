@@ -15,7 +15,7 @@ function parseProcEnv(buffer) {
   return out
 }
 
-function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONICAL_BRANCH, frontendMeta, backendMeta, pm2Env, backendForwardVerifier = () => false }) {
+function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONICAL_BRANCH, frontendMeta, backendMeta, pm2Env, backendForwardVerifier = () => false, frontendForwardVerifier = () => false }) {
   const findings = []
   if (!/^[0-9a-f]{40}$/i.test(String(canonicalCommit || ''))) findings.push('CANONICAL_COMMIT_INVALID')
   for (const [name, meta] of [['FRONTEND', frontendMeta], ['BACKEND', backendMeta]]) {
@@ -31,9 +31,14 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
       /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
       /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
       backendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta)
-    if (meta.commit !== canonicalCommit && !verifiedBackendForward)
+    const verifiedFrontendForward = name === 'FRONTEND' &&
+      meta.component === 'frontend-paper-studio-ux-hardening' &&
+      /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
+      /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
+      frontendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta)
+    if (meta.commit !== canonicalCommit && !verifiedBackendForward && !verifiedFrontendForward)
       findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
-    if (meta.branch !== canonicalBranch && !verifiedBackendForward)
+    if (meta.branch !== canonicalBranch && !verifiedBackendForward && !verifiedFrontendForward)
       findings.push(`${name}_BRANCH_DRIFT:${meta.branch || 'missing'}:${canonicalBranch}`)
     if (meta.productionSmoke !== 'pass') findings.push(`${name}_PRODUCTION_SMOKE_NOT_SEALED`)
     // Static frontend publishes frontendDeployedContracts, while the API
@@ -107,6 +112,31 @@ function verifyBackendForward(base, head, branch, meta = {}) {
   } catch (_) { return false }
 }
 
+function verifyFrontendForward(base, head, branch, meta = {}) {
+  if (![base, head, meta.sourceBaseLiveCommit, meta.previousRelease?.commit]
+    .every(value => /^[0-9a-f]{40}$/i.test(String(value || '')))) return false
+  if (!/^(feat|fix|release)\/[a-z0-9][a-z0-9._/-]{4,120}$/i.test(String(branch || ''))) return false
+  if (!gitAncestor(base, meta.sourceBaseLiveCommit) ||
+      !gitAncestor(meta.sourceBaseLiveCommit, head) ||
+      !gitAncestor(base, meta.previousRelease.commit) ||
+      !gitAncestor(meta.previousRelease.commit, head)) return false
+  try {
+    const remote = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', 'refs/heads/' + branch],
+      { encoding:'utf8', timeout:12000 }).trim().split(/\s+/)[0]
+    if (remote !== head) return false
+    // This forward component must not introduce undeployed backend runtime or
+    // silently rewrite canonical official source papers.
+    const backendChanges = execFileSync('git', ['-C',repoRoot,'diff','--name-only',base,head,'--','al-siddique-backend/src/'],
+      { encoding:'utf8',timeout:12000 }).trim().split('\n').filter(Boolean)
+    if (backendChanges.some(file => !file.startsWith('al-siddique-backend/src/tests/'))) return false
+    const protectedChanges = execFileSync('git',['-C',repoRoot,'diff','--name-only',base,head,'--',
+      'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/',
+      'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/'],
+      {encoding:'utf8',timeout:12000}).trim()
+    return !protectedChanges
+  } catch (_) { return false }
+}
+
 function remoteBackendChanges(liveFrontendCommit, remoteCanonicalCommit) {
   if (!/^[0-9a-f]{40}$/i.test(String(liveFrontendCommit || ''))) throw new Error('Invalid live frontend SHA')
   execFileSync('git', ['-C', repoRoot, 'merge-base', '--is-ancestor', liveFrontendCommit, remoteCanonicalCommit], {timeout:12000})
@@ -127,8 +157,13 @@ function main() {
   const backendMeta = readJson(process.env.ASSPS_BACKEND_RELEASE_META || '/var/www/apex-backend/release-meta.json')
   const pm2Env = pm2Environment()
   const isBackendOnlyForward = backendMeta?.component === 'backend-paper-studio-rls-hardening'
-  const canonicalCommit = isBackendOnlyForward ? frontendMeta?.commit : remoteCanonicalCommit
+  const isFrontendOnlyForward = frontendMeta?.component === 'frontend-paper-studio-ux-hardening'
+  const canonicalCommit = isBackendOnlyForward ? frontendMeta?.commit
+    : isFrontendOnlyForward ? backendMeta?.commit : remoteCanonicalCommit
   const extraFindings = []
+  if (isBackendOnlyForward && isFrontendOnlyForward) extraFindings.push('SIMULTANEOUS_COMPONENT_FORWARD_NOT_SUPPORTED')
+  if (isFrontendOnlyForward && remoteCanonicalCommit !== canonicalCommit)
+    extraFindings.push('UNDEPLOYED_CANONICAL_COMMIT_OR_BACKEND_DRIFT')
   if (isBackendOnlyForward) {
     try {
       const backendChanges = remoteBackendChanges(canonicalCommit, remoteCanonicalCommit)
@@ -137,10 +172,10 @@ function main() {
       extraFindings.push('REMOTE_CANONICAL_ANCESTRY_NOT_VERIFIED')
     }
   }
-  const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env, backendForwardVerifier: verifyBackendForward })
+  const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env, backendForwardVerifier: verifyBackendForward, frontendForwardVerifier: verifyFrontendForward })
   const findings = [...result.findings, ...extraFindings]
   console.log(JSON.stringify({ canonicalCommit, remoteCanonicalCommit, canonicalBranch: CANONICAL_BRANCH,
-    componentForward:isBackendOnlyForward, safe:findings.length===0, findings }, null, 2))
+    componentForward:isBackendOnlyForward || isFrontendOnlyForward, safe:findings.length===0, findings }, null, 2))
   if (findings.length) process.exitCode = 1
 }
 

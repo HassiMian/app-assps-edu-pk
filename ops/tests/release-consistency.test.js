@@ -75,3 +75,32 @@ test('static frontend release uses its actual frontendDeployedContracts seal, no
   assert.equal(deniedApi.safe,false)
   assert.ok(deniedApi.findings.includes('BACKEND_LIVE_CONTRACT_NOT_SEALED'))
 })
+
+test('frontend-only forward release requires genuine branch and ancestry verifier', () => {
+  const candidate = {
+    ...meta,
+    component: 'frontend-paper-studio-ux-hardening',
+    commit: 'b'.repeat(40),
+    branch: 'feat/paper-phase2-release-guard-20261008',
+    sourceBaseLiveCommit: commit,
+    previousRelease: { commit },
+  }
+  const valid = evaluateReleaseConsistency({
+    canonicalCommit: commit, frontendMeta: candidate, backendMeta: meta, pm2Env: env,
+    frontendForwardVerifier: (base, head, branch, metadata) =>
+      base === commit && head === candidate.commit && branch === candidate.branch &&
+      metadata.sourceBaseLiveCommit === commit && metadata.previousRelease.commit === commit,
+  })
+  assert.equal(valid.safe, true)
+  const rejected = evaluateReleaseConsistency({
+    canonicalCommit: commit, frontendMeta: candidate, backendMeta: meta, pm2Env: env,
+    frontendForwardVerifier: () => false,
+  })
+  assert.equal(rejected.safe, false)
+  assert.ok(rejected.findings.some(x => x.startsWith('FRONTEND_BRANCH_DRIFT:')))
+  const missingBase = evaluateReleaseConsistency({
+    canonicalCommit: commit, frontendMeta: { ...candidate, sourceBaseLiveCommit: 'bad' },
+    backendMeta: meta, pm2Env: env, frontendForwardVerifier: () => true,
+  })
+  assert.equal(missingBase.safe, false)
+})
