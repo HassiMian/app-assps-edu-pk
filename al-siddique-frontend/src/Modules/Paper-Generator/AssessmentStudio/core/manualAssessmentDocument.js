@@ -26,6 +26,7 @@ import {
 import { DEFAULT_BLOCK_REGISTRY, normalizeNodeForBlockRegistry } from './BlockRegistry.js'
 import { resolveSectionTotalMarks } from '../../paperSystemRules.js'
 import { buildManualScoringPlan, resolveManualSectionScoring } from '../../PaperEditor/core/ScoringPlan.js'
+import { sanitizeInlineHtml } from '../../inlineHtmlSanitizer.js'
 
 const text = value => String(value ?? '').trim()
 const finiteMarks = value => Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0
@@ -103,7 +104,11 @@ export function createManualAssessmentDocument({ paper = {}, config = {}, paperS
     const sectionId = `manual-section-${text(section.id) || index + 1}`
     const body = text(section.content)
     const heading = text(section.heading || section.text || section.textUrdu)
+    const edited = section.richText && typeof section.richText === 'object' ? section.richText : {}
+    const serialHtml = typeof edited.questionSerial === 'string' ? sanitizeInlineHtml(edited.questionSerial.slice(0,16000)) : ''
+    const instructionHtml = typeof edited.headingInstruction === 'string' ? sanitizeInlineHtml(edited.headingInstruction.slice(0,16000)) : ''
     return createCanonicalSection({
+      ...(serialHtml || instructionHtml ? { headingFormatting:{questionSerial:serialHtml,headingInstruction:instructionHtml} } : {}),
       id: sectionId,
       sectionIndex: index + 1,
       title: heading || `Question ${index + 1}`,
@@ -249,10 +254,23 @@ export async function createAssessmentRelease(doc, { rendererVersion = 'manual-w
 export function mergeServerDocumentIntoLocalPaper(localPaper = {}, doc = {}, serverMeta = {}) {
   const sections = Array.isArray(doc?.sections) ? doc.sections : []
   const officialSections = sections.map((section, index) => ({
+    // The first typed canonical node remains authoritative after reopening.
+    // Do not silently downgrade short/long or asset/math blocks to plain text.
+    layoutPreset:section.nodes?.[0]?.contentCapabilities?.includes(ContentCapability.MATH) ? 'math'
+      : section.nodes?.[0]?.contentCapabilities?.includes(ContentCapability.IMAGE) ? 'image'
+        : ({short_question:'short',long_question:'long',matching_columns:'matching',grammar_table:'table'}[section.nodes?.[0]?.type] || 'auto'),
+    ...(section.nodes?.[0]?.math ? {math:clone(section.nodes[0].math)} : {}),
+    ...(section.nodes?.[0]?.assetRefs?.[0] ? {asset:clone((doc.assets||[]).find(asset=>asset.id===section.nodes[0].assetRefs[0])||{})} : {}),
     id: String(section.id || `server-section-${index + 1}`).replace(/^manual-section-/, ''),
     heading: section.heading || section.title || `Question ${index + 1}`,
     instructions: section.instructions || '',
-    content: section.nodes?.map(node => node.content || '').filter(Boolean).join('\n') || '',
+    // Server-authored revision is authoritative. Never reapply stale local
+    // richText when this revision has no headingFormatting.
+    ...(section.headingFormatting ? { richText:{
+      questionSerial:sanitizeInlineHtml(section.headingFormatting.questionSerial || ''),
+      headingInstruction:sanitizeInlineHtml(section.headingFormatting.headingInstruction || ''),
+    }} : {}),
+    content: section.nodes?.map(node => node.content || node.stemText || node.rawText || '').filter(Boolean).join('\n') || '',
     marks: finiteMarks(section.operationalSectionTotal ?? section.authoritativeSectionTotal),
     attemptRule: section.attemptRule || AttemptRule.ALL,
     attemptCount: Number.isInteger(section.attemptCount) ? section.attemptCount : null,

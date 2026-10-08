@@ -519,6 +519,12 @@ export function createCanonicalSection(overrides = {}) {
     titleUrdu: overrides.titleUrdu ?? null,
     heading: overrides.heading ?? null,
     instructions: overrides.instructions ?? null,
+    // Optional, editor-only rich fragments. Plain canonical heading remains
+    // authoritative for question number, text, marks and assessment scoring.
+    ...(overrides.headingFormatting ? { headingFormatting:{
+      questionSerial: typeof overrides.headingFormatting.questionSerial === 'string' ? overrides.headingFormatting.questionSerial : '',
+      headingInstruction: typeof overrides.headingFormatting.headingInstruction === 'string' ? overrides.headingFormatting.headingInstruction : '',
+    }} : {}),
     direction: overrides.direction || DocumentDirection.AUTO,
     storedLegacyMarksValue: Number.isFinite(overrides.storedLegacyMarksValue)
       ? Number(overrides.storedLegacyMarksValue)
@@ -855,6 +861,21 @@ export function validateCanonicalPaperDocument(doc) {
         sectionIds.add(sec.id)
       }
 
+      if (sec.headingFormatting !== undefined) {
+        const fmt=sec.headingFormatting
+        if (!fmt || typeof fmt !== 'object' || Array.isArray(fmt) ||
+            Object.keys(fmt).some(key=>!['questionSerial','headingInstruction'].includes(key))) {
+          errors.push(`${secPath}.headingFormatting contains invalid fields`)
+        } else {
+          for (const field of ['questionSerial','headingInstruction']) {
+            const html=fmt[field]
+            if (typeof html !== 'string' || html.length > 16000 ||
+              /<\s*(?:script|iframe|svg|img|object|style)\b|\bon\w+\s*=|javascript\s*:/i.test(html)) {
+              errors.push(`${secPath}.headingFormatting.${field} must contain allowlisted HTML`)
+            }
+          }
+        }
+      }
       if (sec.direction === 'dual') {
         errors.push(`${secPath}.direction MUST NOT be "dual"`)
       } else if (!VALID_DIRECTIONS.has(sec.direction)) {

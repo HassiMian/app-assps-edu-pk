@@ -9,7 +9,7 @@ import { createServer } from 'vite'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const frontendRoot = path.resolve(__dirname, '../../../../..')
-const PORT = 5194
+const PORT = Number(process.env.ASSPS_PAPER_ACCEPTANCE_PORT || 5194)
 const BASE_URL = `http://localhost:${PORT}/paper-workspace-test.html`
 
 let server

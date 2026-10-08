@@ -272,3 +272,39 @@ test('nested choice scoring blocks impossible subgroup attempt counts',()=>{
  assert.equal(releaseCheck.valid,false)
  assert.ok(releaseCheck.errors.some(error=>error.includes('cannot exceed available alternatives')))
 })
+
+test('server-authoritative reopen retains user-authored short and long question stems',()=>{
+ for(const preset of ['short','long']){
+  const source={...base,paper:{...base.paper,official_section:[{
+   id:`${preset}-text`,heading:'Q1. Explain. (10)',layoutPreset:preset,
+   content:'Explain how clouds form.',marks:10,
+  }]}}
+  const doc=createManualAssessmentDocument(source)
+  assert.equal(doc.sections[0].nodes[0].stemText,'Explain how clouds form.')
+  const reopened=mergeServerDocumentIntoLocalPaper(source.paper,doc,{currentRevision:2})
+  assert.equal(reopened.official_section[0].content,'Explain how clouds form.')
+  assert.equal(reopened.official_section[0].layoutPreset,preset,'Reopened paper must retain the original question layout type')
+ }
+})
+
+test('heading formatting model requires only bounded recognized rich fragments',()=>{
+ const doc=createManualAssessmentDocument(base)
+ doc.sections[0].headingFormatting={questionSerial:'Q1.',headingInstruction:'Explain the question'}
+ assert.equal(validateCanonicalPaperDocument(doc).valid,true)
+ doc.sections[0].headingFormatting.unexpected='invalid'
+ assert.ok(validateCanonicalPaperDocument(doc).errors.some(x=>x.includes('headingFormatting')))
+})
+
+
+test('canonical server reopen restores typed math section and source metadata',()=>{
+ const authored={...base,paper:{...base.paper,official_section:[{
+  id:'math-roundtrip',heading:'Q1. Solve. (10)',content:'Write the equation',marks:10,
+  layoutPreset:'math',math:{format:'latex',source:'x^2+y^2=z^2',display:'block'},
+ }]}}
+ const doc=createManualAssessmentDocument(authored)
+ const reopened=mergeServerDocumentIntoLocalPaper(authored.paper,doc,{currentRevision:3})
+ assert.equal(reopened.official_section[0].layoutPreset,'math')
+ assert.equal(reopened.official_section[0].math.source,'x^2+y^2=z^2')
+ assert.equal(reopened.official_section[0].content,'Write the equation')
+ assert.equal(Number(reopened.official_section[0].marks),10)
+})
