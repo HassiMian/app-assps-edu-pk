@@ -35,7 +35,7 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
       meta.component === 'frontend-paper-studio-ux-hardening' &&
       /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
       /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
-      frontendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta)
+      frontendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta, backendMeta?.commit)
     if (meta.commit !== canonicalCommit && !verifiedBackendForward && !verifiedFrontendForward)
       findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
     if (meta.branch !== canonicalBranch && !verifiedBackendForward && !verifiedFrontendForward)
@@ -127,21 +127,19 @@ function verifyBackendForward(base, head, branch, meta = {}) {
   } catch (_) { return false }
 }
 
-function verifyFrontendForward(base, head, branch, meta = {}) {
-  if (![base, head, meta.sourceBaseLiveCommit, meta.previousRelease?.commit]
+function verifyFrontendForward(base, head, branch, meta = {}, backendHead = base) {
+  if (![base, head, backendHead, meta.sourceBaseLiveCommit, meta.previousRelease?.commit]
     .every(value => /^[0-9a-f]{40}$/i.test(String(value || '')))) return false
   if (!/^(feat|fix|release)\/[a-z0-9][a-z0-9._/-]{4,120}$/i.test(String(branch || ''))) return false
-  if (!gitAncestor(base, meta.sourceBaseLiveCommit) ||
-      !gitAncestor(meta.sourceBaseLiveCommit, head) ||
-      !gitAncestor(base, meta.previousRelease.commit) ||
-      !gitAncestor(meta.previousRelease.commit, head)) return false
+  if (meta.sourceBaseLiveCommit !== backendHead || meta.previousRelease.commit !== base) return false
+  if (!gitAncestor(base, backendHead) || !gitAncestor(backendHead, head)) return false
   try {
     const remote = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', 'refs/heads/' + branch],
       { encoding:'utf8', timeout:12000 }).trim().split(/\s+/)[0]
     if (remote !== head) return false
     // This forward component must not introduce undeployed backend runtime or
     // silently rewrite canonical official source papers.
-    const backendChanges = execFileSync('git', ['-C',repoRoot,'diff','--name-only',base,head,'--','al-siddique-backend/src/'],
+    const backendChanges = execFileSync('git', ['-C',repoRoot,'diff','--name-only',backendHead,head,'--','al-siddique-backend/src/'],
       { encoding:'utf8',timeout:12000 }).trim().split('\n').filter(Boolean)
     if (backendChanges.some(file => !file.startsWith('al-siddique-backend/src/tests/'))) return false
     const protectedChanges = execFileSync('git',['-C',repoRoot,'diff','--name-only',base,head,'--',
@@ -173,12 +171,11 @@ function main() {
   const pm2Env = pm2Environment()
   const isBackendOnlyForward = ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety'].includes(backendMeta?.component)
   const isFrontendOnlyForward = frontendMeta?.component === 'frontend-paper-studio-ux-hardening'
-  const canonicalCommit = isBackendOnlyForward ? frontendMeta?.commit
-    : isFrontendOnlyForward ? backendMeta?.commit : remoteCanonicalCommit
+  const canonicalCommit = remoteCanonicalCommit
   const extraFindings = []
-  if (isBackendOnlyForward && isFrontendOnlyForward) extraFindings.push('SIMULTANEOUS_COMPONENT_FORWARD_NOT_SUPPORTED')
-  if (isFrontendOnlyForward && remoteCanonicalCommit !== canonicalCommit)
-    extraFindings.push('UNDEPLOYED_CANONICAL_COMMIT_OR_BACKEND_DRIFT')
+  if (isBackendOnlyForward && isFrontendOnlyForward &&
+      frontendMeta?.sourceBaseLiveCommit !== backendMeta?.commit)
+    extraFindings.push('CROSS_COMPONENT_ANCESTRY_MISMATCH')
   if (isBackendOnlyForward) {
     try {
       const backendChanges = remoteBackendChanges(canonicalCommit, remoteCanonicalCommit)

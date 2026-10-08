@@ -120,3 +120,33 @@ test('frontend-only forward release requires genuine branch and ancestry verifie
   })
   assert.equal(missingBase.safe, false)
 })
+
+test('independent concurrent backend and frontend forwards preserve shared canonical ancestry', () => {
+  const backendCommit = 'b'.repeat(40)
+  const frontendCommit = 'c'.repeat(40)
+  const backend = {
+    ...meta, commit: backendCommit, branch: 'fix/paper-grade910-qbank-safe-intake-20261008',
+    component: 'backend-question-bank-seed-intake-safety',
+    sourceBaseLiveCommit: commit, previousRelease: { commit },
+  }
+  const frontend = {
+    ...meta, commit: frontendCommit, branch: 'feat/phase2-paper-safe-forward-0544378',
+    component: 'frontend-paper-studio-ux-hardening',
+    sourceBaseLiveCommit: backendCommit, previousRelease: { commit },
+  }
+  const permitted = evaluateReleaseConsistency({
+    canonicalCommit: commit, backendMeta: backend, frontendMeta: frontend, pm2Env:env,
+    backendForwardVerifier: (base,head,branch) => base===commit && head===backendCommit && branch===backend.branch,
+    frontendForwardVerifier: (base,head,branch,details,liveBackend) =>
+      base===commit && head===frontendCommit && branch===frontend.branch &&
+      details.sourceBaseLiveCommit===backendCommit && liveBackend===backendCommit,
+  })
+  assert.equal(permitted.safe,true)
+  const reverse = evaluateReleaseConsistency({
+    canonicalCommit: commit, backendMeta: backend, frontendMeta:{...frontend,sourceBaseLiveCommit:commit},pm2Env:env,
+    backendForwardVerifier:()=>true,
+    frontendForwardVerifier: (_base,_head,_branch,details,liveBackend)=>details.sourceBaseLiveCommit===liveBackend,
+  })
+  assert.equal(reverse.safe,false)
+  assert.ok(reverse.findings.some(f=>f.startsWith('FRONTEND_COMMIT_DRIFT:')))
+})
