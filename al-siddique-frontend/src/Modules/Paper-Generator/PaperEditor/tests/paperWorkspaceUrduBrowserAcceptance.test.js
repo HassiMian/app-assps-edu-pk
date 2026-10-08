@@ -36,11 +36,32 @@ before(async () => {
   })
 
   const context = await browser.newContext({ viewport: { width: 1600, height: 1100 } })
+  await context.addInitScript(() => {
+    localStorage.setItem('al_siddique_token', 'mock-jwt-token')
+    localStorage.setItem('al_siddique_login_at', String(Date.now()))
+    localStorage.setItem('al_siddique_user', JSON.stringify({ id:999, role:'admin', school_id:1, tenant_id:'assps' }))
+  })
   await context.route('**/api/settings/public**', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
     body: JSON.stringify({}),
   }))
+  await context.route('**/api/settings', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ success:true, data:{} }),
+  }))
+  await context.route('**/api/academic/setup', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ success:true, configured:false, data:null, defaults:{ periodsPerDay:8, localities:['Rayya Khas'], classes:[], subjects:[] } }),
+  }))
+  await context.route('**/api/auth/me', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ user:{ id:999, role:'admin', school_id:1, tenant_id:'assps' } }),
+  }))
+  await context.route('**/api/students**', route => route.fulfill({ status:200, contentType:'application/json', body:'[]' }))
   page = await context.newPage()
   page.on('pageerror', error => console.log('PAGE ERROR:', error.message))
   await page.goto(BASE_URL, { waitUntil: 'domcontentloaded' })

@@ -12,7 +12,7 @@ const frontendRoot = path.resolve(__dirname, '../../../../..')
 const corpusPath = path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const corpus = JSON.parse(fs.readFileSync(corpusPath, 'utf8')).documents
 
-const PORT = 5194
+const PORT = Number(process.env.PHASE14_PORT || 5194)
 const BASE_URL = `http://localhost:${PORT}/b3-test.html`
 
 let server
@@ -84,6 +84,13 @@ after(async () => {
 
 test('Phase 14: all 43 canonical papers preserve render structure and print text parity', async () => {
   assert.strictEqual(corpus.length, 43)
+  const requestedStart = Math.max(1, Number.parseInt(process.env.PHASE14_START || '1', 10) || 1)
+  const requestedEnd = Math.min(corpus.length, Number.parseInt(process.env.PHASE14_END || String(corpus.length), 10) || corpus.length)
+  assert.ok(requestedStart <= requestedEnd, `Invalid PHASE14 range ${requestedStart}-${requestedEnd}`)
+  const selectedCorpus = corpus
+    .map((doc, paperIndex) => ({ doc, paperIndex }))
+    .slice(requestedStart - 1, requestedEnd)
+  const expectedSelectedSections = selectedCorpus.reduce((sum, entry) => sum + (entry.doc.sections?.length || 0), 0)
 
   const failures = []
   const stats = {
@@ -93,7 +100,7 @@ test('Phase 14: all 43 canonical papers preserve render structure and print text
     urduPapers: 0,
   }
 
-  for (const [paperIndex, doc] of corpus.entries()) {
+  for (const { doc, paperIndex } of selectedCorpus) {
     console.log(`PHASE14 ${paperIndex + 1}/${corpus.length} START ${doc.id}`)
     pageErrors = []
     consoleErrors = []
@@ -173,8 +180,13 @@ test('Phase 14: all 43 canonical papers preserve render structure and print text
   }
 
   assert.deepStrictEqual(failures, [], JSON.stringify(failures, null, 2))
-  assert.strictEqual(stats.papers, 43)
-  assert.strictEqual(stats.sections, 242)
+  assert.strictEqual(stats.papers, selectedCorpus.length)
+  assert.strictEqual(stats.sections, expectedSelectedSections)
   assert.ok(stats.nodes > 0)
-  assert.ok(stats.urduPapers > 0)
+  if (requestedStart === 1 && requestedEnd === corpus.length) {
+    assert.strictEqual(stats.papers, 43)
+    assert.strictEqual(stats.sections, 242)
+    assert.ok(stats.urduPapers > 0)
+  }
+  console.log(`PHASE14_RANGE ${requestedStart}-${requestedEnd} PASS ${stats.papers}/${selectedCorpus.length}`)
 })
