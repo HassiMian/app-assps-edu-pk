@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "assps-health9-tech-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-044",
+  "sourcePdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+  "sourceByteLength": 28683619,
+  "pageCount": 110,
+  "identity": [
+    "Health Sciences Grade IX",
+    "PCTB current prescribed textbook",
+    "Printed April 2025",
+    "Matric-Tech"
+  ],
+  "patternEvidence": {
+    "authority": "PECTAA/BISE Lahore",
+    "totalMarks": 40,
+    "objectiveMarks": 10,
+    "subjectiveMarks": 30,
+    "chapterCount": 8
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Introduction to Health Sciences",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Gastrointestinal System",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Respiratory System",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Circulatory System",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Urinary System",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "First Aid-I",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Physical Education",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Nutrition",
+      "status": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "medicalSafetyBoundary": "EDUCATIONAL_NON_DIAGNOSTIC_NON_PROCEDURAL_EMERGENCY_ESCALATION_ONLY"
+  }
+}

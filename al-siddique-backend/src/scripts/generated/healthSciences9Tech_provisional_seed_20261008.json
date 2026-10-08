@@ -1,0 +1,1398 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-HS-C01-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Health Sciences",
+      "topic_name": "health and illness",
+      "category": "mcq",
+      "question_text": "Health is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A state involving physical, mental and social well-being"
+        },
+        {
+          "id": "B",
+          "text": "Only absence of fever"
+        },
+        {
+          "id": "C",
+          "text": "Only athletic ability"
+        },
+        {
+          "id": "D",
+          "text": "Only hospital access"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A state involving physical, mental and social well-being",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 1",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health and illness"
+      ]
+    },
+    {
+      "id": "IX-HS-C01-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Health Sciences",
+      "topic_name": "health indicators",
+      "category": "mcq",
+      "question_text": "A health indicator is used mainly to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Describe or monitor aspects of population health"
+        },
+        {
+          "id": "B",
+          "text": "Replace all medical tests"
+        },
+        {
+          "id": "C",
+          "text": "Name hospital buildings"
+        },
+        {
+          "id": "D",
+          "text": "Measure school attendance only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Describe or monitor aspects of population health",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 1",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health indicators"
+      ]
+    },
+    {
+      "id": "IX-HS-C01-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Health Sciences",
+      "topic_name": "healthcare system",
+      "category": "short",
+      "question_text": "Name two levels or types of healthcare service that can exist in a health system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include primary, secondary and tertiary care; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 1",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "healthcare system"
+      ]
+    },
+    {
+      "id": "IX-HS-C01-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Health Sciences",
+      "topic_name": "disease types",
+      "category": "short",
+      "question_text": "Differentiate communicable and non-communicable diseases.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Communicable diseases can spread through infectious agents; non-communicable diseases are not passed from person to person by infection.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 1",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "disease types"
+      ]
+    },
+    {
+      "id": "IX-HS-C01-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Health Sciences",
+      "topic_name": "health sciences overview",
+      "category": "long",
+      "question_text": "Explain how prevention, healthcare services, public-health indicators and health careers contribute to community well-being.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for all four areas and for linking them to prevention, access, monitoring and support of population health.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 1",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health sciences overview"
+      ]
+    },
+    {
+      "id": "IX-HS-C02-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Gastrointestinal System",
+      "topic_name": "digestion",
+      "category": "mcq",
+      "question_text": "The gastrointestinal system is primarily responsible for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Processing food and absorbing nutrients"
+        },
+        {
+          "id": "B",
+          "text": "Producing thoughts"
+        },
+        {
+          "id": "C",
+          "text": "Pumping blood only"
+        },
+        {
+          "id": "D",
+          "text": "Filtering air only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Processing food and absorbing nutrients",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 2",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "digestion"
+      ]
+    },
+    {
+      "id": "IX-HS-C02-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Gastrointestinal System",
+      "topic_name": "prevention",
+      "category": "mcq",
+      "question_text": "A basic way to reduce many gastrointestinal infections is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Safe food, clean water and good hand hygiene"
+        },
+        {
+          "id": "B",
+          "text": "Sharing unwashed utensils"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring spoiled food"
+        },
+        {
+          "id": "D",
+          "text": "Avoiding all fluids"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Safe food, clean water and good hand hygiene",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 2",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "prevention"
+      ]
+    },
+    {
+      "id": "IX-HS-C02-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Gastrointestinal System",
+      "topic_name": "gi function",
+      "category": "short",
+      "question_text": "State two main functions of the gastrointestinal system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Digestion of food and absorption of nutrients are two main functions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 2",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "gi function"
+      ]
+    },
+    {
+      "id": "IX-HS-C02-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Gastrointestinal System",
+      "topic_name": "infection prevention",
+      "category": "short",
+      "question_text": "Why are clean water and food hygiene important for gastrointestinal health?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They reduce exposure to infectious organisms and contamination that can cause gastrointestinal illness.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 2",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "infection prevention"
+      ]
+    },
+    {
+      "id": "IX-HS-C02-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Gastrointestinal System",
+      "topic_name": "gi system health",
+      "category": "long",
+      "question_text": "Describe the major functions of the gastrointestinal system and general prevention principles for infectious GI disease.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for digestion, absorption, waste handling, safe water/food hygiene and hand hygiene; no treatment instructions are required.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 2",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "gi system health"
+      ]
+    },
+    {
+      "id": "IX-HS-C03-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Respiratory System",
+      "topic_name": "respiration",
+      "category": "mcq",
+      "question_text": "The main function of the respiratory system is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Gas exchange between the body and environment"
+        },
+        {
+          "id": "B",
+          "text": "Digesting proteins only"
+        },
+        {
+          "id": "C",
+          "text": "Filtering urine"
+        },
+        {
+          "id": "D",
+          "text": "Producing bones"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Gas exchange between the body and environment",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 3",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "respiration"
+      ]
+    },
+    {
+      "id": "IX-HS-C03-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Respiratory System",
+      "topic_name": "respiratory prevention",
+      "category": "mcq",
+      "question_text": "Which public-health action can reduce risk from some respiratory infections?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Recommended vaccination and good respiratory hygiene"
+        },
+        {
+          "id": "B",
+          "text": "Sharing used tissues"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring indoor ventilation"
+        },
+        {
+          "id": "D",
+          "text": "Smoking more"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Recommended vaccination and good respiratory hygiene",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 3",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "respiratory prevention"
+      ]
+    },
+    {
+      "id": "IX-HS-C03-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Respiratory System",
+      "topic_name": "gas exchange",
+      "category": "short",
+      "question_text": "Why is oxygen important to body cells?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cells use oxygen in energy-releasing processes that support normal body functions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 3",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "gas exchange"
+      ]
+    },
+    {
+      "id": "IX-HS-C03-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Respiratory System",
+      "topic_name": "smoking prevention",
+      "category": "short",
+      "question_text": "Why is avoiding smoking important for respiratory health?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Tobacco smoke contains harmful substances that damage airways and lungs and increase risk of serious disease.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 3",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "smoking prevention"
+      ]
+    },
+    {
+      "id": "IX-HS-C03-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Respiratory System",
+      "topic_name": "respiratory health",
+      "category": "long",
+      "question_text": "Explain the respiratory system’s main function and broad prevention strategies for maintaining respiratory health.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for gas exchange, clean air, avoiding smoking/vaping exposure, vaccination where recommended, respiratory hygiene and seeking medical care when seriously unwell.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 3",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "respiratory health"
+      ]
+    },
+    {
+      "id": "IX-HS-C04-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Circulatory System",
+      "topic_name": "circulation",
+      "category": "mcq",
+      "question_text": "The heart’s main role in the circulatory system is to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pump blood through the body"
+        },
+        {
+          "id": "B",
+          "text": "Digest food"
+        },
+        {
+          "id": "C",
+          "text": "Store urine"
+        },
+        {
+          "id": "D",
+          "text": "Control all thoughts"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Pump blood through the body",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 4",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "circulation"
+      ]
+    },
+    {
+      "id": "IX-HS-C04-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Circulatory System",
+      "topic_name": "blood vessels",
+      "category": "mcq",
+      "question_text": "Which blood vessels generally carry blood away from the heart?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Arteries"
+        },
+        {
+          "id": "B",
+          "text": "Veins only"
+        },
+        {
+          "id": "C",
+          "text": "Lymph nodes"
+        },
+        {
+          "id": "D",
+          "text": "Alveoli"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Arteries",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 4",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "blood vessels"
+      ]
+    },
+    {
+      "id": "IX-HS-C04-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Circulatory System",
+      "topic_name": "circulatory function",
+      "category": "short",
+      "question_text": "State two functions of the circulatory system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It transports oxygen/nutrients and helps remove carbon dioxide/wastes; it also transports hormones and supports temperature regulation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 4",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "circulatory function"
+      ]
+    },
+    {
+      "id": "IX-HS-C04-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Circulatory System",
+      "topic_name": "prevention",
+      "category": "short",
+      "question_text": "Give two general lifestyle factors associated with cardiovascular health.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include balanced nutrition, regular age-appropriate physical activity, avoiding tobacco exposure and adequate sleep; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 4",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "prevention"
+      ]
+    },
+    {
+      "id": "IX-HS-C04-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Circulatory System",
+      "topic_name": "circulatory health",
+      "category": "long",
+      "question_text": "Explain how the heart, blood vessels and blood work together to support body tissues.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for heart pumping, vessels carrying blood, blood transporting oxygen/nutrients, waste removal and circulation to tissues.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 4",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "circulatory health"
+      ]
+    },
+    {
+      "id": "IX-HS-C05-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Urinary System",
+      "topic_name": "kidney function",
+      "category": "mcq",
+      "question_text": "A major function of the kidneys is to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Filter blood and help regulate body fluids"
+        },
+        {
+          "id": "B",
+          "text": "Pump blood"
+        },
+        {
+          "id": "C",
+          "text": "Exchange air in lungs"
+        },
+        {
+          "id": "D",
+          "text": "Control vision"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Filter blood and help regulate body fluids",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 5",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "kidney function"
+      ]
+    },
+    {
+      "id": "IX-HS-C05-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Urinary System",
+      "topic_name": "urinary system",
+      "category": "mcq",
+      "question_text": "Urine is formed mainly through processes occurring in the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Kidneys"
+        },
+        {
+          "id": "B",
+          "text": "Lungs"
+        },
+        {
+          "id": "C",
+          "text": "Stomach"
+        },
+        {
+          "id": "D",
+          "text": "Skin only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Kidneys",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 5",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "urinary system"
+      ]
+    },
+    {
+      "id": "IX-HS-C05-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Urinary System",
+      "topic_name": "urinary function",
+      "category": "short",
+      "question_text": "State two roles of the urinary system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It removes certain wastes and helps regulate water, salts and acid-base balance.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 5",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "urinary function"
+      ]
+    },
+    {
+      "id": "IX-HS-C05-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Urinary System",
+      "topic_name": "lab interpretation",
+      "category": "short",
+      "question_text": "Why should laboratory results about kidney function be interpreted by qualified healthcare professionals?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Results need clinical context, reference ranges and professional judgment; a single value should not be self-diagnosed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 5",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "lab interpretation"
+      ]
+    },
+    {
+      "id": "IX-HS-C05-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Urinary System",
+      "topic_name": "urinary health",
+      "category": "long",
+      "question_text": "Explain the urinary system’s broad role in waste removal and internal balance.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for filtration, urine formation, removal of wastes, regulation of water/electrolytes and importance of professional assessment for suspected disease.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 5",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "urinary health"
+      ]
+    },
+    {
+      "id": "IX-HS-C06-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "First Aid-I",
+      "topic_name": "first aid purpose",
+      "category": "mcq",
+      "question_text": "The main purpose of first aid is to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Provide immediate basic support until trained help is available"
+        },
+        {
+          "id": "B",
+          "text": "Replace professional medical care"
+        },
+        {
+          "id": "C",
+          "text": "Perform surgery"
+        },
+        {
+          "id": "D",
+          "text": "Diagnose every condition"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Provide immediate basic support until trained help is available",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 6",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "first aid purpose"
+      ]
+    },
+    {
+      "id": "IX-HS-C06-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "First Aid-I",
+      "topic_name": "emergency safety",
+      "category": "mcq",
+      "question_text": "In a serious emergency, a student’s priority should include?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Getting a trained adult and emergency help promptly"
+        },
+        {
+          "id": "B",
+          "text": "Attempting advanced procedures alone"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring the situation"
+        },
+        {
+          "id": "D",
+          "text": "Moving everyone without reason"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Getting a trained adult and emergency help promptly",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 6",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "emergency safety"
+      ]
+    },
+    {
+      "id": "IX-HS-C06-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "First Aid-I",
+      "topic_name": "first aid principles",
+      "category": "short",
+      "question_text": "Why should first aid be given within a person’s training and under appropriate supervision?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Staying within training reduces the chance of causing harm and ensures serious problems are escalated to qualified help.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 6",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "first aid principles"
+      ]
+    },
+    {
+      "id": "IX-HS-C06-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "First Aid-I",
+      "topic_name": "emergency services",
+      "category": "short",
+      "question_text": "Why is early contact with trained emergency services important in a serious injury or sudden illness?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Professional responders can assess severity and provide appropriate care that goes beyond basic first aid.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 6",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "emergency services"
+      ]
+    },
+    {
+      "id": "IX-HS-C06-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "First Aid-I",
+      "topic_name": "first aid safety",
+      "category": "long",
+      "question_text": "Describe the principles of safe first-aid response without giving procedural treatment steps.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for scene safety, getting adult/emergency help, staying within training, reassuring the person, avoiding unnecessary movement/actions and handing over to qualified responders.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 6",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "first aid safety"
+      ]
+    },
+    {
+      "id": "IX-HS-C07-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Physical Education",
+      "topic_name": "physical activity",
+      "category": "mcq",
+      "question_text": "Regular age-appropriate physical activity can support?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cardiovascular and overall health"
+        },
+        {
+          "id": "B",
+          "text": "Only exam marks"
+        },
+        {
+          "id": "C",
+          "text": "Only height"
+        },
+        {
+          "id": "D",
+          "text": "Only eyesight"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Cardiovascular and overall health",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 7",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physical activity"
+      ]
+    },
+    {
+      "id": "IX-HS-C07-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Physical Education",
+      "topic_name": "safe activity",
+      "category": "mcq",
+      "question_text": "Which practice supports safer physical activity?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Appropriate warm-up, technique, hydration and stopping if unwell or injured"
+        },
+        {
+          "id": "B",
+          "text": "Ignoring pain"
+        },
+        {
+          "id": "C",
+          "text": "Exercising through serious injury"
+        },
+        {
+          "id": "D",
+          "text": "Skipping recovery every time"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 7",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "safe activity"
+      ]
+    },
+    {
+      "id": "IX-HS-C07-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Physical Education",
+      "topic_name": "posture",
+      "category": "short",
+      "question_text": "Why can good posture and technique matter during physical activity?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They help movement efficiency and can reduce unnecessary strain on joints and muscles.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 7",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "posture"
+      ]
+    },
+    {
+      "id": "IX-HS-C07-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Physical Education",
+      "topic_name": "activity planning",
+      "category": "short",
+      "question_text": "Why should exercise routines be appropriate to a person’s age, health and ability?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Appropriate intensity and progression support health while reducing avoidable overexertion or injury risk.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 7",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "activity planning"
+      ]
+    },
+    {
+      "id": "IX-HS-C07-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Physical Education",
+      "topic_name": "physical education",
+      "category": "long",
+      "question_text": "Explain how safe, moderate physical activity can support health without focusing on appearance or extreme performance.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for cardiovascular fitness, strength/mobility, mental well-being, safe technique, recovery and age-appropriate moderation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 7",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physical education"
+      ]
+    },
+    {
+      "id": "IX-HS-C08-M01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Nutrition",
+      "topic_name": "balanced nutrition",
+      "category": "mcq",
+      "question_text": "A balanced diet means?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A varied pattern providing appropriate energy and essential nutrients"
+        },
+        {
+          "id": "B",
+          "text": "Eating only one food group"
+        },
+        {
+          "id": "C",
+          "text": "Skipping meals to change body shape"
+        },
+        {
+          "id": "D",
+          "text": "Avoiding all fats and carbohydrates"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A varied pattern providing appropriate energy and essential nutrients",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 8",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "balanced nutrition"
+      ]
+    },
+    {
+      "id": "IX-HS-C08-M02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Nutrition",
+      "topic_name": "micronutrients",
+      "category": "mcq",
+      "question_text": "Iron is important because it contributes to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Normal formation and function of oxygen-carrying blood components"
+        },
+        {
+          "id": "B",
+          "text": "Only hair colour"
+        },
+        {
+          "id": "C",
+          "text": "Only bone length"
+        },
+        {
+          "id": "D",
+          "text": "Only skin temperature"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Normal formation and function of oxygen-carrying blood components",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 8",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "micronutrients"
+      ]
+    },
+    {
+      "id": "IX-HS-C08-S01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Nutrition",
+      "topic_name": "nutrition guidelines",
+      "category": "short",
+      "question_text": "Why do dietary guidelines emphasize variety and balance?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Different foods provide different nutrients, so variety and balance help meet nutritional needs without relying on one food group.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 8",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "nutrition guidelines"
+      ]
+    },
+    {
+      "id": "IX-HS-C08-S02",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Nutrition",
+      "topic_name": "malnutrition",
+      "category": "short",
+      "question_text": "What does malnutrition mean in a general health-science context?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Malnutrition is an unhealthy state caused by inadequate, excessive or imbalanced intake or utilization of nutrients.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 8",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "malnutrition"
+      ]
+    },
+    {
+      "id": "IX-HS-C08-L01",
+      "class_level": "9th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Nutrition",
+      "topic_name": "nutrition health",
+      "category": "long",
+      "question_text": "Explain how balanced nutrition supports growth, learning and long-term health in adolescents.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for adequate energy, protein, vitamins/minerals, hydration, variety and regular balanced meals; avoid restrictive dieting or appearance-based goals.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-044 | 548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b | chapter 8",
+      "tags": [
+        "grade9",
+        "health-sciences-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "nutrition health"
+      ]
+    }
+  ]
+}

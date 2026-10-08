@@ -1,0 +1,3003 @@
+{
+  "schemaVersion": "assps-health9-tech-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-044",
+  "sourcePdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+  "scope": "CURRENT_GRADE9_HEALTH_TECH_EIGHT_CHAPTER_STARTER",
+  "drafts": [
+    {
+      "id": "IX-HS-C01-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C01",
+        "number": 1
+      },
+      "topicId": "health and illness",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Health Sciences"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Health is best described as?",
+          "answer": "A state involving physical, mental and social well-being",
+          "options": [
+            {
+              "id": "A",
+              "text": "A state involving physical, mental and social well-being"
+            },
+            {
+              "id": "B",
+              "text": "Only absence of fever"
+            },
+            {
+              "id": "C",
+              "text": "Only athletic ability"
+            },
+            {
+              "id": "D",
+              "text": "Only hospital access"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C01-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C01",
+        "number": 1
+      },
+      "topicId": "health indicators",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Health Sciences"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "A health indicator is used mainly to?",
+          "answer": "Describe or monitor aspects of population health",
+          "options": [
+            {
+              "id": "A",
+              "text": "Describe or monitor aspects of population health"
+            },
+            {
+              "id": "B",
+              "text": "Replace all medical tests"
+            },
+            {
+              "id": "C",
+              "text": "Name hospital buildings"
+            },
+            {
+              "id": "D",
+              "text": "Measure school attendance only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C01-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C01",
+        "number": 1
+      },
+      "topicId": "healthcare system",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Health Sciences"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Name two levels or types of healthcare service that can exist in a health system.",
+          "answer": "Examples include primary, secondary and tertiary care; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C01-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C01",
+        "number": 1
+      },
+      "topicId": "disease types",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Health Sciences"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate communicable and non-communicable diseases.",
+          "answer": "Communicable diseases can spread through infectious agents; non-communicable diseases are not passed from person to person by infection."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C01-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C01",
+        "number": 1
+      },
+      "topicId": "health sciences overview",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Health Sciences"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Explain how prevention, healthcare services, public-health indicators and health careers contribute to community well-being.",
+          "answer": "Award marks for all four areas and for linking them to prevention, access, monitoring and support of population health."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C02-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C02",
+        "number": 2
+      },
+      "topicId": "digestion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Gastrointestinal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "The gastrointestinal system is primarily responsible for?",
+          "answer": "Processing food and absorbing nutrients",
+          "options": [
+            {
+              "id": "A",
+              "text": "Processing food and absorbing nutrients"
+            },
+            {
+              "id": "B",
+              "text": "Producing thoughts"
+            },
+            {
+              "id": "C",
+              "text": "Pumping blood only"
+            },
+            {
+              "id": "D",
+              "text": "Filtering air only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C02-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C02",
+        "number": 2
+      },
+      "topicId": "prevention",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Gastrointestinal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "A basic way to reduce many gastrointestinal infections is?",
+          "answer": "Safe food, clean water and good hand hygiene",
+          "options": [
+            {
+              "id": "A",
+              "text": "Safe food, clean water and good hand hygiene"
+            },
+            {
+              "id": "B",
+              "text": "Sharing unwashed utensils"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring spoiled food"
+            },
+            {
+              "id": "D",
+              "text": "Avoiding all fluids"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C02-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C02",
+        "number": 2
+      },
+      "topicId": "gi function",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Gastrointestinal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "State two main functions of the gastrointestinal system.",
+          "answer": "Digestion of food and absorption of nutrients are two main functions."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C02-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C02",
+        "number": 2
+      },
+      "topicId": "infection prevention",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Gastrointestinal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why are clean water and food hygiene important for gastrointestinal health?",
+          "answer": "They reduce exposure to infectious organisms and contamination that can cause gastrointestinal illness."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C02-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C02",
+        "number": 2
+      },
+      "topicId": "gi system health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Gastrointestinal System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Describe the major functions of the gastrointestinal system and general prevention principles for infectious GI disease.",
+          "answer": "Award marks for digestion, absorption, waste handling, safe water/food hygiene and hand hygiene; no treatment instructions are required."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C03-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C03",
+        "number": 3
+      },
+      "topicId": "respiration",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "The main function of the respiratory system is?",
+          "answer": "Gas exchange between the body and environment",
+          "options": [
+            {
+              "id": "A",
+              "text": "Gas exchange between the body and environment"
+            },
+            {
+              "id": "B",
+              "text": "Digesting proteins only"
+            },
+            {
+              "id": "C",
+              "text": "Filtering urine"
+            },
+            {
+              "id": "D",
+              "text": "Producing bones"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C03-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C03",
+        "number": 3
+      },
+      "topicId": "respiratory prevention",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Which public-health action can reduce risk from some respiratory infections?",
+          "answer": "Recommended vaccination and good respiratory hygiene",
+          "options": [
+            {
+              "id": "A",
+              "text": "Recommended vaccination and good respiratory hygiene"
+            },
+            {
+              "id": "B",
+              "text": "Sharing used tissues"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring indoor ventilation"
+            },
+            {
+              "id": "D",
+              "text": "Smoking more"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C03-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C03",
+        "number": 3
+      },
+      "topicId": "gas exchange",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why is oxygen important to body cells?",
+          "answer": "Cells use oxygen in energy-releasing processes that support normal body functions."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C03-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C03",
+        "number": 3
+      },
+      "topicId": "smoking prevention",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why is avoiding smoking important for respiratory health?",
+          "answer": "Tobacco smoke contains harmful substances that damage airways and lungs and increase risk of serious disease."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C03-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C03",
+        "number": 3
+      },
+      "topicId": "respiratory health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Explain the respiratory system’s main function and broad prevention strategies for maintaining respiratory health.",
+          "answer": "Award marks for gas exchange, clean air, avoiding smoking/vaping exposure, vaccination where recommended, respiratory hygiene and seeking medical care when seriously unwell."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C04-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C04",
+        "number": 4
+      },
+      "topicId": "circulation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "The heart’s main role in the circulatory system is to?",
+          "answer": "Pump blood through the body",
+          "options": [
+            {
+              "id": "A",
+              "text": "Pump blood through the body"
+            },
+            {
+              "id": "B",
+              "text": "Digest food"
+            },
+            {
+              "id": "C",
+              "text": "Store urine"
+            },
+            {
+              "id": "D",
+              "text": "Control all thoughts"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C04-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C04",
+        "number": 4
+      },
+      "topicId": "blood vessels",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Which blood vessels generally carry blood away from the heart?",
+          "answer": "Arteries",
+          "options": [
+            {
+              "id": "A",
+              "text": "Arteries"
+            },
+            {
+              "id": "B",
+              "text": "Veins only"
+            },
+            {
+              "id": "C",
+              "text": "Lymph nodes"
+            },
+            {
+              "id": "D",
+              "text": "Alveoli"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C04-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C04",
+        "number": 4
+      },
+      "topicId": "circulatory function",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "State two functions of the circulatory system.",
+          "answer": "It transports oxygen/nutrients and helps remove carbon dioxide/wastes; it also transports hormones and supports temperature regulation."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C04-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C04",
+        "number": 4
+      },
+      "topicId": "prevention",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Give two general lifestyle factors associated with cardiovascular health.",
+          "answer": "Examples include balanced nutrition, regular age-appropriate physical activity, avoiding tobacco exposure and adequate sleep; any two."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C04-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C04",
+        "number": 4
+      },
+      "topicId": "circulatory health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Explain how the heart, blood vessels and blood work together to support body tissues.",
+          "answer": "Award marks for heart pumping, vessels carrying blood, blood transporting oxygen/nutrients, waste removal and circulation to tissues."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C05-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C05",
+        "number": 5
+      },
+      "topicId": "kidney function",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "A major function of the kidneys is to?",
+          "answer": "Filter blood and help regulate body fluids",
+          "options": [
+            {
+              "id": "A",
+              "text": "Filter blood and help regulate body fluids"
+            },
+            {
+              "id": "B",
+              "text": "Pump blood"
+            },
+            {
+              "id": "C",
+              "text": "Exchange air in lungs"
+            },
+            {
+              "id": "D",
+              "text": "Control vision"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C05-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C05",
+        "number": 5
+      },
+      "topicId": "urinary system",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Urine is formed mainly through processes occurring in the?",
+          "answer": "Kidneys",
+          "options": [
+            {
+              "id": "A",
+              "text": "Kidneys"
+            },
+            {
+              "id": "B",
+              "text": "Lungs"
+            },
+            {
+              "id": "C",
+              "text": "Stomach"
+            },
+            {
+              "id": "D",
+              "text": "Skin only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C05-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C05",
+        "number": 5
+      },
+      "topicId": "urinary function",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "State two roles of the urinary system.",
+          "answer": "It removes certain wastes and helps regulate water, salts and acid-base balance."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C05-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C05",
+        "number": 5
+      },
+      "topicId": "lab interpretation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why should laboratory results about kidney function be interpreted by qualified healthcare professionals?",
+          "answer": "Results need clinical context, reference ranges and professional judgment; a single value should not be self-diagnosed."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C05-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C05",
+        "number": 5
+      },
+      "topicId": "urinary health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Explain the urinary system’s broad role in waste removal and internal balance.",
+          "answer": "Award marks for filtration, urine formation, removal of wastes, regulation of water/electrolytes and importance of professional assessment for suspected disease."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C06-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C06",
+        "number": 6
+      },
+      "topicId": "first aid purpose",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "The main purpose of first aid is to?",
+          "answer": "Provide immediate basic support until trained help is available",
+          "options": [
+            {
+              "id": "A",
+              "text": "Provide immediate basic support until trained help is available"
+            },
+            {
+              "id": "B",
+              "text": "Replace professional medical care"
+            },
+            {
+              "id": "C",
+              "text": "Perform surgery"
+            },
+            {
+              "id": "D",
+              "text": "Diagnose every condition"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C06-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C06",
+        "number": 6
+      },
+      "topicId": "emergency safety",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "In a serious emergency, a student’s priority should include?",
+          "answer": "Getting a trained adult and emergency help promptly",
+          "options": [
+            {
+              "id": "A",
+              "text": "Getting a trained adult and emergency help promptly"
+            },
+            {
+              "id": "B",
+              "text": "Attempting advanced procedures alone"
+            },
+            {
+              "id": "C",
+              "text": "Ignoring the situation"
+            },
+            {
+              "id": "D",
+              "text": "Moving everyone without reason"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C06-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C06",
+        "number": 6
+      },
+      "topicId": "first aid principles",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why should first aid be given within a person’s training and under appropriate supervision?",
+          "answer": "Staying within training reduces the chance of causing harm and ensures serious problems are escalated to qualified help."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C06-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C06",
+        "number": 6
+      },
+      "topicId": "emergency services",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why is early contact with trained emergency services important in a serious injury or sudden illness?",
+          "answer": "Professional responders can assess severity and provide appropriate care that goes beyond basic first aid."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C06-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C06",
+        "number": 6
+      },
+      "topicId": "first aid safety",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "First Aid-I"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Describe the principles of safe first-aid response without giving procedural treatment steps.",
+          "answer": "Award marks for scene safety, getting adult/emergency help, staying within training, reassuring the person, avoiding unnecessary movement/actions and handing over to qualified responders."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C07-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C07",
+        "number": 7
+      },
+      "topicId": "physical activity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Education"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Regular age-appropriate physical activity can support?",
+          "answer": "Cardiovascular and overall health",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cardiovascular and overall health"
+            },
+            {
+              "id": "B",
+              "text": "Only exam marks"
+            },
+            {
+              "id": "C",
+              "text": "Only height"
+            },
+            {
+              "id": "D",
+              "text": "Only eyesight"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C07-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C07",
+        "number": 7
+      },
+      "topicId": "safe activity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Education"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Which practice supports safer physical activity?",
+          "answer": "Appropriate warm-up, technique, hydration and stopping if unwell or injured",
+          "options": [
+            {
+              "id": "A",
+              "text": "Appropriate warm-up, technique, hydration and stopping if unwell or injured"
+            },
+            {
+              "id": "B",
+              "text": "Ignoring pain"
+            },
+            {
+              "id": "C",
+              "text": "Exercising through serious injury"
+            },
+            {
+              "id": "D",
+              "text": "Skipping recovery every time"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C07-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C07",
+        "number": 7
+      },
+      "topicId": "posture",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Education"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why can good posture and technique matter during physical activity?",
+          "answer": "They help movement efficiency and can reduce unnecessary strain on joints and muscles."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C07-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C07",
+        "number": 7
+      },
+      "topicId": "activity planning",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Education"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why should exercise routines be appropriate to a person’s age, health and ability?",
+          "answer": "Appropriate intensity and progression support health while reducing avoidable overexertion or injury risk."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C07-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C07",
+        "number": 7
+      },
+      "topicId": "physical education",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Physical Education"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Explain how safe, moderate physical activity can support health without focusing on appearance or extreme performance.",
+          "answer": "Award marks for cardiovascular fitness, strength/mobility, mental well-being, safe technique, recovery and age-appropriate moderation."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C08-M01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C08",
+        "number": 8
+      },
+      "topicId": "balanced nutrition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "A balanced diet means?",
+          "answer": "A varied pattern providing appropriate energy and essential nutrients",
+          "options": [
+            {
+              "id": "A",
+              "text": "A varied pattern providing appropriate energy and essential nutrients"
+            },
+            {
+              "id": "B",
+              "text": "Eating only one food group"
+            },
+            {
+              "id": "C",
+              "text": "Skipping meals to change body shape"
+            },
+            {
+              "id": "D",
+              "text": "Avoiding all fats and carbohydrates"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C08-M02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C08",
+        "number": 8
+      },
+      "topicId": "micronutrients",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Iron is important because it contributes to?",
+          "answer": "Normal formation and function of oxygen-carrying blood components",
+          "options": [
+            {
+              "id": "A",
+              "text": "Normal formation and function of oxygen-carrying blood components"
+            },
+            {
+              "id": "B",
+              "text": "Only hair colour"
+            },
+            {
+              "id": "C",
+              "text": "Only bone length"
+            },
+            {
+              "id": "D",
+              "text": "Only skin temperature"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-HS-C08-S01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C08",
+        "number": 8
+      },
+      "topicId": "nutrition guidelines",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Why do dietary guidelines emphasize variety and balance?",
+          "answer": "Different foods provide different nutrients, so variety and balance help meet nutritional needs without relying on one food group."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C08-S02",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C08",
+        "number": 8
+      },
+      "topicId": "malnutrition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "What does malnutrition mean in a general health-science context?",
+          "answer": "Malnutrition is an unhealthy state caused by inadequate, excessive or imbalanced intake or utilization of nutrients."
+        }
+      }
+    },
+    {
+      "id": "IX-HS-C08-L01",
+      "chapter": {
+        "id": "IX-HEALTH-TECH-C08",
+        "number": 8
+      },
+      "topicId": "nutrition health",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-044",
+        "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_BISE_SYLLABUS_AND_TEXTBOOK_STRUCTURE_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "health-sciences-tech",
+        "edition": "2025",
+        "textbookId": "PCTB-IX-HEALTH-SCIENCES-TECH-2025",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Health Sciences IX Tech starter aligned to verified current eight-chapter syllabus. Non-diagnostic and non-procedural safety boundary enforced."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned educational item.",
+      "content": {
+        "en": {
+          "stem": "Explain how balanced nutrition supports growth, learning and long-term health in adolescents.",
+          "answer": "Award marks for adequate energy, protein, vitamins/minerals, hydration, variety and regular balanced meals; avoid restrictive dieting or appearance-based goals."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 40,
+    "mcq": 16,
+    "short": 16,
+    "long": 8,
+    "chapters": 8
+  }
+}
