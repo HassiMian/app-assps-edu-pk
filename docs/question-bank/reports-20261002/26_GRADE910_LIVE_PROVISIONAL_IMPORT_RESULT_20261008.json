@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "assps-g910-live-provisional-import-result-v1",
+  "scope": "PROVISIONAL_LIVE_STAGING_NO_ACADEMIC_APPROVAL",
+  "generatedAt": "2026-10-08T09:35:00Z",
+  "schoolId": 1,
+  "schoolCode": "assps",
+  "database": "apexos",
+  "preImport": {
+    "rows": 1608,
+    "approved": 0,
+    "provisional": 1608,
+    "duplicateGroups": 0,
+    "backup": "/var/backups/assps-qbank-g910-preimport-20261008T092115Z"
+  },
+  "import": {
+    "files": 24,
+    "inserted": 695,
+    "duplicates": 0,
+    "failed": 0,
+    "approvalGranted": false
+  },
+  "postImport": {
+    "rows": 2303,
+    "approved": 0,
+    "provisional": 2303,
+    "duplicateGroups": 0,
+    "byGrade": [
+      {
+        "class_level": "10th",
+        "n": 773
+      },
+      {
+        "class_level": "9th",
+        "n": 1530
+      }
+    ]
+  },
+  "idempotencyDryRun": {
+    "files": 52,
+    "totalRead": 2303,
+    "wouldInsert": 0,
+    "skippedDuplicates": 2303,
+    "failed": 0,
+    "inserted": 0
+  },
+  "rollback": {
+    "preImportBackup": "/var/backups/assps-qbank-g910-preimport-20261008T092115Z",
+    "plannedSourceFilesHadPreexistingRows": false
+  }
+}

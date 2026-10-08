@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "assps-g910-academic-readiness-gaps-v1",
+  "scope": "FAIL_CLOSED_ACADEMIC_READINESS",
+  "generatedAt": "2026-10-08T09:35:00Z",
+  "live": {
+    "discoveredQuestions": 2303,
+    "approvedQuestions": 0,
+    "inspectedChapters": 359,
+    "readyChapters": 0,
+    "coverageReady": false,
+    "mcqAnswerKeys": {
+      "total": 773,
+      "byOption": {
+        "A": 211,
+        "B": 199,
+        "C": 187,
+        "D": 176
+      },
+      "dominantLabel": "A",
+      "dominantShare": 0.273,
+      "editorialReviewFlag": false
+    }
+  },
+  "sourceEvidence": {
+    "manifestEntries": 111,
+    "hashVerifiedRecords": 110,
+    "missingLedgerHashes": 1,
+    "exerciseVerifiedRecords": 0,
+    "starterQuestionsWithoutVerifiedPage": 1144,
+    "recordsWithoutStaging": 60
+  },
+  "reviewOnlyAuthoringItems": 98,
+  "structuralDensity": {
+    "chapters": 359,
+    "provisionalStructurallyReadyChapters": 13,
+    "structuralDeficit": {
+      "mcq": 1085,
+      "short": 1052,
+      "long": 55,
+      "total": 2192
+    },
+    "chaptersWithZero": {
+      "mcq": 37,
+      "short": 0,
+      "long": 55
+    }
+  },
+  "academicReady": false
+}
