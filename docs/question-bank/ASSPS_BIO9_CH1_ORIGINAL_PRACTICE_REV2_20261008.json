@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "assps-bio9-original-practice-revision-v2",
+  "draftId": "ASSPS-BIO9-C1-ORIGINAL-EDITORIAL-PILOT-20261008-REV2",
+  "grade": "9th",
+  "subject": "Biology",
+  "chapterNo": "1",
+  "chapterTitle": "The Science of Biology",
+  "language": "English",
+  "questionsAuthorship": "NEW_ORIGINAL_ASSPS_WORKING_DRAFT_NOT_EXTRACTED_FROM_TEXTBOOK",
+  "evidenceSourceRecordId": "pectaa-catalog-009",
+  "evidencePdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "chapterSourcePhysicalPages": [
+    5,
+    24
+  ],
+  "chapterSourcePrintedPages": [
+    1,
+    20
+  ],
+  "questionLevelSourcePage": null,
+  "sourceExerciseVerified": false,
+  "independentCurriculumReview": false,
+  "independentAnswerReview": false,
+  "academicallyApproved": false,
+  "productionQuestionBankImportAllowed": false,
+  "releaseEligible": false,
+  "scope": "REVISION_2_EDITORIAL_REVIEW_CANDIDATE_NOT_SOURCE_VERIFIED",
+  "proposedTwentyMarkRecipe": {
+    "mcq": 5,
+    "short": 5,
+    "long": 1,
+    "totalMarks": 20
+  },
+  "reviewCriteria": [
+    "Verify textbook edition/curriculum coverage against rendered chapter pages.",
+    "Confirm scientific accuracy and independent answer keys.",
+    "Confirm questions are original and appropriately worded for Grade 9.",
+    "Ensure the source chapter reference is used as topic context, not as a verbatim question citation.",
+    "Approve only via Question Bank governance under the correct ASSPS tenant."
+  ],
+  "questions": [
+    {
+      "localId": "BIO9-C1-MCQ-001",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Which branch of biology would investigate the nesting behavior of sparrows?",
+      "options": [
+        "Meteorology",
+        "Zoology",
+        "Geology",
+        "Astronomy"
+      ],
+      "correctOption": "B",
+      "answerExplanation": "Zoology concerns animals and how they live and behave."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-002",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Which field focuses on organisms too small to observe clearly without magnification?",
+      "options": [
+        "Ecology",
+        "Geophysics",
+        "Botany",
+        "Microbiology"
+      ],
+      "correctOption": "D",
+      "answerExplanation": "Microbiology investigates microorganisms."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-003",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Which subject links biology with the chemical reactions occurring inside cells?",
+      "options": [
+        "Biochemistry",
+        "Seismology",
+        "Biogeography",
+        "Astronomy"
+      ],
+      "correctOption": "A",
+      "answerExplanation": "Biochemistry examines chemical processes in living systems."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-004",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "What do scientists call a proposed explanation that can be checked by collecting evidence?",
+      "options": [
+        "Opinion",
+        "Scientific law",
+        "Testable hypothesis",
+        "Measurement"
+      ],
+      "correctOption": "C",
+      "answerExplanation": "A hypothesis can be evaluated against observations or experiments."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-005",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "In a study comparing two groups of seedlings, which should stay constant to isolate the effect of fertilizer?",
+      "options": [
+        "The final growth results",
+        "The amount of water given",
+        "Whether fertilizer is added",
+        "The measured plant height"
+      ],
+      "correctOption": "B",
+      "answerExplanation": "Keeping water conditions comparable helps make a fair comparison."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-006",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "What is the main value of repeating an investigation under similar conditions?",
+      "options": [
+        "It checks whether the result can be obtained again",
+        "It removes any need to examine data",
+        "It ensures every participant reaches the same conclusion",
+        "It guarantees the original idea is correct"
+      ],
+      "correctOption": "A",
+      "answerExplanation": "Repetition tests the reproducibility of observations."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-007",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Which collaboration would be especially useful for comparing disease-frequency patterns across several regions?",
+      "options": [
+        "Zoology and astronomy",
+        "Botany and mineralogy",
+        "Paleontology and optics",
+        "Biology and statistics"
+      ],
+      "correctOption": "D",
+      "answerExplanation": "Statistics helps organize and interpret numerical biological observations."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-008",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Which example demonstrates research across different disciplines?",
+      "options": [
+        "A scientist ignores feedback from specialists",
+        "An ecologist works with a computer scientist to model habitat change",
+        "One student copies a completed report",
+        "A researcher changes measurements after the experiment"
+      ],
+      "correctOption": "B",
+      "answerExplanation": "Combining ecological knowledge and modeling expertise can improve the investigation."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-009",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Which statement best describes a scientific theory?",
+      "options": [
+        "It is the same as an unsupported guess",
+        "It only lists measurements without explaining them",
+        "It explains a wide range of observations using tested evidence",
+        "It is a claim that cannot be changed when new evidence appears"
+      ],
+      "correctOption": "C",
+      "answerExplanation": "Scientific theories provide evidence-based explanations that can be refined."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-010",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "A second group in an experiment receives no new treatment. What is its main purpose?",
+      "options": [
+        "To provide a basis for comparison",
+        "To make both groups identical in outcomes",
+        "To prove the treatment must be effective",
+        "To avoid collecting any observations"
+      ],
+      "correctOption": "A",
+      "answerExplanation": "The comparison group helps distinguish treatment effects from other changes."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-011",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "What happens during peer review of scientific research?",
+      "options": [
+        "Every reader must repeat every experiment",
+        "The author discards all data",
+        "The results are accepted without checking",
+        "Independent experts examine methods and conclusions"
+      ],
+      "correctOption": "D",
+      "answerExplanation": "Reviewers evaluate whether methods and conclusions are supported."
+    },
+    {
+      "localId": "BIO9-C1-MCQ-012",
+      "type": "mcq",
+      "marks": 1,
+      "questionText": "Who would most likely use biological knowledge to investigate diseases affecting crop plants?",
+      "options": [
+        "An astronomer tracking planets",
+        "A meteorologist forecasting rainfall",
+        "A plant pathologist studying crop health",
+        "A geophysicist studying earthquakes"
+      ],
+      "correctOption": "C",
+      "answerExplanation": "Plant pathology concerns plant diseases and their impact on crops."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-001",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Explain what biology studies and name two branches of the field.",
+      "modelAnswer": "Biology studies living organisms and life processes; acceptable examples include botany, zoology and microbiology."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-002",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Give one example of how chemistry can help answer a biological question.",
+      "modelAnswer": "Chemical knowledge helps explain processes such as reactions occurring within living cells."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-003",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Distinguish an observation from an inference using a plant-growth example.",
+      "modelAnswer": "An observation is a directly recorded fact such as leaf number; an inference is an explanation inferred from those facts."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-004",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Write a testable hypothesis about how light exposure may affect seedling growth.",
+      "modelAnswer": "One acceptable hypothesis: seedlings receiving more hours of light each day will show a different mean growth rate than comparable seedlings with fewer hours."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-005",
+      "type": "short",
+      "marks": 2,
+      "questionText": "For a comparison of fertilizer and plant growth, identify an independent variable and a dependent variable.",
+      "modelAnswer": "Independent variable: amount or presence of fertilizer; dependent variable: measured plant growth."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-006",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Why should scientists record results that do not support their initial prediction?",
+      "modelAnswer": "Contradicting findings can reveal mistaken assumptions or alternative explanations and make conclusions more trustworthy."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-007",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Explain why keeping temperature and water similar matters when comparing light conditions.",
+      "modelAnswer": "Uncontrolled conditions can affect growth, making it difficult to attribute differences to light."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-008",
+      "type": "short",
+      "marks": 2,
+      "questionText": "How is a scientific law different from a scientific theory?",
+      "modelAnswer": "A law describes a consistent pattern; a theory explains phenomena using evidence. Neither is simply an untested guess."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-009",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Give an example of a biological investigation that would benefit from statistical analysis.",
+      "modelAnswer": "Comparing how a measured plant characteristic varies across multiple sampling sites can be summarized with averages and charts."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-010",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Name two ways biologists can cooperate with experts in other subjects.",
+      "modelAnswer": "Examples: work with chemists on cell reactions and with computer scientists on biological data modeling."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-011",
+      "type": "short",
+      "marks": 2,
+      "questionText": "Why should researchers describe their methods clearly when reporting results?",
+      "modelAnswer": "Clear methods allow others to assess the evidence, evaluate limitations and repeat the investigation."
+    },
+    {
+      "localId": "BIO9-C1-SHORT-012",
+      "type": "short",
+      "marks": 2,
+      "questionText": "State one reason why a large, carefully chosen sample can be more informative than a single observation.",
+      "modelAnswer": "A sample covering more relevant variation can reduce the influence of unusual individual cases."
+    },
+    {
+      "localId": "BIO9-C1-LONG-001",
+      "type": "long",
+      "marks": 5,
+      "questionText": "Design a fair classroom investigation to compare seedling growth under two different daily light exposures.",
+      "markingPoints": [
+        "State a testable hypothesis about light exposure and growth.",
+        "Identify the light exposure as the independent variable.",
+        "Identify a measurable growth outcome as the dependent variable.",
+        "Keep plant variety, soil, water and measurement times comparable.",
+        "Explain how to record repeated measurements and compare group results."
+      ]
+    },
+    {
+      "localId": "BIO9-C1-LONG-002",
+      "type": "long",
+      "marks": 5,
+      "questionText": "Describe an evidence-based approach for studying a change in the reported frequency of a mosquito-borne illness without collecting identifying personal details.",
+      "markingPoints": [
+        "Frame a clear, measurable research question.",
+        "Identify suitable anonymous, already-available public-health counts.",
+        "Recognize a potential confounding factor such as season or reporting changes.",
+        "Explain how grouped data can be compared without assuming causation.",
+        "Describe why findings require careful interpretation and expert review."
+      ]
+    },
+    {
+      "localId": "BIO9-C1-LONG-003",
+      "type": "long",
+      "marks": 5,
+      "questionText": "A team studies changes in bird diversity in a local park. Explain how biological knowledge and two other disciplines could strengthen its investigation.",
+      "markingPoints": [
+        "Identify a biological question about bird diversity.",
+        "Describe a fair and repeatable observation method.",
+        "Explain one role of statistics in comparing observations.",
+        "Explain one role of mapping or computing in organizing habitat information.",
+        "State how team review and limitations improve the interpretation."
+      ]
+    }
+  ],
+  "revisionNumber": 2,
+  "parentDraftId": "ASSPS-BIO9-C1-ORIGINAL-EDITORIAL-PILOT-20261008",
+  "parentDraftSha256": "0ddc3084d0de2583579f18c24eda8fc3ff766f44af0dbe26def06a003205036d",
+  "supersedesForReviewOnly": true,
+  "curriculumSessionVerified": false,
+  "editorialRevision": "Non-periodic MCQ answer positions without changing any answer meaning; no new questions added"
+}
