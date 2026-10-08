@@ -8,7 +8,10 @@ const ROOT=path.resolve(__dirname,'../..')
 const STAGING=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
 const OUT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_REVIEW_TRIAGE_QUEUE_20261008.json')
 const SHA=s=>crypto.createHash('sha256').update(s).digest('hex')
-function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[]){
+function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],mcqEditorialCandidates=[]){
+ const mcqCandidates=new Map(mcqEditorialCandidates.map(x=>[x.questionId,x]))
+ if(mcqCandidates.size!==mcqEditorialCandidates.length)throw Error('DUPLICATE_CHEMISTRY_MCQ_EDITORIAL_CANDIDATE')
+ const consumedMcqs=new Set()
  const editorialById=new Map(editorialCandidates.map(x=>[x.questionId,x]))
  if(editorialById.size!==editorialCandidates.length)throw Error('DUPLICATE_EDITORIAL_CANDIDATE_ID')
  const consumed=new Set()
@@ -23,6 +26,13 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[])
    const id=String(q.id)
    if(seen.has(id)){collisions.push({id,file});continue}
    seen.add(id)
+   const mcqRevision=mcqCandidates.get(id)
+   if(mcqRevision){
+    if(q.type!=='mcq'||mcqRevision.parentQuestionSha256!==SHA(JSON.stringify(q))||
+       mcqRevision.approved!==false||mcqRevision.reviewStatus!=='PENDING_INDEPENDENT_CHEMISTRY_SOURCE_ANSWER_EDITORIAL_REVIEW')
+      throw Error('CHEMISTRY_MCQ_REVISION_SOURCE_DRIFT:'+id)
+    consumedMcqs.add(id)
+   }
    const editorial=editorialById.get(id)
    if(editorial){
     if(editorial.parentQuestionSha256!==SHA(JSON.stringify(q))||editorial.approved!==false||
@@ -62,6 +72,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[])
     claimedSourcePage:claimedPage,claimedPageNumbering:'UNSPECIFIED',
     editionClaim:edition||null,
     evidenceTier:'RESEARCH_CANDIDATE_ONLY',
+    editorialMcqRevisionCandidate:mcqRevision?{revisionFile:mcqRevision.revisionFile,revisionFileSha256:mcqRevision.revisionFileSha256,revisionQuestionSha256:mcqRevision.proposedRevisionSha256,status:mcqRevision.reviewStatus,approved:false}:null,
     editorialTranslationCandidate:editorial?{revisionFile:editorial.proposedRevisionFile,revisionFileSha256:editorial.editorialRevisionFileSha256,revisionQuestionSha256:editorial.proposedRevisionSha256,status:editorial.proposalStatus,approved:false}:null,
     blockers,
     status:{sourceVerified:false,independentlyReviewed:false,approved:false,published:false},
@@ -70,6 +81,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[])
   }
  }
  if(consumed.size!==editorialById.size)throw Error('EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
+ if(consumedMcqs.size!==mcqCandidates.size)throw Error('MCQ_EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
  records.sort((a,b)=>String(a.grade).localeCompare(String(b.grade),'en',{numeric:true})||
   a.subjectId.localeCompare(b.subjectId)||a.medium.localeCompare(b.medium)||
   String(a.chapter).localeCompare(String(b.chapter),'en',{numeric:true})||
@@ -94,6 +106,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[])
    sourceVerified:0,independentlyReviewed:0,approved:0,published:0},
   bySubject,byMedium:mediums,byType:types,blockerCounts:issues,
   unapprovedEditorialTranslationProposals:consumed.size,
+  unapprovedMcqRevisionProposals:consumedMcqs.size,
   collisions,
   records
  }
@@ -102,9 +115,10 @@ if(require.main===module){
  const manifest=JSON.parse(fs.readFileSync(path.join(STAGING,'officialSourceManifest.json'),'utf8'))
  const mcq=JSON.parse(fs.readFileSync(path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_MCQ_AUTHORING_QA_20261008.json'),'utf8'))
  const {loadCandidates}=require('./verify-bio9-editorial-translation-proposals.cjs')
- const report=buildReviewQueue(collectDocuments(STAGING),manifest,mcq,loadCandidates())
+ const {verify}=require('./verify-chemistry9-mcq-editorial-rev2.cjs')
+ const report=buildReviewQueue(collectDocuments(STAGING),manifest,mcq,loadCandidates(),verify())
  if(process.argv.includes('--write'))fs.writeFileSync(OUT,JSON.stringify(report,null,2)+'\n')
- console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,reportPath:process.argv.includes('--write')?OUT:null},null,2))
+ console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,unapprovedMcqRevisionProposals:report.unapprovedMcqRevisionProposals,reportPath:process.argv.includes('--write')?OUT:null},null,2))
  if(process.argv.includes('--strict')&&(report.counts.collisionIds||report.counts.approved||report.counts.published))process.exitCode=1
 }
 module.exports={buildReviewQueue}
