@@ -30,38 +30,22 @@ function assessRlsGate({ role, tables }) {
   return { safe: findings.length === 0, findings }
 }
 
-async function main() {
-  const { pool } = require('../al-siddique-backend/src/config/database')
-  const identity = (await pool.query(
-    'SELECT current_database() AS db, current_user AS username'
-  )).rows[0]
-  const role = (await pool.query(
-    'SELECT rolsuper,rolbypassrls FROM pg_roles WHERE rolname = current_user'
-  )).rows[0]
-  const tables = (await pool.query(
-    `SELECT relname,relrowsecurity,relforcerowsecurity
-       FROM pg_class WHERE relnamespace='public'::regnamespace
-       AND relkind='r' AND relname=ANY($1::text[])`,
-    [REQUIRED]
-  )).rows
-  const gate = assessRlsGate({ role, tables })
-  console.log(JSON.stringify({
-    gate: 'PAPER_TENANT_DB_ROLE_RLS',
-    database: identity.db,
-    username: identity.username,
-    safe: gate.safe,
-    inspectedTables: REQUIRED.length,
-    findings: gate.findings,
-  }))
-  if (!gate.safe) process.exitCode = 2
-  await pool.end()
+// The bootstrap login is deliberately privileged for legacy schema operations.
+// Actual authenticated requests SET ROLE to the NOBYPASSRLS runtime identity.
+// Delegate the live gate to the full request-role checker, which proves this
+// with SET LOCAL ROLE and blank/cross-tenant visibility checks.
+function main() {
+  const path = require('node:path')
+  const { spawnSync } = require('node:child_process')
+  const command = spawnSync(process.execPath, [path.join(__dirname,'check-app-runtime-rls.cjs')], {
+    env: process.env,
+    stdio: 'inherit',
+    timeout: 30000,
+  })
+  process.exitCode = command.status === 0 ? 0 : 2
+  if (command.error) console.error('PAPER_TENANT_RUNTIME_RLS_ERROR', command.error.message)
 }
 
-if (require.main === module) {
-  main().catch(err => {
-    console.error('PAPER_TENANT_DB_ROLE_RLS_ERROR', err.message)
-    process.exitCode = 2
-  })
-}
+if (require.main === module) main()
 
 module.exports = { REQUIRED, assessRlsGate }

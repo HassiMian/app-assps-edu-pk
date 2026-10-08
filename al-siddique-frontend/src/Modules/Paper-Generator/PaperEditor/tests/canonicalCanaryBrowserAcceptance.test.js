@@ -12,7 +12,7 @@ const frontendRoot = path.resolve(__dirname, '../../../../..')
 const v13Path = path.resolve(__dirname, '../../seed-data/official-first-term-2026-v13.json')
 const v13 = JSON.parse(fs.readFileSync(v13Path, 'utf8'))
 
-const PORT = 5196
+const PORT = Number(process.env.ASSPS_CANARY_BROWSER_PORT || 5196)
 const BASE_URL = `http://localhost:${PORT}/canonical-canary-test.html`
 
 let server

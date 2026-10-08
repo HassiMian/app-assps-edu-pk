@@ -12,7 +12,7 @@ const frontendRoot = path.resolve(__dirname, '../../../../..')
 const corpusPath = path.resolve(__dirname, '../migration/data/canonical-first-term-2026-paperdoc-v2-schema3.json')
 const corpus = JSON.parse(fs.readFileSync(corpusPath, 'utf8')).documents
 
-const PORT = 5194
+const PORT = Number(process.env.ASSPS_CANONICAL_CORPUS_PORT || 5194)
 const BASE_URL = `http://localhost:${PORT}/b3-test.html`
 
 let server
@@ -100,7 +100,9 @@ test('Phase 14: all 43 canonical papers preserve render structure and print text
     await page.emulateMedia({ media: 'screen' })
     await page.goto(`${BASE_URL}?mode=${encodeURIComponent(doc.id)}`, {
       waitUntil: 'domcontentloaded',
-      timeout: 15000,
+      // CI cold-start compilation can exceed 15s on the shared VPS.
+      // The rendered DOM, screen/print, and geometry assertions remain unchanged.
+      timeout: 45000,
     })
     try {
       await page.waitForSelector('.canonical-paper-editor-container', { timeout: 10000 })
