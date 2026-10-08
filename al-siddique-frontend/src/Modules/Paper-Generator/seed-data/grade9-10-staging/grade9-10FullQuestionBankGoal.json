@@ -449,10 +449,12 @@
         "Science"
       ],
       "media": [
+        "English",
         "Urdu"
       ],
       "manifestRecordIds": [
-        "pectaa-catalog-022"
+        "pectaa-catalog-022",
+        "pectaa-recovered-chemistry10-en-2026"
       ],
       "completionState": "NOT_COMPLETE",
       "requiredArtifacts": [
@@ -1974,7 +1976,7 @@
       "identityRule": "Religious alternatives never inherit Islamiat/Tarjuma content or pattern without their own verified authority."
     }
   ],
-  "manifestRecordCount": 106,
+  "manifestRecordCount": 108,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -2082,7 +2084,8 @@
     "pectaa-catalog-104",
     "pectaa-catalog-105",
     "pectaa-catalog-106",
-    "pectaa-catalog-107"
+    "pectaa-catalog-107",
+    "pectaa-recovered-chemistry10-en-2026"
   ],
   "catalogExpansionRequired": [
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"

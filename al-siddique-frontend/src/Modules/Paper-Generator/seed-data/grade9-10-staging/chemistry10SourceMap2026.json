@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "assps-chemistry10-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-recovered-chemistry10-en-2026",
+  "sourcePdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+  "sourceByteLength": 21483930,
+  "pageCount": 168,
+  "identity": [
+    "CHEMISTRY 10",
+    "PECTAA 2026",
+    "Updated/Revised National Curriculum of Pakistan 2023",
+    "English Medium"
+  ],
+  "provenance": {
+    "officialCatalogState": "CURRENT_CLASS_X_CATALOG_DOES_NOT_SURFACE_SEPARATE_EM_LINK",
+    "independentEvidenceUrl": "https://textbookevidence.com/ur/books/pctb-chemistry-10-en/",
+    "mirrorUrl": "https://files.kholdo.net/pctb-punjab/class-10/chemistry-10-en.pdf",
+    "expectedSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+    "hashMatchVerified": true,
+    "originalSourceId": "142r9HIosiPteAb2BvlcqSxuOTx9KYqSr"
+  },
+  "chapters": [
+    {
+      "number": 14,
+      "title": "States of Matter and Phase Changes",
+      "printedStartPage": 1,
+      "pdfStartPage": 4,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 15,
+      "title": "Stoichiometry",
+      "printedStartPage": 16,
+      "pdfStartPage": 19,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 16,
+      "title": "Electrochemistry",
+      "printedStartPage": 31,
+      "pdfStartPage": 34,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 17,
+      "title": "Reaction Kinetics",
+      "printedStartPage": 55,
+      "pdfStartPage": 58,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 18,
+      "title": "Salts",
+      "printedStartPage": 67,
+      "pdfStartPage": 70,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 19,
+      "title": "Nitrogen and Sulphur",
+      "printedStartPage": 74,
+      "pdfStartPage": 77,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 20,
+      "title": "Water",
+      "printedStartPage": 87,
+      "pdfStartPage": 90,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 21,
+      "title": "Organic Chemistry",
+      "printedStartPage": 99,
+      "pdfStartPage": 102,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 22,
+      "title": "Hydrocarbons",
+      "printedStartPage": 116,
+      "pdfStartPage": 119,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 23,
+      "title": "Monohydroxy Alkanes or Alcohols",
+      "printedStartPage": 126,
+      "pdfStartPage": 129,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 24,
+      "title": "Carboxylic Acids",
+      "printedStartPage": 134,
+      "pdfStartPage": 137,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 25,
+      "title": "Biochemistry",
+      "printedStartPage": 142,
+      "pdfStartPage": 145,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    },
+    {
+      "number": 26,
+      "title": "Polymers",
+      "printedStartPage": 153,
+      "pdfStartPage": 156,
+      "status": "CURRENT_TEXTBOOK_TOC_AND_START_PAGE_VERIFIED"
+    }
+  ],
+  "pairingEvidence": {
+    "printedPage": 162,
+    "pdfPage": 165,
+    "status": "TEXT_LAYER_HEADING_VERIFIED_PATTERN_EXTRACTION_PENDING"
+  },
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "fullBookDefault": true
+  }
+}

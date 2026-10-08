@@ -1,0 +1,2268 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-CHEM-C14-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "kinetic particle theory",
+      "category": "mcq",
+      "question_text": "Which statement best matches kinetic particle theory?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Particles are in continuous motion"
+        },
+        {
+          "id": "B",
+          "text": "Particles have no energy"
+        },
+        {
+          "id": "C",
+          "text": "Particles never collide"
+        },
+        {
+          "id": "D",
+          "text": "Matter contains no spaces"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Particles are in continuous motion",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 4",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "kinetic particle theory"
+      ]
+    },
+    {
+      "id": "X-CHEM-C14-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "phase changes",
+      "category": "mcq",
+      "question_text": "During melting of a pure solid, supplied energy mainly helps to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Overcome intermolecular attractions"
+        },
+        {
+          "id": "B",
+          "text": "Destroy all atoms"
+        },
+        {
+          "id": "C",
+          "text": "Lower particle energy"
+        },
+        {
+          "id": "D",
+          "text": "Remove all mass"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Overcome intermolecular attractions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 4",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "phase changes"
+      ]
+    },
+    {
+      "id": "X-CHEM-C14-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "evaporation and boiling",
+      "category": "short",
+      "question_text": "Differentiate evaporation and boiling.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Evaporation occurs at the surface over a range of temperatures, while boiling occurs throughout a liquid at its boiling point when vapour pressure matches external pressure.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 4",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "evaporation and boiling"
+      ]
+    },
+    {
+      "id": "X-CHEM-C14-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "heating curve",
+      "category": "short",
+      "question_text": "Why can temperature remain constant during a phase change despite heating?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The supplied energy is used mainly to overcome intermolecular attractions rather than increase average kinetic energy.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 4",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "heating curve"
+      ]
+    },
+    {
+      "id": "X-CHEM-C14-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "states of matter",
+      "category": "long",
+      "question_text": "Explain solid, liquid and gas behavior using particle arrangement, motion, attractions and response to heating.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for arrangement, particle motion, relative attractive forces, compressibility/shape differences, and effect of heating/phase change.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 4",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "states of matter"
+      ]
+    },
+    {
+      "id": "X-CHEM-C15-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "mole concept",
+      "category": "mcq",
+      "question_text": "One mole contains approximately how many particles?",
+      "options": [
+        {
+          "id": "A",
+          "text": "6.02×10^23"
+        },
+        {
+          "id": "B",
+          "text": "6.02×10^3"
+        },
+        {
+          "id": "C",
+          "text": "3.00×10^8"
+        },
+        {
+          "id": "D",
+          "text": "9.81"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "6.02×10^23",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 19",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "mole concept"
+      ]
+    },
+    {
+      "id": "X-CHEM-C15-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "molar gas volume",
+      "category": "mcq",
+      "question_text": "The textbook uses approximately what molar gas volume at room temperature and pressure?",
+      "options": [
+        {
+          "id": "A",
+          "text": "24 dm³ mol⁻¹"
+        },
+        {
+          "id": "B",
+          "text": "2.4 dm³ mol⁻¹"
+        },
+        {
+          "id": "C",
+          "text": "240 dm³ mol⁻¹"
+        },
+        {
+          "id": "D",
+          "text": "1 dm³ mol⁻¹"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "24 dm³ mol⁻¹",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 19",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "molar gas volume"
+      ]
+    },
+    {
+      "id": "X-CHEM-C15-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "stoichiometric ratios",
+      "category": "short",
+      "question_text": "Why must a chemical equation be balanced before stoichiometric calculations?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Balanced coefficients provide the mole ratios required to relate amounts of reactants and products consistently with conservation of atoms.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 19",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "stoichiometric ratios"
+      ]
+    },
+    {
+      "id": "X-CHEM-C15-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "concentration",
+      "category": "short",
+      "question_text": "Define molar concentration.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Molar concentration is amount of solute in moles per unit volume of solution, commonly mol dm⁻³.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 19",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "concentration"
+      ]
+    },
+    {
+      "id": "X-CHEM-C15-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "stoichiometry workflow",
+      "category": "long",
+      "question_text": "Describe a reliable method for solving a mass-to-mass stoichiometry problem.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for balancing the equation, converting known mass to moles, using mole ratio, converting target moles to mass, and checking units/significant reasonableness.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 19",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "stoichiometry workflow"
+      ]
+    },
+    {
+      "id": "X-CHEM-C16-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "redox",
+      "category": "mcq",
+      "question_text": "Oxidation can be described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Loss of electrons"
+        },
+        {
+          "id": "B",
+          "text": "Gain of electrons"
+        },
+        {
+          "id": "C",
+          "text": "No electron change"
+        },
+        {
+          "id": "D",
+          "text": "Only dissolution"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Loss of electrons",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 34",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "redox"
+      ]
+    },
+    {
+      "id": "X-CHEM-C16-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "electrolysis",
+      "category": "mcq",
+      "question_text": "In electrolysis, positive ions move toward the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cathode"
+        },
+        {
+          "id": "B",
+          "text": "Anode"
+        },
+        {
+          "id": "C",
+          "text": "Salt bridge only"
+        },
+        {
+          "id": "D",
+          "text": "Gas outlet"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Cathode",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 34",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "electrolysis"
+      ]
+    },
+    {
+      "id": "X-CHEM-C16-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "oxidation state",
+      "category": "short",
+      "question_text": "What is an oxidation state used for?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is a bookkeeping number used to track electron distribution and identify oxidation/reduction changes in compounds and ions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 34",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "oxidation state"
+      ]
+    },
+    {
+      "id": "X-CHEM-C16-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "electrochemical cells",
+      "category": "short",
+      "question_text": "Differentiate a voltaic cell and an electrolytic cell.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A voltaic cell converts spontaneous chemical energy to electrical energy; an electrolytic cell uses electrical energy to drive a non-spontaneous chemical change.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 34",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "electrochemical cells"
+      ]
+    },
+    {
+      "id": "X-CHEM-C16-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "redox and cells",
+      "category": "long",
+      "question_text": "Explain oxidation, reduction, electron transfer and electrode roles in a simple electrochemical process.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for oxidation as electron loss, reduction as gain, electron flow, anode/cathode roles, and relation to overall redox reaction.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 34",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "redox and cells"
+      ]
+    },
+    {
+      "id": "X-CHEM-C17-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "collision theory",
+      "category": "mcq",
+      "question_text": "For a reaction to occur, colliding particles generally need?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sufficient energy and suitable orientation"
+        },
+        {
+          "id": "B",
+          "text": "Zero kinetic energy"
+        },
+        {
+          "id": "C",
+          "text": "No contact"
+        },
+        {
+          "id": "D",
+          "text": "Identical mass"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Sufficient energy and suitable orientation",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 58",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "collision theory"
+      ]
+    },
+    {
+      "id": "X-CHEM-C17-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "catalyst",
+      "category": "mcq",
+      "question_text": "A catalyst increases reaction rate mainly by?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Providing a lower-activation-energy pathway"
+        },
+        {
+          "id": "B",
+          "text": "Increasing product mass"
+        },
+        {
+          "id": "C",
+          "text": "Changing equilibrium permanently"
+        },
+        {
+          "id": "D",
+          "text": "Being consumed completely"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Providing a lower-activation-energy pathway",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 58",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "catalyst"
+      ]
+    },
+    {
+      "id": "X-CHEM-C17-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "rate factors",
+      "category": "short",
+      "question_text": "How can increasing temperature increase reaction rate?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Particles move faster, collide more frequently and a larger fraction of collisions have enough energy to overcome activation energy.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 58",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "rate factors"
+      ]
+    },
+    {
+      "id": "X-CHEM-C17-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "surface area",
+      "category": "short",
+      "question_text": "Why can powdered solid react faster than a large lump of the same mass?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Powdering increases exposed surface area, giving more available collision sites per unit time.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 58",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "surface area"
+      ]
+    },
+    {
+      "id": "X-CHEM-C17-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "kinetics",
+      "category": "long",
+      "question_text": "Explain how concentration, temperature, surface area and catalysts affect reaction rate using collision theory.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award one mark for each factor and one mark for linking all effects to frequency/effectiveness of collisions or activation energy.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 58",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "kinetics"
+      ]
+    },
+    {
+      "id": "X-CHEM-C18-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "salt definition",
+      "category": "mcq",
+      "question_text": "A salt is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "An ionic compound containing cations and anions"
+        },
+        {
+          "id": "B",
+          "text": "Any neutral molecule"
+        },
+        {
+          "id": "C",
+          "text": "Only sodium chloride"
+        },
+        {
+          "id": "D",
+          "text": "Any gas"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "An ionic compound containing cations and anions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 70",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "salt definition"
+      ]
+    },
+    {
+      "id": "X-CHEM-C18-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "salt preparation",
+      "category": "mcq",
+      "question_text": "Which method is suitable for preparing a soluble salt from an acid and an insoluble base?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Add excess base, filter, then crystallize"
+        },
+        {
+          "id": "B",
+          "text": "Distil air"
+        },
+        {
+          "id": "C",
+          "text": "Electroplate metal"
+        },
+        {
+          "id": "D",
+          "text": "Burn the acid"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Add excess base, filter, then crystallize",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 70",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "salt preparation"
+      ]
+    },
+    {
+      "id": "X-CHEM-C18-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "solubility",
+      "category": "short",
+      "question_text": "Why is solubility information important when choosing a salt-preparation method?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It determines whether precipitation, neutralization with excess solid, or another separation/crystallization route is suitable.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 70",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "solubility"
+      ]
+    },
+    {
+      "id": "X-CHEM-C18-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "crystallization",
+      "category": "short",
+      "question_text": "What is the purpose of crystallization in salt preparation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It separates purified solid crystals from a concentrated solution as solvent is removed or the solution cools.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 70",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "crystallization"
+      ]
+    },
+    {
+      "id": "X-CHEM-C18-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "salt preparation",
+      "category": "long",
+      "question_text": "Compare methods for preparing a soluble salt and an insoluble salt in the laboratory.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for choosing reactants, reaction/neutralization or precipitation, filtration where needed, concentration/crystallization for soluble salt, and washing/drying precipitate for insoluble salt.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 70",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "salt preparation"
+      ]
+    },
+    {
+      "id": "X-CHEM-C19-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "nitrogen cycle",
+      "category": "mcq",
+      "question_text": "Nitrogen fixation converts atmospheric nitrogen into?",
+      "options": [
+        {
+          "id": "A",
+          "text": "More reactive nitrogen compounds"
+        },
+        {
+          "id": "B",
+          "text": "Pure oxygen"
+        },
+        {
+          "id": "C",
+          "text": "Only carbon dioxide"
+        },
+        {
+          "id": "D",
+          "text": "Water vapour"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "More reactive nitrogen compounds",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 77",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "nitrogen cycle"
+      ]
+    },
+    {
+      "id": "X-CHEM-C19-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "air pollutants",
+      "category": "mcq",
+      "question_text": "Oxides of nitrogen can contribute to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Photochemical smog and acid-forming pollution"
+        },
+        {
+          "id": "B",
+          "text": "Only pure rainwater"
+        },
+        {
+          "id": "C",
+          "text": "Removal of all ozone"
+        },
+        {
+          "id": "D",
+          "text": "Formation of sodium chloride"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Photochemical smog and acid-forming pollution",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 77",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "air pollutants"
+      ]
+    },
+    {
+      "id": "X-CHEM-C19-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "nitrogen compounds",
+      "category": "short",
+      "question_text": "Why is nitrogen important to living organisms?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Nitrogen is needed to build amino acids/proteins, nucleic acids and other essential biological molecules.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 77",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "nitrogen compounds"
+      ]
+    },
+    {
+      "id": "X-CHEM-C19-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "sulphur compounds",
+      "category": "short",
+      "question_text": "State one environmental concern associated with sulphur dioxide.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can contribute to acid deposition and respiratory/environmental harm when present as an air pollutant.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 77",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "sulphur compounds"
+      ]
+    },
+    {
+      "id": "X-CHEM-C19-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "nitrogen sulphur chemistry",
+      "category": "long",
+      "question_text": "Discuss useful roles and environmental impacts of important nitrogen and sulphur compounds.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for fertilizer/industrial uses, nitrogen biological importance, nitrogen-oxide pollution, sulphur compound uses, and sulphur-dioxide/acid-deposition concerns.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 77",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "nitrogen sulphur chemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-C20-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "water testing",
+      "category": "mcq",
+      "question_text": "Anhydrous copper(II) sulfate can be used to test for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Water"
+        },
+        {
+          "id": "B",
+          "text": "Hydrogen gas"
+        },
+        {
+          "id": "C",
+          "text": "Chloride only"
+        },
+        {
+          "id": "D",
+          "text": "Carbon monoxide"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Water",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 90",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "water testing"
+      ]
+    },
+    {
+      "id": "X-CHEM-C20-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "hard water",
+      "category": "mcq",
+      "question_text": "Hard water commonly contains significant amounts of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Calcium and magnesium ions"
+        },
+        {
+          "id": "B",
+          "text": "Only sodium ions"
+        },
+        {
+          "id": "C",
+          "text": "Only hydrogen ions"
+        },
+        {
+          "id": "D",
+          "text": "Only nitrate molecules"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Calcium and magnesium ions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 90",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "hard water"
+      ]
+    },
+    {
+      "id": "X-CHEM-C20-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "water treatment",
+      "category": "short",
+      "question_text": "Why is water treated before public supply?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Treatment removes or reduces suspended matter, harmful microorganisms and undesirable contaminants so water is safer and more suitable for use.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 90",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "water treatment"
+      ]
+    },
+    {
+      "id": "X-CHEM-C20-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "hardness",
+      "category": "short",
+      "question_text": "State one disadvantage and one possible advantage of hard water.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Disadvantage: scale/soap wastage. Possible advantage: calcium and magnesium ions can contribute useful dietary minerals.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 90",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "hardness"
+      ]
+    },
+    {
+      "id": "X-CHEM-C20-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "water quality",
+      "category": "long",
+      "question_text": "Explain sources of water contamination and major steps used to improve water quality for human use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for contamination sources, sedimentation/filtration, disinfection, chemical/quality monitoring, and responsible pollution prevention.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 90",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "water quality"
+      ]
+    },
+    {
+      "id": "X-CHEM-C21-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "organic compounds",
+      "category": "mcq",
+      "question_text": "Organic chemistry mainly studies compounds of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon"
+        },
+        {
+          "id": "B",
+          "text": "Neon"
+        },
+        {
+          "id": "C",
+          "text": "Helium only"
+        },
+        {
+          "id": "D",
+          "text": "Sodium only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 102",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "organic compounds"
+      ]
+    },
+    {
+      "id": "X-CHEM-C21-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "structural formulae",
+      "category": "mcq",
+      "question_text": "A structural formula shows?",
+      "options": [
+        {
+          "id": "A",
+          "text": "How atoms are connected in a molecule"
+        },
+        {
+          "id": "B",
+          "text": "Only total molecular mass"
+        },
+        {
+          "id": "C",
+          "text": "Only physical colour"
+        },
+        {
+          "id": "D",
+          "text": "Only sample volume"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "How atoms are connected in a molecule",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 102",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "structural formulae"
+      ]
+    },
+    {
+      "id": "X-CHEM-C21-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "homologous series",
+      "category": "short",
+      "question_text": "What is a homologous series?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A family of organic compounds with the same functional group and general formula, similar chemical properties and a gradual change in physical properties.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 102",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "homologous series"
+      ]
+    },
+    {
+      "id": "X-CHEM-C21-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "isomerism",
+      "category": "short",
+      "question_text": "What are structural isomers?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Compounds with the same molecular formula but different structural arrangements of atoms.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 102",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "isomerism"
+      ]
+    },
+    {
+      "id": "X-CHEM-C21-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "organic classification",
+      "category": "long",
+      "question_text": "Explain how functional groups, homologous series and structural formulae help organize organic chemistry.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for each concept, relation to chemical properties, general formula/patterns, and an original example.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 102",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "organic classification"
+      ]
+    },
+    {
+      "id": "X-CHEM-C22-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "hydrocarbons",
+      "category": "mcq",
+      "question_text": "A hydrocarbon contains only?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon and hydrogen"
+        },
+        {
+          "id": "B",
+          "text": "Carbon and oxygen only"
+        },
+        {
+          "id": "C",
+          "text": "Hydrogen and nitrogen only"
+        },
+        {
+          "id": "D",
+          "text": "All elements"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon and hydrogen",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 119",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbons"
+      ]
+    },
+    {
+      "id": "X-CHEM-C22-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "alkenes",
+      "category": "mcq",
+      "question_text": "Alkenes contain at least one?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon-carbon double bond"
+        },
+        {
+          "id": "B",
+          "text": "Ionic bond only"
+        },
+        {
+          "id": "C",
+          "text": "Metal atom"
+        },
+        {
+          "id": "D",
+          "text": "Carboxyl group"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon-carbon double bond",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 119",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "alkenes"
+      ]
+    },
+    {
+      "id": "X-CHEM-C22-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "alkanes and alkenes",
+      "category": "short",
+      "question_text": "Differentiate saturated and unsaturated hydrocarbons.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Saturated hydrocarbons contain only carbon-carbon single bonds; unsaturated hydrocarbons contain one or more carbon-carbon multiple bonds.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 119",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "alkanes and alkenes"
+      ]
+    },
+    {
+      "id": "X-CHEM-C22-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "combustion",
+      "category": "short",
+      "question_text": "Why can incomplete combustion of hydrocarbons be harmful?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can produce carbon monoxide and soot, wasting fuel and causing serious health/air-quality hazards.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 119",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "combustion"
+      ]
+    },
+    {
+      "id": "X-CHEM-C22-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "hydrocarbon reactions",
+      "category": "long",
+      "question_text": "Compare alkanes and alkenes in bonding, general reactivity and one characteristic reaction.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for saturation difference, single vs double bond, relative reactivity, substitution for alkanes, and addition for alkenes.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 119",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbon reactions"
+      ]
+    },
+    {
+      "id": "X-CHEM-C23-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "alcohol functional group",
+      "category": "mcq",
+      "question_text": "The functional group of an alcohol is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "–OH"
+        },
+        {
+          "id": "B",
+          "text": "–COOH"
+        },
+        {
+          "id": "C",
+          "text": "–CHO only"
+        },
+        {
+          "id": "D",
+          "text": "–NH2 only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "–OH",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 129",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "alcohol functional group"
+      ]
+    },
+    {
+      "id": "X-CHEM-C23-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "ethanol production",
+      "category": "mcq",
+      "question_text": "Fermentation can produce ethanol from?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Sugars using microorganisms such as yeast"
+        },
+        {
+          "id": "B",
+          "text": "Pure sodium chloride"
+        },
+        {
+          "id": "C",
+          "text": "Nitrogen gas only"
+        },
+        {
+          "id": "D",
+          "text": "Metal oxides only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Sugars using microorganisms such as yeast",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 129",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "ethanol production"
+      ]
+    },
+    {
+      "id": "X-CHEM-C23-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "alcohol properties",
+      "category": "short",
+      "question_text": "Why are lower alcohols often soluble in water?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Their hydroxyl group can form hydrogen bonds with water; solubility generally decreases as the hydrocarbon chain becomes larger.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 129",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "alcohol properties"
+      ]
+    },
+    {
+      "id": "X-CHEM-C23-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "ethanol oxidation",
+      "category": "short",
+      "question_text": "What type of compound can ethanol form on oxidation under suitable conditions?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can be oxidized toward an aldehyde and further to a carboxylic acid such as ethanoic acid.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 129",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "ethanol oxidation"
+      ]
+    },
+    {
+      "id": "X-CHEM-C23-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "ethanol chemistry",
+      "category": "long",
+      "question_text": "Describe preparation, important properties and selected reactions/uses of ethanol.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for fermentation or another valid preparation route, physical property, combustion, oxidation or other reaction, and a responsible industrial/use example.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 129",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "ethanol chemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-C24-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "carboxyl group",
+      "category": "mcq",
+      "question_text": "The carboxylic-acid functional group is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "–COOH"
+        },
+        {
+          "id": "B",
+          "text": "–OH only"
+        },
+        {
+          "id": "C",
+          "text": "C=C only"
+        },
+        {
+          "id": "D",
+          "text": "–NH2"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "–COOH",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 137",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "carboxyl group"
+      ]
+    },
+    {
+      "id": "X-CHEM-C24-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "acid reaction",
+      "category": "mcq",
+      "question_text": "A carboxylic acid reacting with a carbonate typically produces salt, water and?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon dioxide"
+        },
+        {
+          "id": "B",
+          "text": "Hydrogen chloride"
+        },
+        {
+          "id": "C",
+          "text": "Nitrogen"
+        },
+        {
+          "id": "D",
+          "text": "Methane only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon dioxide",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 137",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "acid reaction"
+      ]
+    },
+    {
+      "id": "X-CHEM-C24-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "carboxylic acids",
+      "category": "short",
+      "question_text": "Why do carboxylic acids show acidic behavior?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The carboxyl group can donate a proton in aqueous conditions, producing carboxylate ions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 137",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "carboxylic acids"
+      ]
+    },
+    {
+      "id": "X-CHEM-C24-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "esterification",
+      "category": "short",
+      "question_text": "What is formed when a carboxylic acid reacts with a suitable alcohol under esterification conditions?",
+      "options": [],
+      "correct_option": "",
+      "answer": "An ester and water are formed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 137",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "esterification"
+      ]
+    },
+    {
+      "id": "X-CHEM-C24-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "carboxylic acid reactions",
+      "category": "long",
+      "question_text": "Explain reactions of carboxylic acids with metals, bases, carbonates and alcohols.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for correct product patterns for the first three acid reactions, ester formation with alcohol, and representative equations/naming without copying textbook examples.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 137",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "carboxylic acid reactions"
+      ]
+    },
+    {
+      "id": "X-CHEM-C25-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "biomolecules",
+      "category": "mcq",
+      "question_text": "Proteins are built from?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Amino acids"
+        },
+        {
+          "id": "B",
+          "text": "Monosaccharides only"
+        },
+        {
+          "id": "C",
+          "text": "Nucleotides only"
+        },
+        {
+          "id": "D",
+          "text": "Fatty acids only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Amino acids",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 145",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "biomolecules"
+      ]
+    },
+    {
+      "id": "X-CHEM-C25-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "carbohydrates",
+      "category": "mcq",
+      "question_text": "Carbohydrates commonly serve as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Important energy sources and structural materials"
+        },
+        {
+          "id": "B",
+          "text": "Only genetic information"
+        },
+        {
+          "id": "C",
+          "text": "Only catalysts"
+        },
+        {
+          "id": "D",
+          "text": "Only gases"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Important energy sources and structural materials",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 145",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "carbohydrates"
+      ]
+    },
+    {
+      "id": "X-CHEM-C25-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "lipids",
+      "category": "short",
+      "question_text": "State two biological roles of lipids.",
+      "options": [],
+      "correct_option": "",
+      "answer": "They can store energy, form cell membranes, provide insulation and participate in signaling; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 145",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "lipids"
+      ]
+    },
+    {
+      "id": "X-CHEM-C25-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "nutrition",
+      "category": "short",
+      "question_text": "Why is a balanced diet important?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It supplies appropriate amounts of energy, essential nutrients, vitamins, minerals, water and fibre needed for growth, repair and healthy body function.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 145",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "nutrition"
+      ]
+    },
+    {
+      "id": "X-CHEM-C25-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "biochemistry",
+      "category": "long",
+      "question_text": "Compare carbohydrates, proteins, lipids and nucleic acids in terms of basic building units and major roles.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award one mark for each biomolecule group plus one mark for a clear comparison linking structure/building units to function.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 145",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "biochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-C26-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "polymers",
+      "category": "mcq",
+      "question_text": "A polymer is made from many smaller units called?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Monomers"
+        },
+        {
+          "id": "B",
+          "text": "Isotopes"
+        },
+        {
+          "id": "C",
+          "text": "Electrodes"
+        },
+        {
+          "id": "D",
+          "text": "Catalysts"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Monomers",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 156",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "polymers"
+      ]
+    },
+    {
+      "id": "X-CHEM-C26-M02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "polymerization",
+      "category": "mcq",
+      "question_text": "Addition polymerization commonly involves monomers containing?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon-carbon double bonds"
+        },
+        {
+          "id": "B",
+          "text": "Only ionic lattices"
+        },
+        {
+          "id": "C",
+          "text": "Noble gases"
+        },
+        {
+          "id": "D",
+          "text": "Metal oxides"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon-carbon double bonds",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 156",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "polymerization"
+      ]
+    },
+    {
+      "id": "X-CHEM-C26-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "natural and synthetic polymers",
+      "category": "short",
+      "question_text": "Give one natural polymer and one synthetic polymer.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples: cellulose or protein as natural; poly(ethene), nylon or PVC as synthetic.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 156",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "natural and synthetic polymers"
+      ]
+    },
+    {
+      "id": "X-CHEM-C26-S02",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "polymer waste",
+      "category": "short",
+      "question_text": "Why can some synthetic polymers create environmental problems?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Many degrade very slowly, accumulate as waste and can fragment into persistent particles unless reduced, reused, recycled or managed responsibly.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 156",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "polymer waste"
+      ]
+    },
+    {
+      "id": "X-CHEM-C26-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "polymer chemistry",
+      "category": "long",
+      "question_text": "Explain monomers, polymerization, repeating units and responsible management of polymer materials.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for defining monomer/polymer, polymerization, repeating unit concept, useful material properties/applications, and waste/recycling considerations.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | 64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6 | page 156",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "english",
+        "pectaa-2026",
+        "internal-provisional",
+        "original-draft",
+        "polymer chemistry"
+      ]
+    }
+  ]
+}
