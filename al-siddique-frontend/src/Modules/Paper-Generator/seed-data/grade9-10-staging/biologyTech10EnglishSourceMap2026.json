@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "assps-biologyTech10English-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-062",
+  "sourcePdfSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
+  "sourceByteLength": 33141272,
+  "pageCount": 84,
+  "identity": [
+    "Biology-Tech Grade X Matric-Tech",
+    "PECTAA current source 2026-27",
+    "native text layer verified"
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Human Digestive System",
+      "chapterStartPdfPage": 4,
+      "exercisePages": [
+        12
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 2,
+      "title": "Human Respiratory System",
+      "chapterStartPdfPage": 14,
+      "exercisePages": [
+        19,
+        20
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 3,
+      "title": "Human Blood Circulatory System",
+      "chapterStartPdfPage": 21,
+      "exercisePages": [
+        30
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 4,
+      "title": "Human Urinary System",
+      "chapterStartPdfPage": 32,
+      "exercisePages": [
+        37
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 5,
+      "title": "Coordination",
+      "chapterStartPdfPage": 39,
+      "exercisePages": [
+        51,
+        53
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 6,
+      "title": "Reproduction",
+      "chapterStartPdfPage": 55,
+      "exercisePages": [
+        59
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 7,
+      "title": "Inheritance",
+      "chapterStartPdfPage": 61,
+      "exercisePages": [
+        69
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 8,
+      "title": "Biotechnology",
+      "chapterStartPdfPage": 71,
+      "exercisePages": [
+        78
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    }
+  ],
+  "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "dangerousPracticalInstructionsAllowed": false
+  }
+}

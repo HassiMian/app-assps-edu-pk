@@ -1,0 +1,888 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-COMMS-TECH-C01-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Advanced Communication Techniques",
+      "topic_name": "persuasion",
+      "category": "mcq",
+      "question_text": "Which feature most strengthens a persuasive professional message?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Credible evidence and audience awareness"
+        },
+        {
+          "id": "B",
+          "text": "Ignoring the audience"
+        },
+        {
+          "id": "C",
+          "text": "Contradictory claims"
+        },
+        {
+          "id": "D",
+          "text": "Avoiding a clear purpose"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Credible evidence and audience awareness",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "persuasion"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C01-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Advanced Communication Techniques",
+      "topic_name": "persuasion",
+      "category": "short",
+      "question_text": "Why is active listening important during a difficult conversation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps the listener understand meaning and emotion, reduces misunderstanding, and supports a respectful solution-focused response.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "persuasion"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C01-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Advanced Communication Techniques",
+      "topic_name": "persuasion",
+      "category": "long",
+      "question_text": "Explain a responsible framework for handling a difficult professional conversation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Clarify the issue, listen actively, regulate emotion, use respectful specific language, explore solutions, agree next steps, and document important commitments.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "persuasion"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C02-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Professional Dressing and Grooming",
+      "topic_name": "professional grooming",
+      "category": "mcq",
+      "question_text": "Professional grooming mainly supports which workplace outcome?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A neat, appropriate and trustworthy presentation"
+        },
+        {
+          "id": "B",
+          "text": "Ignoring hygiene"
+        },
+        {
+          "id": "C",
+          "text": "Using the same clothing for every context"
+        },
+        {
+          "id": "D",
+          "text": "Replacing skills with appearance"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A neat, appropriate and trustworthy presentation",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 13",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "professional grooming"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C02-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Professional Dressing and Grooming",
+      "topic_name": "professional grooming",
+      "category": "short",
+      "question_text": "Why should professional dress be appropriate to role and context?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Appropriate dress supports safety, respect, comfort and professional expectations without replacing competence or character.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 13",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "professional grooming"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C02-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Professional Dressing and Grooming",
+      "topic_name": "professional grooming",
+      "category": "long",
+      "question_text": "Describe the principles of professional dressing and grooming without relying on stereotypes.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Focus on cleanliness, fit, safety, workplace norms, cultural respect, comfort, consistency and a professional appearance rather than gendered or body-based ideals.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 13",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "professional grooming"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C03-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Interview Skills",
+      "topic_name": "interview preparation",
+      "category": "mcq",
+      "question_text": "Good interview preparation should begin with?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Understanding the role and organization"
+        },
+        {
+          "id": "B",
+          "text": "Memorizing unrelated answers"
+        },
+        {
+          "id": "C",
+          "text": "Arriving without documents"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring the job requirements"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Understanding the role and organization",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 20",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "interview preparation"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C03-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Interview Skills",
+      "topic_name": "interview preparation",
+      "category": "short",
+      "question_text": "What is the purpose of a concise evidence-based interview answer?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It connects a relevant example or skill to the question and helps the interviewer understand the candidate’s contribution clearly.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 20",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "interview preparation"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C03-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Interview Skills",
+      "topic_name": "interview preparation",
+      "category": "long",
+      "question_text": "Outline a practical interview-preparation plan.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Research role and organization, identify relevant skills/examples, prepare documents, practice clear answers, plan logistics, and prepare thoughtful questions.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 20",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "interview preparation"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C04-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Self-Awareness",
+      "topic_name": "self-awareness",
+      "category": "mcq",
+      "question_text": "Self-awareness includes recognizing one’s?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Strengths, limits, emotions and values"
+        },
+        {
+          "id": "B",
+          "text": "Only other people’s faults"
+        },
+        {
+          "id": "C",
+          "text": "Salary only"
+        },
+        {
+          "id": "D",
+          "text": "Clothing size"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Strengths, limits, emotions and values",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 29",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "self-awareness"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C04-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Self-Awareness",
+      "topic_name": "self-awareness",
+      "category": "short",
+      "question_text": "How can constructive reflection improve performance?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps identify what worked, what needs improvement and what specific action should be tried next.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 29",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "self-awareness"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C04-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Self-Awareness",
+      "topic_name": "self-awareness",
+      "category": "long",
+      "question_text": "Explain how self-awareness supports responsible goal setting.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accurate self-assessment helps set realistic goals, choose suitable strategies, seek feedback, monitor progress and adjust plans.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 29",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "self-awareness"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C05-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Emotional Intelligence",
+      "topic_name": "emotional intelligence",
+      "category": "mcq",
+      "question_text": "Emotional intelligence includes the ability to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Recognize and manage emotions constructively"
+        },
+        {
+          "id": "B",
+          "text": "Suppress every emotion permanently"
+        },
+        {
+          "id": "C",
+          "text": "Ignore other people"
+        },
+        {
+          "id": "D",
+          "text": "Avoid all feedback"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Recognize and manage emotions constructively",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 42",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "emotional intelligence"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C05-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Emotional Intelligence",
+      "topic_name": "emotional intelligence",
+      "category": "short",
+      "question_text": "What is empathy in a professional interaction?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Understanding another person’s perspective and feelings while maintaining appropriate boundaries and respectful communication.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 42",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "emotional intelligence"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C05-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Emotional Intelligence",
+      "topic_name": "emotional intelligence",
+      "category": "long",
+      "question_text": "Explain how emotional intelligence can reduce conflict.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Recognizing emotions, pausing before reacting, using empathy, communicating clearly and choosing constructive responses can prevent escalation and support solutions.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 42",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "emotional intelligence"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C06-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Interpersonal Skills",
+      "topic_name": "interpersonal skills",
+      "category": "mcq",
+      "question_text": "Which behavior most supports healthy teamwork?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Clear respectful communication and reliability"
+        },
+        {
+          "id": "B",
+          "text": "Withholding needed information"
+        },
+        {
+          "id": "C",
+          "text": "Blaming others automatically"
+        },
+        {
+          "id": "D",
+          "text": "Refusing collaboration"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Clear respectful communication and reliability",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "interpersonal skills"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C06-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Interpersonal Skills",
+      "topic_name": "interpersonal skills",
+      "category": "short",
+      "question_text": "Why are boundaries important in interpersonal relationships?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They clarify acceptable behavior and responsibilities, helping protect respect, trust and wellbeing.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "interpersonal skills"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C06-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Interpersonal Skills",
+      "topic_name": "interpersonal skills",
+      "category": "long",
+      "question_text": "Discuss how communication, cooperation, feedback and boundaries contribute to strong interpersonal skills.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong response explains each element, shows how they reinforce trust and task completion, and includes a workplace or school example.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "interpersonal skills"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C07-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thinking Skills",
+      "topic_name": "thinking skills",
+      "category": "mcq",
+      "question_text": "Critical thinking requires a person to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Evaluate evidence and assumptions"
+        },
+        {
+          "id": "B",
+          "text": "Accept every claim immediately"
+        },
+        {
+          "id": "C",
+          "text": "Avoid questions"
+        },
+        {
+          "id": "D",
+          "text": "Choose the first answer without checking"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Evaluate evidence and assumptions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 64",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "thinking skills"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C07-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thinking Skills",
+      "topic_name": "thinking skills",
+      "category": "short",
+      "question_text": "Differentiate critical thinking from creative thinking.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Critical thinking evaluates evidence and reasoning; creative thinking generates useful possibilities or novel approaches.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 64",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "thinking skills"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C07-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Thinking Skills",
+      "topic_name": "thinking skills",
+      "category": "long",
+      "question_text": "Explain a structured problem-solving process.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Define the problem, gather relevant information, generate options, evaluate evidence and consequences, choose a solution, implement it and review the result.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 64",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "thinking skills"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C08-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Personal Branding and Social Media Presence",
+      "topic_name": "personal branding",
+      "category": "mcq",
+      "question_text": "A responsible personal brand should be based mainly on?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Authentic skills, conduct and consistent values"
+        },
+        {
+          "id": "B",
+          "text": "False claims"
+        },
+        {
+          "id": "C",
+          "text": "Private data oversharing"
+        },
+        {
+          "id": "D",
+          "text": "Copying another person’s identity"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Authentic skills, conduct and consistent values",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 77",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "personal branding"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C08-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Personal Branding and Social Media Presence",
+      "topic_name": "personal branding",
+      "category": "short",
+      "question_text": "Why should privacy settings matter when building a social-media presence?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They help control personal information exposure and reduce avoidable privacy and reputation risks.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 77",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "personal branding"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C08-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Personal Branding and Social Media Presence",
+      "topic_name": "personal branding",
+      "category": "long",
+      "question_text": "Describe how a student can build a responsible professional digital presence.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Use accurate profile information, showcase genuine work, communicate respectfully, protect private data, follow copyright rules and review public content before posting.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 77",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "personal branding"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C09-M01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Health and Nutrition",
+      "topic_name": "health and nutrition",
+      "category": "mcq",
+      "question_text": "A balanced diet is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Appropriate variety and amounts of essential nutrients"
+        },
+        {
+          "id": "B",
+          "text": "Only one food group"
+        },
+        {
+          "id": "C",
+          "text": "Skipping meals routinely"
+        },
+        {
+          "id": "D",
+          "text": "Avoiding water"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Appropriate variety and amounts of essential nutrients",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 88",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "health and nutrition"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C09-S01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Health and Nutrition",
+      "topic_name": "health and nutrition",
+      "category": "short",
+      "question_text": "Why are hydration and regular sleep important for performance?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They support concentration, physical function, recovery and general wellbeing.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 88",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "health and nutrition"
+      ]
+    },
+    {
+      "id": "X-COMMS-TECH-C09-L01",
+      "class_level": "10th",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Health and Nutrition",
+      "topic_name": "health and nutrition",
+      "category": "long",
+      "question_text": "Explain how nutrition, activity, sleep and stress management support personal wellbeing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer links balanced nutrition, regular safe activity, sufficient sleep and healthy coping habits to energy, focus, recovery and long-term wellbeing.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-049 | 87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74 | page 88",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "communication-skills-&-personal-grooming-tech",
+        "health and nutrition"
+      ]
+    }
+  ]
+}

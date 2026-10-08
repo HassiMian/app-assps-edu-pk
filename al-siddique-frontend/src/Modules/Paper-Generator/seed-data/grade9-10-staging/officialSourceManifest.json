@@ -1393,9 +1393,9 @@
       "catalogLabel": "Communication skills and personal grooming 10 (2026-27)",
       "pdfUrl": null,
       "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
-      "chapterIndexStatus": "PENDING",
-      "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterIndexStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1407,7 +1407,11 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
       "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-049.pdf",
-      "pdfPageCount": 108
+      "pdfPageCount": 108,
+      "contentMapStatus": "CURRENT_CHAPTER_START_PAGES_VERIFIED_NATIVE_TEXT_LAYER",
+      "contentMapEvidence": "communicationSkills10TechSourceMap2026.json",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "providerContentLanguage": "English"
     },
     {
       "recordId": "pectaa-catalog-050",
@@ -1528,9 +1532,9 @@
       "catalogLabel": "Health sciences 10 (2026-27) tech",
       "pdfUrl": null,
       "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
-      "chapterIndexStatus": "PENDING",
-      "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterIndexStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1542,7 +1546,11 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
       "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-054.pdf",
-      "pdfPageCount": 123
+      "pdfPageCount": 123,
+      "contentMapStatus": "CURRENT_CHAPTER_START_PAGES_VERIFIED_NATIVE_TEXT_LAYER",
+      "contentMapEvidence": "healthSciences10TechSourceMap2026.json",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "providerContentLanguage": "English"
     },
     {
       "recordId": "pectaa-catalog-055",
@@ -1609,9 +1617,9 @@
       "catalogLabel": "Physic 10 Tech (EM)",
       "pdfUrl": null,
       "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
-      "chapterIndexStatus": "PENDING",
-      "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterIndexStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1623,7 +1631,11 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
       "sourceCacheRef": "20261008/tech10-science/phys10em.pdf",
-      "pdfPageCount": 136
+      "pdfPageCount": 136,
+      "contentMapStatus": "CURRENT_CHAPTER_START_PAGES_VERIFIED_NATIVE_TEXT_LAYER",
+      "contentMapEvidence": "physicsTech10EnglishSourceMap2026.json",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "providerContentLanguage": "English"
     },
     {
       "recordId": "pectaa-catalog-058",
@@ -1744,9 +1756,9 @@
       "catalogLabel": "Bio tech I0 EM (2026-27)",
       "pdfUrl": null,
       "pdfSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
-      "chapterIndexStatus": "PENDING",
-      "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "chapterIndexStatus": "VERIFIED_NATIVE_TEXT_LAYER",
+      "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1758,7 +1770,11 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
       "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-062.pdf",
-      "pdfPageCount": 84
+      "pdfPageCount": 84,
+      "contentMapStatus": "CURRENT_CHAPTER_START_PAGES_VERIFIED_NATIVE_TEXT_LAYER",
+      "contentMapEvidence": "biologyTech10EnglishSourceMap2026.json",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_EXERCISE_COPYING",
+      "providerContentLanguage": "English"
     },
     {
       "recordId": "pectaa-catalog-063",

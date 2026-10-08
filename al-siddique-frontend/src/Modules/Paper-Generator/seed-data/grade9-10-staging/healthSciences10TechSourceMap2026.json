@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "assps-healthSciences10Tech-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-054",
+  "sourcePdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+  "sourceByteLength": 32142102,
+  "pageCount": 123,
+  "identity": [
+    "Health Sciences-Tech Grade X Matric-Tech",
+    "PECTAA current source 2026-27",
+    "native text layer verified"
+  ],
+  "chapters": [
+    {
+      "number": 9,
+      "title": "Central Nervous System",
+      "chapterStartPdfPage": 4,
+      "exercisePages": [
+        9,
+        18
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 10,
+      "title": "Musculoskeletal System",
+      "chapterStartPdfPage": 21,
+      "exercisePages": [
+        24,
+        26,
+        27,
+        28,
+        30,
+        31
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 11,
+      "title": "Endocrine System",
+      "chapterStartPdfPage": 35,
+      "exercisePages": [
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 12,
+      "title": "Pediatrics",
+      "chapterStartPdfPage": 51,
+      "exercisePages": [
+        57,
+        59,
+        60
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 13,
+      "title": "First Aid - II",
+      "chapterStartPdfPage": 62,
+      "exercisePages": [
+        70
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 14,
+      "title": "Sterilization",
+      "chapterStartPdfPage": 72,
+      "exercisePages": [
+        80
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 15,
+      "title": "Nursing and Elderly Care",
+      "chapterStartPdfPage": 83,
+      "exercisePages": [
+        84,
+        86
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 16,
+      "title": "Behavioral Science",
+      "chapterStartPdfPage": 89,
+      "exercisePages": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        98,
+        99,
+        100,
+        101
+      ],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    },
+    {
+      "number": 17,
+      "title": "Essential Life Skills",
+      "chapterStartPdfPage": 102,
+      "exercisePages": [],
+      "status": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED"
+    }
+  ],
+  "exerciseIndexStatus": "PARTIAL_VERIFIED_NATIVE_TEXT_LAYER",
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "dangerousPracticalInstructionsAllowed": false
+  }
+}

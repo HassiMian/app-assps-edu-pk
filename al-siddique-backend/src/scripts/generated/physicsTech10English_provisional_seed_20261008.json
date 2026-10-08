@@ -1,0 +1,986 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-PHY-TECH-C10-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "specific heat",
+      "category": "mcq",
+      "question_text": "Specific heat capacity is energy needed to raise the temperature of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "1 kg of a substance by 1 K"
+        },
+        {
+          "id": "B",
+          "text": "Any mass by 100 K"
+        },
+        {
+          "id": "C",
+          "text": "1 m of wire"
+        },
+        {
+          "id": "D",
+          "text": "1 C of charge"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1 kg of a substance by 1 K",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "specific heat"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C10-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "specific heat",
+      "category": "short",
+      "question_text": "Differentiate heat and temperature.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heat is energy transferred because of a temperature difference; temperature indicates thermal state and relates to average particle kinetic energy.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "specific heat"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C10-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Thermal Physics",
+      "topic_name": "specific heat",
+      "category": "numerical",
+      "question_text": "A 2 kg material with c=500 J kg⁻¹ K⁻¹ warms by 4 K. Calculate energy supplied.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Q=mcΔT=2×500×4=4000 J.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "specific heat"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C11-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "heat transfer",
+      "category": "mcq",
+      "question_text": "Heat transfer through a solid metal is mainly?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Conduction"
+        },
+        {
+          "id": "B",
+          "text": "Convection only"
+        },
+        {
+          "id": "C",
+          "text": "Evaporation only"
+        },
+        {
+          "id": "D",
+          "text": "Nuclear decay"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Conduction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 16",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "heat transfer"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C11-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "heat transfer",
+      "category": "short",
+      "question_text": "Why does trapped air help insulation?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Air is a poor conductor and, when trapped, cannot circulate enough for strong convection.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 16",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "heat transfer"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C11-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Transfer of Thermal Energy",
+      "topic_name": "heat transfer",
+      "category": "long",
+      "question_text": "Compare conduction, convection and radiation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Conduction transfers energy through particle/electron interactions, convection by bulk fluid motion, and radiation by electromagnetic waves that can cross a vacuum.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 16",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "heat transfer"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C12-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "waves",
+      "category": "mcq",
+      "question_text": "Wave speed equals?",
+      "options": [
+        {
+          "id": "A",
+          "text": "frequency × wavelength"
+        },
+        {
+          "id": "B",
+          "text": "frequency/wavelength"
+        },
+        {
+          "id": "C",
+          "text": "amplitude × time"
+        },
+        {
+          "id": "D",
+          "text": "period × mass"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "frequency × wavelength",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 28",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "waves"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C12-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "waves",
+      "category": "short",
+      "question_text": "State the relation between frequency and period.",
+      "options": [],
+      "correct_option": "",
+      "answer": "f=1/T.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 28",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "waves"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C12-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Waves",
+      "topic_name": "waves",
+      "category": "numerical",
+      "question_text": "A wave has frequency 25 Hz and wavelength 4 m. Find its speed.",
+      "options": [],
+      "correct_option": "",
+      "answer": "v=fλ=25×4=100 m/s.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 28",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "waves"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C13-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "sound",
+      "category": "mcq",
+      "question_text": "Pitch mainly depends on sound wave?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Frequency"
+        },
+        {
+          "id": "B",
+          "text": "Amplitude only"
+        },
+        {
+          "id": "C",
+          "text": "Distance only"
+        },
+        {
+          "id": "D",
+          "text": "Mass"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Frequency",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 38",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "sound"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C13-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "sound",
+      "category": "short",
+      "question_text": "Why cannot sound travel through a vacuum?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Mechanical sound waves require particles in a medium to transmit vibrations.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 38",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "sound"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C13-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Sound",
+      "topic_name": "sound",
+      "category": "numerical",
+      "question_text": "An echo returns after 0.50 s at 340 m/s. Find distance to the reflector.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Round trip=340×0.50=170 m; one-way distance=85 m.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 38",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "sound"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C14-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "light",
+      "category": "mcq",
+      "question_text": "The angle of reflection equals?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Angle of incidence"
+        },
+        {
+          "id": "B",
+          "text": "Twice the incidence angle"
+        },
+        {
+          "id": "C",
+          "text": "Zero always"
+        },
+        {
+          "id": "D",
+          "text": "90° always"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Angle of incidence",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "light"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C14-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "light",
+      "category": "short",
+      "question_text": "What causes refraction when light enters another medium?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Its speed changes at the boundary, changing direction unless it enters along the normal.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "light"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C14-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Light",
+      "topic_name": "light",
+      "category": "numerical",
+      "question_text": "Light travels at 2.0×10⁸ m/s in a medium. Find refractive index using c=3.0×10⁸ m/s.",
+      "options": [],
+      "correct_option": "",
+      "answer": "n=c/v=1.5.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "light"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C15-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "electrostatics",
+      "category": "mcq",
+      "question_text": "Like electric charges?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Repel"
+        },
+        {
+          "id": "B",
+          "text": "Attract"
+        },
+        {
+          "id": "C",
+          "text": "Always disappear"
+        },
+        {
+          "id": "D",
+          "text": "Have no force"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Repel",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 65",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electrostatics"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C15-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "electrostatics",
+      "category": "short",
+      "question_text": "Define electric field direction.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is the direction of force that a positive test charge would experience.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 65",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electrostatics"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C15-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Electrostatics",
+      "topic_name": "electrostatics",
+      "category": "long",
+      "question_text": "Explain charging by induction conceptually.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A nearby charged object separates charges in a conductor; with suitable grounding and sequence, a net charge can remain without direct contact with the inducing object.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 65",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electrostatics"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C16-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "electricity",
+      "category": "mcq",
+      "question_text": "Ohm’s law is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "V=IR"
+        },
+        {
+          "id": "B",
+          "text": "F=ma"
+        },
+        {
+          "id": "C",
+          "text": "P=W/t only"
+        },
+        {
+          "id": "D",
+          "text": "Q=mcΔT"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "V=IR",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 77",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electricity"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C16-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "electricity",
+      "category": "short",
+      "question_text": "Why are household devices usually connected in parallel?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Each receives the supply potential difference and can operate independently.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 77",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electricity"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C16-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electricity",
+      "topic_name": "electricity",
+      "category": "numerical",
+      "question_text": "A 12 V supply drives 2 A through a resistor. Find resistance.",
+      "options": [],
+      "correct_option": "",
+      "answer": "R=V/I=12/2=6 Ω.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 77",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electricity"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C17-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "electromagnetism",
+      "category": "mcq",
+      "question_text": "A current-carrying conductor produces?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A magnetic field"
+        },
+        {
+          "id": "B",
+          "text": "Only heat with no field"
+        },
+        {
+          "id": "C",
+          "text": "Gravity only"
+        },
+        {
+          "id": "D",
+          "text": "No effect"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A magnetic field",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 95",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electromagnetism"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C17-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "electromagnetism",
+      "category": "short",
+      "question_text": "How can an electromagnet be strengthened safely?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Increase coil turns, use a suitable soft-iron core, and use current only within designed safe limits.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 95",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electromagnetism"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C17-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Electromagnetism",
+      "topic_name": "electromagnetism",
+      "category": "long",
+      "question_text": "Explain the motor effect.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A current-carrying conductor in a magnetic field can experience a force whose direction depends on current and field directions.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 95",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electromagnetism"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C18-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction",
+      "topic_name": "electromagnetic induction",
+      "category": "mcq",
+      "question_text": "An induced emf is produced when magnetic flux linkage?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Changes"
+        },
+        {
+          "id": "B",
+          "text": "Is permanently constant"
+        },
+        {
+          "id": "C",
+          "text": "Is absent in all cases"
+        },
+        {
+          "id": "D",
+          "text": "Has no time dependence"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Changes",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 104",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electromagnetic induction"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C18-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction",
+      "topic_name": "electromagnetic induction",
+      "category": "short",
+      "question_text": "State Lenz’s law qualitatively.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The induced effect acts in a direction that opposes the change that produced it.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 104",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electromagnetic induction"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C18-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Electromagnetic Induction",
+      "topic_name": "electromagnetic induction",
+      "category": "long",
+      "question_text": "Explain the principle of a transformer at a high level.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Alternating current creates changing magnetic flux in the core, inducing voltage in a secondary coil; turns ratio determines ideal voltage ratio.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 104",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "electromagnetic induction"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C19-M01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nuclear Physics",
+      "topic_name": "nuclear physics",
+      "category": "mcq",
+      "question_text": "Radioactive decay is?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A spontaneous nuclear change"
+        },
+        {
+          "id": "B",
+          "text": "Ordinary melting"
+        },
+        {
+          "id": "C",
+          "text": "Mechanical vibration"
+        },
+        {
+          "id": "D",
+          "text": "Chemical neutralization"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A spontaneous nuclear change",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 114",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "nuclear physics"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C19-S01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nuclear Physics",
+      "topic_name": "nuclear physics",
+      "category": "short",
+      "question_text": "Define half-life.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The time for the number of undecayed nuclei or activity to fall to half its initial value.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 114",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "nuclear physics"
+      ]
+    },
+    {
+      "id": "X-PHY-TECH-C19-X01",
+      "class_level": "10th",
+      "subject": "Physics-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nuclear Physics",
+      "topic_name": "nuclear physics",
+      "category": "numerical",
+      "question_text": "A sample has 800 undecayed nuclei. How many remain after three half-lives?",
+      "options": [],
+      "correct_option": "",
+      "answer": "800→400→200→100, so 100 remain.",
+      "marks": 3,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-057 | 36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74 | page 114",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "physics-tech",
+        "nuclear physics"
+      ]
+    }
+  ]
+}

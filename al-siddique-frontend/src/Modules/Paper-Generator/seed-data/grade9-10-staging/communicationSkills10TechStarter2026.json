@@ -1,0 +1,2000 @@
+{
+  "schemaVersion": "assps-communicationSkills10Tech-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-049",
+  "sourcePdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+  "scope": "CURRENT_GRADE_X_TECH_TEXT_LAYER_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-COMMS-TECH-C01-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C01",
+        "number": 1
+      },
+      "topicId": "persuasion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Advanced Communication Techniques"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Which feature most strengthens a persuasive professional message?",
+          "answer": "Credible evidence and audience awareness",
+          "options": [
+            {
+              "id": "A",
+              "text": "Credible evidence and audience awareness"
+            },
+            {
+              "id": "B",
+              "text": "Ignoring the audience"
+            },
+            {
+              "id": "C",
+              "text": "Contradictory claims"
+            },
+            {
+              "id": "D",
+              "text": "Avoiding a clear purpose"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C01-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C01",
+        "number": 1
+      },
+      "topicId": "persuasion",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Advanced Communication Techniques"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why is active listening important during a difficult conversation?",
+          "answer": "It helps the listener understand meaning and emotion, reduces misunderstanding, and supports a respectful solution-focused response."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C01-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C01",
+        "number": 1
+      },
+      "topicId": "persuasion",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 4,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Advanced Communication Techniques"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain a responsible framework for handling a difficult professional conversation.",
+          "answer": "Clarify the issue, listen actively, regulate emotion, use respectful specific language, explore solutions, agree next steps, and document important commitments."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C02-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C02",
+        "number": 2
+      },
+      "topicId": "professional grooming",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Professional Dressing and Grooming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Professional grooming mainly supports which workplace outcome?",
+          "answer": "A neat, appropriate and trustworthy presentation",
+          "options": [
+            {
+              "id": "A",
+              "text": "A neat, appropriate and trustworthy presentation"
+            },
+            {
+              "id": "B",
+              "text": "Ignoring hygiene"
+            },
+            {
+              "id": "C",
+              "text": "Using the same clothing for every context"
+            },
+            {
+              "id": "D",
+              "text": "Replacing skills with appearance"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C02-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C02",
+        "number": 2
+      },
+      "topicId": "professional grooming",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Professional Dressing and Grooming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why should professional dress be appropriate to role and context?",
+          "answer": "Appropriate dress supports safety, respect, comfort and professional expectations without replacing competence or character."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C02-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C02",
+        "number": 2
+      },
+      "topicId": "professional grooming",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 13,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Professional Dressing and Grooming"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Describe the principles of professional dressing and grooming without relying on stereotypes.",
+          "answer": "Focus on cleanliness, fit, safety, workplace norms, cultural respect, comfort, consistency and a professional appearance rather than gendered or body-based ideals."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C03-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C03",
+        "number": 3
+      },
+      "topicId": "interview preparation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 20,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Interview Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Good interview preparation should begin with?",
+          "answer": "Understanding the role and organization",
+          "options": [
+            {
+              "id": "A",
+              "text": "Understanding the role and organization"
+            },
+            {
+              "id": "B",
+              "text": "Memorizing unrelated answers"
+            },
+            {
+              "id": "C",
+              "text": "Arriving without documents"
+            },
+            {
+              "id": "D",
+              "text": "Ignoring the job requirements"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C03-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C03",
+        "number": 3
+      },
+      "topicId": "interview preparation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 20,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Interview Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "What is the purpose of a concise evidence-based interview answer?",
+          "answer": "It connects a relevant example or skill to the question and helps the interviewer understand the candidate’s contribution clearly."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C03-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C03",
+        "number": 3
+      },
+      "topicId": "interview preparation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 20,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Interview Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Outline a practical interview-preparation plan.",
+          "answer": "Research role and organization, identify relevant skills/examples, prepare documents, practice clear answers, plan logistics, and prepare thoughtful questions."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C04-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C04",
+        "number": 4
+      },
+      "topicId": "self-awareness",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 29,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Self-Awareness"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Self-awareness includes recognizing one’s?",
+          "answer": "Strengths, limits, emotions and values",
+          "options": [
+            {
+              "id": "A",
+              "text": "Strengths, limits, emotions and values"
+            },
+            {
+              "id": "B",
+              "text": "Only other people’s faults"
+            },
+            {
+              "id": "C",
+              "text": "Salary only"
+            },
+            {
+              "id": "D",
+              "text": "Clothing size"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C04-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C04",
+        "number": 4
+      },
+      "topicId": "self-awareness",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 29,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Self-Awareness"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "How can constructive reflection improve performance?",
+          "answer": "It helps identify what worked, what needs improvement and what specific action should be tried next."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C04-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C04",
+        "number": 4
+      },
+      "topicId": "self-awareness",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 29,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Self-Awareness"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain how self-awareness supports responsible goal setting.",
+          "answer": "Accurate self-assessment helps set realistic goals, choose suitable strategies, seek feedback, monitor progress and adjust plans."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C05-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C05",
+        "number": 5
+      },
+      "topicId": "emotional intelligence",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emotional Intelligence"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Emotional intelligence includes the ability to?",
+          "answer": "Recognize and manage emotions constructively",
+          "options": [
+            {
+              "id": "A",
+              "text": "Recognize and manage emotions constructively"
+            },
+            {
+              "id": "B",
+              "text": "Suppress every emotion permanently"
+            },
+            {
+              "id": "C",
+              "text": "Ignore other people"
+            },
+            {
+              "id": "D",
+              "text": "Avoid all feedback"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C05-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C05",
+        "number": 5
+      },
+      "topicId": "emotional intelligence",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emotional Intelligence"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "What is empathy in a professional interaction?",
+          "answer": "Understanding another person’s perspective and feelings while maintaining appropriate boundaries and respectful communication."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C05-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C05",
+        "number": 5
+      },
+      "topicId": "emotional intelligence",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 42,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emotional Intelligence"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain how emotional intelligence can reduce conflict.",
+          "answer": "Recognizing emotions, pausing before reacting, using empathy, communicating clearly and choosing constructive responses can prevent escalation and support solutions."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C06-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C06",
+        "number": 6
+      },
+      "topicId": "interpersonal skills",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Interpersonal Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Which behavior most supports healthy teamwork?",
+          "answer": "Clear respectful communication and reliability",
+          "options": [
+            {
+              "id": "A",
+              "text": "Clear respectful communication and reliability"
+            },
+            {
+              "id": "B",
+              "text": "Withholding needed information"
+            },
+            {
+              "id": "C",
+              "text": "Blaming others automatically"
+            },
+            {
+              "id": "D",
+              "text": "Refusing collaboration"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C06-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C06",
+        "number": 6
+      },
+      "topicId": "interpersonal skills",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Interpersonal Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why are boundaries important in interpersonal relationships?",
+          "answer": "They clarify acceptable behavior and responsibilities, helping protect respect, trust and wellbeing."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C06-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C06",
+        "number": 6
+      },
+      "topicId": "interpersonal skills",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 51,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Interpersonal Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Discuss how communication, cooperation, feedback and boundaries contribute to strong interpersonal skills.",
+          "answer": "A strong response explains each element, shows how they reinforce trust and task completion, and includes a workplace or school example."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C07-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C07",
+        "number": 7
+      },
+      "topicId": "thinking skills",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 64,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thinking Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Critical thinking requires a person to?",
+          "answer": "Evaluate evidence and assumptions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Evaluate evidence and assumptions"
+            },
+            {
+              "id": "B",
+              "text": "Accept every claim immediately"
+            },
+            {
+              "id": "C",
+              "text": "Avoid questions"
+            },
+            {
+              "id": "D",
+              "text": "Choose the first answer without checking"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C07-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C07",
+        "number": 7
+      },
+      "topicId": "thinking skills",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 64,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thinking Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Differentiate critical thinking from creative thinking.",
+          "answer": "Critical thinking evaluates evidence and reasoning; creative thinking generates useful possibilities or novel approaches."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C07-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C07",
+        "number": 7
+      },
+      "topicId": "thinking skills",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 64,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Thinking Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain a structured problem-solving process.",
+          "answer": "Define the problem, gather relevant information, generate options, evaluate evidence and consequences, choose a solution, implement it and review the result."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C08-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C08",
+        "number": 8
+      },
+      "topicId": "personal branding",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Personal Branding and Social Media Presence"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A responsible personal brand should be based mainly on?",
+          "answer": "Authentic skills, conduct and consistent values",
+          "options": [
+            {
+              "id": "A",
+              "text": "Authentic skills, conduct and consistent values"
+            },
+            {
+              "id": "B",
+              "text": "False claims"
+            },
+            {
+              "id": "C",
+              "text": "Private data oversharing"
+            },
+            {
+              "id": "D",
+              "text": "Copying another person’s identity"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C08-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C08",
+        "number": 8
+      },
+      "topicId": "personal branding",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Personal Branding and Social Media Presence"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why should privacy settings matter when building a social-media presence?",
+          "answer": "They help control personal information exposure and reduce avoidable privacy and reputation risks."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C08-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C08",
+        "number": 8
+      },
+      "topicId": "personal branding",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 77,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Personal Branding and Social Media Presence"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Describe how a student can build a responsible professional digital presence.",
+          "answer": "Use accurate profile information, showcase genuine work, communicate respectfully, protect private data, follow copyright rules and review public content before posting."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C09-M01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C09",
+        "number": 9
+      },
+      "topicId": "health and nutrition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 88,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Health and Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "A balanced diet is best described as?",
+          "answer": "Appropriate variety and amounts of essential nutrients",
+          "options": [
+            {
+              "id": "A",
+              "text": "Appropriate variety and amounts of essential nutrients"
+            },
+            {
+              "id": "B",
+              "text": "Only one food group"
+            },
+            {
+              "id": "C",
+              "text": "Skipping meals routinely"
+            },
+            {
+              "id": "D",
+              "text": "Avoiding water"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-COMMS-TECH-C09-S01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C09",
+        "number": 9
+      },
+      "topicId": "health and nutrition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 88,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Health and Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Why are hydration and regular sleep important for performance?",
+          "answer": "They support concentration, physical function, recovery and general wellbeing."
+        }
+      }
+    },
+    {
+      "id": "X-COMMS-TECH-C09-L01",
+      "chapter": {
+        "id": "X-COMMUNICATION-SKILLS-TECH-C09",
+        "number": 9
+      },
+      "topicId": "health and nutrition",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "difficult",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-049",
+        "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+        "page": 88,
+        "exerciseRef": null,
+        "topicIndexEvidence": "NATIVE_TEXT_LAYER_CHAPTER_START_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Health and Nutrition"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "communication-skills-tech",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-COMMUNICATION-SKILLS-TECH-CURRENT",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade X Matric-Tech starter. Official PDF hash and chapter start page are verified from native text layer; independent academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original concept/application item bound to verified chapter start page.",
+      "content": {
+        "en": {
+          "stem": "Explain how nutrition, activity, sleep and stress management support personal wellbeing.",
+          "answer": "A strong answer links balanced nutrition, regular safe activity, sufficient sleep and healthy coping habits to energy, focus, recovery and long-term wellbeing."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 27,
+    "mcq": 9,
+    "short": 9,
+    "numerical": 0,
+    "long": 9,
+    "chapters": 9
+  }
+}

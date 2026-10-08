@@ -1,0 +1,790 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-BIO-TECH-C01-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "digestion",
+      "category": "mcq",
+      "question_text": "Most nutrient absorption occurs mainly in the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Small intestine"
+        },
+        {
+          "id": "B",
+          "text": "Oesophagus"
+        },
+        {
+          "id": "C",
+          "text": "Mouth only"
+        },
+        {
+          "id": "D",
+          "text": "Trachea"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Small intestine",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "digestion"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C01-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "digestion",
+      "category": "short",
+      "question_text": "What is peristalsis?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Wave-like muscular contractions that move material along the digestive tract.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "digestion"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C01-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Human Digestive System",
+      "topic_name": "digestion",
+      "category": "long",
+      "question_text": "Explain how digestion and absorption are related.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Digestion breaks large food molecules into smaller absorbable molecules; absorption transfers suitable products across the intestinal surface into blood or lymph.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "digestion"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C02-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "respiration",
+      "category": "mcq",
+      "question_text": "Gas exchange in the lungs occurs mainly in the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alveoli"
+        },
+        {
+          "id": "B",
+          "text": "Ureter"
+        },
+        {
+          "id": "C",
+          "text": "Stomach"
+        },
+        {
+          "id": "D",
+          "text": "Tendon"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Alveoli",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 14",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "respiration"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C02-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "respiration",
+      "category": "short",
+      "question_text": "Why are alveoli effective gas-exchange surfaces?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They provide a large thin moist surface with a rich blood supply, maintaining diffusion gradients.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 14",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "respiration"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C02-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Human Respiratory System",
+      "topic_name": "respiration",
+      "category": "long",
+      "question_text": "Explain inhalation and exhalation using pressure and volume changes.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Changes in thoracic volume alter air pressure; lower pressure draws air in and higher pressure pushes air out.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 14",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "respiration"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C03-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "circulation",
+      "category": "mcq",
+      "question_text": "The chamber that pumps oxygenated blood to the body is the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Left ventricle"
+        },
+        {
+          "id": "B",
+          "text": "Right atrium"
+        },
+        {
+          "id": "C",
+          "text": "Left atrium only"
+        },
+        {
+          "id": "D",
+          "text": "Vena cava"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Left ventricle",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 21",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "circulation"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C03-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "circulation",
+      "category": "short",
+      "question_text": "What is the function of red blood cells?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They transport oxygen mainly using haemoglobin.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 21",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "circulation"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C03-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Human Blood Circulatory System",
+      "topic_name": "circulation",
+      "category": "long",
+      "question_text": "Compare arteries, veins and capillaries.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Arteries carry blood away under higher pressure, veins return blood and often have valves, and capillaries have thin walls for exchange.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 21",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "circulation"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C04-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "urinary system",
+      "category": "mcq",
+      "question_text": "The functional unit of the kidney is the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nephron"
+        },
+        {
+          "id": "B",
+          "text": "Alveolus"
+        },
+        {
+          "id": "C",
+          "text": "Neuron"
+        },
+        {
+          "id": "D",
+          "text": "Villus"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Nephron",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 32",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "urinary system"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C04-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "urinary system",
+      "category": "short",
+      "question_text": "What is the general role of kidneys in homeostasis?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They filter blood and regulate water, ions and waste removal, helping maintain internal balance.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 32",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "urinary system"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C04-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Human Urinary System",
+      "topic_name": "urinary system",
+      "category": "long",
+      "question_text": "Explain urine formation at a high level.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Blood is filtered in nephrons; useful substances and needed water/ions are selectively reabsorbed, while wastes and excess materials remain for excretion.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 32",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "urinary system"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C05-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "coordination",
+      "category": "mcq",
+      "question_text": "The basic functional cell of the nervous system is the?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Neuron"
+        },
+        {
+          "id": "B",
+          "text": "Nephron"
+        },
+        {
+          "id": "C",
+          "text": "Platelet"
+        },
+        {
+          "id": "D",
+          "text": "Osteocyte"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Neuron",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 39",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "coordination"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C05-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "coordination",
+      "category": "short",
+      "question_text": "What is a reflex action?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A rapid automatic response to a stimulus through a reflex pathway.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 39",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "coordination"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C05-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination",
+      "topic_name": "coordination",
+      "category": "long",
+      "question_text": "Explain how receptors, the nervous system and effectors coordinate a response.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Receptors detect change, signals travel through nervous pathways for processing, and motor signals activate muscles or glands as effectors.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 39",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "coordination"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C06-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "reproduction",
+      "category": "mcq",
+      "question_text": "Fertilization is the fusion of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Male and female gametes"
+        },
+        {
+          "id": "B",
+          "text": "Two red blood cells"
+        },
+        {
+          "id": "C",
+          "text": "Two neurons"
+        },
+        {
+          "id": "D",
+          "text": "Two bones"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Male and female gametes",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 55",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "reproduction"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C06-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "reproduction",
+      "category": "short",
+      "question_text": "Differentiate sexual and asexual reproduction conceptually.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Sexual reproduction involves fusion of gametes and creates genetic variation; asexual reproduction involves one parent and no gamete fusion.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 55",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "reproduction"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C06-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "reproduction",
+      "category": "long",
+      "question_text": "Explain why reproductive health education should be accurate and respectful.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It supports informed, age-appropriate understanding of body systems, health, consent/boundaries and when to seek qualified medical guidance.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 55",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "reproduction"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C07-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "inheritance",
+      "category": "mcq",
+      "question_text": "A gene is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A DNA sequence associated with a functional product or trait"
+        },
+        {
+          "id": "B",
+          "text": "A whole organ"
+        },
+        {
+          "id": "C",
+          "text": "A blood vessel"
+        },
+        {
+          "id": "D",
+          "text": "A mineral"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A DNA sequence associated with a functional product or trait",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 61",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C07-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "inheritance",
+      "category": "short",
+      "question_text": "Differentiate genotype and phenotype.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Genotype is genetic constitution; phenotype is the observable characteristic influenced by genotype and environment.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 61",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C07-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "inheritance",
+      "category": "long",
+      "question_text": "Explain how meiosis and fertilization contribute to genetic variation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Meiosis generates varied gametes through chromosome segregation/recombination, and random fertilization combines genetic material from two parents.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 61",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C08-M01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "biotechnology",
+      "category": "mcq",
+      "question_text": "A plasmid is commonly used in biotechnology as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A DNA vector in microorganisms"
+        },
+        {
+          "id": "B",
+          "text": "A bone joint"
+        },
+        {
+          "id": "C",
+          "text": "A respiratory surface"
+        },
+        {
+          "id": "D",
+          "text": "A muscle protein"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A DNA vector in microorganisms",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 71",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "biotechnology"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C08-S01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "biotechnology",
+      "category": "short",
+      "question_text": "What is genetic engineering at a high level?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It involves deliberately modifying genetic material using controlled laboratory techniques for a defined purpose.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 71",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "biotechnology"
+      ]
+    },
+    {
+      "id": "X-BIO-TECH-C08-L01",
+      "class_level": "10th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "biotechnology",
+      "category": "long",
+      "question_text": "Discuss responsible uses and concerns of biotechnology.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer covers useful applications such as medicines, crops or diagnostics along with biosafety, ethics, environmental effects, regulation and evidence-based oversight.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-062 | 170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818 | page 71",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology-tech",
+        "biotechnology"
+      ]
+    }
+  ]
+}

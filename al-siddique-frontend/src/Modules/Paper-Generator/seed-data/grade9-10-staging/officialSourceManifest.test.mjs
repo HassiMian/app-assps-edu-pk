@@ -34,7 +34,8 @@ test('downloaded official sources carry hash/page evidence while unreviewed sour
    assert.equal(e.recordId,'pectaa-catalog-037');
    assert.match(e.catalogAssetUrl||'',/^https:\/\//);
   }
-  assert.equal(e.exerciseIndexStatus,'PENDING');
+  const partialExerciseOk=new Set(['pectaa-catalog-049','pectaa-catalog-054','pectaa-catalog-057','pectaa-catalog-062']);
+  if(partialExerciseOk.has(e.recordId)) assert.equal(e.exerciseIndexStatus,'PARTIAL_VERIFIED_NATIVE_TEXT_LAYER',e.recordId); else assert.equal(e.exerciseIndexStatus,'PENDING',e.recordId);
   if(e.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'){
    if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED|CROSS_CHECKED.*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
   } else assert.match(e.questionGenerationStatus,/^BLOCKED/,e.recordId);
@@ -91,7 +92,10 @@ test('Grade IX Matric-Tech catalogue identities are expanded without collapsing 
 
 test('Grade X Matric-Tech current catalogue identities are represented without equivalence guessing',()=>{
  const tech=m.entries.filter(x=>x.grade===10&&x.curriculumTrack==='MATRIC_TECH');
- assert.equal(tech.length,17);assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogAssetUrl&&/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
+ const promoted=new Set(['pectaa-catalog-049','pectaa-catalog-054','pectaa-catalog-057','pectaa-catalog-062']);
+ assert.equal(tech.length,17);assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogAssetUrl));
+ assert(tech.filter(x=>promoted.has(x.recordId)).every(x=>x.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'&&x.chapterIndexStatus==='VERIFIED_NATIVE_TEXT_LAYER'&&x.exerciseIndexStatus==='PARTIAL_VERIFIED_NATIVE_TEXT_LAYER'));
+ assert(tech.filter(x=>!promoted.has(x.recordId)).every(x=>/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
  assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech X'),false);
  assert(tech.some(x=>x.subject==='Computer-Tech'));assert(tech.some(x=>x.subject==='Computer Science-Tech'));assert(tech.some(x=>x.subject==='Computer (Matric-Tech catalog identity)'));
  const physics=tech.filter(x=>x.subject==='Physics-Tech');assert.deepEqual(new Set(physics.map(x=>x.medium)),new Set(['English','Urdu']));

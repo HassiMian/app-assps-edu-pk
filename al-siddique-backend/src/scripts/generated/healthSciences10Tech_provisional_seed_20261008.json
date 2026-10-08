@@ -1,0 +1,888 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-HS-TECH-C09-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Central Nervous System",
+      "topic_name": "nervous system",
+      "category": "mcq",
+      "question_text": "The central nervous system mainly consists of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Brain and spinal cord"
+        },
+        {
+          "id": "B",
+          "text": "Heart and lungs"
+        },
+        {
+          "id": "C",
+          "text": "Bones and joints"
+        },
+        {
+          "id": "D",
+          "text": "Kidneys and bladder"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Brain and spinal cord",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "nervous system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C09-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Central Nervous System",
+      "topic_name": "nervous system",
+      "category": "short",
+      "question_text": "What is the general role of the central nervous system?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It receives and processes information and coordinates responses through communication with the rest of the body.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "nervous system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C09-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Central Nervous System",
+      "topic_name": "nervous system",
+      "category": "long",
+      "question_text": "Explain the difference between voluntary and reflex responses at a conceptual level.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Voluntary responses involve conscious processing, while reflex responses are rapid automatic protective responses organized through a reflex pathway.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 4",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "nervous system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C10-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Musculoskeletal System",
+      "topic_name": "musculoskeletal system",
+      "category": "mcq",
+      "question_text": "A tendon connects?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Muscle to bone"
+        },
+        {
+          "id": "B",
+          "text": "Bone to bone"
+        },
+        {
+          "id": "C",
+          "text": "Nerve to gland"
+        },
+        {
+          "id": "D",
+          "text": "Artery to vein"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Muscle to bone",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 21",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "musculoskeletal system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C10-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Musculoskeletal System",
+      "topic_name": "musculoskeletal system",
+      "category": "short",
+      "question_text": "What is the main function of a joint?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A joint connects bones and, depending on its type, permits movement while contributing to stability.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 21",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "musculoskeletal system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C10-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Musculoskeletal System",
+      "topic_name": "musculoskeletal system",
+      "category": "long",
+      "question_text": "Explain how bones, joints and muscles work together to produce movement.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Bones provide support/levers, joints provide controlled movement points, and muscles contract to pull through tendons and move bones.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 21",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "musculoskeletal system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C11-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Endocrine System",
+      "topic_name": "endocrine system",
+      "category": "mcq",
+      "question_text": "Hormones are chemical messengers released mainly by?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Endocrine glands"
+        },
+        {
+          "id": "B",
+          "text": "Bones only"
+        },
+        {
+          "id": "C",
+          "text": "Red blood cells only"
+        },
+        {
+          "id": "D",
+          "text": "Teeth"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Endocrine glands",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 35",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "endocrine system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C11-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Endocrine System",
+      "topic_name": "endocrine system",
+      "category": "short",
+      "question_text": "Why is hormonal regulation important for homeostasis?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Hormones help coordinate processes such as growth, metabolism and fluid or glucose balance over time.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 35",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "endocrine system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C11-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Endocrine System",
+      "topic_name": "endocrine system",
+      "category": "long",
+      "question_text": "Compare nervous and endocrine coordination.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Nervous signaling is generally rapid and electrical/chemical through neurons; endocrine signaling uses hormones in blood and often acts more slowly with longer effects.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 35",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "endocrine system"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C12-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Pediatrics",
+      "topic_name": "pediatrics",
+      "category": "mcq",
+      "question_text": "Pediatrics focuses on the health of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Children and adolescents"
+        },
+        {
+          "id": "B",
+          "text": "Plants"
+        },
+        {
+          "id": "C",
+          "text": "Only athletes"
+        },
+        {
+          "id": "D",
+          "text": "Only older adults"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Children and adolescents",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "pediatrics"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C12-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Pediatrics",
+      "topic_name": "pediatrics",
+      "category": "short",
+      "question_text": "Why are growth and development monitored in children?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Monitoring helps identify whether development follows expected patterns and whether further professional assessment may be needed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "pediatrics"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C12-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Pediatrics",
+      "topic_name": "pediatrics",
+      "category": "long",
+      "question_text": "Explain age-appropriate, respectful care principles for children.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Use clear communication, involve a responsible caregiver, respect privacy, provide reassurance, follow professional guidance and adapt explanations to developmental level.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 51",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "pediatrics"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C13-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "First Aid - II",
+      "topic_name": "first aid safety",
+      "category": "mcq",
+      "question_text": "The first priority in a first-aid situation is to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Check scene safety and seek appropriate help"
+        },
+        {
+          "id": "B",
+          "text": "Rush into danger"
+        },
+        {
+          "id": "C",
+          "text": "Give unknown medicine"
+        },
+        {
+          "id": "D",
+          "text": "Hide the incident"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Check scene safety and seek appropriate help",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 62",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "first aid safety"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C13-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "First Aid - II",
+      "topic_name": "first aid safety",
+      "category": "short",
+      "question_text": "Why should a first-aider avoid actions beyond their training?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Untrained interventions can worsen harm; the safer role is to protect the scene, call qualified help and provide only trained basic support.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 62",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "first aid safety"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C13-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "First Aid - II",
+      "topic_name": "first aid safety",
+      "category": "long",
+      "question_text": "Describe a safe high-level emergency response sequence.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ensure scene safety, alert a responsible adult/emergency service, assess responsiveness and breathing without unnecessary movement, provide only trained basic aid, and monitor until help arrives.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 62",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "first aid safety"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C14-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Sterilization",
+      "topic_name": "infection control",
+      "category": "mcq",
+      "question_text": "Sterilization aims to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Eliminate all viable microorganisms from an item"
+        },
+        {
+          "id": "B",
+          "text": "Make an item look cleaner only"
+        },
+        {
+          "id": "C",
+          "text": "Add fragrance"
+        },
+        {
+          "id": "D",
+          "text": "Replace hand hygiene"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Eliminate all viable microorganisms from an item",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 72",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "infection control"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C14-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Sterilization",
+      "topic_name": "infection control",
+      "category": "short",
+      "question_text": "Differentiate cleaning, disinfection and sterilization conceptually.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cleaning removes soil, disinfection reduces many harmful microorganisms, while sterilization is a validated process intended to eliminate all viable microorganisms.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 72",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "infection control"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C14-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "Sterilization",
+      "topic_name": "infection control",
+      "category": "long",
+      "question_text": "Explain why infection-control procedures require correct method selection and documentation.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The method must fit the item and risk level, follow validated instructions, protect staff/users and be documented so effectiveness and traceability can be checked.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 72",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "infection control"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C15-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Nursing and Elderly Care",
+      "topic_name": "elderly care",
+      "category": "mcq",
+      "question_text": "Respectful elderly care should prioritize?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Dignity, safety and independence where possible"
+        },
+        {
+          "id": "B",
+          "text": "Ignoring preferences"
+        },
+        {
+          "id": "C",
+          "text": "Unnecessary restriction"
+        },
+        {
+          "id": "D",
+          "text": "Speaking about the person as if absent"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Dignity, safety and independence where possible",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 83",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "elderly care"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C15-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Nursing and Elderly Care",
+      "topic_name": "elderly care",
+      "category": "short",
+      "question_text": "Why is person-centered care important for older adults?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It considers the individual’s preferences, abilities, culture, comfort and goals rather than treating everyone the same.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 83",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "elderly care"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C15-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Nursing and Elderly Care",
+      "topic_name": "elderly care",
+      "category": "long",
+      "question_text": "Discuss safe support principles for an older adult with reduced mobility.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Promote dignity and independence, reduce environmental hazards, use approved assistance methods, encourage appropriate activity, and seek trained help for transfers or medical concerns.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 83",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "elderly care"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C16-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Behavioral Science",
+      "topic_name": "behavioral science",
+      "category": "mcq",
+      "question_text": "Behavioral science examines?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Human behavior and factors influencing it"
+        },
+        {
+          "id": "B",
+          "text": "Only bone structure"
+        },
+        {
+          "id": "C",
+          "text": "Only chemistry equations"
+        },
+        {
+          "id": "D",
+          "text": "Weather forecasting"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Human behavior and factors influencing it",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 89",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "behavioral science"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C16-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Behavioral Science",
+      "topic_name": "behavioral science",
+      "category": "short",
+      "question_text": "How can stress affect behavior and decision making?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Stress can influence attention, emotion, sleep and judgment, so healthy coping and support can improve decision quality.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 89",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "behavioral science"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C16-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Behavioral Science",
+      "topic_name": "behavioral science",
+      "category": "long",
+      "question_text": "Explain how respectful communication and observation can support behavioral wellbeing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Listen without judgment, notice meaningful changes, maintain privacy, encourage healthy routines and refer concerns to qualified adults/professionals when needed.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 89",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "behavioral science"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C17-M01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Essential Life Skills",
+      "topic_name": "life skills",
+      "category": "mcq",
+      "question_text": "Which is a core life skill?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Problem solving"
+        },
+        {
+          "id": "B",
+          "text": "Avoiding all decisions"
+        },
+        {
+          "id": "C",
+          "text": "Ignoring consequences"
+        },
+        {
+          "id": "D",
+          "text": "Refusing communication"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Problem solving",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 102",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "life skills"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C17-S01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Essential Life Skills",
+      "topic_name": "life skills",
+      "category": "short",
+      "question_text": "Why is decision making improved by considering consequences?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Considering likely benefits, risks and effects on others supports more responsible choices.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 102",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "life skills"
+      ]
+    },
+    {
+      "id": "X-HS-TECH-C17-L01",
+      "class_level": "10th",
+      "subject": "Health Sciences-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Essential Life Skills",
+      "topic_name": "life skills",
+      "category": "long",
+      "question_text": "Explain how communication, decision making, problem solving and stress management work together in daily life.",
+      "options": [],
+      "correct_option": "",
+      "answer": "These skills help a person understand a situation, communicate needs, compare options, choose responsibly, act safely and adapt after reviewing results.",
+      "marks": 5,
+      "difficulty": "difficult",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-054 | f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906 | page 102",
+      "tags": [
+        "grade10",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "health-sciences-tech",
+        "life skills"
+      ]
+    }
+  ]
+}
