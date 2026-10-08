@@ -8,7 +8,10 @@ const ROOT=path.resolve(__dirname,'../..')
 const STAGING=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
 const OUT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_REVIEW_TRIAGE_QUEUE_20261008.json')
 const SHA=s=>crypto.createHash('sha256').update(s).digest('hex')
-function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],mcqEditorialCandidates=[],similarityReview={pairs:[]}){
+function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],mcqEditorialCandidates=[],similarityReview={pairs:[]},physicsReference={rows:[]}){
+ const physicsById=new Map((physicsReference.rows||[]).map(x=>[x.questionId,x]))
+ if(physicsById.size!==(physicsReference.rows||[]).length)throw Error('PHYSICS_REFERENCE_DUPLICATE_QUESTION')
+ const consumedPhysics=new Set()
  const similarityById=new Map()
  for(const pair of similarityReview.pairs||[]){
   if(!['CROSS_CHAPTER_TEMPLATE_SIMILARITY','SAME_CHAPTER_POSSIBLE_REPHRASE'].includes(pair.reason)||
@@ -37,6 +40,15 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
    const id=String(q.id)
    if(seen.has(id)){collisions.push({id,file});continue}
    seen.add(id)
+   const physics=physicsById.get(id)
+   if(physics){
+    if(q.type!=='mcq'||String(q.curriculum?.subjectId).toLowerCase()!=='physics'||
+       physics.originalQuestionSha256!==SHA(JSON.stringify(q))||
+       physics.approved!==false||physics.answerAccuracyHumanVerified!==false||
+       physics.independentReviewerId!==null||physics.expectedReferenceConsistentWithStoredKey!==true)
+      throw Error('PHYSICS_CONCEPT_REFERENCE_SOURCE_OR_REVIEW_DRIFT:'+id)
+    consumedPhysics.add(id)
+   }
    const similarity=similarityById.get(id)||[]
    for(const match of similarity)if(match.ownSha!==SHA(JSON.stringify(q)))
     throw Error('STALE_STEM_SIMILARITY_REVIEW_SHA:'+id)
@@ -78,6 +90,8 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
    if(String(q.type).toLowerCase()==='mcq'&&flaggedFiles.has(file))blockers.push('SOURCE_FILE_MCQ_KEY_PATTERN_EDITORIAL_REVIEW')
    if(q.content?.en&&q.content?.ur)blockers.push('BILINGUAL_EQUIVALENCE_INDEPENDENT_CHECK_MISSING')
    if(similarity.length)blockers.push('NEAR_STEM_TEMPLATE_ORIGINALITY_HUMAN_REVIEW_REQUIRED')
+   if(physics)blockers.push('PHYSICS_CONCEPT_ANSWER_HUMAN_REVIEW_REQUIRED')
+   if(physics?.contextCaveat)blockers.push('PHYSICS_CONCEPT_SCOPE_QUALIFIER_REVIEW_REQUIRED')
    if(q.content?.en&&q.content?.ur && (!String(q.content.ur.stem||'').trim()||!String(q.content.ur.answer||'').trim()))
      blockers.push('URDU_DUAL_CONTENT_COMPLETION_REQUIRED')
    records.push({
@@ -88,6 +102,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
     claimedSourcePage:claimedPage,claimedPageNumbering:'UNSPECIFIED',
     editionClaim:edition||null,
     evidenceTier:'RESEARCH_CANDIDATE_ONLY',
+    physicsConceptualReferenceCandidate:physics?{referenceQuestionSha256:physics.originalQuestionSha256,expectedAnswerSha256:physics.expectedAnswerSha256,contextCaveat:physics.contextCaveat,reviewStatus:'PENDING_PHYSICS_SUBJECT_SPECIALIST',approved:false}:null,
     nearStemSimilarityReview:similarity.length?{candidatePairs:similarity.length,otherQuestionIds:[...new Set(similarity.map(x=>x.other))].sort(),humanDuplicateVerdict:'PENDING',approved:false}:null,
     editorialMcqRevisionCandidate:mcqRevision?{revisionFile:mcqRevision.revisionFile,revisionFileSha256:mcqRevision.revisionFileSha256,revisionQuestionSha256:mcqRevision.proposedRevisionSha256,status:mcqRevision.reviewStatus,approved:false}:null,
     editorialTranslationCandidate:editorial?{revisionFile:editorial.proposedRevisionFile,revisionFileSha256:editorial.editorialRevisionFileSha256,revisionQuestionSha256:editorial.proposedRevisionSha256,status:editorial.proposalStatus,approved:false}:null,
@@ -100,6 +115,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
  if(consumed.size!==editorialById.size)throw Error('EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
  if(consumedMcqs.size!==mcqCandidates.size)throw Error('MCQ_EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
  if(consumedSimilarity.size!==similarityById.size)throw Error('NEAR_STEM_REVIEW_REFERENCES_MISSING_ORIGINAL_QUESTION')
+ if(consumedPhysics.size!==physicsById.size)throw Error('PHYSICS_CONCEPT_REFERENCES_MISSING_ORIGINAL_QUESTION')
  records.sort((a,b)=>String(a.grade).localeCompare(String(b.grade),'en',{numeric:true})||
   a.subjectId.localeCompare(b.subjectId)||a.medium.localeCompare(b.medium)||
   String(a.chapter).localeCompare(String(b.chapter),'en',{numeric:true})||
@@ -127,6 +143,8 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
   unapprovedMcqRevisionProposals:consumedMcqs.size,
   nearStemOriginalityReviewQuestionCount:consumedSimilarity.size,
   nearStemSimilarityPairs:(similarityReview.pairs||[]).length,
+  physicsProvisionalConceptReferences:consumedPhysics.size,
+  physicsConceptualScopeCaveats:[...consumedPhysics].filter(id=>physicsById.get(id).contextCaveat).length,
   collisions,
   records
  }
@@ -138,9 +156,11 @@ if(require.main===module){
  const {verify}=require('./verify-chemistry9-mcq-editorial-rev2.cjs')
  const {audit}=require('./audit-scientific-stem-similarity.cjs')
  const documents=collectDocuments(STAGING)
- const report=buildReviewQueue(documents,manifest,mcq,loadCandidates(),verify(),audit(documents))
+ const {analyze:physicsAudit,SOURCE:physicsSource}=require('./audit-physics9-conceptual-mcq-reference.cjs')
+ const physicsReference=physicsAudit(fs.readFileSync(physicsSource))
+ const report=buildReviewQueue(documents,manifest,mcq,loadCandidates(),verify(),audit(documents),physicsReference)
  if(process.argv.includes('--write'))fs.writeFileSync(OUT,JSON.stringify(report,null,2)+'\n')
- console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,unapprovedMcqRevisionProposals:report.unapprovedMcqRevisionProposals,nearStemOriginalityReviewQuestionCount:report.nearStemOriginalityReviewQuestionCount,nearStemSimilarityPairs:report.nearStemSimilarityPairs,reportPath:process.argv.includes('--write')?OUT:null},null,2))
+ console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,unapprovedMcqRevisionProposals:report.unapprovedMcqRevisionProposals,nearStemOriginalityReviewQuestionCount:report.nearStemOriginalityReviewQuestionCount,nearStemSimilarityPairs:report.nearStemSimilarityPairs,physicsProvisionalConceptReferences:report.physicsProvisionalConceptReferences,physicsConceptualScopeCaveats:report.physicsConceptualScopeCaveats,reportPath:process.argv.includes('--write')?OUT:null},null,2))
  if(process.argv.includes('--strict')&&(report.counts.collisionIds||report.counts.approved||report.counts.published))process.exitCode=1
 }
 module.exports={buildReviewQueue}
