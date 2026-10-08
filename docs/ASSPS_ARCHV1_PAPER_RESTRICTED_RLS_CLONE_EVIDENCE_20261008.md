@@ -54,3 +54,14 @@ All verification UPDATEs were rolled back. No synthetic school/user/student data
 5. Requested historical file `/opt/assps-editor-worker/early-years/docs/ASSPS_PAPER_ASSESSMENT_ARCHITECTURE_RED_TEAM_20261004.md` was missing at the specified VPS path. The existing `ARCHITECTURE_V1_RELEASE_DEFINITION_MATRIX_20261007.md` and `PAPER_ARCHV1_POSTDEPLOY_VERIFICATION_20261008.md` were inspected for scope and known production gap.
 
 **Release decision:** clone-level RLS implementation and isolation proof PASS. **Full Architecture V1 DB-RLS production security gate remains HOLD** pending restricted connection-path integration and end-to-end SaaS verification.
+
+## Additional genuine application / HTTP gates (same UTC session)
+
+A high-fidelity disposable clone `assps_archv1_rls_auth_20261008` was restored using `pg_dump -Fc apexos | pg_restore --exit-on-error` **without** `--no-owner`. This matters: production owns 78 of the 85 public base tables as `apexos_user`; earlier clones restored with `--no-owner` lost that app user's implicit table-owner privileges and failed at test record setup with `42501 permission denied for table schools`. This was a clone-fidelity problem, not a verified live-service outage. The high-fidelity clone preserved production table ownership, and `apexos_user` INSERT privileges for `schools`, `users` and `paper_vault` were confirmed on the clone before testing. Production ownership and roles were unchanged.
+
+- The versioned clone-only RLS installer and SQL verifier were rerun on this high-fidelity clone: `ARCHV1_PAPER_RUNTIME_CLONE_RLS_PASS` (exit 0).
+- Genuine HTTP suite from the live deployed backend code, with `DB_NAME=assps_archv1_rls_auth_20261008`, `DB_RUNTIME_ROLE=apex_paper_runtime`, `TEST_G21_PORT=5031`, `AUTO_MIGRATE_ON_BOOT=false`: **`G21_DOCX_HTTP 9/9 PASS`**, Node TAP **1 test / 1 pass / 0 fail**, exit 0. It exercised authenticated canonical DOCX routes, tenant access denial, snapshot conflict and generated binary hash.
+- A separate direct test through the **actual Node `tenantContext.run` and `query` helpers** verified `current_database=assps_archv1_rls_auth_20261008`, `current_user=apex_paper_runtime`, `row_security_active=true`, tenant 1 = 59 own QB rows / 0 foreign, tenant 5 = 2645 own QB rows / 0 foreign. Output marker: `APP_RUNTIME_RESTRICTED_ROLE_PASS`.
+- HTTP test synthetic cleanup verified on clone: **0** residual `g21a%`/`g21b%` schools, **0** `@invalid.example` users and **0** `G21 %` papers. Port 5031 was not listening after the suite completed.
+
+**Important limitation:** This proves the app can enter a restricted DB role for the tested G21 path on a clone. It does **not** prove that every production Paper/Assessment endpoint uses that role, or that session GUC spoofing by arbitrary SQL is impossible. Live `apexos_user` still has BYPASSRLS, so production security release remains **HOLD**.
