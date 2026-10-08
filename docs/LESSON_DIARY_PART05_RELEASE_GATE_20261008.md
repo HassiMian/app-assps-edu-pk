@@ -33,3 +33,13 @@ Status: **CANDIDATE READY FOR ISOLATED DATABASE CERTIFICATION; NOT DEPLOYED**.
 ## Deployment decision
 
 **HOLD.** Do not deploy a stale branch or claim full product certification. Release only after completing the isolated database/RLS and print gates. On failure, preserve current live frontend `9fe7b560` and backend `16ab8f3`; use normal backup/rollback procedures, not an uncontrolled overwrite. No production changes were made in this continuation.
+
+## Official curriculum source triage (8 October 2026)
+
+These are **discovery/authority references**, not proof that a specific ASSPS class, term or school textbook uses their contents:
+
+- National Curriculum Council notifications: https://www.ncc.gov.pk/Detail/ODQzMmE3YTAtMmFkYy00NGM0LTk2YmItNjg4ZmNiNjMwOTMw — lists National Curriculum notifications, including a 31 July 2026 Grade 9–12 rationalization entry. Verify the notification text, subject scope and Punjab adoption before applying it.
+- Punjab PECTAA Curriculum and Compliance: https://pectaa.edu.pk/curriculum-compliance/ — lists distinct annual-exam smart syllabi, textbook editions, curriculum links, and Grade 9/10 resources. Annual Examination 2026 coverage is **not** automatically a 2026–27 academic-session teaching plan.
+- PECTAA Books and Publications: https://pectaa.edu.pk/books-and-publications/ — official textbook discovery, but school-approved Oxford and other book mappings must be separately checked.
+
+Policy: attach authority, edition, session, class, subject, board, source URL and reviewed chapter/page evidence to approved resources. Keep provisional SLO/chapter suggestions flagged for teacher review; do not infer holidays from subject curricula or treat Question Bank source text as approved academic evidence.
