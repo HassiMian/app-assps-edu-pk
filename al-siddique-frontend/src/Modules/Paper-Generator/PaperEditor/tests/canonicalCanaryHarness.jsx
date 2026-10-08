@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from '@/context/AuthContext.jsx'
 import PaperGenerator from '../../PaperGenerator.jsx'
+import { ThemeProvider } from '@/context/ThemeContext.jsx'
 import '@/index.css'
 
 function CanaryHarnessApp() {
@@ -23,7 +24,7 @@ function CanaryHarnessApp() {
             path="/paper-generator"
             element={
               <Suspense fallback={<div>Loading Paper Generator...</div>}>
-                <PaperGenerator />
+                <ThemeProvider><PaperGenerator /></ThemeProvider>
               </Suspense>
             }
           />

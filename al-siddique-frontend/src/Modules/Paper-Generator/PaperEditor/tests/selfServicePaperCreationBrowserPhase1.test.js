@@ -41,7 +41,7 @@ test('Blank Urdu paper: create without bank, save empty draft, add typed questio
  await page.goto('http://localhost:5239/paper-workspace-test.html?new',{waitUntil:'domcontentloaded'})
  await page.locator('[data-create-paper-home]').waitFor({timeout:15000})
  console.log('E2E_CREATION_HOME_READY')
- assert.equal(await page.locator('[data-creation-option]').count(),3)
+ assert.equal(await page.locator('[data-creation-option]').count(),4)
  await page.locator('[data-creation-option="blank"]').click()
  await page.locator('[data-create-blank-paper]').waitFor()
  await page.getByLabel('Blank paper class').selectOption('8')

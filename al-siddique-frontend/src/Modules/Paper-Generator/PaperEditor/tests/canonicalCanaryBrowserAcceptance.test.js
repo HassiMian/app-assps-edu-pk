@@ -42,8 +42,10 @@ before(async () => {
 
   const context = await browser.newContext({ viewport: { width: 1440, height: 1100 } })
   await context.addInitScript(() => {
+    localStorage.setItem('al_siddique_token', 'mock-jwt-token')
+    localStorage.setItem('al_siddique_login_at', String(Date.now()))
     localStorage.setItem('al_siddique_user', JSON.stringify({
-      role: 'admin',
+      id: 999, role: 'admin', school_id: 1, tenant_id: 'assps',
       school_name: 'Al Siddique Scholars Public School',
       schoolCode: 'ASSPS',
     }))
@@ -54,7 +56,7 @@ before(async () => {
   await page.route('**/api/**', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
-    body: JSON.stringify({ success: true, data: {} }),
+    body: JSON.stringify({ success: true, data: {}, user:{id:999,role:'admin',school_id:1,tenant_id:'assps'} }),
   }))
 
   page.on('pageerror', error => pageErrors.push(error.message))
@@ -89,6 +91,21 @@ async function loadSavedPaper(paper) {
   const loadButton = page.getByRole('button', { name: 'Load & Preview' }).first()
   await loadButton.click()
 }
+
+test('Teacher-facing Studio shell: creation paths and specialist routing', async () => {
+  await page.goto('http://localhost:5196/ey-test.html?mode=generator', {waitUntil:'domcontentloaded'})
+  await page.locator('[data-create-paper-home]').waitFor({timeout:15000})
+  assert.equal(await page.getByRole('heading', {name:'Paper Studio'}).count(), 1)
+  assert.equal(await page.locator('[data-creation-option]').count(), 4)
+  assert.equal(await page.locator('.paper-generator-module-tabs button').count(), 6)
+  await page.locator('[data-creation-option="early_years"]').click()
+  await page.locator('.early-years-module-wrap').waitFor({timeout:12000})
+  assert.equal(await page.getByRole('button', {name:'Pre Classes Papers'}).getAttribute('aria-current'), 'page')
+  await page.getByRole('button', {name:'Saved Papers'}).click()
+  await page.getByPlaceholder(' Search papers...').waitFor({timeout:12000})
+  await page.getByRole('button', {name:'Paper Workspace'}).click()
+  await page.locator('[data-create-paper-home]').waitFor({timeout:12000})
+})
 
 test('Phase 18: real PaperGenerator default route opens all 43 pristine V13 papers in Canonical V2', async () => {
   assert.strictEqual(v13.papers.length, 43)

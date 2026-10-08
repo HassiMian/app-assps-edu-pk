@@ -1,5 +1,7 @@
-// PaperGenerator.jsx — ASSPS clean Paper Workspace router
+// PaperGenerator.jsx — ASSPS teacher Paper Studio router
 import { lazy, Suspense, useState } from 'react'
+import { useTheme } from '../../context/ThemeContext.jsx'
+import './paperStudioShell.css'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { resolvePaperRoute } from './resolvePaperRoute.js'
@@ -41,26 +43,19 @@ const COMPATIBILITY_TABS = new Set(['word_editor','board_pattern'])
 const ROUTABLE_TAB_IDS = new Set([...MODULE_TABS.map(tab=>tab.id), ...COMPATIBILITY_TABS])
 
 function TabBtn({ active, onClick, children }) {
-  return <button
-    type="button"
-    onClick={onClick}
-    style={{
-      background:active?('linear-gradient(135deg,'+C.gold+','+C.goldL+')'):'rgba(15,23,42,0.46)',
-      color:active?'#071e34':C.silver,
-      fontWeight:700,
-      fontSize:13,
-      padding:'9px 20px',
-      borderRadius:10,
-      border:active?'none':('1px solid '+C.border),
-      cursor:'pointer',
-      whiteSpace:'nowrap',
-    }}
-  >{children}</button>
+  return (
+    <button type="button" aria-current={active ? 'page' : undefined}
+      className={active ? 'studio-nav-tab studio-nav-tab-active' : 'studio-nav-tab'}
+      onClick={onClick}>
+      {children}
+    </button>
+  )
 }
 
 export default function PaperGenerator() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const { theme: studioTheme } = useTheme()
   const requestedTab = searchParams.get('tab')
   const officialCanonicalCanary = searchParams.get('canonicalCanary') === '1'
   const forceOfficialLegacyRoute = searchParams.get('canonicalLegacy') === '1'
@@ -103,21 +98,27 @@ export default function PaperGenerator() {
 
   const ModuleWrap = ({ children }) => (
     <div
-      className={moduleTab === 'early_years' ? 'paper-generator-module-wrap early-years-module-wrap' : 'paper-generator-module-wrap'}
+      className={moduleTab === 'early_years' ? 'assps-paper-studio paper-generator-module-wrap early-years-module-wrap' : 'assps-paper-studio paper-generator-module-wrap'}
+      data-studio-theme={studioTheme}
       style={moduleTab === 'early_years'
-        ? { height:'calc(100dvh - 78px)', minHeight:0, width:'100%', background:'#071e34', display:'flex', flexDirection:'column', overflow:'hidden' }
-        : { minHeight:'100vh', width:'100%', background:'#071e34' }
+        ? { height:'calc(100dvh - 78px)', minHeight:0, width:'100%', background:studioTheme==='light'?'#f3f7fb':'#0c2038', display:'flex', flexDirection:'column', overflow:'hidden' }
+        : { minHeight:'100vh', width:'100%', background:studioTheme==='light'?'#f3f7fb':'#0c2038' }
       }
     >
+      <header className="assps-studio-header no-print" style={{display:moduleTab==='early_years'?'none':undefined,padding:'28px 26px 20px',background:studioTheme==='light'?'#ffffff':'#112c47',borderBottom:'1px solid '+C.border}}>
+        <div style={{color:studioTheme==='light'?'#007d88':'#4ccbc6',fontSize:11,letterSpacing:1.6,fontWeight:850}}>ASSPS / ACADEMICS / ASSESSMENT STUDIO</div>
+        <h1 style={{fontSize:34,letterSpacing:-1.1,fontWeight:800,margin:'9px 0 5px',color:studioTheme==='light'?'#123451':'#ecf6ff'}}>Paper Studio</h1>
+        <p style={{fontSize:13,margin:0,color:studioTheme==='light'?'#62758a':'#b3cadd'}}>Create, organize and print school assessments in one connected workspace.</p>
+      </header>
       <div
-        className={moduleTab === 'early_years' ? 'paper-generator-module-tabs no-print' : 'paper-generator-module-tabs'}
+        className='assps-studio-navigation paper-generator-module-tabs no-print'
         style={{
           padding:'10px 24px',
           display:'flex',
           flexWrap:'wrap',
           gap:8,
           borderBottom:'1px solid '+C.border,
-          background:'rgba(7,25,48,0.98)',
+          background:studioTheme==='light'?'#ffffff':'#112c47',
           position:'sticky',
           top:0,
           zIndex:30,
@@ -131,7 +132,7 @@ export default function PaperGenerator() {
   )
 
   if (moduleTab === 'build') {
-    return <ModuleWrap><PTSPaperGenerator key={loadedSavedPaper?.id || (loadedSavedPaper?.creationMethod==='duplicate' ? `copy-${loadedSavedPaper.duplicateOf}` : 'new-paper')} loadedPaper={loadedSavedPaper} onOpenSaved={()=>setModuleTab('saved')} onReturnToSource={returnToSource}/></ModuleWrap>
+    return <ModuleWrap><PTSPaperGenerator key={loadedSavedPaper?.id || (loadedSavedPaper?.creationMethod==='duplicate' ? `copy-${loadedSavedPaper.duplicateOf}` : 'new-paper')} loadedPaper={loadedSavedPaper} onOpenSaved={()=>setModuleTab('saved')} onOpenEarlyYears={()=>setModuleTab('early_years')} onReturnToSource={returnToSource}/></ModuleWrap>
   }
   if (moduleTab === 'saved') {
     return <ModuleWrap><SavedPapersTab onLoadPaper={handleLoadPaper} onDuplicatePaper={handleDuplicatePaper}/></ModuleWrap>
