@@ -1,8 +1,6 @@
 import React from 'react'
-import { usePaperStore } from './usePaperStore'
-import LessonPlanTab from './LessonPlanTab'
+import LessonPlanningWorkspace from './LessonPlanningWorkspace'
 
 export default function LessonPlanModule() {
-  const { paperSettings } = usePaperStore()
-  return <LessonPlanTab settings={paperSettings} />
+  return <LessonPlanningWorkspace />
 }

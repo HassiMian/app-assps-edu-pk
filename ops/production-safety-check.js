@@ -2692,6 +2692,39 @@ assertContains(
   'student portal must roll back optimistic read state when server persistence fails.'
 )
 
+
+// Lesson Planning + Daily Diary V2 stability gates.
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/LessonPlanModule.jsx',
+  "import LessonPlanningWorkspace from './LessonPlanningWorkspace'",
+  'Lesson Plans must use the canonical mode-driven planning workspace instead of the legacy single-lesson form.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/PaperGenerator.jsx',
+  "lazy(() => import('./DailyDiaryWorkspace'))",
+  'Paper Generator must route Daily Diary to the split editor/live-preview workspace.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/lessonPlanRoutes.js',
+  "router.post('/planner/generate'",
+  'Lesson Planning must retain the authenticated cognitive generation endpoint.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/lessonPlanRoutes.js',
+  'withTenantTransaction(req, schoolId',
+  'Lesson Planning cognitive context/generation must stay inside request-scoped tenant/RLS transactions.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/dailyDiaryRoutes.js',
+  '[2, 3, 4, 5, 6, 8, 10, 12, 14].includes(slipsPerPage)',
+  'Daily Diary must retain dynamic A4 card counts including 2/3/5-card layouts.'
+)
+assertContains(
+  'al-siddique-frontend/src/Modules/Paper-Generator/lessonPlanDomain.js',
+  "documentType: 'ASSPS_LESSON_PLAN'",
+  'Lesson Plans and notebook-card output must retain one canonical LessonPlanDocument domain.'
+)
+
 if (failures.length) {
   console.error('Production safety check FAILED:')
   for (const item of failures) console.error(`- ${item}`)
