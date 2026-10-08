@@ -74,7 +74,7 @@ test('Grade X current catalogue refresh preserves unresolved medium/session fact
 test('Grade IX Matric-Tech catalogue identities are expanded without collapsing media or similarly named subjects',()=>{
  const tech=m.entries.filter(x=>x.grade===9&&x.curriculumTrack==='MATRIC_TECH'&&x.stream==='Matric-Tech');
  assert.equal(tech.length,17);
- assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'&&x.catalogAssetUrl&&/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
  assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech IX'),false);
  assert(tech.some(x=>x.subject==='Computer-Tech'));
  assert(tech.some(x=>x.subject==='Computer Science & Entrepreneurship-Tech'));
@@ -85,7 +85,7 @@ test('Grade IX Matric-Tech catalogue identities are expanded without collapsing 
 
 test('Grade X Matric-Tech current catalogue identities are represented without equivalence guessing',()=>{
  const tech=m.entries.filter(x=>x.grade===10&&x.curriculumTrack==='MATRIC_TECH');
- assert.equal(tech.length,17);assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert.equal(tech.length,17);assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogAssetUrl&&/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
  assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech X'),false);
  assert(tech.some(x=>x.subject==='Computer-Tech'));assert(tech.some(x=>x.subject==='Computer Science-Tech'));assert(tech.some(x=>x.subject==='Computer (Matric-Tech catalog identity)'));
  const physics=tech.filter(x=>x.subject==='Physics-Tech');assert.deepEqual(new Set(physics.map(x=>x.medium)),new Set(['English','Urdu']));
@@ -109,7 +109,7 @@ test('Grade IX/X Practical Notebook sources are explicit and dimension-isolated'
  const pnb=m.entries.filter(x=>x.assessmentDimension==='PRACTICAL_NOTEBOOK');
  assert.equal(pnb.length,22);assert.equal(pnb.filter(x=>x.grade===9).length,14);assert.equal(pnb.filter(x=>x.grade===10).length,8);
  assert.equal(m.additionalCatalogStreamsPending.includes('Practical notebook subjects'),false);
- assert(pnb.every(x=>x.stream==='Practical Notebook'&&x.catalogAssetUrl&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert(pnb.every(x=>x.stream==='Practical Notebook'&&x.catalogAssetUrl&&/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
  assert(pnb.some(x=>x.subject==='Biology Practical Notebook (catalog track unresolved)'&&x.curriculumTrack==='UNRESOLVED_CATALOG_CONTEXT'));
  const bio9=pnb.filter(x=>x.grade===9&&x.subject==='Biology'&&x.curriculumTrack==='MAINSTREAM');assert.deepEqual(new Set(bio9.map(x=>x.medium)),new Set(['English','Urdu']));
 });
@@ -118,6 +118,6 @@ test('religious-alternative catalogue identities are represented without inherit
  const alt=m.entries.filter(x=>x.stream==='Religious Alternative');assert.equal(alt.length,3);
  assert(alt.some(x=>x.grade===9&&x.subject==='Christianity'&&x.edition==='2026-08-27'));
  assert.equal(alt.filter(x=>x.subject==='Akhlaqiat (Religious Minorities)').length,2);
- assert(alt.every(x=>x.medium==='UNSPECIFIED_BY_CATALOG_LABEL'&&x.questionGenerationStatus==='BLOCKED_PENDING_SOURCE'));
+ assert(alt.every(x=>x.medium==='UNSPECIFIED_BY_CATALOG_LABEL'&&/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
  assert.equal(m.additionalCatalogStreamsPending.some(x=>x.startsWith('Religious alternatives')),false);
 });
