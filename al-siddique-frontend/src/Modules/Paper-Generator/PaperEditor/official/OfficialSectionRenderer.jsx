@@ -195,14 +195,14 @@ function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeCol
   const renderRow = row => <div key={row.serial+'-'+row.sourceIndex} data-numbered-response-row style={{ marginBottom:`${itemLineCount ? 7*fs : 4*fs}px`, breakInside:'avoid' }}>
     <div dir={isUrdu?'rtl':'ltr'} style={{ display:'flex', flexDirection:'row', gap:7, alignItems:'baseline', justifyContent:'flex-start', textAlign:isUrdu?'right':'left', minWidth:0 }}>
       <span data-item-serial style={{ flex:'0 0 auto', minWidth:isUrdu?32:26, textAlign:isUrdu?'right':'center', fontWeight:800, whiteSpace:'nowrap', unicodeBidi:'isolate' }}><ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/></span>
-      <div style={{ flex:'1 1 auto', minWidth:0 }}>{rowText(row)}</div>
+      <div style={{ flex:'1 1 auto', minWidth:0, overflowWrap:'anywhere', wordBreak:'break-word' }}>{rowText(row)}</div>
     </div>
     {itemLineCount > 0 && <div data-item-answer-lines style={{ marginInlineStart:isUrdu?0:39, marginInlineEnd:isUrdu?39:0 }}>{Array.from({length:itemLineCount},(_,i)=><div key={i} style={{ height:`${18*fs}px`, borderBottom:'1px solid #8793a0' }}/>)}</div>}
   </div>
   if (shortLayout === '2-column-balanced' && rows.length > 3) {
     const mid = Math.ceil(rows.length/2)
     const columns = [rows.slice(0,mid), rows.slice(mid)]
-    return <div data-short-two-column style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:`${6*fs}px ${18*fs}px`, direction:isUrdu?'rtl':'ltr' }}>{columns.map((column, idx)=><div key={idx}>{column.map(renderRow)}</div>)}</div>
+    return <div data-short-two-column style={{ display:'grid', gridTemplateColumns:'repeat(2,minmax(0,1fr))', gap:`${6*fs}px ${18*fs}px`, direction:isUrdu?'rtl':'ltr' }}>{columns.map((column, idx)=><div key={idx}>{column.map(renderRow)}</div>)}</div>
   }
   return <div data-numbered-list>{rows.map(renderRow)}</div>
 }

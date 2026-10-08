@@ -98,6 +98,20 @@ const classEightUrduFixture = (() => {
 })()
 
 
+// Synthetic pagination/RTL layout test fixture. No official paper source is changed.
+const rtlOddOverflowPaper = {
+ id:'synthetic-rtl-odd-print-20261008',name:'Synthetic Urdu Odd Column Print',
+ documentFormat:'pts-native-v13',printReadiness:'READY',
+ editorSettings:{shortLayout:'2-column-balanced'},
+ config:{className:'7',classLevel:'7',subjectName:'Urdu',subject:'Urdu',language:'urdu',
+   paperCode:'ODD-RTL-PRINT',timeAllowed:'2 Hours',examDate:'2026-10-08',totalMarks:25,title:'Synthetic Print Proof'},
+ official_section:[{
+  id:'rtl-odd-short',sourceOrder:1,medium:'urdu',type:'official_section',layoutPreset:'short',
+  heading:'سوال نمبر 1: مختصر سوالات کے جواب دیں۔ (25)',marks:25,
+  content:Array.from({length:25},(_,i)=>`${i+1}. ${i===0?'ط'.repeat(420):'مختصر سوال کے جواب میں دلیل اور مثال پیش کریں۔'.repeat(5)} [PRINT-PROOF-${String(i+1).padStart(2,'0')}]`).join('\n'),
+ }],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -182,7 +196,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
