@@ -200,3 +200,39 @@ test('backend JARVIS atomicity release follows the already deployed Phase 3 fron
   assert.equal(bad.safe,false)
   assert.ok(bad.findings.some(v=>v.startsWith('BACKEND_COMMIT_DRIFT:')))
 })
+
+test('release-train metadata needs explicit exact-branch verification for each component', () => {
+  const front={...meta,component:'frontend-paper-results-v1',commit:'b'.repeat(40),
+    branch:'release/paper-results-v1-prod-final-20261008',previousRelease:{commit}}
+  const back={...meta,component:'backend-grade910-independent-review-results-rls-v1',
+    commit:'c'.repeat(40),branch:'release/grade910-review-final-candidate-20261008',
+    sourceBaseLiveCommit:front.commit,previousRelease:{commit:front.commit}}
+  const trusted=(name,_base,item,f,b)=>
+    (name==='FRONTEND' && item===f && item.branch===front.branch) ||
+    (name==='BACKEND' && item===b && item.branch===back.branch &&
+      item.sourceBaseLiveCommit===f.commit)
+  const valid=evaluateReleaseConsistency({canonicalCommit:commit,
+    frontendMeta:front,backendMeta:back,pm2Env:env,declaredReleaseVerifier:trusted})
+  assert.equal(valid.safe,true,valid.findings.join(','))
+  const unverified=evaluateReleaseConsistency({canonicalCommit:commit,
+    frontendMeta:front,backendMeta:back,pm2Env:env,declaredReleaseVerifier:()=>false})
+  assert.equal(unverified.safe,false)
+  assert.ok(unverified.findings.some(x=>x.startsWith('FRONTEND_COMMIT_DRIFT')))
+  assert.ok(unverified.findings.some(x=>x.startsWith('BACKEND_BRANCH_DRIFT')))
+})
+
+test('phase4 paired release requires a verified frontend and backend identity', () => {
+  const front={...meta,component:'frontend-phase4-printer-neutral',commit:'d'.repeat(40),
+    branch:'fix/phase4-printer-fee-after-review-20261008',
+    sourceBaseLiveCommit:'c'.repeat(40),previousRelease:{commit:'b'.repeat(40)}}
+  const back={...front,component:'backend-phase4-fee-payment-modes',
+    previousRelease:{commit:'c'.repeat(40)}}
+  const paired=(name,_base,item,f,b)=>f.commit===b.commit && f.branch===b.branch &&
+    f.sourceBaseLiveCommit===b.sourceBaseLiveCommit && (name==='FRONTEND'?item===f:item===b)
+  assert.equal(evaluateReleaseConsistency({canonicalCommit:commit,
+    frontendMeta:front,backendMeta:back,pm2Env:env,declaredReleaseVerifier:paired}).safe,true)
+  const wrong=evaluateReleaseConsistency({canonicalCommit:commit,
+    frontendMeta:front,backendMeta:{...back,commit:'e'.repeat(40)},pm2Env:env,
+    declaredReleaseVerifier:paired})
+  assert.equal(wrong.safe,false)
+})

@@ -15,7 +15,7 @@ function parseProcEnv(buffer) {
   return out
 }
 
-function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONICAL_BRANCH, frontendMeta, backendMeta, pm2Env, backendForwardVerifier = () => false, frontendForwardVerifier = () => false }) {
+function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONICAL_BRANCH, frontendMeta, backendMeta, pm2Env, backendForwardVerifier = () => false, frontendForwardVerifier = () => false, declaredReleaseVerifier = () => false }) {
   const findings = []
   if (!/^[0-9a-f]{40}$/i.test(String(canonicalCommit || ''))) findings.push('CANONICAL_COMMIT_INVALID')
   for (const [name, meta] of [['FRONTEND', frontendMeta], ['BACKEND', backendMeta]]) {
@@ -36,9 +36,16 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
       /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
       /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
       frontendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta, backendMeta?.component === 'backend-jarvis-admission-atomicity' ? backendMeta.previousRelease?.commit : backendMeta?.commit)
-    if (meta.commit !== canonicalCommit && !verifiedBackendForward && !verifiedFrontendForward)
+    const verifiedDeclaredForward = [
+      'frontend-paper-results-v1',
+      'backend-grade910-independent-review-results-rls-v1',
+      'frontend-phase4-printer-neutral',
+      'backend-phase4-fee-payment-modes',
+    ].includes(meta.component) &&
+      declaredReleaseVerifier(name, canonicalCommit, meta, frontendMeta, backendMeta)
+    if (meta.commit !== canonicalCommit && !verifiedBackendForward && !verifiedFrontendForward && !verifiedDeclaredForward)
       findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
-    if (meta.branch !== canonicalBranch && !verifiedBackendForward && !verifiedFrontendForward)
+    if (meta.branch !== canonicalBranch && !verifiedBackendForward && !verifiedFrontendForward && !verifiedDeclaredForward)
       findings.push(`${name}_BRANCH_DRIFT:${meta.branch || 'missing'}:${canonicalBranch}`)
     if (meta.productionSmoke !== 'pass') findings.push(`${name}_PRODUCTION_SMOKE_NOT_SEALED`)
     // Static frontend publishes frontendDeployedContracts, while the API
@@ -171,6 +178,60 @@ function verifyFrontendForward(base, head, branch, meta = {}, backendHead = base
   } catch (_) { return false }
 }
 
+// Explicit release-train provenance. A recognizable label is not itself
+// sufficient: require exact remote SHA, declared lineage and component scope.
+function verifyDeclaredRelease(name, base, meta, frontend, backend) {
+  const refs = {
+    'frontend-paper-results-v1': ['FRONTEND','release/paper-results-v1-prod-final-20261008'],
+    'backend-grade910-independent-review-results-rls-v1': ['BACKEND','release/grade910-review-final-candidate-20261008'],
+    'frontend-phase4-printer-neutral': ['FRONTEND','fix/phase4-printer-fee-after-review-20261008'],
+    'backend-phase4-fee-payment-modes': ['BACKEND','fix/phase4-printer-fee-after-review-20261008'],
+  }
+  const expected=refs[meta.component]
+  if (!expected || expected[0]!==name || expected[1]!==meta.branch ||
+      !/^[0-9a-f]{40}$/i.test(String(meta.commit||'')) ||
+      !gitAncestor(base,meta.commit)) return false
+  try {
+    const remote=execFileSync('git',['-C',repoRoot,'ls-remote','origin','refs/heads/'+meta.branch],
+      {encoding:'utf8',timeout:12000}).trim().split(/\s+/)[0]
+    if (remote!==meta.commit) return false
+    if (meta.component==='frontend-paper-results-v1') {
+      const previous=meta.previousRelease?.commit
+      return /^[0-9a-f]{40}$/i.test(String(previous||'')) &&
+        gitAncestor(base,previous) && gitAncestor(previous,meta.commit)
+    }
+    if (meta.component==='backend-grade910-independent-review-results-rls-v1') {
+      const prior=frontend?.commit
+      if (meta.sourceBaseLiveCommit!==prior ||
+          meta.frontendPreservedCommit!==prior ||
+          meta.previousRelease?.commit!==prior ||
+          !gitAncestor(prior,meta.commit)) return false
+      const delta=execFileSync('git',['-C',repoRoot,'diff','--name-only',prior,meta.commit,
+        '--','al-siddique-frontend/src/'],{encoding:'utf8',timeout:12000}).trim()
+      return !delta
+    }
+    // Phase 4 is a paired promotion based on current separately verified
+    // frontend and backend. It may not claim a backend-only exemption.
+    const target=meta.commit
+    const other=name==='FRONTEND'?backend:frontend
+    const frontendPrevious='25536200ff1d891fedf1adb0c7155e943d3372e1'
+    const backendPrevious='1c92a5ca04cadfe59aa9f436c55d65e9478f2be6'
+    if (other?.commit!==target || other?.branch!==meta.branch ||
+        frontend?.previousRelease?.commit!==frontendPrevious ||
+        backend?.previousRelease?.commit!==backendPrevious ||
+        frontend?.sourceBaseLiveCommit!==backendPrevious ||
+        backend?.sourceBaseLiveCommit!==backendPrevious ||
+        !gitAncestor(frontendPrevious,backendPrevious) ||
+        !gitAncestor(backendPrevious,target)) return false
+    const protectedChanges=execFileSync('git',['-C',repoRoot,'diff','--name-only',
+      frontendPrevious,target,'--',
+      'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/',
+      'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/migration/data/'],
+      {encoding:'utf8',timeout:12000}).trim()
+    return !protectedChanges
+  } catch (_) { return false }
+}
+
 function remoteBackendChanges(liveFrontendCommit, remoteCanonicalCommit) {
   if (!/^[0-9a-f]{40}$/i.test(String(liveFrontendCommit || ''))) throw new Error('Invalid live frontend SHA')
   execFileSync('git', ['-C', repoRoot, 'merge-base', '--is-ancestor', liveFrontendCommit, remoteCanonicalCommit], {timeout:12000})
@@ -210,7 +271,7 @@ function main() {
       extraFindings.push('REMOTE_CANONICAL_ANCESTRY_NOT_VERIFIED')
     }
   }
-  const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env, backendForwardVerifier: verifyBackendForward, frontendForwardVerifier: verifyFrontendForward })
+  const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env, backendForwardVerifier: verifyBackendForward, frontendForwardVerifier: verifyFrontendForward, declaredReleaseVerifier: verifyDeclaredRelease })
   const findings = [...result.findings, ...extraFindings]
   console.log(JSON.stringify({ canonicalCommit, remoteCanonicalCommit, canonicalBranch: CANONICAL_BRANCH,
     componentForward:isBackendOnlyForward || isFrontendOnlyForward, safe:findings.length===0, findings }, null, 2))
