@@ -327,6 +327,15 @@ const pool = new Proxy(rawPool, {
 
 async function applyTenantContext(client) {
   const context = normalizedRuntimeContext()
+  if (signedTenantGate) {
+    const actorId = Number(tenantContext.getStore()?.actorId)
+    if (!context || context.isSuperAdmin ||
+        !Number.isSafeInteger(actorId) || actorId <= 0) {
+      const error = new Error('Signed database tenant context requires authenticated actor and school scope')
+      error.code = 'DB_SIGNED_TENANT_SCOPE_REQUIRED'
+      throw error
+    }
+  }
   if (!context) return false
 
   await client.query(`SELECT set_config('app.rls_enabled', 'true', true)`)
