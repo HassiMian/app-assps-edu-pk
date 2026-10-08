@@ -28,6 +28,30 @@ async function queryDb(text, params = []) {
   }
 }
 
+// A multi-row admission must commit as one tenant-scoped operation. The usual
+// queryDb() helper deliberately uses one transaction per statement, so it must
+// not be used for a multi-table admission workflow.
+async function withSchoolTransaction(callback) {
+  const schoolId = requireConfiguredSchoolId();
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+    await client.query("SELECT set_config('app.rls_enabled', 'true', true)");
+    await client.query("SELECT set_config('app.is_super_admin', 'false', true)");
+    await client.query("SELECT set_config('app.tenant_id', $1, true)", [String(schoolId)]);
+    // Serialize this channel's per-school GR allocation and B-Form checks.
+    await client.query('SELECT pg_advisory_xact_lock($1::integer, $2::integer)', [schoolId, 7711]);
+    const result = await callback((text, params = []) => client.query(text, params));
+    await client.query('COMMIT');
+    return result;
+  } catch (error) {
+    try { await client.query('ROLLBACK'); } catch {}
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 // ─── 1. Exam & Datesheet Tools ──────────────────────────────────────────────
 
 async function getExamDatesheet(args = {}) {
@@ -686,6 +710,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
     }
 
     if (action === 'add') {
+      return await withSchoolTransaction(async txnQuery => {
       const name = String(studentData.name || '').trim();
       if (!name) return { success: false, error: 'Student name is required for admission.' };
 
@@ -708,7 +733,12 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
       const bForm = String(studentData.b_form || studentData.id_card || '').trim();
       const fatherCnic = String(studentData.father_cnic || studentData.father_id_card || '').trim();
       const address = String(studentData.address || studentData.village || studentData.locality || '').trim();
-      const monthlyFee = parseFloat(studentData.monthly_fee || 3000);
+      const requestedFee = studentData.monthly_fee;
+      const monthlyFee = requestedFee === undefined || requestedFee === null || requestedFee === ''
+        ? 3000 : Number(requestedFee);
+      if (!Number.isFinite(monthlyFee) || monthlyFee < 0) {
+        return { success:false, error:'Monthly fee must be a valid non-negative amount.' };
+      }
 
       // Date of birth parsing
       let dob = null;
@@ -724,7 +754,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
 
       // Check duplicates first (Double guard)
       if (bForm) {
-        const dupBForm = await queryDb(`SELECT id, name, gr_number, class FROM students WHERE b_form = $1 LIMIT 1;`, [bForm]);
+        const dupBForm = await txnQuery(`SELECT id, name, gr_number, class FROM students WHERE b_form = $1 LIMIT 1;`, [bForm]);
         if (dupBForm.rowCount > 0) {
           return { success: false, error: `Student with B-Form ${bForm} already exists (${dupBForm.rows[0].name}, GR: ${dupBForm.rows[0].gr_number}, Class: ${dupBForm.rows[0].class}).` };
         }
@@ -733,17 +763,16 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
       // Generate GR number
       let gr = studentData.gr_number;
       if (!gr) {
-        const maxGrRes = await queryDb(`SELECT gr_number FROM students WHERE gr_number ~ '^GR-[0-9]+$' ORDER BY id DESC LIMIT 1;`);
-        let nextNum = Math.floor(1000 + Math.random() * 9000);
-        if (maxGrRes.rowCount > 0) {
-          const num = parseInt(maxGrRes.rows[0].gr_number.replace('GR-', ''), 10);
-          if (!isNaN(num)) nextNum = num + 1;
-        }
+        const maxGrRes = await txnQuery(
+          `SELECT MAX((substring(gr_number FROM 4))::integer) AS max_gr
+           FROM students WHERE gr_number ~ '^GR-[0-9]+$'`
+        );
+        const nextNum = Math.max(1000, Number(maxGrRes.rows[0]?.max_gr || 999) + 1);
         gr = `GR-${nextNum}`;
       }
 
       // 1. Insert Student
-      const ins = await queryDb(
+      const ins = await txnQuery(
         `INSERT INTO students (
           school_id, gr_number, name, father_name, class, section, 
           b_form, father_cnic, date_of_birth, locality, address, 
@@ -760,7 +789,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
       const student = ins.rows[0];
 
       // 2. Insert Fee Profile
-      await queryDb(
+      await txnQuery(
         `INSERT INTO student_fee_profiles (student_id, school_id, monthly_fee, updated_at)
          VALUES ($1, current_setting('app.tenant_id')::int, $2, NOW())
          ON CONFLICT (student_id) DO UPDATE SET monthly_fee = $2, updated_at = NOW();`,
@@ -768,22 +797,24 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
       );
 
       // 3. Generate Initial Admission Challan
-      const challanNo = `CH-${Date.now().toString().slice(-6)}`;
-      await queryDb(
+      const challanNo = `CH-${student.id}`;
+      await txnQuery(
         `INSERT INTO fee_challans (
           school_id, challan_no, student_id, month, year, amount, 
           remaining_balance, monthly_fee, status, due_date, tenant_id, created_at, updated_at
         ) VALUES (
-          current_setting('app.tenant_id')::int, $1, $2, 'October', 2026, $3,
-          $3, $3, 'unpaid', CURRENT_DATE + INTERVAL '10 days',
+          current_setting('app.tenant_id')::int, $1, $2,
+          to_char(timezone('Asia/Karachi', now()), 'FMMonth'),
+          EXTRACT(YEAR FROM timezone('Asia/Karachi', now()))::integer, $3,
+          $3, $3, 'unpaid', (timezone('Asia/Karachi', now())::date + 10),
           (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int),
           NOW(), NOW()
-        ) ON CONFLICT DO NOTHING;`,
+        );`,
         [challanNo, student.id, monthlyFee]
       );
 
       // 4. Record in Admissions table
-      await queryDb(
+      await txnQuery(
         `INSERT INTO admissions (
           school_id, student_name, father_name, parent_phone, whatsapp_number, 
           class_applying, date_of_birth, status, tenant_id, created_at
@@ -809,6 +840,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}, conte
         monthly_fee: monthlyFee,
         challan_no: challanNo
       };
+      });
     }
 
     if (action === 'deactivate') {
