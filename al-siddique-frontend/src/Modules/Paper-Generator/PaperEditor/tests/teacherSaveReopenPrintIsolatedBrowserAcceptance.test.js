@@ -197,7 +197,11 @@ test('teacher creates, saves, reopens, and prints an assessment through real iso
   const paperCanvasText = await page.locator('#paper-canvas').innerText()
   assert.ok(paperCanvasText.includes('Explain why green plants need sunlight.'))
   console.log('PHASE3_REAL_TEACHER_SAVED_PAPER_REOPEN_PASS')
-  await page.getByRole('button', { name: 'Print', exact: true }).click()
+  await page.locator('[data-printer-destination-help] summary').click()
+  const printerGuide=await page.locator('[data-printer-destination-help]').innerText()
+  assert.match(printerGuide,/USB, Wi-Fi or shared printer/)
+  assert.match(printerGuide,/Save as PDF/)
+  await page.getByRole('button', { name: 'Print / Save PDF', exact: true }).click()
   const printFrame=page.locator('#__print_frame')
   await printFrame.waitFor({ state: 'attached', timeout: 12000 })
   const printable=await printFrame.evaluate(el=>({

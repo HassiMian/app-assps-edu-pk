@@ -620,6 +620,8 @@ async function migrate() {
       await curriculumResourceMigration.up()
       const assessmentResultsMigration = require('./migrations/010_assessment_results_v1')
       await assessmentResultsMigration.up()
+      const feePaymentModesMigration = require('./migrations/011_fee_payment_modes_v1')
+      await feePaymentModesMigration.up()
     } catch (err) {
       console.error('Security-critical authoring migration failed:', err.message)
       throw err
