@@ -1,0 +1,2219 @@
+{
+  "schemaVersion": "assps-compEntTech9-urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-033",
+  "sourcePdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+  "scope": "GRADE9_MATRIC_TECH_CURRENT_TOC_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-COMPENT-TECH-URDU-C01-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "system concept",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "سسٹم کی بہتر تعریف کون سی ہے؟",
+          "answer": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
+          "options": [
+            {
+              "id": "A",
+              "text": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں"
+            },
+            {
+              "id": "B",
+              "text": "صرف ایک غیر متعلق شے"
+            },
+            {
+              "id": "C",
+              "text": "صرف keyboard"
+            },
+            {
+              "id": "D",
+              "text": "بے ترتیب فہرست"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C01-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "system components",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "سسٹم میں components کے باہمی interaction کی اہمیت بیان کریں۔",
+          "answer": "اجزا ایک دوسرے پر اثر انداز ہوتے اور مشترکہ مقصد حاصل کرنے کے لیے coordinate کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C01-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C01",
+        "number": 1
+      },
+      "topicId": "systems thinking",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Input، process، output اور feedback کی مدد سے ایک سادہ information system کا تجزیہ کریں۔",
+          "answer": "ہر حصے کا کردار اور feedback کے ذریعے system improvement کی وضاحت کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C02-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "binary",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Binary number system کن digits پر مشتمل ہے؟",
+          "answer": "0 اور 1",
+          "options": [
+            {
+              "id": "A",
+              "text": "0 اور 1"
+            },
+            {
+              "id": "B",
+              "text": "0 سے 7"
+            },
+            {
+              "id": "C",
+              "text": "0 سے 9"
+            },
+            {
+              "id": "D",
+              "text": "صرف A سے F"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C02-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "number representation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Computers اندرونی طور پر binary کیوں استعمال کرتے ہیں؟",
+          "answer": "Digital circuits دو واضح states کو reliably represent کر سکتے ہیں، اس لیے binary موزوں representation ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C02-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C02",
+        "number": 2
+      },
+      "topicId": "base conversion",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Number Systems"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Decimal whole number کو binary میں تبدیل کرنے کا ایک درست طریقہ بیان کریں۔",
+          "answer": "عدد کو بار بار 2 سے divide کر کے remainders نوٹ کیے جاتے ہیں اور انہیں reverse order میں پڑھا جاتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C03-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "logic gate",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "کون سا gate تب true output دیتا ہے جب دونوں inputs true ہوں؟",
+          "answer": "AND gate",
+          "options": [
+            {
+              "id": "A",
+              "text": "AND gate"
+            },
+            {
+              "id": "B",
+              "text": "OR gate"
+            },
+            {
+              "id": "C",
+              "text": "NOT gate"
+            },
+            {
+              "id": "D",
+              "text": "ہر حالت میں XOR"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C03-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "truth table",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Truth table کا مقصد کیا ہے؟",
+          "answer": "یہ تمام input combinations اور ان کے مطابق logical outputs دکھاتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C03-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C03",
+        "number": 3
+      },
+      "topicId": "logic design",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Digital Systems and Logic Design"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Basic logic gates کو decision rules represent کرنے کے لیے کیسے combine کیا جا سکتا ہے؟",
+          "answer": "Boolean inputs، gate operations، intermediate results اور final output کی اصولی وضاحت کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C04-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "software",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Hardware resources manage کرنے اور applications کو core services دینے والی category کون سی ہے؟",
+          "answer": "System software",
+          "options": [
+            {
+              "id": "A",
+              "text": "System software"
+            },
+            {
+              "id": "B",
+              "text": "صرف image files"
+            },
+            {
+              "id": "C",
+              "text": "printed pages"
+            },
+            {
+              "id": "D",
+              "text": "network cable"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C04-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "application software",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "System software اور application software میں فرق بیان کریں۔",
+          "answer": "System software platform resources manage کرتا ہے، جبکہ application software user کے specific tasks انجام دینے میں مدد دیتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C04-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C04",
+        "number": 4
+      },
+      "topicId": "software lifecycle",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Software System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Software کی design، testing، updating اور maintenance منظم انداز میں کیوں ضروری ہے؟",
+          "answer": "Requirements، defect detection، security/improvement اور reliability کے ساتھ ان مراحل کا تعلق بیان کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C05-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "network",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "LAN عام طور پر کس scope کو cover کرتا ہے؟",
+          "answer": "محدود local area جیسے building یا campus",
+          "options": [
+            {
+              "id": "A",
+              "text": "محدود local area جیسے building یا campus"
+            },
+            {
+              "id": "B",
+              "text": "صرف پوری دنیا"
+            },
+            {
+              "id": "C",
+              "text": "صرف CPU register"
+            },
+            {
+              "id": "D",
+              "text": "کوئی connected device نہیں"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C05-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "network purpose",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Computer network کے دو فائدے بیان کریں۔",
+          "answer": "Resource sharing، communication، collaboration، centralized services یا managed access میں سے کوئی دو۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C05-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C05",
+        "number": 5
+      },
+      "topicId": "safe networking",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Introduction to Computer Networks"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "School network کو devices، communication links، shared services اور basic safe-use controls کے لحاظ سے بیان کریں۔",
+          "answer": "Endpoints، network devices/links، services، authentication/access control اور responsible use شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C06-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "decomposition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Complex problem کو چھوٹے حصوں میں تقسیم کرنے کو کیا کہتے ہیں؟",
+          "answer": "Decomposition",
+          "options": [
+            {
+              "id": "A",
+              "text": "Decomposition"
+            },
+            {
+              "id": "B",
+              "text": "Rendering"
+            },
+            {
+              "id": "C",
+              "text": "Formatting"
+            },
+            {
+              "id": "D",
+              "text": "صرف encryption"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C06-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "algorithm",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Algorithm کیا ہوتا ہے؟",
+          "answer": "کسی مسئلے کو حل کرنے یا task مکمل کرنے کے واضح اور finite ordered steps۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C06-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C06",
+        "number": 6
+      },
+      "topicId": "computational thinking",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Computational Thinking"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Decomposition، pattern recognition، abstraction اور algorithm design کی وضاحت کریں۔",
+          "answer": "ہر process کی تعریف اور complex problem سے workable solution تک ان کے باہمی تعلق کو بیان کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C07-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "data quality",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Collected data پر اعتماد بڑھانے والی خاصیت کون سی ہے؟",
+          "answer": "Accuracy",
+          "options": [
+            {
+              "id": "A",
+              "text": "Accuracy"
+            },
+            {
+              "id": "B",
+              "text": "random duplication"
+            },
+            {
+              "id": "C",
+              "text": "unknown source"
+            },
+            {
+              "id": "D",
+              "text": "missing context"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C07-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "data collection",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Data collection method کو research question کے مطابق کیوں ہونا چاہیے؟",
+          "answer": "Method data کی relevance، quality، bias اور usefulness کو متاثر کرتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C07-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C07",
+        "number": 7
+      },
+      "topicId": "data workflow",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Data Science and Data Gathering"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "School attendance analysis کے لیے responsible data workflow بیان کریں۔",
+          "answer": "Question define کرنا، minimal relevant data collect کرنا، cleaning، analysis/visualization، interpretation اور privacy protection شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C08-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "emerging tech",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Emerging computing field کی مثال کون سی ہے؟",
+          "answer": "Artificial Intelligence",
+          "options": [
+            {
+              "id": "A",
+              "text": "Artificial Intelligence"
+            },
+            {
+              "id": "B",
+              "text": "paper stapling"
+            },
+            {
+              "id": "C",
+              "text": "manual filing only"
+            },
+            {
+              "id": "D",
+              "text": "chalk storage"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C08-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "technology evaluation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Emerging technology adopt کرنے سے پہلے evaluation کیوں ضروری ہے؟",
+          "answer": "Benefits، limitations، cost، risks، privacy اور suitability assess کرنا ضروری ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C08-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C08",
+        "number": 8
+      },
+      "topicId": "emerging technologies",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Emerging Technologies in Computer Science"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "دو emerging technologies کا purpose، opportunities اور responsible-use concerns کے لحاظ سے تقابل کریں۔",
+          "answer": "دو technologies کی uses/benefits اور safety، privacy، fairness یا reliability concerns بیان کیے جائیں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C09-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "digital ethics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Responsible computer use کی بہتر مثال کون سی ہے؟",
+          "answer": "Privacy، permissions اور intellectual property کا احترام",
+          "options": [
+            {
+              "id": "A",
+              "text": "Privacy، permissions اور intellectual property کا احترام"
+            },
+            {
+              "id": "B",
+              "text": "Private data بغیر consent share کرنا"
+            },
+            {
+              "id": "C",
+              "text": "Work بغیر attribution copy کرنا"
+            },
+            {
+              "id": "D",
+              "text": "Account security ignore کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C09-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "privacy",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Personal data collect کرتے وقت informed consent کیوں اہم ہے؟",
+          "answer": "User کو معلوم ہونا چاہیے کہ کون سا data، کیوں اور کس protection کے ساتھ استعمال ہوگا۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C09-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C09",
+        "number": 9
+      },
+      "topicId": "digital responsibility",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Ethical, Social, and Legal Concerns in Computer Usage"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Privacy، copyright، cyberbullying اور responsible account use کو ethical/legal concerns کے طور پر بیان کریں۔",
+          "answer": "ہر concern کی وضاحت اور safe، lawful اور respectful principles شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C10-I01",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C10",
+        "number": 10
+      },
+      "topicId": "value proposition",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Value proposition کیا واضح کرتی ہے؟",
+          "answer": "Product یا service target user کے لیے کیوں useful ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Product یا service target user کے لیے کیوں useful ہے"
+            },
+            {
+              "id": "B",
+              "text": "صرف file name"
+            },
+            {
+              "id": "C",
+              "text": "صرف founder کی عمر"
+            },
+            {
+              "id": "D",
+              "text": "صرف screen size"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C10-I02",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C10",
+        "number": 10
+      },
+      "topicId": "market research",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Digital product سے پہلے market research کیوں مفید ہے؟",
+          "answer": "User needs، alternatives، demand اور constraints سمجھنے میں مدد ملتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C10-I03",
+      "chapter": {
+        "id": "IX-COMPENT-TECH-URDU-C10",
+        "number": 10
+      },
+      "topicId": "digital entrepreneurship",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-033",
+        "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_OFFICIAL_TOC_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Entrepreneurship in Digital Age"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "computer-science-entrepreneurship-tech",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-IX-COMPENT-TECH-URDU",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech starter aligned to rendered official TOC. Exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original Matric-Tech concept item.",
+      "content": {
+        "ur": {
+          "stem": "Problem discovery سے ethical launch تک ایک سادہ digital venture process بیان کریں۔",
+          "answer": "User problem، value proposition، MVP/testable solution، feedback، costs/revenue، privacy/legal checks اور responsible launch شامل ہوں۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 30,
+    "mcq": 10,
+    "short": 10,
+    "long": 10,
+    "units": 10
+  }
+}

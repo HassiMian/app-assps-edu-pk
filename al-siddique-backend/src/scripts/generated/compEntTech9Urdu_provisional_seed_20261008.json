@@ -1,0 +1,1016 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-COMPENT-TECH-URDU-C01-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سسٹمز کا تعارف",
+      "topic_name": "system concept",
+      "category": "mcq",
+      "question_text": "سسٹم کی بہتر تعریف کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں"
+        },
+        {
+          "id": "B",
+          "text": "صرف ایک غیر متعلق شے"
+        },
+        {
+          "id": "C",
+          "text": "صرف keyboard"
+        },
+        {
+          "id": "D",
+          "text": "بے ترتیب فہرست"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "باہم مربوط اجزا جو کسی مقصد کے لیے مل کر کام کریں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "system concept"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C01-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سسٹمز کا تعارف",
+      "topic_name": "system components",
+      "category": "short",
+      "question_text": "سسٹم میں components کے باہمی interaction کی اہمیت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اجزا ایک دوسرے پر اثر انداز ہوتے اور مشترکہ مقصد حاصل کرنے کے لیے coordinate کرتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "system components"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C01-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "سسٹمز کا تعارف",
+      "topic_name": "systems thinking",
+      "category": "long",
+      "question_text": "Input، process، output اور feedback کی مدد سے ایک سادہ information system کا تجزیہ کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر حصے کا کردار اور feedback کے ذریعے system improvement کی وضاحت کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "systems thinking"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C02-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "نمبر سسٹمز",
+      "topic_name": "binary",
+      "category": "mcq",
+      "question_text": "Binary number system کن digits پر مشتمل ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "0 اور 1"
+        },
+        {
+          "id": "B",
+          "text": "0 سے 7"
+        },
+        {
+          "id": "C",
+          "text": "0 سے 9"
+        },
+        {
+          "id": "D",
+          "text": "صرف A سے F"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "0 اور 1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "binary"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C02-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "نمبر سسٹمز",
+      "topic_name": "number representation",
+      "category": "short",
+      "question_text": "Computers اندرونی طور پر binary کیوں استعمال کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Digital circuits دو واضح states کو reliably represent کر سکتے ہیں، اس لیے binary موزوں representation ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "number representation"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C02-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "نمبر سسٹمز",
+      "topic_name": "base conversion",
+      "category": "long",
+      "question_text": "Decimal whole number کو binary میں تبدیل کرنے کا ایک درست طریقہ بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "عدد کو بار بار 2 سے divide کر کے remainders نوٹ کیے جاتے ہیں اور انہیں reverse order میں پڑھا جاتا ہے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "base conversion"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C03-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "ڈیجیٹل سسٹمز اور لاجک ڈیزائن",
+      "topic_name": "logic gate",
+      "category": "mcq",
+      "question_text": "کون سا gate تب true output دیتا ہے جب دونوں inputs true ہوں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "AND gate"
+        },
+        {
+          "id": "B",
+          "text": "OR gate"
+        },
+        {
+          "id": "C",
+          "text": "NOT gate"
+        },
+        {
+          "id": "D",
+          "text": "ہر حالت میں XOR"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "AND gate",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "logic gate"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C03-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "ڈیجیٹل سسٹمز اور لاجک ڈیزائن",
+      "topic_name": "truth table",
+      "category": "short",
+      "question_text": "Truth table کا مقصد کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ تمام input combinations اور ان کے مطابق logical outputs دکھاتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "truth table"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C03-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "ڈیجیٹل سسٹمز اور لاجک ڈیزائن",
+      "topic_name": "logic design",
+      "category": "long",
+      "question_text": "Basic logic gates کو decision rules represent کرنے کے لیے کیسے combine کیا جا سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Boolean inputs، gate operations، intermediate results اور final output کی اصولی وضاحت کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "logic design"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C04-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سافٹ ویئر سسٹم",
+      "topic_name": "software",
+      "category": "mcq",
+      "question_text": "Hardware resources manage کرنے اور applications کو core services دینے والی category کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "System software"
+        },
+        {
+          "id": "B",
+          "text": "صرف image files"
+        },
+        {
+          "id": "C",
+          "text": "printed pages"
+        },
+        {
+          "id": "D",
+          "text": "network cable"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "System software",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "software"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C04-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سافٹ ویئر سسٹم",
+      "topic_name": "application software",
+      "category": "short",
+      "question_text": "System software اور application software میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "System software platform resources manage کرتا ہے، جبکہ application software user کے specific tasks انجام دینے میں مدد دیتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "application software"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C04-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سافٹ ویئر سسٹم",
+      "topic_name": "software lifecycle",
+      "category": "long",
+      "question_text": "Software کی design، testing، updating اور maintenance منظم انداز میں کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Requirements، defect detection، security/improvement اور reliability کے ساتھ ان مراحل کا تعلق بیان کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "software lifecycle"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C05-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کمپیوٹر نیٹ ورکس کا تعارف",
+      "topic_name": "network",
+      "category": "mcq",
+      "question_text": "LAN عام طور پر کس scope کو cover کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "محدود local area جیسے building یا campus"
+        },
+        {
+          "id": "B",
+          "text": "صرف پوری دنیا"
+        },
+        {
+          "id": "C",
+          "text": "صرف CPU register"
+        },
+        {
+          "id": "D",
+          "text": "کوئی connected device نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "محدود local area جیسے building یا campus",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "network"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C05-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کمپیوٹر نیٹ ورکس کا تعارف",
+      "topic_name": "network purpose",
+      "category": "short",
+      "question_text": "Computer network کے دو فائدے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Resource sharing، communication، collaboration، centralized services یا managed access میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "network purpose"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C05-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "کمپیوٹر نیٹ ورکس کا تعارف",
+      "topic_name": "safe networking",
+      "category": "long",
+      "question_text": "School network کو devices، communication links، shared services اور basic safe-use controls کے لحاظ سے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Endpoints، network devices/links، services، authentication/access control اور responsible use شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "safe networking"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C06-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "کمپیٹیشنل تھنکنگ",
+      "topic_name": "decomposition",
+      "category": "mcq",
+      "question_text": "Complex problem کو چھوٹے حصوں میں تقسیم کرنے کو کیا کہتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Decomposition"
+        },
+        {
+          "id": "B",
+          "text": "Rendering"
+        },
+        {
+          "id": "C",
+          "text": "Formatting"
+        },
+        {
+          "id": "D",
+          "text": "صرف encryption"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Decomposition",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "decomposition"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C06-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "کمپیٹیشنل تھنکنگ",
+      "topic_name": "algorithm",
+      "category": "short",
+      "question_text": "Algorithm کیا ہوتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "کسی مسئلے کو حل کرنے یا task مکمل کرنے کے واضح اور finite ordered steps۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C06-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "کمپیٹیشنل تھنکنگ",
+      "topic_name": "computational thinking",
+      "category": "long",
+      "question_text": "Decomposition، pattern recognition، abstraction اور algorithm design کی وضاحت کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر process کی تعریف اور complex problem سے workable solution تک ان کے باہمی تعلق کو بیان کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "computational thinking"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C07-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "ڈیٹا سائنس اور ڈیٹا گیدرنگ",
+      "topic_name": "data quality",
+      "category": "mcq",
+      "question_text": "Collected data پر اعتماد بڑھانے والی خاصیت کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Accuracy"
+        },
+        {
+          "id": "B",
+          "text": "random duplication"
+        },
+        {
+          "id": "C",
+          "text": "unknown source"
+        },
+        {
+          "id": "D",
+          "text": "missing context"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Accuracy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "data quality"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C07-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "ڈیٹا سائنس اور ڈیٹا گیدرنگ",
+      "topic_name": "data collection",
+      "category": "short",
+      "question_text": "Data collection method کو research question کے مطابق کیوں ہونا چاہیے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Method data کی relevance، quality، bias اور usefulness کو متاثر کرتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "data collection"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C07-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "ڈیٹا سائنس اور ڈیٹا گیدرنگ",
+      "topic_name": "data workflow",
+      "category": "long",
+      "question_text": "School attendance analysis کے لیے responsible data workflow بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Question define کرنا، minimal relevant data collect کرنا، cleaning، analysis/visualization، interpretation اور privacy protection شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "data workflow"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C08-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "کمپیوٹر سائنس میں ابھرتی ٹیکنالوجیز",
+      "topic_name": "emerging tech",
+      "category": "mcq",
+      "question_text": "Emerging computing field کی مثال کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Artificial Intelligence"
+        },
+        {
+          "id": "B",
+          "text": "paper stapling"
+        },
+        {
+          "id": "C",
+          "text": "manual filing only"
+        },
+        {
+          "id": "D",
+          "text": "chalk storage"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Artificial Intelligence",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "emerging tech"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C08-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "کمپیوٹر سائنس میں ابھرتی ٹیکنالوجیز",
+      "topic_name": "technology evaluation",
+      "category": "short",
+      "question_text": "Emerging technology adopt کرنے سے پہلے evaluation کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Benefits، limitations، cost، risks، privacy اور suitability assess کرنا ضروری ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "technology evaluation"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C08-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "کمپیوٹر سائنس میں ابھرتی ٹیکنالوجیز",
+      "topic_name": "emerging technologies",
+      "category": "long",
+      "question_text": "دو emerging technologies کا purpose، opportunities اور responsible-use concerns کے لحاظ سے تقابل کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "دو technologies کی uses/benefits اور safety، privacy، fairness یا reliability concerns بیان کیے جائیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "emerging technologies"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C09-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "کمپیوٹر استعمال کے اخلاقی، سماجی اور قانونی پہلو",
+      "topic_name": "digital ethics",
+      "category": "mcq",
+      "question_text": "Responsible computer use کی بہتر مثال کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Privacy، permissions اور intellectual property کا احترام"
+        },
+        {
+          "id": "B",
+          "text": "Private data بغیر consent share کرنا"
+        },
+        {
+          "id": "C",
+          "text": "Work بغیر attribution copy کرنا"
+        },
+        {
+          "id": "D",
+          "text": "Account security ignore کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Privacy، permissions اور intellectual property کا احترام",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "digital ethics"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C09-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "کمپیوٹر استعمال کے اخلاقی، سماجی اور قانونی پہلو",
+      "topic_name": "privacy",
+      "category": "short",
+      "question_text": "Personal data collect کرتے وقت informed consent کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "User کو معلوم ہونا چاہیے کہ کون سا data، کیوں اور کس protection کے ساتھ استعمال ہوگا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "privacy"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C09-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "کمپیوٹر استعمال کے اخلاقی، سماجی اور قانونی پہلو",
+      "topic_name": "digital responsibility",
+      "category": "long",
+      "question_text": "Privacy، copyright، cyberbullying اور responsible account use کو ethical/legal concerns کے طور پر بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر concern کی وضاحت اور safe، lawful اور respectful principles شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "digital responsibility"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C10-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "ڈیجیٹل دور میں انٹرپرینیورشپ",
+      "topic_name": "value proposition",
+      "category": "mcq",
+      "question_text": "Value proposition کیا واضح کرتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Product یا service target user کے لیے کیوں useful ہے"
+        },
+        {
+          "id": "B",
+          "text": "صرف file name"
+        },
+        {
+          "id": "C",
+          "text": "صرف founder کی عمر"
+        },
+        {
+          "id": "D",
+          "text": "صرف screen size"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Product یا service target user کے لیے کیوں useful ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "value proposition"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C10-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "ڈیجیٹل دور میں انٹرپرینیورشپ",
+      "topic_name": "market research",
+      "category": "short",
+      "question_text": "Digital product سے پہلے market research کیوں مفید ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "User needs، alternatives، demand اور constraints سمجھنے میں مدد ملتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "market research"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-URDU-C10-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "ڈیجیٹل دور میں انٹرپرینیورشپ",
+      "topic_name": "digital entrepreneurship",
+      "category": "long",
+      "question_text": "Problem discovery سے ethical launch تک ایک سادہ digital venture process بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "User problem، value proposition، MVP/testable solution، feedback، costs/revenue، privacy/legal checks اور responsible launch شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-033 | cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687 | unit 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "urdu",
+        "internal-provisional",
+        "original-draft",
+        "digital entrepreneurship"
+      ]
+    }
+  ]
+}

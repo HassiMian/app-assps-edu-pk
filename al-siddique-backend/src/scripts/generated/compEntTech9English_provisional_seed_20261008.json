@@ -1,0 +1,1016 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C01-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "system concept",
+      "category": "mcq",
+      "question_text": "Which description best matches a system?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A set of interacting components working toward a purpose"
+        },
+        {
+          "id": "B",
+          "text": "A single unrelated object only"
+        },
+        {
+          "id": "C",
+          "text": "Only a computer keyboard"
+        },
+        {
+          "id": "D",
+          "text": "A random list with no relationship"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A set of interacting components working toward a purpose",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "system concept"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C01-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "system components",
+      "category": "short",
+      "question_text": "Why is interaction between components important in a system?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Because the components influence one another and coordinate to achieve the system purpose.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "system components"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C01-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Systems",
+      "topic_name": "systems thinking",
+      "category": "long",
+      "question_text": "Explain how input, process, output and feedback can be used to analyze a simple information system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A strong answer identifies each element, explains its role, and shows how feedback can improve system performance.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 1",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "systems thinking"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C02-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "binary",
+      "category": "mcq",
+      "question_text": "Which digit set belongs to binary notation?",
+      "options": [
+        {
+          "id": "A",
+          "text": "0 and 1 only"
+        },
+        {
+          "id": "B",
+          "text": "0 to 7"
+        },
+        {
+          "id": "C",
+          "text": "0 to 9"
+        },
+        {
+          "id": "D",
+          "text": "A to F only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "0 and 1 only",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "binary"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C02-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "number representation",
+      "category": "short",
+      "question_text": "Why do computers commonly use binary internally?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Digital electronic circuits can reliably represent two states, making binary a natural internal representation.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "number representation"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C02-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Number Systems",
+      "topic_name": "base conversion",
+      "category": "long",
+      "question_text": "Describe a reliable method for converting a small decimal whole number to binary.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Repeated division by 2 with remainders, then reading the remainders in reverse order, gives the binary representation.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 2",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "base conversion"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C03-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "logic gate",
+      "category": "mcq",
+      "question_text": "Which gate produces true output only when both inputs are true?",
+      "options": [
+        {
+          "id": "A",
+          "text": "AND gate"
+        },
+        {
+          "id": "B",
+          "text": "OR gate"
+        },
+        {
+          "id": "C",
+          "text": "NOT gate"
+        },
+        {
+          "id": "D",
+          "text": "XOR gate always"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "AND gate",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "logic gate"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C03-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "truth table",
+      "category": "short",
+      "question_text": "What is the purpose of a truth table?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It lists all input combinations and the corresponding logical output of a digital expression or circuit.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "truth table"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C03-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Digital Systems and Logic Design",
+      "topic_name": "logic design",
+      "category": "long",
+      "question_text": "Explain how basic logic gates can be combined to represent decision rules in a digital system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The answer should discuss Boolean inputs, gate operations, intermediate results and final output without relying on a specific copied circuit.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 3",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "logic design"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C04-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Software System",
+      "topic_name": "software",
+      "category": "mcq",
+      "question_text": "Which category manages hardware resources and provides core services for applications?",
+      "options": [
+        {
+          "id": "A",
+          "text": "System software"
+        },
+        {
+          "id": "B",
+          "text": "Only image files"
+        },
+        {
+          "id": "C",
+          "text": "Printed documents"
+        },
+        {
+          "id": "D",
+          "text": "Network cables"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "System software",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "software"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C04-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Software System",
+      "topic_name": "application software",
+      "category": "short",
+      "question_text": "Differentiate system software and application software.",
+      "options": [],
+      "correct_option": "",
+      "answer": "System software manages platform resources; application software helps users perform specific tasks.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "application software"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C04-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Software System",
+      "topic_name": "software lifecycle",
+      "category": "long",
+      "question_text": "Explain why software should be designed, tested, updated and maintained systematically.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Good responses link design to requirements, testing to defect detection, updates to improvement/security and maintenance to reliability.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 4",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "software lifecycle"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C05-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "network",
+      "category": "mcq",
+      "question_text": "A LAN normally covers which scope?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A limited local area such as a building or campus"
+        },
+        {
+          "id": "B",
+          "text": "The entire world only"
+        },
+        {
+          "id": "C",
+          "text": "Only one CPU register"
+        },
+        {
+          "id": "D",
+          "text": "No connected devices"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A limited local area such as a building or campus",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "network"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C05-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "network purpose",
+      "category": "short",
+      "question_text": "State two benefits of computer networks.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include resource sharing, communication, centralized services, collaboration and managed access.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "network purpose"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C05-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Computer Networks",
+      "topic_name": "safe networking",
+      "category": "long",
+      "question_text": "Describe a school network in terms of devices, communication links, shared services and basic safe-use controls.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A complete answer includes endpoints, networking devices/links, shared services, authentication/access control and responsible use.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 5",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "safe networking"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C06-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "decomposition",
+      "category": "mcq",
+      "question_text": "Breaking a complex problem into smaller manageable parts is called?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Decomposition"
+        },
+        {
+          "id": "B",
+          "text": "Encryption only"
+        },
+        {
+          "id": "C",
+          "text": "Rendering"
+        },
+        {
+          "id": "D",
+          "text": "Formatting"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Decomposition",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "decomposition"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C06-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "algorithm",
+      "category": "short",
+      "question_text": "What is an algorithm?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A finite, ordered set of clear steps for solving a problem or completing a task.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "algorithm"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C06-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Computational Thinking",
+      "topic_name": "computational thinking",
+      "category": "long",
+      "question_text": "Explain decomposition, pattern recognition, abstraction and algorithm design as parts of computational thinking.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Define each process and show how they work together to move from a complex problem to a workable solution.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 6",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "computational thinking"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C07-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data quality",
+      "category": "mcq",
+      "question_text": "Which property improves trust in collected data?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Accuracy"
+        },
+        {
+          "id": "B",
+          "text": "Random duplication"
+        },
+        {
+          "id": "C",
+          "text": "Unknown origin"
+        },
+        {
+          "id": "D",
+          "text": "Missing context"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Accuracy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "data quality"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C07-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data collection",
+      "category": "short",
+      "question_text": "Why should a data-collection method be matched to the question being studied?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The method affects relevance, quality, bias and whether the collected data can answer the intended question.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "data collection"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C07-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Data Science and Data Gathering",
+      "topic_name": "data workflow",
+      "category": "long",
+      "question_text": "Outline a responsible data-science workflow for a school attendance question.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Define the question, collect minimal relevant data, clean it, analyze/visualize it, interpret results and protect privacy.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 7",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "data workflow"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C08-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "emerging tech",
+      "category": "mcq",
+      "question_text": "Which is an example of an emerging computing field?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Artificial intelligence"
+        },
+        {
+          "id": "B",
+          "text": "Paper stapling"
+        },
+        {
+          "id": "C",
+          "text": "Manual filing only"
+        },
+        {
+          "id": "D",
+          "text": "Chalk storage"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Artificial intelligence",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "emerging tech"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C08-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "technology evaluation",
+      "category": "short",
+      "question_text": "Why should an emerging technology be evaluated before adoption?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Its benefits, limitations, costs, risks, privacy implications and suitability for the intended users should be assessed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "technology evaluation"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C08-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Emerging Technologies in Computer Science",
+      "topic_name": "emerging technologies",
+      "category": "long",
+      "question_text": "Compare two emerging computing technologies in terms of purpose, opportunities and responsible-use concerns.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The response should identify two technologies, compare use cases/benefits, and discuss safety, privacy, fairness or reliability concerns.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 8",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "emerging technologies"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C09-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "digital ethics",
+      "category": "mcq",
+      "question_text": "Which action best reflects responsible computer use?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Respecting privacy, permissions and intellectual property"
+        },
+        {
+          "id": "B",
+          "text": "Sharing private data without consent"
+        },
+        {
+          "id": "C",
+          "text": "Copying work without attribution"
+        },
+        {
+          "id": "D",
+          "text": "Ignoring account security"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Respecting privacy, permissions and intellectual property",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "digital ethics"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C09-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "privacy",
+      "category": "short",
+      "question_text": "Why is informed consent important when collecting personal data?",
+      "options": [],
+      "correct_option": "",
+      "answer": "People should understand what data is collected, why it is needed and how it will be used or protected.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "privacy"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C09-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "topic_name": "digital responsibility",
+      "category": "long",
+      "question_text": "Discuss privacy, copyright, cyberbullying and responsible account use as ethical/legal concerns in computing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A good answer explains each concern and gives safe, lawful and respectful principles for handling it.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 9",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "digital responsibility"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C10-I01",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "value proposition",
+      "category": "mcq",
+      "question_text": "A value proposition explains what?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Why a product or service is useful to a target customer"
+        },
+        {
+          "id": "B",
+          "text": "Only the file name"
+        },
+        {
+          "id": "C",
+          "text": "Only the founder age"
+        },
+        {
+          "id": "D",
+          "text": "Only the screen size"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Why a product or service is useful to a target customer",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "value proposition"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C10-I02",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "market research",
+      "category": "short",
+      "question_text": "Why is market research useful before building a digital product?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps identify user needs, alternatives, demand and constraints before significant resources are committed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "market research"
+      ]
+    },
+    {
+      "id": "IX-COMPENT-TECH-ENGLISH-C10-I03",
+      "class_level": "9th",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Entrepreneurship in Digital Age",
+      "topic_name": "digital entrepreneurship",
+      "category": "long",
+      "question_text": "Outline a simple digital venture process from problem discovery to an ethical launch.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Identify user problem, value proposition, small testable solution, feedback, basic costs/revenue, privacy/legal checks and responsible launch.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-034 | 393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b | unit 10",
+      "tags": [
+        "grade9",
+        "matric-tech",
+        "computer-entrepreneurship",
+        "english",
+        "internal-provisional",
+        "original-draft",
+        "digital entrepreneurship"
+      ]
+    }
+  ]
+}

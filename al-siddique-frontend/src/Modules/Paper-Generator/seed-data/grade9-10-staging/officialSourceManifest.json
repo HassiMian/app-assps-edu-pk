@@ -882,9 +882,9 @@
       "catalogLabel": "Computer and entrepreneur Tech 9 UM",
       "pdfUrl": "https://drive.google.com/file/d/1hTYUZQT9RmTDPDBCGfRpPsXwN_J4bSIN/view?usp=sharing",
       "pdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_RENDERED_TOC_10_UNITS",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -897,8 +897,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/compent9ur.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "VERIFIED_RENDERED_TOC_10_UNITS_PAGE_LEVEL_REVIEW_PENDING",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "contentMapEvidence": "compEntTech9UrduSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-034",
@@ -911,9 +912,9 @@
       "catalogLabel": "Computer and entrepreneur Tech 9 EM",
       "pdfUrl": "https://drive.google.com/file/d/1YQNpbrn0gTJddb2mB7bAZJBiH8iqJ0cW/view?usp=sharing",
       "pdfSha256": "393f5e75b142a7364b2f5d8e3157d82ffafea65caf2018c6121cf64555f5177b",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_RENDERED_TOC_10_UNITS",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -926,8 +927,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9-theory/compent9em.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_THEORY_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "VERIFIED_RENDERED_TOC_10_UNITS_PAGE_LEVEL_REVIEW_PENDING",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_CONCEPTUAL_ONLY_NO_TEXTBOOK_OR_EXERCISE_COPYING",
+      "contentMapEvidence": "compEntTech9EnglishSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-035",

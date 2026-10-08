@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "assps-compEntTech9-urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-033",
+  "sourcePdfSha256": "cb38786cd7d2f90fa4ca746f767428078ad8e2a73483192011f14ba97b143687",
+  "sourceByteLength": 71954190,
+  "pageCount": 180,
+  "identity": [
+    "Computer and entrepreneur Tech 9 UM",
+    "PECTAA/PCTB Grade IX Matric-Tech"
+  ],
+  "tocEvidence": "RENDERED_OFFICIAL_TOC_PAGE_2_VERIFIED",
+  "units": [
+    {
+      "number": 1,
+      "titleEnglish": "Introduction to Systems",
+      "titleUrdu": "سسٹمز کا تعارف",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 2,
+      "titleEnglish": "Number Systems",
+      "titleUrdu": "نمبر سسٹمز",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 3,
+      "titleEnglish": "Digital Systems and Logic Design",
+      "titleUrdu": "ڈیجیٹل سسٹمز اور لاجک ڈیزائن",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 4,
+      "titleEnglish": "Software System",
+      "titleUrdu": "سافٹ ویئر سسٹم",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 5,
+      "titleEnglish": "Introduction to Computer Networks",
+      "titleUrdu": "کمپیوٹر نیٹ ورکس کا تعارف",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 6,
+      "titleEnglish": "Computational Thinking",
+      "titleUrdu": "کمپیٹیشنل تھنکنگ",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 7,
+      "titleEnglish": "Data Science and Data Gathering",
+      "titleUrdu": "ڈیٹا سائنس اور ڈیٹا گیدرنگ",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 8,
+      "titleEnglish": "Emerging Technologies in Computer Science",
+      "titleUrdu": "کمپیوٹر سائنس میں ابھرتی ٹیکنالوجیز",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 9,
+      "titleEnglish": "Ethical, Social, and Legal Concerns in Computer Usage",
+      "titleUrdu": "کمپیوٹر استعمال کے اخلاقی، سماجی اور قانونی پہلو",
+      "status": "RENDERED_TOC_VERIFIED"
+    },
+    {
+      "number": 10,
+      "titleEnglish": "Entrepreneurship in Digital Age",
+      "titleUrdu": "ڈیجیٹل دور میں انٹرپرینیورشپ",
+      "status": "RENDERED_TOC_VERIFIED"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "securityTopicsRestrictedToBenignDefensiveUse": true
+  }
+}
