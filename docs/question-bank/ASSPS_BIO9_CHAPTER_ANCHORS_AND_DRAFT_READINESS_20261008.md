@@ -70,3 +70,18 @@ every production editor control was retested in this specific pilot.
 All academic approvals and governed import flags remain false. Technical
 PaperDocument validity does not constitute subject-teacher or curriculum
 approval.
+
+## Live Grade 9–10 Question Bank cohort change — October 8 UTC
+
+A fresh read-only aggregate check found **1,608 unapproved provisional
+Grade 9–10 questions** under operational school tenant 1
+(934 Grade 9; 674 Grade 10), created at 2026-10-08T07:31:19.541744Z.
+This is later than the earlier zero-record production audit. Another staging
+tenant 5 has 2,645 unapproved provisional questions. All counted records
+remain source_type=json_seed, metadata.review_state=provisional_internal
+and is_approved=false. Subject aggregates are preserved in
+ASSPS_GRADE910_PROVISIONAL_COHORT_RECHECK_20261008.json.
+
+**No academic approvals, tenant migrations or database writes** were
+performed by this Biology source-review work. Provisional intake must
+not be mistaken for examination-ready approved content.
