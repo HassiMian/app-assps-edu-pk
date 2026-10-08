@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon"
+          "text": "Helium only"
         },
         {
           "id": "B",
-          "text": "Neon only"
+          "text": "Carbon"
         },
         {
           "id": "C",
-          "text": "Argon only"
+          "text": "Neon only"
         },
         {
           "id": "D",
-          "text": "Helium only"
+          "text": "Argon only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Carbon",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A biological catalyst"
-        },
-        {
-          "id": "B",
-          "text": "A source of chromosomes only"
-        },
-        {
-          "id": "C",
           "text": "A mineral rock"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A type of current"
+        },
+        {
+          "id": "C",
+          "text": "A biological catalyst"
+        },
+        {
+          "id": "D",
+          "text": "A source of chromosomes only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A biological catalyst",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Appropriate energy and essential nutrients"
-        },
-        {
-          "id": "B",
           "text": "Only sugar"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only water"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only one food group"
+        },
+        {
+          "id": "D",
+          "text": "Appropriate energy and essential nutrients"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Appropriate energy and essential nutrients",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Solar energy"
+          "text": "Natural gas"
         },
         {
           "id": "B",
-          "text": "Coal"
+          "text": "Solar energy"
         },
         {
           "id": "C",
-          "text": "Petroleum"
+          "text": "Coal"
         },
         {
           "id": "D",
-          "text": "Natural gas"
+          "text": "Petroleum"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Solar energy",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Do work or cause change"
-        },
-        {
-          "id": "B",
-          "text": "Create mass from nothing"
-        },
-        {
-          "id": "C",
           "text": "Stop all motion permanently"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Remove time"
+        },
+        {
+          "id": "C",
+          "text": "Do work or cause change"
+        },
+        {
+          "id": "D",
+          "text": "Create mass from nothing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Do work or cause change",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electric charge"
-        },
-        {
-          "id": "B",
           "text": "Mass only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Sound only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Temperature only"
+        },
+        {
+          "id": "D",
+          "text": "Electric charge"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Electric charge",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Application of knowledge and tools to solve practical problems"
+          "text": "Only old machines"
         },
         {
           "id": "B",
-          "text": "Only theoretical memorization"
+          "text": "Application of knowledge and tools to solve practical problems"
         },
         {
           "id": "C",
-          "text": "A process without users"
+          "text": "Only theoretical memorization"
         },
         {
           "id": "D",
-          "text": "Only old machines"
+          "text": "A process without users"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Application of knowledge and tools to solve practical problems",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Communication, Earth observation and scientific research"
-        },
-        {
-          "id": "B",
-          "text": "Only road painting"
-        },
-        {
-          "id": "C",
           "text": "Only food storage"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "No scientific work"
+        },
+        {
+          "id": "C",
+          "text": "Communication, Earth observation and scientific research"
+        },
+        {
+          "id": "D",
+          "text": "Only road painting"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Communication, Earth observation and scientific research",
       "marks": 1,
       "difficulty": "easy",

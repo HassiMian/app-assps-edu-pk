@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "0 اور 1"
+          "text": "صرف A سے F"
         },
         {
           "id": "B",
-          "text": "0 سے 7"
+          "text": "0 اور 1"
         },
         {
           "id": "C",
-          "text": "0 سے 9"
+          "text": "0 سے 7"
         },
         {
           "id": "D",
-          "text": "صرف A سے F"
+          "text": "0 سے 9"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "0 اور 1",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "AND gate"
-        },
-        {
-          "id": "B",
-          "text": "OR gate"
-        },
-        {
-          "id": "C",
           "text": "NOT gate"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "ہر حالت میں XOR"
+        },
+        {
+          "id": "C",
+          "text": "AND gate"
+        },
+        {
+          "id": "D",
+          "text": "OR gate"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "AND gate",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "System software"
-        },
-        {
-          "id": "B",
           "text": "صرف image files"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "printed pages"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "network cable"
+        },
+        {
+          "id": "D",
+          "text": "System software"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "System software",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Decomposition"
+          "text": "صرف encryption"
         },
         {
           "id": "B",
-          "text": "Rendering"
+          "text": "Decomposition"
         },
         {
           "id": "C",
-          "text": "Formatting"
+          "text": "Rendering"
         },
         {
           "id": "D",
-          "text": "صرف encryption"
+          "text": "Formatting"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Decomposition",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Accuracy"
-        },
-        {
-          "id": "B",
-          "text": "random duplication"
-        },
-        {
-          "id": "C",
           "text": "unknown source"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "missing context"
+        },
+        {
+          "id": "C",
+          "text": "Accuracy"
+        },
+        {
+          "id": "D",
+          "text": "random duplication"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Accuracy",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Artificial Intelligence"
-        },
-        {
-          "id": "B",
           "text": "paper stapling"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "manual filing only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "chalk storage"
+        },
+        {
+          "id": "D",
+          "text": "Artificial Intelligence"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Artificial Intelligence",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Product یا service target user کے لیے کیوں useful ہے"
+          "text": "صرف screen size"
         },
         {
           "id": "B",
-          "text": "صرف file name"
+          "text": "Product یا service target user کے لیے کیوں useful ہے"
         },
         {
           "id": "C",
-          "text": "صرف founder کی عمر"
+          "text": "صرف file name"
         },
         {
           "id": "D",
-          "text": "صرف screen size"
+          "text": "صرف founder کی عمر"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Product یا service target user کے لیے کیوں useful ہے",
       "marks": 1,
       "difficulty": "easy",

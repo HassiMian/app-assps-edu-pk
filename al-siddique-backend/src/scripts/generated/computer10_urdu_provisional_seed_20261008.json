@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "چلتا ہوا program"
+          "text": "keyboard key"
         },
         {
           "id": "B",
-          "text": "صرف محفوظ file"
+          "text": "چلتا ہوا program"
         },
         {
           "id": "C",
-          "text": "network cable"
+          "text": "صرف محفوظ file"
         },
         {
           "id": "D",
-          "text": "keyboard key"
+          "text": "network cable"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "چلتا ہوا program",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "System settings کو پہلے کے working state پر واپس لانا"
-        },
-        {
-          "id": "B",
-          "text": "تمام data لازماً delete کرنا"
-        },
-        {
-          "id": "C",
           "text": "CPU تبدیل کرنا"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "monitor کی resolution بڑھانا"
+        },
+        {
+          "id": "C",
+          "text": "System settings کو پہلے کے working state پر واپس لانا"
+        },
+        {
+          "id": "D",
+          "text": "تمام data لازماً delete کرنا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "System settings کو پہلے کے working state پر واپس لانا",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Limited drivers/services کے ساتھ diagnosis کے لیے"
-        },
-        {
-          "id": "B",
           "text": "gaming performance بڑھانے کے لیے"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "battery charge کرنے کے لیے"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "printer ink بھرنے کے لیے"
+        },
+        {
+          "id": "D",
+          "text": "Limited drivers/services کے ساتھ diagnosis کے لیے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Limited drivers/services کے ساتھ diagnosis کے لیے",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "دو values کی equality compare کرنے کے لیے"
+          "text": "comment لکھنے کے لیے"
         },
         {
           "id": "B",
-          "text": "assignment کے لیے"
+          "text": "دو values کی equality compare کرنے کے لیے"
         },
         {
           "id": "C",
-          "text": "file delete کرنے کے لیے"
+          "text": "assignment کے لیے"
         },
         {
           "id": "D",
-          "text": "comment لکھنے کے لیے"
+          "text": "file delete کرنے کے لیے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "دو values کی equality compare کرنے کے لیے",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Condition کے مطابق مختلف action منتخب کرنے کے لیے"
-        },
-        {
-          "id": "B",
-          "text": "صرف file rename کرنے کے لیے"
-        },
-        {
-          "id": "C",
           "text": "صرف program بند کرنے کے لیے"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف comment کے لیے"
+        },
+        {
+          "id": "C",
+          "text": "Condition کے مطابق مختلف action منتخب کرنے کے لیے"
+        },
+        {
+          "id": "D",
+          "text": "صرف file rename کرنے کے لیے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Condition کے مطابق مختلف action منتخب کرنے کے لیے",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repeated steps کو منظم طور پر چلانا"
-        },
-        {
-          "id": "B",
           "text": "screen resolution بدلنا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "password بنانا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "printer install کرنا"
+        },
+        {
+          "id": "D",
+          "text": "Repeated steps کو منظم طور پر چلانا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Repeated steps کو منظم طور پر چلانا",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Accuracy"
+          "text": "Unrelated ہونا"
         },
         {
           "id": "B",
-          "text": "Randomness بغیر مقصد"
+          "text": "Accuracy"
         },
         {
           "id": "C",
-          "text": "Missing values لازماً زیادہ ہونا"
+          "text": "Randomness بغیر مقصد"
         },
         {
           "id": "D",
-          "text": "Unrelated ہونا"
+          "text": "Missing values لازماً زیادہ ہونا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Accuracy",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں"
-        },
-        {
-          "id": "B",
-          "text": "صرف text print کرنا"
-        },
-        {
-          "id": "C",
           "text": "صرف cables جوڑنا"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف storage بڑھانا"
+        },
+        {
+          "id": "C",
+          "text": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں"
+        },
+        {
+          "id": "D",
+          "text": "صرف text print کرنا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "ایسے systems بنانا جو learning/reasoning جیسے tasks انجام دے سکیں",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Data"
-        },
-        {
-          "id": "B",
           "text": "Printer paper"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Monitor brightness"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Keyboard layout"
+        },
+        {
+          "id": "D",
+          "text": "Data"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Data",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Human language کو computer کے ذریعے process/understand کرنا"
+          "text": "disk formatting"
         },
         {
           "id": "B",
-          "text": "صرف image printing"
+          "text": "Human language کو computer کے ذریعے process/understand کرنا"
         },
         {
           "id": "C",
-          "text": "network wiring"
+          "text": "صرف image printing"
         },
         {
           "id": "D",
-          "text": "disk formatting"
+          "text": "network wiring"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Human language کو computer کے ذریعے process/understand کرنا",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Customer کے لیے product/service کی خاص value"
-        },
-        {
-          "id": "B",
-          "text": "صرف file size"
-        },
-        {
-          "id": "C",
           "text": "صرف business logo"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف office address"
+        },
+        {
+          "id": "C",
+          "text": "Customer کے لیے product/service کی خاص value"
+        },
+        {
+          "id": "D",
+          "text": "صرف file size"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Customer کے لیے product/service کی خاص value",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Original creative work کے قانونی حقوق کی حفاظت"
-        },
-        {
-          "id": "B",
           "text": "ہر idea کو public domain کرنا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف hardware warranty دینا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "network speed بڑھانا"
+        },
+        {
+          "id": "D",
+          "text": "Original creative work کے قانونی حقوق کی حفاظت"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Original creative work کے قانونی حقوق کی حفاظت",
       "marks": 1,
       "difficulty": "easy",

@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "0 and 1 only"
+          "text": "A to F only"
         },
         {
           "id": "B",
-          "text": "0 to 7"
+          "text": "0 and 1 only"
         },
         {
           "id": "C",
-          "text": "0 to 9"
+          "text": "0 to 7"
         },
         {
           "id": "D",
-          "text": "A to F only"
+          "text": "0 to 9"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "0 and 1 only",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "AND gate"
-        },
-        {
-          "id": "B",
-          "text": "OR gate"
-        },
-        {
-          "id": "C",
           "text": "NOT gate"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "XOR gate always"
+        },
+        {
+          "id": "C",
+          "text": "AND gate"
+        },
+        {
+          "id": "D",
+          "text": "OR gate"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "AND gate",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "System software"
-        },
-        {
-          "id": "B",
           "text": "Only image files"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Printed documents"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Network cables"
+        },
+        {
+          "id": "D",
+          "text": "System software"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "System software",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Decomposition"
+          "text": "Formatting"
         },
         {
           "id": "B",
-          "text": "Encryption only"
+          "text": "Decomposition"
         },
         {
           "id": "C",
-          "text": "Rendering"
+          "text": "Encryption only"
         },
         {
           "id": "D",
-          "text": "Formatting"
+          "text": "Rendering"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Decomposition",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Accuracy"
-        },
-        {
-          "id": "B",
-          "text": "Random duplication"
-        },
-        {
-          "id": "C",
           "text": "Unknown origin"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Missing context"
+        },
+        {
+          "id": "C",
+          "text": "Accuracy"
+        },
+        {
+          "id": "D",
+          "text": "Random duplication"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Accuracy",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Artificial intelligence"
-        },
-        {
-          "id": "B",
           "text": "Paper stapling"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Manual filing only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Chalk storage"
+        },
+        {
+          "id": "D",
+          "text": "Artificial intelligence"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Artificial intelligence",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Why a product or service is useful to a target customer"
+          "text": "Only the screen size"
         },
         {
           "id": "B",
-          "text": "Only the file name"
+          "text": "Why a product or service is useful to a target customer"
         },
         {
           "id": "C",
-          "text": "Only the founder age"
+          "text": "Only the file name"
         },
         {
           "id": "D",
-          "text": "Only the screen size"
+          "text": "Only the founder age"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Why a product or service is useful to a target customer",
       "marks": 1,
       "difficulty": "easy",

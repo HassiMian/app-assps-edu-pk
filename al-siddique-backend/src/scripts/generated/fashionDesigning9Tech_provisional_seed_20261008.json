@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Culture and lifestyle"
+          "text": "Only age of a building"
         },
         {
           "id": "B",
-          "text": "Only gravity"
+          "text": "Culture and lifestyle"
         },
         {
           "id": "C",
-          "text": "Only rainfall"
+          "text": "Only gravity"
         },
         {
           "id": "D",
-          "text": "Only age of a building"
+          "text": "Only rainfall"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Culture and lifestyle",
       "marks": 1,
       "difficulty": "easy",
@@ -162,22 +162,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Direction and movement"
-        },
-        {
-          "id": "B",
-          "text": "Chemical composition only"
-        },
-        {
-          "id": "C",
           "text": "Weight only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Temperature only"
+        },
+        {
+          "id": "C",
+          "text": "Direction and movement"
+        },
+        {
+          "id": "D",
+          "text": "Chemical composition only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Direction and movement",
       "marks": 1,
       "difficulty": "easy",
@@ -207,22 +207,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Relationships and effects of colours"
-        },
-        {
-          "id": "B",
           "text": "Only fabric price"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only sewing speed"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only body height"
+        },
+        {
+          "id": "D",
+          "text": "Relationships and effects of colours"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Relationships and effects of colours",
       "marks": 1,
       "difficulty": "easy",
@@ -353,22 +353,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Rhythm"
+          "text": "Only seam allowance"
         },
         {
           "id": "B",
-          "text": "Only weight"
+          "text": "Rhythm"
         },
         {
           "id": "C",
-          "text": "Only heat"
+          "text": "Only weight"
         },
         {
           "id": "D",
-          "text": "Only seam allowance"
+          "text": "Only heat"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Rhythm",
       "marks": 1,
       "difficulty": "easy",
@@ -454,22 +454,22 @@
       "options": [
         {
           "id": "A",
-          "text": "How culture, technology and society shaped clothing"
-        },
-        {
-          "id": "B",
-          "text": "Only modern brand names"
-        },
-        {
-          "id": "C",
           "text": "Only machine maintenance"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only garment prices"
+        },
+        {
+          "id": "C",
+          "text": "How culture, technology and society shaped clothing"
+        },
+        {
+          "id": "D",
+          "text": "Only modern brand names"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "How culture, technology and society shaped clothing",
       "marks": 1,
       "difficulty": "easy",
@@ -499,22 +499,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Indus Valley Civilization"
-        },
-        {
-          "id": "B",
           "text": "Roman Empire only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Industrial Revolution only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Modern Paris fashion week"
+        },
+        {
+          "id": "D",
+          "text": "Indus Valley Civilization"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Indus Valley Civilization",
       "marks": 1,
       "difficulty": "easy",
@@ -645,22 +645,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They can express regional heritage and design vocabulary"
+          "text": "They replace all materials"
         },
         {
           "id": "B",
-          "text": "They remove all need for design planning"
+          "text": "They can express regional heritage and design vocabulary"
         },
         {
           "id": "C",
-          "text": "They make every garment identical"
+          "text": "They remove all need for design planning"
         },
         {
           "id": "D",
-          "text": "They replace all materials"
+          "text": "They make every garment identical"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "They can express regional heritage and design vocabulary",
       "marks": 1,
       "difficulty": "easy",
@@ -746,22 +746,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Observation and proportion skills"
-        },
-        {
-          "id": "B",
-          "text": "Only fabric washing"
-        },
-        {
-          "id": "C",
           "text": "Only marketing"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only costing"
+        },
+        {
+          "id": "C",
+          "text": "Observation and proportion skills"
+        },
+        {
+          "id": "D",
+          "text": "Only fabric washing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Observation and proportion skills",
       "marks": 1,
       "difficulty": "easy",
@@ -791,22 +791,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Figure proportion and garment visualization"
-        },
-        {
-          "id": "B",
           "text": "Medical diagnosis"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Chemical testing"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Machine repair"
+        },
+        {
+          "id": "D",
+          "text": "Figure proportion and garment visualization"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Figure proportion and garment visualization",
       "marks": 1,
       "difficulty": "easy",
@@ -937,22 +937,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Garment design details"
+          "text": "Body measurements only"
         },
         {
           "id": "B",
-          "text": "Textile fibres"
+          "text": "Garment design details"
         },
         {
           "id": "C",
-          "text": "Marketing segments"
+          "text": "Textile fibres"
         },
         {
           "id": "D",
-          "text": "Body measurements only"
+          "text": "Marketing segments"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Garment design details",
       "marks": 1,
       "difficulty": "easy",
@@ -1038,22 +1038,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A natural fibre"
-        },
-        {
-          "id": "B",
-          "text": "A metal"
-        },
-        {
-          "id": "C",
           "text": "A ceramic"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A synthetic dye only"
+        },
+        {
+          "id": "C",
+          "text": "A natural fibre"
+        },
+        {
+          "id": "D",
+          "text": "A metal"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A natural fibre",
       "marks": 1,
       "difficulty": "easy",
@@ -1083,22 +1083,22 @@
       "options": [
         {
           "id": "A",
-          "text": "It influences properties such as comfort, drape and care"
-        },
-        {
-          "id": "B",
           "text": "It determines only the garment name"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "It has no effect"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "It changes body height"
+        },
+        {
+          "id": "D",
+          "text": "It influences properties such as comfort, drape and care"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "It influences properties such as comfort, drape and care",
       "marks": 1,
       "difficulty": "easy",
@@ -1229,22 +1229,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Shape and neaten fabric during construction"
+          "text": "Replace pattern planning"
         },
         {
           "id": "B",
-          "text": "Measure colour theory"
+          "text": "Shape and neaten fabric during construction"
         },
         {
           "id": "C",
-          "text": "Create fibre chemically"
+          "text": "Measure colour theory"
         },
         {
           "id": "D",
-          "text": "Replace pattern planning"
+          "text": "Create fibre chemically"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Shape and neaten fabric during construction",
       "marks": 1,
       "difficulty": "easy",

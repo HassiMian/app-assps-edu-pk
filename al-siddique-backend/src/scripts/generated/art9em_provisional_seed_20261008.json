@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use visual choices deliberately to support the intended idea"
+          "text": "Treat every material and technique as identical"
         },
         {
           "id": "B",
-          "text": "Ignore proportion, context and audience"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "C",
-          "text": "Copy an existing work exactly"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "D",
-          "text": "Treat every material and technique as identical"
+          "text": "Copy an existing work exactly"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use visual choices deliberately to support the intended idea"
-        },
-        {
-          "id": "B",
-          "text": "Ignore proportion, context and audience"
-        },
-        {
-          "id": "C",
           "text": "Copy an existing work exactly"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "C",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "D",
+          "text": "Ignore proportion, context and audience"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use visual choices deliberately to support the intended idea"
-        },
-        {
-          "id": "B",
           "text": "Ignore proportion, context and audience"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Copy an existing work exactly"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "D",
+          "text": "Use visual choices deliberately to support the intended idea"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use visual choices deliberately to support the intended idea"
+          "text": "Treat every material and technique as identical"
         },
         {
           "id": "B",
-          "text": "Ignore proportion, context and audience"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "C",
-          "text": "Copy an existing work exactly"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "D",
-          "text": "Treat every material and technique as identical"
+          "text": "Copy an existing work exactly"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use visual choices deliberately to support the intended idea"
-        },
-        {
-          "id": "B",
-          "text": "Ignore proportion, context and audience"
-        },
-        {
-          "id": "C",
           "text": "Copy an existing work exactly"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "C",
+          "text": "Use visual choices deliberately to support the intended idea"
+        },
+        {
+          "id": "D",
+          "text": "Ignore proportion, context and audience"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use visual choices deliberately to support the intended idea"
-        },
-        {
-          "id": "B",
           "text": "Ignore proportion, context and audience"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Copy an existing work exactly"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Treat every material and technique as identical"
+        },
+        {
+          "id": "D",
+          "text": "Use visual choices deliberately to support the intended idea"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",

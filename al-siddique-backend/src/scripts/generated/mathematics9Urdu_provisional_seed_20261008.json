@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "3"
+          "text": "1"
         },
         {
           "id": "B",
-          "text": "10"
+          "text": "3"
         },
         {
           "id": "C",
-          "text": "100"
+          "text": "10"
         },
         {
           "id": "D",
-          "text": "1"
+          "text": "100"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "3",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "{3}"
-        },
-        {
-          "id": "B",
-          "text": "{1,2,4}"
-        },
-        {
-          "id": "C",
           "text": "{1,2,3,4}"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "∅"
+        },
+        {
+          "id": "C",
+          "text": "{3}"
+        },
+        {
+          "id": "D",
+          "text": "{1,2,4}"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "{3}",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "(x−4)(x+4)"
-        },
-        {
-          "id": "B",
           "text": "(x−8)(x+2)"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "(x−4)²"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "x(x−16)"
+        },
+        {
+          "id": "D",
+          "text": "(x−4)(x+4)"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "(x−4)(x+4)",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "مقابل ضلع/وتر"
+          "text": "وتر/مقابل ضلع"
         },
         {
           "id": "B",
-          "text": "متصل ضلع/وتر"
+          "text": "مقابل ضلع/وتر"
         },
         {
           "id": "C",
-          "text": "مقابل ضلع/متصل ضلع"
+          "text": "متصل ضلع/وتر"
         },
         {
           "id": "D",
-          "text": "وتر/مقابل ضلع"
+          "text": "مقابل ضلع/متصل ضلع"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "مقابل ضلع/وتر",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "(0,0)"
-        },
-        {
-          "id": "B",
-          "text": "(1,0)"
-        },
-        {
-          "id": "C",
           "text": "(0,1)"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "(1,1)"
+        },
+        {
+          "id": "C",
+          "text": "(0,0)"
+        },
+        {
+          "id": "D",
+          "text": "(1,0)"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "(0,0)",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "جب p اور q دونوں true ہوں"
-        },
-        {
-          "id": "B",
           "text": "جب صرف ایک true ہو"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "جب دونوں false ہوں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "ہمیشہ true"
+        },
+        {
+          "id": "D",
+          "text": "جب p اور q دونوں true ہوں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "جب p اور q دونوں true ہوں",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "سیدھی line"
+          "text": "صرف hyperbola"
         },
         {
           "id": "B",
-          "text": "circle"
+          "text": "سیدھی line"
         },
         {
           "id": "C",
-          "text": "صرف parabola"
+          "text": "circle"
         },
         {
           "id": "D",
-          "text": "صرف hyperbola"
+          "text": "صرف parabola"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "سیدھی line",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں"
-        },
-        {
-          "id": "B",
-          "text": "صرف ایک endpoint کے قریب ہوتے ہیں"
-        },
-        {
-          "id": "C",
           "text": "ہمیشہ circle پر ہوتے ہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "کوئی خاصیت نہیں"
+        },
+        {
+          "id": "C",
+          "text": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں"
+        },
+        {
+          "id": "D",
+          "text": "صرف ایک endpoint کے قریب ہوتے ہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "وہ دونوں endpoints سے برابر فاصلے پر ہوتے ہیں",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "values کا مجموعہ/values کی تعداد"
-        },
-        {
-          "id": "B",
           "text": "صرف درمیانی value"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف سب سے زیادہ value"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "maximum−minimum"
+        },
+        {
+          "id": "D",
+          "text": "values کا مجموعہ/values کی تعداد"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "values کا مجموعہ/values کی تعداد",
       "marks": 1,
       "difficulty": "easy",

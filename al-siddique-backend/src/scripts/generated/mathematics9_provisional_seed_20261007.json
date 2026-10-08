@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Commutative property of addition"
+          "text": "Identity property"
         },
         {
           "id": "B",
-          "text": "Associative property"
+          "text": "Commutative property of addition"
         },
         {
           "id": "C",
-          "text": "Distributive property"
+          "text": "Associative property"
         },
         {
           "id": "D",
-          "text": "Identity property"
+          "text": "Distributive property"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Commutative property of addition",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "2"
-        },
-        {
-          "id": "B",
-          "text": "10"
-        },
-        {
-          "id": "C",
           "text": "100"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "1"
+        },
+        {
+          "id": "C",
+          "text": "2"
+        },
+        {
+          "id": "D",
+          "text": "10"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "2",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "log(ab)=log a + log b"
-        },
-        {
-          "id": "B",
           "text": "log(ab)=log a × log b"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "log(a/b)=log a + log b"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "log(a^n)=log a + n"
+        },
+        {
+          "id": "D",
+          "text": "log(ab)=log a + log b"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "log(ab)=log a + log b",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Exactly one"
+          "text": "Infinitely many only"
         },
         {
           "id": "B",
-          "text": "At least two"
+          "text": "Exactly one"
         },
         {
           "id": "C",
-          "text": "No outputs"
+          "text": "At least two"
         },
         {
           "id": "D",
-          "text": "Infinitely many only"
+          "text": "No outputs"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Exactly one",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "(x-3)(x+3)"
-        },
-        {
-          "id": "B",
-          "text": "(x-9)(x+1)"
-        },
-        {
-          "id": "C",
           "text": "(x-3)²"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "x(x-9)"
+        },
+        {
+          "id": "C",
+          "text": "(x-3)(x+3)"
+        },
+        {
+          "id": "D",
+          "text": "(x-9)(x+1)"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "(x-3)(x+3)",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "a²+2ab+b²"
-        },
-        {
-          "id": "B",
           "text": "a²+b²"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "a²-2ab+b²"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "2a+2b"
+        },
+        {
+          "id": "D",
+          "text": "a²+2ab+b²"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "a²+2ab+b²",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "x>3"
+          "text": "x<7"
         },
         {
           "id": "B",
-          "text": "x<3"
+          "text": "x>3"
         },
         {
           "id": "C",
-          "text": "x>7"
+          "text": "x<3"
         },
         {
           "id": "D",
-          "text": "x<7"
+          "text": "x>7"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "x>3",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "opposite/hypotenuse"
-        },
-        {
-          "id": "B",
-          "text": "adjacent/hypotenuse"
-        },
-        {
-          "id": "C",
           "text": "opposite/adjacent"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "hypotenuse/opposite"
+        },
+        {
+          "id": "C",
+          "text": "opposite/hypotenuse"
+        },
+        {
+          "id": "D",
+          "text": "adjacent/hypotenuse"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "opposite/hypotenuse",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "opposite/adjacent"
-        },
-        {
-          "id": "B",
           "text": "adjacent/opposite"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "hypotenuse/adjacent"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "opposite/hypotenuse"
+        },
+        {
+          "id": "D",
+          "text": "opposite/adjacent"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "opposite/adjacent",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "0"
+          "text": "-1"
         },
         {
           "id": "B",
-          "text": "1"
+          "text": "0"
         },
         {
           "id": "C",
-          "text": "undefined"
+          "text": "1"
         },
         {
           "id": "D",
-          "text": "-1"
+          "text": "undefined"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "0",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "p is not true"
-        },
-        {
-          "id": "B",
-          "text": "p and q"
-        },
-        {
-          "id": "C",
           "text": "p or q"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "p implies q"
+        },
+        {
+          "id": "C",
+          "text": "p is not true"
+        },
+        {
+          "id": "D",
+          "text": "p and q"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "p is not true",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Both p and q are true"
-        },
-        {
-          "id": "B",
           "text": "At least one is true"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Both are false only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "p is false"
+        },
+        {
+          "id": "D",
+          "text": "Both p and q are true"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Both p and q are true",
       "marks": 1,
       "difficulty": "easy",
@@ -1453,22 +1453,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Twice as large"
+          "text": "Four times as large"
         },
         {
           "id": "B",
-          "text": "Half as large"
+          "text": "Twice as large"
         },
         {
           "id": "C",
-          "text": "Unchanged"
+          "text": "Half as large"
         },
         {
           "id": "D",
-          "text": "Four times as large"
+          "text": "Unchanged"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Twice as large",
       "marks": 1,
       "difficulty": "easy",
@@ -1582,22 +1582,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Straight line"
-        },
-        {
-          "id": "B",
-          "text": "Circle"
-        },
-        {
-          "id": "C",
           "text": "Parabola only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Hyperbola only"
+        },
+        {
+          "id": "C",
+          "text": "Straight line"
+        },
+        {
+          "id": "D",
+          "text": "Circle"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Straight line",
       "marks": 1,
       "difficulty": "easy",
@@ -1627,22 +1627,22 @@
       "options": [
         {
           "id": "A",
-          "text": "5"
-        },
-        {
-          "id": "B",
           "text": "2"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "-5"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "0"
+        },
+        {
+          "id": "D",
+          "text": "5"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "5",
       "marks": 1,
       "difficulty": "easy",
@@ -1801,22 +1801,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Equidistant from its endpoints"
+          "text": "Never collinear"
         },
         {
           "id": "B",
-          "text": "Closer to one endpoint"
+          "text": "Equidistant from its endpoints"
         },
         {
           "id": "C",
-          "text": "Always on a circle"
+          "text": "Closer to one endpoint"
         },
         {
           "id": "D",
-          "text": "Never collinear"
+          "text": "Always on a circle"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Equidistant from its endpoints",
       "marks": 1,
       "difficulty": "easy",
@@ -1930,22 +1930,22 @@
       "options": [
         {
           "id": "A",
-          "text": "sum of values divided by number of values"
-        },
-        {
-          "id": "B",
-          "text": "middle value only"
-        },
-        {
-          "id": "C",
           "text": "most frequent value only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "largest minus smallest"
+        },
+        {
+          "id": "C",
+          "text": "sum of values divided by number of values"
+        },
+        {
+          "id": "D",
+          "text": "middle value only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "sum of values divided by number of values",
       "marks": 1,
       "difficulty": "easy",
@@ -1975,22 +1975,22 @@
       "options": [
         {
           "id": "A",
-          "text": "7"
-        },
-        {
-          "id": "B",
           "text": "4"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "9"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "6"
+        },
+        {
+          "id": "D",
+          "text": "7"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "7",
       "marks": 1,
       "difficulty": "easy",
@@ -2149,22 +2149,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1"
+          "text": "-1"
         },
         {
           "id": "B",
-          "text": "0"
+          "text": "1"
         },
         {
           "id": "C",
-          "text": "2"
+          "text": "0"
         },
         {
           "id": "D",
-          "text": "-1"
+          "text": "2"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "1",
       "marks": 1,
       "difficulty": "easy",

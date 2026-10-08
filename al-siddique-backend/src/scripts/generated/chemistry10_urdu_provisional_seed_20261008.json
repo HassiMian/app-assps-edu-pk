@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Reactants اور products"
+          "text": "صرف temperatures"
         },
         {
           "id": "B",
-          "text": "صرف colours"
+          "text": "Reactants اور products"
         },
         {
           "id": "C",
-          "text": "صرف densities"
+          "text": "صرف colours"
         },
         {
           "id": "D",
-          "text": "صرف temperatures"
+          "text": "صرف densities"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Reactants اور products",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Loss of electrons"
-        },
-        {
-          "id": "B",
-          "text": "Gain of electrons"
-        },
-        {
-          "id": "C",
           "text": "No electron change"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only dissolving"
+        },
+        {
+          "id": "C",
+          "text": "Loss of electrons"
+        },
+        {
+          "id": "D",
+          "text": "Gain of electrons"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Loss of electrons",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Lower activation-energy pathway فراہم کر کے"
-        },
-        {
-          "id": "B",
           "text": "Mass بڑھا کر"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Products ختم کر کے"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Temperature ہمیشہ صفر کر کے"
+        },
+        {
+          "id": "D",
+          "text": "Lower activation-energy pathway فراہم کر کے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Lower activation-energy pathway فراہم کر کے",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Proteins اور nucleic acids کی تیاری میں حصہ لیتا ہے"
+          "text": "کوئی biological role نہیں"
         },
         {
           "id": "B",
-          "text": "صرف bones بناتا ہے"
+          "text": "Proteins اور nucleic acids کی تیاری میں حصہ لیتا ہے"
         },
         {
           "id": "C",
-          "text": "صرف water بناتا ہے"
+          "text": "صرف bones بناتا ہے"
         },
         {
           "id": "D",
-          "text": "کوئی biological role نہیں"
+          "text": "صرف water بناتا ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Proteins اور nucleic acids کی تیاری میں حصہ لیتا ہے",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Calcium اور magnesium"
-        },
-        {
-          "id": "B",
-          "text": "صرف sodium"
-        },
-        {
-          "id": "C",
           "text": "صرف hydrogen"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف chloride molecules"
+        },
+        {
+          "id": "C",
+          "text": "Calcium اور magnesium"
+        },
+        {
+          "id": "D",
+          "text": "صرف sodium"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Calcium اور magnesium",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon"
-        },
-        {
-          "id": "B",
           "text": "Helium"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Neon"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Argon"
+        },
+        {
+          "id": "D",
+          "text": "Carbon"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Carbon",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "–OH"
+          "text": "C=C only"
         },
         {
           "id": "B",
-          "text": "–COOH"
+          "text": "–OH"
         },
         {
           "id": "C",
-          "text": "–NH2"
+          "text": "–COOH"
         },
         {
           "id": "D",
-          "text": "C=C only"
+          "text": "–NH2"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "–OH",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "–COOH"
-        },
-        {
-          "id": "B",
-          "text": "–OH only"
-        },
-        {
-          "id": "C",
           "text": "–NH2"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "–Cl"
+        },
+        {
+          "id": "C",
+          "text": "–COOH"
+        },
+        {
+          "id": "D",
+          "text": "–OH only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "–COOH",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Amino acids"
-        },
-        {
-          "id": "B",
           "text": "Fatty acids only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Nucleotides only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Mineral ions"
+        },
+        {
+          "id": "D",
+          "text": "Amino acids"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Amino acids",
       "marks": 1,
       "difficulty": "easy",

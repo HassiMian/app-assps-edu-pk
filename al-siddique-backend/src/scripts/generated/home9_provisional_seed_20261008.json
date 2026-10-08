@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "غذا اور غذائیت کے بنیادی تصورات اور صحت سے تعلق",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "food groups، quality، hygiene اور informed food choices"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "food groups، quality، hygiene اور informed food choices"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "food groups، quality، hygiene اور informed food choices",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول"
-        },
-        {
-          "id": "B",
           "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "D",
+          "text": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "محفوظ، صاف اور منظم food preparation کے بنیادی اصول",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "عمر کے ساتھ physical, social, emotional اور cognitive development میں تبدیلیاں",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "بچوں کے رویوں کو سمجھنے میں صبر، consistency اور age-appropriate guidance",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "خاندان، school اور community کے supportive کردار"
-        },
-        {
-          "id": "B",
           "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "D",
+          "text": "خاندان، school اور community کے supportive کردار"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "خاندان، school اور community کے supportive کردار",
       "marks": 1,
       "difficulty": "easy",

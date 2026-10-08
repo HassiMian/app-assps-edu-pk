@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "natural/synthetic fibres کی عمومی خصوصیات اور انتخاب",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "پاکستانی textile sector کا معاشی/روزگار کردار"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "پاکستانی textile sector کا معاشی/روزگار کردار"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "پاکستانی textile sector کا معاشی/روزگار کردار",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "fibres کی observable properties اور responsible identification"
-        },
-        {
-          "id": "B",
           "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "D",
+          "text": "fibres کی observable properties اور responsible identification"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "fibres کی observable properties اور responsible identification",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "pattern, colour, function اور design planning"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "pattern, colour, function اور design planning"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "pattern, colour, function اور design planning",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "comfort, purpose, climate, durability اور budget-aware selection"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "comfort, purpose, climate, durability اور budget-aware selection"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "comfort, purpose, climate, durability اور budget-aware selection",
       "marks": 1,
       "difficulty": "easy",

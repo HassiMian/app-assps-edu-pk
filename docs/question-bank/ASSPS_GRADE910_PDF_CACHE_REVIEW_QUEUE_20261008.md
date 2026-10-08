@@ -1,68 +1,139 @@
-# ASSPS Grade 9–10 official PDF cache review queue — 2026-10-08
+# ASSPS Grade IX/X PDF Source Cache Review Queue — 2026-10-08
 
-**State:** Source-file integrity audit only; no question academic approval or tenant transfer.
+> Source-integrity inventory only. Exact PDF hash matching does **not** grant academic approval or page/exercise verification.
 
-| Control | Verified |
-|---|---:|
-| Cached PDF files scanned | 32 |
-| Ledger catalog records | 111 |
-| Catalog records with expected PDF SHA-256 | 58 |
-| SHA-256-matched cached references | 22 |
-| Catalog records with expected SHA but file unavailable | 36 |
-| Catalog records without expected SHA | 53 |
-| Cached files without catalog hash match | 10 |
-| Questions academically approved by this audit | **0** |
+## Current cache truth
 
-## Priority source-review queue
+- Cached PDF files: **125**
+- Official manifest records: **111**
+- Records with an expected PDF hash: **108**
+- Exact cached hash matches: **108**
+- Known-hash sources still missing: **0**
+- Manifest records without a locked ledger hash: **3**
+- Local PDFs not yet matched by an exact manifest hash: **0**
+- Academic approvals granted by this audit: **0**
 
-A PDF signature plus exact hash verifies file identity only. It does **not** verify edition/page maps, exercise questions, correct answers, curriculum use rights or publication approval.
+## Exact-hash review queue
 
-| PECTAA ledger ID | Grade | Subject | Verified cache path | Chapter map | Exercise map |
-|---|---|---|---|---|---|
-| pectaa-catalog-009 | 9 | Biology | `official-verified/biology9-pectaa-009.pdf` | VERIFIED | PENDING |
-| pectaa-catalog-007 | 9 | Chemistry | `official-verified/chemistry9-pectaa-007.pdf` | VERIFIED | PENDING |
-| pectaa-catalog-039 | 9 | Agriculture Sciences-Tech | `tech9-theory/agri9em.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-040 | 9 | Agriculture Sciences-Tech | `tech9-theory/agri9ur.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-091 | 9 | Agriculture Sciences-Tech | `tech9/agri9em.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-092 | 9 | Agriculture Sciences-Tech | `tech9/agri9ur.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-104 | 9 | Akhlaqiat (Religious Minorities) | `akhlaqiat9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-030 | 9 | Biology-Tech | `tech9-theory/bio9ur.pdf` | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
-| pectaa-catalog-031 | 9 | Biology-Tech | `tech9-theory/bio9em.pdf` | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
-| pectaa-catalog-035 | 9 | Chemistry-Tech | `tech9-theory/chem9em.pdf` | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
-| pectaa-catalog-036 | 9 | Chemistry-Tech | `tech9-theory/chem9ur.pdf` | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
-| pectaa-catalog-105 | 9 | Christianity | `christianity9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-041 | 9 | Communication Skills & Personal Grooming-Tech | `tech9-theory/comms9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-095 | 9 | Communication Skills & Personal Grooming-Tech | `tech9/comms9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-033 | 9 | Computer Science & Entrepreneurship-Tech | `tech9-theory/compent9ur.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-034 | 9 | Computer Science & Entrepreneurship-Tech | `tech9-theory/compent9em.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-042 | 9 | Fashion Designing-Tech | `tech9/fashion9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-032 | 9 | General Science-Tech | `tech9-theory/gensci9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-038 | 9 | General Science-Tech | `tech9-theory/gensci9ur.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-093 | 9 | Health Sciences-Tech | `tech9/health9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-090 | 9 | Information & Communication Technologies-Tech | `tech9/ict9.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
-| pectaa-catalog-106 | 10 | Akhlaqiat (Religious Minorities) | `akhlaqiat10.pdf` | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| Record | Grade | Subject | Medium | Cached PDF(s) | Chapter status | Exercise status |
+|---|---:|---|---|---|---|---|
+| pectaa-catalog-002 | 9 | Islamiat | Urdu | 20261008/official-verified/pectaa-catalog-002.pdf | PENDING_FULL_CONTENT_VERIFICATION | PENDING |
+| pectaa-catalog-003 | 9 | Urdu | Urdu | 20261008/official-verified/pectaa-catalog-003.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-004 | 9 | English | English | 20261008/official-verified/pectaa-catalog-004.pdf | VERIFIED | PENDING |
+| pectaa-catalog-005 | 9 | Mathematics | English | 20261008/official-verified/pectaa-catalog-005.pdf | VERIFIED | PENDING |
+| pectaa-catalog-006 | 9 | Mathematics | Urdu | 20261008/official-verified/pectaa-catalog-006.pdf | PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-007 | 9 | Chemistry | English | 20261008/official-verified/chemistry9-pectaa-007.pdf | VERIFIED | PENDING |
+| pectaa-catalog-008 | 9 | Chemistry | Urdu | 20261008/official-verified/pectaa-catalog-008.pdf | PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-009 | 9 | Biology | English | 20261008/official-verified/biology9-pectaa-009.pdf | VERIFIED | PENDING |
+| pectaa-catalog-010 | 9 | Biology | Urdu | 20261008/official-verified/pectaa-catalog-010.pdf | PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-011 | 9 | Physics | English | 20261008/official-verified/pectaa-catalog-011.pdf | VERIFIED | PENDING |
+| pectaa-catalog-012 | 9 | Physics | Urdu | 20261008/official-verified/pectaa-catalog-012.pdf | PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-013 | 9 | Computer | English | 20261008/official-verified/pectaa-catalog-013.pdf | VERIFIED | PENDING |
+| pectaa-catalog-015 | 10 | Urdu | Urdu | 20261008/official-verified/pectaa-catalog-015.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-016 | 10 | English | English | 20261008/official-verified/pectaa-catalog-016.pdf | VERIFIED | PENDING |
+| pectaa-catalog-017 | 10 | Mathematics | English | 20261008/official-verified/pectaa-catalog-017.pdf | VERIFIED | PENDING |
+| pectaa-catalog-018 | 10 | Pakistan Studies | Urdu | 20261008/official-verified/pectaa-catalog-018.pdf | PARTIAL_VERIFIED_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGES_PENDING | PENDING |
+| pectaa-catalog-019 | 10 | Pakistan Studies | English | 20261008/official-verified/pectaa-catalog-019.pdf | VERIFIED | PENDING |
+| pectaa-catalog-020 | 10 | Biology | English | 20261008/official-verified/pectaa-catalog-020.pdf | VERIFIED | PENDING |
+| pectaa-catalog-021 | 10 | Biology | Urdu | 20261008/official-verified/pectaa-catalog-021.pdf | PENDING_FULL_CONTENT_VERIFICATION | PENDING |
+| pectaa-catalog-022 | 10 | Chemistry | Urdu | 20261008/official-verified/pectaa-catalog-022.pdf | PENDING_FULL_CONTENT_VERIFICATION | PENDING |
+| pectaa-catalog-023 | 10 | Physics | English | 20261008/official-verified-unhashed/pectaa-catalog-023.pdf | PENDING | PENDING |
+| pectaa-catalog-024 | 10 | Physics | English | 20261008/official-verified/pectaa-catalog-024.pdf | VERIFIED | PENDING |
+| pectaa-catalog-025 | 10 | Computer Science | Urdu | 20261008/official-verified/pectaa-catalog-025.pdf | PENDING_FULL_CONTENT_VERIFICATION | PENDING |
+| pectaa-catalog-026 | 0 | English Grammar and Composition | English | 20261008/official-verified/pectaa-catalog-026.pdf | PENDING_FULL_CONTENT_VERIFICATION | PENDING |
+| pectaa-catalog-027 | 0 | Urdu Quaid-e-Insha | Urdu | 20261008/official-verified/pectaa-catalog-107.pdf, 20261008/official-verified-unhashed/pectaa-catalog-027.pdf | PENDING | PENDING |
+| pectaa-catalog-028 | 0 | General Science | English | 20261008/official-verified-unhashed/pectaa-catalog-028.pdf | PENDING | PENDING |
+| pectaa-catalog-029 | 0 | General Science | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-029.pdf | PENDING | PENDING |
+| pectaa-catalog-030 | 9 | Biology-Tech | Urdu | 20261008/tech9-theory/bio9ur.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-031 | 9 | Biology-Tech | English | 20261008/tech9-theory/bio9em.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-032 | 9 | General Science-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9-theory/gensci9.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-033 | 9 | Computer Science & Entrepreneurship-Tech | Urdu | 20261008/tech9-theory/compent9ur.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-034 | 9 | Computer Science & Entrepreneurship-Tech | English | 20261008/tech9-theory/compent9em.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-035 | 9 | Chemistry-Tech | English | 20261008/tech9-theory/chem9em.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-036 | 9 | Chemistry-Tech | Urdu | 20261008/tech9-theory/chem9ur.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-038 | 9 | General Science-Tech | Urdu | 20261008/tech9-theory/gensci9ur.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-039 | 9 | Agriculture Sciences-Tech | English | 20261008/tech9-theory/agri9em.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-040 | 9 | Agriculture Sciences-Tech | Urdu | 20261008/tech9-theory/agri9ur.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-041 | 9 | Communication Skills & Personal Grooming-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9-theory/comms9.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-042 | 9 | Fashion Designing-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9/fashion9.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-043 | 9 | Information & Communication Technologies-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9-next/ict9.pdf | PENDING | PENDING |
+| pectaa-catalog-044 | 9 | Health Sciences-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9-next/health9.pdf | PENDING | PENDING |
+| pectaa-catalog-045 | 9 | Physics-Tech | English | 20261008/physics-tech9-em.pdf, 20261008/tech9-next/phys9em.pdf | PENDING | PENDING |
+| pectaa-catalog-046 | 9 | Physics-Tech | Urdu | 20261008/physics-tech9-ur.pdf, 20261008/tech9-next/phys9ur.pdf | PENDING | PENDING |
+| pectaa-catalog-047 | 10 | Chemistry-Tech | English | 20261008/tech10-science/chem10em.pdf | PENDING | PENDING |
+| pectaa-catalog-048 | 10 | Chemistry-Tech | Urdu | 20261008/tech10-science/chem10ur.pdf | PENDING | PENDING |
+| pectaa-catalog-049 | 10 | Communication Skills & Personal Grooming-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-049.pdf | PENDING | PENDING |
+| pectaa-catalog-050 | 10 | Computer-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-050.pdf | PENDING | PENDING |
+| pectaa-catalog-051 | 10 | Computer (Matric-Tech catalog identity) | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-051.pdf | PENDING | PENDING |
+| pectaa-catalog-052 | 10 | Computer Science-Tech | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-052.pdf | PENDING | PENDING |
+| pectaa-catalog-053 | 10 | Fashion Designing-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-053.pdf | PENDING | PENDING |
+| pectaa-catalog-054 | 10 | Health Sciences-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-054.pdf | PENDING | PENDING |
+| pectaa-catalog-055 | 10 | Information & Communication Technologies-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-055.pdf | PENDING | PENDING |
+| pectaa-catalog-056 | 10 | Physics-Tech | Urdu | 20261008/tech10-science/phys10ur.pdf | PENDING | PENDING |
+| pectaa-catalog-057 | 10 | Physics-Tech | English | 20261008/tech10-science/phys10em.pdf | PENDING | PENDING |
+| pectaa-catalog-058 | 10 | General Science-Tech | English | 20261008/official-verified-unhashed/pectaa-catalog-058.pdf | PENDING | PENDING |
+| pectaa-catalog-059 | 10 | General Science-Tech | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-059.pdf | PENDING | PENDING |
+| pectaa-catalog-060 | 10 | Agriculture Sciences-Tech | English | 20261008/official-verified-unhashed/pectaa-catalog-060.pdf | PENDING | PENDING |
+| pectaa-catalog-061 | 10 | Agriculture Sciences-Tech | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-061.pdf | PENDING | PENDING |
+| pectaa-catalog-062 | 10 | Biology-Tech | English | 20261008/official-verified-unhashed/pectaa-catalog-062.pdf | PENDING | PENDING |
+| pectaa-catalog-063 | 10 | Biology-Tech | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-063.pdf | PENDING | PENDING |
+| pectaa-catalog-064 | 9 | Ghiza aur Ghizayat | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/g9food.pdf, 20261008-electives/g9-ghiza.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-065 | 9 | Art & Model Drawing | English | 20261008/g9artem.pdf, 20261008-electives/g9-art-em.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-066 | 9 | Home Economics | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/g9home.pdf, 20261008-electives/g9-homeeco.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-067 | 9 | Parcha Bafi (Textile and Clothing) | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/g9textile.pdf, 20261008-electives/g9-parcha.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-068 | 9 | Art & Model Drawing | Urdu | 20261008/g9artum.pdf, 20261008-electives/g9-art-um.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-069 | 10 | Ghiza aur Ghizayat | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/g10food.pdf, 20261008-electives/g10-ghiza.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-070 | 10 | Parcha Bafi (Textile and Clothing) | UNSPECIFIED_BY_CATALOG_LABEL | 20261008-electives/g10-parcha.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-071 | 10 | Art & Model Drawing | Urdu | 20261008/g10artum.pdf, 20261008-electives/g10-art-um.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-072 | 10 | Art & Model Drawing | English | 20261008/g10artem.pdf, 20261008-electives/g10-art-em.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-073 | 10 | Home Economics | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/g10home.pdf, 20261008-electives/g10-homeeco.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
+| pectaa-catalog-074 | 0 | Farsi | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/farsi910.pdf | PENDING | PENDING |
+| pectaa-catalog-075 | 0 | Economics | Urdu | 20261008/econum910.pdf | PENDING | PENDING |
+| pectaa-catalog-076 | 0 | Economics | English | 20261008/econem910.pdf | PENDING | PENDING |
+| pectaa-catalog-077 | 0 | Punjabi Ikhtari | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/punjabi910.pdf | PENDING | PENDING |
+| pectaa-catalog-078 | 0 | Zari Pedawar Workbook | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/zari910.pdf | PENDING | PENDING |
+| pectaa-catalog-079 | 0 | Health & Physical Education | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/hpe910.pdf | PENDING | PENDING |
+| pectaa-catalog-080 | 0 | Education | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/education910.pdf | PENDING | PENDING |
+| pectaa-catalog-081 | 0 | Civics | Urdu | 20261008/civicsum910.pdf | PENDING | PENDING |
+| pectaa-catalog-082 | 9 | Computer Science | English | 20261008/official-verified-unhashed/pectaa-catalog-082.pdf | PENDING | PENDING |
+| pectaa-catalog-083 | 9 | Computer Science | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-083.pdf | PENDING | PENDING |
+| pectaa-catalog-084 | 9 | Biology | English | 20261008/official-verified-unhashed/pectaa-catalog-084.pdf | PENDING | PENDING |
+| pectaa-catalog-085 | 9 | Biology | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-085.pdf | PENDING | PENDING |
+| pectaa-catalog-086 | 9 | Chemistry | English | 20261008/official-verified-unhashed/pectaa-catalog-086.pdf | PENDING | PENDING |
+| pectaa-catalog-087 | 9 | Chemistry | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-087.pdf | PENDING | PENDING |
+| pectaa-catalog-088 | 9 | Physics | English | 20261008/official-verified-unhashed/pectaa-catalog-088.pdf | PENDING | PENDING |
+| pectaa-catalog-089 | 9 | Physics | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-089.pdf | PENDING | PENDING |
+| pectaa-catalog-090 | 9 | Information & Communication Technologies-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9/ict9.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-091 | 9 | Agriculture Sciences-Tech | English | 20261008/tech9/agri9em.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-092 | 9 | Agriculture Sciences-Tech | Urdu | 20261008/tech9/agri9ur.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-093 | 9 | Health Sciences-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9/health9.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-094 | 9 | Biology Practical Notebook (catalog track unresolved) | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/official-verified-unhashed/pectaa-catalog-094.pdf | PENDING | PENDING |
+| pectaa-catalog-095 | 9 | Communication Skills & Personal Grooming-Tech | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/tech9/comms9.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-096 | 10 | Computer Science | English | 20261008/official-verified-unhashed/pectaa-catalog-096.pdf | PENDING | PENDING |
+| pectaa-catalog-097 | 10 | Computer Science | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-097.pdf | PENDING | PENDING |
+| pectaa-catalog-098 | 10 | Biology | English | 20261008/official-verified-unhashed/pectaa-catalog-098.pdf | PENDING | PENDING |
+| pectaa-catalog-099 | 10 | Biology | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-099.pdf | PENDING | PENDING |
+| pectaa-catalog-100 | 10 | Chemistry | English | 20261008/official-verified-unhashed/pectaa-catalog-100.pdf | PENDING | PENDING |
+| pectaa-catalog-101 | 10 | Chemistry | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-101.pdf | PENDING | PENDING |
+| pectaa-catalog-102 | 10 | Physics | English | 20261008/official-verified-unhashed/pectaa-catalog-102.pdf | PENDING | PENDING |
+| pectaa-catalog-103 | 10 | Physics | Urdu | 20261008/official-verified-unhashed/pectaa-catalog-103.pdf | PENDING | PENDING |
+| pectaa-catalog-104 | 9 | Akhlaqiat (Religious Minorities) | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/akhl9.pdf, 20261008/akhlaqiat9.pdf, 20261008-electives/g9-akhlaqiat-minorities.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-105 | 9 | Christianity | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/christ9.pdf, 20261008/christianity9.pdf, 20261008-electives/g9-christianity.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-106 | 10 | Akhlaqiat (Religious Minorities) | UNSPECIFIED_BY_CATALOG_LABEL | 20261008/akhl10.pdf, 20261008/akhlaqiat10.pdf, 20261008-electives/g10-akhlaqiat-minorities.pdf | PENDING_VERIFIED_CONTENT_MAP | PENDING |
+| pectaa-catalog-107 | 0 | Urdu Quaid-e-Insha | Urdu | 20261008/official-verified/pectaa-catalog-107.pdf, 20261008/official-verified-unhashed/pectaa-catalog-027.pdf | PENDING | PENDING |
+| pectaa-recovered-chemistry10-en-2026 | 10 | Chemistry | English | 20261008/official-verified/pectaa-recovered-chemistry10-en-2026.pdf | VERIFIED | PENDING |
+| pectaa-recovered-computer10-en-2026 | 10 | Computer Science | English | 20261008/official-verified/pectaa-recovered-computer10-en-2026.pdf | PARTIAL_VERIFIED_UNIT_TITLES_CHAPTER_PAGES_PENDING | PENDING |
+| pectaa-recovered-tarjuma9-2026 | 9 | Tarjuma-tul-Quran | Urdu | 20261008/official-verified/pectaa-recovered-tarjuma9-2026.pdf | PARTIAL_VERIFIED_SURAH_SEQUENCE_AYAH_RANGES_PENDING | PENDING |
+| pectaa-recovered-tarjuma10-current | 10 | Tarjuma-tul-Quran | Urdu | 20261008/official-verified/pectaa-recovered-tarjuma10-current.pdf | PARTIAL_VERIFIED_SURAH_SEQUENCE_AYAH_RANGES_PENDING | PENDING |
 
-## Missing known-hash catalog sources
+## Missing known-hash sources
 
-pectaa-catalog-002, pectaa-catalog-003, pectaa-catalog-004, pectaa-catalog-005, pectaa-catalog-006, pectaa-catalog-008, pectaa-catalog-010, pectaa-catalog-011, pectaa-catalog-012, pectaa-catalog-013, pectaa-catalog-015, pectaa-catalog-016, pectaa-catalog-017, pectaa-catalog-018, pectaa-catalog-019, pectaa-catalog-020, pectaa-catalog-021, pectaa-catalog-022, pectaa-catalog-024, pectaa-catalog-025, pectaa-catalog-026, pectaa-catalog-064, pectaa-catalog-065, pectaa-catalog-066, pectaa-catalog-067, pectaa-catalog-068, pectaa-catalog-069, pectaa-catalog-070, pectaa-catalog-071, pectaa-catalog-072, pectaa-catalog-073, pectaa-catalog-107, pectaa-recovered-chemistry10-en-2026, pectaa-recovered-computer10-en-2026, pectaa-recovered-tarjuma9-2026, pectaa-recovered-tarjuma10-current
+- None
 
-## Mandatory academic gate for each source
+## Unmatched local PDFs
 
-1. Confirm authorized/current school curriculum textbook edition and printed chapter map.
-2. Record source PDF SHA, page number, chapter/exercise identity and question provenance.
-3. Independently check answer/MCQ-key accuracy, Urdu/English medium alignment and duplication.
-4. Complete academic editorial approval in the appropriate governed tenant, never an unreviewed seed autoapproval.
-5. Repeat teacher-assignment, PaperDocument/ScoringPlan and end-to-end print checks before enabling auto-selection.
+- None
 
-**Do not approve or move provisional questions solely because the source PDF hash matches.**
+## Safety rule
 
-## Core Grade 9 official book text-layer check
-
-The two core, hash-verified Biology 9 and Chemistry 9 English source PDFs were inspected non-destructively with PDFium:
-
-| Catalog record | PDF pages | Text-layer sampling (first 10 pages) | Implication |
-|---|---:|---|---|
-| `pectaa-catalog-009` Biology 9 English | 180 | 0 extracted characters | Image-only in sampled pages; chapter/exercise mapping cannot safely be inferred from text extraction |
-| `pectaa-catalog-007` Chemistry 9 English | 192 | Only short page-number/`Not for sale PCTB` overlay | Main textbook body is not reliably text-extractable in sampled pages |
-
-Source-content transcription or OCR output must be independently checked against page images and edition. **No generated questions were academically approved on the basis of these partial text-layer checks.**
+Do not infer catalog identity from a filename. A local PDF remains unmatched until its exact hash is tied to a verified manifest record. Hash agreement alone still does not verify the printed chapter/page/exercise map or answer correctness.

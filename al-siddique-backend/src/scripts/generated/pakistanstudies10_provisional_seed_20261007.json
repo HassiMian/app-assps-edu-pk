@@ -60,22 +60,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Muslims and Hindus of British India"
+          "text": "Mountains and plains"
         },
         {
           "id": "B",
-          "text": "Farmers and traders"
+          "text": "Muslims and Hindus of British India"
         },
         {
           "id": "C",
-          "text": "Cities and villages"
+          "text": "Farmers and traders"
         },
         {
           "id": "D",
-          "text": "Mountains and plains"
+          "text": "Cities and villages"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Muslims and Hindus of British India",
       "marks": 1,
       "difficulty": "easy",
@@ -185,22 +185,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1940"
-        },
-        {
-          "id": "B",
-          "text": "1930"
-        },
-        {
-          "id": "C",
           "text": "1947"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "1956"
+        },
+        {
+          "id": "C",
+          "text": "1940"
+        },
+        {
+          "id": "D",
+          "text": "1930"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "1940",
       "marks": 1,
       "difficulty": "easy",
@@ -229,22 +229,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Muhammad Ali Jinnah"
-        },
-        {
-          "id": "B",
           "text": "Sir Syed Ahmad Khan"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Allama Iqbal only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Liaquat Ali Khan alone"
+        },
+        {
+          "id": "D",
+          "text": "Muhammad Ali Jinnah"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Muhammad Ali Jinnah",
       "marks": 1,
       "difficulty": "easy",
@@ -398,22 +398,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1973"
+          "text": "1949"
         },
         {
           "id": "B",
-          "text": "1956"
+          "text": "1973"
         },
         {
           "id": "C",
-          "text": "1962"
+          "text": "1956"
         },
         {
           "id": "D",
-          "text": "1949"
+          "text": "1962"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "1973",
       "marks": 1,
       "difficulty": "easy",
@@ -523,22 +523,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Irrigation and agriculture"
-        },
-        {
-          "id": "B",
-          "text": "Ocean tides only"
-        },
-        {
-          "id": "C",
           "text": "Volcanic activity"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Polar transport"
+        },
+        {
+          "id": "C",
+          "text": "Irrigation and agriculture"
+        },
+        {
+          "id": "D",
+          "text": "Ocean tides only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Irrigation and agriculture",
       "marks": 1,
       "difficulty": "easy",
@@ -567,22 +567,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Arabian Sea"
-        },
-        {
-          "id": "B",
           "text": "Red Sea"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Mediterranean Sea"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Black Sea"
+        },
+        {
+          "id": "D",
+          "text": "Arabian Sea"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Arabian Sea",
       "marks": 1,
       "difficulty": "easy",
@@ -736,22 +736,22 @@
       "options": [
         {
           "id": "A",
-          "text": "United Nations"
+          "text": "Arctic Council only"
         },
         {
           "id": "B",
-          "text": "European Union"
+          "text": "United Nations"
         },
         {
           "id": "C",
-          "text": "ASEAN only"
+          "text": "European Union"
         },
         {
           "id": "D",
-          "text": "Arctic Council only"
+          "text": "ASEAN only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "United Nations",
       "marks": 1,
       "difficulty": "easy",
@@ -861,22 +861,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Solar energy"
-        },
-        {
-          "id": "B",
-          "text": "Natural gas"
-        },
-        {
-          "id": "C",
           "text": "Coal"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Metal ore"
+        },
+        {
+          "id": "C",
+          "text": "Solar energy"
+        },
+        {
+          "id": "D",
+          "text": "Natural gas"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Solar energy",
       "marks": 1,
       "difficulty": "easy",
@@ -905,22 +905,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Primary sector"
-        },
-        {
-          "id": "B",
           "text": "Secondary sector"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Tertiary sector only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Quaternary sector only"
+        },
+        {
+          "id": "D",
+          "text": "Primary sector"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Primary sector",
       "marks": 1,
       "difficulty": "easy",
@@ -1074,22 +1074,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Languages, traditions and regional practices"
+          "text": "Currency notes only"
         },
         {
           "id": "B",
-          "text": "Gravity only"
+          "text": "Languages, traditions and regional practices"
         },
         {
           "id": "C",
-          "text": "Latitude only"
+          "text": "Gravity only"
         },
         {
           "id": "D",
-          "text": "Currency notes only"
+          "text": "Latitude only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Languages, traditions and regional practices",
       "marks": 1,
       "difficulty": "easy",
@@ -1199,22 +1199,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Education, health, economic and civic opportunities"
-        },
-        {
-          "id": "B",
-          "text": "Only household chores"
-        },
-        {
-          "id": "C",
           "text": "Only one occupation"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "No decision-making role"
+        },
+        {
+          "id": "C",
+          "text": "Education, health, economic and civic opportunities"
+        },
+        {
+          "id": "D",
+          "text": "Only household chores"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Education, health, economic and civic opportunities",
       "marks": 1,
       "difficulty": "easy",
@@ -1243,22 +1243,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Broader social and economic development"
-        },
-        {
-          "id": "B",
           "text": "Lower skill levels by definition"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Less human capital"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "No effect on society"
+        },
+        {
+          "id": "D",
+          "text": "Broader social and economic development"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Broader social and economic development",
       "marks": 1,
       "difficulty": "easy",

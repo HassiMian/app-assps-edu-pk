@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Proton"
+          "text": "Photon"
         },
         {
           "id": "B",
-          "text": "Electron"
+          "text": "Proton"
         },
         {
           "id": "C",
-          "text": "Neutron"
+          "text": "Electron"
         },
         {
           "id": "D",
-          "text": "Photon"
+          "text": "Neutron"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Proton",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electron transfer and attraction between oppositely charged ions"
-        },
-        {
-          "id": "B",
-          "text": "Proton sharing"
-        },
-        {
-          "id": "C",
           "text": "Neutron transfer"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "No particle interaction"
+        },
+        {
+          "id": "C",
+          "text": "Electron transfer and attraction between oppositely charged ions"
+        },
+        {
+          "id": "D",
+          "text": "Proton sharing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Electron transfer and attraction between oppositely charged ions",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "6.02×10^23 particles"
-        },
-        {
-          "id": "B",
           "text": "6.02×10^3 particles"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "3×10^8 particles"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "9.8 particles"
+        },
+        {
+          "id": "D",
+          "text": "6.02×10^23 particles"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "6.02×10^23 particles",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Forward and reverse reaction rates"
+          "text": "Temperature is always zero"
         },
         {
           "id": "B",
-          "text": "All concentrations are zero"
+          "text": "Forward and reverse reaction rates"
         },
         {
           "id": "C",
-          "text": "All masses are identical"
+          "text": "All concentrations are zero"
         },
         {
           "id": "D",
-          "text": "Temperature is always zero"
+          "text": "All masses are identical"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Forward and reverse reaction rates",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Below 7"
-        },
-        {
-          "id": "B",
-          "text": "Above 7 only"
-        },
-        {
-          "id": "C",
           "text": "Exactly 14"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Always 7"
+        },
+        {
+          "id": "C",
+          "text": "Below 7"
+        },
+        {
+          "id": "D",
+          "text": "Above 7 only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Below 7",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Group"
-        },
-        {
-          "id": "B",
           "text": "Period"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Isotope"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Bond"
+        },
+        {
+          "id": "D",
+          "text": "Group"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Group",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Enhanced greenhouse effect"
+          "text": "Nuclear decay"
         },
         {
           "id": "B",
-          "text": "Only water hardness"
+          "text": "Enhanced greenhouse effect"
         },
         {
           "id": "C",
-          "text": "Ionic bonding"
+          "text": "Only water hardness"
         },
         {
           "id": "D",
-          "text": "Nuclear decay"
+          "text": "Ionic bonding"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Enhanced greenhouse effect",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon and hydrogen"
-        },
-        {
-          "id": "B",
-          "text": "Carbon and oxygen only"
-        },
-        {
-          "id": "C",
           "text": "Hydrogen and nitrogen only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "All elements"
+        },
+        {
+          "id": "C",
+          "text": "Carbon and hydrogen"
+        },
+        {
+          "id": "D",
+          "text": "Carbon and oxygen only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Carbon and hydrogen",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Estimate random variation and improve reliability"
-        },
-        {
-          "id": "B",
           "text": "Remove the need for units"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Guarantee no error"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Hide data"
+        },
+        {
+          "id": "D",
+          "text": "Estimate random variation and improve reliability"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Estimate random variation and improve reliability",
       "marks": 1,
       "difficulty": "easy",

@@ -173,22 +173,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
+          "text": "A copied phrase used without context"
         },
         {
           "id": "B",
-          "text": "A random statement unrelated to the topic"
+          "text": "A clear idea supported by relevant evidence"
         },
         {
           "id": "C",
-          "text": "A sentence with no understandable meaning"
+          "text": "A random statement unrelated to the topic"
         },
         {
           "id": "D",
-          "text": "A copied phrase used without context"
+          "text": "A sentence with no understandable meaning"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",
@@ -330,22 +330,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
-        },
-        {
-          "id": "B",
-          "text": "A random statement unrelated to the topic"
-        },
-        {
-          "id": "C",
           "text": "A sentence with no understandable meaning"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A copied phrase used without context"
+        },
+        {
+          "id": "C",
+          "text": "A clear idea supported by relevant evidence"
+        },
+        {
+          "id": "D",
+          "text": "A random statement unrelated to the topic"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",
@@ -487,22 +487,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
-        },
-        {
-          "id": "B",
           "text": "A random statement unrelated to the topic"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "A sentence with no understandable meaning"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "A copied phrase used without context"
+        },
+        {
+          "id": "D",
+          "text": "A clear idea supported by relevant evidence"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",
@@ -801,22 +801,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
+          "text": "A copied phrase used without context"
         },
         {
           "id": "B",
-          "text": "A random statement unrelated to the topic"
+          "text": "A clear idea supported by relevant evidence"
         },
         {
           "id": "C",
-          "text": "A sentence with no understandable meaning"
+          "text": "A random statement unrelated to the topic"
         },
         {
           "id": "D",
-          "text": "A copied phrase used without context"
+          "text": "A sentence with no understandable meaning"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",
@@ -958,22 +958,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
-        },
-        {
-          "id": "B",
-          "text": "A random statement unrelated to the topic"
-        },
-        {
-          "id": "C",
           "text": "A sentence with no understandable meaning"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A copied phrase used without context"
+        },
+        {
+          "id": "C",
+          "text": "A clear idea supported by relevant evidence"
+        },
+        {
+          "id": "D",
+          "text": "A random statement unrelated to the topic"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",
@@ -1115,22 +1115,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
-        },
-        {
-          "id": "B",
           "text": "A random statement unrelated to the topic"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "A sentence with no understandable meaning"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "A copied phrase used without context"
+        },
+        {
+          "id": "D",
+          "text": "A clear idea supported by relevant evidence"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",
@@ -1429,22 +1429,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A clear idea supported by relevant evidence"
+          "text": "A copied phrase used without context"
         },
         {
           "id": "B",
-          "text": "A random statement unrelated to the topic"
+          "text": "A clear idea supported by relevant evidence"
         },
         {
           "id": "C",
-          "text": "A sentence with no understandable meaning"
+          "text": "A random statement unrelated to the topic"
         },
         {
           "id": "D",
-          "text": "A copied phrase used without context"
+          "text": "A sentence with no understandable meaning"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A clear idea supported by relevant evidence",
       "marks": 1,
       "difficulty": "easy",

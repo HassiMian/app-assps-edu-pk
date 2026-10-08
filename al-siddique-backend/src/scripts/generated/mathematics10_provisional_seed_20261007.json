@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "3"
+          "text": "-3"
         },
         {
           "id": "B",
-          "text": "-4"
+          "text": "3"
         },
         {
           "id": "C",
-          "text": "4"
+          "text": "-4"
         },
         {
           "id": "D",
-          "text": "-3"
+          "text": "4"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "3",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "x²-5x+6=0"
-        },
-        {
-          "id": "B",
-          "text": "2x+1=0"
-        },
-        {
-          "id": "C",
           "text": "1/x=2"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "x³=1"
+        },
+        {
+          "id": "C",
+          "text": "x²-5x+6=0"
+        },
+        {
+          "id": "D",
+          "text": "2x+1=0"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "x²-5x+6=0",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "b²-4ac"
-        },
-        {
-          "id": "B",
           "text": "b²+4ac"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "2a+b"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "a²-c²"
+        },
+        {
+          "id": "D",
+          "text": "b²-4ac"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "b²-4ac",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "ad-bc"
+          "text": "a+b+c+d"
         },
         {
           "id": "B",
-          "text": "ab-cd"
+          "text": "ad-bc"
         },
         {
           "id": "C",
-          "text": "ac-bd"
+          "text": "ab-cd"
         },
         {
           "id": "D",
-          "text": "a+b+c+d"
+          "text": "ac-bd"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "ad-bc",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "f(g(x))"
-        },
-        {
-          "id": "B",
-          "text": "g(f(x)) only"
-        },
-        {
-          "id": "C",
           "text": "f(x)+g(x)"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "f(x)g(x) always"
+        },
+        {
+          "id": "C",
+          "text": "f(g(x))"
+        },
+        {
+          "id": "D",
+          "text": "g(f(x)) only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "f(g(x))",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "x"
-        },
-        {
-          "id": "B",
           "text": "0"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "1"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "f(x)"
+        },
+        {
+          "id": "D",
+          "text": "x"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "x",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A common denominator"
+          "text": "A tangent"
         },
         {
           "id": "B",
-          "text": "A square root"
+          "text": "A common denominator"
         },
         {
           "id": "C",
-          "text": "A determinant"
+          "text": "A square root"
         },
         {
           "id": "D",
-          "text": "A tangent"
+          "text": "A determinant"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A common denominator",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "5"
-        },
-        {
-          "id": "B",
-          "text": "7"
-        },
-        {
-          "id": "C",
           "text": "1"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "12"
+        },
+        {
+          "id": "C",
+          "text": "5"
+        },
+        {
+          "id": "D",
+          "text": "7"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "5",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Adding corresponding components"
-        },
-        {
-          "id": "B",
           "text": "Multiplying magnitudes only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Ignoring direction"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Subtracting every component"
+        },
+        {
+          "id": "D",
+          "text": "Adding corresponding components"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Adding corresponding components",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "sinθ/cosθ"
+          "text": "1/cosθ"
         },
         {
           "id": "B",
-          "text": "cosθ/sinθ"
+          "text": "sinθ/cosθ"
         },
         {
           "id": "C",
-          "text": "1/sinθ"
+          "text": "cosθ/sinθ"
         },
         {
           "id": "D",
-          "text": "1/cosθ"
+          "text": "1/sinθ"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "sinθ/cosθ",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Two points on a circle"
-        },
-        {
-          "id": "B",
-          "text": "The centre to any point only"
-        },
-        {
-          "id": "C",
           "text": "Two external points only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A tangent and radius"
+        },
+        {
+          "id": "C",
+          "text": "Two points on a circle"
+        },
+        {
+          "id": "D",
+          "text": "The centre to any point only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Two points on a circle",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Equal angles at the centre"
-        },
-        {
-          "id": "B",
           "text": "Unequal angles always"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Right angles only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "No angles"
+        },
+        {
+          "id": "D",
+          "text": "Equal angles at the centre"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Equal angles at the centre",
       "marks": 1,
       "difficulty": "easy",
@@ -1453,22 +1453,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Equal lengths"
+          "text": "No measurable relation"
         },
         {
           "id": "B",
-          "text": "Always unequal lengths"
+          "text": "Equal lengths"
         },
         {
           "id": "C",
-          "text": "Zero length"
+          "text": "Always unequal lengths"
         },
         {
           "id": "D",
-          "text": "No measurable relation"
+          "text": "Zero length"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Equal lengths",
       "marks": 1,
       "difficulty": "easy",
@@ -1582,22 +1582,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Perpendicular bisectors of two joining segments"
-        },
-        {
-          "id": "B",
-          "text": "Angle bisectors only"
-        },
-        {
-          "id": "C",
           "text": "Tangents only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Any medians"
+        },
+        {
+          "id": "C",
+          "text": "Perpendicular bisectors of two joining segments"
+        },
+        {
+          "id": "D",
+          "text": "Angle bisectors only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Perpendicular bisectors of two joining segments",
       "marks": 1,
       "difficulty": "easy",
@@ -1627,22 +1627,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Radius OA"
-        },
-        {
-          "id": "B",
           "text": "Any chord not through A"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Diameter elsewhere"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "An arbitrary secant"
+        },
+        {
+          "id": "D",
+          "text": "Radius OA"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Radius OA",
       "marks": 1,
       "difficulty": "easy",
@@ -1801,22 +1801,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Spread between maximum and minimum"
+          "text": "Graph slope"
         },
         {
           "id": "B",
-          "text": "Middle value only"
+          "text": "Spread between maximum and minimum"
         },
         {
           "id": "C",
-          "text": "Most frequent value only"
+          "text": "Middle value only"
         },
         {
           "id": "D",
-          "text": "Graph slope"
+          "text": "Most frequent value only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Spread between maximum and minimum",
       "marks": 1,
       "difficulty": "easy",
@@ -1930,22 +1930,22 @@
       "options": [
         {
           "id": "A",
-          "text": "0 and 1 inclusive"
-        },
-        {
-          "id": "B",
-          "text": "-1 and 1 only"
-        },
-        {
-          "id": "C",
           "text": "1 and 10"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Any real numbers"
+        },
+        {
+          "id": "C",
+          "text": "0 and 1 inclusive"
+        },
+        {
+          "id": "D",
+          "text": "-1 and 1 only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "0 and 1 inclusive",
       "marks": 1,
       "difficulty": "easy",
@@ -1975,22 +1975,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1"
-        },
-        {
-          "id": "B",
           "text": "0"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "2"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "P(A)²"
+        },
+        {
+          "id": "D",
+          "text": "1"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "1",
       "marks": 1,
       "difficulty": "easy",

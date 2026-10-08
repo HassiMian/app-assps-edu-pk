@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A testable proposed explanation"
+          "text": "A measurement unit"
         },
         {
           "id": "B",
-          "text": "A permanent scientific law"
+          "text": "A testable proposed explanation"
         },
         {
           "id": "C",
-          "text": "A random guess that cannot be tested"
+          "text": "A permanent scientific law"
         },
         {
           "id": "D",
-          "text": "A measurement unit"
+          "text": "A random guess that cannot be tested"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A testable proposed explanation",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Species"
-        },
-        {
-          "id": "B",
-          "text": "Family"
-        },
-        {
-          "id": "C",
           "text": "Order"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Class"
+        },
+        {
+          "id": "C",
+          "text": "Species"
+        },
+        {
+          "id": "D",
+          "text": "Family"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Species",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Two"
-        },
-        {
-          "id": "B",
           "text": "One"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Three"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Four"
+        },
+        {
+          "id": "D",
+          "text": "Two"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Two",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Nucleus"
+          "text": "Vacuole only"
         },
         {
           "id": "B",
-          "text": "Ribosome"
+          "text": "Nucleus"
         },
         {
           "id": "C",
-          "text": "Cell wall"
+          "text": "Ribosome"
         },
         {
           "id": "D",
-          "text": "Vacuole only"
+          "text": "Cell wall"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Nucleus",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Two genetically similar daughter cells"
-        },
-        {
-          "id": "B",
-          "text": "Four genetically different gametes"
-        },
-        {
-          "id": "C",
           "text": "One cell with half the chromosome number"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A non-living tissue"
+        },
+        {
+          "id": "C",
+          "text": "Two genetically similar daughter cells"
+        },
+        {
+          "id": "D",
+          "text": "Four genetically different gametes"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Two genetically similar daughter cells",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "It is reduced by half in the products"
-        },
-        {
-          "id": "B",
           "text": "It always doubles"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "It becomes zero"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "It never changes from the parent cell"
+        },
+        {
+          "id": "D",
+          "text": "It is reduced by half in the products"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "It is reduced by half in the products",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Maintenance of relatively stable internal conditions"
+          "text": "Only movement of limbs"
         },
         {
           "id": "B",
-          "text": "Production of all body cells"
+          "text": "Maintenance of relatively stable internal conditions"
         },
         {
           "id": "C",
-          "text": "Only food digestion"
+          "text": "Production of all body cells"
         },
         {
           "id": "D",
-          "text": "Only movement of limbs"
+          "text": "Only food digestion"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Maintenance of relatively stable internal conditions",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbohydrate"
-        },
-        {
-          "id": "B",
-          "text": "DNA"
-        },
-        {
-          "id": "C",
           "text": "Mineral ion"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Water only"
+        },
+        {
+          "id": "C",
+          "text": "Carbohydrate"
+        },
+        {
+          "id": "D",
+          "text": "DNA"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Carbohydrate",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "DNA"
-        },
-        {
-          "id": "B",
           "text": "ATP only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Glycogen"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Cellulose"
+        },
+        {
+          "id": "D",
+          "text": "DNA"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "DNA",
       "marks": 1,
       "difficulty": "easy",
@@ -1329,22 +1329,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Temperature"
+          "text": "Binomial name"
         },
         {
           "id": "B",
-          "text": "Taxonomic rank"
+          "text": "Temperature"
         },
         {
           "id": "C",
-          "text": "Chromosome count only"
+          "text": "Taxonomic rank"
         },
         {
           "id": "D",
-          "text": "Binomial name"
+          "text": "Chromosome count only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Temperature",
       "marks": 1,
       "difficulty": "easy",
@@ -1430,22 +1430,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Short-term transfer of usable energy"
-        },
-        {
-          "id": "B",
-          "text": "Permanent storage of all hereditary information"
-        },
-        {
-          "id": "C",
           "text": "Building cell walls only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Naming species"
+        },
+        {
+          "id": "C",
+          "text": "Short-term transfer of usable energy"
+        },
+        {
+          "id": "D",
+          "text": "Permanent storage of all hereditary information"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Short-term transfer of usable energy",
       "marks": 1,
       "difficulty": "easy",
@@ -1531,22 +1531,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Photosynthesis"
-        },
-        {
-          "id": "B",
           "text": "Mitosis"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Excretion"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Transpiration only"
+        },
+        {
+          "id": "D",
+          "text": "Photosynthesis"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Photosynthesis",
       "marks": 1,
       "difficulty": "easy",
@@ -1733,22 +1733,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
+          "text": "Formation of pollen only"
         },
         {
           "id": "B",
-          "text": "Movement of sugar in phloem only"
+          "text": "Loss of water vapour from aerial plant surfaces, mainly through stomata"
         },
         {
           "id": "C",
-          "text": "Cell division in roots"
+          "text": "Movement of sugar in phloem only"
         },
         {
           "id": "D",
-          "text": "Formation of pollen only"
+          "text": "Cell division in roots"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Loss of water vapour from aerial plant surfaces, mainly through stomata",
       "marks": 1,
       "difficulty": "easy",
@@ -1834,22 +1834,22 @@
       "options": [
         {
           "id": "A",
-          "text": "One parent and no fusion of gametes"
-        },
-        {
-          "id": "B",
-          "text": "Fusion of two gametes is required"
-        },
-        {
-          "id": "C",
           "text": "Only seeds can be produced"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Chromosome number must double every generation"
+        },
+        {
+          "id": "C",
+          "text": "One parent and no fusion of gametes"
+        },
+        {
+          "id": "D",
+          "text": "Fusion of two gametes is required"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "One parent and no fusion of gametes",
       "marks": 1,
       "difficulty": "easy",
@@ -1935,22 +1935,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Pollination"
-        },
-        {
-          "id": "B",
           "text": "Germination"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Transpiration"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Translocation"
+        },
+        {
+          "id": "D",
+          "text": "Pollination"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Pollination",
       "marks": 1,
       "difficulty": "easy",
@@ -2137,22 +2137,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Bar chart"
+          "text": "Taxonomic key"
         },
         {
           "id": "B",
-          "text": "Continuous line with no scale"
+          "text": "Bar chart"
         },
         {
           "id": "C",
-          "text": "Unlabelled sketch only"
+          "text": "Continuous line with no scale"
         },
         {
           "id": "D",
-          "text": "Taxonomic key"
+          "text": "Unlabelled sketch only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Bar chart",
       "marks": 1,
       "difficulty": "easy",

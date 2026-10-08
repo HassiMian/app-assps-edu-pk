@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "جانداروں کی مختلف اقسام اور حیاتیاتی تنوع"
+          "text": "صرف temperature"
         },
         {
           "id": "B",
-          "text": "صرف ایک species"
+          "text": "جانداروں کی مختلف اقسام اور حیاتیاتی تنوع"
         },
         {
           "id": "C",
-          "text": "صرف پانی"
+          "text": "صرف ایک species"
         },
         {
           "id": "D",
-          "text": "صرف temperature"
+          "text": "صرف پانی"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "جانداروں کی مختلف اقسام اور حیاتیاتی تنوع",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "cell میں substances کی آمد و رفت کو regulate کرنا"
-        },
-        {
-          "id": "B",
-          "text": "صرف رنگ دینا"
-        },
-        {
-          "id": "C",
           "text": "DNA کو ختم کرنا"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف حرکت پیدا کرنا"
+        },
+        {
+          "id": "C",
+          "text": "cell میں substances کی آمد و رفت کو regulate کرنا"
+        },
+        {
+          "id": "D",
+          "text": "صرف رنگ دینا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "cell میں substances کی آمد و رفت کو regulate کرنا",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "genetically similar daughter cells"
-        },
-        {
-          "id": "B",
           "text": "ہمیشہ چار مختلف cells"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "DNA کا مکمل خاتمہ"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "صرف gametes"
+        },
+        {
+          "id": "D",
+          "text": "genetically similar daughter cells"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "genetically similar daughter cells",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "amino acids"
+          "text": "minerals only"
         },
         {
           "id": "B",
-          "text": "fatty acids only"
+          "text": "amino acids"
         },
         {
           "id": "C",
-          "text": "nucleotides only"
+          "text": "fatty acids only"
         },
         {
           "id": "D",
-          "text": "minerals only"
+          "text": "nucleotides only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "amino acids",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "biological catalysts"
-        },
-        {
-          "id": "B",
-          "text": "simple minerals"
-        },
-        {
-          "id": "C",
           "text": "DNA کی تمام اقسام"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف lipids"
+        },
+        {
+          "id": "C",
+          "text": "biological catalysts"
+        },
+        {
+          "id": "D",
+          "text": "simple minerals"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "biological catalysts",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "ATP"
-        },
-        {
-          "id": "B",
           "text": "cellulose"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "DNA only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "water only"
+        },
+        {
+          "id": "D",
+          "text": "ATP"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "ATP",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "pollen کا مناسب reproductive surface تک transfer"
+          "text": "leaf کا fall"
         },
         {
           "id": "B",
-          "text": "seed کا germination"
+          "text": "pollen کا مناسب reproductive surface تک transfer"
         },
         {
           "id": "C",
-          "text": "root کا growth"
+          "text": "seed کا germination"
         },
         {
           "id": "D",
-          "text": "leaf کا fall"
+          "text": "root کا growth"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "pollen کا مناسب reproductive surface تک transfer",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "6"
-        },
-        {
-          "id": "B",
-          "text": "5"
-        },
-        {
-          "id": "C",
           "text": "7"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "18"
+        },
+        {
+          "id": "C",
+          "text": "6"
+        },
+        {
+          "id": "D",
+          "text": "5"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "6",
       "marks": 1,
       "difficulty": "easy",

@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Absorption کے لیے surface area بڑھانا"
+          "text": "Air filter کرنا"
         },
         {
           "id": "B",
-          "text": "Blood pump کرنا"
+          "text": "Absorption کے لیے surface area بڑھانا"
         },
         {
           "id": "C",
-          "text": "Urine بنانا"
+          "text": "Blood pump کرنا"
         },
         {
           "id": "D",
-          "text": "Air filter کرنا"
+          "text": "Urine بنانا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Absorption کے لیے surface area بڑھانا",
       "marks": 1,
       "difficulty": "easy",
@@ -162,22 +162,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Alveoli"
-        },
-        {
-          "id": "B",
-          "text": "Trachea only"
-        },
-        {
-          "id": "C",
           "text": "Diaphragm"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Rib"
+        },
+        {
+          "id": "C",
+          "text": "Alveoli"
+        },
+        {
+          "id": "D",
+          "text": "Trachea only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Alveoli",
       "marks": 1,
       "difficulty": "easy",
@@ -207,22 +207,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Contract ہو کر نیچے جاتا ہے"
-        },
-        {
-          "id": "B",
           "text": "Relax ہو کر اوپر جاتا ہے"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Blood pump کرتا ہے"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Food digest کرتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "Contract ہو کر نیچے جاتا ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Contract ہو کر نیچے جاتا ہے",
       "marks": 1,
       "difficulty": "easy",
@@ -353,22 +353,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Left ventricle"
+          "text": "Left atrium only receives"
         },
         {
           "id": "B",
-          "text": "Right atrium"
+          "text": "Left ventricle"
         },
         {
           "id": "C",
-          "text": "Right ventricle"
+          "text": "Right atrium"
         },
         {
           "id": "D",
-          "text": "Left atrium only receives"
+          "text": "Right ventricle"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Left ventricle",
       "marks": 1,
       "difficulty": "easy",
@@ -454,22 +454,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Nephron"
-        },
-        {
-          "id": "B",
-          "text": "Neuron"
-        },
-        {
-          "id": "C",
           "text": "Alveolus"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Villus"
+        },
+        {
+          "id": "C",
+          "text": "Nephron"
+        },
+        {
+          "id": "D",
+          "text": "Neuron"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Nephron",
       "marks": 1,
       "difficulty": "easy",
@@ -499,22 +499,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Useful substances کو blood میں واپس لینا"
-        },
-        {
-          "id": "B",
           "text": "تمام water خارج کرنا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Oxygen absorb کرنا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Food digest کرنا"
+        },
+        {
+          "id": "D",
+          "text": "Useful substances کو blood میں واپس لینا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Useful substances کو blood میں واپس لینا",
       "marks": 1,
       "difficulty": "easy",
@@ -645,22 +645,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Endocrine glands"
+          "text": "Villi only"
         },
         {
           "id": "B",
-          "text": "Bones only"
+          "text": "Endocrine glands"
         },
         {
           "id": "C",
-          "text": "Alveoli only"
+          "text": "Bones only"
         },
         {
           "id": "D",
-          "text": "Villi only"
+          "text": "Alveoli only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Endocrine glands",
       "marks": 1,
       "difficulty": "easy",
@@ -746,22 +746,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Haploid"
-        },
-        {
-          "id": "B",
-          "text": "Diploid always"
-        },
-        {
-          "id": "C",
           "text": "Zero"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Double diploid"
+        },
+        {
+          "id": "C",
+          "text": "Haploid"
+        },
+        {
+          "id": "D",
+          "text": "Diploid always"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Haploid",
       "marks": 1,
       "difficulty": "easy",
@@ -791,22 +791,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Zygote"
-        },
-        {
-          "id": "B",
           "text": "Neuron"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Antibody"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Enzyme"
+        },
+        {
+          "id": "D",
+          "text": "Zygote"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Zygote",
       "marks": 1,
       "difficulty": "easy",
@@ -937,22 +937,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Traits کے predictable inheritance patterns"
+          "text": "Excretion"
         },
         {
           "id": "B",
-          "text": "Respiration"
+          "text": "Traits کے predictable inheritance patterns"
         },
         {
           "id": "C",
-          "text": "Digestion"
+          "text": "Respiration"
         },
         {
           "id": "D",
-          "text": "Excretion"
+          "text": "Digestion"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Traits کے predictable inheritance patterns",
       "marks": 1,
       "difficulty": "easy",
@@ -1038,22 +1038,22 @@
       "options": [
         {
           "id": "A",
-          "text": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے"
-        },
-        {
-          "id": "B",
-          "text": "صرف blood pressure ناپا جاتا ہے"
-        },
-        {
-          "id": "C",
           "text": "Food mechanically grind کیا جاتا ہے"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Urine filter کیا جاتا ہے"
+        },
+        {
+          "id": "C",
+          "text": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "صرف blood pressure ناپا جاتا ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے",
       "marks": 1,
       "difficulty": "easy",
@@ -1083,22 +1083,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Medicines یا useful biological products کی production"
-        },
-        {
-          "id": "B",
           "text": "صرف weather forecast"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Road construction only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Metal cutting only"
+        },
+        {
+          "id": "D",
+          "text": "Medicines یا useful biological products کی production"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Medicines یا useful biological products کی production",
       "marks": 1,
       "difficulty": "easy",
@@ -1229,22 +1229,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Immune system"
+          "text": "Urinary system only"
         },
         {
           "id": "B",
-          "text": "Skeletal system only"
+          "text": "Immune system"
         },
         {
           "id": "C",
-          "text": "Digestive tract only"
+          "text": "Skeletal system only"
         },
         {
           "id": "D",
-          "text": "Urinary system only"
+          "text": "Digestive tract only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Immune system",
       "marks": 1,
       "difficulty": "easy",
@@ -1330,22 +1330,22 @@
       "options": [
         {
           "id": "A",
-          "text": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں"
-        },
-        {
-          "id": "B",
-          "text": "ہمیشہ سب سے بڑے individuals"
-        },
-        {
-          "id": "C",
           "text": "ہمیشہ سب سے پرانے individuals"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "وہ جن میں variation نہ ہو"
+        },
+        {
+          "id": "C",
+          "text": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں"
+        },
+        {
+          "id": "D",
+          "text": "ہمیشہ سب سے بڑے individuals"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں",
       "marks": 1,
       "difficulty": "easy",
@@ -1375,22 +1375,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
-        },
-        {
-          "id": "B",
           "text": "تمام individuals کو identical بناتی ہے"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Genes ختم کرتی ہے"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Environment کو ثابت رکھتی ہے"
+        },
+        {
+          "id": "D",
+          "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Selection کے لیے heritable differences فراہم کرتی ہے",
       "marks": 1,
       "difficulty": "easy",

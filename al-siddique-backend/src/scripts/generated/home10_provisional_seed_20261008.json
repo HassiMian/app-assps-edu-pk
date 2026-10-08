@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "planning, measurement, fit, fabric choice اور safe sewing workflow"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "planning, measurement, fit, fabric choice اور safe sewing workflow"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "planning, measurement, fit, fabric choice اور safe sewing workflow",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "comfort, function, climate, safety اور age-related needs"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "comfort, function, climate, safety اور age-related needs"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "comfort, function, climate, safety اور age-related needs",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "goals، resources، time اور decision-making کے اصول"
-        },
-        {
-          "id": "B",
           "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "D",
+          "text": "goals، resources، time اور decision-making کے اصول"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "goals، resources، time اور decision-making کے اصول",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "elements/principles of design اور functional/aesthetic decisions"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "elements/principles of design اور functional/aesthetic decisions"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "elements/principles of design اور functional/aesthetic decisions",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "art/design principles کا home and daily-life applications میں استعمال"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "art/design principles کا home and daily-life applications میں استعمال"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "art/design principles کا home and daily-life applications میں استعمال",
       "marks": 1,
       "difficulty": "easy",

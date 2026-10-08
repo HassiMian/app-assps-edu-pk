@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1 kg"
+          "text": "Any mass with no reference"
         },
         {
           "id": "B",
-          "text": "1 g only"
+          "text": "1 kg"
         },
         {
           "id": "C",
-          "text": "10 kg"
+          "text": "1 g only"
         },
         {
           "id": "D",
-          "text": "Any mass with no reference"
+          "text": "10 kg"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "1 kg",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Conduction"
-        },
-        {
-          "id": "B",
-          "text": "Convection only"
-        },
-        {
-          "id": "C",
           "text": "Radiation only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Evaporation only"
+        },
+        {
+          "id": "C",
+          "text": "Conduction"
+        },
+        {
+          "id": "D",
+          "text": "Convection only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Conduction",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Vacuum"
-        },
-        {
-          "id": "B",
           "text": "Solids only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Liquids only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Air only"
+        },
+        {
+          "id": "D",
+          "text": "Vacuum"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Vacuum",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Perpendicular to wave travel"
+          "text": "Absent"
         },
         {
           "id": "B",
-          "text": "Parallel to wave travel"
+          "text": "Perpendicular to wave travel"
         },
         {
           "id": "C",
-          "text": "Always circular"
+          "text": "Parallel to wave travel"
         },
         {
           "id": "D",
-          "text": "Absent"
+          "text": "Always circular"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Perpendicular to wave travel",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Longitudinal"
-        },
-        {
-          "id": "B",
-          "text": "Transverse electromagnetic"
-        },
-        {
-          "id": "C",
           "text": "Stationary electric"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Gravitational"
+        },
+        {
+          "id": "C",
+          "text": "Longitudinal"
+        },
+        {
+          "id": "D",
+          "text": "Transverse electromagnetic"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Longitudinal",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Frequency"
-        },
-        {
-          "id": "B",
           "text": "Amplitude"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Speed only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Distance only"
+        },
+        {
+          "id": "D",
+          "text": "Frequency"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Frequency",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Speed"
+          "text": "Mass"
         },
         {
           "id": "B",
-          "text": "Frequency source"
+          "text": "Speed"
         },
         {
           "id": "C",
-          "text": "Charge"
+          "text": "Frequency source"
         },
         {
           "id": "D",
-          "text": "Mass"
+          "text": "Charge"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Speed",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repel"
-        },
-        {
-          "id": "B",
-          "text": "Attract"
-        },
-        {
-          "id": "C",
           "text": "Always neutralize"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Produce sound only"
+        },
+        {
+          "id": "C",
+          "text": "Repel"
+        },
+        {
+          "id": "D",
+          "text": "Attract"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Repel",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Positive test charge"
-        },
-        {
-          "id": "B",
           "text": "Negative test charge only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Neutron"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Mass"
+        },
+        {
+          "id": "D",
+          "text": "Positive test charge"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Positive test charge",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "The same"
+          "text": "Infinite"
         },
         {
           "id": "B",
-          "text": "Always zero"
+          "text": "The same"
         },
         {
           "id": "C",
-          "text": "Different at every point"
+          "text": "Always zero"
         },
         {
           "id": "D",
-          "text": "Infinite"
+          "text": "Different at every point"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "The same",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Magnetic field"
-        },
-        {
-          "id": "B",
-          "text": "Gravitational field only"
-        },
-        {
-          "id": "C",
           "text": "No field"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Sound field only"
+        },
+        {
+          "id": "C",
+          "text": "Magnetic field"
+        },
+        {
+          "id": "D",
+          "text": "Gravitational field only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Magnetic field",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Force"
-        },
-        {
-          "id": "B",
           "text": "Only cooling"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only charging"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Mass loss"
+        },
+        {
+          "id": "D",
+          "text": "Force"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Force",
       "marks": 1,
       "difficulty": "easy",
@@ -1453,22 +1453,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electromagnetic induction"
+          "text": "Thermal expansion"
         },
         {
           "id": "B",
-          "text": "Electrostatic charging only"
+          "text": "Electromagnetic induction"
         },
         {
           "id": "C",
-          "text": "Nuclear fission"
+          "text": "Electrostatic charging only"
         },
         {
           "id": "D",
-          "text": "Thermal expansion"
+          "text": "Nuclear fission"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Electromagnetic induction",
       "marks": 1,
       "difficulty": "easy",
@@ -1582,22 +1582,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Between conductors and insulators"
-        },
-        {
-          "id": "B",
-          "text": "Exactly zero"
-        },
-        {
-          "id": "C",
           "text": "Infinite"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Unrelated to temperature"
+        },
+        {
+          "id": "C",
+          "text": "Between conductors and insulators"
+        },
+        {
+          "id": "D",
+          "text": "Exactly zero"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Between conductors and insulators",
       "marks": 1,
       "difficulty": "easy",
@@ -1627,22 +1627,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Preferentially in one direction"
-        },
-        {
-          "id": "B",
           "text": "Equally in every direction"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only when cold"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only in vacuum"
+        },
+        {
+          "id": "D",
+          "text": "Preferentially in one direction"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Preferentially in one direction",
       "marks": 1,
       "difficulty": "easy",
@@ -1801,22 +1801,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Spontaneous nuclear change"
+          "text": "Thermal expansion"
         },
         {
           "id": "B",
-          "text": "Ordinary chemical combustion"
+          "text": "Spontaneous nuclear change"
         },
         {
           "id": "C",
-          "text": "Mechanical vibration"
+          "text": "Ordinary chemical combustion"
         },
         {
           "id": "D",
-          "text": "Thermal expansion"
+          "text": "Mechanical vibration"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Spontaneous nuclear change",
       "marks": 1,
       "difficulty": "easy",
@@ -1930,22 +1930,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Centripetal acceleration"
-        },
-        {
-          "id": "B",
-          "text": "Thermal insulation"
-        },
-        {
-          "id": "C",
           "text": "Electric resistance"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Sound pressure"
+        },
+        {
+          "id": "C",
+          "text": "Centripetal acceleration"
+        },
+        {
+          "id": "D",
+          "text": "Thermal insulation"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Centripetal acceleration",
       "marks": 1,
       "difficulty": "easy",
@@ -1975,22 +1975,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Nuclear fusion"
-        },
-        {
-          "id": "B",
           "text": "Friction only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Chemical burning only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Electrostatic discharge only"
+        },
+        {
+          "id": "D",
+          "text": "Nuclear fusion"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Nuclear fusion",
       "marks": 1,
       "difficulty": "easy",

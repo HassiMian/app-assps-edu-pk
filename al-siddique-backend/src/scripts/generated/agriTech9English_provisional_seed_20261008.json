@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Climate and soil suitability"
+          "text": "Keyboard layout"
         },
         {
           "id": "B",
-          "text": "Random choice only"
+          "text": "Climate and soil suitability"
         },
         {
           "id": "C",
-          "text": "Screen brightness"
+          "text": "Random choice only"
         },
         {
           "id": "D",
-          "text": "Keyboard layout"
+          "text": "Screen brightness"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Climate and soil suitability",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Warm/monsoon growing season"
-        },
-        {
-          "id": "B",
-          "text": "Only freezing conditions"
-        },
-        {
-          "id": "C",
           "text": "No growing season"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only indoor storage"
+        },
+        {
+          "id": "C",
+          "text": "Warm/monsoon growing season"
+        },
+        {
+          "id": "D",
+          "text": "Only freezing conditions"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Warm/monsoon growing season",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Improve long-term soil and crop management"
-        },
-        {
-          "id": "B",
           "text": "Grow the same crop forever"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Remove all soil organisms"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Eliminate planning"
+        },
+        {
+          "id": "D",
+          "text": "Improve long-term soil and crop management"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Improve long-term soil and crop management",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Excess water saturating the root zone"
+          "text": "Only low light"
         },
         {
           "id": "B",
-          "text": "Complete absence of water in all cases"
+          "text": "Excess water saturating the root zone"
         },
         {
           "id": "C",
-          "text": "Only high wind"
+          "text": "Complete absence of water in all cases"
         },
         {
           "id": "D",
-          "text": "Only low light"
+          "text": "Only high wind"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Excess water saturating the root zone",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Agricultural crops and/or livestock systems"
-        },
-        {
-          "id": "B",
-          "text": "Only office buildings"
-        },
-        {
-          "id": "C",
           "text": "Only roads"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "No land use"
+        },
+        {
+          "id": "C",
+          "text": "Agricultural crops and/or livestock systems"
+        },
+        {
+          "id": "D",
+          "text": "Only office buildings"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Agricultural crops and/or livestock systems",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Health, nutrition, welfare and suitable housing"
-        },
-        {
-          "id": "B",
           "text": "Neglecting clean water"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Ignoring disease signs"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Overcrowding"
+        },
+        {
+          "id": "D",
+          "text": "Health, nutrition, welfare and suitable housing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Health, nutrition, welfare and suitable housing",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Clean housing, suitable feed/water and health monitoring"
+          "text": "Ignoring sick birds"
         },
         {
           "id": "B",
-          "text": "Overcrowding"
+          "text": "Clean housing, suitable feed/water and health monitoring"
         },
         {
           "id": "C",
-          "text": "No ventilation"
+          "text": "Overcrowding"
         },
         {
           "id": "D",
-          "text": "Ignoring sick birds"
+          "text": "No ventilation"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Clean housing, suitable feed/water and health monitoring",
       "marks": 1,
       "difficulty": "easy",

@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "CPU"
+          "text": "Printer"
         },
         {
           "id": "B",
-          "text": "Monitor"
+          "text": "CPU"
         },
         {
           "id": "C",
-          "text": "Keyboard"
+          "text": "Monitor"
         },
         {
           "id": "D",
-          "text": "Printer"
+          "text": "Keyboard"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "CPU",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "0 and 1"
-        },
-        {
-          "id": "B",
-          "text": "0 to 7"
-        },
-        {
-          "id": "C",
           "text": "0 to 9"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A to F only"
+        },
+        {
+          "id": "C",
+          "text": "0 and 1"
+        },
+        {
+          "id": "D",
+          "text": "0 to 7"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "0 and 1",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "16"
-        },
-        {
-          "id": "B",
           "text": "2"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "8"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "10"
+        },
+        {
+          "id": "D",
+          "text": "16"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "16",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Inverts its input"
+          "text": "Routes network packets"
         },
         {
           "id": "B",
-          "text": "Adds two inputs"
+          "text": "Inverts its input"
         },
         {
           "id": "C",
-          "text": "Stores a file"
+          "text": "Adds two inputs"
         },
         {
           "id": "D",
-          "text": "Routes network packets"
+          "text": "Stores a file"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Inverts its input",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Identify and describe the problem clearly"
-        },
-        {
-          "id": "B",
-          "text": "Replace every component"
-        },
-        {
-          "id": "C",
           "text": "Delete all data"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Ignore symptoms"
+        },
+        {
+          "id": "C",
+          "text": "Identify and describe the problem clearly"
+        },
+        {
+          "id": "D",
+          "text": "Replace every component"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Identify and describe the problem clearly",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Testable and reversible where possible"
-        },
-        {
-          "id": "B",
           "text": "Random and undocumented"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Destructive by default"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Based only on guessing"
+        },
+        {
+          "id": "D",
+          "text": "Testable and reversible where possible"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Testable and reversible where possible",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Hardware resources and software services"
+          "text": "Only passwords"
         },
         {
           "id": "B",
-          "text": "Only printed pages"
+          "text": "Hardware resources and software services"
         },
         {
           "id": "C",
-          "text": "Only web colours"
+          "text": "Only printed pages"
         },
         {
           "id": "D",
-          "text": "Only passwords"
+          "text": "Only web colours"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Hardware resources and software services",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A limited local area such as a school or office"
-        },
-        {
-          "id": "B",
-          "text": "The entire world only"
-        },
-        {
-          "id": "C",
           "text": "One CPU register"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A single file"
+        },
+        {
+          "id": "C",
+          "text": "A limited local area such as a school or office"
+        },
+        {
+          "id": "D",
+          "text": "The entire world only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A limited local area such as a school or office",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Router"
-        },
-        {
-          "id": "B",
           "text": "Keyboard"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Scanner"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Speaker"
+        },
+        {
+          "id": "D",
+          "text": "Router"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Router",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A finite ordered set of steps for solving a problem"
+          "text": "A file extension"
         },
         {
           "id": "B",
-          "text": "A hardware port"
+          "text": "A finite ordered set of steps for solving a problem"
         },
         {
           "id": "C",
-          "text": "A network cable"
+          "text": "A hardware port"
         },
         {
           "id": "D",
-          "text": "A file extension"
+          "text": "A network cable"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "A finite ordered set of steps for solving a problem",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Structure and content of a web page"
-        },
-        {
-          "id": "B",
-          "text": "Only network routing"
-        },
-        {
-          "id": "C",
           "text": "Only database passwords"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "CPU instructions"
+        },
+        {
+          "id": "C",
+          "text": "Structure and content of a web page"
+        },
+        {
+          "id": "D",
+          "text": "Only network routing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Structure and content of a web page",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Presentation and styling of web content"
-        },
-        {
-          "id": "B",
           "text": "Replacing the operating system"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Converting decimal to binary"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Managing CPU registers"
+        },
+        {
+          "id": "D",
+          "text": "Presentation and styling of web content"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Presentation and styling of web content",
       "marks": 1,
       "difficulty": "easy",
@@ -1453,22 +1453,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Conducting a survey directly"
+          "text": "Ignoring observations"
         },
         {
           "id": "B",
-          "text": "Copying an unrelated old chart"
+          "text": "Conducting a survey directly"
         },
         {
           "id": "C",
-          "text": "Guessing values"
+          "text": "Copying an unrelated old chart"
         },
         {
           "id": "D",
-          "text": "Ignoring observations"
+          "text": "Guessing values"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Conducting a survey directly",
       "marks": 1,
       "difficulty": "easy",
@@ -1582,22 +1582,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Learning, reasoning or pattern-based decision support"
-        },
-        {
-          "id": "B",
-          "text": "Only printing"
-        },
-        {
-          "id": "C",
           "text": "Only electricity generation"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only file naming"
+        },
+        {
+          "id": "C",
+          "text": "Learning, reasoning or pattern-based decision support"
+        },
+        {
+          "id": "D",
+          "text": "Only printing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Learning, reasoning or pattern-based decision support",
       "marks": 1,
       "difficulty": "easy",
@@ -1627,22 +1627,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Computing resources/services over networks on demand"
-        },
-        {
-          "id": "B",
           "text": "Only local paper storage"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only offline calculators"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only physical keyboards"
+        },
+        {
+          "id": "D",
+          "text": "Computing resources/services over networks on demand"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Computing resources/services over networks on demand",
       "marks": 1,
       "difficulty": "easy",
@@ -1801,22 +1801,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Original creative works and their authorized use"
+          "text": "Only passwords"
         },
         {
           "id": "B",
-          "text": "Any random fact forever"
+          "text": "Original creative works and their authorized use"
         },
         {
           "id": "C",
-          "text": "Only computer hardware"
+          "text": "Any random fact forever"
         },
         {
           "id": "D",
-          "text": "Only passwords"
+          "text": "Only computer hardware"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Original creative works and their authorized use",
       "marks": 1,
       "difficulty": "easy",
@@ -1930,22 +1930,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Why a product or service is useful to a target customer"
-        },
-        {
-          "id": "B",
-          "text": "Only its file size"
-        },
-        {
-          "id": "C",
           "text": "Only its colour"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only its password"
+        },
+        {
+          "id": "C",
+          "text": "Why a product or service is useful to a target customer"
+        },
+        {
+          "id": "D",
+          "text": "Only its file size"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Why a product or service is useful to a target customer",
       "marks": 1,
       "difficulty": "easy",
@@ -1975,22 +1975,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Customer needs and competing solutions"
-        },
-        {
-          "id": "B",
           "text": "Only CPU temperature"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only binary arithmetic"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only screen resolution"
+        },
+        {
+          "id": "D",
+          "text": "Customer needs and competing solutions"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Customer needs and competing solutions",
       "marks": 1,
       "difficulty": "easy",

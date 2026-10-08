@@ -1,0 +1,2433 @@
+{
+  "schemaVersion": "assps-grade910-completion-readiness-v1",
+  "scope": "STAGING_AND_SOURCE_READINESS_NOT_ACADEMIC_APPROVAL",
+  "generatedAt": "2026-10-08T08:18:47.606Z",
+  "summary": {
+    "generatedFiles": 52,
+    "generatedQuestions": 2303,
+    "fullAuthoringFiles": 66,
+    "fullAuthoringQuestions": 2357,
+    "fullAuthoringDuplicateIds": 0,
+    "starterFiles": 51,
+    "starterQuestions": 1988,
+    "stagedSourceRecords": 51,
+    "authoringOutsideStarterQuestions": 369,
+    "mcqs": 773,
+    "mcqBiasFlaggedFiles": 0,
+    "approvedQuestions": 0,
+    "publicationEnabledQuestions": 0,
+    "missingPageQuestions": 1144,
+    "manifestEntries": 111,
+    "grade9Entries": 52,
+    "grade10Entries": 46,
+    "sharedEntries": 13,
+    "cachedHashVerifiedRecords": 108,
+    "missingKnownSources": 0,
+    "missingLedgerHashes": 3,
+    "exerciseVerifiedRecords": 0,
+    "recordsWithStaging": 51,
+    "recordsWithoutStaging": 60
+  },
+  "academicReady": false,
+  "records": [
+    {
+      "recordId": "pectaa-catalog-001",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": false,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "source-hash/cache",
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-002",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "stagedQuestions": 35,
+      "stagingFiles": [
+        "islamiyat9Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_FULL_CONTENT_VERIFICATION",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-003",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "stagedQuestions": 57,
+      "stagingFiles": [
+        "urdu9LiteratureStarter2026.json"
+      ],
+      "missingPageQuestions": 57,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:57",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-004",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "English",
+      "medium": "English",
+      "stagedQuestions": 55,
+      "stagingFiles": [
+        "english9Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-005",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "Mathematics",
+      "medium": "English",
+      "stagedQuestions": 65,
+      "stagingFiles": [
+        "mathematics9Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-006",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "stagedQuestions": 39,
+      "stagingFiles": [
+        "mathematics9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 39,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:39",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-007",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Chemistry",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_EXERCISE_AND_TOPIC_VALIDATION",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-008",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "stagedQuestions": 39,
+      "stagingFiles": [
+        "chemistry9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 39,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:39",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-009",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Biology",
+      "medium": "English",
+      "stagedQuestions": 66,
+      "stagingFiles": [
+        "biology9EnglishStarter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-010",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "stagedQuestions": 33,
+      "stagingFiles": [
+        "biology9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 33,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:33",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-011",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Physics",
+      "medium": "English",
+      "stagedQuestions": 54,
+      "stagingFiles": [
+        "physics9EnglishStarter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-012",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Physics",
+      "medium": "Urdu",
+      "stagedQuestions": 27,
+      "stagingFiles": [
+        "physics9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 27,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:27",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-013",
+      "grade": 9,
+      "stream": "Science",
+      "subject": "Computer",
+      "medium": "English",
+      "stagedQuestions": 60,
+      "stagingFiles": [
+        "computer9Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-014",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": false,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "source-hash/cache",
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-015",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "stagedQuestions": 60,
+      "stagingFiles": [
+        "urdu10LiteratureStarter2026.json"
+      ],
+      "missingPageQuestions": 60,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:60",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-016",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "English",
+      "medium": "English",
+      "stagedQuestions": 50,
+      "stagingFiles": [
+        "english10Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-017",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "Mathematics",
+      "medium": "English",
+      "stagedQuestions": 60,
+      "stagingFiles": [
+        "mathematics10Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-018",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "stagedQuestions": 40,
+      "stagingFiles": [
+        "pakistanStudies10UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 40,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:40",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-019",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "Pakistan Studies",
+      "medium": "English",
+      "stagedQuestions": 40,
+      "stagingFiles": [
+        "pakistanStudies10Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-020",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Biology",
+      "medium": "English",
+      "stagedQuestions": 60,
+      "stagingFiles": [
+        "biology10EnglishStarter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-021",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "stagedQuestions": 40,
+      "stagingFiles": [
+        "biology10UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 40,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_FULL_CONTENT_VERIFICATION",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:40",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-022",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "stagedQuestions": 39,
+      "stagingFiles": [
+        "chemistry10UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 39,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_FULL_CONTENT_VERIFICATION",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:39",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-023",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Physics",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_TRACK_IDENTITY_MISMATCH",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-024",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Physics",
+      "medium": "English",
+      "stagedQuestions": 60,
+      "stagingFiles": [
+        "physics10Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-025",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "stagedQuestions": 40,
+      "stagingFiles": [
+        "computer10UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 40,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_FULL_CONTENT_VERIFICATION",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:40",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-026",
+      "grade": 0,
+      "stream": "IX–X Supplement",
+      "subject": "English Grammar and Composition",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_FULL_CONTENT_VERIFICATION",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-027",
+      "grade": 0,
+      "stream": "IX–X Supplement",
+      "subject": "Urdu Quaid-e-Insha",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-028",
+      "grade": 0,
+      "stream": "IX–X Supplement",
+      "subject": "General Science",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-029",
+      "grade": 0,
+      "stream": "IX–X Supplement",
+      "subject": "General Science",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-030",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 27,
+      "stagingFiles": [
+        "bioTech9urStarter2026.json"
+      ],
+      "missingPageQuestions": 27,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:27",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-031",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "stagedQuestions": 27,
+      "stagingFiles": [
+        "bioTech9emStarter2026.json"
+      ],
+      "missingPageQuestions": 27,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:27",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-032",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "General Science-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 33,
+      "stagingFiles": [
+        "generalScienceTech9EnglishStarter2026.json"
+      ],
+      "missingPageQuestions": 33,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_11_CHAPTER_SEQUENCE_OFFICIAL_PDF_PLUS_CURRENT_INDEX",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:33",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-033",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 30,
+      "stagingFiles": [
+        "compEntTech9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 30,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_RENDERED_TOC_10_UNITS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:30",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-034",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "English",
+      "stagedQuestions": 30,
+      "stagingFiles": [
+        "compEntTech9EnglishStarter2026.json"
+      ],
+      "missingPageQuestions": 30,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_RENDERED_TOC_10_UNITS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:30",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-035",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Chemistry-Tech",
+      "medium": "English",
+      "stagedQuestions": 39,
+      "stagingFiles": [
+        "chemTech9emStarter2026.json"
+      ],
+      "missingPageQuestions": 39,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:39",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-036",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Chemistry-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 39,
+      "stagingFiles": [
+        "chemTech9urStarter2026.json"
+      ],
+      "missingPageQuestions": 39,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:39",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-037",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Computer-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": false,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "source-hash/cache",
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-038",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 33,
+      "stagingFiles": [
+        "generalScienceTech9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 33,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_11_CHAPTER_SEQUENCE_OFFICIAL_PDF_PLUS_CURRENT_INDEX",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:33",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-039",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "stagedQuestions": 30,
+      "stagingFiles": [
+        "agriTech9EnglishStarter2026.json"
+      ],
+      "missingPageQuestions": 30,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_RENDERED_TOC_10_CHAPTERS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:30",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-040",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 30,
+      "stagingFiles": [
+        "agriTech9UrduStarter2026.json"
+      ],
+      "missingPageQuestions": 30,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_RENDERED_TOC_10_CHAPTERS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:30",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-041",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE_IDENTITY_RECONCILIATION",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-042",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Fashion Designing-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 36,
+      "stagingFiles": [
+        "fashionDesigning9TechStarter2026.json"
+      ],
+      "missingPageQuestions": 36,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_CURRENT_9_CHAPTER_SYLLABUS_AND_TEXTBOOK_STRUCTURE",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:36",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-043",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 30,
+      "stagingFiles": [
+        "ict9TechStarter2026.json"
+      ],
+      "missingPageQuestions": 30,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_CURRENT_6_CHAPTER_TEXTBOOK_CONTENTS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:30",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-044",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 40,
+      "stagingFiles": [
+        "healthSciences9TechStarter2026.json"
+      ],
+      "missingPageQuestions": 40,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_CURRENT_8_CHAPTER_BISE_SYLLABUS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:40",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-045",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "stagedQuestions": 32,
+      "stagingFiles": [
+        "physicsTech9DualStarter2026.json"
+      ],
+      "missingPageQuestions": 32,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_CURRENT_8_CHAPTER_BISE_SYLLABUS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:32",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-046",
+      "grade": 9,
+      "stream": "Matric-Tech",
+      "subject": "Physics-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 32,
+      "stagingFiles": [
+        "physicsTech9DualStarter2026.json"
+      ],
+      "missingPageQuestions": 32,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED_CURRENT_8_CHAPTER_BISE_SYLLABUS",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "question-pages:32",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-047",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Chemistry-Tech",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-048",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Chemistry-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-049",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-050",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Computer-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-051",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Computer (Matric-Tech catalog identity)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-052",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Computer Science-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-053",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Fashion Designing-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-054",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-055",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-056",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Physics-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-057",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-058",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "General Science-Tech",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-059",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-060",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-061",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-062",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-063",
+      "grade": 10,
+      "stream": "Matric-Tech",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-064",
+      "grade": 9,
+      "stream": "Arts/Elective",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 15,
+      "stagingFiles": [
+        "ghiza9Starter2026.json"
+      ],
+      "missingPageQuestions": 15,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:15",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-065",
+      "grade": 9,
+      "stream": "Arts/Elective",
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "stagedQuestions": 24,
+      "stagingFiles": [
+        "art9emStarter2026.json"
+      ],
+      "missingPageQuestions": 24,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:24",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-066",
+      "grade": 9,
+      "stream": "Arts/Elective",
+      "subject": "Home Economics",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 24,
+      "stagingFiles": [
+        "home9Starter2026.json"
+      ],
+      "missingPageQuestions": 24,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:24",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-067",
+      "grade": 9,
+      "stream": "Arts/Elective",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 21,
+      "stagingFiles": [
+        "textile9Starter2026.json"
+      ],
+      "missingPageQuestions": 21,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:21",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-068",
+      "grade": 9,
+      "stream": "Arts/Elective",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "stagedQuestions": 24,
+      "stagingFiles": [
+        "art9urStarter2026.json"
+      ],
+      "missingPageQuestions": 24,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:24",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-069",
+      "grade": 10,
+      "stream": "Arts/Elective",
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 15,
+      "stagingFiles": [
+        "ghiza10Starter2026.json"
+      ],
+      "missingPageQuestions": 15,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:15",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-070",
+      "grade": 10,
+      "stream": "Arts/Elective",
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 21,
+      "stagingFiles": [
+        "textile10Starter2026.json"
+      ],
+      "missingPageQuestions": 21,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:21",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-071",
+      "grade": 10,
+      "stream": "Arts/Elective",
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "stagedQuestions": 21,
+      "stagingFiles": [
+        "art10urStarter2026.json"
+      ],
+      "missingPageQuestions": 21,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:21",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-072",
+      "grade": 10,
+      "stream": "Arts/Elective",
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "stagedQuestions": 21,
+      "stagingFiles": [
+        "art10emStarter2026.json"
+      ],
+      "missingPageQuestions": 21,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:21",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-073",
+      "grade": 10,
+      "stream": "Arts/Elective",
+      "subject": "Home Economics",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 21,
+      "stagingFiles": [
+        "home10Starter2026.json"
+      ],
+      "missingPageQuestions": 21,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:21",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-074",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Farsi",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-075",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Economics",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-076",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Economics",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-077",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Punjabi Ikhtari",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-078",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Zari Pedawar Workbook",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-079",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Health & Physical Education",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-080",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Education",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-081",
+      "grade": 0,
+      "stream": "IX–X Arts Supplement",
+      "subject": "Civics",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-082",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Computer Science",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-083",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-084",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Biology",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-085",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-086",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Chemistry",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-087",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-088",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Physics",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-089",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Physics",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-090",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-091",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-092",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-093",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-094",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Biology Practical Notebook (catalog track unresolved)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-095",
+      "grade": 9,
+      "stream": "Practical Notebook",
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-096",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Computer Science",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-097",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-098",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Biology",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-099",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-100",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Chemistry",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-101",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-102",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Physics",
+      "medium": "English",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-103",
+      "grade": 10,
+      "stream": "Practical Notebook",
+      "subject": "Physics",
+      "medium": "Urdu",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-104",
+      "grade": 9,
+      "stream": "Religious Alternative",
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-105",
+      "grade": 9,
+      "stream": "Religious Alternative",
+      "subject": "Christianity",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-106",
+      "grade": 10,
+      "stream": "Religious Alternative",
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "stagedQuestions": 0,
+      "stagingFiles": [],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-authoring",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-107",
+      "grade": 0,
+      "stream": "Shared IX-X",
+      "subject": "Urdu Quaid-e-Insha",
+      "medium": "Urdu",
+      "stagedQuestions": 70,
+      "stagingFiles": [
+        "urdu10GrammarStarter2026.json",
+        "urdu9GrammarStarter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-recovered-chemistry10-en-2026",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Chemistry",
+      "medium": "English",
+      "stagedQuestions": 65,
+      "stagingFiles": [
+        "chemistry10Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-recovered-computer10-en-2026",
+      "grade": 10,
+      "stream": "Science",
+      "subject": "Computer Science",
+      "medium": "English",
+      "stagedQuestions": 40,
+      "stagingFiles": [
+        "computer10Starter2026.json"
+      ],
+      "missingPageQuestions": 35,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_UNIT_TITLES_CHAPTER_PAGES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "question-pages:35",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-recovered-tarjuma9-2026",
+      "grade": 9,
+      "stream": "Compulsory",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "stagedQuestions": 54,
+      "stagingFiles": [
+        "tarjuma9Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_SURAH_SEQUENCE_AYAH_RANGES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "academic-review"
+      ]
+    },
+    {
+      "recordId": "pectaa-recovered-tarjuma10-current",
+      "grade": 10,
+      "stream": "Compulsory",
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "stagedQuestions": 45,
+      "stagingFiles": [
+        "tarjuma10Starter2026.json"
+      ],
+      "missingPageQuestions": 0,
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_SURAH_SEQUENCE_AYAH_RANGES_PENDING",
+      "exerciseStatus": "PENDING",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
+      "academicApproved": false,
+      "blockers": [
+        "chapter/page-map",
+        "exercise-index",
+        "academic-review"
+      ]
+    }
+  ]
+}

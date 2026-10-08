@@ -621,7 +621,7 @@
       "medium": "English",
       "catalogLabel": "Physics 10 EM (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "0205c32c3d65df5270c2b4cdb32739276cae5ea67670e5f8749591bb0260d8ae",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_TRACK_IDENTITY_MISMATCH",
@@ -634,7 +634,12 @@
       "providerAccessNote": "Current PECTAA catalogue anchor verified; linked provider access failure does not establish deletion and does not verify textbook bytes/content.",
       "providerContentIdentity": "PHYSICS (Tech) 10",
       "providerIdentityStatus": "CONTENT_TITLE_CONFLICTS_WITH_GENERIC_CATALOG_LABEL",
-      "identityNote": "Downloaded official asset identifies itself as PHYSICS (Tech) 10. Do not use for mainstream Physics."
+      "identityNote": "Downloaded official asset identifies itself as PHYSICS (Tech) 10. Do not use for mainstream Physics.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 11056539,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-023.pdf"
     },
     {
       "recordId": "pectaa-catalog-024",
@@ -701,7 +706,7 @@
     {
       "recordId": "pectaa-catalog-026",
       "grade": 0,
-      "stream": "IX–X Supplement",
+      "stream": "IX\u2013X Supplement",
       "subject": "English Grammar and Composition",
       "edition": "2023-24",
       "medium": "English",
@@ -728,13 +733,13 @@
     {
       "recordId": "pectaa-catalog-027",
       "grade": 0,
-      "stream": "IX–X Supplement",
+      "stream": "IX\u2013X Supplement",
       "subject": "Urdu Quaid-e-Insha",
       "edition": "2023-24",
       "medium": "Urdu",
       "catalogLabel": "Urdu quaid-e-insha 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -742,18 +747,23 @@
       "catalogLinkCheckedOn": "2026-10-02",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/18jrYqapYhunZykdWTX4Yl5js8RtCk2Bq/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/18jrYqapYhunZykdWTX4Yl5js8RtCk2Bq/view?usp=sharing",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 131046901,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-027.pdf"
     },
     {
       "recordId": "pectaa-catalog-028",
       "grade": 0,
-      "stream": "IX–X Supplement",
+      "stream": "IX\u2013X Supplement",
       "subject": "General Science",
       "edition": "VERIFY",
       "medium": "English",
       "catalogLabel": "General Science EM 9-10",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "c807ef42eaf178de8e4eafdff0dc2443ea130702b592b440ad8c7c76baf6542b",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -761,18 +771,23 @@
       "catalogLinkCheckedOn": "2026-10-02",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1JpqDG39mhcFxq0cx1pRfx3_lLR6xwsLs/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1JpqDG39mhcFxq0cx1pRfx3_lLR6xwsLs/view?usp=sharing",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 48338065,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-028.pdf"
     },
     {
       "recordId": "pectaa-catalog-029",
       "grade": 0,
-      "stream": "IX–X Supplement",
+      "stream": "IX\u2013X Supplement",
       "subject": "General Science",
       "edition": "VERIFY",
       "medium": "Urdu",
       "catalogLabel": "General Science UM 9-10",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "8b9153a12a97ad03684cb609cea0069fa41843960157e06edbb11d9ecb9a2a17",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -780,7 +795,12 @@
       "catalogLinkCheckedOn": "2026-10-02",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
-      "catalogAssetUrl": "https://drive.google.com/file/d/1kX5PVHh8f2u9r_gUIGewxh2T_xSl3P_e/view?usp=sharing"
+      "catalogAssetUrl": "https://drive.google.com/file/d/1kX5PVHh8f2u9r_gUIGewxh2T_xSl3P_e/view?usp=sharing",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 57610400,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-029.pdf"
     },
     {
       "recordId": "pectaa-catalog-030",
@@ -1294,7 +1314,7 @@
       "medium": "English",
       "catalogLabel": "Chemistry 10 TECH EM (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "1120794a943a815308719b135add2da3989d25487aa527a3666d1824b6758e41",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1303,7 +1323,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1sNQVZl0JpkWgb_zx696ZZi3to-Al1IyM/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 49205838,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/tech10-science/chem10em.pdf"
     },
     {
       "recordId": "pectaa-catalog-048",
@@ -1315,7 +1340,7 @@
       "medium": "Urdu",
       "catalogLabel": "chemistry 10 UM (2026-27) TECH",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "1ede957841933ef417e576592eeb98698e2c3ec073c0f20058efda72fe20c1fe",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1324,7 +1349,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1kxviUwdmPdOXJZIxAJg3NkDWV9LzaNp6/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 42634064,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/tech10-science/chem10ur.pdf"
     },
     {
       "recordId": "pectaa-catalog-049",
@@ -1336,7 +1366,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Communication skills and personal grooming 10 (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1345,7 +1375,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1o1L61mD-82Vqbn05aQ_ZjZmBcMrtzX11/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 6687147,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-049.pdf"
     },
     {
       "recordId": "pectaa-catalog-050",
@@ -1357,7 +1392,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Computer 10 tech, (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "6defe274fd12fa2ae36e8f9b9d4d088f53a5f371a36f243cd0fbe2ba6f59efe5",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1366,7 +1401,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1gDVpz_xrqf__XJbmyilI5CDdGnjMc5U0/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 16588678,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-050.pdf"
     },
     {
       "recordId": "pectaa-catalog-051",
@@ -1378,7 +1418,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Computer 10 (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "47f06eff98adfb392bd21c7c25037469fea130a8eb7a1a9c1de35a364685a15a",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1387,7 +1427,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1poWHPGDQNw651-S_tN_yJ9nesBCL8VGH/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 39948122,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-051.pdf"
     },
     {
       "recordId": "pectaa-catalog-052",
@@ -1399,7 +1444,7 @@
       "medium": "Urdu",
       "catalogLabel": "Computer science 10 (2026-27) tech UM",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "65d03c8b2d214f4bf434ed2c352cd78c8b259d51c8c243cdb6b33a41b0e19f4d",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1408,7 +1453,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/14YrSWdrbQqbCDryW3_0vXCZjvnKlzWir/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 20024321,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-052.pdf"
     },
     {
       "recordId": "pectaa-catalog-053",
@@ -1420,7 +1470,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Fashion Design 10 (2026-27) Tech",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "e8df5b79e7e2874e76b965d13e50e3ead09945f7d3df23be9191f2e5e7aeeb7c",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1429,7 +1479,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1OCrpmhkWDDENs8mzpLjatY4kr37heJmL/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 43257753,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-053.pdf"
     },
     {
       "recordId": "pectaa-catalog-054",
@@ -1441,7 +1496,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Health sciences 10 (2026-27) tech",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1450,7 +1505,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1RePtw5Bbr_pIMNvaWaQAG-DpQ_HktgEp/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 11586177,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-054.pdf"
     },
     {
       "recordId": "pectaa-catalog-055",
@@ -1462,7 +1522,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "ICT 10 (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "85faf38e9d8a1ebe78cb1629d775ac8a50bd95e4714146851aa0668fb44dd08a",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1471,7 +1531,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1FBIygoQR0WtRMveIfD6fgNqLGH5LCNvB/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 71169714,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-055.pdf"
     },
     {
       "recordId": "pectaa-catalog-056",
@@ -1483,7 +1548,7 @@
       "medium": "Urdu",
       "catalogLabel": "Physics 10 (2026-27) tech UM",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "97fdcd6b9dfdbfa4ae4e8d5be3314adbafe83e590c66cea30a0291def0a51356",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1492,7 +1557,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1Pv4R1K4-fo8t7IbbMNmaWS4-Slq4zhhU/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 68053111,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/tech10-science/phys10ur.pdf"
     },
     {
       "recordId": "pectaa-catalog-057",
@@ -1504,7 +1574,7 @@
       "medium": "English",
       "catalogLabel": "Physic 10 Tech (EM)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1513,7 +1583,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1oKNHheVFtlbNdP9NRLBxghAu_ZoIsRGk/view?usp=sharing",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 12167534,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/tech10-science/phys10em.pdf"
     },
     {
       "recordId": "pectaa-catalog-058",
@@ -1525,7 +1600,7 @@
       "medium": "English",
       "catalogLabel": "General Science Tech 10 (EM)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "626c7b941b0bfc57d2fbdc8d8adce51789e29678e8c3f89330faa62d0501ddba",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1534,7 +1609,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1icAYuK1MMP-8_XDy-7J6Q8vbpYxSojCu/view?usp=sharing",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 44465010,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-058.pdf"
     },
     {
       "recordId": "pectaa-catalog-059",
@@ -1546,7 +1626,7 @@
       "medium": "Urdu",
       "catalogLabel": "General Science Tech 10 (UM)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "ff0705323317800c3cb6345bdb17decf624b913cef5677aada234d6d7e23c512",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1555,7 +1635,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1PppToKAB5IDndXItPDtBsITmyvI6Y4u1/view?usp=sharing",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 36154836,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-059.pdf"
     },
     {
       "recordId": "pectaa-catalog-060",
@@ -1567,7 +1652,7 @@
       "medium": "English",
       "catalogLabel": "Agriculture Science -EM-I0 (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "3e7bd9bdf9405d0601138b10e44d4bb3677d0c3ddaaad052518c0155025c3b6f",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1576,7 +1661,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1uzhNICBITtsFUxYLhGYoQ2_VIbKRWU4f/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 5494237,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-060.pdf"
     },
     {
       "recordId": "pectaa-catalog-061",
@@ -1588,7 +1678,7 @@
       "medium": "Urdu",
       "catalogLabel": "Agriculture science 10 UM (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "a8d0b0ee36a86ca8dae168fc584e42cbf8d4a9aff92b700ef49a2f03ad4dfae5",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1597,7 +1687,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1GZ18dZgi22EB_FK0E6d8e2WguYUnn5Qw/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 51460049,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-061.pdf"
     },
     {
       "recordId": "pectaa-catalog-062",
@@ -1609,7 +1704,7 @@
       "medium": "English",
       "catalogLabel": "Bio tech I0 EM (2026-27)",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1618,7 +1713,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1iguGjBl_ITDTmeBRLWkKOGCExv9Pbx9t/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 7754740,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-062.pdf"
     },
     {
       "recordId": "pectaa-catalog-063",
@@ -1630,7 +1730,7 @@
       "medium": "Urdu",
       "catalogLabel": "Biology 10 UM (2026-27) tech",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "ba0d9da1868fa1abc4cb762832e335c98362be43741cdbb95e7b102ff9a64616",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1639,7 +1739,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1G6EwHZ2YuRU1JNEdtdIOevfxtGJcUx_S/view?usp=drive_link",
-      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred."
+      "identityNote": "Current official Grade X Matric-Tech catalogue identity only. No exam-pattern, medium equivalence or similarly named catalog equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 37358155,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-063.pdf"
     },
     {
       "recordId": "pectaa-catalog-064",
@@ -1944,13 +2049,13 @@
     {
       "recordId": "pectaa-catalog-074",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Farsi",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Farsi 9-10",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "316d84fd54d9c5bac9ee4ef79b2ec69b1e206669f5d96e9f8687d036fb746da8",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1959,18 +2064,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1x7_YccQIBcR1Txz9noSfcOWGxNfIyBfh/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 5880385,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/farsi910.pdf"
     },
     {
       "recordId": "pectaa-catalog-075",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Economics",
       "edition": "2023-24",
       "medium": "Urdu",
       "catalogLabel": "Economics UM 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "4a20e5cf2ef57eca9bd2c21164cf4c3cef5d325cbdfef457f8755c2de2b6962e",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1979,18 +2089,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1TYeS-sLBmy1PbZNAQb1v2C2kDgZ4INeK/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 64254218,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/econum910.pdf"
     },
     {
       "recordId": "pectaa-catalog-076",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Economics",
       "edition": "2023-24",
       "medium": "English",
       "catalogLabel": "Economics EM 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "cd9f01b1c32e7c929e25eb89e7ff7c16d4fa25c4f5c1de9bd5268627bf682df3",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -1999,18 +2114,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1TDtLr6-Tb7_qXUHfBbJQarir-MDgHPuK/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 109263930,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/econem910.pdf"
     },
     {
       "recordId": "pectaa-catalog-077",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Punjabi Ikhtari",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Punjabi Ikhtari",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "d597903f5a7e47199dba6f972caf3d6c7a156a48098e9a9cca73ee48c4b0cdf6",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2019,18 +2139,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1jJSG3eMqZRpKHF_-elqDg6zO1ku4zlMQ/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 26801881,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/punjabi910.pdf"
     },
     {
       "recordId": "pectaa-catalog-078",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Zari Pedawar Workbook",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Zari Pedawar Workbook",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "64c4de1e013ad47028305c5800192cceaa1a0e5f9854f4298ab4b845a9678253",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2039,18 +2164,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1olRc_30qz47M71FFmdPS4Sfkjc9iITQX/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 14669271,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/zari910.pdf"
     },
     {
       "recordId": "pectaa-catalog-079",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Health & Physical Education",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Heath & Physical Education",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "b5535990ac7c19e320d3e4786f54e5b7d836b936ddf365a41045ca764647cd31",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2059,18 +2189,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1guhX5SdSB4JgSiCgVBfQyBud4K3y-sND/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 4251922,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/hpe910.pdf"
     },
     {
       "recordId": "pectaa-catalog-080",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Education",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "Education",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "fce267423eb36454bc33e179c33b3ca975146c57909473270b472330f26aa09b",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2079,18 +2214,23 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/17ZwO06Cr3qvzeSwIT_gu6qaLx_sFqWo_/view?usp=sharing",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 42093805,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/education910.pdf"
     },
     {
       "recordId": "pectaa-catalog-081",
       "grade": 0,
-      "stream": "IX–X Arts Supplement",
+      "stream": "IX\u2013X Arts Supplement",
       "subject": "Civics",
       "edition": "2023-24",
       "medium": "Urdu",
       "catalogLabel": "Civics UM 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "4594b16697040e6bd1ab6616af012ff3f32a849b5345132519548dea92858d57",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2099,7 +2239,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/117Ixwo3MPOEWOVILaHsRGT5-xfS8hswG/view?usp=drive_link",
-      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred."
+      "identityNote": "Official catalogue identity only; labels/media are preserved literally and no cross-grade equivalence is inferred.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 11227925,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
+      "sourceCacheRef": "20261008/civicsum910.pdf"
     },
     {
       "recordId": "pectaa-catalog-082",
@@ -2112,7 +2257,7 @@
       "medium": "English",
       "catalogLabel": "PNB Computer Science (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "dc2ee57a1dc58434328693a64fa47b39f6f3579f045a2bdcac3ed2162a181fdd",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2121,7 +2266,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1FZcFzuUgfH90nwgZthdxekAmY9cDCWp_/view?usp=sharing",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 12840789,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-082.pdf"
     },
     {
       "recordId": "pectaa-catalog-083",
@@ -2134,7 +2284,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB Computer Science (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "0e5ce4ef4da1bca0dba68b831585ffd73e416a875171e7a5aea7a6746904c60a",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2143,7 +2293,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1yE84Wcsf6SiWmOvjCNCuJ53T3qtTeQN0/view?usp=sharing",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 15000489,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-083.pdf"
     },
     {
       "recordId": "pectaa-catalog-084",
@@ -2156,7 +2311,7 @@
       "medium": "English",
       "catalogLabel": "PNB Biology (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "2a41067fe406de71df31e6c50cc5ab42bec24f504acb7f291f399b1176e63b3b",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2165,7 +2320,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1P8nFxlRfGXJ3Oz982r05egasRq9PWmXj/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 93253312,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-084.pdf"
     },
     {
       "recordId": "pectaa-catalog-085",
@@ -2178,7 +2338,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB Biology (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "21a2d2013764e48e417dea35e7d969f1ce83ab2253d7200c14cc95bcbac61643",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2187,7 +2347,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1yofgNs45BuqiASIcFTtnPkEv2A1wEPPp/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 93708804,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-085.pdf"
     },
     {
       "recordId": "pectaa-catalog-086",
@@ -2200,7 +2365,7 @@
       "medium": "English",
       "catalogLabel": "PNB Chemistry (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "d20c6092caef1131b313e96f480d8cc03171a3b013a86701a83d4d7ba3acaa61",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2209,7 +2374,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1skSDdfQi8kXyHgApFR9Rgq-SD6VCA7ST/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 26736978,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-086.pdf"
     },
     {
       "recordId": "pectaa-catalog-087",
@@ -2222,7 +2392,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB Chemistry (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "80f56b6b572036d610778357e01b2a092689df3195d676589f55cc4642fbde69",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2231,7 +2401,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1nGnK-KRG8_PQpqanTORfv5qYrb-osxu-/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 22527776,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-087.pdf"
     },
     {
       "recordId": "pectaa-catalog-088",
@@ -2244,7 +2419,7 @@
       "medium": "English",
       "catalogLabel": "PNB Physics (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "3033aab932fe8699906d9d6fcb86a103018ce2c5e8050b5f97cd2aaeb1972834",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2253,7 +2428,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1z4U1eg79ArFl2PbHB0TpErB4YGSICPbp/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 33639090,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR_RETRY",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-088.pdf"
     },
     {
       "recordId": "pectaa-catalog-089",
@@ -2266,7 +2446,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB physics (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "f4adaf475b6e3416137e650a485ee9ea64118c07b88b0d03f39478f60eafd1c7",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2275,7 +2455,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1cMY08hSQfVRaeSNPJ5Htc4_WgGwNbL_b/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 30605595,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-089.pdf"
     },
     {
       "recordId": "pectaa-catalog-090",
@@ -2408,7 +2593,7 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "catalogLabel": "PNB Biology -9",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "0ef82349de7b814598083f73ac309a87f8736a8bda597e4f3dad728b0656d6e1",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2417,7 +2602,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1WM07t1BCgxuJ7QjkvQ0rjX6GobczNo-f/view?usp=sharing",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 21935667,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-094.pdf"
     },
     {
       "recordId": "pectaa-catalog-095",
@@ -2460,7 +2650,7 @@
       "medium": "English",
       "catalogLabel": "PNB Computer (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "859aa7195cf0695c28b9b0bf35486bb5271154f1998dd2b961768d73821d65ea",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2469,7 +2659,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1-tzDf85nCABrHeekXGjn_qct91lXBYh3/view?usp=sharing",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 16918809,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-096.pdf"
     },
     {
       "recordId": "pectaa-catalog-097",
@@ -2482,7 +2677,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB Computer (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "a6ba1e3fd45c3b1bc48cf895e115f53d6d99b35e81b3aba60f9945edadbba6ab",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2491,7 +2686,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1BkTP_gSYlznl_JRImGS2zzhp3mGyGqRc/view?usp=sharing",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 10084869,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-097.pdf"
     },
     {
       "recordId": "pectaa-catalog-098",
@@ -2504,7 +2704,7 @@
       "medium": "English",
       "catalogLabel": "PNB Biology (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "922f7532e108782749ac5b3486455bac6a4915df274e5b25b78586d0c076cfe9",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2513,7 +2713,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1MSsmh0Xk9wMTnDA8jLmBrPqjFyFSvkyj/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 46343956,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-098.pdf"
     },
     {
       "recordId": "pectaa-catalog-099",
@@ -2526,7 +2731,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB Biology (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "046d1179ab0a663ae32d2c82d70f957d797c64cfe4c58eb4d4ff42b86a2ad0d6",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2535,7 +2740,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/12xMYh8slEsmRNU5PP9owi7zN2Kn3lzzX/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 48364564,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-099.pdf"
     },
     {
       "recordId": "pectaa-catalog-100",
@@ -2548,7 +2758,7 @@
       "medium": "English",
       "catalogLabel": "PNB Chemistry (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "f5836efe7dbf9a57e32e1e8ff33e5ebfd9f62fa0b128fcdbc29613939cc727e3",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2557,7 +2767,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1Y5DC_JWiBwAheN3xtTkpIdpC90BldS-4/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 20523507,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-100.pdf"
     },
     {
       "recordId": "pectaa-catalog-101",
@@ -2570,7 +2785,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB Chemistry (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "643fa945970d973e7560950208a82c845a0baa53f9eb32f43e1d11eed662fd87",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2579,7 +2794,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1LGLaEAcutMZ9y6ZoKPQzoiGAji9C2Ta6/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 21049450,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-101.pdf"
     },
     {
       "recordId": "pectaa-catalog-102",
@@ -2592,7 +2812,7 @@
       "medium": "English",
       "catalogLabel": "PNB Physics (EM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "913f53ae554f51b86f7cb90a1cd6f38f82bb95a72d2954cadc5c76f0f9ff950c",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2601,7 +2821,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/1a-PO8F8qtOHhF8HLeWOCpPM9FFG1M9yZ/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 23189630,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-102.pdf"
     },
     {
       "recordId": "pectaa-catalog-103",
@@ -2614,7 +2839,7 @@
       "medium": "Urdu",
       "catalogLabel": "PNB physics (UM) 2023-24",
       "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfSha256": "433398ab9521ba45e6439d2c0e110a2241fe25bd51a17cf5ed9ad482f8a242a1",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
@@ -2623,7 +2848,12 @@
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://drive.google.com/file/d/17rtfHf3vy57EuCmxMpH5R8yJhLxcnoaS/view?usp=drive_link",
-      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern."
+      "identityNote": "Practical Notebook source identity only. It does not replace the theory textbook or theory paper pattern.",
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 73066750,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-103.pdf"
     },
     {
       "recordId": "pectaa-catalog-104",

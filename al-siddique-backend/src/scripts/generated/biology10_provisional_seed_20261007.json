@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Small intestine"
+          "text": "Mouth"
         },
         {
           "id": "B",
-          "text": "Oesophagus"
+          "text": "Small intestine"
         },
         {
           "id": "C",
-          "text": "Large intestine"
+          "text": "Oesophagus"
         },
         {
           "id": "D",
-          "text": "Mouth"
+          "text": "Large intestine"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Small intestine",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Alveoli"
-        },
-        {
-          "id": "B",
-          "text": "Trachea"
-        },
-        {
-          "id": "C",
           "text": "Larynx"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Diaphragm"
+        },
+        {
+          "id": "C",
+          "text": "Alveoli"
+        },
+        {
+          "id": "D",
+          "text": "Trachea"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Alveoli",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "It contracts and flattens"
-        },
-        {
-          "id": "B",
           "text": "It relaxes and rises"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "It closes the trachea"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "It stops moving permanently"
+        },
+        {
+          "id": "D",
+          "text": "It contracts and flattens"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "It contracts and flattens",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Left ventricle"
+          "text": "Left atrium"
         },
         {
           "id": "B",
-          "text": "Right ventricle"
+          "text": "Left ventricle"
         },
         {
           "id": "C",
-          "text": "Right atrium"
+          "text": "Right ventricle"
         },
         {
           "id": "D",
-          "text": "Left atrium"
+          "text": "Right atrium"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Left ventricle",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Nephron"
-        },
-        {
-          "id": "B",
-          "text": "Alveolus"
-        },
-        {
-          "id": "C",
           "text": "Neuron"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Villus"
+        },
+        {
+          "id": "C",
+          "text": "Nephron"
+        },
+        {
+          "id": "D",
+          "text": "Alveolus"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Nephron",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Ureter"
-        },
-        {
-          "id": "B",
           "text": "Urethra"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Renal artery"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Vena cava"
+        },
+        {
+          "id": "D",
+          "text": "Ureter"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Ureter",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Blood"
+          "text": "Alveolar air"
         },
         {
           "id": "B",
-          "text": "Digestive lumen"
+          "text": "Blood"
         },
         {
           "id": "C",
-          "text": "Bone marrow cavity only"
+          "text": "Digestive lumen"
         },
         {
           "id": "D",
-          "text": "Alveolar air"
+          "text": "Bone marrow cavity only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Blood",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Fusion of male and female gametes"
-        },
-        {
-          "id": "B",
-          "text": "Formation of identical body cells"
-        },
-        {
-          "id": "C",
           "text": "Release of urine"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Digestion of food"
+        },
+        {
+          "id": "C",
+          "text": "Fusion of male and female gametes"
+        },
+        {
+          "id": "D",
+          "text": "Formation of identical body cells"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Fusion of male and female gametes",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They regulate development of reproductive organs and secondary sexual characteristics"
-        },
-        {
-          "id": "B",
           "text": "They digest proteins"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "They filter blood in nephrons"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "They carry oxygen"
+        },
+        {
+          "id": "D",
+          "text": "They regulate development of reproductive organs and secondary sexual characteristics"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "They regulate development of reproductive organs and secondary sexual characteristics",
       "marks": 1,
       "difficulty": "easy",
@@ -1329,22 +1329,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Alleles"
+          "text": "Lipids"
         },
         {
           "id": "B",
-          "text": "Organs"
+          "text": "Alleles"
         },
         {
           "id": "C",
-          "text": "Enzymes"
+          "text": "Organs"
         },
         {
           "id": "D",
-          "text": "Lipids"
+          "text": "Enzymes"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Alleles",
       "marks": 1,
       "difficulty": "easy",
@@ -1430,22 +1430,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Deliberate modification or transfer of genetic material"
-        },
-        {
-          "id": "B",
-          "text": "Only selective feeding"
-        },
-        {
-          "id": "C",
           "text": "Only mechanical digestion"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only blood clotting"
+        },
+        {
+          "id": "C",
+          "text": "Deliberate modification or transfer of genetic material"
+        },
+        {
+          "id": "D",
+          "text": "Only selective feeding"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Deliberate modification or transfer of genetic material",
       "marks": 1,
       "difficulty": "easy",
@@ -1531,22 +1531,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Using microorganisms or engineered cells to make useful products"
-        },
-        {
-          "id": "B",
           "text": "Measuring body temperature only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Filtering sand from water only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Drawing a food web"
+        },
+        {
+          "id": "D",
+          "text": "Using microorganisms or engineered cells to make useful products"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Using microorganisms or engineered cells to make useful products",
       "marks": 1,
       "difficulty": "easy",
@@ -1733,22 +1733,22 @@
       "options": [
         {
           "id": "A",
-          "text": "To recognize and control harmful foreign agents"
+          "text": "To produce urine"
         },
         {
           "id": "B",
-          "text": "To digest food"
+          "text": "To recognize and control harmful foreign agents"
         },
         {
           "id": "C",
-          "text": "To pump blood"
+          "text": "To digest food"
         },
         {
           "id": "D",
-          "text": "To produce urine"
+          "text": "To pump blood"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "To recognize and control harmful foreign agents",
       "marks": 1,
       "difficulty": "easy",
@@ -1834,22 +1834,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Heritable variation affecting survival or reproduction"
-        },
-        {
-          "id": "B",
-          "text": "All acquired habits equally"
-        },
-        {
-          "id": "C",
           "text": "Only non-heritable changes"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Random choice by organisms"
+        },
+        {
+          "id": "C",
+          "text": "Heritable variation affecting survival or reproduction"
+        },
+        {
+          "id": "D",
+          "text": "All acquired habits equally"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Heritable variation affecting survival or reproduction",
       "marks": 1,
       "difficulty": "easy",
@@ -1935,22 +1935,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Comparative anatomy and molecular similarities"
-        },
-        {
-          "id": "B",
           "text": "Only daily weather"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only individual exercise"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only soil colour"
+        },
+        {
+          "id": "D",
+          "text": "Comparative anatomy and molecular similarities"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Comparative anatomy and molecular similarities",
       "marks": 1,
       "difficulty": "easy",

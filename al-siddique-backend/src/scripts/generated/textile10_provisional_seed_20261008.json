@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "wardrobe planning, needs, budget, versatility اور sustainability"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "wardrobe planning, needs, budget, versatility اور sustainability"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "wardrobe planning, needs, budget, versatility اور sustainability",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "clean, dry, organized storage اور fabric-appropriate care"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "clean, dry, organized storage اور fabric-appropriate care"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "clean, dry, organized storage اور fabric-appropriate care",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "fabric label, prompt safe treatment اور professional help when appropriate"
-        },
-        {
-          "id": "B",
           "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "D",
+          "text": "fabric label, prompt safe treatment اور professional help when appropriate"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "fabric label, prompt safe treatment اور professional help when appropriate",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "measurement, tools, safe workspace اور basic construction planning"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "measurement, tools, safe workspace اور basic construction planning"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "measurement, tools, safe workspace اور basic construction planning",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "design-to-garment workflow, fit, finishing, quality and safe tool use"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "design-to-garment workflow, fit, finishing, quality and safe tool use"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "design-to-garment workflow, fit, finishing, quality and safe tool use",
       "marks": 1,
       "difficulty": "easy",

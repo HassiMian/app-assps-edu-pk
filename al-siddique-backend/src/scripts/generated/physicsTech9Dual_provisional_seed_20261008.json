@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Closeness of repeated measurements to each other"
+          "text": "Unit conversion"
         },
         {
           "id": "B",
-          "text": "Only closeness to zero"
+          "text": "Closeness of repeated measurements to each other"
         },
         {
           "id": "C",
-          "text": "Instrument colour"
+          "text": "Only closeness to zero"
         },
         {
           "id": "D",
-          "text": "Unit conversion"
+          "text": "Instrument colour"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Closeness of repeated measurements to each other",
       "marks": 1,
       "difficulty": "easy",
@@ -162,22 +162,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Direction"
-        },
-        {
-          "id": "B",
-          "text": "Mass"
-        },
-        {
-          "id": "C",
           "text": "Temperature"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Pressure"
+        },
+        {
+          "id": "C",
+          "text": "Direction"
+        },
+        {
+          "id": "D",
+          "text": "Mass"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Direction",
       "marks": 1,
       "difficulty": "easy",
@@ -207,22 +207,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Velocity"
-        },
-        {
-          "id": "B",
           "text": "Mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Density"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Energy only"
+        },
+        {
+          "id": "D",
+          "text": "Velocity"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -353,22 +353,22 @@
       "options": [
         {
           "id": "A",
-          "text": "mass × velocity"
+          "text": "mass ÷ volume"
         },
         {
           "id": "B",
-          "text": "force ÷ area"
+          "text": "mass × velocity"
         },
         {
           "id": "C",
-          "text": "work ÷ time"
+          "text": "force ÷ area"
         },
         {
           "id": "D",
-          "text": "mass ÷ volume"
+          "text": "work ÷ time"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "mass × velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -454,22 +454,22 @@
       "options": [
         {
           "id": "A",
-          "text": "force × perpendicular distance"
-        },
-        {
-          "id": "B",
-          "text": "mass × velocity"
-        },
-        {
-          "id": "C",
           "text": "pressure × volume"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "power × time only"
+        },
+        {
+          "id": "C",
+          "text": "force × perpendicular distance"
+        },
+        {
+          "id": "D",
+          "text": "mass × velocity"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "force × perpendicular distance",
       "marks": 1,
       "difficulty": "easy",
@@ -499,22 +499,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Zero"
-        },
-        {
-          "id": "B",
           "text": "Always maximum"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Equal to mass"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Undefined"
+        },
+        {
+          "id": "D",
+          "text": "Zero"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Zero",
       "marks": 1,
       "difficulty": "easy",
@@ -645,22 +645,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Change form but total energy remains conserved"
+          "text": "Exist only as heat"
         },
         {
           "id": "B",
-          "text": "Be created from nothing"
+          "text": "Change form but total energy remains conserved"
         },
         {
           "id": "C",
-          "text": "Always disappear"
+          "text": "Be created from nothing"
         },
         {
           "id": "D",
-          "text": "Exist only as heat"
+          "text": "Always disappear"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Change form but total energy remains conserved",
       "marks": 1,
       "difficulty": "easy",
@@ -746,22 +746,22 @@
       "options": [
         {
           "id": "A",
-          "text": "mass ÷ volume"
-        },
-        {
-          "id": "B",
-          "text": "force ÷ area"
-        },
-        {
-          "id": "C",
           "text": "work ÷ time"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "distance ÷ time"
+        },
+        {
+          "id": "C",
+          "text": "mass ÷ volume"
+        },
+        {
+          "id": "D",
+          "text": "force ÷ area"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "mass ÷ volume",
       "marks": 1,
       "difficulty": "easy",
@@ -791,22 +791,22 @@
       "options": [
         {
           "id": "A",
-          "text": "force per unit area"
-        },
-        {
-          "id": "B",
           "text": "mass per unit time"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "energy per unit volume only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "speed per unit time"
+        },
+        {
+          "id": "D",
+          "text": "force per unit area"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "force per unit area",
       "marks": 1,
       "difficulty": "easy",
@@ -937,22 +937,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Temperature"
+          "text": "Momentum"
         },
         {
           "id": "B",
-          "text": "Mass"
+          "text": "Temperature"
         },
         {
           "id": "C",
-          "text": "Force"
+          "text": "Mass"
         },
         {
           "id": "D",
-          "text": "Momentum"
+          "text": "Force"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Temperature",
       "marks": 1,
       "difficulty": "easy",
@@ -1038,22 +1038,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repel"
-        },
-        {
-          "id": "B",
-          "text": "Always attract"
-        },
-        {
-          "id": "C",
           "text": "Lose all magnetism instantly"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Have no interaction"
+        },
+        {
+          "id": "C",
+          "text": "Repel"
+        },
+        {
+          "id": "D",
+          "text": "Always attract"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Repel",
       "marks": 1,
       "difficulty": "easy",
@@ -1083,22 +1083,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electric current producing a magnetic field"
-        },
-        {
-          "id": "B",
           "text": "Only gravity"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only heat"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only pressure"
+        },
+        {
+          "id": "D",
+          "text": "Electric current producing a magnetic field"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Electric current producing a magnetic field",
       "marks": 1,
       "difficulty": "easy",
@@ -1229,22 +1229,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repeated measurements کا ایک دوسرے کے قریب ہونا"
+          "text": "unit تبدیل کرنا"
         },
         {
           "id": "B",
-          "text": "صرف zero کے قریب ہونا"
+          "text": "Repeated measurements کا ایک دوسرے کے قریب ہونا"
         },
         {
           "id": "C",
-          "text": "instrument کا رنگ"
+          "text": "صرف zero کے قریب ہونا"
         },
         {
           "id": "D",
-          "text": "unit تبدیل کرنا"
+          "text": "instrument کا رنگ"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Repeated measurements کا ایک دوسرے کے قریب ہونا",
       "marks": 1,
       "difficulty": "easy",
@@ -1330,22 +1330,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Direction"
-        },
-        {
-          "id": "B",
-          "text": "Mass"
-        },
-        {
-          "id": "C",
           "text": "Temperature"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Pressure"
+        },
+        {
+          "id": "C",
+          "text": "Direction"
+        },
+        {
+          "id": "D",
+          "text": "Mass"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Direction",
       "marks": 1,
       "difficulty": "easy",
@@ -1375,22 +1375,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Velocity"
-        },
-        {
-          "id": "B",
           "text": "Mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Density"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Energy only"
+        },
+        {
+          "id": "D",
+          "text": "Velocity"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -1521,22 +1521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "mass × velocity"
+          "text": "mass ÷ volume"
         },
         {
           "id": "B",
-          "text": "force ÷ area"
+          "text": "mass × velocity"
         },
         {
           "id": "C",
-          "text": "work ÷ time"
+          "text": "force ÷ area"
         },
         {
           "id": "D",
-          "text": "mass ÷ volume"
+          "text": "work ÷ time"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "mass × velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -1622,22 +1622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "force × perpendicular distance"
-        },
-        {
-          "id": "B",
-          "text": "mass × velocity"
-        },
-        {
-          "id": "C",
           "text": "pressure × volume"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "power × time only"
+        },
+        {
+          "id": "C",
+          "text": "force × perpendicular distance"
+        },
+        {
+          "id": "D",
+          "text": "mass × velocity"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "force × perpendicular distance",
       "marks": 1,
       "difficulty": "easy",
@@ -1667,22 +1667,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Zero"
-        },
-        {
-          "id": "B",
           "text": "ہمیشہ maximum"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "mass کے برابر"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Undefined"
+        },
+        {
+          "id": "D",
+          "text": "Zero"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Zero",
       "marks": 1,
       "difficulty": "easy",
@@ -1813,22 +1813,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے"
+          "text": "صرف heat موجود ہے"
         },
         {
           "id": "B",
-          "text": "Energy کچھ نہیں سے بنتی ہے"
+          "text": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے"
         },
         {
           "id": "C",
-          "text": "Energy ہمیشہ ختم ہو جاتی ہے"
+          "text": "Energy کچھ نہیں سے بنتی ہے"
         },
         {
           "id": "D",
-          "text": "صرف heat موجود ہے"
+          "text": "Energy ہمیشہ ختم ہو جاتی ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Energy form بدل سکتی ہے مگر total محفوظ رہتی ہے",
       "marks": 1,
       "difficulty": "easy",
@@ -1914,22 +1914,22 @@
       "options": [
         {
           "id": "A",
-          "text": "mass ÷ volume"
-        },
-        {
-          "id": "B",
-          "text": "force ÷ area"
-        },
-        {
-          "id": "C",
           "text": "work ÷ time"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "distance ÷ time"
+        },
+        {
+          "id": "C",
+          "text": "mass ÷ volume"
+        },
+        {
+          "id": "D",
+          "text": "force ÷ area"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "mass ÷ volume",
       "marks": 1,
       "difficulty": "easy",
@@ -1959,22 +1959,22 @@
       "options": [
         {
           "id": "A",
-          "text": "force per unit area"
-        },
-        {
-          "id": "B",
           "text": "mass per unit time"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "energy per unit volume only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "speed per unit time"
+        },
+        {
+          "id": "D",
+          "text": "force per unit area"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "force per unit area",
       "marks": 1,
       "difficulty": "easy",
@@ -2105,22 +2105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Temperature"
+          "text": "Momentum"
         },
         {
           "id": "B",
-          "text": "Mass"
+          "text": "Temperature"
         },
         {
           "id": "C",
-          "text": "Force"
+          "text": "Mass"
         },
         {
           "id": "D",
-          "text": "Momentum"
+          "text": "Force"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Temperature",
       "marks": 1,
       "difficulty": "easy",
@@ -2206,22 +2206,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repel"
-        },
-        {
-          "id": "B",
-          "text": "ہمیشہ attract"
-        },
-        {
-          "id": "C",
           "text": "فوراً تمام magnetism کھو دیتے ہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "کوئی interaction نہیں"
+        },
+        {
+          "id": "C",
+          "text": "Repel"
+        },
+        {
+          "id": "D",
+          "text": "ہمیشہ attract"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Repel",
       "marks": 1,
       "difficulty": "easy",
@@ -2251,22 +2251,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electric current magnetic field پیدا کرتا ہے"
-        },
-        {
-          "id": "B",
           "text": "صرف gravity"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف heat"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "صرف pressure"
+        },
+        {
+          "id": "D",
+          "text": "Electric current magnetic field پیدا کرتا ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Electric current magnetic field پیدا کرتا ہے",
       "marks": 1,
       "difficulty": "easy",

@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے"
+          "text": "کوئی جداگانہ شناخت نہ تھی"
         },
         {
           "id": "B",
-          "text": "تمام سیاسی مطالبات ختم ہو گئے تھے"
+          "text": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے"
         },
         {
           "id": "C",
-          "text": "وہ صرف جغرافیائی اصطلاح تھے"
+          "text": "تمام سیاسی مطالبات ختم ہو گئے تھے"
         },
         {
           "id": "D",
-          "text": "کوئی جداگانہ شناخت نہ تھی"
+          "text": "وہ صرف جغرافیائی اصطلاح تھے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1940"
-        },
-        {
-          "id": "B",
-          "text": "1930"
-        },
-        {
-          "id": "C",
           "text": "1947"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "1956"
+        },
+        {
+          "id": "C",
+          "text": "1940"
+        },
+        {
+          "id": "D",
+          "text": "1930"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "1940",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1906"
-        },
-        {
-          "id": "B",
           "text": "1885"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "1940"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "1947"
+        },
+        {
+          "id": "D",
+          "text": "1906"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "1906",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1973"
+          "text": "1949"
         },
         {
           "id": "B",
-          "text": "1956"
+          "text": "1973"
         },
         {
           "id": "C",
-          "text": "1962"
+          "text": "1956"
         },
         {
           "id": "D",
-          "text": "1949"
+          "text": "1962"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "1973",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "جنوبی ایشیا"
-        },
-        {
-          "id": "B",
-          "text": "جنوبی امریکہ"
-        },
-        {
-          "id": "C",
           "text": "شمالی یورپ"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "وسطی افریقہ"
+        },
+        {
+          "id": "C",
+          "text": "جنوبی ایشیا"
+        },
+        {
+          "id": "D",
+          "text": "جنوبی امریکہ"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "جنوبی ایشیا",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "دریائے سندھ کا نظام"
-        },
-        {
-          "id": "B",
           "text": "دریائے نیل"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "ایمیزون"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "ڈینیوب"
+        },
+        {
+          "id": "D",
+          "text": "دریائے سندھ کا نظام"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "دریائے سندھ کا نظام",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "جنوبی ایشیا"
+          "text": "اسکینڈینیویا"
         },
         {
           "id": "B",
-          "text": "جنوبی امریکہ"
+          "text": "جنوبی ایشیا"
         },
         {
           "id": "C",
-          "text": "مغربی افریقہ"
+          "text": "جنوبی امریکہ"
         },
         {
           "id": "D",
-          "text": "اسکینڈینیویا"
+          "text": "مغربی افریقہ"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "جنوبی ایشیا",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Primary sector"
-        },
-        {
-          "id": "B",
-          "text": "صرف Secondary sector"
-        },
-        {
-          "id": "C",
           "text": "صرف Tertiary sector"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف Quaternary"
+        },
+        {
+          "id": "C",
+          "text": "Primary sector"
+        },
+        {
+          "id": "D",
+          "text": "صرف Secondary sector"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Primary sector",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "شمسی توانائی"
-        },
-        {
-          "id": "B",
           "text": "کوئلہ"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "پٹرولیم"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "قدرتی گیس"
+        },
+        {
+          "id": "D",
+          "text": "شمسی توانائی"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "شمسی توانائی",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "زبانیں، روایات اور سماجی طریقے"
+          "text": "صرف currency"
         },
         {
           "id": "B",
-          "text": "صرف gravity"
+          "text": "زبانیں، روایات اور سماجی طریقے"
         },
         {
           "id": "C",
-          "text": "صرف latitude"
+          "text": "صرف gravity"
         },
         {
           "id": "D",
-          "text": "صرف currency"
+          "text": "صرف latitude"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "زبانیں، روایات اور سماجی طریقے",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا"
-        },
-        {
-          "id": "B",
-          "text": "تعلیم محدود کرنا"
-        },
-        {
-          "id": "C",
           "text": "قانونی شناخت کم کرنا"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "معاشی شرکت روکنا"
+        },
+        {
+          "id": "C",
+          "text": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا"
+        },
+        {
+          "id": "D",
+          "text": "تعلیم محدود کرنا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے"
-        },
-        {
-          "id": "B",
           "text": "یہ literacy کم کرتی ہے"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "یہ employment روکتی ہے"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "یہ civic participation ختم کرتی ہے"
+        },
+        {
+          "id": "D",
+          "text": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے",
       "marks": 1,
       "difficulty": "easy",

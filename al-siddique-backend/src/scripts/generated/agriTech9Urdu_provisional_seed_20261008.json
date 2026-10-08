@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Climate اور soil suitability"
+          "text": "keyboard layout"
         },
         {
           "id": "B",
-          "text": "صرف random choice"
+          "text": "Climate اور soil suitability"
         },
         {
           "id": "C",
-          "text": "screen brightness"
+          "text": "صرف random choice"
         },
         {
           "id": "D",
-          "text": "keyboard layout"
+          "text": "screen brightness"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Climate اور soil suitability",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "گرم/مون سون growing season"
-        },
-        {
-          "id": "B",
-          "text": "صرف freezing conditions"
-        },
-        {
-          "id": "C",
           "text": "کوئی growing season نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف indoor storage"
+        },
+        {
+          "id": "C",
+          "text": "گرم/مون سون growing season"
+        },
+        {
+          "id": "D",
+          "text": "صرف freezing conditions"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "گرم/مون سون growing season",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Long-term soil اور crop management بہتر کرنا"
-        },
-        {
-          "id": "B",
           "text": "ہمیشہ ایک ہی crop اگانا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "تمام soil organisms ختم کرنا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "planning ختم کرنا"
+        },
+        {
+          "id": "D",
+          "text": "Long-term soil اور crop management بہتر کرنا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Long-term soil اور crop management بہتر کرنا",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Root zone میں ضرورت سے زیادہ پانی بھر جانا"
+          "text": "صرف کم روشنی"
         },
         {
           "id": "B",
-          "text": "ہر حالت میں مکمل خشک سالی"
+          "text": "Root zone میں ضرورت سے زیادہ پانی بھر جانا"
         },
         {
           "id": "C",
-          "text": "صرف تیز ہوا"
+          "text": "ہر حالت میں مکمل خشک سالی"
         },
         {
           "id": "D",
-          "text": "صرف کم روشنی"
+          "text": "صرف تیز ہوا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Root zone میں ضرورت سے زیادہ پانی بھر جانا",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Agricultural crops اور/یا livestock systems"
-        },
-        {
-          "id": "B",
-          "text": "صرف office buildings"
-        },
-        {
-          "id": "C",
           "text": "صرف roads"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "کوئی land use نہیں"
+        },
+        {
+          "id": "C",
+          "text": "Agricultural crops اور/یا livestock systems"
+        },
+        {
+          "id": "D",
+          "text": "صرف office buildings"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Agricultural crops اور/یا livestock systems",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Health، nutrition، welfare اور suitable housing"
-        },
-        {
-          "id": "B",
           "text": "clean water ignore کرنا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "disease signs ignore کرنا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "overcrowding"
+        },
+        {
+          "id": "D",
+          "text": "Health، nutrition، welfare اور suitable housing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Health، nutrition، welfare اور suitable housing",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Clean housing، suitable feed/water اور health monitoring"
+          "text": "sick birds ignore کرنا"
         },
         {
           "id": "B",
-          "text": "overcrowding"
+          "text": "Clean housing، suitable feed/water اور health monitoring"
         },
         {
           "id": "C",
-          "text": "no ventilation"
+          "text": "overcrowding"
         },
         {
           "id": "D",
-          "text": "sick birds ignore کرنا"
+          "text": "no ventilation"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Clean housing، suitable feed/water اور health monitoring",
       "marks": 1,
       "difficulty": "easy",

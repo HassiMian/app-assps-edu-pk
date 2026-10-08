@@ -65,22 +65,22 @@
       "options": [
         {
           "id": "A",
-          "text": "حریت"
+          "text": "رکاوٹ"
         },
         {
           "id": "B",
-          "text": "غلامی"
+          "text": "حریت"
         },
         {
           "id": "C",
-          "text": "قید"
+          "text": "غلامی"
         },
         {
           "id": "D",
-          "text": "رکاوٹ"
+          "text": "قید"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "حریت",
       "marks": 1,
       "difficulty": "medium",
@@ -112,22 +112,22 @@
       "options": [
         {
           "id": "A",
-          "text": "زوال"
-        },
-        {
-          "id": "B",
-          "text": "بلندی"
-        },
-        {
-          "id": "C",
           "text": "کمال"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "ترقی"
+        },
+        {
+          "id": "C",
+          "text": "زوال"
+        },
+        {
+          "id": "D",
+          "text": "بلندی"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "زوال",
       "marks": 1,
       "difficulty": "medium",
@@ -159,22 +159,22 @@
       "options": [
         {
           "id": "A",
-          "text": "پوری تیاری کرنا"
-        },
-        {
-          "id": "B",
           "text": "آرام کرنا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "خاموش رہنا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "سفر ختم کرنا"
+        },
+        {
+          "id": "D",
+          "text": "پوری تیاری کرنا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "پوری تیاری کرنا",
       "marks": 1,
       "difficulty": "medium",

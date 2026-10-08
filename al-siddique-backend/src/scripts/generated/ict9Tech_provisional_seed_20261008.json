@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Organize content consistently"
+          "text": "Disable formatting"
         },
         {
           "id": "B",
-          "text": "Increase processor temperature"
+          "text": "Organize content consistently"
         },
         {
           "id": "C",
-          "text": "Replace all text with code"
+          "text": "Increase processor temperature"
         },
         {
           "id": "D",
-          "text": "Disable formatting"
+          "text": "Replace all text with code"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Organize content consistently",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Microcontroller"
-        },
-        {
-          "id": "B",
-          "text": "Printer cartridge"
-        },
-        {
-          "id": "C",
           "text": "Hard-disk platter"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Projector lens"
+        },
+        {
+          "id": "C",
+          "text": "Microcontroller"
+        },
+        {
+          "id": "D",
+          "text": "Printer cartridge"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Microcontroller",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Discrete states such as 0 and 1"
-        },
-        {
-          "id": "B",
           "text": "Only paragraph styles"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only colours"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Only file names"
+        },
+        {
+          "id": "D",
+          "text": "Discrete states such as 0 and 1"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Discrete states such as 0 and 1",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "More than one media form such as text, image, audio or video"
+          "text": "Only hardware"
         },
         {
           "id": "B",
-          "text": "Only numbers"
+          "text": "More than one media form such as text, image, audio or video"
         },
         {
           "id": "C",
-          "text": "Only plain text"
+          "text": "Only numbers"
         },
         {
           "id": "D",
-          "text": "Only hardware"
+          "text": "Only plain text"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "More than one media form such as text, image, audio or video",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Structure web-page content"
-        },
-        {
-          "id": "B",
-          "text": "Repair computer hardware"
-        },
-        {
-          "id": "C",
           "text": "Compress every file"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Replace all databases"
+        },
+        {
+          "id": "C",
+          "text": "Structure web-page content"
+        },
+        {
+          "id": "D",
+          "text": "Repair computer hardware"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Structure web-page content",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Track items a customer may purchase"
-        },
-        {
-          "id": "B",
           "text": "Format a hard drive"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Draw electrical circuits"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Edit operating-system kernels"
+        },
+        {
+          "id": "D",
+          "text": "Track items a customer may purchase"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Track items a customer may purchase",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Reduce avoidable failures and keep systems reliable"
+          "text": "Disable updates forever"
         },
         {
           "id": "B",
-          "text": "Create faults deliberately"
+          "text": "Reduce avoidable failures and keep systems reliable"
         },
         {
           "id": "C",
-          "text": "Remove all backups"
+          "text": "Create faults deliberately"
         },
         {
           "id": "D",
-          "text": "Disable updates forever"
+          "text": "Remove all backups"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Reduce avoidable failures and keep systems reliable",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Pattern recognition, prediction or reasoning"
-        },
-        {
-          "id": "B",
-          "text": "Only cable storage"
-        },
-        {
-          "id": "C",
           "text": "Only page margins"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only battery charging"
+        },
+        {
+          "id": "C",
+          "text": "Pattern recognition, prediction or reasoning"
+        },
+        {
+          "id": "D",
+          "text": "Only cable storage"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Pattern recognition, prediction or reasoning",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Learn useful patterns from data for a task"
-        },
-        {
-          "id": "B",
           "text": "Ignore all data"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Remove all software"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Increase screen size"
+        },
+        {
+          "id": "D",
+          "text": "Learn useful patterns from data for a task"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Learn useful patterns from data for a task",
       "marks": 1,
       "difficulty": "easy",

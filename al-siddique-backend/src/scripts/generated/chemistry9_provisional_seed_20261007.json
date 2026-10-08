@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon dioxide"
+          "text": "Argon"
         },
         {
           "id": "B",
-          "text": "Neon"
+          "text": "Carbon dioxide"
         },
         {
           "id": "C",
-          "text": "Helium"
+          "text": "Neon"
         },
         {
           "id": "D",
-          "text": "Argon"
+          "text": "Helium"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Carbon dioxide",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Particulate matter"
-        },
-        {
-          "id": "B",
-          "text": "Noble gas"
-        },
-        {
-          "id": "C",
           "text": "Distilled water"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Alkali"
+        },
+        {
+          "id": "C",
+          "text": "Particulate matter"
+        },
+        {
+          "id": "D",
+          "text": "Noble gas"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Particulate matter",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon monoxide"
-        },
-        {
-          "id": "B",
           "text": "Oxygen"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Helium"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Argon"
+        },
+        {
+          "id": "D",
+          "text": "Carbon monoxide"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Carbon monoxide",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Acid rain"
+          "text": "Atomic number"
         },
         {
           "id": "B",
-          "text": "Noble-gas formation"
+          "text": "Acid rain"
         },
         {
           "id": "C",
-          "text": "Water electrolysis"
+          "text": "Noble-gas formation"
         },
         {
           "id": "D",
-          "text": "Atomic number"
+          "text": "Water electrolysis"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Acid rain",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Greenhouse effect"
-        },
-        {
-          "id": "B",
-          "text": "Neutralization"
-        },
-        {
-          "id": "C",
           "text": "Electrolysis"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Sublimation"
+        },
+        {
+          "id": "C",
+          "text": "Greenhouse effect"
+        },
+        {
+          "id": "D",
+          "text": "Neutralization"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Greenhouse effect",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Burning fossil fuels"
-        },
-        {
-          "id": "B",
           "text": "Using noble gases"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Freezing pure water"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Filtering sand"
+        },
+        {
+          "id": "D",
+          "text": "Burning fossil fuels"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Burning fossil fuels",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Combustion-related emissions"
+          "text": "Water molecules"
         },
         {
           "id": "B",
-          "text": "Atomic numbers"
+          "text": "Combustion-related emissions"
         },
         {
           "id": "C",
-          "text": "Noble-gas stability"
+          "text": "Atomic numbers"
         },
         {
           "id": "D",
-          "text": "Water molecules"
+          "text": "Noble-gas stability"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Combustion-related emissions",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon and hydrogen"
-        },
-        {
-          "id": "B",
-          "text": "Carbon and oxygen"
-        },
-        {
-          "id": "C",
           "text": "Hydrogen and nitrogen"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Carbon and chlorine"
+        },
+        {
+          "id": "C",
+          "text": "Carbon and hydrogen"
+        },
+        {
+          "id": "D",
+          "text": "Carbon and oxygen"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Carbon and hydrogen",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Saturated hydrocarbons"
-        },
-        {
-          "id": "B",
           "text": "Unsaturated hydrocarbons"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Alcohols"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Carboxylic acids"
+        },
+        {
+          "id": "D",
+          "text": "Saturated hydrocarbons"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Saturated hydrocarbons",
       "marks": 1,
       "difficulty": "easy",
@@ -1329,22 +1329,22 @@
       "options": [
         {
           "id": "A",
-          "text": "CH2"
+          "text": "O2"
         },
         {
           "id": "B",
-          "text": "H2O"
+          "text": "CH2"
         },
         {
           "id": "C",
-          "text": "CO2"
+          "text": "H2O"
         },
         {
           "id": "D",
-          "text": "O2"
+          "text": "CO2"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "CH2",
       "marks": 1,
       "difficulty": "easy",
@@ -1430,22 +1430,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Length of the longest carbon chain"
-        },
-        {
-          "id": "B",
-          "text": "Number of oxygen atoms"
-        },
-        {
-          "id": "C",
           "text": "Colour of compound"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Density only"
+        },
+        {
+          "id": "C",
+          "text": "Length of the longest carbon chain"
+        },
+        {
+          "id": "D",
+          "text": "Number of oxygen atoms"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Length of the longest carbon chain",
       "marks": 1,
       "difficulty": "easy",
@@ -1531,22 +1531,22 @@
       "options": [
         {
           "id": "A",
-          "text": "To give substituents the lowest possible locants"
-        },
-        {
-          "id": "B",
           "text": "To increase molecular mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "To remove hydrogen"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "To change the formula"
+        },
+        {
+          "id": "D",
+          "text": "To give substituents the lowest possible locants"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "To give substituents the lowest possible locants",
       "marks": 1,
       "difficulty": "easy",
@@ -1733,22 +1733,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Add hydrogen across unsaturation"
+          "text": "Convert water to salt"
         },
         {
           "id": "B",
-          "text": "Remove all carbon atoms"
+          "text": "Add hydrogen across unsaturation"
         },
         {
           "id": "C",
-          "text": "Create noble gases"
+          "text": "Remove all carbon atoms"
         },
         {
           "id": "D",
-          "text": "Convert water to salt"
+          "text": "Create noble gases"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Add hydrogen across unsaturation",
       "marks": 1,
       "difficulty": "easy",
@@ -1834,22 +1834,22 @@
       "options": [
         {
           "id": "A",
-          "text": "metre"
+          "text": "gram"
         },
         {
           "id": "B",
-          "text": "mole"
+          "text": "metre"
         },
         {
           "id": "C",
-          "text": "kelvin per mole"
+          "text": "mole"
         },
         {
           "id": "D",
-          "text": "gram"
+          "text": "kelvin per mole"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "C",
       "answer": "mole",
       "marks": 1,
       "difficulty": "easy",
@@ -1879,22 +1879,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They make measurements comparable"
-        },
-        {
-          "id": "B",
           "text": "They remove all experimental error"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "They replace numerical values"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "They are only used in laboratories"
+        },
+        {
+          "id": "D",
+          "text": "They make measurements comparable"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "They make measurements comparable",
       "marks": 1,
       "difficulty": "easy",
@@ -2053,22 +2053,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Using a suitable calibrated instrument"
+          "text": "Mixing different unit systems without conversion"
         },
         {
           "id": "B",
-          "text": "Estimating every value by eye"
+          "text": "Using a suitable calibrated instrument"
         },
         {
           "id": "C",
-          "text": "Recording fewer significant figures than observed"
+          "text": "Estimating every value by eye"
         },
         {
           "id": "D",
-          "text": "Mixing different unit systems without conversion"
+          "text": "Recording fewer significant figures than observed"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Using a suitable calibrated instrument",
       "marks": 1,
       "difficulty": "easy",
@@ -2182,22 +2182,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Precise but not accurate"
-        },
-        {
-          "id": "B",
-          "text": "Accurate but not precise"
-        },
-        {
-          "id": "C",
           "text": "Both accurate and precise"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Neither measured nor recorded"
+        },
+        {
+          "id": "C",
+          "text": "Precise but not accurate"
+        },
+        {
+          "id": "D",
+          "text": "Accurate but not precise"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Precise but not accurate",
       "marks": 1,
       "difficulty": "easy",
@@ -2227,22 +2227,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Systematic error"
-        },
-        {
-          "id": "B",
           "text": "Random error"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "No error"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Unit conversion only"
+        },
+        {
+          "id": "D",
+          "text": "Systematic error"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Systematic error",
       "marks": 1,
       "difficulty": "easy",
@@ -2401,22 +2401,22 @@
       "options": [
         {
           "id": "A",
-          "text": "To identify contents and hazards"
+          "text": "To guarantee the chemical is harmless"
         },
         {
           "id": "B",
-          "text": "To make glassware heavier"
+          "text": "To identify contents and hazards"
         },
         {
           "id": "C",
-          "text": "To remove the need for PPE"
+          "text": "To make glassware heavier"
         },
         {
           "id": "D",
-          "text": "To guarantee the chemical is harmless"
+          "text": "To remove the need for PPE"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "To identify contents and hazards",
       "marks": 1,
       "difficulty": "easy",
@@ -2530,22 +2530,22 @@
       "options": [
         {
           "id": "A",
-          "text": "To communicate a specific risk quickly"
-        },
-        {
-          "id": "B",
-          "text": "To indicate the price of the chemical"
-        },
-        {
-          "id": "C",
           "text": "To show the chemical is safe to taste"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "To replace all written instructions"
+        },
+        {
+          "id": "C",
+          "text": "To communicate a specific risk quickly"
+        },
+        {
+          "id": "D",
+          "text": "To indicate the price of the chemical"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "To communicate a specific risk quickly",
       "marks": 1,
       "difficulty": "easy",
@@ -2575,22 +2575,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Ignition sources"
-        },
-        {
-          "id": "B",
           "text": "Labels"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Measuring cylinders"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Safety data"
+        },
+        {
+          "id": "D",
+          "text": "Ignition sources"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Ignition sources",
       "marks": 1,
       "difficulty": "easy",
@@ -2749,22 +2749,22 @@
       "options": [
         {
           "id": "A",
-          "text": "It provides a protective barrier for clothing and skin"
+          "text": "It removes the need to wash hands"
         },
         {
           "id": "B",
-          "text": "It replaces eye protection"
+          "text": "It provides a protective barrier for clothing and skin"
         },
         {
           "id": "C",
-          "text": "It prevents every chemical reaction"
+          "text": "It replaces eye protection"
         },
         {
           "id": "D",
-          "text": "It removes the need to wash hands"
+          "text": "It prevents every chemical reaction"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "It provides a protective barrier for clothing and skin",
       "marks": 1,
       "difficulty": "easy",
@@ -2878,22 +2878,22 @@
       "options": [
         {
           "id": "A",
-          "text": "So it can be reached quickly in an emergency"
-        },
-        {
-          "id": "B",
-          "text": "So it can be moved randomly"
-        },
-        {
-          "id": "C",
           "text": "So experiments can avoid instructions"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "So labels are unnecessary"
+        },
+        {
+          "id": "C",
+          "text": "So it can be reached quickly in an emergency"
+        },
+        {
+          "id": "D",
+          "text": "So it can be moved randomly"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "So it can be reached quickly in an emergency",
       "marks": 1,
       "difficulty": "easy",
@@ -2923,22 +2923,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Use the correct equipment for the type of emergency"
-        },
-        {
-          "id": "B",
           "text": "Use every device at once"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Ignore teacher instructions"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Block access to the equipment"
+        },
+        {
+          "id": "D",
+          "text": "Use the correct equipment for the type of emergency"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Use the correct equipment for the type of emergency",
       "marks": 1,
       "difficulty": "easy",
@@ -3097,22 +3097,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They help people respond quickly and correctly"
+          "text": "They are only for record keeping"
         },
         {
           "id": "B",
-          "text": "They eliminate all hazards permanently"
+          "text": "They help people respond quickly and correctly"
         },
         {
           "id": "C",
-          "text": "They replace safety equipment"
+          "text": "They eliminate all hazards permanently"
         },
         {
           "id": "D",
-          "text": "They are only for record keeping"
+          "text": "They replace safety equipment"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "They help people respond quickly and correctly",
       "marks": 1,
       "difficulty": "easy",
@@ -3226,22 +3226,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Chemistry"
-        },
-        {
-          "id": "B",
-          "text": "Astronomy"
-        },
-        {
-          "id": "C",
           "text": "Geology"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Ecology"
+        },
+        {
+          "id": "C",
+          "text": "Chemistry"
+        },
+        {
+          "id": "D",
+          "text": "Astronomy"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Chemistry",
       "marks": 1,
       "difficulty": "easy",
@@ -3271,22 +3271,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Why a substance changes into a different substance during a reaction"
-        },
-        {
-          "id": "B",
           "text": "Why a planet follows an orbit"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Why a lens forms an image"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Why a population migrates"
+        },
+        {
+          "id": "D",
+          "text": "Why a substance changes into a different substance during a reaction"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Why a substance changes into a different substance during a reaction",
       "marks": 1,
       "difficulty": "medium",
@@ -3473,22 +3473,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Gas particles are much farther apart"
+          "text": "Solids contain no empty space at all"
         },
         {
           "id": "B",
-          "text": "Gas particles have no mass"
+          "text": "Gas particles are much farther apart"
         },
         {
           "id": "C",
-          "text": "Solid particles are always moving faster"
+          "text": "Gas particles have no mass"
         },
         {
           "id": "D",
-          "text": "Solids contain no empty space at all"
+          "text": "Solid particles are always moving faster"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Gas particles are much farther apart",
       "marks": 1,
       "difficulty": "medium",
@@ -3630,22 +3630,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A pure substance made of one kind of atom"
-        },
-        {
-          "id": "B",
-          "text": "A mixture of two liquids"
-        },
-        {
-          "id": "C",
           "text": "A substance that always contains ions"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Any material that can be separated by filtration"
+        },
+        {
+          "id": "C",
+          "text": "A pure substance made of one kind of atom"
+        },
+        {
+          "id": "D",
+          "text": "A mixture of two liquids"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A pure substance made of one kind of atom",
       "marks": 1,
       "difficulty": "easy",
@@ -3675,22 +3675,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Metals, non-metals, metalloids and noble gases"
-        },
-        {
-          "id": "B",
           "text": "Solids, solutions, suspensions and colloids"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Acids, bases, salts and oxides only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Atoms, molecules, mixtures and compounds"
+        },
+        {
+          "id": "D",
+          "text": "Metals, non-metals, metalloids and noble gases"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Metals, non-metals, metalloids and noble gases",
       "marks": 1,
       "difficulty": "medium",
@@ -3877,22 +3877,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Diamond and graphite"
+          "text": "Hydrogen and water"
         },
         {
           "id": "B",
-          "text": "Water and steam"
+          "text": "Diamond and graphite"
         },
         {
           "id": "C",
-          "text": "Sodium and sodium chloride"
+          "text": "Water and steam"
         },
         {
           "id": "D",
-          "text": "Hydrogen and water"
+          "text": "Sodium and sodium chloride"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Diamond and graphite",
       "marks": 1,
       "difficulty": "medium",
@@ -4034,22 +4034,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A mixture"
-        },
-        {
-          "id": "B",
-          "text": "An element"
-        },
-        {
-          "id": "C",
           "text": "A pure compound only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "A single atom"
+        },
+        {
+          "id": "C",
+          "text": "A mixture"
+        },
+        {
+          "id": "D",
+          "text": "An element"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "A mixture",
       "marks": 1,
       "difficulty": "easy",
@@ -4079,22 +4079,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A compound has constituents chemically combined in a fixed ratio"
-        },
-        {
-          "id": "B",
           "text": "A compound can always be separated by filtration"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "A mixture always contains only two substances"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "A mixture has a fixed chemical formula"
+        },
+        {
+          "id": "D",
+          "text": "A compound has constituents chemically combined in a fixed ratio"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "A compound has constituents chemically combined in a fixed ratio",
       "marks": 1,
       "difficulty": "medium",
@@ -4281,22 +4281,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They are dispersed at a very small particle scale"
+          "text": "They settle before reaching the filter"
         },
         {
           "id": "B",
-          "text": "They are always heavier than the solvent"
+          "text": "They are dispersed at a very small particle scale"
         },
         {
           "id": "C",
-          "text": "They are chemically converted into the filter paper"
+          "text": "They are always heavier than the solvent"
         },
         {
           "id": "D",
-          "text": "They settle before reaching the filter"
+          "text": "They are chemically converted into the filter paper"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "They are dispersed at a very small particle scale",
       "marks": 1,
       "difficulty": "medium",
@@ -4438,22 +4438,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electron"
-        },
-        {
-          "id": "B",
-          "text": "Proton"
-        },
-        {
-          "id": "C",
           "text": "Neutron"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Nucleus"
+        },
+        {
+          "id": "C",
+          "text": "Electron"
+        },
+        {
+          "id": "D",
+          "text": "Proton"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Electron",
       "marks": 1,
       "difficulty": "easy",
@@ -4483,22 +4483,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Higher energy"
-        },
-        {
-          "id": "B",
           "text": "Lower energy only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Zero energy"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "The same energy in every shell"
+        },
+        {
+          "id": "D",
+          "text": "Higher energy"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Higher energy",
       "marks": 1,
       "difficulty": "medium",
@@ -4685,22 +4685,22 @@
       "options": [
         {
           "id": "A",
-          "text": "16"
+          "text": "46"
         },
         {
           "id": "B",
-          "text": "15"
+          "text": "16"
         },
         {
           "id": "C",
-          "text": "31"
+          "text": "15"
         },
         {
           "id": "D",
-          "text": "46"
+          "text": "31"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "16",
       "marks": 1,
       "difficulty": "medium",
@@ -4842,22 +4842,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Protons"
-        },
-        {
-          "id": "B",
-          "text": "Neutrons"
-        },
-        {
-          "id": "C",
           "text": "Nucleons"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Electron shells in every ion"
+        },
+        {
+          "id": "C",
+          "text": "Protons"
+        },
+        {
+          "id": "D",
+          "text": "Neutrons"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Protons",
       "marks": 1,
       "difficulty": "easy",
@@ -4887,22 +4887,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Isotopes of the same element"
-        },
-        {
-          "id": "B",
           "text": "Different ions of different elements"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Identical atoms in every respect"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Two compounds"
+        },
+        {
+          "id": "D",
+          "text": "Isotopes of the same element"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Isotopes of the same element",
       "marks": 1,
       "difficulty": "medium",
@@ -5089,22 +5089,22 @@
       "options": [
         {
           "id": "A",
-          "text": "10.5"
+          "text": "12.0"
         },
         {
           "id": "B",
-          "text": "11.0"
+          "text": "10.5"
         },
         {
           "id": "C",
-          "text": "10.0"
+          "text": "11.0"
         },
         {
           "id": "D",
-          "text": "12.0"
+          "text": "10.0"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "10.5",
       "marks": 1,
       "difficulty": "medium",
@@ -5246,22 +5246,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Bonding always adds an electron to each nucleus."
+          "text": "Bonding removes every electron from both atoms."
         },
         {
           "id": "B",
-          "text": "The bonded arrangement can have lower energy than the separate atoms."
+          "text": "Bonding always adds an electron to each nucleus."
         },
         {
           "id": "C",
-          "text": "All atoms must become positively charged."
+          "text": "The bonded arrangement can have lower energy than the separate atoms."
         },
         {
           "id": "D",
-          "text": "Bonding removes every electron from both atoms."
+          "text": "All atoms must become positively charged."
         }
       ],
-      "correct_option": "B",
+      "correct_option": "C",
       "answer": "The bonded arrangement can have lower energy than the separate atoms.",
       "marks": 1,
       "difficulty": "easy",
@@ -5347,22 +5347,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Two nonmetal atoms share one electron pair."
+          "text": "Two neutral molecules attract through temporary dipoles."
         },
         {
           "id": "B",
-          "text": "A metal atom releases free electrons into a solid lattice."
+          "text": "Two nonmetal atoms share one electron pair."
         },
         {
           "id": "C",
-          "text": "An electron is transferred from one atom to another, producing oppositely charged ions."
+          "text": "A metal atom releases free electrons into a solid lattice."
         },
         {
           "id": "D",
-          "text": "Two neutral molecules attract through temporary dipoles."
+          "text": "An electron is transferred from one atom to another, producing oppositely charged ions."
         }
       ],
-      "correct_option": "C",
+      "correct_option": "D",
       "answer": "An electron is transferred from one atom to another, producing oppositely charged ions.",
       "marks": 1,
       "difficulty": "easy",
@@ -5448,22 +5448,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Positive metal ions move out of the solid."
-        },
-        {
-          "id": "B",
-          "text": "Electrons are completely trapped in isolated pairs."
-        },
-        {
-          "id": "C",
           "text": "Delocalised electrons can move through its lattice."
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Each metal atom first becomes a gas."
+        },
+        {
+          "id": "C",
+          "text": "Positive metal ions move out of the solid."
+        },
+        {
+          "id": "D",
+          "text": "Electrons are completely trapped in isolated pairs."
         }
       ],
-      "correct_option": "C",
+      "correct_option": "A",
       "answer": "Delocalised electrons can move through its lattice.",
       "marks": 1,
       "difficulty": "easy",
@@ -5549,22 +5549,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electropositive character"
+          "text": "Only covalent behaviour"
         },
         {
           "id": "B",
-          "text": "Strong electron-pair acceptance without ion formation"
+          "text": "Electropositive character"
         },
         {
           "id": "C",
-          "text": "Negative ionic charge after losing an electron"
+          "text": "Strong electron-pair acceptance without ion formation"
         },
         {
           "id": "D",
-          "text": "Only covalent behaviour"
+          "text": "Negative ionic charge after losing an electron"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Electropositive character",
       "marks": 1,
       "difficulty": "easy",
@@ -5751,22 +5751,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Solid dry sodium chloride"
-        },
-        {
-          "id": "B",
-          "text": "Molten sodium chloride"
-        },
-        {
-          "id": "C",
           "text": "Pure solid sugar"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Dry covalent wax"
+        },
+        {
+          "id": "C",
+          "text": "Solid dry sodium chloride"
+        },
+        {
+          "id": "D",
+          "text": "Molten sodium chloride"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "D",
       "answer": "Molten sodium chloride",
       "marks": 1,
       "difficulty": "easy",
@@ -5852,22 +5852,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Metallic bonding"
-        },
-        {
-          "id": "B",
           "text": "Hydrogen bonding"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Transfer of electrons from one water molecule to another"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Formation of an ionic lattice of water molecules"
+        },
+        {
+          "id": "D",
+          "text": "Metallic bonding"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "A",
       "answer": "Hydrogen bonding",
       "marks": 1,
       "difficulty": "easy",
@@ -5953,22 +5953,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Every carbon atom becomes a free positive ion."
-        },
-        {
-          "id": "B",
           "text": "All covalent bonds disappear in graphite."
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Some electrons are mobile within the layered carbon structure."
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Graphite is made of molten ionic crystals."
+        },
+        {
+          "id": "D",
+          "text": "Every carbon atom becomes a free positive ion."
         }
       ],
-      "correct_option": "C",
+      "correct_option": "B",
       "answer": "Some electrons are mobile within the layered carbon structure.",
       "marks": 1,
       "difficulty": "easy",
@@ -6155,22 +6155,22 @@
       "options": [
         {
           "id": "A",
-          "text": "C6H12O6"
+          "text": "C2H4O2"
         },
         {
           "id": "B",
-          "text": "C3H6O3"
+          "text": "C6H12O6"
         },
         {
           "id": "C",
-          "text": "CH2O"
+          "text": "C3H6O3"
         },
         {
           "id": "D",
-          "text": "C2H4O2"
+          "text": "CH2O"
         }
       ],
-      "correct_option": "C",
+      "correct_option": "D",
       "answer": "CH2O",
       "marks": 1,
       "difficulty": "easy",
@@ -6256,22 +6256,22 @@
       "options": [
         {
           "id": "A",
-          "text": "MgF"
-        },
-        {
-          "id": "B",
-          "text": "Mg2F"
-        },
-        {
-          "id": "C",
           "text": "MgF2"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Mg2F2"
+        },
+        {
+          "id": "C",
+          "text": "MgF"
+        },
+        {
+          "id": "D",
+          "text": "Mg2F"
         }
       ],
-      "correct_option": "C",
+      "correct_option": "A",
       "answer": "MgF2",
       "marks": 1,
       "difficulty": "easy",
@@ -6357,22 +6357,22 @@
       "options": [
         {
           "id": "A",
-          "text": "CH"
-        },
-        {
-          "id": "B",
-          "text": "C2H2"
-        },
-        {
-          "id": "C",
           "text": "C3H3"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "C6H6"
+        },
+        {
+          "id": "C",
+          "text": "CH"
+        },
+        {
+          "id": "D",
+          "text": "C2H2"
         }
       ],
-      "correct_option": "D",
+      "correct_option": "B",
       "answer": "C6H6",
       "marks": 1,
       "difficulty": "easy",
@@ -6458,22 +6458,22 @@
       "options": [
         {
           "id": "A",
-          "text": "C2H5O"
+          "text": "CH4O"
         },
         {
           "id": "B",
-          "text": "C2H6O"
+          "text": "C2H5O"
         },
         {
           "id": "C",
-          "text": "C2H4O2"
+          "text": "C2H6O"
         },
         {
           "id": "D",
-          "text": "CH4O"
+          "text": "C2H4O2"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "C",
       "answer": "C2H6O",
       "marks": 1,
       "difficulty": "easy",
@@ -6531,22 +6531,22 @@
       "options": [
         {
           "id": "A",
-          "text": "6.02 × 10^20 particles"
-        },
-        {
-          "id": "B",
-          "text": "6.02 × 10^23 particles"
-        },
-        {
-          "id": "C",
           "text": "1.00 × 10^6 particles"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "22 particles"
+        },
+        {
+          "id": "C",
+          "text": "6.02 × 10^20 particles"
+        },
+        {
+          "id": "D",
+          "text": "6.02 × 10^23 particles"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "D",
       "answer": "6.02 × 10^23 particles",
       "marks": 1,
       "difficulty": "easy",
@@ -6632,22 +6632,22 @@
       "options": [
         {
           "id": "A",
-          "text": "28 g mol−1"
-        },
-        {
-          "id": "B",
-          "text": "32 g mol−1"
-        },
-        {
-          "id": "C",
           "text": "44 g mol−1"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "48 g mol−1"
+        },
+        {
+          "id": "C",
+          "text": "28 g mol−1"
+        },
+        {
+          "id": "D",
+          "text": "32 g mol−1"
         }
       ],
-      "correct_option": "C",
+      "correct_option": "A",
       "answer": "44 g mol−1",
       "marks": 1,
       "difficulty": "easy",
@@ -6963,22 +6963,22 @@
       "options": [
         {
           "id": "A",
-          "text": "The reaction mixture inside the vessel"
+          "text": "The reactants before mixing"
         },
         {
           "id": "B",
-          "text": "The reaction products inside the vessel"
+          "text": "The reaction mixture inside the vessel"
         },
         {
           "id": "C",
-          "text": "The laboratory air outside the vessel"
+          "text": "The reaction products inside the vessel"
         },
         {
           "id": "D",
-          "text": "The reactants before mixing"
+          "text": "The laboratory air outside the vessel"
         }
       ],
-      "correct_option": "C",
+      "correct_option": "D",
       "answer": "The laboratory air outside the vessel.",
       "marks": 1,
       "difficulty": "easy",
@@ -7008,22 +7008,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Into the system"
-        },
-        {
-          "id": "B",
           "text": "Out of the system"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "From products to reactants only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "No energy can cross the boundary"
+        },
+        {
+          "id": "D",
+          "text": "Into the system"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "A",
       "answer": "Out of the system.",
       "marks": 1,
       "difficulty": "easy",
@@ -7311,22 +7311,22 @@
       "options": [
         {
           "id": "A",
-          "text": "The system always becomes a metal"
-        },
-        {
-          "id": "B",
-          "text": "The system absorbs heat from its surroundings"
-        },
-        {
-          "id": "C",
           "text": "The system gives heat to its surroundings"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "The reaction cannot involve chemical bonds"
+        },
+        {
+          "id": "C",
+          "text": "The system always becomes a metal"
+        },
+        {
+          "id": "D",
+          "text": "The system absorbs heat from its surroundings"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "D",
       "answer": "The system absorbs heat from its surroundings.",
       "marks": 1,
       "difficulty": "easy",
@@ -7356,22 +7356,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Bond formation only"
-        },
-        {
-          "id": "B",
           "text": "Bond breaking"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Formation of stronger bonds always"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Attraction between product molecules only"
+        },
+        {
+          "id": "D",
+          "text": "Bond formation only"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "A",
       "answer": "Bond breaking",
       "marks": 1,
       "difficulty": "easy",
@@ -7659,22 +7659,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Anaerobic respiration always"
-        },
-        {
-          "id": "B",
-          "text": "Aerobic respiration, when oxygen is available"
-        },
-        {
-          "id": "C",
           "text": "Neither releases energy"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only photosynthesis"
+        },
+        {
+          "id": "C",
+          "text": "Anaerobic respiration always"
+        },
+        {
+          "id": "D",
+          "text": "Aerobic respiration, when oxygen is available"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "D",
       "answer": "Aerobic respiration, when oxygen is available.",
       "marks": 1,
       "difficulty": "easy",
@@ -7704,22 +7704,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Abundant oxygen in every cell"
-        },
-        {
-          "id": "B",
           "text": "Insufficient oxygen for normal aerobic respiration"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "No organic fuel molecules exist"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "All enzymes have been destroyed"
+        },
+        {
+          "id": "D",
+          "text": "Abundant oxygen in every cell"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "A",
       "answer": "Insufficient oxygen for normal aerobic respiration",
       "marks": 1,
       "difficulty": "easy",
@@ -8052,22 +8052,22 @@
       "options": [
         {
           "id": "A",
-          "text": "All particles have stopped moving"
-        },
-        {
-          "id": "B",
           "text": "Reactant and product concentrations remain macroscopically constant"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only the forward reaction continues"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "The catalyst has been consumed"
+        },
+        {
+          "id": "D",
+          "text": "All particles have stopped moving"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "A",
       "answer": "Reactant and product concentrations remain macroscopically constant",
       "marks": 1,
       "difficulty": "easy",
@@ -8181,22 +8181,22 @@
       "options": [
         {
           "id": "A",
-          "text": "The forward reaction is favoured to replace some product"
+          "text": "The equilibrium composition cannot change"
         },
         {
           "id": "B",
-          "text": "All molecular collisions stop"
+          "text": "The forward reaction is favoured to replace some product"
         },
         {
           "id": "C",
-          "text": "The reverse reaction is permanently stopped"
+          "text": "All molecular collisions stop"
         },
         {
           "id": "D",
-          "text": "The equilibrium composition cannot change"
+          "text": "The reverse reaction is permanently stopped"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "The forward reaction is favoured to replace some product",
       "marks": 1,
       "difficulty": "easy",
@@ -8355,22 +8355,22 @@
       "options": [
         {
           "id": "A",
-          "text": "A water-soluble base"
-        },
-        {
-          "id": "B",
           "text": "Any oxide of a non-metal"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Any insoluble salt"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Any neutral molecule"
+        },
+        {
+          "id": "D",
+          "text": "A water-soluble base"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "A water-soluble base",
       "marks": 1,
       "difficulty": "easy",
@@ -8529,22 +8529,22 @@
       "options": [
         {
           "id": "A",
-          "text": "H+"
+          "text": "Na+"
         },
         {
           "id": "B",
-          "text": "OH-"
+          "text": "H+"
         },
         {
           "id": "C",
-          "text": "Cl-"
+          "text": "OH-"
         },
         {
           "id": "D",
-          "text": "Na+"
+          "text": "Cl-"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "H+",
       "marks": 1,
       "difficulty": "easy",
@@ -8574,22 +8574,22 @@
       "options": [
         {
           "id": "A",
-          "text": "It produces OH- ions in aqueous solution"
-        },
-        {
-          "id": "B",
-          "text": "It accepts electrons from a metal"
-        },
-        {
-          "id": "C",
           "text": "It contains oxygen atoms"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "It forms a precipitate in every reaction"
+        },
+        {
+          "id": "C",
+          "text": "It produces OH- ions in aqueous solution"
+        },
+        {
+          "id": "D",
+          "text": "It accepts electrons from a metal"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "It produces OH- ions in aqueous solution",
       "marks": 1,
       "difficulty": "easy",
@@ -8703,22 +8703,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Donates a proton"
-        },
-        {
-          "id": "B",
-          "text": "Accepts a proton"
-        },
-        {
-          "id": "C",
           "text": "Produces electrons only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Must contain OH- in its formula"
+        },
+        {
+          "id": "C",
+          "text": "Donates a proton"
+        },
+        {
+          "id": "D",
+          "text": "Accepts a proton"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "D",
       "answer": "Accepts a proton",
       "marks": 1,
       "difficulty": "easy",
@@ -8877,22 +8877,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Hydrogen"
+          "text": "Carbon dioxide in every case"
         },
         {
           "id": "B",
-          "text": "Nitrogen"
+          "text": "Hydrogen"
         },
         {
           "id": "C",
-          "text": "Chlorine"
+          "text": "Nitrogen"
         },
         {
           "id": "D",
-          "text": "Carbon dioxide in every case"
+          "text": "Chlorine"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Hydrogen",
       "marks": 1,
       "difficulty": "easy",
@@ -8922,22 +8922,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Neutralization"
-        },
-        {
-          "id": "B",
-          "text": "Polymerization"
-        },
-        {
-          "id": "C",
           "text": "Electrolysis"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Sublimation"
+        },
+        {
+          "id": "C",
+          "text": "Neutralization"
+        },
+        {
+          "id": "D",
+          "text": "Polymerization"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Neutralization",
       "marks": 1,
       "difficulty": "easy",
@@ -9051,22 +9051,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Acidic compounds from pollutant gases"
-        },
-        {
-          "id": "B",
           "text": "Only neutral salts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only noble gases"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Pure oxygen droplets"
+        },
+        {
+          "id": "D",
+          "text": "Acidic compounds from pollutant gases"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Acidic compounds from pollutant gases",
       "marks": 1,
       "difficulty": "easy",
@@ -9225,22 +9225,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Increasing atomic number"
+          "text": "Decreasing atomic mass in every case"
         },
         {
           "id": "B",
-          "text": "Alphabetical symbol order"
+          "text": "Increasing atomic number"
         },
         {
           "id": "C",
-          "text": "Increasing neutron number only"
+          "text": "Alphabetical symbol order"
         },
         {
           "id": "D",
-          "text": "Decreasing atomic mass in every case"
+          "text": "Increasing neutron number only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Increasing atomic number",
       "marks": 1,
       "difficulty": "easy",
@@ -9270,22 +9270,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Period"
+          "text": "Block row"
         },
         {
           "id": "B",
-          "text": "Group"
+          "text": "Period"
         },
         {
           "id": "C",
-          "text": "Shell"
+          "text": "Group"
         },
         {
           "id": "D",
-          "text": "Block row"
+          "text": "Shell"
         }
       ],
-      "correct_option": "B",
+      "correct_option": "C",
       "answer": "Group",
       "marks": 1,
       "difficulty": "easy",
@@ -9399,22 +9399,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Its period number"
-        },
-        {
-          "id": "B",
           "text": "Its atomic mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Its isotope count"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Its neutron excess"
+        },
+        {
+          "id": "D",
+          "text": "Its period number"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Its period number",
       "marks": 1,
       "difficulty": "easy",
@@ -9573,22 +9573,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1+"
+          "text": "2-"
         },
         {
           "id": "B",
-          "text": "2+"
+          "text": "1+"
         },
         {
           "id": "C",
-          "text": "1-"
+          "text": "2+"
         },
         {
           "id": "D",
-          "text": "2-"
+          "text": "1-"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "1+",
       "marks": 1,
       "difficulty": "easy",
@@ -9747,22 +9747,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Decreases"
-        },
-        {
-          "id": "B",
           "text": "Increases sharply in every step"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Remains exactly constant"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Becomes zero"
+        },
+        {
+          "id": "D",
+          "text": "Decreases"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Decreases",
       "marks": 1,
       "difficulty": "easy",
@@ -9921,22 +9921,22 @@
       "options": [
         {
           "id": "A",
-          "text": "The outer electron becomes easier to remove"
+          "text": "Valence electrons become more tightly held"
         },
         {
           "id": "B",
-          "text": "Atomic radius becomes zero"
+          "text": "The outer electron becomes easier to remove"
         },
         {
           "id": "C",
-          "text": "The nucleus loses all protons"
+          "text": "Atomic radius becomes zero"
         },
         {
           "id": "D",
-          "text": "Valence electrons become more tightly held"
+          "text": "The nucleus loses all protons"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "The outer electron becomes easier to remove",
       "marks": 1,
       "difficulty": "easy",
@@ -9966,22 +9966,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Alkali metals"
-        },
-        {
-          "id": "B",
-          "text": "Halogens"
-        },
-        {
-          "id": "C",
           "text": "Noble gases"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Transition non-metals"
+        },
+        {
+          "id": "C",
+          "text": "Alkali metals"
+        },
+        {
+          "id": "D",
+          "text": "Halogens"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Alkali metals",
       "marks": 1,
       "difficulty": "easy",
@@ -10095,22 +10095,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Halogens"
-        },
-        {
-          "id": "B",
           "text": "Alkali metals"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Noble gases"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Lanthanides"
+        },
+        {
+          "id": "D",
+          "text": "Halogens"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Halogens",
       "marks": 1,
       "difficulty": "easy",
@@ -10269,22 +10269,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Useful catalytic activity"
+          "text": "Complete chemical inertness"
         },
         {
           "id": "B",
-          "text": "Always being gases at room temperature"
+          "text": "Useful catalytic activity"
         },
         {
           "id": "C",
-          "text": "Extremely low density in every case"
+          "text": "Always being gases at room temperature"
         },
         {
           "id": "D",
-          "text": "Complete chemical inertness"
+          "text": "Extremely low density in every case"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Useful catalytic activity",
       "marks": 1,
       "difficulty": "easy",
@@ -10314,22 +10314,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Metals with characteristic metallic properties"
-        },
-        {
-          "id": "B",
-          "text": "Monatomic noble gases"
-        },
-        {
-          "id": "C",
           "text": "Diatomic non-metals only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Water-soluble bases only"
+        },
+        {
+          "id": "C",
+          "text": "Metals with characteristic metallic properties"
+        },
+        {
+          "id": "D",
+          "text": "Monatomic noble gases"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Metals with characteristic metallic properties",
       "marks": 1,
       "difficulty": "easy",
@@ -10443,22 +10443,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Their outer electron shells are complete"
-        },
-        {
-          "id": "B",
           "text": "They have no electrons"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "They always carry a 2+ charge"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "They exist only as solids"
+        },
+        {
+          "id": "D",
+          "text": "Their outer electron shells are complete"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Their outer electron shells are complete",
       "marks": 1,
       "difficulty": "easy",
@@ -10617,22 +10617,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Good electrical conductivity"
+          "text": "Existence only as gases"
         },
         {
           "id": "B",
-          "text": "Poor thermal conductivity in every case"
+          "text": "Good electrical conductivity"
         },
         {
           "id": "C",
-          "text": "Brittleness in every sample"
+          "text": "Poor thermal conductivity in every case"
         },
         {
           "id": "D",
-          "text": "Existence only as gases"
+          "text": "Brittleness in every sample"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Good electrical conductivity",
       "marks": 1,
       "difficulty": "easy",
@@ -10662,22 +10662,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They are usually poor electrical conductors compared with metals"
-        },
-        {
-          "id": "B",
-          "text": "They are all shiny malleable solids"
-        },
-        {
-          "id": "C",
           "text": "They all form positive ions only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "They all have high density"
+        },
+        {
+          "id": "C",
+          "text": "They are usually poor electrical conductors compared with metals"
+        },
+        {
+          "id": "D",
+          "text": "They are all shiny malleable solids"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "They are usually poor electrical conductors compared with metals",
       "marks": 1,
       "difficulty": "easy",

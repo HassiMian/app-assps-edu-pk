@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Precision"
+          "text": "Density"
         },
         {
           "id": "B",
-          "text": "Power"
+          "text": "Precision"
         },
         {
           "id": "C",
-          "text": "Momentum"
+          "text": "Power"
         },
         {
           "id": "D",
-          "text": "Density"
+          "text": "Momentum"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Precision",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Velocity"
-        },
-        {
-          "id": "B",
-          "text": "Time"
-        },
-        {
-          "id": "C",
           "text": "Temperature"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Energy"
+        },
+        {
+          "id": "C",
+          "text": "Velocity"
+        },
+        {
+          "id": "D",
+          "text": "Time"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -263,22 +263,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Velocity"
-        },
-        {
-          "id": "B",
           "text": "Mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Distance only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Energy"
+        },
+        {
+          "id": "D",
+          "text": "Velocity"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -465,22 +465,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Velocity"
+          "text": "Pressure"
         },
         {
           "id": "B",
-          "text": "Acceleration"
+          "text": "Velocity"
         },
         {
           "id": "C",
-          "text": "Power"
+          "text": "Acceleration"
         },
         {
           "id": "D",
-          "text": "Pressure"
+          "text": "Power"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Velocity",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Moment"
-        },
-        {
-          "id": "B",
-          "text": "Pressure"
-        },
-        {
-          "id": "C",
           "text": "Density"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Impulse only"
+        },
+        {
+          "id": "C",
+          "text": "Moment"
+        },
+        {
+          "id": "D",
+          "text": "Pressure"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Moment",
       "marks": 1,
       "difficulty": "easy",
@@ -667,22 +667,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Anticlockwise moments"
-        },
-        {
-          "id": "B",
           "text": "Mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Pressure"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Kinetic energy"
+        },
+        {
+          "id": "D",
+          "text": "Anticlockwise moments"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Anticlockwise moments",
       "marks": 1,
       "difficulty": "easy",
@@ -869,22 +869,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Work"
+          "text": "Volume"
         },
         {
           "id": "B",
-          "text": "Mass"
+          "text": "Work"
         },
         {
           "id": "C",
-          "text": "Distance only"
+          "text": "Mass"
         },
         {
           "id": "D",
-          "text": "Volume"
+          "text": "Distance only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Work",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Applied force"
-        },
-        {
-          "id": "B",
-          "text": "Density"
-        },
-        {
-          "id": "C",
           "text": "Temperature only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Time"
+        },
+        {
+          "id": "C",
+          "text": "Applied force"
+        },
+        {
+          "id": "D",
+          "text": "Density"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Applied force",
       "marks": 1,
       "difficulty": "easy",
@@ -1071,22 +1071,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Area"
-        },
-        {
-          "id": "B",
           "text": "Volume"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Mass"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Distance"
+        },
+        {
+          "id": "D",
+          "text": "Area"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Area",
       "marks": 1,
       "difficulty": "easy",
@@ -1273,22 +1273,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Gain kinetic energy"
+          "text": "Become electrically neutral in every case"
         },
         {
           "id": "B",
-          "text": "Lose all motion"
+          "text": "Gain kinetic energy"
         },
         {
           "id": "C",
-          "text": "Lose mass"
+          "text": "Lose all motion"
         },
         {
           "id": "D",
-          "text": "Become electrically neutral in every case"
+          "text": "Lose mass"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Gain kinetic energy",
       "marks": 1,
       "difficulty": "easy",
@@ -1430,22 +1430,22 @@
       "options": [
         {
           "id": "A",
-          "text": "They repel"
-        },
-        {
-          "id": "B",
-          "text": "They attract"
-        },
-        {
-          "id": "C",
           "text": "They disappear"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "They produce gravity only"
+        },
+        {
+          "id": "C",
+          "text": "They repel"
+        },
+        {
+          "id": "D",
+          "text": "They attract"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "They repel",
       "marks": 1,
       "difficulty": "easy",
@@ -1475,22 +1475,22 @@
       "options": [
         {
           "id": "A",
-          "text": "North to south"
-        },
-        {
-          "id": "B",
           "text": "South to north only outside"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "East to west"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "They have no direction"
+        },
+        {
+          "id": "D",
+          "text": "North to south"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "North to south",
       "marks": 1,
       "difficulty": "easy",
@@ -1677,22 +1677,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Testable"
+          "text": "Unrelated to evidence"
         },
         {
           "id": "B",
-          "text": "Impossible to check"
+          "text": "Testable"
         },
         {
           "id": "C",
-          "text": "Based only on authority"
+          "text": "Impossible to check"
         },
         {
           "id": "D",
-          "text": "Unrelated to evidence"
+          "text": "Based only on authority"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Testable",
       "marks": 1,
       "difficulty": "easy",

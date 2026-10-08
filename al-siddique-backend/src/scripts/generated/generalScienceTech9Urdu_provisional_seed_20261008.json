@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Carbon"
+          "text": "صرف Helium"
         },
         {
           "id": "B",
-          "text": "صرف Neon"
+          "text": "Carbon"
         },
         {
           "id": "C",
-          "text": "صرف Argon"
+          "text": "صرف Neon"
         },
         {
           "id": "D",
-          "text": "صرف Helium"
+          "text": "صرف Argon"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Carbon",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Biological catalyst کے طور پر کام کرتا ہے"
-        },
-        {
-          "id": "B",
-          "text": "صرف chromosomes بناتا ہے"
-        },
-        {
-          "id": "C",
           "text": "mineral rock ہے"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "electric current ہے"
+        },
+        {
+          "id": "C",
+          "text": "Biological catalyst کے طور پر کام کرتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "صرف chromosomes بناتا ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Biological catalyst کے طور پر کام کرتا ہے",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "مناسب energy اور ضروری nutrients"
-        },
-        {
-          "id": "B",
           "text": "صرف sugar"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف water"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "صرف ایک food group"
+        },
+        {
+          "id": "D",
+          "text": "مناسب energy اور ضروری nutrients"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "مناسب energy اور ضروری nutrients",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Solar energy"
+          "text": "Natural gas"
         },
         {
           "id": "B",
-          "text": "Coal"
+          "text": "Solar energy"
         },
         {
           "id": "C",
-          "text": "Petroleum"
+          "text": "Coal"
         },
         {
           "id": "D",
-          "text": "Natural gas"
+          "text": "Petroleum"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Solar energy",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Work کرنے یا change پیدا کرنے کی صلاحیت"
-        },
-        {
-          "id": "B",
-          "text": "mass کو nothing سے بنانا"
-        },
-        {
-          "id": "C",
           "text": "تمام motion ہمیشہ روکنا"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "time ختم کرنا"
+        },
+        {
+          "id": "C",
+          "text": "Work کرنے یا change پیدا کرنے کی صلاحیت"
+        },
+        {
+          "id": "D",
+          "text": "mass کو nothing سے بنانا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Work کرنے یا change پیدا کرنے کی صلاحیت",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Electric charge"
-        },
-        {
-          "id": "B",
           "text": "صرف mass"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف sound"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "صرف temperature"
+        },
+        {
+          "id": "D",
+          "text": "Electric charge"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Electric charge",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
+          "text": "صرف old machines"
         },
         {
           "id": "B",
-          "text": "صرف theoretical memorization"
+          "text": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال"
         },
         {
           "id": "C",
-          "text": "users کے بغیر process"
+          "text": "صرف theoretical memorization"
         },
         {
           "id": "D",
-          "text": "صرف old machines"
+          "text": "users کے بغیر process"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Knowledge اور tools کا practical problems حل کرنے کے لیے استعمال",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Communication، Earth observation اور scientific research"
-        },
-        {
-          "id": "B",
-          "text": "صرف road painting"
-        },
-        {
-          "id": "C",
           "text": "صرف food storage"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "کوئی scientific work نہیں"
+        },
+        {
+          "id": "C",
+          "text": "Communication، Earth observation اور scientific research"
+        },
+        {
+          "id": "D",
+          "text": "صرف road painting"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Communication، Earth observation اور scientific research",
       "marks": 1,
       "difficulty": "easy",

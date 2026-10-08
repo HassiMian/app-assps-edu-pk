@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "The variety of living organisms and biological variation"
+          "text": "Only mineral diversity"
         },
         {
           "id": "B",
-          "text": "Only one species"
+          "text": "The variety of living organisms and biological variation"
         },
         {
           "id": "C",
-          "text": "Only climate variation"
+          "text": "Only one species"
         },
         {
           "id": "D",
-          "text": "Only mineral diversity"
+          "text": "Only climate variation"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "The variety of living organisms and biological variation",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Cell membrane"
-        },
-        {
-          "id": "B",
-          "text": "Cell wall only"
-        },
-        {
-          "id": "C",
           "text": "Chromosome only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Vacuole only"
+        },
+        {
+          "id": "C",
+          "text": "Cell membrane"
+        },
+        {
+          "id": "D",
+          "text": "Cell wall only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Cell membrane",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Genetically similar daughter cells"
-        },
-        {
-          "id": "B",
           "text": "Four unrelated organisms"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Only gametes"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Cells with no DNA"
+        },
+        {
+          "id": "D",
+          "text": "Genetically similar daughter cells"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Genetically similar daughter cells",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Biological catalysts"
+          "text": "Structural lipids only"
         },
         {
           "id": "B",
-          "text": "Stored genes"
+          "text": "Biological catalysts"
         },
         {
           "id": "C",
-          "text": "Mineral salts only"
+          "text": "Stored genes"
         },
         {
           "id": "D",
-          "text": "Structural lipids only"
+          "text": "Mineral salts only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Biological catalysts",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Transfers usable energy within cells"
-        },
-        {
-          "id": "B",
-          "text": "Stores hereditary information"
-        },
-        {
-          "id": "C",
           "text": "Forms cell walls only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Acts as a mineral"
+        },
+        {
+          "id": "C",
+          "text": "Transfers usable energy within cells"
+        },
+        {
+          "id": "D",
+          "text": "Stores hereditary information"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Transfers usable energy within cells",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Xylem"
-        },
-        {
-          "id": "B",
           "text": "Phloem only"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Epidermis only"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Meristem only"
+        },
+        {
+          "id": "D",
+          "text": "Xylem"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Xylem",
       "marks": 1,
       "difficulty": "easy",

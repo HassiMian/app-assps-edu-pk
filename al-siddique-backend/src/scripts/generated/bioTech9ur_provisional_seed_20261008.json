@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں"
+          "text": "صرف minerals کا فرق"
         },
         {
           "id": "B",
-          "text": "صرف ایک species"
+          "text": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں"
         },
         {
           "id": "C",
-          "text": "صرف موسم کا فرق"
+          "text": "صرف ایک species"
         },
         {
           "id": "D",
-          "text": "صرف minerals کا فرق"
+          "text": "صرف موسم کا فرق"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Cell membrane"
-        },
-        {
-          "id": "B",
-          "text": "صرف cell wall"
-        },
-        {
-          "id": "C",
           "text": "صرف chromosome"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف vacuole"
+        },
+        {
+          "id": "C",
+          "text": "Cell membrane"
+        },
+        {
+          "id": "D",
+          "text": "صرف cell wall"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Cell membrane",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Genetically similar daughter cells"
-        },
-        {
-          "id": "B",
           "text": "چار غیر متعلق organisms"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف gametes"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "DNA کے بغیر cells"
+        },
+        {
+          "id": "D",
+          "text": "Genetically similar daughter cells"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Genetically similar daughter cells",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Biological catalysts"
+          "text": "صرف structural lipids"
         },
         {
           "id": "B",
-          "text": "Stored genes"
+          "text": "Biological catalysts"
         },
         {
           "id": "C",
-          "text": "صرف mineral salts"
+          "text": "Stored genes"
         },
         {
           "id": "D",
-          "text": "صرف structural lipids"
+          "text": "صرف mineral salts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Biological catalysts",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Cells میں usable energy transfer کرتا ہے"
-        },
-        {
-          "id": "B",
-          "text": "صرف hereditary information رکھتا ہے"
-        },
-        {
-          "id": "C",
           "text": "صرف cell wall بناتا ہے"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "صرف mineral ہے"
+        },
+        {
+          "id": "C",
+          "text": "Cells میں usable energy transfer کرتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "صرف hereditary information رکھتا ہے"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Cells میں usable energy transfer کرتا ہے",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Xylem"
-        },
-        {
-          "id": "B",
           "text": "صرف phloem"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف epidermis"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "صرف meristem"
+        },
+        {
+          "id": "D",
+          "text": "Xylem"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Xylem",
       "marks": 1,
       "difficulty": "easy",

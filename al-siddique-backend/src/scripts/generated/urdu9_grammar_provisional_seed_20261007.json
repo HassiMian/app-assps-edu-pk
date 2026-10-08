@@ -65,22 +65,22 @@
       "options": [
         {
           "id": "A",
-          "text": "کتابیں"
+          "text": "کتبہ"
         },
         {
           "id": "B",
-          "text": "کتابان"
+          "text": "کتابیں"
         },
         {
           "id": "C",
-          "text": "کتابی"
+          "text": "کتابان"
         },
         {
           "id": "D",
-          "text": "کتبہ"
+          "text": "کتابی"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "کتابیں",
       "marks": 1,
       "difficulty": "medium",
@@ -112,22 +112,22 @@
       "options": [
         {
           "id": "A",
-          "text": "مسرت"
-        },
-        {
-          "id": "B",
-          "text": "غم"
-        },
-        {
-          "id": "C",
           "text": "اندھیرا"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "نفرت"
+        },
+        {
+          "id": "C",
+          "text": "مسرت"
+        },
+        {
+          "id": "D",
+          "text": "غم"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "مسرت",
       "marks": 1,
       "difficulty": "medium",
@@ -159,22 +159,22 @@
       "options": [
         {
           "id": "A",
-          "text": "انجام"
-        },
-        {
-          "id": "B",
           "text": "ابتدا"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "شروع"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "قدم"
+        },
+        {
+          "id": "D",
+          "text": "انجام"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "انجام",
       "marks": 1,
       "difficulty": "medium",

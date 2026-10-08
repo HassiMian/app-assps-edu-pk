@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا"
+          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "جسم کو توانائی دینے اور نشوونما/صحت میں مدد دینے والے مختلف غذائی اجزا",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات"
-        },
-        {
-          "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
-        },
-        {
-          "id": "C",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "C",
+          "text": "متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات"
+        },
+        {
+          "id": "D",
+          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "متنوع اور متوازن غذا، مناسب food groups اور صحت مند عادات",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار"
-        },
-        {
-          "id": "B",
           "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+        },
+        {
+          "id": "D",
+          "text": "غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "غذائی اشیا کے بنیادی اجزا اور ان کے غذائی کردار",
       "marks": 1,
       "difficulty": "easy",

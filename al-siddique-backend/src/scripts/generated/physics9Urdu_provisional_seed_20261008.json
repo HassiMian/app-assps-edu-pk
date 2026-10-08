@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "distance/time"
+          "text": "mass/volume"
         },
         {
           "id": "B",
-          "text": "time/distance"
+          "text": "distance/time"
         },
         {
           "id": "C",
-          "text": "force×distance"
+          "text": "time/distance"
         },
         {
           "id": "D",
-          "text": "mass/volume"
+          "text": "force×distance"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "distance/time",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Newton کا دوسرا قانون"
-        },
-        {
-          "id": "B",
-          "text": "Newton کا پہلا قانون"
-        },
-        {
-          "id": "C",
           "text": "قانون بقائے توانائی"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Ohm law"
+        },
+        {
+          "id": "C",
+          "text": "Newton کا دوسرا قانون"
+        },
+        {
+          "id": "D",
+          "text": "Newton کا پہلا قانون"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Newton کا دوسرا قانون",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "force × perpendicular distance"
-        },
-        {
-          "id": "B",
           "text": "mass × velocity"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "work/time"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "mass/volume"
+        },
+        {
+          "id": "D",
+          "text": "force × perpendicular distance"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "force × perpendicular distance",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "mass/volume"
+          "text": "work/time"
         },
         {
           "id": "B",
-          "text": "volume/mass"
+          "text": "mass/volume"
         },
         {
           "id": "C",
-          "text": "force/area"
+          "text": "volume/mass"
         },
         {
           "id": "D",
-          "text": "work/time"
+          "text": "force/area"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "mass/volume",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy"
-        },
-        {
-          "id": "B",
-          "text": "مادے کی density"
-        },
-        {
-          "id": "C",
           "text": "مادے کی speed"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "مقناطیسی قوت"
+        },
+        {
+          "id": "C",
+          "text": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy"
+        },
+        {
+          "id": "D",
+          "text": "مادے کی density"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "1 kg مادے کا temperature 1 K بڑھانے کے لیے درکار energy",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "repel"
-        },
-        {
-          "id": "B",
           "text": "attract"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "neutralize"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "کوئی اثر نہیں"
+        },
+        {
+          "id": "D",
+          "text": "repel"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "repel",
       "marks": 1,
       "difficulty": "easy",

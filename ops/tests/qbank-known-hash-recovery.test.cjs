@@ -1,0 +1,5 @@
+const test=require('node:test')
+const assert=require('node:assert/strict')
+const {directUrl}=require('../qbank/recover-known-hash-sources.cjs')
+test('official Google Drive catalog URL becomes direct byte download URL',()=>{const u=directUrl('https://drive.google.com/file/d/ABC_123/view?usp=sharing');assert.equal(u,'https://drive.usercontent.google.com/download?id=ABC_123&export=download&confirm=t')})
+test('non-Drive recovery URL is preserved for exact-hash verification',()=>{const u='https://example.org/a.pdf';assert.equal(directUrl(u),u)})

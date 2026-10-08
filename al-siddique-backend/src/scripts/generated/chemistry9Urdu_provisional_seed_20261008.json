@@ -117,22 +117,22 @@
       "options": [
         {
           "id": "A",
-          "text": "positive"
+          "text": "variable always"
         },
         {
           "id": "B",
-          "text": "negative"
+          "text": "positive"
         },
         {
           "id": "C",
-          "text": "neutral"
+          "text": "negative"
         },
         {
           "id": "D",
-          "text": "variable always"
+          "text": "neutral"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "positive",
       "marks": 1,
       "difficulty": "easy",
@@ -218,22 +218,22 @@
       "options": [
         {
           "id": "A",
-          "text": "electrons کی transfer اور مخالف ions کی attraction"
-        },
-        {
-          "id": "B",
-          "text": "protons کی sharing"
-        },
-        {
-          "id": "C",
           "text": "neutrons کی transfer"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "کوئی particle interaction نہیں"
+        },
+        {
+          "id": "C",
+          "text": "electrons کی transfer اور مخالف ions کی attraction"
+        },
+        {
+          "id": "D",
+          "text": "protons کی sharing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "electrons کی transfer اور مخالف ions کی attraction",
       "marks": 1,
       "difficulty": "easy",
@@ -319,22 +319,22 @@
       "options": [
         {
           "id": "A",
-          "text": "6.02×10²³"
-        },
-        {
-          "id": "B",
           "text": "6.02×10³"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "3×10⁸"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "9.8"
+        },
+        {
+          "id": "D",
+          "text": "6.02×10²³"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "6.02×10²³",
       "marks": 1,
       "difficulty": "easy",
@@ -521,22 +521,22 @@
       "options": [
         {
           "id": "A",
-          "text": "forward اور reverse reaction rates"
+          "text": "temperature ہمیشہ 0°C"
         },
         {
           "id": "B",
-          "text": "reactant اور product masses لازماً"
+          "text": "forward اور reverse reaction rates"
         },
         {
           "id": "C",
-          "text": "تمام concentrations صفر"
+          "text": "reactant اور product masses لازماً"
         },
         {
           "id": "D",
-          "text": "temperature ہمیشہ 0°C"
+          "text": "تمام concentrations صفر"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "forward اور reverse reaction rates",
       "marks": 1,
       "difficulty": "easy",
@@ -622,22 +622,22 @@
       "options": [
         {
           "id": "A",
-          "text": "7 سے کم"
-        },
-        {
-          "id": "B",
-          "text": "7 سے زیادہ"
-        },
-        {
-          "id": "C",
           "text": "ہمیشہ 14"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "ہمیشہ 7"
+        },
+        {
+          "id": "C",
+          "text": "7 سے کم"
+        },
+        {
+          "id": "D",
+          "text": "7 سے زیادہ"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "7 سے کم",
       "marks": 1,
       "difficulty": "easy",
@@ -723,22 +723,22 @@
       "options": [
         {
           "id": "A",
-          "text": "group"
-        },
-        {
-          "id": "B",
           "text": "period"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "isotope"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "bond"
+        },
+        {
+          "id": "D",
+          "text": "group"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "group",
       "marks": 1,
       "difficulty": "easy",
@@ -925,22 +925,22 @@
       "options": [
         {
           "id": "A",
-          "text": "greenhouse effect میں اضافہ"
+          "text": "radioactivity"
         },
         {
           "id": "B",
-          "text": "صرف water hardness"
+          "text": "greenhouse effect میں اضافہ"
         },
         {
           "id": "C",
-          "text": "metal bonding"
+          "text": "صرف water hardness"
         },
         {
           "id": "D",
-          "text": "radioactivity"
+          "text": "metal bonding"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "greenhouse effect میں اضافہ",
       "marks": 1,
       "difficulty": "easy",
@@ -1026,22 +1026,22 @@
       "options": [
         {
           "id": "A",
-          "text": "carbon اور hydrogen"
-        },
-        {
-          "id": "B",
-          "text": "carbon اور oxygen only"
-        },
-        {
-          "id": "C",
           "text": "hydrogen اور nitrogen only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "تمام elements"
+        },
+        {
+          "id": "C",
+          "text": "carbon اور hydrogen"
+        },
+        {
+          "id": "D",
+          "text": "carbon اور oxygen only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "carbon اور hydrogen",
       "marks": 1,
       "difficulty": "easy",
@@ -1127,22 +1127,22 @@
       "options": [
         {
           "id": "A",
-          "text": "random variation کا اندازہ اور reliability بہتر کرنا"
-        },
-        {
-          "id": "B",
           "text": "ہر غلطی ختم ہونا لازمی"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "units کی ضرورت ختم کرنا"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "data کو چھپانا"
+        },
+        {
+          "id": "D",
+          "text": "random variation کا اندازہ اور reliability بہتر کرنا"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "random variation کا اندازہ اور reliability بہتر کرنا",
       "marks": 1,
       "difficulty": "easy",

@@ -61,22 +61,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Arrival"
+          "text": "Highest screen resolution"
         },
         {
           "id": "B",
-          "text": "Shortest name"
+          "text": "Arrival"
         },
         {
           "id": "C",
-          "text": "Largest file size"
+          "text": "Shortest name"
         },
         {
           "id": "D",
-          "text": "Highest screen resolution"
+          "text": "Largest file size"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Arrival",
       "marks": 1,
       "difficulty": "easy",
@@ -190,22 +190,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Back up important data where possible"
-        },
-        {
-          "id": "B",
-          "text": "Delete all user files"
-        },
-        {
-          "id": "C",
           "text": "Disable every safety control"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Format every drive immediately"
+        },
+        {
+          "id": "C",
+          "text": "Back up important data where possible"
+        },
+        {
+          "id": "D",
+          "text": "Delete all user files"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Back up important data where possible",
       "marks": 1,
       "difficulty": "easy",
@@ -235,22 +235,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Reduce avoidable failures and keep systems reliable"
-        },
-        {
-          "id": "B",
           "text": "Create faults deliberately"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Remove all software"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Ignore updates forever"
+        },
+        {
+          "id": "D",
+          "text": "Reduce avoidable failures and keep systems reliable"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Reduce avoidable failures and keep systems reliable",
       "marks": 1,
       "difficulty": "easy",
@@ -409,22 +409,22 @@
       "options": [
         {
           "id": "A",
-          "text": "print()"
+          "text": "compilebook()"
         },
         {
           "id": "B",
-          "text": "inputfile()"
+          "text": "print()"
         },
         {
           "id": "C",
-          "text": "route()"
+          "text": "inputfile()"
         },
         {
           "id": "D",
-          "text": "compilebook()"
+          "text": "route()"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "print()",
       "marks": 1,
       "difficulty": "easy",
@@ -538,22 +538,22 @@
       "options": [
         {
           "id": "A",
-          "text": "if/elif/else"
-        },
-        {
-          "id": "B",
-          "text": "import only"
-        },
-        {
-          "id": "C",
           "text": "comment only"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "file name only"
+        },
+        {
+          "id": "C",
+          "text": "if/elif/else"
+        },
+        {
+          "id": "D",
+          "text": "import only"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "if/elif/else",
       "marks": 1,
       "difficulty": "easy",
@@ -583,22 +583,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Repeat an action under defined conditions"
-        },
-        {
-          "id": "B",
           "text": "Change hardware voltage"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Draw only one character"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Remove all variables"
+        },
+        {
+          "id": "D",
+          "text": "Repeat an action under defined conditions"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Repeat an action under defined conditions",
       "marks": 1,
       "difficulty": "easy",
@@ -757,22 +757,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Accuracy"
+          "text": "Unknown source"
         },
         {
           "id": "B",
-          "text": "Random duplication"
+          "text": "Accuracy"
         },
         {
           "id": "C",
-          "text": "Missing context"
+          "text": "Random duplication"
         },
         {
           "id": "D",
-          "text": "Unknown source"
+          "text": "Missing context"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Accuracy",
       "marks": 1,
       "difficulty": "easy",
@@ -886,22 +886,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Pattern recognition, reasoning or prediction"
-        },
-        {
-          "id": "B",
-          "text": "Only paper printing"
-        },
-        {
-          "id": "C",
           "text": "Only file deletion"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only electrical wiring"
+        },
+        {
+          "id": "C",
+          "text": "Pattern recognition, reasoning or prediction"
+        },
+        {
+          "id": "D",
+          "text": "Only paper printing"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Pattern recognition, reasoning or prediction",
       "marks": 1,
       "difficulty": "easy",
@@ -931,22 +931,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Learn patterns from data for a task"
-        },
-        {
-          "id": "B",
           "text": "Replace all operating systems"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Ignore data"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Increase monitor size"
+        },
+        {
+          "id": "D",
+          "text": "Learn patterns from data for a task"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Learn patterns from data for a task",
       "marks": 1,
       "difficulty": "easy",
@@ -1105,22 +1105,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Accuracy, privacy, fairness and human oversight"
+          "text": "No evaluation"
         },
         {
           "id": "B",
-          "text": "Only speed"
+          "text": "Accuracy, privacy, fairness and human oversight"
         },
         {
           "id": "C",
-          "text": "Only appearance"
+          "text": "Only speed"
         },
         {
           "id": "D",
-          "text": "No evaluation"
+          "text": "Only appearance"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "B",
       "answer": "Accuracy, privacy, fairness and human oversight",
       "marks": 1,
       "difficulty": "easy",
@@ -1234,22 +1234,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Why a digital product is useful to a target user"
-        },
-        {
-          "id": "B",
-          "text": "Only the program file name"
-        },
-        {
-          "id": "C",
           "text": "Only the founder’s age"
         },
         {
-          "id": "D",
+          "id": "B",
           "text": "Only computer memory size"
+        },
+        {
+          "id": "C",
+          "text": "Why a digital product is useful to a target user"
+        },
+        {
+          "id": "D",
+          "text": "Only the program file name"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "C",
       "answer": "Why a digital product is useful to a target user",
       "marks": 1,
       "difficulty": "easy",
@@ -1279,22 +1279,22 @@
       "options": [
         {
           "id": "A",
-          "text": "Test core value with limited essential features"
-        },
-        {
-          "id": "B",
           "text": "Contain every possible feature immediately"
         },
         {
-          "id": "C",
+          "id": "B",
           "text": "Avoid user feedback"
         },
         {
-          "id": "D",
+          "id": "C",
           "text": "Skip problem definition"
+        },
+        {
+          "id": "D",
+          "text": "Test core value with limited essential features"
         }
       ],
-      "correct_option": "A",
+      "correct_option": "D",
       "answer": "Test core value with limited essential features",
       "marks": 1,
       "difficulty": "easy",
