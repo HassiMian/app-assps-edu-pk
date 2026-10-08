@@ -275,8 +275,13 @@ async function getOrPrintResultCards({ examId = 9, className, studentIdOrGr } = 
 
 // ─── 3. Fee & Challan Engine ────────────────────────────────────────────────
 
-async function editStudentFee({ studentQuery, className, newMonthlyFee, newRemainingBalance, reason } = {}) {
+async function editStudentFee({ studentQuery, className, newMonthlyFee, newRemainingBalance, reason } = {}, context = {}) {
   try {
+    const role = context.role || 'UNKNOWN';
+    const isPrivileged = ['OWNER', 'ADMIN'].includes(role);
+    if (!isPrivileged) {
+      return { success: false, error: 'Student fee modifications are restricted to authorized School Owner and Administrators.' };
+    }
     const q = String(studentQuery).trim();
     let findSql = `
       SELECT s.id, s.name, s.gr_number, s.class, s.section, fp.monthly_fee
@@ -638,14 +643,20 @@ async function getOrManageTimetable({ action = 'get', className, section, teache
 
 // ─── 6. Student Management Tools ────────────────────────────────────────────
 
-async function manageStudent({ action = 'search', studentData = {} } = {}) {
+async function manageStudent({ action = 'search', studentData = {} } = {}, context = {}) {
   try {
-    if (action !== 'search') return { success: false, error: 'Student mutations are disabled in the WhatsApp AI channel.' };
+    const role = context.role || 'UNKNOWN';
+    const isPrivileged = ['OWNER', 'ADMIN'].includes(role);
+
+    if (action !== 'search' && !isPrivileged) {
+      return { success: false, error: 'Student mutations (add/update/deactivate) are restricted to authorized School Owner and Administrators.' };
+    }
+
     if (action === 'search') {
       const q = studentData.query || studentData.name || studentData.gr_number || '';
       let sql = `
         SELECT s.id, s.gr_number, s.name, s.father_name, s.class, s.section,
-               s.parent_phone, s.parent_whatsapp, s.is_active, s.created_at,
+               s.parent_phone, s.parent_whatsapp, s.b_form, s.father_cnic, s.is_active, s.created_at,
                COALESCE(fp.monthly_fee, 0) AS monthly_fee,
                COALESCE(SUM(fc.remaining_balance), 0) AS latest_balance,
                CASE WHEN COALESCE(SUM(fc.remaining_balance), 0) > 0 THEN 'defaulter' ELSE 'clear' END AS fee_status
@@ -657,7 +668,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
       const params = [];
       if (q) {
         params.push(`%${q.trim()}%`);
-        sql += ` AND (s.name ILIKE $1 OR s.gr_number ILIKE $1 OR s.father_name ILIKE $1 OR s.parent_phone ILIKE $1)`;
+        sql += ` AND (s.name ILIKE $1 OR s.gr_number ILIKE $1 OR s.father_name ILIKE $1 OR s.parent_phone ILIKE $1 OR s.b_form ILIKE $1)`;
       }
       if (studentData.class) {
         params.push(`%${studentData.class.trim()}%`);
@@ -665,7 +676,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
       }
 
       sql += `
-        GROUP BY s.id, s.gr_number, s.name, s.father_name, s.class, s.section, s.parent_phone, s.parent_whatsapp, s.is_active, s.created_at, fp.monthly_fee
+        GROUP BY s.id, s.gr_number, s.name, s.father_name, s.class, s.section, s.parent_phone, s.parent_whatsapp, s.b_form, s.father_cnic, s.is_active, s.created_at, fp.monthly_fee
         ORDER BY s.class ASC, s.name ASC
         LIMIT 10;
       `;
@@ -675,31 +686,129 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
     }
 
     if (action === 'add') {
-      const gr = studentData.gr_number || `GR-${Date.now().toString().slice(-4)}`;
-      const name = studentData.name;
-      const fatherName = studentData.father_name || '';
-      const className = studentData.class || 'Starter';
-      const section = studentData.section || 'A';
-      const phone = studentData.parent_phone || '';
-      const whatsapp = studentData.parent_whatsapp || phone;
+      const name = String(studentData.name || '').trim();
+      if (!name) return { success: false, error: 'Student name is required for admission.' };
+
+      const fatherName = String(studentData.father_name || '').trim();
+      let rawClass = String(studentData.class || 'Starter').trim();
+      if (/7th|seven/i.test(rawClass)) rawClass = 'Seven';
+      else if (/8th|eight/i.test(rawClass)) rawClass = 'Eight';
+      else if (/9th|nine/i.test(rawClass)) rawClass = 'Nine';
+      else if (/10th|ten/i.test(rawClass)) rawClass = 'Ten';
+      else if (/6th|six/i.test(rawClass)) rawClass = 'Six';
+      else if (/5th|five/i.test(rawClass)) rawClass = 'Five';
+      else if (/4th|four/i.test(rawClass)) rawClass = 'Four';
+      else if (/3rd|three/i.test(rawClass)) rawClass = 'Three';
+      else if (/2nd|two/i.test(rawClass)) rawClass = 'Two';
+      else if (/1st|one/i.test(rawClass)) rawClass = 'One';
+
+      const section = String(studentData.section || 'A').trim();
+      const phone = String(studentData.parent_phone || studentData.phone || '').trim();
+      const whatsapp = String(studentData.parent_whatsapp || studentData.whatsapp || phone).trim();
+      const bForm = String(studentData.b_form || studentData.id_card || '').trim();
+      const fatherCnic = String(studentData.father_cnic || studentData.father_id_card || '').trim();
+      const address = String(studentData.address || studentData.village || studentData.locality || '').trim();
       const monthlyFee = parseFloat(studentData.monthly_fee || 3000);
 
+      // Date of birth parsing
+      let dob = null;
+      const rawDob = studentData.date_of_birth || studentData.dob;
+      if (rawDob && typeof rawDob === 'string') {
+        const dmy = rawDob.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
+        if (dmy) {
+          dob = `${dmy[3]}-${dmy[2].padStart(2, '0')}-${dmy[1].padStart(2, '0')}`;
+        } else if (/^\d{4}-\d{2}-\d{2}$/.test(rawDob)) {
+          dob = rawDob;
+        }
+      }
+
+      // Check duplicates first (Double guard)
+      if (bForm) {
+        const dupBForm = await queryDb(`SELECT id, name, gr_number, class FROM students WHERE b_form = $1 LIMIT 1;`, [bForm]);
+        if (dupBForm.rowCount > 0) {
+          return { success: false, error: `Student with B-Form ${bForm} already exists (${dupBForm.rows[0].name}, GR: ${dupBForm.rows[0].gr_number}, Class: ${dupBForm.rows[0].class}).` };
+        }
+      }
+
+      // Generate GR number
+      let gr = studentData.gr_number;
+      if (!gr) {
+        const maxGrRes = await queryDb(`SELECT gr_number FROM students WHERE gr_number ~ '^GR-[0-9]+$' ORDER BY id DESC LIMIT 1;`);
+        let nextNum = Math.floor(1000 + Math.random() * 9000);
+        if (maxGrRes.rowCount > 0) {
+          const num = parseInt(maxGrRes.rows[0].gr_number.replace('GR-', ''), 10);
+          if (!isNaN(num)) nextNum = num + 1;
+        }
+        gr = `GR-${nextNum}`;
+      }
+
+      // 1. Insert Student
       const ins = await queryDb(
-        `INSERT INTO students (school_id, gr_number, name, father_name, class, section, parent_phone, parent_whatsapp, is_active, tenant_id)
-         VALUES (current_setting('app.tenant_id')::int, $1, $2, $3, $4, $5, $6, $7, true, (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int))
-         RETURNING id, gr_number, name, class, section;`,
-        [gr, name, fatherName, className, section, phone, whatsapp]
+        `INSERT INTO students (
+          school_id, gr_number, name, father_name, class, section, 
+          b_form, father_cnic, date_of_birth, locality, address, 
+          parent_phone, parent_whatsapp, is_active, admission_date, tenant_id
+        ) VALUES (
+          current_setting('app.tenant_id')::int, $1, $2, $3, $4, $5, 
+          $6, $7, $8, $9, $10, 
+          $11, $12, true, CURRENT_DATE, 
+          (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int)
+        )
+        RETURNING id, gr_number, name, father_name, class, section, b_form, parent_phone;`,
+        [gr, name, fatherName, rawClass, section, bForm, fatherCnic, dob, address, address, phone, whatsapp]
       );
       const student = ins.rows[0];
 
+      // 2. Insert Fee Profile
       await queryDb(
-        `INSERT INTO student_fee_profiles (student_id, school_id, monthly_fee)
-         VALUES ($1, current_setting('app.tenant_id')::int, $2)
-         ON CONFLICT (student_id) DO UPDATE SET monthly_fee = $2;`,
+        `INSERT INTO student_fee_profiles (student_id, school_id, monthly_fee, updated_at)
+         VALUES ($1, current_setting('app.tenant_id')::int, $2, NOW())
+         ON CONFLICT (student_id) DO UPDATE SET monthly_fee = $2, updated_at = NOW();`,
         [student.id, monthlyFee]
       );
 
-      return { success: true, action: 'added', student, monthly_fee: monthlyFee };
+      // 3. Generate Initial Admission Challan
+      const challanNo = `CH-${Date.now().toString().slice(-6)}`;
+      await queryDb(
+        `INSERT INTO fee_challans (
+          school_id, challan_no, student_id, month, year, amount, 
+          remaining_balance, monthly_fee, status, due_date, tenant_id, created_at, updated_at
+        ) VALUES (
+          current_setting('app.tenant_id')::int, $1, $2, 'October', 2026, $3,
+          $3, $3, 'unpaid', CURRENT_DATE + INTERVAL '10 days',
+          (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int),
+          NOW(), NOW()
+        ) ON CONFLICT DO NOTHING;`,
+        [challanNo, student.id, monthlyFee]
+      );
+
+      // 4. Record in Admissions table
+      await queryDb(
+        `INSERT INTO admissions (
+          school_id, student_name, father_name, parent_phone, whatsapp_number, 
+          class_applying, date_of_birth, status, tenant_id, created_at
+        ) VALUES (
+          current_setting('app.tenant_id')::int, $1, $2, $3, $4, 
+          $5, $6, 'admitted', 
+          (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int),
+          NOW()
+        );`,
+        [name, fatherName, phone, whatsapp, rawClass, dob]
+      );
+
+      return {
+        success: true,
+        action: 'admitted',
+        student_id: student.id,
+        gr_number: student.gr_number,
+        name: student.name,
+        father_name: student.father_name,
+        class: student.class,
+        section: student.section,
+        b_form: student.b_form,
+        monthly_fee: monthlyFee,
+        challan_no: challanNo
+      };
     }
 
     if (action === 'deactivate') {
@@ -721,17 +830,42 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
       if (studentData.class) { params.push(studentData.class); fields.push(`class = $${params.length}`); }
       if (studentData.section) { params.push(studentData.section); fields.push(`section = $${params.length}`); }
       if (studentData.parent_phone) { params.push(studentData.parent_phone); fields.push(`parent_phone = $${params.length}`); }
+      if (studentData.parent_whatsapp) { params.push(studentData.parent_whatsapp); fields.push(`parent_whatsapp = $${params.length}`); }
       if (studentData.name) { params.push(studentData.name); fields.push(`name = $${params.length}`); }
+      if (studentData.father_name) { params.push(studentData.father_name); fields.push(`father_name = $${params.length}`); }
+      if (studentData.b_form) { params.push(studentData.b_form); fields.push(`b_form = $${params.length}`); }
+      if (studentData.address) { params.push(studentData.address); fields.push(`address = $${params.length}`); fields.push(`locality = $${params.length}`); }
 
-      if (fields.length === 0) return { success: false, error: 'No update fields provided' };
+      if (fields.length === 0 && studentData.monthly_fee === undefined) {
+        return { success: false, error: 'No update fields provided' };
+      }
 
-      const res = await queryDb(
-        `UPDATE students SET ${fields.join(', ')}, updated_at = NOW()
-         WHERE (gr_number = $1 OR name ILIKE $2)
-         RETURNING id, name, gr_number, class, section, parent_phone;`,
-        params
-      );
-      return { success: true, action: 'updated', affected: res.rowCount, student: res.rows[0] };
+      let student = null;
+      if (fields.length > 0) {
+        const res = await queryDb(
+          `UPDATE students SET ${fields.join(', ')}, updated_at = NOW()
+           WHERE (gr_number = $1 OR name ILIKE $2)
+           RETURNING id, name, gr_number, class, section, parent_phone;`,
+          params
+        );
+        student = res.rows[0];
+      } else {
+        const findRes = await queryDb(`SELECT id, name, gr_number, class, section FROM students WHERE (gr_number = $1 OR name ILIKE $2) LIMIT 1;`, params);
+        student = findRes.rows[0];
+      }
+
+      if (student && studentData.monthly_fee !== undefined) {
+        const fee = parseFloat(studentData.monthly_fee);
+        await queryDb(
+          `INSERT INTO student_fee_profiles (student_id, school_id, monthly_fee, updated_at)
+           VALUES ($1, current_setting('app.tenant_id')::int, $2, NOW())
+           ON CONFLICT (student_id) DO UPDATE SET monthly_fee = $2, updated_at = NOW();`,
+          [student.id, fee]
+        );
+        student.monthly_fee = fee;
+      }
+
+      return { success: true, action: 'updated', student };
     }
 
     return { success: false, error: 'Unknown action' };
@@ -742,9 +876,13 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
 
 // ─── 7. Classes & Settings Management ───────────────────────────────────────
 
-async function manageClassesAndSettings({ action = 'list_classes', data = {} } = {}) {
+async function manageClassesAndSettings({ action = 'list_classes', data = {} } = {}, context = {}) {
   try {
-    if (!['list_classes', 'get_settings'].includes(action)) return { success: false, error: 'Class/settings mutations are disabled in the WhatsApp AI channel.' };
+    const role = context.role || 'UNKNOWN';
+    const isPrivileged = ['OWNER', 'ADMIN'].includes(role);
+    if (!['list_classes', 'get_settings'].includes(action) && !isPrivileged) {
+      return { success: false, error: 'Class/settings mutations are restricted to authorized School Owner and Administrators.' };
+    }
     if (action === 'list_classes') {
       const res = await queryDb(
         `SELECT DISTINCT class AS class_name, COUNT(*) AS active_students
@@ -1055,9 +1193,13 @@ async function manageAdmissionsAndFamilies({ action = 'list', query } = {}) {
 
 // ─── 15. Expenses & Financial Ledger ────────────────────────────────────────
 
-async function manageExpensesAndAccounts({ action = 'list', category, amount, description } = {}) {
+async function manageExpensesAndAccounts({ action = 'list', category, amount, description } = {}, context = {}) {
   try {
-    if (action !== 'list') return { success: false, error: 'Expense mutations are disabled in the WhatsApp AI channel.' };
+    const role = context.role || 'UNKNOWN';
+    const isPrivileged = ['OWNER', 'ADMIN'].includes(role);
+    if (action !== 'list' && !isPrivileged) {
+      return { success: false, error: 'Expense mutations are restricted to authorized School Owner and Administrators.' };
+    }
     if (action === 'add') {
       const res = await queryDb(`
         INSERT INTO expenses (school_id, category, amount, description, expense_date, created_at)
