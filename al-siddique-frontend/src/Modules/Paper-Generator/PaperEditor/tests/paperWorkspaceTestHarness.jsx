@@ -126,6 +126,24 @@ const bilingualTableOverflowPaper = {
  }],
 }
 
+// Synthetic bilingual matrix-MCQ stress test, never an official paper.
+const bilingualMatrixOverflowPaper = {
+ id:'synthetic-mcq-matrix-overflow-20261008',name:'Matrix MCQ Bilingual Print Stress Fixture',
+ documentFormat:'pts-native-v13',printReadiness:'READY',editorSettings:{mcqLayout:'matrix-table'},
+ config:{className:'7',classLevel:'7',subjectName:'Science',subject:'Science',language:'urdu',
+   paperCode:'MCQ-MATRIX-PRINT',timeAllowed:'45 minutes',examDate:'2026-10-08',totalMarks:3,title:'Synthetic MCQ Print'},
+ official_section:[{id:'synthetic-mcq-matrix',type:'official_section',sourceOrder:1,medium:'urdu',layoutPreset:'mcq',
+  heading:'سوال نمبر 1: درست جواب منتخب کریں۔ (3)',marks:3,content:[
+   `1. ${'LONGENGLISHSCIENTIFICMEASUREMENT'.repeat(24)} [MCQ-STEM-01]`,
+   `A) Yes B) No C) Depends D) Never`,
+   `2. پاکستان کے کس موسم میں بارش ہوتی ہے؟ [MCQ-STEM-02]`,
+   `A) ${'VERYUNBROKENOPTIONWORD'.repeat(25)} B) Autumn C) Winter D) Spring`,
+   `3. ${'ب'.repeat(220)} [MCQ-STEM-03]`,
+   `A) Yes B) No C) Maybe D) None`,
+  ].join('\n'),
+ }],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -210,7 +228,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('bilingualMatrixOverflow') ? bilingualMatrixOverflowPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>

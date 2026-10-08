@@ -128,10 +128,10 @@ function McqSection({ rows, layout, isUrdu, qFs, fs, themeColor, editMode=false,
       <tbody>{rows.map((row,rowIndex) => <Fragment key={row.number+'-'+rowIndex}>
         <tr style={{ breakInside:'avoid' }}>
           <td rowSpan={2} style={{ border:`1px solid ${themeColor}66`, padding:5, textAlign:'center', fontWeight:800, verticalAlign:'top' }}>{numberNode(row,rowIndex)}</td>
-          <td colSpan={maxOptions} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px ${7*fs}px`, fontWeight:800, textAlign:isUrdu?'right':'left' }}>{promptNode(row,rowIndex)}</td>
+          <td colSpan={maxOptions} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px ${7*fs}px`, fontWeight:800, textAlign:isUrdu?'right':'left', overflowWrap:'anywhere', wordBreak:'break-word' }}>{promptNode(row,rowIndex)}</td>
         </tr>
         <tr style={{ breakInside:'avoid' }}>
-          {Array.from({length:maxOptions},(_,i)=><td key={i} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', verticalAlign:'top', overflowWrap:'break-word' }}>{row.options[i] ? optionNode(row.options[i],i,rowIndex) : ''}</td>)}
+          {Array.from({length:maxOptions},(_,i)=><td key={i} style={{ border:`1px solid ${themeColor}66`, padding:`${5*fs}px`, textAlign:isUrdu?'right':'left', verticalAlign:'top', overflowWrap:'anywhere', wordBreak:'break-word' }}>{row.options[i] ? optionNode(row.options[i],i,rowIndex) : ''}</td>)}
         </tr>
       </Fragment>)}</tbody>
     </table>
