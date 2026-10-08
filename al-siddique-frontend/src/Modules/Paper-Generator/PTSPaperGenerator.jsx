@@ -2597,7 +2597,7 @@ function OfficialExamPaperEditor({ loadedPaper, onReturnToSource }) {
 }
 
 //  Main Component 
-function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSaved = null }) {
+function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSaved = null, onOpenEarlyYears = null }) {
  const { theme:uiTheme, setTheme:setUiTheme } = useTheme()
  const [step, setStep] = useState(() => loadedPaper ? 'questions' : 'choose')
  const [creationDraft, setCreationDraft] = useState(null)
@@ -2665,7 +2665,7 @@ function PTSPaperGeneratorCore({ loadedPaper, onReturnToSource = null, onOpenSav
  <DBreadcrumb steps={crumbs[step]||[]} />
  {step !== 'questions' && (<div style={{ position:'absolute', top:8, right:18, zIndex:5 }}><ThemeToggle mode={uiTheme} onToggle={() => togglePaperWorkspaceTheme(setUiTheme)} /></div>)}
  <div style={{ padding:'24px', maxWidth:1100, margin:'0 auto' }}>
- {step==='choose' && <PaperCreationWelcome onBlank={()=>setStep('blank_setup')} onBank={()=>setStep('syllabus')} onDuplicate={()=>onOpenSaved?.()} />}
+ {step==='choose' && <PaperCreationWelcome onBlank={()=>setStep('blank_setup')} onBank={()=>setStep('syllabus')} onDuplicate={()=>onOpenSaved?.()} onEarlyYears={()=>onOpenEarlyYears?.()} />}
  {step==='blank_setup' && <BlankPaperSetup onBack={()=>setStep('choose')} onCreate={createNewBlankPaper} />}
  {step==='syllabus' && (<SyllabusStep onSelect={id => { setSyllabusId(id); setStep('class') }} />)}
  {step==='class' && (<ClassStep syllabusId={syllabusId} onSelect={id => { setClassId(id); setStep('subject') }} onBack={() => setStep('syllabus')} />)}

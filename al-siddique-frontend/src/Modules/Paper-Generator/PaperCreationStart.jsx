@@ -11,24 +11,25 @@ const theme = {
 const inputStyle={width:'100%',boxSizing:'border-box',padding:'10px 12px',borderRadius:8,border:`1px solid ${theme.border}`,background:'var(--pg-input-bg,#102b4c)',color:theme.text,fontSize:14}
 
 const choices=[
- {key:'blank',tag:'01',title:'Blank Paper — Type Myself',description:'Start with no questions. Enter the class and subject, then add and edit each question directly.',detail:'Question Bank not required.'},
- {key:'bank',tag:'02',title:'Build from Question Bank',description:'Choose syllabus, class, subject and questions using the existing bank-selection workflow.',detail:'Existing wizard; no changes to saved questions.'},
- {key:'duplicate',tag:'03',title:'Duplicate a Saved Paper',description:'Choose a previously saved paper and make an entirely separate working copy.',detail:'Original is never overwritten.'},
+ {key:'blank',tag:'01',title:'Create a Blank Paper',description:'Start with a clean paper, set your class and subject, then add questions in the Workspace.',detail:'Start creating'},
+ {key:'bank',tag:'02',title:'Build from Question Bank',description:'Find approved questions by syllabus and topic, then arrange them into your assessment.',detail:'Browse questions'},
+ {key:'early_years',tag:'03',title:'Pre Classes & Early Years',description:'Create activity-based papers for Starter, Mover and Flyer in their dedicated studio.',detail:'Open Early Years Studio'},
+ {key:'duplicate',tag:'04',title:'Continue from Saved Papers',description:'Reopen a paper to edit, or duplicate one to make a separate version.',detail:'Open saved papers'},
 ]
-export function PaperCreationWelcome({onBlank,onBank,onDuplicate}) {
- const handlers={blank:onBlank,bank:onBank,duplicate:onDuplicate}
- return <main data-create-paper-home style={{maxWidth:1000,margin:'24px auto',color:theme.text}}>
-  <div style={{marginBottom:26}}>
-   <div style={{fontSize:11,letterSpacing:1.3,fontWeight:900,color:theme.gold}}>ASSPS PAPER STUDIO</div>
-   <h2 style={{fontSize:26,margin:'7px 0',color:theme.text}}>How would you like to create your paper?</h2>
-   <p style={{fontSize:13,opacity:.8,maxWidth:750,margin:0}}>You decide the content. Create from a blank A4, pick existing questions, or duplicate an approved template. Nothing is inserted without your selection.</p>
+export function PaperCreationWelcome({onBlank,onBank,onDuplicate,onEarlyYears}) {
+ const handlers={blank:onBlank,bank:onBank,early_years:onEarlyYears,duplicate:onDuplicate}
+ return <main data-create-paper-home className="studio-creation-home" style={{maxWidth:1000,margin:'35px auto',padding:'0 16px 24px',color:theme.text}}>
+  <div className="studio-start-intro" style={{marginBottom:26}}>
+   <div style={{fontSize:11,letterSpacing:1.5,fontWeight:900,color:'var(--pg-blue,#087d91)'}}>CHOOSE A CREATION PATH</div>
+   <h2 style={{fontSize:32,letterSpacing:-1,margin:'10px 0',color:theme.text}}>Start your next assessment</h2>
+   <p style={{fontSize:13,opacity:.8,maxWidth:750,margin:0}}>Choose a starting point. Every option leads to the same trusted save, review and print workflow, with dedicated activities for Pre Classes.</p>
   </div>
-  <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(255px,1fr))',gap:14}}>
-   {choices.map(c=><button key={c.key} data-creation-option={c.key} type="button" onClick={handlers[c.key]} style={{textAlign:'left',minHeight:205,padding:19,border:`1px solid ${theme.border}`,borderRadius:16,background:theme.panel,color:theme.text,cursor:'pointer',display:'flex',flexDirection:'column',gap:12}}>
-    <span style={{width:37,height:37,display:'grid',placeItems:'center',borderRadius:10,background:'rgba(200,153,26,.12)',color:theme.gold,fontWeight:900}}>{c.tag}</span>
-    <strong style={{fontSize:16}}>{c.title}</strong>
-    <span style={{fontSize:12,lineHeight:1.6,opacity:.86}}>{c.description}</span>
-    <span style={{marginTop:'auto',fontSize:11,color:theme.gold,fontWeight:800}}>{c.detail} →</span>
+  <div className='studio-choice-grid' style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(min(100%,390px),1fr))',gap:16}}>
+   {choices.map(c=><button key={c.key} className="studio-create-choice" data-creation-option={c.key} type="button" onClick={handlers[c.key]} style={{textAlign:'left',minHeight:210,padding:23,border:`1px solid ${theme.border}`,borderRadius:18,background:theme.panel,color:theme.text,cursor:'pointer',display:'flex',flexDirection:'column',gap:15,boxShadow:'0 7px 23px rgba(0,20,50,.055)'}}>
+    <span style={{width:37,height:37,display:'grid',placeItems:'center',borderRadius:10,background:'var(--pg-chip,#e7f5f6)',color:'var(--pg-blue,#087d91)',fontWeight:900}}>{c.tag}</span>
+    <strong style={{fontSize:18,letterSpacing:-.3}}>{c.title}</strong>
+    <span style={{fontSize:13,lineHeight:1.65,opacity:.85}}>{c.description}</span>
+    <span style={{marginTop:'auto',fontSize:12,color:'var(--pg-blue,#087d91)',fontWeight:850}}>{c.detail} →</span>
    </button>)}
   </div>
  </main>
@@ -64,7 +65,7 @@ export function BlankPaperSetup({onCreate,onBack}) {
   onCreate(form)
  }
  const field=(label,name,node)=> <label key={name} style={{display:'flex',flexDirection:'column',gap:6,fontSize:12,fontWeight:800,color:theme.text}}>{label}{node}</label>
- return <form data-create-blank-paper onSubmit={make} style={{maxWidth:920,margin:'15px auto',padding:22,border:`1px solid ${theme.border}`,borderRadius:16,background:theme.panel}}>
+ return <form data-create-blank-paper onSubmit={make} style={{maxWidth:920,margin:'15px auto',padding:22,border:`1px solid ${theme.border}`,borderRadius:18,background:theme.panel}}>
   <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:20,flexWrap:'wrap'}}>
    <button type="button" onClick={onBack} style={{...inputStyle,width:'auto',cursor:'pointer'}}>← Methods</button>
    <div><div style={{color:theme.gold,fontSize:11,fontWeight:900}}>BLANK PAPER</div><h2 style={{margin:'4px 0',fontSize:22}}>Enter paper information</h2></div>

@@ -99,6 +99,21 @@ async function loadSavedPaper(paper) {
   await loadButton.click()
 }
 
+test('Teacher-facing Studio shell: creation paths and specialist routing', async () => {
+  await page.goto('http://localhost:5196/ey-test.html?mode=generator', { waitUntil:'domcontentloaded' })
+  await page.locator('[data-create-paper-home]').waitFor({ timeout:15000 })
+  assert.equal(await page.getByRole('heading', { name:'Paper Studio' }).count(), 1)
+  assert.equal(await page.locator('[data-creation-option]').count(), 4)
+  assert.equal(await page.locator('.paper-generator-module-tabs button').count(), 6)
+  await page.locator('[data-creation-option="early_years"]').click()
+  await page.locator('.early-years-module-wrap').waitFor({ timeout:12000 })
+  assert.equal(await page.getByRole('button', { name:'Pre Classes Papers' }).getAttribute('aria-current'), 'page')
+  await page.getByRole('button', { name:'Saved Papers' }).click()
+  await page.getByPlaceholder(' Search papers...').waitFor({ timeout:12000 })
+  await page.getByRole('button', { name:'Paper Workspace' }).click()
+  await page.locator('[data-create-paper-home]').waitFor({ timeout:12000 })
+})
+
 test('Phase 18: Saved Papers opens all 43 official V13 papers in the unified Paper Workspace', async () => {
   assert.strictEqual(v13.papers.length, 43)
 

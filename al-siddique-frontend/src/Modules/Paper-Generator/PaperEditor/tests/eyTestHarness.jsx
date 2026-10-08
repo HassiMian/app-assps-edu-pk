@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom/client'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import EarlyYearsWorksheetEditor from '../earlyYears/EarlyYearsWorksheetEditor.jsx'
 import PaperGenerator from '../../PaperGenerator.jsx'
+import { ThemeProvider } from '@/context/ThemeContext.jsx'
+import { AuthProvider } from '@/context/AuthContext.jsx'
 import '@/index.css'
 import '../earlyYears/earlyYearsPrint.css'
 
@@ -37,7 +39,7 @@ function EarlyYearsHarnessApp() {
             path="/paper-generator"
             element={
               <Suspense fallback={<div style={{ padding: 40, color: '#C0C8D8' }}>Loading Paper Generator...</div>}>
-                <PaperGenerator />
+                <ThemeProvider><AuthProvider><PaperGenerator /></AuthProvider></ThemeProvider>
               </Suspense>
             }
           />
