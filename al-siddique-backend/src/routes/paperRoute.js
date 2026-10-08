@@ -56,6 +56,37 @@ const canUsePaperAi = (req, res, next) => {
 }
 
 
+async function applyPaperVaultRuntimeContext(client, schoolId) {
+  const tenantId = Number(schoolId)
+  if (!Number.isInteger(tenantId) || tenantId <= 0) {
+    const err = new Error('School context is required.')
+    err.code = 'SCHOOL_CONTEXT_REQUIRED'
+    err.status = 403
+    throw err
+  }
+  await client.query('SET LOCAL ROLE apex_paper_runtime')
+  await client.query(
+    "SELECT set_config('app.rls_enabled','true',true), set_config('app.is_super_admin','false',true), set_config('app.tenant_id',$1,true)",
+    [String(tenantId)]
+  )
+}
+
+async function withPaperVaultRuntime(schoolId, work) {
+  const client = await pool.connect()
+  try {
+    await client.query('BEGIN')
+    await applyPaperVaultRuntimeContext(client, schoolId)
+    const value = await work(client)
+    await client.query('COMMIT')
+    return value
+  } catch (err) {
+    await client.query('ROLLBACK').catch(() => {})
+    throw err
+  } finally {
+    client.release()
+  }
+}
+
 async function ensurePaperVaultSchema() {
   const result = await pool.query(`
     SELECT
@@ -253,8 +284,8 @@ router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 
   try {
     await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
-    if (!schoolId && String(req.user?.role || '').toLowerCase() !== 'super_admin') {
-      return res.status(403).json({ success: false, message: 'School context is required.' })
+    if (!schoolId) {
+      return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'School context is required.' })
     }
     const params = [schoolId]
     let ownerClause = ''
@@ -262,21 +293,22 @@ router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 
       params.push(req.user?.id)
       ownerClause = ` AND owner_user_id=$${params.length}`
     }
-    const result = await pool.query(
+    const result = await withPaperVaultRuntime(schoolId, client => client.query(
       `SELECT id, school_id, owner_user_id, name, class_name, section, subject_name, status, revision,
               payload, created_at, updated_at
        FROM paper_vault
        WHERE school_id=$1 AND deleted_at IS NULL${ownerClause}
        ORDER BY updated_at DESC
-       LIMIT 200`, params)
+       LIMIT 200`, params))
     return res.json({
       success: true,
       scope: isPaperAdmin(req) ? 'school' : 'mine',
       papers: result.rows.map(serializeVaultPaper),
     })
   } catch (err) {
-    console.error('Paper vault list error:', err.message)
-    return res.status(500).json({ success: false, message: 'Saved papers could not be loaded.' })
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault list error:', err.message)
+    return res.status(status).json({ success: false, code: err.code || undefined, message: 'Saved papers could not be loaded.' })
   }
 })
 
@@ -291,13 +323,13 @@ router.post('/vault', protect, requireRoles('super_admin', 'admin', 'principal',
     }
     await enforceTeacherPaperScope(req, payload)
     const cfg = paperConfig(payload)
-    const result = await pool.query(
+    const result = await withPaperVaultRuntime(schoolId, client => client.query(
       `INSERT INTO paper_vault
        (school_id, owner_user_id, name, class_name, section, subject_name, status, payload)
        VALUES ($1,$2,$3,$4,$5,$6,'draft',$7)
        RETURNING id, school_id, owner_user_id, name, class_name, section, subject_name, status, revision,
                  payload, created_at, updated_at`,
-      [schoolId, req.user?.id, cfg.name, cfg.className, cfg.section, cfg.subjectName, JSON.stringify(payload)])
+      [schoolId, req.user?.id, cfg.name, cfg.className, cfg.section, cfg.subjectName, JSON.stringify(payload)]))
     return res.status(201).json({ success: true, paper: serializeVaultPaper(result.rows[0]) })
   } catch (err) {
     const status = Number(err.status) || 500
@@ -311,9 +343,11 @@ router.patch('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princi
   try {
     await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
+    if (!schoolId) return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'School context is required.' })
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
     await client.query('BEGIN')
+    await applyPaperVaultRuntimeContext(client, schoolId)
     const params = [id, schoolId]
     let ownerClause = ''
     if (!isPaperAdmin(req)) {
@@ -365,9 +399,11 @@ router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princ
   try {
     await ensurePaperVaultSchema()
     const schoolId = currentSchoolId(req)
+    if (!schoolId) return res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'School context is required.' })
     const id = String(req.params.id || '').trim()
     if (!/^\d+$/.test(id)) return res.status(400).json({ success: false, message: 'Invalid paper id.' })
     await client.query('BEGIN')
+    await applyPaperVaultRuntimeContext(client, schoolId)
     const params = [id, schoolId]
     let ownerClause = ''
     if (!isPaperAdmin(req)) {
@@ -401,8 +437,9 @@ router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princ
     return res.json({ success: true })
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
-    console.error('Paper vault delete error:', err.message)
-    return res.status(500).json({ success: false, message: 'Paper could not be deleted.' })
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault delete error:', err.message)
+    return res.status(status).json({ success: false, code: err.code || undefined, message: 'Paper could not be deleted.' })
   } finally {
     client.release()
   }

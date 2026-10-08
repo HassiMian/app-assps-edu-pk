@@ -38,6 +38,8 @@ async function up(options = {}) {
         ON paper_vault(school_id, LOWER(COALESCE(class_name,'')), LOWER(COALESCE(subject_name,'')))
         WHERE deleted_at IS NULL;
     `)
+    await client.query('GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE paper_vault TO apex_paper_runtime')
+    await client.query('GRANT USAGE, SELECT ON SEQUENCE paper_vault_id_seq TO apex_paper_runtime')
     await client.query('COMMIT')
     return { success: true }
   } catch (err) {
