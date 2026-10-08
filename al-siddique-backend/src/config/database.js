@@ -107,6 +107,25 @@ async function prepareRuntimeClient(client) {
 async function connectForContext() {
   const client = await rawPool.connect()
   try {
+    // Independent non-BYPASS LOGIN requirement. Opt-in until all bootstrap,
+    // service, super-admin and legacy paths pass isolated acceptance.
+    // SET ROLE alone is insufficient when the underlying LOGIN can RESET ROLE
+    // to BYPASSRLS. There is NO fallback to privileged mode on failure.
+    if (process.env.DB_ENFORCE_LEAST_PRIVILEGE_LOGIN === 'true') {
+      if (!configuredRuntimeRole()) {
+        const error = new Error('Restricted runtime role required by database security gate')
+        error.code = 'DB_RUNTIME_ROLE_REQUIRED'
+        throw error
+      }
+      const login = await client.query(
+        'SELECT current_user AS login_name, rolsuper, rolbypassrls FROM pg_roles WHERE rolname = current_user'
+      )
+      if (login.rows.length !== 1 || login.rows[0].rolsuper || login.rows[0].rolbypassrls) {
+        const error = new Error('Privileged database login rejected by security gate')
+        error.code = 'DB_PRIVILEGED_LOGIN_REJECTED'
+        throw error
+      }
+    }
     return await prepareRuntimeClient(client)
   } catch (error) {
     client.release()

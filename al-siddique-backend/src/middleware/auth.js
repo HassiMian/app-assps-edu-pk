@@ -241,12 +241,32 @@ async function protect(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET, { algorithms: ['HS256'] })
+    // Opt-in candidate boundary: use ONLY the verified, signed tenant claim
+    // to restrict the first DB lookup. With a non-BYPASS LOGIN, the legacy
+    // unscoped lookup cannot read users. Never accept a header/query tenant.
+    // Platform-wide accounts without a school must be explicitly redesigned
+    // before enabling this flag in production.
+    const prebindTenant = process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT === 'true'
+    const verifiedClaimSchoolId = normalizeSchoolId(decoded?.school_id)
+    if (prebindTenant) {
+      const context = tenantContext.getStore()
+      if (!context || !verifiedClaimSchoolId) {
+        return sendJson(res, 401, { message: 'Signed school context is required.' })
+      }
+      context.rlsEnabled = true
+      context.isSuperAdmin = false
+      context.tenantId = verifiedClaimSchoolId
+      context.tenantKey = String(decoded?.tenant_id || '').trim() || null
+    }
     let activeUser = await fetchActiveUserById(decoded?.id)
     if (!activeUser) {
       activeUser = await fetchVirtualBranchUserByEmail(decoded?.email)
     }
     if (!activeUser) {
       return sendJson(res, 401, { message: 'Invalid or expired token.' })
+    }
+    if (prebindTenant && normalizeSchoolId(activeUser.school_id) !== verifiedClaimSchoolId) {
+      return sendJson(res, 401, { message: 'Signed school context does not match the active user.' })
     }
     if (decoded?.email && activeUser.email && String(decoded.email).toLowerCase() !== String(activeUser.email).toLowerCase()) {
       return sendJson(res, 401, { message: 'Invalid or expired token.' })
