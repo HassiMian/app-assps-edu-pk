@@ -104,7 +104,8 @@ async function getAcademicReviewContext({schoolId,requesterId,publicId}={}){
       independentReviewerRequired:true,
       requesterIsAuthor:Number(row.author_id)===Number(requesterId) ||
         Number(row.revision_author_id)===Number(requesterId),
-      academicApprovalGranted:row.lifecycle_status==='ready',
+      academicApprovalGranted:false,
+      academicApprovalProofStatus:'NOT_EVALUATED_IN_REVIEW_CONTEXT',
     }
   })
 }
