@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "assps-biology9-chapter-header-ocr-samples-v1",
+  "sourceRecordId": "pectaa-catalog-009",
+  "sourceSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "sourcePdfPages": 180,
+  "scope": "BOUNDED_HEADER_OCR_CANDIDATES_NO_ACADEMIC_APPROVAL",
+  "academicApprovalGranted": false,
+  "requiresHumanImageReview": true,
+  "samples": [
+    {
+      "chapter": 1,
+      "pdfPhysicalPage": 5,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 1"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 1,
+      "pdfPhysicalPage": 6,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 2,
+      "pdfPhysicalPage": 23,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 2,
+      "pdfPhysicalPage": 24,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 2,
+      "pdfPhysicalPage": 25,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 2"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 3,
+      "pdfPhysicalPage": 40,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 3,
+      "pdfPhysicalPage": 41,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 3"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 3,
+      "pdfPhysicalPage": 42,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 4,
+      "pdfPhysicalPage": 62,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 4,
+      "pdfPhysicalPage": 63,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 4"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 4,
+      "pdfPhysicalPage": 64,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 5,
+      "pdfPhysicalPage": 79,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 5"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 5,
+      "pdfPhysicalPage": 80,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 5,
+      "pdfPhysicalPage": 81,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 6,
+      "pdfPhysicalPage": 92,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 6,
+      "pdfPhysicalPage": 93,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 6,
+      "pdfPhysicalPage": 94,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 7,
+      "pdfPhysicalPage": 107,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 7,
+      "pdfPhysicalPage": 108,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 7,
+      "pdfPhysicalPage": 109,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 7"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 8,
+      "pdfPhysicalPage": 118,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 8,
+      "pdfPhysicalPage": 119,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 8"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 8,
+      "pdfPhysicalPage": 120,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 9,
+      "pdfPhysicalPage": 132,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 9,
+      "pdfPhysicalPage": 133,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 9"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 9,
+      "pdfPhysicalPage": 134,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 10,
+      "pdfPhysicalPage": 149,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 10,
+      "pdfPhysicalPage": 150,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 10,
+      "pdfPhysicalPage": 151,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 10"
+      ],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 11,
+      "pdfPhysicalPage": 165,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 11,
+      "pdfPhysicalPage": 166,
+      "headerChapterNumberDetected": false,
+      "headerLines": [],
+      "ocrStatus": "OK"
+    },
+    {
+      "chapter": 11,
+      "pdfPhysicalPage": 167,
+      "headerChapterNumberDetected": true,
+      "headerLines": [
+        "Chapter 11"
+      ],
+      "ocrStatus": "OK"
+    }
+  ],
+  "textRetentionPolicy": "CHAPTER_MARKERS_ONLY_NO_TEXTBOOK_PARAGRAPHS"
+}

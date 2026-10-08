@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "assps-biology9-official-chapter-anchor-candidates-v1",
+  "sourceRecordId": "pectaa-catalog-009",
+  "grade": 9,
+  "subject": "Biology",
+  "medium": "English",
+  "expectedSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "cachedSourceRelativePath": "official-verified/biology9-pectaa-009.pdf",
+  "pdfiumObservedPageCount": 180,
+  "tocPhysicalPages": [
+    3,
+    4
+  ],
+  "pageNumberOffsetPdfPhysicalMinusPrinted": 4,
+  "scope": "SCAN_OCR_HEADER_AND_TOC_PAGINATION_CANDIDATES_NOT_ACADEMIC_APPROVAL",
+  "questionGenerationApproved": false,
+  "requiresHumanImageReview": true,
+  "allChaptersAcademicApproval": false,
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "The Science of Biology",
+      "printedPageStart": 1,
+      "printedPageEnd": 20,
+      "pdfPhysicalPageStart": 5,
+      "pdfPhysicalPageEnd": 24,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 5,
+        "recognizedChapterMarker": "Chapter 1",
+        "firstPageHeading": "The Science of Biology",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 2,
+      "title": "Biodiversity",
+      "printedPageStart": 21,
+      "printedPageEnd": 36,
+      "pdfPhysicalPageStart": 25,
+      "pdfPhysicalPageEnd": 40,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 25,
+        "recognizedChapterMarker": "Chapter 2",
+        "firstPageHeading": "Biodiversity",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 3,
+      "title": "The Cell",
+      "printedPageStart": 37,
+      "printedPageEnd": 58,
+      "pdfPhysicalPageStart": 41,
+      "pdfPhysicalPageEnd": 62,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 41,
+        "recognizedChapterMarker": "Chapter 3",
+        "firstPageHeading": "The Cell",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 4,
+      "title": "Cell Cycle",
+      "printedPageStart": 59,
+      "printedPageEnd": 74,
+      "pdfPhysicalPageStart": 63,
+      "pdfPhysicalPageEnd": 78,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 63,
+        "recognizedChapterMarker": "Chapter 4",
+        "firstPageHeading": "Cell Cycle",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 5,
+      "title": "Tissues, Organs, and Organ Systems",
+      "printedPageStart": 75,
+      "printedPageEnd": 88,
+      "pdfPhysicalPageStart": 79,
+      "pdfPhysicalPageEnd": 92,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 79,
+        "recognizedChapterMarker": "Chapter 5",
+        "firstPageHeading": "Tissues, Organs, and Organ Systems",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 6,
+      "title": "Biomolecules",
+      "printedPageStart": 89,
+      "printedPageEnd": 104,
+      "pdfPhysicalPageStart": 93,
+      "pdfPhysicalPageEnd": 108,
+      "sourceEvidence": {
+        "method": "HIGH_RESOLUTION_FULL_PAGE_HEADER_OCR",
+        "physicalPage": 93,
+        "recognizedChapterMarker": "Chapter 6",
+        "firstPageHeading": "Biomolecules",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 7,
+      "title": "Enzymes",
+      "printedPageStart": 105,
+      "printedPageEnd": 114,
+      "pdfPhysicalPageStart": 109,
+      "pdfPhysicalPageEnd": 118,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 109,
+        "recognizedChapterMarker": "Chapter 7",
+        "firstPageHeading": "Enzymes",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 8,
+      "title": "Bioenergetics",
+      "printedPageStart": 115,
+      "printedPageEnd": 128,
+      "pdfPhysicalPageStart": 119,
+      "pdfPhysicalPageEnd": 132,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 119,
+        "recognizedChapterMarker": "Chapter 8",
+        "firstPageHeading": "Bioenergetics",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 9,
+      "title": "Plant Physiology",
+      "printedPageStart": 129,
+      "printedPageEnd": 146,
+      "pdfPhysicalPageStart": 133,
+      "pdfPhysicalPageEnd": 150,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 133,
+        "recognizedChapterMarker": "Chapter 9",
+        "firstPageHeading": "Plant Physiology",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 10,
+      "title": "Reproduction in Plants",
+      "printedPageStart": 147,
+      "printedPageEnd": 162,
+      "pdfPhysicalPageStart": 151,
+      "pdfPhysicalPageEnd": 166,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 151,
+        "recognizedChapterMarker": "Chapter 10",
+        "firstPageHeading": "Reproduction in Plants",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    },
+    {
+      "chapter": 11,
+      "title": "Biostatistics",
+      "printedPageStart": 163,
+      "printedPageEnd": 176,
+      "pdfPhysicalPageStart": 167,
+      "pdfPhysicalPageEnd": 180,
+      "sourceEvidence": {
+        "method": "SCANNED_HEADER_OCR",
+        "physicalPage": 167,
+        "recognizedChapterMarker": "Chapter 11",
+        "firstPageHeading": "Biostatistics",
+        "independentPageImageReview": "REQUIRED"
+      },
+      "academicApproval": false,
+      "chapterTextReproduced": false,
+      "exerciseIndexStatus": "PENDING",
+      "manualPageImageVerificationRequired": true
+    }
+  ]
+}
