@@ -9,11 +9,11 @@
       "grade": 9,
       "subject": "Tarjuma-tul-Quran",
       "medium": "Urdu",
-      "pdfSha256": null,
+      "pdfSha256": "1308a2ea8cd8460a96161d99b66c8e809f60f4856f917061134be7d92c6b8fd8",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
-      "edition": "UNCONFIRMED"
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "edition": "CURRENT_OFFICIAL_LINK_2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-002",
@@ -152,11 +152,11 @@
       "grade": 10,
       "subject": "Tarjuma-tul-Quran",
       "medium": "Urdu",
-      "pdfSha256": null,
+      "pdfSha256": "b215a77d0209bfba751082c90c7c58af3414f7859fd87a8b164b5adc258a13ee",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
-      "edition": "VERIFY"
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "edition": "CURRENT_OFFICIAL_LINK_2026-10-08"
     },
     {
       "recordId": "pectaa-catalog-015",

@@ -5,16 +5,16 @@
 ## Snapshot
 
 - Provisional backend package: **2303 questions / 52 files**.
-- Full authoring universe: **2357 unique questions / 66 authoring files**.
+- Full authoring universe: **2401 unique questions / 67 authoring files**.
 - Starter authoring corpus: **1988 questions / 51 files / 51 source records**.
-- Authoring outside Starter files: **369 questions**.
+- Authoring outside Starter files: **413 questions**.
 - Generated provisional import package: **2303 questions / 52 files** (a deployment package, not the full authoring universe).
 - MCQs: **773**; biased seed files after editorial rebalancing: **0**.
 - Academically approved questions in staging/import package: **0**.
 - Publication-enabled provisional questions: **0**.
 - Starter questions without verified physical page: **1144**.
 - Official/source manifest entries: **111** (52 Grade IX, 46 Grade X, 13 shared IX–X).
-- Exact cached PDF hash matches: **108**; known source PDFs missing: **0**; manifest records lacking verified ledger hash: **3**.
+- Exact cached PDF hash matches: **110**; known source PDFs missing: **0**; manifest records lacking verified ledger hash: **1**.
 - Exercise indices complete: **0/111**.
 - Academic readiness: **BLOCKED**.
 
@@ -22,7 +22,7 @@
 
 | Record | Grade | Subject | Medium | Staged Qs | Cached hash | Chapter | Exercise | Generation | Blockers |
 |---|---:|---|---|---:|---|---|---|---|---|
-| pectaa-catalog-001 | 9 | Tarjuma-tul-Quran | Urdu | 0 | no | PENDING | PENDING | BLOCKED_PENDING_SOURCE | source-hash/cache; chapter/page-map; exercise-index; question-authoring; academic-review |
+| pectaa-catalog-001 | 9 | Tarjuma-tul-Quran | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_VERIFIED_CONTENT_MAP | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-002 | 9 | Islamiat | Urdu | 35 | yes | PENDING_FULL_CONTENT_VERIFICATION | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | chapter/page-map; exercise-index; academic-review |
 | pectaa-catalog-003 | 9 | Urdu | Urdu | 57 | yes | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | chapter/page-map; exercise-index; question-pages:57; academic-review |
 | pectaa-catalog-004 | 9 | English | English | 55 | yes | VERIFIED | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
@@ -35,7 +35,7 @@
 | pectaa-catalog-011 | 9 | Physics | English | 54 | yes | VERIFIED | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
 | pectaa-catalog-012 | 9 | Physics | Urdu | 27 | yes | PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | chapter/page-map; exercise-index; question-pages:27; academic-review |
 | pectaa-catalog-013 | 9 | Computer | English | 60 | yes | VERIFIED | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
-| pectaa-catalog-014 | 10 | Tarjuma-tul-Quran | Urdu | 0 | no | PENDING | PENDING | BLOCKED_PENDING_SOURCE | source-hash/cache; chapter/page-map; exercise-index; question-authoring; academic-review |
+| pectaa-catalog-014 | 10 | Tarjuma-tul-Quran | Urdu | 0 | yes | PENDING | PENDING | BLOCKED_PENDING_VERIFIED_CONTENT_MAP | chapter/page-map; exercise-index; question-authoring; academic-review |
 | pectaa-catalog-015 | 10 | Urdu | Urdu | 60 | yes | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | chapter/page-map; exercise-index; question-pages:60; academic-review |
 | pectaa-catalog-016 | 10 | English | English | 50 | yes | VERIFIED | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |
 | pectaa-catalog-017 | 10 | Mathematics | English | 60 | yes | VERIFIED | PENDING | PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW | exercise-index; academic-review |

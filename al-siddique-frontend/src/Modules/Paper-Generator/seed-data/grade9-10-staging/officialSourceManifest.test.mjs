@@ -9,6 +9,8 @@ test('source catalog manifest is well-formed and IDs unique',()=>{
 });
 test('downloaded official sources carry hash/page evidence while unreviewed sources remain blocked',()=>{
  const locked=new Map([
+  ['pectaa-catalog-001',{bytes:35605320,sha:'1308a2ea8cd8460a96161d99b66c8e809f60f4856f917061134be7d92c6b8fd8',pages:222}],
+  ['pectaa-catalog-014',{bytes:166991816,sha:'b215a77d0209bfba751082c90c7c58af3414f7859fd87a8b164b5adc258a13ee',pages:240}],
   ['pectaa-catalog-002',{bytes:25011563,sha:'8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b',pages:170}],
   ['pectaa-catalog-004',{bytes:19576377,sha:'737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf',pages:168}],
   ['pectaa-catalog-005',{bytes:113912128,sha:'181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1',pages:288}],
@@ -25,10 +27,13 @@ test('downloaded official sources carry hash/page evidence while unreviewed sour
   ['pectaa-catalog-025',{bytes:94367319,sha:'acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a',pages:152}],
  ]);
  for(const e of m.entries){
-  if(e.pdfUrl){
+  if(e.pdfSha256){
    assert.match(e.pdfSha256,/^[a-f0-9]{64}$/);assert.match(e.downloadStatus||'',/^PDF_BYTES_VERIFIED/);
    assert(Number(e.downloadByteLength)>0,e.recordId);assert(Number(e.pdfPageCount)>0,e.recordId);
-  } else assert.equal(e.pdfSha256,null);
+  } else {
+   assert.equal(e.recordId,'pectaa-catalog-037');
+   assert.match(e.catalogAssetUrl||'',/^https:\/\//);
+  }
   assert.equal(e.exerciseIndexStatus,'PENDING');
   if(e.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'){
    if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED|CROSS_CHECKED.*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
@@ -121,4 +126,16 @@ test('religious-alternative catalogue identities are represented without inherit
  assert.equal(alt.filter(x=>x.subject==='Akhlaqiat (Religious Minorities)').length,2);
  assert(alt.every(x=>x.medium==='UNSPECIFIED_BY_CATALOG_LABEL'&&/^BLOCKED_PENDING_/.test(x.questionGenerationStatus)));
  assert.equal(m.additionalCatalogStreamsPending.some(x=>x.startsWith('Religious alternatives')),false);
+});
+
+test('Computer Tech 9 Urdu remains fail-closed when the official catalog anchor exists but the asset endpoint is unavailable',()=>{
+ const e=m.entries.find(x=>x.recordId==='pectaa-catalog-037');
+ assert(e);
+ assert.equal(e.catalogLinkStatus,'OFFICIAL_PAGE_ANCHOR_FOUND');
+ assert.equal(e.sourceAvailabilityStatus,'OFFICIAL_CATALOG_ANCHOR_PRESENT_ASSET_ENDPOINT_TIMEOUT');
+ assert.equal(e.downloadStatus,'OFFICIAL_ASSET_UNAVAILABLE_TIMEOUT');
+ assert.equal(e.pdfSha256,null);
+ assert.equal(e.chapterIndexStatus,'PENDING');
+ assert.equal(e.exerciseIndexStatus,'PENDING');
+ assert.match(e.questionGenerationStatus,/^BLOCKED/);
 });

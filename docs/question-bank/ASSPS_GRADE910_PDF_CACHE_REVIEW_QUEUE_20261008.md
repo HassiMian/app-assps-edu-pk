@@ -4,12 +4,12 @@
 
 ## Current cache truth
 
-- Cached PDF files: **125**
+- Cached PDF files: **127**
 - Official manifest records: **111**
-- Records with an expected PDF hash: **108**
-- Exact cached hash matches: **108**
+- Records with an expected PDF hash: **110**
+- Exact cached hash matches: **110**
 - Known-hash sources still missing: **0**
-- Manifest records without a locked ledger hash: **3**
+- Manifest records without a locked ledger hash: **1**
 - Local PDFs not yet matched by an exact manifest hash: **0**
 - Academic approvals granted by this audit: **0**
 
@@ -17,6 +17,7 @@
 
 | Record | Grade | Subject | Medium | Cached PDF(s) | Chapter status | Exercise status |
 |---|---:|---|---|---|---|---|
+| pectaa-catalog-001 | 9 | Tarjuma-tul-Quran | Urdu | 20261008/official-verified/pectaa-catalog-001.pdf | PENDING | PENDING |
 | pectaa-catalog-002 | 9 | Islamiat | Urdu | 20261008/official-verified/pectaa-catalog-002.pdf | PENDING_FULL_CONTENT_VERIFICATION | PENDING |
 | pectaa-catalog-003 | 9 | Urdu | Urdu | 20261008/official-verified/pectaa-catalog-003.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
 | pectaa-catalog-004 | 9 | English | English | 20261008/official-verified/pectaa-catalog-004.pdf | VERIFIED | PENDING |
@@ -29,6 +30,7 @@
 | pectaa-catalog-011 | 9 | Physics | English | 20261008/official-verified/pectaa-catalog-011.pdf | VERIFIED | PENDING |
 | pectaa-catalog-012 | 9 | Physics | Urdu | 20261008/official-verified/pectaa-catalog-012.pdf | PARTIAL_VERIFIED_TOC_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
 | pectaa-catalog-013 | 9 | Computer | English | 20261008/official-verified/pectaa-catalog-013.pdf | VERIFIED | PENDING |
+| pectaa-catalog-014 | 10 | Tarjuma-tul-Quran | Urdu | 20261008/official-verified/pectaa-catalog-014.pdf | PENDING | PENDING |
 | pectaa-catalog-015 | 10 | Urdu | Urdu | 20261008/official-verified/pectaa-catalog-015.pdf | PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING | PENDING |
 | pectaa-catalog-016 | 10 | English | English | 20261008/official-verified/pectaa-catalog-016.pdf | VERIFIED | PENDING |
 | pectaa-catalog-017 | 10 | Mathematics | English | 20261008/official-verified/pectaa-catalog-017.pdf | VERIFIED | PENDING |

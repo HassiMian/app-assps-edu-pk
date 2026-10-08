@@ -3,24 +3,38 @@
   "scope": "SOURCE_INTEGRITY_ONLY_NO_ACADEMIC_APPROVAL",
   "ledgerSha256": "c25779f6c9b68fe8d98ef2543caaa8116a204a49cc2461284306e1985a221a50",
   "sourceCacheAudit": {
-    "cachedPdfFiles": 125,
+    "cachedPdfFiles": 127,
     "catalogRecords": 111,
-    "expectedHashCatalogRecords": 108,
-    "exactHashMatches": 108,
+    "expectedHashCatalogRecords": 110,
+    "exactHashMatches": 110,
     "missingKnownSources": 0,
-    "missingLedgerHashes": 3,
+    "missingLedgerHashes": 1,
     "unmatchedLocalPdfs": 0
   },
   "metrics": {
-    "cachedPdfFiles": 125,
+    "cachedPdfFiles": 127,
     "catalogRecords": 111,
-    "expectedHashCatalogRecords": 108,
-    "exactHashMatches": 108,
+    "expectedHashCatalogRecords": 110,
+    "exactHashMatches": 110,
     "missingKnownSources": 0,
-    "missingLedgerHashes": 3,
+    "missingLedgerHashes": 1,
     "unmatchedLocalPdfs": 0
   },
   "reviewQueue": [
+    {
+      "recordId": "pectaa-catalog-001",
+      "grade": 9,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "20261008/official-verified/pectaa-catalog-001.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
     {
       "recordId": "pectaa-catalog-002",
       "grade": 9,
@@ -186,6 +200,20 @@
       ],
       "cachedHashVerified": true,
       "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-014",
+      "grade": 10,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "20261008/official-verified/pectaa-catalog-014.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING",
       "exerciseStatus": "PENDING",
       "academicApproved": false
     },
@@ -1555,8 +1583,6 @@
   ],
   "missingSourceCatalogIds": [],
   "catalogWithoutExpectedHash": [
-    "pectaa-catalog-001",
-    "pectaa-catalog-014",
     "pectaa-catalog-037"
   ],
   "unmatchedLocalPdfs": [],

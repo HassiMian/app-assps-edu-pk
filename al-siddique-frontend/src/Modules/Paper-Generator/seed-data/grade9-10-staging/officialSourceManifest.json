@@ -11,19 +11,26 @@
       "grade": 9,
       "stream": "Compulsory",
       "subject": "Tarjuma-tul-Quran",
-      "edition": "UNCONFIRMED",
+      "edition": "CURRENT_OFFICIAL_LINK_2026-10-08",
       "medium": "Urdu",
       "catalogLabel": "TARJUMA -TUL-QURAN -UL MAJEED (For Muslim Students)",
-      "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfUrl": "https://drive.google.com/file/d/157EhLaNBr6h1XNrF6k2mflsdui9RfYaU/view?usp=sharing",
+      "pdfSha256": "1308a2ea8cd8460a96161d99b66c8e809f60f4856f917061134be7d92c6b8fd8",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
-      "catalogLinkMatchCount": 7,
-      "catalogLinkStatus": "AMBIGUOUS_REPEATED_LABEL",
-      "catalogAssetUrl": null
+      "catalogLinkCheckedOn": "2026-10-08",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_GRADE_SPECIFIC_LINK_RESOLVED",
+      "catalogAssetUrl": null,
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 35605320,
+      "pdfPageCount": 222,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_GRADE_SPECIFIC_LINK",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-001.pdf",
+      "identityNote": "Current official Grade IX PECTAA link resolved directly from the Class-IX catalog. Current official bytes differ from the previously recovered archive copy; both identities are preserved separately. No academic approval is implied."
     },
     {
       "recordId": "pectaa-catalog-002",
@@ -365,19 +372,26 @@
       "grade": 10,
       "stream": "Compulsory",
       "subject": "Tarjuma-tul-Quran",
-      "edition": "VERIFY",
+      "edition": "CURRENT_OFFICIAL_LINK_2026-10-08",
       "medium": "Urdu",
       "catalogLabel": "TARJUMA -TUL-QURAN -UL MAJEED (For Muslim Students)",
-      "pdfUrl": null,
-      "pdfSha256": null,
+      "pdfUrl": "https://drive.google.com/file/d/1DMkY84-p4zsQbjKzyGcsTxIXsMGDxOeM/view?usp=sharing",
+      "pdfSha256": "b215a77d0209bfba751082c90c7c58af3414f7859fd87a8b164b5adc258a13ee",
       "chapterIndexStatus": "PENDING",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
+      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-02",
-      "catalogLinkMatchCount": 7,
-      "catalogLinkStatus": "AMBIGUOUS_REPEATED_LABEL",
-      "catalogAssetUrl": null
+      "catalogLinkCheckedOn": "2026-10-08",
+      "catalogLinkMatchCount": 1,
+      "catalogLinkStatus": "OFFICIAL_GRADE_SPECIFIC_LINK_RESOLVED",
+      "catalogAssetUrl": null,
+      "downloadContentMagic": "%PDF-",
+      "downloadByteLength": 166991816,
+      "pdfPageCount": 240,
+      "downloadVerifiedOn": "2026-10-08",
+      "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_GRADE_SPECIFIC_LINK",
+      "sourceCacheRef": "20261008/official-verified/pectaa-catalog-014.pdf",
+      "identityNote": "Current official Grade X PECTAA link resolved directly from the Class-X catalog. Current official bytes differ from the previously recovered archive copy; both identities are preserved separately. No academic approval is implied."
     },
     {
       "recordId": "pectaa-catalog-015",
@@ -639,7 +653,8 @@
       "downloadByteLength": 11056539,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-023.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-023.pdf",
+      "pdfPageCount": 136
     },
     {
       "recordId": "pectaa-catalog-024",
@@ -706,7 +721,7 @@
     {
       "recordId": "pectaa-catalog-026",
       "grade": 0,
-      "stream": "IX\u2013X Supplement",
+      "stream": "IX–X Supplement",
       "subject": "English Grammar and Composition",
       "edition": "2023-24",
       "medium": "English",
@@ -733,7 +748,7 @@
     {
       "recordId": "pectaa-catalog-027",
       "grade": 0,
-      "stream": "IX\u2013X Supplement",
+      "stream": "IX–X Supplement",
       "subject": "Urdu Quaid-e-Insha",
       "edition": "2023-24",
       "medium": "Urdu",
@@ -752,12 +767,13 @@
       "downloadByteLength": 131046901,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-027.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-027.pdf",
+      "pdfPageCount": 160
     },
     {
       "recordId": "pectaa-catalog-028",
       "grade": 0,
-      "stream": "IX\u2013X Supplement",
+      "stream": "IX–X Supplement",
       "subject": "General Science",
       "edition": "VERIFY",
       "medium": "English",
@@ -776,12 +792,13 @@
       "downloadByteLength": 48338065,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-028.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-028.pdf",
+      "pdfPageCount": 178
     },
     {
       "recordId": "pectaa-catalog-029",
       "grade": 0,
-      "stream": "IX\u2013X Supplement",
+      "stream": "IX–X Supplement",
       "subject": "General Science",
       "edition": "VERIFY",
       "medium": "Urdu",
@@ -800,7 +817,8 @@
       "downloadByteLength": 57610400,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-029.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-029.pdf",
+      "pdfPageCount": 188
     },
     {
       "recordId": "pectaa-catalog-030",
@@ -1027,11 +1045,17 @@
       "exerciseIndexStatus": "PENDING",
       "questionGenerationStatus": "BLOCKED_PENDING_SOURCE",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
-      "catalogLinkCheckedOn": "2026-10-06",
+      "catalogLinkCheckedOn": "2026-10-08",
       "catalogLinkMatchCount": 1,
       "catalogLinkStatus": "OFFICIAL_PAGE_ANCHOR_FOUND",
       "catalogAssetUrl": "https://pctb.punjab.gov.pk/system/files/COMPUTER%20Tech%209%20UM%20SHORT%20Version_Compressed%20final.pdf",
-      "identityNote": "Catalog identity only; no medium/edition equivalence or content parity is inferred beyond the official label."
+      "identityNote": "Catalog identity only; no medium/edition equivalence or content parity is inferred beyond the official label.",
+      "sourceAvailabilityStatus": "OFFICIAL_CATALOG_ANCHOR_PRESENT_ASSET_ENDPOINT_TIMEOUT",
+      "sourceAvailabilityCheckedOn": "2026-10-08",
+      "sourceAvailabilityEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+      "downloadStatus": "OFFICIAL_ASSET_UNAVAILABLE_TIMEOUT",
+      "downloadAttemptUrl": "https://pctb.punjab.gov.pk/system/files/COMPUTER%20Tech%209%20UM%20SHORT%20Version_Compressed%20final.pdf",
+      "sourceAvailabilityNote": "Current official PECTAA catalogue still lists Computer Tech 9 UM, but its linked pctb.punjab.gov.pk PDF endpoint timed out during independent VPS and web retrieval checks. No hash, page count, content map, or approval is inferred."
     },
     {
       "recordId": "pectaa-catalog-038",
@@ -1328,7 +1352,8 @@
       "downloadByteLength": 49205838,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/tech10-science/chem10em.pdf"
+      "sourceCacheRef": "20261008/tech10-science/chem10em.pdf",
+      "pdfPageCount": 140
     },
     {
       "recordId": "pectaa-catalog-048",
@@ -1354,7 +1379,8 @@
       "downloadByteLength": 42634064,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/tech10-science/chem10ur.pdf"
+      "sourceCacheRef": "20261008/tech10-science/chem10ur.pdf",
+      "pdfPageCount": 135
     },
     {
       "recordId": "pectaa-catalog-049",
@@ -1380,7 +1406,8 @@
       "downloadByteLength": 6687147,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-049.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-049.pdf",
+      "pdfPageCount": 108
     },
     {
       "recordId": "pectaa-catalog-050",
@@ -1406,7 +1433,8 @@
       "downloadByteLength": 16588678,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-050.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-050.pdf",
+      "pdfPageCount": 108
     },
     {
       "recordId": "pectaa-catalog-051",
@@ -1432,7 +1460,8 @@
       "downloadByteLength": 39948122,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-051.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-051.pdf",
+      "pdfPageCount": 140
     },
     {
       "recordId": "pectaa-catalog-052",
@@ -1458,7 +1487,8 @@
       "downloadByteLength": 20024321,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-052.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-052.pdf",
+      "pdfPageCount": 152
     },
     {
       "recordId": "pectaa-catalog-053",
@@ -1484,7 +1514,8 @@
       "downloadByteLength": 43257753,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-053.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-053.pdf",
+      "pdfPageCount": 108
     },
     {
       "recordId": "pectaa-catalog-054",
@@ -1510,7 +1541,8 @@
       "downloadByteLength": 11586177,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-054.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-054.pdf",
+      "pdfPageCount": 123
     },
     {
       "recordId": "pectaa-catalog-055",
@@ -1536,7 +1568,8 @@
       "downloadByteLength": 71169714,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-055.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-055.pdf",
+      "pdfPageCount": 167
     },
     {
       "recordId": "pectaa-catalog-056",
@@ -1562,7 +1595,8 @@
       "downloadByteLength": 68053111,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/tech10-science/phys10ur.pdf"
+      "sourceCacheRef": "20261008/tech10-science/phys10ur.pdf",
+      "pdfPageCount": 120
     },
     {
       "recordId": "pectaa-catalog-057",
@@ -1588,7 +1622,8 @@
       "downloadByteLength": 12167534,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/tech10-science/phys10em.pdf"
+      "sourceCacheRef": "20261008/tech10-science/phys10em.pdf",
+      "pdfPageCount": 136
     },
     {
       "recordId": "pectaa-catalog-058",
@@ -1614,7 +1649,8 @@
       "downloadByteLength": 44465010,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-058.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-058.pdf",
+      "pdfPageCount": 76
     },
     {
       "recordId": "pectaa-catalog-059",
@@ -1640,7 +1676,8 @@
       "downloadByteLength": 36154836,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-059.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-059.pdf",
+      "pdfPageCount": 80
     },
     {
       "recordId": "pectaa-catalog-060",
@@ -1666,7 +1703,8 @@
       "downloadByteLength": 5494237,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-060.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-060.pdf",
+      "pdfPageCount": 116
     },
     {
       "recordId": "pectaa-catalog-061",
@@ -1692,7 +1730,8 @@
       "downloadByteLength": 51460049,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-061.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-061.pdf",
+      "pdfPageCount": 116
     },
     {
       "recordId": "pectaa-catalog-062",
@@ -1718,7 +1757,8 @@
       "downloadByteLength": 7754740,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-062.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-062.pdf",
+      "pdfPageCount": 84
     },
     {
       "recordId": "pectaa-catalog-063",
@@ -1744,7 +1784,8 @@
       "downloadByteLength": 37358155,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-063.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-063.pdf",
+      "pdfPageCount": 88
     },
     {
       "recordId": "pectaa-catalog-064",
@@ -2049,7 +2090,7 @@
     {
       "recordId": "pectaa-catalog-074",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Farsi",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
@@ -2069,12 +2110,13 @@
       "downloadByteLength": 5880385,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/farsi910.pdf"
+      "sourceCacheRef": "20261008/farsi910.pdf",
+      "pdfPageCount": 132
     },
     {
       "recordId": "pectaa-catalog-075",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Economics",
       "edition": "2023-24",
       "medium": "Urdu",
@@ -2094,12 +2136,13 @@
       "downloadByteLength": 64254218,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/econum910.pdf"
+      "sourceCacheRef": "20261008/econum910.pdf",
+      "pdfPageCount": 132
     },
     {
       "recordId": "pectaa-catalog-076",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Economics",
       "edition": "2023-24",
       "medium": "English",
@@ -2119,12 +2162,13 @@
       "downloadByteLength": 109263930,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/econem910.pdf"
+      "sourceCacheRef": "20261008/econem910.pdf",
+      "pdfPageCount": 120
     },
     {
       "recordId": "pectaa-catalog-077",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Punjabi Ikhtari",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
@@ -2144,12 +2188,13 @@
       "downloadByteLength": 26801881,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/punjabi910.pdf"
+      "sourceCacheRef": "20261008/punjabi910.pdf",
+      "pdfPageCount": 96
     },
     {
       "recordId": "pectaa-catalog-078",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Zari Pedawar Workbook",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
@@ -2169,12 +2214,13 @@
       "downloadByteLength": 14669271,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/zari910.pdf"
+      "sourceCacheRef": "20261008/zari910.pdf",
+      "pdfPageCount": 358
     },
     {
       "recordId": "pectaa-catalog-079",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Health & Physical Education",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
@@ -2194,12 +2240,13 @@
       "downloadByteLength": 4251922,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/hpe910.pdf"
+      "sourceCacheRef": "20261008/hpe910.pdf",
+      "pdfPageCount": 84
     },
     {
       "recordId": "pectaa-catalog-080",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Education",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
@@ -2219,12 +2266,13 @@
       "downloadByteLength": 42093805,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/education910.pdf"
+      "sourceCacheRef": "20261008/education910.pdf",
+      "pdfPageCount": 76
     },
     {
       "recordId": "pectaa-catalog-081",
       "grade": 0,
-      "stream": "IX\u2013X Arts Supplement",
+      "stream": "IX–X Arts Supplement",
       "subject": "Civics",
       "edition": "2023-24",
       "medium": "Urdu",
@@ -2244,7 +2292,8 @@
       "downloadByteLength": 11227925,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ASSET_MATCH",
-      "sourceCacheRef": "20261008/civicsum910.pdf"
+      "sourceCacheRef": "20261008/civicsum910.pdf",
+      "pdfPageCount": 96
     },
     {
       "recordId": "pectaa-catalog-082",
@@ -2271,7 +2320,8 @@
       "downloadByteLength": 12840789,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-082.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-082.pdf",
+      "pdfPageCount": 97
     },
     {
       "recordId": "pectaa-catalog-083",
@@ -2298,7 +2348,8 @@
       "downloadByteLength": 15000489,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-083.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-083.pdf",
+      "pdfPageCount": 98
     },
     {
       "recordId": "pectaa-catalog-084",
@@ -2325,7 +2376,8 @@
       "downloadByteLength": 93253312,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-084.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-084.pdf",
+      "pdfPageCount": 124
     },
     {
       "recordId": "pectaa-catalog-085",
@@ -2352,7 +2404,8 @@
       "downloadByteLength": 93708804,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-085.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-085.pdf",
+      "pdfPageCount": 124
     },
     {
       "recordId": "pectaa-catalog-086",
@@ -2379,7 +2432,8 @@
       "downloadByteLength": 26736978,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-086.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-086.pdf",
+      "pdfPageCount": 64
     },
     {
       "recordId": "pectaa-catalog-087",
@@ -2406,7 +2460,8 @@
       "downloadByteLength": 22527776,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-087.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-087.pdf",
+      "pdfPageCount": 64
     },
     {
       "recordId": "pectaa-catalog-088",
@@ -2433,7 +2488,8 @@
       "downloadByteLength": 33639090,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR_RETRY",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-088.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-088.pdf",
+      "pdfPageCount": 80
     },
     {
       "recordId": "pectaa-catalog-089",
@@ -2460,7 +2516,8 @@
       "downloadByteLength": 30605595,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-089.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-089.pdf",
+      "pdfPageCount": 92
     },
     {
       "recordId": "pectaa-catalog-090",
@@ -2607,7 +2664,8 @@
       "downloadByteLength": 21935667,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-094.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-094.pdf",
+      "pdfPageCount": 96
     },
     {
       "recordId": "pectaa-catalog-095",
@@ -2664,7 +2722,8 @@
       "downloadByteLength": 16918809,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-096.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-096.pdf",
+      "pdfPageCount": 58
     },
     {
       "recordId": "pectaa-catalog-097",
@@ -2691,7 +2750,8 @@
       "downloadByteLength": 10084869,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-097.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-097.pdf",
+      "pdfPageCount": 58
     },
     {
       "recordId": "pectaa-catalog-098",
@@ -2718,7 +2778,8 @@
       "downloadByteLength": 46343956,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-098.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-098.pdf",
+      "pdfPageCount": 64
     },
     {
       "recordId": "pectaa-catalog-099",
@@ -2745,7 +2806,8 @@
       "downloadByteLength": 48364564,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-099.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-099.pdf",
+      "pdfPageCount": 64
     },
     {
       "recordId": "pectaa-catalog-100",
@@ -2772,7 +2834,8 @@
       "downloadByteLength": 20523507,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-100.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-100.pdf",
+      "pdfPageCount": 48
     },
     {
       "recordId": "pectaa-catalog-101",
@@ -2799,7 +2862,8 @@
       "downloadByteLength": 21049450,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-101.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-101.pdf",
+      "pdfPageCount": 48
     },
     {
       "recordId": "pectaa-catalog-102",
@@ -2826,7 +2890,8 @@
       "downloadByteLength": 23189630,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-102.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-102.pdf",
+      "pdfPageCount": 65
     },
     {
       "recordId": "pectaa-catalog-103",
@@ -2853,7 +2918,8 @@
       "downloadByteLength": 73066750,
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED_OFFICIAL_ANCHOR",
-      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-103.pdf"
+      "sourceCacheRef": "20261008/official-verified-unhashed/pectaa-catalog-103.pdf",
+      "pdfPageCount": 63
     },
     {
       "recordId": "pectaa-catalog-104",
