@@ -34,6 +34,7 @@ async function up() {
     'assessment_papers',
     'assessment_paper_revisions',
     'assessment_releases',
+    'paper_vault',
   ]
 
   const skipped = []
