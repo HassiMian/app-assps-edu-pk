@@ -9,6 +9,10 @@ export const INLINE_SIZES = [8,9,10,11,12,13,14,16,18,20,22,24,28,32]
 const selectionCache = new Map()
 const liveFieldHandles = new WeakMap()
 let lastActualSelection = null
+let crossPointerStart = null
+let lastCrossQuestionSelection = null
+const crossQuestionHistory = new WeakMap()
+
 const cacheKey = (sectionId='',fieldKey='') => String(sectionId)+'::'+String(fieldKey)
 const ALLOWED_TAGS = new Set(['B','STRONG','I','EM','U','S','SPAN','SUP','SUB','BR'])
 const ALLOWED_STYLE = new Set(['font-family','font-size','color','background-color','font-weight','font-style','text-decoration','text-decoration-line','vertical-align','display','transform'])
@@ -142,7 +146,7 @@ function findActiveElement(active){
 
 export function InlineEditable(props) {
  const { text='', richHtml='', editMode=false, direction='ltr', className='', style,
-  fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='' }=props
+  fieldKey='', sectionId='', onCommit, onActivate, as='span', singleLine=true, ariaLabel='', sharedSelectionRoot=false }=props
  const ref=useRef(null); const focused=useRef(false); const savedSelection=useRef(null); const Tag=as
  const html=normalizeHeadingPunctuation(richHtml?sanitizeInlineHtml(richHtml):textHtml(text),fieldKey)
  const lastCommittedHtml=useRef(html)
@@ -210,12 +214,13 @@ export function InlineEditable(props) {
   className={('paper-inline-editable '+className).trim()}
   data-paper-inline-editable={editMode?'true':undefined}
   data-edit-field={fieldKey||undefined} data-section-id={sectionId||undefined}
-  contentEditable={editMode} suppressContentEditableWarning dir={direction}
+  contentEditable={editMode&&sharedSelectionRoot?undefined:editMode} suppressContentEditableWarning dir={direction}
   aria-label={ariaLabel||undefined} spellCheck={false}
   style={{...style,outline:editMode?'none':undefined,cursor:editMode?'text':undefined}}
   onFocus={()=>{
    focused.current=true
    if(lastActualSelection?.element!==ref.current) lastActualSelection=null
+   if(lastCrossQuestionSelection && ref.current!==lastCrossQuestionSelection.serial && ref.current!==lastCrossQuestionSelection.heading) lastCrossQuestionSelection=null
    activate()
   }}
   onBlur={event=>{
@@ -239,6 +244,183 @@ export function InlineEditable(props) {
 function ownerOfSelectionNode(node) {
  const el=node?.nodeType===Node.ELEMENT_NODE?node:node?.parentElement
  return el?.closest?.('[data-paper-inline-editable]')||null
+}
+// A native mouse drag crossing the two independently editable question roots
+// cannot be treated as a selection inside either owner. Keep an explicit,
+// bounded two-field range and never include the sibling marks editable.
+function selectionPointAt(x,y) {
+ const point=document.caretRangeFromPoint?.(x,y)
+ if(point)return {node:point.startContainer,offset:point.startOffset}
+ const pos=document.caretPositionFromPoint?.(x,y)
+ return pos?{node:pos.offsetNode,offset:pos.offset}:null
+}
+function positionWithin(el,point){
+ if(!point||!el?.contains(point.node))return null
+ const range=document.createRange()
+ range.selectNodeContents(el)
+ try{range.setEnd(point.node,point.offset)}catch{return null}
+ return range.toString().length
+}
+export function activateQuestionHeadingField(event,onActivate){
+ const el=event.target?.closest?.('[data-paper-inline-editable]')
+ const handle=el&&liveFieldHandles.get(el)?.()
+ if(handle)onActivate?.(handle)
+}
+export function commitQuestionHeadingGroup(event){
+ if(event.relatedTarget?.closest?.('[data-inline-selection-toolbar]'))return
+ for(const el of event.currentTarget?.querySelectorAll?.('[data-paper-inline-editable]')||[]){
+  liveFieldHandles.get(el)?.()?.commitElement?.(el)
+ }
+}
+export function guardQuestionHeadingEdit(event){
+ const selection=window.getSelection?.()
+ if(!selection?.rangeCount)return
+ const range=selection.getRangeAt(0)
+ const start=ownerOfSelectionNode(range.startContainer)
+ const end=ownerOfSelectionNode(range.endContainer)
+ const isSame=(field,el)=>el?.dataset.editField===field
+ const withinRoot=el=>el?.closest('[data-question-heading]')===event.currentTarget
+ if(!withinRoot(start)||!withinRoot(end))return
+ // Editing across an independent serial/instruction boundary would destroy
+ // document structure. Native selection remains legal for bounded formatting.
+ if(start!==end){event.preventDefault();return}
+ if(!range.collapsed)return
+ const offset=positionWithin(start,{node:range.startContainer,offset:range.startOffset})
+ const input=String(event.inputType||(event.key==='Backspace'?'deleteContentBackward':event.key==='Delete'?'deleteContentForward':''))
+ if((isSame('question-heading',start)&&offset===0&&input==='deleteContentBackward')||
+    (isSame('question-number',start)&&offset===(start.textContent?.length||0)&&input==='deleteContentForward')){
+  event.preventDefault()
+ }
+}
+export function beginQuestionHeadingDrag(event){
+ const el=event.target?.closest?.('[data-paper-inline-editable]')
+ const field=el?.dataset?.editField
+ crossPointerStart=field==='question-number'||field==='question-heading'
+  ? {el,sectionId:el.dataset.sectionId,point:selectionPointAt(event.clientX,event.clientY),x:event.clientX}:null
+ lastCrossQuestionSelection=null
+}
+export function finishQuestionHeadingDrag(event){
+ const started=crossPointerStart;crossPointerStart=null
+ if(!started)return false
+ const endEl=event.target?.closest?.('[data-paper-inline-editable]')
+ if(!endEl||started.el===endEl||started.sectionId!==endEl.dataset.sectionId)return false
+ const roots=[started.el,endEl]
+ if(!roots.every(el=>['question-number','question-heading'].includes(el.dataset.editField)))return false
+ const holder=started.el.closest('[data-question-heading]')
+ if(!holder||endEl.closest('[data-question-heading]')!==holder)return false
+ const serial=roots.find(el=>el.dataset.editField==='question-number')
+ const heading=roots.find(el=>el.dataset.editField==='question-heading')
+ const ended=selectionPointAt(event.clientX,event.clientY)
+ const approximateOffset=(el,x)=>{
+  // Chromium may return a caret outside a nested RTL span. Resolve the
+  // actual glyph boundary rather than assuming uniform character widths.
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT)
+  const rtl=el.getAttribute('dir')==='rtl'
+  let pos=0,best=null,node
+  while((node=walker.nextNode())){
+   const length=node.textContent?.length||0
+   for(let i=0;i<length;i++){
+    const r=document.createRange();r.setStart(node,i);r.setEnd(node,i+1)
+    const box=r.getBoundingClientRect()
+    if(!box.width)continue
+    const edge=rtl?box.right:box.left
+    const d=Math.abs(x-edge)
+    if(best===null||d<best.distance)best={offset:pos+i,distance:d}
+   }
+   pos+=length
+  }
+  return best?.offset??null
+ }
+ const startOffset=positionWithin(started.el,started.point)??approximateOffset(started.el,started.x)
+ const endOffset=positionWithin(endEl,ended)??approximateOffset(endEl,event.clientX)
+ if(startOffset===null||endOffset===null)return false
+ const serialSpan=started.el===serial?{start:startOffset,end:serial.textContent.length}:{start:endOffset,end:serial.textContent.length}
+ const headingSpan=started.el===heading?{start:0,end:startOffset}:{start:0,end:endOffset}
+ if(serialSpan.end<=serialSpan.start||headingSpan.end<=headingSpan.start)return false
+ lastCrossQuestionSelection={serial,heading,serialSpan,headingSpan,sectionId:started.sectionId,serialText:serial.textContent,headingText:heading.textContent,savedAt:Date.now()}
+ restoreCrossQuestionRange(lastCrossQuestionSelection)
+ return true
+}
+function restoreCrossQuestionRange(cross){
+ const s=rangeFromOffsets(cross.serial,cross.serialSpan)
+ const h=rangeFromOffsets(cross.heading,cross.headingSpan)
+ if(!s||!h)return false
+ const range=document.createRange()
+ range.setStart(s.startContainer,s.startOffset)
+ range.setEnd(h.endContainer,h.endOffset)
+ const selection=window.getSelection?.()
+ if(!selection)return false
+ selection.removeAllRanges();selection.addRange(range)
+ return true
+}
+function resolveCrossQuestionSelection(){
+ const native=window.getSelection?.()
+ if(native?.rangeCount&&!native.isCollapsed){
+  const range=native.getRangeAt(0)
+  const start=ownerOfSelectionNode(range.startContainer)
+  const end=ownerOfSelectionNode(range.endContainer)
+  if(start&&end&&start!==end&&start.dataset.sectionId===end.dataset.sectionId){
+   if(start.dataset.editField==='question-number'&&end.dataset.editField==='question-heading'){
+    const serialSpan={start:positionWithin(start,{node:range.startContainer,offset:range.startOffset}),end:start.textContent.length}
+    const headingSpan={start:0,end:positionWithin(end,{node:range.endContainer,offset:range.endOffset})}
+    if(serialSpan.start!==null&&headingSpan.end!==null&&serialSpan.end>serialSpan.start&&headingSpan.end>0){
+     lastCrossQuestionSelection={serial:start,heading:end,serialSpan,headingSpan,sectionId:start.dataset.sectionId,serialText:start.textContent,headingText:end.textContent,savedAt:Date.now()}
+    }
+   }
+  }
+ }
+ const cross=lastCrossQuestionSelection
+ if(!cross||Date.now()-cross.savedAt>30000||!document.body.contains(cross.serial)||!document.body.contains(cross.heading))return null
+ if(cross.serial.dataset.sectionId!==cross.sectionId||cross.heading.dataset.sectionId!==cross.sectionId)return null
+ if(cross.serial.textContent!==cross.serialText||cross.heading.textContent!==cross.headingText)return null
+ return cross
+}
+function toggleCrossQuestionMark(mark){
+ const cross=resolveCrossQuestionSelection()
+ if(!cross)return null
+ const {serial,heading,serialSpan,headingSpan,sectionId}=cross
+ const serialHandle=liveFieldHandles.get(serial)?.()
+ const headingHandle=liveFieldHandles.get(heading)?.()
+ if(!serialHandle||!headingHandle)return null
+ const state=selectedMarkStates(serial,serialSpan)[mark]&&selectedMarkStates(heading,headingSpan)[mark]
+ const enable=!state
+ const before={serial:serial.innerHTML,heading:heading.innerHTML}
+ const first=splitAndToggleMark(serial,serialSpan,mark,enable)
+ const second=splitAndToggleMark(heading,headingSpan,mark,enable)
+ if(first===null||second===null){serial.innerHTML=before.serial;heading.innerHTML=before.heading;return null}
+ serialHandle.commitElement?.(serial)
+ headingHandle.commitElement?.(heading)
+ // Commit may sanitize HTML. Undo/redo snapshots must track the canonical
+ // post-sanitization DOM, not the intermediate execCommand markup.
+ const after={serial:serial.innerHTML,heading:heading.innerHTML}
+ const history=crossQuestionHistory.get(serial)||{past:[],future:[]}
+ history.past.push({before,after});if(history.past.length>30)history.past.shift();history.future=[]
+ crossQuestionHistory.set(serial,history)
+ cross.savedAt=Date.now()
+ restoreCrossQuestionRange(cross)
+ requestAnimationFrame(()=>restoreCrossQuestionRange(cross))
+ return enable
+}
+function replayCrossQuestionHistory(direction){
+ const cross=resolveCrossQuestionSelection()
+ if(!cross)return false
+ const history=crossQuestionHistory.get(cross.serial)
+ const from=direction==='undo'?history?.past:history?.future
+ const to=direction==='undo'?history?.future:history?.past
+ if(!from?.length)return false
+ const entry=from[from.length-1]
+ const expected=direction==='undo'?entry.after:entry.before
+ if(cross.serial.innerHTML!==expected.serial||cross.heading.innerHTML!==expected.heading){
+  history.past=[];history.future=[];return false
+ }
+ from.pop();to.push(entry)
+ const html=direction==='undo'?entry.before:entry.after
+ cross.serial.innerHTML=html.serial;cross.heading.innerHTML=html.heading
+ liveFieldHandles.get(cross.serial)?.()?.commitElement?.(cross.serial)
+ liveFieldHandles.get(cross.heading)?.()?.commitElement?.(cross.heading)
+ restoreCrossQuestionRange(cross)
+ requestAnimationFrame(()=>restoreCrossQuestionRange(cross))
+ return true
 }
 function resolveActionTarget(active) {
  const selection=window.getSelection?.()
@@ -369,11 +551,11 @@ function renderInlineRuns(el,runs) {
  }
  el.replaceChildren(fragment)
 }
-function splitAndToggleMark(el,snapshot,mark) {
+function splitAndToggleMark(el,snapshot,mark,forceState=null) {
  const runs=readInlineRuns(el)
  if(runs.some(run=>run.br))return null
  const states=selectedMarkStates(el,snapshot)
- const enable=!states[mark]
+ const enable=forceState===null?!states[mark]:forceState
  const next=[];let offset=0;let found=false
  for(const run of runs){
   const end=offset+run.text.length
@@ -402,6 +584,8 @@ function splitAndToggleMark(el,snapshot,mark) {
 }
 function toggleSemanticMark(active,command) {
  if(!MARK_NAMES.includes(command))return null
+ const crossResult=toggleCrossQuestionMark(command)
+ if(crossResult!==null)return crossResult
  const target=resolveActionTarget(active)
  if(!target)return null
  const {el,handle,snapshot}=target
@@ -433,6 +617,7 @@ function toggleSemanticMark(active,command) {
  return result
 }
 function replaySemanticHistory(active,direction) {
+ if(replayCrossQuestionHistory(direction))return true
  const target=resolveActionTarget(active)
  if(!target)return false
  const {el,handle,snapshot}=target
