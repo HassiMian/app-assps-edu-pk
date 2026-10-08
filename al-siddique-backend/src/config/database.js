@@ -119,6 +119,52 @@ function isRestrictedPaperRequest() {
   return Boolean(paperRestrictedMode && tenantContext.getStore()?.paperRestricted)
 }
 
+// A separate signed Paper LOGIN uses transaction-local RLS state. A failed
+// COMMIT/ROLLBACK leaves the physical session's state uncertain, so NEVER
+// return that connection to pg-pool's reusable idle list.
+function createRestrictedPaperLease(raw) {
+  let open = true
+  let released = false
+  let failedCompletion = null
+  return {
+    async query(...args) {
+      const command = typeof args[0] === 'string' ? args[0].trim().replace(/;$/, '').toUpperCase() : ''
+      if (command === 'BEGIN') return { rows: [], rowCount: null, command: 'BEGIN' }
+      if (!open) throw new Error('PAPER_DB_TRANSACTION_ALREADY_CLOSED')
+      if (command === 'COMMIT' || command === 'ROLLBACK') {
+        try {
+          const result = await raw.query(command)
+          open = false
+          return result
+        } catch (error) {
+          open = false
+          failedCompletion = error
+          throw error
+        }
+      }
+      return raw.query(...args)
+    },
+    async release(releaseError) {
+      if (released) return
+      released = true
+      let discard = releaseError || failedCompletion
+      if (open) {
+        try {
+          await raw.query('ROLLBACK')
+        } catch (error) {
+          if (!discard) {
+            discard = new Error('Dedicated Paper database transaction rollback failed')
+            discard.code = 'PAPER_DB_ROLLBACK_FAILED'
+            discard.cause = error
+          }
+        }
+      }
+      // release(error) forces pg-pool to retire uncertain signed sessions.
+      raw.release(discard)
+    },
+  }
+}
+
 // One transaction per connection lease, all GUCs LOCAL. Caller-supplied SQL
 // cannot make the pool silently fall back to the privileged SaaS login.
 async function connectRestrictedPaper() {
@@ -138,7 +184,6 @@ async function connectRestrictedPaper() {
   }
   const raw = await restrictedPaperPool.connect()
   let open = false
-  let released = false
   try {
     const identity = (await raw.query(`
       SELECT current_user AS db_login, rolbypassrls AS bypass,
@@ -176,28 +221,14 @@ async function connectRestrictedPaper() {
     }
   } catch (err) {
     if (open) await raw.query('ROLLBACK').catch(() => {})
-    raw.release()
+    // Authentication/privilege/HMAC preparation failed. Even a successful
+    // rollback cannot make a failed identity attestation trustworthy.
+    raw.release(err)
     throw err
   }
-  // Several existing Paper Vault services explicitly BEGIN/COMMIT/ROLLBACK.
-  // BEGIN is already issued by this boundary, and COMMIT/ROLLBACK remain real.
-  return {
-    async query(...args) {
-      const command = typeof args[0] === 'string' ? args[0].trim().replace(/;$/, '').toUpperCase() : ''
-      if (command === 'BEGIN') return { rows: [], rowCount: null, command: 'BEGIN' }
-      if (!open) throw new Error('PAPER_DB_TRANSACTION_ALREADY_CLOSED')
-      if (command === 'COMMIT' || command === 'ROLLBACK') {
-        try { return await raw.query(command) } finally { open = false }
-      }
-      return raw.query(...args)
-    },
-    async release(releaseError) {
-      if (released) return
-      released = true
-      if (open) await raw.query('ROLLBACK').catch(() => {})
-      raw.release(releaseError)
-    },
-  }
+  // Existing Paper callers may issue BEGIN/COMMIT/ROLLBACK themselves.
+  // BEGIN was already issued; the signed lease owns cleanup on release.
+  return createRestrictedPaperLease(raw)
 }
 
 
@@ -422,5 +453,5 @@ module.exports = {
   normalizedRuntimeContext,
   rejectUnscopedProtectedSql,
   isRestrictedPaperRequest,
-  ...(process.env.NODE_ENV === 'test' ? { __test: { prepareRuntimeClient, resetRuntimeSession } } : {}),
+  ...(process.env.NODE_ENV === 'test' ? { __test: { prepareRuntimeClient, resetRuntimeSession, createRestrictedPaperLease } } : {}),
 }
