@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const {assertIndependentReviewReady}=require('./grade910AcademicReviewGate')
 
 const text = value => String(value ?? '').trim().replace(/\s+/g, ' ')
 const lower = value => text(value).toLowerCase()
@@ -285,7 +286,7 @@ async function captureQuestionGovernance({ schoolId, userId = null, idempotencyK
 async function transitionQuestionLifecycle({ schoolId, userId = null, publicId, toStatus }) {
   return withTenantTransaction(schoolId, async (client, tenantId) => {
     const found = await client.query(
-      `SELECT id,public_id,lifecycle_status,current_revision,source_question_bank_id FROM question_masters WHERE school_id=$1 AND public_id=$2 FOR UPDATE`,
+      `SELECT id,public_id,lifecycle_status,current_revision,source_question_bank_id,created_by FROM question_masters WHERE school_id=$1 AND public_id=$2 FOR UPDATE`,
       [tenantId, text(publicId)]
     )
     if (!found.rowCount) throw governanceError(404, 'QUESTION_MASTER_NOT_FOUND', 'Governed question was not found.')
@@ -295,15 +296,43 @@ async function transitionQuestionLifecycle({ schoolId, userId = null, publicId, 
       throw governanceError(409, 'QUESTION_MASTER_HAS_NO_REVISION', 'A question must have an immutable revision before it can be ready.')
     }
     const nextStatus = lower(toStatus)
+    const academicReview = nextStatus==='ready'
+      ? await assertIndependentReviewReady(client,{schoolId:tenantId,master,actorId:userId})
+      : null
     const updated = await client.query(
       `UPDATE question_masters SET lifecycle_status=$1,updated_by=$2,updated_at=NOW() WHERE school_id=$3 AND id=$4 RETURNING public_id,lifecycle_status,current_revision,updated_at`,
       [nextStatus, userId, tenantId, master.id]
     )
     if (master.source_question_bank_id && (nextStatus === 'ready' || nextStatus === 'retired')) {
-      await client.query(
-        `UPDATE question_bank SET is_approved=$1 WHERE school_id=$2 AND id=$3`,
-        [nextStatus === 'ready', tenantId, master.source_question_bank_id]
-      )
+      if(nextStatus==='ready' && academicReview?.grade){
+        // Publish exactly the already-locked tenant-local legacy row. Preserve
+        // all paper content: any source/revision drift is rejected above.
+        const patch={
+          review_state:'academically_reviewed',
+          review_gate_version:'assps-grade910-independent-review-v1',
+          reviewed_revision:Number(academicReview.revision.revision_number),
+          reviewed_content_hash:String(academicReview.revision.content_hash).trim(),
+          academic_reviewer_id:Number(academicReview.review.reviewed_by),
+          approved_by:Number(userId),
+          source_catalog_id:academicReview.review.metadata.sourceEvidence.sourceRecordId,
+          source_pdf_sha256:academicReview.review.metadata.sourceEvidence.sourcePdfSha256,
+        }
+        const promoted=await client.query(
+          `UPDATE question_bank SET is_approved=true,
+              metadata=COALESCE(metadata,'{}'::jsonb) || $1::jsonb
+             WHERE school_id=$2 AND id=$3 AND is_approved IS NOT TRUE
+             RETURNING id`,
+          [JSON.stringify(patch),tenantId,master.source_question_bank_id]
+        )
+        if(promoted.rowCount!==1)
+          throw governanceError(409,'ACADEMIC_APPROVAL_CAS_CONFLICT',
+            'The exact tenant question could not be atomically approved.')
+      } else {
+        await client.query(
+          `UPDATE question_bank SET is_approved=$1 WHERE school_id=$2 AND id=$3`,
+          [nextStatus === 'ready', tenantId, master.source_question_bank_id]
+        )
+      }
     }
     return updated.rows[0]
   })
