@@ -1,0 +1,1319 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "particle model",
+      "category": "mcq",
+      "question_text": "Which statement best describes particles in a solid?",
+      "options": [
+        {
+          "id": "A",
+          "text": "They are closely packed and vibrate around fixed positions"
+        },
+        {
+          "id": "B",
+          "text": "They are absent"
+        },
+        {
+          "id": "C",
+          "text": "They move completely freely at all times"
+        },
+        {
+          "id": "D",
+          "text": "They are always ions"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "They are closely packed and vibrate around fixed positions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 1",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "particle model"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C01-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "particle model",
+      "category": "short",
+      "question_text": "Differentiate evaporation and boiling.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Evaporation occurs at a surface over a range of temperatures; boiling occurs throughout a liquid at its boiling condition.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 1",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "particle model"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C01-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "particle model",
+      "category": "long",
+      "question_text": "Explain melting and boiling using the particle model.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Heating increases particle energy; during phase change energy is used to overcome attractions, changing arrangement and freedom of movement.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 1",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "particle model"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C02-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Atomic Structure",
+      "topic_name": "atomic structure",
+      "category": "mcq",
+      "question_text": "Which subatomic particle has a positive charge?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Proton"
+        },
+        {
+          "id": "B",
+          "text": "Electron"
+        },
+        {
+          "id": "C",
+          "text": "Neutron"
+        },
+        {
+          "id": "D",
+          "text": "Photon"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Proton",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 2",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "atomic structure"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C02-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Atomic Structure",
+      "topic_name": "atomic structure",
+      "category": "short",
+      "question_text": "Define isotopes.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Atoms of the same element with the same proton number but different neutron numbers.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 2",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "atomic structure"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C02-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Atomic Structure",
+      "topic_name": "atomic structure",
+      "category": "long",
+      "question_text": "Explain atomic number and mass number.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Atomic number is proton count; mass number is protons plus neutrons; a neutral atom has equal protons and electrons.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 2",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "atomic structure"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C03-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Chemical Bonding",
+      "topic_name": "bonding",
+      "category": "mcq",
+      "question_text": "Ionic bonding mainly involves?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Electron transfer and attraction between oppositely charged ions"
+        },
+        {
+          "id": "B",
+          "text": "Proton sharing"
+        },
+        {
+          "id": "C",
+          "text": "Neutron transfer"
+        },
+        {
+          "id": "D",
+          "text": "No particle interaction"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Electron transfer and attraction between oppositely charged ions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 3",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bonding"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C03-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Chemical Bonding",
+      "topic_name": "bonding",
+      "category": "short",
+      "question_text": "What is a covalent bond?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A bond formed by sharing one or more electron pairs between atoms.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 3",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bonding"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C03-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Chemical Bonding",
+      "topic_name": "bonding",
+      "category": "long",
+      "question_text": "Compare ionic and covalent bonding.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ionic bonding involves electron transfer and electrostatic attraction between ions; covalent bonding involves shared electron pairs.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 3",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bonding"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C04-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "stoichiometry",
+      "category": "mcq",
+      "question_text": "One mole contains approximately?",
+      "options": [
+        {
+          "id": "A",
+          "text": "6.02×10^23 particles"
+        },
+        {
+          "id": "B",
+          "text": "6.02×10^3 particles"
+        },
+        {
+          "id": "C",
+          "text": "3×10^8 particles"
+        },
+        {
+          "id": "D",
+          "text": "9.8 particles"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "6.02×10^23 particles",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 4",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "stoichiometry"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C04-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "stoichiometry",
+      "category": "short",
+      "question_text": "Why must equations be balanced for stoichiometry?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Balanced coefficients provide mole ratios and conserve atoms.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 4",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "stoichiometry"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C04-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "stoichiometry",
+      "category": "long",
+      "question_text": "Describe a reliable stoichiometric calculation workflow.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Balance the equation, convert known quantity to moles, apply mole ratio, convert to required quantity and check units.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 4",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "stoichiometry"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C05-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Energetics",
+      "topic_name": "energetics",
+      "category": "mcq",
+      "question_text": "An exothermic process generally?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Releases energy to surroundings"
+        },
+        {
+          "id": "B",
+          "text": "Always absorbs energy"
+        },
+        {
+          "id": "C",
+          "text": "Destroys matter"
+        },
+        {
+          "id": "D",
+          "text": "Has no energy change"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Releases energy to surroundings",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 5",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "energetics"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C05-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Energetics",
+      "topic_name": "energetics",
+      "category": "short",
+      "question_text": "Define activation energy.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The minimum energy barrier reacting particles must overcome for a reaction to proceed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 5",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "energetics"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C05-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Energetics",
+      "topic_name": "energetics",
+      "category": "long",
+      "question_text": "Compare exothermic and endothermic reactions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Exothermic reactions release energy to surroundings; endothermic reactions absorb energy from surroundings.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 5",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "energetics"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C06-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Equilibria",
+      "topic_name": "equilibrium",
+      "category": "mcq",
+      "question_text": "At dynamic equilibrium, what is equal?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Forward and reverse reaction rates"
+        },
+        {
+          "id": "B",
+          "text": "All concentrations are zero"
+        },
+        {
+          "id": "C",
+          "text": "All masses are identical"
+        },
+        {
+          "id": "D",
+          "text": "Temperature is always zero"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Forward and reverse reaction rates",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 6",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C06-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Equilibria",
+      "topic_name": "equilibrium",
+      "category": "short",
+      "question_text": "Why is equilibrium called dynamic?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Forward and reverse reactions continue microscopically at equal rates while macroscopic concentrations remain constant.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 6",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C06-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Equilibria",
+      "topic_name": "equilibrium",
+      "category": "long",
+      "question_text": "Explain how a change in concentration or temperature can shift equilibrium.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A system can respond in a direction that opposes the imposed change; temperature also changes relative favor of endothermic/exothermic directions.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 6",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C07-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Acid Base Chemistry",
+      "topic_name": "acid base",
+      "category": "mcq",
+      "question_text": "An acidic solution generally has pH?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Below 7"
+        },
+        {
+          "id": "B",
+          "text": "Above 7 only"
+        },
+        {
+          "id": "C",
+          "text": "Exactly 14"
+        },
+        {
+          "id": "D",
+          "text": "Always 7"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Below 7",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 7",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "acid base"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C07-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Acid Base Chemistry",
+      "topic_name": "acid base",
+      "category": "short",
+      "question_text": "What is neutralization?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A reaction in which an acid and base react, commonly forming salt and water.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 7",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "acid base"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C07-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Acid Base Chemistry",
+      "topic_name": "acid base",
+      "category": "long",
+      "question_text": "Explain the relation among acids, bases and pH.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Acidic/basic behavior reflects proton or hydroxide-related chemistry in solution; pH gives a relative measure of acidity/basicity.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 7",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "acid base"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C08-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Periodic Table and Periodicity",
+      "topic_name": "periodicity",
+      "category": "mcq",
+      "question_text": "A vertical column in the periodic table is a?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Group"
+        },
+        {
+          "id": "B",
+          "text": "Period"
+        },
+        {
+          "id": "C",
+          "text": "Isotope"
+        },
+        {
+          "id": "D",
+          "text": "Bond"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Group",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 8",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "periodicity"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C08-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Periodic Table and Periodicity",
+      "topic_name": "periodicity",
+      "category": "short",
+      "question_text": "Define periodicity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The repeating pattern in properties as atomic number increases.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 8",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "periodicity"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C08-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Periodic Table and Periodicity",
+      "topic_name": "periodicity",
+      "category": "long",
+      "question_text": "Explain why position in the periodic table helps predict properties.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Group position relates to valence-electron patterns and similar chemical behavior; periods show systematic trends.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 8",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "periodicity"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C09-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Group Properties and Elements",
+      "topic_name": "group properties",
+      "category": "mcq",
+      "question_text": "Alkali metals are in?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Group 1"
+        },
+        {
+          "id": "B",
+          "text": "Group 18"
+        },
+        {
+          "id": "C",
+          "text": "Group 17"
+        },
+        {
+          "id": "D",
+          "text": "Group 14"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Group 1",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 9",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "group properties"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C09-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Group Properties and Elements",
+      "topic_name": "group properties",
+      "category": "short",
+      "question_text": "Why do elements in the same group often behave similarly?",
+      "options": [],
+      "correct_option": "",
+      "answer": "They have related valence-electron arrangements.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 9",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "group properties"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C09-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Group Properties and Elements",
+      "topic_name": "group properties",
+      "category": "long",
+      "question_text": "Compare general tendencies of Group 1 and Group 17 elements.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Group 1 elements tend to lose one electron; Group 17 elements tend to gain/share one electron toward stable arrangements.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 9",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "group properties"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C10-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Environmental Chemistry",
+      "topic_name": "environment",
+      "category": "mcq",
+      "question_text": "Excess carbon dioxide is linked with?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Enhanced greenhouse effect"
+        },
+        {
+          "id": "B",
+          "text": "Only water hardness"
+        },
+        {
+          "id": "C",
+          "text": "Ionic bonding"
+        },
+        {
+          "id": "D",
+          "text": "Nuclear decay"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Enhanced greenhouse effect",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 10",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "environment"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C10-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Environmental Chemistry",
+      "topic_name": "environment",
+      "category": "short",
+      "question_text": "Name two gases that can contribute to acid deposition.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Sulphur dioxide and nitrogen oxides.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 10",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "environment"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C10-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Environmental Chemistry",
+      "topic_name": "environment",
+      "category": "long",
+      "question_text": "Explain how monitoring, cleaner technology and responsible energy use can reduce air pollution.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Monitoring identifies sources, cleaner processes reduce emissions, and efficient energy use/transport choices can lower pollution.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 10",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "environment"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C11-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "hydrocarbons",
+      "category": "mcq",
+      "question_text": "A hydrocarbon contains only?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon and hydrogen"
+        },
+        {
+          "id": "B",
+          "text": "Carbon and oxygen only"
+        },
+        {
+          "id": "C",
+          "text": "Hydrogen and nitrogen only"
+        },
+        {
+          "id": "D",
+          "text": "All elements"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon and hydrogen",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 11",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbons"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C11-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "hydrocarbons",
+      "category": "short",
+      "question_text": "Differentiate saturated and unsaturated hydrocarbons.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Saturated hydrocarbons have only carbon-carbon single bonds; unsaturated hydrocarbons contain at least one multiple bond.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 11",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbons"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C11-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "11",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "hydrocarbons",
+      "category": "long",
+      "question_text": "Compare alkanes and alkenes in bonding and general reactivity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Alkanes are saturated and relatively less reactive; alkenes contain C=C bonds and commonly undergo addition reactions.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 11",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "hydrocarbons"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C12-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Empirical Data Collection and Analysis",
+      "topic_name": "data analysis",
+      "category": "mcq",
+      "question_text": "Repeated measurements can help?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Estimate random variation and improve reliability"
+        },
+        {
+          "id": "B",
+          "text": "Remove the need for units"
+        },
+        {
+          "id": "C",
+          "text": "Guarantee no error"
+        },
+        {
+          "id": "D",
+          "text": "Hide data"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Estimate random variation and improve reliability",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 12",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "data analysis"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C12-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Empirical Data Collection and Analysis",
+      "topic_name": "data analysis",
+      "category": "short",
+      "question_text": "Differentiate accuracy and precision.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Accuracy is closeness to an accepted value; precision is consistency among repeated measurements.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 12",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "data analysis"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C12-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "12",
+      "chapter_name": "Empirical Data Collection and Analysis",
+      "topic_name": "data analysis",
+      "category": "long",
+      "question_text": "Describe good practice for tables and graphs in experimental chemistry.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Use clear headings, units, suitable significant figures, correct variables, labeled axes and appropriate scales.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 12",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "data analysis"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Laboratory and Practical Skills",
+      "topic_name": "lab skills",
+      "category": "mcq",
+      "question_text": "A basic laboratory safety practice is to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Follow instructions and use suitable protective equipment"
+        },
+        {
+          "id": "B",
+          "text": "Taste unknown chemicals"
+        },
+        {
+          "id": "C",
+          "text": "Leave samples unlabeled"
+        },
+        {
+          "id": "D",
+          "text": "Ignore safety rules"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Follow instructions and use suitable protective equipment",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 13",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "lab skills"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C13-S01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Laboratory and Practical Skills",
+      "topic_name": "lab skills",
+      "category": "short",
+      "question_text": "Why should observations be recorded promptly?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It reduces memory error and preserves raw evidence for analysis and reproducibility.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 13",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "lab skills"
+      ]
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C13-L01",
+      "class_level": "9th",
+      "subject": "Chemistry-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "13",
+      "chapter_name": "Laboratory and Practical Skills",
+      "topic_name": "lab skills",
+      "category": "long",
+      "question_text": "Explain principles of safe and reliable practical work.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Plan clearly, use suitable measuring tools, label materials, follow laboratory rules for handling/waste, and document observations without improvising hazardous procedures.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-035 | 8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362 | chapter 13",
+      "tags": [
+        "grade9",
+        "chemistry-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "lab skills"
+      ]
+    }
+  ]
+}

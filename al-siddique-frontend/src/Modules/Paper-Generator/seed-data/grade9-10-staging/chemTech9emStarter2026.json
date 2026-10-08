@@ -1,0 +1,2879 @@
+{
+  "schemaVersion": "assps-chemTech9em-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-035",
+  "sourcePdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+  "scope": "GRADE9_MATRIC_TECH_CURRENT_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C01-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "particle model",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which statement best describes particles in a solid?",
+          "answer": "They are closely packed and vibrate around fixed positions",
+          "options": [
+            {
+              "id": "A",
+              "text": "They are closely packed and vibrate around fixed positions"
+            },
+            {
+              "id": "B",
+              "text": "They are absent"
+            },
+            {
+              "id": "C",
+              "text": "They move completely freely at all times"
+            },
+            {
+              "id": "D",
+              "text": "They are always ions"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C01-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "particle model",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate evaporation and boiling.",
+          "answer": "Evaporation occurs at a surface over a range of temperatures; boiling occurs throughout a liquid at its boiling condition."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C01-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C01",
+        "number": 1
+      },
+      "topicId": "particle model",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "States of Matter and Phase Changes"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain melting and boiling using the particle model.",
+          "answer": "Heating increases particle energy; during phase change energy is used to overcome attractions, changing arrangement and freedom of movement."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C02-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "atomic structure",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Structure"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Which subatomic particle has a positive charge?",
+          "answer": "Proton",
+          "options": [
+            {
+              "id": "A",
+              "text": "Proton"
+            },
+            {
+              "id": "B",
+              "text": "Electron"
+            },
+            {
+              "id": "C",
+              "text": "Neutron"
+            },
+            {
+              "id": "D",
+              "text": "Photon"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C02-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "atomic structure",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Structure"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Define isotopes.",
+          "answer": "Atoms of the same element with the same proton number but different neutron numbers."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C02-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C02",
+        "number": 2
+      },
+      "topicId": "atomic structure",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Atomic Structure"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain atomic number and mass number.",
+          "answer": "Atomic number is proton count; mass number is protons plus neutrons; a neutral atom has equal protons and electrons."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C03-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "bonding",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Bonding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Ionic bonding mainly involves?",
+          "answer": "Electron transfer and attraction between oppositely charged ions",
+          "options": [
+            {
+              "id": "A",
+              "text": "Electron transfer and attraction between oppositely charged ions"
+            },
+            {
+              "id": "B",
+              "text": "Proton sharing"
+            },
+            {
+              "id": "C",
+              "text": "Neutron transfer"
+            },
+            {
+              "id": "D",
+              "text": "No particle interaction"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C03-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "bonding",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Bonding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is a covalent bond?",
+          "answer": "A bond formed by sharing one or more electron pairs between atoms."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C03-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C03",
+        "number": 3
+      },
+      "topicId": "bonding",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Chemical Bonding"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare ionic and covalent bonding.",
+          "answer": "Ionic bonding involves electron transfer and electrostatic attraction between ions; covalent bonding involves shared electron pairs."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C04-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "stoichiometry",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "One mole contains approximately?",
+          "answer": "6.02×10^23 particles",
+          "options": [
+            {
+              "id": "A",
+              "text": "6.02×10^23 particles"
+            },
+            {
+              "id": "B",
+              "text": "6.02×10^3 particles"
+            },
+            {
+              "id": "C",
+              "text": "3×10^8 particles"
+            },
+            {
+              "id": "D",
+              "text": "9.8 particles"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C04-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "stoichiometry",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why must equations be balanced for stoichiometry?",
+          "answer": "Balanced coefficients provide mole ratios and conserve atoms."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C04-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C04",
+        "number": 4
+      },
+      "topicId": "stoichiometry",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Stoichiometry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe a reliable stoichiometric calculation workflow.",
+          "answer": "Balance the equation, convert known quantity to moles, apply mole ratio, convert to required quantity and check units."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C05-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "energetics",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Energetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "An exothermic process generally?",
+          "answer": "Releases energy to surroundings",
+          "options": [
+            {
+              "id": "A",
+              "text": "Releases energy to surroundings"
+            },
+            {
+              "id": "B",
+              "text": "Always absorbs energy"
+            },
+            {
+              "id": "C",
+              "text": "Destroys matter"
+            },
+            {
+              "id": "D",
+              "text": "Has no energy change"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C05-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "energetics",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Energetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Define activation energy.",
+          "answer": "The minimum energy barrier reacting particles must overcome for a reaction to proceed."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C05-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C05",
+        "number": 5
+      },
+      "topicId": "energetics",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Energetics"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare exothermic and endothermic reactions.",
+          "answer": "Exothermic reactions release energy to surroundings; endothermic reactions absorb energy from surroundings."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C06-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "equilibrium",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Equilibria"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "At dynamic equilibrium, what is equal?",
+          "answer": "Forward and reverse reaction rates",
+          "options": [
+            {
+              "id": "A",
+              "text": "Forward and reverse reaction rates"
+            },
+            {
+              "id": "B",
+              "text": "All concentrations are zero"
+            },
+            {
+              "id": "C",
+              "text": "All masses are identical"
+            },
+            {
+              "id": "D",
+              "text": "Temperature is always zero"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C06-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "equilibrium",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Equilibria"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why is equilibrium called dynamic?",
+          "answer": "Forward and reverse reactions continue microscopically at equal rates while macroscopic concentrations remain constant."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C06-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C06",
+        "number": 6
+      },
+      "topicId": "equilibrium",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Equilibria"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how a change in concentration or temperature can shift equilibrium.",
+          "answer": "A system can respond in a direction that opposes the imposed change; temperature also changes relative favor of endothermic/exothermic directions."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C07-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "acid base",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Acid Base Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "An acidic solution generally has pH?",
+          "answer": "Below 7",
+          "options": [
+            {
+              "id": "A",
+              "text": "Below 7"
+            },
+            {
+              "id": "B",
+              "text": "Above 7 only"
+            },
+            {
+              "id": "C",
+              "text": "Exactly 14"
+            },
+            {
+              "id": "D",
+              "text": "Always 7"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C07-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "acid base",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Acid Base Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "What is neutralization?",
+          "answer": "A reaction in which an acid and base react, commonly forming salt and water."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C07-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C07",
+        "number": 7
+      },
+      "topicId": "acid base",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Acid Base Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain the relation among acids, bases and pH.",
+          "answer": "Acidic/basic behavior reflects proton or hydroxide-related chemistry in solution; pH gives a relative measure of acidity/basicity."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C08-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "periodicity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Periodic Table and Periodicity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A vertical column in the periodic table is a?",
+          "answer": "Group",
+          "options": [
+            {
+              "id": "A",
+              "text": "Group"
+            },
+            {
+              "id": "B",
+              "text": "Period"
+            },
+            {
+              "id": "C",
+              "text": "Isotope"
+            },
+            {
+              "id": "D",
+              "text": "Bond"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C08-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "periodicity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Periodic Table and Periodicity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Define periodicity.",
+          "answer": "The repeating pattern in properties as atomic number increases."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C08-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C08",
+        "number": 8
+      },
+      "topicId": "periodicity",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Periodic Table and Periodicity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain why position in the periodic table helps predict properties.",
+          "answer": "Group position relates to valence-electron patterns and similar chemical behavior; periods show systematic trends."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C09-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "group properties",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group Properties and Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Alkali metals are in?",
+          "answer": "Group 1",
+          "options": [
+            {
+              "id": "A",
+              "text": "Group 1"
+            },
+            {
+              "id": "B",
+              "text": "Group 18"
+            },
+            {
+              "id": "C",
+              "text": "Group 17"
+            },
+            {
+              "id": "D",
+              "text": "Group 14"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C09-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "group properties",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group Properties and Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why do elements in the same group often behave similarly?",
+          "answer": "They have related valence-electron arrangements."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C09-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C09",
+        "number": 9
+      },
+      "topicId": "group properties",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Group Properties and Elements"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare general tendencies of Group 1 and Group 17 elements.",
+          "answer": "Group 1 elements tend to lose one electron; Group 17 elements tend to gain/share one electron toward stable arrangements."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C10-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "environment",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Environmental Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Excess carbon dioxide is linked with?",
+          "answer": "Enhanced greenhouse effect",
+          "options": [
+            {
+              "id": "A",
+              "text": "Enhanced greenhouse effect"
+            },
+            {
+              "id": "B",
+              "text": "Only water hardness"
+            },
+            {
+              "id": "C",
+              "text": "Ionic bonding"
+            },
+            {
+              "id": "D",
+              "text": "Nuclear decay"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C10-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "environment",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Environmental Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Name two gases that can contribute to acid deposition.",
+          "answer": "Sulphur dioxide and nitrogen oxides."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C10-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C10",
+        "number": 10
+      },
+      "topicId": "environment",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Environmental Chemistry"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain how monitoring, cleaner technology and responsible energy use can reduce air pollution.",
+          "answer": "Monitoring identifies sources, cleaner processes reduce emissions, and efficient energy use/transport choices can lower pollution."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C11-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C11",
+        "number": 11
+      },
+      "topicId": "hydrocarbons",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A hydrocarbon contains only?",
+          "answer": "Carbon and hydrogen",
+          "options": [
+            {
+              "id": "A",
+              "text": "Carbon and hydrogen"
+            },
+            {
+              "id": "B",
+              "text": "Carbon and oxygen only"
+            },
+            {
+              "id": "C",
+              "text": "Hydrogen and nitrogen only"
+            },
+            {
+              "id": "D",
+              "text": "All elements"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C11-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C11",
+        "number": 11
+      },
+      "topicId": "hydrocarbons",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate saturated and unsaturated hydrocarbons.",
+          "answer": "Saturated hydrocarbons have only carbon-carbon single bonds; unsaturated hydrocarbons contain at least one multiple bond."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C11-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C11",
+        "number": 11
+      },
+      "topicId": "hydrocarbons",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Hydrocarbons"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Compare alkanes and alkenes in bonding and general reactivity.",
+          "answer": "Alkanes are saturated and relatively less reactive; alkenes contain C=C bonds and commonly undergo addition reactions."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C12-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C12",
+        "number": 12
+      },
+      "topicId": "data analysis",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Empirical Data Collection and Analysis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Repeated measurements can help?",
+          "answer": "Estimate random variation and improve reliability",
+          "options": [
+            {
+              "id": "A",
+              "text": "Estimate random variation and improve reliability"
+            },
+            {
+              "id": "B",
+              "text": "Remove the need for units"
+            },
+            {
+              "id": "C",
+              "text": "Guarantee no error"
+            },
+            {
+              "id": "D",
+              "text": "Hide data"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C12-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C12",
+        "number": 12
+      },
+      "topicId": "data analysis",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Empirical Data Collection and Analysis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Differentiate accuracy and precision.",
+          "answer": "Accuracy is closeness to an accepted value; precision is consistency among repeated measurements."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C12-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C12",
+        "number": 12
+      },
+      "topicId": "data analysis",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Empirical Data Collection and Analysis"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Describe good practice for tables and graphs in experimental chemistry.",
+          "answer": "Use clear headings, units, suitable significant figures, correct variables, labeled axes and appropriate scales."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C13-M01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C13",
+        "number": 13
+      },
+      "topicId": "lab skills",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Laboratory and Practical Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "A basic laboratory safety practice is to?",
+          "answer": "Follow instructions and use suitable protective equipment",
+          "options": [
+            {
+              "id": "A",
+              "text": "Follow instructions and use suitable protective equipment"
+            },
+            {
+              "id": "B",
+              "text": "Taste unknown chemicals"
+            },
+            {
+              "id": "C",
+              "text": "Leave samples unlabeled"
+            },
+            {
+              "id": "D",
+              "text": "Ignore safety rules"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C13-S01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C13",
+        "number": 13
+      },
+      "topicId": "lab skills",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Laboratory and Practical Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Why should observations be recorded promptly?",
+          "answer": "It reduces memory error and preserves raw evidence for analysis and reproducibility."
+        }
+      }
+    },
+    {
+      "id": "IX-CHEMISTRY-TECH-ENGLISH-C13-L01",
+      "chapter": {
+        "id": "IX-CHEMISTRY-TECH-ENGLISH-C13",
+        "number": 13
+      },
+      "topicId": "lab skills",
+      "type": "long",
+      "origin": "additional",
+      "marks": 4,
+      "difficulty": "medium",
+      "medium": "english",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-035",
+        "pdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "RENDERED_TOC_AND_OFFICIAL_PATTERN_CROSS_VERIFIED",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Laboratory and Practical Skills"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 9,
+        "subjectId": "chemistry-tech",
+        "edition": "CURRENT_CATALOG",
+        "textbookId": "PECTAA-IX-CHEMISTRY-TECH-ENGLISH-TECH",
+        "syllabusVersion": "ix-tech-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Grade IX Matric-Tech conceptual starter. Official textbook bytes and chapter sequence are verified; exact page-level academic review remains pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Original chapter-aligned Matric-Tech conceptual item.",
+      "content": {
+        "en": {
+          "stem": "Explain principles of safe and reliable practical work.",
+          "answer": "Plan clearly, use suitable measuring tools, label materials, follow laboratory rules for handling/waste, and document observations without improvising hazardous procedures."
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 39,
+    "mcq": 13,
+    "short": 13,
+    "long": 13,
+    "chapters": 13
+  }
+}

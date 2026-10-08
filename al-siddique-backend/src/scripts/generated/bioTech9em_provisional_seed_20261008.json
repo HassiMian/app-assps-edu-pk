@@ -1,0 +1,915 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C01-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "biology as science",
+      "category": "mcq",
+      "question_text": "Which statement best describes biology?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The scientific study of life and living organisms"
+        },
+        {
+          "id": "B",
+          "text": "Only the study of rocks"
+        },
+        {
+          "id": "C",
+          "text": "Only the study of machines"
+        },
+        {
+          "id": "D",
+          "text": "Only weather forecasting"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "The scientific study of life and living organisms",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 1",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology as science"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C01-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "biology as science",
+      "category": "short",
+      "question_text": "Why is the scientific method useful in biology?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It provides a systematic way to ask questions, test explanations with evidence, and revise conclusions.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 1",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology as science"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C01-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "The Science of Biology",
+      "topic_name": "biology as science",
+      "category": "long",
+      "question_text": "Explain how observation, hypothesis, experiment and evidence work together in biological inquiry.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A complete answer links observation to a testable hypothesis, controlled investigation, data collection, evidence-based conclusion and revision when needed.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 1",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology as science"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C02-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "biodiversity",
+      "category": "mcq",
+      "question_text": "Biodiversity refers to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "The variety of living organisms and biological variation"
+        },
+        {
+          "id": "B",
+          "text": "Only one species"
+        },
+        {
+          "id": "C",
+          "text": "Only climate variation"
+        },
+        {
+          "id": "D",
+          "text": "Only mineral diversity"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "The variety of living organisms and biological variation",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 2",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biodiversity"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C02-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "biodiversity",
+      "category": "short",
+      "question_text": "Why is classification useful in biology?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It organizes organisms by shared and differing features, helping identification and study of relationships.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 2",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biodiversity"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C02-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Biodiversity",
+      "topic_name": "biodiversity",
+      "category": "long",
+      "question_text": "Explain why conserving biodiversity is important.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Discuss ecosystem stability, genetic resources, food webs, useful biological resources and responsible habitat protection.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 2",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biodiversity"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C03-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "cell",
+      "category": "mcq",
+      "question_text": "Which structure controls movement of many substances into and out of a cell?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cell membrane"
+        },
+        {
+          "id": "B",
+          "text": "Cell wall only"
+        },
+        {
+          "id": "C",
+          "text": "Chromosome only"
+        },
+        {
+          "id": "D",
+          "text": "Vacuole only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Cell membrane",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 3",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C03-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "cell",
+      "category": "short",
+      "question_text": "State one major function of mitochondria.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Mitochondria are important sites of cellular respiration and ATP production.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 3",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C03-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "The Cell",
+      "topic_name": "cell",
+      "category": "long",
+      "question_text": "Compare plant and animal cells at a basic structural level.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Include shared structures such as membrane, cytoplasm and nucleus, plus plant features such as cell wall, chloroplasts and a large central vacuole.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 3",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C04-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "cell cycle",
+      "category": "mcq",
+      "question_text": "Mitosis mainly produces?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Genetically similar daughter cells"
+        },
+        {
+          "id": "B",
+          "text": "Four unrelated organisms"
+        },
+        {
+          "id": "C",
+          "text": "Only gametes"
+        },
+        {
+          "id": "D",
+          "text": "Cells with no DNA"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Genetically similar daughter cells",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 4",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell cycle"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C04-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "cell cycle",
+      "category": "short",
+      "question_text": "What is the cell cycle?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The ordered sequence of cell growth, DNA replication and division.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 4",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell cycle"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C04-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Cell Cycle",
+      "topic_name": "cell cycle",
+      "category": "long",
+      "question_text": "Explain the importance of mitosis in growth and tissue repair.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Mitosis increases cell number, replaces damaged or worn cells and maintains chromosome number in daughter cells.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 4",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell cycle"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C05-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "organization",
+      "category": "mcq",
+      "question_text": "A group of similar cells performing a common function is a?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tissue"
+        },
+        {
+          "id": "B",
+          "text": "Molecule"
+        },
+        {
+          "id": "C",
+          "text": "Species"
+        },
+        {
+          "id": "D",
+          "text": "Gene"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Tissue",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 5",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "organization"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C05-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "organization",
+      "category": "short",
+      "question_text": "Differentiate tissue and organ.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A tissue is a group of similar cells with a common role; an organ contains multiple tissues working together for a larger function.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 5",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "organization"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C05-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Tissues, Organs, and Organ Systems",
+      "topic_name": "organization",
+      "category": "long",
+      "question_text": "Explain the hierarchy from cells to organ systems.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cells form tissues, tissues combine into organs, and organs cooperate in organ systems; each higher level depends on coordinated lower levels.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 5",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "organization"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C06-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Enzyme",
+      "topic_name": "enzyme",
+      "category": "mcq",
+      "question_text": "Enzymes are best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Biological catalysts"
+        },
+        {
+          "id": "B",
+          "text": "Stored genes"
+        },
+        {
+          "id": "C",
+          "text": "Mineral salts only"
+        },
+        {
+          "id": "D",
+          "text": "Structural lipids only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Biological catalysts",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 6",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C06-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Enzyme",
+      "topic_name": "enzyme",
+      "category": "short",
+      "question_text": "What is an enzyme active site?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It is the region where a specific substrate binds and catalysis occurs.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 6",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C06-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Enzyme",
+      "topic_name": "enzyme",
+      "category": "long",
+      "question_text": "Explain how temperature and pH can affect enzyme activity.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Activity rises toward suitable conditions but extreme temperature or pH can alter enzyme structure/active site and reduce activity.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 6",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C07-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "bioenergetics",
+      "category": "mcq",
+      "question_text": "ATP is mainly important because it?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Transfers usable energy within cells"
+        },
+        {
+          "id": "B",
+          "text": "Stores hereditary information"
+        },
+        {
+          "id": "C",
+          "text": "Forms cell walls only"
+        },
+        {
+          "id": "D",
+          "text": "Acts as a mineral"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Transfers usable energy within cells",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 7",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bioenergetics"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C07-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "bioenergetics",
+      "category": "short",
+      "question_text": "Differentiate photosynthesis and cellular respiration by energy role.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Photosynthesis stores captured light energy in chemical form; respiration releases chemical energy to help make ATP.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 7",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bioenergetics"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C07-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Bioenergetics",
+      "topic_name": "bioenergetics",
+      "category": "long",
+      "question_text": "Explain why energy transformation is essential for living cells.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cells need usable energy for synthesis, transport, movement, growth and maintenance; bioenergetic processes convert energy into usable forms.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 7",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bioenergetics"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C08-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "plant physiology",
+      "category": "mcq",
+      "question_text": "Which tissue mainly transports water upward in plants?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xylem"
+        },
+        {
+          "id": "B",
+          "text": "Phloem only"
+        },
+        {
+          "id": "C",
+          "text": "Epidermis only"
+        },
+        {
+          "id": "D",
+          "text": "Meristem only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Xylem",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 8",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant physiology"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C08-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "plant physiology",
+      "category": "short",
+      "question_text": "What is transpiration?",
+      "options": [],
+      "correct_option": "",
+      "answer": "The loss of water vapour mainly from aerial parts of plants, especially through stomata.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 8",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant physiology"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C08-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Plant Physiology",
+      "topic_name": "plant physiology",
+      "category": "long",
+      "question_text": "Explain the relationship among root absorption, xylem transport and transpiration.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Roots absorb water/minerals, xylem carries them upward, and transpiration helps maintain the water movement gradient through the plant.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 8",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant physiology"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C09-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "plant reproduction",
+      "category": "mcq",
+      "question_text": "Pollination is the transfer of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pollen to a suitable reproductive surface"
+        },
+        {
+          "id": "B",
+          "text": "Water to roots"
+        },
+        {
+          "id": "C",
+          "text": "Food through xylem"
+        },
+        {
+          "id": "D",
+          "text": "Seeds into fruits"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Pollen to a suitable reproductive surface",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 9",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant reproduction"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C09-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "plant reproduction",
+      "category": "short",
+      "question_text": "State one advantage of sexual reproduction in plants.",
+      "options": [],
+      "correct_option": "",
+      "answer": "It can generate genetic variation in offspring.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 9",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant reproduction"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-ENGLISH-C09-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Reproduction in Plants",
+      "topic_name": "plant reproduction",
+      "category": "long",
+      "question_text": "Describe the sequence from pollination to seed formation in general terms.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Pollen transfer is followed by gamete delivery and fertilization; the fertilized ovule develops into a seed under suitable conditions.",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-031 | 5b4d585b56fd3abdc0112bdd01eb65fa05310e78dbc433ed45bfefb448e54704 | chapter 9",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant reproduction"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "assps-chemTech9em-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-035",
+  "sourcePdfSha256": "8cb6c92ba33eebfd6c786a1c6ded3a3122c5081089d1da17bd9c6d70903a0362",
+  "sourceByteLength": 41978721,
+  "pageCount": 132,
+  "identity": [
+    "Chemistry-Tech",
+    "Grade 9",
+    "Matric-Tech",
+    "English"
+  ],
+  "chapterMapStatus": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_FROM_RENDERED_TOC_AND_BOARD_PATTERN",
+  "chapters": [
+    {
+      "number": 1,
+      "titleEnglish": "States of Matter and Phase Changes",
+      "titleUrdu": "مادے کی حالتیں اور فیز تبدیلیاں",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "titleEnglish": "Atomic Structure",
+      "titleUrdu": "ایٹمی ساخت",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "titleEnglish": "Chemical Bonding",
+      "titleUrdu": "کیمیائی بند",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "titleEnglish": "Stoichiometry",
+      "titleUrdu": "اسٹوکیومیٹری",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "titleEnglish": "Energetics",
+      "titleUrdu": "انرجیٹکس",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "titleEnglish": "Equilibria",
+      "titleUrdu": "کیمیائی توازن",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "titleEnglish": "Acid Base Chemistry",
+      "titleUrdu": "ایسڈ بیس کیمسٹری",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "titleEnglish": "Periodic Table and Periodicity",
+      "titleUrdu": "پیریاڈک ٹیبل اور دوریت",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "titleEnglish": "Group Properties and Elements",
+      "titleUrdu": "گروپس کی خصوصیات اور عناصر",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 10,
+      "titleEnglish": "Environmental Chemistry",
+      "titleUrdu": "ماحولیاتی کیمسٹری",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 11,
+      "titleEnglish": "Hydrocarbons",
+      "titleUrdu": "ہائیڈروکاربنز",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 12,
+      "titleEnglish": "Empirical Data Collection and Analysis",
+      "titleUrdu": "تجرباتی ڈیٹا اور تجزیہ",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 13,
+      "titleEnglish": "Laboratory and Practical Skills",
+      "titleUrdu": "لیبارٹری اور عملی مہارتیں",
+      "status": "CHAPTER_SEQUENCE_VERIFIED_EXACT_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactPageBoundariesPending": true,
+    "assessmentPatternUse": "CATEGORY_AND_HIERARCHY_ONLY"
+  }
+}

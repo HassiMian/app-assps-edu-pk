@@ -1,0 +1,915 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C01-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "علمِ حیاتیات",
+      "topic_name": "biology as science",
+      "category": "mcq",
+      "question_text": "Biology بنیادی طور پر کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "زندگی اور جانداروں کا سائنسی مطالعہ"
+        },
+        {
+          "id": "B",
+          "text": "صرف چٹانوں کا مطالعہ"
+        },
+        {
+          "id": "C",
+          "text": "صرف مشینوں کا مطالعہ"
+        },
+        {
+          "id": "D",
+          "text": "صرف موسم کی پیش گوئی"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "زندگی اور جانداروں کا سائنسی مطالعہ",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 1",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology as science"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C01-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "علمِ حیاتیات",
+      "topic_name": "biology as science",
+      "category": "short",
+      "question_text": "Biology میں scientific method کیوں مفید ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ سوال، قابلِ آزمائش explanation، evidence اور نتیجے کو منظم انداز میں جوڑتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 1",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology as science"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C01-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "علمِ حیاتیات",
+      "topic_name": "biology as science",
+      "category": "long",
+      "question_text": "Biological inquiry میں observation، hypothesis، experiment اور evidence کے باہمی تعلق کی وضاحت کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Observation سے سوال بنتا ہے، hypothesis قابلِ آزمائش explanation دیتی ہے، experiment/data اسے test کرتے ہیں اور evidence کے مطابق نتیجہ revise کیا جاتا ہے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 1",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biology as science"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C02-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حیاتیاتی تنوع",
+      "topic_name": "biodiversity",
+      "category": "mcq",
+      "question_text": "Biodiversity سے کیا مراد ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں"
+        },
+        {
+          "id": "B",
+          "text": "صرف ایک species"
+        },
+        {
+          "id": "C",
+          "text": "صرف موسم کا فرق"
+        },
+        {
+          "id": "D",
+          "text": "صرف minerals کا فرق"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "جانداروں اور حیاتیاتی variation کی مختلف صورتیں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 2",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biodiversity"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C02-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حیاتیاتی تنوع",
+      "topic_name": "biodiversity",
+      "category": "short",
+      "question_text": "Classification کیوں مفید ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ organisms کو similarities/differences کی بنیاد پر منظم کرتی ہے اور identification/relationships سمجھنے میں مدد دیتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 2",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biodiversity"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C02-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "حیاتیاتی تنوع",
+      "topic_name": "biodiversity",
+      "category": "long",
+      "question_text": "Biodiversity کے تحفظ کی اہمیت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ecosystem stability، genetic resources، food webs اور useful biological resources کے ساتھ habitat protection کی اہمیت بیان کی جائے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 2",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "biodiversity"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C03-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "خلیہ",
+      "topic_name": "cell",
+      "category": "mcq",
+      "question_text": "Cell میں substances کی آمد و رفت کو regulate کرنے والی اہم structure کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cell membrane"
+        },
+        {
+          "id": "B",
+          "text": "صرف cell wall"
+        },
+        {
+          "id": "C",
+          "text": "صرف chromosome"
+        },
+        {
+          "id": "D",
+          "text": "صرف vacuole"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Cell membrane",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 3",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C03-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "خلیہ",
+      "topic_name": "cell",
+      "category": "short",
+      "question_text": "Mitochondria کا ایک اہم function لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cellular respiration اور ATP production میں اہم کردار ادا کرتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 3",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C03-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "خلیہ",
+      "topic_name": "cell",
+      "category": "long",
+      "question_text": "Plant cell اور animal cell کا بنیادی structural comparison کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "دونوں میں membrane، cytoplasm، nucleus وغیرہ؛ plant cell میں cell wall، chloroplasts اور بڑی central vacuole نمایاں ہو سکتی ہے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 3",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C04-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سیل سائیکل",
+      "topic_name": "cell cycle",
+      "category": "mcq",
+      "question_text": "Mitosis کا بنیادی نتیجہ کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Genetically similar daughter cells"
+        },
+        {
+          "id": "B",
+          "text": "چار غیر متعلق organisms"
+        },
+        {
+          "id": "C",
+          "text": "صرف gametes"
+        },
+        {
+          "id": "D",
+          "text": "DNA کے بغیر cells"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Genetically similar daughter cells",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 4",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell cycle"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C04-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سیل سائیکل",
+      "topic_name": "cell cycle",
+      "category": "short",
+      "question_text": "Cell cycle کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cell growth، DNA replication اور division کی منظم sequence۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 4",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell cycle"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C04-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "سیل سائیکل",
+      "topic_name": "cell cycle",
+      "category": "long",
+      "question_text": "Growth اور tissue repair میں mitosis کی اہمیت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Mitosis cell number بڑھاتا، damaged/worn cells replace کرتا اور chromosome number برقرار رکھتا ہے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 4",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "cell cycle"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C05-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "ٹشوز، اعضا اور نظامِ اعضا",
+      "topic_name": "organization",
+      "category": "mcq",
+      "question_text": "مشابہ cells کا common function والا group کیا کہلاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Tissue"
+        },
+        {
+          "id": "B",
+          "text": "Molecule"
+        },
+        {
+          "id": "C",
+          "text": "Species"
+        },
+        {
+          "id": "D",
+          "text": "Gene"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Tissue",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 5",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "organization"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C05-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "ٹشوز، اعضا اور نظامِ اعضا",
+      "topic_name": "organization",
+      "category": "short",
+      "question_text": "Tissue اور organ میں فرق لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Tissue مشابہ cells کا group ہے؛ organ مختلف tissues کا مجموعہ ہے جو بڑا function انجام دیتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 5",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "organization"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C05-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "ٹشوز، اعضا اور نظامِ اعضا",
+      "topic_name": "organization",
+      "category": "long",
+      "question_text": "Cells سے organ systems تک organization کی hierarchy بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Cells → tissues → organs → organ systems؛ ہر level coordinated lower levels سے بنتا ہے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 5",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "organization"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C06-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "انزائم",
+      "topic_name": "enzyme",
+      "category": "mcq",
+      "question_text": "Enzymes کیا ہوتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Biological catalysts"
+        },
+        {
+          "id": "B",
+          "text": "Stored genes"
+        },
+        {
+          "id": "C",
+          "text": "صرف mineral salts"
+        },
+        {
+          "id": "D",
+          "text": "صرف structural lipids"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Biological catalysts",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 6",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C06-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "انزائم",
+      "topic_name": "enzyme",
+      "category": "short",
+      "question_text": "Enzyme active site کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "وہ region جہاں substrate bind کرتا اور catalysis ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 6",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C06-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "انزائم",
+      "topic_name": "enzyme",
+      "category": "long",
+      "question_text": "Temperature اور pH enzyme activity کو کیسے متاثر کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "مناسب range تک activity بہتر ہو سکتی ہے، جبکہ extreme conditions structure/active site متاثر کر کے activity کم کر سکتی ہیں۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 6",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "enzyme"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C07-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "بایوانرجیٹکس",
+      "topic_name": "bioenergetics",
+      "category": "mcq",
+      "question_text": "ATP کی اہمیت کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cells میں usable energy transfer کرتا ہے"
+        },
+        {
+          "id": "B",
+          "text": "صرف hereditary information رکھتا ہے"
+        },
+        {
+          "id": "C",
+          "text": "صرف cell wall بناتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "صرف mineral ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Cells میں usable energy transfer کرتا ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 7",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bioenergetics"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C07-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "بایوانرجیٹکس",
+      "topic_name": "bioenergetics",
+      "category": "short",
+      "question_text": "Photosynthesis اور cellular respiration کے energy roles میں فرق لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Photosynthesis light energy کو chemical energy میں store کرتی ہے، respiration chemical energy release کر کے ATP بنانے میں مدد دیتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 7",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bioenergetics"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C07-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "بایوانرجیٹکس",
+      "topic_name": "bioenergetics",
+      "category": "long",
+      "question_text": "Living cells کے لیے energy transformation کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Synthesis، transport، movement، growth اور maintenance کے لیے usable energy چاہیے؛ bioenergetic processes energy کو usable forms میں بدلتے ہیں۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 7",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "bioenergetics"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C08-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "نباتاتی فعلیات",
+      "topic_name": "plant physiology",
+      "category": "mcq",
+      "question_text": "Plants میں water transport سے بنیادی طور پر کون سا tissue متعلق ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xylem"
+        },
+        {
+          "id": "B",
+          "text": "صرف phloem"
+        },
+        {
+          "id": "C",
+          "text": "صرف epidermis"
+        },
+        {
+          "id": "D",
+          "text": "صرف meristem"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Xylem",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 8",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant physiology"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C08-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "نباتاتی فعلیات",
+      "topic_name": "plant physiology",
+      "category": "short",
+      "question_text": "Transpiration کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Plants کے aerial parts سے water vapour کا loss، خاص طور پر stomata کے ذریعے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 8",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant physiology"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C08-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "نباتاتی فعلیات",
+      "topic_name": "plant physiology",
+      "category": "long",
+      "question_text": "Root absorption، xylem transport اور transpiration کا تعلق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Roots water/minerals absorb کرتے، xylem اوپر پہنچاتا اور transpiration water movement gradient برقرار رکھنے میں مدد دیتی ہے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 8",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant physiology"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C09-M01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "پودوں میں تولید",
+      "topic_name": "plant reproduction",
+      "category": "mcq",
+      "question_text": "Pollination کس transfer کو کہتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pollen کا مناسب reproductive surface تک transfer"
+        },
+        {
+          "id": "B",
+          "text": "Water کا roots تک transfer"
+        },
+        {
+          "id": "C",
+          "text": "Food کا xylem سے transfer"
+        },
+        {
+          "id": "D",
+          "text": "Seeds کا fruits میں transfer"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Pollen کا مناسب reproductive surface تک transfer",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 9",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant reproduction"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C09-S01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "پودوں میں تولید",
+      "topic_name": "plant reproduction",
+      "category": "short",
+      "question_text": "Sexual reproduction in plants کا ایک فائدہ لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Offspring میں genetic variation پیدا ہو سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 9",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant reproduction"
+      ]
+    },
+    {
+      "id": "IX-BIOLOGY-TECH-URDU-C09-L01",
+      "class_level": "9th",
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "پودوں میں تولید",
+      "topic_name": "plant reproduction",
+      "category": "long",
+      "question_text": "Pollination سے seed formation تک عمومی sequence بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Pollen transfer کے بعد gamete delivery اور fertilization ہوتی ہے، پھر fertilized ovule seed میں develop ہوتا ہے۔",
+      "marks": 4,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-030 | 52f2afc94a50bccf839b1204733caa1459a66de9e65d893aa2678a4558b77ed7 | chapter 9",
+      "tags": [
+        "grade9",
+        "biology-tech",
+        "urdu",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "plant reproduction"
+      ]
+    }
+  ]
+}
