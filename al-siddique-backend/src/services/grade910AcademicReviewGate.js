@@ -2,8 +2,10 @@
 const { createHash } = require('node:crypto')
 const { isDeepStrictEqual } = require('node:util')
 const SOURCE_REGISTRY = require('../data/verifiedGrade910SourceRegistry.json')
+const {requireAdoptedSource}=require('./grade910SchoolAdoptionGate')
+const {requirePhysicalPageProof}=require('./grade910PhysicalPageGate')
 
-const ACADEMIC_REVIEW_VERSION = 'assps-grade910-independent-review-v1'
+const ACADEMIC_REVIEW_VERSION = 'assps-grade910-independent-review-v2'
 const ATTESTATIONS = Object.freeze([
   'sourceImageChecked','editionChecked','chapterMatchChecked',
   'curriculumChecked','answerKeyChecked','languageChecked','originalityChecked',
@@ -16,7 +18,7 @@ const normalizeGrade = value => {
 function error(code,message,status=409){
   const e=new Error(message);e.code=code;e.status=status;return e
 }
-function normalizeEvidence(evidence, question) {
+function normalizeEvidence(evidence, question, context={}) {
   if (!evidence || typeof evidence!=='object'||Array.isArray(evidence))
     throw error('ACADEMIC_EVIDENCE_REQUIRED','Independent academic review evidence is required.',422)
   if (evidence.schemaVersion!==ACADEMIC_REVIEW_VERSION)
@@ -52,8 +54,12 @@ function normalizeEvidence(evidence, question) {
       throw error('ACADEMIC_ATTESTATION_INCOMPLETE','Missing explicit review attestation: '+key,422)
   if(String(evidence.editorialNotes||'').trim().length<45)
     throw error('ACADEMIC_REVIEW_NOTES_REQUIRED','Provide substantive independent review notes.',422)
+  const school=requireAdoptedSource({tenantId:context.tenantId,source,evidence,grade,question})
+  const physical=requirePhysicalPageProof({source,evidence,question,mode})
   return {
     schemaVersion:ACADEMIC_REVIEW_VERSION,
+    ...school,
+    ...physical,
     questionOrigin:mode,sourceRecordId:source.recordId,
     sourcePdfSha256:source.pdfSha256,edition:source.edition,
     chapterNo:String(evidence.chapterNo).trim(),
@@ -131,7 +137,7 @@ async function assertIndependentReviewReady(client,{schoolId,master,actorId}){
      signed.metadata?.reviewerUserId!==reviewer ||
      signed.metadata?.schoolId!==Number(schoolId))
     throw error('STALE_ACADEMIC_REVIEW','Review evidence is not bound to current school/revision/hash.')
-  const normalized=normalizeEvidence(signed.metadata?.sourceEvidence,rev.content_json)
+  const normalized=normalizeEvidence(signed.metadata?.sourceEvidence,rev.content_json,{tenantId:schoolId})
   if(!isDeepStrictEqual(normalized,signed.metadata?.sourceEvidence))
     throw error('TAMPERED_ACADEMIC_EVIDENCE','Academic review metadata failed source registry verification.')
   if(!master.source_question_bank_id)

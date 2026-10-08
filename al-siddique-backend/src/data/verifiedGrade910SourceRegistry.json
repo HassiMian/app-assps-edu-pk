@@ -2,7 +2,68 @@
   "schemaVersion": "assps-source-identity-v1",
   "catalogLedgerHash": "c25779f6c9b68fe8d98ef2543caaa8116a204a49cc2461284306e1985a221a50",
   "academicApproval": false,
+  "cacheBytesRehashedByThisBuilder": false,
+  "editionAdoptionCertification": false,
+  "questionPageExerciseVerification": false,
+  "scope": "IDENTITY_ONLY_FROM_HISTORICAL_LEDGER_AND_PRESENT_CACHE_NO_SCHOOL_APPROVAL",
+  "quarantinedSourceIds": [
+    "pectaa-catalog-037"
+  ],
   "entries": [
+    {
+      "recordId": "pectaa-catalog-001",
+      "grade": 9,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "pdfSha256": "1308a2ea8cd8460a96161d99b66c8e809f60f4856f917061134be7d92c6b8fd8",
+      "edition": "CURRENT_OFFICIAL_LINK_2026-10-08",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-002",
+      "grade": 9,
+      "subject": "Islamiat",
+      "medium": "Urdu",
+      "pdfSha256": "8e1977a8fcc90dcc2babf87d76c1a1b1bc015252aee9e1bc37718cfdffce806b",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-003",
+      "grade": 9,
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "pdfSha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-004",
+      "grade": 9,
+      "subject": "English",
+      "medium": "English",
+      "pdfSha256": "737ab5481acbdf11240b23e535aa301b15b8eb4ee71f414d8ef6958bdcf41bdf",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-005",
+      "grade": 9,
+      "subject": "Mathematics",
+      "medium": "English",
+      "pdfSha256": "181f1316aef57a681e2ad37d2d4c00e1fdc92656a3efc7422ddd2939dc08cbe1",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-006",
+      "grade": 9,
+      "subject": "Mathematics",
+      "medium": "Urdu",
+      "pdfSha256": "d01c27960d9870f7367a5c5b6788290886afa5b9cb43f1c67510399a91b79c11",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
     {
       "recordId": "pectaa-catalog-007",
       "grade": 9,
@@ -13,12 +74,201 @@
       "academicApproval": false
     },
     {
+      "recordId": "pectaa-catalog-008",
+      "grade": 9,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "pdfSha256": "37864e636e1ec3c35e063c2e838d3d73b75909096759dd215a24e9e05e867fb7",
+      "edition": "2026-09-03",
+      "academicApproval": false
+    },
+    {
       "recordId": "pectaa-catalog-009",
       "grade": 9,
       "subject": "Biology",
       "medium": "English",
       "pdfSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
       "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-010",
+      "grade": 9,
+      "subject": "Biology",
+      "medium": "Urdu",
+      "pdfSha256": "7f325fd04a1291949a39d4bb18e60d9d1daef4d18535f7b2189971c514a344dd",
+      "edition": "2026-09-03",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-011",
+      "grade": 9,
+      "subject": "Physics",
+      "medium": "English",
+      "pdfSha256": "a77c9b5fd12e35de2a08390c2b93d10a59fa94fb4603e3349908e75c6b189794",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-012",
+      "grade": 9,
+      "subject": "Physics",
+      "medium": "Urdu",
+      "pdfSha256": "b1ae1f1a23ce5d420daa24cfead8ac8711af89060b124700ad75b21f68a355d1",
+      "edition": "VERIFY",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-013",
+      "grade": 9,
+      "subject": "Computer",
+      "medium": "English",
+      "pdfSha256": "29eb323435d412bd5a0b0648e20e88bfb5c7c29e07642b0597a7e94bcf9fd7cb",
+      "edition": "2025-26",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-014",
+      "grade": 10,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "pdfSha256": "b215a77d0209bfba751082c90c7c58af3414f7859fd87a8b164b5adc258a13ee",
+      "edition": "CURRENT_OFFICIAL_LINK_2026-10-08",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-015",
+      "grade": 10,
+      "subject": "Urdu",
+      "medium": "Urdu",
+      "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-016",
+      "grade": 10,
+      "subject": "English",
+      "medium": "English",
+      "pdfSha256": "61c864f306e9de9d0d7f938a0dc80922a5ec46822acf84027b6257b665631a07",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-017",
+      "grade": 10,
+      "subject": "Mathematics",
+      "medium": "English",
+      "pdfSha256": "4c0e41ae91ecd2d8f391ed5d474276069b898546d3998a4af553baf965a6bece",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-018",
+      "grade": 10,
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-019",
+      "grade": 10,
+      "subject": "Pakistan Studies",
+      "medium": "English",
+      "pdfSha256": "430551b660fb2379c5cf6c3327ddf91bc073f26f22f258e59538c8e07497cf9a",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-020",
+      "grade": 10,
+      "subject": "Biology",
+      "medium": "English",
+      "pdfSha256": "ad602022755a9b298cf26c9c184afbbd81ec9ad32f690e1beb220ecfb268b97b",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-021",
+      "grade": 10,
+      "subject": "Biology",
+      "medium": "Urdu",
+      "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-022",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "pdfSha256": "09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-023",
+      "grade": 10,
+      "subject": "Physics",
+      "medium": "English",
+      "pdfSha256": "0205c32c3d65df5270c2b4cdb32739276cae5ea67670e5f8749591bb0260d8ae",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-024",
+      "grade": 10,
+      "subject": "Physics",
+      "medium": "English",
+      "pdfSha256": "47e5654f4fc691741f0afc7dd80148b121601eef11767de7cd3a87255c5a879f",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-025",
+      "grade": 10,
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "pdfSha256": "acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-026",
+      "grade": 0,
+      "subject": "English Grammar and Composition",
+      "medium": "English",
+      "pdfSha256": "f9d449a6075b17282831c95521f060ac246c422f7169a1bc80cf6568fd185a62",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-027",
+      "grade": 0,
+      "subject": "Urdu Quaid-e-Insha",
+      "medium": "Urdu",
+      "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-028",
+      "grade": 0,
+      "subject": "General Science",
+      "medium": "English",
+      "pdfSha256": "c807ef42eaf178de8e4eafdff0dc2443ea130702b592b440ad8c7c76baf6542b",
+      "edition": "VERIFY",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-029",
+      "grade": 0,
+      "subject": "General Science",
+      "medium": "Urdu",
+      "pdfSha256": "8b9153a12a97ad03684cb609cea0069fa41843960157e06edbb11d9ecb9a2a17",
+      "edition": "VERIFY",
       "academicApproval": false
     },
     {
@@ -130,6 +380,429 @@
       "academicApproval": false
     },
     {
+      "recordId": "pectaa-catalog-043",
+      "grade": 9,
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "9f9097140f3fac8221fbdb235c3b87e4635cdb23601250d451ea3ac04f72612a",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-044",
+      "grade": 9,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "548e66e933f3f9970ab2ac7da9f1dda897a50d5e555a25251d0f2dc54b18752b",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-045",
+      "grade": 9,
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "pdfSha256": "9700857847dd8a0548d36caea6c5de6c58780107564a755c5c7a5d4029e6eead",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-046",
+      "grade": 9,
+      "subject": "Physics-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "9dfd19bc746a37ed019ba5458ef7644058ba69af599a9303f5788275aba07d8b",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-047",
+      "grade": 10,
+      "subject": "Chemistry-Tech",
+      "medium": "English",
+      "pdfSha256": "1120794a943a815308719b135add2da3989d25487aa527a3666d1824b6758e41",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-048",
+      "grade": 10,
+      "subject": "Chemistry-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "1ede957841933ef417e576592eeb98698e2c3ec073c0f20058efda72fe20c1fe",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-049",
+      "grade": 10,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "87dc27ebf31af0a91dbc77a56daa16d5ba7e239a489c3b0a749dd0a57e971e74",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-050",
+      "grade": 10,
+      "subject": "Computer-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "6defe274fd12fa2ae36e8f9b9d4d088f53a5f371a36f243cd0fbe2ba6f59efe5",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-051",
+      "grade": 10,
+      "subject": "Computer (Matric-Tech catalog identity)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "47f06eff98adfb392bd21c7c25037469fea130a8eb7a1a9c1de35a364685a15a",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-052",
+      "grade": 10,
+      "subject": "Computer Science-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "65d03c8b2d214f4bf434ed2c352cd78c8b259d51c8c243cdb6b33a41b0e19f4d",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-053",
+      "grade": 10,
+      "subject": "Fashion Designing-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "e8df5b79e7e2874e76b965d13e50e3ead09945f7d3df23be9191f2e5e7aeeb7c",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-054",
+      "grade": 10,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "f69e2553dc39f30fc2f76bda87934cd927c45a5b12e7c8e6305f6ccc6e3aa906",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-055",
+      "grade": 10,
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "85faf38e9d8a1ebe78cb1629d775ac8a50bd95e4714146851aa0668fb44dd08a",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-056",
+      "grade": 10,
+      "subject": "Physics-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "97fdcd6b9dfdbfa4ae4e8d5be3314adbafe83e590c66cea30a0291def0a51356",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-057",
+      "grade": 10,
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "pdfSha256": "36a947f36646f02192841709366272da567d923533629288c803f1b444f1cf74",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-058",
+      "grade": 10,
+      "subject": "General Science-Tech",
+      "medium": "English",
+      "pdfSha256": "626c7b941b0bfc57d2fbdc8d8adce51789e29678e8c3f89330faa62d0501ddba",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-059",
+      "grade": 10,
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "ff0705323317800c3cb6345bdb17decf624b913cef5677aada234d6d7e23c512",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-060",
+      "grade": 10,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "pdfSha256": "3e7bd9bdf9405d0601138b10e44d4bb3677d0c3ddaaad052518c0155025c3b6f",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-061",
+      "grade": 10,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "a8d0b0ee36a86ca8dae168fc584e42cbf8d4a9aff92b700ef49a2f03ad4dfae5",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-062",
+      "grade": 10,
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "pdfSha256": "170fe88aaa03b5714583d57fe922e3654f3faacc7840620f1a701f989bce9818",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-063",
+      "grade": 10,
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "pdfSha256": "ba0d9da1868fa1abc4cb762832e335c98362be43741cdbb95e7b102ff9a64616",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-064",
+      "grade": 9,
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "277bd11cb59f8e424c519572f8db727349cabb131d60e1e8be57753f60562c6c",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-065",
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "pdfSha256": "4e6ae9d00d4bd379d1517b598f48dbaf5991519a2e248936f5ba94aecfbab356",
+      "edition": "2024-25",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-066",
+      "grade": 9,
+      "subject": "Home Economics",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "faded86e997d2bc4387d952ad2947c90219810b5151a05faf57af6d001df85f3",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-067",
+      "grade": 9,
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "9b7fcea9533f0333c6560ed583638649ba5bbf1c208e73af81adfe8bdb4fb20a",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-068",
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "pdfSha256": "11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-069",
+      "grade": 10,
+      "subject": "Ghiza aur Ghizayat",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "05445c71545e5d67af51a0e519129fe6d0e94ebe01c178f3770c4db0ded93722",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-070",
+      "grade": 10,
+      "subject": "Parcha Bafi (Textile and Clothing)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "81829814fdbc6005d89b3c91672610a5a0ac274f9d70a43d6c4e9a7da6ce5902",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-071",
+      "grade": 10,
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "pdfSha256": "72e6498f4dfbab7c23ffc94de945b5cb80527db870726dbbb3b3fe99d4c533bf",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-072",
+      "grade": 10,
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "pdfSha256": "d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-073",
+      "grade": 10,
+      "subject": "Home Economics",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "1cb7bb3c1847880cd4e22fb6d1ef6247ade6018528784a040f1bdf084f995483",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-074",
+      "grade": 0,
+      "subject": "Farsi",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "316d84fd54d9c5bac9ee4ef79b2ec69b1e206669f5d96e9f8687d036fb746da8",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-075",
+      "grade": 0,
+      "subject": "Economics",
+      "medium": "Urdu",
+      "pdfSha256": "4a20e5cf2ef57eca9bd2c21164cf4c3cef5d325cbdfef457f8755c2de2b6962e",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-076",
+      "grade": 0,
+      "subject": "Economics",
+      "medium": "English",
+      "pdfSha256": "cd9f01b1c32e7c929e25eb89e7ff7c16d4fa25c4f5c1de9bd5268627bf682df3",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-077",
+      "grade": 0,
+      "subject": "Punjabi Ikhtari",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "d597903f5a7e47199dba6f972caf3d6c7a156a48098e9a9cca73ee48c4b0cdf6",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-078",
+      "grade": 0,
+      "subject": "Zari Pedawar Workbook",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "64c4de1e013ad47028305c5800192cceaa1a0e5f9854f4298ab4b845a9678253",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-079",
+      "grade": 0,
+      "subject": "Health & Physical Education",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "b5535990ac7c19e320d3e4786f54e5b7d836b936ddf365a41045ca764647cd31",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-080",
+      "grade": 0,
+      "subject": "Education",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "fce267423eb36454bc33e179c33b3ca975146c57909473270b472330f26aa09b",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-081",
+      "grade": 0,
+      "subject": "Civics",
+      "medium": "Urdu",
+      "pdfSha256": "4594b16697040e6bd1ab6616af012ff3f32a849b5345132519548dea92858d57",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-082",
+      "grade": 9,
+      "subject": "Computer Science",
+      "medium": "English",
+      "pdfSha256": "dc2ee57a1dc58434328693a64fa47b39f6f3579f045a2bdcac3ed2162a181fdd",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-083",
+      "grade": 9,
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "pdfSha256": "0e5ce4ef4da1bca0dba68b831585ffd73e416a875171e7a5aea7a6746904c60a",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-084",
+      "grade": 9,
+      "subject": "Biology",
+      "medium": "English",
+      "pdfSha256": "2a41067fe406de71df31e6c50cc5ab42bec24f504acb7f291f399b1176e63b3b",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-085",
+      "grade": 9,
+      "subject": "Biology",
+      "medium": "Urdu",
+      "pdfSha256": "21a2d2013764e48e417dea35e7d969f1ce83ab2253d7200c14cc95bcbac61643",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-086",
+      "grade": 9,
+      "subject": "Chemistry",
+      "medium": "English",
+      "pdfSha256": "d20c6092caef1131b313e96f480d8cc03171a3b013a86701a83d4d7ba3acaa61",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-087",
+      "grade": 9,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "pdfSha256": "80f56b6b572036d610778357e01b2a092689df3195d676589f55cc4642fbde69",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-088",
+      "grade": 9,
+      "subject": "Physics",
+      "medium": "English",
+      "pdfSha256": "3033aab932fe8699906d9d6fcb86a103018ce2c5e8050b5f97cd2aaeb1972834",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-089",
+      "grade": 9,
+      "subject": "Physics",
+      "medium": "Urdu",
+      "pdfSha256": "f4adaf475b6e3416137e650a485ee9ea64118c07b88b0d03f39478f60eafd1c7",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
       "recordId": "pectaa-catalog-090",
       "grade": 9,
       "subject": "Information & Communication Technologies-Tech",
@@ -166,12 +839,93 @@
       "academicApproval": false
     },
     {
+      "recordId": "pectaa-catalog-094",
+      "grade": 9,
+      "subject": "Biology Practical Notebook (catalog track unresolved)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "pdfSha256": "0ef82349de7b814598083f73ac309a87f8736a8bda597e4f3dad728b0656d6e1",
+      "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
       "recordId": "pectaa-catalog-095",
       "grade": 9,
       "subject": "Communication Skills & Personal Grooming-Tech",
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "pdfSha256": "f6eb776bfd63238a83c11e20d25ad84c63a48bfc5149db4e162ce81c9c009f64",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-096",
+      "grade": 10,
+      "subject": "Computer Science",
+      "medium": "English",
+      "pdfSha256": "859aa7195cf0695c28b9b0bf35486bb5271154f1998dd2b961768d73821d65ea",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-097",
+      "grade": 10,
+      "subject": "Computer Science",
+      "medium": "Urdu",
+      "pdfSha256": "a6ba1e3fd45c3b1bc48cf895e115f53d6d99b35e81b3aba60f9945edadbba6ab",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-098",
+      "grade": 10,
+      "subject": "Biology",
+      "medium": "English",
+      "pdfSha256": "922f7532e108782749ac5b3486455bac6a4915df274e5b25b78586d0c076cfe9",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-099",
+      "grade": 10,
+      "subject": "Biology",
+      "medium": "Urdu",
+      "pdfSha256": "046d1179ab0a663ae32d2c82d70f957d797c64cfe4c58eb4d4ff42b86a2ad0d6",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-100",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "English",
+      "pdfSha256": "f5836efe7dbf9a57e32e1e8ff33e5ebfd9f62fa0b128fcdbc29613939cc727e3",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-101",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "pdfSha256": "643fa945970d973e7560950208a82c845a0baa53f9eb32f43e1d11eed662fd87",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-102",
+      "grade": 10,
+      "subject": "Physics",
+      "medium": "English",
+      "pdfSha256": "913f53ae554f51b86f7cb90a1cd6f38f82bb95a72d2954cadc5c76f0f9ff950c",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-103",
+      "grade": 10,
+      "subject": "Physics",
+      "medium": "Urdu",
+      "pdfSha256": "433398ab9521ba45e6439d2c0e110a2241fe25bd51a17cf5ed9ad482f8a242a1",
+      "edition": "2023-24",
       "academicApproval": false
     },
     {
@@ -199,6 +953,51 @@
       "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
       "pdfSha256": "2906adcad1301a0008d251e89735310bdfe70fd71965879dee7dc42b6185d7a7",
       "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-catalog-107",
+      "grade": 0,
+      "subject": "Urdu Quaid-e-Insha",
+      "medium": "Urdu",
+      "pdfSha256": "75d03c872c2785879b57ac05970783ebe3da294c659342dc08e09a2da754afb3",
+      "edition": "2023-24",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-recovered-chemistry10-en-2026",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "English",
+      "pdfSha256": "64fcd73190ad12858ff756a2fcfde6cdf8f108cc0b318d55999554cf4f53aed6",
+      "edition": "2026",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-recovered-computer10-en-2026",
+      "grade": 10,
+      "subject": "Computer Science",
+      "medium": "English",
+      "pdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+      "edition": "2026-27",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-recovered-tarjuma9-2026",
+      "grade": 9,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "pdfSha256": "e88daabbcaef28ae8de9f0d0d08b3c857c4ffa899fd56fdd131ff27cd7fd7f66",
+      "edition": "CURRENT_2026_RESOURCE",
+      "academicApproval": false
+    },
+    {
+      "recordId": "pectaa-recovered-tarjuma10-current",
+      "grade": 10,
+      "subject": "Tarjuma-tul-Quran",
+      "medium": "Urdu",
+      "pdfSha256": "52907c2e615dc5cd8f826bd02390ce97fcb532e5887312168cd6b6ebd7ec2301",
+      "edition": "CONTINUING_CURRENT",
       "academicApproval": false
     }
   ]

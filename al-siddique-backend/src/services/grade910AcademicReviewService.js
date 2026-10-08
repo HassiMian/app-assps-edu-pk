@@ -44,7 +44,7 @@ async function recordIndependentAcademicReview({
       throw error('ACADEMIC_REVIEW_NOT_INDEPENDENT','Reviewer must differ from original author and revision author.',403)
     if(!master.source_question_bank_id)
       throw error('REVIEW_SOURCE_QUESTION_LINK_REQUIRED','A tenant-linked legacy Question Bank record is required.')
-    const normalized=normalizeEvidence(evidence,revision.content_json)
+    const normalized=normalizeEvidence(evidence,revision.content_json,{tenantId})
     const existing=await client.query(
       "SELECT metadata,reviewed_by FROM question_mappings WHERE school_id=$1 AND question_master_id=$2 AND mapping_type='grade910_independent_academic_review' AND mapping_key=$3",
       [tenantId,master.id,mappingKey]

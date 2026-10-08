@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "assps-grade910-school-adoption-registry-v1",
+  "schoolId": 1,
+  "schoolCode": "assps",
+  "teachingSession": "2026-27",
+  "teachingSessionEvidence": {
+    "kind": "school_timetable",
+    "filename": "AL_SIDDIQUE_TIMETABLE_2026_2027_READABLE.pdf",
+    "scope": "school-wide-teaching-session-only"
+  },
+  "schoolBookAndExamYearApplicabilityCertified": false,
+  "verifiedAdoptions": [],
+  "note": "Empty by design. Official PECTAA listings and the school timetable do not establish school-adopted textbook editions, subject/medium cohorts, board exam years or academic approval."
+}

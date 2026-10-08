@@ -17,11 +17,8 @@ test('grade normalization is strict, supporting only Grade 9 and 10',()=>{
  assert.equal(normalizeGrade('9th'),9);assert.equal(normalizeGrade('10'),10)
  assert.equal(normalizeGrade('8th'),null);assert.equal(normalizeGrade('9A'),null)
 })
-test('verified Biology 9 original draft can be submitted for independent review but remains unapproved',()=>{
- const x=normalizeEvidence(evidence,question)
- assert.equal(x.sourceRecordId,'pectaa-catalog-009')
- assert.equal(x.academicApprovalGranted,false)
- assert.equal(x.questionOrigin,'ORIGINAL')
+test('Biology 9 hashed source is blocked without school-specific adopted edition',()=>{
+ assert.throws(()=>normalizeEvidence(evidence,question,{tenantId:1}),{code:'SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED'})
 })
 test('unsigned, incomplete or forged source/subject/grade review evidence is rejected',()=>{
  for(const key of ['sourceRecordId','sourcePdfSha256','edition','chapterNo']){
@@ -40,7 +37,7 @@ test('original content cannot fabricate an exercise page, and textbook-derived c
  const textbook=clone(evidence);textbook.questionOrigin='TEXTBOOK_EXERCISE'
  assert.throws(()=>normalizeEvidence(textbook,question),{code:'MISSING_EXERCISE_PROVENANCE'})
  textbook.sourcePrintedPage=18;textbook.exerciseReference='Exercise 1 A'
- assert.equal(normalizeEvidence(textbook,question).sourcePrintedPage,18)
+ assert.throws(()=>normalizeEvidence(textbook,question,{tenantId:1}),{code:'SCHOOL_BOOK_ADOPTION_NOT_CERTIFIED'})
 })
 test('review binding is immutable-content-hash and revision scoped',()=>{
  const h='a'.repeat(64)
@@ -50,7 +47,7 @@ test('review binding is immutable-content-hash and revision scoped',()=>{
 })
 test('same-school source registry is an identity ledger, never a list of academically approved textbooks',()=>{
  assert.equal(catalog.academicApproval,false)
- assert.equal(catalog.entries.length,22)
+ assert.equal(catalog.entries.length,110)
  assert.ok(catalog.entries.every(x=>x.academicApproval===false))
 })
 test('question and answer revision parity cannot be bypassed by keeping stem unchanged',()=>{
@@ -78,4 +75,9 @@ test('a source with a catalog-only edition cannot pass review evidence',()=>{
  const q={classLevel:String(unresolved.grade),subject:unresolved.subject,medium:unresolved.medium,chapterNo:'1'}
  const e={...clone(evidence),sourceRecordId:unresolved.recordId,sourcePdfSha256:unresolved.pdfSha256,edition:unresolved.edition}
  assert.throws(()=>normalizeEvidence(e,q),{code:'UNVERIFIED_SOURCE_EDITION'})
+})
+test('older source-review schema v1 does not automatically inherit new edition/page applicability',()=>{
+ const e=clone(evidence)
+ e.schemaVersion='assps-grade910-independent-review-v1'
+ assert.throws(()=>normalizeEvidence(e,question,{tenantId:1}),{code:'INVALID_REVIEW_SCHEMA'})
 })
