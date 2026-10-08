@@ -27,7 +27,7 @@ function request(path, { method = 'GET', body, cookie = '' } = {}) {
 
 test('restricted app runtime preserves school dashboard and academic API', {timeout: 45000}, async () => {
   assert.equal(process.env.NODE_ENV, 'test')
-  assert.match(String(process.env.DB_NAME || ''), /^assps_archv1_rls_stage_/)
+  assert.match(String(process.env.DB_NAME || ''), /^(assps_archv1_rls_stage_|assps_phase234_cert_)/)
   assert.notEqual(PORT, 5000)
   const suffix = crypto.randomBytes(6).toString('hex')
   const code = `runt${suffix}`

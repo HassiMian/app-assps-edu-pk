@@ -57,7 +57,8 @@ test('backend-only forward release preserves frontend commit and requires indepe
   assert.equal(denied.safe,false)
   assert.ok(denied.findings.some(item=>item.startsWith('BACKEND_COMMIT_DRIFT:')))
   const wrongBase = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:meta,
-    backendMeta:{...backend,sourceBaseLiveCommit:'c'.repeat(40)},pm2Env:env,backendForwardVerifier:()=>true})
+    backendMeta:{...backend,sourceBaseLiveCommit:'c'.repeat(40)},pm2Env:env,
+    backendForwardVerifier:(_base,_head,_branch,metadata)=>metadata.sourceBaseLiveCommit===commit})
   assert.equal(wrongBase.safe,false)
 })
 

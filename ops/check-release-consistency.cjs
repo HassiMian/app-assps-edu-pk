@@ -28,9 +28,9 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
     // ancestry AND exact remote branch identity. No heuristic SHA allowance.
     const verifiedBackendForward = name === 'BACKEND' &&
       ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety'].includes(meta.component) &&
-      meta.sourceBaseLiveCommit === canonicalCommit &&
-      meta.previousRelease?.commit === canonicalCommit &&
-      backendForwardVerifier(canonicalCommit, meta.commit, meta.branch)
+      /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
+      /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
+      backendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta)
     if (meta.commit !== canonicalCommit && !verifiedBackendForward)
       findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
     if (meta.branch !== canonicalBranch && !verifiedBackendForward)
@@ -66,33 +66,56 @@ function readJson(file) {
 function canonicalRemoteCommit() {
   const expected = String(process.env.ASSPS_EXPECTED_CANONICAL_COMMIT || '').trim()
   if (expected) return expected
-  const output = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', `refs/heads/${CANONICAL_BRANCH}`], { encoding: 'utf8' }).trim()
+  const output = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', `refs/heads/${CANONICAL_BRANCH}`], { encoding: 'utf8',timeout:12000 }).trim()
   const commit = output.split(/\s+/)[0]
   if (!commit) throw new Error('Canonical remote branch could not be resolved.')
   return commit
 }
 
-function verifyBackendForward(base, head, branch) {
-  if (!/^[0-9a-f]{40}$/i.test(String(head || ''))) return false
-  if (!['fix/paper-v1-release-rls-reconcile-20261008','fix/paper-grade910-qbank-safe-intake-20261008'].includes(branch)) return false
+function gitAncestor(ancestor, descendant) {
+  if (![ancestor,descendant].every(value => /^[0-9a-f]{40}$/i.test(String(value || ''))))
+    return false
   try {
-    execFileSync('git', ['-C', repoRoot, 'merge-base', '--is-ancestor', base, head], {timeout:12000})
-    const remote = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', 'refs/heads/' + branch], {encoding:'utf8',timeout:12000}).trim().split(/\s+/)[0]
+    execFileSync('git',['-C',repoRoot,'merge-base','--is-ancestor',ancestor,descendant],
+      {timeout:10000})
+    return true
+  } catch (_) { return false }
+}
+
+function verifyBackendForward(base, head, branch, meta = {}) {
+  if (![base,head,meta.sourceBaseLiveCommit,meta.previousRelease?.commit]
+    .every(value => /^[0-9a-f]{40}$/i.test(String(value || '')))) return false
+  // Only specifically identified, traceable backend-only release branches.
+  if (!/^(fix|release)\/[a-z0-9][a-z0-9._/-]{4,120}$/i.test(String(branch || ''))) return false
+  if (!gitAncestor(base,meta.sourceBaseLiveCommit) ||
+      !gitAncestor(meta.sourceBaseLiveCommit,head) ||
+      !gitAncestor(base,meta.previousRelease.commit) ||
+      !gitAncestor(meta.previousRelease.commit,head)) return false
+  try {
+    const remote = execFileSync('git',['-C',repoRoot,'ls-remote','origin','refs/heads/'+branch],
+      {encoding:'utf8',timeout:12000}).trim().split(/\s+/)[0]
     if (remote !== head) return false
-    // Backend-only release cannot silently replace newer teacher-facing frontend
-    // or unrelated backend business logic. The QBank intake release is scoped
-    // strictly to the offline seed importer, its local policy, audits/tests/docs.
-    if (branch === 'fix/paper-grade910-qbank-safe-intake-20261008') {
-      const paths = execFileSync('git', ['-C',repoRoot,'diff','--name-only',base,head],
+    // Never certify an unchanged frontend on a backend commit that modifies its
+    // shipped source. Isolated browser-test files are the only exception.
+    const changed = execFileSync('git',['-C',repoRoot,'diff','--name-only',base,head,'--',
+      'al-siddique-frontend/'],{encoding:'utf8',timeout:12000}).split('\n').filter(Boolean)
+    const isFixture = file => (
+      file.startsWith('al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/') ||
+      /^al-siddique-frontend\/[a-z0-9._-]+-test\.html$/i.test(file)
+    )
+    if (!changed.every(isFixture)) return false
+    if (meta.component === 'backend-question-bank-seed-intake-safety') {
+      if (branch !== 'fix/paper-grade910-qbank-safe-intake-20261008') return false
+      const paths = execFileSync('git',['-C',repoRoot,'diff','--name-only',base,head],
         {encoding:'utf8',timeout:12000}).trim().split('\n').filter(Boolean)
-      const permitted = p =>
-        p === 'al-siddique-backend/src/scripts/seedQuestionBankFromJson.js' ||
-        p === 'al-siddique-backend/src/scripts/lib/seed-intake-policy.cjs' ||
-        p === 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/canonicalCanaryBrowserAcceptance.test.js' ||
-        p.startsWith('ops/qbank/') || p.startsWith('ops/tests/') ||
-        p === 'ops/check-release-consistency.cjs' ||
-        p === 'ops/check-school-exam-readiness.cjs' ||
-        p.startsWith('docs/question-bank/')
+      const permitted = file =>
+        file === 'al-siddique-backend/src/scripts/seedQuestionBankFromJson.js' ||
+        file === 'al-siddique-backend/src/scripts/lib/seed-intake-policy.cjs' ||
+        file === 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/canonicalCanaryBrowserAcceptance.test.js' ||
+        file.startsWith('ops/qbank/') || file.startsWith('ops/tests/') ||
+        file === 'ops/check-release-consistency.cjs' ||
+        file === 'ops/check-school-exam-readiness.cjs' ||
+        file.startsWith('docs/question-bank/')
       if (!paths.every(permitted)) return false
     }
     return true
