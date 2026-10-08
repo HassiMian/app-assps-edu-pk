@@ -18,6 +18,7 @@ async function up(options = {}) {
         WHERE school_id IS NOT NULL;
 
       ALTER TABLE whatsapp_inbound_events ENABLE ROW LEVEL SECURITY;
+      ALTER TABLE whatsapp_inbound_events FORCE ROW LEVEL SECURITY;
 
       DO $$
       BEGIN

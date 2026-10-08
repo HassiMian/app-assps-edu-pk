@@ -108,6 +108,7 @@ test('WhatsApp event migration adds nullable school scope without guessing legac
   assert.match(migration, /ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools\(id\)/)
   assert.match(migration, /idx_whatsapp_inbound_events_school_created/)
   assert.match(migration, /ALTER TABLE whatsapp_inbound_events ENABLE ROW LEVEL SECURITY/)
+  assert.match(migration, /ALTER TABLE whatsapp_inbound_events FORCE ROW LEVEL SECURITY/)
   assert.match(migration, /CREATE POLICY tenant_isolation_policy ON whatsapp_inbound_events/)
   assert.doesNotMatch(migration, /UPDATE\s+whatsapp_inbound_events\s+SET\s+school_id/i)
   assert.doesNotMatch(migration, /school_id\s+INTEGER\s+NOT NULL/i)

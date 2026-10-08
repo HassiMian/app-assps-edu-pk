@@ -1985,6 +1985,11 @@ assertContains(
 )
 assertContains(
   'al-siddique-backend/migrations/021_whatsapp_event_school_scope.js',
+  'ALTER TABLE whatsapp_inbound_events FORCE ROW LEVEL SECURITY',
+  'WhatsApp event storage must force row-level security because the application role owns the table.'
+)
+assertContains(
+  'al-siddique-backend/migrations/021_whatsapp_event_school_scope.js',
   'CREATE POLICY tenant_isolation_policy ON whatsapp_inbound_events',
   'WhatsApp event storage must enforce tenant isolation when request RLS is enabled.'
 )
