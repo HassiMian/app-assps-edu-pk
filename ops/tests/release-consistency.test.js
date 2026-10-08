@@ -60,3 +60,17 @@ test('backend-only forward release preserves frontend commit and requires indepe
     backendMeta:{...backend,sourceBaseLiveCommit:'c'.repeat(40)},pm2Env:env,backendForwardVerifier:()=>true})
   assert.equal(wrongBase.safe,false)
 })
+
+test('static frontend release uses its actual frontendDeployedContracts seal, not an absent API contract field', () => {
+  const staticFrontend = {...meta,liveRouteContract:undefined,frontendDeployedContracts:'pass'}
+  const result = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:staticFrontend,backendMeta:meta,pm2Env:env})
+  assert.equal(result.safe,true)
+  const brokenFrontend = {...staticFrontend,frontendDeployedContracts:'unknown'}
+  const denied = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:brokenFrontend,backendMeta:meta,pm2Env:env})
+  assert.equal(denied.safe,false)
+  assert.ok(denied.findings.includes('FRONTEND_LIVE_CONTRACT_NOT_SEALED'))
+  const brokenApi = {...meta,liveRouteContract:undefined,frontendDeployedContracts:'pass'}
+  const deniedApi = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:staticFrontend,backendMeta:brokenApi,pm2Env:env})
+  assert.equal(deniedApi.safe,false)
+  assert.ok(deniedApi.findings.includes('BACKEND_LIVE_CONTRACT_NOT_SEALED'))
+})

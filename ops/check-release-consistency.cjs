@@ -36,7 +36,12 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
     if (meta.branch !== canonicalBranch && !verifiedBackendForward)
       findings.push(`${name}_BRANCH_DRIFT:${meta.branch || 'missing'}:${canonicalBranch}`)
     if (meta.productionSmoke !== 'pass') findings.push(`${name}_PRODUCTION_SMOKE_NOT_SEALED`)
-    if (meta.liveRouteContract !== 'pass') findings.push(`${name}_LIVE_CONTRACT_NOT_SEALED`)
+    // Static frontend publishes frontendDeployedContracts, while the API
+    // publishes liveRouteContract. Both are independently sealed release gates.
+    const contractSealed = name === 'FRONTEND'
+      ? (meta.frontendDeployedContracts === 'pass' || meta.liveRouteContract === 'pass')
+      : meta.liveRouteContract === 'pass'
+    if (!contractSealed) findings.push(`${name}_LIVE_CONTRACT_NOT_SEALED`)
     if (meta.protectedTemplates !== '6/6 unchanged') findings.push(`${name}_PROTECTED_TEMPLATE_SEAL_INVALID`)
   }
 
