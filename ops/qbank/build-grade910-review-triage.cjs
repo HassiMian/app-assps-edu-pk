@@ -8,7 +8,18 @@ const ROOT=path.resolve(__dirname,'../..')
 const STAGING=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
 const OUT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_REVIEW_TRIAGE_QUEUE_20261008.json')
 const SHA=s=>crypto.createHash('sha256').update(s).digest('hex')
-function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],mcqEditorialCandidates=[]){
+function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],mcqEditorialCandidates=[],similarityReview={pairs:[]}){
+ const similarityById=new Map()
+ for(const pair of similarityReview.pairs||[]){
+  if(!['CROSS_CHAPTER_TEMPLATE_SIMILARITY','SAME_CHAPTER_POSSIBLE_REPHRASE'].includes(pair.reason)||
+     pair.approved!==false||pair.duplicateConfirmed!==false||pair.questionA===pair.questionB)
+   throw Error('UNTRUSTED_SIMILARITY_REVIEW_RECORD')
+  for(const [id,ownSha,other] of [[pair.questionA,pair.questionShaA,pair.questionB],[pair.questionB,pair.questionShaB,pair.questionA]]){
+   if(!similarityById.has(id))similarityById.set(id,[])
+   similarityById.get(id).push({ownSha,other,reason:pair.reason})
+  }
+ }
+ const consumedSimilarity=new Set()
  const mcqCandidates=new Map(mcqEditorialCandidates.map(x=>[x.questionId,x]))
  if(mcqCandidates.size!==mcqEditorialCandidates.length)throw Error('DUPLICATE_CHEMISTRY_MCQ_EDITORIAL_CANDIDATE')
  const consumedMcqs=new Set()
@@ -26,6 +37,10 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
    const id=String(q.id)
    if(seen.has(id)){collisions.push({id,file});continue}
    seen.add(id)
+   const similarity=similarityById.get(id)||[]
+   for(const match of similarity)if(match.ownSha!==SHA(JSON.stringify(q)))
+    throw Error('STALE_STEM_SIMILARITY_REVIEW_SHA:'+id)
+   if(similarity.length)consumedSimilarity.add(id)
    const mcqRevision=mcqCandidates.get(id)
    if(mcqRevision){
     if(q.type!=='mcq'||mcqRevision.parentQuestionSha256!==SHA(JSON.stringify(q))||
@@ -62,6 +77,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
    if(topic===null||String(topic).trim()==='')blockers.push('TOPIC_MAPPING_UNRESOLVED')
    if(String(q.type).toLowerCase()==='mcq'&&flaggedFiles.has(file))blockers.push('SOURCE_FILE_MCQ_KEY_PATTERN_EDITORIAL_REVIEW')
    if(q.content?.en&&q.content?.ur)blockers.push('BILINGUAL_EQUIVALENCE_INDEPENDENT_CHECK_MISSING')
+   if(similarity.length)blockers.push('NEAR_STEM_TEMPLATE_ORIGINALITY_HUMAN_REVIEW_REQUIRED')
    if(q.content?.en&&q.content?.ur && (!String(q.content.ur.stem||'').trim()||!String(q.content.ur.answer||'').trim()))
      blockers.push('URDU_DUAL_CONTENT_COMPLETION_REQUIRED')
    records.push({
@@ -72,6 +88,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
     claimedSourcePage:claimedPage,claimedPageNumbering:'UNSPECIFIED',
     editionClaim:edition||null,
     evidenceTier:'RESEARCH_CANDIDATE_ONLY',
+    nearStemSimilarityReview:similarity.length?{candidatePairs:similarity.length,otherQuestionIds:[...new Set(similarity.map(x=>x.other))].sort(),humanDuplicateVerdict:'PENDING',approved:false}:null,
     editorialMcqRevisionCandidate:mcqRevision?{revisionFile:mcqRevision.revisionFile,revisionFileSha256:mcqRevision.revisionFileSha256,revisionQuestionSha256:mcqRevision.proposedRevisionSha256,status:mcqRevision.reviewStatus,approved:false}:null,
     editorialTranslationCandidate:editorial?{revisionFile:editorial.proposedRevisionFile,revisionFileSha256:editorial.editorialRevisionFileSha256,revisionQuestionSha256:editorial.proposedRevisionSha256,status:editorial.proposalStatus,approved:false}:null,
     blockers,
@@ -82,6 +99,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
  }
  if(consumed.size!==editorialById.size)throw Error('EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
  if(consumedMcqs.size!==mcqCandidates.size)throw Error('MCQ_EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
+ if(consumedSimilarity.size!==similarityById.size)throw Error('NEAR_STEM_REVIEW_REFERENCES_MISSING_ORIGINAL_QUESTION')
  records.sort((a,b)=>String(a.grade).localeCompare(String(b.grade),'en',{numeric:true})||
   a.subjectId.localeCompare(b.subjectId)||a.medium.localeCompare(b.medium)||
   String(a.chapter).localeCompare(String(b.chapter),'en',{numeric:true})||
@@ -107,6 +125,8 @@ function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[],
   bySubject,byMedium:mediums,byType:types,blockerCounts:issues,
   unapprovedEditorialTranslationProposals:consumed.size,
   unapprovedMcqRevisionProposals:consumedMcqs.size,
+  nearStemOriginalityReviewQuestionCount:consumedSimilarity.size,
+  nearStemSimilarityPairs:(similarityReview.pairs||[]).length,
   collisions,
   records
  }
@@ -116,9 +136,11 @@ if(require.main===module){
  const mcq=JSON.parse(fs.readFileSync(path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_MCQ_AUTHORING_QA_20261008.json'),'utf8'))
  const {loadCandidates}=require('./verify-bio9-editorial-translation-proposals.cjs')
  const {verify}=require('./verify-chemistry9-mcq-editorial-rev2.cjs')
- const report=buildReviewQueue(collectDocuments(STAGING),manifest,mcq,loadCandidates(),verify())
+ const {audit}=require('./audit-scientific-stem-similarity.cjs')
+ const documents=collectDocuments(STAGING)
+ const report=buildReviewQueue(documents,manifest,mcq,loadCandidates(),verify(),audit(documents))
  if(process.argv.includes('--write'))fs.writeFileSync(OUT,JSON.stringify(report,null,2)+'\n')
- console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,unapprovedMcqRevisionProposals:report.unapprovedMcqRevisionProposals,reportPath:process.argv.includes('--write')?OUT:null},null,2))
+ console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,unapprovedMcqRevisionProposals:report.unapprovedMcqRevisionProposals,nearStemOriginalityReviewQuestionCount:report.nearStemOriginalityReviewQuestionCount,nearStemSimilarityPairs:report.nearStemSimilarityPairs,reportPath:process.argv.includes('--write')?OUT:null},null,2))
  if(process.argv.includes('--strict')&&(report.counts.collisionIds||report.counts.approved||report.counts.published))process.exitCode=1
 }
 module.exports={buildReviewQueue}
