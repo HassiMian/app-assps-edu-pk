@@ -53,3 +53,20 @@ The complete per-chapter candidate source pages are recorded in
 source checksum establishes answer correctness, image review, rights to
 reproduce questions, or academic approval. No textbook exercise questions were
 transcribed by this scan.
+
+## Canonical PaperDocument and ScoringPlan proof
+
+The offline original question pilot was composed **through the existing
+AssessmentStudio manual authoring foundation**, not a parallel paper editor.
+Selecting 5 original MCQs, 5 short and 1 long produces 11 independently
+editable question sections, USER_AUTHORED PaperDocument origin and a
+balanced **20-mark** ScoringPlan. Structural release validation passes.
+
+The canonical MCQ node schema was separately tested with four individually
+addressable options, zero embedded correct-answer flags and unchanged marks
+when editing one option. This proves **schema capability**, not a claim that
+every production editor control was retested in this specific pilot.
+
+All academic approvals and governed import flags remain false. Technical
+PaperDocument validity does not constitute subject-teacher or curriculum
+approval.
