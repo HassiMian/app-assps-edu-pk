@@ -15,6 +15,78 @@ function cleanText(value, max = 160) {
   return text ? text.slice(0, max) : null
 }
 
+const FORBIDDEN_ANSWER_KEYS = new Set([
+  'answer','answers','answerkey','answer_key','correctanswer','correct_answer','correctoption','correct_option',
+  'correctmappings','correct_mappings','iscorrect','is_correct','explanation','explanations','solution','solutions',
+  'markingscheme','marking_scheme','teachernotes','teacher_notes',
+])
+
+function normalizeProjectionKey(value) {
+  return String(value || '').replace(/[^a-z0-9_]/gi, '').toLowerCase()
+}
+
+function stripAnswerMaterial(value) {
+  if (Array.isArray(value)) return value.map(stripAnswerMaterial)
+  if (!value || typeof value !== 'object') return value
+  const out = {}
+  for (const [key, nested] of Object.entries(value)) {
+    if (FORBIDDEN_ANSWER_KEYS.has(normalizeProjectionKey(key))) continue
+    out[key] = stripAnswerMaterial(nested)
+  }
+  return out
+}
+
+function containsForbiddenAnswerMaterial(value) {
+  if (Array.isArray(value)) return value.some(containsForbiddenAnswerMaterial)
+  if (!value || typeof value !== 'object') return false
+  return Object.entries(value).some(([key, nested]) => (
+    FORBIDDEN_ANSWER_KEYS.has(normalizeProjectionKey(key)) || containsForbiddenAnswerMaterial(nested)
+  ))
+}
+
+function buildStudentSafeProjection(releaseSnapshot = {}, bindings = {}) {
+  const paper = stripAnswerMaterial(releaseSnapshot)
+  const student = bindings.student || null
+  const teacher = bindings.teacher || null
+  const projection = {
+    projectionType: 'STUDENT_SAFE',
+    paper,
+    personalization: {
+      student: student ? {
+        displayName: cleanText(student.displayName ?? student.name, 160),
+        rollNumber: cleanText(student.rollNumber ?? student.rollNo ?? student.roll_no, 80),
+        className: cleanText(student.className ?? student.class_name, 120),
+        section: cleanText(student.section, 80),
+      } : null,
+      teacher: teacher ? {
+        displayName: cleanText(teacher.displayName ?? teacher.teacherName ?? teacher.name, 160),
+        subject: cleanText(teacher.subject ?? teacher.subjectName, 160),
+      } : null,
+    },
+  }
+  if (containsForbiddenAnswerMaterial(projection)) {
+    const error = new Error('Student-safe projection retained forbidden answer material')
+    error.code = 'STUDENT_PROJECTION_ANSWER_LEAK'
+    error.status = 500
+    throw error
+  }
+  return projection
+}
+
+function buildStaffAnswerKeyProjection(releaseSnapshot = {}, { role } = {}) {
+  const allowed = new Set(['super_admin','admin','school_admin','principal','teacher'])
+  if (!allowed.has(String(role || '').toLowerCase())) {
+    const error = new Error('Staff authorization is required for answer-key projection')
+    error.code = 'ANSWER_KEY_ROLE_REQUIRED'
+    error.status = 403
+    throw error
+  }
+  return {
+    projectionType: 'STAFF_ANSWER_KEY',
+    paper: JSON.parse(JSON.stringify(releaseSnapshot || {})),
+  }
+}
+
 function normalizeRosterStudent(student = {}) {
   const studentId = cleanText(student.studentId ?? student.id, 80)
   if (!studentId) throw new Error('Roster student id is required')
@@ -204,6 +276,10 @@ function paddedPageCount(pageCount, { personalized = false, duplex = false } = {
 
 module.exports = {
   createPrintJobBinding,
+  stripAnswerMaterial,
+  containsForbiddenAnswerMaterial,
+  buildStudentSafeProjection,
+  buildStaffAnswerKeyProjection,
   normalizeRosterSnapshot,
   normalizeTeacherBinding,
   normalizeRenderSettings,

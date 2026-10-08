@@ -15,9 +15,24 @@ test('Blank Urdu paper: create without bank, save empty draft, add typed questio
  await server.listen()
  const browser=await chromium.launch({headless:true,executablePath:executable,args:['--no-sandbox']})
  const context=await browser.newContext({viewport:{width:1640,height:960}})
+ await context.addInitScript(()=>{
+  localStorage.setItem('al_siddique_token','mock-jwt-token')
+  localStorage.setItem('al_siddique_login_at',String(Date.now()))
+  localStorage.setItem('al_siddique_user',JSON.stringify({id:999,role:'admin',school_id:1,tenant_id:'assps'}))
+ })
  t.after(async()=>{await context.close().catch(()=>{});await browser.close().catch(()=>{});await server.close().catch(()=>{})})
  await context.route('**/api/students**',route=>route.fulfill({status:200,contentType:'application/json',body:'[]'}))
  await context.route('**/api/settings/public**',route=>route.fulfill({status:200,contentType:'application/json',body:'{}'}))
+ await context.route('**/api/settings',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true,data:{}})}))
+ await context.route('**/api/academic/setup',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({
+  success:true,configured:false,data:null,defaults:{periodsPerDay:8,localities:['Rayya Khas'],classes:[],subjects:[]},
+ })}))
+ await context.route('**/api/auth/me',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({user:{id:999,role:'admin',school_id:1,tenant_id:'assps'}})}))
+ let revision=0
+ await context.route('**/api/assessment-studio/papers/*/revisions',route=>{
+  revision+=1
+  return route.fulfill({status:201,contentType:'application/json',body:JSON.stringify({success:true,data:{publicId:'phase1-browser-urdu',currentRevision:revision,contentHash:'c'.repeat(64),status:'DRAFT'}})})
+ })
  const page=await context.newPage()
  page.on('dialog', dialog=>dialog.accept().catch(()=>{}))
  const errors=[]
@@ -42,6 +57,10 @@ test('Blank Urdu paper: create without bank, save empty draft, add typed questio
  assert.equal(await page.getByRole('button',{name:'Save Draft'}).isEnabled(),true)
  await page.getByRole('button',{name:'Save Draft'}).click()
  console.log('E2E_EMPTY_DRAFT_SAVE_CLICKED')
+ await page.waitForFunction(()=>{
+   const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
+   return keys.some(k=>{try{return (JSON.parse(localStorage.getItem(k)).savedPapers||[]).some(p=>p.userAuthored&&p.name==='Phase1 Browser Urdu')}catch{return false}})
+ },null,{timeout:12000})
  const savedBefore=await page.evaluate(()=>{
    const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
    return keys.flatMap(k=>{try{return JSON.parse(localStorage.getItem(k)).savedPapers||[]}catch{return[]}}).filter(p=>p.userAuthored && p.name==='Phase1 Browser Urdu')
@@ -58,6 +77,10 @@ test('Blank Urdu paper: create without bank, save empty draft, add typed questio
  await page.locator('[data-section-inspector] input[type="number"]').nth(1).fill('5')
  await page.getByRole('button',{name:'Save Draft'}).click()
  console.log('E2E_QUESTION_SAVE_CLICKED')
+ await page.waitForFunction(()=>{
+   const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
+   return keys.some(k=>{try{return (JSON.parse(localStorage.getItem(k)).savedPapers||[]).some(p=>p.userAuthored&&p.name==='Phase1 Browser Urdu'&&(p.official_section||[]).length===1)}catch{return false}})
+ },null,{timeout:12000})
  const savedAfter=await page.evaluate(()=>{
    const keys=Object.keys(localStorage).filter(k=>k.startsWith('al_siddique_paper_store'))
    return keys.flatMap(k=>{try{return JSON.parse(localStorage.getItem(k)).savedPapers||[]}catch{return[]}}).filter(p=>p.userAuthored && p.name==='Phase1 Browser Urdu')
