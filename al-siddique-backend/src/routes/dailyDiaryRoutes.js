@@ -59,7 +59,7 @@ function normalizePayload(body = {}) {
     class_level: normalizeText(body.class_level ?? body.classLevel, ''),
     class_name: normalizeText(body.class_name ?? body.className, ''),
     diary_date: normalizeText(body.diary_date ?? body.diaryDate, new Date().toISOString().slice(0, 10)),
-    slips_per_page: [4, 6, 8, 10, 12, 14].includes(slipsPerPage) ? slipsPerPage : 8,
+    slips_per_page: [2, 3, 4, 5, 6, 8, 10, 12, 14].includes(slipsPerPage) ? slipsPerPage : 4,
     footer_text: normalizeText(body.footer_text ?? body.footerText, ''),
     footer_is_urdu: footerIsUrdu,
     rows,
