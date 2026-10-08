@@ -3,787 +3,811 @@
   "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
   "questions": [
     {
-      "id": "ART9UR-C01-M01",
+      "id": "IX-ART-UR-C01-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "1",
-      "chapter_name": "فن اور ڈرائنگ کا تعارف",
-      "topic_name": "Introduction to Art and Drawing",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "art fundamentals",
       "category": "mcq",
-      "question_text": "باب ”فن اور ڈرائنگ کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”Introduction to Art and Drawing“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "فن کے عناصر، بنیادی اشکال اور اصول"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "فن کے عناصر، بنیادی اشکال اور اصول",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 1",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Introduction to Art and Drawing"
+        "art fundamentals"
       ]
     },
     {
-      "id": "ART9UR-C01-S01",
+      "id": "IX-ART-UR-C01-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "1",
-      "chapter_name": "فن اور ڈرائنگ کا تعارف",
-      "topic_name": "Introduction to Art and Drawing",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "art fundamentals",
       "category": "short",
-      "question_text": "”فن اور ڈرائنگ کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”Introduction to Art and Drawing“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: فن کے عناصر، بنیادی اشکال اور اصول۔",
+      "answer": "جواب میں line, shape, form, tone, texture and observation سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 1",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Introduction to Art and Drawing"
+        "art fundamentals"
       ]
     },
     {
-      "id": "ART9UR-C01-L01",
+      "id": "IX-ART-UR-C01-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "1",
-      "chapter_name": "فن اور ڈرائنگ کا تعارف",
-      "topic_name": "Introduction to Art and Drawing",
+      "chapter_name": "Introduction to Art and Drawing",
+      "topic_name": "art fundamentals",
       "category": "long",
-      "question_text": "”فن اور ڈرائنگ کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”Introduction to Art and Drawing“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (فن کے عناصر، بنیادی اشکال اور اصول)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں line, shape, form, tone, texture and observation سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 1",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Introduction to Art and Drawing"
+        "art fundamentals"
       ]
     },
     {
-      "id": "ART9UR-C02-M01",
+      "id": "IX-ART-UR-C02-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "2",
-      "chapter_name": "ڈرائنگ اور خاکہ کشی-I",
-      "topic_name": "Drawing and Sketching-I",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "drawing and sketching",
       "category": "mcq",
-      "question_text": "باب ”ڈرائنگ اور خاکہ کشی-I“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”Drawing and Sketching-I“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "مشاہدہ، line، form، proportion اور sketching"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "مشاہدہ، line، form، proportion اور sketching",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 2",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Drawing and Sketching-I"
+        "drawing and sketching"
       ]
     },
     {
-      "id": "ART9UR-C02-S01",
+      "id": "IX-ART-UR-C02-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "2",
-      "chapter_name": "ڈرائنگ اور خاکہ کشی-I",
-      "topic_name": "Drawing and Sketching-I",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "drawing and sketching",
       "category": "short",
-      "question_text": "”ڈرائنگ اور خاکہ کشی-I“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”Drawing and Sketching-I“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: مشاہدہ، line، form، proportion اور sketching۔",
+      "answer": "جواب میں proportion, contour, observation and composition سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 2",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Drawing and Sketching-I"
+        "drawing and sketching"
       ]
     },
     {
-      "id": "ART9UR-C02-L01",
+      "id": "IX-ART-UR-C02-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "2",
-      "chapter_name": "ڈرائنگ اور خاکہ کشی-I",
-      "topic_name": "Drawing and Sketching-I",
+      "chapter_name": "Drawing and Sketching-I",
+      "topic_name": "drawing and sketching",
       "category": "long",
-      "question_text": "”ڈرائنگ اور خاکہ کشی-I“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”Drawing and Sketching-I“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (مشاہدہ، line، form، proportion اور sketching)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں proportion, contour, observation and composition سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 2",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Drawing and Sketching-I"
+        "drawing and sketching"
       ]
     },
     {
-      "id": "ART9UR-C03-M01",
+      "id": "IX-ART-UR-C03-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "3",
-      "chapter_name": "پینٹنگ کی مشق-I",
-      "topic_name": "Painting Practice-I",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "painting practice",
       "category": "mcq",
-      "question_text": "باب ”پینٹنگ کی مشق-I“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”Painting Practice-I“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "رنگ، painting media اور visual expression"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "رنگ، painting media اور visual expression",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 3",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Painting Practice-I"
+        "painting practice"
       ]
     },
     {
-      "id": "ART9UR-C03-S01",
+      "id": "IX-ART-UR-C03-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "3",
-      "chapter_name": "پینٹنگ کی مشق-I",
-      "topic_name": "Painting Practice-I",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "painting practice",
       "category": "short",
-      "question_text": "”پینٹنگ کی مشق-I“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”Painting Practice-I“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: رنگ، painting media اور visual expression۔",
+      "answer": "جواب میں colour relationships, brush control, layering and composition سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 3",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Painting Practice-I"
+        "painting practice"
       ]
     },
     {
-      "id": "ART9UR-C03-L01",
+      "id": "IX-ART-UR-C03-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "3",
-      "chapter_name": "پینٹنگ کی مشق-I",
-      "topic_name": "Painting Practice-I",
+      "chapter_name": "Painting Practice-I",
+      "topic_name": "painting practice",
       "category": "long",
-      "question_text": "”پینٹنگ کی مشق-I“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”Painting Practice-I“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (رنگ، painting media اور visual expression)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں colour relationships, brush control, layering and composition سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 3",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Painting Practice-I"
+        "painting practice"
       ]
     },
     {
-      "id": "ART9UR-C04-M01",
+      "id": "IX-ART-UR-C04-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "4",
-      "chapter_name": "گرافک ڈیزائن کا تعارف",
-      "topic_name": "An Introduction to Graphic Design",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "graphic design",
       "category": "mcq",
-      "question_text": "باب ”گرافک ڈیزائن کا تعارف“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”An Introduction to Graphic Design“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "خطاطی، poster، pattern اور visual communication"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "خطاطی، poster، pattern اور visual communication",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 4",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "An Introduction to Graphic Design"
+        "graphic design"
       ]
     },
     {
-      "id": "ART9UR-C04-S01",
+      "id": "IX-ART-UR-C04-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "4",
-      "chapter_name": "گرافک ڈیزائن کا تعارف",
-      "topic_name": "An Introduction to Graphic Design",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "graphic design",
       "category": "short",
-      "question_text": "”گرافک ڈیزائن کا تعارف“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”An Introduction to Graphic Design“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: خطاطی، poster، pattern اور visual communication۔",
+      "answer": "جواب میں visual hierarchy, typography, balance and communication سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 4",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "An Introduction to Graphic Design"
+        "graphic design"
       ]
     },
     {
-      "id": "ART9UR-C04-L01",
+      "id": "IX-ART-UR-C04-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "4",
-      "chapter_name": "گرافک ڈیزائن کا تعارف",
-      "topic_name": "An Introduction to Graphic Design",
+      "chapter_name": "An Introduction to Graphic Design",
+      "topic_name": "graphic design",
       "category": "long",
-      "question_text": "”گرافک ڈیزائن کا تعارف“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”An Introduction to Graphic Design“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (خطاطی، poster، pattern اور visual communication)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں visual hierarchy, typography, balance and communication سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 4",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "An Introduction to Graphic Design"
+        "graphic design"
       ]
     },
     {
-      "id": "ART9UR-C05-M01",
+      "id": "IX-ART-UR-C05-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "5",
-      "chapter_name": "پاکستان میں فنِ تعمیر کی تاریخ",
-      "topic_name": "History of Architecture in Pakistan",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "architecture in Pakistan",
       "category": "mcq",
-      "question_text": "باب ”پاکستان میں فنِ تعمیر کی تاریخ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”History of Architecture in Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "پاکستانی architectural heritage کے منتخب نمونے"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "پاکستانی architectural heritage کے منتخب نمونے",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 5",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Architecture in Pakistan"
+        "architecture in Pakistan"
       ]
     },
     {
-      "id": "ART9UR-C05-S01",
+      "id": "IX-ART-UR-C05-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "5",
-      "chapter_name": "پاکستان میں فنِ تعمیر کی تاریخ",
-      "topic_name": "History of Architecture in Pakistan",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "architecture in Pakistan",
       "category": "short",
-      "question_text": "”پاکستان میں فنِ تعمیر کی تاریخ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”History of Architecture in Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: پاکستانی architectural heritage کے منتخب نمونے۔",
+      "answer": "جواب میں form, function, materials, regional identity and historical context سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 5",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Architecture in Pakistan"
+        "architecture in Pakistan"
       ]
     },
     {
-      "id": "ART9UR-C05-L01",
+      "id": "IX-ART-UR-C05-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "5",
-      "chapter_name": "پاکستان میں فنِ تعمیر کی تاریخ",
-      "topic_name": "History of Architecture in Pakistan",
+      "chapter_name": "History of Architecture in Pakistan",
+      "topic_name": "architecture in Pakistan",
       "category": "long",
-      "question_text": "”پاکستان میں فنِ تعمیر کی تاریخ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”History of Architecture in Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (پاکستانی architectural heritage کے منتخب نمونے)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں form, function, materials, regional identity and historical context سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 5",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Architecture in Pakistan"
+        "architecture in Pakistan"
       ]
     },
     {
-      "id": "ART9UR-C06-M01",
+      "id": "IX-ART-UR-C06-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "6",
-      "chapter_name": "جنوبی ایشیا میں مصوری کی تاریخ",
-      "topic_name": "History of Painting in South Asia",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "painting in South Asia",
       "category": "mcq",
-      "question_text": "باب ”جنوبی ایشیا میں مصوری کی تاریخ“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”History of Painting in South Asia“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "South Asian painting traditions اور پاکستانی painters"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "South Asian painting traditions اور پاکستانی painters",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 6",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Painting in South Asia"
+        "painting in South Asia"
       ]
     },
     {
-      "id": "ART9UR-C06-S01",
+      "id": "IX-ART-UR-C06-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "6",
-      "chapter_name": "جنوبی ایشیا میں مصوری کی تاریخ",
-      "topic_name": "History of Painting in South Asia",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "painting in South Asia",
       "category": "short",
-      "question_text": "”جنوبی ایشیا میں مصوری کی تاریخ“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”History of Painting in South Asia“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: South Asian painting traditions اور پاکستانی painters۔",
+      "answer": "جواب میں style, context, visual language and historical development سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 6",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Painting in South Asia"
+        "painting in South Asia"
       ]
     },
     {
-      "id": "ART9UR-C06-L01",
+      "id": "IX-ART-UR-C06-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "6",
-      "chapter_name": "جنوبی ایشیا میں مصوری کی تاریخ",
-      "topic_name": "History of Painting in South Asia",
+      "chapter_name": "History of Painting in South Asia",
+      "topic_name": "painting in South Asia",
       "category": "long",
-      "question_text": "”جنوبی ایشیا میں مصوری کی تاریخ“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”History of Painting in South Asia“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (South Asian painting traditions اور پاکستانی painters)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں style, context, visual language and historical development سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 6",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Painting in South Asia"
+        "painting in South Asia"
       ]
     },
     {
-      "id": "ART9UR-C07-M01",
+      "id": "IX-ART-UR-C07-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "7",
-      "chapter_name": "پاکستان کے نامور خطاط",
-      "topic_name": "Master Calligraphists of Pakistan",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "calligraphy in Pakistan",
       "category": "mcq",
-      "question_text": "باب ”پاکستان کے نامور خطاط“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”Master Calligraphists of Pakistan“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "خطاطی بطور بصری فن اور پاکستانی calligraphists"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "خطاطی بطور بصری فن اور پاکستانی calligraphists",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 7",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Master Calligraphists of Pakistan"
+        "calligraphy in Pakistan"
       ]
     },
     {
-      "id": "ART9UR-C07-S01",
+      "id": "IX-ART-UR-C07-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "7",
-      "chapter_name": "پاکستان کے نامور خطاط",
-      "topic_name": "Master Calligraphists of Pakistan",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "calligraphy in Pakistan",
       "category": "short",
-      "question_text": "”پاکستان کے نامور خطاط“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”Master Calligraphists of Pakistan“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: خطاطی بطور بصری فن اور پاکستانی calligraphists۔",
+      "answer": "جواب میں letterform, rhythm, balance, discipline and cultural context سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 7",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Master Calligraphists of Pakistan"
+        "calligraphy in Pakistan"
       ]
     },
     {
-      "id": "ART9UR-C07-L01",
+      "id": "IX-ART-UR-C07-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "7",
-      "chapter_name": "پاکستان کے نامور خطاط",
-      "topic_name": "Master Calligraphists of Pakistan",
+      "chapter_name": "Master Calligraphists of Pakistan",
+      "topic_name": "calligraphy in Pakistan",
       "category": "long",
-      "question_text": "”پاکستان کے نامور خطاط“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”Master Calligraphists of Pakistan“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (خطاطی بطور بصری فن اور پاکستانی calligraphists)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں letterform, rhythm, balance, discipline and cultural context سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 7",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Master Calligraphists of Pakistan"
+        "calligraphy in Pakistan"
       ]
     },
     {
-      "id": "ART9UR-C08-M01",
+      "id": "IX-ART-UR-C08-M01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "8",
-      "chapter_name": "پارچہ بافی: بُنائی، چھپائی اور کڑھائی",
-      "topic_name": "Textiles: Weaving, Printing and Embroidery",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "textile arts",
       "category": "mcq",
-      "question_text": "باب ”پارچہ بافی: بُنائی، چھپائی اور کڑھائی“ کے بنیادی focus کی بہترین وضاحت کون سی ہے؟",
+      "question_text": "باب ”Textiles: Weaving, Printing and Embroidery“ میں مؤثر کام کے لیے کون سا approach زیادہ مناسب ہے؟",
       "options": [
         {
           "id": "A",
-          "text": "weaving، printing، embroidery اور textile crafts"
+          "text": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا"
         },
         {
           "id": "B",
-          "text": "صرف غیر متعلق یادداشت اور بغیر مفہوم کے facts"
+          "text": "تناسب، context اور audience کو نظر انداز کرنا"
         },
         {
           "id": "C",
-          "text": "صرف ایک isolated detail جو باب کے مرکزی مقصد سے متعلق نہیں"
+          "text": "کسی موجودہ کام کو لفظ بہ لفظ/عین اسی طرح نقل کرنا"
         },
         {
           "id": "D",
-          "text": "موضوع کو context، safety اور practical judgment سے الگ کرنا"
+          "text": "ہر material اور technique کو بالکل ایک جیسا سمجھنا"
         }
       ],
       "correct_option": "A",
-      "answer": "weaving، printing، embroidery اور textile crafts",
+      "answer": "بصری فیصلوں کو مقصد، خیال اور context کے مطابق سوچ سمجھ کر استعمال کرنا",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 8",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Textiles: Weaving, Printing and Embroidery"
+        "textile arts"
       ]
     },
     {
-      "id": "ART9UR-C08-S01",
+      "id": "IX-ART-UR-C08-S01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "8",
-      "chapter_name": "پارچہ بافی: بُنائی، چھپائی اور کڑھائی",
-      "topic_name": "Textiles: Weaving, Printing and Embroidery",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "textile arts",
       "category": "short",
-      "question_text": "”پارچہ بافی: بُنائی، چھپائی اور کڑھائی“ کے مطالعے میں دو اہم اصول یا considerations بیان کریں۔",
+      "question_text": "”Textiles: Weaving, Printing and Embroidery“ کے مطالعے یا practice میں دو اہم considerations بیان کریں۔",
       "options": [],
       "correct_option": "",
-      "answer": "اچھے جواب میں باب سے متعلق دو درست اصول اور ہر ایک کی مختصر اہمیت بیان کی جائے۔ مرکزی focus: weaving، printing، embroidery اور textile crafts۔",
+      "answer": "جواب میں weaving, printing, embroidery, pattern and craft traditions سے متعلق کوئی دو مناسب نکات واضح کیے جائیں اور chapter context سے ان کا تعلق بتایا جائے۔",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 8",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Textiles: Weaving, Printing and Embroidery"
+        "textile arts"
       ]
     },
     {
-      "id": "ART9UR-C08-L01",
+      "id": "IX-ART-UR-C08-L01",
       "class_level": "9th",
       "subject": "Art & Model Drawing",
       "medium": "Urdu",
       "board": "Punjab Board",
       "chapter_no": "8",
-      "chapter_name": "پارچہ بافی: بُنائی، چھپائی اور کڑھائی",
-      "topic_name": "Textiles: Weaving, Printing and Embroidery",
+      "chapter_name": "Textiles: Weaving, Printing and Embroidery",
+      "topic_name": "textile arts",
       "category": "long",
-      "question_text": "”پارچہ بافی: بُنائی، چھپائی اور کڑھائی“ کے بنیادی تصورات کی وضاحت کریں اور بتائیں کہ یہ responsible practical یا analytical فیصلوں میں کیسے رہنمائی کرتے ہیں۔",
+      "question_text": "”Textiles: Weaving, Printing and Embroidery“ میں skill، meaning اور context کو visual decisions کے ذریعے کیسے جوڑا جا سکتا ہے؟",
       "options": [],
       "correct_option": "",
-      "answer": "جواب میں باب کا مرکزی focus (weaving، printing، embroidery اور textile crafts)، کم از کم تین متعلقہ اصول، ایک حقیقی application، اور جہاں مناسب ہو safety/ethics/sustainability شامل ہوں۔ textbook عبارت نقل نہ کی جائے۔",
+      "answer": "جواب میں weaving, printing, embroidery, pattern and craft traditions سے کم از کم تین متعلقہ پہلو، ان کا باہمی تعلق، اور technique کو purpose/context سے جوڑنے کی وضاحت شامل ہو؛ textbook عبارت یا artwork کو نقل نہ کیا جائے۔",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-068 | 11478d05bd848a7d5e23bae4a10c90795c146a632cac22defe14cb534448e7cb | chapter 8",
       "tags": [
         "grade9",
+        "art-model-drawing",
+        "urdu",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Textiles: Weaving, Printing and Embroidery"
+        "textile arts"
       ]
     }
   ]

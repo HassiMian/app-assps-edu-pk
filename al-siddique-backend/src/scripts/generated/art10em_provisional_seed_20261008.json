@@ -3,689 +3,710 @@
   "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
   "questions": [
     {
-      "id": "ART10EM-C01-M01",
+      "id": "X-ART-EN-C01-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "1",
       "chapter_name": "Drawing and Sketching",
-      "topic_name": "Drawing and Sketching",
+      "topic_name": "drawing and sketching",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “Drawing and Sketching”?",
+      "question_text": "Which approach best supports effective work in Drawing and Sketching?",
       "options": [
         {
           "id": "A",
-          "text": "observation, structure, proportion and expressive drawing"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "observation, structure, proportion and expressive drawing",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 1",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Drawing and Sketching"
+        "drawing and sketching"
       ]
     },
     {
-      "id": "ART10EM-C01-S01",
+      "id": "X-ART-EN-C01-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "1",
       "chapter_name": "Drawing and Sketching",
-      "topic_name": "Drawing and Sketching",
+      "topic_name": "drawing and sketching",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying Drawing and Sketching.",
+      "question_text": "Name two important considerations when studying or practising Drawing and Sketching.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: observation, structure, proportion and expressive drawing.",
+      "answer": "Any two well-explained considerations connected to observation, perspective, proportion and expressive line, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 1",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Drawing and Sketching"
+        "drawing and sketching"
       ]
     },
     {
-      "id": "ART10EM-C01-L01",
+      "id": "X-ART-EN-C01-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "1",
       "chapter_name": "Drawing and Sketching",
-      "topic_name": "Drawing and Sketching",
+      "topic_name": "drawing and sketching",
       "category": "long",
-      "question_text": "Explain the core ideas of Drawing and Sketching and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in Drawing and Sketching can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (observation, structure, proportion and expressive drawing), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from observation, perspective, proportion and expressive line, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 1",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Drawing and Sketching"
+        "drawing and sketching"
       ]
     },
     {
-      "id": "ART10EM-C02-M01",
+      "id": "X-ART-EN-C02-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "2",
       "chapter_name": "Painting Practice",
-      "topic_name": "Painting Practice",
+      "topic_name": "painting practice",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “Painting Practice”?",
+      "question_text": "Which approach best supports effective work in Painting Practice?",
       "options": [
         {
           "id": "A",
-          "text": "colour, composition, media and painting decisions"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "colour, composition, media and painting decisions",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 2",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Painting Practice"
+        "painting practice"
       ]
     },
     {
-      "id": "ART10EM-C02-S01",
+      "id": "X-ART-EN-C02-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "2",
       "chapter_name": "Painting Practice",
-      "topic_name": "Painting Practice",
+      "topic_name": "painting practice",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying Painting Practice.",
+      "question_text": "Name two important considerations when studying or practising Painting Practice.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: colour, composition, media and painting decisions.",
+      "answer": "Any two well-explained considerations connected to colour, surface, composition and technique, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 2",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Painting Practice"
+        "painting practice"
       ]
     },
     {
-      "id": "ART10EM-C02-L01",
+      "id": "X-ART-EN-C02-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "2",
       "chapter_name": "Painting Practice",
-      "topic_name": "Painting Practice",
+      "topic_name": "painting practice",
       "category": "long",
-      "question_text": "Explain the core ideas of Painting Practice and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in Painting Practice can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (colour, composition, media and painting decisions), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from colour, surface, composition and technique, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 2",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Painting Practice"
+        "painting practice"
       ]
     },
     {
-      "id": "ART10EM-C03-M01",
+      "id": "X-ART-EN-C03-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "3",
       "chapter_name": "Graphic Design",
-      "topic_name": "Graphic Design",
+      "topic_name": "graphic design",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “Graphic Design”?",
+      "question_text": "Which approach best supports effective work in Graphic Design?",
       "options": [
         {
           "id": "A",
-          "text": "visual communication, layout, lettering and design"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "visual communication, layout, lettering and design",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 3",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Graphic Design"
+        "graphic design"
       ]
     },
     {
-      "id": "ART10EM-C03-S01",
+      "id": "X-ART-EN-C03-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "3",
       "chapter_name": "Graphic Design",
-      "topic_name": "Graphic Design",
+      "topic_name": "graphic design",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying Graphic Design.",
+      "question_text": "Name two important considerations when studying or practising Graphic Design.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: visual communication, layout, lettering and design.",
+      "answer": "Any two well-explained considerations connected to message, audience, typography, layout and visual identity, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 3",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Graphic Design"
+        "graphic design"
       ]
     },
     {
-      "id": "ART10EM-C03-L01",
+      "id": "X-ART-EN-C03-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "3",
       "chapter_name": "Graphic Design",
-      "topic_name": "Graphic Design",
+      "topic_name": "graphic design",
       "category": "long",
-      "question_text": "Explain the core ideas of Graphic Design and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in Graphic Design can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (visual communication, layout, lettering and design), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from message, audience, typography, layout and visual identity, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 3",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Graphic Design"
+        "graphic design"
       ]
     },
     {
-      "id": "ART10EM-C04-M01",
+      "id": "X-ART-EN-C04-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "4",
       "chapter_name": "Sculpture Making",
-      "topic_name": "Sculpture Making",
+      "topic_name": "sculpture making",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “Sculpture Making”?",
+      "question_text": "Which approach best supports effective work in Sculpture Making?",
       "options": [
         {
           "id": "A",
-          "text": "three-dimensional form, modelling and safe material handling"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "three-dimensional form, modelling and safe material handling",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 4",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Sculpture Making"
+        "sculpture making"
       ]
     },
     {
-      "id": "ART10EM-C04-S01",
+      "id": "X-ART-EN-C04-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "4",
       "chapter_name": "Sculpture Making",
-      "topic_name": "Sculpture Making",
+      "topic_name": "sculpture making",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying Sculpture Making.",
+      "question_text": "Name two important considerations when studying or practising Sculpture Making.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: three-dimensional form, modelling and safe material handling.",
+      "answer": "Any two well-explained considerations connected to three-dimensional form, volume, balance and material awareness, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 4",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Sculpture Making"
+        "sculpture making"
       ]
     },
     {
-      "id": "ART10EM-C04-L01",
+      "id": "X-ART-EN-C04-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "4",
       "chapter_name": "Sculpture Making",
-      "topic_name": "Sculpture Making",
+      "topic_name": "sculpture making",
       "category": "long",
-      "question_text": "Explain the core ideas of Sculpture Making and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in Sculpture Making can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (three-dimensional form, modelling and safe material handling), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from three-dimensional form, volume, balance and material awareness, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 4",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Sculpture Making"
+        "sculpture making"
       ]
     },
     {
-      "id": "ART10EM-C05-M01",
+      "id": "X-ART-EN-C05-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "5",
       "chapter_name": "History of Sculpture and Architectural Relief in Pakistan",
-      "topic_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "topic_name": "sculpture and architectural relief in Pakistan",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “History of Sculpture and Architectural Relief in Pakistan”?",
+      "question_text": "Which approach best supports effective work in History of Sculpture and Architectural Relief in Pakistan?",
       "options": [
         {
           "id": "A",
-          "text": "selected Pakistani sculpture/relief heritage and context"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "selected Pakistani sculpture/relief heritage and context",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 5",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Sculpture and Architectural Relief in Pakistan"
+        "sculpture and architectural relief in Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C05-S01",
+      "id": "X-ART-EN-C05-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "5",
       "chapter_name": "History of Sculpture and Architectural Relief in Pakistan",
-      "topic_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "topic_name": "sculpture and architectural relief in Pakistan",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying History of Sculpture and Architectural Relief in Pakistan.",
+      "question_text": "Name two important considerations when studying or practising History of Sculpture and Architectural Relief in Pakistan.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: selected Pakistani sculpture/relief heritage and context.",
+      "answer": "Any two well-explained considerations connected to form, relief, context, material and heritage, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 5",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Sculpture and Architectural Relief in Pakistan"
+        "sculpture and architectural relief in Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C05-L01",
+      "id": "X-ART-EN-C05-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "5",
       "chapter_name": "History of Sculpture and Architectural Relief in Pakistan",
-      "topic_name": "History of Sculpture and Architectural Relief in Pakistan",
+      "topic_name": "sculpture and architectural relief in Pakistan",
       "category": "long",
-      "question_text": "Explain the core ideas of History of Sculpture and Architectural Relief in Pakistan and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in History of Sculpture and Architectural Relief in Pakistan can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (selected Pakistani sculpture/relief heritage and context), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from form, relief, context, material and heritage, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 5",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Sculpture and Architectural Relief in Pakistan"
+        "sculpture and architectural relief in Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C06-M01",
+      "id": "X-ART-EN-C06-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "6",
       "chapter_name": "History of Pottery and Ceramics in Pakistan",
-      "topic_name": "History of Pottery and Ceramics in Pakistan",
+      "topic_name": "pottery and ceramics in Pakistan",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “History of Pottery and Ceramics in Pakistan”?",
+      "question_text": "Which approach best supports effective work in History of Pottery and Ceramics in Pakistan?",
       "options": [
         {
           "id": "A",
-          "text": "pottery/ceramic traditions, form and decorative practice"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "pottery/ceramic traditions, form and decorative practice",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 6",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Pottery and Ceramics in Pakistan"
+        "pottery and ceramics in Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C06-S01",
+      "id": "X-ART-EN-C06-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "6",
       "chapter_name": "History of Pottery and Ceramics in Pakistan",
-      "topic_name": "History of Pottery and Ceramics in Pakistan",
+      "topic_name": "pottery and ceramics in Pakistan",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying History of Pottery and Ceramics in Pakistan.",
+      "question_text": "Name two important considerations when studying or practising History of Pottery and Ceramics in Pakistan.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: pottery/ceramic traditions, form and decorative practice.",
+      "answer": "Any two well-explained considerations connected to clay form, surface, function, firing awareness and heritage, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 6",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Pottery and Ceramics in Pakistan"
+        "pottery and ceramics in Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C06-L01",
+      "id": "X-ART-EN-C06-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "6",
       "chapter_name": "History of Pottery and Ceramics in Pakistan",
-      "topic_name": "History of Pottery and Ceramics in Pakistan",
+      "topic_name": "pottery and ceramics in Pakistan",
       "category": "long",
-      "question_text": "Explain the core ideas of History of Pottery and Ceramics in Pakistan and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in History of Pottery and Ceramics in Pakistan can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (pottery/ceramic traditions, form and decorative practice), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from clay form, surface, function, firing awareness and heritage, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 6",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "History of Pottery and Ceramics in Pakistan"
+        "pottery and ceramics in Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C07-M01",
+      "id": "X-ART-EN-C07-M01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "7",
       "chapter_name": "Craft of Pakistan",
-      "topic_name": "Craft of Pakistan",
+      "topic_name": "craft of Pakistan",
       "category": "mcq",
-      "question_text": "Which description best matches the focus of “Craft of Pakistan”?",
+      "question_text": "Which approach best supports effective work in Craft of Pakistan?",
       "options": [
         {
           "id": "A",
-          "text": "regional craft traditions, materials, function and cultural value"
+          "text": "Use visual choices deliberately to support the intended idea"
         },
         {
           "id": "B",
-          "text": "Memorizing unrelated facts without understanding"
+          "text": "Ignore proportion, context and audience"
         },
         {
           "id": "C",
-          "text": "Focusing on an isolated detail unrelated to the chapter purpose"
+          "text": "Copy an existing work exactly"
         },
         {
           "id": "D",
-          "text": "Ignoring context, safety and practical judgment"
+          "text": "Treat every material and technique as identical"
         }
       ],
       "correct_option": "A",
-      "answer": "regional craft traditions, materials, function and cultural value",
+      "answer": "Use visual choices deliberately to support the intended idea",
       "marks": 1,
       "difficulty": "easy",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 7",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Craft of Pakistan"
+        "craft of Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C07-S01",
+      "id": "X-ART-EN-C07-S01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "7",
       "chapter_name": "Craft of Pakistan",
-      "topic_name": "Craft of Pakistan",
+      "topic_name": "craft of Pakistan",
       "category": "short",
-      "question_text": "State two principles or considerations that are important when studying Craft of Pakistan.",
+      "question_text": "Name two important considerations when studying or practising Craft of Pakistan.",
       "options": [],
       "correct_option": "",
-      "answer": "A strong answer should identify two accurate chapter-relevant principles and explain briefly why each matters. Focus: regional craft traditions, materials, function and cultural value.",
+      "answer": "Any two well-explained considerations connected to materials, regional traditions, function, design and cultural identity, with clear relevance to the chapter context.",
       "marks": 2,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 7",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Craft of Pakistan"
+        "craft of Pakistan"
       ]
     },
     {
-      "id": "ART10EM-C07-L01",
+      "id": "X-ART-EN-C07-L01",
       "class_level": "10th",
       "subject": "Art & Model Drawing",
       "medium": "english",
       "board": "Punjab Board",
       "chapter_no": "7",
       "chapter_name": "Craft of Pakistan",
-      "topic_name": "Craft of Pakistan",
+      "topic_name": "craft of Pakistan",
       "category": "long",
-      "question_text": "Explain the core ideas of Craft of Pakistan and show how they guide responsible practical or analytical decisions.",
+      "question_text": "Explain how visual decisions in Craft of Pakistan can combine skill, meaning and context.",
       "options": [],
       "correct_option": "",
-      "answer": "Cover the chapter focus (regional craft traditions, materials, function and cultural value), at least three relevant principles, one realistic application, and appropriate safety/ethical/sustainability considerations where applicable. Do not reproduce textbook passages.",
+      "answer": "A strong answer should discuss at least three relevant dimensions from materials, regional traditions, function, design and cultural identity, explain how they interact, and connect technique with purpose or context without copying a textbook passage or artwork.",
       "marks": 5,
       "difficulty": "medium",
       "priority": "conceptual",
       "source": "PECTAA pectaa-catalog-072 | d88ff4dd8f1e87791bf580dff1ccb3bb5af5d6360cf487e8ad8ca4a6d12e4bd7 | chapter 7",
       "tags": [
         "grade10",
+        "art-model-drawing",
+        "english",
         "elective",
-        "art & model drawing",
         "internal-provisional",
         "original-draft",
-        "Craft of Pakistan"
+        "craft of Pakistan"
       ]
     }
   ]
