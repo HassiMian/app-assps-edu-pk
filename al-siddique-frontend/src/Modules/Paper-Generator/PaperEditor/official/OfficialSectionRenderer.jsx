@@ -182,7 +182,7 @@ function NumberedList({ rows, content='', isUrdu, qFs, fs, shortLayout, themeCol
     const rowCount = Math.max(left.length, right.length)
     const cell = row => row ? <>
       <td style={{ width:44, border:`1px solid ${themeColor}55`, padding:5, textAlign:'center', fontWeight:800, whiteSpace:'nowrap' }}><ItemSerial serial={row.serial} isUrdu={isUrdu} color={themeColor}/></td>
-      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', minWidth:0 }}>{rowText(row)}</td>
+      <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px`, textAlign:isUrdu?'right':'left', minWidth:0, overflowWrap:'anywhere', wordBreak:'break-word' }}>{rowText(row)}</td>
     </> : <>
       <td style={{ width:44, border:`1px solid ${themeColor}55`, padding:5 }} />
       <td style={{ border:`1px solid ${themeColor}55`, padding:`${5*fs}px ${7*fs}px` }} />

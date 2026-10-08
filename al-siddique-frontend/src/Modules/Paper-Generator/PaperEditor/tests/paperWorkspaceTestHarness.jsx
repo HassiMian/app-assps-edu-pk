@@ -112,6 +112,20 @@ const rtlOddOverflowPaper = {
  }],
 }
 
+// Synthetic bilingual-print adversarial fixture; independent of official papers.
+const bilingualTableOverflowPaper = {
+ id:'synthetic-bilingual-short-table-print-20261008',name:'Bilingual Two Column Table Print Fixture',
+ documentFormat:'pts-native-v13',printReadiness:'READY',
+ editorSettings:{shortLayout:'table-2-column'},
+ config:{className:'6',classLevel:'6',subjectName:'Social Studies',subject:'Social Studies',language:'urdu',
+  paperCode:'BILINGUAL-TABLE-PRINT',timeAllowed:'60 Minutes',examDate:'2026-10-08',totalMarks:9,title:'Synthetic Bilingual Print'},
+ official_section:[{
+  id:'bilingual-table-short',type:'official_section',sourceOrder:1,layoutPreset:'short',medium:'urdu',
+  heading:'سوال نمبر 1: مختصر سوالات کے جواب دیں۔ (9)',marks:9,
+  content:Array.from({length:9},(_,i)=>`${i+1}. ${i===0?'LONGMATHSOURCETOKEN'.repeat(34):i===1?'ب'.repeat(200):'پاکستان میں موسم کے متعلق ایک مختصر جواب لکھیں۔ English climate observations '+String(i+1)} [BILINGUAL-TABLE-${String(i+1).padStart(2,'0')}]`).join('\n'),
+ }],
+}
+
 const nestedScoringPaper = {
  clientDraftId:'nested-scoring-browser-paper',
  name:'Nested Scoring Browser Paper',
@@ -196,7 +210,7 @@ function ThemeFixture() {
  const reopenPaper = savedPapers.find(p => p.userAuthored && (reopenId ? String(p.id)===reopenId : p.name===reopenName)) || null
  const officialId = params.get('officialId') || ''
  const officialPaper = officialId ? officialV13.papers.find(item => item.id === officialId) || null : null
- const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
+ const fixture = params.has('new') ? null : params.has('reopen') ? reopenPaper : params.has('bilingualTableOverflow') ? bilingualTableOverflowPaper : params.has('rtlOddOverflow') ? rtlOddOverflowPaper : params.has('nestedScoring') ? nestedScoringPaper : params.has('mathAssets') ? mathAssetsPaper : officialPaper || (params.has('recovery8') ? classEightUrduFixture : paper)
  React.useEffect(() => { setTheme('light') }, [setTheme])
  return <>
   <button hidden id="fixture-global-theme-toggle" data-current-theme={theme} onClick={toggleTheme}>Portal theme toggle</button>
