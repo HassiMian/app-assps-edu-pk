@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "assps-urdu9-literature-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-003",
+  "sourcePdfSha256": "426ec0e75e3952e0a5a0372f2021ada9ca9ce477f0aabf870cedd27eaf61705e",
+  "sourceByteLength": 10242198,
+  "pageCount": 144,
+  "identity": [
+    "Urdu 9",
+    "Punjab Board current syllabus 2025-26",
+    "PECTAA/PCTB"
+  ],
+  "chapterMapState": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialPdf": "hash/bytes/page-count verified from official-linked asset",
+    "currentSyllabusCrossChecks": [
+      "https://www.punjabboardnotes.com/books/9/urdu",
+      "https://www.ilmkidunya.com/9th-class/notes/urdu-punjab-board"
+    ],
+    "exactChapterPageBoundariesPending": true
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "حمد",
+      "genre": "حمد",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "title": "نعت",
+      "genre": "نعت",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "title": "اخلاق حسنہ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "title": "اپنی مدد آپ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "title": "کلیم اور مرزا ظاہر دار بیگ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "title": "نام دیو مالی",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "title": "آرام و سکون",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "title": "کتبہ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "title": "ابتدائی حساب",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 10,
+      "title": "لڑی میں پروئے ہوئے منظر",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 11,
+      "title": "بھیڑیا",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 12,
+      "title": "محنت کی برکات",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 13,
+      "title": "جاوید کے نام",
+      "genre": "نظم",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 14,
+      "title": "پیام لطیف",
+      "genre": "نظم",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 15,
+      "title": "کرکٹ اور مشاعرہ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 16,
+      "title": "فقیرانہ آئے صدا کر چلے",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 17,
+      "title": "سن تو سہی جہاں میں ہے تیرا افسانہ کیا",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 18,
+      "title": "غم ہے یا خوشی ہے تو",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 19,
+      "title": "کاش طوفاں میں سفینے کو اتارا ہوتا",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPoetryLines": false,
+    "copyExerciseStems": false,
+    "copySolvedNotes": false,
+    "copyPastPaperStems": false,
+    "exactLessonPageBoundariesPending": true,
+    "mode": "RUBRIC_BASED_ANALYTICAL_NO_UNVERIFIED_FACT_ASSERTIONS"
+  }
+}

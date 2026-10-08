@@ -1,0 +1,4038 @@
+{
+  "schemaVersion": "assps-urdu10-literature-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_RUBRIC_BASED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-015",
+  "sourcePdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+  "scope": "CURRENT_CHAPTER_SEQUENCE_ALIGNED_RUBRIC_BASED_LITERATURE_STARTER",
+  "drafts": [
+    {
+      "id": "X-URDU-LIT-C01-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C01-CH",
+        "number": 1
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حمد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”حمد“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”حمد“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C01-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C01-CH",
+        "number": 1
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حمد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”حمد“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C01-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C01-CH",
+        "number": 1
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "حمد"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”حمد“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C02-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C02-CH",
+        "number": 2
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نعت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”نعت“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”نعت“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C02-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C02-CH",
+        "number": 2
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نعت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”نعت“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C02-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C02-CH",
+        "number": 2
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نعت"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”نعت“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C03-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C03-CH",
+        "number": 3
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”اخلاق نبوی ﷺ“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”اخلاق نبوی ﷺ“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C03-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C03-CH",
+        "number": 3
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”اخلاق نبوی ﷺ“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C03-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C03-CH",
+        "number": 3
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اخلاق نبوی ﷺ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”اخلاق نبوی ﷺ“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C04-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C04-CH",
+        "number": 4
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سرسید کا بچپن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”سرسید کا بچپن“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”سرسید کا بچپن“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C04-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C04-CH",
+        "number": 4
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سرسید کا بچپن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”سرسید کا بچپن“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C04-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C04-CH",
+        "number": 4
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سرسید کا بچپن"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”سرسید کا بچپن“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C05-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C05-CH",
+        "number": 5
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "محسن محلہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”محسن محلہ“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”محسن محلہ“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C05-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C05-CH",
+        "number": 5
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "محسن محلہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”محسن محلہ“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C05-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C05-CH",
+        "number": 5
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "محسن محلہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”محسن محلہ“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C06-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C06-CH",
+        "number": 6
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کفارہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”کفارہ“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”کفارہ“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C06-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C06-CH",
+        "number": 6
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کفارہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”کفارہ“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C06-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C06-CH",
+        "number": 6
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کفارہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”کفارہ“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C07-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C07-CH",
+        "number": 7
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سویرے جو کل آنکھ میری کھلی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”سویرے جو کل آنکھ میری کھلی“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”سویرے جو کل آنکھ میری کھلی“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C07-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C07-CH",
+        "number": 7
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سویرے جو کل آنکھ میری کھلی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”سویرے جو کل آنکھ میری کھلی“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C07-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C07-CH",
+        "number": 7
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "سویرے جو کل آنکھ میری کھلی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”سویرے جو کل آنکھ میری کھلی“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C08-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C08-CH",
+        "number": 8
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "دوستی کا پھل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”دوستی کا پھل“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”دوستی کا پھل“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C08-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C08-CH",
+        "number": 8
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "دوستی کا پھل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”دوستی کا پھل“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C08-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C08-CH",
+        "number": 8
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "دوستی کا پھل"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”دوستی کا پھل“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C09-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C09-CH",
+        "number": 9
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "میرا گاؤں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”میرا گاؤں“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”میرا گاؤں“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C09-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C09-CH",
+        "number": 9
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "میرا گاؤں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”میرا گاؤں“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C09-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C09-CH",
+        "number": 9
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "میرا گاؤں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”میرا گاؤں“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C10-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C10-CH",
+        "number": 10
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بابل کے کھنڈر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”بابل کے کھنڈر“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”بابل کے کھنڈر“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C10-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C10-CH",
+        "number": 10
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بابل کے کھنڈر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”بابل کے کھنڈر“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C10-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C10-CH",
+        "number": 10
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بابل کے کھنڈر"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”بابل کے کھنڈر“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C11-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C11-CH",
+        "number": 11
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اولڈ ایج ہوم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”اولڈ ایج ہوم“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”اولڈ ایج ہوم“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C11-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C11-CH",
+        "number": 11
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اولڈ ایج ہوم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”اولڈ ایج ہوم“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C11-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C11-CH",
+        "number": 11
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اولڈ ایج ہوم"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”اولڈ ایج ہوم“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C12-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C12-CH",
+        "number": 12
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کچھ ذریعۂ تعلیم کے بارے میں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”کچھ ذریعۂ تعلیم کے بارے میں“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں سبق ”کچھ ذریعۂ تعلیم کے بارے میں“ کے بنیادی خیال یا مسئلے کو مختصر، درست اور مربوط انداز میں بیان کیا جائے، اور غیر ضروری جزئیات سے گریز ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C12-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C12-CH",
+        "number": 12
+      },
+      "topicId": "اسلوب و ساخت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کچھ ذریعۂ تعلیم کے بارے میں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”کچھ ذریعۂ تعلیم کے بارے میں“ میں مصنف کے اسلوب، کردار، واقعے یا دلیل میں سے کسی دو نمایاں پہلوؤں کی وضاحت کریں۔",
+          "answer": "طالب علم سبق کی نوعیت کے مطابق دو موزوں پہلو منتخب کرے اور ہر نکتے کو متن کے مجموعی مفہوم سے جوڑ کر واضح کرے؛ ایسا کوئی واقعہ یا قول نہ گھڑا جائے جو متن میں موجود نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C12-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C12-CH",
+        "number": 12
+      },
+      "topicId": "تنقیدی مطالعہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "کچھ ذریعۂ تعلیم کے بارے میں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "سبق ”کچھ ذریعۂ تعلیم کے بارے میں“ کا تنقیدی جائزہ لکھیں: مرکزی خیال، اہم ادبی/فکری پہلو اور آج کی زندگی سے اس کی مناسبت بیان کریں۔",
+          "answer": "جواب میں مرکزی خیال، کم از کم دو متن-مبنی ادبی/فکری پہلو، اور موجودہ زندگی یا معاشرت سے معقول ربط شامل ہو۔ درست متن فہمی کو ترجیح دی جائے اور عبارت لفظ بہ لفظ نقل نہ کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C13-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C13-CH",
+        "number": 13
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آدمی نامہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”آدمی نامہ“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”آدمی نامہ“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C13-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C13-CH",
+        "number": 13
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آدمی نامہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”آدمی نامہ“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C13-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C13-CH",
+        "number": 13
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آدمی نامہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”آدمی نامہ“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C14-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C14-CH",
+        "number": 14
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نمود صبح"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”نمود صبح“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”نمود صبح“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C14-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C14-CH",
+        "number": 14
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نمود صبح"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”نمود صبح“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C14-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C14-CH",
+        "number": 14
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نمود صبح"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”نمود صبح“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C15-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C15-CH",
+        "number": 15
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خطاب بہ جوانان اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”خطاب بہ جوانان اسلام“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”خطاب بہ جوانان اسلام“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C15-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C15-CH",
+        "number": 15
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خطاب بہ جوانان اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”خطاب بہ جوانان اسلام“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C15-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C15-CH",
+        "number": 15
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "خطاب بہ جوانان اسلام"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”خطاب بہ جوانان اسلام“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C16-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C16-CH",
+        "number": 16
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وغیرہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”وغیرہ“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”وغیرہ“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C16-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C16-CH",
+        "number": 16
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وغیرہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”وغیرہ“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C16-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C16-CH",
+        "number": 16
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وغیرہ"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”وغیرہ“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C17-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C17-CH",
+        "number": 17
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بازیچہ اطفال ہے دنیا میرے آگے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”بازیچہ اطفال ہے دنیا میرے آگے“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”بازیچہ اطفال ہے دنیا میرے آگے“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C17-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C17-CH",
+        "number": 17
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بازیچہ اطفال ہے دنیا میرے آگے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”بازیچہ اطفال ہے دنیا میرے آگے“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C17-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C17-CH",
+        "number": 17
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "بازیچہ اطفال ہے دنیا میرے آگے"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”بازیچہ اطفال ہے دنیا میرے آگے“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C18-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C18-CH",
+        "number": 18
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اثر اس کو ذرا نہیں ہوتا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”اثر اس کو ذرا نہیں ہوتا“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”اثر اس کو ذرا نہیں ہوتا“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C18-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C18-CH",
+        "number": 18
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اثر اس کو ذرا نہیں ہوتا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”اثر اس کو ذرا نہیں ہوتا“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C18-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C18-CH",
+        "number": 18
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "اثر اس کو ذرا نہیں ہوتا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”اثر اس کو ذرا نہیں ہوتا“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C19-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C19-CH",
+        "number": 19
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہے مشق سخن جاری چکی کی مشقت بھی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”ہے مشق سخن جاری چکی کی مشقت بھی“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”ہے مشق سخن جاری چکی کی مشقت بھی“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C19-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C19-CH",
+        "number": 19
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہے مشق سخن جاری چکی کی مشقت بھی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”ہے مشق سخن جاری چکی کی مشقت بھی“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C19-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C19-CH",
+        "number": 19
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "ہے مشق سخن جاری چکی کی مشقت بھی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”ہے مشق سخن جاری چکی کی مشقت بھی“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C20-I01",
+      "chapter": {
+        "id": "X-URDU-LIT-C20-CH",
+        "number": 20
+      },
+      "topicId": "مرکزی خیال",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "یوں کہنے کو پیرایۂ اظہار بہت ہیں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "باب/کلام ”یوں کہنے کو پیرایۂ اظہار بہت ہیں“ کا مرکزی خیال اپنے الفاظ میں بیان کریں۔",
+          "answer": "جواب میں ”یوں کہنے کو پیرایۂ اظہار بہت ہیں“ کے بنیادی پیغام کو مختصر، مربوط اور متن سے ہم آہنگ انداز میں بیان کیا جائے؛ غیر متعلق تفصیل یا یاد کی ہوئی عبارت کے بجائے مفہوم واضح ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C20-I02",
+      "chapter": {
+        "id": "X-URDU-LIT-C20-CH",
+        "number": 20
+      },
+      "topicId": "ادبی اظہار",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "یوں کہنے کو پیرایۂ اظہار بہت ہیں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”یوں کہنے کو پیرایۂ اظہار بہت ہیں“ میں شاعر کے طرزِ اظہار یا ادبی کیفیت کی دو نمایاں خصوصیات بیان کریں، اشعار نقل کیے بغیر۔",
+          "answer": "دو مناسب ادبی خصوصیات بیان کی جائیں، مثلاً زبان، لہجہ، جذبہ، منظر نگاری، علامت، تشبیہ یا فکری ربط؛ ہر نکتے کو کلام کے مجموعی مفہوم سے جوڑا جائے اور کوئی شعر لفظ بہ لفظ نقل نہ کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-URDU-LIT-C20-I03",
+      "chapter": {
+        "id": "X-URDU-LIT-C20-CH",
+        "number": 20
+      },
+      "topicId": "موضوعی تجزیہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-015",
+        "pdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "یوں کہنے کو پیرایۂ اظہار بہت ہیں"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "urdu",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-10-URDU-2026-27",
+        "syllabusVersion": "2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original rubric-based analytical Urdu literature item. Chapter sequence verified; exact lesson-page/content-fact verification remains pending, so no copied or invented factual answer is asserted."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "Rubric-based analytical literature item; no unverified factual claim asserted.",
+      "content": {
+        "ur": {
+          "stem": "”یوں کہنے کو پیرایۂ اظہار بہت ہیں“ کے موضوع، جذبے اور فکری پیغام کا تجزیہ کریں اور بتائیں کہ یہ قاری کی عملی یا اخلاقی سوچ سے کیسے جڑتا ہے۔",
+          "answer": "جواب میں موضوع/مرکزی خیال، غالب جذبہ یا لہجہ، کم از کم دو ادبی یا فکری پہلو، اور عملی/اخلاقی ربط واضح کیا جائے۔ متن یا اشعار کی طویل نقل ضروری نہیں۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 60,
+    "short": 40,
+    "long": 20,
+    "chapters": 20
+  }
+}

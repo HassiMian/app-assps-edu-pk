@@ -1,0 +1,155 @@
+{
+  "schemaVersion": "assps-urdu10-literature-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-015",
+  "sourcePdfSha256": "9889e3bbf04e83de3a7cbc1d9fb9e7ca1287fdba45dbd2adac1c2241fe81da16",
+  "sourceByteLength": 86277897,
+  "pageCount": 164,
+  "identity": [
+    "Urdu 10",
+    "Punjab Board current syllabus 2026-27",
+    "PECTAA/PCTB"
+  ],
+  "chapterMapState": "CURRENT_CHAPTER_SEQUENCE_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
+  "chapterEvidence": {
+    "officialPdf": "hash/bytes/page-count verified from official-linked asset",
+    "currentSyllabusCrossChecks": [
+      "https://www.punjabboardnotes.com/books/10/urdu",
+      "https://studyplusplus.com/punjab-board/books/10/urdu"
+    ],
+    "exactChapterPageBoundariesPending": true
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "حمد",
+      "genre": "حمد",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "title": "نعت",
+      "genre": "نعت",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "title": "اخلاق نبوی ﷺ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "title": "سرسید کا بچپن",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "title": "محسن محلہ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "title": "کفارہ",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "title": "سویرے جو کل آنکھ میری کھلی",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "title": "دوستی کا پھل",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "title": "میرا گاؤں",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 10,
+      "title": "بابل کے کھنڈر",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 11,
+      "title": "اولڈ ایج ہوم",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 12,
+      "title": "کچھ ذریعۂ تعلیم کے بارے میں",
+      "genre": "نثر",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 13,
+      "title": "آدمی نامہ",
+      "genre": "نظم",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 14,
+      "title": "نمود صبح",
+      "genre": "نظم",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 15,
+      "title": "خطاب بہ جوانان اسلام",
+      "genre": "نظم",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 16,
+      "title": "وغیرہ",
+      "genre": "نظم",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 17,
+      "title": "بازیچہ اطفال ہے دنیا میرے آگے",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 18,
+      "title": "اثر اس کو ذرا نہیں ہوتا",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 19,
+      "title": "ہے مشق سخن جاری چکی کی مشقت بھی",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 20,
+      "title": "یوں کہنے کو پیرایۂ اظہار بہت ہیں",
+      "genre": "غزل",
+      "status": "CURRENT_CHAPTER_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyPoetryLines": false,
+    "copyExerciseStems": false,
+    "copySolvedNotes": false,
+    "copyPastPaperStems": false,
+    "exactLessonPageBoundariesPending": true,
+    "mode": "RUBRIC_BASED_ANALYTICAL_NO_UNVERIFIED_FACT_ASSERTIONS"
+  }
+}
