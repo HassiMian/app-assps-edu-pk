@@ -27,15 +27,15 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
     // the still-live frontend. It must preserve the canonical base and prove
     // ancestry AND exact remote branch identity. No heuristic SHA allowance.
     const verifiedBackendForward = name === 'BACKEND' &&
-      ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety'].includes(meta.component) &&
+      ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety','backend-jarvis-admission-atomicity'].includes(meta.component) &&
       /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
       /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
-      backendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta)
+      backendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta, frontendMeta?.commit)
     const verifiedFrontendForward = name === 'FRONTEND' &&
       meta.component === 'frontend-paper-studio-ux-hardening' &&
       /^[0-9a-f]{40}$/i.test(String(meta.sourceBaseLiveCommit || '')) &&
       /^[0-9a-f]{40}$/i.test(String(meta.previousRelease?.commit || '')) &&
-      frontendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta, backendMeta?.commit)
+      frontendForwardVerifier(canonicalCommit, meta.commit, meta.branch, meta, backendMeta?.component === 'backend-jarvis-admission-atomicity' ? backendMeta.previousRelease?.commit : backendMeta?.commit)
     if (meta.commit !== canonicalCommit && !verifiedBackendForward && !verifiedFrontendForward)
       findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
     if (meta.branch !== canonicalBranch && !verifiedBackendForward && !verifiedFrontendForward)
@@ -87,8 +87,8 @@ function gitAncestor(ancestor, descendant) {
   } catch (_) { return false }
 }
 
-function verifyBackendForward(base, head, branch, meta = {}) {
-  if (![base,head,meta.sourceBaseLiveCommit,meta.previousRelease?.commit]
+function verifyBackendForward(base, head, branch, meta = {}, frontendHead = base) {
+  if (![base,head,frontendHead,meta.sourceBaseLiveCommit,meta.previousRelease?.commit]
     .every(value => /^[0-9a-f]{40}$/i.test(String(value || '')))) return false
   // Only specifically identified, traceable backend-only release branches.
   if (!/^(fix|release)\/[a-z0-9][a-z0-9._/-]{4,120}$/i.test(String(branch || ''))) return false
@@ -102,13 +102,29 @@ function verifyBackendForward(base, head, branch, meta = {}) {
     if (remote !== head) return false
     // Never certify an unchanged frontend on a backend commit that modifies its
     // shipped source. Isolated browser-test files are the only exception.
-    const changed = execFileSync('git',['-C',repoRoot,'diff','--name-only',base,head,'--',
+    const changed = execFileSync('git',['-C',repoRoot,'diff','--name-only',meta.component === 'backend-jarvis-admission-atomicity' ? frontendHead : base,head,'--',
       'al-siddique-frontend/'],{encoding:'utf8',timeout:12000}).split('\n').filter(Boolean)
     const isFixture = file => (
       file.startsWith('al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/') ||
       /^al-siddique-frontend\/[a-z0-9._-]+-test\.html$/i.test(file)
     )
     if (!changed.every(isFixture)) return false
+    if (meta.component === 'backend-jarvis-admission-atomicity') {
+      if (branch !== 'fix/jarvis-admission-atomicity-forward-20261008') return false
+      // The Phase 3 frontend is already deployed: backend-only source must
+      // descend from it, without shipping any newer or changed UI source.
+      if (meta.sourceBaseLiveCommit !== frontendHead ||
+          !gitAncestor(meta.previousRelease.commit, frontendHead) ||
+          !gitAncestor(frontendHead, head) || changed.length) return false
+      const paths = execFileSync('git',['-C',repoRoot,'diff','--name-only',frontendHead,head,'--','al-siddique-backend/src/'],
+        {encoding:'utf8',timeout:12000}).trim().split('\n').filter(Boolean)
+      const permitted = new Set([
+        'al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js',
+        'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+        'al-siddique-backend/src/tests/jarvis-student-admission-atomicity.test.js',
+      ])
+      if (!paths.length || !paths.every(file => permitted.has(file))) return false
+    }
     if (meta.component === 'backend-question-bank-seed-intake-safety') {
       if (branch !== 'fix/paper-grade910-qbank-safe-intake-20261008') return false
       const paths = execFileSync('git',['-C',repoRoot,'diff','--name-only',base,head],
@@ -174,13 +190,18 @@ function main() {
   const frontendMeta = readJson(process.env.ASSPS_FRONTEND_RELEASE_META || '/var/www/apex-os/release-meta.json')
   const backendMeta = readJson(process.env.ASSPS_BACKEND_RELEASE_META || '/var/www/apex-backend/release-meta.json')
   const pm2Env = pm2Environment()
-  const isBackendOnlyForward = ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety'].includes(backendMeta?.component)
+  const isBackendOnlyForward = ['backend-paper-studio-rls-hardening','backend-question-bank-seed-intake-safety','backend-jarvis-admission-atomicity'].includes(backendMeta?.component)
   const isFrontendOnlyForward = frontendMeta?.component === 'frontend-paper-studio-ux-hardening'
   const canonicalCommit = remoteCanonicalCommit
   const extraFindings = []
-  if (isBackendOnlyForward && isFrontendOnlyForward &&
-      frontendMeta?.sourceBaseLiveCommit !== backendMeta?.commit)
-    extraFindings.push('CROSS_COMPONENT_ANCESTRY_MISMATCH')
+  if (isBackendOnlyForward && isFrontendOnlyForward) {
+    const frontendBuiltOnBackend = frontendMeta?.sourceBaseLiveCommit === backendMeta?.commit
+    const backendBuiltOnFrontend = backendMeta?.component === 'backend-jarvis-admission-atomicity' &&
+      backendMeta?.sourceBaseLiveCommit === frontendMeta?.commit &&
+      backendMeta?.previousRelease?.commit === frontendMeta?.sourceBaseLiveCommit
+    if (!frontendBuiltOnBackend && !backendBuiltOnFrontend)
+      extraFindings.push('CROSS_COMPONENT_ANCESTRY_MISMATCH')
+  }
   if (isBackendOnlyForward) {
     try {
       const backendChanges = remoteBackendChanges(canonicalCommit, remoteCanonicalCommit)

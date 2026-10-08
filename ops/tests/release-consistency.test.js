@@ -181,3 +181,22 @@ test('sequential frontend-only promotions retain their previous live release ide
   assert.equal(rejected.safe,false)
   assert.ok(rejected.findings.some(item=>item.startsWith('FRONTEND_COMMIT_DRIFT:')))
 })
+
+test('backend JARVIS atomicity release follows the already deployed Phase 3 frontend', () => {
+  const backendOld='b'.repeat(40)
+  const frontendHead='c'.repeat(40)
+  const backendHead='d'.repeat(40)
+  const frontend={...meta,commit:frontendHead,branch:'feat/paper-phase3-teacher-delivery-20261008',component:'frontend-paper-studio-ux-hardening',sourceBaseLiveCommit:backendOld,previousRelease:{commit:backendOld}}
+  const backend={...meta,commit:backendHead,branch:'fix/jarvis-admission-atomicity-forward-20261008',component:'backend-jarvis-admission-atomicity',sourceBaseLiveCommit:frontendHead,previousRelease:{commit:backendOld}}
+  const valid=evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:frontend,backendMeta:backend,pm2Env:env,
+    frontendForwardVerifier:(base,head,branch,details,sourceBackend)=>base===commit&&head===frontendHead&&details.sourceBaseLiveCommit===sourceBackend&&sourceBackend===backendOld,
+    backendForwardVerifier:(base,head,branch,details,sourceFrontend)=>base===commit&&head===backendHead&&details.sourceBaseLiveCommit===sourceFrontend&&sourceFrontend===frontendHead,
+  })
+  assert.equal(valid.safe,true,valid.findings.join(','))
+  const bad=evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:frontend,backendMeta:{...backend,sourceBaseLiveCommit:backendOld},pm2Env:env,
+    frontendForwardVerifier:()=>true,
+    backendForwardVerifier:(_base,_head,_branch,details,sourceFrontend)=>details.sourceBaseLiveCommit===sourceFrontend,
+  })
+  assert.equal(bad.safe,false)
+  assert.ok(bad.findings.some(v=>v.startsWith('BACKEND_COMMIT_DRIFT:')))
+})
