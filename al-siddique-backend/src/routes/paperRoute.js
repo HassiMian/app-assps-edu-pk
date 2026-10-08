@@ -275,8 +275,9 @@ router.get('/vault', protect, requireRoles('super_admin', 'admin', 'principal', 
       papers: result.rows.map(serializeVaultPaper),
     })
   } catch (err) {
-    console.error('Paper vault list error:', err.message)
-    return res.status(500).json({ success: false, message: 'Saved papers could not be loaded.' })
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault list error:', err.message)
+    return res.status(status).json({ success: false, code: err.code || undefined, message: 'Saved papers could not be loaded.' })
   }
 })
 
@@ -401,8 +402,9 @@ router.delete('/vault/:id', protect, requireRoles('super_admin', 'admin', 'princ
     return res.json({ success: true })
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
-    console.error('Paper vault delete error:', err.message)
-    return res.status(500).json({ success: false, message: 'Paper could not be deleted.' })
+    const status = Number(err.status) || 500
+    if (status >= 500) console.error('Paper vault delete error:', err.message)
+    return res.status(status).json({ success: false, code: err.code || undefined, message: 'Paper could not be deleted.' })
   } finally {
     client.release()
   }
