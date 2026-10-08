@@ -42,6 +42,8 @@ function buildReviewQueue(documents,manifest,mcqAudit={}){
    if(topic===null||String(topic).trim()==='')blockers.push('TOPIC_MAPPING_UNRESOLVED')
    if(String(q.type).toLowerCase()==='mcq'&&flaggedFiles.has(file))blockers.push('SOURCE_FILE_MCQ_KEY_PATTERN_EDITORIAL_REVIEW')
    if(q.content?.en&&q.content?.ur)blockers.push('BILINGUAL_EQUIVALENCE_INDEPENDENT_CHECK_MISSING')
+   if(q.content?.en&&q.content?.ur && (!String(q.content.ur.stem||'').trim()||!String(q.content.ur.answer||'').trim()))
+     blockers.push('URDU_DUAL_CONTENT_COMPLETION_REQUIRED')
    records.push({
     questionId:id,sourceFile:file,questionContentSha256:SHA(JSON.stringify(q)),
     grade,subjectId:subject,medium,chapter,topicId:topic,type:q.type,
