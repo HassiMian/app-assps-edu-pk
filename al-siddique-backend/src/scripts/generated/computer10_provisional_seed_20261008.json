@@ -1,0 +1,1398 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-COMP-U01-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Operating Systems: Structure and Services",
+      "topic_name": "operating system",
+      "category": "mcq",
+      "question_text": "An operating system mainly acts as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "An interface and resource manager between users, software and hardware"
+        },
+        {
+          "id": "B",
+          "text": "A spreadsheet file"
+        },
+        {
+          "id": "C",
+          "text": "A network cable"
+        },
+        {
+          "id": "D",
+          "text": "A printer driver only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "An interface and resource manager between users, software and hardware",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 1",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "operating system"
+      ]
+    },
+    {
+      "id": "X-COMP-U01-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Operating Systems: Structure and Services",
+      "topic_name": "process scheduling",
+      "category": "mcq",
+      "question_text": "FCFS scheduling serves processes primarily in order of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Arrival"
+        },
+        {
+          "id": "B",
+          "text": "Shortest name"
+        },
+        {
+          "id": "C",
+          "text": "Largest file size"
+        },
+        {
+          "id": "D",
+          "text": "Highest screen resolution"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Arrival",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 1",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "process scheduling"
+      ]
+    },
+    {
+      "id": "X-COMP-U01-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Operating Systems: Structure and Services",
+      "topic_name": "kernel and shell",
+      "category": "short",
+      "question_text": "Differentiate the kernel and the shell.",
+      "options": [],
+      "correct_option": "",
+      "answer": "The kernel is the core OS component that manages hardware/resources; the shell provides a user or command interface that requests OS services.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 1",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "kernel and shell"
+      ]
+    },
+    {
+      "id": "X-COMP-U01-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Operating Systems: Structure and Services",
+      "topic_name": "process and thread",
+      "category": "short",
+      "question_text": "Differentiate a process and a thread.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A process is an executing program with its own resources; a thread is a smaller execution path within a process and typically shares process resources with other threads.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 1",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "process and thread"
+      ]
+    },
+    {
+      "id": "X-COMP-U01-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Operating Systems: Structure and Services",
+      "topic_name": "os services",
+      "category": "long",
+      "question_text": "Explain how process management, memory management, file systems, system calls and device drivers cooperate in an operating system.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for each named service and one coherent explanation of how they support safe execution and user requests.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 1",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "os services"
+      ]
+    },
+    {
+      "id": "X-COMP-U02-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "System Recovery and Advanced Maintenance",
+      "topic_name": "recovery",
+      "category": "mcq",
+      "question_text": "Which is a sensible first step before a major recovery operation?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Back up important data where possible"
+        },
+        {
+          "id": "B",
+          "text": "Delete all user files"
+        },
+        {
+          "id": "C",
+          "text": "Disable every safety control"
+        },
+        {
+          "id": "D",
+          "text": "Format every drive immediately"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Back up important data where possible",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 2",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "recovery"
+      ]
+    },
+    {
+      "id": "X-COMP-U02-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "System Recovery and Advanced Maintenance",
+      "topic_name": "maintenance",
+      "category": "mcq",
+      "question_text": "Preventive maintenance aims to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Reduce avoidable failures and keep systems reliable"
+        },
+        {
+          "id": "B",
+          "text": "Create faults deliberately"
+        },
+        {
+          "id": "C",
+          "text": "Remove all software"
+        },
+        {
+          "id": "D",
+          "text": "Ignore updates forever"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Reduce avoidable failures and keep systems reliable",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 2",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "maintenance"
+      ]
+    },
+    {
+      "id": "X-COMP-U02-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "System Recovery and Advanced Maintenance",
+      "topic_name": "system restore",
+      "category": "short",
+      "question_text": "What is the purpose of a restore point or recovery snapshot?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It provides a known system state that can help reverse certain configuration/software changes without rebuilding everything from scratch.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 2",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "system restore"
+      ]
+    },
+    {
+      "id": "X-COMP-U02-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "System Recovery and Advanced Maintenance",
+      "topic_name": "diagnostics",
+      "category": "short",
+      "question_text": "Why should hardware and software causes be isolated separately during troubleshooting?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Separating possible causes makes diagnosis more reliable and avoids unnecessary changes or replacements.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 2",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "diagnostics"
+      ]
+    },
+    {
+      "id": "X-COMP-U02-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "System Recovery and Advanced Maintenance",
+      "topic_name": "safe recovery",
+      "category": "long",
+      "question_text": "Describe a safe recovery workflow for an unstable school computer while protecting student data.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for documenting symptoms, backing up data, using non-destructive diagnostics, applying least-invasive repair/recovery steps, and verifying/recording the result.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 2",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "safe recovery"
+      ]
+    },
+    {
+      "id": "X-COMP-U03-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Introduction to Python Programming",
+      "topic_name": "python variables",
+      "category": "mcq",
+      "question_text": "A variable in Python is used to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Refer to a value in a program"
+        },
+        {
+          "id": "B",
+          "text": "Physically cool a CPU"
+        },
+        {
+          "id": "C",
+          "text": "Route network packets"
+        },
+        {
+          "id": "D",
+          "text": "Format a hard disk automatically"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Refer to a value in a program",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 3",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "python variables"
+      ]
+    },
+    {
+      "id": "X-COMP-U03-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Introduction to Python Programming",
+      "topic_name": "python output",
+      "category": "mcq",
+      "question_text": "Which built-in function displays output in basic Python?",
+      "options": [
+        {
+          "id": "A",
+          "text": "print()"
+        },
+        {
+          "id": "B",
+          "text": "inputfile()"
+        },
+        {
+          "id": "C",
+          "text": "route()"
+        },
+        {
+          "id": "D",
+          "text": "compilebook()"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "print()",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 3",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "python output"
+      ]
+    },
+    {
+      "id": "X-COMP-U03-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Introduction to Python Programming",
+      "topic_name": "data types",
+      "category": "short",
+      "question_text": "Name three common Python data types.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include int, float, str and bool; any three appropriate basic types.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 3",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "data types"
+      ]
+    },
+    {
+      "id": "X-COMP-U03-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Introduction to Python Programming",
+      "topic_name": "input",
+      "category": "short",
+      "question_text": "What is the purpose of input() in Python?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It reads user input as text so the program can store or process the entered value, often after conversion to another type when needed.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 3",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "input"
+      ]
+    },
+    {
+      "id": "X-COMP-U03-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Introduction to Python Programming",
+      "topic_name": "python fundamentals",
+      "category": "long",
+      "question_text": "Explain variables, expressions, input, output and basic data types using a simple original example.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for correct definitions, data flow from input to variable/expression, type awareness, output, and a valid original example.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 3",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "python fundamentals"
+      ]
+    },
+    {
+      "id": "X-COMP-U04-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Control Structures in Python",
+      "topic_name": "selection",
+      "category": "mcq",
+      "question_text": "Which Python structure is used for conditional selection?",
+      "options": [
+        {
+          "id": "A",
+          "text": "if/elif/else"
+        },
+        {
+          "id": "B",
+          "text": "import only"
+        },
+        {
+          "id": "C",
+          "text": "comment only"
+        },
+        {
+          "id": "D",
+          "text": "file name only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "if/elif/else",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 4",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "selection"
+      ]
+    },
+    {
+      "id": "X-COMP-U04-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Control Structures in Python",
+      "topic_name": "loops",
+      "category": "mcq",
+      "question_text": "A loop is useful when a program needs to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Repeat an action under defined conditions"
+        },
+        {
+          "id": "B",
+          "text": "Change hardware voltage"
+        },
+        {
+          "id": "C",
+          "text": "Draw only one character"
+        },
+        {
+          "id": "D",
+          "text": "Remove all variables"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Repeat an action under defined conditions",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 4",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "loops"
+      ]
+    },
+    {
+      "id": "X-COMP-U04-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Control Structures in Python",
+      "topic_name": "if statement",
+      "category": "short",
+      "question_text": "What is the purpose of a condition in an if statement?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It evaluates to a truth value that determines whether a block of code should run.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 4",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "if statement"
+      ]
+    },
+    {
+      "id": "X-COMP-U04-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Control Structures in Python",
+      "topic_name": "for and while",
+      "category": "short",
+      "question_text": "Differentiate a for loop and a while loop in basic use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "A for loop is often used for iterating over a known sequence/range; a while loop repeats while a condition remains true.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 4",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "for and while"
+      ]
+    },
+    {
+      "id": "X-COMP-U04-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Control Structures in Python",
+      "topic_name": "control flow",
+      "category": "long",
+      "question_text": "Design the logic for a program that reads a score, classifies it into categories and repeats for several students.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for input, conditional selection, valid boundaries, iteration, output, and handling an invalid score safely.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 4",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "control flow"
+      ]
+    },
+    {
+      "id": "X-COMP-U05-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Data Science",
+      "topic_name": "data science",
+      "category": "mcq",
+      "question_text": "Data science combines data with methods for?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Analysis, interpretation and decision support"
+        },
+        {
+          "id": "B",
+          "text": "Only screen design"
+        },
+        {
+          "id": "C",
+          "text": "Only keyboard repair"
+        },
+        {
+          "id": "D",
+          "text": "Only file naming"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Analysis, interpretation and decision support",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 5",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "data science"
+      ]
+    },
+    {
+      "id": "X-COMP-U05-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Data Science",
+      "topic_name": "data quality",
+      "category": "mcq",
+      "question_text": "Which characteristic improves trust in a dataset?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Accuracy"
+        },
+        {
+          "id": "B",
+          "text": "Random duplication"
+        },
+        {
+          "id": "C",
+          "text": "Missing context"
+        },
+        {
+          "id": "D",
+          "text": "Unknown source"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Accuracy",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 5",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "data quality"
+      ]
+    },
+    {
+      "id": "X-COMP-U05-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Data Science",
+      "topic_name": "structured data",
+      "category": "short",
+      "question_text": "What is structured data?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Data organized according to a defined schema such as rows/columns and fields, making it easier to query and analyze.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 5",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "structured data"
+      ]
+    },
+    {
+      "id": "X-COMP-U05-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Data Science",
+      "topic_name": "data cleaning",
+      "category": "short",
+      "question_text": "Why is data cleaning important?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It identifies and corrects or handles errors, duplicates, missing values and inconsistencies so analysis is more reliable.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 5",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "data cleaning"
+      ]
+    },
+    {
+      "id": "X-COMP-U05-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Introduction to Data Science",
+      "topic_name": "data workflow",
+      "category": "long",
+      "question_text": "Outline a responsible data-science workflow for analyzing school attendance.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for clear question, lawful/minimal data collection, cleaning, analysis/visualization, interpretation, and privacy-aware reporting.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 5",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "data workflow"
+      ]
+    },
+    {
+      "id": "X-COMP-U06-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "topic_name": "artificial intelligence",
+      "category": "mcq",
+      "question_text": "AI systems are designed to perform tasks involving?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Pattern recognition, reasoning or prediction"
+        },
+        {
+          "id": "B",
+          "text": "Only paper printing"
+        },
+        {
+          "id": "C",
+          "text": "Only file deletion"
+        },
+        {
+          "id": "D",
+          "text": "Only electrical wiring"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Pattern recognition, reasoning or prediction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 6",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "artificial intelligence"
+      ]
+    },
+    {
+      "id": "X-COMP-U06-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "topic_name": "machine learning",
+      "category": "mcq",
+      "question_text": "Machine learning primarily enables a system to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Learn patterns from data for a task"
+        },
+        {
+          "id": "B",
+          "text": "Replace all operating systems"
+        },
+        {
+          "id": "C",
+          "text": "Ignore data"
+        },
+        {
+          "id": "D",
+          "text": "Increase monitor size"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Learn patterns from data for a task",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 6",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "machine learning"
+      ]
+    },
+    {
+      "id": "X-COMP-U06-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "topic_name": "training data",
+      "category": "short",
+      "question_text": "Why is training-data quality important in machine learning?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Poor, biased or unrepresentative data can lead to unreliable or unfair model behavior.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 6",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "training data"
+      ]
+    },
+    {
+      "id": "X-COMP-U06-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "topic_name": "model evaluation",
+      "category": "short",
+      "question_text": "What is the purpose of evaluating an ML model on data not used for training?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps estimate how well the model generalizes to new examples rather than merely memorizing training data.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 6",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "model evaluation"
+      ]
+    },
+    {
+      "id": "X-COMP-U06-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
+      "topic_name": "ai and ml",
+      "category": "long",
+      "question_text": "Compare rule-based programming and machine learning, including one strength and one limitation of each.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for rule-based explicit instructions, ML learned patterns, a strength of each, a limitation of each, and appropriate-use distinction.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 6",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "ai and ml"
+      ]
+    },
+    {
+      "id": "X-COMP-U07-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Applications of AI",
+      "topic_name": "AI application",
+      "category": "mcq",
+      "question_text": "Which is a common benign application of AI?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Image classification or language assistance"
+        },
+        {
+          "id": "B",
+          "text": "Randomly corrupting files"
+        },
+        {
+          "id": "C",
+          "text": "Disabling backups"
+        },
+        {
+          "id": "D",
+          "text": "Deleting safety logs"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Image classification or language assistance",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 7",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "AI application"
+      ]
+    },
+    {
+      "id": "X-COMP-U07-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Applications of AI",
+      "topic_name": "responsible AI",
+      "category": "mcq",
+      "question_text": "Responsible AI use should consider?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Accuracy, privacy, fairness and human oversight"
+        },
+        {
+          "id": "B",
+          "text": "Only speed"
+        },
+        {
+          "id": "C",
+          "text": "Only appearance"
+        },
+        {
+          "id": "D",
+          "text": "No evaluation"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Accuracy, privacy, fairness and human oversight",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 7",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "responsible AI"
+      ]
+    },
+    {
+      "id": "X-COMP-U07-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Applications of AI",
+      "topic_name": "recommendation systems",
+      "category": "short",
+      "question_text": "What does a recommendation system do?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It uses available information or learned patterns to rank or suggest items likely to be relevant to a user or context.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 7",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "recommendation systems"
+      ]
+    },
+    {
+      "id": "X-COMP-U07-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Applications of AI",
+      "topic_name": "human oversight",
+      "category": "short",
+      "question_text": "Why is human oversight important for high-impact AI decisions?",
+      "options": [],
+      "correct_option": "",
+      "answer": "AI can make errors or reflect bias; human review helps check context, accountability and consequences before action.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 7",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "human oversight"
+      ]
+    },
+    {
+      "id": "X-COMP-U07-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Applications of AI",
+      "topic_name": "ai applications",
+      "category": "long",
+      "question_text": "Discuss three useful AI applications and the safeguards needed for responsible use.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for three valid applications plus privacy/fairness/accuracy/security/human-oversight safeguards and a clear conclusion.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 7",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "ai applications"
+      ]
+    },
+    {
+      "id": "X-COMP-U08-M01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Digital Entrepreneurship",
+      "topic_name": "digital entrepreneurship",
+      "category": "mcq",
+      "question_text": "A value proposition explains?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Why a digital product is useful to a target user"
+        },
+        {
+          "id": "B",
+          "text": "Only the program file name"
+        },
+        {
+          "id": "C",
+          "text": "Only the founder’s age"
+        },
+        {
+          "id": "D",
+          "text": "Only computer memory size"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Why a digital product is useful to a target user",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 8",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "digital entrepreneurship"
+      ]
+    },
+    {
+      "id": "X-COMP-U08-M02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Digital Entrepreneurship",
+      "topic_name": "minimum viable product",
+      "category": "mcq",
+      "question_text": "An MVP is mainly built to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Test core value with limited essential features"
+        },
+        {
+          "id": "B",
+          "text": "Contain every possible feature immediately"
+        },
+        {
+          "id": "C",
+          "text": "Avoid user feedback"
+        },
+        {
+          "id": "D",
+          "text": "Skip problem definition"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Test core value with limited essential features",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 8",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "minimum viable product"
+      ]
+    },
+    {
+      "id": "X-COMP-U08-S01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Digital Entrepreneurship",
+      "topic_name": "market research",
+      "category": "short",
+      "question_text": "Why is market research useful before building a digital product?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps understand user needs, alternatives, demand and constraints before investing heavily in development.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 8",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "market research"
+      ]
+    },
+    {
+      "id": "X-COMP-U08-S02",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Digital Entrepreneurship",
+      "topic_name": "digital business ethics",
+      "category": "short",
+      "question_text": "State two ethical considerations for a student digital business.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Examples include user privacy, honest claims, copyright compliance, fair pricing, accessibility and data security; any two.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 8",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "digital business ethics"
+      ]
+    },
+    {
+      "id": "X-COMP-U08-L01",
+      "class_level": "10th",
+      "subject": "Computer Science",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Digital Entrepreneurship",
+      "topic_name": "startup planning",
+      "category": "long",
+      "question_text": "Outline a simple digital entrepreneurship plan from problem discovery to launch.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for problem/user research, value proposition, MVP, testing/feedback, basic cost/revenue plan, and responsible privacy/legal launch practices.",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA recovered EM | ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a | unit 8",
+      "tags": [
+        "grade10",
+        "computer-science",
+        "english",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "startup planning"
+      ]
+    }
+  ]
+}

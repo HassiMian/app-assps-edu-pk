@@ -499,10 +499,12 @@
         "Science"
       ],
       "media": [
+        "English",
         "VERIFY"
       ],
       "manifestRecordIds": [
-        "pectaa-catalog-025"
+        "pectaa-catalog-025",
+        "pectaa-recovered-computer10-en-2026"
       ],
       "completionState": "NOT_COMPLETE",
       "requiredArtifacts": [
@@ -1976,7 +1978,7 @@
       "identityRule": "Religious alternatives never inherit Islamiat/Tarjuma content or pattern without their own verified authority."
     }
   ],
-  "manifestRecordCount": 108,
+  "manifestRecordCount": 109,
   "manifestRecordIds": [
     "pectaa-catalog-001",
     "pectaa-catalog-002",
@@ -2085,7 +2087,8 @@
     "pectaa-catalog-105",
     "pectaa-catalog-106",
     "pectaa-catalog-107",
-    "pectaa-recovered-chemistry10-en-2026"
+    "pectaa-recovered-chemistry10-en-2026",
+    "pectaa-recovered-computer10-en-2026"
   ],
   "catalogExpansionRequired": [
     "Any newly notified 2026-27/2027 exam source replacing a currently VERIFY/UNCONFIRMED record"

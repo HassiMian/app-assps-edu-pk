@@ -1,70 +1,64 @@
 {
   "schemaVersion": "assps-computer10-source-map-v1",
   "checkedOn": "2026-10-08",
-  "sourceRecordId": "pectaa-catalog-025",
-  "sourcePdfSha256": "acefc9ba9e8c60baa66df7f222db169def63a93b69df3f664c14841ac009474a",
-  "sourceByteLength": 94367319,
-  "pageCount": 152,
+  "sourceRecordId": "pectaa-recovered-computer10-en-2026",
+  "sourcePdfSha256": "ecc5877f7c334b5067ce7193d662cec2bd4967bf06f6921018370589380ba98a",
+  "sourceByteLength": 39516588,
+  "pageCount": 127,
   "identity": [
-    "Computer Science 10 (2026-27)",
-    "PECTAA",
-    "Urdu-medium content verified from title/review pages"
+    "10th Class Computer Science and Entrepreneurship (English Medium)",
+    "PECTAA 2026",
+    "Academic session 2026-27"
   ],
-  "chapterMapState": "CURRENT_2026_TITLES_CROSS_VERIFIED_EXACT_PAGE_BOUNDARIES_PENDING",
-  "chapterEvidence": {
-    "officialPdf": "hash/bytes/page-count verified; Urdu-medium review/content visible",
-    "independentCurrent2026CrossChecks": [
-      "Chapter 1 Introduction to Operating System",
-      "Chapter 2 System Recovery and Advanced Maintenance",
-      "Chapter 3 Introduction to Python Programming",
-      "Chapter 4 Control Structures in Python",
-      "Chapter 5 Introduction to Data Science",
-      "Chapter 6 Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
-      "Chapter 7 Applications of AI",
-      "Chapter 8 Digital Entrepreneurship"
-    ],
-    "exactChapterPageBoundariesPending": true
+  "provenance": {
+    "officialCatalogGenericRecordId": "pectaa-catalog-025",
+    "officialCatalogGenericLabel": "Computer Science 10 (2026-27)",
+    "archiveEvidenceUrl": "https://www.taleem360.com/10th-class-computer-em-new-text-book-2026-pectaa",
+    "archiveDownloadUrl": "https://www.taleem360.com/download/10th-class-computer-em-new-text-book-2026-pectaa?f=352423f8",
+    "archiveAuthorLabel": "PECTAA",
+    "renderedIdentityVerified": true,
+    "chapterListCrossCheckedOnCurrent2026Sources": true
   },
-  "chapters": [
+  "units": [
     {
       "number": 1,
       "title": "Operating Systems: Structure and Services",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 2,
       "title": "System Recovery and Advanced Maintenance",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 3,
       "title": "Introduction to Python Programming",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 4,
       "title": "Control Structures in Python",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 5,
       "title": "Introduction to Data Science",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 6,
       "title": "Introduction to Artificial Intelligence (AI) and Machine Learning (ML)",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 7,
       "title": "Applications of AI",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     },
     {
       "number": 8,
       "title": "Digital Entrepreneurship",
-      "status": "CURRENT_2026_TITLE_CROSS_VERIFIED_PAGE_BOUNDARY_PENDING"
+      "status": "CURRENT_2026_UNIT_TITLE_CROSS_CHECKED_CHAPTER_START_PAGE_PENDING"
     }
   ],
   "authoring": {
@@ -73,7 +67,7 @@
     "copyTextbookPassages": false,
     "copyExerciseStems": false,
     "copyPastPaperStems": false,
-    "exactChapterPageBoundariesPending": true,
+    "exactChapterStartPagesPending": true,
     "securityTopicsRestrictedToDefensiveAndBenignContent": true
   }
 }

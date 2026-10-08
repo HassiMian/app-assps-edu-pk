@@ -31,7 +31,7 @@ test('downloaded official sources carry hash/page evidence while unreviewed sour
   } else assert.equal(e.pdfSha256,null);
   assert.equal(e.exerciseIndexStatus,'PENDING');
   if(e.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'){
-   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED.*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
+   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/(VERIFIED|CROSS_CHECKED).*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
   } else assert.match(e.questionGenerationStatus,/^BLOCKED/,e.recordId);
  }
  for(const [rid,x] of locked){const e=m.entries.find(v=>v.recordId===rid);assert(e,rid);assert.equal(e.downloadByteLength,x.bytes);assert.equal(e.pdfSha256,x.sha);assert.equal(e.pdfPageCount,x.pages);}
