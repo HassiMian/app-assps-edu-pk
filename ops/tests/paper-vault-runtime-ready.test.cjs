@@ -5,6 +5,8 @@ const { assessVaultRuntime } = require('../check-paper-vault-runtime-ready.cjs')
 const fixture = () => ({
   role:{rolbypassrls:false,rolsuper:false,rolcanlogin:false},
   canSetRole:true,
+  appRuntimeActive:true,
+  canAppRoleSetPaper:true,
   tables:[
     {relname:'paper_vault',relrowsecurity:true,relforcerowsecurity:true},
     {relname:'paper_vault_revision_history',relrowsecurity:true,relforcerowsecurity:true},
@@ -29,6 +31,7 @@ test('role privilege bypass, login or missing membership fails',()=>{
     {role:{...fixture().role,rolcanlogin:true}},
     {role:{...fixture().role,rolsuper:true}},
     {canSetRole:false},
+    {canAppRoleSetPaper:false},
   ]) assert.equal(assessVaultRuntime({...fixture(),...variant}).ready,false)
 })
 test('missing context default-allow policy never counts as strict',()=>{

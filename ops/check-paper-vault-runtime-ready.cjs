@@ -14,6 +14,7 @@ function assessVaultRuntime(probe) {
     if (role.rolbypassrls || role.rolsuper || role.rolcanlogin)
       findings.push('VAULT_RUNTIME_ROLE_OVERPRIVILEGED')
     if (!probe.canSetRole) findings.push('APPLICATION_CANNOT_SET_RUNTIME_ROLE')
+    if (probe.appRuntimeActive && !probe.canAppRoleSetPaper) findings.push('APP_RUNTIME_CANNOT_SET_PAPER_RUNTIME')
   }
   const vault = probe.tables.find(x => x.relname === 'paper_vault')
   const journal = probe.tables.find(x => x.relname === 'paper_vault_revision_history')
@@ -55,6 +56,8 @@ async function inspect() {
     const role = roles[0] || null
     const canSetRole = role ?
       (await pool.query("SELECT pg_has_role(current_user,$1,'SET') AS permitted",[ROLE])).rows[0].permitted : false
+    const appRuntimeActive = process.env.DB_RUNTIME_ROLE === 'apex_app_runtime'
+    const canAppRoleSetPaper = appRuntimeActive ? (await pool.query("SELECT pg_has_role('apex_app_runtime',$1,'SET') AS permitted",[ROLE])).rows[0].permitted : false
     const tableGrants = {}
     const sequenceGrants = {}
     const journalGrants = {}
@@ -79,7 +82,7 @@ async function inspect() {
           "SELECT has_table_privilege($1,'public.teacher_class_assignments','SELECT') AS allowed",[ROLE])).rows[0].allowed
       }
     }
-    const assessed = assessVaultRuntime({role,tables,policies,canSetRole,tableGrants,sequenceGrants,journalGrants,teacherAssignmentGrant})
+    const assessed = assessVaultRuntime({role,tables,policies,canSetRole,appRuntimeActive,canAppRoleSetPaper,tableGrants,sequenceGrants,journalGrants,teacherAssignmentGrant})
     console.log(JSON.stringify({
       gate:'PAPER_VAULT_RUNTIME_DB_BOUNDARY',database:(await pool.query('SELECT current_database() AS db')).rows[0].db,
       role:ROLE,ready:assessed.ready,findings:assessed.findings,

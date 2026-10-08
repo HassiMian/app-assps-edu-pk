@@ -149,7 +149,7 @@ export default function FamilyModule() {
  const [addStudentSearch, setAddStudentSearch] = useState('')
 
  const {
- families, autoDetectFamilies, getFamilyForStudent,
+ families, loading: familiesLoading, error: familyError, autoDetectFamilies, getFamilyForStudent,
  createFamily, addStudentToFamily, removeStudentFromFamily,
  } = useFamilyStore()
 
@@ -293,10 +293,15 @@ export default function FamilyModule() {
  {loadError && students.length > 0 && (
  <div style={{ ...card, marginBottom:12, padding:16, color:'var(--apex-action-danger)' }}>{loadError}</div>
  )}
- {loading ? (
- <div style={{ textAlign: 'center', padding: 60, color: C.muted }}>Loading students and detecting families…</div>
+ {familyError && families.length > 0 && (
+ <div style={{ ...card, marginBottom:12, padding:16, color:'var(--apex-action-danger)' }}>{familyError}</div>
+ )}
+ {loading || familiesLoading ? (
+ <div style={{ textAlign: 'center', padding: 60, color: C.muted }}>Loading students and families…</div>
  ) : loadError && students.length === 0 ? (
  <div style={{ ...card, textAlign:'center', padding:32, color:'var(--apex-action-danger)' }}>{loadError}</div>
+ ) : familyError && families.length === 0 ? (
+ <div style={{ ...card, textAlign:'center', padding:32, color:'var(--apex-action-danger)' }}>Family data is temporarily unavailable.</div>
  ) : filteredFamilies.length === 0 ? (
  <div style={{ ...card, textAlign: 'center', padding: 60, color: C.muted }}>
  <div style={{ fontSize: 48, marginBottom: 12 }}></div>

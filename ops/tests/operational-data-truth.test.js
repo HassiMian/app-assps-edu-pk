@@ -31,3 +31,14 @@ test('expense source failure is distinct from a verified zero total', () => {
   assert.match(s, /loadError && expenses\.length === 0 \? 'Unavailable'/)
   assert.match(s, /Expense data is temporarily unavailable\./)
 })
+
+test('family refresh failures preserve loaded families and expose source availability', () => {
+  const store = source('al-siddique-frontend/src/services/useFamilyStore.js')
+  const module = source('al-siddique-frontend/src/Modules/families/FamilyModule.jsx')
+  const failure = store.match(/catch \(err\) \{[\s\S]{0,260}?Existing loaded families were preserved\.[\s\S]{0,120}?finally/)?.[0] || ''
+  assert.ok(failure)
+  assert.doesNotMatch(failure, /setFamilies\(\[\]\)/)
+  assert.match(module, /loading: familiesLoading, error: familyError/)
+  assert.match(module, /familyError && families\.length === 0/)
+  assert.match(module, /Family data is temporarily unavailable\./)
+})

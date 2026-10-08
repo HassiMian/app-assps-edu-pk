@@ -43,8 +43,7 @@ export function useFamilyStore() {
  setFamilies(next)
  return next
  } catch (err) {
- setFamilies([])
- setError(err.response?.data?.message || 'Families could not be loaded.')
+ setError(err.response?.data?.message || 'Families could not be refreshed. Existing loaded families were preserved.')
  return null
  } finally {
  setLoading(false)
