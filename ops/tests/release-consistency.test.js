@@ -39,3 +39,24 @@ test('proc env parser keeps exact values without exposing unrelated semantics', 
   assert.equal(parsed.NODE_ENV,'production')
   assert.equal(parsed.EMPTY,'')
 })
+
+test('backend-only forward release preserves frontend commit and requires independent ancestry proof', () => {
+  const backend = {
+    ...meta,
+    commit:'b'.repeat(40),
+    branch:'fix/paper-v1-release-rls-reconcile-20261008',
+    component:'backend-paper-studio-rls-hardening',
+    sourceBaseLiveCommit:commit,
+    previousRelease:{commit},
+  }
+  const allowed = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:meta,backendMeta:backend,pm2Env:env,
+    backendForwardVerifier:(base,head,branch)=>base===commit&&head===backend.commit&&branch===backend.branch})
+  assert.equal(allowed.safe,true)
+  const denied = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:meta,backendMeta:backend,pm2Env:env,
+    backendForwardVerifier:()=>false})
+  assert.equal(denied.safe,false)
+  assert.ok(denied.findings.some(item=>item.startsWith('BACKEND_COMMIT_DRIFT:')))
+  const wrongBase = evaluateReleaseConsistency({canonicalCommit:commit,frontendMeta:meta,
+    backendMeta:{...backend,sourceBaseLiveCommit:'c'.repeat(40)},pm2Env:env,backendForwardVerifier:()=>true})
+  assert.equal(wrongBase.safe,false)
+})

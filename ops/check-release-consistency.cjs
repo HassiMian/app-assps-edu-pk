@@ -15,7 +15,7 @@ function parseProcEnv(buffer) {
   return out
 }
 
-function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONICAL_BRANCH, frontendMeta, backendMeta, pm2Env }) {
+function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONICAL_BRANCH, frontendMeta, backendMeta, pm2Env, backendForwardVerifier = () => false }) {
   const findings = []
   if (!/^[0-9a-f]{40}$/i.test(String(canonicalCommit || ''))) findings.push('CANONICAL_COMMIT_INVALID')
   for (const [name, meta] of [['FRONTEND', frontendMeta], ['BACKEND', backendMeta]]) {
@@ -23,8 +23,18 @@ function evaluateReleaseConsistency({ canonicalCommit, canonicalBranch = CANONIC
       findings.push(`${name}_RELEASE_METADATA_MISSING`)
       continue
     }
-    if (meta.commit !== canonicalCommit) findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
-    if (meta.branch !== canonicalBranch) findings.push(`${name}_BRANCH_DRIFT:${meta.branch || 'missing'}:${canonicalBranch}`)
+    // A backend-only forward security release may legitimately advance beyond
+    // the still-live frontend. It must preserve the canonical base and prove
+    // ancestry AND exact remote branch identity. No heuristic SHA allowance.
+    const verifiedBackendForward = name === 'BACKEND' &&
+      meta.component === 'backend-paper-studio-rls-hardening' &&
+      meta.sourceBaseLiveCommit === canonicalCommit &&
+      meta.previousRelease?.commit === canonicalCommit &&
+      backendForwardVerifier(canonicalCommit, meta.commit, meta.branch)
+    if (meta.commit !== canonicalCommit && !verifiedBackendForward)
+      findings.push(`${name}_COMMIT_DRIFT:${meta.commit || 'missing'}:${canonicalCommit}`)
+    if (meta.branch !== canonicalBranch && !verifiedBackendForward)
+      findings.push(`${name}_BRANCH_DRIFT:${meta.branch || 'missing'}:${canonicalBranch}`)
     if (meta.productionSmoke !== 'pass') findings.push(`${name}_PRODUCTION_SMOKE_NOT_SEALED`)
     if (meta.liveRouteContract !== 'pass') findings.push(`${name}_LIVE_CONTRACT_NOT_SEALED`)
     if (meta.protectedTemplates !== '6/6 unchanged') findings.push(`${name}_PROTECTED_TEMPLATE_SEAL_INVALID`)
@@ -57,6 +67,16 @@ function canonicalRemoteCommit() {
   return commit
 }
 
+function verifyBackendForward(base, head, branch) {
+  if (!/^[0-9a-f]{40}$/i.test(String(head || ''))) return false
+  if (branch !== 'fix/paper-v1-release-rls-reconcile-20261008') return false
+  try {
+    execFileSync('git', ['-C', repoRoot, 'merge-base', '--is-ancestor', base, head], {timeout:12000})
+    const remote = execFileSync('git', ['-C', repoRoot, 'ls-remote', 'origin', 'refs/heads/' + branch], {encoding:'utf8',timeout:12000}).trim().split(/\s+/)[0]
+    return remote === head
+  } catch (_) { return false }
+}
+
 function pm2Environment() {
   const output = execFileSync('pm2', ['pid', 'apex-backend'], { encoding: 'utf8' }).trim()
   const pid = output.split(/\s+/).filter(Boolean).at(-1)
@@ -69,7 +89,7 @@ function main() {
   const frontendMeta = readJson(process.env.ASSPS_FRONTEND_RELEASE_META || '/var/www/apex-os/release-meta.json')
   const backendMeta = readJson(process.env.ASSPS_BACKEND_RELEASE_META || '/var/www/apex-backend/release-meta.json')
   const pm2Env = pm2Environment()
-  const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env })
+  const result = evaluateReleaseConsistency({ canonicalCommit, frontendMeta, backendMeta, pm2Env, backendForwardVerifier: verifyBackendForward })
   console.log(JSON.stringify({ canonicalCommit, canonicalBranch: CANONICAL_BRANCH, ...result }, null, 2))
   if (!result.safe) process.exitCode = 1
 }

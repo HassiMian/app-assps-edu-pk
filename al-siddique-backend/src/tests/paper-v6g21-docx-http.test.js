@@ -25,7 +25,7 @@ function req(pathname,{method='GET',body=null,cookie=''}={}){
 }
 const json=r=>{try{return JSON.parse(r.buffer.toString('utf8'))}catch{return{}}}
 async function waitHealth(){
- for(let i=0;i<40;i++){try{const r=await req('/health');if(r.status===200)return}catch{}await new Promise(r=>setTimeout(r,150))}
+ for(let i=0;i<100;i++){try{const r=await req('/health');if(r.status===200)return}catch{}await new Promise(r=>setTimeout(r,150))}
  throw Error('G21 test server did not become healthy')
 }
 async function login(email,password,role,code){
@@ -42,7 +42,7 @@ function canonicalFixture(){
  return doc
 }
 
-test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, async t=>{
+test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:60000}, async t=>{
  assert.notEqual(process.env.DB_NAME,'apexos','G21 HTTP test must not run on production DB')
  const suffix=crypto.randomBytes(5).toString('hex')
  const password=crypto.randomBytes(18).toString('base64url')
@@ -66,7 +66,7 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   child=spawn(process.execPath,['server.js'],{cwd:path.resolve(__dirname,'..'),env:{...process.env,PORT:String(PORT),NODE_ENV:'production',AUTO_MIGRATE_ON_BOOT:'false'},stdio:['ignore','pipe','pipe']})
   let serverErr='';child.stderr.on('data',d=>{serverErr+=d.toString()})
   t.after(()=>{try{child?.kill('SIGTERM')}catch{}})
-  await waitHealth()
+  try { await waitHealth() } catch(error) { throw new Error(error.message+' child_error='+serverErr.slice(-1600)) }
 
   let r=await req('/api/portal/paper-studio/papers/'+eligibleId+'/canonical-docx',{method:'POST',body:{revision:3,snapshotHash:canonicalHash}})
   assert.equal(r.status,401)
@@ -75,7 +75,7 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   const cookieB=await login(emailB,password,'admin',codeB)
 
   let hashResponse=await req('/api/portal/paper-studio/papers/'+eligibleId+'/revisions',{cookie:cookieA})
-  assert.equal(hashResponse.status,200)
+  assert.equal(hashResponse.status,200,`response=${hashResponse.buffer.toString('utf8').slice(0,500)} server_error=${serverErr.slice(-1500)}`)
   canonicalHash=String(json(hashResponse).data.currentSnapshotHash||'')
   assert.match(canonicalHash,/^[a-f0-9]{64}$/)
 

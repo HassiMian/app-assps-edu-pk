@@ -8,7 +8,6 @@ const {pool}=require('../../config/database')
 const {ensureTeacherAssignmentSchema}=require('../teacherAssignmentService')
 const CONTRACT=path.join(__dirname,'saasReviewedContract/losslessLegacyBridgeV6D.mjs')
 const VERIFIED_SHA='a6e25426a8f803050ec8bb112dbed76bc8d17c0173fb14770113ca06e100094b'
-const migration=fs.readFileSync(path.join(__dirname,'../../migrations/20261005_paper_vault_revision_history.sql'),'utf8')
 const digest=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex')
 const failure=(status,message,code)=>Object.assign(new Error(message),{status,code})
 let contractPromise
@@ -18,7 +17,18 @@ async function bridge(){
   if(!contractPromise)contractPromise=import(`file://${CONTRACT}`)
   return contractPromise
 }
-async function ensureJournal(){await pool.query(migration)}
+async function ensureJournal(){
+  // Schema is provisioned by a controlled migration, never by an HTTP request.
+  // A zero-row read verifies both existence and the current tenant's DB privileges.
+  try {
+    await pool.query('SELECT 1 FROM paper_vault_revision_history LIMIT 0')
+  } catch (err) {
+    if (err.code === '42P01' || err.code === '42501') {
+      throw failure(503,'Paper revision journal is unavailable. Apply the versioned migration before using this workflow.','REVISION_JOURNAL_NOT_READY')
+    }
+    throw err
+  }
+}
 function roleAllowed(role){return ['super_admin','admin','principal','teacher'].includes(String(role||'').toLowerCase())}
 function ownerClause(role,userId,params){if(role==='teacher'){params.push(userId);return ` AND owner_user_id=$${params.length}`}return ''}
 async function authorizedCurrent(client,{schoolId,userId,role,paperId,lock=false}){
