@@ -1,0 +1,976 @@
+{
+  "schemaVersion": "assps-bio9-ocr-exercise-marker-candidates-v1",
+  "sourceRecordId": "pectaa-catalog-009",
+  "sourceSha256": "f6e3181561856359e77749f8f684f87c04c9c0a05bd2f0f60f60b4338c4284c5",
+  "sourcePdfPages": 180,
+  "sampledLastPagesPerChapter": 6,
+  "questionsReproduced": false,
+  "automaticQuestionApproval": false,
+  "requiresManualImageVerification": true,
+  "chapters": [
+    {
+      "chapter": 1,
+      "sampledPdfPhysicalPages": [
+        19,
+        24
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        22
+      ],
+      "firstExerciseCandidatePhysicalPage": 22,
+      "firstExerciseCandidatePrintedPage": 18,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 19,
+          "printedPageCandidate": 15,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 20,
+          "printedPageCandidate": 16,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 21,
+          "printedPageCandidate": 17,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 22,
+          "printedPageCandidate": 18,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 23,
+          "printedPageCandidate": 19,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 24,
+          "printedPageCandidate": 20,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "sampledPdfPhysicalPages": [
+        35,
+        40
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        38
+      ],
+      "firstExerciseCandidatePhysicalPage": 38,
+      "firstExerciseCandidatePrintedPage": 34,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 35,
+          "printedPageCandidate": 31,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 36,
+          "printedPageCandidate": 32,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 37,
+          "printedPageCandidate": 33,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 38,
+          "printedPageCandidate": 34,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 39,
+          "printedPageCandidate": 35,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 40,
+          "printedPageCandidate": 36,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "sampledPdfPhysicalPages": [
+        57,
+        62
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        60
+      ],
+      "firstExerciseCandidatePhysicalPage": 60,
+      "firstExerciseCandidatePrintedPage": 56,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 57,
+          "printedPageCandidate": 53,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 58,
+          "printedPageCandidate": 54,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 59,
+          "printedPageCandidate": 55,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 60,
+          "printedPageCandidate": 56,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 61,
+          "printedPageCandidate": 57,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 62,
+          "printedPageCandidate": 58,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "sampledPdfPhysicalPages": [
+        73,
+        78
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        77
+      ],
+      "firstExerciseCandidatePhysicalPage": 77,
+      "firstExerciseCandidatePrintedPage": 73,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 73,
+          "printedPageCandidate": 69,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 74,
+          "printedPageCandidate": 70,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 75,
+          "printedPageCandidate": 71,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 76,
+          "printedPageCandidate": 72,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 77,
+          "printedPageCandidate": 73,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 78,
+          "printedPageCandidate": 74,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "sampledPdfPhysicalPages": [
+        87,
+        92
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        90
+      ],
+      "firstExerciseCandidatePhysicalPage": 90,
+      "firstExerciseCandidatePrintedPage": 86,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 87,
+          "printedPageCandidate": 83,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 88,
+          "printedPageCandidate": 84,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 89,
+          "printedPageCandidate": 85,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 90,
+          "printedPageCandidate": 86,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 91,
+          "printedPageCandidate": 87,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 92,
+          "printedPageCandidate": 88,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "sampledPdfPhysicalPages": [
+        103,
+        108
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [],
+      "firstExerciseCandidatePhysicalPage": null,
+      "firstExerciseCandidatePrintedPage": null,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 103,
+          "printedPageCandidate": 99,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 104,
+          "printedPageCandidate": 100,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 105,
+          "printedPageCandidate": 101,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 106,
+          "printedPageCandidate": 102,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 107,
+          "printedPageCandidate": 103,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 108,
+          "printedPageCandidate": 104,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "sampledPdfPhysicalPages": [
+        113,
+        118
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        117
+      ],
+      "firstExerciseCandidatePhysicalPage": 117,
+      "firstExerciseCandidatePrintedPage": 113,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 113,
+          "printedPageCandidate": 109,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 114,
+          "printedPageCandidate": 110,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 115,
+          "printedPageCandidate": 111,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 116,
+          "printedPageCandidate": 112,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 117,
+          "printedPageCandidate": 113,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 118,
+          "printedPageCandidate": 114,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "sampledPdfPhysicalPages": [
+        127,
+        132
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        131
+      ],
+      "firstExerciseCandidatePhysicalPage": 131,
+      "firstExerciseCandidatePrintedPage": 127,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 127,
+          "printedPageCandidate": 123,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 128,
+          "printedPageCandidate": 124,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 129,
+          "printedPageCandidate": 125,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 130,
+          "printedPageCandidate": 126,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 131,
+          "printedPageCandidate": 127,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 132,
+          "printedPageCandidate": 128,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 9,
+      "sampledPdfPhysicalPages": [
+        145,
+        150
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        149
+      ],
+      "firstExerciseCandidatePhysicalPage": 149,
+      "firstExerciseCandidatePrintedPage": 145,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 145,
+          "printedPageCandidate": 141,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 146,
+          "printedPageCandidate": 142,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 147,
+          "printedPageCandidate": 143,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 148,
+          "printedPageCandidate": 144,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 149,
+          "printedPageCandidate": 145,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 150,
+          "printedPageCandidate": 146,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 10,
+      "sampledPdfPhysicalPages": [
+        161,
+        166
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [
+        164
+      ],
+      "firstExerciseCandidatePhysicalPage": 164,
+      "firstExerciseCandidatePrintedPage": 160,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 161,
+          "printedPageCandidate": 157,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 162,
+          "printedPageCandidate": 158,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 163,
+          "printedPageCandidate": 159,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": true
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 164,
+          "printedPageCandidate": 160,
+          "signals": {
+            "exerciseHeading": true,
+            "mcqInstruction": true,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 165,
+          "printedPageCandidate": 161,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 166,
+          "printedPageCandidate": 162,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    },
+    {
+      "chapter": 11,
+      "sampledPdfPhysicalPages": [
+        175,
+        180
+      ],
+      "exerciseHeadingPdfPhysicalCandidates": [],
+      "firstExerciseCandidatePhysicalPage": null,
+      "firstExerciseCandidatePrintedPage": null,
+      "manualPageImageVerificationRequired": true,
+      "academicApproval": false,
+      "pages": [
+        {
+          "pdfPhysicalPage": 175,
+          "printedPageCandidate": 171,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": true,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 176,
+          "printedPageCandidate": 172,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 177,
+          "printedPageCandidate": 173,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 178,
+          "printedPageCandidate": 174,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 179,
+          "printedPageCandidate": 175,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        },
+        {
+          "pdfPhysicalPage": 180,
+          "printedPageCandidate": 176,
+          "signals": {
+            "exerciseHeading": false,
+            "mcqInstruction": false,
+            "shortInstruction": false,
+            "longInstruction": false,
+            "keyPointsHeading": false
+          },
+          "ocrStatus": "OK"
+        }
+      ]
+    }
+  ]
+}
