@@ -330,7 +330,7 @@ function SuperAppControlCenter({ superappModules = {}, setSuperappModule, school
                   <div key={mod.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', borderRadius: 12, border: '1px solid rgba(148,163,184,0.05)' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                       <span style={{ display: 'flex', alignItems: 'center', color: enabled ? C.gold : C.muted }}>
-                        {typeof ModIcon === 'function' ? <ModIcon size={18} /> : ModIcon}
+                        {ModIcon ? <ModIcon size={18} /> : null}
                       </span>
                       <div>
                         <div style={{ color: enabled ? '#fff' : C.muted, fontSize: 13, fontWeight: 600 }}>{mod.name}</div>

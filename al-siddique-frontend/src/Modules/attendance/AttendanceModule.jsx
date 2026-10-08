@@ -33,6 +33,13 @@ const transformStudent = (student) => ({
  parent_whatsapp: student.parent_whatsapp || student.whatsapp_number || '',
 })
 
+function attendanceSectionsForClass(className, sectionsForClass) {
+ const direct = sectionsForClass(className)
+ if (direct.length) return direct
+ if (className === 'Nine') return sectionsForClass('Pre Nine')
+ return []
+}
+
 const card = {
  background: "var(--apex-bg-surface)", backdropFilter: "blur(20px)",
  border: "1px solid var(--apex-border-default)", borderRadius: 20, padding: 24,
