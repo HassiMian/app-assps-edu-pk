@@ -31,7 +31,7 @@ test('downloaded official sources carry hash/page evidence while unreviewed sour
   } else assert.equal(e.pdfSha256,null);
   assert.equal(e.exerciseIndexStatus,'PENDING');
   if(e.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'){
-   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED.*PENDING|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
+   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED.*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
   } else assert.match(e.questionGenerationStatus,/^BLOCKED/,e.recordId);
  }
  for(const [rid,x] of locked){const e=m.entries.find(v=>v.recordId===rid);assert(e,rid);assert.equal(e.downloadByteLength,x.bytes);assert.equal(e.pdfSha256,x.sha);assert.equal(e.pdfPageCount,x.pages);}
@@ -50,19 +50,19 @@ test('current Urdu science catalogue dates are resolved without pretending provi
  for(const e of [chem,bio]){
   assert.equal(e.catalogLinkCheckedOn,'2026-10-06');
   assert.match(e.providerAccessState,/AUTH_REQUIRED_OR_401|SIGN_IN_PAGE/);
-  if(['pectaa-catalog-004','pectaa-catalog-005','pectaa-catalog-011','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-024','pectaa-catalog-025'].includes(e.recordId)) assert.equal(e.questionGenerationStatus,'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
+  if(['pectaa-catalog-004','pectaa-catalog-005','pectaa-catalog-011','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-021','pectaa-catalog-022','pectaa-catalog-024','pectaa-catalog-025'].includes(e.recordId)) assert.equal(e.questionGenerationStatus,'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
  }
 });
 
 test('current science provider access failures remain separate from official catalogue identity',()=>{
  for(const rid of ['pectaa-catalog-005','pectaa-catalog-006','pectaa-catalog-007','pectaa-catalog-011','pectaa-catalog-012']){
-  const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);if(['pectaa-catalog-004','pectaa-catalog-005','pectaa-catalog-011','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-024','pectaa-catalog-025'].includes(e.recordId)) assert.equal(e.questionGenerationStatus,'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
+  const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);if(['pectaa-catalog-004','pectaa-catalog-005','pectaa-catalog-011','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-021','pectaa-catalog-022','pectaa-catalog-024','pectaa-catalog-025'].includes(e.recordId)) assert.equal(e.questionGenerationStatus,'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
  }
 });
 
 test('Grade X current catalogue refresh preserves unresolved medium/session facts explicitly',()=>{
  for(const rid of ['pectaa-catalog-015','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-018','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-021','pectaa-catalog-022','pectaa-catalog-023','pectaa-catalog-024','pectaa-catalog-025']){
-  const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);if(['pectaa-catalog-004','pectaa-catalog-005','pectaa-catalog-011','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-024','pectaa-catalog-025'].includes(e.recordId)) assert.equal(e.questionGenerationStatus,'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
+  const e=m.entries.find(x=>x.recordId===rid);assert(e);assert.equal(e.catalogLinkCheckedOn,'2026-10-06');assert(e.providerAccessState);if(['pectaa-catalog-004','pectaa-catalog-005','pectaa-catalog-011','pectaa-catalog-016','pectaa-catalog-017','pectaa-catalog-019','pectaa-catalog-020','pectaa-catalog-021','pectaa-catalog-022','pectaa-catalog-024','pectaa-catalog-025'].includes(e.recordId)) assert.equal(e.questionGenerationStatus,'PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'); else assert.match(e.questionGenerationStatus,/^BLOCKED/);
  }
  assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-017').medium,'English');
  assert.equal(m.entries.find(x=>x.recordId==='pectaa-catalog-024').medium,'English');

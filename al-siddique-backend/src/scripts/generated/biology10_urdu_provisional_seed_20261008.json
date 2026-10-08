@@ -1,0 +1,1466 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-BIO-UR-C01-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "انسانی نظامِ انہضام",
+      "topic_name": "Digestion",
+      "category": "mcq",
+      "question_text": "Protein digestion کا آغاز بنیادی طور پر کہاں ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Stomach"
+        },
+        {
+          "id": "B",
+          "text": "Mouth"
+        },
+        {
+          "id": "C",
+          "text": "Large intestine"
+        },
+        {
+          "id": "D",
+          "text": "Kidney"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Stomach",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Digestion"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C01-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "انسانی نظامِ انہضام",
+      "topic_name": "Absorption",
+      "category": "mcq",
+      "question_text": "Small intestine میں villi کا اہم کام کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Absorption کے لیے surface area بڑھانا"
+        },
+        {
+          "id": "B",
+          "text": "Blood pump کرنا"
+        },
+        {
+          "id": "C",
+          "text": "Urine بنانا"
+        },
+        {
+          "id": "D",
+          "text": "Air filter کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Absorption کے لیے surface area بڑھانا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Absorption"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C01-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "انسانی نظامِ انہضام",
+      "topic_name": "Nutrition",
+      "category": "short",
+      "question_text": "Balanced diet سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایسی غذا جو جسم کو مناسب مقدار میں carbohydrates, proteins, fats, vitamins, minerals, fibre اور water فراہم کرے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Nutrition"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C01-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "انسانی نظامِ انہضام",
+      "topic_name": "Digestive system",
+      "category": "long",
+      "question_text": "انسانی digestive system میں mouth سے small intestine تک food processing کی ترتیب بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں ingestion, mechanical/chemical digestion, stomach کی processing, bile/pancreatic enzymes کا کردار اور small intestine میں digestion/absorption شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Digestive system"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C02-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "انسانی نظامِ تنفس",
+      "topic_name": "Respiration",
+      "category": "mcq",
+      "question_text": "Gas exchange بنیادی طور پر lungs کے کس حصے میں ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Alveoli"
+        },
+        {
+          "id": "B",
+          "text": "Trachea only"
+        },
+        {
+          "id": "C",
+          "text": "Diaphragm"
+        },
+        {
+          "id": "D",
+          "text": "Rib"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Alveoli",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Respiration"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C02-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "انسانی نظامِ تنفس",
+      "topic_name": "Breathing",
+      "category": "mcq",
+      "question_text": "Inhalation کے دوران diaphragm عموماً کیا کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Contract ہو کر نیچے جاتا ہے"
+        },
+        {
+          "id": "B",
+          "text": "Relax ہو کر اوپر جاتا ہے"
+        },
+        {
+          "id": "C",
+          "text": "Blood pump کرتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "Food digest کرتا ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Contract ہو کر نیچے جاتا ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Breathing"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C02-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "انسانی نظامِ تنفس",
+      "topic_name": "Gas exchange",
+      "category": "short",
+      "question_text": "Alveoli gas exchange کے لیے موزوں کیوں ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ان کی walls thin ہوتی ہیں، surface area بڑا ہوتا ہے اور capillary blood supply بھرپور ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Gas exchange"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C02-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "انسانی نظامِ تنفس",
+      "topic_name": "Breathing mechanism",
+      "category": "long",
+      "question_text": "Inhalation اور exhalation کے mechanism کو diaphragm, ribs اور pressure changes کے حوالے سے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں thoracic volume, pressure change, diaphragm/rib movement اور air flow کی سمت واضح ہونی چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Breathing mechanism"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C03-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انسانی نظامِ دورانِ خون",
+      "topic_name": "Blood",
+      "category": "mcq",
+      "question_text": "Oxygen transport میں اہم blood cell کون سا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Red blood cell"
+        },
+        {
+          "id": "B",
+          "text": "Platelet"
+        },
+        {
+          "id": "C",
+          "text": "Neuron"
+        },
+        {
+          "id": "D",
+          "text": "Osteocyte"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Red blood cell",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Blood"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C03-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انسانی نظامِ دورانِ خون",
+      "topic_name": "Heart",
+      "category": "mcq",
+      "question_text": "Heart کا کون سا حصہ oxygenated blood کو body کی طرف pump کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Left ventricle"
+        },
+        {
+          "id": "B",
+          "text": "Right atrium"
+        },
+        {
+          "id": "C",
+          "text": "Right ventricle"
+        },
+        {
+          "id": "D",
+          "text": "Left atrium only receives"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Left ventricle",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Heart"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C03-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انسانی نظامِ دورانِ خون",
+      "topic_name": "Blood vessels",
+      "category": "short",
+      "question_text": "Artery اور vein میں ایک بنیادی فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Artery blood کو heart سے دور لے جاتی ہے جبکہ vein blood کو heart کی طرف واپس لاتی ہے؛ structure اور pressure بھی مختلف ہوتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Blood vessels"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C03-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "انسانی نظامِ دورانِ خون",
+      "topic_name": "Circulation",
+      "category": "long",
+      "question_text": "Double circulation کا تصور اور pulmonary و systemic circulation کا کردار بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں heart→lungs→heart pulmonary circuit اور heart→body→heart systemic circuit، oxygenation اور pressure/function کا فرق شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Circulation"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C04-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی نظامِ اخراج",
+      "topic_name": "Kidney",
+      "category": "mcq",
+      "question_text": "Kidney کی functional unit کیا کہلاتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Nephron"
+        },
+        {
+          "id": "B",
+          "text": "Neuron"
+        },
+        {
+          "id": "C",
+          "text": "Alveolus"
+        },
+        {
+          "id": "D",
+          "text": "Villus"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Nephron",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Kidney"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C04-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی نظامِ اخراج",
+      "topic_name": "Urine formation",
+      "category": "mcq",
+      "question_text": "Selective reabsorption کا اہم فائدہ کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Useful substances کو blood میں واپس لینا"
+        },
+        {
+          "id": "B",
+          "text": "تمام water خارج کرنا"
+        },
+        {
+          "id": "C",
+          "text": "Oxygen absorb کرنا"
+        },
+        {
+          "id": "D",
+          "text": "Food digest کرنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Useful substances کو blood میں واپس لینا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Urine formation"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C04-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی نظامِ اخراج",
+      "topic_name": "Excretion",
+      "category": "short",
+      "question_text": "Excretion اور egestion میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Excretion metabolic wastes کو body سے نکالنا ہے، جبکہ egestion undigested food کو digestive tract سے خارج کرنا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Excretion"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C04-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "انسانی نظامِ اخراج",
+      "topic_name": "Kidney function",
+      "category": "long",
+      "question_text": "Nephron میں filtration, selective reabsorption اور urine formation کی ترتیب بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں glomerular filtration, useful solutes/water کی reabsorption، remaining waste کی concentration اور collecting pathway شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Kidney function"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C05-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination اور عصبی و Endocrine نظام",
+      "topic_name": "Neuron",
+      "category": "mcq",
+      "question_text": "Nervous system کی بنیادی functional cell کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Neuron"
+        },
+        {
+          "id": "B",
+          "text": "Platelet"
+        },
+        {
+          "id": "C",
+          "text": "RBC"
+        },
+        {
+          "id": "D",
+          "text": "Osteoblast"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Neuron",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Neuron"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C05-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination اور عصبی و Endocrine نظام",
+      "topic_name": "Hormones",
+      "category": "mcq",
+      "question_text": "Hormones عام طور پر کہاں سے release ہوتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Endocrine glands"
+        },
+        {
+          "id": "B",
+          "text": "Bones only"
+        },
+        {
+          "id": "C",
+          "text": "Alveoli only"
+        },
+        {
+          "id": "D",
+          "text": "Villi only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Endocrine glands",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Hormones"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C05-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination اور عصبی و Endocrine نظام",
+      "topic_name": "Coordination",
+      "category": "short",
+      "question_text": "Nervous coordination اور hormonal coordination میں ایک فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Nervous coordination electrical impulses کے ذریعے عموماً تیز اور short-term response دیتی ہے، جبکہ hormonal coordination blood-borne hormones کے ذریعے نسبتاً سست مگر دیرپا ہو سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Coordination"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C05-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Coordination اور عصبی و Endocrine نظام",
+      "topic_name": "Nervous endocrine",
+      "category": "long",
+      "question_text": "Nervous system اور endocrine system کس طرح body coordination میں ایک دوسرے کی تکمیل کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں receptors/signals, CNS response, endocrine hormones, speed/duration differences اور homeostasis میں مشترکہ کردار شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Nervous endocrine"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C06-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Gametes",
+      "category": "mcq",
+      "question_text": "Gametes میں chromosome number عموماً کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Haploid"
+        },
+        {
+          "id": "B",
+          "text": "Diploid always"
+        },
+        {
+          "id": "C",
+          "text": "Zero"
+        },
+        {
+          "id": "D",
+          "text": "Double diploid"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Haploid",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Gametes"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C06-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Fertilization",
+      "category": "mcq",
+      "question_text": "Fertilization کا نتیجہ کیا بنتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Zygote"
+        },
+        {
+          "id": "B",
+          "text": "Neuron"
+        },
+        {
+          "id": "C",
+          "text": "Antibody"
+        },
+        {
+          "id": "D",
+          "text": "Enzyme"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Zygote",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Fertilization"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C06-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Meiosis",
+      "category": "short",
+      "question_text": "Reproduction میں meiosis کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ haploid gametes بناتی ہے، chromosome number کو generation to generation maintain کرنے میں مدد دیتی ہے اور genetic variation پیدا کرتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Meiosis"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C06-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Reproduction",
+      "topic_name": "Reproductive biology",
+      "category": "long",
+      "question_text": "Gamete formation, fertilization اور early development کے بنیادی biological sequence کو مختصراً بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں meiosis سے gametes، fertilization سے diploid zygote اور mitotic divisions سے early development شامل ہو؛ غیر ضروری explicit detail نہ ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Reproductive biology"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C07-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "DNA",
+      "category": "mcq",
+      "question_text": "Hereditary information بنیادی طور پر کس molecule میں محفوظ ہوتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "DNA"
+        },
+        {
+          "id": "B",
+          "text": "Starch"
+        },
+        {
+          "id": "C",
+          "text": "Lipid"
+        },
+        {
+          "id": "D",
+          "text": "Water"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "DNA",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "DNA"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C07-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Mendel",
+      "category": "mcq",
+      "question_text": "Mendel کی inheritance studies بنیادی طور پر کس تصور سے متعلق تھیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Traits کے predictable inheritance patterns"
+        },
+        {
+          "id": "B",
+          "text": "Respiration"
+        },
+        {
+          "id": "C",
+          "text": "Digestion"
+        },
+        {
+          "id": "D",
+          "text": "Excretion"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Traits کے predictable inheritance patterns",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Mendel"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C07-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Gene",
+      "category": "short",
+      "question_text": "Gene کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "DNA کا ایسا functional segment جو کسی product یا inherited characteristic سے متعلق genetic information رکھتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Gene"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C07-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Inheritance",
+      "topic_name": "Inheritance",
+      "category": "long",
+      "question_text": "Chromosome, DNA, gene, allele, genotype اور phenotype کے باہمی تعلق کو واضح کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں chromosome پر DNA، DNA کے genes، gene کی alternative forms alleles، genotype genetic makeup اور phenotype expressed trait شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Inheritance"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C08-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Biotechnology",
+      "category": "mcq",
+      "question_text": "Genetic engineering میں بنیادی طور پر کیا کیا جاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے"
+        },
+        {
+          "id": "B",
+          "text": "صرف blood pressure ناپا جاتا ہے"
+        },
+        {
+          "id": "C",
+          "text": "Food mechanically grind کیا جاتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "Urine filter کیا جاتا ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Biotechnology"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C08-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Applications",
+      "category": "mcq",
+      "question_text": "Biotechnology کی ایک مفید application کون سی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Medicines یا useful biological products کی production"
+        },
+        {
+          "id": "B",
+          "text": "صرف weather forecast"
+        },
+        {
+          "id": "C",
+          "text": "Road construction only"
+        },
+        {
+          "id": "D",
+          "text": "Metal cutting only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Medicines یا useful biological products کی production",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Applications"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C08-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Biotech risks",
+      "category": "short",
+      "question_text": "Biotechnology کے responsible use میں risk assessment کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Environmental, health, ethical اور social impacts کو evaluate کرنا ضروری ہے تاکہ benefits کے ساتھ possible harms بھی manage کیے جا سکیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Biotech risks"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C08-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Biotechnology",
+      "topic_name": "Biotech applications",
+      "category": "long",
+      "question_text": "Biotechnology کی agriculture, medicine اور industry میں applications اور دو ethical/safety concerns بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں کم از کم تین valid applications اور concerns جیسے biosafety, environment, privacy/ownership یا equitable access شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Biotech applications"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C09-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Pathogens",
+      "category": "mcq",
+      "question_text": "Pathogen کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Disease-causing biological agent"
+        },
+        {
+          "id": "B",
+          "text": "Digestive enzyme"
+        },
+        {
+          "id": "C",
+          "text": "Bone cell"
+        },
+        {
+          "id": "D",
+          "text": "Vitamin"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Disease-causing biological agent",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Pathogens"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C09-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Immunity",
+      "category": "mcq",
+      "question_text": "Antibodies کس system کا حصہ ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Immune system"
+        },
+        {
+          "id": "B",
+          "text": "Skeletal system only"
+        },
+        {
+          "id": "C",
+          "text": "Digestive tract only"
+        },
+        {
+          "id": "D",
+          "text": "Urinary system only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Immune system",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Immunity"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C09-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Immunity",
+      "category": "short",
+      "question_text": "Innate اور acquired immunity میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Innate immunity non-specific دفاع ہے جو پہلے سے موجود ہوتا ہے؛ acquired immunity specific response ہے جو exposure یا vaccination کے بعد develop ہو سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Immunity"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C09-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Diseases and Immunity",
+      "topic_name": "Disease defense",
+      "category": "long",
+      "question_text": "Body کی first-line defenses, immune response اور vaccination کے کردار کو بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں barriers, white blood cells/immune recognition, antibodies/memory اور vaccination کے preventive principle شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Disease defense"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C10-M01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Natural selection",
+      "category": "mcq",
+      "question_text": "Natural selection میں کون سے individuals زیادہ reproductive success حاصل کرتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں"
+        },
+        {
+          "id": "B",
+          "text": "ہمیشہ سب سے بڑے individuals"
+        },
+        {
+          "id": "C",
+          "text": "ہمیشہ سب سے پرانے individuals"
+        },
+        {
+          "id": "D",
+          "text": "وہ جن میں variation نہ ہو"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Natural selection"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C10-M02",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Variation",
+      "category": "mcq",
+      "question_text": "Evolution کے لیے variation کیوں اہم ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
+        },
+        {
+          "id": "B",
+          "text": "تمام individuals کو identical بناتی ہے"
+        },
+        {
+          "id": "C",
+          "text": "Genes ختم کرتی ہے"
+        },
+        {
+          "id": "D",
+          "text": "Environment کو ثابت رکھتی ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Selection کے لیے heritable differences فراہم کرتی ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Variation"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C10-S01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Speciation",
+      "category": "short",
+      "question_text": "Speciation سے کیا مراد ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایسا evolutionary process جس میں populations میں genetic divergence اور reproductive isolation بڑھ کر نئی species کے وجود کا باعث بن سکتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Speciation"
+      ]
+    },
+    {
+      "id": "X-BIO-UR-C10-L01",
+      "class_level": "10th",
+      "subject": "Biology",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "10",
+      "chapter_name": "Evolution",
+      "topic_name": "Evolution evidence",
+      "category": "long",
+      "question_text": "Evolution کے حق میں evidence کی کم از کم چار categories بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Fossil record, comparative anatomy, embryological evidence, molecular/DNA similarities اور biogeography میں سے چار کی درست وضاحت شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-021 | 47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "biology",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Evolution evidence"
+      ]
+    }
+  ]
+}

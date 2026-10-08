@@ -1,0 +1,3079 @@
+{
+  "schemaVersion": "assps-biology10-urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-021",
+  "sourcePdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+  "scope": "CURRENT_2026_27_URDU_MEDIUM_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-BIO-UR-C01-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C01",
+        "number": 1
+      },
+      "topicId": "Digestion",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Protein digestion کا آغاز بنیادی طور پر کہاں ہوتا ہے؟",
+          "answer": "Stomach",
+          "options": [
+            {
+              "id": "A",
+              "text": "Stomach"
+            },
+            {
+              "id": "B",
+              "text": "Mouth"
+            },
+            {
+              "id": "C",
+              "text": "Large intestine"
+            },
+            {
+              "id": "D",
+              "text": "Kidney"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C01-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C01",
+        "number": 1
+      },
+      "topicId": "Absorption",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Small intestine میں villi کا اہم کام کیا ہے؟",
+          "answer": "Absorption کے لیے surface area بڑھانا",
+          "options": [
+            {
+              "id": "A",
+              "text": "Absorption کے لیے surface area بڑھانا"
+            },
+            {
+              "id": "B",
+              "text": "Blood pump کرنا"
+            },
+            {
+              "id": "C",
+              "text": "Urine بنانا"
+            },
+            {
+              "id": "D",
+              "text": "Air filter کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C01-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C01",
+        "number": 1
+      },
+      "topicId": "Nutrition",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Balanced diet سے کیا مراد ہے؟",
+          "answer": "ایسی غذا جو جسم کو مناسب مقدار میں carbohydrates, proteins, fats, vitamins, minerals, fibre اور water فراہم کرے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C01-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C01",
+        "number": 1
+      },
+      "topicId": "Digestive system",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Digestive System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "انسانی digestive system میں mouth سے small intestine تک food processing کی ترتیب بیان کریں۔",
+          "answer": "جواب میں ingestion, mechanical/chemical digestion, stomach کی processing, bile/pancreatic enzymes کا کردار اور small intestine میں digestion/absorption شامل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C02-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C02",
+        "number": 2
+      },
+      "topicId": "Respiration",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Gas exchange بنیادی طور پر lungs کے کس حصے میں ہوتا ہے؟",
+          "answer": "Alveoli",
+          "options": [
+            {
+              "id": "A",
+              "text": "Alveoli"
+            },
+            {
+              "id": "B",
+              "text": "Trachea only"
+            },
+            {
+              "id": "C",
+              "text": "Diaphragm"
+            },
+            {
+              "id": "D",
+              "text": "Rib"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C02-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C02",
+        "number": 2
+      },
+      "topicId": "Breathing",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Inhalation کے دوران diaphragm عموماً کیا کرتا ہے؟",
+          "answer": "Contract ہو کر نیچے جاتا ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Contract ہو کر نیچے جاتا ہے"
+            },
+            {
+              "id": "B",
+              "text": "Relax ہو کر اوپر جاتا ہے"
+            },
+            {
+              "id": "C",
+              "text": "Blood pump کرتا ہے"
+            },
+            {
+              "id": "D",
+              "text": "Food digest کرتا ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C02-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C02",
+        "number": 2
+      },
+      "topicId": "Gas exchange",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Alveoli gas exchange کے لیے موزوں کیوں ہیں؟",
+          "answer": "ان کی walls thin ہوتی ہیں، surface area بڑا ہوتا ہے اور capillary blood supply بھرپور ہوتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C02-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C02",
+        "number": 2
+      },
+      "topicId": "Breathing mechanism",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Respiratory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Inhalation اور exhalation کے mechanism کو diaphragm, ribs اور pressure changes کے حوالے سے بیان کریں۔",
+          "answer": "جواب میں thoracic volume, pressure change, diaphragm/rib movement اور air flow کی سمت واضح ہونی چاہیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C03-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C03",
+        "number": 3
+      },
+      "topicId": "Blood",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Blood Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Oxygen transport میں اہم blood cell کون سا ہے؟",
+          "answer": "Red blood cell",
+          "options": [
+            {
+              "id": "A",
+              "text": "Red blood cell"
+            },
+            {
+              "id": "B",
+              "text": "Platelet"
+            },
+            {
+              "id": "C",
+              "text": "Neuron"
+            },
+            {
+              "id": "D",
+              "text": "Osteocyte"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C03-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C03",
+        "number": 3
+      },
+      "topicId": "Heart",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Blood Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Heart کا کون سا حصہ oxygenated blood کو body کی طرف pump کرتا ہے؟",
+          "answer": "Left ventricle",
+          "options": [
+            {
+              "id": "A",
+              "text": "Left ventricle"
+            },
+            {
+              "id": "B",
+              "text": "Right atrium"
+            },
+            {
+              "id": "C",
+              "text": "Right ventricle"
+            },
+            {
+              "id": "D",
+              "text": "Left atrium only receives"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C03-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C03",
+        "number": 3
+      },
+      "topicId": "Blood vessels",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Blood Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Artery اور vein میں ایک بنیادی فرق بیان کریں۔",
+          "answer": "Artery blood کو heart سے دور لے جاتی ہے جبکہ vein blood کو heart کی طرف واپس لاتی ہے؛ structure اور pressure بھی مختلف ہوتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C03-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C03",
+        "number": 3
+      },
+      "topicId": "Circulation",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Blood Circulatory System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Double circulation کا تصور اور pulmonary و systemic circulation کا کردار بیان کریں۔",
+          "answer": "جواب میں heart→lungs→heart pulmonary circuit اور heart→body→heart systemic circuit، oxygenation اور pressure/function کا فرق شامل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C04-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C04",
+        "number": 4
+      },
+      "topicId": "Kidney",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Kidney کی functional unit کیا کہلاتی ہے؟",
+          "answer": "Nephron",
+          "options": [
+            {
+              "id": "A",
+              "text": "Nephron"
+            },
+            {
+              "id": "B",
+              "text": "Neuron"
+            },
+            {
+              "id": "C",
+              "text": "Alveolus"
+            },
+            {
+              "id": "D",
+              "text": "Villus"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C04-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C04",
+        "number": 4
+      },
+      "topicId": "Urine formation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Selective reabsorption کا اہم فائدہ کیا ہے؟",
+          "answer": "Useful substances کو blood میں واپس لینا",
+          "options": [
+            {
+              "id": "A",
+              "text": "Useful substances کو blood میں واپس لینا"
+            },
+            {
+              "id": "B",
+              "text": "تمام water خارج کرنا"
+            },
+            {
+              "id": "C",
+              "text": "Oxygen absorb کرنا"
+            },
+            {
+              "id": "D",
+              "text": "Food digest کرنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C04-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C04",
+        "number": 4
+      },
+      "topicId": "Excretion",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Excretion اور egestion میں فرق بیان کریں۔",
+          "answer": "Excretion metabolic wastes کو body سے نکالنا ہے، جبکہ egestion undigested food کو digestive tract سے خارج کرنا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C04-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C04",
+        "number": 4
+      },
+      "topicId": "Kidney function",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Human Urinary System"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Nephron میں filtration, selective reabsorption اور urine formation کی ترتیب بیان کریں۔",
+          "answer": "جواب میں glomerular filtration, useful solutes/water کی reabsorption، remaining waste کی concentration اور collecting pathway شامل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C05-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C05",
+        "number": 5
+      },
+      "topicId": "Neuron",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordination"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Nervous system کی بنیادی functional cell کیا ہے؟",
+          "answer": "Neuron",
+          "options": [
+            {
+              "id": "A",
+              "text": "Neuron"
+            },
+            {
+              "id": "B",
+              "text": "Platelet"
+            },
+            {
+              "id": "C",
+              "text": "RBC"
+            },
+            {
+              "id": "D",
+              "text": "Osteoblast"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C05-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C05",
+        "number": 5
+      },
+      "topicId": "Hormones",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordination"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Hormones عام طور پر کہاں سے release ہوتے ہیں؟",
+          "answer": "Endocrine glands",
+          "options": [
+            {
+              "id": "A",
+              "text": "Endocrine glands"
+            },
+            {
+              "id": "B",
+              "text": "Bones only"
+            },
+            {
+              "id": "C",
+              "text": "Alveoli only"
+            },
+            {
+              "id": "D",
+              "text": "Villi only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C05-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C05",
+        "number": 5
+      },
+      "topicId": "Coordination",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordination"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Nervous coordination اور hormonal coordination میں ایک فرق بیان کریں۔",
+          "answer": "Nervous coordination electrical impulses کے ذریعے عموماً تیز اور short-term response دیتی ہے، جبکہ hormonal coordination blood-borne hormones کے ذریعے نسبتاً سست مگر دیرپا ہو سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C05-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C05",
+        "number": 5
+      },
+      "topicId": "Nervous endocrine",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Coordination"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Nervous system اور endocrine system کس طرح body coordination میں ایک دوسرے کی تکمیل کرتے ہیں؟",
+          "answer": "جواب میں receptors/signals, CNS response, endocrine hormones, speed/duration differences اور homeostasis میں مشترکہ کردار شامل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C06-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C06",
+        "number": 6
+      },
+      "topicId": "Gametes",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Gametes میں chromosome number عموماً کیا ہوتا ہے؟",
+          "answer": "Haploid",
+          "options": [
+            {
+              "id": "A",
+              "text": "Haploid"
+            },
+            {
+              "id": "B",
+              "text": "Diploid always"
+            },
+            {
+              "id": "C",
+              "text": "Zero"
+            },
+            {
+              "id": "D",
+              "text": "Double diploid"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C06-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C06",
+        "number": 6
+      },
+      "topicId": "Fertilization",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Fertilization کا نتیجہ کیا بنتا ہے؟",
+          "answer": "Zygote",
+          "options": [
+            {
+              "id": "A",
+              "text": "Zygote"
+            },
+            {
+              "id": "B",
+              "text": "Neuron"
+            },
+            {
+              "id": "C",
+              "text": "Antibody"
+            },
+            {
+              "id": "D",
+              "text": "Enzyme"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C06-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C06",
+        "number": 6
+      },
+      "topicId": "Meiosis",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Reproduction میں meiosis کیوں اہم ہے؟",
+          "answer": "یہ haploid gametes بناتی ہے، chromosome number کو generation to generation maintain کرنے میں مدد دیتی ہے اور genetic variation پیدا کرتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C06-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C06",
+        "number": 6
+      },
+      "topicId": "Reproductive biology",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Reproduction"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Gamete formation, fertilization اور early development کے بنیادی biological sequence کو مختصراً بیان کریں۔",
+          "answer": "جواب میں meiosis سے gametes، fertilization سے diploid zygote اور mitotic divisions سے early development شامل ہو؛ غیر ضروری explicit detail نہ ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C07-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C07",
+        "number": 7
+      },
+      "topicId": "DNA",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Hereditary information بنیادی طور پر کس molecule میں محفوظ ہوتی ہے؟",
+          "answer": "DNA",
+          "options": [
+            {
+              "id": "A",
+              "text": "DNA"
+            },
+            {
+              "id": "B",
+              "text": "Starch"
+            },
+            {
+              "id": "C",
+              "text": "Lipid"
+            },
+            {
+              "id": "D",
+              "text": "Water"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C07-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C07",
+        "number": 7
+      },
+      "topicId": "Mendel",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Mendel کی inheritance studies بنیادی طور پر کس تصور سے متعلق تھیں؟",
+          "answer": "Traits کے predictable inheritance patterns",
+          "options": [
+            {
+              "id": "A",
+              "text": "Traits کے predictable inheritance patterns"
+            },
+            {
+              "id": "B",
+              "text": "Respiration"
+            },
+            {
+              "id": "C",
+              "text": "Digestion"
+            },
+            {
+              "id": "D",
+              "text": "Excretion"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C07-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C07",
+        "number": 7
+      },
+      "topicId": "Gene",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Gene کیا ہے؟",
+          "answer": "DNA کا ایسا functional segment جو کسی product یا inherited characteristic سے متعلق genetic information رکھتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C07-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C07",
+        "number": 7
+      },
+      "topicId": "Inheritance",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Inheritance"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Chromosome, DNA, gene, allele, genotype اور phenotype کے باہمی تعلق کو واضح کریں۔",
+          "answer": "جواب میں chromosome پر DNA، DNA کے genes، gene کی alternative forms alleles، genotype genetic makeup اور phenotype expressed trait شامل ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C08-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C08",
+        "number": 8
+      },
+      "topicId": "Biotechnology",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Genetic engineering میں بنیادی طور پر کیا کیا جاتا ہے؟",
+          "answer": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "DNA کو purposeful طور پر modify یا transfer کیا جاتا ہے"
+            },
+            {
+              "id": "B",
+              "text": "صرف blood pressure ناپا جاتا ہے"
+            },
+            {
+              "id": "C",
+              "text": "Food mechanically grind کیا جاتا ہے"
+            },
+            {
+              "id": "D",
+              "text": "Urine filter کیا جاتا ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C08-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C08",
+        "number": 8
+      },
+      "topicId": "Applications",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Biotechnology کی ایک مفید application کون سی ہے؟",
+          "answer": "Medicines یا useful biological products کی production",
+          "options": [
+            {
+              "id": "A",
+              "text": "Medicines یا useful biological products کی production"
+            },
+            {
+              "id": "B",
+              "text": "صرف weather forecast"
+            },
+            {
+              "id": "C",
+              "text": "Road construction only"
+            },
+            {
+              "id": "D",
+              "text": "Metal cutting only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C08-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C08",
+        "number": 8
+      },
+      "topicId": "Biotech risks",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Biotechnology کے responsible use میں risk assessment کیوں ضروری ہے؟",
+          "answer": "Environmental, health, ethical اور social impacts کو evaluate کرنا ضروری ہے تاکہ benefits کے ساتھ possible harms بھی manage کیے جا سکیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C08-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C08",
+        "number": 8
+      },
+      "topicId": "Biotech applications",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Biotechnology"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Biotechnology کی agriculture, medicine اور industry میں applications اور دو ethical/safety concerns بیان کریں۔",
+          "answer": "جواب میں کم از کم تین valid applications اور concerns جیسے biosafety, environment, privacy/ownership یا equitable access شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C09-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C09",
+        "number": 9
+      },
+      "topicId": "Pathogens",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Diseases and Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Pathogen کیا ہے؟",
+          "answer": "Disease-causing biological agent",
+          "options": [
+            {
+              "id": "A",
+              "text": "Disease-causing biological agent"
+            },
+            {
+              "id": "B",
+              "text": "Digestive enzyme"
+            },
+            {
+              "id": "C",
+              "text": "Bone cell"
+            },
+            {
+              "id": "D",
+              "text": "Vitamin"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C09-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C09",
+        "number": 9
+      },
+      "topicId": "Immunity",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Diseases and Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Antibodies کس system کا حصہ ہیں؟",
+          "answer": "Immune system",
+          "options": [
+            {
+              "id": "A",
+              "text": "Immune system"
+            },
+            {
+              "id": "B",
+              "text": "Skeletal system only"
+            },
+            {
+              "id": "C",
+              "text": "Digestive tract only"
+            },
+            {
+              "id": "D",
+              "text": "Urinary system only"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C09-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C09",
+        "number": 9
+      },
+      "topicId": "Immunity",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Diseases and Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Innate اور acquired immunity میں فرق بیان کریں۔",
+          "answer": "Innate immunity non-specific دفاع ہے جو پہلے سے موجود ہوتا ہے؛ acquired immunity specific response ہے جو exposure یا vaccination کے بعد develop ہو سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C09-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C09",
+        "number": 9
+      },
+      "topicId": "Disease defense",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Diseases and Immunity"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Body کی first-line defenses, immune response اور vaccination کے کردار کو بیان کریں۔",
+          "answer": "جواب میں barriers, white blood cells/immune recognition, antibodies/memory اور vaccination کے preventive principle شامل ہوں۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C10-M01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C10",
+        "number": 10
+      },
+      "topicId": "Natural selection",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Natural selection میں کون سے individuals زیادہ reproductive success حاصل کرتے ہیں؟",
+          "answer": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں",
+          "options": [
+            {
+              "id": "A",
+              "text": "وہ جن کی heritable traits environment میں فائدہ دیتی ہیں"
+            },
+            {
+              "id": "B",
+              "text": "ہمیشہ سب سے بڑے individuals"
+            },
+            {
+              "id": "C",
+              "text": "ہمیشہ سب سے پرانے individuals"
+            },
+            {
+              "id": "D",
+              "text": "وہ جن میں variation نہ ہو"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C10-M02",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C10",
+        "number": 10
+      },
+      "topicId": "Variation",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Evolution کے لیے variation کیوں اہم ہے؟",
+          "answer": "Selection کے لیے heritable differences فراہم کرتی ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "Selection کے لیے heritable differences فراہم کرتی ہے"
+            },
+            {
+              "id": "B",
+              "text": "تمام individuals کو identical بناتی ہے"
+            },
+            {
+              "id": "C",
+              "text": "Genes ختم کرتی ہے"
+            },
+            {
+              "id": "D",
+              "text": "Environment کو ثابت رکھتی ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-BIO-UR-C10-S01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C10",
+        "number": 10
+      },
+      "topicId": "Speciation",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Speciation سے کیا مراد ہے؟",
+          "answer": "ایسا evolutionary process جس میں populations میں genetic divergence اور reproductive isolation بڑھ کر نئی species کے وجود کا باعث بن سکتی ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-BIO-UR-C10-L01",
+      "chapter": {
+        "id": "X-BIO-2026-UR-C10",
+        "number": 10
+      },
+      "topicId": "Evolution evidence",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-021",
+        "pdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_EDITION_CROSS_MEDIUM_PARITY_EXACT_URDU_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "Evolution"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "biology",
+        "edition": "2026-27",
+        "textbookId": "PECTAA-X-BIOLOGY-UR-2026-27",
+        "syllabusVersion": "x-2026-27"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Biology X Urdu-medium starter; current edition/source bytes verified. Exact Urdu page boundaries and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل تصوراتی سوال؛ provisional internal استعمال کے لیے۔",
+      "content": {
+        "ur": {
+          "stem": "Evolution کے حق میں evidence کی کم از کم چار categories بیان کریں۔",
+          "answer": "Fossil record, comparative anatomy, embryological evidence, molecular/DNA similarities اور biogeography میں سے چار کی درست وضاحت شامل ہو۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 40,
+    "mcq": 20,
+    "short": 10,
+    "long": 10,
+    "chapters": 10
+  }
+}

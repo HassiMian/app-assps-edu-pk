@@ -1,0 +1,1319 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-CHEM-UR-C14-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "Kinetic particle theory",
+      "category": "mcq",
+      "question_text": "Temperature بڑھنے پر particles کی average kinetic energy عام طور پر کیا کرتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "بڑھتی ہے"
+        },
+        {
+          "id": "B",
+          "text": "کم ہو کر صفر ہو جاتی ہے"
+        },
+        {
+          "id": "C",
+          "text": "ہمیشہ برابر رہتی ہے"
+        },
+        {
+          "id": "D",
+          "text": "mass میں بدل جاتی ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "بڑھتی ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Kinetic particle theory"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C14-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "Kinetic particle theory",
+      "category": "short",
+      "question_text": "Boiling اور evaporation میں ایک بنیادی فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Evaporation surface پر مختلف temperatures پر ہو سکتی ہے، جبکہ boiling پورے liquid میں مخصوص boiling point کے قریب ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Kinetic particle theory"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C14-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "14",
+      "chapter_name": "States of Matter and Phase Changes",
+      "topic_name": "Kinetic particle theory",
+      "category": "long",
+      "question_text": "Heating curve کو kinetic particle theory کے مطابق explain کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں temperature rise, particle kinetic energy, phase-change plateau, intermolecular forces اور latent heat کا تعلق شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Kinetic particle theory"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C15-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "Stoichiometry",
+      "category": "mcq",
+      "question_text": "Balanced chemical equation کس چیز کے mole ratios دیتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Reactants اور products"
+        },
+        {
+          "id": "B",
+          "text": "صرف colours"
+        },
+        {
+          "id": "C",
+          "text": "صرف densities"
+        },
+        {
+          "id": "D",
+          "text": "صرف temperatures"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Reactants اور products",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Stoichiometry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C15-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "Stoichiometry",
+      "category": "short",
+      "question_text": "Mole concept کی stoichiometry میں اہمیت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Mole مختلف substances کی particle amounts کو compare کرنے اور balanced equation کے ratios کے مطابق calculations کرنے کی standard unit ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Stoichiometry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C15-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "15",
+      "chapter_name": "Stoichiometry",
+      "topic_name": "Stoichiometry",
+      "category": "long",
+      "question_text": "Mass-to-mass stoichiometric calculation کے steps بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Equation balance کرنا، given mass کو moles میں convert کرنا، mole ratio لگانا، target moles کو mass میں بدلنا اور units check کرنا شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Stoichiometry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C16-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "Electrochemistry",
+      "category": "mcq",
+      "question_text": "Oxidation کو electron terms میں کیسے بیان کیا جاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Loss of electrons"
+        },
+        {
+          "id": "B",
+          "text": "Gain of electrons"
+        },
+        {
+          "id": "C",
+          "text": "No electron change"
+        },
+        {
+          "id": "D",
+          "text": "Only dissolving"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Loss of electrons",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Electrochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C16-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "Electrochemistry",
+      "category": "short",
+      "question_text": "Voltaic cell اور electrolytic cell میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Voltaic cell spontaneous chemical reaction سے electrical energy بناتا ہے؛ electrolytic cell external electrical energy سے non-spontaneous reaction چلاتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Electrochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C16-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "16",
+      "chapter_name": "Electrochemistry",
+      "topic_name": "Electrochemistry",
+      "category": "long",
+      "question_text": "Redox process میں oxidation, reduction, anode اور cathode کے کردار explain کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Electron loss/gain، oxidation at anode، reduction at cathode اور electron flow کا واضح تعلق بیان ہونا چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Electrochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C17-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "Reaction Kinetics",
+      "category": "mcq",
+      "question_text": "Catalyst reaction rate کیسے بڑھاتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Lower activation-energy pathway فراہم کر کے"
+        },
+        {
+          "id": "B",
+          "text": "Mass بڑھا کر"
+        },
+        {
+          "id": "C",
+          "text": "Products ختم کر کے"
+        },
+        {
+          "id": "D",
+          "text": "Temperature ہمیشہ صفر کر کے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Lower activation-energy pathway فراہم کر کے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Reaction Kinetics"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C17-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "Reaction Kinetics",
+      "category": "short",
+      "question_text": "Temperature بڑھانے سے reaction rate کیوں بڑھ سکتی ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Particles تیز حرکت کرتے ہیں، collisions زیادہ ہوتے ہیں اور زیادہ collisions activation energy سے اوپر جا سکتی ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Reaction Kinetics"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C17-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "17",
+      "chapter_name": "Reaction Kinetics",
+      "topic_name": "Reaction Kinetics",
+      "category": "long",
+      "question_text": "Concentration, temperature, surface area اور catalyst کے effects collision theory سے explain کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر factor کو collision frequency/effectiveness یا activation energy کے ساتھ logically relate کرنا چاہیے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Reaction Kinetics"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C18-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "Salts",
+      "category": "mcq",
+      "question_text": "Salt عام طور پر کیا ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ionic compound"
+        },
+        {
+          "id": "B",
+          "text": "صرف gas"
+        },
+        {
+          "id": "C",
+          "text": "صرف metal"
+        },
+        {
+          "id": "D",
+          "text": "صرف acid"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Ionic compound",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Salts"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C18-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "Salts",
+      "category": "short",
+      "question_text": "Crystallization کا purpose کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Concentrated solution سے purified solid crystals حاصل کرنا۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Salts"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C18-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "18",
+      "chapter_name": "Salts",
+      "topic_name": "Salts",
+      "category": "long",
+      "question_text": "Soluble اور insoluble salts کی preparation methods compare کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Neutralization/acid + insoluble base route، filtration/crystallization، precipitation، washing اور drying کے مناسب steps شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Salts"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C19-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "Nitrogen and Sulphur",
+      "category": "mcq",
+      "question_text": "Nitrogen living organisms کے لیے کیوں اہم ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Proteins اور nucleic acids کی تیاری میں حصہ لیتا ہے"
+        },
+        {
+          "id": "B",
+          "text": "صرف bones بناتا ہے"
+        },
+        {
+          "id": "C",
+          "text": "صرف water بناتا ہے"
+        },
+        {
+          "id": "D",
+          "text": "کوئی biological role نہیں"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Proteins اور nucleic acids کی تیاری میں حصہ لیتا ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Nitrogen and Sulphur"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C19-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "Nitrogen and Sulphur",
+      "category": "short",
+      "question_text": "Sulphur dioxide کا ایک environmental effect بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ acid deposition اور respiratory/environmental problems میں contribute کر سکتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Nitrogen and Sulphur"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C19-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "19",
+      "chapter_name": "Nitrogen and Sulphur",
+      "topic_name": "Nitrogen and Sulphur",
+      "category": "long",
+      "question_text": "Nitrogen اور sulphur compounds کے useful roles اور environmental impacts discuss کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Fertilizers/industry, biological importance, nitrogen oxides, sulphur compounds اور pollution/acid deposition شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Nitrogen and Sulphur"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C20-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "Water",
+      "category": "mcq",
+      "question_text": "Hard water میں عام طور پر کن ions کی مقدار زیادہ ہو سکتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Calcium اور magnesium"
+        },
+        {
+          "id": "B",
+          "text": "صرف sodium"
+        },
+        {
+          "id": "C",
+          "text": "صرف hydrogen"
+        },
+        {
+          "id": "D",
+          "text": "صرف chloride molecules"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Calcium اور magnesium",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Water"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C20-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "Water",
+      "category": "short",
+      "question_text": "Public water treatment کیوں ضروری ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Suspended matter, harmful microorganisms اور بعض contaminants کم کر کے پانی کو زیادہ محفوظ اور usable بنانے کے لیے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Water"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C20-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "20",
+      "chapter_name": "Water",
+      "topic_name": "Water",
+      "category": "long",
+      "question_text": "Water contamination sources اور treatment کے major steps explain کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Sources of contamination، sedimentation/filtration، disinfection، quality monitoring اور pollution prevention شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Water"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C21-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "Organic Chemistry",
+      "category": "mcq",
+      "question_text": "Organic chemistry بنیادی طور پر کس element کے compounds کا مطالعہ کرتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon"
+        },
+        {
+          "id": "B",
+          "text": "Helium"
+        },
+        {
+          "id": "C",
+          "text": "Neon"
+        },
+        {
+          "id": "D",
+          "text": "Argon"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Organic Chemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C21-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "Organic Chemistry",
+      "category": "short",
+      "question_text": "Homologous series کیا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "ایسے organic compounds کی family جن میں same functional group/general pattern اور similar chemical properties ہوں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Organic Chemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C21-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "21",
+      "chapter_name": "Organic Chemistry",
+      "topic_name": "Organic Chemistry",
+      "category": "long",
+      "question_text": "Functional groups, homologous series اور structural formulae organic compounds کو classify کرنے میں کیسے مدد دیتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Definitions، chemical behaviour، structural representation اور original examples کے ساتھ relation explain ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Organic Chemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C22-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "Hydrocarbons",
+      "category": "mcq",
+      "question_text": "Hydrocarbon کن elements پر مشتمل ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Carbon اور hydrogen"
+        },
+        {
+          "id": "B",
+          "text": "Carbon اور oxygen only"
+        },
+        {
+          "id": "C",
+          "text": "Nitrogen اور oxygen only"
+        },
+        {
+          "id": "D",
+          "text": "All metals"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Carbon اور hydrogen",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Hydrocarbons"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C22-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "Hydrocarbons",
+      "category": "short",
+      "question_text": "Saturated اور unsaturated hydrocarbons میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Saturated hydrocarbons میں C-C single bonds ہوتے ہیں، unsaturated میں C=C یا C≡C multiple bond موجود ہوتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Hydrocarbons"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C22-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "22",
+      "chapter_name": "Hydrocarbons",
+      "topic_name": "Hydrocarbons",
+      "category": "long",
+      "question_text": "Alkanes اور alkenes کو bonding, reactivity اور characteristic reactions کے لحاظ سے compare کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Single vs double bond، saturation، relative reactivity، substitution اور addition reactions شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Hydrocarbons"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C23-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "Alcohols",
+      "category": "mcq",
+      "question_text": "Alcohol کا functional group کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "–OH"
+        },
+        {
+          "id": "B",
+          "text": "–COOH"
+        },
+        {
+          "id": "C",
+          "text": "–NH2"
+        },
+        {
+          "id": "D",
+          "text": "C=C only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "–OH",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Alcohols"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C23-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "Alcohols",
+      "category": "short",
+      "question_text": "Fermentation سے ethanol کیسے بن سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Sugars کو مناسب conditions میں yeast/microorganisms کے ذریعے ethanol اور carbon dioxide میں convert کیا جاتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Alcohols"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C23-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "23",
+      "chapter_name": "Monohydroxy Alkanes or Alcohols",
+      "topic_name": "Alcohols",
+      "category": "long",
+      "question_text": "Ethanol کی preparation, important properties, reactions اور uses کا خلاصہ بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Fermentation، solubility/physical property، combustion, oxidation اور responsible industrial use شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Alcohols"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C24-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "Carboxylic Acids",
+      "category": "mcq",
+      "question_text": "Carboxylic acid کا functional group کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "–COOH"
+        },
+        {
+          "id": "B",
+          "text": "–OH only"
+        },
+        {
+          "id": "C",
+          "text": "–NH2"
+        },
+        {
+          "id": "D",
+          "text": "–Cl"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "–COOH",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Carboxylic Acids"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C24-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "Carboxylic Acids",
+      "category": "short",
+      "question_text": "Carboxylic acid اور alcohol کی esterification کا product کیا ہوتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Ester اور water بنتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Carboxylic Acids"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C24-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "24",
+      "chapter_name": "Carboxylic Acids",
+      "topic_name": "Carboxylic Acids",
+      "category": "long",
+      "question_text": "Carboxylic acids کے metals, bases, carbonates اور alcohols کے ساتھ reactions بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Salt formation, hydrogen/CO2 where relevant, neutralization اور esterification کا درست pattern شامل ہو۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Carboxylic Acids"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C25-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "Biochemistry",
+      "category": "mcq",
+      "question_text": "Proteins کے basic building units کیا ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Amino acids"
+        },
+        {
+          "id": "B",
+          "text": "Fatty acids only"
+        },
+        {
+          "id": "C",
+          "text": "Nucleotides only"
+        },
+        {
+          "id": "D",
+          "text": "Mineral ions"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Amino acids",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Biochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C25-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "Biochemistry",
+      "category": "short",
+      "question_text": "Balanced diet کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ energy اور ضروری nutrients مناسب مقدار میں فراہم کرتی ہے تاکہ growth, repair اور normal body functions برقرار رہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Biochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C25-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "25",
+      "chapter_name": "Biochemistry",
+      "topic_name": "Biochemistry",
+      "category": "long",
+      "question_text": "Carbohydrates, proteins, lipids اور nucleic acids کے major roles compare کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Building units/basic composition اور energy, structure, enzymes, membranes, heredity وغیرہ کے relevant roles شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Biochemistry"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C26-M01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "Polymers",
+      "category": "mcq",
+      "question_text": "Polymer کے چھوٹے repeating building units کو کیا کہتے ہیں؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Monomers"
+        },
+        {
+          "id": "B",
+          "text": "Electrodes"
+        },
+        {
+          "id": "C",
+          "text": "Isotopes"
+        },
+        {
+          "id": "D",
+          "text": "Catalysts"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Monomers",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Polymers"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C26-S01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "Polymers",
+      "category": "short",
+      "question_text": "Synthetic polymer waste environmental مسئلہ کیوں بن سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "بہت سے polymers آہستہ degrade ہوتے ہیں، waste accumulate ہو سکتا ہے اور recycling/management کی ضرورت ہوتی ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Polymers"
+      ]
+    },
+    {
+      "id": "X-CHEM-UR-C26-L01",
+      "class_level": "10th",
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "26",
+      "chapter_name": "Polymers",
+      "topic_name": "Polymers",
+      "category": "long",
+      "question_text": "Monomer, polymerization, repeating unit اور responsible polymer management explain کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Definitions، polymer formation، repeating-unit concept، useful properties/applications اور reduce/reuse/recycle/disposal considerations شامل ہوں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-022 | 09495a4747b282b52f519aa25eca678a158df3f3448ca7414eb225a8768429c6 | current-edition parity/page-boundary pending",
+      "tags": [
+        "grade10",
+        "chemistry",
+        "urdu",
+        "2026-27",
+        "internal-provisional",
+        "original-draft",
+        "Polymers"
+      ]
+    }
+  ]
+}

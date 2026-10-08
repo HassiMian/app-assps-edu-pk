@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "assps-biology10-urdu-source-map-v1",
+  "checkedOn": "2026-10-08",
+  "sourceRecordId": "pectaa-catalog-021",
+  "sourcePdfSha256": "47db6fd87947bb812cef701ec2b0a8c8fc97dc2b0c90b53b09c26a28fdc334e5",
+  "sourceByteLength": 68159705,
+  "pageCount": 132,
+  "identity": [
+    "Biology 10 UM (2026-27)",
+    "PECTAA",
+    "Urdu Medium"
+  ],
+  "chapterMapState": "CURRENT_EDITION_PARITY_VERIFIED_EXACT_URDU_PAGE_BOUNDARIES_PENDING",
+  "chapters": [
+    {
+      "number": 1,
+      "titleUr": "انسانی نظامِ انہضام",
+      "titleEn": "Human Digestive System",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 2,
+      "titleUr": "انسانی نظامِ تنفس",
+      "titleEn": "Human Respiratory System",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 3,
+      "titleUr": "انسانی نظامِ دورانِ خون",
+      "titleEn": "Human Blood Circulatory System",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 4,
+      "titleUr": "انسانی نظامِ اخراج",
+      "titleEn": "Human Urinary System",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 5,
+      "titleUr": "Coordination اور عصبی و Endocrine نظام",
+      "titleEn": "Coordination",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 6,
+      "titleUr": "Reproduction",
+      "titleEn": "Reproduction",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 7,
+      "titleUr": "Inheritance",
+      "titleEn": "Inheritance",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 8,
+      "titleUr": "Biotechnology",
+      "titleEn": "Biotechnology",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 9,
+      "titleUr": "Diseases and Immunity",
+      "titleEn": "Diseases and Immunity",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    },
+    {
+      "number": 10,
+      "titleUr": "Evolution",
+      "titleEn": "Evolution",
+      "status": "CURRENT_EDITION_PARITY_VERIFIED_PAGE_BOUNDARY_PENDING"
+    }
+  ],
+  "authoring": {
+    "provisionalInternalAllowed": true,
+    "publicationAllowed": false,
+    "copyTextbookPassages": false,
+    "copyExerciseStems": false,
+    "copyPastPaperStems": false,
+    "exactUrduPageBoundariesPending": true,
+    "urduLanguageConvention": "NATURAL_URDU_WITH_FAMILIAR_SCIENTIFIC_ENGLISH_TERMS"
+  }
+}
