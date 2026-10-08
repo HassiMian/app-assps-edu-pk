@@ -5,20 +5,12 @@
  */
 
 const { pool } = require('../../config/database');
+const { requireConfiguredSchoolId } = require('./schoolChannelGuard.cjs');
 const { execFile } = require('child_process');
 
-function requireWhatsAppSchoolId(env = process.env) {
-  const schoolId = Number.parseInt(String(env.WHATSAPP_SCHOOL_ID || ''), 10);
-  if (!Number.isInteger(schoolId) || schoolId <= 0) {
-    const error = new Error('WHATSAPP_SCHOOL_ID must be explicitly configured for the school channel.');
-    error.code = 'WHATSAPP_SCHOOL_CONTEXT_REQUIRED';
-    throw error;
-  }
-  return schoolId;
-}
 
 async function queryDb(text, params = []) {
-  const schoolId = requireWhatsAppSchoolId();
+  const schoolId = requireConfiguredSchoolId();
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
@@ -71,7 +63,7 @@ async function getExamDatesheet(args = {}) {
              es.paper_time, es.total_marks, es.pass_marks
       FROM exam_subjects es
       LEFT JOIN exams e ON es.exam_id = e.id
-      WHERE 1=1
+      WHERE es.school_id = current_setting('app.tenant_id')::int
     `;
     const params = [];
 
@@ -113,7 +105,10 @@ async function manageDatesheet({ action = 'add', examId = 9, className, subject,
   try {
     if (action === 'delete') {
       const del = await queryDb(
-        `DELETE FROM exam_subjects WHERE exam_id = $1 AND class_name ILIKE $2 AND subject ILIKE $3 RETURNING id;`,
+        `DELETE FROM exam_subjects
+         WHERE school_id = current_setting('app.tenant_id')::int
+           AND exam_id = $1 AND class_name ILIKE $2 AND subject ILIKE $3
+         RETURNING id;`,
         [examId, `%${className}%`, `%${subject}%`]
       );
       return { success: true, action: 'deleted', deletedCount: del.rowCount };
@@ -121,7 +116,7 @@ async function manageDatesheet({ action = 'add', examId = 9, className, subject,
 
     const res = await queryDb(
       `INSERT INTO exam_subjects (exam_id, class_name, subject, exam_date, paper_time, total_marks, pass_marks, school_id)
-       VALUES ($1, $2, $3, $4::date, $5, $6, $7, 1)
+       VALUES ($1, $2, $3, $4::date, $5, $6, $7, current_setting('app.tenant_id')::int)
        RETURNING id, exam_id, class_name, subject, exam_date, paper_time;`,
       [examId, className, subject, examDate, paperTime, totalMarks, passMarks]
     );
@@ -173,7 +168,7 @@ async function enterExamMarks({ examId = 9, className, subject, marksList = [] }
 
       const upsert = await queryDb(
         `INSERT INTO exam_results (exam_id, student_id, subject, marks_obtained, total_marks, grade, remarks, school_id)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, 1)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, current_setting('app.tenant_id')::int)
          ON CONFLICT (exam_id, student_id, subject)
          DO UPDATE SET marks_obtained = $4, total_marks = $5, grade = $6, remarks = $7, updated_at = NOW()
          RETURNING id, student_id, subject, marks_obtained, grade;`,
@@ -307,7 +302,7 @@ async function editStudentFee({ studentQuery, className, newMonthlyFee, newRemai
     if (newMonthlyFee !== undefined) {
       await queryDb(
         `INSERT INTO student_fee_profiles (student_id, school_id, monthly_fee, updated_at)
-         VALUES ($1, 1, $2, NOW())
+         VALUES ($1, current_setting('app.tenant_id')::int, $2, NOW())
          ON CONFLICT (student_id)
          DO UPDATE SET monthly_fee = $2, updated_at = NOW();`,
         [student.id, newMonthlyFee]
@@ -372,7 +367,7 @@ async function generateFeeChallans({ className, month = 'October', year = 2026 }
 
       const ins = await queryDb(
         `INSERT INTO fee_challans (school_id, student_id, challan_no, month, year, amount, remaining_balance, status, due_date)
-         VALUES (1, $1, $2, $3, $4, $5, $5, 'unpaid', NOW() + INTERVAL '10 days')
+         VALUES (current_setting('app.tenant_id')::int, $1, $2, $3, $4, $5, $5, 'unpaid', NOW() + INTERVAL '10 days')
          ON CONFLICT (student_id, month, year) DO NOTHING
          RETURNING id;`,
         [std.id, challanNo, month, year, fee]
@@ -395,18 +390,32 @@ async function generateFeeChallans({ className, month = 'October', year = 2026 }
 
 async function getFeeFinancialSummaryAndDefaulters({ limit = 15, className, month, year } = {}) {
   try {
-    const statsSql = `
+    const normalizedLimit = Math.min(Math.max(Number.parseInt(limit, 10) || 15, 1), 50);
+    let statsSql = `
       SELECT
         COUNT(*) AS total_challans,
         COALESCE(SUM(amount), 0) AS total_billed,
         COALESCE(SUM(CASE WHEN status = 'paid' THEN amount ELSE amount - remaining_balance END), 0) AS total_collected,
         COALESCE(SUM(remaining_balance), 0) AS total_outstanding
       FROM fee_challans
-      WHERE 1=1
-      ${month ? `AND month = '${month}'` : ''}
-      ${year ? `AND year = ${year}` : ''};
+      WHERE school_id = current_setting('app.tenant_id')::int
     `;
-    const statsRes = await queryDb(statsSql);
+    const statsParams = [];
+    if (month) {
+      statsParams.push(String(month).trim());
+      statsSql += ` AND month = $${statsParams.length}`;
+    }
+    if (year !== undefined && year !== null && String(year).trim() !== '') {
+      const normalizedYear = Number.parseInt(year, 10);
+      if (!Number.isInteger(normalizedYear) || normalizedYear < 2000 || normalizedYear > 2200) {
+        return { success: false, error: 'Invalid fee year.' };
+      }
+      statsParams.push(normalizedYear);
+      statsSql += ` AND year = $${statsParams.length}`;
+    }
+    statsSql += ';';
+
+    const statsRes = await queryDb(statsSql, statsParams);
     const stats = statsRes.rows[0];
 
     let defaultersSql = `
@@ -422,31 +431,44 @@ async function getFeeFinancialSummaryAndDefaulters({ limit = 15, className, mont
         SUM(fc.remaining_balance) AS total_due
       FROM fee_challans fc
       JOIN students s ON fc.student_id = s.id
-      WHERE fc.status = 'unpaid' AND fc.remaining_balance > 0
+      WHERE fc.school_id = current_setting('app.tenant_id')::int
+        AND s.school_id = current_setting('app.tenant_id')::int
+        AND fc.status = 'unpaid' AND fc.remaining_balance > 0
     `;
     const params = [];
     if (className) {
-      params.push(`%${className.trim()}%`);
+      params.push(`%${String(className).trim()}%`);
       defaultersSql += ` AND s.class ILIKE $${params.length}`;
     }
+    if (month) {
+      params.push(String(month).trim());
+      defaultersSql += ` AND fc.month = $${params.length}`;
+    }
+    if (year !== undefined && year !== null && String(year).trim() !== '') {
+      const normalizedYear = Number.parseInt(year, 10);
+      params.push(normalizedYear);
+      defaultersSql += ` AND fc.year = $${params.length}`;
+    }
 
+    params.push(normalizedLimit);
     defaultersSql += `
       GROUP BY s.id, s.name, s.father_name, s.class, s.section, s.parent_phone, s.parent_whatsapp
       ORDER BY total_due DESC
-      LIMIT $${params.length + 1};
+      LIMIT $${params.length};
     `;
-    params.push(limit);
 
     const defaultersRes = await queryDb(defaultersSql, params);
 
+    const totalBilled = Number(stats.total_billed || 0);
+    const totalCollected = Number(stats.total_collected || 0);
     return {
       success: true,
       summary: {
-        total_challans: parseInt(stats.total_challans, 10),
-        total_billed: parseFloat(stats.total_billed),
-        total_collected: parseFloat(stats.total_collected),
-        total_outstanding: parseFloat(stats.total_outstanding),
-        recovery_percentage: stats.total_billed > 0 ? ((stats.total_collected / stats.total_billed) * 100).toFixed(1) + '%' : '0%'
+        total_challans: Number.parseInt(stats.total_challans, 10) || 0,
+        total_billed: totalBilled,
+        total_collected: totalCollected,
+        total_outstanding: Number(stats.total_outstanding || 0),
+        recovery_percentage: totalBilled > 0 ? ((totalCollected / totalBilled) * 100).toFixed(1) + '%' : '0%'
       },
       defaulters_count: defaultersRes.rowCount,
       top_defaulters: defaultersRes.rows
@@ -540,7 +562,7 @@ async function markAttendance({ date, className, records = [] } = {}) {
       const s = stdRes.rows[0];
       await queryDb(
         `INSERT INTO attendance (school_id, student_id, date, status, updated_at)
-         VALUES (1, $1, $2::date, $3, NOW())
+         VALUES (current_setting('app.tenant_id')::int, $1, $2::date, $3, NOW())
          ON CONFLICT (student_id, date)
          DO UPDATE SET status = $3, updated_at = NOW();`,
         [s.id, markDate, status]
@@ -565,6 +587,7 @@ async function markAttendance({ date, className, records = [] } = {}) {
 
 async function getOrManageTimetable({ action = 'get', className, section, teacherName, dayName, subject, startTime, endTime, periodLabel } = {}) {
   try {
+    if (action !== 'get') return { success: false, error: 'Timetable mutations are disabled in the WhatsApp AI channel.' };
     if (action === 'create_slot') {
       let teacherId = null;
       if (teacherName) {
@@ -573,7 +596,7 @@ async function getOrManageTimetable({ action = 'get', className, section, teache
       }
       const res = await queryDb(
         `INSERT INTO timetable (school_id, teacher_id, day_name, start_time, end_time, subject, class_name, section, period_label)
-         VALUES (1, $1, $2, $3, $4, $5, $6, $7, $8)
+         VALUES (current_setting('app.tenant_id')::int, $1, $2, $3, $4, $5, $6, $7, $8)
          RETURNING id, class_name, section, day_name, subject, start_time, end_time;`,
         [teacherId, dayName || 'Monday', startTime || '08:00', endTime || '08:45', subject, className, section, periodLabel || 'Period 1']
       );
@@ -617,6 +640,7 @@ async function getOrManageTimetable({ action = 'get', className, section, teache
 
 async function manageStudent({ action = 'search', studentData = {} } = {}) {
   try {
+    if (action !== 'search') return { success: false, error: 'Student mutations are disabled in the WhatsApp AI channel.' };
     if (action === 'search') {
       const q = studentData.query || studentData.name || studentData.gr_number || '';
       let sql = `
@@ -662,7 +686,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
 
       const ins = await queryDb(
         `INSERT INTO students (school_id, gr_number, name, father_name, class, section, parent_phone, parent_whatsapp, is_active, tenant_id)
-         VALUES (1, $1, $2, $3, $4, $5, $6, $7, true, 'assps')
+         VALUES (current_setting('app.tenant_id')::int, $1, $2, $3, $4, $5, $6, $7, true, (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int))
          RETURNING id, gr_number, name, class, section;`,
         [gr, name, fatherName, className, section, phone, whatsapp]
       );
@@ -670,7 +694,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
 
       await queryDb(
         `INSERT INTO student_fee_profiles (student_id, school_id, monthly_fee)
-         VALUES ($1, 1, $2)
+         VALUES ($1, current_setting('app.tenant_id')::int, $2)
          ON CONFLICT (student_id) DO UPDATE SET monthly_fee = $2;`,
         [student.id, monthlyFee]
       );
@@ -720,6 +744,7 @@ async function manageStudent({ action = 'search', studentData = {} } = {}) {
 
 async function manageClassesAndSettings({ action = 'list_classes', data = {} } = {}) {
   try {
+    if (!['list_classes', 'get_settings'].includes(action)) return { success: false, error: 'Class/settings mutations are disabled in the WhatsApp AI channel.' };
     if (action === 'list_classes') {
       const res = await queryDb(
         `SELECT DISTINCT class AS class_name, COUNT(*) AS active_students
@@ -734,21 +759,21 @@ async function manageClassesAndSettings({ action = 'list_classes', data = {} } =
       const { name, section } = data;
       const res = await queryDb(
         `INSERT INTO classes (school_id, name, section)
-         VALUES (1, $1, $2)
+         VALUES (current_setting('app.tenant_id')::int, $1, $2)
          RETURNING id, name, section;`,
         [name, section || 'A']
       );
       return { success: true, action: 'added', class: res.rows[0] };
     }
     if (action === 'get_settings') {
-      const res = await queryDb(`SELECT key, value FROM settings WHERE school_id = 1;`);
+      const res = await queryDb(`SELECT key, value FROM settings WHERE school_id = current_setting('app.tenant_id')::int;`);
       return { success: true, settings: res.rows };
     }
     if (action === 'update_setting') {
       const { key, value } = data;
       await queryDb(
         `INSERT INTO settings (school_id, key, value, updated_at)
-         VALUES (1, $1, $2, NOW())
+         VALUES (current_setting('app.tenant_id')::int, $1, $2, NOW())
          ON CONFLICT (school_id, key) DO UPDATE SET value = $2, updated_at = NOW();`,
         [key, String(value)]
       );
@@ -873,6 +898,7 @@ print("QUEUED_OK")
 
 async function getOrManageDailyDiary({ action = 'get', className, date = 'today', rows = [], footerText = '' } = {}) {
   try {
+    if (action !== 'get') return { success: false, error: 'Daily diary mutations are disabled in the WhatsApp AI channel.' };
     let queryDate = date;
     const now = new Date();
     const pkTime = new Date(now.getTime() + (5 * 60 + now.getTimezoneOffset()) * 60000);
@@ -888,7 +914,7 @@ async function getOrManageDailyDiary({ action = 'get', className, date = 'today'
     if (action === 'add') {
       const res = await queryDb(
         `INSERT INTO daily_diaries (school_id, class_name, diary_date, tasks, footer_text, created_at)
-         VALUES (1, $1, $2::date, $3, $4, NOW())
+         VALUES (current_setting('app.tenant_id')::int, $1, $2::date, $3, $4, NOW())
          ON CONFLICT (class_name, diary_date)
          DO UPDATE SET tasks = $3, footer_text = $4, updated_at = NOW()
          RETURNING id, class_name, diary_date;`,
@@ -931,6 +957,7 @@ async function getOrManageStaff({ action = 'list', query, date = 'today' } = {})
         FROM employee_attendance ea
         JOIN employees e ON ea.employee_id = e.id
         WHERE ea.date = $1::date
+          AND ea.school_id = current_setting('app.tenant_id')::int
         ORDER BY e.name ASC;
       `, [queryDate]);
 
@@ -969,10 +996,11 @@ async function getOrManageStaff({ action = 'list', query, date = 'today' } = {})
 
 async function getOrManageNotices({ action = 'get', title, content, priority = 'normal' } = {}) {
   try {
+    if (action !== 'get') return { success: false, error: 'Notice publishing is disabled in the WhatsApp AI channel.' };
     if (action === 'publish') {
       const res = await queryDb(
         `INSERT INTO notices (school_id, title, content, priority, is_active, created_at)
-         VALUES (1, $1, $2, $3, true, NOW())
+         VALUES (current_setting('app.tenant_id')::int, $1, $2, $3, true, NOW())
          RETURNING id, title, priority, created_at;`,
         [title, content, priority]
       );
@@ -982,7 +1010,8 @@ async function getOrManageNotices({ action = 'get', title, content, priority = '
     const res = await queryDb(`
       SELECT id, title, content, priority, is_active, created_at
       FROM notices
-      WHERE is_active = true
+      WHERE school_id = current_setting('app.tenant_id')::int
+        AND is_active = true
       ORDER BY created_at DESC
       LIMIT 10;
     `);
@@ -1014,6 +1043,7 @@ async function manageAdmissionsAndFamilies({ action = 'list', query } = {}) {
     const res = await queryDb(`
       SELECT id, student_name, father_name, class_applied, phone, status, created_at
       FROM admissions
+      WHERE school_id = current_setting('app.tenant_id')::int
       ORDER BY created_at DESC
       LIMIT 10;
     `);
@@ -1027,10 +1057,11 @@ async function manageAdmissionsAndFamilies({ action = 'list', query } = {}) {
 
 async function manageExpensesAndAccounts({ action = 'list', category, amount, description } = {}) {
   try {
+    if (action !== 'list') return { success: false, error: 'Expense mutations are disabled in the WhatsApp AI channel.' };
     if (action === 'add') {
       const res = await queryDb(`
         INSERT INTO expenses (school_id, category, amount, description, expense_date, created_at)
-        VALUES (1, $1, $2, $3, CURRENT_DATE, NOW())
+        VALUES (current_setting('app.tenant_id')::int, $1, $2, $3, CURRENT_DATE, NOW())
         RETURNING id, category, amount, description;
       `, [category || 'General', parseFloat(amount), description || '']);
       return { success: true, action: 'recorded', expense: res.rows[0] };
@@ -1039,6 +1070,7 @@ async function manageExpensesAndAccounts({ action = 'list', category, amount, de
     const res = await queryDb(`
       SELECT id, category, amount, description, expense_date
       FROM expenses
+      WHERE school_id = current_setting('app.tenant_id')::int
       ORDER BY expense_date DESC, id DESC
       LIMIT 15;
     `);
@@ -1161,7 +1193,7 @@ async function persistPaperAndDisaggregate(paper) {
   // 1. Insert full document into paper_vault
   const vaultRes = await queryDb(
     `INSERT INTO paper_vault (school_id, owner_user_id, name, class_name, section, subject_name, status, revision, payload, created_at, updated_at)
-     VALUES (1, 1, $1, $2, 'All', $3, 'approved', 1, $4, NOW(), NOW())
+     VALUES (current_setting('app.tenant_id')::int, NULL, $1, $2, 'All', $3, 'approved', 1, $4, NOW(), NOW())
      RETURNING id;`,
     [
       paper.name || `${paper.config?.className} ${paper.config?.subjectName} Test`,
@@ -1188,7 +1220,7 @@ async function persistPaperAndDisaggregate(paper) {
             id, school_id, class_level, subject, chapter_no, chapter_name,
             question_type, question_text, options, correct_option, marks,
             difficulty, is_approved, tenant_id, created_at, updated_at
-          ) VALUES ($1, 1, $2, $3, $4, $5, 'mcq', $6, $7, $8, $9, $10, true, 'assps', NOW(), NOW());`,
+          ) VALUES ($1, current_setting('app.tenant_id')::int, $2, $3, $4, $5, 'mcq', $6, $7, $8, $9, $10, true, (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int), NOW(), NOW());`,
           [
             qId,
             className,
@@ -1212,7 +1244,7 @@ async function persistPaperAndDisaggregate(paper) {
             id, school_id, class_level, subject, chapter_no, chapter_name,
             question_type, question_text, options, marks,
             difficulty, is_approved, tenant_id, created_at, updated_at
-          ) VALUES ($1, 1, $2, $3, $4, $5, 'column_matching', $6, $7, 1, 'medium', true, 'assps', NOW(), NOW());`,
+          ) VALUES ($1, current_setting('app.tenant_id')::int, $2, $3, $4, $5, 'column_matching', $6, $7, 1, 'medium', true, (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int), NOW(), NOW());`,
           [
             qId,
             className,
@@ -1234,7 +1266,7 @@ async function persistPaperAndDisaggregate(paper) {
             id, school_id, class_level, subject, chapter_no, chapter_name,
             question_type, question_text, answer, marks,
             difficulty, is_approved, tenant_id, created_at, updated_at
-          ) VALUES ($1, 1, $2, $3, $4, $5, $6, $7, $8, $9, $10, true, 'assps', NOW(), NOW());`,
+          ) VALUES ($1, current_setting('app.tenant_id')::int, $2, $3, $4, $5, $6, $7, $8, $9, $10, true, (SELECT tenant_id FROM schools WHERE id = current_setting('app.tenant_id')::int), NOW(), NOW());`,
           [
             qId,
             className,
@@ -1411,11 +1443,14 @@ ${rawPaperText}`;
 
 async function getPaperFromVault({ paperId, className, subject, action = 'view' } = {}) {
   try {
+    if (action !== 'view') return { success: false, error: 'Paper printing is disabled in the WhatsApp AI channel.' };
     if (paperId) {
       const res = await queryDb(
         `SELECT id, name, class_name, subject_name, status, payload, created_at
          FROM paper_vault
-         WHERE id = $1 AND deleted_at IS NULL;`,
+         WHERE id = $1
+           AND school_id = current_setting('app.tenant_id')::int
+           AND deleted_at IS NULL;`,
         [paperId]
       );
       if (res.rowCount === 0) {
@@ -1455,7 +1490,8 @@ async function getPaperFromVault({ paperId, className, subject, action = 'view' 
     let sql = `
       SELECT id, name, class_name, subject_name, status, created_at
       FROM paper_vault
-      WHERE deleted_at IS NULL
+      WHERE school_id = current_setting('app.tenant_id')::int
+        AND deleted_at IS NULL
     `;
     const params = [];
     if (className) {

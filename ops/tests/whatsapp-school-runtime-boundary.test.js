@@ -46,11 +46,15 @@ test('cognitive DB tools fail closed around explicit school RLS and direct SQL e
   const tools = read('al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js')
   const core = read('al-siddique-backend/src/services/whatsapp/jarvisCognitiveCore.js')
   assert.match(tools, /require\('\.\.\/\.\.\/config\/database'\)/)
-  assert.match(tools, /WHATSAPP_SCHOOL_ID/)
+  assert.match(tools, /require\('\.\/schoolChannelGuard\.cjs'\)/)
+  assert.match(read('al-siddique-backend/src/services/whatsapp/schoolChannelGuard.cjs'), /WHATSAPP_SCHOOL_ID/)
   assert.match(tools, /set_config\('app\.is_super_admin', 'false', true\)/)
   assert.doesNotMatch(tools, /new\s+Pool\s*\(|DB_PASSWORD\s*\|\||app\.tenant_id\s*=\s*'1'/)
   assert.match(tools, /Direct SQL execution is disabled in the ASSPS school channel/)
   assert.doesNotMatch(core, /execute_saas_sql_query|inspect_database_schema|get_market_intelligence/)
+  assert.doesNotMatch(tools, /VALUES\s*\(1,\s*\$|VALUES\s*\(\$1,\s*1,|school_id\s*=\s*1\b|tenant_id\s*=\s*['"]assps['"]/)
+  assert.doesNotMatch(tools, /AND month = ['"]\$\{month\}|AND year = \$\{year\}/)
+  assert.match(tools, /fee_challans[\s\S]{0,500}?school_id = current_setting\('app\.tenant_id'\)::int/)
 })
 
 test('tool dispatcher enforces caller role before touching sensitive school tools', async () => {
@@ -86,4 +90,25 @@ test('school data tools fail closed when explicit WhatsApp school context is mis
     if (previousSchoolId === undefined) delete process.env.WHATSAPP_SCHOOL_ID
     else process.env.WHATSAPP_SCHOOL_ID = previousSchoolId
   }
+})
+
+test('webhook route has no spoof/test bypass and never exposes direct chat or event history', () => {
+  const route = read('al-siddique-backend/src/routes/whatsappRoutes.js')
+  assert.doesNotMatch(route, /jarvis_assps_meta_webhook_verify_2026|x-internal-test/)
+  assert.match(route, /Webhook verification is not configured\./)
+  assert.match(route, /Direct WhatsApp chat API is disabled\./)
+  assert.match(route, /WhatsApp event history is not exposed over HTTP\./)
+  assert.match(route, /\(school_id, event_id, event_type, sender_id, recipient_id, payload, signature_valid, status\)/)
+  assert.match(route, /Inbound event persistence unavailable\./)
+  assert.doesNotMatch(route, /DIRECT_DATABASE_AUTHORITATIVE|Deterministic SQL Fallback/)
+})
+
+test('WhatsApp event migration adds nullable school scope without guessing legacy rows', () => {
+  const migration = read('al-siddique-backend/migrations/021_whatsapp_event_school_scope.js')
+  assert.match(migration, /ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools\(id\)/)
+  assert.match(migration, /idx_whatsapp_inbound_events_school_created/)
+  assert.match(migration, /ALTER TABLE whatsapp_inbound_events ENABLE ROW LEVEL SECURITY/)
+  assert.match(migration, /CREATE POLICY tenant_isolation_policy ON whatsapp_inbound_events/)
+  assert.doesNotMatch(migration, /UPDATE\s+whatsapp_inbound_events\s+SET\s+school_id/i)
+  assert.doesNotMatch(migration, /school_id\s+INTEGER\s+NOT NULL/i)
 })

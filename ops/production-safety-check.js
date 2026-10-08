@@ -1948,9 +1948,14 @@ assertContains(
   'WhatsApp cognitive tools must use the canonical production database pool.'
 )
 assertContains(
-  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  'al-siddique-backend/src/services/whatsapp/schoolChannelGuard.cjs',
   'WHATSAPP_SCHOOL_ID',
-  'WhatsApp cognitive tools must require explicit school context.'
+  'WhatsApp school context must be explicit and fail closed.'
+)
+assertContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  "require('./schoolChannelGuard.cjs')",
+  'WhatsApp cognitive tools must consume the canonical school-channel guard.'
 )
 assertContains(
   'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
@@ -1966,6 +1971,58 @@ assertContains(
   'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
   'Direct SQL execution is disabled in the ASSPS school channel',
   'direct SQL escape hatch must fail closed in the school channel.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/services/whatsapp/jarvisCognitiveTools.js',
+  /VALUES\s*\(1,\s*\$|VALUES\s*\(\$1,\s*1,|school_id\s*=\s*1\b|tenant_id\s*=\s*['"]assps['"]|AND month = ['"]\$\{month\}|AND year = \$\{year\}/,
+  'WhatsApp domain tools must derive tenant scope from the configured school context and parameterize fee filters.'
+)
+assertContains(
+  'al-siddique-backend/migrations/021_whatsapp_event_school_scope.js',
+  'ALTER TABLE whatsapp_inbound_events ENABLE ROW LEVEL SECURITY',
+  'WhatsApp event storage must enable row-level security after adding school scope.'
+)
+assertContains(
+  'al-siddique-backend/migrations/021_whatsapp_event_school_scope.js',
+  'CREATE POLICY tenant_isolation_policy ON whatsapp_inbound_events',
+  'WhatsApp event storage must enforce tenant isolation when request RLS is enabled.'
+)
+
+assertNotContains(
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  /jarvis_assps_meta_webhook_verify_2026|x-internal-test|DIRECT_DATABASE_AUTHORITATIVE|Deterministic SQL Fallback/,
+  'WhatsApp route must not contain fallback verification secrets, signature bypasses, or sensitive runtime telemetry.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  'Direct WhatsApp chat API is disabled.',
+  'spoofable direct WhatsApp chat endpoint must fail closed.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  'WhatsApp event history is not exposed over HTTP.',
+  'WhatsApp event history must not be publicly exposed.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  '(school_id, event_id, event_type, sender_id, recipient_id, payload, signature_valid, status)',
+  'new WhatsApp events must carry explicit school scope.'
+)
+assertContains(
+  'al-siddique-backend/src/routes/whatsappRoutes.js',
+  "return res.status(503).json({ success: false, error: 'Inbound event persistence unavailable.' })",
+  'WhatsApp webhook must not acknowledge success when event persistence fails.'
+)
+assertContains(
+  'al-siddique-backend/migrations/021_whatsapp_event_school_scope.js',
+  'ADD COLUMN IF NOT EXISTS school_id INTEGER REFERENCES schools(id)',
+  'WhatsApp event school scope must be introduced by a versioned migration.'
+)
+assertNotContains(
+  'al-siddique-backend/migrations/021_whatsapp_event_school_scope.js',
+  /UPDATE\s+whatsapp_inbound_events\s+SET\s+school_id/i,
+  'legacy WhatsApp events must not be guessed/backfilled to a school.'
 )
 
 const routeDir = path.join(repoRoot, 'al-siddique-backend/src/routes')

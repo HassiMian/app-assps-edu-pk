@@ -357,6 +357,25 @@ const GEMINI_TOOLS = [{
   ]
 }];
 
+const SCHOOL_AI_TOOL_ALLOWLIST = new Set([
+  'get_exam_datesheet',
+  'get_or_print_result_cards',
+  'get_attendance',
+  'get_or_manage_timetable',
+  'manage_student',
+  'manage_classes_and_settings',
+  'get_or_manage_daily_diary',
+  'get_or_manage_staff',
+  'get_fee_financial_summary_and_defaulters',
+  'get_or_manage_notices',
+  'manage_admissions_and_families',
+  'manage_expenses_and_accounts',
+  'get_paper_from_vault',
+])
+
+const exposedDeclarations = GEMINI_TOOLS[0]?.functionDeclarations || []
+GEMINI_TOOLS[0].functionDeclarations = exposedDeclarations.filter(decl => SCHOOL_AI_TOOL_ALLOWLIST.has(decl.name))
+
 // Tools Converter for DeepSeek (Lowercase standard schema)
 function convertToDeepSeekTools(geminiDecl) {
   function convertType(t) {
@@ -459,6 +478,7 @@ const PRIVILEGED_TOOL_ROLES = new Set(['OWNER', 'ADMIN']);
 const PUBLIC_SAFE_TOOLS = new Set(['get_exam_datesheet']);
 
 function canExecuteSchoolTool(role, toolName) {
+  if (!SCHOOL_AI_TOOL_ALLOWLIST.has(toolName)) return false;
   if (PRIVILEGED_TOOL_ROLES.has(role)) return true;
   return PUBLIC_SAFE_TOOLS.has(toolName);
 }

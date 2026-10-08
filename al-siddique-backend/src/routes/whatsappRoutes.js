@@ -1,8 +1,9 @@
 const express = require('express')
 const crypto = require('crypto')
-const { query } = require('../config/database')
+const { query, tenantContext } = require('../config/database')
 const jarvisCore = require('../services/whatsapp/jarvisCognitiveCore')
 const { WhatsAppRouter } = require('../services/whatsapp/whatsappRouter')
+const { requireConfiguredSchoolId } = require('../services/whatsapp/schoolChannelGuard.cjs')
 const { missionManager } = require('../services/whatsapp/missionManager')
 
 const router = express.Router()
@@ -94,20 +95,24 @@ async function sendWhatsAppMessage(to, text) {
  * Durable PostgreSQL Idempotency Layer
  */
 async function recordIdempotentEvent(eventId, eventType, senderId, recipientId, payload) {
-  if (!eventId) return true
+  if (!eventId) return false
+  const schoolId = requireConfiguredSchoolId()
   try {
-    const res = await query(
-      `INSERT INTO whatsapp_inbound_events
-         (event_id, event_type, sender_id, recipient_id, payload, signature_valid, status)
-       VALUES ($1, $2, $3, $4, $5, true, 'processed')
-       ON CONFLICT (event_id) DO NOTHING
-       RETURNING id;`,
-      [eventId, eventType, senderId || null, recipientId || null, JSON.stringify(payload || {})]
+    const res = await tenantContext.run(
+      { rlsEnabled: true, isSuperAdmin: false, tenantId: schoolId },
+      () => query(
+        `INSERT INTO whatsapp_inbound_events
+           (school_id, event_id, event_type, sender_id, recipient_id, payload, signature_valid, status)
+         VALUES ($1, $2, $3, $4, $5, $6, true, 'processed')
+         ON CONFLICT (event_id) DO NOTHING
+         RETURNING id;`,
+        [schoolId, eventId, eventType, senderId || null, recipientId || null, JSON.stringify(payload || {})]
+      )
     )
     return (res.rowCount || 0) > 0
   } catch (err) {
     console.error('[WhatsApp Webhook Idempotency Error]', err.message)
-    return true
+    throw err
   }
 }
 
@@ -144,7 +149,11 @@ router.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode'] || req.query['mode']
   const token = req.query['hub.verify_token'] || req.query['verify_token']
   const challenge = req.query['hub.challenge'] || req.query['challenge']
-  const configuredVerifyToken = process.env.WHATSAPP_WEBHOOK_VERIFY_TOKEN || process.env.WHATSAPP_CLOUD_VERIFY_TOKEN || 'jarvis_assps_meta_webhook_verify_2026'
+  const configuredVerifyToken = process.env.WHATSAPP_WEBHOOK_VERIFY_TOKEN || process.env.WHATSAPP_CLOUD_VERIFY_TOKEN || ''
+
+  if (!configuredVerifyToken) {
+    return res.status(503).json({ success: false, error: 'Webhook verification is not configured.' })
+  }
 
   if (mode === 'subscribe' && token === configuredVerifyToken) {
     return res.status(200).send(String(challenge || ''))
@@ -160,17 +169,13 @@ router.get('/webhook', (req, res) => {
 router.post('/webhook', async (req, res) => {
   const signature = req.headers['x-hub-signature-256']
   const appSecret = process.env.WHATSAPP_APP_SECRET || process.env.WHATSAPP_CLOUD_APP_SECRET || ''
-  const isInternalTest = req.headers['x-internal-test'] === 'apexos_internal'
 
   const rawBody = req.rawBody || Buffer.from(JSON.stringify(req.body || {}), 'utf8')
-
-  // Enforce Signature Verification unless explicitly flagged internal canary
-  if (!isInternalTest) {
-    const sigResult = validateSignature(rawBody, signature, appSecret)
-    if (!sigResult.ok) {
-      console.warn(`[WhatsApp Webhook Security] Rejected: ${sigResult.reason}`)
-      return res.status(403).json({ success: false, error: sigResult.reason })
-    }
+  const sigResult = validateSignature(rawBody, signature, appSecret)
+  if (!sigResult.ok) {
+    console.warn(`[WhatsApp Webhook Security] Rejected: ${sigResult.reason}`)
+    const status = sigResult.reason === 'APP_SECRET_NOT_CONFIGURED' ? 503 : 403
+    return res.status(status).json({ success: false, error: sigResult.reason })
   }
 
   const payload = req.body
@@ -178,119 +183,82 @@ router.post('/webhook', async (req, res) => {
     return res.status(200).json({ success: true, message: 'Ignored' })
   }
 
-  // Immediately respond HTTP 200 to Meta so webhook connection is instantaneous
+  const pendingMessages = []
+  try {
+    const entries = Array.isArray(payload.entry) ? payload.entry : []
+    for (const entry of entries) {
+      const changes = entry.changes?.[0]?.value
+      if (!changes) continue
+
+      if (Array.isArray(changes.messages)) {
+        for (const msg of changes.messages) {
+          const msgId = msg.id
+          const from = msg.from
+          const isNew = await recordIdempotentEvent(msgId, 'message', from, null, msg)
+          if (!isNew) {
+            console.log(`[WhatsApp Webhook] Duplicate ${msgId} dropped.`)
+            continue
+          }
+          pendingMessages.push({ msgId, from, msg })
+        }
+      }
+
+      if (Array.isArray(changes.statuses)) {
+        for (const st of changes.statuses) {
+          const statusEventId = `status:${st.id}:${st.status}`
+          await recordIdempotentEvent(statusEventId, 'status', null, st.recipient_id, st)
+        }
+      }
+    }
+  } catch (err) {
+    console.error('[WhatsApp Webhook Persistence Error]', err.message)
+    return res.status(503).json({ success: false, error: 'Inbound event persistence unavailable.' })
+  }
+
   res.status(200).json({ success: true, received: true })
 
-  const entries = Array.isArray(payload.entry) ? payload.entry : []
-  for (const entry of entries) {
-    const changes = entry.changes?.[0]?.value
-    if (!changes) continue
+  for (const { msgId, from, msg } of pendingMessages) {
+    const text = msg.text?.body || msg.interactive?.button_reply?.title || msg.image?.caption || msg.document?.caption || ''
+    console.log(`[WhatsApp Webhook Inbound] ${msgId} from +${from}: "${text.slice(0, 80)}"`)
+    void markMessageAsRead(msgId)
 
-    // Handle Inbound Messages
-    if (Array.isArray(changes.messages)) {
-      for (const msg of changes.messages) {
-        const msgId = msg.id
-        const from = msg.from
-
-        const isNew = await recordIdempotentEvent(msgId, 'message', from, null, msg)
-        if (!isNew) {
-          console.log(`[WhatsApp Webhook] Duplicate ${msgId} dropped.`)
-          continue
-        }
-
-        const text = msg.text?.body || msg.interactive?.button_reply?.title || msg.image?.caption || msg.document?.caption || ''
-        console.log(`[WhatsApp Webhook Inbound] ${msgId} from +${from}: "${text.slice(0, 80)}"`)
-
-        // 1. Instant Blue Tick (<100ms)
-        markMessageAsRead(msgId)
-
-        // 2. Authoritative JARVIS 5.0 Cognitive LLM Execution & Outbound Dispatch
-        if (text) {
-          jarvisCore.processMessage(from, text)
-            .then(res => {
-              const replyText = typeof res === 'object' && res?.reply ? res.reply : (typeof res === 'string' ? res : '')
-              if (replyText) {
-                return sendWhatsAppMessage(from, replyText)
-              }
-            })
-            .catch(err => {
-              console.error('[JARVIS Core Execution Error]', err.message)
-              // Graceful fallback to legacy router
-              return whatsappRouter.processMessage(from, text)
-                .then(result => {
-                  if (result && result.reply) {
-                    return sendWhatsAppMessage(from, result.reply)
-                  }
-                })
-            })
-            .catch(fallbackErr => {
-              console.error('[WhatsApp Router Fallback Error]', fallbackErr.message)
-            })
-        }
-      }
-    }
-
-    // Handle Delivery Status Updates
-    if (Array.isArray(changes.statuses)) {
-      for (const st of changes.statuses) {
-        const statusEventId = `status:${st.id}:${st.status}`
-        await recordIdempotentEvent(statusEventId, 'status', null, st.recipient_id, st)
-      }
+    if (text) {
+      jarvisCore.processMessage(from, text)
+        .then(result => {
+          const replyText = typeof result === 'object' && result?.reply ? result.reply : (typeof result === 'string' ? result : '')
+          if (replyText) return sendWhatsAppMessage(from, replyText)
+          return null
+        })
+        .catch(err => {
+          console.error('[JARVIS Core Execution Error]', err.message)
+          return whatsappRouter.processMessage(from, text)
+            .then(result => result?.reply ? sendWhatsAppMessage(from, result.reply) : null)
+        })
+        .catch(fallbackErr => {
+          console.error('[WhatsApp Router Fallback Error]', fallbackErr.message)
+        })
     }
   }
 })
 
-// ─── 3. POST /api/whatsapp/chat (Direct Cognitive API) ──────────────────────
-router.post('/chat', async (req, res) => {
-  try {
-    const { from, text } = req.body
-    if (!from || !text) {
-      return res.status(400).json({ success: false, error: 'Missing from or text' })
-    }
-    const result = await jarvisCore.processMessage(from, text)
-    const reply = typeof result === 'object' && result?.reply ? result.reply : result
-    return res.status(200).json({ success: true, from, text, reply, details: result })
-  } catch (err) {
-    return res.status(500).json({ success: false, error: err.message })
-  }
+// ─── 3. Direct cognitive API is disabled in production school runtime ────────
+router.post('/chat', (req, res) => {
+  return res.status(404).json({ success: false, error: 'Direct WhatsApp chat API is disabled.' })
 })
 
-// ─── 4. GET /api/whatsapp/status ───────────────────────────────────────────
+// ─── 4. Minimal public liveness only ────────────────────────────────────────
 router.get('/status', (req, res) => {
-  const telemetry = missionManager.getTelemetry()
   return res.status(200).json({
     success: true,
-    service: 'Al Siddique Scholars Smart AI Gateway — JARVIS 5.0',
-    version: '5.0.0',
-    intelligence: 'AUTONOMOUS_COGNITIVE_LLM_AGENT',
-    engines: {
-      primary: 'Gemini 2.5 Flash (Function Calling)',
-      secondary: 'DeepSeek V4 Pro (OpenAI Tools)',
-      tertiary: 'Deterministic SQL Fallback'
-    },
-    mode: 'DIRECT_DATABASE_AUTHORITATIVE',
+    service: 'ASSPS WhatsApp Gateway',
     status: 'ONLINE',
-    blueTickInstant: true,
-    telemetry,
     time: new Date().toISOString()
   })
 })
 
-// ─── 5. GET /api/whatsapp/events ───────────────────────────────────────────
-router.get('/events', async (req, res) => {
-  try {
-    const limit = Math.min(Number(req.query.limit) || 10, 50)
-    const result = await query(
-      `SELECT id, event_id, event_type, sender_id, status, created_at
-       FROM whatsapp_inbound_events
-       ORDER BY id DESC
-       LIMIT $1;`,
-      [limit]
-    )
-    return res.status(200).json({ success: true, count: result.rowCount, events: result.rows })
-  } catch (err) {
-    return res.status(500).json({ success: false, error: err.message })
-  }
+// ─── 5. Event history is never exposed over public HTTP ─────────────────────
+router.get('/events', (req, res) => {
+  return res.status(404).json({ success: false, error: 'WhatsApp event history is not exposed over HTTP.' })
 })
 
 module.exports = router

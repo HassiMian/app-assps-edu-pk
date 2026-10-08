@@ -38,10 +38,20 @@ function isOwner(rawPhone) {
   return Boolean(normalized && configuredNumbers(process.env.WHATSAPP_OWNER_NUMBER).has(normalized))
 }
 
+function requireConfiguredSchoolId(env = process.env) {
+  const schoolId = Number.parseInt(String(env.WHATSAPP_SCHOOL_ID || ''), 10)
+  if (!Number.isInteger(schoolId) || schoolId <= 0) {
+    const error = new Error('WHATSAPP_SCHOOL_ID must be explicitly configured for the school channel.')
+    error.code = 'WHATSAPP_SCHOOL_CONTEXT_REQUIRED'
+    throw error
+  }
+  return schoolId
+}
+
 function formatSchoolScopeRestriction(language='ROMAN_URDU') {
   if (language === 'URDU_SCRIPT') return 'یہ ASSPS اسکول اسسٹنٹ صرف اسکول آپریشنز، طلبہ، فیس، حاضری اور داخلوں کے لیے ہے۔ مارکیٹ یا ٹریڈنگ انٹیلیجنس اس چینل پر دستیاب نہیں ہے۔'
   if (language === 'ENGLISH') return 'This ASSPS school assistant is limited to school operations, students, fees, attendance, and admissions. Market or trading intelligence is not available on this channel.'
   return 'Ye ASSPS school assistant sirf school operations, students, fees, attendance aur admissions ke liye hai. Market ya trading intelligence is channel par available nahi hai.'
 }
 
-module.exports = { USER_ROLES, normalizePhoneNumber, resolveUserRole, isOwner, formatSchoolScopeRestriction }
+module.exports = { USER_ROLES, normalizePhoneNumber, resolveUserRole, isOwner, requireConfiguredSchoolId, formatSchoolScopeRestriction }
