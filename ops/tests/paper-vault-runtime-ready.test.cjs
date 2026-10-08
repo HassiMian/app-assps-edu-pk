@@ -8,13 +8,16 @@ const fixture = () => ({
   tables:[
     {relname:'paper_vault',relrowsecurity:true,relforcerowsecurity:true},
     {relname:'paper_vault_revision_history',relrowsecurity:true,relforcerowsecurity:true},
+    {relname:'teacher_class_assignments',relrowsecurity:true,relforcerowsecurity:true},
   ],
-  policies:['paper_vault','paper_vault_revision_history'].map(tablename=>({
+  policies:['paper_vault','paper_vault_revision_history','teacher_class_assignments'].map(tablename=>({
     tablename,qual:"school_id = current_setting('app.tenant_id', true)::int",
     with_check:"school_id = current_setting('app.tenant_id', true)::int",
   })),
   tableGrants:{SELECT:true,INSERT:true,UPDATE:true,DELETE:true},
   sequenceGrants:{USAGE:true,SELECT:true},
+  journalGrants:{SELECT:true,INSERT:true},
+  teacherAssignmentGrant:true,
 })
 
 test('restricted runtime with both strict tenant policies passes',()=>{

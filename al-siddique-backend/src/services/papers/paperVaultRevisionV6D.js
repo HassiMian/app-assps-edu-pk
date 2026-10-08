@@ -5,10 +5,11 @@ const fs=require('node:fs')
 const path=require('node:path')
 const {createHash}=require('node:crypto')
 const {pool}=require('../../config/database')
+const {applyPaperVaultRuntimeContext,withPaperVaultRuntime}=require('./paperVaultRuntimeRole')
 const {ensureTeacherAssignmentSchema}=require('../teacherAssignmentService')
 const CONTRACT=path.join(__dirname,'saasReviewedContract/losslessLegacyBridgeV6D.mjs')
 const VERIFIED_SHA='a6e25426a8f803050ec8bb112dbed76bc8d17c0173fb14770113ca06e100094b'
-const migration=fs.readFileSync(path.join(__dirname,'../../migrations/20261005_paper_vault_revision_history.sql'),'utf8')
+// Schema migrations are release-time only; requests must not execute DDL.
 const digest=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex')
 const failure=(status,message,code)=>Object.assign(new Error(message),{status,code})
 let contractPromise
@@ -18,7 +19,10 @@ async function bridge(){
   if(!contractPromise)contractPromise=import(`file://${CONTRACT}`)
   return contractPromise
 }
-async function ensureJournal(){await pool.query(migration)}
+async function ensureJournal(){
+  const result=await pool.query("SELECT to_regclass('public.paper_vault_revision_history') AS ready")
+  if(!result.rows[0]?.ready)throw failure(503,'Paper revision history schema is not initialized.','PAPER_JOURNAL_SCHEMA_NOT_READY')
+}
 function roleAllowed(role){return ['super_admin','admin','principal','teacher'].includes(String(role||'').toLowerCase())}
 function ownerClause(role,userId,params){if(role==='teacher'){params.push(userId);return ` AND owner_user_id=$${params.length}`}return ''}
 async function authorizedCurrent(client,{schoolId,userId,role,paperId,lock=false}){
@@ -49,6 +53,7 @@ async function saveGuardedRevision({schoolId,userId,role,paperId,expectedRevisio
   const client=await pool.connect()
   try{
     await client.query('BEGIN')
+    await applyPaperVaultRuntimeContext(client,schoolId)
     const row=await authorizedCurrent(client,{schoolId,userId,role,paperId,lock:true})
     const priorHash=digest(row.payload)
     if(Number(row.revision)!==expectedRevision||priorHash!==expectedSnapshotHash){
@@ -85,6 +90,7 @@ async function renameGuardedPaper({schoolId,userId,role,paperId,expectedRevision
   const client=await pool.connect()
   try{
     await client.query('BEGIN')
+    await applyPaperVaultRuntimeContext(client,schoolId)
     const row=await authorizedCurrent(client,{schoolId,userId,role,paperId,lock:true})
     const priorHash=digest(row.payload)
     if(Number(row.revision)!==expectedRevision||priorHash!==expectedSnapshotHash)throw failure(409,'This paper changed in another session. Reload before renaming.','STALE_REVISION')
@@ -105,6 +111,7 @@ async function deleteGuardedPaper({schoolId,userId,role,paperId,expectedRevision
   const client=await pool.connect()
   try{
     await client.query('BEGIN')
+    await applyPaperVaultRuntimeContext(client,schoolId)
     const row=await authorizedCurrent(client,{schoolId,userId,role,paperId,lock:true})
     const priorHash=digest(row.payload)
     if(Number(row.revision)!==expectedRevision||priorHash!==expectedSnapshotHash)throw failure(409,'This paper changed in another session. Reload before deleting.','STALE_REVISION')
@@ -120,24 +127,22 @@ async function deleteGuardedPaper({schoolId,userId,role,paperId,expectedRevision
 }
 async function listGuardedRevisions({schoolId,userId,role,paperId}){
   await ensureJournal()
-  const client=await pool.connect()
-  try{
+  return withPaperVaultRuntime(schoolId,async client=>{
     const row=await authorizedCurrent(client,{schoolId,userId,role,paperId})
     const list=await client.query(`SELECT revision,event_kind,actor_user_id,payload_hash,created_at FROM paper_vault_revision_history WHERE school_id=$1 AND paper_id=$2 ORDER BY revision DESC LIMIT 200`,[schoolId,paperId])
     return {currentRevision:Number(row.revision),currentSnapshotHash:digest(row.payload),history:list.rows.map(({revision,event_kind,actor_user_id,payload_hash,created_at})=>({revision:Number(revision),event:event_kind,actorUserId:actor_user_id?String(actor_user_id):null,snapshotHash:payload_hash.trim(),createdAt:created_at}))}
-  }finally{client.release()}
+  })
 }
 async function readGuardedRevision({schoolId,userId,role,paperId,revision}){
   if(!/^\d+$/.test(String(revision??'')))throw failure(400,'Invalid revision.','INVALID_REVISION')
   await ensureJournal()
-  const client=await pool.connect()
-  try{
+  return withPaperVaultRuntime(schoolId,async client=>{
     await authorizedCurrent(client,{schoolId,userId,role,paperId})
     const found=await client.query(`SELECT revision,event_kind,actor_user_id,payload_hash,payload,created_at FROM paper_vault_revision_history WHERE school_id=$1 AND paper_id=$2 AND revision=$3 LIMIT 1`,[schoolId,paperId,revision])
     if(!found.rowCount)throw failure(404,'Revision not found in your accessible paper.','NOT_FOUND')
     const row=found.rows[0]
     if(digest(row.payload)!==row.payload_hash.trim())throw failure(409,'Historical revision hash check failed.','HISTORY_CORRUPTED')
     return {revision:Number(row.revision),event:row.event_kind,snapshotHash:row.payload_hash.trim(),document:row.payload,createdAt:row.created_at}
-  }finally{client.release()}
+  })
 }
 module.exports={saveGuardedRevision,renameGuardedPaper,deleteGuardedPaper,listGuardedRevisions,readGuardedRevision,ensureJournal,digest,VERIFIED_SHA}

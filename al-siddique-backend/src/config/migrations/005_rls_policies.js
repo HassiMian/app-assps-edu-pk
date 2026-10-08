@@ -85,7 +85,7 @@ async function up() {
     'resource_sets', 'resource_set_items', 'resource_scope_mappings', 'curriculum_migration_plans',
     'assessment_papers', 'assessment_paper_revisions', 'assessment_releases',
     'assessment_roster_snapshots', 'assessment_print_jobs', 'lesson_plans',
-    'paper_vault', 'paper_vault_revision_history'
+    'paper_vault', 'paper_vault_revision_history', 'teacher_class_assignments'
   ]
   for (const table of strictTables) {
     assertSafeTableName(table)

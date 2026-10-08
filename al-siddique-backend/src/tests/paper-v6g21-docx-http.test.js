@@ -120,6 +120,20 @@ test('G21 canonical DOCX HTTP is tenant-safe and fail-closed', {timeout:30000}, 
   const bodySha=crypto.createHash('sha256').update(r.buffer).digest('hex')
   assert.equal(r.headers['x-assps-docx-sha256'],bodySha)
   console.log('G21_DOCX_HTTP 9/9 PASS')
+
+  // Additional independent proof: V6-D history writes/reads now run through
+  // the same restricted tenant-bound transaction role as the Vault itself.
+  let rev=await req('/api/portal/paper-studio/papers/'+eligibleId+'/metadata',{method:'PATCH',cookie:cookieA,body:{expectedRevision:3,expectedSnapshotHash:canonicalHash,name:'G21 Renamed Restricted'}})
+  assert.equal(rev.status,200,'restricted rename failed '+rev.buffer.toString('utf8').slice(0,300)+' stderr='+serverErr.slice(-300))
+  rev=await req('/api/portal/paper-studio/papers/'+eligibleId+'/revisions',{cookie:cookieA})
+  assert.equal(rev.status,200)
+  assert.equal(Number(json(rev).data.currentRevision),4)
+  rev=await req('/api/portal/paper-studio/papers/'+eligibleId+'/revisions/3',{cookie:cookieA})
+  assert.equal(rev.status,200,'history read failed '+rev.buffer.toString('utf8').slice(0,250))
+  assert.equal(json(rev).data.snapshotHash,canonicalHash)
+  rev=await req('/api/portal/paper-studio/papers/'+eligibleId+'/revisions/3',{cookie:cookieB})
+  assert.equal(rev.status,404)
+  console.log('V6D_RESTRICTED_HISTORY_HTTP 5/5 PASS')
  } finally {
   try{child?.kill('SIGTERM')}catch{}
   if(sidA)await c.query('delete from paper_vault where school_id=$1',[sidA]).catch(()=>{})

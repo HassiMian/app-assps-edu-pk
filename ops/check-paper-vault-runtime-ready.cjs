@@ -4,7 +4,7 @@
  * boundary; Paper Vault must actively SET LOCAL ROLE to this limited role.
  */
 const ROLE = 'apex_paper_runtime'
-const PROTECTED = ['paper_vault', 'paper_vault_revision_history']
+const PROTECTED = ['paper_vault', 'paper_vault_revision_history', 'teacher_class_assignments']
 
 function assessVaultRuntime(probe) {
   const findings = []
@@ -17,7 +17,8 @@ function assessVaultRuntime(probe) {
   }
   const vault = probe.tables.find(x => x.relname === 'paper_vault')
   const journal = probe.tables.find(x => x.relname === 'paper_vault_revision_history')
-  for (const table of [vault, journal]) {
+  const teacherScope = probe.tables.find(x => x.relname === 'teacher_class_assignments')
+  for (const table of [vault, journal, teacherScope]) {
     if (!table) findings.push('REQUIRED_TABLE_MISSING')
     else {
       if (!table.relrowsecurity || !table.relforcerowsecurity)
@@ -36,6 +37,10 @@ function assessVaultRuntime(probe) {
   for (const p of ['USAGE','SELECT']) {
     if (probe.sequenceGrants?.[p] !== true) findings.push('VAULT_SEQUENCE_GRANT_MISSING:' + p)
   }
+  for (const p of ['SELECT','INSERT']) {
+    if (probe.journalGrants?.[p] !== true) findings.push('JOURNAL_GRANT_MISSING:' + p)
+  }
+  if (probe.teacherAssignmentGrant !== true) findings.push('TEACHER_SCOPE_GRANT_MISSING')
   return { ready: findings.length === 0, findings }
 }
 
@@ -52,6 +57,8 @@ async function inspect() {
       (await pool.query("SELECT pg_has_role(current_user,$1,'SET') AS permitted",[ROLE])).rows[0].permitted : false
     const tableGrants = {}
     const sequenceGrants = {}
+    const journalGrants = {}
+    let teacherAssignmentGrant = false
     if (role && tables.some(t=>t.relname==='paper_vault')) {
       for (const p of ['SELECT','INSERT','UPDATE','DELETE']) {
         tableGrants[p] = (await pool.query(
@@ -61,8 +68,18 @@ async function inspect() {
         sequenceGrants[p] = (await pool.query(
           "SELECT has_sequence_privilege($1,'public.paper_vault_id_seq',$2) AS allowed",[ROLE,p])).rows[0].allowed
       }
+      if (tables.some(t=>t.relname==='paper_vault_revision_history')) {
+        for (const p of ['SELECT','INSERT']) {
+          journalGrants[p] = (await pool.query(
+            "SELECT has_table_privilege($1,'public.paper_vault_revision_history',$2) AS allowed",[ROLE,p])).rows[0].allowed
+        }
+      }
+      if (tables.some(t=>t.relname==='teacher_class_assignments')) {
+        teacherAssignmentGrant = (await pool.query(
+          "SELECT has_table_privilege($1,'public.teacher_class_assignments','SELECT') AS allowed",[ROLE])).rows[0].allowed
+      }
     }
-    const assessed = assessVaultRuntime({role,tables,policies,canSetRole,tableGrants,sequenceGrants})
+    const assessed = assessVaultRuntime({role,tables,policies,canSetRole,tableGrants,sequenceGrants,journalGrants,teacherAssignmentGrant})
     console.log(JSON.stringify({
       gate:'PAPER_VAULT_RUNTIME_DB_BOUNDARY',database:(await pool.query('SELECT current_database() AS db')).rows[0].db,
       role:ROLE,ready:assessed.ready,findings:assessed.findings,
