@@ -1,0 +1,51 @@
+'use strict'
+const test=require('node:test')
+const assert=require('node:assert/strict')
+const fs=require('node:fs')
+const crypto=require('node:crypto')
+const path=require('node:path')
+const root=path.resolve(__dirname,'../..')
+const docket=require(path.join(root,'docs/question-bank/ASSPS_BIO9_CH1_ACADEMIC_REVIEW_DOCKET_20261008.json'))
+const draftPath=path.join(root,'docs/question-bank/ASSPS_BIO9_CH1_ORIGINAL_PRACTICE_DRAFT_20261008.json')
+const draft=require(draftPath)
+const reg=require(path.join(root,'al-siddique-backend/src/data/verifiedGrade910SourceRegistry.json'))
+const sha=v=>crypto.createHash('sha256').update(v).digest('hex')
+
+test('27 original Grade9 Biology Chapter 1 pilot questions are preserved with exact original per-question hashes',()=>{
+ assert.equal(docket.schoolId,1)
+ assert.equal(docket.grade,'9th');assert.equal(docket.chapterNo,'1')
+ assert.equal(docket.questions.length,27)
+ assert.equal(new Set(docket.questions.map(x=>x.localQuestionId)).size,27)
+ assert.equal(docket.sourceDraftSha256,sha(fs.readFileSync(draftPath)))
+ for(const q of draft.questions){
+  const item=docket.questions.find(x=>x.localQuestionId===q.localId)
+  assert.ok(item,q.localId)
+  assert.equal(item.sourceDraftSha256,sha(JSON.stringify(q)))
+ }
+})
+test('Biology pilot has correct 12 MCQ 12 short 3 long coverage, no falsely verified answer or textbook page',()=>{
+ assert.deepEqual(docket.draftTotals,{total:27,mcq:12,short:12,long:3})
+ assert.equal(docket.approvedQuestions,0)
+ assert.equal(docket.independentReviewCompleted,false)
+ assert.equal(docket.automaticApprovalAllowed,false)
+ assert.equal(docket.automaticImportAllowed,false)
+ for(const q of docket.questions){
+  assert.equal(q.eligibleForProductionSeed,false)
+  assert.equal(q.academicallyReviewed,false)
+  assert.equal(q.independentAnswerVerified,false)
+  assert.equal(q.sourcePageEvidenceVerified,false)
+  assert.ok(Object.values(q.verifiedChecks).every(x=>x===false))
+ }
+})
+test('Source catalog matches the official 2025-26 Grade9 Biology English PDF SHA without granting academic approval',()=>{
+ const source=reg.entries.find(x=>x.recordId===docket.sourceRecordId)
+ assert.ok(source)
+ assert.equal(source.pdfSha256,docket.sourcePdfSha256)
+ assert.equal(source.grade,9)
+ assert.equal(source.subject,'Biology')
+ assert.equal(source.medium,'English')
+ assert.equal(source.edition,docket.sourceEdition)
+ assert.equal(source.academicApproval,false)
+ assert.equal(draft.productionQuestionBankImportAllowed,false)
+ assert.equal(draft.academicallyApproved,false)
+})
