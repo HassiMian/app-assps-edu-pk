@@ -1,0 +1,3003 @@
+{
+  "schemaVersion": "assps-pakstudies10-urdu-starter-v1",
+  "createdOn": "2026-10-08",
+  "publicationAllowed": false,
+  "liveImportAllowed": false,
+  "reviewStatus": "UNREVIEWED_ORIGINAL_DRAFTS",
+  "sourceRecordId": "pectaa-catalog-018",
+  "sourcePdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+  "scope": "CURRENT_URDU_MEDIUM_CHAPTER_ALIGNED_ORIGINAL_STARTER",
+  "drafts": [
+    {
+      "id": "X-PAK-UR-C01-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C01",
+        "number": 1
+      },
+      "topicId": "نظریہ",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نظریاتی اساسِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "نظریہ سے عمومی طور پر کیا مراد ہے؟",
+          "answer": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
+          "options": [
+            {
+              "id": "A",
+              "text": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں"
+            },
+            {
+              "id": "B",
+              "text": "صرف موسم کی رپورٹ"
+            },
+            {
+              "id": "C",
+              "text": "صرف نقشہ"
+            },
+            {
+              "id": "D",
+              "text": "صرف معاشی عدد"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C01-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C01",
+        "number": 1
+      },
+      "topicId": "دو قومی نظریہ",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نظریاتی اساسِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "دو قومی نظریے نے برصغیر کے مسلمانوں کے بارے میں کس بات پر زور دیا؟",
+          "answer": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے",
+          "options": [
+            {
+              "id": "A",
+              "text": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے"
+            },
+            {
+              "id": "B",
+              "text": "تمام سیاسی مطالبات ختم ہو گئے تھے"
+            },
+            {
+              "id": "C",
+              "text": "وہ صرف جغرافیائی اصطلاح تھے"
+            },
+            {
+              "id": "D",
+              "text": "کوئی جداگانہ شناخت نہ تھی"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C01-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C01",
+        "number": 1
+      },
+      "topicId": "نظریاتی بنیاد",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نظریاتی اساسِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کی نظریاتی بنیاد کے دو اہم پہلو بیان کریں۔",
+          "answer": "اسلامی اصول و اقدار اور برصغیر کے مسلمانوں کی جداگانہ سیاسی، سماجی و تاریخی شناخت دو اہم پہلو ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C01-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C01",
+        "number": 1
+      },
+      "topicId": "ریاستی اصول",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نظریاتی اساسِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "نظریاتی اقدار آئینی اصولوں پر کیسے اثر انداز ہو سکتی ہیں؟",
+          "answer": "یہ عدل، حقوق، حاکمیت، شہری ذمہ داری اور ریاستی مقصد جیسے اصولوں کی سمت متعین کرنے میں مدد دیتی ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C01-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C01",
+        "number": 1
+      },
+      "topicId": "نظریاتی اساس",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "نظریاتی اساسِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کی نظریاتی بنیاد میں مذہبی، سماجی اور سیاسی عوامل کے باہمی تعلق کی وضاحت کریں۔",
+          "answer": "جواب میں اسلامی اقدار، مسلم شناخت، سیاسی نمائندگی، سماجی و معاشی تحفظات اور علیحدہ وطن کے مطالبے کے باہمی تعلق کو واضح کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C02-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C02",
+        "number": 2
+      },
+      "topicId": "لاہور قرارداد",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تحریکِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "قراردادِ لاہور کس سال منظور ہوئی؟",
+          "answer": "1940",
+          "options": [
+            {
+              "id": "A",
+              "text": "1940"
+            },
+            {
+              "id": "B",
+              "text": "1930"
+            },
+            {
+              "id": "C",
+              "text": "1947"
+            },
+            {
+              "id": "D",
+              "text": "1956"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C02-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C02",
+        "number": 2
+      },
+      "topicId": "مسلم لیگ",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تحریکِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "آل انڈیا مسلم لیگ کا قیام کس سال ہوا؟",
+          "answer": "1906",
+          "options": [
+            {
+              "id": "A",
+              "text": "1906"
+            },
+            {
+              "id": "B",
+              "text": "1885"
+            },
+            {
+              "id": "C",
+              "text": "1940"
+            },
+            {
+              "id": "D",
+              "text": "1947"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C02-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C02",
+        "number": 2
+      },
+      "topicId": "تحریک پاکستان",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تحریکِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "قراردادِ لاہور کی سیاسی اہمیت مختصراً بیان کریں۔",
+          "answer": "اس نے مسلم اکثریتی علاقوں کے لیے الگ سیاسی مستقبل کے مطالبے کو منظم اور واضح سیاسی شکل دی۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C02-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C02",
+        "number": 2
+      },
+      "topicId": "قیادت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تحریکِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "قائداعظم محمد علی جناح کی تحریکِ پاکستان میں ایک نمایاں خدمت بیان کریں۔",
+          "answer": "انہوں نے مسلم سیاسی نمائندگی کو منظم کیا، آئینی مطالبات کی قیادت کی اور پاکستان کے مطالبے کو متحد سیاسی سمت دی۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C02-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C02",
+        "number": 2
+      },
+      "topicId": "تحریک کی پیش رفت",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تحریکِ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "1906 سے 1947 تک تحریکِ پاکستان کو مضبوط کرنے والے پانچ اہم سیاسی مراحل بیان کریں۔",
+          "answer": "مسلم لیگ کا قیام، آئینی و سیاسی جدوجہد، علامہ اقبال کے تصورات، قرارداد لاہور، انتخابات/مذاکرات اور 1947 کی آزادی جیسے مراحل میں سے مناسب ترتیب کے ساتھ پانچ بیان کیے جائیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C03-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C03",
+        "number": 3
+      },
+      "topicId": "آئین 1956",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تاریخِ پاکستان اور آئینی ارتقا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کا پہلا باقاعدہ آئین کب نافذ ہوا؟",
+          "answer": "1956",
+          "options": [
+            {
+              "id": "A",
+              "text": "1956"
+            },
+            {
+              "id": "B",
+              "text": "1947"
+            },
+            {
+              "id": "C",
+              "text": "1962"
+            },
+            {
+              "id": "D",
+              "text": "1973"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C03-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C03",
+        "number": 3
+      },
+      "topicId": "آئین 1973",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تاریخِ پاکستان اور آئینی ارتقا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کا موجودہ بنیادی آئینی ڈھانچہ کس آئین پر قائم ہے؟",
+          "answer": "1973",
+          "options": [
+            {
+              "id": "A",
+              "text": "1973"
+            },
+            {
+              "id": "B",
+              "text": "1956"
+            },
+            {
+              "id": "C",
+              "text": "1962"
+            },
+            {
+              "id": "D",
+              "text": "1949"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C03-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C03",
+        "number": 3
+      },
+      "topicId": "قرارداد مقاصد",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تاریخِ پاکستان اور آئینی ارتقا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "قراردادِ مقاصد کی آئینی اہمیت کیا تھی؟",
+          "answer": "1949 کی قراردادِ مقاصد نے آئندہ آئینی ڈھانچے کے لیے بنیادی رہنما اصول فراہم کیے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C03-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C03",
+        "number": 3
+      },
+      "topicId": "آئینی تاریخ",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تاریخِ پاکستان اور آئینی ارتقا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کے تین اہم آئینوں کے سال لکھیں۔",
+          "answer": "1956، 1962 اور 1973۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C03-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C03",
+        "number": 3
+      },
+      "topicId": "آئینی ارتقا",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "تاریخِ پاکستان اور آئینی ارتقا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "1947 سے 1973 تک پاکستان کے آئینی ارتقا کا خلاصہ بیان کریں۔",
+          "answer": "عبوری انتظام، قراردادِ مقاصد، 1956 کا آئین، 1962 کا آئین، سیاسی تبدیلیاں اور 1973 کے آئین کی تشکیل و اہمیت شامل کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C04-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C04",
+        "number": 4
+      },
+      "topicId": "محل وقوع",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "جغرافیۂ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان ایشیا کے کس خطے میں واقع ہے؟",
+          "answer": "جنوبی ایشیا",
+          "options": [
+            {
+              "id": "A",
+              "text": "جنوبی ایشیا"
+            },
+            {
+              "id": "B",
+              "text": "جنوبی امریکہ"
+            },
+            {
+              "id": "C",
+              "text": "شمالی یورپ"
+            },
+            {
+              "id": "D",
+              "text": "وسطی افریقہ"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C04-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C04",
+        "number": 4
+      },
+      "topicId": "دریائی نظام",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "جغرافیۂ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کی زراعت کے لیے بنیادی اہمیت رکھنے والا دریائی نظام کون سا ہے؟",
+          "answer": "دریائے سندھ کا نظام",
+          "options": [
+            {
+              "id": "A",
+              "text": "دریائے سندھ کا نظام"
+            },
+            {
+              "id": "B",
+              "text": "دریائے نیل"
+            },
+            {
+              "id": "C",
+              "text": "ایمیزون"
+            },
+            {
+              "id": "D",
+              "text": "ڈینیوب"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C04-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C04",
+        "number": 4
+      },
+      "topicId": "طبعی خطے",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "جغرافیۂ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کے چار اہم طبعی خطے بیان کریں۔",
+          "answer": "مثلاً شمالی پہاڑی علاقے، میدانِ سندھ، بلوچستان کا سطح مرتفع، صحرائی علاقے اور ساحلی پٹی؛ ان میں سے مناسب چار۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C04-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C04",
+        "number": 4
+      },
+      "topicId": "آب و ہوا",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "جغرافیۂ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کے مختلف علاقوں میں آب و ہوا کیوں مختلف ہے؟",
+          "answer": "بلندی، سمندر سے فاصلہ، عرض البلد، زمینی ساخت اور موسمی ہواؤں کی وجہ سے temperature اور rainfall میں فرق پیدا ہوتا ہے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C04-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C04",
+        "number": 4
+      },
+      "topicId": "جغرافیہ اور معیشت",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "جغرافیۂ پاکستان"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کی زمینی ساخت، دریائی نظام اور آب و ہوا آبادی اور معاشی سرگرمیوں پر کیسے اثر انداز ہوتے ہیں؟",
+          "answer": "پہاڑوں/سطح مرتفع، زرخیز میدانِ سندھ، irrigation، climate variation، settlement، agriculture، transport اور resources کے تعلق کو واضح کیا جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C05-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C05",
+        "number": 5
+      },
+      "topicId": "اقوام متحدہ",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان اور بین الاقوامی امور"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کس عالمی تنظیم کا رکن ہے جو 1945 میں قائم ہوئی؟",
+          "answer": "اقوام متحدہ",
+          "options": [
+            {
+              "id": "A",
+              "text": "اقوام متحدہ"
+            },
+            {
+              "id": "B",
+              "text": "یورپی یونین"
+            },
+            {
+              "id": "C",
+              "text": "ASEAN"
+            },
+            {
+              "id": "D",
+              "text": "NAFTA"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C05-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C05",
+        "number": 5
+      },
+      "topicId": "سارک",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان اور بین الاقوامی امور"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "SAARC بنیادی طور پر کس خطے کی علاقائی تنظیم ہے؟",
+          "answer": "جنوبی ایشیا",
+          "options": [
+            {
+              "id": "A",
+              "text": "جنوبی ایشیا"
+            },
+            {
+              "id": "B",
+              "text": "جنوبی امریکہ"
+            },
+            {
+              "id": "C",
+              "text": "مغربی افریقہ"
+            },
+            {
+              "id": "D",
+              "text": "اسکینڈینیویا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C05-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C05",
+        "number": 5
+      },
+      "topicId": "خارجہ پالیسی",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان اور بین الاقوامی امور"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کی خارجہ پالیسی پر اثر انداز ہونے والے دو عوامل بیان کریں۔",
+          "answer": "قومی سلامتی، معاشی مفادات، جغرافیائی محل وقوع، ہمسایہ ممالک، عالمی ادارے اور بین الاقوامی قانون میں سے کوئی دو۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C05-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C05",
+        "number": 5
+      },
+      "topicId": "عالمی ادارے",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان اور بین الاقوامی امور"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "بین الاقوامی اداروں میں شرکت پاکستان کے لیے کیوں اہم ہے؟",
+          "answer": "یہ سفارت کاری، امن و سلامتی، ترقیاتی تعاون اور قومی مفادات کی نمائندگی کے لیے فورم فراہم کرتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C05-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C05",
+        "number": 5
+      },
+      "topicId": "بین الاقوامی تعلقات",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان اور بین الاقوامی امور"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "جغرافیہ، سلامتی، تجارت اور عالمی ادارے پاکستان کے بیرونی تعلقات کو کیسے متاثر کرتے ہیں؟",
+          "answer": "چاروں عوامل کے باہمی اثر، علاقائی و دوطرفہ تعلقات، معاشی مفاد اور عالمی تعاون کے تناظر میں وضاحت کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C06-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C06",
+        "number": 6
+      },
+      "topicId": "معاشی شعبے",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وسائل اور معاشی ترقی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "زراعت بنیادی طور پر کس معاشی شعبے سے تعلق رکھتی ہے؟",
+          "answer": "Primary sector",
+          "options": [
+            {
+              "id": "A",
+              "text": "Primary sector"
+            },
+            {
+              "id": "B",
+              "text": "صرف Secondary sector"
+            },
+            {
+              "id": "C",
+              "text": "صرف Tertiary sector"
+            },
+            {
+              "id": "D",
+              "text": "صرف Quaternary"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C06-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C06",
+        "number": 6
+      },
+      "topicId": "توانائی",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وسائل اور معاشی ترقی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ان میں سے کون سا renewable energy resource ہے؟",
+          "answer": "شمسی توانائی",
+          "options": [
+            {
+              "id": "A",
+              "text": "شمسی توانائی"
+            },
+            {
+              "id": "B",
+              "text": "کوئلہ"
+            },
+            {
+              "id": "C",
+              "text": "پٹرولیم"
+            },
+            {
+              "id": "D",
+              "text": "قدرتی گیس"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C06-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C06",
+        "number": 6
+      },
+      "topicId": "وسائل",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وسائل اور معاشی ترقی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Renewable اور non-renewable resources میں فرق بیان کریں۔",
+          "answer": "Renewable resources نسبتاً انسانی زمانی پیمانے پر قدرتی طور پر دوبارہ پیدا ہو سکتے ہیں؛ non-renewable resources محدود ذخائر رکھتے ہیں اور بہت آہستہ بنتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C06-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C06",
+        "number": 6
+      },
+      "topicId": "انفراسٹرکچر",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وسائل اور معاشی ترقی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "معاشی ترقی میں infrastructure کیوں اہم ہے؟",
+          "answer": "Transport، energy، communication اور water systems markets کو جوڑتے، costs کم کرتے اور productivity/industry/services کو سہارا دیتے ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C06-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C06",
+        "number": 6
+      },
+      "topicId": "معاشی ترقی",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "وسائل اور معاشی ترقی"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "پاکستان کی معاشی ترقی میں زراعت، صنعت، خدمات اور توانائی کے کردار بیان کریں۔",
+          "answer": "ہر بڑے شعبے کی پیداوار، روزگار، تجارت، باہمی linkage اور resource efficiency/infrastructure کی اہمیت بیان کی جائے۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C07-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C07",
+        "number": 7
+      },
+      "topicId": "مردم شماری",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آبادی، معاشرہ اور ثقافتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Population census بنیادی طور پر کس چیز کی معلومات جمع کرتا ہے؟",
+          "answer": "آبادی اور households",
+          "options": [
+            {
+              "id": "A",
+              "text": "آبادی اور households"
+            },
+            {
+              "id": "B",
+              "text": "صرف rainfall"
+            },
+            {
+              "id": "C",
+              "text": "صرف minerals"
+            },
+            {
+              "id": "D",
+              "text": "صرف exports"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C07-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C07",
+        "number": 7
+      },
+      "topicId": "ثقافتی تنوع",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آبادی، معاشرہ اور ثقافتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ثقافتی تنوع میں بنیادی طور پر کیا شامل ہوتا ہے؟",
+          "answer": "زبانیں، روایات اور سماجی طریقے",
+          "options": [
+            {
+              "id": "A",
+              "text": "زبانیں، روایات اور سماجی طریقے"
+            },
+            {
+              "id": "B",
+              "text": "صرف gravity"
+            },
+            {
+              "id": "C",
+              "text": "صرف latitude"
+            },
+            {
+              "id": "D",
+              "text": "صرف currency"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C07-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C07",
+        "number": 7
+      },
+      "topicId": "آبادی",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آبادی، معاشرہ اور ثقافتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "آبادی میں تبدیلی کے دو اہم عوامل بیان کریں۔",
+          "answer": "Birth rate، death rate اور migration میں سے کوئی دو اہم عوامل ہیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C07-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C07",
+        "number": 7
+      },
+      "topicId": "ثقافتی ہم آہنگی",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آبادی، معاشرہ اور ثقافتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "ثقافتی تنوع معاشرے کو کیسے مضبوط کر سکتا ہے؟",
+          "answer": "مختلف زبانیں، روایات، مہارتیں اور perspectives قومی ثقافت کو وسعت دیتے ہیں، بشرطیکہ احترام، برابری اور تعاون موجود ہو۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C07-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C07",
+        "number": 7
+      },
+      "topicId": "آبادی و معاشرہ",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "آبادی، معاشرہ اور ثقافتی تنوع"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "آبادی میں اضافہ اور ثقافتی تنوع سے پیدا ہونے والے مواقع اور چیلنجز بیان کریں۔",
+          "answer": "Labour/market opportunities، services/resources پر دباؤ، urbanization، cultural richness، inclusion، education اور planning کے پہلو شامل کیے جائیں۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C08-M01",
+      "chapter": {
+        "id": "X-PAK-UR-C08",
+        "number": 8
+      },
+      "topicId": "خواتین کا بااختیار ہونا",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں خواتین کا بااختیار ہونا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "Women empowerment کا بنیادی مفہوم کیا ہے؟",
+          "answer": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا",
+          "options": [
+            {
+              "id": "A",
+              "text": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا"
+            },
+            {
+              "id": "B",
+              "text": "تعلیم محدود کرنا"
+            },
+            {
+              "id": "C",
+              "text": "قانونی شناخت کم کرنا"
+            },
+            {
+              "id": "D",
+              "text": "معاشی شرکت روکنا"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C08-M02",
+      "chapter": {
+        "id": "X-PAK-UR-C08",
+        "number": 8
+      },
+      "topicId": "تعلیم",
+      "type": "mcq",
+      "origin": "additional",
+      "marks": 1,
+      "difficulty": "easy",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں خواتین کا بااختیار ہونا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "خواتین کی تعلیم ترقی سے کیوں جڑی ہے؟",
+          "answer": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے",
+          "options": [
+            {
+              "id": "A",
+              "text": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے"
+            },
+            {
+              "id": "B",
+              "text": "یہ literacy کم کرتی ہے"
+            },
+            {
+              "id": "C",
+              "text": "یہ employment روکتی ہے"
+            },
+            {
+              "id": "D",
+              "text": "یہ civic participation ختم کرتی ہے"
+            }
+          ]
+        }
+      },
+      "correctOptionId": "A"
+    },
+    {
+      "id": "X-PAK-UR-C08-S01",
+      "chapter": {
+        "id": "X-PAK-UR-C08",
+        "number": 8
+      },
+      "topicId": "شرکت",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں خواتین کا بااختیار ہونا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "دو شعبے بیان کریں جہاں خواتین کی شرکت قومی ترقی میں کردار ادا کرتی ہے۔",
+          "answer": "تعلیم، صحت، کاروبار، زراعت، public service، science، سیاست یا community leadership میں سے کوئی دو۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C08-S02",
+      "chapter": {
+        "id": "X-PAK-UR-C08",
+        "number": 8
+      },
+      "topicId": "رکاوٹیں",
+      "type": "short",
+      "origin": "additional",
+      "marks": 2,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں خواتین کا بااختیار ہونا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "خواتین کے بااختیار ہونے میں دو ممکنہ رکاوٹیں بیان کریں۔",
+          "answer": "تعلیم تک محدود رسائی، discrimination، unsafe environment، financial access کی کمی یا restrictive social norms میں سے کوئی دو۔"
+        }
+      }
+    },
+    {
+      "id": "X-PAK-UR-C08-L01",
+      "chapter": {
+        "id": "X-PAK-UR-C08",
+        "number": 8
+      },
+      "topicId": "بااختیاری",
+      "type": "long",
+      "origin": "additional",
+      "marks": 5,
+      "difficulty": "medium",
+      "medium": "urdu",
+      "importance": {
+        "selected": false,
+        "reason": ""
+      },
+      "editorial": {
+        "traditional": false
+      },
+      "source": {
+        "catalogRecordId": "pectaa-catalog-018",
+        "pdfSha256": "7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731",
+        "page": null,
+        "exerciseRef": null,
+        "topicIndexEvidence": "CURRENT_URDU_SOURCE_CROSS_MEDIUM_PARITY_EXACT_PAGE_PENDING",
+        "officialUrl": "https://pectaa.edu.pk/curriculum-compliance/",
+        "anchor": "پاکستان میں خواتین کا بااختیار ہونا"
+      },
+      "curriculum": {
+        "authority": "PECTAA",
+        "grade": 10,
+        "subjectId": "pakistan-studies",
+        "edition": "CURRENT_CATALOG_LABEL_NO_SESSION",
+        "textbookId": "PECTAA-X-PAKSTUDIES-UR-CURRENT",
+        "syllabusVersion": "x-current"
+      },
+      "review": {
+        "status": "draft",
+        "checks": {
+          "source": false,
+          "academic": false,
+          "answer": false,
+          "originality": false,
+          "syllabus": false,
+          "english": false,
+          "urdu": false,
+          "translation": false,
+          "duplicate": false
+        },
+        "notes": [
+          "Original Pakistan Studies X Urdu-medium starter aligned to current official Urdu source and cross-medium chapter parity. Exact Urdu page anchors and academic review remain pending."
+        ]
+      },
+      "syllabusScope": {
+        "coverage": "full-textbook",
+        "alpStatus": "unverified"
+      },
+      "boardEvidence": [],
+      "authorId": "ASSPS-RAPID-PROVISIONAL-AUTHOR-20261008",
+      "difficultyRationale": "اصل اردو میڈیم تصوراتی سوال؛ موجودہ باب سے ہم آہنگ۔",
+      "content": {
+        "ur": {
+          "stem": "تعلیم، قانونی حقوق، معاشی مواقع اور سماجی تعاون خواتین کے بااختیار ہونے میں کیسے مدد دیتے ہیں؟",
+          "answer": "چاروں dimensions کی وضاحت اور ان کے مجموعی اثر کو participation، household/community wellbeing اور قومی development سے جوڑا جائے۔"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "drafts": 40,
+    "mcq": 16,
+    "short": 16,
+    "long": 8,
+    "chapters": 8
+  }
+}

@@ -1,0 +1,1398 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "X-PAK-UR-C01-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "نظریاتی اساسِ پاکستان",
+      "topic_name": "نظریہ",
+      "category": "mcq",
+      "question_text": "نظریہ سے عمومی طور پر کیا مراد ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں"
+        },
+        {
+          "id": "B",
+          "text": "صرف موسم کی رپورٹ"
+        },
+        {
+          "id": "C",
+          "text": "صرف نقشہ"
+        },
+        {
+          "id": "D",
+          "text": "صرف معاشی عدد"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "ایسے بنیادی خیالات اور اقدار جو اجتماعی سمت متعین کریں",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 1",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "نظریہ"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C01-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "نظریاتی اساسِ پاکستان",
+      "topic_name": "دو قومی نظریہ",
+      "category": "mcq",
+      "question_text": "دو قومی نظریے نے برصغیر کے مسلمانوں کے بارے میں کس بات پر زور دیا؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے"
+        },
+        {
+          "id": "B",
+          "text": "تمام سیاسی مطالبات ختم ہو گئے تھے"
+        },
+        {
+          "id": "C",
+          "text": "وہ صرف جغرافیائی اصطلاح تھے"
+        },
+        {
+          "id": "D",
+          "text": "کوئی جداگانہ شناخت نہ تھی"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "وہ ایک الگ سیاسی و ثقافتی شناخت رکھتے تھے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 1",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "دو قومی نظریہ"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C01-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "نظریاتی اساسِ پاکستان",
+      "topic_name": "نظریاتی بنیاد",
+      "category": "short",
+      "question_text": "پاکستان کی نظریاتی بنیاد کے دو اہم پہلو بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اسلامی اصول و اقدار اور برصغیر کے مسلمانوں کی جداگانہ سیاسی، سماجی و تاریخی شناخت دو اہم پہلو ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 1",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "نظریاتی بنیاد"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C01-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "نظریاتی اساسِ پاکستان",
+      "topic_name": "ریاستی اصول",
+      "category": "short",
+      "question_text": "نظریاتی اقدار آئینی اصولوں پر کیسے اثر انداز ہو سکتی ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ عدل، حقوق، حاکمیت، شہری ذمہ داری اور ریاستی مقصد جیسے اصولوں کی سمت متعین کرنے میں مدد دیتی ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 1",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ریاستی اصول"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C01-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "نظریاتی اساسِ پاکستان",
+      "topic_name": "نظریاتی اساس",
+      "category": "long",
+      "question_text": "پاکستان کی نظریاتی بنیاد میں مذہبی، سماجی اور سیاسی عوامل کے باہمی تعلق کی وضاحت کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "جواب میں اسلامی اقدار، مسلم شناخت، سیاسی نمائندگی، سماجی و معاشی تحفظات اور علیحدہ وطن کے مطالبے کے باہمی تعلق کو واضح کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 1",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "نظریاتی اساس"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C02-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "تحریکِ پاکستان",
+      "topic_name": "لاہور قرارداد",
+      "category": "mcq",
+      "question_text": "قراردادِ لاہور کس سال منظور ہوئی؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "1940"
+        },
+        {
+          "id": "B",
+          "text": "1930"
+        },
+        {
+          "id": "C",
+          "text": "1947"
+        },
+        {
+          "id": "D",
+          "text": "1956"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1940",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "لاہور قرارداد"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C02-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "تحریکِ پاکستان",
+      "topic_name": "مسلم لیگ",
+      "category": "mcq",
+      "question_text": "آل انڈیا مسلم لیگ کا قیام کس سال ہوا؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "1906"
+        },
+        {
+          "id": "B",
+          "text": "1885"
+        },
+        {
+          "id": "C",
+          "text": "1940"
+        },
+        {
+          "id": "D",
+          "text": "1947"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1906",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "مسلم لیگ"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C02-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "تحریکِ پاکستان",
+      "topic_name": "تحریک پاکستان",
+      "category": "short",
+      "question_text": "قراردادِ لاہور کی سیاسی اہمیت مختصراً بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "اس نے مسلم اکثریتی علاقوں کے لیے الگ سیاسی مستقبل کے مطالبے کو منظم اور واضح سیاسی شکل دی۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "تحریک پاکستان"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C02-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "تحریکِ پاکستان",
+      "topic_name": "قیادت",
+      "category": "short",
+      "question_text": "قائداعظم محمد علی جناح کی تحریکِ پاکستان میں ایک نمایاں خدمت بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "انہوں نے مسلم سیاسی نمائندگی کو منظم کیا، آئینی مطالبات کی قیادت کی اور پاکستان کے مطالبے کو متحد سیاسی سمت دی۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "قیادت"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C02-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "تحریکِ پاکستان",
+      "topic_name": "تحریک کی پیش رفت",
+      "category": "long",
+      "question_text": "1906 سے 1947 تک تحریکِ پاکستان کو مضبوط کرنے والے پانچ اہم سیاسی مراحل بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "مسلم لیگ کا قیام، آئینی و سیاسی جدوجہد، علامہ اقبال کے تصورات، قرارداد لاہور، انتخابات/مذاکرات اور 1947 کی آزادی جیسے مراحل میں سے مناسب ترتیب کے ساتھ پانچ بیان کیے جائیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 2",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "تحریک کی پیش رفت"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C03-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "تاریخِ پاکستان اور آئینی ارتقا",
+      "topic_name": "آئین 1956",
+      "category": "mcq",
+      "question_text": "پاکستان کا پہلا باقاعدہ آئین کب نافذ ہوا؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "1956"
+        },
+        {
+          "id": "B",
+          "text": "1947"
+        },
+        {
+          "id": "C",
+          "text": "1962"
+        },
+        {
+          "id": "D",
+          "text": "1973"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1956",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 3",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آئین 1956"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C03-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "تاریخِ پاکستان اور آئینی ارتقا",
+      "topic_name": "آئین 1973",
+      "category": "mcq",
+      "question_text": "پاکستان کا موجودہ بنیادی آئینی ڈھانچہ کس آئین پر قائم ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "1973"
+        },
+        {
+          "id": "B",
+          "text": "1956"
+        },
+        {
+          "id": "C",
+          "text": "1962"
+        },
+        {
+          "id": "D",
+          "text": "1949"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "1973",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 3",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آئین 1973"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C03-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "تاریخِ پاکستان اور آئینی ارتقا",
+      "topic_name": "قرارداد مقاصد",
+      "category": "short",
+      "question_text": "قراردادِ مقاصد کی آئینی اہمیت کیا تھی؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "1949 کی قراردادِ مقاصد نے آئندہ آئینی ڈھانچے کے لیے بنیادی رہنما اصول فراہم کیے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 3",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "قرارداد مقاصد"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C03-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "تاریخِ پاکستان اور آئینی ارتقا",
+      "topic_name": "آئینی تاریخ",
+      "category": "short",
+      "question_text": "پاکستان کے تین اہم آئینوں کے سال لکھیں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "1956، 1962 اور 1973۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 3",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آئینی تاریخ"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C03-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "تاریخِ پاکستان اور آئینی ارتقا",
+      "topic_name": "آئینی ارتقا",
+      "category": "long",
+      "question_text": "1947 سے 1973 تک پاکستان کے آئینی ارتقا کا خلاصہ بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "عبوری انتظام، قراردادِ مقاصد، 1956 کا آئین، 1962 کا آئین، سیاسی تبدیلیاں اور 1973 کے آئین کی تشکیل و اہمیت شامل کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 3",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آئینی ارتقا"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C04-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "جغرافیۂ پاکستان",
+      "topic_name": "محل وقوع",
+      "category": "mcq",
+      "question_text": "پاکستان ایشیا کے کس خطے میں واقع ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "جنوبی ایشیا"
+        },
+        {
+          "id": "B",
+          "text": "جنوبی امریکہ"
+        },
+        {
+          "id": "C",
+          "text": "شمالی یورپ"
+        },
+        {
+          "id": "D",
+          "text": "وسطی افریقہ"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "جنوبی ایشیا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 4",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "محل وقوع"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C04-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "جغرافیۂ پاکستان",
+      "topic_name": "دریائی نظام",
+      "category": "mcq",
+      "question_text": "پاکستان کی زراعت کے لیے بنیادی اہمیت رکھنے والا دریائی نظام کون سا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "دریائے سندھ کا نظام"
+        },
+        {
+          "id": "B",
+          "text": "دریائے نیل"
+        },
+        {
+          "id": "C",
+          "text": "ایمیزون"
+        },
+        {
+          "id": "D",
+          "text": "ڈینیوب"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "دریائے سندھ کا نظام",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 4",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "دریائی نظام"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C04-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "جغرافیۂ پاکستان",
+      "topic_name": "طبعی خطے",
+      "category": "short",
+      "question_text": "پاکستان کے چار اہم طبعی خطے بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "مثلاً شمالی پہاڑی علاقے، میدانِ سندھ، بلوچستان کا سطح مرتفع، صحرائی علاقے اور ساحلی پٹی؛ ان میں سے مناسب چار۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 4",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "طبعی خطے"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C04-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "جغرافیۂ پاکستان",
+      "topic_name": "آب و ہوا",
+      "category": "short",
+      "question_text": "پاکستان کے مختلف علاقوں میں آب و ہوا کیوں مختلف ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "بلندی، سمندر سے فاصلہ، عرض البلد، زمینی ساخت اور موسمی ہواؤں کی وجہ سے temperature اور rainfall میں فرق پیدا ہوتا ہے۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 4",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آب و ہوا"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C04-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "جغرافیۂ پاکستان",
+      "topic_name": "جغرافیہ اور معیشت",
+      "category": "long",
+      "question_text": "پاکستان کی زمینی ساخت، دریائی نظام اور آب و ہوا آبادی اور معاشی سرگرمیوں پر کیسے اثر انداز ہوتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "پہاڑوں/سطح مرتفع، زرخیز میدانِ سندھ، irrigation، climate variation، settlement، agriculture، transport اور resources کے تعلق کو واضح کیا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 4",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "جغرافیہ اور معیشت"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C05-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان اور بین الاقوامی امور",
+      "topic_name": "اقوام متحدہ",
+      "category": "mcq",
+      "question_text": "پاکستان کس عالمی تنظیم کا رکن ہے جو 1945 میں قائم ہوئی؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "اقوام متحدہ"
+        },
+        {
+          "id": "B",
+          "text": "یورپی یونین"
+        },
+        {
+          "id": "C",
+          "text": "ASEAN"
+        },
+        {
+          "id": "D",
+          "text": "NAFTA"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "اقوام متحدہ",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 5",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "اقوام متحدہ"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C05-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان اور بین الاقوامی امور",
+      "topic_name": "سارک",
+      "category": "mcq",
+      "question_text": "SAARC بنیادی طور پر کس خطے کی علاقائی تنظیم ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "جنوبی ایشیا"
+        },
+        {
+          "id": "B",
+          "text": "جنوبی امریکہ"
+        },
+        {
+          "id": "C",
+          "text": "مغربی افریقہ"
+        },
+        {
+          "id": "D",
+          "text": "اسکینڈینیویا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "جنوبی ایشیا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 5",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "سارک"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C05-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان اور بین الاقوامی امور",
+      "topic_name": "خارجہ پالیسی",
+      "category": "short",
+      "question_text": "پاکستان کی خارجہ پالیسی پر اثر انداز ہونے والے دو عوامل بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "قومی سلامتی، معاشی مفادات، جغرافیائی محل وقوع، ہمسایہ ممالک، عالمی ادارے اور بین الاقوامی قانون میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 5",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "خارجہ پالیسی"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C05-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان اور بین الاقوامی امور",
+      "topic_name": "عالمی ادارے",
+      "category": "short",
+      "question_text": "بین الاقوامی اداروں میں شرکت پاکستان کے لیے کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "یہ سفارت کاری، امن و سلامتی، ترقیاتی تعاون اور قومی مفادات کی نمائندگی کے لیے فورم فراہم کرتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 5",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "عالمی ادارے"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C05-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "پاکستان اور بین الاقوامی امور",
+      "topic_name": "بین الاقوامی تعلقات",
+      "category": "long",
+      "question_text": "جغرافیہ، سلامتی، تجارت اور عالمی ادارے پاکستان کے بیرونی تعلقات کو کیسے متاثر کرتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "چاروں عوامل کے باہمی اثر، علاقائی و دوطرفہ تعلقات، معاشی مفاد اور عالمی تعاون کے تناظر میں وضاحت کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 5",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "بین الاقوامی تعلقات"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C06-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "وسائل اور معاشی ترقی",
+      "topic_name": "معاشی شعبے",
+      "category": "mcq",
+      "question_text": "زراعت بنیادی طور پر کس معاشی شعبے سے تعلق رکھتی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "Primary sector"
+        },
+        {
+          "id": "B",
+          "text": "صرف Secondary sector"
+        },
+        {
+          "id": "C",
+          "text": "صرف Tertiary sector"
+        },
+        {
+          "id": "D",
+          "text": "صرف Quaternary"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Primary sector",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 6",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "معاشی شعبے"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C06-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "وسائل اور معاشی ترقی",
+      "topic_name": "توانائی",
+      "category": "mcq",
+      "question_text": "ان میں سے کون سا renewable energy resource ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "شمسی توانائی"
+        },
+        {
+          "id": "B",
+          "text": "کوئلہ"
+        },
+        {
+          "id": "C",
+          "text": "پٹرولیم"
+        },
+        {
+          "id": "D",
+          "text": "قدرتی گیس"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "شمسی توانائی",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 6",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "توانائی"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C06-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "وسائل اور معاشی ترقی",
+      "topic_name": "وسائل",
+      "category": "short",
+      "question_text": "Renewable اور non-renewable resources میں فرق بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Renewable resources نسبتاً انسانی زمانی پیمانے پر قدرتی طور پر دوبارہ پیدا ہو سکتے ہیں؛ non-renewable resources محدود ذخائر رکھتے ہیں اور بہت آہستہ بنتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 6",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "وسائل"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C06-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "وسائل اور معاشی ترقی",
+      "topic_name": "انفراسٹرکچر",
+      "category": "short",
+      "question_text": "معاشی ترقی میں infrastructure کیوں اہم ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "Transport، energy، communication اور water systems markets کو جوڑتے، costs کم کرتے اور productivity/industry/services کو سہارا دیتے ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 6",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "انفراسٹرکچر"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C06-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "وسائل اور معاشی ترقی",
+      "topic_name": "معاشی ترقی",
+      "category": "long",
+      "question_text": "پاکستان کی معاشی ترقی میں زراعت، صنعت، خدمات اور توانائی کے کردار بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "ہر بڑے شعبے کی پیداوار، روزگار، تجارت، باہمی linkage اور resource efficiency/infrastructure کی اہمیت بیان کی جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 6",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "معاشی ترقی"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C07-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "آبادی، معاشرہ اور ثقافتی تنوع",
+      "topic_name": "مردم شماری",
+      "category": "mcq",
+      "question_text": "Population census بنیادی طور پر کس چیز کی معلومات جمع کرتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "آبادی اور households"
+        },
+        {
+          "id": "B",
+          "text": "صرف rainfall"
+        },
+        {
+          "id": "C",
+          "text": "صرف minerals"
+        },
+        {
+          "id": "D",
+          "text": "صرف exports"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "آبادی اور households",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 7",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "مردم شماری"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C07-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "آبادی، معاشرہ اور ثقافتی تنوع",
+      "topic_name": "ثقافتی تنوع",
+      "category": "mcq",
+      "question_text": "ثقافتی تنوع میں بنیادی طور پر کیا شامل ہوتا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "زبانیں، روایات اور سماجی طریقے"
+        },
+        {
+          "id": "B",
+          "text": "صرف gravity"
+        },
+        {
+          "id": "C",
+          "text": "صرف latitude"
+        },
+        {
+          "id": "D",
+          "text": "صرف currency"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "زبانیں، روایات اور سماجی طریقے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 7",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ثقافتی تنوع"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C07-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "آبادی، معاشرہ اور ثقافتی تنوع",
+      "topic_name": "آبادی",
+      "category": "short",
+      "question_text": "آبادی میں تبدیلی کے دو اہم عوامل بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Birth rate، death rate اور migration میں سے کوئی دو اہم عوامل ہیں۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 7",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آبادی"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C07-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "آبادی، معاشرہ اور ثقافتی تنوع",
+      "topic_name": "ثقافتی ہم آہنگی",
+      "category": "short",
+      "question_text": "ثقافتی تنوع معاشرے کو کیسے مضبوط کر سکتا ہے؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "مختلف زبانیں، روایات، مہارتیں اور perspectives قومی ثقافت کو وسعت دیتے ہیں، بشرطیکہ احترام، برابری اور تعاون موجود ہو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 7",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "ثقافتی ہم آہنگی"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C07-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "آبادی، معاشرہ اور ثقافتی تنوع",
+      "topic_name": "آبادی و معاشرہ",
+      "category": "long",
+      "question_text": "آبادی میں اضافہ اور ثقافتی تنوع سے پیدا ہونے والے مواقع اور چیلنجز بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "Labour/market opportunities، services/resources پر دباؤ، urbanization، cultural richness، inclusion، education اور planning کے پہلو شامل کیے جائیں۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 7",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "آبادی و معاشرہ"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C08-M01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پاکستان میں خواتین کا بااختیار ہونا",
+      "topic_name": "خواتین کا بااختیار ہونا",
+      "category": "mcq",
+      "question_text": "Women empowerment کا بنیادی مفہوم کیا ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا"
+        },
+        {
+          "id": "B",
+          "text": "تعلیم محدود کرنا"
+        },
+        {
+          "id": "C",
+          "text": "قانونی شناخت کم کرنا"
+        },
+        {
+          "id": "D",
+          "text": "معاشی شرکت روکنا"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "حقوق، تعلیم اور مواقع تک منصفانہ رسائی بڑھانا",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 8",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "خواتین کا بااختیار ہونا"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C08-M02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پاکستان میں خواتین کا بااختیار ہونا",
+      "topic_name": "تعلیم",
+      "category": "mcq",
+      "question_text": "خواتین کی تعلیم ترقی سے کیوں جڑی ہے؟",
+      "options": [
+        {
+          "id": "A",
+          "text": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے"
+        },
+        {
+          "id": "B",
+          "text": "یہ literacy کم کرتی ہے"
+        },
+        {
+          "id": "C",
+          "text": "یہ employment روکتی ہے"
+        },
+        {
+          "id": "D",
+          "text": "یہ civic participation ختم کرتی ہے"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "یہ skills، health awareness اور economic participation بڑھا سکتی ہے",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 8",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "تعلیم"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C08-S01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پاکستان میں خواتین کا بااختیار ہونا",
+      "topic_name": "شرکت",
+      "category": "short",
+      "question_text": "دو شعبے بیان کریں جہاں خواتین کی شرکت قومی ترقی میں کردار ادا کرتی ہے۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "تعلیم، صحت، کاروبار، زراعت، public service، science، سیاست یا community leadership میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 8",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "شرکت"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C08-S02",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پاکستان میں خواتین کا بااختیار ہونا",
+      "topic_name": "رکاوٹیں",
+      "category": "short",
+      "question_text": "خواتین کے بااختیار ہونے میں دو ممکنہ رکاوٹیں بیان کریں۔",
+      "options": [],
+      "correct_option": "",
+      "answer": "تعلیم تک محدود رسائی، discrimination، unsafe environment، financial access کی کمی یا restrictive social norms میں سے کوئی دو۔",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 8",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "رکاوٹیں"
+      ]
+    },
+    {
+      "id": "X-PAK-UR-C08-L01",
+      "class_level": "10th",
+      "subject": "Pakistan Studies",
+      "medium": "Urdu",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "پاکستان میں خواتین کا بااختیار ہونا",
+      "topic_name": "بااختیاری",
+      "category": "long",
+      "question_text": "تعلیم، قانونی حقوق، معاشی مواقع اور سماجی تعاون خواتین کے بااختیار ہونے میں کیسے مدد دیتے ہیں؟",
+      "options": [],
+      "correct_option": "",
+      "answer": "چاروں dimensions کی وضاحت اور ان کے مجموعی اثر کو participation، household/community wellbeing اور قومی development سے جوڑا جائے۔",
+      "marks": 5,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-018 | 7dd478354333f74c73b0cfba1a7889ce2b772bad5b40a5d76b6c598e75551731 | chapter 8",
+      "tags": [
+        "grade10",
+        "pakistan-studies",
+        "urdu",
+        "current-textbook",
+        "internal-provisional",
+        "original-draft",
+        "بااختیاری"
+      ]
+    }
+  ]
+}
