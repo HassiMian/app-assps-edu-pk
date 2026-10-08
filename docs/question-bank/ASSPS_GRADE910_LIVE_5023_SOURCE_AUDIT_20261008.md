@@ -18,7 +18,7 @@ These school tenants must never be merged or given each other's approvals.
 
 | Observation | Flagged |
 |---|---:|
-| Missing structured source-page number | **5,023** |
+| Missing structured source-page number | **5,023** |\n| No academic-session metadata bound to the question | **5,023** |\n| Subject/grade MCQ groups with at least 80% same answer option (n>=12) | **31 groups** |
 | Source catalog ID not in independently verified registry | **2,502** |
 | Missing/unstructured source claim | **1,141** |
 | Source grade/subject/medium mismatch | **168** |
@@ -26,7 +26,7 @@ These school tenants must never be merged or given each other's approvals.
 | Possible same-school duplicate requiring review | **114** |
 | Questions approved by this audit | **0** |
 
-No source page numbers were inferred or written into the database. The source-catalog mismatches are review flags, not proof the question is false. These numbers overlap; do not sum them.
+No source page numbers, session metadata or MCQ correct-option values were inferred or written into the database. The source-catalog mismatches are review flags, not proof the question is false. These numbers overlap; do not sum them.
 
 ## Chemistry 9 priority
 

@@ -21,7 +21,7 @@ const FLAG_ORDER=[
  'SOURCE_RECORD_UNKNOWN','SOURCE_ID_HASH_MISMATCH','SOURCE_GRADE_SUBJECT_MEDIUM_MISMATCH',
  'SOURCE_EDITION_SESSION_REVIEW_REQUIRED','SOURCE_PAGE_COLUMN_MISSING',
  'SOURCE_PAGE_NUMBER_INCONSISTENT','CHAPTER_PAGE_CLAIM_OUTSIDE_TOC',
- 'CHAPTER_PAGE_INDEX_NOT_VERIFIED','MCQ_OPTIONS_MALFORMED','MCQ_KEY_INVALID',
+ 'CHAPTER_PAGE_INDEX_NOT_VERIFIED','TEACHING_SESSION_NOT_DECLARED','MCQ_OPTIONS_MALFORMED','MCQ_KEY_INVALID',
  'CHAPTER_NUMBER_OUTSIDE_VERIFIED_CHEM9_TOC','DUPLICATE_CANDIDATE','NO_OFFICIAL_SOURCE_PAGE_IMAGE_REVIEW'
 ]
 function parseClaim(value){
@@ -39,6 +39,8 @@ function normalizeOptions(options){
 }
 function auditRow(row,{seen}={}){
  const flags=new Set(['QUESTION_NOT_ACADEMICALLY_APPROVED','NO_OFFICIAL_SOURCE_PAGE_IMAGE_REVIEW'])
+ if(!['academicSession','curriculumSession','session'].some(k=>String(row.metadata?.[k]||'').trim()))
+   flags.add('TEACHING_SESSION_NOT_DECLARED')
  const grade=GRADE_ALIASES.get(canonical(row.class_level))||null
  const claim=parseClaim(row.metadata?.source)
  const registry=claim?sourceMap.get(claim.recordId):null
@@ -96,7 +98,7 @@ function auditRow(row,{seen}={}){
    claimedPageType:claim?.type||'',claimedPage:claim?.number??null,
    structuredSourcePage:page,chem9TocRangePlausible:chem9Plausible,
    officialSourceFileIdentityVerified:claim?.recordId==='pectaa-catalog-007'?chemistryPdfHashVerified:null,
-   academicApprovalGranted:false,flags:sorted}
+   correctOption:canonical(row.correct_option).toUpperCase(),academicApprovalGranted:false,flags:sorted}
 }
 function summarize(items){
  const grouped=new Map()
@@ -105,8 +107,13 @@ function summarize(items){
    const key=[q.schoolId,q.grade,q.subject].join('|')
    const current=grouped.get(key)||{schoolId:q.schoolId,grade:q.grade,
      subject:q.subject,total:0,claimedStructured:0,sourcePageFields:0,academicApproved:0,
+     mcqCount:0,mcqKeyCounts:{A:0,B:0,C:0,D:0},
      invalidSourceClaims:0,invalidMcqs:0,duplicateCandidates:0,chemistryRangePlausible:0}
    current.total++
+   if(canonical(q.questionType)==='mcq'){
+     current.mcqCount++
+     if(current.mcqKeyCounts[q.correctOption]!==undefined)current.mcqKeyCounts[q.correctOption]++
+   }
    if(q.claimedRecordId)current.claimedStructured++
    if(q.structuredSourcePage!=null)current.sourcePageFields++
    if(q.flags.some(f=>f.startsWith('SOURCE_RECORD_')||f.includes('HASH_MISMATCH')||
@@ -117,7 +124,13 @@ function summarize(items){
    grouped.set(key,current)
    for(const f of q.flags)flagCounts[f]=(flagCounts[f]||0)+1
  }
- return {questionsInspected:items.length,schoolCounts:Object.fromEntries(
+ const editorialKeyWarnings=[...grouped.values()].filter(x=>x.mcqCount>=12 &&
+   Math.max(...Object.values(x.mcqKeyCounts))/x.mcqCount>=0.8).map(x=>({
+     schoolId:x.schoolId,grade:x.grade,subject:x.subject,mcqCount:x.mcqCount,
+     mcqKeyCounts:x.mcqKeyCounts,dominantShare:Number((Math.max(...Object.values(x.mcqKeyCounts))/x.mcqCount).toFixed(4)),
+     status:'EDITORIAL_REVIEW_NO_KEY_MUTATION',
+   }))
+ return {questionsInspected:items.length,editorialKeyWarnings,schoolCounts:Object.fromEntries(
    [...new Set(items.map(x=>x.schoolId))].map(id=>[id,items.filter(x=>x.schoolId===id).length])),
    flags:flagCounts,bySubject:[...grouped.values()].sort((a,b)=>a.schoolId-b.schoolId||
      a.grade-b.grade||a.subject.localeCompare(b.subject))}
@@ -125,7 +138,7 @@ function summarize(items){
 function csv(rows){
  const cols=['questionId','schoolId','grade','subject','medium','chapter','questionType',
    'claimedRecordId','claimedHash','claimedPageType','claimedPage','structuredSourcePage',
-   'chem9TocRangePlausible','officialSourceFileIdentityVerified','academicApprovalGranted','flags']
+   'chem9TocRangePlausible','officialSourceFileIdentityVerified','correctOption','academicApprovalGranted','flags']
  const cell=v=>'"'+String(Array.isArray(v)?v.join(';'):v??'').replace(/"/g,'""')+'"'
  return cols.join(',')+'\n'+rows.map(row=>cols.map(col=>cell(row[col])).join(',')).join('\n')+'\n'
 }
@@ -177,6 +190,8 @@ async function main(){
      questions:summary.questionsInspected,schoolCounts:summary.schoolCounts,
      officialChemistry9PdfIdentityMatched:chemistryPdfHashVerified,
      sourcePageMissing:summary.flags.SOURCE_PAGE_COLUMN_MISSING||0,
+     sessionMissing:summary.flags.TEACHING_SESSION_NOT_DECLARED||0,
+     answerKeyEditorialGroups:summary.editorialKeyWarnings.length,
      sourceClaimMissing:summary.flags.SOURCE_CLAIM_MISSING_OR_UNSTRUCTURED||0,
      sourceScopeMismatch:summary.flags.SOURCE_GRADE_SUBJECT_MEDIUM_MISMATCH||0,
      invalidMCQ:((summary.flags.MCQ_OPTIONS_MALFORMED||0)+(summary.flags.MCQ_KEY_INVALID||0)),

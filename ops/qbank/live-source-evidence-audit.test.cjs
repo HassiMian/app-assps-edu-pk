@@ -65,3 +65,24 @@ test('duplicate detection never crosses schools and never deletes records',()=>{
   const result=summarize([repeat,other])
   assert.deepEqual(result.schoolCounts,{'1':1,'5':1})
 })
+
+test('missing teaching session is flagged even when a textbook identity hash matches',()=>{
+  const item=auditRow(base())
+  assert.ok(item.flags.includes('TEACHING_SESSION_NOT_DECLARED'))
+  assert.equal(item.academicApprovalGranted,false)
+  const withSession={...base(),metadata:{...base().metadata,curriculumSession:'2026-27'}}
+  assert.ok(!auditRow(withSession).flags.includes('TEACHING_SESSION_NOT_DECLARED'))
+})
+
+test('answer key imbalance is review-only and preserves original correct options',()=>{
+  const seen=new Set()
+  const group=Array.from({length:16},(_,i)=>auditRow({
+    ...base(),id:'imbalance-'+i,question_text:'Distinct review item '+i,correct_option:'A',
+  },{seen}))
+  const report=summarize(group)
+  assert.equal(report.editorialKeyWarnings.length,1)
+  assert.deepEqual(report.editorialKeyWarnings[0].mcqKeyCounts,{A:16,B:0,C:0,D:0})
+  assert.equal(report.editorialKeyWarnings[0].dominantShare,1)
+  assert.equal(report.editorialKeyWarnings[0].status,'EDITORIAL_REVIEW_NO_KEY_MUTATION')
+  assert.equal(group.every(x=>x.correctOption==='A'&&x.academicApprovalGranted===false),true)
+})
