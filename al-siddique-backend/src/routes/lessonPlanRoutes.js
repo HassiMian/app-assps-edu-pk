@@ -2,7 +2,8 @@ const express = require('express')
 const crypto = require('node:crypto')
 const router = express.Router()
 
-const { pool } = require('../config/database')
+const { pool, query } = require('../config/database')
+const { withPaperRestrictedScope } = require('../middleware/paperRestrictedDatabase')
 const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { loadPlanningContext } = require('../services/lessonPlanningContext')
@@ -138,7 +139,7 @@ router.get('/planner/context', async (req, res) => {
       classLevel: cleanText(req.query.classLevel || req.query.class || '',100),
       section: cleanText(req.query.section || '',80),
       subjects,
-    }))
+    }, { protectedReader:{ query:(sql,params)=>withPaperRestrictedScope(req,()=>query(sql,params)) } }))
     return res.json({ success:true, data })
   } catch (error) {
     const status = Number(error.status || 500)
@@ -172,7 +173,7 @@ router.post('/planner/generate', async (req, res) => {
     if (!classLevel) return res.status(422).json({ success:false, code:'LESSON_PLAN_CLASS_REQUIRED', message:'Class is required.' })
     if (!startDate || !endDate || endDate < startDate) return res.status(422).json({ success:false, code:'LESSON_PLAN_DATE_RANGE_INVALID', message:'A valid planning date range is required.' })
     const subjects = Array.isArray(input.subjects) ? input.subjects.slice(0,20).map(value => cleanText(value,160)).filter(Boolean) : []
-    const context = await withTenantTransaction(req, schoolId, client => loadPlanningContext(client, schoolId, { classLevel, section, subjects }))
+    const context = await withTenantTransaction(req, schoolId, client => loadPlanningContext(client, schoolId, { classLevel, section, subjects }, { protectedReader:{ query:(sql,params)=>withPaperRestrictedScope(req,()=>query(sql,params)) } }))
     const deterministic = buildDeterministicPlan({ ...input, classLevel, section, startDate, endDate, subjects }, context)
     const aiRequested = input.useAi !== false
     const result = aiRequested

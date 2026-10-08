@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { query } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
 const { currentSchoolId, tenantClause } = require('../middleware/tenant')
 const { saveResultRevision } = require('../services/assessmentResults')
 const { ensureTeacherAssignmentSchema, teacherCanAccessClass } = require('../services/teacherAssignmentService')
@@ -42,6 +43,7 @@ async function teacherCanAccessRelease(req, schoolId, releaseId) {
 }
 
 router.use(protect, canEnterResults)
+router.use(paperRestrictedDatabase)
 
 router.post('/', async (req,res)=>{
   try{

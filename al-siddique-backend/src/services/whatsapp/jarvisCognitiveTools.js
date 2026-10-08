@@ -4,8 +4,8 @@
  * Production-hardened, fail-closed & auditable
  */
 
-const { pool } = require('../../config/database');
-const { requireConfiguredSchoolId } = require('./schoolChannelGuard.cjs');
+const { pool, tenantContext } = require('../../config/database');
+const { requireConfiguredSchoolId, resolveUserRole } = require('./schoolChannelGuard.cjs');
 const { execFile } = require('child_process');
 
 
@@ -1689,6 +1689,42 @@ async function getPaperFromVault({ paperId, className, subject, action = 'view' 
   }
 }
 
+// With RLS production enforcement, legacy WhatsApp paper ingestion cannot
+// bypass the canonical Question Bank review/governance pipeline. Only the
+// authenticated OWNER/ADMIN read-only Paper Vault workflow is supported until
+// the ingestion format has been converted to PaperDocument + governed capture.
+async function withSignedWhatsAppPaperRead(ctx, callback) {
+  if (process.env.PAPER_RESTRICTED_DB_ENABLED !== 'true') return callback()
+  const verified = resolveUserRole(ctx?.fromNumber)
+  if (!ctx || !['OWNER','ADMIN'].includes(verified) || verified !== ctx.role) {
+    return { success:false, code:'WHATSAPP_PAPER_AUTH_DENIED', error:'Authenticated school owner/admin channel is required.' }
+  }
+  const schoolId = requireConfiguredSchoolId()
+  if (schoolId > 99999999) return { success:false, code:'WHATSAPP_PAPER_SERVICE_ACTOR_INVALID', error:'School service scope could not be verified.' }
+  // Reserved non-login integration actor. It is never a real teacher/admin user
+  // ID; origin is logged by the verified WhatsApp caller channel.
+  const integrationActorId = 900000000 + schoolId
+  return tenantContext.run({
+    rlsEnabled:true, paperRestricted:true, isSuperAdmin:false,
+    tenantId:schoolId, tenantKey:'whatsapp-school-service',
+    paperActorId:integrationActorId, paperActorRole:'admin',
+  }, callback)
+}
+function preventUngovernedWhatsappPaperWrite() {
+  return { success:false, code:'PAPER_GOVERNANCE_AUTHORING_ONLY',
+    error:'Paper authoring and Question Bank intake require the authenticated Paper Workspace and academic review. WhatsApp direct imports are unavailable in secure mode.' }
+}
+const guardedGenerateAssessmentPaper = (args,ctx) =>
+  process.env.PAPER_RESTRICTED_DB_ENABLED === 'true'
+    ? preventUngovernedWhatsappPaperWrite()
+    : generateAssessmentPaper(args,ctx)
+const guardedParseAndIngestPaperToVault = (args,ctx) =>
+  process.env.PAPER_RESTRICTED_DB_ENABLED === 'true'
+    ? preventUngovernedWhatsappPaperWrite()
+    : parseAndIngestPaperToVault(args,ctx)
+const guardedGetPaperFromVault = (args,ctx) =>
+  withSignedWhatsAppPaperRead(ctx,()=>getPaperFromVault(args,ctx))
+
 module.exports = {
   getExamDatesheet,
   manageDatesheet,
@@ -1708,7 +1744,7 @@ module.exports = {
   getOrManageNotices,
   manageAdmissionsAndFamilies,
   manageExpensesAndAccounts,
-  generateAssessmentPaper,
-  parseAndIngestPaperToVault,
-  getPaperFromVault,
+  generateAssessmentPaper: guardedGenerateAssessmentPaper,
+  parseAndIngestPaperToVault: guardedParseAndIngestPaperToVault,
+  getPaperFromVault: guardedGetPaperFromVault,
 };

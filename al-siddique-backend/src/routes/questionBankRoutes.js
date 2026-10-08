@@ -3,6 +3,8 @@
 
 const crypto = require('crypto')
 const express = require('express')
+const { paperRestrictedDatabase } = require('../middleware/paperRestrictedDatabase')
+
 const router = express.Router()
 const { query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles } = require('../middleware/auth')
@@ -14,6 +16,7 @@ const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'te
 const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
 
 router.use(protect, canUseQuestionBank)
+router.use(paperRestrictedDatabase)
 
 function requireSchoolContext(req, res) {
   const schoolId = currentSchoolId(req)

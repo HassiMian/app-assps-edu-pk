@@ -149,7 +149,7 @@ async function loadCurriculumScopes(client, schoolId, classLevel, subjects = [])
   }))
 }
 
-async function loadPlanningContext(client, schoolId, filters = {}) {
+async function loadPlanningContext(client, schoolId, filters = {}, access = {}) {
   const classLevel = clean(filters.classLevel, 80)
   const section = clean(filters.section, 80)
   const subjects = [...new Set((Array.isArray(filters.subjects) ? filters.subjects : []).map(value => clean(value, 160)).filter(Boolean))]
@@ -158,8 +158,8 @@ async function loadPlanningContext(client, schoolId, filters = {}) {
   const academicSetup = await loadAcademicSetup(client, schoolId)
   const session = await loadSession(client, schoolId)
   const timetable = await loadTimetable(client, schoolId, classLevel, section)
-  const questionBankSignals = await loadQuestionBankSignals(client, schoolId, classLevel, subjects)
-  const curriculumScopes = await loadCurriculumScopes(client, schoolId, classLevel, subjects)
+  const questionBankSignals = await loadQuestionBankSignals(access.protectedReader || client, schoolId, classLevel, subjects)
+  const curriculumScopes = await loadCurriculumScopes(access.protectedReader || client, schoolId, classLevel, subjects)
   const timetableSubjects = [...new Set(timetable.map(row => clean(row.subject, 160)).filter(Boolean))]
   const curriculumSubjects = [...new Set(curriculumScopes.map(row => clean(row.subject, 160)).filter(Boolean))]
   const qbankSubjects = [...new Set(questionBankSignals.map(row => clean(row.subject, 160)).filter(Boolean))]

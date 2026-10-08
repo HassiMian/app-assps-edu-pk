@@ -3,6 +3,7 @@ const router = express.Router()
 const { query } = require('../config/database')
 const { protect } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
+const { withPaperRestrictedScope } = require('../middleware/paperRestrictedDatabase')
 
 router.get('/', protect, async (req, res) => {
   try {
@@ -59,15 +60,15 @@ router.get('/', protect, async (req, res) => {
       })
     )
 
-    // 3. Search Question Bank
+    // 3. Search Question Bank: signed actor/school context, never privileged SQL.
     promises.push(
-      query(`
+      withPaperRestrictedScope(req,()=>query(`
         SELECT id, question_text, subject, class_level, chapter_name
         FROM question_bank
         WHERE school_id = $1 
           AND (question_text ILIKE $2 OR chapter_name ILIKE $2)
         LIMIT 5
-      `, [schoolId, searchQuery]).then(res => {
+      `, [schoolId, searchQuery])).then(res => {
         res.rows.forEach(r => results.push({
           id: `qbank_${r.id}`,
           title: r.question_text.length > 50 ? r.question_text.substring(0, 50) + '...' : r.question_text,
