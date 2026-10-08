@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "assps-g910-pdf-source-cache-review-queue-v1",
+  "scope": "SOURCE_INTEGRITY_ONLY_NO_ACADEMIC_APPROVAL",
+  "ledgerSha256": "c25779f6c9b68fe8d98ef2543caaa8116a204a49cc2461284306e1985a221a50",
+  "metrics": {
+    "cachedPdfFiles": 32,
+    "catalogRecords": 111,
+    "expectedHashCatalogRecords": 58,
+    "exactHashMatches": 22,
+    "missingKnownSources": 36,
+    "missingLedgerHashes": 53,
+    "unmatchedLocalPdfs": 10
+  },
+  "reviewQueue": [
+    {
+      "recordId": "pectaa-catalog-009",
+      "grade": 9,
+      "subject": "Biology",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "official-verified/biology9-pectaa-009.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-007",
+      "grade": 9,
+      "subject": "Chemistry",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "official-verified/chemistry9-pectaa-007.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "VERIFIED",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-039",
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/agri9em.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-040",
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/agri9ur.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-091",
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9/agri9em.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-092",
+      "grade": 9,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9/agri9ur.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-104",
+      "grade": 9,
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "akhlaqiat9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-030",
+      "grade": 9,
+      "subject": "Biology-Tech",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/bio9ur.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-031",
+      "grade": 9,
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/bio9em.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-035",
+      "grade": 9,
+      "subject": "Chemistry-Tech",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/chem9em.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-036",
+      "grade": 9,
+      "subject": "Chemistry-Tech",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/chem9ur.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PARTIAL_VERIFIED_CHAPTER_SEQUENCE_PAGE_BOUNDARIES_PENDING",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-105",
+      "grade": 9,
+      "subject": "Christianity",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "christianity9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-041",
+      "grade": 9,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/comms9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-095",
+      "grade": 9,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9/comms9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-033",
+      "grade": 9,
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/compent9ur.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-034",
+      "grade": 9,
+      "subject": "Computer Science & Entrepreneurship-Tech",
+      "medium": "English",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/compent9em.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-042",
+      "grade": 9,
+      "subject": "Fashion Designing-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9/fashion9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-032",
+      "grade": 9,
+      "subject": "General Science-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/gensci9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-038",
+      "grade": 9,
+      "subject": "General Science-Tech",
+      "medium": "Urdu",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9-theory/gensci9ur.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-093",
+      "grade": 9,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9/health9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-090",
+      "grade": 9,
+      "subject": "Information & Communication Technologies-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "tech9/ict9.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    },
+    {
+      "recordId": "pectaa-catalog-106",
+      "grade": 10,
+      "subject": "Akhlaqiat (Religious Minorities)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "expectedHashPresent": true,
+      "matchingCachedPdfs": [
+        "akhlaqiat10.pdf"
+      ],
+      "cachedHashVerified": true,
+      "chapterStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "exerciseStatus": "PENDING",
+      "academicApproved": false
+    }
+  ],
+  "missingSourceCatalogIds": [
+    "pectaa-catalog-002",
+    "pectaa-catalog-003",
+    "pectaa-catalog-004",
+    "pectaa-catalog-005",
+    "pectaa-catalog-006",
+    "pectaa-catalog-008",
+    "pectaa-catalog-010",
+    "pectaa-catalog-011",
+    "pectaa-catalog-012",
+    "pectaa-catalog-013",
+    "pectaa-catalog-015",
+    "pectaa-catalog-016",
+    "pectaa-catalog-017",
+    "pectaa-catalog-018",
+    "pectaa-catalog-019",
+    "pectaa-catalog-020",
+    "pectaa-catalog-021",
+    "pectaa-catalog-022",
+    "pectaa-catalog-024",
+    "pectaa-catalog-025",
+    "pectaa-catalog-026",
+    "pectaa-catalog-064",
+    "pectaa-catalog-065",
+    "pectaa-catalog-066",
+    "pectaa-catalog-067",
+    "pectaa-catalog-068",
+    "pectaa-catalog-069",
+    "pectaa-catalog-070",
+    "pectaa-catalog-071",
+    "pectaa-catalog-072",
+    "pectaa-catalog-073",
+    "pectaa-catalog-107",
+    "pectaa-recovered-chemistry10-en-2026",
+    "pectaa-recovered-computer10-en-2026",
+    "pectaa-recovered-tarjuma9-2026",
+    "pectaa-recovered-tarjuma10-current"
+  ],
+  "academicApprovalGranted": false
+}
