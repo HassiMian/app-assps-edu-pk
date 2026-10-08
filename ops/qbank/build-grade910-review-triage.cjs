@@ -8,7 +8,10 @@ const ROOT=path.resolve(__dirname,'../..')
 const STAGING=path.join(ROOT,'al-siddique-frontend/src/Modules/Paper-Generator/seed-data/grade9-10-staging')
 const OUT=path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_REVIEW_TRIAGE_QUEUE_20261008.json')
 const SHA=s=>crypto.createHash('sha256').update(s).digest('hex')
-function buildReviewQueue(documents,manifest,mcqAudit={}){
+function buildReviewQueue(documents,manifest,mcqAudit={},editorialCandidates=[]){
+ const editorialById=new Map(editorialCandidates.map(x=>[x.questionId,x]))
+ if(editorialById.size!==editorialCandidates.length)throw Error('DUPLICATE_EDITORIAL_CANDIDATE_ID')
+ const consumed=new Set()
  const source=new Map((manifest.entries||[]).map(x=>[x.recordId,x]))
  const flaggedFiles=new Set((mcqAudit.filesWithPatterns||[]).map(x=>x.file))
  const seen=new Set(), records=[], collisions=[]
@@ -20,6 +23,13 @@ function buildReviewQueue(documents,manifest,mcqAudit={}){
    const id=String(q.id)
    if(seen.has(id)){collisions.push({id,file});continue}
    seen.add(id)
+   const editorial=editorialById.get(id)
+   if(editorial){
+    if(editorial.parentQuestionSha256!==SHA(JSON.stringify(q))||editorial.approved!==false||
+       editorial.proposalStatus!=='PENDING_INDEPENDENT_TRANSLATION_AND_BIOLOGY_REVIEW')
+      throw Error('EDITORIAL_PROPOSAL_STALE_OR_UNVERIFIED:'+id)
+    consumed.add(id)
+   }
    const srcId=String(q.source?.catalogRecordId||q.sourceRecordId||data.sourceRecordId||'').trim()
    const canonical=source.get(srcId)
    const pdfHash=String(q.source?.pdfSha256||q.sourcePdfSha256||data.sourcePdfSha256||'')
@@ -52,12 +62,14 @@ function buildReviewQueue(documents,manifest,mcqAudit={}){
     claimedSourcePage:claimedPage,claimedPageNumbering:'UNSPECIFIED',
     editionClaim:edition||null,
     evidenceTier:'RESEARCH_CANDIDATE_ONLY',
+    editorialTranslationCandidate:editorial?{revisionFile:editorial.proposedRevisionFile,revisionFileSha256:editorial.editorialRevisionFileSha256,revisionQuestionSha256:editorial.proposedRevisionSha256,status:editorial.proposalStatus,approved:false}:null,
     blockers,
     status:{sourceVerified:false,independentlyReviewed:false,approved:false,published:false},
     reviewerId:null,academicApproverId:null,revisionApproved:null
    })
   }
  }
+ if(consumed.size!==editorialById.size)throw Error('EDITORIAL_CANDIDATE_SOURCE_QUESTION_NOT_FOUND')
  records.sort((a,b)=>String(a.grade).localeCompare(String(b.grade),'en',{numeric:true})||
   a.subjectId.localeCompare(b.subjectId)||a.medium.localeCompare(b.medium)||
   String(a.chapter).localeCompare(String(b.chapter),'en',{numeric:true})||
@@ -81,6 +93,7 @@ function buildReviewQueue(documents,manifest,mcqAudit={}){
    originalAuthoringFiles:new Set(records.map(x=>x.sourceFile)).size,
    sourceVerified:0,independentlyReviewed:0,approved:0,published:0},
   bySubject,byMedium:mediums,byType:types,blockerCounts:issues,
+  unapprovedEditorialTranslationProposals:consumed.size,
   collisions,
   records
  }
@@ -88,9 +101,10 @@ function buildReviewQueue(documents,manifest,mcqAudit={}){
 if(require.main===module){
  const manifest=JSON.parse(fs.readFileSync(path.join(STAGING,'officialSourceManifest.json'),'utf8'))
  const mcq=JSON.parse(fs.readFileSync(path.join(ROOT,'docs/question-bank/ASSPS_GRADE910_MCQ_AUTHORING_QA_20261008.json'),'utf8'))
- const report=buildReviewQueue(collectDocuments(STAGING),manifest,mcq)
+ const {loadCandidates}=require('./verify-bio9-editorial-translation-proposals.cjs')
+ const report=buildReviewQueue(collectDocuments(STAGING),manifest,mcq,loadCandidates())
  if(process.argv.includes('--write'))fs.writeFileSync(OUT,JSON.stringify(report,null,2)+'\n')
- console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,reportPath:process.argv.includes('--write')?OUT:null},null,2))
+ console.log(JSON.stringify({counts:report.counts,byMedium:report.byMedium,blockerCounts:report.blockerCounts,unapprovedEditorialTranslationProposals:report.unapprovedEditorialTranslationProposals,reportPath:process.argv.includes('--write')?OUT:null},null,2))
  if(process.argv.includes('--strict')&&(report.counts.collisionIds||report.counts.approved||report.counts.published))process.exitCode=1
 }
 module.exports={buildReviewQueue}
