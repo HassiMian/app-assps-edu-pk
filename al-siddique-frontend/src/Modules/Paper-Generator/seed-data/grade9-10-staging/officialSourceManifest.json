@@ -1145,9 +1145,9 @@
       "catalogLabel": "Fashion Design 9 Tech 2025",
       "pdfUrl": "https://drive.google.com/file/d/1FBo8CD6rbbFDKJLzYSggRycinmZOTRgS/view?usp=sharing",
       "pdfSha256": "80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b",
-      "chapterIndexStatus": "PENDING_VERIFIED_CONTENT_MAP",
+      "chapterIndexStatus": "VERIFIED_CURRENT_9_CHAPTER_SYLLABUS_AND_TEXTBOOK_STRUCTURE",
       "exerciseIndexStatus": "PENDING",
-      "questionGenerationStatus": "BLOCKED_PENDING_VERIFIED_CONTENT_MAP",
+      "questionGenerationStatus": "PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW",
       "catalogEvidenceUrl": "https://pectaa.edu.pk/curriculum-compliance/",
       "catalogLinkCheckedOn": "2026-10-06",
       "catalogLinkMatchCount": 1,
@@ -1160,8 +1160,9 @@
       "downloadVerifiedOn": "2026-10-08",
       "downloadStatus": "PDF_BYTES_VERIFIED",
       "sourceCacheRef": "20261008/tech9/fashion9.pdf",
-      "contentMapStatus": "PENDING_VERIFIED_CONTENT_MAP",
-      "authoringBoundary": "NO_AUTHORING_UNTIL_GRADE9_MATRIC_TECH_CONTENT_MAP_VERIFIED"
+      "contentMapStatus": "CURRENT_9_CHAPTER_MAP_VERIFIED",
+      "authoringBoundary": "PROVISIONAL_ORIGINAL_ONLY_NO_TEXTBOOK_EXERCISE_OR_PAST_PAPER_COPYING",
+      "contentMapEvidence": "fashionDesigning9TechSourceMap2026.json"
     },
     {
       "recordId": "pectaa-catalog-043",

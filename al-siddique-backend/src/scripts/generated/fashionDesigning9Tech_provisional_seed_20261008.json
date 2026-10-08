@@ -1,0 +1,1320 @@
+{
+  "schemaVersion": "assps-qbank-provisional-seed-v1",
+  "approvalPolicy": "PROVISIONAL_INTERNAL_NOT_REVIEW_APPROVED",
+  "questions": [
+    {
+      "id": "IX-FASH-C01-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Fashion Designing",
+      "topic_name": "fashion definition",
+      "category": "mcq",
+      "question_text": "Fashion is best understood as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A style or way of dressing that becomes popular in a social or cultural context"
+        },
+        {
+          "id": "B",
+          "text": "Only a sewing tool"
+        },
+        {
+          "id": "C",
+          "text": "Only one historical costume"
+        },
+        {
+          "id": "D",
+          "text": "A mathematical formula"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A style or way of dressing that becomes popular in a social or cultural context",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 1",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fashion definition"
+      ]
+    },
+    {
+      "id": "IX-FASH-C01-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Fashion Designing",
+      "topic_name": "fashion influences",
+      "category": "mcq",
+      "question_text": "Which factor can influence fashion trends?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Culture and lifestyle"
+        },
+        {
+          "id": "B",
+          "text": "Only gravity"
+        },
+        {
+          "id": "C",
+          "text": "Only rainfall"
+        },
+        {
+          "id": "D",
+          "text": "Only age of a building"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Culture and lifestyle",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 1",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fashion influences"
+      ]
+    },
+    {
+      "id": "IX-FASH-C01-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Fashion Designing",
+      "topic_name": "fashion importance",
+      "category": "short",
+      "question_text": "Why is fashion design more than simply decorating clothes?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It combines function, comfort, aesthetics, cultural meaning and user or market needs in planned clothing design.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 1",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fashion importance"
+      ]
+    },
+    {
+      "id": "IX-FASH-C01-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "1",
+      "chapter_name": "Introduction to Fashion Designing",
+      "topic_name": "fashion context",
+      "category": "long",
+      "question_text": "Explain how culture, lifestyle, market segment and personal identity can influence fashion choices.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for defining each influence and explaining how designers balance social context, user needs and visual identity without copying textbook examples.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 1",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fashion context"
+      ]
+    },
+    {
+      "id": "IX-FASH-C02-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Elements of Design",
+      "topic_name": "line",
+      "category": "mcq",
+      "question_text": "In design, line can strongly affect the viewer’s sense of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Direction and movement"
+        },
+        {
+          "id": "B",
+          "text": "Chemical composition only"
+        },
+        {
+          "id": "C",
+          "text": "Weight only"
+        },
+        {
+          "id": "D",
+          "text": "Temperature only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Direction and movement",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 2",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "line"
+      ]
+    },
+    {
+      "id": "IX-FASH-C02-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Elements of Design",
+      "topic_name": "colour theory",
+      "category": "mcq",
+      "question_text": "Colour theory mainly helps a designer understand?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Relationships and effects of colours"
+        },
+        {
+          "id": "B",
+          "text": "Only fabric price"
+        },
+        {
+          "id": "C",
+          "text": "Only sewing speed"
+        },
+        {
+          "id": "D",
+          "text": "Only body height"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Relationships and effects of colours",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 2",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "colour theory"
+      ]
+    },
+    {
+      "id": "IX-FASH-C02-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Elements of Design",
+      "topic_name": "elements of design",
+      "category": "short",
+      "question_text": "Name four elements of design used in fashion.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any four appropriate elements such as line, shape, form, space, texture, colour, pattern or silhouette.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 2",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "elements of design"
+      ]
+    },
+    {
+      "id": "IX-FASH-C02-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "2",
+      "chapter_name": "Elements of Design",
+      "topic_name": "design elements",
+      "category": "long",
+      "question_text": "Explain how line, shape, colour and texture can work together in a clothing design.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for each element and for explaining their combined effect on appearance, emphasis, proportion or visual mood.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 2",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "design elements"
+      ]
+    },
+    {
+      "id": "IX-FASH-C03-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Principles of Design",
+      "topic_name": "balance",
+      "category": "mcq",
+      "question_text": "Which principle is concerned with visual stability in a composition?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Balance"
+        },
+        {
+          "id": "B",
+          "text": "Fibre content"
+        },
+        {
+          "id": "C",
+          "text": "Thread count"
+        },
+        {
+          "id": "D",
+          "text": "Pressing"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Balance",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 3",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "balance"
+      ]
+    },
+    {
+      "id": "IX-FASH-C03-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Principles of Design",
+      "topic_name": "rhythm",
+      "category": "mcq",
+      "question_text": "Repetition of visual features can create?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Rhythm"
+        },
+        {
+          "id": "B",
+          "text": "Only weight"
+        },
+        {
+          "id": "C",
+          "text": "Only heat"
+        },
+        {
+          "id": "D",
+          "text": "Only seam allowance"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Rhythm",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 3",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "rhythm"
+      ]
+    },
+    {
+      "id": "IX-FASH-C03-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Principles of Design",
+      "topic_name": "principles",
+      "category": "short",
+      "question_text": "Differentiate contrast and harmony in design.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Contrast creates noticeable difference and emphasis; harmony creates visual agreement or coherence among design elements.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 3",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "principles"
+      ]
+    },
+    {
+      "id": "IX-FASH-C03-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "3",
+      "chapter_name": "Principles of Design",
+      "topic_name": "design principles",
+      "category": "long",
+      "question_text": "Discuss balance, rhythm, proportion, emphasis and unity as principles for evaluating a fashion design.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for accurate explanations of all five principles and a coherent description of how they guide design decisions.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 3",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "design principles"
+      ]
+    },
+    {
+      "id": "IX-FASH-C04-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Historical Aspects of Fashion Design",
+      "topic_name": "historical dress",
+      "category": "mcq",
+      "question_text": "Studying historical dress is useful because it helps designers understand?",
+      "options": [
+        {
+          "id": "A",
+          "text": "How culture, technology and society shaped clothing"
+        },
+        {
+          "id": "B",
+          "text": "Only modern brand names"
+        },
+        {
+          "id": "C",
+          "text": "Only machine maintenance"
+        },
+        {
+          "id": "D",
+          "text": "Only garment prices"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "How culture, technology and society shaped clothing",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 4",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "historical dress"
+      ]
+    },
+    {
+      "id": "IX-FASH-C04-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Historical Aspects of Fashion Design",
+      "topic_name": "Indus heritage",
+      "category": "mcq",
+      "question_text": "Harappa and Mohenjo-Daro are associated with?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Indus Valley Civilization"
+        },
+        {
+          "id": "B",
+          "text": "Roman Empire only"
+        },
+        {
+          "id": "C",
+          "text": "Industrial Revolution only"
+        },
+        {
+          "id": "D",
+          "text": "Modern Paris fashion week"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Indus Valley Civilization",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 4",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "Indus heritage"
+      ]
+    },
+    {
+      "id": "IX-FASH-C04-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Historical Aspects of Fashion Design",
+      "topic_name": "fashion history",
+      "category": "short",
+      "question_text": "Why can historical costume study inspire contemporary design without directly copying it?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Historical forms, materials, motifs and social meanings can inform new interpretations while a designer develops an original modern solution.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 4",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fashion history"
+      ]
+    },
+    {
+      "id": "IX-FASH-C04-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "4",
+      "chapter_name": "Historical Aspects of Fashion Design",
+      "topic_name": "historical influence",
+      "category": "long",
+      "question_text": "Explain how ancient regional civilizations can be studied as sources of fashion knowledge.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for context, clothing traditions, materials or ornament, cultural meaning, and responsible reinterpretation in original design.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 4",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "historical influence"
+      ]
+    },
+    {
+      "id": "IX-FASH-C05-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Crafts of Pakistan",
+      "topic_name": "regional crafts",
+      "category": "mcq",
+      "question_text": "A regional craft is best described as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A locally developed skill or decorative tradition linked with community and culture"
+        },
+        {
+          "id": "B",
+          "text": "Only a factory machine"
+        },
+        {
+          "id": "C",
+          "text": "Only a foreign logo"
+        },
+        {
+          "id": "D",
+          "text": "A random measurement"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A locally developed skill or decorative tradition linked with community and culture",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 5",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "regional crafts"
+      ]
+    },
+    {
+      "id": "IX-FASH-C05-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Crafts of Pakistan",
+      "topic_name": "craft identity",
+      "category": "mcq",
+      "question_text": "Why are Pakistani crafts important to fashion design?",
+      "options": [
+        {
+          "id": "A",
+          "text": "They can express regional heritage and design vocabulary"
+        },
+        {
+          "id": "B",
+          "text": "They remove all need for design planning"
+        },
+        {
+          "id": "C",
+          "text": "They make every garment identical"
+        },
+        {
+          "id": "D",
+          "text": "They replace all materials"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "They can express regional heritage and design vocabulary",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 5",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "craft identity"
+      ]
+    },
+    {
+      "id": "IX-FASH-C05-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Crafts of Pakistan",
+      "topic_name": "craft diversity",
+      "category": "short",
+      "question_text": "Name four regions of Pakistan represented by distinct craft traditions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Any four of Punjab, Sindh, Balochistan, Khyber Pakhtunkhwa, Azad Kashmir and Gilgit-Baltistan.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 5",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "craft diversity"
+      ]
+    },
+    {
+      "id": "IX-FASH-C05-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "5",
+      "chapter_name": "Crafts of Pakistan",
+      "topic_name": "crafts and fashion",
+      "category": "long",
+      "question_text": "Discuss how a designer can draw inspiration from regional crafts while respecting cultural identity and originality.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for research, attribution/respect, selective use of motifs/material ideas, original transformation, and avoiding misleading cultural representation.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 5",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "crafts and fashion"
+      ]
+    },
+    {
+      "id": "IX-FASH-C06-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Basic Drawing and Anatomy",
+      "topic_name": "drawing basics",
+      "category": "mcq",
+      "question_text": "Basic shape drawing mainly helps a fashion student develop?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Observation and proportion skills"
+        },
+        {
+          "id": "B",
+          "text": "Only fabric washing"
+        },
+        {
+          "id": "C",
+          "text": "Only marketing"
+        },
+        {
+          "id": "D",
+          "text": "Only costing"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Observation and proportion skills",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 6",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "drawing basics"
+      ]
+    },
+    {
+      "id": "IX-FASH-C06-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Basic Drawing and Anatomy",
+      "topic_name": "anatomy drawing",
+      "category": "mcq",
+      "question_text": "Human anatomy drawing in fashion is mainly used to support?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Figure proportion and garment visualization"
+        },
+        {
+          "id": "B",
+          "text": "Medical diagnosis"
+        },
+        {
+          "id": "C",
+          "text": "Chemical testing"
+        },
+        {
+          "id": "D",
+          "text": "Machine repair"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Figure proportion and garment visualization",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 6",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "anatomy drawing"
+      ]
+    },
+    {
+      "id": "IX-FASH-C06-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Basic Drawing and Anatomy",
+      "topic_name": "sketching",
+      "category": "short",
+      "question_text": "Why is observation important in object and figure drawing?",
+      "options": [],
+      "correct_option": "",
+      "answer": "Careful observation improves proportion, placement, shape relationships and visual accuracy.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 6",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "sketching"
+      ]
+    },
+    {
+      "id": "IX-FASH-C06-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "6",
+      "chapter_name": "Basic Drawing and Anatomy",
+      "topic_name": "drawing workflow",
+      "category": "long",
+      "question_text": "Describe a safe classroom workflow for developing a fashion sketch from simple shapes to a clear figure.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for observation, light construction shapes, proportion checks, refinement, clean presentation and safe ordinary drawing-tool use.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 6",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "drawing workflow"
+      ]
+    },
+    {
+      "id": "IX-FASH-C07-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Fashion Drawing and Design Detail",
+      "topic_name": "croquis",
+      "category": "mcq",
+      "question_text": "A croquis in fashion is primarily?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A simplified figure template used for design sketching"
+        },
+        {
+          "id": "B",
+          "text": "A sewing-machine part"
+        },
+        {
+          "id": "C",
+          "text": "A fabric fibre"
+        },
+        {
+          "id": "D",
+          "text": "A colour pigment"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A simplified figure template used for design sketching",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 7",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "croquis"
+      ]
+    },
+    {
+      "id": "IX-FASH-C07-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Fashion Drawing and Design Detail",
+      "topic_name": "garment details",
+      "category": "mcq",
+      "question_text": "Necklines, collars and sleeves are examples of?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Garment design details"
+        },
+        {
+          "id": "B",
+          "text": "Textile fibres"
+        },
+        {
+          "id": "C",
+          "text": "Marketing segments"
+        },
+        {
+          "id": "D",
+          "text": "Body measurements only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Garment design details",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 7",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "garment details"
+      ]
+    },
+    {
+      "id": "IX-FASH-C07-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Fashion Drawing and Design Detail",
+      "topic_name": "technical drawing",
+      "category": "short",
+      "question_text": "Why should a technical fashion drawing communicate garment details clearly?",
+      "options": [],
+      "correct_option": "",
+      "answer": "It helps others understand construction-relevant features, shape, seams and design details without relying only on artistic styling.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 7",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "technical drawing"
+      ]
+    },
+    {
+      "id": "IX-FASH-C07-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "7",
+      "chapter_name": "Fashion Drawing and Design Detail",
+      "topic_name": "fashion drawing",
+      "category": "long",
+      "question_text": "Explain the difference between expressive fashion illustration and technical garment drawing.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for purpose, level of detail, proportion/style, communication of construction features, and appropriate use in the design process.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 7",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fashion drawing"
+      ]
+    },
+    {
+      "id": "IX-FASH-C08-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Basics of Textiles",
+      "topic_name": "fibres",
+      "category": "mcq",
+      "question_text": "Cotton is classified as?",
+      "options": [
+        {
+          "id": "A",
+          "text": "A natural fibre"
+        },
+        {
+          "id": "B",
+          "text": "A metal"
+        },
+        {
+          "id": "C",
+          "text": "A ceramic"
+        },
+        {
+          "id": "D",
+          "text": "A synthetic dye only"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "A natural fibre",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 8",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "fibres"
+      ]
+    },
+    {
+      "id": "IX-FASH-C08-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Basics of Textiles",
+      "topic_name": "textile choice",
+      "category": "mcq",
+      "question_text": "Why does fibre type matter in clothing design?",
+      "options": [
+        {
+          "id": "A",
+          "text": "It influences properties such as comfort, drape and care"
+        },
+        {
+          "id": "B",
+          "text": "It determines only the garment name"
+        },
+        {
+          "id": "C",
+          "text": "It has no effect"
+        },
+        {
+          "id": "D",
+          "text": "It changes body height"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "It influences properties such as comfort, drape and care",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 8",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "textile choice"
+      ]
+    },
+    {
+      "id": "IX-FASH-C08-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Basics of Textiles",
+      "topic_name": "natural man-made",
+      "category": "short",
+      "question_text": "Differentiate natural and man-made fibres.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Natural fibres come from plant, animal or mineral sources; man-made fibres are produced through industrial processes from regenerated or synthetic materials.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 8",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "natural man-made"
+      ]
+    },
+    {
+      "id": "IX-FASH-C08-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "8",
+      "chapter_name": "Basics of Textiles",
+      "topic_name": "textile selection",
+      "category": "long",
+      "question_text": "Explain how comfort, drape, durability, care and intended use influence textile selection.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for each criterion and for connecting material properties to the garment’s purpose and user needs.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 8",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "textile selection"
+      ]
+    },
+    {
+      "id": "IX-FASH-C09-M01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basics of Sewing",
+      "topic_name": "sewing safety",
+      "category": "mcq",
+      "question_text": "Which is the safest classroom principle when using sewing tools?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Follow teacher instructions and keep tools stored and handled carefully"
+        },
+        {
+          "id": "B",
+          "text": "Rush to finish"
+        },
+        {
+          "id": "C",
+          "text": "Ignore damaged equipment"
+        },
+        {
+          "id": "D",
+          "text": "Leave sharp tools loose"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Follow teacher instructions and keep tools stored and handled carefully",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 9",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "sewing safety"
+      ]
+    },
+    {
+      "id": "IX-FASH-C09-M02",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basics of Sewing",
+      "topic_name": "pressing",
+      "category": "mcq",
+      "question_text": "Pressing in garment work is mainly used to?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Shape and neaten fabric during construction"
+        },
+        {
+          "id": "B",
+          "text": "Measure colour theory"
+        },
+        {
+          "id": "C",
+          "text": "Create fibre chemically"
+        },
+        {
+          "id": "D",
+          "text": "Replace pattern planning"
+        }
+      ],
+      "correct_option": "A",
+      "answer": "Shape and neaten fabric during construction",
+      "marks": 1,
+      "difficulty": "easy",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 9",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "pressing"
+      ]
+    },
+    {
+      "id": "IX-FASH-C09-S01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basics of Sewing",
+      "topic_name": "sewing tools",
+      "category": "short",
+      "question_text": "Why should sewing tools and equipment be checked before classroom use?",
+      "options": [],
+      "correct_option": "",
+      "answer": "A quick condition and setup check reduces mistakes and helps ensure tools are used safely and appropriately under supervision.",
+      "marks": 2,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 9",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "sewing tools"
+      ]
+    },
+    {
+      "id": "IX-FASH-C09-L01",
+      "class_level": "9th",
+      "subject": "Fashion Designing-Tech",
+      "medium": "english",
+      "board": "Punjab Board",
+      "chapter_no": "9",
+      "chapter_name": "Basics of Sewing",
+      "topic_name": "sewing workflow",
+      "category": "long",
+      "question_text": "Describe the principles of a safe, organized beginner sewing workspace without giving machine-operation instructions.",
+      "options": [],
+      "correct_option": "",
+      "answer": "Award marks for supervision, tidy layout, safe storage of sharp items, checking equipment condition, suitable posture/lighting, careful fabric handling and stopping when equipment appears unsafe.",
+      "marks": 7,
+      "difficulty": "medium",
+      "priority": "conceptual",
+      "source": "PECTAA pectaa-catalog-042 | 80ef152a9e642fbeff023e787c0c2aeb95699392f862b7af17c0d3facceea11b | chapter 9",
+      "tags": [
+        "grade9",
+        "fashion-designing-tech",
+        "english",
+        "matric-tech",
+        "internal-provisional",
+        "original-draft",
+        "sewing workflow"
+      ]
+    }
+  ]
+}

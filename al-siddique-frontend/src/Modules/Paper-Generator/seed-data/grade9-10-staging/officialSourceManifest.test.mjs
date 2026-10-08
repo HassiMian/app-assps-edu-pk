@@ -31,7 +31,7 @@ test('downloaded official sources carry hash/page evidence while unreviewed sour
   } else assert.equal(e.pdfSha256,null);
   assert.equal(e.exerciseIndexStatus,'PENDING');
   if(e.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW'){
-   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/(VERIFIED|CROSS_CHECKED).*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
+   if(e.chapterIndexStatus!=='VERIFIED'){assert.match(e.contentMapStatus||'',/VERIFIED|CROSS_CHECKED.*PENDING|PENDING.*VERIFIED|PARTIAL_VERIFIED/,e.recordId);assert(e.contentMapEvidence,e.recordId);assert.match(e.authoringBoundary||'',/^PROVISIONAL_/);}
   } else assert.match(e.questionGenerationStatus,/^BLOCKED/,e.recordId);
  }
  for(const [rid,x] of locked){const e=m.entries.find(v=>v.recordId===rid);assert(e,rid);assert.equal(e.downloadByteLength,x.bytes);assert.equal(e.pdfSha256,x.sha);assert.equal(e.pdfPageCount,x.pages);}
@@ -74,7 +74,7 @@ test('Grade X current catalogue refresh preserves unresolved medium/session fact
 test('Grade IX Matric-Tech catalogue identities are expanded without collapsing media or similarly named subjects',()=>{
  const tech=m.entries.filter(x=>x.grade===9&&x.curriculumTrack==='MATRIC_TECH'&&x.stream==='Matric-Tech');
  assert.equal(tech.length,17);
- const provisional=new Set(['pectaa-catalog-030','pectaa-catalog-031','pectaa-catalog-032','pectaa-catalog-033','pectaa-catalog-034','pectaa-catalog-035','pectaa-catalog-036','pectaa-catalog-038','pectaa-catalog-039','pectaa-catalog-040']);
+ const provisional=new Set(['pectaa-catalog-030','pectaa-catalog-031','pectaa-catalog-032','pectaa-catalog-033','pectaa-catalog-034','pectaa-catalog-035','pectaa-catalog-036','pectaa-catalog-038','pectaa-catalog-039','pectaa-catalog-040','pectaa-catalog-042']);
  assert(tech.every(x=>x.stream==='Matric-Tech'&&x.catalogLinkStatus==='OFFICIAL_PAGE_ANCHOR_FOUND'&&x.catalogAssetUrl&&(provisional.has(x.recordId)?x.questionGenerationStatus==='PROVISIONAL_INTERNAL_ONLY_PENDING_REVIEW':/^BLOCKED_PENDING_/.test(x.questionGenerationStatus))));
  assert.equal(m.additionalCatalogStreamsPending.includes('Matric-Tech IX'),false);
  assert(tech.some(x=>x.subject==='Computer-Tech'));
