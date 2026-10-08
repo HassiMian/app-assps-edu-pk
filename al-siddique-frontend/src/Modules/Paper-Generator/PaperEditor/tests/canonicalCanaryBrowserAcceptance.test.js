@@ -100,7 +100,7 @@ async function loadSavedPaper(paper) {
 }
 
 test('Teacher-facing Studio shell: creation paths and specialist routing', async () => {
-  await page.goto('http://localhost:5196/ey-test.html?mode=generator', { waitUntil:'domcontentloaded' })
+  await page.goto(`http://localhost:${PORT}/ey-test.html?mode=generator`, { waitUntil:'domcontentloaded' })
   await page.locator('[data-create-paper-home]').waitFor({ timeout:15000 })
   assert.equal(await page.getByRole('heading', { name:'Paper Studio' }).count(), 1)
   assert.equal(await page.locator('[data-creation-option]').count(), 4)

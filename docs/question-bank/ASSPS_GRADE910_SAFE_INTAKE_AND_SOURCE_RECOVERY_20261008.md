@@ -44,3 +44,14 @@ For operational auditing, `ops/qbank/audit-tenant-evidence.cjs` uses the exact s
 ## Remaining substantive academic blocker
 
 The staging bank is a draft inventory, not an approved examination Question Bank. Verifying authoritative curriculum edition, chapter/exercise/page location and accuracy of question answers/MCQ keys across all subjects is still required. An inflated count cannot substitute for that work. Keep the independently functional manual PaperDocument authoring path available while the academic review queue is processed.
+
+## Guarded release rehearsal (source-aligned follow-up)
+
+- Verified the current canonical frontend/backend base `68a158e067e8bbcb0f35514abaff8d580a6435be` and that this isolated security branch descends from it, without changing unrelated teacher-facing production modules.
+- A Teacher Studio canary uncovered a **test-only hard-coded port 5196**, which caused false Chromium failures when testing on isolated port 5384. The fixture now honors the configured port; the actual specialist-routing test then passed, followed by **all 43 official Saved Papers opens and retired-editor rejection 3/3 PASS**.
+- Manual create/save/finalize/reopen/print browser 2/2 PASS, Question Bank teacher governed lifecycle/scoping and legacy hydration tests 3/3 PASS, independent source PDF signatures and hashes PASS.
+- Backend HTTP server started on isolated port 5064 with clone DB and restricted runtime role; health/ready HTTP 200, standard backend release-smoke PASS, unauthenticated Paper Studio and Question Bank calls return HTTP 401.
+- Full ops release suite **90/90 PASS**, production safety and six locked templates PASS. Current deterministic frontend build PASS.
+- Pre-deployment rollback bundle is SHA256 verified at `/var/backups/assps-qbank-safeintake-predeploy-20261008T061842Z`: exact backend importer/release metadata, full frontend and PostgreSQL custom dump. The backup dump was actually restored into disposable `assps_qbank_rollback_clean_20261008` with 85 public tables and nonempty school/student/question bank tables. A first pipe-based verification produced an ambiguous SIGPIPE status and was **not counted as a PASS**; a subsequent direct-file restore ran `pg_restore --exit-on-error` successfully and established this verified milestone.
+
+No approved Grade 9–10 source questions were published by this change. The remaining academic review gate remains red, independent from the successful technical safety release.

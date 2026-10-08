@@ -88,6 +88,7 @@ function verifyBackendForward(base, head, branch) {
       const permitted = p =>
         p === 'al-siddique-backend/src/scripts/seedQuestionBankFromJson.js' ||
         p === 'al-siddique-backend/src/scripts/lib/seed-intake-policy.cjs' ||
+        p === 'al-siddique-frontend/src/Modules/Paper-Generator/PaperEditor/tests/canonicalCanaryBrowserAcceptance.test.js' ||
         p.startsWith('ops/qbank/') || p.startsWith('ops/tests/') ||
         p === 'ops/check-release-consistency.cjs' ||
         p === 'ops/check-school-exam-readiness.cjs' ||
