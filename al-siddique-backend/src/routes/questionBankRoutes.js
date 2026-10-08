@@ -9,6 +9,7 @@ const { protect, requireRoles } = require('../middleware/auth')
 const { currentSchoolId } = require('../middleware/tenant')
 const { ensureTeacherAssignmentSchema } = require('../services/teacherAssignmentService')
 const { captureQuestionGovernance, transitionQuestionLifecycle } = require('../services/questionBankGovernance')
+const { recordIndependentAcademicReview, getAcademicReviewContext } = require('../services/grade910AcademicReviewService')
 
 const canUseQuestionBank = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const canManageQuestionBank = requireRoles('super_admin', 'admin', 'principal')
@@ -69,6 +70,43 @@ router.patch('/governance/:publicId/status', canManageQuestionBank, async (req, 
     const status = Number(error.status) || (error.code === 'INVALID_QUESTION_LIFECYCLE_TRANSITION' ? 409 : 500)
     if (status >= 500) console.error('Question governance lifecycle failed:', error)
     res.status(status).json({ success:false, code:error.code || 'QUESTION_GOVERNANCE_LIFECYCLE_FAILED', message:error.message || 'Question governance lifecycle failed' })
+  }
+})
+
+// Grade 9–10 review is revision-bound and cannot itself publish a question.
+// Reviewer identity always comes from verified session, never from request JSON.
+router.get('/governance/:publicId/review-context', canManageQuestionBank, async (req,res)=>{
+  try {
+    const schoolId=requireSchoolContext(req,res);if(!schoolId)return
+    const data=await getAcademicReviewContext({
+      schoolId,requesterId:req.user?.id||null,publicId:req.params.publicId,
+    })
+    res.set('Cache-Control','private, no-store')
+    res.json({success:true,data})
+  } catch(e) {
+    const status=Number(e.status)||500
+    if(status>=500)console.error('Grade9/10 review context failed:',e)
+    res.status(status).json({success:false,code:e.code||'GRADE910_REVIEW_CONTEXT_FAILED',
+      message:status>=500?'Academic review context could not be loaded.':e.message})
+  }
+})
+
+router.post('/governance/:publicId/academic-review', canManageQuestionBank, async (req,res)=>{
+  try {
+    const schoolId=requireSchoolContext(req,res);if(!schoolId)return
+    const data=await recordIndependentAcademicReview({
+      schoolId,reviewerId:req.user?.id||null,publicId:req.params.publicId,
+      expectedRevision:req.body?.expectedRevision,
+      expectedContentHash:req.body?.expectedContentHash,
+      evidence:req.body?.evidence,
+    })
+    res.set('Cache-Control','private, no-store')
+    res.status(data.replayed?200:201).json({success:true,data})
+  } catch(e) {
+    const status=Number(e.status)||500
+    if(status>=500)console.error('Grade9/10 academic review failed:',e)
+    res.status(status).json({success:false,code:e.code||'GRADE910_REVIEW_FAILED',
+      message:status>=500?'Academic review could not be recorded.':e.message})
   }
 })
 
