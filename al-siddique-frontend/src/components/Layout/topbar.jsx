@@ -6,6 +6,7 @@ import { useStudentStore } from '../../services/useStudentStore'
 import { useTenantBranding } from '../../context/TenantBrandingContext'
 import { useTheme } from '../../context/ThemeContext'
 import api from '../../services/api'
+import { userRoleLabel } from '../../utils/userRoleLabel'
 
 const MODULE_SEARCH_ITEMS = [
  { id:'dashboard', type:'Module', title:'Dashboard', subtitle:'School overview, stats, shortcuts', path:'/dashboard', keywords:['home','overview','stats','analytics'] },
@@ -628,7 +629,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  {user?.name?.split(' ').slice(0, 2).join(' ') || 'Admin'}
  </div>
  <div style={{ color: 'var(--apex-action-highlight)', fontSize: 12, fontWeight: '500' }}>
- {user?.designation || 'Principal'}
+ {userRoleLabel(user)}
  </div>
  </div>
  }
@@ -643,7 +644,7 @@ export default function Topbar({ onMenuToggle, isMobile }) {
  }}>
  <div style={{ padding: '12px 16px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
  <div style={{ color: 'var(--apex-text-primary)', fontWeight: 700, fontSize: 14 }}>{user?.name || 'Admin'}</div>
- <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{user?.designation || 'Principal'}</div>
+ <div style={{ color: 'var(--apex-text-tertiary)', fontSize: 12 }}>{userRoleLabel(user)}</div>
  </div>
  {[
  { icon: <UserRound size={14} />, label: 'My Profile', path: '/profile' },
