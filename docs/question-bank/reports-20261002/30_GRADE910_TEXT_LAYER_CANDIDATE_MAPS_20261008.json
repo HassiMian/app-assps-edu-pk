@@ -1,0 +1,2933 @@
+{
+  "schemaVersion": "assps-g910-text-layer-candidate-maps-v1",
+  "scope": "REVIEW_ONLY_NO_OCR_NO_AUTO_VERIFICATION",
+  "generatedAt": "2026-10-08T10:20:00Z",
+  "summary": {
+    "eligibleRecords": 17,
+    "recordsWithCandidates": 13,
+    "totalCandidates": 547,
+    "verifiedChapterMaps": 0,
+    "verifiedExerciseIndices": 0,
+    "academicApprovalGranted": false
+  },
+  "records": [
+    {
+      "recordId": "pectaa-catalog-004",
+      "grade": 9,
+      "subject": "English",
+      "medium": "English",
+      "cacheRef": "20261008/official-verified/pectaa-catalog-004.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 10,
+      "candidates": [
+        {
+          "physicalPage": 20,
+          "type": "chapter_or_unit",
+          "heading": "UNIT2"
+        },
+        {
+          "physicalPage": 26,
+          "type": "exercise_or_question_heading",
+          "heading": "questions:"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "questions, and provide feedback. Emphasise varying pitch to convey different"
+        },
+        {
+          "physicalPage": 77,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions:"
+        },
+        {
+          "physicalPage": 79,
+          "type": "chapter_or_unit",
+          "heading": "lesson of the jar. He became a master of time management, and the lesson he"
+        },
+        {
+          "physicalPage": 81,
+          "type": "exercise_or_question_heading",
+          "heading": "questions."
+        },
+        {
+          "physicalPage": 110,
+          "type": "chapter_or_unit",
+          "heading": "United Nations, aims to meet the needs of the present without compromising"
+        },
+        {
+          "physicalPage": 124,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 136,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 166,
+          "type": "exercise_or_question_heading",
+          "heading": "questions below or create your own:"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-013",
+      "grade": 9,
+      "subject": "Computer",
+      "medium": "English",
+      "cacheRef": "20261008/official-verified/pectaa-catalog-013.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 49,
+      "candidates": [
+        {
+          "physicalPage": 27,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 52,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 59,
+          "type": "chapter_or_unit",
+          "heading": "Units (ALUs) of CPUs to perform operations like addition, subtraction,"
+        },
+        {
+          "physicalPage": 70,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 70,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 72,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 87,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions (MCQs)"
+        },
+        {
+          "physicalPage": 88,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 89,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 100,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions (MCQs)"
+        },
+        {
+          "physicalPage": 101,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 101,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 102,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 124,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions (MCQs)"
+        },
+        {
+          "physicalPage": 125,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 125,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 126,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 134,
+          "type": "exercise_or_question_heading",
+          "heading": "question or true/false"
+        },
+        {
+          "physicalPage": 151,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions"
+        },
+        {
+          "physicalPage": 152,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 153,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 154,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 180,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions"
+        },
+        {
+          "physicalPage": 181,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 181,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 182,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 190,
+          "type": "exercise_or_question_heading",
+          "heading": "questions like \"What is your favourite ice cream ﬂavour?\" and give it to your"
+        },
+        {
+          "physicalPage": 191,
+          "type": "exercise_or_question_heading",
+          "heading": "questions like, \"Which school activity do you enjoy the most? (e.g., sports,"
+        },
+        {
+          "physicalPage": 211,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions (MCQs)"
+        },
+        {
+          "physicalPage": 212,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 213,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 214,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 215,
+          "type": "chapter_or_unit",
+          "heading": "chapter provides an introduction to AI and loT, explores their applications,"
+        },
+        {
+          "physicalPage": 225,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions"
+        },
+        {
+          "physicalPage": 226,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions:"
+        },
+        {
+          "physicalPage": 227,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions:"
+        },
+        {
+          "physicalPage": 228,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 229,
+          "type": "chapter_or_unit",
+          "heading": "chapter, we'll learn how to use computers and digital platforms wisely. We'll"
+        },
+        {
+          "physicalPage": 233,
+          "type": "exercise_or_question_heading",
+          "heading": "questions about how our personal information is handled and protected."
+        },
+        {
+          "physicalPage": 242,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions (MCQs)"
+        },
+        {
+          "physicalPage": 244,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 244,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 246,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 262,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions"
+        },
+        {
+          "physicalPage": 263,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 263,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-023",
+      "grade": 10,
+      "subject": "Physics",
+      "medium": "English",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-023.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 19,
+      "candidates": [
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter Description Page No."
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 10"
+        },
+        {
+          "physicalPage": 14,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 16,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 11"
+        },
+        {
+          "physicalPage": 26,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 28,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 12"
+        },
+        {
+          "physicalPage": 36,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 38,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 13"
+        },
+        {
+          "physicalPage": 49,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 51,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 14"
+        },
+        {
+          "physicalPage": 63,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 65,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 15"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 16"
+        },
+        {
+          "physicalPage": 95,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 17"
+        },
+        {
+          "physicalPage": 102,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 104,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 18"
+        },
+        {
+          "physicalPage": 112,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 114,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER 19"
+        },
+        {
+          "physicalPage": 130,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-049",
+      "grade": 10,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-049.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 121,
+      "candidates": [
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter No. Chapters Page No."
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 1"
+        },
+        {
+          "physicalPage": 11,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 13,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2"
+        },
+        {
+          "physicalPage": 13,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 14,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 15,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 16,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 17,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 18,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 19,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Professional Dressing and Grooming"
+        },
+        {
+          "physicalPage": 19,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 20,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3"
+        },
+        {
+          "physicalPage": 20,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 20,
+          "type": "exercise_or_question_heading",
+          "heading": "questions."
+        },
+        {
+          "physicalPage": 21,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 22,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 23,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 24,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 25,
+          "type": "exercise_or_question_heading",
+          "heading": "questions. A structured method like the"
+        },
+        {
+          "physicalPage": 25,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 26,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 27,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 27,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 28,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Interview Skills"
+        },
+        {
+          "physicalPage": 29,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4"
+        },
+        {
+          "physicalPage": 29,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 30,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 31,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 32,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise, listening to Quran or playing music or listening poetry , writing your"
+        },
+        {
+          "physicalPage": 32,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 33,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise are usually more energetic . They become better to cope with"
+        },
+        {
+          "physicalPage": 33,
+          "type": "exercise_or_question_heading",
+          "heading": "exercises, and took small breaks. These strategies helped her to control"
+        },
+        {
+          "physicalPage": 33,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 34,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 35,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 36,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 37,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 38,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 39,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 40,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 40,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 41,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Self - Awareness"
+        },
+        {
+          "physicalPage": 42,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5"
+        },
+        {
+          "physicalPage": 42,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 43,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 44,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 45,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 46,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 47,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 48,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 49,
+          "type": "exercise_or_question_heading",
+          "heading": "questions."
+        },
+        {
+          "physicalPage": 49,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 49,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 50,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Emo\u0000onal Intelligence"
+        },
+        {
+          "physicalPage": 51,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6"
+        },
+        {
+          "physicalPage": 51,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 52,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 53,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 54,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 55,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 56,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 57,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 58,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 59,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 60,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 61,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 62,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 62,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 63,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Interpersonal Skills"
+        },
+        {
+          "physicalPage": 64,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7"
+        },
+        {
+          "physicalPage": 64,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 65,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 66,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 67,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 68,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 69,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 70,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 71,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 72,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 73,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 74,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 75,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 75,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 76,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 Thinking Skills"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 78,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 79,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 80,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 81,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 82,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 83,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 84,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 85,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 86,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 86,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 87,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Personal Branding and Social Media Presence"
+        },
+        {
+          "physicalPage": 88,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9"
+        },
+        {
+          "physicalPage": 88,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 89,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 91,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 92,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 93,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 94,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 95,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 96,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 97,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 98,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 99,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 100,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 101,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 102,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 102,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 103,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 9 Health and Nutri\u0000on"
+        },
+        {
+          "physicalPage": 104,
+          "type": "chapter_or_unit",
+          "heading": "chapter except chapter 7 from wh ich two"
+        },
+        {
+          "physicalPage": 104,
+          "type": "exercise_or_question_heading",
+          "heading": "questions. Each short answer question will be"
+        },
+        {
+          "physicalPage": 104,
+          "type": "chapter_or_unit",
+          "heading": "chapter 5."
+        },
+        {
+          "physicalPage": 105,
+          "type": "exercise_or_question_heading",
+          "heading": "questions carrying 7 marks each. Each"
+        },
+        {
+          "physicalPage": 105,
+          "type": "exercise_or_question_heading",
+          "heading": "exercises of the textbook. The detail is as"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-050",
+      "grade": 10,
+      "subject": "Computer-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-050.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 20,
+      "candidates": [
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapters Page"
+        },
+        {
+          "physicalPage": 23,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 35,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions"
+        },
+        {
+          "physicalPage": 35,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 38,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 49,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions"
+        },
+        {
+          "physicalPage": 49,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 52,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 69,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions:"
+        },
+        {
+          "physicalPage": 69,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 70,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 70,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions:"
+        },
+        {
+          "physicalPage": 72,
+          "type": "chapter_or_unit",
+          "heading": "UNIT"
+        },
+        {
+          "physicalPage": 72,
+          "type": "chapter_or_unit",
+          "heading": "chapter introduces the exciting ﬁelds of Artificial Intelligence (AI), and Machine"
+        },
+        {
+          "physicalPage": 76,
+          "type": "exercise_or_question_heading",
+          "heading": "questions."
+        },
+        {
+          "physicalPage": 78,
+          "type": "exercise_or_question_heading",
+          "heading": "questions without needing a human agent."
+        },
+        {
+          "physicalPage": 82,
+          "type": "exercise_or_question_heading",
+          "heading": "Multiple Choice Questions:"
+        },
+        {
+          "physicalPage": 82,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-052",
+      "grade": 10,
+      "subject": "Computer Science-Tech",
+      "medium": "Urdu",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-052.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 0,
+      "candidates": []
+    },
+    {
+      "recordId": "pectaa-catalog-054",
+      "grade": 10,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-054.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 21,
+      "candidates": [
+        {
+          "physicalPage": 9,
+          "type": "exercise_or_question_heading",
+          "heading": "questions again and again, diﬃculty in planning or solving problems, confusion"
+        },
+        {
+          "physicalPage": 18,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 21,
+          "type": "chapter_or_unit",
+          "heading": "chapter, you will learn about the role of musculoskeletal system. You will also"
+        },
+        {
+          "physicalPage": 21,
+          "type": "chapter_or_unit",
+          "heading": "chapter will also describe the modern diagnostic tools like X-rays and bone"
+        },
+        {
+          "physicalPage": 26,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise, losing extra weight, using warm"
+        },
+        {
+          "physicalPage": 26,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise help to keep joints"
+        },
+        {
+          "physicalPage": 31,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 35,
+          "type": "chapter_or_unit",
+          "heading": "chapter, you will identify the major endocrine glands and their roles. You will also"
+        },
+        {
+          "physicalPage": 43,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise, family history"
+        },
+        {
+          "physicalPage": 46,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise"
+        },
+        {
+          "physicalPage": 46,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise, tablets,"
+        },
+        {
+          "physicalPage": 48,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 59,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 70,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 80,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 84,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise), regular monitoring and anti"
+        },
+        {
+          "physicalPage": 86,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 90,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise along with taking medicines. Without such"
+        },
+        {
+          "physicalPage": 92,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise"
+        },
+        {
+          "physicalPage": 93,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise increases “happy chemicals” (endorphins) in the brain that ﬁght stress naturally."
+        },
+        {
+          "physicalPage": 99,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-057",
+      "grade": 10,
+      "subject": "Physics-Tech",
+      "medium": "English",
+      "cacheRef": "20261008/tech10-science/phys10em.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 29,
+      "candidates": [
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "unit,"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 9,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 15,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions"
+        },
+        {
+          "physicalPage": 16,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 28,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 38,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions"
+        },
+        {
+          "physicalPage": 51,
+          "type": "chapter_or_unit",
+          "heading": "chapter"
+        },
+        {
+          "physicalPage": 65,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 66,
+          "type": "chapter_or_unit",
+          "heading": "chapter,"
+        },
+        {
+          "physicalPage": 66,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 72,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 75,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 82,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 86,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 89,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "units"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 95,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 104,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 114,
+          "type": "chapter_or_unit",
+          "heading": "CHAPTER"
+        },
+        {
+          "physicalPage": 114,
+          "type": "chapter_or_unit",
+          "heading": "unit"
+        },
+        {
+          "physicalPage": 115,
+          "type": "chapter_or_unit",
+          "heading": "chapter,"
+        },
+        {
+          "physicalPage": 117,
+          "type": "chapter_or_unit",
+          "heading": "units(u)]."
+        },
+        {
+          "physicalPage": 130,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions"
+        },
+        {
+          "physicalPage": 131,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-060",
+      "grade": 10,
+      "subject": "Agriculture Sciences-Tech",
+      "medium": "English",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-060.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 20,
+      "candidates": [
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Unit No. Topic Page No."
+        },
+        {
+          "physicalPage": 20,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 38,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 50,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 65,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 66,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 67,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 79,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 80,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions (7)"
+        },
+        {
+          "physicalPage": 80,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 93,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 94,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 95,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 108,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise"
+        },
+        {
+          "physicalPage": 109,
+          "type": "exercise_or_question_heading",
+          "heading": "Short Questions"
+        },
+        {
+          "physicalPage": 109,
+          "type": "exercise_or_question_heading",
+          "heading": "Long Questions"
+        },
+        {
+          "physicalPage": 114,
+          "type": "exercise_or_question_heading",
+          "heading": "question will be asked form the exercises of the textbook. The"
+        },
+        {
+          "physicalPage": 114,
+          "type": "chapter_or_unit",
+          "heading": "Unit 5."
+        },
+        {
+          "physicalPage": 114,
+          "type": "chapter_or_unit",
+          "heading": "Unit4."
+        },
+        {
+          "physicalPage": 114,
+          "type": "chapter_or_unit",
+          "heading": "Unit 7 ."
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-062",
+      "grade": 10,
+      "subject": "Biology-Tech",
+      "medium": "English",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-062.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 17,
+      "candidates": [
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 1 Human Digestive Sy ts em 1"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Huma Re ratoryn spi System 11"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Huma Bl C ory Systen ood irculat m 18"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 Huma Urn inary System 29"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 Coordi ationn 36"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 Reproduction 52"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 In ta cheri n e 58"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 Bi olotechn ogy 68"
+        },
+        {
+          "physicalPage": 12,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 20,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 30,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 33,
+          "type": "chapter_or_unit",
+          "heading": "chapter, we will study the structure and functions of the human urinary system"
+        },
+        {
+          "physicalPage": 37,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 53,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 59,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 69,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 78,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-065",
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "medium": "English",
+      "cacheRef": "20261008/g9artem.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 49,
+      "candidates": [
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 1 is an introduction which narrates the basic knowledge about elements and"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 is about Drawing and Sketching. This chapter provides multiple exercises"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 is about painting practice. Students can enhance their knowledge about"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 is an introduction to graphic design along with a sound practice of two"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5 presents the information about some of the very important historical"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6 is a short review of history of painting in South Asia and notes on few"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7 is focused to provide information about a few selected calligraphists in"
+        },
+        {
+          "physicalPage": 3,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8 is narration of Pakistani craftsmanship. It provides general information"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 1 Introduction to Art and Drawing 1-4"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2 Drawing and Sketching-I 5-43"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3 Painting Practice-I 44-75"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4 An Introduction to Graphic Design 76-120"
+        },
+        {
+          "physicalPage": 5,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5"
+        },
+        {
+          "physicalPage": 5,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6"
+        },
+        {
+          "physicalPage": 5,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7"
+        },
+        {
+          "physicalPage": 5,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8"
+        },
+        {
+          "physicalPage": 6,
+          "type": "chapter_or_unit",
+          "heading": "Chapter# 1"
+        },
+        {
+          "physicalPage": 9,
+          "type": "chapter_or_unit",
+          "heading": "unity, proportions, variety, emphasis and movement. These principals are all about the"
+        },
+        {
+          "physicalPage": 10,
+          "type": "chapter_or_unit",
+          "heading": "Chapter# 2"
+        },
+        {
+          "physicalPage": 49,
+          "type": "chapter_or_unit",
+          "heading": "Chapter#3"
+        },
+        {
+          "physicalPage": 81,
+          "type": "chapter_or_unit",
+          "heading": "Chapter# 4"
+        },
+        {
+          "physicalPage": 99,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Bay"
+        },
+        {
+          "physicalPage": 100,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Jeem"
+        },
+        {
+          "physicalPage": 100,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Seen"
+        },
+        {
+          "physicalPage": 101,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Suaad"
+        },
+        {
+          "physicalPage": 101,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Toa"
+        },
+        {
+          "physicalPage": 102,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Ain"
+        },
+        {
+          "physicalPage": 102,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Fay"
+        },
+        {
+          "physicalPage": 103,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Ka 'f"
+        },
+        {
+          "physicalPage": 103,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Meem"
+        },
+        {
+          "physicalPage": 104,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise of Hay"
+        },
+        {
+          "physicalPage": 107,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise the lowercase letter 'h'"
+        },
+        {
+          "physicalPage": 111,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise."
+        },
+        {
+          "physicalPage": 126,
+          "type": "chapter_or_unit",
+          "heading": "Chapter# 5"
+        },
+        {
+          "physicalPage": 146,
+          "type": "chapter_or_unit",
+          "heading": "Chapter#6"
+        },
+        {
+          "physicalPage": 172,
+          "type": "chapter_or_unit",
+          "heading": "Chapter#6"
+        },
+        {
+          "physicalPage": 181,
+          "type": "chapter_or_unit",
+          "heading": "Chapter#8"
+        },
+        {
+          "physicalPage": 205,
+          "type": "exercise_or_question_heading",
+          "heading": "QUESTIONS FOR EXAMINATION"
+        },
+        {
+          "physicalPage": 205,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 1"
+        },
+        {
+          "physicalPage": 206,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 2:"
+        },
+        {
+          "physicalPage": 206,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions for Drawing Practical examination:"
+        },
+        {
+          "physicalPage": 207,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 3"
+        },
+        {
+          "physicalPage": 207,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions for painting practical examination:"
+        },
+        {
+          "physicalPage": 207,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 4:"
+        },
+        {
+          "physicalPage": 208,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions for Design Practical Examination:"
+        },
+        {
+          "physicalPage": 208,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 5"
+        },
+        {
+          "physicalPage": 211,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 6:"
+        },
+        {
+          "physicalPage": 213,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 7"
+        },
+        {
+          "physicalPage": 214,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 8"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-068",
+      "grade": 9,
+      "subject": "Art & Model Drawing",
+      "medium": "Urdu",
+      "cacheRef": "20261008/g9artum.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 0,
+      "candidates": []
+    },
+    {
+      "recordId": "pectaa-catalog-093",
+      "grade": 9,
+      "subject": "Health Sciences-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "cacheRef": "20261008/tech9/health9.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 4,
+      "candidates": [
+        {
+          "physicalPage": 19,
+          "type": "exercise_or_question_heading",
+          "heading": "exercise part."
+        },
+        {
+          "physicalPage": 20,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise” (breaths/minute)"
+        },
+        {
+          "physicalPage": 33,
+          "type": "exercise_or_question_heading",
+          "heading": "Question Oxygen"
+        },
+        {
+          "physicalPage": 46,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercise (bpm)"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-094",
+      "grade": 9,
+      "subject": "Biology Practical Notebook (catalog track unresolved)",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-094.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 0,
+      "candidates": []
+    },
+    {
+      "recordId": "pectaa-catalog-095",
+      "grade": 9,
+      "subject": "Communication Skills & Personal Grooming-Tech",
+      "medium": "UNSPECIFIED_BY_CATALOG_LABEL",
+      "cacheRef": "20261008/tech9/comms9.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 2,
+      "candidates": [
+        {
+          "physicalPage": 9,
+          "type": "exercise_or_question_heading",
+          "heading": "questions about their practical work. The teacher should also conduct a Viva-Voce on the"
+        },
+        {
+          "physicalPage": 37,
+          "type": "exercise_or_question_heading",
+          "heading": "Exercises)"
+        }
+      ]
+    },
+    {
+      "recordId": "pectaa-catalog-101",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "Urdu",
+      "cacheRef": "20261008/official-verified-unhashed/pectaa-catalog-101.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 0,
+      "candidates": []
+    },
+    {
+      "recordId": "pectaa-recovered-chemistry10-en-2026",
+      "grade": 10,
+      "subject": "Chemistry",
+      "medium": "English",
+      "cacheRef": "20261008/official-verified/pectaa-recovered-chemistry10-en-2026.pdf",
+      "status": "REVIEW_ONLY_CANDIDATES",
+      "candidateCount": 186,
+      "candidates": [
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 14"
+        },
+        {
+          "physicalPage": 4,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 5,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 6,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 7,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 8,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 9,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 10,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 11,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 12,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 13,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 14,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 15,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 16,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 16,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 17,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 18,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 18,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-14"
+        },
+        {
+          "physicalPage": 19,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-9"
+        },
+        {
+          "physicalPage": 19,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 15"
+        },
+        {
+          "physicalPage": 19,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 20,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 21,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 22,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 23,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 24,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 25,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 26,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 27,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 28,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 29,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 30,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 31,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 31,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 32,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 33,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 33,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-15"
+        },
+        {
+          "physicalPage": 34,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 16"
+        },
+        {
+          "physicalPage": 34,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 35,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 36,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 37,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 38,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 39,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 40,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 41,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 42,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 43,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 44,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 45,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 46,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 47,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 48,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 49,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 50,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 51,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 52,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 53,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 54,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 55,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 55,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 56,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 57,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-16"
+        },
+        {
+          "physicalPage": 58,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-9"
+        },
+        {
+          "physicalPage": 58,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 17"
+        },
+        {
+          "physicalPage": 58,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 59,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 60,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 61,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 62,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 63,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 64,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 65,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 66,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 67,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 67,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 68,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 69,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 69,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-17"
+        },
+        {
+          "physicalPage": 70,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-9"
+        },
+        {
+          "physicalPage": 70,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 18"
+        },
+        {
+          "physicalPage": 70,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 71,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 72,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 73,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 74,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 75,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 75,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 76,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 76,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-18"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-9"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 19 Nitrogen and"
+        },
+        {
+          "physicalPage": 77,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 78,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 79,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 80,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 81,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 82,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 83,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 84,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 85,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 86,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 87,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 87,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 88,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 89,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 89,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-19"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-9"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 20"
+        },
+        {
+          "physicalPage": 90,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 91,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 92,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 93,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 94,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 95,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 96,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 97,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 98,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 99,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 100,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 100,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 101,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 101,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-20"
+        },
+        {
+          "physicalPage": 102,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 21"
+        },
+        {
+          "physicalPage": 116,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 118,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 119,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 22"
+        },
+        {
+          "physicalPage": 127,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 128,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 129,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 23"
+        },
+        {
+          "physicalPage": 129,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 130,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 131,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 132,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 133,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 134,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 134,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 135,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 136,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 136,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-23"
+        },
+        {
+          "physicalPage": 137,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 24 Carboxylic Acids"
+        },
+        {
+          "physicalPage": 137,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 138,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 139,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 140,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 141,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 142,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 143,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 143,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 144,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 144,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-24"
+        },
+        {
+          "physicalPage": 145,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 25"
+        },
+        {
+          "physicalPage": 145,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 146,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 147,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 148,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 149,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 150,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 151,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 152,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 153,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 154,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 154,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 155,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 155,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-25"
+        },
+        {
+          "physicalPage": 156,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-9"
+        },
+        {
+          "physicalPage": 156,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 26"
+        },
+        {
+          "physicalPage": 156,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 157,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 158,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 159,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 160,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 161,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 162,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 163,
+          "type": "exercise_or_question_heading",
+          "heading": "EXERCISE"
+        },
+        {
+          "physicalPage": 163,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 164,
+          "type": "chapter_or_unit",
+          "heading": "Chapter"
+        },
+        {
+          "physicalPage": 164,
+          "type": "chapter_or_unit",
+          "heading": "Chapter-26"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 14 15 16 17 18 19 20 21 22 23 24"
+        },
+        {
+          "physicalPage": 165,
+          "type": "exercise_or_question_heading",
+          "heading": "Questions"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 14 15 16 17"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 23 24 25"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 14 15"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 20 22"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 23 25"
+        },
+        {
+          "physicalPage": 165,
+          "type": "chapter_or_unit",
+          "heading": "Chapter 19 20 21"
+        }
+      ]
+    }
+  ]
+}
